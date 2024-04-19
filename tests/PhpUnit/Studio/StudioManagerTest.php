@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Studio;
 
+use App\DB\Entity\Project\Program;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
@@ -60,9 +63,10 @@ class StudioManagerTest extends DefaultTestCase
     $studio_user_repository = $this->entity_manager->getRepository(StudioUser::class);
     $user_comment_repository = $this->entity_manager->getRepository(UserComment::class);
     $studio_join_request_repository = $this->entity_manager->getRepository(StudioJoinRequest::class);
+    $studio_program_repository = $this->entity_manager->getRepository(Program::class);
     $this->object = $this->getMockBuilder(StudioManager::class)->setConstructorArgs(
       [$this->entity_manager, $studio_repository, $studio_activity_repository,
-        $studio_project_repository, $studio_user_repository, $user_comment_repository, $studio_join_request_repository, ])
+        $studio_project_repository, $studio_user_repository, $user_comment_repository, $studio_join_request_repository, $studio_program_repository])
       ->getMockForAbstractClass()
     ;
     $this->user_manager = $kernel->getContainer()->get(UserManager::class);
@@ -229,8 +233,8 @@ class StudioManagerTest extends DefaultTestCase
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'kitkat', 'password' => '123456']);
     $newUser_2 = $this->user_fixture->insertUser(['name' => 'peanutbutter', 'password' => '123456']);
-    $project = $this->project_fixture->insertProject(['owned by' => $newUser, 'name' => 'test prog',
-      'description' => 'test desc', 'credit' => $newUser, ]);
+    $project = $this->project_fixture->insertProject(['owned by' => 'kitkat', 'name' => 'test prog',
+      'description' => 'test desc', 'credit' => 'peanutbutter', ]);
     $studio_project = $this->object->addProjectToStudio($newUser, $this->studio, $project);
     $this->assertNull($studio_project);
     $this->object->addUserToStudio($this->user, $this->studio, $newUser);

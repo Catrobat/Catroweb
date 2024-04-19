@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\Project;
 
 use App\DB\Entity\User\User;
@@ -15,9 +17,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProgramInappropriateReportRepository::class)]
 class ProgramInappropriateReport
 {
-  final public const STATUS_NEW = 1;
-  final public const STATUS_REJECTED = 2;
-  final public const STATUS_ACCEPTED = 3;
+  final public const int STATUS_NEW = 1;
+  final public const int STATUS_REJECTED = 2;
+  final public const int STATUS_ACCEPTED = 3;
 
   #[ORM\Column(name: 'id', type: 'integer')]
   #[ORM\Id]

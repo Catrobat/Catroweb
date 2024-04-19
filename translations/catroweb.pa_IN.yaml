@@ -900,6 +900,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'ਹੋਰ ਦਿਖਾਓ'
     showLess: 'ਘੱਟ ਦਿਖਾਓ'
     remove_project: 'ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਓ'
@@ -914,6 +915,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'ਪ੍ਰੋਜੈਕਟ'
+      addProject: 'Add your own projects'
     comments:
       title: 'ਟਿਪਣੀਆਂ'
       type_something: 'Type something'

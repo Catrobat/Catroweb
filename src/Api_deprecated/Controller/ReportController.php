@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\DB\Entity\Project\Program;
@@ -14,7 +16,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -39,7 +41,7 @@ class ReportController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/reportProject/reportProject.json', name: 'catrobat_api_report_program', defaults: ['_format' => 'json'], methods: ['POST', 'GET'])]
-  public function reportProjectAction(Request $request): JsonResponse
+  public function reportProject(Request $request): JsonResponse
   {
     /* @var $project Program */
     /* @var $user User */

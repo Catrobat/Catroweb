@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -9,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * @deprecated
@@ -21,7 +23,7 @@ class DownloadMediaPackageController extends AbstractController
   }
 
   #[Route(path: '/download-media/{id}', name: 'download_media', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function downloadMediaPackageAction(int $id, MediaPackageFileRepository $file_repository): BinaryFileResponse
+  public function downloadMediaPackage(int $id, MediaPackageFileRepository $file_repository): BinaryFileResponse
   {
     /** @var MediaPackageFile|null $media_file */
     $media_file = $this->entity_manager->getRepository(MediaPackageFile::class)->find($id);
@@ -39,7 +41,7 @@ class DownloadMediaPackageController extends AbstractController
       // replace special characters in filename and replace them with -
       $filename = preg_replace('#[^A-Za-z0-9-_. ()]#', '-', $media_file->getName());
       // replace multiple following - with a single one
-      $filename = preg_replace('#-+#', '-', $filename);
+      $filename = preg_replace('#-+#', '-', (string) $filename);
 
       $d = $response->headers->makeDisposition(
         ResponseHeaderBag::DISPOSITION_ATTACHMENT,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Comments;
 
 use App\DB\Entity\User\Comment\UserComment;
@@ -13,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class CommentsController extends AbstractController
 {
@@ -26,7 +28,7 @@ class CommentsController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/reportComment', name: 'report', methods: ['GET'])]
-  public function reportAction(): Response
+  public function report(): Response
   {
     $user = $this->getUser();
     if (null === $user) {
@@ -51,7 +53,7 @@ class CommentsController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/deleteComment', name: 'delete', methods: ['GET'])]
-  public function deleteCommentAction(): Response
+  public function deleteComment(): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -84,7 +86,7 @@ class CommentsController extends AbstractController
   }
 
   #[Route(path: '/comment', name: 'comment', methods: ['POST'])]
-  public function postCommentAction(NotificationManager $notification_service, ProjectManager $project_manager): Response
+  public function postComment(NotificationManager $notification_service, ProjectManager $project_manager): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -125,7 +127,7 @@ class CommentsController extends AbstractController
   }
 
   #[Route(path: '/translate/comment/{id}', name: 'translate_comment', methods: ['GET'])]
-  public function translateCommentAction(Request $request, int $id, TranslationDelegate $translation_delegate): Response
+  public function translateComment(Request $request, int $id, TranslationDelegate $translation_delegate): Response
   {
     if (!$request->query->has('target_language')) {
       return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
@@ -147,7 +149,7 @@ class CommentsController extends AbstractController
       return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
     $response = new JsonResponse();
-    $response->setEtag(md5($comment->getText()).$target_language);
+    $response->setEtag(md5((string) $comment->getText()).$target_language);
     $response->setPublic();
     if ($response->isNotModified($request)) {
       return $response;

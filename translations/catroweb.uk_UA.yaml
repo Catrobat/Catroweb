@@ -251,20 +251,20 @@ newAccountConfirmation:
   subject: Будь ласка, підтвердьте свою адресу ел. пошти
   welcome: Вітаємо в спільноті Catrobat!
   message: |
-    Please verify your E-Mail-Address
-    Welcome to Catrobat Community
-    With just one click on the button below
-    you can verify your regestration at Catrobat.
-    This link is valid until %time% and can be
-    used only once to confirm your email address.
+    Будь ласка, підтвердьте свою ел. адресу
+    Ласкаво просимо до спільноти Catrobat
+    Лише одним натисканням на кнопку нижче
+    ви можете підтвердити свою реєстрацію на Catrobat.
+    Це посилання чинне до %time% і може бути
+    використане лише один раз для підтвердження адреси ел. пошти.
   messageHtml: |
     <p>
-    With just one click on the button below<br>
-    you can verify your regestration at Catrobat.<br>
+    Лише одним натисканням на кнопку нижче<br>
+    ви можете підтвердити свою реєстрацію на Catrobat.<br>
     <br>
     <br>
-    This link is valid until %time% and can be<br>
-    used only once to confirm your email address.<br>
+    Це посилання чинне до %time% і може бути<br>
+    використане лише один раз для підтвердження адреси ел. пошти.<br>
     </p>
   button: ПІДТВЕРДИТИ ПОШТУ
   delete: Ви можете видалити свій обліковий запис будь-коли.
@@ -477,7 +477,7 @@ resetPassword:
     cheers: "Бувай!"
   newemail:
     title: "Скинути свій пароль"
-    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    content: <p> Ви отримуєте цей лист, тому що нещодавно<br> ви надіслали запит на зміну пароля для<br> вашого облікового запису Catrobat. Щоб змінити пароль,<br> перейдіть за посиланням нижче<br><br> Якщо ви не надіслали запит на зміну пароля,<br> ви можете проігнорувати цей лист.<br> </p>
     visitLink: СКИНУТИ ПАРОЛЬ
     expire: Посилання дійсне протягом %time% — лише на один раз!
   reset:
@@ -900,6 +900,7 @@ studio:
     public_studios: 'Публічні студії'
     private_studios: 'Приватні студії'
   details:
+    add_project: 'натисніть, щоб додати проєкт'
     showMore: 'Показати більше'
     showLess: 'Показати менше'
     remove_project: 'Видалити зі студії'
@@ -914,6 +915,7 @@ studio:
     decline: 'Відхилено'
     projects:
       title: 'проєкти'
+      addProject: 'Додайте власні проєкти'
     comments:
       title: 'Коментарі'
       type_something: 'Введіть щось'

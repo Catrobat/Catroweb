@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User\Notifications;
 
 use App\DB\Entity\User\User;
@@ -90,7 +92,7 @@ class CatroNotification
   }
 
   /**
-   * Sets he user to which this CatroNotification will be shown.
+   * Sets the user to which this CatroNotification will be shown.
    */
   public function setUser(User $user): CatroNotification
   {

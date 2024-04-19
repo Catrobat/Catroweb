@@ -208,7 +208,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('es_host', '%env(ES_HOST)%');
   $parameters->set('es_port', '%env(ES_PORT)%');
   $parameters->set('dkim.private.key', '%kernel.project_dir%/.dkim/private.key');
-  $parameters->set('container.dumper.inline_class_loader', true);
+  $parameters->set('.container.dumper.inline_class_loader', true);
   $parameters->set('features', '%kernel.project_dir%/config/features.php');
   $parameters->set('reset_password.throttle_limit', 86400);
 
@@ -789,18 +789,26 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(HwiOauthRegistrationFormType::class, HwiOauthRegistrationFormType::class);
 
   $services->set(ItranslateApi::class, ItranslateApi::class)
+    ->lazy()
     ->args([service('eight_points_guzzle.client.itranslate')])
   ;
 
   $services->set(GoogleTranslateApi::class, GoogleTranslateApi::class)
+    ->lazy()
     ->arg('$client', service(TranslateClient::class))
     ->arg('$short_text_length', 20)
   ;
 
-  $services->set(TranslateClient::class);
+  $services->set(TranslateClient::class)
+    ->lazy()
+  ;
 
   $services->set(TranslationDelegate::class, TranslationDelegate::class)
-    ->arg('$apis', [service(ItranslateApi::class), service(GoogleTranslateApi::class)])
+    ->lazy()
+    ->arg('$apis', [
+      service(ItranslateApi::class),
+      service(GoogleTranslateApi::class),
+    ])
   ;
 
   $services->set('admin.block.statistics.project_machine_translation', ProjectMachineTranslationAdmin::class)

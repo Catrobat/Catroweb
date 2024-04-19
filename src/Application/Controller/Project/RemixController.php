@@ -1,14 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Project;
 
 use App\Project\Remix\RemixManager;
 use App\Storage\ScreenshotRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 class RemixController extends AbstractController
@@ -37,7 +38,7 @@ class RemixController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/project/{id}/remix_graph_data', name: 'remix_graph_data', methods: ['GET'])]
-  public function getRemixGraphData(Request $request, string $id): JsonResponse
+  public function getRemixGraphData(string $id): JsonResponse
   {
     $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
     $catrobat_project_thumbnails = [];

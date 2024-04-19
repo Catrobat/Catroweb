@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Services\Base;
 
 use App\Api\Services\ResponseCache\ResponseCacheManager;
@@ -38,7 +40,7 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     $responseHeaders['Content-Language'] = $this->getLocale();
   }
 
-  public function getCachedResponse(string $cache_id, string $time = '-10 minutes'): ?ResponseCache
+  public function getCachedResponse(string $cache_id, string $time = '-180 minutes'): ?ResponseCache
   {
     /** @var ResponseCache|null $cache_entry */
     $cache_entry = $this->response_cache_manager->getResponseCacheRepository()->findOneBy(['id' => $cache_id]);

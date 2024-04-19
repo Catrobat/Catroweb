@@ -1,30 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
+use App\DB\Entity\Project\Program;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:studio', description: 'Create a studio')]
 class CreateStudioCommand extends Command
 {
   public function __construct(
     private readonly EntityManagerInterface $entityManager,
     private readonly StudioManager $studioManager,
-    private readonly UserManager $user_manager
+    private readonly UserManager $user_manager,
   ) {
     parent::__construct();
   }
 
   protected function configure(): void
   {
-    $this->setName('catrobat:studio')
+    $this
       ->addArgument('name', InputArgument::REQUIRED, 'Name for the Studio')
       ->addArgument('description', InputArgument::REQUIRED, 'Description for the studio')
       ->addArgument('admin', InputArgument::REQUIRED, 'User which is admin on a studio')
@@ -33,6 +38,7 @@ class CreateStudioCommand extends Command
       ->addArgument('allow_comments', InputArgument::REQUIRED, 'Enables comments in studios')
       ->addArgument('users', InputArgument::REQUIRED, 'Array of users for the studio')
       ->addArgument('status', InputArgument::REQUIRED, 'Array of statuses for the studio')
+      ->addArgument('projects', InputArgument::REQUIRED, 'Array of projects for the studio')
     ;
   }
 
@@ -46,6 +52,7 @@ class CreateStudioCommand extends Command
     $allowComments = filter_var($input->getArgument('allow_comments'), FILTER_VALIDATE_BOOLEAN);
     $usernames = $input->getArgument('users');
     $status = $input->getArgument('status');
+    $projects = $input->getArgument('projects');
     $coverPath = null;
 
     /** @var User|null $adminUser */
@@ -57,7 +64,7 @@ class CreateStudioCommand extends Command
     }
 
     try {
-      $ret = $this->createStudio($adminUser, $name, $description, $isPublic, $isEnabled, $usernames, $status, $allowComments, $coverPath);
+      $ret = $this->createStudio($adminUser, $name, $description, $isPublic, $isEnabled, $usernames, $status, $allowComments, $projects, $coverPath);
       if (1 == $ret) {
         $output->writeln('User not found.');
       }
@@ -71,7 +78,7 @@ class CreateStudioCommand extends Command
     }
   }
 
-  private function createStudio(User $admin, string $name, string $description, bool $is_public, bool $is_enabled, array $usernames, array $statuses, bool $allow_comments, ?string $cover_path = null): int
+  private function createStudio(User $admin, string $name, string $description, bool $is_public, bool $is_enabled, array $usernames, array $statuses, bool $allow_comments, array $projects, ?string $cover_path = null): int
   {
     $studio = (new Studio())
       ->setName($name)
@@ -95,6 +102,14 @@ class CreateStudioCommand extends Command
           return 1;
         }
         $this->studioManager->addUserToStudio($admin, $studio, $user);
+      }
+
+      foreach ($projects as $project) {
+        /** @var Program $currentProject */
+        $currentProject = $this->studioManager->findOneByName($project);
+        /** @var User $user */
+        $user = $this->user_manager->findUserByUsername($currentProject->getUser()->getUsername());
+        $this->studioManager->addProjectToStudio($user, $studio, $currentProject);
       }
     } else {
       foreach (array_combine($usernames, $statuses) as $username => $status) {

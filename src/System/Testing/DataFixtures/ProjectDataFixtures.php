@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Testing\DataFixtures;
 
 use App\DB\Entity\Project\Extension;
@@ -88,7 +90,7 @@ class ProjectDataFixtures
     $project->setCatrobatVersionName($config['version'] ?? '0.8.5');
     $project->setLanguageVersion($config['language version'] ?? '0.925');
     $project->setUploadIp($config['upload_ip'] ?? '127.0.0.1');
-    $project->setFilesize($config['file_size'] ?? 0);
+    $project->setFilesize((int) ($config['file_size'] ?? 0));
     $project->setVisible(!isset($config['visible']) || 'true' === $config['visible']);
     $project->setUploadLanguage($config['upload_language'] ?? 'en');
     $project->setApproved(isset($config['approved']) && 'true' === $config['approved']);
@@ -96,9 +98,9 @@ class ProjectDataFixtures
     $project->setPrivate(isset($config['private']) && 'true' === $config['private']);
     $project->setDebugBuild(isset($config['debug']) && 'true' === $config['debug']);
     $project->setFlavor($config['flavor'] ?? 'pocketcode');
-    $project->setRand($config['rand'] ?? 0);
-    $project->setPopularity($config['popularity'] ?? 0);
-    $project->setNotForKids($config['not_for_kids'] ?? 0);
+    $project->setRand((int) ($config['rand'] ?? 0));
+    $project->setPopularity((float) ($config['popularity'] ?? 0));
+    $project->setNotForKids((int) $config['not_for_kids'] ?? 0);
 
     if (isset($config['apk request time'])) {
       $project->setApkRequestTime(new \DateTime($config['apk request time'], new \DateTimeZone('UTC')));

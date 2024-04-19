@@ -1,17 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Reset;
 
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Commands\ImportProjects\ProgramImportCommand;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
+#[AsCommand(name: 'catrobat:reset', description: 'Resets everything to base values')]
 class ResetCommand extends Command
 {
   final public const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
@@ -25,8 +29,7 @@ class ResetCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:reset')
-      ->setDescription('Resets everything to base values')
+    $this
       ->addOption('hard')
       ->addOption('limit', null, InputOption::VALUE_REQUIRED,
         'Downloads the given amount of projects',
@@ -83,7 +86,6 @@ class ResetCommand extends Command
     ];
 
     $this->createUsers($user_array, $output);
-    $this->createStudios($user_array, $output);
     $share_projects_import = $this->importProjectsFromShare(
       intval($input->getOption('limit')),
       $user_array,
@@ -112,7 +114,7 @@ class ResetCommand extends Command
     foreach ($programs as $program) {
       $program_names[] = $program->getName();
     }
-
+    $this->createStudios($user_array, $programs, $output);
     $this->reportProjects($program_names, $user_array, $output);
     // if ($input->hasOption('with-remixes')) {
     // $this->remixGen($program_names, $output);  // Currently not working
@@ -305,9 +307,9 @@ class ResetCommand extends Command
   /**
    * @throws \Exception
    */
-  private function createStudios(array $user_array, OutputInterface $output): void
+  private function createStudios(array $user_array, array $program_array, OutputInterface $output): void
   {
-    $random_studio_amount = random_int(1, 8);
+    $random_studio_amount = random_int(5, 8);
     $i = 0;
 
     for ($j = 0; $j <= $random_studio_amount; ++$j) {
@@ -335,6 +337,21 @@ class ResetCommand extends Command
         $status[] = $this->getRandomStatus();
       }
 
+      $numPrograms = random_int(3, 10);
+      $programs = [];
+      for ($k = 0; $k < $numPrograms; ++$k) {
+        $random_program_id = array_rand($program_array);
+        /** @var Program $program */
+        $program = $program_array[$random_program_id];
+        $program->getUser()->getUserIdentifier();
+
+        foreach ($users as $user) {
+          if ($user == $program->getUser()->getUsername() && $isPublic) {
+            $programs[] = $program->getName();
+          }
+        }
+      }
+
       $parameters = [
         'name' => $this->randomStudioNameGenerator().$i,
         'description' => $this->randomStudioDescriptionGenerator(),
@@ -343,6 +360,7 @@ class ResetCommand extends Command
         'is_enabled' => $isEnabled,
         'allow_comments' => $allowComments,
         'users' => $users,
+        'projects' => $programs,
         'status' => $status,
       ];
 

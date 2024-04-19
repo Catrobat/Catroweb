@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\Remix;
 
 use App\DB\Entity\Project\Program;
@@ -84,10 +86,9 @@ class RemixSubgraphManipulator
     }
 
     foreach ($all_project_remix_relations as $project_remix_relation) {
-      $this->entity_manager->detach($project_remix_relation);
       $this->entity_manager->persist($project_remix_relation);
-      $this->entity_manager->flush();
     }
+    $this->entity_manager->flush();
   }
 
   private function splitNewParentIdsByRelationDirection(array $existing_descendant_relations_of_project,

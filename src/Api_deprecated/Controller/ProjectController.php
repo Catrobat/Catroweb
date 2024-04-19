@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProjectListResponse;
@@ -10,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -22,7 +24,7 @@ class ProjectController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/getInfoById.json', name: 'api_info_by_id', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function showProjectAction(Request $request, ProjectManager $project_manager): JsonResponse|ProjectListResponse
+  public function showProject(Request $request, ProjectManager $project_manager): JsonResponse|ProjectListResponse
   {
     $id = (string) $request->query->get('id', '0');
     $projects = [];
@@ -42,7 +44,7 @@ class ProjectController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/api/project/{id}/likes', name: 'api_project_likes', methods: ['GET'])]
-  public function projectLikesAction(string $id, ProjectManager $project_manager): JsonResponse
+  public function projectLikes(string $id, ProjectManager $project_manager): JsonResponse
   {
     $project = $project_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
@@ -75,7 +77,7 @@ class ProjectController extends AbstractController
    * @throws NotFoundHttpException
    */
   #[Route(path: '/api/project/{id}/likes/count', name: 'api_project_likes_count', methods: ['GET'])]
-  public function projectLikesCountAction(Request $request, string $id, ProjectManager $project_manager, TranslatorInterface $translator): JsonResponse
+  public function projectLikesCount(Request $request, string $id, ProjectManager $project_manager, TranslatorInterface $translator): JsonResponse
   {
     $project = $project_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {

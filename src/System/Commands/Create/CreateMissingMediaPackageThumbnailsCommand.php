@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Symfony Command to create missing media package thumbnails.
- */
+#[AsCommand(name: 'catrobat:create:media-package-thumbnails', description: 'Creates missing thumbnails for images in media package.')]
 class CreateMissingMediaPackageThumbnailsCommand extends Command
 {
   public function __construct(private readonly MediaPackageFileRepository $media_package_file_repository)
@@ -19,8 +20,7 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:create:media-package-thumbnails')
-      ->setDescription('Creates missing thumbnails for images in media package.')
+    $this
       ->addOption('force')
     ;
   }

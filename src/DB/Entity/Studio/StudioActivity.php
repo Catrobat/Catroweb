@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
@@ -13,9 +15,9 @@ class StudioActivity
   /**
    * adding new constant requires adding it to the enum in the annotation of the column.
    */
-  final public const TYPE_COMMENT = 'comment';
-  final public const TYPE_PROJECT = 'project';
-  final public const TYPE_USER = 'user';
+  final public const string TYPE_COMMENT = 'comment';
+  final public const string TYPE_PROJECT = 'project';
+  final public const string TYPE_USER = 'user';
 
   private array $activity_types = [self::TYPE_COMMENT, self::TYPE_PROJECT, self::TYPE_USER];
 

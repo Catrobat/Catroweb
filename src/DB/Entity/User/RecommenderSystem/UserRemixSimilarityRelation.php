@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User\RecommenderSystem;
 
 use App\DB\Entity\User\User;
@@ -38,9 +40,12 @@ class UserRemixSimilarityRelation
   #[ORM\Column(type: 'datetime')]
   protected ?\DateTime $created_at = null;
 
-  public function __construct(User $first_user, User $second_user, #[ORM\Column(type: 'decimal', precision: 4, scale: 3, nullable: false, options: ['default' => '0.0'])]
-    protected float $similarity)
-  {
+  public function __construct(
+    User $first_user,
+    User $second_user,
+    #[ORM\Column(type: 'decimal', precision: 4, scale: 3, nullable: false, options: ['default' => '0.0'])]
+    protected string $similarity
+  ) {
     $this->setFirstUser($first_user);
     $this->setSecondUser($second_user);
   }
@@ -92,16 +97,9 @@ class UserRemixSimilarityRelation
     return $this->second_user_id;
   }
 
-  public function setSimilarity(float $similarity): UserRemixSimilarityRelation
-  {
-    $this->similarity = $similarity;
-
-    return $this;
-  }
-
   public function getSimilarity(): float
   {
-    return $this->similarity;
+    return (float) $this->similarity;
   }
 
   public function getCreatedAt(): ?\DateTime

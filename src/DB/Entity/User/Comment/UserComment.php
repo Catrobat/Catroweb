@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User\Comment;
 
 use App\DB\Entity\Project\Program;
@@ -11,11 +13,11 @@ use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'user_comment')]
-#[ORM\Index(columns: ['parent_id'], name: 'parent_id_idx')]
-#[ORM\Index(columns: ['user_id'], name: 'user_id_idx')]
-#[ORM\Index(columns: ['programId'], name: 'program_id_idx')]
-#[ORM\Index(columns: ['studio'], name: 'studio_idx')]
-#[ORM\Index(columns: ['uploadDate'], name: 'upload_date_idx')]
+#[ORM\Index(name: 'parent_id_idx', columns: ['parent_id'])]
+#[ORM\Index(name: 'user_id_idx', columns: ['user_id'])]
+#[ORM\Index(name: 'program_id_idx', columns: ['programId'])]
+#[ORM\Index(name: 'studio_idx', columns: ['studio'])]
+#[ORM\Index(name: 'upload_date_idx', columns: ['uploadDate'])]
 #[ORM\Entity(repositoryClass: UserCommentRepository::class)]
 class UserComment implements \Stringable
 {
@@ -35,8 +37,7 @@ class UserComment implements \Stringable
    * The CommentNotification triggered by creating this UserComment.
    * If this UserComment gets deleted, this CommentNotification gets deleted as well.
    */
-  #[ORM\JoinColumn(name: 'notification_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
-  #[ORM\OneToOne(mappedBy: 'comment', targetEntity: CommentNotification::class, cascade: ['remove'])]
+  #[ORM\OneToOne(targetEntity: CommentNotification::class, mappedBy: 'comment', cascade: ['remove'])]
   protected ?CommentNotification $notification = null;
 
   #[ORM\Column(type: 'datetime')]

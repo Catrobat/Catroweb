@@ -905,6 +905,7 @@ studio:
     public_studios: '公开的工作室'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: '显示更多'
     showLess: '显示更多'
     remove_project: '从工作室移除'
@@ -919,6 +920,7 @@ studio:
     decline: 'Declined'
     projects:
       title: '项目'
+      addProject: 'Add your own projects'
     comments:
       title: '评论'
       type_something: '输入内容'

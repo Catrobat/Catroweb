@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Ci;
 
 use App\DB\Entity\Project\Program;
@@ -12,7 +14,7 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Class BuildApkController.
@@ -33,7 +35,7 @@ class BuildApkController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/ci/build/{id}', name: 'ci_build', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function createApkAction(string $id): JsonResponse
+  public function createApk(string $id): JsonResponse
   {
     /** @var Program|null $project */
     $project = $this->project_manager->find($id);
@@ -55,7 +57,7 @@ class BuildApkController extends AbstractController
   }
 
   #[Route(path: '/ci/upload/{id}', name: 'ci_upload_apk', defaults: ['_format' => 'json'], methods: ['GET', 'POST'])]
-  public function uploadApkAction(string $id, Request $request): JsonResponse
+  public function uploadApk(string $id, Request $request): JsonResponse
   {
     /** @var Program|null $project */
     $project = $this->project_manager->find($id);
@@ -78,7 +80,7 @@ class BuildApkController extends AbstractController
   }
 
   #[Route(path: '/ci/failed/{id}', name: 'ci_failed_apk', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function failedApkAction(string $id, Request $request): JsonResponse
+  public function failedApk(string $id, Request $request): JsonResponse
   {
     /** @var Program|null $project */
     $project = $this->project_manager->find($id);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User\Notifications;
 
 use App\DB\Entity\User\Comment\UserComment;
@@ -22,14 +24,10 @@ class CommentNotification extends CatroNotification
    */
   public function __construct(
     User $user,
-    /**
-     * The UserComment which triggered this CommentNotification. If the UserComment gets deleted,
-     * this CommentNotification gets deleted as well.
-     */
     #[ORM\JoinColumn(name: 'comment_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
-    #[ORM\OneToOne(inversedBy: 'notification', targetEntity: UserComment::class)]
-    private ?UserComment $comment)
-  {
+    #[ORM\OneToOne(targetEntity: UserComment::class, inversedBy: 'notification')]
+    private ?UserComment $comment
+  ) {
     parent::__construct($user, '', '', 'comment');
   }
 
@@ -50,7 +48,7 @@ class CommentNotification extends CatroNotification
   }
 
   /**
-   * its important to overwrite the get method, otherwise it won't work
+   * It's important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
    */
   public function getTwigTemplate(): string

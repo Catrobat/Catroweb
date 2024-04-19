@@ -7,6 +7,14 @@
   <meta charset="UTF-8">
   <meta name='viewport' content='width=device-width, user-scalable=no'/>
 
+  {% if gtm_container_id %}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_container_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  {% endif %}
+
   <title>
     {% block title %}{{ "title"|trans({}, "catroweb") }}{% endblock %}
   </title>
@@ -49,8 +57,8 @@
 
 {% include('Default/language_menu.html.twig') %}
 
-<div class="body-content">
-  <div class="page-content container">
+<div id="main_container_content" class="body-content">
+  <div class="page-content{% if app.request.attributes.get('_route') == 'studio_details' %} container{% endif %}">
     {% block body %}{% endblock %}
   </div>
 </div>
@@ -58,6 +66,7 @@
 {% include 'Default/footer.html.twig' %}
 
 <div id="bugsnag" data-api-key="{{ bugsnag_api_key }}" style="display: none;"></div>
+<div id="gtm-container-id" data-gtm-container-id="{{ gtm_container_id }}" style="display: none;"></div>
 <div id="app-version" data-app-version="{{ app_version }}" style="display: none;">{{ app_version }}</div>
 <div id="app-language" data-app-language="{{ app.request.locale }}"></div>
 <div class="js-app-env" data-app-env="'{{ app_env }}"></div>

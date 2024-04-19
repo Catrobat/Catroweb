@@ -968,6 +968,7 @@ studio:
 
 
   details:
+    add_project: 'click to add the project'
     showMore: 'show more'
     showLess: 'show less'
     remove_project: 'Remove from studio'
@@ -983,6 +984,7 @@ studio:
 
     projects:
       title: 'Projects'
+      addProject: 'Add your own projects'
 
     comments:
       title: 'Comments'

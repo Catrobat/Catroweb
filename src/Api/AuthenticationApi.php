@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api;
 
 use App\Api\Services\Authentication\AuthenticationApiFacade;

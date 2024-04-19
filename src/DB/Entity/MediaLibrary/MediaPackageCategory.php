@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\MediaLibrary;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -32,7 +34,7 @@ class MediaPackageCategory implements \Stringable
   #[ORM\ManyToMany(targetEntity: MediaPackage::class, inversedBy: 'categories')]
   protected Collection $package;
 
-  #[ORM\OneToMany(mappedBy: 'category', targetEntity: MediaPackageFile::class)]
+  #[ORM\OneToMany(targetEntity: MediaPackageFile::class, mappedBy: 'category')]
   protected Collection $files;
 
   #[ORM\Column(type: 'integer')]

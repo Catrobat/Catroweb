@@ -100,14 +100,7 @@
           {% include 'Project/project_apk_generation_buttons.html.twig' %}
         </div>
       {% endif %}
-      <div class="mt-3">
-        {% include 'components/redirect_button.twig' with {
-          'id': 'remixGraphButton',
-          'url': path('remix_graph', {'id': project.id }),
-          'icon': 'call_split',
-          'text': "remixGraph.showRemixGraph"|trans({}, "catroweb")
-        } %}
-      </div>
+      {% include 'Project/project_remix_graph_buttons.html.twig' %}
       <div class="mt-3">
         {% include 'Project/project_sign_app_button.html.twig' %}
       </div>
@@ -150,32 +143,22 @@
         {% include 'Project/project_apk_generation_buttons.html.twig' with {'suffix': '-small'} %}
       </div>
       <div class="col-6 mt-3">
-        {% include 'components/redirect_button.twig' with {
-          'id': 'remixGraphButton',
-          'suffix': '-small',
-          'url': path('remix_graph', {'id': project.id }),
-          'icon': 'call_split',
-          'text': "remixGraph.showRemixGraph"|trans({}, "catroweb")
-        } %}
+        {% include 'Project/project_remix_graph_buttons.html.twig' with {'suffix': '-small'} %}
       </div>
     {% else %}
       <div class="col-12 mb-3">
-        {% include 'components/redirect_button.twig' with {
-          'id': 'remixGraphButton',
-          'suffix': '-small',
-          'url': path('remix_graph', {'id': project.id }),
-          'icon': 'call_split',
-          'text': "remixGraph.showRemixGraph"|trans({}, "catroweb")
-        } %}
+        {% include 'Project/project_remix_graph_buttons.html.twig' with {'suffix': '-small'} %}
       </div>
     {% endif %}
   </div>
-  <div class="row d-lg-none">
-    <div class="col-12 mt-3 mb-3">
-      {% include 'Project/project_sign_app_button.html.twig' %}
+  {% if isFeatureFlagEnabled('sign-apk') %}
+     <div class="row d-lg-none">
+      <div class="col-12 mt-3 mb-3">
+        {% include 'Project/project_sign_app_button.html.twig' %}
+      </div>
     </div>
-  </div>
-  {% include 'Project/project_sign_app_modal.html.twig' %}
+    {% include 'Project/project_sign_app_modal.html.twig' %}
+  {% endif %}
 
   {% include 'Project/project_details.html.twig' %}
   <div id="recommended-projects">
@@ -310,5 +293,5 @@
     }
   }
 </script>
-  {{ encore_entry_script_tags('project_js') }}
+  {{ encore_entry_script_tags('project_js')}}
 {% endblock %}

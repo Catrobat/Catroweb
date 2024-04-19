@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User\Notifications;
 
 use App\DB\Entity\User\User;
@@ -19,14 +21,12 @@ class FollowNotification extends CatroNotification
    * @param User $user     the User to which this FollowNotification should be shown
    * @param User $follower the User which "follow action" to another user triggered this FollowNotification
    */
-  public function __construct(User $user, /**
-     * The User which "follow action" to another user triggered this FollowNotification.
-     * If this user gets deleted, this FollowNotification gets deleted as well.
-     */
+  public function __construct(
+    User $user,
     #[ORM\JoinColumn(name: 'follower_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'follow_notification_mentions')]
-    private User $follower)
-  {
+    private User $follower
+  ) {
     parent::__construct($user, '', '', 'follow');
   }
 
@@ -47,7 +47,7 @@ class FollowNotification extends CatroNotification
   }
 
   /**
-   * its important to overwrite the get method, otherwise it won't work
+   * It's important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
    */
   public function getTwigTemplate(): string

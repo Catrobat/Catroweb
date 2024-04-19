@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\Project;
 
 use App\DB\Entity\User\User;
@@ -9,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class ProgramDownloads
 {
-  final public const TYPE_PROJECT = 'project';
-  final public const TYPE_APK = 'apk';
+  final public const string TYPE_PROJECT = 'project';
+  final public const string TYPE_APK = 'apk';
 
   #[ORM\Column(name: 'id', type: 'integer')]
   #[ORM\Id]

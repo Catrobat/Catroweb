@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
@@ -10,11 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: StudioJoinRequestRepository::class)]
 class StudioJoinRequest
 {
-  public const STATUS_PENDING = 'pending';
-  public const STATUS_APPROVED = 'approved';
-  public const STATUS_DECLINED = 'declined';
+  public const string STATUS_PENDING = 'pending';
+  public const string STATUS_APPROVED = 'approved';
+  public const string STATUS_DECLINED = 'declined';
 
-  public const STATUS_JOINED = 'joined';
+  public const string STATUS_JOINED = 'joined';
 
   #[ORM\Id]
   #[ORM\GeneratedValue]
@@ -30,7 +32,7 @@ class StudioJoinRequest
   protected Studio $studio;
 
   #[ORM\Column(type: 'string', length: 20)]
-  protected ?string $status;
+  protected ?string $status = null;
 
   public function getId(): ?int
   {

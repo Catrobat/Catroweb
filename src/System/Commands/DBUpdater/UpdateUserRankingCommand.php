@@ -1,27 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater;
 
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\EntityRepository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:update:userranking', description: 'Recomputes the ELO ranking for all users')]
 class UpdateUserRankingCommand extends Command
 {
   public function __construct(protected EntityManagerInterface $entity_manager, protected UserRepository $userRepository, protected ProgramRepository $programRepository)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this
-      ->setName('catrobat:update:userranking')
-      ->setDescription('Recomputes the ELO ranking for all users')
-    ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int

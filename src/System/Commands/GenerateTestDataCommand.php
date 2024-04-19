@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands;
 
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Storage\FileHelper;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,6 +18,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
+#[AsCommand(name: 'catrobat:test:generate', description: 'Generates test data')]
 class GenerateTestDataCommand extends Command
 {
   protected string $source;
@@ -34,8 +38,6 @@ class GenerateTestDataCommand extends Command
   protected function configure(): void
   {
     $this
-      ->setName('catrobat:test:generate')
-      ->setDescription('Generates test data')
       ->addOption('force')
     ;
   }

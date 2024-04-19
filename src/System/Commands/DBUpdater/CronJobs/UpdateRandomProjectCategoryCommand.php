@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater\CronJobs;
 
 use App\DB\Entity\Project\Program;
 use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:workflow:update_random_project_category', description: 'Update random projects\' category.')]
 class UpdateRandomProjectCategoryCommand extends Command
 {
   protected const LIMIT = 100;
@@ -16,13 +20,6 @@ class UpdateRandomProjectCategoryCommand extends Command
   public function __construct(protected EntityManagerInterface $entity_manager, protected ProjectManager $program_manager)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:workflow:update_random_project_category')
-      ->setDescription('Update random projects\' category.')
-    ;
   }
 
   /**

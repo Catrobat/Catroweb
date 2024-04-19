@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Statistics\Translation\Controller;
 
 use App\DB\Entity\Translation\CommentMachineTranslation;

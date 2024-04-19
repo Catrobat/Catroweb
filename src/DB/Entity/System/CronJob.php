@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\System;
 
 use App\DB\EntityRepository\System\CronJobRepository;

@@ -111,8 +111,7 @@
 }
 
 .project-delete-button {
-  position: absolute;
-  right: 0;
+  float: right;
   cursor: pointer;
 }
 
@@ -223,6 +222,20 @@
 
 #comment-replies-body {
   padding-bottom: 20%;
+}
+
+.green-background {
+  transition: transform 0.3s ease;
+  box-shadow: 6px 6px 20px rgba(#c8c50a, 0.8);
+  border-color: rgba(#0f0, 0.5);
+  transform: scale(0.8);
+}
+
+.red-background {
+  transition: transform 0.3s ease;
+  box-shadow: 6px 6px 20px rgba(#e13e3e, 0.8);
+  border-color: rgba(#f00, 0.5);
+  transform: scale(0.8);
 }
 
 @media screen and (width >= 768px) {

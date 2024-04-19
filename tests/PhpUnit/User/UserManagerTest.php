@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\User;
 
 use App\DB\EntityRepository\User\UserRepository;

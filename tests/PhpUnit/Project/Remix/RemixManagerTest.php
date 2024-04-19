@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Project\Remix;
 
 use App\DB\Entity\Project\Program;
@@ -1214,20 +1216,28 @@ class RemixManagerTest extends TestCase
 
     foreach ($parent_data as $parent_id => $data) {
       $catrobat_relations = array_filter($data['existingRelations'], fn ($relation) => $relation instanceof ProgramRemixRelation);
-      $program_remix_repository_find_map[] = [['descendant_id' => (string) $parent_id], null, null, null, $catrobat_relations];
-      $program_repository_find_map[] = [(string) $parent_id, null, null, $data['exists'] ? $data['entity'] : null];
+      if ($data['exists']) {
+        $program_remix_repository_find_map[(string) $parent_id] = $catrobat_relations;
+      }
+      $program_repository_find_map[$parent_id] = $data['exists'] ? $data['entity'] : null;
     }
 
     $this->program_repository
       ->expects($this->any())
       ->method('find')
-      ->willReturn($this->returnValueMap($program_repository_find_map))
+      ->will($this->returnCallback(function ($id) use ($program_repository_find_map) {
+        return $program_repository_find_map[$id] ?? null;
+      }))
     ;
 
     $this->program_remix_repository
       ->expects($this->any())
       ->method('findBy')
-      ->willReturn($this->returnValueMap($program_remix_repository_find_map))
+      ->will($this->returnCallback(function ($criteria) use ($program_remix_repository_find_map) {
+        $descendant_id = $criteria['descendant_id'] ?? null;
+
+        return $program_remix_repository_find_map[$descendant_id] ?? [];
+      }))
     ;
 
     $this->entity_manager

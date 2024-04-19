@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\EntityRepository\Project;
 
 use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;

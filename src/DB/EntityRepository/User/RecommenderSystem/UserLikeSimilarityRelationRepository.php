@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\EntityRepository\User\RecommenderSystem;
 
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;

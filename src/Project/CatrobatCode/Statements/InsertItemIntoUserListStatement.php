@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode\Statements;
 
 class InsertItemIntoUserListStatement extends BaseUserListStatement
@@ -41,10 +43,8 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
       }
     }
 
-    $formula_str_index_no_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
-    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
-    $formula_str_value_no_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
-    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
+    $formula_str_index_no_markup = preg_replace('#<[^>]*>#', '', (string) $formula_string_index);
+    $formula_str_value_no_markup = preg_replace('#<[^>]*>#', '', (string) $formula_string_value);
 
     return 'Insert item into list '.$list_variable_name.' at position '.$formula_str_index_no_markup.' with '.$formula_str_value_no_markup;
   }

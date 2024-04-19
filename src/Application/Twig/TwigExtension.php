@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Twig;
 
+use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -9,7 +12,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Locales;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -22,7 +25,8 @@ class TwigExtension extends AbstractExtension
     private readonly MediaPackageFileRepository $media_package_file_repository,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly string $catrobat_translation_dir,
-    private readonly TranslatorInterface $translator
+    private readonly TranslatorInterface $translator,
+    private readonly FeatureFlagManager $featureFlagManager,
   ) {
   }
 
@@ -93,7 +97,13 @@ class TwigExtension extends AbstractExtension
       new TwigFunction('assetExists', $this->assetExists(...)),
       new TwigFunction('assetFileExists', $this->assetFileExists(...)),
       new TwigFunction('isVersionSupportedByCatBlocks', $this->isVersionSupportedByCatBlocks(...)),
+      new TwigFunction('isFeatureFlagEnabled', $this->isFeatureFlagEnabled(...)),
     ];
+  }
+
+  public function isFeatureFlagEnabled(string $featureFlag): bool
+  {
+    return $this->featureFlagManager->isEnabled($featureFlag);
   }
 
   public function isVersionSupportedByCatBlocks(string $version): bool

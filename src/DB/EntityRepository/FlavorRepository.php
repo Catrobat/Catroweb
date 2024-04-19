@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\EntityRepository;
 
 use App\DB\Entity\Flavor;

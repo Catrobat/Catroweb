@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Testing\PhpUnit\Extension;
 
 use App\System\Commands\Helpers\CommandHelper;

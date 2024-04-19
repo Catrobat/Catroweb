@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Ci;
 
 use App\DB\Entity\Project\Program;
@@ -7,7 +9,7 @@ use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -23,7 +25,7 @@ class ApkStatusController extends AbstractController
   }
 
   #[Route(path: '/ci/status/{id}', name: 'ci_status', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function getApkStatusAction(string $id): JsonResponse
+  public function getApkStatus(string $id): JsonResponse
   {
     /** @var Program|null $project */
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);

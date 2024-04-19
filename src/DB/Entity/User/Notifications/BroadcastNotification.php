@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User\Notifications;
 
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Table]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class BroadcastNotification extends CatroNotification
 {
   /**
@@ -20,7 +25,7 @@ class BroadcastNotification extends CatroNotification
   }
 
   /**
-   * its important to overwrite the get method, otherwise it won't work
+   * It's important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
    */
   public function getTwigTemplate(): string

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Api\Services\Base;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Base\AbstractApiFacade;
-use App\Api\Services\Base\PandaAuthenticationInterface;
+use App\Api\Services\Base\BearerAuthenticationInterface;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,6 +56,6 @@ final class AbstractApiControllerTest extends DefaultTestCase
    */
   public function testTestClassImplements(): void
   {
-    $this->assertInstanceOf(PandaAuthenticationInterface::class, $this->object);
+    $this->assertInstanceOf(BearerAuthenticationInterface::class, $this->object);
   }
 }

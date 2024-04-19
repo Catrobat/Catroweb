@@ -898,6 +898,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: '자세히보기'
     showLess: '덜 보여'
     remove_project: '스튜디오에서 제거'
@@ -912,6 +913,7 @@ studio:
     decline: 'Declined'
     projects:
       title: '프로그램'
+      addProject: 'Add your own projects'
     comments:
       title: '코멘트'
       type_something: 'Type something'

@@ -41,8 +41,8 @@
 
   <div id="home-projects">
     {# array values: [api project_type, translation, property to show] #}
+    {# disabled due to performance issues: ['recent', 'newest', 'uploaded'],#}
     {% for category in [
-      ['recent', 'newest', 'uploaded'],
       ['example', 'example', 'author'],
       ['most_downloaded', 'most.downloaded', 'downloads'],
       ['trending', 'trending', 'downloads'],

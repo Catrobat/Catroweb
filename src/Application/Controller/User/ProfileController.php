@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\User;
 
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -15,7 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class ProfileController extends AbstractController
 {
@@ -34,7 +36,7 @@ class ProfileController extends AbstractController
    */
   #[Route(path: '/user/{id}', name: 'profile', defaults: ['id' => 0], methods: ['GET'])]
   #[Route(path: '/user/}')]
-  public function profileAction(string $id): Response
+  public function profile(string $id): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();

@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater;
 
 use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\EntityRepository\User\Achievements\AchievementRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:update:achievements', description: 'Inserting our static achievements into the Database')]
 class UpdateAchievementsCommand extends Command
 {
   final public const ACHIEVEMENT_IMAGE_ASSETS_PATH = 'images/achievements/';
@@ -17,13 +21,6 @@ class UpdateAchievementsCommand extends Command
   public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementRepository $achievement_repository)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:update:achievements')
-      ->setDescription('Inserting our static achievements into the Database')
-    ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int

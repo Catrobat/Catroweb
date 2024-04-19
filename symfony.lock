@@ -23,6 +23,18 @@
     "brick/math": {
         "version": "0.9.3"
     },
+    "bugsnag/bugsnag-symfony": {
+        "version": "1.14",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.13",
+            "ref": "f571597c0e65ca904f2d853c2396017ab28da0df"
+        },
+        "files": [
+            "config/packages/bugsnag.yaml"
+        ]
+    },
     "catrobat/capi": {
         "version": "v1.0.43"
     },
@@ -650,6 +662,15 @@
     "symfony/asset": {
         "version": "v4.4.5"
     },
+    "symfony/brevo-mailer": {
+        "version": "6.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.4",
+            "ref": "7c1038ceb733175f610a913a885a7c8b552b703a"
+        }
+    },
     "symfony/browser-kit": {
         "version": "v5.0.5"
     },
@@ -910,15 +931,6 @@
     },
     "symfony/security-http": {
         "version": "v5.4.8"
-    },
-    "symfony/sendinblue-mailer": {
-        "version": "6.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "5.2",
-            "ref": "ae1cf494ce06b9a4578a8445c610402a1676ee8d"
-        }
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"

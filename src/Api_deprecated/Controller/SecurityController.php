@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\OAuth\OAuthService;
@@ -12,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -29,7 +31,7 @@ class SecurityController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/checkToken/check.json', name: 'catrobat_api_check_token', defaults: ['_format' => 'json'], methods: ['POST'])]
-  public function checkTokenAction(TranslatorInterface $translator): JsonResponse
+  public function checkToken(TranslatorInterface $translator): JsonResponse
   {
     return new JsonResponse([
       'statusCode' => Response::HTTP_OK,
@@ -173,7 +175,7 @@ class SecurityController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/api/exchangeGoogleCode/exchangeGoogleCode.json', name: 'catrobat_oauth_login_google_code', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
-  public function exchangeGoogleCodeAction(Request $request): JsonResponse
+  public function exchangeGoogleCode(Request $request): JsonResponse
   {
     return $this->getOAuthService()->exchangeGoogleCodeAction($request);
   }
@@ -184,7 +186,7 @@ class SecurityController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/api/loginWithGoogle/loginWithGoogle.json', name: 'catrobat_oauth_login_google', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
-  public function loginWithGoogleAction(Request $request): JsonResponse
+  public function loginWithGoogle(Request $request): JsonResponse
   {
     return $this->getOAuthService()->loginWithGoogleAction($request);
   }

@@ -3,10 +3,10 @@ description: 'Install php and composer vendor libraries. Caching is enabled for 
 runs:
   using: 'composite'
   steps:
-    - name: 'Setup PHP 8.2'
+    - name: 'Setup PHP 8.3'
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.2
+        php-version: 8.3
 
     - name: 'Ensure composer configuration is valid'
       shell: bash

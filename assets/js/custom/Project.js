@@ -29,7 +29,7 @@ export const Project = function (
   downloadStartedText,
 ) {
   createLinks()
-  getApkStatus()
+  // getApkStatus() - APKs are disabled
 
   // -------------------------- FileHelper
 

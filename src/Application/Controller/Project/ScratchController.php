@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Project;
 
 use App\Project\Scratch\AsyncHttpClient;
@@ -7,7 +9,7 @@ use App\Project\Scratch\ScratchManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class ScratchController extends AbstractController
 {
@@ -19,7 +21,7 @@ class ScratchController extends AbstractController
   }
 
   #[Route(path: '/scratch/project/{id}', name: 'scratch_program', methods: ['GET', 'POST'])]
-  public function scratchProjectAction(Request $request, int $id): Response
+  public function scratchProject(Request $request, int $id): Response
   {
     $project = $this->scratch_manager->createScratchProjectFromId($id);
     if (null === $project) {

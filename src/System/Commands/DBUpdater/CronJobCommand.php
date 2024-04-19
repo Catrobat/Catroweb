@@ -1,15 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater;
 
 use App\DB\Entity\System\CronJob;
 use App\DB\EntityRepository\System\CronJobRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:cronjob', description: 'Executing Cron Jobs')]
 class CronJobCommand extends Command
 {
   protected const ONE_MINUTE_IN_SECONDS = 60;
@@ -20,13 +24,6 @@ class CronJobCommand extends Command
   public function __construct(protected EntityManagerInterface $entity_manager, protected CronJobRepository $cron_job_repository)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:cronjob')
-      ->setDescription('Executing Cron Jobs')
-    ;
   }
 
   /**

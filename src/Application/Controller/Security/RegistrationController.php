@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Security;
 
 use App\DB\Entity\User\User;
@@ -8,7 +10,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
@@ -19,7 +21,7 @@ class RegistrationController extends AbstractController
   }
 
   #[Route(path: '/register', name: 'register', methods: ['GET'])]
-  public function registerAction(): Response
+  public function register(): Response
   {
     return $this->render('security/registration/register.html.twig');
   }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User\Notifications;
 
 use App\DB\Entity\Project\Program;
@@ -21,19 +23,15 @@ class LikeNotification extends CatroNotification
    * @param User|null    $like_from the User which "like action" to another user triggered this LikeNotification
    * @param Program|null $program   the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
    */
-  public function __construct(User $user, /**
-     * The User which "like action" to another user triggered this LikeNotification.
-     * If this user gets deleted, this LikeNotification gets deleted as well.
-     */
+  public function __construct(
+    User $user,
     #[ORM\JoinColumn(name: 'like_from', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'like_notification_mentions')]
-    private ?User $like_from, /**
-     * the Program about which this LikeNotification is notifying, belongs to.
-     */
+    private ?User $like_from,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'like_notification_mentions')]
-    private ?Program $program)
-  {
+    private ?Program $program
+  ) {
     parent::__construct($user, '', '', 'reaction');
   }
 
@@ -54,7 +52,7 @@ class LikeNotification extends CatroNotification
   }
 
   /**
-   * its important to overwrite the get method, otherwise it won't work
+   * It's important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
    */
   public function getTwigTemplate(): string
