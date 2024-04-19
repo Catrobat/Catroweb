@@ -139,17 +139,21 @@ class ProgramRemixRepository extends ServiceEntityRepository
 
   public function removeRelationsBetweenProgramIds(array $ancestor_program_ids, array $descendant_program_ids): void
   {
-    $qb = $this->createQueryBuilder('r');
-
-    $qb
-      ->delete()
+    $entities = $this->createQueryBuilder('r')
       ->where('r.ancestor_id IN (:ancestor_program_ids)')
       ->andWhere('r.descendant_id IN (:descendant_program_ids)')
       ->setParameter('ancestor_program_ids', $ancestor_program_ids)
       ->setParameter('descendant_program_ids', $descendant_program_ids)
       ->getQuery()
-      ->execute()
+      ->getResult()
     ;
+
+    foreach ($entities as $entity) {
+      $this->getEntityManager()->remove($entity);
+      $this->getEntityManager()->detach($entity);
+    }
+
+    $this->getEntityManager()->flush();
   }
 
   public function removeAllRelations(): void

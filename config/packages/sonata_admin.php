@@ -9,7 +9,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $containerConfigurator->extension(
     'sonata_block',
     [
-      'http_cache' => false,
       'default_contexts' => [
         'cms',
       ],

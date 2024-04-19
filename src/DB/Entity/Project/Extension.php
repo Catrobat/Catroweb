@@ -10,20 +10,20 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'extension')]
-#[ORM\Index(columns: ['internal_title'], name: 'internal_title_idx')]
+#[ORM\Index(name: 'internal_title_idx', columns: ['internal_title'])]
 #[ORM\Entity(repositoryClass: ExtensionRepository::class)]
 class Extension implements \Stringable
 {
   /**
    * Static Tags - added/updated with UpdateTagsCommand.
    */
-  final public const ARDUINO = 'arduino';
-  final public const DRONE = 'drone';
-  final public const PHIRO = 'phiro';
-  final public const RASPBERRY_PI = 'raspberry_pi';
-  final public const EMBROIDERY = 'embroidery';
-  final public const MINDSTORMS = 'mindstorms';
-  final public const MULTIPLAYER = 'multiplayer';
+  final public const string ARDUINO = 'arduino';
+  final public const string DRONE = 'drone';
+  final public const string PHIRO = 'phiro';
+  final public const string RASPBERRY_PI = 'raspberry_pi';
+  final public const string EMBROIDERY = 'embroidery';
+  final public const string MINDSTORMS = 'mindstorms';
+  final public const string MULTIPLAYER = 'multiplayer';
 
   #[ORM\Id]
   #[ORM\Column(type: 'integer')]

@@ -16,14 +16,12 @@ class NewProgramNotification extends CatroNotification
    */
   private string $twig_template = 'Notifications/NotificationTypes/new_project_notification.html.twig';
 
-  public function __construct(User $user, /**
-     * The new Program which triggered this NewProgramNotification. If this Program gets deleted,
-     * this NewProgramNotification gets deleted as well.
-     */
+  public function __construct(
+    User $user,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'new_program_notification_mentions')]
-    private ?Program $program)
-  {
+    private ?Program $program
+  ) {
     parent::__construct($user, '', '', 'follow');
   }
 
@@ -44,7 +42,7 @@ class NewProgramNotification extends CatroNotification
   }
 
   /**
-   * its important to overwrite the get method, otherwise it won't work
+   * It's important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
    */
   public function getTwigTemplate(): string
