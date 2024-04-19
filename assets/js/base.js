@@ -8,6 +8,7 @@ import { showSnackbar } from './components/snackbar'
 import { LogoutTokenHandler } from './security/LogoutTokenHandler'
 
 import Bugsnag from '@bugsnag/js'
+import BugsnagPerformance from '@bugsnag/browser-performance'
 
 // Start the stimulus app
 import './bootstrap'
@@ -16,6 +17,7 @@ const appVersion = $('#app-version').data('app-version')
 const bugsnagApiKey = $('#bugsnag').data('api-key')
 if (bugsnagApiKey) {
   Bugsnag.start({ apiKey: bugsnagApiKey, appVersion })
+  BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion: appVersion })
 }
 
 require('../styles/base.scss')
