@@ -208,7 +208,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('es_host', '%env(ES_HOST)%');
   $parameters->set('es_port', '%env(ES_PORT)%');
   $parameters->set('dkim.private.key', '%kernel.project_dir%/.dkim/private.key');
-  $parameters->set('container.dumper.inline_class_loader', true);
+  $parameters->set('.container.dumper.inline_class_loader', true);
   $parameters->set('features', '%kernel.project_dir%/config/features.php');
   $parameters->set('reset_password.throttle_limit', 86400);
 

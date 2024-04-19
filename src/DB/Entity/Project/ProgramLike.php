@@ -14,14 +14,14 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProgramLikeRepository::class)]
 class ProgramLike implements \Stringable
 {
-  final public const TYPE_NONE = 0;
-  final public const TYPE_THUMBS_UP = 1;
-  final public const TYPE_SMILE = 2;
-  final public const TYPE_LOVE = 3;
-  final public const TYPE_WOW = 4;
+  final public const int TYPE_NONE = 0;
+  final public const int TYPE_THUMBS_UP = 1;
+  final public const int TYPE_SMILE = 2;
+  final public const int TYPE_LOVE = 3;
+  final public const int TYPE_WOW = 4;
 
-  final public const ACTION_ADD = 'add';
-  final public const ACTION_REMOVE = 'remove';
+  final public const string ACTION_ADD = 'add';
+  final public const string ACTION_REMOVE = 'remove';
   // -> new types go here...
 
   public static array $VALID_TYPES = [

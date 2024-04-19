@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\System\Commands\DBUpdater\CronJobs;
 
-use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\Extension\ProjectExtensionManager;
@@ -42,12 +41,10 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
     $iterator = $this->program_repository
       ->createQueryBuilder('e')
       ->getQuery()
-      ->iterate()
+      ->toIterable()
     ;
 
-    foreach ($iterator as $projects) {
-      /** @var Program $project */
-      $project = $projects[0];
+    foreach ($iterator as $project) {
       $extracted_file = $this->extracted_file_repo->loadProjectExtractedFile($project);
       if (!is_null($extracted_file)) {
         $this->extension_manager->addExtensions($extracted_file, $project, false);

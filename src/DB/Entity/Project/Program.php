@@ -21,28 +21,28 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program')]
-#[ORM\Index(columns: ['rand'], name: 'rand_idx')]
-#[ORM\Index(columns: ['uploaded_at'], name: 'uploaded_at_idx')]
-#[ORM\Index(columns: ['views'], name: 'views_idx')]
-#[ORM\Index(columns: ['downloads'], name: 'downloads_idx')]
-#[ORM\Index(columns: ['name'], name: 'name_idx')]
-#[ORM\Index(columns: ['user_id'], name: 'user_idx')]
-#[ORM\Index(columns: ['language_version'], name: 'language_version_idx')]
-#[ORM\Index(columns: ['visible'], name: 'visible_idx')]
-#[ORM\Index(columns: ['private'], name: 'private_idx')]
-#[ORM\Index(columns: ['debug_build'], name: 'debug_build_idx')]
-#[ORM\Index(columns: ['flavor'], name: 'flavor_idx')]
+#[ORM\Index(name: 'rand_idx', columns: ['rand'])]
+#[ORM\Index(name: 'uploaded_at_idx', columns: ['uploaded_at'])]
+#[ORM\Index(name: 'views_idx', columns: ['views'])]
+#[ORM\Index(name: 'downloads_idx', columns: ['downloads'])]
+#[ORM\Index(name: 'name_idx', columns: ['name'])]
+#[ORM\Index(name: 'user_idx', columns: ['user_id'])]
+#[ORM\Index(name: 'language_version_idx', columns: ['language_version'])]
+#[ORM\Index(name: 'visible_idx', columns: ['visible'])]
+#[ORM\Index(name: 'private_idx', columns: ['private'])]
+#[ORM\Index(name: 'debug_build_idx', columns: ['debug_build'])]
+#[ORM\Index(name: 'flavor_idx', columns: ['flavor'])]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program implements \Stringable
 {
-  final public const APK_NONE = 0;
+  final public const int APK_NONE = 0;
 
-  final public const APK_PENDING = 1;
+  final public const int APK_PENDING = 1;
 
-  final public const APK_READY = 2;
+  final public const int APK_READY = 2;
 
-  final public const INITIAL_VERSION = 1;
+  final public const int INITIAL_VERSION = 1;
 
   #[ORM\Id]
   #[ORM\Column(name: 'id', type: 'guid')]
@@ -75,35 +75,35 @@ class Program implements \Stringable
   /**
    * The UserComments commenting this Program. If this Program gets deleted, these UserComments get deleted as well.
    */
-  #[ORM\OneToMany(mappedBy: 'program', targetEntity: UserComment::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: UserComment::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $comments;
 
   /**
    * The LikeNotifications mentioning this Program. If this Program gets deleted,
    * these LikeNotifications get deleted as well.
    */
-  #[ORM\OneToMany(mappedBy: 'program', targetEntity: LikeNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: LikeNotification::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $like_notification_mentions;
 
   /**
    * The NewProgramNotification mentioning this Program as a new Program.
    * If this Program gets deleted, these NewProgramNotifications get deleted as well.
    */
-  #[ORM\OneToMany(mappedBy: 'program', targetEntity: NewProgramNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: NewProgramNotification::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $new_program_notification_mentions;
 
   /**
    * RemixNotifications which are triggered when this Program (child) is created as a remix of
    *  another one (parent). If this Program gets deleted, all those RemixNotifications get deleted as well.
    */
-  #[ORM\OneToMany(mappedBy: 'remix_program', targetEntity: RemixNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: RemixNotification::class, mappedBy: 'remix_program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $remix_notification_mentions_as_child;
 
   /**
    * RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
    * If this Program gets deleted, all RemixNotifications mentioning this program get deleted as well.
    */
-  #[ORM\OneToMany(mappedBy: 'program', targetEntity: RemixNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: RemixNotification::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $remix_notification_mentions_as_parent;
 
   #[ORM\JoinTable(name: 'program_tag')]
@@ -163,22 +163,22 @@ class Program implements \Stringable
   #[ORM\Column(type: 'datetime', nullable: true)]
   protected ?\DateTime $remix_migrated_at = null;
 
-  #[ORM\OneToMany(mappedBy: 'descendant', targetEntity: ProgramRemixRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProgramRemixRelation::class, mappedBy: 'descendant', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_ancestor_relations;
 
-  #[ORM\OneToMany(mappedBy: 'child', targetEntity: ProgramRemixBackwardRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProgramRemixBackwardRelation::class, mappedBy: 'child', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_backward_parent_relations;
 
-  #[ORM\OneToMany(mappedBy: 'ancestor', targetEntity: ProgramRemixRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProgramRemixRelation::class, mappedBy: 'ancestor', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_descendant_relations;
 
-  #[ORM\OneToMany(mappedBy: 'parent', targetEntity: ProgramRemixBackwardRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProgramRemixBackwardRelation::class, mappedBy: 'parent', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_backward_child_relations;
 
-  #[ORM\OneToMany(mappedBy: 'catrobat_child', targetEntity: ScratchProgramRemixRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ScratchProgramRemixRelation::class, mappedBy: 'catrobat_child', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $scratch_remix_parent_relations;
 
-  #[ORM\OneToMany(mappedBy: 'program', targetEntity: ProgramLike::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProgramLike::class, mappedBy: 'program', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $likes;
 
   #[ORM\Column(type: 'boolean', options: ['default' => false])]
@@ -200,7 +200,7 @@ class Program implements \Stringable
   #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $debug_build = false;
 
-  #[ORM\OneToMany(mappedBy: 'program', targetEntity: ProgramInappropriateReport::class, fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: ProgramInappropriateReport::class, mappedBy: 'program', fetch: 'EXTRA_LAZY')]
   protected Collection $reports;
 
   #[ORM\Column(type: 'integer', options: ['default' => 0])]
@@ -209,7 +209,7 @@ class Program implements \Stringable
   #[ORM\Column(type: 'float', options: ['default' => '0.0'])]
   protected float $popularity = 0.0;
 
-  #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectCustomTranslation::class, cascade: ['remove'])]
+  #[ORM\OneToMany(targetEntity: ProjectCustomTranslation::class, mappedBy: 'project', cascade: ['remove'])]
   private Collection $custom_translations;
 
   /**

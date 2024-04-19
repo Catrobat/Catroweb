@@ -24,23 +24,18 @@ class RemixNotification extends CatroNotification
    * @param Program|null $program       the parent Program
    * @param Program|null $remix_program the newly remixed child Program
    */
-  public function __construct(User $user, /**
-     * the owner of the parent Program.
-     */
+  public function __construct(
+    User $user,
     #[ORM\JoinColumn(name: 'remix_root', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: User::class)]
-    private ?User $remix_from, /**
-     *  the parent Program.
-     */
+    private ?User $remix_from,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'remix_notification_mentions_as_parent')]
-    private ?Program $program, /**
-     * the newly remixed child Program.
-     */
+    private ?Program $program,
     #[ORM\JoinColumn(name: 'remix_program_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'remix_notification_mentions_as_child')]
-    private ?Program $remix_program)
-  {
+    private ?Program $remix_program
+  ) {
     parent::__construct($user, '', '', 'remix');
   }
 
@@ -61,7 +56,7 @@ class RemixNotification extends CatroNotification
   }
 
   /**
-   * its important to overwrite the get method, otherwise it won't work
+   * It's important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
    */
   public function getTwigTemplate(): string

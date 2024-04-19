@@ -24,7 +24,7 @@ class NotificationRepository extends ServiceEntityRepository
    */
   public function getLikeNotificationsForProject(Program $project, ?User $owner = null, ?User $likeFrom = null): array
   {
-    $qb = $this->_em->createQueryBuilder();
+    $qb = $this->getEntityManager()->createQueryBuilder();
 
     $qb
       ->select('n')
@@ -55,7 +55,7 @@ class NotificationRepository extends ServiceEntityRepository
    */
   public function getFollowNotificationForUser(?User $owner = null, ?User $follow_from = null): array
   {
-    $qb = $this->_em->createQueryBuilder();
+    $qb = $this->getEntityManager()->createQueryBuilder();
 
     $qb
       ->select('n')
@@ -81,7 +81,7 @@ class NotificationRepository extends ServiceEntityRepository
 
   public function markAllNotificationsFromUserAsSeen(User $user): void
   {
-    $qb = $this->_em->createQueryBuilder();
+    $qb = $this->getEntityManager()->createQueryBuilder();
 
     $qb
       ->select('n')

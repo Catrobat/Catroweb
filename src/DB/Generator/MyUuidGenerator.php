@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Generator;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Id\AbstractIdGenerator;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 
@@ -25,7 +25,7 @@ class MyUuidGenerator extends AbstractIdGenerator
   /**
    * @throws \Exception
    */
-  public function generate(EntityManager $em, $entity): string
+  public function generateId(EntityManagerInterface $em, ?object $entity): string
   {
     $app_env = $_ENV['APP_ENV'];
 
@@ -36,7 +36,7 @@ class MyUuidGenerator extends AbstractIdGenerator
       return $new_uuid;
     }
 
-    return $this->uuid_generator->generate($em, $entity)->toString();
+    return $this->uuid_generator->generateId($em, $entity)->toString();
   }
 
   public static function setNextValue(string $next_value): void

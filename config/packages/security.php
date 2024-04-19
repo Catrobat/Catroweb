@@ -28,7 +28,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'id' => 'sonata.user.security.user_provider',
         ],
       ],
-      'enable_authenticator_manager' => true,
       'firewalls' => [
         'api_authentication_login' => [
           'provider' => 'chain_provider',

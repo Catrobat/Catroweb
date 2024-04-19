@@ -17,7 +17,7 @@ const appVersion = $('#app-version').data('app-version')
 const bugsnagApiKey = $('#bugsnag').data('api-key')
 if (bugsnagApiKey) {
   Bugsnag.start({ apiKey: bugsnagApiKey, appVersion })
-  BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion: appVersion })
+  BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion })
 }
 
 require('../styles/base.scss')

@@ -14,16 +14,16 @@ class Achievement
   /**
    * Static Achievements - added/updated with UpdateAchievementsCommand.
    */
-  final public const BRONZE_USER = 'bronze_user';
-  final public const SILVER_USER = 'silver_user';
-  final public const GOLD_USER = 'gold_user';
-  final public const DIAMOND_USER = 'diamond_user';
-  final public const PERFECT_PROFILE = 'perfect_profile';
-  final public const VERIFIED_DEVELOPER = 'verified_developer';
-  final public const CODING_JAM_09_2021 = 'coding_jam_09_2021';
-  final public const BILINGUAL = 'bilingual';
-  final public const TRILINGUAL = 'trilingual';
-  final public const LINGUIST = 'linguist';
+  final public const string BRONZE_USER = 'bronze_user';
+  final public const string SILVER_USER = 'silver_user';
+  final public const string GOLD_USER = 'gold_user';
+  final public const string DIAMOND_USER = 'diamond_user';
+  final public const string PERFECT_PROFILE = 'perfect_profile';
+  final public const string VERIFIED_DEVELOPER = 'verified_developer';
+  final public const string CODING_JAM_09_2021 = 'coding_jam_09_2021';
+  final public const string BILINGUAL = 'bilingual';
+  final public const string TRILINGUAL = 'trilingual';
+  final public const string LINGUIST = 'linguist';
 
   #[ORM\Column(name: 'id', type: 'integer')]
   #[ORM\Id]

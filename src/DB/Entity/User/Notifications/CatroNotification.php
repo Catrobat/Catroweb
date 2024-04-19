@@ -92,7 +92,7 @@ class CatroNotification
   }
 
   /**
-   * Sets he user to which this CatroNotification will be shown.
+   * Sets the user to which this CatroNotification will be shown.
    */
   public function setUser(User $user): CatroNotification
   {
