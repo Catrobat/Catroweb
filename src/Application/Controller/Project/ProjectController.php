@@ -31,12 +31,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectController extends AbstractController
 {
+  public const NOT_FOR_KIDS = 1;
+  public const NOT_FOR_KIDS_MODERATOR = 2;
+
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly ProjectManager $project_manager,
@@ -414,6 +417,29 @@ class ProjectController extends AbstractController
       'project' => $project,
       'are_replies' => true,
     ]);
+  }
+
+  #[Route(path: '/markNotForKids/{id}', name: 'mark_not_for_kids', methods: ['POST'])]
+  public function markNotForKids(string $id): Response
+  {
+    $project = $this->project_manager->find($id);
+    if (null === $project) {
+      return $this->redirectToIndexOnError();
+    }
+    if (self::NOT_FOR_KIDS_MODERATOR == $project->getNotForKids()) {
+      $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_for_kids_moderator', [], 'catroweb'));
+    } elseif (self::NOT_FOR_KIDS == $project->getNotForKids()) {
+      $project->setNotForKids(false);
+      $this->addFlash('snackbar', $this->translator->trans('snackbar.project_safe_for_kids', [], 'catroweb'));
+    } else {
+      $project->setNotForKids(true);
+      $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_for_kids', [], 'catroweb'));
+    }
+
+    $this->entity_manager->persist($project);
+    $this->entity_manager->flush();
+
+    return $this->redirectToRoute('program', ['id' => $id]);
   }
 
   protected function redirectToIndexOnError(): RedirectResponse

@@ -12,7 +12,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Locales;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;

@@ -6,7 +6,12 @@ namespace App\Project\EventListener;
 
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\Storage\ImageRepository;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PostPersistEventArgs;
+use Doctrine\ORM\Event\PostRemoveEventArgs;
+use Doctrine\ORM\Event\PostUpdateEventArgs;
+use Doctrine\ORM\Event\PrePersistEventArgs;
+use Doctrine\ORM\Event\PreRemoveEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 class FeaturedProjectImageListener
 {
@@ -14,7 +19,7 @@ class FeaturedProjectImageListener
   {
   }
 
-  public function prePersist(FeaturedProgram $featured, LifecycleEventArgs $event): void
+  public function prePersist(FeaturedProgram $featured, PrePersistEventArgs $event): void
   {
     $file = $featured->file;
     if (null == $file) {
@@ -23,7 +28,7 @@ class FeaturedProjectImageListener
     $featured->setImageType($file->guessExtension());
   }
 
-  public function postPersist(FeaturedProgram $featured, LifecycleEventArgs $event): void
+  public function postPersist(FeaturedProgram $featured, PostPersistEventArgs $event): void
   {
     $file = $featured->file;
     if (null == $file) {
@@ -32,7 +37,7 @@ class FeaturedProjectImageListener
     $this->repository->save($file, $featured->getId(), $featured->getImageType(), true);
   }
 
-  public function preUpdate(FeaturedProgram $featured, LifecycleEventArgs $event): void
+  public function preUpdate(FeaturedProgram $featured, PreUpdateEventArgs $event): void
   {
     $file = $featured->file;
     if (null == $file) {
@@ -43,7 +48,7 @@ class FeaturedProjectImageListener
     $featured->setImageType($file->guessExtension());
   }
 
-  public function postUpdate(FeaturedProgram $featured, LifecycleEventArgs $event): void
+  public function postUpdate(FeaturedProgram $featured, PostUpdateEventArgs $event): void
   {
     $file = $featured->file;
     if (null == $file) {
@@ -52,12 +57,12 @@ class FeaturedProjectImageListener
     $this->repository->save($file, $featured->getId(), $featured->getImageType(), true);
   }
 
-  public function preRemove(FeaturedProgram $featured, LifecycleEventArgs $event): void
+  public function preRemove(FeaturedProgram $featured, PreRemoveEventArgs $event): void
   {
     $featured->removed_id = $featured->getId();
   }
 
-  public function postRemove(FeaturedProgram $featured, LifecycleEventArgs $event): void
+  public function postRemove(FeaturedProgram $featured, PostRemoveEventArgs $event): void
   {
     $this->repository->remove($featured->removed_id, $featured->getImageType(), true);
   }

@@ -26,6 +26,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'version_strategy' => VersionStrategy::class,
         'json_manifest_path' => null,
       ],
+      'handle_all_throwables' => true,
+      'php_errors' => [
+        'log' => true,
+      ],
+      'annotations' => [
+        'enabled' => false,
+      ],
     ]
   );
 };

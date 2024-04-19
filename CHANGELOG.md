@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v24.4.3]
+
+## What's Changed
+
+- Bumped dependencies & translations
+- Fix deprecations
+- Add Bugsnag performance
+- Remove legacy Google Analytics, add gtm manager
+- SHARE-555 child restriction by @makne17
+
+**Full Changelog**: https://github.com/Catrobat/Catroweb/compare/v24.4.2...v24.4.3
+
 ## [v24.4.2]
 
 ## What's Changed

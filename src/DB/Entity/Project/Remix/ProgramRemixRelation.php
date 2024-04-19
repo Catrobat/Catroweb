@@ -26,7 +26,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   protected string $ancestor_id;
 
   #[ORM\JoinColumn(name: 'ancestor_id', referencedColumnName: 'id')]
-  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_descendant_relations')]
+  #[ORM\ManyToOne(targetEntity: Program::class, cascade: ['persist'], fetch: 'LAZY', inversedBy: 'catrobat_remix_descendant_relations')]
   protected Program $ancestor;
 
   #[ORM\Id]
@@ -34,7 +34,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   protected string $descendant_id;
 
   #[ORM\JoinColumn(name: 'descendant_id', referencedColumnName: 'id')]
-  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_ancestor_relations')]
+  #[ORM\ManyToOne(targetEntity: Program::class, cascade: ['persist'], fetch: 'LAZY', inversedBy: 'catrobat_remix_ancestor_relations')]
   protected Program $descendant;
 
   #[ORM\Id]

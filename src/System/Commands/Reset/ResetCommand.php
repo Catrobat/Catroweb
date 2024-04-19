@@ -126,6 +126,7 @@ class ResetCommand extends Command
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
     $this->exampleProject($program_names, $output);
+    $this->markNotForKids($program_names, $output);
 
     // https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
@@ -499,6 +500,24 @@ class ResetCommand extends Command
       if (0 !== $ret) {
         // Might fail because of missing screenshots!
         $output->writeln('Setting project to example failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
+      }
+    }
+  }
+
+  private function markNotForKids(array $program_names, OutputInterface $output): void
+  {
+    foreach ($program_names as $program_name) {
+      $mark = random_int(1, 100);
+      if ($mark <= 15) {
+        $parameters = [
+          'program_name' => $program_name,
+          'type' => random_int(1, 2),
+        ];
+        $ret = CommandHelper::executeSymfonyCommand('catrobat:notforkids', $this->getApplication(), $parameters, $output);
+
+        if (0 !== $ret) {
+          $output->writeln('Marking project not safe for kids failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
+        }
       }
     }
   }

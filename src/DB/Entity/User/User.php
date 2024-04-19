@@ -22,14 +22,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser;
 
 #[ORM\Table(name: 'fos_user')]
-#[ORM\Index(columns: ['upload_token'], name: 'upload_token_idx')]
-#[ORM\Index(columns: ['confirmation_token'], name: 'confirmation_token_isx')]
-#[ORM\Index(columns: ['username_canonical'], name: 'username_canonical_idx')]
-#[ORM\Index(columns: ['email_canonical'], name: 'email_canonical_idx')]
-#[ORM\Index(columns: ['scratch_user_id'], name: 'scratch_user_id_idx')]
-#[ORM\Index(columns: ['google_id'], name: 'google_id_idx')]
-#[ORM\Index(columns: ['google_id'], name: 'facebook_id_idx')]
-#[ORM\Index(columns: ['google_id'], name: 'apple_id_idx')]
+#[ORM\Index(name: 'upload_token_idx', columns: ['upload_token'])]
+#[ORM\Index(name: 'confirmation_token_isx', columns: ['confirmation_token'])]
+#[ORM\Index(name: 'username_canonical_idx', columns: ['username_canonical'])]
+#[ORM\Index(name: 'email_canonical_idx', columns: ['email_canonical'])]
+#[ORM\Index(name: 'scratch_user_id_idx', columns: ['scratch_user_id'])]
+#[ORM\Index(name: 'google_id_idx', columns: ['google_id'])]
+#[ORM\Index(name: 'facebook_id_idx', columns: ['google_id'])]
+#[ORM\Index(name: 'apple_id_idx', columns: ['google_id'])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User extends BaseUser
 {
@@ -56,28 +56,28 @@ class User extends BaseUser
    * Programs owned by this user.
    * When this user is deleted, all the programs owned by him should be deleted too.
    */
-  #[ORM\OneToMany(mappedBy: 'user', targetEntity: Program::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: Program::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $programs;
 
   /**
    * Requests to change the password issued by this user.
    * When this user is deleted, all the reset-password requests issued by him should be deleted too.
    */
-  #[ORM\OneToMany(mappedBy: 'user', targetEntity: ResetPasswordRequest::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: ResetPasswordRequest::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $reset_password_requests;
 
   /**
    * Notifications which are available for this user (shown upon login).
    * When this user is deleted, all notifications for him should also be deleted.
    */
-  #[ORM\OneToMany(mappedBy: 'user', targetEntity: CatroNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: CatroNotification::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $notifications;
 
   /**
    * Comments written by this user.
    * When this user is deleted, all the comments he wrote should be deleted too.
    */
-  #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserComment::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: UserComment::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $comments;
 
   /**
@@ -85,7 +85,7 @@ class User extends BaseUser
    * When this user will be deleted, all FollowNotifications mentioning
    * him as a follower, should also be deleted.
    */
-  #[ORM\OneToMany(mappedBy: 'follower', targetEntity: FollowNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: FollowNotification::class, mappedBy: 'follower', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $follow_notification_mentions;
 
   /**
@@ -93,7 +93,7 @@ class User extends BaseUser
    * When this user will be deleted, all LikeNotifications mentioning
    * him as a user giving a like to another user, should also be deleted.
    */
-  #[ORM\OneToMany(mappedBy: 'like_from', targetEntity: LikeNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: LikeNotification::class, mappedBy: 'like_from', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $like_notification_mentions;
 
   #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'following')]
@@ -102,19 +102,19 @@ class User extends BaseUser
   #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'followers')]
   protected Collection $following;
 
-  #[ORM\OneToMany(mappedBy: 'user', targetEntity: ProgramLike::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProgramLike::class, mappedBy: 'user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $likes;
 
-  #[ORM\OneToMany(mappedBy: 'first_user', targetEntity: UserLikeSimilarityRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: UserLikeSimilarityRelation::class, mappedBy: 'first_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $relations_of_similar_users_based_on_likes;
 
-  #[ORM\OneToMany(mappedBy: 'second_user', targetEntity: UserLikeSimilarityRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: UserLikeSimilarityRelation::class, mappedBy: 'second_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $reverse_relations_of_similar_users_based_on_likes;
 
-  #[ORM\OneToMany(mappedBy: 'first_user', targetEntity: UserRemixSimilarityRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: UserRemixSimilarityRelation::class, mappedBy: 'first_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $relations_of_similar_users_based_on_remixes;
 
-  #[ORM\OneToMany(mappedBy: 'second_user', targetEntity: UserRemixSimilarityRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: UserRemixSimilarityRelation::class, mappedBy: 'second_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $reverse_relations_of_similar_users_based_on_remixes;
 
   /**
@@ -160,10 +160,10 @@ class User extends BaseUser
   #[ORM\Column(type: 'boolean', options: ['default' => true])]
   protected bool $verified = true;
 
-  #[ORM\OneToMany(mappedBy: 'reporting_user', targetEntity: ProgramInappropriateReport::class, fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: ProgramInappropriateReport::class, mappedBy: 'reporting_user', fetch: 'EXTRA_LAZY')]
   protected Collection $reports_triggered_by_this_user;
 
-  #[ORM\OneToMany(mappedBy: 'reported_user', targetEntity: ProgramInappropriateReport::class, fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: ProgramInappropriateReport::class, mappedBy: 'reported_user', fetch: 'EXTRA_LAZY')]
   protected Collection $reports_of_this_user;
 
   #[ORM\Column(type: 'text', length: 65535, nullable: true)]

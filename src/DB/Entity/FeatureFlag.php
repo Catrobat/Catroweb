@@ -14,10 +14,12 @@ class FeatureFlag
   #[ORM\Column(type: 'integer')]
   private int $id;
 
-  public function __construct(#[ORM\Column(type: 'string', length: 255)]
-    private string $name, #[ORM\Column(type: 'boolean')]
-    private bool $value)
-  {
+  public function __construct(
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $name,
+    #[ORM\Column(type: 'boolean')]
+    private bool $value
+  ) {
   }
 
   public function getId(): ?int
