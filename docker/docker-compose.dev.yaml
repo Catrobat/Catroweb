@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   # Catroweb Project using APACHE with PHP
   app.catroweb:
@@ -92,12 +90,12 @@ services:
       - ./../webpack.config.js:/var/www/catroweb/webpack.config.js
       - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
 
-      # Sharing npm package files is not working (at least on windows) - feel free to try it out on any other OS
+      # sharing package files might not work on windows
       # - ./../package.json:/var/www/catroweb/package.json
       # - ./../package-lock.json:/var/www/catroweb/package-lock.json
 
   db.catroweb.dev:
-    image: mariadb:10.9
+    image: mariadb:10.11
     container_name: db.catroweb.dev
     ports:
       - 3306
@@ -129,7 +127,7 @@ services:
       - 9222
 
   db.catroweb.test:
-    image: mariadb:10.9
+    image: mariadb:10.11
     container_name: db.catroweb.test
     ports:
       - 3306
@@ -158,7 +156,7 @@ services:
       - db.catroweb.test
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.20
     container_name: elasticsearch
     environment:
       - cluster.name=docker-cluster

@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   # APACHE WITH PHP
   app.catroweb:
@@ -44,7 +42,7 @@ services:
       - 9222
 
   db.catroweb.test:
-    image: mariadb:10.9
+    image: mariadb:10.11
     container_name: db.catroweb.test
     ports:
       - 3306
@@ -54,7 +52,7 @@ services:
       - MYSQL_DATABASE=catroweb_test
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.20
     container_name: elasticsearch
     environment:
       - cluster.name=docker-cluster

@@ -99,7 +99,7 @@ task('restart:nginx', function () {
 });
 
 task('restart:php-fpm', function () {
-  run('/usr/sbin/service php8.2-fpm restart');
+  run('/usr/sbin/service php8.3-fpm restart');
 });
 
 task('install:npm', function () {
