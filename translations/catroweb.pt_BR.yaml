@@ -216,6 +216,7 @@ project:
   deletedComment: '**Excluído**'
   replyLabel: responder
   repliesLabel: respostas
+  notForKids: Not safe for kids
 remixGraph:
   title: Remixes
   showRemixGraph: 'Mostrar gráfico de remistura'
@@ -954,12 +955,15 @@ media_library:
       default: 'Tipo: desconhecido'
 snackbar:
   project_not_found: 'O projeto solicitado não está disponível'
+  project_not_for_kids: 'The project was marked as not safe for kids!'
+  project_safe_for_kids: 'The project was marked safe for kids!'
+  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
 maintenanceinformations:
   maintenance_information:
     additional_info: 'Informações adicionais: adicionar'
     feature_1: 'O recurso featureName não está disponível desde a maintenanceStart até maintenanceEnd'
     feature_2: 'O recurso'
     feature_3: 'O recurso'
-
-
+MarkNotForKids: Mark as not safe for kids
+MarkSafeForKids: Mark as safe for kids
 

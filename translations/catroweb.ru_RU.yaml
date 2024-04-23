@@ -216,6 +216,7 @@ project:
   deletedComment: '**Удалено**'
   replyLabel: ответить
   repliesLabel: oтветы
+  notForKids: Not safe for kids
 remixGraph:
   title: Ремиксы
   showRemixGraph: 'Графа ремиксов'
@@ -955,12 +956,15 @@ media_library:
       default: 'Тип: неизвестно'
 snackbar:
   project_not_found: 'Запрошенный проект недоступен'
+  project_not_for_kids: 'The project was marked as not safe for kids!'
+  project_safe_for_kids: 'The project was marked safe for kids!'
+  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
 maintenanceinformations:
   maintenance_information:
     additional_info: 'Дополнительная информация: additionalinfo'
     feature_1: 'Функция featureName не доступна с maintenanceStart до maintenanceEnd'
     feature_2: 'Функция'
     feature_3: 'Функция'
-
-
+MarkNotForKids: Mark as not safe for kids
+MarkSafeForKids: Mark as safe for kids
 

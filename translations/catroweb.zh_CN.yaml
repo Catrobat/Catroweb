@@ -103,12 +103,12 @@ project:
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Download the app
     statistics: More statistics
-  featured: Featured
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
+  featured: 精选
+  example: 示例
+  newest: 最新项目
+  recommended: 推荐的项目
   scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+  noProjects: 目前没有项目。
   deleteAction: 删除项目
   deleteConfirmation: |+
     Are you sure?
@@ -137,25 +137,25 @@ project:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
+  tooLongName: 项目名称太长！
+  tooLongDescription: 项目描述太长！
   tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
   popular: Popular projects
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
-  random: Random projects
-  related: Related projects
+  random: 随机项目
+  related: 相关项目
   downloads: '%downloads% downloads'
-  sample: Example projects
+  sample: 示例项目
   views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
     all: "所有"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
+  submitted: 已提交的项目
   uploaded: Uploaded projects
   reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
@@ -216,6 +216,7 @@ project:
   deletedComment: '**已删除**'
   replyLabel: 回复
   repliesLabel: 回复
+  notForKids: 对儿童不安全
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'
@@ -789,13 +790,13 @@ checkOutUser: '查看此用户：'
 community: 'Catrobat社区'
 back_to_app: '退出社区'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: 最新项目
+  random: 随机项目
   most_viewed: 看得最多的
   most_downloaded: 下载得最多的
   example: 示例
   scratch: Scratch remixes
-  recommended: Recommended projects
+  recommended: 推荐的项目
   popular: Most popular
 achievements:
   sidebar:
@@ -960,12 +961,15 @@ media_library:
       default: '类型：未知'
 snackbar:
   project_not_found: '请求的项目不可用'
+  project_not_for_kids: '该项目被标记为对儿童不安全！'
+  project_safe_for_kids: '该项目被标记为对儿童是安全的！'
+  project_not_for_kids_moderator: '这个项目已被版主标记。您无法取消标记！'
 maintenanceinformations:
   maintenance_information:
     additional_info: 'Additional information: additionalInfo'
     feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
     feature_2: 'The Feature'
     feature_3: 'The Feature'
-
-
+MarkNotForKids: 标记为对儿童不安全
+MarkSafeForKids: 标记为对儿童是安全的
 
