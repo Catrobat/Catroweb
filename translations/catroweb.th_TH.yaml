@@ -217,6 +217,7 @@ project:
   deletedComment: '**ลบแล้ว**'
   replyLabel: ตอบกลับ
   repliesLabel: ตอบกลับ
+  notForKids: Not safe for kids
 remixGraph:
   title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'
@@ -959,12 +960,15 @@ media_library:
       default: 'ประเภท: ไม่ทราบ'
 snackbar:
   project_not_found: 'ไม่มีโครงการที่ร้องขอ'
+  project_not_for_kids: 'The project was marked as not safe for kids!'
+  project_safe_for_kids: 'The project was marked safe for kids!'
+  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
 maintenanceinformations:
   maintenance_information:
     additional_info: 'ข้อมูลเพิ่มเติม: ข้อมูลเพิ่มเติม'
     feature_1: 'คุณลักษณะ ชื่อคุณลักษณะ ไม่พร้อมใช้งานตั้งแต่เริ่มต้นการบำรุงรักษาจนถึงสิ้นสุดการบำรุงรักษา'
     feature_2: 'คุณสมบัติ'
     feature_3: 'คุณสมบัติ'
-
-
+MarkNotForKids: Mark as not safe for kids
+MarkSafeForKids: Mark as safe for kids
 
