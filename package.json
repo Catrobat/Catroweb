@@ -67,7 +67,7 @@
     "@analytics/google-tag-manager": "^0.5.5",
     "@babel/core": "^7.24.5",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@bugsnag/browser-performance": "^2.4.1",
+    "@bugsnag/browser-performance": "^2.5.0",
     "@bugsnag/js": "^7.22.7",
     "@material/checkbox": "^14.0",
     "@material/chips": "^14.0",
