@@ -30,7 +30,7 @@
     "http-interop/http-factory-guzzle": "*",
     "hwi/oauth-bundle": "2.2.*",
     "incenteev/composer-parameter-handler": "2.2.*",
-    "lexik/jwt-authentication-bundle": "2.20.*",
+    "lexik/jwt-authentication-bundle": "2.21.*",
     "php-http/guzzle7-adapter": "1.0.*",
     "php-http/httplug-bundle": "1.33.*",
     "php-http/message": "1.16.*",
