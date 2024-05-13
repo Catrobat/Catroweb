@@ -65,7 +65,7 @@
     "symfonycasts/reset-password-bundle": "1.21.*",
     "symfonycasts/verify-email-bundle": "1.17.*",
     "twig/extra-bundle": "3.10.*",
-    "twig/twig": "3.9.*"
+    "twig/twig": "3.10.*"
   },
   "require-dev": {
     "behat/behat": "3.14.*",
