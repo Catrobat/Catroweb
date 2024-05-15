@@ -9,13 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
 {
-  /**
-   * @var string
-   */
   final public const MEDIA_LICENSE = 'https://developer.catrobat.org/ccbysa_v4';
-  /**
-   * @var string
-   */
   final public const PROJECT_LICENSE = 'https://developer.catrobat.org/agpl_v3';
 
   public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event): void

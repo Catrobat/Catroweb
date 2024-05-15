@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\File\File;
 #[AsCommand(name: 'catrobat:import', description: 'Import programs from a given directory to the application')]
 class ProgramImportCommand extends Command
 {
-  final public const REMIX_GRAPH_NO_LAYOUT = '0';
+  final public const string REMIX_GRAPH_NO_LAYOUT = '0';
 
   public function __construct(private readonly UserManager $user_manager, private readonly RemixManipulationProjectManager $remix_manipulation_program_manager)
   {

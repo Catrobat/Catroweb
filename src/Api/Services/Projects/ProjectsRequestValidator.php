@@ -15,10 +15,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectsRequestValidator extends AbstractRequestValidator
 {
-  final public const MIN_NAME_LENGTH = 1;
-  final public const MAX_NAME_LENGTH = 255;
-  final public const MAX_DESCRIPTION_LENGTH = 10_000;
-  final public const MAX_CREDITS_LENGTH = 3_000;
+  final public const int MIN_NAME_LENGTH = 1;
+  final public const int MAX_NAME_LENGTH = 255;
+  final public const int MAX_DESCRIPTION_LENGTH = 10_000;
+  final public const int MAX_CREDITS_LENGTH = 3_000;
 
   public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager)
   {

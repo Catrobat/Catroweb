@@ -40,8 +40,6 @@ class JenkinsDispatcher
   protected function dispatch(mixed $params): string
   {
     $url = $this->config['url'].'?'.http_build_query($params);
-
-    // @phpstan-ignore-next-line // We don't want to check the return value, just dispatch the request
     file_get_contents($url);
 
     return $url;

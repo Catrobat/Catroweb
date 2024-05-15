@@ -6,9 +6,6 @@ namespace App\Project\Remix;
 
 class RemixData
 {
-  /**
-   * @var string
-   */
   final public const SCRATCH_DOMAIN = 'scratch.mit.edu';
 
   private int|string|array|bool|null $remix_url_data = null;

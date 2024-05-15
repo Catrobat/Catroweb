@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:update:extensions', description: 'Inserting our static project extension into the Database')]
 class UpdateProjectExtensionsCommand extends Command
 {
-  final public const EXTENSION_LTM_PREFIX = 'extensions.extension.';
+  final public const string EXTENSION_LTM_PREFIX = 'extensions.extension.';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ExtensionRepository $extension_repository)
   {

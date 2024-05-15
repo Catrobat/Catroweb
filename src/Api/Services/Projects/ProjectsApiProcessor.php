@@ -17,8 +17,8 @@ use OpenAPI\Server\Model\UpdateProjectRequest;
 
 class ProjectsApiProcessor extends AbstractApiProcessor
 {
-  final public const SERVER_ERROR_SAVE_XML = 1;
-  final public const SERVER_ERROR_SCREENSHOT = 2;
+  final public const int SERVER_ERROR_SAVE_XML = 1;
+  final public const int SERVER_ERROR_SCREENSHOT = 2;
 
   public function __construct(private readonly ProjectManager $project_manager,
     private readonly EntityManagerInterface $entity_manager,

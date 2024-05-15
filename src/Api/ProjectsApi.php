@@ -346,7 +346,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   /**
-   * @psalm-param 200 $responseCode
+   * @psalm-param 200|404|500 $responseCode
    */
   public function customProjectIdCatrobatGet(string $id, int &$responseCode, ?array &$responseHeaders = null): ?BinaryFileResponse
   {

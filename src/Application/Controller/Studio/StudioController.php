@@ -490,7 +490,7 @@ class StudioController extends AbstractController
     $headerImg->move($coverPath, $coverName);
     $pathToSave = '/'.$newPath.$coverName;
     $studio->setCoverPath('resources'.$pathToSave);
-    /** @var User|null $user */
+    /** @var User $user */
     $user = $this->getUser();
     $this->studio_manager->changeStudio($user, $studio);
 
@@ -526,7 +526,7 @@ class StudioController extends AbstractController
 
       $studio->setUpdatedOn(new \DateTime('now'));
 
-      /** @var User|null $user */
+      /** @var User $user */
       $user = $this->getUser();
       $formData = $request->request->all();
       $switches = $formData['switches'] ?? [];
@@ -559,7 +559,7 @@ class StudioController extends AbstractController
       if (is_null($this->getUser()) || is_null($studio)) {
         return $this->redirect($request->headers->get('referer'));
       }
-      /** @var User|null $user */
+      /** @var User $user */
       $user = $this->getUser();
       $clickedProjectsJson = $request->request->get('projects_add');
 
@@ -596,7 +596,7 @@ class StudioController extends AbstractController
           return new JsonResponse(['redirect_url' => $request->headers->get('referer')]);
         }
 
-        /** @var User|null $user */
+        /** @var User $user */
         $user = $this->getUser();
         $clickedRemoveProjectsJson = $request->request->get('projects_remove');
 

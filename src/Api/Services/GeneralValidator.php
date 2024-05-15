@@ -6,8 +6,8 @@ namespace App\Api\Services;
 
 class GeneralValidator
 {
-  final public const VALID_PICTURE_MIME_TYPES = ['jpeg', 'png', 'gif', 'webp', 'bmp'];
-  final public const VALID_PICTURE_DATA_URL_REGEX = '/^data:image\/([^;]+);base64,([A-Za-z0-9\/+=]+)$/';
+  final public const array VALID_PICTURE_MIME_TYPES = ['jpeg', 'png', 'gif', 'webp', 'bmp'];
+  final public const string VALID_PICTURE_DATA_URL_REGEX = '/^data:image\/([^;]+);base64,([A-Za-z0-9\/+=]+)$/';
 
   public static function validateImageDataUrl(string $image, bool $jpeg_if_mime_type_not_supported = false): bool|\Imagick
   {

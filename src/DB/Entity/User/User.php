@@ -20,6 +20,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Table(name: 'fos_user')]
 #[ORM\Index(name: 'upload_token_idx', columns: ['upload_token'])]
@@ -31,7 +32,7 @@ use Sonata\UserBundle\Entity\BaseUser;
 #[ORM\Index(name: 'facebook_id_idx', columns: ['google_id'])]
 #[ORM\Index(name: 'apple_id_idx', columns: ['google_id'])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User extends BaseUser
+class User extends BaseUser implements UserInterface
 {
   public static string $SCRATCH_PREFIX = 'Scratch:';
   /**

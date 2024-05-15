@@ -6,10 +6,7 @@ namespace App\Project\CatrobatCode\Statements;
 
 class BroadcastScriptStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'when receive message ';
+  final public const string BEGIN_STRING = 'when receive message ';
 
   private mixed $message;
 

@@ -93,18 +93,33 @@ class ApiContext implements Context
   /**
    * @var string[]
    */
-  private array $default_project_structure = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string',
-    'screenshot_large', 'screenshot_small', 'project_url',
-    // TODO: hotfix for Catty + Catroid . Remove 'tags' after Catty uses attributes-parameter.
-    'tags', 'download',
-    'description', 'version', 'uploaded', 'download_url', 'filesize',
+  private array $default_project_structure = [
+    'id',
+    'name',
+    'author',
+    'views',
+    'downloads',
+    'flavor',
+    'uploaded_string',
+    'screenshot_large',
+    'screenshot_small',
+    'project_url',
+    'tags',
+    'download',
+    'description',
+    'version',
+    'uploaded',
+    'download_url',
+    'filesize',
+    'not_for_kids',
   ];
+
   /**
    * @var string[]
    */
   private array $full_project_structure = ['id', 'name', 'author', 'description', 'credits', 'version', 'views',
     'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string',
-    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', ];
+    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', 'not_for_kids', ];
   /**
    * @var string[]
    */
@@ -1087,12 +1102,8 @@ class ApiContext implements Context
    */
   public function theResponseShouldContain(string $needle): void
   {
-    if (!str_contains((string) $this->getKernelBrowser()
-      ->getResponse()
-      ->getContent(), $needle)
-    ) {
-      Assert::assertTrue(false, $needle.' not found in the response ');
-    }
+    $content = $this->getKernelBrowser()->getResponse()->getContent();
+    Assert::assertStringContainsString($needle, $content, "{$needle} not found in the response");
   }
 
   /**
@@ -1169,10 +1180,7 @@ class ApiContext implements Context
   public function uriFromShouldBe(string $arg1, string $arg2): void
   {
     $link = $this->getKernelBrowser()->getCrawler()->selectLink($arg1)->link();
-
-    if (!strcmp($link->getUri(), $arg2)) {
-      Assert::assertTrue(false, 'expected: '.$arg2.'  get: '.$link->getURI());
-    }
+    Assert::assertEquals($arg2, $link->getUri(), 'expected: '.$arg2.'  get: '.$link->getURI());
   }
 
   /**
@@ -1461,12 +1469,15 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
+    /** @var array $project */
     foreach ($responseArray as $project) {
-      Assert::assertEquals(count($this->default_project_structure), is_countable($project) ? count($project) : 0,
+      Assert::assertCount(
+        count($this->default_project_structure),
+        $project,
         'Number of project fields should be '.count($this->default_project_structure));
       foreach ($this->default_project_structure as $key) {
         Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
-        Assert::assertEquals($this->checkProjectFieldsValue($project, $key), true);
+        Assert::assertTrue($this->checkProjectFieldsValue($project, $key), 'Project field '.$key.' has wrong value');
       }
     }
   }
@@ -1653,7 +1664,7 @@ class ApiContext implements Context
       'English' => $this->iSetCookie('hl', 'en'),
       'Deutsch' => $this->iSetCookie('hl', 'de_DE'),
       'French' => $this->iSetCookie('hl', 'fr_FR'),
-      default => Assert::assertTrue(false),
+      default => throw new \InvalidArgumentException("Invalid language: {$language}"),
     };
   }
 
@@ -2477,7 +2488,7 @@ class ApiContext implements Context
    */
   public function theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(string $project_id, string $descendant_project_id, string $depth): void
   {
-    /** @var ProgramRemixRelation $forward_descendant_relation */
+    /** @var ProgramRemixRelation|null $forward_descendant_relation */
     $forward_descendant_relation = $this->getProjectRemixForwardRepository()->findOneBy([
       'ancestor_id' => $project_id,
       'descendant_id' => $descendant_project_id,
@@ -2811,80 +2822,97 @@ class ApiContext implements Context
   {
     $fields = [
       'id' => function ($id): void {
-        Assert::assertIsString($id);
-        Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
+        Assert::assertIsString($id, 'id is not a string!');
+        Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id is not in the correct format!');
       },
       'name' => function ($name): void {
-        Assert::assertIsString($name);
+        Assert::assertIsString($name, 'Name is not a string!');
       },
       'author' => function ($author): void {
-        Assert::assertIsString($author);
+        Assert::assertIsString($author, 'Author is not a string!');
       },
       'description' => function ($description): void {
-        Assert::assertIsString($description);
+        Assert::assertIsString($description, 'Description is not a string!');
       },
       'credits' => function ($description): void {
-        Assert::assertIsString($description);
+        Assert::assertIsString($description, 'Credits is not a string!');
       },
       'version' => function ($version): void {
-        Assert::assertIsString($version);
-        Assert::assertMatchesRegularExpression('/[0-9]\\.[0-9]\\.[0-9]/', $version);
+        Assert::assertIsString($version, 'Version is not a string!');
+        Assert::assertMatchesRegularExpression('/[0-9]\\.[0-9]\\.[0-9]/', $version, 'Version is not in the correct format!');
       },
       'views' => function ($views): void {
-        Assert::assertIsInt($views);
+        Assert::assertIsInt($views, 'Views is not an integer!');
       },
       'download' => function ($downloads): void {
-        Assert::assertIsInt($downloads); // deprecated
+        Assert::assertIsInt($downloads, 'Download is not an integer!'); // deprecated
       },
       'downloads' => function ($downloads): void {
-        Assert::assertIsInt($downloads);
+        Assert::assertIsInt($downloads, 'Downloads is not an integer!');
       },
       'reactions' => function ($reactions): void {
-        Assert::assertIsInt($reactions);
+        Assert::assertIsInt($reactions, 'Reactions is not an integer!');
       },
       'comments' => function ($comments): void {
-        Assert::assertIsInt($comments);
+        Assert::assertIsInt($comments, 'Comments is not an integer!');
       },
       'private' => function ($private): void {
-        Assert::assertIsBool($private);
+        Assert::assertIsBool($private, 'Private is not a boolean!');
       },
       'flavor' => function ($flavor): void {
-        Assert::assertIsString($flavor);
+        Assert::assertIsString($flavor, 'Flavor is not a string!');
       },
       'tags' => function ($tags): void {
         Assert::assertIsArray($tags, 'Tags is not an array!');
       },
       'uploaded' => function ($uploaded): void {
-        Assert::assertIsInt($uploaded);
+        Assert::assertIsInt($uploaded, 'uploaded is not an integer!');
       },
       'uploaded_string' => function ($uploaded_string): void {
-        Assert::assertIsString($uploaded_string);
+        Assert::assertIsString($uploaded_string, 'uploaded_string is not a string!');
       },
       'screenshot_large' => function ($screenshot_large): void {
         Assert::assertIsString($screenshot_large);
-        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/((resources_test\\/screenshots\/screen_[0-9]+)|(images\\/default\\/screenshot))\\.png/',
-          $screenshot_large);
+        Assert::assertMatchesRegularExpression(
+          '/http:\\/\\/localhost\\/((resources_test\\/screenshots\/screen_[0-9]+)|(images\\/default\\/screenshot))\\.png/',
+          $screenshot_large,
+          'screenshot_large is not a valid URL!'
+        );
       },
       'screenshot_small' => function ($screenshot_small): void {
         Assert::assertIsString($screenshot_small);
-        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/((resources_test\\/thumbnails\/screen_[0-9]+)|(images\\/default\\/thumbnail))\\.png/',
-          $screenshot_small);
+        Assert::assertMatchesRegularExpression(
+          '/http:\\/\\/localhost\\/((resources_test\\/thumbnails\/screen_[0-9]+)|(images\\/default\\/thumbnail))\\.png/',
+          $screenshot_small,
+          'screenshot_small is not a valid URL!'
+        );
       },
       'project_url' => function ($project_url): void {
         Assert::assertIsString($project_url);
-        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/', $project_url);
+        Assert::assertMatchesRegularExpression(
+          '/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/',
+          $project_url,
+          'project_url is not a valid URL!'
+        );
       },
       'download_url' => function ($download_url): void {
         Assert::assertIsString($download_url);
-        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/api\\/project\\/([a-zA-Z0-9-]+)\\/catrobat/',
-          $download_url);
+        Assert::assertMatchesRegularExpression(
+          '/http:\\/\\/localhost\\/api\\/project\\/([a-zA-Z0-9-]+)\\/catrobat/',
+          $download_url,
+          'download_url is not a valid URL!'
+        );
       },
       'filesize' => function ($filesize): void {
-        Assert::assertEquals(is_float($filesize) || is_int($filesize), true);
+        Assert::assertEquals(is_float($filesize) || is_int($filesize), true, 'Filesize is not a number!');
+      },
+      'not_for_kids' => function ($not_for_kids): void {
+        Assert::assertIsInt($not_for_kids, "not_for_kids is not an integer! {$not_for_kids}");
+        Assert::assertContains($not_for_kids, [0, 1, 2], "not_for_kids is not 0 or 1 or 2! {$not_for_kids}");
       },
     ];
 
-    Assert::assertArrayHasKey($key, $fields);
+    Assert::assertArrayHasKey($key, $fields, "Key '{$key}' not found in fields array of checkProjectFieldsValue");
     call_user_func($fields[$key], $project[$key]);
 
     return true;

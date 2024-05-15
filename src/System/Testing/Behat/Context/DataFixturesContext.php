@@ -535,7 +535,7 @@ class DataFixturesContext implements Context
   {
     /** @var Program $project */
     $project = $this->getProjectManager()->findAll()[0];
-    Assert::assertNotNull($project->getExtensions());
+    Assert::assertTrue($project->getExtensions()->isEmpty());
   }
 
   /**
@@ -1080,8 +1080,8 @@ class DataFixturesContext implements Context
           $to_create = new CatroNotification($user, 'Random Title', 'Random Text');
           $em->persist($to_create);
           break;
-        case 'default':
-          Assert::assertTrue(false);
+        default:
+          throw new \InvalidArgumentException('Unknown type "'.$type.'" given.');
       }
     }
     $em->flush();

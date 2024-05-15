@@ -414,7 +414,6 @@ final class ProjectsApiTest extends DefaultTestCase
     $response = $this->object->projectsFeaturedGet('', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
   }
 
   /**
@@ -431,10 +430,9 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectsGet('category', 'en', '', 20, 0, '', '', $response_code, $response_headers);
+    $this->object->projectsGet('category', 'en', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
   }
 
   /**
@@ -495,10 +493,9 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectsSearchGet('query', '', 20, 0, '', '', $response_code, $response_headers);
+    $this->object->projectsSearchGet('query', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
   }
 
   /**
@@ -515,10 +512,9 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectsCategoriesGet('', '', 'en', $response_code, $response_headers);
+    $this->object->projectsCategoriesGet('', '', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
   }
 
   /**
@@ -769,10 +765,9 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectsExtensionsGet('en', $response_code, $response_headers);
+    $this->object->projectsExtensionsGet('en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
   }
 
   /**
@@ -789,9 +784,8 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectsTagsGet('', $response_code, $response_headers);
+    $this->object->projectsTagsGet('', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
   }
 }

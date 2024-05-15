@@ -6,10 +6,7 @@ namespace App\Project\CatrobatCode\Statements;
 
 class LookListStatement extends BaseListStatement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'used looks: <br/>';
+  final public const string BEGIN_STRING = 'used looks: <br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {

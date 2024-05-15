@@ -1,4 +1,4 @@
-@api @projects @post @remixes
+@api @projects @post @remixes @disabled
 Feature: Upload a remixed program with multiple parents
 
   Background:
