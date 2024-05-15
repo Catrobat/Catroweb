@@ -6,14 +6,8 @@ namespace App\Project\CatrobatCode\Statements;
 
 class VibrationStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'vibrating for ';
-  /**
-   * @var string
-   */
-  final public const END_STRING = ' seconds<br/>';
+  final public const string BEGIN_STRING = 'vibrating for ';
+  final public const string END_STRING = ' seconds<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {

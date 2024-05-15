@@ -99,9 +99,9 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
       );
     }
     foreach ($media_package_categories as $media_package_category) {
-      /** @var array|MediaPackageFile $media_package_files */
+      /** @var MediaPackageFile[]|null $media_package_files */
       $media_package_files = $media_package_category->getFiles();
-      if (null !== $media_package_files && (is_countable($media_package_files) ? count($media_package_files) : 0) > 0) {
+      if (!empty($media_package_files)) {
         foreach ($media_package_files as $media_package_file) {
           $json_response_array[] = $this->createArrayOfMediaData($media_package_file);
         }

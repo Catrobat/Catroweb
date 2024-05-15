@@ -79,7 +79,6 @@ json;
 
     $response_test = new PathUserResponse();
 
-    /** @var HttpUtils $httpUtils */
     $httpUtils = $this->createMock(HttpUtils::class);
     $resourceOwner = new GoogleResourceOwner(
       $httpClient,

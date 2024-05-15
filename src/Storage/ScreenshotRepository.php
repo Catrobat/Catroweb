@@ -11,13 +11,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ScreenshotRepository
 {
-  /**
-   * @var string
-   */
   final public const DEFAULT_SCREENSHOT = 'images/default/screenshot.png';
-  /**
-   * @var string
-   */
   final public const DEFAULT_THUMBNAIL = 'images/default/thumbnail.png';
 
   private readonly string $thumbnail_dir;

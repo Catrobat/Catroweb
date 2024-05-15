@@ -13,10 +13,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RemixUpdaterEventSubscriber implements EventSubscriberInterface
 {
-  /**
-   * @var string
-   */
-  final public const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
+  final public const string MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
 
   private readonly string $migration_lock_file_path;
 

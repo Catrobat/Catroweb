@@ -34,9 +34,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class CatrowebBrowserContext extends BrowserContext
 {
-  final public const AVATAR_DIR = './tests/TestData/DataFixtures/AvatarImages/';
+  final public const string AVATAR_DIR = './tests/TestData/DataFixtures/AvatarImages/';
 
-  final public const ALREADY_IN_DB_USER = 'AlreadyinDB';
+  final public const string ALREADY_IN_DB_USER = 'AlreadyinDB';
 
   protected bool $use_real_oauth_javascript_code = false;
 
@@ -354,7 +354,7 @@ class CatrowebBrowserContext extends BrowserContext
         break;
 
       default:
-        Assert::assertTrue(false);
+        throw new \InvalidArgumentException('Invalid language: '.$arg1);
     }
   }
 
@@ -368,7 +368,7 @@ class CatrowebBrowserContext extends BrowserContext
       'Deutsch' => $this->getSession()->setCookie('hl', 'de_DE'),
       'Russisch' => $this->getSession()->setCookie('hl', 'ru_RU'),
       'French' => $this->getSession()->setCookie('hl', 'fr_FR'),
-      default => Assert::assertTrue(false),
+      default => throw new \InvalidArgumentException('Invalid language: '.$arg1),
     };
     $this->reload();
   }
@@ -877,12 +877,8 @@ class CatrowebBrowserContext extends BrowserContext
     $not = trim($not);
 
     $pre_source = $this->getSession()->getPage()->find('css', '.profile__basic-info__avatar__img');
-    $source = '';
-    if (!is_null($pre_source)) {
-      $source = $pre_source->getAttribute('src') ?? '';
-    } else {
-      Assert::assertTrue(false, "Couldn't find avatar in .profile__basic-info__avatar__img");
-    }
+    Assert::assertNotNull($pre_source, 'Couldn\'t find .profile__basic-info__avatar__img');
+    $source = $pre_source->getAttribute('src') ?? '';
     $source = trim($source, '"');
 
     switch ($name) {
@@ -904,7 +900,7 @@ class CatrowebBrowserContext extends BrowserContext
         break;
 
       default:
-        Assert::assertTrue(false);
+        throw new \InvalidArgumentException('Invalid image name: '.$name);
     }
   }
 
@@ -1038,12 +1034,8 @@ class CatrowebBrowserContext extends BrowserContext
   public function iClickTheCurrentlyVisibleSearchIcon(): void
   {
     $icon = $this->getSession()->getPage()->findById('top-app-bar__btn-search');
-    if ($icon->isVisible()) {
-      $icon->click();
-
-      return;
-    }
-    Assert::assertTrue(false, 'Tried to click #top-app-bar__btn-search but no visible element was found.');
+    Assert::assertTrue($icon->isVisible(), 'Tried to click #top-app-bar__btn-search but no visible element was found.');
+    $icon->click();
   }
 
   /**

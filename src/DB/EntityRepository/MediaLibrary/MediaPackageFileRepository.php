@@ -151,7 +151,6 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     $finder = new Finder();
     $finder->files()->in($this->dir)->depth(0);
 
-    /** @var \SplFileInfo $file */
     foreach ($finder as $file) {
       $ext = 'catrobat' == $file->getExtension() ? 'png' : $file->getExtension();
       $basename = $file->getBasename('.'.$ext);

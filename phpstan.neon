@@ -1,3 +1,5 @@
+includes:
+	- phar://phpstan.phar/conf/bleedingEdge.neon
 parameters:
   bootstrapFiles:
       - config/bootstrap_test.php
@@ -9,6 +11,6 @@ parameters:
   inferPrivatePropertyTypeFromConstructor: true
   reportUnmatchedIgnoredErrors: true
 
-  # Would be nice, but not worth the amount of work needed to fix this. Maybe in the future ;)
-  checkMissingIterableValueType: false
-  checkGenericClassInNonGenericObjectType: false
+  ignoreErrors:
+    - identifier: missingType.generics
+    - identifier: missingType.iterableValue

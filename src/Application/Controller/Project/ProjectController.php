@@ -37,8 +37,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectController extends AbstractController
 {
-  public const NOT_FOR_KIDS = 1;
-  public const NOT_FOR_KIDS_MODERATOR = 2;
+  public const int NOT_FOR_KIDS = 1;
+  public const int NOT_FOR_KIDS_MODERATOR = 2;
 
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,

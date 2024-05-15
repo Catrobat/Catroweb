@@ -104,14 +104,15 @@ class BrowserContext extends MinkContext implements Context
    */
   public function atLeastOneElementShouldBeVisible(string $locator): void
   {
+    $result = false;
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
     foreach ($elements as $e) {
-      /** @var NodeElement $e */
       if ($e->isVisible()) {
-        return;
+        $result = true;
+        break;
       }
     }
-    Assert::assertTrue(false, 'No '.$locator.' element currently visible.');
+    Assert::assertTrue($result, 'No '.$locator.' element currently visible.');
   }
 
   /**

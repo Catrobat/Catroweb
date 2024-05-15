@@ -10,22 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VersionValidatorEventSubscriber implements EventSubscriberInterface
 {
-  /**
-   * @var string
-   */
-  final public const MIN_LANGUAGE_VERSION = '0.92';
-  /**
-   * @var string
-   */
-  final public const MIN_ANDROID_PROGRAM_VERSION = '0.7.3';
-  /**
-   * @var string
-   */
-  final public const MIN_IOS_PROGRAM_VERSION = '0.1';
-  /**
-   * @var string
-   */
-  final public const MIN_WINDOWS_PROGRAM_VERSION = '0.1';
+  final public const string MIN_LANGUAGE_VERSION = '0.92';
+
+  final public const string MIN_ANDROID_PROGRAM_VERSION = '0.7.3';
+
+  final public const string MIN_IOS_PROGRAM_VERSION = '0.1';
+
+  final public const string MIN_WINDOWS_PROGRAM_VERSION = '0.1';
 
   public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event): void
   {

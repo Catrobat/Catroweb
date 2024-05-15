@@ -6,10 +6,7 @@ namespace App\Project\CatrobatCode\Statements;
 
 class WhenScriptStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'when program started <br/>';
+  final public const string BEGIN_STRING = 'when program started <br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {

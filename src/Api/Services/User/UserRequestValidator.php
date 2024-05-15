@@ -19,15 +19,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserRequestValidator extends AbstractRequestValidator
 {
-  public const MIN_PASSWORD_LENGTH = 6;
-  public const MAX_PASSWORD_LENGTH = 4096;
+  public const int MIN_PASSWORD_LENGTH = 6;
+  public const int MAX_PASSWORD_LENGTH = 4096;
 
-  public const MIN_USERNAME_LENGTH = 3;
-  public const MAX_USERNAME_LENGTH = 180;
+  public const int MIN_USERNAME_LENGTH = 3;
+  public const int MAX_USERNAME_LENGTH = 180;
 
-  public const MODE_REGISTER = 'register_mode';
-  public const MODE_RESET_PASSWORD = 'reset_password_mode';
-  public const MODE_UPDATE = 'update_mode';
+  public const string MODE_REGISTER = 'register_mode';
+  public const string MODE_RESET_PASSWORD = 'reset_password_mode';
+  public const string MODE_UPDATE = 'update_mode';
 
   public function __construct(
     ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager,

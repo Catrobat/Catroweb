@@ -7,7 +7,6 @@ namespace Tests\PhpUnit\Application\Locale;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Translation\Formatter\MessageFormatter;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\Translation\Translator;
@@ -33,7 +32,6 @@ class TransChoiceTest extends TestCase
       $translator->trans($message_id, ['%count%' => 2], 'catroweb', $language_code);
       $translator->trans($message_id, ['%count%' => 10], 'catroweb', $language_code);
     }
-    $this->assertTrue(true);
   }
 
   public static function provideLanguageData(): array
@@ -46,7 +44,6 @@ class TransChoiceTest extends TestCase
     $finder = new Finder();
     $files = $finder->in($directory)->files();
     $language_codes = [];
-    /** @var File $file */
     foreach ($files as $file) {
       $parts = explode('.', $file->getFilename());
       $language_codes[] = $parts[1];

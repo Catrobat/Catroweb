@@ -14,9 +14,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class RemixSubgraphManipulator
 {
-  /**
-   * @var string
-   */
   final public const COMMON_TIMESTAMP = 'common_timestamp';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramRepository $project_repository, private readonly ProgramRemixRepository $project_remix_repository, private readonly ProgramRemixBackwardRepository $project_remix_backward_repository)

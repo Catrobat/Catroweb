@@ -6,14 +6,8 @@ namespace App\Project\CatrobatCode\Statements;
 
 class BroadcastWaitStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'broadcast and wait ';
-  /**
-   * @var string
-   */
-  final public const END_STRING = '<br/>';
+  final public const string BEGIN_STRING = 'broadcast and wait ';
+  final public const string END_STRING = '<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {

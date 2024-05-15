@@ -32,7 +32,7 @@ class MediaPackageController extends AbstractController
   #[Route(path: '/pocket-library/', name: 'pocket_library_overview', methods: ['GET'])]
   public function index(): Response
   {
-    /** @var MediaPackage $packages */
+    /** @var MediaPackage[] $packages */
     $packages = $this->entity_manager->getRepository(MediaPackage::class)->findAll();
 
     return $this->render('MediaLibrary/media_library_overview.html.twig',

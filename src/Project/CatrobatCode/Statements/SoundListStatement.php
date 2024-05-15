@@ -6,10 +6,7 @@ namespace App\Project\CatrobatCode\Statements;
 
 class SoundListStatement extends BaseListStatement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'used sounds: <br/>';
+  final public const string BEGIN_STRING = 'used sounds: <br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {

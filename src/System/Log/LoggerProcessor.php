@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class LoggerProcessor
 {
-  private const ANON_USER = 'anonymous';
+  private const string ANON_USER = 'anonymous';
 
   public function __construct(private readonly RequestStack $request_stack, private readonly TokenStorageInterface $security_token_storage)
   {
