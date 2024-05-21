@@ -70,7 +70,7 @@ COPY / ./
 # Overwrite behat config:
 COPY behat.yaml.dist ./behat.yaml
 RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb/index_test.php/|g" behat.yaml && \
-    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb:9222|g" behat.yaml
+    sed -i -r "s|(api_url:)(\s+.+)|api_url: http://chrome.catroweb:9222|g" behat.yaml
 
 # Overwrite project config:
 ARG APP_ENVIRONMENT

@@ -66,7 +66,7 @@
     "behat/mink": "1.11.*",
     "deployer/deployer": "v7.4.*",
     "dmore/behat-chrome-extension": "1.4.*",
-    "dmore/chrome-mink-driver": "2.9.2",
+    "dmore/chrome-mink-driver": "2.9.*",
     "doctrine/doctrine-fixtures-bundle": "3.6.*",
     "dvdoug/behat-code-coverage": "5.3.*",
     "friends-of-behat/symfony-extension": "2.6.*",
@@ -85,8 +85,7 @@
     "symfony/stopwatch": "7.0.*",
     "symfony/web-profiler-bundle": "7.1.*",
     "vimeo/psalm": "5.25.*",
-    "wapmorgan/php-deprecation-detector": "2.0.*",
-    "textalk/websocket": "1.5.8.*"
+    "wapmorgan/php-deprecation-detector": "2.0.*"
   },
   "config": {
     "platform": {
