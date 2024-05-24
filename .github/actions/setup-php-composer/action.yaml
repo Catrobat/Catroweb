@@ -14,7 +14,7 @@ runs:
 
     - name: 'Use caching action to improve performance'
       id: composer-cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           vendor
