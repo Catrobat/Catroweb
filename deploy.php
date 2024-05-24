@@ -142,6 +142,11 @@ task('sonata:admin:setup:acl', function () {
   run('bin/console sonata:admin:setup-acl');
 });
 
+task('clean:db:rollup', function () {
+  cd('{{release_path}}');
+  run('bin/console doctrine:migrations:rollup -n');
+});
+
 /*
  * Main task
  */
@@ -154,6 +159,7 @@ task('deploy', [
   'deploy:cache:clear',
   'deploy:writable',
   'deploy:symlink',
+  'clean:db:rollup',
   'database:migrate',
   'install:npm',
   'deploy:encore',
