@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Application\Theme;
 
 use App\Application\Theme\ThemeRequestEventSubscriber;
+use App\DB\Entity\Flavor;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\Utils\RequestHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -73,70 +74,70 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   {
     return [
       'Using a valid request theme' => [
-        'request_theme' => 'pocketcode',
+        'request_theme' => Flavor::POCKETCODE,
         'request_uri' => '',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Using a valid request theme 2' => [
-        'request_theme' => 'luna',
+        'request_theme' => Flavor::LUNA,
         'request_uri' => '',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'luna',
+        'expected_flavor' => Flavor::LUNA,
       ],
       'Using umbrella theme that is no flavor must use default flavor' => [
         'request_theme' => 'app',
         'request_uri' => '',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Using a invalid request theme must use default theme/flavor' => [
         'request_theme' => 'invalid',
         'request_uri' => '',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Using a request theme has higher priority than legacy URL theming' => [
-        'request_theme' => 'luna',
+        'request_theme' => Flavor::LUNA,
         'request_uri' => 'http://share.catrob.at/pocketcode',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'luna',
+        'expected_flavor' => Flavor::LUNA,
       ],
       'No set request theme must use and keep legacy URL theming' => [
         'request_theme' => '',
         'request_uri' => 'http://share.catrob.at/luna',
-        'expected_routing_theme' => 'luna',
-        'expected_flavor' => 'luna',
+        'expected_routing_theme' => Flavor::LUNA,
+        'expected_flavor' => Flavor::LUNA,
       ],
       'Umbrella URL theming must use default but keep route' => [
         'request_theme' => '',
         'request_uri' => 'http://share.catrob.at/app/',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Invalid Legacy URL theming must use default but keep route' => [
         'request_theme' => '',
         'request_uri' => 'http://share.catrob.at/invalid',
         'expected_routing_theme' => 'invalid',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Should also work with index(test?).php in route' => [
         'request_theme' => '',
         'request_uri' => 'http://localhost/index_test.php/luna',
-        'expected_routing_theme' => 'luna',
-        'expected_flavor' => 'luna',
+        'expected_routing_theme' => Flavor::LUNA,
+        'expected_flavor' => Flavor::LUNA,
       ],
       'It must be possible to return from the admin interface' => [
-        'request_theme' => 'luna',
+        'request_theme' => Flavor::LUNA,
         'request_uri' => 'http://localhost/admin',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'luna',
+        'expected_flavor' => Flavor::LUNA,
       ],
       'It must be possible to return from the admin interface (legacy)' => [
         'request_theme' => '',
         'request_uri' => 'http://localhost/admin',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
     ];
   }
@@ -159,7 +160,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     $router = $this->mockRouter($request_context);
 
     $this->expectRoutingThemeToEqual($request_context, 'app');
-    $this->expectAttributesToEqual($request_attributes, 'app', 'pocketcode');
+    $this->expectAttributesToEqual($request_attributes, 'app', Flavor::POCKETCODE);
 
     $this->object = $this->mockThemeRequestEventSubscriber([$this->parameter_bag, $router, $app_request]);
     $this->object->onKernelRequest($event);
@@ -237,7 +238,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
           function ($param) {
             switch ($param) {
               case 'flavors':
-                return ['pocketcode', 'luna'];
+                return [Flavor::POCKETCODE, Flavor::LUNA];
 
               case 'umbrellaTheme':
                 return 'app';
@@ -246,7 +247,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
                 return 'admin';
 
               case 'defaultFlavor':
-                return 'pocketcode';
+                return Flavor::POCKETCODE;
             }
 
             return '';

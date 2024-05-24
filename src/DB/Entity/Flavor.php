@@ -14,6 +14,27 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: FlavorRepository::class)]
 class Flavor implements \Stringable
 {
+  final public const string POCKETCODE = 'pocketcode';
+  final public const string POCKETALICE = 'pocketalice';
+  final public const string POCKETGALAXY = 'pocketgalaxy';
+  final public const string PHIROCODE = 'phirocode';
+  final public const string LUNA = 'luna';
+  final public const string CREATE_AT_SCHOOL = 'create@school';
+  final public const string EMBROIDERY = 'embroidery';
+  final public const string ARDUINO = 'arduino';
+  final public const string MINDSTORMS = 'mindstorms';
+  final public const array ALL = [
+    self::POCKETCODE,
+    self::POCKETALICE,
+    self::POCKETGALAXY,
+    self::PHIROCODE,
+    self::LUNA,
+    self::CREATE_AT_SCHOOL,
+    self::EMBROIDERY,
+    self::ARDUINO,
+    self::MINDSTORMS,
+  ];
+
   #[ORM\Id]
   #[ORM\Column(type: 'integer')]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
@@ -35,9 +56,11 @@ class Flavor implements \Stringable
     return $this->getName() ?? '';
   }
 
-  public function setId(?int $id): void
+  public function setId(?int $id): self
   {
     $this->id = $id;
+
+    return $this;
   }
 
   public function getId(): ?int
@@ -45,9 +68,11 @@ class Flavor implements \Stringable
     return $this->id;
   }
 
-  public function setName(?string $name): void
+  public function setName(?string $name): self
   {
     $this->name = $name;
+
+    return $this;
   }
 
   public function getName(): ?string

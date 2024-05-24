@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Project;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
 use App\DB\Entity\Project\Remix\ProgramRemixRelation;
 use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
@@ -148,8 +149,8 @@ class Program implements \Stringable
   #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $private = false;
 
-  #[ORM\Column(type: 'string', options: ['default' => 'pocketcode'])]
-  protected ?string $flavor = 'pocketcode';
+  #[ORM\Column(type: 'string', options: ['default' => Flavor::POCKETCODE])]
+  protected ?string $flavor = Flavor::POCKETCODE;
 
   #[ORM\Column(type: 'string', options: ['default' => ''])]
   protected string $upload_language = '';

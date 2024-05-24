@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
@@ -112,7 +113,7 @@ class ProjectManagerTest extends TestCase
     $this->request->expects($this->any())->method('getUser')->willReturn($user);
     $this->request->expects($this->any())->method('getIp')->willReturn('127.0.0.1');
     $this->request->expects($this->any())->method('getLanguage')->willReturn('en');
-    $this->request->expects($this->any())->method('getFlavor')->willReturn('pocketcode');
+    $this->request->expects($this->any())->method('getFlavor')->willReturn(Flavor::POCKETCODE);
     $file_extractor->expects($this->any())->method('extract')->with($file)->willReturn($this->extracted_file);
     $inserted_program->expects($this->any())->method('getId')->willReturn('1');
 

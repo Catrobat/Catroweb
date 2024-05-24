@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Create;
 
+use App\DB\Entity\Flavor;
 use App\DB\EntityRepository\FlavorRepository;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageCategoryRepository;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
@@ -52,9 +53,9 @@ class CreateMediaPackageSamplesCommand extends Command
     $package_looks = $this->media_package_repo->createMediaPackage('Looks', 'looks');
 
     // Creating MediaPackageCategory Animals and filling it with MediaPackageFiles
-    $pocketcode_flavor = $this->flavor_repo->getFlavorByName('pocketcode');
-    $luna_flavor = $this->flavor_repo->getFlavorByName('luna');
-    $create_at_school_flavor = $this->flavor_repo->getFlavorByName('create@school');
+    $pocketcode_flavor = $this->flavor_repo->getFlavorByName(Flavor::POCKETCODE);
+    $luna_flavor = $this->flavor_repo->getFlavorByName(Flavor::LUNA);
+    $create_at_school_flavor = $this->flavor_repo->getFlavorByName(Flavor::CREATE_AT_SCHOOL);
 
     $category_pocket_family = $this->media_package_category_repo->createMediaPackageCategory('Pocket Family', new ArrayCollection([$package_looks]));
     $this->media_package_file_repo->createMediaPackageFile('Penguin', new File($sample_pckg_path.'Looks/Pocket Family/Penguin.png'), $category_pocket_family, [$pocketcode_flavor], 'Catrobat');

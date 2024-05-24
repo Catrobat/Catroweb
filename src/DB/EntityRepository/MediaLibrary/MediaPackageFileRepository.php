@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\MediaLibrary;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -231,9 +232,9 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    *
    * @return mixed an array containing the found media files or null if no results found
    */
-  public function search(string $term, ?string $flavor = 'pocketcode', ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
+  public function search(string $term, ?string $flavor = Flavor::POCKETCODE, ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
   {
-    $flavor = $flavor ?: 'pocketcode';
+    $flavor = $flavor ?: Flavor::POCKETCODE;
 
     $qb = $this->createQueryBuilder('f')
       ->where('f.name LIKE :term')

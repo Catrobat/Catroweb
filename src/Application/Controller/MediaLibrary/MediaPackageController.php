@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\MediaLibrary;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -49,11 +50,7 @@ class MediaPackageController extends AbstractController
   #[Route(path: '/pocket-library/{package_name}', name: 'pocket_library', methods: ['GET'])]
   public function mediaPackage(Request $request, string $package_name, TranslatorInterface $translator): Response
   {
-    $flavor = $request->attributes->get('flavor');
-    if ('' === $flavor) {
-      $flavor = 'pocketcode';
-    }
-
+    $flavor = $request->attributes->get('flavor') ?: Flavor::POCKETCODE;
     $package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy([
         'nameUrl' => $package_name,
@@ -132,7 +129,7 @@ class MediaPackageController extends AbstractController
   {
     $categories = [];
 
-    if ('pocketcode' !== $flavor) {
+    if (Flavor::POCKETCODE !== $flavor) {
       $flavor_name = $translator->trans('flavor.'.$flavor, [], 'catroweb');
       $theme_special_name = $translator->trans('media-packages.theme-special',
         ['%flavor%' => $flavor_name], 'catroweb');

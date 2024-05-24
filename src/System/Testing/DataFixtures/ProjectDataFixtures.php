@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Testing\DataFixtures;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Tag;
@@ -97,7 +98,7 @@ class ProjectDataFixtures
     $project->setRemixRoot(!isset($config['remix_root']) || 'true' === $config['remix_root']);
     $project->setPrivate(isset($config['private']) && 'true' === $config['private']);
     $project->setDebugBuild(isset($config['debug']) && 'true' === $config['debug']);
-    $project->setFlavor($config['flavor'] ?? 'pocketcode');
+    $project->setFlavor($config['flavor'] ?? Flavor::POCKETCODE);
     $project->setRand((int) ($config['rand'] ?? 0));
     $project->setPopularity((float) ($config['popularity'] ?? 0));
     $project->setNotForKids((int) ($config['not_for_kids'] ?? 0));

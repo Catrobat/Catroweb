@@ -207,7 +207,7 @@ class MediaPackageFile
   public function getFlavor(): ?string
   {
     if ($this->getFlavors()->isEmpty()) {
-      return 'pocketcode';
+      return Flavor::POCKETCODE;
     }
 
     return $this->getFlavors()->first()->getName();

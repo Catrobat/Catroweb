@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Project;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\User\User;
 use Symfony\Component\HttpFoundation\File\File;
 
 class AddProjectRequest
 {
-  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = 'pocketcode')
+  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = Flavor::POCKETCODE)
   {
   }
 
