@@ -7,6 +7,7 @@ namespace App\DB\Entity\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramLikeRepository;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_like')]
@@ -48,7 +49,7 @@ class ProgramLike implements \Stringable
    * -----------------------------------------------------------------------------------------------------------------
    */
   #[ORM\Id]
-  #[ORM\Column(type: 'guid', nullable: false)]
+  #[ORM\Column(type: Types::GUID, nullable: false)]
   protected string $program_id;
 
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
@@ -56,7 +57,7 @@ class ProgramLike implements \Stringable
   protected Program $program;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'guid', nullable: false)]
+  #[ORM\Column(type: Types::GUID, nullable: false)]
   protected string $user_id;
 
   #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
@@ -64,10 +65,10 @@ class ProgramLike implements \Stringable
   protected User $user;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'integer', nullable: false, options: ['default' => 0])]
+  #[ORM\Column(type: Types::INTEGER, nullable: false, options: ['default' => 0])]
   protected int $type = self::TYPE_THUMBS_UP;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $created_at = null;
 
   public function __construct(Program $program, User $user, int $type)

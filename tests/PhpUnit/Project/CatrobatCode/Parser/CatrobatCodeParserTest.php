@@ -72,7 +72,7 @@ class CatrobatCodeParserTest extends TestCase
   }
 
   /**
-   * @return \App\Project\CatrobatFile\ExtractedCatrobatFile[][]
+   * @return ExtractedCatrobatFile[][]
    */
   public static function provideValidProgramData(): array
   {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DB\Entity\Api;
 
 use App\Api\Services\ResponseCache\ResponseCacheRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'response_cache')]
@@ -12,19 +13,19 @@ use Doctrine\ORM\Mapping as ORM;
 class ResponseCache
 {
   #[ORM\Id]
-  #[ORM\Column(type: 'string')]
+  #[ORM\Column(type: Types::STRING)]
   private ?string $id = null;
 
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   private int $response_code;
 
-  #[ORM\Column(type: 'text')]
+  #[ORM\Column(type: Types::TEXT)]
   private string $response;
 
-  #[ORM\Column(type: 'string')]
+  #[ORM\Column(type: Types::STRING)]
   private string $response_headers;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected \DateTime $cached_at;
 
   public function setId(string $cache_id): self

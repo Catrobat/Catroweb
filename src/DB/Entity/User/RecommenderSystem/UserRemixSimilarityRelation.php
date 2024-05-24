@@ -7,6 +7,7 @@ namespace App\DB\Entity\User\RecommenderSystem;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'user_remix_similarity_relation')]
@@ -22,7 +23,7 @@ class UserRemixSimilarityRelation
    * -----------------------------------------------------------------------------------------------------------------
    */
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $first_user_id;
 
   #[ORM\JoinColumn(name: 'first_user_id', referencedColumnName: 'id')]
@@ -30,20 +31,20 @@ class UserRemixSimilarityRelation
   protected User $first_user;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $second_user_id;
 
   #[ORM\JoinColumn(name: 'second_user_id', referencedColumnName: 'id')]
   #[ORM\ManyToOne(targetEntity: User::class, fetch: 'LAZY', inversedBy: 'reverse_relations_of_similar_users_based_on_remixes')]
   protected User $second_user;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $created_at = null;
 
   public function __construct(
     User $first_user,
     User $second_user,
-    #[ORM\Column(type: 'decimal', precision: 4, scale: 3, nullable: false, options: ['default' => '0.0'])]
+    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 3, nullable: false, options: ['default' => '0.0'])]
     protected string $similarity
   ) {
     $this->setFirstUser($first_user);

@@ -6,6 +6,7 @@ namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'studio_activity')]
@@ -22,7 +23,7 @@ class StudioActivity
   private array $activity_types = [self::TYPE_COMMENT, self::TYPE_PROJECT, self::TYPE_USER];
 
   #[ORM\Id]
-  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
@@ -30,14 +31,14 @@ class StudioActivity
   #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
   protected Studio $studio;
 
-  #[ORM\Column(name: 'type', type: 'string', nullable: false, columnDefinition: "ENUM('comment', 'project', 'user')")]
+  #[ORM\Column(name: 'type', type: Types::STRING, nullable: false, columnDefinition: "ENUM('comment', 'project', 'user')")]
   protected string $type;
 
   #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
   protected User $user;
 
-  #[ORM\Column(name: 'created_on', type: 'datetime', nullable: false)]
+  #[ORM\Column(name: 'created_on', type: Types::DATETIME_MUTABLE, nullable: false)]
   protected \DateTime $created_on;
 
   public function getId(): ?int

@@ -8,6 +8,7 @@ use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\FlavorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'flavor')]
@@ -36,13 +37,16 @@ class Flavor implements \Stringable
   ];
 
   #[ORM\Id]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  #[ORM\Column(type: 'string', length: 255, unique: true)]
+  #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
   protected ?string $name = null;
 
+  /**
+   * @var Collection<int, MediaPackageFile>
+   */
   #[ORM\ManyToMany(targetEntity: MediaPackageFile::class, mappedBy: 'flavors', fetch: 'EXTRA_LAZY')]
   protected Collection $media_package_files;
 

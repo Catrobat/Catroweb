@@ -6,6 +6,7 @@ namespace App\DB\Entity\MediaLibrary;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,16 +26,19 @@ use Doctrine\ORM\Mapping as ORM;
 class MediaPackage implements \Stringable
 {
   #[ORM\Id]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  #[ORM\Column(type: 'text', nullable: false)]
+  #[ORM\Column(type: Types::TEXT, nullable: false)]
   protected ?string $name = null;
 
-  #[ORM\Column(type: 'text', nullable: false)]
+  #[ORM\Column(type: Types::TEXT, nullable: false)]
   protected ?string $nameUrl = null;
 
+  /**
+   * @var Collection<int, MediaPackageCategory>
+   */
   #[ORM\ManyToMany(targetEntity: MediaPackageCategory::class, mappedBy: 'package')]
   protected Collection $categories;
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DB\Entity\Project;
 
 use App\DB\Entity\User\User;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_downloads')]
@@ -14,7 +15,7 @@ class ProgramDownloads
   final public const string TYPE_PROJECT = 'project';
   final public const string TYPE_APK = 'apk';
 
-  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\Id]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
@@ -27,10 +28,10 @@ class ProgramDownloads
   #[ORM\ManyToOne(targetEntity: User::class)]
   protected ?User $user = null;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $downloaded_at = null;
 
-  #[ORM\Column(type: 'string', options: ['default' => 'project'])]
+  #[ORM\Column(type: Types::STRING, options: ['default' => 'project'])]
   protected ?string $type = self::TYPE_PROJECT;
 
   public function getId(): ?int

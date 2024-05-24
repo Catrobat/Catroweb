@@ -7,6 +7,7 @@ namespace App\DB\Entity\Project\Remix;
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRemixRepository;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_remix_relation')]
@@ -22,7 +23,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    * -----------------------------------------------------------------------------------------------------------------
    */
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $ancestor_id;
 
   #[ORM\JoinColumn(name: 'ancestor_id', referencedColumnName: 'id')]
@@ -30,7 +31,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   protected Program $ancestor;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $descendant_id;
 
   #[ORM\JoinColumn(name: 'descendant_id', referencedColumnName: 'id')]
@@ -38,13 +39,13 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   protected Program $descendant;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'integer', nullable: false, options: ['default' => 0])]
+  #[ORM\Column(type: Types::INTEGER, nullable: false, options: ['default' => 0])]
   protected int $depth = 0;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $created_at = null;
 
-  #[ORM\Column(type: 'datetime', nullable: true)]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTime $seen_at = null;
 
   public function __construct(Program $ancestor, Program $descendant, int $depth)

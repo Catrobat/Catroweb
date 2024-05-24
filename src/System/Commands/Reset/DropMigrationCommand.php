@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\System\Commands\Reset;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -24,7 +25,7 @@ class DropMigrationCommand extends Command
   }
 
   /**
-   * @throws \Doctrine\DBAL\Exception
+   * @throws Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -39,7 +40,7 @@ class DropMigrationCommand extends Command
   }
 
   /**
-   * @throws \Doctrine\DBAL\Exception
+   * @throws Exception
    */
   private function dropMigrationVersions(): bool
   {

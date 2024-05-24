@@ -6,6 +6,7 @@ namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'studio_join_requests')]
@@ -20,7 +21,7 @@ class StudioJoinRequest
 
   #[ORM\Id]
   #[ORM\GeneratedValue]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   protected ?int $id = null;
 
   #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
@@ -31,7 +32,7 @@ class StudioJoinRequest
   #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
   protected Studio $studio;
 
-  #[ORM\Column(type: 'string', length: 20)]
+  #[ORM\Column(type: Types::STRING, length: 20)]
   protected ?string $status = null;
 
   public function getId(): ?int

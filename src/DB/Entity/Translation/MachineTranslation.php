@@ -5,29 +5,30 @@ declare(strict_types=1);
 namespace App\DB\Entity\Translation;
 
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 abstract class MachineTranslation
 {
   #[ORM\Id]
   #[ORM\GeneratedValue]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   protected ?int $id = null;
 
-  #[ORM\Column(type: 'float')]
+  #[ORM\Column(type: Types::FLOAT)]
   protected float $usage_per_month;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected \DateTime $last_modified_at;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected \DateTime $created_at;
 
   public function __construct(
-    #[ORM\Column(type: 'string', length: 5)] protected string $source_language,
-    #[ORM\Column(type: 'string', length: 5)] protected string $target_language,
-    #[ORM\Column(type: 'string')] protected string $provider,
-    #[ORM\Column(type: 'integer')] protected int $usage_count = 1)
+    #[ORM\Column(type: Types::STRING, length: 5)] protected string $source_language,
+    #[ORM\Column(type: Types::STRING, length: 5)] protected string $target_language,
+    #[ORM\Column(type: Types::STRING)] protected string $provider,
+    #[ORM\Column(type: Types::INTEGER)] protected int $usage_count = 1)
   {
     $this->usage_per_month = $usage_count;
   }

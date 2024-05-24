@@ -13,6 +13,7 @@ use CoderCat\JWKToPEM\JWKConverter;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 class AuthenticationApiProcessor extends AbstractApiProcessor
 {
@@ -65,7 +66,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
    *
    * @psalm-return array{id: mixed, email: mixed}
    *
-   * @throws \GuzzleHttp\Exception\GuzzleException
+   * @throws GuzzleException
    */
   protected function getPayloadFromAppleIdToken(string $id_token): array
   {

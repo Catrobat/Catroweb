@@ -8,7 +8,6 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class BroadcastNotification extends CatroNotification

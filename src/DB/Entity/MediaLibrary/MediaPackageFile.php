@@ -8,6 +8,7 @@ use App\DB\Entity\Flavor;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -34,33 +35,36 @@ class MediaPackageFile
   public ?string $old_extension = null;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  #[ORM\Column(type: 'text', nullable: false)]
+  #[ORM\Column(type: Types::TEXT, nullable: false)]
   protected string $name = '';
 
-  #[ORM\Column(type: 'string')]
+  #[ORM\Column(type: Types::STRING)]
   protected string $extension = '';
 
-  #[ORM\Column(type: 'text', nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $url = null;
 
   #[ORM\ManyToOne(targetEntity: MediaPackageCategory::class, inversedBy: 'files')]
   protected ?MediaPackageCategory $category = null;
 
-  #[ORM\Column(type: 'boolean')]
+  #[ORM\Column(type: Types::BOOLEAN)]
   protected bool $active = true;
 
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   protected int $downloads = 0;
 
+  /**
+   * @var Collection<int, Flavor>
+   */
   #[Assert\Count(min: 1)]
   #[ORM\ManyToMany(targetEntity: Flavor::class, inversedBy: 'media_package_files', fetch: 'EXTRA_LAZY')]
   protected Collection $flavors;
 
-  #[ORM\Column(type: 'string', nullable: true)]
+  #[ORM\Column(type: Types::STRING, nullable: true)]
   protected ?string $author = null;
 
   public function __construct()

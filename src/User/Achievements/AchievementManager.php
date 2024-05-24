@@ -293,6 +293,6 @@ class AchievementManager
    */
   protected function mapUserAchievementsToAchievements(array $user_achievements): array
   {
-    return array_map(fn (UserAchievement $achievement): \App\DB\Entity\User\Achievements\Achievement => $achievement->getAchievement(), $user_achievements);
+    return array_map(fn (UserAchievement $achievement): Achievement => $achievement->getAchievement(), $user_achievements);
   }
 }

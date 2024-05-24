@@ -10,6 +10,7 @@ use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'user_comment')]
@@ -23,7 +24,7 @@ class UserComment implements \Stringable
 {
   #[ORM\Id]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   protected ?int $id = null;
 
   /**
@@ -40,16 +41,16 @@ class UserComment implements \Stringable
   #[ORM\OneToOne(targetEntity: CommentNotification::class, mappedBy: 'comment', cascade: ['remove'])]
   protected ?CommentNotification $notification = null;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $uploadDate = null;
 
-  #[ORM\Column(type: 'text')]
+  #[ORM\Column(type: Types::TEXT)]
   protected ?string $text = null;
 
-  #[ORM\Column(type: 'string')]
+  #[ORM\Column(type: Types::STRING)]
   protected ?string $username = null;
 
-  #[ORM\Column(type: 'boolean')]
+  #[ORM\Column(type: Types::BOOLEAN)]
   protected bool $isReported = false;
 
   /**
@@ -59,14 +60,14 @@ class UserComment implements \Stringable
   #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'comments')]
   private ?Program $program = null;
 
-  #[ORM\Column(type: 'integer', nullable: true)]
+  #[ORM\Column(type: Types::INTEGER, nullable: true)]
   protected ?int $parent_id = null;
 
   #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'], inversedBy: 'user_comments')]
   protected ?Studio $studio = null;
 
-  #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => false])]
+  #[ORM\Column(type: Types::BOOLEAN, nullable: false, options: ['default' => false])]
   protected bool $is_deleted = false;
 
   #[ORM\JoinColumn(name: 'activity', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]

@@ -7,12 +7,12 @@ namespace App\DB\Entity\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramInappropriateReportRepository;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ProgramInappropriateReport.
  */
-#[ORM\Table]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProgramInappropriateReportRepository::class)]
 class ProgramInappropriateReport
@@ -21,7 +21,7 @@ class ProgramInappropriateReport
   final public const int STATUS_REJECTED = 2;
   final public const int STATUS_ACCEPTED = 3;
 
-  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\Id]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   private ?int $id = null;
@@ -34,23 +34,23 @@ class ProgramInappropriateReport
   #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reports_of_this_user')]
   private ?User $reported_user = null;
 
-  #[ORM\Column(name: 'category', type: 'text', length: 256)]
+  #[ORM\Column(name: 'category', type: Types::TEXT, length: 256)]
   private ?string $category = null;
 
-  #[ORM\Column(name: 'note', type: 'text')]
+  #[ORM\Column(name: 'note', type: Types::TEXT)]
   private ?string $note = null;
 
-  #[ORM\Column(name: 'time', type: 'datetime')]
+  #[ORM\Column(name: 'time', type: Types::DATETIME_MUTABLE)]
   private ?\DateTime $time = null;
 
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   private ?int $state = null;
 
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
   #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'reports')]
   private ?Program $program = null;
 
-  #[ORM\Column(name: 'projectVersion', type: 'integer')]
+  #[ORM\Column(name: 'projectVersion', type: Types::INTEGER)]
   private int $projectVersion;
 
   /**

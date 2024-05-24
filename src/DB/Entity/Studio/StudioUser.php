@@ -6,6 +6,7 @@ namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'studio_user')]
@@ -26,7 +27,7 @@ class StudioUser
   private array $statuses = [self::STATUS_ACTIVE, self::STATUS_BANNED, self::STATUS_PENDING_REQUEST];
 
   #[ORM\Id]
-  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
@@ -42,16 +43,16 @@ class StudioUser
   #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
   protected User $user;
 
-  #[ORM\Column(name: 'role', type: 'string', nullable: false, columnDefinition: "ENUM('admin', 'member')")]
+  #[ORM\Column(name: 'role', type: Types::STRING, nullable: false, columnDefinition: "ENUM('admin', 'member')")]
   protected string $role;
 
-  #[ORM\Column(name: 'status', type: 'string', nullable: false, columnDefinition: "ENUM('active', 'banned', 'pending_request')")]
+  #[ORM\Column(name: 'status', type: Types::STRING, nullable: false, columnDefinition: "ENUM('active', 'banned', 'pending_request')")]
   protected string $status;
 
-  #[ORM\Column(name: 'updated_on', type: 'datetime', length: 300, nullable: true)]
+  #[ORM\Column(name: 'updated_on', type: Types::DATETIME_MUTABLE, length: 300, nullable: true)]
   protected ?\DateTime $updated_on = null;
 
-  #[ORM\Column(name: 'created_on', type: 'datetime', length: 300, nullable: false)]
+  #[ORM\Column(name: 'created_on', type: Types::DATETIME_MUTABLE, length: 300, nullable: false)]
   protected \DateTime $created_on;
 
   public function getId(): ?int

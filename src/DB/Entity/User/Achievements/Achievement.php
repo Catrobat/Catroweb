@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DB\Entity\User\Achievements;
 
 use App\DB\EntityRepository\User\Achievements\AchievementRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'achievement')]
@@ -25,39 +26,39 @@ class Achievement
   final public const string TRILINGUAL = 'trilingual';
   final public const string LINGUIST = 'linguist';
 
-  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\Id]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  #[ORM\Column(name: 'internal_title', type: 'string', unique: true, nullable: false)]
+  #[ORM\Column(name: 'internal_title', type: Types::STRING, unique: true, nullable: false)]
   protected string $internal_title = '';
 
-  #[ORM\Column(name: 'title_ltm_code', type: 'string', nullable: false)]
+  #[ORM\Column(name: 'title_ltm_code', type: Types::STRING, nullable: false)]
   protected string $title_ltm_code = '';
 
-  #[ORM\Column(name: 'internal_description', type: 'text', nullable: false)]
+  #[ORM\Column(name: 'internal_description', type: Types::TEXT, nullable: false)]
   protected string $internal_description = '';
 
-  #[ORM\Column(name: 'description_ltm_code', type: 'string', nullable: false)]
+  #[ORM\Column(name: 'description_ltm_code', type: Types::STRING, nullable: false)]
   protected string $description_ltm_code = '';
 
-  #[ORM\Column(name: 'badge_svg_path', type: 'string', nullable: false)]
+  #[ORM\Column(name: 'badge_svg_path', type: Types::STRING, nullable: false)]
   protected string $badge_svg_path = '';
 
-  #[ORM\Column(name: 'badge_locked_svg_path', type: 'string', nullable: false)]
+  #[ORM\Column(name: 'badge_locked_svg_path', type: Types::STRING, nullable: false)]
   protected string $badge_locked_svg_path = '';
 
-  #[ORM\Column(name: 'banner_svg_path', type: 'string', nullable: false)]
+  #[ORM\Column(name: 'banner_svg_path', type: Types::STRING, nullable: false)]
   protected string $banner_svg_path = '';
 
-  #[ORM\Column(name: 'banner_color', type: 'string', nullable: false)]
+  #[ORM\Column(name: 'banner_color', type: Types::STRING, nullable: false)]
   protected string $banner_color = '';
 
-  #[ORM\Column(name: 'enabled', type: 'boolean', options: ['default' => true])]
+  #[ORM\Column(name: 'enabled', type: Types::BOOLEAN, options: ['default' => true])]
   protected bool $enabled = true;
 
-  #[ORM\Column(name: 'priority', type: 'integer', nullable: false)]
+  #[ORM\Column(name: 'priority', type: Types::INTEGER, nullable: false)]
   protected int $priority;
 
   public function getId(): ?int

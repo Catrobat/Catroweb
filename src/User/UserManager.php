@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\User;
 
+use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\UserRepository;
 use App\Project\ProjectManager;
@@ -142,7 +143,7 @@ class UserManager implements UserManagerInterface
     $result = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
       ->from(User::class, 'user')
-      ->leftjoin(\App\DB\Entity\Project\Program::class, 'project', Join::WITH, 'user.id = project.user')
+      ->leftjoin(Program::class, 'project', Join::WITH, 'user.id = project.user')
       ->where('user.createdAt <= :date')
       ->setParameter('date', new \DateTime("-{$years} years"))
       ->groupBy('user.id')

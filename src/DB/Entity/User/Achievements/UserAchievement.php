@@ -6,6 +6,7 @@ namespace App\DB\Entity\User\Achievements;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Achievements\UserAchievementRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'user_achievement')]
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UserAchievementRepository::class)]
 class UserAchievement
 {
-  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\Id]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
@@ -26,10 +27,10 @@ class UserAchievement
   #[ORM\ManyToOne(targetEntity: Achievement::class)]
   protected Achievement $achievement;
 
-  #[ORM\Column(name: 'unlocked_at', type: 'datetime', nullable: true)]
+  #[ORM\Column(name: 'unlocked_at', type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTimeInterface $unlocked_at = null;
 
-  #[ORM\Column(name: 'seen_at', type: 'datetime', nullable: true)]
+  #[ORM\Column(name: 'seen_at', type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTimeInterface $seen_at = null;
 
   public function getId(): ?int
