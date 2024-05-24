@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ReplaceItemInUserListBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::REPLACE_ITEM_LIST_BRICK;

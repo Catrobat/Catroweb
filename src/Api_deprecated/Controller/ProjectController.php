@@ -6,6 +6,7 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProjectListResponse;
 use App\Application\Twig\TwigExtension;
+use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
 use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +33,7 @@ class ProjectController extends AbstractController
     if (null === $project) {
       return new JsonResponse(['Error' => 'Project not found (uploaded)', 'preHeaderMessages' => '']);
     }
+
     $numbOfTotalProjects = 1;
     $projects[] = $project;
 
@@ -47,9 +49,10 @@ class ProjectController extends AbstractController
   public function projectLikes(string $id, ProjectManager $project_manager): JsonResponse
   {
     $project = $project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (null === $project) {
-      throw $this->createNotFoundException("Can't like a project that's not visible to you!; Id: ``{$id}");
+    if (!$project instanceof Program) {
+      throw $this->createNotFoundException('Can\'t like a project that\'s not visible to you!; Id: ``'.$id);
     }
+
     $data = [];
     $user_objects = [];
     /** @var ProgramLike $like */
@@ -80,9 +83,10 @@ class ProjectController extends AbstractController
   public function projectLikesCount(Request $request, string $id, ProjectManager $project_manager, TranslatorInterface $translator): JsonResponse
   {
     $project = $project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (null === $project) {
-      throw $this->createNotFoundException("Can't count likes of a project that's not visible to you!; Id: `{$id}`");
+    if (!$project instanceof Program) {
+      throw $this->createNotFoundException(sprintf('Can\'t count likes of a project that\'s not visible to you!; Id: `%s`', $id));
     }
+
     $user_locale = $request->getLocale();
     $data = new \stdClass();
     $data->total = new \stdClass();

@@ -25,6 +25,7 @@ class CreateRemixCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -36,6 +37,7 @@ class CreateRemixCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $program_remixes_of_original = [];
@@ -63,6 +65,7 @@ class CreateRemixCommand extends Command
     } catch (\Exception) {
       return 4;
     }
+
     $output->writeln('Remixing '.$program_original->getName().' with '.$remix_program_name);
 
     return 0;

@@ -26,6 +26,7 @@ class CreateProgramInappropriateReportCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -38,6 +39,7 @@ class CreateProgramInappropriateReportCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $username = $input->getArgument('user');
@@ -61,6 +63,7 @@ class CreateProgramInappropriateReportCommand extends Command
     } catch (\Exception) {
       return 3;
     }
+
     $output->writeln('Reporting '.$program->getName());
     $output->writeln('ReportedUser = '.$program->getUser());
 
@@ -71,11 +74,13 @@ class CreateProgramInappropriateReportCommand extends Command
   {
     $report = new ProgramInappropriateReport();
     $report->setReportingUser($user);
+
     $program->setVisible(false);
     $report->setCategory('Inappropriate');
     $report->setNote($note);
     $report->setProgram($program);
     $report->setReportedUser($program->getUser());
+
     $this->entity_manager->persist($report);
     $this->entity_manager->flush();
   }

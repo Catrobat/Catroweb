@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class SetBackgroundWaitBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::SET_BACKGROUND_WAIT_BRICK;

@@ -23,6 +23,7 @@ class TwigExtensionTest extends TestCase
 {
   private string $translationPath;
 
+  #[\Override]
   protected function setup(): void
   {
     parent::setUp();
@@ -127,7 +128,7 @@ class TwigExtensionTest extends TestCase
   private function inArray(string $needle, array $haystack): bool
   {
     foreach ($haystack as $value) {
-      if (0 === strcmp($needle, $value[1])) {
+      if (0 === strcmp($needle, (string) $value[1])) {
         return true;
       }
     }
@@ -138,9 +139,14 @@ class TwigExtensionTest extends TestCase
   private function isSelected(string $short, array $locales): bool
   {
     foreach ($locales as $value) {
-      if (0 === strcmp($short, $value[0]) && $value[2]) {
-        return true;
+      if (0 !== strcmp($short, (string) $value[0])) {
+        continue;
       }
+      if (!$value[2]) {
+        continue;
+      }
+
+      return true;
     }
 
     return false;

@@ -18,6 +18,7 @@ class NameValidatorEventSubscriberTest extends TestCase
 {
   private NameValidatorEventSubscriber $name_validator;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->name_validator = new NameValidatorEventSubscriber();

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WhenRaspiPinChangedScript extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_RASPI_PIN_CHANGED_SCRIPT;

@@ -18,6 +18,7 @@ final class SearchApiProcessorTest extends DefaultTestCase
 {
   protected MockObject|SearchApiProcessor $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(SearchApiProcessor::class)

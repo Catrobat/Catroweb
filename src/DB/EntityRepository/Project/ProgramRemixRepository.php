@@ -36,7 +36,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   {
     $parents_catrobat_ancestor_relations = $this->getAncestorRelations($descendant_program_ids);
 
-    return array_unique(array_map(fn (ProgramRemixRelation $relation): string => $relation->getAncestorId(), $parents_catrobat_ancestor_relations));
+    return array_unique(array_map(static fn (ProgramRemixRelation $relation): string => $relation->getAncestorId(), $parents_catrobat_ancestor_relations));
   }
 
   public function getParentAncestorRelations(array $descendant_program_ids): array
@@ -78,7 +78,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->getDirectAndIndirectDescendantRelations($ancestor_program_ids_to_exclude, $descendant_program_ids)
     ;
 
-    return array_unique(array_map(fn (ProgramRemixRelation $relation): string => $relation->getAncestorId(), $direct_and_indirect_descendant_relations));
+    return array_unique(array_map(static fn (ProgramRemixRelation $relation): string => $relation->getAncestorId(), $direct_and_indirect_descendant_relations));
   }
 
   public function getRootProgramIds(array $program_ids): array
@@ -96,7 +96,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->getResult()
     ;
 
-    return array_unique(array_map(fn ($row): mixed => $row['ancestor_id'], $result_data));
+    return array_unique(array_map(static fn ($row): mixed => $row['ancestor_id'], $result_data));
   }
 
   public function getDescendantRelations(array $ancestor_program_ids): array
@@ -117,7 +117,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   {
     $catrobat_root_descendant_relations = $this->getDescendantRelations($ancestor_program_ids);
 
-    return array_unique(array_map(fn (ProgramRemixRelation $relation): string => $relation->getDescendantId(), $catrobat_root_descendant_relations));
+    return array_unique(array_map(static fn (ProgramRemixRelation $relation): string => $relation->getDescendantId(), $catrobat_root_descendant_relations));
   }
 
   public function getDirectEdgeRelationsBetweenProgramIds(array $edge_start_program_ids, array $edge_end_program_ids): array

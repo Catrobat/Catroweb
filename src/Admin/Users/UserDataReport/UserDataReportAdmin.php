@@ -24,6 +24,7 @@ class UserDataReportAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -44,6 +45,7 @@ class UserDataReportAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter->add('username', null, [
@@ -53,6 +55,7 @@ class UserDataReportAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class JumpingSumoJumpLongBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::JUMP_SUMO_JUMP_LONG_BRICK;

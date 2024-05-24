@@ -36,6 +36,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User extends BaseUser implements UserInterface
 {
   public static string $SCRATCH_PREFIX = 'Scratch:';
+
   /**
    * @var string
    */
@@ -160,17 +161,22 @@ class User extends BaseUser implements UserInterface
 
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $google_id = null;
+
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $facebook_id = null;
 
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $google_access_token = null;
+
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $facebook_access_token = null;
+
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $apple_id = null;
+
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $apple_access_token = null;
+
   /**
    * @deprecated
    */
@@ -270,6 +276,7 @@ class User extends BaseUser implements UserInterface
     return $this->gplus_refresh_token;
   }
 
+  #[\Override]
   public function getId(): ?string
   {
     return $this->id;

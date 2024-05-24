@@ -20,6 +20,7 @@ class AchievementWorkflow_GoldUser_CommandTest extends KernelTestCase
 {
   protected AchievementWorkflow_GoldUser_Command|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AchievementWorkflow_GoldUser_Command::class)

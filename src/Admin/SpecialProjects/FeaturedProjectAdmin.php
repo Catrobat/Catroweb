@@ -47,6 +47,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
     return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType(), true);
   }
 
+  #[\Override]
   public function getObjectMetadata($object): MetadataInterface
   {
     /** @var FeaturedProgram $featured_project */
@@ -56,7 +57,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
       $this->getFeaturedImageUrl($featured_project));
   }
 
-  public function preUpdate(object $object): void
+  #[\Override]
+  protected function preUpdate(object $object): void
   {
     /** @var FeaturedProgram $featured_project */
     $featured_project = $object;
@@ -64,7 +66,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
     $featured_project->old_image_type = $featured_project->getImageType();
   }
 
-  public function preValidate(object $object): void
+  #[\Override]
+  protected function preValidate(object $object): void
   {
     $id = $this->getForm()->get('Program_Id_or_Url')->getData();
 
@@ -100,6 +103,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     /** @var FeaturedProgram $featured_project */
@@ -126,6 +130,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
     } else {
       $file_options = ['help' => 'The featured image must be of size 1024 x 400'];
     }
+
     $form
       ->add('file', FileType::class, $file_options)
       ->add('Use_Url', CheckboxType::class, ['mapped' => false, 'required' => false,
@@ -144,6 +149,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -160,6 +166,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     unset($this->getListModes()['mosaic']);
@@ -191,6 +198,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('acl');

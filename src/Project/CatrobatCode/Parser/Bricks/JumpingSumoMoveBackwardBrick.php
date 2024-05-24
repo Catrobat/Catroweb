@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class JumpingSumoMoveBackwardBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::JUMP_SUMO_MOVE_BACKWARD_BRICK;

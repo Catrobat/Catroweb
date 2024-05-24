@@ -97,6 +97,7 @@ class CatrowebBrowserContext extends BrowserContext
     if ('try to' === $try_to) {
       $this->assertPageNotContainsText('Your password or username was incorrect');
     }
+
     $this->getUserDataFixtures()->setCurrentUserByUsername($username);
   }
 
@@ -120,7 +121,8 @@ class CatrowebBrowserContext extends BrowserContext
       $this->getSession()->wait(2_000, 'window.location.href.search("login") == -1');
       $this->cookieShouldExist('BEARER');
     }
-    if ('out' == $arg1) {
+
+    if ('out' === $arg1) {
       $this->getSession()->wait(1_000, 'window.location.href.search("profile") == -1');
       $this->cookieShouldNotExist('BEARER');
     }
@@ -157,6 +159,7 @@ class CatrowebBrowserContext extends BrowserContext
     if ('NULL' === $cookie_value) {
       $cookie_value = null;
     }
+
     $this->getSession()->setCookie($cookie_name, $cookie_value);
   }
 
@@ -204,6 +207,7 @@ class CatrowebBrowserContext extends BrowserContext
     if (!$sidebar_open) {
       $this->getSession()->getPage()->find('css', '#top-app-bar__btn-sidebar-toggle')->click();
     }
+
     $this->iWaitForAjaxToFinish();
   }
 
@@ -219,6 +223,7 @@ class CatrowebBrowserContext extends BrowserContext
         ++$count;
       }
     }
+
     Assert::assertEquals($element_count, $count);
   }
 
@@ -344,6 +349,7 @@ class CatrowebBrowserContext extends BrowserContext
         if (!empty($cookie)) {
           $this->assertSession()->cookieEquals('hl', 'en');
         }
+
         break;
 
       case 'Deutsch':
@@ -497,11 +503,9 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change the visibility of the project number "([^"]*)" in the approve list to "([^"]*)"$/
    *
-   * @param string $visibility
-   *
    * @throws \Exception
    */
-  public function iChangeTheVisibilityOfTheProjectInTheApproveList(string $project_number, $visibility): void
+  public function iChangeTheVisibilityOfTheProjectInTheApproveList(string $project_number, string $visibility): void
   {
     // /param project_number contains the number of the project position in the list on the admin page
     // /
@@ -538,11 +542,9 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change the approval of the project number "([^"]*)" in the approve list to "([^"]*)"$/
    *
-   * @param string $approved
-   *
    * @throws \Exception
    */
-  public function iChangeTheApprovalOfTheProjectInApproveList(string $project_number, $approved): void
+  public function iChangeTheApprovalOfTheProjectInApproveList(string $project_number, string $approved): void
   {
     // /param project_number contains the number of the project position in the list on the admin page
     // /
@@ -855,7 +857,7 @@ class CatrowebBrowserContext extends BrowserContext
     $em = $this->getManager();
     $comments = $em->getRepository(UserComment::class)->findAll();
     $notifications = $em->getRepository(CatroNotification::class)->findAll();
-    Assert::assertTrue(!$comments && !$notifications);
+    Assert::assertTrue([] === $comments && [] === $notifications);
   }
 
   /**
@@ -878,7 +880,7 @@ class CatrowebBrowserContext extends BrowserContext
     $not = trim($not);
 
     $pre_source = $this->getSession()->getPage()->find('css', '.profile__basic-info__avatar__img');
-    Assert::assertNotNull($pre_source, 'Couldn\'t find .profile__basic-info__avatar__img');
+    Assert::assertNotNull($pre_source, "Couldn't find .profile__basic-info__avatar__img");
     $source = $pre_source->getAttribute('src') ?? '';
     $source = trim($source, '"');
 
@@ -1158,6 +1160,7 @@ class CatrowebBrowserContext extends BrowserContext
     foreach ($parameter_defs as $parameter_def) {
       $expected_parameters[$parameter_def['parameter']] = $parameter_def['value'];
     }
+
     $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
     $parameters = $dispatcher->getLastParameters();
 
@@ -1222,6 +1225,7 @@ class CatrowebBrowserContext extends BrowserContext
       default:
         $project->setApkStatus(Program::APK_NONE);
     }
+
     $pm->save($project);
   }
 
@@ -1807,6 +1811,7 @@ class CatrowebBrowserContext extends BrowserContext
     if (!is_dir($dirname)) {
       mkdir($dirname, 0755, true);
     }
+
     $file_path = fopen($full_filename, 'w'); // open in write mode.
     fseek($file_path, (int) $size - 1, SEEK_CUR); // seek to SIZE-1
     fwrite($file_path, 'a'); // write a dummy char at SIZE position
@@ -1826,7 +1831,7 @@ class CatrowebBrowserContext extends BrowserContext
     ;
 
     // click yes or no option
-    if ('yes' == $option) {
+    if ('yes' === $option) {
       $page
         ->find('css', 'select.form-control > option:nth-child(2)')
         ->click()
@@ -1837,6 +1842,7 @@ class CatrowebBrowserContext extends BrowserContext
         ->click()
       ;
     }
+
     // click button to confirm the selection
     $page
       ->find('css', 'button.btn-sm:nth-child(1)')

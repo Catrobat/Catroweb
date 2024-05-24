@@ -55,6 +55,7 @@ class LikeNotification extends CatroNotification
    * It's important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
    */
+  #[\Override]
   public function getTwigTemplate(): string
   {
     return $this->twig_template;

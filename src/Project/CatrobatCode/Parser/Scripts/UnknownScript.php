@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class UnknownScript extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::UNKNOWN_SCRIPT;

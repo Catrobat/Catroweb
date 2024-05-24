@@ -20,13 +20,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:update:popularity', description: 'Updating the popularity score of projects')]
 class UpdateProjectPopularityCommand extends Command
 {
-  final public const BATCH_SIZE = 1000;
+  final public const int BATCH_SIZE = 1000;
 
   // Weights for the popularity score computation
-  final public const VIEWS_W = 10;
-  final public const DOWNLOADS_W = 30;
-  final public const REMIXES_W = 45;
-  final public const REACTIONS_W = 15;
+  final public const int VIEWS_W = 10;
+
+  final public const int DOWNLOADS_W = 30;
+
+  final public const int REMIXES_W = 45;
+
+  final public const int REACTIONS_W = 15;
 
   public function __construct(protected EntityManagerInterface $entity_manager, protected ProgramRepository $program_repository, protected ProgramRemixRepository $program_remix_repository, protected ProgramLikeRepository $program_like_repository)
   {
@@ -34,6 +37,7 @@ class UpdateProjectPopularityCommand extends Command
   }
 
   // Compute and update popularity score for every project
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $program_count = $this->program_repository->countProjects();
@@ -46,8 +50,10 @@ class UpdateProjectPopularityCommand extends Command
         $program->setPopularity($popularity);
         $this->entity_manager->persist($program);
       }
+
       $offset += self::BATCH_SIZE;
     }
+
     $this->entity_manager->flush();
     $output->writeln('Popularity scores have been updated');
 
@@ -93,6 +99,7 @@ class UpdateProjectPopularityCommand extends Command
   {
     $query_builder = $this->program_repository->createQueryBuilder('e');
     $query_builder->select($query_builder->expr()->min('e.views'));
+
     $min = $query_builder->getQuery()->getResult()[0][1];
     $query_builder->select($query_builder->expr()->max('e.views'));
     $max = $query_builder->getQuery()->getResult()[0][1];
@@ -108,6 +115,7 @@ class UpdateProjectPopularityCommand extends Command
   {
     $query_builder = $this->program_repository->createQueryBuilder('e');
     $query_builder->select($query_builder->expr()->min('e.downloads'));
+
     $min = $query_builder->getQuery()->getResult()[0][1];
     $query_builder->select($query_builder->expr()->max('e.downloads'));
     $max = $query_builder->getQuery()->getResult()[0][1];

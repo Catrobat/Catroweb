@@ -39,6 +39,7 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
     $this->setCatrobatChild($catrobat_child);
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return '(Scratch: #'.$this->scratch_parent_id.', Catrobat: #'.$this->catrobat_child_id.')';
@@ -74,11 +75,13 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
     return $this->catrobat_child_id;
   }
 
+  #[\Override]
   public function getDepth(): int
   {
     return 1;
   }
 
+  #[\Override]
   public function getUniqueKey(): string
   {
     return sprintf('ScratchProgramRemixRelation(%d, %d)', $this->scratch_parent_id, $this->catrobat_child_id);

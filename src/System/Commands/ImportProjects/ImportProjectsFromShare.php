@@ -17,6 +17,7 @@ use Symfony\Component\Filesystem\Filesystem;
 #[AsCommand(name: 'catrobat:import:share', description: 'Imports the specified amount of recent programs from share.catrob.at')]
 class ImportProjectsFromShare extends Command
 {
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -38,6 +39,7 @@ class ImportProjectsFromShare extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $number_of_projects_to_download = intval($input->getOption('limit'));
@@ -73,6 +75,7 @@ class ImportProjectsFromShare extends Command
         --$downloads_left;
         continue;
       }
+
       $server_json = json_decode($projects, true, 512, JSON_THROW_ON_ERROR);
 
       $base_url = $server_json['CatrobatInformation']['BaseUrl'];
@@ -87,6 +90,7 @@ class ImportProjectsFromShare extends Command
             --$downloads_left;
             continue;
           }
+
           --$downloads_left;
         } catch (\Exception $e) {
           $output->writeln('File <'.$project_url.'> download failed');

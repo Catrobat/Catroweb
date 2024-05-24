@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WhenNfcScript extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_NFC_SCRIPT;

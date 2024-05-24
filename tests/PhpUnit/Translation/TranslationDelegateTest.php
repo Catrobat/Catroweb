@@ -25,6 +25,7 @@ class TranslationDelegateTest extends TestCase
 
   private MockObject|ProjectMachineTranslationRepository $project_machine_translation_repository;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->project_custom_translation_repository = $this->createMock(ProjectCustomTranslationRepository::class);

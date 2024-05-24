@@ -19,6 +19,7 @@ class CommentsAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'comments';
 
+  #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'uploaded_at';
@@ -30,6 +31,7 @@ class CommentsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -39,6 +41,7 @@ class CommentsAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('create')->remove('delete')->remove('export');

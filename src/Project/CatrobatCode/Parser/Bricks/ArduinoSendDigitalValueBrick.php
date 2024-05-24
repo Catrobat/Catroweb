@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ArduinoSendDigitalValueBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::ARDUINO_SEND_DIGITAL_VALUE_BRICK;

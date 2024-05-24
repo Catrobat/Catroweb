@@ -20,6 +20,7 @@ class UpdateAchievementsCommandTest extends KernelTestCase
 {
   protected MockObject|UpdateAchievementsCommand $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UpdateAchievementsCommand::class)

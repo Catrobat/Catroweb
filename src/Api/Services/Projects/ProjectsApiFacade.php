@@ -21,21 +21,25 @@ class ProjectsApiFacade extends AbstractApiFacade
     parent::__construct($authentication_manager);
   }
 
+  #[\Override]
   public function getResponseManager(): ProjectsResponseManager
   {
     return $this->response_manager;
   }
 
+  #[\Override]
   public function getLoader(): ProjectsApiLoader
   {
     return $this->loader;
   }
 
+  #[\Override]
   public function getProcessor(): ProjectsApiProcessor
   {
     return $this->processor;
   }
 
+  #[\Override]
   public function getRequestValidator(): ProjectsRequestValidator
   {
     return $this->request_validator;

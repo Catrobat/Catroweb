@@ -15,13 +15,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:update:tags', description: 'Inserting our static project tags into the Database')]
 class UpdateTagsCommand extends Command
 {
-  final public const TAG_LTM_PREFIX = 'tags.tag.';
+  final public const string TAG_LTM_PREFIX = 'tags.tag.';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly TagRepository $tag_repository)
   {
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $count = 0;
@@ -83,7 +84,8 @@ class UpdateTagsCommand extends Command
     $this->entity_manager->persist($tag);
 
     $this->entity_manager->flush();
-    $output->writeln("{$count} Tags in the Database have been inserted/updated");
+
+    $output->writeln($count.' Tags in the Database have been inserted/updated');
 
     return 0;
   }

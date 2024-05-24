@@ -16,6 +16,7 @@ class MaintainAdmin extends AbstractAdmin
 
   protected $baseRouteName = 'maintain';
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     // Find the implementation in the Controller-Folder

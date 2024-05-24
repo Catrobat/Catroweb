@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ComeToFrontBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::COME_TO_FRONT_BRICK;

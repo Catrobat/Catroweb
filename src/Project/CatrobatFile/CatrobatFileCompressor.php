@@ -34,6 +34,7 @@ class CatrobatFileCompressor
         $archive->addFile($element->getRealpath(), $element->getRelativePathname());
       }
     }
+
     $archive->close();
 
     return $destination.'/'.$filename;

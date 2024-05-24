@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class SetTextBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::SET_TEXT_BRICK;

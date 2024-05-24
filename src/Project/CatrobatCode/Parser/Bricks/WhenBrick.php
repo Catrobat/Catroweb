@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WhenBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_BRICK;

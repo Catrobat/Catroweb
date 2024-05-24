@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class SetPenColorBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::SET_PEN_COLOR_BRICK;

@@ -6,10 +6,15 @@ namespace App\Project\CatrobatCode;
 
 class SyntaxHighlightingConstants
 {
-  final public const VARIABLES = '<span style="color:blueviolet">';
-  final public const VALUE = '<span style="color:limegreen">';
-  final public const OBJECTS = '<span style="color:blue">';
-  final public const FUNCTIONS = '<span style="color:orange">';
-  final public const LOOP = '<span style="color:orangered">';
-  final public const END = '</span>';
+  final public const string VARIABLES = '<span style="color:blueviolet">';
+
+  final public const string VALUE = '<span style="color:limegreen">';
+
+  final public const string OBJECTS = '<span style="color:blue">';
+
+  final public const string FUNCTIONS = '<span style="color:orange">';
+
+  final public const string LOOP = '<span style="color:orangered">';
+
+  final public const string END = '</span>';
 }

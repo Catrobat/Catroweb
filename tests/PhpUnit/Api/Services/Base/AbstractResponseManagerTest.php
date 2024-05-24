@@ -20,6 +20,7 @@ final class AbstractResponseManagerTest extends DefaultTestCase
 {
   protected AbstractResponseManager|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AbstractResponseManager::class)

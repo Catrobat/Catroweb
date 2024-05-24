@@ -6,8 +6,9 @@ namespace App\Project\CatrobatCode\Statements;
 
 class FormulaListStatement extends Statement
 {
-  final public const X_POSITION = 'X_POSITION';
-  final public const Y_POSITION = 'Y_POSITION';
+  final public const string X_POSITION = 'X_POSITION';
+
+  final public const string Y_POSITION = 'Y_POSITION';
 
   private ?FormulaStatement $x_position = null;
 
@@ -19,6 +20,7 @@ class FormulaListStatement extends Statement
       '', '');
   }
 
+  #[\Override]
   public function executeChildren(): string
   {
     $code = '';

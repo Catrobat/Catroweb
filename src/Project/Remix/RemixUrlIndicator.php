@@ -6,7 +6,9 @@ namespace App\Project\Remix;
 
 class RemixUrlIndicator
 {
-  final public const PREFIX_INDICATOR = '[';
-  final public const SUFFIX_INDICATOR = ']';
-  final public const SEPARATOR = ',';
+  final public const string PREFIX_INDICATOR = '[';
+
+  final public const string SUFFIX_INDICATOR = ']';
+
+  final public const string SEPARATOR = ',';
 }

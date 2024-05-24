@@ -29,8 +29,9 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
    *  Must be sent in the request HEADER containing the user token
    *  Must not be empty
    */
-  private const TOKEN = 'authenticate';
-  private const OLD_TOKEN = 'token';
+  private const string TOKEN = 'authenticate';
+
+  private const string OLD_TOKEN = 'token';
 
   public function __construct(
     private readonly EntityManagerInterface $em,
@@ -45,15 +46,20 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
    *
    * {@inheritdoc}
    */
+  #[\Override]
   public function supports(Request $request): ?bool
   {
-    return $this->requestHasValidAuthTokenInHeader($request)
-      || $this->requestHasValidTokenInBody__supportAPIv1($request);
+    if ($this->requestHasValidAuthTokenInHeader($request)) {
+      return true;
+    }
+
+    return $this->requestHasValidTokenInBody__supportAPIv1($request);
   }
 
   /**
    * @throws NonUniqueResultException
    */
+  #[\Override]
   public function authenticate(Request $request): Passport
   {
     $token = $request->headers->has(self::TOKEN) ? $request->headers->get(self::TOKEN) : $request->request->get(self::OLD_TOKEN);
@@ -77,12 +83,14 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
     return new SelfValidatingPassport(new UserBadge($user['username']));
   }
 
+  #[\Override]
   public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
   {
     // on success, let the request continue
     return null;
   }
 
+  #[\Override]
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
   {
     $data = [

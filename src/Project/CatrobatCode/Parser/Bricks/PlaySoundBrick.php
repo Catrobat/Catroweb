@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PlaySoundBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PLAY_SOUND_BRICK;

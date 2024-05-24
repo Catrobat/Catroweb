@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PaintNewLookBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PAINT_NEW_LOOK_BRICK;

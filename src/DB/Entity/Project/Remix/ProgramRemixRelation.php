@@ -55,6 +55,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     $this->setDepth($depth);
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return '(#'.$this->ancestor_id.', #'.$this->descendant_id.', depth: '.$this->depth.')';
@@ -77,6 +78,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     $this->ancestor_id = $ancestor->getId();
   }
 
+  #[\Override]
   public function getAncestor(): Program
   {
     return $this->ancestor;
@@ -93,6 +95,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     $this->descendant_id = $descendant->getId();
   }
 
+  #[\Override]
   public function getDescendant(): Program
   {
     return $this->descendant;
@@ -108,31 +111,37 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     $this->depth = $depth;
   }
 
+  #[\Override]
   public function getDepth(): int
   {
     return $this->depth;
   }
 
+  #[\Override]
   public function getCreatedAt(): ?\DateTime
   {
     return $this->created_at;
   }
 
+  #[\Override]
   public function setCreatedAt(\DateTime $created_at): void
   {
     $this->created_at = $created_at;
   }
 
+  #[\Override]
   public function getSeenAt(): ?\DateTime
   {
     return $this->seen_at;
   }
 
+  #[\Override]
   public function setSeenAt(?\DateTime $seen_at): void
   {
     $this->seen_at = $seen_at;
   }
 
+  #[\Override]
   public function getUniqueKey(): string
   {
     return sprintf('ProgramRemixRelation(%d,%d,%d)', $this->ancestor_id, $this->descendant_id, $this->depth);

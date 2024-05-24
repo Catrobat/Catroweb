@@ -16,9 +16,12 @@ use PHPUnit\TextUI\Configuration\Configuration;
 class BootstrapExtension implements Extension
 {
   public static string $CACHE_DIR = 'tests/TestData/Cache/';
+
   public static string $FIXTURES_DIR = 'tests/TestData/DataFixtures/';
+
   public static string $GENERATED_FIXTURES_DIR = 'tests/TestData/DataFixtures/GeneratedFixtures/';
 
+  #[\Override]
   public function bootstrap(Configuration $configuration, EventFacade $facade, ParameterCollection $parameters): void
   {
     $facade->registerSubscriber(new class() implements StartedSubscriber {

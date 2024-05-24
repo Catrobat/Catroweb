@@ -8,6 +8,7 @@ use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
+use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
@@ -18,6 +19,7 @@ use OpenAPI\Server\Model\UpdateProjectRequest;
 class ProjectsApiProcessor extends AbstractApiProcessor
 {
   final public const int SERVER_ERROR_SAVE_XML = 1;
+
   final public const int SERVER_ERROR_SCREENSHOT = 2;
 
   public function __construct(private readonly ProjectManager $project_manager,
@@ -57,23 +59,27 @@ class ProjectsApiProcessor extends AbstractApiProcessor
       if (!is_null($name)) {
         $project->setName($name);
       }
+
       if (!is_null($description)) {
         $project->setDescription($description);
       }
+
       if (!is_null($credits)) {
         $project->setCredits($credits);
       }
 
       $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
-      if ($extracted_file) {
+      if ($extracted_file instanceof ExtractedCatrobatFile) {
         if (!is_null($name)) {
           $extracted_file_properties_before_update['name'] = $extracted_file->getName();
           $extracted_file->setName($name);
         }
+
         if (!is_null($description)) {
           $extracted_file_properties_before_update['description'] = $extracted_file->getDescription();
           $extracted_file->setDescription($description);
         }
+
         if (!is_null($credits)) {
           $extracted_file_properties_before_update['credits'] = $extracted_file->getNotesAndCredits();
           $extracted_file->setNotesAndCredits($credits);
@@ -84,6 +90,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
         } catch (\Exception) {
           return self::SERVER_ERROR_SAVE_XML;
         }
+
         $this->file_repository->deleteProjectZipFileIfExists($project->getId());
       }
     }
@@ -97,7 +104,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
       try {
         $this->screenshot_repository->updateProjectAssets($request->getScreenshot(), $project->getId());
       } catch (\Exception) {
-        if ($extracted_file) {
+        if ($extracted_file instanceof ExtractedCatrobatFile) {
           // restore old values
           foreach ($extracted_file_properties_before_update as $key => $value) {
             switch ($key) {
@@ -112,6 +119,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
                 break;
             }
           }
+
           try {
             $extracted_file->saveProjectXmlProperties();
           } catch (\Exception) {
@@ -143,7 +151,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
 
     $program = $this->project_manager->getProjectByID($id, true);
 
-    if (!$program || $program[0]->getUser() != $user) {
+    if ([] === $program || $program[0]->getUser() != $user) {
       return false;
     }
 

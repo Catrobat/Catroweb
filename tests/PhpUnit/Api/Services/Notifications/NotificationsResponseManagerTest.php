@@ -18,6 +18,7 @@ final class NotificationsResponseManagerTest extends DefaultTestCase
 {
   protected MockObject|NotificationsResponseManager $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(NotificationsResponseManager::class)

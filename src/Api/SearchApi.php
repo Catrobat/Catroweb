@@ -19,6 +19,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
   /**
    * @throws \JsonException
    */
+  #[\Override]
   public function searchGet(string $query, string $type, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|SearchResponse
   {
     if ('' === $query || ctype_space($query)) {

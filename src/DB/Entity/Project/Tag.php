@@ -19,12 +19,19 @@ class Tag
    * Static Tags - added/updated with UpdateTagsCommand.
    */
   final public const string GAME = 'game';
+
   final public const string ANIMATION = 'animation';
+
   final public const string STORY = 'story';
+
   final public const string MUSIC = 'music';
+
   final public const string ART = 'art';
+
   final public const string EXPERIMENTAL = 'experimental';
+
   final public const string TUTORIAL = 'tutorial';
+
   final public const string CODING_JAM_09_2021 = 'catrobatfestival2021';
 
   #[ORM\Id]
@@ -98,6 +105,7 @@ class Tag
     if ($this->programs->contains($program)) {
       return;
     }
+
     $this->programs->add($program);
   }
 

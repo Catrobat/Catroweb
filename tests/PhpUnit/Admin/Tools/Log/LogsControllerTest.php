@@ -21,6 +21,7 @@ class LogsControllerTest extends DefaultTestCase
 {
   private MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockForAbstractClass(LogsController::class);
@@ -110,6 +111,7 @@ class LogsControllerTest extends DefaultTestCase
     foreach ($expectedLines as $expectedLine) {
       $expectedLinesArray[] = new LogLine($expectedLine);
     }
+
     $i = 0;
     foreach ($rs as $line) {
       $this->assertEquals($line, $expectedLinesArray[$i]);

@@ -18,6 +18,7 @@ final class ApiVersionNotSupportedExceptionTest extends DefaultTestCase
 {
   protected ApiVersionNotSupportedException|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ApiVersionNotSupportedException::class)

@@ -20,6 +20,7 @@ class ParsedObjectGroupTest extends TestCase
 {
   protected ParsedObjectGroup $group;
 
+  #[\Override]
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');

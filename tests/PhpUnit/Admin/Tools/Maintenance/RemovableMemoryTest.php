@@ -16,6 +16,7 @@ class RemovableMemoryTest extends TestCase
 {
   private RemovableMemory $removable_memory;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->removable_memory = new RemovableMemory();

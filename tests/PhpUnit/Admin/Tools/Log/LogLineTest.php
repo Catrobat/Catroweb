@@ -19,6 +19,7 @@ class LogLineTest extends DefaultTestCase
 {
   private MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockForAbstractClass(LogLine::class);

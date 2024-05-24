@@ -21,6 +21,7 @@ class AchievementWorkflow_BronzeUser_Command extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->addBronzeUserAchievementToEveryUser($output);
@@ -31,7 +32,7 @@ class AchievementWorkflow_BronzeUser_Command extends Command
   protected function addBronzeUserAchievementToEveryUser(OutputInterface $output): void
   {
     $user_achievements = $this->achievement_manager->findUserAchievementsOfAchievement(Achievement::BRONZE_USER);
-    $excluded_user_id_list = array_map(fn ($user_achievement) => $user_achievement->getUser()->getId(), $user_achievements);
+    $excluded_user_id_list = array_map(static fn ($user_achievement) => $user_achievement->getUser()->getId(), $user_achievements);
     $user_ID_list = $this->user_manager->getUserIDList();
     $user_id_list = array_values(array_diff($user_ID_list, $excluded_user_id_list));
 

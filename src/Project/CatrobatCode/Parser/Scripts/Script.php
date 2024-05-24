@@ -82,15 +82,15 @@ abstract class Script
    */
   private function checkAndParseChildrenBlocks(\SimpleXMLElement $brick_as_xml): void
   {
-    if (isset($brick_as_xml->loopBricks)) {
+    if (property_exists($brick_as_xml, 'loopBricks') && null !== $brick_as_xml->loopBricks) {
       // "loop" .. "end of loop" -> auto generate "end of loop" bricks
       $this->parseChildBricks($brick_as_xml->loopBricks);
       $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::LOOP_END_BRICK);
-    } elseif (isset($brick_as_xml->ifBranchBricks) && !isset($brick_as_xml->elseBranchBricks)) {
+    } elseif (property_exists($brick_as_xml, 'ifBranchBricks') && null !== $brick_as_xml->ifBranchBricks && (!property_exists($brick_as_xml, 'elseBranchBricks') || null === $brick_as_xml->elseBranchBricks)) {
       // "if" .. "end if" -> auto generate "end if" bricks
       $this->parseChildBricks($brick_as_xml->ifBranchBricks);
       $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::ENDIF_BRICK);
-    } elseif (isset($brick_as_xml->ifBranchBricks, $brick_as_xml->elseBranchBricks)) {
+    } elseif (property_exists($brick_as_xml, 'ifBranchBricks') && null !== $brick_as_xml->ifBranchBricks && (property_exists($brick_as_xml, 'elseBranchBricks') && null !== $brick_as_xml->elseBranchBricks)) {
       // if .. else .. "end if"-> auto generate "else", "end if" bricks
       $this->parseChildBricks($brick_as_xml->ifBranchBricks);
       $this->addBrickThatIsNotDirectlyMentionedInXml(Constants::ELSE_BRICK);

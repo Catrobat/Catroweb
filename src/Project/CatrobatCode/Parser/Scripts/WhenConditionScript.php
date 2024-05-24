@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WhenConditionScript extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_CONDITION_SCRIPT;

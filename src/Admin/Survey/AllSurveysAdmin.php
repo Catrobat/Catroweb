@@ -36,6 +36,7 @@ class AllSurveysAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     $remaining_choices = Survey::getISO_639_1_Codes();
@@ -63,6 +64,7 @@ class AllSurveysAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $survey_flavors = $this->getAllSurveyFlavors();
@@ -94,6 +96,7 @@ class AllSurveysAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $all_flavors = $this->getAllFlavors();
@@ -138,6 +141,7 @@ class AllSurveysAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('export')->remove('acl');

@@ -65,6 +65,7 @@ class ProjectManagerTest extends TestCase
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function setUp(): void
   {
     $file_extractor = $this->createMock(CatrobatFileExtractor::class);
@@ -130,7 +131,7 @@ class ProjectManagerTest extends TestCase
    */
   public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
   {
-    $func = function (Program $project): Program {
+    $func = static function (Program $project): Program {
       $project->setId('1');
 
       return $project;
@@ -156,7 +157,7 @@ class ProjectManagerTest extends TestCase
   public function testSavesTheProgramToTheFileRepositoryIfTheUploadSucceeded(): void
   {
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;
@@ -184,7 +185,7 @@ class ProjectManagerTest extends TestCase
     $this->extracted_file->expects($this->atLeastOnce())->method('getTags')->willReturn([]);
     $this->extracted_file->expects($this->atLeastOnce())->method('isDebugBuild')->willReturn(false);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;
@@ -212,7 +213,7 @@ class ProjectManagerTest extends TestCase
    */
   public function testFiresAnEventBeforeInsertingAProgram(): void
   {
-    $func = function (Program $project): Program {
+    $func = static function (Program $project): Program {
       $project->setId('1');
 
       return $project;
@@ -258,7 +259,7 @@ class ProjectManagerTest extends TestCase
   public function testFiresAnEventWhenTheProgramIsStored(): void
   {
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;

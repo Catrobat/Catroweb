@@ -9,6 +9,7 @@ use App\Project\CatrobatCode\SyntaxHighlightingConstants;
 class IfLogicElseStatement extends Statement
 {
   final public const string BEGIN_STRING = 'else';
+
   final public const string END_STRING = '<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
@@ -20,6 +21,7 @@ class IfLogicElseStatement extends Statement
       self::END_STRING);
   }
 
+  #[\Override]
   public function getSpacesForNextBrick(): int
   {
     return $this->spaces + 1;

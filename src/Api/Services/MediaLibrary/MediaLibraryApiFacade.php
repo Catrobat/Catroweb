@@ -19,21 +19,25 @@ class MediaLibraryApiFacade extends AbstractApiFacade
     parent::__construct($authentication_manager);
   }
 
+  #[\Override]
   public function getResponseManager(): MediaLibraryResponseManager
   {
     return $this->response_manager;
   }
 
+  #[\Override]
   public function getLoader(): MediaLibraryApiLoader
   {
     return $this->loader;
   }
 
+  #[\Override]
   public function getProcessor(): MediaLibraryApiProcessor
   {
     return $this->processor;
   }
 
+  #[\Override]
   public function getRequestValidator(): MediaLibraryRequestValidator
   {
     return $this->request_validator;

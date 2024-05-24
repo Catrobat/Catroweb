@@ -12,6 +12,7 @@ class ScriptListStatement extends Statement
       '', '');
   }
 
+  #[\Override]
   protected function addSpaces(int $offset = 0): string
   {
     return '';

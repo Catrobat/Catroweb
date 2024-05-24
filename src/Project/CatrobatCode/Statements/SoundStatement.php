@@ -19,16 +19,17 @@ class SoundStatement extends Statement
       '');
   }
 
+  #[\Override]
   public function execute(): string
   {
     $code = $this->value;
     $this->findNames();
 
-    if (null !== $this->name) {
+    if ($this->name instanceof ValueStatement) {
       $code .= $this->name->execute();
     }
 
-    if (null !== $this->fileName) {
+    if ($this->fileName instanceof FileNameStatement) {
       $code .= ' (filename: '.$this->fileName->execute().')';
     }
 

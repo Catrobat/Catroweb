@@ -7,7 +7,9 @@ namespace App\Project\CatrobatCode\Statements;
 class InsertItemIntoUserListStatement extends BaseUserListStatement
 {
   final public const string BEGIN_STRING = 'insert item into userlist ';
-  final public const MIDDLE_STRING = '(';
+
+  final public const string MIDDLE_STRING = '(';
+
   final public const string END_STRING = ')<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)

@@ -27,7 +27,7 @@ class UserResponseManager extends AbstractResponseManager
 
   public function createBasicUserDataResponse(User $user, ?string $attributes = null): BasicUserDataResponse
   {
-    if (empty($attributes)) {
+    if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = ['id', 'username'];
     } elseif ('ALL' === $attributes) {
       $attributes_list = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following', 'ranking_score'];
@@ -40,7 +40,7 @@ class UserResponseManager extends AbstractResponseManager
 
   public function createExtendedUserDataResponse(User $user, ?string $attributes = null): ExtendedUserDataResponse
   {
-    if (empty($attributes)) {
+    if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = ['id', 'username', 'email'];
     } elseif ('ALL' === $attributes) {
       $attributes_list = ['id', 'username', 'email', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
@@ -62,24 +62,31 @@ class UserResponseManager extends AbstractResponseManager
     if (in_array('id', $attributes_list, true)) {
       $data['id'] = $user->getId();
     }
+
     if (in_array('username', $attributes_list, true)) {
       $data['username'] = $user->getUsername();
     }
+
     if (in_array('picture', $attributes_list, true)) {
       $data['picture'] = $user->getAvatar();
     }
+
     if (in_array('about', $attributes_list, true)) {
       $data['about'] = $user->getAbout() ?? '';
     }
+
     if (in_array('currently_working_on', $attributes_list, true)) {
       $data['currently_working_on'] = $user->getCurrentlyWorkingOn() ?? '';
     }
+
     if (in_array('projects', $attributes_list, true)) {
       $data['projects'] = $user->getPrograms()->count();
     }
+
     if (in_array('followers', $attributes_list, true)) {
       $data['followers'] = $user->getFollowers()->count();
     }
+
     if (in_array('following', $attributes_list, true)) {
       $data['following'] = $user->getFollowing()->count();
     }

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class FinishStageBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::FINISH_STAGE_BRICK;

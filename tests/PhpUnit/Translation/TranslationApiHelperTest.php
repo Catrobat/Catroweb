@@ -14,13 +14,14 @@ use PHPUnit\Framework\TestCase;
  */
 class TranslationApiHelperTest extends TestCase
 {
-  private const LONG_LANGUAGE_CODE = [
+  private const array LONG_LANGUAGE_CODE = [
     'aa-bb',
     'cc-dd',
   ];
 
   private TranslationApiHelper $helper;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WhenBGChangeScript extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_BG_CHANGE_SCRIPT;

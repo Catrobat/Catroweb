@@ -7,6 +7,7 @@ namespace App\Project\CatrobatCode\Statements;
 class SetTransparencyStatement extends BaseSetToStatement
 {
   final public const string BEGIN_STRING = 'transparency';
+
   final public const string END_STRING = ')%<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)

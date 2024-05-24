@@ -27,11 +27,13 @@ class CleanApkCommand extends Command
    * @throws NoResultException
    * @throws NonUniqueResultException
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $output1 = $output;
 
     $output1->writeln('Deleting APKs');
+
     $apk_dir = (string) $this->parameter_bag->get('catrobat.apk.dir');
     FileHelper::emptyDirectory($apk_dir);
 
@@ -39,6 +41,7 @@ class CleanApkCommand extends Command
       ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.apk_status = :status WHERE p.apk_status != :status')
     ;
     $query->setParameter('status', Program::APK_NONE);
+
     $result = $query->getSingleScalarResult();
     $output1->writeln('Reset the apk status of '.$result.' projects');
 

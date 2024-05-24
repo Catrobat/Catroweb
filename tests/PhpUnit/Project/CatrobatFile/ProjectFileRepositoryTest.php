@@ -28,6 +28,7 @@ class ProjectFileRepositoryTest extends TestCase
 
   private ProjectFileRepository $program_file_repository;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->storage_dir = BootstrapExtension::$CACHE_DIR.'zip/';
@@ -36,9 +37,11 @@ class ProjectFileRepositoryTest extends TestCase
     $filesystem->mkdir($this->storage_dir);
     $filesystem->mkdir($this->extract_dir);
     $filesystem->mkdir($this->storage_dir.'tmp/');
+
     $this->program_file_repository = new ProjectFileRepository($this->storage_dir, $this->extract_dir, new CatrobatFileCompressor());
   }
 
+  #[\Override]
   protected function tearDown(): void
   {
     FileHelper::removeDirectory($this->storage_dir);

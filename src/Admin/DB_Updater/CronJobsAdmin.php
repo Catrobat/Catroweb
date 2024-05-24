@@ -18,6 +18,7 @@ class CronJobsAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'cronjobs';
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection
@@ -35,6 +36,7 @@ class CronJobsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list

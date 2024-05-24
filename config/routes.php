@@ -15,7 +15,7 @@ return static function (RoutingConfigurator $routingConfigurator): void {
   $routingConfigurator->add('apple_login', '/login/check-apple');
 
   $routingConfigurator->add('gesdinet_jwt_refresh_token', '/api/authentication/refresh')
-    ->controller('App\Api\Services\Authentication\JWTTokenRefreshService::refresh')
+    ->controller(App\Api\Services\Authentication\JWTTokenRefreshService::class.'::refresh')
   ;
 
   $routingConfigurator->import('@OpenAPIServerBundle/Resources/config/routing.yaml')

@@ -6,6 +6,7 @@ namespace App\Application\Controller\Project;
 
 use App\DB\Entity\Project\Program;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
+use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,15 +31,17 @@ class CodeStatisticsController extends AbstractController
     $project = $this->project_manager->find($id);
     if (null !== $project) {
       $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
-      if (null !== $extracted_file) {
+      if ($extracted_file instanceof ExtractedCatrobatFile) {
         $parsed_project = $this->code_parser->parse($extracted_file);
       }
     }
+
     if (null === $parsed_project) {
       return $this->render('Project/code_statistics.html.twig', [
         'id' => $id,
       ]);
     }
+
     $stats = $parsed_project->getCodeStatistic();
     $brick_stats = $stats->getBrickTypeStatistic();
 

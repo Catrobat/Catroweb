@@ -67,6 +67,7 @@ class MigrateRemixGraphsCommand extends Command
     exit(-1);
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -82,6 +83,7 @@ class MigrateRemixGraphsCommand extends Command
    * @throws NonUniqueResultException
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     declare(ticks=1);
@@ -101,7 +103,7 @@ class MigrateRemixGraphsCommand extends Command
       return 2;
     }
 
-    $directory = (!str_ends_with((string) $directory, '/')) ? $directory.'/' : $directory;
+    $directory = (str_ends_with((string) $directory, '/')) ? $directory : $directory.'/';
 
     if ($is_debug_import_missing_projects) {
       $username = $input->getArgument('user');
@@ -177,6 +179,7 @@ class MigrateRemixGraphsCommand extends Command
     $duration = TimeUtils::getDateTime()->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
+
     $output->writeln('');
     $output->writeln('<info>Migrated only forward remixes of '.count($remix_data_map).
       ' projects (Skipped '.$skipped.') Duration: '.$duration.'</info>');
@@ -208,6 +211,7 @@ class MigrateRemixGraphsCommand extends Command
     $duration = TimeUtils::getDateTime()->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
+
     $output->writeln('');
     $output->writeln('<info>Migrated remaining remixes of '.count($remix_data_map).
       ' projects (Skipped '.$skipped.') Duration: '.$duration.'</info>');
@@ -218,6 +222,7 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar = new ProgressBar($output);
     $progress_bar->setFormat($progress_bar_format_simple);
     $progress_bar->start();
+
     $intermediate_uploads = 0;
     $skipped = 0;
 
@@ -245,6 +250,7 @@ class MigrateRemixGraphsCommand extends Command
     $duration = TimeUtils::getDateTime()->getTimestamp() - $migration_start_time->getTimestamp();
     $progress_bar->setMessage('');
     $progress_bar->finish();
+
     $output->writeln('');
     $output->writeln('<info>Migrated remixes of '.$intermediate_uploads.' projects uploaded '.
       'during migration (Skipped '.$skipped.') Duration: '.$duration.'</info>');
@@ -258,7 +264,8 @@ class MigrateRemixGraphsCommand extends Command
     // (7) finally mark all relations as seen, so the users will not get bothered with many remix user notifications
     // ==============================================================================================================
     $seen_at = TimeUtils::getDateTime();
-    $seen_at->setTimestamp(0); // 1970-01-01 in order to indicate that this was not seen by the user
+    $seen_at->setTimestamp(0);
+    // 1970-01-01 in order to indicate that this was not seen by the user
     $this->remix_manager->markAllUnseenRemixRelationsAsSeen($seen_at);
   }
 
@@ -321,11 +328,11 @@ class MigrateRemixGraphsCommand extends Command
    */
   private function addRemixData(Program $project, array $remixes_data, bool $is_update = false): void
   {
-    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
+    $scratch_remixes_data = array_filter($remixes_data, static fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
     $scratch_info_data = [];
 
-    if (count($scratch_remixes_data) > 0) {
-      $scratch_ids = array_map(fn (RemixData $data): string => $data->getProjectId(), $scratch_remixes_data);
+    if ([] !== $scratch_remixes_data) {
+      $scratch_ids = array_map(static fn (RemixData $data): string => $data->getProjectId(), $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProjectIds($scratch_ids);
       $not_existing_scratch_ids = array_diff($scratch_ids, $existing_scratch_ids);
       $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails($not_existing_scratch_ids);
@@ -370,6 +377,7 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar = new ProgressBar($output, $finder->count());
     $progress_bar->setFormat(' %current%/%max% [%bar%] %message%');
     $progress_bar->start();
+
     $number_imported_projects = 0;
 
     $metadata = $this->entity_manager->getClassMetaData(Program::class);
@@ -444,6 +452,7 @@ class MigrateRemixGraphsCommand extends Command
     $this->entity_manager->flush();
     $progress_bar->setMessage('');
     $progress_bar->finish();
+
     $output->writeln('');
     $output->writeln('<info>Imported '.$number_imported_projects.' projects (Skipped '.$skipped.')</info>');
   }

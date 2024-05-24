@@ -29,6 +29,7 @@ class CreateLikeCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -40,6 +41,7 @@ class CreateLikeCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $program_name = $input->getArgument('program_name');
@@ -55,6 +57,7 @@ class CreateLikeCommand extends Command
 
       return 1;
     }
+
     try {
       if ($program->getUser() !== $user) {
         $this->likeProgram($program, $user);
@@ -67,6 +70,7 @@ class CreateLikeCommand extends Command
 
       return 2;
     }
+
     $output->writeln('Liking '.$program->getName().' with user '.$user_name);
 
     return 0;

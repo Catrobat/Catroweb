@@ -47,6 +47,7 @@ class RemixController extends AbstractController
         $catrobat_project_thumbnails[$node_id] = '/images/default/not_available.png';
         continue;
       }
+
       $catrobat_project_thumbnails[$node_id] = '/'.$this->screenshot_repository
         ->getThumbnailWebPath($node_id)
       ;

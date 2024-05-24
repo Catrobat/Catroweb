@@ -25,14 +25,16 @@ class ExtractedCatrobatFile
     }
 
     $content = file_get_contents($path.'code.xml');
-    if (!$content) {
+    if ('' === $content || '0' === $content || false === $content) {
       throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
     }
+
     $content = str_replace('&#x0;', '', $content);
 
     preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
-    $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
-    for ($i = 0; $i < count($this->xml_filenames); ++$i) {
+    $this->xml_filenames = count($matches) > 1 ? $matches[1] : [];
+    $counter = count($this->xml_filenames);
+    for ($i = 0; $i < $counter; ++$i) {
       $this->xml_filenames[$i] = $this->decodeXmlEntities($this->xml_filenames[$i]);
     }
 
@@ -40,6 +42,7 @@ class ExtractedCatrobatFile
     if (!$xml) {
       throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
     }
+
     $this->project_xml_properties = $xml;
   }
 
@@ -263,19 +266,20 @@ class ExtractedCatrobatFile
     for ($index = 0; $index < strlen($remixes_string); ++$index) {
       $current_character = $remixes_string[$index];
 
-      if (RemixUrlIndicator::PREFIX_INDICATOR == $current_character) {
+      if (RemixUrlIndicator::PREFIX_INDICATOR === $current_character) {
         if (RemixUrlParsingState::STARTING == $state) {
           $state = RemixUrlParsingState::BETWEEN;
         } elseif (RemixUrlParsingState::TOKEN == $state) {
           $temp = '';
           $state = RemixUrlParsingState::BETWEEN;
         }
-      } elseif (RemixUrlIndicator::SUFFIX_INDICATOR == $current_character) {
+      } elseif (RemixUrlIndicator::SUFFIX_INDICATOR === $current_character) {
         if (RemixUrlParsingState::TOKEN == $state) {
           $extracted_url = trim($temp);
           if (!str_contains($extracted_url, RemixUrlIndicator::SEPARATOR) && strlen($extracted_url) > 0) {
             $extracted_remixes[] = new RemixData($extracted_url);
           }
+
           $temp = '';
           $state = RemixUrlParsingState::BETWEEN;
         }
@@ -402,7 +406,7 @@ class ExtractedCatrobatFile
   private function decodeXmlEntities(string $input): string
   {
     $match = ['/&amp;/', '/&gt;/', '/&lt;/', '/&apos;/', '/&quot;/'];
-    $replace = ['&', '<', '>', '\'', '"'];
+    $replace = ['&', '<', '>', "'", '"'];
 
     return preg_replace($match, $replace, $input);
   }

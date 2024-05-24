@@ -7,6 +7,7 @@ namespace App\Api_deprecated\Controller;
 use App\Api\ProjectsApi;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -29,7 +30,7 @@ class DownloadProjectController extends AbstractController
     $responseCode = 200;
     $responseHeaders = [];
     $result = $this->projectsApi->customProjectIdCatrobatGet($id, $responseCode, $responseHeaders);
-    if (null === $result) {
+    if (!$result instanceof BinaryFileResponse) {
       return new Response(null, $responseCode, $responseHeaders);
     }
 

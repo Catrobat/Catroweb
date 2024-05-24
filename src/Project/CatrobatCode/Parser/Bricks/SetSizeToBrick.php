@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class SetSizeToBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::SET_SIZE_TO_BRICK;

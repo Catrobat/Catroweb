@@ -21,6 +21,7 @@ class OAuthSuccessHandler implements AuthenticationSuccessHandlerInterface
   ) {
   }
 
+  #[\Override]
   public function onAuthenticationSuccess(Request $request, TokenInterface $token): RedirectResponse
   {
     $user = $token->getUser();

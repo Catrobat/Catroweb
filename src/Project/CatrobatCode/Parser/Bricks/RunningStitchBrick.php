@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class RunningStitchBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::RUNNING_STITCH_BRICK;

@@ -28,6 +28,7 @@ class CronJobsAdminController extends CRUDController
   ) {
   }
 
+  #[\Override]
   public function listAction(Request $request): Response
   {
     return $this->renderWithExtraParams('Admin/DB_Updater/admin_cron_jobs.html.twig', [

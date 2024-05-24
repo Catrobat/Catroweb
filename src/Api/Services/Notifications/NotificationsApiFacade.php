@@ -21,21 +21,25 @@ class NotificationsApiFacade extends AbstractApiFacade
     parent::__construct($authentication_manager);
   }
 
+  #[\Override]
   public function getResponseManager(): NotificationsResponseManager
   {
     return $this->response_manager;
   }
 
+  #[\Override]
   public function getLoader(): NotificationsApiLoader
   {
     return $this->loader;
   }
 
+  #[\Override]
   public function getProcessor(): NotificationsApiProcessor
   {
     return $this->processor;
   }
 
+  #[\Override]
   public function getRequestValidator(): NotificationsRequestValidator
   {
     return $this->request_validator;

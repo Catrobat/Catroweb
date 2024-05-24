@@ -16,15 +16,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:translation:trim-storage', description: 'Clean up old db entries in machine translation schema')]
 class TranslationTrimStorageCommand extends Command
 {
-  private const OLDER_THAN = 'older-than';
-  private const ONLY_PROJECT = 'only-project';
-  private const ONLY_COMMENT = 'only-comment';
+  private const string OLDER_THAN = 'older-than';
+
+  private const string ONLY_PROJECT = 'only-project';
+
+  private const string ONLY_COMMENT = 'only-comment';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager)
   {
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -41,6 +44,7 @@ class TranslationTrimStorageCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $days = intval($input->getOption(self::OLDER_THAN));
@@ -52,13 +56,14 @@ class TranslationTrimStorageCommand extends Command
     }
 
     $today = new \DateTimeImmutable();
-    $date = $today->sub(new \DateInterval("P{$days}D"));
+    $date = $today->sub(new \DateInterval(sprintf('P%dD', $days)));
 
     if ($input->getOption(self::ONLY_PROJECT) && $input->getOption(self::ONLY_COMMENT)) {
       $output->writeln('invalid combination of options');
 
       return 1;
     }
+
     if ($input->getOption(self::ONLY_PROJECT)) {
       $this->deleteEntries(ProjectMachineTranslation::class, $date);
     } elseif ($input->getOption(self::ONLY_COMMENT)) {

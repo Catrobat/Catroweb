@@ -25,6 +25,7 @@ class ExampleProjectImageListener
     if (null == $file) {
       return;
     }
+
     $example->setImageType($file->guessExtension());
   }
 
@@ -34,6 +35,7 @@ class ExampleProjectImageListener
     if (null == $file) {
       return;
     }
+
     $this->repository->save($file, $example->getId(), $example->getImageType(), false);
   }
 
@@ -45,6 +47,7 @@ class ExampleProjectImageListener
 
       return;
     }
+
     $example->setImageType($file->guessExtension());
   }
 
@@ -54,6 +57,7 @@ class ExampleProjectImageListener
     if (null == $file) {
       return;
     }
+
     $this->repository->save($file, $example->getId(), $example->getImageType(), false);
   }
 

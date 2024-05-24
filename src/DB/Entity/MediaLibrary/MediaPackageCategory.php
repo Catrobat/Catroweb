@@ -53,9 +53,10 @@ class MediaPackageCategory implements \Stringable
     $this->files = new ArrayCollection();
   }
 
+  #[\Override]
   public function __toString(): string
   {
-    if (count($this->package)) {
+    if (count($this->package) > 0) {
       $string = $this->name.' (';
       $count = count($this->package);
 

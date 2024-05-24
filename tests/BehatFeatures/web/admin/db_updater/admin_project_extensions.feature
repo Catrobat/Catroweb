@@ -29,7 +29,7 @@ Feature: The admin extensions view provides a detailed list about all extensions
     And I am on "/admin/extensions/list"
     And I wait for the page to be loaded
     Then I should see "Update extensions"
-    And I should see "Step by step guide"
+    And I should see "Step-by-step guide"
     And I should not see "phiro"
     And the element "#btn-update-extensions" should be visible
     And there should be "2" extensions in the database

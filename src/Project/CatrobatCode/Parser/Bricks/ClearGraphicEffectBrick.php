@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ClearGraphicEffectBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::CLEAR_GRAPHIC_EFFECT_BRICK;

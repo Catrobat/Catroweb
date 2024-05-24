@@ -7,6 +7,7 @@ namespace App\Project\CatrobatCode\Statements;
 class MoveNStepsStatement extends Statement
 {
   final public const string BEGIN_STRING = 'move (';
+
   final public const string END_STRING = ') steps<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)

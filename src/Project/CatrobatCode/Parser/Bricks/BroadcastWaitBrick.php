@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class BroadcastWaitBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::BROADCAST_WAIT_BRICK;

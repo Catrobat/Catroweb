@@ -20,6 +20,7 @@ class AchievementWorkflow_DiamondUser_CommandTest extends KernelTestCase
 {
   protected AchievementWorkflow_DiamondUser_Command|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AchievementWorkflow_DiamondUser_Command::class)

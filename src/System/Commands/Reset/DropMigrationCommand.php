@@ -16,6 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DropMigrationCommand extends Command
 {
   protected Connection $connection;
+
   private OutputInterface $output;
 
   public function __construct(protected EntityManagerInterface $entity_manager)
@@ -27,13 +28,14 @@ class DropMigrationCommand extends Command
   /**
    * @throws Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->output = $output;
     if ($this->dropMigrationVersions()) {
       $this->output->writeln('Table doctrine_migration_versions dropped!');
     } else {
-      $this->output->writeln('Table doctrine_migration_versions doesn\'t exist!');
+      $this->output->writeln("Table doctrine_migration_versions doesn't exist!");
     }
 
     return 0;

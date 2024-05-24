@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class LegoNxtMotorMoveBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::LEGO_NXT_MOTOR_MOVE_BRICK;

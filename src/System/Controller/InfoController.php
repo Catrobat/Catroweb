@@ -4,7 +4,6 @@ namespace App\System\Controller;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use JetBrains\PhpStorm\NoReturn;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

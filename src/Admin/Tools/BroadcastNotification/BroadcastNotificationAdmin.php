@@ -17,6 +17,7 @@ class BroadcastNotificationAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'broadcast';
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);

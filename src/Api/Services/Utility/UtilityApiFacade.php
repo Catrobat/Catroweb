@@ -19,21 +19,25 @@ class UtilityApiFacade extends AbstractApiFacade
     parent::__construct($authentication_manager);
   }
 
+  #[\Override]
   public function getResponseManager(): UtilityResponseManager
   {
     return $this->response_manager;
   }
 
+  #[\Override]
   public function getLoader(): UtilityApiLoader
   {
     return $this->loader;
   }
 
+  #[\Override]
   public function getProcessor(): UtilityApiProcessor
   {
     return $this->processor;
   }
 
+  #[\Override]
   public function getRequestValidator(): UtilityRequestValidator
   {
     return $this->request_validator;

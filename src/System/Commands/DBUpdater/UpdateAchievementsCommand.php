@@ -16,6 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class UpdateAchievementsCommand extends Command
 {
   final public const string ACHIEVEMENT_IMAGE_ASSETS_PATH = 'images/achievements/';
+
   final public const string ACHIEVEMENT_LTM_PREFIX = 'achievements.achievement.type.';
 
   public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementRepository $achievement_repository)
@@ -23,6 +24,7 @@ class UpdateAchievementsCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $priority = 0;
@@ -162,7 +164,7 @@ class UpdateAchievementsCommand extends Command
 
     $this->entity_manager->flush();
 
-    $output->writeln("{$priority} Achievements in the Database have been inserted/updated");
+    $output->writeln($priority.' Achievements in the Database have been inserted/updated');
 
     return 0;
   }

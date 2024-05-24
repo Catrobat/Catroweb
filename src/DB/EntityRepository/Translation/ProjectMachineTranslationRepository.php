@@ -28,6 +28,7 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     if (null !== $source_language) {
       $criteria->andWhere(Criteria::expr()->eq('source_language', $source_language));
     }
+
     $entries = $this->matching($criteria);
 
     if ($entries->isEmpty()) {
@@ -74,6 +75,7 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
       $entry->invalidateCachedTranslation();
       $this->getEntityManager()->persist($entry);
     }
+
     $this->getEntityManager()->flush();
   }
 }

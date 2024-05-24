@@ -20,6 +20,7 @@ class AchievementWorkflow_VerifiedDeveloper_CommandTest extends KernelTestCase
 {
   protected AchievementWorkflow_VerifiedDeveloper_Command|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AchievementWorkflow_VerifiedDeveloper_Command::class)

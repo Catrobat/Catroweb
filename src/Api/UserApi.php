@@ -6,6 +6,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
+use App\DB\Entity\User\User;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
@@ -27,6 +28,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * @throws \Exception
    */
+  #[\Override]
   public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
   {
     $validation_wrapper = $this->facade->getRequestValidator()->validateRegistration($register_request, $accept_language);
@@ -40,7 +42,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
       return $error_response;
     }
 
-    if ($register_request->isDryRun()) {
+    if (true === $register_request->isDryRun()) {
       $responseCode = Response::HTTP_NO_CONTENT;
 
       return null;
@@ -58,6 +60,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
+  #[\Override]
   public function userDelete(int &$responseCode, array &$responseHeaders): void
   {
     $responseCode = Response::HTTP_NO_CONTENT;
@@ -65,6 +68,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     $this->facade->getProcessor()->deleteUser($this->facade->getAuthenticationManager()->getAuthenticatedUser());
   }
 
+  #[\Override]
   public function userGet(&$responseCode, array &$responseHeaders): ExtendedUserDataResponse
   {
     $responseCode = Response::HTTP_OK;
@@ -77,11 +81,12 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
+  #[\Override]
   public function userIdGet(string $id, int &$responseCode, array &$responseHeaders): ?BasicUserDataResponse
   {
     $user = $this->facade->getLoader()->findUserByID($id);
 
-    if (null === $user) {
+    if (!$user instanceof User) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -95,6 +100,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
+  #[\Override]
   public function userPut(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -111,7 +117,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
 
     $responseCode = Response::HTTP_NO_CONTENT;
 
-    if (!$update_user_request->isDryRun()) {
+    if (true !== $update_user_request->isDryRun()) {
       $this->facade->getProcessor()->updateUser(
         $user, $update_user_request
       );
@@ -126,6 +132,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return null;
   }
 
+  #[\Override]
   public function usersSearchGet(string $query, int $limit, int $offset, string $attributes, int &$responseCode, array &$responseHeaders): array
   {
     $users = $this->facade->getLoader()->searchUsers($query, $limit, $offset);
@@ -138,6 +145,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
+  #[\Override]
   public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language, int &$responseCode, array &$responseHeaders): ?RegisterErrorResponse
   {
     $validation_wrapper = $this->facade->getRequestValidator()->validateResetPasswordRequest($reset_password_request, $accept_language);
@@ -158,6 +166,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return null;
   }
 
+  #[\Override]
   public function usersGet(string $query, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $users = $this->facade->getLoader()->getAllUsers($query, $limit, $offset);

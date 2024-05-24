@@ -20,6 +20,7 @@ class ApproveProjectsController extends CRUDController
     $object = $this->admin->getSubject();
     $object->setApproved(true);
     $object->setVisible(true);
+
     $this->admin->update($object);
     $this->addFlash('sonata_flash_success', $object->getName().' approved. '.$this->getRemainingProjectCount().' remaining.');
 
@@ -41,8 +42,10 @@ class ApproveProjectsController extends CRUDController
     if (null === $object) {
       throw new NotFoundHttpException('Unable to find project');
     }
+
     $object->setApproved(true);
     $object->setVisible(false);
+
     $this->admin->update($object);
 
     $this->addFlash('sonata_flash_success', $object->getName().' set to invisible'.$this->getRemainingProjectCount().' remaining.');
@@ -66,7 +69,7 @@ class ApproveProjectsController extends CRUDController
     $objects = $data_grid->getResults();
     $objectsArray = $this->getObjectsArrayByObjects($objects);
 
-    if (empty($objectsArray)) {
+    if ([] === $objectsArray) {
       return null;
     }
 

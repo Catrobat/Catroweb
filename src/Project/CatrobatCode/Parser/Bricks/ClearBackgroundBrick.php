@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ClearBackgroundBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::CLEAR_BACKGROUND_BRICK;

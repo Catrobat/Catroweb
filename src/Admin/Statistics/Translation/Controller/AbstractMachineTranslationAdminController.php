@@ -21,6 +21,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 abstract class AbstractMachineTranslationAdminController extends CRUDController
 {
   protected const TYPE_PROJECT = 'TYPE_PROJECT';
+
   protected const TYPE_COMMENT = 'TYPE_COMMENT';
 
   protected string $type;
@@ -31,6 +32,7 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
   ) {
   }
 
+  #[\Override]
   public function listAction(Request $request): Response
   {
     if (self::TYPE_PROJECT === $this->type) {
@@ -48,7 +50,7 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
     $this->admin->checkAccess('list');
 
     $preResponse = $this->preList($request);
-    if (null !== $preResponse) {
+    if ($preResponse instanceof Response) {
       return $preResponse;
     }
 

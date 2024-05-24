@@ -45,6 +45,7 @@ class ParsedSceneProject
     foreach ($this->scenes as $scene) {
       $this->code_statistic->update($scene);
     }
+
     $this->code_statistic->computeVariableStatistic($this->project_xml_properties);
   }
 }

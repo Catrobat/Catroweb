@@ -30,7 +30,7 @@ abstract class ParsedObjectsContainer
     /** @var ParsedObjectGroup|null $current_group */
     $current_group = null;
     foreach ($this->getAllObjectXMLProperties() as $object_xml_properties) {
-      if (null === $this->background) {
+      if (!$this->background instanceof ParsedObject) {
         $this->background = new ParsedObject($object_xml_properties);
       } else {
         switch ($object_xml_properties[Constants::TYPE_ATTRIBUTE]) {
@@ -42,6 +42,7 @@ abstract class ParsedObjectsContainer
             if ($current_group) {
               $current_group->addObject(new ParsedObject($object_xml_properties));
             }
+
             break;
           default:
             $this->addCurrentGroup($current_group);
@@ -50,6 +51,7 @@ abstract class ParsedObjectsContainer
         }
       }
     }
+
     $this->addCurrentGroup($current_group);
   }
 

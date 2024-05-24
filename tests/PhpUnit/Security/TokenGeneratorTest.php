@@ -17,6 +17,7 @@ class TokenGeneratorTest extends TestCase
 {
   private TokenGenerator $token_generator;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->token_generator = new TokenGenerator();
@@ -34,6 +35,7 @@ class TokenGeneratorTest extends TestCase
       $generated_token = $this->token_generator->generateToken();
       $generated_tokens[] = $generated_token;
     }
+
     Assert::assertCount(100, array_unique($generated_tokens));
   }
 
@@ -46,9 +48,7 @@ class TokenGeneratorTest extends TestCase
   public function getMatchers(): array
   {
     return [
-      'haveLength' => function ($subject, $key) {
-        return strlen($subject) === $key;
-      },
+      'haveLength' => static fn ($subject, $key): bool => strlen((string) $subject) === $key,
     ];
   }
 }

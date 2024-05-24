@@ -27,10 +27,11 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ThemeRequestEventSubscriberTest extends DefaultTestCase
 {
-  protected MockObject|ThemeRequestEventSubscriber $object;
+  protected ThemeRequestEventSubscriber|MockObject $object;
 
-  protected MockObject|ParameterBagInterface $parameter_bag;
+  protected ParameterBagInterface|MockObject $parameter_bag;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->mockThemeRequestEventSubscriber();
@@ -166,10 +167,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     $this->object->onKernelRequest($event);
   }
 
-  /**
-   * @param MockObject|RequestContext $request_context
-   */
-  private function expectRoutingThemeToEqual($request_context, string $theme): void
+  private function expectRoutingThemeToEqual(RequestContext|MockObject $request_context, string $theme): void
   {
     $request_context->expects($this->once())
       ->method('setParameter')
@@ -177,15 +175,12 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @param MockObject|ParameterBag $request_attributes
-   */
-  private function expectAttributesToEqual($request_attributes, string $theme, string $flavor): void
+  private function expectAttributesToEqual(MockObject $request_attributes, string $theme, string $flavor): void
   {
     $request_attributes->expects($this->exactly(2))
       ->method('set')
       ->willReturnCallback(
-        function ($key, $value) use ($theme, $flavor) {
+        function ($key, $value) use ($theme, $flavor): void {
           switch ($key) {
             case 'theme':
               $this->assertEquals($theme, $value);
@@ -199,10 +194,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @return ThemeRequestEventSubscriber|MockObject
-   */
-  private function mockThemeRequestEventSubscriber(?array $ctor_args = null)
+  private function mockThemeRequestEventSubscriber(?array $ctor_args = null): ThemeRequestEventSubscriber|MockObject
   {
     if (null === $ctor_args) {
       return $this->getMockBuilder(ThemeRequestEventSubscriber::class)
@@ -219,10 +211,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @return MockObject|ParameterBagInterface
-   */
-  private function mockParameterBag()
+  private function mockParameterBag(): ParameterBagInterface|MockObject
   {
     $parameter_bag = $this->getMockBuilder(ParameterBagInterface::class)
       ->disableOriginalConstructor()
@@ -235,22 +224,12 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
       ->method('get')
       ->will(
         $this->returnCallback(
-          function ($param) {
-            switch ($param) {
-              case 'flavors':
-                return [Flavor::POCKETCODE, Flavor::LUNA];
-
-              case 'umbrellaTheme':
-                return 'app';
-
-              case 'adminTheme':
-                return 'admin';
-
-              case 'defaultFlavor':
-                return Flavor::POCKETCODE;
-            }
-
-            return '';
+          static fn ($param): array|string => match ($param) {
+            'flavors' => [Flavor::POCKETCODE, Flavor::LUNA],
+            'umbrellaTheme' => 'app',
+            'adminTheme' => 'admin',
+            'defaultFlavor' => Flavor::POCKETCODE,
+            default => '',
           }
         )
       )
@@ -292,10 +271,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     return $event;
   }
 
-  /**
-   * @return MockObject|ParameterBagInterface
-   */
-  private function mockRequestAttributes()
+  private function mockRequestAttributes(): ParameterBagInterface|MockObject
   {
     return $this->getMockBuilder(ParameterBagInterface::class)
       ->disableOriginalConstructor()
@@ -303,10 +279,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @return MockObject|RequestContext
-   */
-  private function mockRequestContext()
+  private function mockRequestContext(): RequestContext|MockObject
   {
     return $this->getMockBuilder(RequestContext::class)
       ->disableOriginalConstructor()
@@ -314,10 +287,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @return RequestHelper|MockObject
-   */
-  private function mockAppRequest(string $response = '')
+  private function mockAppRequest(string $response = ''): RequestHelper|MockObject
   {
     $app_request = $this->getMockBuilder(RequestHelper::class)->disableOriginalConstructor()->getMock();
 
@@ -331,12 +301,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     return $app_request;
   }
 
-  /**
-   * @param MockObject|RequestContext $request_context
-   *
-   * @return MockObject|RouterInterface
-   */
-  private function mockRouter($request_context = null)
+  private function mockRouter(RequestContext|MockObject|null $request_context = null): RouterInterface|MockObject
   {
     $router = $this->getMockBuilder(RouterInterface::class)
       ->disableOriginalConstructor()

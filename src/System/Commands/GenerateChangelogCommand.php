@@ -15,6 +15,7 @@ use Symfony\Component\Process\Process;
 #[AsCommand(name: 'changelog', description: 'Runs auto-changelog to create a new changelog file')]
 class GenerateChangelogCommand extends Command
 {
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -22,6 +23,7 @@ class GenerateChangelogCommand extends Command
     ;
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $output->writeln('Create changelog file');

@@ -17,6 +17,7 @@ final class ValidationWrapperTest extends DefaultTestCase
 {
   protected MockObject|ValidationWrapper $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ValidationWrapper::class)

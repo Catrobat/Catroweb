@@ -18,6 +18,7 @@ final class AuthenticationRequestValidatorTest extends DefaultTestCase
 {
   protected AuthenticationRequestValidator|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AuthenticationRequestValidator::class)

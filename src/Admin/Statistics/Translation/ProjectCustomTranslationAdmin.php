@@ -21,6 +21,7 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'project_custom_translation';
 
+  #[\Override]
   protected function configureExportFields(): array
   {
     return ['id', 'project.id', 'language', 'name', 'description', 'credits'];
@@ -31,6 +32,7 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -54,6 +56,7 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     $form
@@ -67,6 +70,7 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('acl');

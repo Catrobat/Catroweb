@@ -7,6 +7,7 @@ namespace App\Project\CatrobatCode\Statements;
 class WaitStatement extends Statement
 {
   final public const string BEGIN_STRING = 'wait (';
+
   final public const string END_STRING = ') seconds<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)

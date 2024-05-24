@@ -19,11 +19,17 @@ class Extension implements \Stringable
    * Static Tags - added/updated with UpdateTagsCommand.
    */
   final public const string ARDUINO = 'arduino';
+
   final public const string DRONE = 'drone';
+
   final public const string PHIRO = 'phiro';
+
   final public const string RASPBERRY_PI = 'raspberry_pi';
+
   final public const string EMBROIDERY = 'embroidery';
+
   final public const string MINDSTORMS = 'mindstorms';
+
   final public const string MULTIPLAYER = 'multiplayer';
 
   #[ORM\Id]
@@ -51,6 +57,7 @@ class Extension implements \Stringable
     $this->programs = new ArrayCollection();
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return $this->internal_title;
@@ -102,6 +109,7 @@ class Extension implements \Stringable
     if ($this->programs->contains($program)) {
       return;
     }
+
     $this->programs->add($program);
   }
 

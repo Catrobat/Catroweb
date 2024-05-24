@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class GlideToBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::GLIDE_TO_BRICK;

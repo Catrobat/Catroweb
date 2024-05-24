@@ -9,6 +9,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class FeaturedImageConstraintValidator extends ConstraintValidator
 {
+  #[\Override]
   public function validate(mixed $value, Constraint $constraint): void
   {
     if (null === $value || !$constraint instanceof FeaturedImageConstraint) {

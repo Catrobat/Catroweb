@@ -27,6 +27,7 @@ class UtilityApiTest extends DefaultTestCase
 
   protected MockObject|UtilityApiFacade $facade;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UtilityApi::class)

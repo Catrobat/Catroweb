@@ -13,6 +13,7 @@ class ValueStatement extends Statement
     parent::__construct($statementFactory, $xmlTree, $spaces, $value, '');
   }
 
+  #[\Override]
   public function execute(): string
   {
     $color = match ((string) $this->type) {

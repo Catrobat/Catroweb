@@ -20,6 +20,7 @@ class UpdateTagsCommandTest extends KernelTestCase
 {
   protected MockObject|UpdateTagsCommand $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UpdateTagsCommand::class)

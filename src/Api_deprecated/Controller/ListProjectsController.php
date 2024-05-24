@@ -106,6 +106,7 @@ class ListProjectsController extends AbstractController
         // For our default flavor we like to provide users with new projects of all flavors in the recent category
         $flavor = null;
       }
+
       $projects = $this->project_manager->getRecentProjects($flavor, $limit, $offset, $max_version);
     }
 
@@ -123,7 +124,7 @@ class ListProjectsController extends AbstractController
   {
     $number_of_projects = count($projects);
 
-    if ($number_of_projects >= $limit || !$flavor) {
+    if ($number_of_projects >= $limit || ('' === $flavor || '0' === $flavor)) {
       return $projects; // Nothing to do. There are already enough projects or we don't know the already used flavor
     }
 

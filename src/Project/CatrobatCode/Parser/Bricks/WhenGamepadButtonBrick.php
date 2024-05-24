@@ -9,6 +9,7 @@ use App\Project\CatrobatCode\Parser\Scripts\Script;
 
 class WhenGamepadButtonBrick extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_GAME_PAD_BUTTON_BRICK;

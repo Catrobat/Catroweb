@@ -24,6 +24,7 @@ class ItranslateApiTest extends TestCase
 
   protected MockObject $httpClient;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->httpClient = $this->getMockBuilder(Client::class)->getMock();
@@ -37,7 +38,7 @@ class ItranslateApiTest extends TestCase
       ->expects($this->once())
       ->method('request')
       ->with('POST', '/translate/v1',
-        $this->callback(function ($subject) {
+        $this->callback(function (array $subject): bool {
           $this->assertEquals('auto', $subject['json']['source']['dialect']);
           $this->assertEquals('en', $subject['json']['target']['dialect']);
 

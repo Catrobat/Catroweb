@@ -18,6 +18,7 @@ final class AbstractRequestValidatorTest extends DefaultTestCase
 {
   protected AbstractRequestValidator|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AbstractRequestValidator::class)

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class DeleteLookBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::DELETE_LOOK_BRICK;

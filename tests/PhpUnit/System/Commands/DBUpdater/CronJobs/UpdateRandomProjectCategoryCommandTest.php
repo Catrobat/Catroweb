@@ -20,6 +20,7 @@ class UpdateRandomProjectCategoryCommandTest extends KernelTestCase
 {
   protected MockObject|UpdateRandomProjectCategoryCommand $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UpdateRandomProjectCategoryCommand::class)

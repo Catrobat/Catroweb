@@ -33,6 +33,7 @@ final class AuthenticationApiTest extends DefaultTestCase
   /**
    * @throws \ReflectionException
    */
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AuthenticationApi::class)

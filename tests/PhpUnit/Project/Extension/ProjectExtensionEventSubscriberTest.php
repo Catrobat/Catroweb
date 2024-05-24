@@ -18,6 +18,7 @@ class ProjectExtensionEventSubscriberTest extends DefaultTestCase
 {
   protected MockObject|ProjectExtensionEventSubscriber $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ProjectExtensionEventSubscriber::class)

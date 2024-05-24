@@ -13,6 +13,7 @@ class FileNameStatement extends Statement
     parent::__construct($statementFactory, $xmlTree, $spaces, $value, '');
   }
 
+  #[\Override]
   public function execute(): string
   {
     return SyntaxHighlightingConstants::VALUE.$this->value.$this->executeChildren().SyntaxHighlightingConstants::END;

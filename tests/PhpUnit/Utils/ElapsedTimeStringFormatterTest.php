@@ -22,6 +22,7 @@ class ElapsedTimeStringFormatterTest extends TestCase
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ElapsedTimeStringFormatter::class)

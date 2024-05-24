@@ -23,6 +23,7 @@ class ClearCompressedProjectsTest extends KernelTestCase
 
   private string $compressed_projects_dir;
 
+  #[\Override]
   protected function setUp(): void
   {
     $kernel = static::createKernel();

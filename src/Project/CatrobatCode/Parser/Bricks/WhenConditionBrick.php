@@ -9,6 +9,7 @@ use App\Project\CatrobatCode\Parser\Scripts\Script;
 
 class WhenConditionBrick extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_CONDITION_BRICK;

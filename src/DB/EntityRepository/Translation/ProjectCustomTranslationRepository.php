@@ -122,7 +122,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
   {
     $translation = $this->findTranslation($project, $language);
 
-    if (null === $translation) {
+    if (!$translation instanceof ProjectCustomTranslation) {
       return true;
     }
 
@@ -132,6 +132,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
       $translation->setName(null);
       $this->getEntityManager()->persist($translation);
     }
+
     $this->getEntityManager()->flush();
 
     return true;
@@ -141,7 +142,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
   {
     $translation = $this->findTranslation($project, $language);
 
-    if (null === $translation) {
+    if (!$translation instanceof ProjectCustomTranslation) {
       return true;
     }
 
@@ -151,6 +152,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
       $translation->setDescription(null);
       $this->getEntityManager()->persist($translation);
     }
+
     $this->getEntityManager()->flush();
 
     return true;
@@ -160,7 +162,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
   {
     $translation = $this->findTranslation($project, $language);
 
-    if (null === $translation) {
+    if (!$translation instanceof ProjectCustomTranslation) {
       return true;
     }
 
@@ -170,6 +172,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
       $translation->setCredits(null);
       $this->getEntityManager()->persist($translation);
     }
+
     $this->getEntityManager()->flush();
 
     return true;
@@ -187,7 +190,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     ;
 
     return array_map(
-      fn ($e): mixed => $e['language'], $result
+      static fn ($e): mixed => $e['language'], $result
     );
   }
 
@@ -201,7 +204,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
       $languages = array_unique(array_merge($languages, $this->listDefinedLanguages($project)));
     }
 
-    return sizeof($languages);
+    return count($languages);
   }
 
   private function findTranslation(Program $project, string $language): ?ProjectCustomTranslation

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class LegoNxtPlayToneBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::LEGO_NXT_PLAY_TONE_BRICK;

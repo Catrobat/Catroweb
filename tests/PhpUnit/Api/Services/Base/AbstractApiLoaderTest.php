@@ -17,6 +17,7 @@ final class AbstractApiLoaderTest extends DefaultTestCase
 {
   protected AbstractApiLoader|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AbstractApiLoader::class)

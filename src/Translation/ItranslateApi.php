@@ -10,14 +10,14 @@ use Psr\Log\LoggerInterface;
 
 class ItranslateApi implements TranslationApiInterface
 {
-  private const LONG_LANGUAGE_CODE = [
+  private const array LONG_LANGUAGE_CODE = [
     'zh-CN',
     'zh-TW',
     'pt-BR',
     'pt-PT',
   ];
 
-  private const SUPPORTED_LANGUAGE_CODE = [
+  private const array SUPPORTED_LANGUAGE_CODE = [
     'af',
     'ar',
     'az',
@@ -75,7 +75,9 @@ class ItranslateApi implements TranslationApiInterface
     'zh-CN',
     'zh-TW',
   ];
+
   private readonly string $api_key;
+
   private readonly TranslationApiHelper $helper;
 
   public function __construct(private readonly Client $client, private readonly LoggerInterface $logger)
@@ -84,6 +86,7 @@ class ItranslateApi implements TranslationApiInterface
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
 
+  #[\Override]
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
     $target_language = $this->helper->transformLanguageCode($target_language);
@@ -97,7 +100,7 @@ class ItranslateApi implements TranslationApiInterface
           'json' => [
             'key' => $this->api_key,
             'source' => [
-              'dialect' => empty($source_language) ? 'auto' : $source_language,
+              'dialect' => null === $source_language || '' === $source_language || '0' === $source_language ? 'auto' : $source_language,
               'text' => $text,
             ],
             'target' => [
@@ -106,8 +109,8 @@ class ItranslateApi implements TranslationApiInterface
           ],
         ]
       );
-    } catch (GuzzleException $e) {
-      $this->logger->error("Itranslate Guzzle client exception, source: {$source_language}, target: {$target_language}, text: {$text}, message: {$e->getMessage()}");
+    } catch (GuzzleException $guzzleException) {
+      $this->logger->error(sprintf('Itranslate Guzzle client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $guzzleException->getMessage()));
 
       return null;
     }
@@ -115,7 +118,7 @@ class ItranslateApi implements TranslationApiInterface
     $statusCode = $response->getStatusCode();
 
     if (200 != $statusCode) {
-      $this->logger->error("Itranslate returned status code {$statusCode}, source: {$source_language}, target: {$target_language}, text: {$text}, body: {$response->getBody()}");
+      $this->logger->error(sprintf('Itranslate returned status code %s, source: %s, target: %s, text: %s, body: %s', $statusCode, $source_language, $target_language, $text, $response->getBody()));
 
       return null;
     }
@@ -128,11 +131,13 @@ class ItranslateApi implements TranslationApiInterface
     if (null == $source_language) {
       $translation_result->detected_source_language = $result['source']['detected'];
     }
+
     $translation_result->translation = $result['target']['text'];
 
     return $translation_result;
   }
 
+  #[\Override]
   public function getPreference(string $text, ?string $source_language, string $target_language): float
   {
     $target_language = $this->helper->transformLanguageCode($target_language);

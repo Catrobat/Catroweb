@@ -19,6 +19,7 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
 {
   private ProjectXmlHeaderValidatorEventSubscriber $program_xml_header_validator;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->program_xml_header_validator = new ProjectXmlHeaderValidatorEventSubscriber();

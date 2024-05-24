@@ -25,6 +25,7 @@ class AchievementWorkflow_Translation_Command extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $qb = $this->entity_manager->createQueryBuilder();

@@ -48,6 +48,7 @@ class UserAchievementRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($user_achievement);
       }
     }
+
     $this->getEntityManager()->flush();
   }
 }

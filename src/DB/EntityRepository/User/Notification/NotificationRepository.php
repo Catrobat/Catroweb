@@ -33,14 +33,14 @@ class NotificationRepository extends ServiceEntityRepository
       ->setParameter(':program_id', $project->getId())
     ;
 
-    if (null !== $owner) {
+    if ($owner instanceof User) {
       $qb
         ->andWhere($qb->expr()->eq('n.user', ':user_id'))
         ->setParameter(':user_id', $owner->getId())
       ;
     }
 
-    if (null !== $likeFrom) {
+    if ($likeFrom instanceof User) {
       $qb
         ->andWhere($qb->expr()->eq('n.like_from', ':like_from_id'))
         ->setParameter(':like_from_id', $likeFrom->getId())
@@ -62,14 +62,14 @@ class NotificationRepository extends ServiceEntityRepository
       ->from(FollowNotification::class, 'n')
     ;
 
-    if (null !== $owner) {
+    if ($owner instanceof User) {
       $qb
         ->andWhere($qb->expr()->eq('n.user', ':user_id'))
         ->setParameter(':user_id', $owner->getId())
       ;
     }
 
-    if (null !== $follow_from) {
+    if ($follow_from instanceof User) {
       $qb
         ->andWhere($qb->expr()->eq('n.follower', ':follower_id'))
         ->setParameter(':follower_id', $follow_from->getId())

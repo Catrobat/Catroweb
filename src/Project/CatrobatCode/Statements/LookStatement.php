@@ -18,6 +18,7 @@ class LookStatement extends Statement
       '');
   }
 
+  #[\Override]
   public function execute(): string
   {
     $this->findNames();
@@ -27,7 +28,8 @@ class LookStatement extends Statement
     if (null !== $this->value) {
       $code = SyntaxHighlightingConstants::VARIABLES.$this->value.SyntaxHighlightingConstants::END;
     }
-    if (null !== $this->fileName) {
+
+    if ($this->fileName instanceof Statement) {
       $code .= ' (filename: '.$this->fileName->execute().')';
     }
 
@@ -48,9 +50,13 @@ class LookStatement extends Statement
   {
     $tmpStatements = parent::getStatements();
     foreach ($tmpStatements as $statement) {
-      if (null != $statement && $statement instanceof FileNameStatement) {
-        $this->fileName = $statement;
+      if (null == $statement) {
+        continue;
       }
+      if (!$statement instanceof FileNameStatement) {
+        continue;
+      }
+      $this->fileName = $statement;
     }
   }
 }

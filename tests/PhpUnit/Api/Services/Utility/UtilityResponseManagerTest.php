@@ -18,6 +18,7 @@ final class UtilityResponseManagerTest extends DefaultTestCase
 {
   protected MockObject|UtilityResponseManager $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UtilityResponseManager::class)

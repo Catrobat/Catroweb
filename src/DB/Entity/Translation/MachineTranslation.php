@@ -99,10 +99,6 @@ abstract class MachineTranslation
     $date_interval = $this->last_modified_at->diff($this->created_at);
     $months = $date_interval->days / 30;
 
-    if (1 > $months) {
-      $this->usage_per_month = $this->usage_count;
-    } else {
-      $this->usage_per_month = $this->usage_count / $months;
-    }
+    $this->usage_per_month = 1 > $months ? $this->usage_count : $this->usage_count / $months;
   }
 }

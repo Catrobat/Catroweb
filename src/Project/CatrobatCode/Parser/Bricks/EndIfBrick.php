@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class EndIfBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::ENDIF_BRICK;

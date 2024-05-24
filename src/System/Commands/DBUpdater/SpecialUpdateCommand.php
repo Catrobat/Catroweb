@@ -20,6 +20,7 @@ class SpecialUpdateCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     return 0;

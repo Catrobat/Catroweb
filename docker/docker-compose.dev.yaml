@@ -6,6 +6,7 @@ services:
         - APP_ENVIRONMENT=dev
       context: ../
       dockerfile: docker/Dockerfile
+    shm_size: '4gb'
     container_name: app.catroweb
     image: app.catroweb
     command: ['sh', '/var/www/catroweb/docker/app/startup.sh']
@@ -97,6 +98,7 @@ services:
   db.catroweb.dev:
     image: mariadb:10.11
     container_name: db.catroweb.dev
+    shm_size: '2gb'
     ports:
       - 3306
     restart: always
@@ -110,6 +112,7 @@ services:
     image: zenika/alpine-chrome:100
     container_name: chrome.catroweb
     restart: on-failure
+    shm_size: '2gb'
     volumes:
       - ./../tests/TestData/DataFixtures:/var/www/catroweb/tests/TestData/DataFixtures:ro
       - ./../tests/TestData/UploadDownloadTemp:/var/www/catroweb/tests/TestData/UploadDownloadTemp
@@ -129,6 +132,7 @@ services:
   db.catroweb.test:
     image: mariadb:10.11
     container_name: db.catroweb.test
+    shm_size: '2gb'
     ports:
       - 3306
     restart: always
@@ -141,6 +145,7 @@ services:
   phpmyadmin.catroweb.dev:
     image: phpmyadmin:latest
     container_name: phpmyadmin.catroweb.dev
+    shm_size: '2gb'
     environment:
       - PMA_ARBITRARY=1
     restart: always
@@ -158,6 +163,7 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.20
     container_name: elasticsearch
+    shm_size: '2gb'
     environment:
       - cluster.name=docker-cluster
       - transport.host=localhost

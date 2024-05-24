@@ -26,6 +26,7 @@ class ApkReadyAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'apk_ready';
 
+  #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'apk_request_time';
@@ -42,6 +43,7 @@ class ApkReadyAdmin extends AbstractAdmin
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
+  #[\Override]
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     /** @var ProxyQuery $query */
@@ -62,6 +64,7 @@ class ApkReadyAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -77,6 +80,7 @@ class ApkReadyAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -105,6 +109,7 @@ class ApkReadyAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);

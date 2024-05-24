@@ -14,7 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 class StudioJoinRequest
 {
   public const string STATUS_PENDING = 'pending';
+
   public const string STATUS_APPROVED = 'approved';
+
   public const string STATUS_DECLINED = 'declined';
 
   public const string STATUS_JOINED = 'joined';

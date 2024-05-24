@@ -24,6 +24,7 @@ use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtens
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
+use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -121,10 +122,12 @@ class ApiContext implements Context
   private array $full_project_structure = ['id', 'name', 'author', 'description', 'credits', 'version', 'views',
     'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string',
     'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', 'not_for_kids', ];
+
   /**
    * @var string[]
    */
   private array $default_user_structure = ['id', 'username'];
+
   /**
    * @var string[]
    */
@@ -135,6 +138,7 @@ class ApiContext implements Context
    * @var string[]
    */
   private array $default_user_structure_extended = ['id', 'username', 'email'];
+
   /**
    * @var string[]
    */
@@ -144,6 +148,7 @@ class ApiContext implements Context
    * @var string[]
    */
   private array $default_media_file_structure = ['id', 'name'];
+
   /**
    * @var string[]
    */
@@ -156,7 +161,7 @@ class ApiContext implements Context
    */
   public function getKernelBrowser(): KernelBrowser
   {
-    if (null === $this->kernel_browser) {
+    if (!$this->kernel_browser instanceof KernelBrowser) {
       $this->kernel_browser = $this->getSymfonyService('test.client');
     }
 
@@ -352,9 +357,11 @@ class ApiContext implements Context
     if (!isset($this->request_parameters['limit'])) {
       $this->iHaveAParameterWithValue('limit', '1');
     }
+
     if (!isset($this->request_parameters['offset'])) {
       $this->iHaveAParameterWithValue('offset', '0');
     }
+
     $this->iGetFrom('/app/api/projects/recsys.json');
   }
 
@@ -371,6 +378,7 @@ class ApiContext implements Context
     if (null === $project) {
       throw new \Exception('Project not found: '.$arg1);
     }
+
     $router = $this->getRouter();
     $url = $router->generate('ci_download', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
     $this->iGetFrom($url);
@@ -629,11 +637,12 @@ class ApiContext implements Context
     $jwt_manager = $this->getJwtManager();
     $user_manager = $this->getUserManager();
     $user = $user_manager->findUserByUsername($username);
-    if (null !== $user) {
+    if ($user instanceof UserInterface) {
       $token = $jwt_manager->create($user);
     } else {
       $token = $this->getJwtEncoder()->encode(['username' => $username, 'exp' => 3600]);
     }
+
     $this->request_headers['HTTP_authorization'] = 'Bearer '.$token;
   }
 
@@ -982,13 +991,15 @@ class ApiContext implements Context
     $returned_projects = $responseArray['CatrobatProjects'];
     $expected_projects = $table->getHash();
     Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Wrong number of returned projects');
-    for ($i = 0; $i < count($expected_projects); ++$i) {
+    $counter = count($expected_projects);
+    for ($i = 0; $i < $counter; ++$i) {
       $found = false;
       for ($j = 0; $j < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$j) {
         if ($expected_projects[$i]['name'] === $returned_projects[$j]['ProjectName']) {
           $found = true;
         }
       }
+
       Assert::assertTrue($found, $expected_projects[$i]['name'].' was not found in the returned projects');
     }
   }
@@ -1104,7 +1115,7 @@ class ApiContext implements Context
   public function theResponseShouldContain(string $needle): void
   {
     $content = $this->getKernelBrowser()->getResponse()->getContent();
-    Assert::assertStringContainsString($needle, $content, "{$needle} not found in the response");
+    Assert::assertStringContainsString($needle, $content, $needle.' not found in the response');
   }
 
   /**
@@ -1145,6 +1156,7 @@ class ApiContext implements Context
     if (null === $project) {
       throw new \Exception('last project not found');
     }
+
     $file = $this->generateProjectFileWith([
       'name' => $project->getName(),
     ]);
@@ -1181,7 +1193,10 @@ class ApiContext implements Context
   public function uriFromShouldBe(string $arg1, string $arg2): void
   {
     $link = $this->getKernelBrowser()->getCrawler()->selectLink($arg1)->link();
-    Assert::assertEquals($arg2, $link->getUri(), 'expected: '.$arg2.'  get: '.$link->getURI());
+    $absoluteUrl = $link->getUri();
+    $parsedUrl = parse_url($absoluteUrl);
+    $relativePath = $parsedUrl['path'];
+    Assert::assertEquals($arg2, $relativePath, 'expected: '.$arg2.'  get: '.$relativePath);
   }
 
   /**
@@ -1326,6 +1341,7 @@ class ApiContext implements Context
           $project_found = true;
         }
       }
+
       Assert::assertEquals($project_found, true, 'Project does not exist in the database');
     }
   }
@@ -1352,6 +1368,7 @@ class ApiContext implements Context
           $project_found = true;
         }
       }
+
       Assert::assertEquals($project_found, true, 'Project does not exist in the database');
     }
   }
@@ -1370,11 +1387,13 @@ class ApiContext implements Context
 
     for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
       $found = false;
-      for ($j = 0; $j < count($expected_projects); ++$j) {
+      $counter = count($expected_projects);
+      for ($j = 0; $j < $counter; ++$j) {
         if ($expected_projects[$j] === $returned_projects[$i]['ProjectName']) {
           $found = true;
         }
       }
+
       Assert::assertTrue($found);
     }
   }
@@ -1543,7 +1562,7 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    $structure = array_diff($this->full_user_structure, empty($excluded) ? [] : explode(',', $excluded));
+    $structure = array_diff($this->full_user_structure, '' === $excluded || '0' === $excluded ? [] : explode(',', $excluded));
 
     Assert::assertEquals(count($structure), is_countable($user) ? count($user) : 0,
       'Number of user fields should be '.count($structure));
@@ -1629,7 +1648,7 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $returned_languages = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    $all_locales = array_filter(Locales::getNames(), fn ($key): bool => 2 == strlen((string) $key) || 5 == strlen((string) $key), ARRAY_FILTER_USE_KEY);
+    $all_locales = array_filter(Locales::getNames(), static fn ($key): bool => 2 == strlen((string) $key) || 5 == strlen((string) $key), ARRAY_FILTER_USE_KEY);
     $all_locales_count = count($all_locales);
 
     Assert::assertEquals($all_locales_count, is_countable($returned_languages) ? count($returned_languages) : 0,
@@ -1665,7 +1684,7 @@ class ApiContext implements Context
       'English' => $this->iSetCookie('hl', 'en'),
       'Deutsch' => $this->iSetCookie('hl', 'de_DE'),
       'French' => $this->iSetCookie('hl', 'fr_FR'),
-      default => throw new \InvalidArgumentException("Invalid language: {$language}"),
+      default => throw new \InvalidArgumentException('Invalid language: '.$language),
     };
   }
 
@@ -1789,9 +1808,9 @@ class ApiContext implements Context
    */
   public function iHaveAParameterWithTheMdChecksumOfTheUploadFile(string $parameter, string $api_version): void
   {
-    if ('1' == $api_version) {
+    if ('1' === $api_version) {
       $this->request_parameters[$parameter] = md5_file($this->request_files[0]->getPathname());
-    } elseif ('2' == $api_version) {
+    } elseif ('2' === $api_version) {
       $this->request_parameters[$parameter] = md5_file($this->request_files['file']->getPathname());
     } else {
       throw new ApiVersionNotSupportedException($api_version);
@@ -1837,13 +1856,13 @@ class ApiContext implements Context
    */
   public function itShouldBeUpdated(string $api_version): void
   {
-    if ('1' == $api_version) {
+    if ('1' === $api_version) {
       $last_json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
       $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
       Assert::assertEquals($last_json['projectId'], $json['projectId'],
         $this->getKernelBrowser()->getResponse()->getContent()
       );
-    } elseif ('2' == $api_version) {
+    } elseif ('2' === $api_version) {
       $response = $this->getKernelBrowser()->getResponse();
       $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
       $location = $responseArray['project_url'];
@@ -1919,14 +1938,14 @@ class ApiContext implements Context
    */
   public function iUploadThisProjectWithId(string $id, string $api_version): void
   {
-    if ('1' == $api_version) {
+    if ('1' === $api_version) {
       $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat',
         $api_version, null, $id);
 
       $resp_array = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
       $resp_array['projectId'] = $id;
       $this->getKernelBrowser()->getResponse()->setContent(json_encode($resp_array, JSON_THROW_ON_ERROR));
-    } elseif ('2' == $api_version) {
+    } elseif ('2' === $api_version) {
       $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
     } else {
       throw new ApiVersionNotSupportedException($api_version);
@@ -2124,9 +2143,9 @@ class ApiContext implements Context
       default => 'NotExisting',
     };
 
-    if ('1' == $api_version) {
+    if ('1' === $api_version) {
       $this->iHaveAParameterWithValue('deviceLanguage', $deviceLanguage);
-    } elseif ('2' == $api_version) {
+    } elseif ('2' === $api_version) {
       $this->iHaveARequestHeaderWithValue('HTTP_ACCEPT_LANGUAGE', $deviceLanguage);
     } else {
       throw new ApiVersionNotSupportedException($api_version);
@@ -2215,9 +2234,9 @@ class ApiContext implements Context
     Assert::assertTrue(file_exists($filepath), 'File not found');
     $this->request_files = [];
 
-    if ('1' == $api_version) {
+    if ('1' === $api_version) {
       $this->request_files[0] = new UploadedFile($filepath, 'test.catrobat');
-    } elseif ('2' == $api_version) {
+    } elseif ('2' === $api_version) {
       $this->request_files['file'] = new UploadedFile($filepath, 'test.catrobat');
     } else {
       throw new ApiVersionNotSupportedException($api_version);
@@ -2238,7 +2257,7 @@ class ApiContext implements Context
     Assert::assertTrue(file_exists($filepath), 'File not found');
     $this->request_files = [];
 
-    if ('2' == $api_version) {
+    if ('2' === $api_version) {
       $this->request_files['file'] = new UploadedFile($filepath, 'broken.catrobat');
     } else {
       throw new ApiVersionNotSupportedException($api_version);
@@ -2388,11 +2407,14 @@ class ApiContext implements Context
     Assert::assertNotNull($forward_ancestor_relation);
     $this->checked_catrobat_remix_forward_ancestor_relations[$forward_ancestor_relation->getUniqueKey()] =
       $forward_ancestor_relation;
-
-    if ($project_id == $ancestor_project_id && 0 == $depth) {
-      $this->checked_catrobat_remix_forward_descendant_relations[$forward_ancestor_relation->getUniqueKey()] =
-        $forward_ancestor_relation;
+    if ($project_id !== $ancestor_project_id) {
+      return;
     }
+    if (0 != $depth) {
+      return;
+    }
+    $this->checked_catrobat_remix_forward_descendant_relations[$forward_ancestor_relation->getUniqueKey()] =
+      $forward_ancestor_relation;
   }
 
   /**
@@ -2421,7 +2443,7 @@ class ApiContext implements Context
     ;
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
-      fn (ProgramRemixRelation $relation): bool => $relation->getDepth() >= 1));
+      static fn (ProgramRemixRelation $relation): bool => $relation->getDepth() >= 1));
   }
 
   /**
@@ -2499,11 +2521,14 @@ class ApiContext implements Context
     Assert::assertNotNull($forward_descendant_relation);
     $this->checked_catrobat_remix_forward_descendant_relations[$forward_descendant_relation->getUniqueKey()] =
       $forward_descendant_relation;
-
-    if ($project_id == $descendant_project_id && 0 == $depth) {
-      $this->checked_catrobat_remix_forward_ancestor_relations[$forward_descendant_relation->getUniqueKey()] =
-        $forward_descendant_relation;
+    if ($project_id !== $descendant_project_id) {
+      return;
     }
+    if (0 != $depth) {
+      return;
+    }
+    $this->checked_catrobat_remix_forward_ancestor_relations[$forward_descendant_relation->getUniqueKey()] =
+      $forward_descendant_relation;
   }
 
   /**
@@ -2517,7 +2542,7 @@ class ApiContext implements Context
     ;
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
-      fn (ProgramRemixRelation $relation): bool => $relation->getDepth() >= 1));
+      static fn (ProgramRemixRelation $relation): bool => $relation->getDepth() >= 1));
   }
 
   /**
@@ -2734,6 +2759,7 @@ class ApiContext implements Context
       if (!$this->expectProject($expected_projects, $project->getName())) {
         continue;
       }
+
       $result = [
         'id' => $project->getId(),
         'name' => $project->getName(),
@@ -2763,6 +2789,7 @@ class ApiContext implements Context
       if (!$this->expectProject($expected_projects, $featured_project->getProgram()->getName())) {
         continue;
       }
+
       $url = $featured_project->getUrl();
       $project_url = 'http://localhost/app/project/'.$featured_project->getProgram()->getId();
       if (empty($url)) {
@@ -2770,6 +2797,7 @@ class ApiContext implements Context
       } else {
         $project_url = null;
       }
+
       $result = [
         'id' => $featured_project->getId(),
         'name' => $featured_project->getProgram()->getName(),
@@ -2793,6 +2821,7 @@ class ApiContext implements Context
       if (!$this->expectProject($expected_projects, $project['name'])) {
         continue;
       }
+
       $projects[] = $project;
     }
 
@@ -2822,73 +2851,74 @@ class ApiContext implements Context
   private function checkProjectFieldsValue(array $project, string $key): bool
   {
     $fields = [
-      'id' => function ($id): void {
+      'id' => static function ($id): void {
         Assert::assertIsString($id, 'id is not a string!');
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id is not in the correct format!');
       },
-      'name' => function ($name): void {
+      'name' => static function ($name): void {
         Assert::assertIsString($name, 'Name is not a string!');
       },
-      'author' => function ($author): void {
+      'author' => static function ($author): void {
         Assert::assertIsString($author, 'Author is not a string!');
       },
-      'description' => function ($description): void {
+      'description' => static function ($description): void {
         Assert::assertIsString($description, 'Description is not a string!');
       },
-      'credits' => function ($description): void {
+      'credits' => static function ($description): void {
         Assert::assertIsString($description, 'Credits is not a string!');
       },
-      'version' => function ($version): void {
+      'version' => static function ($version): void {
         Assert::assertIsString($version, 'Version is not a string!');
-        Assert::assertMatchesRegularExpression('/[0-9]\\.[0-9]\\.[0-9]/', $version, 'Version is not in the correct format!');
+        Assert::assertMatchesRegularExpression('/\d\.\d\.\d/', $version, 'Version is not in the correct format!');
       },
-      'views' => function ($views): void {
+      'views' => static function ($views): void {
         Assert::assertIsInt($views, 'Views is not an integer!');
       },
-      'download' => function ($downloads): void {
-        Assert::assertIsInt($downloads, 'Download is not an integer!'); // deprecated
+      'download' => static function ($downloads): void {
+        Assert::assertIsInt($downloads, 'Download is not an integer!');
+        // deprecated
       },
-      'downloads' => function ($downloads): void {
+      'downloads' => static function ($downloads): void {
         Assert::assertIsInt($downloads, 'Downloads is not an integer!');
       },
-      'reactions' => function ($reactions): void {
+      'reactions' => static function ($reactions): void {
         Assert::assertIsInt($reactions, 'Reactions is not an integer!');
       },
-      'comments' => function ($comments): void {
+      'comments' => static function ($comments): void {
         Assert::assertIsInt($comments, 'Comments is not an integer!');
       },
-      'private' => function ($private): void {
+      'private' => static function ($private): void {
         Assert::assertIsBool($private, 'Private is not a boolean!');
       },
-      'flavor' => function ($flavor): void {
+      'flavor' => static function ($flavor): void {
         Assert::assertIsString($flavor, 'Flavor is not a string!');
       },
-      'tags' => function ($tags): void {
+      'tags' => static function ($tags): void {
         Assert::assertIsArray($tags, 'Tags is not an array!');
       },
-      'uploaded' => function ($uploaded): void {
+      'uploaded' => static function ($uploaded): void {
         Assert::assertIsInt($uploaded, 'uploaded is not an integer!');
       },
-      'uploaded_string' => function ($uploaded_string): void {
+      'uploaded_string' => static function ($uploaded_string): void {
         Assert::assertIsString($uploaded_string, 'uploaded_string is not a string!');
       },
-      'screenshot_large' => function ($screenshot_large): void {
+      'screenshot_large' => static function ($screenshot_large): void {
         Assert::assertIsString($screenshot_large);
         Assert::assertMatchesRegularExpression(
-          '/http:\\/\\/localhost\\/((resources_test\\/screenshots\/screen_[0-9]+)|(images\\/default\\/screenshot))\\.png/',
+          '/http:\/\/localhost\/((resources_test\/screenshots\/screen_\d+)|(images\/default\/screenshot))\.png/',
           $screenshot_large,
           'screenshot_large is not a valid URL!'
         );
       },
-      'screenshot_small' => function ($screenshot_small): void {
+      'screenshot_small' => static function ($screenshot_small): void {
         Assert::assertIsString($screenshot_small);
         Assert::assertMatchesRegularExpression(
-          '/http:\\/\\/localhost\\/((resources_test\\/thumbnails\/screen_[0-9]+)|(images\\/default\\/thumbnail))\\.png/',
+          '/http:\/\/localhost\/((resources_test\/thumbnails\/screen_\d+)|(images\/default\/thumbnail))\.png/',
           $screenshot_small,
           'screenshot_small is not a valid URL!'
         );
       },
-      'project_url' => function ($project_url): void {
+      'project_url' => static function ($project_url): void {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression(
           '/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/',
@@ -2896,7 +2926,7 @@ class ApiContext implements Context
           'project_url is not a valid URL!'
         );
       },
-      'download_url' => function ($download_url): void {
+      'download_url' => static function ($download_url): void {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression(
           '/http:\\/\\/localhost\\/api\\/project\\/([a-zA-Z0-9-]+)\\/catrobat/',
@@ -2904,16 +2934,16 @@ class ApiContext implements Context
           'download_url is not a valid URL!'
         );
       },
-      'filesize' => function ($filesize): void {
+      'filesize' => static function ($filesize): void {
         Assert::assertEquals(is_float($filesize) || is_int($filesize), true, 'Filesize is not a number!');
       },
-      'not_for_kids' => function ($not_for_kids): void {
-        Assert::assertIsInt($not_for_kids, "not_for_kids is not an integer! {$not_for_kids}");
-        Assert::assertContains($not_for_kids, [0, 1, 2], "not_for_kids is not 0 or 1 or 2! {$not_for_kids}");
+      'not_for_kids' => static function ($not_for_kids): void {
+        Assert::assertIsInt($not_for_kids, 'not_for_kids is not an integer! '.$not_for_kids);
+        Assert::assertContains($not_for_kids, [0, 1, 2], 'not_for_kids is not 0 or 1 or 2! '.$not_for_kids);
       },
     ];
 
-    Assert::assertArrayHasKey($key, $fields, "Key '{$key}' not found in fields array of checkProjectFieldsValue");
+    Assert::assertArrayHasKey($key, $fields, sprintf('Key \'%s\' not found in fields array of checkProjectFieldsValue', $key));
     call_user_func($fields[$key], $project[$key]);
 
     return true;
@@ -2922,31 +2952,31 @@ class ApiContext implements Context
   private function checkFeaturedProjectFieldsValue(array $project, string $key): bool
   {
     $fields = [
-      'id' => function ($id): void {
+      'id' => static function ($id): void {
         Assert::assertIsString($id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
-      'name' => function ($name): void {
+      'name' => static function ($name): void {
         Assert::assertIsString($name);
       },
-      'author' => function ($author): void {
+      'author' => static function ($author): void {
         Assert::assertIsString($author);
       },
-      'project_id' => function ($project_id): void {
+      'project_id' => static function ($project_id): void {
         Assert::assertIsString($project_id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $project_id, 'project_id');
       },
-      'project_url' => function ($project_url): void {
+      'project_url' => static function ($project_url): void {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/project\/[a-zA-Z0-9-]+$/', $project_url);
       },
-      'url' => function ($url): void {
+      'url' => static function ($url): void {
         Assert::assertIsString($url);
         Assert::assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
       },
-      'featured_image' => function ($featured_image): void {
+      'featured_image' => static function ($featured_image): void {
         Assert::assertIsString($featured_image);
-        Assert::assertMatchesRegularExpression('/http:\/\/localhost\/resources_test\/featured\/featured_[0-9]+\.(jpg|png)/',
+        Assert::assertMatchesRegularExpression('/http:\/\/localhost\/resources_test\/featured\/featured_\d+\.(jpg|png)/',
           $featured_image);
       },
     ];
@@ -2960,36 +2990,36 @@ class ApiContext implements Context
   private function checkMediaFileFieldsValue(array $project, string $key): bool
   {
     $fields = [
-      'id' => function ($id): void {
+      'id' => static function ($id): void {
         Assert::assertIsInt($id);
       },
-      'name' => function ($name): void {
+      'name' => static function ($name): void {
         Assert::assertIsString($name);
       },
-      'flavor' => function ($flavor): void {
+      'flavor' => static function ($flavor): void {
         Assert::assertIsString($flavor);
       },
-      'packages' => function ($package): void {
+      'packages' => static function ($package): void {
         Assert::assertIsArray($package);
       },
-      'category' => function ($category): void {
+      'category' => static function ($category): void {
         Assert::assertIsString($category);
       },
-      'author' => function ($author): void {
+      'author' => static function ($author): void {
         Assert::assertIsString($author);
       },
-      'extension' => function ($extension): void {
+      'extension' => static function ($extension): void {
         Assert::assertIsString($extension);
       },
-      'download_url' => function ($download_url): void {
+      'download_url' => static function ($download_url): void {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/download-media\/[a-zA-Z0-9-]+/',
           $download_url, 'download_url');
       },
-      'size' => function ($size): void {
+      'size' => static function ($size): void {
         Assert::assertIsInt($size);
       },
-      'file_type' => function ($file_type): void {
+      'file_type' => static function ($file_type): void {
         Assert::assertIsString($file_type);
         Assert::assertTrue(in_array($file_type, ['project', 'image', 'sound', 'other'], true));
       },
@@ -3004,33 +3034,33 @@ class ApiContext implements Context
   private function checkUserFieldsValue(array $user, string $key): bool
   {
     $fields = [
-      'id' => function ($id): void {
+      'id' => static function ($id): void {
         Assert::assertIsString($id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
-      'username' => function ($username): void {
+      'username' => static function ($username): void {
         Assert::assertIsString($username);
       },
-      'email' => function ($email): void {
+      'email' => static function ($email): void {
         Assert::assertIsString($email);
       },
-      'picture' => function ($picture): void {
+      'picture' => static function ($picture): void {
         Assert::assertIsString($picture);
         Assert::assertMatchesRegularExpression('/^data:image\/([^;]+);base64,([A-Za-z0-9\/+=]+)$/', $picture, 'Invalid user picture data-URL');
       },
-      'about' => function ($about): void {
+      'about' => static function ($about): void {
         Assert::assertIsString($about);
       },
-      'currentlyWorkingOn' => function ($currentlyWorkingOn): void {
+      'currentlyWorkingOn' => static function ($currentlyWorkingOn): void {
         Assert::assertIsString($currentlyWorkingOn);
       },
-      'projects' => function ($projects): void {
+      'projects' => static function ($projects): void {
         Assert::assertIsInt($projects);
       },
-      'followers' => function ($followers): void {
+      'followers' => static function ($followers): void {
         Assert::assertIsInt($followers);
       },
-      'following' => function ($following): void {
+      'following' => static function ($following): void {
         Assert::assertIsInt($following);
       },
     ];
@@ -3044,7 +3074,7 @@ class ApiContext implements Context
   private function checkSurveyFieldsValue(array $user, string $key): bool
   {
     $fields = [
-      'url' => function ($username): void {
+      'url' => static function ($username): void {
         Assert::assertIsString($username);
       },
     ];
@@ -3074,7 +3104,7 @@ class ApiContext implements Context
   private function uploadProject(string $file, string $api_version, ?User $user = null, string $desired_id = '', string $flavor = Flavor::POCKETCODE): void
   {
     if (null == $user) {
-      if (isset($this->username)) {
+      if (null !== $this->username) {
         /** @var User $user */
         $user = $this->getUserManager()->findUserByUsername($this->username);
       } else {
@@ -3089,17 +3119,17 @@ class ApiContext implements Context
 
     try {
       $file = new UploadedFile($file, basename($file));
-    } catch (\Exception $e) {
-      throw new \Exception('File to upload does not exist'.$e);
+    } catch (\Exception $exception) {
+      throw new \Exception('File to upload does not exist'.$exception, $exception->getCode(), $exception);
     }
 
-    if ('1' == $api_version) {
+    if ('1' === $api_version) {
       $this->request_parameters['username'] = $user->getUsername();
       $this->request_parameters['token'] = $user->getUploadToken();
       $this->request_files[0] = $file;
       $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum', '1');
       $this->iRequestWith('POST', '/'.$flavor.'/api/upload/upload.json');
-    } elseif ('2' == $api_version) {
+    } elseif ('2' === $api_version) {
       $this->request_headers['CONTENT_TYPE'] = 'multipart/form-data';
       $this->request_headers['HTTP_ACCEPT'] = 'application/json';
       $this->request_files['file'] = $file;
@@ -3124,9 +3154,9 @@ class ApiContext implements Context
   {
     $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    if ('1' == $api_version) {
+    if ('1' === $api_version) {
       $last_uploaded_project_id = $json['projectId'];
-    } elseif ('2' == $api_version) {
+    } elseif ('2' === $api_version) {
       $last_uploaded_project_id = $json['id'];
     } else {
       throw new ApiVersionNotSupportedException($api_version);

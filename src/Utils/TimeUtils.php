@@ -31,7 +31,7 @@ class TimeUtils
    */
   public static function getDateTime(): \DateTime
   {
-    if (null !== self::$freeze_time) {
+    if (self::$freeze_time instanceof \DateTime) {
       return self::$freeze_time;
     }
 

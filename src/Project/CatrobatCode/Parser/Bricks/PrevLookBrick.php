@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PrevLookBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PREV_LOOK_BRICK;

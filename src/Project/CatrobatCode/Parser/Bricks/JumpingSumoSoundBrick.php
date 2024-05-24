@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class JumpingSumoSoundBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::JUMP_SUMO_SOUND_BRICK;

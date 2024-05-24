@@ -21,15 +21,18 @@ use Symfony\Component\Finder\SplFileInfo;
 #[AsCommand(name: 'catrobat:clean:old-apk', description: 'Delete all APKs older than X days and resets the status to NONE')]
 class CleanOldApkCommand extends Command
 {
-  private const HOURS = 24;
-  private const MINUTES = 60;
-  private const SECONDS = 60;
+  private const int HOURS = 24;
+
+  private const int MINUTES = 60;
+
+  private const int SECONDS = 60;
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -41,6 +44,7 @@ class CleanOldApkCommand extends Command
    * @throws NoResultException
    * @throws NonUniqueResultException
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $days = $input->getArgument('days');
@@ -58,7 +62,7 @@ class CleanOldApkCommand extends Command
     $finder = new Finder();
     $finder->in($directory)->depth(0);
     $removed_apk_ids = new \ArrayObject();
-    $amount_of_files = sizeof($finder);
+    $amount_of_files = count($finder);
 
     /** @var SplFileInfo $file */
     foreach ($finder as $file) {
@@ -69,13 +73,14 @@ class CleanOldApkCommand extends Command
       }
     }
 
-    $output->writeln('Files removed ('.sizeof($removed_apk_ids).'/'.$amount_of_files.')');
+    $output->writeln('Files removed ('.count($removed_apk_ids).'/'.$amount_of_files.')');
 
-    if (!sizeof($removed_apk_ids)) {
+    if (0 === count($removed_apk_ids)) {
       $output->writeln('No projects have been reset.');
 
       return 0;
     }
+
     $query = $this->createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids);
     $result = $query->getSingleScalarResult();
     $output->writeln('Reset the apk status of '.$result.' projects');
@@ -91,7 +96,8 @@ class CleanOldApkCommand extends Command
       if (0 !== $i) {
         $id_query_part .= 'OR ';
       }
-      $id_query_part .= 'p.id = \''.$apk_id.'\' ';
+
+      $id_query_part .= "p.id = '".$apk_id."' ";
       ++$i;
     }
 

@@ -12,7 +12,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'catrobat:workflow:update_random_project_category', description: 'Update random projects\' category.')]
+#[AsCommand(name: 'catrobat:workflow:update_random_project_category', description: "Update random projects' category.")]
 class UpdateRandomProjectCategoryCommand extends Command
 {
   protected const LIMIT = 100;
@@ -25,6 +25,7 @@ class UpdateRandomProjectCategoryCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->resetCategoryOfIndex('rand');
@@ -47,6 +48,7 @@ class UpdateRandomProjectCategoryCommand extends Command
       ++$rand_value;
       $this->entity_manager->persist($program);
     }
+
     $this->entity_manager->flush();
 
     return 0;
@@ -57,8 +59,8 @@ class UpdateRandomProjectCategoryCommand extends Command
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->update()
       ->from(Program::class, 'p')
-      ->where("p.{$index} <> 0")
-      ->set("p.{$index}", 0)
+      ->where(sprintf('p.%s <> 0', $index))
+      ->set('p.'.$index, 0)
       ->getQuery()
       ->execute()
     ;

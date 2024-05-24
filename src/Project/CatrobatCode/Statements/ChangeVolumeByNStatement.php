@@ -7,6 +7,7 @@ namespace App\Project\CatrobatCode\Statements;
 class ChangeVolumeByNStatement extends BaseChangeByNStatement
 {
   final public const string BEGIN_STRING = 'volume';
+
   final public const string END_STRING = ')%<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)

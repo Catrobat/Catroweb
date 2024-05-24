@@ -17,6 +17,7 @@ final class ApiExceptionTest extends DefaultTestCase
 {
   protected ApiException|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ApiException::class)

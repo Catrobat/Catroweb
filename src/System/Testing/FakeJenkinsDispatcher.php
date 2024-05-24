@@ -15,6 +15,7 @@ class FakeJenkinsDispatcher extends JenkinsDispatcher
     return $this->last_params;
   }
 
+  #[\Override]
   protected function dispatch(mixed $params): string
   {
     $this->last_params = $params;

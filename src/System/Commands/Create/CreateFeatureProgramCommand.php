@@ -28,6 +28,7 @@ class CreateFeatureProgramCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -35,6 +36,7 @@ class CreateFeatureProgramCommand extends Command
     ;
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $program_name = $input->getArgument('program_name');
@@ -50,6 +52,7 @@ class CreateFeatureProgramCommand extends Command
     } catch (\Exception) {
       return 2;
     }
+
     $output->writeln('Featuring '.$program->getName());
 
     return 0;

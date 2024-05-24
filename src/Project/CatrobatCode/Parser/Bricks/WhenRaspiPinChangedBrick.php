@@ -9,6 +9,7 @@ use App\Project\CatrobatCode\Parser\Scripts\Script;
 
 class WhenRaspiPinChangedBrick extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_RASPI_PIN_CHANGED_BRICK;

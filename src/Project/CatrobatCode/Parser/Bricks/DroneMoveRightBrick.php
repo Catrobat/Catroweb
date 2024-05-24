@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class DroneMoveRightBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::AR_DRONE_MOVE_RIGHT_BRICK;

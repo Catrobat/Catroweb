@@ -37,24 +37,28 @@ class VersionValidatorEventSubscriber implements EventSubscriberInterface
         if (version_compare($version, self::MIN_ANDROID_PROGRAM_VERSION, '<')) {
           throw new InvalidCatrobatFileException('errors.projectversion.tooold', 519, 'android catrobat version too old');
         }
+
         break;
 
       case 'Windows':
         if (version_compare((string) $xml->header->applicationVersion, self::MIN_WINDOWS_PROGRAM_VERSION, '<')) {
           throw new InvalidCatrobatFileException('errors.projectversion.tooold', 519, 'windows catrobat version too old');
         }
+
         break;
 
       case 'iOS':
         if (version_compare((string) $xml->header->applicationVersion, self::MIN_IOS_PROGRAM_VERSION, '<')) {
           throw new InvalidCatrobatFileException('errors.projectversion.tooold', 519, 'ios catrobat version too old');
         }
+
         break;
       default:
         throw new InvalidCatrobatFileException('unsupported platform', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforeInsertEvent::class => 'onProjectBeforeInsert'];

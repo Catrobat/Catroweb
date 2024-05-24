@@ -28,9 +28,11 @@ class ReportedCommentsController extends CRUDController
     if (null === $object) {
       throw new NotFoundHttpException();
     }
+
     $project = $object->getProgram();
     $project->setVisible(true);
     $project->setApproved(true);
+
     $object->setState(3);
     $this->admin->update($object);
     $this->addFlash('sonata_flash_success', 'Project '.$object->getId().' is no longer reported');
@@ -43,6 +45,7 @@ class ReportedCommentsController extends CRUDController
     /* @var $object UserComment */
     $object = $this->admin->getSubject();
     $object->setIsReported(false);
+
     $this->admin->update($object);
     $this->addFlash('sonata_flash_success', 'Comment '.$object->getId().' is no longer reported');
 
@@ -57,6 +60,7 @@ class ReportedCommentsController extends CRUDController
     if (null === $comment) {
       throw $this->createNotFoundException('No comment found for this id '.$object->getId());
     }
+
     $this->entity_manager->remove($comment);
     $this->entity_manager->flush();
     $this->addFlash('sonata_flash_success', 'Comment '.$object->getId().' deleted');

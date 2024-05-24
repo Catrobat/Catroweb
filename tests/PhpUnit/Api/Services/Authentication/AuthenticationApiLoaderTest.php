@@ -18,6 +18,7 @@ final class AuthenticationApiLoaderTest extends DefaultTestCase
 {
   protected AuthenticationApiLoader|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AuthenticationApiLoader::class)
