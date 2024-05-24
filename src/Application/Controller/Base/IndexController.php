@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\Base;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\User\User;
@@ -39,8 +40,8 @@ class IndexController extends AbstractController
 
   protected function getFeaturedSliderData(string $flavor): array
   {
-    if ('phirocode' === $flavor) {
-      $featured_items = $this->featured_repository->getFeaturedItems('pocketcode', 10, 0);
+    if (Flavor::PHIROCODE === $flavor) {
+      $featured_items = $this->featured_repository->getFeaturedItems(Flavor::POCKETCODE, 10, 0);
     } else {
       $featured_items = $this->featured_repository->getFeaturedItems($flavor, 10, 0);
     }

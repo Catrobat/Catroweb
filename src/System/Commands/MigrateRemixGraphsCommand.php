@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramRepository;
@@ -426,7 +427,7 @@ class MigrateRemixGraphsCommand extends Command
       }
 
       $project->setApproved(true);
-      $project->setFlavor('pocketcode');
+      $project->setFlavor(Flavor::POCKETCODE);
       $project->setRemixRoot(true);
 
       $this->entity_manager->persist($project);

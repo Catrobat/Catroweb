@@ -149,6 +149,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'items' => [
               'admin.block.cron_jobs',
               'admin.block.special_updater',
+              'admin.block.flavors',
               'admin.block.achievements',
               'admin.block.extensions',
               'admin.block.tags',

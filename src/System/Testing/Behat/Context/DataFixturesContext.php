@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Testing\Behat\Context;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
@@ -602,7 +603,7 @@ class DataFixturesContext implements Context
     $project_manager = $this->getProjectManager();
     $project = $project_manager->find('1');
     Assert::assertNotNull($project, 'No project added');
-    Assert::assertEquals('phirocode', $project->getFlavor(), 'Project is NOT flagged as phiro');
+    Assert::assertEquals(Flavor::PHIROCODE, $project->getFlavor(), 'Project is NOT flagged as phiro');
   }
 
   /**
@@ -613,7 +614,7 @@ class DataFixturesContext implements Context
     $project_manager = $this->getProjectManager();
     $project = $project_manager->find('1');
     Assert::assertNotNull($project, 'No project added');
-    Assert::assertNotEquals('phirocode', $project->getFlavor(), 'Project is flagged as a phiro');
+    Assert::assertNotEquals(Flavor::PHIROCODE, $project->getFlavor(), 'Project is flagged as a phiro');
   }
 
   /**
@@ -1295,6 +1296,15 @@ class DataFixturesContext implements Context
   }
 
   /**
+   * @Then there should be :number_of_flavors flavors in the database
+   */
+  public function thereShouldBeFlavorsInTheDatabase(int $number_of_flavors): void
+  {
+    $tags = $this->getFlavorRepository()->findAll();
+    Assert::assertCount($number_of_flavors, $tags);
+  }
+
+  /**
    * @Then there should be :number_of_user_achievements user achievements in the database
    */
   public function thereShouldBeUserAchievementsInTheDatabase(int $number_of_user_achievements): void
@@ -1339,6 +1349,16 @@ class DataFixturesContext implements Context
   {
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:update:extensions'], [], 'Creating Extensions'
+    );
+  }
+
+  /**
+   * @Given I run the update flavors command
+   */
+  public function iRunTheUpdateFlavorsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:flavors'], [], 'Creating Flavors'
     );
   }
 

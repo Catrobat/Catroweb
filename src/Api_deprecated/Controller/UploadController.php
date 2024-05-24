@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Api_deprecated\Controller;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
@@ -78,7 +79,7 @@ class UploadController
       throw new InvalidCatrobatFileException('errors.checksum.invalid', 504);
     }
 
-    $flavor = 'pocketcode';
+    $flavor = Flavor::POCKETCODE;
 
     // Needed to make sure everything is up to date (followers, ..)
     $this->em->refresh($user);

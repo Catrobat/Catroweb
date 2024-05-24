@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\Remix;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Event\ProjectAfterInsertEvent;
@@ -69,7 +70,7 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
       $this->remix_manager->addRemixes($project, $remixes_data);
     }
     $project_xml_properties->header->remixOf = $remix_url_string;
-    $project_xml_properties->header->url = $this->router->generate('program', ['id' => $project->getId(), 'theme' => 'pocketcode']);
+    $project_xml_properties->header->url = $this->router->generate('program', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
     $project_xml_properties->header->userHandle = $project->getUser()->getUsername();
     $file->saveProjectXmlProperties();
   }

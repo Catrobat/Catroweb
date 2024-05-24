@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Create;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\EntityRepository\FlavorRepository;
@@ -59,7 +60,7 @@ class CreateFeatureProgramCommand extends Command
     $feature = new FeaturedProgram();
     $feature->setProgram($program);
     $feature->setActive(true);
-    $feature->setFlavor($this->flavor_repository->getFlavorByName('pocketcode'));
+    $feature->setFlavor($this->flavor_repository->getFlavorByName(Flavor::POCKETCODE));
     $feature->setImageType('jpeg'); // todo picture?
     $feature->setUrl(null);
 

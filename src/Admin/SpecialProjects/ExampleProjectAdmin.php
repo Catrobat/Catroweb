@@ -173,6 +173,6 @@ class ExampleProjectAdmin extends AbstractAdmin
 
   private function getFlavors(): array
   {
-    return $this->flavor_repository->getFlavorsByNames(['arduino', 'embroidery']);
+    return $this->flavor_repository->getFlavorsByNames([Flavor::ARDUINO, Flavor::EMBROIDERY]);
   }
 }

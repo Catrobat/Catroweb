@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProjectListResponse;
+use App\DB\Entity\Flavor;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -101,7 +102,7 @@ class ListProjectsController extends AbstractController
         $projects = $this->project_manager->getPublicUserProjects($user_id, null, null, null, $max_version);
       }
     } else {
-      if ('pocketcode' === $flavor) {
+      if (Flavor::POCKETCODE === $flavor) {
         // For our default flavor we like to provide users with new projects of all flavors in the recent category
         $flavor = null;
       }

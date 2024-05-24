@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Twig;
 
 use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -258,11 +259,11 @@ class TwigExtension extends AbstractExtension
   public function getThemeDisplayName(): string
   {
     return match ($this->getFlavor()) {
-      'luna' => 'Luna & Cat',
-      'phirocode' => 'Phirocode',
-      'create@school' => 'Create@School',
-      'embroidery' => 'Embroidery Designer',
-      'arduino' => 'Arduino Code',
+      Flavor::LUNA => 'Luna & Cat',
+      Flavor::PHIROCODE => 'Phirocode',
+      Flavor::CREATE_AT_SCHOOL => 'Create@School',
+      Flavor::EMBROIDERY => 'Embroidery Designer',
+      Flavor::ARDUINO => 'Arduino Code',
       default => 'Pocket Code',
     };
   }

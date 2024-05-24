@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project\CatrobatFile;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ProjectFlavorEventSubscriber;
 use PHPUnit\Framework\Assert;
@@ -38,14 +39,14 @@ class ProjectFlavorEventSubscriberTest extends TestCase
     $program = new Program();
     $request = new Request();
 
-    $request->attributes->set('flavor', 'pocketcode');
+    $request->attributes->set('flavor', Flavor::POCKETCODE);
     $this->stack->push($request);
     $this->program_flavor_listener->checkFlavor($program);
-    Assert::assertEquals('pocketcode', $program->getFlavor());
+    Assert::assertEquals(Flavor::POCKETCODE, $program->getFlavor());
 
-    $request->attributes->set('flavor', 'pocketphiro');
+    $request->attributes->set('flavor', Flavor::PHIROCODE);
     $this->stack->push($request);
     $this->program_flavor_listener->checkFlavor($program);
-    Assert::assertEquals('pocketphiro', $program->getFlavor());
+    Assert::assertEquals(Flavor::PHIROCODE, $program->getFlavor());
   }
 }

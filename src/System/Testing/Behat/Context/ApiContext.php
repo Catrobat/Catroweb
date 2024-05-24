@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\System\Testing\Behat\Context;
 
 use App\Api\Exceptions\ApiVersionNotSupportedException;
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
 use App\DB\Entity\Project\Remix\ProgramRemixRelation;
@@ -371,7 +372,7 @@ class ApiContext implements Context
       throw new \Exception('Project not found: '.$arg1);
     }
     $router = $this->getRouter();
-    $url = $router->generate('ci_download', ['id' => $project->getId(), 'theme' => 'pocketcode']);
+    $url = $router->generate('ci_download', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
     $this->iGetFrom($url);
   }
 
@@ -2556,7 +2557,7 @@ class ApiContext implements Context
    */
   public function iRequestFromASpecificBuildTypeOfCatroidApp(string $build_type): void
   {
-    $this->iUseTheUserAgentParameterized('0.998', 'PocketCode', '0.9.60', $build_type);
+    $this->iUseTheUserAgentParameterized('0.998', Flavor::POCKETCODE, '0.9.60', $build_type);
   }
 
   /**
@@ -2568,7 +2569,7 @@ class ApiContext implements Context
   {
     $user = $this->insertUser();
     $uploadedFile = $this->getStandardProjectFile();
-    $this->uploadProject(strval($uploadedFile), '1', $user, '1', 'phirocode');
+    $this->uploadProject(strval($uploadedFile), '1', $user, '1', Flavor::PHIROCODE);
     Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
@@ -3070,8 +3071,7 @@ class ApiContext implements Context
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \Exception                      when an error while uploading occurs
    */
-  private function uploadProject(string $file, string $api_version, ?User $user = null, string $desired_id = '',
-    string $flavor = 'pocketcode'): void
+  private function uploadProject(string $file, string $api_version, ?User $user = null, string $desired_id = '', string $flavor = Flavor::POCKETCODE): void
   {
     if (null == $user) {
       if (isset($this->username)) {
@@ -3141,7 +3141,7 @@ class ApiContext implements Context
   }
 
   private function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version,
-    string $build_type, string $theme = 'pocketcode'): void
+    string $build_type, string $theme = Flavor::POCKETCODE): void
   {
     // see org.catrobat.catroid.ui.WebViewActivity
     $platform = 'Android';

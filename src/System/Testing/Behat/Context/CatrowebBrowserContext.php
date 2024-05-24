@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Testing\Behat\Context;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
@@ -130,7 +131,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iUseASpecificBuildTypeOfCatroidApp(string $build_type): void
   {
-    $this->iUseTheUserAgentParameterized('0.998', 'PocketCode', '0.9.60', $build_type);
+    $this->iUseTheUserAgentParameterized('0.998', Flavor::POCKETCODE, '0.9.60', $build_type);
   }
 
   /**
@@ -577,28 +578,28 @@ class CatrowebBrowserContext extends BrowserContext
     ;
 
     match ($flavor) {
-      'pocketcode' => $page
+      Flavor::POCKETCODE => $page
         ->find('css', 'select.form-control > option:nth-child(1)')
         ->click(),
-      'pocketalice' => $page
+      Flavor::POCKETALICE => $page
         ->find('css', 'select.form-control > option:nth-child(2)')
         ->click(),
-      'pocketgalaxy' => $page
+      Flavor::POCKETGALAXY => $page
         ->find('css', 'select.form-control > option:nth-child(3)')
         ->click(),
-      'phirocode' => $page
+      Flavor::PHIROCODE => $page
         ->find('css', 'select.form-control > option:nth-child(4)')
         ->click(),
-      'luna' => $page
+      Flavor::LUNA => $page
         ->find('css', 'select.form-control > option:nth-child(5)')
         ->click(),
-      'create@school' => $page
+      Flavor::CREATE_AT_SCHOOL => $page
         ->find('css', 'select.form-control > option:nth-child(6)')
         ->click(),
-      'embroidery' => $page
+      Flavor::EMBROIDERY => $page
         ->find('css', 'select.form-control > option:nth-child(7)')
         ->click(),
-      'arduino' => $page
+      Flavor::ARDUINO => $page
         ->find('css', 'select.form-control > option:nth-child(8)')
         ->click(),
       default => throw new \Exception('Wrong flavor'),
@@ -984,7 +985,7 @@ class CatrowebBrowserContext extends BrowserContext
         $project = $this->getProjectManager()->findOneByName($url);
         Assert::assertNotNull($project);
         Assert::assertNotNull($project->getId());
-        $url = $this->getRouter()->generate('program', ['id' => $project->getId(), 'theme' => 'pocketcode']);
+        $url = $this->getRouter()->generate('program', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
@@ -1790,7 +1791,7 @@ class CatrowebBrowserContext extends BrowserContext
     $this->getSession()->setRequestHeader('User-Agent', $user_agent);
   }
 
-  protected function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version, string $build_type, string $theme = 'pocketcode'): void
+  protected function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version, string $build_type, string $theme = Flavor::POCKETCODE): void
   {
     // see org.catrobat.catroid.ui.WebViewActivity
     $platform = 'Android';

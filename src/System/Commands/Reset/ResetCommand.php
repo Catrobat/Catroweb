@@ -63,6 +63,11 @@ class ResetCommand extends Command
       'catrobat:purge', $this->getApplication(), ['--force' => true], $output
     );
 
+    // Create static flavors
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:flavors'], [], 'Creating constant flavors', $output
+    );
+
     // Create static tags
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:update:tags'], [], 'Creating constant tags', $output
