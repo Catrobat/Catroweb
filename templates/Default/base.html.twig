@@ -58,7 +58,7 @@
 {% include('Default/language_menu.html.twig') %}
 
 <div id="main_container_content" class="body-content">
-  <div class="page-content{% if app.request.attributes.get('_route') == 'studio_details' %} container{% endif %}">
+  <div class="page-content{% if app.request.attributes.get('_route') != 'studio_details' %} container{% endif %}">
     {% block body %}{% endblock %}
   </div>
 </div>
