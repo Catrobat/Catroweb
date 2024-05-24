@@ -429,10 +429,10 @@ class ProjectController extends AbstractController
     if (self::NOT_FOR_KIDS_MODERATOR == $project->getNotForKids()) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_for_kids_moderator', [], 'catroweb'));
     } elseif (self::NOT_FOR_KIDS == $project->getNotForKids()) {
-      $project->setNotForKids(false);
+      $project->setNotForKids(0);
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_safe_for_kids', [], 'catroweb'));
     } else {
-      $project->setNotForKids(true);
+      $project->setNotForKids(1);
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_for_kids', [], 'catroweb'));
     }
 
