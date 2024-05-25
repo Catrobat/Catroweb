@@ -34,7 +34,8 @@ class StudioController extends AbstractController
     $studios = $this->studio_manager->findAllStudiosWithUsersAndProjectsCount();
     /** @var User|null $user */
     $user = $this->getUser();
-    for ($i = 0; $i < count($studios); ++$i) {
+    $counter = count($studios);
+    for ($i = 0; $i < $counter; ++$i) {
       $studio = $this->studio_manager->findStudioById($studios[$i]['id']);
       $studios[$i]['is_joined'] = !is_null($user) && $this->studio_manager->isUserInStudio($user, $studio);
       $studios[$i]['status'] = 'false';
@@ -48,7 +49,7 @@ class StudioController extends AbstractController
 
     return $this->render('Studio/studios_overview.html.twig', [
       'studios' => $studios,
-      'user_name' => !is_null($user) ? $user->getUserIdentifier() : '',
+      'user_name' => is_null($user) ? '' : $user->getUserIdentifier(),
     ]);
   }
 
@@ -62,7 +63,7 @@ class StudioController extends AbstractController
     $user = $this->getUser();
 
     return $this->render('Studio/studio_new.html.twig', [
-      'user_name' => !is_null($user) ? $user->getUserIdentifier() : '',
+      'user_name' => is_null($user) ? '' : $user->getUserIdentifier(),
     ]);
   }
 
@@ -73,6 +74,7 @@ class StudioController extends AbstractController
     if (is_null($studio)) {
       throw $this->createNotFoundException('Unable to find this studio');
     }
+
     /** @var User|null $user */
     $user = $this->getUser();
     $user_role = $this->studio_manager->getStudioUserRole($user, $studio);
@@ -97,7 +99,7 @@ class StudioController extends AbstractController
       'status_public' => $statusPublicStudio,
       'status_private' => $statusPrivateStudio,
       'studio' => $studio,
-      'user_name' => !is_null($this->getUser()) ? $this->getUser()->getUserIdentifier() : '',
+      'user_name' => is_null($this->getUser()) ? '' : $this->getUser()->getUserIdentifier(),
       'user_role' => $user_role,
       'members_count' => $members_count,
       'activities_count' => $activities_count,
@@ -123,6 +125,7 @@ class StudioController extends AbstractController
     if (is_null($user)) {
       throw $this->createAccessDeniedException();
     }
+
     $is_enabled = (bool) $request->request->get('is_enabled', false);
     $is_public = (bool) $request->request->get('is_public', false);
     $allow_comments = (bool) $request->request->get('allow_comments', false);
@@ -134,7 +137,7 @@ class StudioController extends AbstractController
     }
 
     $existingStudio = $this->studio_manager->findStudioByName($name);
-    if ($existingStudio) {
+    if ($existingStudio instanceof Studio) {
       return new JsonResponse(['message' => 'studio name is already taken'], Response::HTTP_CONFLICT);
     }
 
@@ -143,6 +146,7 @@ class StudioController extends AbstractController
     if (is_null($headerImg)) {
       return new JsonResponse(['message' => sprintf('"%s" successfully created the studio', $user->getUsername())], Response::HTTP_OK);
     }
+
     $newPath = 'images/default/';
     $coverPath = $this->parameter_bag->get('catrobat.resources.dir').$newPath;
     $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
@@ -150,6 +154,7 @@ class StudioController extends AbstractController
       $fs = new Filesystem();
       $fs->mkdir($coverPath);
     }
+
     $headerImg->move($coverPath, $coverName);
     $pathToSave = '/'.$newPath.$coverName;
     $studio->setCoverPath('resources'.$pathToSave);
@@ -171,19 +176,23 @@ class StudioController extends AbstractController
     if (is_null($user)) {
       throw $this->createAccessDeniedException();
     }
+
     /** @var Studio|null $studio */
     $studio = $this->studio_manager->findStudioById($id);
     if (null == $studio) {
       return new JsonResponse(['message' => 'studio not found'], Response::HTTP_NOT_FOUND);
     }
+
     $admin = $this->studio_manager->getStudioAdmin($studio);
     if (!$admin instanceof StudioUser) {
       return new JsonResponse(['message' => 'No admin found for the studio'], Response::HTTP_NOT_FOUND);
     }
+
     $admin = $admin->getUser();
     if ($this->studio_manager->isStudioPublic($studio)) {
       $this->studio_manager->addUserToStudio($admin, $studio, $user);
     }
+
     /* add to join list so admin can accept/decline or so?  for private studios */
     if (!$this->studio_manager->isStudioPublic($studio)) {
       $this->studio_manager->setJoinRequest($user, $studio, StudioJoinRequest::STATUS_PENDING);
@@ -206,7 +215,7 @@ class StudioController extends AbstractController
     }
 
     $studio = $this->studio_manager->findStudioById($id);
-    if (!$studio) {
+    if (!$studio instanceof Studio) {
       return new JsonResponse(['message' => 'studio not found'], Response::HTTP_NOT_FOUND);
     }
 
@@ -233,6 +242,7 @@ class StudioController extends AbstractController
     if (!is_null($studio)) {
       $this->redirectToRoute('index');
     }
+
     $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
     $members = $this->studio_manager->findAllStudioUsers($studio);
     $projects_per_member = [];
@@ -272,10 +282,12 @@ class StudioController extends AbstractController
     if (is_null($studio) || is_null($user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
+
     $studio_user = $this->studio_manager->findStudioUser($user, $studio);
     if (is_null($studio_user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
+
     /** @var User|null $logged_in_user */
     $logged_in_user = $this->getUser();
     $studio_user = $this->studio_manager->changeStudioUserRole($logged_in_user, $studio, $user, StudioUser::ROLE_ADMIN);
@@ -301,10 +313,12 @@ class StudioController extends AbstractController
     if (is_null($studio) || is_null($user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
+
     $studio_user = $this->studio_manager->findStudioUser($user, $studio);
     if (is_null($studio_user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
+
     $studio_user = $this->studio_manager->changeStudioUserStatus($logged_in_user, $studio, $user, StudioUser::STATUS_BANNED);
     if (!is_null($studio_user) && StudioUser::STATUS_BANNED === $studio_user->getStatus()) {
       return new JsonResponse(null, Response::HTTP_NO_CONTENT);
@@ -325,6 +339,7 @@ class StudioController extends AbstractController
     if (is_null($studio)) {
       $this->redirectToRoute('index');
     }
+
     $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
     $activities = $this->studio_manager->findAllStudioActivitiesCombined($studio);
 
@@ -345,6 +360,7 @@ class StudioController extends AbstractController
     if (is_null($project) || is_null($studio)) {
       return new JsonResponse(Response::HTTP_NOT_FOUND);
     }
+
     /** @var User|null $user */
     $user = $this->getUser();
     $this->studio_manager->deleteProjectFromStudio($user, $studio, $project);
@@ -370,6 +386,7 @@ class StudioController extends AbstractController
     if (!$comment_id || is_null($studio)) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
+
     $replies_count = null;
     /** @var User|null $user */
     $user = $this->getUser();
@@ -377,6 +394,7 @@ class StudioController extends AbstractController
     if ('true' === $isReply && $parent_id > 0) {
       $replies_count = $this->studio_manager->countCommentReplies($parent_id).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
     }
+
     $comments_count = ' ('.$this->studio_manager->countStudioComments($studio).')';
     $activities_count = $this->studio_manager->countStudioActivities($studio);
     if (is_null($this->studio_manager->findStudioCommentById($comment_id))) {
@@ -399,6 +417,7 @@ class StudioController extends AbstractController
     if ('' === $comment_text) {
       return new JsonResponse('', Response::HTTP_NOT_FOUND);
     }
+
     $replies_count = null;
     $comments_count = null;
     /** @var User|null $user */
@@ -410,6 +429,7 @@ class StudioController extends AbstractController
       $comment = $this->studio_manager->addCommentToStudio($user, $studio, $comment_text);
       $comments_count = ' ('.$this->studio_manager->countStudioComments($studio).')';
     }
+
     $activities_count = $this->studio_manager->countStudioActivities($studio);
     $avatarSrc = $comment->getUser()->getAvatar() ?? '/images/default/avatar_default.png';
     $result = '<div class="studio-comment">';
@@ -430,6 +450,7 @@ class StudioController extends AbstractController
       $result .= '<span id="info-'.$comment->getId().'">0 '.$this->translator->trans('studio.details.replies', [], 'catroweb').'</span>';
       $result .= '</div></div></div><hr class="comment-hr">';
     }
+
     $result .= '</div></div></div>';
     if ($comment->getText() === $comment_text) {
       return new JsonResponse(['comment' => $result, 'replies_count' => $replies_count,
@@ -451,11 +472,13 @@ class StudioController extends AbstractController
     if (is_null($comment)) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
+
     $rs .= $this->getCommentsAndRepliesForAjax($comment, false);
     $replies = $this->studio_manager->findCommentReplies($comment_id);
     foreach ($replies as $reply) {
       $rs .= $this->getCommentsAndRepliesForAjax($reply, true);
     }
+
     /** @var User|null $user */
     $user = $this->getUser();
     if (!is_null($user) && $this->studio_manager->isUserInStudio($user, $comment->getStudio())) {
@@ -480,6 +503,7 @@ class StudioController extends AbstractController
     if (is_null($headerImg) || is_null($studio) || is_null($this->getUser())) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
+
     $newPath = 'images/Studios/';
     $coverPath = $this->parameter_bag->get('catrobat.resources.dir').$newPath;
     $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
@@ -487,6 +511,7 @@ class StudioController extends AbstractController
       $fs = new Filesystem();
       $fs->mkdir($coverPath);
     }
+
     $headerImg->move($coverPath, $coverName);
     $pathToSave = '/'.$newPath.$coverName;
     $studio->setCoverPath('resources'.$pathToSave);
@@ -509,12 +534,14 @@ class StudioController extends AbstractController
       if (is_null($this->getUser()) || is_null($studio)) {
         return $this->redirect($request->headers->get('referer'));
       }
+
       $name = trim(strval($request->request->get('studio_name')));
       if (strlen($name) > 0) {
         $studio->setName($name);
       }
+
       $desc = trim(strval($request->request->get('studio_description')));
-      if (strlen($desc)) {
+      if (0 !== strlen($desc)) {
         $studio->setDescription($desc);
       }
 
@@ -535,10 +562,12 @@ class StudioController extends AbstractController
         $joinRequest = $this->studio_manager->findJoinRequestById($requestId);
         $this->studio_manager->updateJoinRequests($joinRequest, $switchValue, $joinRequest->getUser(), $user, $studio);
       }
+
       foreach ($approvedSwitches as $requestId => $switchValue) {
         $joinRequest = $this->studio_manager->findJoinRequestById($requestId);
         $this->studio_manager->updateJoinRequests($joinRequest, $switchValue, $joinRequest->getUser(), $user, $studio);
       }
+
       $this->studio_manager->changeStudio($user, $studio);
 
       return $this->redirect($request->headers->get('referer'));
@@ -559,6 +588,7 @@ class StudioController extends AbstractController
       if (is_null($this->getUser()) || is_null($studio)) {
         return $this->redirect($request->headers->get('referer'));
       }
+
       /** @var User $user */
       $user = $this->getUser();
       $clickedProjectsJson = $request->request->get('projects_add');
@@ -571,6 +601,7 @@ class StudioController extends AbstractController
           $this->studio_manager->addProjectToStudio($user, $studio, $project);
         }
       }
+
       $clickedRemoveProjectsJson = $request->request->get('projects_remove');
       if (strlen($clickedRemoveProjectsJson) > 0) {
         $clickedRemoveProjects = json_decode($clickedRemoveProjectsJson, true);
@@ -667,6 +698,7 @@ class StudioController extends AbstractController
       } else {
         $commentsObj['avatar'] = null;
       }
+
       $rs[] = $commentsObj;
     }
 
@@ -689,6 +721,7 @@ class StudioController extends AbstractController
       $rs .= '<i class="ms-2 material-icons text-danger">delete</i>';
       $rs .= '</a>';
     }
+
     $rs .= '<p>'.$comment->getText().'</p>';
     $rs .= '<div class="comment-info"><span class="comment-time col-6">';
     $rs .= '<span class="material-icons comment-info-icons">watch_later</span>'.$comment->getUploadDate()->format('Y-m-d').'</span>';

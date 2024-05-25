@@ -7,6 +7,7 @@ namespace App\Project\CatrobatCode\Statements;
 class NextLookStatement extends Statement
 {
   final public const string BEGIN_STRING = 'next look';
+
   final public const string END_STRING = '<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)

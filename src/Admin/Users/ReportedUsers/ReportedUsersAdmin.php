@@ -25,6 +25,7 @@ class ReportedUsersAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'reported_users';
 
+  #[\Override]
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     /** @var ProxyQuery $query */
@@ -65,6 +66,7 @@ class ReportedUsersAdmin extends AbstractAdmin
     return $query;
   }
 
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -101,6 +103,7 @@ class ReportedUsersAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter->add('username', null, [
@@ -110,6 +113,7 @@ class ReportedUsersAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('create')->remove('delete');

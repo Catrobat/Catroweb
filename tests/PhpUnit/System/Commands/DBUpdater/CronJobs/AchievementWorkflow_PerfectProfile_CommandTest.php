@@ -20,6 +20,7 @@ class AchievementWorkflow_PerfectProfile_CommandTest extends KernelTestCase
 {
   protected AchievementWorkflow_PerfectProfile_Command|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AchievementWorkflow_PerfectProfile_Command::class)

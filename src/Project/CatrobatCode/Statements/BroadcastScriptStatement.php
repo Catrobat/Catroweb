@@ -17,6 +17,7 @@ class BroadcastScriptStatement extends Statement
       '');
   }
 
+  #[\Override]
   public function execute(): string
   {
     $children = $this->executeChildren();
@@ -28,6 +29,7 @@ class BroadcastScriptStatement extends Statement
     return $code.('<br/>'.$children);
   }
 
+  #[\Override]
   public function executeChildren(): string
   {
     $code = '';

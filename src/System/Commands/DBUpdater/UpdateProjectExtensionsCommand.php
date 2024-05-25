@@ -22,6 +22,7 @@ class UpdateProjectExtensionsCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $count = 0;
@@ -76,7 +77,8 @@ class UpdateProjectExtensionsCommand extends Command
     $this->entity_manager->persist($extension);
 
     $this->entity_manager->flush();
-    $output->writeln("{$count} Extensions in the Database have been inserted/updated");
+
+    $output->writeln($count.' Extensions in the Database have been inserted/updated');
 
     return 0;
   }

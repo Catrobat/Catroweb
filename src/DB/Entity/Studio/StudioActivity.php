@@ -17,7 +17,9 @@ class StudioActivity
    * adding new constant requires adding it to the enum in the annotation of the column.
    */
   final public const string TYPE_COMMENT = 'comment';
+
   final public const string TYPE_PROJECT = 'project';
+
   final public const string TYPE_USER = 'user';
 
   private array $activity_types = [self::TYPE_COMMENT, self::TYPE_PROJECT, self::TYPE_USER];
@@ -75,6 +77,7 @@ class StudioActivity
     if (!in_array($type, $this->activity_types, true)) {
       throw new \InvalidArgumentException('invalid activity type given');
     }
+
     $this->type = $type;
 
     return $this;

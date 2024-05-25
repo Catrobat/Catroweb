@@ -20,6 +20,7 @@ class ProjectRefreshExtensionsWorkflowCommandTest extends KernelTestCase
 {
   protected MockObject|ProjectRefreshExtensionsWorkflowCommand $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ProjectRefreshExtensionsWorkflowCommand::class)

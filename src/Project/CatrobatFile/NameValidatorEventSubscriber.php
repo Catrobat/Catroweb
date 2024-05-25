@@ -17,14 +17,16 @@ class NameValidatorEventSubscriber implements EventSubscriberInterface
 
   public function validate(ExtractedCatrobatFile $file): void
   {
-    if ('' == $file->getName()) {
+    if ('' === $file->getName()) {
       throw new InvalidCatrobatFileException('errors.name.missing', 509);
     }
+
     if (strlen($file->getName()) > ProjectsRequestValidator::MAX_NAME_LENGTH) {
       throw new InvalidCatrobatFileException('errors.name.toolong', 526);
     }
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforeInsertEvent::class => 'onProjectBeforeInsert'];

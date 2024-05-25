@@ -18,6 +18,7 @@ final class MediaLibraryResponseManagerTest extends DefaultTestCase
 {
   protected MediaLibraryResponseManager|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(MediaLibraryResponseManager::class)

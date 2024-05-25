@@ -19,6 +19,7 @@ class CodeStatisticTest extends TestCase
 {
   protected \SimpleXMLElement $xml_properties;
 
+  #[\Override]
   protected function setUp(): void
   {
     $xml = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');

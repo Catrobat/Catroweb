@@ -47,6 +47,7 @@ class MediaPackage implements \Stringable
     $this->categories = new ArrayCollection();
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return (string) $this->name;

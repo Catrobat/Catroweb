@@ -20,6 +20,7 @@ class UpdateProjectExtensionsCommandTest extends KernelTestCase
 {
   protected MockObject|UpdateProjectExtensionsCommand $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UpdateProjectExtensionsCommand::class)

@@ -25,6 +25,7 @@ class CreateFollowersCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -36,6 +37,7 @@ class CreateFollowersCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $user_name = $input->getArgument('user_name');
@@ -64,6 +66,7 @@ class CreateFollowersCommand extends Command
     } catch (\Exception) {
       return 3;
     }
+
     $output->writeln($follower_name.' follows '.$user_name);
 
     return 0;

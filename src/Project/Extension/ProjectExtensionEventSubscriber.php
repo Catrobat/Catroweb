@@ -19,6 +19,7 @@ class ProjectExtensionEventSubscriber implements EventSubscriberInterface
     $this->extension_manager->addExtensions($event->getExtractedFile(), $event->getProjectEntity());
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforePersistEvent::class => 'onEvent'];

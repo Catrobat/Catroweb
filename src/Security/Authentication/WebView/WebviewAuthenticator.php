@@ -37,7 +37,7 @@ class WebviewAuthenticator extends AbstractAuthenticator
    *
    * @var string
    */
-  private const COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
+  private const string COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
 
   public function __construct(
     private readonly EntityManagerInterface $em,
@@ -55,6 +55,7 @@ class WebviewAuthenticator extends AbstractAuthenticator
    *
    * {@inheritdoc}
    */
+  #[\Override]
   public function supports(Request $request): ?bool
   {
     $this->request_stack->getSession()->set('webview-auth', false);
@@ -65,6 +66,7 @@ class WebviewAuthenticator extends AbstractAuthenticator
   /**
    * @throws NonUniqueResultException
    */
+  #[\Override]
   public function authenticate(Request $request): Passport
   {
     $token = $request->cookies->get(self::COOKIE_TOKEN_KEY);
@@ -88,6 +90,7 @@ class WebviewAuthenticator extends AbstractAuthenticator
     return new SelfValidatingPassport(new UserBadge($user['username']));
   }
 
+  #[\Override]
   public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
   {
     $this->request_stack->getSession()->set('webview-auth', true);
@@ -99,6 +102,7 @@ class WebviewAuthenticator extends AbstractAuthenticator
   /**
    * @throws HttpException
    */
+  #[\Override]
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
   {
     throw new UnauthorizedHttpException('catro-auth', $exception->getMessage());

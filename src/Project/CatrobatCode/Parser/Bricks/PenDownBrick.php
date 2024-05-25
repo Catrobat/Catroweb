@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PenDownBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PEN_DOWN_BRICK;

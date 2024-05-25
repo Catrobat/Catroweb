@@ -44,6 +44,7 @@ class ProjectPostUpdateNotifier
       if (!$project->getTags()->contains($coding_jam_09_2021_tag)) {
         $project->addTag($coding_jam_09_2021_tag);
       }
+
       $this->achievement_manager->unlockAchievementCodingJam092021($user);
     }
   }

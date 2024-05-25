@@ -16,14 +16,23 @@ use Doctrine\ORM\Mapping as ORM;
 class Flavor implements \Stringable
 {
   final public const string POCKETCODE = 'pocketcode';
+
   final public const string POCKETALICE = 'pocketalice';
+
   final public const string POCKETGALAXY = 'pocketgalaxy';
+
   final public const string PHIROCODE = 'phirocode';
+
   final public const string LUNA = 'luna';
+
   final public const string CREATE_AT_SCHOOL = 'create@school';
+
   final public const string EMBROIDERY = 'embroidery';
+
   final public const string ARDUINO = 'arduino';
+
   final public const string MINDSTORMS = 'mindstorms';
+
   final public const array ALL = [
     self::POCKETCODE,
     self::POCKETALICE,
@@ -55,6 +64,7 @@ class Flavor implements \Stringable
     $this->media_package_files = new ArrayCollection();
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return $this->getName() ?? '';
@@ -89,6 +99,7 @@ class Flavor implements \Stringable
     if ($this->media_package_files->contains($media_package_file)) {
       return;
     }
+
     $this->media_package_files[] = $media_package_file;
   }
 
@@ -97,6 +108,7 @@ class Flavor implements \Stringable
     if (!$this->media_package_files->contains($media_package_file)) {
       return;
     }
+
     $this->media_package_files->removeElement($media_package_file);
   }
 

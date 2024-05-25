@@ -18,6 +18,7 @@ class FlavorsAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'flavors';
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection
@@ -34,6 +35,7 @@ class FlavorsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list

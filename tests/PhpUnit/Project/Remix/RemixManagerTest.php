@@ -40,6 +40,7 @@ class RemixManagerTest extends TestCase
 
   private MockObject|ProgramRemixRepository $program_remix_repository;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->entity_manager = $this->createMock(EntityManager::class);
@@ -86,7 +87,7 @@ class RemixManagerTest extends TestCase
       ->will($this->returnCallback(function (ScratchProgram $scratch_project) use (
         $expected_id_of_first_program, $expected_name_of_first_program,
         $expected_description_of_first_program, $expected_username_of_first_program
-      ) {
+      ): void {
         $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
         $this->assertSame($expected_id_of_first_program, $scratch_project->getId());
         $this->assertSame($expected_name_of_first_program, $scratch_project->getName());
@@ -115,7 +116,7 @@ class RemixManagerTest extends TestCase
     $this->entity_manager
       ->expects($this->atLeastOnce())
       ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
-      ->will($this->returnCallback(function (ScratchProgram $scratch_project) use ($expected_id_of_first_program) {
+      ->will($this->returnCallback(function (ScratchProgram $scratch_project) use ($expected_id_of_first_program): void {
         $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
         $this->assertSame($expected_id_of_first_program, $scratch_project->getId());
         $this->assertNull($scratch_project->getName());
@@ -166,7 +167,7 @@ class RemixManagerTest extends TestCase
         $expected_id_of_first_program, $expected_name_of_first_program,
         $expected_description_of_first_program, $expected_username_of_first_program,
         $expected_id_of_second_program, $expected_name_of_second_program, $expected_username_of_second_program
-      ) {
+      ): void {
         $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
         if ($scratch_project->getId() === $expected_id_of_first_program) {
           $this->assertSame($expected_name_of_first_program, $scratch_project->getName());
@@ -1195,19 +1196,17 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @param Program|MockObject $program_entity
-   *
    * @throws \Exception
    */
-  private function checkRemixRelations($program_entity, array $parent_data, array $expected_relations): void
+  private function checkRemixRelations(Program|MockObject $program_entity, array $parent_data, array $expected_relations): void
   {
-    /** @var MockObject|Program $program_entity */
     $expected_relations_map = [];
     $expected_catrobat_relations = [];
     foreach ($expected_relations as $expected_relation) {
       if ($expected_relation instanceof ProgramRemixRelation) {
         $expected_catrobat_relations[] = $expected_relation;
       }
+
       $expected_relations_map[$expected_relation->getUniqueKey()] = $expected_relation;
     }
 
@@ -1215,25 +1214,24 @@ class RemixManagerTest extends TestCase
     $program_remix_repository_find_map = [];
 
     foreach ($parent_data as $parent_id => $data) {
-      $catrobat_relations = array_filter($data['existingRelations'], fn ($relation) => $relation instanceof ProgramRemixRelation);
+      $catrobat_relations = array_filter($data['existingRelations'], static fn ($relation): bool => $relation instanceof ProgramRemixRelation);
       if ($data['exists']) {
         $program_remix_repository_find_map[(string) $parent_id] = $catrobat_relations;
       }
+
       $program_repository_find_map[$parent_id] = $data['exists'] ? $data['entity'] : null;
     }
 
     $this->program_repository
       ->expects($this->any())
       ->method('find')
-      ->will($this->returnCallback(function ($id) use ($program_repository_find_map) {
-        return $program_repository_find_map[$id] ?? null;
-      }))
+      ->will($this->returnCallback(static fn ($id) => $program_repository_find_map[$id] ?? null))
     ;
 
     $this->program_remix_repository
       ->expects($this->any())
       ->method('findBy')
-      ->will($this->returnCallback(function ($criteria) use ($program_remix_repository_find_map) {
+      ->will($this->returnCallback(static function ($criteria) use ($program_remix_repository_find_map) {
         $descendant_id = $criteria['descendant_id'] ?? null;
 
         return $program_remix_repository_find_map[$descendant_id] ?? [];
@@ -1243,13 +1241,12 @@ class RemixManagerTest extends TestCase
     $this->entity_manager
       ->expects($this->atLeastOnce())
       ->method('persist')
-      ->will($this->returnCallback(function ($arg) use ($program_entity, &$expected_relations_map) {
+      ->will($this->returnCallback(static function ($arg) use ($program_entity, &$expected_relations_map): void {
         if ($arg instanceof ProgramRemixRelation || $arg instanceof ScratchProgramRemixRelation) {
           $relation = $arg;
           Assert::assertArrayHasKey($relation->getUniqueKey(), $expected_relations_map);
           unset($expected_relations_map[$relation->getUniqueKey()]);
         }
-
         if ($arg instanceof Program) {
           Assert::assertEquals($arg, $program_entity);
         }
@@ -1260,8 +1257,8 @@ class RemixManagerTest extends TestCase
 
     $remixes_data = [];
     foreach ($parent_data as $parent_id => $data) {
-      $remixes_data[] = new RemixData(!$data['isScratch'] ? '/app/project/'.$parent_id
-        : 'https://scratch.mit.edu/projects/'.$parent_id.'/');
+      $remixes_data[] = new RemixData($data['isScratch'] ? 'https://scratch.mit.edu/projects/'.$parent_id.'/'
+        : '/app/project/'.$parent_id);
     }
 
     Assert::assertCount(count($expected_relations), $expected_relations_map);
@@ -1293,6 +1290,7 @@ class RemixManagerTest extends TestCase
           ->willReturn(true)
         ;
       }
+
       $array[] = $program_entity;
     }
 
@@ -1333,7 +1331,9 @@ class RemixManagerTest extends TestCase
     ;
 
     $array = [];
-    array_push($array, $program_entity, $first_parent_entity, $second_parent_entity);
+    $array[] = $program_entity;
+    $array[] = $first_parent_entity;
+    $array[] = $second_parent_entity;
 
     return $array;
   }

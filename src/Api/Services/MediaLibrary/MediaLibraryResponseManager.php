@@ -42,7 +42,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
 
   public function createMediaFileResponse(MediaPackageFile $media_package_file, ?string $attributes): MediaFileResponse
   {
-    if (empty($attributes)) {
+    if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = ['id', 'name'];
     } elseif ('ALL' === $attributes) {
       $attributes_list = ['id', 'name', 'flavors', 'packages', 'category', 'author', 'extension', 'download_url', 'size', 'file_type'];
@@ -54,24 +54,31 @@ class MediaLibraryResponseManager extends AbstractResponseManager
     if (in_array('id', $attributes_list, true)) {
       $data['id'] = $media_package_file->getId();
     }
+
     if (in_array('name', $attributes_list, true)) {
       $data['name'] = $media_package_file->getName();
     }
+
     if (in_array('flavors', $attributes_list, true)) {
       $data['flavors'] = $media_package_file->getFlavorNames();
     }
+
     if (in_array('packages', $attributes_list, true)) {
       $data['packages'] = $media_package_file->getCategory()->getPackageNames();
     }
+
     if (in_array('category', $attributes_list, true)) {
       $data['category'] = $media_package_file->getCategory()->getName();
     }
+
     if (in_array('author', $attributes_list, true)) {
       $data['author'] = $media_package_file->getAuthor();
     }
+
     if (in_array('extension', $attributes_list, true)) {
       $data['extension'] = $media_package_file->getExtension();
     }
+
     if (in_array('download_url', $attributes_list, true)) {
       $data['download_url'] = $this->url_generator->generate(
         'download_media',
@@ -133,6 +140,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
         if (0 != $offset) {
           $offset -= count($media_package_files);
         }
+
         continue;
       }
 
@@ -142,9 +150,11 @@ class MediaLibraryResponseManager extends AbstractResponseManager
           --$offset;
           continue;
         }
+
         if (count($response_array) === $limit) {
           break;
         }
+
         $response_array[] = $this->createMediaFileResponse($media_package_file, $attributes);
       }
     }

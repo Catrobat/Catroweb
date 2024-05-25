@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class MaintenanceInformationAdmin extends AbstractAdmin
 {
   protected $baseRoutePattern = 'maintenance information';
+
   protected $baseRouteName = 'maintenance information';
 
   public function __construct(
@@ -42,6 +43,7 @@ class MaintenanceInformationAdmin extends AbstractAdmin
     $this->entityManager->flush();
   }
 
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     $form
@@ -97,6 +99,7 @@ class MaintenanceInformationAdmin extends AbstractAdmin
     $this->updateLtmCodes();
   }
 
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -105,6 +108,7 @@ class MaintenanceInformationAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -127,6 +131,7 @@ class MaintenanceInformationAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection

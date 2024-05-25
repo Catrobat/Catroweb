@@ -18,6 +18,7 @@ class CronJobsAdminTest extends DefaultTestCase
 {
   protected CronJobsAdmin|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(CronJobsAdmin::class)

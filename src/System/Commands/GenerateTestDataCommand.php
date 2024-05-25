@@ -35,6 +35,7 @@ class GenerateTestDataCommand extends Command
     $this->target_directory = (string) $parameter_bag->get('catrobat.test.directory.target');
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -42,6 +43,7 @@ class GenerateTestDataCommand extends Command
     ;
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     /** @var QuestionHelper $question_helper */
@@ -76,6 +78,7 @@ class GenerateTestDataCommand extends Command
       foreach ($finder as $dir) {
         $this->compressor->compress($this->target_directory.$dir->getRelativePathname(), $this->target_directory, $dir->getRelativePathname());
       }
+
       $output->writeln('<info>Test data generated</info>');
     }
 

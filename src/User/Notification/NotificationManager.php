@@ -25,6 +25,7 @@ class NotificationManager
     foreach ($notifications as $notification) {
       $this->em->persist($notification);
     }
+
     $this->em->flush();
   }
 
@@ -40,6 +41,7 @@ class NotificationManager
       $notification->setSeen(true);
       $this->em->persist($notification);
     }
+
     $this->em->flush();
   }
 
@@ -48,6 +50,7 @@ class NotificationManager
     foreach ($notifications as $notification) {
       $this->em->remove($notification);
     }
+
     $this->em->flush();
   }
 }

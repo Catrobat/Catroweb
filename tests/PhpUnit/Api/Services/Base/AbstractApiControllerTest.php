@@ -20,6 +20,7 @@ final class AbstractApiControllerTest extends DefaultTestCase
 {
   protected AbstractApiFacade|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AbstractApiController::class)

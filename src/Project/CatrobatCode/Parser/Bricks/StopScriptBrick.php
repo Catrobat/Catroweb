@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class StopScriptBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::STOP_SCRIPT_BRICK;

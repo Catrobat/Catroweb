@@ -21,9 +21,11 @@ class ReportedProjectsController extends CRUDController
     if (null === $object) {
       throw new NotFoundHttpException();
     }
+
     $project = $object->getProgram();
     $project->setVisible(true);
     $project->setApproved(true);
+
     $object->setState(3);
     $this->admin->update($object);
     $this->addFlash('sonata_flash_success', 'Project '.$object->getId().' is no longer reported');
@@ -38,9 +40,11 @@ class ReportedProjectsController extends CRUDController
     if (null === $object) {
       throw new NotFoundHttpException();
     }
+
     $project = $object->getProgram();
     $project->setVisible(false);
     $project->setApproved(false);
+
     $object->setState(2);
     $this->admin->update($object);
     $this->addFlash('sonata_flash_error', 'Project '.$object->getId().' report got accepted');

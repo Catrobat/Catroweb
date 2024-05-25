@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ChooseCameraBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::CHOOSE_CAMERA_BRICK;

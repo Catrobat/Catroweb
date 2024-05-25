@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class RaspiSendDigitalValueBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::RASPI_SEND_DIGITAL_VALUE_BRICK;

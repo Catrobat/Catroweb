@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class LoopEndlessBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::LOOP_ENDLESS_BRICK;

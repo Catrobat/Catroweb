@@ -20,6 +20,7 @@ class JenkinsDispatcher
     if (!isset($config['url'])) {
       throw new \Exception();
     }
+
     $this->config = $config;
   }
 

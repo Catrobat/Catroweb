@@ -51,14 +51,16 @@ class SecurityController extends AbstractController
     $violations = $validator->validate($create_request);
     foreach ($violations as $violation) {
       $retArray['statusCode'] = Response::HTTP_UNAUTHORIZED;
-      if ('errors.password.short' == $violation->getMessageTemplate()) {
+      if ('errors.password.short' === $violation->getMessageTemplate()) {
         $retArray['statusCode'] = 753;
-      } elseif ('errors.email.invalid' == $violation->getMessageTemplate()) {
+      } elseif ('errors.email.invalid' === $violation->getMessageTemplate()) {
         $retArray['statusCode'] = 765;
       }
+
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
     }
+
     if (0 == count($violations)) {
       if (null != $user_manager->findUserByEmail($create_request->mail)) {
         $retArray['statusCode'] = 757;
@@ -82,6 +84,7 @@ class SecurityController extends AbstractController
         $retArray['token'] = $user->getUploadToken();
       }
     }
+
     $retArray['preHeaderMessages'] = '';
 
     return new JsonResponse($retArray);
@@ -98,19 +101,22 @@ class SecurityController extends AbstractController
     $violations = $validator->validate($login_request);
     foreach ($violations as $violation) {
       $retArray['statusCode'] = 601;
-      if ('errors.password.short' == $violation->getMessageTemplate()) {
+      if ('errors.password.short' === $violation->getMessageTemplate()) {
         $retArray['statusCode'] = 753;
-      } elseif ('errors.email.invalid' == $violation->getMessageTemplate()) {
+      } elseif ('errors.email.invalid' === $violation->getMessageTemplate()) {
         $retArray['statusCode'] = 765;
       }
+
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
     }
+
     if (count($violations) > 0) {
       $retArray['preHeaderMessages'] = '';
 
       return new JsonResponse($retArray);
     }
+
     $username = (string) $request->request->get('registrationUsername');
     $password = (string) $request->request->get('registrationPassword');
     /** @var User|null $user */
@@ -131,6 +137,7 @@ class SecurityController extends AbstractController
         $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
       }
     }
+
     $retArray['preHeaderMessages'] = '';
 
     return new JsonResponse($retArray);

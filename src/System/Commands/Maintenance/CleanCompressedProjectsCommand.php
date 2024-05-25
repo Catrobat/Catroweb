@@ -27,6 +27,7 @@ class CleanCompressedProjectsCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $files = glob($this->compressed_path.'*'); // get all file names

@@ -29,7 +29,7 @@ class RequestHelper
   public function isDebugBuildRequest(): bool
   {
     $request = $this->request_stack->getCurrentRequest();
-    if (null === $request) {
+    if (!$request instanceof Request) {
       return false;
     }
 
@@ -47,7 +47,7 @@ class RequestHelper
   public function getThemeDefinedInRequest(): string
   {
     $request = $this->request_stack->getCurrentRequest();
-    if (null === $request) {
+    if (!$request instanceof Request) {
       return '';
     }
 

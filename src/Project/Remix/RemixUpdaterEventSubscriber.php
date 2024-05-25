@@ -9,6 +9,7 @@ use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Scratch\AsyncHttpClient;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -18,9 +19,13 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
 
   private readonly string $migration_lock_file_path;
 
-  public function __construct(private readonly RemixManager $remix_manager, private readonly AsyncHttpClient $async_http_client, private readonly RouterInterface $router,
-    string $kernel_root_dir)
-  {
+  public function __construct(
+    private readonly RemixManager $remix_manager,
+    private readonly AsyncHttpClient $async_http_client,
+    private readonly RouterInterface $router,
+    private readonly LoggerInterface $logger,
+    string $kernel_root_dir
+  ) {
     $app_root_dir = $kernel_root_dir;
     $this->migration_lock_file_path = $app_root_dir.'/'.self::MIGRATION_LOCK_FILE_NAME;
   }
@@ -30,7 +35,11 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
    */
   public function onProjectAfterInsert(ProjectAfterInsertEvent $event): void
   {
-    $this->update($event->getExtractedFile(), $event->getProjectEntity());
+    try {
+      $this->update($event->getExtractedFile(), $event->getProjectEntity());
+    } catch (\Throwable $e) {
+      $this->logger->error('RemixUpdaterEventSubscriber failed: '.$e->getMessage());
+    }
   }
 
   /**
@@ -45,7 +54,7 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
       $project->isInitialVersion(),
       $this->remix_manager->getProjectRepository()
     );
-    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
+    $scratch_remixes_data = array_filter($remixes_data, static fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
     $scratch_info_data = [];
     $project_xml_properties = $file->getProjectXmlProperties();
     $remix_url_string = $file->getRemixUrlsString();
@@ -57,8 +66,8 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
       $remix_url_string = '';
     }
 
-    if (count($scratch_remixes_data) > 0) {
-      $scratch_ids = array_map(fn (RemixData $data): string => $data->getProjectId(), $scratch_remixes_data);
+    if ([] !== $scratch_remixes_data) {
+      $scratch_ids = array_map(static fn (RemixData $data): string => $data->getProjectId(), $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProjectIds($scratch_ids);
       $not_existing_scratch_ids = array_diff($scratch_ids, $existing_scratch_ids);
       $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails($not_existing_scratch_ids);
@@ -69,12 +78,14 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
       $this->remix_manager->addScratchProjects($scratch_info_data);
       $this->remix_manager->addRemixes($project, $remixes_data);
     }
+
     $project_xml_properties->header->remixOf = $remix_url_string;
     $project_xml_properties->header->url = $this->router->generate('program', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
     $project_xml_properties->header->userHandle = $project->getUser()->getUsername();
     $file->saveProjectXmlProperties();
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectAfterInsertEvent::class => 'onProjectAfterInsert'];

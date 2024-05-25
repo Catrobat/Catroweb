@@ -10,12 +10,12 @@ use Psr\Log\LoggerInterface;
 
 class GoogleTranslateApi implements TranslationApiInterface
 {
-  private const LONG_LANGUAGE_CODE = [
+  private const array LONG_LANGUAGE_CODE = [
     'zh-CN',
     'zh-TW',
   ];
 
-  private const SUPPORTED_LANGUAGE_CODE = [
+  private const array SUPPORTED_LANGUAGE_CODE = [
     'af',
     'am',
     'ar',
@@ -124,6 +124,7 @@ class GoogleTranslateApi implements TranslationApiInterface
     'zh-TW',
     'zu',
   ];
+
   private readonly TranslationApiHelper $helper;
 
   public function __construct(private readonly TranslateClient $client, private readonly LoggerInterface $logger, private readonly int $short_text_length)
@@ -131,6 +132,7 @@ class GoogleTranslateApi implements TranslationApiInterface
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
 
+  #[\Override]
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
     $target_language = $this->helper->transformLanguageCode($target_language);
@@ -142,8 +144,8 @@ class GoogleTranslateApi implements TranslationApiInterface
         'target' => $target_language,
         'format' => 'text',
       ]);
-    } catch (ServiceException $e) {
-      $this->logger->error("Google translate client exception, source: {$source_language}, target: {$target_language}, text: {$text}, message: {$e->getMessage()}");
+    } catch (ServiceException $serviceException) {
+      $this->logger->error(sprintf('Google translate client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $serviceException->getMessage()));
 
       return null;
     }
@@ -157,11 +159,13 @@ class GoogleTranslateApi implements TranslationApiInterface
     if (null == $source_language) {
       $translation_result->detected_source_language = $result['source'];
     }
+
     $translation_result->translation = $result['text'];
 
     return $translation_result;
   }
 
+  #[\Override]
   public function getPreference(string $text, ?string $source_language, string $target_language): float
   {
     $target_language = $this->helper->transformLanguageCode($target_language);

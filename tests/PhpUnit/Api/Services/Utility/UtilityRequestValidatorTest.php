@@ -18,6 +18,7 @@ final class UtilityRequestValidatorTest extends DefaultTestCase
 {
   protected MockObject|UtilityRequestValidator $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UtilityRequestValidator::class)

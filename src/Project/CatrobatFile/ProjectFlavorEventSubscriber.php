@@ -31,6 +31,7 @@ class ProjectFlavorEventSubscriber implements EventSubscriberInterface
     }
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforePersistEvent::class => 'onEvent'];

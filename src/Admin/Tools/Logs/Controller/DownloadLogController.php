@@ -26,6 +26,7 @@ class DownloadLogController extends AbstractController
     if (is_null($user) || !$user->hasRole('ROLE_SUPER_ADMIN')) {
       throw new AuthenticationException();
     }
+
     $fileName = (string) $request->request->get('file');
     $path = LogsController::LOG_DIR;
     $finder = new Finder();
@@ -43,6 +44,7 @@ class DownloadLogController extends AbstractController
         return $response;
       }
     }
+
     throw new NotFoundHttpException();
   }
 }

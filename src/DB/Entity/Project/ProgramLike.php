@@ -16,13 +16,19 @@ use Doctrine\ORM\Mapping as ORM;
 class ProgramLike implements \Stringable
 {
   final public const int TYPE_NONE = 0;
+
   final public const int TYPE_THUMBS_UP = 1;
+
   final public const int TYPE_SMILE = 2;
+
   final public const int TYPE_LOVE = 3;
+
   final public const int TYPE_WOW = 4;
 
   final public const string ACTION_ADD = 'add';
+
   final public const string ACTION_REMOVE = 'remove';
+
   // -> new types go here...
 
   public static array $VALID_TYPES = [
@@ -78,6 +84,7 @@ class ProgramLike implements \Stringable
     $this->setType($type);
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return $this->program.'';
@@ -94,7 +101,7 @@ class ProgramLike implements \Stringable
   #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
-    if (null === $this->getCreatedAt()) {
+    if (!$this->getCreatedAt() instanceof \DateTime) {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }

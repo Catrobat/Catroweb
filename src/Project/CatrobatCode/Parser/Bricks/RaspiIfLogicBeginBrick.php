@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class RaspiIfLogicBeginBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::RASPI_IF_LOGIC_BEGIN_BRICK;

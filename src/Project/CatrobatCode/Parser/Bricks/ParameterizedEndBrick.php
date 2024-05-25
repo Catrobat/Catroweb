@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ParameterizedEndBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PARAMETERIZED_END_BRICK;

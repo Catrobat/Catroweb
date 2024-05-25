@@ -18,6 +18,7 @@ final class AuthenticationApiProcessorTest extends DefaultTestCase
 {
   protected AuthenticationApiProcessor|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AuthenticationApiProcessor::class)

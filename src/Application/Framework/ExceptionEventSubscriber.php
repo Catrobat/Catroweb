@@ -46,6 +46,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
         break;
       }
     }
+
     if (!$applicationRequest) {
       return $event->getResponse();
     }
@@ -79,6 +80,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
     return !str_starts_with($requestUri, '/'.$theme.'/api/') && !str_starts_with($requestUri, '/'.$theme.'/ci/') && !str_starts_with($requestUri, '/'.$theme.'/download/');
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::EXCEPTION => 'onKernelException'];

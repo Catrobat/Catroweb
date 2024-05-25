@@ -12,6 +12,7 @@ class ProxyTokenGenerator extends TokenGenerator
   {
   }
 
+  #[\Override]
   public function generateToken(): string
   {
     return $this->generator->generateToken();

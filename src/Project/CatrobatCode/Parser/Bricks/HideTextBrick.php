@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class HideTextBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::HIDE_TEXT_BRICK;

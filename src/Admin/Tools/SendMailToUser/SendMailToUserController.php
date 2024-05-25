@@ -9,6 +9,7 @@ use App\System\Mail\MailerAdapter;
 use App\User\UserManager;
 use Psr\Log\LoggerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
@@ -28,6 +29,7 @@ class SendMailToUserController extends CRUDController
   ) {
   }
 
+  #[\Override]
   public function listAction(Request $request): Response
   {
     return $this->renderWithExtraParams('Admin/Tools/send_mail_to_user.html.twig');
@@ -40,6 +42,7 @@ class SendMailToUserController extends CRUDController
     if (!$user) {
       return new Response('User does not exist', Response::HTTP_BAD_REQUEST);
     }
+
     $subject = (string) $request->query->get('subject');
     if ('' === $subject) {
       return new Response('Empty subject!', Response::HTTP_BAD_REQUEST);
@@ -49,6 +52,7 @@ class SendMailToUserController extends CRUDController
     if ('' === $messageText) {
       return new Response('Empty message!', Response::HTTP_BAD_REQUEST);
     }
+
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
     $mailTo = $user->getEmail();
     $this->mailer->send(
@@ -76,7 +80,7 @@ class SendMailToUserController extends CRUDController
   public function renderConfirmation(Request $request): Response
   {
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
-    if (!$user) {
+    if (!$user instanceof UserInterface) {
       return new Response('User does not exist', Response::HTTP_NOT_FOUND);
     }
 
@@ -101,7 +105,7 @@ class SendMailToUserController extends CRUDController
   public function renderReset(Request $request): Response
   {
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
-    if (!$user) {
+    if (!$user instanceof UserInterface) {
       return new Response('User does not exist', Response::HTTP_NOT_FOUND);
     }
 
@@ -129,7 +133,7 @@ class SendMailToUserController extends CRUDController
   public function renderBasic(Request $request): Response
   {
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
-    if (!$user) {
+    if (!$user instanceof UserInterface) {
       return new Response('User does not exist', Response::HTTP_NOT_FOUND);
     }
 

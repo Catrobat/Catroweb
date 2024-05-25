@@ -31,6 +31,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
   /**
    * @throws \ReflectionException
    */
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(MediaLibraryApi::class)

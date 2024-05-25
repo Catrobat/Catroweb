@@ -54,6 +54,7 @@ class ImageRepository
     if (file_exists($filename)) {
       unlink($filename);
     }
+
     $thumb->writeImage($filename);
     chmod($filename, 0777);
     $thumb->destroy();
@@ -66,6 +67,7 @@ class ImageRepository
     } else {
       $path = $this->example_dir.$this->generateFileNameFromId($id, $extension, false);
     }
+
     if (is_file($path)) {
       unlink($path);
     }

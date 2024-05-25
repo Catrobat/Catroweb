@@ -96,6 +96,7 @@ class MediaPackageController extends AbstractController
         $categories_of_found_files[] = $found_media_file->getCategory();
       }
     }
+
     $categories = $this->sortCategoriesFlavoredFirst($categories_of_found_files, $flavor, $translator);
 
     return $this->render('MediaLibrary/media_library_package.html.twig', [
@@ -104,7 +105,7 @@ class MediaPackageController extends AbstractController
       'package' => $package_name,
       'categories' => $categories,
       'mediaDir' => '/'.$this->catrobat_mediapackage_path,
-      'foundResults' => (count($found_media_files) ? true : false),
+      'foundResults' => ((bool) count($found_media_files)),
       'resultsCount' => is_countable($found_media_files) ? count($found_media_files) : 0,
       'mediaSearchPath' => $url_generator->generate(
         'open_api_server_mediaLibrary_mediafilessearchget',
@@ -154,7 +155,7 @@ class MediaPackageController extends AbstractController
       ];
     }
 
-    usort($categories, fn ($category_a, $category_b): int => $category_b['priority'] <=> $category_a['priority']);
+    usort($categories, static fn ($category_a, $category_b): int => $category_b['priority'] <=> $category_a['priority']);
 
     return $categories;
   }

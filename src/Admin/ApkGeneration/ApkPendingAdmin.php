@@ -26,6 +26,7 @@ class ApkPendingAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'apk_pending';
 
+  #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'apk_request_time';
@@ -45,6 +46,7 @@ class ApkPendingAdmin extends AbstractAdmin
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
+  #[\Override]
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     /** @var ProxyQuery $query */
@@ -65,6 +67,7 @@ class ApkPendingAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -88,6 +91,7 @@ class ApkPendingAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -122,6 +126,7 @@ class ApkPendingAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->add('resetApkBuildStatus', $this->getRouterIdParameter().'/resetApkBuildStatus');

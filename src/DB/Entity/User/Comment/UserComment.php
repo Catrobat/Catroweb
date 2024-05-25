@@ -79,6 +79,7 @@ class UserComment implements \Stringable
    */
   public ?int $number_of_replies = null;
 
+  #[\Override]
   public function __toString(): string
   {
     return $this->text ?? '';

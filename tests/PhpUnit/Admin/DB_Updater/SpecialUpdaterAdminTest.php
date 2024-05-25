@@ -18,6 +18,7 @@ class SpecialUpdaterAdminTest extends DefaultTestCase
 {
   protected MockObject|SpecialUpdaterAdmin $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(SpecialUpdaterAdmin::class)

@@ -17,6 +17,7 @@ final class AchievementManagerTest extends DefaultTestCase
 {
   protected AchievementManager|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AchievementManager::class)

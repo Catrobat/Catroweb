@@ -10,7 +10,9 @@ use App\Utils\RequestHelper;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class AuthenticationManager
 {
@@ -22,9 +24,9 @@ class AuthenticationManager
   {
     $token = $this->token_storage->getToken();
 
-    if (!$token) {
+    if (!$token instanceof TokenInterface) {
       $tokenAsString = $this->extractTokenFromRequest();
-      if (!empty($tokenAsString)) {
+      if (null !== $tokenAsString && '' !== $tokenAsString && '0' !== $tokenAsString) {
         return $this->getUserFromAuthenticationToken($tokenAsString);
       }
 
@@ -35,7 +37,7 @@ class AuthenticationManager
 
     $user = $token->getUser();
     if (!($user instanceof User)) {
-      $user = null;
+      return null;
     }
 
     return $user;
@@ -55,7 +57,7 @@ class AuthenticationManager
     }
 
     $user = $this->user_manager->findUserByUsername($payload[$idClaim]);
-    if (null === $user || $user instanceof User) {
+    if (!$user instanceof UserInterface || $user instanceof User) {
       return $user;
     }
 
@@ -68,6 +70,7 @@ class AuthenticationManager
     if (null === $refreshToken) {
       return false;
     }
+
     $this->refresh_manager->delete($refreshToken);
 
     return true;

@@ -143,7 +143,7 @@ class StudioManager
 
   public function addAdminToStudio(User $admin, Studio $studio, string $role = StudioUser::ROLE_ADMIN): ?StudioUser
   {
-    if (!$this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN == $role) {
+    if (!$this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN === $role) {
       $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
 
       return $this->createStudioUser($admin, $studio, $activity, $role);
@@ -188,12 +188,15 @@ class StudioManager
     if (!$this->isUserInStudio($admin, $studio) || !$this->isUserAStudioAdmin($admin, $studio)) {
       return null;
     }
+
     $studioUser = $this->findStudioUser($user_to_change, $studio);
     if (is_null($studioUser)) {
       return null;
     }
+
     $studioUser->setUpdatedOn(new \DateTime('now'));
     $studioUser->setStatus($status);
+
     $this->entity_manager->persist($studioUser);
     $this->entity_manager->flush();
 
@@ -205,12 +208,15 @@ class StudioManager
     if (!$this->isUserInStudio($admin, $studio) || !$this->isUserAStudioAdmin($admin, $studio)) {
       return null;
     }
+
     $studioUser = $this->findStudioUser($user_to_change, $studio);
     if (is_null($studioUser)) {
       return null;
     }
+
     $studioUser->setUpdatedOn(new \DateTime('now'));
     $studioUser->setRole($role);
+
     $this->entity_manager->persist($studioUser);
     $this->entity_manager->flush();
 
@@ -248,6 +254,7 @@ class StudioManager
       foreach ($replies as $reply) {
         $this->entity_manager->remove($reply);
       }
+
       $this->entity_manager->remove($comment);
       $this->entity_manager->flush();
     }
@@ -461,14 +468,14 @@ class StudioManager
 
   public function updateJoinRequests(StudioJoinRequest $joinRequest, string $switchValue, User $user, User $admin, Studio $studio): StudioJoinRequest
   {
-    if ('pending' == $joinRequest->getStatus() && '1' == $switchValue) {
+    if ('pending' == $joinRequest->getStatus() && '1' === $switchValue) {
       $joinRequest->setStatus('approved');
       $this->addUserToStudio($admin, $studio, $user);
     /* ---Notification*-- */
-    } elseif ('pending' == $joinRequest->getStatus() && '0' == $switchValue) {
+    } elseif ('pending' == $joinRequest->getStatus() && '0' === $switchValue) {
       $joinRequest->setStatus('declined');
     /* ---Notification*-- */
-    } elseif ('declined' == $joinRequest->getStatus() && '0' == $switchValue) {
+    } elseif ('declined' == $joinRequest->getStatus() && '0' === $switchValue) {
       $joinRequest->setStatus('approved');
       $this->addUserToStudio($admin, $studio, $user);
       /* ---Notification*-- */

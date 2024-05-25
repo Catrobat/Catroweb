@@ -18,6 +18,7 @@ final class ProjectsApiFacadeTest extends DefaultTestCase
 {
   protected MockObject|ProjectsApiFacade $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ProjectsApiFacade::class)

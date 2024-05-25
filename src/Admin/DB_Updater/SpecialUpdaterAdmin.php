@@ -16,6 +16,7 @@ class SpecialUpdaterAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'special_updater';
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection

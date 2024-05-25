@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
  */
 class CategoriesTest extends TestCase
 {
+  #[\Override]
   protected function setUp(): void
   {
   }

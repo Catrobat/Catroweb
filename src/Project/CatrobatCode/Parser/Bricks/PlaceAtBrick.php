@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PlaceAtBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PLACE_AT_BRICK;

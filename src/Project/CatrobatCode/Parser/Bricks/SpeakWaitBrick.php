@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class SpeakWaitBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::SPEAK_WAIT_BRICK;

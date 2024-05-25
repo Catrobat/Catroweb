@@ -17,12 +17,14 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
     if (!str_starts_with($event->getRequest()->getPathInfo(), '/api')) {
       return;
     }
+
     $exception = $event->getThrowable();
     $statusCode = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
     $response = new Response(null, $statusCode);
     $event->setResponse($response);
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [

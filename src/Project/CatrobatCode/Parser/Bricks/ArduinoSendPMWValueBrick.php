@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ArduinoSendPMWValueBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::ARDUINO_SEND_PMW_VALUE_BRICK;

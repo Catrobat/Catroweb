@@ -16,6 +16,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
   {
   }
 
+  #[\Override]
   public function mediaFilesSearchGet(string $query, int $limit, int $offset, string $attributes, string $flavor, string $package_name, int &$responseCode, array &$responseHeaders): array
   {
     $found_media_files = $this->facade->getLoader()->searchMediaLibraryFiles($query, $flavor, $package_name, $limit, $offset);
@@ -28,6 +29,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     return $response;
   }
 
+  #[\Override]
   public function mediaPackageNameGet(string $name, int $limit, int $offset, string $attributes, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $media_package = $this->facade->getLoader()->getMediaPackageByName($name);
@@ -48,6 +50,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     return $response;
   }
 
+  #[\Override]
   public function mediaFileIdGet(int $id, string $attributes, int &$responseCode, array &$responseHeaders): ?MediaFileResponse
   {
     $media_package_file = $this->facade->getLoader()->getMediaPackageFileByID($id);
@@ -68,6 +71,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     return $response;
   }
 
+  #[\Override]
   public function mediaFilesGet(int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
     $media_package_files = $this->facade->getLoader()->getMediaPackageFiles($limit, $offset, $flavor);

@@ -20,6 +20,7 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
     $this->properties = array_merge($this->properties, $properties);
   }
 
+  #[\Override]
   public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
   {
     $username = $response->getUsername();
@@ -32,10 +33,10 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
     $setter_access_token = $setter_name.'AccessToken';
     $access_token = $response->getAccessToken();
     // register new user
-    if (null === $user) {
+    if (!$user instanceof User) {
       $user = $this->user_manager->findUserByEmail($response->getEmail());
       // if user with the given email doesnt exists create a new user
-      if (null === $user) {
+      if (!$user instanceof \Sonata\UserBundle\Model\UserInterface) {
         /** @var User $user */
         $user = $this->user_manager->create();
         // generate random username for example user12345678, needs to be discussed
@@ -45,6 +46,7 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
         $user->setPassword(PasswordGenerator::generateRandomPassword());
         $user->setOauthUser(true);
       }
+
       $user->{$setter_id}($username);
       $user->{$setter_access_token}($access_token);
       $this->user_manager->updateUser($user);
@@ -63,12 +65,13 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
     $first_name = $response->getFirstName();
     $last_name = $response->getLastName();
     $username_base = $first_name.$last_name;
-    if (empty($username_base)) {
+    if ('' === $username_base || '0' === $username_base) {
       $username_base = 'user';
     }
+
     $username = $username_base;
     $user_number = 0;
-    while (null !== $this->user_manager->findUserByUsername($username)) {
+    while ($this->user_manager->findUserByUsername($username) instanceof \Sonata\UserBundle\Model\UserInterface) {
       ++$user_number;
       $username = $username_base.$user_number;
     }

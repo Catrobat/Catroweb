@@ -46,7 +46,7 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
   public function validateAppleIdToken(string $id_token): bool
   {
     $jwt = self::jwt_decode($id_token);
-    if (!$jwt || !isset($jwt['header']['kid'])) {
+    if (null === $jwt || [] === $jwt || !isset($jwt['header']['kid'])) {
       return false;
     }
 
@@ -95,11 +95,13 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
     } catch (\Exception) {
       return null;
     }
+
     try {
       $header = json_decode(base64_decode($header, true), true, 512, JSON_THROW_ON_ERROR);
     } catch (\JsonException) {
       return null;
     }
+
     // if the token was urlencoded, do some fixes to ensure that it is valid base64 encoded
     $payload = str_replace(['-', '_'], ['+', '/'], $payload);
     // complete token if needed
@@ -114,6 +116,7 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
       default:
         return null;
     }
+
     $payload = json_decode(base64_decode($payload, true), true, 512, JSON_THROW_ON_ERROR);
 
     return ['header' => $header, 'payload' => $payload];

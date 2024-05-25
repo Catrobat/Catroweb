@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 #[AsCommand(name: 'catrobat:reset', description: 'Resets everything to base values')]
 class ResetCommand extends Command
 {
-  final public const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
+  final public const string DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
 
   private array $reported = [];
 
@@ -27,6 +27,7 @@ class ResetCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -45,6 +46,7 @@ class ResetCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     if (!$input->getOption('hard')) {
@@ -119,6 +121,7 @@ class ResetCommand extends Command
     foreach ($programs as $program) {
       $program_names[] = $program->getName();
     }
+
     $this->createStudios($user_array, $programs, $output);
     $this->reportProjects($program_names, $user_array, $output);
     // if ($input->hasOption('with-remixes')) {
@@ -176,8 +179,9 @@ class ResetCommand extends Command
       ['bin/console', 'sonata:user:create', 'catroweb', 'catroweb@localhost.at', $password, '--super-admin'],
       ['timeout' => 300], 'Create default admin user named catroweb with password catroweb', $output
     );
+    $counter = count($user_array);
 
-    for ($i = 1; $i < sizeof($user_array); ++$i) { // starting at one because of admin user
+    for ($i = 1; $i < $counter; ++$i) { // starting at one because of admin user
       CommandHelper::executeShellCommand(
         ['bin/console', 'sonata:user:create', $user_array[$i], $user_array[$i].'@localhost.at', $password],
         ['timeout' => 300], 'Create default user named '.$user_array[$i].' with password catroweb', $output
@@ -197,7 +201,7 @@ class ResetCommand extends Command
     $projects_to_download = $limit;
     while ($projects_to_download > 0) {
       $amount = random_int(1, intval(floor($projects_to_download / 5)) + 1);
-      $username = $user_array[random_int(0, sizeof($user_array) - 1)];
+      $username = $user_array[random_int(0, count($user_array) - 1)];
 
       CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
         [
@@ -227,9 +231,10 @@ class ResetCommand extends Command
     $projects_to_download = $limit;
     while ($projects_to_download > 0) {
       $amount = random_int(1, intval(floor($projects_to_download / 5)) + 1);
-      $this->userUploadProjects($amount, $user_array[random_int(0, sizeof($user_array) - 1)], $remix_layout, $output);
+      $this->userUploadProjects($amount, $user_array[random_int(0, count($user_array) - 1)], $remix_layout, $output);
       $projects_to_download -= $amount;
     }
+
     $projects_count = count($this->program_manager->findAll());
 
     return $projects_count > 0;
@@ -290,6 +295,7 @@ class ResetCommand extends Command
       if ($random_reported <= 0) {
         $random_reported = 0;
       }
+
       $random_comment_amount = random_int(0, 3);
       for ($j = 0; $j <= $random_comment_amount; ++$j) {
         $user_id = array_rand($user_array);
@@ -305,6 +311,7 @@ class ResetCommand extends Command
           $output->writeln('Comment creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
         }
       }
+
       ++$i;
     }
   }
@@ -336,7 +343,7 @@ class ResetCommand extends Command
       for ($k = 1; $k < $numUsers; ++$k) {
         do {
           $random_user_id = array_rand($user_array);
-        } while ($random_user_id == $admin_user_id);
+        } while ($random_user_id === $admin_user_id);
 
         $users[] = $user_array[$random_user_id];
         $status[] = $this->getRandomStatus();
@@ -351,9 +358,13 @@ class ResetCommand extends Command
         $program->getUser()->getUserIdentifier();
 
         foreach ($users as $user) {
-          if ($user == $program->getUser()->getUsername() && $isPublic) {
-            $programs[] = $program->getName();
+          if ($user != $program->getUser()->getUsername()) {
+            continue;
           }
+          if (!$isPublic) {
+            continue;
+          }
+          $programs[] = $program->getName();
         }
       }
 
@@ -373,6 +384,7 @@ class ResetCommand extends Command
       if (0 !== $ret) {
         $output->writeln('Failed to create studio'.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
       }
+
       ++$i;
     }
   }
@@ -391,9 +403,10 @@ class ResetCommand extends Command
   {
     $rand_start = random_int(0, 2);
     $rand_interval = random_int(4, 6);
+    $counter = count($program_names);
 
-    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_interval) {
-      $this->reported[sizeof($this->reported)] = $i;
+    for ($i = $rand_start; $i < $counter; $i += $rand_interval) {
+      $this->reported[count($this->reported)] = $i;
       $parameters = [
         'user' => $user_array[array_rand($user_array)],
         'program_name' => $program_names[$i],
@@ -417,7 +430,7 @@ class ResetCommand extends Command
       for ($i = 0; $i < $like_amount; ++$i) {
         $parameters = [
           'program_name' => $program_name,
-          'user_name' => $user_array[($i + $like_amount) % sizeof($user_array)],
+          'user_name' => $user_array[($i + $like_amount) % count($user_array)],
         ];
         $ret = CommandHelper::executeSymfonyCommand('catrobat:like', $this->getApplication(), $parameters, $output);
 
@@ -456,10 +469,11 @@ class ResetCommand extends Command
   {
     $rand_start = random_int(1, 2);
     $rand_interval = random_int(4, 6);
+    $counter = count($program_names);
 
-    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_interval) {
+    for ($i = $rand_start; $i < $counter; $i += $rand_interval) {
       $parameters = [
-        'program_name' => $program_names[$i % sizeof($program_names)],
+        'program_name' => $program_names[$i % count($program_names)],
       ];
       $ret = CommandHelper::executeSymfonyCommand('catrobat:feature', $this->getApplication(), $parameters, $output);
 
@@ -475,9 +489,10 @@ class ResetCommand extends Command
    */
   private function followUsers(array $user_array, OutputInterface $output): void
   {
-    for ($i = 0; $i < sizeof($user_array); ++$i) {
+    $counter = count($user_array);
+    for ($i = 0; $i < $counter; ++$i) {
       $user_id = $i;
-      $follower_id = random_int(0, sizeof($user_array) - 1);
+      $follower_id = random_int(0, count($user_array) - 1);
 
       $parameters = [
         'user_name' => $user_array[$user_id],
@@ -495,10 +510,11 @@ class ResetCommand extends Command
   {
     $rand_start = random_int(1, 2);
     $rand_interval = random_int(4, 6);
+    $counter = count($program_names);
 
-    for ($i = $rand_start; $i < sizeof($program_names); $i += $rand_interval) {
+    for ($i = $rand_start; $i < $counter; $i += $rand_interval) {
       $parameters = [
-        'program_name' => $program_names[$i % sizeof($program_names)],
+        'program_name' => $program_names[$i % count($program_names)],
       ];
       $ret = CommandHelper::executeSymfonyCommand('catrobat:example', $this->getApplication(), $parameters, $output);
 

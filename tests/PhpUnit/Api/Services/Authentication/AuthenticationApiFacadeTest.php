@@ -18,6 +18,7 @@ final class AuthenticationApiFacadeTest extends DefaultTestCase
 {
   protected AuthenticationApiFacade|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AuthenticationApiFacade::class)

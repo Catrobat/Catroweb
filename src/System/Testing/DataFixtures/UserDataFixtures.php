@@ -49,6 +49,7 @@ class UserDataFixtures
     $user->setEnabled(!isset($config['enabled']) || 'true' === $config['enabled']);
     $user->addRole($config['role'] ?? 'ROLE_USER');
     $user->setOauthUser(isset($config['oauth_user']) && 'true' === $config['oauth_user']);
+
     $this->user_manager->updateUser($user, $andFlush);
 
     return $user;
@@ -65,16 +66,20 @@ class UserDataFixtures
       Assert::assertEquals($user->getUserIdentifier(), $config['name'],
         'Name wrong'.$config['name'].'expected, but '.$user->getUserIdentifier().' found.');
     }
+
     if (isset($config['email'])) {
       Assert::assertEquals($user->getEmail(), $config['email'],
         'E-Mail wrong'.$config['email'].'expected, but '.$user->getEmail().' found.');
     }
+
     if (isset($config['token'])) {
       Assert::assertEquals($user->getUploadToken(), $config['token'], 'Token Invalid');
     }
+
     if (isset($config['enabled'])) {
       Assert::assertEquals($user->isEnabled(), 'true' === $config['enabled'], 'Enabled wrong.');
     }
+
     if (isset($config['password'])) {
       $hasher = $this->password_hasher_factory->getPasswordHasher($user);
       Assert::assertTrue($hasher->verify($user->getPassword(), $config['password']), 'Password invalid');
@@ -83,7 +88,7 @@ class UserDataFixtures
 
   public function getDefaultUser(): User
   {
-    if (null === UserDataFixtures::$default_user) {
+    if (!UserDataFixtures::$default_user instanceof User) {
       UserDataFixtures::$default_user = $this->insertUser([]);
     }
 

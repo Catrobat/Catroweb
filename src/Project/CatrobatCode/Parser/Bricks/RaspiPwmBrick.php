@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class RaspiPwmBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::RASPI_PWM_BRICK;

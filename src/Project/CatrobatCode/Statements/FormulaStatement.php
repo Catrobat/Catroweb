@@ -17,11 +17,13 @@ class FormulaStatement extends Statement
     parent::__construct($statementFactory, $xmlTree, $spaces, '', '');
   }
 
+  #[\Override]
   public function execute(): string
   {
     return $this->executeChildren();
   }
 
+  #[\Override]
   public function executeChildren(): string
   {
     $code = '';
@@ -32,6 +34,7 @@ class FormulaStatement extends Statement
     if (null != $this->type) {
       $code .= $this->type->execute();
     }
+
     if (null != $this->type && (null != $this->leftChild || null != $this->rightChild)) {
       $code .= '(';
       $endCode = ')';

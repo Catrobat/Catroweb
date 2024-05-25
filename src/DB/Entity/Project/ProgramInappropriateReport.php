@@ -18,7 +18,9 @@ use Doctrine\ORM\Mapping as ORM;
 class ProgramInappropriateReport
 {
   final public const int STATUS_NEW = 1;
+
   final public const int STATUS_REJECTED = 2;
+
   final public const int STATUS_ACCEPTED = 3;
 
   #[ORM\Column(name: 'id', type: Types::INTEGER)]
@@ -59,7 +61,7 @@ class ProgramInappropriateReport
   #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
-    if (null === $this->getTime()) {
+    if (!$this->getTime() instanceof \DateTime) {
       $this->setTime(TimeUtils::getDateTime());
     }
   }
@@ -151,6 +153,7 @@ class ProgramInappropriateReport
     if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true)) {
       throw new \InvalidArgumentException('Invalid state');
     }
+
     $this->state = $state;
 
     return $this;

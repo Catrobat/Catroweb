@@ -45,8 +45,10 @@ final class ProjectsApiTest extends DefaultTestCase
   protected MockObject|ProjectsApiFacade $facade;
 
   protected mixed $full_validator;
+
   protected mixed $full_response_manager;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ProjectsApi::class)
@@ -297,8 +299,10 @@ final class ProjectsApiTest extends DefaultTestCase
     $project = new Program();
     $user = new User();
     $user->setId('user1');
+
     $wrong_user = new User();
     $wrong_user->setId('user2');
+
     $project->setUser($wrong_user);
 
     $this->projectIdPut_setLoaderAndAuthManager($project, $user);
@@ -411,7 +415,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $loader->method('getFeaturedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectsFeaturedGet('', '', 20, 0, '', '', $response_code, $response_headers);
+    $this->object->projectsFeaturedGet('', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }

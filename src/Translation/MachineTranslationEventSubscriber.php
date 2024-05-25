@@ -18,7 +18,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class MachineTranslationEventSubscriber implements EventSubscriberInterface
 {
-  private const CACHED_PROVIDER = 'etag';
+  private const string CACHED_PROVIDER = 'etag';
+
   private readonly int $project_caching_threshold;
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProjectManager $project_manager, ParameterBagInterface $parameters)
@@ -200,6 +201,7 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
     return null === $cache;
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::TERMINATE => 'onTerminateEvent'];

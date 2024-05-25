@@ -29,7 +29,7 @@ Feature: The admin tags view provides a detailed list about all tags and allows 
     And I am on "/admin/tags/list"
     And I wait for the page to be loaded
     Then I should see "Update tags"
-    And I should see "Step by step guide"
+    And I should see "Step-by-step guide"
     And I should not see "story"
     And the element "#btn-update-tags" should be visible
     And there should be "2" tags in the database

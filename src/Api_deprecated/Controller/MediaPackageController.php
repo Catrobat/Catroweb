@@ -48,6 +48,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
           'message' => $package.' not found', ]
       );
     }
+
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if ($media_package_categories->isEmpty()) {
@@ -55,6 +56,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
         $json_response_array
       );
     }
+
     /** @var MediaPackageCategory $media_package_category */
     foreach ($media_package_categories as $media_package_category) {
       $media_package_files = $media_package_category->getFiles();
@@ -78,9 +80,10 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
   #[Route(path: '/api/media/packageByNameUrl/{package}/json', name: 'api_media_lib_package_bynameurl_old', requirements: ['package' => '\w+'], defaults: ['_format' => 'json'], methods: ['GET'])]
   public function getMediaFilesForPackageByNameUrl(Request $request, string $package = ''): JsonResponse
   {
-    if (!$package) {
+    if ('' === $package || '0' === $package) {
       $package = strval($request->query->get('package'));
     }
+
     /** @var MediaPackage|null $media_package */
     $media_package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy(['nameUrl' => $package])
@@ -91,6 +94,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
           'message' => $package.' not found', ]
       );
     }
+
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if ($media_package_categories->isEmpty()) {
@@ -98,6 +102,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
         $json_response_array
       );
     }
+
     foreach ($media_package_categories as $media_package_category) {
       /** @var MediaPackageFile[]|null $media_package_files */
       $media_package_files = $media_package_category->getFiles();
@@ -144,12 +149,13 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
       $fileType = 'unknown';
       $description_line1 = $this->trans('media_library.file.type_description.default');
     }
+
     $description_line2 = $this->trans('media_library.file.size', ['%size%' => $size]);
     $description = $description_line1.'</br>'.$description_line2;
 
     $url = $media_package_file->getUrl();
     $project_url = null;
-    if (!empty($url)) {
+    if (null !== $url && '' !== $url && '0' !== $url) {
       $project_id = $url;
       $project_url = $this->generateUrl('program', [
         'id' => $project_id,

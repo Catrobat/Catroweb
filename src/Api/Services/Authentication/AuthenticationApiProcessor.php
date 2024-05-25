@@ -14,6 +14,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Sonata\UserBundle\Model\UserInterface;
 
 class AuthenticationApiProcessor extends AbstractApiProcessor
 {
@@ -140,6 +141,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     $user->setPassword(PasswordGenerator::generateRandomPassword());
     $user->setOauthUser(true);
     $user->setVerified(true);
+
     $this->user_manager->updateUser($user);
 
     return $user;
@@ -153,12 +155,13 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
   protected function createRandomUsername(?string $name = null): string
   {
     $username_base = 'user';
-    if (!empty($name)) {
+    if (null !== $name && '' !== $name && '0' !== $name) {
       $username_base = str_replace(' ', '', $name);
     }
+
     $username = $username_base;
     $user_number = 0;
-    while (null !== $this->user_manager->findUserByUsername($username)) {
+    while ($this->user_manager->findUserByUsername($username) instanceof UserInterface) {
       ++$user_number;
       $username = $username_base.$user_number;
     }

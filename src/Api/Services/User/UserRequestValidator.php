@@ -20,13 +20,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UserRequestValidator extends AbstractRequestValidator
 {
   public const int MIN_PASSWORD_LENGTH = 6;
+
   public const int MAX_PASSWORD_LENGTH = 4096;
 
   public const int MIN_USERNAME_LENGTH = 3;
+
   public const int MAX_USERNAME_LENGTH = 180;
 
   public const string MODE_REGISTER = 'register_mode';
+
   public const string MODE_RESET_PASSWORD = 'reset_password_mode';
+
   public const string MODE_UPDATE = 'update_mode';
 
   public function __construct(
@@ -134,7 +138,7 @@ class UserRequestValidator extends AbstractRequestValidator
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordTooShort', [], $locale), $KEY);
     } elseif (strlen((string) $password) > self::MAX_PASSWORD_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordTooLong', [], $locale), $KEY);
-    } elseif (!mb_detect_encoding((string) $password, 'ASCII', true)) {
+    } elseif ('' === mb_detect_encoding((string) $password, 'ASCII', true) || '0' === mb_detect_encoding((string) $password, 'ASCII', true) || false === mb_detect_encoding((string) $password, 'ASCII', true)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordInvalidChars', [], $locale), $KEY);
     }
   }
@@ -143,7 +147,7 @@ class UserRequestValidator extends AbstractRequestValidator
   {
     $KEY = 'current_password';
     if (self::MODE_UPDATE === $mode) { // non-update mode doesn't need current password
-      if (empty($current_password)) {
+      if (null === $current_password || '' === $current_password || '0' === $current_password) {
         $this->getValidationWrapper()->addError($this->__('api.updateUser.currentPasswordMissing', [], $locale), $KEY);
       } else {
         $password_hasher = $this->password_hasher_factory->getPasswordHasher($user);
@@ -156,9 +160,10 @@ class UserRequestValidator extends AbstractRequestValidator
 
   private function validateAndResizePicture(string $picture_in, ?string &$picture_out, string $locale): void
   {
-    if (empty($picture_in)) {
+    if ('' === $picture_in || '0' === $picture_in) {
       return;
     }
+
     $KEY = 'picture';
     $image_size = 300;
 
@@ -183,7 +188,13 @@ class UserRequestValidator extends AbstractRequestValidator
 
     foreach ($pslLines as $line) {
       $line = trim($line);
-      if ('' == $line || '/' == $line[0] || '!' == $line[0]) {
+      if ('' === $line) {
+        continue;
+      }
+      if ('/' === $line[0]) {
+        continue;
+      }
+      if ('!' === $line[0]) {
         continue;
       }
 

@@ -18,6 +18,7 @@ final class NotificationsApiLoaderTest extends DefaultTestCase
 {
   protected MockObject|NotificationsApiLoader $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(NotificationsApiLoader::class)

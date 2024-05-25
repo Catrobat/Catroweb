@@ -3,19 +3,23 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Doctrine\Set\DoctrineSetList;
 
-return static function (RectorConfig $rectorConfig): void {
-  $rectorConfig->paths([
+return RectorConfig::configure()
+
+  ->withPaths([
     __DIR__.'/src',
     __DIR__.'/config',
-  ]);
+    __DIR__.'/tests',
+  ])
 
-  $rectorConfig->symfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml');
+  ->withPhpSets(php83: true)
 
-  $rectorConfig->sets([
-    DoctrineSetList::DOCTRINE_CODE_QUALITY,
-  ]);
-
-  $rectorConfig->skip([__DIR__.'/src/System/Testing/DataFixtures/DataBaseUtils.php']);
-};
+  // here we can define, what prepared sets of rules will be applied
+  ->withPreparedSets(
+    deadCode: true,
+    codeQuality: true,
+    typeDeclarations: true,
+    earlyReturn: true,
+    strictBooleans: true,
+  )
+;

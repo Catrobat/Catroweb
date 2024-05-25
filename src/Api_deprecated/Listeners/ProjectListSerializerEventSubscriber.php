@@ -49,6 +49,7 @@ class ProjectListSerializerEventSubscriber implements EventSubscriberInterface
         $example = true;
         $project = $project->getProgram();
       }
+
       $new_project['ProjectId'] = $project->getId();
       $new_project['ProjectName'] = $project->getName();
       $new_project['ProjectNameShort'] = $project->getName();
@@ -68,6 +69,7 @@ class ProjectListSerializerEventSubscriber implements EventSubscriberInterface
         $new_project['ScreenshotBig'] = $this->screenshot_repository->getScreenshotWebPath($project->getId());
         $new_project['ScreenshotSmall'] = $this->screenshot_repository->getThumbnailWebPath($project->getId());
       }
+
       $new_project['ProjectUrl'] = ltrim($this->generateUrl('program', [
         'theme' => $this->parameter_bag->get('umbrellaTheme'),
         'id' => $project->getId(),
@@ -96,6 +98,7 @@ class ProjectListSerializerEventSubscriber implements EventSubscriberInterface
     return $this->router->generate($route, $parameters);
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::VIEW => 'onKernelView'];

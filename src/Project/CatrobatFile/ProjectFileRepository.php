@@ -64,10 +64,6 @@ class ProjectFileRepository
 
   public function checkIfProjectZipFileExists(string $id): bool
   {
-    if (file_exists($this->zip_dir.$id.'.catrobat')) {
-      return true;
-    }
-
-    return false;
+    return file_exists($this->zip_dir.$id.'.catrobat');
   }
 }

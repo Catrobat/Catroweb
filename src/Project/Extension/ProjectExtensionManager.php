@@ -119,7 +119,7 @@ class ProjectExtensionManager
     /** @var Extension|null $extension */
     $extension = $this->extension_repository->findOneBy(['internal_title' => $internal_title]);
     if (null === $extension) {
-      $this->logger->alert("Extension `{$internal_title}` is missing!");
+      $this->logger->alert(sprintf('Extension `%s` is missing!', $internal_title));
     }
 
     return $extension;

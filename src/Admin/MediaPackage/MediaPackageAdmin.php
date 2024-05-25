@@ -25,6 +25,7 @@ class MediaPackageAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     $form
@@ -38,6 +39,7 @@ class MediaPackageAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
   }
@@ -47,6 +49,7 @@ class MediaPackageAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list

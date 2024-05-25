@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\Project;
 
+use App\DB\Entity\Project\Program;
 use App\Project\Scratch\AsyncHttpClient;
 use App\Project\Scratch\ScratchManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,9 +25,10 @@ class ScratchController extends AbstractController
   public function scratchProject(Request $request, int $id): Response
   {
     $project = $this->scratch_manager->createScratchProjectFromId($id);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       throw $this->createNotFoundException('Error creating Scratch project');
     }
+
     $url = $this->generateUrl('program', ['id' => $project->getId()]);
     if ($request->isMethod('GET')) {
       return $this->redirect($url);

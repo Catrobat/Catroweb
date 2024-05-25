@@ -16,6 +16,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
   {
   }
 
+  #[\Override]
   public function notificationIdReadPut(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -29,6 +30,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
     $responseCode = $successful ? Response::HTTP_NO_CONTENT : Response::HTTP_NOT_FOUND;
   }
 
+  #[\Override]
   public function notificationsCountGet(int &$responseCode, array &$responseHeaders): ?NotificationsCountResponse
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -47,6 +49,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
     return $response;
   }
 
+  #[\Override]
   public function notificationsGet(string $accept_language, int $limit, int $offset, string $attributes, string $type, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // TODO: Implement notificationsGet() method.
@@ -56,6 +59,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
     return null;
   }
 
+  #[\Override]
   public function notificationsReadPut(int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();

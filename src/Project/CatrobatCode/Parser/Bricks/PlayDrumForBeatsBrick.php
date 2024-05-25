@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PlayDrumForBeatsBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PLAY_DRUM_FOR_BEATS_BRICK;

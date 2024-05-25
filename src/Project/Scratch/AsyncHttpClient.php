@@ -21,7 +21,7 @@ class AsyncHttpClient
 
   public function fetchScratchProjectDetails(array $scratch_project_ids): array
   {
-    if (0 === count($scratch_project_ids)) {
+    if ([] === $scratch_project_ids) {
       return [];
     }
 
@@ -31,14 +31,11 @@ class AsyncHttpClient
       $scratch_project_ids = array_slice($scratch_project_ids, 0, $max_number_of_total_requests);
     }
 
-    $promises = function () use ($scratch_project_ids): \Generator {
-      /** @var string $scratch_project_id */
-      foreach ($scratch_project_ids as $scratch_project_id) {
-        $scratch_api_url = 'https://api.scratch.mit.edu/projects/'.$scratch_project_id.'/?format=json';
-        yield $this->async_http_client->requestAsync('GET', $scratch_api_url);
-      }
-    };
-    $promises = $promises();
+    $promises = [];
+    foreach ($scratch_project_ids as $scratch_project_id) {
+      $scratch_api_url = 'https://api.scratch.mit.edu/projects/'.$scratch_project_id.'/?format=json';
+      $promises[] = $this->async_http_client->requestAsync('GET', $scratch_api_url);
+    }
 
     $max_number_of_concurrent_requests = $this->config['max_number_of_concurrent_requests'] ?? 1;
 
@@ -47,10 +44,13 @@ class AsyncHttpClient
     (new EachPromise($promises, [
       'concurrency' => $max_number_of_concurrent_requests,
       'fulfilled' => function (ResponseInterface $responses): void {
-        $data = @json_decode($responses->getBody()->__toString(), true, 512, JSON_THROW_ON_ERROR);
+        $data = json_decode($responses->getBody()->__toString(), true, 512, JSON_THROW_ON_ERROR);
         if (null != $data && array_key_exists('id', $data) && (int) $data['id'] > 0) {
           $this->scratch_info_data[(int) $data['id']] = $data;
         }
+      },
+      'rejected' => function ($reason, $index) {
+        // Do nothing
       },
     ]))->promise()->wait();
 

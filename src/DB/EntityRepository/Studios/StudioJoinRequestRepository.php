@@ -46,7 +46,7 @@ class StudioJoinRequestRepository extends ServiceEntityRepository
   {
     $joinRequest = $this->findJoinRequestById($joinRequestId);
 
-    if (null !== $joinRequest) {
+    if ($joinRequest instanceof StudioJoinRequest) {
       $entityManager = $this->getEntityManager();
       $entityManager->remove($joinRequest);
       $entityManager->flush();

@@ -11,8 +11,7 @@ class PasswordGenerator
    */
   public static function generateRandomPassword(int $length = 32): string
   {
-    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.
-            '0123456789-=~!@#$%&*()_+,.<>?;:[]{}|';
+    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-=~!@#$%&*()_+,.<>?;:[]{}|';
 
     $password = '';
     $max = strlen($chars) - 1;

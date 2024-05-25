@@ -101,13 +101,13 @@ class CodeExtractorTest extends TestCase
     $referenceOutputFile = fopen($absolutePath, 'r');
     $size = filesize($absolutePath);
 
-    if (!$referenceOutputFile || !$size) {
+    if (!$referenceOutputFile || (0 === $size || false === $size)) {
       exit('Unable to open file!');
     }
 
     $referenceOutput = fread($referenceOutputFile, $size);
 
-    if (!$referenceOutput) {
+    if ('' === $referenceOutput || '0' === $referenceOutput || false === $referenceOutput) {
       exit('Unable to redd file!');
     }
 

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class UserDefinedReceiverBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::USER_DEFINED_RECEIVER_BRICK;

@@ -16,6 +16,7 @@ class SendMailToUserAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'mail';
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);

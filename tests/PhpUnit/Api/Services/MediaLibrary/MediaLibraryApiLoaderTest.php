@@ -18,6 +18,7 @@ final class MediaLibraryApiLoaderTest extends DefaultTestCase
 {
   protected MediaLibraryApiLoader|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(MediaLibraryApiLoader::class)

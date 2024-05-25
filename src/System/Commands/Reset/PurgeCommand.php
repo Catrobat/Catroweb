@@ -22,6 +22,7 @@ class PurgeCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -32,6 +33,7 @@ class PurgeCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     if (!$input->getOption('force')) {
@@ -96,6 +98,7 @@ class PurgeCommand extends Command
 
     $progress->advance();
     $progress->finish();
+
     $output->writeln('');
 
     return 0;

@@ -26,6 +26,7 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->refreshProjectExtensions();
@@ -49,12 +50,14 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
       if (!is_null($extracted_file)) {
         $this->extension_manager->addExtensions($extracted_file, $project, false);
       }
+
       ++$i;
       if (($i % $batchSize) === 0) {
         $this->entity_manager->flush();
         $this->entity_manager->clear();
       }
     }
+
     $this->entity_manager->flush();
     $this->entity_manager->clear();
   }

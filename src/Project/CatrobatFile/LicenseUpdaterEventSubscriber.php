@@ -9,8 +9,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
 {
-  final public const MEDIA_LICENSE = 'https://developer.catrobat.org/ccbysa_v4';
-  final public const PROJECT_LICENSE = 'https://developer.catrobat.org/agpl_v3';
+  final public const string MEDIA_LICENSE = 'https://developer.catrobat.org/ccbysa_v4';
+
+  final public const string PROJECT_LICENSE = 'https://developer.catrobat.org/agpl_v3';
 
   public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event): void
   {
@@ -28,6 +29,7 @@ class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
     $file->saveProjectXmlProperties();
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforeInsertEvent::class => ['onProjectBeforeInsert', -1]];

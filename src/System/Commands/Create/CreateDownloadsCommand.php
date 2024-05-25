@@ -25,6 +25,7 @@ class CreateDownloadsCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -33,6 +34,7 @@ class CreateDownloadsCommand extends Command
     ;
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $program_name = $input->getArgument('program_name');
@@ -52,6 +54,7 @@ class CreateDownloadsCommand extends Command
     } catch (\Exception) {
       return 2;
     }
+
     $output->writeln('Downloading '.$program->getName().' with user '.$user->getUsername());
 
     return 0;
@@ -63,6 +66,7 @@ class CreateDownloadsCommand extends Command
     $download->setUser($user);
     $download->setProgram($program);
     $download->setDownloadedAt(date_create());
+
     $program->setDownloads($program->getDownloads() + 1);
 
     $this->entity_manager->persist($program);

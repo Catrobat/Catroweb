@@ -22,6 +22,7 @@ class ExtractedCatrobatFileTest extends TestCase
 {
   private ExtractedCatrobatFile $extracted_catrobat_file;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
@@ -528,6 +529,7 @@ class ExtractedCatrobatFileTest extends TestCase
       } else {
         $this->assertFalse($urls[$i]->isScratchProject());
       }
+
       if ($absolutePaths[$i]) {
         $this->assertTrue($urls[$i]->isAbsoluteUrl());
       } else {

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ReadListFromDeviceBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::READ_LIST_FROM_DEVICE_BRICK;

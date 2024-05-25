@@ -26,6 +26,7 @@ class ReportedProjectsAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'reported_projects';
 
+  #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
@@ -36,6 +37,7 @@ class ReportedProjectsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -60,6 +62,7 @@ class ReportedProjectsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -86,6 +89,7 @@ class ReportedProjectsAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->add('unreportProgram');

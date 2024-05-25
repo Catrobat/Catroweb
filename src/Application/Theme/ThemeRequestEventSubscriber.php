@@ -92,6 +92,7 @@ class ThemeRequestEventSubscriber implements EventSubscriberInterface
     return in_array($flavor, $flavors, true);
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::REQUEST => ['onKernelRequest', 10]];

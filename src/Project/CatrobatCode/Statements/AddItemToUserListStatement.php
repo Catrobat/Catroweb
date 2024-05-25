@@ -8,7 +8,7 @@ class AddItemToUserListStatement extends BaseUserListStatement
 {
   final public const string BEGIN_STRING = 'add item to userlist ';
 
-  final public const MIDDLE_STRING = '(';
+  final public const string MIDDLE_STRING = '(';
 
   final public const string END_STRING = ')<br/>';
 

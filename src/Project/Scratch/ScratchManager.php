@@ -27,6 +27,7 @@ class ScratchManager
     if (null == $project_arr) {
       return null;
     }
+
     $project_data = $project_arr[$id];
     /** @var Program|null $old_project */
     $old_project = $this->project_manager->findOneByScratchId($id);

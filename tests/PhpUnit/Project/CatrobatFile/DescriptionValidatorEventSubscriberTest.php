@@ -18,6 +18,7 @@ class DescriptionValidatorEventSubscriberTest extends TestCase
 {
   private DescriptionValidatorEventSubscriber $description_validator;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->description_validator = new DescriptionValidatorEventSubscriber();

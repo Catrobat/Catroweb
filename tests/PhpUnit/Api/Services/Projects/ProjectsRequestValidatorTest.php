@@ -21,6 +21,7 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 {
   protected MockObject|ProjectsRequestValidator $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ProjectsRequestValidator::class)

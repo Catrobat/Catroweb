@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class UserDefinedScript extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::USER_DEFINED_SCRIPT;

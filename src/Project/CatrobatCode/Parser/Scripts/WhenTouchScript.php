@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WhenTouchScript extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WHEN_TOUCH_SCRIPT;

@@ -26,6 +26,7 @@ class AchievementsAdminController extends CRUDController
   ) {
   }
 
+  #[\Override]
   public function listAction(Request $request): Response
   {
     $achievements = $this->achievement_manager->findAllAchievements();

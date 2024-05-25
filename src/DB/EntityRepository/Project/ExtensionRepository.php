@@ -30,16 +30,8 @@ class ExtensionRepository extends ServiceEntityRepository
 
   public function getActiveExtensions(): array
   {
-    $extensions = $this->findBy([
+    return $this->findBy([
       'enabled' => true,
     ]);
-
-    $active_extensions = [];
-    /** @var Extension $extension */
-    foreach ($extensions as $extension) {
-      $active_extensions[] = $extension;
-    }
-
-    return $active_extensions;
   }
 }

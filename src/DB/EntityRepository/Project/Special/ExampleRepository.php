@@ -149,8 +149,9 @@ class ExampleRepository extends ServiceEntityRepository
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';
       if ($include_pocketcode) {
-        $where .= ' OR fl.name = \'pocketcode\'';
+        $where .= " OR fl.name = 'pocketcode'";
       }
+
       $query_builder
         ->join($alias.'.flavor', 'fl')
         ->andWhere($where)

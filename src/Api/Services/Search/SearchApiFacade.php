@@ -35,21 +35,25 @@ class SearchApiFacade extends AbstractApiFacade
     parent::__construct($authentication_manager);
   }
 
+  #[\Override]
   public function getResponseManager(): SearchResponseManager
   {
     return $this->response_manager;
   }
 
+  #[\Override]
   public function getLoader(): SearchApiLoader
   {
     return $this->loader;
   }
 
+  #[\Override]
   public function getProcessor(): SearchApiProcessor
   {
     return $this->processor;
   }
 
+  #[\Override]
   public function getRequestValidator(): SearchRequestValidator
   {
     return $this->request_validator;

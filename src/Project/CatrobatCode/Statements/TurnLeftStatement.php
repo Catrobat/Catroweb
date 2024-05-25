@@ -7,6 +7,7 @@ namespace App\Project\CatrobatCode\Statements;
 class TurnLeftStatement extends Statement
 {
   final public const string BEGIN_STRING = 'turn left (';
+
   final public const string END_STRING = ') degrees<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)

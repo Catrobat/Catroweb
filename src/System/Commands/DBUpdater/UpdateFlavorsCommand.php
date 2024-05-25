@@ -20,6 +20,7 @@ class UpdateFlavorsCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $count = 0;
@@ -31,7 +32,7 @@ class UpdateFlavorsCommand extends Command
     }
 
     $this->entity_manager->flush();
-    $output->writeln("{$count} Flavors in the Database have been inserted/updated");
+    $output->writeln($count.' Flavors in the Database have been inserted/updated');
 
     return 0;
   }

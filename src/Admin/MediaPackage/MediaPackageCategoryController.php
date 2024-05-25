@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class MediaPackageCategoryController extends CRUDController
 {
+  #[\Override]
   protected function preDelete(Request $request, object $object): ?Response
   {
     /* @var $object MediaPackageCategory */

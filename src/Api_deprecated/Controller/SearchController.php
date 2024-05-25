@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @deprecated
@@ -34,18 +35,20 @@ class SearchController extends AbstractController
   public function searchProjects(Request $request, ProjectManager $project_manager, LoggerInterface $searchLogger): ProjectListResponse
   {
     $query = (string) $request->query->get('q', '');
-    $username = $this->getUser() ? $this->getUser()->getUserIdentifier() : '-';
-    $searchLogger->debug("User: {$username}, Query: {$query}");
+    $username = $this->getUser() instanceof UserInterface ? $this->getUser()->getUserIdentifier() : '-';
+    $searchLogger->debug(sprintf('User: %s, Query: %s', $username, $query));
     $query = str_replace('yahoo', '', $query);
     $query = str_replace('gmail', '', $query);
     $query = str_replace('gmx', '', $query);
     $query = trim($query);
+
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
     $max_version = (string) $request->query->get('max_version', '');
     if ('' === $query || ctype_space($query)) {
       return new ProjectListResponse([], 0);
     }
+
     // we can't count the results since we apply limit and offset.
     // so we indeed have to use a separate query that ignores
     // limit and offset to get the number of results.

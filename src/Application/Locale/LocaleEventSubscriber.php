@@ -17,6 +17,7 @@ class LocaleEventSubscriber implements EventSubscriberInterface
     );
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::REQUEST => ['onKernelRequest', 100]];

@@ -17,6 +17,7 @@ class AsyncHttpClientTest extends TestCase
 {
   private AsyncHttpClient $async_http_client;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->async_http_client = new AsyncHttpClient(['timeout' => 8.0, 'max_number_of_concurrent_requests' => 4]);

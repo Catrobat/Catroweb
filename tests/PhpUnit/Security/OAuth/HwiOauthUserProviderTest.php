@@ -32,6 +32,7 @@ class HwiOauthUserProviderTest extends WebTestCase
 
     'attr_name' => 'access_token',
   ];
+
   protected array $paths = [
     'identifier' => 'id',
     'nickname' => 'foo',
@@ -40,7 +41,9 @@ class HwiOauthUserProviderTest extends WebTestCase
     'lastname' => 'last_name',
     'email' => 'email',
   ];
+
   protected string $state = 'random';
+
   protected string $userResponse = <<<'json'
 {
     "id":  "1",
@@ -50,13 +53,17 @@ class HwiOauthUserProviderTest extends WebTestCase
     "last_name": "user"
 }
 json;
+
   protected array $properties = [
     'identifier' => 'id',
     'google' => 'id',
   ];
+
   protected array $tokenData = ['access_token' => 'token'];
+
   private HwiOauthUserProvider $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     static::createClient();
@@ -88,6 +95,7 @@ json;
       $storage
     );
     $resourceOwner->addPaths(array_merge($this->paths, []));
+
     $response_test->setResourceOwner($resourceOwner);
     $response_test->setPaths($this->paths);
     $response_test->setData($this->userResponse);

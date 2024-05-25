@@ -191,6 +191,7 @@ class MediaPackageFile
     if ($this->flavors->contains($flavor)) {
       return;
     }
+
     $this->flavors[] = $flavor;
   }
 
@@ -199,6 +200,7 @@ class MediaPackageFile
     if (!$this->flavors->contains($flavor)) {
       return;
     }
+
     $this->flavors->removeElement($flavor);
   }
 

@@ -18,6 +18,7 @@ class TranslationTrimStorageCommandTest extends TestCase
 {
   protected MockObject|TranslationTrimStorageCommand $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(TranslationTrimStorageCommand::class)

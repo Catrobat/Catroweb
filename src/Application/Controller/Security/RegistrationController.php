@@ -40,9 +40,9 @@ class RegistrationController extends AbstractController
     // Do not get the User's Id or Email Address from the Request object
     try {
       $this->verify_email_helper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
-    } catch (VerifyEmailExceptionInterface $e) {
+    } catch (VerifyEmailExceptionInterface $verifyEmailException) {
       $this->logger->critical('Email verification failed for '.$user->getId().$user->getEmail());
-      $this->addFlash('verify_email_error', $e->getReason());
+      $this->addFlash('verify_email_error', $verifyEmailException->getReason());
 
       return $this->redirectToRoute('register');
     }

@@ -95,22 +95,21 @@ class ProjectManager
       return true;
     }
 
-    if (!$project->isVisible()) {
-      // featured or approved projects should never be invisible
-      if (!$this->featured_repository->isFeatured($project) && !$project->getApproved()) {
-        return false;
-      }
-    }
-
-    // SHARE-49: Private projects are visible to everyone.
-    // -
-
-    // SHARE-70/SHARE-296: Debug projects must only be seen in the dev env or if explicitly requested
-    if ($project->isDebugBuild() && !$this->request_helper->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
+    // featured or approved projects should never be invisible
+    if (!$project->isVisible() && (!$this->featured_repository->isFeatured($project) && !$project->getApproved())) {
       return false;
     }
+    // SHARE-49: Private projects are visible to everyone.
+    // -
+    // SHARE-70/SHARE-296: Debug projects must only be seen in the dev env or if explicitly requested
+    if (!$project->isDebugBuild()) {
+      return true;
+    }
+    if ($this->request_helper->isDebugBuildRequest()) {
+      return true;
+    }
 
-    return true;
+    return 'dev' === $_ENV['APP_ENV'];
   }
 
   /*
@@ -128,9 +127,9 @@ class ProjectManager
 
     try {
       $event = $this->event_dispatcher->dispatch(new ProjectBeforeInsertEvent($extracted_file));
-    } catch (InvalidCatrobatFileException $e) {
-      $this->logger->error('addProject failed with code: '.$e->getCode().' and message:'.$e->getMessage());
-      throw $e;
+    } catch (InvalidCatrobatFileException $invalidCatrobatFileException) {
+      $this->logger->error('addProject failed with code: '.$invalidCatrobatFileException->getCode().' and message:'.$invalidCatrobatFileException->getMessage());
+      throw $invalidCatrobatFileException;
     }
 
     if ($event->isPropagationStopped()) {
@@ -181,8 +180,8 @@ class ProjectManager
       if (null !== $extracted_file->getScreenshotPath()) {
         $this->screenshot_repository->saveProjectAssetsTemp($extracted_file->getScreenshotPath(), $project->getId());
       }
-    } catch (\Exception $e) {
-      $this->logger->error('UploadError -> saveProjectAssetsTemp failed!', ['exception' => $e->getMessage()]);
+    } catch (\Exception $exception) {
+      $this->logger->error('UploadError -> saveProjectAssetsTemp failed!', ['exception' => $exception->getMessage()]);
       $project_id = $project->getId();
       $this->entity_manager->remove($project);
       $this->entity_manager->flush();
@@ -200,8 +199,8 @@ class ProjectManager
       if (null !== $extracted_file->getScreenshotPath()) {
         $this->screenshot_repository->makeTempProjectAssetsPerm($project->getId());
       }
-    } catch (\Exception $e) {
-      $this->logger->error('UploadError -> makeTempProjectPerm failed!', ['exception' => $e]);
+    } catch (\Exception $exception) {
+      $this->logger->error('UploadError -> makeTempProjectPerm failed!', ['exception' => $exception]);
       $project_id = $project->getId();
       $this->entity_manager->remove($project);
       $this->entity_manager->flush();
@@ -209,7 +208,7 @@ class ProjectManager
         $this->screenshot_repository->deletePermProjectAssets($project_id);
       } catch (IOException $error) {
         $this->logger->error(
-          'UploadError -> deletePermProjectAssets or deleteProjectFile failed!', ['exception' => $e]
+          'UploadError -> deletePermProjectAssets or deleteProjectFile failed!', ['exception' => $error]
         );
         throw $error;
       }
@@ -220,6 +219,7 @@ class ProjectManager
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($project);
+
     $this->file_repository->saveProjectZipFile($file, $project->getId());
 
     $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project));
@@ -228,9 +228,11 @@ class ProjectManager
     if (is_dir($compressed_file_directory)) {
       (new Filesystem())->remove($compressed_file_directory);
     }
+
     if (is_dir($extracted_file->getPath())) {
       (new Filesystem())->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$project->getId());
     }
+
     (new Filesystem())->remove($extracted_file->getPath());
 
     // remove old "cached" zips - they will be re-generated on a project download
@@ -249,7 +251,7 @@ class ProjectManager
   public function createProjectFromScratch(?Program $project, User $user, array $project_data): Program
   {
     $modified_time = TimeUtils::dateTimeFromScratch($project_data['history']['modified']);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       $project = new Program();
       $project->setUser($user);
       $project->setScratchId($project_data['id']);
@@ -259,8 +261,10 @@ class ProjectManager
       if ($project->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp()) {
         return $project;
       }
+
       $project->incrementVersion();
     }
+
     $project->setVisible(true);
     $project->setApproved(false);
 
@@ -268,12 +272,15 @@ class ProjectManager
     if ($instructions = $project_data['instructions'] ?? null) {
       $description_text .= $instructions;
     }
+
     if ($description = $project_data['description'] ?? null) {
       if ($instructions) {
         $description_text .= "\n\n";
       }
+
       $description_text .= $description;
     }
+
     $project->setDescription($description_text);
 
     if ($title = $project_data['title'] ?? null) {
@@ -281,12 +288,13 @@ class ProjectManager
     }
 
     $shared_time = TimeUtils::dateTimeFromScratch($project_data['history']['shared']);
-    if ($shared_time) {
+    if ($shared_time instanceof \DateTime) {
       $project->setUploadedAt($shared_time);
     } else {
       $project->setUploadedAt(TimeUtils::getDateTime());
     }
-    if ($modified_time) {
+
+    if ($modified_time instanceof \DateTime) {
       $project->setLastModifiedAt($modified_time);
     } else {
       $project->setLastModifiedAt(TimeUtils::getDateTime());
@@ -328,7 +336,7 @@ class ProjectManager
     } elseif (ProgramLike::ACTION_REMOVE === $action) {
       $this->project_like_repository->removeLike($project, $user, $type);
     } else {
-      throw new \InvalidArgumentException("Invalid action: {$action}");
+      throw new \InvalidArgumentException('Invalid action: '.$action);
     }
   }
 
@@ -358,7 +366,7 @@ class ProjectManager
   {
     $tags = $extracted_file->getTags();
 
-    if (!empty($tags)) {
+    if ([] !== $tags) {
       $i = 0;
       foreach ($tags as $tag) {
         /** @var Tag|null $db_tag */
@@ -481,7 +489,7 @@ class ProjectManager
     $project = $this->find($id);
 
     if (null === $project) {
-      $this->logger->warning("Project with `{$id}` can't be found.");
+      $this->logger->warning(sprintf('Project with `%s` can\'t be found.', $id));
     } elseif ($this->isProjectVisibleForCurrentUser($project)) {
       return $project;
     }
@@ -635,6 +643,7 @@ class ProjectManager
             ->execute()
           ;
         }
+
         $this->addDownloadEntry($project, $user, $download_type);
       }
     }
@@ -647,6 +656,7 @@ class ProjectManager
     $download->setProgram($project);
     $download->setType($download_type);
     $download->setDownloadedAt(new \DateTime('now'));
+
     $this->entity_manager->persist($download);
     $this->entity_manager->flush();
   }
@@ -657,6 +667,7 @@ class ProjectManager
     if (!is_null($downloads)) {
       $this->entity_manager->persist($downloads);
     }
+
     $this->entity_manager->flush();
   }
 
@@ -739,6 +750,7 @@ class ProjectManager
     foreach ($words as &$word) {
       $word .= '*';
     }
+
     unset($word);
     $query = implode(' ', $words);
 
@@ -760,6 +772,7 @@ class ProjectManager
     if ('' !== $max_version) {
       $bool_query->addMust(new Range('language_version', ['lte' => $max_version]));
     }
+
     if (null !== $flavor && '' !== trim($flavor)) {
       $bool_query->addMust(new Terms('flavor', [$flavor]));
     }

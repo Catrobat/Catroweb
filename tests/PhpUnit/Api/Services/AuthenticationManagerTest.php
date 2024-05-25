@@ -17,6 +17,7 @@ final class AuthenticationManagerTest extends DefaultTestCase
 {
   protected AuthenticationManager|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AuthenticationManager::class)

@@ -21,6 +21,7 @@ class NotificationsApiProcessor extends AbstractApiProcessor
     if (null === $notification_seen) {
       return false;
     }
+
     $this->notification_manager->markSeen([$notification_seen]);
 
     return true;

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class LegoEV3MotorTurnAngleBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::LEGO_EV3_MOTOR_TURN_ANGLE_BRICK;

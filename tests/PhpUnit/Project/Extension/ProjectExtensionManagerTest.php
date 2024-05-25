@@ -21,10 +21,12 @@ use Symfony\Component\Filesystem\Filesystem;
 class ProjectExtensionManagerTest extends DefaultTestCase
 {
   protected ExtractedCatrobatFile $extracted_catrobat_file_with_extensions;
+
   protected ExtractedCatrobatFile $extracted_catrobat_file_without_extensions;
 
   protected MockObject|ProjectExtensionManager $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ProjectExtensionManager::class)
@@ -153,6 +155,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
     $filesystem = new Filesystem();
     $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_extensions/', BootstrapExtension::$CACHE_DIR.'program_with_extensions/');
     $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', BootstrapExtension::$CACHE_DIR.'base/');
+
     $this->extracted_catrobat_file_without_extensions = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '', '');
     $this->extracted_catrobat_file_with_extensions = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'program_with_extensions/', '', '');
   }

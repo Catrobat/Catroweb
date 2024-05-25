@@ -19,6 +19,7 @@ final class BearerAuthenticationTraitTest extends DefaultTestCase
 {
   protected MockObject|BearerAuthenticationTraitTestClass $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockForAbstractClass(BearerAuthenticationTraitTestClass::class);

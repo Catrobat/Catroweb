@@ -19,7 +19,9 @@ use PHPUnit\Framework\TestCase;
 class BricksTest extends TestCase
 {
   public const string TYPE = 'type';
+
   public const string CAPTION = 'caption';
+
   public const string IMG_FILE = 'img_file';
 
   /**
@@ -27,6 +29,7 @@ class BricksTest extends TestCase
    */
   protected $brick_xml_properties_list;
 
+  #[\Override]
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');

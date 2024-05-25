@@ -10,6 +10,7 @@ use App\Translation\TranslationResult;
 
 class FakeTranslationDelegate extends TranslationDelegate
 {
+  #[\Override]
   public function translateProject(Program $project, ?string $source_language, string $target_language): ?array
   {
     $cached_result = $this->getCachedProjectTranslation($project, $source_language, $target_language);
@@ -22,7 +23,7 @@ class FakeTranslationDelegate extends TranslationDelegate
 
     foreach ($to_translate as $text) {
       if (null == $text) {
-        array_push($translation_result, null);
+        $translation_result[] = null;
         continue;
       }
 
@@ -31,14 +32,16 @@ class FakeTranslationDelegate extends TranslationDelegate
       if (null == $source_language) {
         $translated_text->detected_source_language = 'en';
       }
+
       $translated_text->translation = 'translated '.$text;
 
-      array_push($translation_result, $translated_text);
+      $translation_result[] = $translated_text;
     }
 
     return $translation_result;
   }
 
+  #[\Override]
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
     $translation_result = new TranslationResult();
@@ -46,6 +49,7 @@ class FakeTranslationDelegate extends TranslationDelegate
     if (null == $source_language) {
       $translation_result->detected_source_language = 'en';
     }
+
     $translation_result->translation = 'Fixed translation text';
 
     return $translation_result;

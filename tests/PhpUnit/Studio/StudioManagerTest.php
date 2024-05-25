@@ -28,31 +28,38 @@ use PHPUnit\Framework\MockObject\MockObject;
 class StudioManagerTest extends DefaultTestCase
 {
   protected MockObject|StudioManager $object;
+
   /**
    * @var UserDataFixtures|null
    */
   protected $user_fixture;
+
   /**
    * @var ProjectDataFixtures|null
    */
   protected $project_fixture;
+
   /**
    * @var UserManager|null
    */
   protected $user_manager;
+
   /**
    * @var Studio|null
    */
   protected $studio;
+
   /**
    * @var User
    */
   protected $user;
+
   /**
    * @var EntityManager
    */
   protected $entity_manager;
 
+  #[\Override]
   protected function setUp(): void
   {
     $kernel = self::bootKernel();
@@ -76,6 +83,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->studio = $this->object->createStudio($this->user, 'testname', 'test description');
   }
 
+  #[\Override]
   protected function tearDown(): void
   {
     $this->object->deleteStudio($this->studio, $this->user);
@@ -155,6 +163,7 @@ class StudioManagerTest extends DefaultTestCase
     if (is_null($this->object->addUserToStudio($this->user, $this->studio, $newUser))) {
       $this->markTestSkipped('unable to add new user to the studio');
     }
+
     $this->assertEquals(StudioUser::ROLE_ADMIN, $this->object->getStudioUserRole($this->user, $this->studio));
     $this->assertEquals(StudioUser::ROLE_MEMBER, $this->object->getStudioUserRole($newUser, $this->studio));
     $this->assertNull($this->object->changeStudioUserRole($newUser, $this->studio, $newUser, StudioUser::ROLE_ADMIN));
@@ -174,6 +183,7 @@ class StudioManagerTest extends DefaultTestCase
     if (is_null($this->object->addUserToStudio($this->user, $this->studio, $newUser))) {
       $this->markTestSkipped('unable to add new user to the studio');
     }
+
     $this->assertEquals(StudioUser::STATUS_ACTIVE, $this->object->getStudioUserStatus($newUser, $this->studio));
     $this->assertNull($this->object->changeStudioUserStatus($newUser, $this->studio, $newUser, StudioUser::STATUS_BANNED));
     $this->assertInstanceOf(StudioUser::class, $this->object->changeStudioUserStatus($this->user, $this->studio, $newUser, StudioUser::STATUS_BANNED));
@@ -239,6 +249,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->assertNull($studio_project);
     $this->object->addUserToStudio($this->user, $this->studio, $newUser);
     $this->object->addUserToStudio($this->user, $this->studio, $newUser_2);
+
     $studio_project = $this->object->addProjectToStudio($newUser, $this->studio, $project);
     $this->assertInstanceOf(StudioProgram::class, $studio_project);
     $this->object->deleteProjectFromStudio($newUser_2, $this->studio, $project);
@@ -275,6 +286,7 @@ class StudioManagerTest extends DefaultTestCase
         break;
       }
     }
+
     $this->object->deleteCommentFromStudio($this->user, $studioComment->getId());
 
     $this->assertEquals(0, $this->object->countStudioComments($this->studio));

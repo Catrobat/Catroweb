@@ -22,6 +22,7 @@ class CleanApkTest extends KernelTestCase
 
   private string $apk_dir;
 
+  #[\Override]
   protected function setUp(): void
   {
     $kernel = static::createKernel();

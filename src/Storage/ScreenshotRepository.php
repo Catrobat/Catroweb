@@ -11,8 +11,9 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ScreenshotRepository
 {
-  final public const DEFAULT_SCREENSHOT = 'images/default/screenshot.png';
-  final public const DEFAULT_THUMBNAIL = 'images/default/thumbnail.png';
+  final public const string DEFAULT_SCREENSHOT = 'images/default/screenshot.png';
+
+  final public const string DEFAULT_THUMBNAIL = 'images/default/thumbnail.png';
 
   private readonly string $thumbnail_dir;
 
@@ -72,6 +73,7 @@ class ScreenshotRepository
     if ($filesystem->exists($tmp_file_path)) {
       unlink($tmp_file_path);
     }
+
     $filesystem->copy($image, $tmp_file_path);
   }
 
@@ -198,6 +200,7 @@ class ScreenshotRepository
     if (file_exists($filename)) {
       unlink($filename);
     }
+
     $screen->writeImage($filename);
     chmod($filename, 0777);
     $screen->destroy();
@@ -240,6 +243,7 @@ class ScreenshotRepository
     if (file_exists($filename)) {
       unlink($filename);
     }
+
     $thumb->writeImage($filename);
     chmod($filename, 0777);
     $thumb->destroy();
@@ -272,6 +276,7 @@ class ScreenshotRepository
     if (file_exists($filename)) {
       unlink($filename);
     }
+
     $thumb->writeImage($filename);
     chmod($filename, 0777);
     $thumb->destroy();
@@ -285,6 +290,7 @@ class ScreenshotRepository
     if (file_exists($filename)) {
       unlink($filename);
     }
+
     $screen->writeImage($filename);
     chmod($filename, 0777);
   }
@@ -297,6 +303,7 @@ class ScreenshotRepository
     if (file_exists($filename)) {
       unlink($filename);
     }
+
     $screen->writeImage($filename);
     chmod($filename, 0777);
     $this->preventInvalidImagesInCacheZips($id);

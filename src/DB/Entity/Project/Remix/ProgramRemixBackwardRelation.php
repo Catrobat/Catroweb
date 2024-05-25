@@ -50,6 +50,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     $this->setChild($child);
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return '(#'.$this->parent_id.', #'.$this->child_id.')';
@@ -102,41 +103,49 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return $this->child_id;
   }
 
+  #[\Override]
   public function getDepth(): int
   {
     return 1;
   }
 
+  #[\Override]
   public function getCreatedAt(): ?\DateTime
   {
     return $this->created_at;
   }
 
+  #[\Override]
   public function setCreatedAt(\DateTime $created_at): void
   {
     $this->created_at = $created_at;
   }
 
+  #[\Override]
   public function getSeenAt(): ?\DateTime
   {
     return $this->seen_at;
   }
 
+  #[\Override]
   public function setSeenAt(?\DateTime $seen_at): void
   {
     $this->seen_at = $seen_at;
   }
 
+  #[\Override]
   public function getUniqueKey(): string
   {
     return sprintf('ProgramRemixBackwardRelation(%d,%d)', $this->parent_id, $this->child_id);
   }
 
+  #[\Override]
   public function getAncestor(): Program
   {
     return $this->parent;
   }
 
+  #[\Override]
   public function getDescendant(): Program
   {
     return $this->child;

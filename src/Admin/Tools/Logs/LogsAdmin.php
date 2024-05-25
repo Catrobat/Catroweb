@@ -16,6 +16,7 @@ class LogsAdmin extends AbstractAdmin
 
   protected $baseRouteName = 'logs';
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);

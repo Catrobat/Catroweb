@@ -17,6 +17,7 @@ final class AbstractApiProcessorTest extends DefaultTestCase
 {
   protected AbstractApiProcessor|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AbstractApiProcessor::class)

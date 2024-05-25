@@ -30,6 +30,7 @@ class ProgramImportCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -46,6 +47,7 @@ class ProgramImportCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $directory = $input->getArgument('directory');

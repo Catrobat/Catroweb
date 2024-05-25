@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PhiroRgbLightBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PHIRO_RGB_LIGHT_BRICK;

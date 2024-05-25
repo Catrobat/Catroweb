@@ -19,6 +19,7 @@ class VersionStrategyTest extends DefaultTestCase
 {
   protected MockObject|VersionStrategy $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(VersionStrategy::class)

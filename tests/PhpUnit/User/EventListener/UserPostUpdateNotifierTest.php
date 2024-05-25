@@ -17,6 +17,7 @@ class UserPostUpdateNotifierTest extends DefaultTestCase
 {
   protected MockObject|UserPostUpdateNotifier $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UserPostUpdateNotifier::class)

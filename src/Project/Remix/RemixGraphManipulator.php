@@ -50,7 +50,7 @@ class RemixGraphManipulator
         [$backward_relation->getParentId()], $preserved_creation_date_mapping, $preserved_seen_date_mapping);
     }
 
-    if (count($backward_relations_to_be_converted) > 0) {
+    if ([] !== $backward_relations_to_be_converted) {
       $this->entity_manager->flush();
     }
   }

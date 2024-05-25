@@ -19,15 +19,17 @@ class CleanLogsCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $output1 = $output;
     $output1->writeln('Deleting log files');
+
     $log_dir = strval($this->parameter_bag->get('catrobat.logs.dir'));
     try {
       FileHelper::emptyDirectory($log_dir);
-    } catch (\Exception $e) {
-      $output->writeln('Clearing log files failed with code '.$e->getCode());
+    } catch (\Exception $exception) {
+      $output->writeln('Clearing log files failed with code '.$exception->getCode());
     }
 
     return 0;

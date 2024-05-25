@@ -21,8 +21,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ProfileController extends AbstractController
 {
-  final public const MIN_PASSWORD_LENGTH = 6;
-  final public const MAX_PASSWORD_LENGTH = 4096;
+  final public const int MIN_PASSWORD_LENGTH = 6;
+
+  final public const int MAX_PASSWORD_LENGTH = 4096;
 
   public function __construct(
     protected ProjectManager $project_manager,
@@ -44,6 +45,7 @@ class ProfileController extends AbstractController
       if (is_null($user)) {
         return $this->redirectToRoute('login');
       }
+
       $project_count = $this->project_manager->countUserProjects($user->getId());
       $view = 'UserManagement/Profile/myProfile.html.twig';
     } else {
@@ -52,6 +54,7 @@ class ProfileController extends AbstractController
       if (is_null($user)) {
         return $this->redirectToRoute('index');
       }
+
       $project_count = $this->project_manager->countPublicUserProjects($id);
       $view = 'UserManagement/Profile/profile.html.twig';
     }
@@ -77,9 +80,11 @@ class ProfileController extends AbstractController
     if (null === $user) {
       return $this->redirectToRoute('login');
     }
+
     if ('0' === $id || $id === $user->getId()) {
       return $this->redirectToRoute('profile');
     }
+
     /** @var User $user_to_follow */
     $user_to_follow = $user_manager->find($id);
     $user->addFollowing($user_to_follow);
@@ -98,9 +103,11 @@ class ProfileController extends AbstractController
     if (null === $user) {
       return $this->redirectToRoute('login');
     }
+
     if ('0' === $id) {
       return $this->redirectToRoute('profile');
     }
+
     /** @var User $user_to_unfollow */
     $user_to_unfollow = $user_manager->find($id);
     $user->removeFollowing($user_to_unfollow);
@@ -132,6 +139,7 @@ class ProfileController extends AbstractController
         $followCollection = $user->getFollowing();
         break;
     }
+
     $length = $followCollection->count();
     $followCollection->first();
     $users = $followCollection->matching($criteria)->toArray();

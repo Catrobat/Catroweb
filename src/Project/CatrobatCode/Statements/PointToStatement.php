@@ -7,6 +7,7 @@ namespace App\Project\CatrobatCode\Statements;
 class PointToStatement extends Statement
 {
   final public const string BEGIN_STRING = 'point to ';
+
   final public const string END_STRING = '<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)

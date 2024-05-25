@@ -20,6 +20,7 @@ class AchievementWorkflow_SilverUser_CommandTest extends KernelTestCase
 {
   protected AchievementWorkflow_SilverUser_Command|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AchievementWorkflow_SilverUser_Command::class)

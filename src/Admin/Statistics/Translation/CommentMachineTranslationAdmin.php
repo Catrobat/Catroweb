@@ -18,6 +18,7 @@ class CommentMachineTranslationAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'comment_machine_translation';
 
+  #[\Override]
   protected function configureExportFields(): array
   {
     return ['id', 'comment.id', 'source_language', 'target_language', 'provider', 'usage_count',
@@ -29,6 +30,7 @@ class CommentMachineTranslationAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -44,6 +46,7 @@ class CommentMachineTranslationAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection

@@ -43,6 +43,7 @@ class DataBaseUtils
       $q = $entity_manager->getConnection()->getDatabasePlatform()->getTruncateTableSql($tableName);
       $entity_manager->getConnection()->executeUpdate($q);
     }
+
     $entity_manager->getConnection()->query('SET FOREIGN_KEY_CHECKS=1');
 
     ProjectDataFixtures::clear();

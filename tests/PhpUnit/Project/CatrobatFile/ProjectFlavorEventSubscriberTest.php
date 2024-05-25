@@ -23,6 +23,7 @@ class ProjectFlavorEventSubscriberTest extends TestCase
 
   private RequestStack $stack;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->stack = new RequestStack();

@@ -112,9 +112,9 @@ class AchievementManager
   {
     $achievements = $this->findAllEnabledAchievements();
     $unlocked_achievements = $this->findUnlockedAchievements($user);
-    $achievements_unlocked_id_list = array_map(fn (Achievement $achievement): ?int => $achievement->getId(), $unlocked_achievements);
+    $achievements_unlocked_id_list = array_map(static fn (Achievement $achievement): ?int => $achievement->getId(), $unlocked_achievements);
 
-    return array_filter($achievements, fn (Achievement $achievement): bool => !in_array($achievement->getId(), $achievements_unlocked_id_list, true));
+    return array_filter($achievements, static fn (Achievement $achievement): bool => !in_array($achievement->getId(), $achievements_unlocked_id_list, true));
   }
 
   public function findMostRecentUserAchievement(User $user): ?UserAchievement
@@ -184,12 +184,14 @@ class AchievementManager
     if ($user->getCreatedAt() > new \DateTime('-1 years')) {
       return null;
     }
+
     $years_with_project_uploads = [];
     foreach ($user->getPrograms() as $project) {
       /** @var Program $project */
       $year = $project->getUploadedAt()->format('Y');
       $years_with_project_uploads[$year] = true;
     }
+
     if (count($years_with_project_uploads) < 1) {
       return null;
     }
@@ -205,12 +207,14 @@ class AchievementManager
     if ($user->getCreatedAt() > new \DateTime('-4 years')) {
       return null;
     }
+
     $years_with_project_uploads = [];
     foreach ($user->getPrograms() as $project) {
       /** @var Program $project */
       $year = $project->getUploadedAt()->format('Y');
       $years_with_project_uploads[$year] = true;
     }
+
     if (count($years_with_project_uploads) < 4) {
       return null;
     }
@@ -233,6 +237,7 @@ class AchievementManager
       $year = $project->getUploadedAt()->format('Y');
       $years_with_project_uploads[$year] = true;
     }
+
     if (count($years_with_project_uploads) < 7) {
       return null;
     }
@@ -293,6 +298,6 @@ class AchievementManager
    */
   protected function mapUserAchievementsToAchievements(array $user_achievements): array
   {
-    return array_map(fn (UserAchievement $achievement): Achievement => $achievement->getAchievement(), $user_achievements);
+    return array_map(static fn (UserAchievement $achievement): Achievement => $achievement->getAchievement(), $user_achievements);
   }
 }

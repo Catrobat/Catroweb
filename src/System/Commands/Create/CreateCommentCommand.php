@@ -26,6 +26,7 @@ class CreateCommentCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -39,6 +40,7 @@ class CreateCommentCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $username = $input->getArgument('user');
@@ -63,6 +65,7 @@ class CreateCommentCommand extends Command
     } catch (\Exception) {
       return 2;
     }
+
     $output->writeln('Commenting '.$program->getName().' with user '.$user->getUsername());
 
     return 0;
@@ -83,6 +86,7 @@ class CreateCommentCommand extends Command
     $notification = new CommentNotification($program->getUser(), $comment);
     $notification->setComment($comment);
     $notification->setSeen(random_int(0, 2) > 1);
+
     $this->em->persist($notification);
 
     $comment->setNotification($notification);

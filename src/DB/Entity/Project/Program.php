@@ -281,6 +281,7 @@ class Program implements \Stringable
     $this->custom_translations = new ArrayCollection();
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return $this->name.' (#'.$this->id.')';
@@ -639,6 +640,7 @@ class Program implements \Stringable
     if ($this->tags->contains($tag)) {
       return;
     }
+
     $this->tags->add($tag);
   }
 
@@ -652,6 +654,7 @@ class Program implements \Stringable
     if ($this->extensions->contains($extension)) {
       return;
     }
+
     $this->extensions->add($extension);
   }
 
@@ -696,7 +699,7 @@ class Program implements \Stringable
   {
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(fn (ProgramRemixRelation $ra): string => $ra->getDescendantId(), $relations));
+    return array_unique(array_map(static fn (ProgramRemixRelation $ra): string => $ra->getDescendantId(), $relations));
   }
 
   public function getScratchRemixParentRelations(): Collection

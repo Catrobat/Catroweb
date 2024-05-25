@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class DroneTakeOffLandBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::AR_DRONE_TAKE_OFF_LAND_BRICK;

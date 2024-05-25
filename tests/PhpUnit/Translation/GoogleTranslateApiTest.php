@@ -22,6 +22,7 @@ class GoogleTranslateApiTest extends TestCase
 
   private MockObject|TranslateClient $client;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->client = $this->createMock(TranslateClient::class);

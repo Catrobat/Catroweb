@@ -19,6 +19,7 @@ class CatrobatFileCompressorTest extends TestCase
 {
   private CatrobatFileCompressor $catrobat_file_compressor;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->catrobat_file_compressor = new CatrobatFileCompressor();

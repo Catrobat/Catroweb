@@ -18,6 +18,7 @@ class NotesAndCreditsValidatorEventSubscriberTest extends TestCase
 {
   private NotesAndCreditsValidatorEventSubscriber $notes_and_credits_validator;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->notes_and_credits_validator = new NotesAndCreditsValidatorEventSubscriber();

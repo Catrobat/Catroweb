@@ -18,6 +18,7 @@ final class NotificationsRequestValidatorTest extends DefaultTestCase
 {
   protected MockObject|NotificationsRequestValidator $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(NotificationsRequestValidator::class)

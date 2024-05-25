@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class DeleteThisCloneBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::DELETE_THIS_CLONE_BRICK;

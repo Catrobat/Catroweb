@@ -31,6 +31,7 @@ class TwigExtension extends AbstractExtension
   ) {
   }
 
+  #[\Override]
   public function getFilters(): array
   {
     return [
@@ -78,6 +79,7 @@ class TwigExtension extends AbstractExtension
     return $number_formatter->format($input);
   }
 
+  #[\Override]
   public function getFunctions(): array
   {
     return [
@@ -151,10 +153,12 @@ class TwigExtension extends AbstractExtension
     }
 
     foreach ($shortNames as $shortName) {
-      if ('en_AU' === $shortName || 'en_CA' === $shortName) {
+      if ('en_AU' === $shortName) {
         continue;
       }
-
+      if ('en_CA' === $shortName) {
+        continue;
+      }
       // Is this locale available in Symfony?
       if (array_key_exists($shortName, $available_locales)) {
         $hl_locale_code = $shortName;
@@ -170,7 +174,7 @@ class TwigExtension extends AbstractExtension
     }
 
     if ($current_language !== $hl_locale_code) {
-      $list = $this->setSelectedLanguage($list, $current_language);
+      return $this->setSelectedLanguage($list, $current_language);
     }
 
     return $list;
@@ -322,6 +326,7 @@ class TwigExtension extends AbstractExtension
           true,
         ];
       }
+
       $list[] = $language;
     }
 

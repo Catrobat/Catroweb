@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class AddItemToUserListBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::ADD_ITEM_LIST_BRICK;
