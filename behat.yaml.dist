@@ -342,6 +342,15 @@ default:
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
                 - App\System\Testing\Behat\Context\ApiContext
 
+        web-system:
+            paths:
+                - "tests/BehatFeatures/web/system"
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+                - App\System\Testing\Behat\Context\ApiContext
+
 
 # --------------------------------------------------------------------------------------------------
 # Exclude specific tests based on their tags here:

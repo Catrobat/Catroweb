@@ -272,6 +272,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
+  $services->load('App\System\Controller\\', __DIR__.'/../src/System/Controller')
+    ->public()
+  ;
+
   $services->load('App\Api_deprecated\Controller\\', __DIR__.'/../src/Api_deprecated/Controller')
     ->public()
   ;

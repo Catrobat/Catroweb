@@ -272,6 +272,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'roles' => 'IS_AUTHENTICATED_FULLY',
         ],
         [
+          'path' => '^/system/',
+          'role' => [
+            'ROLE_ADMIN',
+            'ROLE_SONATA_ADMIN',
+          ],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/admin/',
           'role' => [
             'ROLE_ADMIN',
