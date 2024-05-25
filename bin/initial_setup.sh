@@ -34,7 +34,8 @@ sudo service mariadb start
 sudo mysql_secure_installation
 
 ## Web server (Apache)
-sudo apt install apache2
+sudo apt install apache2 libapache2-mod-php
+sudo a2enmod php8.3
 sudo service apache2 start
 
 ## Install google chrome browser (needed for testing with selenium/behat)
@@ -66,23 +67,30 @@ CREATE DATABASE catroweb_dev;
 
 ## Setup the Apache configuration
 ### Create a symbolic link in /var/www
-sudo ln -s ./public /var/www/catroweb
+sudo ln -s $(pwd) /var/www/catroweb
 ### Copy the Apache configuration file
 sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/catroweb.conf
 ### Define the path to the configuration file
 CONF_FILE="/etc/apache2/sites-available/catroweb.conf"
-### Use sed to edit the file in place
-sudo sed -i "s|ServerName .*|ServerName catroweb|g" $CONF_FILE
-sudo sed -i "s|ServerAdmin .*|ServerAdmin webmaster@localhost|g" $CONF_FILE
-sudo sed -i "s|DocumentRoot .*|DocumentRoot /var/www/catroweb|g" $CONF_FILE
-sudo sed -i "/<Directory \/var\/www\/catroweb>/,/<\/Directory>/c<Directory /var/www/catroweb>\n\tDirectoryIndex /index.php\n\tFallbackResource /index.php\n</Directory>" $CONF_FILE
-sudo sed -i "s|SetEnvIf Authorization .*|SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1|g" $CONF_FILE
+echo "
+<VirtualHost *:80>
+    Servername catroweb
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/catroweb
+    <Directory /var/www/catroweb>
+        DirectoryIndex /index.php
+        FallbackResource /index.php
+    </Directory>
+    SetEnvIf Authorization \"(.*)\" HTTP_AUTHORIZATION=\$1
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+" | sudo tee $CONF_FILE
 ### Add entry to hosts file
 echo "127.0.0.1 catroweb" | sudo tee -a /etc/hosts
 ### Set the correct Apache configuration
 sudo a2dissite 000-default.conf
 sudo a2ensite catroweb.conf
-### Restart Apache service
 sudo service apache2 restart
 
 ## Setup some final permissions
