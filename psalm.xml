@@ -2,7 +2,6 @@
 <!-- 1 is the highest and 8 the lowest error level  -->
 <psalm
         errorLevel="4"
-        resolveFromConfigFile="true"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
@@ -10,15 +9,18 @@
         findUnusedCode="false"
 >
     <projectFiles>
-        <directory name="src" />
+        <directory name="bin" />
         <directory name="config" />
+        <directory name="migrations" />
+        <directory name="public" />
+        <directory name="src" />
+        <directory name="templates" />
         <directory name="tests" />
+        <directory name="translations" />
         <ignoreFiles>
             <directory name="vendor" />
             <!-- Legacy code that will be removed in the future -->
             <directory name="src/Project/CatrobatCode"/>
-            <file name="config/bootstrap.php" />
-            <file name="config/preload.php" />
         </ignoreFiles>
     </projectFiles>
 
@@ -38,5 +40,15 @@
                 <directory name="tests" />
             </errorLevel>
         </InternalMethod>
+        <MissingFile>
+            <errorLevel type="info">
+                <file name="config/bootstrap.php"/>
+            </errorLevel>
+        </MissingFile>
+        <InvalidArgument>
+            <errorLevel type="info">
+                <file name="config/routes.php"/>
+            </errorLevel>
+        </InvalidArgument>
     </issueHandlers>
 </psalm>
