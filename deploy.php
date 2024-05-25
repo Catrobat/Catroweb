@@ -152,6 +152,12 @@ task('clean:db:rollup', function () {
   run('bin/console doctrine:migrations:rollup -n');
 });
 
+// dump the .env file as .env.local.php to speed up the loading of the env vars
+task('dump:env', function () {
+  cd('{{release_path}}');
+  run('composer dump-env prod');
+});
+
 /*
  * Main task
  */
@@ -161,6 +167,7 @@ task('deploy', [
   'deploy:clear_paths',
   'deploy:vendors',
   'install:assets',
+  'dump:env',
   'deploy:cache:clear',
   'deploy:writable',
   'deploy:symlink',
