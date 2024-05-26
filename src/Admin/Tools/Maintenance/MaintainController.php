@@ -134,11 +134,13 @@ class MaintainController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+  #[\Override]
   public function listAction(Request $request): Response
   {
     if (!$this->admin->isGranted('LIST')) {
       throw new AccessDeniedException();
     }
+
     // ... use any methods or services to get statistics data
     $RemovableObjects = [];
     $description = "This will remove all compressed catrobat files in the 'compressed'-directory and flag the projects accordingly";
@@ -164,10 +166,12 @@ class MaintainController extends CRUDController
     $freeSpace = disk_free_space('/');
     $usedSpace = disk_total_space('/') - $freeSpace;
     $usedSpace = $usedSpace < 0 ? 0 : $usedSpace;
+
     $usedSpaceRaw = $usedSpace;
     foreach ($RemovableObjects as $obj) {
       $usedSpaceRaw -= $obj->size_raw;
     }
+
     $projectsSize = $this->get_dir_size(strval($this->file_storage_dir));
     $usedSpaceRaw -= $projectsSize;
     $whole_ram = (float) shell_exec("free | grep Mem | awk '{print $2}'") * 1_000;
@@ -212,14 +216,19 @@ class MaintainController extends CRUDController
       if (null !== $extension && !in_array(pathinfo((string) $filename, PATHINFO_EXTENSION), $extension, true)) {
         continue;
       }
-      if ('..' != $filename && '.' != $filename) {
-        if (is_dir($directory.'/'.$filename)) {
-          $new_folder_size = $this->get_dir_size($directory.'/'.$filename);
-          $count_size += $new_folder_size;
-        } elseif (is_file($directory.'/'.$filename)) {
-          $count_size += filesize($directory.'/'.$filename);
-          ++$count;
-        }
+
+      if ('..' == $filename) {
+        continue;
+      }
+      if ('.' == $filename) {
+        continue;
+      }
+      if (is_dir($directory.'/'.$filename)) {
+        $new_folder_size = $this->get_dir_size($directory.'/'.$filename);
+        $count_size += $new_folder_size;
+      } elseif (is_file($directory.'/'.$filename)) {
+        $count_size += filesize($directory.'/'.$filename);
+        ++$count;
       }
     }
 

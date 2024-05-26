@@ -16,6 +16,7 @@ class VersionStrategy implements VersionStrategyInterface
   /**
    * @throws \Exception
    */
+  #[\Override]
   public function getVersion(string $path): string
   {
     $hash = '';
@@ -34,6 +35,7 @@ class VersionStrategy implements VersionStrategyInterface
   /**
    * @throws \Exception
    */
+  #[\Override]
   public function applyVersion(string $path): string
   {
     return $path.$this->getVersion($path);

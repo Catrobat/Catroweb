@@ -32,6 +32,7 @@ class ApkStatusController extends AbstractController
     if (null === $project) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
+
     $result = [];
     switch ($project->getApkStatus()) {
       case Program::APK_READY:

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class TouchAndSlideBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::TOUCH_AND_SLIDE_BRICK;

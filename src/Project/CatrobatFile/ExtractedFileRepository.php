@@ -59,10 +59,10 @@ class ExtractedFileRepository
       $extract_dir = $this->local_path.$project_id.'/';
       FileHelper::removeDirectory($extract_dir);
       $this->project_manager->save($project);
-    } catch (\Exception $e) {
+    } catch (\Exception $exception) {
       $this->logger->error(
-        "Removing extracted project files failed with code '".$e->getCode().
-        "' and message: '".$e->getMessage()."'"
+        "Removing extracted project files failed with code '".$exception->getCode().
+        "' and message: '".$exception->getMessage()."'"
       );
     }
   }

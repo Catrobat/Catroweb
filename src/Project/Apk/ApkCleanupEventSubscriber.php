@@ -23,6 +23,7 @@ class ApkCleanupEventSubscriber implements EventSubscriberInterface
     }
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforePersistEvent::class => 'handleEvent'];

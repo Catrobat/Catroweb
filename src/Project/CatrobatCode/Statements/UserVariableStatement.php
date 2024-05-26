@@ -8,19 +8,11 @@ use App\Project\CatrobatCode\SyntaxHighlightingConstants;
 
 class UserVariableStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = '';
+  final public const string BEGIN_STRING = '';
 
-  /**
-   * @var string
-   */
-  final public const AT_END_STRING = ' at (';
-  /**
-   * @var string
-   */
-  final public const TO_END_STRING = ' to (';
+  final public const string AT_END_STRING = ' at (';
+
+  final public const string TO_END_STRING = ' to (';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces, mixed $value, bool $useAt = false)
   {

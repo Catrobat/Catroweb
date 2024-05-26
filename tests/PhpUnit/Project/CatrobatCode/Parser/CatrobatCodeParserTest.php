@@ -22,12 +22,14 @@ class CatrobatCodeParserTest extends TestCase
 {
   protected CatrobatCodeParser $parser;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->parser = new CatrobatCodeParser();
   }
 
-  public function tearDown(): void
+  #[\Override]
+  protected function tearDown(): void
   {
     FileHelper::emptyDirectory(BootstrapExtension::$CACHE_DIR);
   }
@@ -72,16 +74,11 @@ class CatrobatCodeParserTest extends TestCase
   }
 
   /**
-   * @return \App\Project\CatrobatFile\ExtractedCatrobatFile[][]
+   * @return ExtractedCatrobatFile[][]
    */
   public static function provideValidProgramData(): array
   {
-    $programs = [];
-    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '')];
-    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '')];
-    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/', '', '')];
-
-    return $programs;
+    return [[new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '')], [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '')], [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/', '', '')]];
   }
 
   public static function provideFaultyProgramData(): \Generator

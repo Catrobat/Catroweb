@@ -19,10 +19,12 @@ class VersionValidatorEventSubscriberTest extends TestCase
 {
   private VersionValidatorEventSubscriber $version_validator;
 
+  #[\Override]
   protected function setUp(): void
   {
     $filesystem = new Filesystem();
     $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', BootstrapExtension::$CACHE_DIR.'base/');
+
     $this->version_validator = new VersionValidatorEventSubscriber();
   }
 

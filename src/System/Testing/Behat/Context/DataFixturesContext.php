@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Testing\Behat\Context;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
@@ -48,8 +49,11 @@ class DataFixturesContext implements Context
   use ContextTrait;
 
   private array $projects = [];
+
   private array $featured_projects = [];
+
   private array $media_files = [];
+
   private array $users = [];
 
   /**
@@ -93,6 +97,7 @@ class DataFixturesContext implements Context
       $user = $this->insertUser($config, false);
       $this->users[] = $user;
     }
+
     $this->getManager()->flush();
   }
 
@@ -132,6 +137,7 @@ class DataFixturesContext implements Context
       $user_config['admin'] = 'true';
       $this->insertUser($user_config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -146,6 +152,7 @@ class DataFixturesContext implements Context
     for ($i = 0; $i < $user_count; ++$i) {
       $list[] = 'User'.($base + $i);
     }
+
     $table = TableNode::fromList($list);
     $this->thereAreUsers($table);
   }
@@ -198,6 +205,7 @@ class DataFixturesContext implements Context
       $notification = new FollowNotification($followedUser, $user);
       $this->getManager()->persist($notification);
     }
+
     $this->getManager()->flush();
   }
 
@@ -266,9 +274,11 @@ class DataFixturesContext implements Context
       $survey->setPlatform($survey_config['platform'] ?? '');
       $em->persist($survey);
     }
+
     $em->flush();
     $this->getManager()->flush();
   }
+
   // -------------------------------------------------------------------------------------------------------------------
   //
   // -------------------------------------------------------------------------------------------------------------------
@@ -286,10 +296,12 @@ class DataFixturesContext implements Context
       if (!$user) {
         throw new \RuntimeException('User not found: '.$joinRequestConfig['User']);
       }
+
       $studio = $this->getStudioManager()->findStudioByName($joinRequestConfig['Studio']);
-      if (!$studio) {
+      if (!$studio instanceof Studio) {
         throw new \RuntimeException('Studio not found: '.$joinRequestConfig['Studio']);
       }
+
       $joinRequest = new StudioJoinRequest();
       $joinRequest->setUser($user);
       $joinRequest->setStudio($studio);
@@ -326,8 +338,10 @@ class DataFixturesContext implements Context
       $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
       $em->persist($maintenanceInformation);
     }
+
     $em->flush();
   }
+
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
   // -------------------------------------------------------------------------------------------------------------------
@@ -343,6 +357,7 @@ class DataFixturesContext implements Context
       $inserted_project = $this->insertProject($config, false);
       $this->projects[] = $inserted_project;
     }
+
     $this->getManager()->flush();
   }
 
@@ -368,6 +383,7 @@ class DataFixturesContext implements Context
       $inserted_project = $this->insertProject($project_info, false);
       $this->projects[] = $inserted_project;
     }
+
     $this->getManager()->flush();
   }
 
@@ -411,6 +427,7 @@ class DataFixturesContext implements Context
       $project = $this->insertProject($config, false);
       $file_repo->saveProjectZipFile(new File($this->FIXTURES_DIR.'test.catrobat'), $project->getId());
     }
+
     $this->getManager()->flush();
   }
 
@@ -424,6 +441,7 @@ class DataFixturesContext implements Context
       $project = $this->insertFeaturedProject($config, false);
       $this->featured_projects[] = $project;
     }
+
     $this->getManager()->flush();
   }
 
@@ -447,6 +465,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertExampleProject($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -461,6 +480,7 @@ class DataFixturesContext implements Context
       $config['description'] = str_repeat('10 chars !', 950).'the end of the description';
       $this->insertProject($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -535,7 +555,7 @@ class DataFixturesContext implements Context
   {
     /** @var Program $project */
     $project = $this->getProjectManager()->findAll()[0];
-    Assert::assertNotNull($project->getExtensions());
+    Assert::assertTrue($project->getExtensions()->isEmpty());
   }
 
   /**
@@ -602,7 +622,7 @@ class DataFixturesContext implements Context
     $project_manager = $this->getProjectManager();
     $project = $project_manager->find('1');
     Assert::assertNotNull($project, 'No project added');
-    Assert::assertEquals('phirocode', $project->getFlavor(), 'Project is NOT flagged as phiro');
+    Assert::assertEquals(Flavor::PHIROCODE, $project->getFlavor(), 'Project is NOT flagged as phiro');
   }
 
   /**
@@ -613,7 +633,7 @@ class DataFixturesContext implements Context
     $project_manager = $this->getProjectManager();
     $project = $project_manager->find('1');
     Assert::assertNotNull($project, 'No project added');
-    Assert::assertNotEquals('phirocode', $project->getFlavor(), 'Project is flagged as a phiro');
+    Assert::assertNotEquals(Flavor::PHIROCODE, $project->getFlavor(), 'Project is flagged as a phiro');
   }
 
   /**
@@ -648,6 +668,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertUserComment($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -665,6 +686,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertProjectReport($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -707,6 +729,7 @@ class DataFixturesContext implements Context
       $new_package->setNameUrl($package['name_url']);
       $em->persist($new_package);
     }
+
     $em->flush();
   }
 
@@ -734,6 +757,7 @@ class DataFixturesContext implements Context
       $package->setCategories($current_categories);
       $em->persist($new_category);
     }
+
     $em->flush();
   }
 
@@ -767,6 +791,7 @@ class DataFixturesContext implements Context
           $new_file->addFlavor($flavor_repo->getFlavorByName(trim($flavor)));
         }
       }
+
       $new_file->setAuthor($file['author']);
 
       $file_repo->saveFile(
@@ -791,6 +816,7 @@ class DataFixturesContext implements Context
         'download_url' => 'http://localhost/app/download-media/'.$file['id'],
       ];
     }
+
     $em->flush();
   }
 
@@ -802,6 +828,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertFlavor($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -813,6 +840,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertUserLikeSimilarity($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -824,6 +852,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertUserRemixSimilarity($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -837,6 +866,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertProjectLike($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -848,6 +878,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertTag($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -859,6 +890,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertExtension($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -870,6 +902,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertForwardRemixRelation($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -881,6 +914,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertBackwardRemixRelation($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -892,6 +926,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->insertScratchRemixRelation($config, false);
     }
+
     $this->getManager()->flush();
   }
 
@@ -925,18 +960,20 @@ class DataFixturesContext implements Context
           throw new \Exception('Unknown type "'.$data['type'].'" given.');
         }
       }
+
       if (!ProgramLike::isValidType($type)) {
         throw new \Exception('Unknown type "'.$data['type'].'" given.');
       }
 
       $like = new ProgramLike($project, $user, $type);
 
-      if (array_key_exists('created at', $data) && !empty(trim((string) $data['created at']))) {
+      if (array_key_exists('created at', $data) && ('' !== trim((string) $data['created at']) && '0' !== trim((string) $data['created at']))) {
         $like->setCreatedAt(new \DateTime($data['created at'], new \DateTimeZone('UTC')));
       }
 
       $em->persist($like);
     }
+
     $em->flush();
   }
 
@@ -995,6 +1032,7 @@ class DataFixturesContext implements Context
       if (isset($notification['id'])) {
         $to_create->setId((int) $notification['id']);
       }
+
       if (isset($notification['seen'])) {
         $to_create->setSeen((bool) $notification['seen']);
       }
@@ -1036,6 +1074,7 @@ class DataFixturesContext implements Context
       $to_create = new CatroNotification($user, 'Random Title', 'Random Text');
       $em->persist($to_create);
     }
+
     $em->flush();
   }
 
@@ -1080,10 +1119,11 @@ class DataFixturesContext implements Context
           $to_create = new CatroNotification($user, 'Random Title', 'Random Text');
           $em->persist($to_create);
           break;
-        case 'default':
-          Assert::assertTrue(false);
+        default:
+          throw new \InvalidArgumentException('Unknown type "'.$type.'" given.');
       }
     }
+
     $em->flush();
   }
 
@@ -1095,6 +1135,7 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $config) {
       $this->getUserDataFixtures()->overwriteCreatedAt($config);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1178,6 +1219,7 @@ class DataFixturesContext implements Context
 
       $this->getManager()->persist($studio_user);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1199,6 +1241,7 @@ class DataFixturesContext implements Context
       $studio_project = $this->getStudioManager()->addProjectToStudio($user, $studio, $project);
       $this->getManager()->persist($studio_project);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1219,6 +1262,7 @@ class DataFixturesContext implements Context
       $studio_comment = $this->getStudioManager()->addCommentToStudio($user, $studio, $config['comment']);
       $this->getManager()->persist($studio_comment);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1242,6 +1286,7 @@ class DataFixturesContext implements Context
       ;
       $this->getManager()->persist($achievement);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1259,11 +1304,12 @@ class DataFixturesContext implements Context
       $user_achievement = (new UserAchievement())
         ->setUser($user)
         ->setAchievement($achievement)
-        ->setSeenAt(!empty($config['seen_at']) ? new \DateTime($config['seen_at']) : null)
-        ->setUnlockedAt(!empty($config['unlocked_at']) ? new \DateTime($config['unlocked_at']) : new \DateTime('now'))
+        ->setSeenAt(empty($config['seen_at']) ? null : new \DateTime($config['seen_at']))
+        ->setUnlockedAt(empty($config['unlocked_at']) ? new \DateTime('now') : new \DateTime($config['unlocked_at']))
       ;
       $this->getManager()->persist($user_achievement);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1292,6 +1338,15 @@ class DataFixturesContext implements Context
   {
     $tags = $this->getExtensionRepository()->findAll();
     Assert::assertCount($number_of_extensions, $tags);
+  }
+
+  /**
+   * @Then there should be :number_of_flavors flavors in the database
+   */
+  public function thereShouldBeFlavorsInTheDatabase(int $number_of_flavors): void
+  {
+    $tags = $this->getFlavorRepository()->findAll();
+    Assert::assertCount($number_of_flavors, $tags);
   }
 
   /**
@@ -1339,6 +1394,16 @@ class DataFixturesContext implements Context
   {
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:update:extensions'], [], 'Creating Extensions'
+    );
+  }
+
+  /**
+   * @Given I run the update flavors command
+   */
+  public function iRunTheUpdateFlavorsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:flavors'], [], 'Creating Flavors'
     );
   }
 
@@ -1461,6 +1526,7 @@ class DataFixturesContext implements Context
       $project_machine_translation->setCachedTranslation($cached_name, $cached_description, $cached_credits);
       $this->getManager()->persist($project_machine_translation);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1474,6 +1540,7 @@ class DataFixturesContext implements Context
     foreach ($project_machine_translations as $translation) {
       $this->getManager()->refresh($translation);
     }
+
     $table_rows = $table->getHash();
 
     Assert::assertEquals(count($table_rows), count($project_machine_translations), 'table has different number of rows');
@@ -1491,7 +1558,7 @@ class DataFixturesContext implements Context
       $cached_credits = $translation->getCachedCredits();
 
       $matching_row = array_filter($table_rows,
-        fn ($row): bool => $project_id == $row['project_id']
+        static fn ($row): bool => $project_id == $row['project_id']
           && $source_language == $row['source_language']
           && $target_language == $row['target_language']
           && $provider == $row['provider']
@@ -1500,7 +1567,7 @@ class DataFixturesContext implements Context
           && $cached_description == ($row['cached_description'] ?? null)
           && $cached_credits == ($row['cached_credits'] ?? null));
 
-      Assert::assertEquals(1, count($matching_row), "row not found: {$project_id}");
+      Assert::assertEquals(1, count($matching_row), 'row not found: '.$project_id);
     }
   }
 
@@ -1522,6 +1589,7 @@ class DataFixturesContext implements Context
       $comment_machine_translation = new CommentMachineTranslation($comment, $source_language, $target_language, $provider, $usage_count);
       $this->getManager()->persist($comment_machine_translation);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1535,6 +1603,7 @@ class DataFixturesContext implements Context
     foreach ($comment_machine_translations as $translation) {
       $this->getManager()->refresh($translation);
     }
+
     $table_rows = $table->getHash();
 
     Assert::assertEquals(count($comment_machine_translations), count($table_rows), 'table has different number of rows');
@@ -1547,13 +1616,13 @@ class DataFixturesContext implements Context
       $usage_count = $translation->getUsageCount();
 
       $matching_row = array_filter($table_rows,
-        fn ($row): bool => $comment_id == $row['comment_id']
+        static fn ($row): bool => $comment_id == $row['comment_id']
           && $source_language == $row['source_language']
           && $target_language == $row['target_language']
           && $provider == $row['provider']
           && $usage_count == $row['usage_count']);
 
-      Assert::assertEquals(1, count($matching_row), "row not found: {$comment_id}");
+      Assert::assertEquals(1, count($matching_row), 'row not found: '.$comment_id);
     }
   }
 
@@ -1575,6 +1644,7 @@ class DataFixturesContext implements Context
       $project_custom_translation->setCredits($credit);
       $this->getManager()->persist($project_custom_translation);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1589,6 +1659,7 @@ class DataFixturesContext implements Context
     foreach ($project_custom_translations as $translation) {
       $this->getManager()->refresh($translation);
     }
+
     $table_rows = $table->getHash();
 
     Assert::assertEquals(count($project_custom_translations), count($table_rows), 'table has different number of rows');
@@ -1602,13 +1673,13 @@ class DataFixturesContext implements Context
       $credit = $translation->getCredits();
 
       $matching_row = array_filter($table_rows,
-        fn ($row): bool => $project_id == $row['project_id']
+        static fn ($row): bool => $project_id == $row['project_id']
           && $language == $row['language']
           && $name == $row['name']
           && $description == $row['description']
           && $credit == $row['credit']);
 
-      Assert::assertEquals(1, count($matching_row), "row not found: {$project_id}");
+      Assert::assertEquals(1, count($matching_row), 'row not found: '.$project_id);
     }
   }
 }

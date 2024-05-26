@@ -26,7 +26,7 @@ class FeatureFlagManager
         $flagMap[$name] = new FeatureFlag($name, $value);
         $flag = $this->entityManager->getRepository(FeatureFlag::class)->findOneBy(['name' => $name]);
 
-        if (!$flag) {
+        if (null === $flag) {
           $flag = $flagMap[$name];
           $this->entityManager->persist($flag);
         }
@@ -39,6 +39,7 @@ class FeatureFlagManager
           $this->entityManager->remove($flag);
         }
       }
+
       $this->entityManager->flush();
     }
   }
@@ -52,7 +53,7 @@ class FeatureFlagManager
   {
     $flag = $this->entityManager->getRepository(FeatureFlag::class)->findOneBy(['name' => $flagName]);
 
-    if (!$flag) {
+    if (null === $flag) {
       $flag = new FeatureFlag($flagName, $value);
       $this->entityManager->persist($flag);
     } else {
@@ -72,7 +73,7 @@ class FeatureFlagManager
 
     $flag = $this->entityManager->getRepository(FeatureFlag::class)->findOneBy(['name' => $flagName]);
 
-    if ($flag) {
+    if (null !== $flag) {
       return $flag->getValue();
     }
 

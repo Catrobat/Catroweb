@@ -24,7 +24,7 @@ class ValidationWrapper
 
   public function hasError(): bool
   {
-    return count($this->getErrors()) > 0;
+    return [] !== $this->getErrors();
   }
 
   public function getError(?string $key = null): string

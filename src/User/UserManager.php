@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\User;
 
+use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\UserRepository;
 use App\Project\ProjectManager;
@@ -98,10 +99,12 @@ class UserManager implements UserManagerInterface
       if ($avatar = $userdata['profile']['images']['90x90'] ?? null) {
         $user->setAvatar($avatar);
       }
+
       $joined = TimeUtils::dateTimeFromScratch($userdata['history']['joined']);
-      if ($joined) {
+      if ($joined instanceof \DateTime) {
         $user->changeCreatedAt($joined);
       }
+
       $this->save($user);
       $this->entity_manager->refresh($user);
     }
@@ -134,7 +137,7 @@ class UserManager implements UserManagerInterface
       ->execute()
     ;
 
-    return array_map(fn ($value): mixed => $value['id'], $associative_array);
+    return array_map(static fn ($value): mixed => $value['id'], $associative_array);
   }
 
   public function getActiveUserIDList(int $years): array
@@ -142,16 +145,16 @@ class UserManager implements UserManagerInterface
     $result = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
       ->from(User::class, 'user')
-      ->leftjoin(\App\DB\Entity\Project\Program::class, 'project', Join::WITH, 'user.id = project.user')
+      ->leftjoin(Program::class, 'project', Join::WITH, 'user.id = project.user')
       ->where('user.createdAt <= :date')
-      ->setParameter('date', new \DateTime("-{$years} years"))
+      ->setParameter('date', new \DateTime(sprintf('-%d years', $years)))
       ->groupBy('user.id')
-      ->having("COUNT(user.id) >= {$years}")
+      ->having('COUNT(user.id) >= '.$years)
       ->getQuery()
       ->execute()
     ;
 
-    return array_map(fn ($value): mixed => $value['id'], $result);
+    return array_map(static fn ($value): mixed => $value['id'], $result);
   }
 
   protected function userSearchQuery(string $query): BoolQuery
@@ -162,6 +165,7 @@ class UserManager implements UserManagerInterface
     foreach ($words as &$word) {
       $word .= '*';
     }
+
     unset($word);
     $query = implode(' ', $words);
 
@@ -179,6 +183,7 @@ class UserManager implements UserManagerInterface
 
   // Sonata ->
 
+  #[\Override]
   public function updatePassword(UserInterface $user): void
   {
     $plainPassword = $user->getPlainPassword();
@@ -193,6 +198,7 @@ class UserManager implements UserManagerInterface
     $user->eraseCredentials();
   }
 
+  #[\Override]
   public function findUserByUsername(string $username): ?UserInterface
   {
     return $this->findOneBy([
@@ -200,6 +206,7 @@ class UserManager implements UserManagerInterface
     ]);
   }
 
+  #[\Override]
   public function findUserByEmail(string $email): ?UserInterface
   {
     return $this->findOneBy([
@@ -207,11 +214,12 @@ class UserManager implements UserManagerInterface
     ]);
   }
 
+  #[\Override]
   public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface
   {
     if (1 === preg_match('/^.+@\S+\.\S+$/', $usernameOrEmail)) {
       $user = $this->findUserByEmail($usernameOrEmail);
-      if (null !== $user) {
+      if ($user instanceof UserInterface) {
         return $user;
       }
     }
@@ -219,11 +227,13 @@ class UserManager implements UserManagerInterface
     return $this->findUserByUsername($usernameOrEmail);
   }
 
+  #[\Override]
   public function findUserByConfirmationToken(string $token): ?UserInterface
   {
     return $this->findOneBy(['confirmation_token' => $token]);
   }
 
+  #[\Override]
   public function getClass(): string
   {
     return User::class;
@@ -232,31 +242,37 @@ class UserManager implements UserManagerInterface
   /**
    * @return array<User>
    */
+  #[\Override]
   public function findAll(): array
   {
     return $this->user_repository->findAll();
   }
 
+  #[\Override]
   public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
   {
     return $this->user_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
+  #[\Override]
   public function findOneBy(array $criteria, ?array $orderBy = null): ?User
   {
     return $this->user_repository->findOneBy($criteria, $orderBy);
   }
 
+  #[\Override]
   public function find(mixed $id): ?User
   {
     return $this->user_repository->find($id);
   }
 
+  #[\Override]
   public function create(): User
   {
     return new User();
   }
 
+  #[\Override]
   public function save($entity, $andFlush = true): void
   {
     $this->entity_manager->persist($entity);
@@ -265,6 +281,7 @@ class UserManager implements UserManagerInterface
     }
   }
 
+  #[\Override]
   public function delete($entity, $andFlush = true): void
   {
     $this->entity_manager->remove($entity);

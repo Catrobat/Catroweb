@@ -18,6 +18,7 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -29,6 +30,7 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
    * @throws \ImagickException
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $username = posix_getpwuid(posix_geteuid())['name'];

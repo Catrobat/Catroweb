@@ -69,6 +69,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
         $this->project_manager->find($object->getId())
       );
     }
+
     if (null == $this->extractedProject) {
       return [];
     }
@@ -109,6 +110,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
         $this->project_manager->find($object->getId())
       );
     }
+
     if (null == $this->extractedProject) {
       return [];
     }
@@ -134,6 +136,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
     return $this->extractedProject->getContainingCodeObjects();
   }
 
+  #[\Override]
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     /** @var ProxyQuery $query */
@@ -148,6 +151,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
     return $query;
   }
 
+  #[\Override]
   protected function configureShowFields(ShowMapper $show): void
   {
     // Here we set the fields of the ShowMapper variable, $show (but this can be called anything)
@@ -183,7 +187,8 @@ class ApproveProjectsAdmin extends AbstractAdmin
         'template' => 'Admin/project_containing_code_objects.html.twig',
       ])
       ->add('Actions', null, [
-        'accessor' => function ($subject): void {}, // Just some buttons, nothing to "access"!
+        'accessor' => static function ($subject): void {
+        }, // Just some buttons, nothing to "access"!
         'template' => 'Admin/project_approve_action.html.twig',
       ])
     ;
@@ -194,6 +199,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     $form
@@ -207,6 +213,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -223,6 +230,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -236,6 +244,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('create')->remove('delete');

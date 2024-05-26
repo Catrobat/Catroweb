@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ChangeTempoByNBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::CHANGE_TEMPO_BY_N_BRICK;

@@ -10,6 +10,11 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     ->requirements(['theme' => '%themeRoutes%'])
   ;
 
+  $routingConfigurator->import('../../src/System/Controller', 'annotation')
+    ->prefix('/{theme}/')
+    ->requirements(['theme' => 'system'])
+  ;
+
   $routingConfigurator->import('../../src/Admin/', 'annotation')
     ->prefix('/admin/')
     ->requirements(['theme' => 'admin'])

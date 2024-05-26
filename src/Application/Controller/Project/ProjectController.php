@@ -13,6 +13,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
+use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\Event\CheckScratchProjectEvent;
@@ -33,12 +34,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectController extends AbstractController
 {
-  public const NOT_FOR_KIDS = 1;
-  public const NOT_FOR_KIDS_MODERATOR = 2;
+  public const int NOT_FOR_KIDS = 1;
+
+  public const int NOT_FOR_KIDS_MODERATOR = 2;
 
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
@@ -64,14 +67,16 @@ class ProjectController extends AbstractController
   public function project(Request $request, string $id): Response
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
 
       return $this->redirectToRoute('index');
     }
+
     if ($project->isScratchProgram()) {
       $this->event_dispatcher->dispatch(new CheckScratchProjectEvent($project->getScratchId()));
     }
+
     $viewed = $request->getSession()->get('viewed', []);
     $this->checkAndAddViewed($request, $project, $viewed);
     $referrer = $request->headers->get('referer');
@@ -87,6 +92,7 @@ class ProjectController extends AbstractController
         $active_user_like_types[] = $like->getType();
       }
     }
+
     $active_like_types = $this->project_manager->findProjectLikeTypes($project->getId());
     $total_like_count = $this->project_manager->totalLikeCount($project->getId());
     $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
@@ -127,6 +133,7 @@ class ProjectController extends AbstractController
 
       throw $this->createAccessDeniedException('Invalid like-type for project given!');
     }
+
     $project = $this->project_manager->find($id);
     if (null === $project) {
       if ($request->isXmlHttpRequest()) {
@@ -138,6 +145,7 @@ class ProjectController extends AbstractController
 
       throw $this->createNotFoundException('Project with given ID does not exist!');
     }
+
     /** @var User|null $user */
     $user = $this->getUser();
     if (!$user) {
@@ -153,6 +161,7 @@ class ProjectController extends AbstractController
 
       return $this->redirectToRoute('login');
     }
+
     try {
       $this->project_manager->changeLike($project, $user, $type, $action);
     } catch (\InvalidArgumentException) {
@@ -165,13 +174,14 @@ class ProjectController extends AbstractController
 
       throw $this->createAccessDeniedException('Invalid action given!');
     }
+
     if ($project->getUser() !== $user) {
       $existing_notifications = $this->notification_repo->getLikeNotificationsForProject(
         $project, $project->getUser(), $user
       );
 
       if (ProgramLike::ACTION_ADD === $action) {
-        if (0 === count($existing_notifications)) {
+        if ([] === $existing_notifications) {
           $notification = new LikeNotification($project->getUser(), $user, $project);
           $this->notification_service->addNotification($notification);
         }
@@ -184,12 +194,14 @@ class ProjectController extends AbstractController
         }
       }
     }
+
     if (!$request->isXmlHttpRequest()) {
       return $this->redirectToRoute('program', ['id' => $id]);
     }
+
     $user_locale = $request->getLocale();
     $total_like_count = $this->project_manager->totalLikeCount($project->getId());
-    $active_like_types = array_map(fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->project_manager->findProjectLikeTypes($project->getId()));
+    $active_like_types = array_map(static fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->project_manager->findProjectLikeTypes($project->getId()));
 
     return new JsonResponse([
       'totalLikeCount' => [
@@ -230,22 +242,27 @@ class ProjectController extends AbstractController
         Response::HTTP_UNPROCESSABLE_ENTITY
       );
     }
+
     $user = $this->getUser();
-    if (null === $user) {
+    if (!$user instanceof UserInterface) {
       return $this->redirectToRoute('login');
     }
+
     $project = $this->project_manager->find($id);
     if (!$project) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
+
     if ($project->getUser() !== $user) {
       throw $this->createAccessDeniedException('Not your project!');
     }
+
     $project->setName($value);
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
+
     $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
-    if ($extracted_file) {
+    if ($extracted_file instanceof ExtractedCatrobatFile) {
       $extracted_file->setName($value);
       $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
       $this->file_repository->deleteProjectZipFileIfExists($project->getId());
@@ -269,22 +286,27 @@ class ProjectController extends AbstractController
         'message' => $this->translator
           ->trans('project.tooLongDescription', [], 'catroweb'), ]);
     }
+
     $user = $this->getUser();
-    if (null === $user) {
+    if (!$user instanceof UserInterface) {
       return $this->redirectToRoute('login');
     }
+
     $project = $this->project_manager->find($id);
     if (!$project) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
+
     if ($project->getUser() !== $user) {
       throw $this->createAccessDeniedException('Not your project!');
     }
+
     $project->setDescription($value);
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
+
     $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
-    if ($extracted_file) {
+    if ($extracted_file instanceof ExtractedCatrobatFile) {
       $extracted_file->setDescription($value);
       $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
       $this->file_repository->deleteProjectZipFileIfExists($project->getId());
@@ -308,22 +330,27 @@ class ProjectController extends AbstractController
         'message' => $this->translator
           ->trans('project.tooLongCredits', [], 'catroweb'), ]);
     }
+
     $user = $this->getUser();
-    if (null === $user) {
+    if (!$user instanceof UserInterface) {
       return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
+
     $project = $this->project_manager->find($id);
     if (null === $project) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
+
     if ($project->getUser() !== $user) {
       throw $this->createAccessDeniedException('Not your project!');
     }
+
     $project->setCredits($value);
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
+
     $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
-    if ($extracted_file) {
+    if ($extracted_file instanceof ExtractedCatrobatFile) {
       $extracted_file->setNotesAndCredits($value);
       $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
       $this->file_repository->deleteProjectZipFileIfExists($project->getId());
@@ -341,22 +368,27 @@ class ProjectController extends AbstractController
     if (!$request->query->has('target_language')) {
       return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
     }
+
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       return new Response('No project found for this id', Response::HTTP_NOT_FOUND);
     }
+
     $source_language = $request->query->get('source_language');
     $source_language = is_null($source_language) ? $source_language : (string) $source_language;
+
     $target_language = (string) $request->query->get('target_language');
     if ($source_language === $target_language) {
       return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
     $response = new JsonResponse();
     $response->setEtag(md5($project->getName().$project->getDescription().$project->getCredits()).$target_language);
     $response->setPublic();
     if ($response->isNotModified($request)) {
       return $response;
     }
+
     $translation_result = $this->translation_delegate->translateProject($project, $source_language, $target_language);
     if (null === $translation_result) {
       return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
@@ -389,7 +421,7 @@ class ProjectController extends AbstractController
   public function projectCustomTranslationLanguageList(string $id): Response
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
@@ -404,9 +436,10 @@ class ProjectController extends AbstractController
   {
     $arr_comment = $this->comment_repository->getProjectCommentDetailViewData($id);
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($arr_comment['program_id'] ?? null);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       return $this->redirectToIndexOnError();
     }
+
     $comment_list = $this->comment_repository->getProjectCommentDetailViewCommentListData($id);
     array_unshift($comment_list, $arr_comment);
 
@@ -426,13 +459,14 @@ class ProjectController extends AbstractController
     if (null === $project) {
       return $this->redirectToIndexOnError();
     }
+
     if (self::NOT_FOR_KIDS_MODERATOR == $project->getNotForKids()) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_for_kids_moderator', [], 'catroweb'));
     } elseif (self::NOT_FOR_KIDS == $project->getNotForKids()) {
-      $project->setNotForKids(false);
+      $project->setNotForKids(0);
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_safe_for_kids', [], 'catroweb'));
     } else {
-      $project->setNotForKids(true);
+      $project->setNotForKids(1);
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_for_kids', [], 'catroweb'));
     }
 
@@ -488,7 +522,7 @@ class ProjectController extends AbstractController
   private function projectCustomTranslationDeleteAction(Request $request, string $id): Response
   {
     $user = $this->getUser();
-    if (null === $user) {
+    if (!$user instanceof UserInterface) {
       return new Response(null, Response::HTTP_UNAUTHORIZED);
     }
 
@@ -519,8 +553,8 @@ class ProjectController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (\InvalidArgumentException $exception) {
-      return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+    } catch (\InvalidArgumentException $invalidArgumentException) {
+      return new Response($invalidArgumentException->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
     return new Response(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -529,7 +563,7 @@ class ProjectController extends AbstractController
   private function projectCustomTranslationGetAction(Request $request, string $id): Response
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
@@ -555,8 +589,8 @@ class ProjectController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (\InvalidArgumentException $exception) {
-      return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+    } catch (\InvalidArgumentException $invalidArgumentException) {
+      return new Response($invalidArgumentException->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
     return new Response($result, null == $result ? Response::HTTP_NOT_FOUND : Response::HTTP_OK);
@@ -565,7 +599,7 @@ class ProjectController extends AbstractController
   private function projectCustomTranslationPutAction(Request $request, string $id): Response
   {
     $user = $this->getUser();
-    if (null === $user) {
+    if (!$user instanceof UserInterface) {
       return new Response(null, Response::HTTP_UNAUTHORIZED);
     }
 
@@ -602,8 +636,8 @@ class ProjectController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (\InvalidArgumentException $exception) {
-      return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+    } catch (\InvalidArgumentException $invalidArgumentException) {
+      return new Response($invalidArgumentException->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
     return new Response(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);

@@ -13,6 +13,7 @@ class ObjectStatement extends Statement
     parent::__construct($statementFactory, null, $spaces, '', '');
   }
 
+  #[\Override]
   public function execute(): string
   {
     return $this->name;

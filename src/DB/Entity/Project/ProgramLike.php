@@ -7,6 +7,7 @@ namespace App\DB\Entity\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramLikeRepository;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_like')]
@@ -15,13 +16,19 @@ use Doctrine\ORM\Mapping as ORM;
 class ProgramLike implements \Stringable
 {
   final public const int TYPE_NONE = 0;
+
   final public const int TYPE_THUMBS_UP = 1;
+
   final public const int TYPE_SMILE = 2;
+
   final public const int TYPE_LOVE = 3;
+
   final public const int TYPE_WOW = 4;
 
   final public const string ACTION_ADD = 'add';
+
   final public const string ACTION_REMOVE = 'remove';
+
   // -> new types go here...
 
   public static array $VALID_TYPES = [
@@ -48,7 +55,7 @@ class ProgramLike implements \Stringable
    * -----------------------------------------------------------------------------------------------------------------
    */
   #[ORM\Id]
-  #[ORM\Column(type: 'guid', nullable: false)]
+  #[ORM\Column(type: Types::GUID, nullable: false)]
   protected string $program_id;
 
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
@@ -56,7 +63,7 @@ class ProgramLike implements \Stringable
   protected Program $program;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'guid', nullable: false)]
+  #[ORM\Column(type: Types::GUID, nullable: false)]
   protected string $user_id;
 
   #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
@@ -64,10 +71,10 @@ class ProgramLike implements \Stringable
   protected User $user;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'integer', nullable: false, options: ['default' => 0])]
+  #[ORM\Column(type: Types::INTEGER, nullable: false, options: ['default' => 0])]
   protected int $type = self::TYPE_THUMBS_UP;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $created_at = null;
 
   public function __construct(Program $program, User $user, int $type)
@@ -77,6 +84,7 @@ class ProgramLike implements \Stringable
     $this->setType($type);
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return $this->program.'';
@@ -93,7 +101,7 @@ class ProgramLike implements \Stringable
   #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
-    if (null === $this->getCreatedAt()) {
+    if (!$this->getCreatedAt() instanceof \DateTime) {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }

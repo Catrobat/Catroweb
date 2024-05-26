@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
@@ -64,6 +65,7 @@ class ProjectManagerTest extends TestCase
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function setUp(): void
   {
     $file_extractor = $this->createMock(CatrobatFileExtractor::class);
@@ -112,7 +114,7 @@ class ProjectManagerTest extends TestCase
     $this->request->expects($this->any())->method('getUser')->willReturn($user);
     $this->request->expects($this->any())->method('getIp')->willReturn('127.0.0.1');
     $this->request->expects($this->any())->method('getLanguage')->willReturn('en');
-    $this->request->expects($this->any())->method('getFlavor')->willReturn('pocketcode');
+    $this->request->expects($this->any())->method('getFlavor')->willReturn(Flavor::POCKETCODE);
     $file_extractor->expects($this->any())->method('extract')->with($file)->willReturn($this->extracted_file);
     $inserted_program->expects($this->any())->method('getId')->willReturn('1');
 
@@ -129,7 +131,7 @@ class ProjectManagerTest extends TestCase
    */
   public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
   {
-    $func = function (Program $project): Program {
+    $func = static function (Program $project): Program {
       $project->setId('1');
 
       return $project;
@@ -155,7 +157,7 @@ class ProjectManagerTest extends TestCase
   public function testSavesTheProgramToTheFileRepositoryIfTheUploadSucceeded(): void
   {
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;
@@ -183,7 +185,7 @@ class ProjectManagerTest extends TestCase
     $this->extracted_file->expects($this->atLeastOnce())->method('getTags')->willReturn([]);
     $this->extracted_file->expects($this->atLeastOnce())->method('isDebugBuild')->willReturn(false);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;
@@ -211,7 +213,7 @@ class ProjectManagerTest extends TestCase
    */
   public function testFiresAnEventBeforeInsertingAProgram(): void
   {
-    $func = function (Program $project): Program {
+    $func = static function (Program $project): Program {
       $project->setId('1');
 
       return $project;
@@ -257,7 +259,7 @@ class ProjectManagerTest extends TestCase
   public function testFiresAnEventWhenTheProgramIsStored(): void
   {
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;

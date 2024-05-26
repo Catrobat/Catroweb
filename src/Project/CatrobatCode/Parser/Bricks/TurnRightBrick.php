@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class TurnRightBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::TURN_RIGHT_BRICK;

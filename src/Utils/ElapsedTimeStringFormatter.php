@@ -23,12 +23,15 @@ class ElapsedTimeStringFormatter
     if ($elapsed <= 3_540) {
       return $this->getFormattedInMinutes((int) round($elapsed / 60));
     }
+
     if ($elapsed <= 82_800) {
       return $this->getFormattedInHours((int) round($elapsed / 3_600));
     }
+
     if ($elapsed <= 2_505_600) {
       return $this->getFormattedInDays((int) round($elapsed / 86_400));
     }
+
     if ($elapsed <= 28_927_800) {
       return $this->getFormattedInMonths((int) round($elapsed / 2_629_800));
     }

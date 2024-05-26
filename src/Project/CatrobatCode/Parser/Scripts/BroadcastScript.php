@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class BroadcastScript extends Script
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::BROADCAST_SCRIPT;

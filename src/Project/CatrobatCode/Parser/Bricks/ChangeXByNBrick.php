@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ChangeXByNBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::CHANGE_X_BY_N_BRICK;

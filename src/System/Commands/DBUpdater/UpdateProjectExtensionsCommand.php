@@ -15,13 +15,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:update:extensions', description: 'Inserting our static project extension into the Database')]
 class UpdateProjectExtensionsCommand extends Command
 {
-  final public const EXTENSION_LTM_PREFIX = 'extensions.extension.';
+  final public const string EXTENSION_LTM_PREFIX = 'extensions.extension.';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ExtensionRepository $extension_repository)
   {
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $count = 0;
@@ -76,7 +77,8 @@ class UpdateProjectExtensionsCommand extends Command
     $this->entity_manager->persist($extension);
 
     $this->entity_manager->flush();
-    $output->writeln("{$count} Extensions in the Database have been inserted/updated");
+
+    $output->writeln($count.' Extensions in the Database have been inserted/updated');
 
     return 0;
   }

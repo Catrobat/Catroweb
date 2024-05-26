@@ -40,6 +40,7 @@ class ProjectsAdmin extends AbstractAdmin
 
   protected const NOT_FOR_KIDS_MOD = 2;
 
+  #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'uploaded_at';
@@ -53,6 +54,7 @@ class ProjectsAdmin extends AbstractAdmin
   ) {
   }
 
+  #[\Override]
   public function getObjectMetadata($object): MetadataInterface
   {
     return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
@@ -68,6 +70,7 @@ class ProjectsAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     $form
@@ -85,6 +88,7 @@ class ProjectsAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -113,6 +117,7 @@ class ProjectsAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $flavor_options = $this->parameter_bag->get('flavors');
@@ -123,6 +128,7 @@ class ProjectsAdmin extends AbstractAdmin
         $choices[$flavor] = $flavor;
       }
     }
+
     $list
       ->add('uploaded_at', null, ['label' => 'Upload Time'])
       ->addIdentifier('name', 'string', ['sortable' => false])
@@ -157,6 +163,7 @@ class ProjectsAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureShowFields(ShowMapper $show): void
   {
     $flavor_options = $this->parameter_bag->get('flavors');
@@ -190,6 +197,7 @@ class ProjectsAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('create')->remove('delete')->remove('export');

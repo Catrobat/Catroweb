@@ -29,7 +29,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     When I am on "/admin/cronjobs/list"
     And I wait for the page to be loaded
     Then I should see "Manually trigger the cron job"
-    And I should see "Step by step guide"
+    And I should see "Step-by-step guide"
     And the element "#btn-trigger-cron-jobs" should be visible
     And there should be "0" cron jobs in the database
     When I click "#btn-trigger-cron-jobs"
@@ -44,7 +44,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     And I am on "/admin/cronjobs/list"
     And I wait for the page to be loaded
     Then I should see "Manually trigger the cron job"
-    And I should see "Step by step guide"
+    And I should see "Step-by-step guide"
     And the element ".btn-reset-cron-job" should be visible
     When I click ".btn-reset-cron-job"
     And I wait for the page to be loaded

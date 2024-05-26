@@ -9,6 +9,7 @@ use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\Generator\MyUuidGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'studio')]
@@ -16,46 +17,52 @@ use Doctrine\ORM\Mapping as ORM;
 class Studio
 {
   #[ORM\Id]
-  #[ORM\Column(name: 'id', type: 'guid')]
+  #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]
   #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
   protected ?string $id = null;
 
-  #[ORM\Column(name: 'name', type: 'string', unique: true, nullable: false)]
+  #[ORM\Column(name: 'name', type: Types::STRING, unique: true, nullable: false)]
   protected string $name;
 
-  #[ORM\Column(name: 'description', type: 'text', length: 3000, nullable: false)]
+  #[ORM\Column(name: 'description', type: Types::TEXT, length: 3000, nullable: false)]
   protected string $description;
 
-  #[ORM\Column(name: 'is_public', type: 'boolean', options: ['default' => true])]
+  #[ORM\Column(name: 'is_public', type: Types::BOOLEAN, options: ['default' => true])]
   protected bool $is_public = true;
 
-  #[ORM\Column(name: 'is_enabled', type: 'boolean', options: ['default' => true])]
+  #[ORM\Column(name: 'is_enabled', type: Types::BOOLEAN, options: ['default' => true])]
   protected bool $is_enabled = true;
 
-  #[ORM\Column(name: 'allow_comments', type: 'boolean', options: ['default' => true])]
+  #[ORM\Column(name: 'allow_comments', type: Types::BOOLEAN, options: ['default' => true])]
   protected bool $allow_comments = true;
 
-  #[ORM\Column(name: 'cover_path', type: 'string', length: 300, nullable: true)]
+  #[ORM\Column(name: 'cover_path', type: Types::STRING, length: 300, nullable: true)]
   protected ?string $cover_path = null;
 
-  #[ORM\Column(name: 'updated_on', type: 'datetime', nullable: true)]
+  #[ORM\Column(name: 'updated_on', type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTime $updated_on = null;
 
-  #[ORM\Column(name: 'created_on', type: 'datetime', nullable: false)]
+  #[ORM\Column(name: 'created_on', type: Types::DATETIME_MUTABLE, nullable: false)]
   protected ?\DateTime $created_on = null;
 
   /**
    * When this studio is deleted, all its comments should be removed too.
+   *
+   * @var Collection<int, UserComment>
    */
   #[ORM\OneToMany(targetEntity: UserComment::class, mappedBy: 'studio', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $user_comments;
 
+  /**
+   * @var Collection<int, StudioJoinRequest>
+   */
   #[ORM\OneToMany(targetEntity: StudioJoinRequest::class, mappedBy: 'studio', cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY', orphanRemoval: true)]
   protected Collection $join_requests;
 
   public function __construct()
   {
+    $this->user_comments = new ArrayCollection();
     $this->join_requests = new ArrayCollection();
   }
 

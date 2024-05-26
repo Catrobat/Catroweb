@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ParameterizedBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PARAMETERIZED_BRICK;

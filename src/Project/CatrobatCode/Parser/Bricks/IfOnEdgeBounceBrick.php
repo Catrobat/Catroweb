@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class IfOnEdgeBounceBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::IF_ON_EDGE_BOUNCE_BRICK;

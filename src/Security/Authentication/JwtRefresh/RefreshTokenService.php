@@ -59,8 +59,10 @@ class RefreshTokenService
 
         return;
       }
+
       $this->refresh_manager->delete($refresh_token);
     }
+
     $this->cookie_service->clearCookie('REFRESH_TOKEN');
   }
 
@@ -71,7 +73,7 @@ class RefreshTokenService
 
   protected function isValidRefreshToken(?RefreshTokenInterface $refresh_token): bool
   {
-    return null !== $refresh_token && $refresh_token->isValid() && !empty($refresh_token->getUsername());
+    return $refresh_token instanceof RefreshTokenInterface && $refresh_token->isValid() && !empty($refresh_token->getUsername());
   }
 
   public function isBearerCookieSet(): bool

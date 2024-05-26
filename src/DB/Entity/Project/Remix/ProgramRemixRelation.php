@@ -7,6 +7,7 @@ namespace App\DB\Entity\Project\Remix;
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRemixRepository;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_remix_relation')]
@@ -22,7 +23,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    * -----------------------------------------------------------------------------------------------------------------
    */
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $ancestor_id;
 
   #[ORM\JoinColumn(name: 'ancestor_id', referencedColumnName: 'id')]
@@ -30,7 +31,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   protected Program $ancestor;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $descendant_id;
 
   #[ORM\JoinColumn(name: 'descendant_id', referencedColumnName: 'id')]
@@ -38,13 +39,13 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   protected Program $descendant;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'integer', nullable: false, options: ['default' => 0])]
+  #[ORM\Column(type: Types::INTEGER, nullable: false, options: ['default' => 0])]
   protected int $depth = 0;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $created_at = null;
 
-  #[ORM\Column(type: 'datetime', nullable: true)]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTime $seen_at = null;
 
   public function __construct(Program $ancestor, Program $descendant, int $depth)
@@ -54,6 +55,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     $this->setDepth($depth);
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return '(#'.$this->ancestor_id.', #'.$this->descendant_id.', depth: '.$this->depth.')';
@@ -76,6 +78,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     $this->ancestor_id = $ancestor->getId();
   }
 
+  #[\Override]
   public function getAncestor(): Program
   {
     return $this->ancestor;
@@ -92,6 +95,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     $this->descendant_id = $descendant->getId();
   }
 
+  #[\Override]
   public function getDescendant(): Program
   {
     return $this->descendant;
@@ -107,31 +111,37 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
     $this->depth = $depth;
   }
 
+  #[\Override]
   public function getDepth(): int
   {
     return $this->depth;
   }
 
+  #[\Override]
   public function getCreatedAt(): ?\DateTime
   {
     return $this->created_at;
   }
 
+  #[\Override]
   public function setCreatedAt(\DateTime $created_at): void
   {
     $this->created_at = $created_at;
   }
 
+  #[\Override]
   public function getSeenAt(): ?\DateTime
   {
     return $this->seen_at;
   }
 
+  #[\Override]
   public function setSeenAt(?\DateTime $seen_at): void
   {
     $this->seen_at = $seen_at;
   }
 
+  #[\Override]
   public function getUniqueKey(): string
   {
     return sprintf('ProgramRemixRelation(%d,%d,%d)', $this->ancestor_id, $this->descendant_id, $this->depth);

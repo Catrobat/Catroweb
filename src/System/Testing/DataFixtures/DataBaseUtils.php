@@ -6,6 +6,7 @@ namespace App\System\Testing\DataFixtures;
 
 use App\Kernel;
 use App\System\Commands\Helpers\CommandHelper;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\ToolsException;
@@ -32,7 +33,7 @@ class DataBaseUtils
   }
 
   /**
-   * @throws \Doctrine\DBAL\Exception
+   * @throws Exception
    */
   public static function databaseRollback(): void
   {
@@ -42,6 +43,7 @@ class DataBaseUtils
       $q = $entity_manager->getConnection()->getDatabasePlatform()->getTruncateTableSql($tableName);
       $entity_manager->getConnection()->executeUpdate($q);
     }
+
     $entity_manager->getConnection()->query('SET FOREIGN_KEY_CHECKS=1');
 
     ProjectDataFixtures::clear();

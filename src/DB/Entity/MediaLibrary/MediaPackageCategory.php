@@ -6,6 +6,7 @@ namespace App\DB\Entity\MediaLibrary;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,20 +25,26 @@ use Doctrine\ORM\Mapping as ORM;
 class MediaPackageCategory implements \Stringable
 {
   #[ORM\Id]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  #[ORM\Column(type: 'text', nullable: false)]
+  #[ORM\Column(type: Types::TEXT, nullable: false)]
   protected ?string $name = null;
 
+  /**
+   * @var Collection<int, MediaPackage>
+   */
   #[ORM\ManyToMany(targetEntity: MediaPackage::class, inversedBy: 'categories')]
   protected Collection $package;
 
+  /**
+   * @var Collection<int, MediaPackageFile>
+   */
   #[ORM\OneToMany(targetEntity: MediaPackageFile::class, mappedBy: 'category')]
   protected Collection $files;
 
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   protected int $priority = 0;
 
   public function __construct()
@@ -46,9 +53,10 @@ class MediaPackageCategory implements \Stringable
     $this->files = new ArrayCollection();
   }
 
+  #[\Override]
   public function __toString(): string
   {
-    if (count($this->package)) {
+    if (count($this->package) > 0) {
       $string = $this->name.' (';
       $count = count($this->package);
 

@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class AssertEqualsBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::ASSERT_EQUALS_BRICK;

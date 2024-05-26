@@ -54,6 +54,7 @@ class FeaturedController extends AbstractController
     foreach ($featured_projects as $featured_project) {
       $retArray['CatrobatProjects'][] = $this->generateProjectObject($featured_project, $image_repository);
     }
+
     $retArray['preHeaderMessages'] = '';
     $retArray['CatrobatInformation'] = [
       'BaseUrl' => $request->getSchemeAndHttpHost().'/',
@@ -66,20 +67,12 @@ class FeaturedController extends AbstractController
 
   private function generateProjectObject(FeaturedProgram $featured_project, ImageRepository $image_repository): array
   {
-    $new_project = [];
-    $new_project['ProjectId'] = $featured_project->getProgram()->getId();
-    $new_project['ProjectName'] = $featured_project->getProgram()->getName();
-    $new_project['Author'] = $featured_project->getProgram()
+    return ['ProjectId' => $featured_project->getProgram()->getId(), 'ProjectName' => $featured_project->getProgram()->getName(), 'Author' => $featured_project->getProgram()
       ->getUser()
-      ->getUserIdentifier()
-    ;
-
-    $new_project['FeaturedImage'] = $image_repository->getWebPath(
-      $featured_project->getId(),
-      $featured_project->getImageType(),
-      true
-    );
-
-    return $new_project;
+      ->getUserIdentifier(), 'FeaturedImage' => $image_repository->getWebPath(
+        $featured_project->getId(),
+        $featured_project->getImageType(),
+        true
+      )];
   }
 }

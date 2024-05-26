@@ -17,6 +17,7 @@ class AchievementsAdminControllerTest extends DefaultTestCase
 {
   protected AchievementsAdminController|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AchievementsAdminController::class)

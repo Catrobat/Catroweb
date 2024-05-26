@@ -34,7 +34,7 @@ Feature: The admin achievements view provides a detailed list about all achievem
     And I am on "/admin/achievements/list"
     And I wait for the page to be loaded
     Then I should see "Achievements"
-    And I should see "Step by step guide"
+    And I should see "Step-by-step guide"
     And the element "#btn-update-achievements" should be visible
     And there should be "2" achievements in the database
     When I click "#btn-update-achievements"

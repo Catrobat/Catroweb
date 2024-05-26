@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class SewUpBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::SEW_UP_BRICK;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'survey')]
@@ -11,17 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
 class Survey
 {
   #[ORM\Id]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  #[ORM\Column(type: 'string', length: 255)]
+  #[ORM\Column(type: Types::STRING, length: 255)]
   protected ?string $language_code = null;
 
-  #[ORM\Column(type: 'string', length: 255)]
+  #[ORM\Column(type: Types::STRING, length: 255)]
   protected ?string $url = null;
 
-  #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => true])]
+  #[ORM\Column(type: Types::BOOLEAN, nullable: false, options: ['default' => true])]
   protected bool $active = true;
 
   /**
@@ -31,7 +32,7 @@ class Survey
   #[ORM\ManyToOne(targetEntity: Flavor::class)]
   protected ?Flavor $flavor = null;
 
-  #[ORM\Column(type: 'string', nullable: true)]
+  #[ORM\Column(type: Types::STRING, nullable: true)]
   protected ?string $platform = null;
 
   public function getId(): ?int

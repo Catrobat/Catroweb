@@ -6,14 +6,9 @@ namespace App\Project\CatrobatCode\Statements;
 
 class SetLookStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'switch to look ';
-  /**
-   * @var string
-   */
-  final public const END_STRING = '<br/>';
+  final public const string BEGIN_STRING = 'switch to look ';
+
+  final public const string END_STRING = '<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {

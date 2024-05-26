@@ -17,7 +17,7 @@ class ProjectXmlHeaderValidatorEventSubscriber implements EventSubscriberInterfa
   public function validate(ExtractedCatrobatFile $file): void
   {
     $project_xml_properties = $file->getProjectXmlProperties();
-    if (isset($project_xml_properties->header)) {
+    if (property_exists($project_xml_properties, 'header') && null !== $project_xml_properties->header) {
       if (!(isset($project_xml_properties->header->applicationName, $project_xml_properties->header->applicationVersion, $project_xml_properties->header->catrobatLanguageVersion, $project_xml_properties->header->description, $project_xml_properties->header->mediaLicense, $project_xml_properties->header->platform, $project_xml_properties->header->platformVersion, $project_xml_properties->header->programLicense, $project_xml_properties->header->programName, $project_xml_properties->header->remixOf, $project_xml_properties->header->url, $project_xml_properties->header->userHandle)
       )) {
         throw new InvalidCatrobatFileException('errors.xml.invalid', 508, 'Project XML header information missing');
@@ -27,6 +27,7 @@ class ProjectXmlHeaderValidatorEventSubscriber implements EventSubscriberInterfa
     }
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforeInsertEvent::class => 'onProjectBeforeInsert'];

@@ -9,6 +9,7 @@ use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\Translation\TranslationDelegate;
+use App\Translation\TranslationResult;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class CommentsController extends AbstractController
 {
@@ -31,9 +33,10 @@ class CommentsController extends AbstractController
   public function report(): Response
   {
     $user = $this->getUser();
-    if (null === $user) {
+    if (!$user instanceof UserInterface) {
       return new Response('', Response::HTTP_UNAUTHORIZED);
     }
+
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($_GET['CommentId']);
     if (null === $comment) {
       return new Response('No comment found for this id '.$_GET['CommentId'], Response::HTTP_NOT_FOUND);
@@ -60,6 +63,7 @@ class CommentsController extends AbstractController
     if (!$user) {
       return new Response('', Response::HTTP_UNAUTHORIZED);
     }
+
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($_GET['CommentId']);
     if (null === $comment) {
       return new Response('No comment found for this id '.$_GET['CommentId'], Response::HTTP_NOT_FOUND);
@@ -73,6 +77,7 @@ class CommentsController extends AbstractController
     if ($comment->getUser()) {
       $comment_user_id = $comment->getUser()->getId();
     }
+
     if ($user->getId() !== $comment_user_id && !$this->isGranted('ROLE_ADMIN')) {
       return new Response('', Response::HTTP_FORBIDDEN);
     }
@@ -93,6 +98,7 @@ class CommentsController extends AbstractController
     if (null === $user) {
       return new Response('', Response::HTTP_UNAUTHORIZED);
     }
+
     /** @var User|null $user */
     $user = $this->getUser();
     $project = $project_manager->find($_POST['ProgramId']);
@@ -101,6 +107,7 @@ class CommentsController extends AbstractController
     $temp_comment->setUser($user);
     $temp_comment->setText($_POST['Message']);
     $temp_comment->setProgram($project);
+
     $date_time_zone = new \DateTimeZone('UTC');
     $temp_comment->setUploadDate(date_create('now', $date_time_zone));
     $temp_comment->setIsReported(false);
@@ -109,6 +116,7 @@ class CommentsController extends AbstractController
       $parent_comment_id = intval($_POST['ParentCommentId']);
       $temp_comment->setParentId($parent_comment_id);
     }
+
     $this->entity_manager->persist($temp_comment);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($temp_comment);
@@ -132,6 +140,7 @@ class CommentsController extends AbstractController
     if (!$request->query->has('target_language')) {
       return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
     }
+
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($id);
 
     if (null === $comment) {
@@ -144,22 +153,26 @@ class CommentsController extends AbstractController
 
     $source_language = $request->query->get('source_language');
     $source_language = is_null($source_language) ? $source_language : (string) $source_language;
+
     $target_language = (string) $request->query->get('target_language');
     if ($source_language === $target_language) {
       return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
     $response = new JsonResponse();
     $response->setEtag(md5((string) $comment->getText()).$target_language);
     $response->setPublic();
     if ($response->isNotModified($request)) {
       return $response;
     }
+
     try {
       $translation_result = $translation_delegate->translate($comment->getText(), $source_language, $target_language);
-    } catch (\InvalidArgumentException $exception) {
-      return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+    } catch (\InvalidArgumentException $invalidArgumentException) {
+      return new Response($invalidArgumentException->getMessage(), Response::HTTP_BAD_REQUEST);
     }
-    if (null === $translation_result) {
+
+    if (!$translation_result instanceof TranslationResult) {
       return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
     }
 

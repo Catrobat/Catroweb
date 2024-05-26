@@ -14,10 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class RemixSubgraphManipulator
 {
-  /**
-   * @var string
-   */
-  final public const COMMON_TIMESTAMP = 'common_timestamp';
+  final public const string COMMON_TIMESTAMP = 'common_timestamp';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramRepository $project_repository, private readonly ProgramRemixRepository $project_remix_repository, private readonly ProgramRemixBackwardRepository $project_remix_backward_repository)
   {
@@ -34,14 +31,14 @@ class RemixSubgraphManipulator
     $backward_parent_ids = $result['backwardParentIds'];
 
     $parents_ancestor_relations = $this->project_remix_repository->getAncestorRelations($forward_parent_ids);
-    $parent_ancestor_ids = array_unique(array_map(fn ($r) => $r->getAncestorId(), $parents_ancestor_relations));
+    $parent_ancestor_ids = array_unique(array_map(static fn ($r) => $r->getAncestorId(), $parents_ancestor_relations));
     $parent_ancestors_descendant_relations = $this->project_remix_repository
       ->getDescendantRelations($parent_ancestor_ids)
     ;
     $backward_parent_relations = $this->project_remix_backward_repository->getParentRelations([$project->getId()]);
 
     $all_existing_relations = array_merge($parent_ancestors_descendant_relations, $backward_parent_relations);
-    $unique_keys_of_all_existing_relations = array_map(fn ($r) => $r->getUniqueKey(), $all_existing_relations);
+    $unique_keys_of_all_existing_relations = array_map(static fn ($r) => $r->getUniqueKey(), $all_existing_relations);
 
     $all_project_remix_relations = [];
 
@@ -88,6 +85,7 @@ class RemixSubgraphManipulator
     foreach ($all_project_remix_relations as $project_remix_relation) {
       $this->entity_manager->persist($project_remix_relation);
     }
+
     $this->entity_manager->flush();
   }
 

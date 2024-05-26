@@ -100,7 +100,7 @@ task('restart:nginx', function () {
 });
 
 task('restart:php-fpm', function () {
-  run('/usr/sbin/service php8.2-fpm restart');
+  run('/usr/sbin/service php8.3-fpm restart');
 });
 
 task('install:npm', function () {
@@ -133,6 +133,11 @@ task('update:extensions', function () {
   run('bin/console catrobat:update:extensions');
 });
 
+task('update:flavors', function () {
+  cd('{{release_path}}');
+  run('bin/console catrobat:update:flavors');
+});
+
 task('update:special', function () {
   cd('{{release_path}}');
   run('bin/console catrobat:update:special');
@@ -141,6 +146,17 @@ task('update:special', function () {
 task('sonata:admin:setup:acl', function () {
   cd('{{release_path}}');
   run('bin/console sonata:admin:setup-acl');
+});
+
+task('clean:db:rollup', function () {
+  cd('{{release_path}}');
+  run('bin/console doctrine:migrations:rollup -n');
+});
+
+// dump the .env file as .env.local.php to speed up the loading of the env vars
+task('dump:env', function () {
+  cd('{{release_path}}');
+  run('composer dump-env prod');
 });
 
 /*
@@ -152,9 +168,11 @@ task('deploy', [
   'deploy:clear_paths',
   'deploy:vendors',
   'install:assets',
+  'dump:env',
   'deploy:cache:clear',
   'deploy:writable',
   'deploy:symlink',
+  'clean:db:rollup',
   'database:migrate',
   'install:npm',
   'deploy:encore',
@@ -162,6 +180,7 @@ task('deploy', [
   'restart:nginx',
   'restart:php-fpm',
   'sonata:admin:setup:acl',
+  'update:flavors',
   'update:achievements',
   'update:tags',
   'update:extensions',

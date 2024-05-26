@@ -16,11 +16,13 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
   {
   }
 
+  #[\Override]
   public function healthGet(int &$responseCode, array &$responseHeaders): void
   {
     $responseCode = Response::HTTP_NO_CONTENT;
   }
 
+  #[\Override]
   public function surveyLangCodeGet(string $lang_code, string $flavor, string $platform, int &$responseCode, array &$responseHeaders): ?SurveyResponse
   {
     $criteria = [];
@@ -34,6 +36,7 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
 
         return null;
       }
+
       $criteria['flavor'] = $flavor_obj;
     }
 
@@ -45,6 +48,7 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
 
         return null;
       }
+
       $criteria['platform'] = $platform;
     }
 

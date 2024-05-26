@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class RepeatBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::REPEAT_BRICK;

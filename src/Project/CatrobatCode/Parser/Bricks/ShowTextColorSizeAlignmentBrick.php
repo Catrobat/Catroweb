@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ShowTextColorSizeAlignmentBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::SHOW_TEXT_COLOR_SIZE_ALIGNMENT_BRICK;

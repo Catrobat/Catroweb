@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\CatrobatFile;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\Project\Event\ProjectBeforePersistEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -24,12 +25,13 @@ class ProjectFlavorEventSubscriber implements EventSubscriberInterface
   {
     $request = $this->request_stack->getCurrentRequest();
     if (null == $request) {
-      $project->setFlavor('pocketcode');
+      $project->setFlavor(Flavor::POCKETCODE);
     } else {
       $project->setFlavor($request->attributes->get('flavor'));
     }
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforePersistEvent::class => 'onEvent'];

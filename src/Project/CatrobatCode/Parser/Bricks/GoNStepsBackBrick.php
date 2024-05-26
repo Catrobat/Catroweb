@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class GoNStepsBackBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::GO_N_STEPS_BACK_BRICK;

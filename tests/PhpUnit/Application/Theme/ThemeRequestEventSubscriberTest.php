@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Application\Theme;
 
 use App\Application\Theme\ThemeRequestEventSubscriber;
+use App\DB\Entity\Flavor;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\Utils\RequestHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -26,10 +27,11 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ThemeRequestEventSubscriberTest extends DefaultTestCase
 {
-  protected MockObject|ThemeRequestEventSubscriber $object;
+  protected ThemeRequestEventSubscriber|MockObject $object;
 
-  protected MockObject|ParameterBagInterface $parameter_bag;
+  protected ParameterBagInterface|MockObject $parameter_bag;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->mockThemeRequestEventSubscriber();
@@ -73,70 +75,70 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   {
     return [
       'Using a valid request theme' => [
-        'request_theme' => 'pocketcode',
+        'request_theme' => Flavor::POCKETCODE,
         'request_uri' => '',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Using a valid request theme 2' => [
-        'request_theme' => 'luna',
+        'request_theme' => Flavor::LUNA,
         'request_uri' => '',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'luna',
+        'expected_flavor' => Flavor::LUNA,
       ],
       'Using umbrella theme that is no flavor must use default flavor' => [
         'request_theme' => 'app',
         'request_uri' => '',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Using a invalid request theme must use default theme/flavor' => [
         'request_theme' => 'invalid',
         'request_uri' => '',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Using a request theme has higher priority than legacy URL theming' => [
-        'request_theme' => 'luna',
+        'request_theme' => Flavor::LUNA,
         'request_uri' => 'http://share.catrob.at/pocketcode',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'luna',
+        'expected_flavor' => Flavor::LUNA,
       ],
       'No set request theme must use and keep legacy URL theming' => [
         'request_theme' => '',
         'request_uri' => 'http://share.catrob.at/luna',
-        'expected_routing_theme' => 'luna',
-        'expected_flavor' => 'luna',
+        'expected_routing_theme' => Flavor::LUNA,
+        'expected_flavor' => Flavor::LUNA,
       ],
       'Umbrella URL theming must use default but keep route' => [
         'request_theme' => '',
         'request_uri' => 'http://share.catrob.at/app/',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Invalid Legacy URL theming must use default but keep route' => [
         'request_theme' => '',
         'request_uri' => 'http://share.catrob.at/invalid',
         'expected_routing_theme' => 'invalid',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
       'Should also work with index(test?).php in route' => [
         'request_theme' => '',
         'request_uri' => 'http://localhost/index_test.php/luna',
-        'expected_routing_theme' => 'luna',
-        'expected_flavor' => 'luna',
+        'expected_routing_theme' => Flavor::LUNA,
+        'expected_flavor' => Flavor::LUNA,
       ],
       'It must be possible to return from the admin interface' => [
-        'request_theme' => 'luna',
+        'request_theme' => Flavor::LUNA,
         'request_uri' => 'http://localhost/admin',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'luna',
+        'expected_flavor' => Flavor::LUNA,
       ],
       'It must be possible to return from the admin interface (legacy)' => [
         'request_theme' => '',
         'request_uri' => 'http://localhost/admin',
         'expected_routing_theme' => 'app',
-        'expected_flavor' => 'pocketcode',
+        'expected_flavor' => Flavor::POCKETCODE,
       ],
     ];
   }
@@ -159,16 +161,13 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     $router = $this->mockRouter($request_context);
 
     $this->expectRoutingThemeToEqual($request_context, 'app');
-    $this->expectAttributesToEqual($request_attributes, 'app', 'pocketcode');
+    $this->expectAttributesToEqual($request_attributes, 'app', Flavor::POCKETCODE);
 
     $this->object = $this->mockThemeRequestEventSubscriber([$this->parameter_bag, $router, $app_request]);
     $this->object->onKernelRequest($event);
   }
 
-  /**
-   * @param MockObject|RequestContext $request_context
-   */
-  private function expectRoutingThemeToEqual($request_context, string $theme): void
+  private function expectRoutingThemeToEqual(RequestContext|MockObject $request_context, string $theme): void
   {
     $request_context->expects($this->once())
       ->method('setParameter')
@@ -176,15 +175,12 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @param MockObject|ParameterBag $request_attributes
-   */
-  private function expectAttributesToEqual($request_attributes, string $theme, string $flavor): void
+  private function expectAttributesToEqual(MockObject $request_attributes, string $theme, string $flavor): void
   {
     $request_attributes->expects($this->exactly(2))
       ->method('set')
       ->willReturnCallback(
-        function ($key, $value) use ($theme, $flavor) {
+        function ($key, $value) use ($theme, $flavor): void {
           switch ($key) {
             case 'theme':
               $this->assertEquals($theme, $value);
@@ -198,10 +194,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @return ThemeRequestEventSubscriber|MockObject
-   */
-  private function mockThemeRequestEventSubscriber(?array $ctor_args = null)
+  private function mockThemeRequestEventSubscriber(?array $ctor_args = null): ThemeRequestEventSubscriber|MockObject
   {
     if (null === $ctor_args) {
       return $this->getMockBuilder(ThemeRequestEventSubscriber::class)
@@ -218,10 +211,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @return MockObject|ParameterBagInterface
-   */
-  private function mockParameterBag()
+  private function mockParameterBag(): ParameterBagInterface|MockObject
   {
     $parameter_bag = $this->getMockBuilder(ParameterBagInterface::class)
       ->disableOriginalConstructor()
@@ -234,22 +224,12 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
       ->method('get')
       ->will(
         $this->returnCallback(
-          function ($param) {
-            switch ($param) {
-              case 'flavors':
-                return ['pocketcode', 'luna'];
-
-              case 'umbrellaTheme':
-                return 'app';
-
-              case 'adminTheme':
-                return 'admin';
-
-              case 'defaultFlavor':
-                return 'pocketcode';
-            }
-
-            return '';
+          static fn ($param): array|string => match ($param) {
+            'flavors' => [Flavor::POCKETCODE, Flavor::LUNA],
+            'umbrellaTheme' => 'app',
+            'adminTheme' => 'admin',
+            'defaultFlavor' => Flavor::POCKETCODE,
+            default => '',
           }
         )
       )
@@ -291,10 +271,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     return $event;
   }
 
-  /**
-   * @return MockObject|ParameterBagInterface
-   */
-  private function mockRequestAttributes()
+  private function mockRequestAttributes(): ParameterBagInterface|MockObject
   {
     return $this->getMockBuilder(ParameterBagInterface::class)
       ->disableOriginalConstructor()
@@ -302,10 +279,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @return MockObject|RequestContext
-   */
-  private function mockRequestContext()
+  private function mockRequestContext(): RequestContext|MockObject
   {
     return $this->getMockBuilder(RequestContext::class)
       ->disableOriginalConstructor()
@@ -313,10 +287,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  /**
-   * @return RequestHelper|MockObject
-   */
-  private function mockAppRequest(string $response = '')
+  private function mockAppRequest(string $response = ''): RequestHelper|MockObject
   {
     $app_request = $this->getMockBuilder(RequestHelper::class)->disableOriginalConstructor()->getMock();
 
@@ -330,12 +301,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     return $app_request;
   }
 
-  /**
-   * @param MockObject|RequestContext $request_context
-   *
-   * @return MockObject|RouterInterface
-   */
-  private function mockRouter($request_context = null)
+  private function mockRouter(RequestContext|MockObject|null $request_context = null): RouterInterface|MockObject
   {
     $router = $this->getMockBuilder(RouterInterface::class)
       ->disableOriginalConstructor()

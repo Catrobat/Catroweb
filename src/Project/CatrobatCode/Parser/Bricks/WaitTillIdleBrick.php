@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WaitTillIdleBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WAIT_TILL_IDLE_BRICK;

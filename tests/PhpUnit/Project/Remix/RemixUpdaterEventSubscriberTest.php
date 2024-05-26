@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project\Remix;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
@@ -16,6 +17,7 @@ use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -35,17 +37,19 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
   private MockObject|Program $program_entity;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->remix_manager = $this->createMock(RemixManager::class);
 
     $this->async_http_client = $this->createMock(AsyncHttpClient::class);
     $router = $this->createMock(RouterInterface::class);
+    $logger = $this->createMock(LoggerInterface::class);
 
     $route_map = [
       // It is important to explicitly define all optional parameters!
-      ['program', ['id' => '3571', 'theme' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
-      ['program', ['id' => '3572', 'theme' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+      ['program', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['program', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
     ];
 
     $router
@@ -56,7 +60,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $this->program_entity = $this->createMock(Program::class);
 
-    $this->remix_updater = new RemixUpdaterEventSubscriber($this->remix_manager, $this->async_http_client, $router, '.');
+    $this->remix_updater = new RemixUpdaterEventSubscriber($this->remix_manager, $this->async_http_client, $router, $logger, '.');
 
     $filesystem = new Filesystem();
     $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', BootstrapExtension::$CACHE_DIR.'base/');
@@ -76,7 +80,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
   }
 
-  public function tearDown(): void
+  #[\Override]
+  protected function tearDown(): void
   {
     FileHelper::removeDirectory(BootstrapExtension::$CACHE_DIR.'base/');
   }
@@ -186,7 +191,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchProjects')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info): void {
         $this->assertCount(2, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
@@ -290,7 +295,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchProjects')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info): void {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
@@ -345,7 +350,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
     $this->remix_manager->expects($this->atLeastOnce())
       ->method('addRemixes')
-      ->will($this->returnCallback(function (Program $project, array $remixes_data) use ($first_expected_url, $second_expected_url) {
+      ->will($this->returnCallback(function (Program $project, array $remixes_data) use ($first_expected_url, $second_expected_url): void {
         $this->assertEquals($this->program_entity, $project);
 
         $this->assertCount(2, $remixes_data);
@@ -370,7 +375,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchProjects')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info): void {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))

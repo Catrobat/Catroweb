@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Create;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\EntityRepository\FlavorRepository;
@@ -27,6 +28,7 @@ class CreateExampleProgramCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -34,6 +36,7 @@ class CreateExampleProgramCommand extends Command
     ;
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $program_name = $input->getArgument('program_name');
@@ -46,11 +49,12 @@ class CreateExampleProgramCommand extends Command
 
     try {
       $this->exampleProgram($program);
-    } catch (\Exception $e) {
-      $output->writeln('Failed to example: '.$program->getName().' '.$e->getMessage());
+    } catch (\Exception $exception) {
+      $output->writeln('Failed to example: '.$program->getName().' '.$exception->getMessage());
 
       return 2;
     }
+
     $output->writeln('Example: '.$program->getName());
 
     return 0;
@@ -64,7 +68,7 @@ class CreateExampleProgramCommand extends Command
     $example = new ExampleProgram();
     $example->setProgram($program);
     $example->setActive(true);
-    $example->setFlavor(random_int(0, 1) ? $this->flavor_repository->getFlavorByName('arduino') : $this->flavor_repository->getFlavorByName('embroidery'));
+    $example->setFlavor(0 !== random_int(0, 1) ? $this->flavor_repository->getFlavorByName(Flavor::ARDUINO) : $this->flavor_repository->getFlavorByName(Flavor::EMBROIDERY));
     $example->setImageType('jpeg'); // todo picture?
     $example->setForIos(false);
 

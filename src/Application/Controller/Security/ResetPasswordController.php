@@ -15,6 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
+use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 #[Route(path: '/reset-password')]
@@ -46,7 +47,7 @@ class ResetPasswordController extends AbstractController
   {
     // Generate a fake token if the user does not exist or someone hit this page directly.
     // This prevents exposing whether a user was found with the given email address or not
-    if (null === ($resetToken = $this->getTokenObjectFromSession())) {
+    if (!($resetToken = $this->getTokenObjectFromSession()) instanceof ResetPasswordToken) {
       $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
     }
 
@@ -62,28 +63,31 @@ class ResetPasswordController extends AbstractController
   #[Route(path: '/reset/{token}', name: 'app_reset_password')]
   public function reset(Request $request, UserPasswordHasherInterface $user_password_hasher, ?string $token = null): Response
   {
-    if ($token) {
+    if (null !== $token && '' !== $token && '0' !== $token) {
       // We store the token in session and remove it from the URL, to avoid the URL being
       // loaded in a browser and potentially leaking the token to 3rd party JavaScript.
       $this->storeTokenInSession($token);
 
       return $this->redirectToRoute('app_reset_password');
     }
+
     $token = $this->getTokenFromSession();
     if (null === $token) {
       throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
     }
+
     try {
       /** @var User $user */
       $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
-    } catch (ResetPasswordExceptionInterface $e) {
+    } catch (ResetPasswordExceptionInterface $resetPasswordException) {
       $this->addFlash('reset_password_error', sprintf(
         'There was a problem validating your reset request - %s',
-        $e->getReason()
+        $resetPasswordException->getReason()
       ));
 
       return $this->redirectToRoute('app_forgot_password_request');
     }
+
     // The token is valid; allow the user to change their password.
     $form = $this->createForm(ChangePasswordFormType::class);
     $form->handleRequest($request);

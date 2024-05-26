@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WriteListOnDeviceBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WRITE_LIST_ON_DEVICE_BRICK;

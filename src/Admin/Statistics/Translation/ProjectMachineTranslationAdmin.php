@@ -18,6 +18,7 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'project_machine_translation';
 
+  #[\Override]
   protected function configureExportFields(): array
   {
     return ['id', 'project.id', 'project.name', 'source_language', 'target_language', 'provider', 'usage_count',
@@ -29,6 +30,7 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -47,6 +49,7 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection

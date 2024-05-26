@@ -20,6 +20,7 @@ class UpdateUserRankingCommandTest extends KernelTestCase
 {
   protected MockObject|UpdateUserRankingCommand $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UpdateUserRankingCommand::class)

@@ -85,7 +85,7 @@ follower:
   followers: Підписники
   follow: Підписатись
   username: Користувач
-  followsMe: Підписані на мене
+  followsMe: Підписаний на мене
   noFollowing: Зараз у вас немає підписок.
   noFollowers: Зараз у вас немає підписників.
   noOtherFollowing: Зараз немає підписаних користувачів.
@@ -217,6 +217,7 @@ project:
   deletedComment: '**Видалено**'
   replyLabel: відповісти
   repliesLabel: відповіді
+  notForKids: Не безпечний для дітей
 remixGraph:
   title: Ремікси
   showRemixGraph: 'Графік реміксів'
@@ -955,12 +956,15 @@ media_library:
       default: 'Тип: невідомий'
 snackbar:
   project_not_found: 'Потрібний проєкт недоступний'
+  project_not_for_kids: 'Проєкт був позначений як не безпечний для дітей!'
+  project_safe_for_kids: 'Проєкт був позначений як безпечний для дітей!'
+  project_not_for_kids_moderator: 'Проєкт був позначений модератором. Ви не можете це скасувати!'
 maintenanceinformations:
   maintenance_information:
     additional_info: 'Додаткові відомості: additionalInfo'
     feature_1: 'Функція featureName недоступна з maintenanceStart до maintenanceEnd'
     feature_2: 'Функція'
     feature_3: 'Функція'
-
-
+MarkNotForKids: Позначити як не безпечний для дітей
+MarkSafeForKids: Позначити як безпечний для дітей
 

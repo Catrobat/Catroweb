@@ -18,8 +18,10 @@ use App\DB\Generator\MyUuidGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Table(name: 'fos_user')]
 #[ORM\Index(name: 'upload_token_idx', columns: ['upload_token'])]
@@ -31,14 +33,15 @@ use Sonata\UserBundle\Entity\BaseUser;
 #[ORM\Index(name: 'facebook_id_idx', columns: ['google_id'])]
 #[ORM\Index(name: 'apple_id_idx', columns: ['google_id'])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User extends BaseUser
+class User extends BaseUser implements UserInterface
 {
   public static string $SCRATCH_PREFIX = 'Scratch:';
+
   /**
    * @var string
    */
   #[ORM\Id]
-  #[ORM\Column(name: 'id', type: 'guid')]
+  #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]
   #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
   protected $id;
@@ -46,15 +49,17 @@ class User extends BaseUser
   /**
    * @deprecated API v1
    */
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $upload_token = null;
 
-  #[ORM\Column(type: 'text', nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $avatar = null;
 
   /**
    * Programs owned by this user.
    * When this user is deleted, all the programs owned by him should be deleted too.
+   *
+   * @var Collection<int, Program>
    */
   #[ORM\OneToMany(targetEntity: Program::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $programs;
@@ -62,6 +67,8 @@ class User extends BaseUser
   /**
    * Requests to change the password issued by this user.
    * When this user is deleted, all the reset-password requests issued by him should be deleted too.
+   *
+   * @var Collection<int, ResetPasswordRequest>
    */
   #[ORM\OneToMany(targetEntity: ResetPasswordRequest::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $reset_password_requests;
@@ -69,6 +76,8 @@ class User extends BaseUser
   /**
    * Notifications which are available for this user (shown upon login).
    * When this user is deleted, all notifications for him should also be deleted.
+   *
+   * @var Collection<int, CatroNotification>
    */
   #[ORM\OneToMany(targetEntity: CatroNotification::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $notifications;
@@ -76,6 +85,8 @@ class User extends BaseUser
   /**
    * Comments written by this user.
    * When this user is deleted, all the comments he wrote should be deleted too.
+   *
+   * @var Collection<int, UserComment>
    */
   #[ORM\OneToMany(targetEntity: UserComment::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $comments;
@@ -84,6 +95,8 @@ class User extends BaseUser
    * FollowNotifications mentioning this user as a follower.
    * When this user will be deleted, all FollowNotifications mentioning
    * him as a follower, should also be deleted.
+   *
+   * @var Collection<int, FollowNotification>
    */
   #[ORM\OneToMany(targetEntity: FollowNotification::class, mappedBy: 'follower', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $follow_notification_mentions;
@@ -92,91 +105,126 @@ class User extends BaseUser
    * LikeNotifications mentioning this user as giving a like to another user.
    * When this user will be deleted, all LikeNotifications mentioning
    * him as a user giving a like to another user, should also be deleted.
+   *
+   * @var Collection<int, LikeNotification>
    */
   #[ORM\OneToMany(targetEntity: LikeNotification::class, mappedBy: 'like_from', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $like_notification_mentions;
 
+  /**
+   * @var Collection<int, User>
+   */
   #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'following')]
   protected Collection $followers;
 
+  /**
+   * @var Collection<int, User>
+   */
   #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'followers')]
   protected Collection $following;
 
+  /**
+   * @var Collection<int, ProgramLike>
+   */
   #[ORM\OneToMany(targetEntity: ProgramLike::class, mappedBy: 'user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $likes;
 
+  /**
+   * @var Collection<int, UserLikeSimilarityRelation>
+   */
   #[ORM\OneToMany(targetEntity: UserLikeSimilarityRelation::class, mappedBy: 'first_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $relations_of_similar_users_based_on_likes;
 
+  /**
+   * @var Collection<int, UserLikeSimilarityRelation>
+   */
   #[ORM\OneToMany(targetEntity: UserLikeSimilarityRelation::class, mappedBy: 'second_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $reverse_relations_of_similar_users_based_on_likes;
 
+  /**
+   * @var Collection<int, UserRemixSimilarityRelation>
+   */
   #[ORM\OneToMany(targetEntity: UserRemixSimilarityRelation::class, mappedBy: 'first_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $relations_of_similar_users_based_on_remixes;
 
+  /**
+   * @var Collection<int, UserRemixSimilarityRelation>
+   */
   #[ORM\OneToMany(targetEntity: UserRemixSimilarityRelation::class, mappedBy: 'second_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $reverse_relations_of_similar_users_based_on_remixes;
 
   /**
    * @deprecated
    */
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $gplus_access_token = null;
 
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $google_id = null;
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $facebook_id = null;
 
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $google_access_token = null;
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $facebook_access_token = null;
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $apple_id = null;
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $apple_access_token = null;
+
   /**
    * @deprecated
    */
-  #[ORM\Column(type: 'string', length: 5000, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 5000, nullable: true)]
   protected ?string $gplus_id_token = null;
 
   /**
    * @deprecated
    */
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $gplus_refresh_token = null;
 
-  #[ORM\Column(type: 'integer', unique: true, nullable: true)]
+  #[ORM\Column(type: Types::INTEGER, unique: true, nullable: true)]
   protected ?int $scratch_user_id = null;
 
-  #[ORM\Column(type: 'boolean', options: ['default' => false])]
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $oauth_password_created = false;
 
-  #[ORM\Column(type: 'boolean', options: ['default' => false])]
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $oauth_user = false;
 
-  #[ORM\Column(type: 'boolean', options: ['default' => true])]
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
   protected bool $verified = true;
 
+  /**
+   * @var Collection<int, ProgramInappropriateReport>
+   */
   #[ORM\OneToMany(targetEntity: ProgramInappropriateReport::class, mappedBy: 'reporting_user', fetch: 'EXTRA_LAZY')]
   protected Collection $reports_triggered_by_this_user;
 
+  /**
+   * @var Collection<int, ProgramInappropriateReport>
+   */
   #[ORM\OneToMany(targetEntity: ProgramInappropriateReport::class, mappedBy: 'reported_user', fetch: 'EXTRA_LAZY')]
   protected Collection $reports_of_this_user;
 
-  #[ORM\Column(type: 'text', length: 65535, nullable: true)]
+  #[ORM\Column(type: Types::TEXT, length: 65535, nullable: true)]
   protected ?string $about = null;
 
-  #[ORM\Column(type: 'string', length: 255, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
   protected ?string $currently_working_on = null;
 
-  #[ORM\Column(type: 'integer', nullable: true)]
+  #[ORM\Column(type: Types::INTEGER, nullable: true)]
   protected ?int $ranking_score = null;
 
   public function __construct()
   {
+    $this->reset_password_requests = new ArrayCollection();
     $this->programs = new ArrayCollection();
     $this->notifications = new ArrayCollection();
     $this->comments = new ArrayCollection();
@@ -228,6 +276,7 @@ class User extends BaseUser
     return $this->gplus_refresh_token;
   }
 
+  #[\Override]
   public function getId(): ?string
   {
     return $this->id;

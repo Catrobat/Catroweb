@@ -131,17 +131,17 @@ class TranslationDelegate
 
     foreach ($to_translate as $text) {
       if (null == $text) {
-        array_push($translation_result, null);
+        $translation_result[] = null;
         continue;
       }
 
       $translated_text = $this->internalTranslate($text, $source_language, $target_language);
 
-      if (null === $translated_text) {
+      if (!$translated_text instanceof TranslationResult) {
         return null;
       }
 
-      array_push($translation_result, $translated_text);
+      $translation_result[] = $translated_text;
     }
 
     return $translation_result;
@@ -177,7 +177,7 @@ class TranslationDelegate
   {
     $apis = $this->apis;
 
-    usort($apis, fn (TranslationApiInterface $api_1, TranslationApiInterface $api_2): int => -($api_1->getPreference($text, $source_language, $target_language) <=>
+    usort($apis, static fn (TranslationApiInterface $api_1, TranslationApiInterface $api_2): int => -($api_1->getPreference($text, $source_language, $target_language) <=>
       $api_2->getPreference($text, $source_language, $target_language)));
 
     return $apis;
@@ -194,14 +194,14 @@ class TranslationDelegate
         throw new \InvalidArgumentException('2-character language code is invalid');
       }
     } elseif (5 == strlen((string) $language)) {
-      if ('-' != $language[2]) {
+      if ('-' !== $language[2]) {
         throw new \InvalidArgumentException('Invalid 5-character language code format');
       }
 
       $language_code = substr((string) $language, 0, 2);
       $country_code = substr((string) $language, 3, 2);
 
-      if (strtolower($language_code) != $language_code) {
+      if (strtolower($language_code) !== $language_code) {
         throw new \InvalidArgumentException('5-character language code has to contain lower case language code');
       }
 
@@ -209,7 +209,7 @@ class TranslationDelegate
         throw new \InvalidArgumentException('language code in 5-character language code is invalid');
       }
 
-      if (strtoupper($country_code) != $country_code) {
+      if (strtoupper($country_code) !== $country_code) {
         throw new \InvalidArgumentException('5-character language code has to contain upper case country code');
       }
 

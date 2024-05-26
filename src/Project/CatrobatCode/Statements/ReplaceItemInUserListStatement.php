@@ -6,18 +6,11 @@ namespace App\Project\CatrobatCode\Statements;
 
 class ReplaceItemInUserListStatement extends BaseUserListStatement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'replace item in userlist ';
-  /**
-   * @var string
-   */
-  final public const MIDDLE_STRING = '(';
-  /**
-   * @var string
-   */
-  final public const END_STRING = ')<br/>';
+  final public const string BEGIN_STRING = 'replace item in userlist ';
+
+  final public const string MIDDLE_STRING = '(';
+
+  final public const string END_STRING = ')<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Testing\DataFixtures;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Tag;
@@ -81,6 +82,7 @@ class ProjectDataFixtures
     } else {
       $project->setApkStatus(Program::APK_NONE);
     }
+
     $project->setUploadedAt(
       isset($config['upload time']) ?
         new \DateTime($config['upload time'], new \DateTimeZone('UTC')) :
@@ -97,10 +99,10 @@ class ProjectDataFixtures
     $project->setRemixRoot(!isset($config['remix_root']) || 'true' === $config['remix_root']);
     $project->setPrivate(isset($config['private']) && 'true' === $config['private']);
     $project->setDebugBuild(isset($config['debug']) && 'true' === $config['debug']);
-    $project->setFlavor($config['flavor'] ?? 'pocketcode');
+    $project->setFlavor($config['flavor'] ?? Flavor::POCKETCODE);
     $project->setRand((int) ($config['rand'] ?? 0));
     $project->setPopularity((float) ($config['popularity'] ?? 0));
-    $project->setNotForKids((int) $config['not_for_kids'] ?? 0);
+    $project->setNotForKids((int) ($config['not_for_kids'] ?? 0));
 
     if (isset($config['apk request time'])) {
       $project->setApkRequestTime(new \DateTime($config['apk request time'], new \DateTimeZone('UTC')));
@@ -157,39 +159,50 @@ class ProjectDataFixtures
     if (isset($config['name'])) {
       Assert::assertEquals($config['name'], $project->getName(), 'Project name wrong.');
     }
+
     if (isset($config['author'])) {
       $author = $project->getUser() ? $project->getUser()->getUserIdentifier() : 'null';
       Assert::assertEquals($config['author'], $author, 'Project author wrong.');
     }
+
     if (isset($config['description'])) {
       Assert::assertEquals($config['description'], $project->getDescription(), 'Project description wrong.');
     }
+
     if (isset($config['credits'])) {
       Assert::assertEquals($config['credits'], $project->getCredits(), 'Project credits wrong.');
     }
+
     if (isset($config['version'])) {
       Assert::assertEquals($config['version'], $project->getCatrobatVersionName(), 'Project version wrong.');
     }
+
     if (isset($config['views'])) {
       Assert::assertEquals($config['views'], $project->getViews(), 'Project view count wrong.');
     }
+
     if (isset($config['downloads'])) {
       Assert::assertEquals($config['downloads'], $project->getDownloads(), 'Project download count wrong.');
     }
+
     if (isset($config['reactions'])) {
       Assert::assertEquals($config['reactions'], $project->getLikes()->count(), 'Project reaction count wrong.');
     }
+
     if (isset($config['comments'])) {
       Assert::assertEquals($config['comments'], $project->getComments()->count(), 'Project comment count wrong.');
     }
+
     if (isset($config['private'])) {
       $private = 'true' === strtolower((string) $config['private']);
       Assert::assertEquals($private, $project->getPrivate(), 'Project private flag wrong.');
     }
+
     if (isset($config['visible'])) {
       $visible = 'true' === strtolower((string) $config['visible']);
       Assert::assertEquals($visible, $project->getVisible(), 'Project visible flag wrong.');
     }
+
     if (isset($config['flavor'])) {
       Assert::assertEquals($config['flavor'], $project->getFlavor(), 'Project flavor wrong.');
     }

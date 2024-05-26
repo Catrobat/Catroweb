@@ -16,6 +16,7 @@ class CreateNotForKidsCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this->setName('catrobat:notforkids')
@@ -28,6 +29,7 @@ class CreateNotForKidsCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $project_name = $input->getArgument('program_name');
@@ -40,6 +42,7 @@ class CreateNotForKidsCommand extends Command
 
       return 1;
     }
+
     try {
       $project->setNotForKids($type);
       $this->entity_manager->persist($project);
@@ -49,6 +52,7 @@ class CreateNotForKidsCommand extends Command
 
       return 2;
     }
+
     $output->writeln('Marking '.$project_name.' as not safe for kids');
 
     return 0;

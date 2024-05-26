@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WriteEmbroideryToFileBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WRITE_EMBROIDERY_TO_FILE_BRICK;

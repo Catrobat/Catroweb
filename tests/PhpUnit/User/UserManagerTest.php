@@ -26,6 +26,7 @@ class UserManagerTest extends TestCase
 {
   private UserManager $user_manager;
 
+  #[\Override]
   protected function setUp(): void
   {
     $canonicalFieldsUpdater = $this->createMock(CanonicalFieldsUpdater::class);

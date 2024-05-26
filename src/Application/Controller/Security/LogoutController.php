@@ -24,6 +24,7 @@ class LogoutController extends AbstractController
   {
     $this->cookie_service->clearCookie('BEARER');
     $this->cookie_service->clearCookie('REFRESH_TOKEN');
+
     $this->token_storage->setToken(null);
     $request->getSession()->invalidate();
 

@@ -21,8 +21,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NotificationsController extends AbstractController
 {
-  final public const load_limit = 20;
-  final public const load_offset = 0;
+  final public const int load_limit = 20;
+
+  final public const int load_offset = 0;
 
   #[Route(path: '/user_notifications', name: 'notifications', methods: ['GET'])]
   public function Notifications(NotificationRepository $notification_repository): Response
@@ -32,6 +33,7 @@ class NotificationsController extends AbstractController
     if (!$user) {
       return $this->redirectToRoute('login');
     }
+
     $notifications = $notification_repository->findBy(['user' => $user], ['id' => 'DESC'], self::load_limit, self::load_offset);
     $avatars = [];
     $all_notifications = [];
@@ -88,24 +90,28 @@ class NotificationsController extends AbstractController
       } else {
         $all_notifications[$notification->getId()] = $notification;
       }
+
       if (null == $notification_instance[$notification->getId()]) {
         $notification_instance[$notification->getId()] = 'other';
       }
+
       if (null == $redirect_array[$notification->getId()]) {
         $redirect_array[$notification->getId()] = 'other';
       }
-      if (null !== $user) {
+
+      if ($user instanceof User) {
         $avatar = $user->getAvatar();
-        if ($avatar) {
+        if (null !== $avatar && '' !== $avatar && '0' !== $avatar) {
           $avatars[$notification->getId()] = $avatar;
         }
       }
     }
-    $all_notifications_count = sizeof($all_notifications);
-    $follower_count = sizeof($follower_notifications);
-    $reaction_count = sizeof($reaction_notifications);
-    $comment_count = sizeof($comment_notifications);
-    $remix_count = sizeof($remix_notifications);
+
+    $all_notifications_count = count($all_notifications);
+    $follower_count = count($follower_notifications);
+    $reaction_count = count($reaction_notifications);
+    $comment_count = count($comment_notifications);
+    $remix_count = count($remix_notifications);
     $response = $this->render('Notifications/notifications.html.twig', [
       'avatars' => $avatars,
       'allNotifications' => $all_notifications,
@@ -149,17 +155,20 @@ class NotificationsController extends AbstractController
     if (!$user) {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
+
     if ('all' === $type) {
       $notifications = $notification_repo->findBy(['user' => $user], ['id' => 'DESC'], $limit, $offset);
     } else {
       $notifications = $notification_repo->findBy(['user' => $user, 'type' => $type], ['id' => 'DESC'], $limit, $offset);
     }
+
     $fetched_notifications = [];
     foreach ($notifications as $notification) {
       if ($notification instanceof LikeNotification && ('reaction' === $type || 'all' === $type)) {
         if ($notification->getLikeFrom() === $this->getUser()) {
           continue;
         }
+
         $fetched_notifications[] = ['id' => $notification->getId(),
           'from' => $notification->getLikeFrom()->getId(),
           'from_name' => $notification->getLikeFrom()->getUserIdentifier(),
@@ -174,12 +183,16 @@ class NotificationsController extends AbstractController
 
         continue;
       }
+
       if (($notification instanceof FollowNotification || $notification instanceof NewProgramNotification)
           && ('follow' === $type || 'all' === $type)) {
-        if (($notification instanceof FollowNotification && $notification->getFollower() === $this->getUser())
-            || ($notification instanceof NewProgramNotification && $notification->getProgram()->getUser() === $this->getUser())) {
+        if ($notification instanceof FollowNotification && $notification->getFollower() === $this->getUser()) {
           continue;
         }
+        if ($notification instanceof NewProgramNotification && $notification->getProgram()->getUser() === $this->getUser()) {
+          continue;
+        }
+
         if ($notification instanceof FollowNotification) {
           $fetched_notifications[] = ['id' => $notification->getId(),
             'from' => $notification->getFollower()->getId(),
@@ -205,12 +218,15 @@ class NotificationsController extends AbstractController
             'message' => $translator->trans('catro-notifications.project-upload.message', [], 'catroweb'),
             'seen' => $notification->getSeen(), ];
         }
+
         continue;
       }
+
       if ($notification instanceof CommentNotification && ('comment' === $type || 'all' === $type)) {
         if ($notification->getComment()->getUser() === $this->getUser()) {
           continue;
         }
+
         $fetched_notifications[] = ['id' => $notification->getId(),
           'from' => $notification->getComment()->getUser()->getId(),
           'from_name' => $notification->getComment()->getUser()->getUserIdentifier(),
@@ -224,6 +240,7 @@ class NotificationsController extends AbstractController
           'seen' => $notification->getSeen(), ];
         continue;
       }
+
       if ($notification instanceof RemixNotification && ('remix' === $type || 'all' === $type)) {
         if ($notification->getRemixFrom() === $this->getUser()) {
           continue;
@@ -242,6 +259,7 @@ class NotificationsController extends AbstractController
           'seen' => $notification->getSeen(), ];
         continue;
       }
+
       if ('all' === $type) {
         $fetched_notifications[] = ['id' => $notification->getId(),
           'from' => null,

@@ -79,6 +79,7 @@ class LogLine
     if (false === $pos) {
       return '';
     }
+
     if ($last_char) {
       ++$pos;
     }

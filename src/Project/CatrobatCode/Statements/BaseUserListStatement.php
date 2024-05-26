@@ -15,6 +15,7 @@ class BaseUserListStatement extends Statement
       $end);
   }
 
+  #[\Override]
   public function execute(): string
   {
     $children = $this->executeChildren();
@@ -22,6 +23,7 @@ class BaseUserListStatement extends Statement
     return parent::addSpaces().$this->start.$this->listName.$this->middle.$children.$this->end;
   }
 
+  #[\Override]
   public function executeChildren(): string
   {
     $code = '';

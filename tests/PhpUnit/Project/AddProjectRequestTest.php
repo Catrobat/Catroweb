@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -23,6 +24,7 @@ class AddProjectRequestTest extends TestCase
 
   private MockObject|User $user;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->user = $this->createMock(User::class);
@@ -66,6 +68,6 @@ class AddProjectRequestTest extends TestCase
 
   public function testHasAFlavor(): void
   {
-    $this->assertSame('pocketcode', $this->add_program_request->getFlavor());
+    $this->assertSame(Flavor::POCKETCODE, $this->add_program_request->getFlavor());
   }
 }

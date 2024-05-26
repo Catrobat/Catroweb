@@ -6,10 +6,7 @@ namespace App\Project\CatrobatCode\Statements;
 
 class BroadcastScriptStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'when receive message ';
+  final public const string BEGIN_STRING = 'when receive message ';
 
   private mixed $message;
 
@@ -20,6 +17,7 @@ class BroadcastScriptStatement extends Statement
       '');
   }
 
+  #[\Override]
   public function execute(): string
   {
     $children = $this->executeChildren();
@@ -31,6 +29,7 @@ class BroadcastScriptStatement extends Statement
     return $code.('<br/>'.$children);
   }
 
+  #[\Override]
   public function executeChildren(): string
   {
     $code = '';

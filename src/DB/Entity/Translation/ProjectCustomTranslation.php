@@ -6,6 +6,7 @@ namespace App\DB\Entity\Translation;
 
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'project_custom_translation')]
@@ -14,23 +15,23 @@ class ProjectCustomTranslation
 {
   #[ORM\Id]
   #[ORM\GeneratedValue]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   private ?int $id = null;
 
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   private ?string $name = null;
 
-  #[ORM\Column(type: 'text', nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   private ?string $description = null;
 
-  #[ORM\Column(type: 'text', nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   private ?string $credits = null;
 
   public function __construct(
     #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'custom_translations')]
     private Program $project,
-    #[ORM\Column(type: 'string', length: 5)]
+    #[ORM\Column(type: Types::STRING, length: 5)]
     private string $language
   ) {
   }

@@ -18,6 +18,7 @@ final class SearchResponseManagerTest extends DefaultTestCase
 {
   protected MockObject|SearchResponseManager $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(SearchResponseManager::class)

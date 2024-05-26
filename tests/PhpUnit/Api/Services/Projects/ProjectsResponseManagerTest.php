@@ -18,6 +18,7 @@ final class ProjectsResponseManagerTest extends DefaultTestCase
 {
   protected MockObject|ProjectsResponseManager $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(ProjectsResponseManager::class)

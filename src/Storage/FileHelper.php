@@ -23,15 +23,20 @@ class FileHelper
     $dir = opendir($src);
     mkdir($dst);
     while (false !== ($file = readdir($dir))) {
-      if ('.' === $file || '..' === $file) {
+      if ('.' === $file) {
         continue;
       }
+      if ('..' === $file) {
+        continue;
+      }
+
       if (is_dir($src.'/'.$file)) {
         FileHelper::copyDirectory($src.'/'.$file, $dst.'/'.$file);
       } else {
         copy($src.'/'.$file, $dst.'/'.$file);
       }
     }
+
     closedir($dir);
   }
 
@@ -40,9 +45,13 @@ class FileHelper
     $dir = new \DirectoryIterator($dir);
     foreach ($dir as $file) {
       chmod($file->getPathname(), $mode);
-      if ($file->isDir() && !$file->isDot()) {
-        FileHelper::setDirectoryPermissionsRecursive($file->getPathname(), $mode);
+      if (!$file->isDir()) {
+        continue;
       }
+      if ($file->isDot()) {
+        continue;
+      }
+      FileHelper::setDirectoryPermissionsRecursive($file->getPathname(), $mode);
     }
   }
 
@@ -83,10 +92,11 @@ class FileHelper
 
     $files = scandir($directory_path);
     foreach ($files as $file) {
-      if ('.' != $file && '..' != $file) {
-        if ('.gitignore' == $file && !$force) {
+      if ('.' !== $file && '..' !== $file) {
+        if ('.gitignore' === $file && !$force) {
           continue; // Keep .gitignores if not forced!
         }
+
         if ('dir' == filetype($directory_path.DIRECTORY_SEPARATOR.$file)) {
           self::removeDirectory($directory_path.DIRECTORY_SEPARATOR.$file);
         } else {
@@ -94,6 +104,7 @@ class FileHelper
         }
       }
     }
+
     reset($files);
   }
 
@@ -116,6 +127,7 @@ class FileHelper
         return;
       }
     }
+
     if (!str_contains($directory_path, '..')) {
       return;
     }

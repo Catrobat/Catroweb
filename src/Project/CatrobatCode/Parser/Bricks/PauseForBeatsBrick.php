@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PauseForBeatsBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PAUSE_FOR_BEATS_BRICK;

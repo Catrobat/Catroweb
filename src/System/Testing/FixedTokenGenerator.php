@@ -12,6 +12,7 @@ class FixedTokenGenerator extends TokenGenerator
   {
   }
 
+  #[\Override]
   public function generateToken(): string
   {
     return $this->token;

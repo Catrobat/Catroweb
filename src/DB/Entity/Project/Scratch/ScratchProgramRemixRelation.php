@@ -7,6 +7,7 @@ namespace App\DB\Entity\Project\Scratch;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Remix\ProgramRemixRelationInterface;
 use App\DB\EntityRepository\Project\ScratchProgramRemixRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'scratch_program_remix_relation')]
@@ -21,11 +22,11 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
    * -----------------------------------------------------------------------------------------------------------------
    */
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $scratch_parent_id;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $catrobat_child_id;
 
   #[ORM\JoinColumn(name: 'catrobat_child_id', referencedColumnName: 'id')]
@@ -38,6 +39,7 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
     $this->setCatrobatChild($catrobat_child);
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return '(Scratch: #'.$this->scratch_parent_id.', Catrobat: #'.$this->catrobat_child_id.')';
@@ -73,11 +75,13 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
     return $this->catrobat_child_id;
   }
 
+  #[\Override]
   public function getDepth(): int
   {
     return 1;
   }
 
+  #[\Override]
   public function getUniqueKey(): string
   {
     return sprintf('ScratchProgramRemixRelation(%d, %d)', $this->scratch_parent_id, $this->catrobat_child_id);

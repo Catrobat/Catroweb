@@ -6,14 +6,9 @@ namespace App\Project\CatrobatCode\Statements;
 
 class HideTextStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'hide variable ';
-  /**
-   * @var string
-   */
-  final public const END_STRING = ')<br/>';
+  final public const string BEGIN_STRING = 'hide variable ';
+
+  final public const string END_STRING = ')<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {

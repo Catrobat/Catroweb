@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\MediaLibrary;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -32,7 +33,7 @@ class MediaPackageController extends AbstractController
   #[Route(path: '/pocket-library/', name: 'pocket_library_overview', methods: ['GET'])]
   public function index(): Response
   {
-    /** @var MediaPackage $packages */
+    /** @var MediaPackage[] $packages */
     $packages = $this->entity_manager->getRepository(MediaPackage::class)->findAll();
 
     return $this->render('MediaLibrary/media_library_overview.html.twig',
@@ -49,11 +50,7 @@ class MediaPackageController extends AbstractController
   #[Route(path: '/pocket-library/{package_name}', name: 'pocket_library', methods: ['GET'])]
   public function mediaPackage(Request $request, string $package_name, TranslatorInterface $translator): Response
   {
-    $flavor = $request->attributes->get('flavor');
-    if ('' === $flavor) {
-      $flavor = 'pocketcode';
-    }
-
+    $flavor = $request->attributes->get('flavor') ?: Flavor::POCKETCODE;
     $package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy([
         'nameUrl' => $package_name,
@@ -99,6 +96,7 @@ class MediaPackageController extends AbstractController
         $categories_of_found_files[] = $found_media_file->getCategory();
       }
     }
+
     $categories = $this->sortCategoriesFlavoredFirst($categories_of_found_files, $flavor, $translator);
 
     return $this->render('MediaLibrary/media_library_package.html.twig', [
@@ -107,7 +105,7 @@ class MediaPackageController extends AbstractController
       'package' => $package_name,
       'categories' => $categories,
       'mediaDir' => '/'.$this->catrobat_mediapackage_path,
-      'foundResults' => (count($found_media_files) ? true : false),
+      'foundResults' => ((bool) count($found_media_files)),
       'resultsCount' => is_countable($found_media_files) ? count($found_media_files) : 0,
       'mediaSearchPath' => $url_generator->generate(
         'open_api_server_mediaLibrary_mediafilessearchget',
@@ -132,7 +130,7 @@ class MediaPackageController extends AbstractController
   {
     $categories = [];
 
-    if ('pocketcode' !== $flavor) {
+    if (Flavor::POCKETCODE !== $flavor) {
       $flavor_name = $translator->trans('flavor.'.$flavor, [], 'catroweb');
       $theme_special_name = $translator->trans('media-packages.theme-special',
         ['%flavor%' => $flavor_name], 'catroweb');
@@ -157,7 +155,7 @@ class MediaPackageController extends AbstractController
       ];
     }
 
-    usort($categories, fn ($category_a, $category_b): int => $category_b['priority'] <=> $category_a['priority']);
+    usort($categories, static fn ($category_a, $category_b): int => $category_b['priority'] <=> $category_a['priority']);
 
     return $categories;
   }

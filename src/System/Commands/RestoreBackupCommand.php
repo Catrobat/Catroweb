@@ -13,6 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:backup:restore', description: 'Restores a borg backup')]
 class RestoreBackupCommand extends Command
 {
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $output->writeln('Restore backup on localhost');

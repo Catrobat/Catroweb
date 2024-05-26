@@ -17,6 +17,7 @@ class UserPostPersistNotifierTest extends DefaultTestCase
 {
   protected MockObject|UserPostPersistNotifier $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UserPostPersistNotifier::class)

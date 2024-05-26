@@ -18,6 +18,7 @@ final class SearchApiLoaderTest extends DefaultTestCase
 {
   protected MockObject|SearchApiLoader $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(SearchApiLoader::class)

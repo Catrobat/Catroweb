@@ -9,6 +9,7 @@ use App\Security\PasswordGenerator;
 use App\Security\TokenGenerator;
 use App\User\UserManager;
 use Google\Client;
+use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +40,7 @@ class OAuthService
     } else {
       $retArray['email_available'] = false;
     }
+
     $retArray['statusCode'] = Response::HTTP_OK;
 
     return new JsonResponse($retArray);
@@ -80,6 +82,7 @@ class OAuthService
     } else {
       $retArray['token_available'] = false;
     }
+
     $retArray['statusCode'] = Response::HTTP_OK;
 
     return new JsonResponse($retArray);
@@ -106,12 +109,7 @@ class OAuthService
         return new JsonResponse('Token invalid', 777);
       }
 
-      if ($gEmail) {
-        /** @var User|null $user */
-        $user = $this->user_manager->findUserByUsernameOrEmail($gEmail);
-      } else {
-        $user = null;
-      }
+      $user = $gEmail ? $this->user_manager->findUserByUsernameOrEmail($gEmail) : null;
       /** @var User|null $google_user */
       $google_user = $this->user_manager->findOneBy([
         'google_id' => $gPlusId,
@@ -122,7 +120,7 @@ class OAuthService
 
     if (null !== $google_user) {
       $this->setGoogleTokens($google_user, null, null, $id_token);
-    } elseif (null !== $user) {
+    } elseif ($user instanceof User) {
       $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $gPlusId, $username);
       $this->setGoogleTokens($user, null, null, $id_token);
     } else {
@@ -174,15 +172,18 @@ class OAuthService
 
   private function setGoogleTokens(User $user, ?string $access_token, ?string $refresh_token, ?string $id_token): void
   {
-    if ($access_token) {
+    if (null !== $access_token && '' !== $access_token && '0' !== $access_token) {
       $user->setGplusAccessToken($access_token);
     }
-    if ($refresh_token) {
+
+    if (null !== $refresh_token && '' !== $refresh_token && '0' !== $refresh_token) {
       $user->setGplusRefreshToken($refresh_token);
     }
-    if ($id_token) {
+
+    if (null !== $id_token && '' !== $id_token && '0' !== $id_token) {
       $user->setGplusIdToken($id_token);
     }
+
     $this->user_manager->updateUser($user);
   }
 
@@ -193,16 +194,16 @@ class OAuthService
   {
     $violations = $this->validateOAuthUser($request, $retArray);
     if (0 === count($violations)) {
-      if ('' === $user->getUsername()) {
-        if ($user->getUsername() != $googleUsername) {
-          if ($this->user_manager->findUserByUsername($googleUsername)) {
-            $username = PasswordGenerator::generateRandomPassword();
-          } else {
-            $username = $googleUsername;
-          }
-          $user->setUsername($username);
+      if ('' === $user->getUsername() && $user->getUsername() !== $googleUsername) {
+        if ($this->user_manager->findUserByUsername($googleUsername) instanceof UserInterface) {
+          $username = PasswordGenerator::generateRandomPassword();
+        } else {
+          $username = $googleUsername;
         }
+
+        $user->setUsername($username);
       }
+
       $user->setGoogleId($googleId);
 
       $user->setEnabled(true);
@@ -218,7 +219,7 @@ class OAuthService
   private function registerGoogleUser(Request $request, array &$retArray, string $googleId,
     string $googleUsername, string $googleEmail, ?string $id_token = null): void
   {
-    if ($this->user_manager->findUserByUsername($googleUsername)) {
+    if ($this->user_manager->findUserByUsername($googleUsername) instanceof UserInterface) {
       $username = PasswordGenerator::generateRandomPassword();
     } else {
       $username = $googleUsername;
@@ -234,7 +235,7 @@ class OAuthService
       $user->setEmail($googleEmail);
       $user->setPlainPassword(PasswordGenerator::generateRandomPassword());
       $user->setEnabled(true);
-      if ($id_token) {
+      if (null !== $id_token && '' !== $id_token && '0' !== $id_token) {
         $user->setGplusIdToken($id_token);
       }
 

@@ -12,10 +12,12 @@ use App\Admin\DB_Updater\AchievementsAdmin;
 use App\Admin\DB_Updater\Controller\AchievementsAdminController;
 use App\Admin\DB_Updater\Controller\CronJobsAdminController;
 use App\Admin\DB_Updater\Controller\ExtensionsAdminController;
+use App\Admin\DB_Updater\Controller\FlavorsAdminController;
 use App\Admin\DB_Updater\Controller\SpecialUpdaterAdminController;
 use App\Admin\DB_Updater\Controller\TagsAdminController;
 use App\Admin\DB_Updater\CronJobsAdmin;
 use App\Admin\DB_Updater\ExtensionsAdmin;
+use App\Admin\DB_Updater\FlavorsAdmin;
 use App\Admin\DB_Updater\SpecialUpdaterAdmin;
 use App\Admin\DB_Updater\TagsAdmin;
 use App\Admin\MediaPackage\MediaPackageAdmin;
@@ -75,6 +77,7 @@ use App\Application\Locale\LocaleEventSubscriber;
 use App\Application\Theme\ThemeRequestEventSubscriber;
 use App\Application\Twig\TwigExtension;
 use App\DB\Entity\FeatureFlag;
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
@@ -266,6 +269,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->load('App\Application\Controller\\', __DIR__.'/../src/Application/Controller')
+    ->public()
+  ;
+
+  $services->load('App\System\Controller\\', __DIR__.'/../src/System/Controller')
     ->public()
   ;
 
@@ -697,6 +704,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   $services->set('admin.block.achievements', AchievementsAdmin::class)
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Achievements', 'code' => null, 'model_class' => Achievement::class, 'controller' => AchievementsAdminController::class])
+    ->public()
+  ;
+
+  $services->set('admin.block.flavors', FlavorsAdmin::class)
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Flavors', 'code' => null, 'model_class' => Flavor::class, 'controller' => FlavorsAdminController::class])
     ->public()
   ;
 

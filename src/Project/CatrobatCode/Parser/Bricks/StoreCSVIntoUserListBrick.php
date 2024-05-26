@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class StoreCSVIntoUserListBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::STORE_CSV_INTO_USERLIST_BRICK;

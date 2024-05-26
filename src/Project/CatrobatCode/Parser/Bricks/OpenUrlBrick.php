@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class OpenUrlBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::OPEN_URL_BRICK;

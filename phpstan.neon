@@ -1,14 +1,19 @@
+includes:
+	- phar://phpstan.phar/conf/bleedingEdge.neon
 parameters:
   bootstrapFiles:
       - config/bootstrap_test.php
   level: 6  # 0 is the loosest lvl and 9 is the strictest (https://phpstan.org/user-guide/rule-levels)
   paths:
-      - src
-      - config
-      - tests
+      - .  # Analyze all directories in the project
+  excludePaths:
+      - node_modules/**/*
+      - var/**/*
+      - vendor/**/*
+      - deploy.php
   inferPrivatePropertyTypeFromConstructor: true
   reportUnmatchedIgnoredErrors: true
 
-  # Would be nice, but not worth the amount of work needed to fix this. Maybe in the future ;)
-  checkMissingIterableValueType: false
-  checkGenericClassInNonGenericObjectType: false
+  ignoreErrors:
+    - identifier: missingType.generics
+    - identifier: missingType.iterableValue

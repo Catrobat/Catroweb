@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class DownloadApkController.
@@ -51,13 +52,13 @@ class DownloadApkController extends AbstractController
 
   protected function createDownloadApkFileResponse(string $id, File $file): BinaryFileResponse
   {
-    $username = $this->getUser() ? $this->getUser()->getUserIdentifier() : '-';
-    $this->logger->debug("User \"{$username}\" downloaded project apk with ID \"{$id}\" successfully");
+    $username = $this->getUser() instanceof UserInterface ? $this->getUser()->getUserIdentifier() : '-';
+    $this->logger->debug(sprintf('User "%s" downloaded project apk with ID "%s" successfully', $username, $id));
 
     $response = new BinaryFileResponse($file);
     $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
       ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-      "{$id}.apk"
+      $id.'.apk'
     ));
     $response->headers->set('Content-type', 'application/vnd.android.package-archive');
 
@@ -76,8 +77,9 @@ class DownloadApkController extends AbstractController
       if (null !== $project) {
         $project->setApkStatus(Program::APK_NONE);
         $this->project_manager->save($project);
-        $this->logger->error("Project apk for id: \"{$id}\" not found; Status reset");
+        $this->logger->error(sprintf('Project apk for id: "%s" not found; Status reset', $id));
       }
+
       throw new NotFoundHttpException($exception->getMessage());
     }
 

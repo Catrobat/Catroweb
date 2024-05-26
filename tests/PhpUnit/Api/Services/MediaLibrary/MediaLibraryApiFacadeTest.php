@@ -18,6 +18,7 @@ final class MediaLibraryApiFacadeTest extends DefaultTestCase
 {
   protected MediaLibraryApiFacade|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(MediaLibraryApiFacade::class)

@@ -21,6 +21,7 @@ class ParsedObjectsContainerTest extends TestCase
 {
   protected ParsedScene $container;
 
+  #[\Override]
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');

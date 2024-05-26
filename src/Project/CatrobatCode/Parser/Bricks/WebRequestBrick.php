@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class WebRequestBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::WEB_REQUEST_BRICK;

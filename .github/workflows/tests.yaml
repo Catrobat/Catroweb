@@ -163,6 +163,7 @@ jobs:
           - web-studio
           - web-top-bar
           - web-translation
+          - web-system
 
     steps:
       - name: Checkout

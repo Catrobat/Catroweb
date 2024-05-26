@@ -67,9 +67,13 @@ trait ContextTrait
   private readonly KernelInterface $kernel;
 
   public string $ERROR_DIR;
+
   public string $FIXTURES_DIR;
+
   public string $SCREENSHOT_DIR;
+
   public string $MEDIA_PACKAGE_DIR = './tests/TestData/DataFixtures/MediaPackage/';
+
   public string $EXTRACT_RESOURCES_DIR;
 
   public function __construct(KernelInterface $kernel)
@@ -420,14 +424,16 @@ trait ContextTrait
     } else {
       $project = $this->getProjectManager()->findOneByName($config['name']);
     }
+
     $featured_project->setProgram($project);
 
     /* @var Flavor $flavor */
-    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
+    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? Flavor::POCKETCODE);
     if (null == $flavor) {
-      $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
+      $new_flavor['name'] = $config['flavor'] ?? Flavor::POCKETCODE;
       $flavor = $this->insertFlavor($new_flavor);
     }
+
     $featured_project->setFlavor($flavor);
 
     $featured_project->setUrl($config['url'] ?? null);
@@ -459,11 +465,12 @@ trait ContextTrait
     }
 
     /* @var Flavor $flavor */
-    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
+    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? Flavor::POCKETCODE);
     if (null == $flavor) {
-      $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
+      $new_flavor['name'] = $config['flavor'] ?? Flavor::POCKETCODE;
       $flavor = $this->insertFlavor($new_flavor);
     }
+
     $example_project->setFlavor($flavor);
 
     $example_project->setImageType($config['imagetype'] ?? 'jpg');
@@ -492,8 +499,10 @@ trait ContextTrait
 
     $parent_id = $config['parent_id'] ?? null;
     $parent_id = ('NULL' === $parent_id || is_null($parent_id)) ? null : intval($parent_id);
+
     $is_deleted = $config['is_deleted'] ?? false;
     $is_deleted = 'true' === $is_deleted;
+
     $new_comment = new UserComment();
     $new_comment->setUploadDate(isset($config['upload_date']) ?
       new \DateTime($config['upload_date'], new \DateTimeZone('UTC')) :
@@ -564,6 +573,7 @@ trait ContextTrait
     } else {
       $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/base', $new_project_dir);
     }
+
     $properties = simplexml_load_file($new_project_dir.'/code.xml');
     if (!$properties) {
       throw new \Exception("Can't load code.xml file");

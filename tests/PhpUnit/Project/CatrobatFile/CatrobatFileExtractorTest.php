@@ -20,6 +20,7 @@ class CatrobatFileExtractorTest extends TestCase
 {
   private CatrobatFileExtractor $catrobat_file_extractor;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->catrobat_file_extractor = new CatrobatFileExtractor(BootstrapExtension::$CACHE_DIR, '/webpath');

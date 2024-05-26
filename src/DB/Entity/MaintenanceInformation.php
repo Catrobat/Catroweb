@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'maintanance_information')]
@@ -12,28 +13,28 @@ class MaintenanceInformation
 {
   #[ORM\Id]
   #[ORM\GeneratedValue]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   protected int $id;
 
-  #[ORM\Column(type: 'string', length: 255)]
+  #[ORM\Column(type: Types::STRING, length: 255)]
   protected string $internalTitle;
 
-  #[ORM\Column(type: 'string', length: 255, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
   protected ?string $icon = null;
 
-  #[ORM\Column(type: 'string', length: 255, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
   protected ?string $ltmCode = null;
 
-  #[ORM\Column(type: 'date', nullable: true)]
+  #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
   protected ?\DateTime $ltm_maintenanceStart = null;
 
-  #[ORM\Column(type: 'date', nullable: true)]
+  #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
   protected ?\DateTime $ltm_maintenanceEnd = null;
 
-  #[ORM\Column(type: 'text', nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $ltm_additionalInformation = null;
 
-  #[ORM\Column(type: 'boolean')]
+  #[ORM\Column(type: Types::BOOLEAN)]
   protected bool $active;
 
   // Getters and setters

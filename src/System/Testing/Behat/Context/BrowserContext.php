@@ -90,7 +90,7 @@ class BrowserContext extends MinkContext implements Context
     Assert::assertNotNull($element, $locator.' not found!');
     Assert::assertTrue($element->hasAttribute($attribute), 'Element has no attribute '.$attribute);
 
-    if ('a' == $should_have) {
+    if ('a' === $should_have) {
       Assert::assertStringContainsString($value, $element->getAttribute($attribute), '<'.$attribute.'> does not contain '.$value);
     } else {
       Assert::assertStringNotContainsString($value, $element->getAttribute($attribute), '<'.$attribute.'> does contain '.$value);
@@ -104,14 +104,16 @@ class BrowserContext extends MinkContext implements Context
    */
   public function atLeastOneElementShouldBeVisible(string $locator): void
   {
+    $result = false;
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
     foreach ($elements as $e) {
-      /** @var NodeElement $e */
       if ($e->isVisible()) {
-        return;
+        $result = true;
+        break;
       }
     }
-    Assert::assertTrue(false, 'No '.$locator.' element currently visible.');
+
+    Assert::assertTrue($result, 'No '.$locator.' element currently visible.');
   }
 
   /**
@@ -240,6 +242,7 @@ class BrowserContext extends MinkContext implements Context
   {
     $field = $this->fixStepArgument($field);
     $field = $this->getSession()->getPage()->findField($field);
+
     $valid = $this->getSession()->getDriver()->evaluateScript('return document.evaluate("'.str_replace('"', '\\"', $field->getXpath()).'", document, null, XPathResult.ANY_TYPE, null).iterateNext().checkValidity();');
     if ('not' === trim($not)) {
       Assert::assertFalse($valid, 'Field needs to be invalid but was valid');
@@ -318,10 +321,11 @@ class BrowserContext extends MinkContext implements Context
         unlink($file_path);
         break;
       }
+
       usleep(125000);
     }
 
-    Assert::assertEquals(true, $received, "File {$name} hasn't been found at location '{$file_path}'");
+    Assert::assertEquals(true, $received, sprintf('File %s hasn\'t been found at location \'%s\'', $name, $file_path));
   }
 
   /**
@@ -337,6 +341,7 @@ class BrowserContext extends MinkContext implements Context
         break;
       }
     }
+
     Assert::assertTrue($contains, "No element '".$selector."' contains '".$value."'");
   }
 
@@ -353,6 +358,7 @@ class BrowserContext extends MinkContext implements Context
         break;
       }
     }
+
     Assert::assertFalse($contains, "A element '".$selector."' contains '".$value."'");
   }
 
@@ -362,7 +368,7 @@ class BrowserContext extends MinkContext implements Context
   public function scrollVertical(string $selectorID, string $value): void
   {
     $this->getSession()->getDriver()->evaluateScript(
-      "document.getElementById(\"{$selectorID}\").scrollTop = {$value}"
+      sprintf('document.getElementById("%s").scrollTop = %s', $selectorID, $value)
     );
   }
 
@@ -372,7 +378,7 @@ class BrowserContext extends MinkContext implements Context
   public function scrollHorizontal(string $selectorID, string $className, string $value): void
   {
     $this->getSession()->getDriver()->evaluateScript(
-      "document.getElementById(\"{$selectorID}\").getElementsByClassName(\"{$className}\")[0].scrollLeft = {$value}"
+      sprintf('document.getElementById("%s").getElementsByClassName("%s")[0].scrollLeft = %s', $selectorID, $className, $value)
     );
   }
 
@@ -455,9 +461,11 @@ class BrowserContext extends MinkContext implements Context
           continue;
         }
       }
+
       if ($element->isVisible()) {
         return;
       }
+
       usleep($delay);
     }
 
@@ -476,12 +484,14 @@ class BrowserContext extends MinkContext implements Context
     if (null === $element) {
       return; // element does not exist, so not visible
     }
+
     $tries = 100;
     $delay = 100000; // every 1/10 second
     for ($timer = 0; $timer < $tries; ++$timer) {
       if (!$element->isValid() || !$element->isVisible()) {
         return;
       }
+
       usleep($delay);
     }
 
@@ -509,9 +519,11 @@ class BrowserContext extends MinkContext implements Context
           continue;
         }
       }
+
       if ($element->isValid() && $element->isVisible()) {
         break;
       }
+
       usleep($delay);
     }
 
@@ -523,6 +535,7 @@ class BrowserContext extends MinkContext implements Context
       if (!$element->isValid() || !$element->isVisible()) {
         return;
       }
+
       usleep($delay);
     }
 
@@ -545,6 +558,7 @@ class BrowserContext extends MinkContext implements Context
       if ($element->getText() === $text) {
         return;
       }
+
       usleep($delay);
     }
 

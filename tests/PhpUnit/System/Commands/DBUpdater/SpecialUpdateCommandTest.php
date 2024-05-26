@@ -20,6 +20,7 @@ class SpecialUpdateCommandTest extends KernelTestCase
 {
   protected MockObject|SpecialUpdateCommand $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(SpecialUpdateCommand::class)

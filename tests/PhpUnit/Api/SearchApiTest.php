@@ -24,6 +24,7 @@ final class SearchApiTest extends DefaultTestCase
 
   protected MockObject|SearchApiFacade $facade;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(SearchApi::class)

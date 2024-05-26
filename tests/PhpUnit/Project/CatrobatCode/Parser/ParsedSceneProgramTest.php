@@ -21,6 +21,7 @@ class ParsedSceneProgramTest extends TestCase
 {
   protected ParsedSceneProject $program;
 
+  #[\Override]
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');

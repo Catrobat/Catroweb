@@ -47,6 +47,7 @@ class ExampleProjectAdmin extends AbstractAdmin
     return '../../'.$this->example_image_repository->getWebPath($object->getId(), $object->getImageType(), false);
   }
 
+  #[\Override]
   public function getObjectMetadata($object): MetadataInterface
   {
     /** @var ExampleProgram $example_project */
@@ -56,7 +57,8 @@ class ExampleProjectAdmin extends AbstractAdmin
       $this->getExampleImageUrl($example_project));
   }
 
-  public function preUpdate(object $object): void
+  #[\Override]
+  protected function preUpdate(object $object): void
   {
     /** @var ExampleProgram $example_project */
     $example_project = $object;
@@ -65,11 +67,13 @@ class ExampleProjectAdmin extends AbstractAdmin
     $this->checkProjectID($example_project);
   }
 
-  public function prePersist($object): void
+  #[\Override]
+  protected function prePersist($object): void
   {
     $this->checkProjectID($object);
   }
 
+  #[\Override]
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     /** @var ProxyQuery $query */
@@ -89,6 +93,7 @@ class ExampleProjectAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     /** @var ExampleProgram $example_project */
@@ -120,6 +125,7 @@ class ExampleProjectAdmin extends AbstractAdmin
    *
    * Fields to be shown on filter forms
    */
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -132,6 +138,7 @@ class ExampleProjectAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     unset($this->getListModes()['mosaic']);
@@ -173,6 +180,6 @@ class ExampleProjectAdmin extends AbstractAdmin
 
   private function getFlavors(): array
   {
-    return $this->flavor_repository->getFlavorsByNames(['arduino', 'embroidery']);
+    return $this->flavor_repository->getFlavorsByNames([Flavor::ARDUINO, Flavor::EMBROIDERY]);
   }
 }

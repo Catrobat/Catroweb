@@ -19,6 +19,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 {
   protected MockObject|TranslatorAwareTraitTestClass $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockForAbstractClass(TranslatorAwareTraitTestClass::class);

@@ -1,10 +1,10 @@
-@web @tags
-Feature: Tags are inserted/update to the database by a symfony command
+@web @extension
+Feature: Extension are inserted/update to the database by a symfony command
 
   Background:
     Given there should be "0" extensions in the database
 
-  Scenario: Running the command adds all tags to the database
+  Scenario: Running the command adds all extension to the database
     Given I run the update extensions command
     Then there should be "7" extensions in the database
 

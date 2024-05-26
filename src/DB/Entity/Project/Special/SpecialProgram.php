@@ -7,6 +7,7 @@ namespace App\DB\Entity\Project\Special;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -19,23 +20,23 @@ class SpecialProgram
   public ?string $old_image_type = null;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  #[ORM\Column(type: 'string')]
+  #[ORM\Column(type: Types::STRING)]
   protected string $imagetype;
 
-  #[ORM\Column(type: 'boolean')]
+  #[ORM\Column(type: Types::BOOLEAN)]
   protected bool $active = true;
 
   #[ORM\ManyToOne(targetEntity: Flavor::class, fetch: 'EAGER')]
   protected ?Flavor $flavor = null;
 
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: Types::INTEGER)]
   protected int $priority = 0;
 
-  #[ORM\Column(type: 'boolean', options: ['default' => false])]
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $for_ios = false;
 
   #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'EAGER')]

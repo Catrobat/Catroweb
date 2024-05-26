@@ -23,11 +23,13 @@ class HwiOauthAccountConnector implements AccountConnectorInterface
   /**
    * Overwrite the provider!
    */
+  #[\Override]
   public function connect(UserInterface $user, UserResponseInterface $response): void
   {
     if (!$user instanceof User) {
       throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', $user::class));
     }
+
     // retrieve access token and the ID
     $property = $this->getProperty($response);
     $username = $response->getUsername();
@@ -39,14 +41,16 @@ class HwiOauthAccountConnector implements AccountConnectorInterface
     $access_token = $response->getAccessToken();
 
     // Disconnect previous user
-    if (null !== $previousUser = $this->user_manager->findOneBy([$property => $username])) {
+    if (($previousUser = $this->user_manager->findOneBy([$property => $username])) instanceof User) {
       $previousUser->{$setter_id}(null);
       $previousUser->{$setter_access_token}(null);
       $this->user_manager->updateUser($user);
     }
+
     // username is a unique integer
     $user->{$setter_id}($username);
     $user->{$setter_access_token}($access_token);
+
     $this->user_manager->updateUser($user);
   }
 

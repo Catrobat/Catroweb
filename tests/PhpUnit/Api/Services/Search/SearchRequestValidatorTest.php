@@ -18,6 +18,7 @@ final class SearchRequestValidatorTest extends DefaultTestCase
 {
   protected MockObject|SearchRequestValidator $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(SearchRequestValidator::class)

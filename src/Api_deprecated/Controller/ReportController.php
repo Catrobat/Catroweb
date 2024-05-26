@@ -53,6 +53,7 @@ class ReportController extends AbstractController
 
       return new JsonResponse($response);
     }
+
     $category = strval($request->request->get('category'));
     $note = strval($request->request->get('note'));
     $projectId = strval($request->request->get('program'));
@@ -64,6 +65,7 @@ class ReportController extends AbstractController
 
       return new JsonResponse($response);
     }
+
     $report = new ProgramInappropriateReport();
     $approved_project = $project->getApproved();
     $featured_project = $this->project_manager->getFeaturedRepository()->isFeatured($project);
@@ -73,6 +75,7 @@ class ReportController extends AbstractController
 
       return new JsonResponse($response);
     }
+
     $token = $request->headers->get('authorization');
     if ($this->authorization_checker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
       /** @var User|null $user */
@@ -93,18 +96,22 @@ class ReportController extends AbstractController
         if (!array_key_exists('username', $jwt_payload)) {
           return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
         }
+
         $report->setReportingUser($jwt_payload['username']);
       }
     } else {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
+
     $project->setVisible(false);
     $report->setCategory($category);
     $report->setNote($note);
     $report->setProgram($project);
     $report->setReportedUser($project->getUser());
+
     $this->entity_manager->persist($report);
     $this->entity_manager->flush();
+
     $this->event_dispatcher->dispatch(new ReportInsertEvent($category, $note, $report));
     $response['answer'] = $this->translator->trans('success.report', [], 'catroweb');
     $response['statusCode'] = Response::HTTP_OK;

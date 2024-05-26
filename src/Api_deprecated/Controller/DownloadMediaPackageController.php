@@ -30,6 +30,7 @@ class DownloadMediaPackageController extends AbstractController
     if (null === $media_file) {
       throw new NotFoundHttpException();
     }
+
     $file = $file_repository->getMediaFile($id, $media_file->getExtension());
     if ($file->isFile()) {
       $media_file->setDownloads($media_file->getDownloads() + 1);
@@ -51,6 +52,7 @@ class DownloadMediaPackageController extends AbstractController
 
       return $response;
     }
+
     throw new NotFoundHttpException();
   }
 }

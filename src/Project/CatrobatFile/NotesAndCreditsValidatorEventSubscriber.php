@@ -22,6 +22,7 @@ class NotesAndCreditsValidatorEventSubscriber implements EventSubscriberInterfac
     }
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [ProjectBeforeInsertEvent::class => 'onProjectBeforeInsert'];

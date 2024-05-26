@@ -20,6 +20,7 @@ class CronJobCommandTest extends KernelTestCase
 {
   protected CronJobCommand|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(CronJobCommand::class)

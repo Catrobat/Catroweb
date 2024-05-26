@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Theme;
 
+use App\DB\Entity\Flavor;
 use App\Utils\RequestHelper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -81,11 +82,7 @@ class ThemeRequestEventSubscriber implements EventSubscriberInterface
 
   private function getFlavorFromTheme(string $theme): string
   {
-    if (!$this->flavorExists($theme)) {
-      return 'pocketcode';
-    }
-
-    return $theme;
+    return $this->flavorExists($theme) ? $theme : Flavor::POCKETCODE;
   }
 
   private function flavorExists(?string $flavor): bool
@@ -95,6 +92,7 @@ class ThemeRequestEventSubscriber implements EventSubscriberInterface
     return in_array($flavor, $flavors, true);
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::REQUEST => ['onKernelRequest', 10]];

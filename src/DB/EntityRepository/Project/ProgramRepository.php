@@ -70,6 +70,7 @@ class ProgramRepository extends ServiceEntityRepository
 
       return $this->program_finder->find($query, $limit, ['from' => $offset]);
     }
+
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
     $query_builder = $this->setPagination($query_builder, $limit, $offset);
@@ -101,10 +102,12 @@ class ProgramRepository extends ServiceEntityRepository
 
       return $this->program_finder->find($query, $limit, ['from' => $offset]);
     }
+
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
     $query_builder = $this->setPagination($query_builder, $limit, $offset);
     $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
+
     $date_time_delta_7_days = $query_builder->expr()->literal($time_for_check);
     $left_or = $query_builder->expr()->gte('e.uploaded_at', $date_time_delta_7_days);
     $right_or = $query_builder->expr()->gte('e.last_modified_at', $date_time_delta_7_days);
@@ -288,7 +291,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->getResult()
     ;
 
-    return array_map(fn ($data): mixed => $data['id'], $result);
+    return array_map(static fn ($data): mixed => $data['id'], $result);
   }
 
   /**
@@ -362,7 +365,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $results = $query_builder->getQuery()->getResult();
 
-    return array_map(fn ($result): mixed => $result['program'], $results);
+    return array_map(static fn ($result): mixed => $result['program'], $results);
   }
 
   public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Program $program, ?int $limit, int $offset): array
@@ -372,7 +375,7 @@ class ProgramRepository extends ServiceEntityRepository
 
   public function filterVisiblePrograms(array $programs, string $max_version = ''): array
   {
-    if (empty($programs)) {
+    if ([] === $programs) {
       return [];
     }
 
@@ -380,11 +383,19 @@ class ProgramRepository extends ServiceEntityRepository
     $filtered_programs = [];
 
     foreach ($programs as $program) {
-      if (true === $program->getVisible() && false === $program->getPrivate()
-        && ($this->app_request->isDebugBuildRequest() || false === $program->isDebugBuild())
-        && ('' === $max_version || $program->getLanguageVersion() <= $max_version)) {
-        $filtered_programs[] = $program;
+      if (true !== $program->getVisible()) {
+        continue;
       }
+      if (false !== $program->getPrivate()) {
+        continue;
+      }
+      if (!$this->app_request->isDebugBuildRequest() && false !== $program->isDebugBuild()) {
+        continue;
+      }
+      if ('' !== $max_version && $program->getLanguageVersion() > $max_version) {
+        continue;
+      }
+      $filtered_programs[] = $program;
     }
 
     return $filtered_programs;
@@ -400,7 +411,7 @@ class ProgramRepository extends ServiceEntityRepository
 
   private function createQueryCountBuilder(string $alias = 'e'): QueryBuilder
   {
-    return $this->createQueryBuilder($alias)->select("count({$alias}.id)");
+    return $this->createQueryBuilder($alias)->select(sprintf('count(%s.id)', $alias));
   }
 
   private function getQueryCount(QueryBuilder $query_builder): int
@@ -415,7 +426,7 @@ class ProgramRepository extends ServiceEntityRepository
   private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC', string $alias = 'e'): QueryBuilder
   {
     if ('' !== trim($order_by)) {
-      $query_builder = $query_builder
+      return $query_builder
         ->orderBy($alias.'.'.$order_by, $order)
       ;
     }
@@ -428,6 +439,7 @@ class ProgramRepository extends ServiceEntityRepository
     if (null !== $offset && $offset > 0) {
       $query_builder->setFirstResult($offset);
     }
+
     if (null !== $limit && $limit > 0) {
       $query_builder->setMaxResults($limit);
     }
@@ -532,14 +544,17 @@ class ProgramRepository extends ServiceEntityRepository
     if ('' === trim((string) $flavor)) {
       return;
     }
+
     if ('!' === $flavor[0]) {
       $must_not = new BoolQuery();
       $must_not->addMustNot(new MatchQuery('flavor', strtolower(substr((string) $flavor, 1))));
       $qb->addMust($must_not);
     }
+
     $should = new BoolQuery();
     $should->addShould(new Query\Wildcard('flavor', strtolower((string) $flavor)));
     $should->addShould(new Query\Wildcard('getExtensionsString', strtolower((string) $flavor)));
+
     $qb->addMust($should);
   }
 
@@ -552,9 +567,13 @@ class ProgramRepository extends ServiceEntityRepository
 
   private function excludeDebugProjectsElastica(BoolQuery $qb): void
   {
-    if (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
-      $qb->addMust(new Query\Term(['debug_build' => false]));
+    if ($this->app_request->isDebugBuildRequest()) {
+      return;
     }
+    if ('dev' === $_ENV['APP_ENV']) {
+      return;
+    }
+    $qb->addMust(new Query\Term(['debug_build' => false]));
   }
 
   private function excludeInvisibleProjectsElastica(BoolQuery $qb): void
@@ -571,7 +590,7 @@ class ProgramRepository extends ServiceEntityRepository
   {
     $query = new Query();
     $query->setQuery($bool_query);
-    if ('' != $order_by) {
+    if ('' !== $order_by) {
       $query->addSort([$order_by => $order]);
     }
 

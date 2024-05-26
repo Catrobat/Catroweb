@@ -1,6 +1,7 @@
 @web @help
 Feature: Help page redirect
 
+  @disabled # flaky, we can't control the availability of the wiki
   Scenario: Navigating to "/app/help" should redirect to the wiki
     When I go to "/app/help"
     And I wait for the page to be loaded

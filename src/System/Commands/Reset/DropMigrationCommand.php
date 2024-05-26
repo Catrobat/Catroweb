@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\System\Commands\Reset;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -15,6 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DropMigrationCommand extends Command
 {
   protected Connection $connection;
+
   private OutputInterface $output;
 
   public function __construct(protected EntityManagerInterface $entity_manager)
@@ -24,22 +26,23 @@ class DropMigrationCommand extends Command
   }
 
   /**
-   * @throws \Doctrine\DBAL\Exception
+   * @throws Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->output = $output;
     if ($this->dropMigrationVersions()) {
       $this->output->writeln('Table doctrine_migration_versions dropped!');
     } else {
-      $this->output->writeln('Table doctrine_migration_versions doesn\'t exist!');
+      $this->output->writeln("Table doctrine_migration_versions doesn't exist!");
     }
 
     return 0;
   }
 
   /**
-   * @throws \Doctrine\DBAL\Exception
+   * @throws Exception
    */
   private function dropMigrationVersions(): bool
   {

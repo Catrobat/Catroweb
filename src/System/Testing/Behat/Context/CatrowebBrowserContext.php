@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Testing\Behat\Context;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
@@ -34,9 +35,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class CatrowebBrowserContext extends BrowserContext
 {
-  final public const AVATAR_DIR = './tests/TestData/DataFixtures/AvatarImages/';
+  final public const string AVATAR_DIR = './tests/TestData/DataFixtures/AvatarImages/';
 
-  final public const ALREADY_IN_DB_USER = 'AlreadyinDB';
+  final public const string ALREADY_IN_DB_USER = 'AlreadyinDB';
 
   protected bool $use_real_oauth_javascript_code = false;
 
@@ -96,6 +97,7 @@ class CatrowebBrowserContext extends BrowserContext
     if ('try to' === $try_to) {
       $this->assertPageNotContainsText('Your password or username was incorrect');
     }
+
     $this->getUserDataFixtures()->setCurrentUserByUsername($username);
   }
 
@@ -119,7 +121,8 @@ class CatrowebBrowserContext extends BrowserContext
       $this->getSession()->wait(2_000, 'window.location.href.search("login") == -1');
       $this->cookieShouldExist('BEARER');
     }
-    if ('out' == $arg1) {
+
+    if ('out' === $arg1) {
       $this->getSession()->wait(1_000, 'window.location.href.search("profile") == -1');
       $this->cookieShouldNotExist('BEARER');
     }
@@ -130,7 +133,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iUseASpecificBuildTypeOfCatroidApp(string $build_type): void
   {
-    $this->iUseTheUserAgentParameterized('0.998', 'PocketCode', '0.9.60', $build_type);
+    $this->iUseTheUserAgentParameterized('0.998', Flavor::POCKETCODE, '0.9.60', $build_type);
   }
 
   /**
@@ -156,6 +159,7 @@ class CatrowebBrowserContext extends BrowserContext
     if ('NULL' === $cookie_value) {
       $cookie_value = null;
     }
+
     $this->getSession()->setCookie($cookie_name, $cookie_value);
   }
 
@@ -203,6 +207,7 @@ class CatrowebBrowserContext extends BrowserContext
     if (!$sidebar_open) {
       $this->getSession()->getPage()->find('css', '#top-app-bar__btn-sidebar-toggle')->click();
     }
+
     $this->iWaitForAjaxToFinish();
   }
 
@@ -218,6 +223,7 @@ class CatrowebBrowserContext extends BrowserContext
         ++$count;
       }
     }
+
     Assert::assertEquals($element_count, $count);
   }
 
@@ -343,6 +349,7 @@ class CatrowebBrowserContext extends BrowserContext
         if (!empty($cookie)) {
           $this->assertSession()->cookieEquals('hl', 'en');
         }
+
         break;
 
       case 'Deutsch':
@@ -354,7 +361,7 @@ class CatrowebBrowserContext extends BrowserContext
         break;
 
       default:
-        Assert::assertTrue(false);
+        throw new \InvalidArgumentException('Invalid language: '.$arg1);
     }
   }
 
@@ -368,7 +375,7 @@ class CatrowebBrowserContext extends BrowserContext
       'Deutsch' => $this->getSession()->setCookie('hl', 'de_DE'),
       'Russisch' => $this->getSession()->setCookie('hl', 'ru_RU'),
       'French' => $this->getSession()->setCookie('hl', 'fr_FR'),
-      default => Assert::assertTrue(false),
+      default => throw new \InvalidArgumentException('Invalid language: '.$arg1),
     };
     $this->reload();
   }
@@ -496,11 +503,9 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change the visibility of the project number "([^"]*)" in the approve list to "([^"]*)"$/
    *
-   * @param string $visibility
-   *
    * @throws \Exception
    */
-  public function iChangeTheVisibilityOfTheProjectInTheApproveList(string $project_number, $visibility): void
+  public function iChangeTheVisibilityOfTheProjectInTheApproveList(string $project_number, string $visibility): void
   {
     // /param project_number contains the number of the project position in the list on the admin page
     // /
@@ -537,11 +542,9 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change the approval of the project number "([^"]*)" in the approve list to "([^"]*)"$/
    *
-   * @param string $approved
-   *
    * @throws \Exception
    */
-  public function iChangeTheApprovalOfTheProjectInApproveList(string $project_number, $approved): void
+  public function iChangeTheApprovalOfTheProjectInApproveList(string $project_number, string $approved): void
   {
     // /param project_number contains the number of the project position in the list on the admin page
     // /
@@ -577,28 +580,28 @@ class CatrowebBrowserContext extends BrowserContext
     ;
 
     match ($flavor) {
-      'pocketcode' => $page
+      Flavor::POCKETCODE => $page
         ->find('css', 'select.form-control > option:nth-child(1)')
         ->click(),
-      'pocketalice' => $page
+      Flavor::POCKETALICE => $page
         ->find('css', 'select.form-control > option:nth-child(2)')
         ->click(),
-      'pocketgalaxy' => $page
+      Flavor::POCKETGALAXY => $page
         ->find('css', 'select.form-control > option:nth-child(3)')
         ->click(),
-      'phirocode' => $page
+      Flavor::PHIROCODE => $page
         ->find('css', 'select.form-control > option:nth-child(4)')
         ->click(),
-      'luna' => $page
+      Flavor::LUNA => $page
         ->find('css', 'select.form-control > option:nth-child(5)')
         ->click(),
-      'create@school' => $page
+      Flavor::CREATE_AT_SCHOOL => $page
         ->find('css', 'select.form-control > option:nth-child(6)')
         ->click(),
-      'embroidery' => $page
+      Flavor::EMBROIDERY => $page
         ->find('css', 'select.form-control > option:nth-child(7)')
         ->click(),
-      'arduino' => $page
+      Flavor::ARDUINO => $page
         ->find('css', 'select.form-control > option:nth-child(8)')
         ->click(),
       default => throw new \Exception('Wrong flavor'),
@@ -854,7 +857,7 @@ class CatrowebBrowserContext extends BrowserContext
     $em = $this->getManager();
     $comments = $em->getRepository(UserComment::class)->findAll();
     $notifications = $em->getRepository(CatroNotification::class)->findAll();
-    Assert::assertTrue(!$comments && !$notifications);
+    Assert::assertTrue([] === $comments && [] === $notifications);
   }
 
   /**
@@ -877,12 +880,8 @@ class CatrowebBrowserContext extends BrowserContext
     $not = trim($not);
 
     $pre_source = $this->getSession()->getPage()->find('css', '.profile__basic-info__avatar__img');
-    $source = '';
-    if (!is_null($pre_source)) {
-      $source = $pre_source->getAttribute('src') ?? '';
-    } else {
-      Assert::assertTrue(false, "Couldn't find avatar in .profile__basic-info__avatar__img");
-    }
+    Assert::assertNotNull($pre_source, "Couldn't find .profile__basic-info__avatar__img");
+    $source = $pre_source->getAttribute('src') ?? '';
     $source = trim($source, '"');
 
     switch ($name) {
@@ -904,7 +903,7 @@ class CatrowebBrowserContext extends BrowserContext
         break;
 
       default:
-        Assert::assertTrue(false);
+        throw new \InvalidArgumentException('Invalid image name: '.$name);
     }
   }
 
@@ -988,7 +987,7 @@ class CatrowebBrowserContext extends BrowserContext
         $project = $this->getProjectManager()->findOneByName($url);
         Assert::assertNotNull($project);
         Assert::assertNotNull($project->getId());
-        $url = $this->getRouter()->generate('program', ['id' => $project->getId(), 'theme' => 'pocketcode']);
+        $url = $this->getRouter()->generate('program', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
@@ -1038,12 +1037,8 @@ class CatrowebBrowserContext extends BrowserContext
   public function iClickTheCurrentlyVisibleSearchIcon(): void
   {
     $icon = $this->getSession()->getPage()->findById('top-app-bar__btn-search');
-    if ($icon->isVisible()) {
-      $icon->click();
-
-      return;
-    }
-    Assert::assertTrue(false, 'Tried to click #top-app-bar__btn-search but no visible element was found.');
+    Assert::assertTrue($icon->isVisible(), 'Tried to click #top-app-bar__btn-search but no visible element was found.');
+    $icon->click();
   }
 
   /**
@@ -1165,6 +1160,7 @@ class CatrowebBrowserContext extends BrowserContext
     foreach ($parameter_defs as $parameter_def) {
       $expected_parameters[$parameter_def['parameter']] = $parameter_def['value'];
     }
+
     $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
     $parameters = $dispatcher->getLastParameters();
 
@@ -1229,6 +1225,7 @@ class CatrowebBrowserContext extends BrowserContext
       default:
         $project->setApkStatus(Program::APK_NONE);
     }
+
     $pm->save($project);
   }
 
@@ -1798,7 +1795,7 @@ class CatrowebBrowserContext extends BrowserContext
     $this->getSession()->setRequestHeader('User-Agent', $user_agent);
   }
 
-  protected function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version, string $build_type, string $theme = 'pocketcode'): void
+  protected function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version, string $build_type, string $theme = Flavor::POCKETCODE): void
   {
     // see org.catrobat.catroid.ui.WebViewActivity
     $platform = 'Android';
@@ -1814,6 +1811,7 @@ class CatrowebBrowserContext extends BrowserContext
     if (!is_dir($dirname)) {
       mkdir($dirname, 0755, true);
     }
+
     $file_path = fopen($full_filename, 'w'); // open in write mode.
     fseek($file_path, (int) $size - 1, SEEK_CUR); // seek to SIZE-1
     fwrite($file_path, 'a'); // write a dummy char at SIZE position
@@ -1833,7 +1831,7 @@ class CatrowebBrowserContext extends BrowserContext
     ;
 
     // click yes or no option
-    if ('yes' == $option) {
+    if ('yes' === $option) {
       $page
         ->find('css', 'select.form-control > option:nth-child(2)')
         ->click()
@@ -1844,6 +1842,7 @@ class CatrowebBrowserContext extends BrowserContext
         ->click()
       ;
     }
+
     // click button to confirm the selection
     $page
       ->find('css', 'button.btn-sm:nth-child(1)')

@@ -8,7 +8,6 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class BroadcastNotification extends CatroNotification
@@ -28,6 +27,7 @@ class BroadcastNotification extends CatroNotification
    * It's important to overwrite the get method, otherwise it won't work
    * and the wrong template will be rendered.
    */
+  #[\Override]
   public function getTwigTemplate(): string
   {
     return $this->twig_template;

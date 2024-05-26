@@ -18,6 +18,7 @@ class ScratchProjectUpdaterEventSubscriber implements EventSubscriberInterface
     $this->scratch_manager->createScratchProjectFromId($event->getScratchId());
   }
 
+  #[\Override]
   public static function getSubscribedEvents(): array
   {
     return [CheckScratchProjectEvent::class => 'onCheckScratchProgram'];

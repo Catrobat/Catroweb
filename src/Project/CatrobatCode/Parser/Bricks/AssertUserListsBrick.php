@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class AssertUserListsBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::ASSERT_USER_LISTS_BRICK;

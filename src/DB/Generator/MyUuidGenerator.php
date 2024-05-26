@@ -25,6 +25,7 @@ class MyUuidGenerator extends AbstractIdGenerator
   /**
    * @throws \Exception
    */
+  #[\Override]
   public function generateId(EntityManagerInterface $em, ?object $entity): string
   {
     $app_env = $_ENV['APP_ENV'];

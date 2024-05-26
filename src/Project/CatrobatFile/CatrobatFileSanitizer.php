@@ -6,8 +6,6 @@ namespace App\Project\CatrobatFile;
 
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatCode\Parser\ParsedScene;
-use App\Project\CatrobatCode\Parser\ParsedSceneProject;
-use App\Project\CatrobatCode\Parser\ParsedSimpleProject;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -42,13 +40,22 @@ class CatrobatFileSanitizer
       $filename = $file->getFilename();
       $filepath = $file->getRealPath();
       $relative_filepath = $this->getRelativePath($filepath);
-
-      if ($this->isTheOnlyCodeXmlFile($relative_filepath)
-        || $this->isTheOnlyPermissionsFile($relative_filepath)
-        || $this->isAValidImageFile($filename, $relative_filepath, $extracted_file)
-        || $this->isAValidSoundFile($filename, $relative_filepath, $extracted_file)
-        || $this->isAValidScreenshot($relative_filepath)
-        || $this->isAValidSceneDirectory($relative_filepath)) {
+      if ($this->isTheOnlyCodeXmlFile($relative_filepath)) {
+        continue;
+      }
+      if ($this->isTheOnlyPermissionsFile($relative_filepath)) {
+        continue;
+      }
+      if ($this->isAValidImageFile($filename, $relative_filepath, $extracted_file)) {
+        continue;
+      }
+      if ($this->isAValidSoundFile($filename, $relative_filepath, $extracted_file)) {
+        continue;
+      }
+      if ($this->isAValidScreenshot($relative_filepath)) {
+        continue;
+      }
+      if ($this->isAValidSceneDirectory($relative_filepath)) {
         continue;
       }
 
@@ -118,9 +125,14 @@ class CatrobatFileSanitizer
     }
 
     foreach ($paths_array as $path) {
-      if ($extracted_file->isFileMentionedInXml($filename) && $this->getRelativePath($path) === $relative_filepath) {
-        return true;
+      if (!$extracted_file->isFileMentionedInXml($filename)) {
+        continue;
       }
+      if ($this->getRelativePath($path) !== $relative_filepath) {
+        continue;
+      }
+
+      return true;
     }
 
     return false;
@@ -130,7 +142,6 @@ class CatrobatFileSanitizer
   {
     $scenes = [];
     $parsed_project = $this->catrobat_code_parser->parse($extracted_file);
-    /** @var ParsedSceneProject|ParsedSimpleProject $parsed_project */
     if (null !== $parsed_project && $parsed_project->hasScenes()) {
       $scenes_array = $parsed_project->getScenes();
       foreach ($scenes_array as $scene) {
@@ -168,9 +179,13 @@ class CatrobatFileSanitizer
     }
 
     foreach (scandir($dir) as $item) {
-      if ('.' == $item || '..' == $item) {
+      if ('.' === $item) {
         continue;
       }
+      if ('..' === $item) {
+        continue;
+      }
+
       if (!$this->deleteDirectory($dir.DIRECTORY_SEPARATOR.$item)) {
         return false;
       }

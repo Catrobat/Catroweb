@@ -6,6 +6,7 @@ namespace App\Application\Controller\Project;
 
 use App\DB\Entity\Project\Program;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
+use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,6 +31,7 @@ class CodeViewController extends AbstractController
 
       return $this->redirectToRoute('index');
     }
+
     $this->parameter_bag->get('catrobat.file.extract.path');
 
     return $this->render('Project/code_view.html.twig', [
@@ -45,9 +47,10 @@ class CodeViewController extends AbstractController
     try {
       $project = $this->project_manager->find($id);
       $extracted_project = $this->extracted_file_repository->loadProjectExtractedFile($project);
-      if (null === $extracted_project) {
+      if (!$extracted_project instanceof ExtractedCatrobatFile) {
         throw new \Exception();
       }
+
       $parsed_project = $this->code_parser->parse($extracted_project);
 
       $web_path = $extracted_project->getWebPath();

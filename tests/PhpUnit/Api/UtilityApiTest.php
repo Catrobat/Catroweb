@@ -27,6 +27,7 @@ class UtilityApiTest extends DefaultTestCase
 
   protected MockObject|UtilityApiFacade $facade;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UtilityApi::class)
@@ -183,11 +184,11 @@ class UtilityApiTest extends DefaultTestCase
     $loader = $this->createMock(UtilityApiLoader::class);
     $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
     $flavor = new Flavor();
-    $flavor->setName('pocketcode');
+    $flavor->setName(Flavor::POCKETCODE);
     $loader->method('getSurveyFlavor')->willReturn($flavor);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->surveyLangCodeGet('de', 'pocketcode', '', $response_code, $response_headers);
+    $response = $this->object->surveyLangCodeGet('de', Flavor::POCKETCODE, '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
 

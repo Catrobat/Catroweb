@@ -9,10 +9,11 @@ use Monolog\LogRecord;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class LoggerProcessor
 {
-  private const ANON_USER = 'anonymous';
+  private const string ANON_USER = 'anonymous';
 
   public function __construct(private readonly RequestStack $request_stack, private readonly TokenStorageInterface $security_token_storage)
   {
@@ -20,7 +21,7 @@ class LoggerProcessor
 
   public function __invoke(LogRecord $record): LogRecord
   {
-    if (!$this->request_stack->getCurrentRequest()) {
+    if (!$this->request_stack->getCurrentRequest() instanceof Request) {
       return $record;
     }
 
@@ -37,7 +38,7 @@ class LoggerProcessor
   {
     $token = $this->security_token_storage->getToken();
     $session_user = null;
-    if (null !== $token) {
+    if ($token instanceof TokenInterface) {
       $session_user = $this->security_token_storage->getToken()->getUser();
     }
 
@@ -54,7 +55,7 @@ class LoggerProcessor
     $ip = $request->getClientIp();
 
     if (str_contains((string) $ip, ',')) {
-      $ip = substr((string) $ip, 0, strpos((string) $ip, ','));
+      return substr((string) $ip, 0, strpos((string) $ip, ','));
     }
 
     return $ip;

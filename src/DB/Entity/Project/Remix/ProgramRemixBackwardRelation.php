@@ -7,6 +7,7 @@ namespace App\DB\Entity\Project\Remix;
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_remix_backward_relation')]
@@ -22,7 +23,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
    * -----------------------------------------------------------------------------------------------------------------
    */
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $parent_id;
 
   #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id')]
@@ -30,17 +31,17 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   protected Program $parent;
 
   #[ORM\Id]
-  #[ORM\Column(type: 'guid')]
+  #[ORM\Column(type: Types::GUID)]
   protected string $child_id;
 
   #[ORM\JoinColumn(name: 'child_id', referencedColumnName: 'id')]
   #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_backward_parent_relations')]
   protected Program $child;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $created_at = null;
 
-  #[ORM\Column(type: 'datetime', nullable: true)]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTime $seen_at = null;
 
   public function __construct(Program $parent, Program $child)
@@ -49,6 +50,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     $this->setChild($child);
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return '(#'.$this->parent_id.', #'.$this->child_id.')';
@@ -101,41 +103,49 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return $this->child_id;
   }
 
+  #[\Override]
   public function getDepth(): int
   {
     return 1;
   }
 
+  #[\Override]
   public function getCreatedAt(): ?\DateTime
   {
     return $this->created_at;
   }
 
+  #[\Override]
   public function setCreatedAt(\DateTime $created_at): void
   {
     $this->created_at = $created_at;
   }
 
+  #[\Override]
   public function getSeenAt(): ?\DateTime
   {
     return $this->seen_at;
   }
 
+  #[\Override]
   public function setSeenAt(?\DateTime $seen_at): void
   {
     $this->seen_at = $seen_at;
   }
 
+  #[\Override]
   public function getUniqueKey(): string
   {
     return sprintf('ProgramRemixBackwardRelation(%d,%d)', $this->parent_id, $this->child_id);
   }
 
+  #[\Override]
   public function getAncestor(): Program
   {
     return $this->parent;
   }
 
+  #[\Override]
   public function getDescendant(): Program
   {
     return $this->child;

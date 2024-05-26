@@ -18,6 +18,7 @@ final class MediaLibraryRequestValidatorTest extends DefaultTestCase
 {
   protected MediaLibraryRequestValidator|MockObject $object;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(MediaLibraryRequestValidator::class)

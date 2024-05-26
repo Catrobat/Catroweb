@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class SceneStartBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::SCENE_START_BRICK;

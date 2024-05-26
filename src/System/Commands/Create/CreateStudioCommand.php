@@ -27,6 +27,7 @@ class CreateStudioCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function configure(): void
   {
     $this
@@ -42,6 +43,7 @@ class CreateStudioCommand extends Command
     ;
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $admin = $input->getArgument('admin');
@@ -68,11 +70,12 @@ class CreateStudioCommand extends Command
       if (1 == $ret) {
         $output->writeln('User not found.');
       }
+
       $output->writeln('Studio created successfully.');
 
       return 0;
-    } catch (\Exception $e) {
-      $output->writeln('Failed to create studio: '.$e->getMessage());
+    } catch (\Exception $exception) {
+      $output->writeln('Failed to create studio: '.$exception->getMessage());
 
       return 2;
     }
@@ -92,15 +95,17 @@ class CreateStudioCommand extends Command
     $this->entityManager->persist($studio);
     $this->entityManager->flush();
     $this->entityManager->refresh($studio);
+
     $this->studioManager->addAdminToStudio($admin, $studio);
 
     if ($is_public) {
-      foreach (array_combine($usernames, $statuses) as $username => $status) {
+      foreach (array_keys(array_combine($usernames, $statuses)) as $username) {
         /** @var User|null $user */
         $user = $this->user_manager->findUserByUsername($username);
         if (null === $user) {
           return 1;
         }
+
         $this->studioManager->addUserToStudio($admin, $studio, $user);
       }
 
@@ -118,6 +123,7 @@ class CreateStudioCommand extends Command
         if (null === $user) {
           return 1;
         }
+
         $this->studioManager->setJoinRequest($user, $studio, (string) $status);
       }
     }

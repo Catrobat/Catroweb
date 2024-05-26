@@ -29,7 +29,7 @@ class CommandHelper
   public static function executeShellCommand(array $command, array $config, string $description = '',
     ?OutputInterface $output = null, ?KernelInterface $kernel = null): ?int
   {
-    if (null !== $output) {
+    if ($output instanceof OutputInterface) {
       $output->write($description." ('".implode(' ', $command)."') ... ");
     }
 
@@ -51,7 +51,7 @@ class CommandHelper
     $process->run();
 
     if ($process->isSuccessful()) {
-      if (null !== $output) {
+      if ($output instanceof OutputInterface) {
         $output->writeln($process->getOutput());
         $output->writeln('OK');
       }
@@ -59,7 +59,7 @@ class CommandHelper
       return 0;
     }
 
-    if (null !== $output) {
+    if ($output instanceof OutputInterface) {
       $output->writeln($process->getOutput());
       $output->writeln('failed! - Exit-Code: '.$process->getExitCode());
       $output->writeln('Error output: '.$process->getErrorOutput());

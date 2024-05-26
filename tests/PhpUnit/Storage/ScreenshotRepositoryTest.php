@@ -40,6 +40,7 @@ class ScreenshotRepositoryTest extends TestCase
 
   private string $project_id;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->screenshot_dir = BootstrapExtension::$CACHE_DIR.'screenshot_repository/';
@@ -74,6 +75,7 @@ class ScreenshotRepositoryTest extends TestCase
     ]));
   }
 
+  #[\Override]
   protected function tearDown(): void
   {
     FileHelper::removeDirectory($this->screenshot_dir);

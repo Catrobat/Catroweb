@@ -41,7 +41,7 @@ class ProjectsApiLoader extends AbstractApiLoader
   {
     $projects = $this->findProjectsByID($id, $include_private);
 
-    return empty($projects) ? null : $projects[0];
+    return [] === $projects ? null : $projects[0];
   }
 
   public function searchProjects(string $query, int $limit, int $offset, string $max_version, string $flavor): array
@@ -118,6 +118,7 @@ class ProjectsApiLoader extends AbstractApiLoader
       if (!$this->file_repository->checkIfProjectZipFileExists($id)) {
         $this->file_repository->zipProject($this->extracted_file_repository->getBaseDir($id), $id);
       }
+
       $zipFile = $this->file_repository->getProjectZipFile($id);
       if (!$zipFile->isFile()) {
         return null;
@@ -125,7 +126,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     } catch (FileNotFoundException) {
       return null;
     } catch (\Throwable $e) {
-      $this->logger->error("Can't get project zip for \"{$id}\"; error: ".$e->getMessage());
+      $this->logger->error(sprintf('Can\'t get project zip for "%s"; error: ', $id).$e->getMessage());
 
       return null;
     }

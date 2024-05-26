@@ -21,12 +21,14 @@ class LicenseUpdaterEventSubscriberTest extends TestCase
 {
   private LicenseUpdaterEventSubscriber $license_updater;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->license_updater = new LicenseUpdaterEventSubscriber();
   }
 
-  public function tearDown(): void
+  #[\Override]
+  protected function tearDown(): void
   {
     FileHelper::emptyDirectory(BootstrapExtension::$CACHE_DIR);
   }

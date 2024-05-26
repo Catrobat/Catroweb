@@ -17,8 +17,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CronJobCommand extends Command
 {
   protected const ONE_MINUTE_IN_SECONDS = 60;
+
   protected const ONE_HOUR_IN_SECONDS = self::ONE_MINUTE_IN_SECONDS * 60;
+
   protected const ONE_DAY_IN_SECONDS = self::ONE_HOUR_IN_SECONDS * 24;
+
   protected const ONE_WEEK_IN_SECONDS = self::ONE_DAY_IN_SECONDS * 7;
 
   public function __construct(protected EntityManagerInterface $entity_manager, protected CronJobRepository $cron_job_repository)
@@ -29,6 +32,7 @@ class CronJobCommand extends Command
   /**
    * @throws \Exception
    */
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $output->writeln('App env: '.$_ENV['APP_ENV']);
@@ -152,6 +156,7 @@ class CronJobCommand extends Command
 
     $cron_job->setState('run');
     $cron_job->setStartAt(new \DateTime('now'));
+
     $this->entity_manager->persist($cron_job);
     $this->entity_manager->flush();
 
@@ -170,6 +175,7 @@ class CronJobCommand extends Command
     $cron_job->setResultCode($result_code);
     $cron_job->setEndAt(new \DateTime('now'));
     $cron_job->setState('idle');
+
     $this->entity_manager->persist($cron_job);
     $this->entity_manager->flush();
 

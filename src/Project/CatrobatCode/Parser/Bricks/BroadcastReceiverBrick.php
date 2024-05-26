@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class BroadcastReceiverBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::BROADCAST_RECEIVER_BRICK;

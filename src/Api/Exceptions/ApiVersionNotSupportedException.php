@@ -14,6 +14,6 @@ class ApiVersionNotSupportedException extends ApiException
    */
   public function __construct(string $requested_api_version, ?\Exception $previous = null)
   {
-    parent::__construct("The requested API version '{$requested_api_version}' is not supported!", 1, $previous);
+    parent::__construct(sprintf('The requested API version \'%s\' is not supported!', $requested_api_version), 1, $previous);
   }
 }

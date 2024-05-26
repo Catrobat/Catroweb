@@ -25,6 +25,7 @@ class AchievementsController extends AbstractController
     if (is_null($user)) {
       return $this->redirectToRoute('login');
     }
+
     $most_recent_user_achievement = $this->achievement_manager->findMostRecentUserAchievement($user);
     $most_recent_achievement = is_null($most_recent_user_achievement) ? null : $most_recent_user_achievement->getAchievement();
     $most_recent_achievement_unlocked_at = is_null($most_recent_user_achievement) ? null : $most_recent_user_achievement->getUnlockedAt()->format('Y-m-d');
@@ -67,6 +68,7 @@ class AchievementsController extends AbstractController
     if (is_null($user)) {
       return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
+
     try {
       $this->achievement_manager->readAllUnseenAchievements($user);
     } catch (\Exception) {

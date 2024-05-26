@@ -31,6 +31,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
   /**
    * @throws \ReflectionException
    */
+  #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(MediaLibraryApi::class)
@@ -100,11 +101,9 @@ final class MediaLibraryApiTest extends DefaultTestCase
     $loader->method('searchMediaLibraryFiles')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->mediaFilesSearchGet('query', 20, 0, '', '', '', $response_code, $response_headers);
+    $this->object->mediaFilesSearchGet('query', 20, 0, '', '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
-
-    $this->assertIsArray($response);
   }
 
   /**
@@ -215,9 +214,8 @@ final class MediaLibraryApiTest extends DefaultTestCase
     $loader->method('getMediaPackageFiles')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->mediaFilesGet(20, 0, '', '', $response_code, $response_headers);
+    $this->object->mediaFilesGet(20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
   }
 }

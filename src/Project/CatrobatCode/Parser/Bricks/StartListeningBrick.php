@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class StartListeningBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::START_LISTENING_BRICK;

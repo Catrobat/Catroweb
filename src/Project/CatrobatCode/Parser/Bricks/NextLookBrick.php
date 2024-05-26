@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class NextLookBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::NEXT_LOOK_BRICK;

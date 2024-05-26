@@ -6,24 +6,24 @@ namespace App\DB\Entity\User\Notifications;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Generic Notification.
  */
-#[ORM\Table]
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'notification_type', type: 'string')]
 #[ORM\DiscriminatorMap(['default' => 'CatroNotification', 'comment' => 'CommentNotification', 'like' => 'LikeNotification', 'follow' => 'FollowNotification', 'follow_project' => 'NewProgramNotification', 'broadcast_notification' => 'BroadcastNotification', 'remix_notification' => 'RemixNotification'])]
 class CatroNotification
 {
-  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\Id]
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   private ?int $id = null;
 
-  #[ORM\Column(name: 'seen', type: 'boolean', options: ['default' => false])]
+  #[ORM\Column(name: 'seen', type: Types::BOOLEAN, options: ['default' => false])]
   private bool $seen = false;
 
   private string $twig_template = 'Notifications/NotificationTypes/catro_notification.html.twig';
@@ -36,11 +36,11 @@ class CatroNotification
     #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false)]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'notifications')]
     private User $user,
-    #[ORM\Column(name: 'title', type: 'string')]
+    #[ORM\Column(name: 'title', type: Types::STRING)]
     private string $title = '',
-    #[ORM\Column(name: 'message', type: 'text')]
+    #[ORM\Column(name: 'message', type: Types::TEXT)]
     private string $message = '',
-    #[ORM\Column(name: 'type', type: 'string')]
+    #[ORM\Column(name: 'type', type: Types::STRING)]
     private string $type = ''
   ) {
   }

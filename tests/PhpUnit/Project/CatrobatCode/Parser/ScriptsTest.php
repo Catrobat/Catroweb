@@ -19,24 +19,18 @@ use PHPUnit\Framework\TestCase;
  */
 class ScriptsTest extends TestCase
 {
-  /**
-   * @var string
-   */
-  public const TYPE = 'type';
-  /**
-   * @var string
-   */
-  public const CAPTION = 'caption';
-  /**
-   * @var string
-   */
-  public const IMG_FILE = 'img_file';
+  public const string TYPE = 'type';
+
+  public const string CAPTION = 'caption';
+
+  public const string IMG_FILE = 'img_file';
 
   /**
    * @var \SimpleXMLElement[]
    */
   protected array $script_xml_properties_list;
 
+  #[\Override]
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
@@ -76,8 +70,6 @@ class ScriptsTest extends TestCase
     $this->assertEquals($expected[self::TYPE], $actual->getType());
     $this->assertEquals($expected[self::CAPTION], $actual->getCaption());
     $this->assertEquals($expected[self::IMG_FILE], $actual->getImgFile());
-
-    $this->assertTrue(true);
   }
 
   /**

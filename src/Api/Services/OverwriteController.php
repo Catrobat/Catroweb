@@ -6,6 +6,7 @@ namespace App\Api\Services;
 
 use App\Api\ProjectsApi;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class OverwriteController extends AbstractController
@@ -20,7 +21,7 @@ class OverwriteController extends AbstractController
     $responseHeaders = [];
     $result = $this->projectsApi->customProjectIdCatrobatGet($id, $responseCode, $responseHeaders);
 
-    if (null === $result) {
+    if (!$result instanceof BinaryFileResponse) {
       return new Response(null, $responseCode, $responseHeaders);
     }
 

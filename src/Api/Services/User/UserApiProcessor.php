@@ -30,16 +30,19 @@ class UserApiProcessor extends AbstractApiProcessor
     $user->setEnabled(true);
     $user->setVerified(false);
     $user->setUploadToken($this->token_generator->generateToken());
+
     $this->user_manager->updateUser($user);
 
-    if (!empty($request->getPicture())) {
+    if (null !== $request->getPicture() && '' !== $request->getPicture() && '0' !== $request->getPicture()) {
       // Resize happens in UserRequestValidator::validateAndResizePicture
       $user->setAvatar($request->getPicture());
     }
-    if (!empty($request->getAbout())) {
+
+    if (null !== $request->getAbout() && '' !== $request->getAbout() && '0' !== $request->getAbout()) {
       $user->setAbout($request->getAbout());
     }
-    if (!empty($request->getCurrentlyWorkingOn())) {
+
+    if (null !== $request->getCurrentlyWorkingOn() && '' !== $request->getCurrentlyWorkingOn() && '0' !== $request->getCurrentlyWorkingOn()) {
       $user->setCurrentlyWorkingOn($request->getCurrentlyWorkingOn());
     }
 
@@ -53,26 +56,31 @@ class UserApiProcessor extends AbstractApiProcessor
 
   public function updateUser(User $user, UpdateUserRequest $request): void
   {
-    if (!empty($request->getEmail())) {
+    if (null !== $request->getEmail() && '' !== $request->getEmail() && '0' !== $request->getEmail()) {
       $user->setEmail($request->getEmail());
     }
-    if (!empty($request->getUsername())) {
+
+    if (null !== $request->getUsername() && '' !== $request->getUsername() && '0' !== $request->getUsername()) {
       $user->setUsername($request->getUsername());
     }
-    if (!empty($request->getPassword())) {
+
+    if (null !== $request->getPassword() && '' !== $request->getPassword() && '0' !== $request->getPassword()) {
       $user->setPlainPassword($request->getPassword());
     }
+
     if (!is_null($request->getPicture())) {
-      if (empty($request->getPicture())) {
+      if ('' === $request->getPicture() || '0' === $request->getPicture()) {
         $user->setAvatar(null);
       } else {
         // Resize happens in UserRequestValidator::validateAndResizePicture
         $user->setAvatar($request->getPicture());
       }
     }
+
     if (!is_null($request->getAbout())) {
       $user->setAbout($request->getAbout());
     }
+
     if (!is_null($request->getCurrentlyWorkingOn())) {
       $user->setCurrentlyWorkingOn($request->getCurrentlyWorkingOn());
     }

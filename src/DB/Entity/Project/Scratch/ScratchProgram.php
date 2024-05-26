@@ -6,6 +6,7 @@ namespace App\DB\Entity\Project\Scratch;
 
 use App\DB\EntityRepository\Project\ScratchProgramRepository;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'scratch_program')]
@@ -13,16 +14,16 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ScratchProgramRepository::class)]
 class ScratchProgram
 {
-  #[ORM\Column(type: 'string', length: 300, nullable: true)]
+  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $name = null;
 
-  #[ORM\Column(type: 'text', nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $description = null;
 
-  #[ORM\Column(type: 'text', nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $username = null;
 
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $last_modified_at = null;
 
   /**
@@ -32,7 +33,7 @@ class ScratchProgram
    */
   public function __construct(
     #[ORM\Id]
-    #[ORM\Column(type: 'guid', nullable: false)]
+    #[ORM\Column(type: Types::GUID, nullable: false)]
     protected string $id)
   {
     $this->updateLastModifiedTimestamp();

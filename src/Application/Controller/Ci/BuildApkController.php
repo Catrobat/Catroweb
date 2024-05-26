@@ -42,15 +42,19 @@ class BuildApkController extends AbstractController
     if (null === $project || !$project->isVisible()) {
       throw $this->createNotFoundException();
     }
+
     if (Program::APK_READY === $project->getApkStatus()) {
       return new JsonResponse(['status' => 'ready']);
     }
+
     if (Program::APK_PENDING === $project->getApkStatus()) {
       return new JsonResponse(['status' => 'pending']);
     }
+
     $this->dispatcher->sendBuildRequest($project->getId());
     $project->setApkStatus(Program::APK_PENDING);
     $project->setApkRequestTime(TimeUtils::getDateTime());
+
     $this->project_manager->save($project);
 
     return new JsonResponse(['status' => 'pending']);
@@ -64,13 +68,16 @@ class BuildApkController extends AbstractController
     if (null === $project || !$project->isVisible()) {
       throw $this->createNotFoundException();
     }
+
     $config = $this->arr_jenkins_config;
     if ($request->query->get('token') !== $config['uploadtoken']) {
       throw new AccessDeniedException();
     }
+
     if (1 != $request->files->count()) {
       throw new BadRequestHttpException('Wrong number of files: '.$request->files->count());
     }
+
     $file = array_values($request->files->all())[0];
     $this->apk_repository->save($file, $project->getId());
     $project->setApkStatus(Program::APK_READY);
@@ -87,10 +94,12 @@ class BuildApkController extends AbstractController
     if (null === $project || !$project->isVisible()) {
       throw $this->createNotFoundException();
     }
+
     $config = $this->arr_jenkins_config;
     if ($request->query->get('token') !== $config['uploadtoken']) {
       throw new AccessDeniedException();
     }
+
     if (Program::APK_PENDING === $project->getApkStatus()) {
       $project->setApkStatus(Program::APK_NONE);
       $this->project_manager->save($project);

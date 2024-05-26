@@ -6,14 +6,9 @@ namespace App\Project\CatrobatCode\Statements;
 
 class PlaceAtStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'place at ';
-  /**
-   * @var string
-   */
-  final public const END_STRING = '<br/>';
+  final public const string BEGIN_STRING = 'place at ';
+
+  final public const string END_STRING = '<br/>';
 
   public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {
@@ -22,6 +17,7 @@ class PlaceAtStatement extends Statement
       self::END_STRING);
   }
 
+  #[\Override]
   public function executeChildren(): string
   {
     $code = '';

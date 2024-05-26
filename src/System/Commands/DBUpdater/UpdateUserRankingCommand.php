@@ -20,6 +20,7 @@ class UpdateUserRankingCommand extends Command
     parent::__construct();
   }
 
+  #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $output->writeln('Recomputing ELO ranking for all users');
@@ -40,12 +41,14 @@ class UpdateUserRankingCommand extends Command
         $user->setRankingScore(intval($elo));
         $this->entity_manager->persist($user);
       }
+
       ++$counter;
       if (0 === $counter % 100) {
         $this->entity_manager->flush();
         $this->entity_manager->clear();
       }
     }
+
     $this->entity_manager->flush();
     $output->writeln('Update finished!');
 

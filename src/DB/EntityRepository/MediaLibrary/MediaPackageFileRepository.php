@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\MediaLibrary;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -22,8 +23,11 @@ use Symfony\Component\HttpFoundation\File\File;
 class MediaPackageFileRepository extends ServiceEntityRepository
 {
   private readonly string $dir;
+
   private readonly string $path;
+
   private readonly Filesystem $filesystem;
+
   private readonly string $thumb_dir;
 
   public function __construct(private readonly ParameterBagInterface $parameter_bag, ManagerRegistry $manager_registry)
@@ -151,7 +155,6 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     $finder = new Finder();
     $finder->files()->in($this->dir)->depth(0);
 
-    /** @var \SplFileInfo $file */
     foreach ($finder as $file) {
       $ext = 'catrobat' == $file->getExtension() ? 'png' : $file->getExtension();
       $basename = $file->getBasename('.'.$ext);
@@ -195,7 +198,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    */
   public function getThumbnailWebPath(int $id, string $extension): string
   {
-    $extension = 'catrobat' == $extension ? 'png' : $extension;
+    $extension = 'catrobat' === $extension ? 'png' : $extension;
 
     return $this->path.'/thumbs/'.$id.'.'.$extension.FileHelper::getTimestampParameter($this->getMediaPath($id, $extension));
   }
@@ -232,9 +235,9 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    *
    * @return mixed an array containing the found media files or null if no results found
    */
-  public function search(string $term, ?string $flavor = 'pocketcode', ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
+  public function search(string $term, ?string $flavor = Flavor::POCKETCODE, ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
   {
-    $flavor = $flavor ?: 'pocketcode';
+    $flavor = null !== $flavor && '' !== $flavor && '0' !== $flavor ? $flavor : Flavor::POCKETCODE;
 
     $qb = $this->createQueryBuilder('f')
       ->where('f.name LIKE :term')
@@ -274,7 +277,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       $path = $this->dir.$this->generateFileNameFromId($id, $file_extension);
       $imagick = new \Imagick();
 
-      if ('catrobat' == $file_extension) {
+      if ('catrobat' === $file_extension) {
         // We are dealing with an media library "object" here. An "object" is basically a .catrobat file containing scenes, characters etc.
 
         // Searching screenshot in .catrobat file
@@ -320,7 +323,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       $imagick->setImageFormat($thumbnail_extension);
       $imagick->thumbnailImage(200, 0);
 
-      if ('catrobat' == $file_extension) {
+      if ('catrobat' === $file_extension) {
         // We want to annotate the thumbnail so that the user can recognize that the thubnail represents an
         // media library "object"
 
@@ -367,8 +370,9 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';
       if ($include_pocketcode) {
-        $where .= ' OR fl.name = \'pocketcode\'';
+        $where .= " OR fl.name = 'pocketcode'";
       }
+
       $query_builder
         ->join($alias.'.flavors', 'fl')
         ->andWhere($where)

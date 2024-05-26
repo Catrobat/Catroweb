@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class PhiroMotorMoveBackwardBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::PHIRO_MOTOR_MOVE_BACKWARD_BRICK;

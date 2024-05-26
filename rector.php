@@ -3,24 +3,23 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Symfony\Set\SymfonySetList;
 
-return static function (RectorConfig $rectorConfig): void {
-  $rectorConfig->paths([
+return RectorConfig::configure()
+
+  ->withPaths([
     __DIR__.'/src',
     __DIR__.'/config',
-  ]);
+    __DIR__.'/tests',
+  ])
 
-  $rectorConfig->symfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml');
+  ->withPhpSets(php83: true)
 
-  $rectorConfig->sets([
-    LevelSetList::UP_TO_PHP_83,
-    SymfonySetList::SYMFONY_CODE_QUALITY,
-    SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
-    Rector\Set\ValueObject\SetList::DEAD_CODE,
-    Rector\Set\ValueObject\SetList::TYPE_DECLARATION,
-  ]);
-
-  $rectorConfig->skip([__DIR__.'/src/System/Testing/DataFixtures/DataBaseUtils.php']);
-};
+  // here we can define, what prepared sets of rules will be applied
+  ->withPreparedSets(
+    deadCode: true,
+    codeQuality: true,
+    typeDeclarations: true,
+    earlyReturn: true,
+    strictBooleans: true,
+  )
+;

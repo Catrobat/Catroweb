@@ -30,7 +30,8 @@ class MediaPackageFileAdmin extends AbstractAdmin
   ) {
   }
 
-  public function prePersist($object): void
+  #[\Override]
+  protected function prePersist($object): void
   {
     /* @var MediaPackageFile $object */
     /** @var UploadedFile $file */
@@ -45,17 +46,20 @@ class MediaPackageFileAdmin extends AbstractAdmin
   /**
    * @throws \ImagickException
    */
-  public function postPersist($object): void
+  #[\Override]
+  protected function postPersist($object): void
   {
     /* @var MediaPackageFile $object */
     $file = $object->file;
     if (null === $file) {
       return;
     }
+
     $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
   }
 
-  public function preUpdate(object $object): void
+  #[\Override]
+  protected function preUpdate(object $object): void
   {
     /* @var MediaPackageFile $object */
     $object->old_extension = $object->getExtension();
@@ -67,29 +71,34 @@ class MediaPackageFileAdmin extends AbstractAdmin
 
       return;
     }
+
     $object->setExtension(('catrobat' == $file->getClientOriginalExtension()) ? 'catrobat' : $file->guessExtension());
   }
 
   /**
    * @throws \ImagickException
    */
-  public function postUpdate($object): void
+  #[\Override]
+  protected function postUpdate($object): void
   {
     /* @var MediaPackageFile $object */
     $file = $object->file;
     if (null === $file) {
       return;
     }
+
     $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
   }
 
-  public function preRemove($object): void
+  #[\Override]
+  protected function preRemove($object): void
   {
     /* @var MediaPackageFile $object */
     $object->removed_id = $object->getId();
   }
 
-  public function postRemove($object): void
+  #[\Override]
+  protected function postRemove($object): void
   {
     /* @var MediaPackageFile $object */
     $this->media_package_file_repository->remove($object->removed_id, $object->getExtension());
@@ -100,6 +109,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
    *
    * Fields to be shown on create/edit forms
    */
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     $file_options = [
@@ -123,6 +133,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
    *
    * Fields to be shown on lists
    */
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list

@@ -30,7 +30,7 @@ class ApkController extends CRUDController
     $project = $this->admin->getSubject();
 
     if (null === $project) {
-      $this->addFlash('sonata_flash_error', 'Can\'t reset APK status');
+      $this->addFlash('sonata_flash_error', "Can't reset APK status");
     } else {
       $project->setApkStatus(Program::APK_NONE);
       $project->setApkRequestTime(null);
@@ -50,7 +50,7 @@ class ApkController extends CRUDController
     $project = $this->admin->getSubject();
 
     if (null === $project) {
-      $this->addFlash('sonata_flash_error', 'Can\'t trigger APK rebuild');
+      $this->addFlash('sonata_flash_error', "Can't trigger APK rebuild");
     } else {
       $this->jenkins_dispatcher->sendBuildRequest($project->getId());
       $project->setApkRequestTime(TimeUtils::getDateTime());

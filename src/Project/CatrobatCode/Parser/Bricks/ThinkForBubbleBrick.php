@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ThinkForBubbleBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::THINK_FOR_BUBBLE_BRICK;

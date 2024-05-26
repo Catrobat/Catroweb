@@ -53,6 +53,7 @@ Feature: Admin approve programs
     And I am on "/admin/approve/list"
     And I wait for the page to be loaded
     Then I am on "/admin/approve/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=Apr+22%2C+2014%2C+2%3A15%3A00+pm&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=Apr+22%2C+2014%2C+2%3A30%3A00+pm&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I wait for the page to be loaded
     Then I should see the following not approved projects:
       | Upload Time          | Id | User     | Name      | Visible | Approved | Action |
       | April 22, 2014 14:30 | 3  | Catroweb | program 3 | yes     | no       | Show   |

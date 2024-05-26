@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class TapForBrick extends Brick
 {
+  #[\Override]
   protected function create(): void
   {
     $this->type = Constants::TAP_FOR_BRICK;

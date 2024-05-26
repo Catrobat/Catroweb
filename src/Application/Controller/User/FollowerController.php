@@ -30,13 +30,15 @@ class FollowerController extends AbstractController
     $pageSize = $request->request->getInt('pageSize');
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!(('0' === $id) || ($user && $user->getId() === $id))) {
+    if ('0' !== $id && !($user && $user->getId() === $id)) {
       /** @var User|null $user */
       $user = $this->user_manager->find($id);
     }
+
     if (null === $user) {
       return $this->redirectToRoute('login');
     }
+
     $criteria = Criteria::create()
       ->orderBy(['username' => Criteria::ASC])
       ->setFirstResult($page * $pageSize)
@@ -71,14 +73,17 @@ class FollowerController extends AbstractController
     if (null === $user) {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
+
     if ($user->getId() === $id) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
     /** @var User|null $user_to_unfollow */
     $user_to_unfollow = $this->user_manager->find($id);
     if (null === $user_to_unfollow) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
     $user->removeFollowing($user_to_unfollow);
     $this->user_manager->updateUser($user);
     $existing_notifications = $this->notification_repo->getFollowNotificationForUser($user_to_unfollow, $user);
@@ -100,18 +105,22 @@ class FollowerController extends AbstractController
     if (null === $user) {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
+
     if ($user->getId() === $id) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
     /** @var User|null $user_to_follow */
     $user_to_follow = $this->user_manager->find($id);
     if (null === $user_to_follow) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
     $followings = $user->getFollowing();
     if ($followings->contains($user_to_follow)) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
     $user->addFollowing($user_to_follow);
     $this->user_manager->updateUser($user);
     $this->addFollowNotificationIfNotExists($user, $user_to_follow);
@@ -131,6 +140,7 @@ class FollowerController extends AbstractController
         break;
       }
     }
+
     if (!$notification_exists) {
       $notification = new FollowNotification($user_to_follow, $user);
       $this->notification_service->addNotification($notification);

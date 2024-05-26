@@ -8,14 +8,9 @@ use App\Project\CatrobatCode\StatementFactory;
 
 class ShowTextStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  final public const BEGIN_STRING = 'show variable ';
-  /**
-   * @var string
-   */
-  final public const END_STRING = ')<br/>';
+  final public const string BEGIN_STRING = 'show variable ';
+
+  final public const string END_STRING = ')<br/>';
 
   public function __construct(StatementFactory $statementFactory, ?\SimpleXMLElement $xmlTree, int $spaces)
   {
@@ -40,6 +35,7 @@ class ShowTextStatement extends Statement
         }
       }
     }
+
     $formula_x_pos_no_markup = preg_replace('#<[^>]*>#', '', $formula_x_pos);
     $formula_y_pos_no_markup = preg_replace('#<[^>]*>#', '', $formula_y_pos);
 

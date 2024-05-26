@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Api_deprecated\Controller;
 
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
@@ -61,6 +62,7 @@ class UploadController
       $this->logger->error('Missing POST data');
       throw new InvalidCatrobatFileException('errors.post-data', 501);
     }
+
     if (!$request->request->has('fileChecksum')) {
       $this->logger->error('Missing Checksum');
       throw new InvalidCatrobatFileException('errors.checksum.missing', 503);
@@ -70,6 +72,7 @@ class UploadController
     if (empty($file) || empty($file->getPathname())) {
       throw new InvalidCatrobatFileException('errors.checksum.invalid', 501);
     }
+
     if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum')) {
       $this->logger->error('UploadError checksum', [
         'checksum_symfony' => md5((string) $file->getPathname()),
@@ -78,7 +81,7 @@ class UploadController
       throw new InvalidCatrobatFileException('errors.checksum.invalid', 504);
     }
 
-    $flavor = 'pocketcode';
+    $flavor = Flavor::POCKETCODE;
 
     // Needed to make sure everything is up to date (followers, ..)
     $this->em->refresh($user);
@@ -91,14 +94,16 @@ class UploadController
 
     $language = $request->request->get('deviceLanguage');
     $language = is_null($language) ? $language : (string) $language;
+
     $add_project_request = new AddProjectRequest($user, $file, $request->getClientIp(), $language, $flavor);
 
     $project = $this->project_manager->addProject($add_project_request);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       $response = $this->createUploadFailedResponse($request, $user);
     } else {
       $response = $this->createUploadResponse($request, $user, $project);
     }
+
     $this->logger->info('Uploading a project done : '.json_encode($response, JSON_THROW_ON_ERROR));
 
     return new JsonResponse($response);

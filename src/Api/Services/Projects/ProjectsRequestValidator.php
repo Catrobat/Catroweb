@@ -7,6 +7,7 @@ namespace App\Api\Services\Projects;
 use App\Api\Services\Base\AbstractRequestValidator;
 use App\Api\Services\GeneralValidator;
 use App\Api\Services\ValidationWrapper;
+use App\DB\Entity\User\User;
 use App\User\UserManager;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -15,10 +16,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectsRequestValidator extends AbstractRequestValidator
 {
-  final public const MIN_NAME_LENGTH = 1;
-  final public const MAX_NAME_LENGTH = 255;
-  final public const MAX_DESCRIPTION_LENGTH = 10_000;
-  final public const MAX_CREDITS_LENGTH = 3_000;
+  final public const int MIN_NAME_LENGTH = 1;
+
+  final public const int MAX_NAME_LENGTH = 255;
+
+  final public const int MAX_DESCRIPTION_LENGTH = 10_000;
+
+  final public const int MAX_CREDITS_LENGTH = 3_000;
 
   public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager)
   {
@@ -29,7 +33,7 @@ class ProjectsRequestValidator extends AbstractRequestValidator
   {
     return '' !== trim($user_id)
         && !ctype_space($user_id)
-        && null !== $this->user_manager->findOneBy(['id' => $user_id]);
+        && $this->user_manager->findOneBy(['id' => $user_id]) instanceof User;
   }
 
   public function validateUploadFile(string $checksum, UploadedFile $file, string $locale): ValidationWrapper
@@ -43,7 +47,7 @@ class ProjectsRequestValidator extends AbstractRequestValidator
     }
 
     $calculated_checksum = md5_file($file->getPathname());
-    if (strtolower((string) $calculated_checksum) != strtolower($checksum)) {
+    if (strtolower((string) $calculated_checksum) !== strtolower($checksum)) {
       return $this->getValidationWrapper()->addError(
         $this->__('api.projectsPost.invalid_checksum', [], $locale), $KEY
       );
