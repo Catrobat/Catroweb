@@ -35,7 +35,7 @@
     "php-http/httplug-bundle": "1.33.*",
     "php-http/message": "1.16.*",
     "ramsey/uuid": "4.7.*",
-    "ramsey/uuid-doctrine": "2.0.*",
+    "ramsey/uuid-doctrine": "2.1.*",
     "rosell-dk/webp-convert": "2.9.*",
     "sonata-project/admin-bundle": "4.30.*",
     "sonata-project/doctrine-orm-admin-bundle": "4.17.*",
