@@ -102,7 +102,7 @@
     "glob-all": "^3.3.1",
     "jquery": "^3.7.1",
     "jquery-contextmenu": "^2.9.2",
-    "jquery-ui-dist": "^1.13.2",
+    "jquery-ui-dist": "^1.13.3",
     "js-yaml": "^4.1.0",
     "jwt-decode": "^4.0.0",
     "lazysizes": "^5.3.2",
