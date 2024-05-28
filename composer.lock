@@ -8578,67 +8578,65 @@
         },
         {
             "name": "symfony/doctrine-bridge",
-            "version": "v6.4.7",
+            "version": "v7.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "0eb1189828f66c74697737e89a12b3aded8b748c"
+                "reference": "da605530d1a75162359d494efc00f767f7fcd68a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/0eb1189828f66c74697737e89a12b3aded8b748c",
-                "reference": "0eb1189828f66c74697737e89a12b3aded8b748c",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/da605530d1a75162359d494efc00f767f7fcd68a",
+                "reference": "da605530d1a75162359d494efc00f767f7fcd68a",
                 "shasum": ""
             },
             "require": {
-                "doctrine/event-manager": "^1.2|^2",
+                "doctrine/event-manager": "^2",
                 "doctrine/persistence": "^3.1",
-                "php": ">=8.1",
-                "symfony/deprecation-contracts": "^2.5|^3",
+                "php": ">=8.2",
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0",
                 "symfony/service-contracts": "^2.5|^3"
             },
             "conflict": {
-                "doctrine/dbal": "<2.13.1",
+                "doctrine/dbal": "<3.6",
                 "doctrine/lexer": "<1.1",
                 "doctrine/orm": "<2.15",
-                "symfony/cache": "<5.4",
-                "symfony/dependency-injection": "<6.2",
-                "symfony/form": "<5.4.38|>=6,<6.4.6|>=7,<7.0.6",
-                "symfony/http-foundation": "<6.3",
-                "symfony/http-kernel": "<6.2",
-                "symfony/lock": "<6.3",
-                "symfony/messenger": "<5.4",
-                "symfony/property-info": "<5.4",
-                "symfony/security-bundle": "<5.4",
+                "symfony/cache": "<6.4",
+                "symfony/dependency-injection": "<6.4",
+                "symfony/form": "<6.4.6|>=7,<7.0.6",
+                "symfony/http-foundation": "<6.4",
+                "symfony/http-kernel": "<6.4",
+                "symfony/lock": "<6.4",
+                "symfony/messenger": "<6.4",
+                "symfony/property-info": "<6.4",
+                "symfony/security-bundle": "<6.4",
                 "symfony/security-core": "<6.4",
                 "symfony/validator": "<6.4"
             },
             "require-dev": {
                 "doctrine/collections": "^1.0|^2.0",
                 "doctrine/data-fixtures": "^1.1",
-                "doctrine/dbal": "^2.13.1|^3|^4",
+                "doctrine/dbal": "^3.6|^4",
                 "doctrine/orm": "^2.15|^3",
                 "psr/log": "^1|^2|^3",
-                "symfony/cache": "^5.4|^6.0|^7.0",
-                "symfony/config": "^5.4|^6.0|^7.0",
-                "symfony/dependency-injection": "^6.2|^7.0",
-                "symfony/doctrine-messenger": "^5.4|^6.0|^7.0",
-                "symfony/expression-language": "^5.4|^6.0|^7.0",
-                "symfony/form": "^5.4.38|^6.4.6|^7.0.6",
-                "symfony/http-kernel": "^6.3|^7.0",
-                "symfony/lock": "^6.3|^7.0",
-                "symfony/messenger": "^5.4|^6.0|^7.0",
-                "symfony/property-access": "^5.4|^6.0|^7.0",
-                "symfony/property-info": "^5.4|^6.0|^7.0",
-                "symfony/proxy-manager-bridge": "^6.4",
+                "symfony/cache": "^6.4|^7.0",
+                "symfony/config": "^6.4|^7.0",
+                "symfony/dependency-injection": "^6.4|^7.0",
+                "symfony/doctrine-messenger": "^6.4|^7.0",
+                "symfony/expression-language": "^6.4|^7.0",
+                "symfony/form": "^6.4.6|^7.0.6",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "symfony/lock": "^6.4|^7.0",
+                "symfony/messenger": "^6.4|^7.0",
+                "symfony/property-access": "^6.4|^7.0",
+                "symfony/property-info": "^6.4|^7.0",
                 "symfony/security-core": "^6.4|^7.0",
-                "symfony/stopwatch": "^5.4|^6.0|^7.0",
-                "symfony/translation": "^5.4|^6.0|^7.0",
-                "symfony/uid": "^5.4|^6.0|^7.0",
+                "symfony/stopwatch": "^6.4|^7.0",
+                "symfony/translation": "^6.4|^7.0",
+                "symfony/uid": "^6.4|^7.0",
                 "symfony/validator": "^6.4|^7.0",
-                "symfony/var-dumper": "^5.4|^6.0|^7.0"
+                "symfony/var-dumper": "^6.4|^7.0"
             },
             "type": "symfony-bridge",
             "autoload": {
@@ -8666,7 +8664,7 @@
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/doctrine-bridge/tree/v6.4.7"
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v7.0.7"
             },
             "funding": [
                 {
@@ -8682,7 +8680,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-22T16:59:38+00:00"
+            "time": "2024-04-28T11:44:19+00:00"
         },
         {
             "name": "symfony/dotenv",
@@ -8760,22 +8758,22 @@
         },
         {
             "name": "symfony/error-handler",
-            "version": "v6.4.7",
+            "version": "v7.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
-                "reference": "667a072466c6a53827ed7b119af93806b884cbb3"
+                "reference": "cf97429887e40480c847bfeb6c3991e1e2c086ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/error-handler/zipball/667a072466c6a53827ed7b119af93806b884cbb3",
-                "reference": "667a072466c6a53827ed7b119af93806b884cbb3",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/cf97429887e40480c847bfeb6c3991e1e2c086ab",
+                "reference": "cf97429887e40480c847bfeb6c3991e1e2c086ab",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "psr/log": "^1|^2|^3",
-                "symfony/var-dumper": "^5.4|^6.0|^7.0"
+                "symfony/var-dumper": "^6.4|^7.0"
             },
             "conflict": {
                 "symfony/deprecation-contracts": "<2.5",
@@ -8784,7 +8782,7 @@
             "require-dev": {
                 "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/http-kernel": "^6.4|^7.0",
-                "symfony/serializer": "^5.4|^6.0|^7.0"
+                "symfony/serializer": "^6.4|^7.0"
             },
             "bin": [
                 "Resources/bin/patch-type-declarations"
@@ -8815,7 +8813,7 @@
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/error-handler/tree/v6.4.7"
+                "source": "https://github.com/symfony/error-handler/tree/v7.0.7"
             },
             "funding": [
                 {
@@ -8831,7 +8829,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:22:46+00:00"
+            "time": "2024-04-18T09:29:19+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -12877,34 +12875,32 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v6.4.7",
+            "version": "v7.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "7a9cd977cd1c5fed3694bee52990866432af07d7"
+                "reference": "d1627b66fd87c8b4d90cabe5671c29d575690924"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/7a9cd977cd1c5fed3694bee52990866432af07d7",
-                "reference": "7a9cd977cd1c5fed3694bee52990866432af07d7",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/d1627b66fd87c8b4d90cabe5671c29d575690924",
+                "reference": "d1627b66fd87c8b4d90cabe5671c29d575690924",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
-                "symfony/deprecation-contracts": "^2.5|^3",
+                "php": ">=8.2",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
-                "symfony/console": "<5.4"
+                "symfony/console": "<6.4"
             },
             "require-dev": {
                 "ext-iconv": "*",
-                "symfony/console": "^5.4|^6.0|^7.0",
-                "symfony/error-handler": "^6.3|^7.0",
-                "symfony/http-kernel": "^5.4|^6.0|^7.0",
-                "symfony/process": "^5.4|^6.0|^7.0",
-                "symfony/uid": "^5.4|^6.0|^7.0",
-                "twig/twig": "^2.13|^3.0.4"
+                "symfony/console": "^6.4|^7.0",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "symfony/process": "^6.4|^7.0",
+                "symfony/uid": "^6.4|^7.0",
+                "twig/twig": "^3.0.4"
             },
             "bin": [
                 "Resources/bin/var-dump-server"
@@ -12942,7 +12938,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v6.4.7"
+                "source": "https://github.com/symfony/var-dumper/tree/v7.0.7"
             },
             "funding": [
                 {
@@ -12958,7 +12954,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:22:46+00:00"
+            "time": "2024-04-18T09:29:19+00:00"
         },
         {
             "name": "symfony/var-exporter",
@@ -14468,16 +14464,16 @@
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "3.6.0",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "87f5d53708a3855aa018bf0a00d0d4b0ef58a956"
+                "reference": "d13a08ebf244f74c8adb8ff15aa55d01c404e534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/87f5d53708a3855aa018bf0a00d0d4b0ef58a956",
-                "reference": "87f5d53708a3855aa018bf0a00d0d4b0ef58a956",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/d13a08ebf244f74c8adb8ff15aa55d01c404e534",
+                "reference": "d13a08ebf244f74c8adb8ff15aa55d01c404e534",
                 "shasum": ""
             },
             "require": {
@@ -14535,7 +14531,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineFixturesBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineFixturesBundle/tree/3.6.0"
+                "source": "https://github.com/doctrine/DoctrineFixturesBundle/tree/3.6.1"
             },
             "funding": [
                 {
@@ -14551,7 +14547,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-02T18:06:53+00:00"
+            "time": "2024-05-07T07:16:35+00:00"
         },
         {
             "name": "dvdoug/behat-code-coverage",
