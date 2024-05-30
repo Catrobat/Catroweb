@@ -77,7 +77,7 @@
     "dvdoug/behat-code-coverage": "5.3.*",
     "friends-of-behat/symfony-extension": "2.5.*",
     "friends-of-behat/mink-extension": "v2.7.5",
-    "friendsofphp/php-cs-fixer": "3.57.*",
+    "friendsofphp/php-cs-fixer": "3.58.*",
     "phpstan/phpstan": "1.11.*",
     "phpstan/phpstan-doctrine": "1.4.*",
     "phpstan/phpstan-phpunit": "1.4.*",
