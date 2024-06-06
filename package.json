@@ -64,7 +64,7 @@
   },
   "dependencies": {
     "@analytics/google-tag-manager": "^0.5.5",
-    "@babel/core": "^7.24.5",
+    "@babel/core": "^7.24.7",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@bugsnag/browser-performance": "^2.5.0",
     "@bugsnag/js": "^7.23.0",
