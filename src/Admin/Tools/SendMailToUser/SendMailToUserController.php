@@ -9,9 +9,9 @@ use App\System\Mail\MailerAdapter;
 use App\User\UserManager;
 use Psr\Log\LoggerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 

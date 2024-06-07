@@ -24,12 +24,12 @@ use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtens
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\Intl\Locales;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class ApiContext.

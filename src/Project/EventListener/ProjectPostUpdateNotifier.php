@@ -18,6 +18,13 @@ class ProjectPostUpdateNotifier
   {
   }
 
+  public function postPersist(Program $project, LifecycleEventArgs $event): void
+  {
+    $user = $project->getUser();
+    $user->addProgram($project);
+    $this->addBronzeUserAchievement($project->getUser());
+  }
+
   public function postUpdate(Program $project, LifecycleEventArgs $event): void
   {
     $user = $project->getUser();
@@ -54,5 +61,13 @@ class ProjectPostUpdateNotifier
     if ($project->shouldInvalidateTranslationCache()) {
       $this->machine_translation_repository->invalidateCachedTranslation($project);
     }
+  }
+
+  /**
+   * @throws \Exception
+   */
+  protected function addBronzeUserAchievement(User $user): void
+  {
+    $this->achievement_manager->unlockAchievementBronzeUser($user);
   }
 }
