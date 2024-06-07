@@ -30,8 +30,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.apk.dir', '%catrobat.pubdir%resources_test/apk/');
   $parameters->set('catrobat.mediapackage.dir', '%catrobat.pubdir%resources_test/mediapackage/');
   $parameters->set('catrobat.mediapackage.path', 'resources_test/mediapackage/');
-  $parameters->set('catrobat.mediapackage.font.dir', '%catrobat.pubdir%webfonts/fa-solid-900.ttf');
-  $parameters->set('catrobat.mediapackage.font.path', 'webfonts/fa-solid-900.ttf');
   $parameters->set('catrobat.tests.upld-dwnld-dir', 'tests/TestData/UploadDownloadTemp');
   $parameters->set('catrobat.logs.dir', '%kernel.project_dir%/tests/TestData/Cache/log/');
   $parameters->set('catrobat.testreports.behat', 'tests/TestReports/Behat/');

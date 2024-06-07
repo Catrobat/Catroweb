@@ -1,4 +1,3 @@
-// import $ from 'jquery'
 import { showSnackbar } from './components/snackbar'
 require('../styles/custom/studios.scss')
 document.addEventListener('DOMContentLoaded', function () {

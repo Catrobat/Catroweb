@@ -1,11 +1,21 @@
-import $ from 'jquery'
 import { ProjectLoader } from './custom/ProjectLoader'
+import '../styles/custom/search.scss'
 
-require('../styles/custom/search.scss')
+class SearchOld {
+  constructor() {
+    this.searchElement = document.querySelector('.js-search')
+    this.resultContainer = this.searchElement.dataset.resultContainer
+    this.pathSearch = this.searchElement.dataset.pathSearch
+    this.query = this.searchElement.dataset.query
+    this.projectLoader = new ProjectLoader(
+      this.resultContainer,
+      this.pathSearch,
+    )
+  }
 
-const $search = $('.js-search')
-const projectLoader = new ProjectLoader(
-  $search.data('result-container'),
-  $search.data('path-search'),
-)
-projectLoader.searchResult($search.data('query'))
+  searchResult() {
+    this.projectLoader.searchResult(this.query)
+  }
+}
+
+new SearchOld().searchResult()

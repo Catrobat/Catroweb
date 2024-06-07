@@ -1,31 +1,33 @@
-import $ from 'jquery'
 import { ApiFetch } from '../api/ApiHelper'
 
-require('../../styles/layout/sidebar.scss')
+import '../../styles/layout/sidebar.scss'
 
-const sidebar = $('#sidebar')
-const sidebarJs = $('.js-sidebar')
+const sidebar = document.getElementById('sidebar')
+const sidebarJs = document.querySelector('.js-sidebar')
 
-const sidebarToggleBtn = $('#top-app-bar__btn-sidebar-toggle')
+const sidebarToggleBtn = document.getElementById(
+  'top-app-bar__btn-sidebar-toggle',
+)
 
-$(() => {
+document.addEventListener('DOMContentLoaded', () => {
   initSidebarBadges()
   setClickListener()
   initSidebarSwipe()
 })
+
 function initSidebarBadges() {
-  if ($('.js-user-state').data('is-user-logged-in')) {
+  if (document.querySelector('.js-user-state').dataset.isUserLoggedIn) {
     updateBadge(
-      sidebarJs.data('base-url') + '/api/notifications/count',
+      sidebarJs.dataset.baseUrl + '/api/notifications/count',
       'sidebar_badge--unseen-notifications',
       'new',
     )
 
     updateBadge(
-      sidebarJs.data('path-achievements-count'),
+      sidebarJs.dataset.pathAchievementsCount,
       'sidebar_badge--unseen-achievements',
       'old',
-      sidebarJs.data('trans-achievements-bade-text'),
+      sidebarJs.dataset.transAchievementsBadeText,
     )
   }
 }
@@ -81,43 +83,43 @@ const fnCloseSidebar = function () {
   window.history.back() // to remove pushed state
 }
 const fnCloseSidebarInternal = function () {
-  $(window).off('popstate', fnCloseSidebarInternal)
-  sidebar.removeClass('active')
-  sidebarToggleBtn.attr('aria-expanded', false)
+  window.removeEventListener('popstate', fnCloseSidebarInternal)
+  sidebar.classList.remove('active')
+  sidebarToggleBtn?.setAttribute('aria-expanded', 'false')
 }
 const fnCloseSidebarDesktop = function () {
-  sidebar.addClass('inactive')
-  $('body').removeClass('body-with-sidebar')
-  sidebarToggleBtn.attr('aria-expanded', false)
+  sidebar.classList.add('inactive')
+  document.body.classList.remove('body-with-sidebar')
+  sidebarToggleBtn?.setAttribute('aria-expanded', 'false')
 }
 const fnOpenSidebar = function () {
-  sidebar.addClass('active')
-  sidebarToggleBtn.attr('aria-expanded', true)
+  sidebar.classList.add('active')
+  sidebarToggleBtn?.setAttribute('aria-expanded', 'true')
   window.history.pushState('sidebar-open', null, '')
-  $(window).on('popstate', fnCloseSidebarInternal)
+  window.addEventListener('popstate', fnCloseSidebarInternal)
 }
 const fnOpenSidebarDesktop = function () {
-  sidebar.removeClass('inactive')
-  $('body').addClass('body-with-sidebar')
-  sidebarToggleBtn.attr('aria-expanded', true)
+  sidebar.classList.remove('inactive')
+  document.body.classList.add('body-with-sidebar')
+  sidebarToggleBtn?.setAttribute('aria-expanded', 'true')
 }
 
 function setClickListener() {
-  if ($(window).width() >= 768) {
-    sidebarToggleBtn.attr('aria-expanded', true)
+  if (window.innerWidth >= 768) {
+    sidebarToggleBtn?.setAttribute('aria-expanded', 'true')
   }
 
-  sidebarToggleBtn.on('click', function () {
-    if ($(window).width() < 768) {
+  sidebarToggleBtn?.addEventListener('click', function () {
+    if (window.innerWidth < 768) {
       // mobile mode
-      if (sidebar.hasClass('active')) {
+      if (sidebar.classList.contains('active')) {
         fnCloseSidebar()
       } else {
         fnOpenSidebar()
       }
     } else {
       // desktop mode
-      if (sidebar.hasClass('inactive')) {
+      if (sidebar.classList.contains('inactive')) {
         fnOpenSidebarDesktop()
       } else {
         fnCloseSidebarDesktop()
@@ -125,12 +127,14 @@ function setClickListener() {
     }
   })
 
-  $('#sidebar-overlay').on('click', fnCloseSidebar)
+  document
+    .getElementById('sidebar-overlay')
+    .addEventListener('click', fnCloseSidebar)
 }
 
 function initSidebarSwipe() {
-  const sidebarWidth = sidebar.width()
-  const sidebarOverlay = $('#sidebar-overlay')
+  const sidebarWidth = sidebar.offsetWidth
+  const sidebarOverlay = document.querySelector('#sidebar-overlay')
 
   let curX = null
   let startTime = null
@@ -146,13 +150,13 @@ function initSidebarSwipe() {
 
   function refreshSidebar() {
     const left = curX >= sidebarWidth ? 0 : curX - sidebarWidth
-    sidebar.css('transition', 'none').css('left', left)
+    sidebar.style.transition = 'none'
+    sidebar.style.left = `${left}px`
     if (!desktop) {
       const opacity = curX >= sidebarWidth ? 1 : curX / sidebarWidth
-      sidebarOverlay
-        .css('transition', 'all 10ms ease-in-out')
-        .css('display', 'block')
-        .css('opacity', opacity)
+      sidebarOverlay.style.transition = 'all 10ms ease-in-out'
+      sidebarOverlay.style.display = 'block'
+      sidebarOverlay.style.opacity = opacity.toString()
     }
   }
 
@@ -164,11 +168,11 @@ function initSidebarSwipe() {
     if (e.touches.length === 1) {
       const touch = e.touches[0]
 
-      desktop = $(window).width() >= 768
+      desktop = window.innerWidth >= 768
 
       const sidebarOpened =
-        (desktop && !sidebar.hasClass('inactive')) ||
-        (!desktop && sidebar.hasClass('active'))
+        (desktop && !sidebar.classList.contains('inactive')) ||
+        (!desktop && sidebar.classList.contains('active'))
       if (sidebarOpened) {
         curX = touch.pageX
         startX = touch.pageX
@@ -255,8 +259,11 @@ function initSidebarSwipe() {
   })
 
   function reset() {
-    sidebar.css('left', '').css('transition', '')
-    sidebarOverlay.css('display', '').css('opacity', '').css('transition', '')
+    sidebar.style.left = ''
+    sidebar.style.transition = ''
+    sidebarOverlay.style.display = ''
+    sidebarOverlay.style.opacity = ''
+    sidebarOverlay.style.transition = ''
     curX = null
     startTime = null
     startX = null
@@ -271,6 +278,9 @@ function initSidebarSwipe() {
 
 document.addEventListener('DOMContentLoaded', function () {
   const languageButton = document.querySelector('#btn-language')
+  if (!languageButton) {
+    return
+  }
   const languageMenu = document.querySelector('.language-body')
   const languageMenuOverlay = document.querySelector('.language-body-overlay')
 

@@ -1,4 +1,3 @@
-// import $ from 'jquery'
 import './components/tab_bar'
 import './components/fullscreen_list_modal'
 import './components/switch'
