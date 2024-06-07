@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import textFillDefault from './components/text_fill_default'
 import './layout/top_bar'
 import './layout/sidebar'
@@ -15,14 +14,15 @@ import googleTagManager from '@analytics/google-tag-manager'
 // Start the stimulus app
 import './bootstrap'
 
-const appVersion = $('#app-version').data('app-version')
-const bugsnagApiKey = $('#bugsnag').data('api-key')
+const appVersion = document.getElementById('app-version').dataset.appVersion
+const bugsnagApiKey = document.getElementById('bugsnag').dataset.apiKey
 if (bugsnagApiKey) {
   Bugsnag.start({ apiKey: bugsnagApiKey, appVersion })
   BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion })
 }
 
-const gtmContainerId = $('#gtm-container-id').data('gtm-container-id')
+const gtmContainerId =
+  document.getElementById('gtm-container-id').dataset.gtmContainerId
 if (gtmContainerId) {
   const analytics = Analytics({
     app: 'share.catrob.at',
@@ -41,7 +41,7 @@ require('../styles/layout/footer.scss')
 new TokenExpirationHandler()
 new LogoutTokenHandler()
 
-$(() => {
+document.addEventListener('DOMContentLoaded', () => {
   showFlashSnackbar()
   fitHeadingFontSizeToAvailableWidth()
   initScrollToHash()
@@ -58,21 +58,27 @@ function showFlashSnackbar() {
 function fitHeadingFontSizeToAvailableWidth() {
   // Adjust heading font size or break word
   ;['h1', '.h1', 'h2', '.h2', 'h3', '.h3'].forEach(function (element) {
-    $(element + ':not(.no-textfill)').each(function () {
-      textFillDefault(this)
-    })
+    document
+      .querySelectorAll(element + ':not(.no-textfill)')
+      .forEach(function (el) {
+        textFillDefault(el)
+      })
   })
 }
 
 function initScrollToHash() {
-  $(window).on('load', function () {
+  window.addEventListener('load', function () {
     let hash
     let timeout = 0
-    const poll = window.setInterval(function () {
-      hash = $(window.location.hash)
+    if (window.location.hash === '') {
+      return
+    }
 
-      if (hash.length) {
-        $('html, body').animate({ scrollTop: hash.offset().top })
+    const poll = window.setInterval(function () {
+      hash = document.querySelector(window.location.hash)
+
+      if (hash) {
+        window.scrollTo(0, hash.offsetTop)
         window.clearInterval(poll)
       } else if (timeout++ > 100) {
         // cancel the interval after 100 attempts (== 10s)

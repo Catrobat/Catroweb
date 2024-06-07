@@ -219,13 +219,6 @@ class ProjectController extends AbstractController
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }
 
-  #[Route(path: '/search_old/{q}', name: 'search_old', requirements: ['q' => '.+'], methods: ['GET'])]
-  #[Route(path: '/search_old/', name: 'empty_search_old', defaults: ['q' => null], methods: ['GET'])]
-  public function searchActionOld(string $q): Response
-  {
-    return $this->render('Search/searchOld.html.twig', ['q' => $q]);
-  }
-
   /**
    * @deprecated Use new API
    * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.

@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import Clipboard from 'clipboard'
 import { showSnackbar } from '../components/snackbar'
 
@@ -12,8 +11,10 @@ export function shareLink(
   clipboardSuccess,
   clipboardFail,
 ) {
+  const shareButton = document.querySelector('#top-app-bar__btn-share')
+  const shareButtonText = document.querySelector('#top-app-bar__btn-share-text')
   if (navigator.share) {
-    $('#top-app-bar__btn-share').on('click', function () {
+    shareButton.addEventListener('click', function () {
       navigator
         .share({
           title: themeDisplayName,
@@ -30,7 +31,7 @@ export function shareLink(
     })
   } else {
     // Web Share API is still very limited - provide copy action as fallback
-    $('#top-app-bar__btn-share-text').text(copy)
+    shareButtonText.textContent = copy
     const cb = new Clipboard('#top-app-bar__btn-share')
     cb.on('success', function () {
       showSnackbar('#share-snackbar', clipboardSuccess)

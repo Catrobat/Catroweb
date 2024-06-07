@@ -1,118 +1,141 @@
-import $ from 'jquery'
 import Swal from 'sweetalert2'
-
 import './components/tab_bar'
+import '../styles/custom/profile.scss'
+import { showSnackbar } from './components/snackbar'
 
-require('../styles/custom/profile.scss')
-
-const $followerOverview = $('.js-follower-overview')
-let numberOfFollow = $followerOverview.data('number-of-following')
-const emptyContainerMessage = $('#no-followers')
-
-/**
- * Register EventListeners
- */
-$(() => {
-  $('.unfollow-btn').on('click', (e) => {
-    e.preventDefault()
-    e.stopImmediatePropagation()
-    unfollow($(e.target).data('user-id'), $(e.target).data('user-name'))
-  })
-
-  $('.follow-btn').on('click', (e) => {
-    e.preventDefault()
-    e.stopImmediatePropagation()
-    follow($(e.target).data('user-id'))
-  })
-})
-
-/**
- *
- */
-function unfollow(id, username) {
-  const $followerItems = $('.follower-item-' + id)
-  const $buttons = $followerItems
-    .find('.btn-follow button')
-    .attr('disabled', true)
-
-  Swal.fire({
-    title: $followerOverview.data('unfollow-question'),
-    icon: 'question',
-    showCancelButton: true,
-    allowOutsideClick: false,
-    confirmButtonText: $followerOverview
-      .data('unfollow-button')
-      .replace('%username%', username),
-    cancelButtonText: $followerOverview.data('cancel-button'),
-    customClass: {
-      confirmButton: 'btn btn-primary',
-      cancelButton: 'btn btn-outline-primary',
-    },
-    buttonsStyling: false,
-  }).then((result) => {
-    if (result.value) {
-      $.ajax({
-        url: $followerOverview.data('unfollow-url') + '/' + id,
-        type: 'delete',
-        success: function () {
-          $buttons.attr('disabled', false)
-          --numberOfFollow
-          if (numberOfFollow <= 0) {
-            emptyContainerMessage.removeClass('d-none').addClass('d-block')
-          }
-          window.location.reload()
-        },
-        error: function (xhr) {
-          handleError(xhr, $buttons)
-        },
-      })
-    } else {
-      $buttons.attr('disabled', false)
-    }
-  })
-}
-
-function follow(id) {
-  const $followerItems = $('.follower-item-' + id)
-  const $buttons = $followerItems.find('.btn-follow button')
-  $buttons.attr('disabled', true)
-  const url = $followerOverview.data('follow-url')
-
-  $.ajax({
-    url: url + '/' + id,
-    type: 'post',
-    success: function () {
-      $buttons.attr('disabled', false)
-      ++numberOfFollow
-      window.location.reload()
-      emptyContainerMessage.removeClass('d-block').addClass('d-none')
-    },
-    error: function (xhr) {
-      handleError(xhr, $buttons)
-    },
-  })
-}
-
-function handleError(xhr, $buttons) {
-  if (xhr.status === 401) {
-    // a user must be logged in to (un)follow someone
-    window.location.href = $followerOverview.data('login-url')
-    return false
+class FollowerOverview {
+  constructor() {
+    this.followerContainer = document.querySelector('.js-follower-overview')
+    this.numberOfFollowings = this.followerContainer.dataset.numberOfFollowing
+    this.emptyContainerMessage = document.querySelector('#no-followers')
   }
 
-  $buttons.attr('disabled', false)
-  fireSomeThingWentWrongPopUp()
+  registerEventListeners() {
+    document.addEventListener('DOMContentLoaded', () => {
+      this.registerFollowOnButtonClickEventListeners()
+      this.registerUnfollowOnButtonClickEventListeners()
+    })
+  }
+
+  unfollow(button, id, username) {
+    button.disabled = true
+
+    Swal.fire({
+      title: this.followerContainer.dataset.unfollowQuestion,
+      icon: 'question',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      confirmButtonText: this.followerContainer.dataset.unfollowButton.replace(
+        '%username%',
+        username,
+      ),
+      cancelButtonText: this.followerContainer.dataset.cancelButton,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary',
+      },
+      buttonsStyling: false,
+    }).then((result) => {
+      if (result.value) {
+        fetch(this.followerContainer.dataset.unfollowUrl + '/' + id, {
+          method: 'delete',
+        })
+          .then((response) => {
+            if (response.ok) {
+              button.disabled = false
+              --this.numberOfFollowings
+              if (this.numberOfFollowings <= 0) {
+                this.showEmptyContainerMessage()
+              }
+              window.location.reload()
+            } else if (response.status === 401) {
+              window.location.href = this.followerContainer.dataset.loginUrl
+              return false
+            } else {
+              throw new Error('Unexpected error response: ' + response.status)
+            }
+          })
+          .catch((error) => {
+            this.showUnexpectedErrorSnackbar(error)
+          })
+          .finally(() => {
+            button.disabled = false
+          })
+      } else {
+        button.disabled = false
+      }
+    })
+  }
+
+  follow(button, id) {
+    button.disabled = true
+
+    fetch(this.followerContainer.dataset.followUrl + '/' + id, {
+      method: 'post',
+    })
+      .then((response) => {
+        if (response.ok) {
+          ++this.numberOfFollowings
+          this.hideEmptyContainerMessage()
+          window.location.reload()
+        } else if (response.status === 401) {
+          window.location.href = this.followerContainer.dataset.loginUrl
+          return false
+        } else {
+          throw new Error('Unexpected error response: ' + response.status)
+        }
+      })
+      .catch((error) => {
+        this.showUnexpectedErrorSnackbar(error)
+      })
+      .finally(() => {
+        button.disabled = false
+      })
+  }
+
+  showUnexpectedErrorSnackbar(error) {
+    showSnackbar(
+      '#share-snackbar',
+      this.followerContainer.dataset.somethingWentWrongError +
+        this.followerContainer.dataset.followError,
+    )
+    console.error('Updating followers failed: ' + error)
+  }
+
+  hideEmptyContainerMessage() {
+    this.emptyContainerMessage.classList.remove('d-block')
+    this.emptyContainerMessage.classList.add('d-none')
+  }
+
+  showEmptyContainerMessage() {
+    this.emptyContainerMessage.classList.remove('d-none')
+    this.emptyContainerMessage.classList.add('d-block')
+  }
+
+  registerFollowOnButtonClickEventListeners() {
+    document.querySelectorAll('.follow-btn').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        this.follow(e.target, e.target.dataset.userId)
+      })
+    })
+  }
+
+  registerUnfollowOnButtonClickEventListeners() {
+    document.querySelectorAll('.unfollow-btn').forEach((button) => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        this.unfollow(
+          e.target,
+          e.target.dataset.userId,
+          e.target.dataset.userName,
+        )
+      })
+    })
+  }
 }
 
-function fireSomeThingWentWrongPopUp() {
-  Swal.fire({
-    title: $followerOverview.data('something-went-wrong-error'),
-    text: $followerOverview.data('follow-error'),
-    icon: 'error',
-    customClass: {
-      confirmButton: 'btn btn-primary',
-    },
-    buttonsStyling: false,
-    allowOutsideClick: false,
-  })
-}
+const followerOverview = new FollowerOverview()
+followerOverview.registerEventListeners()
