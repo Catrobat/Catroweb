@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\DB\Entity\User\User;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -29,8 +28,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
         ],
         'sonata.block.service.text' => null,
-        'sonata.user.block.menu' => null,
-        'sonata.user.block.account' => null,
       ],
     ]
   );
@@ -181,7 +178,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
       ],
       'security' => [
-        'handler' => 'sonata.admin.security.handler.acl',
+        'handler' => 'sonata.admin.security.handler.role',
         'role_admin' => 'ROLE_ADMIN',
         'role_super_admin' => 'ROLE_SUPER_ADMIN',
         'information' => [
@@ -258,25 +255,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'integer' => '@SonataAdmin/CRUD/base_show_field.html.twig',
             'decimal' => '@SonataAdmin/CRUD/base_show_field.html.twig',
           ],
-        ],
-      ],
-    ]
-  );
-
-  $containerConfigurator->extension(
-    'sonata_user',
-    [
-      'security_acl' => true,
-      'manager_type' => 'orm',
-      'mailer' => 'sonata.user.mailer.default',
-      'class' => [
-        'user' => User::class,
-      ],
-      'resetting' => [
-        'email' => [
-          'template' => '@SonataUser/Admin/Security/Resetting/email.html.twig',
-          'address' => 'support@catrob.at',
-          'sender_name' => 'Catrobat Team',
         ],
       ],
     ]

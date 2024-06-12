@@ -19,14 +19,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class TransChoiceTest extends TestCase
 {
-  /**
-   * @var string
-   */
-  public const LANGUAGE_DIR = 'tests/TestData/DataFixtures/translations/';
+  public const string LANGUAGE_DIR = 'tests/TestData/DataFixtures/translations/';
 
   #[DataProvider('provideLanguageData')]
   public function testAllTransChoiceEntriesShouldHaveACorrectSyntax(TranslatorInterface $translator, string $language_code, array $message_ids): void
   {
+    $this->expectNotToPerformAssertions();
     foreach ($message_ids as $message_id) {
       $translator->trans($message_id, ['%count%' => 1], 'catroweb', $language_code);
       $translator->trans($message_id, ['%count%' => 2], 'catroweb', $language_code);

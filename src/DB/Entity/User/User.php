@@ -15,12 +15,13 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\DB\EntityRepository\User\UserRepository;
 use App\DB\Generator\MyUuidGenerator;
+use App\Utils\CanonicalFieldsUpdater;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Sonata\UserBundle\Entity\BaseUser;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Table(name: 'fos_user')]
@@ -33,18 +34,19 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Index(name: 'facebook_id_idx', columns: ['google_id'])]
 #[ORM\Index(name: 'apple_id_idx', columns: ['google_id'])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User extends BaseUser implements UserInterface
+#[ORM\HasLifecycleCallbacks]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+  public const string ROLE_DEFAULT = 'ROLE_USER';
+  public const string ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+
   public static string $SCRATCH_PREFIX = 'Scratch:';
 
-  /**
-   * @var string
-   */
   #[ORM\Id]
   #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]
   #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
-  protected $id;
+  protected string $id;
 
   /**
    * @deprecated API v1
@@ -222,6 +224,47 @@ class User extends BaseUser implements UserInterface
   #[ORM\Column(type: Types::INTEGER, nullable: true)]
   protected ?int $ranking_score = null;
 
+  #[ORM\Column(type: 'string', length: 180, nullable: false)]
+  protected ?string $username = null;
+
+  #[ORM\Column(name: 'username_canonical', type: 'string', length: 180, unique: true, nullable: false)]
+  protected ?string $usernameCanonical = null;
+
+  #[ORM\Column(type: 'string', length: 180, nullable: false)]
+  protected ?string $email = null;
+
+  #[ORM\Column(name: 'email_canonical', type: 'string', length: 180, unique: true, nullable: false)]
+  protected ?string $emailCanonical = null;
+
+  #[ORM\Column(type: 'boolean')]
+  protected bool $enabled = false;
+
+  #[ORM\Column(type: 'string', nullable: true)]
+  protected ?string $salt = null;
+
+  #[ORM\Column(type: 'string', nullable: false)]
+  protected ?string $password = null;
+
+  protected ?string $plainPassword = null;
+
+  #[ORM\Column(name: 'last_login', type: 'datetime', nullable: true)]
+  protected ?\DateTimeInterface $lastLogin = null;
+
+  #[ORM\Column(name: 'confirmation_token', type: 'string', length: 180, unique: true, nullable: true)]
+  protected ?string $confirmationToken = null;
+
+  #[ORM\Column(name: 'password_requested_at', type: 'datetime', nullable: true)]
+  protected ?\DateTimeInterface $passwordRequestedAt = null;
+
+  #[ORM\Column(name: 'created_at', type: 'datetime')]
+  protected \DateTimeInterface $createdAt;
+
+  #[ORM\Column(name: 'updated_at', type: 'datetime')]
+  protected \DateTimeInterface $updatedAt;
+
+  #[ORM\Column(name: 'roles', type: 'array')]
+  protected array $roles = [];
+
   public function __construct()
   {
     $this->reset_password_requests = new ArrayCollection();
@@ -276,7 +319,6 @@ class User extends BaseUser implements UserInterface
     return $this->gplus_refresh_token;
   }
 
-  #[\Override]
   public function getId(): ?string
   {
     return $this->id;
@@ -569,5 +611,297 @@ class User extends BaseUser implements UserInterface
   public function setRankingScore(?int $ranking_score): void
   {
     $this->ranking_score = $ranking_score;
+  }
+
+  #[ORM\PrePersist]
+  public function prePersist(): void
+  {
+    $this->createdAt = new \DateTime();
+    $this->updatedAt = new \DateTime();
+  }
+
+  #[ORM\PreUpdate]
+  public function preUpdate(): void
+  {
+    $this->updatedAt = new \DateTime();
+  }
+
+  public function __toString(): string
+  {
+    return $this->getUserIdentifier();
+  }
+
+  public function __serialize(): array
+  {
+    return [
+      $this->password,
+      $this->salt,
+      $this->usernameCanonical,
+      $this->username,
+      $this->enabled,
+      $this->id,
+      $this->email,
+      $this->emailCanonical,
+    ];
+  }
+
+  public function __unserialize(array $data): void
+  {
+    [
+      $this->password,
+      $this->salt,
+      $this->usernameCanonical,
+      $this->username,
+      $this->enabled,
+      $this->id,
+      $this->email,
+      $this->emailCanonical
+    ] = $data;
+  }
+
+  public function addRole(string $role): void
+  {
+    $role = strtoupper($role);
+
+    if (self::ROLE_DEFAULT === $role) {
+      return;
+    }
+
+    if (!\in_array($role, $this->roles, true)) {
+      $this->roles[] = $role;
+    }
+  }
+
+  public function eraseCredentials(): void
+  {
+    $this->plainPassword = null;
+  }
+
+  public function getUsername(): ?string
+  {
+    return $this->username;
+  }
+
+  public function getUserIdentifier(): string
+  {
+    return $this->getUsername() ?? '-';
+  }
+
+  public function getUsernameCanonical(): ?string
+  {
+    return $this->usernameCanonical;
+  }
+
+  public function getSalt(): ?string
+  {
+    return $this->salt;
+  }
+
+  public function getEmail(): ?string
+  {
+    return $this->email;
+  }
+
+  public function getEmailCanonical(): ?string
+  {
+    return $this->emailCanonical;
+  }
+
+  public function getPassword(): ?string
+  {
+    return $this->password;
+  }
+
+  public function getPlainPassword(): ?string
+  {
+    return $this->plainPassword;
+  }
+
+  public function getLastLogin(): ?\DateTimeInterface
+  {
+    return $this->lastLogin;
+  }
+
+  public function getConfirmationToken(): ?string
+  {
+    return $this->confirmationToken;
+  }
+
+  public function getRoles(): array
+  {
+    $roles = $this->roles;
+
+    // we need to make sure to have at least one role
+    $roles[] = self::ROLE_DEFAULT;
+
+    return array_values(array_unique($roles));
+  }
+
+  public function hasRole(string $role): bool
+  {
+    return \in_array(strtoupper($role), $this->getRoles(), true);
+  }
+
+  public function isEnabled(): bool
+  {
+    return $this->enabled;
+  }
+
+  public function isSuperAdmin(): bool
+  {
+    return $this->hasRole(self::ROLE_SUPER_ADMIN);
+  }
+
+  public function removeRole(string $role): void
+  {
+    if (false !== $key = array_search(strtoupper($role), $this->roles, true)) {
+      unset($this->roles[$key]);
+      $this->roles = array_values($this->roles);
+    }
+  }
+
+  public function setUsername(?string $username): void
+  {
+    $this->username = $username;
+    $canonicalFieldsUpdater = new CanonicalFieldsUpdater();
+    $canonicalFieldsUpdater->updateCanonicalFields($this);
+  }
+
+  public function setUsernameCanonical(?string $usernameCanonical): void
+  {
+    $this->usernameCanonical = $usernameCanonical;
+  }
+
+  public function setSalt(?string $salt): void
+  {
+    $this->salt = $salt;
+  }
+
+  public function setEmail(?string $email): void
+  {
+    $this->email = $email;
+    $canonicalFieldsUpdater = new CanonicalFieldsUpdater();
+    $canonicalFieldsUpdater->updateCanonicalFields($this);
+  }
+
+  public function setEmailCanonical(?string $emailCanonical): void
+  {
+    $this->emailCanonical = $emailCanonical;
+  }
+
+  public function setEnabled(bool $enabled): void
+  {
+    $this->enabled = $enabled;
+  }
+
+  public function setPassword(?string $password): void
+  {
+    $this->password = $password;
+  }
+
+  public function setSuperAdmin(bool $boolean): void
+  {
+    if (true === $boolean) {
+      $this->addRole(self::ROLE_SUPER_ADMIN);
+    } else {
+      $this->removeRole(self::ROLE_SUPER_ADMIN);
+    }
+  }
+
+  public function setPlainPassword(?string $password): void
+  {
+    $this->plainPassword = $password;
+
+    // Do not remove this, it will trigger preUpdate doctrine event
+    // when you only change the password, since plainPassword
+    // is not persisted on the entity, doctrine does not watch for it.
+    $this->updatedAt = new \DateTime();
+  }
+
+  public function setLastLogin(?\DateTimeInterface $time = null): void
+  {
+    $this->lastLogin = $time;
+  }
+
+  public function setConfirmationToken(?string $confirmationToken): void
+  {
+    $this->confirmationToken = $confirmationToken;
+  }
+
+  public function setPasswordRequestedAt(?\DateTimeInterface $date = null): void
+  {
+    $this->passwordRequestedAt = $date;
+  }
+
+  public function getPasswordRequestedAt(): ?\DateTimeInterface
+  {
+    return $this->passwordRequestedAt;
+  }
+
+  public function isPasswordRequestNonExpired(int $ttl): bool
+  {
+    $passwordRequestedAt = $this->getPasswordRequestedAt();
+
+    return null !== $passwordRequestedAt && $passwordRequestedAt->getTimestamp() + $ttl > time();
+  }
+
+  public function setRoles(array $roles): void
+  {
+    $this->roles = [];
+
+    foreach ($roles as $role) {
+      $this->addRole($role);
+    }
+  }
+
+  public function isEqualTo(UserInterface $user): bool
+  {
+    if (!$user instanceof self) {
+      return false;
+    }
+
+    if ($this->password !== $user->getPassword()) {
+      return false;
+    }
+
+    if ($this->salt !== $user->getSalt()) {
+      return false;
+    }
+
+    if ($this->username !== $user->getUsername()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public function setCreatedAt(?\DateTimeInterface $createdAt = null): void
+  {
+    $this->createdAt = $createdAt;
+  }
+
+  public function getCreatedAt(): ?\DateTimeInterface
+  {
+    return $this->createdAt;
+  }
+
+  public function setUpdatedAt(?\DateTimeInterface $updatedAt = null): void
+  {
+    $this->updatedAt = $updatedAt;
+  }
+
+  public function getUpdatedAt(): ?\DateTimeInterface
+  {
+    return $this->updatedAt;
+  }
+
+  public function getRealRoles(): array
+  {
+    return $this->roles;
+  }
+
+  public function setRealRoles(array $roles): void
+  {
+    $this->setRoles($roles);
   }
 }

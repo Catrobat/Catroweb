@@ -56,11 +56,6 @@ class CatrowebBrowserContext extends BrowserContext
     setlocale(LC_ALL, 'en');
   }
 
-  public static function getAcceptedSnippetType(): string
-  {
-    return 'regex';
-  }
-
   // -------------------------------------------------------------------------------------------------------------------
   //  Hook
   // -------------------------------------------------------------------------------------------------------------------

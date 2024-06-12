@@ -16,7 +16,6 @@ default:
 
         FriendsOfBehat\SymfonyExtension:
             kernel:
-                # bootstrap: config/bootstrap_test.php
                 environment: test
                 class: App\Kernel
 
@@ -60,7 +59,8 @@ default:
     suites:
 
         api-authentication:
-            paths:    [ "tests/BehatFeatures/api/authentication" ]
+            paths:
+                features: "tests/BehatFeatures/api/authentication"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -68,7 +68,8 @@ default:
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
         api-mediapackage:
-            paths:    [ "tests/BehatFeatures/api/medialibrary" ]
+            paths:
+                features: "tests/BehatFeatures/api/medialibrary"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -76,7 +77,8 @@ default:
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
         api-projects:
-            paths:    [ "tests/BehatFeatures/api/projects" ]
+            paths:
+                features: "tests/BehatFeatures/api/projects"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -84,7 +86,8 @@ default:
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
         api-user:
-            paths:    [ "tests/BehatFeatures/api/user" ]
+            paths:
+                features: "tests/BehatFeatures/api/user"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -92,7 +95,8 @@ default:
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
         api-notifications:
-            paths:    [ "tests/BehatFeatures/api/notifications" ]
+            paths:
+                features: "tests/BehatFeatures/api/notifications"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -100,7 +104,8 @@ default:
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
         api-utility:
-            paths:    [ "tests/BehatFeatures/api/utility" ]
+            paths:
+                features: "tests/BehatFeatures/api/utility"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -108,14 +113,16 @@ default:
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
         api-tag:
-            paths:    [ "tests/BehatFeatures/api/tag" ]
+            paths:
+                features: "tests/BehatFeatures/api/tag"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
                 - App\System\Testing\Behat\Context\ApiContext
 
         api-translation:
-            paths:    [ "tests/BehatFeatures/api/translation" ]
+            paths:
+                features: "tests/BehatFeatures/api/translation"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -124,7 +131,8 @@ default:
 ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###
 
         api-deprecated-general:
-            paths:    [ "tests/BehatFeatures/api-deprecated/general" ]
+            paths:
+                features: "tests/BehatFeatures/api-deprecated/general"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -132,7 +140,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         api-deprecated-profile:
-            paths:    [ "tests/BehatFeatures/api-deprecated/profile" ]
+            paths:
+                features: "tests/BehatFeatures/api-deprecated/profile"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -140,7 +149,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         api-deprecated-project:
-            paths:    [ "tests/BehatFeatures/api-deprecated/project" ]
+            paths:
+                features: "tests/BehatFeatures/api-deprecated/project"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -148,7 +158,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         api-deprecated-upload:
-            paths:    [ "tests/BehatFeatures/api-deprecated/upload" ]
+            paths:
+                features: "tests/BehatFeatures/api-deprecated/upload"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -158,7 +169,8 @@ default:
 ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###
 
         web-achievements:
-            paths:    [ "tests/BehatFeatures/web/achievements" ]
+            paths:
+                features: "tests/BehatFeatures/web/achievements"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -166,7 +178,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-admin:
-            paths:    [ "tests/BehatFeatures/web/admin" ]
+            paths:
+                features: "tests/BehatFeatures/web/admin"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -174,7 +187,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-apk-generation:
-            paths:    [ "tests/BehatFeatures/web/apk-generation" ]
+            paths:
+                features: "tests/BehatFeatures/web/apk-generation"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -182,7 +196,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-authentication:
-            paths:    [ "tests/BehatFeatures/web/authentication" ]
+            paths:
+                features: "tests/BehatFeatures/web/authentication"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -191,7 +206,7 @@ default:
 
         web-code-statistics:
             paths:
-                - "tests/BehatFeatures/web/code-statistics"
+                features: "tests/BehatFeatures/web/code-statistics"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -200,7 +215,7 @@ default:
 
         web-code-view:
             paths:
-                - "tests/BehatFeatures/web/code-view"
+                features: "tests/BehatFeatures/web/code-view"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -209,7 +224,7 @@ default:
 
         web-comments:
             paths:
-                - "tests/BehatFeatures/web/comments"
+                features: "tests/BehatFeatures/web/comments"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -218,7 +233,7 @@ default:
 
         web-general:
             paths:
-                - "tests/BehatFeatures/web/general"
+                features: "tests/BehatFeatures/web/general"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -227,7 +242,7 @@ default:
 
         web-media-library:
             paths:
-                - "tests/BehatFeatures/web/media-library"
+                features: "tests/BehatFeatures/web/media-library"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -235,7 +250,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-notifications:
-            paths: ["tests/BehatFeatures/web/notifications"]
+            paths:
+                features: "tests/BehatFeatures/web/notifications"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -243,7 +259,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-profile:
-            paths:    [ "tests/BehatFeatures/web/profile" ]
+            paths:
+                features: "tests/BehatFeatures/web/profile"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -251,7 +268,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-project:
-            paths:    [ "tests/BehatFeatures/web/project" ]
+            paths:
+                features: "tests/BehatFeatures/web/project"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -259,7 +277,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-project-details:
-            paths:    [ "tests/BehatFeatures/web/project-details" ]
+            paths:
+                features: "tests/BehatFeatures/web/project-details"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -267,7 +286,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-project-list:
-            paths:    [ "tests/BehatFeatures/web/project-list" ]
+            paths:
+                features: "tests/BehatFeatures/web/project-list"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -276,7 +296,8 @@ default:
 
         web-reactions:
             paths:
-                - "tests/BehatFeatures/web/reactions"
+                features: "tests/BehatFeatures/web/reactions"
+
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -285,7 +306,7 @@ default:
 
         web-recommendations:
             paths:
-                - "tests/BehatFeatures/web/recommendations"
+                features: "tests/BehatFeatures/web/recommendations"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -294,7 +315,7 @@ default:
 
         web-remix-system:
             paths:
-                - "tests/BehatFeatures/web/remix-system"
+                features: "tests/BehatFeatures/web/remix-system"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -303,7 +324,7 @@ default:
 
         web-scratch-integration:
             paths:
-                - "tests/BehatFeatures/web/scratch-integration"
+                features: "tests/BehatFeatures/web/scratch-integration"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -311,7 +332,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-search:
-            paths:    [ "tests/BehatFeatures/web/search" ]
+            paths:
+                features: "tests/BehatFeatures/web/search"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -319,7 +341,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-studio:
-            paths:    [ "tests/BehatFeatures/web/studio" ]
+            paths:
+                features: "tests/BehatFeatures/web/studio"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -327,7 +350,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-top-bar:
-            paths:    [ "tests/BehatFeatures/web/top-bar" ]
+            paths:
+                features: "tests/BehatFeatures/web/top-bar"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -335,7 +359,8 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
 
         web-translation:
-            paths:    [ "tests/BehatFeatures/web/translation" ]
+            paths:
+                features: "tests/BehatFeatures/web/translation"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -344,7 +369,7 @@ default:
 
         web-system:
             paths:
-                - "tests/BehatFeatures/web/system"
+                features: "tests/BehatFeatures/web/system"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext

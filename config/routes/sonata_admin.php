@@ -9,18 +9,6 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     ->prefix('/admin')
   ;
 
-  $routingConfigurator->import('@SonataUserBundle/Resources/config/routing/admin_security.xml')
-    ->prefix('/admin')
-  ;
-
-  $routingConfigurator->import('@SonataUserBundle/Resources/config/routing/admin_resetting.xml')
-    ->prefix('/admin/resetting')
-  ;
-
-  $routingConfigurator->add('sonata_user_admin_security_logout', '/{theme}/logout')
-    ->controller('SonataUserBundle:AdminSecurity:logout')
-  ;
-
   $routingConfigurator->import('@SonataAdminBundle/Resources/config/routing/sonata_admin.xml')
     ->prefix('/admin')
   ;

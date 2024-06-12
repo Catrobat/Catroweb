@@ -38,12 +38,12 @@ use Elastica\Query\Terms;
 use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Psr\Log\LoggerInterface;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\UrlHelper;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProjectManager
 {
