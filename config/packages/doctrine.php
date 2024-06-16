@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\DB\Doctrine\ArrayType;
 use Doctrine\DBAL\Types\JsonType;
 use DoctrineExtensions\Query\Mysql\MatchAgainst;
 use DoctrineExtensions\Query\Mysql\Rand;
@@ -14,7 +15,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'dbal' => [
         'url' => '%env(resolve:DATABASE_URL)%',
         'server_version' => '10.11.7-MariaDB',
-        'types' => ['json' => JsonType::class],
+        'types' => ['json' => JsonType::class, 'array' => ArrayType::class],
         'mapping_types' => ['enum' => 'string'],
       ],
       'orm' => [
