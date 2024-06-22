@@ -2921,7 +2921,7 @@ class ApiContext implements Context
       'project_url' => static function ($project_url): void {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression(
-          '/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/',
+          '/http:\/\/localhost\/app\/project\/[a-zA-Z0-9-]+/',
           $project_url,
           'project_url is not a valid URL!'
         );
@@ -2929,7 +2929,7 @@ class ApiContext implements Context
       'download_url' => static function ($download_url): void {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression(
-          '/http:\\/\\/localhost\\/api\\/project\\/([a-zA-Z0-9-]+)\\/catrobat/',
+          '/http:\/\/localhost\/api\/project\/([a-zA-Z0-9-]+)\/catrobat/',
           $download_url,
           'download_url is not a valid URL!'
         );

@@ -1,5 +1,7 @@
 <?php
 
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
+
 $finder = PhpCsFixer\Finder::create()
   ->in(__DIR__)
   ->exclude(['var', 'node_modules', 'vendor']);
@@ -7,6 +9,7 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 $config
   ->setRiskyAllowed(true)
+  ->setParallelConfig(ParallelConfigFactory::detect())
   ->setRules([
     '@PSR1' => true,
     '@PSR2' => true,
