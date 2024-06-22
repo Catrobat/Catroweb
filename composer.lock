@@ -1959,16 +1959,16 @@
         },
         {
             "name": "eightpoints/guzzle-bundle",
-            "version": "v8.5.0",
+            "version": "v8.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/8p/EightPointsGuzzleBundle.git",
-                "reference": "71efd775a4c0767ba8bda2af615787520a96aa29"
+                "reference": "363fcb2c4bae313ec2f859f9d00f9de128d0d7dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/71efd775a4c0767ba8bda2af615787520a96aa29",
-                "reference": "71efd775a4c0767ba8bda2af615787520a96aa29",
+                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/363fcb2c4bae313ec2f859f9d00f9de128d0d7dc",
+                "reference": "363fcb2c4bae313ec2f859f9d00f9de128d0d7dc",
                 "shasum": ""
             },
             "require": {
@@ -2025,9 +2025,9 @@
             ],
             "support": {
                 "issues": "https://github.com/8p/EightPointsGuzzleBundle/issues",
-                "source": "https://github.com/8p/EightPointsGuzzleBundle/tree/v8.5.0"
+                "source": "https://github.com/8p/EightPointsGuzzleBundle/tree/v8.5.1"
             },
-            "time": "2023-12-04T14:40:56+00:00"
+            "time": "2024-06-18T11:25:52+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
