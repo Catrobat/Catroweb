@@ -51,7 +51,7 @@
     "symfony/intl": "7.1.*",
     "symfony/mailer": "7.1.*",
     "symfony/monolog-bundle": "3.10.*",
-    "symfony/polyfill-iconv": "1.29.*",
+    "symfony/polyfill-iconv": "1.30.*",
     "symfony/process": "7.1.*",
     "symfony/routing": "7.1.*",
     "symfony/runtime": "7.1.*",
