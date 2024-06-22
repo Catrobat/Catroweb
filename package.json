@@ -57,7 +57,7 @@
     "postcss-loader": "^7.3.4",
     "prettier": "3.3.2",
     "purgecss-webpack-plugin": "^6.0.0",
-    "sass": "^1.77.5",
+    "sass": "^1.77.6",
     "sass-loader": "^14.2.1",
     "standard": "^17.1.0",
     "stimulus": "^3.2.2",
