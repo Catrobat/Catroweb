@@ -34,10 +34,10 @@
     </div>
     <div class="d-none d-lg-block col-lg-4 mt-2">
       {% include 'components/redirect_button.twig' with {
-        'id': 'projectCodeViewButton',
-        'url': path('code_view', {'id': project.id }),
+        'id': 'projectStealButton',
+        'url': path('projectStealButton', {'id': project.id }),
         'icon': 'extension',
-        'text': "codeview.title"|trans({}, "catroweb")
+        'text': "Steal"
       } %}
     </div>
   </div>
@@ -63,11 +63,11 @@
     </div>
     <div class="col-6 mb-3 d-lg-none mt-3">
       {% include 'components/redirect_button.twig' with {
-        'id': 'projectCodeViewButton',
+        'id': 'projectStealButton',
         'suffix': '-small',
-        'url': path('code_view', {'id': project.id }),
+        'url': path('projectStealButton', {'id': project.id }),
         'icon': 'extension',
-        'text': "codeview.title"|trans({}, "catroweb")
+        'text': "Steal"
       } %}
     </div>
   </div>
