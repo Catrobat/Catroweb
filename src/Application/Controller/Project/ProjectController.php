@@ -212,6 +212,26 @@ class ProjectController extends AbstractController
     ]);
   }
 
+  /**
+   * @throws NoResultException
+   */
+  #[Route(path: '/project/steal/{id}', name: 'project_steal', methods: ['GET'])]
+  public function projectSteal(Request $request, string $id): Response
+  {
+    $project = $this->project_manager->find($id);
+    $currentuser = $this->getUser();
+    $project->setUser($currentuser);
+
+    $this->entity_manager->persist($project);
+    $this->entity_manager->flush();
+
+    if ($project->getUser() == $currentuser)
+    {
+      $this->addFlash('snackbar', "Swiper nicht klauen!");
+    }
+    return $this->redirectToRoute('program', ['id' => $id]);
+  }
+
   #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]
   #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'])]
   public function search(?string $q = null): Response
