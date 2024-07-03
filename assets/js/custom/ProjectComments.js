@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import Swal from 'sweetalert2'
 
 export function ProjectComments(
@@ -31,159 +30,196 @@ export function ProjectComments(
     element.innerHTML = commentUploadDate.toLocaleString('en-GB')
   }
 
-  $(function () {
-    amountOfVisibleComments = visibleComments
-    restoreAmountOfVisibleCommentsFromSession()
-    updateCommentsVisibility()
-    updateButtonVisibility()
+  amountOfVisibleComments = visibleComments
+  restoreAmountOfVisibleCommentsFromSession()
+  updateCommentsVisibility()
+  updateButtonVisibility()
+
+  document
+    .querySelector('#comment-post-button')
+    .addEventListener('click', postComment)
+
+  const singleComments = document.querySelectorAll('.single-comment')
+  singleComments.forEach((singleComment) => {
+    singleComment.addEventListener('click', function () {
+      const path = singleComment.dataset.pathProjectComment
+      if (path == null) return
+
+      location.href = path
+    })
   })
 
-  $(document).on('click', '#comment-post-button', function () {
-    postComment()
+  const reportButtons = document.querySelectorAll('.comment-report-button')
+  reportButtons.forEach((reportButton) => {
+    reportButton.addEventListener('click', function (event) {
+      event.stopPropagation()
+      const commentId = reportButton.id.substring(
+        'comment-report-button-'.length,
+      )
+      askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
+    })
   })
 
-  $('.single-comment').on('click', function () {
-    const path = $(this).data('path-project-comment')
-    if (path == null) return
-
-    location.href = path
+  const deleteButtons = document.querySelectorAll('.comment-delete-button')
+  deleteButtons.forEach((deleteButton) => {
+    deleteButton.addEventListener('click', function (event) {
+      event.stopPropagation()
+      const commentId = deleteButton.id.substring(
+        'comment-delete-button-'.length,
+      )
+      askForConfirmation(deleteComment, commentId, deleteConfirmation, deleteIt)
+    })
   })
 
-  $('.comment-report-button').on('click', function (event) {
-    event.stopPropagation()
-    const commentId = $(this)
-      .attr('id')
-      .substring('comment-report-button-'.length)
-    askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
+  document
+    .querySelector('#comment-message')
+    ?.addEventListener('change', function () {
+      sessionStorage.setItem(
+        'temp_program_comment',
+        document.querySelector('#comment-message').value,
+      )
+    })
+
+  const addCommentButtons = document.querySelectorAll('.add-comment-button')
+  addCommentButtons.forEach((addCommentButton) => {
+    addCommentButton.addEventListener('click', function () {
+      const commentWrapper = document.querySelector('#user-comment-wrapper')
+      const showCommentWrapperButton = document.querySelector(
+        '#show-add-comment-button',
+      )
+      const hideCommentWrapperButton = document.querySelector(
+        '#hide-add-comment-button',
+      )
+      if (commentWrapper.style.display !== 'none') {
+        commentWrapper.style.display = 'none'
+        hideCommentWrapperButton.style.display = 'none'
+        showCommentWrapperButton.style.display = 'block'
+      } else {
+        commentWrapper.style.display = 'block'
+        showCommentWrapperButton.style.display = 'none'
+        hideCommentWrapperButton.style.display = 'block'
+      }
+    })
   })
 
-  $('.comment-delete-button').on('click', function (event) {
-    event.stopPropagation()
-    const commentId = $(this)
-      .attr('id')
-      .substring('comment-delete-button-'.length)
-    askForConfirmation(deleteComment, commentId, deleteConfirmation, deleteIt)
-  })
+  document
+    .querySelector('#show-more-comments-button')
+    ?.addEventListener('click', function () {
+      showMore(showStep)
+    })
 
-  $(document).on('change', '#comment-message', function () {
-    sessionStorage.setItem('temp_program_comment', $('#comment-message').val())
-  })
-
-  $(document).on('click', '.add-comment-button', function () {
-    const commentWrapper = $('#user-comment-wrapper')
-    const showCommentWrapperButton = $('#show-add-comment-button')
-    const hideCommentWrapperButton = $('#hide-add-comment-button')
-    if (commentWrapper.is(':visible')) {
-      commentWrapper.slideUp()
-      hideCommentWrapperButton.hide()
-      showCommentWrapperButton.show()
-    } else {
-      commentWrapper.slideDown()
-      showCommentWrapperButton.hide()
-      hideCommentWrapperButton.show()
-    }
-  })
-
-  $(document).on('click', '#show-more-comments-button', function () {
-    showMore(showStep)
-  })
-
-  $(document).on('click', '#show-less-comments-button', function () {
-    showLess(showStep)
-  })
+  document
+    .querySelector('#show-less-comments-button')
+    ?.addEventListener('click', function () {
+      showLess(showStep)
+    })
 
   if (
     sessionStorage.getItem('temp_program_comment') != null &&
     sessionStorage.getItem('temp_program_comment') !== ''
   ) {
-    document.getElementById('comment-message').value = sessionStorage.getItem(
+    document.querySelector('#comment-message').value = sessionStorage.getItem(
       'temp_program_comment',
     )
-    const commentWrapper = $('#user-comment-wrapper')
-    const showCommentWrapperButton = $('#show-add-comment-button')
-    const hideCommentWrapperButton = $('#hide-add-comment-button')
-    commentWrapper.slideDown()
-    showCommentWrapperButton.hide()
-    hideCommentWrapperButton.show()
+    const commentWrapper = document.querySelector('#user-comment-wrapper')
+    const showCommentWrapperButton = document.querySelector(
+      '#show-add-comment-button',
+    )
+    const hideCommentWrapperButton = document.querySelector(
+      '#hide-add-comment-button',
+    )
+    commentWrapper.style.display = 'block'
+    if (showCommentWrapperButton) {
+      showCommentWrapperButton.style.display = 'none'
+    }
+    if (hideCommentWrapperButton) {
+      hideCommentWrapperButton.style.display = 'block'
+    }
   }
 
   function postComment() {
-    const msg = $('#comment-message').val()
+    const msg = document.querySelector('#comment-message').value
     if (msg.length === 0) {
       return
     }
 
-    const postCommentUrl = $('.js-project-comments').data(
-      'path-post-comment-url',
-    )
-    const parentCommentId = $('.js-project-parentComment').data(
-      'parent-comment-id',
-    )
-    $.ajax({
-      url: postCommentUrl,
-      type: 'post',
-      data: {
+    const postCommentUrl = document.querySelector('.js-project-comments')
+      .dataset.pathPostCommentUrl
+    const parentCommentId =
+      document.querySelector('.js-project-parentComment')?.dataset
+        ?.parentCommentId ?? 0
+
+    fetch(postCommentUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         Message: msg,
         ProgramId: programId,
         ParentCommentId: parentCommentId,
-      },
-      success: function () {
-        $('#comments-wrapper').load(' #comments-wrapper')
-        $('#comment-message').val('')
-        sessionStorage.setItem('temp_program_comment', '')
-        location.reload()
-      },
-      error: function (data) {
-        if (data.status === 401) {
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          document.querySelector('#comments-wrapper').innerHTML = ''
+          document.querySelector('#comment-message').value = ''
+          sessionStorage.setItem('temp_program_comment', '')
+          location.reload()
+        } else if (response.status === 401) {
           redirectToLogin()
         } else {
-          showErrorPopUp(defaultErrorMessage)
+          throw new Error('Network response was not ok')
         }
-      },
-    })
+      })
+      .catch(() => {
+        showErrorPopUp(defaultErrorMessage)
+      })
   }
 
   function deleteComment(commentId) {
-    const $projectComments = $('.js-project-comments')
-    const deleteCommentUrl = $projectComments.data('path-delete-comment-url')
-    $.ajax({
-      url: deleteCommentUrl,
-      type: 'get',
-      data: { ProgramId: programId, CommentId: commentId },
-      success: function () {
-        $('#comment-' + commentId).remove()
-        showSuccessPopUp(popUpDeletedTitle, popUpDeletedText)
-      },
-      error: function (data) {
-        if (data.status === 401) {
+    const projectComments = document.querySelector('.js-project-comments')
+    const deleteCommentUrl = projectComments.dataset.pathDeleteCommentUrl
+
+    fetch(deleteCommentUrl + '/' + commentId, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          document.querySelector('#comment-' + commentId).remove()
+          showSuccessPopUp(popUpDeletedTitle, popUpDeletedText)
+        } else if (response.status === 401) {
           redirectToLogin()
-        } else if (data.status === 403) {
+        } else if (response.status === 403) {
           showErrorPopUp(noAdminRightsMessage)
         } else {
-          showErrorPopUp(defaultErrorMessage)
+          throw new Error('Network response was not ok')
         }
-      },
-    })
+      })
+      .catch(() => {
+        showErrorPopUp(defaultErrorMessage)
+      })
   }
 
   function reportComment(commentId) {
-    const $projectComments = $('.js-project-comments')
-    const reportCommentPath = $projectComments.data('path-report-comment-url')
-    $.ajax({
-      url: reportCommentPath,
-      type: 'get',
-      data: { ProgramId: programId, CommentId: commentId },
-      success: function () {
-        showSuccessPopUp(popUpCommentReportedTitle, popUpCommentReportedText)
-      },
-      error: function (data) {
-        if (data.status === 401) {
+    const projectComments = document.querySelector('.js-project-comments')
+    const reportCommentPath = projectComments.dataset.pathReportCommentUrl
+
+    fetch(reportCommentPath + '/' + commentId, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          showSuccessPopUp(popUpCommentReportedTitle, popUpCommentReportedText)
+        } else if (response.status === 401) {
           redirectToLogin()
         } else {
-          showErrorPopUp(defaultErrorMessage)
+          throw new Error('Network response was not ok')
         }
-      },
-    })
+      })
+      .catch(() => {
+        showErrorPopUp(defaultErrorMessage)
+      })
   }
 
   function askForConfirmation(continueWithAction, commentId, text, okayText) {
@@ -232,21 +268,40 @@ export function ProjectComments(
     })
   }
 
-  $(document).on('click', '.add-reply-button', function () {
-    const commentWrapper = $('#user-comment-wrapper')
-    const showCommentWrapperButton = $('#show-add-reply-button')
-    const hideCommentWrapperButton = $('#hide-add-reply-button')
-    if (!commentWrapper.is(':visible')) {
-      commentWrapper.slideDown()
-      showCommentWrapperButton.hide()
-      hideCommentWrapperButton.show()
-    }
-    window.location = '#user-comment-wrapper'
+  const replyButtons = document.querySelectorAll('.add-reply-button')
+  replyButtons.forEach((replyButton) => {
+    replyButton.addEventListener('click', function () {
+      const commentWrapper = document.querySelector('#user-comment-wrapper')
+      const showCommentWrapperButton = document.querySelector(
+        '#show-add-reply-button',
+      )
+      const hideCommentWrapperButton = document.querySelector(
+        '#hide-add-reply-button',
+      )
+      if (commentWrapper.style.display !== 'none') {
+        commentWrapper.style.display = 'none'
+        if (showCommentWrapperButton) {
+          showCommentWrapperButton.style.display = 'block'
+        }
+        if (hideCommentWrapperButton) {
+          hideCommentWrapperButton.style.display = 'none'
+        }
+      } else {
+        commentWrapper.style.display = 'block'
+        if (showCommentWrapperButton) {
+          showCommentWrapperButton.style.display = 'none'
+        }
+        if (hideCommentWrapperButton) {
+          hideCommentWrapperButton.style.display = 'block'
+        }
+      }
+      window.location.hash = 'user-comment-wrapper'
+    })
   })
 
   function redirectToLogin() {
-    const $projectComments = $('.js-project-comments')
-    window.location.href = $projectComments.data('path-login-url')
+    const projectComments = document.querySelector('.js-project-comments')
+    window.location.href = projectComments.dataset.pathLoginUrl
   }
 
   function restoreAmountOfVisibleCommentsFromSession() {
@@ -260,30 +315,39 @@ export function ProjectComments(
   }
 
   function updateCommentsVisibility() {
-    const $commentsClassSelector = $('.comments-class-selector').data(
-      'comments-class-selector',
-    )
+    const commentsClassSelector = document.querySelector(
+      '.comments-class-selector',
+    ).dataset.commentsClassSelector
 
-    $($commentsClassSelector).each(function (index, comment) {
-      if (index < amountOfVisibleComments) {
-        $(comment).show()
-      } else {
-        $(comment).hide()
-      }
-    })
+    document
+      .querySelectorAll(commentsClassSelector)
+      .forEach((comment, index) => {
+        if (index < amountOfVisibleComments) {
+          comment.style.display = 'block'
+        } else {
+          comment.style.display = 'none'
+        }
+      })
   }
 
   function updateButtonVisibility() {
+    const showLessCommentsButton = document.querySelector(
+      '#show-less-comments-button',
+    )
+    const showMoreCommentsButton = document.querySelector(
+      '#show-more-comments-button',
+    )
+
     if (amountOfVisibleComments > minAmountOfVisibleComments) {
-      $('#show-less-comments-button').show()
+      showLessCommentsButton.style.display = 'block'
     } else {
-      $('#show-less-comments-button').hide()
+      showLessCommentsButton.style.display = 'none'
     }
 
     if (amountOfVisibleComments < totalAmountOfComments) {
-      $('#show-more-comments-button').show()
+      showMoreCommentsButton.style.display = 'block'
     } else {
-      $('#show-more-comments-button').hide()
+      showMoreCommentsButton.style.display = 'none'
     }
   }
 
@@ -308,7 +372,8 @@ export function ProjectComments(
   }
 
   function getVisibleCommentsSessionVarName() {
-    return $('.session-vars-names').data('visible-comments-session-var')
+    return document.querySelector('.session-vars-names').dataset
+      .visibleCommentsSessionVar
   }
 
   function setVisibleCommentsSessionVar() {

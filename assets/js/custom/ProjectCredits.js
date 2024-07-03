@@ -1,12 +1,10 @@
-import $ from 'jquery'
-
 export function ProjectCredits(
   programId,
   usersLanguage,
   myProgram,
   customTranslationApi,
 ) {
-  const credits = $('#credits')
+  const credits = document.getElementById('credits')
 
   if (!myProgram) {
     customTranslationApi.getCustomTranslation(
@@ -16,7 +14,7 @@ export function ProjectCredits(
     )
 
     function setCredits(value) {
-      credits.text(value)
+      credits.textContent = value
     }
   }
 }

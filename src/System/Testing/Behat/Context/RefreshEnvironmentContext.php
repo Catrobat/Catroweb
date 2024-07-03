@@ -8,7 +8,6 @@ use App\Storage\FileHelper;
 use App\System\Testing\Behat\ContextTrait;
 use App\System\Testing\DataFixtures\DataBaseUtils;
 use Behat\Behat\Context\Context;
-use Doctrine\DBAL\Exception;
 use Doctrine\ORM\Tools\ToolsException;
 
 class RefreshEnvironmentContext implements Context
@@ -34,8 +33,6 @@ class RefreshEnvironmentContext implements Context
    * to allow easy debugging at the end of a scenario. Also, we need to make sure that the DB is clean anyway.
    *
    * @BeforeScenario
-   *
-   * @throws Exception
    */
   public function databaseRollback(): void
   {

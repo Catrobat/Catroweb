@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 use App\Api_deprecated\Security\ApiTokenAuthenticator;
+use App\DB\Entity\User\User;
 use App\Security\Authentication\WebView\WebviewAuthenticator;
 use App\Security\Authentication\WebView\WebviewJWTAuthenticator;
 use App\Security\OAuth\HwiOauthUserProvider;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
   $containerConfigurator->extension(
@@ -17,20 +18,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         UserInterface::class => 'auto',
       ],
       'providers' => [
-        'chain_provider' => [
-          'chain' => [
-            'providers' => [
-              'sonata_userbundle',
-            ],
+        'user_provider' => [
+          'entity' => [
+            'class' => User::class,
+            'property' => 'username',
           ],
-        ],
-        'sonata_userbundle' => [
-          'id' => 'sonata.user.security.user_provider',
         ],
       ],
       'firewalls' => [
         'api_authentication_login' => [
-          'provider' => 'chain_provider',
+          'provider' => 'user_provider',
           'pattern' => '^/api/authentication',
           'methods' => ['POST'],
           'stateless' => true,
@@ -45,12 +42,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         'api' => [
           'pattern' => '^/api',
-          'provider' => 'chain_provider',
+          'provider' => 'user_provider',
           'stateless' => true,
           'jwt' => null,
         ],
         'api_checktoken' => [
-          'provider' => 'chain_provider',
+          'provider' => 'user_provider',
           'pattern' => '^.*?/api/checkToken/check.json',
           'stateless' => true,
           'custom_authenticators' => [
@@ -58,20 +55,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
         ],
         'api_upload' => [
-          'provider' => 'chain_provider',
+          'provider' => 'user_provider',
           'pattern' => '^.*?/api/upload/upload.json',
           'custom_authenticators' => [
             ApiTokenAuthenticator::class,
           ],
         ],
         'debug' => [
-          'provider' => 'chain_provider',
+          'provider' => 'user_provider',
           'pattern' => '^/debug',
           'security' => false,
         ],
         'main' => [
           'pattern' => '^/(?!(api/))',
-          'provider' => 'chain_provider',
+          'provider' => 'user_provider',
           'stateless' => false,
           'form_login' => [
             'default_target_path' => '/',
@@ -99,7 +96,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         'dev' => [
           'pattern' => '^/(_(profiler|wdt)|css|images|js)/',
-          'provider' => 'chain_provider',
+          'provider' => 'user_provider',
           'security' => false,
           'form_login' => [
             'always_use_default_target_path' => true,
@@ -327,13 +324,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'ROLE_ADMIN',
         ],
       ],
-    ]
-  );
-
-  $containerConfigurator->extension(
-    'acl',
-    [
-      'connection' => 'default',
     ]
   );
 };

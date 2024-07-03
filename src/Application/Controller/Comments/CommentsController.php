@@ -29,17 +29,17 @@ class CommentsController extends AbstractController
   /**
    * @throws \Exception
    */
-  #[Route(path: '/reportComment', name: 'report', methods: ['GET'])]
-  public function report(): Response
+  #[Route(path: '/reportComment/{id}', name: 'report', defaults: ['id' => 0], methods: ['DELETE'])]
+  public function report(int $id): Response
   {
     $user = $this->getUser();
     if (!$user instanceof UserInterface) {
       return new Response('', Response::HTTP_UNAUTHORIZED);
     }
 
-    $comment = $this->entity_manager->getRepository(UserComment::class)->find($_GET['CommentId']);
+    $comment = $this->entity_manager->getRepository(UserComment::class)->find($id);
     if (null === $comment) {
-      return new Response('No comment found for this id '.$_GET['CommentId'], Response::HTTP_NOT_FOUND);
+      return new Response('No comment found for this id '.$id, Response::HTTP_NOT_FOUND);
     }
 
     if ($comment->getIsDeleted()) {
@@ -49,14 +49,14 @@ class CommentsController extends AbstractController
     $comment->setIsReported(true);
     $this->entity_manager->flush();
 
-    return new Response('', Response::HTTP_OK);
+    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
 
   /**
    * @throws \Exception
    */
-  #[Route(path: '/deleteComment', name: 'delete', methods: ['GET'])]
-  public function deleteComment(): Response
+  #[Route(path: '/deleteComment/{id}', name: 'delete', defaults: ['id' => 0], methods: ['DELETE'])]
+  public function deleteComment(int $id): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -64,9 +64,13 @@ class CommentsController extends AbstractController
       return new Response('', Response::HTTP_UNAUTHORIZED);
     }
 
-    $comment = $this->entity_manager->getRepository(UserComment::class)->find($_GET['CommentId']);
+    if ($id <= 0) {
+      return new Response('Invalid comment id', Response::HTTP_BAD_REQUEST);
+    }
+
+    $comment = $this->entity_manager->getRepository(UserComment::class)->find($id);
     if (null === $comment) {
-      return new Response('No comment found for this id '.$_GET['CommentId'], Response::HTTP_NOT_FOUND);
+      return new Response('No comment found for this id '.$id, Response::HTTP_NOT_FOUND);
     }
 
     if ($comment->getIsDeleted()) {
@@ -87,11 +91,11 @@ class CommentsController extends AbstractController
     $this->entity_manager->persist($comment);
     $this->entity_manager->flush();
 
-    return new Response('', Response::HTTP_OK);
+    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
 
   #[Route(path: '/comment', name: 'comment', methods: ['POST'])]
-  public function postComment(NotificationManager $notification_service, ProjectManager $project_manager): Response
+  public function postComment(Request $request, NotificationManager $notification_service, ProjectManager $project_manager): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -99,21 +103,23 @@ class CommentsController extends AbstractController
       return new Response('', Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @var User|null $user */
-    $user = $this->getUser();
-    $project = $project_manager->find($_POST['ProgramId']);
+    $data = json_decode($request->getContent(), true);
+    $message = (string) $data['Message'];
+    $program_id = (string) $data['ProgramId'];
+    $parent_comment_id = (int) ($data['ParentCommentId'] ?? null);
+
+    $project = $project_manager->find($program_id);
     $temp_comment = new UserComment();
     $temp_comment->setUsername($user->getUserIdentifier());
     $temp_comment->setUser($user);
-    $temp_comment->setText($_POST['Message']);
+    $temp_comment->setText($message);
     $temp_comment->setProgram($project);
 
     $date_time_zone = new \DateTimeZone('UTC');
     $temp_comment->setUploadDate(date_create('now', $date_time_zone));
     $temp_comment->setIsReported(false);
     $temp_comment->setIsDeleted(false);
-    if (isset($_POST['ParentCommentId'])) {
-      $parent_comment_id = intval($_POST['ParentCommentId']);
+    if ($parent_comment_id > 0) {
       $temp_comment->setParentId($parent_comment_id);
     }
 
@@ -131,7 +137,7 @@ class CommentsController extends AbstractController
       $this->entity_manager->flush();
     }
 
-    return new Response('', Response::HTTP_OK);
+    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
 
   #[Route(path: '/translate/comment/{id}', name: 'translate_comment', methods: ['GET'])]

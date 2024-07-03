@@ -243,7 +243,7 @@ class BrowserContext extends MinkContext implements Context
     $field = $this->fixStepArgument($field);
     $field = $this->getSession()->getPage()->findField($field);
 
-    $valid = $this->getSession()->getDriver()->evaluateScript('return document.evaluate("'.str_replace('"', '\\"', $field->getXpath()).'", document, null, XPathResult.ANY_TYPE, null).iterateNext().checkValidity();');
+    $valid = $this->getSession()->getDriver()->evaluateScript('return document.evaluate("'.str_replace('"', '\"', $field->getXpath()).'", document, null, XPathResult.ANY_TYPE, null).iterateNext().checkValidity();');
     if ('not' === trim($not)) {
       Assert::assertFalse($valid, 'Field needs to be invalid but was valid');
     } else {

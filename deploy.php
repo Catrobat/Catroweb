@@ -147,11 +147,6 @@ task('sonata:admin:setup:acl', function () {
   run('bin/console sonata:admin:setup-acl');
 });
 
-task('clean:db:rollup', function () {
-  cd('{{release_path}}');
-  run('bin/console doctrine:migrations:rollup -n');
-});
-
 // dump the .env file as .env.local.php to speed up the loading of the env vars
 task('dump:env', function () {
   cd('{{release_path}}');
@@ -171,7 +166,6 @@ task('deploy', [
   'deploy:cache:clear',
   'deploy:writable',
   'deploy:symlink',
-  'clean:db:rollup',
   'database:migrate',
   'install:npm',
   'deploy:encore',

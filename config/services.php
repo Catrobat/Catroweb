@@ -52,6 +52,8 @@ use App\Admin\Tools\SendMailToUser\SendMailToUserAdmin;
 use App\Admin\Tools\SendMailToUser\SendMailToUserController;
 use App\Admin\Users\ReportedUsers\ReportedUsersAdmin;
 use App\Admin\Users\ReportedUsers\ReportedUsersController;
+use App\Admin\Users\RolesMatrixType;
+use App\Admin\Users\SecurityRolesBuilder;
 use App\Admin\Users\UserAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportController;
@@ -156,6 +158,7 @@ use App\User\EventListener\UserPostUpdateNotifier;
 use App\User\Notification\NotificationManager;
 use App\User\ResetPassword\PasswordResetRequestedSubscriber;
 use App\User\UserManager;
+use App\User\UserProvider;
 use App\Utils\CanonicalFieldsUpdater;
 use App\Utils\ElapsedTimeStringFormatter;
 use App\Utils\RequestHelper;
@@ -186,8 +189,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.mediapackage.path', 'resources/mediapackage/');
   $parameters->set('catrobat.mediapackage.sample.dir', '%catrobat.pubdir%tests/TestData/DataFixtures/MediaPackage/SampleMediaPackage/');
   $parameters->set('catrobat.mediapackage.sample.path', 'tests/TestData/DataFixtures/MediaPackage/SampleMediaPackage/');
-  $parameters->set('catrobat.mediapackage.font.dir', '%catrobat.pubdir%webfonts/fa-solid-900.ttf');
-  $parameters->set('catrobat.mediapackage.font.path', 'webfonts/fa-solid-900.ttf');
+  $parameters->set('catrobat.mediapackage.font.dir', '%catrobat.pubdir%/build/fonts/Roboto-Regular-webfont.ttf');
+  $parameters->set('catrobat.mediapackage.font.path', 'build/fonts/Roboto-Regular-webfont.ttf');
   $parameters->set('catrobat.pubdir', '%kernel.project_dir%/public/');
   $parameters->set('catrobat.resources.dir', '%kernel.project_dir%/public/resources/');
   $parameters->set('catrobat.screenshot.dir', '%catrobat.pubdir%resources/screenshots/');
@@ -240,13 +243,28 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
+  $services->alias(Sonata\AdminBundle\SonataConfiguration::class, 'sonata.admin.configuration');
+
+  $services->set(SecurityRolesBuilder::class, SecurityRolesBuilder::class)
+    ->args([service('security.authorization_checker'), service('sonata.admin.configuration'), service('translator')])
+    ->public()
+  ;
+
+  $services->set(RolesMatrixType::class, RolesMatrixType::class)
+    ->args([service(SecurityRolesBuilder::class)])
+    ->public()
+  ;
+
   $services->set(UserManager::class, UserManager::class)
     ->public()
   ;
 
-  $services->alias(Sonata\UserBundle\Entity\UserManager::class, 'sonata.user.manager.user');
+  $services->alias(UserProviderInterface::class, UserProvider::class);
 
-  $services->alias(UserProviderInterface::class, 'sonata.user.security.user_provider');
+  $services->set(UserProvider::class, UserProvider::class)
+    ->args([service(UserManager::class)])
+    ->public()
+  ;
 
   $services->set(ProjectManager::class, ProjectManager::class)
     ->public()
@@ -475,6 +493,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   $services->set(ProjectPostUpdateNotifier::class)
     ->tag('doctrine.orm.entity_listener', ['event' => 'postUpdate', 'entity' => Program::class])
+    ->tag('doctrine.orm.entity_listener', ['event' => 'postPersist', 'entity' => Program::class])
   ;
 
   $services->set(UserPostPersistNotifier::class)
@@ -613,7 +632,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set('admin.block.projects.overview', ProjectsAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Projects Overview', 'show_mosaic_button' => false, 'default' => true, 'code' => null, 'model_class' => Program::class, 'controller' => null])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Projects Overview', 'show_mosaic_button' => false, 'default' => true, 'code' => null, 'model_class' => Program::class, 'controller' => null, 'pager_type' => 'simple'])
     ->public()
   ;
 
@@ -673,8 +692,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set('admin.block.users.overview', UserAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'model_class' => User::class, 'label' => 'User Overview', 'show_mosaic_button' => false])
-    ->args([service(UserManager::class), null, null])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'model_class' => User::class, 'label' => 'User Overview', 'show_mosaic_button' => false, 'default' => true, 'code' => null, 'controller' => null, 'pager_type' => 'simple'])
   ;
 
   $services->set('admin.block.users.data_report', UserDataReportAdmin::class)

@@ -40,7 +40,7 @@ class TimeUtils
 
   public static function dateTimeFromScratch(string $time): ?\DateTime
   {
-    $dateTime = \DateTime::createFromFormat('Y-m-d\\TG\\:i\\:s\\.ve', $time);
+    $dateTime = \DateTime::createFromFormat('Y-m-d\TG\:i\:s\.ve', $time);
     if ($dateTime) {
       return $dateTime;
     }

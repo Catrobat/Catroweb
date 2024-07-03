@@ -1,111 +1,113 @@
-import $ from 'jquery'
 import { MDCTopAppBar } from '@material/top-app-bar'
 
-require('../../styles/layout/top_bar.scss')
+import '../../styles/layout/top_bar.scss'
 
-/**
- * Define elements
- */
 const topAppBarElement = document.querySelector('.mdc-top-app-bar')
 const mdcObject = new MDCTopAppBar(topAppBarElement)
 
-const $title = $('#top-app-bar__title')
-const $toggleSidebarButton = $('#top-app-bar__btn-sidebar-toggle')
-let $backButton = $('#top-app-bar__back__btn-back')
+const title = document.querySelector('#top-app-bar__title')
+const toggleSidebarButton = document.querySelector(
+  '#top-app-bar__btn-sidebar-toggle',
+)
+let backButton = document.querySelector('#top-app-bar__back__btn-back')
 
-const $searchButton = $('#top-app-bar__btn-search')
-const $searchBackButton = $('#top-app-bar__btn-search-back')
-const $searchClearButton = $('#top-app-bar__btn-search-clear')
-const $searchInput = $('#top-app-bar__search-input')
-const $searchForm = $('#top-app-bar__search-form')
+const searchButton = document.querySelector('#top-app-bar__btn-search')
+const searchBackButton = document.querySelector('#top-app-bar__btn-search-back')
+const searchClearButton = document.querySelector(
+  '#top-app-bar__btn-search-clear',
+)
+const searchInput = document.querySelector('#top-app-bar__search-input')
+const searchForm = document.querySelector('#top-app-bar__search-form')
 
-const $optionsButton = $('#top-app-bar__btn-options')
-const $optionsContainer = $('#top-app-bar__options-container')
+const optionsButton = document.querySelector('#top-app-bar__btn-options')
+const optionsContainer = document.querySelector(
+  '#top-app-bar__options-container',
+)
 
-const defaultAppBarHref = $title.attr('href')
-const defaultTitle = $title.html()
+const defaultAppBarHref = title.getAttribute('href')
+const defaultTitle = title.innerHTML
 
-/**
- * Register eventListener
- */
-$searchButton.on('click', () => {
+const PREVIOUS_SEARCH_URL_KEY = 'KEY_BEFORE_SEARCH_URL'
+const searchUrl = document.querySelector('.js-header').dataset.pathSearchUrl
+
+searchButton?.addEventListener('click', () => {
   showTopBarSearch()
 })
-$searchBackButton.on('click', () => {
+searchBackButton?.addEventListener('click', () => {
   handleSearchBackButton()
 })
-$searchClearButton.on('click', () => {
+searchClearButton?.addEventListener('click', () => {
   clearTopBarSearch()
 })
-$searchInput.on('input change', () => {
+searchInput?.addEventListener('input', () => {
   controlTopBarSearchClearButton()
 })
-$searchForm.on('submit', (event) => {
+searchInput?.addEventListener('change', () => {
+  controlTopBarSearchClearButton()
+})
+searchForm?.addEventListener('submit', (event) => {
   submitSearchForm(event)
 })
-$optionsButton.on('click', () => {
+optionsButton?.addEventListener('click', () => {
   showTopBarOptions()
 })
-$(document).on('click', (event) => {
-  if (!$optionsButton.is(event.target)) {
-    $optionsContainer.hide() // hide options container when user clicks
-  }
-})
 
-/**
- * Session
- */
-const PREVIOUS_SEARCH_URL_KEY = 'KEY_BEFORE_SEARCH_URL'
+if (optionsContainer && optionsButton) {
+  document.addEventListener('click', (event) => {
+    if (optionsButton !== event.target) {
+      optionsContainer.style.display = 'none'
+    }
+  })
+}
 
-/**
- * Dynamic data
- */
-const searchUrl = $('.js-header').data('path-search-url')
-
-/**
- * public
- */
 export function showTopBarDownload() {
   hideTopBars()
-  $('#top-app-bar__media-library-download').show()
+  document.querySelector('#top-app-bar__media-library-download').style.display =
+    'flex'
 }
 
 export function showTopBarDefault() {
   hideTopBars()
-  $('#top-app-bar__default').show()
+  document.querySelector('#top-app-bar__default').style.display = 'flex'
 }
 
-export function showCustomTopBarTitle(title, onBack) {
-  $title.text(title)
-  $title.removeAttr('href')
-  $backButton.hide()
+export function showCustomTopBarTitle(titleText, onBack) {
+  title.textContent = titleText
+  title.removeAttribute('href')
+  if (backButton) {
+    backButton.style.display = 'none'
+  }
 
-  $('.mdc-top-app-bar').css('top', 0)
+  document.querySelector('.mdc-top-app-bar').style.top = '0'
   mdcObject.setScrollTarget(document.createElement('div'))
   if (typeof onBack === 'function') {
-    $backButton = $('<button/>', {
-      id: 'top-app-bar__back__btn-back',
-      class: 'material-icons mdc-top-app-bar__action-item mdc-icon-button',
-      'aria-label': 'Back to previous page',
-      text: 'arrow_back',
-    }).insertAfter($toggleSidebarButton)
-    $toggleSidebarButton.hide()
-    $backButton.show()
-    $backButton.off('click').on('click', onBack)
+    backButton = document.createElement('button')
+    backButton.id = 'top-app-bar__back__btn-back'
+    backButton.className =
+      'material-icons mdc-top-app-bar__action-item mdc-icon-button'
+    backButton.setAttribute('aria-label', 'Back to previous page')
+    backButton.textContent = 'arrow_back'
+    toggleSidebarButton.parentNode.insertBefore(
+      backButton,
+      toggleSidebarButton.nextSibling,
+    )
+    toggleSidebarButton.style.display = 'none'
+    backButton.style.display = 'block'
+    backButton.addEventListener('click', onBack)
   }
 }
 
 export function showDefaultTopBarTitle() {
-  $title.html(defaultTitle)
-  $title.attr('href', defaultAppBarHref)
-  $toggleSidebarButton.show()
-  if ($backButton) $backButton.hide()
-  mdcObject.setScrollTarget(window) // reset to default
+  title.innerHTML = defaultTitle
+  title.setAttribute('href', defaultAppBarHref)
+  toggleSidebarButton.style.display = 'block'
+  if (backButton) backButton.style.display = 'none'
+  mdcObject.setScrollTarget(window)
 }
 
 function submitSearchForm(event) {
   event.preventDefault()
-  const query = $searchInput.val()
+  const query = searchInput.value
   if (!window.location.pathname.includes('/search/')) {
     // keeping track of last page that was no search page
     window.sessionStorage.setItem(PREVIOUS_SEARCH_URL_KEY, window.location.href)
@@ -114,7 +116,10 @@ function submitSearchForm(event) {
 }
 
 function hideTopBars() {
-  $('.mdc-top-app-bar__row').hide()
+  const topBarRows = document.querySelectorAll('.mdc-top-app-bar__row')
+  topBarRows.forEach((row) => {
+    row.style.display = 'none'
+  })
 }
 
 function handleSearchBackButton() {
@@ -131,28 +136,26 @@ function handleSearchBackButton() {
 }
 
 function showTopBarOptions() {
-  const container = $optionsContainer
-  container.show()
-  container.trigger('focus')
+  optionsContainer.style.display = 'flex'
+  optionsContainer.focus()
 }
 
 export function showTopBarSearch() {
   hideTopBars()
-  $('#top-app-bar__search').show()
-  $searchInput.trigger('focus')
+  document.querySelector('#top-app-bar__search').style.display = 'flex'
+  searchInput.focus()
 }
 
 export function controlTopBarSearchClearButton() {
-  if ($searchInput.val()) {
-    $searchClearButton.show()
+  if (searchInput.value) {
+    searchClearButton.style.display = 'block'
   } else {
-    $searchClearButton.hide()
+    searchClearButton.style.display = 'none'
   }
 }
 
 function clearTopBarSearch() {
-  const inputField = $searchInput
-  inputField.val('')
-  $searchClearButton.hide()
-  inputField.trigger('focus')
+  searchInput.value = ''
+  searchClearButton.style.display = 'none'
+  searchInput.focus()
 }

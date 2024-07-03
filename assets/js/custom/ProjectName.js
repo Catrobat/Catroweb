@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 export function ProjectName(
   programId,
   usersLanguage,
@@ -7,10 +5,14 @@ export function ProjectName(
   customTranslationApi,
   editorNavigation,
 ) {
-  const name = $('#name')
-  const editProgramButton = $('#edit-project-button')
+  const name = document.querySelector('#name')
+  const editProgramButton = document.querySelector('#edit-project-button')
 
-  if (!myProgram) {
+  if (myProgram) {
+    editProgramButton?.addEventListener('click', () => {
+      editorNavigation.show()
+    })
+  } else {
     customTranslationApi.getCustomTranslation(
       programId,
       usersLanguage.substring(0, 2),
@@ -18,11 +20,7 @@ export function ProjectName(
     )
 
     function setName(value) {
-      name.text(value)
+      name.textContent = value
     }
   }
-
-  editProgramButton.on('click', () => {
-    editorNavigation.show()
-  })
 }

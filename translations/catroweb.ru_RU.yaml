@@ -193,7 +193,7 @@ project:
   btnDiscard: Сбросить
   addComment: Написать комментарий
   thumbsUp: Палец вверх!
-  smile: Улыбка!
+  smile: Улыбаюсь!
   love: Люблю!
   wow: Вааау!
   linkTitle: Ссылка
@@ -216,7 +216,7 @@ project:
   deletedComment: '**Удалено**'
   replyLabel: ответить
   repliesLabel: oтветы
-  notForKids: Not safe for kids
+  notForKids: Не безопасно для детей
 remixGraph:
   title: Ремиксы
   showRemixGraph: 'Графа ремиксов'
@@ -901,7 +901,7 @@ studio:
     public_studios: 'Публичные студии'
     private_studios: 'Частные студии'
   details:
-    add_project: 'click to add the project'
+    add_project: 'нажмите, чтобы добавить проект'
     showMore: 'показать больше'
     showLess: 'свернуть'
     remove_project: 'Удалить из студии'
@@ -916,7 +916,7 @@ studio:
     decline: 'Отклонено'
     projects:
       title: 'Проекты'
-      addProject: 'Add your own projects'
+      addProject: 'Добавить свои собственные проекты'
     comments:
       title: 'Комментарии'
       type_something: 'Введите что-нибудь'
@@ -956,15 +956,15 @@ media_library:
       default: 'Тип: неизвестно'
 snackbar:
   project_not_found: 'Запрошенный проект недоступен'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
+  project_not_for_kids: 'Проект был отмечен как небезопасный для детей!'
+  project_safe_for_kids: 'Проект был отмечен безопасным для детей!'
+  project_not_for_kids_moderator: 'Проект был отмечен модератором. Вы не можете отменить это!'
 maintenanceinformations:
   maintenance_information:
     additional_info: 'Дополнительная информация: additionalinfo'
     feature_1: 'Функция featureName не доступна с maintenanceStart до maintenanceEnd'
     feature_2: 'Функция'
     feature_3: 'Функция'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+MarkNotForKids: Отметить как небезопасный для детей
+MarkSafeForKids: Отметить как безопасный для детей
 

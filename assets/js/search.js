@@ -1,60 +1,58 @@
-import $ from 'jquery'
 import {
   controlTopBarSearchClearButton,
   showTopBarSearch,
 } from './layout/top_bar'
 import { ProjectList } from './components/project_list'
 import { UserList } from './components/user_list'
+import '../styles/custom/search.scss'
 
-require('../styles/custom/search.scss')
+class Search {
+  constructor() {
+    this.searchElement = document.querySelector('.js-search')
+    this.query = this.searchElement.dataset.query
+    this.searchInput = document.querySelector('#top-app-bar__search-input')
+    this.oldQuery = this.searchInput.innerHTML = this.query
+    this.searchInput.value = this.oldQuery
+    showTopBarSearch()
+    controlTopBarSearchClearButton()
+    this.initProjects()
+  }
 
-$(() => {
-  const $search = $('.js-search')
-  const query = $search.data('query')
-  const searchInput = $('#top-app-bar__search-input')
-  const oldQuery = searchInput.html(query).text()
-  searchInput.val(oldQuery)
-  showTopBarSearch()
-  controlTopBarSearchClearButton()
+  initProjects() {
+    const searchProjects = document.querySelector('#search-projects')
+    const searchUsers = document.querySelector('#search-users')
+    const theme = this.searchElement.dataset.theme
+    const baseUrl = this.searchElement.dataset.baseUrl
+    const category = this.searchElement.dataset.projectCategory
+    const property = this.searchElement.dataset.projectProperty
+    const query = this.searchElement.dataset.query
+    const projectString = this.searchElement.dataset.projectTranslated
+    const noUsers = this.searchElement.dataset.noUsers
+    const noProjects = this.searchElement.dataset.noProjects
 
-  initProjects()
-})
-function initProjects() {
-  const $search = $('.js-search')
+    const projectUrl = `${baseUrl}/api/projects/search?query=${query}`
+    const userUrl = `${baseUrl}/api/users/search?query=${query}`
 
-  const $searchProjects = $('#search-projects')
-  const $searchUsers = $('#search-users')
-  const theme = $search.data('theme')
-  const baseUrl = $search.data('base-url')
-  const category = $search.data('project-category')
-  const property = $search.data('project-property')
-  const query = $search.data('query')
-  const projectString = $search.data('project-translated')
-  const noUsers = $search.data('no-users')
-  const noProjects = $search.data('no-projects')
+    this.list = new ProjectList(
+      searchProjects,
+      category,
+      projectUrl,
+      property,
+      theme,
+      30,
+      noProjects,
+    )
 
-  const projectUrl = baseUrl + '/api/projects/search?query=' + query
-  const userUrl = baseUrl + '/api/users/search?query=' + query
-
-  const list = new ProjectList(
-    $searchProjects[0],
-    category,
-    projectUrl,
-    property,
-    theme,
-    30,
-    noProjects,
-  )
-  $(this).data('list', list)
-
-  const userList = new UserList(
-    $searchUsers[0],
-    baseUrl,
-    userUrl,
-    theme,
-    projectString,
-    30,
-    noUsers,
-  )
-  $(this).data('list', userList)
+    this.userList = new UserList(
+      searchUsers,
+      baseUrl,
+      userUrl,
+      theme,
+      projectString,
+      30,
+      noUsers,
+    )
+  }
 }
+
+new Search()

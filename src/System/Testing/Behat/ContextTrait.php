@@ -643,13 +643,13 @@ trait ContextTrait
 
     // escape chars that should not be used as regex
     $pattern = str_replace('\\', '\\\\', $pattern);
-    $pattern = str_replace('[', '\\[', $pattern);
-    $pattern = str_replace(']', '\\]', $pattern);
-    $pattern = str_replace('?', '\\?', $pattern);
-    $pattern = str_replace('*', '\\*', $pattern);
-    $pattern = str_replace('(', '\\(', $pattern);
-    $pattern = str_replace(')', '\\)', $pattern);
-    $pattern = str_replace('+', '\\+', $pattern);
+    $pattern = str_replace('[', '\[', $pattern);
+    $pattern = str_replace(']', '\]', $pattern);
+    $pattern = str_replace('?', '\?', $pattern);
+    $pattern = str_replace('*', '\*', $pattern);
+    $pattern = str_replace('(', '\(', $pattern);
+    $pattern = str_replace(')', '\)', $pattern);
+    $pattern = str_replace('+', '\+', $pattern);
 
     // define regex wildcards
     $pattern = str_replace('REGEX_STRING_WILDCARD', '(.+?)', $pattern);

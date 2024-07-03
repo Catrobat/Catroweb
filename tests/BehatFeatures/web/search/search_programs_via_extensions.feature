@@ -34,7 +34,7 @@ Feature: Searching for programs with extensions
     And I should not see "project 3"
 
   Scenario: search for programs should work
-    When I am on "/app/search_old/mindstorms"
+    When I am on "/app/extension/search/mindstorms"
     And I wait for the page to be loaded
     Then I should see "Search results"
     And I should see "project 1"

@@ -1,33 +1,32 @@
 import { ProjectComments } from './ProjectComments'
 import { TranslateComments } from './TranslateComments'
-import $ from 'jquery'
 
 require('../../styles/custom/program.scss')
 
-const $projectComments = $('.js-project-comments')
+const projectComments = document.querySelector('.js-project-comments')
 
 ProjectComments(
-  $projectComments.data('project-id'),
+  projectComments.dataset.projectId,
   5,
   5,
   5,
-  $projectComments.data('total-number-of-comments'),
-  $projectComments.data('trans-cancel'),
-  $projectComments.data('trans-delete-it'),
-  $projectComments.data('trans-report-it'),
-  $projectComments.data('trans-are-you-sure'),
-  $projectComments.data('trans-no-way-of-return'),
-  $projectComments.data('trans-delete-confirmation'),
-  $projectComments.data('trans-report-confirmation'),
-  $projectComments.data('trans-pop-up-comment-reported-title'),
-  $projectComments.data('trans-pop-up-comment-reported-text'),
-  $projectComments.data('trans-pop-up-deleted-title'),
-  $projectComments.data('trans-pop-up-deleted-text'),
-  $projectComments.data('trans-no-admin-rights-message'),
-  $projectComments.data('trans-default-error-message'),
+  projectComments.dataset.totalNumberOfComments,
+  projectComments.dataset.transCancel,
+  projectComments.dataset.transDeleteIt,
+  projectComments.dataset.transReportIt,
+  projectComments.dataset.transAreYouSure,
+  projectComments.dataset.transNoWayOfReturn,
+  projectComments.dataset.transDeleteConfirmation,
+  projectComments.dataset.transReportConfirmation,
+  projectComments.dataset.transPopUpCommentReportedTitle,
+  projectComments.dataset.transPopUpCommentReportedText,
+  projectComments.dataset.transPopUpDeletedTitle,
+  projectComments.dataset.transPopUpDeletedText,
+  projectComments.dataset.transNoAdminRightsMessage,
+  projectComments.dataset.transDefaultErrorMessage,
 )
 
 new TranslateComments(
-  $projectComments.data('translated-by-line'),
-  $projectComments.data('google-translate-display-name'),
+  projectComments.dataset.translatedByLine,
+  projectComments.dataset.googleTranslateDisplayName,
 )

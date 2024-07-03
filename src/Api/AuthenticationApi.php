@@ -81,7 +81,6 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
 
       return null;
     }
-
     $user = $this->facade->getProcessor()->connectUserToAccount($id_token, $resource_owner);
     $token = $this->facade->getProcessor()->createJWTByUser($user);
     $refresh_token = $this->facade->getProcessor()->createRefreshTokenByUser($user);

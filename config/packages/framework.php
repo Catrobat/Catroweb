@@ -30,9 +30,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'php_errors' => [
         'log' => true,
       ],
-      'annotations' => [
-        'enabled' => false,
-      ],
     ]
   );
 };

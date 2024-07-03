@@ -28,15 +28,13 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
   public function validateFacebookIdToken(string $id_token): bool
   {
     try {
-      $public_key = getenv('FB_OAUTH_PUBLIC_KEY');
+      $public_key = $_ENV['FB_OAUTH_PUBLIC_KEY'] ?? '';
       $decoded = JWT::decode($id_token, new Key($public_key, 'RS256'));
     } catch (\Exception) {
       return false;
     }
 
-    if ($decoded->app_id !== getenv('FB_ID') || $decoded->expires_at < time()
-      || $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email)
-      || !isset($decoded->name)) {
+    if ($decoded->expires_at < time() || $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email) || !isset($decoded->name)) {
       return false;
     }
 
