@@ -19,12 +19,17 @@ use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
  */
 class ApkReadyAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'admin_catrobat_apk_ready';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_catrobat_apk_ready';
+  }
 
-  /**
-   * {@inheritdoc string}.
-   */
-  protected $baseRoutePattern = 'apk_ready';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'catrobat/apk/ready';
+  }
 
   #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void

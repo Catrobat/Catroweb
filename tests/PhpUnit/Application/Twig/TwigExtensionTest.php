@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Application\Twig;
 
-use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
+use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\Application\Twig\TwigExtension;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use PHPUnit\Framework\MockObject\MockObject;

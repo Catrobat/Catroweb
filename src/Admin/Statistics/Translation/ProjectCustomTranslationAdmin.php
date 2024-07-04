@@ -17,9 +17,17 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
  */
 class ProjectCustomTranslationAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'admin_catrobat_adminbundle_project_custom_translation';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_project_custom_translation';
+  }
 
-  protected $baseRoutePattern = 'project_custom_translation';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'statistics/translation/project/custom';
+  }
 
   #[\Override]
   protected function configureExportFields(): array

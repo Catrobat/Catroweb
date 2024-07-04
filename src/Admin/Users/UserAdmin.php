@@ -19,6 +19,12 @@ class UserAdmin extends AbstractAdmin
 {
   protected $classnameLabel = 'user';
 
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'user';
+  }
+
   protected function configureFormOptions(array &$formOptions): void
   {
     $formOptions['validation_groups'] = ['Default'];

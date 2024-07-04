@@ -14,7 +14,7 @@ Feature: Maintenance information
 
   Scenario: List all maintenance information:
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/maintenance information/list"
+    And I am on "/admin/user-communication/maintenance-info/list"
     And I wait for the page to be loaded
     Then I should see the ready maintenance information table:
       | Feature Name | Active   | LTM Code                                                  | Maintenance Start | Maintenance End | Additional Information | Icon  | Actions |

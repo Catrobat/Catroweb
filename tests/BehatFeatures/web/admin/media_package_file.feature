@@ -34,7 +34,7 @@ Feature: Media Package Files
 
   Scenario: List media package files sorted by ID
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/media_package_file/list"
+    And I am on "/admin/media-package/file/list"
     And I wait for the page to be loaded
     Then I should see the media package files table:
       | Id | Name   | Category   | Author   | Flavors          | Downloads | Active |
@@ -46,7 +46,7 @@ Feature: Media Package Files
 
   Scenario: List media package files sorted by downloads
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/media_package_file/list?filter%5B_sort_order%5D=ASC&filter%5B_sort_by%5D=downloads&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
+    And I am on "/admin/media-package/file/list?filter%5B_sort_order%5D=ASC&filter%5B_sort_by%5D=downloads&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the media package files table:
       | Id | Name   | Category   | Author   | Flavors          | Downloads | Active |
@@ -58,7 +58,7 @@ Feature: Media Package Files
 
   Scenario: Delete first media package file
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/media_package_file/list"
+    And I am on "/admin/media-package/file/list"
     And I wait for the page to be loaded
     Then I should see the media package files table:
       | Id | Name   | Category   | Author   | Flavors          | Downloads | Active |
@@ -67,7 +67,7 @@ Feature: Media Package Files
       | 3  | File 3 | category 2 | Superman | pocketcode       | 3         | 1      |
       | 4  | File 4 | category 2 | Gregor   | pocketcode       | 4         | 1      |
       | 5  | File 5 | category 3 | Gregor   | luna             | 5         | 1      |
-    Then I am on "/admin/media_package_file/1/delete"
+    Then I am on "/admin/media-package/file/1/delete"
     And I wait for the page to be loaded
     Then I click on the first ".btn-danger" button
     And I wait for the page to be loaded
@@ -81,7 +81,7 @@ Feature: Media Package Files
 
   Scenario: Adding a media package file
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/media_package_file/list"
+    And I am on "/admin/media-package/file/list"
     And I wait for the page to be loaded
     Then I should see the media package files table:
       | Id | Name   | Category   | Author   | Flavors          | Downloads | Active |
@@ -92,14 +92,14 @@ Feature: Media Package Files
       | 5  | File 5 | category 3 | Gregor   | luna             | 5         | 1      |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/media_package_file/create"
+    Then I should be on "/admin/media-package/file/create"
     When I attach the avatar "galaxy.jpg" to "File"
     Then I write "New file" in textarea with label "Name"
     Then I write "Adminius" in textarea with label "Author"
     Then I select flavor "pocketcode" for media package file
     Then I select flavor "luna" for media package file
     Then I click ".btn-success"
-    And I go to "/admin/media_package_file/list"
+    And I go to "/admin/media-package/file/list"
     And I wait for the page to be loaded
     Then I should see the media package files table:
       | Id | Name     | Category   | Author   | Flavors          | Downloads | Active |

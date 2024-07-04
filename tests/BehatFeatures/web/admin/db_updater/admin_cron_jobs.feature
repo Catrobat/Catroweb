@@ -9,7 +9,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
   Scenario: All cron jobs should be shown with some statistics
     Given I run the cron job command
     And I log in as "Admin"
-    When I am on "/admin/cronjobs/list"
+    When I am on "/admin/system/cron-job/list"
     And I wait for the page to be loaded
     Then I should see "Cron Jobs"
     And I should see the cron jobs table:
@@ -26,7 +26,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
 
   Scenario: Cron jobs can be manually triggered
     Given I log in as "Admin"
-    When I am on "/admin/cronjobs/list"
+    When I am on "/admin/system/cron-job/list"
     And I wait for the page to be loaded
     Then I should see "Manually trigger the cron job"
     And I should see "Step-by-step guide"
@@ -34,14 +34,14 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     And there should be "0" cron jobs in the database
     When I click "#btn-trigger-cron-jobs"
     Then I should see "Cron jobs finished successfully"
-    When I am on "/admin/cronjobs/list"
+    When I am on "/admin/system/cron-job/list"
     And I wait for the page to be loaded
     And there should be "10" cron jobs in the database
 
   Scenario: Cron jobs can be reset
     Given I log in as "Admin"
     And I run the cron job command
-    And I am on "/admin/cronjobs/list"
+    And I am on "/admin/system/cron-job/list"
     And I wait for the page to be loaded
     Then I should see "Manually trigger the cron job"
     And I should see "Step-by-step guide"

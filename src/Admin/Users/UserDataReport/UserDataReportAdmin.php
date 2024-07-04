@@ -15,9 +15,17 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
  */
 class UserDataReportAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'admin_userdata';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_userdata';
+  }
 
-  protected $baseRoutePattern = 'stored_userdata';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'user/data-report';
+  }
 
   /**
    * {@inheritdoc}

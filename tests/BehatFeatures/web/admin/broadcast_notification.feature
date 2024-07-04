@@ -13,7 +13,7 @@ Feature: Admin Broadcast Notification
 
   Scenario: Send out Notifications
     Given I log in as "Catrobat"
-    And I am on "/admin/broadcast/list"
+    And I am on "/admin/user-communication/notification/list"
     And I wait for the page to be loaded
     And the element "#msg" should be visible
     And I fill in "msg" with "Test Message"

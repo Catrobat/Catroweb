@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Admin\Tools\Maintenance;
 
-use App\Admin\Tools\Maintenance\RemovableMemory;
+use App\Admin\System\Maintenance\RemovableMemory;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Admin\Tools\Maintenance\RemovableMemory
+ * @covers \App\Admin\System\Maintenance\RemovableMemory
  *
  * @internal
  */

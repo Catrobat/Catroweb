@@ -18,7 +18,7 @@ Feature: APK-Generation Pending in Admin Area
 
   Scenario: List should be complete and sorted after Apk Request Time DESC
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/apk_ready/list"
+    And I am on "/admin/catrobat/apk/ready/list"
     And I wait for the page to be loaded
     Then I should see the ready apks table:
       | Id | User     | Name      | Apk Request Time   |
@@ -28,28 +28,28 @@ Feature: APK-Generation Pending in Admin Area
 
   Scenario: The Rebuild button should rebuild apk and set state to pending. Entry shouldn't be in list anymore
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/apk_ready/list"
+    And I am on "/admin/catrobat/apk/ready/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_ready/3/requestApkRebuild"
+    Then I am on "/admin/catrobat/apk/ready/3/requestApkRebuild"
     And I wait for the page to be loaded
-    When I am on "/admin/apk_ready/list"
+    When I am on "/admin/catrobat/apk/ready/list"
     And I wait for the page to be loaded
     Then I should not see "program 3"
     And I wait for the page to be loaded
-    When I am on "/admin/apk_pending/list"
+    When I am on "/admin/catrobat/apk/pending/list"
     And I wait for the page to be loaded
     Then I should see "program 3"
 
   Scenario: The Reset button should reset the apk status, the request time and entry shouldn't be in list anymore
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/apk_ready/list"
+    And I am on "/admin/catrobat/apk/ready/list"
     And I wait for the page to be loaded
-    And I am on "/admin/apk_ready/3/resetApkBuildStatus"
+    And I am on "/admin/catrobat/apk/ready/3/resetApkBuildStatus"
     And I wait for the page to be loaded
-    When I am on "/admin/apk_ready/list"
+    When I am on "/admin/catrobat/apk/ready/list"
     And I wait for the page to be loaded
     Then I should not see "program 3"
     And I wait for the page to be loaded
-    When I am on "/admin/apk_pending/list"
+    When I am on "/admin/catrobat/apk/pending/list"
     And I wait for the page to be loaded
     Then I should not see "program 3"
