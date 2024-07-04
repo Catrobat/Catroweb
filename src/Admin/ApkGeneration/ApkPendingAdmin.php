@@ -22,9 +22,17 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
  */
 class ApkPendingAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'admin_catrobat_apk_pending';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_catrobat_apk_pending';
+  }
 
-  protected $baseRoutePattern = 'apk_pending';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'catrobat/apk/pending';
+  }
 
   #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void

@@ -33,9 +33,17 @@ class ApproveProjectsAdmin extends AbstractAdmin
 {
   use ProjectPreUpdateTrait;
 
-  protected $baseRouteName = 'admin_approve_programs';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_approve_projects';
+  }
 
-  protected $baseRoutePattern = 'approve';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'project/approval';
+  }
 
   private ?ExtractedCatrobatFile $extractedProject = null;
 

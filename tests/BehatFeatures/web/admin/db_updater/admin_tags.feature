@@ -16,7 +16,7 @@ Feature: The admin tags view provides a detailed list about all tags and allows 
 
   Scenario: All tags should be displayed with some stats
     Given I log in as "Admin"
-    And I am on "/admin/tags/list"
+    And I am on "admin/system/db/tags/list"
     And I wait for the page to be loaded
     Then I should see "Tags"
     And I should see the tags table:
@@ -26,7 +26,7 @@ Feature: The admin tags view provides a detailed list about all tags and allows 
 
   Scenario: Tags can be updated
     Given I log in as "Admin"
-    And I am on "/admin/tags/list"
+    And I am on "admin/system/db/tags/list"
     And I wait for the page to be loaded
     Then I should see "Update tags"
     And I should see "Step-by-step guide"
@@ -37,7 +37,7 @@ Feature: The admin tags view provides a detailed list about all tags and allows 
     And I wait for the page to be loaded
     Then I should see "Tags have been successfully updated"
     And there should be "8" tags in the database
-    And I am on "/admin/tags/list"
+    And I am on "admin/system/db/tags/list"
     And I wait for the page to be loaded
     And I should see "Tags"
     And I should see the tags table:

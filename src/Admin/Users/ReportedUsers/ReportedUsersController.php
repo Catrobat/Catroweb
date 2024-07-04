@@ -16,7 +16,7 @@ class ReportedUsersController extends CRUDController
   public function createUrlProjectsAction(): RedirectResponse
   {
     $filter = [
-      'reportedUser' => [
+      'reported_user' => [
         'value' => $this->admin->getSubject()->getId(),
       ],
     ];

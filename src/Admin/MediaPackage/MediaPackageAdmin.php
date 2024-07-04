@@ -16,9 +16,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class MediaPackageAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'adminmedia_package_package';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_media_package_package';
+  }
 
-  protected $baseRoutePattern = 'media_package';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'media-package';
+  }
 
   /**
    * {@inheritdoc}

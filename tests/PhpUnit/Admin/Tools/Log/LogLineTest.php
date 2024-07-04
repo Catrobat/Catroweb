@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Admin\Tools\Log;
 
-use App\Admin\Tools\Logs\Controller\LogsController;
-use App\Admin\Tools\Logs\LogLine;
+use App\Admin\System\Logs\LogLine;
+use App\Admin\System\Logs\LogsController;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -13,7 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 /**
  * @internal
  *
- * @covers \App\Admin\Tools\Logs\LogLine
+ * @covers \App\Admin\System\Logs\LogLine
  */
 class LogLineTest extends DefaultTestCase
 {

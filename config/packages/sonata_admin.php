@@ -74,7 +74,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
         ],
         'groups' => [
-          'sonata.admin.group.programs' => [
+          'sonata.admin.group.projects' => [
             'label' => 'Projects',
             'translation_domain' => 'catroweb',
             'icon' => '<i class="fa fa-cubes"></i>',
@@ -82,6 +82,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.projects.overview',
               'admin.block.projects.approve',
               'admin.block.projects.reported',
+              'admin.block.featured.projects',
+              'admin.block.example.projects',
             ],
           ],
           'sonata.admin.group.users' => [
@@ -103,15 +105,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.comments.reported',
             ],
           ],
-          'sonata.admin.group.featured' => [
-            'label' => 'Special Projects',
-            'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-bullhorn"></i>',
-            'items' => [
-              'admin.block.featured.program',
-              'admin.block.example.program',
-            ],
-          ],
           'sonata.admin.group.mediapackage' => [
             'label' => 'Media Package',
             'translation_domain' => 'catroweb',
@@ -131,37 +124,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.apk.list',
             ],
           ],
-          'sonata.admin.group.survey' => [
-            'label' => 'Survey',
+          'sonata.admin.group.user_communication' => [
+            'label' => 'User communication',
             'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-bar-chart"></i>',
+            'icon' => '<i class="fa fa-bullhorn"></i>',
             'items' => [
               'admin.block.survey',
-            ],
-          ],
-          'sonata.admin.group.db_updater' => [
-            'label' => 'DB Updater',
-            'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-cogs"></i>',
-            'items' => [
-              'admin.block.cron_jobs',
-              'admin.block.special_updater',
-              'admin.block.flavors',
-              'admin.block.achievements',
-              'admin.block.extensions',
-              'admin.block.tags',
-            ],
-          ],
-          'sonata.admin.group.tools' => [
-            'label' => 'Tools',
-            'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-cogs"></i>',
-            'items' => [
-              'admin.block.tools.maintain',
-              'admin.block.tools.logs',
               'admin.block.tools.broadcast',
               'admin.block.tools.mail',
-              'admin.block.tools.feature_flag',
               'admin.block.tools.maintenance_information',
             ],
           ],
@@ -173,6 +143,22 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.statistics.project_machine_translation',
               'admin.block.statistics.project_custom_translation',
               'admin.block.statistics.comment_machine_translation',
+            ],
+          ],
+          'sonata.admin.group.tools' => [
+            'label' => 'System Management',
+            'translation_domain' => 'catroweb',
+            'icon' => '<i class="fa fa-cogs"></i>',
+            'items' => [
+              'admin.block.tools.maintain',
+              'admin.block.tools.logs',
+              'admin.block.tools.feature_flag',
+              'admin.block.cron_jobs',
+              'admin.block.special_updater',
+              'admin.block.flavors',
+              'admin.block.achievements',
+              'admin.block.extensions',
+              'admin.block.tags',
             ],
           ],
         ],

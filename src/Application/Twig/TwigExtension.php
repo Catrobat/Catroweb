@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Twig;
 
-use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
+use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;

@@ -13,7 +13,7 @@ Feature: Admin Preview Mail
 
 Scenario: Valid Confirmation Email Template:
   Given I log in as "Admin" with the password "123456"
-  And I am on "/admin/mail/list"
+  And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
   When I select option 1 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field
@@ -24,7 +24,7 @@ Scenario: Valid Confirmation Email Template:
 
 Scenario: Valid Reset Email Template:
   Given I log in as "Admin" with the password "123456"
-  And I am on "/admin/mail/list"
+  And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
   When I select option 2 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field
@@ -35,7 +35,7 @@ Scenario: Valid Reset Email Template:
 
 Scenario: Valid Simple Message Email Template:
   Given I log in as "Admin" with the password "123456"
-  And I am on "/admin/mail/list"
+  And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
   When I select option 3 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field
@@ -48,7 +48,7 @@ Scenario: Valid Simple Message Email Template:
 
 Scenario: Invalid Subject Simple Message Email Template:
   Given I log in as "Admin" with the password "123456"
-  And I am on "/admin/mail/list"
+  And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
   When I select option 3 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field
@@ -59,7 +59,7 @@ Scenario: Invalid Subject Simple Message Email Template:
 
 Scenario: Invalid Content Simple Message Email Template:
   Given I log in as "Admin" with the password "123456"
-  And I am on "/admin/mail/list"
+  And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
   When I select option 3 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field

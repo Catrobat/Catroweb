@@ -38,7 +38,7 @@
             {% if _tab_menu is not empty %}
               {{ _tab_menu|raw }}
             {% endif %}
-            {% if app.request.requesturi == '/admin/apk_pending/list' %}
+            {% if app.request.requesturi == '/admin/catrobat/apk/pending/list' %}
               <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('resetPendingProjects') }}">Reset all</a>
               <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('rebuildAllApk') }}">Rebuild all</a>
             {% endif %}

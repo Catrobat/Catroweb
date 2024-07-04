@@ -35,7 +35,7 @@ Feature: Admin reported users
   @disabled
   Scenario: List reported users sorted by reported comments
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getReportedCommentsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
+    And I am on "/admin/user/report/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getReportedCommentsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the reported table:
       | #Reported Comments | #Reported Projects | Username | Email               |
@@ -47,7 +47,7 @@ Feature: Admin reported users
   @disabled
   Scenario: List reported users sorted by reported programs
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getProgramInappropriateReportsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
+    And I am on "/admin/user/report/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getProgramInappropriateReportsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the reported table:
       | #Reported Comments | #Reported Projects | Username | Email               |
@@ -57,7 +57,7 @@ Feature: Admin reported users
 
   Scenario: Show reported Programs by user
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/reported_users/list"
+    And I am on "/admin/user/report/list"
     And I wait for the page to be loaded
     Then I should see the reported table:
       | #Reported Comments | #Reported Projects | Username | Email               |
@@ -65,11 +65,11 @@ Feature: Admin reported users
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     Then I click on xpath "body/div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr[1]/td[4]/div/a[2]"
     And I wait for the page to be loaded
-    Then I should be on "/admin/reported_projects/list?filter%5BreportedUser%5D%5Bvalue%5D=2"
+    Then I should be on "/admin/project/report/list?filter%5BreportedUser%5D%5Bvalue%5D=2"
 
   Scenario: Show reported Programs by user
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/reported_users/list"
+    And I am on "/admin/user/report/list"
     And I wait for the page to be loaded
     Then I should see the reported table:
       | #Reported Comments | #Reported Projects | Username | Email               |
@@ -77,4 +77,4 @@ Feature: Admin reported users
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     Then I click on xpath "body/div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr[1]/td[4]/div/a[2]"
     And I wait for the page to be loaded
-    Then I should be on "/admin/reported_projects/list?filter%5BreportedUser%5D%5Bvalue%5D=3"
+    Then I should be on "/admin/project/report/list?filter%5BreportedUser%5D%5Bvalue%5D=3"

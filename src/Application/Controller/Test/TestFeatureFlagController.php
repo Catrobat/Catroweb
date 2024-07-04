@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\Test;
 
-use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
+use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

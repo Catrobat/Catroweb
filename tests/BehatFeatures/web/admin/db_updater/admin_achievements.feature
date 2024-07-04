@@ -21,7 +21,7 @@ Feature: The admin achievements view provides a detailed list about all achievem
 
   Scenario: All achievements should be displayed with some stats
     Given I log in as "Admin"
-    And I am on "/admin/achievements/list"
+    And I am on "/admin/system/db/achievements/list"
     And I wait for the page to be loaded
     Then I should see "Achievements"
     And I should see the achievements table:
@@ -31,7 +31,7 @@ Feature: The admin achievements view provides a detailed list about all achievem
 
   Scenario: Achievements can be updated
     Given I log in as "Admin"
-    And I am on "/admin/achievements/list"
+    And I am on "/admin/system/db/achievements/list"
     And I wait for the page to be loaded
     Then I should see "Achievements"
     And I should see "Step-by-step guide"

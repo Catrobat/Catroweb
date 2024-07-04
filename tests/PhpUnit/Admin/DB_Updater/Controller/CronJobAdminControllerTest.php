@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Admin\DB_Updater\Controller;
 
-use App\Admin\DB_Updater\Controller\CronJobsAdminController;
+use App\Admin\System\CronJobs\CronJobsAdminController;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 

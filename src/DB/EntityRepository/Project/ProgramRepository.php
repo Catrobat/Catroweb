@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\Project;
 
-use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
+use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
