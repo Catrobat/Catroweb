@@ -34,13 +34,21 @@
     </div>
     <div class="d-none d-lg-block col-lg-4 mt-2">
       {% include 'components/redirect_button.twig' with {
-        'id': 'projectStealButton',
-        'url': path('projectStealButton', {'id': project.id }),
+        'id': 'projectCodeViewButton',
+        'url': path('code_view', {'id': project.id }),
         'icon': 'extension',
-        'text': "Steal"
+        'text': "codeview.title"|trans({}, "catroweb")
       } %}
     </div>
   </div>
+  {% if project.user != current_user %}
+  <div class="row">
+    <form action="{{ path('projectStealButton', {'id': project.id }) }}" method="post">
+      <input type="hidden" id="project-id" value="{{ project.id }}">
+      <button type="submit" class="btn btn-primary">Steal</button>
+    </form>
+  </div>
+  {% endif %}
 
   {% if project.getNotForKids() %}
   <div class="row">
@@ -59,15 +67,6 @@
         'url': path('code_statistics', {'id': project.id }),
         'icon': 'show_chart',
         'text': "statistics"|trans({}, "catroweb")
-      } %}
-    </div>
-    <div class="col-6 mb-3 d-lg-none mt-3">
-      {% include 'components/redirect_button.twig' with {
-        'id': 'projectStealButton',
-        'suffix': '-small',
-        'url': path('projectStealButton', {'id': project.id }),
-        'icon': 'extension',
-        'text': "Steal"
       } %}
     </div>
   </div>

@@ -109,6 +109,7 @@ class ProjectController extends AbstractController
       'project_details' => $project_details,
       'my_project' => $my_project,
       'logged_in' => $logged_in,
+      'current_user' => $user,
       'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
       'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
@@ -211,7 +212,7 @@ class ProjectController extends AbstractController
     ]);
   }
 
-    #[Route(path: '/projectStealButton/{id}', name: 'projectStealButton', methods: ['GET'])]
+    #[Route(path: '/projectStealButton/{id}', name: 'projectStealButton', methods: ['POST'])]
     public function projectSteal(string $id): Response
     {
         $project = $this->project_manager->find($id);
