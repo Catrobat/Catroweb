@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e96bc8a19d74bef1531d399a82201650",
+    "content-hash": "15b9e843ae050f66ce1ae50a03429445",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -14884,16 +14884,16 @@
         },
         {
             "name": "friends-of-behat/symfony-extension",
-            "version": "v2.5.0",
+            "version": "v2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/SymfonyExtension.git",
-                "reference": "92653f5c8a5d14300434411eb76aed584802e722"
+                "reference": "dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/92653f5c8a5d14300434411eb76aed584802e722",
-                "reference": "92653f5c8a5d14300434411eb76aed584802e722",
+                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd",
+                "reference": "dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd",
                 "shasum": ""
             },
             "require": {
@@ -14946,9 +14946,9 @@
             "description": "Integrates Behat with Symfony.",
             "support": {
                 "issues": "https://github.com/FriendsOfBehat/SymfonyExtension/issues",
-                "source": "https://github.com/FriendsOfBehat/SymfonyExtension/tree/v2.5.0"
+                "source": "https://github.com/FriendsOfBehat/SymfonyExtension/tree/v2.6.0"
             },
-            "time": "2024-01-11T14:57:03+00:00"
+            "time": "2024-07-03T15:49:43+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
