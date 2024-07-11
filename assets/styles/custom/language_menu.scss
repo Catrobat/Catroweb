@@ -33,6 +33,10 @@
   & .radio {
     margin-right: 0.75rem;
   }
+
+  &:hover {
+    background-color: #dfeaf4;
+  }
 }
 .language-button-container {
   background: white;

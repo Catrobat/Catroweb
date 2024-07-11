@@ -4,14 +4,14 @@
 
 <div class="language-body-overlay"></div>
 <div class="language-body">
-    <div class="language-header">Language</div>
+    <div class="language-header">{{ "languageSelection"|trans({}, "catroweb") }}</div>
     <div class="language-option-container" >
         {% set languageOptionList = getLanguageOptions() %}
         {% for languageOption in languageOptionList %}
-            <div class="language-option" role="option">
+            <label for="{{ languageOption[0] }}" class="language-option" role="option">
                 <input class="language-option radio" type="radio" id="{{ languageOption[0] }}" name="language_option" value="{{ languageOption[0] }}" {% if languageOption[2] %}checked{% endif %}>
-                <label for="{{ languageOption[0] }}">{{ languageOption[1] }}</label>
-            </div>
+                <span>{{ languageOption[1] }}</span>
+            </label>
         {% else %}
             <div>{{ 'menu.noLanguageOptionsAvailable'|trans({}, "catroweb") }}</div>
         {% endfor %}
