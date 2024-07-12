@@ -1,47 +1,48 @@
-import $ from 'jquery'
 import { showSnackbar } from './components/snackbar'
-
 import { MDCChipSet } from '@material/chips'
 import { ApiFetch } from './api/ApiHelper'
-const chipset = new MDCChipSet(document.querySelector('.mdc-chip-set'))
-const tabPaneElements = document.querySelectorAll('.tab-pane')
+import '../styles/notifications_overview.scss'
 
-chipset.listen('MDCChip:interaction', function (event) {
-  document.querySelector('.show.active').classList.remove('show', 'active')
-  tabPaneElements[event.detail.index].classList.add('show', 'active')
-})
+document.addEventListener('DOMContentLoaded', () => {
+  const chipset = new MDCChipSet(document.querySelector('.mdc-chip-set'))
+  const tabPaneElements = document.querySelectorAll('.tab-pane')
 
-require('../styles/notifications_overview.scss')
+  chipset.listen('MDCChip:interaction', function (event) {
+    document.querySelector('.show.active').classList.remove('show', 'active')
+    tabPaneElements[event.detail.index].classList.add('show', 'active')
+  })
 
-$(() => {
-  const $notifications = $('.js-notifications')
+  const notificationsElement = document.querySelector('.js-notifications')
   const userNotifications = new UserNotifications(
-    $notifications.data('base-url') + '/api/notifications/read',
-    $notifications.data('fetch-url'),
-    $notifications.data('something-went-wrong-error'),
-    $notifications.data('notifications-clear-error'),
-    $notifications.data('notifications-unauthorized-error'),
-    $notifications.data('all-notifications-count'),
-    $notifications.data('follow-notification-count'),
-    $notifications.data('reaction-notification-count'),
-    $notifications.data('comment-notification-count'),
-    $notifications.data('remix-notification-count'),
-    $notifications.data('profile-path'),
-    $notifications.data('project-path'),
-    $notifications.data('img-asset'),
+    notificationsElement.dataset.baseUrl + '/api/notifications/read',
+    notificationsElement.dataset.fetchUrl,
+    notificationsElement.dataset.somethingWentWrongError,
+    notificationsElement.dataset.notificationsClearError,
+    notificationsElement.dataset.notificationsUnauthorizedError,
+    notificationsElement.dataset.allNotificationsCount,
+    notificationsElement.dataset.followNotificationCount,
+    notificationsElement.dataset.reactionNotificationCount,
+    notificationsElement.dataset.commentNotificationCount,
+    notificationsElement.dataset.remixNotificationCount,
+    notificationsElement.dataset.profilePath,
+    notificationsElement.dataset.projectPath,
+    notificationsElement.dataset.imgAsset,
   )
 
   userNotifications.markAllRead()
 
-  $('.js-notification-interaction').on('click', function () {
-    userNotifications.redirectUser(
-      $(this).attr('data-notification-instance'),
-      $(this).attr('data-notification-redirect'),
-    )
-  })
+  document
+    .querySelectorAll('.js-notification-interaction')
+    .forEach((element) => {
+      element.addEventListener('click', () => {
+        userNotifications.redirectUser(
+          element.getAttribute('data-notification-instance'),
+          element.getAttribute('data-notification-redirect'),
+        )
+      })
+    })
 })
 
-// eslint-disable-next-line no-unused-vars
 class UserNotifications {
   constructor(
     markAllSeen,
@@ -94,100 +95,108 @@ class UserNotifications {
 
   _initListeners() {
     const self = this
-    $(document).on('click', '#all-notif', function () {
-      if (self.all === false) {
+    document.getElementById('all-notif').addEventListener('click', function () {
+      if (!self.all) {
         self.resetChips()
         self.selectChip('all-notif', 'notifications')
         self.all = true
       }
     })
 
-    $(document).on('click', '#follow-notif', function () {
-      if (self.follower === false) {
-        self.resetChips()
-        self.selectChip('follow-notif', 'follow-notifications')
-        self.follower = true
-        if (self.followerNotificationsLoaded < self.notificationsFetchCount) {
-          self.followerNotificationsLoaded = document.getElementById(
-            'follow-notifications',
-          ).childElementCount
-          self.fetchMoreNotifications(
-            self.notificationsFetchCount,
-            self.followerNotificationsLoaded,
-            'follow',
-            'follow-notification-',
-            $('#follow-notifications'),
-          )
+    document
+      .getElementById('follow-notif')
+      .addEventListener('click', function () {
+        if (!self.follower) {
+          self.resetChips()
+          self.selectChip('follow-notif', 'follow-notifications')
+          self.follower = true
+          if (self.followerNotificationsLoaded < self.notificationsFetchCount) {
+            self.followerNotificationsLoaded = document.getElementById(
+              'follow-notifications',
+            ).childElementCount
+            self.fetchMoreNotifications(
+              self.notificationsFetchCount,
+              self.followerNotificationsLoaded,
+              'follow',
+              'follow-notification-',
+              document.getElementById('follow-notifications'),
+            )
+          }
         }
-      }
-    })
+      })
 
-    $(document).on('click', '#comment-notif', function () {
-      if (self.comment === false) {
-        self.resetChips()
-        self.selectChip('comment-notif', 'comment-notifications')
-        self.comment = true
-        if (self.commentNotificationsLoaded < self.notificationsFetchCount) {
-          self.commentNotificationsLoaded = document.getElementById(
-            'comment-notifications',
-          ).childElementCount
-          self.fetchMoreNotifications(
-            self.notificationsFetchCount,
-            self.commentNotificationsLoaded,
-            'comment',
-            'comment-notification-',
-            $('#comment-notifications'),
-          )
+    document
+      .getElementById('comment-notif')
+      .addEventListener('click', function () {
+        if (!self.comment) {
+          self.resetChips()
+          self.selectChip('comment-notif', 'comment-notifications')
+          self.comment = true
+          if (self.commentNotificationsLoaded < self.notificationsFetchCount) {
+            self.commentNotificationsLoaded = document.getElementById(
+              'comment-notifications',
+            ).childElementCount
+            self.fetchMoreNotifications(
+              self.notificationsFetchCount,
+              self.commentNotificationsLoaded,
+              'comment',
+              'comment-notification-',
+              document.getElementById('comment-notifications'),
+            )
+          }
         }
-      }
-    })
+      })
 
-    $(document).on('click', '#reaction-notif', function () {
-      if (self.reactions === false) {
-        self.resetChips()
-        self.selectChip('reaction-notif', 'reaction-notifications')
-        self.reactions = true
-        if (self.reactionNotificationsLoaded < self.notificationsFetchCount) {
-          self.reactionNotificationsLoaded = document.getElementById(
-            'reaction-notifications',
-          ).childElementCount
-          self.fetchMoreNotifications(
-            self.notificationsFetchCount,
-            self.reactionNotificationsLoaded,
-            'reaction',
-            'reaction-notification-',
-            $('#reaction-notifications'),
-          )
+    document
+      .getElementById('reaction-notif')
+      .addEventListener('click', function () {
+        if (!self.reactions) {
+          self.resetChips()
+          self.selectChip('reaction-notif', 'reaction-notifications')
+          self.reactions = true
+          if (self.reactionNotificationsLoaded < self.notificationsFetchCount) {
+            self.reactionNotificationsLoaded = document.getElementById(
+              'reaction-notifications',
+            ).childElementCount
+            self.fetchMoreNotifications(
+              self.notificationsFetchCount,
+              self.reactionNotificationsLoaded,
+              'reaction',
+              'reaction-notification-',
+              document.getElementById('reaction-notifications'),
+            )
+          }
         }
-      }
-    })
+      })
 
-    $(document).on('click', '#remix-notif', function () {
-      if (self.remixes === false) {
-        self.resetChips()
-        self.selectChip('remix-notif', 'remix-notifications')
-        self.remixes = true
-        if (self.remixNotificationsLoaded < self.notificationsFetchCount) {
-          self.remixNotificationsLoaded = document.getElementById(
-            'remix-notifications',
-          ).childElementCount
-          self.fetchMoreNotifications(
-            self.notificationsFetchCount,
-            self.remixNotificationsLoaded,
-            'remix',
-            'remix-notification-',
-            $('#remix-notifications'),
-          )
+    document
+      .getElementById('remix-notif')
+      .addEventListener('click', function () {
+        if (!self.remixes) {
+          self.resetChips()
+          self.selectChip('remix-notif', 'remix-notifications')
+          self.remixes = true
+          if (self.remixNotificationsLoaded < self.notificationsFetchCount) {
+            self.remixNotificationsLoaded = document.getElementById(
+              'remix-notifications',
+            ).childElementCount
+            self.fetchMoreNotifications(
+              self.notificationsFetchCount,
+              self.remixNotificationsLoaded,
+              'remix',
+              'remix-notification-',
+              document.getElementById('remix-notifications'),
+            )
+          }
         }
-      }
-    })
+      })
 
-    $(document).on('scroll', function () {
-      const position = $(window).scrollTop()
-      const bottom = $(document).height() - $(window).height()
+    window.addEventListener('scroll', function () {
+      const position = window.scrollY
+      const bottom = document.documentElement.scrollHeight - window.innerHeight
       const pctVertical = position / bottom
       if (pctVertical >= 0.7) {
-        if (self.all === true) {
+        if (self.all) {
           self.allNotificationsLoaded =
             document.getElementById('notifications').childElementCount
           self.fetchMoreNotifications(
@@ -195,9 +204,9 @@ class UserNotifications {
             self.allNotificationsLoaded,
             'all',
             'catro-notification-',
-            $('#notifications'),
+            document.getElementById('notifications'),
           )
-        } else if (self.follower === true) {
+        } else if (self.follower) {
           self.followerNotificationsLoaded = document.getElementById(
             'follow-notifications',
           ).childElementCount
@@ -206,9 +215,9 @@ class UserNotifications {
             self.followerNotificationsLoaded,
             'follow',
             'follow-notification-',
-            $('#follow-notifications'),
+            document.getElementById('follow-notifications'),
           )
-        } else if (self.comment === true) {
+        } else if (self.comment) {
           self.commentNotificationsLoaded = document.getElementById(
             'comment-notifications',
           ).childElementCount
@@ -217,9 +226,9 @@ class UserNotifications {
             self.commentNotificationsLoaded,
             'comment',
             'comment-notification-',
-            $('#comment-notifications'),
+            document.getElementById('comment-notifications'),
           )
-        } else if (self.reactions === true) {
+        } else if (self.reactions) {
           self.reactionNotificationsLoaded = document.getElementById(
             'reaction-notifications',
           ).childElementCount
@@ -228,9 +237,9 @@ class UserNotifications {
             self.reactionNotificationsLoaded,
             'reaction',
             'reaction-notification-',
-            $('#reaction-notifications'),
+            document.getElementById('reaction-notifications'),
           )
-        } else if (self.remixes === true) {
+        } else if (self.remixes) {
           self.remixNotificationsLoaded = document.getElementById(
             'remix-notifications',
           ).childElementCount
@@ -239,43 +248,35 @@ class UserNotifications {
             self.remixNotificationsLoaded,
             'remix',
             'remix-notification-',
-            $('#remix-notifications'),
+            document.getElementById('remix-notifications'),
           )
         }
       }
     })
   }
 
-  fetchMoreNotifications(limit, loadedCount, type, idPrefix, $container) {
+  fetchMoreNotifications(limit, loadedCount, type, idPrefix, container) {
     const self = this
-    if (this.empty === true || this.fetchActive === true) {
+    if (this.empty || this.fetchActive) {
       return
     }
     this.fetchActive = true
-    $.ajax({
-      url:
-        self.fetchNotificationsUrl +
-        '/' +
-        limit +
-        '/' +
-        loadedCount +
-        '/' +
-        type,
-      type: 'get',
-      success: function (data) {
-        data['fetched-notifications'].forEach(function (fetched) {
-          self.generateNotificationBody(fetched, idPrefix, $container)
+
+    fetch(`${self.fetchNotificationsUrl}/${limit}/${loadedCount}/${type}`)
+      .then((response) => response.json())
+      .then((data) => {
+        data['fetched-notifications'].forEach((fetched) => {
+          self.generateNotificationBody(fetched, idPrefix, container)
         })
         self.updateNoNotificationsPlaceholder(
           type,
           data['fetched-notifications'].length,
         )
         self.fetchActive = false
-      },
-      error: function (xhr) {
+      })
+      .catch((xhr) => {
         self.handleError(xhr)
-      },
-    })
+      })
   }
 
   updateNoNotificationsPlaceholder(type, fetchedAmount) {
@@ -298,7 +299,7 @@ class UserNotifications {
     }
   }
 
-  generateNotificationBody(fetched, idPrefix, $container) {
+  generateNotificationBody(fetched, idPrefix, container) {
     const self = this
     const imgLeft = self.generateNotificationImage(fetched)
     const msg = self.generateNotificationMessage(fetched)
@@ -311,19 +312,12 @@ class UserNotifications {
         '</span>' +
         '</div>'
     }
-    const notificationBody =
-      '<div id="' +
-      notificationId +
-      '" class="row my-3 no-gutters ripple notif">' +
-      '<div class="col-2 my-auto">' +
-      imgLeft +
-      '</div>' +
-      '<div class="col-8 ps-3 my-auto">' +
-      msg +
-      '</div>' +
-      notificationDot +
-      '</div>'
-    $container.append(notificationBody)
+    const notificationBody = `<div id="${notificationId}" class="row my-3 no-gutters ripple notif">
+        <div class="col-2 my-auto">${imgLeft}</div>
+        <div class="col-8 ps-3 my-auto">${msg}</div>
+        ${notificationDot}
+      </div>`
+    container.insertAdjacentHTML('beforeend', notificationBody)
   }
 
   generateNotificationImage(fetched) {
@@ -333,25 +327,14 @@ class UserNotifications {
       if (fetched.avatar) {
         imgLeft = fetched.avatar
       }
-      imgLeft =
-        '<a href="' +
-        self.profilePath +
-        '/' +
-        fetched.from +
-        '">' +
-        '<img class="img-fluid notification-avatar-round" src="' +
-        imgLeft +
-        '" alt="">' +
-        '</a>'
-      return imgLeft
+      return `<a href="${self.profilePath}/${fetched.from}">
+        <img class="img-fluid notification-avatar-round" src="${imgLeft}" alt="">
+      </a>`
     } else {
       let imgLeft =
-        '<span class="material-icons broadcast-icon">' +
-        'notifications_active' +
-        '</span>'
+        '<span class="material-icons broadcast-icon">notifications_active</span>'
       if (fetched.prize) {
-        imgLeft =
-          '<span class="material-icons broadcast-icon">' + 'cake' + '</span>'
+        imgLeft = '<span class="material-icons broadcast-icon">cake</span>'
       }
       return imgLeft
     }
@@ -363,59 +346,34 @@ class UserNotifications {
     if (msg.includes('%user_link%')) {
       msg = msg.replace(
         '%user_link%',
-        '<a href="' +
-          self.profilePath +
-          '/' +
-          fetched.from +
-          '">' +
-          fetched.from_name +
-          '</a>',
+        `<a href="${self.profilePath}/${fetched.from}">${fetched.from_name}</a>`,
       )
     }
     if (msg.includes('%program_link%')) {
       msg = msg.replace(
         '%program_link%',
-        '<a href="' +
-          self.projectPath +
-          '/' +
-          fetched.program +
-          '">' +
-          fetched.program_name +
-          '</a>',
+        `<a href="${self.projectPath}/${fetched.program}">${fetched.program_name}</a>`,
       )
     }
     if (msg.includes('%remix_program_link%')) {
       msg = msg.replace(
         '%remix_program_link%',
-        '<a href="' +
-          self.projectPath +
-          '/' +
-          fetched.remixed_program +
-          '">' +
-          fetched.remixed_program_name +
-          '</a>',
+        `<a href="${self.projectPath}/${fetched.remixed_program}">${fetched.remixed_program_name}</a>`,
       )
     }
     if (fetched.prize) {
-      msg =
-        '<div class="message">' +
-        fetched.message +
-        '</div>' +
-        '<div class="prize">' +
-        fetched.prize +
-        '</div>'
+      msg = `<div class="message">${fetched.message}</div><div class="prize">${fetched.prize}</div>`
     }
     return msg
   }
 
   resetChips() {
-    const self = this
-    self.remixes = false
-    self.all = false
-    self.follower = false
-    self.comment = false
-    self.reactions = false
-    self.resetColor()
+    this.remixes = false
+    this.all = false
+    this.follower = false
+    this.comment = false
+    this.reactions = false
+    this.resetColor()
   }
 
   resetColor() {
@@ -434,37 +392,34 @@ class UserNotifications {
     document
       .getElementById('remix-notif')
       .classList.replace('chip-selected', 'chip-default')
-    document.getElementById('notifications').classList.remove('show')
-    document.getElementById('notifications').classList.remove('active')
-    document.getElementById('follow-notifications').classList.remove('show')
-    document.getElementById('follow-notifications').classList.remove('active')
-    document.getElementById('comment-notifications').classList.remove('show')
-    document.getElementById('comment-notifications').classList.remove('active')
-    document.getElementById('reaction-notifications').classList.remove('show')
-    document.getElementById('reaction-notifications').classList.remove('active')
-    document.getElementById('remix-notifications').classList.remove('show')
-    document.getElementById('remix-notifications').classList.remove('active')
+    document.getElementById('notifications').classList.remove('show', 'active')
+    document
+      .getElementById('follow-notifications')
+      .classList.remove('show', 'active')
+    document
+      .getElementById('comment-notifications')
+      .classList.remove('show', 'active')
+    document
+      .getElementById('reaction-notifications')
+      .classList.remove('show', 'active')
+    document
+      .getElementById('remix-notifications')
+      .classList.remove('show', 'active')
   }
 
   selectChip(elementId, paneID) {
     document
       .getElementById(elementId)
       .classList.replace('chip-default', 'chip-selected')
-    document.getElementById(paneID).classList.add('show')
-    document.getElementById(paneID).classList.add('active')
+    document.getElementById(paneID).classList.add('show', 'active')
   }
 
   redirectUser(type, id) {
     if (type === 'follow') {
       window.location.assign('follower')
     }
-    if (
-      type === 'comment' ||
-      type === 'reaction' ||
-      type === 'remix' ||
-      type === 'program'
-    ) {
-      window.location.assign('project/' + id)
+    if (['comment', 'reaction', 'remix', 'program'].includes(type)) {
+      window.location.assign(`project/${id}`)
     }
   }
 
@@ -487,12 +442,10 @@ class UserNotifications {
   handleError(xhr) {
     const self = this
     if (xhr.status === 401) {
-      // eslint-disable-next-line no-undef
       showSnackbar('#share-snackbar', self.notificationsUnauthorizedError)
       return
     }
     if (xhr.status === 404) {
-      // eslint-disable-next-line no-undef
       showSnackbar('#share-snackbar', self.notificationsClearError)
     }
   }

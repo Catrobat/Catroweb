@@ -1,7 +1,6 @@
 /* global globalConfiguration */
 /* global myProfileConfiguration */
 
-import $ from 'jquery'
 import './components/fullscreen_list_modal'
 import './components/text_field'
 import './components/tab_bar'
@@ -15,7 +14,7 @@ import { ApiDeleteFetch, ApiPutFetch } from './api/ApiHelper'
 
 require('../styles/custom/profile.scss')
 
-$(() => {
+document.addEventListener('DOMContentLoaded', () => {
   if (
     window.location.search.includes('profileChangeSuccess') ||
     window.location.search.includes('profilePictureChangeSuccess')
@@ -100,7 +99,7 @@ class OwnProfile {
 
   addProfilePictureChangeListenerToInput(input) {
     const self = this
-    input.onchange = () => {
+    input.addEventListener('change', () => {
       let loadingSpinner
       if (this.avatarElement) {
         const loadingSpinnerTemplate = document.getElementById(
@@ -145,7 +144,7 @@ class OwnProfile {
         )
       }
       reader.readAsDataURL(input.files[0])
-    }
+    })
   }
 
   initSaveProfileSettings() {
@@ -234,10 +233,9 @@ class OwnProfile {
             ).run()
           }
         })
-        $('.swal2-container.swal2-shown').css(
-          'background-color',
-          'rgba(255, 0, 0, 0.75)',
-        ) // changes the color of the overlay
+        document.querySelector(
+          '.swal2-container.swal2-backdrop-show',
+        ).style.backgroundColor = 'rgba(220, 53, 69, 0.75)' // changes the color of the overlay
       })
   }
 }
