@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import Swal from 'sweetalert2'
 
 export function ProjectReport(
@@ -26,22 +25,20 @@ export function ProjectReport(
   const SESSION_OLD_REPORT_REASON = 'oldReportReason' + programId
   const SESSION_OLD_REPORT_CATEGORY = 'oldReportCategory' + programId
 
-  $('#top-app-bar__btn-report-project').on('click', function () {
-    if (!loggedIn) {
-      window.location.href = loginUrl
-      return
-    }
+  document
+    .getElementById('top-app-bar__btn-report-project')
+    .addEventListener('click', function () {
+      if (!loggedIn) {
+        window.location.href = loginUrl
+        return
+      }
 
-    let oldReportReason = sessionStorage.getItem(SESSION_OLD_REPORT_REASON)
-    if (oldReportReason === null) {
-      oldReportReason = ''
-    }
-    let oldReportCategory = sessionStorage.getItem(SESSION_OLD_REPORT_CATEGORY)
-    if (oldReportCategory === null) {
-      oldReportCategory = ''
-    }
-    reportProgramDialog(false, oldReportReason, oldReportCategory)
-  })
+      const oldReportReason =
+        sessionStorage.getItem(SESSION_OLD_REPORT_REASON) || ''
+      const oldReportCategory =
+        sessionStorage.getItem(SESSION_OLD_REPORT_CATEGORY) || ''
+      reportProgramDialog(false, oldReportReason, oldReportCategory)
+    })
 
   function reportProgramDialog(
     error = false,
@@ -64,8 +61,9 @@ export function ProjectReport(
       preConfirm: function () {
         return new Promise(function (resolve) {
           resolve([
-            $('#report-reason').val(),
-            $('input[name=report-category]:checked').val(),
+            document.getElementById('report-reason').value,
+            document.querySelector('input[name="report-category"]:checked')
+              .value,
           ])
         })
       },
@@ -76,46 +74,49 @@ export function ProjectReport(
     })
   }
 
-  $(document).on('keyup', '#report-reason', function () {
-    sessionStorage.setItem(SESSION_OLD_REPORT_REASON, $('#report-reason').val())
-  })
-  $(document).on('change', '#report-reason', function () {
-    sessionStorage.setItem(SESSION_OLD_REPORT_REASON, $('#report-reason').val())
+  document.addEventListener('keyup', function (event) {
+    if (event.target && event.target.id === 'report-reason') {
+      sessionStorage.setItem(SESSION_OLD_REPORT_REASON, event.target.value)
+    }
   })
 
-  $(document).on('change', 'input[name=report-category]', function () {
-    sessionStorage.setItem(
-      SESSION_OLD_REPORT_CATEGORY,
-      $('input[name=report-category]:checked').val(),
-    )
+  document.addEventListener('change', function (event) {
+    if (event.target && event.target.id === 'report-reason') {
+      sessionStorage.setItem(SESSION_OLD_REPORT_REASON, event.target.value)
+    }
+    if (event.target && event.target.name === 'report-category') {
+      sessionStorage.setItem(
+        SESSION_OLD_REPORT_CATEGORY,
+        document.querySelector('input[name="report-category"]:checked').value,
+      )
+    }
   })
 
   function handleSubmitProgramReport(result) {
-    let reason = result[0]
-    let category = result[1]
+    const reason = result[0]
+    const category = result[1]
 
     if (reason === null || reason === '' || category === null) {
-      if (reason === null) {
-        reason = ''
-      }
-      if (category === null) {
-        category = ''
-      }
-      reportProgramDialog(true, reason, category)
+      reportProgramDialog(true, reason || '', category || '')
     } else {
       reportProgram(reason, category)
     }
   }
 
   function reportProgram(reason, category) {
-    $.post(
-      reportUrl,
-      {
+    fetch(reportUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         program: programId,
         category,
         note: reason,
-      },
-      function (data) {
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
         if (data.statusCode === statusCodeOk) {
           Swal.fire({
             text: reportSentText,
@@ -125,7 +126,7 @@ export function ProjectReport(
             },
             buttonsStyling: false,
             allowOutsideClick: false,
-          }).then(function () {
+          }).then(() => {
             window.location.href = '/'
           })
         } else {
@@ -139,141 +140,85 @@ export function ProjectReport(
             allowOutsideClick: false,
           })
         }
-      },
-    ).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-      Swal.fire({
-        title: errorText,
-        text: errorThrown,
-        icon: 'error',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-        buttonsStyling: false,
-        allowOutsideClick: false,
       })
-    })
+      .catch((error) => {
+        Swal.fire({
+          title: errorText,
+          text: error.message,
+          icon: 'error',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
+          allowOutsideClick: false,
+        })
+      })
   }
 
   function getReportDialogHtml(error, oldReason, oldCategory) {
-    let errorClass = ''
-    if (error) {
-      errorClass = 'text-area-empty'
-    }
+    const errorClass = error ? 'text-area-empty' : ''
+    const reasonPlaceholder = oldReason ? '' : reportDialogReason
 
-    let reasonPlaceholder = reportDialogReason
-    let reason = ''
-    if (oldReason !== '') {
-      reasonPlaceholder = ''
-      reason = oldReason
-    }
+    const checkedInappropriate =
+      oldCategory === INAPPROPRIATE_VALUE ? CHECKED : ''
+    const checkedCopyright = oldCategory === COPYRIGHT_VALUE ? CHECKED : ''
+    const checkedSpam = oldCategory === SPAM_VALUE ? CHECKED : ''
+    const checkedDislike = oldCategory === DISLIKE_VALUE ? CHECKED : ''
 
-    let checkedInappropriate = ''
-    let checkedCopyright = ''
-    let checkedSpam = ''
-    let checkedDislike = ''
-
-    switch (oldCategory) {
-      case INAPPROPRIATE_VALUE:
-        checkedInappropriate = CHECKED
-        break
-      case COPYRIGHT_VALUE:
-        checkedCopyright = CHECKED
-        break
-      case SPAM_VALUE:
-        checkedSpam = CHECKED
-        break
-      case DISLIKE_VALUE:
-        checkedDislike = CHECKED
-        break
-      default:
-        checkedInappropriate = CHECKED
-        break
-    }
-
-    return (
-      '<div class="mdc-form-field">' +
-      ' <div class="mdc-radio">' +
-      '   <input class="mdc-radio__native-control" type="radio" style="--checked-stroke-color(red)" id="report-inappropriate" name="report-category" value="' +
-      INAPPROPRIATE_VALUE +
-      '" ' +
-      checkedInappropriate +
-      '>' +
-      '   <div class="mdc-radio__background">' +
-      '     <div class="mdc-radio__outer-circle"></div>' +
-      '     <div class="mdc-radio__inner-circle"></div>' +
-      '   </div>' +
-      '   <div class="mdc-radio__ripple"></div>' +
-      ' </div>' +
-      ' <label for="report-inappropriate"">' +
-      inappropriateLabel +
-      '</label>' +
-      '</div>' +
-      '<div class="mdc-form-field">' +
-      ' <div class="mdc-radio">' +
-      '   <input class="mdc-radio__native-control" type="radio" id="report-copyright" name="report-category" value="' +
-      COPYRIGHT_VALUE +
-      '" ' +
-      checkedCopyright +
-      '>' +
-      '   <div class="mdc-radio__background">' +
-      '     <div class="mdc-radio__outer-circle"></div>' +
-      '     <div class="mdc-radio__inner-circle"></div>' +
-      '   </div>' +
-      '   <div class="mdc-radio__ripple"></div>' +
-      ' </div>' +
-      ' <label for="report-copyright">' +
-      copyrightLabel +
-      '</label>' +
-      '</div>' +
-      '<div class="mdc-form-field">' +
-      ' <div class="mdc-radio">' +
-      '   <input class="mdc-radio__native-control" type="radio" id="report-spam" name="report-category" value="' +
-      SPAM_VALUE +
-      '" ' +
-      checkedSpam +
-      '>' +
-      '   <div class="mdc-radio__background">' +
-      '     <div class="mdc-radio__outer-circle"></div>' +
-      '     <div class="mdc-radio__inner-circle"></div>' +
-      '   </div>' +
-      '   <div class="mdc-radio__ripple"></div>' +
-      ' </div>' +
-      ' <label for="report-spam">' +
-      spamLabel +
-      '</label>' +
-      '</div>' +
-      '<div class="mdc-form-field">' +
-      ' <div class="mdc-radio">' +
-      '  <input class="mdc-radio__native-control" type="radio" id="report-dislike" name="report-category" value="' +
-      DISLIKE_VALUE +
-      '" ' +
-      checkedDislike +
-      '>' +
-      '  <div class="mdc-radio__background">' +
-      '    <div class="mdc-radio__outer-circle"></div>' +
-      '    <div class="mdc-radio__inner-circle"></div>' +
-      '  </div>' +
-      '  <div class="mdc-radio__ripple"></div>' +
-      ' </div>' +
-      ' <label for="report-dislike">' +
-      dislikeLabel +
-      '</label>' +
-      '</div>' +
-      '<label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea report-reason">' +
-      ' <span class="mdc-text-field__resizer">' +
-      '   <textarea class="mdc-text-field__input ' +
-      errorClass +
-      '" id="report-reason" placeholder="' +
-      reasonPlaceholder +
-      '" style="width: 100%; height: 100px" cols="100">' +
-      reason +
-      '</textarea>' +
-      ' </span>' +
-      ' <span class="mdc-notched-outline">' +
-      '   <span class="mdc-notched-outline__leading"></span>' +
-      '   <span class="mdc-notched-outline__trailing"></span>' +
-      ' </span>' +
-      '</label>'
-    )
+    return `
+      <div class="mdc-form-field">
+        <div class="mdc-radio">
+          <input class="mdc-radio__native-control" type="radio" style="--checked-stroke-color(red)" id="report-inappropriate" name="report-category" value="${INAPPROPRIATE_VALUE}" ${checkedInappropriate}>
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+          <div class="mdc-radio__ripple"></div>
+        </div>
+        <label for="report-inappropriate">${inappropriateLabel}</label>
+      </div>
+      <div class="mdc-form-field">
+        <div class="mdc-radio">
+          <input class="mdc-radio__native-control" type="radio" id="report-copyright" name="report-category" value="${COPYRIGHT_VALUE}" ${checkedCopyright}>
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+          <div class="mdc-radio__ripple"></div>
+        </div>
+        <label for="report-copyright">${copyrightLabel}</label>
+      </div>
+      <div class="mdc-form-field">
+        <div class="mdc-radio">
+          <input class="mdc-radio__native-control" type="radio" id="report-spam" name="report-category" value="${SPAM_VALUE}" ${checkedSpam}>
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+          <div class="mdc-radio__ripple"></div>
+        </div>
+        <label for="report-spam">${spamLabel}</label>
+      </div>
+      <div class="mdc-form-field">
+        <div class="mdc-radio">
+          <input class="mdc-radio__native-control" type="radio" id="report-dislike" name="report-category" value="${DISLIKE_VALUE}" ${checkedDislike}>
+          <div class="mdc-radio__background">
+            <div class="mdc-radio__outer-circle"></div>
+            <div class="mdc-radio__inner-circle"></div>
+          </div>
+          <div class="mdc-radio__ripple"></div>
+        </div>
+        <label for="report-dislike">${dislikeLabel}</label>
+      </div>
+      <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea report-reason">
+        <span class="mdc-text-field__resizer">
+          <textarea class="mdc-text-field__input ${errorClass}" id="report-reason" placeholder="${reasonPlaceholder}" style="width: 100%; height: 100px" cols="100">${oldReason}</textarea>
+        </span>
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+      </label>
+    `
   }
 }

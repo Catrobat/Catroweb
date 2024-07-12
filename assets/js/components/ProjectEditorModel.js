@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
 
 export const DIALOG = {
@@ -7,8 +6,6 @@ export const DIALOG = {
 }
 
 export function ProjectEditorModel(programId, textFieldModels) {
-  const self = this
-
   this.programId = programId
   this.textFieldModels = textFieldModels
 
@@ -83,12 +80,12 @@ export function ProjectEditorModel(programId, textFieldModels) {
   this.deleteTranslationResult = (result) => {
     if (result.isDenied) {
       Promise.all(
-        self.textFieldModels.map((textField) =>
+        this.textFieldModels.map((textField) =>
           textField.delete(this.selectedLanguage),
         ),
       )
         .then((results) => {
-          if (results.length === self.textFieldModels.length) {
+          if (results.length === this.textFieldModels.length) {
             this.onClose()
           }
         })
@@ -134,10 +131,12 @@ export function ProjectEditorModel(programId, textFieldModels) {
   }
 
   // region private
-  $(document).ready(() => this.getLanguages())
+  document.addEventListener('DOMContentLoaded', () => this.getLanguages())
 
   this.getLanguages = () => {
-    const languagesPromise = $.get('../languages')
+    const languagesPromise = fetch('../languages').then((response) =>
+      response.json(),
+    )
     const definedLanguagesPromise =
       this.customTranslationApi.getCustomTranslationLanguages(this.programId)
 
@@ -168,7 +167,7 @@ export function ProjectEditorModel(programId, textFieldModels) {
     )
   }
 
-  self.fetchText = () => {
+  this.fetchText = () => {
     for (const textField of this.textFieldModels) {
       textField.fetchText(this.selectedLanguage)
     }

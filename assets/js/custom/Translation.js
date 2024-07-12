@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 export class Translation {
   constructor(translatedByLine, googleTranslateDisplayName) {
     this.translatedByLine = translatedByLine
@@ -23,23 +21,23 @@ export class Translation {
   }
 
   setTargetLanguage() {
-    const appLanguage = $('#app-language').data('app-language')
-    this.targetLanguage = appLanguage.replace('_', '-')
+    const appLanguageElement = document.getElementById('app-language')
+    this.targetLanguage = appLanguageElement.dataset.appLanguage.replace(
+      '_',
+      '-',
+    )
   }
 
   setDisplayLanguageMap() {
-    const self = this
-    $.ajax({
-      url: '../languages',
-      type: 'get',
-      success: function (data) {
-        self.displayLanguageMap = data
-      },
-    })
+    fetch('../languages')
+      .then((response) => response.json())
+      .then((data) => {
+        this.displayLanguageMap = data
+      })
+      .catch((error) => console.error('Error fetching languages:', error))
   }
 
   splitTranslatedByLine() {
-    const self = this
     let firstLanguage = '%sourceLanguage%'
     let secondLanguage = '%targetLanguage%'
     if (!this.isSourceLanguageFirst()) {
@@ -47,17 +45,17 @@ export class Translation {
       secondLanguage = '%sourceLanguage%'
     }
 
-    self.translatedByLineMap = {
-      before: self.translatedByLine.substring(
+    this.translatedByLineMap = {
+      before: this.translatedByLine.substring(
         0,
-        self.translatedByLine.indexOf(firstLanguage),
+        this.translatedByLine.indexOf(firstLanguage),
       ),
-      between: self.translatedByLine.substring(
-        self.translatedByLine.indexOf(firstLanguage) + firstLanguage.length,
-        self.translatedByLine.indexOf(secondLanguage),
+      between: this.translatedByLine.substring(
+        this.translatedByLine.indexOf(firstLanguage) + firstLanguage.length,
+        this.translatedByLine.indexOf(secondLanguage),
       ),
-      after: self.translatedByLine.substring(
-        self.translatedByLine.indexOf(secondLanguage) + secondLanguage.length,
+      after: this.translatedByLine.substring(
+        this.translatedByLine.indexOf(secondLanguage) + secondLanguage.length,
       ),
     }
   }
@@ -70,7 +68,10 @@ export class Translation {
   }
 
   isTranslationNotAvailable(elementId) {
-    return $(elementId).attr('lang') !== this.targetLanguage
+    return (
+      document.querySelector(elementId).getAttribute('lang') !==
+      this.targetLanguage
+    )
   }
 
   openGoogleTranslatePage(text) {
@@ -84,50 +85,36 @@ export class Translation {
   }
 
   setTranslationCredit(data, byLineElements) {
-    $(byLineElements.before).html(
-      this.formatProvider(
-        this.translatedByLineMap.before,
-        this.providerMap[data.provider],
-      ),
+    byLineElements.before.innerHTML = this.formatProvider(
+      this.translatedByLineMap.before,
+      this.providerMap[data.provider],
     )
-    $(byLineElements.between).html(
-      this.formatProvider(
-        this.translatedByLineMap.between,
-        this.providerMap[data.provider],
-      ),
+    byLineElements.between.innerHTML = this.formatProvider(
+      this.translatedByLineMap.between,
+      this.providerMap[data.provider],
     )
-    $(byLineElements.after).html(
-      this.formatProvider(
-        this.translatedByLineMap.after,
-        this.providerMap[data.provider],
-      ),
+    byLineElements.after.innerHTML = this.formatProvider(
+      this.translatedByLineMap.after,
+      this.providerMap[data.provider],
     )
 
     if (this.isSourceLanguageFirst()) {
-      $(byLineElements.firstLanguage).text(
-        this.displayLanguageMap[data.source_language],
-      )
-      $(byLineElements.secondLanguage).text(
-        this.displayLanguageMap[data.target_language],
-      )
+      byLineElements.firstLanguage.textContent =
+        this.displayLanguageMap[data.source_language]
+      byLineElements.secondLanguage.textContent =
+        this.displayLanguageMap[data.target_language]
     } else {
-      $(byLineElements.secondLanguage).text(
-        this.displayLanguageMap[data.target_language],
-      )
-      $(byLineElements.firstLanguage).text(
-        this.displayLanguageMap[data.source_language],
-      )
+      byLineElements.secondLanguage.textContent =
+        this.displayLanguageMap[data.target_language]
+      byLineElements.firstLanguage.textContent =
+        this.displayLanguageMap[data.source_language]
     }
   }
 
   formatProvider(byLine, provider) {
     return byLine.replace(
       '%provider%',
-      '<a href="' +
-        provider.link +
-        '" class="translation-credit" style="text-decoration: none">' +
-        provider.displayName +
-        '</a>',
+      `<a href="${provider.link}" class="translation-credit" style="text-decoration: none">${provider.displayName}</a>`,
     )
   }
 }

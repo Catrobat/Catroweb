@@ -1,10 +1,9 @@
-import $ from 'jquery'
 import {
   showDefaultTopBarTitle,
   showCustomTopBarTitle,
 } from '../layout/top_bar'
 
-require('../../styles/components/user_list.scss')
+import '../../styles/components/user_list.scss'
 
 export class UserList {
   constructor(
@@ -17,7 +16,7 @@ export class UserList {
     emptyMessage = '',
   ) {
     this.container = container
-    this.usersContainer = $('.users-container', container)
+    this.usersContainer = container.querySelector('.users-container')
     this.apiUrl =
       (apiUrl.includes('?') ? apiUrl + '&' : apiUrl + '?') +
       'attributes=id,username,picture,projects&'
@@ -31,10 +30,10 @@ export class UserList {
     this.emptyMessage = emptyMessage
     this.projectString = projectString
 
-    this.$title = $('.user-list__title', $(this.container))
-    this.$body = $('body')
-    this.$chevronLeft = $('.user-list__chevrons__left', $(this.container))
-    this.$chevronRight = $('.user-list__chevrons__right', $(this.container))
+    this.titleElement = container.querySelector('.user-list__title')
+    this.body = document.body
+    this.chevronLeft = container.querySelector('.user-list__chevrons__left')
+    this.chevronRight = container.querySelector('.user-list__chevrons__right')
     const self = this
     this.popStateHandler = function () {
       self.closeFullView()
@@ -45,20 +44,22 @@ export class UserList {
   }
 
   fetchMore(clear = false) {
-    if (this.empty === true || this.fetchActive === true) {
+    if (this.empty || this.fetchActive) {
       return
     }
 
     this.fetchActive = true
     const self = this
 
-    $.getJSON(
+    fetch(
       this.apiUrl +
         'limit=' +
         this.userFetchCount +
         '&offset=' +
         this.usersLoaded,
-      function (data) {
+    )
+      .then((response) => response.json())
+      .then((data) => {
         if (!Array.isArray(data)) {
           console.error('Data received for users is no array!')
           self.container.classList.remove('loading')
@@ -66,31 +67,33 @@ export class UserList {
         }
 
         if (clear) {
-          self.usersContainer.empty()
+          self.usersContainer.innerHTML = ''
         }
 
         data.forEach(function (user) {
           user = self._generate(user)
-          self.usersContainer.append(user)
-          user.click(function () {
-            user.empty()
-            user.css('display', 'flex')
-            user.css('justify-content', 'center')
-            user.append($('#user-opening-spinner').html())
+          self.usersContainer.appendChild(user)
+          user.addEventListener('click', function () {
+            user.innerHTML = ''
+            user.style.display = 'flex'
+            user.style.justifyContent = 'center'
+            user.innerHTML = document.getElementById(
+              'user-opening-spinner',
+            ).innerHTML
           })
         })
         self.container.classList.remove('loading')
 
         if (data.length > 0) {
-          self.$chevronRight.show()
+          self.chevronRight.style.display = 'block'
         }
 
         self.usersLoaded += data.length
 
-        if (self.usersLoaded === 0 && self.empty === false) {
+        if (self.usersLoaded === 0 && !self.empty) {
           self.empty = true
           if (self.emptyMessage) {
-            self.usersContainer.append(self.emptyMessage)
+            self.usersContainer.innerHTML = self.emptyMessage
             self.container.classList.add('empty-with-text')
           } else {
             self.container.classList.add('empty')
@@ -98,83 +101,75 @@ export class UserList {
         }
 
         self.fetchActive = false
-      },
-    ).fail(function (jqXHR, textStatus, errorThrown) {
-      console.error(
-        'Failed loading users',
-        JSON.stringify(jqXHR),
-        textStatus,
-        errorThrown,
-      )
-      self.container.classList.remove('loading')
-    })
+      })
+      .catch((jqXHR, textStatus, errorThrown) => {
+        console.error(
+          'Failed loading users',
+          JSON.stringify(jqXHR),
+          textStatus,
+          errorThrown,
+        )
+        self.container.classList.remove('loading')
+      })
   }
 
   _generate(data) {
-    /*
-     * Necessary to support legacy flavoring with URL:
-     *   Absolute url always uses new 'app' routing flavor. We have to replace it!
-     */
     const userUrl = this.baseUrl + '/app/user/' + data.id
 
-    const $p = $('<a />', { class: 'user-list__user', href: userUrl })
-    $p.data('id', data.id)
-    if (typeof data.picture === 'string' && data.picture.length > 0) {
-      $('<img />', {
-        src: data.picture,
-        class: 'user-list__user__image',
-      }).appendTo($p)
-    } else {
-      $('<img/>', {
-        'data-src': '/images/default/avatar_default.png?v=3.7.1',
-        class: 'lazyload user-list__user__image',
-      }).appendTo($p)
-    }
-    $('<span/>', { class: 'user-list__user__name' })
-      .text(data.username)
-      .appendTo($p)
-    const $prop = $('<div />', { class: 'lazyload user-list__user__property' })
-    $prop.appendTo($p)
-    $('<span/>', { class: 'user-list__user__property__value' })
-      .text(data.projects + ' ' + this.projectString)
-      .appendTo($prop)
+    const userElement = document.createElement('a')
+    userElement.className = 'user-list__user'
+    userElement.href = userUrl
+    userElement.dataset.id = data.id
 
-    return $p
+    const userImage = document.createElement('img')
+    userImage.className = 'user-list__user__image'
+    if (typeof data.picture === 'string' && data.picture.length > 0) {
+      userImage.src = data.picture
+    } else {
+      userImage.dataset.src = '/images/default/avatar_default.png?v=3.7.1'
+      userImage.classList.add('lazyload')
+    }
+    userElement.appendChild(userImage)
+
+    const userName = document.createElement('span')
+    userName.className = 'user-list__user__name'
+    userName.textContent = data.username
+    userElement.appendChild(userName)
+
+    const userProperty = document.createElement('div')
+    userProperty.className = 'lazyload user-list__user__property'
+    userElement.appendChild(userProperty)
+
+    const userPropertyValue = document.createElement('span')
+    userPropertyValue.className = 'user-list__user__property__value'
+    userPropertyValue.textContent = data.projects + ' ' + this.projectString
+    userProperty.appendChild(userPropertyValue)
+
+    return userElement
   }
 
   _initListeners() {
     const self = this
 
-    // ---- History State
     window.addEventListener('popstate', function (event) {
       if (event.state != null) {
         if (event.state.type === 'UserList' && event.state.full === true) {
-          $('#' + event.state.id)
-            .data('list')
-            .openFullView()
+          document.getElementById(event.state.id).dataset.list.openFullView()
         }
       }
     })
 
-    this.usersContainer.on('scroll', function () {
+    this.usersContainer.addEventListener('scroll', function () {
       const pctHorizontal =
         this.scrollLeft / (this.scrollWidth - this.clientWidth)
       if (pctHorizontal >= 0.8) {
         self.fetchMore()
       }
-      if (pctHorizontal === 0) {
-        self.$chevronLeft.hide()
-      } else {
-        self.$chevronLeft.show()
-      }
-
-      if (pctHorizontal >= 1) {
-        self.$chevronRight.hide()
-      } else {
-        self.$chevronRight.show()
-      }
+      self.chevronLeft.style.display = pctHorizontal === 0 ? 'none' : 'block'
+      self.chevronRight.style.display = pctHorizontal >= 1 ? 'none' : 'block'
     })
-    $(this.container).on('scroll', function () {
+
+    this.container.addEventListener('scroll', function () {
       const pctVertical =
         this.scrollTop / (this.scrollHeight - this.clientHeight)
       if (pctVertical >= 0.8) {
@@ -182,47 +177,47 @@ export class UserList {
       }
     })
 
-    this.$title.on('click', function () {
+    this.titleElement.addEventListener('click', function () {
       if (self.isFullView) {
-        window.history.back() // to remove pushed state
+        window.history.back()
       } else {
         window.history.pushState(
           { type: 'UserList', id: self.container.id, full: true },
-          $(this).text(),
+          this.textContent,
           '#' + self.container.id,
         )
         self.openFullView()
       }
     })
 
-    this.$chevronLeft.on('click', function () {
-      const width = self.usersContainer
-        .find('.user-list__project')
-        .outerWidth(true)
-      self.usersContainer.scrollLeft(
-        self.usersContainer.scrollLeft() - 2 * width,
-      )
+    this.chevronLeft.addEventListener('click', function () {
+      const width = self.usersContainer.querySelector(
+        '.user-list__project',
+      ).offsetWidth
+      self.usersContainer.scrollLeft -= 2 * width
     })
-    this.$chevronRight.on('click', function () {
-      const width = self.usersContainer
-        .find('.user-list__project')
-        .outerWidth(true)
-      self.usersContainer.scrollLeft(
-        self.usersContainer.scrollLeft() + 2 * width,
-      )
+
+    this.chevronRight.addEventListener('click', function () {
+      const width = self.usersContainer.querySelector(
+        '.user-list__project',
+      ).offsetWidth
+      self.usersContainer.scrollLeft += 2 * width
     })
   }
 
   openFullView() {
-    $(window).on('popstate', this.popStateHandler)
-    showCustomTopBarTitle(this.$title.find('h2').text(), function () {
-      window.history.back()
-    })
-    this.$title.hide()
+    window.addEventListener('popstate', this.popStateHandler)
+    showCustomTopBarTitle(
+      this.titleElement.querySelector('h2').textContent,
+      function () {
+        window.history.back()
+      },
+    )
+    this.titleElement.style.display = 'none'
     this.isFullView = true
     this.container.classList.add('vertical')
     this.container.classList.remove('horizontal')
-    this.$body.addClass('overflow-hidden')
+    this.body.classList.add('overflow-hidden')
     if (
       this.container.clientHeight === this.container.scrollHeight ||
       this.container.scrollTop /
@@ -234,13 +229,13 @@ export class UserList {
   }
 
   closeFullView() {
-    $(window).off('popstate', this.popStateHandler)
+    window.removeEventListener('popstate', this.popStateHandler)
     showDefaultTopBarTitle()
-    this.$title.show()
+    this.titleElement.style.display = 'block'
     this.isFullView = false
     this.container.classList.add('horizontal')
     this.container.classList.remove('vertical')
-    this.$body.removeClass('overflow-hidden')
+    this.body.classList.remove('overflow-hidden')
     return false
   }
 }
