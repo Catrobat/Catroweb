@@ -75,6 +75,7 @@ oauthPopUpTitle: "외부 계정 정보"
 oauthInfo: '방금 외부 계정을 사용하여 로그인했습니다. 사용자 이름을 무작위로 만들 수 있습니다. 사용자 이름을 변경하거나 계정에 대한 새 비밀번호를 만들려면 내 프로필 페이지로 이동하십시오. 프로필 페이지로 이동하려면 %link_start% 여기 %link_end%를 클릭하세요.'
 oauthHere: "여기"
 statistics: "통계"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:

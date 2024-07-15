@@ -75,6 +75,7 @@ oauthPopUpTitle: "Kanpoko kontu baten saio hasteari buruzko informazioa"
 oauthInfo: 'Kanpoko kontu bat erabili berri duzu saioa hasteko. Ausazko izen bat asmatu dugu zuretzat. Erabiltzailearen izena edo pasahitza aldatu nahi baduzu joan mesedez zure profilaren orrialdera.'
 oauthHere: "hemen"
 statistics: "Estatistikak"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
