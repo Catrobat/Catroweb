@@ -75,6 +75,7 @@ oauthPopUpTitle: "të dhënat e identifikimit të llogarisë së jashtme"
 oauthInfo: 'Sapo keni përdorur një llogari të jashtme për t''u identifikuar. Ne krijuam një emër përdorimi të rastësishëm për ju. Nëse dëshironi të ndryshoni emrin tuaj të përdoruesit ose të krijoni një fjalëkalim të ri për llogarinë tuaj, ju lutemi shkoni në faqen tuaj të profilit. Klikoni  %link_start% këtu %link_end% për të shkuar në faqen tuaj të profilit'
 oauthHere: "këtu"
 statistics: "Statistikat"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:

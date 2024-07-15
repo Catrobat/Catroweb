@@ -75,6 +75,7 @@ oauthPopUpTitle: "Informação de login da conta externa"
 oauthInfo: 'Você acabou de usar uma conta externa para entrar. Nós criamos um nome de usuário aleatório para você. Se quiser mudar seu nome de usuário ou criar uma nova senha para sua conta, acesse minha página de perfil. Clique %link_start% aqui %link_end% para ir para a sua página de perfil'
 oauthHere: "aqui"
 statistics: "Estatísticas"
+languageSelection: "Seleção de idioma"
 indexPage:
   recommendedSection:
     info:

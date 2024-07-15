@@ -75,6 +75,7 @@ oauthPopUpTitle: "حساب خارجی ورود به سیستم اطلاعات"
 oauthInfo: 'شما به تازگی از یک حساب خارجی برای ورود استفاده کرده اید. ما یک نام کاربری تصادفی برای شما ایجاد کردیم. اگر می خواهید نام کاربری خود را تغییر دهید یا گذرواژه جدیدی برای حساب خود ایجاد کنید ، لطفاً به صفحه نمایه خود بروید.'
 oauthHere: "اینجا"
 statistics: "آمارها"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:

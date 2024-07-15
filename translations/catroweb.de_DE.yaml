@@ -75,6 +75,7 @@ oauthPopUpTitle: "Externe Logininformationen"
 oauthInfo: 'Du hast einen externen Account zum Einloggen benutzt. Wir haben für dich einen zufälligen Benutzernamen erstellt. Wenn du den Benutzernamen ändern willst oder ein neues Passwort setzen willst, geh auf deine Profilseite. Klicke %link_start% hier %link_end% um zu deiner Profilseite zu gelangen.'
 oauthHere: "hier"
 statistics: "Statistiken"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:

@@ -75,6 +75,7 @@ oauthPopUpTitle: "ข้อมูลการลงชื่อเข้าใ�
 oauthInfo: 'คุณเพิ่งใช้บัญชีภายนอกเพื่อเข้าสู่ระบบเราได้สร้างชื่อผู้ใช้แบบสุ่มสำหรับคุณ หากคุณต้องการเปลี่ยนชื่อผู้ใช้ของคุณหรือสร้างรหัสผ่านใหม่สำหรับบัญชีของคุณโปรดไปที่หน้าโปรไฟล์ของฉัน คลิก %link_start% ที่นี่ %link_end% เพื่อไปที่หน้าโปรไฟล์ของคุณ'
 oauthHere: "ที่นี่"
 statistics: "สถิติ"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:

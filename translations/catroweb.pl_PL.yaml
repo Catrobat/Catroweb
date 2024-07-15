@@ -75,6 +75,7 @@ oauthPopUpTitle: "Informacje o logowaniu do konta zewnętrznego"
 oauthInfo: 'Właśnie użyłeś zewnętrznego konta, aby się zalogować. Stworzyliśmy dla Ciebie losową nazwę użytkownika. Jeśli chcesz zmienić nazwę użytkownika lub utworzyć nowe hasło dla swojego konta, przejdź do swojej strony profilowej. Kliknij %link_start% tutaj %link_end% , aby przejść do strony profilu'
 oauthHere: "tutaj"
 statistics: "Statystyki"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
