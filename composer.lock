@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3dcbb0b2d5275ed79454805db57f456a",
+    "content-hash": "679945efb49738a3bb3e335ca129ffb3",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -6867,16 +6867,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.30.2",
+            "version": "4.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "ad0bffaa798b20743889f2c96b17eff96ff989d6"
+                "reference": "73492afdcdf6cb5314685b2661f87dc906b1f2b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/ad0bffaa798b20743889f2c96b17eff96ff989d6",
-                "reference": "ad0bffaa798b20743889f2c96b17eff96ff989d6",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/73492afdcdf6cb5314685b2661f87dc906b1f2b6",
+                "reference": "73492afdcdf6cb5314685b2661f87dc906b1f2b6",
                 "shasum": ""
             },
             "require": {
@@ -6935,7 +6935,7 @@
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
                 "psr/event-dispatcher": "^1.0",
-                "rector/rector": "^0.19",
+                "rector/rector": "^1.1",
                 "symfony/browser-kit": "^5.4 || ^6.2 || ^7.0",
                 "symfony/css-selector": "^5.4 || ^6.2 || ^7.0",
                 "symfony/filesystem": "^5.4 || ^6.2 || ^7.0",
@@ -6980,7 +6980,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.30.2"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.31.0"
             },
             "funding": [
                 {
@@ -7000,7 +7000,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-05-08T12:26:44+00:00"
+            "time": "2024-07-15T18:56:45+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
