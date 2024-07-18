@@ -41,6 +41,29 @@
       } %}
     </div>
   </div>
+  {% if logged_in %}
+  <div class="btn btn-danger d-lg-block col-lg-3 mt-2">
+        {% include 'components/redirect_button.twig' with {
+        'id': 'projectStealButton',
+        'url': path('project_steal', {'id': project.id }),
+        'icon': 'person',
+        'text': "Steal"
+      } %}
+      <aside class="mdc-snackbar">
+        <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+          <div class="mdc-snackbar__label" aria-atomic="false">
+            Can't send photo. Retry in 5 seconds.
+          </div>
+          <div class="mdc-snackbar__actions" aria-atomic="true">
+            <button type="button" class="mdc-button mdc-snackbar__action">
+              <div class="mdc-button__ripple"></div>
+              <span class="mdc-button__label">Retry</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  {% endif %}
 
   {% if project.getNotForKids() %}
   <div class="row">
