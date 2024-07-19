@@ -1,6 +1,5 @@
-/* eslint-env jquery */
+/* eslint-env browser */
 
-// eslint-disable-next-line no-unused-vars
 function AdminMail() {
   const sendBtn = document.querySelector('.btn-send')
   const previewBtn = document.querySelector('.btn-preview')
@@ -16,7 +15,7 @@ function AdminMail() {
     const subject = subjectInput.value
     const title = titleInput.value
     const message = messageInput.value
-    const url = `send?username=${username}&subject=${subject}&title=${title}&message=${message}`
+    const url = `send?username=${encodeURIComponent(username)}&subject=${encodeURIComponent(subject)}&title=${encodeURIComponent(title)}&message=${encodeURIComponent(message)}`
 
     fetch(url)
       .then((response) => {
@@ -38,6 +37,9 @@ function AdminMail() {
       })
       .catch((error) => {
         console.error(error)
+        resultBox.classList.remove('success')
+        resultBox.classList.add('error')
+        resultBox.innerHTML = 'Error sending mail'
       })
   }
 
@@ -47,10 +49,14 @@ function AdminMail() {
     const title = titleInput.value
     const message = messageInput.value
     const template = templateSelect.value
-    const url = `preview?username=${username}&subject=${subject}&title=${title}&message=${message}&template=${template}`
+    const url = `preview?username=${encodeURIComponent(username)}&subject=${encodeURIComponent(subject)}&title=${encodeURIComponent(title)}&message=${encodeURIComponent(message)}&template=${encodeURIComponent(template)}`
     window.open(url, '_blank')
   }
 
   sendBtn.addEventListener('click', sendMail)
   previewBtn.addEventListener('click', previewMail)
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  AdminMail()
+})
