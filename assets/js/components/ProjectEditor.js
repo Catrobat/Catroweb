@@ -1,46 +1,49 @@
-import $ from 'jquery'
 import { MDCSelect } from '@material/select'
 import { ProjectEditorDialog } from '../custom/ProjectEditorDialog'
 import { showCustomTopBarTitle } from '../layout/top_bar'
 import { DIALOG } from './ProjectEditorModel'
 
 export function ProjectEditor(projectDescriptionCredits, programId, model) {
-  this.body = $('body')
-  this.editTextUI = $('#edit-text-ui')
-  this.languageSelectorList = $('#edit-language-selector-list')
-  this.selectedLanguage = $('#edit-selected-language')
-  this.textLoadingSpinner = $('#edit-loading-spinner')
-  this.saveButton = $('#edit-submit-button')
+  this.body = document.body
+  this.editTextUI = document.getElementById('edit-text-ui')
+  this.languageSelectorList = document.getElementById(
+    'edit-language-selector-list',
+  )
+  this.saveButton = document.getElementById('edit-submit-button')
 
   this.languageSelect = new MDCSelect(
     document.querySelector('#edit-language-selector'),
   )
 
   this.closeEditorDialog = new ProjectEditorDialog(
-    projectDescriptionCredits.data('trans-close-editor-prompt'),
-    projectDescriptionCredits.data('trans-save'),
-    projectDescriptionCredits.data('trans-discard'),
+    projectDescriptionCredits.dataset.transCloseEditorPrompt,
+    projectDescriptionCredits.dataset.transSave,
+    projectDescriptionCredits.dataset.transDiscard,
   )
 
   this.confirmDeleteDialog = new ProjectEditorDialog(
-    projectDescriptionCredits.data('trans-confirm-delete'),
-    projectDescriptionCredits.data('trans-cancel'),
-    projectDescriptionCredits.data('trans-delete'),
+    projectDescriptionCredits.dataset.transConfirmDelete,
+    projectDescriptionCredits.dataset.transCancel,
+    projectDescriptionCredits.dataset.transDelete,
   )
 
-  this.saveButton.on('click', model.save)
+  this.saveButton.addEventListener('click', model.save)
 
-  $('#edit-delete-button').on('click', model.deleteTranslation)
+  document
+    .getElementById('edit-delete-button')
+    .addEventListener('click', model.deleteTranslation)
 
   this.languageSelect.listen('MDCSelect:change', () => {
-    if (!this.editTextUI.is(':visible')) {
-      return
+    if (!this.editTextUI.classList.contains('d-none')) {
+      model.setLanguage(this.languageSelect.value)
     }
-
-    model.setLanguage(this.languageSelect.value)
   })
 
-  $('.mdc-text-field__input').on('input', model.onInput)
+  Array.from(document.querySelectorAll('.mdc-text-field__input')).forEach(
+    (input) => {
+      input.addEventListener('input', model.onInput)
+    },
+  )
 
   this.show = (
     navigationCallback,
@@ -55,53 +58,60 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
 
     model.show(language)
 
-    const languageSelectElement = $('#edit-language-selector')
+    const languageSelectElement = document.getElementById(
+      'edit-language-selector',
+    )
     if (this.showLanguageSelect) {
-      languageSelectElement.removeClass('d-none')
+      languageSelectElement.classList.remove('d-none')
     } else {
-      languageSelectElement.addClass('d-none')
+      languageSelectElement.classList.add('d-none')
     }
 
-    const deleteButtonElement = $('#edit-delete-button')
+    const deleteButtonElement = document.getElementById('edit-delete-button')
     if (this.showDeleteButton) {
-      deleteButtonElement.removeClass('d-none')
+      deleteButtonElement.classList.remove('d-none')
     } else {
-      deleteButtonElement.addClass('d-none')
+      deleteButtonElement.classList.add('d-none')
     }
 
     window.history.pushState(
       { type: 'ProjectEditor', id: programId, full: true },
-      $(this).text(),
+      document.title,
       '#editor',
     )
 
-    $(window).on('popstate', model.popStateHandler)
-    showCustomTopBarTitle(headerText, function () {
+    window.addEventListener('popstate', model.popStateHandler)
+    showCustomTopBarTitle(headerText, () => {
       window.history.back()
     })
 
-    this.body.addClass('overflow-hidden')
-    this.editTextUI.removeClass('d-none')
+    this.body.classList.add('overflow-hidden')
+    this.editTextUI.classList.remove('d-none')
   }
 
   // region private
   this.close = () => {
-    $(window).off('popstate', model.popStateHandler)
+    window.removeEventListener('popstate', model.popStateHandler)
 
-    this.editTextUI.addClass('d-none')
+    this.editTextUI.classList.add('d-none')
 
     this.navigationCallback()
   }
 
   model.setOnLanguageList((languages) => {
-    this.languageSelectorList.empty()
+    this.languageSelectorList.innerHTML = ''
 
     for (const language in languages) {
-      this.languageSelectorList
-        .append(`<li class="mdc-list-item" data-value="${language}" role="option" tabindex="-1">\
-        <span class="mdc-list-item__ripple"></span>\
-        <span class="mdc-list-item__text">${languages[language]}</span>\
-        </li>`)
+      const listItem = document.createElement('li')
+      listItem.classList.add('mdc-list-item')
+      listItem.dataset.value = language
+      listItem.setAttribute('role', 'option')
+      listItem.setAttribute('tabindex', '-1')
+      listItem.innerHTML = `
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__text">${languages[language]}</span>
+      `
+      this.languageSelectorList.appendChild(listItem)
     }
 
     this.languageSelect.layoutOptions()
@@ -118,9 +128,13 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
     }
   })
 
-  model.setOnButtonEnabled((enabled) =>
-    this.saveButton.attr('disabled', !enabled),
-  )
+  model.setOnButtonEnabled((enabled) => {
+    if (enabled) {
+      this.saveButton.removeAttribute('disabled')
+    } else {
+      this.saveButton.setAttribute('disabled', 'disabled')
+    }
+  })
 
   model.setOnLanguageSelected((languageIndex) => {
     this.languageSelect.selectedIndex = languageIndex

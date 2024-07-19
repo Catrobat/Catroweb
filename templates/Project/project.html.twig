@@ -204,8 +204,8 @@
        data-project-id="{{ project.id }}"
        data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
        data-google-translate-display-name="{{ 'project.googleTranslate'|trans({}, 'catroweb') }}"
-       data-has-description="{{ project.description is not empty }}"
-       data-has-credits="{{ project.credits is not empty }}"
+       data-has-description="{% if project.description %}true{% else %}false{% endif %}"
+       data-has-credits="{% if project.credits %}true{% else %}false{% endif %}"
        data-theme="{{ theme() }}"
        data-flavor="{{ flavor() }}"
        data-base-url="{{ app.request.getBaseURL() }}"
@@ -243,8 +243,8 @@
   ></div>
   <div class="js-project-description-credits"
        data-project-id="{{ project.id }}"
-       data-has-description={% if project.description %} true {% else %} false {% endif %}
-       data-has-credits={% if project.credits %} true {% else %} false {% endif %}
+       data-has-description="{% if project.description %}true{% else %}false{% endif %}"
+       data-has-credits="{% if project.credits %}true{% else %}false{% endif %}"
        data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
        data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
        data-trans-confirm-delete="{{ "project.confrimDelete"|trans({}, "catroweb") }}"
@@ -259,9 +259,6 @@
        data-trans-edit-translation="{{ "project.editTranslation"|trans({}, "catroweb") }}"
        data-trans-create-translation="{{ "project.createTranslation"|trans({}, "catroweb") }}"
        data-trans-translations="{{ "project.translations"|trans({}, "catroweb") }}"
-       data-path-edit-project-name="{{ path('edit_project_name', {'id': project.id}) }}"
-       data-path-edit-project-description="{{ path('edit_project_description', {'id': project.id}) }}"
-       data-path-edit-project-credits="{{ path('edit_project_credits', {'id': project.id}) }}"
   ></div>
   <div class="js-project-comments"
        data-project-id="{{ project_details.id }}"

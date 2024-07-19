@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function initSidebarBadges() {
-  if (document.querySelector('.js-user-state').dataset.isUserLoggedIn) {
+  if (
+    document.querySelector('.js-user-state').dataset.isUserLoggedIn === 'true'
+  ) {
     updateBadge(
       sidebarJs.dataset.baseUrl + '/api/notifications/count',
       'sidebar_badge--unseen-notifications',

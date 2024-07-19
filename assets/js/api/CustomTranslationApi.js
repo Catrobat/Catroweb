@@ -1,55 +1,53 @@
-import $ from 'jquery'
-
 export class CustomTranslationApi {
   constructor(programSection) {
-    if (programSection === 'credits') {
-      this.programSection = 'credit'
-    } else {
-      this.programSection = programSection
-    }
+    this.programSection =
+      programSection === 'credits' ? 'credit' : programSection
   }
 
-  getCustomTranslation(
+  async getCustomTranslation(
     programId,
     language,
     successCallback,
     errorCallback = () => {},
   ) {
-    $.ajax({
-      url:
-        '../translate/custom/project/' +
-        programId +
-        '?field=' +
-        this.programSection +
-        '&language=' +
-        language,
-      type: 'get',
-      success: successCallback,
-      error: errorCallback,
-    })
+    try {
+      const response = await fetch(
+        `../translate/custom/project/${programId}?field=${this.programSection}&language=${language}`,
+        {
+          method: 'GET',
+        },
+      )
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`)
+      }
+      const data = await response.text()
+      successCallback(data)
+    } catch (error) {
+      errorCallback(error)
+    }
   }
 
   deleteCustomTranslation(programId, language, successCallback, errorCallback) {
     const self = this
-    return new Promise(function (resolve, reject) {
-      $.ajax({
-        url:
-          '../translate/custom/project/' +
-          programId +
-          '?field=' +
-          self.programSection +
-          '&language=' +
-          language,
-        type: 'delete',
-        success: function (data) {
+    return new Promise((resolve, reject) => {
+      fetch(
+        `../translate/custom/project/${programId}?field=${self.programSection}&language=${language}`,
+        {
+          method: 'DELETE',
+        },
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error: ${response.status}`)
+          }
           successCallback(language)
           resolve()
-        },
-        error: function (error) {
+        })
+        .catch((error) => {
           errorCallback(error)
-          reject(error.status)
-        },
-      })
+          reject(error)
+        })
     })
   }
 
@@ -61,34 +59,43 @@ export class CustomTranslationApi {
     errorCallback,
   ) {
     const self = this
-    return new Promise(function (resolve, reject) {
-      $.ajax({
-        url:
-          '../translate/custom/project/' +
-          programId +
-          '?field=' +
-          self.programSection +
-          '&text=' +
-          text +
-          '&language=' +
-          language,
-        type: 'put',
-        success: function (data) {
+    return new Promise((resolve, reject) => {
+      fetch(
+        `../translate/custom/project/${programId}?field=${self.programSection}&text=${text}&language=${language}`,
+        {
+          method: 'PUT',
+        },
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Error: ${response.status}`)
+          }
           successCallback(language)
           resolve()
-        },
-        error: function (error) {
+        })
+        .catch((error) => {
           errorCallback(error)
-          reject(error.status)
-        },
-      })
+          reject(error)
+        })
     })
   }
 
-  getCustomTranslationLanguages(programId) {
-    return $.ajax({
-      url: '../translate/custom/project/' + programId + '/list',
-      type: 'get',
-    })
+  async getCustomTranslationLanguages(programId) {
+    try {
+      const response = await fetch(
+        `../translate/custom/project/${programId}/list`,
+        {
+          method: 'GET',
+        },
+      )
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`)
+      }
+
+      return await response.json()
+    } catch (error) {
+      throw new Error(`Error fetching languages: ${error.message}`)
+    }
   }
 }
