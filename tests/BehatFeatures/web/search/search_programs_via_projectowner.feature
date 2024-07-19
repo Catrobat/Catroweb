@@ -13,7 +13,7 @@ Feature: Searching for programs with ownername
       | 1  | project 1 | Catrobat |
       | 2  | project 2 | User2    |
       | 3  | project 3 | User3    |
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
 
   Scenario: search for programs with full name should work
     When I am on "/app/search/User3"

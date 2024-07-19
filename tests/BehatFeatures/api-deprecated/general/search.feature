@@ -21,7 +21,7 @@ Feature: Search programs
       | 10 | Fritz the Cat   |             | User1    | 112       | 33    | 01.01.2012 13:00 | 0.8.5   |
     And the current time is "01.08.2014 13:00"
     And the server name is "pocketcode.org"
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
 
   Scenario: Search for a program
 

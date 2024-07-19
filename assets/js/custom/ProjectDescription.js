@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 export function ProjectDescription(
   programId,
   usersLanguage,
@@ -8,17 +6,21 @@ export function ProjectDescription(
   myProgram,
   customTranslationApi,
 ) {
-  const description = $('#description')
-  const descriptionCreditsContainer = $('#description-credits-container')
-  const showMoreToggle = $('#descriptionShowMoreToggle')
-  const descriptionShowMoreText = $('#descriptionShowMoreText')
+  const description = document.getElementById('description')
+  const descriptionCreditsContainer = document.getElementById(
+    'description-credits-container',
+  )
+  const showMoreToggle = document.getElementById('descriptionShowMoreToggle')
+  const descriptionShowMoreText = document.getElementById(
+    'descriptionShowMoreText',
+  )
 
   initShowMore()
 
   function initShowMore() {
-    if (descriptionCreditsContainer.height() > 300) {
-      showMoreToggle.removeClass('d-none')
-      descriptionCreditsContainer.css({ height: '200px' })
+    if (descriptionCreditsContainer.offsetHeight > 300) {
+      showMoreToggle.classList.remove('d-none')
+      descriptionCreditsContainer.style.height = '200px'
     }
   }
 
@@ -30,25 +32,25 @@ export function ProjectDescription(
     )
 
     function setDescription(value) {
-      description.text(value)
+      description.textContent = value
     }
   }
 
-  showMoreToggle.on('click', () => {
-    const icon = showMoreToggle.find('i')
-    if (icon.text() === 'keyboard_arrow_up') {
-      icon.text('keyboard_arrow_down')
+  showMoreToggle.addEventListener('click', () => {
+    const icon = showMoreToggle.querySelector('i')
+    if (icon.textContent === 'keyboard_arrow_up') {
+      icon.textContent = 'keyboard_arrow_down'
     } else {
-      icon.text('keyboard_arrow_up')
+      icon.textContent = 'keyboard_arrow_up'
     }
-    if (descriptionCreditsContainer.height() !== 200) {
-      descriptionShowMoreText.text(showMoreButtonText)
-      showMoreToggle.attr('aria-expanded', false)
-      descriptionCreditsContainer.css({ height: '200px' })
+    if (descriptionCreditsContainer.offsetHeight !== 200) {
+      descriptionShowMoreText.textContent = showMoreButtonText
+      showMoreToggle.setAttribute('aria-expanded', false)
+      descriptionCreditsContainer.style.height = '200px'
     } else {
-      descriptionShowMoreText.text(showLessButtonText)
-      showMoreToggle.attr('aria-expanded', true)
-      descriptionCreditsContainer.css({ height: '100%' })
+      descriptionShowMoreText.textContent = showLessButtonText
+      showMoreToggle.setAttribute('aria-expanded', true)
+      descriptionCreditsContainer.style.height = '100%'
     }
   })
 }

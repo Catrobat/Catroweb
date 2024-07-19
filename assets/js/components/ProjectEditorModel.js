@@ -1,4 +1,5 @@
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
+import { getCookie } from '../security/CookieHelper'
 
 export const DIALOG = {
   CLOSE_EDITOR: 'close_editor',
@@ -12,6 +13,10 @@ export function ProjectEditorModel(programId, textFieldModels) {
   this.languages = {}
   this.definedLanguages = {}
   this.selectedLanguage = ''
+
+  this.routing = document.getElementById('js-api-routing')
+  this.baseUrl = this.routing.dataset.baseUrl
+  this.theme = this.routing.dataset.index
 
   this.customTranslationApi = new CustomTranslationApi()
 
@@ -100,28 +105,63 @@ export function ProjectEditorModel(programId, textFieldModels) {
   }
 
   this.save = () => {
-    Promise.all(
-      this.textFieldModels.map((textField) =>
-        textField.save(this.selectedLanguage),
-      ),
-    )
-      .then((results) => {
-        if (
-          this.selectedLanguage === '' ||
-          this.selectedLanguage === 'default'
-        ) {
-          this.onReload()
-        } else if (results.length === this.textFieldModels.length) {
-          this.onClose()
-        }
+    if (this.selectedLanguage === '' || this.selectedLanguage === 'default') {
+      // Update default project name, credits & description
+      const requestData = this.textFieldModels
+        .map((textField) => textField.collectChanges(this.selectedLanguage))
+        .filter((update) => update !== null)
+        .reduce((acc, curr) => ({ ...acc, ...curr }), {})
+
+      if (requestData.length === 0) {
+        return
+      }
+
+      fetch(`${this.baseUrl}/api/project/${this.programId}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + getCookie('BEARER'),
+          'Accept-Language': this.getAcceptLanguage(),
+        },
+        body: JSON.stringify(requestData),
       })
-      .catch((reason) => {
-        for (const error of reason) {
-          if (error === 401) {
-            this.onUnauthorized()
+        .then((response) => {
+          if (response.ok) {
+            if (
+              this.selectedLanguage === '' ||
+              this.selectedLanguage === 'default'
+            ) {
+              this.onReload()
+            }
+          } else if (response.status === 401) {
+            window.location.href = `${this.baseUrl}/${this.theme}/login`
+          } else if (response.status === 403) {
+            window.location.href = `${this.baseUrl}/${this.theme}`
+          } else if (response.status === 422) {
+            response.json().then((json) => {
+              this.textFieldModels.forEach((textField) => {
+                if (json[textField.programSection]) {
+                  textField.setError(json[textField.programSection])
+                }
+              })
+            })
           }
-        }
-      })
+        })
+        .catch((reason) => {
+          console.error('Unexpected error on updating project')
+        })
+    } else {
+      Promise.all(
+        this.textFieldModels.map((textFieldModel) =>
+          textFieldModel.handleTranslations(this.selectedLanguage),
+        ),
+      )
+        .catch((error) => {
+          console.error(error)
+        })
+        .finally(() => this.onClose())
+    }
   }
 
   this.deleteTranslation = () => {
@@ -175,4 +215,12 @@ export function ProjectEditorModel(programId, textFieldModels) {
     this.onButtonEnabled(false)
   }
   // end region
+
+  this.getAcceptLanguage = () => {
+    try {
+      return document.getElementById('app-language').dataset.appLanguage
+    } catch (e) {
+      return 'en'
+    }
+  }
 }

@@ -9,13 +9,11 @@ Feature: Projects should have credits where a custom translation can be defined
       | id | name      | owned by | credit     |
       | 1  | project 1 | Catrobat | my credits |
       | 2  | project 2 | Catrobat |            |
-    And I wait 1000 milliseconds
 
   Scenario: Credit text field should be disabled if there is not a default credit defined
     Given I log in as "Catrobat"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
-    And I wait 10000 milliseconds
     When I click "#edit-project-button"
     And I wait for AJAX to finish
     When I click "#add-translation-button"

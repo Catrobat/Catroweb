@@ -28,7 +28,7 @@ Feature: Search projects
       | kbrw-khwf | ponny           |                           | NewUser  | arduino          | 05.01.2012 14:00 | 0.8.5   | 0.985            | false   | true    |
       | isxs-adkt | Webteam         |                           | NewUser  | arduino          | 04.01.2012 14:00 | 0.8.5   | 0.984            | false   | true    |
       | tvut-irkw | Fritz the Cat   |                           | NewUser  | mindstorms       | 03.01.2012 14:00 | 0.8.5   | 0.985            | false   | true    |
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
 
   Scenario: Search for projects with specific word
 

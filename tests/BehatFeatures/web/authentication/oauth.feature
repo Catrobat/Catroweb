@@ -29,7 +29,7 @@ Feature:
     And I fill in "repeat-password" with "test12"
     And I click "#save-password"
     And I wait for the page to be loaded
-    And I wait 2000 milliseconds
+    And I wait 500 milliseconds
     Then I should see "Success"
     And I click ".swal2-confirm"
     Then I should see "Password"
