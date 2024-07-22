@@ -45,7 +45,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.4.0",
+    "eslint-plugin-promise": "^6.6.0",
     "eslint-webpack-plugin": "^4.1.0",
     "file-loader": "^6.2.0",
     "glob-all": "^3.3.1",
