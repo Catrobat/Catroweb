@@ -3,8 +3,8 @@
   "version": "3.20.34",
   "description": "Catroweb - The share communication platform for the Catrobat community",
   "scripts": {
-    "test": "npm run test-js && npm run test-css && npm run test-php",
-    "fix": "npm run fix-js && npm run fix-css && npm run fix-php",
+    "test": "npm run test-js && npm run test-css && npm run test-asset && npm run test-php",
+    "fix": "npm run fix-js && npm run fix-css && fix-asset && npm run fix-php",
     "test-js": "npx eslint assets/js/*.js assets/js/**/*.js webpack.config.js",
     "fix-js": "npx eslint assets/js/*.js assets/js/**/*.js webpack.config.js --fix",
     "test-css": "npx stylelint assets/**/*.scss assets/**/**/*.scss",
