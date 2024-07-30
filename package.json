@@ -94,7 +94,7 @@
     "@material/top-app-bar": "^14.0",
     "@popperjs/core": "^2.11.8",
     "@symfony/stimulus-bridge": "^3.2.2",
-    "analytics": "^0.8.13",
+    "analytics": "^0.8.14",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.3",
     "clipboard": "^2.0.11",
