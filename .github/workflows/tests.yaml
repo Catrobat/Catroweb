@@ -31,10 +31,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
       - name: Build catroweb app image
         run: |
           cd docker
-          docker-compose -f docker-compose.test.yaml build app.catroweb
+          docker compose -f docker-compose.test.yaml build app.catroweb
           docker save app.catroweb > catroweb-image.tar
 
       - name: Upload app.catroweb image
@@ -64,7 +68,7 @@ jobs:
       - name: Pull the latest images to build (Faster than caching)
         run: |
           cd docker
-          docker-compose -f docker-compose.test.yaml pull
+          docker compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
         uses: actions/download-artifact@v4
@@ -77,7 +81,7 @@ jobs:
         run: |
           cd docker
           docker load < catroweb-image.tar
-          docker-compose -f docker-compose.test.yaml up -d
+          docker compose -f docker-compose.test.yaml up -d
           sleep 60
 
       - name: PhpUnit tests
@@ -169,10 +173,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Log in to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
       - name: Pull the latest images to build (Faster than caching)
         run: |
           cd docker
-          docker-compose -f docker-compose.test.yaml pull
+          docker compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
         uses: actions/download-artifact@v4
@@ -184,7 +192,7 @@ jobs:
         run: |
           cd docker
           docker load < catroweb-image.tar
-          docker-compose -f docker-compose.test.yaml up -d
+          docker compose -f docker-compose.test.yaml up -d
           sleep 30
 
       # Test Run
