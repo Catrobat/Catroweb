@@ -169,6 +169,7 @@ use OpenAPI\Server\Service\SerializerInterface;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\Dotenv\Command\DotenvDumpCommand;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -332,10 +333,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set(MaintenanceController::class, MaintenanceController::class)
-    ->public()
     ->arg('$file_storage_dir', '%catrobat.file.storage.dir%')
     ->arg('$apk_dir', '%catrobat.apk.dir%')
     ->arg('$log_dir', '%catrobat.logs.dir%')
+    ->public()
   ;
 
   $services->set(SendMailToUserController::class, SendMailToUserController::class)
@@ -597,8 +598,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->tag('kernel.event_subscriber')
   ;
 
-  $services
-    ->set(ApiExceptionSubscriber::class)
+  $services->set(ApiExceptionSubscriber::class)
     ->tag('kernel.event_subscriber')
   ;
 
@@ -862,6 +862,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   $services->set('admin.block.statistics.comment_machine_translation', CommentMachineTranslationAdmin::class)
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Comment Machine Translation', 'code' => null, 'model_class' => CommentMachineTranslation::class, 'controller' => CommentMachineTranslationAdminController::class])
+    ->public()
+  ;
+
+  $services->set(DotenvDumpCommand::class)
+    ->tag('console.command')
+    ->arg('$projectDir', '%kernel.project_dir%/.env')
+    ->arg('$defaultEnv', '%kernel.environment%')
     ->public()
   ;
 

@@ -79,7 +79,6 @@ host(getenv('DEPLOY_SHARE'))
   ->set('labels', ['stage' => 'share'])
   ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
-  ->set('composer_options', '--verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share')
   ->set('remote_user', 'root')
 ;
@@ -150,7 +149,7 @@ task('sonata:admin:setup:acl', function () {
 // dump the .env file as .env.local.php to speed up the loading of the env vars
 task('dump:env', function () {
   cd('{{release_path}}');
-  run('composer dump-env prod');
+  run('bin/console dotenv:dump prod');
 });
 
 /*
