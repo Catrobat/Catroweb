@@ -1,4 +1,3 @@
-// import $ from 'jquery'
 import { MDCMenu } from '@material/menu'
 import { showSnackbar } from './components/snackbar'
 require('../styles/custom/studios.scss')

@@ -22,9 +22,17 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
  */
 class ReportedProjectsAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'admin_reported_projects';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_reported_projects';
+  }
 
-  protected $baseRoutePattern = 'reported_projects';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'project/report';
+  }
 
   #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void
@@ -83,8 +91,8 @@ class ReportedProjectsAdmin extends AbstractAdmin
       ->add('program.visible')
       ->add('program.approved', null, ['sortable' => false])
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
-        'unreportProgram' => ['template' => 'Admin/CRUD/list__action_unreportProject.html.twig'],
-        'acceptProgramReport' => ['template' => 'Admin/CRUD/list__action_accept_project_report.html.twig'],
+        'unreportProject' => ['template' => 'Admin/CRUD/list__action_unreportProject.html.twig'],
+        'acceptProjectReport' => ['template' => 'Admin/CRUD/list__action_accept_project_report.html.twig'],
       ]])
     ;
   }
@@ -92,8 +100,8 @@ class ReportedProjectsAdmin extends AbstractAdmin
   #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
-    $collection->add('unreportProgram');
-    $collection->add('acceptProgramReport');
+    $collection->add('unreportProject');
+    $collection->add('acceptProjectReport');
     $collection->remove('create')->remove('delete')->remove('export');
   }
 }

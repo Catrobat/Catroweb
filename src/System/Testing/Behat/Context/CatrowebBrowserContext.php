@@ -56,11 +56,6 @@ class CatrowebBrowserContext extends BrowserContext
     setlocale(LC_ALL, 'en');
   }
 
-  public static function getAcceptedSnippetType(): string
-  {
-    return 'regex';
-  }
-
   // -------------------------------------------------------------------------------------------------------------------
   //  Hook
   // -------------------------------------------------------------------------------------------------------------------
@@ -741,7 +736,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iClickOnTheShowButtonInTheApproveList(string $project_id): void
   {
     $page = $this->getSession()->getPage();
-    $page->find('xpath', "//a[contains(@href,'/admin/approve/".$project_id."/show')]")->click();
+    $page->find('xpath', "//a[contains(@href,'/admin/project/approval/".$project_id."/show')]")->click();
   }
 
   /**

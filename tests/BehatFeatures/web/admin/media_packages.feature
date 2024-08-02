@@ -21,7 +21,7 @@ Feature: Media Packages
 
   Scenario: List media packages sorted by Name
     Given I log in as "Admoon" with the password "123456"
-    And I am on "/admin/media_package/list"
+    And I am on "/admin/media-package/list"
     And I wait for the page to be loaded
     Then I should see the media packages table:
       | name    | name_url |
@@ -31,14 +31,14 @@ Feature: Media Packages
 
   Scenario: Delete media package
     Given I log in as "Admoon" with the password "123456"
-    And I am on "/admin/media_package/list"
+    And I am on "/admin/media-package/list"
     And I wait for the page to be loaded
     Then I should see the media packages table:
       | name    | name_url |
       | Looks   | looks    |
       | Sounds  | sounds   |
       | Objects | objects  |
-    Then I am on "/admin/media_package/1/delete"
+    Then I am on "/admin/media-package/1/delete"
     And I wait for the page to be loaded
     Then I click on the first ".btn-danger" button
     And I wait for the page to be loaded
@@ -49,7 +49,7 @@ Feature: Media Packages
 
   Scenario: Adding a media package
     Given I log in as "Admoon" with the password "123456"
-    And I am on "/admin/media_package/list"
+    And I am on "/admin/media-package/list"
     And I wait for the page to be loaded
     Then I should see the media packages table:
       | name    | name_url |
@@ -58,12 +58,12 @@ Feature: Media Packages
       | Objects | objects  |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/media_package/create"
+    Then I should be on "/admin/media-package/create"
     Then I write "Backgrounds" in textarea with label "Name"
     Then I write "backgrounds" in textarea with label "Url"
     Then I click ".btn-success"
     And I wait for the page to be loaded
-    And I am on "/admin/media_package/list"
+    And I am on "/admin/media-package/list"
     Then I should see the media packages table:
       | name        | name_url    |
       | Looks       | looks       |
@@ -73,19 +73,19 @@ Feature: Media Packages
 
   Scenario: Editing a media category
     Given I log in as "Admoon" with the password "123456"
-    And I am on "/admin/media_package/list"
+    And I am on "/admin/media-package/list"
     And I wait for the page to be loaded
     Then I should see the media packages table:
       | name    | name_url |
       | Looks   | looks    |
       | Sounds  | sounds   |
       | Objects | objects  |
-    Then I am on "/admin/media_package/3/edit"
+    Then I am on "/admin/media-package/3/edit"
     And I wait for the page to be loaded
     Then I write "Backgrounds" in textarea with label "Name"
     Then I write "backgrounds" in textarea with label "Url"
     Then I click on the button named "btn_update_and_list"
-    And I am on "/admin/media_package/list"
+    And I am on "/admin/media-package/list"
     And I wait for the page to be loaded
     Then I should see the media packages table:
       | name        | name_url    |

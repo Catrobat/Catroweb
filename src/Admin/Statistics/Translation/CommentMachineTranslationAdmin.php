@@ -14,9 +14,17 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
  */
 class CommentMachineTranslationAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'admin_catrobat_adminbundle_comment_machine_translation';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_comment_machine_translation';
+  }
 
-  protected $baseRoutePattern = 'comment_machine_translation';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'statistics/translation/comment';
+  }
 
   #[\Override]
   protected function configureExportFields(): array

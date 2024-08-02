@@ -14,7 +14,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use Sonata\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthenticationApiProcessor extends AbstractApiProcessor
 {
@@ -53,7 +53,8 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
    */
   protected function getPayloadFromFacebookIdToken(mixed $id_token): array
   {
-    $payload = JWT::decode($id_token, new Key(getenv('FB_OAUTH_PUBLIC_KEY'), 'RS256'));
+    $public_key = $_ENV['FB_OAUTH_PUBLIC_KEY'] ?? '';
+    $payload = JWT::decode($id_token, new Key($public_key, 'RS256'));
 
     return [
       'id' => $payload->user_id,
@@ -132,7 +133,6 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     }
 
     // User does not exist yet
-    /** @var User $user */
     $user = $this->user_manager->create();
     $user->{$set_id}($user_id);
     $user->setEnabled(true);

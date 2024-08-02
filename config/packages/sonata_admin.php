@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\DB\Entity\User\User;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -29,8 +28,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
         ],
         'sonata.block.service.text' => null,
-        'sonata.user.block.menu' => null,
-        'sonata.user.block.account' => null,
       ],
     ]
   );
@@ -77,7 +74,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
         ],
         'groups' => [
-          'sonata.admin.group.programs' => [
+          'sonata.admin.group.projects' => [
             'label' => 'Projects',
             'translation_domain' => 'catroweb',
             'icon' => '<i class="fa fa-cubes"></i>',
@@ -85,6 +82,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.projects.overview',
               'admin.block.projects.approve',
               'admin.block.projects.reported',
+              'admin.block.featured.projects',
+              'admin.block.example.projects',
             ],
           ],
           'sonata.admin.group.users' => [
@@ -106,15 +105,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.comments.reported',
             ],
           ],
-          'sonata.admin.group.featured' => [
-            'label' => 'Special Projects',
-            'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-bullhorn"></i>',
-            'items' => [
-              'admin.block.featured.program',
-              'admin.block.example.program',
-            ],
-          ],
           'sonata.admin.group.mediapackage' => [
             'label' => 'Media Package',
             'translation_domain' => 'catroweb',
@@ -134,37 +124,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.apk.list',
             ],
           ],
-          'sonata.admin.group.survey' => [
-            'label' => 'Survey',
+          'sonata.admin.group.user_communication' => [
+            'label' => 'User communication',
             'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-bar-chart"></i>',
+            'icon' => '<i class="fa fa-bullhorn"></i>',
             'items' => [
               'admin.block.survey',
-            ],
-          ],
-          'sonata.admin.group.db_updater' => [
-            'label' => 'DB Updater',
-            'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-cogs"></i>',
-            'items' => [
-              'admin.block.cron_jobs',
-              'admin.block.special_updater',
-              'admin.block.flavors',
-              'admin.block.achievements',
-              'admin.block.extensions',
-              'admin.block.tags',
-            ],
-          ],
-          'sonata.admin.group.tools' => [
-            'label' => 'Tools',
-            'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-cogs"></i>',
-            'items' => [
-              'admin.block.tools.maintain',
-              'admin.block.tools.logs',
               'admin.block.tools.broadcast',
               'admin.block.tools.mail',
-              'admin.block.tools.feature_flag',
               'admin.block.tools.maintenance_information',
             ],
           ],
@@ -178,10 +145,26 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.statistics.comment_machine_translation',
             ],
           ],
+          'sonata.admin.group.tools' => [
+            'label' => 'System Management',
+            'translation_domain' => 'catroweb',
+            'icon' => '<i class="fa fa-cogs"></i>',
+            'items' => [
+              'admin.block.tools.maintain',
+              'admin.block.tools.logs',
+              'admin.block.tools.feature_flag',
+              'admin.block.cron_jobs',
+              'admin.block.special_updater',
+              'admin.block.flavors',
+              'admin.block.achievements',
+              'admin.block.extensions',
+              'admin.block.tags',
+            ],
+          ],
         ],
       ],
       'security' => [
-        'handler' => 'sonata.admin.security.handler.acl',
+        'handler' => 'sonata.admin.security.handler.role',
         'role_admin' => 'ROLE_ADMIN',
         'role_super_admin' => 'ROLE_SUPER_ADMIN',
         'information' => [
@@ -258,25 +241,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'integer' => '@SonataAdmin/CRUD/base_show_field.html.twig',
             'decimal' => '@SonataAdmin/CRUD/base_show_field.html.twig',
           ],
-        ],
-      ],
-    ]
-  );
-
-  $containerConfigurator->extension(
-    'sonata_user',
-    [
-      'security_acl' => true,
-      'manager_type' => 'orm',
-      'mailer' => 'sonata.user.mailer.default',
-      'class' => [
-        'user' => User::class,
-      ],
-      'resetting' => [
-        'email' => [
-          'template' => '@SonataUser/Admin/Security/Resetting/email.html.twig',
-          'address' => 'support@catrob.at',
-          'sender_name' => 'Catrobat Team',
         ],
       ],
     ]

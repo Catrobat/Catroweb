@@ -32,7 +32,7 @@ Feature: Searching for programs
       | 6  | test advanced games |             | User3    | animation, story | mindstorms | 22.04.2014 14:00 | 0.8.5   |
       | 7  | test                |             | Cat      | story, animation | mindstorms | 22.04.2014 14:00 | 0.8.5   |
       | 8  | project test        | catrobat    | User1    | game             | drone      | 22.04.2014 14:00 | 0.8.5   |
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
 
 
   Scenario: search for programs, which contain the word "program"

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Admin\Tools\Log;
 
-use App\Admin\Tools\Logs\Controller\LogsController;
-use App\Admin\Tools\Logs\LogLine;
+use App\Admin\System\Logs\LogLine;
+use App\Admin\System\Logs\LogsController;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * @internal
  *
- * @covers \App\Admin\Tools\Logs\Controller\LogsController
+ * @covers \App\Admin\System\Logs\LogsController
  */
 class LogsControllerTest extends DefaultTestCase
 {

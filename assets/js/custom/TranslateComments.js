@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateComments extends Translation {
@@ -9,74 +8,110 @@ export class TranslateComments extends Translation {
 
   _initListeners() {
     const translateComments = this
-    $('.comment-translation-button').on('click', function (event) {
-      event.stopPropagation()
-      const commentId = $(this)
-        .attr('id')
-        .substring('comment-translation-button-'.length)
-      const matchingContainer = $(
-        '.comment-translation[data-translate-comment-id="translate-comment-' +
-          commentId +
-          '"]',
-      )
-      const translateCommentUrl = $(matchingContainer).data(
-        'path-translate-comment',
-      )
+    document
+      .querySelectorAll('.comment-translation-button')
+      .forEach((button) => {
+        button.addEventListener('click', function (event) {
+          event.stopPropagation()
+          const commentId = this.id.substring(
+            'comment-translation-button-'.length,
+          )
+          const matchingContainer = document.querySelector(
+            '.comment-translation[data-translate-comment-id="translate-comment-' +
+              commentId +
+              '"]',
+          )
+          const translateCommentUrl =
+            matchingContainer.dataset.pathTranslateComment
 
-      $(this).hide()
+          this.style.display = 'none'
 
-      if (
-        translateComments.isTranslationNotAvailable(
-          '#comment-text-translation-' + commentId,
-        )
-      ) {
-        $('#comment-translation-loading-spinner-' + commentId).show()
-        translateComments.translateComment(translateCommentUrl, commentId)
-      } else {
-        translateComments.openTranslatedComment(commentId)
-      }
-    })
+          if (
+            translateComments.isTranslationNotAvailable(
+              '#comment-text-translation-' + commentId,
+            )
+          ) {
+            document.getElementById(
+              'comment-translation-loading-spinner-' + commentId,
+            ).style.display = 'block'
+            translateComments.translateComment(translateCommentUrl, commentId)
+          } else {
+            translateComments.openTranslatedComment(commentId)
+          }
+        })
+      })
 
-    $('.remove-comment-translation-button').on('click', function (event) {
-      event.stopPropagation()
-      const commentId = $(this)
-        .attr('id')
-        .substring('remove-comment-translation-button-'.length)
-      $(this).hide()
-      $('#comment-translation-button-' + commentId).show()
-      $('#comment-translation-wrapper-' + commentId).slideUp()
-      $('#comment-text-wrapper-' + commentId).slideDown()
-    })
+    document
+      .querySelectorAll('.remove-comment-translation-button')
+      .forEach((button) => {
+        button.addEventListener('click', function (event) {
+          event.stopPropagation()
+          const commentId = this.id.substring(
+            'remove-comment-translation-button-'.length,
+          )
+          this.style.display = 'none'
+          document.getElementById(
+            'comment-translation-button-' + commentId,
+          ).style.display = 'block'
+          document.getElementById(
+            'comment-translation-wrapper-' + commentId,
+          ).style.display = 'none'
+          document.getElementById(
+            'comment-text-wrapper-' + commentId,
+          ).style.display = 'block'
+        })
+      })
   }
 
   setTranslatedCommentData(commentId, data) {
-    $('#comment-text-translation-' + commentId).text(data.translation)
-    $('#comment-text-translation-' + commentId).attr(
-      'lang',
-      data.target_language,
+    const commentTextTranslation = document.getElementById(
+      'comment-text-translation-' + commentId,
     )
+    commentTextTranslation.textContent = data.translation
+    commentTextTranslation.setAttribute('lang', data.target_language)
 
     const byLineElements = new ByLineElementContainer(
-      '#comment-translation-before-languages-' + commentId,
-      '#comment-translation-between-languages-' + commentId,
-      '#comment-translation-after-languages-' + commentId,
-      '#comment-translation-first-language-' + commentId,
-      '#comment-translation-second-language-' + commentId,
+      document.getElementById(
+        'comment-translation-before-languages-' + commentId,
+      ),
+      document.getElementById(
+        'comment-translation-between-languages-' + commentId,
+      ),
+      document.getElementById(
+        'comment-translation-after-languages-' + commentId,
+      ),
+      document.getElementById(
+        'comment-translation-first-language-' + commentId,
+      ),
+      document.getElementById(
+        'comment-translation-second-language-' + commentId,
+      ),
     )
 
     this.setTranslationCredit(data, byLineElements)
   }
 
   openTranslatedComment(commentId) {
-    $('#comment-translation-loading-spinner-' + commentId).hide()
-    $('#remove-comment-translation-button-' + commentId).show()
-    $('#comment-translation-wrapper-' + commentId).slideDown()
-    $('#comment-text-wrapper-' + commentId).slideUp()
+    document.getElementById(
+      'comment-translation-loading-spinner-' + commentId,
+    ).style.display = 'none'
+    document.getElementById(
+      'remove-comment-translation-button-' + commentId,
+    ).style.display = 'block'
+    document.getElementById(
+      'comment-translation-wrapper-' + commentId,
+    ).style.display = 'block'
+    document.getElementById('comment-text-wrapper-' + commentId).style.display =
+      'none'
   }
 
   commentNotTranslated(commentId) {
-    $('#comment-translation-loading-spinner-' + commentId).hide()
-    $('#comment-translation-button-' + commentId).show()
+    document.getElementById(
+      'comment-translation-loading-spinner-' + commentId,
+    ).style.display = 'none'
+    document.getElementById(
+      'comment-translation-button-' + commentId,
+    ).style.display = 'block'
     this.openGoogleTranslatePage(
       document.getElementById('comment-text-' + commentId).innerText,
     )
@@ -84,17 +119,16 @@ export class TranslateComments extends Translation {
 
   translateComment(translateCommentUrl, commentId) {
     const self = this
-    $.ajax({
-      url: translateCommentUrl,
-      type: 'get',
-      data: { target_language: self.targetLanguage },
-      success: function (data) {
+    fetch(translateCommentUrl + '?target_language=' + self.targetLanguage, {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((data) => {
         self.setTranslatedCommentData(commentId, data)
         self.openTranslatedComment(commentId)
-      },
-      error: function () {
+      })
+      .catch((e) => {
         self.commentNotTranslated(commentId)
-      },
-    })
+      })
   }
 }

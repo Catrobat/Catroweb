@@ -2,7 +2,6 @@
 /* global projectConfiguration */
 
 import { MDCTextField } from '@material/textfield'
-import $ from 'jquery'
 import './components/fullscreen_list_modal'
 import { TranslateProgram } from './custom/TranslateProgram'
 import { TranslateComments } from './custom/TranslateComments'
@@ -24,46 +23,45 @@ import MessageDialogs from './components/MessageDialogs'
 
 require('../styles/custom/program.scss')
 
-const $project = $('.js-project')
-const $projectShare = $('.js-project-share')
-const $projectDescriptionCredits = $('.js-project-description-credits')
-const $projectComments = $('.js-project-comments')
-const $appLanguage = $('#app-language')
+const projectElement = document.querySelector('.js-project')
+const projectShareElement = document.querySelector('.js-project-share')
+const projectDescriptionCreditsElement = document.querySelector(
+  '.js-project-description-credits',
+)
+const projectCommentsElement = document.querySelector('.js-project-comments')
+const appLanguageElement = document.querySelector('#app-language')
 
 let editorNavigation = null
 
-if ($project.data('my-project')) {
+if (projectElement.dataset.myProject === 'true') {
   new MDCTextField(document.querySelector('.comment-message'))
 
   const nameEditorTextFieldModel = new ProjectEditorTextFieldModel(
-    $projectDescriptionCredits,
-    $projectDescriptionCredits.data('project-id'),
+    projectDescriptionCreditsElement.dataset.projectId,
     'name',
     true,
-    $('#name').text().trim(),
+    document.querySelector('#name').textContent.trim(),
   )
   new ProjectEditorTextField(nameEditorTextFieldModel)
 
   const descriptionEditorTextFieldModel = new ProjectEditorTextFieldModel(
-    $projectDescriptionCredits,
-    $projectDescriptionCredits.data('project-id'),
+    projectDescriptionCreditsElement.dataset.projectId,
     'description',
-    $projectDescriptionCredits.data('has-description'),
-    $('#description').text().trim(),
+    projectDescriptionCreditsElement.dataset.hasDescription === 'true',
+    document.querySelector('#description').textContent.trim(),
   )
   new ProjectEditorTextField(descriptionEditorTextFieldModel)
 
   const creditsEditorTextFieldModel = new ProjectEditorTextFieldModel(
-    $projectDescriptionCredits,
-    $projectDescriptionCredits.data('project-id'),
+    projectDescriptionCreditsElement.dataset.projectId,
     'credits',
-    $projectDescriptionCredits.data('has-credits'),
-    $('#credits').text().trim(),
+    projectDescriptionCreditsElement.dataset.hasCredits === 'true',
+    document.querySelector('#credits').textContent.trim(),
   )
   new ProjectEditorTextField(creditsEditorTextFieldModel)
 
   const projectEditorModel = new ProjectEditorModel(
-    $projectDescriptionCredits.data('project-id'),
+    projectDescriptionCreditsElement.dataset.projectId,
     [
       nameEditorTextFieldModel,
       descriptionEditorTextFieldModel,
@@ -71,94 +69,94 @@ if ($project.data('my-project')) {
     ],
   )
   const projectEditor = new ProjectEditor(
-    $projectDescriptionCredits,
-    $projectDescriptionCredits.data('project-id'),
+    projectDescriptionCreditsElement,
+    projectDescriptionCreditsElement.dataset.projectId,
     projectEditorModel,
   )
 
   editorNavigation = new ProjectEditorNavigation(
-    $projectDescriptionCredits,
-    $projectDescriptionCredits.data('project-id'),
+    projectDescriptionCreditsElement,
+    projectDescriptionCreditsElement.dataset.projectId,
     projectEditor,
   )
 }
 
 shareLink(
-  $projectShare.data('theme-display-name'),
-  $projectShare.data('trans-check-out-project'),
-  $projectShare.data('project-url'),
-  $projectShare.data('trans-share-success'),
-  $projectShare.data('trans-share-error'),
-  $projectShare.data('trans-copy'),
-  $projectShare.data('trans-clipboard-success'),
-  $projectShare.data('trans-clipboard-fail'),
+  projectShareElement.dataset.themeDisplayName,
+  projectShareElement.dataset.transCheckOutProject,
+  projectShareElement.dataset.projectUrl,
+  projectShareElement.dataset.transShareSuccess,
+  projectShareElement.dataset.transShareError,
+  projectShareElement.dataset.transCopy,
+  projectShareElement.dataset.transClipboardSuccess,
+  projectShareElement.dataset.transClipboardFail,
 )
 
 /* TODO: Disable Report Project for now. Needs a separate flag in database - a new concept!
 ProjectReport(
-  $projectReport.data('project-id'),
-  $projectReport.data('path-report'),
-  $projectReport.data('path-login'),
-  $projectReport.data('trans-success'),
-  $projectReport.data('trans-error'),
-  $projectReport.data('trans-report'),
-  $projectReport.data('trans-cancel'),
-  $projectReport.data('trans-header'),
-  $projectReport.data('trans-reason'),
-  $projectReport.data('trans-inappropriate'),
-  $projectReport.data('trans-copyright'),
-  $projectReport.data('trans-spam'),
-  $projectReport.data('trans-dislike'),
-  $projectReport.data('const-ok'),
-  $projectReport.data('logged-in')
+  projectReport.dataset.projectId,
+  projectReport.dataset.pathReport,
+  projectReport.dataset.pathLogin,
+  projectReport.dataset.transSuccess,
+  projectReport.dataset.transError,
+  projectReport.dataset.transReport,
+  projectReport.dataset.transCancel,
+  projectReport.dataset.transHeader,
+  projectReport.dataset.transReason,
+  projectReport.dataset.transInappropriate,
+  projectReport.dataset.transCopyright,
+  projectReport.dataset.transSpam,
+  projectReport.dataset.transDislike,
+  projectReport.dataset.constOk,
+  projectReport.dataset.loggedIn
 )
 */
 
 Project(
-  $project.data('project-id'),
-  $project.data('project-name'),
-  $project.data('user-role'),
-  $project.data('my-project') === 'true',
-  $project.data('path-ci-status'),
-  $project.data('path-ci-build'),
-  $project.data('path-project-like'),
-  $project.data('path-like-details'),
-  $project.data('trans-apk-prep'),
-  $project.data('trans-apk-text'),
-  $project.data('trans-update-app-header'),
-  $project.data('trans-update-app-text'),
-  $project.data('trans-btn-close'),
-  $project.data('const-action-add'),
-  $project.data('const-action-remove'),
-  $project.data('path-profile'),
-  $project.data('asset-wow-white'),
-  $project.data('asset-wow-black'),
-  $project.data('trans-reaction'),
-  $project.data('trans-download-error'),
-  $project.data('trans-download-start'),
+  projectElement.dataset.projectId,
+  projectElement.dataset.projectName,
+  projectElement.dataset.userRole,
+  projectElement.dataset.myProject === 'true',
+  projectElement.dataset.pathCiStatus,
+  projectElement.dataset.pathCiBuild,
+  projectElement.dataset.pathProjectLike,
+  projectElement.dataset.pathLikeDetails,
+  projectElement.dataset.transApkPrep,
+  projectElement.dataset.transApkText,
+  projectElement.dataset.transUpdateAppHeader,
+  projectElement.dataset.transUpdateAppText,
+  projectElement.dataset.transBtnClose,
+  projectElement.dataset.constActionAdd,
+  projectElement.dataset.constActionRemove,
+  projectElement.dataset.pathProfile,
+  projectElement.dataset.assetWowWhite,
+  projectElement.dataset.assetWowBlack,
+  projectElement.dataset.transReaction,
+  projectElement.dataset.transDownloadError,
+  projectElement.dataset.transDownloadStart,
 )
 
 ProjectName(
-  $projectDescriptionCredits.data('project-id'),
-  $appLanguage.data('app-language'),
-  $project.data('my-project'),
+  projectDescriptionCreditsElement.dataset.projectId,
+  appLanguageElement.dataset.appLanguage,
+  projectElement.dataset.myProject === 'true',
   new CustomTranslationApi('name'),
   editorNavigation,
 )
 
 ProjectDescription(
-  $projectDescriptionCredits.data('project-id'),
-  $appLanguage.data('app-language'),
-  $projectDescriptionCredits.data('trans-more-info'),
-  $projectDescriptionCredits.data('trans-less-info'),
-  $project.data('my-project'),
+  projectDescriptionCreditsElement.dataset.projectId,
+  appLanguageElement.dataset.appLanguage,
+  projectDescriptionCreditsElement.dataset.transMoreInfo,
+  projectDescriptionCreditsElement.dataset.transLessInfo,
+  projectElement.dataset.myProject === 'true',
   new CustomTranslationApi('description'),
 )
 
 ProjectCredits(
-  $projectDescriptionCredits.data('project-id'),
-  $appLanguage.data('app-language'),
-  $project.data('my-project'),
+  projectDescriptionCreditsElement.dataset.projectId,
+  appLanguageElement.dataset.appLanguage,
+  projectElement.dataset.myProject === 'true',
   new CustomTranslationApi('credit'),
 )
 
@@ -180,7 +178,7 @@ function initProjectScreenshotUpload() {
         const image = event.currentTarget.result // base64 data url
         const projectApi = new ProjectApi()
         projectApi.updateProject(
-          $project.data('project-id'),
+          projectElement.dataset.projectId,
           { screenshot: image },
           function () {
             const imageElement = document.getElementById(
@@ -238,59 +236,62 @@ function initProjectScreenshotUpload() {
 initProjects()
 
 function initProjects() {
-  const $recommendedProjects = $('#recommended-projects')
-  $('.project-list', $recommendedProjects).each(function () {
-    const id = $(this).data('project-id')
-    const category = $(this).data('category')
-    const property = $(this).data('property')
-    const theme = $(this).data('theme')
-    const flavor = $(this).data('flavor')
-    const baseUrl = $(this).data('base-url')
+  const recommendedProjectsElement = document.querySelector(
+    '#recommended-projects',
+  )
+  document
+    .querySelectorAll('.project-list', recommendedProjectsElement)
+    .forEach((element) => {
+      const id = element.dataset.projectId
+      const category = element.dataset.category
+      const property = element.dataset.property
+      const theme = element.dataset.theme
+      const flavor = element.dataset.flavor
+      const baseUrl = element.dataset.baseUrl
 
-    let url =
-      baseUrl + '/api/project/' + id + '/recommendations?category=' + category
+      let url = `${baseUrl}/api/project/${id}/recommendations?category=${category}`
 
-    if (flavor !== 'pocketcode' || category === 'example') {
-      // Only the pocketcode flavor shows projects from all flavors!
-      // Other flavors must only show projects from their flavor.
-      url += '&flavor=' + flavor
-    }
+      if (flavor !== 'pocketcode' || category === 'example') {
+        // Only the pocketcode flavor shows projects from all flavors!
+        // Other flavors must only show projects from their flavor.
+        url += `&flavor=${flavor}`
+      }
 
-    const list = new ProjectList(this, category, url, property, theme)
-    $(this).data('list', list)
-  })
+      const list = new ProjectList(element, category, url, property, theme)
+      element.dataset.list = list
+    })
 }
 
 new TranslateComments(
-  $project.data('translated-by-line'),
-  $project.data('google-translate-display-name'),
+  projectElement.dataset.translatedByLine,
+  projectElement.dataset.googleTranslateDisplayName,
 )
 
 ProjectComments(
-  $projectComments.data('project-id'),
+  projectCommentsElement.dataset.projectId,
   5,
   5,
   5,
-  $projectComments.data('total-number-of-comments'),
-  $projectComments.data('trans-cancel'),
-  $projectComments.data('trans-delete-it'),
-  $projectComments.data('trans-report-it'),
-  $projectComments.data('trans-are-you-sure'),
-  $projectComments.data('trans-no-way-of-return'),
-  $projectComments.data('trans-delete-confirmation'),
-  $projectComments.data('trans-report-confirmation'),
-  $projectComments.data('trans-pop-up-comment-reported-title'),
-  $projectComments.data('trans-pop-up-comment-reported-text'),
-  $projectComments.data('trans-pop-up-deleted-title'),
-  $projectComments.data('trans-pop-up-deleted-text'),
-  $projectComments.data('trans-no-admin-rights-message'),
-  $projectComments.data('trans-default-error-message'),
+  projectCommentsElement.dataset.totalNumberOfComments,
+  projectCommentsElement.dataset.transCancel,
+  projectCommentsElement.dataset.transDeleteIt,
+  projectCommentsElement.dataset.transReportIt,
+  projectCommentsElement.dataset.transAreYouSure,
+  projectCommentsElement.dataset.transNoWayOfReturn,
+  projectCommentsElement.dataset.transDeleteConfirmation,
+  projectCommentsElement.dataset.transReportConfirmation,
+  projectCommentsElement.dataset.transPopUpCommentReportedTitle,
+  projectCommentsElement.dataset.transPopUpCommentReportedText,
+  projectCommentsElement.dataset.transPopUpDeletedTitle,
+  projectCommentsElement.dataset.transPopUpDeletedText,
+  projectCommentsElement.dataset.transNoAdminRightsMessage,
+  projectCommentsElement.dataset.transDefaultErrorMessage,
 )
 
 new TranslateProgram(
-  $project.data('translated-by-line'),
-  $project.data('google-translate-display-name'),
-  $project.data('project-id'),
-  $project.data('has-description'),
-  $project.data('has-credits'),
+  projectElement.dataset.translatedByLine,
+  projectElement.dataset.googleTranslateDisplayName,
+  projectElement.dataset.projectId,
+  projectElement.dataset.hasDescription === 'true',
+  projectElement.dataset.hasCredits === 'true',
 )

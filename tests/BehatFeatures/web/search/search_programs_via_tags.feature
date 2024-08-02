@@ -16,7 +16,7 @@ Feature: Searching for programs with tags
       | 1  | project 1 | Catrobat | game, animation |
       | 2  | project 2 | Catrobat | animation       |
       | 3  | project 3 | User1    | story           |
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
 
   Scenario: Searching other programs with the same tag
     Given I am on "/app/project/1"
@@ -32,7 +32,7 @@ Feature: Searching for programs with tags
     But I should not see "project 3"
 
   Scenario: search for tags should work
-    When I am on "/app/search_old/Animation"
+    When I am on "/app/tag/search/Animation"
     And I wait for the page to be loaded
     Then I should see "Your search returned 2 results"
     And I should see "project 1"

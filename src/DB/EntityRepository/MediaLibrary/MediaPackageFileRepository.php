@@ -329,8 +329,10 @@ class MediaPackageFileRepository extends ServiceEntityRepository
 
         $draw = new \ImagickDraw();
 
+        $imagickPixel = new \ImagickPixel();
+        $draw->setFillColor($imagickPixel);
         // Black text
-        $draw->setFillColor('gray');
+        $draw->setFillColor($imagickPixel);
         $draw->setTextEncoding('UTF-8');
 
         // Font properties

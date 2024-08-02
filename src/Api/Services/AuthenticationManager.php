@@ -10,7 +10,6 @@ use App\Utils\RequestHelper;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
@@ -57,7 +56,7 @@ class AuthenticationManager
     }
 
     $user = $this->user_manager->findUserByUsername($payload[$idClaim]);
-    if (!$user instanceof UserInterface || $user instanceof User) {
+    if ($user instanceof User) {
       return $user;
     }
 

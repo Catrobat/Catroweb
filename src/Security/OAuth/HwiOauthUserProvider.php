@@ -36,7 +36,7 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
     if (!$user instanceof User) {
       $user = $this->user_manager->findUserByEmail($response->getEmail());
       // if user with the given email doesnt exists create a new user
-      if (!$user instanceof \Sonata\UserBundle\Model\UserInterface) {
+      if (!$user instanceof UserInterface) {
         /** @var User $user */
         $user = $this->user_manager->create();
         // generate random username for example user12345678, needs to be discussed
@@ -71,7 +71,7 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
 
     $username = $username_base;
     $user_number = 0;
-    while ($this->user_manager->findUserByUsername($username) instanceof \Sonata\UserBundle\Model\UserInterface) {
+    while ($this->user_manager->findUserByUsername($username) instanceof UserInterface) {
       ++$user_number;
       $username = $username_base.$user_number;
     }

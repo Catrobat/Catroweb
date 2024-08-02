@@ -5,46 +5,47 @@ import './follower_overview'
 import { shareLink } from './custom/ShareLink'
 import { ProjectList } from './components/project_list'
 
-import $ from 'jquery'
+import '../styles/custom/profile.scss'
+import '../styles/components/achievements.scss'
 
-require('../styles/custom/profile.scss')
-require('../styles/components/achievements.scss')
-
-const $userShare = $('.js-user-share')
+const userShare = document.querySelector('.js-user-share')
 
 shareLink(
-  $userShare.data('theme-display-name'),
-  $userShare.data('trans-check-out-user'),
-  $userShare.data('user-url'),
-  $userShare.data('trans-share-success'),
-  $userShare.data('trans-share-error'),
-  $userShare.data('trans-copy'),
-  $userShare.data('trans-clipboard-success'),
-  $userShare.data('trans-clipboard-fail'),
+  userShare.dataset.themeDisplayName,
+  userShare.dataset.transCheckOutUser,
+  userShare.dataset.userUrl,
+  userShare.dataset.transShareSuccess,
+  userShare.dataset.transShareError,
+  userShare.dataset.transCopy,
+  userShare.dataset.transClipboardSuccess,
+  userShare.dataset.transClipboardFail,
 )
 
 initUserProjects()
 
 function initUserProjects() {
-  const $userProjects = $('#projects-section')
-  $('.project-list', $userProjects).each(function () {
-    const property = $(this).data('property')
-    const theme = $(this).data('theme')
-    const baseUrl = $(this).data('base-url')
-    const userId = $(this).data('user-id')
-    const emptyMessage = $(this).data('empty-message')
+  const userProjects = document.querySelector('#projects-section')
+  const projectLists = userProjects.querySelectorAll('.project-list')
 
-    const url = baseUrl + '/api/projects/user/' + userId
+  projectLists.forEach((projectList) => {
+    const property = projectList.dataset.property
+    const theme = projectList.dataset.theme
+    const baseUrl = projectList.dataset.baseUrl
+    const userId = projectList.dataset.userId
+    const emptyMessage = projectList.dataset.emptyMessage
 
-    const list = new ProjectList(
-      this,
-      'user-projects',
-      url,
-      property,
-      theme,
-      999,
-      emptyMessage,
+    const url = `${baseUrl}/api/projects/user/${userId}`
+
+    projectList.dataset.list = JSON.stringify(
+      new ProjectList(
+        projectList,
+        'user-projects',
+        url,
+        property,
+        theme,
+        999,
+        emptyMessage,
+      ),
     )
-    $(this).data('list', list)
   })
 }

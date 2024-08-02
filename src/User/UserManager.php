@@ -18,15 +18,10 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use Sonata\UserBundle\Model\UserInterface;
-use Sonata\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-/**
- * @psalm-suppress InvalidExtendClass
- */
-class UserManager implements UserManagerInterface
+class UserManager
 {
   public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProjectManager $project_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
   {
@@ -49,7 +44,7 @@ class UserManager implements UserManagerInterface
     }
   }
 
-  public function isPasswordValid(UserInterface $user, string $password): bool
+  public function isPasswordValid(User $user, string $password): bool
   {
     return $this->userPasswordHasher->isPasswordValid($user, $password);
   }
@@ -71,7 +66,7 @@ class UserManager implements UserManagerInterface
     return $response_data;
   }
 
-  public function updateUser(UserInterface $user, bool $andFlush = true): void
+  public function updateUser(User $user, bool $andFlush = true): void
   {
     $this->updatePassword($user);
     $this->entity_manager->persist($user);
@@ -181,10 +176,7 @@ class UserManager implements UserManagerInterface
     return $bool_query;
   }
 
-  // Sonata ->
-
-  #[\Override]
-  public function updatePassword(UserInterface $user): void
+  public function updatePassword(User $user): void
   {
     $plainPassword = $user->getPlainPassword();
 
@@ -198,28 +190,25 @@ class UserManager implements UserManagerInterface
     $user->eraseCredentials();
   }
 
-  #[\Override]
-  public function findUserByUsername(string $username): ?UserInterface
+  public function findUserByUsername(string $username): ?User
   {
     return $this->findOneBy([
       'usernameCanonical' => $this->canonicalFieldsUpdater->canonicalizeUsername($username),
     ]);
   }
 
-  #[\Override]
-  public function findUserByEmail(string $email): ?UserInterface
+  public function findUserByEmail(string $email): ?User
   {
     return $this->findOneBy([
       'emailCanonical' => $this->canonicalFieldsUpdater->canonicalizeEmail($email),
     ]);
   }
 
-  #[\Override]
-  public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface
+  public function findUserByUsernameOrEmail(string $usernameOrEmail): ?User
   {
     if (1 === preg_match('/^.+@\S+\.\S+$/', $usernameOrEmail)) {
       $user = $this->findUserByEmail($usernameOrEmail);
-      if ($user instanceof UserInterface) {
+      if ($user instanceof User) {
         return $user;
       }
     }
@@ -227,62 +216,49 @@ class UserManager implements UserManagerInterface
     return $this->findUserByUsername($usernameOrEmail);
   }
 
-  #[\Override]
-  public function findUserByConfirmationToken(string $token): ?UserInterface
+  public function findUserByConfirmationToken(string $token): ?User
   {
     return $this->findOneBy(['confirmation_token' => $token]);
-  }
-
-  #[\Override]
-  public function getClass(): string
-  {
-    return User::class;
   }
 
   /**
    * @return array<User>
    */
-  #[\Override]
   public function findAll(): array
   {
     return $this->user_repository->findAll();
   }
 
-  #[\Override]
   public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
   {
     return $this->user_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
-  #[\Override]
   public function findOneBy(array $criteria, ?array $orderBy = null): ?User
   {
     return $this->user_repository->findOneBy($criteria, $orderBy);
   }
 
-  #[\Override]
   public function find(mixed $id): ?User
   {
     return $this->user_repository->find($id);
   }
 
-  #[\Override]
   public function create(): User
   {
     return new User();
   }
 
-  #[\Override]
-  public function save($entity, $andFlush = true): void
+  public function save(User $entity, bool $andFlush = true): void
   {
+    $this->updatePassword($entity);
     $this->entity_manager->persist($entity);
     if ($andFlush) {
       $this->entity_manager->flush();
     }
   }
 
-  #[\Override]
-  public function delete($entity, $andFlush = true): void
+  public function delete(User $entity, bool $andFlush = true): void
   {
     $this->entity_manager->remove($entity);
     if ($andFlush) {

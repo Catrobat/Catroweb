@@ -75,6 +75,7 @@ oauthPopUpTitle: "معلومات تسجيل الدخول للحساب الخار
 oauthInfo: 'لقد استخدمت للتو حساب خارجي لتسجيل الدخول. قمنا بإنشاء اسم مستخدم عشوائي لك. إذا كنت ترغب في تغيير اسم المستخدم الخاص بك أو إنشاء كلمة مرور جديدة للحساب الخاص بك يرجى الذهاب إلى صفحة ملفي الشخصي. انقر على %link_start% هنا %link_end% للذهاب إلى الصفحة الشخصية الخاصة بك'
 oauthHere: "هنا"
 statistics: "الإحصائيات"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:

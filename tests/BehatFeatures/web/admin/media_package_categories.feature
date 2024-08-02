@@ -31,7 +31,7 @@ Feature: Media Package Categories
 
   Scenario: List media package categories sorted by ID
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/media_package_category/list"
+    And I am on "/admin/media-package/category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
       | Id | Name       | Package | Priority |
@@ -42,7 +42,7 @@ Feature: Media Package Categories
 
   Scenario: List media package categories sorted by priority
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/media_package_category/list?filter%5B_sort_order%5D=ASC&filter%5B_sort_by%5D=priority&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
+    And I am on "/admin/media-package/category/list?filter%5B_sort_order%5D=ASC&filter%5B_sort_by%5D=priority&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
       | Id | Name       | Package | Priority |
@@ -53,7 +53,7 @@ Feature: Media Package Categories
 
   Scenario: Delete media package category (fail)
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/media_package_category/list"
+    And I am on "/admin/media-package/category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
       | Id | Name       | Package | Priority |
@@ -61,7 +61,7 @@ Feature: Media Package Categories
       | 2  | Category 2 | Objects | 0        |
       | 3  | Category 3 | Sounds  | 0        |
       | 4  | Category 4 | Sounds  | 1        |
-    Then I am on "/admin/media_package_category/1/delete"
+    Then I am on "/admin/media-package/category/1/delete"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
       | Id | Name       | Package | Priority |
@@ -73,7 +73,7 @@ Feature: Media Package Categories
 
   Scenario: Delete media package category (success)
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/media_package_category/list"
+    And I am on "/admin/media-package/category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
       | Id | Name       | Package | Priority |
@@ -81,7 +81,7 @@ Feature: Media Package Categories
       | 2  | Category 2 | Objects | 0        |
       | 3  | Category 3 | Sounds  | 0        |
       | 4  | Category 4 | Sounds  | 1        |
-    Then I am on "/admin/media_package_category/2/delete"
+    Then I am on "/admin/media-package/category/2/delete"
     And I wait for the page to be loaded
     Then I click on the first ".btn-danger" button
     And I wait for the page to be loaded
@@ -93,7 +93,7 @@ Feature: Media Package Categories
 
   Scenario: Adding a media package category
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/media_package_category/list"
+    And I am on "/admin/media-package/category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
       | Id | Name       | Package | Priority |
@@ -103,13 +103,13 @@ Feature: Media Package Categories
       | 4  | Category 4 | Sounds  | 1        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/media_package_category/create"
+    Then I should be on "/admin/media-package/category/create"
     Then I write "New category" in textarea with label "Name"
     Then I select package "Looks" for media package category
     Then I select package "Objects" for media package category
     Then I write "2" in textarea with label "Priority"
     Then I click ".btn-success"
-    And I go to "/admin/media_package_category/list"
+    And I go to "/admin/media-package/category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
       | Id | Name         | Package        | Priority |

@@ -75,6 +75,7 @@ oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
 oauthInfo: 'Oturum açmak için harici bir hesap kullandınız. Sizin için rastgele bir kullanıcı adı oluşturduk. Kullanıcı adınızı değiştirmek veya hesabınız için yeni bir şifre oluşturmak istiyorsanız lütfen profil sayfama gidin. Tıklayın %link_start% buraya %link_end% profil sayfanıza gitmek için.'
 oauthHere: "buraya"
 statistics: "İstatistik"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:

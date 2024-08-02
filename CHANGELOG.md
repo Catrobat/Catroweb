@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v24.8.0]
+
+## What's Changed
+
+- Reorganize Admin interface
+
+- Bump dependencies & translations
+- Remove a bunch of jquery
+- Remove sonata user bundle
+
+**Full Changelog**: https://github.com/Catrobat/Catroweb/releases/tag/v24.8.0
+
+## [v24.5.0]
+
+## What's Changed
+
+- Bump dependencies & translations
+- Migration rollup
+
+**Full Changelog**: https://github.com/Catrobat/Catroweb/releases/tag/v24.5.0
+
 ## [v24.4.3]
 
 ## What's Changed

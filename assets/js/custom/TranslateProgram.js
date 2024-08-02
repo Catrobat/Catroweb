@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateProgram extends Translation {
@@ -24,115 +23,126 @@ export class TranslateProgram extends Translation {
       return
     }
 
-    $('#project-translation-button').on('click', function (event) {
-      $(this).hide()
+    document
+      .getElementById('project-translation-button')
+      .addEventListener('click', function (event) {
+        this.style.display = 'none'
 
-      if (translateProgram.isTranslationNotAvailable('#name-translation')) {
-        $('#project-translation-loading-spinner').show()
-        translateProgram.translateProgram()
-      } else {
-        translateProgram.openTranslatedProgram()
-      }
-    })
+        if (translateProgram.isTranslationNotAvailable('#name-translation')) {
+          document.getElementById(
+            'project-translation-loading-spinner',
+          ).style.display = 'block'
+          translateProgram.translateProgram()
+        } else {
+          translateProgram.openTranslatedProgram()
+        }
+      })
 
-    $('#remove-project-translation-button').on('click', function (event) {
-      $(this).hide()
-      $('#project-translation-button').show()
+    document
+      .getElementById('remove-project-translation-button')
+      .addEventListener('click', function (event) {
+        this.style.display = 'none'
+        document.getElementById('project-translation-button').style.display =
+          'block'
 
-      const $name = $('#name')
-      const $nameTranslation = $('#name-translation')
-      $name.removeClass('project-name').addClass('project-name-animation')
-      $nameTranslation
-        .removeClass('project-name')
-        .addClass('project-name-animation')
-      $nameTranslation.animate({ width: 'toggle' })
-      $name.animate(
-        { width: 'toggle' },
-        translateProgram.ANIMATION_TIME,
-        function () {
-          $('#name')
-            .removeClass('project-name-animation')
-            .addClass('project-name')
-          $('#name-translation')
-            .removeClass('project-name-animation')
-            .addClass('project-name')
-        },
-      )
+        const name = document.getElementById('name')
+        const nameTranslation = document.getElementById('name-translation')
+        name.classList.remove('project-name')
+        name.classList.add('project-name-animation')
+        nameTranslation.classList.remove('project-name')
+        nameTranslation.classList.add('project-name-animation')
+        nameTranslation.style.display = 'none'
+        name.style.display = 'block'
 
-      if (translateProgram.hasDescription) {
-        $('#description').slideDown()
-        $('#description-translation').slideUp()
-      }
+        setTimeout(() => {
+          name.classList.remove('project-name-animation')
+          name.classList.add('project-name')
+          nameTranslation.classList.remove('project-name-animation')
+          nameTranslation.classList.add('project-name')
+        }, translateProgram.ANIMATION_TIME)
 
-      $('#credits-translation-wrapper').slideUp()
-      if (translateProgram.hasCredit) {
-        $('#credits').slideDown()
-      }
-    })
+        if (translateProgram.hasDescription) {
+          document.getElementById('description').style.display = 'block'
+          document.getElementById('description-translation').style.display =
+            'none'
+        }
+
+        document.getElementById('credits-translation-wrapper').style.display =
+          'none'
+        if (translateProgram.hasCredit) {
+          document.getElementById('credits').style.display = 'block'
+        }
+      })
   }
 
   setTranslatedProgramData(data) {
-    const $nameTranslation = $('#name-translation')
-    $nameTranslation.attr('lang', data.target_language)
-    $nameTranslation.text(data.translated_title)
+    const nameTranslation = document.getElementById('name-translation')
+    nameTranslation.setAttribute('lang', data.target_language)
+    nameTranslation.textContent = data.translated_title
 
     if (this.hasDescription) {
-      $('#description-translation').text(data.translated_description)
+      document.getElementById('description-translation').textContent =
+        data.translated_description
     }
 
     if (this.hasCredit) {
-      $('#credits-translation').text(data.translated_credit)
+      document.getElementById('credits-translation').textContent =
+        data.translated_credit
     }
 
     const byLineElements = new ByLineElementContainer(
-      '#project-translation-before-languages',
-      '#project-translation-between-languages',
-      '#project-translation-after-languages',
-      '#project-translation-first-language',
-      '#project-translation-second-language',
+      document.getElementById('project-translation-before-languages'),
+      document.getElementById('project-translation-between-languages'),
+      document.getElementById('project-translation-after-languages'),
+      document.getElementById('project-translation-first-language'),
+      document.getElementById('project-translation-second-language'),
     )
 
     this.setTranslationCredit(data, byLineElements)
   }
 
   openTranslatedProgram() {
-    $('#project-translation-loading-spinner').hide()
-    $('#remove-project-translation-button').show()
+    console.error('!!!!')
+    document.getElementById(
+      'project-translation-loading-spinner',
+    ).style.display = 'none'
+    document.getElementById('remove-project-translation-button').style.display =
+      'block'
 
-    const $name = $('#name')
-    const $nameTranslation = $('#name-translation')
-    $name.removeClass('project-name').addClass('project-name-animation')
-    $nameTranslation
-      .removeClass('project-name')
-      .addClass('project-name-animation')
-    $name.animate({ width: 'toggle' })
-    $nameTranslation.animate(
-      { width: 'toggle' },
-      this.ANIMATION_TIME,
-      function () {
-        $('#name')
-          .removeClass('project-name-animation')
-          .addClass('project-name')
-        $('#name-translation')
-          .removeClass('project-name-animation')
-          .addClass('project-name')
-      },
-    )
+    const name = document.getElementById('name')
+    const nameTranslation = document.getElementById('name-translation')
+    name.classList.remove('project-name')
+    name.classList.add('project-name-animation')
+    nameTranslation.classList.remove('project-name')
+    nameTranslation.classList.add('project-name-animation')
+    name.style.display = 'none'
+    nameTranslation.style.display = 'block'
+
+    setTimeout(() => {
+      name.classList.remove('project-name-animation')
+      name.classList.add('project-name')
+      nameTranslation.classList.remove('project-name-animation')
+      nameTranslation.classList.add('project-name')
+    }, this.ANIMATION_TIME)
 
     if (this.hasDescription) {
-      $('#description-translation').slideDown()
-      $('#description').slideUp()
+      document.getElementById('description-translation').style.display = 'block'
+      document.getElementById('description').style.display = 'none'
     }
 
-    $('#credits-translation-wrapper').slideDown()
+    document.getElementById('credits-translation-wrapper').style.display =
+      'block'
     if (this.hasCredit) {
-      $('#credits').slideUp()
+      document.getElementById('credits').style.display = 'none'
     }
   }
 
   programNotTranslated() {
-    $('#project-translation-loading-spinner').hide()
-    $('#project-translation-button').show()
+    document.getElementById(
+      'project-translation-loading-spinner',
+    ).style.display = 'none'
+    document.getElementById('project-translation-button').style.display =
+      'block'
 
     let text = document.getElementById('name').innerText
 
@@ -149,17 +159,22 @@ export class TranslateProgram extends Translation {
 
   translateProgram() {
     const self = this
-    $.ajax({
-      url: '../translate/project/' + self.programId,
-      type: 'get',
-      data: { target_language: self.targetLanguage },
-      success: function (data) {
+    fetch(
+      '../translate/project/' +
+        self.programId +
+        '?target_language=' +
+        self.targetLanguage,
+      {
+        method: 'GET',
+      },
+    )
+      .then((response) => response.json())
+      .then((data) => {
         self.setTranslatedProgramData(data)
         self.openTranslatedProgram()
-      },
-      error: function () {
+      })
+      .catch(() => {
         self.programNotTranslated()
-      },
-    })
+      })
   }
 }

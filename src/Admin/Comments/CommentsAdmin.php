@@ -15,9 +15,17 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
  */
 class CommentsAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'admin_catrobat_adminbundle_commentsadmin';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_comments';
+  }
 
-  protected $baseRoutePattern = 'comments';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'comment';
+  }
 
   #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void

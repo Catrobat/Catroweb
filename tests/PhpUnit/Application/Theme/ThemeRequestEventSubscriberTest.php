@@ -175,7 +175,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     ;
   }
 
-  private function expectAttributesToEqual(MockObject $request_attributes, string $theme, string $flavor): void
+  private function expectAttributesToEqual(MockObject|ParameterBag $request_attributes, string $theme, string $flavor): void
   {
     $request_attributes->expects($this->exactly(2))
       ->method('set')
@@ -271,11 +271,11 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     return $event;
   }
 
-  private function mockRequestAttributes(): ParameterBagInterface|MockObject
+  private function mockRequestAttributes(): ParameterBag
   {
-    return $this->getMockBuilder(ParameterBagInterface::class)
+    return $this->getMockBuilder(ParameterBag::class)
       ->disableOriginalConstructor()
-      ->getMockForAbstractClass()
+      ->getMock()
     ;
   }
 

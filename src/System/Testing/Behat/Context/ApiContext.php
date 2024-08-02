@@ -24,12 +24,12 @@ use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtens
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\Intl\Locales;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class ApiContext.
@@ -2921,7 +2921,7 @@ class ApiContext implements Context
       'project_url' => static function ($project_url): void {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression(
-          '/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/',
+          '/http:\/\/localhost\/app\/project\/[a-zA-Z0-9-]+/',
           $project_url,
           'project_url is not a valid URL!'
         );
@@ -2929,7 +2929,7 @@ class ApiContext implements Context
       'download_url' => static function ($download_url): void {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression(
-          '/http:\\/\\/localhost\\/api\\/project\\/([a-zA-Z0-9-]+)\\/catrobat/',
+          '/http:\/\/localhost\/api\/project\/([a-zA-Z0-9-]+)\/catrobat/',
           $download_url,
           'download_url is not a valid URL!'
         );

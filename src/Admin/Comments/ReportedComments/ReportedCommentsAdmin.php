@@ -19,9 +19,17 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
  */
 class ReportedCommentsAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'admin_report';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_comments_report';
+  }
 
-  protected $baseRoutePattern = 'report';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'comment/report';
+  }
 
   #[\Override]
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface

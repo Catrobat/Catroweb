@@ -13,9 +13,6 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
-use App\Project\CatrobatFile\ExtractedCatrobatFile;
-use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
@@ -47,13 +44,11 @@ class ProjectController extends AbstractController
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly ProjectManager $project_manager,
     private readonly ElapsedTimeStringFormatter $elapsed_time,
-    private readonly ExtractedFileRepository $extracted_file_repository,
     private readonly NotificationRepository $notification_repo,
     private readonly NotificationManager $notification_service,
     private readonly TranslatorInterface $translator,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly EventDispatcherInterface $event_dispatcher,
-    private readonly ProjectFileRepository $file_repository,
     private readonly TranslationDelegate $translation_delegate,
     private readonly EntityManagerInterface $entity_manager,
     private readonly UserCommentRepository $comment_repository,
@@ -217,146 +212,6 @@ class ProjectController extends AbstractController
   public function search(?string $q = null): Response
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
-  }
-
-  #[Route(path: '/search_old/{q}', name: 'search_old', requirements: ['q' => '.+'], methods: ['GET'])]
-  #[Route(path: '/search_old/', name: 'empty_search_old', defaults: ['q' => null], methods: ['GET'])]
-  public function searchActionOld(string $q): Response
-  {
-    return $this->render('Search/searchOld.html.twig', ['q' => $q]);
-  }
-
-  /**
-   * @deprecated Use new API
-   * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
-   *
-   * @throws \Exception
-   */
-  #[Route(path: '/editProjectName/{id}', name: 'edit_project_name', methods: ['PUT'])]
-  public function editProjectName(Request $request, string $id): Response
-  {
-    $value = (string) $request->request->get('value');
-    if (strlen($value) > ProjectsRequestValidator::MAX_NAME_LENGTH) {
-      return new Response(
-        $this->translator->trans('project.tooLongName', [], 'catroweb'),
-        Response::HTTP_UNPROCESSABLE_ENTITY
-      );
-    }
-
-    $user = $this->getUser();
-    if (!$user instanceof UserInterface) {
-      return $this->redirectToRoute('login');
-    }
-
-    $project = $this->project_manager->find($id);
-    if (!$project) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
-    }
-
-    if ($project->getUser() !== $user) {
-      throw $this->createAccessDeniedException('Not your project!');
-    }
-
-    $project->setName($value);
-    $this->entity_manager->persist($project);
-    $this->entity_manager->flush();
-
-    $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
-    if ($extracted_file instanceof ExtractedCatrobatFile) {
-      $extracted_file->setName($value);
-      $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
-      $this->file_repository->deleteProjectZipFileIfExists($project->getId());
-    }
-
-    return new Response();
-  }
-
-  /**
-   * @deprecated Use new API
-   * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
-   *
-   * @throws \Exception
-   */
-  #[Route(path: '/editProjectDescription/{id}', name: 'edit_project_description', methods: ['PUT'])]
-  public function editProjectDescription(Request $request, string $id): Response
-  {
-    $value = (string) $request->request->get('value');
-    if (strlen($value) > ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH) {
-      return new JsonResponse(['statusCode' => 527,
-        'message' => $this->translator
-          ->trans('project.tooLongDescription', [], 'catroweb'), ]);
-    }
-
-    $user = $this->getUser();
-    if (!$user instanceof UserInterface) {
-      return $this->redirectToRoute('login');
-    }
-
-    $project = $this->project_manager->find($id);
-    if (!$project) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
-    }
-
-    if ($project->getUser() !== $user) {
-      throw $this->createAccessDeniedException('Not your project!');
-    }
-
-    $project->setDescription($value);
-    $this->entity_manager->persist($project);
-    $this->entity_manager->flush();
-
-    $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
-    if ($extracted_file instanceof ExtractedCatrobatFile) {
-      $extracted_file->setDescription($value);
-      $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
-      $this->file_repository->deleteProjectZipFileIfExists($project->getId());
-    }
-
-    return new JsonResponse(['statusCode' => Response::HTTP_OK]);
-  }
-
-  /**
-   * @deprecated Use new API
-   * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
-   *
-   * @throws \Exception
-   */
-  #[Route(path: '/editProjectCredits/{id}', name: 'edit_project_credits', methods: ['PUT'])]
-  public function editProjectCredits(Request $request, string $id): Response
-  {
-    $value = (string) $request->request->get('value');
-    if (strlen($value) > ProjectsRequestValidator::MAX_CREDITS_LENGTH) {
-      return new JsonResponse(['statusCode' => 707,
-        'message' => $this->translator
-          ->trans('project.tooLongCredits', [], 'catroweb'), ]);
-    }
-
-    $user = $this->getUser();
-    if (!$user instanceof UserInterface) {
-      return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
-    }
-
-    $project = $this->project_manager->find($id);
-    if (null === $project) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
-    }
-
-    if ($project->getUser() !== $user) {
-      throw $this->createAccessDeniedException('Not your project!');
-    }
-
-    $project->setCredits($value);
-    $this->entity_manager->persist($project);
-    $this->entity_manager->flush();
-
-    $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
-    if ($extracted_file instanceof ExtractedCatrobatFile) {
-      $extracted_file->setNotesAndCredits($value);
-      $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
-      $this->file_repository->deleteProjectZipFileIfExists($project->getId());
-    }
-
-    return new JsonResponse(['statusCode' => Response::HTTP_OK]);
   }
 
   /**

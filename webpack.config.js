@@ -43,14 +43,6 @@ Encore
     // Fonts (deprecated!)
     { from: './assets/fonts', to: '/fonts/[path][name].[ext]' },
     {
-      from: './node_modules/@fortawesome/',
-      to: '../@fortawesome/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/@fortawesome/fontawesome-free/webfonts',
-      to: '../webfonts/[path][name].[ext]',
-    },
-    {
       from: './node_modules/material-icons/',
       to: '../material-icons/[path][name].[ext]',
     },

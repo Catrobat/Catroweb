@@ -21,9 +21,17 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class MediaPackageFileAdmin extends AbstractAdmin
 {
-  protected $baseRouteName = 'adminmedia_package_file';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_media_package_file';
+  }
 
-  protected $baseRoutePattern = 'media_package_file';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'media-package/file';
+  }
 
   public function __construct(
     private readonly MediaPackageFileRepository $media_package_file_repository

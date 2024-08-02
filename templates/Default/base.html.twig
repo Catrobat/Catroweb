@@ -70,7 +70,7 @@
 <div id="app-version" data-app-version="{{ app_version }}" style="display: none;">{{ app_version }}</div>
 <div id="app-language" data-app-language="{{ app.request.locale }}"></div>
 <div class="js-app-env" data-app-env="'{{ app_env }}"></div>
-<div class="js-user-state" data-is-user-logged-in="{{ app.user != null }}"></div>
+<div class="js-user-state" data-is-user-logged-in="{% if app.user != null %}true{% else %}false{% endif %}"></div>
 {% for snackbarMsg in app.flashes('snackbar') %}
   <div class="js-flash-snackbar" data-msg="{{ snackbarMsg }}"></div>
 {% endfor %}

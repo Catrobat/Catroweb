@@ -18,7 +18,7 @@ Feature: Searching for programs with extensions
       | 1  | project 1 | Catrobat | mindstorms,phiro |
       | 2  | project 2 | Catrobat | mindstorms,drone |
       | 3  | project 3 | User1    | drone            |
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
 
   Scenario: Searching other programs with the same extensions
     Given I am on "/app/project/1"
@@ -34,7 +34,7 @@ Feature: Searching for programs with extensions
     And I should not see "project 3"
 
   Scenario: search for programs should work
-    When I am on "/app/search_old/mindstorms"
+    When I am on "/app/extension/search/mindstorms"
     And I wait for the page to be loaded
     Then I should see "Search results"
     And I should see "project 1"

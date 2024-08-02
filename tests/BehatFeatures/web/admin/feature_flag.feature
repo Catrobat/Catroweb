@@ -8,7 +8,7 @@ Background:
 
 Scenario: List all Feature Flags:
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/featureflag/list"
+    And I am on "/admin/system/feature-flag/list"
     And I wait for the page to be loaded
     Then I should see "Test-Flag"
 
@@ -29,7 +29,7 @@ Scenario: Overriding test feature with header false:
 
 Scenario: List Studio Link Feature Flags:
    Given I log in as "Admin" with the password "123456"
-   And I am on "/admin/featureflag/list"
+   And I am on "/admin/system/feature-flag/list"
    Then I should see "Sidebar-Studio-Link-Feature"
 
 
