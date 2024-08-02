@@ -269,26 +269,32 @@ jobs:
           name: codecov-umbrella # optional
           # fail_ci_if_error: true # optional (default = false)
 
-      # Rerun #1
       - name: Rerun Behat Tests (1st Attempt)
-        if: steps.test-run.outcome == 'failure'
+        if: env.test-run-exit-code != '0'
+        id: test-rerun-1
+        continue-on-error: true
         run: |
           docker exec app.catroweb chmod -R 777 var
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
-          exit ${PIPESTATUS[0]}
+          TEST_RUN_EXIT_CODE=$?
+          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
+          ( exit $TEST_RUN_EXIT_CODE )
 
-      # Rerun #2
       - name: Rerun Behat Tests (2nd Attempt)
-        if: steps.test-run.outcome == 'failure'
+        if: env.test-run-exit-code != '0'
+        id: test-rerun-2
+        continue-on-error: true
         run: |
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
-          exit ${PIPESTATUS[0]}
+          TEST_RUN_EXIT_CODE=$?
+          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
+          ( exit $TEST_RUN_EXIT_CODE )
 
-      # Rerun #3
       - name: Rerun Behat Tests (3rd Attempt)
-        if: steps.test-run.outcome == 'failure'
+        if: env.test-run-exit-code != '0'
+        id: test-rerun-3
         run: |
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
+          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
 
       ## Failure debugging
       - name: Debug Failure
