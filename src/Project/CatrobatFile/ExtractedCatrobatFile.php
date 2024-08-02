@@ -32,7 +32,7 @@ class ExtractedCatrobatFile
     $content = str_replace('&#x0;', '', $content);
 
     preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
-    $this->xml_filenames = count($matches) > 1 ? $matches[1] : [];
+    $this->xml_filenames = $matches[1];
     $counter = count($this->xml_filenames);
     for ($i = 0; $i < $counter; ++$i) {
       $this->xml_filenames[$i] = $this->decodeXmlEntities($this->xml_filenames[$i]);
