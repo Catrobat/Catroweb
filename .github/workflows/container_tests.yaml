@@ -47,7 +47,7 @@ jobs:
       - name: Build and start all containers (Docker Compose)
         run: |
           cd docker
-          docker-compose -f docker-compose.dev.yaml up -d
+          docker compose -f docker-compose.dev.yaml up -d
           sleep 30
 
       - name: Check Symfony application (info)
