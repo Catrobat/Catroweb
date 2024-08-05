@@ -38,7 +38,7 @@ class AbstractSimilarityRelation
   public function __construct(
     User $first_user,
     User $second_user,
-    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 3, nullable: false, options: ['default' => '0.0'])]
+    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 3, nullable: false, options: ['default' => '0.000'])]
     protected string $similarity
   ) {
     $this->setFirstUser($first_user);
