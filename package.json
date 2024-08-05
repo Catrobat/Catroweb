@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/Catrobat/Catroweb#readme",
   "devDependencies": {
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "auto-changelog": "^2.4.0",
     "@babel/preset-env": "^7.25.3",
     "@babel/core": "^7.25.2",
