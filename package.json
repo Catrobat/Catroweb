@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/Catrobat/Catroweb#readme",
   "devDependencies": {
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "auto-changelog": "^2.4.0",
     "@babel/preset-env": "^7.25.3",
     "@babel/core": "^7.25.2",
@@ -39,7 +39,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@symfony/webpack-encore": "^4.6.1",
     "browserslist": "^4.23.3",
-    "core-js": "^3.37.1",
+    "core-js": "^3.38.0",
     "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",

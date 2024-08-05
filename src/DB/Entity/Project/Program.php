@@ -245,7 +245,7 @@ class Program implements \Stringable
   #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
   protected int $rand = 0;
 
-  #[ORM\Column(type: Types::FLOAT, options: ['default' => '0.0'])]
+  #[ORM\Column(type: Types::FLOAT, options: ['default' => '0'])]
   protected float $popularity = 0.0;
 
   /**
