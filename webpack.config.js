@@ -230,9 +230,6 @@ Encore
   // integrity="..." attributes on your script & link tags
   // .enableIntegrityHashes(Encore.isProduction())
 
-  // uncomment if you're having problems with a jQuery plugin
-  .autoProvidejQuery()
-
   // Post CSS processing; E.g. auto vendor prefixing, px to rem, ...
   .enablePostCssLoader()
 
