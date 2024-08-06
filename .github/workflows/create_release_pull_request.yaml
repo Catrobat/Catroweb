@@ -38,6 +38,9 @@ jobs:
           month=${current_version:3:2}
           patch=${current_version:6}
           
+          # Ensure patch is numeric only
+          patch=$(echo $patch | grep -oE '[0-9]+')
+          
           # Increment the patch version
           new_patch=$((patch + 1))
           
@@ -58,6 +61,7 @@ jobs:
           
           # Output the new version
           echo "new_version=$new_version" >> $GITHUB_ENV
+          echo "::set-output name=new_version::$new_version"
 
       - name: Generate Release Notes
         id: generate_notes
