@@ -828,3 +828,5 @@ Switched to new versioning scheme. This is the first release with the new versio
 [2.2.0]: https://github.com/Catrobat/Catroweb/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/Catrobat/Catroweb/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/Catrobat/Catroweb/releases/tag/v2.1.0
+
+## v24.8.0
