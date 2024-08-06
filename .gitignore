@@ -17,6 +17,7 @@ bin/
 !bin/x_perm.sh
 !bin/x_reset.sh
 !bin/x_test.sh
+!bin/next_version.sh
 
 ### Sass ###
 .sass-cache/
