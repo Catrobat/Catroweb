@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar } from '../components/snackbar'
@@ -34,66 +33,68 @@ export const Project = function (
   // -------------------------- FileHelper
 
   function createLinks() {
-    $('#description').each(function () {
-      $(this).html(
-        $(this)
-          .html()
-          .replace(
-            /((http|https|ftp):\/\/[\w?=&./+-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g,
-            '<a href="$1" target="_blank">$1</a> ',
-          ),
+    document.querySelectorAll('#description').forEach((element) => {
+      element.innerHTML = element.innerHTML.replace(
+        /((http|https|ftp):\/\/[\w?=&./+-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g,
+        '<a href="$1" target="_blank">$1</a> ',
       )
     })
   }
 
   // -------------------------- Redirect Buttons
-  $('.js-redirect-button').on('click', (e) => {
-    redirect(
-      $(e.currentTarget).data('url'),
-      $(e.currentTarget).data('button-id'),
-      $(e.currentTarget).data('spinner-id'),
-      $(e.currentTarget).data('icon-id'),
-    )
+  document.querySelectorAll('.js-redirect-button').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      redirect(
+        e.currentTarget.dataset.url,
+        e.currentTarget.dataset.buttonId,
+        e.currentTarget.dataset.spinnerId,
+        e.currentTarget.dataset.iconId,
+      )
+    })
   })
 
   // -------------------------- Download
-
-  $('.js-btn-project-download').on('click', (e) => {
-    download(
-      $(e.currentTarget).data('path-url'),
-      $(e.currentTarget).data('project-id') + '.catrobat',
-      $(e.currentTarget).data('button-id'),
-      $(e.currentTarget).data('spinner-id'),
-      $(e.currentTarget).data('icon-id'),
-      $(e.currentTarget).data('is-webview'),
-      $(e.currentTarget).data('is-supported'),
-      $(e.currentTarget).data('is-not-supported-title'),
-      $(e.currentTarget).data('is-not-supported-text'),
-    )
-  })
-
-  $(
-    $('.js-btn-project-download-disabled').on('click', (e) => {
-      downloadDisabled(
-        $(e.currentTarget).data('redirect-url'),
-        // $(e.currentTarget).data('alert-text')
+  document.querySelectorAll('.js-btn-project-download').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      download(
+        e.currentTarget.dataset.pathUrl,
+        `${e.currentTarget.dataset.projectId}.catrobat`,
+        e.currentTarget.dataset.buttonId,
+        e.currentTarget.dataset.spinnerId,
+        e.currentTarget.dataset.iconId,
+        e.currentTarget.dataset.isWebview,
+        e.currentTarget.dataset.isSupported,
+        e.currentTarget.dataset.isNotSupportedTitle,
+        e.currentTarget.dataset.isNotSupportedText,
       )
-    }),
-  )
-
-  $('.js-btn-project-apk-download').on('click', (e) => {
-    download(
-      $(e.currentTarget).data('path-url'),
-      $(e.currentTarget).data('project-id') + '.apk',
-      $(e.currentTarget).data('button-id'),
-      $(e.currentTarget).data('spinner-id'),
-      $(e.currentTarget).data('icon-id'),
-      $(e.currentTarget).data('is-webview'),
-      $(e.currentTarget).data('is-supported'),
-      $(e.currentTarget).data('is-not-supported-title'),
-      $(e.currentTarget).data('is-not-supported-text'),
-    )
+    })
   })
+
+  document
+    .querySelectorAll('.js-btn-project-download-disabled')
+    .forEach((button) => {
+      button.addEventListener('click', (e) => {
+        downloadDisabled(e.currentTarget.dataset.redirectUrl)
+      })
+    })
+
+  document
+    .querySelectorAll('.js-btn-project-apk-download')
+    .forEach((button) => {
+      button.addEventListener('click', (e) => {
+        download(
+          e.currentTarget.dataset.pathUrl,
+          `${e.currentTarget.dataset.projectId}.apk`,
+          e.currentTarget.dataset.buttonId,
+          e.currentTarget.dataset.spinnerId,
+          e.currentTarget.dataset.iconId,
+          e.currentTarget.dataset.isWebview,
+          e.currentTarget.dataset.isSupported,
+          e.currentTarget.dataset.isNotSupportedTitle,
+          e.currentTarget.dataset.isNotSupportedText,
+        )
+      })
+    })
 
   function download(
     downloadUrl,
@@ -135,7 +136,7 @@ export const Project = function (
 
     new ApiFetch(downloadUrl)
       .generateAuthenticatedFetch()
-      .then(function (response) {
+      .then((response) => {
         // fetching the data in the background; this allows us to detect when the download is finished!
         if (response.ok) {
           return response.blob()
@@ -153,7 +154,7 @@ export const Project = function (
         window.URL.revokeObjectURL(url)
       })
       .catch(() => {
-        // UX: Tell the use that something went wrong
+        // UX: Tell the user that something went wrong
         showDownloadFailedSnackbar(downloadErrorText, filename)
       })
       .finally(() => {
@@ -218,76 +219,102 @@ export const Project = function (
   //
 
   function getApkStatus() {
-    $.get(statusUrl, null, onResult)
+    fetch(statusUrl)
+      .then((response) => response.json())
+      .then(onResult)
   }
 
   function createApk() {
-    $('#apk-generate, #apk-generate-small').addClass('d-none')
-    $('#apk-pending, #apk-pending-small').removeClass('d-none')
-    $.get(createUrl, null, onResult)
+    document.getElementById('apk-generate').classList.add('d-none')
+    document.getElementById('apk-generate-small').classList.add('d-none')
+    document.getElementById('apk-pending').classList.remove('d-none')
+    document.getElementById('apk-pending-small').classList.remove('d-none')
+    fetch(createUrl)
+      .then((response) => response.json())
+      .then(onResult)
     showPreparingApkPopup()
   }
 
   function onResult(data) {
-    const apkPending = $('#apk-pending, #apk-pending-small')
-    const apkDownload = $(
+    const apkPending = document.querySelectorAll(
+      '#apk-pending, #apk-pending-small',
+    )
+    const apkDownload = document.querySelectorAll(
       '#projectApkDownloadButton, #projectApkDownloadButton-small',
     )
-    const apkGenerate = $('#apk-generate, #apk-generate-small')
-    apkGenerate.addClass('d-none')
-    apkDownload.addClass('d-none')
-    apkPending.addClass('d-none')
+    const apkGenerate = document.querySelectorAll(
+      '#apk-generate, #apk-generate-small',
+    )
+    apkGenerate.forEach((el) => el.classList.add('d-none'))
+    apkDownload.forEach((el) => el.classList.add('d-none'))
+    apkPending.forEach((el) => el.classList.add('d-none'))
+
     if (data && data.status === 'ready') {
-      apkDownload.removeClass('d-none')
+      apkDownload.forEach((el) => el.classList.remove('d-none'))
     } else if (data && data.status === 'pending') {
-      apkPending.removeClass('d-none')
+      apkPending.forEach((el) => el.classList.remove('d-none'))
       setTimeout(getApkStatus, 5000)
     } else if (data && data.status === 'none') {
-      apkGenerate.removeClass('d-none')
-      apkGenerate.click(createApk)
+      apkGenerate.forEach((el) => el.classList.remove('d-none'))
+      apkGenerate.forEach((el) => el.addEventListener('click', createApk))
     } else {
-      apkGenerate.removeClass('d-none')
+      apkGenerate.forEach((el) => el.classList.remove('d-none'))
     }
 
-    const bgDarkPopupInfo = $('#bg-dark, #popup-info')
-    if (bgDarkPopupInfo.length > 0 && data.status === 'ready') {
-      bgDarkPopupInfo.remove()
+    const bgDarkPopupInfo = document.querySelectorAll('#bg-dark, #popup-info')
+    if (bgDarkPopupInfo.length > 0) {
+      bgDarkPopupInfo.forEach((el) => el.classList.add('d-none'))
     }
   }
 
   function showPreparingApkPopup() {
     const popupBackground = createPopupBackgroundDiv()
     const popupDiv = createPopupDiv()
-    const body = $('body')
-    const apkSpinner = $('#apk-pb')
-    apkSpinner.removeClass('d-none')
+    const body = document.body
+    const apkSpinner = document.getElementById('apk-pb')
+    apkSpinner.classList.remove('d-none')
 
-    popupDiv.append('<h2>' + apkPreparing + '</h2><br>')
-    popupDiv.append(apkSpinner)
-    popupDiv.append('<p>' + apkText + '</p>')
+    const h2 = document.createElement('h2')
+    h2.textContent = apkPreparing
+    popupDiv.appendChild(h2)
+    popupDiv.appendChild(document.createElement('br'))
+    popupDiv.appendChild(apkSpinner)
 
-    const closePopupButton =
-      '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' +
-      btnClosePopup +
-      '</button>'
-    popupDiv.append(closePopupButton)
+    const p = document.createElement('p')
+    p.textContent = apkText
+    popupDiv.appendChild(p)
 
-    body.append(popupBackground)
-    body.append(popupDiv)
+    const closePopupButton = document.createElement('button')
+    closePopupButton.id = 'btn-close-popup'
+    closePopupButton.className = 'btn btn-primary btn-close-popup'
+    closePopupButton.textContent = btnClosePopup
+    popupDiv.appendChild(closePopupButton)
 
-    $('#popup-background, #btn-close-popup').click(function () {
-      apkSpinner.addClass('d-none')
+    body.appendChild(popupBackground)
+    body.appendChild(popupDiv)
+
+    popupBackground.addEventListener('click', closePopup)
+    closePopupButton.addEventListener('click', closePopup)
+
+    function closePopup() {
+      apkSpinner.classList.add('d-none')
       popupDiv.remove()
       popupBackground.remove()
-    })
+    }
   }
 
   function createPopupDiv() {
-    return $('<div id="popup-info" class="popup-div"></div>')
+    const div = document.createElement('div')
+    div.id = 'popup-info'
+    div.className = 'popup-div'
+    return div
   }
 
   function createPopupBackgroundDiv() {
-    return $('<div id="popup-background" class="popup-bg"></div>')
+    const div = document.createElement('div')
+    div.id = 'popup-background'
+    div.className = 'popup-bg'
+    return div
   }
 
   // -------------------------- Project Likes / Reactions
@@ -311,121 +338,132 @@ export const Project = function (
     })
   }
 
-  let $projectLikeCounter, $projectLikeButtons, $projectLikeDetail
-  let $projectLikeCounterSmall,
-    $projectLikeButtonsSmall,
-    $projectLikeDetailSmall
+  let projectLikeCounter, projectLikeButton, projectLikeDetail
+  let projectLikeCounterSmall, projectLikeButtonsSmall, projectLikeDetailSmall
 
   function initProjectLike() {
     let detailOpened = false
 
-    const $container = $('#project-like')
+    const container = document.getElementById('project-like')
 
-    const $buttons = $('#project-like-buttons', $container)
-    const $detail = $('#project-like-detail', $container)
-    const $counter = $('#project-like-counter', $container)
-    $projectLikeCounter = $counter
-    $projectLikeButtons = $buttons
-    $projectLikeDetail = $detail
+    projectLikeButton = container.querySelector('#project-like-buttons')
+    projectLikeDetail = container.querySelector('#project-like-detail')
+    projectLikeCounter = container.querySelector('#project-like-counter')
 
-    $buttons.on('click', function () {
-      if ($detail.css('display') === 'flex') {
+    projectLikeButton.addEventListener('click', function () {
+      if (projectLikeDetail.style.display === 'flex') {
         return
       }
-      $detail.css('display', 'flex').hide().fadeIn()
-      detailOpened = true
-    })
-    const $containerSmall = $('#project-like-small')
-    const $buttonsSmall = $('#project-like-buttons-small', $containerSmall)
-    const $detailSmall = $('#project-like-detail-small', $containerSmall)
-    const $counterSmall = $('#project-like-counter-small', $containerSmall)
-    $projectLikeCounterSmall = $counterSmall
-    $projectLikeButtonsSmall = $buttonsSmall
-    $projectLikeDetailSmall = $detailSmall
-
-    $buttonsSmall.on('click', function () {
-      if ($detailSmall.css('display') === 'flex') {
-        return
-      }
-      $detailSmall.css('display', 'flex').hide().fadeIn()
+      projectLikeDetail.style.display = 'flex'
       detailOpened = true
     })
 
-    $('body').on('mousedown', function () {
-      if (detailOpened) {
-        $detail.fadeOut()
-        $detailSmall.fadeOut()
+    const containerSmall = document.getElementById('project-like-small')
+    projectLikeButtonsSmall = containerSmall.querySelector(
+      '#project-like-buttons-small',
+    )
+    projectLikeDetailSmall = containerSmall.querySelector(
+      '#project-like-detail-small',
+    )
+    projectLikeCounterSmall = containerSmall.querySelector(
+      '#project-like-counter-small',
+    )
+
+    projectLikeButtonsSmall.addEventListener('click', function () {
+      if (projectLikeDetailSmall.style.display === 'flex') {
+        return
+      }
+      projectLikeDetailSmall.style.display = 'flex'
+      detailOpened = true
+    })
+
+    document.body.addEventListener('mousedown', function () {
+      if (!detailOpened) {
+        return
+      }
+      const isClickInsideDetail =
+        projectLikeDetail.contains(event.target) ||
+        projectLikeDetailSmall.contains(event.target)
+      if (!isClickInsideDetail) {
+        projectLikeDetail.style.display = 'none'
+        projectLikeDetailSmall.style.display = 'none'
         detailOpened = false
       }
     })
-    $counter.on('click', { small: false }, counterClickAction)
-    $counterSmall.on('click', { small: true }, counterClickAction)
-    $detail.find('.btn').on('click', detailsAction)
-    $detailSmall.find('.btn').on('click', detailsActionSmall)
+
+    projectLikeCounter.addEventListener('click', (event) =>
+      counterClickAction(event, false),
+    )
+    projectLikeCounterSmall.addEventListener('click', (event) =>
+      counterClickAction(event, true),
+    )
+
+    projectLikeDetail
+      .querySelectorAll('.btn')
+      .forEach((button) => button.addEventListener('click', detailsAction))
+    projectLikeDetailSmall
+      .querySelectorAll('.btn')
+      .forEach((button) => button.addEventListener('click', detailsActionSmall))
   }
 
-  function counterClickAction(event) {
-    if (event.data.small) {
-      $('#project-reactions-spinner-small').removeClass('d-none')
-    } else {
-      $('#project-reactions-spinner').removeClass('d-none')
-    }
-    $.getJSON(
-      likeDetailUrl,
-      /** @param {{user: {id: string, name: string}, types: string[]}[]} data */
-      function (data) {
+  function counterClickAction(event, small) {
+    const spinner = small
+      ? document.getElementById('project-reactions-spinner-small')
+      : document.getElementById('project-reactions-spinner')
+    spinner.classList.remove('d-none')
+
+    fetch(likeDetailUrl, {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    })
+      .then((data) => {
         if (!Array.isArray(data)) {
           showErrorAlert()
           console.error('Invalid data returned by likeDetailUrl', data)
           return
         }
 
-        const $modal = $('#project-like-modal')
-        const bootstrapModal = new Modal('#project-like-modal')
+        const modal = document.getElementById('project-like-modal')
+        const bootstrapModal = new Modal(modal)
         const firstTabEl = document.querySelector(
           '#reaction-modal-tab li:first-child button',
         )
         const firstTab = new Tab(firstTabEl)
         firstTab.show()
 
-        const thumbsUpData = data.filter(
-          (x) => x.types.indexOf('thumbs_up') !== -1,
-        )
-        const smileData = data.filter((x) => x.types.indexOf('smile') !== -1)
-        const loveData = data.filter((x) => x.types.indexOf('love') !== -1)
-        const wowData = data.filter((x) => x.types.indexOf('wow') !== -1)
+        const thumbsUpData = data.filter((x) => x.types.includes('thumbs_up'))
+        const smileData = data.filter((x) => x.types.includes('smile'))
+        const loveData = data.filter((x) => x.types.includes('love'))
+        const wowData = data.filter((x) => x.types.includes('wow'))
 
-        /**
-         * @param type string
-         * @param data {{user: {id: string, name: string}, types: string[]}[]}
-         */
         const fnUpdateContent = (type, data) => {
-          const $tab = /** @type jQuery */ $modal.find(
-            'button#' + type + '-tab',
-          )
-          const $content = $modal.find('#' + type + '-tab-content')
-          $content.empty()
+          const tab = modal.querySelector('button#' + type + '-tab')
+          const content = modal.querySelector('#' + type + '-tab-content')
+          content.innerHTML = ''
 
-          // count
-          $tab.find(' > span').text(data.length)
+          tab.querySelector('span').textContent = data.length
 
           if (data.length === 0 && type !== 'all') {
-            $tab.parent().hide()
+            tab.parentElement.style.display = 'none'
             return
           } else {
-            $tab.parent().show()
+            tab.parentElement.style.display = 'block'
           }
 
-          // tab content
           data.forEach(function (like) {
-            const $like = $('<div/>').addClass('reaction')
-            $like.append(
-              $('<a/>')
-                .attr('href', profileUrl.replace('USERID', like.user.id))
-                .text(like.user.name),
-            )
-            const $likeTypes = $('<div/>').addClass('types')
-            $like.append($likeTypes)
+            const likeDiv = document.createElement('div')
+            likeDiv.className = 'reaction'
+
+            const likeLink = document.createElement('a')
+            likeLink.href = profileUrl.replace('USERID', like.user.id)
+            likeLink.textContent = like.user.name
+            likeDiv.appendChild(likeLink)
+
+            const likeTypes = document.createElement('div')
+            likeTypes.className = 'types'
+            likeDiv.appendChild(likeTypes)
 
             const iconMapping = {
               thumbs_up: 'thumb_up',
@@ -442,24 +480,22 @@ export const Project = function (
 
             like.types.forEach((type) => {
               if (type !== 'wow') {
-                $likeTypes.append(
-                  $('<i/>')
-                    .addClass(
-                      'material-icons md-18 ' + iconMappingClasses[type],
-                    )
-                    .append(iconMapping[type]),
-                )
+                const icon = document.createElement('i')
+                icon.className =
+                  'material-icons md-18 ' + iconMappingClasses[type]
+                icon.textContent = iconMapping[type]
+                likeTypes.appendChild(icon)
               } else {
                 const img = document.createElement('IMG')
                 img.src = wowBlack
                 img.className = 'wow'
                 img.id = 'wow-reaction-modal'
                 img.alt = 'Wow Reaction'
-                $likeTypes.append(img)
+                likeTypes.appendChild(img)
               }
             })
 
-            $content.append($like)
+            content.appendChild(likeDiv)
           })
         }
 
@@ -468,17 +504,25 @@ export const Project = function (
         fnUpdateContent('smile', smileData)
         fnUpdateContent('love', loveData)
         fnUpdateContent('wow', wowData)
-        $('#project-reactions-spinner').addClass('d-none')
-        $('#project-reactions-spinner-small').addClass('d-none')
+
+        document
+          .getElementById('project-reactions-spinner')
+          .classList.add('d-none')
+        document
+          .getElementById('project-reactions-spinner-small')
+          .classList.add('d-none')
 
         bootstrapModal.show()
-      },
-    ).fail(function (jqXHR, textStatus, errorThrown) {
-      $('#project-reactions-spinner').hide()
-      $('#project-reactions-spinner-small').hide()
-      showErrorAlert()
-      console.error('Failed fetching like list', jqXHR, textStatus, errorThrown)
-    })
+      })
+      .catch((error) => {
+        document.getElementById('project-reactions-spinner').style.display =
+          'none'
+        document.getElementById(
+          'project-reactions-spinner-small',
+        ).style.display = 'none'
+        showErrorAlert()
+        console.error('Failed fetching like list', error)
+      })
   }
 
   function detailsAction(event) {
@@ -487,11 +531,11 @@ export const Project = function (
       ? likeActionRemove
       : likeActionAdd
     sendProjectLike(
-      $(this).data('like-type'),
+      this.dataset.likeType,
       action,
-      $projectLikeButtons,
-      $projectLikeCounter,
-      $projectLikeDetail,
+      projectLikeButton,
+      projectLikeCounter,
+      projectLikeDetail,
       false,
     )
   }
@@ -502,11 +546,11 @@ export const Project = function (
       ? likeActionRemove
       : likeActionAdd
     sendProjectLike(
-      $(this).data('like-type'),
+      this.dataset.likeType,
       action,
-      $projectLikeButtonsSmall,
-      $projectLikeCounterSmall,
-      $projectLikeDetailSmall,
+      projectLikeButtonsSmall,
+      projectLikeCounterSmall,
+      projectLikeDetailSmall,
       true,
     )
   }
@@ -519,174 +563,173 @@ export const Project = function (
     likeDetail,
     smallScreen,
   ) {
-    const url =
-      likeUrl +
-      '?type=' +
-      encodeURIComponent(likeType) +
-      '&action=' +
-      encodeURIComponent(likeAction)
+    const url = `${likeUrl}?type=${encodeURIComponent(likeType)}&action=${encodeURIComponent(likeAction)}`
 
     if (userRole === 'guest') {
       window.location.href = url
       return false
     }
 
-    $.ajax({
-      url,
-      type: 'get',
-      success: function (data) {
-        // update .active of button
-        const typeBtn = likeDetail.find('.btn[data-like-type=' + likeType + ']')
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        const typeBtn = likeDetail.querySelector(
+          `.btn[data-like-type="${likeType}"]`,
+        )
         if (likeAction === likeActionAdd) {
-          typeBtn.addClass('active')
+          typeBtn.classList.add('active')
         } else {
-          typeBtn.removeClass('active')
-        }
-        let iconSize = 'md-28'
-        if (smallScreen) {
-          iconSize = 'md-24'
+          typeBtn.classList.remove('active')
         }
 
-        // update like count
-        likeCounter.text(data.totalLikeCount.stringValue + ' ' + reactionsText)
+        const iconSize = smallScreen ? 'md-24' : 'md-28'
+        likeCounter.textContent = `${data.totalLikeCount.stringValue} ${reactionsText}`
+
         if (data.totalLikeCount.value === 0) {
-          likeCounter.addClass('d-none')
+          likeCounter.classList.add('d-none')
         } else {
-          likeCounter.removeClass('d-none')
+          likeCounter.classList.remove('d-none')
         }
 
-        // update like buttons (behavior like in project.html.twig)
         if (
           !Array.isArray(data.activeLikeTypes) ||
           data.activeLikeTypes.length === 0
         ) {
-          likeButtons.html(
-            '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
-              '<i class="material-icons thumbs-up ' +
-              iconSize +
-              '">thumb_up</i></div>',
-          )
+          likeButtons.innerHTML = `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                    <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
         } else {
           let html = ''
 
-          if (data.activeLikeTypes.indexOf('thumbs_up') !== -1) {
-            html +=
-              '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
-              '<i class="material-icons thumbs-up ' +
-              iconSize +
-              '">thumb_up</i></div>'
+          if (data.activeLikeTypes.includes('thumbs_up')) {
+            html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                        <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
           }
 
-          if (data.activeLikeTypes.indexOf('smile') !== -1) {
-            html +=
-              '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
-              '<i class="material-icons smile ' +
-              iconSize +
-              '">sentiment_very_satisfied</i></div>'
+          if (data.activeLikeTypes.includes('smile')) {
+            html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                        <i class="material-icons smile ${iconSize}">sentiment_very_satisfied</i></div>`
           }
 
-          if (data.activeLikeTypes.indexOf('love') !== -1) {
-            html +=
-              '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
-              '<i class="material-icons love ' +
-              iconSize +
-              '">favorite</i></div>'
+          if (data.activeLikeTypes.includes('love')) {
+            html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                        <i class="material-icons love ${iconSize}">favorite</i></div>`
           }
 
-          if (data.activeLikeTypes.indexOf('wow') !== -1) {
+          if (data.activeLikeTypes.includes('wow')) {
             const img = document.createElement('IMG')
             const div = document.createElement('DIV')
             div.className =
               'btn btn-primary btn-round d-inline-flex justify-content-center align-items-center'
             div.id = 'wow-reaction'
             img.src = wowWhite
-            img.id = 'wow-reaction-img'
-            if (smallScreen) {
-              img.id = 'wow-reaction-img-small'
-            }
+            img.id = smallScreen ? 'wow-reaction-img-small' : 'wow-reaction-img'
             img.className = 'wow'
-            div.append(img)
+            div.appendChild(img)
             html += div.outerHTML
           }
-          likeButtons.html(html)
+          likeButtons.innerHTML = html
         }
-      },
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-      // on 401 redirect to url to log in
-      if (jqXHR.status === 401) {
-        window.location.href = url
-      } else {
-        console.error('Like failure', jqXHR, textStatus, errorThrown)
-        showErrorAlert()
-      }
-    })
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          window.location.href = url
+        } else {
+          console.error('Like failure', error)
+          showErrorAlert()
+        }
+      })
   }
 
-  $(function () {
-    initProjectLike()
-  })
+  document.addEventListener('DOMContentLoaded', initProjectLike)
 }
 
 // -------------------------- APK Logic
-// Implementation not even finished
+// Implementation not finished
 //
 
-$(document).on('click', function (e) {
-  const ellipsisContainer = $('#sign-app-ellipsis-container')
+document.addEventListener('click', function (e) {
+  const ellipsisContainer = document.getElementById(
+    'sign-app-ellipsis-container',
+  )
+  const ellipsis = document.getElementById('sign-app-ellipsis')
+
   if (
-    !(ellipsisContainer.is(e.target) || $('#sign-app-ellipsis').is(e.target))
+    ellipsisContainer &&
+    !(ellipsisContainer.contains(e.target) || ellipsis?.contains(e.target))
   ) {
-    ellipsisContainer.hide()
+    ellipsisContainer.style.display = 'none'
   }
 })
 
-$(document).ready(function () {
-  $('#sign-app-ellipsis').on('click', function () {
-    $('#sign-app-ellipsis-container').show()
-  })
+document.addEventListener('DOMContentLoaded', function () {
+  document
+    .getElementById('sign-app-ellipsis')
+    ?.addEventListener('click', function () {
+      document.getElementById('sign-app-ellipsis-container').style.display =
+        'block'
+    })
 
-  $('#toggle_ads').on('click', function () {
-    if ($('#show_ads_chk').is(':checked')) {
-      $('#ads_info').show()
+  document.getElementById('toggle_ads')?.addEventListener('click', function () {
+    const adsInfo = document.getElementById('ads_info')
+    const showAdsChk = document.getElementById('show_ads_chk')
+
+    if (showAdsChk.checked) {
+      adsInfo.style.display = 'block'
     } else {
-      $('#ads_info').hide()
+      adsInfo.style.display = 'none'
     }
   })
 
-  $('#key_store_file').on('change', function () {
-    $('#key_store_file_text').val($('#key_store_file').val())
-  })
-  $('#key_store_file_text').on('click', function () {
-    $('#key_store_file').trigger('click')
-    $(this).blur()
-  })
-  $('#key_store_icon').on('click', function () {
-    $('#key_store_file').trigger('click')
+  const keyStoreFile = document.getElementById('key_store_file')
+  const keyStoreFileText = document.getElementById('key_store_file_text')
+  const keyStoreIcon = document.getElementById('key_store_icon')
+  const keyStorePath = document.getElementById('key_store_path')
+  const keyStorePathText = document.getElementById('key_store_path_text')
+  const keyFilePathIcon = document.getElementById('key_file_path_icon')
+
+  keyStoreFile?.addEventListener('change', function () {
+    keyStoreFileText.value = keyStoreFile.value
   })
 
-  $('#key_store_path').on('change', function () {
-    $('#key_store_path_text').val($('#key_store_path').val())
+  keyStoreFileText?.addEventListener('click', function () {
+    keyStoreFile.click()
+    keyStoreFileText.blur()
   })
-  $('#key_file_path_icon').on('click', function () {
-    $('#key_store_path').trigger('click')
+
+  keyStoreIcon?.addEventListener('click', function () {
+    keyStoreFile.click()
   })
-  $('#key_store_path_text').on('click', function () {
-    $('#key_store_path').trigger('click')
-    $(this).blur()
+
+  keyStorePath?.addEventListener('change', function () {
+    keyStorePathText.value = keyStorePath.value
   })
-  $('#inc_years').on('click', function () {
-    const yearsField = $('#key_validity')
-    if (yearsField.val() < 99) {
-      yearsField.val(parseInt(yearsField.val()) + 1)
+
+  keyFilePathIcon?.addEventListener('click', function () {
+    keyStorePath.click()
+  })
+
+  keyStorePathText?.addEventListener('click', function () {
+    keyStorePath.click()
+    keyStorePathText.blur()
+  })
+
+  document.getElementById('inc_years')?.addEventListener('click', function () {
+    const yearsField = document.getElementById('key_validity')
+    if (yearsField.value < 99) {
+      yearsField.value = parseInt(yearsField.value) + 1
     }
   })
-  $('#dec_years').on('click', function () {
-    const yearsField = $('#key_validity')
-    if (yearsField.val() > 0) {
-      yearsField.val(parseInt(yearsField.val()) - 1)
+
+  document.getElementById('dec_years')?.addEventListener('click', function () {
+    const yearsField = document.getElementById('key_validity')
+    if (yearsField.value > 0) {
+      yearsField.value = parseInt(yearsField.value) - 1
     }
   })
 })
+
+// --------------------------------
+// Not 4 kids!
 
 document.addEventListener('DOMContentLoaded', function () {
   const button = document.getElementById('projectNotForKidsButton')
