@@ -1,82 +1,45 @@
-// eslint-disable-next-line no-unused-vars
-function AdminLogs() {
-  document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('line-head')) {
-      const panelHeading = event.target.closest('.panel-heading')
-      if (panelHeading) {
-        const panelCollapse = panelHeading.nextElementSibling
-        if (
-          panelCollapse &&
-          panelCollapse.classList.contains('panel-collapse')
-        ) {
-          panelCollapse.classList.toggle('hide')
-        }
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.panel-heading').forEach(function (panelHeading) {
+    panelHeading.addEventListener('click', function (event) {
+      const panelCollapse = panelHeading.nextElementSibling
+      if (panelCollapse && panelCollapse.classList.contains('panel-collapse')) {
+        panelCollapse.classList.toggle('hide')
       }
-    }
-
-    if (event.target.id === 'search') {
-      loadFileContent(
-        document.getElementById('currentFile').value,
-        document.getElementById('logLevelSelect').value,
-        document.getElementById('lineNumber').value,
-        document.querySelector('.greaterThanRB:checked').value,
-      )
-    }
-
-    if (event.target.classList.contains('files')) {
-      loadFileContent(
-        event.target.value,
-        document.getElementById('logLevelSelect').value,
-        document.getElementById('lineNumber').value,
-        document.querySelector('.greaterThanRB:checked').value,
-      )
-      document.getElementById('currentFile').value = event.target.value
-    }
+    })
   })
-}
 
-function loadFileContent(file, filter, count, greaterThan) {
-  const loadingSpinner = document.getElementById('loading-spinner')
-  const innerLogContainer = document.getElementById('innerLogContainer')
-  const outerLogContainer = document.getElementById('outerLogContainer')
+  document.querySelectorAll('.files').forEach(function (fileElement) {
+    fileElement.addEventListener('click', function (event) {
+      loadFileContent(fileElement.value)
+      document.getElementById('currentFile').value = fileElement.value
+    })
+  })
+})
 
-  loadingSpinner.style.display = 'block'
-  innerLogContainer.innerHTML = ''
+function loadFileContent(file) {
+  document.getElementById('loading-spinner').style.display = 'block'
+  document.getElementById('innerLogContainer').innerHTML = ''
+  document.getElementById('currentFileName').innerHTML = file
 
-  const xhr = new XMLHttpRequest()
-  xhr.open(
-    'GET',
-    `/your-endpoint?file=${file}&filter=${filter}&count=${count}&greaterThan=${greaterThan}`,
-    true,
-  )
-
-  xhr.onload = function () {
-    loadingSpinner.style.display = 'none'
-    if (xhr.status >= 200 && xhr.status < 300) {
-      try {
-        const data = JSON.parse(xhr.responseText)
-        outerLogContainer.innerHTML = formatLogData(data)
-      } catch (error) {
-        alert('Error parsing data: ' + error.message)
+  fetch(`${window.location.href}?file=${file}&count=1000`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok')
       }
-    } else {
+      return response.text()
+    })
+    .then((data) => {
+      document.getElementById('loading-spinner').style.display = 'none'
+      const tempDiv = document.createElement('div')
+      tempDiv.innerHTML = data
+
+      console.error(tempDiv.querySelector('#innerLogContainer').innerHTML)
+
+      document.getElementById('innerLogContainer').innerHTML =
+        tempDiv.querySelector('#innerLogContainer').innerHTML
+    })
+    .catch(() => {
+      document.getElementById('loading-spinner').style.display = 'none'
       alert('something went terribly wrong')
-    }
-  }
-
-  xhr.onerror = function () {
-    loadingSpinner.style.display = 'none'
-    alert('something went terribly wrong')
-  }
-
-  xhr.send()
-}
-
-function formatLogData(data) {
-  let formattedData = '<ul>'
-  data.forEach((log) => {
-    formattedData += `<li>${log}</li>`
-  })
-  formattedData += '</ul>'
-  return formattedData
+    })
 }

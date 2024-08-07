@@ -604,8 +604,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   $services->set('catroweb.oauth_success_handler', OAuthSuccessHandler::class);
 
+  $logFormat = "[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n[Client IP: %%extra.client_ip%%, User Agent: %%extra.user_agent%%, Session User: %%extra.session_user%%]";
+
   $services->set('monolog.formatter.catrobat_custom_formatter', LineFormatter::class)
-    ->call('includeStacktraces', ["[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%stacktrace%%[Client IP: %%extra.client_ip%%, User Agent: %%extra.user_agent%%, Session User: %%extra.session_user%%]\n"])
+    ->args([$logFormat, null, true, false])
+    ->call('includeStacktraces', [true])
+    ->call('setBasePath', ['/var/www/my_project'])
+    ->call('indentStacktraces', ['    '])
+    ->call('setMaxLevelNameLength', [5])
   ;
 
   $services->set(LoggerProcessor::class)
