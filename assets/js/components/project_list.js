@@ -18,7 +18,6 @@ export class ProjectList {
     this.container = container
     this.projectsContainer = container.querySelector('.projects-container')
     this.category = category
-    this.apiUrl = this.formatApiUrl(apiUrl)
     this.propertyToShow = propertyToShow
     this.projectsLoaded = 0
     this.projectFetchCount = fetchCount
@@ -33,7 +32,7 @@ export class ProjectList {
     this.$chevronRight = container.querySelector(
       '.project-list__chevrons__right',
     )
-
+    this.apiUrl = this.formatApiUrl(apiUrl)
     this.popStateHandler = this.closeFullView.bind(this)
 
     this.fetchMore(true)
@@ -42,11 +41,14 @@ export class ProjectList {
 
   formatApiUrl(apiUrl) {
     let attributes =
-      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,'
-    attributes +=
-      this.propertyToShow === 'uploaded'
-        ? 'uploaded_string'
-        : this.propertyToShow
+      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,uploaded_string,'
+
+    if (
+      this.propertyToShow &&
+      !attributes.includes(`,${this.propertyToShow},`)
+    ) {
+      attributes += this.propertyToShow
+    }
     return apiUrl.includes('?')
       ? `${apiUrl}&attributes=${attributes}&`
       : `${apiUrl}?attributes=${attributes}&`
