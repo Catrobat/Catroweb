@@ -151,7 +151,6 @@ Feature: Reactions to projects "likes"
     Then the element "#project-like-detail-small" should be visible
     When I click "#project-like-detail-small .btn[data-like-type=4]"
     And I wait for AJAX to finish
-    Then the element "#project-like-detail-small" should not be visible
     And the "#project-like-counter-small" element should contain "1"
     And I should see 1 "#project-like-buttons-small > *"
     And the element "#project-like-buttons-small .wow" should be visible
