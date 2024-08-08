@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @phpstan-extends CRUDController<LogLine>
+ * @phpstan-extends CRUDController<\stdClass>
  */
 class LogsController extends CRUDController
 {
@@ -18,58 +18,29 @@ class LogsController extends CRUDController
 
   final public const string LOG_PATTERN = '*.log';
 
-  final public const int FILTER_LEVEL_DEBUG = 0;
-
-  final public const int FILTER_LEVEL_INFO = 1;
-
-  final public const int FILTER_LEVEL_NOTICE = 2;
-
-  final public const int FILTER_LEVEL_WARNING = 3;
-
-  final public const int FILTER_LEVEL_ERROR = 4;
-
-  final public const int FILTER_LEVEL_CRITICAL = 5;
-
-  final public const int FILTER_LEVEL_ALERT = 6;
-
-  final public const int FILTER_LEVEL_EMERGENCY = 7;
-
   #[\Override]
   public function listAction(Request $request): Response
   {
-    $filter = self::FILTER_LEVEL_WARNING;
-    $greater_equal_than_level = true;
-    $line_count = 20;
+    $line_count = 5000;
     $file = null;
-    if ($request->isXmlHttpRequest()) {
-      if ($request->query->get('count')) {
-        $line_count = $request->query->getInt('count');
-      }
+    if ($request->query->get('count')) {
+      $line_count = $request->query->getInt('count');
+    }
 
-      if (false !== $request->query->get('filter')) {
-        $filter = $request->query->getInt('filter');
-      }
-
-      if ($request->query->get('greaterThan')) {
-        $greater_equal_than_level = $request->query->getBoolean('greaterThan');
-      }
-
-      if ($request->query->get('file')) {
-        $file = (string) $request->query->get('file');
-      }
+    if ($request->query->get('file')) {
+      $file = (string) $request->query->get('file');
     }
 
     $searchParam = [];
-    $searchParam['filter'] = $filter;
-    $searchParam['greater_equal_than_level'] = $greater_equal_than_level;
     $searchParam['line_count'] = $line_count;
     $allFiles = $this->getAllFilesInDirByPattern(self::LOG_DIR, self::LOG_PATTERN);
-    if (empty($file)) {
+    if (empty($file) && !empty($allFiles)) {
       $file = $allFiles[0];
     }
+    $content = empty($file) ? null : $this->getLogFileContent($file, self::LOG_DIR, $searchParam);
 
     return $this->renderWithExtraParams('Admin/Tools/logs.html.twig', [
-      'files' => $allFiles, 'content' => $this->getLogFileContent($file, self::LOG_DIR, $searchParam), ]
+      'files' => $allFiles, 'content' => $content, ]
     );
   }
 
@@ -90,23 +61,43 @@ class LogsController extends CRUDController
   protected function getLogFileContent(string $fileName, string $dir, array $searchParam): array
   {
     $filePath = $dir.$fileName;
-    $file = popen('tac '.$filePath, 'r');
+    $file = fopen($filePath, 'r');
 
     $index = 0;
     $content = [];
-    while (($line = fgets($file)) && ($index < $searchParam['line_count'])) {
-      $log_line = new LogLine($line);
+    $currentLogEntry = null;
 
-      if (($searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() >= $searchParam['filter'])
-        || (!$searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() == $searchParam['filter'])
-      ) {
-        $content[$index] = $log_line;
+    while (($line = fgets($file)) !== false && ($index < $searchParam['line_count'])) {
+      $trimmedLine = trim($line);
 
-        ++$index;
+      if ('' === $trimmedLine) {
+        // Start a new log entry if we encounter an empty line
+        if (null !== $currentLogEntry) {
+          $content[$index] = $currentLogEntry;
+          $currentLogEntry = null;
+          ++$index;
+        }
+        continue;
+      }
+
+      if (null === $currentLogEntry) {
+        // Start a new log entry with the current line as the title
+        $currentLogEntry = [
+          'title' => $trimmedLine,
+          'message' => '',
+        ];
+      } else {
+        // Append to the current log entry's message
+        $currentLogEntry['message'] .= $trimmedLine."\n";
       }
     }
 
-    pclose($file);
+    // Add the last log entry if it exists and there is room
+    if (null !== $currentLogEntry && $index < $searchParam['line_count']) {
+      $content[$index] = $currentLogEntry;
+    }
+
+    fclose($file);
 
     return $content;
   }
