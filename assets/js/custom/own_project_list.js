@@ -5,6 +5,8 @@ import { MDCMenuSurfaceFoundation } from '@material/menu-surface'
 import Swal from 'sweetalert2'
 import { ApiDeleteFetch, ApiFetch } from '../api/ApiHelper'
 import ProjectApi from '../api/ProjectApi'
+import Clipboard from 'clipboard'
+import { showSnackbar } from '../components/snackbar'
 
 require('../../styles/components/own_project_list.scss')
 
@@ -69,6 +71,9 @@ export class OwnProjectList {
         // Set public/private
         self._actionToggleVisibility(self.projectActionMenu.projectId)
       } else if (event.detail.index === 1) {
+        // Share
+        self._actionShareProject(self.projectActionMenu.projectId)
+      } else if (event.detail.index === 2) {
         // Delete
         self._actionDeleteProject(self.projectActionMenu.projectId)
       } else {
@@ -324,6 +329,49 @@ export class OwnProjectList {
         ).run()
       }
     })
+  }
+
+  _actionShareProject(id) {
+    const clipboardSuccessMessage =
+      myProfileConfiguration.messages.clipboardSuccessMessage
+    const clipboardFailMessage = myProfileConfiguration.messages.clipboardFailMessage
+    const shareSuccessMessage = myProfileConfiguration.messages.shareSuccessMessage
+    const shareFailMessage = myProfileConfiguration.messages.shareFailMessage
+    const projectUrl = this.projectsData[id].project_url
+    const titleMessage = myProfileConfiguration.messages.displayName
+    const textMessage = myProfileConfiguration.messages.checkoutMessage
+
+    const shareButton = document.querySelector('#project-share-action')
+
+    if (navigator.share) {
+      shareButton.addEventListener('click', function () {
+        navigator
+          .share({
+            title: titleMessage,
+            text: textMessage,
+            url: projectUrl,
+          })
+          .then(() => {
+            showSnackbar('#share-snackbar', shareSuccessMessage)
+          })
+          .catch((e) => {
+            console.error(e)
+            showSnackbar('#share-snackbar', shareFailMessage)
+          })
+      })
+    } else {
+      const cb = new Clipboard('#project-share-action', {
+        text: function () {
+          return projectUrl
+        },
+      })
+      cb.on('success', function () {
+        showSnackbar('#share-snackbar', clipboardSuccessMessage)
+      })
+      cb.on('error', function () {
+        showSnackbar('#share-snackbar', clipboardFailMessage)
+      })
+    }
   }
 
   _actionToggleVisibility(id) {

@@ -114,6 +114,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Share
   deleteAction: Delete project
   deleteConfirmation: |+
     Are you sure?
