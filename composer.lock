@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b74a6b4e42f98c4956db0acc29d466e4",
+    "content-hash": "653189890a514dea6ae3eb663995db3a",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2623,16 +2623,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.59.0",
+            "version": "v1.59.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "56d31be2663780a7ed0736bee60d01f047bf15c0"
+                "reference": "35aae23dc4d0b860b6c3733e5cf381a510b506d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/56d31be2663780a7ed0736bee60d01f047bf15c0",
-                "reference": "56d31be2663780a7ed0736bee60d01f047bf15c0",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/35aae23dc4d0b860b6c3733e5cf381a510b506d9",
+                "reference": "35aae23dc4d0b860b6c3733e5cf381a510b506d9",
                 "shasum": ""
             },
             "require": {
@@ -2683,22 +2683,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.59.0"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.59.1"
             },
-            "time": "2024-06-07T22:33:41+00:00"
+            "time": "2024-08-10T02:24:23+00:00"
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.17.7",
+            "version": "v1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "92ea9ed3ee8c2f46344aeb88590c66a074f760c6"
+                "reference": "edff9f131ab6fd1b0be7f19069c017afbcb57071"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/92ea9ed3ee8c2f46344aeb88590c66a074f760c6",
-                "reference": "92ea9ed3ee8c2f46344aeb88590c66a074f760c6",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/edff9f131ab6fd1b0be7f19069c017afbcb57071",
+                "reference": "edff9f131ab6fd1b0be7f19069c017afbcb57071",
                 "shasum": ""
             },
             "require": {
@@ -2739,22 +2739,22 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.17.7"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.18.0"
             },
-            "time": "2024-06-01T03:14:01+00:00"
+            "time": "2024-08-10T02:24:23+00:00"
         },
         {
             "name": "google/common-protos",
-            "version": "v4.6.0",
+            "version": "v4.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/common-protos-php.git",
-                "reference": "f8588298a0a204aef2db15ce501530e476ec883f"
+                "reference": "e58068776f57605c336e32c7db373f0a81da17b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/common-protos-php/zipball/f8588298a0a204aef2db15ce501530e476ec883f",
-                "reference": "f8588298a0a204aef2db15ce501530e476ec883f",
+                "url": "https://api.github.com/repos/googleapis/common-protos-php/zipball/e58068776f57605c336e32c7db373f0a81da17b8",
+                "reference": "e58068776f57605c336e32c7db373f0a81da17b8",
                 "shasum": ""
             },
             "require": {
@@ -2791,22 +2791,22 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/common-protos-php/issues",
-                "source": "https://github.com/googleapis/common-protos-php/tree/v4.6.0"
+                "source": "https://github.com/googleapis/common-protos-php/tree/v4.7.0"
             },
-            "time": "2024-04-03T19:11:54+00:00"
+            "time": "2024-07-25T20:20:43+00:00"
         },
         {
             "name": "google/gax",
-            "version": "v1.34.0",
+            "version": "v1.34.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "28aa3e95969a75b278606a88448992a6396a119e"
+                "reference": "173f0a97323284f91fd453c4ed7ed8317ecf6cfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/28aa3e95969a75b278606a88448992a6396a119e",
-                "reference": "28aa3e95969a75b278606a88448992a6396a119e",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/173f0a97323284f91fd453c4ed7ed8317ecf6cfa",
+                "reference": "173f0a97323284f91fd453c4ed7ed8317ecf6cfa",
                 "shasum": ""
             },
             "require": {
@@ -2848,9 +2848,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.34.0"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.34.1"
             },
-            "time": "2024-05-30T00:35:13+00:00"
+            "time": "2024-08-15T18:00:58+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -2943,16 +2943,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v4.27.2",
+            "version": "v4.27.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "1b9bfead0ea8108e6ab411258fc38417b62d4bf6"
+                "reference": "ff079fe467bf86ac8f3359e2eb77a1613ebd204d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/1b9bfead0ea8108e6ab411258fc38417b62d4bf6",
-                "reference": "1b9bfead0ea8108e6ab411258fc38417b62d4bf6",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/ff079fe467bf86ac8f3359e2eb77a1613ebd204d",
+                "reference": "ff079fe467bf86ac8f3359e2eb77a1613ebd204d",
                 "shasum": ""
             },
             "require": {
@@ -2981,9 +2981,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.27.2"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.27.3"
             },
-            "time": "2024-06-25T19:14:44+00:00"
+            "time": "2024-07-31T13:27:16+00:00"
         },
         {
             "name": "grpc/grpc",
@@ -3031,22 +3031,22 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.8.1",
+            "version": "7.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "41042bc7ab002487b876a0683fc8dce04ddce104"
+                "reference": "d281ed313b989f213357e3be1a179f02196ac99b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/41042bc7ab002487b876a0683fc8dce04ddce104",
-                "reference": "41042bc7ab002487b876a0683fc8dce04ddce104",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d281ed313b989f213357e3be1a179f02196ac99b",
+                "reference": "d281ed313b989f213357e3be1a179f02196ac99b",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.5.3 || ^2.0.1",
-                "guzzlehttp/psr7": "^1.9.1 || ^2.5.1",
+                "guzzlehttp/promises": "^1.5.3 || ^2.0.3",
+                "guzzlehttp/psr7": "^2.7.0",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
                 "symfony/deprecation-contracts": "^2.2 || ^3.0"
@@ -3057,9 +3057,9 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "ext-curl": "*",
-                "php-http/client-integration-tests": "dev-master#2c025848417c1135031fdf9c728ee53d0a7ceaee as 3.0.999",
+                "guzzle/client-integration-tests": "3.0.2",
                 "php-http/message-factory": "^1.1",
-                "phpunit/phpunit": "^8.5.36 || ^9.6.15",
+                "phpunit/phpunit": "^8.5.39 || ^9.6.20",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
             },
             "suggest": {
@@ -3137,7 +3137,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.8.1"
+                "source": "https://github.com/guzzle/guzzle/tree/7.9.2"
             },
             "funding": [
                 {
@@ -3153,20 +3153,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-03T20:35:24+00:00"
+            "time": "2024-07-24T11:22:20+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.0.2",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "bbff78d96034045e58e13dedd6ad91b5d1253223"
+                "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/bbff78d96034045e58e13dedd6ad91b5d1253223",
-                "reference": "bbff78d96034045e58e13dedd6ad91b5d1253223",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
+                "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
                 "shasum": ""
             },
             "require": {
@@ -3174,7 +3174,7 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "phpunit/phpunit": "^8.5.36 || ^9.6.15"
+                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
             },
             "type": "library",
             "extra": {
@@ -3220,7 +3220,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0.2"
+                "source": "https://github.com/guzzle/promises/tree/2.0.3"
             },
             "funding": [
                 {
@@ -3236,20 +3236,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-03T20:19:20+00:00"
+            "time": "2024-07-18T10:29:17+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.6.2",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "45b30f99ac27b5ca93cb4831afe16285f57b8221"
+                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/45b30f99ac27b5ca93cb4831afe16285f57b8221",
-                "reference": "45b30f99ac27b5ca93cb4831afe16285f57b8221",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
+                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
                 "shasum": ""
             },
             "require": {
@@ -3264,8 +3264,8 @@
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
-                "http-interop/http-factory-tests": "^0.9",
-                "phpunit/phpunit": "^8.5.36 || ^9.6.15"
+                "http-interop/http-factory-tests": "0.9.0",
+                "phpunit/phpunit": "^8.5.39 || ^9.6.20"
             },
             "suggest": {
                 "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
@@ -3336,7 +3336,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.6.2"
+                "source": "https://github.com/guzzle/psr7/tree/2.7.0"
             },
             "funding": [
                 {
@@ -3352,7 +3352,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-03T20:05:35+00:00"
+            "time": "2024-07-18T11:15:46+00:00"
         },
         {
             "name": "http-interop/http-factory-guzzle",
