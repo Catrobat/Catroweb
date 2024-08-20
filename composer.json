@@ -26,7 +26,7 @@
     "friendsofsymfony/elastica-bundle": "6.4.*",
     "gesdinet/jwt-refresh-token-bundle": "1.3.*",
     "google/apiclient": "2.17.*",
-    "google/cloud-translate": "1.17.*",
+    "google/cloud-translate": "1.18.*",
     "http-interop/http-factory-guzzle": "*",
     "hwi/oauth-bundle": "2.2.*",
     "incenteev/composer-parameter-handler": "2.2.*",
