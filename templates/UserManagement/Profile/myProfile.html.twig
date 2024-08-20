@@ -126,6 +126,10 @@
               data-text-private="{{ 'project.setPrivateAction'|trans({}, 'catroweb') }}"
               data-text-public="{{ 'project.setPublicAction'|trans({}, 'catroweb') }}"></span>
       </li>
+      <li class="mdc-list-item" role="menuitem" id="project-share-action">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__text">{{ 'project.shareAction'|trans({}, 'catroweb') }}</span>
+      </li>
       <li class="mdc-list-item" role="menuitem">
         <span class="mdc-list-item__ripple"></span>
         <span class="mdc-list-item__text">{{ 'project.deleteAction'|trans({}, 'catroweb') }}</span>
@@ -165,6 +169,12 @@
       }
     },
     messages: {
+      clipboardSuccessMessage: '{{ 'clipboard.success_project'|trans({}, 'catroweb')|escape('js')|raw }}',
+      clipboardFailMessage: '{{ 'clipboard.fail'|trans({}, 'catroweb')|escape('js')|raw }}',
+      shareSuccessMessage: '{{ 'share.success'|trans({}, 'catroweb')|escape('js')|raw }}',
+      shareFailMessage: '{{ 'share.error'|trans({}, 'catroweb')|escape('js')|raw }}',
+      checkoutMessage: '{{ 'checkOutProject'|trans({}, 'catroweb')|escape('js')|raw }}',
+      displayName: '{{ 'flavor.pocketcode'|trans({}, 'catroweb')|escape('js')|raw }}',
       unspecifiedErrorText: '{{ 'myprofile.unspecifiedError'|trans({}, 'catroweb')|escape('js')|raw }}',
       deleteProjectNotFoundText: '{{ 'project.deleteNotFoundError'|trans({}, 'catroweb')|escape('js')|raw }}',
       security: {
