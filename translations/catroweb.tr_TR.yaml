@@ -110,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Paylaş
   deleteAction: Projeyi sil
   deleteConfirmation: |+
     Are you sure?
