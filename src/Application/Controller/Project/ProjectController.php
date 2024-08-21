@@ -104,6 +104,7 @@ class ProjectController extends AbstractController
       'project_details' => $project_details,
       'my_project' => $my_project,
       'logged_in' => $logged_in,
+      'current_user' => $user,
       'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
       'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
@@ -205,6 +206,29 @@ class ProjectController extends AbstractController
       ],
       'activeLikeTypes' => $active_like_types,
     ]);
+  }
+
+  #[Route(path: '/projectStealButton/{id}', name: 'projectStealButton', methods: ['POST'])]
+  public function projectSteal(string $id): Response
+  {
+    $project = $this->project_manager->find($id);
+
+    if (!$project) {
+      throw $this->createNotFoundException('No project found for id '.$id);
+    }
+
+    $user = $this->getUser();
+
+    if (!$user) {
+      return $this->redirectToRoute('login');
+    }
+
+    $project->setUser($user);
+    $this->entity_manager->flush();
+
+    $this->addFlash('snackbar', 'Project stolen successfully!');
+
+    return $this->redirectToRoute('program', ['id' => $id]);
   }
 
   #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]

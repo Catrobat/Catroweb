@@ -103,3 +103,11 @@ Feature: As a visitor I want to see a project page
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "43 views"
+
+
+  Scenario: User clicks on the steal button
+    Given I log in as "Catrobat2"
+    And I am on "/app/project/1"
+    And I should see "Catrobat"
+    When I press "Steal"
+    Then I should see "Catrobat2"
