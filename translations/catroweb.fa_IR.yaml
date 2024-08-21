@@ -110,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: به شراکت بگذار
   deleteAction: حذف پروژه
   deleteConfirmation: |+
     Are you sure?

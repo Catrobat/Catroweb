@@ -110,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: 共有
   deleteAction: プロジェクトを削除
   deleteConfirmation: |+
     Are you sure?

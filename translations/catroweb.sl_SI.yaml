@@ -110,6 +110,7 @@ project:
   recommended: Predlagani projekti
   scratchremixes: Zavrzi predelave
   noProjects: Trenutno ni nobenih projektov.
+  shareAction: Share
   deleteAction: Izbriši projekt
   deleteConfirmation: |+
     Are you sure?

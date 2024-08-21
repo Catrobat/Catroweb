@@ -110,6 +110,7 @@ project:
   recommended: Рекомендуемые проекты
   scratchremixes: Scratch ремиксы
   noProjects: На данный момент проекты отсутствуют.
+  shareAction: Поделиться
   deleteAction: Удалить проект
   deleteConfirmation: |+
     Вы уверены?
