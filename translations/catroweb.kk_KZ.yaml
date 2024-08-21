@@ -110,6 +110,7 @@ project:
   recommended: Ұсынылған жобалар
   scratchremixes: Scratch ремикстері
   noProjects: Қазіргі уақытта жобалар жоқ.
+  shareAction: Бөлісу
   deleteAction: Жобаны жою
   deleteConfirmation: |+
     Сіз сенімдісіз бе?

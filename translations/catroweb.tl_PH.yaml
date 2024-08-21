@@ -110,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Share
   deleteAction: Burahin ang proyekto
   deleteConfirmation: |+
     Are you sure?

@@ -110,6 +110,7 @@ project:
   recommended: โครงการแนะนำ
   scratchremixes: รีมิกซ์แบบเกา
   noProjects: ขณะนี้ยังไม่มีโครงการใดๆ
+  shareAction: แบ่งปัน
   deleteAction: ลบโปรเจค
   deleteConfirmation: |+
     คุณแน่ใจไหม?

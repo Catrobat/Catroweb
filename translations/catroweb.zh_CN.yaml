@@ -110,6 +110,7 @@ project:
   recommended: 推荐的项目
   scratchremixes: Scratch remixes
   noProjects: 目前没有项目。
+  shareAction: 分享
   deleteAction: 删除项目
   deleteConfirmation: |+
     Are you sure?

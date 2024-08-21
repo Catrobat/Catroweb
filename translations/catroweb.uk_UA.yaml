@@ -110,6 +110,7 @@ project:
   recommended: Рекомендовані проєкти
   scratchremixes: Scratch ремікси
   noProjects: Наразі немає проєктів.
+  shareAction: Поділитися
   deleteAction: Видалити проєкт
   deleteConfirmation: |+
     Ви впевнені?
