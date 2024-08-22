@@ -75,6 +75,7 @@ oauthPopUpTitle: "Сыртқы тіркелгіге кіру ақпараты"
 oauthInfo: 'Жүйеге кіру үшін жаңа ғана сыртқы тіркелгіні пайдаландыңыз. Біз сіз үшін кездейсоқ пайдаланушы атын жасадық. Пайдаланушы атыңызды өзгерткіңіз немесе тіркелгіңізге жаңа құпия сөз жасағыңыз келсе, профиль бетіне өтіңіз.'
 oauthHere: "мұнда"
 statistics: "Статисткалар"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Ұсынылған жобалар
   scratchremixes: Scratch ремикстері
   noProjects: Қазіргі уақытта жобалар жоқ.
+  shareAction: Бөлісу
   deleteAction: Жобаны жою
   deleteConfirmation: |+
     Сіз сенімдісіз бе?

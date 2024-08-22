@@ -75,6 +75,7 @@ oauthPopUpTitle: "Informazioni accesso account esterno"
 oauthInfo: 'Hai appena usato un account esterno per accedere. Abbiamo creato un nome utente casuale. Se vuoi cambiare il tuo nome utente o creare una nuova password per il tuo account, vai alla pagina del profilo. Clicca %link_start% qui %link_end% per andare alla pagina del tuo profilo'
 oauthHere: "qui"
 statistics: "Statistiche"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Condividi
   deleteAction: Elimina progetto
   deleteConfirmation: |+
     Are you sure?

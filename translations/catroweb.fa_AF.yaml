@@ -75,6 +75,7 @@ oauthPopUpTitle: "معلومات وارد شدن به حساب خارجی"
 oauthInfo: 'شما فقط از یک حساب خارجی برای ورود به سیستم استفاده کرده اید. ما یک نام کاربری تصادفی برای شما ایجاد کردیم. اگر می خواهید نام کاربری خود را تغییر دهید یا یک رمز جدید برای حساب کاربری خود ایجاد کنید پس لطفا به صفحه نمایه من بروید. برای رفتن به صفحه نمایه خود %link_start%اینجا%link_end%را کلیک کنید.'
 oauthHere: "اینجا"
 statistics: "آمار"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: اشتراک
   deleteAction: حذف پروژه
   deleteConfirmation: |+
     Are you sure?

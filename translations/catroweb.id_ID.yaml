@@ -75,6 +75,7 @@ oauthPopUpTitle: "Informasi masuk akun eksternal"
 oauthInfo: 'Anda baru saja menggunakan akun eksternal untuk masuk. Kami membuat nama pengguna acak untuk Anda. Jika Anda ingin mengubah nama pengguna atau membuat kata sandi baru untuk akun Anda, silakan buka halaman profil saya. Klik %link_start% di sini %link_end% untuk membuka halaman profil Anda'
 oauthHere: "sini"
 statistics: "Statistik"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Bagikan
   deleteAction: Hapus proyek
   deleteConfirmation: |+
     Are you sure?

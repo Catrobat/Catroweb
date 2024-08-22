@@ -1557,17 +1557,42 @@ class DataFixturesContext implements Context
       $cached_description = $translation->getCachedDescription();
       $cached_credits = $translation->getCachedCredits();
 
-      $matching_row = array_filter($table_rows,
-        static fn ($row): bool => $project_id == $row['project_id']
+      // Filter rows to find matching entries
+      $matching_row = array_filter($table_rows, static function ($row) use (
+        $project_id,
+        $source_language,
+        $target_language,
+        $provider,
+        $usage_count,
+        $cached_name,
+        $cached_description,
+        $cached_credits
+      ) {
+        return $project_id == $row['project_id']
           && $source_language == $row['source_language']
           && $target_language == $row['target_language']
           && $provider == $row['provider']
-          && $usage_count == $row['usage_count']
+          && $usage_count == (int) $row['usage_count']
           && $cached_name == ($row['cached_name'] ?? null)
           && $cached_description == ($row['cached_description'] ?? null)
-          && $cached_credits == ($row['cached_credits'] ?? null));
+          && $cached_credits == ($row['cached_credits'] ?? null);
+      });
 
-      Assert::assertEquals(1, count($matching_row), 'row not found: '.$project_id);
+      // Assert that exactly one matching row was found
+      $matching_row_count = count($matching_row);
+      Assert::assertEquals(1, $matching_row_count, 'Row not found: '.json_encode([
+        'expected' => [
+          'project_id' => $project_id,
+          'source_language' => $source_language,
+          'target_language' => $target_language,
+          'provider' => $provider,
+          'usage_count' => $usage_count,
+          'cached_name' => $cached_name,
+          'cached_description' => $cached_description,
+          'cached_credits' => $cached_credits,
+        ],
+        'found_rows' => $table_rows,
+      ]));
     }
   }
 

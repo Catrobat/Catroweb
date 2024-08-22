@@ -15,64 +15,91 @@ Feature: Invalidate project cached machine translation
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
-    And I POST login with user "Catrobat" and password "123456"
-    When I have a request parameter "value" with value "new value"
-    And I request "PUT" "/app/<url>/1"
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+        """
+          {
+            "<property>": "new random value"
+          }
+        """
+    When I request "PUT" "/api/project/1"
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count |
       | 1          | en              | fr-FR           | itranslate | 16          |
 
     Examples:
-      | url                    |
-      | editProjectName        |
-      | editProjectDescription |
-      | editProjectCredits     |
+      | property    |
+      | name        |
+      | description |
+      | credits      |
 
   Scenario Outline: Edits should not invalidate cached translation when not logged in
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
-    When I have a request parameter "value" with value "new value"
-    And I request "PUT" "/app/<url>/1"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+        """
+          {
+            "<property>": "new value"
+          }
+        """
+    When I request "PUT" "/api/project/1"
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
 
     Examples:
-      | url                    |
-      | editProjectName        |
-      | editProjectDescription |
-      | editProjectCredits     |
+      | property    |
+      | name        |
+      | description |
+      | credits     |
 
   Scenario Outline: Nothing happens when other project properties are changed
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
-    And I log in as "<user>"
-    When I go to "<url>"
+    And I use a valid JWT Bearer token for "<user>"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+        """
+          {
+            "<property>": <value>
+          }
+        """
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
 
     Examples:
-      | user     | url                            |
-      | Catroweb | /app/userDeleteProject/1           |
-      | Catroweb | /app/userToggleProjectVisibility/1 |
-      | Alice    | /app/project/like/1                |
+      | user     | property | value |
+      | Catroweb | visible  | 0     |
+      | Catroweb | private  | 1     |
 
   Scenario Outline: Nothing happens when other projects are edited
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
-    And I POST login with user "Catrobat" and password "123456"
-    When I have a request parameter "value" with value "new value"
-    And I request "PUT" "/app/<url>/2"
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+        """
+          {
+            "<property>": "new value"
+          }
+        """
+    When I request "PUT" "/api/project/2"
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
 
     Examples:
-      | url                    |
-      | editProjectName        |
-      | editProjectDescription |
-      | editProjectCredits     |
+      | property    |
+      | name        |
+      | description |
+      | credits     |

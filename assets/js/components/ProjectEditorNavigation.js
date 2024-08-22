@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
 import {
   showCustomTopBarTitle,
@@ -15,77 +14,78 @@ export function ProjectEditorNavigation(
   this.programId = programId
   this.programEditor = programEditor
 
-  this.body = $('body')
-  this.editTextNavigation = $('#edit-text-navigation')
-  this.navigationLanguageList = $('#navigation-language-list')
+  this.body = document.body
+  this.editTextNavigation = document.getElementById('edit-text-navigation')
+  this.navigationLanguageList = document.getElementById(
+    'navigation-language-list',
+  )
 
   this.languages = {}
 
   this.customTranslationApi = new CustomTranslationApi()
 
-  this.translationsText = projectDescriptionCredits.data('trans-translations')
-  this.defaultText = projectDescriptionCredits.data('trans-default')
-  this.translationTitleText = projectDescriptionCredits.data(
-    'trans-translation-title',
-  )
-  this.editDefaultText = projectDescriptionCredits.data('trans-edit-default')
-  this.editTranslationText = projectDescriptionCredits.data(
-    'trans-edit-translation',
-  )
-  this.createTranslationText = projectDescriptionCredits.data(
-    'trans-create-translation',
-  )
+  this.translationsText = projectDescriptionCredits.dataset.transTranslations
+  this.defaultText = projectDescriptionCredits.dataset.transDefault
+  this.translationTitleText =
+    projectDescriptionCredits.dataset.transTranslationTitle
+  this.editDefaultText = projectDescriptionCredits.dataset.transEditDefault
+  this.editTranslationText =
+    projectDescriptionCredits.dataset.transEditTranslation
+  this.createTranslationText =
+    projectDescriptionCredits.dataset.transCreateTranslation
 
-  $('#add-translation-button').on('click', () => {
-    this.openEditor(null, true, false, this.createTranslationText)
-  })
+  document
+    .getElementById('add-translation-button')
+    .addEventListener('click', () => {
+      this.openEditor(null, true, false, this.createTranslationText)
+    })
 
-  $(document).ready(getLanguages)
+  document.addEventListener('DOMContentLoaded', getLanguages)
 
-  $(document).on('click', '.edit-defined-translation', function () {
-    const language = $(this).data('value')
-    const languageName = $(this).data('language')
+  document.addEventListener('click', function (event) {
+    if (event.target && event.target.matches('.edit-defined-translation')) {
+      const language = event.target.dataset.value
+      const languageName = event.target.dataset.language
 
-    if (language === 'default') {
-      self.openEditor(language, false, false, self.editDefaultText)
-    } else {
-      self.openEditor(
-        language,
-        false,
-        true,
-        self.translationTitleText.replace('%language%', languageName),
-      )
+      if (language === 'default') {
+        self.openEditor(language, false, false, self.editDefaultText)
+      } else {
+        self.openEditor(
+          language,
+          false,
+          true,
+          self.translationTitleText.replace('%language%', languageName),
+        )
+      }
     }
   })
 
   this.show = () => {
     window.history.pushState(
       { type: 'ProjectEditorNavigation', id: programId, full: true },
-      $(this).text(),
+      document.title,
       '#navigation',
     )
 
-    $(window).on('popstate', this.popStateHandler)
+    window.addEventListener('popstate', this.popStateHandler)
     showCustomTopBarTitle(this.translationsText, function () {
       window.history.back()
     })
 
-    this.body.addClass('overflow-hidden')
-    this.editTextNavigation.removeClass('d-none')
+    this.body.classList.add('overflow-hidden')
+    this.editTextNavigation.classList.remove('d-none')
   }
-
-  // region private
 
   this.popStateHandler = () => {
     this.close()
   }
 
   this.close = () => {
-    $(window).off('popstate', this.popStateHandler)
+    window.removeEventListener('popstate', this.popStateHandler)
     showDefaultTopBarTitle()
 
-    this.body.removeClass('overflow-hidden')
-    this.editTextNavigation.addClass('d-none')
+    this.body.classList.remove('overflow-hidden')
+    this.editTextNavigation.classList.add('d-none')
   }
 
   this.openEditor = (
@@ -94,7 +94,7 @@ export function ProjectEditorNavigation(
     showDeleteButton,
     headerText,
   ) => {
-    $(window).off('popstate', this.popStateHandler)
+    window.removeEventListener('popstate', this.popStateHandler)
 
     this.programEditor.show(
       this.reopenNavigation,
@@ -106,67 +106,60 @@ export function ProjectEditorNavigation(
   }
 
   this.reopenNavigation = () => {
-    $(window).on('popstate', this.popStateHandler)
+    window.addEventListener('popstate', this.popStateHandler)
 
     showCustomTopBarTitle(this.translationsText, function () {
       window.history.back()
     })
 
-    this.editTextNavigation.removeClass('d-none')
+    this.editTextNavigation.classList.remove('d-none')
 
     this.getTranslations()
   }
 
   function getLanguages() {
-    $.ajax({
-      url: '../languages',
-      type: 'get',
-      success: function (data) {
+    fetch('../languages')
+      .then((response) => response.json())
+      .then((data) => {
         self.languages = data
         self.getTranslations()
-      },
-    })
+      })
+      .catch((error) => {
+        console.error('Error fetching languages:', error)
+      })
   }
 
   this.getTranslations = () => {
     this.customTranslationApi
       .getCustomTranslationLanguages(this.programId)
       .then(this.showTranslations)
+      .catch((error) => {
+        console.error('Error fetching translations:', error)
+      })
   }
 
   this.showTranslations = (translationLanguages) => {
-    this.navigationLanguageList.empty()
-    this.navigationLanguageList.append(
-      '<li>' +
-        '<div id="edit-default-button" class="text-icon-aligned edit-defined-translation" data-value="default">' +
-        '<span class="language-code"></span>' +
-        '<span class="language-name">' +
-        this.defaultText +
-        '</span>' +
-        '<span data-bs-toggle="tooltip" title="' +
-        this.editDefaultText +
-        '" class="catro-icon-button material-icons trailing-icon " style="font-size: 1.75rem;">edit</span>' +
-        '</div>' +
-        '</li>',
-    )
+    this.navigationLanguageList.innerHTML = '' // Clear existing content
+    this.navigationLanguageList.innerHTML += `
+      <li>
+        <div id="edit-default-button" class="text-icon-aligned edit-defined-translation" data-value="default">
+          <span class="language-code"></span>
+          <span class="language-name">${this.defaultText}</span>
+          <span data-bs-toggle="tooltip" title="${this.editDefaultText}" class="catro-icon-button material-icons trailing-icon" style="font-size: 1.75rem;">edit</span>
+        </div>
+      </li>
+    `
 
-    for (const language of translationLanguages) {
-      this.navigationLanguageList.append(
-        `<li>\
-          <div id="edit-${language}-button" class="text-icon-aligned edit-defined-translation" data-value="${language}" data-language="${
-            this.languages[language]
-          }">\
-            <span class="language-code">${language}</span>\
-            <span class="language-name">${this.languages[language]}</span>\
-            <span data-bs-toggle="tooltip" title="${this.editTranslationText.replace(
-              '%language%',
-              this.languages[language],
-            )}" class="catro-icon-button material-icons trailing-icon " style="font-size: 1.75rem;">edit</span>\
-          </div>\
-        </li>`,
-      )
-    }
+    translationLanguages.forEach((language) => {
+      this.navigationLanguageList.innerHTML += `
+        <li>
+          <div id="edit-${language}-button" class="text-icon-aligned edit-defined-translation" data-value="${language}" data-language="${this.languages[language]}">
+            <span class="language-code">${language}</span>
+            <span class="language-name">${this.languages[language]}</span>
+            <span data-bs-toggle="tooltip" title="${this.editTranslationText.replace('%language%', this.languages[language])}" class="catro-icon-button material-icons trailing-icon" style="font-size: 1.75rem;">edit</span>
+          </div>
+        </li>
+      `
+    })
   }
-
-  // end region
 }

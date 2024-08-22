@@ -75,6 +75,7 @@ oauthPopUpTitle: "Innloggingsinformasjon for ekstern konto"
 oauthInfo: 'Du har nettopp brukt en ekstern konto for å logge inn. Vi opprettet et tilfeldig brukernavn for deg. Hvis du ønsker å endre brukernavnet ditt eller opprette et nytt passord for din konto, kan du gå til profilsiden min. Klikk %link_start% her %link_end% for å gå til din profilside'
 oauthHere: "her"
 statistics: "Statistikk"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Del
   deleteAction: Delete project
   deleteConfirmation: |+
     Are you sure?

@@ -8,18 +8,6 @@ use App\Admin\ApkGeneration\ApkReadyAdmin;
 use App\Admin\Comments\CommentsAdmin;
 use App\Admin\Comments\ReportedComments\ReportedCommentsAdmin;
 use App\Admin\Comments\ReportedComments\ReportedCommentsController;
-use App\Admin\DB_Updater\AchievementsAdmin;
-use App\Admin\DB_Updater\Controller\AchievementsAdminController;
-use App\Admin\DB_Updater\Controller\CronJobsAdminController;
-use App\Admin\DB_Updater\Controller\ExtensionsAdminController;
-use App\Admin\DB_Updater\Controller\FlavorsAdminController;
-use App\Admin\DB_Updater\Controller\SpecialUpdaterAdminController;
-use App\Admin\DB_Updater\Controller\TagsAdminController;
-use App\Admin\DB_Updater\CronJobsAdmin;
-use App\Admin\DB_Updater\ExtensionsAdmin;
-use App\Admin\DB_Updater\FlavorsAdmin;
-use App\Admin\DB_Updater\SpecialUpdaterAdmin;
-use App\Admin\DB_Updater\TagsAdmin;
 use App\Admin\MediaPackage\MediaPackageAdmin;
 use App\Admin\MediaPackage\MediaPackageCategoriesAdmin;
 use App\Admin\MediaPackage\MediaPackageCategoryController;
@@ -29,27 +17,40 @@ use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
 use App\Admin\Projects\ProjectsAdmin;
 use App\Admin\Projects\ReportedProjects\ReportedProjectsAdmin;
 use App\Admin\Projects\ReportedProjects\ReportedProjectsController;
-use App\Admin\SpecialProjects\ExampleProjectAdmin;
-use App\Admin\SpecialProjects\FeaturedProjectAdmin;
+use App\Admin\Projects\SpecialProjects\ExampleProjectAdmin;
+use App\Admin\Projects\SpecialProjects\FeaturedProjectAdmin;
 use App\Admin\Statistics\Translation\CommentMachineTranslationAdmin;
 use App\Admin\Statistics\Translation\Controller\CommentMachineTranslationAdminController;
 use App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController;
 use App\Admin\Statistics\Translation\ProjectCustomTranslationAdmin;
 use App\Admin\Statistics\Translation\ProjectMachineTranslationAdmin;
-use App\Admin\Survey\AllSurveysAdmin;
-use App\Admin\Tools\BroadcastNotification\BroadcastNotificationAdmin;
-use App\Admin\Tools\BroadcastNotification\BroadcastNotificationController;
-use App\Admin\Tools\FeatureFlag\FeatureFlagAdmin;
-use App\Admin\Tools\FeatureFlag\FeatureFlagController;
-use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
-use App\Admin\Tools\Logs\Controller\LogsController;
-use App\Admin\Tools\Logs\LogsAdmin;
-use App\Admin\Tools\Maintenance\MaintainAdmin;
-use App\Admin\Tools\Maintenance\MaintainController;
-use App\Admin\Tools\MaintenanceInformation\MaintenanceInformationAdmin;
-use App\Admin\Tools\MaintenanceInformation\MaintenanceInformationController;
-use App\Admin\Tools\SendMailToUser\SendMailToUserAdmin;
-use App\Admin\Tools\SendMailToUser\SendMailToUserController;
+use App\Admin\System\CronJobs\CronJobsAdmin;
+use App\Admin\System\CronJobs\CronJobsAdminController;
+use App\Admin\System\DB_Updater\AchievementsAdmin;
+use App\Admin\System\DB_Updater\Controller\AchievementsAdminController;
+use App\Admin\System\DB_Updater\Controller\ExtensionsAdminController;
+use App\Admin\System\DB_Updater\Controller\FlavorsAdminController;
+use App\Admin\System\DB_Updater\Controller\SpecialUpdaterAdminController;
+use App\Admin\System\DB_Updater\Controller\TagsAdminController;
+use App\Admin\System\DB_Updater\ExtensionsAdmin;
+use App\Admin\System\DB_Updater\FlavorsAdmin;
+use App\Admin\System\DB_Updater\SpecialUpdaterAdmin;
+use App\Admin\System\DB_Updater\TagsAdmin;
+use App\Admin\System\FeatureFlag\FeatureFlagAdmin;
+use App\Admin\System\FeatureFlag\FeatureFlagController;
+use App\Admin\System\FeatureFlag\FeatureFlagManager;
+use App\Admin\System\Logs\DownloadLogController;
+use App\Admin\System\Logs\LogsAdmin;
+use App\Admin\System\Logs\LogsController;
+use App\Admin\System\Maintenance\MaintenanceAdmin;
+use App\Admin\System\Maintenance\MaintenanceController;
+use App\Admin\UserCommunication\BroadcastNotification\BroadcastNotificationAdmin;
+use App\Admin\UserCommunication\BroadcastNotification\BroadcastNotificationController;
+use App\Admin\UserCommunication\MaintenanceInformation\MaintenanceInformationAdmin;
+use App\Admin\UserCommunication\MaintenanceInformation\MaintenanceInformationController;
+use App\Admin\UserCommunication\SendMailToUser\SendMailToUserAdmin;
+use App\Admin\UserCommunication\SendMailToUser\SendMailToUserController;
+use App\Admin\UserCommunication\Survey\AllSurveysAdmin;
 use App\Admin\Users\ReportedUsers\ReportedUsersAdmin;
 use App\Admin\Users\ReportedUsers\ReportedUsersController;
 use App\Admin\Users\RolesMatrixType;
@@ -168,6 +169,7 @@ use OpenAPI\Server\Service\SerializerInterface;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\Dotenv\Command\DotenvDumpCommand;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -322,15 +324,19 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->load('App\Admin\Tools\Logs\Controller\\', __DIR__.'/../src/Admin/Tools/Logs/Controller')
+  $services->set(DownloadLogController::class, DownloadLogController::class)
     ->public()
   ;
 
-  $services->set(MaintainController::class, MaintainController::class)
+  $services->set(LogsController::class, LogsController::class)
     ->public()
+  ;
+
+  $services->set(MaintenanceController::class, MaintenanceController::class)
     ->arg('$file_storage_dir', '%catrobat.file.storage.dir%')
     ->arg('$apk_dir', '%catrobat.apk.dir%')
     ->arg('$log_dir', '%catrobat.logs.dir%')
+    ->public()
   ;
 
   $services->set(SendMailToUserController::class, SendMailToUserController::class)
@@ -356,7 +362,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->load('App\Admin\DB_Updater\Controller\\', __DIR__.'/../src/Admin/DB_Updater/Controller')
+  $services->set(CronJobsAdminController::class, CronJobsAdminController::class)
+    ->public()
+  ;
+
+  $services->load('App\Admin\System\DB_Updater\Controller\\', __DIR__.'/../src/Admin/System/DB_Updater/Controller')
     ->public()
   ;
 
@@ -588,15 +598,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->tag('kernel.event_subscriber')
   ;
 
-  $services
-    ->set(ApiExceptionSubscriber::class)
+  $services->set(ApiExceptionSubscriber::class)
     ->tag('kernel.event_subscriber')
   ;
 
   $services->set('catroweb.oauth_success_handler', OAuthSuccessHandler::class);
 
+  $logFormat = "[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n[Client IP: %%extra.client_ip%%, User Agent: %%extra.user_agent%%, Session User: %%extra.session_user%%]";
+
   $services->set('monolog.formatter.catrobat_custom_formatter', LineFormatter::class)
-    ->call('includeStacktraces', ["[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%stacktrace%%[Client IP: %%extra.client_ip%%, User Agent: %%extra.user_agent%%, Session User: %%extra.session_user%%]\n"])
+    ->args([$logFormat, null, true, false])
+    ->call('includeStacktraces', [true])
+    ->call('setBasePath', ['/var/www/my_project'])
+    ->call('indentStacktraces', ['    '])
+    ->call('setMaxLevelNameLength', [5])
   ;
 
   $services->set(LoggerProcessor::class)
@@ -656,12 +671,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->set('admin.block.featured.program', FeaturedProjectAdmin::class)
+  $services->set('admin.block.featured.projects', FeaturedProjectAdmin::class)
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Featured Projects', 'code' => null, 'model_class' => FeaturedProgram::class, 'controller' => null])
     ->public()
   ;
 
-  $services->set('admin.block.example.program', ExampleProjectAdmin::class)
+  $services->set('admin.block.example.projects', ExampleProjectAdmin::class)
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Example Projects', 'code' => null, 'model_class' => ExampleProgram::class, 'controller' => null])
     ->public()
   ;
@@ -706,12 +721,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set('admin.block.survey', AllSurveysAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'All Surveys', 'pager_type' => 'simple', 'icon' => '<i class="fa fa-cogs"></i>', 'code' => null, 'model_class' => Survey::class, 'controller' => null])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Surveys', 'pager_type' => 'simple', 'icon' => '<i class="fa fa-cogs"></i>', 'code' => null, 'model_class' => Survey::class, 'controller' => null])
     ->public()
   ;
 
   $services->set('admin.block.special_updater', SpecialUpdaterAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Special Updater', 'icon' => '<i class="fa fa-cogs"></i>', 'code' => null, 'model_class' => CronJob::class, 'controller' => SpecialUpdaterAdminController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'DB Special Updater', 'icon' => '<i class="fa fa-cogs"></i>', 'code' => null, 'model_class' => CronJob::class, 'controller' => SpecialUpdaterAdminController::class])
     ->public()
   ;
 
@@ -721,27 +736,27 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set('admin.block.achievements', AchievementsAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Achievements', 'code' => null, 'model_class' => Achievement::class, 'controller' => AchievementsAdminController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'DB-Updater Achievements', 'code' => null, 'model_class' => Achievement::class, 'controller' => AchievementsAdminController::class])
     ->public()
   ;
 
   $services->set('admin.block.flavors', FlavorsAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Flavors', 'code' => null, 'model_class' => Flavor::class, 'controller' => FlavorsAdminController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'DB-Updater Flavors', 'code' => null, 'model_class' => Flavor::class, 'controller' => FlavorsAdminController::class])
     ->public()
   ;
 
   $services->set('admin.block.extensions', ExtensionsAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Extensions', 'code' => null, 'model_class' => Extension::class, 'controller' => ExtensionsAdminController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'DB-Updater Extensions', 'code' => null, 'model_class' => Extension::class, 'controller' => ExtensionsAdminController::class])
     ->public()
   ;
 
   $services->set('admin.block.tags', TagsAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Tags', 'code' => null, 'model_class' => Tag::class, 'controller' => TagsAdminController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'DB-Updater Tags', 'code' => null, 'model_class' => Tag::class, 'controller' => TagsAdminController::class])
     ->public()
   ;
 
-  $services->set('admin.block.tools.maintain', MaintainAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Maintain', 'icon' => '<i class="fa fa-cogs"></i>', 'code' => null, 'model_class' => CronJob::class, 'controller' => MaintainController::class])
+  $services->set('admin.block.tools.maintain', MaintenanceAdmin::class)
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'System Dashboard', 'icon' => '<i class="fa fa-cogs"></i>', 'code' => null, 'model_class' => CronJob::class, 'controller' => MaintenanceController::class])
     ->public()
   ;
 
@@ -751,12 +766,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set('admin.block.tools.broadcast', BroadcastNotificationAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Broadcast Notification', 'code' => null, 'model_class' => BroadcastNotification::class, 'controller' => BroadcastNotificationController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Send Notification', 'code' => null, 'model_class' => BroadcastNotification::class, 'controller' => BroadcastNotificationController::class])
     ->public()
   ;
 
   $services->set('admin.block.tools.mail', SendMailToUserAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Send Mail to User', 'code' => null, 'model_class' => CronJob::class, 'controller' => SendMailToUserController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Send Mail', 'code' => null, 'model_class' => CronJob::class, 'controller' => SendMailToUserController::class])
     ->public()
   ;
 
@@ -853,6 +868,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   $services->set('admin.block.statistics.comment_machine_translation', CommentMachineTranslationAdmin::class)
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Comment Machine Translation', 'code' => null, 'model_class' => CommentMachineTranslation::class, 'controller' => CommentMachineTranslationAdminController::class])
+    ->public()
+  ;
+
+  $services->set(DotenvDumpCommand::class)
+    ->tag('console.command')
+    ->arg('$projectDir', '%kernel.project_dir%/.env')
+    ->arg('$defaultEnv', '%kernel.environment%')
     ->public()
   ;
 

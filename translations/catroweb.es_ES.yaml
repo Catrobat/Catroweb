@@ -75,6 +75,7 @@ oauthPopUpTitle: "Información de inicio de sesión de cuenta externa"
 oauthInfo: 'Acabas de usar una cuenta externa para iniciar sesión. Creamos un nombre de usuario aleatorio para ti. Si quieres cambiar tu nombre de usuario o crear una nueva contraseña para tu cuenta, por favor ve a mi página de perfil. Haz clic %link_start% aquí %link_end% para ir a tu página de perfil'
 oauthHere: "aqui"
 statistics: "Estadísticas"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Compartir
   deleteAction: Eliminar proyecto
   deleteConfirmation: |+
     Are you sure?

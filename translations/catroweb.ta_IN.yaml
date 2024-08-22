@@ -75,6 +75,7 @@ oauthPopUpTitle: "வெளிக் கணக்கு உள்நுழைவ
 oauthInfo: 'தற்போது நீங்கள் உள்நுழைய ஒரு வெளிக் கணக்கைப் பயன்படுத்தியுள்ளீர்கள். உங்களுக்காக ஒரு சீரற்ற பயனர்பெயரை நாங்கள் உருவாக்கியுள்ளோம்.  உங்கள் பயனர்பெயரை மாற்ற விரும்பினால் அல்லது உங்கள் கணக்கிற்கு புதிய கடவுச்சொல்லை உருவாக்க விரும்பினால் எனது சுயவிவரப் பக்கத்திற்குச் செல்லவும்.  உங்கள் சுயவிவரப் பக்கத்திற்குச் செல்ல %link_start% இங்கே %link_end% தோட்டு எடுங்கள்'
 oauthHere: "இங்கு"
 statistics: "புள்ளிவிவரம்"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: பகிர்
   deleteAction: செயல்திட்டத்தை நீக்கு
   deleteConfirmation: |+
     Are you sure?

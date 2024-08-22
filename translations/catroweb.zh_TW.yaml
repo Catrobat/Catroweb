@@ -75,6 +75,7 @@ oauthPopUpTitle: "外部帳戶登錄信息"
 oauthInfo: '您剛剛使用外部帳戶登錄。我們為您創建了一個隨機用戶名。如果您想更改用戶名或為您的帳戶創建新密碼，請轉到我的個人資料頁面。點擊此處%link_end%的%link_start%轉到您的個人資料頁面'
 oauthHere: "這裡"
 statistics: "統計數據"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: 分享
   deleteAction: 刪除項目
   deleteConfirmation: |+
     Are you sure?

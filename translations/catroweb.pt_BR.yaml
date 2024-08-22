@@ -75,6 +75,7 @@ oauthPopUpTitle: "Informação de login da conta externa"
 oauthInfo: 'Você acabou de usar uma conta externa para entrar. Nós criamos um nome de usuário aleatório para você. Se quiser mudar seu nome de usuário ou criar uma nova senha para sua conta, acesse minha página de perfil. Clique %link_start% aqui %link_end% para ir para a sua página de perfil'
 oauthHere: "aqui"
 statistics: "Estatísticas"
+languageSelection: "Seleção de idioma"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Projetos recomendados
   scratchremixes: Remixes do Scratch
   noProjects: Atualmente, não há nenhum projeto.
+  shareAction: Compartilhar
   deleteAction: Excluir projeto
   deleteConfirmation: |+
     Tem certeza?
@@ -216,7 +218,7 @@ project:
   deletedComment: '**Excluído**'
   replyLabel: responder
   repliesLabel: respostas
-  notForKids: Not safe for kids
+  notForKids: Não é seguro para crianças
 remixGraph:
   title: Remixes
   showRemixGraph: 'Mostrar gráfico de remistura'
@@ -248,27 +250,25 @@ accountConfirmation:
     Your Catrobat Team.
     </p>
 newAccountConfirmation:
-  subject: Please verify your E-Mail-Address
-  welcome: Welcome to Catrobat Community!
+  subject: Por favor, verifique seu endereço de e-mail.
+  welcome: Seja bem-vindo à comunidade Catrobat!
   message: |
-    Please verify your E-Mail-Address
-    Welcome to Catrobat Community
-    With just one click on the button below
-    you can verify your regestration at Catrobat.
-    This link is valid until %time% and can be
-    used only once to confirm your email address.
+    Por favor, verifique seu endereço de e-mail
+    Seja bem-vindo à Comunidade Catrobat
+    Você pode verificar seu registro no Catrobat com apenas um clique no botão abaixo.
+    Este link é válido até %time% e pode ser usado apenas uma vez para confirmar seu endereço de e-mail.
   messageHtml: |
     <p>
-    With just one click on the button below<br>
-    you can verify your regestration at Catrobat.<br>
+    Com apenas um clique no botão abaixo<br>
+    você pode verificar seu registro na Catrobat.<br>
     <br>
     <br>
-    This link is valid until %time% and can be<br>
-    used only once to confirm your email address.<br>
+    Este link é válido até %time% e pode ser usado<br>
+    apenas uma vez para confirmar seu endereço de e-mail.<br>
     </p>
-  button: CONFIRM E-MAIL
-  delete: You can delete your account here at any time.
-  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
+  button: CONFIRMAR E-MAIL
+  delete: Você pode deletar sua conta aqui a qualquer momento.
+  deleteHtml: Você pode <a href="%deleteUrl%">deletar</a> sua conta aqui a qualquer momento.
 passwordRecovery:
   subject: Sua recuperação de senha Catrobat
   message: |
@@ -421,7 +421,7 @@ menu:
   mediaLibrary: Biblioteca de mídia
   studio: Estúdios
   language: Idioma
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: Não há opções de idioma disponíveis.
 login:
   login: Login
   button:
@@ -477,9 +477,9 @@ resetPassword:
     cheers: "Saudações!"
   newemail:
     title: "Redefinir sua senha"
-    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
-    visitLink: RESET PASSWORD
-    expire: This link is valid for %time% - only one time use!
+    content: <p> Você está recebendo este e-mail porque<br> recentemente solicitou uma alteração de senha<br> para sua conta Catrobat. Clique no link abaixo<br> para mudar sua senha.<br><br> Se você não solicitou uma alteração de senha,<br>desconsidere este e-mail.<br></p>
+    visitLink: REDEFINIR SENHA
+    expire: Este link é válido por %time% - apenas um uso!
   reset:
     title: "Redefinir sua senha"
     button:
@@ -889,7 +889,7 @@ studio:
   delete_studio: 'Excluir estúdio'
   cancel_studio: 'Cancelar'
   studio_name: 'Nome do estúdio'
-  studio_description: 'Studio description'
+  studio_description: 'Descrição do estúdio'
   join: 'Entrar'
   leave: 'Sair'
   report: 'Reportar'
@@ -898,9 +898,9 @@ studio:
   overview:
     joined_studios: 'Entrou em estúdios'
     public_studios: 'Estúdios públicos'
-    private_studios: 'Private studios'
+    private_studios: 'Estúdios privados'
   details:
-    add_project: 'click to add the project'
+    add_project: 'Clique para adicionar o projeto'
     showMore: 'mostrar mais'
     showLess: 'mostrar menos'
     remove_project: 'Remover do estúdio'
@@ -911,11 +911,11 @@ studio:
     join: 'Entrar'
     leave: 'Sair'
     report: 'Reportar'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: 'Pendente'
+    decline: 'Recusado'
     projects:
       title: 'Projetos'
-      addProject: 'Add your own projects'
+      addProject: 'Adicionar seus próprios projetos'
     comments:
       title: 'Comentários'
       type_something: 'Digite algo'
@@ -955,15 +955,15 @@ media_library:
       default: 'Tipo: desconhecido'
 snackbar:
   project_not_found: 'O projeto solicitado não está disponível'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
+  project_not_for_kids: 'O projeto foi marcado como não seguro para crianças!'
+  project_safe_for_kids: 'O projeto foi marcado como seguro para crianças!'
+  project_not_for_kids_moderator: 'O projeto foi marcado por um moderador. Você não pode desfazer isso!'
 maintenanceinformations:
   maintenance_information:
     additional_info: 'Informações adicionais: adicionar'
     feature_1: 'O recurso featureName não está disponível desde a maintenanceStart até maintenanceEnd'
     feature_2: 'O recurso'
     feature_3: 'O recurso'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+MarkNotForKids: Marcar como não seguro para crianças
+MarkSafeForKids: Marcar como seguro para crianças
 

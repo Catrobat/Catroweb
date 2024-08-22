@@ -1,33 +1,22 @@
-import $ from 'jquery'
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
 
 export function ProjectEditorTextFieldModel(
-  projectDescriptionCredits,
-  programId,
-  programSection,
+  projectId,
+  sectionKey,
   hasDefaultLanguage,
   initialText,
 ) {
-  const self = this
   this.text = ''
   this.lastSavedText = ''
   this.error = ''
   this.enabled = true
 
-  this.programId = programId
-  this.programSection = programSection
+  this.programId = projectId
+  this.programSection = sectionKey
   this.hasDefaultLanguage = hasDefaultLanguage
   this.initialText = initialText
 
-  this.customTranslationApi = new CustomTranslationApi(programSection)
-
-  this.pathEditName = projectDescriptionCredits.data('path-edit-project-name')
-  this.pathEditDescription = projectDescriptionCredits.data(
-    'path-edit-project-description',
-  )
-  this.pathEditCredits = projectDescriptionCredits.data(
-    'path-edit-project-credits',
-  )
+  this.customTranslationApi = new CustomTranslationApi(sectionKey)
 
   this.setOnTextChanged = (onTextChanged) => {
     this.onTextChanged = onTextChanged
@@ -45,46 +34,19 @@ export function ProjectEditorTextFieldModel(
     this.onLoading = onLoading
   }
 
-  this.save = (language) => {
-    this.clearError()
-
+  this.collectChanges = (language) => {
     if (this.areChangesSaved() || !this.enabled) {
       return null
-    } else if (language === '' || language === 'default') {
-      let url
-      if (this.programSection === 'name') {
-        url = this.pathEditName
-      } else if (this.programSection === 'description') {
-        url = this.pathEditDescription
-      } else if (this.programSection === 'credits') {
-        url = this.pathEditCredits
-      }
+    }
 
-      return new Promise((resolve, reject) => {
-        $.ajax({
-          url,
-          type: 'put',
-          data: { value: this.text },
-          success: function (data) {
-            const statusCode = parseInt(data.statusCode)
-            if (statusCode === 527 || statusCode === 707) {
-              self.setError(data.message)
-              reject(statusCode)
-            } else {
-              resolve(statusCode)
-            }
-          },
-          error: function (error) {
-            if (error.status === 422) {
-              self.setError(error.responseText)
-              reject(error.status)
-            } else if (error.status === 401) {
-              reject(error.status)
-            }
-          },
-        })
-      })
-    } else if (this.text === '') {
+    return { [this.programSection]: this.text }
+  }
+
+  this.handleTranslations = (language) => {
+    if (this.areChangesSaved() || !this.enabled) {
+      return null
+    }
+    if (this.text === '') {
       return this.delete(language)
     } else {
       return this.customTranslationApi.saveCustomTranslation(
@@ -130,20 +92,20 @@ export function ProjectEditorTextFieldModel(
       this.onTextChanged('')
       this.setLoading(true)
 
-      function getCustomTranslationSuccess(data) {
-        self.setLoading(false)
-        self.setText(data)
-        self.onTextChanged(data)
-        self.lastSavedText = data
-        self.setEnabled(true)
+      const getCustomTranslationSuccess = (data) => {
+        this.setLoading(false)
+        this.setText(data)
+        this.onTextChanged(data)
+        this.lastSavedText = data
+        this.setEnabled(true)
       }
 
-      function getCustomTranslationError() {
-        self.setLoading(false)
-        self.setText('')
-        self.onTextChanged('')
-        self.lastSavedText = ''
-        self.setEnabled(true)
+      const getCustomTranslationError = () => {
+        this.setLoading(false)
+        this.setText('')
+        this.onTextChanged('')
+        this.lastSavedText = ''
+        this.setEnabled(true)
       }
 
       this.customTranslationApi.getCustomTranslation(
@@ -187,5 +149,4 @@ export function ProjectEditorTextFieldModel(
       languageSelected !== 'default'
     )
   }
-  // end region
 }

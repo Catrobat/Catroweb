@@ -24,7 +24,7 @@ class BootstrapExtension implements Extension
   #[\Override]
   public function bootstrap(Configuration $configuration, EventFacade $facade, ParameterCollection $parameters): void
   {
-    $facade->registerSubscriber(new class() implements StartedSubscriber {
+    $facade->registerSubscriber(new class implements StartedSubscriber {
       public function notify(Started $event): void
       {
         DataBaseUtils::recreateTestEnvironment();

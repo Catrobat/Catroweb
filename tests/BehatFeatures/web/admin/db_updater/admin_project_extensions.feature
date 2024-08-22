@@ -16,7 +16,7 @@ Feature: The admin extensions view provides a detailed list about all extensions
 
   Scenario: All extensions should be displayed with some stats
     Given I log in as "Adminius"
-    And I am on "/admin/extensions/list"
+    And I am on "admin/system/db/extensions/list"
     And I wait for the page to be loaded
     Then I should see "extensions"
     And I should see the extensions table:
@@ -26,7 +26,7 @@ Feature: The admin extensions view provides a detailed list about all extensions
 
   Scenario: Extensions can be updated
     Given I log in as "Adminius"
-    And I am on "/admin/extensions/list"
+    And I am on "admin/system/db/extensions/list"
     And I wait for the page to be loaded
     Then I should see "Update extensions"
     And I should see "Step-by-step guide"

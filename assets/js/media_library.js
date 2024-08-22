@@ -9,6 +9,6 @@ MediaLib(
   mediaLibrary.dataset.flavor,
   mediaLibrary.dataset.mediaDir,
   JSON.parse(mediaLibrary.dataset.translations),
-  mediaLibrary.dataset.isWebview,
+  mediaLibrary.dataset.isWebview === 'true',
   mediaLibrary.dataset.pathMedialibpackagebynameurl,
 )

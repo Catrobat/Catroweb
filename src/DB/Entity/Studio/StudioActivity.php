@@ -33,7 +33,7 @@ class StudioActivity
   #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
   protected Studio $studio;
 
-  #[ORM\Column(name: 'type', type: Types::STRING, nullable: false, columnDefinition: "ENUM('comment', 'project', 'user')")]
+  #[ORM\Column(name: 'type', type: Types::STRING, length: 20, nullable: false)]
   protected string $type;
 
   #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]

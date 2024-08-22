@@ -47,10 +47,10 @@ class StudioUser
   #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
   protected User $user;
 
-  #[ORM\Column(name: 'role', type: Types::STRING, nullable: false, columnDefinition: "ENUM('admin', 'member')")]
+  #[ORM\Column(name: 'role', type: Types::STRING, length: 20, nullable: false)]
   protected string $role;
 
-  #[ORM\Column(name: 'status', type: Types::STRING, nullable: false, columnDefinition: "ENUM('active', 'banned', 'pending_request')")]
+  #[ORM\Column(name: 'status', type: Types::STRING, length: 20, nullable: false)]
   protected string $status;
 
   #[ORM\Column(name: 'updated_on', type: Types::DATETIME_MUTABLE, length: 300, nullable: true)]

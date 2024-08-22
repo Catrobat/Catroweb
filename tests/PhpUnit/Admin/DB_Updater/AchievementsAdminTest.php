@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Admin\DB_Updater;
 
-use App\Admin\DB_Updater\AchievementsAdmin;
+use App\Admin\System\DB_Updater\AchievementsAdmin;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Sonata\AdminBundle\Admin\AbstractAdmin;

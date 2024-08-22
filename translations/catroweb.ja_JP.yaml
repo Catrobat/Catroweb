@@ -75,6 +75,7 @@ oauthPopUpTitle: "外部アカウントのサインイン情報"
 oauthInfo: '外部アカウントを使用してログインしました。ランダムなユーザー名を作成しました。 ユーザー名を変更したい場合、またはアカウントの新しいパスワードを作成したい場合は、プロフィールページにアクセスしてください。 ここで %link_start% をクリックして %link_end% プロフィールページに移動'
 oauthHere: "ここ"
 statistics: "統計情報"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: 共有
   deleteAction: プロジェクトを削除
   deleteConfirmation: |+
     Are you sure?

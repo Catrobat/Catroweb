@@ -30,8 +30,8 @@ class CreateProgramInappropriateReportCommand extends Command
   protected function configure(): void
   {
     $this
-      ->addArgument('user', InputArgument::REQUIRED, 'User who reports on program')
-      ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets reported')
+      ->addArgument('user', InputArgument::REQUIRED, 'User who reports the project')
+      ->addArgument('program_name', InputArgument::REQUIRED, 'Name of project which gets reported')
       ->addArgument('note', InputArgument::REQUIRED, 'Report message')
     ;
   }

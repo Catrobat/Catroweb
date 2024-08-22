@@ -8,7 +8,7 @@ Feature: Update user
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
       | NewUser  | 54321    | bbbbbbbbbb | 3  |
       | Catroweb | 54321    | bbbbbbbbbb | 4  |
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
 
   Scenario: Update user with dry-run option
     Given I use a valid JWT Bearer token for "Catrobat"

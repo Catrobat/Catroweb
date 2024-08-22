@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import {
   showDefaultTopBarTitle,
   showCustomTopBarTitle,
@@ -17,9 +16,8 @@ export class ProjectList {
     emptyMessage = '',
   ) {
     this.container = container
-    this.projectsContainer = $('.projects-container', container)
+    this.projectsContainer = container.querySelector('.projects-container')
     this.category = category
-    this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' : apiUrl + '?'
     this.propertyToShow = propertyToShow
     this.projectsLoaded = 0
     this.projectFetchCount = fetchCount
@@ -28,126 +26,126 @@ export class ProjectList {
     this.isFullView = false
     this.theme = theme
     this.emptyMessage = emptyMessage
-    this.$title = $('.project-list__title', $(this.container))
-    this.$body = $('body')
-    this.$chevronLeft = $('.project-list__chevrons__left', $(this.container))
-    this.$chevronRight = $('.project-list__chevrons__right', $(this.container))
-    const self = this
-    this.popStateHandler = function () {
-      self.closeFullView()
-    }
-
-    let attributes =
-      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,'
-    attributes +=
-      this.propertyToShow === 'uploaded'
-        ? 'uploaded_string'
-        : this.propertyToShow
-    this.apiUrl += 'attributes=' + attributes + '&'
+    this.$title = container.querySelector('.project-list__title')
+    this.$body = document.body
+    this.$chevronLeft = container.querySelector('.project-list__chevrons__left')
+    this.$chevronRight = container.querySelector(
+      '.project-list__chevrons__right',
+    )
+    this.apiUrl = this.formatApiUrl(apiUrl)
+    this.popStateHandler = this.closeFullView.bind(this)
 
     this.fetchMore(true)
-    this._initListeners()
+    this.initListeners()
+  }
+
+  formatApiUrl(apiUrl) {
+    let attributes =
+      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,uploaded_string,'
+
+    if (
+      this.propertyToShow &&
+      !attributes.includes(`,${this.propertyToShow},`)
+    ) {
+      attributes += this.propertyToShow
+    }
+    return apiUrl.includes('?')
+      ? `${apiUrl}&attributes=${attributes}&`
+      : `${apiUrl}?attributes=${attributes}&`
   }
 
   fetchMore(clear = false) {
-    if (this.empty === true || this.fetchActive === true) {
+    if (this.empty || this.fetchActive) {
       return
     }
 
     this.fetchActive = true
-    const self = this
 
-    $.getJSON(
-      this.apiUrl +
-        'limit=' +
-        this.projectFetchCount +
-        '&offset=' +
-        this.projectsLoaded,
-      function (data) {
+    fetch(
+      `${this.apiUrl}limit=${this.projectFetchCount}&offset=${this.projectsLoaded}`,
+    )
+      .then((response) => response.json())
+      .then((data) => {
         if (!Array.isArray(data)) {
-          console.error('Data received for ' + self.category + ' is no array!')
-          self.container.classList.remove('loading')
+          console.error(`Data received for ${this.category} is not an array!`)
+          this.container.classList.remove('loading')
           return
         }
 
         if (clear) {
-          self.projectsContainer.empty()
+          this.projectsContainer.innerHTML = ''
         }
 
-        data.forEach(function (project) {
-          project = self._generate(project)
-          self.projectsContainer.append(project)
-          project.click(function () {
-            project.empty()
-            project.css('display', 'flex')
-            project.css('justify-content', 'center')
-            project.append($('#project-opening-spinner').html())
-          })
+        data.forEach((project) => {
+          const projectElement = this.generateProjectElement(project)
+          this.projectsContainer.appendChild(projectElement)
         })
-        self.container.classList.remove('loading')
 
-        if (data.length > 0) {
-          self.$chevronRight.show()
+        this.container.classList.remove('loading')
+        this.updateChevronVisibility()
+
+        this.projectsLoaded += data.length
+
+        if (this.projectsLoaded === 0 && !this.empty) {
+          this.empty = true
+          this.displayEmptyMessage()
         }
 
-        self.projectsLoaded += data.length
-
-        if (self.projectsLoaded === 0 && self.empty === false) {
-          self.empty = true
-          if (self.emptyMessage) {
-            self.projectsContainer.append(self.emptyMessage)
-            self.container.classList.add('empty-with-text')
-          } else {
-            self.container.classList.add('empty')
-          }
-        }
-
-        self.fetchActive = false
-      },
-    ).fail(function (jqXHR, textStatus, errorThrown) {
-      console.error(
-        'Failed loading projects in category ' + self.category,
-        JSON.stringify(jqXHR),
-        textStatus,
-        errorThrown,
-      )
-      self.container.classList.remove('loading')
-    })
+        this.fetchActive = false
+      })
+      .catch((error) => {
+        console.error(
+          `Failed loading projects in category ${this.category}`,
+          error,
+        )
+        this.container.classList.remove('loading')
+      })
   }
 
-  _generate(data) {
-    /*
-     * Necessary to support legacy flavoring with URL:
-     *   Absolute url always uses new 'app' routing flavor. We have to replace it!
-     */
-    let projectUrl = data.project_url
-    projectUrl = projectUrl.replace('/app/', '/' + this.theme + '/')
-    //
-    const $p = $('<a />', { class: 'project-list__project', href: projectUrl })
-    $p.data('id', data.id)
+  generateProjectElement(data) {
+    const projectUrl = data.project_url.replace('/app/', `/${this.theme}/`)
 
-    let style = ''
+    const projectElement = document.createElement('a')
+    projectElement.className = 'project-list__project'
+    projectElement.href = projectUrl
+    projectElement.dataset.id = data.id
+
+    const img = this.createImageElement(data)
+    projectElement.appendChild(img)
+
+    const nameSpan = document.createElement('span')
+    nameSpan.className = 'project-list__project__name'
+    nameSpan.textContent = data.name
+    projectElement.appendChild(nameSpan)
+
+    const propDiv = this.createPropertyElement(data)
+    projectElement.appendChild(propDiv)
+
     if (data.not_for_kids) {
-      style = 'filter: blur(10px);'
+      this.addNotForKidsElement(projectElement)
     }
-    $('<img/>', {
-      'data-src': data.screenshot_small,
-      // TODO: generate larger thumbnails and adapt here (change 80w to width of thumbs)
-      'data-srcset':
-        data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w',
-      'data-sizes': '(min-width: 768px) 10vw, 25vw',
-      class: 'lazyload project-list__project__image',
-      style,
-    }).appendTo($p)
-    $('<span/>', { class: 'project-list__project__name' })
-      .text(data.name)
-      .appendTo($p)
-    const $prop = $('<div />', {
-      class:
-        'lazyload project-list__project__property project-list__project__property-' +
-        this.propertyToShow,
-    })
-    $prop.appendTo($p)
+
+    return projectElement
+  }
+
+  createImageElement(data) {
+    const img = document.createElement('img')
+    img.setAttribute('data-src', data.screenshot_small)
+    img.setAttribute(
+      'data-srcset',
+      `${data.screenshot_small} 80w, ${data.screenshot_large} 480w`,
+    )
+    img.setAttribute('data-sizes', '(min-width: 768px) 10vw, 25vw')
+    img.className = 'lazyload project-list__project__image'
+    if (data.not_for_kids) {
+      img.style.filter = 'blur(10px)'
+    }
+    return img
+  }
+
+  createPropertyElement(data) {
+    const propDiv = document.createElement('div')
+    propDiv.className = `lazyload project-list__project__property project-list__project__property-${this.propertyToShow}`
 
     const icons = {
       views: 'visibility',
@@ -160,113 +158,148 @@ export class ProjectList {
       this.propertyToShow === 'uploaded'
         ? data.uploaded_string
         : data[this.propertyToShow]
-    $('<i/>', { class: 'material-icons' })
-      .text(icons[this.propertyToShow])
-      .appendTo($prop)
-    $('<span/>', { class: 'project-list__project__property__value' })
-      .text(propertyValue)
-      .appendTo($prop)
 
-    if (data.not_for_kids) {
-      const $newProp = $('<div />', {
-        class: 'lazyload project-list__project__property__not-for-kids',
-      })
+    const icon = document.createElement('i')
+    icon.className = 'material-icons'
+    icon.textContent = icons[this.propertyToShow]
+    propDiv.appendChild(icon)
 
-      $newProp.appendTo($p)
+    const valueSpan = document.createElement('span')
+    valueSpan.className = 'project-list__project__property__value'
+    valueSpan.textContent = propertyValue
+    propDiv.appendChild(valueSpan)
 
-      $('<img/>', {
-        class: 'lazyload project-list__not-for-kids-logo',
-        src: '/images/default/not_for_kids.svg',
-      }).appendTo($newProp)
-
-      $('<span/>', { class: 'project-list__project__property__value' })
-        .text('Not for kids')
-        .appendTo($newProp)
-    }
-    return $p
+    return propDiv
   }
 
-  _initListeners() {
-    const self = this
+  addNotForKidsElement(projectElement) {
+    const notForKidsDiv = document.createElement('div')
+    notForKidsDiv.className =
+      'lazyload project-list__project__property__not-for-kids'
 
-    // ---- History State
-    window.addEventListener('popstate', function (event) {
-      if (event.state != null) {
-        if (event.state.type === 'ProjectList' && event.state.full === true) {
-          $('#' + event.state.id)
-            .data('list')
-            .openFullView()
-        }
-      }
-    })
+    const notForKidsImg = document.createElement('img')
+    notForKidsImg.className = 'lazyload project-list__not-for-kids-logo'
+    notForKidsImg.src = '/images/default/not_for_kids.svg'
+    notForKidsDiv.appendChild(notForKidsImg)
 
-    this.projectsContainer.on('scroll', function () {
-      const pctHorizontal =
-        this.scrollLeft / (this.scrollWidth - this.clientWidth)
-      if (pctHorizontal >= 0.8) {
-        self.fetchMore()
-      }
-      if (pctHorizontal === 0) {
-        self.$chevronLeft.hide()
-      } else {
-        self.$chevronLeft.show()
-      }
+    const notForKidsValueSpan = document.createElement('span')
+    notForKidsValueSpan.className = 'project-list__project__property__value'
+    notForKidsValueSpan.textContent = 'Not for kids'
+    notForKidsDiv.appendChild(notForKidsValueSpan)
 
-      if (pctHorizontal >= 1) {
-        self.$chevronRight.hide()
-      } else {
-        self.$chevronRight.show()
-      }
-    })
-    $(this.container).on('scroll', function () {
-      const pctVertical =
-        this.scrollTop / (this.scrollHeight - this.clientHeight)
-      if (pctVertical >= 0.8) {
-        self.fetchMore()
-      }
-    })
+    projectElement.appendChild(notForKidsDiv)
+  }
 
-    this.$title.on('click', function () {
-      if (self.isFullView) {
-        window.history.back() // to remove pushed state
-      } else {
-        self.openFullView()
-        window.history.pushState(
-          { type: 'ProjectList', id: self.container.id, full: true },
-          $(this).text(),
-          '#' + self.container.id,
-        )
-      }
-    })
+  updateChevronVisibility() {
+    if (!this.$chevronRight) {
+      return
+    }
+    if (
+      this.projectsContainer.scrollWidth > this.projectsContainer.clientWidth
+    ) {
+      this.$chevronRight.style.display = 'block'
+    } else {
+      this.$chevronRight.style.display = 'none'
+    }
+  }
 
-    this.$chevronLeft.on('click', function () {
-      const width = self.projectsContainer
-        .find('.project-list__project')
-        .outerWidth(true)
-      self.projectsContainer.scrollLeft(
-        self.projectsContainer.scrollLeft() - 2 * width,
+  displayEmptyMessage() {
+    if (this.emptyMessage) {
+      this.projectsContainer.innerHTML = this.emptyMessage
+      this.container.classList.add('empty-with-text')
+    } else {
+      this.container.classList.add('empty')
+    }
+  }
+
+  initListeners() {
+    window.addEventListener('popstate', this.handlePopState.bind(this))
+    this.projectsContainer?.addEventListener(
+      'scroll',
+      this.handleHorizontalScroll.bind(this),
+    )
+    this.container?.addEventListener(
+      'scroll',
+      this.handleVerticalScroll.bind(this),
+    )
+    this.$title?.addEventListener('click', this.handleTitleClick.bind(this))
+    this.$chevronLeft?.addEventListener(
+      'click',
+      this.handleChevronLeftClick.bind(this),
+    )
+    this.$chevronRight?.addEventListener(
+      'click',
+      this.handleChevronRightClick.bind(this),
+    )
+  }
+
+  handlePopState(event) {
+    if (
+      event.state &&
+      event.state.type === 'ProjectList' &&
+      event.state.full === true
+    ) {
+      document.querySelector(`#${event.state.id}`).data('list').openFullView()
+    }
+  }
+
+  handleHorizontalScroll() {
+    const pctHorizontal =
+      this.projectsContainer.scrollLeft /
+      (this.projectsContainer.scrollWidth - this.projectsContainer.clientWidth)
+    if (pctHorizontal >= 0.8) {
+      this.fetchMore()
+    }
+    this.$chevronLeft.style.display = pctHorizontal === 0 ? 'none' : 'block'
+    this.$chevronRight.style.display = pctHorizontal >= 1 ? 'none' : 'block'
+  }
+
+  handleVerticalScroll() {
+    const pctVertical =
+      this.container.scrollTop /
+      (this.container.scrollHeight - this.container.clientHeight)
+    if (pctVertical >= 0.8) {
+      this.fetchMore()
+    }
+  }
+
+  handleTitleClick() {
+    if (this.isFullView) {
+      window.history.back()
+    } else {
+      this.openFullView()
+      window.history.pushState(
+        { type: 'ProjectList', id: this.container.id, full: true },
+        this.$title.querySelector('h2').textContent,
+        `#${this.container.id}`,
       )
-    })
-    this.$chevronRight.on('click', function () {
-      const width = self.projectsContainer
-        .find('.project-list__project')
-        .outerWidth(true)
-      self.projectsContainer.scrollLeft(
-        self.projectsContainer.scrollLeft() + 2 * width,
-      )
-    })
+    }
+  }
+
+  handleChevronLeftClick() {
+    const width = this.projectsContainer.querySelector(
+      '.project-list__project',
+    ).offsetWidth
+    this.projectsContainer.scrollLeft -= 2 * width
+  }
+
+  handleChevronRightClick() {
+    const width = this.projectsContainer.querySelector(
+      '.project-list__project',
+    ).offsetWidth
+    this.projectsContainer.scrollLeft += 2 * width
   }
 
   openFullView() {
-    $(window).on('popstate', this.popStateHandler)
-    showCustomTopBarTitle(this.$title.find('h2').text(), function () {
+    window.addEventListener('popstate', this.popStateHandler)
+    showCustomTopBarTitle(this.$title.querySelector('h2').textContent, () => {
       window.history.back()
     })
-    this.$title.hide()
+    this.$title.style.display = 'none'
     this.isFullView = true
     this.container.classList.add('vertical')
     this.container.classList.remove('horizontal')
-    this.$body.addClass('overflow-hidden')
+    this.$body.classList.add('overflow-hidden')
     if (
       this.container.clientHeight === this.container.scrollHeight ||
       this.container.scrollTop /
@@ -278,13 +311,13 @@ export class ProjectList {
   }
 
   closeFullView() {
-    $(window).off('popstate', this.popStateHandler)
+    window.removeEventListener('popstate', this.popStateHandler)
     showDefaultTopBarTitle()
-    this.$title.show()
+    this.$title.style.display = 'block'
     this.isFullView = false
     this.container.classList.add('horizontal')
     this.container.classList.remove('vertical')
-    this.$body.removeClass('overflow-hidden')
+    this.$body.classList.remove('overflow-hidden')
     return false
   }
 }

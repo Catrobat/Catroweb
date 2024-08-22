@@ -35,7 +35,7 @@ Feature: Adminius example programs
 
   Scenario: List all example programs:
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/example_program/list"
+    And I am on "/admin/project/example/list"
     And I wait for the page to be loaded
     Then I should see the example table:
       | Id | Project                  | Flavor     | Priority |
@@ -47,7 +47,7 @@ Feature: Adminius example programs
 
   Scenario: Delete first example Program
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/example_program/list"
+    And I am on "/admin/project/example/list"
     And I wait for the page to be loaded
     Then I should see the example table:
       | Id | Project                  | Flavor     | Priority |
@@ -55,7 +55,7 @@ Feature: Adminius example programs
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |
       | 4  | program 4 (#b100d-c01d)  | arduino    | 3        |
-    Then I am on "/admin/example_program/1/delete"
+    Then I am on "/admin/project/example/1/delete"
     And I wait for the page to be loaded
     Then I click on the first ".btn-danger" button
     And I wait for the page to be loaded
@@ -69,7 +69,7 @@ Feature: Adminius example programs
 
   Scenario: Click on program link
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/example_program/list"
+    And I am on "/admin/project/example/list"
     And I wait for the page to be loaded
     Then I should see the example table:
       | Id | Project                  | Flavor     | Priority |
@@ -83,7 +83,7 @@ Feature: Adminius example programs
 
   Scenario: Adding an example Program (success)
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/example_program/list"
+    And I am on "/admin/project/example/list"
     And I wait for the page to be loaded
     Then I should see the example table:
       | Id | Project                  | Flavor     | Priority |
@@ -93,14 +93,14 @@ Feature: Adminius example programs
       | 4  | program 4 (#b100d-c01d)  | arduino    | 3        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/example_program/create"
+    Then I should be on "/admin/project/example/create"
     When I attach the avatar "galaxy.jpg" to "File"
     Then I write "dead-beef" in textarea with label "Program Id"
     Then I write "3" in textarea with label "Priority"
     Then I select flavor "arduino" for example project
     Then I click ".btn-success"
     Then I should see "has been successfully created"
-    And I am on "/admin/example_program/list"
+    And I am on "/admin/project/example/list"
     Then I should see the example table:
       | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |
@@ -111,7 +111,7 @@ Feature: Adminius example programs
 
   Scenario: Adding a example Program (fail)
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/example_program/list"
+    And I am on "/admin/project/example/list"
     And I wait for the page to be loaded
     Then I should see the example table:
       | Id | Project                  | Flavor     | Priority |
@@ -121,12 +121,12 @@ Feature: Adminius example programs
       | 4  | program 4 (#b100d-c01d)  | arduino    | 3        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/example_program/create"
+    Then I should be on "/admin/project/example/create"
     When I attach the avatar "galaxy.jpg" to "File"
     Then I write "dead-b00f" in textarea with label "Program Id"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"
-    And I am on "/admin/example_program/list"
+    And I am on "/admin/project/example/list"
     Then I should see the example table:
       | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |

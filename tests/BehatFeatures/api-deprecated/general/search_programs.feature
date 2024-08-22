@@ -22,7 +22,7 @@ Feature: Search programs
       | isxs-adkt | Webteam         |                           | NewUser  | 04.01.2012 14:00 | 0.8.5   |
       | tvut-irkw | Fritz the Cat   |                           | NewUser  | 03.01.2012 14:00 | 0.8.5   |
     And the current time is "01.08.2014 14:00"
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
 
 
   Scenario: A request must have specific parameters to succeed
@@ -185,7 +185,7 @@ Feature: Search programs
 
   Scenario: only show visible programs
     Given project "Ponny" is not visible
-    And I wait 1000 milliseconds
+    And I wait 500 milliseconds
     And I use the limit "10"
     When I search for "description2"
     Then I should get following projects:

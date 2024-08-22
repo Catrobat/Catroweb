@@ -32,13 +32,21 @@ class ProjectsAdmin extends AbstractAdmin
 {
   use ProjectPreUpdateTrait;
 
-  protected $baseRouteName = 'admin_catrobat_adminbundle_projectsadmin';
+  #[\Override]
+  protected function generateBaseRouteName(bool $isChildAdmin = false): string
+  {
+    return 'admin_projects';
+  }
 
-  protected $baseRoutePattern = 'projects';
+  #[\Override]
+  protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
+  {
+    return 'project';
+  }
 
-  protected const SAFE_FOR_KIDS = 0;
+  protected const int SAFE_FOR_KIDS = 0;
 
-  protected const NOT_FOR_KIDS_MOD = 2;
+  protected const int NOT_FOR_KIDS_MOD = 2;
 
   #[\Override]
   protected function configureDefaultSortValues(array &$sortValues): void

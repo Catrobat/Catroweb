@@ -37,7 +37,7 @@ Feature: Admin featured programs
 
   Scenario: List all featured programs:
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -49,7 +49,7 @@ Feature: Admin featured programs
 
   Scenario: List featured programs just for arduino
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=3&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I am on "/admin/project/featured/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=3&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor  | Priority |
@@ -60,7 +60,7 @@ Feature: Admin featured programs
 
   Scenario: List featured programs just for IOS
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=1&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I am on "/admin/project/featured/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=1&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -71,7 +71,7 @@ Feature: Admin featured programs
 
   Scenario: List featured programs with priority above 1
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=2&filter%5Bpriority%5D%5Bvalue%5D=1&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I am on "/admin/project/featured/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=&filter%5Bpriority%5D%5Btype%5D=2&filter%5Bpriority%5D%5Bvalue%5D=1&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                 | Url | Flavor     | Priority |
@@ -83,7 +83,7 @@ Feature: Admin featured programs
 
   Scenario: List only active featured programs
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=1&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
+    And I am on "/admin/project/featured/list?filter%5Bprogram__name%5D%5Btype%5D=&filter%5Bprogram__name%5D%5Bvalue%5D=&filter%5Bfor_ios%5D%5Btype%5D=&filter%5Bfor_ios%5D%5Bvalue%5D=&filter%5Bactive%5D%5Btype%5D=&filter%5Bactive%5D%5Bvalue%5D=1&filter%5Bpriority%5D%5Btype%5D=&filter%5Bpriority%5D%5Bvalue%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -95,7 +95,7 @@ Feature: Admin featured programs
 
   Scenario: Delete first Featured Program
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -103,7 +103,7 @@ Feature: Admin featured programs
       | 2  | program 2 (#c0ffee-b00b) |     | arduino    | 1        |
       | 3  | program 3 (#c01d-cafe)   |     | luna       | 2        |
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
-    Then I am on "/admin/featured_program/1/delete"
+    Then I am on "/admin/project/featured/1/delete"
     And I wait for the page to be loaded
     Then I click on the first ".btn-danger" button
     And I wait for the page to be loaded
@@ -120,7 +120,7 @@ Feature: Admin featured programs
 
   Scenario: Click on program link
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -134,7 +134,7 @@ Feature: Admin featured programs
 
   Scenario: Adding a featured Program (success)
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -144,13 +144,13 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/featured_program/create"
+    Then I should be on "/admin/project/featured/create"
     When I attach the avatar "galaxy.jpg" to "File"
     Then I write "dead-beef" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"
     Then I should see "has been successfully created"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) |     | pocketcode | 1        |
@@ -161,7 +161,7 @@ Feature: Admin featured programs
 
   Scenario: Adding a featured Program (fail)
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -171,12 +171,12 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/featured_program/create"
+    Then I should be on "/admin/project/featured/create"
     When I attach the avatar "galaxy.jpg" to "File"
     Then I write "dead-b00f" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) |     | pocketcode | 1        |
@@ -186,7 +186,7 @@ Feature: Admin featured programs
 
   Scenario: Adding a featured Program (wrong picture)
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -196,7 +196,7 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/featured_program/create"
+    Then I should be on "/admin/project/featured/create"
     When I attach the avatar "fail.tif" to "File"
     Then I write "dead-b00f" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
@@ -205,7 +205,7 @@ Feature: Admin featured programs
 
   Scenario: Adding a featured Program with URL - Project (success)
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -215,14 +215,14 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/featured_program/create"
+    Then I should be on "/admin/project/featured/create"
     When I attach the avatar "galaxy.jpg" to "File"
     Then I write "1" in textarea with label "Use Url"
     Then I write "catrobat.at/app/project/dead-beef" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"
     Then I should see "has been successfully created"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) |     | pocketcode | 1        |
@@ -233,7 +233,7 @@ Feature: Admin featured programs
 
   Scenario: Adding a featured Program with URL - Extern (success)
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -243,14 +243,14 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/featured_program/create"
+    Then I should be on "/admin/project/featured/create"
     When I attach the avatar "galaxy.jpg" to "File"
     When I click ".iCheck-helper"
     Then the "Use Url" checkbox should be checked
     Then I write "http://www.google.com" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     Then I should see the featured table:
       | Id | Project                  | Url                   | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) |                       | pocketcode | 1        |
@@ -261,7 +261,7 @@ Feature: Admin featured programs
 
   Scenario: Adding a featured Program with URL - Project (fail)
     Given I log in as "Adminius" with the password "123456"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     And I wait for the page to be loaded
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
@@ -271,13 +271,13 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
     And I click on the "new" link
     And I wait for the page to be loaded
-    Then I should be on "/admin/featured_program/create"
+    Then I should be on "/admin/project/featured/create"
     When I attach the avatar "galaxy.jpg" to "File"
     Then I write "catrobat.at/app/project/dead-b00f" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"
     Then I should see "Error"
-    And I am on "/admin/featured_program/list"
+    And I am on "/admin/project/featured/list"
     Then I should see the featured table:
       | Id | Project                  | Url | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) |     | pocketcode | 1        |

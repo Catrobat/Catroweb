@@ -75,6 +75,7 @@ oauthPopUpTitle: "外部帐户登录信息"
 oauthInfo: '您刚刚使用了一个外部帐户登录。我们为您创建了一个随机用户名。 如果你想要更改你的用户名或为你的帐户创建一个新的密码，请访问我的个人资料页面。 点击 %link_start% 这里 %link_end% 去您的个人资料页面'
 oauthHere: "此处"
 statistics: "统计"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: 推荐的项目
   scratchremixes: Scratch remixes
   noProjects: 目前没有项目。
+  shareAction: 分享
   deleteAction: 删除项目
   deleteConfirmation: |+
     Are you sure?

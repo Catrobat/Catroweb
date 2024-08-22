@@ -8,13 +8,12 @@ Feature: Projects should have an editor a custom translation can be defined
     And there are projects:
       | id | name      | owned by | description    | credit     |
       | 1  | project 1 | Catrobat | my description | my credits |
-    And I wait 1000 milliseconds
 
   Scenario: Custom translation editor should be visible
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 10000 milliseconds
+    And I wait 500 milliseconds
     When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-navigation" should be visible
@@ -35,7 +34,7 @@ Feature: Projects should have an editor a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 10000 milliseconds
+    And I wait 500 milliseconds
     When I click "#edit-project-button"
     And I wait for AJAX to finish
     And I click "#add-translation-button"
@@ -53,7 +52,7 @@ Feature: Projects should have an editor a custom translation can be defined
     And I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 10000 milliseconds
+    And I wait 500 milliseconds
     When I click "#edit-project-button"
     And I wait for AJAX to finish
     And I click "#add-translation-button"
@@ -66,7 +65,7 @@ Feature: Projects should have an editor a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 10000 milliseconds
+    And I wait 500 milliseconds
     When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-navigation" should be visible
@@ -81,7 +80,7 @@ Feature: Projects should have an editor a custom translation can be defined
     Then the element "#edit-submit-button" should not be disabled
     When I click "#edit-submit-button"
     And I wait for AJAX to finish
-    And I wait 2000 milliseconds
+    And I wait 500 milliseconds
     Then the element "#edit-text-navigation" should be visible
     And the element "#edit-fr-button" should exist
     And I should see "French"
@@ -93,7 +92,7 @@ Feature: Projects should have an editor a custom translation can be defined
     And I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 10000 milliseconds
+    And I wait 500 milliseconds
     When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-navigation" should be visible
@@ -120,7 +119,7 @@ Feature: Projects should have an editor a custom translation can be defined
     And I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 10000 milliseconds
+    And I wait 500 milliseconds
     When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then the element "#edit-fr-button" should be visible

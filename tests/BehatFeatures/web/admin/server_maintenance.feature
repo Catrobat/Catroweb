@@ -4,14 +4,14 @@ Feature: Admin Server Maintenance
   As Admin
   I want to be able to delete Extracted Catrobatfiles/APKs in the Backend
 
-  Scenario: As a valid admin I want to be able to see the Maintain menu
+  Scenario: As a valid admin I want to be able to see the Disk Space menu
     Given I am a logged in as super admin
     When I GET "/admin/dashboard"
-    Then the client response should contain "Maintain"
+    Then the client response should contain "System Dashboard"
 
   Scenario: As a valid admin I want to be able to delete the resources
     Given I am a logged in as super admin
-    When I GET "/admin/maintain/list"
+    When I GET "/admin/system/maintenance/list"
     Then the client response should contain "Delete APKs"
     And the client response should contain "Delete compressed files"
     And the client response should contain "Delete log files"
@@ -20,15 +20,15 @@ Feature: Admin Server Maintenance
   Scenario: As a valid admin I want to be able to remove the APKs through the backend
   which should result in deleting apk from disk and reset entity state
     Given I am a logged in as super admin
-    When I GET "/admin/maintain/apk"
+    When I GET "/admin/system/maintenance/apk"
     Then the client response should contain "Generated APKs (0.00 B)"
     And there are projects:
       | id | name      | apk_status | directory_hash |
       | 1  | program 1 | ready      | null           |
     And there is a file "1.apk" with size "4096" bytes in the APK-folder
-    When I GET "/admin/maintain/list"
+    When I GET "/admin/system/maintenance/list"
     Then the client response should contain "Generated APKs (4.00 KiB)"
-    When I GET "/admin/maintain/apk"
+    When I GET "/admin/system/maintenance/apk"
     Then the client response should contain "Generated APKs (0.00 B)"
     And project with id "1" should have no apk
 
@@ -39,8 +39,8 @@ Feature: Admin Server Maintenance
       | id | name    | apk_status |
       | 1  | program | none       |
     And there is a file "1.catrobat" with size "4096" bytes in the compressed-folder
-    When I GET "/admin/maintain/list"
+    When I GET "/admin/system/maintenance/list"
     Then the client response should contain "Compressed Catrobatfiles (4.00 KiB)"
-    When I GET "/admin/maintain/compressed"
+    When I GET "/admin/system/maintenance/compressed"
     Then the client response should contain "Compressed Catrobatfiles (0.00 B)"
 

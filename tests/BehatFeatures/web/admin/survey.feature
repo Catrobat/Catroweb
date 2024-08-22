@@ -12,7 +12,7 @@ Feature: Surveys can be added, removed, and updated in the Admin interface
 
   Scenario: List should be complete
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/all_surveys/list"
+    And I am on "/admin/user-communication/survey/list"
     And I wait for the page to be loaded
     Then I should see the survey table:
       | Language Code | Url                | Active |
@@ -20,7 +20,7 @@ Feature: Surveys can be added, removed, and updated in the Admin interface
 
   Scenario: I can add new surveys
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/all_surveys/create"
+    And I am on "/admin/user-communication/survey/create"
     And I wait for the page to be loaded
     Then I should see "Language Code"
     Then I should see "Url"
@@ -31,15 +31,15 @@ Feature: Surveys can be added, removed, and updated in the Admin interface
 
   Scenario: I can delete entries
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/all_surveys/list"
+    And I am on "/admin/user-communication/survey/list"
     And I wait for the page to be loaded
     Then I should see the survey table:
       | Language Code | Url                | Active |
       | English       | www.catrosurvey.at | yes    |
-    When I go to "/admin/all_surveys/1/delete"
+    When I go to "/admin/user-communication/survey/1/delete"
     And I wait for the page to be loaded
     And I click ".btn-danger"
     And I wait for the page to be loaded
-    And I am on "/admin/all_surveys/list"
+    And I am on "/admin/user-communication/survey/list"
     And I wait for the page to be loaded
     Then I should not see "www.catrosurvey.at"

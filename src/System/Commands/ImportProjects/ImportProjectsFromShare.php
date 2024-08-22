@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-#[AsCommand(name: 'catrobat:import:share', description: 'Imports the specified amount of recent programs from share.catrob.at')]
+#[AsCommand(name: 'catrobat:import:share', description: 'Imports the specified amount of recent projects from share.catrob.at')]
 class ImportProjectsFromShare extends Command
 {
   #[\Override]

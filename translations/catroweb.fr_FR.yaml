@@ -75,6 +75,7 @@ oauthPopUpTitle: "Informations de connexion de compte externe"
 oauthInfo: 'Vous venez d''utiliser un compte externe pour vous connecter. Nous avons créé un nom d''utilisateur aléatoire. Si vous voulez changer votre nom d''utilisateur ou créer un nouveau mot de passe pour votre compte, veuillez vous rendre sur ma page de profil. Cliquez %link_start% ici %link_end% pour accéder à votre page de profil'
 oauthHere: "ici"
 statistics: "Statistiques"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Partager
   deleteAction: Supprimer le projet
   deleteConfirmation: |+
     Vous êtes sûr?

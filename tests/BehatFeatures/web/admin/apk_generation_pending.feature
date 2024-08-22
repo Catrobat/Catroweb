@@ -19,7 +19,7 @@ Feature: APK-Generation Pending in Admin Area
 
   Scenario: List should be complete and sorted after Apk Request Time DESC
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/apk_pending/list"
+    And I am on "/admin/catrobat/apk/pending/list"
     And I wait for the page to be loaded
     Then I should see the pending apk table:
       | Id | User  | Name      | Apk Request Time | Apk Status |
@@ -28,9 +28,9 @@ Feature: APK-Generation Pending in Admin Area
 
   Scenario: The rebuild button should rebuild apk and set state to pending
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/apk_pending/list"
+    And I am on "/admin/catrobat/apk/pending/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_pending/3/requestApkRebuild"
+    Then I am on "/admin/catrobat/apk/pending/3/requestApkRebuild"
     And I wait for the page to be loaded
     And I should see the pending apk table:
       | Id | User  | Name      | Apk Request Time | Apk Status |
@@ -39,28 +39,28 @@ Feature: APK-Generation Pending in Admin Area
 
   Scenario: The reset button should reset the apk status and the request time
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/apk_pending/list"
+    And I am on "/admin/catrobat/apk/pending/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_pending/3/resetApkBuildStatus"
+    Then I am on "/admin/catrobat/apk/pending/3/resetApkBuildStatus"
     And I wait for the page to be loaded
-    And I am on "/admin/apk_pending/list"
+    And I am on "/admin/catrobat/apk/pending/list"
     And I wait for the page to be loaded
     And I should not see "program 3"
 
   Scenario: The reset all button should reset all programs
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/apk_pending/list"
+    And I am on "/admin/catrobat/apk/pending/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_pending/resetPendingProjects"
+    Then I am on "/admin/catrobat/apk/pending/resetPendingProjects"
     And I wait for the page to be loaded
     And I should not see "program 3"
     And I should not see "program 4"
 
   Scenario: The rebuild all button should rebuild all programs
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/apk_pending/list"
+    And I am on "/admin/catrobat/apk/pending/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_pending/rebuildAllApk"
+    Then I am on "/admin/catrobat/apk/pending/rebuildAllApk"
     And I wait for the page to be loaded
     And I should see the pending apk table:
       | Id | User  | Name      | Apk Request Time | Apk Status |

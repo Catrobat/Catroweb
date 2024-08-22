@@ -75,6 +75,7 @@ oauthPopUpTitle: "Xarici hesabla daxil olma məlumatları"
 oauthInfo: 'Giriş etmək üçün xarici bir hesab istifadə etdiniz. Sizin üçün təsadüfi bir istifadəçi adı yaratdıq. İstifadəçi adınızı dəyişdirmək və ya hesabınız üçün yeni bir şifrə yaratmaq istəyirsinizsə, zəhmət olmasa "profil səhifəm"ə gedin. Profil səhifənizə getmək üçün %link_start% bura%link_end% klikləyin'
 oauthHere: "bura"
 statistics: "Statistikalar"
+languageSelection: "Language selection"
 indexPage:
   recommendedSection:
     info:
@@ -109,6 +110,7 @@ project:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noProjects: There are currently no projects.
+  shareAction: Share
   deleteAction: Delete project
   deleteConfirmation: |+
     Are you sure?
