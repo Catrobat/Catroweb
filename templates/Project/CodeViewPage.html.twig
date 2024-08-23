@@ -1,0 +1,38 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block page_title %}{{ "codeview.title"|trans({}, "catroweb") }}{% endblock %}
+{% block back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('project_code_view') }}
+  <script src="{{ asset('catblocks/CatBlocks.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+  <div class="d-flex justify-content-center">
+    <i class="material-icons" id="code-view-spinner">
+      {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default()} %}
+    </i>
+  </div>
+  {% if isVersionSupportedByCatBlocks(version) %}
+
+    <div id='catblocks-code-container'></div>
+    {# As long as catblocks is not stable we need to also load the old view as backup #}
+    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController::oldView', {'id' : id, 'visible' : false })) }}
+  {% else %}
+    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController::oldView', {'id' : id })) }}
+  {% endif %}
+
+  <div class="js-code-view"
+       data-app-env="{{ app_env }}"
+       data-locale="{{ app.request.getLocale() }}"
+       data-extracted-project-path="{{ app.request.getSchemeAndHttpHost() ~ '/' ~ extracted_path ~ '/' }}"
+       data-project-hash="{{ extracted_dir_hash }}"
+  ></div>
+
+{% endblock %}
+
+
+{% block javascript %}
+  {{ encore_entry_script_tags('project_code_view') }}
+{% endblock %}
+

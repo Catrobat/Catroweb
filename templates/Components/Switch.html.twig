@@ -1,0 +1,48 @@
+{#
+Wrapper template for a simple usage of material switches.
+
+===== Dependencies =====
+
+  - Components/Switch.js
+
+===== Example usage =====
+
+  {% include 'Components/Switch.html.twig' with {
+  'switch':
+    {
+      'id': 'id-1',
+      'label': 'on / off',
+      'selected': '1',
+      'name': 'name-1'
+    }
+}%}
+#}
+
+<div class="mb-4" style="display: flex;">
+  <label for="{{ switch.id }}" data-toggle="tooltip" data-placement="top" >{{ switch.label }}</label>
+  <button id="{{ switch.id }}"
+          class="mdc-switch mdc-switch--{% if switch.selected != '1' %}un{% endif %}selected"
+          type="button" role="switch"
+          aria-checked="{% if switch.selected == '1' %}true{% else %}false{% endif %}"
+          style="margin-left: auto;">
+
+    <input type="hidden" name="{{ switch.name }}" value="{{ switch.selected }}">
+    <span class="mdc-switch__track"></span>
+    <span class="mdc-switch__handle-track">
+      <span class="mdc-switch__handle">
+        <span class="mdc-switch__shadow">
+          <span class="mdc-elevation-overlay"></span>
+        </span>
+        <span class="mdc-switch__ripple"></span>
+        <span class="mdc-switch__icons">
+          <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
+            <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
+          </svg>
+          <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+            <path d="M20 13H4v-2h16v2z" />
+          </svg>
+        </span>
+      </span>
+    </span>
+  </button>
+</div>

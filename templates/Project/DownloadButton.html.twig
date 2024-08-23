@@ -1,0 +1,24 @@
+<button id="projectDownloadButton{{ suffix|default('') }}" class="btn btn-primary btn-block js-btn-project-download"
+        data-path-url='{{ project_details.downloadUrl }}'
+        data-project-id='{{ project.id }}'
+        data-button-id='projectDownloadButton{{ suffix|default('') }}'
+        data-spinner-id='projectDownloadButton__loadingSpinner{{ suffix|default('') }}'
+        data-icon-id='projectDownloadButton__icon{{ suffix|default('') }}'
+        data-is-webview='{% if isWebview() %}true{% else %}false{% endif %}'
+        data-is-supported='{% if checkCatrobatLanguage(project_details.languageVersion) %}true{% else %}false{% endif %}'
+        data-is-not-supported-title="{{ 'project.updateAppHeaderDownload'|trans({}, 'catroweb')}}"
+        data-is-not-supported-text="{{ 'project.updateAppTextDownload'|trans({}, 'catroweb')}}"
+>
+
+  {# Loading spinner during download #}
+  <i id="projectDownloadButton__loadingSpinner{{ suffix|default('') }}" class="material-icons text-start d-none">
+    {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'download-progressbar' ~ suffix|default(), 'size': 'small'} only %}
+  </i>
+
+  {# Icon #}
+  <i id="projectDownloadButton__icon{{ suffix|default('') }}" class="material-icons align-bottom">get_app</i>
+
+  {# Text #}
+  <span>{{ "download"|trans({}, "catroweb") }}</span>
+
+</button>

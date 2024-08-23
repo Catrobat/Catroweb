@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
   #[Route(path: '/register', name: 'register', methods: ['GET'])]
   public function register(): Response
   {
-    return $this->render('security/registration/register.html.twig');
+    return $this->render('Security/Registration/RegistrationPage.html.twig');
   }
 
   /**

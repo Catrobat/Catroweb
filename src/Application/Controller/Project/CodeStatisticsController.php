@@ -37,7 +37,7 @@ class CodeStatisticsController extends AbstractController
     }
 
     if (null === $parsed_project) {
-      return $this->render('Project/code_statistics.html.twig', [
+      return $this->render('Project/CodeStatisticsPage.html.twig', [
         'id' => $id,
       ]);
     }
@@ -45,7 +45,7 @@ class CodeStatisticsController extends AbstractController
     $stats = $parsed_project->getCodeStatistic();
     $brick_stats = $stats->getBrickTypeStatistic();
 
-    return $this->render('Project/code_statistics.html.twig', [
+    return $this->render('Project/CodeStatisticsPage.html.twig', [
       'id' => $id,
       'data' => [
         'scenes' => $this->getMappedProjectStatistic('codeview.scenes', $stats->getSceneStatistic()),

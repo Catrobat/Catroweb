@@ -1,0 +1,26 @@
+{% extends 'User/Notification/Type/Base.html.twig' %}
+
+{% block notification_leftAvatar %}
+  <div class="col-2 my-auto">
+    <a href="{{ path('profile', { "id" : notification.program.user.id }) }}">
+      <img class="img-fluid notification-avatar-round"
+           src="{% if notification.program.user.avatar is not empty %}{{ notification.program.user.avatar }}
+                          {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
+           alt="">
+    </a>
+  </div>
+{% endblock %}
+
+{% block notification_body %}
+  <div class="col-8 ps-3 my-auto">
+    {{ 'catro-notifications.project-upload.message' | trans
+      (
+      {
+        '%user_link%': '<a href="'~path('profile', {'id': notification.program.user.id|escape})~'">'~notification.program.user.username|escape~'</a>',
+        '%program_link%': '<a href="'~path('program', {'id': notification.program.id|escape})~'">'~notification.program.name|escape~'</a>'
+      },
+      'catroweb'
+    )
+    |raw }}
+  </div>
+{% endblock %}

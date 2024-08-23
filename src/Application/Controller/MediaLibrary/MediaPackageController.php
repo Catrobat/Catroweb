@@ -29,14 +29,14 @@ class MediaPackageController extends AbstractController
   /**
    * Legacy route:.
    */
-  #[Route(path: '/media-library/', name: 'media_library_overview', methods: ['GET'])]
+  #[Route(path: '/media-library/', name: 'media_library_package_overview', methods: ['GET'])]
   #[Route(path: '/pocket-library/', name: 'pocket_library_overview', methods: ['GET'])]
   public function index(): Response
   {
     /** @var MediaPackage[] $packages */
     $packages = $this->entity_manager->getRepository(MediaPackage::class)->findAll();
 
-    return $this->render('MediaLibrary/media_library_overview.html.twig',
+    return $this->render('MediaLibrary/PackageOverview.html.twig',
       [
         'packages' => $packages,
       ]
@@ -63,7 +63,7 @@ class MediaPackageController extends AbstractController
 
     $categories = $this->sortCategoriesFlavoredFirst($package->getCategories()->toArray(), $flavor, $translator);
 
-    return $this->render('MediaLibrary/media_library_package.html.twig', [
+    return $this->render('MediaLibrary/PackageDetail.html.twig', [
       'flavor' => $flavor,
       'package' => $package_name,
       'categories' => $categories,

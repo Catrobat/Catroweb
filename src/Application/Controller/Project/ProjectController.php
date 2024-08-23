@@ -98,7 +98,7 @@ class ProjectController extends AbstractController
       $referrer, $project_comment_list
     );
 
-    return $this->render('Project/project.html.twig', [
+    return $this->render('Project/ProjectPage.html.twig', [
       'project' => $project,
       'login_redirect' => $login_redirect,
       'project_details' => $project_details,
@@ -207,13 +207,6 @@ class ProjectController extends AbstractController
     ]);
   }
 
-  #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]
-  #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'])]
-  public function search(?string $q = null): Response
-  {
-    return $this->render('Search/search.html.twig', ['q' => $q]);
-  }
-
   /**
    * @throws NoResultException
    */
@@ -286,7 +279,7 @@ class ProjectController extends AbstractController
   /**
    * @throws NonUniqueResultException
    */
-  #[Route(path: 'program/comment/{id}', name: 'program_comment', methods: ['GET'])]
+  #[Route(path: 'project/comment/{id}', name: 'project_comment', methods: ['GET'])]
   public function projectCommentDetail(string $id): Response
   {
     $arr_comment = $this->comment_repository->getProjectCommentDetailViewData($id);

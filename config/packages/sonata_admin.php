@@ -39,7 +39,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'title_logo' => 'images/admin/admin_logo.png',
       'show_mosaic_button' => false,
       'templates' => [
-        'layout' => 'Admin\standard_layout.html.twig',
+        'layout' => 'Admin\StandardLayout.html.twig',
       ],
       'dashboard' => [
         'blocks' => [

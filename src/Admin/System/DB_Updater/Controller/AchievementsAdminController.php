@@ -36,7 +36,7 @@ class AchievementsAdminController extends CRUDController
       $numberOfUserAchievements[$id] = $this->achievement_manager->countUserAchievementsOfAchievement($id);
     }
 
-    return $this->renderWithExtraParams('Admin/SystemManagement/DbUpdater/achievements.html.twig', [
+    return $this->render('Admin/SystemManagement/DbUpdater/Achievements.html.twig', [
       'action' => 'update_achievements',
       'numberOfUserAchievements' => $numberOfUserAchievements,
       'updateAchievementsUrl' => $this->admin->generateUrl('update_achievements'),

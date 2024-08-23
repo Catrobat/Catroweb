@@ -1,0 +1,75 @@
+{% extends 'Components/FullscreenModal.html.twig' %}
+{% set modal =
+  {
+    'id': 'profile-settings-modal',
+    'title': '' ~ 'myprofile.profileSettings'|trans({}, 'catroweb'),
+    'left_action':
+    {
+      'id': 'profile_settings-cancel_action',
+      'icon': 'close',
+      'label': '' ~ 'cancel'|trans({}, 'catroweb'),
+      'dismiss': true
+    },
+    'right_action':
+    {
+      'id': 'profile_settings-save_action',
+      'icon': 'done',
+      'label': '' ~ 'myprofile.done'|trans({}, 'catroweb'),
+      'dismiss': false
+    }
+  }
+%}
+{% block content %}
+  <form id="profile-settings-form" class="form-horizontal" role="form">
+    {% include 'Components/TextField.html.twig' with {
+      'text_field':
+      {
+        'id': 'profile-username',
+        'label': '' ~ 'username'|trans({}, 'catroweb'),
+        'value': username,
+        'name': 'username',
+        'leading_icon': 'person',
+        'tabindex': 1
+      }
+    } %}
+
+    {% include 'Components/TextField.html.twig' with {
+      'text_field':
+      {
+        'id': 'profile-email',
+        'label': '' ~ 'email'|trans({}, 'catroweb'),
+        'value': firstMail,
+        'name': 'email',
+        'leading_icon': 'email',
+        'tabindex': 2
+      }
+    } %}
+
+    {% include 'Components/TextField.html.twig' with {
+      'text_field':
+      {
+        'id': 'profile-currentlyWorkingOn',
+        'label': '' ~ 'profile.currentlyWorkingOn'|trans({}, 'catroweb'),
+        'value': app.user.currentlyWorkingOn,
+        'name': 'currentlyWorkingOn',
+        'leading_icon': 'schedule',
+        'required': false,
+        'tabindex': 3
+      }
+    } %}
+
+    {% include 'Components/TextArea.html.twig' with {
+      'text_area':
+      {
+        'id': 'profile-about',
+        'label': '' ~ 'profile.aboutMe'|trans({}, 'catroweb'),
+        'value': app.user.about,
+        'name': 'about',
+        'leading_icon': 'description',
+        'rows': '4',
+        'mb': 'mb-4'
+      }
+    }%}
+
+  </form>
+{% endblock %}
