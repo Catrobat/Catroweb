@@ -35,7 +35,7 @@ class AchievementsController extends AbstractController
     $total_number_of_achievements = $this->achievement_manager->countAllEnabledAchievements();
     $number_of_unlocked_achievements = count($achievements_unlocked);
 
-    return $this->render('Achievements/achievement_overview.html.twig', [
+    return $this->render('User/Achievements/achievement_overview.html.twig', [
       'most_recent_achievement' => $most_recent_achievement,
       'most_recent_achievement_unlocked_at' => $most_recent_achievement_unlocked_at,
       'most_recent_achievement_seen_at' => $most_recent_achievement_seen_at,

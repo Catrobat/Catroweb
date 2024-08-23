@@ -38,9 +38,6 @@
     "catrobat/capi": {
         "version": "v1.0.43"
     },
-    "clue/stream-filter": {
-        "version": "v1.4.1"
-    },
     "codercat/jwk-to-pem": {
         "version": "0.0.3"
     },
@@ -67,18 +64,6 @@
     },
     "dnoegel/php-xdg-base-dir": {
         "version": "v0.1.1"
-    },
-    "doctrine/annotations": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
-        },
-        "files": [
-            "config/routes/annotations.yaml"
-        ]
     },
     "doctrine/cache": {
         "version": "1.10.0"
@@ -170,10 +155,10 @@
         "version": "2.1.17"
     },
     "eightpoints/guzzle-bundle": {
-        "version": "7.0",
+        "version": "8.5",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
+            "branch": "main",
             "version": "7.0",
             "ref": "7babb21a3928e44e485391907e3abc346804e0d2"
         },
@@ -308,9 +293,6 @@
             "config/routes/hwi_oauth_routing.yaml"
         ]
     },
-    "incenteev/composer-parameter-handler": {
-        "version": "v2.1.3"
-    },
     "jms/metadata": {
         "version": "1.7.0"
     },
@@ -396,42 +378,6 @@
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
-    },
-    "php-http/client-common": {
-        "version": "2.2.0"
-    },
-    "php-http/discovery": {
-        "version": "1.9.0"
-    },
-    "php-http/httplug": {
-        "version": "2.1.0"
-    },
-    "php-http/httplug-bundle": {
-        "version": "1.6",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "1.6",
-            "ref": "87b3d491d593d2c6e3b90bf0689ac69a188bfa5f"
-        },
-        "files": [
-            "config/packages/httplug.yaml"
-        ]
-    },
-    "php-http/logger-plugin": {
-        "version": "1.1.0"
-    },
-    "php-http/message": {
-        "version": "1.8.0"
-    },
-    "php-http/message-factory": {
-        "version": "v1.0.2"
-    },
-    "php-http/promise": {
-        "version": "v1.0.0"
-    },
-    "php-http/stopwatch-plugin": {
-        "version": "1.3.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"

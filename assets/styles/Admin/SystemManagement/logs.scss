@@ -1,0 +1,142 @@
+.popup-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 999;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+h5 {
+  margin: 1rem 0;
+}
+
+#logFilesContainer {
+  margin: 1rem;
+}
+
+.chipButton {
+  background-color: rgb(51, 51, 51);
+  border: none;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font: inherit;
+  margin: 0.25rem;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.chipButton:hover {
+  background-color: #495659;
+}
+
+ul#logFiles {
+  list-style-type: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+ul#logFiles li {
+  display: inline-block;
+}
+
+#outerLogContainer {
+  display: flex;
+  min-width: 100%;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#innerLogContainer {
+  width: 70%;
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.logs {
+  margin-bottom: 1rem;
+}
+
+.panel-heading {
+  background-color: #d1d1d1;
+  color: #000000;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.panel-heading:hover {
+  background-color: #9d9b9b;
+}
+
+.panel-collapse {
+  padding: 0.5rem;
+  background-color: #f1f1f1;
+  border-radius: 0.25rem;
+}
+
+.panel-body {
+  padding: 0.5rem;
+}
+
+.hide {
+  display: none;
+}
+
+#currentFileContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 30%;
+}
+
+#currentFileContainer h5 {
+  margin: 0 0 1rem 0;
+  text-align: right;
+}
+
+.btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s;
+}
+
+#currentFileContainer form {
+  margin: 0 0 1rem 0;
+  text-align: right;
+}
+
+.btn:hover {
+  background-color: #218838;
+}
+
+.line-head {
+  color: #000000;
+  text-decoration: none;
+}
+
+.line-head:hover {
+  color: #000000;
+  text-decoration: none;
+}

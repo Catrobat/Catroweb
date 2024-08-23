@@ -7,6 +7,10 @@
   <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
 {% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('admin_standard_layout') }}
+{% endblock %}
 
 {% block sonata_top_nav_menu %}
   <div class="navbar-custom-menu">
@@ -80,3 +84,9 @@
     </nav>
   {% endif %}
 {% endblock sonata_page_content_nav %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('admin_standard_layout') }}
+{% endblock %}
+

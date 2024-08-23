@@ -63,8 +63,8 @@ class AchievementsAdmin extends AbstractAdmin
       ->add('priority')
       ->add('internal_title')
       ->add('internal_description')
-      ->add('badge_svg_path', null, ['template' => 'Admin/achievement_badge_image.html.twig'])
-      ->add('badge_locked_svg_path', null, ['template' => 'Admin/achievement_badge_locked_image.html.twig'])
+      ->add('badge_svg_path', null, ['template' => 'Admin/SystemManagement/DbUpdater/Achievements/achievement_badge_image.html.twig'])
+      ->add('badge_locked_svg_path', null, ['template' => 'Admin/SystemManagement/DbUpdater/Achievements/achievement_badge_locked_image.html.twig'])
       ->add('banner_color')
       ->add('enabled')
       ->add('unlocked_by', 'string', [

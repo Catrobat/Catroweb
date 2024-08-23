@@ -169,7 +169,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
        */
       ->add('thumbnail', null, [
         'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-        'template' => 'Admin/project_thumbnail_image.html.twig',
+        'template' => 'Admin/Projects/thumbnail_image.html.twig',
       ])
       ->add('id')
       ->add('Name')
@@ -180,24 +180,24 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('visible', 'boolean')
       ->add('Images', null, [
         'accessor' => fn ($subject): array => $this->getContainingImageUrls($subject),
-        'template' => 'Admin/project_containing_image.html.twig',
+        'template' => 'Admin/Projects/containing_image.html.twig',
       ])
       ->add('Sounds', null, [
         'accessor' => fn ($subject): array => $this->getContainingSoundUrls($subject),
-        'template' => 'Admin/project_containing_sound.html.twig',
+        'template' => 'Admin/Projects/containing_sound.html.twig',
       ])
       ->add('Strings', null, [
         'accessor' => fn ($subject): array => $this->getContainingStrings($subject),
-        'template' => 'Admin/project_containing_strings.html.twig',
+        'template' => 'Admin/Projects/containing_strings.html.twig',
       ])
       ->add('Objects', null, [
         'accessor' => fn ($subject): array => $this->getContainingCodeObjects($subject),
-        'template' => 'Admin/project_containing_code_objects.html.twig',
+        'template' => 'Admin/Projects/containing_code_objects.html.twig',
       ])
       ->add('Actions', null, [
         'accessor' => static function ($subject): void {
         }, // Just some buttons, nothing to "access"!
-        'template' => 'Admin/project_approve_action.html.twig',
+        'template' => 'Admin/Projects/approve_action.html.twig',
       ])
     ;
   }

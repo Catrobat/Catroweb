@@ -27,7 +27,7 @@ class ExtensionsAdminController extends CRUDController
   #[\Override]
   public function listAction(Request $request): Response
   {
-    return $this->renderWithExtraParams('Admin/DB_Updater/admin_extensions.html.twig', [
+    return $this->renderWithExtraParams('Admin/SystemManagement/DbUpdater/extensions.html.twig', [
       'action' => 'update_extensions',
       'updateExtensionsUrl' => $this->admin->generateUrl('update_extensions'),
     ]);

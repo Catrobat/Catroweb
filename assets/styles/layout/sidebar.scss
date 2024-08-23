@@ -77,7 +77,7 @@ $sidebar-width: 250px;
   .body-with-sidebar {
     .body-content {
       margin-left: $sidebar-width;
-      width: calc(100% - #{$sidebar-width});
+      width: calc(100% - $sidebar-width);
     }
 
     &.modal-open .modal {
@@ -86,12 +86,12 @@ $sidebar-width: 250px;
 
     .project-list.vertical {
       left: $sidebar-width;
-      width: calc(100vw - #{$sidebar-width});
+      width: calc(100vw - $sidebar-width);
     }
 
     .full-screen {
       left: $sidebar-width;
-      width: calc(100vw - #{$sidebar-width});
+      width: calc(100vw - $sidebar-width);
     }
   }
 }
