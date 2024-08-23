@@ -57,7 +57,7 @@ class MaintenanceInformationAdmin extends AbstractAdmin
     $form
       ->add('internalTitle', null, ['label' => 'Feature Name'])
       ->add('AvailableIcons', TemplateType::class, [
-        'template' => 'Admin/maintenance_information_ltmParameters.html.twig',
+        'template' => 'Admin/UserCommunication/MaintenanceInformation/ltm_parameters.html.twig',
         'label' => '',
       ])
       ->add('icon', ChoiceType::class, [
@@ -128,7 +128,7 @@ class MaintenanceInformationAdmin extends AbstractAdmin
       ->add('ltm_additionalInformation', null, ['label' => 'Additional Information'])
       ->add('icon', 'string',
         [
-          'template' => 'Admin/maintenance_information_icon.html.twig',
+          'template' => 'Admin/UserCommunication/MaintenanceInformation/icon.html.twig',
         ]
       )
       ->add(ListMapper::NAME_ACTIONS, null, [

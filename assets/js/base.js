@@ -1,3 +1,15 @@
+// Lazy load images (performance) --------------------------------------------------------------------------------------
+// lazysizes does not need any JS configuration:
+// Add the class "lazyload" to your images/iframes in conjunction with a data-src and/or data-srcset attribute.
+// Optionally you can also add a src attribute with a low quality image
+import 'lazysizes'
+
+// Icons (Google) ------------------------------------------------------------------------------------------------------
+// https://fonts.google.com/icons
+// no further config is needed - just add the class material-icons to element
+// E.g: <i class="material-icons">thumb_up</i>
+import 'material-icons/iconfont/material-icons.css'
+
 import textFillDefault from './components/text_fill_default'
 import './layout/top_bar'
 import './layout/sidebar'

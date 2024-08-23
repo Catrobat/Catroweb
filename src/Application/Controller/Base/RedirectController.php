@@ -15,12 +15,12 @@ class RedirectController extends AbstractController
   #[Route(path: '/help', name: 'help', methods: ['GET'])]
   public function help(Request $request): Response
   {
-    $flavor = $request->attributes->get('flavor');
-    if ('mindstorms' === $flavor) {
-      return $this->redirect('https://catrob.at/MindstormsFlavorDocumentation');
+    $locale = $request->getLocale();
+    if (str_contains($locale, 'de')) {
+      return $this->redirect('https://catrobat.org/de/dokumentation/');
     }
 
-    return $this->redirect('https://wiki.catrobat.org/bin/view/Documentation/');
+    return $this->redirect('https://catrobat.org/docs/');
   }
 
   #[Route(path: '/gp', name: 'google_play_store', methods: ['GET'])]

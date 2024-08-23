@@ -86,8 +86,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.example.projects',
             ],
           ],
-          'sonata.admin.group.users' => [
-            'label' => 'Users',
+          'sonata.admin.group.user' => [
+            'label' => 'User',
             'translation_domain' => 'catroweb',
             'icon' => '<i class="fa fa-users"></i>',
             'items' => [

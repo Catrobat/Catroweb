@@ -31,9 +31,7 @@ $img-border-strength: 2px;
       .mediafile {
         position: relative;
         height: $tile-size-sm;
-        width: calc(
-          100% + (2 * #{$tile-padding-overflow-x})
-        ); // sass interpolation
+        width: calc(100% + (2 * $tile-padding-overflow-x));
         margin: 0 (-$tile-padding-overflow-x);
         padding: $tile-padding-y $tile-padding-overflow-x;
         font-size: 1rem;

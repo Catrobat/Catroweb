@@ -12,7 +12,6 @@ const noop = require('noop-webpack-plugin')
 if (!Encore.isRuntimeEnvironmentConfigured()) {
   Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev')
 }
-
 Encore
   // directory where compiled assets will be stored
   .setOutputPath('public/build/')
@@ -33,20 +32,6 @@ Encore
   .enableSingleRuntimeChunk()
 
   .copyFiles([
-    // Bootstrap (deprecated!)
-    { from: './node_modules/bootstrap', to: '../bootstrap/[path][name].[ext]' },
-
-    // VIS (used in remix graph) (deprecated!)
-    // We need the whole dist folder because the css references multiple images
-    { from: './node_modules/vis/dist/', to: '../vis/[path][name].[ext]' },
-
-    // Fonts (deprecated!)
-    { from: './assets/fonts', to: '/fonts/[path][name].[ext]' },
-    {
-      from: './node_modules/material-icons/',
-      to: '../material-icons/[path][name].[ext]',
-    },
-
     // Images
     { from: './assets/images', to: '../images/[path][name].[ext]' },
 
@@ -56,30 +41,14 @@ Encore
     // Catblocks
     { from: './assets/catblocks', to: '../catblocks/[path][name].[ext]' },
 
-    // JS (deprecated!)
-    { from: './assets/js/custom', to: '../js/[path][name].[ext]' },
-    {
-      from: './node_modules/clipboard/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/bootstrap/dist/js',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/sweetalert2/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
+    // Fonts
+    { from: './assets/fonts', to: '/fonts/[path][name].[ext]' },
+
+    // Remix graph (deprecated!) - Complete rework needed
+    { from: './assets/js/Legacy', to: '../js/[path][name].[ext]' },
+    { from: './node_modules/vis/dist/', to: '../vis/[path][name].[ext]' },
     {
       from: './node_modules/jquery/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/textfilljs/dist/',
       pattern: /\.js$/,
       to: '../js/modules/[path][name].[ext]',
     },
@@ -98,18 +67,6 @@ Encore
       pattern: /\.js$/,
       to: '../js/modules/[path][name].[ext]',
     },
-    {
-      from: './node_modules/lazysizes/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jwt-decode/build/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-
-    // CSS (deprecated!)
     {
       from: './node_modules/jquery-contextmenu/dist/',
       pattern: /\.css$/,
@@ -156,6 +113,36 @@ Encore
   .addEntry('medialib_content', './assets/js/medialib_content.js')
   .addEntry('language_menu', './assets/js/custom/languageMenu.js')
 
+  // project
+  .addEntry('project_code_statistics', './assets/js/Project/code_statistics.js')
+
+  // admin interface
+  .addEntry('admin_standard_layout', './assets/js/Admin/standard_layout.js')
+  .addEntry(
+    'admin_user_communication_broadcast_notification',
+    './assets/js/Admin/UserCommunication/broadcast_notification.js',
+  )
+  .addEntry(
+    'admin_user_communication_send_mail',
+    './assets/js/Admin/UserCommunication/send_mail.js',
+  )
+  .addEntry(
+    'admin_user_communication_maintenance_information_icon_list',
+    './assets/js/Admin/UserCommunication/MaintenanceInformation/icon_list.js',
+  )
+  .addEntry(
+    'admin_system_management_logs',
+    './assets/js/Admin/SystemManagement/logs.js',
+  )
+  .addEntry(
+    'admin_system_management_maintain',
+    './assets/js/Admin/SystemManagement/maintain.js',
+  )
+  .addEntry(
+    'admin_statistics_machine_translation',
+    './assets/js/Admin/Statistics/machine_translation.js',
+  )
+
   // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')
   .addStyleEntry('project_scss', './assets/styles/custom/program.scss')
@@ -164,10 +151,6 @@ Encore
     './assets/styles/custom/multi_column_article.scss',
   )
   .addStyleEntry('old_code_view', './assets/styles/custom/old_code_view.scss')
-  .addStyleEntry(
-    'code_statistics',
-    './assets/styles/components/code_statistics.scss',
-  )
 
   .addStyleEntry(
     'maintenance_slider',
