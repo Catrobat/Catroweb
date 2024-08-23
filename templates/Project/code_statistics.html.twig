@@ -3,7 +3,7 @@
 {% block back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
 
 {% block head %}
-  {{ encore_entry_link_tags('code_statistics') }}
+  {{ encore_entry_link_tags('project_code_statistics') }}
 {% endblock %}
 
 {% block body %}
@@ -81,7 +81,6 @@
 
 {% endblock %}
 
-
 {% block javascript %}
-
+  {{ encore_entry_script_tags('project_code_statistics') }}
 {% endblock %}

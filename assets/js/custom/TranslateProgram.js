@@ -102,7 +102,6 @@ export class TranslateProgram extends Translation {
   }
 
   openTranslatedProgram() {
-    console.error('!!!!')
     document.getElementById(
       'project-translation-loading-spinner',
     ).style.display = 'none'

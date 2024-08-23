@@ -1,0 +1,76 @@
+h3 {
+  margin-left: 20px;
+}
+
+p {
+  margin-left: 20px;
+}
+
+label {
+  font-weight: normal;
+}
+
+.mtable {
+  display: table;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  width: 95%;
+}
+
+.row-title {
+  width: 100px;
+  line-height: 28px;
+  display: table-row;
+  float: left;
+  clear: both;
+}
+
+.row-button-mt {
+  margin-top: -15px;
+  display: table-row;
+  float: left;
+  margin-bottom: 10px;
+  width: 500px;
+}
+
+.row-button {
+  display: table-row;
+  float: left;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.row-result {
+  margin-top: 5px;
+  display: table-row;
+  float: left;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.row-button-mt-input {
+  width: 100%;
+}
+
+.row-button-mt-textarea {
+  width: 100%;
+  min-height: 100px;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+.drop-down {
+  display: table-row;
+  float: left;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 0 10px 0;
+}

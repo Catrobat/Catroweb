@@ -12,9 +12,7 @@ $list-item-padding-overflow-x: 1.5rem;
 }
 
 .studios-list-item {
-  width: calc(
-    100% + (2 * #{$list-item-padding-overflow-x})
-  ); // sass interpolation
+  width: calc(100% + (2 * $list-item-padding-overflow-x));
   margin: 0 (-$list-item-padding-overflow-x);
   padding: 0.75rem $list-item-padding-overflow-x;
   display: flex;
@@ -107,8 +105,8 @@ $list-item-padding-overflow-x: 1.5rem;
   padding-right: 1rem;
   padding-left: 1rem;
   margin-top: -2rem;
-  margin-right: calc(#{var(--bs-gutter-x, 0.75rem)} * -1);
-  margin-left: calc(#{var(--bs-gutter-x, 0.75rem)} * -1);
+  margin-right: calc(var(--bs-gutter-x, 0.75rem) * -1);
+  margin-left: calc(var(--bs-gutter-x, 0.75rem) * -1);
   background-color: $gray-200;
 }
 

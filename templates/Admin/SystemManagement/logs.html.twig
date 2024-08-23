@@ -1,0 +1,66 @@
+{% extends base_template %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin_system_management_logs') }}
+{% endblock %}
+
+{% block list_table %}
+  <div id="loading-spinner" class="popup-bg" style="display: none">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+  <div class="col-xs-12 col-md-12" xmlns="http://www.w3.org/1999/html">
+    <div class="box box-primary">
+      <div class="box-body table-responsive no-padding">
+        {% if files|length > 0 %}
+
+          <div id="logFilesContainer">
+            <h5>Log files:</h5>
+            <ul id="logFiles">
+              {% for file in files %}
+                <li>
+                  <button class="chipButton files" value="{{ file }}">{{ file }}</button>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div id="outerLogContainer">
+            <div id="innerLogContainer">
+              {% for line in content %}
+                  <div class='logs'>
+                      <div class="panel-heading">
+                          <a data-bs-toggle="collapse" class="line-head">
+                              {{ line.title }}
+                          </a>
+                      </div>
+                      <div class="panel-collapse hide">
+                          <div class="panel-body">
+                              {{ line.message }}
+                          </div>
+                      </div>
+                  </div>
+              {% endfor %}
+            </div>
+
+            <div id="currentFileContainer">
+              <h5>Current file: <span id="currentFileName">{{ files[0] }}</span></h5>
+              <form action="/admin/downloadLogs/" method="post">
+                <input id="currentFile" name="file" type="hidden" value="{{ files[0] }}">
+                <input value="Download" type="submit" formtarget="_blank" class="btn">
+              </form>
+            </div>
+          </div>
+
+        {% else %}
+          <h4>No log files found!</h4>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('admin_system_management_logs') }}
+{% endblock %}

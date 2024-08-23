@@ -185,7 +185,7 @@ class MaintenanceController extends CRUDController
     $shared_ram_percentage = ($shared_ram / $whole_ram) * 100;
     $cached_ram_percentage = ($cached_ram / $whole_ram) * 100;
 
-    return $this->renderWithExtraParams('Admin/Tools/maintain.html.twig', [
+    return $this->renderWithExtraParams('Admin/SystemManagement/maintain.html.twig', [
       'RemovableObjects' => $RemovableObjects,
       'wholeSpace' => $this->getSymbolByQuantity($usedSpace + $freeSpace),
       'usedSpace' => $this->getSymbolByQuantity($usedSpaceRaw),

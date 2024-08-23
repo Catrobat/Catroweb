@@ -32,7 +32,7 @@ class SendMailToUserController extends CRUDController
   #[\Override]
   public function listAction(Request $request): Response
   {
-    return $this->renderWithExtraParams('Admin/Tools/send_mail_to_user.html.twig');
+    return $this->renderWithExtraParams('Admin/UserCommunication/send_mail_to_user.html.twig');
   }
 
   public function sendAction(Request $request): Response
@@ -153,7 +153,7 @@ class SendMailToUserController extends CRUDController
     $text = str_replace(PHP_EOL, ' ', $messageText);
     $htmlText = wordwrap($text, 60, "<br>\n");
 
-    return $this->render('Admin/Tools/Email/new_simple_message.html.twig', [
+    return $this->render('Admin/UserCommunication/SendMail/simple_message.html.twig', [
       'message' => $htmlText,
       'subject' => $subject,
       'title' => $title,
