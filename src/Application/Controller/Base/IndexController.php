@@ -29,9 +29,9 @@ class IndexController extends AbstractController
     $flavor = $request->attributes->get('flavor');
     /** @var User|null $user */
     $user = $this->getUser();
-    $maintenanceInformation = $this->sendMaintenanceInformation($request);
+    $maintenanceInformation = $this->renderMaintenanceInformation($request);
 
-    return $this->render('Index/index.html.twig', [
+    return $this->render('Index/IndexPage.html.twig', [
       'featured' => $this->getFeaturedSliderData($flavor),
       'is_first_oauth_login' => null !== $user && $user->isOauthUser() && !$user->isOauthPasswordCreated(),
       'maintenanceInformation' => $maintenanceInformation,
@@ -69,7 +69,7 @@ class IndexController extends AbstractController
     return $featuredData;
   }
 
-  public function sendMaintenanceInformation(Request $request): array
+  public function renderMaintenanceInformation(Request $request): array
   {
     $maintenanceInformationRepository = $this->entityManager->getRepository(MaintenanceInformation::class);
     $maintenanceInformation = $maintenanceInformationRepository->findAll();
@@ -85,7 +85,7 @@ class IndexController extends AbstractController
           'featureName' => $info->getInternalTitle(),
           'id' => $info->getId(),
         ];
-        $maintenanceInformationMessages[] = $this->renderView('/components/maintenaceinformation.html.twig', $parameters);
+        $maintenanceInformationMessages[] = $this->renderView('Index/MaintenanceInformation.html.twig', $parameters);
       }
     }
 

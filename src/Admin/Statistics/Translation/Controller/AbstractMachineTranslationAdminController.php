@@ -79,7 +79,7 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
     ;
     $provider_breakdown = $qb->getQuery()->getResult();
 
-    return $this->renderWithExtraParams('Admin/Statistics/machine_translation.html.twig', [
+    return $this->render('Admin/Statistics/MachineTranslation.html.twig', [
       'action' => 'list',
       'trimUrl' => $this->admin->generateUrl('trim'),
       'providerBreakdown' => $provider_breakdown,

@@ -47,7 +47,7 @@ class ProfileController extends AbstractController
       }
 
       $project_count = $this->project_manager->countUserProjects($user->getId());
-      $view = 'UserManagement/Profile/myProfile.html.twig';
+      $view = 'User/Profile/MyProfilePage.html.twig';
     } else {
       /** @var User|null $user */
       $user = $this->user_manager->find($id);
@@ -56,7 +56,7 @@ class ProfileController extends AbstractController
       }
 
       $project_count = $this->project_manager->countPublicUserProjects($id);
-      $view = 'UserManagement/Profile/profile.html.twig';
+      $view = 'User/Profile/ProfilePage.html.twig';
     }
 
     return $this->render($view, [

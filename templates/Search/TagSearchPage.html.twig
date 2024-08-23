@@ -1,0 +1,28 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('legacy_search_page')  }}
+{% endblock %}
+
+{% block body %}
+
+  <div id="search-results">
+    <h1>{{ "search.results"|trans({}, "catroweb") }}</h1>
+    <div id="search-results-text">
+      {{ "search.resultcount"|trans({'%count%': '<span></span>'}, "catroweb")|raw }}
+    </div>
+    {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'search-progressbar'} only %}
+    <div class="projects"></div>
+  </div>
+
+  <div class="js-search"
+       data-result-container="#search-results"
+       data-path-search="{{ path('api_search_tag') }}"
+       data-query="{{ q }}"
+  ></div>
+
+{% endblock %}
+
+{% block javascript %}
+  {{ encore_entry_script_tags('legacy_search_page')  }}
+{% endblock %}

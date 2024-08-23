@@ -155,7 +155,7 @@ class ExampleProjectAdmin extends AbstractAdmin
       ->addIdentifier('id')
       ->add('Example Image', null, [
         'accessor' => fn ($subject): string => $this->getExampleImageUrl($subject),
-        'template' => 'Admin/Projects/example_image.html.twig',
+        'template' => 'Admin/Projects/ExampleImage.html.twig',
       ])
       ->add('program', EntityType::class, ['class' => Program::class, 'editable' => false])
       ->add('flavor', 'string')

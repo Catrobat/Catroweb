@@ -1,0 +1,97 @@
+{% extends "Layout/Base.html.twig" %}
+
+{% block head %}
+  {{ encore_entry_link_tags('login_page') }}
+{% endblock %}
+
+{% block header %}{% endblock header %}
+
+{% block body %}
+
+  <div class="content-card">
+
+    <div class="row justify-content-center">
+      <form id="login-form" class="login-container mb-4 form-horizontal" role="form">
+
+        <h1>{{ "login.login"|trans({}, "catroweb") }}</h1>
+
+        <!-- Error Message -->
+        <div id="login-alert" class="alert alert-danger col-sm-12">
+          {{ "login.passOrUser"|trans({}, "catroweb") }}
+        </div>
+        {% if showResetError|default(false) %}
+          <div class="alert alert-danger">
+            {{ "login.alreadyReset"|trans({}, "catroweb") }}
+          </div>
+        {% elseif showResetSuccess|default(false) %}
+          <div class="alert alert-success">
+            {{ "login.recoverPassSend"|trans({}, "catroweb") }}
+          </div>
+        {% endif %}
+
+        {% include 'Components/TextField.html.twig' with {
+          'text_field':
+          {
+            'id': 'username',
+            'label': '' ~ 'login.username'|trans({}, 'catroweb'),
+            'name': '_username',
+            'leading_icon': 'person',
+            'tabindex': 1
+          }
+        } %}
+
+        {% include 'Components/TextField.html.twig' with {
+          'text_field':
+          {
+            'id': 'password',
+            'label': '' ~ 'password'|trans({}, 'catroweb'),
+            'name': '_password',
+            'type': 'password',
+            'trailing_icon': 'visibility',
+            'leading_icon': 'lock',
+            'tabindex': 2
+          }
+        } %}
+
+        <div class="mb-3" style="width: 100%; text-align: right;">
+          <a class="col-12 login-text--secondary" id="pw-request"
+             href="{{ path("app_forgot_password_request") }}">
+            {{ "login.button.forgetPassword"|trans({}, "catroweb") }}
+          </a>
+        </div>
+
+        <div>
+          {% if (app.session.get("catroweb_login_redirect") is not empty) %}
+            <input id="target-path" type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}"/>
+            {{ app.session.set("catroweb_login_referer", app.session.get("catroweb_login_redirect")) }}
+            {{ app.session.set("catroweb_login_redirect", "") }}
+          {% elseif ("/login" in app.request.headers.get('referer')) and app.session.has("catroweb_login_referer") %}
+              <input id="target-path" type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer") }}#login"/>
+          {% elseif ("/login" in app.request.headers.get('referer')) %}
+              <input id="target-path" type="hidden" name="_target_path" value="{{ path("index") }}#login"/>
+          {% elseif (app.request.headers.get('referer') is not empty) %}
+              <input id="target-path" type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login"/>
+              {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
+          {% else %}
+            <input type="hidden" name="_target_path" value="index"/>
+          {% endif %}
+
+          <button id="_submit" value="Login" class="btn btn-primary"
+                  name="_submit">{{ "login.button.loginNow"|trans({}, "catroweb") }}
+          </button>
+
+          <a href="{{ path('register') }}" class="ms-2 btn btn-secondary">{{ "login.button.createAccount"|trans({}, "catroweb") }}</a>
+        </div>
+
+      </form>
+    </div>
+
+    {% include 'Security/OauthRegistration.html.twig' %}
+
+  </div>
+
+{% endblock body %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('login_page') }}
+{% endblock %}

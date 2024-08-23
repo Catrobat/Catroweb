@@ -1,0 +1,54 @@
+
+<div class="maintenance">
+    <div class="maintenance-content" id="viewID_{{ id }}">
+        <div class="maintenance-text">
+            <div class="maintenance-icon">
+                <i class="material-icons md-48">{{ icon }}</i>
+            </div>
+            {% set translationParams = {} %}
+            {% if maintenanceStart is not null %}
+                {% set translationParams = translationParams|merge({
+                    'maintenanceStart': '<span class="maintenanceStart-start-date bold-text">' ~ maintenanceStart.format('Y-m-d') ~ '</span>'
+                }) %}
+            {% endif %}
+            {% if maintenanceEnd is not null %}
+                {% set translationParams = translationParams|merge({
+                    'maintenanceEnd': '<span class="maintenanceStart-end-date bold-text">' ~ maintenanceEnd.format('Y-m-d') ~ '</span>'
+                }) %}
+
+            {% endif %}
+            {% if featureName is defined %}
+                {% set translationParams = translationParams|merge({
+                    'featureName': '<span class="maintenance-feature-name bold-text">' ~ featureName ~ '</span>'
+                }) %}
+            {% endif %}
+            <span>
+                {{ (code)|trans(translationParams, "catroweb")|raw }}
+            </span>
+            {% if additionalInfo is not null %}
+            <div class="expand-button" data-id="{{ code }}">
+                <i class="material-icons">arrow_drop_down</i>
+            </div>
+            {% endif %}
+        </div>
+        {% if additionalInfo is not null %}
+            <div class="additional-info-section" id="additional-info-{{ code }}">
+             <span>
+                      {% set translationParams = translationParams|merge({
+                          'additionalInfo': '<span class="maintenance-additionalinfo-text  bold-text">' ~ additionalInfo ~ '</span>'
+                      }) %}
+                {{ 'maintenanceinformations.maintenance_information.additional_info'|trans(translationParams, "catroweb")|raw}}
+             </span>
+            </div>
+        {% endif %}
+    </div>
+    <button class="close-button"
+            data-url="{{ path('close_maintenance_view',{'viewId':id })}}"
+
+            data-maintenance-id= {{id}}>
+        <i class="material-icons md-48">close</i>
+    </button>
+
+</div>
+
+

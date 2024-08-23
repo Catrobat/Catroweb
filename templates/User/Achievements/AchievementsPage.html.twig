@@ -1,0 +1,92 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block page_title %}{{ "achievements.overview.header"|trans({}, "catroweb") }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('user_achievements_page') }}
+{% endblock %}
+
+
+{% block body %}
+
+  {% if most_recent_achievement != null %}
+    {% include 'User/Achievements/MostRecent.html.twig' with { 'most_most_recent_achievement': most_recent_achievement } %}
+  {% endif %}
+
+  {% include 'Components/TabBar.html.twig' with {
+    'tabs': [
+      {
+        'id': 'unlocked-achievements-tab',
+        'title': '' ~ 'achievements.overview.tab_unlocked.title'|trans({}, 'catroweb'),
+        'controls': 'unlocked-achievements'
+      },
+      {
+        'id': 'locked-achievements-tab',
+        'title': '' ~ 'achievements.overview.tab_locked.title'|trans({}, 'catroweb'),
+        'controls': 'locked-achievements'
+      }
+    ]
+  }%}
+
+  <div class="tab-content mt-4">
+
+    <div id="unlocked-achievements" class="achievement__wrapper tab-pane show active" role="tabpanel">
+      <p id="no-unlocked-achievements" class="{{ achievements_unlocked is empty ? 'd-block' : 'd-none' }}">
+        {{ "achievements.overview.tab_unlocked.empty"|trans({}, "catroweb") }}
+      </p>
+      {% for achievement in achievements_unlocked %}
+        <div class="achievement">
+          <div class="achievement__badge">
+            <svg class="achievement__badge__coin achievement__badge__coin--tab"
+                 data-src="{{ asset(achievement.getBadgeSvgPath()) }}"
+                 data-unique-ids="disabled"/>
+            <svg class="achievement__badge__banner achievement__badge__banner--tab"
+                 style="color: {{ achievement.getBannerColor() }}"
+                 data-src="{{ asset(achievement.getBannerSvgPath()) }}"
+                 data-unique-ids="disabled"/>
+            <div class="achievement__badge__banner__text achievement__badge__banner__text--tab">
+              {{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}
+            </div>
+          </div>
+          <p class="achievement__badge__text">{{ achievement.getDescriptionLtmCode()|trans({}, "catroweb") }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div id="locked-achievements" class="achievement__wrapper tab-pane fade" role="tabpanel">
+      <p id="no-locked-achievements" class="{{ achievements_locked is empty ? 'd-block' : 'd-none' }}">
+        {{ "achievements.overview.tab_locked.empty"|trans({}, "catroweb") }}
+      </p>
+      {% for achievement in achievements_locked %}
+        <div class="achievement">
+          <div class="achievement__badge">
+            <svg class="achievement__badge__coin achievement__badge__coin--tab"
+                 data-src="{{ asset(achievement.getBadgeLockedSvgPath()) }}"
+                 data-unique-ids="disabled"/>
+          </div>
+          <p class="achievement__badge__text">{{ achievement.getDescriptionLtmCode()|trans({}, "catroweb") }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+{% endblock %}
+
+
+{% block javascript %}
+  <script>
+    let showNewAchievementAnimation = false;
+    {% if most_recent_achievement != null and most_recent_achievement_seen_at == null %}
+      showNewAchievementAnimation = true;
+      const assetPathNewAchievementPopupBackgroundSVG = "{{ asset("/images/achievements/new_achievement_popup.svg") }}";
+      const assetPathBadgeSVG = "{{ asset(most_recent_achievement.getBadgeSvgPath()) }}";
+      const assetPathBannerSVG = "{{ asset(most_recent_achievement.getBannerSvgPath()) }}";
+      const bannerColor = "{{ most_recent_achievement.getBannerColor() }}";
+      const bannerText = "{{ most_recent_achievement.getTitleLtmCode()|trans({}, "catroweb") }}";
+      const ltmAchievementsPopupNewTitle = '{{ "achievements.popup.new.title"|trans({}, "catroweb") }}';
+      const ltmAchievementsPopupNewSubtitle = '{{ "achievements.popup.new.subtitle"|trans({}, "catroweb") }}';
+      const ltmAchievementsPopupNewConfirm = '{{ "achievements.popup.new.confirm"|trans({}, "catroweb") }}';
+      const readUnseenAchievementsUrl = '{{ path('achievements_read') }}';
+    {% endif %}
+  </script>
+  {{ encore_entry_script_tags('user_achievements_page') }}
+{% endblock %}

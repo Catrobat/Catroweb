@@ -13,7 +13,7 @@ class FollowNotification extends CatroNotification
   /**
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private string $twig_template = '/Notifications/NotificationTypes/follow_notification.html.twig';
+  private string $twig_template = '/User/Notification/Type/Follow.html.twig';
 
   /**
    * FollowNotification constructor.

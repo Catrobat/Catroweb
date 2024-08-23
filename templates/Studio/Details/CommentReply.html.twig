@@ -1,0 +1,29 @@
+<!-- Modal -->
+<div class="modal fade modal-full" id="comment-reply-modal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog full-modal-dialog" role="document">
+
+        <div class="modal-content full-modal-content">
+
+            <div class="modal-header modal-header-full mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    <button data-bs-dismiss="modal"
+                            class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                            aria-label="Back to top bar">
+                        arrow_back
+                    </button>
+                    <span class="mdc-top-app-bar__title">{{ 'community'|trans({}, 'catroweb') }}</span>
+                </section>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+                    {% include 'Layout/Header/OptionButton.html.twig' %}
+                    {% include 'Layout/Header/StudioOptions.html.twig' %}
+                </section>
+            </div>
+            <input id="cmtID" type="hidden">
+            <div id="comment-replies-body">
+
+            </div>
+        </div>
+    </div>
+</div>

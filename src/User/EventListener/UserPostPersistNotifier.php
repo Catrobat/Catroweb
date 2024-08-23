@@ -43,7 +43,7 @@ class UserPostPersistNotifier
     $this->mailer->send(
       $user->getEmail(),
       $this->translator->trans('user.verification.email', [], 'catroweb'),
-      'security/registration/confirmation_email.html.twig',
+      'Security/Registration/ConfirmationEmail.html.twig',
       [
         'signedUrl' => $signatureComponents->getSignedUrl(),
         'user' => $user,

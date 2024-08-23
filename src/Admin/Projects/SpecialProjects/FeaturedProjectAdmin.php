@@ -184,7 +184,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
       ])
       ->add('Featured Image', null, [
         'accessor' => fn ($subject): string => $this->getFeaturedImageUrl($subject),
-        'template' => 'Admin/Projects/featured_image.html.twig',
+        'template' => 'Admin/Projects/FeaturedImage.html.twig',
       ])
       ->add('program', EntityType::class, [
         'class' => Program::class,

@@ -1,0 +1,67 @@
+{#
+  Wrapper template for a simple usage of material fext fields
+
+  ===== Dependencies =====
+
+    - Components/text_field.js
+
+  ===== Example usage =====
+
+    {% include 'Components/TextField.html.twig' with {
+    'text_field':
+      {
+        'id': 'id-1',
+        'label': 'Mail',
+        'value': 'oldmail@mail.at',
+        'name': 'name-1',
+        'leading_icon': 'blur_circular',
+        'trailing_icon': 'close',
+        'tab_index': '0',
+        'type': 'text',
+        'required: true,
+        'input': '',
+      }
+  }%}
+#}
+<label id="{{ text_field.id }}"
+       class="mdc-text-field mdc-text-field--filled
+             {#  Leading Icon (Optional) #}
+             {% if text_field.leading_icon|default() %}mdc-text-field--with-leading-icon{% endif %}
+             {#  Trailing Icon (Optional) #}
+             {% if text_field.trailing_icon|default() %}mdc-text-field--with-trailing-icon{% endif %}">
+
+  <span class="mdc-text-field__ripple"></span>
+
+  <span class="mdc-floating-label" id="{{ text_field.id }}__label">{{ text_field.label }}</span>
+
+  {#  Leading Icon (Optional) #}
+  {% if text_field.leading_icon|default() %}
+    <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading"
+          role="button">
+      {{ text_field.leading_icon }}
+    </span>
+  {% endif %}
+
+  <input id="{{ text_field.input|default(text_field.id~'__input') }}"
+         class="mdc-text-field__input"
+         name="{{ text_field.name }}"
+         type="{{ text_field.type|default('text') }}"
+         aria-labelledby="{{ text_field.id }}__label"
+         tabindex="{{ text_field.tab_index|default('0') }}"
+         {% if text_field.type|default('') %}autocomplete="{{ text_field.type }}"{% endif %}
+         {% if text_field.required ?? true %}required="required"{% endif %}
+         value="{{ text_field.value|default() }}">
+
+  {#  Trailing Icon (Optional) #}
+  {% if text_field.trailing_icon|default() %}
+    <span class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing
+                {% if text_field.trailing_icon|default() == 'visibility' %}password-toggle{% endif %}"
+          role="button" style="pointer-events: all;"
+    >{{ text_field.trailing_icon }}</span>
+  {% endif %}
+  <span class="mdc-line-ripple"></span>
+</label>
+
+<div class="mdc-text-field-helper-line mb-2">
+  <div class="mdc-text-field-helper-text" id="{{ text_field.id }}__helper" aria-hidden="true"></div>
+</div>

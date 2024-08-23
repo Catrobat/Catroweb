@@ -34,7 +34,7 @@ class CodeViewController extends AbstractController
 
     $this->parameter_bag->get('catrobat.file.extract.path');
 
-    return $this->render('Project/code_view.html.twig', [
+    return $this->render('Project/CodeViewPage.html.twig', [
       'id' => $id,
       'version' => $project->getLanguageVersion(),
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
@@ -59,7 +59,7 @@ class CodeViewController extends AbstractController
       $web_path = null;
     }
 
-    return $this->render('Project/old_code_view.html.twig', [
+    return $this->render('Project/LegacyCodeViewPage.html.twig', [
       'parsed_project' => $parsed_project,
       'path' => $web_path,
       'visible' => $visible,

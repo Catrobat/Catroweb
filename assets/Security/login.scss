@@ -1,0 +1,50 @@
+@import '../Layout/Variables';
+
+.content-card {
+  .login-container {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  @media screen and (width >= 555px) {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0.1875rem 0.375rem 0.9375rem 0;
+  }
+}
+
+.social-login-btn {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0.2em #000;
+}
+
+.social-login-btn--facebook {
+  background-color: #0572e6;
+}
+
+.social-login-btn__img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.25rem;
+  transform: translate(-50%, -50%);
+}
+
+.social-login-btn__img--facebook {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.5rem;
+  transform: translate(-50%, -50%);
+}
+
+#login-alert {
+  display: none;
+}

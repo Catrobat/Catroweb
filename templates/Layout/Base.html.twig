@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="{{ app.request.locale | slice(0, 2) }}">
+<head>
+  <meta http-equiv="Content-Type" content="text/html"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name='viewport' content='width=device-width, user-scalable=no'/>
+
+  {% if gtm_container_id %}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_container_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  {% endif %}
+
+  <title>
+    {% block title %}{{ "title"|trans({}, "catroweb") }}{% endblock %}
+  </title>
+
+  <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
+
+  {% block stylesheets %}
+    {{ encore_entry_link_tags('base_layout') }}
+    {{ encore_entry_link_tags(themeAssets()) }}
+  {% endblock stylesheets %}
+
+  <script>const globalConfiguration = {
+      messages: {
+        errorTitle: '{{ 'error'|trans({}, 'catroweb')|escape('js')|raw }}',
+        successTitle: '{{ 'success.text'|trans({}, 'catroweb')|escape('js')|raw }}',
+        okayButtonText: '{{ 'ok'|trans({}, 'catroweb')|escape('js')|raw }}',
+        authenticationErrorText: '{{ 'errors.authentication.webview'|trans({}, 'catroweb')|replace({'\r': '', '\n': ' '})|trim|escape('js')|raw }}',
+        unspecifiedErrorText: '{{ 'errors.unspecified'|trans({}, 'catroweb')|escape('js')|raw }}',
+      },
+      environment: '{{ app.environment }}',
+    }</script>
+  {{ encore_entry_script_tags('base_layout') }}
+  {% block javascript %}{% endblock %}
+
+  {% block head %}{% endblock %}
+</head>
+
+<body class="body-with-sidebar">
+
+{% include 'Layout/Header.html.twig' with
+  {
+    page_title: block('page_title') ?? '',
+    back_path: block('back_path') ?? '',
+    no_search: block('no_search') ?? ''
+  } %}
+
+{% include 'Layout/Snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}
+
+{% include 'Layout/Sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
+
+{% include('Layout/LanguageMenu.html.twig') %}
+
+<div id="main_container_content" class="body-content">
+  <div class="page-content{% if app.request.attributes.get('_route') != 'studio_details' %} container{% endif %}">
+    {% block body %}{% endblock %}
+  </div>
+</div>
+
+{% include 'Layout/Footer.html.twig' %}
+
+<div id="bugsnag" data-api-key="{{ bugsnag_api_key }}" style="display: none;"></div>
+<div id="gtm-container-id" data-gtm-container-id="{{ gtm_container_id }}" style="display: none;"></div>
+<div id="app-version" data-app-version="{{ app_version }}" style="display: none;">{{ app_version }}</div>
+<div id="app-language" data-app-language="{{ app.request.locale }}"></div>
+<div class="js-app-env" data-app-env="'{{ app_env }}"></div>
+<div class="js-user-state" data-is-user-logged-in="{% if app.user != null %}true{% else %}false{% endif %}"></div>
+{% for snackbarMsg in app.flashes('snackbar') %}
+  <div class="js-flash-snackbar" data-msg="{{ snackbarMsg }}"></div>
+{% endfor %}
+<div id="js-api-routing"
+     data-base-url="{{ app.request.baseUrl }}"
+     data-index="{{ path("index") }}"
+     data-authentication="{{ path("open_api_server_authentication_authenticationpost") }}"
+     data-authentication-refresh="{{ path("open_api_server_authentication_authenticationrefreshpost") }}"
+></div>
+</body>
+</html>
