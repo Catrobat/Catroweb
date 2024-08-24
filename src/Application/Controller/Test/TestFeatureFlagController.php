@@ -18,6 +18,6 @@ class TestFeatureFlagController extends AbstractController
   #[Route(path: '/featureflag/test', name: 'test_flag', methods: ['GET'])]
   public function testFlag(): Response
   {
-    return $this->render('Test/test_feature_flag.html.twig', ['enabled' => $this->manager->isEnabled('Test-Flag')]);
+    return $this->render('Test/FeatureFlagPage.html.twig', ['enabled' => $this->manager->isEnabled('Test-Flag')]);
   }
 }

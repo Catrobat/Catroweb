@@ -1,0 +1,75 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block page_title %}{{ project.name }}{% endblock %}
+{% block back_path %}{{ path('program', { 'id' : project.id }) ~ "#comments-wrapper" }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('project_comments_page') }}
+  <meta property="og:type" content="website"/>
+{% endblock %}
+
+{% block body %}
+
+  <div id="project-comments" class="row mt-3 mb-3">
+    {% include 'Project/Comment/Wrapper.html.twig' with {
+      'comments': replies,
+      'isAdmin': isAdmin,
+    } %}
+
+    <hr style="color: transparent">
+    <div id="user-comment-wrapper" class="col-12 col-sm-8 col-md-12 col-lg-12 center" style="display: none">
+      <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label">
+      <span class="mdc-notched-outline">
+        <span class="mdc-notched-outline__leading"></span>
+        <span class="mdc-notched-outline__trailing"></span>
+      </span>
+        <span class="mdc-text-field__resizer">
+        <textarea class="mdc-text-field__input" cols="75" id="comment-message" rows="5" aria-label="Label"></textarea>
+      </span>
+      </label>
+      <hr style="color: transparent">
+      <button id="comment-post-button" class="btn btn-primary">
+        {{ 'project.send'|trans({}, 'catroweb') }}
+      </button>
+    </div>
+
+    <hr style="color: transparent">
+
+    <div class="center col-12">
+      <div id="show-more-comments-button" class="button-show-more" data-comments-class-selector=".single-reply">
+        <a data-bs-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
+          <i class="material-icons catro-round-icon-button">expand_more</i>
+        </a>
+      </div>
+      <div id="show-less-comments-button" class="button-show-less" data-comments-class-selector=".single-reply">
+        <a data-bs-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
+          <i class="material-icons catro-round-icon-button">expand_less</i>
+        </a>
+      </div>
+    </div>
+    <hr style="color: transparent">
+
+    {% if not comment.is_deleted %}
+      <button class="mdc-fab add-reply-button reply-button--fab" aria-label="Favorite" style="display: inline-block;">
+        <div class="mdc-fab__ripple"></div>
+        <span class="mdc-fab__icon material-icons">reply</span>
+      </button>
+    {% endif %}
+  </div>
+  <div class="js-project-parentComment"
+       data-parent-comment-id="{{ comment.id }}">
+  </div>
+
+  {% include 'Project/Comment/JsData.html.twig' with {
+    'comment': comment,
+    'project': project,
+    'comments': replies
+  } %}
+
+  <div class="session-vars-names" data-visible-comments-session-var="visibleReplies"></div>
+  <div class="comments-class-selector" data-comments-class-selector=".single-reply"></div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('project_comments_page') }}
+{% endblock %}

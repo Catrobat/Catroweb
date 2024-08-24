@@ -1,0 +1,69 @@
+{#
+
+Wrapper template for a simple usage of fullscreen bootstrap modal
+
+===== Dependencies =====
+
+  - Components/FullscreenListModal.scss
+
+
+===== Example usage =====
+
+{% extends 'Components/FullscreenModal.html.twig' %}
+{% set modal =
+  {
+    'id': 'demo-modal',
+    'title': '' ~ 'demo'|trans({}, 'catroweb'),
+    'left_action':
+    {
+      'id': 'demo-back_action',
+      'icon': 'arrow_back',
+      'label': '' ~ 'cancel'|trans({}, 'catroweb'),
+      'dismiss': true
+    },
+    'right_action':
+    {
+      'id': 'profile_settings-save_action',
+      'icon': 'done',
+      'label': '' ~ 'myprofile.done'|trans({}, 'catroweb'),
+      'dismiss': false
+    }
+  }
+%}
+{% block content %}
+    ...
+{% endblock %}
+#}
+
+<div class="modal fade modal-full" id="{{ modal.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog full-modal-dialog" role="document">
+        <div class="modal-content full-modal-content">
+            <div class="modal-header modal-header-full mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    {% if modal.left_action|default() %}
+                    <button id="{{ modal.left_action.id|default(modal.id~'-left_action') }}"
+                            {% if modal.left_action.dismiss ?? false %}data-bs-dismiss="modal" {% endif %}
+                            class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                            aria-label="{{ modal.left_action.label|default('Go back') }}">
+                        {{ modal.left_action.icon|default('arrow_back') }}
+                    </button>
+                    {% endif %}
+                    <span class="mdc-top-app-bar__title">{{ modal.title }}</span>
+                </section>
+                {% if modal.right_action|default() %}
+                    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+                        <button id="{{ modal.right_action.id|default(modal.id~'-right_action') }}"
+                                class="material-icons mdc-top-app-bar__action-item mdc-icon-button mdc-ripple-upgraded--unbounded mdc-ripple-upgraded"
+                                aria-label="{{ modal.right_action.label|default('Done') }}"
+                                style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">
+                            {{ modal.right_action.icon|default('done') }}
+                        </button>
+                    </section>
+                {% endif %}
+            </div>
+            <div class="container">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>

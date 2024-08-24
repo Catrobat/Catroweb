@@ -52,7 +52,7 @@ class PasswordResetRequestedSubscriber implements EventSubscriberInterface
       $this->mailer->send(
         $email,
         $this->__('passwordRecovery.subject', [], $locale),
-        'security/reset_password/email.html.twig',
+        'Security/ResetPassword/ResetPasswordEmail.html.twig',
         ['resetToken' => $this->reset_password_helper->generateResetToken($user)]
       );
     } catch (ResetPasswordExceptionInterface $resetPasswordException) {

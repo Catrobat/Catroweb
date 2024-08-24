@@ -34,7 +34,7 @@ class UserDataReportController extends CRUDController
     $user_comments = $this->getUserComments($id);
     $user_projects = $this->getUserProjects($id);
 
-    return $this->renderWithExtraParams('Admin/CRUD/list__action_show_user_data.html.twig',
+    return $this->render('Admin/CRUD/list__action_show_user_data.html.twig',
       [
         'user' => $user,
         'notifications' => $notifications,

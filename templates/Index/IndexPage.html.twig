@@ -1,0 +1,111 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('index_page') }}
+{% endblock %}
+
+{% block body %}
+
+
+  <div id="maintenance-container">
+    {% for maintenanceMessage in maintenanceInformation %}
+        {{ maintenanceMessage | raw }}
+    {% endfor %}
+  </div>
+
+  {% if not app.user and not isWebview() %}
+    {{ include('Index/WelcomeSection.html.twig') }}
+  {% endif %}
+
+  {% if featured|length > 0 %}
+    {% if not app.user and not isWebview() %}
+      <h2>{{ "project.featured"|trans({}, "catroweb") }}</h2>
+    {% endif %}
+    <div id="featured-slider" class="featured-slider">
+      {{ include('Components/Carousel.html.twig',
+        { 'carousel' :
+          {
+            'id' : 'feature-slider',
+            'slideCount' : featured|length,
+            'slides' : featured,
+            'classes' : '',
+            'controls' : true,
+            'width': '1024',
+            'height': '400',
+            'alt': ''
+          }
+        }
+      ) }}
+    </div>
+  {% endif %}
+
+  <div id="home-projects">
+    {# array values: [api project_type, translation, property to show] #}
+    {# disabled due to performance issues: ['recent', 'newest', 'uploaded'],#}
+    {% for category in [
+      ['example', 'example', 'author'],
+      ['most_downloaded', 'most.downloaded', 'downloads'],
+      ['trending', 'trending', 'downloads'],
+      ['random', 'random', 'uploaded'],
+      ['scratch', 'scratchremixes', 'views'],
+      ['popular', 'popular', 'author'],
+    ] %}
+      <div id="home-projects__{{ category[0] }}" data-category="{{ category[0] }}" data-property="{{ category[2] }}"
+           data-theme="{{ theme() }}" data-flavor="{{ flavor() }}" data-base-url="{{ app.request.getBaseURL() }}"
+           class="project-list loading horizontal">
+        <div class="container">
+          <div class="project-list__title">
+            <h2>{{ ("project." ~ category[1]) | trans({}, "catroweb") }}</h2>
+            <div class="project-list__title__btn-toggle btn-view-open">
+              <div class="project-list__title__btn-toggle__text">{{ "show-more" | trans({}, "catroweb") }}</div>
+              <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
+            </div>
+          </div>
+          <div class="lazyload project-list__wrapper">
+            <div class="lazyload projects-container">
+
+              {% for i in range(0, 10) %} {# Fill with dummy data until loaded to prevent cls #}
+                <div class="project-list__project">
+                  <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20360'%3E%3Crect%20width='360'%20height='360'%20fill='%23E8E8E8'%20/%3E%3C/svg%3E"
+                       class="project-list__project__image">
+                  <span class="project-list__project__name"></span>
+                  <div class="project-list__project__property project-list__project__property-uploaded lazyloaded">
+                    <i class="material-icons"></i>
+                    <span class="project-list__project__property__value"></span>
+                  </div>
+                  <div class="project-list__project__property project-list__project__property__not-for-kids lazyloaded">
+                    <img class="project-list__not-for-kids-logo" style="display: none">
+                    <span class="project-list__project__property__value"></span>
+                  </div>
+                </div>
+              {% endfor %}
+
+            </div>
+            <div class="lazyload project-list__chevrons">
+              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">
+                chevron_left
+              </div>
+              <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <i class="material-icons d-none" id="project-opening-spinner" style="margin: auto;">
+    {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'project-opening-spinner' ~ suffix|default(), 'small': 'true'} %}
+  </i>
+
+  <div class="js-trans-ok" data-trans-ok="'{{ "ok"|trans({}, "catroweb") }}"></div>
+
+  <div class="js-oauth-greeting"
+       data-is-first-oauth-login="{{ is_first_oauth_login }}"
+       data-trans-title="{{ 'oauthPopUpTitle' | trans({}, 'catroweb') }}"
+       data-trans-info="{{ 'oauthInfo' | trans({}, 'catroweb') }}"
+       data-trans-ok="{{ 'ok' | trans({}, 'catroweb') }}"
+  ></div>
+{% endblock %}
+
+{% block javascript %}
+  {{ encore_entry_script_tags('index_page') }}
+{% endblock %}

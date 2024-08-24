@@ -147,7 +147,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
     $list
       ->addIdentifier('id')
       ->add('name')
-      ->add('file', 'string', ['template' => 'Admin/MediaPackage/file.html.twig'])
+      ->add('file', 'string', ['template' => 'Admin/MediaPackage/File.html.twig'])
       ->add('category', EntityType::class, ['class' => MediaPackageCategory::class])
       ->add('author', null, ['editable' => true])
       ->add('flavors', null, ['multiple' => true])

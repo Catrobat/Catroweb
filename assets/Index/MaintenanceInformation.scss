@@ -1,0 +1,90 @@
+:root {
+  --maintenance-color1: #333;
+  --maintenance-color2: #0097a7;
+  --maintenance-font-family1: 'Material Icons', sans-serif;
+  --maintenance-background-color1: #f0f0f0;
+}
+
+/* Style for the additional information section (initially hidden) */
+.maintenance {
+  border: 1px solid var(--maintenance-color1);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: var(--maintenance-background-color1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  transition: box-shadow 0.9s;
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+  }
+}
+
+.maintenance-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.maintenance-text {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.additional-info {
+  font-size: 14px;
+  color: var(--maintenance-color1);
+}
+
+.maintenance-icon {
+  font-size: 24px;
+  color: var(--maintenance-color2);
+  margin-right: 10px;
+}
+
+.material-icons {
+  font-family: var(--maintenance-font-family1), sans-serif;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  &:hover {
+    font-weight: bold;
+  }
+}
+
+.material-icons.md-48 {
+  font-size: 26px;
+  color: var(--maintenance-color2);
+}
+
+.expand-button {
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  top: 50%;
+  right: 10px;
+}
+
+.expanded {
+  transform: rotate(180deg);
+}
+
+.additional-info-section {
+  display: none;
+  background-color: var(--maintenance-background-color1);
+  margin-top: 10px;
+  padding: 10px;
+  transition: display 0.3s;
+}

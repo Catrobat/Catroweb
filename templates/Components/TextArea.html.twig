@@ -1,0 +1,49 @@
+{#
+  Wrapper template for a simple usage of material text-area fext fields
+  Note: Material text-areas currently do not support leading icons
+
+  ===== Dependencies =====
+
+    - Components/text_area.js
+
+  ===== Example usage =====
+
+    {% include 'Components/TextArea.html.twig' with {
+    'text_area':
+      {
+        'id': 'id-1',
+        'label': 'on / off',
+        'value': 'pre-filled value',
+        'name': 'name-1',
+        'leading_icon': 'icon',
+        'max_length': '1000',
+        'rows': '4',
+        'mb': 'mb-4'
+      }
+  }%}
+#}
+<label id="{{ text_area.id }}"
+       class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea {{ text_area.mb|default("mb-4") }}{% if text_area.max_length|default() %} mdc-text-field--with-internal-counter{% endif %}
+             {#  Leading Icon (Optional) #}
+             {% if text_area.leading_icon|default() %}mdc-text-field--with-leading-icon{% endif %}">
+  <span class="mdc-text-field__ripple"></span>
+  <span class="mdc-floating-label" id="{{ text_area.id }}__label">{{ text_area.label }}</span>
+
+  {#  Leading Icon (Optional) #}
+  {% if text_area.leading_icon|default() %}
+    <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading"
+          role="button">
+      {{ text_area.leading_icon }}
+    </span>
+  {% endif %}
+
+  <span class="mdc-text-field__resizer">
+    <textarea name="{{ text_area.name }}" class="mdc-text-field__input"
+              aria-labelledby="{{ text_area.id }}__label" rows="{{ text_area.rows|default('4') }}" cols="400"
+              {% if text_area.max_length|default() %}maxlength="{{ text_area.max_length }}"{% endif %}>{{ text_area.value|default() }}</textarea>
+    {% if text_area.max_length|default() %}
+      <span class="mdc-text-field-character-counter">0 / {{ text_area.max_length }}</span>
+    {% endif %}
+  </span>
+  <span class="mdc-line-ripple"></span>
+</label>

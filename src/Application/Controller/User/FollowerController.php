@@ -56,7 +56,7 @@ class FollowerController extends AbstractController
     $data_followers = $this->user_manager->getMappedUserData($followers);
     $data_following = $this->user_manager->getMappedUserData($following);
 
-    return $this->render('UserManagement/Followers/followers.html.twig', [
+    return $this->render('User/Followers/FollowersPage.html.twig', [
       'followers_list' => $data_followers,
       'following_list' => $data_following,
     ]);

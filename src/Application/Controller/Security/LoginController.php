@@ -13,6 +13,6 @@ class LoginController extends AbstractController
   #[Route(path: '/login', name: 'login', methods: ['GET'])]
   public function login(): Response
   {
-    return $this->render('security/login.html.twig');
+    return $this->render('Security/LoginPage.html.twig');
   }
 }

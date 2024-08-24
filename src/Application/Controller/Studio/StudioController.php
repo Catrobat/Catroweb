@@ -47,7 +47,7 @@ class StudioController extends AbstractController
       }
     }
 
-    return $this->render('Studio/studios_overview.html.twig', [
+    return $this->render('Studio/Studios.html.twig', [
       'studios' => $studios,
       'user_name' => is_null($user) ? '' : $user->getUserIdentifier(),
     ]);
@@ -62,7 +62,7 @@ class StudioController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
 
-    return $this->render('Studio/studio_new.html.twig', [
+    return $this->render('Studio/CreatePage.html.twig', [
       'user_name' => is_null($user) ? '' : $user->getUserIdentifier(),
     ]);
   }
@@ -95,7 +95,7 @@ class StudioController extends AbstractController
       }
     }
 
-    return $this->render('Studio/studio_details.html.twig', [
+    return $this->render('Studio/DetailsPage.html.twig', [
       'status_public' => $statusPublicStudio,
       'status_private' => $statusPrivateStudio,
       'studio' => $studio,
@@ -251,7 +251,7 @@ class StudioController extends AbstractController
       $projects_per_member[$member->getID()] = $this->studio_manager->countStudioUserProjects($member->getStudio(), $member->getUser());
     }
 
-    return $this->render('Studio/_studio_members_list.html.twig', [
+    return $this->render('Studio/members_list.html.twig', [
       'is_studio_admin' => $is_studio_admin,
       'members' => $members,
       'projects_per_member' => $projects_per_member,
@@ -343,7 +343,7 @@ class StudioController extends AbstractController
     $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
     $activities = $this->studio_manager->findAllStudioActivitiesCombined($studio);
 
-    return $this->render('Studio/_studio_activity_list.html.twig', [
+    return $this->render('Studio/ActivityListPage.html.twig', [
       'is_studio_admin' => $is_studio_admin,
       'activities' => $activities,
     ]);

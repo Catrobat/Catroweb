@@ -32,7 +32,7 @@ class SendMailToUserController extends CRUDController
   #[\Override]
   public function listAction(Request $request): Response
   {
-    return $this->renderWithExtraParams('Admin/UserCommunication/send_mail_to_user.html.twig');
+    return $this->render('Admin/UserCommunication/SendMail.html.twig');
   }
 
   public function sendAction(Request $request): Response
@@ -58,7 +58,7 @@ class SendMailToUserController extends CRUDController
     $this->mailer->send(
       $mailTo,
       $subject,
-      'Admin/Tools/Email/simple_message.html.twig',
+      'Admin/Tools/Email/SimpleMessage.html.twig',
       ['message' => $htmlText]
     );
 
@@ -94,7 +94,7 @@ class SendMailToUserController extends CRUDController
 
     $confirm = 'https:://example.url'; // TODO: CHANGE!
 
-    return $this->render('security/registration/new_confirmation_email.html.twig', [
+    return $this->render('Security/Registration/NewConfirmationEmail.html.twig', [
       'signedUrl' => $confirm,
       'deleteUrl' => $confirm,
       'user' => $user,
@@ -121,7 +121,7 @@ class SendMailToUserController extends CRUDController
 
     $confirm = 'this is the url'; // TODO: CHANGE!
 
-    return $this->render('security/reset_password/new_email.html.twig', [
+    return $this->render('Security/ResetPassword/NewResetPasswordEmail.html.twig', [
       'resetToken' => $resetToken,
       'user' => $user,
       'signedUrl' => $confirm,
@@ -153,7 +153,7 @@ class SendMailToUserController extends CRUDController
     $text = str_replace(PHP_EOL, ' ', $messageText);
     $htmlText = wordwrap($text, 60, "<br>\n");
 
-    return $this->render('Admin/UserCommunication/SendMail/simple_message.html.twig', [
+    return $this->render('Admin/UserCommunication/SendMail/SimpleMessage.html.twig', [
       'message' => $htmlText,
       'subject' => $subject,
       'title' => $title,

@@ -14,7 +14,7 @@ class RemixNotification extends CatroNotification
   /*
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private string $twig_template = '/Notifications/NotificationTypes/remix_notification.html.twig';
+  private string $twig_template = '/User/Notification/Type/Remix.html.twig';
 
   /**
    * RemixNotification constructor.

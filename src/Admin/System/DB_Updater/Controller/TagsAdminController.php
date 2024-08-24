@@ -27,7 +27,7 @@ class TagsAdminController extends CRUDController
   #[\Override]
   public function listAction(Request $request): Response
   {
-    return $this->renderWithExtraParams('Admin/SystemManagement/DbUpdater/tags.html.twig', [
+    return $this->render('Admin/SystemManagement/DbUpdater/Tags.html.twig', [
       'action' => 'update_tags',
       'updateTagsUrl' => $this->admin->generateUrl('update_tags'),
     ]);

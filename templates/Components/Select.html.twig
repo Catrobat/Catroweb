@@ -1,0 +1,72 @@
+{#
+Wrapper template for a simple usage of material selects
+
+===== Dependencies =====
+
+  - Components/Select.js
+
+===== Example usage =====
+
+    {% include 'Components/select.html.twig' with {
+      'select':
+      {
+        'id': 'country',
+        'label': '' ~ 'country'|trans({}, 'catroweb'),
+        'value': 'option2',
+        'name': 'name-1',
+        'leading_icon': 'map',
+        'options': {
+          'option1': 'Option 1',
+          'option2': 'Option 2',
+        }
+      }
+    } %}
+#}
+<div id="{{ select.id }}"
+     class="mdc-select mdc-select--filled
+             {#  Leading Icon (Optional) #}
+             {% if select.leading_icon|default() %}mdc-select--with-leading-icon{% endif %}"
+>
+  <div class="mdc-select__anchor"
+       role="button"
+       aria-haspopup="listbox"
+       aria-expanded="false"
+       aria-labelledby="{{ select.id~'-label' }} {{ select.id~'-selected-text' }}">
+    <span class="mdc-select__ripple"></span>
+    <span id="{{ select.id~'-label' }}" class="mdc-floating-label">{{ select.label }}</span>
+    {#  Leading Icon (Optional) #}
+    {% if select.leading_icon|default() %}
+    <span class="material-icons mdc-select__icon" tabindex="0" role="button">
+      {{ select.leading_icon }}
+    </span>
+    {% endif %}
+    <span class="mdc-select__selected-text-container">
+      <span id="{{ select.id~'-selected-text' }}" class="mdc-select__selected-text">{% if select.value|default() %}{{ select.options[select.value] }}{% endif %}</span>
+    </span>
+    <span class="mdc-select__dropdown-icon">
+      <svg class="mdc-select__dropdown-icon-graphic" viewBox="7 10 10 5" focusable="false">
+        <polygon class="mdc-select__dropdown-icon-inactive"
+                 stroke="none" fill-rule="evenodd" points="7 10 12 15 17 10"></polygon>
+        <polygon class="mdc-select__dropdown-icon-active"
+                 stroke="none" fill-rule="evenodd" points="7 15 12 10 17 15"></polygon>
+      </svg>
+    </span>
+    <span class="mdc-line-ripple"></span>
+  </div>
+
+  <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+    <ul class="mdc-deprecated-list" role="listbox" aria-label="{{ select.label~' listbox' }}">
+      <li class="mdc-deprecated-list-item mdc-deprecated-list-item--selected" aria-selected="true" data-value=""
+          role="option">
+        <span class="mdc-deprecated-list-item__ripple"></span>
+      </li>
+      {% for key, value in select.options %}
+        <li class="mdc-deprecated-list-item" aria-selected="{% if key == select.value %}true{% else %}false{% endif %}" data-value="{{ key }}" role="option">
+          <span class="mdc-deprecated-list-item__ripple"></span>
+          <span class="mdc-deprecated-list-item__text">{{ value }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<input type="hidden" name="{{ select.name }}" id="{{ select.id~'-native' }}" value="{{ select.value|default('') }}" />

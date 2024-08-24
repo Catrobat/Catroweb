@@ -36,7 +36,7 @@ class ResetPasswordController extends AbstractController
   #[Route(path: '', name: 'app_forgot_password_request')]
   public function request(): Response
   {
-    return $this->render('security/reset_password/request.html.twig', []);
+    return $this->render('Security/ResetPassword/RequestToResetPasswordPage.html.twig', []);
   }
 
   /**
@@ -51,7 +51,7 @@ class ResetPasswordController extends AbstractController
       $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
     }
 
-    return $this->render('security/reset_password/check_email.html.twig', [
+    return $this->render('Security/ResetPassword/CheckYourEmailsPage.html.twig', [
       'resetToken' => $resetToken,
       'throttleLimit' => $this->parameter_bag->get('reset_password.throttle_limit') / 3600,
     ]);
@@ -107,7 +107,7 @@ class ResetPasswordController extends AbstractController
       return $this->redirectToRoute('index');
     }
 
-    return $this->render('security/reset_password/reset.html.twig', [
+    return $this->render('Security/ResetPassword/ResetPasswordPage.html.twig', [
       'resetForm' => $form->createView(),
     ]);
   }

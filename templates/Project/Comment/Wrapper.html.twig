@@ -1,0 +1,5 @@
+<div id="comments-wrapper" class="col-12">
+  {% for comment in comments %}
+    {% include 'Project/Comment/Comment.html.twig' with {'comment': comment, 'hide': loop.index > 5} %}
+  {% endfor %}
+</div>

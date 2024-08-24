@@ -1,0 +1,102 @@
+<div id="comment-{{ comment.id }}"
+     data-path-project-comment="{{ path('project_comment', { id : comment.id }) }}"
+     class="{% if are_replies is defined and are_replies %}single-reply{% else %}single-comment{% endif %}"
+      {% if hide is defined and hide %}
+       style="display: none"
+      {% endif %}>
+
+  <div class="comment-avatar">
+    <img class="comment-avatar-img" src="{% if comment.user_avatar is defined and comment.user_avatar is not null %}
+                    {{ comment.user_avatar }}
+                  {% else %}
+                    {{ asset('images/default/avatar_default.png') }}
+                  {% endif %}" alt="Card image">
+  </div>
+
+  <div class="comment-payload-wrapper">
+    <div class="name-date-wrapper">
+      <a href="{{ url('profile', { id : comment.user_id }) }}">
+        <div id="profile-comment-user-id-{{ comment.user_id }}" class="usr-name no-overflow">
+          {{ comment.username }}
+        </div>
+      </a>
+
+      {% if (isAdmin or not app.user or comment.id != app.user.id) and (not comment.is_deleted) %}
+        {#  Everybody, but the comment owner must be able to report a comment  #}
+        <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
+           data-bs-toggle="tooltip" title="{{ 'project.report'|trans({}, 'catroweb') }}">
+          <i class="material-icons">report</i>
+        </a>
+      {% endif %}
+
+      {% if (isAdmin or (app.user and comment.user_id == app.user.id)) and (not comment.is_deleted) %}
+        {#  Only Admins and comment owner can delete the comment  #}
+        <a id="comment-delete-button-{{ comment.id }}" class="comment-delete-button"
+           data-bs-toggle="tooltip" title="{{ 'project.delete'|trans({}, 'catroweb') }}">
+          <i class="ms-2 material-icons text-danger">delete</i>
+        </a>
+      {% endif %}
+    </div>
+    <div id="comment-text-wrapper-{{ comment.id }}" class="comment-text">
+      {% if comment.is_deleted %}
+        <p><span class="deleted-comment">{{ 'project.deletedComment'|trans({}, 'catroweb') }}</span></p>
+      {% else %}
+        <p id="comment-text-{{ comment.id }}">{{ comment.text }}</p>
+      {% endif %}
+
+    </div>
+    <div class="date">
+      <i class="material-icons">access_time_filled</i>
+      <span class="icon-text no-overflow comment-upload-date">{{ getDatetimeAsString(comment.upload_date) }}</span>
+
+      {% if comment.number_of_replies is defined and comment.number_of_replies is not null %}
+        <i class="material-icons space-left">comment</i>
+        <span>
+            {{ comment.number_of_replies }}
+          {{ (comment.number_of_replies == 1) ? 'project.replyLabel'|trans({}, 'catroweb') : 'project.repliesLabel'|trans({}, 'catroweb') }}
+          </span>
+      {% endif %}
+
+      {% if (not app.user or comment.user_id != app.user.id) and (not comment.is_deleted) %}
+        <span>
+            <span id="comment-translation-button-{{ comment.id }}" class="comment-translation-button catro-icon-button"
+                  data-bs-toggle="tooltip" title="{{ 'project.showTranslation'|trans({}, 'catroweb') }}">
+              <i class="ms-3 material-icons">
+                translate
+              </i>
+            </span>
+            <span id="comment-translation-loading-spinner-{{ comment.id }}" class="comment-translation-loading-spinner"
+                  style="display: none;">
+              <i class="material-icons">
+                {% include 'Components/LoadingSpinner.html.twig' with {'size': 'small'} %}
+              </i>
+            </span>
+            <span id="remove-comment-translation-button-{{ comment.id }}"
+                  class="remove-comment-translation-button catro-icon-button" style="display: none"
+                  data-bs-toggle="tooltip"
+                  title="Hide Translation">
+              <i class="ms-3 material-icons" data-bs-toggle="tooltip"
+                 title="{{ 'project.hideTranslation'|trans({}, 'catroweb') }}">
+                close
+              </i>
+            </span>
+          </span>
+        <div class="comment-translation"
+             data-translate-comment-id="translate-comment-{{ comment.id }}"
+             data-path-translate-comment="{{ path('translate_comment', {'id': comment.id}) }}"></div>
+      {% endif %}
+    </div>
+
+    <div id="comment-translation-wrapper-{{ comment.id }}" class="comment-translation-wrapper"
+         style="display: none">
+      <div id="comment-translation-credit-wrapper-{{ comment.id }}">
+        <span id="comment-translation-before-languages-{{ comment.id }}" class="translation-credit"></span>
+        <span id="comment-translation-first-language-{{ comment.id }}" class="translation-credit"></span>
+        <span id="comment-translation-between-languages-{{ comment.id }}" class="translation-credit"></span>
+        <span id="comment-translation-second-language-{{ comment.id }}" class="translation-credit"></span>
+        <span id="comment-translation-after-languages-{{ comment.id }}" class="translation-credit"></span>
+      </div>
+      <p id="comment-text-translation-{{ comment.id }}" class="comment-text-translation" lang=""></p>
+    </div>
+  </div>
+</div>

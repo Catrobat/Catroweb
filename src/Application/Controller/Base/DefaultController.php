@@ -16,7 +16,7 @@ class DefaultController extends AbstractController
   #[Route(path: '/termsOfUse', name: 'termsOfUse', methods: ['GET'])]
   public function termsOfUse(): Response
   {
-    return $this->render('PrivacyAndTerms/termsOfUse.html.twig');
+    return $this->render('PrivacyAndTerms/TermsOfUsePage.html.twig');
   }
 
   #[Route(path: '/privacypolicy', name: 'privacypolicy', methods: ['GET'])]
@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
   #[Route(path: '/licenseToPlay', name: 'licenseToPlay', methods: ['GET'])]
   public function licenseToPlay(): Response
   {
-    return $this->render('PrivacyAndTerms/licenseToPlay.html.twig');
+    return $this->render('PrivacyAndTerms/LicenseToPlayPage.html.twig');
   }
 
   #[Route(path: '/languages', name: 'languages', methods: ['GET'])]

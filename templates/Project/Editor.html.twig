@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col">
+    {% if app.user and my_project %}
+      <div id="edit-text-ui" class="d-none mb-5 full-screen">
+        <div class="mt-3">
+          <span class="h2" id="edit-name-headline">{{ 'name'|trans({}, 'catroweb') }}</span>
+        </div>
+        <div id="edit-name-text-error" style="display:none;" class="alert alert-danger"></div>
+        <label id="edit-name-mdc-text-field"
+            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-text-field__resizer">
+            <span id="edit-name-loading-spinner" style="display: none;">
+              <i class="ms-2 material-icons">
+                {% include 'Components/LoadingSpinner.html.twig' with {'size': 'small'} %}
+              </i>
+            </span>
+            <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-name-text" name="edit-name-text" title="_edit-text"
+                      maxlength="{{ max_name_size }}" style="width: 100%" rows="1" cols="1000">
+            </textarea>
+          </span>
+          <span class="mdc-line-ripple"></span>
+        </label>
+
+        <div class="mt-3">
+          <span class="h2" id="edit-description-headline">{{ 'description'|trans({}, 'catroweb') }}</span>
+        </div>
+        <div id="edit-description-text-error" style="display:none;" class="alert alert-danger"></div>
+        <label id="edit-description-mdc-text-field"
+            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-text-field__resizer">
+            <span id="edit-description-loading-spinner" style="display: none;">
+              <i class="ms-2 material-icons">
+                {% include 'Components/LoadingSpinner.html.twig' with {'size': 'small'} %}
+              </i>
+            </span>
+            <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-description-text" name="edit-description-text" title="_edit-text"
+                      maxlength="{{ max_description_size }}" style="width: 100%" rows="7" cols="1000">
+            </textarea>
+          </span>
+          <span class="mdc-line-ripple"></span>
+        </label>
+
+        <div class="mt-3">
+          <span class="h2" id="edit-credits-headline">{{ 'credits'|trans({}, 'catroweb') }}</span>
+        </div>
+        <div id="edit-credits-text-instruction">{{ 'notesAndCreditsDescription'|trans({}, 'catroweb') }}</div>
+        <div id="edit-credits-text-error" style="display:none;" class="alert alert-danger"></div>
+        <label id="edit-credits-mdc-text-field"
+            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label">
+          <span class="mdc-text-field__ripple"></span>
+          <span class="mdc-text-field__resizer">
+            <span id="edit-credits-loading-spinner" style="display: none;">
+              <i class="ms-2 material-icons">
+                {% include 'Components/LoadingSpinner.html.twig' with {'size': 'small'} %}
+              </i>
+            </span>
+            <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-credits-text" name="edit-credits-text" title="_edit-text"
+                      maxlength="{{ max_description_size }}" style="width: 100%" rows="7" cols="1000">
+            </textarea>
+          </span>
+          <span class="mdc-line-ripple"></span>
+        </label>
+
+        <div class="row justify-content-between" style="margin-top: 1rem;">
+          <div id="edit-language-selector" class="mdc-select mdc-select--outlined">
+            <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
+              <span class="mdc-notched-outline">
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                  <span class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
+                </span>
+                <span class="mdc-notched-outline__trailing"></span>
+              </span>
+              <span class="mdc-select__selected-text-container">
+                <span id="edit-selected-language" class="mdc-select__selected-text" data-selected-value="default"></span>
+              </span>
+              <span class="mdc-select__dropdown-icon">
+                {% include 'Components/MdcSelectSvg.html.twig' %}
+              </span>
+            </div>
+            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+              <ul id="edit-language-selector-list" class="mdc-list" role="listbox">
+                <li class="mdc-list-item" data-value="default" role="option">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">
+                      {{ "project.default"|trans({}, "catroweb") }}
+                    </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="justify-content-between" style="margin-top: 1rem; float: right;">
+          <button id="edit-delete-button" class="btn btn-danger" style="padding: 10px;">
+            <i class="material-icons align-bottom">delete</i>
+            {{ "project.delete"|trans({}, "catroweb") }}
+          </button>
+
+          <button id="edit-submit-button" class="btn btn-primary" style="padding: 10px;">
+            <i class="material-icons align-bottom">done</i>
+            {{ "project.save"|trans({}, "catroweb") }}
+          </button>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

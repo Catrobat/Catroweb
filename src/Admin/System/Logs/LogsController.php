@@ -39,7 +39,7 @@ class LogsController extends CRUDController
     }
     $content = empty($file) ? null : $this->getLogFileContent($file, self::LOG_DIR, $searchParam);
 
-    return $this->renderWithExtraParams('Admin/SystemManagement/logs.html.twig', [
+    return $this->render('Admin/SystemManagement/Logs.html.twig', [
       'files' => $allFiles, 'content' => $content, ]
     );
   }

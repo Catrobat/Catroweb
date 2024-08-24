@@ -14,7 +14,7 @@ class LikeNotification extends CatroNotification
   /*
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private string $twig_template = '/Notifications/NotificationTypes/like_notification.html.twig';
+  private string $twig_template = '/User/Notification/Type/Like.html.twig';
 
   /**
    * LikeNotification constructor.

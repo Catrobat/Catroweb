@@ -1,0 +1,123 @@
+@import './Variables';
+@import './Mixins';
+
+$sidebar-width: 250px;
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: ($sidebar-width * -1) - 50px;
+
+  // top layer
+  z-index: 9999;
+  width: $sidebar-width;
+  height: 100vh;
+  overflow-y: auto;
+  background: #fff;
+  box-shadow: 3px 3px 3px rgba(0 0 0 / 20%);
+  transition: all 0.3s;
+
+  &.active {
+    left: 0;
+  }
+
+  .logo {
+    display: block;
+    width: $sidebar-width - 50px;
+    height: $sidebar-width - 100px;
+    max-height: 20vh;
+    margin: 15px auto;
+    background: no-repeat center center;
+    background-size: contain;
+  }
+
+  .nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 1rem;
+    color: #222;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+      background: rgba(0 0 0 / 20%);
+    }
+
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  .sidebar-link-icon {
+    flex-shrink: 0;
+    width: 2rem;
+    padding-right: 0.75rem;
+    text-align: center;
+  }
+
+  .sidebar-link-text {
+    @include force-word-break;
+
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  @include media-breakpoint-up(md) {
+    &:not(.inactive) {
+      left: 0;
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .body-with-sidebar {
+    .body-content {
+      margin-left: $sidebar-width;
+      width: calc(100% - $sidebar-width);
+    }
+
+    &.modal-open .modal {
+      border-left: $sidebar-width solid transparent;
+    }
+
+    .project-list.vertical {
+      left: $sidebar-width;
+      width: calc(100vw - $sidebar-width);
+    }
+
+    .full-screen {
+      left: $sidebar-width;
+      width: calc(100vw - $sidebar-width);
+    }
+  }
+}
+
+#sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* middle layer, i.e. appears below the sidebar */
+  z-index: 9998;
+  display: none;
+
+  /* full screen */
+  width: 100vw;
+  height: 100vh;
+
+  /* transparent black */
+  background: rgba(0 0 0 / 70%);
+  opacity: 0;
+
+  /* animate the transition */
+  transition: all 0.5s ease-in-out;
+}
+
+#sidebar.active + #sidebar-overlay {
+  display: block;
+  opacity: 1;
+}
