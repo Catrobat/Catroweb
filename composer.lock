@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66ac94ba9bbc8dfe857d07f9581c8e2c",
+    "content-hash": "7a56210d8443877bf64497d066388882",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -711,16 +711,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "4.1.0",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "2377cd41609aa51bee822c8d207317a3f363a558"
+                "reference": "389230389ed2d73a5fbf9a07d2bc0f8d0d56070e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2377cd41609aa51bee822c8d207317a3f363a558",
-                "reference": "2377cd41609aa51bee822c8d207317a3f363a558",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/389230389ed2d73a5fbf9a07d2bc0f8d0d56070e",
+                "reference": "389230389ed2d73a5fbf9a07d2bc0f8d0d56070e",
                 "shasum": ""
             },
             "require": {
@@ -799,7 +799,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/4.1.0"
+                "source": "https://github.com/doctrine/dbal/tree/4.0.5"
             },
             "funding": [
                 {
@@ -815,7 +815,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-08-15T07:37:07+00:00"
+            "time": "2024-08-07T12:53:48+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -14805,16 +14805,16 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "1.5.1",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "a9bb990e0a1ab33078aa925114845769b4abbb96"
+                "reference": "4d17bed8a33aa8220c1f2a21a6b14fcdb0e5b02c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/a9bb990e0a1ab33078aa925114845769b4abbb96",
-                "reference": "a9bb990e0a1ab33078aa925114845769b4abbb96",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/4d17bed8a33aa8220c1f2a21a6b14fcdb0e5b02c",
+                "reference": "4d17bed8a33aa8220c1f2a21a6b14fcdb0e5b02c",
                 "shasum": ""
             },
             "require": {
@@ -14871,9 +14871,9 @@
             "description": "Doctrine extensions for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-doctrine/issues",
-                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.5.1"
+                "source": "https://github.com/phpstan/phpstan-doctrine/tree/1.5.2"
             },
-            "time": "2024-08-20T16:55:00+00:00"
+            "time": "2024-08-23T11:07:15+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
