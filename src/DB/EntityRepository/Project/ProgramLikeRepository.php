@@ -93,19 +93,20 @@ class ProgramLikeRepository extends ServiceEntityRepository
     ;
   }
 
-  /**
-   * @throws NoResultException
-   */
   public function addLike(Program $project, User $user, int $type): void
   {
-    if ($this->likeExists($project, $user, $type)) {
-      // Like exists already, nothing to do.
-      return;
-    }
+    $entityManager = $this->getEntityManager();
+    $entityManager->beginTransaction();
 
-    $obj = new ProgramLike($project, $user, $type);
-    $this->getEntityManager()->persist($obj);
-    $this->getEntityManager()->flush();
+    try {
+      $obj = new ProgramLike($project, $user, $type);
+      $entityManager->persist($obj);
+      $entityManager->flush();
+      $entityManager->commit();
+    } catch (\Exception) {
+      // Like already exits, do nothing
+      $entityManager->rollback();
+    }
   }
 
   public function removeLike(Program $project, User $user, int $type): void
@@ -121,30 +122,6 @@ class ProgramLikeRepository extends ServiceEntityRepository
     ;
 
     $qb->getQuery()->execute();
-  }
-
-  /**
-   * @throws NoResultException
-   */
-  public function likeExists(Program $project, User $user, int $type): bool
-  {
-    $qb = $this->createQueryBuilder('l');
-    $qb->select('count(l)')
-      ->where($qb->expr()->eq('l.program_id', ':program_id'))
-      ->andWhere($qb->expr()->eq('l.user_id', ':user_id'))
-      ->andWhere($qb->expr()->eq('l.type', ':type'))
-      ->setParameter(':program_id', $project->getId())
-      ->setParameter(':user_id', $user->getId())
-      ->setParameter(':type', $type)
-    ;
-
-    try {
-      $count = $qb->getQuery()->getSingleScalarResult();
-    } catch (NonUniqueResultException) {
-      return false;
-    }
-
-    return ctype_digit($count) && $count > 0;
   }
 
   /**

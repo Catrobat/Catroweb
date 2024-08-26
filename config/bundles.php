@@ -32,4 +32,5 @@ return [
   Sonata\Twig\Bridge\Symfony\SonataTwigBundle::class => ['all' => true],
   Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
   Bugsnag\BugsnagBundle\BugsnagBundle::class => ['all' => true],
+  Http\HttplugBundle\HttplugBundle::class => ['all' => true],
 ];

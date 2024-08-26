@@ -2,6 +2,7 @@ import { Carousel } from 'bootstrap'
 
 export class FeaturedProjects {
   constructor(elementId) {
+    this.id = elementId
     this.carouselElement = document.getElementById(elementId)
   }
 
@@ -9,7 +10,7 @@ export class FeaturedProjects {
     if (this.carouselElement) {
       new Carousel(this.carouselElement)
     } else {
-      console.warn(`#${this.carouselElement.id} can't be found in the DOM.`)
+      console.warn(`#${this.id} can't be found in the DOM.`)
     }
   }
 }

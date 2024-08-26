@@ -22,7 +22,7 @@ class DefaultController extends AbstractController
   #[Route(path: '/privacypolicy', name: 'privacypolicy', methods: ['GET'])]
   public function privacyPolicy(): Response
   {
-    return $this->redirect('https://catrob.at/privacypolicy');
+    return $this->redirect('https://developer.catrobat.org/pages/legal/policies/privacy/');
   }
 
   #[Route(path: '/licenseToPlay', name: 'licenseToPlay', methods: ['GET'])]

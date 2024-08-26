@@ -45,7 +45,7 @@
               <a href="{{ url('termsOfUse') }}">{{ "termsOfUse.title"|trans({}, "catroweb") }}</a>
             </li>
             <li>
-              <a href="https://catrob.at/imprint"
+              <a href="https://developer.catrobat.org/pages/legal/imprint/"
                  target="_blank">{{ "imprint"|trans({}, "catroweb") }}</a>
             </li>
           </ul>
@@ -54,13 +54,11 @@
           <h3>{{ "footer.download"|trans({}, "catroweb") }}</h3>
           <ul class="list-vertical">
             <li>
-              <a href="{{ url('google_play_store') }}"
-                 target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
+              <a href="{{ url('google_play_store') }}" target="_blank">{{ "googlePlay"|trans({}, "catroweb") }}</a>
             </li>
             {% if flavor() == "pocketcode" %}
               <li>
-                <a href="https://catrob.at/ca"
-                   target="_blank">{{ "iosAppStore"|trans({}, "catroweb") }}</a>
+                <a href="{{ url('apple_app_store') }}" target="_blank">{{ "iosAppStore"|trans({}, "catroweb") }}</a>
               </li>
               <li>
                 <a href="https://catrob.at/HuaweiAppGallery"
@@ -68,8 +66,7 @@
               </li>
             {% endif %}
             <li>
-              <a href="https://catrob.at/apps"
-                 target="_blank">{{ "others"|trans({}, "catroweb") }}</a>
+              <a href="https://catrobat.org/our-apps/" target="_blank">{{ "others"|trans({}, "catroweb") }}</a>
             </li>
           </ul>
         </div>
