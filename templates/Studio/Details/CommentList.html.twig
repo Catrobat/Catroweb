@@ -8,8 +8,7 @@
       <div class="comment-content">
         <a href="{{ url('profile', { id : comment.user.id }) }}">{{ comment.username }}</a>
         {% if user_role == 'admin' or comment.username == user_name %}
-          <a class="comment-delete-button" data-bs-toggle="tooltip"
-             onclick="(new Studio()).removeComment($(this),'{{ comment.id }}', false, 0)"
+          <a class="comment-delete-button" data-bs-toggle="tooltip" data-comment-id="{{ comment.id }}"
              title="{{ 'studio.details.comments.remove_comment'|trans({}, 'catroweb') }}">
             <i class="ms-2 material-icons text-danger">delete</i>
           </a>
@@ -18,7 +17,7 @@
         <div class="comment-info">
           <span class="comment-time col-6">
               <span class="material-icons comment-info-icons">watch_later</span>{{ comment.uploadDate.format('Y-m-d') }}</span>
-          <a class="comment-replies col-6" onclick="(new Studio()).loadReplies('{{ comment.id }}')"
+          <a class="comment-replies col-6" data-comment-id="{{ comment.id }}"
              data-bs-toggle="modal"
              data-bs-target="#comment-reply-modal">
             <span class="material-icons comment-info-icons">forum</span>
@@ -31,11 +30,9 @@
     <hr class="comment-hr">
   {% endfor %}
 
-  {% if comments|length == 0 and studio.isAllowComments == '1' %}
-    <p id="no-comments" class="mt-4 center">
-      {{ 'studio.details.comments.no_comments'|trans({}, 'catroweb') }}
-    </p>
-  {% endif %}
+  <p id="no-comments" class="mt-4 center" {% if comments|length > 0 and studio.isAllowComments == '1' %}style="display: none"{% endif %}>
+    {{ 'studio.details.comments.no_comments'|trans({}, 'catroweb') }}
+  </p>
   {% if comments|length == 0 and studio.isAllowComments == '0' %}
     <p id="disabled-comments" class="mt-4 center">
       {{ 'studio.details.comments.disabled_comments'|trans({}, 'catroweb') }}
@@ -61,8 +58,7 @@
           'mb': 'none'
         }
       }%}
-      <a href="javascript:void(0)"
-         onclick="(new Studio()).postComment(false)">{{ 'studio.details.comments.send'|trans({}, 'catroweb') }}</a>
+      <button id="studio-send-comment">{{ 'studio.details.comments.send'|trans({}, 'catroweb') }}</button>
     </div>
   {% endif %}
 

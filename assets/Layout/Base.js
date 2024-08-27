@@ -11,7 +11,7 @@ import 'lazysizes'
 import 'material-icons/iconfont/material-icons.css'
 
 import textFillDefault from '../Components/TextFillDefault'
-import './TopBar.scss'
+import './TopBar'
 import './Sidebar'
 import { TokenExpirationHandler } from '../Security/TokenExpirationHandler'
 import { LogoutTokenHandler } from '../Security/LogoutTokenHandler'

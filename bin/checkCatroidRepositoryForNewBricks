@@ -14,7 +14,7 @@
  */
 
 $url1 = 'https://raw.githubusercontent.com/Catrobat/Catroid/develop/catroid/src/main/java/org/catrobat/catroid/io/XstreamSerializer.java';
-$url2 = 'https://raw.githubusercontent.com/Catrobat/Catroid/develop/catroid/src/main/java/org/catrobat/catroid/ui/fragment/CategoryBricksFactory.java';
+$url2 = 'https://raw.githubusercontent.com/Catrobat/Catroid/3204098b163b248cd0bbe03d73002632e694e8f5/catroid/src/main/java/org/catrobat/catroid/ui/fragment/CategoryBricksFactory.kt';
 $catroid_data_set_1 = file_get_contents($url1);
 $catroid_data_set_2 = file_get_contents($url2);
 
@@ -46,7 +46,7 @@ $all_catroid_bricks_and_scripts = array_unique(
 );
 asort($all_catroid_bricks_and_scripts);
 
-$path = './src/Catrobat/CatrobatCode/Parser/Constants.php';
+$path = './src/Project/CatrobatCode/Parser/Constants.php';
 $catroweb_data_set = file_get_contents($path);
 
 if (!$catroweb_data_set)

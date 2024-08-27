@@ -5,173 +5,76 @@ import '../Components/TextArea'
 import '../Components/TextField'
 import { showSnackbar } from '../Layout/Snackbar'
 import Swal from 'sweetalert2'
+import StudioCommentHandler from './StudioCommentHandler'
 require('../Project/ProjectList.scss')
 require('./AdminSettings.scss')
 require('./MembersList.scss')
 require('./ActivityList.scss')
 require('./Studio.scss')
+document.getElementById('std-header-form')?.addEventListener('change', () => {
+  event.preventDefault()
+  const fileInput = document.getElementById('std-header')
+  const studioId = document.getElementById('studio-id').value
+  if (fileInput.files.length > 0) {
+    uploadCoverImage(fileInput.files[0], studioId)
+  }
+})
 
-// $('.studio-detail__header__details__button--upload-image').on('click', () => {
-//   uploadCoverImage()
-// })
+document.querySelectorAll('.comment-delete-button').forEach((element) =>
+  element.addEventListener('click', (e) => {
+    const studioId = document.getElementById('studio-id').value
+    new StudioCommentHandler().removeComment(
+      studioId,
+      element,
+      element.dataset.commentId,
+      false,
+      0,
+    )
+  }),
+)
 
-// function showMoreLessDescription (element) {
-//   const more = $('#showMore-text').val()
-//   const less = $('#showLess-text').val()
-//   $('#studio-desc').toggleClass('desc-show-less')
-//   if (element.text() === more) {
-//     element.text(less)
-//   } else {
-//     element.text(more)
-//   }
-// }
-//
-// function removeProject (projectID) {
-//   const removeSuccess = $('#project-remove-success').val()
-//   const removeError = $('#project-remove-error').val()
-//   const studioID = $('#studio-id').val()
-//   $.ajax({
-//     url: '../removeStudioProject/',
-//     type: 'POST',
-//     data: {
-//       studioID: studioID,
-//       projectID: projectID
-//     },
-//     success: function (data, status) {
-//       if (status === 'success') {
-//         // eslint-disable-next-line no-undef
-//         showSnackbar('#share-snackbar', removeSuccess)
-//         $('#project-' + projectID).fadeOut()
-//         $('#projects-count').text(data.projects_count)
-//         $('#activities_count').text(data.activities_count)
-//       } else {
-//         // eslint-disable-next-line no-undef
-//         showSnackbar('#share-snackbar', removeError)
-//       }
-//     },
-//     fail: function () {
-//       // eslint-disable-next-line no-undef
-//       showSnackbar('#share-snackbar', removeError)
-//     }
-//   })
-// }
-//
-// function removeComment (element, commentID, isReply, parentID) {
-//   const studioID = $('#studio-id').val()
-//   const removeError = $('#comment-remove-error').val()
-//   $.ajax({
-//     url: '../removeStudioComment/',
-//     type: 'POST',
-//     data: {
-//       studioID: studioID,
-//       commentID: commentID,
-//       parentID: parentID,
-//       isReply: isReply
-//     },
-//     success: function (data, status) {
-//       if (status === 'success') {
-//         element.parents('.studio-comment').fadeOut().next('hr').fadeOut()
-//         $('#comments-count').text(data.comments_count)
-//         $('#activities_count').text(data.activities_count)
-//         if (isReply && parentID > 0) {
-//           $('#info-' + parentID).text(data.replies_count)
-//         }
-//       } else {
-//         // eslint-disable-next-line no-undef
-//         showSnackbar('#share-snackbar', removeError)
-//       }
-//     },
-//     fail: function () {
-//       // eslint-disable-next-line no-undef
-//       showSnackbar('#share-snackbar', removeError)
-//     }
-//   })
-// }
-//
-// function postComment (isReply) {
-//   const studioID = $('#studio-id').val()
-//   const comment = isReply ? $('#add-reply').find('input').val() : $('#add-comment').find('input').val()
-//   const commentError = $('#comment-error').val()
-//   const parentID = isReply ? $('#cmtID').val() : 0
-//   if (comment.trim() === '') {
-//     return
-//   }
-//   $.ajax({
-//     url: '../postCommentToStudio/',
-//     type: 'POST',
-//     data: {
-//       studioID: studioID,
-//       comment: comment,
-//       isReply: isReply,
-//       parentID: parentID
-//     },
-//     success: function (data, status) {
-//       if (status === 'success') {
-//         if (isReply) {
-//           $('#add-reply').before(data.comment).find('input').val('')
-//           $('#info-' + parentID).text(data.replies_count)
-//         } else {
-//           $('#add-comment').before(data.comment).find('input').val('')
-//           $('#comments-count').text(data.comments_count)
-//           $('#no-comments').hide()
-//         }
-//         $('#activities_count').text(data.activities_count)
-//       } else {
-//         // eslint-disable-next-line no-undef
-//         showSnackbar('#share-snackbar', commentError)
-//       }
-//     },
-//     fail: function () {
-//       // eslint-disable-next-line no-undef
-//       showSnackbar('#share-snackbar', commentError)
-//     }
-//   })
-// }
-//
-// function loadReplies (commentID) {
-//   $('#modal-body').html('')
-//   $('#cmtID').val(commentID)
-//   $.ajax({
-//     url: '../loadCommentReplies/',
-//     type: 'GET',
-//     data: {
-//       commentID: commentID
-//     },
-//     success: function (data, status) {
-//       if (status === 'success') {
-//         $('#comment-replies-body').html(data)
-//       }
-//     },
-//     fail: function () {
-//       $('#comment-replies-body').html('<h1>Failed to load replies</h1>')
-//     }
-//   })
-// }
-//
-// function uploadCoverImage () {
-//   const updateCoverError = $('#update-cover-error').val()
-//   if ($('#std-header').val() !== '') {
-//     $.ajax({
-//       type: 'POST',
-//       url: '../uploadStudioCover/',
-//       cache: false,
-//       processData: false,
-//       contentType: false,
-//       data: new FormData(document.getElementById('std-header-form')),
-//       success: function (data, status) {
-//         if (status === 'success') {
-//           $('#studio-img-container').find('img').attr('src', data.new_cover)
-//         } else {
-//           showSnackbar('#share-snackbar', updateCoverError)
-//         }
-//       },
-//       fail: function () {
-//         showSnackbar('#share-snackbar', updateCoverError)
-//       }
-//     })
-//   }
-// }
-// }
+document
+  .getElementById('studio-send-comment')
+  ?.addEventListener('click', () => {
+    const studioId = document.getElementById('studio-id').value
+    new StudioCommentHandler().postComment(studioId, false)
+  })
+
+document.querySelectorAll('.comment-replies').forEach((element) =>
+  element.addEventListener('click', (e) => {
+    const studioId = document.getElementById('studio-id').value
+    new StudioCommentHandler().loadReplies(
+      studioId,
+      element,
+      element.dataset.commentId,
+      false,
+      0,
+    )
+  }),
+)
+function uploadCoverImage(file, studioId) {
+  const updateCoverError = document.getElementById('update-cover-error').value
+
+  const formData = new FormData()
+  formData.append('header-img', file)
+  formData.append('std-id', studioId)
+
+  fetch('../uploadStudioCover/', {
+    method: 'POST',
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.new_cover) {
+        document.querySelector('#studio-img-container img').src = data.new_cover
+      } else {
+        showSnackbar('#share-snackbar', updateCoverError)
+      }
+    })
+    .catch(() => {
+      showSnackbar('#share-snackbar', updateCoverError)
+    })
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const bodyContentParent = document.getElementById('main_container_content')
