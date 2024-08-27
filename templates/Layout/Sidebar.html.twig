@@ -76,7 +76,7 @@
 
         {% if flavor() == "pocketcode" %}
           <li class="nav-item">
-            <a class="nav-link" href="https://catrob.at/ca" target="_blank">
+            <a class="nav-link" href="{{ url('apple_app_store') }}" target="_blank">
               <span class="sidebar-link-icon material-icons">get_app</span>
               <span class="sidebar-link-text">{{ "iosAppStore"|trans({}, "catroweb") }}</span>
             </a>

@@ -234,7 +234,7 @@ class TwigExtension extends AbstractExtension
       $user_agent_array = explode('/', $user_agent);
 
       // $user_agent_array = [ "Catrobat", "0.93 PocketCode", 0.9.14 Platform", "Android" ];
-      $catrobat_language_array = explode(' ', $user_agent_array[1]);
+      $catrobat_language_array = explode(' ', $user_agent_array[1] ?? '');
       // $catrobat_language_array = [ "0.93", "PocketCode" ];
       $catrobat_language = floatval($catrobat_language_array[0]);
 

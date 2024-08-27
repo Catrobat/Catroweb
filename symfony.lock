@@ -379,6 +379,30 @@
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
     },
+    "php-http/discovery": {
+        "version": "1.19",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.18",
+            "ref": "f45b5dd173a27873ab19f5e3180b2f661c21de02"
+        },
+        "files": [
+            "config/packages/http_discovery.yaml"
+        ]
+    },
+    "php-http/httplug-bundle": {
+        "version": "1.34",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.6",
+            "ref": "87b3d491d593d2c6e3b90bf0689ac69a188bfa5f"
+        },
+        "files": [
+            "config/packages/httplug.yaml"
+        ]
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
     },

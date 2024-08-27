@@ -99,7 +99,7 @@ class MediaPackageController extends AbstractController
 
     $categories = $this->sortCategoriesFlavoredFirst($categories_of_found_files, $flavor, $translator);
 
-    return $this->render('MediaLibrary/media_library_package.html.twig', [
+    return $this->render('MediaLibrary/PackageDetail.html.twig', [
       'mediasearch' => true,
       'flavor' => $flavor,
       'package' => $package_name,

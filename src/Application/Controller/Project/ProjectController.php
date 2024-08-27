@@ -291,7 +291,7 @@ class ProjectController extends AbstractController
     $comment_list = $this->comment_repository->getProjectCommentDetailViewCommentListData($id);
     array_unshift($comment_list, $arr_comment);
 
-    return $this->render('Project/Comment/comment_detail.html.twig', [
+    return $this->render('Project/Comment/Detail.html.twig', [
       'comment' => $arr_comment,
       'replies' => $comment_list,
       'isAdmin' => $this->isGranted('ROLE_ADMIN'),

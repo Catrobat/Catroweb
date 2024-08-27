@@ -570,7 +570,12 @@ export const Project = function (
       return false
     }
 
-    fetch(url)
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         const typeBtn = likeDetail.querySelector(
