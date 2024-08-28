@@ -30,12 +30,13 @@
     <hr class="comment-hr">
   {% endfor %}
 
-  <p id="no-comments" class="mt-4 center" {% if comments|length > 0 and studio.isAllowComments == '1' %}style="display: none"{% endif %}>
-    {{ 'studio.details.comments.no_comments'|trans({}, 'catroweb') }}
-  </p>
   {% if comments|length == 0 and studio.isAllowComments == '0' %}
     <p id="disabled-comments" class="mt-4 center">
       {{ 'studio.details.comments.disabled_comments'|trans({}, 'catroweb') }}
+    </p>
+  {% else %}
+    <p id="no-comments" class="mt-4 center" {% if comments|length > 0 and studio.isAllowComments == '1' %}style="display: none"{% endif %}>
+      {{ 'studio.details.comments.no_comments'|trans({}, 'catroweb') }}
     </p>
   {% endif %}
 

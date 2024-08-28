@@ -210,7 +210,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then I should see "Delete project"
     And the element "#project-action-menu" should be visible
-    When I click "#project-action-menu > ul > li:nth-child(2)"
+    When I click "#project-action-menu > ul > li:nth-child(3)"
     Then I should see "delete it"
     When I click ".swal2-cancel"
     Then I should not see "delete it"
@@ -225,7 +225,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then I should see "Delete project"
     And the element "#project-action-menu" should be visible
-    When I click "#project-action-menu > ul > li:nth-child(2)"
+    When I click "#project-action-menu > ul > li:nth-child(3)"
     Then I should see "delete it"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded

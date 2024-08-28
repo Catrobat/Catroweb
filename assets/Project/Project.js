@@ -418,6 +418,7 @@ export const Project = function (
         'X-Requested-With': 'XMLHttpRequest',
       },
     })
+      .then((response) => response.json())
       .then((data) => {
         if (!Array.isArray(data)) {
           showErrorAlert()

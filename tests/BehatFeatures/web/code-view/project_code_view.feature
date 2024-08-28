@@ -38,7 +38,9 @@ Feature: As a visitor I want to see the code view on a project page
     And I am on "/app/project/1/code_view"
     And the element "#codeview-wrapper" should be visible
 
+  @disabled
   Scenario: The code view should use an accordion principle. It must be displayed instead of the old code view
+    # Disabled due to problems in the chrome headless/mink/blockly interactions
     Given I have a project zip "CodeStatistics/new_code_view.catrobat"
     And I upload this generated project with id "1", API version 1
     And I am on "/app/project/1/code_view"
