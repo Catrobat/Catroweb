@@ -251,7 +251,7 @@ class StudioController extends AbstractController
       $projects_per_member[$member->getID()] = $this->studio_manager->countStudioUserProjects($member->getStudio(), $member->getUser());
     }
 
-    return $this->render('Studio/members_list.html.twig', [
+    return $this->render('Studio/MembersList.html.twig', [
       'is_studio_admin' => $is_studio_admin,
       'members' => $members,
       'projects_per_member' => $projects_per_member,
@@ -376,33 +376,21 @@ class StudioController extends AbstractController
   /**
    * ToDo: move to capi.
    */
-  #[Route(path: '/removeStudioComment/', name: 'remove_studio_comment', methods: ['POST'])]
+  #[Route(path: '/removeStudioComment/', name: 'remove_studio_comment', methods: ['DELETE'])]
   public function removeCommentFromStudio(Request $request): JsonResponse
   {
-    $comment_id = $request->request->getInt('commentID');
-    $isReply = trim((string) $request->request->get('isReply'));
-    $parent_id = $request->request->getInt('parentID');
-    $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('studioID')));
+    $data = json_decode($request->getContent(), true);
+    $comment_id = (int) $data['commentID'];
+    $studio = $this->studio_manager->findStudioById(trim((string) $data['studioID']));
     if (!$comment_id || is_null($studio)) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
 
-    $replies_count = null;
     /** @var User|null $user */
     $user = $this->getUser();
     $this->studio_manager->deleteCommentFromStudio($user, $comment_id);
-    if ('true' === $isReply && $parent_id > 0) {
-      $replies_count = $this->studio_manager->countCommentReplies($parent_id).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
-    }
 
-    $comments_count = ' ('.$this->studio_manager->countStudioComments($studio).')';
-    $activities_count = $this->studio_manager->countStudioActivities($studio);
-    if (is_null($this->studio_manager->findStudioCommentById($comment_id))) {
-      return new JsonResponse(['comments_count' => $comments_count, 'activities_count' => $activities_count,
-        'replies_count' => $replies_count, ], Response::HTTP_OK);
-    }
-
-    return new JsonResponse([], Response::HTTP_NOT_FOUND);
+    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
 
   /**
@@ -411,50 +399,21 @@ class StudioController extends AbstractController
   #[Route(path: '/postCommentToStudio/', name: 'post_studio_comment', methods: ['POST'])]
   public function postComment(Request $request): JsonResponse
   {
-    $isReply = 'true' == $request->request->get('isReply') && $request->request->getInt('parentID') > 0;
-    $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('studioID')));
-    $comment_text = trim((string) $request->request->get('comment'));
+    $data = json_decode($request->getContent(), true);
+    $studio = $this->studio_manager->findStudioById(trim((string) $data['studioID']));
+    $comment_text = trim((string) $data['comment']);
+    $parent_id = (int) $data['parentID'];
+
     if ('' === $comment_text) {
       return new JsonResponse('', Response::HTTP_NOT_FOUND);
     }
 
-    $replies_count = null;
-    $comments_count = null;
     /** @var User|null $user */
     $user = $this->getUser();
-    if ($isReply) {
-      $comment = $this->studio_manager->addCommentToStudio($user, $studio, $comment_text, $request->request->getInt('parentID'));
-      $replies_count = $this->studio_manager->countCommentReplies($request->request->getInt('parentID')).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
-    } else {
-      $comment = $this->studio_manager->addCommentToStudio($user, $studio, $comment_text);
-      $comments_count = ' ('.$this->studio_manager->countStudioComments($studio).')';
-    }
+    $comment = $this->studio_manager->addCommentToStudio($user, $studio, $comment_text, $parent_id);
 
-    $activities_count = $this->studio_manager->countStudioActivities($studio);
-    $avatarSrc = $comment->getUser()->getAvatar() ?? '/images/default/avatar_default.png';
-    $result = '<div class="studio-comment">';
-    $result .= '<img class="comment-avatar" src="'.$avatarSrc.'" alt="Card image">';
-    $result .= '<div class="comment-content">';
-    $result .= '<a href="/app/user/'.$comment->getId().'">'.$comment->getUsername().'</a>';
-    $result .= '<a class="comment-delete-button" data-bs-toggle="tooltip" onclick="';
-    $result .= '(new Studio()).removeComment($(this), '.$comment->getId().',';
-    $result .= $isReply ? 'true,'.$comment->getParentId().')">' : 'false, 0)">';
-    $result .= '<i class="ms-2 material-icons text-danger">delete</i></a>';
-    $result .= '<p>'.$comment->getText().'</p>';
-    $result .= '<div class="comment-info">';
-    $result .= '<span class="comment-time col-6">';
-    $result .= '<span class="material-icons comment-info-icons">watch_later</span>'.$comment->getUploadDate()->format('Y-m-d').'</span>';
-    if (!$isReply) {
-      $result .= '<a class="comment-replies col-6" onclick="(new Studio()).loadReplies('.$comment->getId().')" data-bs-toggle="modal" data-bs-target="#comment-reply-modal">';
-      $result .= '<span class="material-icons comment-info-icons">forum</span>';
-      $result .= '<span id="info-'.$comment->getId().'">0 '.$this->translator->trans('studio.details.replies', [], 'catroweb').'</span>';
-      $result .= '</div></div></div><hr class="comment-hr">';
-    }
-
-    $result .= '</div></div></div>';
     if ($comment->getText() === $comment_text) {
-      return new JsonResponse(['comment' => $result, 'replies_count' => $replies_count,
-        'comments_count' => $comments_count, 'activities_count' => $activities_count, ], Response::HTTP_OK);
+      return new JsonResponse(null, Response::HTTP_CREATED);
     }
 
     return new JsonResponse([], Response::HTTP_NOT_FOUND);
@@ -467,7 +426,8 @@ class StudioController extends AbstractController
   public function loadCommentReplies(Request $request): Response
   {
     $rs = '';
-    $comment_id = $request->query->getInt('commentID');
+    $data = json_decode($request->getContent(), true);
+    $comment_id = (int) $data['commentID'];
     $comment = $this->studio_manager->findStudioCommentById($comment_id);
     if (is_null($comment)) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
@@ -499,7 +459,8 @@ class StudioController extends AbstractController
   public function uploadStudioCover(Request $request): Response
   {
     $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('std-id')));
-    $headerImg = $request->files->get('header-img');
+    $headerImg = $request->files->get('header-img');  // Expect the file to be named 'header-img'
+
     if (is_null($headerImg) || is_null($studio) || is_null($this->getUser())) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
@@ -507,19 +468,20 @@ class StudioController extends AbstractController
     $newPath = 'images/Studios/';
     $coverPath = $this->parameter_bag->get('catrobat.resources.dir').$newPath;
     $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
+
     if (!file_exists($coverPath)) {
       $fs = new Filesystem();
       $fs->mkdir($coverPath);
     }
 
     $headerImg->move($coverPath, $coverName);
-    $pathToSave = '/'.$newPath.$coverName;
-    $studio->setCoverPath('resources'.$pathToSave);
+    $pathToSave = 'resources/'.$newPath.$coverName;
+    $studio->setCoverPath($pathToSave);
     /** @var User $user */
     $user = $this->getUser();
     $this->studio_manager->changeStudio($user, $studio);
 
-    return new JsonResponse(['new_cover' => $pathToSave], Response::HTTP_OK);
+    return new JsonResponse(['new_cover' => '/'.$pathToSave], Response::HTTP_OK);
   }
 
   /**

@@ -2,17 +2,13 @@
 @import '../Layout/Variables';
 
 .studio-detail__header {
-  padding-top: 2.25rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  margin-top: -2rem;
-  margin-right: calc(var(--bs-gutter-x, 0.75rem) * -1);
-  margin-left: calc(var(--bs-gutter-x, 0.75rem) * -1);
+  margin-top: -1.5rem;
   background-color: $gray-200;
 }
 
 .studio-detail__header__name {
   flex: 0 0 100%;
+  margin-top: 0.5em;
   margin-bottom: 0.5em;
 }
 
@@ -39,44 +35,48 @@
 
 .studio-detail__header__details__button--upload-image {
   position: absolute;
-  right: -20px;
-  bottom: 0;
+  right: 15px;
+  bottom: 15px;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255 255 255 / 75%);
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0 0 0 / 40%);
-  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0 0 0 / 30%);
+  z-index: 10;
+}
 
-  .button-show-ajax {
-    margin: 0 auto;
-  }
+.studio-detail__header__details__button--upload-image .material-icons {
+  font-size: 24px;
+  color: var(--primary);
+}
 
-  input {
-    position: absolute;
-    inset: 0;
-    cursor: pointer;
-    opacity: 0.001;
-  }
+.studio-detail__header__details__button--upload-image input[type='file'] {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  opacity: 0;
 }
 
 #studio-img-container {
+  position: relative;
+  width: 100%;
+  max-height: 17rem;
+  min-height: 10rem;
+  display: flex;
   justify-content: center;
-  width: auto;
-  max-height: 9rem;
-  overflow: hidden;
+  align-items: center;
+  overflow-y: hidden;
 }
 
-#studio-detail__header__details__button--upload-image {
-  position: absolute;
-  bottom: 0;
-  left: 45%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30%;
-  background-color: #fff;
+#studio-img-container img {
+  max-width: 100%;
+  min-width: -webkit-fill-available;
+  min-height: 10rem;
+  height: auto;
+  object-fit: cover;
 }
 
 .tab-text {
