@@ -2,13 +2,13 @@
 Feature: Help page redirect
 
   Scenario: Navigating to "/app/help" should redirect to the wiki
-    When the selected language should be "en"
+    When I switch the language to "English"
     And I go to "/app/help"
     And I wait for the page to be loaded
     Then I should be on "https://catrobat.org/docs/"
 
   Scenario: Navigating to "/app/help" should redirect to a german page
-    When the selected language should be "de"
+    When I switch the language to "Deutsch"
     And I go to "/app/help"
     And I wait for the page to be loaded
     Then I should be on "https://catrobat.org/de/dokumentation/"
