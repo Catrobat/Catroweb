@@ -22,10 +22,7 @@ export class Translation {
 
   setTargetLanguage() {
     const appLanguageElement = document.getElementById('app-language')
-    this.targetLanguage = appLanguageElement.dataset.appLanguage.replace(
-      '_',
-      '-',
-    )
+    this.targetLanguage = appLanguageElement.dataset.appLanguage.replace('_', '-')
   }
 
   setDisplayLanguageMap() {
@@ -46,10 +43,7 @@ export class Translation {
     }
 
     this.translatedByLineMap = {
-      before: this.translatedByLine.substring(
-        0,
-        this.translatedByLine.indexOf(firstLanguage),
-      ),
+      before: this.translatedByLine.substring(0, this.translatedByLine.indexOf(firstLanguage)),
       between: this.translatedByLine.substring(
         this.translatedByLine.indexOf(firstLanguage) + firstLanguage.length,
         this.translatedByLine.indexOf(secondLanguage),
@@ -68,10 +62,7 @@ export class Translation {
   }
 
   isTranslationNotAvailable(elementId) {
-    return (
-      document.querySelector(elementId).getAttribute('lang') !==
-      this.targetLanguage
-    )
+    return document.querySelector(elementId).getAttribute('lang') !== this.targetLanguage
   }
 
   openGoogleTranslatePage(text) {
@@ -99,15 +90,11 @@ export class Translation {
     )
 
     if (this.isSourceLanguageFirst()) {
-      byLineElements.firstLanguage.textContent =
-        this.displayLanguageMap[data.source_language]
-      byLineElements.secondLanguage.textContent =
-        this.displayLanguageMap[data.target_language]
+      byLineElements.firstLanguage.textContent = this.displayLanguageMap[data.source_language]
+      byLineElements.secondLanguage.textContent = this.displayLanguageMap[data.target_language]
     } else {
-      byLineElements.secondLanguage.textContent =
-        this.displayLanguageMap[data.target_language]
-      byLineElements.firstLanguage.textContent =
-        this.displayLanguageMap[data.source_language]
+      byLineElements.secondLanguage.textContent = this.displayLanguageMap[data.target_language]
+      byLineElements.firstLanguage.textContent = this.displayLanguageMap[data.source_language]
     }
   }
 

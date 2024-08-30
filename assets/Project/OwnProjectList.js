@@ -13,14 +13,11 @@ require('./OwnProjectList.scss')
 export class OwnProjectList {
   constructor(container, apiUrl, theme, emptyMessage, baseUrl) {
     this.container = container
-    this.projectsContainer =
-      container.getElementsByClassName('projects-container')[0]
+    this.projectsContainer = container.getElementsByClassName('projects-container')[0]
     const attributes =
       'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private'
     this.baseUrl = baseUrl
-    this.apiUrl = apiUrl.includes('?')
-      ? apiUrl + '&' + attributes
-      : apiUrl + '?' + attributes
+    this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' + attributes : apiUrl + '?' + attributes
     this.projectsLoaded = 0
     this.projectsData = {}
     this.projectFetchCount = 20
@@ -63,9 +60,7 @@ export class OwnProjectList {
 
   _initActionMenu() {
     const self = this
-    this.projectActionMenu = new MDCMenu(
-      document.getElementById('project-action-menu'),
-    )
+    this.projectActionMenu = new MDCMenu(document.getElementById('project-action-menu'))
     this.projectActionMenu.listen('MDCMenu:selected', function (event) {
       if (event.detail.index === 0) {
         // Set public/private
@@ -92,12 +87,7 @@ export class OwnProjectList {
     this.fetchActive = true
     const self = this
 
-    const url =
-      this.apiUrl +
-      '&limit=' +
-      this.projectFetchCount +
-      '&offset=' +
-      this.projectsLoaded
+    const url = this.apiUrl + '&limit=' + this.projectFetchCount + '&offset=' + this.projectsLoaded
 
     new ApiFetch(url, 'GET', undefined, 'json')
       .run()
@@ -109,11 +99,9 @@ export class OwnProjectList {
         }
 
         if (clear) {
-          Array.prototype.slice
-            .call(self.projectsContainer.childNodes)
-            .forEach(function (child) {
-              self.projectsContainer.removeChild(child)
-            })
+          Array.prototype.slice.call(self.projectsContainer.childNodes).forEach(function (child) {
+            self.projectsContainer.removeChild(child)
+          })
         }
 
         data.forEach(function (project) {
@@ -135,9 +123,7 @@ export class OwnProjectList {
         if (self.projectsLoaded === 0 && self.empty === false) {
           self.empty = true
           if (self.emptyMessage) {
-            self.projectsContainer.appendChild(
-              document.createTextNode(self.emptyMessage),
-            )
+            self.projectsContainer.appendChild(document.createTextNode(self.emptyMessage))
             self.container.classList.add('empty-with-text')
           } else {
             self.container.classList.add('empty')
@@ -171,8 +157,7 @@ export class OwnProjectList {
     img.className = 'lazyload own-project-list__project__image'
     img.dataset.src = data.screenshot_small
     // TODO: generate larger thumbnails and adapt here (change 80w to width of thumbs)
-    img.dataset.srcset =
-      data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w'
+    img.dataset.srcset = data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w'
     img.dataset.sizes = '(min-width: 768px) 10vw, 25vw'
 
     proj.appendChild(img)
@@ -198,44 +183,36 @@ export class OwnProjectList {
     }
 
     // eslint-disable-next-line no-array-constructor
-    Array('downloads', 'views', 'reactions', 'comments').forEach(
-      function (propertyKey) {
-        if (Object.prototype.hasOwnProperty.call(data, propertyKey)) {
-          const propEl = document.createElement('div')
-          propEl.className =
-            'own-project-list__project__details__properties__property'
+    Array('downloads', 'views', 'reactions', 'comments').forEach(function (propertyKey) {
+      if (Object.prototype.hasOwnProperty.call(data, propertyKey)) {
+        const propEl = document.createElement('div')
+        propEl.className = 'own-project-list__project__details__properties__property'
 
-          const iconEl = document.createElement('span')
-          iconEl.className = 'material-icons'
-          iconEl.appendChild(document.createTextNode(icons[propertyKey]))
-          propEl.appendChild(iconEl)
+        const iconEl = document.createElement('span')
+        iconEl.className = 'material-icons'
+        iconEl.appendChild(document.createTextNode(icons[propertyKey]))
+        propEl.appendChild(iconEl)
 
-          const valueEl = document.createElement('span')
-          valueEl.className =
-            'own-project-list__project__details__properties__property__value'
-          valueEl.appendChild(document.createTextNode(data[propertyKey]))
-          propEl.appendChild(valueEl)
+        const valueEl = document.createElement('span')
+        valueEl.className = 'own-project-list__project__details__properties__property__value'
+        valueEl.appendChild(document.createTextNode(data[propertyKey]))
+        propEl.appendChild(valueEl)
 
-          properties.appendChild(propEl)
-        }
-      },
-    )
+        properties.appendChild(propEl)
+      }
+    })
 
     const visibility = document.createElement('div')
     visibility.className = 'own-project-list__project__details__visibility'
     details.appendChild(visibility)
 
     const visibilityIcon = document.createElement('span')
-    visibilityIcon.className =
-      'material-icons own-project-list__project__details__visibility__icon'
-    visibilityIcon.appendChild(
-      document.createTextNode(data.private ? 'lock' : 'lock_open'),
-    )
+    visibilityIcon.className = 'material-icons own-project-list__project__details__visibility__icon'
+    visibilityIcon.appendChild(document.createTextNode(data.private ? 'lock' : 'lock_open'))
     visibility.appendChild(visibilityIcon)
 
     const visibilityText = document.createElement('span')
-    visibilityText.className =
-      'own-project-list__project__details__visibility__text'
+    visibilityText.className = 'own-project-list__project__details__visibility__text'
     visibilityText.appendChild(
       document.createTextNode(
         data.private
@@ -255,9 +232,7 @@ export class OwnProjectList {
 
         const refreshAndOpenMenu = function () {
           const visibilityItem =
-            self.projectActionMenu.items[0].getElementsByClassName(
-              'mdc-list-item__text',
-            )[0]
+            self.projectActionMenu.items[0].getElementsByClassName('mdc-list-item__text')[0]
           if (self.projectsData[data.id].private) {
             // private project
             visibilityItem.innerText = visibilityItem.dataset.textPublic
@@ -332,12 +307,9 @@ export class OwnProjectList {
   }
 
   _actionShareProject(id) {
-    const clipboardSuccessMessage =
-      myProfileConfiguration.messages.clipboardSuccessMessage
-    const clipboardFailMessage =
-      myProfileConfiguration.messages.clipboardFailMessage
-    const shareSuccessMessage =
-      myProfileConfiguration.messages.shareSuccessMessage
+    const clipboardSuccessMessage = myProfileConfiguration.messages.clipboardSuccessMessage
+    const clipboardFailMessage = myProfileConfiguration.messages.clipboardFailMessage
+    const shareSuccessMessage = myProfileConfiguration.messages.shareSuccessMessage
     const shareFailMessage = myProfileConfiguration.messages.shareFailMessage
     const projectUrl = this.projectsData[id].project_url
     const titleMessage = myProfileConfiguration.messages.displayName
@@ -384,9 +356,7 @@ export class OwnProjectList {
       .split('\n')
     Swal.fire({
       title: msgParts[0],
-      html: project.private
-        ? msgParts[3]
-        : msgParts[1] + '<br><br>' + msgParts[2],
+      html: project.private ? msgParts[3] : msgParts[1] + '<br><br>' + msgParts[2],
       icon: 'warning',
       showCancelButton: true,
       allowOutsideClick: false,

@@ -31,16 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   userNotifications.markAllRead()
 
-  document
-    .querySelectorAll('.js-notification-interaction')
-    .forEach((element) => {
-      element.addEventListener('click', () => {
-        userNotifications.redirectUser(
-          element.getAttribute('data-notification-instance'),
-          element.getAttribute('data-notification-redirect'),
-        )
-      })
+  document.querySelectorAll('.js-notification-interaction').forEach((element) => {
+    element.addEventListener('click', () => {
+      userNotifications.redirectUser(
+        element.getAttribute('data-notification-instance'),
+        element.getAttribute('data-notification-redirect'),
+      )
     })
+  })
 })
 
 class UserNotifications {
@@ -70,20 +68,14 @@ class UserNotifications {
     this.notificationsClearError = notificationsClearError
     this.notificationsUnauthorizedError = notificationsUnauthorizedError
     this.notificationsFetchCount = 20
-    this.allNotificationsLoaded =
-      document.getElementById('notifications').childElementCount
-    this.followerNotificationsLoaded = document.getElementById(
-      'follow-notifications',
-    ).childElementCount
-    this.reactionNotificationsLoaded = document.getElementById(
-      'reaction-notifications',
-    ).childElementCount
-    this.commentNotificationsLoaded = document.getElementById(
-      'comment-notifications',
-    ).childElementCount
-    this.remixNotificationsLoaded = document.getElementById(
-      'remix-notifications',
-    ).childElementCount
+    this.allNotificationsLoaded = document.getElementById('notifications').childElementCount
+    this.followerNotificationsLoaded =
+      document.getElementById('follow-notifications').childElementCount
+    this.reactionNotificationsLoaded =
+      document.getElementById('reaction-notifications').childElementCount
+    this.commentNotificationsLoaded =
+      document.getElementById('comment-notifications').childElementCount
+    this.remixNotificationsLoaded = document.getElementById('remix-notifications').childElementCount
     this.empty = false
     this.fetchActive = false
     this.profilePath = profilePath
@@ -103,93 +95,81 @@ class UserNotifications {
       }
     })
 
-    document
-      .getElementById('follow-notif')
-      .addEventListener('click', function () {
-        if (!self.follower) {
-          self.resetChips()
-          self.selectChip('follow-notif', 'follow-notifications')
-          self.follower = true
-          if (self.followerNotificationsLoaded < self.notificationsFetchCount) {
-            self.followerNotificationsLoaded = document.getElementById(
-              'follow-notifications',
-            ).childElementCount
-            self.fetchMoreNotifications(
-              self.notificationsFetchCount,
-              self.followerNotificationsLoaded,
-              'follow',
-              'follow-notification-',
-              document.getElementById('follow-notifications'),
-            )
-          }
+    document.getElementById('follow-notif').addEventListener('click', function () {
+      if (!self.follower) {
+        self.resetChips()
+        self.selectChip('follow-notif', 'follow-notifications')
+        self.follower = true
+        if (self.followerNotificationsLoaded < self.notificationsFetchCount) {
+          self.followerNotificationsLoaded =
+            document.getElementById('follow-notifications').childElementCount
+          self.fetchMoreNotifications(
+            self.notificationsFetchCount,
+            self.followerNotificationsLoaded,
+            'follow',
+            'follow-notification-',
+            document.getElementById('follow-notifications'),
+          )
         }
-      })
+      }
+    })
 
-    document
-      .getElementById('comment-notif')
-      .addEventListener('click', function () {
-        if (!self.comment) {
-          self.resetChips()
-          self.selectChip('comment-notif', 'comment-notifications')
-          self.comment = true
-          if (self.commentNotificationsLoaded < self.notificationsFetchCount) {
-            self.commentNotificationsLoaded = document.getElementById(
-              'comment-notifications',
-            ).childElementCount
-            self.fetchMoreNotifications(
-              self.notificationsFetchCount,
-              self.commentNotificationsLoaded,
-              'comment',
-              'comment-notification-',
-              document.getElementById('comment-notifications'),
-            )
-          }
+    document.getElementById('comment-notif').addEventListener('click', function () {
+      if (!self.comment) {
+        self.resetChips()
+        self.selectChip('comment-notif', 'comment-notifications')
+        self.comment = true
+        if (self.commentNotificationsLoaded < self.notificationsFetchCount) {
+          self.commentNotificationsLoaded =
+            document.getElementById('comment-notifications').childElementCount
+          self.fetchMoreNotifications(
+            self.notificationsFetchCount,
+            self.commentNotificationsLoaded,
+            'comment',
+            'comment-notification-',
+            document.getElementById('comment-notifications'),
+          )
         }
-      })
+      }
+    })
 
-    document
-      .getElementById('reaction-notif')
-      .addEventListener('click', function () {
-        if (!self.reactions) {
-          self.resetChips()
-          self.selectChip('reaction-notif', 'reaction-notifications')
-          self.reactions = true
-          if (self.reactionNotificationsLoaded < self.notificationsFetchCount) {
-            self.reactionNotificationsLoaded = document.getElementById(
-              'reaction-notifications',
-            ).childElementCount
-            self.fetchMoreNotifications(
-              self.notificationsFetchCount,
-              self.reactionNotificationsLoaded,
-              'reaction',
-              'reaction-notification-',
-              document.getElementById('reaction-notifications'),
-            )
-          }
+    document.getElementById('reaction-notif').addEventListener('click', function () {
+      if (!self.reactions) {
+        self.resetChips()
+        self.selectChip('reaction-notif', 'reaction-notifications')
+        self.reactions = true
+        if (self.reactionNotificationsLoaded < self.notificationsFetchCount) {
+          self.reactionNotificationsLoaded =
+            document.getElementById('reaction-notifications').childElementCount
+          self.fetchMoreNotifications(
+            self.notificationsFetchCount,
+            self.reactionNotificationsLoaded,
+            'reaction',
+            'reaction-notification-',
+            document.getElementById('reaction-notifications'),
+          )
         }
-      })
+      }
+    })
 
-    document
-      .getElementById('remix-notif')
-      .addEventListener('click', function () {
-        if (!self.remixes) {
-          self.resetChips()
-          self.selectChip('remix-notif', 'remix-notifications')
-          self.remixes = true
-          if (self.remixNotificationsLoaded < self.notificationsFetchCount) {
-            self.remixNotificationsLoaded = document.getElementById(
-              'remix-notifications',
-            ).childElementCount
-            self.fetchMoreNotifications(
-              self.notificationsFetchCount,
-              self.remixNotificationsLoaded,
-              'remix',
-              'remix-notification-',
-              document.getElementById('remix-notifications'),
-            )
-          }
+    document.getElementById('remix-notif').addEventListener('click', function () {
+      if (!self.remixes) {
+        self.resetChips()
+        self.selectChip('remix-notif', 'remix-notifications')
+        self.remixes = true
+        if (self.remixNotificationsLoaded < self.notificationsFetchCount) {
+          self.remixNotificationsLoaded =
+            document.getElementById('remix-notifications').childElementCount
+          self.fetchMoreNotifications(
+            self.notificationsFetchCount,
+            self.remixNotificationsLoaded,
+            'remix',
+            'remix-notification-',
+            document.getElementById('remix-notifications'),
+          )
         }
-      })
+      }
+    })
 
     window.addEventListener('scroll', function () {
       const position = window.scrollY
@@ -197,8 +177,7 @@ class UserNotifications {
       const pctVertical = position / bottom
       if (pctVertical >= 0.7) {
         if (self.all) {
-          self.allNotificationsLoaded =
-            document.getElementById('notifications').childElementCount
+          self.allNotificationsLoaded = document.getElementById('notifications').childElementCount
           self.fetchMoreNotifications(
             self.notificationsFetchCount,
             self.allNotificationsLoaded,
@@ -207,9 +186,8 @@ class UserNotifications {
             document.getElementById('notifications'),
           )
         } else if (self.follower) {
-          self.followerNotificationsLoaded = document.getElementById(
-            'follow-notifications',
-          ).childElementCount
+          self.followerNotificationsLoaded =
+            document.getElementById('follow-notifications').childElementCount
           self.fetchMoreNotifications(
             self.notificationsFetchCount,
             self.followerNotificationsLoaded,
@@ -218,9 +196,8 @@ class UserNotifications {
             document.getElementById('follow-notifications'),
           )
         } else if (self.comment) {
-          self.commentNotificationsLoaded = document.getElementById(
-            'comment-notifications',
-          ).childElementCount
+          self.commentNotificationsLoaded =
+            document.getElementById('comment-notifications').childElementCount
           self.fetchMoreNotifications(
             self.notificationsFetchCount,
             self.commentNotificationsLoaded,
@@ -229,9 +206,8 @@ class UserNotifications {
             document.getElementById('comment-notifications'),
           )
         } else if (self.reactions) {
-          self.reactionNotificationsLoaded = document.getElementById(
-            'reaction-notifications',
-          ).childElementCount
+          self.reactionNotificationsLoaded =
+            document.getElementById('reaction-notifications').childElementCount
           self.fetchMoreNotifications(
             self.notificationsFetchCount,
             self.reactionNotificationsLoaded,
@@ -240,9 +216,8 @@ class UserNotifications {
             document.getElementById('reaction-notifications'),
           )
         } else if (self.remixes) {
-          self.remixNotificationsLoaded = document.getElementById(
-            'remix-notifications',
-          ).childElementCount
+          self.remixNotificationsLoaded =
+            document.getElementById('remix-notifications').childElementCount
           self.fetchMoreNotifications(
             self.notificationsFetchCount,
             self.remixNotificationsLoaded,
@@ -268,10 +243,7 @@ class UserNotifications {
         data['fetched-notifications'].forEach((fetched) => {
           self.generateNotificationBody(fetched, idPrefix, container)
         })
-        self.updateNoNotificationsPlaceholder(
-          type,
-          data['fetched-notifications'].length,
-        )
+        self.updateNoNotificationsPlaceholder(type, data['fetched-notifications'].length)
         self.fetchActive = false
       })
       .catch((xhr) => {
@@ -307,10 +279,7 @@ class UserNotifications {
     let notificationDot = ''
     if (!fetched.seen) {
       notificationDot =
-        '<div class="col-2 my-auto mark-as-read">' +
-        '<span class="dot">' +
-        '</span>' +
-        '</div>'
+        '<div class="col-2 my-auto mark-as-read">' + '<span class="dot">' + '</span>' + '</div>'
     }
     const notificationBody = `<div id="${notificationId}" class="row my-3 no-gutters ripple notif">
         <div class="col-2 my-auto">${imgLeft}</div>
@@ -331,8 +300,7 @@ class UserNotifications {
         <img class="img-fluid notification-avatar-round" src="${imgLeft}" alt="">
       </a>`
     } else {
-      let imgLeft =
-        '<span class="material-icons broadcast-icon">notifications_active</span>'
+      let imgLeft = '<span class="material-icons broadcast-icon">notifications_active</span>'
       if (fetched.prize) {
         imgLeft = '<span class="material-icons broadcast-icon">cake</span>'
       }
@@ -377,40 +345,20 @@ class UserNotifications {
   }
 
   resetColor() {
-    document
-      .getElementById('all-notif')
-      .classList.replace('chip-selected', 'chip-default')
-    document
-      .getElementById('follow-notif')
-      .classList.replace('chip-selected', 'chip-default')
-    document
-      .getElementById('comment-notif')
-      .classList.replace('chip-selected', 'chip-default')
-    document
-      .getElementById('reaction-notif')
-      .classList.replace('chip-selected', 'chip-default')
-    document
-      .getElementById('remix-notif')
-      .classList.replace('chip-selected', 'chip-default')
+    document.getElementById('all-notif').classList.replace('chip-selected', 'chip-default')
+    document.getElementById('follow-notif').classList.replace('chip-selected', 'chip-default')
+    document.getElementById('comment-notif').classList.replace('chip-selected', 'chip-default')
+    document.getElementById('reaction-notif').classList.replace('chip-selected', 'chip-default')
+    document.getElementById('remix-notif').classList.replace('chip-selected', 'chip-default')
     document.getElementById('notifications').classList.remove('show', 'active')
-    document
-      .getElementById('follow-notifications')
-      .classList.remove('show', 'active')
-    document
-      .getElementById('comment-notifications')
-      .classList.remove('show', 'active')
-    document
-      .getElementById('reaction-notifications')
-      .classList.remove('show', 'active')
-    document
-      .getElementById('remix-notifications')
-      .classList.remove('show', 'active')
+    document.getElementById('follow-notifications').classList.remove('show', 'active')
+    document.getElementById('comment-notifications').classList.remove('show', 'active')
+    document.getElementById('reaction-notifications').classList.remove('show', 'active')
+    document.getElementById('remix-notifications').classList.remove('show', 'active')
   }
 
   selectChip(elementId, paneID) {
-    document
-      .getElementById(elementId)
-      .classList.replace('chip-default', 'chip-selected')
+    document.getElementById(elementId).classList.replace('chip-default', 'chip-selected')
     document.getElementById(paneID).classList.add('show', 'active')
   }
 

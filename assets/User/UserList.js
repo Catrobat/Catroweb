@@ -48,13 +48,7 @@ export class UserList {
     this.fetchActive = true
     const self = this
 
-    fetch(
-      this.apiUrl +
-        'limit=' +
-        this.userFetchCount +
-        '&offset=' +
-        this.usersLoaded,
-    )
+    fetch(this.apiUrl + 'limit=' + this.userFetchCount + '&offset=' + this.usersLoaded)
       .then((response) => response.json())
       .then((data) => {
         if (!Array.isArray(data)) {
@@ -74,9 +68,7 @@ export class UserList {
             user.innerHTML = ''
             user.style.display = 'flex'
             user.style.justifyContent = 'center'
-            user.innerHTML = document.getElementById(
-              'user-opening-spinner',
-            ).innerHTML
+            user.innerHTML = document.getElementById('user-opening-spinner').innerHTML
           })
         })
         self.container.classList.remove('loading')
@@ -100,12 +92,7 @@ export class UserList {
         self.fetchActive = false
       })
       .catch((jqXHR, textStatus, errorThrown) => {
-        console.error(
-          'Failed loading users',
-          JSON.stringify(jqXHR),
-          textStatus,
-          errorThrown,
-        )
+        console.error('Failed loading users', JSON.stringify(jqXHR), textStatus, errorThrown)
         self.container.classList.remove('loading')
       })
   }
@@ -157,8 +144,7 @@ export class UserList {
     })
 
     this.usersContainer.addEventListener('scroll', function () {
-      const pctHorizontal =
-        this.scrollLeft / (this.scrollWidth - this.clientWidth)
+      const pctHorizontal = this.scrollLeft / (this.scrollWidth - this.clientWidth)
       if (pctHorizontal >= 0.8) {
         self.fetchMore()
       }
@@ -167,8 +153,7 @@ export class UserList {
     })
 
     this.container.addEventListener('scroll', function () {
-      const pctVertical =
-        this.scrollTop / (this.scrollHeight - this.clientHeight)
+      const pctVertical = this.scrollTop / (this.scrollHeight - this.clientHeight)
       if (pctVertical >= 0.8) {
         self.fetchMore()
       }
@@ -188,28 +173,21 @@ export class UserList {
     })
 
     this.chevronLeft.addEventListener('click', function () {
-      const width = self.usersContainer.querySelector(
-        '.user-list__project',
-      ).offsetWidth
+      const width = self.usersContainer.querySelector('.user-list__project').offsetWidth
       self.usersContainer.scrollLeft -= 2 * width
     })
 
     this.chevronRight.addEventListener('click', function () {
-      const width = self.usersContainer.querySelector(
-        '.user-list__project',
-      ).offsetWidth
+      const width = self.usersContainer.querySelector('.user-list__project').offsetWidth
       self.usersContainer.scrollLeft += 2 * width
     })
   }
 
   openFullView() {
     window.addEventListener('popstate', this.popStateHandler)
-    showCustomTopBarTitle(
-      this.titleElement.querySelector('h2').textContent,
-      function () {
-        window.history.back()
-      },
-    )
+    showCustomTopBarTitle(this.titleElement.querySelector('h2').textContent, function () {
+      window.history.back()
+    })
     this.titleElement.style.display = 'none'
     this.isFullView = true
     this.container.classList.add('vertical')
@@ -217,9 +195,7 @@ export class UserList {
     this.body.classList.add('overflow-hidden')
     if (
       this.container.clientHeight === this.container.scrollHeight ||
-      this.container.scrollTop /
-        (this.container.scrollHeight - this.container.clientHeight) >=
-        0.8
+      this.container.scrollTop / (this.container.scrollHeight - this.container.clientHeight) >= 0.8
     ) {
       this.fetchMore()
     }

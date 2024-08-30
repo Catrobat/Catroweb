@@ -26,9 +26,7 @@ export class ProjectList {
     this.$title = container.querySelector('.project-list__title')
     this.$body = document.body
     this.$chevronLeft = container.querySelector('.project-list__chevrons__left')
-    this.$chevronRight = container.querySelector(
-      '.project-list__chevrons__right',
-    )
+    this.$chevronRight = container.querySelector('.project-list__chevrons__right')
     this.apiUrl = this.formatApiUrl(apiUrl)
     this.popStateHandler = this.closeFullView.bind(this)
 
@@ -40,10 +38,7 @@ export class ProjectList {
     let attributes =
       'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,uploaded_string,'
 
-    if (
-      this.propertyToShow &&
-      !attributes.includes(`,${this.propertyToShow},`)
-    ) {
+    if (this.propertyToShow && !attributes.includes(`,${this.propertyToShow},`)) {
       attributes += this.propertyToShow
     }
     return apiUrl.includes('?')
@@ -58,9 +53,7 @@ export class ProjectList {
 
     this.fetchActive = true
 
-    fetch(
-      `${this.apiUrl}limit=${this.projectFetchCount}&offset=${this.projectsLoaded}`,
-    )
+    fetch(`${this.apiUrl}limit=${this.projectFetchCount}&offset=${this.projectsLoaded}`)
       .then((response) => response.json())
       .then((data) => {
         if (!Array.isArray(data)) {
@@ -91,10 +84,7 @@ export class ProjectList {
         this.fetchActive = false
       })
       .catch((error) => {
-        console.error(
-          `Failed loading projects in category ${this.category}`,
-          error,
-        )
+        console.error(`Failed loading projects in category ${this.category}`, error)
         this.container.classList.remove('loading')
       })
   }
@@ -128,10 +118,7 @@ export class ProjectList {
   createImageElement(data) {
     const img = document.createElement('img')
     img.setAttribute('data-src', data.screenshot_small)
-    img.setAttribute(
-      'data-srcset',
-      `${data.screenshot_small} 80w, ${data.screenshot_large} 480w`,
-    )
+    img.setAttribute('data-srcset', `${data.screenshot_small} 80w, ${data.screenshot_large} 480w`)
     img.setAttribute('data-sizes', '(min-width: 768px) 10vw, 25vw')
     img.className = 'lazyload project-list__project__image'
     if (data.not_for_kids) {
@@ -152,9 +139,7 @@ export class ProjectList {
     }
 
     const propertyValue =
-      this.propertyToShow === 'uploaded'
-        ? data.uploaded_string
-        : data[this.propertyToShow]
+      this.propertyToShow === 'uploaded' ? data.uploaded_string : data[this.propertyToShow]
 
     const icon = document.createElement('i')
     icon.className = 'material-icons'
@@ -171,8 +156,7 @@ export class ProjectList {
 
   addNotForKidsElement(projectElement) {
     const notForKidsDiv = document.createElement('div')
-    notForKidsDiv.className =
-      'lazyload project-list__project__property__not-for-kids'
+    notForKidsDiv.className = 'lazyload project-list__project__property__not-for-kids'
 
     const notForKidsImg = document.createElement('img')
     notForKidsImg.className = 'lazyload project-list__not-for-kids-logo'
@@ -191,9 +175,7 @@ export class ProjectList {
     if (!this.$chevronRight) {
       return
     }
-    if (
-      this.projectsContainer.scrollWidth > this.projectsContainer.clientWidth
-    ) {
+    if (this.projectsContainer.scrollWidth > this.projectsContainer.clientWidth) {
       this.$chevronRight.style.display = 'block'
     } else {
       this.$chevronRight.style.display = 'none'
@@ -211,31 +193,15 @@ export class ProjectList {
 
   initListeners() {
     window.addEventListener('popstate', this.handlePopState.bind(this))
-    this.projectsContainer?.addEventListener(
-      'scroll',
-      this.handleHorizontalScroll.bind(this),
-    )
-    this.container?.addEventListener(
-      'scroll',
-      this.handleVerticalScroll.bind(this),
-    )
+    this.projectsContainer?.addEventListener('scroll', this.handleHorizontalScroll.bind(this))
+    this.container?.addEventListener('scroll', this.handleVerticalScroll.bind(this))
     this.$title?.addEventListener('click', this.handleTitleClick.bind(this))
-    this.$chevronLeft?.addEventListener(
-      'click',
-      this.handleChevronLeftClick.bind(this),
-    )
-    this.$chevronRight?.addEventListener(
-      'click',
-      this.handleChevronRightClick.bind(this),
-    )
+    this.$chevronLeft?.addEventListener('click', this.handleChevronLeftClick.bind(this))
+    this.$chevronRight?.addEventListener('click', this.handleChevronRightClick.bind(this))
   }
 
   handlePopState(event) {
-    if (
-      event.state &&
-      event.state.type === 'ProjectList' &&
-      event.state.full === true
-    ) {
+    if (event.state && event.state.type === 'ProjectList' && event.state.full === true) {
       document.querySelector(`#${event.state.id}`).data('list').openFullView()
     }
   }
@@ -253,8 +219,7 @@ export class ProjectList {
 
   handleVerticalScroll() {
     const pctVertical =
-      this.container.scrollTop /
-      (this.container.scrollHeight - this.container.clientHeight)
+      this.container.scrollTop / (this.container.scrollHeight - this.container.clientHeight)
     if (pctVertical >= 0.8) {
       this.fetchMore()
     }
@@ -274,16 +239,12 @@ export class ProjectList {
   }
 
   handleChevronLeftClick() {
-    const width = this.projectsContainer.querySelector(
-      '.project-list__project',
-    ).offsetWidth
+    const width = this.projectsContainer.querySelector('.project-list__project').offsetWidth
     this.projectsContainer.scrollLeft -= 2 * width
   }
 
   handleChevronRightClick() {
-    const width = this.projectsContainer.querySelector(
-      '.project-list__project',
-    ).offsetWidth
+    const width = this.projectsContainer.querySelector('.project-list__project').offsetWidth
     this.projectsContainer.scrollLeft += 2 * width
   }
 
@@ -299,9 +260,7 @@ export class ProjectList {
     this.$body.classList.add('overflow-hidden')
     if (
       this.container.clientHeight === this.container.scrollHeight ||
-      this.container.scrollTop /
-        (this.container.scrollHeight - this.container.clientHeight) >=
-        0.8
+      this.container.scrollTop / (this.container.scrollHeight - this.container.clientHeight) >= 0.8
     ) {
       this.fetchMore()
     }

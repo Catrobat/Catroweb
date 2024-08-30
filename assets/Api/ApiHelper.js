@@ -49,8 +49,7 @@ export class ApiFetch {
     if (response.ok) {
       return Promise.resolve(data)
     } else {
-      const errorMessage =
-        'ERROR ' + response.status + ': ' + JSON.stringify(data)
+      const errorMessage = 'ERROR ' + response.status + ': ' + JSON.stringify(data)
       return Promise.reject(new Error(errorMessage))
     }
   }
@@ -69,14 +68,10 @@ export class ApiPutFetch {
     this.url = url
     this.data = data
     this.componentName = componentName
-    if (
-      typeof unspecifiedErrorText === 'string' &&
-      unspecifiedErrorText.length > 0
-    ) {
+    if (typeof unspecifiedErrorText === 'string' && unspecifiedErrorText.length > 0) {
       this.unspecifiedErrorText = unspecifiedErrorText
     } else {
-      this.unspecifiedErrorText =
-        globalConfiguration.messages.unspecifiedErrorText
+      this.unspecifiedErrorText = globalConfiguration.messages.unspecifiedErrorText
     }
     this.successCallback = successCallback
     this.otherErrorMessages = otherErrorMessages
@@ -95,13 +90,8 @@ export class ApiPutFetch {
             break
           case 401:
             // Invalid credentials
-            console.error(
-              this.componentName + ' ERROR 401: Invalid credentials',
-              response,
-            )
-            MessageDialogs.showErrorMessage(
-              globalConfiguration.messages.authenticationErrorText,
-            )
+            console.error(this.componentName + ' ERROR 401: Invalid credentials', response)
+            MessageDialogs.showErrorMessage(globalConfiguration.messages.authenticationErrorText)
             break
           case 422:
             response.json().then((errors) => {
@@ -110,16 +100,8 @@ export class ApiPutFetch {
             })
             break
           default:
-            console.error(
-              this.componentName + ' ERROR ' + response.status,
-              response,
-            )
-            if (
-              Object.prototype.hasOwnProperty.call(
-                this.otherErrorMessages,
-                response.status,
-              )
-            ) {
+            console.error(this.componentName + ' ERROR ' + response.status, response)
+            if (Object.prototype.hasOwnProperty.call(this.otherErrorMessages, response.status)) {
               const errorHandler = this.otherErrorMessages[response.status]
               if (typeof errorHandler === 'function') {
                 errorHandler(response)
@@ -154,14 +136,10 @@ export class ApiDeleteFetch {
   ) {
     this.url = url
     this.componentName = componentName
-    if (
-      typeof unspecifiedErrorText === 'string' &&
-      unspecifiedErrorText.length > 0
-    ) {
+    if (typeof unspecifiedErrorText === 'string' && unspecifiedErrorText.length > 0) {
       this.unspecifiedErrorText = unspecifiedErrorText
     } else {
-      this.unspecifiedErrorText =
-        globalConfiguration.messages.unspecifiedErrorText
+      this.unspecifiedErrorText = globalConfiguration.messages.unspecifiedErrorText
     }
     this.successCallback = successCallback
     this.otherErrorMessages = otherErrorMessages
@@ -180,25 +158,12 @@ export class ApiDeleteFetch {
             break
           case 401:
             // Invalid credentials
-            console.error(
-              this.componentName + ' ERROR 401: Invalid credentials',
-              response,
-            )
-            MessageDialogs.showErrorMessage(
-              globalConfiguration.messages.authenticationErrorText,
-            )
+            console.error(this.componentName + ' ERROR 401: Invalid credentials', response)
+            MessageDialogs.showErrorMessage(globalConfiguration.messages.authenticationErrorText)
             break
           default:
-            console.error(
-              this.componentName + ' ERROR ' + response.status,
-              response,
-            )
-            if (
-              Object.prototype.hasOwnProperty.call(
-                this.otherErrorMessages,
-                response.status,
-              )
-            ) {
+            console.error(this.componentName + ' ERROR ' + response.status, response)
+            if (Object.prototype.hasOwnProperty.call(this.otherErrorMessages, response.status)) {
               const errorHandler = this.otherErrorMessages[response.status]
               if (typeof errorHandler === 'function') {
                 errorHandler(response)

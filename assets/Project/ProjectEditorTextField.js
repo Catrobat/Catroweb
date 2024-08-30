@@ -1,19 +1,13 @@
 import { MDCTextField } from '@material/textfield'
 
 export function ProjectEditorTextField(model) {
-  this.editText = document.querySelector(
-    '#edit-' + model.programSection + '-text',
-  )
-  this.editTextError = document.querySelector(
-    '#edit-' + model.programSection + '-text-error',
-  )
+  this.editText = document.querySelector('#edit-' + model.programSection + '-text')
+  this.editTextError = document.querySelector('#edit-' + model.programSection + '-text-error')
   this.textLoadingSpinner = document.querySelector(
     '#edit-' + model.programSection + '-loading-spinner',
   )
 
-  new MDCTextField(
-    document.querySelector('#edit-' + model.programSection + '-mdc-text-field'),
-  )
+  new MDCTextField(document.querySelector('#edit-' + model.programSection + '-mdc-text-field'))
 
   this.editText.addEventListener('input', () => {
     model.setText(this.editText.value.trim())

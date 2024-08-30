@@ -10,10 +10,4 @@ globals:
   SharedArrayBuffer: readonly
 parserOptions:
   ecmaVersion: 2020
-rules:
-  {
-    'no-new': 0,
-    'comma-dangle': 0,
-    'space-before-function-paren': 0,
-    'indent': 0,
-  }
+rules: { 'no-new': 0, 'comma-dangle': 0, 'space-before-function-paren': 0, 'indent': 0 }

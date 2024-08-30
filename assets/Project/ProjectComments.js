@@ -22,9 +22,7 @@ export function ProjectComments(
 ) {
   let amountOfVisibleComments
 
-  const commentUploadDates = document.getElementsByClassName(
-    'comment-upload-date',
-  )
+  const commentUploadDates = document.getElementsByClassName('comment-upload-date')
   for (const element of commentUploadDates) {
     const commentUploadDate = new Date(element.innerHTML)
     element.innerHTML = commentUploadDate.toLocaleString('en-GB')
@@ -35,9 +33,7 @@ export function ProjectComments(
   updateCommentsVisibility()
   updateButtonVisibility()
 
-  document
-    .querySelector('#comment-post-button')
-    .addEventListener('click', postComment)
+  document.querySelector('#comment-post-button').addEventListener('click', postComment)
 
   const singleComments = document.querySelectorAll('.single-comment')
   singleComments.forEach((singleComment) => {
@@ -53,9 +49,7 @@ export function ProjectComments(
   reportButtons.forEach((reportButton) => {
     reportButton.addEventListener('click', function (event) {
       event.stopPropagation()
-      const commentId = reportButton.id.substring(
-        'comment-report-button-'.length,
-      )
+      const commentId = reportButton.id.substring('comment-report-button-'.length)
       askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
     })
   })
@@ -64,32 +58,21 @@ export function ProjectComments(
   deleteButtons.forEach((deleteButton) => {
     deleteButton.addEventListener('click', function (event) {
       event.stopPropagation()
-      const commentId = deleteButton.id.substring(
-        'comment-delete-button-'.length,
-      )
+      const commentId = deleteButton.id.substring('comment-delete-button-'.length)
       askForConfirmation(deleteComment, commentId, deleteConfirmation, deleteIt)
     })
   })
 
-  document
-    .querySelector('#comment-message')
-    ?.addEventListener('change', function () {
-      sessionStorage.setItem(
-        'temp_project_comment',
-        document.querySelector('#comment-message').value,
-      )
-    })
+  document.querySelector('#comment-message')?.addEventListener('change', function () {
+    sessionStorage.setItem('temp_project_comment', document.querySelector('#comment-message').value)
+  })
 
   const addCommentButtons = document.querySelectorAll('.add-comment-button')
   addCommentButtons.forEach((addCommentButton) => {
     addCommentButton.addEventListener('click', function () {
       const commentWrapper = document.querySelector('#user-comment-wrapper')
-      const showCommentWrapperButton = document.querySelector(
-        '#show-add-comment-button',
-      )
-      const hideCommentWrapperButton = document.querySelector(
-        '#hide-add-comment-button',
-      )
+      const showCommentWrapperButton = document.querySelector('#show-add-comment-button')
+      const hideCommentWrapperButton = document.querySelector('#hide-add-comment-button')
       if (commentWrapper.style.display !== 'none') {
         commentWrapper.style.display = 'none'
         hideCommentWrapperButton.style.display = 'none'
@@ -102,32 +85,23 @@ export function ProjectComments(
     })
   })
 
-  document
-    .querySelector('#show-more-comments-button')
-    ?.addEventListener('click', function () {
-      showMore(showStep)
-    })
+  document.querySelector('#show-more-comments-button')?.addEventListener('click', function () {
+    showMore(showStep)
+  })
 
-  document
-    .querySelector('#show-less-comments-button')
-    ?.addEventListener('click', function () {
-      showLess(showStep)
-    })
+  document.querySelector('#show-less-comments-button')?.addEventListener('click', function () {
+    showLess(showStep)
+  })
 
   if (
     sessionStorage.getItem('temp_project_comment') != null &&
     sessionStorage.getItem('temp_project_comment') !== ''
   ) {
-    document.querySelector('#comment-message').value = sessionStorage.getItem(
-      'temp_project_comment',
-    )
+    document.querySelector('#comment-message').value =
+      sessionStorage.getItem('temp_project_comment')
     const commentWrapper = document.querySelector('#user-comment-wrapper')
-    const showCommentWrapperButton = document.querySelector(
-      '#show-add-comment-button',
-    )
-    const hideCommentWrapperButton = document.querySelector(
-      '#hide-add-comment-button',
-    )
+    const showCommentWrapperButton = document.querySelector('#show-add-comment-button')
+    const hideCommentWrapperButton = document.querySelector('#hide-add-comment-button')
     commentWrapper.style.display = 'block'
     if (showCommentWrapperButton) {
       showCommentWrapperButton.style.display = 'none'
@@ -143,11 +117,9 @@ export function ProjectComments(
       return
     }
 
-    const postCommentUrl = document.querySelector('.js-project-comments')
-      .dataset.pathPostCommentUrl
+    const postCommentUrl = document.querySelector('.js-project-comments').dataset.pathPostCommentUrl
     const parentCommentId =
-      document.querySelector('.js-project-parentComment')?.dataset
-        ?.parentCommentId ?? 0
+      document.querySelector('.js-project-parentComment')?.dataset?.parentCommentId ?? 0
 
     fetch(postCommentUrl, {
       method: 'POST',
@@ -272,12 +244,8 @@ export function ProjectComments(
   replyButtons.forEach((replyButton) => {
     replyButton.addEventListener('click', function () {
       const commentWrapper = document.querySelector('#user-comment-wrapper')
-      const showCommentWrapperButton = document.querySelector(
-        '#show-add-reply-button',
-      )
-      const hideCommentWrapperButton = document.querySelector(
-        '#hide-add-reply-button',
-      )
+      const showCommentWrapperButton = document.querySelector('#show-add-reply-button')
+      const hideCommentWrapperButton = document.querySelector('#hide-add-reply-button')
       if (commentWrapper.style.display !== 'none') {
         commentWrapper.style.display = 'none'
         if (showCommentWrapperButton) {
@@ -315,28 +283,21 @@ export function ProjectComments(
   }
 
   function updateCommentsVisibility() {
-    const commentsClassSelector = document.querySelector(
-      '.comments-class-selector',
-    ).dataset.commentsClassSelector
+    const commentsClassSelector = document.querySelector('.comments-class-selector').dataset
+      .commentsClassSelector
 
-    document
-      .querySelectorAll(commentsClassSelector)
-      .forEach((comment, index) => {
-        if (index < amountOfVisibleComments) {
-          comment.style.display = 'block'
-        } else {
-          comment.style.display = 'none'
-        }
-      })
+    document.querySelectorAll(commentsClassSelector).forEach((comment, index) => {
+      if (index < amountOfVisibleComments) {
+        comment.style.display = 'block'
+      } else {
+        comment.style.display = 'none'
+      }
+    })
   }
 
   function updateButtonVisibility() {
-    const showLessCommentsButton = document.querySelector(
-      '#show-less-comments-button',
-    )
-    const showMoreCommentsButton = document.querySelector(
-      '#show-more-comments-button',
-    )
+    const showLessCommentsButton = document.querySelector('#show-less-comments-button')
+    const showMoreCommentsButton = document.querySelector('#show-more-comments-button')
 
     if (amountOfVisibleComments > minAmountOfVisibleComments) {
       showLessCommentsButton.style.display = 'block'
@@ -352,28 +313,21 @@ export function ProjectComments(
   }
 
   function showMore(step) {
-    amountOfVisibleComments = Math.min(
-      amountOfVisibleComments + step,
-      totalAmountOfComments,
-    )
+    amountOfVisibleComments = Math.min(amountOfVisibleComments + step, totalAmountOfComments)
     setVisibleCommentsSessionVar()
     updateCommentsVisibility()
     updateButtonVisibility()
   }
 
   function showLess(step) {
-    amountOfVisibleComments = Math.max(
-      amountOfVisibleComments - step,
-      minAmountOfVisibleComments,
-    )
+    amountOfVisibleComments = Math.max(amountOfVisibleComments - step, minAmountOfVisibleComments)
     setVisibleCommentsSessionVar()
     updateCommentsVisibility()
     updateButtonVisibility()
   }
 
   function getVisibleCommentsSessionVarName() {
-    return document.querySelector('.session-vars-names').dataset
-      .visibleCommentsSessionVar
+    return document.querySelector('.session-vars-names').dataset.visibleCommentsSessionVar
   }
 
   function setVisibleCommentsSessionVar() {

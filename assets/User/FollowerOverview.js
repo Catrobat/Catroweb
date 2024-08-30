@@ -127,11 +127,7 @@ class FollowerOverview {
       button.addEventListener('click', (e) => {
         e.preventDefault()
         e.stopImmediatePropagation()
-        this.unfollow(
-          e.target,
-          e.target.dataset.userId,
-          e.target.dataset.userName,
-        )
+        this.unfollow(e.target, e.target.dataset.userId, e.target.dataset.userName)
       })
     })
   }

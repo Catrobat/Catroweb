@@ -18,23 +18,16 @@ export function MediaLib(
   function getPackageFiles(packageName, mediaSearchPath, flavor) {
     let downloadList = []
 
-    document.getElementById('top-app-bar__btn-download-selection').onclick =
-      function () {
-        for (let i = 0; i < downloadList.length; i++) {
-          medialibDownloadSelectedFile(downloadList[i])
-        }
-        document
-          .getElementById('top-app-bar__btn-cancel-download-selection')
-          .click()
-      }
-
-    document.getElementById(
-      'top-app-bar__btn-cancel-download-selection',
-    ).onclick = function () {
+    document.getElementById('top-app-bar__btn-download-selection').onclick = function () {
       for (let i = 0; i < downloadList.length; i++) {
-        document
-          .getElementById('mediafile-' + downloadList[i].id)
-          .classList.remove('selected')
+        medialibDownloadSelectedFile(downloadList[i])
+      }
+      document.getElementById('top-app-bar__btn-cancel-download-selection').click()
+    }
+
+    document.getElementById('top-app-bar__btn-cancel-download-selection').onclick = function () {
+      for (let i = 0; i < downloadList.length; i++) {
+        document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
       }
       downloadList = []
       showTopBarDefault()
@@ -48,18 +41,12 @@ export function MediaLib(
 
     // api url
     let url
-    const attributes =
-      'id,name,flavors,packages,category,extension,file_type,size,download_url'
+    const attributes = 'id,name,flavors,packages,category,extension,file_type,size,download_url'
     const limit = 1000
     if (mediaSearchPath !== '') {
       url = mediaSearchPath + '&attributes=' + attributes + '&limit=' + limit
     } else {
-      url =
-        mediaLibPackageByNameUrlApi +
-        '?attributes=' +
-        attributes +
-        '&limit=' +
-        limit
+      url = mediaLibPackageByNameUrlApi + '?attributes=' + attributes + '&limit=' + limit
     }
 
     fetch(url)
@@ -74,9 +61,7 @@ export function MediaLib(
           }
 
           const isFlavored = !fileFlavorArray.includes('pocketcode')
-          const flavorFound = fileFlavorArray.some((item) =>
-            acceptedFlavors.includes(item),
-          )
+          const flavorFound = fileFlavorArray.some((item) => acceptedFlavors.includes(item))
           if (!flavorFound) {
             return
           }
@@ -114,9 +99,7 @@ export function MediaLib(
                 elementsText += translations.elementsPlural
               }
 
-              document.getElementById(
-                'top-app-bar__download-nr-selected',
-              ).innerText = elementsText
+              document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
 
               if (downloadList.length > 0) {
                 showTopBarDownload()
@@ -190,9 +173,7 @@ export function MediaLib(
           } else {
             const catEscaped = file.category.replace(/"/g, '\\"')
             document
-              .querySelector(
-                '#content .category[data-name="' + catEscaped + '"] .files',
-              )
+              .querySelector('#content .category[data-name="' + catEscaped + '"] .files')
               .prepend(mediafileContainer)
           }
         })
@@ -205,9 +186,7 @@ export function MediaLib(
           const catId = /^category-(.+)$/.exec(item.id)[1]
 
           item.style.display = 'block'
-          document.querySelector(
-            '#sidebar #menu-mediacat-' + catId,
-          ).style.display = 'block'
+          document.querySelector('#sidebar #menu-mediacat-' + catId).style.display = 'block'
         })
 
         document.getElementById('loading-spinner').style.display = 'none'
@@ -288,10 +267,7 @@ export function MediaLib(
     const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
     const image = document.createElement('img')
     image.setAttribute('alt', file.id)
-    image.setAttribute(
-      'src',
-      assetsDir + 'thumbs/' + file.id + '.' + imgExtension,
-    )
+    image.setAttribute('src', assetsDir + 'thumbs/' + file.id + '.' + imgExtension)
     image.setAttribute('title', file.name)
     image.addEventListener('error', function () {
       image.remove()

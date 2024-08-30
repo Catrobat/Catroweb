@@ -8,9 +8,7 @@ export class MaintenanceHandler {
   initCloseButtons() {
     const closeButtons = document.querySelectorAll('.close-button')
     closeButtons.forEach((closeButton) => {
-      closeButton.addEventListener('click', () =>
-        this.handleCloseButtonClick(closeButton),
-      )
+      closeButton.addEventListener('click', () => this.handleCloseButtonClick(closeButton))
     })
   }
 
@@ -47,23 +45,17 @@ export class MaintenanceHandler {
   initExpandButtons() {
     const expandButtons = document.querySelectorAll('.expand-button')
     expandButtons.forEach((expandButton) => {
-      expandButton.addEventListener('click', () =>
-        this.handleExpandButtonClick(expandButton),
-      )
+      expandButton.addEventListener('click', () => this.handleExpandButtonClick(expandButton))
     })
   }
 
   // Handle expand button click event
   handleExpandButtonClick(expandButton) {
     const dataId = expandButton.getAttribute('data-id')
-    const additionalInfoSection = document.getElementById(
-      `additional-info-${dataId}`,
-    )
+    const additionalInfoSection = document.getElementById(`additional-info-${dataId}`)
     if (additionalInfoSection) {
       const isCurrentlyVisible = additionalInfoSection.style.display === 'block'
-      additionalInfoSection.style.display = isCurrentlyVisible
-        ? 'none'
-        : 'block'
+      additionalInfoSection.style.display = isCurrentlyVisible ? 'none' : 'block'
       expandButton.classList.toggle('expanded')
     }
   }

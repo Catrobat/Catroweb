@@ -76,10 +76,5 @@ $text-color: $gray-900;
   $color-variable-s: var(#{$color-variable + '-s'});
   $color-variable-l: var(#{$color-variable + '-l'});
 
-  @return hsla(
-    $color-variable-h,
-    $color-variable-s,
-    $color-variable-l,
-    $opacity
-  );
+  @return hsla($color-variable-h, $color-variable-s, $color-variable-l, $opacity);
 }

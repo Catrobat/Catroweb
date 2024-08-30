@@ -6,14 +6,10 @@ import { DIALOG } from './ProjectEditorModel'
 export function ProjectEditor(projectDescriptionCredits, programId, model) {
   this.body = document.body
   this.editTextUI = document.getElementById('edit-text-ui')
-  this.languageSelectorList = document.getElementById(
-    'edit-language-selector-list',
-  )
+  this.languageSelectorList = document.getElementById('edit-language-selector-list')
   this.saveButton = document.getElementById('edit-submit-button')
 
-  this.languageSelect = new MDCSelect(
-    document.querySelector('#edit-language-selector'),
-  )
+  this.languageSelect = new MDCSelect(document.querySelector('#edit-language-selector'))
 
   this.closeEditorDialog = new ProjectEditorDialog(
     projectDescriptionCredits.dataset.transCloseEditorPrompt,
@@ -29,9 +25,7 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
 
   this.saveButton.addEventListener('click', model.save)
 
-  document
-    .getElementById('edit-delete-button')
-    .addEventListener('click', model.deleteTranslation)
+  document.getElementById('edit-delete-button').addEventListener('click', model.deleteTranslation)
 
   this.languageSelect.listen('MDCSelect:change', () => {
     if (!this.editTextUI.classList.contains('d-none')) {
@@ -39,28 +33,18 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
     }
   })
 
-  Array.from(document.querySelectorAll('.mdc-text-field__input')).forEach(
-    (input) => {
-      input.addEventListener('input', model.onInput)
-    },
-  )
+  Array.from(document.querySelectorAll('.mdc-text-field__input')).forEach((input) => {
+    input.addEventListener('input', model.onInput)
+  })
 
-  this.show = (
-    navigationCallback,
-    language,
-    showLanguageSelect,
-    showDeleteButton,
-    headerText,
-  ) => {
+  this.show = (navigationCallback, language, showLanguageSelect, showDeleteButton, headerText) => {
     this.navigationCallback = navigationCallback
     this.showLanguageSelect = showLanguageSelect
     this.showDeleteButton = showDeleteButton
 
     model.show(language)
 
-    const languageSelectElement = document.getElementById(
-      'edit-language-selector',
-    )
+    const languageSelectElement = document.getElementById('edit-language-selector')
     if (this.showLanguageSelect) {
       languageSelectElement.classList.remove('d-none')
     } else {

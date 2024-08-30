@@ -1,13 +1,7 @@
 import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateProgram extends Translation {
-  constructor(
-    translatedByLine,
-    googleTranslateDisplayName,
-    programId,
-    hasDescription,
-    hasCredit,
-  ) {
+  constructor(translatedByLine, googleTranslateDisplayName, programId, hasDescription, hasCredit) {
     super(translatedByLine, googleTranslateDisplayName)
     this.programId = programId
     this.hasDescription = hasDescription
@@ -29,9 +23,7 @@ export class TranslateProgram extends Translation {
         this.style.display = 'none'
 
         if (translateProgram.isTranslationNotAvailable('#name-translation')) {
-          document.getElementById(
-            'project-translation-loading-spinner',
-          ).style.display = 'block'
+          document.getElementById('project-translation-loading-spinner').style.display = 'block'
           translateProgram.translateProgram()
         } else {
           translateProgram.openTranslatedProgram()
@@ -42,8 +34,7 @@ export class TranslateProgram extends Translation {
       .getElementById('remove-project-translation-button')
       .addEventListener('click', function (event) {
         this.style.display = 'none'
-        document.getElementById('project-translation-button').style.display =
-          'block'
+        document.getElementById('project-translation-button').style.display = 'block'
 
         const name = document.getElementById('name')
         const nameTranslation = document.getElementById('name-translation')
@@ -63,12 +54,10 @@ export class TranslateProgram extends Translation {
 
         if (translateProgram.hasDescription) {
           document.getElementById('description').style.display = 'block'
-          document.getElementById('description-translation').style.display =
-            'none'
+          document.getElementById('description-translation').style.display = 'none'
         }
 
-        document.getElementById('credits-translation-wrapper').style.display =
-          'none'
+        document.getElementById('credits-translation-wrapper').style.display = 'none'
         if (translateProgram.hasCredit) {
           document.getElementById('credits').style.display = 'block'
         }
@@ -81,13 +70,11 @@ export class TranslateProgram extends Translation {
     nameTranslation.textContent = data.translated_title
 
     if (this.hasDescription) {
-      document.getElementById('description-translation').textContent =
-        data.translated_description
+      document.getElementById('description-translation').textContent = data.translated_description
     }
 
     if (this.hasCredit) {
-      document.getElementById('credits-translation').textContent =
-        data.translated_credit
+      document.getElementById('credits-translation').textContent = data.translated_credit
     }
 
     const byLineElements = new ByLineElementContainer(
@@ -102,11 +89,8 @@ export class TranslateProgram extends Translation {
   }
 
   openTranslatedProgram() {
-    document.getElementById(
-      'project-translation-loading-spinner',
-    ).style.display = 'none'
-    document.getElementById('remove-project-translation-button').style.display =
-      'block'
+    document.getElementById('project-translation-loading-spinner').style.display = 'none'
+    document.getElementById('remove-project-translation-button').style.display = 'block'
 
     const name = document.getElementById('name')
     const nameTranslation = document.getElementById('name-translation')
@@ -129,19 +113,15 @@ export class TranslateProgram extends Translation {
       document.getElementById('description').style.display = 'none'
     }
 
-    document.getElementById('credits-translation-wrapper').style.display =
-      'block'
+    document.getElementById('credits-translation-wrapper').style.display = 'block'
     if (this.hasCredit) {
       document.getElementById('credits').style.display = 'none'
     }
   }
 
   programNotTranslated() {
-    document.getElementById(
-      'project-translation-loading-spinner',
-    ).style.display = 'none'
-    document.getElementById('project-translation-button').style.display =
-      'block'
+    document.getElementById('project-translation-loading-spinner').style.display = 'none'
+    document.getElementById('project-translation-button').style.display = 'block'
 
     let text = document.getElementById('name').innerText
 
@@ -158,15 +138,9 @@ export class TranslateProgram extends Translation {
 
   translateProgram() {
     const self = this
-    fetch(
-      '../translate/project/' +
-        self.programId +
-        '?target_language=' +
-        self.targetLanguage,
-      {
-        method: 'GET',
-      },
-    )
+    fetch('../translate/project/' + self.programId + '?target_language=' + self.targetLanguage, {
+      method: 'GET',
+    })
       .then((response) => response.json())
       .then((data) => {
         self.setTranslatedProgramData(data)

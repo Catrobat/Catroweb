@@ -23,33 +23,19 @@ document.getElementById('std-header-form')?.addEventListener('change', () => {
 document.querySelectorAll('.comment-delete-button').forEach((element) =>
   element.addEventListener('click', (e) => {
     const studioId = document.getElementById('studio-id').value
-    new StudioCommentHandler().removeComment(
-      studioId,
-      element,
-      element.dataset.commentId,
-      false,
-      0,
-    )
+    new StudioCommentHandler().removeComment(studioId, element, element.dataset.commentId, false, 0)
   }),
 )
 
-document
-  .getElementById('studio-send-comment')
-  ?.addEventListener('click', () => {
-    const studioId = document.getElementById('studio-id').value
-    new StudioCommentHandler().postComment(studioId, false)
-  })
+document.getElementById('studio-send-comment')?.addEventListener('click', () => {
+  const studioId = document.getElementById('studio-id').value
+  new StudioCommentHandler().postComment(studioId, false)
+})
 
 document.querySelectorAll('.comment-replies').forEach((element) =>
   element.addEventListener('click', (e) => {
     const studioId = document.getElementById('studio-id').value
-    new StudioCommentHandler().loadReplies(
-      studioId,
-      element,
-      element.dataset.commentId,
-      false,
-      0,
-    )
+    new StudioCommentHandler().loadReplies(studioId, element, element.dataset.commentId, false, 0)
   }),
 )
 function uploadCoverImage(file, studioId) {
@@ -100,12 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  const pendingJoinButton = document.querySelectorAll(
-    '#pending-join-requests button.mdc-switch',
-  )
-  const buttonsDeclined = document.querySelectorAll(
-    '#declined-join-requests button.mdc-switch',
-  )
+  const pendingJoinButton = document.querySelectorAll('#pending-join-requests button.mdc-switch')
+  const buttonsDeclined = document.querySelectorAll('#declined-join-requests button.mdc-switch')
   pendingJoinButton.forEach(function (button) {
     button.addEventListener('click', function () {
       const buttonAriaChecked = button.getAttribute('aria-checked')
@@ -176,14 +158,10 @@ document.addEventListener('DOMContentLoaded', function () {
         clickedProjectsAdminRemove.splice(index, 1)
       }
       AJAXdata =
-        clickedProjectsAdminRemove.length > 0
-          ? JSON.stringify(clickedProjectsAdminRemove)
-          : ''
+        clickedProjectsAdminRemove.length > 0 ? JSON.stringify(clickedProjectsAdminRemove) : ''
     }
   })
-  const ajaxRequestDeleteProject = document.getElementById(
-    'ajaxRequestDeleteProject',
-  )
+  const ajaxRequestDeleteProject = document.getElementById('ajaxRequestDeleteProject')
   if (ajaxRequestDeleteProject) {
     ajaxRequestDeleteProject.addEventListener('click', function () {
       if (AJAXdata !== '') {

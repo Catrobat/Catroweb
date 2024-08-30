@@ -57,9 +57,7 @@ export default class extends AjaxController {
       this.registrationButton = document.getElementById('register-btn')
     }
     if (null === this.registrationButtonSpinner) {
-      this.registrationButtonSpinner = document.getElementById(
-        'register-btn__spinner',
-      )
+      this.registrationButtonSpinner = document.getElementById('register-btn__spinner')
     }
   }
 

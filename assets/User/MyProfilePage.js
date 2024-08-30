@@ -36,13 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const url = baseUrl + '/api/projects/user'
 
-  new OwnProjectList(
-    projectsContainer,
-    url,
-    theme,
-    emptyMessage,
-    baseUrl,
-  ).initialize()
+  new OwnProjectList(projectsContainer, url, theme, emptyMessage, baseUrl).initialize()
   new OwnProfile(baseUrl).initializeAll()
 })
 
@@ -72,9 +66,7 @@ class OwnProfile {
 
   initProfilePictureChange() {
     const self = this
-    const avatarElements = document.getElementsByClassName(
-      'profile__basic-info__avatar',
-    )
+    const avatarElements = document.getElementsByClassName('profile__basic-info__avatar')
     if (avatarElements.length) {
       this.avatarElement = avatarElements[0]
       this.avatarElement.addEventListener('click', function () {
@@ -120,9 +112,7 @@ class OwnProfile {
           this.avatarElement.removeChild(loadingSpinner)
           loadingSpinner = null
         }
-        MessageDialogs.showErrorMessage(
-          myProfileConfiguration.messages.profilePictureInvalid,
-        )
+        MessageDialogs.showErrorMessage(myProfileConfiguration.messages.profilePictureInvalid)
       }
       reader.onload = (event) => {
         const image = event.currentTarget.result // base64 data url
@@ -149,93 +139,82 @@ class OwnProfile {
 
   initSaveProfileSettings() {
     const self = this
-    document
-      .getElementById('profile_settings-save_action')
-      .addEventListener('click', () => {
-        const form = document.getElementById('profile-settings-form')
-        if (form.reportValidity() === true) {
-          const formData = new window.FormData(form)
-          const data = {}
-          formData.forEach((value, key) => (data[key] = value))
-          self.updateProfile(data, function () {
-            window.location.search = 'profileChangeSuccess'
-          })
-        }
-      })
+    document.getElementById('profile_settings-save_action').addEventListener('click', () => {
+      const form = document.getElementById('profile-settings-form')
+      if (form.reportValidity() === true) {
+        const formData = new window.FormData(form)
+        const data = {}
+        formData.forEach((value, key) => (data[key] = value))
+        self.updateProfile(data, function () {
+          window.location.search = 'profileChangeSuccess'
+        })
+      }
+    })
   }
 
   initSaveSecuritySettings() {
     const self = this
-    document
-      .getElementById('security_settings-save_action')
-      .addEventListener('click', () => {
-        const form = document.getElementById('security-settings-form')
-        if (form.reportValidity() === true) {
-          const formData = new window.FormData(form)
-          if (formData.get('password') !== formData.get('repeat-password')) {
-            MessageDialogs.showErrorMessage(
-              myProfileConfiguration.messages.security.passwordsDontMatch,
-            )
-          } else {
-            self.updateProfile(
-              {
-                currentPassword: formData.get('current-password'),
-                password: formData.get('password'),
-              },
-              function () {
-                MessageDialogs.showSuccessMessage(
-                  myProfileConfiguration.messages.passwordChangedSuccessText,
-                ).then(() => {
-                  form.reset()
-                  Modal.getInstance(
-                    document.getElementById('security-settings-modal'),
-                  ).hide()
-                })
-              },
-            )
-          }
+    document.getElementById('security_settings-save_action').addEventListener('click', () => {
+      const form = document.getElementById('security-settings-form')
+      if (form.reportValidity() === true) {
+        const formData = new window.FormData(form)
+        if (formData.get('password') !== formData.get('repeat-password')) {
+          MessageDialogs.showErrorMessage(
+            myProfileConfiguration.messages.security.passwordsDontMatch,
+          )
+        } else {
+          self.updateProfile(
+            {
+              currentPassword: formData.get('current-password'),
+              password: formData.get('password'),
+            },
+            function () {
+              MessageDialogs.showSuccessMessage(
+                myProfileConfiguration.messages.passwordChangedSuccessText,
+              ).then(() => {
+                form.reset()
+                Modal.getInstance(document.getElementById('security-settings-modal')).hide()
+              })
+            },
+          )
         }
-      })
+      }
+    })
   }
 
   initDeleteAccount() {
     const routingDataset = document.getElementById('js-api-routing').dataset
-    document
-      .getElementById('btn-delete-account')
-      .addEventListener('click', () => {
-        const msgParts =
-          myProfileConfiguration.userSettings.deleteAccount.confirmationText.split(
-            '\n',
-          )
-        Swal.fire({
-          title: msgParts[0],
-          html: msgParts[1] + '<br><br>' + msgParts[2],
-          icon: 'warning',
-          showCancelButton: true,
-          allowOutsideClick: false,
-          customClass: {
-            confirmButton: 'btn btn-danger',
-            cancelButton: 'btn btn-outline-primary',
-          },
-          buttonsStyling: false,
-          confirmButtonText: msgParts[3],
-          cancelButtonText: msgParts[4],
-        }).then((result) => {
-          if (result.value) {
-            new ApiDeleteFetch(
-              this.baseUrl + '/api/user',
-              'Delete User',
-              myProfileConfiguration.messages.unspecifiedErrorText,
-              function () {
-                deleteCookie('BEARER', routingDataset.baseUrl + '/')
-                window.location.href = routingDataset.index
-              },
-            ).run()
-          }
-        })
-        document.querySelector(
-          '.swal2-container.swal2-backdrop-show',
-        ).style.backgroundColor = 'rgba(220, 53, 69, 0.75)' // changes the color of the overlay
+    document.getElementById('btn-delete-account').addEventListener('click', () => {
+      const msgParts =
+        myProfileConfiguration.userSettings.deleteAccount.confirmationText.split('\n')
+      Swal.fire({
+        title: msgParts[0],
+        html: msgParts[1] + '<br><br>' + msgParts[2],
+        icon: 'warning',
+        showCancelButton: true,
+        allowOutsideClick: false,
+        customClass: {
+          confirmButton: 'btn btn-danger',
+          cancelButton: 'btn btn-outline-primary',
+        },
+        buttonsStyling: false,
+        confirmButtonText: msgParts[3],
+        cancelButtonText: msgParts[4],
+      }).then((result) => {
+        if (result.value) {
+          new ApiDeleteFetch(
+            this.baseUrl + '/api/user',
+            'Delete User',
+            myProfileConfiguration.messages.unspecifiedErrorText,
+            function () {
+              deleteCookie('BEARER', routingDataset.baseUrl + '/')
+              window.location.href = routingDataset.index
+            },
+          ).run()
+        }
       })
+      document.querySelector('.swal2-container.swal2-backdrop-show').style.backgroundColor =
+        'rgba(220, 53, 69, 0.75)' // changes the color of the overlay
+    })
   }
 }

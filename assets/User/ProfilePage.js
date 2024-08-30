@@ -37,15 +37,7 @@ function initUserProjects() {
     const url = `${baseUrl}/api/projects/user/${userId}`
 
     projectList.dataset.list = JSON.stringify(
-      new ProjectList(
-        projectList,
-        'user-projects',
-        url,
-        property,
-        theme,
-        999,
-        emptyMessage,
-      ),
+      new ProjectList(projectList, 'user-projects', url, property, theme, 999, emptyMessage),
     )
   })
 }

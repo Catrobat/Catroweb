@@ -44,7 +44,5 @@ function handleImageClickRemove(projectId) {
   }
 
   document.getElementById('clicked-projects_own_and_studio_projects').value =
-    clickedProjectsRemove.length > 0
-      ? JSON.stringify(clickedProjectsRemove)
-      : ''
+    clickedProjectsRemove.length > 0 ? JSON.stringify(clickedProjectsRemove) : ''
 }

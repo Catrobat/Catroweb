@@ -5,9 +5,7 @@ import './Sidebar.scss'
 const sidebar = document.getElementById('sidebar')
 const sidebarJs = document.querySelector('.js-sidebar')
 
-const sidebarToggleBtn = document.getElementById(
-  'top-app-bar__btn-sidebar-toggle',
-)
+const sidebarToggleBtn = document.getElementById('top-app-bar__btn-sidebar-toggle')
 
 document.addEventListener('DOMContentLoaded', () => {
   initSidebarBadges()
@@ -16,9 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function initSidebarBadges() {
-  if (
-    document.querySelector('.js-user-state').dataset.isUserLoggedIn === 'true'
-  ) {
+  if (document.querySelector('.js-user-state').dataset.isUserLoggedIn === 'true') {
     updateBadge(
       sidebarJs.dataset.baseUrl + '/api/notifications/count',
       'sidebar_badge--unseen-notifications',
@@ -53,10 +49,7 @@ function updateBadge(
       const count = apiToCall === 'new' ? data.total : data.count
       if (count > 0) {
         if (badgeText === null) {
-          badge.innerHTML =
-            count <= maxAmountToFetch
-              ? count.toString()
-              : maxAmountToFetch + '+'
+          badge.innerHTML = count <= maxAmountToFetch ? count.toString() : maxAmountToFetch + '+'
         } else {
           badge.innerHTML = badgeText
         }
@@ -129,9 +122,7 @@ function setClickListener() {
     }
   })
 
-  document
-    .getElementById('sidebar-overlay')
-    .addEventListener('click', fnCloseSidebar)
+  document.getElementById('sidebar-overlay').addEventListener('click', fnCloseSidebar)
 }
 
 function initSidebarSwipe() {
@@ -215,12 +206,7 @@ function initSidebarSwipe() {
   })
 
   document.addEventListener('touchend', function (e) {
-    if (
-      e.changedTouches.length === 1 &&
-      (closing || opening) &&
-      !!curX &&
-      startTime
-    ) {
+    if (e.changedTouches.length === 1 && (closing || opening) && !!curX && startTime) {
       const touchX = e.changedTouches[0].pageX
       const touchY = e.changedTouches[0].pageY
       const timeDiff = Date.now() - startTime
@@ -287,10 +273,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const languageMenuOverlay = document.querySelector('.language-body-overlay')
 
   languageButton.addEventListener('click', function () {
-    if (
-      languageMenu.style.display === 'none' ||
-      languageMenu.style.display === ''
-    ) {
+    if (languageMenu.style.display === 'none' || languageMenu.style.display === '') {
       languageMenu.style.display = 'block'
       languageMenuOverlay.style.display = 'block'
       document.body.style.overflow = 'hidden'

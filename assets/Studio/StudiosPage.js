@@ -17,15 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  document
-    .querySelectorAll('.studios-list-item .mdc-icon-button')
-    .forEach((el) => {
-      el.addEventListener('click', (ev) => {
-        ev.preventDefault()
-        const id = el.dataset.studioId
-        menus[id].open = menus[id].open ? !menus[id].open : true
-      })
+  document.querySelectorAll('.studios-list-item .mdc-icon-button').forEach((el) => {
+    el.addEventListener('click', (ev) => {
+      ev.preventDefault()
+      const id = el.dataset.studioId
+      menus[id].open = menus[id].open ? !menus[id].open : true
     })
+  })
 
   document.querySelectorAll('.ajaxRequestJoinLeaveReport').forEach((el) => {
     el.addEventListener('click', (event) => {

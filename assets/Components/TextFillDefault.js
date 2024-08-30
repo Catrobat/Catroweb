@@ -2,9 +2,7 @@ import TextFill from 'textfilljs'
 
 export default function (container) {
   const containerElem =
-    typeof container === 'string'
-      ? document.querySelector(container)
-      : container
+    typeof container === 'string' ? document.querySelector(container) : container
 
   if (!containerElem) {
     console.error('Container element not found.')

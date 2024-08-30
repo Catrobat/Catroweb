@@ -25,9 +25,7 @@ require('./ProjectPage.scss')
 
 const projectElement = document.querySelector('.js-project')
 const projectShareElement = document.querySelector('.js-project-share')
-const projectDescriptionCreditsElement = document.querySelector(
-  '.js-project-description-credits',
-)
+const projectDescriptionCreditsElement = document.querySelector('.js-project-description-credits')
 const projectCommentsElement = document.querySelector('.js-project-comments')
 const appLanguageElement = document.querySelector('#app-language')
 
@@ -62,11 +60,7 @@ if (projectElement.dataset.myProject === 'true') {
 
   const projectEditorModel = new ProjectEditorModel(
     projectDescriptionCreditsElement.dataset.projectId,
-    [
-      nameEditorTextFieldModel,
-      descriptionEditorTextFieldModel,
-      creditsEditorTextFieldModel,
-    ],
+    [nameEditorTextFieldModel, descriptionEditorTextFieldModel, creditsEditorTextFieldModel],
   )
   const projectEditor = new ProjectEditor(
     projectDescriptionCreditsElement,
@@ -170,9 +164,7 @@ function initProjectScreenshotUpload() {
       const reader = new window.FileReader()
       reader.onerror = () => {
         document.getElementById('upload-image-spinner').classList.add('d-none')
-        MessageDialogs.showErrorMessage(
-          projectConfiguration.messages.screenshotInvalid,
-        )
+        MessageDialogs.showErrorMessage(projectConfiguration.messages.screenshotInvalid)
       }
       reader.onload = (event) => {
         const image = event.currentTarget.result // base64 data url
@@ -181,36 +173,26 @@ function initProjectScreenshotUpload() {
           projectElement.dataset.projectId,
           { screenshot: image },
           function () {
-            const imageElement = document.getElementById(
-              'project-thumbnail-big',
-            )
+            const imageElement = document.getElementById('project-thumbnail-big')
             if (imageElement.src.includes('?')) {
               imageElement.src += '&x=' + new Date().getTime()
             } else {
               imageElement.src += '?x=' + new Date().getTime()
             }
-            document
-              .querySelector('.text-img-upload-success')
-              .classList.remove('d-none')
+            document.querySelector('.text-img-upload-success').classList.remove('d-none')
             setTimeout(function () {
-              document
-                .querySelector('.text-img-upload-success')
-                .classList.add('d-none')
+              document.querySelector('.text-img-upload-success').classList.add('d-none')
             }, 3000)
           },
           function () {
-            document
-              .getElementById('upload-image-spinner')
-              .classList.add('d-none')
+            document.getElementById('upload-image-spinner').classList.add('d-none')
           },
         )
       }
       reader.readAsDataURL(input.files[0])
     }
   }
-  const changeButton = document.getElementById(
-    'change-project-thumbnail-button',
-  )
+  const changeButton = document.getElementById('change-project-thumbnail-button')
   if (changeButton) {
     // otherwise user is not allowed to change screenshot (e.g., not owner of project)
     changeButton.addEventListener('click', function () {
@@ -236,30 +218,26 @@ function initProjectScreenshotUpload() {
 initProjects()
 
 function initProjects() {
-  const recommendedProjectsElement = document.querySelector(
-    '#recommended-projects',
-  )
-  document
-    .querySelectorAll('.project-list', recommendedProjectsElement)
-    .forEach((element) => {
-      const id = element.dataset.projectId
-      const category = element.dataset.category
-      const property = element.dataset.property
-      const theme = element.dataset.theme
-      const flavor = element.dataset.flavor
-      const baseUrl = element.dataset.baseUrl
+  const recommendedProjectsElement = document.querySelector('#recommended-projects')
+  document.querySelectorAll('.project-list', recommendedProjectsElement).forEach((element) => {
+    const id = element.dataset.projectId
+    const category = element.dataset.category
+    const property = element.dataset.property
+    const theme = element.dataset.theme
+    const flavor = element.dataset.flavor
+    const baseUrl = element.dataset.baseUrl
 
-      let url = `${baseUrl}/api/project/${id}/recommendations?category=${category}`
+    let url = `${baseUrl}/api/project/${id}/recommendations?category=${category}`
 
-      if (flavor !== 'pocketcode' || category === 'example') {
-        // Only the pocketcode flavor shows projects from all flavors!
-        // Other flavors must only show projects from their flavor.
-        url += `&flavor=${flavor}`
-      }
+    if (flavor !== 'pocketcode' || category === 'example') {
+      // Only the pocketcode flavor shows projects from all flavors!
+      // Other flavors must only show projects from their flavor.
+      url += `&flavor=${flavor}`
+    }
 
-      const list = new ProjectList(element, category, url, property, theme)
-      element.dataset.list = list
-    })
+    const list = new ProjectList(element, category, url, property, theme)
+    element.dataset.list = list
+  })
 }
 
 new TranslateComments(

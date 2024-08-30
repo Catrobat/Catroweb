@@ -143,10 +143,6 @@ export function ProjectEditorTextFieldModel(
 
   this.shouldDisable = (languageSelected) => {
     // User should not be able to define custom translation if field is not defined in default language
-    return (
-      !this.hasDefaultLanguage &&
-      languageSelected !== '' &&
-      languageSelected !== 'default'
-    )
+    return !this.hasDefaultLanguage && languageSelected !== '' && languageSelected !== 'default'
   }
 }

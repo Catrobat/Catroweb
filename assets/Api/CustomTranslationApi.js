@@ -1,15 +1,9 @@
 export class CustomTranslationApi {
   constructor(programSection) {
-    this.programSection =
-      programSection === 'credits' ? 'credit' : programSection
+    this.programSection = programSection === 'credits' ? 'credit' : programSection
   }
 
-  async getCustomTranslation(
-    programId,
-    language,
-    successCallback,
-    errorCallback = () => {},
-  ) {
+  async getCustomTranslation(programId, language, successCallback, errorCallback = () => {}) {
     try {
       const response = await fetch(
         `../translate/custom/project/${programId}?field=${this.programSection}&language=${language}`,
@@ -51,13 +45,7 @@ export class CustomTranslationApi {
     })
   }
 
-  saveCustomTranslation(
-    programId,
-    text,
-    language,
-    successCallback,
-    errorCallback,
-  ) {
+  saveCustomTranslation(programId, text, language, successCallback, errorCallback) {
     const self = this
     return new Promise((resolve, reject) => {
       fetch(
@@ -82,12 +70,9 @@ export class CustomTranslationApi {
 
   async getCustomTranslationLanguages(programId) {
     try {
-      const response = await fetch(
-        `../translate/custom/project/${programId}/list`,
-        {
-          method: 'GET',
-        },
-      )
+      const response = await fetch(`../translate/custom/project/${programId}/list`, {
+        method: 'GET',
+      })
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)

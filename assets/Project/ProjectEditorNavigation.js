@@ -1,11 +1,7 @@
 import { CustomTranslationApi } from '../Api/CustomTranslationApi'
 import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 
-export function ProjectEditorNavigation(
-  projectDescriptionCredits,
-  programId,
-  programEditor,
-) {
+export function ProjectEditorNavigation(projectDescriptionCredits, programId, programEditor) {
   const self = this
 
   this.programId = programId
@@ -13,9 +9,7 @@ export function ProjectEditorNavigation(
 
   this.body = document.body
   this.editTextNavigation = document.getElementById('edit-text-navigation')
-  this.navigationLanguageList = document.getElementById(
-    'navigation-language-list',
-  )
+  this.navigationLanguageList = document.getElementById('navigation-language-list')
 
   this.languages = {}
 
@@ -23,19 +17,14 @@ export function ProjectEditorNavigation(
 
   this.translationsText = projectDescriptionCredits.dataset.transTranslations
   this.defaultText = projectDescriptionCredits.dataset.transDefault
-  this.translationTitleText =
-    projectDescriptionCredits.dataset.transTranslationTitle
+  this.translationTitleText = projectDescriptionCredits.dataset.transTranslationTitle
   this.editDefaultText = projectDescriptionCredits.dataset.transEditDefault
-  this.editTranslationText =
-    projectDescriptionCredits.dataset.transEditTranslation
-  this.createTranslationText =
-    projectDescriptionCredits.dataset.transCreateTranslation
+  this.editTranslationText = projectDescriptionCredits.dataset.transEditTranslation
+  this.createTranslationText = projectDescriptionCredits.dataset.transCreateTranslation
 
-  document
-    .getElementById('add-translation-button')
-    .addEventListener('click', () => {
-      this.openEditor(null, true, false, this.createTranslationText)
-    })
+  document.getElementById('add-translation-button').addEventListener('click', () => {
+    this.openEditor(null, true, false, this.createTranslationText)
+  })
 
   document.addEventListener('DOMContentLoaded', getLanguages)
 
@@ -85,12 +74,7 @@ export function ProjectEditorNavigation(
     this.editTextNavigation.classList.add('d-none')
   }
 
-  this.openEditor = (
-    language,
-    showLanguageSelect,
-    showDeleteButton,
-    headerText,
-  ) => {
+  this.openEditor = (language, showLanguageSelect, showDeleteButton, headerText) => {
     window.removeEventListener('popstate', this.popStateHandler)
 
     this.programEditor.show(

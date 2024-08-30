@@ -1,9 +1,6 @@
 /* global sessionStorage */
 
-import {
-  showTopBarSearch,
-  controlTopBarSearchClearButton,
-} from '../Layout/TopBar'
+import { showTopBarSearch, controlTopBarSearchClearButton } from '../Layout/TopBar'
 require('./ProjectList.scss')
 
 /**
@@ -54,12 +51,8 @@ export class ProjectLoader {
         return
       }
 
-      searchResultsText.querySelector('span').innerText =
-        data.CatrobatInformation.TotalProjects
-      this.totalNumberOfFoundProjects = parseInt(
-        data.CatrobatInformation.TotalProjects,
-        10,
-      )
+      searchResultsText.querySelector('span').innerText = data.CatrobatInformation.TotalProjects
+      this.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects, 10)
 
       await this.setup(data)
     } catch (error) {
@@ -119,13 +112,10 @@ export class ProjectLoader {
   }
 
   async updateInitialDownloadLimit() {
-    if (
-      this.restored_numberOfVisibleProjects === this.totalNumberOfFoundProjects
-    ) {
+    if (this.restored_numberOfVisibleProjects === this.totalNumberOfFoundProjects) {
       this.initialDownloadLimit = this.totalNumberOfFoundProjects
     } else if (this.initialDownloadLimit > this.downloadLimit) {
-      this.initialDownloadLimit -=
-        this.initialDownloadLimit % this.downloadLimit
+      this.initialDownloadLimit -= this.initialDownloadLimit % this.downloadLimit
     } else {
       this.initialDownloadLimit = this.downloadLimit
     }
@@ -169,17 +159,10 @@ export class ProjectLoader {
   async showMoreProjects() {
     if (this.numberOfVisibleProjects >= this.totalNumberOfFoundProjects) {
       await this.hide(this.container.querySelector('.btn-show-more'))
-    } else if (
-      this.numberOfLoadedProjects >=
-      this.numberOfVisibleProjects + this.downloadLimit
-    ) {
-      await this.updateNumberOfVisiblePrograms(
-        this.numberOfVisibleProjects + this.downloadLimit,
-      )
+    } else if (this.numberOfLoadedProjects >= this.numberOfVisibleProjects + this.downloadLimit) {
+      await this.updateNumberOfVisiblePrograms(this.numberOfVisibleProjects + this.downloadLimit)
       await this.updateUIVisibility()
-    } else if (
-      this.totalNumberOfFoundProjects === this.numberOfLoadedProjects
-    ) {
+    } else if (this.totalNumberOfFoundProjects === this.numberOfLoadedProjects) {
       await this.updateNumberOfVisiblePrograms(this.totalNumberOfFoundProjects)
       await this.updateUIVisibility()
     } else {
@@ -210,8 +193,7 @@ export class ProjectLoader {
 
   async showLessProjects() {
     await this.updateNumberOfVisiblePrograms(
-      this.numberOfVisibleProjects -
-        (this.numberOfVisibleProjects % this.downloadLimit),
+      this.numberOfVisibleProjects - (this.numberOfVisibleProjects % this.downloadLimit),
     )
     await this.updateUIVisibility()
   }
@@ -246,10 +228,7 @@ export class ProjectLoader {
 
   restoreParamsWithSessionStorage() {
     const storageId = window.location.href.split('?')[0]
-    this.restored_numberOfVisibleProjects = parseInt(
-      sessionStorage.getItem(storageId),
-      10,
-    )
+    this.restored_numberOfVisibleProjects = parseInt(sessionStorage.getItem(storageId), 10)
   }
 
   async buildProjectInHtml(project, data) {

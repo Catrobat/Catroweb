@@ -33,8 +33,7 @@ if (bugsnagApiKey) {
   BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion })
 }
 
-const gtmContainerId =
-  document.getElementById('gtm-container-id').dataset.gtmContainerId
+const gtmContainerId = document.getElementById('gtm-container-id').dataset.gtmContainerId
 if (gtmContainerId) {
   const analytics = Analytics({
     app: 'share.catrob.at',
@@ -60,8 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function showFlashSnackbar() {
-  const snackbarFlashMessages =
-    document.getElementsByClassName('js-flash-snackbar')
+  const snackbarFlashMessages = document.getElementsByClassName('js-flash-snackbar')
   Array.from(snackbarFlashMessages).forEach((jsMsgObj) => {
     showSnackbar('#share-snackbar', jsMsgObj.dataset.msg)
   })
@@ -70,11 +68,9 @@ function showFlashSnackbar() {
 function fitHeadingFontSizeToAvailableWidth() {
   // Adjust heading font size or break word
   ;['h1', '.h1', 'h2', '.h2', 'h3', '.h3'].forEach(function (element) {
-    document
-      .querySelectorAll(element + ':not(.no-textfill)')
-      .forEach(function (el) {
-        textFillDefault(el)
-      })
+    document.querySelectorAll(element + ':not(.no-textfill)').forEach(function (el) {
+      textFillDefault(el)
+    })
   })
 }
 

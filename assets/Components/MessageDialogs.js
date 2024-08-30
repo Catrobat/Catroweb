@@ -24,8 +24,7 @@ export default class MessageDialogs {
 
     return Swal.fire({
       title: globalConfiguration.messages.errorTitle,
-      html:
-        '<ul class="text-start"><li>' + errors.join('</li><li>') + '</li></ul>',
+      html: '<ul class="text-start"><li>' + errors.join('</li><li>') + '</li></ul>',
       icon: 'error',
       customClass: {
         confirmButton: 'btn btn-primary',

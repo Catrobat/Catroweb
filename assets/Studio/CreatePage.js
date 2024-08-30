@@ -50,8 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function drag() {
-    document.getElementById('uploadFile').parentNode.className =
-      'draging dragBox'
+    document.getElementById('uploadFile').parentNode.className = 'draging dragBox'
   }
 
   function drop() {
@@ -75,9 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  const checkboxesPublic = document.getElementsByClassName(
-    'check-studios-public',
-  )
+  const checkboxesPublic = document.getElementsByClassName('check-studios-public')
   for (let i = 0; i < checkboxesPublic.length; i++) {
     checkboxesPublic[i].addEventListener('input', function (event) {
       resetCssInvalidCheckbox(checkboxesPublic)
@@ -85,9 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   }
 
-  const checkboxesComments = document.getElementsByClassName(
-    'check-studios-comments',
-  )
+  const checkboxesComments = document.getElementsByClassName('check-studios-comments')
   for (let i = 0; i < checkboxesComments.length; i++) {
     checkboxesComments[i].addEventListener('input', function (event) {
       resetCssInvalidCheckbox(checkboxesComments)
@@ -98,12 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function submitForm() {
   const nameInput = document.getElementById('inputStudioName').value.trim()
-  const descriptionInput = document
-    .getElementById('inputStudioDescription')
-    .value.trim()
-  const isEnabledValue = document.querySelector(
-    '.check-studios[name="form[is_enabled]"]:checked',
-  )
+  const descriptionInput = document.getElementById('inputStudioDescription').value.trim()
+  const isEnabledValue = document.querySelector('.check-studios[name="form[is_enabled]"]:checked')
   const isPublicValue = document.querySelector(
     '.check-studios-public[name="form[is_public]"]:checked',
   )
@@ -170,9 +161,7 @@ function cancelForm() {
 }
 
 function parseInput() {
-  const isEnableChecked = document.querySelector(
-    '.check-studios[name="form[is_enabled]"]:checked',
-  )
+  const isEnableChecked = document.querySelector('.check-studios[name="form[is_enabled]"]:checked')
   const isPublicChecked = document.querySelector(
     '.check-studios-public[name="form[is_public]"]:checked',
   )
@@ -199,15 +188,12 @@ function parseInput() {
   }
 
   if (!allowCommentsChecked) {
-    const radioInputs = document.getElementsByClassName(
-      'check-studios-comments',
-    )
+    const radioInputs = document.getElementsByClassName('check-studios-comments')
     for (let i = 0; i < radioInputs.length; i++) {
       radioInputs[i].classList.add('warning')
     }
     const warningMessage = document.getElementById('allow-comments-warning')
-    warningMessage.textContent =
-      'Please select whether to allow comments or not in the studio!'
+    warningMessage.textContent = 'Please select whether to allow comments or not in the studio!'
     wrongInput = true
   }
   if (!isPublicChecked) {
@@ -216,8 +202,7 @@ function parseInput() {
       radioInputs[i].classList.add('warning')
     }
     const warningMessage = document.getElementById('is-public-warning')
-    warningMessage.textContent =
-      'Please select whether the studio should be private or public!'
+    warningMessage.textContent = 'Please select whether the studio should be private or public!'
     wrongInput = true
   }
   if (wrongInput) {

@@ -48,9 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .finally(() => {
           document.getElementById('code-view-spinner').classList.add('d-none')
-          document
-            .getElementById('code-view-toggler')
-            .classList.remove('d-none')
+          document.getElementById('code-view-toggler').classList.remove('d-none')
           // CatBlocks need a visible container to calculate the svg sizes.
           // Still it should be collapsed on a page load.
           const collapseCodeView = document.getElementById('collapseCodeView')
@@ -66,10 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.collapse-btn').forEach((btn) => {
     btn.addEventListener('click', function () {
       const nextElement = this.nextElementSibling
-      if (
-        nextElement.style.display === 'none' ||
-        nextElement.style.display === ''
-      ) {
+      if (nextElement.style.display === 'none' || nextElement.style.display === '') {
         nextElement.style.display = 'block'
       } else {
         nextElement.style.display = 'none'

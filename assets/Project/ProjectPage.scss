@@ -107,14 +107,10 @@
     $like-detail-button-size: 2.4rem;
     $like-detail-triangle-width: 2rem;
     $like-detail-triangle-height: math.div($like-detail-triangle-width, 1.38);
-    $like-detail-triangle-left: math.div(
-      $like-button-size,
-      2 - $like-detail-left
-    );
+    $like-detail-triangle-left: math.div($like-button-size, 2 - $like-detail-left);
 
     position: absolute;
-    top: -$like-detail-button-size - 2 * $like-detail-padding -
-      $like-detail-triangle-height;
+    top: -$like-detail-button-size - 2 * $like-detail-padding - $like-detail-triangle-height;
     left: $like-detail-left;
     display: none;
     padding: $like-detail-padding;

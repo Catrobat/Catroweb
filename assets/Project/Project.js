@@ -70,31 +70,27 @@ export const Project = function (
     })
   })
 
-  document
-    .querySelectorAll('.js-btn-project-download-disabled')
-    .forEach((button) => {
-      button.addEventListener('click', (e) => {
-        downloadDisabled(e.currentTarget.dataset.redirectUrl)
-      })
+  document.querySelectorAll('.js-btn-project-download-disabled').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      downloadDisabled(e.currentTarget.dataset.redirectUrl)
     })
+  })
 
-  document
-    .querySelectorAll('.js-btn-project-apk-download')
-    .forEach((button) => {
-      button.addEventListener('click', (e) => {
-        download(
-          e.currentTarget.dataset.pathUrl,
-          `${e.currentTarget.dataset.projectId}.apk`,
-          e.currentTarget.dataset.buttonId,
-          e.currentTarget.dataset.spinnerId,
-          e.currentTarget.dataset.iconId,
-          e.currentTarget.dataset.isWebview,
-          e.currentTarget.dataset.isSupported,
-          e.currentTarget.dataset.isNotSupportedTitle,
-          e.currentTarget.dataset.isNotSupportedText,
-        )
-      })
+  document.querySelectorAll('.js-btn-project-apk-download').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      download(
+        e.currentTarget.dataset.pathUrl,
+        `${e.currentTarget.dataset.projectId}.apk`,
+        e.currentTarget.dataset.buttonId,
+        e.currentTarget.dataset.spinnerId,
+        e.currentTarget.dataset.iconId,
+        e.currentTarget.dataset.isWebview,
+        e.currentTarget.dataset.isSupported,
+        e.currentTarget.dataset.isNotSupportedTitle,
+        e.currentTarget.dataset.isNotSupportedText,
+      )
     })
+  })
 
   function download(
     downloadUrl,
@@ -198,10 +194,7 @@ export const Project = function (
     console.error('Downloading ' + filename + ' failed')
   }
 
-  function showProjectIsNotSupportedMessage(
-    isNotSupportedTitle,
-    isNotSupportedText,
-  ) {
+  function showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText) {
     Swal.fire({
       icon: 'error',
       title: isNotSupportedTitle,
@@ -236,15 +229,11 @@ export const Project = function (
   }
 
   function onResult(data) {
-    const apkPending = document.querySelectorAll(
-      '#apk-pending, #apk-pending-small',
-    )
+    const apkPending = document.querySelectorAll('#apk-pending, #apk-pending-small')
     const apkDownload = document.querySelectorAll(
       '#projectApkDownloadButton, #projectApkDownloadButton-small',
     )
-    const apkGenerate = document.querySelectorAll(
-      '#apk-generate, #apk-generate-small',
-    )
+    const apkGenerate = document.querySelectorAll('#apk-generate, #apk-generate-small')
     apkGenerate.forEach((el) => el.classList.add('d-none'))
     apkDownload.forEach((el) => el.classList.add('d-none'))
     apkPending.forEach((el) => el.classList.add('d-none'))
@@ -359,15 +348,9 @@ export const Project = function (
     })
 
     const containerSmall = document.getElementById('project-like-small')
-    projectLikeButtonsSmall = containerSmall.querySelector(
-      '#project-like-buttons-small',
-    )
-    projectLikeDetailSmall = containerSmall.querySelector(
-      '#project-like-detail-small',
-    )
-    projectLikeCounterSmall = containerSmall.querySelector(
-      '#project-like-counter-small',
-    )
+    projectLikeButtonsSmall = containerSmall.querySelector('#project-like-buttons-small')
+    projectLikeDetailSmall = containerSmall.querySelector('#project-like-detail-small')
+    projectLikeCounterSmall = containerSmall.querySelector('#project-like-counter-small')
 
     projectLikeButtonsSmall.addEventListener('click', function () {
       if (projectLikeDetailSmall.style.display === 'flex') {
@@ -382,8 +365,7 @@ export const Project = function (
         return
       }
       const isClickInsideDetail =
-        projectLikeDetail.contains(event.target) ||
-        projectLikeDetailSmall.contains(event.target)
+        projectLikeDetail.contains(event.target) || projectLikeDetailSmall.contains(event.target)
       if (!isClickInsideDetail) {
         projectLikeDetail.style.display = 'none'
         projectLikeDetailSmall.style.display = 'none'
@@ -391,12 +373,8 @@ export const Project = function (
       }
     })
 
-    projectLikeCounter.addEventListener('click', (event) =>
-      counterClickAction(event, false),
-    )
-    projectLikeCounterSmall.addEventListener('click', (event) =>
-      counterClickAction(event, true),
-    )
+    projectLikeCounter.addEventListener('click', (event) => counterClickAction(event, false))
+    projectLikeCounterSmall.addEventListener('click', (event) => counterClickAction(event, true))
 
     projectLikeDetail
       .querySelectorAll('.btn')
@@ -428,9 +406,7 @@ export const Project = function (
 
         const modal = document.getElementById('project-like-modal')
         const bootstrapModal = new Modal(modal)
-        const firstTabEl = document.querySelector(
-          '#reaction-modal-tab li:first-child button',
-        )
+        const firstTabEl = document.querySelector('#reaction-modal-tab li:first-child button')
         const firstTab = new Tab(firstTabEl)
         firstTab.show()
 
@@ -482,8 +458,7 @@ export const Project = function (
             like.types.forEach((type) => {
               if (type !== 'wow') {
                 const icon = document.createElement('i')
-                icon.className =
-                  'material-icons md-18 ' + iconMappingClasses[type]
+                icon.className = 'material-icons md-18 ' + iconMappingClasses[type]
                 icon.textContent = iconMapping[type]
                 likeTypes.appendChild(icon)
               } else {
@@ -506,21 +481,14 @@ export const Project = function (
         fnUpdateContent('love', loveData)
         fnUpdateContent('wow', wowData)
 
-        document
-          .getElementById('project-reactions-spinner')
-          .classList.add('d-none')
-        document
-          .getElementById('project-reactions-spinner-small')
-          .classList.add('d-none')
+        document.getElementById('project-reactions-spinner').classList.add('d-none')
+        document.getElementById('project-reactions-spinner-small').classList.add('d-none')
 
         bootstrapModal.show()
       })
       .catch((error) => {
-        document.getElementById('project-reactions-spinner').style.display =
-          'none'
-        document.getElementById(
-          'project-reactions-spinner-small',
-        ).style.display = 'none'
+        document.getElementById('project-reactions-spinner').style.display = 'none'
+        document.getElementById('project-reactions-spinner-small').style.display = 'none'
         showErrorAlert()
         console.error('Failed fetching like list', error)
       })
@@ -528,9 +496,7 @@ export const Project = function (
 
   function detailsAction(event) {
     event.preventDefault()
-    const action = this.classList.contains('active')
-      ? likeActionRemove
-      : likeActionAdd
+    const action = this.classList.contains('active') ? likeActionRemove : likeActionAdd
     sendProjectLike(
       this.dataset.likeType,
       action,
@@ -543,9 +509,7 @@ export const Project = function (
 
   function detailsActionSmall(event) {
     event.preventDefault()
-    const action = this.classList.contains('active')
-      ? likeActionRemove
-      : likeActionAdd
+    const action = this.classList.contains('active') ? likeActionRemove : likeActionAdd
     sendProjectLike(
       this.dataset.likeType,
       action,
@@ -579,9 +543,7 @@ export const Project = function (
     })
       .then((response) => response.json())
       .then((data) => {
-        const typeBtn = likeDetail.querySelector(
-          `.btn[data-like-type="${likeType}"]`,
-        )
+        const typeBtn = likeDetail.querySelector(`.btn[data-like-type="${likeType}"]`)
         if (likeAction === likeActionAdd) {
           typeBtn.classList.add('active')
         } else {
@@ -597,10 +559,7 @@ export const Project = function (
           likeCounter.classList.remove('d-none')
         }
 
-        if (
-          !Array.isArray(data.activeLikeTypes) ||
-          data.activeLikeTypes.length === 0
-        ) {
+        if (!Array.isArray(data.activeLikeTypes) || data.activeLikeTypes.length === 0) {
           likeButtons.innerHTML = `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
                     <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
         } else {
@@ -654,9 +613,7 @@ export const Project = function (
 //
 
 document.addEventListener('click', function (e) {
-  const ellipsisContainer = document.getElementById(
-    'sign-app-ellipsis-container',
-  )
+  const ellipsisContainer = document.getElementById('sign-app-ellipsis-container')
   const ellipsis = document.getElementById('sign-app-ellipsis')
 
   if (
@@ -668,12 +625,9 @@ document.addEventListener('click', function (e) {
 })
 
 document.addEventListener('DOMContentLoaded', function () {
-  document
-    .getElementById('sign-app-ellipsis')
-    ?.addEventListener('click', function () {
-      document.getElementById('sign-app-ellipsis-container').style.display =
-        'block'
-    })
+  document.getElementById('sign-app-ellipsis')?.addEventListener('click', function () {
+    document.getElementById('sign-app-ellipsis-container').style.display = 'block'
+  })
 
   document.getElementById('toggle_ads')?.addEventListener('click', function () {
     const adsInfo = document.getElementById('ads_info')
@@ -744,13 +698,10 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault()
       const markSafeForKidsText = document.getElementById('markSafeForKidsText')
       const markNotForKidsText = document.getElementById('markNotForKidsText')
-      const url = document
-        .getElementById('projectNotForKidsButton')
-        .getAttribute('data-url')
+      const url = document.getElementById('projectNotForKidsButton').getAttribute('data-url')
       let text = ''
       if (markSafeForKidsText != null) {
-        text =
-          'Are you sure you want to remove the not for kids flag from this project?'
+        text = 'Are you sure you want to remove the not for kids flag from this project?'
       } else if (markNotForKidsText != null) {
         text = 'Are you sure you want to mark this project as not for kids?'
       }

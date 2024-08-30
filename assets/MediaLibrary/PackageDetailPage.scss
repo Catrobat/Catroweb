@@ -73,10 +73,8 @@ $img-border-strength: 2px;
           justify-content: center;
 
           img {
-            max-width: $tile-size-sm - 2 * $tile-padding-y - 2 *
-              $img-border-strength;
-            max-height: $tile-size-sm - 2 * $tile-padding-y - 2 *
-              $img-border-strength;
+            max-width: $tile-size-sm - 2 * $tile-padding-y - 2 * $img-border-strength;
+            max-height: $tile-size-sm - 2 * $tile-padding-y - 2 * $img-border-strength;
           }
         }
 
@@ -185,10 +183,8 @@ $img-border-strength: 2px;
       height: $tile-size-md - 2 * $tile-padding-y;
 
       img {
-        max-width: $tile-size-md - 2 * $tile-padding-y - 2 *
-          $img-border-strength;
-        max-height: $tile-size-md - 2 * $tile-padding-y - 2 *
-          $img-border-strength;
+        max-width: $tile-size-md - 2 * $tile-padding-y - 2 * $img-border-strength;
+        max-height: $tile-size-md - 2 * $tile-padding-y - 2 * $img-border-strength;
       }
     }
 
@@ -213,10 +209,8 @@ $img-border-strength: 2px;
       height: $tile-size-lg - 4 * $tile-padding-y;
 
       img {
-        max-width: $tile-size-lg - 4 * $tile-padding-y - 2 *
-          $img-border-strength;
-        max-height: $tile-size-lg - 4 * $tile-padding-y - 2 *
-          $img-border-strength;
+        max-width: $tile-size-lg - 4 * $tile-padding-y - 2 * $img-border-strength;
+        max-height: $tile-size-lg - 4 * $tile-padding-y - 2 * $img-border-strength;
       }
     }
 

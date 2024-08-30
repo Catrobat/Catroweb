@@ -8,11 +8,7 @@ export class TokenExpirationHandler {
     this.indexPath = routingDataset.index
     this.authenticationRefreshPath = routingDataset.authenticationRefresh
     this.checkBearerTokenExpiration()
-    this.interval = this.setScopedInterval(
-      this.checkBearerTokenExpiration,
-      60000,
-      this,
-    )
+    this.interval = this.setScopedInterval(this.checkBearerTokenExpiration, 60000, this)
   }
 
   checkBearerTokenExpiration() {
@@ -52,12 +48,7 @@ export class TokenExpirationHandler {
         }
       })
       .then((data) => {
-        setCookie(
-          'BEARER',
-          data.token,
-          'Tue, 19 Jan 2038 00:00:01 GMT',
-          this.baseUrl + '/',
-        )
+        setCookie('BEARER', data.token, 'Tue, 19 Jan 2038 00:00:01 GMT', this.baseUrl + '/')
         setCookie(
           'REFRESH_TOKEN',
           data.refresh_token,

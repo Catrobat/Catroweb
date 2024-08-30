@@ -1,7 +1,4 @@
-import {
-  controlTopBarSearchClearButton,
-  showTopBarSearch,
-} from '../Layout/TopBar'
+import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
 import { ProjectList } from '../Project/ProjectList'
 import { UserList } from '../User/UserList'
 import './Search.scss'
@@ -43,15 +40,7 @@ class Search {
       noProjects,
     )
 
-    this.userList = new UserList(
-      searchUsers,
-      baseUrl,
-      userUrl,
-      theme,
-      projectString,
-      30,
-      noUsers,
-    )
+    this.userList = new UserList(searchUsers, baseUrl, userUrl, theme, projectString, 30, noUsers)
   }
 }
 

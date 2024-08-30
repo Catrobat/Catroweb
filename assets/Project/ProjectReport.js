@@ -25,26 +25,18 @@ export function ProjectReport(
   const SESSION_OLD_REPORT_REASON = 'oldReportReason' + programId
   const SESSION_OLD_REPORT_CATEGORY = 'oldReportCategory' + programId
 
-  document
-    .getElementById('top-app-bar__btn-report-project')
-    .addEventListener('click', function () {
-      if (!loggedIn) {
-        window.location.href = loginUrl
-        return
-      }
+  document.getElementById('top-app-bar__btn-report-project').addEventListener('click', function () {
+    if (!loggedIn) {
+      window.location.href = loginUrl
+      return
+    }
 
-      const oldReportReason =
-        sessionStorage.getItem(SESSION_OLD_REPORT_REASON) || ''
-      const oldReportCategory =
-        sessionStorage.getItem(SESSION_OLD_REPORT_CATEGORY) || ''
-      reportProgramDialog(false, oldReportReason, oldReportCategory)
-    })
+    const oldReportReason = sessionStorage.getItem(SESSION_OLD_REPORT_REASON) || ''
+    const oldReportCategory = sessionStorage.getItem(SESSION_OLD_REPORT_CATEGORY) || ''
+    reportProgramDialog(false, oldReportReason, oldReportCategory)
+  })
 
-  function reportProgramDialog(
-    error = false,
-    oldReason = '',
-    oldCategory = '',
-  ) {
+  function reportProgramDialog(error = false, oldReason = '', oldCategory = '') {
     Swal.fire({
       title: reportDialogTitle,
       html: getReportDialogHtml(error, oldReason, oldCategory),
@@ -62,8 +54,7 @@ export function ProjectReport(
         return new Promise(function (resolve) {
           resolve([
             document.getElementById('report-reason').value,
-            document.querySelector('input[name="report-category"]:checked')
-              .value,
+            document.querySelector('input[name="report-category"]:checked').value,
           ])
         })
       },
@@ -159,8 +150,7 @@ export function ProjectReport(
     const errorClass = error ? 'text-area-empty' : ''
     const reasonPlaceholder = oldReason ? '' : reportDialogReason
 
-    const checkedInappropriate =
-      oldCategory === INAPPROPRIATE_VALUE ? CHECKED : ''
+    const checkedInappropriate = oldCategory === INAPPROPRIATE_VALUE ? CHECKED : ''
     const checkedCopyright = oldCategory === COPYRIGHT_VALUE ? CHECKED : ''
     const checkedSpam = oldCategory === SPAM_VALUE ? CHECKED : ''
     const checkedDislike = oldCategory === DISLIKE_VALUE ? CHECKED : ''

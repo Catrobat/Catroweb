@@ -7,10 +7,7 @@ class SearchOld {
     this.resultContainer = this.searchElement.dataset.resultContainer
     this.pathSearch = this.searchElement.dataset.pathSearch
     this.query = this.searchElement.dataset.query
-    this.projectLoader = new ProjectLoader(
-      this.resultContainer,
-      this.pathSearch,
-    )
+    this.projectLoader = new ProjectLoader(this.resultContainer, this.pathSearch)
   }
 
   searchResult() {

@@ -7,13 +7,9 @@ export function ProjectDescription(
   customTranslationApi,
 ) {
   const description = document.getElementById('description')
-  const descriptionCreditsContainer = document.getElementById(
-    'description-credits-container',
-  )
+  const descriptionCreditsContainer = document.getElementById('description-credits-container')
   const showMoreToggle = document.getElementById('descriptionShowMoreToggle')
-  const descriptionShowMoreText = document.getElementById(
-    'descriptionShowMoreText',
-  )
+  const descriptionShowMoreText = document.getElementById('descriptionShowMoreText')
 
   initShowMore()
 

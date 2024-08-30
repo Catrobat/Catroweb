@@ -6,23 +6,17 @@ const topAppBarElement = document.querySelector('.mdc-top-app-bar')
 const mdcObject = new MDCTopAppBar(topAppBarElement)
 
 const title = document.querySelector('#top-app-bar__title')
-const toggleSidebarButton = document.querySelector(
-  '#top-app-bar__btn-sidebar-toggle',
-)
+const toggleSidebarButton = document.querySelector('#top-app-bar__btn-sidebar-toggle')
 let backButton = document.querySelector('#top-app-bar__back__btn-back')
 
 const searchButton = document.querySelector('#top-app-bar__btn-search')
 const searchBackButton = document.querySelector('#top-app-bar__btn-search-back')
-const searchClearButton = document.querySelector(
-  '#top-app-bar__btn-search-clear',
-)
+const searchClearButton = document.querySelector('#top-app-bar__btn-search-clear')
 const searchInput = document.querySelector('#top-app-bar__search-input')
 const searchForm = document.querySelector('#top-app-bar__search-form')
 
 const optionsButton = document.querySelector('#top-app-bar__btn-options')
-const optionsContainer = document.querySelector(
-  '#top-app-bar__options-container',
-)
+const optionsContainer = document.querySelector('#top-app-bar__options-container')
 
 const defaultAppBarHref = title.getAttribute('href')
 const defaultTitle = title.innerHTML
@@ -62,8 +56,7 @@ if (optionsContainer && optionsButton) {
 
 export function showTopBarDownload() {
   hideTopBars()
-  document.querySelector('#top-app-bar__media-library-download').style.display =
-    'flex'
+  document.querySelector('#top-app-bar__media-library-download').style.display = 'flex'
 }
 
 export function showTopBarDefault() {
@@ -83,14 +76,10 @@ export function showCustomTopBarTitle(titleText, onBack) {
   if (typeof onBack === 'function') {
     backButton = document.createElement('button')
     backButton.id = 'top-app-bar__back__btn-back'
-    backButton.className =
-      'material-icons mdc-top-app-bar__action-item mdc-icon-button'
+    backButton.className = 'material-icons mdc-top-app-bar__action-item mdc-icon-button'
     backButton.setAttribute('aria-label', 'Back to previous page')
     backButton.textContent = 'arrow_back'
-    toggleSidebarButton.parentNode.insertBefore(
-      backButton,
-      toggleSidebarButton.nextSibling,
-    )
+    toggleSidebarButton.parentNode.insertBefore(backButton, toggleSidebarButton.nextSibling)
     toggleSidebarButton.style.display = 'none'
     backButton.style.display = 'block'
     backButton.addEventListener('click', onBack)
@@ -124,10 +113,7 @@ function hideTopBars() {
 
 function handleSearchBackButton() {
   const beforeSearchUrl = window.sessionStorage.getItem(PREVIOUS_SEARCH_URL_KEY)
-  if (
-    window.location.pathname.includes('/search/') &&
-    beforeSearchUrl !== null
-  ) {
+  if (window.location.pathname.includes('/search/') && beforeSearchUrl !== null) {
     window.sessionStorage.removeItem(PREVIOUS_SEARCH_URL_KEY)
     window.location.href = beforeSearchUrl
   } else {

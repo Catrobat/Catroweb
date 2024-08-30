@@ -47,9 +47,9 @@ const _InternalRemixGraph = function () {
     self.remixGraphLayerId = remixGraphLayerId
     self.remixGraphTranslations = remixGraphTranslations
     self.programDetailsUrlTemplate = programDetailsUrlTemplate
-    $(
-      '<div id="context-menu" class="context-menu-trigger" style="display:none;"></div>',
-    ).appendTo('#' + modalLayerId)
+    $('<div id="context-menu" class="context-menu-trigger" style="display:none;"></div>').appendTo(
+      '#' + modalLayerId,
+    )
   }
 
   self.getNodes = function () {
@@ -104,9 +104,7 @@ const _InternalRemixGraph = function () {
 
   self.onClick = function (params) {
     // prevent multiple simultaneous clicks (needed for Google Chrome on Android)
-    const overlayDiv = $('<div></div>')
-      .attr('id', 'overlay')
-      .addClass('overlay')
+    const overlayDiv = $('<div></div>').attr('id', 'overlay').addClass('overlay')
     overlayDiv.appendTo('body')
     // eslint-disable-next-line no-implied-eval
     setTimeout("$('#overlay').remove();", 300)
@@ -131,9 +129,7 @@ const _InternalRemixGraph = function () {
           size: id === self.programID ? 40 : 20,
         },
       ])
-      self.edges.update([
-        { id: edgeData.id, width: 1, color: NETWORK_OPTIONS.edges.color },
-      ])
+      self.edges.update([{ id: edgeData.id, width: 1, color: NETWORK_OPTIONS.edges.color }])
     })
 
     if (selectedNodes.length === 0) {
@@ -216,9 +212,7 @@ const _InternalRemixGraph = function () {
         name: self.remixGraphTranslations.showPaths,
         icon: function (opt, $itemElement, itemKey, item) {
           $itemElement.html(
-            '<span class="material-icons">repeat</span><span class="text">' +
-              item.name +
-              '</span>',
+            '<span class="material-icons">repeat</span><span class="text">' + item.name + '</span>',
           )
           return 'context-menu-icon-material'
         },
@@ -250,10 +244,7 @@ const _InternalRemixGraph = function () {
           const minMarginLeft = 10
           const minMarginRight = 10
           const menuOffsetX = Math.max(
-            Math.min(
-              offsetX + domPosition.x,
-              windowWidth - menuWidth - minMarginRight,
-            ),
+            Math.min(offsetX + domPosition.x, windowWidth - menuWidth - minMarginRight),
             minMarginLeft,
           )
           opt.$menu.css({
@@ -302,24 +293,16 @@ const _InternalRemixGraph = function () {
   self.dimEdges = function () {
     const edgeIds = self.edges.getIds()
     for (let i = 0; i < edgeIds.length; i++) {
-      self.edges.update([
-        { id: edgeIds[i], color: { border: '#000000', opacity: 0.5 } },
-      ])
+      self.edges.update([{ id: edgeIds[i], color: { border: '#000000', opacity: 0.5 } }])
     }
-    self.nodes.update([
-      { id: CATROBAT_NODE_PREFIX + '_' + self.programID, size: 20 },
-    ])
+    self.nodes.update([{ id: CATROBAT_NODE_PREFIX + '_' + self.programID, size: 20 }])
   }
 
   self.highlightNode = function (nodeId) {
-    self.nodes.update([
-      { id: nodeId, borderWidth: 7, size: 30, color: { border: '#00acc1' } },
-    ])
+    self.nodes.update([{ id: nodeId, borderWidth: 7, size: 30, color: { border: '#00acc1' } }])
   }
 
   self.highlightEdge = function (edgeId) {
-    self.edges.update([
-      { id: edgeId, width: 3, color: { color: '#00acc1', opacity: 1.0 } },
-    ])
+    self.edges.update([{ id: edgeId, width: 3, color: { color: '#00acc1', opacity: 1.0 } }])
   }
 }

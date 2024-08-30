@@ -84,11 +84,7 @@ export function ProjectEditorModel(programId, textFieldModels) {
 
   this.deleteTranslationResult = (result) => {
     if (result.isDenied) {
-      Promise.all(
-        this.textFieldModels.map((textField) =>
-          textField.delete(this.selectedLanguage),
-        ),
-      )
+      Promise.all(this.textFieldModels.map((textField) => textField.delete(this.selectedLanguage)))
         .then((results) => {
           if (results.length === this.textFieldModels.length) {
             this.onClose()
@@ -128,10 +124,7 @@ export function ProjectEditorModel(programId, textFieldModels) {
       })
         .then((response) => {
           if (response.ok) {
-            if (
-              this.selectedLanguage === '' ||
-              this.selectedLanguage === 'default'
-            ) {
+            if (this.selectedLanguage === '' || this.selectedLanguage === 'default') {
               this.onReload()
             }
           } else if (response.status === 401) {
@@ -174,11 +167,10 @@ export function ProjectEditorModel(programId, textFieldModels) {
   document.addEventListener('DOMContentLoaded', () => this.getLanguages())
 
   this.getLanguages = () => {
-    const languagesPromise = fetch('../languages').then((response) =>
-      response.json(),
+    const languagesPromise = fetch('../languages').then((response) => response.json())
+    const definedLanguagesPromise = this.customTranslationApi.getCustomTranslationLanguages(
+      this.programId,
     )
-    const definedLanguagesPromise =
-      this.customTranslationApi.getCustomTranslationLanguages(this.programId)
 
     Promise.all([languagesPromise, definedLanguagesPromise]).then((results) => {
       this.languages = results[0]
@@ -202,9 +194,7 @@ export function ProjectEditorModel(programId, textFieldModels) {
   }
 
   this.areChangesSaved = () => {
-    return this.textFieldModels.every((textField) =>
-      textField.areChangesSaved(),
-    )
+    return this.textFieldModels.every((textField) => textField.areChangesSaved())
   }
 
   this.fetchText = () => {

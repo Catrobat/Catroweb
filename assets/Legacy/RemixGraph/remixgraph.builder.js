@@ -24,12 +24,7 @@ const NetworkDirector = function () {
 }
 
 // eslint-disable-next-line no-unused-vars
-const NetworkBuilder = function (
-  programID,
-  remixGraphLayerId,
-  remixGraphTranslations,
-  remixData,
-) {
+const NetworkBuilder = function (programID, remixGraphLayerId, remixGraphTranslations, remixData) {
   const self = this
   self.network = null
   self.nodes = new vis.DataSet()
@@ -69,20 +64,15 @@ const NetworkBuilder = function (
       relationIndex < self.remixGraphData.catrobatForwardRelations.length;
       ++relationIndex
     ) {
-      const relationData =
-        self.remixGraphData.catrobatForwardRelations[relationIndex]
+      const relationData = self.remixGraphData.catrobatForwardRelations[relationIndex]
       if (!(relationData.ancestor_id in self.relationDescendantMap)) {
         self.relationDescendantMap[relationData.ancestor_id] = []
       }
       if (!(relationData.descendant_id in self.relationAncestorMap)) {
         self.relationAncestorMap[relationData.descendant_id] = []
       }
-      self.relationDescendantMap[relationData.ancestor_id].push(
-        relationData.descendant_id,
-      )
-      self.relationAncestorMap[relationData.descendant_id].push(
-        relationData.ancestor_id,
-      )
+      self.relationDescendantMap[relationData.ancestor_id].push(relationData.descendant_id)
+      self.relationAncestorMap[relationData.descendant_id].push(relationData.ancestor_id)
     }
 
     for (
@@ -90,20 +80,15 @@ const NetworkBuilder = function (
       relationIndex < self.remixGraphData.catrobatBackwardEdgeRelations.length;
       ++relationIndex
     ) {
-      const relationData =
-        self.remixGraphData.catrobatBackwardEdgeRelations[relationIndex]
+      const relationData = self.remixGraphData.catrobatBackwardEdgeRelations[relationIndex]
       if (!(relationData.ancestor_id in self.backwardEdgeMap)) {
         self.backwardEdgeMap[relationData.ancestor_id] = []
       }
       if (!(relationData.descendant_id in self.backwardReverseEdgeMap)) {
         self.backwardReverseEdgeMap[relationData.descendant_id] = []
       }
-      self.backwardEdgeMap[relationData.ancestor_id].push(
-        relationData.descendant_id,
-      )
-      self.backwardReverseEdgeMap[relationData.descendant_id].push(
-        relationData.ancestor_id,
-      )
+      self.backwardEdgeMap[relationData.ancestor_id].push(relationData.descendant_id)
+      self.backwardReverseEdgeMap[relationData.descendant_id].push(relationData.ancestor_id)
     }
 
     for (const ancestorId in self.relationDescendantMap) {
@@ -132,11 +117,7 @@ const NetworkBuilder = function (
   }
 
   self.stepBuildNodes = function () {
-    for (
-      let nodeIndex = 0;
-      nodeIndex < self.remixGraphData.catrobatNodes.length;
-      ++nodeIndex
-    ) {
+    for (let nodeIndex = 0; nodeIndex < self.remixGraphData.catrobatNodes.length; ++nodeIndex) {
       const nodeId = self.remixGraphData.catrobatNodes[nodeIndex]
 
       const nodeData = {
@@ -158,11 +139,7 @@ const NetworkBuilder = function (
       self.nodesData.push(nodeData)
     }
 
-    for (
-      let nodeIndex = 0;
-      nodeIndex < self.remixGraphData.scratchNodes.length;
-      ++nodeIndex
-    ) {
+    for (let nodeIndex = 0; nodeIndex < self.remixGraphData.scratchNodes.length; ++nodeIndex) {
       const unavailableProgramData = {
         name: self.remixGraphTranslations.programNotAvailable,
         username: self.remixGraphTranslations.programUnknownUser,
@@ -193,8 +170,7 @@ const NetworkBuilder = function (
       edgeIndex < self.remixGraphData.catrobatForwardEdgeRelations.length;
       ++edgeIndex
     ) {
-      const edgeData =
-        self.remixGraphData.catrobatForwardEdgeRelations[edgeIndex]
+      const edgeData = self.remixGraphData.catrobatForwardEdgeRelations[edgeIndex]
 
       self.edgesData.push({
         from: CATROBAT_NODE_PREFIX + '_' + edgeData.ancestor_id,
@@ -208,8 +184,7 @@ const NetworkBuilder = function (
       edgeIndex < self.remixGraphData.catrobatBackwardEdgeRelations.length;
       ++edgeIndex
     ) {
-      const edgeData =
-        self.remixGraphData.catrobatBackwardEdgeRelations[edgeIndex]
+      const edgeData = self.remixGraphData.catrobatBackwardEdgeRelations[edgeIndex]
 
       self.edgesData.push({
         from: CATROBAT_NODE_PREFIX + '_' + edgeData.ancestor_id,
@@ -231,8 +206,7 @@ const NetworkBuilder = function (
   }
 
   self.stepBuildNetwork = function () {
-    const hasGraphCycles =
-      self.remixGraphData.catrobatBackwardEdgeRelations.length > 0
+    const hasGraphCycles = self.remixGraphData.catrobatBackwardEdgeRelations.length > 0
     self.nodes.add(self.nodesData)
     self.edges.add(self.edgesData)
 

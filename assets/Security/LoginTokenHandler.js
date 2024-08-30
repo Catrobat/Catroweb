@@ -18,15 +18,13 @@ export class LoginTokenHandler {
 
   initListeners() {
     const self = this
-    document
-      .getElementById('login-form')
-      .addEventListener('submit', function (event) {
-        event.preventDefault()
-        self.login({
-          username: document.getElementById('username__input').value,
-          password: document.getElementById('password__input').value,
-        })
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+      event.preventDefault()
+      self.login({
+        username: document.getElementById('username__input').value,
+        password: document.getElementById('password__input').value,
       })
+    })
   }
 
   login(data) {
@@ -45,12 +43,7 @@ export class LoginTokenHandler {
         }
       })
       .then((data) => {
-        setCookie(
-          'BEARER',
-          data.token,
-          'Tue, 19 Jan 2038 00:00:01 GMT',
-          this.baseUrl + '/',
-        )
+        setCookie('BEARER', data.token, 'Tue, 19 Jan 2038 00:00:01 GMT', this.baseUrl + '/')
         setCookie(
           'REFRESH_TOKEN',
           data.refresh_token,

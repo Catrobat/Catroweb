@@ -13,11 +13,7 @@ export function ProjectName(
       editorNavigation.show()
     })
   } else {
-    customTranslationApi.getCustomTranslation(
-      programId,
-      usersLanguage.substring(0, 2),
-      setName,
-    )
+    customTranslationApi.getCustomTranslation(programId, usersLanguage.substring(0, 2), setName)
 
     function setName(value) {
       name.textContent = value
