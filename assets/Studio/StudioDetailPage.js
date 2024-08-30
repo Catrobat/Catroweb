@@ -6,6 +6,8 @@ import '../Components/TextField'
 import { showSnackbar } from '../Layout/Snackbar'
 import Swal from 'sweetalert2'
 import StudioCommentHandler from './StudioCommentHandler'
+import { getCookie } from '../Security/CookieHelper'
+import AcceptLanguage from '../Api/AcceptLanguage'
 require('../Project/ProjectList.scss')
 require('./AdminSettings.scss')
 require('./MembersList.scss')
@@ -15,8 +17,9 @@ document.getElementById('std-header-form')?.addEventListener('change', () => {
   event.preventDefault()
   const fileInput = document.getElementById('std-header')
   const studioId = document.getElementById('studio-id').value
+  const url = document.getElementById('js-api-routing').dataset.baseUrl + '/api/studio/' + studioId
   if (fileInput.files.length > 0) {
-    uploadCoverImage(fileInput.files[0], studioId)
+    uploadCoverImage(url, fileInput.files[0], studioId)
   }
 })
 
@@ -38,28 +41,31 @@ document.querySelectorAll('.comment-replies').forEach((element) =>
     new StudioCommentHandler().loadReplies(studioId, element, element.dataset.commentId, false, 0)
   }),
 )
-function uploadCoverImage(file, studioId) {
-  const updateCoverError = document.getElementById('update-cover-error').value
-
+async function uploadCoverImage(url, file) {
   const formData = new FormData()
-  formData.append('header-img', file)
-  formData.append('std-id', studioId)
+  formData.append('image_file', file)
 
-  fetch('../uploadStudioCover/', {
+  const response = await fetch(url, {
     method: 'POST',
     body: formData,
+    headers: {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + getCookie('BEARER'),
+      'Accept-Language': new AcceptLanguage().get(),
+    },
   })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.new_cover) {
-        document.querySelector('#studio-img-container img').src = data.new_cover
-      } else {
-        showSnackbar('#share-snackbar', updateCoverError)
-      }
+
+  if (response.status === 200) {
+    response.json().then(function (data) {
+      document.querySelector('#studio-img-container img').src = data.image_path
     })
-    .catch(() => {
-      showSnackbar('#share-snackbar', updateCoverError)
+  }
+
+  if (response.status === 422) {
+    response.text().then(function (text) {
+      showSnackbar('#share-snackbar', text)
     })
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

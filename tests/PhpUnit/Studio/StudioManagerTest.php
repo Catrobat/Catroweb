@@ -19,6 +19,7 @@ use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * @internal
@@ -71,9 +72,19 @@ class StudioManagerTest extends DefaultTestCase
     $user_comment_repository = $this->entity_manager->getRepository(UserComment::class);
     $studio_join_request_repository = $this->entity_manager->getRepository(StudioJoinRequest::class);
     $studio_program_repository = $this->entity_manager->getRepository(Program::class);
+    $parameter_bag = $this->getMockBuilder(ParameterBagInterface::class)->getMock();
     $this->object = $this->getMockBuilder(StudioManager::class)->setConstructorArgs(
-      [$this->entity_manager, $studio_repository, $studio_activity_repository,
-        $studio_project_repository, $studio_user_repository, $user_comment_repository, $studio_join_request_repository, $studio_program_repository])
+      [
+        $this->entity_manager,
+        $studio_repository,
+        $studio_activity_repository,
+        $studio_project_repository,
+        $studio_user_repository,
+        $user_comment_repository,
+        $studio_join_request_repository,
+        $studio_program_repository,
+        $parameter_bag,
+      ])
       ->getMockForAbstractClass()
     ;
     $this->user_manager = $kernel->getContainer()->get(UserManager::class);

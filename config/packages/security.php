@@ -155,6 +155,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/studio/[a-zA-Z0-9_-]+/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/projects/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],

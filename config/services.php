@@ -66,6 +66,7 @@ use App\Api\ProjectsApi;
 use App\Api\SearchApi;
 use App\Api\Services\Authentication\JWTTokenRefreshService;
 use App\Api\Services\OverwriteController;
+use App\Api\StudioApi;
 use App\Api\UserApi;
 use App\Api\UtilityApi;
 use App\Api_deprecated\Listeners\ProjectListSerializerEventSubscriber;
@@ -195,6 +196,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.mediapackage.font.path', 'build/fonts/Roboto-Regular-webfont.ttf');
   $parameters->set('catrobat.pubdir', '%kernel.project_dir%/public/');
   $parameters->set('catrobat.resources.dir', '%kernel.project_dir%/public/resources/');
+  $parameters->set('catrobat.resources.path', '%catrobat.pubdir%resources/');
   $parameters->set('catrobat.screenshot.dir', '%catrobat.pubdir%resources/screenshots/');
   $parameters->set('catrobat.screenshot.path', 'resources/screenshots/');
   $parameters->set('catrobat.template.dir', '%catrobat.pubdir%resources/templates/');
@@ -811,6 +813,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   $services->set('api.notifications', NotificationsApi::class)
     ->tag('open_api_server.api', ['api' => 'notifications'])
+  ;
+
+  $services->set('api.studio', StudioApi::class)
+    ->tag('open_api_server.api', ['api' => 'studio'])
   ;
 
   $services->set(OverwriteController::class)

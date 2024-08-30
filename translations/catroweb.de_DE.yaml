@@ -602,6 +602,9 @@ api:
     screenshotError: 'Fehler beim Lesen, Konvertieren oder Speichern des Screenshots. Bitte überprüfe deine Eingabe.'
     notFound: 'Das zu ändernde Projekt konnte nicht gefunden werden.'
     forbidden: 'Ändern des Projekts nicht erlaubt. Bist du noch angemeldet?'
+  createStudio:
+    nameTooLong: 'Name zu lang'
+    descriptionMissing: 'Beschreibung fehlt'
 #languages and countries
 language:
   arabic: Arabisch

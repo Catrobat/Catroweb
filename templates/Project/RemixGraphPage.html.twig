@@ -1,6 +1,6 @@
 {% extends 'Layout/Base.html.twig' %}
-{% block page_title %}{{ "remixGraph.title"|trans({}, "catroweb") }}{% endblock %}
-{% block back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
+{% block top_bar_page_title %}{{ "remixGraph.title"|trans({}, "catroweb") }}{% endblock %}
+{% block top_bar_back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
 
 {% block head %}
     <link rel="stylesheet" href="{{ asset('css/modules/jquery.contextMenu.min.css') }}"/>

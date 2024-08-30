@@ -46,9 +46,12 @@
 
 {% include 'Layout/Header.html.twig' with
   {
-    page_title: block('page_title') ?? '',
-    back_path: block('back_path') ?? '',
-    no_search: block('no_search') ?? ''
+    top_bar_page_title: block('top_bar_page_title') ?? '',
+    top_bar_back_path: block('top_bar_back_path') ?? '',
+    top_bar_back_icon: block('top_bar_back_icon') ?? '',
+    top_bar_search: block('top_bar_search') ?? 'enable',
+    top_bar_save: block('top_bar_save') ?? 'disable',
+    top_bar_save_form: block('top_bar_save_form') ?? ''
   } %}
 
 {% include 'Layout/Snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}

@@ -1,242 +1,110 @@
-import { showSnackbar } from '../Layout/Snackbar'
-require('./Studios.scss')
+import '../Components/Switch'
+import { getCookie } from '../Security/CookieHelper'
+import { showValidationMessage } from '../Components/TextField'
+import AcceptLanguage from '../Api/AcceptLanguage'
+
+require('./CreateStudio.scss')
+
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('uploadFile').addEventListener('change', dragNdrop)
-  document.getElementById('uploadFile').addEventListener('dragover', drag)
-  document.getElementById('uploadFile').addEventListener('drop', drop)
+  const saveButton = document.getElementById('top-app-bar__btn-save')
+  const createForm = document.getElementById('studio-create-form')
+  saveButton.addEventListener('click', function (event) {
+    if (createForm.reportValidity()) {
+      event.preventDefault()
+      submitForm(
+        {
+          url: document.getElementById('js-api-routing').dataset.baseUrl + '/api/studio',
+        },
+        {
+          name: createForm.querySelector('#studio-name__input').value,
+          description: createForm.querySelector('#studio-description__input').value,
+          is_public: createForm.querySelector('[name="is-public"]').value,
+          enable_comments: createForm.querySelector('[name="enable-comments"]').value,
+          image_file: createForm.querySelector('#studio-file-input').files[0],
+        },
+      )
+    }
+  })
 
-  function dragNdrop(event) {
-    const fileName = URL.createObjectURL(event.target.files[0])
+  async function submitForm(config, input) {
+    const formData = new FormData()
+    formData.append('name', input.name)
+    formData.append('description', input.description)
+    formData.append('is_public', input.is_public === '1')
+    formData.append('enable_comments', input.enable_comments === '1')
+    formData.append('image_file', input.image_file)
 
-    if (event.target.files[0].type.startsWith('image/')) {
-      document.getElementById('uploadFile').setAttribute('value', fileName)
-    } else {
-      document.getElementById('uploadFile').setAttribute('value', null)
+    const response = await fetch(config.url, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + getCookie('BEARER'),
+        'Accept-Language': new AcceptLanguage().get(),
+      },
+    })
+
+    if (response.status === 201) {
+      window.location.href = response.headers.get('Location')
+      return
     }
 
-    const preview = document.getElementById('preview')
-    const previewImg = document.createElement('img')
-    previewImg.setAttribute('src', fileName)
-    preview.innerHTML = ''
-    preview.appendChild(previewImg)
-
-    previewImg.addEventListener('load', function () {
-      previewImg.classList.add('loaded')
-      document.getElementById('cover__preview').style.display = 'block'
-      addCloseIcon(preview)
-    })
+    if (response.status === 422) {
+      response.text().then(function (text) {
+        handleValidationError(text)
+      })
+    }
   }
 
-  function addCloseIcon(preview) {
-    const closeIcon = document.createElement('i')
-    closeIcon.className = 'material-icons close-icon'
-    closeIcon.textContent = 'close'
-    closeIcon.style.position = 'absolute'
-    closeIcon.style.top = '5px'
-    closeIcon.style.right = '5px'
-    closeIcon.style.cursor = 'pointer'
+  function handleValidationError(responseText) {
+    const responseObj = JSON.parse(responseText)
+    showValidationMessage(responseObj.name, 'studio-name')
+    showValidationMessage(responseObj.description, 'studio-description')
+    if (responseObj.image_file) {
+      fileName.textContent = responseObj.image_file
+      fileName.classList.add('error-text')
+    } else {
+      fileName.textContent = currentFileName
+      fileName.classList.remove('error-text')
+    }
+  }
 
-    closeIcon.addEventListener('click', function () {
-      const previewImg = preview.querySelector('img')
-      if (previewImg) {
-        previewImg.remove()
-        closeIcon.remove()
+  const fileInput = document.getElementById('studio-file-input')
+  const fileName = document.getElementById('studio-file-name')
+  const previewImage = document.getElementById('studio-preview-image')
+  const deleteButton = document.getElementById('studio-delete-button')
+  const emptyFileMsg = fileName.textContent
+  let currentFileName = emptyFileMsg
+
+  fileInput.addEventListener('change', function (event) {
+    const file = event.target.files[0]
+    if (file) {
+      currentFileName = file.name.length > 20 ? file.name.substring(0, 17) + '...' : file.name
+      fileName.textContent = currentFileName
+
+      // Display image preview
+      const reader = new FileReader()
+      reader.onload = function (e) {
+        previewImage.src = e.target.result
+        previewImage.style.display = 'block'
+        deleteButton.style.display = 'flex'
       }
-      document.getElementById('uploadFile').setAttribute('value', null)
-      document.getElementById('cover__preview').style.display = 'none'
-    })
+      reader.readAsDataURL(file)
+    } else {
+      resetFileInput()
+    }
+  })
 
-    preview.appendChild(closeIcon)
-  }
+  deleteButton.addEventListener('click', function () {
+    resetFileInput()
+  })
 
-  function drag() {
-    document.getElementById('uploadFile').parentNode.className = 'draging dragBox'
-  }
-
-  function drop() {
-    document.getElementById('uploadFile').parentNode.className = 'dragBox'
-  }
-
-  const submitButton = document.getElementById('studioCreateFormSubmit')
-  submitButton.addEventListener('click', submitForm)
-
-  const cancelButton = document.getElementById('studioCreateFormCancel')
-  cancelButton.addEventListener('click', cancelForm)
-
-  const nameInput = document.getElementById('inputStudioName')
-  nameInput.addEventListener('input', resetCssInvalidNameInputfield)
-
-  const checkboxes = document.getElementsByClassName('check-studios')
-  for (let i = 0; i < checkboxes.length; i++) {
-    checkboxes[i].addEventListener('input', function (event) {
-      resetCssInvalidCheckbox(checkboxes)
-      resetWarningMessage('enable-studio-name-warning')
-    })
-  }
-
-  const checkboxesPublic = document.getElementsByClassName('check-studios-public')
-  for (let i = 0; i < checkboxesPublic.length; i++) {
-    checkboxesPublic[i].addEventListener('input', function (event) {
-      resetCssInvalidCheckbox(checkboxesPublic)
-      resetWarningMessage('is-public-warning')
-    })
-  }
-
-  const checkboxesComments = document.getElementsByClassName('check-studios-comments')
-  for (let i = 0; i < checkboxesComments.length; i++) {
-    checkboxesComments[i].addEventListener('input', function (event) {
-      resetCssInvalidCheckbox(checkboxesComments)
-      resetWarningMessage('allow-comments-warning')
-    })
+  function resetFileInput() {
+    fileInput.value = ''
+    currentFileName = emptyFileMsg
+    fileName.textContent = currentFileName
+    fileName.classList.remove('error-text')
+    previewImage.style.display = 'none'
+    deleteButton.style.display = 'none'
   }
 })
-
-function submitForm() {
-  const nameInput = document.getElementById('inputStudioName').value.trim()
-  const descriptionInput = document.getElementById('inputStudioDescription').value.trim()
-  const isEnabledValue = document.querySelector('.check-studios[name="form[is_enabled]"]:checked')
-  const isPublicValue = document.querySelector(
-    '.check-studios-public[name="form[is_public]"]:checked',
-  )
-  const allowCommentsValue = document.querySelector(
-    '.check-studios-comments[name="form[allow_comments]"]:checked',
-  )
-
-  if (!parseInput()) {
-    return
-  }
-
-  const formData = new FormData()
-  formData.append('name', nameInput)
-  formData.append('description', descriptionInput)
-  formData.append('is_enabled', isEnabledValue.value)
-  formData.append('is_public', isPublicValue.value)
-  formData.append('allow_comments', allowCommentsValue.value)
-  const fileInput = document.getElementById('uploadFile')
-
-  if (fileInput.value === 'null') {
-    formData.append('image', null)
-  } else {
-    formData.append('image', fileInput.files[0])
-  }
-
-  const submitButton = document.getElementById('studioCreateFormSubmit')
-  const url = submitButton.getAttribute('data-url')
-  const urlBack = submitButton.getAttribute('data-url-back')
-
-  fetch(url, {
-    method: 'POST',
-    body: formData,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        console.error('There was a problem with the server.')
-        const warningMessage = document.getElementById('name-warning')
-        document.getElementById('inputStudioName').classList.add('is-invalid')
-        warningMessage.textContent = 'There was a problem with the server.'
-      } else {
-        return response.json()
-      }
-    })
-    .then((data) => {
-      if (!data) {
-        console.error('There was a problem with the server.')
-        const warningMessage = document.getElementById('name-warning')
-        warningMessage.textContent = 'There was a problem with the server'
-      } else if (data.message) {
-        showSnackbar('#share-snackbar', data.message.toString())
-        window.location.href = urlBack
-      }
-    })
-    .catch((error) => {
-      console.error('There was an error with the fetch operation:', error)
-      const warningMessage = document.getElementById('name-warning')
-      warningMessage.textContent = 'There was an error with the fetch operation'
-    })
-}
-
-function cancelForm() {
-  const cancelButton = document.getElementById('studioCreateFormCancel')
-  window.location.href = cancelButton.getAttribute('data-url')
-}
-
-function parseInput() {
-  const isEnableChecked = document.querySelector('.check-studios[name="form[is_enabled]"]:checked')
-  const isPublicChecked = document.querySelector(
-    '.check-studios-public[name="form[is_public]"]:checked',
-  )
-  const allowCommentsChecked = document.querySelector(
-    '.check-studios-comments[name="form[allow_comments]"]:checked',
-  )
-
-  const nameInput = document.getElementById('inputStudioName')
-  let wrongInput = false
-  if (nameInput.value.trim() === '') {
-    nameInput.classList.add('is-invalid')
-    const warningMessage = document.getElementById('name-warning')
-    warningMessage.textContent = 'Please fill in all required fields.'
-    wrongInput = true
-  }
-  if (!isEnableChecked) {
-    const radioInputs = document.getElementsByClassName('check-studios')
-    for (let i = 0; i < radioInputs.length; i++) {
-      radioInputs[i].classList.add('warning')
-    }
-    const warningMessage = document.getElementById('enable-studio-name-warning')
-    warningMessage.textContent = 'Please select whether to enable the studio!'
-    wrongInput = true
-  }
-
-  if (!allowCommentsChecked) {
-    const radioInputs = document.getElementsByClassName('check-studios-comments')
-    for (let i = 0; i < radioInputs.length; i++) {
-      radioInputs[i].classList.add('warning')
-    }
-    const warningMessage = document.getElementById('allow-comments-warning')
-    warningMessage.textContent = 'Please select whether to allow comments or not in the studio!'
-    wrongInput = true
-  }
-  if (!isPublicChecked) {
-    const radioInputs = document.getElementsByClassName('check-studios-public')
-    for (let i = 0; i < radioInputs.length; i++) {
-      radioInputs[i].classList.add('warning')
-    }
-    const warningMessage = document.getElementById('is-public-warning')
-    warningMessage.textContent = 'Please select whether the studio should be private or public!'
-    wrongInput = true
-  }
-  if (wrongInput) {
-    return false
-  }
-  const warningMessage = document.getElementById('name-warning')
-  warningMessage.textContent = ''
-  nameInput.classList.remove('is-invalid')
-  nameInput.classList.add('is-valid')
-
-  return true
-}
-
-function resetCssInvalidNameInputfield() {
-  const nameInput = document.getElementById('inputStudioName')
-  if (nameInput.classList.contains('is-invalid')) {
-    const warningMessage = document.getElementById('name-warning')
-    warningMessage.textContent = ''
-    nameInput.classList.remove('is-invalid')
-  }
-}
-
-function resetCssInvalidCheckbox(checkboxes) {
-  for (let i = 0; i < checkboxes.length; i++) {
-    const checkbox = checkboxes[i]
-    if (checkbox.classList.contains('warning')) {
-      checkbox.classList.remove('warning')
-    }
-  }
-}
-
-function resetWarningMessage(elementIds) {
-  const element = document.getElementById(elementIds)
-  if (element) {
-    element.textContent = ''
-  }
-}

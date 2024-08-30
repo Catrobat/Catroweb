@@ -165,7 +165,7 @@ class OwnProfile {
         } else {
           self.updateProfile(
             {
-              currentPassword: formData.get('current-password'),
+              current_password: formData.get('current-password'),
               password: formData.get('password'),
             },
             function () {

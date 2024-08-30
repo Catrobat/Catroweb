@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
+import AcceptLanguage from '../Api/AcceptLanguage'
 
 export class AjaxController extends Controller {
   /**
@@ -32,7 +33,7 @@ export class AjaxController extends Controller {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'Accept-Language': this.getAcceptLanguage(),
+        'Accept-Language': new AcceptLanguage().get(),
       },
       body: JSON.stringify(data),
     })
@@ -52,17 +53,9 @@ export class AjaxController extends Controller {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'Accept-Language': this.getAcceptLanguage(),
+        'Accept-Language': new AcceptLanguage().get(),
       },
       body: JSON.stringify(data),
     })
-  }
-
-  getAcceptLanguage() {
-    try {
-      return document.getElementById('app-language').dataset.appLanguage
-    } catch (e) {
-      return 'en'
-    }
   }
 }

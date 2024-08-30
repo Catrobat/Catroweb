@@ -1,6 +1,6 @@
 {% extends 'Layout/Base.html.twig' %}
-{% block page_title %}{{ project.name }}{% endblock %}
-{% block back_path %}{{ path('program', { 'id' : project.id }) ~ "#comments-wrapper" }}{% endblock %}
+{% block top_bar_page_title %}{{ project.name }}{% endblock %}
+{% block top_bar_back_path %}{{ path('program', { 'id' : project.id }) ~ "#comments-wrapper" }}{% endblock %}
 
 {% block head %}
   {{ encore_entry_link_tags('project_comments_page') }}

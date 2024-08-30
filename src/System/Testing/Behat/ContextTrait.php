@@ -69,6 +69,7 @@ trait ContextTrait
   public string $ERROR_DIR;
 
   public string $FIXTURES_DIR;
+  public string $PUBLIC_DIR;
 
   public string $SCREENSHOT_DIR;
 
@@ -83,7 +84,8 @@ trait ContextTrait
     $this->SCREENSHOT_DIR = $this->getSymfonyParameterAsString('catrobat.testreports.screenshot');
     $this->FIXTURES_DIR = $this->getSymfonyParameterAsString('catrobat.test.directory.source');
     $this->MEDIA_PACKAGE_DIR = $this->FIXTURES_DIR.'MediaPackage/';
-    $this->EXTRACT_RESOURCES_DIR = strval($this->getSymfonyParameterAsString('catrobat.file.extract.dir'));
+    $this->EXTRACT_RESOURCES_DIR = $this->getSymfonyParameterAsString('catrobat.file.extract.dir');
+    $this->PUBLIC_DIR = $this->getSymfonyParameterAsString('catrobat.pubdir');
   }
 
   public function getKernel(): KernelInterface

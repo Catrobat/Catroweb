@@ -10,14 +10,14 @@ Feature: Update user
       | Catroweb | 54321    | bbbbbbbbbb | 4  |
     And I wait 500 milliseconds
 
-  Scenario: Update user with dry-run option
+  Scenario: Update user with dry_run option
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
     """
       {
-        "dry-run": true,
+        "dry_run": true,
         "username": "User2"
       }
     """
@@ -31,7 +31,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
+        "dry_run": false,
         "username": "User2"
       }
     """
@@ -49,7 +49,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
+        "dry_run": false,
         "username": "Catroweb"
       }
     """
@@ -69,7 +69,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
+        "dry_run": false,
         "username": "Scratch: admin"
       }
     """
@@ -89,7 +89,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "currentPassword": "12345",
+        "current_password": "12345",
         "password": "123456"
       }
     """
@@ -114,7 +114,7 @@ Feature: Update user
     And I should get the json object:
     """
       {
-        "currentPassword": "Current password is missing"
+        "current_password": "Current password is missing"
       }
     """
 
@@ -125,8 +125,8 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
-        "currentPassword": "12345",
+        "dry_run": false,
+        "current_password": "12345",
         "password": ""
       }
     """
@@ -146,7 +146,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
+        "dry_run": false,
         "email": "user@catrobat.at"
       }
     """
@@ -180,7 +180,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": false,
+        "dry_run": false,
         "email": "User1@catrobat.at"
       }
     """
@@ -200,7 +200,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": true,
+        "dry_run": true,
         "username": "User2"
       }
     """
@@ -214,7 +214,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": true,
+        "dry_run": true,
         "username": "User2"
       }
     """
@@ -227,7 +227,7 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
-        "dry-run": true,
+        "dry_run": true,
         "username": "User2"
       }
     """
