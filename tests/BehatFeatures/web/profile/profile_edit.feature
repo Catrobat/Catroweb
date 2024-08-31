@@ -108,7 +108,7 @@ Feature:
     And I wait for the element "#user-settings-modal" to be visible
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
     And I wait for the element "#profile-settings-modal" to be visible
-    When I fill in "currentlyWorkingOn" with "an awesome project"
+    When I fill in "currently_working_on" with "an awesome project"
     When I fill in "about" with "I am a regular Catrobat user. Welcome on my profile."
     And I click "#profile_settings-save_action"
     Then I wait for the page to be loaded
@@ -122,7 +122,7 @@ Feature:
     And I wait for the element "#user-settings-modal" to be visible
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
     And I wait for the element "#profile-settings-modal" to be visible
-    When I fill in "currentlyWorkingOn" with "an awesome project"
+    When I fill in "currently_working_on" with "an awesome project"
     When I fill in "about" with "I am a regular Catrobat user. Welcome on my profile."
     And I click "#profile_settings-save_action"
     Then I wait for the page to be loaded
@@ -133,7 +133,7 @@ Feature:
     And I wait for the element "#user-settings-modal" to be visible
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
     And I wait for the element "#profile-settings-modal" to be visible
-    When I fill in "currentlyWorkingOn" with ""
+    When I fill in "currently_working_on" with ""
     When I fill in "about" with ""
     And I click "#profile_settings-save_action"
     Then I wait for the page to be loaded

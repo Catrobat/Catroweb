@@ -14,6 +14,7 @@ use OpenAPI\Server\Model\ResetPasswordRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -212,5 +213,10 @@ class UserRequestValidator extends AbstractRequestValidator
     $validTLDs = $this->getValidTLDs();
 
     return in_array($tld, $validTLDs, true);
+  }
+
+  private function validate(?string $value, ?Email $constraints = null): ConstraintViolationListInterface
+  {
+    return $this->validator->validate($value, $constraints);
   }
 }

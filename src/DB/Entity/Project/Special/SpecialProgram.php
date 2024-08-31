@@ -106,4 +106,9 @@ class SpecialProgram
   {
     return $this->getProgram()->getUser();
   }
+
+  public function getNotForKids(): bool
+  {
+    return false;
+  }
 }

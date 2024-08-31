@@ -6,12 +6,12 @@
 
           <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
 
-            {% if back_path is not empty %}
+            {% if top_bar_back_path is not empty %}
               <button id="top-app-bar__back__btn-back"
                       class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                       aria-label="Back to previous page"
-                      onclick="location.href='{{ back_path }}'">
-                arrow_back
+                      onclick="location.href='{{ top_bar_back_path }}'">
+                {{ top_bar_back_icon|default("arrow_back") }}
               </button>
             {% else %}
             <button id="top-app-bar__btn-sidebar-toggle"
@@ -21,7 +21,7 @@
             </button>
             {% endif %}
 
-            {% if page_title|default('') is empty %}
+            {% if top_bar_page_title|default('') is empty %}
             <a id="top-app-bar__title"
                class="mdc-top-app-bar__title"
                href="{{ path('index') }}">
@@ -30,24 +30,33 @@
             {% else %}
             <span id="top-app-bar__title"
                class="mdc-top-app-bar__title">
-              {{ page_title }}
+              {{ top_bar_page_title }}
             </span>
             {% endif %}
 
           </section>
 
-          {% if no_search|default('') is empty %}
           <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+
+            {% if top_bar_search == 'enable' %}
             <button id="top-app-bar__btn-search"
                     class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                     aria-label="Search">
               search
             </button>
+            {% endif %}
+
+            {% if top_bar_save == 'enable' %}
+              <button id="top-app-bar__btn-save"
+                      class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                      aria-label="Save">
+                check
+              </button>
+            {% endif %}
 
             {% include 'Layout/Header/Options.html.twig' %}
 
           </section>
-          {% endif %}
         </div>
 
 

@@ -19,7 +19,11 @@ use App\DB\EntityRepository\Studios\StudioProgramRepository;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class StudioManager
 {
@@ -31,11 +35,12 @@ class StudioManager
     protected StudioUserRepository $studio_user_repository,
     protected UserCommentRepository $user_comment_repository,
     protected StudioJoinRequestRepository $studio_join_request_repository,
-    protected ProgramRepository $program_repository
+    protected ProgramRepository $program_repository,
+    protected ParameterBagInterface $parameter_bag
   ) {
   }
 
-  public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, ?string $cover_path = null): Studio
+  public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, ?UploadedFile $image_file = null): Studio
   {
     $studio = (new Studio())
       ->setName($name)
@@ -43,7 +48,7 @@ class StudioManager
       ->setIsPublic($is_public)
       ->setIsEnabled($is_enabled)
       ->setAllowComments($allow_comments)
-      ->setCoverPath($cover_path)
+      ->setCoverAssetPath($this->storeCoverImage($image_file, $name))
       ->setCreatedOn(new \DateTime())
     ;
 
@@ -51,6 +56,35 @@ class StudioManager
     $this->addAdminToStudio($user, $studio);
 
     return $studio;
+  }
+
+  public function updateStudio(Studio $studio, ?string $name, ?string $description, ?bool $is_public, ?bool $enable_comments, ?UploadedFile $image_file): Studio
+  {
+    $somethingChanged = false;
+    if (null !== $name) {
+      $studio->setName($name);
+      $somethingChanged = true;
+    }
+    if (null !== $description) {
+      $studio->setDescription($description);
+      $somethingChanged = true;
+    }
+    if (null !== $is_public) {
+      $studio->setIsPublic($is_public);
+      $somethingChanged = true;
+    }
+    if (null !== $enable_comments) {
+      $studio->setAllowComments($enable_comments);
+      $somethingChanged = true;
+    }
+    if (null !== $image_file) {
+      $this->deleteCoverImage($studio->getCoverAssetPath());
+      $cover_name = $this->storeCoverImage($image_file, $studio->getName());
+      $studio->setCoverAssetPath($cover_name);
+      $somethingChanged = true;
+    }
+
+    return $somethingChanged ? $this->saveStudio($studio) : $studio;
   }
 
   protected function createActivity(User $user, Studio $studio, string $type): StudioActivity
@@ -278,6 +312,30 @@ class StudioManager
     }
   }
 
+  public function storeCoverImage(?UploadedFile $image_file, string $name): ?string
+  {
+    $cover_asset_path = null;
+    if (null !== $image_file) {
+      $cover_asset_path = TimeUtils::getTimestamp().'-'.str_replace(' ', '-', $name).'.'.$image_file->getClientOriginalExtension();
+      $studio_image_dir = $this->parameter_bag->get('catrobat.resources.dir').'images/studio/';
+      $image_file->move($studio_image_dir, $cover_asset_path);
+      $cover_asset_path = 'resources/images/studio/'.$cover_asset_path;
+    }
+
+    return $cover_asset_path;
+  }
+
+  public function deleteCoverImage(?string $cover_asset_path): bool
+  {
+    if (null === $cover_asset_path) {
+      return false;
+    }
+
+    $file = new File($this->parameter_bag->get('catrobat.pubdir').$cover_asset_path);
+
+    return unlink($file->getPathname());
+  }
+
   protected function deleteActivity(StudioActivity $activity): void
   {
     $this->entity_manager->remove($activity);
@@ -409,7 +467,7 @@ class StudioManager
     return StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $studio);
   }
 
-  protected function saveStudio(Studio $studio): Studio
+  public function saveStudio(Studio $studio): Studio
   {
     $this->entity_manager->persist($studio);
     $this->entity_manager->flush();

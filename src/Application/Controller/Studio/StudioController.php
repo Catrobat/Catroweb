@@ -15,7 +15,6 @@ use App\Studio\StudioManager;
 use App\User\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,14 +55,17 @@ class StudioController extends AbstractController
   /**
    * @internal route for now
    */
-  #[Route(path: '/studio/new', name: 'studio_new', methods: ['GET'])]
+  #[Route(path: '/studio/create', name: 'studio_new', methods: ['GET'])]
   public function studioNew(): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
+    if (is_null($user)) {
+      return $this->redirectToRoute('login');
+    }
 
     return $this->render('Studio/CreatePage.html.twig', [
-      'user_name' => is_null($user) ? '' : $user->getUserIdentifier(),
+      'user_name' => $user->getUserIdentifier(),
     ]);
   }
 
@@ -112,57 +114,6 @@ class StudioController extends AbstractController
       'declined_join_requests' => $this->studio_manager->findDeclinedJoinRequests($studio),
       'approved_join_requests' => $this->studio_manager->findApprovedJoinRequests($studio),
     ]);
-  }
-
-  /**
-   * ToDo: move to capi.
-   */
-  #[Route(path: '/studio', name: 'studio_create', methods: ['POST'])]
-  public function createStudio(Request $request): JsonResponse
-  {
-    /** @var User|null $user */
-    $user = $this->getUser();
-    if (is_null($user)) {
-      throw $this->createAccessDeniedException();
-    }
-
-    $is_enabled = (bool) $request->request->get('is_enabled', false);
-    $is_public = (bool) $request->request->get('is_public', false);
-    $allow_comments = (bool) $request->request->get('allow_comments', false);
-    $name = trim((string) $request->request->get('name', ''));
-    $description = trim((string) $request->request->get('description', ''));
-    $headerImg = $request->files->get('image');
-    if ('' === $name) {
-      return new JsonResponse(['message' => 'arguments invalid'], Response::HTTP_BAD_REQUEST);
-    }
-
-    $existingStudio = $this->studio_manager->findStudioByName($name);
-    if ($existingStudio instanceof Studio) {
-      return new JsonResponse(['message' => 'studio name is already taken'], Response::HTTP_CONFLICT);
-    }
-
-    $studio = $this->studio_manager->createStudio($user, $name, $description, $is_public, $allow_comments, $is_enabled);
-
-    if (is_null($headerImg)) {
-      return new JsonResponse(['message' => sprintf('"%s" successfully created the studio', $user->getUsername())], Response::HTTP_OK);
-    }
-
-    $newPath = 'images/default/';
-    $coverPath = $this->parameter_bag->get('catrobat.resources.dir').$newPath;
-    $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
-    if (!file_exists($coverPath)) {
-      $fs = new Filesystem();
-      $fs->mkdir($coverPath);
-    }
-
-    $headerImg->move($coverPath, $coverName);
-    $pathToSave = '/'.$newPath.$coverName;
-    $studio->setCoverPath('resources'.$pathToSave);
-    /** @var User|null $user */
-    $user = $this->getUser();
-    $this->studio_manager->changeStudio($user, $studio);
-
-    return new JsonResponse(['message' => sprintf('"%s" successfully created the studio', $user->getUsername())], Response::HTTP_OK);
   }
 
   /**
@@ -450,38 +401,6 @@ class StudioController extends AbstractController
     }
 
     return new JsonResponse($rs, Response::HTTP_OK);
-  }
-
-  /**
-   * ToDo: move to capi.
-   */
-  #[Route(path: '/uploadStudioCover/', name: 'upload_studio_cover', methods: ['POST'])]
-  public function uploadStudioCover(Request $request): Response
-  {
-    $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('std-id')));
-    $headerImg = $request->files->get('header-img');  // Expect the file to be named 'header-img'
-
-    if (is_null($headerImg) || is_null($studio) || is_null($this->getUser())) {
-      return new JsonResponse([], Response::HTTP_NOT_FOUND);
-    }
-
-    $newPath = 'images/Studios/';
-    $coverPath = $this->parameter_bag->get('catrobat.resources.dir').$newPath;
-    $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
-
-    if (!file_exists($coverPath)) {
-      $fs = new Filesystem();
-      $fs->mkdir($coverPath);
-    }
-
-    $headerImg->move($coverPath, $coverName);
-    $pathToSave = 'resources/'.$newPath.$coverName;
-    $studio->setCoverPath($pathToSave);
-    /** @var User $user */
-    $user = $this->getUser();
-    $this->studio_manager->changeStudio($user, $studio);
-
-    return new JsonResponse(['new_cover' => '/'.$pathToSave], Response::HTTP_OK);
   }
 
   /**

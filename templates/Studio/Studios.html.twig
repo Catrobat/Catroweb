@@ -1,16 +1,11 @@
 {% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ "studio.title"|trans({}, "catroweb") }}{% endblock %}
 
 {% block head %}
   {{ encore_entry_link_tags('studios_page') }}
 {% endblock %}
 
 {% block body %}
-
-        <div class="row">
-            <div class="col text-start">
-                <h1>{{ 'studio.title'|trans({}, 'catroweb') }}</h1>
-            </div>
-        </div>
         {% if user_name %}
             <h2>{{ 'studio.overview.joined_studios'|trans({}, 'catroweb') }}</h2>
             {% include 'Studio/StudioList.html.twig' with { 'studios': studios, 'public': false, 'user_name': user_name, 'joined': true} %}

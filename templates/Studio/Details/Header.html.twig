@@ -1,12 +1,12 @@
 <div class="studio-detail__header ">
 
   <div id="studio-img-container" class="studio-detail__header__img__container">
-    <img src="{{ asset(studio.CoverPath|default("")) }}" class="img-fluid" alt="">
+    <img src="{{ asset(studio.CoverAssetPath|default("")) }}" class="img-fluid" alt="">
     {% if user_role == 'admin' %}
       <form class="studio-detail__header__details__button--upload-image" id="std-header-form"
             enctype="multipart/form-data" method="post">
         <span class="material-icons">photo_camera</span>
-        <input id="std-header" name="header-img" type="file">
+        <input id="std-header" name="header-img" type="file" accept="image/*">
         <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
       </form>
     {% endif %}

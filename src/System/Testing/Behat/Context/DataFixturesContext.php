@@ -1707,4 +1707,55 @@ class DataFixturesContext implements Context
       Assert::assertEquals(1, count($matching_row), 'row not found: '.$project_id);
     }
   }
+
+  /**
+   * @Given the uploaded file :fileName exists
+   */
+  public function theFileInTheFolderExists(string $filename): void
+  {
+    $filepath = $this->PUBLIC_DIR.$filename;
+    Assert::assertFileExists($filepath, 'File should exist: '.$filepath);
+  }
+
+  /**
+   * @Given the uploaded file :fileName does not exist
+   */
+  public function theFileInTheFolderDoesNotExists(string $filename): void
+  {
+    $filepath = $this->PUBLIC_DIR.$filename;
+    Assert::assertFileDoesNotExist($filepath, 'File should not exist: '.$filepath);
+  }
+
+  /**
+   * @Given the studio with the name :name should exist with following values:
+   */
+  public function theStudioWithNameShouldHaveValues(string $name, TableNode $table): void
+  {
+    $studio = $this->getStudioManager()->findStudioByName($name);
+    Assert::assertNotNull($studio, 'Studio does not exist!');
+    foreach ($table->getHash() as $set) {
+      $result = match ($set['key']) {
+        'description' => $studio->getDescription(),
+        'is_enabled' => $studio->isIsEnabled(),
+        'enable_comments' => $studio->isAllowComments(),
+        'is_public' => $studio->isIsPublic(),
+        'cover_path' => $studio->getCoverAssetPath(),
+        default => throw new \InvalidArgumentException(json_encode($set))
+      };
+      switch ($set['key']) {
+        case 'is_enabled':
+        case 'enable_comments':
+        case 'is_public':
+          Assert::assertSame('true' === $set['value'], $result, 'Failed for: '.json_encode($set));
+          break;
+        case 'cover_path':
+          if ($set['value']) {
+            Assert::assertStringEndsWith($set['value'], $result, 'Failed for: '.json_encode($set));
+          }
+          break;
+        default:
+          Assert::assertSame($set['value'], $result, 'Failed for: '.json_encode($set));
+      }
+    }
+  }
 }

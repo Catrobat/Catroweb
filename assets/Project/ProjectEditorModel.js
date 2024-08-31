@@ -1,5 +1,6 @@
 import { CustomTranslationApi } from '../Api/CustomTranslationApi'
 import { getCookie } from '../Security/CookieHelper'
+import AcceptLanguage from '../Api/AcceptLanguage'
 
 export const DIALOG = {
   CLOSE_EDITOR: 'close_editor',
@@ -118,7 +119,7 @@ export function ProjectEditorModel(programId, textFieldModels) {
           Accept: 'application/json',
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + getCookie('BEARER'),
-          'Accept-Language': this.getAcceptLanguage(),
+          'Accept-Language': new AcceptLanguage().get(),
         },
         body: JSON.stringify(requestData),
       })
@@ -205,12 +206,4 @@ export function ProjectEditorModel(programId, textFieldModels) {
     this.onButtonEnabled(false)
   }
   // end region
-
-  this.getAcceptLanguage = () => {
-    try {
-      return document.getElementById('app-language').dataset.appLanguage
-    } catch (e) {
-      return 'en'
-    }
-  }
 }

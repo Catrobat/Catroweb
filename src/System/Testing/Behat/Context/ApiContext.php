@@ -131,8 +131,7 @@ class ApiContext implements Context
   /**
    * @var string[]
    */
-  private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currentlyWorkingOn', 'projects',
-    'followers', 'following', ];
+  private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
 
   /**
    * @var string[]
@@ -452,7 +451,7 @@ class ApiContext implements Context
   public function jenkinsUploadsTheApkFileToTheGivenUploadUrl(): void
   {
     $filepath = $this->FIXTURES_DIR.'test.catrobat';
-    Assert::assertTrue(file_exists($filepath), 'File not found');
+    Assert::assertFileExists($filepath, 'File not found');
     $temp_path = strval($this->getTempCopy($filepath));
     $this->request_files = [
       new UploadedFile($temp_path, 'test.apk'),
@@ -1564,8 +1563,11 @@ class ApiContext implements Context
 
     $structure = array_diff($this->full_user_structure, '' === $excluded || '0' === $excluded ? [] : explode(',', $excluded));
 
-    Assert::assertEquals(count($structure), is_countable($user) ? count($user) : 0,
-      'Number of user fields should be '.count($structure));
+    Assert::assertEquals(
+      count($structure),
+      is_countable($user) ? count($user) : 0,
+      'Number of user fields should be '.count($structure)
+    );
     foreach ($structure as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
@@ -2241,6 +2243,18 @@ class ApiContext implements Context
     } else {
       throw new ApiVersionNotSupportedException($api_version);
     }
+  }
+
+  /**
+   * @Given I add the file :fileName from path :fixturePath as :key
+   */
+  public function iSendAValidFileWithKey(string $fileName, string $fixturePath, string $key): void
+  {
+    $filepath = $this->FIXTURES_DIR.$fixturePath.'/'.$fileName;
+    Assert::assertTrue(file_exists($filepath), 'File not found: '.$filepath);
+    $tempFilePath = sys_get_temp_dir().'/'.uniqid('upload_', true).'_'.$fileName;
+    copy($filepath, $tempFilePath);
+    $this->request_files[$key] = new UploadedFile($tempFilePath, $fileName);
   }
 
   /**
@@ -3051,7 +3065,7 @@ class ApiContext implements Context
       'about' => static function ($about): void {
         Assert::assertIsString($about);
       },
-      'currentlyWorkingOn' => static function ($currentlyWorkingOn): void {
+      'currently_working_on' => static function ($currentlyWorkingOn): void {
         Assert::assertIsString($currentlyWorkingOn);
       },
       'projects' => static function ($projects): void {

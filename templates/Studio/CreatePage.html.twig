@@ -1,143 +1,73 @@
 {% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ "studio.create_studio"|trans({}, "catroweb") }}{% endblock %}
+{% block top_bar_back_path %}{{ path('studios_overview') }}{% endblock %}
+{% block top_bar_back_icon %}close{% endblock %}
+{% block top_bar_search %}disable{% endblock %}
+{% block top_bar_save %}enable{% endblock %}
 
 {% block head %}
-    {{ encore_entry_link_tags('studio_create_page') }}
+  {{ encore_entry_link_tags('studio_create_page') }}
 {% endblock %}
 
 {% block body %}
+  <form id="studio-create-form" class="container">
 
-    <h1>{{ 'studio.create_studio'|trans({}, 'catroweb') }}</h1>
-    <form id="studioCreateForm" class="container">
-        <div class="mb-3">
-            <label class="form-label" for="inputStudioName">{{ 'studio.studio_name'|trans({}, 'catroweb') }}</label>
-            <input class="form-control" id="inputStudioName" type="text" name="name" placeholder="Studio Name">
+    {% include 'Components/TextField.html.twig' with {
+      'text_field':
+      {
+        'id': 'studio-name',
+        'label': '' ~ 'studio.studio_name'|trans({}, 'catroweb'),
+        'name': 'name',
+        'leading_icon': 'badge',
+        'tabindex': 1
+      }
+    } %}
 
-            <div id="name-warning"></div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="inputStudioDescription">{{ 'studio.studio_description'|trans({}, 'catroweb') }}</label>
-            <input class="form-control" id="inputStudioDescription" type="text" name="description" >
+    {% include 'Components/TextField.html.twig' with {
+      'text_field':
+      {
+        'id': 'studio-description',
+        'label': '' ~ 'studio.studio_description'|trans({}, 'catroweb'),
+        'name': 'description',
+        'leading_icon': 'description',
+        'tabindex': 2
+      }
+    } %}
 
-        </div>
-        <div class="row">
-                <label>{{ 'Enable Studio'|trans({}, 'catroweb') }}</label>
-                <div class="col-md-2">
-                    <div class="mb-3">
-                        <div>
-                            <input type="radio" class="check-studios" id="is_enabled_true" name="form[is_enabled]" value="1">
-                            <label for="is_enabled_true">Yes</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label></label>
-                        <div>
-                            <input type="radio" class="check-studios" id="is_enabled_false" name="form[is_enabled]" value="0">
-                            <label for="is_enabled_false">No</label>
-                        </div>
-                    </div>
-                </div>
-            <div class="mb-3">
-                <div id="enable-studio-name-warning"></div>
-            </div>
+    {% include 'Components/Switch.html.twig' with {
+      'switch':
+      {
+        'id': 'studio-is-public',
+        'label': '' ~ 'studio.is_public'|trans({}, 'catroweb'),
+        'selected': 1,
+        'name': 'is-public'
+      }
+    } %}
 
-            </div>
+    {% include 'Components/Switch.html.twig' with {
+      'switch':
+      {
+        'id': 'studio-enable-comments',
+        'label': '' ~ 'studio.enable_comments'|trans({}, 'catroweb'),
+        'selected': 1,
+        'name': 'enable-comments'
+      }
+    } %}
 
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="mb-3">
-                        <label>{{ 'Public Studio'|trans({}, 'catroweb') }}</label>
-                        <div>
-                            <input type="radio" class="check-studios-public" id="is_public_true" name="form[is_public]" value="1">
-                            <label for="is_public_true"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label>{{ 'Private Studio'|trans({}, 'catroweb') }}</label>
-                        <div>
-                            <input type="radio" class="check-studios-public" id="is_public_false" name="form[is_public]" value="0">
-                            <label for="is_public_false"></label>
-                        </div>
-                    </div>
-                </div>
+    <button class="btn btn-secondary" style="position: relative;">
+      <span>{{ 'studio.cover_image'|trans({}, 'catroweb') }}</span>
+      <input type="file" id="studio-file-input" name="studio-file-input" accept="image/*">
+    </button>
+    <div id="studio-file-name">{{ 'studio.cover_image_empty'|trans({}, 'catroweb') }}</div>
+    <div id="studio-image-preview">
+      <button id="studio-delete-button"><span class="material-icons">close</span></button>
+      <img id="studio-preview-image" alt="{{ 'studio.cover_image_alt'|trans({}, 'catroweb') }}">
+    </div>
 
-                <div class="mb-3">
-                    <div id="is-public-warning"></div>
-                </div>
-            </div>
-
-            <div class="row">
-                <label>{{ 'Allow Comments'|trans({}, 'catroweb') }}</label>
-                <div class="col-md-2">
-                    <div class="mb-3">
-                        <div>
-                            <input type="radio" class="check-studios-comments" id="allow_comments_true" name="form[allow_comments]" value="1">
-                            <label for="allow_comments_true">Yes</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label></label>
-                        <div>
-                            <input type="radio" class="check-studios-comments" id="allow_comments_false" name="form[allow_comments]" value="0">
-                            <label for="allow_comments_false">No</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="mb-3">
-                   <div id="allow-comments-warning"></div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label>{{ 'Studio Cover'|trans({}, 'catroweb') }}</label>
-                <div class="uploadOuter  mt-3">
-                    <span class="drag-box" >
-                    Darg and Drop image here
-                    <input type="file" id="uploadFile"  />
-                    </span>
-                </div>
-            </div>
-                <div class="row">
-                    <label id="cover__preview" style="display: none">{{ 'Preview Studio Cover'|trans({}, 'catroweb') }}</label>
-                    <div class="mb-3 mt-3">
-                        <div id="preview"></div>
-                    </div>
-                </div>
-            {% if user_name %}
-            <div class="row">
-            <div class="col-md-2">
-                <div class="mb-3">
-                    <a  data-url="{{ path('studio_create')}}"  data-url-back="{{ path('studios_overview')}}" id="studioCreateFormSubmit" class="btn btn-primary" >{{ 'studio.create_studio'|trans({}, 'catroweb') }}</a>
-                </div>
-            </div>
-            <div class="col-md-4 ">
-                <div class="mb-3">
-                    <a   data-url="{{ path('studios_overview')}}"  id="studioCreateFormCancel" class="btn btn-secondary" >{{ 'studio.cancel_studio'|trans({}, 'catroweb') }}</a>
-                </div>
-            </div>
-        </div>
-        {% else %}
-        <div class="row">
-            <div class="col-md-2">
-                <div class="mb-3">
-                    <a  href="{{ path('login') }}" id="studioCreateFormSubmit"   class="btn btn-primary">{{ 'studio.create_studio'|trans({}, 'catroweb') }}</a>
-                </div>
-            </div>
-            <div class="col-md-4 ">
-                <div class="mb-3">
-                    <a  href="{{ path('login') }}"   id="studioCreateFormCancel" class="btn btn-secondary">{{ 'studio.cancel_studio'|trans({}, 'catroweb') }}</a>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-    </form>
+  </form>
 
 {% endblock %}
 
 {% block javascript %}
- {{ encore_entry_script_tags('studio_create_page') }}
+{{ encore_entry_script_tags('studio_create_page') }}
 {% endblock %}

@@ -89,7 +89,7 @@ class CreateStudioCommand extends Command
       ->setIsPublic($is_public)
       ->setIsEnabled($is_enabled)
       ->setAllowComments($allow_comments)
-      ->setCoverPath($cover_path)
+      ->setCoverAssetPath($cover_path)
       ->setCreatedOn(new \DateTime())
     ;
     $this->entityManager->persist($studio);
