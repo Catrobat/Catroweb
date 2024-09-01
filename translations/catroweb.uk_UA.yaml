@@ -598,6 +598,19 @@ api:
     screenshotError: 'Не вдалося прочитати, перетворити або зберегти знімок екрана. Будь ласка, перевірте свій внесок.'
     notFound: 'Не вдалося знайти проєкт, який потрібно змінити.'
     forbidden: 'Зміна проєкту не дозволяється. Ви все ще ввійшли в систему?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Назва не може бути порожньою'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Назва занадто довга'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Опис занадто довгий'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Арабська
@@ -893,6 +906,11 @@ studio:
   cancel_studio: 'Скасувати'
   studio_name: 'Назва студії'
   studio_description: 'Опис студії'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Долучитися'
   leave: 'Покинути'
   report: 'Скарга'

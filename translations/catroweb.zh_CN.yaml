@@ -603,6 +603,19 @@ api:
     screenshotError: '读取、转换或存储截图失败。请检查您的输入内容。'
     notFound: '找不到要更改的项目。'
     forbidden: '无法更改项目。请确认您是否仍然处于登录状态？'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: '名字不能为空'
+    nameTooShort: 'Name too short'
+    nameTooLong: '名字太长'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: '描述太长'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: 阿拉伯语
@@ -898,6 +911,11 @@ studio:
   cancel_studio: '取消'
   studio_name: '工作室名称'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: '加入'
   leave: '退出'
   report: '报告'
