@@ -598,6 +598,19 @@ api:
     screenshotError: 'Не удалось прочитать, конвертировать или сохранить скриншот. Пожалуйста, проверьте свой ввод'
     notFound: 'Проект нужный для изменения не был найден.'
     forbidden: 'Изменение проекта запрещено. Вы до сих пор находитесь в аккаунте?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Название не может быть пустым'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Название слишком длинное'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Описание слишком длинное'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Арабский
@@ -893,6 +906,11 @@ studio:
   cancel_studio: 'Отменить'
   studio_name: 'Название студии'
   studio_description: 'Описание студии'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Присоединиться'
   leave: 'Покинуть'
   report: 'Отчет'

@@ -602,6 +602,19 @@ api:
     screenshotError: 'Lettura, conversione o archiviazione dello screenshot non riuscita. Controlla il tuo dispositivo.'
     notFound: 'Il progetto da cambiare non è stato trovato.'
     forbidden: 'Cambi sul progetto non autorizzati. Sei ancora connesso?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Il nome non può essere vuoto'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Nome troppo lungo'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Descrizione troppo lunga'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Arabo
@@ -897,6 +910,11 @@ studio:
   cancel_studio: 'Annulla'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: 'Rapporto'

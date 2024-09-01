@@ -598,6 +598,19 @@ api:
     screenshotError: 'Nie udało się odczytać, zkonwertować lub przechować zrzutu ekranu. Sprawdź wprowadzone dane.'
     notFound: 'Nie znaleziono projektu do zmiany.'
     forbidden: 'Zmiana projektu jest niedozwolona. Czy nadal jesteś zalogowany?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Nazwa nie może być pusta'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Zbyt długa nazwa'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Zbyt długi opis'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Arabski
@@ -893,6 +906,11 @@ studio:
   cancel_studio: 'Anuluj'
   studio_name: 'Nazwa Studia'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Dołącz'
   leave: 'Opuść'
   report: 'Zgłoś'

@@ -603,8 +603,18 @@ api:
     notFound: 'Das zu ändernde Projekt konnte nicht gefunden werden.'
     forbidden: 'Ändern des Projekts nicht erlaubt. Bist du noch angemeldet?'
   createStudio:
-    nameTooLong: 'Name zu lang'
-    descriptionMissing: 'Beschreibung fehlt'
+    nameMissing: 'Name missing'
+    nameEmpty: 'Name darf nicht leer sein'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Name ist zu lang'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Die Beschreibung ist zu lang'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Arabisch
@@ -900,6 +910,11 @@ studio:
   cancel_studio: 'Abbrechen'
   studio_name: 'Studio-Name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Beitreten'
   leave: 'Verlassen'
   report: 'Melden'

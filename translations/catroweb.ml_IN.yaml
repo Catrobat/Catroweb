@@ -599,6 +599,19 @@ api:
     screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
     notFound: 'The project to change could not be found.'
     forbidden: 'Changing the project not allowed. Are you still logged in?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Name cannot be empty'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Name too long'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Description too long'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Arabic
@@ -894,6 +907,11 @@ studio:
   cancel_studio: 'വേണ്ടെന്നു വയ്ക്കുക'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: 'റിപ്പോർട്ട് '

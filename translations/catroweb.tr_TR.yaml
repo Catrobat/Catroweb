@@ -596,6 +596,19 @@ api:
     screenshotError: 'Ekran görüntüsü okunamadı, dönüştürülemedi veya saklanamadı. Lütfen girişinizi kontrol edin.'
     notFound: 'Değiştirilecek proje bulunamadı.'
     forbidden: 'Proje değişikliğine izin verilmiyor. Hala giriş yaptın mı?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'İsim boş olamaz'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'İsim çok uzun'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Açıklama çok uzun'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Arapça
@@ -891,6 +904,11 @@ studio:
   cancel_studio: 'İptal et'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: 'Bildir'

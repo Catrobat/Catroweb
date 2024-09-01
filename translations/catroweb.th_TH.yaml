@@ -602,6 +602,19 @@ api:
     screenshotError: 'ไม่สามารถอ่าน แปลง หรือจัดเก็บภาพหน้าจอได้ โปรดตรวจสอบข้อมูลของคุณ'
     notFound: 'ไม่พบโครงการที่จะเปลี่ยนแปลง'
     forbidden: 'ไม่อนุญาตให้เปลี่ยนแปลงโครงการ คุณยังคงเข้าสู่ระบบ'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'ต้องใส่ชื่อ'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'ชื่อยาวเกินไป'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'คำอธิบายยาวเกินไป'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: ภาษาอาหรับ
@@ -897,6 +910,11 @@ studio:
   cancel_studio: 'ยกเลิก'
   studio_name: 'ชื่อสตูดิโอ'
   studio_description: 'คำอธิบายของสตูดิโอ'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'เข้าร่วม'
   leave: 'ออกจากระบบ'
   report: 'รายงาน'
