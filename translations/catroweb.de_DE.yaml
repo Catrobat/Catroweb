@@ -605,10 +605,10 @@ api:
   createStudio:
     nameMissing: 'Name missing'
     nameEmpty: 'Name darf nicht leer sein'
-    nameTooShort: 'Name too short'
+    nameTooShort: 'Name zu lang'
     nameTooLong: 'Name ist zu lang'
     nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
+    descriptionMissing: 'Beschreibung fehlt'
     descriptionEmpty: 'Description empty'
     descriptionTooShort: 'Description too short'
     descriptionTooLong: 'Die Beschreibung ist zu lang'
