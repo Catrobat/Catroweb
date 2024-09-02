@@ -108,7 +108,7 @@ project:
   example: Примеры
   newest: Самые новые проекты
   recommended: Рекомендуемые проекты
-  scratchremixes: Коммунизм в Catrobat
+  scratchremixes: Scratch ремиксы
   noProjects: На данный момент проекты отсутствуют.
   shareAction: Поделиться
   deleteAction: Удалить проект
@@ -599,18 +599,18 @@ api:
     notFound: 'Проект нужный для изменения не был найден.'
     forbidden: 'Изменение проекта запрещено. Вы до сих пор находитесь в аккаунте?'
   createStudio:
-    nameMissing: 'Name missing'
+    nameMissing: 'Название отсутствует'
     nameEmpty: 'Название не может быть пустым'
-    nameTooShort: 'Name too short'
+    nameTooShort: 'Название слишком короткое'
     nameTooLong: 'Название слишком длинное'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
+    nameAlreadyInUse: 'Название уже используется'
+    descriptionMissing: 'Описание отсутствует'
+    descriptionEmpty: 'Описание пустое'
+    descriptionTooShort: 'Описание слишком короткое'
     descriptionTooLong: 'Описание слишком длинное'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    imageFileInvalid: 'Файл изображения недопустим'
+    imageFileInvalidType: 'Файловый тип изображения недопустим'
+    imageFileTooLarge: 'Файл изображения слишком большой'
 #languages and countries
 language:
   arabic: Арабский
@@ -906,11 +906,11 @@ studio:
   cancel_studio: 'Отменить'
   studio_name: 'Название студии'
   studio_description: 'Описание студии'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
-  cover_image_alt: 'Your cover image'
+  is_public: 'Сделать публичным?'
+  enable_comments: 'Включить комментарии?'
+  cover_image: 'Загрузить обложку'
+  cover_image_empty: 'Изображение не выбрано. Размер файла должен быть менее 1 мегабайта.'
+  cover_image_alt: 'Изображение вашей обложки'
   join: 'Присоединиться'
   leave: 'Покинуть'
   report: 'Отчет'
