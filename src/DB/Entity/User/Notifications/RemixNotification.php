@@ -34,7 +34,7 @@ class RemixNotification extends CatroNotification
     private ?Program $program,
     #[ORM\JoinColumn(name: 'remix_program_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'remix_notification_mentions_as_child')]
-    private ?Program $remix_program
+    private ?Program $remix_program,
   ) {
     parent::__construct($user, '', '', 'remix');
   }

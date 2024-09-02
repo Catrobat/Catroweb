@@ -19,7 +19,7 @@ class UserDataReportController extends CRUDController
   public function __construct(
     protected UserManager $user_manager,
     protected NotificationRepository $notification_repository,
-    protected EntityManagerInterface $entity_manager
+    protected EntityManagerInterface $entity_manager,
   ) {
   }
 

@@ -25,7 +25,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
     protected TranslatorInterface $translator,
     protected ParameterBagInterface $parameter_bag,
     protected UrlGeneratorInterface $url_generator,
-    protected CookieService $cookie_service
+    protected CookieService $cookie_service,
   ) {
   }
 

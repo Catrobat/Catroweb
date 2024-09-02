@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class TagsAdminController extends CRUDController
 {
   public function __construct(
-    protected KernelInterface $kernel
+    protected KernelInterface $kernel,
   ) {
   }
 

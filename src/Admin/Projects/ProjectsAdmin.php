@@ -58,7 +58,7 @@ class ProjectsAdmin extends AbstractAdmin
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
     protected TokenStorageInterface $security_token_storage,
-    private readonly ParameterBagInterface $parameter_bag
+    private readonly ParameterBagInterface $parameter_bag,
   ) {
   }
 

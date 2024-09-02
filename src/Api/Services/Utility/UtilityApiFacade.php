@@ -14,7 +14,7 @@ class UtilityApiFacade extends AbstractApiFacade
     private readonly UtilityResponseManager $response_manager,
     private readonly UtilityApiLoader $loader,
     private readonly UtilityApiProcessor $processor,
-    private readonly UtilityRequestValidator $request_validator
+    private readonly UtilityRequestValidator $request_validator,
   ) {
     parent::__construct($authentication_manager);
   }

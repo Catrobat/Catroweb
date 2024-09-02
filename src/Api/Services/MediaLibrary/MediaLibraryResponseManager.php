@@ -23,7 +23,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
     ResponseCacheManager $response_cache_manager,
     private readonly UrlGeneratorInterface $url_generator,
     private readonly ParameterBagInterface $parameter_bag,
-    private readonly MediaPackageFileRepository $media_package_file_repository
+    private readonly MediaPackageFileRepository $media_package_file_repository,
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
   }

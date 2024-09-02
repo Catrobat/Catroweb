@@ -29,7 +29,7 @@ final class SecurityRolesBuilder
     private AuthorizationCheckerInterface $authorizationChecker,
     private SonataConfiguration $configuration,
     private TranslatorInterface $translator,
-    private array $rolesHierarchy = []
+    private array $rolesHierarchy = [],
   ) {
   }
 

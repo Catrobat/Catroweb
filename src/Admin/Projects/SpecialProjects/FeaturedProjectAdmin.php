@@ -43,7 +43,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly ImageRepository $featured_image_repository,
-    private readonly ProjectManager $project_manager
+    private readonly ProjectManager $project_manager,
   ) {
   }
 

@@ -11,7 +11,7 @@ class ProjectListResponse
 {
   public function __construct(
     private readonly array $projects,
-    private readonly int $total_projects
+    private readonly int $total_projects,
   ) {
   }
 

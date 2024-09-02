@@ -23,7 +23,7 @@ class CreateExampleProgramCommand extends Command
   public function __construct(
     private readonly ProjectManager $program_manager,
     private readonly EntityManagerInterface $entity_manager,
-    private readonly FlavorRepository $flavor_repository
+    private readonly FlavorRepository $flavor_repository,
   ) {
     parent::__construct();
   }

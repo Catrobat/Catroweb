@@ -42,7 +42,7 @@ class ApkPendingAdmin extends AbstractAdmin
   }
 
   public function __construct(
-    private readonly ScreenshotRepository $screenshot_repository
+    private readonly ScreenshotRepository $screenshot_repository,
   ) {
   }
 

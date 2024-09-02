@@ -20,7 +20,7 @@ class NewProgramNotification extends CatroNotification
     User $user,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'new_program_notification_mentions')]
-    private ?Program $program
+    private ?Program $program,
   ) {
     parent::__construct($user, '', '', 'follow');
   }

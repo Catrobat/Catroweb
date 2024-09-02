@@ -54,7 +54,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
    */
   #[DataProvider('provideKernelRequestData')]
   public function testOnKernelRequestThemeInRequest(
-    string $request_theme, string $request_uri, string $expected_routing_theme, string $expected_flavor
+    string $request_theme, string $request_uri, string $expected_routing_theme, string $expected_flavor,
   ): void {
     $request_attributes = $this->mockRequestAttributes();
     $event = $this->mockRequestEvent(HttpKernelInterface::MAIN_REQUEST, $request_attributes, $request_uri);

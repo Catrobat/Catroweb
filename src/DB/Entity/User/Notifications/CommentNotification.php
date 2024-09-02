@@ -26,7 +26,7 @@ class CommentNotification extends CatroNotification
     User $user,
     #[ORM\JoinColumn(name: 'comment_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
     #[ORM\OneToOne(targetEntity: UserComment::class, inversedBy: 'notification')]
-    private ?UserComment $comment
+    private ?UserComment $comment,
   ) {
     parent::__construct($user, '', '', 'comment');
   }

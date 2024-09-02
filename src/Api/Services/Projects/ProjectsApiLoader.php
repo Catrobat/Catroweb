@@ -28,7 +28,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     private readonly RequestStack $request_stack,
     protected ProjectFileRepository $file_repository,
     protected ExtractedFileRepository $extracted_file_repository,
-    protected LoggerInterface $logger
+    protected LoggerInterface $logger,
   ) {
   }
 

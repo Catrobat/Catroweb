@@ -65,7 +65,7 @@ class ProjectManager
     protected NotificationManager $notification_service,
     private readonly TransformedFinder $program_finder,
     private readonly ?UrlHelper $urlHelper,
-    protected Security $security
+    protected Security $security,
   ) {
   }
 
