@@ -18,7 +18,7 @@
     "catrobat/capi": "1.6.*",
     "codercat/jwk-to-pem": "1.1.*",
     "doctrine/dbal": "4.1.*",
-    "doctrine/doctrine-bundle": "2.12.*",
+    "doctrine/doctrine-bundle": "2.13.*",
     "doctrine/doctrine-migrations-bundle": "3.3.*",
     "doctrine/orm": "3.2.*",
     "eightpoints/guzzle-bundle": "^8.5",
