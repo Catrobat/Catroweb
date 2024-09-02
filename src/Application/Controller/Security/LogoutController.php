@@ -15,7 +15,7 @@ class LogoutController extends AbstractController
 {
   public function __construct(
     protected TokenStorageInterface $token_storage,
-    protected CookieService $cookie_service
+    protected CookieService $cookie_service,
   ) {
   }
 

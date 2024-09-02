@@ -40,7 +40,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     private readonly ProjectManager $project_manager,
-    ResponseCacheManager $response_cache_manager
+    ResponseCacheManager $response_cache_manager,
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
   }

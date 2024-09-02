@@ -36,7 +36,7 @@ class UserRequestValidator extends AbstractRequestValidator
 
   public function __construct(
     ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager,
-    private readonly PasswordHasherFactoryInterface $password_hasher_factory
+    private readonly PasswordHasherFactoryInterface $password_hasher_factory,
   ) {
     parent::__construct($validator, $translator);
   }

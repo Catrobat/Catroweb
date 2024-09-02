@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class FlavorsAdminController extends CRUDController
 {
   public function __construct(
-    protected KernelInterface $kernel
+    protected KernelInterface $kernel,
   ) {
   }
 

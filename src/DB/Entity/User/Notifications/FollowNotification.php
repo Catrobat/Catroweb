@@ -25,7 +25,7 @@ class FollowNotification extends CatroNotification
     User $user,
     #[ORM\JoinColumn(name: 'follower_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'follow_notification_mentions')]
-    private User $follower
+    private User $follower,
   ) {
     parent::__construct($user, '', '', 'follow');
   }

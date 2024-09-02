@@ -16,7 +16,7 @@ class UserApiFacade extends AbstractApiFacade
     private readonly UserApiLoader $loader,
     private readonly UserApiProcessor $processor,
     private readonly UserRequestValidator $request_validator,
-    private readonly EventDispatcherInterface $event_dispatcher
+    private readonly EventDispatcherInterface $event_dispatcher,
   ) {
     parent::__construct($authentication_manager);
   }

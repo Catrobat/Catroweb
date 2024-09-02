@@ -16,7 +16,7 @@ class FeatureFlagManager
   public function __construct(
     protected RequestStack $requestStack,
     protected EntityManagerInterface $entityManager,
-    protected ParameterBagInterface $parameter_bag
+    protected ParameterBagInterface $parameter_bag,
   ) {
     if ($this->entityManager->getConnection()->isConnected()) {
       $this->defaultFlags = include $parameter_bag->get('features');

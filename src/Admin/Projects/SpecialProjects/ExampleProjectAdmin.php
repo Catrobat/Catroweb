@@ -43,7 +43,7 @@ class ExampleProjectAdmin extends AbstractAdmin
   public function __construct(
     private readonly ImageRepository $example_image_repository,
     private readonly ProjectManager $project_manager,
-    private readonly FlavorRepository $flavor_repository
+    private readonly FlavorRepository $flavor_repository,
   ) {
   }
 

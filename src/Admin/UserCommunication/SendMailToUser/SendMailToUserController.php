@@ -25,7 +25,7 @@ class SendMailToUserController extends CRUDController
     protected UserManager $user_manager,
     protected LoggerInterface $logger,
     private readonly ResetPasswordHelperInterface $resetPasswordHelper,
-    protected VerifyEmailHelperInterface $verify_email_helper
+    protected VerifyEmailHelperInterface $verify_email_helper,
   ) {
   }
 

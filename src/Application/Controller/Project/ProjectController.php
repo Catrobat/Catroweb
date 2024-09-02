@@ -52,7 +52,7 @@ class ProjectController extends AbstractController
     private readonly TranslationDelegate $translation_delegate,
     private readonly EntityManagerInterface $entity_manager,
     private readonly UserCommentRepository $comment_repository,
-    private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository
+    private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
   ) {
   }
 

@@ -19,7 +19,7 @@ class FeatureFlag
     #[ORM\Column(type: Types::STRING, length: 255)]
     private string $name,
     #[ORM\Column(type: Types::BOOLEAN)]
-    private bool $value
+    private bool $value,
   ) {
   }
 

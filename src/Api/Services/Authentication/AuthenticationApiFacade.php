@@ -14,7 +14,7 @@ class AuthenticationApiFacade extends AbstractApiFacade
     private readonly AuthenticationResponseManager $response_manager,
     private readonly AuthenticationApiLoader $loader,
     private readonly AuthenticationApiProcessor $processor,
-    private readonly AuthenticationRequestValidator $request_validator
+    private readonly AuthenticationRequestValidator $request_validator,
   ) {
     parent::__construct($authentication_manager);
   }

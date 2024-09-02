@@ -28,7 +28,7 @@ class AchievementsAdmin extends AbstractAdmin
   }
 
   public function __construct(
-    protected AchievementManager $achievement_manager
+    protected AchievementManager $achievement_manager,
   ) {
   }
 

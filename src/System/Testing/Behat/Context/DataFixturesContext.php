@@ -1740,7 +1740,7 @@ class DataFixturesContext implements Context
         'enable_comments' => $studio->isAllowComments(),
         'is_public' => $studio->isIsPublic(),
         'cover_path' => $studio->getCoverAssetPath(),
-        default => throw new \InvalidArgumentException(json_encode($set))
+        default => throw new \InvalidArgumentException(json_encode($set)),
       };
       switch ($set['key']) {
         case 'is_enabled':

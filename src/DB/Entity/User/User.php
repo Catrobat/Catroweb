@@ -655,7 +655,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
       $this->enabled,
       $this->id,
       $this->email,
-      $this->emailCanonical
+      $this->emailCanonical,
     ] = $data;
   }
 

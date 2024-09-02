@@ -24,7 +24,7 @@ class MaintenanceController extends CRUDController
     protected KernelInterface $kernel,
     private readonly string $file_storage_dir,
     private readonly string $apk_dir,
-    private readonly string $log_dir
+    private readonly string $log_dir,
   ) {
   }
 

@@ -41,7 +41,7 @@ class CatroNotification
     #[ORM\Column(name: 'message', type: Types::TEXT)]
     private string $message = '',
     #[ORM\Column(name: 'type', type: Types::STRING)]
-    private string $type = ''
+    private string $type = '',
   ) {
   }
 

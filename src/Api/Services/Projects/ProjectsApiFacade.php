@@ -16,7 +16,7 @@ class ProjectsApiFacade extends AbstractApiFacade
     private readonly ProjectsApiLoader $loader,
     private readonly ProjectsApiProcessor $processor,
     private readonly ProjectsRequestValidator $request_validator,
-    private readonly EventDispatcherInterface $event_dispatcher
+    private readonly EventDispatcherInterface $event_dispatcher,
   ) {
     parent::__construct($authentication_manager);
   }

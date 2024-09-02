@@ -24,7 +24,7 @@ class CronJobsAdminController extends CRUDController
   public function __construct(
     protected CronJobRepository $cron_job_repository,
     protected EntityManagerInterface $entity_manager,
-    protected KernelInterface $kernel
+    protected KernelInterface $kernel,
   ) {
   }
 

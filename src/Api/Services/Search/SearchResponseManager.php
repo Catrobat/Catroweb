@@ -21,7 +21,7 @@ class SearchResponseManager extends AbstractResponseManager
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     ResponseCacheManager $response_cache_manager,
-    protected ProjectsResponseManager $projectsResponseManager
+    protected ProjectsResponseManager $projectsResponseManager,
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
   }

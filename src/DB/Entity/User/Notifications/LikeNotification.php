@@ -30,7 +30,7 @@ class LikeNotification extends CatroNotification
     private ?User $like_from,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'like_notification_mentions')]
-    private ?Program $program
+    private ?Program $program,
   ) {
     parent::__construct($user, '', '', 'reaction');
   }

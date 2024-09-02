@@ -17,7 +17,7 @@ class OAuthSuccessHandler implements AuthenticationSuccessHandlerInterface
   public function __construct(
     private readonly CookieService $cookie_service,
     private readonly JWTTokenManagerInterface $jwt_manager,
-    private readonly RefreshTokenService $refresh_token_service
+    private readonly RefreshTokenService $refresh_token_service,
   ) {
   }
 

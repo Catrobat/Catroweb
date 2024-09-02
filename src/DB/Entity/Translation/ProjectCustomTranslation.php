@@ -32,7 +32,7 @@ class ProjectCustomTranslation
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'custom_translations')]
     private Program $project,
     #[ORM\Column(type: Types::STRING, length: 5)]
-    private string $language
+    private string $language,
   ) {
   }
 

@@ -36,7 +36,7 @@ class StudioManager
     protected UserCommentRepository $user_comment_repository,
     protected StudioJoinRequestRepository $studio_join_request_repository,
     protected ProgramRepository $program_repository,
-    protected ParameterBagInterface $parameter_bag
+    protected ParameterBagInterface $parameter_bag,
   ) {
   }
 
