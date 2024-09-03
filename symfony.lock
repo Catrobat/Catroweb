@@ -1025,9 +1025,6 @@
     "symfonycasts/verify-email-bundle": {
         "version": "v1.7.0"
     },
-    "textalk/websocket": {
-        "version": "1.2.0"
-    },
     "theseer/tokenizer": {
         "version": "1.1.3"
     },
