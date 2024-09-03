@@ -41,6 +41,13 @@ class ProjectCustomTranslation
     return $this->id;
   }
 
+  public function setId(?int $id): ProjectCustomTranslation
+  {
+    $this->id = $id;
+
+    return $this;
+  }
+
   public function getProject(): Program
   {
     return $this->project;

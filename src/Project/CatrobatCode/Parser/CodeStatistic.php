@@ -20,11 +20,11 @@ class CodeStatistic
 
   private int $total_num_looks = 0;
 
-  private ?int $total_num_sounds = 0;
+  private int $total_num_sounds = 0;
 
-  private ?int $total_num_global_vars = 0;
+  private int $total_num_global_vars = 0;
 
-  private ?int $total_num_local_vars = 0;
+  private int $total_num_local_vars = 0;
 
   private array $brick_type_statistic = [
     'eventBricks' => [
@@ -288,7 +288,7 @@ class CodeStatistic
         count($project_xml_properties->xpath('//programVariableList//userVariable')) +
         count($project_xml_properties->xpath('//programListOfLists//userVariable'));
     } catch (Exception) {
-      $this->total_num_global_vars = null;
+      $this->total_num_global_vars = 0;
     }
   }
 
@@ -305,7 +305,7 @@ class CodeStatistic
           count($project_xml_properties->xpath('//objectVariableList//userVariable'));
       }
     } catch (Exception) {
-      $this->total_num_local_vars = null;
+      $this->total_num_local_vars = 0;
     }
   }
 }

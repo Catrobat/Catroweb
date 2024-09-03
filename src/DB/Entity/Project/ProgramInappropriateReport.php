@@ -80,6 +80,13 @@ class ProgramInappropriateReport
     $this->setProjectVersion($this->getProgram()->getVersion());
   }
 
+  public function setId(?int $id): ProgramInappropriateReport
+  {
+    $this->id = $id;
+
+    return $this;
+  }
+
   public function getId(): ?int
   {
     return $this->id;

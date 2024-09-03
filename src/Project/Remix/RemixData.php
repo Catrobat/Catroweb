@@ -8,11 +8,14 @@ class RemixData
 {
   final public const string SCRATCH_DOMAIN = 'scratch.mit.edu';
 
-  private int|string|array|bool|null $remix_url_data = null;
+  private array $remix_url_data = [];
 
   public function __construct(private readonly string $remix_url)
   {
-    $this->remix_url_data = parse_url($this->remix_url);
+    $data = parse_url($this->remix_url);
+    if (is_array($data)) {
+      $this->remix_url_data = $data;
+    }
   }
 
   public function getUrl(): string
@@ -36,7 +39,7 @@ class RemixData
     }
 
     // legacy id filtering for old projects where ids where numbers
-    preg_match('#(\/\d+(\/)?)$#', (string) $remix_url_path, $id_matches);
+    preg_match('#(/\d+(/)?)$#', (string) $remix_url_path, $id_matches);
     if (count($id_matches) > 0) {
       return str_replace('/', '', $id_matches[0]);
     }
