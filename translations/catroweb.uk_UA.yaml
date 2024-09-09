@@ -585,8 +585,8 @@ api:
     currentPasswordWrong: "Поточний пароль неправильний"
   project:
     nameEmpty: 'Назва не може бути порожньою'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
+    nameTooLong: 'Назва задовга'
+    descriptionTooLong: 'Опис задовгий'
     creditsTooLong: 'Поле «Примітки та автори» занадто довге'
     screenshotInvalid: 'Знімок екрана проєкту неприпустимий або не підтримується'
   projectsPost:
