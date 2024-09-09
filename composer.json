@@ -84,7 +84,7 @@
     "symfony/phpunit-bridge": "7.1.*",
     "symfony/stopwatch": "7.0.*",
     "symfony/web-profiler-bundle": "7.1.*",
-    "vimeo/psalm": "5.25.*",
+    "vimeo/psalm": "5.26.*",
     "wapmorgan/php-deprecation-detector": "2.0.*"
   },
   "config": {
