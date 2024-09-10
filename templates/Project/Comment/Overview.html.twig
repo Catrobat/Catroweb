@@ -25,10 +25,10 @@
     </button>
   </div>
 
-  {% include 'Project/Comment/Wrapper.html.twig' with {
-    'comments': project_details.comments,
-    'isAdmin': project_details.isAdmin,
-  } %}
+  {{ include('Project/Comment/Wrapper.html.twig', {
+    comments: project_details.comments,
+    isAdmin: project_details.isAdmin,
+  }) }}
 
   <div class="center row" style="justify-content: center">
     <div id="show-more-comments-button" class="button-show-more col-2" data-comments-class-selector=".single-comment">
@@ -44,9 +44,9 @@
   </div>
 </div>
 
-{% include 'Project/Comment/JsData.html.twig' with {
-  'project': project,
-  'comments': project_details.comments
-} %}
+{{ include('Project/Comment/JsData.html.twig', {
+  project: project,
+  comments: project_details.comments
+}) }}
 <div class="session-vars-names" data-visible-comments-session-var="visibleComments"></div>
 <div class="comments-class-selector" data-comments-class-selector=".single-comment"></div>

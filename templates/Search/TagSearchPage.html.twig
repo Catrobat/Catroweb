@@ -1,17 +1,17 @@
 {% extends 'Layout/Base.html.twig' %}
 
 {% block head %}
-  {{ encore_entry_link_tags('legacy_search_page')  }}
+  {{ encore_entry_link_tags('legacy_search_page') }}
 {% endblock %}
 
 {% block body %}
 
   <div id="search-results">
-    <h1>{{ "search.results"|trans({}, "catroweb") }}</h1>
+    <h1>{{ 'search.results'|trans({}, 'catroweb') }}</h1>
     <div id="search-results-text">
-      {{ "search.resultcount"|trans({'%count%': '<span></span>'}, "catroweb")|raw }}
+      {{ 'search.resultcount'|trans({'%count%': '<span></span>'}, 'catroweb')|raw }}
     </div>
-    {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'search-progressbar'} only %}
+    {{ include('Components/LoadingSpinner.html.twig', {spinner_id: 'search-progressbar'}, false) }}
     <div class="projects"></div>
   </div>
 
@@ -24,5 +24,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('legacy_search_page')  }}
+  {{ encore_entry_script_tags('legacy_search_page') }}
 {% endblock %}

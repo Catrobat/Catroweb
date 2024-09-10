@@ -1,13 +1,13 @@
-{% if '/project/'       in app.request.pathinfo and project|default(false) and project.id|default(false) %}
+{% if '/project/' in app.request.pathinfo and project|default(false) and project.id|default(false) %}
 
 <div class="mdc-menu-surface--anchor">
-    {% include 'Layout/Header/OptionButton.html.twig' %}
+    {{ include('Layout/Header/OptionButton.html.twig') }}
 
     <div id="top-app-bar__options-container"
          class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed mdc-menu-surface--open"
          tabindex="0">
 
-        {% include 'Layout/Header/ProjectOptions.html.twig' %}
+        {{ include('Layout/Header/ProjectOptions.html.twig') }}
 
     </div>
 </div>
@@ -18,21 +18,21 @@
                 aria-label="Search">
             settings
         </button>
-        {% include 'Studio/Details/AdminSettings.html.twig' %}
+        {{ include('Studio/Details/AdminSettings.html.twig') }}
     {% else %}
-        {% include 'Layout/Header/OptionButton.html.twig' %}
-        {% include 'Layout/Header/StudioOptions.html.twig' %}
+        {{ include('Layout/Header/OptionButton.html.twig') }}
+        {{ include('Layout/Header/StudioOptions.html.twig') }}
     {% endif %}
 
 {% elseif '/user/' in app.request.pathinfo and profile|default(false) and profile.id|default(false) %}
     <div class="mdc-menu-surface--anchor">
-        {% include 'Layout/Header/OptionButton.html.twig' %}
+        {{ include('Layout/Header/OptionButton.html.twig') }}
 
         <div id="top-app-bar__options-container"
              class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed mdc-menu-surface--open"
              tabindex="0">
 
-            {% include 'Layout/Header/UserOptions.html.twig' %}
+            {{ include('Layout/Header/UserOptions.html.twig') }}
 
         </div>
     </div>
@@ -43,6 +43,3 @@
         settings
     </button>
 {% endif %}
-
-
-

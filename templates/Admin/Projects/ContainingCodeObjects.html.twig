@@ -2,12 +2,10 @@
 
 {% block field %}
 
-
   <button id="code-view{{ suffix|default('') }}"
           class="btn"
-          onclick="location.href='{{ path('code_view', {'id': object.id }) }}'">
-    <span>{{ "codeview.title"|trans({}, "catroweb") }}</span>
+          onclick="location.href='{{ path('code_view', {id: object.id}) }}'">
+    <span>{{ 'codeview.title'|trans({}, 'catroweb') }}</span>
   </button>
-
 
 {% endblock %}

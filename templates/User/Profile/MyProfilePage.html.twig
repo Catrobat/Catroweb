@@ -1,5 +1,5 @@
 {% extends 'Layout/Base.html.twig' %}
-{% block top_bar_page_title %}{{ "menu.profile"|trans({}, "catroweb") }}{% endblock %}
+{% block top_bar_page_title %}{{ 'menu.profile'|trans({}, 'catroweb') }}{% endblock %}
 
 {% block head %}
   {{ encore_entry_link_tags('user_my_profile_page') }}
@@ -20,14 +20,14 @@
   {% endif %}
   <div class="profile__basic-info">
     <div class="profile__basic-info__avatar">
-      <img class="profile__basic-info__avatar__img" alt="{{ 'profile.picture' | trans({}, 'catroweb') }}"
+      <img class="profile__basic-info__avatar__img" alt="{{ 'profile.picture'|trans({}, 'catroweb') }}"
            src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"/>
       <div class="profile__basic-info__avatar__btn-change"
-           aria-label="{{ 'profile.changePicture' | trans({}, 'catroweb') }}"><span
+           aria-label="{{ 'profile.changePicture'|trans({}, 'catroweb') }}"><span
             class="material-icons">photo_camera</span></div>
     </div>
     <div class="profile__basic-info__text">
-      <div class="profile__basic-info__text__name" aria-label="{{ 'username' | trans({}, 'catroweb') }}">
+      <div class="profile__basic-info__text__name" aria-label="{{ 'username'|trans({}, 'catroweb') }}">
         {{ username }}
       </div>
     </div>
@@ -35,14 +35,14 @@
   {% if app.user.about is not empty or app.user.currentlyWorkingOn is not empty %}
     <div class="profile__description">
       {% if app.user.about is not empty %}
-        <div class="profile__description__about" aria-label="{{ 'profile.aboutMe' | trans({}, 'catroweb') }}">
+        <div class="profile__description__about" aria-label="{{ 'profile.aboutMe'|trans({}, 'catroweb') }}">
           {{ app.user.about }}
         </div>
       {% endif %}
       {% if app.user.currentlyWorkingOn is not empty %}
         <div class="profile__description__status">
         <span class="profile__description__status__label">
-            {{ 'profile.currentlyWorkingOn' | trans({}, 'catroweb') }}:
+            {{ 'profile.currentlyWorkingOn'|trans({}, 'catroweb') }}:
         </span>
           <span class="profile__description__status__content">{{ app.user.currentlyWorkingOn }}</span>
         </div>
@@ -50,10 +50,10 @@
     </div>
   {% endif %}
 
-  {% include 'User/Profile/Settings/UserSettings.html.twig' %}
-  {% include 'User/Profile/Settings/ProfileSettings.html.twig' %}
-  {% include 'User/Profile/Settings/SecuritySettings.html.twig' %}
-  {% include 'User/Profile/Settings/AccountSettings.html.twig' %}
+  {{ include('User/Profile/Settings/UserSettings.html.twig') }}
+  {{ include('User/Profile/Settings/ProfileSettings.html.twig') }}
+  {{ include('User/Profile/Settings/SecuritySettings.html.twig') }}
+  {{ include('User/Profile/Settings/AccountSettings.html.twig') }}
 
   <div class="tab-bar-container mt-3">
     <div class="mdc-tab-bar" role="tablist">
@@ -63,7 +63,7 @@
             <button class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
             <span class="mdc-tab__content">
               <span class="mdc-tab__icon" id="projects-count">{{ project_count }}</span>
-              <span class="mdc-tab__icon-text">{{ "projects"|trans({}, "catroweb") }}</span>
+              <span class="mdc-tab__icon-text">{{ 'projects'|trans({}, 'catroweb') }}</span>
             </span>
               <span class="mdc-tab-indicator mdc-tab-indicator--active">
               <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -102,11 +102,11 @@
            data-theme="{{ theme() }}"
            data-base-url="{{ app.request.getBaseURL() }}"
            data-flavor="{{ flavor() }}"
-           data-empty-message="{{ "project.noProjects"|trans({}, 'catroweb') }}"
+           data-empty-message="{{ 'project.noProjects'|trans({}, 'catroweb') }}"
            class="own-project-list loading">
         <div class="container">
           <div class="lazyload projects-spinner-container">
-            {% include 'Components/LoadingSpinner.html.twig' only %}
+            {{ include('Components/LoadingSpinner.html.twig', [], false) }}
           </div>
           <div class="lazyload own-project-list__wrapper">
             <div class="lazyload projects-container"></div>
@@ -115,7 +115,7 @@
       </div>
     </div>
 
-    {% include 'User/Followers/FollowersTabs.twig' %}
+    {{ include('User/Followers/FollowersTabs.twig') }}
   </div>
 
   <div class="mdc-menu mdc-menu-surface" id="project-action-menu">
@@ -139,7 +139,7 @@
 
   <template id="profile-loading-spinner-template" class="d-none">
     <div class="loading-spinner-backdrop">
-      {% include 'Components/LoadingSpinner.html.twig' with {'size': 'large'} %}
+      {{ include('Components/LoadingSpinner.html.twig', {size: 'large'}) }}
     </div>
   </template>
 
@@ -149,15 +149,15 @@
 <script>
   const myProfileConfiguration = {
     projectInfo: {
-      visibilityPrivateText: '{{ "project.private"|trans({}, "catroweb")|escape('js')|raw }}',
-      visibilityPublicText: '{{ "project.public"|trans({}, "catroweb")|escape('js')|raw }}',
+      visibilityPrivateText: '{{ 'project.private'|trans({}, 'catroweb')|escape('js')|raw }}',
+      visibilityPublicText: '{{ 'project.public'|trans({}, 'catroweb')|escape('js')|raw }}',
     },
     projectActions: {
       delete: {
-        confirmationText: `{{ "project.deleteConfirmation"|trans({}, "catroweb")|escape('js')|raw }}`
+        confirmationText: `{{ 'project.deleteConfirmation'|trans({}, 'catroweb')|escape('js')|raw }}`
       },
       visibility: {
-        confirmationText: `{{ "project.changeVisibility"|trans({}, "catroweb")|escape('js')|raw }}`,
+        confirmationText: `{{ 'project.changeVisibility'|trans({}, 'catroweb')|escape('js')|raw }}`,
       }
     },
     securitySettings: {
@@ -165,7 +165,7 @@
     },
     userSettings: {
       deleteAccount: {
-        confirmationText: `{{ "project.deleteAccountConfirmation"|trans({}, "catroweb")|escape('js')|raw }}`
+        confirmationText: `{{ 'project.deleteAccountConfirmation'|trans({}, 'catroweb')|escape('js')|raw }}`
       }
     },
     messages: {

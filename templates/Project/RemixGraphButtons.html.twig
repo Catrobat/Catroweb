@@ -1,9 +1,9 @@
 {% if isFeatureFlagEnabled('remix-graph') %}
-  {% include 'Components/RedirectButton.twig' with {
-      'id': 'remixGraphButton',
-      'suffix': suffix|default(''),
-      'url': path('remix_graph', {'id': project.id }),
-      'icon': 'call_split',
-      'text': "remixGraph.showRemixGraph"|trans({}, "catroweb")
-  } %}
+  {{ include('Components/RedirectButton.twig', {
+      id: 'remixGraphButton',
+      suffix: suffix|default(''),
+      url: path('remix_graph', {id: project.id}),
+      icon: 'call_split',
+      text: 'remixGraph.showRemixGraph'|trans({}, 'catroweb')
+  }) }}
 {% endif %}

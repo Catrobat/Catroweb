@@ -3,19 +3,19 @@
     <span class="activity__list-entry__date">{{ activity.getCreatedOn().format('d-m-y') }}:&nbsp;</span>
     <span>
       {% if activity.getType() == 'user' %}
-        {{ "studio.details.activity_list.join_studio"|trans({
+        {{ 'studio.details.activity_list.join_studio'|trans({
           '%user%': '<a href="/">' ~ activity.getUser().getUserName() ~ '</a>',
-        }, "catroweb")|raw }}
+        }, 'catroweb')|raw }}
       {% endif %}
       {% if activity.getType() == 'project' %}
-        {{ "studio.details.activity_list.add_project"|trans({
+        {{ 'studio.details.activity_list.add_project'|trans({
           '%user%': '<a href="/">' ~ activity.getUser().getUserName() ~ '</a>',
-        }, "catroweb")|raw }}
+        }, 'catroweb')|raw }}
       {% endif %}
       {% if activity.getType() == 'comment' %}
-        {{ "studio.details.activity_list.add_comment"|trans({
+        {{ 'studio.details.activity_list.add_comment'|trans({
           '%user%': '<a href="/">' ~ activity.getUser().getUserName() ~ '</a>',
-        }, "catroweb")|raw }}
+        }, 'catroweb')|raw }}
       {% endif %}
     </span>
   </li>

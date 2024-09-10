@@ -2,7 +2,7 @@
 
 {% block notification_leftAvatar %}
   <div class="col-2 my-auto">
-    <a href="{{ path('profile', { "id" : notification.follower.id }) }}">
+    <a href="{{ path('profile', {id: notification.follower.id}) }}">
       <img class="img-fluid notification-avatar-round"
            src="{% if notification.follower.avatar is not empty %}{{ notification.follower.avatar }}
                           {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
@@ -13,15 +13,14 @@
 
 {% block notification_body %}
   <div class="col-8 ps-3 my-auto">
-    {{ 'catro-notifications.follow.message' | trans
+    {{ 'catro-notifications.follow.message'|trans
       (
       {
-        '%user_link%': '<a href="'~path('profile', {'id': notification.follower.id|escape})~'">'~notification.follower.username|escape~'</a>',
+        '%user_link%': '<a href="' ~ path('profile', {id: notification.follower.id|escape}) ~ '">' ~ notification.follower.username|escape ~ '</a>',
       },
       'catroweb'
     )
     |raw }}
   </div>
-
 
 {% endblock %}

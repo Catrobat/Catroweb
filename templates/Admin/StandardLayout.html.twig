@@ -16,14 +16,13 @@
   <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
       <li class="dropdown">
-        <a class="dropdown-toggle" href="{{ path('index')}}">
+        <a class="dropdown-toggle" href="{{ path('index') }}">
           <i class="fa fa-home fa-fw"></i>
         </a>
       </li>
     </ul>
   </div>
 {% endblock %}
-
 
 {% block sonata_page_content_nav %}
   {% if _tab_menu is not empty or _actions is not empty or _list_filters_actions is not empty %}
@@ -59,7 +58,7 @@
           {% endif %}
 
           {% block sonata_admin_content_actions_wrappers %}
-            {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
+            {% if _actions|replace({'<li>': '', '</li>': ''})|trim is not empty %}
               <ul class="nav navbar-nav navbar-right">
                 {% if _actions|split('</a>')|length > 2 %}
                   <li class="dropdown sonata-actions">
@@ -89,4 +88,3 @@
   {{ parent() }}
   {{ encore_entry_script_tags('admin_standard_layout') }}
 {% endblock %}
-

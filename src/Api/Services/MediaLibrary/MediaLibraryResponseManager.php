@@ -151,7 +151,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
           continue;
         }
 
-        if (count($response_array) === $limit) {
+        if (count($response_array) >= $limit) {
           break;
         }
 

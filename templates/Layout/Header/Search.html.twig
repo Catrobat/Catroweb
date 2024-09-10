@@ -19,13 +19,13 @@
              for="top-app-bar__search-input"
              alt="
 {% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
-{{ "search.inMediaLib"|trans({}, "catroweb") }}
-{% else %}{{ "search.search"|trans({}, "catroweb") }}
+{{ 'search.inMediaLib'|trans({}, 'catroweb') }}
+{% else %}{{ 'search.search'|trans({}, 'catroweb') }}
 {% endif %}"
              placeholder="
 {% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
-{{ "search.inMediaLib"|trans({}, "catroweb") }}
-{% else %}{{ "search.search"|trans({}, "catroweb") }}
+{{ 'search.inMediaLib'|trans({}, 'catroweb') }}
+{% else %}{{ 'search.search'|trans({}, 'catroweb') }}
 {% endif %}">
       </label>
       <input id="top-app-bar__search-form__submit" type="submit">

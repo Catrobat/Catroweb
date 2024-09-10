@@ -3,7 +3,7 @@
 {% block list_table %}
   <div class="col-xs-12 col-md-12 mb-5">
       <h1 class="h1" style="margin-top: 0">Extensions</h1>
-      {% include '@SonataTwig/FlashMessage/render.html.twig' %}
+      {{ include('@SonataTwig/FlashMessage/render.html.twig') }}
       <p style="padding: 0.5em">
           Extensions must be added directly in the source code to utilize our translation system.
           Then, to insert/update those static extensions into the database, the update button must be

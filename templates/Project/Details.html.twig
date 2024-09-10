@@ -1,25 +1,25 @@
 <div id="details">
 
   <h2 class="mt-3">
-    {{ "projectDetails"|trans({}, "catroweb") }}
+    {{ 'projectDetails'|trans({}, 'catroweb') }}
   </h2>
 
   <div class="row">
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
       <i class="material-icons">visibility</i>
-      <span class="icon-text ms-2 align-bottom">{{ "project.views"|trans({ '%views%' : project_details.views }, "catroweb") }}</span>
+      <span class="icon-text ms-2 align-bottom">{{ 'project.views'|trans({'%views%': project_details.views}, 'catroweb') }}</span>
     </div>
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
       <i class="material-icons">query_builder</i>
       <span class="icon-text ms-2 align-bottom">{{ project_details.age }}</span>
     </div>
     <div class="d-none d-lg-block col-lg-4">
-      {% include 'Components/RedirectButton.twig' with {
-        'id': 'projectCodeStatsButton',
-        'url': path('code_statistics', {'id': project.id }),
-        'icon': 'show_chart',
-        'text': "statistics"|trans({}, "catroweb")
-      } %}
+      {{ include('Components/RedirectButton.twig', {
+        id: 'projectCodeStatsButton',
+        url: path('code_statistics', {id: project.id}),
+        icon: 'show_chart',
+        text: 'statistics'|trans({}, 'catroweb')
+      }) }}
     </div>
   </div>
 
@@ -30,15 +30,15 @@
     </div>
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
       <i class="material-icons ">get_app</i>
-      <span class="icon-text ms-2">{{ "project.downloads"|trans({ '%downloads%' : project_details.downloads }, "catroweb") }}</span>
+      <span class="icon-text ms-2">{{ 'project.downloads'|trans({'%downloads%': project_details.downloads}, 'catroweb') }}</span>
     </div>
     <div class="d-none d-lg-block col-lg-4 mt-2">
-      {% include 'Components/RedirectButton.twig' with {
-        'id': 'projectCodeViewButton',
-        'url': path('code_view', {'id': project.id }),
-        'icon': 'extension',
-        'text': "codeview.title"|trans({}, "catroweb")
-      } %}
+      {{ include('Components/RedirectButton.twig', {
+        id: 'projectCodeViewButton',
+        url: path('code_view', {id: project.id}),
+        icon: 'extension',
+        text: 'codeview.title'|trans({}, 'catroweb')
+      }) }}
     </div>
   </div>
 
@@ -46,29 +46,29 @@
   <div class="row">
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
       <img alt="Not for Kids" id="not-for-kids-logo" src="{{ asset('images/default/not_for_kids.svg') }}" style="width: 24px; height: 24px;">
-      <span id="notForKidsText" class="icon-text ms-2 align-bottom">{{ "project.notForKids"|trans({}, "catroweb") }}</span>
+      <span id="notForKidsText" class="icon-text ms-2 align-bottom">{{ 'project.notForKids'|trans({}, 'catroweb') }}</span>
     </div>
   </div>
   {% endif %}
 
   <div class="row mb-4">
     <div class="col-6 mb-3 d-lg-none mt-3">
-      {% include 'Components/RedirectButton.twig' with {
-        'id': 'projectCodeStatsButton',
-        'suffix': '-small',
-        'url': path('code_statistics', {'id': project.id }),
-        'icon': 'show_chart',
-        'text': "statistics"|trans({}, "catroweb")
-      } %}
+      {{ include('Components/RedirectButton.twig', {
+        id: 'projectCodeStatsButton',
+        suffix: '-small',
+        url: path('code_statistics', {id: project.id}),
+        icon: 'show_chart',
+        text: 'statistics'|trans({}, 'catroweb')
+      }) }}
     </div>
     <div class="col-6 mb-3 d-lg-none mt-3">
-      {% include 'Components/RedirectButton.twig' with {
-        'id': 'projectCodeViewButton',
-        'suffix': '-small',
-        'url': path('code_view', {'id': project.id }),
-        'icon': 'extension',
-        'text': "codeview.title"|trans({}, "catroweb")
-      } %}
+      {{ include('Components/RedirectButton.twig', {
+        id: 'projectCodeViewButton',
+        suffix: '-small',
+        url: path('code_view', {id: project.id}),
+        icon: 'extension',
+        text: 'codeview.title'|trans({}, 'catroweb')
+      }) }}
     </div>
   </div>
 

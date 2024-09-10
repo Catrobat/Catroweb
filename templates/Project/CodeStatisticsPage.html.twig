@@ -1,6 +1,6 @@
 {% extends 'Layout/Base.html.twig' %}
-{% block top_bar_page_title %}{{ "codeStatistics.title"|trans({}, "catroweb") }}{% endblock %}
-{% block top_bar_back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
+{% block top_bar_page_title %}{{ 'codeStatistics.title'|trans({}, 'catroweb') }}{% endblock %}
+{% block top_bar_back_path %}{{ path('program', {id: id}) }}{% endblock %}
 
 {% block head %}
   {{ encore_entry_link_tags('project_code_statistics') }}
@@ -14,7 +14,7 @@
     <div class="accordion-item">
       <h2 class="accordion-header" id="statisticsGeneral">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeneral" aria-expanded="true" aria-controls="collapseGeneral">
-          {{ "codeStatistics.general"|trans({}, "catroweb") }}
+          {{ 'codeStatistics.general'|trans({}, 'catroweb') }}
         </button>
       </h2>
       <div id="collapseGeneral" class="accordion-collapse collapse show" aria-labelledby="statisticsGeneral" data-bs-parent="#accordionStatistics">
@@ -39,13 +39,12 @@
       </div>
     </div>
 
-
     <div class="accordion-item">
       <h2 class="accordion-header" id="statisticsBricks">
         <button class="accordion-button" type="button"
                 data-bs-toggle="collapse" data-bs-target="#collapseBricks"
                 aria-expanded="true" aria-controls="collapseBricks">
-          {{ "codeStatistics.bricks"|trans({}, "catroweb") }}
+          {{ 'codeStatistics.bricks'|trans({}, 'catroweb') }}
         </button>
       </h2>
 
@@ -76,7 +75,7 @@
     </div>
   </div>
 {% else %}
-    <p>{{ "codeStatistics.error"|trans({}, "catroweb") }}</p>
+    <p>{{ 'codeStatistics.error'|trans({}, 'catroweb') }}</p>
 {% endif %}
 
 {% endblock %}

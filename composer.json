@@ -69,8 +69,8 @@
     "dmore/chrome-mink-driver": "2.9.*",
     "doctrine/doctrine-fixtures-bundle": "3.6.*",
     "dvdoug/behat-code-coverage": "5.3.*",
-    "friends-of-behat/symfony-extension": "2.6.*",
     "friends-of-behat/mink-extension": "v2.7.5",
+    "friends-of-behat/symfony-extension": "2.6.*",
     "friendsofphp/php-cs-fixer": "3.64.*",
     "phpstan/phpstan": "1.12.*",
     "phpstan/phpstan-doctrine": "1.5.*",
@@ -85,6 +85,7 @@
     "symfony/stopwatch": "7.0.*",
     "symfony/web-profiler-bundle": "7.1.*",
     "vimeo/psalm": "5.26.*",
+    "vincentlanglet/twig-cs-fixer": "^3.1",
     "wapmorgan/php-deprecation-detector": "2.0.*"
   },
   "config": {

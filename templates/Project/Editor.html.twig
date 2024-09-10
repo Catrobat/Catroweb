@@ -12,7 +12,7 @@
           <span class="mdc-text-field__resizer">
             <span id="edit-name-loading-spinner" style="display: none;">
               <i class="ms-2 material-icons">
-                {% include 'Components/LoadingSpinner.html.twig' with {'size': 'small'} %}
+                {{ include('Components/LoadingSpinner.html.twig', {size: 'small'}) }}
               </i>
             </span>
             <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-name-text" name="edit-name-text" title="_edit-text"
@@ -32,7 +32,7 @@
           <span class="mdc-text-field__resizer">
             <span id="edit-description-loading-spinner" style="display: none;">
               <i class="ms-2 material-icons">
-                {% include 'Components/LoadingSpinner.html.twig' with {'size': 'small'} %}
+                {{ include('Components/LoadingSpinner.html.twig', {size: 'small'}) }}
               </i>
             </span>
             <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-description-text" name="edit-description-text" title="_edit-text"
@@ -53,7 +53,7 @@
           <span class="mdc-text-field__resizer">
             <span id="edit-credits-loading-spinner" style="display: none;">
               <i class="ms-2 material-icons">
-                {% include 'Components/LoadingSpinner.html.twig' with {'size': 'small'} %}
+                {{ include('Components/LoadingSpinner.html.twig', {size: 'small'}) }}
               </i>
             </span>
             <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-credits-text" name="edit-credits-text" title="_edit-text"
@@ -69,7 +69,7 @@
               <span class="mdc-notched-outline">
                 <span class="mdc-notched-outline__leading"></span>
                 <span class="mdc-notched-outline__notch">
-                  <span class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
+                  <span class="mdc-floating-label">{{ 'footer.language'|trans({}, 'catroweb') }}</span>
                 </span>
                 <span class="mdc-notched-outline__trailing"></span>
               </span>
@@ -77,7 +77,7 @@
                 <span id="edit-selected-language" class="mdc-select__selected-text" data-selected-value="default"></span>
               </span>
               <span class="mdc-select__dropdown-icon">
-                {% include 'Components/MdcSelectSvg.html.twig' %}
+                {{ include('Components/MdcSelectSvg.html.twig') }}
               </span>
             </div>
             <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
@@ -85,7 +85,7 @@
                 <li class="mdc-list-item" data-value="default" role="option">
                     <span class="mdc-list-item__ripple"></span>
                     <span class="mdc-list-item__text">
-                      {{ "project.default"|trans({}, "catroweb") }}
+                      {{ 'project.default'|trans({}, 'catroweb') }}
                     </span>
                 </li>
               </ul>
@@ -96,12 +96,12 @@
         <div class="justify-content-between" style="margin-top: 1rem; float: right;">
           <button id="edit-delete-button" class="btn btn-danger" style="padding: 10px;">
             <i class="material-icons align-bottom">delete</i>
-            {{ "project.delete"|trans({}, "catroweb") }}
+            {{ 'project.delete'|trans({}, 'catroweb') }}
           </button>
 
           <button id="edit-submit-button" class="btn btn-primary" style="padding: 10px;">
             <i class="material-icons align-bottom">done</i>
-            {{ "project.save"|trans({}, "catroweb") }}
+            {{ 'project.save'|trans({}, 'catroweb') }}
           </button>
         </div>
       </div>

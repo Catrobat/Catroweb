@@ -8,7 +8,7 @@
 {% block list_table %}
   <div class="col-xs-12 col-md-12 mb-5">
       <h1 class="h1" style="margin-top: 0;">Achievements</h1>
-      {% include '@SonataTwig/FlashMessage/render.html.twig' %}
+      {{ include('@SonataTwig/FlashMessage/render.html.twig') }}
       <p style="padding: 0.5em;">
           Achievements are tightly coupled to events that usually require complex logic in the background.
           Therefore, achievements can not simply be added here through the Admin interface.

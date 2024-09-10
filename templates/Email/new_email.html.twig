@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="{{ app.request.locale | default('en') | slice(0, 2) }}" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="{{ app.request.locale|default('en')|slice(0, 2) }}" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title> - No Reply - </title>
@@ -67,15 +67,15 @@
                     <img src="{{ asset('images/social/google-play.svg') }}" width="87%" height="auto"/>
                   </a>
                 </div>
-              </div>    
+              </div>
               <tr>
                 <td style=" font-family: Arial, sans-serif; font-size: 12px;" width="75%">
-                  {{ "noReply"|trans({}, "catroweb") }}
+                  {{ 'noReply'|trans({}, 'catroweb') }}
                 </td>
               </tr>
               <tr>
                 <td style="font-family: Arial, sans-serif; font-size: 14px;" width="75%">
-                  {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
+                  {{ 'copyright'|trans({'%year%': 'now'|date('Y')}, 'catroweb')|raw }}
                 </td>
               </tr>
             </table>

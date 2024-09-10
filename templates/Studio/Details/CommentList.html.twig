@@ -6,7 +6,7 @@
                     {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
            alt="Card image">
       <div class="comment-content">
-        <a href="{{ url('profile', { id : comment.user.id }) }}">{{ comment.username }}</a>
+        <a href="{{ url('profile', {id: comment.user.id}) }}">{{ comment.username }}</a>
         {% if user_role == 'admin' or comment.username == user_name %}
           <a class="comment-delete-button" data-bs-toggle="tooltip" data-comment-id="{{ comment.id }}"
              title="{{ 'studio.details.comments.remove_comment'|trans({}, 'catroweb') }}">
@@ -43,22 +43,22 @@
   {% if user_role != null and studio.isAllowComments == '1' %}
 
     <div style="display: flex; align-items: center;">
-      <a href="{{ path('profile', { 'id': app.user.id }) }}">
+      <a href="{{ path('profile', {id: app.user.id}) }}">
         <img class="member__list-entry__image"
              src="{{ app.user.avatar|default(asset('/images/default/avatar_default.png')) }}"
              alt="">
       </a>
 
-      {% include 'Components/TextArea.html.twig' with {
-        'text_area':
+      {{ include('Components/TextArea.html.twig', {
+        text_area:
         {
-          'id': 'add-comment',
-          'label': '' ~ 'studio.details.comments.type_something'|trans({}, 'catroweb'),
-          'name': 'comment',
-          'rows': '1',
-          'mb': 'none'
+          id: 'add-comment',
+          label: '' ~ 'studio.details.comments.type_something'|trans({}, 'catroweb'),
+          name: 'comment',
+          rows: '1',
+          mb: 'none'
         }
-      }%}
+      }) }}
       <button id="studio-send-comment">{{ 'studio.details.comments.send'|trans({}, 'catroweb') }}</button>
     </div>
   {% endif %}

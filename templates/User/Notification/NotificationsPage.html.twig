@@ -1,5 +1,5 @@
 {% extends 'Layout/Base.html.twig' %}
-{% block top_bar_page_title %}{{ "notifications"|trans({}, "catroweb") }}{% endblock %}
+{% block top_bar_page_title %}{{ 'notifications'|trans({}, 'catroweb') }}{% endblock %}
 
 {% block head %}
   {{ encore_entry_link_tags('user_notifications_page') }}
@@ -7,72 +7,72 @@
 
 {% block body %}
 
-  {% include 'Components/ChipSet.html.twig' with {
-    'chips': [
+  {{ include('Components/ChipSet.html.twig', {
+    chips: [
       {
-        'id': 'all-notif',
-        'icon': 'notifications',
-        'title': '' ~ 'allNotifications'|trans({}, 'catroweb'),
-        'controls': 'notifications'
+        id: 'all-notif',
+        icon: 'notifications',
+        title: '' ~ 'allNotifications'|trans({}, 'catroweb'),
+        controls: 'notifications'
       },
       {
-        'id': 'follow-notif',
-        'icon': 'person',
-        'title': '' ~ 'FollowersNotifications'|trans({}, 'catroweb'),
-        'controls': 'follow-notifications'
+        id: 'follow-notif',
+        icon: 'person',
+        title: '' ~ 'FollowersNotifications'|trans({}, 'catroweb'),
+        controls: 'follow-notifications'
       },
       {
-        'id': 'comment-notif',
-        'icon': 'comment',
-        'title': '' ~ 'CommentNotifications'|trans({}, 'catroweb'),
-        'controls': 'comment-notifications'
+        id: 'comment-notif',
+        icon: 'comment',
+        title: '' ~ 'CommentNotifications'|trans({}, 'catroweb'),
+        controls: 'comment-notifications'
       },
       {
-        'id': 'reaction-notif',
-        'icon': 'thumb_up',
-        'title': '' ~ 'LikeNotifications'|trans({}, 'catroweb'),
-        'controls': 'reaction-notifications'
+        id: 'reaction-notif',
+        icon: 'thumb_up',
+        title: '' ~ 'LikeNotifications'|trans({}, 'catroweb'),
+        controls: 'reaction-notifications'
       },
       {
-        'id': 'remix-notif',
-        'icon': 'call_split',
-        'title': '' ~ 'RemixNotifications'|trans({}, 'catroweb'),
-        'controls': 'remix-notifications'
+        id: 'remix-notif',
+        icon: 'call_split',
+        title: '' ~ 'RemixNotifications'|trans({}, 'catroweb'),
+        controls: 'remix-notifications'
       },
     ]
-  } %}
+  }) }}
 
   <div class="tab-content mt-4">
     {% for category in [
       {
-        'id': 'notifications',
-        'notifications': allNotifications,
-        'emptyID': 'no-notif-all',
-        'emptyMessage': '' ~ 'notificationsReadMessage'|trans({}, 'catroweb'),
+        id: 'notifications',
+        notifications: allNotifications,
+        emptyID: 'no-notif-all',
+        emptyMessage: '' ~ 'notificationsReadMessage'|trans({}, 'catroweb'),
       },
       {
-        'id': 'follow-notifications',
-        'notifications': followerNotifications,
-        'emptyID': 'no-notif-follow',
-        'emptyMessage': '' ~ 'catro-notifications.noFollowers'|trans({}, 'catroweb'),
+        id: 'follow-notifications',
+        notifications: followerNotifications,
+        emptyID: 'no-notif-follow',
+        emptyMessage: '' ~ 'catro-notifications.noFollowers'|trans({}, 'catroweb'),
       },
       {
-        'id': 'comment-notifications',
-        'notifications': commentNotifications,
-        'emptyID': 'no-notif-comment',
-        'emptyMessage': '' ~ 'catro-notifications.noComments'|trans({}, 'catroweb'),
+        id: 'comment-notifications',
+        notifications: commentNotifications,
+        emptyID: 'no-notif-comment',
+        emptyMessage: '' ~ 'catro-notifications.noComments'|trans({}, 'catroweb'),
       },
       {
-        'id': 'reaction-notifications',
-        'notifications': reactionNotifications,
-        'emptyID': 'no-notif-reaction',
-        'emptyMessage': '' ~ 'catro-notifications.noReactions'|trans({}, 'catroweb'),
+        id: 'reaction-notifications',
+        notifications: reactionNotifications,
+        emptyID: 'no-notif-reaction',
+        emptyMessage: '' ~ 'catro-notifications.noReactions'|trans({}, 'catroweb'),
       },
       {
-        'id': 'remix-notifications',
-        'notifications': remixNotifications,
-        'emptyID': 'no-notif-remix',
-        'emptyMessage': '' ~ 'catro-notifications.noRemixes'|trans({}, 'catroweb'),
+        id: 'remix-notifications',
+        notifications: remixNotifications,
+        emptyID: 'no-notif-remix',
+        emptyMessage: '' ~ 'catro-notifications.noRemixes'|trans({}, 'catroweb'),
       },
     ] %}
     <div id="{{ category.id }}" class="tab-pane fade {% if loop.first %} show active {% endif %}" role="tabpanel">
@@ -82,7 +82,7 @@
               data-notification-id="{{ notification.id }}"
               data-notification-instance="{{ instance[notification.id] }}"
               data-notification-seen="{{ notification.getSeen() }}"
-              data-notification-redirect="{{  redirect[notification.id] }}"
+              data-notification-redirect="{{ redirect[notification.id] }}"
             >
             {{ include(notification.getTwigTemplate) }}
           </div>
@@ -99,9 +99,9 @@
   <div class="js-notifications"
        data-base-url="{{ app.request.getBaseURL() }}"
        data-fetch-url="{{ path('notifications_fetch') }}"
-       data-something-went-wrong-error="{{ "somethingWentWrong"|trans({}, "catroweb") }}"
-       data-notifications-clear-error="{{ "notificationsClearError"|trans({}, "catroweb") }}"
-       data-notifications-unauthorized-error="{{ "notificationsUnauthorizedError"|trans({}, "catroweb") }}"
+       data-something-went-wrong-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+       data-notifications-clear-error="{{ 'notificationsClearError'|trans({}, 'catroweb') }}"
+       data-notifications-unauthorized-error="{{ 'notificationsUnauthorizedError'|trans({}, 'catroweb') }}"
        data-all-notifications-count="{{ allNotificationsCount }}"
        data-follow-notification-count="{{ followNotificationCount }}"
        data-reaction-notification-count="{{ reactionNotificationCount }}"

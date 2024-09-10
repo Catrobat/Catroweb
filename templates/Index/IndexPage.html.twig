@@ -6,10 +6,9 @@
 
 {% block body %}
 
-
   <div id="maintenance-container">
     {% for maintenanceMessage in maintenanceInformation %}
-        {{ maintenanceMessage | raw }}
+        {{ maintenanceMessage|raw }}
     {% endfor %}
   </div>
 
@@ -19,20 +18,20 @@
 
   {% if featured|length > 0 %}
     {% if not app.user and not isWebview() %}
-      <h2>{{ "project.featured"|trans({}, "catroweb") }}</h2>
+      <h2>{{ 'project.featured'|trans({}, 'catroweb') }}</h2>
     {% endif %}
     <div id="featured-slider" class="featured-slider">
       {{ include('Components/Carousel.html.twig',
-        { 'carousel' :
+        {carousel:
           {
-            'id' : 'feature-slider',
-            'slideCount' : featured|length,
-            'slides' : featured,
-            'classes' : '',
-            'controls' : true,
-            'width': '1024',
-            'height': '400',
-            'alt': ''
+            id: 'feature-slider',
+            slideCount: featured|length,
+            slides: featured,
+            classes: '',
+            controls: true,
+            width: '1024',
+            height: '400',
+            alt: ''
           }
         }
       ) }}
@@ -41,7 +40,7 @@
 
   <div id="home-projects">
     {# array values: [api project_type, translation, property to show] #}
-    {# disabled due to performance issues: ['recent', 'newest', 'uploaded'],#}
+    {# disabled due to performance issues: ['recent', 'newest', 'uploaded'], #}
     {% for category in [
       ['example', 'example', 'author'],
       ['most_downloaded', 'most.downloaded', 'downloads'],
@@ -55,9 +54,9 @@
            class="project-list loading horizontal">
         <div class="container">
           <div class="project-list__title">
-            <h2>{{ ("project." ~ category[1]) | trans({}, "catroweb") }}</h2>
+            <h2>{{ ('project.' ~ category[1])|trans({}, 'catroweb') }}</h2>
             <div class="project-list__title__btn-toggle btn-view-open">
-              <div class="project-list__title__btn-toggle__text">{{ "show-more" | trans({}, "catroweb") }}</div>
+              <div class="project-list__title__btn-toggle__text">{{ 'show-more'|trans({}, 'catroweb') }}</div>
               <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
             </div>
           </div>
@@ -93,16 +92,16 @@
     {% endfor %}
   </div>
   <i class="material-icons d-none" id="project-opening-spinner" style="margin: auto;">
-    {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'project-opening-spinner' ~ suffix|default(), 'small': 'true'} %}
+    {{ include('Components/LoadingSpinner.html.twig', {spinner_id: 'project-opening-spinner' ~ suffix|default(), small: 'true'}) }}
   </i>
 
-  <div class="js-trans-ok" data-trans-ok="'{{ "ok"|trans({}, "catroweb") }}"></div>
+  <div class="js-trans-ok" data-trans-ok="'{{ 'ok'|trans({}, 'catroweb') }}"></div>
 
   <div class="js-oauth-greeting"
        data-is-first-oauth-login="{{ is_first_oauth_login }}"
-       data-trans-title="{{ 'oauthPopUpTitle' | trans({}, 'catroweb') }}"
-       data-trans-info="{{ 'oauthInfo' | trans({}, 'catroweb') }}"
-       data-trans-ok="{{ 'ok' | trans({}, 'catroweb') }}"
+       data-trans-title="{{ 'oauthPopUpTitle'|trans({}, 'catroweb') }}"
+       data-trans-info="{{ 'oauthInfo'|trans({}, 'catroweb') }}"
+       data-trans-ok="{{ 'ok'|trans({}, 'catroweb') }}"
   ></div>
 {% endblock %}
 

@@ -16,8 +16,8 @@
                     <span class="mdc-top-app-bar__title">{{ 'community'|trans({}, 'catroweb') }}</span>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                    {% include 'Layout/Header/OptionButton.html.twig' %}
-                    {% include 'Layout/Header/StudioOptions.html.twig' %}
+                    {{ include('Layout/Header/OptionButton.html.twig') }}
+                    {{ include('Layout/Header/StudioOptions.html.twig') }}
                 </section>
             </div>
             <input id="cmtID" type="hidden">

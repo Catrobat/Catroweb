@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="og: https://ogp.me/ns#" lang="{{ app.request.locale | slice(0, 2) }}">
+<html prefix="og: https://ogp.me/ns#" lang="{{ app.request.locale|slice(0, 2) }}">
 <head>
   <meta http-equiv="Content-Type" content="text/html"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,7 @@
   {% endif %}
 
   <title>
-    {% block title %}{{ "title"|trans({}, "catroweb") }}{% endblock %}
+    {% block title %}{{ 'title'|trans({}, 'catroweb') }}{% endblock %}
   </title>
 
   <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
@@ -44,7 +44,7 @@
 
 <body class="body-with-sidebar">
 
-{% include 'Layout/Header.html.twig' with
+{{ include('Layout/Header.html.twig',
   {
     top_bar_page_title: block('top_bar_page_title') ?? '',
     top_bar_back_path: block('top_bar_back_path') ?? '',
@@ -52,13 +52,13 @@
     top_bar_search: block('top_bar_search') ?? 'enable',
     top_bar_save: block('top_bar_save') ?? 'disable',
     top_bar_save_form: block('top_bar_save_form') ?? ''
-  } %}
+  }) }}
 
-{% include 'Layout/Snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}
+{{ include('Layout/Snackbar.html.twig', {snackbar_id: 'share-snackbar'}, false) }}
 
-{% include 'Layout/Sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
+{{ include('Layout/Sidebar.html.twig', {sidebar_ul: (block('sidebar_ul')) ?? ''}) }}
 
-{% include('Layout/LanguageMenu.html.twig') %}
+{{ include(('Layout/LanguageMenu.html.twig')) }}
 
 <div id="main_container_content" class="body-content">
   <div class="page-content{% if app.request.attributes.get('_route') != 'studio_details' %} container{% endif %}">
@@ -66,7 +66,7 @@
   </div>
 </div>
 
-{% include 'Layout/Footer.html.twig' %}
+{{ include('Layout/Footer.html.twig') }}
 
 <div id="bugsnag" data-api-key="{{ bugsnag_api_key }}" style="display: none;"></div>
 <div id="gtm-container-id" data-gtm-container-id="{{ gtm_container_id }}" style="display: none;"></div>
@@ -79,9 +79,9 @@
 {% endfor %}
 <div id="js-api-routing"
      data-base-url="{{ app.request.baseUrl }}"
-     data-index="{{ path("index") }}"
-     data-authentication="{{ path("open_api_server_authentication_authenticationpost") }}"
-     data-authentication-refresh="{{ path("open_api_server_authentication_authenticationrefreshpost") }}"
+     data-index="{{ path('index') }}"
+     data-authentication="{{ path('open_api_server_authentication_authenticationpost') }}"
+     data-authentication-refresh="{{ path('open_api_server_authentication_authenticationrefreshpost') }}"
 ></div>
 </body>
 </html>

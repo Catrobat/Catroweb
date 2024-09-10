@@ -1,6 +1,6 @@
 {% extends 'Layout/Base.html.twig' %}
 {% block top_bar_page_title %}{{ project.name }}{% endblock %}
-{% block top_bar_back_path %}{{ path('program', { 'id' : project.id }) ~ "#comments-wrapper" }}{% endblock %}
+{% block top_bar_back_path %}{{ path('program', {id: project.id}) ~ '#comments-wrapper' }}{% endblock %}
 
 {% block head %}
   {{ encore_entry_link_tags('project_comments_page') }}
@@ -10,10 +10,10 @@
 {% block body %}
 
   <div id="project-comments" class="row mt-3 mb-3">
-    {% include 'Project/Comment/Wrapper.html.twig' with {
-      'comments': replies,
-      'isAdmin': isAdmin,
-    } %}
+    {{ include('Project/Comment/Wrapper.html.twig', {
+      comments: replies,
+      isAdmin: isAdmin,
+    }) }}
 
     <hr style="color: transparent">
     <div id="user-comment-wrapper" class="col-12 col-sm-8 col-md-12 col-lg-12 center" style="display: none">
@@ -59,11 +59,11 @@
        data-parent-comment-id="{{ comment.id }}">
   </div>
 
-  {% include 'Project/Comment/JsData.html.twig' with {
-    'comment': comment,
-    'project': project,
-    'comments': replies
-  } %}
+  {{ include('Project/Comment/JsData.html.twig', {
+    comment: comment,
+    project: project,
+    comments: replies
+  }) }}
 
   <div class="session-vars-names" data-visible-comments-session-var="visibleReplies"></div>
   <div class="comments-class-selector" data-comments-class-selector=".single-reply"></div>

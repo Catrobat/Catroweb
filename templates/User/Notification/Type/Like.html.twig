@@ -2,7 +2,7 @@
 
 {% block notification_leftAvatar %}
   <div class="col-2 my-auto">
-    <a href="{{ path('profile', { "id" : notification.getLikeFrom.id }) }}">
+    <a href="{{ path('profile', {id: notification.getLikeFrom.id}) }}">
       <img class="img-fluid notification-avatar-round"
            src="{% if notification.getLikeFrom.avatar is not empty %}{{ notification.getLikeFrom.avatar }}
                           {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
@@ -13,11 +13,11 @@
 
 {% block notification_body %}
   <div class="col-8 ps-3 my-auto">
-    {{ 'catro-notifications.like.message' | trans
+    {{ 'catro-notifications.like.message'|trans
       (
       {
-        '%user_link%': '<a href="'~path('profile', {'id': notification.getLikeFrom.id|escape})~'">'~notification.getLikeFrom.getUserName|escape~'</a>',
-        '%program_link%': '<a href="'~path('program', {'id': notification.program.id|escape})~'">'~notification.program.name|escape~'</a>'
+        '%user_link%': '<a href="' ~ path('profile', {id: notification.getLikeFrom.id|escape}) ~ '">' ~ notification.getLikeFrom.getUserName|escape ~ '</a>',
+        '%program_link%': '<a href="' ~ path('program', {id: notification.program.id|escape}) ~ '">' ~ notification.program.name|escape ~ '</a>'
       },
       'catroweb'
     )

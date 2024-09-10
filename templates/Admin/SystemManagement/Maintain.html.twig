@@ -11,7 +11,7 @@
 
       <div class="col-md-6">
         <div class="box">
-          <h3 class="box-header">{{ "admin.maintain.diskMaintenance"|trans({}, "catroweb") }}</h3>
+          <h3 class="box-header">{{ 'admin.maintain.diskMaintenance'|trans({}, 'catroweb') }}</h3>
           <div class="box-body">
             <div>
               <div id="piechart_3d" style="width: 100%; height: 300px; display: inline-block;"></div>
@@ -22,7 +22,7 @@
 
       <div class="col-md-6">
         <div class="box">
-          <h3 class="box-header">{{ "admin.maintain.ramMaintenance"|trans({}, "catroweb") }}</h3>
+          <h3 class="box-header">{{ 'admin.maintain.ramMaintenance'|trans({}, 'catroweb') }}</h3>
           <div class="box-body">
             <div>
               <div id="piechart_3d_mem" style="width: 100%; height: 300px; display: inline-block;"></div>
@@ -37,7 +37,7 @@
 
       <div class="col-md-6">
         <div class="box">
-          <h3 class="box-header">{{ "admin.maintain.removableObjects"|trans({}, "catroweb") }}</h3>
+          <h3 class="box-header">{{ 'admin.maintain.removableObjects'|trans({}, 'catroweb') }}</h3>
           <div class="box-body">
             <div>
               {% set i = 0 %}
@@ -68,9 +68,9 @@
                   </div>
                   <div id="Removable_{{ i }}" style="display: none">{{ RemovableObject.description|raw }}</div>
                 </div>
-                {% set i = i+1 %}
+                {% set i = i + 1 %}
               {% else %}
-                {{ "admin.maintain.noRemovableObjects"|trans({}, "catroweb") }}
+                {{ 'admin.maintain.noRemovableObjects'|trans({}, 'catroweb') }}
               {% endfor %}
             </div>
           </div>

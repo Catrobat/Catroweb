@@ -4,7 +4,7 @@
 
 <div class="language-body-overlay"></div>
 <div class="language-body">
-    <div class="language-header">{{ "languageSelection"|trans({}, "catroweb") }}</div>
+    <div class="language-header">{{ 'languageSelection'|trans({}, 'catroweb') }}</div>
     <div class="language-option-container" >
         {% set languageOptionList = getLanguageOptions() %}
         {% for languageOption in languageOptionList %}
@@ -13,7 +13,7 @@
                 <span>{{ languageOption[1] }}</span>
             </label>
         {% else %}
-            <div>{{ 'menu.noLanguageOptionsAvailable'|trans({}, "catroweb") }}</div>
+            <div>{{ 'menu.noLanguageOptionsAvailable'|trans({}, 'catroweb') }}</div>
         {% endfor %}
 
     </div>

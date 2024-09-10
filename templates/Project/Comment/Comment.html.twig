@@ -1,5 +1,5 @@
 <div id="comment-{{ comment.id }}"
-     data-path-project-comment="{{ path('project_comment', { id : comment.id }) }}"
+     data-path-project-comment="{{ path('project_comment', {id: comment.id}) }}"
      class="{% if are_replies is defined and are_replies %}single-reply{% else %}single-comment{% endif %}"
       {% if hide is defined and hide %}
        style="display: none"
@@ -15,14 +15,14 @@
 
   <div class="comment-payload-wrapper">
     <div class="name-date-wrapper">
-      <a href="{{ url('profile', { id : comment.user_id }) }}">
+      <a href="{{ url('profile', {id: comment.user_id}) }}">
         <div id="profile-comment-user-id-{{ comment.user_id }}" class="usr-name no-overflow">
           {{ comment.username }}
         </div>
       </a>
 
       {% if (isAdmin or not app.user or comment.id != app.user.id) and (not comment.is_deleted) %}
-        {#  Everybody, but the comment owner must be able to report a comment  #}
+        {# Everybody, but the comment owner must be able to report a comment #}
         <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
            data-bs-toggle="tooltip" title="{{ 'project.report'|trans({}, 'catroweb') }}">
           <i class="material-icons">report</i>
@@ -30,7 +30,7 @@
       {% endif %}
 
       {% if (isAdmin or (app.user and comment.user_id == app.user.id)) and (not comment.is_deleted) %}
-        {#  Only Admins and comment owner can delete the comment  #}
+        {# Only Admins and comment owner can delete the comment #}
         <a id="comment-delete-button-{{ comment.id }}" class="comment-delete-button"
            data-bs-toggle="tooltip" title="{{ 'project.delete'|trans({}, 'catroweb') }}">
           <i class="ms-2 material-icons text-danger">delete</i>
@@ -68,7 +68,7 @@
             <span id="comment-translation-loading-spinner-{{ comment.id }}" class="comment-translation-loading-spinner"
                   style="display: none;">
               <i class="material-icons">
-                {% include 'Components/LoadingSpinner.html.twig' with {'size': 'small'} %}
+                {{ include('Components/LoadingSpinner.html.twig', {size: 'small'}) }}
               </i>
             </span>
             <span id="remove-comment-translation-button-{{ comment.id }}"
@@ -83,7 +83,7 @@
           </span>
         <div class="comment-translation"
              data-translate-comment-id="translate-comment-{{ comment.id }}"
-             data-path-translate-comment="{{ path('translate_comment', {'id': comment.id}) }}"></div>
+             data-path-translate-comment="{{ path('translate_comment', {id: comment.id}) }}"></div>
       {% endif %}
     </div>
 

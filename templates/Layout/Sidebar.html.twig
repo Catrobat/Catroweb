@@ -1,7 +1,7 @@
 <nav id="sidebar">
   <a href="{{ path('index') }}">
     <img alt="Catrobat logo" loading="lazy" src="{{ asset('images/logo/logo_catrobat_text.svg') }}" class="logo" >
-    <span class="visually-hidden">{{ "menu.home"|trans({}, "catroweb") }}</span>
+    <span class="visually-hidden">{{ 'menu.home'|trans({}, 'catroweb') }}</span>
   </a>
 
   <ul class="list-unstyled" id="project-navigation">
@@ -10,7 +10,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ path('index') }}" id="btn-back-to-app">
           <span class="sidebar-link-icon material-icons">arrow_back</span>
-          <span class="sidebar-link-text">{{ 'back_to_app'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'back_to_app'|trans({}, 'catroweb') }}</span>
         </a>
       </li>
     {% endif %}
@@ -21,7 +21,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('notifications') }}" id="sidebar-notifications">
           <span class="sidebar-link-icon material-icons">notifications</span>
-          <span class="sidebar-link-text">{{ "notifications"|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'notifications'|trans({}, 'catroweb') }}</span>
           <span class="badge rounded-pill bg-primary all-notifications" id="sidebar_badge--unseen-notifications"></span>
         </a>
       </li>
@@ -29,7 +29,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('achievements_overview') }}" id="sidebar-achievements">
           <span class="sidebar-link-icon material-icons">events</span>
-          <span class="sidebar-link-text">{{ "achievements.sidebar.title"|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'achievements.sidebar.title'|trans({}, 'catroweb') }}</span>
           <span class="badge rounded-pill bg-primary" id="sidebar_badge--unseen-achievements"></span>
         </a>
       </li>
@@ -37,7 +37,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
           <span class="sidebar-link-icon material-icons">person</span>
-          <span class="sidebar-link-text">{{ 'menu.profile'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.profile'|trans({}, 'catroweb') }}</span>
         </a>
       </li>
 
@@ -45,7 +45,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
             <span class="sidebar-link-icon material-icons">security</span>
-            <span class="sidebar-link-text">{{ 'menu.admin'|trans({}, "catroweb") }}</span>
+            <span class="sidebar-link-text">{{ 'menu.admin'|trans({}, 'catroweb') }}</span>
           </a>
         </li>
       {% endif %}
@@ -53,7 +53,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('catrobat_follower') }}" id="btn-follow">
           <span class="sidebar-link-icon material-icons">people</span>
-          <span class="sidebar-link-text">{{ 'menu.followersAndFollowing'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.followersAndFollowing'|trans({}, 'catroweb') }}</span>
         </a>
       </li>
 
@@ -61,7 +61,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ url('login') }}" id="btn-login">
           <span class="sidebar-link-icon material-icons">exit_to_app</span>
-          <span class="sidebar-link-text">{{ 'menu.login'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.login'|trans({}, 'catroweb') }}</span>
         </a>
       </li>
 
@@ -70,40 +70,40 @@
         <li class="nav-item">
           <a class="nav-link" href="{{ url('google_play_store') }}" target="_blank">
             <span class="sidebar-link-icon material-icons">get_app</span>
-            <span class="sidebar-link-text">{{ "googlePlay"|trans({}, "catroweb") }}</span>
+            <span class="sidebar-link-text">{{ 'googlePlay'|trans({}, 'catroweb') }}</span>
           </a>
         </li>
 
-        {% if flavor() == "pocketcode" %}
+        {% if flavor() == 'pocketcode' %}
           <li class="nav-item">
             <a class="nav-link" href="{{ url('apple_app_store') }}" target="_blank">
               <span class="sidebar-link-icon material-icons">get_app</span>
-              <span class="sidebar-link-text">{{ "iosAppStore"|trans({}, "catroweb") }}</span>
+              <span class="sidebar-link-text">{{ 'iosAppStore'|trans({}, 'catroweb') }}</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="https://catrob.at/HuaweiAppGallery" target="_blank">
               <span class="sidebar-link-icon material-icons">get_app</span>
-              <span class="sidebar-link-text">{{ "huaweiAppGallery"|trans({}, "catroweb") }}</span>
+              <span class="sidebar-link-text">{{ 'huaweiAppGallery'|trans({}, 'catroweb') }}</span>
             </a>
           </li>
         {% endif %}
 
-        {% if flavor() == "luna" %}
+        {% if flavor() == 'luna' %}
           <li class="nav-item">
             <a class="nav-link" href="https://catrob.at/lcd" target="_blank">
               <span class="sidebar-link-icon material-icons">question_answer</span>
-              <span class="sidebar-link-text">{{ "discordChat"|trans({}, "catroweb") }}</span>
+              <span class="sidebar-link-text">{{ 'discordChat'|trans({}, 'catroweb') }}</span>
             </a>
           </li>
         {% endif %}
 
-        {% if flavor() == "embroidery" %}
+        {% if flavor() == 'embroidery' %}
           <li class="nav-item">
             <a class="nav-link" href="https://www.instagram.com/code_n_stitch/" target="_blank">
               <span class="sidebar-link-icon material-icons">public</span>
-              <span class="sidebar-link-text">{{ "instagram"|trans({}, "catroweb") }}</span>
+              <span class="sidebar-link-text">{{ 'instagram'|trans({}, 'catroweb') }}</span>
             </a>
           </li>
         {% endif %}
@@ -113,11 +113,10 @@
 
     {# Always visible #}
 
-
     <li class="nav-item">
       <a class="nav-link" href="{{ url('media_library_package_overview') }}">
         <span class="sidebar-link-icon material-icons">collections</span>
-        <span class="sidebar-link-text">{{ 'menu.mediaLibrary'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'menu.mediaLibrary'|trans({}, 'catroweb') }}</span>
       </a>
     </li>
 
@@ -125,7 +124,7 @@
       <li class="nav-item" >
         <a class="nav-link" href="{{ url('studios_overview') }}" id="btn-studio">
           <span class="sidebar-link-icon material-icons">group_work</span>
-          <span class="sidebar-link-text">{{ 'menu.studio'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.studio'|trans({}, 'catroweb') }}</span>
         </a>
       </li>
     {% endif %}
@@ -133,14 +132,14 @@
     <li class="nav-item dropdown">
       <a class="nav-link" id="btn-language">
         <span class="sidebar-link-icon material-icons">translate</span>
-        <span class="sidebar-link-text">{{ 'menu.language'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'menu.language'|trans({}, 'catroweb') }}</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="{{url('help')}}" id="btn-tutorials">
+      <a class="nav-link" href="{{ url('help') }}" id="btn-tutorials">
         <span class="sidebar-link-icon material-icons">help_outline</span>
-        <span class="sidebar-link-text">{{ 'menu.helpAndTutorials'|trans({}, "catroweb") }}</span>
+        <span class="sidebar-link-text">{{ 'menu.helpAndTutorials'|trans({}, 'catroweb') }}</span>
       </a>
     </li>
 
@@ -149,7 +148,7 @@
       <li class="nav-item" id="logout-nav-item">
         <a class="nav-link" href="#" id="btn-logout" data-logout-path="{{ url('logout') }}">
           <span class="sidebar-link-icon material-icons ">exit_to_app</span>
-          <span class="sidebar-link-text">{{ 'menu.logout'|trans({}, "catroweb") }}</span>
+          <span class="sidebar-link-text">{{ 'menu.logout'|trans({}, 'catroweb') }}</span>
         </a>
       </li>
     {% endif %}
@@ -166,7 +165,7 @@
 {% if app.user != null %}
   <div class="js-sidebar"
        data-path-achievements-count="{{ path('sidebar_achievements_count') }}"
-       data-trans-achievements-bade-text="{{ "achievements.sidebar.badge"|trans({}, "catroweb") }}"
+       data-trans-achievements-bade-text="{{ 'achievements.sidebar.badge'|trans({}, 'catroweb') }}"
        data-base-url="{{ app.request.getBaseURL() }}"
   ></div>
 {% endif %}
