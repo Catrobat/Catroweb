@@ -8,10 +8,10 @@
 
   {# Loading spinner during redirect #}
   <i id="{{ id }}__spinner{{ suffix|default('') }}" class="material-icons d-none text-start">
-    {% include 'Components/LoadingSpinner.html.twig' with {
-      'spinner_id': id ~ '__spinner' ~ suffix|default(),
-      'size': 'small'}
-    %}
+    {{ include('Components/LoadingSpinner.html.twig', {
+      spinner_id: id ~ '__spinner' ~ suffix|default(),
+      size: 'small'}
+    ) }}
   </i>
 
   {# Icon #}

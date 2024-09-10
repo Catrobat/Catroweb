@@ -1,13 +1,13 @@
 {# Follower #}
 <div id="follower-section" class="tab-pane fade" role="tabpanel" aria-labelledby="follower-tab">
   <div id="no-followers" class="text-center mb-5 {{ followers_list is empty ? 'd-block' : 'd-none' }}">
-    {{ "follower.noOtherFollowers"|trans({}, "catroweb") }}
+    {{ 'follower.noOtherFollowers'|trans({}, 'catroweb') }}
   </div>
 
   <div id="follower-cards" class="row mb-5">
     {% for followerUser in followers_list %}
       <div id="followers-{{ followerUser.id }}" class="col-12 single-follower my-3">
-        {% include 'User/Followers/FollowerItem.html.twig' with {'user': followerUser} only %}
+        {{ include('User/Followers/FollowerItem.html.twig', {user: followerUser}, false) }}
       </div>
     {% endfor %}
   </div>
@@ -16,13 +16,13 @@
 {# Following #}
 <div id="following-section" class="tab-pane fade" role="tabpanel" aria-labelledby="follows-tab">
   <div id="no-following" class="text-center mb-5 {{ following_list is empty ? 'd-block' : 'd-none' }}">
-    {{ "follower.noOtherFollowing"|trans({}, "catroweb") }}
+    {{ 'follower.noOtherFollowing'|trans({}, 'catroweb') }}
   </div>
 
   <div id="following-cards" class="row mb-5">
     {% for followsUser in following_list %}
       <div id="following-{{ followsUser.id }}" class="col-12 single-following my-3">
-        {% include 'User/Followers/FollowerItem.html.twig' with {'user': followsUser, 'following': true} only %}
+        {{ include('User/Followers/FollowerItem.html.twig', {user: followsUser, following: true}, false) }}
       </div>
     {% endfor %}
   </div>
@@ -33,11 +33,11 @@
      data-unfollow-url="{{ url('unfollow') }}"
      data-follow-url="{{ url('follow') }}"
      data-login-url="{{ url('login') }}"
-     data-something-went-wrong-error="{{ "somethingWentWrong"|trans({}, "catroweb") }}"
-     data-follow-error="{{ "follower.followError"|trans({}, "catroweb") }}"
-     data-unfollow-error="{{ "follower.unfollowError"|trans({}, "catroweb") }}"
-     data-unfollow-button="{{ "follower.unfollowButton"|trans({}, "catroweb") }}"
-     data-unfollow-question="{{ "follower.unfollowQuestion"|trans({}, "catroweb") }}"
-     data-cancel-button="{{ "cancelMessage"|trans({}, "catroweb") }}"
+     data-something-went-wrong-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+     data-follow-error="{{ 'follower.followError'|trans({}, 'catroweb') }}"
+     data-unfollow-error="{{ 'follower.unfollowError'|trans({}, 'catroweb') }}"
+     data-unfollow-button="{{ 'follower.unfollowButton'|trans({}, 'catroweb') }}"
+     data-unfollow-question="{{ 'follower.unfollowQuestion'|trans({}, 'catroweb') }}"
+     data-cancel-button="{{ 'cancelMessage'|trans({}, 'catroweb') }}"
      data-number-of-following="{{ following_list|length }}"
 ></div>

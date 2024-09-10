@@ -1,28 +1,28 @@
 {% extends 'Layout/Base.html.twig' %}
 
 {% block head %}
-  {{ encore_entry_link_tags('search_page')  }}
+  {{ encore_entry_link_tags('search_page') }}
 {% endblock %}
 
 {% block body %}
 
   <div id="search-results">
     <div class="search-results__title">
-      <h1><span id="search-results-text"></span>{{ "search.results"|trans({}, "catroweb") }}</h1>
+      <h1><span id="search-results-text"></span>{{ 'search.results'|trans({}, 'catroweb') }}</h1>
     </div>
     <div id="search-projects" class="project-list loading horizontal">
       <div class="container">
         <div class="project-list__title">
-          <h2>{{ "projects" | trans({}, "catroweb") }}</h2>
+          <h2>{{ 'projects'|trans({}, 'catroweb') }}</h2>
           <div class="project-list__title__btn-toggle btn-view-open">
-            <div class="project-list__title__btn-toggle__text">{{ "show-more" | trans({}, "catroweb") }}</div>
+            <div class="project-list__title__btn-toggle__text">{{ 'show-more'|trans({}, 'catroweb') }}</div>
             <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
           </div>
         </div>
         <div class="lazyload project-list__wrapper">
           <div class="lazyload projects-container">
 
-            {% for i in range(0, 10) %}  {#Fill with dummy data until loaded to prevent cls#}
+            {% for i in range(0, 10) %}  {# Fill with dummy data until loaded to prevent cls #}
               <div class="project-list__project">
                 <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20360'%3E%3Crect%20width='360'%20height='360'%20fill='%23E8E8E8'%20/%3E%3C/svg%3E"
                      class="project-list__project__image">
@@ -45,15 +45,15 @@
       </div>
     </div>
     <i class="material-icons d-none" id="project-opening-spinner" style="margin: auto;">
-      {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'project-opening-spinner' ~ suffix|default(), 'small': 'true'} %}
+      {{ include('Components/LoadingSpinner.html.twig', {spinner_id: 'project-opening-spinner' ~ suffix|default(), small: 'true'}) }}
     </i>
 
     <div id="search-users" class="user-list loading horizontal">
       <div class="container">
         <div class="user-list__title">
-          <h2>{{ "users" | trans({}, "catroweb") }}</h2>
+          <h2>{{ 'users'|trans({}, 'catroweb') }}</h2>
           <div class="user-list__title__btn-toggle btn-view-open">
-            <div class="user-list__title__btn-toggle__text">{{ "show-more" | trans({}, "catroweb") }}</div>
+            <div class="user-list__title__btn-toggle__text">{{ 'show-more'|trans({}, 'catroweb') }}</div>
             <div class="user-list__title__btn-toggle__icon material-icons">arrow_forward</div>
           </div>
         </div>
@@ -82,7 +82,7 @@
       </div>
     </div>
     <i class="material-icons d-none" id="project-opening-spinner" style="margin: auto;">
-      {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'user-opening-spinner' ~ suffix|default(), 'small': 'true'} %}
+      {{ include('Components/LoadingSpinner.html.twig', {spinner_id: 'user-opening-spinner' ~ suffix|default(), small: 'true'}) }}
     </i>
   </div>
 
@@ -103,5 +103,5 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ encore_entry_script_tags('search_page')  }}
+    {{ encore_entry_script_tags('search_page') }}
 {% endblock %}

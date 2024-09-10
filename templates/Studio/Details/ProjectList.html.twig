@@ -9,7 +9,7 @@
           {% for project in projects %}
             <div id="project-{{ project.id }}" class="project-list__project studio-project-list-admin">
               <img class="project-list__project__image"
-                   src="{{ asset(project.thumbnail|default("")) }}"
+                   src="{{ asset(project.thumbnail|default('')) }}"
                    alt="{{ project.name }}">
               <span class="project-list__project__name">{{ project.name }}</span>
             </div>
@@ -18,7 +18,7 @@
           {% for project in projects %}
           <div id="project-{{ project.id }}" class="project-list__project studio-project-list-admin ">
             <img class="project-list__project__image removeProjectsAdmin"
-                 src="{{ asset(project.thumbnail|default("")) }}"
+                 src="{{ asset(project.thumbnail|default('')) }}"
                  alt="{{ project.name }}"
                  id="{{ project.id }}">
             <span class="project-list__project__name">{{ project.name }}</span>
@@ -37,7 +37,7 @@
     {% if user_role == 'admin' %}
       <a id="ajaxRequestDeleteProject" class="project-delete-button" data-bs-toggle="tooltip"
          title="{{ 'studio.details.remove_project'|trans({}, 'catroweb') }}"
-         data-url="{{ path('delete_studio_projects_admin')}}"
+         data-url="{{ path('delete_studio_projects_admin') }}"
         data-studio-id="{{ studio.id }}">
         <i class="ms-2 material-icons text-danger">delete</i>
       </a>
@@ -50,10 +50,6 @@
        title="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb') }}">remove</i>
     {% endif %}
   </div>
-  {% include 'Studio/StudioAddProjectDialog.html.twig' %}
+  {{ include('Studio/StudioAddProjectDialog.html.twig') }}
 
 </div>
-
-
-
-

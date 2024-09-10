@@ -10,11 +10,10 @@
     <meta property="og:image" content="{{ asset(profile.avatar) }}"/>
     <meta property="og:image:secure_url" content="{{ asset(profile.avatar) }}"/>
   {% endif %}
-  <meta property="og:title" content="{{ profile.username |escape('html_attr') }}"/>
+  <meta property="og:title" content="{{ profile.username|escape('html_attr') }}"/>
   <meta property="og:url" content="{{ url('profile', {id: profile.id}) }}"/>
 
 {% endblock %}
-
 
 {% block body %}
 
@@ -61,7 +60,7 @@
   {% if achievements|length > 0 %}
     <div id="user-achievements" class="mt-4 mb-2">
       <hr>
-      <h3>{{ 'achievements.profile.title'|trans({}, "catroweb") }}</h3>
+      <h3>{{ 'achievements.profile.title'|trans({}, 'catroweb') }}</h3>
       <div class="horizontal-scrolling-wrapper">
         {% for achievement in achievements %}
           <div class="achievement__badge">
@@ -73,7 +72,7 @@
                  data-src="{{ asset(achievement.getBannerSvgPath()) }}"
                  data-unique-ids="disabled"/>
             <div class="achievement__badge__banner__text achievement__badge__banner__text--profile">
-              {{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}
+              {{ achievement.getTitleLtmCode()|trans({}, 'catroweb') }}
             </div>
           </div>
         {% endfor %}
@@ -90,7 +89,7 @@
             <button class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
               <span class="mdc-tab__content">
                 <span class="mdc-tab__icon" id="projects-count">{{ project_count }}</span>
-                <span class="mdc-tab__icon-text">{{ "projects"|trans({}, "catroweb") }}</span>
+                <span class="mdc-tab__icon-text">{{ 'projects'|trans({}, 'catroweb') }}</span>
               </span>
               <span class="mdc-tab-indicator mdc-tab-indicator--active">
                 <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
@@ -131,11 +130,11 @@
            data-base-url="{{ app.request.getBaseURL() }}"
            data-user-id="{{ profile.id }}"
            data-flavor="{{ flavor() }}"
-           data-empty-message="{{ "project.noProjects"|trans({}, 'catroweb') }}"
+           data-empty-message="{{ 'project.noProjects'|trans({}, 'catroweb') }}"
            class="project-list loading project-list--full">
         <div class="container">
           <div class="lazyload projects-spinner-container">
-            {% include 'Components/LoadingSpinner.html.twig' only %}
+            {{ include('Components/LoadingSpinner.html.twig', [], false) }}
           </div>
           <div class="lazyload project-list__wrapper">
             <div class="lazyload projects-container"></div>
@@ -144,18 +143,18 @@
       </div>
     </div>
 
-    {% include 'User/Followers/FollowersTabs.twig' %}
+    {{ include('User/Followers/FollowersTabs.twig') }}
   </div>
 
   <div class="js-user-share"
        data-theme-display-name="{{ getThemeDisplayName() }}"
-       data-trans-check-out-user="{{ "checkOutUser"|trans({}, "catroweb") }}"
-       data-user-url="{{ url('profile', { id : profile.id }) }}"
-       data-trans-share-success="{{ "share.success"|trans({}, "catroweb") }}"
-       data-trans-share-error="{{ "share.error"|trans({}, "catroweb") }}"
-       data-trans-copy="{{ "copy"|trans({}, "catroweb") }}"
-       data-trans-clipboard-success="{{ "clipboard.success_user"|trans({}, "catroweb") }}"
-       data-trans-clipboard-fail="{{ "clipboard.fail"|trans({}, "catroweb") }}"
+       data-trans-check-out-user="{{ 'checkOutUser'|trans({}, 'catroweb') }}"
+       data-user-url="{{ url('profile', {id: profile.id}) }}"
+       data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
+       data-trans-share-error="{{ 'share.error'|trans({}, 'catroweb') }}"
+       data-trans-copy="{{ 'copy'|trans({}, 'catroweb') }}"
+       data-trans-clipboard-success="{{ 'clipboard.success_user'|trans({}, 'catroweb') }}"
+       data-trans-clipboard-fail="{{ 'clipboard.fail'|trans({}, 'catroweb') }}"
   ></div>
 
 {% endblock %}

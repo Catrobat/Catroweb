@@ -36,14 +36,14 @@
                         <li class="btn top-app-bar-btn-options">
                             <a class="ellipsis-modal-btn" data-bs-toggle="modal" data-bs-target="#new-key-store-modal">
                                 <span class="material-icons me-2">vpn_key</span>
-                                <span class="top-app-bar__btn-options-text">{{ 'program.signApp.generate_key'|trans({}, "catroweb") }}</span>
+                                <span class="top-app-bar__btn-options-text">{{ 'program.signApp.generate_key'|trans({}, 'catroweb') }}</span>
                             </a>
                         </li>
                         <li id="sign-app-help-link"
                             class="btn top-app-bar-btn-options">
-                            <a class="ellipsis-modal-btn" href="{{url('help')}}">
+                            <a class="ellipsis-modal-btn" href="{{ url('help') }}">
                                 <span class="material-icons me-2">help</span>
-                                <span class="top-app-bar__btn-options-text">{{ 'program.signApp.help'|trans({}, "catroweb") }}</span>
+                                <span class="top-app-bar__btn-options-text">{{ 'program.signApp.help'|trans({}, 'catroweb') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -160,4 +160,4 @@
         </div>
     </div>
 </div>
-{% include 'Project/new_key_store.html.twig' %}
+{{ include('Project/new_key_store.html.twig') }}

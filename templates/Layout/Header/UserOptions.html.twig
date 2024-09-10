@@ -8,13 +8,12 @@
         class="btn top-app-bar-btn-options mdc-list-item mdc-ripple-upgraded"
         role="menuitem"
         tabindex="0"
-        data-clipboard-text="{{ url('profile', { id : profile.id }) }}">
+        data-clipboard-text="{{ url('profile', {id: profile.id}) }}">
       <span class="material-icons me-2">share</span><span id="top-app-bar__btn-share-text" class="top-app-bar-btn-options-text">
-         {{ "share.text"|trans({}, "catroweb") }}
+         {{ 'share.text'|trans({}, 'catroweb') }}
         </span>
     </li>
 
   </ul>
 
 {% endif %}
-

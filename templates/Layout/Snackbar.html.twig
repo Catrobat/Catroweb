@@ -3,7 +3,7 @@
         <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
             <div {% if snackbar_id %} id="{{ snackbar_id }}-label" {% endif %}
                     class="mdc-snackbar__label" aria-atomic="false">
-                {{ snackbar_text|default("") }}
+                {{ snackbar_text|default('') }}
             </div>
         </div>
     </div>

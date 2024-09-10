@@ -1,6 +1,6 @@
 {% extends 'Layout/Base.html.twig' %}
-{% block top_bar_page_title %}{{ "codeview.title"|trans({}, "catroweb") }}{% endblock %}
-{% block top_bar_back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
+{% block top_bar_page_title %}{{ 'codeview.title'|trans({}, 'catroweb') }}{% endblock %}
+{% block top_bar_back_path %}{{ path('program', {id: id}) }}{% endblock %}
 
 {% block head %}
   {{ encore_entry_link_tags('project_code_view') }}
@@ -10,16 +10,16 @@
 {% block body %}
   <div class="d-flex justify-content-center">
     <i class="material-icons" id="code-view-spinner">
-      {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default()} %}
+      {{ include('Components/LoadingSpinner.html.twig', {spinner_id: 'code-view-spinner' ~ suffix|default()}) }}
     </i>
   </div>
   {% if isVersionSupportedByCatBlocks(version) %}
 
     <div id='catblocks-code-container'></div>
     {# As long as catblocks is not stable we need to also load the old view as backup #}
-    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController::oldView', {'id' : id, 'visible' : false })) }}
+    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController::oldView', {id: id, visible: false})) }}
   {% else %}
-    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController::oldView', {'id' : id })) }}
+    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController::oldView', {id: id})) }}
   {% endif %}
 
   <div class="js-code-view"
@@ -31,8 +31,6 @@
 
 {% endblock %}
 
-
 {% block javascript %}
   {{ encore_entry_script_tags('project_code_view') }}
 {% endblock %}
-

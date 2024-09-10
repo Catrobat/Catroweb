@@ -1,4 +1,4 @@
-<h2>{{ "achievements.overview.most_recent_achievement.title"|trans({}, "catroweb") }}</h2>
+<h2>{{ 'achievements.overview.most_recent_achievement.title'|trans({}, 'catroweb') }}</h2>
 
 <div class="mt-4 mb-4 achievement-top__wrapper">
 
@@ -11,13 +11,13 @@
          data-src="{{ asset(most_recent_achievement.getBannerSvgPath()) }}"
          data-unique-ids="disabled"/>
     <div class="achievement__badge__banner__text achievement__badge__banner__text--top">
-      {{ most_recent_achievement.getTitleLtmCode()|trans({}, "catroweb") }}
+      {{ most_recent_achievement.getTitleLtmCode()|trans({}, 'catroweb') }}
     </div>
   </div>
 
   <div class="achievement-top__text-wrapper">
-    <div>{{ most_recent_achievement.getDescriptionLtmCode()|trans({}, "catroweb") }}</div>
-    <div>{{ most_recent_achievement_unlocked_at|trans({}, "catroweb") }}</div>
-    <div>{{ "achievements.overview.most_recent_achievement.x_out_of_y"|trans({'%unlocked%': number_of_unlocked_achievements, '%total%': total_number_of_achievements}, "catroweb") }}</div>
+    <div>{{ most_recent_achievement.getDescriptionLtmCode()|trans({}, 'catroweb') }}</div>
+    <div>{{ most_recent_achievement_unlocked_at|trans({}, 'catroweb') }}</div>
+    <div>{{ 'achievements.overview.most_recent_achievement.x_out_of_y'|trans({'%unlocked%': number_of_unlocked_achievements, '%total%': total_number_of_achievements}, 'catroweb') }}</div>
   </div>
 </div>

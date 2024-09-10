@@ -16,12 +16,12 @@
 {% block body %}
   {% if foundResults is defined %}
     <div id="search-results" class="mb-4">
-      <h1>{{ "media-packages.search-results"|trans({}, "catroweb") }}</h1>
+      <h1>{{ 'media-packages.search-results'|trans({}, 'catroweb') }}</h1>
       <div id="search-results-text">
         {% if foundResults %}
-          {{ "search.resultcount"|trans({'%count%': resultsCount}, "catroweb") }}.
+          {{ 'search.resultcount'|trans({'%count%': resultsCount}, 'catroweb') }}.
         {% else %}
-          {{ "media-packages.no-results"|trans({}, "catroweb") }}
+          {{ 'media-packages.no-results'|trans({}, 'catroweb') }}
         {% endif %}
       </div>
     </div>
@@ -33,7 +33,7 @@
 
   <div id="content" class="medialib-content">
     {% for category in categories %}
-      <div id="category-{{ category.displayID }}" data-name="{{ category.name | e('html_attr') }}"
+      <div id="category-{{ category.displayID }}" data-name="{{ category.name|e('html_attr') }}"
            style="display: none;" class="category active">
         <div class="header">{{ category.name }}</div>
         <div class="files"></div>
@@ -43,16 +43,16 @@
 
   {%
     set translations = {
-      'elementsSingular': "element"|trans({}, "catroweb"),
-      'elementsPlural': "elements"|trans({}, "catroweb"),
-      'size': "media_library.file.size"|trans({}, "catroweb"),
-      'type': {
-        'catrobat': "media_library.file.type_description.image"|trans({}, "catroweb"),
-        'image': "media_library.file.type_description.image"|trans({}, "catroweb"),
-        'sound': "media_library.file.type_description.sound"|trans({}, "catroweb"),
-        'video': "media_library.file.type_description.movie"|trans({}, "catroweb"),
-        'project': "media_library.file.type_description.project"|trans({}, "catroweb"),
-        'unknown': "media_library.file.type_description.default"|trans({}, "catroweb"),
+      elementsSingular: 'element'|trans({}, 'catroweb'),
+      elementsPlural: 'elements'|trans({}, 'catroweb'),
+      size: 'media_library.file.size'|trans({}, 'catroweb'),
+      type: {
+        catrobat: 'media_library.file.type_description.image'|trans({}, 'catroweb'),
+        image: 'media_library.file.type_description.image'|trans({}, 'catroweb'),
+        sound: 'media_library.file.type_description.sound'|trans({}, 'catroweb'),
+        video: 'media_library.file.type_description.movie'|trans({}, 'catroweb'),
+        project: 'media_library.file.type_description.project'|trans({}, 'catroweb'),
+        unknown: 'media_library.file.type_description.default'|trans({}, 'catroweb'),
       },
     }
   %}
@@ -64,7 +64,7 @@
        data-media-dir="{{ mediaDir }}"
        data-translations="{{ translations|json_encode() }}"
        data-is-webview="{{ isWebview() }}"
-       data-path-medialibpackagebynameurl="{{ path("open_api_server_mediaLibrary_mediapackagenameget", { 'name': package }) }}"
+       data-path-medialibpackagebynameurl="{{ path('open_api_server_mediaLibrary_mediapackagenameget', {name: package}) }}"
   ></div>
 {% endblock %}
 

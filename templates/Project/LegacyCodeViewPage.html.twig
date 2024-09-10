@@ -8,18 +8,17 @@
   <script src="{{ asset('catblocks/CatBlocks.js') }}"></script>
 {% endblock %}
 
-
 {% import _self as self %}
 
 {% macro dropbtn(object, path, scene_name) %}
 
   {% if object.getLooks()|length > 0 %}
 
-    {% if scene_name is null and assetFileExists(path~'images/'~object.getLooks()[0].getFileName()) %}
-      <img src="{{ asset(path~'images/'~object.getLooks()[0].getFileName()) }}"
+    {% if scene_name is null and assetFileExists(path ~ 'images/' ~ object.getLooks()[0].getFileName()) %}
+      <img src="{{ asset(path ~ 'images/' ~ object.getLooks()[0].getFileName()) }}"
            class="object-icon">
-    {% elseif assetFileExists(path~scene_name~'/images/'~object.getLooks()[0].getFileName()) %}
-      <img src="{{ asset(path~scene_name~'/images/'~object.getLooks()[0].getFileName()) }}"
+    {% elseif assetFileExists(path ~ scene_name ~ '/images/' ~ object.getLooks()[0].getFileName()) %}
+      <img src="{{ asset(path ~ scene_name ~ '/images/' ~ object.getLooks()[0].getFileName()) }}"
            class="object-icon">
     {% else %}
       <div class="object-icon">
@@ -60,14 +59,14 @@
   {% if object.getScripts()|length > 0 %}
     {% for script in object.getScripts() %}
       <div class="script">
-        <div class="script-top-brick" style="background-image: url({{ asset('images/bricks/'~script.getImgFile) }})">
+        <div class="script-top-brick" style="background-image: url({{ asset('images/bricks/' ~ script.getImgFile) }})">
           <div class="script-text">
             <span class="script-type">{{ script.getCaption() }}</span>
           </div>
         </div>
         <div class="script-bricks-wrapper">
           {% for brick in script.getBricks() %}
-            <div class="brick" style="background-image: url({{ asset('images/bricks/'~brick.getImgFile()) }})">
+            <div class="brick" style="background-image: url({{ asset('images/bricks/' ~ brick.getImgFile()) }})">
               <div class="brick-text">{{ brick.getCaption() }}</div>
             </div>
           {% endfor %}
@@ -170,7 +169,7 @@
   <div id="codeview-wrapper" {% if not visible %} class="d-none" {% endif %}>
     {% if parsed_project is null %}
       <p>
-        {{ "codeview.cantDisplayCode"|trans({}, "catroweb") }}
+        {{ 'codeview.cantDisplayCode'|trans({}, 'catroweb') }}
       </p>
     {% else %}
       {% if parsed_project.hasScenes() %}

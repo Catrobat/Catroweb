@@ -1,14 +1,14 @@
 {% extends 'Components/FullscreenModal.html.twig' %}
 {% set modal =
   {
-    'id': 'account-settings-modal',
-    'title': '' ~ 'myprofile.accountSettings'|trans({}, 'catroweb'),
-    'left_action':
+    id: 'account-settings-modal',
+    title: '' ~ 'myprofile.accountSettings'|trans({}, 'catroweb'),
+    left_action:
     {
-      'id': 'account_settings-cancel_action',
-      'icon': 'close',
-      'label': '' ~ 'cancel'|trans({}, 'catroweb'),
-      'dismiss': true
+      id: 'account_settings-cancel_action',
+      icon: 'close',
+      label: '' ~ 'cancel'|trans({}, 'catroweb'),
+      dismiss: true
     }
   } %}
 {% block content %}

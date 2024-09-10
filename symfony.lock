@@ -1040,6 +1040,15 @@
     "vimeo/psalm": {
         "version": "3.12.2"
     },
+    "vincentlanglet/twig-cs-fixer": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.6",
+            "ref": "e4da12a48e8138479bd24a675321bcfd84950266"
+        }
+    },
     "wapmorgan/php-deprecation-detector": {
         "version": "2.0.24"
     },

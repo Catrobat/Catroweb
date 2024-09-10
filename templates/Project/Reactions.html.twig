@@ -44,12 +44,12 @@
   {% endif %}
   <span id="project-like-counter{{ suffix|default('') }}"
         class="like-counter">
-      {{ project_details.totalLikeCount | humanFriendlyNumber }}
+      {{ project_details.totalLikeCount|humanFriendlyNumber }}
     {{ 'project.reactionsText'|trans({}, 'catroweb') }}
     </span>
     <span>
     <i class="material-icons d-none" id="project-reactions-spinner{{ suffix|default('') }}">
-      {% include 'Components/LoadingSpinner.html.twig' with {'spinner_id': 'reactions-spinner' ~ suffix|default(), 'size': 'small'} %}
+      {{ include('Components/LoadingSpinner.html.twig', {spinner_id: 'reactions-spinner' ~ suffix|default(), size: 'small'}) }}
     </i>
     </span>
   {% if suffix is defined %}

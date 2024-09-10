@@ -5,19 +5,19 @@
 
 <div class="row justify-content-center">
   <div class="login-container mb-3">
-    <span class="login-text--secondary">{{ "login.oauth.title"|trans({}, "catroweb") }}</span>
+    <span class="login-text--secondary">{{ 'login.oauth.title'|trans({}, 'catroweb') }}</span>
   </div>
 </div>
 
 <div class="row justify-content-center">
   <div class="login-container">
-    <a class="btn social-login-btn me-2" id="btn-login-google" href="{{ path('hwi_oauth_service_redirect', { service: 'google' }) }}">
+    <a class="btn social-login-btn me-2" id="btn-login-google" href="{{ path('hwi_oauth_service_redirect', {service: 'google'}) }}">
       <img class="social-login-btn__img" alt="Google Login" src="{{ asset('images/social/btn_google_custom.png') }}"/>
     </a>
-    <a class="btn social-login-btn social-login-btn--facebook me-2" id="btn-login-facebook" href="{{ path('hwi_oauth_service_redirect', { service: 'facebook' }) }}">
+    <a class="btn social-login-btn social-login-btn--facebook me-2" id="btn-login-facebook" href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}">
       <img class="social-login-btn__img social-login-btn__img--facebook" alt="Facebook Login" src="{{ asset('images/social/fb_logo.svg') }}"/>
     </a>
-    <a class="btn social-login-btn me-2" id="btn-login-apple" href="{{ path('hwi_oauth_service_redirect', { service: 'apple' }) }}">
+    <a class="btn social-login-btn me-2" id="btn-login-apple" href="{{ path('hwi_oauth_service_redirect', {service: 'apple'}) }}">
       <img class="social-login-btn__img" alt="Apple Login" src="{{ asset('images/social/apple_logo__black.svg') }}"/>
     </a>
   </div>

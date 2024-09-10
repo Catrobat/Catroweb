@@ -41,7 +41,7 @@ Wrapper template for a simple usage of fullscreen bootstrap modal
             <div class="modal-header modal-header-full mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                     {% if modal.left_action|default() %}
-                    <button id="{{ modal.left_action.id|default(modal.id~'-left_action') }}"
+                    <button id="{{ modal.left_action.id|default(modal.id ~ '-left_action') }}"
                             {% if modal.left_action.dismiss ?? false %}data-bs-dismiss="modal" {% endif %}
                             class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                             aria-label="{{ modal.left_action.label|default('Go back') }}">
@@ -52,7 +52,7 @@ Wrapper template for a simple usage of fullscreen bootstrap modal
                 </section>
                 {% if modal.right_action|default() %}
                     <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                        <button id="{{ modal.right_action.id|default(modal.id~'-right_action') }}"
+                        <button id="{{ modal.right_action.id|default(modal.id ~ '-right_action') }}"
                                 class="material-icons mdc-top-app-bar__action-item mdc-icon-button mdc-ripple-upgraded--unbounded mdc-ripple-upgraded"
                                 aria-label="{{ modal.right_action.label|default('Done') }}"
                                 style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">

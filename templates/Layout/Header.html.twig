@@ -11,7 +11,7 @@
                       class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                       aria-label="Back to previous page"
                       onclick="location.href='{{ top_bar_back_path }}'">
-                {{ top_bar_back_icon|default("arrow_back") }}
+                {{ top_bar_back_icon|default('arrow_back') }}
               </button>
             {% else %}
             <button id="top-app-bar__btn-sidebar-toggle"
@@ -25,7 +25,7 @@
             <a id="top-app-bar__title"
                class="mdc-top-app-bar__title"
                href="{{ path('index') }}">
-                {{ "community"|trans({}, "catroweb") }}
+                {{ 'community'|trans({}, 'catroweb') }}
             </a>
             {% else %}
             <span id="top-app-bar__title"
@@ -54,23 +54,22 @@
               </button>
             {% endif %}
 
-            {% include 'Layout/Header/Options.html.twig' %}
+            {{ include('Layout/Header/Options.html.twig') }}
 
           </section>
         </div>
 
+        {# The Navbar design changes fitting to actions: #}
 
-        {#  The Navbar design changes fitting to actions:  #}
+        {{ include('Layout/Header/Search.html.twig') }}
 
-        {% include 'Layout/Header/Search.html.twig' %}
-
-        {% include 'Layout/Header/MediaLibraryDownload.html.twig' %}
+        {{ include('Layout/Header/MediaLibraryDownload.html.twig') }}
 
         <div class="js-header"
             {% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
-              data-path-search-url="{{ path('medialibrary_empty_search', {'package_name' : package} ) }}"
+              data-path-search-url="{{ path('medialibrary_empty_search', {package_name: package}) }}"
             {% else %}
-              data-path-search-url="{{ path('empty_search' ) }}"
+              data-path-search-url="{{ path('empty_search') }}"
             {% endif %}
         ></div>
       {% endblock %}

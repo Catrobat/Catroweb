@@ -1,11 +1,10 @@
-{% extends "Email/email.html.twig" %}
+{% extends 'Email/email.html.twig' %}
 
 {% block body_title %}
   {% autoescape false %}
-    {{ 'accountConfirmation.subject'|trans({}, 'catroweb')}}
+    {{ 'accountConfirmation.subject'|trans({}, 'catroweb') }}
   {% endautoescape %}
 {% endblock %}
-
 
 {% block body_content %}
 
