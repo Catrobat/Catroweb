@@ -112,6 +112,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
   /**
    * @throws \JsonException
+   * @throws \DateMalformedStringException
    */
   #[\Override]
   public function projectsGet(string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
@@ -229,6 +230,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
   /**
    * @throws \JsonException
+   * @throws \DateMalformedStringException
    */
   #[\Override]
   public function projectsCategoriesGet(string $max_version, string $flavor, string $accept_language, int &$responseCode, array &$responseHeaders): array

@@ -40,6 +40,9 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     $responseHeaders['Content-Language'] = $this->getLocale();
   }
 
+  /**
+   * @throws \DateMalformedStringException
+   */
   public function getCachedResponse(string $cache_id, string $time = '-180 minutes'): ?ResponseCache
   {
     /** @var ResponseCache|null $cache_entry */
@@ -57,6 +60,9 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     return $cache_entry;
   }
 
+  /**
+   * @throws \JsonException
+   */
   public function cacheResponse(string $cache_id, int $response_code, array $responseHeaders, mixed $response): void
   {
     $this->response_cache_manager->addCacheEntry($cache_id, $response_code, $responseHeaders, $response);
@@ -72,6 +78,9 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     return unserialize($cache_entry->getResponse()) ?? [];
   }
 
+  /**
+   * @throws \JsonException
+   */
   public function extractResponseHeader(ResponseCache $cache_entry): array
   {
     return json_decode($cache_entry->getResponseHeaders(), true, 512, JSON_THROW_ON_ERROR) ?? [];

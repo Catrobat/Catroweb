@@ -7,6 +7,7 @@ namespace App\Project\Scratch;
 use App\DB\Entity\Project\Program;
 use App\Project\ProjectManager;
 use App\User\UserManager;
+use Doctrine\ORM\Exception\ORMException;
 
 class ScratchManager
 {
@@ -20,6 +21,7 @@ class ScratchManager
 
   /**
    * @throws \Exception
+   * @throws ORMException
    */
   public function createScratchProjectFromId(int $id): ?Program
   {

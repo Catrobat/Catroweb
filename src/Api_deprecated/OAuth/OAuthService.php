@@ -17,9 +17,9 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class OAuthService
+readonly class OAuthService
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly ValidatorInterface $validator, private readonly TranslatorInterface $translator, private readonly TokenGenerator $token_generator)
+  public function __construct(private UserManager $user_manager, private ValidatorInterface $validator, private TranslatorInterface $translator, private TokenGenerator $token_generator)
   {
   }
 
@@ -228,7 +228,6 @@ class OAuthService
     $violations = $this->validateOAuthUser($request, $retArray);
     $retArray['violations'] = count($violations);
     if (0 == count($violations)) {
-      /** @var User $user */
       $user = $this->user_manager->create();
       $user->setGoogleId($googleId);
       $user->setUsername($username);

@@ -59,7 +59,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   /**
    * @param mixed|Program $object
    */
-  public function getThumbnailImageUrl($object): string
+  public function getThumbnailImageUrl(mixed $object): string
   {
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
@@ -111,7 +111,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   /**
    * @param mixed|Program $object
    */
-  public function getContainingStrings($object): array
+  public function getContainingStrings(mixed $object): array
   {
     if (null == $this->extractedProject) {
       $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
@@ -129,7 +129,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   /**
    * @param mixed|Program $object
    */
-  public function getContainingCodeObjects($object): array
+  public function getContainingCodeObjects(mixed $object): array
   {
     if (null == $this->extractedProject) {
       $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(

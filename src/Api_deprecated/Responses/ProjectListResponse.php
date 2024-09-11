@@ -7,11 +7,11 @@ namespace App\Api_deprecated\Responses;
 /**
  * @deprecated
  */
-class ProjectListResponse
+readonly class ProjectListResponse
 {
   public function __construct(
-    private readonly array $projects,
-    private readonly int $total_projects,
+    private array $projects,
+    private int $total_projects,
   ) {
   }
 

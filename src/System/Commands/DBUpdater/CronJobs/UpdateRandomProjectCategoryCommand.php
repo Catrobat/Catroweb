@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:workflow:update_random_project_category', description: "Update random projects' category.")]
 class UpdateRandomProjectCategoryCommand extends Command
 {
-  protected const LIMIT = 100;
+  protected const int LIMIT = 100;
 
   public function __construct(protected EntityManagerInterface $entity_manager, protected ProjectManager $program_manager)
   {

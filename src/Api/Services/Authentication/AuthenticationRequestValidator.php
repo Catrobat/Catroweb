@@ -9,6 +9,7 @@ use CoderCat\JWKToPEM\JWKConverter;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 class AuthenticationRequestValidator extends AbstractRequestValidator
 {
@@ -41,6 +42,10 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
     return true;
   }
 
+  /**
+   * @throws GuzzleException
+   * @throws \JsonException
+   */
   public function validateAppleIdToken(string $id_token): bool
   {
     $jwt = self::jwt_decode($id_token);

@@ -14,6 +14,9 @@ trait BearerAuthenticationTrait
 {
   private string $token;
 
+  /**
+   * @throws \Exception
+   */
   public function setBearerAuth(?string $value): void
   {
     $this->token = $this->extractAuthenticationToken($value ?? '');

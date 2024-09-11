@@ -247,8 +247,8 @@ class ProjectController extends AbstractController
       'source_language' => $source_language ?? $translation_result[0]->detected_source_language,
       'target_language' => $target_language,
       'translated_title' => $translation_result[0]->translation,
-      'translated_description' => $translation_result[1] ? $translation_result[1]->translation : null,
-      'translated_credit' => $translation_result[2] ? $translation_result[2]->translation : null,
+      'translated_description' => $translation_result[1]?->translation,
+      'translated_credit' => $translation_result[2]?->translation,
       'provider' => $translation_result[0]->provider,
       '_cache' => $translation_result[0]->cache,
     ]);
@@ -340,6 +340,9 @@ class ProjectController extends AbstractController
     }
   }
 
+  /**
+   * @throws \Exception
+   */
   private function createProjectDetailsArray(Program $project,
     array $active_like_types,
     array $active_user_like_types,

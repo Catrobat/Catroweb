@@ -16,6 +16,9 @@ class ExtractedFileRepository
 
   private readonly string $web_path;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(ParameterBagInterface $parameter_bag,
     private readonly ProjectManager $project_manager,
     private readonly LoggerInterface $logger)

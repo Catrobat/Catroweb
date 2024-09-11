@@ -159,16 +159,12 @@ class FeaturedRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, ?string $flavor = null): QueryBuilder
   {
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';
-      if ($include_pocketcode) {
-        $where .= " OR fl.name = 'pocketcode'";
-      }
-
       $query_builder
-        ->join($alias.'.flavor', 'fl')
+        ->join('e.flavor', 'fl')
         ->andWhere($where)
         ->setParameter('name', $flavor)
       ;

@@ -21,6 +21,7 @@ use App\DB\EntityRepository\Studios\StudioUserRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -312,6 +313,9 @@ class StudioManager
     }
   }
 
+  /**
+   * @throws \Exception
+   */
   public function storeCoverImage(?UploadedFile $image_file, string $name): ?string
   {
     $cover_asset_path = null;
@@ -467,6 +471,9 @@ class StudioManager
     return StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $studio);
   }
 
+  /**
+   * @throws ORMException
+   */
   public function saveStudio(Studio $studio): Studio
   {
     $this->entity_manager->persist($studio);
@@ -487,6 +494,9 @@ class StudioManager
     return $this->studio_join_request_repository->findJoinRequestByUserAndStudio($user, $studio);
   }
 
+  /**
+   * @throws ORMException
+   */
   public function setJoinRequest(User $user, Studio $studio, string $status): ?StudioJoinRequest
   {
     if (is_null($this->findJoinRequestByUserAndStudio($user, $studio))) {
@@ -524,6 +534,9 @@ class StudioManager
     return $this->studio_join_request_repository->findJoinRequestById($joinRequestId);
   }
 
+  /**
+   * @throws ORMException
+   */
   public function updateJoinRequests(StudioJoinRequest $joinRequest, string $switchValue, User $user, User $admin, Studio $studio): StudioJoinRequest
   {
     if ('pending' == $joinRequest->getStatus() && '1' === $switchValue) {

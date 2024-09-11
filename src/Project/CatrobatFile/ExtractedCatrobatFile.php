@@ -387,7 +387,6 @@ class ExtractedCatrobatFile
   {
     preg_match('@'.$dir_regex.'@', $dir_regex, $scene_names);
 
-    /** @var string $scene_name */
     foreach ($scene_names as $scene_name) {
       $directory = $base_path.$scene_name.$dir_name;
       if (!file_exists($directory)) {

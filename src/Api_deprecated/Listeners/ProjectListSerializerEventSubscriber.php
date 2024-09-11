@@ -20,12 +20,15 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @deprecated
  */
-class ProjectListSerializerEventSubscriber implements EventSubscriberInterface
+readonly class ProjectListSerializerEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly ScreenshotRepository $screenshot_repository, private readonly RequestStack $request_stack, private readonly RouterInterface $router, private readonly ElapsedTimeStringFormatter $time_formatter, private readonly ImageRepository $example_image_repository, private readonly ParameterBagInterface $parameter_bag)
+  public function __construct(private ScreenshotRepository $screenshot_repository, private RequestStack $request_stack, private RouterInterface $router, private ElapsedTimeStringFormatter $time_formatter, private ImageRepository $example_image_repository, private ParameterBagInterface $parameter_bag)
   {
   }
 
+  /**
+   * @throws \Exception
+   */
   public function onKernelView(ViewEvent $event): void
   {
     $result = $event->getControllerResult();

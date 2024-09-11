@@ -16,7 +16,7 @@ services:
       - chrome.catroweb
       - elasticsearch
     ports:
-      - 8080:80
+      - '8080:80'
     volumes:
       #
       # Changes to the following files are shared between host and container.
@@ -100,7 +100,7 @@ services:
     container_name: db.catroweb.dev
     shm_size: '2gb'
     ports:
-      - 3306
+      - '3306'
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -127,14 +127,14 @@ services:
         '--no-sandbox',
       ]
     ports:
-      - 9222
+      - '9222'
 
   db.catroweb.test:
     image: mariadb:10.11
     container_name: db.catroweb.test
     shm_size: '2gb'
     ports:
-      - 3306
+      - '3306'
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -150,7 +150,7 @@ services:
       - PMA_ARBITRARY=1
     restart: always
     ports:
-      - 8081:80
+      - '8081:80'
     volumes:
       - /sessions
     external_links:
@@ -177,7 +177,7 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - '9200:9200'
 
 volumes:
   esdata1:

@@ -7,9 +7,9 @@ namespace App\Security\Authentication;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Routing\RouterInterface;
 
-class CookieService
+readonly class CookieService
 {
-  public function __construct(private readonly int $jwtTokenLifetime, private readonly int $refreshTokenLifetime, private readonly RouterInterface $router)
+  public function __construct(private int $jwtTokenLifetime, private int $refreshTokenLifetime, private RouterInterface $router)
   {
   }
 

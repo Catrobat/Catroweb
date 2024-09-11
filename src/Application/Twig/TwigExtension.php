@@ -43,7 +43,7 @@ class TwigExtension extends AbstractExtension
   /**
    * @return string|string[]|null
    */
-  public function decamelizeFilter(mixed $input)
+  public function decamelizeFilter(mixed $input): mixed
   {
     if (!is_string($input)) {
       return $input;
@@ -230,7 +230,7 @@ class TwigExtension extends AbstractExtension
     $user_agent = $this->getUserAgent();
 
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    if (preg_match('/Catrobat/', $user_agent)) {
+    if (str_contains($user_agent, 'Catrobat')) {
       $user_agent_array = explode('/', $user_agent);
 
       // $user_agent_array = [ "Catrobat", "0.93 PocketCode", 0.9.14 Platform", "Android" ];

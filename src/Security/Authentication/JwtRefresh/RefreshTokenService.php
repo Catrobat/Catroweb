@@ -24,6 +24,9 @@ class RefreshTokenService
   ) {
   }
 
+  /**
+   * @throws \DateMalformedStringException
+   */
   public function createRefreshTokenForUsername(string $username): RefreshTokenInterface
   {
     $datetime = new \DateTime('now');

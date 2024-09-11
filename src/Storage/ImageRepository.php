@@ -20,6 +20,9 @@ class ImageRepository
 
   private ?\Imagick $imagick = null;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(ParameterBagInterface $parameter_bag, private readonly ?UrlHelper $urlHelper = null)
   {
     $example_dir = (string) $parameter_bag->get('catrobat.exampleimage.dir');
@@ -89,9 +92,6 @@ class ImageRepository
     return $this->urlHelper->getAbsoluteUrl('/').$this->getWebPath($id, $extension, $featured);
   }
 
-  /**
-   * @throws \ImagickException
-   */
   public function getImagick(): \Imagick
   {
     if (null == $this->imagick) {

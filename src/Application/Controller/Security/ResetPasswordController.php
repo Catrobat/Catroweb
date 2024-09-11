@@ -36,7 +36,7 @@ class ResetPasswordController extends AbstractController
   #[Route(path: '', name: 'app_forgot_password_request')]
   public function request(): Response
   {
-    return $this->render('Security/ResetPassword/RequestToResetPasswordPage.html.twig', []);
+    return $this->render('Security/ResetPassword/RequestToResetPasswordPage.html.twig');
   }
 
   /**

@@ -460,11 +460,10 @@ trait ContextTrait
     /* @var Program $project */
     if (isset($config['project_id'])) {
       $project = $this->getProjectManager()->find($config['project_id']);
-      $example_project->setProgram($project);
     } else {
       $project = $this->getProjectManager()->findOneByName($config['name']);
-      $example_project->setProgram($project);
     }
+    $example_project->setProgram($project);
 
     /* @var Flavor $flavor */
     $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? Flavor::POCKETCODE);

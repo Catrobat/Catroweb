@@ -18,6 +18,9 @@ class UserPostPersistNotifier
   {
   }
 
+  /**
+   * @throws \Exception
+   */
   public function postPersist(User $user, LifecycleEventArgs $event): void
   {
     $this->addVerifiedDeveloperAchievement($user);

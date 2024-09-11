@@ -594,6 +594,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^I click on xpath "([^"]*)"$/
+   *
+   * @throws ElementNotFoundException
    */
   public function iClickOnXpath(string $arg1): void
   {

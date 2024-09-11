@@ -97,8 +97,6 @@ yarn-error.log
 
 ###> symfony/phpunit-bridge ###
 .phpunit
-.phpunit.result.cache
-/phpunit.xml
 ###< symfony/phpunit-bridge ###
 
 ###> friends-of-behat/symfony-extension ###

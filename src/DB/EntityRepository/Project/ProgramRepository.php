@@ -87,6 +87,9 @@ class ProgramRepository extends ServiceEntityRepository
     return $this->getQueryCount($query_builder);
   }
 
+  /**
+   * @throws \DateMalformedStringException
+   */
   public function getTrendingProjects(?string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
   {
     $now = new \DateTime('now', new \DateTimeZone('UTC'));
@@ -404,14 +407,14 @@ class ProgramRepository extends ServiceEntityRepository
   //
   // --------------------------------------------------------------------------------------------------------------------
   //
-  private function createQueryAllBuilder(string $alias = 'e'): QueryBuilder
+  private function createQueryAllBuilder(): QueryBuilder
   {
-    return $this->createQueryBuilder($alias)->select($alias);
+    return $this->createQueryBuilder('e')->select('e');
   }
 
-  private function createQueryCountBuilder(string $alias = 'e'): QueryBuilder
+  private function createQueryCountBuilder(): QueryBuilder
   {
-    return $this->createQueryBuilder($alias)->select(sprintf('count(%s.id)', $alias));
+    return $this->createQueryBuilder('e')->select(sprintf('count(%s.id)', 'e'));
   }
 
   private function getQueryCount(QueryBuilder $query_builder): int
@@ -423,11 +426,11 @@ class ProgramRepository extends ServiceEntityRepository
     }
   }
 
-  private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC', string $alias = 'e'): QueryBuilder
+  private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC'): QueryBuilder
   {
     if ('' !== trim($order_by)) {
       return $query_builder
-        ->orderBy($alias.'.'.$order_by, $order)
+        ->orderBy('e.'.$order_by, $order)
       ;
     }
 
@@ -447,11 +450,11 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
+  private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = ''): QueryBuilder
   {
-    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, $alias);
+    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, 'e');
 
-    return $this->excludePrivateProjects($qb, $alias);
+    return $this->excludePrivateProjects($qb, 'e');
   }
 
   private function excludeUnavailableProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder

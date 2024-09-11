@@ -53,6 +53,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
 
   /**
    * @throws \ImagickException
+   * @throws \ImagickDrawException
    */
   #[\Override]
   protected function postPersist($object): void
@@ -85,6 +86,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
 
   /**
    * @throws \ImagickException
+   * @throws \ImagickDrawException
    */
   #[\Override]
   protected function postUpdate($object): void

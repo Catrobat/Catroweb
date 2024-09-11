@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class CustomTranslationAchievementEventSubscriber implements EventSubscriberInterface
+readonly class CustomTranslationAchievementEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly AchievementManager $achievement_manager, private readonly ProjectManager $project_manager, private readonly LoggerInterface $logger)
+  public function __construct(private AchievementManager $achievement_manager, private ProjectManager $project_manager, private LoggerInterface $logger)
   {
   }
 

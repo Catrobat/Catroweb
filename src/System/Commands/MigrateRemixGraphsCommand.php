@@ -116,8 +116,7 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @throws NoResultException
-   * @throws NonUniqueResultException
+   * @throws \Exception
    */
   private function migrateRemixDataOfExistingProjects(OutputInterface $output, string $directory): void
   {
@@ -158,7 +157,7 @@ class MigrateRemixGraphsCommand extends Command
 
       $project = $this->project_manager->find($project_id);
       assert(null != $project);
-      $truncated_project_name = mb_strimwidth((string) $project->getName(), 0, 12, '...');
+      $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $truncated_project_name, $output, $progress_bar);
       if ('0.0' == $result['languageVersion']) {
@@ -167,7 +166,7 @@ class MigrateRemixGraphsCommand extends Command
 
       $progress_bar->setMessage('Migrating forward remixes of "'.$truncated_project_name.'" (#'.$project_id.')');
       $remix_data_map[$project_id] = $result['fullRemixData'];
-      $this->addRemixData($project, $result['remixDataOnlyForwardParents'], false);
+      $this->addRemixData($project, $result['remixDataOnlyForwardParents']);
 
       $progress_bar->clear();
       $output->writeln('Migrated forward remix data of "'.$truncated_project_name.'" (#'.$project_id.')');
@@ -197,7 +196,7 @@ class MigrateRemixGraphsCommand extends Command
 
     foreach ($all_project_ids as $project_id) {
       $project = $this->project_manager->find($project_id);
-      $truncated_project_name = mb_strimwidth((string) $project->getName(), 0, 12, '...');
+      $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $progress_bar->setMessage('Migrating remaining remixes of "'.$truncated_project_name.'" (#'.$project_id.')');
       $this->addRemixData($project, $remix_data_map[$project_id], true);
@@ -229,7 +228,7 @@ class MigrateRemixGraphsCommand extends Command
     while (null != ($unmigrated_project = $this->project_manager->findOneByRemixMigratedAt(null))) {
       $project_file_path = $directory.$project_id.'/';
       $project_id = $unmigrated_project->getId();
-      $truncated_project_name = mb_strimwidth((string) $unmigrated_project->getName(), 0, 12, '...');
+      $truncated_project_name = mb_strimwidth($unmigrated_project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $unmigrated_project->getName(), $output, $progress_bar);
       if ('0.0' == $result['languageVersion']) {
@@ -294,7 +293,7 @@ class MigrateRemixGraphsCommand extends Command
       // NOTE: this is a workaround only needed for migration purposes in order to stay backward compatible
       //       with older XML files -> do not change order here
       // ----------------------------------------------------------------------------------------------------------
-      $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->project_repository, false);
+      $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->project_repository);
       assert(1 == count($url_data), 'WTH! This project has multiple urls with different project IDs?!!');
       assert($url_data[0]->getProgramId() == $project_id);
 

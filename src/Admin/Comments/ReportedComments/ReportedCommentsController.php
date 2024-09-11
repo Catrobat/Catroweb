@@ -8,8 +8,9 @@ use App\DB\Entity\Project\ProgramInappropriateReport;
 use App\DB\Entity\User\Comment\UserComment;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Exception\LockException;
+use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @phpstan-extends CRUDController<ProgramInappropriateReport|UserComment>
@@ -21,25 +22,29 @@ class ReportedCommentsController extends CRUDController
   ) {
   }
 
+  /**
+   * @throws LockException
+   * @throws ModelManagerThrowable
+   */
   public function unreportProjectAction(): RedirectResponse
   {
-    /** @var ProgramInappropriateReport|null $object */
-    $object = $this->admin->getSubject();
-    if (null === $object) {
-      throw new NotFoundHttpException();
-    }
-
-    $project = $object->getProgram();
+    /** @var ProgramInappropriateReport $report */
+    $report = $this->admin->getSubject();
+    $project = $report->getProgram();
     $project->setVisible(true);
     $project->setApproved(true);
 
-    $object->setState(3);
-    $this->admin->update($object);
-    $this->addFlash('sonata_flash_success', 'Project '.$object->getId().' is no longer reported');
+    $report->setState(3);
+    $this->admin->update($report);
+    $this->addFlash('sonata_flash_success', 'Project '.$report->getId().' is no longer reported');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+  /**
+   * @throws LockException
+   * @throws ModelManagerThrowable
+   */
   public function unreportCommentAction(): RedirectResponse
   {
     /* @var $object UserComment */
