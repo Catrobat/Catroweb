@@ -11,15 +11,16 @@ use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GoogleResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(HwiOauthUserProvider::class)]
 class HwiOauthUserProviderTest extends WebTestCase
 {
   protected array $options = [
@@ -78,6 +79,9 @@ json;
     $this->assertInstanceOf(HwiOauthUserProvider::class, $this->object);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testLoadUserByOauthResponse(): void
   {
     $httpClient = $this->createMock(HttpClientInterface::class);
@@ -109,7 +113,7 @@ json;
     $this->assertEquals('test@localhost.org', $response->getEmail());
     $this->assertEquals('token', $response->getGoogleAccessToken());
     $this->assertEquals('1', $response->getGoogleId());
-    $this->assertEquals(true, $response->isOauthUser());
+    $this->assertTrue($response->isOauthUser());
     $this->assertNull($response->getFacebookAccessToken());
   }
 }

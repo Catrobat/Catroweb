@@ -6,7 +6,6 @@ namespace Tests\PhpUnit\Api;
 
 use App\Api\ProjectsApi;
 use App\Api\Services\AuthenticationManager;
-use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
 use App\Api\Services\Projects\ProjectsApiLoader;
 use App\Api\Services\Projects\ProjectsApiProcessor;
@@ -22,22 +21,23 @@ use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use Doctrine\ORM\EntityManagerInterface;
-use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\UpdateProjectErrorResponse;
 use OpenAPI\Server\Model\UpdateProjectFailureResponse;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 use OpenAPI\Server\Model\UploadErrorResponse;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
- *
- * @coversDefaultClass \App\Api\ProjectsApi
  */
+#[CoversClass(ProjectsApi::class)]
 final class ProjectsApiTest extends DefaultTestCase
 {
   protected MockObject|ProjectsApi $object;
@@ -48,6 +48,10 @@ final class ProjectsApiTest extends DefaultTestCase
 
   protected mixed $full_response_manager;
 
+  /**
+   * @throws \ReflectionException
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
@@ -65,42 +69,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->full_response_manager = ProjectsApiTest::getContainer()->get(ProjectsResponseManager::class);
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExists(): void
-  {
-    $this->assertTrue(class_exists(ProjectsApi::class));
-    $this->assertInstanceOf(ProjectsApi::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExtends(): void
-  {
-    $this->assertInstanceOf(AbstractApiController::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassImplements(): void
-  {
-    $this->assertInstanceOf(ProjectsApiInterface::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testCtor(): void
   {
     $this->object = new ProjectsApi($this->facade);
@@ -108,14 +77,9 @@ final class ProjectsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdGet
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testProjectIdGetNotFound(): void
   {
     $response_code = 200;
@@ -132,14 +96,10 @@ final class ProjectsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdGet
-   *
    * @throws \Exception
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectIdGet(): void
   {
     $response_code = 200;
@@ -155,6 +115,9 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
+  /**
+   * @throws Exception
+   */
   private function projectIdPut_setLoaderAndAuthManager(MockObject|Program|null $project = null, MockObject|User|null $user = null): void
   {
     if (is_null($user)) {
@@ -170,6 +133,9 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->projectIdPut_setAuthManager($user);
   }
 
+  /**
+   * @throws Exception
+   */
   private function projectIdPut_setLoader(MockObject|Program|null $project): void
   {
     $loader = $this->createMock(ProjectsApiLoader::class);
@@ -177,6 +143,9 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->facade->method('getLoader')->willReturn($loader);
   }
 
+  /**
+   * @throws Exception
+   */
   private function projectIdPut_setAuthManager(MockObject|User|null $user): void
   {
     $authentication_manager = $this->createMock(AuthenticationManager::class);
@@ -185,10 +154,9 @@ final class ProjectsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @covers \App\Api\ProjectsApi::projectIdPut
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectIdPut(): void
   {
     $response_code = 200;
@@ -207,13 +175,13 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $extracted_file_repository = $this->createMock(ExtractedFileRepository::class);
     $extracted_file_repository->method('loadProjectExtractedFile')->willReturn(null);
-    $processor = $this->createTestProxy(ProjectsApiProcessor::class, [
-      'project_manager' => $this->createMock(ProjectManager::class),
-      'entity_manager' => $this->createMock(EntityManagerInterface::class),
-      'extracted_file_repository' => $extracted_file_repository,
-      'file_repository' => $this->createMock(ProjectFileRepository::class),
-      'screenshot_repository' => $this->createMock(ScreenshotRepository::class),
-    ]);
+    $processor = new ProjectsApiProcessor(
+      $this->createMock(ProjectManager::class),
+      $this->createMock(EntityManagerInterface::class),
+      $extracted_file_repository,
+      $this->createMock(ProjectFileRepository::class),
+      $this->createMock(ScreenshotRepository::class)
+    );
     $this->facade->method('getProcessor')->willReturn($processor);
 
     $this->facade->method('getRequestValidator')->willReturn($this->full_validator);
@@ -240,12 +208,9 @@ final class ProjectsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdPut
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectIdPutNotFound(): void
   {
     $response_code = 200;
@@ -262,12 +227,9 @@ final class ProjectsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdPut
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectIdPutUnauthorized(): void
   {
     $response_code = 200;
@@ -285,12 +247,9 @@ final class ProjectsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdPut
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectIdPutForbidden(): void
   {
     $response_code = 200;
@@ -316,10 +275,9 @@ final class ProjectsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @covers \App\Api\ProjectsApi::projectIdPut
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectIdPutValidationError(): void
   {
     $response_code = 200;
@@ -352,10 +310,9 @@ final class ProjectsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @covers \App\Api\ProjectsApi::projectIdPut
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testProjectIdPutSaveXMLError(): void
   {
     $response_code = 200;
@@ -368,13 +325,13 @@ final class ProjectsApiTest extends DefaultTestCase
     $extracted_file_repository->method('loadProjectExtractedFile')->willReturn($extracted_file);
     $extracted_file_repository->method('saveProjectExtractedFile')->willThrowException(new \Exception(''));
 
-    $processor = $this->createTestProxy(ProjectsApiProcessor::class, [
-      'project_manager' => $this->createMock(ProjectManager::class),
-      'entity_manager' => $this->createMock(EntityManagerInterface::class),
-      'extracted_file_repository' => $extracted_file_repository,
-      'file_repository' => $this->createMock(ProjectFileRepository::class),
-      'screenshot_repository' => $this->createMock(ScreenshotRepository::class),
-    ]);
+    $processor = new ProjectsApiProcessor(
+      $this->createMock(ProjectManager::class),
+      $this->createMock(EntityManagerInterface::class),
+      $extracted_file_repository,
+      $this->createMock(ProjectFileRepository::class),
+      $this->createMock(ScreenshotRepository::class)
+    );
     $this->facade->method('getProcessor')->willReturn($processor);
 
     $validator = $this->createMock(ProjectsRequestValidator::class);
@@ -400,11 +357,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsFeaturedGet
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectsFeaturedGet(): void
   {
@@ -423,10 +377,6 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsGet
-   *
    * @throws \Exception
    */
   public function testProjectsGet(): void
@@ -441,10 +391,6 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdRecommendationsGet
    *
    * @throws \Exception
    */
@@ -461,11 +407,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdRecommendationsGet
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectIdRecommendationsGet(): void
   {
@@ -486,10 +429,6 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsSearchGet
-   *
    * @throws \Exception
    */
   public function testProjectsSearchGet(): void
@@ -504,10 +443,6 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsCategoriesGet
    *
    * @throws \Exception
    */
@@ -524,11 +459,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsUserGet
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectsUserGetForbidden(): void
   {
@@ -548,11 +480,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsUserGet
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectsUserGet(): void
   {
@@ -574,11 +503,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsUserIdGet
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectsUserIdGet(): void
   {
@@ -598,11 +524,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsUserIdGet
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectsUserIdGetNotFound(): void
   {
@@ -622,11 +545,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdReportPost
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectIdReportPost(): void
   {
@@ -643,11 +563,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsPost
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectsPost(): void
   {
@@ -674,11 +591,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsPost
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectsPostValidationError(): void
   {
@@ -709,11 +623,8 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsPost
-   *
    * @throws \Exception
+   * @throws Exception
    */
   public function testProjectsPostAddException(): void
   {
@@ -739,10 +650,6 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectIdDelete
-   *
    * @throws \Exception
    */
   public function testProjectIdDelete(): void
@@ -758,10 +665,6 @@ final class ProjectsApiTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsExtensionsGet
-   *
    * @throws \Exception
    */
   public function testProjectsExtensionsGet(): void
@@ -776,10 +679,6 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\ProjectsApi::projectsTagsGet
    *
    * @throws \Exception
    */

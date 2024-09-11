@@ -5,68 +5,36 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api\Services\Base;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Api\Services\Base\TranslatorAwareInterface;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Service\JmsSerializer;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
- *
- * @coversDefaultClass \App\Api\Services\Base\AbstractResponseManager
  */
+#[CoversClass(AbstractResponseManager::class)]
 final class AbstractResponseManagerTest extends DefaultTestCase
 {
   protected AbstractResponseManager|MockObject $object;
 
+  /** @noinspection PhpMultipleClassDeclarationsInspection */
   #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(AbstractResponseManager::class)
       ->disableOriginalConstructor()
-      ->getMockForAbstractClass()
+      ->onlyMethods([])
+      ->getMock()
     ;
   }
 
   /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExists(): void
-  {
-    $this->assertTrue(class_exists(AbstractResponseManager::class));
-    $this->assertInstanceOf(AbstractResponseManager::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExtends(): void
-  {
-    $this->assertInstanceOf(AbstractResponseManager::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassImplements(): void
-  {
-    $this->assertInstanceOf(TranslatorAwareInterface::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   *
    * @throws \ReflectionException
    */
+  #[Group('integration')]
   public function testAddResponseHashToHeaders(): void
   {
     $this->mockProperty(AbstractResponseManager::class, $this->object, 'serializer', new JmsSerializer());

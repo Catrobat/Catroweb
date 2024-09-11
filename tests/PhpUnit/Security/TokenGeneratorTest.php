@@ -6,13 +6,13 @@ namespace Tests\PhpUnit\Security;
 
 use App\Security\TokenGenerator;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers  \App\Security\TokenGenerator
  */
+#[CoversClass(TokenGenerator::class)]
 class TokenGeneratorTest extends TestCase
 {
   private TokenGenerator $token_generator;
@@ -28,6 +28,9 @@ class TokenGeneratorTest extends TestCase
     $this->assertInstanceOf(TokenGenerator::class, $this->token_generator);
   }
 
+  /**
+   * @throws \Exception
+   */
   public function testGeneratesADifferentTokenEachTime(): void
   {
     $generated_tokens = [];
@@ -39,6 +42,9 @@ class TokenGeneratorTest extends TestCase
     Assert::assertCount(100, array_unique($generated_tokens));
   }
 
+  /**
+   * @throws \Exception
+   */
   public function testGeneratesATokenWithALengthOf32(): void
   {
     $generated_token = $this->token_generator->generateToken();

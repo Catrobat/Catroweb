@@ -7,14 +7,14 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 use App\Project\CatrobatCode\Parser\Constants;
 use App\Project\CatrobatCode\Parser\FormulaResolver;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Project\CatrobatCode\Parser\FormulaResolver
  */
+#[CoversClass(FormulaResolver::class)]
 class FormulaResolverTest extends TestCase
 {
   #[DataProvider('provideFormulaData')]
@@ -27,7 +27,7 @@ class FormulaResolverTest extends TestCase
   }
 
   /**
-   * @return mixed[][]
+   * @return array[]
    */
   public static function provideFormulaData(): array
   {

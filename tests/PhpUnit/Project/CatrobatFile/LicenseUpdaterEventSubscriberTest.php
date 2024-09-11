@@ -9,14 +9,14 @@ use App\Project\CatrobatFile\LicenseUpdaterEventSubscriber;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\LicenseUpdaterEventSubscriber
  */
+#[CoversClass(LicenseUpdaterEventSubscriber::class)]
 class LicenseUpdaterEventSubscriberTest extends TestCase
 {
   private LicenseUpdaterEventSubscriber $license_updater;
@@ -27,6 +27,9 @@ class LicenseUpdaterEventSubscriberTest extends TestCase
     $this->license_updater = new LicenseUpdaterEventSubscriber();
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   protected function tearDown(): void
   {
@@ -45,13 +48,13 @@ class LicenseUpdaterEventSubscriberTest extends TestCase
 
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
-    Assert::assertEquals($xml->header->mediaLicense, '');
+    Assert::assertEquals('', $xml->header->mediaLicense);
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->license_updater->update($file);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
-    Assert::assertEquals($xml->header->mediaLicense, 'https://developer.catrobat.org/ccbysa_v4');
+    Assert::assertEquals('https://developer.catrobat.org/ccbysa_v4', $xml->header->mediaLicense);
   }
 
   public function testSetsProgramLicense(): void
@@ -61,12 +64,12 @@ class LicenseUpdaterEventSubscriberTest extends TestCase
 
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
-    Assert::assertEquals($xml->header->programLicense, '');
+    Assert::assertEquals('', $xml->header->programLicense);
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->license_updater->update($file);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
-    Assert::assertEquals($xml->header->programLicense, 'https://developer.catrobat.org/agpl_v3');
+    Assert::assertEquals('https://developer.catrobat.org/agpl_v3', $xml->header->programLicense);
   }
 }

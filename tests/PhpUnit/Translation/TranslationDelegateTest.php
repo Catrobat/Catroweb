@@ -10,21 +10,25 @@ use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use App\Translation\TranslationApiInterface;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Translation\TranslationDelegate
  */
+#[CoversClass(TranslationDelegate::class)]
 class TranslationDelegateTest extends TestCase
 {
   private MockObject|ProjectCustomTranslationRepository $project_custom_translation_repository;
 
   private MockObject|ProjectMachineTranslationRepository $project_machine_translation_repository;
 
+  /**
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
@@ -33,6 +37,9 @@ class TranslationDelegateTest extends TestCase
     $this->project_machine_translation_repository->method('getCachedTranslation')->willReturn(null);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testSingleApi(): void
   {
     $api = $this->createMock(TranslationApiInterface::class);
@@ -49,6 +56,9 @@ class TranslationDelegateTest extends TestCase
     $this->assertEquals($expected_result, $actual_result);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testOrderApis(): void
   {
     $api1 = $this->createMock(TranslationApiInterface::class);
@@ -72,6 +82,9 @@ class TranslationDelegateTest extends TestCase
     $this->assertEquals($expected_result, $actual_result);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testTryNextApiIfFirstFails(): void
   {
     $api1 = $this->createMock(TranslationApiInterface::class);
@@ -95,6 +108,9 @@ class TranslationDelegateTest extends TestCase
     $this->assertEquals($expected_result, $actual_result);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testAllApiFails(): void
   {
     $api1 = $this->createMock(TranslationApiInterface::class);
@@ -126,6 +142,9 @@ class TranslationDelegateTest extends TestCase
     $translation_delegate->translate('test', $invalid_code, $invalid_code);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testTranslateProjectWithOnlyName(): void
   {
     $api = $this->createMock(TranslationApiInterface::class);
@@ -145,6 +164,9 @@ class TranslationDelegateTest extends TestCase
     $this->assertEquals([$translation_result, null, null], $actual_result);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testTranslateProjectWithDescriptionAndCredit(): void
   {
     $api = $this->createMock(TranslationApiInterface::class);
@@ -166,6 +188,9 @@ class TranslationDelegateTest extends TestCase
     $this->assertEquals([$translation_result, $translation_result, $translation_result], $actual_result);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testTranslateProjectFailure(): void
   {
     $api = $this->createMock(TranslationApiInterface::class);
@@ -217,6 +242,9 @@ class TranslationDelegateTest extends TestCase
       $translation_delegate->addProjectCreditCustomTranslation($project, 'fr', 'test'));
   }
 
+  /**
+   * @throws Exception
+   */
   public function testCachedProjectTranslation(): void
   {
     $cached_translation = [new TranslationResult(), null, null];

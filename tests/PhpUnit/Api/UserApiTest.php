@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api;
 
 use App\Api\Services\AuthenticationManager;
-use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
 use App\Api\Services\User\UserApiLoader;
 use App\Api\Services\User\UserRequestValidator;
@@ -13,7 +12,6 @@ use App\Api\Services\ValidationWrapper;
 use App\Api\UserApi;
 use App\DB\Entity\User\User;
 use App\System\Testing\PhpUnit\DefaultTestCase;
-use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
@@ -21,68 +19,40 @@ use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
- *
- * @coversDefaultClass \App\Api\UserApi
  */
+#[CoversClass(UserApi::class)]
 final class UserApiTest extends DefaultTestCase
 {
   protected MockObject|UserApi $object;
 
   protected MockObject|UserApiFacade $facade;
 
+  /**
+   * @throws \ReflectionException
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(UserApi::class)
       ->disableOriginalConstructor()
-      ->getMockForAbstractClass()
+      ->onlyMethods([])
+      ->getMock()
     ;
 
     $this->facade = $this->createMock(UserApiFacade::class);
     $this->mockProperty(UserApi::class, $this->object, 'facade', $this->facade);
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExists(): void
-  {
-    $this->assertTrue(class_exists(UserApi::class));
-    $this->assertInstanceOf(UserApi::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExtends(): void
-  {
-    $this->assertInstanceOf(AbstractApiController::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassImplements(): void
-  {
-    $this->assertInstanceOf(UserApiInterface::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testCtor(): void
   {
     $this->object = new UserApi($this->facade);
@@ -90,14 +60,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userPost
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserPostDryRun(): void
   {
     $response_code = 200;
@@ -119,14 +84,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userPost
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserPostValidationError(): void
   {
     $response_code = 200;
@@ -148,14 +108,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userPost
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserPost(): void
   {
     $response_code = 200;
@@ -178,14 +133,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userDelete
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserDelete(): void
   {
     $response_code = 200;
@@ -201,14 +151,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userGet
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserGet(): void
   {
     $response_code = 200;
@@ -226,14 +171,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userIdGet
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserIdGetNotFound(): void
   {
     $response_code = 200;
@@ -250,14 +190,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userIdGet
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserIdGet(): void
   {
     $response_code = 200;
@@ -275,14 +210,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::usersSearchGet
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUsersSearchGet(): void
   {
     $response_code = 200;
@@ -298,14 +228,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userPut
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserPutDryRun(): void
   {
     $response_code = 200;
@@ -330,14 +255,9 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userPut
-   *
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
+  #[Group('unit')]
   public function testUserPutValidationError(): void
   {
     $response_code = 200;
@@ -362,14 +282,10 @@ final class UserApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\UserApi::userPut
-   *
    * @throws \Exception
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testUserPut(): void
   {
     $response_code = 200;

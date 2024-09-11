@@ -7,21 +7,25 @@ namespace Tests\PhpUnit\Translation;
 use App\Translation\GoogleTranslateApi;
 use Google\Cloud\Core\Exception\ServiceException;
 use Google\Cloud\Translate\V2\TranslateClient;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 /**
  * @internal
- *
- * @covers \App\Translation\GoogleTranslateApi
  */
+#[CoversClass(GoogleTranslateApi::class)]
 class GoogleTranslateApiTest extends TestCase
 {
   private GoogleTranslateApi $api;
 
   private MockObject|TranslateClient $client;
 
+  /**
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
@@ -64,6 +68,9 @@ class GoogleTranslateApiTest extends TestCase
     $this->assertNull($result);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testExceptionThrown(): void
   {
     $exception = $this->createMock(ServiceException::class);

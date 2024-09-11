@@ -8,15 +8,15 @@ use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ProjectFlavorEventSubscriber;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\ProjectFlavorEventSubscriber
  */
+#[CoversClass(ProjectFlavorEventSubscriber::class)]
 class ProjectFlavorEventSubscriberTest extends TestCase
 {
   private ProjectFlavorEventSubscriber $program_flavor_listener;

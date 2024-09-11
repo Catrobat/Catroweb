@@ -8,13 +8,14 @@ use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CatrobatFile\ProjectXmlHeaderValidatorEventSubscriber;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\ProjectXmlHeaderValidatorEventSubscriber
  */
+#[CoversClass(ProjectXmlHeaderValidatorEventSubscriber::class)]
 class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
 {
   private ProjectXmlHeaderValidatorEventSubscriber $program_xml_header_validator;
@@ -30,6 +31,9 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     $this->assertInstanceOf(ProjectXmlHeaderValidatorEventSubscriber::class, $this->program_xml_header_validator);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testChecksIfTheProgramXmlHeaderIsValid(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
@@ -39,6 +43,9 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     $this->program_xml_header_validator->validate($file);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testThrowsAnExceptionIfHeaderIsMissing(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
@@ -50,6 +57,9 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     $this->program_xml_header_validator->validate($file);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testThrowsAnExceptionIfHeaderInformationIsMissing(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
@@ -61,6 +71,9 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     $this->program_xml_header_validator->validate($file);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testChecksIfProgramNameIsSet(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
@@ -72,6 +85,9 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     $this->program_xml_header_validator->validate($file);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testChecksIfDescriptionIsSet(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);

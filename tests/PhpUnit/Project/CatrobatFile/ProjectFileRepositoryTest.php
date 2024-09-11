@@ -10,6 +10,8 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -17,9 +19,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\ProjectFileRepository
  */
+#[CoversClass(ProjectFileRepository::class)]
 class ProjectFileRepositoryTest extends TestCase
 {
   private string $storage_dir;
@@ -41,6 +42,9 @@ class ProjectFileRepositoryTest extends TestCase
     $this->program_file_repository = new ProjectFileRepository($this->storage_dir, $this->extract_dir, new CatrobatFileCompressor());
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   protected function tearDown(): void
   {
@@ -52,6 +56,9 @@ class ProjectFileRepositoryTest extends TestCase
     $this->assertInstanceOf(ProjectFileRepository::class, $this->program_file_repository);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testThrowsAnExceptionIfDirectoryIsNotFound(): void
   {
     $this->expectException(\Exception::class);
@@ -59,6 +66,9 @@ class ProjectFileRepositoryTest extends TestCase
     $this->program_file_repository = new ProjectFileRepository(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testThrowsAnExceptionIfDirectoryIsNotFound2(): void
   {
     $this->expectException(\Exception::class);

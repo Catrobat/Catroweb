@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Application\Locale;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
@@ -14,9 +15,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversNothing]
 class TransChoiceTest extends TestCase
 {
   public const string LANGUAGE_DIR = 'tests/TestData/DataFixtures/translations/';

@@ -8,6 +8,7 @@ use App\Storage\FileHelper;
 use App\Storage\ScreenshotRepository;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\Filesystem\Filesystem;
@@ -15,9 +16,8 @@ use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
- *
- * @covers  \App\Storage\ScreenshotRepository
  */
+#[CoversClass(ScreenshotRepository::class)]
 class ScreenshotRepositoryTest extends TestCase
 {
   private string $screenshot_dir;
@@ -75,6 +75,9 @@ class ScreenshotRepositoryTest extends TestCase
     ]));
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   protected function tearDown(): void
   {

@@ -6,13 +6,14 @@ namespace Tests\PhpUnit\Api\Services;
 
 use App\Api\Services\ValidationWrapper;
 use App\System\Testing\PhpUnit\DefaultTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
- *
- * @coversDefaultClass \App\Api\Services\ValidationWrapper
  */
+#[CoversClass(ValidationWrapper::class)]
 final class ValidationWrapperTest extends DefaultTestCase
 {
   protected MockObject|ValidationWrapper $object;
@@ -22,28 +23,12 @@ final class ValidationWrapperTest extends DefaultTestCase
   {
     $this->object = $this->getMockBuilder(ValidationWrapper::class)
       ->disableOriginalConstructor()
-      ->getMockForAbstractClass()
+      ->onlyMethods([])
+      ->getMock()
     ;
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExists(): void
-  {
-    $this->assertTrue(class_exists(ValidationWrapper::class));
-    $this->assertInstanceOf(ValidationWrapper::class, $this->object);
-  }
-
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\ValidationWrapper::addError
-   */
+  #[Group('unit')]
   public function testAddError(): void
   {
     $this->object->addError('Error 1');
@@ -52,13 +37,7 @@ final class ValidationWrapperTest extends DefaultTestCase
     $this->assertEquals(['Error 1', 'Error 2'], $this->object->getErrors());
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\ValidationWrapper::addError
-   */
+  #[Group('unit')]
   public function testAddErrorWithKey(): void
   {
     $this->assertFalse($this->object->hasError());
@@ -67,13 +46,7 @@ final class ValidationWrapperTest extends DefaultTestCase
     $this->assertEquals(['key' => 'Error 1'], $this->object->getErrors());
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\ValidationWrapper::hasError
-   */
+  #[Group('unit')]
   public function testHasError(): void
   {
     $this->assertFalse($this->object->hasError());
@@ -81,13 +54,7 @@ final class ValidationWrapperTest extends DefaultTestCase
     $this->assertTrue($this->object->hasError());
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\ValidationWrapper::clear
-   */
+  #[Group('unit')]
   public function testClear(): void
   {
     $this->object->addError('Error 1');
@@ -96,25 +63,13 @@ final class ValidationWrapperTest extends DefaultTestCase
     $this->assertFalse($this->object->hasError());
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\ValidationWrapper::getError
-   */
+  #[Group('unit')]
   public function testGetErrorEmpty(): void
   {
     $this->assertEquals('', $this->object->getError());
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\ValidationWrapper::getError
-   */
+  #[Group('unit')]
   public function testGetErrorNoKey(): void
   {
     $this->object->addError('Error 1');
@@ -122,13 +77,7 @@ final class ValidationWrapperTest extends DefaultTestCase
     $this->assertEquals('Error 1', $this->object->getError());
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\ValidationWrapper::getError
-   */
+  #[Group('unit')]
   public function testGetErrorKey(): void
   {
     $this->object->addError('Error 1', 'key 1');

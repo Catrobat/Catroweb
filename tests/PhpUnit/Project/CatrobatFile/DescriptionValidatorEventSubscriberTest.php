@@ -7,13 +7,14 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 use App\Project\CatrobatFile\DescriptionValidatorEventSubscriber;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Project\CatrobatFile\DescriptionValidatorEventSubscriber
  */
+#[CoversClass(DescriptionValidatorEventSubscriber::class)]
 class DescriptionValidatorEventSubscriberTest extends TestCase
 {
   private DescriptionValidatorEventSubscriber $description_validator;
@@ -29,6 +30,9 @@ class DescriptionValidatorEventSubscriberTest extends TestCase
     $this->assertInstanceOf(DescriptionValidatorEventSubscriber::class, $this->description_validator);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testThrowsAnExceptionIfTheDescriptionIsTooLong(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
@@ -38,6 +42,9 @@ class DescriptionValidatorEventSubscriberTest extends TestCase
     $this->description_validator->validate($file);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testThrowsNothingIfANormalDescriptionIsValidated(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);

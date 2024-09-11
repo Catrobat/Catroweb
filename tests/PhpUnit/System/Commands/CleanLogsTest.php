@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\System\Commands;
 
+use App\System\Commands\Maintenance\CleanLogsCommand;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
- * Class CleanupTest.
- *
  * @internal
- *
- * @covers \App\System\Commands\Maintenance\CleanLogsCommand
  */
+#[CoversClass(CleanLogsCommand::class)]
 class CleanLogsTest extends KernelTestCase
 {
   public function testCleanLogs(): void

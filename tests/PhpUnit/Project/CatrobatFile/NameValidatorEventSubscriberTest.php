@@ -7,13 +7,14 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CatrobatFile\NameValidatorEventSubscriber;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\NameValidatorEventSubscriber
  */
+#[CoversClass(NameValidatorEventSubscriber::class)]
 class NameValidatorEventSubscriberTest extends TestCase
 {
   private NameValidatorEventSubscriber $name_validator;
@@ -29,6 +30,9 @@ class NameValidatorEventSubscriberTest extends TestCase
     $this->assertInstanceOf(NameValidatorEventSubscriber::class, $this->name_validator);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testMakesSureTheGivenProgramNameIsValid(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
@@ -36,6 +40,9 @@ class NameValidatorEventSubscriberTest extends TestCase
     $this->name_validator->validate($file);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testThrowsAnExceptionIfTheNameIsEmpty(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
@@ -44,6 +51,9 @@ class NameValidatorEventSubscriberTest extends TestCase
     $this->name_validator->validate($file);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testThrowsAnExceptionIfTheNameIsTooLong(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);

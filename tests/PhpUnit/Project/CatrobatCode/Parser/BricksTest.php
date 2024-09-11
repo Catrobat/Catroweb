@@ -12,9 +12,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @internal
- *
  * @coversNothing
+ *
+ * @internal
  */
 class BricksTest extends TestCase
 {
@@ -27,7 +27,7 @@ class BricksTest extends TestCase
   /**
    * @var \SimpleXMLElement[]|bool
    */
-  protected $brick_xml_properties_list;
+  protected array|bool|null $brick_xml_properties_list;
 
   #[\Override]
   protected function setUp(): void
@@ -71,7 +71,7 @@ class BricksTest extends TestCase
   }
 
   /**
-   * @return mixed[][]
+   * @return array[]
    */
   public static function provideBrickXMLProperties(): array
   {
@@ -88,7 +88,7 @@ class BricksTest extends TestCase
         self::CAPTION => $reference_output[$reference_output_index++],
         self::IMG_FILE => $reference_output[$reference_output_index++],
       ];
-      // To omit '---' after each script information block in file 'script_reference.ouput'
+      // To omit '---' after each script information block in file 'script_reference.output'
       ++$reference_output_index;
 
       $data[] = [
