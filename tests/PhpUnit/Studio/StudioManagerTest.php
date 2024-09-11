@@ -18,47 +18,30 @@ use App\System\Testing\DataFixtures\UserDataFixtures;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManager;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(StudioManager::class)]
 class StudioManagerTest extends DefaultTestCase
 {
   protected MockObject|StudioManager $object;
 
-  /**
-   * @var UserDataFixtures|null
-   */
-  protected $user_fixture;
+  protected ?UserDataFixtures $user_fixture;
 
-  /**
-   * @var ProjectDataFixtures|null
-   */
-  protected $project_fixture;
+  protected ?ProjectDataFixtures $project_fixture;
 
-  /**
-   * @var UserManager|null
-   */
-  protected $user_manager;
+  protected ?UserManager $user_manager;
 
-  /**
-   * @var Studio|null
-   */
-  protected $studio;
+  protected ?Studio $studio;
 
-  /**
-   * @var User
-   */
-  protected $user;
+  protected ?User $user;
 
-  /**
-   * @var EntityManager
-   */
-  protected $entity_manager;
+  protected EntityManager $entity_manager;
 
   #[\Override]
   protected function setUp(): void
@@ -85,7 +68,8 @@ class StudioManagerTest extends DefaultTestCase
         $studio_program_repository,
         $parameter_bag,
       ])
-      ->getMockForAbstractClass()
+      ->onlyMethods([])
+      ->getMock()
     ;
     $this->user_manager = $kernel->getContainer()->get(UserManager::class);
     $this->user_fixture = $kernel->getContainer()->get(UserDataFixtures::class);
@@ -101,22 +85,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->entity_manager->close();
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExists(): void
-  {
-    $this->assertTrue(class_exists(StudioManager::class));
-    $this->assertInstanceOf(StudioManager::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testCreateDeleteStudio(): void
   {
     $this->assertInstanceOf(Studio::class, $this->studio);
@@ -130,11 +99,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->assertEmpty($this->object->findAllStudioActivities($studio_cloned));
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testEditStudio(): void
   {
     $newStudio = clone $this->studio;
@@ -144,11 +109,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->assertNotSame($this->studio, $newStudio);
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testAddAndRemoveStudioUsers(): void
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'amrdiab', 'password' => '123456']);
@@ -162,11 +123,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->assertNull($this->object->findStudioUser($newUser_cloned, $this->studio));
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testChangeStudioUserRole(): void
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'leomessi', 'password' => '123456']);
@@ -182,11 +139,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->assertEquals(StudioUser::ROLE_ADMIN, $this->object->getStudioUserRole($newUser, $this->studio));
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testChangeStudioUserStatus(): void
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'lutherking', 'password' => '123456']);
@@ -201,11 +154,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->assertEquals(StudioUser::STATUS_BANNED, $this->object->getStudioUserStatus($newUser, $this->studio));
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testAddEditRemoveStudioComment(): void
   {
     $adminComment = $this->object->addCommentToStudio($this->user, $this->studio, 'test comment');
@@ -244,12 +193,9 @@ class StudioManagerTest extends DefaultTestCase
   }
 
   /**
-   * @group integration
-   *
-   * @small
-   *
    * @throws \Exception
    */
+  #[Group('integration')]
   public function testAddRemoveStudioProject(): void
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'kitkat', 'password' => '123456']);
@@ -276,11 +222,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->assertCount(0, $this->object->findAllStudioProjects($this->studio));
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testAddRemoveStudioCommentReplies(): void
   {
     $studioComment = $this->object->addCommentToStudio($this->user, $this->studio, 'test comment');

@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Translation;
 
 use App\Translation\TranslationApiHelper;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Translation\TranslationApiHelper
  */
+#[CoversClass(TranslationApiHelper::class)]
 class TranslationApiHelperTest extends TestCase
 {
   private const array LONG_LANGUAGE_CODE = [

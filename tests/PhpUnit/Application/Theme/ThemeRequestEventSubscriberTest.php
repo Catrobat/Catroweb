@@ -8,7 +8,9 @@ use App\Application\Theme\ThemeRequestEventSubscriber;
 use App\DB\Entity\Flavor;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\Utils\RequestHelper;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -19,12 +21,9 @@ use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Class ThemeRequestEventSubscriberTest.
- *
- * @covers \App\Application\Theme\ThemeRequestEventSubscriber
- *
  * @internal
  */
+#[CoversClass(ThemeRequestEventSubscriber::class)]
 class ThemeRequestEventSubscriberTest extends DefaultTestCase
 {
   protected ThemeRequestEventSubscriber|MockObject $object;
@@ -39,19 +38,9 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   }
 
   /**
-   * @group integration
-   */
-  public function testTestClassExists(): void
-  {
-    $this->assertTrue(class_exists(ThemeRequestEventSubscriber::class));
-    $this->assertInstanceOf(ThemeRequestEventSubscriber::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
    * @throws \ReflectionException
    */
+  #[Group('integration')]
   #[DataProvider('provideKernelRequestData')]
   public function testOnKernelRequestThemeInRequest(
     string $request_theme, string $request_uri, string $expected_routing_theme, string $expected_flavor,
@@ -144,10 +133,9 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   }
 
   /**
-   * @group integration
-   *
    * @throws \ReflectionException
    */
+  #[Group('integration')]
   public function testOnKernelRequestSubRequest(): void
   {
     $request_attributes = $this->mockRequestAttributes();
@@ -216,22 +204,20 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     $parameter_bag = $this->getMockBuilder(ParameterBagInterface::class)
       ->disableOriginalConstructor()
       ->onlyMethods([])
-      ->getMockForAbstractClass()
+      ->getMock()
     ;
 
     $parameter_bag
       ->expects($this->any())
       ->method('get')
-      ->will(
-        $this->returnCallback(
-          static fn ($param): array|string => match ($param) {
-            'flavors' => [Flavor::POCKETCODE, Flavor::LUNA],
-            'umbrellaTheme' => 'app',
-            'adminTheme' => 'admin',
-            'defaultFlavor' => Flavor::POCKETCODE,
-            default => '',
-          }
-        )
+      ->willReturnCallback(
+        static fn ($param): array|string => match ($param) {
+          'flavors' => [Flavor::POCKETCODE, Flavor::LUNA],
+          'umbrellaTheme' => 'app',
+          'adminTheme' => 'admin',
+          'defaultFlavor' => Flavor::POCKETCODE,
+          default => '',
+        }
       )
     ;
 
@@ -239,13 +225,9 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   }
 
   /**
-   * @param ParameterBag|MockObject|null $attributes
-   *
-   * @return MockObject|RequestEvent
-   *
    * @throws \ReflectionException
    */
-  private function mockRequestEvent(int $request_type, $attributes = null, ?string $uri = null)
+  private function mockRequestEvent(int $request_type, ParameterBag|MockObject|null $attributes = null, ?string $uri = null): MockObject|RequestEvent
   {
     $event = $this->getMockBuilder(RequestEvent::class)->disableOriginalConstructor()->getMock();
     $event->expects($this->once())

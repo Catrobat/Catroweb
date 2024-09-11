@@ -7,14 +7,14 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CatrobatFile\VersionValidatorEventSubscriber;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\VersionValidatorEventSubscriber
  */
+#[CoversClass(VersionValidatorEventSubscriber::class)]
 class VersionValidatorEventSubscriberTest extends TestCase
 {
   private VersionValidatorEventSubscriber $version_validator;

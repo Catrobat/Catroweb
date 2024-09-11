@@ -10,14 +10,15 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixData;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\ExtractedCatrobatFile
  */
+#[CoversClass(ExtractedCatrobatFile::class)]
 class ExtractedCatrobatFileTest extends TestCase
 {
   private ExtractedCatrobatFile $extracted_catrobat_file;
@@ -130,6 +131,9 @@ class ExtractedCatrobatFileTest extends TestCase
       .'The Periodic Table [/app/project/3570]', $this->extracted_catrobat_file->getRemixUrlsString());
   }
 
+  /**
+   * @throws Exception
+   */
   public function testGetsRelativeAndAbsoluteRemixUrls(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -161,6 +165,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testCanExtractSimpleCatrobatAbsoluteRemixUrl(): void
   {
@@ -175,6 +181,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testNotExtractNumberFromNormalText(): void
   {
@@ -188,6 +196,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testCanExtractSimpleScratchAbsoluteRemixUrl(): void
   {
@@ -202,6 +212,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testCanExtractSimpleRelativeCatrobatRemixUrl(): void
   {
@@ -233,6 +245,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testExtractUniqueProgramRemixUrls(): void
   {
@@ -249,6 +263,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testDontExtractProgramRemixUrlsReferencingToCurrentProgram(): void
   {
@@ -265,6 +281,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testExtractOnlyOlderProgramRemixUrls(): void
   {
@@ -281,6 +299,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testCanExtractDoubleMergedProgramRemixUrls(): void
   {
@@ -301,6 +321,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testExtractUniqueProgramRemixUrlsOfDoubleMergedProgram(): void
   {
@@ -321,6 +343,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testDontExtractProgramRemixUrlsReferencingToCurrentDoubleMergedProgram(): void
   {
@@ -341,6 +365,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testCanExtractMultipleMergedRemixUrls(): void
   {
@@ -362,6 +388,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testExtractUniqueProgramRemixUrlsOfMultipleMergedProgram(): void
   {
@@ -383,6 +411,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testExtractOnlyOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsAnInitialVersion(): void
   {
@@ -404,6 +434,8 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws Exception
    */
   public function testExtractOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsNotAnInitialVersion(): void
   {
@@ -468,6 +500,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProjectXmlProperties());
   }
 
+  /**
+   * @throws \Exception
+   */
   public function testPreservesInvalid0XmlCharFromCollisionsWithOtherActors(): void
   {
     $filesystem = new Filesystem();
@@ -475,7 +510,7 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
-    Assert::assertEquals($count, 1);
+    Assert::assertEquals(1, $count);
 
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
     $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProjectXmlProperties());
@@ -483,9 +518,12 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
-    Assert::assertEquals($count, 1);
+    Assert::assertEquals(1, $count);
   }
 
+  /**
+   * @throws \Exception
+   */
   public function testPreservesInvalid0XmlCharFromCollisionsWithAnything(): void
   {
     $filesystem = new Filesystem();
@@ -493,7 +531,7 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
-    Assert::assertEquals($count, 1);
+    Assert::assertEquals(1, $count);
 
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
     $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProjectXmlProperties());
@@ -501,7 +539,7 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
-    Assert::assertEquals($count, 1);
+    Assert::assertEquals(1, $count);
   }
 
   public function testIOSXMLVersionWorksWithCurrentRegex(): void

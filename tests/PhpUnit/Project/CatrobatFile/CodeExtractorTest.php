@@ -7,13 +7,13 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 use App\Project\CatrobatCode\CodeObject;
 use App\Project\CatrobatCode\SyntaxHighlightingConstants;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(ExtractedCatrobatFile::class)]
 class CodeExtractorTest extends TestCase
 {
   public function testXmlWithIfAndCondition(): void

@@ -8,14 +8,14 @@ use App\Project\CatrobatCode\Parser\CodeStatistic;
 use App\Project\CatrobatCode\Parser\ParsedSimpleProject;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Project\CatrobatCode\Parser\ParsedSimpleProject
  */
+#[CoversClass(ParsedSimpleProject::class)]
 class ParsedSimpleProgramTest extends TestCase
 {
   protected ParsedSimpleProject $program;

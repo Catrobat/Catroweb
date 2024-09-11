@@ -7,6 +7,8 @@ namespace Tests\PhpUnit\Translation;
 use App\Translation\ItranslateApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -15,15 +17,17 @@ use Psr\Log\LoggerInterface;
 
 /**
  * @internal
- *
- * @covers \App\Translation\ItranslateApi
  */
+#[CoversClass(ItranslateApi::class)]
 class ItranslateApiTest extends TestCase
 {
   private ItranslateApi $api;
 
   protected MockObject $httpClient;
 
+  /**
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
@@ -32,6 +36,10 @@ class ItranslateApiTest extends TestCase
     $this->api = new ItranslateApi($this->httpClient, $this->createMock(LoggerInterface::class));
   }
 
+  /**
+   * @throws Exception
+   * @throws \JsonException
+   */
   public function testDetectLanguageCode(): void
   {
     $this->httpClient
@@ -51,6 +59,10 @@ class ItranslateApiTest extends TestCase
     $this->api->translate('testing', null, 'en');
   }
 
+  /**
+   * @throws Exception
+   * @throws \JsonException
+   */
   public function testSuccessDetectedLanguage(): void
   {
     $response = $this->createMock(ResponseInterface::class);
@@ -80,6 +92,10 @@ class ItranslateApiTest extends TestCase
     $this->assertEquals('test', $result->translation);
   }
 
+  /**
+   * @throws Exception
+   * @throws \JsonException
+   */
   public function testSuccessSpecifiedLanguage(): void
   {
     $response = $this->createMock(ResponseInterface::class);
@@ -108,6 +124,10 @@ class ItranslateApiTest extends TestCase
     $this->assertEquals('test', $result->translation);
   }
 
+  /**
+   * @throws Exception
+   * @throws \JsonException
+   */
   public function testNon200StatusCode(): void
   {
     $response = $this->createMock(ResponseInterface::class);
@@ -119,6 +139,10 @@ class ItranslateApiTest extends TestCase
     $this->assertNull($result);
   }
 
+  /**
+   * @throws Exception
+   * @throws \JsonException
+   */
   public function testExceptionThrown(): void
   {
     $exception = $this->createMock(GuzzleException::class);
@@ -141,6 +165,9 @@ class ItranslateApiTest extends TestCase
     $this->assertEquals(0.5, $this->api->getPreference('testing', 'de', 'en'));
   }
 
+  /**
+   * @throws Exception
+   */
   private function mockGenericResponse(): ResponseInterface
   {
     $response = $this->createMock(ResponseInterface::class);

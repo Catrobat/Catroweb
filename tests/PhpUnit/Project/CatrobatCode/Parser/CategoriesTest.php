@@ -10,17 +10,12 @@ use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @internal
- *
  * @coversNothing
+ *
+ * @internal
  */
 class CategoriesTest extends TestCase
 {
-  #[\Override]
-  protected function setUp(): void
-  {
-  }
-
   public function testMustDetectAllControlBricks(): void
   {
     $category = 'control';

@@ -7,14 +7,16 @@ namespace Tests\PhpUnit\Api\Services\Base;
 use App\Api\Services\Base\TranslatorAwareTrait;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use Behat\Behat\Definition\Translator\Translator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
- *
- * @covers \Tests\PhpUnit\Api\Services\Base\TranslatorAwareTraitTestClass
  */
+#[CoversClass(TranslatorAwareTraitTestClass::class)]
 final class TranslatorAwareTraitTest extends DefaultTestCase
 {
   protected MockObject|TranslatorAwareTraitTestClass $object;
@@ -22,32 +24,26 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockForAbstractClass(TranslatorAwareTraitTestClass::class);
+    $this->object = $this->getMockBuilder(TranslatorAwareTraitTestClass::class)
+      ->onlyMethods([])
+      ->onlyMethods([])
+      ->getMock()
+    ;
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testTestTraitExists(): void
   {
     $this->assertTrue(trait_exists(TranslatorAwareTrait::class));
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::__
-   */
+  #[Group('unit')]
   public function test(): void
   {
     $this->object = $this->getMockBuilder(TranslatorAwareTraitTestClass::class)
       ->disableOriginalConstructor()
       ->onlyMethods(['trans'])
-      ->getMockForAbstractClass()
+      ->getMock()
     ;
 
     $this->object->expects($this->once())->method('trans');
@@ -55,12 +51,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::trans
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testTransSuccess(): void
   {
     $translator = $this->createMock(Translator::class);
@@ -68,7 +61,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     $this->object = $this->getMockBuilder(TranslatorAwareTraitTestClass::class)
       ->disableOriginalConstructor()
       ->onlyMethods(['sanitizeLocale'])
-      ->getMockForAbstractClass()
+      ->getMock()
     ;
     $this->object->expects($this->once())->method('sanitizeLocale');
     $this->object->initTranslator($translator);
@@ -76,25 +69,28 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::trans
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testTransFailureHandling(): void
   {
     $translator = $this->createMock(Translator::class);
-    $translator->expects($this->exactly(2))->method('trans')->will(
-      $this->onConsecutiveCalls(
-        $this->throwException(new \Exception()),
-        'en',
-      )
-    );
+    $translator->method('trans')
+      ->willReturnCallback(function () {
+        static $callCount = 0;
+        ++$callCount;
+        if (1 === $callCount) {
+          throw new \Exception();
+        }
+
+        return 'en';
+      })
+    ;
+
     $this->object = $this->getMockBuilder(TranslatorAwareTraitTestClass::class)
       ->disableOriginalConstructor()
       ->onlyMethods(['sanitizeLocale', 'getLocaleFallback'])
-      ->getMockForAbstractClass()
+      ->getMock()
     ;
     $this->object->expects($this->once())->method('sanitizeLocale');
     $this->object->expects($this->once())->method('getLocaleFallback');
@@ -102,13 +98,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     $this->object->trans('id');
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::sanitizeLocale
-   */
+  #[Group('unit')]
   #[DataProvider('provideSanitizeLocaleData')]
   public function testSanitizeLocale(?string $input, string $expected): void
   {
@@ -135,13 +125,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     ];
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::isLocaleAValidLocaleWithUnderscore
-   */
+  #[Group('unit')]
   #[DataProvider('provideIsLocaleAValidLocaleWithUnderscoreData')]
   public function testIsLocaleAValidLocaleWithUnderscore(string $input, bool $expected): void
   {
@@ -165,13 +149,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     ];
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::isLocaleAValidTwoLetterLocale
-   */
+  #[Group('unit')]
   #[DataProvider('provideIsLocaleAValidTwoLetterLocaleData')]
   public function testIsLocaleAValidTwoLetterLocale(string $input, bool $expected): void
   {
@@ -194,13 +172,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     ];
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::normalizeLocaleFormatToLocaleWithUnderscore
-   */
+  #[Group('unit')]
   #[DataProvider('provideMapLocaleToLocaleWithUnderscoreData')]
   public function testMapLocaleToLocaleWithUnderscore(string $input, string $expected): void
   {
@@ -218,13 +190,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     ];
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::mapLocaleWithUnderscoreToTwoLetterCode
-   */
+  #[Group('unit')]
   #[DataProvider('provideMapLocaleWithUnderscoreToTwoLetterCodeData')]
   public function testMapLocaleWithUnderscoreToTwoLetterCode(string $input, string $expected): void
   {
@@ -242,13 +208,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     ];
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers       \App\Api\Services\Base\TranslatorAwareTrait::mapTwoLetterCodeToLocaleWithUnderscore
-   */
+  #[Group('unit')]
   #[DataProvider('provideMapTwoLetterCodeToLocaleWithUnderscoreData')]
   public function testMapTwoLetterCodeToLocaleWithUnderscore(string $input, string $expected): void
   {

@@ -7,15 +7,16 @@ namespace Tests\PhpUnit\Project;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
- *
- * @covers  \App\Project\AddProjectRequest
  */
+#[CoversClass(AddProjectRequest::class)]
 class AddProjectRequestTest extends TestCase
 {
   private File $file;
@@ -24,6 +25,9 @@ class AddProjectRequestTest extends TestCase
 
   private MockObject|User $user;
 
+  /**
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
@@ -38,6 +42,9 @@ class AddProjectRequestTest extends TestCase
     $this->assertInstanceOf(AddProjectRequest::class, $this->add_program_request);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testHoldsAUser(): void
   {
     $new_user = $this->createMock(User::class);

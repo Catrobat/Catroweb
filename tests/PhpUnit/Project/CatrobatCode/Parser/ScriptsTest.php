@@ -13,9 +13,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @internal
- *
  * @coversNothing
+ *
+ * @internal
  */
 class ScriptsTest extends TestCase
 {
@@ -73,7 +73,7 @@ class ScriptsTest extends TestCase
   }
 
   /**
-   * @return mixed[][]
+   * @return array[]
    */
   public static function provideScriptXMLProperties(): array
   {
