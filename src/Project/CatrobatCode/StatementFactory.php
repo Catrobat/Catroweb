@@ -310,19 +310,19 @@ class StatementFactory
           break;
         case self::NAME_ATTRIBUTE:
         case self::VALUE_STMT:
-          $tmpStatement = $this->generateValueStatement($statement, 0);
+          $tmpStatement = $this->generateValueStatement($statement);
           break;
         case self::USER_VARIABLE_STMT:
-          $tmpStatement = $this->generateUserVariableStatement($statement, 0);
+          $tmpStatement = $this->generateUserVariableStatement($statement);
           break;
         case self::POINTED_OBJECT_STMT:
-          $tmpStatement = $this->generateObjectStatement($statement, 0);
+          $tmpStatement = $this->generateObjectStatement($statement);
           break;
         case self::RECEIVED_MESSAGE_STMT:
-          $tmpStatement = $this->generateReceivedMessageStatement($statement, 0);
+          $tmpStatement = $this->generateReceivedMessageStatement($statement);
           break;
         case self::BROADCAST_MESSAGE_STMT:
-          $tmpStatement = $this->generateBroadcastMessageStatement($statement, 0);
+          $tmpStatement = $this->generateBroadcastMessageStatement($statement);
           break;
         case self::LOOK_STMT:
           $tmpStatement = $this->generateLookStatement($statement, $spaces);
@@ -544,12 +544,12 @@ class StatementFactory
     };
   }
 
-  private function generateValueStatement(\SimpleXMLElement $statement, int $spaces): ValueStatement
+  private function generateValueStatement(\SimpleXMLElement $statement): ValueStatement
   {
     $value = (string) $statement;
     $type = $this->getTypeOfValue($statement);
 
-    return new ValueStatement($this, $statement, $spaces, $value, $type);
+    return new ValueStatement($this, $statement, 0, $value, $type);
   }
 
   private function getTypeOfValue(\SimpleXMLElement $statement): ?string
@@ -564,7 +564,7 @@ class StatementFactory
     return null;
   }
 
-  private function generateUserVariableStatement(\SimpleXMLElement $statement, int $spaces): UserVariableStatement
+  private function generateUserVariableStatement(\SimpleXMLElement $statement): UserVariableStatement
   {
     $variableName = (string) $statement;
     if (null == $variableName) {
@@ -576,10 +576,10 @@ class StatementFactory
     if ($this->isTypeExisting($statement, $parent, self::SHOW_TEXT_STMT)
       || $this->isTypeExisting($statement, $parent, self::HIDE_TEXT_STMT)
     ) {
-      return new UserVariableStatement($this, $statement, $spaces, $variableName, true);
+      return new UserVariableStatement($this, $statement, 0, $variableName, true);
     }
 
-    return new UserVariableStatement($this, $statement, $spaces, $variableName);
+    return new UserVariableStatement($this, $statement, 0, $variableName);
   }
 
   private function isTypeExisting(\SimpleXMLElement $statement, mixed $reference, mixed $type): bool
@@ -594,27 +594,27 @@ class StatementFactory
     return false;
   }
 
-  private function generateObjectStatement(\SimpleXMLElement $statement, int $spaces): ObjectStatement
+  private function generateObjectStatement(\SimpleXMLElement $statement): ObjectStatement
   {
     $name = (string) $statement['name'];
     $factory = new StatementFactory();
     $this->currentObject->addCodeObject($factory->createObject($statement));
 
-    return new ObjectStatement($this, $spaces, $name);
+    return new ObjectStatement($this, 0, $name);
   }
 
-  private function generateReceivedMessageStatement(\SimpleXMLElement $statement, int $spaces): ReceivedMessageStatement
+  private function generateReceivedMessageStatement(\SimpleXMLElement $statement): ReceivedMessageStatement
   {
     $message = (string) $statement;
 
-    return new ReceivedMessageStatement($this, $statement, $spaces, $message);
+    return new ReceivedMessageStatement($this, $statement, 0, $message);
   }
 
-  private function generateBroadcastMessageStatement(\SimpleXMLElement $statement, int $spaces): BroadcastMessageStatement
+  private function generateBroadcastMessageStatement(\SimpleXMLElement $statement): BroadcastMessageStatement
   {
     $message = (string) $statement;
 
-    return new BroadcastMessageStatement($this, $statement, $spaces, $message);
+    return new BroadcastMessageStatement($this, $statement, 0, $message);
   }
 
   private function generateLookStatement(\SimpleXMLElement $statement, int $spaces): LookStatement

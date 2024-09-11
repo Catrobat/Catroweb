@@ -20,7 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  *      group_code?: string
  *  }
  */
-final class SecurityRolesBuilder
+final readonly class SecurityRolesBuilder
 {
   /**
    * @param array<string, array<string>> $rolesHierarchy

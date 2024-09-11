@@ -22,7 +22,6 @@ class UserApiProcessor extends AbstractApiProcessor
    */
   public function registerUser(RegisterRequest $request): User
   {
-    /** @var User $user */
     $user = $this->user_manager->create();
     $user->setUsername($request->getUsername());
     $user->setEmail($request->getEmail());
@@ -85,6 +84,6 @@ class UserApiProcessor extends AbstractApiProcessor
       $user->setCurrentlyWorkingOn($request->getCurrentlyWorkingOn());
     }
 
-    $this->user_manager->updateUser($user, true);
+    $this->user_manager->updateUser($user);
   }
 }

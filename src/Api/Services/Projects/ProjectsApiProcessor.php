@@ -14,6 +14,7 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 
 class ProjectsApiProcessor extends AbstractApiProcessor
@@ -32,6 +33,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
 
   /**
    * @throws \Exception
+   * @throws ORMException
    */
   public function addProject(AddProjectRequest $add_program_request): ?Program
   {
@@ -138,6 +140,9 @@ class ProjectsApiProcessor extends AbstractApiProcessor
     return true;
   }
 
+  /**
+   * @throws ORMException
+   */
   public function refreshUser(User $user): void
   {
     $this->entity_manager->refresh($user);

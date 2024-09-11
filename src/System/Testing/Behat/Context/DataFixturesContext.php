@@ -40,6 +40,7 @@ use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Exception\ORMException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Process\Process;
@@ -560,6 +561,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then the project :id should have :downloads downloads
+   *
+   * @throws ORMException
    */
   public function theProjectShouldHaveDownloads(string $id, string $downloads): void
   {
@@ -593,9 +596,6 @@ class DataFixturesContext implements Context
   public function theEmbroideryProjectShouldHaveTheExtension(string $extension): void
   {
     $project_extensions = $this->getProjectManager()->findOneByName('ZigZag Stich')->getExtensions();
-
-    Assert::assertNotNull($project_extensions);
-
     foreach ($project_extensions as $project_extension) {
       /* @var $project_extension Extension */
       Assert::assertStringContainsString($project_extension->getInternalTitle(), $extension, 'The Extension was not found!');
@@ -604,13 +604,14 @@ class DataFixturesContext implements Context
 
   /**
    * @Then the project with id :id should be marked with :arg2 extensions in the database
+   *
+   * @throws ORMException
    */
   public function theProjectShouldBeMarkedWithExtensionsInTheDatabase(string $id, string $count): void
   {
     $project = $this->getProjectManager()->find($id);
     $this->getManager()->refresh($project);
     $project_extensions = $project->getExtensions();
-    Assert::assertNotNull($project_extensions);
     Assert::assertCount((int) $count, $project_extensions, 'Too much or too less extensions found!');
   }
 
@@ -765,6 +766,7 @@ class DataFixturesContext implements Context
    * @Given /^there are media package files:$/
    *
    * @throws \ImagickException
+   * @throws \ImagickDrawException
    */
   public function thereAreMediaPackageFiles(TableNode $table): void
   {
@@ -1129,6 +1131,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^the users are created at:$/
+   *
+   * @throws \Exception
    */
   public function theUsersAreCreatedAt(TableNode $table): void
   {
@@ -1150,6 +1154,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^there are studios:$/
+   *
+   * @throws \DateMalformedStringException
    */
   public function thereAreStudios(TableNode $table): void
   {
@@ -1181,6 +1187,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^there are studio users:$/
+   *
+   * @throws \DateMalformedStringException
    */
   public function thereAreStudioUsers(TableNode $table): void
   {
@@ -1532,6 +1540,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then there should be project machine translations:
+   *
+   * @throws ORMException
    */
   public function thereShouldBeProjectMachineTranslations(TableNode $table): void
   {
@@ -1620,6 +1630,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then there should be comment machine translations:
+   *
+   * @throws ORMException
    */
   public function thereShouldBeCommentMachineTranslations(TableNode $table): void
   {
@@ -1675,6 +1687,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then there should be project custom translations:
+   *
+   * @throws ORMException
    */
   public function thereShouldBeProjectCustomTranslations(TableNode $table): void
   {

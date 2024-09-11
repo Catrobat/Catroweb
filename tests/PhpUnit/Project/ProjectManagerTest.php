@@ -27,6 +27,7 @@ use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Exception\ORMException;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
@@ -128,7 +129,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
   {
@@ -153,7 +154,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testSavesTheProgramToTheFileRepositoryIfTheUploadSucceeded(): void
   {
@@ -176,7 +177,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testSavesTheScreenshotsToTheScreenshotRepository(): void
   {
@@ -210,7 +211,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testFiresAnEventBeforeInsertingAProgram(): void
   {
@@ -237,7 +238,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testFiresAnEventWhenTheProgramIsInvalid(): void
   {
@@ -255,7 +256,8 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception|Exception
+   * @throws Exception
+   * @throws ORMException
    */
   public function testFiresAnEventWhenTheProgramIsStored(): void
   {

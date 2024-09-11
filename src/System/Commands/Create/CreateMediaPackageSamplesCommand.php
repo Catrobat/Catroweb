@@ -43,6 +43,9 @@ class CreateMediaPackageSamplesCommand extends Command
     parent::__construct();
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {

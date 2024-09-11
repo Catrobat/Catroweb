@@ -20,6 +20,8 @@ class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws \Exception
    */
   public function update(ExtractedCatrobatFile $file): void
   {

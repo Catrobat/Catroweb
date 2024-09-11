@@ -16,7 +16,6 @@ class FeaturedImageConstraintValidator extends ConstraintValidator
       return;
     }
 
-    /** @var FeaturedImageConstraint $featured_constraint */
     $featured_constraint = $constraint;
 
     $image_info = getimagesize($value);

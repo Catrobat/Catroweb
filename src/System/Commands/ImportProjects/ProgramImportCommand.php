@@ -10,6 +10,7 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixGraphLayout;
 use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\User\UserManager;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -46,6 +47,7 @@ class ProgramImportCommand extends Command
 
   /**
    * @throws \Exception
+   * @throws ORMException
    */
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int

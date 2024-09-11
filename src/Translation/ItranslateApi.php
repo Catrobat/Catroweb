@@ -86,6 +86,9 @@ class ItranslateApi implements TranslationApiInterface
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
 
+  /**
+   * @throws \JsonException
+   */
   #[\Override]
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {

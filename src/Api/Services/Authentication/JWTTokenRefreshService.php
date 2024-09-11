@@ -8,9 +8,9 @@ use Gesdinet\JWTRefreshTokenBundle\Service\RefreshToken;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class JWTTokenRefreshService
+readonly class JWTTokenRefreshService
 {
-  public function __construct(private readonly RefreshToken $refreshToken)
+  public function __construct(private RefreshToken $refreshToken)
   {
   }
 

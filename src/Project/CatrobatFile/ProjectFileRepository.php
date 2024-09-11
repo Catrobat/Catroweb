@@ -16,6 +16,9 @@ class ProjectFileRepository
 
   private readonly Filesystem $filesystem;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(
     string $catrobat_file_storage_dir,
     string $catrobat_file_extract_dir,
@@ -30,11 +33,17 @@ class ProjectFileRepository
     $this->filesystem = new Filesystem();
   }
 
+  /**
+   * @throws \Exception
+   */
   public function zipProject(string $path, string $id): void
   {
     $this->file_compressor->compress($path, $this->zip_dir, $id);
   }
 
+  /**
+   * @throws \Exception
+   */
   public function deleteProjectExtractFiles(string $id): void
   {
     FileHelper::removeDirectory($this->extract_dir.$id);

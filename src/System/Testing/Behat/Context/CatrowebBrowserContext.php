@@ -19,6 +19,7 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -108,6 +109,9 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^I should be logged (in|out)$/
+   *
+   * @throws ExpectationException
+   * @throws ExpectationException
    */
   public function iShouldBeLogged(string $arg1): void
   {
@@ -170,8 +174,6 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given /^cookie "([^"]+)" should not exist"$/
-   *
-   * @throws ExpectationException
    */
   public function cookieShouldNotExist(string $cookie_name): void
   {
@@ -904,6 +906,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @When /^I press enter in the search bar$/
+   *
+   * @throws ElementNotFoundException
    */
   public function iPressEnterInTheSearchBar(): void
   {
@@ -1038,6 +1042,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given I use a valid JWT token for :username
+   *
+   * @throws JWTEncodeFailureException
    */
   public function iUseAValidJwtTokenFor(string $username): void
   {
@@ -1048,6 +1054,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given I use a valid BEARER cookie for :username
+   *
+   * @throws JWTEncodeFailureException
    */
   public function iUseAValidBEARERCookieFor(string $username): void
   {
@@ -1086,6 +1094,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given I have a project
+   *
+   * @throws \Exception
    */
   public function iHaveAProject(): void
   {
@@ -1094,6 +1104,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given /^I am using pocketcode with language version "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function iAmUsingPocketcodeWithLanguageVersion(string $version): void
   {
@@ -1104,6 +1116,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given I have an embroidery project
+   *
+   * @throws \Exception
    */
   public function iHaveAnEmbroideryProject(): void
   {
@@ -1112,6 +1126,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given /^I am using pocketcode for "([^"]*)" with version "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function iAmUsingPocketcodeForWithVersion(string $platform, string $version): void
   {
@@ -1147,6 +1163,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^following parameters are sent to jenkins:$/
+   *
+   * @throws \Exception
    */
   public function followingParametersAreSentToJenkins(TableNode $table): void
   {
@@ -1202,6 +1220,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given /^the project apk status is flagged "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function theProjectApkStatusIsFlagged(string $arg1): void
   {
@@ -1226,6 +1246,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^no build request will be sent to jenkins$/
+   *
+   * @throws \Exception
    */
   public function noBuildRequestWillBeSentToJenkins(): void
   {
@@ -1594,7 +1616,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function theResourcesShouldNotContainTheUnnecessaryFiles(): void
   {
     $files = new \RecursiveIteratorIterator(
-      new \RecursiveDirectoryIterator($this->EXTRACT_RESOURCES_DIR, \RecursiveDirectoryIterator::SKIP_DOTS),
+      new \RecursiveDirectoryIterator($this->EXTRACT_RESOURCES_DIR, \FilesystemIterator::SKIP_DOTS),
       \RecursiveIteratorIterator::CHILD_FIRST
     );
 
@@ -1676,6 +1698,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given the next generated token will be :token
+   *
+   * @throws \Exception
    */
   public function theNextGeneratedTokenWillBe(string $token): void
   {
@@ -1714,6 +1738,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^I should see the featured table:$/
+   *
+   * @throws ResponseTextException
    */
   public function iShouldSeeTheFeaturedTable(TableNode $table): void
   {
@@ -1739,10 +1765,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^I write "([^"]*)" in textarea with label "([^"]*)"$/
-   *
-   * @param string $arg1
    */
-  public function iWriteInTextareaWithLabel($arg1, string $arg2): void
+  public function iWriteInTextareaWithLabel(string $arg1, string $arg2): void
   {
     $textarea = $this->getSession()->getPage()->findField($arg2);
     Assert::assertNotNull($textarea, 'Textarea not found');
@@ -1768,6 +1792,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^I should see the user table:$/
+   *
+   * @throws ResponseTextException
    */
   public function iShouldSeeTheUserTable(TableNode $table): void
   {

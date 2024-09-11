@@ -12,6 +12,7 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,16 +25,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @deprecated
  */
-class UploadController
+readonly class UploadController
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProjectManager $project_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em)
+  public function __construct(private UserManager $user_manager, private TokenStorageInterface $token_storage, private ProjectManager $project_manager, private TranslatorInterface $translator, private LoggerInterface $logger, private EntityManagerInterface $em)
   {
   }
 
   /**
-   * @deprecated
+   * @throws \Exception|ORMException
    *
-   * @throws \Exception
+   * @deprecated
    */
   #[Route(path: '/api/upload/upload.json', name: 'catrobat_api_upload', defaults: ['_format' => 'json'], methods: ['POST'])]
   public function uploadAction(Request $request): JsonResponse
@@ -44,7 +45,8 @@ class UploadController
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
+   * @throws \JsonException
    */
   private function processUpload(Request $request): JsonResponse
   {

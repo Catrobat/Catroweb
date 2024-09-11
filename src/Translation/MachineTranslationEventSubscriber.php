@@ -85,6 +85,9 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
     $this->findProjectAndIncrement($project_id, $source_language, $target_language, self::CACHED_PROVIDER);
   }
 
+  /**
+   * @throws \JsonException
+   */
   private function getParameters(TerminateEvent $event): array
   {
     $json = $this->getJson($event);
@@ -111,6 +114,9 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
     ];
   }
 
+  /**
+   * @throws \JsonException
+   */
   private function getTranslation(TerminateEvent $event): array
   {
     $json = $this->getJson($event);
@@ -122,6 +128,9 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
     ];
   }
 
+  /**
+   * @throws \JsonException
+   */
   private function getJson(TerminateEvent $event): array
   {
     $json_response = $event->getResponse()->getContent();

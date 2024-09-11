@@ -61,6 +61,9 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
     return new JWTResponse();
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   public function authenticationOauthPost(OAuthLoginRequest $o_auth_login_request, int &$responseCode, array &$responseHeaders): array|object|null
   {

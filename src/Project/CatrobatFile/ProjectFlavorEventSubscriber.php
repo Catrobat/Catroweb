@@ -10,9 +10,9 @@ use App\Project\Event\ProjectBeforePersistEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class ProjectFlavorEventSubscriber implements EventSubscriberInterface
+readonly class ProjectFlavorEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly RequestStack $request_stack)
+  public function __construct(private RequestStack $request_stack)
   {
   }
 

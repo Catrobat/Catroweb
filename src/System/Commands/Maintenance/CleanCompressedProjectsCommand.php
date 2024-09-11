@@ -15,6 +15,9 @@ class CleanCompressedProjectsCommand extends Command
 {
   private readonly ?string $compressed_path;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     parent::__construct();

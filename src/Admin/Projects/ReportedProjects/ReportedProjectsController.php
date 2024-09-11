@@ -6,21 +6,23 @@ namespace App\Admin\Projects\ReportedProjects;
 
 use App\DB\Entity\Project\ProgramInappropriateReport;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Exception\LockException;
+use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @phpstan-extends CRUDController<ProgramInappropriateReport>
  */
 class ReportedProjectsController extends CRUDController
 {
+  /**
+   * @throws LockException
+   * @throws ModelManagerThrowable
+   */
   public function unreportProjectAction(): RedirectResponse
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object) {
-      throw new NotFoundHttpException();
-    }
 
     $project = $object->getProgram();
     $project->setVisible(true);
@@ -33,13 +35,14 @@ class ReportedProjectsController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+  /**
+   * @throws LockException
+   * @throws ModelManagerThrowable
+   */
   public function acceptProjectReportAction(): RedirectResponse
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object) {
-      throw new NotFoundHttpException();
-    }
 
     $project = $object->getProgram();
     $project->setVisible(false);

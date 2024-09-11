@@ -6,14 +6,19 @@ namespace App\Admin\Projects\ApproveProjects;
 
 use App\DB\Entity\Project\Program;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Exception\LockException;
+use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @phpstan-extends CRUDController<Program>
  */
 class ApproveProjectsController extends CRUDController
 {
+  /**
+   * @throws LockException
+   * @throws ModelManagerThrowable
+   */
   public function approveAction(): RedirectResponse
   {
     /** @var Program|null $object */
@@ -35,20 +40,20 @@ class ApproveProjectsController extends CRUDController
     return new RedirectResponse($this->getRedirectionUrl());
   }
 
+  /**
+   * @throws LockException
+   * @throws ModelManagerThrowable
+   */
   public function invisibleAction(): RedirectResponse
   {
-    /** @var Program|null $object */
-    $object = $this->admin->getSubject();
-    if (null === $object) {
-      throw new NotFoundHttpException('Unable to find project');
-    }
+    /** @var Program $project */
+    $project = $this->admin->getSubject();
+    $project->setApproved(true);
+    $project->setVisible(false);
 
-    $object->setApproved(true);
-    $object->setVisible(false);
+    $this->admin->update($project);
 
-    $this->admin->update($object);
-
-    $this->addFlash('sonata_flash_success', $object->getName().' set to invisible'.$this->getRemainingProjectCount().' remaining.');
+    $this->addFlash('sonata_flash_success', $project->getName().' set to invisible'.$this->getRemainingProjectCount().' remaining.');
 
     return new RedirectResponse($this->getRedirectionUrl());
   }

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Admin\Users\ReportedUsers;
 
 use App\DB\Entity\User\User;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -13,6 +15,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class ReportedUsersController extends CRUDController
 {
+  /**
+   * @throws ContainerExceptionInterface
+   * @throws NotFoundExceptionInterface
+   */
   public function createUrlProjectsAction(): RedirectResponse
   {
     $filter = [
@@ -26,6 +32,10 @@ class ReportedUsersController extends CRUDController
     );
   }
 
+  /**
+   * @throws ContainerExceptionInterface
+   * @throws NotFoundExceptionInterface
+   */
   public function createUrlCommentsAction(): RedirectResponse
   {
     $filter = [

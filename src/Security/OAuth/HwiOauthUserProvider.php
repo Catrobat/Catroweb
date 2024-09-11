@@ -20,6 +20,9 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
     $this->properties = array_merge($this->properties, $properties);
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
   {
@@ -37,7 +40,6 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
       $user = $this->user_manager->findUserByEmail($response->getEmail());
       // if user with the given email doesnt exists create a new user
       if (!$user instanceof UserInterface) {
-        /** @var User $user */
         $user = $this->user_manager->create();
         // generate random username for example user12345678, needs to be discussed
         $user->setUsername($this->createRandomUsername($response));

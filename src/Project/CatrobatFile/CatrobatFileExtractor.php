@@ -12,6 +12,9 @@ class CatrobatFileExtractor
 {
   private readonly string $extract_dir;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(
     string $extract_dir,
     private readonly string $extract_path,

@@ -43,6 +43,9 @@ class GenerateTestDataCommand extends Command
     ;
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {

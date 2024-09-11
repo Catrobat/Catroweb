@@ -15,9 +15,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @deprecated
  */
-class UploadExceptionEventSubscriber implements EventSubscriberInterface
+readonly class UploadExceptionEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly TranslatorInterface $translator)
+  public function __construct(private TranslatorInterface $translator)
   {
   }
 

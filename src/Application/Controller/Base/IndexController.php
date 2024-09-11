@@ -41,9 +41,9 @@ class IndexController extends AbstractController
   protected function getFeaturedSliderData(string $flavor): array
   {
     if (Flavor::PHIROCODE === $flavor) {
-      $featured_items = $this->featured_repository->getFeaturedItems(Flavor::POCKETCODE, 10, 0);
+      $featured_items = $this->featured_repository->getFeaturedItems(Flavor::POCKETCODE, 10);
     } else {
-      $featured_items = $this->featured_repository->getFeaturedItems($flavor, 10, 0);
+      $featured_items = $this->featured_repository->getFeaturedItems($flavor, 10);
     }
 
     $featuredData = [];

@@ -7,7 +7,6 @@ namespace App\User\EventListener;
 use App\DB\Entity\User\User;
 use App\User\Achievements\AchievementManager;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class UserPostUpdateNotifier
 {
@@ -16,7 +15,7 @@ class UserPostUpdateNotifier
   }
 
   /**
-   * @throws TransportExceptionInterface
+   * @throws \Exception
    */
   public function postUpdate(User $user, LifecycleEventArgs $event): void
   {

@@ -88,7 +88,7 @@ class UserAdmin extends AbstractAdmin
       ->add('plainPassword', PasswordType::class, [
         'required' => (!$this->hasSubject() || null === $this->getSubject()->getId()),
       ])
-      ->add('enabled', null)
+      ->add('enabled')
       ->end()
       ->with('roles', ['class' => 'col-md-8'])
       ->add('realRoles', RolesMatrixType::class, [

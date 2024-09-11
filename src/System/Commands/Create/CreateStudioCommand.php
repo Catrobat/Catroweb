@@ -10,6 +10,7 @@ use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -81,6 +82,9 @@ class CreateStudioCommand extends Command
     }
   }
 
+  /**
+   * @throws ORMException
+   */
   private function createStudio(User $admin, string $name, string $description, bool $is_public, bool $is_enabled, array $usernames, array $statuses, bool $allow_comments, array $projects, ?string $cover_path = null): int
   {
     $studio = (new Studio())

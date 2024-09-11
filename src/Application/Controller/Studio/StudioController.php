@@ -221,6 +221,8 @@ class StudioController extends AbstractController
   }
 
   /**
+   * @throws \JsonException
+   *
    * @internal route only
    */
   #[Route(path: '/studio/member/promote', name: 'studio_promote_member', methods: ['PUT'])]
@@ -250,6 +252,8 @@ class StudioController extends AbstractController
   }
 
   /**
+   * @throws \JsonException
+   *
    * @internal route only
    */
   #[Route(path: '/studio/member/ban', name: 'studio_ban_user', methods: ['PUT'])]

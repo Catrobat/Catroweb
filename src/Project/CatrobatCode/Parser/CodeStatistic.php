@@ -113,7 +113,7 @@ class CodeStatistic
     $objects = array_merge([$object_list_container->getBackground()], $object_list_container->getObjects());
 
     foreach ($objects as $object) {
-      /* @var ParsedObject|ParsedObjectGroup */
+      /* @var ParsedObject|ParsedObjectGroup $this */
       if ($object->isGroup()) {
         foreach ($object->getObjects() as $group_object) {
           $this->updateObjectStatistic($group_object);

@@ -8,6 +8,8 @@ use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Sonata\AdminBundle\Bridge\Exporter\AdminExporter;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,9 +22,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 abstract class AbstractMachineTranslationAdminController extends CRUDController
 {
-  protected const TYPE_PROJECT = 'TYPE_PROJECT';
+  protected const string TYPE_PROJECT = 'TYPE_PROJECT';
 
-  protected const TYPE_COMMENT = 'TYPE_COMMENT';
+  protected const string TYPE_COMMENT = 'TYPE_COMMENT';
 
   protected string $type;
 
@@ -32,6 +34,10 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
   ) {
   }
 
+  /**
+   * @throws ContainerExceptionInterface
+   * @throws NotFoundExceptionInterface
+   */
   #[\Override]
   public function listAction(Request $request): Response
   {

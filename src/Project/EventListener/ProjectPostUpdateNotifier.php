@@ -18,6 +18,9 @@ class ProjectPostUpdateNotifier
   {
   }
 
+  /**
+   * @throws \Exception
+   */
   public function postPersist(Program $project, LifecycleEventArgs $event): void
   {
     $user = $project->getUser();
@@ -25,6 +28,9 @@ class ProjectPostUpdateNotifier
     $this->addBronzeUserAchievement($project->getUser());
   }
 
+  /**
+   * @throws \Exception
+   */
   public function postUpdate(Program $project, LifecycleEventArgs $event): void
   {
     $user = $project->getUser();

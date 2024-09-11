@@ -13,9 +13,9 @@ use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
-class ExampleProjectImageListener
+readonly class ExampleProjectImageListener
 {
-  public function __construct(private readonly ImageRepository $repository)
+  public function __construct(private ImageRepository $repository)
   {
   }
 
@@ -29,6 +29,9 @@ class ExampleProjectImageListener
     $example->setImageType($file->guessExtension());
   }
 
+  /**
+   * @throws \ImagickException
+   */
   public function postPersist(ExampleProgram $example, PostPersistEventArgs $event): void
   {
     $file = $example->file;
@@ -51,6 +54,9 @@ class ExampleProjectImageListener
     $example->setImageType($file->guessExtension());
   }
 
+  /**
+   * @throws \ImagickException
+   */
   public function postUpdate(ExampleProgram $example, PostUpdateEventArgs $event): void
   {
     $file = $example->file;

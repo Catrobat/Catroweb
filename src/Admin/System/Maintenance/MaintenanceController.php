@@ -145,19 +145,19 @@ class MaintenanceController extends CRUDController
     $RemovableObjects = [];
     $description = "This will remove all compressed catrobat files in the 'compressed'-directory and flag the projects accordingly";
     $rm = new RemovableMemory('Compressed Catrobatfiles', $description);
-    $this->setSizeOfObject($rm, strval($this->file_storage_dir));
+    $this->setSizeOfObject($rm, $this->file_storage_dir);
     $rm->setCommandName('Delete compressed files');
     $rm->setCommandLink($this->admin->generateUrl('compressed'));
     $RemovableObjects[] = $rm;
     $description = "This will remove all generated apk-files in the 'apk'-directory and flag the projects accordingly";
     $rm = new RemovableMemory('Generated APKs', $description);
-    $this->setSizeOfObject($rm, strval($this->apk_dir), ['apk']);
+    $this->setSizeOfObject($rm, $this->apk_dir, ['apk']);
     $rm->setCommandName('Delete APKs');
     $rm->setCommandLink($this->admin->generateUrl('apk'));
     $RemovableObjects[] = $rm;
     $description = 'This will remove all log files.';
     $rm = new RemovableMemory('Logs', $description);
-    $this->setSizeOfObject($rm, strval($this->log_dir));
+    $this->setSizeOfObject($rm, $this->log_dir);
     $rm->setCommandName('Delete log files');
     $rm->setCommandLink($this->admin->generateUrl('delete_logs'));
     $rm->setArchiveCommandLink($this->admin->generateUrl('archive_logs'));
@@ -165,14 +165,14 @@ class MaintenanceController extends CRUDController
     $RemovableObjects[] = $rm;
     $freeSpace = disk_free_space('/');
     $usedSpace = disk_total_space('/') - $freeSpace;
-    $usedSpace = $usedSpace < 0 ? 0 : $usedSpace;
+    $usedSpace = max($usedSpace, 0);
 
     $usedSpaceRaw = $usedSpace;
     foreach ($RemovableObjects as $obj) {
       $usedSpaceRaw -= $obj->size_raw;
     }
 
-    $projectsSize = $this->get_dir_size(strval($this->file_storage_dir));
+    $projectsSize = $this->get_dir_size($this->file_storage_dir);
     $usedSpaceRaw -= $projectsSize;
     $whole_ram = (float) shell_exec("free | grep Mem | awk '{print $2}'") * 1_000;
     $used_ram = (float) shell_exec("free | grep Mem | awk '{print $3}'") * 1_000;
@@ -235,7 +235,7 @@ class MaintenanceController extends CRUDController
     return $count_size;
   }
 
-  private function setSizeOfObject(RemovableMemory &$object, string $path, ?array $extension = null): void
+  private function setSizeOfObject(RemovableMemory $object, string $path, ?array $extension = null): void
   {
     if (is_dir($path)) {
       $size = $this->get_dir_size($path, $extension);

@@ -39,9 +39,7 @@ abstract class ParsedObjectsContainer
             $current_group = new ParsedObjectGroup($object_xml_properties);
             break;
           case Constants::GROUP_ITEM_SPRITE_TYPE:
-            if ($current_group) {
-              $current_group->addObject(new ParsedObject($object_xml_properties));
-            }
+            $current_group?->addObject(new ParsedObject($object_xml_properties));
 
             break;
           default:
@@ -63,6 +61,9 @@ abstract class ParsedObjectsContainer
     }
   }
 
+  /**
+   * @throws \Exception
+   */
   private function getAllObjectXMLProperties(): array
   {
     $all_object_xmls = [];
@@ -78,6 +79,9 @@ abstract class ParsedObjectsContainer
     return $all_object_xmls;
   }
 
+  /**
+   * @throws \Exception
+   */
   private function getPointedObjectXMLProperties(\SimpleXMLElement $object_xml): array
   {
     $all_pointed_object_xmls = [];
@@ -92,6 +96,9 @@ abstract class ParsedObjectsContainer
     return $all_pointed_object_xmls;
   }
 
+  /**
+   * @throws \Exception
+   */
   private function dereference(\SimpleXMLElement $object_xml_properties): \SimpleXMLElement
   {
     if (null != $object_xml_properties[Constants::REFERENCE_ATTRIBUTE]) {

@@ -8,6 +8,7 @@ use App\Storage\FileHelper;
 use App\System\Commands\Helpers\CommandHelper;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\NullOutput;
@@ -38,6 +39,7 @@ class ImportProjectsFromShare extends Command
 
   /**
    * @throws \Exception
+   * @throws ExceptionInterface
    */
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -66,6 +68,9 @@ class ImportProjectsFromShare extends Command
     };
   }
 
+  /**
+   * @throws \JsonException
+   */
   private function downloadProjects(string $dir, int $limit, string $url, OutputInterface $output): void
   {
     $downloads_left = $limit;
@@ -86,12 +91,10 @@ class ImportProjectsFromShare extends Command
         try {
           $project_json = @file_get_contents($project_url);
           file_put_contents($name, $project_json);
+          --$downloads_left;
           if (false === $project_json) {
-            --$downloads_left;
             continue;
           }
-
-          --$downloads_left;
         } catch (\Exception $e) {
           $output->writeln('File <'.$project_url.'> download failed');
           $output->writeln('Error code: '.$e->getCode());
@@ -103,7 +106,7 @@ class ImportProjectsFromShare extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
    */
   private function importProjects(string $import_dir, string $username, int $remix_layout, OutputInterface $output): void
   {

@@ -72,7 +72,7 @@ class ProfileController extends AbstractController
     ]);
   }
 
-  #[Route(path: '/followUser/{id}', name: 'follow_user', methods: ['GET'], defaults: ['id' => 0])]
+  #[Route(path: '/followUser/{id}', name: 'follow_user', defaults: ['id' => 0], methods: ['GET'])]
   public function followUser(string $id, UserManager $user_manager, NotificationManager $notification_service): RedirectResponse
   {
     /** @var User|null $user */
@@ -95,7 +95,7 @@ class ProfileController extends AbstractController
     return $this->redirectToRoute('profile', ['id' => $id]);
   }
 
-  #[Route(path: '/unfollowUser/{id}', name: 'unfollow_user', methods: ['GET'], defaults: ['id' => 0])]
+  #[Route(path: '/unfollowUser/{id}', name: 'unfollow_user', defaults: ['id' => 0], methods: ['GET'])]
   public function unfollowUser(string $id, UserManager $user_manager): RedirectResponse
   {
     /** @var User|null $user */
@@ -116,7 +116,7 @@ class ProfileController extends AbstractController
     return $this->redirectToRoute('profile', ['id' => $id]);
   }
 
-  #[Route(path: '/follow/{type}', name: 'list_follow', methods: ['POST'], defaults: ['_format' => 'json'], requirements: ['type' => 'follower|follows'])]
+  #[Route(path: '/follow/{type}', name: 'list_follow', requirements: ['type' => 'follower|follows'], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function listFollow(Request $request, string $type, UserManager $user_manager): JsonResponse
   {
     $page = $request->request->getInt('page');

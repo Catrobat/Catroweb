@@ -10,6 +10,8 @@ use App\Project\ProjectManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
+use Sonata\AdminBundle\Exception\LockException;
+use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -24,19 +26,18 @@ class ApkController extends CRUDController
   ) {
   }
 
+  /**
+   * @throws LockException
+   * @throws ModelManagerThrowable
+   */
   public function resetApkBuildStatusAction(): RedirectResponse
   {
-    /** @var Program|null $project */
+    /** @var Program $project */
     $project = $this->admin->getSubject();
-
-    if (null === $project) {
-      $this->addFlash('sonata_flash_error', "Can't reset APK status");
-    } else {
-      $project->setApkStatus(Program::APK_NONE);
-      $project->setApkRequestTime(null);
-      $this->admin->update($project);
-      $this->addFlash('sonata_flash_success', 'Reset APK status of '.$project->getName().' successful');
-    }
+    $project->setApkStatus(Program::APK_NONE);
+    $project->setApkRequestTime(null);
+    $this->admin->update($project);
+    $this->addFlash('sonata_flash_success', 'Reset APK status of '.$project->getName().' successful');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
@@ -46,18 +47,13 @@ class ApkController extends CRUDController
    */
   public function requestApkRebuildAction(): RedirectResponse
   {
-    /** @var Program|null $project */
+    /** @var Program $project */
     $project = $this->admin->getSubject();
-
-    if (null === $project) {
-      $this->addFlash('sonata_flash_error', "Can't trigger APK rebuild");
-    } else {
-      $this->jenkins_dispatcher->sendBuildRequest($project->getId());
-      $project->setApkRequestTime(TimeUtils::getDateTime());
-      $project->setApkStatus(Program::APK_PENDING);
-      $this->admin->update($project);
-      $this->addFlash('sonata_flash_success', 'Requested a rebuild of '.$project->getName());
-    }
+    $this->jenkins_dispatcher->sendBuildRequest($project->getId());
+    $project->setApkRequestTime(TimeUtils::getDateTime());
+    $project->setApkStatus(Program::APK_PENDING);
+    $this->admin->update($project);
+    $this->addFlash('sonata_flash_success', 'Requested a rebuild of '.$project->getName());
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }

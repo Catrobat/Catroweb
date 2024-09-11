@@ -65,7 +65,7 @@ class FollowerController extends AbstractController
   /**
    * Todo -> move to CAPI.
    */
-  #[Route(path: '/follower/unfollow/{id}', name: 'unfollow', methods: ['DELETE'], defaults: ['id' => 0])]
+  #[Route(path: '/follower/unfollow/{id}', name: 'unfollow', defaults: ['id' => 0], methods: ['DELETE'])]
   public function unfollowUser(string $id): JsonResponse
   {
     /** @var User|null $user */
@@ -97,7 +97,7 @@ class FollowerController extends AbstractController
   /**
    * Todo -> move to CAPI.
    */
-  #[Route(path: '/follower/follow/{id}', name: 'follow', methods: ['POST'], defaults: ['id' => 0])]
+  #[Route(path: '/follower/follow/{id}', name: 'follow', defaults: ['id' => 0], methods: ['POST'])]
   public function followUser(string $id): JsonResponse
   {
     /** @var User|null $user */

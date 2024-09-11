@@ -35,6 +35,9 @@ class ProjectDataFixtures
 
   private static int $number_of_projects = 0;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(private readonly UserManager $user_manager, private readonly ProjectManager $project_manager,
     private readonly EntityManagerInterface $entity_manager, private readonly ProjectFileRepository $project_file_repository,
     private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,

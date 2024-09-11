@@ -19,6 +19,9 @@ class AuthenticationManager
   {
   }
 
+  /**
+   * @throws \Exception
+   */
   public function getAuthenticatedUser(): ?User
   {
     $token = $this->token_storage->getToken();
@@ -47,6 +50,9 @@ class AuthenticationManager
     return $this->jwt_manager->create($user);
   }
 
+  /**
+   * @throws \Exception
+   */
   protected function getUserFromAuthenticationToken(string $token): ?User
   {
     $payload = $this->user_manager->decodeToken($token);

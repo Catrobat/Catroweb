@@ -50,14 +50,14 @@ class NotificationController extends AbstractController
 
       if ($notification instanceof LikeNotification) {
         $user = $notification->getLikeFrom();
-        if ($user != $this->getUser()) {
+        if ($user !== $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $reaction_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'reaction';
           $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
         }
       } elseif ($notification instanceof CommentNotification) {
-        if ($notification->getComment()->getUser() != $this->getUser()) {
+        if ($notification->getComment()->getUser() !== $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $comment_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'comment';
@@ -65,7 +65,7 @@ class NotificationController extends AbstractController
         }
       } elseif ($notification instanceof NewProgramNotification) {
         $user = $notification->getProgram()->getUser();
-        if ($user != $this->getUser()) {
+        if ($user !== $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $follower_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'program';
@@ -73,7 +73,7 @@ class NotificationController extends AbstractController
         }
       } elseif ($notification instanceof FollowNotification) {
         $user = $notification->getFollower();
-        if ($user != $this->getUser()) {
+        if ($user !== $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $follower_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'follow';
@@ -81,7 +81,7 @@ class NotificationController extends AbstractController
         }
       } elseif ($notification instanceof RemixNotification) {
         $user = $notification->getRemixFrom();
-        if ($user != $this->getUser()) {
+        if ($user !== $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $remix_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'remix';

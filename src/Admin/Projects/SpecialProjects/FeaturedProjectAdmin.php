@@ -47,10 +47,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
   ) {
   }
 
-  /**
-   * @param FeaturedProgram $object
-   */
-  public function getFeaturedImageUrl($object): string
+  public function getFeaturedImageUrl(FeaturedProgram $object): string
   {
     return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType(), true);
   }

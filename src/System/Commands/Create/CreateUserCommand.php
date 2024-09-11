@@ -15,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:user:create', description: 'Create a user')]
 final class CreateUserCommand extends Command
 {
-  public function __construct(private UserManager $userManager)
+  public function __construct(private readonly UserManager $userManager)
   {
     parent::__construct();
   }

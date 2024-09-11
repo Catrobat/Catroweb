@@ -26,28 +26,14 @@ class FeaturedController extends AbstractController
   #[Route(path: '/api/projects/ios-featured.json', name: 'api_ios_featured_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function getFeaturedIOSProjects(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): JsonResponse
   {
-    return $this->getFeaturedProjects($request, true, $image_repository, $repository);
-  }
-
-  /**
-   * @throws NonUniqueResultException
-   */
-  private function getFeaturedProjects(Request $request, bool $ios_only, ImageRepository $image_repository,
-    FeaturedRepository $repository): JsonResponse
-  {
     $flavor = $request->attributes->get('flavor');
 
     $limit = (int) $request->query->get('limit', 20);
     $offset = (int) $request->query->get('offset', 0);
-
-    $platform = null;
-
-    if ($ios_only) {
-      $platform = 'ios';
-    }
+    $platform = 'ios';
 
     $featured_projects = $repository->getFeaturedPrograms($flavor, $limit, $offset, $platform);
-    $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor, $ios_only);
+    $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor, true);
 
     $retArray = [];
     $retArray['CatrobatProjects'] = [];

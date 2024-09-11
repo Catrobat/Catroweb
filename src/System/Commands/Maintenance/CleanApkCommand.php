@@ -7,8 +7,6 @@ namespace App\System\Commands\Maintenance;
 use App\DB\Entity\Project\Program;
 use App\Storage\FileHelper;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,8 +22,7 @@ class CleanApkCommand extends Command
   }
 
   /**
-   * @throws NoResultException
-   * @throws NonUniqueResultException
+   * @throws \Exception
    */
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int

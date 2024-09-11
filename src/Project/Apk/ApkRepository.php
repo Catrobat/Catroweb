@@ -8,10 +8,13 @@ use App\Storage\FileHelper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ApkRepository
+readonly class ApkRepository
 {
-  private readonly ?string $dir;
+  private ?string $dir;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     $apk_dir = (string) $parameter_bag->get('catrobat.apk.dir');

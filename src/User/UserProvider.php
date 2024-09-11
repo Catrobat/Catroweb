@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 /**
  * @phpstan-implements UserProviderInterface<User>
  */
-class UserProvider implements UserProviderInterface
+readonly class UserProvider implements UserProviderInterface
 {
   public function __construct(private UserManager $userManager)
   {
