@@ -41,7 +41,7 @@
     "@babel/preset-env": "^7.25.4",
     "@hotwired/stimulus": "^3.2.2",
     "@symfony/webpack-encore": "^4.7.0",
-    "auto-changelog": "^2.4.0",
+    "auto-changelog": "^2.5.0",
     "autoprefixer": "^10.4.20",
     "browserslist": "^4.23.3",
     "core-js": "^3.38.1",
