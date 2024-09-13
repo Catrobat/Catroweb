@@ -75,7 +75,7 @@
     let showNewAchievementAnimation = false;
     {% if most_recent_achievement != null and most_recent_achievement_seen_at == null %}
       showNewAchievementAnimation = true;
-      const assetPathNewAchievementPopupBackgroundSVG = "{{ asset('/images/achievements/new_achievement_popup.svg') }}";
+      const assetPathNewAchievementPopupBackgroundSVG = "{{ asset('/images/achievements/new-achievement-popup.svg') }}";
       const assetPathBadgeSVG = "{{ asset(most_recent_achievement.getBadgeSvgPath()) }}";
       const assetPathBannerSVG = "{{ asset(most_recent_achievement.getBannerSvgPath()) }}";
       const bannerColor = "{{ most_recent_achievement.getBannerColor() }}";

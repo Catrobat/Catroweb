@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 import { deleteCookie } from '../Security/CookieHelper'
 import MessageDialogs from '../Components/MessageDialogs'
 import { ApiDeleteFetch, ApiPutFetch } from '../Api/ApiHelper'
+import VerifyAccountHandler from './VerifyAccountHandler'
 
 require('./Profile.scss')
 
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new OwnProjectList(projectsContainer, url, theme, emptyMessage, baseUrl).initialize()
   new OwnProfile(baseUrl).initializeAll()
+  new VerifyAccountHandler().init()
 })
 
 class OwnProfile {

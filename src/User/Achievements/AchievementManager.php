@@ -125,9 +125,17 @@ class AchievementManager
   /**
    * @throws \Exception
    */
-  public function unlockAchievementVerifiedDeveloper(User $user): ?UserAchievement
+  public function unlockAchievementAccountCreated(User $user): ?UserAchievement
   {
-    return $this->unlockAchievement($user, Achievement::VERIFIED_DEVELOPER, $user->getCreatedAt());
+    return $this->unlockAchievement($user, Achievement::ACCOUNT_CREATED, $user->getCreatedAt());
+  }
+
+  /**
+   * @throws \Exception
+   */
+  public function unlockAchievementAccountVerification(User $user): ?UserAchievement
+  {
+    return $this->unlockAchievement($user, Achievement::ACCOUNT_VERIFICATION, TimeUtils::getDateTime());
   }
 
   /**

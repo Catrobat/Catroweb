@@ -10,24 +10,20 @@ use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Scratch\AsyncHttpClient;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class RemixUpdaterEventSubscriber implements EventSubscriberInterface
 {
-  final public const string MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
-
-  private readonly string $migration_lock_file_path;
-
   public function __construct(
     private readonly RemixManager $remix_manager,
     private readonly AsyncHttpClient $async_http_client,
     private readonly RouterInterface $router,
     private readonly LoggerInterface $logger,
-    string $kernel_root_dir,
+    #[Autowire('%kernel.project_dir%/CatrobatRemixMigration.lock')]
+    private readonly string $migration_lock_file_path,
   ) {
-    $app_root_dir = $kernel_root_dir;
-    $this->migration_lock_file_path = $app_root_dir.'/'.self::MIGRATION_LOCK_FILE_NAME;
   }
 
   /**

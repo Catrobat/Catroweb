@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\User\ResetPassword;
 
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\System\Mail\MailerAdapter;
+use App\Security\Authentication\ResetPasswordEmail;
 use App\User\UserManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
-use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 class PasswordResetRequestedSubscriber implements EventSubscriberInterface
 {
@@ -20,12 +18,9 @@ class PasswordResetRequestedSubscriber implements EventSubscriberInterface
 
   public function __construct(
     protected UserManager $user_manager,
-    protected MailerAdapter $mailer,
     protected LoggerInterface $logger,
-    protected ResetPasswordHelperInterface $reset_password_helper,
-    TranslatorInterface $translator)
+    protected ResetPasswordEmail $reset_password_email)
   {
-    $this->initTranslator($translator);
   }
 
   public function onPasswordResetRequested(PasswordResetRequestedEvent $event): void
@@ -49,12 +44,10 @@ class PasswordResetRequestedSubscriber implements EventSubscriberInterface
     }
 
     try {
-      $this->mailer->send(
-        $email,
-        $this->__('passwordRecovery.subject', [], $locale),
-        'Security/ResetPassword/ResetPasswordEmail.html.twig',
-        ['resetToken' => $this->reset_password_helper->generateResetToken($user)]
-      );
+      $this->reset_password_email
+        ->init($user, $locale)
+        ->send()
+      ;
     } catch (ResetPasswordExceptionInterface $resetPasswordException) {
       $this->logger->info(sprintf('Can\'t create reset token for %s; Reason ', $email).$resetPasswordException);
     }

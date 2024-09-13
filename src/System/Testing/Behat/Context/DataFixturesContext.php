@@ -257,6 +257,33 @@ class DataFixturesContext implements Context
     Assert::assertEquals($email, $user->getEmail());
   }
 
+  /**
+   * @Then the user :user_name should have a last login date with the value :date
+   */
+  public function theUserShouldHaveALastLoginDate(string $user_name, string $date): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($user_name);
+    Assert::assertEquals('null' === $date ? '' : $date, $user?->getLastLogin()?->getTimestamp() ?? '');
+  }
+
+  /**
+   * @Then the user :user_name should have a verification status of :verification_state
+   */
+  public function theUserShouldHaveAVerificationStatus(string $user_name, string $verification_state): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($user_name);
+    Assert::assertEquals('true' === $verification_state, $user->isVerified());
+  }
+
+  /**
+   * @Then the user :user_name should have a verification email requested at :date
+   */
+  public function theUserShouldHaveAVerificationEmailRequestedAt(string $user_name, string $date): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($user_name);
+    Assert::assertEquals('null' === $date ? '' : $date, $user->getVerificationRequestedAt()?->getTimestamp() ?? '');
+  }
+
   // -------------------------------------------------------------------------------------------------------------------
   //  Surveys
   // -------------------------------------------------------------------------------------------------------------------
@@ -1285,9 +1312,9 @@ class DataFixturesContext implements Context
         ->setInternalDescription($config['internal_description'] ?? '')
         ->setTitleLtmCode($config['title_ltm_code'] ?? '')
         ->setDescriptionLtmCode($config['description_ltm_code'] ?? '')
-        ->setBadgeSvgPath($config['badge_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_1.svg')
-        ->setBadgeLockedSvgPath($config['badge_locked_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_locked_1.svg')
-        ->setBannerSvgPath($config['banner_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_banner.svg')
+        ->setBadgeSvgPath($config['badge_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'badge1.svg')
+        ->setBadgeLockedSvgPath($config['badge_locked_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'badge1-locked.svg')
+        ->setBannerSvgPath($config['banner_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'badge-banner.svg')
         ->setBannerColor($config['banner_color'] ?? '#00ff00')
         ->setEnabled((bool) ($config['enabled'] ?? true))
         ->setPriority((int) ($config['priority'] ?? 0))
@@ -1476,12 +1503,22 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given I run the add verified_developer user achievements command
+   * @Given I run the add verified_developer_silver user achievements command
    */
-  public function iRunTheAddVerifiedDeveloperAchievementsCommand(): void
+  public function iRunTheAddVerifiedDeveloperSilverAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:verified_developer'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_silver'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add verified_developer_gold user achievements command
+   */
+  public function iRunTheAddVerifiedDeveloperGoldAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_gold'], [], 'Updating user achievements'
     );
   }
 

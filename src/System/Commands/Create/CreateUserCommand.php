@@ -63,6 +63,7 @@ final class CreateUserCommand extends Command
     $user->setPlainPassword($password);
     $user->setEnabled(!$inactive);
     $user->setSuperAdmin($superAdmin);
+    $user->setVerified(true);
 
     $this->userManager->save($user);
 

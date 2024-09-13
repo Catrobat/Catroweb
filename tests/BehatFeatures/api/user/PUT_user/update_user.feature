@@ -3,11 +3,11 @@ Feature: Update user
 
   Background:
     Given there are users:
-      | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc | 1  |
-      | User1    | vwxyz    | aaaaaaaaaa | 2  |
-      | NewUser  | 54321    | bbbbbbbbbb | 3  |
-      | Catroweb | 54321    | bbbbbbbbbb | 4  |
+      | name     | password | token      | id | verified |
+      | Catrobat | 12345    | cccccccccc | 1  | true     |
+      | User1    | vwxyz    | aaaaaaaaaa | 2  | false    |
+      | NewUser  | 54321    | bbbbbbbbbb | 3  | true     |
+      | Catroweb | 54321    | bbbbbbbbbb | 4  | false    |
     And I wait 500 milliseconds
 
   Scenario: Update user with dry_run option
@@ -252,3 +252,34 @@ Feature: Update user
         "email": "Email invalid"
       }
     """
+
+  Scenario: Update any properties but the email, must not change the verification status
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "username": "new"
+      }
+    """
+    And I request "PUT" "/api/user"
+    Then the response code should be "204"
+    And the user "new" should have a verification status of "true"
+    And the user "new" should have a verification email requested at "null"
+
+  Scenario: Updating the email, must change the verification status and resend verification email
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And the current time is "01.08.2014 14:00"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "email": "new@catrobat.at"
+      }
+    """
+    And I request "PUT" "/api/user"
+    Then the response code should be "204"
+    And the user "Catrobat" should have a verification status of "false"
+    And the user "Catrobat" should have a verification email requested at "1406901600"
