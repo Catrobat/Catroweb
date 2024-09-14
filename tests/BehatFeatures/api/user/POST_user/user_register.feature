@@ -288,3 +288,26 @@ Feature: Registering a new user.
         "email": "Email invalid"
       }
     """
+
+  Scenario: Registering a user should send an email to verify the account
+    Given I have the following JSON request body:
+    """
+      {
+        "email": "test@test.at",
+        "username": "Testuser",
+        "password": "1234567"
+      }
+    """
+    And the current time is "01.08.2014 14:00"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "POST" "/api/user"
+    Then the response status code should be "201"
+    And I should get the json object:
+    """
+      {
+        "token": "REGEX_STRING_WILDCARD",
+        "refresh_token": "REGEX_STRING_WILDCARD"
+      }
+    """
+    And the user "Testuser" should have a verification email requested at "1406901600"

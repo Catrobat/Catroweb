@@ -8,6 +8,7 @@ use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,6 +26,7 @@ class TwigExtension extends AbstractExtension
     private readonly RequestStack $request_stack,
     private readonly MediaPackageFileRepository $media_package_file_repository,
     private readonly ParameterBagInterface $parameter_bag,
+    #[Autowire('%kernel.project_dir%/translations')]
     private readonly string $catrobat_translation_dir,
     private readonly TranslatorInterface $translator,
     private readonly FeatureFlagManager $featureFlagManager,
@@ -250,14 +252,14 @@ class TwigExtension extends AbstractExtension
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request->attributes->get('flavor');
+    return $request?->attributes->get('flavor') ?? (string) $this->parameter_bag->get('defaultFlavor');
   }
 
   public function getTheme(): string
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request->attributes->get('theme');
+    return $request?->attributes->get('theme') ?? (string) $this->parameter_bag->get('umbrellaTheme');
   }
 
   public function getThemeDisplayName(): string

@@ -86,3 +86,24 @@ Feature: Login with valid credentials should return a valid JWT token
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I request "POST" "/api/authentication"
     Then the response status code should be "401"
+
+  Scenario: A valid request should update the last login date of a user
+    Given the user "Catrobat" should have a last login date with the value "null"
+    And the current time is "06.07.2032 13:00"
+    Given I have the following JSON request body:
+    """
+      {
+        "username": "Catrobat",
+        "password": "123456"
+      }
+    """
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I request "POST" "/api/authentication"
+    Then the response status code should be "200"
+    And I should get the json object:
+    """
+     {
+        "token": "REGEX_STRING_WILDCARD"
+     }
+    """
+    And the user "Catrobat" should have a last login date with the value "1972731600"

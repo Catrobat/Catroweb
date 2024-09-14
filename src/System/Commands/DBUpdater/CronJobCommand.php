@@ -75,9 +75,17 @@ class CronJobCommand extends Command
 
     $this->runCronJob(
       'Add verified_developer UserAchievements',
-      ['bin/console', 'catrobat:workflow:achievement:verified_developer'],
-      ['timeout' => self::ONE_WEEK_IN_SECONDS],
-      '1 year',
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_silver'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 week',
+      $output
+    );
+
+    $this->runCronJob(
+      'Add verified_developer UserAchievements',
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_gold'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 week',
       $output
     );
 

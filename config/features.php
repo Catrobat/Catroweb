@@ -6,4 +6,5 @@ return [
   'GET_projects_elastica' => false,
   'remix-graph' => false, // performance issues
   'sign-apk' => false, // not allowed by Google
+  'force-account-verification' => false,
 ];

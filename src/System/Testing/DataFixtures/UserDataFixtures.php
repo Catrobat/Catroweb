@@ -46,6 +46,7 @@ class UserDataFixtures
     $user->setUploadToken($config['token'] ?? 'default_token_'.UserDataFixtures::$number_of_users);
     $user->setSuperAdmin(isset($config['admin']) && 'true' === $config['admin']);
     $user->setEnabled(!isset($config['enabled']) || 'true' === $config['enabled']);
+    $user->setVerified(!isset($config['verified']) || 'true' === $config['verified']);
     $user->addRole($config['role'] ?? 'ROLE_USER');
     $user->setOauthUser(isset($config['oauth_user']) && 'true' === $config['oauth_user']);
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Project\CatrobatFile;
 
 use App\Storage\FileHelper;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -20,7 +21,9 @@ class ProjectFileRepository
    * @throws \Exception
    */
   public function __construct(
+    #[Autowire('%catrobat.file.storage.dir%')]
     string $catrobat_file_storage_dir,
+    #[Autowire('%catrobat.file.extract.dir%')]
     string $catrobat_file_extract_dir,
     private readonly CatrobatFileCompressor $file_compressor,
   ) {

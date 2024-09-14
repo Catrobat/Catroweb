@@ -64,7 +64,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $this->program_entity = $this->createMock(Program::class);
 
-    $this->remix_updater = new RemixUpdaterEventSubscriber($this->remix_manager, $this->async_http_client, $router, $logger, '.');
+    $this->remix_updater = new RemixUpdaterEventSubscriber($this->remix_manager, $this->async_http_client, $router, $logger, './CatrobatRemixMigration.lock');
 
     $filesystem = new Filesystem();
     $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', BootstrapExtension::$CACHE_DIR.'base/');

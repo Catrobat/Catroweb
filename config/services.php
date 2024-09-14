@@ -133,8 +133,11 @@ use App\Project\Scratch\AsyncHttpClient;
 use App\Project\Scratch\ScratchManager;
 use App\Project\Scratch\ScratchProjectUpdaterEventSubscriber;
 use App\Security\Authentication\CookieService;
+use App\Security\Authentication\JWTAuthenticationSuccessEventSubscriber;
 use App\Security\Authentication\JwtRefresh\RefreshBearerCookieOnKernelResponseEventSubscriber;
 use App\Security\Authentication\JwtRefresh\RefreshTokenService;
+use App\Security\Authentication\ResetPasswordEmail;
+use App\Security\Authentication\VerifyEmail;
 use App\Security\Authentication\WebView\WebviewAuthenticator;
 use App\Security\Authentication\WebView\WebviewJWTAuthenticator;
 use App\Security\OAuth\HwiOauthAccountConnector;
@@ -211,7 +214,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.test.directory.target', '%kernel.project_dir%/tests/TestData/DataFixtures/GeneratedFixtures/');
   $parameters->set('catrobat.thumbnail.dir', '%catrobat.pubdir%resources/thumbnails/');
   $parameters->set('catrobat.thumbnail.path', 'resources/thumbnails/');
-  $parameters->set('catrobat.translations.dir', '%kernel.project_dir%/translations');
   $parameters->set('catrobat.translations.project_cache_threshold', 15);
   $parameters->set('catrobat.upload.temp.dir', '%catrobat.pubdir%resources/tmp/uploads/');
   $parameters->set('catrobat.upload.temp.path', 'resources/tmp/uploads/');
@@ -229,10 +231,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->defaults()
     ->autowire()
     ->autoconfigure()
-    ->bind('$kernel_root_dir', '%kernel.project_dir%')
-    ->bind('$catrobat_translation_dir', '%catrobat.translations.dir%')
-    ->bind('$catrobat_file_storage_dir', '%catrobat.file.storage.dir%')
-    ->bind('$catrobat_file_extract_dir', '%catrobat.file.extract.dir%')
     ->bind('$program_finder', service('fos_elastica.finder.app_program'))
     ->bind('$user_finder', service('fos_elastica.finder.app_user'))
     ->bind('$refresh_token_ttl', '%lexik_jwt_authentication.token_ttl%')
@@ -471,6 +469,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
+  $services->set(VerifyEmail::class, VerifyEmail::class)
+    ->public()
+  ;
+
+  $services->set(ResetPasswordEmail::class, ResetPasswordEmail::class)
+    ->public()
+  ;
+
   $services->set(CookieService::class, CookieService::class)
     ->args(['%env(JWT_TTL)%', '%env(REFRESH_TOKEN_TTL)%'])
     ->public()
@@ -601,6 +607,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set(ApiExceptionSubscriber::class)
+    ->tag('kernel.event_subscriber')
+  ;
+
+  $services->set(JWTAuthenticationSuccessEventSubscriber::class)
     ->tag('kernel.event_subscriber')
   ;
 

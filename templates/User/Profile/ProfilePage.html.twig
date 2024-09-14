@@ -24,7 +24,7 @@
     </div>
 
     <div id="user-information" class="col-8 col-md-10 mt-2 user-info d-flex flex-column justify-content-between">
-      <h1 class="h4">{{ profile.username }}</h1>
+      <h1 class="h4">{{ profile.username }} {% if profile.isVerified %}<i class="verification-icon material-icons">check</i>{% endif %}</h1>
 
       <div class="button-container w-100 mt-3">
         {% if profile.isScratchUser() %}

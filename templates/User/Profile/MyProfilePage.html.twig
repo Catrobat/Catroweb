@@ -28,7 +28,7 @@
     </div>
     <div class="profile__basic-info__text">
       <div class="profile__basic-info__text__name" aria-label="{{ 'username'|trans({}, 'catroweb') }}">
-        {{ username }}
+        {{ username }} {% if profile.isVerified %}<i class="verification-icon material-icons">check</i>{% endif %}
       </div>
     </div>
   </div>
@@ -53,6 +53,7 @@
   {{ include('User/Profile/Settings/UserSettings.html.twig') }}
   {{ include('User/Profile/Settings/ProfileSettings.html.twig') }}
   {{ include('User/Profile/Settings/SecuritySettings.html.twig') }}
+  {{ include('User/Profile/Settings/VerifySettings.html.twig') }}
   {{ include('User/Profile/Settings/AccountSettings.html.twig') }}
 
   <div class="tab-bar-container mt-3">

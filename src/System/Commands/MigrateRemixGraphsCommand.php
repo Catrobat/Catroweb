@@ -26,7 +26,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
@@ -36,8 +36,6 @@ class MigrateRemixGraphsCommand extends Command
 {
   private readonly AsyncHttpClient $async_http_client;
 
-  private readonly string $app_root_dir;
-
   private ?OutputInterface $output = null;
 
   private ?MigrationFileLock $migration_file_lock = null;
@@ -45,11 +43,12 @@ class MigrateRemixGraphsCommand extends Command
   public function __construct(private readonly UserManager $user_manager,
     private readonly ProjectManager $project_manager, private readonly RemixManager $remix_manager,
     private readonly EntityManagerInterface $entity_manager, private readonly CatrobatFileExtractor $file_extractor,
-    private readonly ProgramRepository $project_repository, ParameterBagInterface $parameter_bag)
+    private readonly ProgramRepository $project_repository,
+    #[Autowire('%kernel.project_dir%/CatrobatRemixMigration.lock')]
+    private readonly string $migration_lock_file_path)
   {
     parent::__construct();
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
-    $this->app_root_dir = (string) $parameter_bag->get('kernel.project_dir');
   }
 
   public function signalHandler(int $signal_number): void
@@ -87,7 +86,7 @@ class MigrateRemixGraphsCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     declare(ticks=1);
-    $this->migration_file_lock = new MigrationFileLock($this->app_root_dir, $output);
+    $this->migration_file_lock = new MigrationFileLock($this->migration_lock_file_path, $output);
     $this->output = $output;
     pcntl_signal(SIGTERM, $this->signalHandler(...));
     pcntl_signal(SIGHUP, $this->signalHandler(...));

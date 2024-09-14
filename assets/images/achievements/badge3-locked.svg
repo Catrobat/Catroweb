@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" style="isolation:isolate"
+     viewBox="495.796 -922 518.204 421.006" width="518.204pt" height="421.006pt">
+    <defs>
+        <filter id="gkU63bzAlAkXIOA4BaLrcQVxZQ8zndAc" x="-200%" y="-200%" width="400%" height="400%"
+                filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+            <feOffset xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" dx="0" dy="0"/>
+            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" stdDeviation="6.440413594258542"
+                            result="pf_100_offsetBlur"/>
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" in2="pf_100_offsetBlur"
+                         result="pf_100_inverse" operator="out"/>
+            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.75"
+                     result="pf_100_color"/>
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_100_color" in2="pf_100_inverse" operator="in"
+                         result="pf_100_shadow"/>
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_100_shadow" in2="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g filter="url(#gkU63bzAlAkXIOA4BaLrcQVxZQ8zndAc)">
+        <linearGradient id="svg__achievement__badge__locked--gradient-3" x1="0.565238605359203" y1="0.8799376051618178" x2="0.33613792238495555"
+                        y2="-0.1234056188699334"
+                        gradientTransform="matrix(513.536,105.344,-93.718,456.863,573.405,-964.922)"
+                        gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-opacity="1" style="stop-color:rgb(230,230,230)"/>
+            <stop offset="98.26086956521739%" stop-opacity="1" style="stop-color:rgb(255,255,255)"/>
+        </linearGradient>
+        <path d=" M 916.058 -591.258 L 947.478 -590.976 C 951.725 -590.998 954.547 -590.153 955.914 -588.471 L 1013.752 -588.225 L 979.604 -544.833 L 1014 -504 L 940 -504.645 C 933.76 -501.635 930.167 -500.917 918 -501 L 584 -502 Q 574.708 -502.958 572.224 -504.645 L 495.796 -504.755 L 537 -545 L 496.26 -588.851 L 552.918 -588.584 C 554.588 -590.636 556.651 -591.775 559.076 -592.031 L 592.448 -591.753 L 576.946 -640.168 L 540.548 -753.845 C 537.833 -762.326 541.496 -773.438 548.723 -778.641 L 645.588 -848.386 L 742.453 -918.13 C 749.681 -923.334 761.38 -923.283 768.562 -918.018 L 864.826 -847.446 L 961.09 -776.874 C 968.272 -771.608 971.84 -760.466 969.051 -752.008 L 931.68 -638.648 L 916.058 -591.258 Z "
+              fill="url(#svg__achievement__badge__locked--gradient-3)"/>
+    </g>
+</svg>

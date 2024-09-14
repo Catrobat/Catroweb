@@ -2,7 +2,7 @@
 {% set modal =
   {
     id: 'account-settings-modal',
-    title: '' ~ 'myprofile.accountSettings'|trans({}, 'catroweb'),
+    title: '' ~ 'myprofile.deleteAccount'|trans({}, 'catroweb'),
     left_action:
     {
       id: 'account_settings-cancel_action',
@@ -12,7 +12,6 @@
     }
   } %}
 {% block content %}
-  <h2>{{ 'myprofile.deleteAccount'|trans({}, 'catroweb') }}</h2>
   {% set text_parts = 'myprofile.deleteAccountWarning'
     |trans({'%num_projects%': app.user.programs|length, '%num_followers%': app.user.followers|length}, 'catroweb')
     |split('\n') %}

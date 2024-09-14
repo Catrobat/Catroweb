@@ -26,6 +26,14 @@
         <span class="link-text">{{ 'myprofile.securitySettings'|trans({}, 'catroweb') }}</span>
       </a>
     </li>
+    {% if not profile.verified %}
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="modal" data-bs-target="#verify-settings-modal">
+        <span class="link-icon material-icons">check_circle</span>
+        <span class="link-text">{{ 'myprofile.accountVerification'|trans({}, 'catroweb') }}</span>
+      </a>
+    </li>
+    {% endif %}
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="modal" data-bs-target="#account-settings-modal">
         <span class="link-icon material-icons">settings</span>

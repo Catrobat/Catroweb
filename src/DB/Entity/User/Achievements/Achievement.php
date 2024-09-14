@@ -25,8 +25,6 @@ class Achievement
 
   final public const string PERFECT_PROFILE = 'perfect_profile';
 
-  final public const string VERIFIED_DEVELOPER = 'verified_developer';
-
   final public const string CODING_JAM_09_2021 = 'coding_jam_09_2021';
 
   final public const string BILINGUAL = 'bilingual';
@@ -34,6 +32,10 @@ class Achievement
   final public const string TRILINGUAL = 'trilingual';
 
   final public const string LINGUIST = 'linguist';
+
+  final public const string ACCOUNT_CREATED = 'verified_developer';
+
+  final public const string ACCOUNT_VERIFICATION = 'account_verification';
 
   #[ORM\Column(name: 'id', type: Types::INTEGER)]
   #[ORM\Id]

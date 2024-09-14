@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Helpers;
 
-use App\Project\Remix\RemixUpdaterEventSubscriber;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrationFileLock
@@ -13,9 +12,9 @@ class MigrationFileLock
 
   private mixed $lock_file;
 
-  public function __construct(string $app_root_dir, private readonly OutputInterface $output)
+  public function __construct(string $filePath, private readonly OutputInterface $output)
   {
-    $this->lock_file_path = $app_root_dir.'/'.RemixUpdaterEventSubscriber::MIGRATION_LOCK_FILE_NAME;
+    $this->lock_file_path = $filePath;
   }
 
   public function lock(): void
