@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\Apk;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Routing\RouterInterface;
 
 class JenkinsDispatcher
@@ -15,8 +16,11 @@ class JenkinsDispatcher
    *
    * @throws \Exception
    */
-  public function __construct(array $config, protected RouterInterface $router)
-  {
+  public function __construct(
+    #[Autowire('%jenkins%')]
+    array $config,
+    protected RouterInterface $router,
+  ) {
     if (!isset($config['url'])) {
       throw new \Exception();
     }

@@ -15,6 +15,7 @@ use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,16 +27,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @deprecated
  */
-readonly class UploadController
+class UploadController extends AbstractController
 {
   public function __construct(
-    private UserManager $user_manager,
-    private TokenStorageInterface $token_storage,
-    private ProjectManager $project_manager,
-    private TranslatorInterface $translator,
-    private LoggerInterface $logger,
-    private EntityManagerInterface $em,
-    private FeatureFlagManager $feature_flag_manager)
+    private readonly UserManager $user_manager,
+    private readonly TokenStorageInterface $token_storage,
+    private readonly ProjectManager $project_manager,
+    private readonly TranslatorInterface $translator,
+    private readonly LoggerInterface $logger,
+    private readonly EntityManagerInterface $em,
+    private readonly FeatureFlagManager $feature_flag_manager)
   {
   }
 

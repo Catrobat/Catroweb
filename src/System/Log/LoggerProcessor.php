@@ -6,11 +6,13 @@ namespace App\System\Log;
 
 use App\DB\Entity\User\User;
 use Monolog\LogRecord;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
+#[Autoconfigure(tags: ['monolog.processor'])]
 class LoggerProcessor
 {
   private const string ANON_USER = 'anonymous';

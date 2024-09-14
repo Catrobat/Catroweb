@@ -6,6 +6,7 @@ namespace App\Project\CatrobatFile;
 
 use App\Storage\FileHelper;
 use App\Utils\TimeUtils;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\File;
 
 class CatrobatFileExtractor
@@ -16,7 +17,9 @@ class CatrobatFileExtractor
    * @throws \Exception
    */
   public function __construct(
+    #[Autowire('%catrobat.file.extract.dir%')]
     string $extract_dir,
+    #[Autowire('%catrobat.file.extract.path%')]
     private readonly string $extract_path,
   ) {
     FileHelper::verifyDirectoryExists($extract_dir);

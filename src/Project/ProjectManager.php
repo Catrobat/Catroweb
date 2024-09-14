@@ -40,6 +40,7 @@ use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -64,6 +65,7 @@ class ProjectManager
     protected ExtensionRepository $extension_repository,
     protected CatrobatFileSanitizer $file_sanitizer,
     protected NotificationManager $notification_service,
+    #[Autowire(service: 'fos_elastica.finder.app_program')]
     private readonly TransformedFinder $program_finder,
     private readonly ?UrlHelper $urlHelper,
     protected Security $security,

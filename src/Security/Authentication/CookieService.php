@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace App\Security\Authentication;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\Routing\RouterInterface;
 
 readonly class CookieService
 {
-  public function __construct(private int $jwtTokenLifetime, private int $refreshTokenLifetime, private RouterInterface $router)
+  public function __construct(
+    #[Autowire('%env(JWT_TTL)%')]
+    private int $jwtTokenLifetime,
+    #[Autowire('%env(REFRESH_TOKEN_TTL)%')]
+    private int $refreshTokenLifetime,
+    private RouterInterface $router)
   {
   }
 

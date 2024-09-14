@@ -19,13 +19,22 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserManager
 {
-  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProjectManager $project_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
-  {
+  public function __construct(
+    protected CanonicalFieldsUpdater $canonicalFieldsUpdater,
+    protected UserPasswordHasherInterface $userPasswordHasher,
+    protected EntityManagerInterface $entity_manager,
+    #[Autowire(service: 'fos_elastica.finder.app_user')]
+    protected TransformedFinder $user_finder,
+    protected ProjectManager $project_manager,
+    protected UrlHelper $url_helper,
+    protected UserRepository $user_repository,
+  ) {
   }
 
   public function decodeToken(string $token): array

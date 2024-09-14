@@ -68,10 +68,12 @@ json;
   protected function setUp(): void
   {
     static::createClient();
-    $kernel = self::bootKernel();
+    self::bootKernel();
+    $container = static::getContainer();
     /** @var UserManager $user_manager */
-    $user_manager = $kernel->getContainer()->get(UserManager::class);
-    $this->object = new HwiOauthUserProvider($user_manager, $this->properties);
+    $user_manager = $container->get(UserManager::class);
+    $this->object = new HwiOauthUserProvider($user_manager);
+    $this->object->setProperties($this->properties);
   }
 
   public function testInitialization(): void

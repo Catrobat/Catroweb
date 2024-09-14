@@ -8,6 +8,7 @@ use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
@@ -20,6 +21,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
+#[Autoconfigure(tags: ['twig.extension'])]
 class TwigExtension extends AbstractExtension
 {
   public function __construct(

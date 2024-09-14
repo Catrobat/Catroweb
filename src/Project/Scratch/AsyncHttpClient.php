@@ -14,8 +14,15 @@ class AsyncHttpClient
 
   private ?array $scratch_info_data = null;
 
-  public function __construct(private readonly array $config = [])
+  public function __construct(private array $config = [])
   {
+    if (empty($this->config)) {
+      $this->config = [
+        'timeout' => 8.0,
+        'max_number_of_total_requests' => 12,
+        'max_number_of_concurrent_requests' => 4,
+      ];
+    }
     $this->async_http_client = new Client($config);
   }
 

@@ -7,7 +7,10 @@ namespace App\Translation;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
+#[Autoconfigure(lazy: true)]
 class ItranslateApi implements TranslationApiInterface
 {
   private const array LONG_LANGUAGE_CODE = [
@@ -76,13 +79,15 @@ class ItranslateApi implements TranslationApiInterface
     'zh-TW',
   ];
 
-  private readonly string $api_key;
-
   private readonly TranslationApiHelper $helper;
 
-  public function __construct(private readonly Client $client, private readonly LoggerInterface $logger)
-  {
-    $this->api_key = $_ENV['ITRANSLATE_API_KEY'];
+  public function __construct(
+    #[Autowire(service: 'eight_points_guzzle.client.itranslate')]
+    private readonly Client $client,
+    #[Autowire(env: 'ITRANSLATE_API_KEY')]
+    private readonly string $api_key,
+    private readonly LoggerInterface $logger,
+  ) {
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
 

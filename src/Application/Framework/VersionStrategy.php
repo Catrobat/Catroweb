@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Application\Framework;
 
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class VersionStrategy implements VersionStrategyInterface
 {
   public function __construct(
+    #[Autowire('%env(string:APP_VERSION)%')]
     protected string $app_version,
   ) {
   }

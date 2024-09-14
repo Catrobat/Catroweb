@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\Users;
 
 use Sonata\AdminBundle\SonataConfiguration;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -26,8 +27,11 @@ final readonly class SecurityRolesBuilder
    * @param array<string, array<string>> $rolesHierarchy
    */
   public function __construct(
+    #[Autowire(service: 'security.authorization_checker')]
     private AuthorizationCheckerInterface $authorizationChecker,
+    #[Autowire(service: 'sonata.admin.configuration')]
     private SonataConfiguration $configuration,
+    #[Autowire(service: 'translator')]
     private TranslatorInterface $translator,
     private array $rolesHierarchy = [],
   ) {

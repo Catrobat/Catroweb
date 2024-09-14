@@ -6,6 +6,7 @@ namespace App\System\Mail;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
@@ -16,8 +17,13 @@ use Twig\Environment;
 
 class MailerAdapter
 {
-  public function __construct(protected MailerInterface $mailer, protected LoggerInterface $logger, protected Environment $templateWrapper, protected string $dkim_private_key_path)
-  {
+  public function __construct(
+    protected MailerInterface $mailer,
+    protected LoggerInterface $logger,
+    protected Environment $templateWrapper,
+    #[Autowire('%dkim.private.key%')]
+    protected string $dkim_private_key_path,
+  ) {
   }
 
   public function send(string $to, string $subject, string $template, array $context = []): void
