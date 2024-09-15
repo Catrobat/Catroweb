@@ -339,10 +339,11 @@ profile:
   changePicture: படத்தை மாற்றுக
   goToScratchProfile: Scratch-இல்‌ உள்ள சுயவிவரம்
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: User settings
+  profileSettings: சுயவிவர திருத்தம்
+  securitySettings: கடவுச்சொல்லை மாற்றவும்
+  accountSettings: கணக்கை நீக்கு
+  accountVerification: Verify account
   account: Account
   editProfile: சுயவிவர திருத்தம்
   edit: திருத்து
@@ -359,6 +360,10 @@ myprofile:
   editAccountSettings: கணக்கு அமைப்புகளைத் திருத்தவும்
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'விளையாட உரிமம்'
   title: 'விளையாட உரிமம் - கடன் மற்றும் பங்கு கொடுங்கள்'
@@ -866,6 +871,9 @@ achievements:
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:

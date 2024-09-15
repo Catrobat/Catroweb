@@ -337,10 +337,11 @@ profile:
   changePicture: انځور بدل کړئ
   goToScratchProfile: په سکریچ کې پروفایل
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: User settings
+  profileSettings: پروفایل ایډیټ کړئ
+  securitySettings: پټ نوم بدل کړی
+  accountSettings: حساب ړنګ کړئ
+  accountVerification: Verify account
   account: Account
   editProfile: پروفایل ایډیټ کړئ
   edit: سمون
@@ -357,6 +358,10 @@ myprofile:
   editAccountSettings: د حساب ترتیبات سم کړئ
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'د لوبې کولو جواز'
   title: 'د لوبې کولو جواز - کریډیټ ورکړئ او شریک کړئ'
@@ -864,6 +869,9 @@ achievements:
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] ټاګونه'
   tag:

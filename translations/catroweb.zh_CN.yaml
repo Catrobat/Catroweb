@@ -344,6 +344,7 @@ myprofile:
   profileSettings: 个人资料设置
   securitySettings: 安全设置
   accountSettings: 账户设置
+  accountVerification: Verify account
   account: 帐户
   editProfile: 编辑档案
   edit: 编辑
@@ -360,6 +361,10 @@ myprofile:
   editAccountSettings: 编辑帐户设置
   profileChangeSuccess: 您的个人资料已成功更改。
   unspecifiedError: 更改您的个人资料时发生未知错误。请联系我们。
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: '授权'
   title: '授权执行-评分并分享'
@@ -867,6 +872,9 @@ achievements:
       linguist:
         title: "语言学家"
         description: "将您的项目翻译成5种语言"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} 标签 |]1,Inf] 标签'
   tag:

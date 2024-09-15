@@ -339,6 +339,7 @@ myprofile:
   profileSettings: "\nपार्श्वचित्र समायोजन"
   securitySettings: "\nसुरक्षा सेटिंग्स"
   accountSettings: अकाउंट सेटिंग
+  accountVerification: Verify account
   account: "\nअकाउंट"
   editProfile: अर्द्ध मुख संपादित करें
   edit: बदलें
@@ -355,6 +356,10 @@ myprofile:
   editAccountSettings: खाता सेटिंग संपादित करें
   profileChangeSuccess: आपकी प्रोफ़ाइल सफलतापूर्वक बदल दी गई है।
   unspecifiedError: आपकी प्रोफ़ाइल बदलते समय एक अज्ञात त्रुटि हुई। कृपया हमसे संपर्क करें।
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'चलाने के लिए लाइसेंस'
   title: 'खेलने के लिए लाइसेंस - श्रेय दे और साझा करें'
@@ -862,6 +867,9 @@ achievements:
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:

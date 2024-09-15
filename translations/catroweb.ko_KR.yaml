@@ -333,10 +333,11 @@ profile:
   changePicture: 사진 변경
   goToScratchProfile: 스크래치용 프로파일
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: User settings
+  profileSettings: 프로필 수정
+  securitySettings: 비밀번호 변경하기
+  accountSettings: 계정 삭제
+  accountVerification: Verify account
   account: Account
   editProfile: 프로필 수정
   edit: 편집
@@ -353,6 +354,10 @@ myprofile:
   editAccountSettings: 계정 설정 수정
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: '게임 라이센스'
   title: '신용 및 공유 라이센스'
@@ -860,6 +865,9 @@ achievements:
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:

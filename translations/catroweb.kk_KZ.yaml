@@ -338,6 +338,7 @@ myprofile:
   profileSettings: Профиль Параметрлер
   securitySettings: Қауіпсіздік Параметрлер
   accountSettings: Аккаунт параметрлері
+  accountVerification: Verify account
   account: Аккаунт
   editProfile: Профильді өңдеу
   edit: Өңдеу
@@ -354,6 +355,10 @@ myprofile:
   editAccountSettings: Есептік жазба параметрлерін өңдеу
   profileChangeSuccess: Сіздің профиліңіз сәтті өзгертілді.
   unspecifiedError: Профильді өзгерту кезінде анықталмаған қате орын алды. Өтінеміз, бізге хабарласыңыз.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'Ойынға лицензия'
   title: 'Ойынға лицензия - авторларды белгілеп, бөлісіңіз'
@@ -861,6 +866,9 @@ achievements:
       linguist:
         title: "Тіл маманы"
         description: "Жобаңызды 5 тілге аударыңыз"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Белгі |]1,Inf] Белгілер'
   tag:

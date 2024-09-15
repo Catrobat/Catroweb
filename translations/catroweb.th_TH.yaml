@@ -344,6 +344,7 @@ myprofile:
   profileSettings: การตั้งค่าโปรไฟล์
   securitySettings: ตั้งค่าความปลอดภัย
   accountSettings: การตั้งค่าบัญชี
+  accountVerification: Verify account
   account: บัญชี
   editProfile: แก้ไขโปรไฟล์
   edit: แก้ไข
@@ -360,6 +361,10 @@ myprofile:
   editAccountSettings: แก้ไขการตั้งค่าบัญชี
   profileChangeSuccess: เปลี่ยนโปรไฟล์ของคุณสำเร็จแล้ว
   unspecifiedError: เกิดข้อผิดพลาดที่ไม่ระบุขณะเปลี่ยนโปรไฟล์ของคุณ กรุณาติดต่อเรา.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'ใบอนุญาตให้เล่น'
   title: 'กฏการเล่น - ให้เครดิต และ ร่วมแบ่งปัน'
@@ -866,6 +871,9 @@ achievements:
       linguist:
         title: "นักภาษาศาสตร์"
         description: "แปลโครงการของคุณเป็น 5 ภาษา"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} แท็ก |]1,Inf] แท็ก'
   tag:
