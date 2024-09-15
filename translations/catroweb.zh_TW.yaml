@@ -335,10 +335,11 @@ profile:
   changePicture: 更改圖片
   goToScratchProfile: 從頭開始的個人資料
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: User settings
+  profileSettings: 編輯個人資料
+  securitySettings: 變更密碼
+  accountSettings: Delete Account
+  accountVerification: Verify account
   account: Account
   editProfile: 編輯個人資料
   edit: 編輯
@@ -355,6 +356,10 @@ myprofile:
   editAccountSettings: 編輯帳戶設置
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: '玩牌'
   title: '授權撥放或執行-同意授權並分享'
@@ -862,6 +867,9 @@ achievements:
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:

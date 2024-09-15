@@ -339,6 +339,7 @@ myprofile:
   profileSettings: Налаштування профілю
   securitySettings: Налаштування безпеки
   accountSettings: Налаштування облікового запису
+  accountVerification: Verify account
   account: Обліковий запис
   editProfile: Редагувати профіль
   edit: Редагувати
@@ -355,6 +356,10 @@ myprofile:
   editAccountSettings: Змінити налаштування облікового запису
   profileChangeSuccess: Ваш профіль успішно змінено.
   unspecifiedError: Під час змінень профілю сталася невідома помилка. Будь ласка, зв'яжіться з нами.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'Ліцензія на гру'
   title: 'Ліцензія на гру — вказуйте джерело і діліться'
@@ -862,6 +867,9 @@ achievements:
       linguist:
         title: "Лінгвіст"
         description: "Перекласти свої проєкти на 5 мов"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} тег |]1,Inf] теги'
   tag:

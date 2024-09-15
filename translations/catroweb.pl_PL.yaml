@@ -339,6 +339,7 @@ myprofile:
   profileSettings: Ustawienia profilu
   securitySettings: Ustawienia zabezpieczeń
   accountSettings: Ustawienia konta
+  accountVerification: Verify account
   account: Konto
   editProfile: Edytuj profil
   edit: Edytuj
@@ -355,6 +356,10 @@ myprofile:
   editAccountSettings: Edytuj ustawienia konta
   profileChangeSuccess: Twój profil został pomyślnie zmieniony.
   unspecifiedError: Wystąpił nieokreślony błąd podczas zmiany profilu. Skontaktuj się z nami.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'Licencja na korzystanie'
   title: 'Licencja na korzystanie - podziękuj i podziel się'
@@ -862,6 +867,9 @@ achievements:
       linguist:
         title: "Język"
         description: "Przetłumacz swoje projekty na 5 języków"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tagi'
   tag:
