@@ -7,6 +7,7 @@ use App\DB\Entity\User\User;
 use App\Security\Authentication\WebView\WebviewAuthenticator;
 use App\Security\Authentication\WebView\WebviewJWTAuthenticator;
 use App\Security\OAuth\HwiOauthUserProvider;
+use App\Security\OAuth\OAuthSuccessHandler;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -88,7 +89,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'login_path' => '/login',
             'use_forward' => false,
             'failure_path' => '/app/login',
-            'success_handler' => 'catroweb.oauth_success_handler',
+            'success_handler' => OAuthSuccessHandler::class,
             'oauth_user_provider' => [
               'service' => HwiOauthUserProvider::class,
             ],

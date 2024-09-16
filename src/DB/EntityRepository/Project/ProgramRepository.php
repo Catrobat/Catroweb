@@ -19,11 +19,17 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchQuery;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class ProgramRepository extends ServiceEntityRepository
 {
-  public function __construct(ManagerRegistry $managerRegistry, protected RequestHelper $app_request, protected FeatureFlagManager $feature_flag_manager, private readonly TransformedFinder $program_finder)
-  {
+  public function __construct(
+    ManagerRegistry $managerRegistry,
+    protected RequestHelper $app_request,
+    protected FeatureFlagManager $feature_flag_manager,
+    #[Autowire(service: 'fos_elastica.finder.app_program')]
+    private readonly TransformedFinder $program_finder,
+  ) {
     parent::__construct($managerRegistry, Program::class);
   }
 

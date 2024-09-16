@@ -46,8 +46,10 @@ class StudioManagerTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $kernel = self::bootKernel();
-    $this->entity_manager = $kernel->getContainer()->get('doctrine')->getManager();
+    self::bootKernel();
+    $container = static::getContainer();
+
+    $this->entity_manager = $container->get('doctrine')->getManager();
     $studio_repository = $this->entity_manager->getRepository(Studio::class);
     $studio_activity_repository = $this->entity_manager->getRepository(StudioActivity::class);
     $studio_project_repository = $this->entity_manager->getRepository(StudioProgram::class);
@@ -71,9 +73,9 @@ class StudioManagerTest extends DefaultTestCase
       ->onlyMethods([])
       ->getMock()
     ;
-    $this->user_manager = $kernel->getContainer()->get(UserManager::class);
-    $this->user_fixture = $kernel->getContainer()->get(UserDataFixtures::class);
-    $this->project_fixture = $kernel->getContainer()->get(ProjectDataFixtures::class);
+    $this->user_manager = $container->get(UserManager::class);
+    $this->user_fixture = $container->get(UserDataFixtures::class);
+    $this->project_fixture = $container->get(ProjectDataFixtures::class);
     $this->user = $this->user_manager->findUserByUsername('catroweb') ?? $this->user_fixture->insertUser(['name' => 'catroweb', 'password' => '123456']);
     $this->studio = $this->object->createStudio($this->user, 'testname', 'test description');
   }

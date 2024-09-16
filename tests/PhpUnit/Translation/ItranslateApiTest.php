@@ -33,7 +33,7 @@ class ItranslateApiTest extends TestCase
   {
     $this->httpClient = $this->getMockBuilder(Client::class)->getMock();
 
-    $this->api = new ItranslateApi($this->httpClient, $this->createMock(LoggerInterface::class));
+    $this->api = new ItranslateApi($this->httpClient, 'fake', $this->createMock(LoggerInterface::class));
   }
 
   /**

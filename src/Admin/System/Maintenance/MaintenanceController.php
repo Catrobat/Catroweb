@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,8 +23,11 @@ class MaintenanceController extends CRUDController
 {
   public function __construct(
     protected KernelInterface $kernel,
+    #[Autowire('%catrobat.file.storage.dir%')]
     private readonly string $file_storage_dir,
+    #[Autowire('%catrobat.apk.dir%')]
     private readonly string $apk_dir,
+    #[Autowire('%catrobat.logs.dir%')]
     private readonly string $log_dir,
   ) {
   }

@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Project\Apk\JenkinsDispatcher;
-use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Security\TokenGenerator;
 use App\System\Testing\DataFixtures\ProjectDataFixtures;
 use App\System\Testing\DataFixtures\UserDataFixtures;
@@ -43,31 +42,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->load('App\System\Testing\Behat\Context\\', __DIR__.'/../src/System/Testing/Behat/Context/*');
-
+  // Overwrite services to ensure testability
   $services->set('token_generator.inner', TokenGenerator::class);
-
-  $services->set(TokenGenerator::class, ProxyTokenGenerator::class)
-    ->autowire(false)
-    ->args([service('token_generator.inner')])
-  ;
-
-  $services->set(JenkinsDispatcher::class, FakeJenkinsDispatcher::class)
-    ->args(['%jenkins%'])
-  ;
-
-  $services->set(CatrobatFileExtractor::class, CatrobatFileExtractor::class)
-    ->args(['%catrobat.file.extract.dir%', '%catrobat.file.extract.path%'])
-    ->public()
-  ;
-
-  $services->set(ProjectDataFixtures::class, ProjectDataFixtures::class)
-    ->public()
-  ;
-
-  $services->set(UserDataFixtures::class, UserDataFixtures::class)
-    ->public()
-  ;
-
+  $services->set(TokenGenerator::class, ProxyTokenGenerator::class)->autowire(false)->args([service('token_generator.inner')]);
+  $services->set(JenkinsDispatcher::class, FakeJenkinsDispatcher::class)->args(['%jenkins%']);
   $services->set(TranslationDelegate::class, FakeTranslationDelegate::class);
+
+  // Load additional test-only services:
+  $services->load('App\System\Testing\Behat\Context\\', __DIR__.'/../src/System/Testing/Behat/Context/*');
+  $services->set(ProjectDataFixtures::class);
+  $services->set(UserDataFixtures::class);
 };

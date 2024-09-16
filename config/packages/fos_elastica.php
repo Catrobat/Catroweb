@@ -17,10 +17,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'url' => '%env(ELASTICSEARCH_URL)%',
             ],
             [
-              'host' => '%es_host%',
+              'host' => '%env(ES_HOST)%',
             ],
             [
-              'port' => '%es_port%',
+              'port' => '%env(ES_PORT)%',
             ],
           ],
         ],

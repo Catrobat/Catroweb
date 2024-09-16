@@ -10,13 +10,22 @@ use App\Utils\RequestHelper;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class AuthenticationManager
 {
-  public function __construct(private readonly TokenStorageInterface $token_storage, private readonly JWTTokenManagerInterface $jwt_manager, private readonly UserManager $user_manager, private readonly RefreshTokenGeneratorInterface $refresh_token_generator, private readonly RefreshTokenManagerInterface $refresh_manager, protected RequestHelper $request_helper, protected int $refresh_token_ttl)
-  {
+  public function __construct(
+    private readonly TokenStorageInterface $token_storage,
+    private readonly JWTTokenManagerInterface $jwt_manager,
+    private readonly UserManager $user_manager,
+    private readonly RefreshTokenGeneratorInterface $refresh_token_generator,
+    private readonly RefreshTokenManagerInterface $refresh_manager,
+    protected RequestHelper $request_helper,
+    #[Autowire('%lexik_jwt_authentication.token_ttl%')]
+    protected int $refresh_token_ttl,
+  ) {
   }
 
   /**

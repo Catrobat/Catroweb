@@ -10,6 +10,7 @@ use App\Project\Apk\JenkinsDispatcher;
 use App\Project\ProjectManager;
 use App\Utils\TimeUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +28,7 @@ class BuildApkController extends AbstractController
     private readonly ProjectManager $project_manager,
     private readonly JenkinsDispatcher $dispatcher,
     private readonly ApkRepository $apk_repository,
+    #[Autowire('%jenkins%')]
     private readonly array $arr_jenkins_config)
   {
   }
