@@ -339,7 +339,7 @@ myprofile:
   profileSettings: Налаштування профілю
   securitySettings: Налаштування безпеки
   accountSettings: Налаштування облікового запису
-  accountVerification: Verify account
+  accountVerification: Верифікувати обліковий запис
   account: Обліковий запис
   editProfile: Редагувати профіль
   edit: Редагувати
@@ -356,10 +356,10 @@ myprofile:
   editAccountSettings: Змінити налаштування облікового запису
   profileChangeSuccess: Ваш профіль успішно змінено.
   unspecifiedError: Під час змінень профілю сталася невідома помилка. Будь ласка, зв'яжіться з нами.
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  verifyAccountText: Ми відправимо вам електронного листа з посиланням для верифікації вашого облікового запису. Переконайтеся, що ви перейшли за посиланням протягом наступної години, оскільки ви маєте право запитувати лише один лист на день.
+  verifyAccountButton: Відправити лист
+  verifyAccountMailSent: Лист успішно відправлено. Будь ласка, перевірте свої вхідні листи
+  verifyAccountMailFailed: Ви можете запитувати лише один лист на день
 licenseToPlay:
   link: 'Ліцензія на гру'
   title: 'Ліцензія на гру — вказуйте джерело і діліться'
@@ -868,8 +868,8 @@ achievements:
         title: "Лінгвіст"
         description: "Перекласти свої проєкти на 5 мов"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "Верифіковано"
+        description: "Верифікувати свій обліковий запис"
 tags:
   title: '{0} |{1} тег |]1,Inf] теги'
   tag:
