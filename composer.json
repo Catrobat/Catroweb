@@ -28,7 +28,7 @@
     "google/cloud-translate": "1.18.*",
     "hwi/oauth-bundle": "2.2.*",
     "lexik/jwt-authentication-bundle": "3.1.*",
-    "php-http/httplug-bundle": "^1.34",
+    "php-http/httplug-bundle": "^2.0",
     "ramsey/uuid": "4.7.*",
     "ramsey/uuid-doctrine": "2.1.*",
     "rosell-dk/webp-convert": "2.9.*",
