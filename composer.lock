@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3878defd4c85ef65b6c42ec9f12c19ba",
+    "content-hash": "ac251aefe52c2b3b5f4123b71e19802c",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2549,16 +2549,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.59.1",
+            "version": "v1.60.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "35aae23dc4d0b860b6c3733e5cf381a510b506d9"
+                "reference": "7d63ba4295b799dc63227b6c9daf9dc207650eb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/35aae23dc4d0b860b6c3733e5cf381a510b506d9",
-                "reference": "35aae23dc4d0b860b6c3733e5cf381a510b506d9",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/7d63ba4295b799dc63227b6c9daf9dc207650eb4",
+                "reference": "7d63ba4295b799dc63227b6c9daf9dc207650eb4",
                 "shasum": ""
             },
             "require": {
@@ -2609,22 +2609,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.59.1"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.60.0"
             },
-            "time": "2024-08-10T02:24:23+00:00"
+            "time": "2024-09-28T04:24:22+00:00"
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.18.1",
+            "version": "v1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "e95a213d2cb053d78ef457dc00eb50af036909b8"
+                "reference": "79abf39e60814e04257c8f9d1f4878f34e93141d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/e95a213d2cb053d78ef457dc00eb50af036909b8",
-                "reference": "e95a213d2cb053d78ef457dc00eb50af036909b8",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/79abf39e60814e04257c8f9d1f4878f34e93141d",
+                "reference": "79abf39e60814e04257c8f9d1f4878f34e93141d",
                 "shasum": ""
             },
             "require": {
@@ -2665,9 +2665,9 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.18.1"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.19.0"
             },
-            "time": "2024-08-19T16:20:29+00:00"
+            "time": "2024-09-28T04:24:22+00:00"
         },
         {
             "name": "google/common-protos",
@@ -2876,16 +2876,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v4.28.0",
+            "version": "v4.28.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "17e3d804bf6631c2744c99575698f9cd4878b84f"
+                "reference": "96021a9a8a5aa7770427b1e7ef1b2e543792684e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/17e3d804bf6631c2744c99575698f9cd4878b84f",
-                "reference": "17e3d804bf6631c2744c99575698f9cd4878b84f",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/96021a9a8a5aa7770427b1e7ef1b2e543792684e",
+                "reference": "96021a9a8a5aa7770427b1e7ef1b2e543792684e",
                 "shasum": ""
             },
             "require": {
@@ -2914,9 +2914,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.28.0"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.28.2"
             },
-            "time": "2024-08-28T17:54:02+00:00"
+            "time": "2024-09-18T20:56:15+00:00"
         },
         {
             "name": "grpc/grpc",
