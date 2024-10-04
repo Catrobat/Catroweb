@@ -10,7 +10,7 @@ sudo apt upgrade
 sudo apt install curl acl
 
 ## Php and its extensions, composer (php package manager)
-sudo apt install php8.3-common php8.3-ldap php8.3-cli php8.3-curl php8.3-intl php8.3-apcu php8.3-imagick php8.3-mbstring php8.3-xml php8.3-fpm php8.3-mysql php8.3-gd php8.3-zip
+sudo apt install php8.3-common php8.3-ldap php8.3-cli php8.3-curl php8.3-intl php8.3-apcu php8.3-imagick php8.3-mbstring php8.3-xml php8.3-fpm php8.3-mysql php8.3-gd php8.3-zip php8.3-bcmath
 sudo apt install composer
 
 ## Node and npm (node package manager)

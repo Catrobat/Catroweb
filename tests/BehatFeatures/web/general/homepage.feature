@@ -126,17 +126,10 @@ Feature: Pocketcode homepage
     And the "#home-projects__example" element should contain "project 5"
     And the "#home-projects__example" element should contain "project 6"
 
-  Scenario: User should be able to see useful links
+  Scenario: User should be able to see legally required links
     Given I am on homepage
     And I wait for the page to be loaded
-    Then I should see "Useful Links"
-    And I should see "Help"
-    And I should see "About"
-    And I should see "Education"
-    And I should see "Imprint"
-    And I should see "Google Play Store"
-    And I should see "iOS App store"
-    And I should see "Huawei AppGallery"
-    And I should see "Others"
-    And I should see "Chat and forums"
-    And I should see "Privacy Awareness Guide"
+    And I should see "About Catrobat"
+    And I should see "License to play"
+    And I should see "Privacy policy"
+    And I should see "Terms of Use"

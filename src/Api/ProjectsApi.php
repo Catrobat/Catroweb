@@ -195,7 +195,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
           $user, $file, $this->facade->getLoader()->getClientIp(), $accept_language, $flavor
         )
       );
-    } catch (\Exception) {
+    } catch (\Exception $e) {
+      $this->facade->getLogger()->critical('Project Upload broken: '.$e->getMessage().$e->getTraceAsString());
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);

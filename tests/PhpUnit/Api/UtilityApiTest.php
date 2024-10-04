@@ -8,7 +8,7 @@ use App\Api\Services\Utility\UtilityApiFacade;
 use App\Api\Services\Utility\UtilityApiLoader;
 use App\Api\UtilityApi;
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Survey;
+use App\DB\Entity\System\Survey;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\SurveyResponse;
 use PHPUnit\Framework\Attributes\CoversClass;

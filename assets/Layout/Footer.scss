@@ -1,13 +1,5 @@
-@use '~@material/select';
-@use '~@material/select/mdc-select';
-@use '~@material/list/mdc-list';
-@use '~@material/menu-surface/mdc-menu-surface';
-@use '~@material/menu/mdc-menu';
-@use '~@material/select/styles';
 @import './Variables';
 @import './Mixins';
-
-// Keep the footer at the bottom at all time.
 
 html,
 body {
@@ -21,39 +13,54 @@ body {
   margin-bottom: 1.25rem;
 }
 
-// ----
-
 .footer {
   margin-top: auto;
-  padding: 1.5rem;
+  padding: 1rem;
   color: $footer-color;
   background-color: $footer-background-color;
 
+  @media (width >= 768px) {
+    padding: 2rem;
+  }
+
   a {
     color: inherit;
+    text-decoration: underline;
 
     &:hover {
-      text-decoration: none;
+      color: var(--primary);
     }
   }
 
-  ul {
-    padding: 0;
-    list-style: none;
+  .footer-links {
+    a {
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+      text-decoration: none;
 
-    .list-vertical {
-      li {
-        display: block;
-        hyphens: auto;
+      &:hover {
+        color: var(--primary);
+      }
+
+      &:not(:first-child) {
+        margin-left: 0.5rem;
       }
     }
   }
+
+  .footer-copyright {
+    font-size: 0.9rem;
+  }
 }
 
-.mdc-select {
-  width: 100% !important;
-}
+.footer-download {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  a {
+    text-decoration: none;
 
-.mdc-notched-outline__notch {
-  width: 100% !important;
+    img {
+      margin-top: 0.3rem;
+    }
+  }
 }

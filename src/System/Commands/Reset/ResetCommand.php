@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\System\Commands\Reset;
 
 use App\DB\Entity\Project\Program;
+use App\DB\Entity\System\Statistic;
 use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\System\StatisticRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Commands\ImportProjects\ProgramImportCommand;
+use Doctrine\ORM\EntityManagerInterface;
 use Random\RandomException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -22,7 +25,11 @@ class ResetCommand extends Command
 {
   final public const string DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
 
-  public function __construct(private readonly ProgramRepository $program_manager, private readonly ParameterBagInterface $parameter_bag)
+  public function __construct(
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly ProgramRepository $program_manager,
+    private readonly StatisticRepository $statistic_repository,
+    private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
   }
@@ -137,6 +144,7 @@ class ResetCommand extends Command
     $this->downloadProjects($program_names, $user_array, $output);
     $this->exampleProject($program_names, $output);
     $this->markNotForKids($program_names, $output);
+    $this->addStatistics();
 
     // https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
@@ -568,5 +576,17 @@ class ResetCommand extends Command
         }
       }
     }
+  }
+
+  private function addStatistics(): void
+  {
+    $statistic = $this->statistic_repository->find(1);
+    if (!$statistic) {
+      $statistic = new Statistic();
+    }
+    $statistic->setProjects('13461234621');
+    $statistic->setUsers('345423543');
+    $this->entity_manager->persist($statistic);
+    $this->entity_manager->flush();
   }
 }

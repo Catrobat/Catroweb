@@ -29,6 +29,7 @@ use App\DB\EntityRepository\Project\ScratchProgramRemixRepository;
 use App\DB\EntityRepository\Project\ScratchProgramRepository;
 use App\DB\EntityRepository\Project\TagRepository;
 use App\DB\EntityRepository\System\CronJobRepository;
+use App\DB\EntityRepository\System\StatisticRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRepository;
 use App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository;
@@ -227,6 +228,11 @@ trait ContextTrait
   public function getStudioManager(): ?StudioManager
   {
     return $this->getContainer()->get(StudioManager::class);
+  }
+
+  public function getStatisticsRepository(): ?StatisticRepository
+  {
+    return $this->getContainer()->get(StatisticRepository::class);
   }
 
   public function getSymfonyParameter(string $param): mixed

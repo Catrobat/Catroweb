@@ -7,6 +7,7 @@ namespace Tests\PhpUnit\Application\Twig;
 use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\Application\Twig\TwigExtension;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
+use App\DB\EntityRepository\System\StatisticRepository;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -140,9 +141,18 @@ class TwigExtensionTest extends TestCase
     $request_stack = $this->mockRequestStack($locale);
     $parameter_bag = $this->createMock(ParameterBag::class);
     $translator = $this->createMock(TranslatorInterface::class);
-    $featureFlagManager = $this->createMock(FeatureFlagManager::class);
+    $feature_flag_manager = $this->createMock(FeatureFlagManager::class);
+    $statistics_repository = $this->createMock(StatisticRepository::class);
 
-    return new TwigExtension($request_stack, $repo, $parameter_bag, $this->translationPath, $translator, $featureFlagManager);
+    return new TwigExtension(
+      $request_stack,
+      $repo,
+      $parameter_bag,
+      $this->translationPath,
+      $translator,
+      $feature_flag_manager,
+      $statistics_repository
+    );
   }
 
   private function inArray(string $needle, array $haystack): bool

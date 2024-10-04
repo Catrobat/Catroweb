@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\System\FeatureFlag;
 
-use App\DB\Entity\FeatureFlag;
+use App\DB\Entity\System\FeatureFlag;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
