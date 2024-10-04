@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\System\FeatureFlag;
 
-use App\DB\Entity\FeatureFlag;
+use App\DB\Entity\System\FeatureFlag;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;

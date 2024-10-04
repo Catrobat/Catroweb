@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Application\Controller\Base;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\System\MaintenanceInformation;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\Storage\ImageRepository;

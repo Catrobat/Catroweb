@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\System\Testing\Behat\Context;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -17,7 +16,9 @@ use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
-use App\DB\Entity\Survey;
+use App\DB\Entity\System\MaintenanceInformation;
+use App\DB\Entity\System\Statistic;
+use App\DB\Entity\System\Survey;
 use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
@@ -1808,5 +1809,32 @@ class DataFixturesContext implements Context
           Assert::assertSame($set['value'], $result, 'Failed for: '.json_encode($set));
       }
     }
+  }
+
+  /**
+   * @Given there are statistics with :user_count user and :project_count projects
+   */
+  public function thereAreStatistics(string $user_count, string $project_count): void
+  {
+    $statistic = $this->getStatisticsRepository()->findOneBy(['id' => 1]);
+    if (!$statistic) {
+      $statistic = new Statistic();
+    }
+    $statistic->setUsers($user_count);
+    $statistic->setProjects($project_count);
+    $em = $this->getManager();
+    $em->persist($statistic);
+    $em->flush();
+  }
+
+  /**
+   * @Then There should be statistics with :user_count user and :project_count projects
+   */
+  public function thereShouldBeStatistics(string $user_count, string $project_count): void
+  {
+    $statistic = $this->getStatisticsRepository()->findOneBy(['id' => 1]);
+    $this->getManager()->refresh($statistic);
+    Assert::assertSame($user_count, $statistic->getUsers(), 'Expected user count check failed');
+    Assert::assertSame($project_count, $statistic->getProjects(), 'Expected project count check failed');
   }
 }

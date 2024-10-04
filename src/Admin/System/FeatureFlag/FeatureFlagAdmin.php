@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\System\FeatureFlag;
 
-use App\DB\Entity\FeatureFlag;
+use App\DB\Entity\System\FeatureFlag;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

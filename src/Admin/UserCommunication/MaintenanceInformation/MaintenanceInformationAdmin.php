@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\UserCommunication\MaintenanceInformation;
 
-use App\DB\Entity\MaintenanceInformation;
+use App\DB\Entity\System\MaintenanceInformation;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;

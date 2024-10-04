@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\DB\Entity;
+namespace App\DB\Entity\System;
 
+use App\DB\Entity\Flavor;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

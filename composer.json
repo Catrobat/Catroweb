@@ -5,6 +5,7 @@
   "description": "Catrobat's Share Community Platform",
   "require": {
     "php": ">=8.3",
+    "ext-bcmath": "*",
     "ext-SimpleXML": "*",
     "ext-gd": "*",
     "ext-imagick": "*",
@@ -99,7 +100,8 @@
       "ext-pcntl": "8.3",
       "ext-posix": "8.3",
       "ext-xml": "8.3",
-      "ext-zip": "8.3"
+      "ext-zip": "8.3",
+      "ext-bcmath": "8.3"
     },
     "bin-dir": "bin",
     "preferred-install": {
