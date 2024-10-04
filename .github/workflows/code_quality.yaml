@@ -39,7 +39,7 @@ on:
   pull_request:
     branches:
       - '**' # all branches
-      - '!master' # excludes master to prevent double test runs during release prep.
+      - '!main' # excludes main to prevent double test runs during release prep.
 
 jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
