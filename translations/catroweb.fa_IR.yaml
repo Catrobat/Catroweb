@@ -8,7 +8,7 @@ createNewPassword: ایجاد کلمه عبور جدید
 accountSettings: تنظیمات حساب کاربری
 email: ایمیل
 aboutPocketCode: درباره پاکت کد
-about: درباره
+about: درباره "کت ربات"
 education: تحصیلات
 chat: چت و انجمن ها
 privacyGuide: Privacy Awareness Guide
@@ -732,11 +732,8 @@ codeStatistics:
   deviceBricks: 'دستگاه'
   specialBricks: 'خاص'
 footer:
-  language: زبان
-  usefulLinks: لینک‌های مفید
-  legalities: حقوقی
-  communityStats: آمار جامعه
-  download: برنامه را دریافت کنید
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: سیاست حفظ حریم خصوصی
   version: نسخه ۲٫۲، ۱۷ اکتبر ۲۰۱۹

@@ -8,7 +8,7 @@ createNewPassword: إنشاء كلمة مرور جديدة
 accountSettings: إعدادت الحساب
 email: البريد الإلكتروني
 aboutPocketCode: حول تطبيق بوكت بينت
-about: حول
+about: حول كاتروبات
 education: التعليم
 chat: المحادثات والمنتديات
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: 'الجهاز'
   specialBricks: 'مميز'
 footer:
-  language: اللغة
-  usefulLinks: روابط مفيدة
-  legalities: الجوانب القانونية
-  communityStats: إحصائيات المجتمع
-  download: احصل على التطبيق
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: سياسة الخصوصية
   version: الإصدار 2.2، 17 تشرين الأول/أكتوبر 2019

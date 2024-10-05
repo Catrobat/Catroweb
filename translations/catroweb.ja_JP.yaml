@@ -8,7 +8,7 @@ createNewPassword: 新しいパスワードを作成
 accountSettings: アカウント設定
 email: メール
 aboutPocketCode: ポケットコードについて
-about: アプリについて
+about: キャトロバットについて
 education: 教育
 chat: チャットとフォーラム
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: 'デバイス'
   specialBricks: 'スペシャル'
 footer:
-  language: 言語
-  usefulLinks: 役に立つリンク
-  legalities: 法的
-  communityStats: コミュニティ状況
-  download: アプリを入手
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: プライバシーポリシー
   version: バージョン 2.2、2019 年 10 月 17 日

@@ -8,7 +8,7 @@ createNewPassword: புதிய கடவுச்சொல்லை உர�
 accountSettings: கணக்கு செயலமைப்புகள்
 email: மின்னஞ்சல்
 aboutPocketCode: பற்றி பாக்கெட் குறியீடு
-about: இதனைப் பற்றி
+about: கேட்ரோபாட் பற்றி
 education: கல்வி
 chat: அரட்டை மற்றும் மன்றங்கள்
 privacyGuide: Privacy Awareness Guide
@@ -732,11 +732,8 @@ codeStatistics:
   deviceBricks: 'Device'
   specialBricks: 'சிறப்பு'
 footer:
-  language: மொழி
-  usefulLinks: பயனுள்ள இணைப்புகள்
-  legalities: சட்டப்பூர்வமான
-  communityStats: சமூக புள்ளிவிவரங்கள்
-  download: செயலியைப் (App ஐ) பெற
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: தனிமனித உரிமை கொள்கை
   version: பதிப்பு 2.2, 17 அக்டோபர் 2019

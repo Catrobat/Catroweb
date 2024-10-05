@@ -8,7 +8,7 @@ createNewPassword: ایجاد رمز عبور جدید
 accountSettings: تنظیمات حساب
 email: پست الکترونیک
 aboutPocketCode: درباره کد جیبی Pocket Code
-about: در باره
+about: درباره کاتروبات Catrobat
 education: تحصیل
 chat: چت و انجمن ها
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: 'دستگاه'
   specialBricks: 'خاص'
 footer:
-  language: زبان
-  usefulLinks: Useful Links
-  legalities: حقوقی
-  communityStats: Community Stats
-  download: برنامه را بدست آورید
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Privacy Policy
   version: نخسه ۲.۲، ۱۷ اکتوبر ۲۰۱۹

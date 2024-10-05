@@ -8,7 +8,7 @@ createNewPassword: కొత్త పాస్‌వర్డ్‌ను స�
 accountSettings: ఖాతా సెట్టింగ్‌లు
 email: ఇ-మెయిల్
 aboutPocketCode: పాకెట్ కొడ్ గురించి
-about: About
+about: About Catrobat
 education: చదువు
 chat: చాట్ మరియు ఫోరమ్‌లు
 privacyGuide: Privacy Awareness Guide
@@ -731,11 +731,8 @@ codeStatistics:
   deviceBricks: 'పరికరం'
   specialBricks: 'ప్రత్యేక'
 footer:
-  language: భాష
-  usefulLinks: ఉపయోగకరమైన లింకులు
-  legalities: చట్టాలు
-  communityStats: కమ్యూనిటీ గణాంకాలు
-  download: యాప్ ని తీస్కో
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: గోప్యతా విధానం
   version: వెర్షన్ 2.2, 17 అక్టోబర్ 2019

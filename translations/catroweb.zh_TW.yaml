@@ -8,7 +8,7 @@ createNewPassword: 建立新密碼
 accountSettings: Account Settings
 email: 電子郵件
 aboutPocketCode: 關於 Pocket Code
-about: 關於
+about: 關於 Catrobat
 education: 教育
 chat: 聊天和論壇
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: '設備'
   specialBricks: '特別的'
 footer:
-  language: 語言
-  usefulLinks: Useful Links
-  legalities: 合法性
-  communityStats: Community Stats
-  download: 下載這個軟件
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: 隱私權政策
   version: 2.2 版，2019 年 10 月 17 日

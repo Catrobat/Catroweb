@@ -8,7 +8,7 @@ createNewPassword: Create new password
 accountSettings: Подешавања налога
 email: E-Мail
 aboutPocketCode: О Pocket Code
-about: O
+about: О Catrobat
 education: Education
 chat: Chat and forums
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
-  language: Језик
-  usefulLinks: Корисни линкови
-  legalities: Legalities
-  communityStats: Community Stats
-  download: Get the App
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Правила о приватности
   version: Version 2.2, 17 October 2019

@@ -8,7 +8,7 @@ createNewPassword: สร้างรหัสผ่านใหม่
 accountSettings: แก้ไขข้อมูลส่วนตัว
 email: อีเมล
 aboutPocketCode: เกี่ยวกับ Pocket Code
-about: เกี่ยวกับ
+about: เกี่ยวกับ Catrobat
 education: การศึกษา
 chat: แชทและฟอรัม
 privacyGuide: คู่มือควรรู้เกี่ยวกับความเป็นส่วนตัว
@@ -732,11 +732,8 @@ codeStatistics:
   deviceBricks: 'อุปกรณ์'
   specialBricks: 'พิเศษ'
 footer:
-  language: ภาษา
-  usefulLinks: ลิงค์ที่เป็นประโยชน์
-  legalities: กฎหมาย
-  communityStats: สถิติชุมชน
-  download: รับแอป
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: นโยบายความเป็นส่วนตัว
   version: เวอร์ชัน 2.2 วันที่ 17 ตุลาคม 2562
