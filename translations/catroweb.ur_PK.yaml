@@ -8,7 +8,7 @@ createNewPassword: ایک نیا پاس ورڈ بنائیں
 accountSettings: اکاؤنٹ کی ترتیبات
 email: ای-میل
 aboutPocketCode: پاکٹ کوڈ کے بارے میں
-about: ' اِس سافٹ وٖیر کے بارے میں'
+about: کیٹروبیٹ کے بارے میں
 education: تعلیم
 chat: چیٹ اور فورم
 privacyGuide: Privacy Awareness Guide
@@ -722,11 +722,8 @@ codeStatistics:
   deviceBricks: 'ڈیوائس'
   specialBricks: 'خصوصی'
 footer:
-  language: زبان
-  usefulLinks: مفید لنکس
-  legalities: قانونییت
-  communityStats: کمیونٹی کے اعدادوشمار
-  download: اپلی کیشن حاصل
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: رازداری کا طریقہ کار
   version: ورژن ۲٫۲، ۱۷ اکتوبر ۲۰۱۹.

@@ -8,7 +8,7 @@ createNewPassword: Skapa nytt lösenord
 accountSettings: Kontoinställningar
 email: E-post
 aboutPocketCode: Om Pocket Code
-about: Om
+about: Om Catrobat
 education: Utbildning
 chat: Chatt och forum
 privacyGuide: Privacy Awareness Guide
@@ -727,11 +727,8 @@ codeStatistics:
   deviceBricks: 'Enhet'
   specialBricks: 'Special'
 footer:
-  language: Språk
-  usefulLinks: Användbara länkar
-  legalities: Legalities
-  communityStats: Community stats
-  download: Skaffa appen
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Integritetspolicy
   version: Version 2.2, 17 oktober 2019

@@ -8,7 +8,7 @@ createNewPassword: 创建新密码
 accountSettings: 账号设置
 email: 邮箱
 aboutPocketCode: 关于口袋编程
-about: 关于统计
+about: 关于 Catrobat
 education: 教育
 chat: 聊天和论坛
 privacyGuide: Privacy Awareness Guide
@@ -733,11 +733,8 @@ codeStatistics:
   deviceBricks: '设备'
   specialBricks: '特殊的'
 footer:
-  language: 语言
-  usefulLinks: 相关链接
-  legalities: 法律信息
-  communityStats: 社区统计
-  download: 获取应用
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: 隐私策略
   version: 第2.2版，2019年10月17日

@@ -8,7 +8,7 @@ createNewPassword: 새로운 비밀번호 생성
 accountSettings: 계정 설정
 email: 이메일
 aboutPocketCode: 포켓 코드에 대하여
-about: 정보
+about: Catrobat에 대하여
 education: 교육
 chat: 채팅과 포럼
 privacyGuide: Privacy Awareness Guide
@@ -726,11 +726,8 @@ codeStatistics:
   deviceBricks: '기기'
   specialBricks: '특수'
 footer:
-  language: 언어
-  usefulLinks: 유용한 링크
-  legalities: 합법적임
-  communityStats: 커뮤니티 현황
-  download: 앱 다운로드
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: 개인 정보 보호 정책
   version: 버전 2.2, 2019년 10월 17일

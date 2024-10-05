@@ -8,7 +8,7 @@ createNewPassword: नया पासवर्ड बनाएं
 accountSettings: अकाउंट सेटिंग
 email: ई-मेल
 aboutPocketCode: पॉकेट कोड के बारे में 
-about: के बारे में
+about: कैटरोबैट के बारे में
 education: शिक्षा
 chat: चैट और फ़ोरम
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: 'युक्ति'
   specialBricks: 'विशेष'
 footer:
-  language: भाषा
-  usefulLinks: उपयोगी कड़ियां
-  legalities: कानूनी निर्देशों
-  communityStats: सामुदायिक आँकड़े
-  download: एप्लिकेशन लें
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: गोपनीयता नीति
   version: संस्करण 2.2, 17 अक्टूबर 2019

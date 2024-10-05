@@ -8,7 +8,7 @@ createNewPassword: Opprett nytt passord
 accountSettings: Kontoinnstillinger
 email: E-post
 aboutPocketCode: Om Pocket Code
-about: Om
+about: Om Catrobat
 education: Utdanning
 chat: Chat og forum
 privacyGuide: Privacy Awareness Guide
@@ -729,11 +729,8 @@ codeStatistics:
   deviceBricks: 'Enhet'
   specialBricks: 'Spesiell '
 footer:
-  language: Språk
-  usefulLinks: Nyttige lenker
-  legalities: Legaliteter
-  communityStats: Samfunns statistikk
-  download: Få appen
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Personvernregler
   version: Versjon 2.2, 17. oktober 2019

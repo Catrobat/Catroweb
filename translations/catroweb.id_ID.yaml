@@ -8,7 +8,7 @@ createNewPassword: Buat kata sandi baru
 accountSettings: Pengaturan akun
 email: E-mail
 aboutPocketCode: Tentang Pocket Code
-about: Tentang
+about: Tentang Catrobat
 education: pendidikan
 chat: Obrolan dan forum
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: 'Alat'
   specialBricks: 'Khusus'
 footer:
-  language: Bahasa
-  usefulLinks: Link yang bermanfaat
-  legalities: Legalitas
-  communityStats: Statistik Komunitas
-  download: Dapatkan aplikasinya
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Kebijakan privasi
   version: Versi 2.2, 17 Oktober 2019

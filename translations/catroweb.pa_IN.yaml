@@ -8,7 +8,7 @@ createNewPassword: ਨਵਾਂ ਪਾਸਵਰਡ ਬਣਾਓ
 accountSettings: ਖਾਤਾ ਯੋਜਨਾ
 email: E-Mail
 aboutPocketCode: ਪਾਕੇਟ ਕੋਡ ਬਾਰੇ
-about: ਬਾਰੇ
+about: ਕੈਟਰੋਬੈਟ ਬਾਰੇ
 education: ਸਿੱਖਿਆ
 chat: ਗੱਲਬਾਤ ਅਤੇ ਫੋਰਮ
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: 'ਡੀਵਾਈਸ:'
   specialBricks: 'ਵਿਸ਼ੇਸ਼'
 footer:
-  language: ਭਾਸ਼ਾ
-  usefulLinks: ਲਾਭਦਾਇਕ ਲਿੰਕ
-  legalities: ਕਾਨੂੰਨੀ
-  communityStats: ਕਮਿ Communityਨਿਟੀ ਅੰਕੜੇ
-  download: ਐਪ ਪ੍ਰਾਪਤ ਕਰੋ
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: ਪਰਾਈਵੇਟ ਨੀਤੀ
   version: ਸੰਸਕਰਣ 2.2, 17 ਅਕਤੂਬਰ 2019
