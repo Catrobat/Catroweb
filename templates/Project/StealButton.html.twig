@@ -1,0 +1,57 @@
+<form id="stealProjectForm" action="{{ path('program_steal', {'id': project.id}) }}" method="POST">
+    <button id="projectStealButton{{ suffix|default('') }}" class="btn btn-danger" type="submit">
+        Steal Project
+    </button>
+</form>
+
+<div id="feedback-snackbar" style="display: none;" class="alert"></div>
+
+<script>
+document.getElementById('stealProjectForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    const form = event.target;
+    const actionUrl = form.getAttribute('action');
+    
+    // Make an AJAX request using fetch to submit the form
+    fetch(actionUrl, {
+        method: 'POST',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const snackbar = document.getElementById('feedback-snackbar');
+        
+        if (data.error) {
+            // Show error message
+            snackbar.textContent = data.error;
+            snackbar.classList.add('alert-danger');
+            snackbar.classList.remove('alert-success');
+        } else {
+            // Show success message
+            snackbar.textContent = data.message;
+            snackbar.classList.add('alert-success');
+            snackbar.classList.remove('alert-danger');
+            
+            // Automatically reload the page after the project is stolen
+            setTimeout(() => {
+                location.reload();
+            }, 1000); // Delay the reload for 1 seconds to show the success message
+        }
+        
+        // Display the snackbar
+        snackbar.style.display = 'block';
+        
+        // hide the snackbar after a few seconds if no reload is needed
+        setTimeout(() => {
+            snackbar.style.display = 'none';
+        }, 3000);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+</script>

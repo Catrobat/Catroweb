@@ -91,6 +91,9 @@
     <div class="d-none d-lg-block col-lg-4 mt-4 ">
       {% if logged_in %}
         {{ include('Project/DownloadButton.html.twig') }}
+        {% if not my_project %}
+          {{ include('Project/StealButton.html.twig') }}
+        {% endif %}
       {% else %}
         {{ include('Project/DownloadDisabledButton.html.twig') }}
       {% endif %}
@@ -120,6 +123,9 @@
     <div class="col-7 col-sm-8 mt-3" style="padding-left: 0;">
       {% if logged_in %}
         {{ include('Project/DownloadButton.html.twig', {suffix: '-small'}) }}
+        {% if not my_project %}
+          {{ include('Project/StealButton.html.twig') }}
+        {% endif %}
       {% else %}
         {{ include('Project/DownloadDisabledButton.html.twig', {suffix: '-small'}) }}
       {% endif %}
