@@ -324,6 +324,30 @@ class ProjectController extends AbstractController
     return $this->redirectToRoute('program', ['id' => $id]);
   }
 
+#[Route(path: '/project/steal/{id}', name: 'program_steal', methods: ['POST'])]
+public function stealProject(string $id, EntityManagerInterface $entityManager): JsonResponse
+{
+    // Get the current user
+    $user = $this->getUser();
+    if (!$user) {
+        return new JsonResponse(['error' => 'You must be logged in to steal a project.'], Response::HTTP_UNAUTHORIZED);
+    }
+
+    // Find the project by ID
+    $project = $this->project_manager->find($id);
+    if (!$project) {
+        return new JsonResponse(['error' => $this->translator->trans('snackbar.project_not_found', [], 'catroweb')], Response::HTTP_NOT_FOUND);
+    }
+
+    // Stealing project by changing the owner
+    $project->setUser($user);
+    $entityManager->persist($project);
+    $entityManager->flush();
+
+    // Return a JSON response with a success message
+    return new JsonResponse(['message' => 'You successfully stole the project'], Response::HTTP_OK);
+}
+
   protected function redirectToIndexOnError(): RedirectResponse
   {
     $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
