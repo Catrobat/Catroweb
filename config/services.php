@@ -90,8 +90,8 @@ use OpenAPI\Server\Service\SerializerInterface;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Dotenv\Command\DotenvDumpCommand;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters = $containerConfigurator->parameters();
