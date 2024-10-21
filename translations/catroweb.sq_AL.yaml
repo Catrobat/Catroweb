@@ -8,7 +8,7 @@ createNewPassword: Krijo një Fjalëkalim të ri
 accountSettings: Konfigurimet e llogarisë
 email: E-Mail
 aboutPocketCode: Për Pocket Code
-about: Për rreth
+about: About Catrobat
 education: Edukimi
 chat: Biseda dhe Forume
 privacyGuide: Privacy Awareness Guide
@@ -728,11 +728,8 @@ codeStatistics:
   deviceBricks: 'Pajisje '
   specialBricks: 'Speciale'
 footer:
-  language: Gjuha
-  usefulLinks: Linjqe të dobishme
-  legalities: Ligjshmëritë 
-  communityStats: Statistikat e komunitetit 
-  download: Merr aplikacionin 
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Politika e privatësisë 
   version: Versioni 2.2, 17 Tetor 2019 

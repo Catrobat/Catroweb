@@ -8,7 +8,7 @@ createNewPassword: Create new password
 accountSettings: ගිණුමේ සැකසුම්
 email: විද්‍යුත් තැපෑල
 aboutPocketCode: About Pocket Code
-about: About
+about: About Catrobat
 education: අධ්‍යාපනය
 chat: Chat and forums
 privacyGuide: Privacy Awareness Guide
@@ -727,11 +727,8 @@ codeStatistics:
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
-  language: භාෂාව
-  usefulLinks: ප්‍රයෝජනවත් සබැඳි
-  legalities: Legalities
-  communityStats: Community Stats
-  download: Get the App
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: රහස්‍යතා ප්‍රතිපත්තිය
   version: Version 2.2, 17 October 2019

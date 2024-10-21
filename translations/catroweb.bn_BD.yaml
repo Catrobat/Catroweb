@@ -8,7 +8,7 @@ createNewPassword: নতুন পাসওয়ার্ড তৈরি ক�
 accountSettings: অ্যাকাউন্ট সেটিংস
 email: ই-মেল
 aboutPocketCode: পকেট কোড সম্পর্কে
-about: সম্পর্কে
+about: ক্যাট্রোব্যাট সম্পর্কে
 education: শিক্ষা
 chat: চ্যাট এবং ফোরাম
 privacyGuide: Privacy Awareness Guide
@@ -734,11 +734,8 @@ codeStatistics:
   deviceBricks: 'যন্ত্র'
   specialBricks: 'বিশেষ'
 footer:
-  language: ভাষা
-  usefulLinks: উপকারী লিংক
-  legalities: বৈধতা
-  communityStats: সম্প্রদায় পরিসংখ্যান
-  download: অ্যাপ্লিকেশনটি পান
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: গোপনীয়তার নীতি
   version: সংস্করণ 2.2, 17 অক্টোবর 2019

@@ -8,7 +8,7 @@ createNewPassword: نوی پټنوم جوړ کړئ
 accountSettings: د حساب ترتیبات
 email: ای میل
 aboutPocketCode: د Pocket Code په اړه
-about: په اړه
+about: د Catrobat په اړه
 education: زده کړه
 chat: چیٹ او فورمونه
 privacyGuide: Privacy Awareness Guide
@@ -730,11 +730,8 @@ codeStatistics:
   deviceBricks: 'وسیله'
   specialBricks: 'ځانګړې'
 footer:
-  language: ژبه
-  usefulLinks: ګټورې اړیکې
-  legalities: قانونيتونه
-  communityStats: د ټولنې احصایې
-  download: اپلیکیشن ترلاسه کړئ
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: د پټتیا تګلاره
   version: Version 2.2, 17 October 2019
