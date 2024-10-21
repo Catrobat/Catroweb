@@ -91,6 +91,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Dotenv\Command\DotenvDumpCommand;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters = $containerConfigurator->parameters();
@@ -510,6 +511,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'model_class' => CommentMachineTranslation::class,
         'controller' => CommentMachineTranslationAdminController::class,
       ])
+  ;
+
+  // enable prod env dumping without composer
+  $services->set(DotenvDumpCommand::class)
+    ->tag('console.command')
+    ->arg('$projectDir', '%kernel.project_dir%/.env')
+    ->arg('$defaultEnv', '%kernel.environment%')
+    ->public()
   ;
 
   // -------------------------------------------------------------------------------------------------------------------
