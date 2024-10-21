@@ -83,7 +83,7 @@ services:
       - ./../.env.dev:/var/www/catroweb/.env.dev
       - ./../.env.test:/var/www/catroweb/.env.test
       - ./../.env.prod:/var/www/catroweb/.env.prod
-      - ./../.env.local:/var/www/catroweb/.env.local # useful for deploying
+      # - ./../.env.local:/var/www/catroweb/.env.local # useful for deploying, but not working with github testing workflow
       - ./../deploy.php:/var/www/catroweb/deploy.php
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
