@@ -83,17 +83,16 @@ services:
       - ./../.env.dev:/var/www/catroweb/.env.dev
       - ./../.env.test:/var/www/catroweb/.env.test
       - ./../.env.prod:/var/www/catroweb/.env.prod
-      # - ./../.env.local:/var/www/catroweb/.env.local # useful for deploying
+      - ./../.env.local:/var/www/catroweb/.env.local # useful for deploying
       - ./../deploy.php:/var/www/catroweb/deploy.php
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
       - ./../symfony.lock:/var/www/catroweb/symfony.lock
       - ./../webpack.config.js:/var/www/catroweb/webpack.config.js
       - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
-
-      # sharing package files might not work on windows
-      # - ./../package.json:/var/www/catroweb/package.json
-      # - ./../package-lock.json:/var/www/catroweb/package-lock.json
+      # sharing package files on windows might not work as expected
+      - ./../package.json:/var/www/catroweb/package.json
+      - ./../package-lock.json:/var/www/catroweb/package-lock.json
 
   db.catroweb.dev:
     image: mariadb:10.11
