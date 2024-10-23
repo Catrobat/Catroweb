@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33fe0613530b5b16682c55553346f856",
+    "content-hash": "04b9d7b32dd4b2d424492ed0cf90ea94",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -13853,20 +13853,24 @@
         },
         {
             "name": "deployer/deployer",
-            "version": "v7.4.1",
+            "version": "v7.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "9d6397f25d8185622717e6e66d3eed737fd9d99b"
+                "reference": "12e99f965ade27bc00c54541096715e1904acd3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/9d6397f25d8185622717e6e66d3eed737fd9d99b",
-                "reference": "9d6397f25d8185622717e6e66d3eed737fd9d99b",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/12e99f965ade27bc00c54541096715e1904acd3f",
+                "reference": "12e99f965ade27bc00c54541096715e1904acd3f",
                 "shasum": ""
             },
+            "require": {
+                "ext-json": "*",
+                "php": "^8.0|^7.3"
+            },
             "bin": [
-                "dep"
+                "bin/dep"
             ],
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -13892,7 +13896,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-12T20:42:52+00:00"
+            "time": "2024-10-22T12:37:24+00:00"
         },
         {
             "name": "dmore/behat-chrome-extension",

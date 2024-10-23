@@ -65,7 +65,7 @@
   "require-dev": {
     "behat/behat": "3.14.*",
     "behat/mink": "1.11.*",
-    "deployer/deployer": "v7.4.*",
+    "deployer/deployer": "v7.5.*",
     "dmore/behat-chrome-extension": "1.4.*",
     "dmore/chrome-mink-driver": "2.9.*",
     "doctrine/doctrine-fixtures-bundle": "3.6.*",
