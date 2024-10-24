@@ -13853,21 +13853,28 @@
         },
         {
             "name": "deployer/deployer",
-            "version": "v7.5.3",
+            "version": "v7.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "12e99f965ade27bc00c54541096715e1904acd3f"
+                "reference": "df7d86e47f9760ca98dc7ff10962dd07134ac489"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/12e99f965ade27bc00c54541096715e1904acd3f",
-                "reference": "12e99f965ade27bc00c54541096715e1904acd3f",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/df7d86e47f9760ca98dc7ff10962dd07134ac489",
+                "reference": "df7d86e47f9760ca98dc7ff10962dd07134ac489",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": "^8.0|^7.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.64",
+                "pestphp/pest": "^3.3",
+                "phpstan/phpstan": "^1.4",
+                "phpunit/php-code-coverage": "^11.0",
+                "phpunit/phpunit": "^11.4"
             },
             "bin": [
                 "bin/dep"
@@ -13896,7 +13903,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-22T12:37:24+00:00"
+            "time": "2024-10-23T15:09:50+00:00"
         },
         {
             "name": "dmore/behat-chrome-extension",
