@@ -74,7 +74,7 @@
   "dependencies": {
     "@analytics/google-tag-manager": "^0.5.5",
     "@bugsnag/browser-performance": "^2.9.1",
-    "@bugsnag/js": "^8.0.0",
+    "@bugsnag/js": "^8.1.1",
     "@material/checkbox": "^14.0.0",
     "@material/chips": "^14.0.0",
     "@material/circular-progress": "^14.0.0",
