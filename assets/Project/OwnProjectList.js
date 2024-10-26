@@ -307,47 +307,57 @@ export class OwnProjectList {
   }
 
   _actionShareProject(id) {
-    const clipboardSuccessMessage = myProfileConfiguration.messages.clipboardSuccessMessage
-    const clipboardFailMessage = myProfileConfiguration.messages.clipboardFailMessage
-    const shareSuccessMessage = myProfileConfiguration.messages.shareSuccessMessage
-    const shareFailMessage = myProfileConfiguration.messages.shareFailMessage
-    const projectUrl = this.projectsData[id].project_url
-    const titleMessage = myProfileConfiguration.messages.displayName
-    const textMessage = myProfileConfiguration.messages.checkoutMessage
+    const clipboardSuccessMessage = myProfileConfiguration.messages.clipboardSuccessMessage;
+    const clipboardFailMessage = myProfileConfiguration.messages.clipboardFailMessage;
+    const shareSuccessMessage = myProfileConfiguration.messages.shareSuccessMessage;
+    const shareFailMessage = myProfileConfiguration.messages.shareFailMessage;
+    const projectUrl = this.projectsData[id].project_url;
+    const titleMessage = myProfileConfiguration.messages.displayName;
+    const textMessage = myProfileConfiguration.messages.checkoutMessage;
 
-    const shareButton = document.querySelector('#project-share-action')
+    const shareButton = document.querySelector('#project-share-action');
 
     if (navigator.share) {
-      shareButton.addEventListener('click', function () {
-        navigator
-          .share({
-            title: titleMessage,
-            text: textMessage,
-            url: projectUrl,
-          })
-          .then(() => {
-            showSnackbar('#share-snackbar', shareSuccessMessage)
-          })
-          .catch((e) => {
-            console.error(e)
-            showSnackbar('#share-snackbar', shareFailMessage)
-          })
-      })
+      if (!shareButton.dataset.listenerAdded) {
+        console.log('Adding event listener for native share functionality.');
+        shareButton.addEventListener('click', function () {
+          console.log('Share button clicked. Attempting to share project.');
+          navigator
+            .share({
+              title: titleMessage,
+              text: textMessage,
+              url: projectUrl,
+            })
+            .then(() => {
+              console.log('Project shared successfully.');
+              showSnackbar('#share-snackbar', shareSuccessMessage);
+            })
+            .catch((e) => {
+              console.error('Error sharing project:', e);
+              showSnackbar('#share-snackbar', shareFailMessage);
+            });
+        });
+        shareButton.dataset.listenerAdded = true;
+      } else {
+        console.log('Event listener for native share functionality already added.');
+      }
     } else {
+      console.log('Native share not supported. Using clipboard functionality.');
       const cb = new Clipboard('#project-share-action', {
         text: function () {
-          return projectUrl
+          return projectUrl;
         },
-      })
+      });
       cb.on('success', function () {
-        showSnackbar('#share-snackbar', clipboardSuccessMessage)
-      })
+        console.log('Project URL copied to clipboard successfully.');
+        showSnackbar('#share-snackbar', clipboardSuccessMessage);
+      });
       cb.on('error', function () {
-        showSnackbar('#share-snackbar', clipboardFailMessage)
-      })
+        console.error('Error copying project URL to clipboard.');
+        showSnackbar('#share-snackbar', clipboardFailMessage);
+      });
     }
   }
-
   _actionToggleVisibility(id) {
     const self = this
     const project = this.projectsData[id]
