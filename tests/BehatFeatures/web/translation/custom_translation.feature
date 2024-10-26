@@ -80,7 +80,7 @@ Feature: Projects should have an editor a custom translation can be defined
     Then the element "#edit-submit-button" should not be disabled
     When I click "#edit-submit-button"
     And I wait for AJAX to finish
-    And I wait 500 milliseconds
+    And I wait 1000 milliseconds
     Then the element "#edit-text-navigation" should be visible
     And the element "#edit-fr-button" should exist
     And I should see "French"

@@ -29,6 +29,7 @@ use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Elastica\Query\BoolQuery;
@@ -39,6 +40,7 @@ use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -63,9 +65,10 @@ class ProjectManager
     protected ExtensionRepository $extension_repository,
     protected CatrobatFileSanitizer $file_sanitizer,
     protected NotificationManager $notification_service,
+    #[Autowire(service: 'fos_elastica.finder.app_program')]
     private readonly TransformedFinder $program_finder,
     private readonly ?UrlHelper $urlHelper,
-    protected Security $security
+    protected Security $security,
   ) {
   }
 
@@ -116,6 +119,9 @@ class ProjectManager
    * Adds a new project and notifies all followers of the uploader about it.
    *
    * @throws Exception
+   */
+  /**
+   * @throws ORMException
    */
   public function addProject(AddProjectRequest $request): ?Program
   {
@@ -246,7 +252,8 @@ class ProjectManager
   /**
    * Adds a new project from a scratch_project. Doesn't add the Project file.
    *
-   * @throws \Exception
+   * @throws ORMException
+   * @throws \ImagickException
    */
   public function createProjectFromScratch(?Program $project, User $user, array $project_data): Program
   {
@@ -406,10 +413,8 @@ class ProjectManager
   /**
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
-   *
-   * @return Program|object|null
    */
-  public function findOneByNameAndUser(string $project_name, UserInterface $user)
+  public function findOneByNameAndUser(string $project_name, UserInterface $user): ?Program
   {
     return $this->project_repository->findOneBy([
       'name' => $project_name,
@@ -420,10 +425,8 @@ class ProjectManager
   /**
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
-   *
-   * @return Program|object|null
    */
-  public function findOneByName(string $project_name)
+  public function findOneByName(string $project_name): ?Program
   {
     return $this->project_repository->findOneBy(['name' => $project_name]);
   }
@@ -431,10 +434,8 @@ class ProjectManager
   /**
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
-   *
-   * @return Program|object|null
    */
-  public function findOneByScratchId(int $scratch_id)
+  public function findOneByScratchId(int $scratch_id): ?Program
   {
     return $this->project_repository->findOneBy(['scratch_id' => $scratch_id]);
   }
@@ -471,10 +472,8 @@ class ProjectManager
   /**
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
-   *
-   * @return Program|object|null
    */
-  public function find(string $id)
+  public function find(string $id): ?Program
   {
     return $this->project_repository->find($id);
   }
@@ -500,10 +499,8 @@ class ProjectManager
   /**
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
-   *
-   * @return Program|object|null
    */
-  public function findOneByRemixMigratedAt(?\DateTime $remix_migrated_at)
+  public function findOneByRemixMigratedAt(?\DateTime $remix_migrated_at): ?Program
   {
     return $this->project_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
   }
@@ -708,6 +705,9 @@ class ProjectManager
     return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getThumbnailWebPath($id);
   }
 
+  /**
+   * @throws \JsonException
+   */
   public function decodeToken(string $token): array
   {
     $tokenParts = explode('.', $token);
@@ -791,6 +791,9 @@ class ProjectManager
     }
   }
 
+  /**
+   * @throws ORMException
+   */
   public function deleteProject(Program $project): void
   {
     $project->setVisible(false);

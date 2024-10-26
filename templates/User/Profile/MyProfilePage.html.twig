@@ -1,0 +1,197 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ 'menu.profile'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('user_my_profile_page') }}
+  {{ encore_entry_link_tags('user_follower_overview') }}
+{% endblock %}
+
+{% block body %}
+  {% set queryParams = app.request.query.all %}
+  {% if queryParams.profileChangeSuccess is defined %}
+    <div id="alert-profile-change-success" class="alert alert-success">
+      {{ 'myprofile.profileChangeSuccess'|trans({}, 'catroweb') }}
+    </div>
+  {% endif %}
+  {% if queryParams.profilePictureChangeSuccess is defined %}
+    <div id="alert-profile-picture-change-success" class="alert alert-success">
+      {{ 'success.imgUpload'|trans({}, 'catroweb') }}
+    </div>
+  {% endif %}
+  <div class="profile__basic-info">
+    <div class="profile__basic-info__avatar">
+      <img class="profile__basic-info__avatar__img" alt="{{ 'profile.picture'|trans({}, 'catroweb') }}"
+           src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"/>
+      <div class="profile__basic-info__avatar__btn-change"
+           aria-label="{{ 'profile.changePicture'|trans({}, 'catroweb') }}"><span
+            class="material-icons">photo_camera</span></div>
+    </div>
+    <div class="profile__basic-info__text">
+      <div class="profile__basic-info__text__name" aria-label="{{ 'username'|trans({}, 'catroweb') }}">
+        {{ username }} {% if profile.isVerified %}<i class="verification-icon material-icons">check</i>{% endif %}
+      </div>
+    </div>
+  </div>
+  {% if app.user.about is not empty or app.user.currentlyWorkingOn is not empty %}
+    <div class="profile__description">
+      {% if app.user.about is not empty %}
+        <div class="profile__description__about" aria-label="{{ 'profile.aboutMe'|trans({}, 'catroweb') }}">
+          {{ app.user.about }}
+        </div>
+      {% endif %}
+      {% if app.user.currentlyWorkingOn is not empty %}
+        <div class="profile__description__status">
+        <span class="profile__description__status__label">
+            {{ 'profile.currentlyWorkingOn'|trans({}, 'catroweb') }}:
+        </span>
+          <span class="profile__description__status__content">{{ app.user.currentlyWorkingOn }}</span>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {{ include('User/Profile/Settings/UserSettings.html.twig') }}
+  {{ include('User/Profile/Settings/ProfileSettings.html.twig') }}
+  {{ include('User/Profile/Settings/SecuritySettings.html.twig') }}
+  {{ include('User/Profile/Settings/VerifySettings.html.twig') }}
+  {{ include('User/Profile/Settings/AccountSettings.html.twig') }}
+
+  <div class="tab-bar-container mt-3">
+    <div class="mdc-tab-bar" role="tablist">
+      <div class="mdc-tab-scroller">
+        <div class="mdc-tab-scroller__scroll-area" id="scroll-area">
+          <div class="mdc-tab-scroller__scroll-content">
+            <button class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
+            <span class="mdc-tab__content">
+              <span class="mdc-tab__icon" id="projects-count">{{ project_count }}</span>
+              <span class="mdc-tab__icon-text">{{ 'projects'|trans({}, 'catroweb') }}</span>
+            </span>
+              <span class="mdc-tab-indicator mdc-tab-indicator--active">
+              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+            </span>
+            </button>
+
+            <button class="mdc-tab mdc-tab--stacked" id="test" role="tab" aria-selected="false" tabindex="0">
+            <span class="mdc-tab__content">
+              <span class="mdc-tab__icon" id="followers-count">{{ followers_list|length }}</span>
+              <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
+            </span>
+              <span class="mdc-tab-indicator">
+              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+            </span>
+            </button>
+
+            <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
+            <span class="mdc-tab__content">
+              <span class="mdc-tab__icon" id="following-count">{{ following_list|length }}</span>
+              <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
+            </span>
+              <span class="mdc-tab-indicator">
+              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+            </span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content mt-4">
+    <div id="projects-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="projects-tab">
+      <div id="own-projects"
+           data-theme="{{ theme() }}"
+           data-base-url="{{ app.request.getBaseURL() }}"
+           data-flavor="{{ flavor() }}"
+           data-empty-message="{{ 'project.noProjects'|trans({}, 'catroweb') }}"
+           class="own-project-list loading">
+        <div class="container">
+          <div class="lazyload projects-spinner-container">
+            {{ include('Components/LoadingSpinner.html.twig', [], false) }}
+          </div>
+          <div class="lazyload own-project-list__wrapper">
+            <div class="lazyload projects-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{ include('User/Followers/FollowersTabs.twig') }}
+  </div>
+
+  <div class="mdc-menu mdc-menu-surface" id="project-action-menu">
+    <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+      <li class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__text"
+              data-text-private="{{ 'project.setPrivateAction'|trans({}, 'catroweb') }}"
+              data-text-public="{{ 'project.setPublicAction'|trans({}, 'catroweb') }}"></span>
+      </li>
+      <li class="mdc-list-item" role="menuitem" id="project-share-action">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__text">{{ 'project.shareAction'|trans({}, 'catroweb') }}</span>
+      </li>
+      <li class="mdc-list-item" role="menuitem">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__text">{{ 'project.deleteAction'|trans({}, 'catroweb') }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <template id="profile-loading-spinner-template" class="d-none">
+    <div class="loading-spinner-backdrop">
+      {{ include('Components/LoadingSpinner.html.twig', {size: 'large'}) }}
+    </div>
+  </template>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  const myProfileConfiguration = {
+    projectInfo: {
+      visibilityPrivateText: '{{ 'project.private'|trans({}, 'catroweb')|escape('js')|raw }}',
+      visibilityPublicText: '{{ 'project.public'|trans({}, 'catroweb')|escape('js')|raw }}',
+    },
+    projectActions: {
+      delete: {
+        confirmationText: `{{ 'project.deleteConfirmation'|trans({}, 'catroweb')|escape('js')|raw }}`
+      },
+      visibility: {
+        confirmationText: `{{ 'project.changeVisibility'|trans({}, 'catroweb')|escape('js')|raw }}`,
+      }
+    },
+    securitySettings: {
+
+    },
+    userSettings: {
+      deleteAccount: {
+        confirmationText: `{{ 'project.deleteAccountConfirmation'|trans({}, 'catroweb')|escape('js')|raw }}`
+      }
+    },
+    messages: {
+      clipboardSuccessMessage: '{{ 'clipboard.success_project'|trans({}, 'catroweb')|escape('js')|raw }}',
+      clipboardFailMessage: '{{ 'clipboard.fail'|trans({}, 'catroweb')|escape('js')|raw }}',
+      shareSuccessMessage: '{{ 'share.success'|trans({}, 'catroweb')|escape('js')|raw }}',
+      shareFailMessage: '{{ 'share.error'|trans({}, 'catroweb')|escape('js')|raw }}',
+      checkoutMessage: '{{ 'checkOutProject'|trans({}, 'catroweb')|escape('js')|raw }}',
+      displayName: '{{ 'flavor.pocketcode'|trans({}, 'catroweb')|escape('js')|raw }}',
+      unspecifiedErrorText: '{{ 'myprofile.unspecifiedError'|trans({}, 'catroweb')|escape('js')|raw }}',
+      deleteProjectNotFoundText: '{{ 'project.deleteNotFoundError'|trans({}, 'catroweb')|escape('js')|raw }}',
+      security: {
+        passwordsDontMatch: '{{ 'passwordsNoMatch'|trans({}, 'catroweb')|escape('js')|raw }}'
+      },
+      profilePictureInvalid: '{{ 'api.registerUser.pictureInvalid'|trans({}, 'catroweb')|escape('js')|raw }}',
+      passwordChangedSuccessText:  '{{ 'myprofile.passwordUpdated'|trans({}, 'catroweb')|escape('js')|raw }}'
+    }
+  }
+  const projectConfiguration = { {# needed in OwnProjectList::_actionToggleVisibility #}
+    messages: {
+      forbidden: '{{ 'api.updateProject.forbidden'|trans({}, 'catroweb') }}',
+      notFound: '{{ 'api.updateProject.notFound'|trans({}, 'catroweb') }}',
+    }
+  }
+</script>
+  {{ encore_entry_script_tags('user_my_profile_page') }}
+  {{ encore_entry_script_tags('user_follower_overview') }}
+{% endblock %}

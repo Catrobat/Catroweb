@@ -52,7 +52,7 @@ class ProjectController extends AbstractController
     private readonly TranslationDelegate $translation_delegate,
     private readonly EntityManagerInterface $entity_manager,
     private readonly UserCommentRepository $comment_repository,
-    private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository
+    private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
   ) {
   }
 
@@ -98,7 +98,7 @@ class ProjectController extends AbstractController
       $referrer, $project_comment_list
     );
 
-    return $this->render('Project/project.html.twig', [
+    return $this->render('Project/ProjectPage.html.twig', [
       'project' => $project,
       'login_redirect' => $login_redirect,
       'project_details' => $project_details,
@@ -207,13 +207,6 @@ class ProjectController extends AbstractController
     ]);
   }
 
-  #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]
-  #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'])]
-  public function search(?string $q = null): Response
-  {
-    return $this->render('Search/search.html.twig', ['q' => $q]);
-  }
-
   /**
    * @throws NoResultException
    */
@@ -254,8 +247,8 @@ class ProjectController extends AbstractController
       'source_language' => $source_language ?? $translation_result[0]->detected_source_language,
       'target_language' => $target_language,
       'translated_title' => $translation_result[0]->translation,
-      'translated_description' => $translation_result[1] ? $translation_result[1]->translation : null,
-      'translated_credit' => $translation_result[2] ? $translation_result[2]->translation : null,
+      'translated_description' => $translation_result[1]?->translation,
+      'translated_credit' => $translation_result[2]?->translation,
       'provider' => $translation_result[0]->provider,
       '_cache' => $translation_result[0]->cache,
     ]);
@@ -286,7 +279,7 @@ class ProjectController extends AbstractController
   /**
    * @throws NonUniqueResultException
    */
-  #[Route(path: 'program/comment/{id}', name: 'program_comment', methods: ['GET'])]
+  #[Route(path: 'project/comment/{id}', name: 'project_comment', methods: ['GET'])]
   public function projectCommentDetail(string $id): Response
   {
     $arr_comment = $this->comment_repository->getProjectCommentDetailViewData($id);
@@ -298,7 +291,7 @@ class ProjectController extends AbstractController
     $comment_list = $this->comment_repository->getProjectCommentDetailViewCommentListData($id);
     array_unshift($comment_list, $arr_comment);
 
-    return $this->render('Project/Comment/comment_detail.html.twig', [
+    return $this->render('Project/Comment/Detail.html.twig', [
       'comment' => $arr_comment,
       'replies' => $comment_list,
       'isAdmin' => $this->isGranted('ROLE_ADMIN'),
@@ -347,6 +340,9 @@ class ProjectController extends AbstractController
     }
   }
 
+  /**
+   * @throws \Exception
+   */
   private function createProjectDetailsArray(Program $project,
     array $active_like_types,
     array $active_user_like_types,

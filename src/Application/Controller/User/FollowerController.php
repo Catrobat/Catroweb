@@ -56,7 +56,7 @@ class FollowerController extends AbstractController
     $data_followers = $this->user_manager->getMappedUserData($followers);
     $data_following = $this->user_manager->getMappedUserData($following);
 
-    return $this->render('UserManagement/Followers/followers.html.twig', [
+    return $this->render('User/Followers/FollowersPage.html.twig', [
       'followers_list' => $data_followers,
       'following_list' => $data_following,
     ]);
@@ -65,7 +65,7 @@ class FollowerController extends AbstractController
   /**
    * Todo -> move to CAPI.
    */
-  #[Route(path: '/follower/unfollow/{id}', name: 'unfollow', methods: ['DELETE'], defaults: ['id' => 0])]
+  #[Route(path: '/follower/unfollow/{id}', name: 'unfollow', defaults: ['id' => 0], methods: ['DELETE'])]
   public function unfollowUser(string $id): JsonResponse
   {
     /** @var User|null $user */
@@ -97,7 +97,7 @@ class FollowerController extends AbstractController
   /**
    * Todo -> move to CAPI.
    */
-  #[Route(path: '/follower/follow/{id}', name: 'follow', methods: ['POST'], defaults: ['id' => 0])]
+  #[Route(path: '/follower/follow/{id}', name: 'follow', defaults: ['id' => 0], methods: ['POST'])]
   public function followUser(string $id): JsonResponse
   {
     /** @var User|null $user */

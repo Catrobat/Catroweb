@@ -1,0 +1,37 @@
+<footer class="footer d-flex flex-column justify-content-center">
+  {% block footer %}
+    <div class="body-content">
+      <div class="container">
+        {% set stats = getStatistics() %}
+        <div class="footer-download">
+          <h2>{{ 'footer.title'|trans({'%user_count%': stats.users}, 'catroweb') }}</h2>
+          <p class="mt-4 mb-4">{{ 'footer.text'|trans({'%project_count%': stats.projects}, 'catroweb') }}:</p>
+          <a href="{{ url('apple_app_store') }}" target="_blank">
+            <img alt="{{ 'iosAppStore'|trans({}, 'catroweb') }}" src="{{ asset('images/social/download-on-app-store.svg') }}" height="42px"/>
+          </a>
+          {% if flavor() == 'pocketcode' %}
+            <a href="{{ url('google_play_store') }}" target="_blank">
+              <img alt="{{ 'googlePlay'|trans({}, 'catroweb') }}" src="{{ asset('images/social/google-play.svg') }}" height="42px"/>
+            </a>
+            <a href="https://catrob.at/HuaweiAppGallery" target="_blank">
+              <img alt="{{ 'huaweiAppGallery'|trans({}, 'catroweb') }}" src="{{ asset('images/social/huawei-app-gallery.svg') }}" height="42px"/>
+            </a>
+          {% endif %}
+        </div>
+
+        <hr class="my-4">
+
+        <div class="footer-links">
+          <a href="https://catrob.at/ShareAbout" target="_blank">{{ 'about'|trans({}, 'catroweb') }}</a> |
+          <a href="{{ url('licenseToPlay') }}">{{ 'licenseToPlay.link'|trans({}, 'catroweb') }}</a> |
+          <a href="{{ url('privacypolicy') }}">{{ 'privacy-policy.header'|trans({}, 'catroweb') }}</a> |
+          <a href="{{ url('termsOfUse') }}">{{ 'termsOfUse.title'|trans({}, 'catroweb') }}</a>
+        </div>
+
+        <div class="footer-copyright mt-2">
+          {{ 'copyright'|trans({'%year%': 'now'|date('Y')}, 'catroweb')|raw }}
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+</footer>

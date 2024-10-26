@@ -31,6 +31,9 @@ class ScreenshotRepository
 
   private readonly string $project_zip_dir;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     $screenshot_dir = strval($parameter_bag->get('catrobat.screenshot.dir'));
@@ -100,6 +103,9 @@ class ScreenshotRepository
     $screen->destroy();
   }
 
+  /**
+   * @throws \ImagickException
+   */
   public function saveScratchScreenshot(int $Scratch_id, string $id): void
   {
     $screen = $this->getImagick();
@@ -136,9 +142,6 @@ class ScreenshotRepository
     $filesystem->copy($thumbnail_filepath, $this->thumbnail_dir.$this->generateFileNameFromId($id));
   }
 
-  /**
-   * @throws \ImagickException
-   */
   public function getImagick(): \Imagick
   {
     if (null == $this->imagick) {
@@ -224,6 +227,8 @@ class ScreenshotRepository
    * When this function is used while a user is
    * uploading a project you will kill the process.
    * So don't use it. It's for testing purposes.
+   *
+   * @throws \Exception
    */
   public function deleteTempFiles(): void
   {
@@ -282,6 +287,9 @@ class ScreenshotRepository
     $thumb->destroy();
   }
 
+  /**
+   * @throws \ImagickException
+   */
   private function saveImagickScreenshot(\Imagick $screen, string $id): void
   {
     $screen->cropThumbnailImage(480, 480);
@@ -295,6 +303,9 @@ class ScreenshotRepository
     chmod($filename, 0777);
   }
 
+  /**
+   * @throws \ImagickException
+   */
   private function overwriteOriginalScreenshot(\Imagick $screen, string $id): void
   {
     $screen->cropThumbnailImage(480, 480);

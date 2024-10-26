@@ -16,7 +16,7 @@ services:
       - chrome.catroweb
       - elasticsearch
     ports:
-      - 8080:80
+      - '8080:80'
     volumes:
       #
       # Changes to the following files are shared between host and container.
@@ -83,24 +83,23 @@ services:
       - ./../.env.dev:/var/www/catroweb/.env.dev
       - ./../.env.test:/var/www/catroweb/.env.test
       - ./../.env.prod:/var/www/catroweb/.env.prod
-      # - ./../.env.local:/var/www/catroweb/.env.local # useful for deploying
+      # - ./../.env.local:/var/www/catroweb/.env.local # useful for deploying, but not working with github testing workflow
       - ./../deploy.php:/var/www/catroweb/deploy.php
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
       - ./../symfony.lock:/var/www/catroweb/symfony.lock
       - ./../webpack.config.js:/var/www/catroweb/webpack.config.js
       - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
-
-      # sharing package files might not work on windows
-      # - ./../package.json:/var/www/catroweb/package.json
-      # - ./../package-lock.json:/var/www/catroweb/package-lock.json
+      # sharing package files on windows might not work as expected
+      - ./../package.json:/var/www/catroweb/package.json
+      - ./../package-lock.json:/var/www/catroweb/package-lock.json
 
   db.catroweb.dev:
     image: mariadb:10.11
     container_name: db.catroweb.dev
     shm_size: '2gb'
     ports:
-      - 3306
+      - '3306'
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -127,14 +126,14 @@ services:
         '--no-sandbox',
       ]
     ports:
-      - 9222
+      - '9222'
 
   db.catroweb.test:
     image: mariadb:10.11
     container_name: db.catroweb.test
     shm_size: '2gb'
     ports:
-      - 3306
+      - '3306'
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -150,7 +149,7 @@ services:
       - PMA_ARBITRARY=1
     restart: always
     ports:
-      - 8081:80
+      - '8081:80'
     volumes:
       - /sessions
     external_links:
@@ -177,7 +176,7 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - '9200:9200'
 
 volumes:
   esdata1:

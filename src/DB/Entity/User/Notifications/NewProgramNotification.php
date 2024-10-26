@@ -14,13 +14,13 @@ class NewProgramNotification extends CatroNotification
   /**
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private string $twig_template = 'Notifications/NotificationTypes/new_project_notification.html.twig';
+  private string $twig_template = 'User/Notification/Type/NewProject.html.twig';
 
   public function __construct(
     User $user,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'new_program_notification_mentions')]
-    private ?Program $program
+    private ?Program $program,
   ) {
     parent::__construct($user, '', '', 'follow');
   }

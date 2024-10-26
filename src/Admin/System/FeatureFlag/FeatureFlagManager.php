@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Admin\System\FeatureFlag;
 
-use App\DB\Entity\FeatureFlag;
+use App\DB\Entity\System\FeatureFlag;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class FeatureFlagManager
@@ -16,10 +16,11 @@ class FeatureFlagManager
   public function __construct(
     protected RequestStack $requestStack,
     protected EntityManagerInterface $entityManager,
-    protected ParameterBagInterface $parameter_bag
+    #[Autowire('%feature_flags%')]
+    protected array $feature_flags,
   ) {
     if ($this->entityManager->getConnection()->isConnected()) {
-      $this->defaultFlags = include $parameter_bag->get('features');
+      $this->defaultFlags = $this->feature_flags;
 
       $flagMap = [];
       foreach ($this->defaultFlags as $name => $value) {

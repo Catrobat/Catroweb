@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Gravit.io --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    style="isolation:isolate" viewBox="702 -660 527 445" width="527pt" height="445pt">
+    <defs>
+        <filter id="odPHhJfeD6gkXIqVDmNpOntkNEOMSI97" x="-200%" y="-200%" width="400%" height="400%"
+            filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+            <feOffset xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" dx="0" dy="0" />
+            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" stdDeviation="6.440413594258542"
+                result="pf_100_offsetBlur" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" in2="pf_100_offsetBlur"
+                result="pf_100_inverse" operator="out" />
+            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.75"
+                result="pf_100_color" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_100_color" in2="pf_100_inverse" operator="in"
+                result="pf_100_shadow" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_100_shadow" in2="SourceGraphic" operator="over" />
+        </filter>
+    </defs>
+    <g filter="url(#odPHhJfeD6gkXIqVDmNpOntkNEOMSI97)">
+        <linearGradient id="svg__achievement__badge__locked--gradient-1" x1="0.04236018486340176" y1="0.4696384939907934" x2="1.0072274143643463"
+            y2="0.5444344564597348" gradientTransform="matrix(-30.553,-463.493,530.2,-34.951,704.292,-183.952)"
+            gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-opacity="1" style="stop-color:rgb(230,230,230)" />
+            <stop offset="98.26086956521739%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+        </linearGradient>
+        <path
+            d=" M 1122.448 -588.787 L 1147.303 -547.613 L 1172.159 -506.439 C 1180.93 -491.911 1185.923 -466.502 1183.303 -449.735 L 1175.877 -402.217 L 1168.452 -354.7 C 1165.832 -337.932 1153.083 -315.557 1140 -304.764 L 1140 -304.764 L 1162.355 -304.764 C 1166.224 -304.836 1168.852 -304.059 1170.21 -302.464 C 1185.438 -302.125 1205.312 -302.125 1229 -302.213 L 1194.218 -258.8 L 1228.581 -218.513 Q 1154.344 -218.671 1154.015 -218.513 C 1149.522 -216.358 1144.866 -215.021 1140 -215 L 796.282 -216 C 790.344 -215.917 785 -216.292 780.267 -218.347 L 702 -218.722 L 743.966 -259.021 Q 704.939 -300.695 702.419 -302.801 C 702.494 -302.907 760.154 -302.423 760.236 -302.525 C 761.919 -304.625 764.907 -305.896 767 -305.962 L 781.459 -305.962 L 781.459 -305.962 C 772.101 -311.793 761.847 -330.046 758.574 -346.698 L 749.3 -393.89 L 740.026 -441.082 C 736.753 -457.734 740.751 -483.318 748.948 -498.178 L 772.178 -540.29 L 795.407 -582.403 C 803.604 -597.263 823.112 -614.291 838.943 -620.406 L 883.807 -637.734 L 928.671 -655.062 C 944.502 -661.177 970.392 -661.682 986.45 -656.19 L 1031.956 -640.626 L 1077.462 -625.062 C 1093.52 -619.57 1113.677 -603.316 1122.448 -588.787 Z "
+            fill="url(#svg__achievement__badge__locked--gradient-1)" />
+    </g>
+</svg>

@@ -1,0 +1,19 @@
+<div id="welcome-section">
+  <div class="mb-4">
+    {% if flavor() == 'mindstorms' %}
+      <h1>{{ 'project.welcome.title_mindstorms'|trans({}, 'catroweb') }}</h1>
+    {% else %}
+      <h1>{{ 'project.welcome.title'|trans({'%theme%': getThemeDisplayName()}, 'catroweb') }}</h1>
+    {% endif %}
+
+    {% if flavor() == 'embroidery' %}
+      <h3>{{ 'project.welcome.subtitle_embroidery'|trans({}, 'catroweb') }}</h3>
+    {% elseif flavor() == 'mindstorms' %}
+      <h3>{{ 'project.welcome.subtitle_mindstorms'|trans({}, 'catroweb') }}</h3>
+    {% else %}
+      <h3>{{ 'project.welcome.subtitle'|trans({}, 'catroweb') }}</h3>
+    {% endif %}
+  </div>
+
+  {{ include('Index/YoutubeHelpVideo.html.twig') }}
+</div>

@@ -30,6 +30,9 @@ class MediaPackageFileRepository extends ServiceEntityRepository
 
   private readonly string $thumb_dir;
 
+  /**
+   * @throws \Exception
+   */
   public function __construct(private readonly ParameterBagInterface $parameter_bag, ManagerRegistry $manager_registry)
   {
     parent::__construct($manager_registry, MediaPackageFile::class);
@@ -93,6 +96,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string $extension        File extension
    * @param bool   $create_thumbnail Whether a thumbnail should be created or not. Default is true.
    *
+   * @throws \ImagickDrawException
    * @throws \ImagickException
    */
   public function moveFile(File $file, int $id, string $extension, bool $create_thumbnail = true): void
@@ -112,6 +116,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string $extension        file extension
    * @param bool   $create_thumbnail Whether a thumbnail should be created or not. Default is true.
    *
+   * @throws \ImagickDrawException
    * @throws \ImagickException
    */
   public function saveFile(File $file, int $id, string $extension,
@@ -148,6 +153,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * Creates missing thumbnails.
    * It checks for files that exist in the base directory but not in the thumbs directory.
    *
+   * @throws \ImagickDrawException
    * @throws \ImagickException
    */
   public function createMissingThumbnails(): void
@@ -232,10 +238,8 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string|null $package_name if set, then just MediaPackageFiles belonging to this MediaPackage will be returned
    * @param int|null    $limit        Maximum number of search results that should be returned. Defaults to PHP_INT_MAX.
    * @param int|null    $offset       The starting entry in the search results list. Defaults to 0.
-   *
-   * @return mixed an array containing the found media files or null if no results found
    */
-  public function search(string $term, ?string $flavor = Flavor::POCKETCODE, ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
+  public function search(string $term, ?string $flavor = Flavor::POCKETCODE, ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0): ?array
   {
     $flavor = null !== $flavor && '' !== $flavor && '0' !== $flavor ? $flavor : Flavor::POCKETCODE;
 

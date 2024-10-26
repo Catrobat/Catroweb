@@ -1,0 +1,42 @@
+<div id="{{ carousel.id }}" class="carousel slide {{ carousel.classes }} center mb-4" data-bs-ride="carousel">
+
+  <!-- Indicators -->
+  <div class="carousel-indicators">
+    {% for i in 0..carousel.slideCount - 1 %}
+      {% if i == 0 %}
+        <button type="button" data-bs-target="#{{ carousel.id }}" data-bs-slide-to="{{ i }}" class="active" aria-current="true" aria-label="Slide {{ i }}"></button>
+      {% else %}
+        <button type="button" data-bs-target="#{{ carousel.id }}" data-bs-slide-to="{{ i }}" aria-label="Slide {{ i }}"></button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    {% for slide in carousel.slides %}
+      {% if loop.first %}
+          <a class="carousel-item active" href="{{ slide.url }}">
+            <img src="{{ asset(slide.image) }}" class="carousel-item__image d-block w-100" alt="{{ carousel.alt }}"
+                 width="{{ carousel.width }}" height="{{ carousel.height }}" loading="eager">
+          </a>
+      {% else %}
+          <a class="carousel-item" href="{{ slide.url }}" style="background: #fff;">
+            <img src="{{ asset(slide.image) }}" class="carousel-item__image d-block w-100" alt="{{ carousel.alt }}"
+                 width="{{ carousel.width }}" height="{{ carousel.height }}" loading="lazy">
+          </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if carousel.controls %}
+    <!-- Left and right controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ carousel.id }}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ carousel.id }}" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+  {% endif %}
+</div>

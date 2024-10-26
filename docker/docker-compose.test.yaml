@@ -19,7 +19,7 @@ services:
       - chrome.catroweb
       - elasticsearch
     ports:
-      - 8080:80
+      - '8080:80'
 
     # --- Tests:
 
@@ -41,14 +41,14 @@ services:
         '--no-sandbox',
       ]
     ports:
-      - 9222
+      - '9222'
 
   db.catroweb.test:
     image: mariadb:10.11
     container_name: db.catroweb.test
     shm_size: '2gb'
     ports:
-      - 3306
+      - '3306'
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -71,7 +71,7 @@ services:
     volumes:
       - esdata1:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - '9200:9200'
 
 volumes:
   esdata1:

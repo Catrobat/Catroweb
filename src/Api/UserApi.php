@@ -68,12 +68,15 @@ class UserApi extends AbstractApiController implements UserApiInterface
     $this->facade->getProcessor()->deleteUser($this->facade->getAuthenticationManager()->getAuthenticatedUser());
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   public function userGet(&$responseCode, array &$responseHeaders): ExtendedUserDataResponse
   {
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createExtendedUserDataResponse(
-      $this->facade->getAuthenticationManager()->getAuthenticatedUser(), null
+      $this->facade->getAuthenticationManager()->getAuthenticatedUser()
     );
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);

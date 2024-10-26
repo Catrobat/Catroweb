@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg class="svg__achievement__banner" xmlns="http://www.w3.org/2000/svg"
+     style="isolation:isolate" viewBox="474 512.19 535.08 104.934" width="535.08pt" height="104.934pt">
+    <defs>
+        <filter id="I1ow3PfO98e7aH5n9Qc7msLRebKAiGPY" x="-200%" y="-200%" width="400%" height="400%"
+            filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" in="SourceGraphic"
+                stdDeviation="2.146804531419514" />
+            <feOffset xmlns="http://www.w3.org/2000/svg" dx="-10" dy="0" result="pf_100_offsetBlur" />
+            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.5" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in2="pf_100_offsetBlur" operator="in"
+                result="pf_100_dropShadow" />
+            <feBlend xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" in2="pf_100_dropShadow"
+                     result="_out_vIZfIHhGIBLYasgJBDN8SZWd9BNlUJWe" />
+            <feOffset xmlns="http://www.w3.org/2000/svg" in="_out_vIZfIHhGIBLYasgJBDN8SZWd9BNlUJWe" dx="5" dy="0" />
+            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" stdDeviation="2.146804531419514"
+                result="pf_101_offsetBlur" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="_out_vIZfIHhGIBLYasgJBDN8SZWd9BNlUJWe"
+                in2="pf_101_offsetBlur" result="pf_101_inverse" operator="out" />
+            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.5"
+                result="pf_101_color" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_101_color" in2="pf_101_inverse" operator="in"
+                result="pf_101_shadow" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_101_shadow"
+                in2="_out_vIZfIHhGIBLYasgJBDN8SZWd9BNlUJWe"
+                         result="_out_P1Ja052xK9Da1rNbS3hLMB2Jlr2z8fG8" />
+            <feMerge>
+                <feMergeNode in="_out_P1Ja052xK9Da1rNbS3hLMB2Jlr2z8fG8" />
+            </feMerge>
+        </filter>
+    </defs>
+    <g filter="url(#I1ow3PfO98e7aH5n9Qc7msLRebKAiGPY)">
+        <linearGradient id="svg__achievement__banner__left--gradient" x1="0.16284793988191112" y1="1.4380911312933646" x2="1.113953832491685"
+            y2="-0.7880739399487613" gradientTransform="matrix(99.126,0,0,84.56,491,522.323)"
+            gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-opacity="1" style="stop-color:currentcolor" />
+            <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+        </linearGradient>
+        <path
+            d=" M 589.375 606.884 L 491 606.402 L 491 606.402 L 491 606.402 L 491 606.402 L 491 606.402 L 491 606.402 L 491 606.402 C 504.687 592.318 525.6 577.292 532.256 566.104 C 521.098 551.046 504.959 536.846 491.412 522.323 L 491.412 522.323 L 491.412 522.323 L 491.412 522.323 L 491.412 522.323 L 491.412 522.323 L 491.412 522.323 L 590.126 522.807 L 589.375 606.884 L 589.375 606.884 Z "
+            fill="url(#svg__achievement__banner__left--gradient)" />
+    </g>
+    <defs>
+        <filter id="tYejuzqrQ0rRGza5ifoiRHG28roTaQqs" x="-200%" y="-200%" width="400%" height="400%"
+            filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" in="SourceGraphic"
+                stdDeviation="2.146804531419514" />
+            <feOffset xmlns="http://www.w3.org/2000/svg" dx="-10" dy="0" result="pf_100_offsetBlur" />
+            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.5" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in2="pf_100_offsetBlur" operator="in"
+                result="pf_100_dropShadow" />
+            <feBlend xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" in2="pf_100_dropShadow"
+                     result="_out_2v5KZeQN6ooN69ZmPWAp8p1xcdwMNGJK" />
+            <feOffset xmlns="http://www.w3.org/2000/svg" in="_out_2v5KZeQN6ooN69ZmPWAp8p1xcdwMNGJK" dx="5" dy="0" />
+            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" stdDeviation="2.146804531419514"
+                result="pf_101_offsetBlur" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="_out_2v5KZeQN6ooN69ZmPWAp8p1xcdwMNGJK"
+                in2="pf_101_offsetBlur" result="pf_101_inverse" operator="out" />
+            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.5"
+                result="pf_101_color" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_101_color" in2="pf_101_inverse" operator="in"
+                result="pf_101_shadow" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in="pf_101_shadow"
+                in2="_out_2v5KZeQN6ooN69ZmPWAp8p1xcdwMNGJK"
+                         result="_out_xFR0cw7liANuiu2thu14ACpTTITx5lFM" />
+            <feMerge>
+                <feMergeNode in="_out_xFR0cw7liANuiu2thu14ACpTTITx5lFM" />
+            </feMerge>
+        </filter>
+    </defs>
+    <g filter="url(#tYejuzqrQ0rRGza5ifoiRHG28roTaQqs)">
+        <linearGradient id="svg__achievement__banner__right--gradient" x1="0.16284793988191112" y1="1.4380911312933646" x2="1.113953832491685"
+            y2="-0.7880739399487613" gradientTransform="matrix(120.08,0,0,84.667,889,522.323)"
+            gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-opacity="1" style="stop-color:currentcolor" />
+            <stop offset="100%" stop-opacity="1" style="stop-color:rgb(255,255,255)" />
+        </linearGradient>
+        <path
+            d=" M 889.647 606.407 L 1008.669 606.99 C 996.801 596.858 988.761 585.734 974.836 566.324 C 987.735 551.384 987.764 545.333 1009.08 522.911 L 1009.08 522.911 L 987.753 522.807 L 889 522.323 L 889.647 606.407 L 889.647 606.407 Z "
+            fill="url(#svg__achievement__banner__right--gradient)" />
+    </g>
+    <defs>
+        <filter id="6GpHuZCS92k1AfieMzUtpFFvPQcDHswK" x="-200%" y="-200%" width="400%" height="400%"
+            filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+            <feGaussianBlur xmlns="http://www.w3.org/2000/svg" in="SourceGraphic"
+                stdDeviation="2.146804531419514" />
+            <feOffset xmlns="http://www.w3.org/2000/svg" dx="-2" dy="0" result="pf_100_offsetBlur" />
+            <feFlood xmlns="http://www.w3.org/2000/svg" flood-color="#000000" flood-opacity="0.65" />
+            <feComposite xmlns="http://www.w3.org/2000/svg" in2="pf_100_offsetBlur" operator="in"
+                result="pf_100_dropShadow" />
+            <feBlend xmlns="http://www.w3.org/2000/svg" in="SourceGraphic" in2="pf_100_dropShadow"/>
+        </filter>
+        <linearGradient id="svg__achievement__banner__middle--gradient"
+                        x1="0.16284793988191112" y1="1.4380911312933646"
+                        x2="1.113953832491685" y2="-0.7880739399487613">
+            <stop offset="0%" style="stop-color:currentcolor" />
+            <stop offset="100%" style="stop-color:rgb(255,255,255)" />
+        </linearGradient>
+    </defs>
+    <g filter="url(#6GpHuZCS92k1AfieMzUtpFFvPQcDHswK)">
+        <path
+            d="M 555.317 519.19 L 945.106 520.334 C 950.15 520.349 954.232 524.455 954.217 529.499 L 954.075 576.23 C 954.018 594.992 938.74 610.179 919.978 610.124 L 580.327 609.127 C 561.248 609.071 545.806 593.536 545.864 574.457 L 546.003 528.448 C 546.019 523.323 550.192 519.175 555.317 519.19 Z"
+            style="stroke:none;fill:url(#svg__achievement__banner__middle--gradient);stroke-miterlimit:10;" />
+    </g>
+</svg>

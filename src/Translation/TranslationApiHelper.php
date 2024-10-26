@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Translation;
 
-class TranslationApiHelper
+readonly class TranslationApiHelper
 {
-  public function __construct(private readonly array $long_language_code)
+  public function __construct(private array $long_language_code)
   {
   }
 

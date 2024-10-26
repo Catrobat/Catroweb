@@ -6,15 +6,16 @@ namespace Tests\PhpUnit\Utils;
 
 use App\Utils\ElapsedTimeStringFormatter;
 use App\Utils\TimeUtils;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers  \App\Utils\ElapsedTimeStringFormatter
  */
+#[CoversClass(ElapsedTimeStringFormatter::class)]
 class ElapsedTimeStringFormatterTest extends TestCase
 {
   private ElapsedTimeStringFormatter|MockObject $object;
@@ -44,14 +45,9 @@ class ElapsedTimeStringFormatterTest extends TestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Utils\ElapsedTimeStringFormatter::format
-   *
    * @throws \Exception
    */
+  #[Group('unit')]
   #[DataProvider('provideElapsedTimeStringFormatterData')]
   public function testElapsedTimeStringFormatter(string $expected, int $timestamp): void
   {

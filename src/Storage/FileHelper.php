@@ -104,8 +104,6 @@ class FileHelper
         }
       }
     }
-
-    reset($files);
   }
 
   public static function getTimestampParameter(string $filename): string
@@ -123,7 +121,7 @@ class FileHelper
   protected static function verifyDirectoryCanBeCleared(string $directory_path): void
   {
     foreach (self::getRemovableDirAllowList() as $allowedDir) {
-      if (str_contains($directory_path, (string) $allowedDir)) {
+      if (str_contains($directory_path, $allowedDir)) {
         return;
       }
     }

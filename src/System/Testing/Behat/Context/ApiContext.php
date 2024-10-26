@@ -131,8 +131,7 @@ class ApiContext implements Context
   /**
    * @var string[]
    */
-  private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currentlyWorkingOn', 'projects',
-    'followers', 'following', ];
+  private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
 
   /**
    * @var string[]
@@ -183,7 +182,7 @@ class ApiContext implements Context
    */
   public function followRedirects(): void
   {
-    $this->getKernelBrowser()->followRedirects(true);
+    $this->getKernelBrowser()->followRedirects();
   }
 
   /**
@@ -240,6 +239,8 @@ class ApiContext implements Context
 
   /**
    * @Given /^I activate the Profiler$/
+   *
+   * @throws \Exception
    */
   public function iActivateTheProfiler(): void
   {
@@ -292,6 +293,8 @@ class ApiContext implements Context
    * @When /^a Request is invoked$/
    * @When /^the Request is invoked$/
    * @When /^I invoke the Request$/
+   *
+   * @throws \Exception
    */
   public function iRequest(): void
   {
@@ -316,6 +319,8 @@ class ApiContext implements Context
    * @When /^I get the most downloaded projects with "([^"]*)"$/
    * @When /^I get the most viewed projects with "([^"]*)"$/
    * @When /^I GET the tag list from "([^"]*)" with these parameters$/
+   *
+   * @throws \Exception
    */
   public function iGetFrom(string $url): void
   {
@@ -333,6 +338,8 @@ class ApiContext implements Context
    * Get the response from $this->getKernelBrowser()->getResponse()
    *
    * @When /^I POST these parameters to "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function iPostTo(string $url): void
   {
@@ -452,7 +459,7 @@ class ApiContext implements Context
   public function jenkinsUploadsTheApkFileToTheGivenUploadUrl(): void
   {
     $filepath = $this->FIXTURES_DIR.'test.catrobat';
-    Assert::assertTrue(file_exists($filepath), 'File not found');
+    Assert::assertFileExists($filepath, 'File not found');
     $temp_path = strval($this->getTempCopy($filepath));
     $this->request_files = [
       new UploadedFile($temp_path, 'test.apk'),
@@ -478,6 +485,11 @@ class ApiContext implements Context
 
   /**
    * @When /^I POST login with user "([^"]*)" and password "([^"]*)"$/
+   *
+   * @throws \Exception
+   * @throws \Exception
+   * @throws \JsonException
+   * @throws \JsonException
    */
   public function iPostLoginUserWithPassword(string $uname, string $pwd): void
   {
@@ -493,6 +505,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should receive a "([^"]*)" file$/
+   *
+   * @throws \Exception
    */
   public function iShouldReceiveAFile(string $extension): void
   {
@@ -502,6 +516,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should receive a file named "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function iShouldReceiveAFileNamed(string $name): void
   {
@@ -511,6 +527,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should receive the apk file$/
+   *
+   * @throws \Exception
+   * @throws \Exception
    */
   public function iShouldReceiveTheApkFile(): void
   {
@@ -522,6 +541,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should receive an application file$/
+   *
+   * @throws \Exception
+   * @throws \Exception
    */
   public function iShouldReceiveAnApplicationFile(): void
   {
@@ -537,6 +559,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldBeARemixRoot(string $api_version): void
   {
@@ -549,6 +572,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the requested $api_version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldExistInTheDatabase(string $api_version): void
   {
@@ -562,6 +586,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response status code should be "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function theResponseStatusCodeShouldBe(string $status_code): void
   {
@@ -574,6 +600,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should be in json format$/
+   *
+   * @throws \Exception
    */
   public function theResponseShouldBeInJsonFormat(): void
   {
@@ -610,6 +638,7 @@ class ApiContext implements Context
    * @Then /^I should get the json object:$/
    *
    * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetTheJsonObject(PyStringNode $string): void
   {
@@ -619,6 +648,8 @@ class ApiContext implements Context
 
   /**
    * @Then the response content must be empty
+   *
+   * @throws \Exception
    */
   public function theResponseContentMustBeEmpty(): void
   {
@@ -686,6 +717,9 @@ class ApiContext implements Context
     $this->request_headers['HTTP_authorization'] = $upload_token;
   }
 
+  /**
+   * @throws \Exception
+   */
   public function getSymfonyProfile(): Profile
   {
     $profile = $this->getKernelBrowser()->getProfile();
@@ -750,6 +784,7 @@ class ApiContext implements Context
    * @param string $api_version The API version to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \Exception
    */
   public function iUploadTheProjectWithAsName(string $name, string $api_version): void
   {
@@ -765,6 +800,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldNotBeARemixRoot(string $api_version): void
   {
@@ -777,6 +813,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveMigrationDateNotNull(string $api_version): void
   {
@@ -791,6 +828,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveAScratchParentHavingScratchID(string $scratch_parent_id, string $api_version): void
   {
@@ -803,6 +841,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoFurtherScratchParents(string $api_version): void
   {
@@ -815,6 +854,7 @@ class ApiContext implements Context
    * @param string $api_version The API version to be used
    *
    * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(string $id, string $depth, string $api_version): void
   {
@@ -828,6 +868,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth(string $depth, string $api_version): void
   {
@@ -840,6 +881,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveACatrobatBackwardParentHavingId(string $id, string $api_version): void
   {
@@ -852,6 +894,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(string $api_version): void
   {
@@ -864,6 +907,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoCatrobatBackwardParents(string $api_version): void
   {
@@ -876,6 +920,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoFurtherCatrobatBackwardParents(string $api_version): void
   {
@@ -888,6 +933,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoCatrobatAncestors(string $api_version): void
   {
@@ -900,6 +946,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoScratchParents(string $api_version): void
   {
@@ -912,6 +959,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(string $id, string $depth, string $api_version): void
   {
@@ -924,6 +972,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(string $api_version): void
   {
@@ -936,6 +985,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardDescendants(string $api_version): void
   {
@@ -948,6 +998,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveRemixOfInTheXml(string $value, string $api_version): void
   {
@@ -970,6 +1021,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get no projects/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetNoProjects(): void
   {
@@ -982,6 +1036,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get following projects:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetFollowingProjects(TableNode $table): void
   {
@@ -1010,6 +1067,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
   public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardAncestors(string $api_version): void
   {
@@ -1018,6 +1076,8 @@ class ApiContext implements Context
 
   /**
    * @When /^I start an apk generation of my project$/
+   *
+   * @throws \Exception
    */
   public function iStartAnApkGenerationOfMyProject(): void
   {
@@ -1029,6 +1089,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^the apk file will not be found$/
+   *
+   * @throws \Exception
    */
   public function theApkFileWillNotBeFound(): void
   {
@@ -1041,6 +1103,8 @@ class ApiContext implements Context
 
   /**
    * @When /^I report a build error$/
+   *
+   * @throws \Exception
    */
   public function iReportABuildError(): void
   {
@@ -1085,6 +1149,10 @@ class ApiContext implements Context
 
   /**
    * @Then /^will get the following JSON:$/
+   *
+   * @throws \JsonException
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function willGetTheFollowingJson(PyStringNode $string): void
   {
@@ -1098,6 +1166,8 @@ class ApiContext implements Context
 
   /**
    * @Given /^I am a user with role "([^"]*)"$/
+   *
+   * @throws \JsonException
    */
   public function iAmAUserWithRole(string $role): void
   {
@@ -1111,6 +1181,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^the client response should contain "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function theResponseShouldContain(string $needle): void
   {
@@ -1120,6 +1192,10 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain the URL of the uploaded project$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
+   * @throws \Exception
    */
   public function theResponseShouldContainALocationHeaderWithURLOfTheUploadedProject(): void
   {
@@ -1140,6 +1216,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^the client response should not contain "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function theResponseShouldNotContain(string $needle): void
   {
@@ -1148,6 +1226,10 @@ class ApiContext implements Context
 
   /**
    * @When /^I update this project$/
+   *
+   * @throws ApiVersionNotSupportedException
+   * @throws \Exception
+   * @throws \Exception
    */
   public function iUpdateThisProject(): void
   {
@@ -1189,6 +1271,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^URI from "([^"]*)" should be "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function uriFromShouldBe(string $arg1, string $arg2): void
   {
@@ -1201,6 +1285,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response Header should contain the key "([^"]*)" with the value '([^']*)'$/
+   *
+   * @throws \Exception
    */
   public function theResponseHeadershouldContainTheKeyWithTheValue(string $headerKey, string $headerValue): void
   {
@@ -1212,6 +1298,10 @@ class ApiContext implements Context
 
   /**
    * @Then the returned json object with id :id will be:
+   *
+   * @throws \JsonException
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function theReturnedJsonObjectWithIdWillBe(string $id, PyStringNode $string): void
   {
@@ -1221,11 +1311,13 @@ class ApiContext implements Context
 
     $res_array['projectId'] = $id;
 
-    Assert::assertJsonStringEqualsJsonString($string->getRaw(), json_encode($res_array, JSON_THROW_ON_ERROR), '');
+    Assert::assertJsonStringEqualsJsonString($string->getRaw(), json_encode($res_array, JSON_THROW_ON_ERROR));
   }
 
   /**
    * @Then /^the response code will be "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function theResponseCodeWillBe(string $code): void
   {
@@ -1246,6 +1338,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the project should get (.*)$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function theProjectShouldGet(string $result): void
   {
@@ -1261,6 +1356,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get a total of (\d+) projects$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetATotalOfProjects(string $arg1): void
   {
@@ -1274,6 +1372,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get (\d+) projects$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetProjects(string $arg1): void
   {
@@ -1303,6 +1404,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get projects in the following order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetProjectsInTheFollowingOrder(TableNode $table): void
   {
@@ -1323,6 +1427,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get (\d+) projects in random order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetProjectsInRandomOrder(string $project_count, TableNode $table): void
   {
@@ -1349,9 +1456,9 @@ class ApiContext implements Context
   /**
    * @Then /^I should get the projects "([^"]*)" in random order$/
    *
-   * @param string $project_list
+   * @throws \JsonException
    */
-  public function iShouldGetTheProjectsInRandomOrder($project_list): void
+  public function iShouldGetTheProjectsInRandomOrder(string $project_list): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -1376,9 +1483,9 @@ class ApiContext implements Context
   /**
    * @Then /^I should get the projects "([^"]*)"$/
    *
-   * @param string $project_list
+   * @throws \JsonException
    */
-  public function iShouldGetTheProjects($project_list): void
+  public function iShouldGetTheProjects(string $project_list): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -1400,6 +1507,8 @@ class ApiContext implements Context
 
   /**
    * @Given /^the response code should be "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function theResponseCodeShouldBe(string $code): void
   {
@@ -1417,6 +1526,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get the stored json object "([^"]*)"$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetTheStoredJsonObject(string $name): void
   {
@@ -1426,6 +1538,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain the following project:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldContainTheFollowingProject(TableNode $table): void
   {
@@ -1443,6 +1558,9 @@ class ApiContext implements Context
   /**
    * @Then /^the response should contain the following projects:$/
    * @Then /^the response should contain projects in the following order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldContainProjectsInTheFollowingOrder(TableNode $table): void
   {
@@ -1461,6 +1579,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain featured projects in the following order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldContainFeaturedProjectsInTheFollowingOrder(TableNode $table): void
   {
@@ -1483,6 +1604,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have the default projects model structure$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldHaveDefaultProjectsModelStructure(): void
   {
@@ -1505,6 +1629,9 @@ class ApiContext implements Context
   /**
    * @Then /^the response should contain the following users:$/
    * @Then /^the response should contain users in the following order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldContainUsersInTheFollowingOrder(TableNode $table): void
   {
@@ -1524,6 +1651,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain the following user:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldContainTheFollowingUser(): void
   {
@@ -1538,6 +1668,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have the default users model structure$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldHaveDefaultUsersModelStructure(): void
   {
@@ -1556,6 +1689,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have the user model structure(?: excluding "(?P<excluded>([^"]+))")?$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldHaveUserModelStructure(string $excluded = ''): void
   {
@@ -1564,8 +1700,11 @@ class ApiContext implements Context
 
     $structure = array_diff($this->full_user_structure, '' === $excluded || '0' === $excluded ? [] : explode(',', $excluded));
 
-    Assert::assertEquals(count($structure), is_countable($user) ? count($user) : 0,
-      'Number of user fields should be '.count($structure));
+    Assert::assertEquals(
+      count($structure),
+      is_countable($user) ? count($user) : 0,
+      'Number of user fields should be '.count($structure)
+    );
     foreach ($structure as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
@@ -1574,6 +1713,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have the survey model structure$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldHaveSurveyModelStructure(): void
   {
@@ -1590,6 +1732,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have the project model structure$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldHaveProjectModelStructure(): void
   {
@@ -1606,6 +1751,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have the default featured projects model structure$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldHaveDefaultFeaturedProjectsModelStructure(): void
   {
@@ -1624,6 +1772,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have the default media files model structure$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldHaveDefaultMediaFilesModelStructure(): void
   {
@@ -1642,6 +1793,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have language list structure$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldHaveLanguageListStructure(): void
   {
@@ -1663,6 +1817,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain the following languages:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldContainTheFollowingLanguages(TableNode $table): void
   {
@@ -1690,6 +1847,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^I set cookie "([^"]*)" to "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function iSetCookie(string $key, string $value): void
   {
@@ -1698,6 +1857,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain media files in the following order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldContainMediaFilesInTheFollowingOrder(TableNode $table): void
   {
@@ -1720,6 +1882,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain (\d+) projects$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function responseShouldContainNumberProjects(int $projects): void
   {
@@ -1733,6 +1898,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get (\d+) programs in the following order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetScratchProgramsInTheFollowingOrder(string $project_count, TableNode $table): void
   {
@@ -1767,6 +1935,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should get (\d+) projects in the following order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function iShouldGetScratchProjectsInTheFollowingOrder(int $project_count, TableNode $table): void
   {
@@ -1829,6 +2000,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^i should receive a project file$/
+   *
+   * @throws \Exception
    */
   public function iShouldReceiveAProjectFile(): void
   {
@@ -1838,6 +2011,9 @@ class ApiContext implements Context
 
   /**
    * @When /^I have a parameter "([^"]*)" with the returned projectId$/
+   *
+   * @throws \Exception
+   * @throws \JsonException
    */
   public function iHaveAParameterWithTheReturnedProjectid(string $name): void
   {
@@ -1853,6 +2029,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException When the specified $api_version is not supported
+   * @throws \JsonException
    */
   public function itShouldBeUpdated(string $api_version): void
   {
@@ -1935,6 +2112,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API is not supported
+   * @throws \JsonException
    */
   public function iUploadThisProjectWithId(string $id, string $api_version): void
   {
@@ -2074,6 +2252,7 @@ class ApiContext implements Context
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \Exception
    */
   public function iUploadThisProjectAgainWithTheTags(string $tags, string $api_version): void
   {
@@ -2199,6 +2378,8 @@ class ApiContext implements Context
 
   /**
    * @Given /^I have a project with "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function iHaveAProjectWithAsTwoHeaderFields(string $key1, string $value1, string $key2, string $value2): void
   {
@@ -2210,6 +2391,8 @@ class ApiContext implements Context
 
   /**
    * @Given I have a project with :key1 set to :value1, :key2 set to :value2 and :key3 set to :value3
+   *
+   * @throws \Exception
    */
   public function iHaveAProjectWithAsMultipleHeaderFields(string $key1, string $value1, string $key2, string $value2, string $key3, string $value3): void
   {
@@ -2244,6 +2427,18 @@ class ApiContext implements Context
   }
 
   /**
+   * @Given I add the file :fileName from path :fixturePath as :key
+   */
+  public function iSendAValidFileWithKey(string $fileName, string $fixturePath, string $key): void
+  {
+    $filepath = $this->FIXTURES_DIR.$fixturePath.'/'.$fileName;
+    Assert::assertTrue(file_exists($filepath), 'File not found: '.$filepath);
+    $tempFilePath = sys_get_temp_dir().'/'.uniqid('upload_', true).'_'.$fileName;
+    copy($filepath, $tempFilePath);
+    $this->request_files[$key] = new UploadedFile($tempFilePath, $fileName);
+  }
+
+  /**
    * @Given I have a broken Catrobat file, API version :api_version
    *
    * @param string $api_version the version of the API which should be used
@@ -2267,6 +2462,8 @@ class ApiContext implements Context
   /**
    * @Given /^I have a project with "([^"]*)" set to "([^"]*)"$/
    * @Given /^there is a project with "([^"]*)" set to "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function iHaveAProjectWithAs(string $key, string $value): void
   {
@@ -2277,6 +2474,9 @@ class ApiContext implements Context
 
   /**
    * @Then The returned url with id :id should be
+   *
+   * @throws \Exception
+   * @throws \JsonException
    */
   public function theReturnedUrlShouldBe(string $id, PyStringNode $string): void
   {
@@ -2290,6 +2490,9 @@ class ApiContext implements Context
 
   /**
    * @Then The submission should be rejected
+   *
+   * @throws \Exception
+   * @throws \JsonException
    */
   public function theSubmissionShouldBeRejected(): void
   {
@@ -2301,6 +2504,9 @@ class ApiContext implements Context
 
   /**
    * @Then The message should be:
+   *
+   * @throws \Exception
+   * @throws \JsonException
    */
   public function theMessageShouldBe(PyStringNode $string): void
   {
@@ -2312,6 +2518,9 @@ class ApiContext implements Context
 
   /**
    * @Then I should not get the url to the google form
+   *
+   * @throws \Exception
+   * @throws \JsonException
    */
   public function iShouldNotGetTheUrlToTheGoogleForm(): void
   {
@@ -2323,6 +2532,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should see the message "([^"]*)"$/
+   *
+   * @throws \Exception
    */
   public function iShouldSeeAMessage(string $arg1): void
   {
@@ -2331,6 +2542,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should see the hashtag "([^"]*)" in the project description$/
+   *
+   * @throws \Exception
    */
   public function iShouldSeeTheHashtagInTheProjectDescription(string $hashtag): void
   {
@@ -2589,6 +2802,8 @@ class ApiContext implements Context
    * @When /^I upload a catrobat project with the phiro app$/
    *
    * @throws ApiVersionNotSupportedException
+   * @throws \Exception
+   * @throws \Exception
    */
   public function iUploadACatrobatProjectWithThePhiroProApp(): void
   {
@@ -2628,6 +2843,8 @@ class ApiContext implements Context
    * @When /^I upload a standard catrobat project$/
    *
    * @throws ApiVersionNotSupportedException
+   * @throws \Exception
+   * @throws \Exception
    */
   public function iUploadAStandardCatrobatProject(): void
   {
@@ -2640,6 +2857,8 @@ class ApiContext implements Context
 
   /**
    * @Then /^I should be redirected to a catrobat project$/
+   *
+   * @throws \Exception
    */
   public function iShouldBeRedirectedToACatrobatProject(): void
   {
@@ -2648,6 +2867,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain all categories$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function theResponseShouldContainAllCategories(): void
   {
@@ -2674,6 +2896,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should contain example projects in the following order:$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function theResponseShouldContainExampleProjectsInTheFollowingOrder(TableNode $table): void
   {
@@ -2693,6 +2918,9 @@ class ApiContext implements Context
 
   /**
    * @Then /^the response should have the default extended user model structure$/
+   *
+   * @throws \JsonException
+   * @throws \Exception
    */
   public function theResponseShouldHaveTheExtendedUserModelStructure(): void
   {
@@ -2707,6 +2935,9 @@ class ApiContext implements Context
     }
   }
 
+  /**
+   * @throws \JsonException
+   */
   private function getAuthenticationRequestBody(string $username, string $password): string
   {
     $credentials = [
@@ -3051,7 +3282,7 @@ class ApiContext implements Context
       'about' => static function ($about): void {
         Assert::assertIsString($about);
       },
-      'currentlyWorkingOn' => static function ($currentlyWorkingOn): void {
+      'currently_working_on' => static function ($currentlyWorkingOn): void {
         Assert::assertIsString($currentlyWorkingOn);
       },
       'projects' => static function ($projects): void {
@@ -3149,8 +3380,9 @@ class ApiContext implements Context
    * @return string the ID of the last uploaded project or null if not available
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @throws \JsonException
    */
-  private function getIDOfLastUploadedProject(string $api_version)
+  private function getIDOfLastUploadedProject(string $api_version): string
   {
     $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 

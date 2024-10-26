@@ -1,0 +1,62 @@
+{% for member in members %}
+  <li class="member__list-entry">
+    <a href="{{ path('profile', {id: member.user.id}) }}">
+      <img class="member__list-entry__image"
+           src="{{ member.user.avatar|default(asset('/images/default/avatar_default.png')) }}"
+           alt="">
+    </a>
+    <div class="ps-3">
+      {% if member.isAdmin() %}
+        <div>
+          <i class="material-icons member__list-entry__admin-indicator">admin_panel_settings</i>
+          <a href="{{ path('profile', {id: member.user.id}) }}">{{ member.user.username }}</a>
+        </div>
+      {% else %}
+        <a href="{{ path('profile', {id: member.user.id}) }}">{{ member.user.username }}</a>
+      {% endif %}
+      <div>{{ 'studio.details.members_list.project_count'|trans({'%count%': projects_per_member[member.id]}, 'catroweb') }}</div>
+    </div>
+
+    {% if is_studio_admin and not member.isAdmin() %}
+      <div class="member__list-entry__admin-buttons mdc-menu-surface--anchor">
+
+        <button class="member__list-entry__admin-button btn material-icons"
+                data-action="click->studio--member-list#openAdminMenu"
+                role="button"
+        >
+          more_vert
+        </button>
+
+        <div class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed">
+
+          <ul class="mdc-list" role="menu" aria-hidden="true">
+
+            <li class="member__list-entry__admin-button__promote btn mdc-list-item mdc-ripple-upgraded" role="menuitem"
+                data-action="click->studio--member-list#promoteMemberToAdmin"
+                data-url="{{ path('studio_promote_member') }}"
+                data-user-id="{{ member.user.id }}"
+                data-error-message="{{ 'studio.details.members_list.promotion_failed'|trans({}, 'catroweb') }}"
+            >
+              <span class="material-icons me-2">upgrade</span>
+              <span
+                  class="member__list-entry__admin-buttons__text">{{ 'studio.details.members_list.promote_member'|trans({}, 'catroweb') }}</span>
+            </li>
+
+            <li class="member__list-entry__admin-button__ban btn mdc-list-item mdc-ripple-upgraded" role="menuitem"
+                data-action="click->studio--member-list#banUserFromStudio"
+                data-url="{{ path('studio_ban_user') }}"
+                data-user-id="{{ member.user.id }}"
+                data-error-message="{{ 'studio.details.members_list.ban_failed'|trans({}, 'catroweb') }}"
+            >
+              <span class="material-icons me-2 text-danger">delete</span>
+              <span
+                  class="member__list-entry__admin-buttons__text">{{ 'studio.details.members_list.ban_member'|trans({}, 'catroweb') }}</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    {% endif %}
+  </li>
+{% endfor %}

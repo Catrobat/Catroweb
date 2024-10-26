@@ -58,7 +58,7 @@ class ProjectsAdmin extends AbstractAdmin
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
     protected TokenStorageInterface $security_token_storage,
-    private readonly ParameterBagInterface $parameter_bag
+    private readonly ParameterBagInterface $parameter_bag,
   ) {
   }
 
@@ -151,7 +151,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('thumbnail', 'string',
         [
           'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-          'template' => 'Admin/project_thumbnail_image_list.html.twig',
+          'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
         ]
       )
       ->add('private', null, ['editable' => false, 'sortable' => false])
@@ -196,7 +196,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('thumbnail', 'string',
         [
           'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-          'template' => 'Admin/project_thumbnail_image_list.html.twig',
+          'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
         ]
       )
       ->add('private', null, ['editable' => false, 'sortable' => false])

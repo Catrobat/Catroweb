@@ -8,11 +8,11 @@
 #
 name: Deployment
 
-# Run-on every merge of a pull request into the master branch
+# Run-on every merge of a pull request into the main branch
 on:
   push:
     branches:
-      - master
+      - main
 
 # The concurrency: production_environment is important as it prevents concurrent deploys.
 concurrency: production_environment
@@ -48,7 +48,7 @@ jobs:
           printf 'SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK }}\n' >> .env.local
           printf 'DEP_USER="Catroweb Github Action"\n' >> .env.local
           printf 'DEPLOY_SHARE=${{ secrets.DEPLOY_SHARE }}\n' >> .env.local
-          printf 'DEPLOY_SHARE_BRANCH="master"\n' >> .env.local
+          printf 'DEPLOY_SHARE_BRANCH="main"\n' >> .env.local
 
       - name: Deploy Share
         uses: deployphp/action@v1

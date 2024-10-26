@@ -8,7 +8,7 @@ createNewPassword: สร้างรหัสผ่านใหม่
 accountSettings: แก้ไขข้อมูลส่วนตัว
 email: อีเมล
 aboutPocketCode: เกี่ยวกับ Pocket Code
-about: เกี่ยวกับ
+about: เกี่ยวกับ Catrobat
 education: การศึกษา
 chat: แชทและฟอรัม
 privacyGuide: คู่มือควรรู้เกี่ยวกับความเป็นส่วนตัว
@@ -344,6 +344,7 @@ myprofile:
   profileSettings: การตั้งค่าโปรไฟล์
   securitySettings: ตั้งค่าความปลอดภัย
   accountSettings: การตั้งค่าบัญชี
+  accountVerification: Verify account
   account: บัญชี
   editProfile: แก้ไขโปรไฟล์
   edit: แก้ไข
@@ -360,6 +361,10 @@ myprofile:
   editAccountSettings: แก้ไขการตั้งค่าบัญชี
   profileChangeSuccess: เปลี่ยนโปรไฟล์ของคุณสำเร็จแล้ว
   unspecifiedError: เกิดข้อผิดพลาดที่ไม่ระบุขณะเปลี่ยนโปรไฟล์ของคุณ กรุณาติดต่อเรา.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'ใบอนุญาตให้เล่น'
   title: 'กฏการเล่น - ให้เครดิต และ ร่วมแบ่งปัน'
@@ -602,6 +607,19 @@ api:
     screenshotError: 'ไม่สามารถอ่าน แปลง หรือจัดเก็บภาพหน้าจอได้ โปรดตรวจสอบข้อมูลของคุณ'
     notFound: 'ไม่พบโครงการที่จะเปลี่ยนแปลง'
     forbidden: 'ไม่อนุญาตให้เปลี่ยนแปลงโครงการ คุณยังคงเข้าสู่ระบบ'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'ต้องใส่ชื่อ'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'ชื่อยาวเกินไป'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'คำอธิบายยาวเกินไป'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: ภาษาอาหรับ
@@ -714,11 +732,8 @@ codeStatistics:
   deviceBricks: 'อุปกรณ์'
   specialBricks: 'พิเศษ'
 footer:
-  language: ภาษา
-  usefulLinks: ลิงค์ที่เป็นประโยชน์
-  legalities: กฎหมาย
-  communityStats: สถิติชุมชน
-  download: รับแอป
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: นโยบายความเป็นส่วนตัว
   version: เวอร์ชัน 2.2 วันที่ 17 ตุลาคม 2562
@@ -853,6 +868,9 @@ achievements:
       linguist:
         title: "นักภาษาศาสตร์"
         description: "แปลโครงการของคุณเป็น 5 ภาษา"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} แท็ก |]1,Inf] แท็ก'
   tag:
@@ -897,6 +915,11 @@ studio:
   cancel_studio: 'ยกเลิก'
   studio_name: 'ชื่อสตูดิโอ'
   studio_description: 'คำอธิบายของสตูดิโอ'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'เข้าร่วม'
   leave: 'ออกจากระบบ'
   report: 'รายงาน'

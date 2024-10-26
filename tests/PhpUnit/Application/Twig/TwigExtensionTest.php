@@ -7,6 +7,9 @@ namespace Tests\PhpUnit\Application\Twig;
 use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\Application\Twig\TwigExtension;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
+use App\DB\EntityRepository\System\StatisticRepository;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -16,9 +19,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(TwigExtension::class)]
 class TwigExtensionTest extends TestCase
 {
   private string $translationPath;
@@ -30,6 +32,9 @@ class TwigExtensionTest extends TestCase
     $this->translationPath = 'translations';
   }
 
+  /**
+   * @throws Exception
+   */
   public function testLanguageOptions(): void
   {
     $short = 'de_DE';
@@ -50,6 +55,9 @@ class TwigExtensionTest extends TestCase
     $this->assertTrue($this->isSelected($short, $language_options));
   }
 
+  /**
+   * @throws Exception
+   */
   public function testEnglishMustBeSelected(): void
   {
     $short = 'en_GB';
@@ -62,6 +70,9 @@ class TwigExtensionTest extends TestCase
     $this->assertFalse($this->isSelected($notShort, $list));
   }
 
+  /**
+   * @throws Exception
+   */
   public function testGermanMustBeSelected(): void
   {
     $short = 'de_DE';
@@ -74,6 +85,9 @@ class TwigExtensionTest extends TestCase
     $this->assertFalse($this->isSelected($notShort, $list));
   }
 
+  /**
+   * @throws Exception
+   */
   public function portugueseBrazilMustBeSelected(): void
   {
     $short = 'pt_BR';
@@ -86,6 +100,9 @@ class TwigExtensionTest extends TestCase
     $this->assertFalse($this->isSelected($notShort, $list));
   }
 
+  /**
+   * @throws Exception
+   */
   public function portuguesePortugalMustBeSelected(): void
   {
     $short = 'pt_PT';
@@ -99,9 +116,10 @@ class TwigExtensionTest extends TestCase
   }
 
   /**
-   * @return MockObject&RequestStack
+   * @throws Exception
+   * @throws Exception
    */
-  private function mockRequestStack(string $locale)
+  private function mockRequestStack(string $locale): RequestStack&MockObject
   {
     $requestStack = $this->createMock(RequestStack::class);
 
@@ -114,15 +132,27 @@ class TwigExtensionTest extends TestCase
     return $requestStack;
   }
 
+  /**
+   * @throws Exception
+   */
   private function createTwigExtension(string $locale): TwigExtension
   {
     $repo = $this->createMock(MediaPackageFileRepository::class);
     $request_stack = $this->mockRequestStack($locale);
     $parameter_bag = $this->createMock(ParameterBag::class);
     $translator = $this->createMock(TranslatorInterface::class);
-    $featureFlagManager = $this->createMock(FeatureFlagManager::class);
+    $feature_flag_manager = $this->createMock(FeatureFlagManager::class);
+    $statistics_repository = $this->createMock(StatisticRepository::class);
 
-    return new TwigExtension($request_stack, $repo, $parameter_bag, $this->translationPath, $translator, $featureFlagManager);
+    return new TwigExtension(
+      $request_stack,
+      $repo,
+      $parameter_bag,
+      $this->translationPath,
+      $translator,
+      $feature_flag_manager,
+      $statistics_repository
+    );
   }
 
   private function inArray(string $needle, array $haystack): bool

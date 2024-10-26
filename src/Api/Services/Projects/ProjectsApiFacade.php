@@ -6,6 +6,7 @@ namespace App\Api\Services\Projects;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
+use Psr\Log\LoggerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class ProjectsApiFacade extends AbstractApiFacade
@@ -16,7 +17,8 @@ class ProjectsApiFacade extends AbstractApiFacade
     private readonly ProjectsApiLoader $loader,
     private readonly ProjectsApiProcessor $processor,
     private readonly ProjectsRequestValidator $request_validator,
-    private readonly EventDispatcherInterface $event_dispatcher
+    private readonly EventDispatcherInterface $event_dispatcher,
+    private readonly LoggerInterface $logger,
   ) {
     parent::__construct($authentication_manager);
   }
@@ -48,5 +50,10 @@ class ProjectsApiFacade extends AbstractApiFacade
   public function getEventDispatcher(): EventDispatcherInterface
   {
     return $this->event_dispatcher;
+  }
+
+  public function getLogger(): LoggerInterface
+  {
+    return $this->logger;
   }
 }

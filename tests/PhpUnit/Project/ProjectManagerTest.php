@@ -27,7 +27,10 @@ use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Exception\ORMException;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -39,9 +42,8 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
- *
- * @covers \App\Project\ProjectManager
  */
+#[CoversClass(ProjectManager::class)]
 class ProjectManagerTest extends TestCase
 {
   private ProjectManager $program_manager;
@@ -63,7 +65,7 @@ class ProjectManagerTest extends TestCase
   private MockObject|ProjectAfterInsertEvent $programAfterInsertEvent;
 
   /**
-   * @throws \Exception
+   * @throws \Exception|Exception
    */
   #[\Override]
   protected function setUp(): void
@@ -127,7 +129,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
   {
@@ -138,7 +140,7 @@ class ProjectManagerTest extends TestCase
     };
 
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Program::class))
-      ->will($this->returnCallback($func))
+      ->willReturnCallback($func)
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
@@ -152,16 +154,16 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testSavesTheProgramToTheFileRepositoryIfTheUploadSucceeded(): void
   {
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(static function (Program $project): Program {
+      ->willReturnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;
-      }))
+      })
     ;
     fopen('/tmp/PhpUnitTest', 'w');
     $file = new File('/tmp/PhpUnitTest');
@@ -175,7 +177,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testSavesTheScreenshotsToTheScreenshotRepository(): void
   {
@@ -185,11 +187,11 @@ class ProjectManagerTest extends TestCase
     $this->extracted_file->expects($this->atLeastOnce())->method('getTags')->willReturn([]);
     $this->extracted_file->expects($this->atLeastOnce())->method('isDebugBuild')->willReturn(false);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(static function (Program $project): Program {
+      ->willReturnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;
-      }))
+      })
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())
@@ -209,7 +211,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testFiresAnEventBeforeInsertingAProgram(): void
   {
@@ -220,7 +222,7 @@ class ProjectManagerTest extends TestCase
     };
 
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback($func))
+      ->willReturnCallback($func)
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
@@ -236,7 +238,7 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function testFiresAnEventWhenTheProgramIsInvalid(): void
   {
@@ -254,16 +256,17 @@ class ProjectManagerTest extends TestCase
   }
 
   /**
-   * @throws \Exception
+   * @throws Exception
+   * @throws ORMException
    */
   public function testFiresAnEventWhenTheProgramIsStored(): void
   {
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(static function (Program $project): Program {
+      ->willReturnCallback(static function (Program $project): Program {
         $project->setId('1');
 
         return $project;
-      }))
+      })
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
@@ -274,7 +277,7 @@ class ProjectManagerTest extends TestCase
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
-      ->willReturn($this->onConsecutiveCalls($this->programBeforeInsertEvent, $this->createMock(ProjectBeforePersistEvent::class), $this->programAfterInsertEvent))
+      ->willReturn($this->programBeforeInsertEvent, $this->createMock(ProjectBeforePersistEvent::class), $this->programAfterInsertEvent)
     ;
 
     $this->assertInstanceOf(Program::class, $this->program_manager->addProject($this->request));

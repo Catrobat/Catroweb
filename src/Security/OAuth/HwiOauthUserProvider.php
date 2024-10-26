@@ -13,13 +13,22 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
 {
-  protected array $properties = ['identifier' => 'id'];
+  protected array $properties = ['identifier' => 'id', 'google' => 'google_id', 'facebook' => 'facebook_id', 'apple' => 'apple_id'];
 
-  public function __construct(protected UserManager $user_manager, array $properties)
+  public function __construct(protected UserManager $user_manager)
   {
-    $this->properties = array_merge($this->properties, $properties);
   }
 
+  public function setProperties(array $properties): self
+  {
+    $this->properties = $properties;
+
+    return $this;
+  }
+
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
   {
@@ -37,7 +46,6 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
       $user = $this->user_manager->findUserByEmail($response->getEmail());
       // if user with the given email doesnt exists create a new user
       if (!$user instanceof UserInterface) {
-        /** @var User $user */
         $user = $this->user_manager->create();
         // generate random username for example user12345678, needs to be discussed
         $user->setUsername($this->createRandomUsername($response));

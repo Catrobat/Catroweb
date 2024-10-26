@@ -8,7 +8,7 @@ createNewPassword: ایک نیا پاس ورڈ بنائیں
 accountSettings: اکاؤنٹ کی ترتیبات
 email: ای-میل
 aboutPocketCode: پاکٹ کوڈ کے بارے میں
-about: ' اِس سافٹ وٖیر کے بارے میں'
+about: کیٹروبیٹ کے بارے میں
 education: تعلیم
 chat: چیٹ اور فورم
 privacyGuide: Privacy Awareness Guide
@@ -75,7 +75,7 @@ oauthPopUpTitle: "بیرونی اکاؤنٹ کے سائن ان معلومات"
 oauthInfo: 'آپ نے لاگ ان کرنے کے لئے صرف ایک بیرونی اکاؤنٹ استعمال کیا ہے. ہم نے آپ کے لئے بے ترتیب صارف نام بنایا. اگر آپ اپنا صارف نام تبدیل کرنا چاہتے ہیں یا اپنے اکاؤنٹ کے لئے ایک نیا پاس ورڈ بنائیں تو براہ کرم اپنے پروفائل کے صفحے پر جائیں. اپنے پروفائل کے صفحے پر جانے کے لئے %link_start% یہاں %link_end% کلک کریں'
 oauthHere: "یہاں"
 statistics: "اعداد و شمار"
-languageSelection: "Language selection"
+languageSelection: "زبان کا انتخاب"
 indexPage:
   recommendedSection:
     info:
@@ -330,10 +330,11 @@ profile:
   changePicture: تصویر تبدیل کریں
   goToScratchProfile: Scratch پر پروفائل
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: User settings
+  profileSettings: پروفائل میں ترمیم کریں
+  securitySettings: خفیہ کوڈ تبدیل کریں
+  accountSettings: اکاؤنٹ ختم کریں
+  accountVerification: Verify account
   account: Account
   editProfile: پروفائل میں ترمیم کریں
   edit: تدوین کریں
@@ -350,6 +351,10 @@ myprofile:
   editAccountSettings: اکاؤنٹ کی ترتیبات میں ترمیم کریں
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'کھیلنے کے لئے لائسنس'
   title: 'کھیلنے کا لائسنس - اعزاز دیں اور دوسروں کیساتھ شریک کریں۔'
@@ -592,6 +597,19 @@ api:
     screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
     notFound: 'The project to change could not be found.'
     forbidden: 'Changing the project not allowed. Are you still logged in?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Name cannot be empty'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Name too long'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Description too long'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: عربی
@@ -704,11 +722,8 @@ codeStatistics:
   deviceBricks: 'ڈیوائس'
   specialBricks: 'خصوصی'
 footer:
-  language: زبان
-  usefulLinks: مفید لنکس
-  legalities: قانونییت
-  communityStats: کمیونٹی کے اعدادوشمار
-  download: اپلی کیشن حاصل
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: رازداری کا طریقہ کار
   version: ورژن ۲٫۲، ۱۷ اکتوبر ۲۰۱۹.
@@ -843,6 +858,9 @@ achievements:
       linguist:
         title: "ماہر لسانیات"
         description: "اپنے پراجکٹ کا پانچ ذبانوں میں ترجمہ کریں"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -887,6 +905,11 @@ studio:
   cancel_studio: 'منسوخ'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: 'رپورٹ'

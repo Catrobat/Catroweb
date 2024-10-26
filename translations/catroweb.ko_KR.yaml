@@ -8,7 +8,7 @@ createNewPassword: 새로운 비밀번호 생성
 accountSettings: 계정 설정
 email: 이메일
 aboutPocketCode: 포켓 코드에 대하여
-about: 정보
+about: Catrobat에 대하여
 education: 교육
 chat: 채팅과 포럼
 privacyGuide: Privacy Awareness Guide
@@ -333,10 +333,11 @@ profile:
   changePicture: 사진 변경
   goToScratchProfile: 스크래치용 프로파일
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: User settings
+  profileSettings: 프로필 수정
+  securitySettings: 비밀번호 변경하기
+  accountSettings: 계정 삭제
+  accountVerification: Verify account
   account: Account
   editProfile: 프로필 수정
   edit: 편집
@@ -353,6 +354,10 @@ myprofile:
   editAccountSettings: 계정 설정 수정
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: '게임 라이센스'
   title: '신용 및 공유 라이센스'
@@ -596,6 +601,19 @@ api:
     screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
     notFound: 'The project to change could not be found.'
     forbidden: 'Changing the project not allowed. Are you still logged in?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Name cannot be empty'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Name too long'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Description too long'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: 아랍어
@@ -708,11 +726,8 @@ codeStatistics:
   deviceBricks: '기기'
   specialBricks: '특수'
 footer:
-  language: 언어
-  usefulLinks: 유용한 링크
-  legalities: 합법적임
-  communityStats: 커뮤니티 현황
-  download: 앱 다운로드
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: 개인 정보 보호 정책
   version: 버전 2.2, 2019년 10월 17일
@@ -847,6 +862,9 @@ achievements:
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -891,6 +909,11 @@ studio:
   cancel_studio: '취소'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: '보고서'

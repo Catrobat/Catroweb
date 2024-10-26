@@ -1,0 +1,26 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+{% block field %}
+  {% set sound = getMediaPackageSoundUrl(object) %}
+  {% set image = getMediaPackageImageUrl(object) %}
+  <div style="">
+    {% if sound %}
+      <audio controls>
+        <source src="{{ asset(sound) }}" type="audio/mpeg">
+
+        <object>
+          <param name="autostart" value="false">
+          <param name="src" value="{{ sound }}">
+          <param name="autoplay" value="false">
+          <param name="controller" value="true">
+          <embed src="{{ asset(sound) }}" controller="true" autoplay="false" autostart="false"
+                 type="audio/mpeg"></embed>
+          Update your Browser
+        </object>
+      </audio>
+      (<a href="{{ asset(sound) }}">Download</a>)<br/>
+    {% endif %}
+    {% if image %}
+      <img src="{{ asset(image) }}" style="height: 100px;">
+    {% endif %}
+  </div>
+{% endblock %}

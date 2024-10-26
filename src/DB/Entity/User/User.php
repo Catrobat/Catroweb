@@ -200,8 +200,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $oauth_user = false;
 
-  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
-  protected bool $verified = true;
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+  protected bool $verified = false;
 
   /**
    * @var Collection<int, ProgramInappropriateReport>
@@ -250,11 +250,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\Column(name: 'last_login', type: 'datetime', nullable: true)]
   protected ?\DateTimeInterface $lastLogin = null;
 
+  #[ORM\Column(name: 'verification_requested_at', type: 'datetime', nullable: true)]
+  protected ?\DateTimeInterface $verification_requested_at = null;
+
   #[ORM\Column(name: 'confirmation_token', type: 'string', length: 180, unique: true, nullable: true)]
   protected ?string $confirmationToken = null;
 
   #[ORM\Column(name: 'password_requested_at', type: 'datetime', nullable: true)]
-  protected ?\DateTimeInterface $passwordRequestedAt = null;
+  protected ?\DateTimeInterface $password_requested_at = null;
 
   #[ORM\Column(name: 'created_at', type: 'datetime')]
   protected \DateTimeInterface $createdAt;
@@ -577,10 +580,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
   public function isVerified(): bool
   {
-    // All user are automatically verified in non production environments
-    $app_env = $_ENV['APP_ENV'];
-
-    return 'prod' !== $app_env || $this->verified;
+    return $this->verified;
   }
 
   public function getAbout(): ?string
@@ -655,7 +655,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
       $this->enabled,
       $this->id,
       $this->email,
-      $this->emailCanonical
+      $this->emailCanonical,
     ] = $data;
   }
 
@@ -830,12 +830,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
   public function setPasswordRequestedAt(?\DateTimeInterface $date = null): void
   {
-    $this->passwordRequestedAt = $date;
+    $this->password_requested_at = $date;
   }
 
   public function getPasswordRequestedAt(): ?\DateTimeInterface
   {
-    return $this->passwordRequestedAt;
+    return $this->password_requested_at;
   }
 
   public function isPasswordRequestNonExpired(int $ttl): bool
@@ -903,5 +903,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   public function setRealRoles(array $roles): void
   {
     $this->setRoles($roles);
+  }
+
+  public function getVerificationRequestedAt(): ?\DateTimeInterface
+  {
+    return $this->verification_requested_at;
+  }
+
+  public function setVerificationRequestedAt(?\DateTimeInterface $verification_requested_at): User
+  {
+    $this->verification_requested_at = $verification_requested_at;
+
+    return $this;
   }
 }

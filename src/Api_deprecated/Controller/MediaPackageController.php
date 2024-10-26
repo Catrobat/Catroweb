@@ -27,7 +27,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
   public function __construct(
     TranslatorInterface $translator,
     private readonly EntityManagerInterface $entity_manager,
-    protected MediaPackageFileRepository $media_package_file_repository
+    protected MediaPackageFileRepository $media_package_file_repository,
   ) {
     $this->initTranslator($translator);
   }

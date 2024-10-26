@@ -1,0 +1,27 @@
+@import 'WelcomeSection';
+@import 'MaintenanceInformation';
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+  color: var(--mdc-theme-primary);
+}
+
+/* fade image in after load */
+.lazyload,
+.lazyloading {
+  opacity: 0;
+}
+
+.lazyloaded {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+img .lazyload:not([src]) {
+  visibility: hidden;
+}
+
+.carousel-item__image {
+  max-width: 1024px;
+  max-height: 400px;
+  height: auto;
+}

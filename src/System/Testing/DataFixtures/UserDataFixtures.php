@@ -26,7 +26,7 @@ class UserDataFixtures
 
   public function __construct(
     private readonly UserManager $user_manager,
-    private readonly PasswordHasherFactoryInterface $password_hasher_factory
+    private readonly PasswordHasherFactoryInterface $password_hasher_factory,
   ) {
   }
 
@@ -39,7 +39,6 @@ class UserDataFixtures
 
     ++UserDataFixtures::$number_of_users;
 
-    /** @var User $user */
     $user = $this->user_manager->create();
     $user->setUsername($config['name'] ?? 'User'.UserDataFixtures::$number_of_users);
     $user->setEmail($config['email'] ?? $user->getUsername().'@catrobat.at');
@@ -47,6 +46,7 @@ class UserDataFixtures
     $user->setUploadToken($config['token'] ?? 'default_token_'.UserDataFixtures::$number_of_users);
     $user->setSuperAdmin(isset($config['admin']) && 'true' === $config['admin']);
     $user->setEnabled(!isset($config['enabled']) || 'true' === $config['enabled']);
+    $user->setVerified(!isset($config['verified']) || 'true' === $config['verified']);
     $user->addRole($config['role'] ?? 'ROLE_USER');
     $user->setOauthUser(isset($config['oauth_user']) && 'true' === $config['oauth_user']);
 
@@ -89,7 +89,7 @@ class UserDataFixtures
   public function getDefaultUser(): User
   {
     if (!UserDataFixtures::$default_user instanceof User) {
-      UserDataFixtures::$default_user = $this->insertUser([]);
+      UserDataFixtures::$default_user = $this->insertUser();
     }
 
     return UserDataFixtures::$default_user;
@@ -128,6 +128,6 @@ class UserDataFixtures
     $user = $this->user_manager->findUserByUsername($config['name']);
     $date = isset($config['created_at']) ? new \DateTime($config['created_at']) : TimeUtils::getDateTime();
     $user->changeCreatedAt($date);
-    $this->user_manager->updateUser($user, true);
+    $this->user_manager->updateUser($user);
   }
 }

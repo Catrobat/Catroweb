@@ -8,7 +8,7 @@ createNewPassword: Создать новый пароль
 accountSettings: Настройки аккаунта
 email: Электронная почта
 aboutPocketCode: О Pocket Code
-about: О приложении
+about: О проекте Catrobat
 education: Образование
 chat: Общение и форумы
 privacyGuide: Инструкция по конфиденциальности
@@ -75,7 +75,7 @@ oauthPopUpTitle: "Информация о входе с помощью акка�
 oauthInfo: 'Вы только что использовали аккаунт стороннего ресурса для входа. Мы создали для вас случайное имя пользователя. Если вы хотите изменить имя пользователя или создать новый пароль для вашего аккаунта, пожалуйста, перейдите на страницу вашего профиля.'
 oauthHere: "здесь"
 statistics: "Статистика"
-languageSelection: "Language selection"
+languageSelection: "Выбор языка"
 indexPage:
   recommendedSection:
     info:
@@ -339,6 +339,7 @@ myprofile:
   profileSettings: Настройки профиля
   securitySettings: Настройки безопасности
   accountSettings: Настройки аккаунта
+  accountVerification: Verify account
   account: Аккаунт
   editProfile: Изменить профиль
   edit: Изменить
@@ -355,6 +356,10 @@ myprofile:
   editAccountSettings: Изменить настройки аккаунта
   profileChangeSuccess: Ваш профиль был успешно изменен.
   unspecifiedError: Произошла неизвестная ошибка во время изменения вашего профиля. Пожалуйста, свяжитесь с нами.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'Лицензия на игру'
   title: 'Лицензия на игру - Указывайте источник и делитесь'
@@ -598,6 +603,19 @@ api:
     screenshotError: 'Не удалось прочитать, конвертировать или сохранить скриншот. Пожалуйста, проверьте свой ввод'
     notFound: 'Проект нужный для изменения не был найден.'
     forbidden: 'Изменение проекта запрещено. Вы до сих пор находитесь в аккаунте?'
+  createStudio:
+    nameMissing: 'Название отсутствует'
+    nameEmpty: 'Название не может быть пустым'
+    nameTooShort: 'Название слишком короткое'
+    nameTooLong: 'Название слишком длинное'
+    nameAlreadyInUse: 'Название уже используется'
+    descriptionMissing: 'Описание отсутствует'
+    descriptionEmpty: 'Описание пустое'
+    descriptionTooShort: 'Описание слишком короткое'
+    descriptionTooLong: 'Описание слишком длинное'
+    imageFileInvalid: 'Файл изображения недопустим'
+    imageFileInvalidType: 'Файловый тип изображения недопустим'
+    imageFileTooLarge: 'Файл изображения слишком большой'
 #languages and countries
 language:
   arabic: Арабский
@@ -710,11 +728,8 @@ codeStatistics:
   deviceBricks: 'Устройство'
   specialBricks: 'Особые'
 footer:
-  language: Язык
-  usefulLinks: Полезные ссылки
-  legalities: Правовая информация
-  communityStats: Статистика сообщества
-  download: Скачать приложение
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Политика конфиденциальности
   version: Версия 2.2, 17 октября 2019 года
@@ -849,6 +864,9 @@ achievements:
       linguist:
         title: "Лингвист"
         description: "Перевести ваши проекты на 5 языков"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Отметка |]1,Inf] Отметки'
   tag:
@@ -893,6 +911,11 @@ studio:
   cancel_studio: 'Отменить'
   studio_name: 'Название студии'
   studio_description: 'Описание студии'
+  is_public: 'Сделать публичным?'
+  enable_comments: 'Включить комментарии?'
+  cover_image: 'Загрузить обложку'
+  cover_image_empty: 'Изображение не выбрано. Размер файла должен быть менее 1 мегабайта.'
+  cover_image_alt: 'Изображение вашей обложки'
   join: 'Присоединиться'
   leave: 'Покинуть'
   report: 'Отчет'

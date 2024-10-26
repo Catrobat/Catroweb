@@ -1,0 +1,90 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+
+{% block meta_tags %}
+  {{ parent() }}
+  <meta http-equiv="Content-Type" content="text/html"/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('admin_standard_layout') }}
+{% endblock %}
+
+{% block sonata_top_nav_menu %}
+  <div class="navbar-custom-menu">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a class="dropdown-toggle" href="{{ path('index') }}">
+          <i class="fa fa-home fa-fw"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}
+
+{% block sonata_page_content_nav %}
+  {% if _tab_menu is not empty or _actions is not empty or _list_filters_actions is not empty %}
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        {% block tab_menu_navbar_header %}
+          {% if _navbar_title is not empty %}
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">{{ _navbar_title|raw }}</a>
+            </div>
+          {% endif %}
+        {% endblock %}
+
+        <div class="navbar-collapse">
+          <div class="navbar-left">
+            {% if _tab_menu is not empty %}
+              {{ _tab_menu|raw }}
+            {% endif %}
+            {% if app.request.requesturi == '/admin/catrobat/apk/pending/list' %}
+              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('resetPendingProjects') }}">Reset all</a>
+              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('rebuildAllApk') }}">Rebuild all</a>
+            {% endif %}
+          </div>
+
+          {% if admin is defined and action is defined and action == 'list' and admin.listModes|length > 1 %}
+            <div class="nav navbar-right btn-group">
+              {% for mode, settings in admin.listModes %}
+                <a href="{{ admin.generateUrl('list', app.request.query.all|merge({_list_mode: mode})) }}"
+                   class="btn btn-default navbar-btn btn-sm{% if admin.getListMode() == mode %} active{% endif %}"><i
+                      class="{{ settings.class }}"></i></a>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% block sonata_admin_content_actions_wrappers %}
+            {% if _actions|replace({'<li>': '', '</li>': ''})|trim is not empty %}
+              <ul class="nav navbar-nav navbar-right">
+                {% if _actions|split('</a>')|length > 2 %}
+                  <li class="dropdown sonata-actions">
+                    <a href="#" class="dropdown-toggle"
+                       data-bs-toggle="dropdown">{{ 'link_actions'|trans({}, 'SonataAdminBundle') }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
+                      {{ _actions|raw }}
+                    </ul>
+                  </li>
+                {% else %}
+                  {{ _actions|raw }}
+                {% endif %}
+              </ul>
+            {% endif %}
+          {% endblock sonata_admin_content_actions_wrappers %}
+
+          {% if _list_filters_actions is not empty %}
+            {{ _list_filters_actions|raw }}
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+  {% endif %}
+{% endblock sonata_page_content_nav %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('admin_standard_layout') }}
+{% endblock %}

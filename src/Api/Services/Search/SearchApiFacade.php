@@ -30,7 +30,7 @@ class SearchApiFacade extends AbstractApiFacade
     private readonly TokenStorageInterface $token_storage,
     private readonly JWTTokenManagerInterface $jwt_manager,
     private readonly ParameterBagInterface $parameter_bag,
-    private readonly ImageRepository $image_repository
+    private readonly ImageRepository $image_repository,
   ) {
     parent::__construct($authentication_manager);
   }

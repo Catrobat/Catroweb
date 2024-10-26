@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 
-class OAuthSuccessHandler implements AuthenticationSuccessHandlerInterface
+readonly class OAuthSuccessHandler implements AuthenticationSuccessHandlerInterface
 {
   public function __construct(
-    private readonly CookieService $cookie_service,
-    private readonly JWTTokenManagerInterface $jwt_manager,
-    private readonly RefreshTokenService $refresh_token_service
+    private CookieService $cookie_service,
+    private JWTTokenManagerInterface $jwt_manager,
+    private RefreshTokenService $refresh_token_service,
   ) {
   }
 

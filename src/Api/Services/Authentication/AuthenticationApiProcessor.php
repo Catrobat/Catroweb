@@ -8,7 +8,10 @@ use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
 use App\Security\PasswordGenerator;
+use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
+use CoderCat\JWKToPEM\Exception\Base64DecodeException;
+use CoderCat\JWKToPEM\Exception\JWKConverterException;
 use CoderCat\JWKToPEM\JWKConverter;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
@@ -18,7 +21,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthenticationApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager)
+  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager, protected AchievementManager $achievement_manager)
   {
   }
 
@@ -66,9 +69,10 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
   /**
    * used in connectUserToAccount!
    *
-   * @psalm-return array{id: mixed, email: mixed}
-   *
    * @throws GuzzleException
+   * @throws Base64DecodeException
+   * @throws JWKConverterException
+   * @throws \JsonException
    */
   protected function getPayloadFromAppleIdToken(string $id_token): array
   {
@@ -141,6 +145,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     $user->setPassword(PasswordGenerator::generateRandomPassword());
     $user->setOauthUser(true);
     $user->setVerified(true);
+    $this->achievement_manager->unlockAchievementAccountVerification($user);
 
     $this->user_manager->updateUser($user);
 

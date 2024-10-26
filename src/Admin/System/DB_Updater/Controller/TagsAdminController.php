@@ -20,14 +20,14 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class TagsAdminController extends CRUDController
 {
   public function __construct(
-    protected KernelInterface $kernel
+    protected KernelInterface $kernel,
   ) {
   }
 
   #[\Override]
   public function listAction(Request $request): Response
   {
-    return $this->renderWithExtraParams('Admin/DB_Updater/admin_tags.html.twig', [
+    return $this->render('Admin/SystemManagement/DbUpdater/Tags.html.twig', [
       'action' => 'update_tags',
       'updateTagsUrl' => $this->admin->generateUrl('update_tags'),
     ]);

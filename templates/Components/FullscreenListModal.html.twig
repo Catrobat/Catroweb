@@ -1,0 +1,40 @@
+{#
+
+  Wrapper template for a simple usage of fullscreen bootstrap modal list
+
+  ===== Dependencies =====
+
+    - Components/FullscreenListModal.scss
+
+
+  ===== Example usage =====
+
+  {% include 'Components/FullscreenListModal.html.twig' with {
+    'modal':
+      {
+        'id': 'studioDetailMembersListModal',
+        'title': '' ~ 'studio.details.members'|trans({}, 'catroweb'),
+        'list_id': 'studioDetailMembersList'
+      }
+  }%}
+#}
+
+<div class="modal fade modal-full" id="{{ modal.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog full-modal-dialog" role="document">
+    <div class="modal-content full-modal-content">
+      <div class="modal-header modal-header-full mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button data-bs-dismiss="modal"
+                  class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                  aria-label="Back to top bar">
+            arrow_back
+          </button>
+          <span class="mdc-top-app-bar__title">{{ modal.title }}</span>
+        </section>
+      </div>
+      <div class="container">
+        <ul id="{{ modal.list_id }}"></ul>
+      </div>
+    </div>
+  </div>
+</div>

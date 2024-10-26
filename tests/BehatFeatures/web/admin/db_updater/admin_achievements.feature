@@ -40,4 +40,4 @@ Feature: The admin achievements view provides a detailed list about all achievem
     When I click "#btn-update-achievements"
     And I wait for the page to be loaded
     Then I should see "Achievements have been successfully updated"
-    Then there should be "12" achievements in the database
+    Then there should be "13" achievements in the database

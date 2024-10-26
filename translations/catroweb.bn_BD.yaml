@@ -8,7 +8,7 @@ createNewPassword: নতুন পাসওয়ার্ড তৈরি ক�
 accountSettings: অ্যাকাউন্ট সেটিংস
 email: ই-মেল
 aboutPocketCode: পকেট কোড সম্পর্কে
-about: সম্পর্কে
+about: ক্যাট্রোব্যাট সম্পর্কে
 education: শিক্ষা
 chat: চ্যাট এবং ফোরাম
 privacyGuide: Privacy Awareness Guide
@@ -341,10 +341,11 @@ profile:
   changePicture: ছবি পরিবর্তন করুন
   goToScratchProfile: স্ক্র্যাচ-এ প্রোফাইল
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: User settings
+  profileSettings: প্রোফাইল সম্পাদন করুন
+  securitySettings: পাসওয়ার্ড পরিবর্তন করুন
+  accountSettings: অ্যাকাউন্ট মুছে ফেলুন
+  accountVerification: Verify account
   account: Account
   editProfile: প্রোফাইল সম্পাদন করুন
   edit: সম্পাদনা করুন
@@ -361,6 +362,10 @@ myprofile:
   editAccountSettings: অ্যাকাউন্ট সেটিংস সম্পাদনা করুন
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'খেলার জন্য লাইসেন্স'
   title: 'খেলার জন্য লাইসেন্স - কৃতিত্ব এবং শেয়ার দিন'
@@ -604,6 +609,19 @@ api:
     screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
     notFound: 'The project to change could not be found.'
     forbidden: 'Changing the project not allowed. Are you still logged in?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Name cannot be empty'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Name too long'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Description too long'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: আরবী
@@ -716,11 +734,8 @@ codeStatistics:
   deviceBricks: 'যন্ত্র'
   specialBricks: 'বিশেষ'
 footer:
-  language: ভাষা
-  usefulLinks: উপকারী লিংক
-  legalities: বৈধতা
-  communityStats: সম্প্রদায় পরিসংখ্যান
-  download: অ্যাপ্লিকেশনটি পান
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: গোপনীয়তার নীতি
   version: সংস্করণ 2.2, 17 অক্টোবর 2019
@@ -855,6 +870,9 @@ achievements:
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -899,6 +917,11 @@ studio:
   cancel_studio: 'বাতিল'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: 'প্রতিবেদন করুন'

@@ -23,12 +23,12 @@ trait ProjectPreUpdateTrait
       ->getUnitOfWork()->getOriginalEntityData($object)
     ;
 
-    if (false == $old_project['approved'] && true == $object->getApproved()) {
+    if (!$old_project['approved'] && $object->getApproved()) {
       /** @var User $user */
       $user = $this->security_token_storage->getToken()->getUser();
       $object->setApprovedByUser($user);
       $this->getModelManager()->update($object);
-    } elseif (true == $old_project['approved'] && false == $object->getApproved()) {
+    } elseif ($old_project['approved'] && !$object->getApproved()) {
       $object->setApprovedByUser(null);
       $this->getModelManager()->update($object);
     }

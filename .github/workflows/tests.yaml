@@ -13,7 +13,7 @@ on:
   pull_request:
     branches:
       - '**' # all branches
-      - '!master' # excludes master to prevent double test runs during release prep.
+      - '!main' # excludes main to prevent double test runs during release prep.
 
 jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -156,6 +156,7 @@ jobs:
           - api-utility
           - api-translation
           - api-tag
+          - api-studio
 
           - api-deprecated-general
           - api-deprecated-project
@@ -218,8 +219,10 @@ jobs:
         run: |
           docker exec app.catroweb chmod -R 777 var
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty \
-          |& tee tests/TestReports/Behat/${{ matrix.testSuite }}.log
-          exit ${PIPESTATUS[0]}
+          |& tee tests/TestReports/Behat/${{ matrix.testSuite }}.log; \
+          TEST_RUN_EXIT_CODE=${PIPESTATUS[0]}
+          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
+          ( exit $TEST_RUN_EXIT_CODE )
 
       # Missing steps are not rerun by behat, without this step they will be lost in the process
       # We must explicitly kill the pipeline if the log contains undefined steps

@@ -1,0 +1,24 @@
+{% extends base_template %}
+
+{% block sonata_admin_content %}
+  <h1 class="h1" style="margin-top: 0">Special Updater</h1>
+
+  {{ include('@SonataTwig/FlashMessage/render.html.twig') }}
+
+  <div class="box box-primary">
+    <div class="box-body">
+      <p>
+        From time to time it can be necessary to manually manipulate the data inside the database.
+        For example to delete old entries, or to add new ones.
+        Therefore, the special updater command must be used,
+        rather than executing the queries directly on the server.
+        Just add your logic to the source code (UpdateSpecialCommand.php) and trigger the command.
+        Typically, this is done automatically during the deployment.
+      </p>
+      <a id="btn-update-database" class="btn btn-large btn-primary" href="{{ updateSpecialUrl }}">
+        <i class="glyphicon glyphicon-refresh"></i>
+        Manually trigger the database update
+      </a>
+    </div>
+  </div>
+{% endblock %}

@@ -32,13 +32,20 @@ class ProjectCustomTranslation
     #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'custom_translations')]
     private Program $project,
     #[ORM\Column(type: Types::STRING, length: 5)]
-    private string $language
+    private string $language,
   ) {
   }
 
   public function getId(): ?int
   {
     return $this->id;
+  }
+
+  public function setId(?int $id): ProjectCustomTranslation
+  {
+    $this->id = $id;
+
+    return $this;
   }
 
   public function getProject(): Program

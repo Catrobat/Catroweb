@@ -44,7 +44,7 @@ class WebviewAuthenticator extends AbstractAuthenticator
     protected TranslatorInterface $translator,
     protected RequestStack $request_stack,
     protected LoggerInterface $logger,
-    protected UrlGeneratorInterface $url_generator
+    protected UrlGeneratorInterface $url_generator,
   ) {
   }
 

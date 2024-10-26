@@ -20,7 +20,7 @@ class UserResponseManager extends AbstractResponseManager
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     ResponseCacheManager $response_cache_manager,
-    private readonly CookieService $cookie_service
+    private readonly CookieService $cookie_service,
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
   }

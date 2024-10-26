@@ -1,0 +1,11 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+
+{% block field %}
+
+  <button id="code-view{{ suffix|default('') }}"
+          class="btn"
+          onclick="location.href='{{ path('code_view', {id: object.id}) }}'">
+    <span>{{ 'codeview.title'|trans({}, 'catroweb') }}</span>
+  </button>
+
+{% endblock %}

@@ -13,18 +13,28 @@ use App\Utils\CanonicalFieldsUpdater;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\Query\Expr\Join;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserManager
 {
-  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProjectManager $project_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
-  {
+  public function __construct(
+    protected CanonicalFieldsUpdater $canonicalFieldsUpdater,
+    protected UserPasswordHasherInterface $userPasswordHasher,
+    protected EntityManagerInterface $entity_manager,
+    #[Autowire(service: 'fos_elastica.finder.app_user')]
+    protected TransformedFinder $user_finder,
+    protected ProjectManager $project_manager,
+    protected UrlHelper $url_helper,
+    protected UserRepository $user_repository,
+  ) {
   }
 
   public function decodeToken(string $token): array
@@ -76,7 +86,7 @@ class UserManager
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
    */
   public function createUserFromScratch(array $userdata): ?User
   {
@@ -135,6 +145,9 @@ class UserManager
     return array_map(static fn ($value): mixed => $value['id'], $associative_array);
   }
 
+  /**
+   * @throws \DateMalformedStringException
+   */
   public function getActiveUserIDList(int $years): array
   {
     $result = $this->entity_manager->createQueryBuilder()

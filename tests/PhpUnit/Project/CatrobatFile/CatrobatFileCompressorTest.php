@@ -7,14 +7,14 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\CatrobatFileCompressor
  */
+#[CoversClass(CatrobatFileCompressor::class)]
 class CatrobatFileCompressorTest extends TestCase
 {
   private CatrobatFileCompressor $catrobat_file_compressor;
@@ -36,6 +36,9 @@ class CatrobatFileCompressorTest extends TestCase
     $this->catrobat_file_compressor->compress(__DIR__.'/invalid_directory/', BootstrapExtension::$CACHE_DIR.'base/', 'archivename');
   }
 
+  /**
+   * @throws \Exception
+   */
   public function testCompressAValidDirectory(): void
   {
     $filesystem = new Filesystem();

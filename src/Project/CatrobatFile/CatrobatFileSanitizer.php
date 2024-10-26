@@ -31,7 +31,7 @@ class CatrobatFileSanitizer
     $this->scenes = $this->getScenes($extracted_file);
 
     $files = new \RecursiveIteratorIterator(
-      new RecursiveDirectoryIterator($this->extracted_file_root_path, RecursiveDirectoryIterator::SKIP_DOTS),
+      new RecursiveDirectoryIterator($this->extracted_file_root_path, \FilesystemIterator::SKIP_DOTS),
       \RecursiveIteratorIterator::CHILD_FIRST
     );
 

@@ -1,0 +1,26 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+{% block field %}
+  {% set sounds = admin.getContainingSoundUrls(object) %}
+  <div style="">
+    {% if sounds|length == 0 %}
+      No Sounds in this project
+    {% else %}
+      There are {{ sounds|length }} Sounds:<br/>
+      {% for sound in sounds %}
+        <audio controls>
+          <source src="{{ sound }}" type="audio/mpeg">
+
+          <object>
+            <param name="autostart" value="false">
+            <param name="src" value="{{ sound }}">
+            <param name="autoplay" value="false">
+            <param name="controller" value="true">
+            <embed src="{{ sound }}" controller="true" autoplay="false" autostart="false" type="audio/mpeg"></embed>
+            Update your Browser
+          </object>
+        </audio>
+        (<a href="{{ sound }}">Download</a>)<br/>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endblock %}

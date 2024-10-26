@@ -71,31 +71,31 @@
           <div class="lrow">Facebook name</div><div class="rrow">{{ user.facebookName }}</div>
           <div class="lrow">Facebook uid</div><div class="rrow">{{ user.facebookUid }}</div>
           <div class="lrow">Followers</div><div class="rrow">
-            {% for follower in user.followers %} {{ follower }}; {%  endfor %}
+            {% for follower in user.followers %} {{ follower }}; {% endfor %}
           </div>
           <div class="lrow">Following</div><div class="rrow">
-            {% for following in user.following %} {{ following }}; {%  endfor %}
+            {% for following in user.following %} {{ following }}; {% endfor %}
           </div>
           <div class="lrow">Google ID</div><div class="rrow">{{ user.googleId }}</div>
           <div class="lrow">Group names</div>
           <div class="rrow">
-            {% for groupname in user.groupnames %} {{ groupname }}; {%  endfor %}
+            {% for groupname in user.groupnames %} {{ groupname }}; {% endfor %}
           </div>
           <div class="lrow">Last login</div><div class="rrow">{{ user.lastLogin|date('Y-m-d h:m:s') }}</div>
           <div class="lrow">Given likes</div>
           <div class="rrow">
-            {% for like in user.likes %} {{ like }}; {%  endfor %}
+            {% for like in user.likes %} {{ like }}; {% endfor %}
           </div>
           <div class="lrow">Locale</div><div class="rrow">{{ user.locale }}</div>
           <div class="lrow">Password</div><div class="rrow">*****</div>
           <div class="lrow">Passwort requested at</div><div class="rrow">{{ user.passwordRequestedAt|date('Y-m-d h:m:s') }}</div>
           <div class="lrow">Real roles</div>
           <div class="rrow">
-            {% for realrole in user.realroles %} {{ realrole }}; {%  endfor %}
+            {% for realrole in user.realroles %} {{ realrole }}; {% endfor %}
           </div>
           <div class="lrow">Roles</div>
           <div class="rrow">
-            {% for role in user.roles %} {{ role }}; {%  endfor %}
+            {% for role in user.roles %} {{ role }}; {% endfor %}
           </div>
           <div class="lrow">Salt</div><div class="rrow">*****</div>
           <div class="lrow">Timezone</div><div class="rrow">{{ user.timezone }}</div>
@@ -109,20 +109,20 @@
         <div class="mtable">
           <div class="table-name">Projects (uploaded by this user)</div>
 
-          {% if user_projects is empty %} <div>No entries for this user</div> {%  endif %}
+          {% if user_projects is empty %} <div>No entries for this user</div> {% endif %}
 
           {% for up in user_projects %}
             <div class="lrow">ID</div><div class="rrow">{{ up.id }}</div>
             <div class="lrow">Name</div><div class="rrow">{{ up.name }}</div>
 
             <div class="lrow separator"></div><div class="rrow separator"></div>
-          {%  endfor %}
+          {% endfor %}
         </div>
 
         <div class="mtable">
           <div class="table-name">Project Inappropriate Reports (filed by this user)</div>
 
-          {% if project_inappropriate_reports is empty %} <div>No entries for this user</div> {%  endif %}
+          {% if project_inappropriate_reports is empty %} <div>No entries for this user</div> {% endif %}
 
           {% for pir in project_inappropriate_reports %}
             <div class="lrow">ID</div><div class="rrow">{{ pir.id }}</div>
@@ -134,14 +134,14 @@
             <div class="lrow">Project</div><div class="rrow">{{ pir.program }}</div>
             <div class="lrow">Project Version</div><div class="rrow">{{ pir.projectVersion }}</div>
             <div class="lrow separator"></div><div class="rrow separator"></div>
-          {%  endfor %}
+          {% endfor %}
 
         </div>
 
         <div class="mtable">
           <div class="table-name">User Comments (created by this user)</div>
 
-          {% if user_comments is empty %} <div>No entries for this user</div> {%  endif %}
+          {% if user_comments is empty %} <div>No entries for this user</div> {% endif %}
 
           {% for uc in user_comments %}
             <div class="lrow">ID</div><div class="rrow">{{ uc.id }}</div>
@@ -152,24 +152,24 @@
             <div class="lrow">Text</div><div class="rrow">{{ uc.text }}</div>
             <div class="lrow">Is Reported</div><div class="rrow">{{ uc.isReported }}</div>
             <div class="lrow separator"></div><div class="rrow separator"></div>
-          {%  endfor %}
+          {% endfor %}
 
         </div>
 
         <div class="mtable">
           <div class="table-name">Notifications (for this user)</div>
 
-          {% if notifications is empty %} <div>No entries for this user</div> {%  endif %}
+          {% if notifications is empty %} <div>No entries for this user</div> {% endif %}
 
           {% for notification in notifications %}
             <div class="lrow">ID</div><div class="rrow">{{ notification.id }}</div>
             <div class="lrow">User</div><div class="rrow">{{ notification.user }}</div>
-            <div class="lrow">Title</div><div class="rrow">{{ notification.title}}</div>
+            <div class="lrow">Title</div><div class="rrow">{{ notification.title }}</div>
             <div class="lrow">Message</div><div class="rrow">{{ notification.message }}</div>
             <div class="lrow">Seen</div><div class="rrow">{{ notification.seen }}</div>
             {% if notification.price is defined %}
               <div class="lrow">Price</div><div class="rrow">{{ notification.price }}</div>
-            {%  endif %}
+            {% endif %}
             {% if notification.imagePath is defined %}
               <div class="lrow">Image Path</div><div class="rrow">{{ notification.imagePath }}</div>
             {% endif %}
@@ -186,7 +186,7 @@
               <div class="lrow">Project</div><div class="rrow">{{ notification.program }}</div>
             {% endif %}
                 <div class="lrow separator"></div><div class="rrow separator"></div>
-          {%  endfor %}
+          {% endfor %}
 
           </div>
 

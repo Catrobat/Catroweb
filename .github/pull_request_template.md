@@ -15,13 +15,9 @@ Please review the [contributing guidelines](https://github.com/Catrobat/Catroweb
 - [ ] Stick to the project’s git workflow (rebase and squash your commits)
 - [ ] Verify that your changes do not have any conflicts with the base branch
 - [ ] Put your ticket into the `Code Review` section in [Jira](https://jira.catrob.at/)
-- [ ] Post a message in the _#catroweb_ [Slack channel](https://catrobat.slack.com) and ask for a code reviewer
+- [ ] Ask for a code reviewer
 - [ ] Check that your pull request has been successfully deployed to https://web-test-1.catrob.at/
 
 ### Additional Description
 
 `TODO: Add additional information that is not in your commit-message here`
-
-### Tests - additional information
-
-`TODO: add additional information about testruns here`

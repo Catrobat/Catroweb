@@ -1,0 +1,23 @@
+<button id="{{ id }}{{ suffix|default('') }}"
+        class="btn btn-outline-primary btn-block js-redirect-button"
+        data-url='{{ url }}'
+        data-button-id='{{ id }}{{ suffix|default('') }}'
+        data-spinner-id='{{ id }}__spinner{{ suffix|default('') }}'
+        data-icon-id='{{ id }}__icon{{ suffix|default('') }}'
+>
+
+  {# Loading spinner during redirect #}
+  <i id="{{ id }}__spinner{{ suffix|default('') }}" class="material-icons d-none text-start">
+    {{ include('Components/LoadingSpinner.html.twig', {
+      spinner_id: id ~ '__spinner' ~ suffix|default(),
+      size: 'small'}
+    ) }}
+  </i>
+
+  {# Icon #}
+  <i id="{{ id }}__icon{{ suffix|default('') }}" class="material-icons align-bottom" >{{ icon }}</i>
+
+  {# Text #}
+  <span>{{ text }}</span>
+
+</button>

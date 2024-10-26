@@ -19,14 +19,14 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class SpecialUpdaterAdminController extends CRUDController
 {
   public function __construct(
-    protected KernelInterface $kernel
+    protected KernelInterface $kernel,
   ) {
   }
 
   #[\Override]
   public function listAction(Request $request): Response
   {
-    return $this->renderWithExtraParams('Admin/DB_Updater/admin_special_updater.html.twig', [
+    return $this->render('Admin/SystemManagement/DbUpdater/Special.html.twig', [
       'updateSpecialUrl' => $this->admin->generateUrl('update_special'),
     ]);
   }

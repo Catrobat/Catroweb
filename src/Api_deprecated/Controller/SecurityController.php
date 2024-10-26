@@ -41,6 +41,8 @@ class SecurityController extends AbstractController
   }
 
   /**
+   * @throws \Exception
+   *
    * @deprecated
    */
   #[Route(path: '/api/register/Register.json', name: 'catrobat_api_register', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
@@ -69,7 +71,6 @@ class SecurityController extends AbstractController
         $retArray['statusCode'] = 777;
         $retArray['answer'] = $translator->trans('errors.username.exists', [], 'catroweb');
       } else {
-        /** @var User $user */
         $user = $user_manager->create();
         $user->setUsername($create_request->username);
         $user->setEmail($create_request->mail);
@@ -91,6 +92,8 @@ class SecurityController extends AbstractController
   }
 
   /**
+   * @throws \Exception
+   *
    * @deprecated
    */
   #[Route(path: '/api/login/Login.json', name: 'catrobat_api_login', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Api_deprecated\Controller;
 
+use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
@@ -12,7 +13,9 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,16 +27,23 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @deprecated
  */
-class UploadController
+class UploadController extends AbstractController
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProjectManager $project_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em)
+  public function __construct(
+    private readonly UserManager $user_manager,
+    private readonly TokenStorageInterface $token_storage,
+    private readonly ProjectManager $project_manager,
+    private readonly TranslatorInterface $translator,
+    private readonly LoggerInterface $logger,
+    private readonly EntityManagerInterface $em,
+    private readonly FeatureFlagManager $feature_flag_manager)
   {
   }
 
   /**
-   * @deprecated
+   * @throws \Exception|ORMException
    *
-   * @throws \Exception
+   * @deprecated
    */
   #[Route(path: '/api/upload/upload.json', name: 'catrobat_api_upload', defaults: ['_format' => 'json'], methods: ['POST'])]
   public function uploadAction(Request $request): JsonResponse
@@ -44,16 +54,17 @@ class UploadController
   }
 
   /**
-   * @throws \Exception
+   * @throws ORMException
+   * @throws \JsonException
    */
   private function processUpload(Request $request): JsonResponse
   {
     /** @var User|null $user */
     $user = $this->token_storage->getToken()->getUser();
 
-    //    if (null === $user || !$user->isVerified()) {
-    //      throw new Exception('Account not verified!');
-    //    }
+    if (!$user?->isVerified() && $this->forceUserVerification()) {
+      return new JsonResponse(null, Response::HTTP_FORBIDDEN);
+    }
 
     /* @var $file File */
     /* @var $user User */
@@ -143,5 +154,10 @@ class UploadController
     $response['preHeaderMessages'] = '';
 
     return $response;
+  }
+
+  private function forceUserVerification(): bool
+  {
+    return $this->feature_flag_manager->isEnabled('force-account-verification');
   }
 }

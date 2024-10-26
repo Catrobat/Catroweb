@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Reset;
 
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,6 +19,9 @@ class RollbackDatabaseCommand extends Command
     parent::__construct();
   }
 
+  /**
+   * @throws Exception
+   */
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {

@@ -34,7 +34,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   public function __construct(
-    private readonly MediaPackageFileRepository $media_package_file_repository
+    private readonly MediaPackageFileRepository $media_package_file_repository,
   ) {
   }
 
@@ -53,6 +53,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
 
   /**
    * @throws \ImagickException
+   * @throws \ImagickDrawException
    */
   #[\Override]
   protected function postPersist($object): void
@@ -85,6 +86,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
 
   /**
    * @throws \ImagickException
+   * @throws \ImagickDrawException
    */
   #[\Override]
   protected function postUpdate($object): void
@@ -147,7 +149,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
     $list
       ->addIdentifier('id')
       ->add('name')
-      ->add('file', 'string', ['template' => 'Admin/mediapackage_file.html.twig'])
+      ->add('file', 'string', ['template' => 'Admin/MediaPackage/File.html.twig'])
       ->add('category', EntityType::class, ['class' => MediaPackageCategory::class])
       ->add('author', null, ['editable' => true])
       ->add('flavors', null, ['multiple' => true])

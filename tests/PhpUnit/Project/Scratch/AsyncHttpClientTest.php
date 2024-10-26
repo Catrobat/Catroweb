@@ -6,13 +6,13 @@ namespace Tests\PhpUnit\Project\Scratch;
 
 use App\Project\Scratch\AsyncHttpClient;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers  \App\Project\Scratch\AsyncHttpClient
  */
+#[CoversClass(AsyncHttpClient::class)]
 class AsyncHttpClientTest extends TestCase
 {
   private AsyncHttpClient $async_http_client;
@@ -57,7 +57,7 @@ class AsyncHttpClientTest extends TestCase
 
   public function testHandlesErrorWhenHttpTimeoutIsExceededCorrectly(): void
   {
-    // this timeout is so short so that the client will close the connection before the response is received
+    // a short timeout in order for the client to close the connection before the response is received
     $this->async_http_client = new AsyncHttpClient(['timeout' => 0.01]);
 
     $expected_id_of_first_program = 117_697_631;

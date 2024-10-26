@@ -43,14 +43,11 @@ class ExampleProjectAdmin extends AbstractAdmin
   public function __construct(
     private readonly ImageRepository $example_image_repository,
     private readonly ProjectManager $project_manager,
-    private readonly FlavorRepository $flavor_repository
+    private readonly FlavorRepository $flavor_repository,
   ) {
   }
 
-  /**
-   * @param ExampleProgram $object
-   */
-  public function getExampleImageUrl($object): string
+  public function getExampleImageUrl(ExampleProgram $object): string
   {
     return '../../'.$this->example_image_repository->getWebPath($object->getId(), $object->getImageType(), false);
   }
@@ -155,7 +152,7 @@ class ExampleProjectAdmin extends AbstractAdmin
       ->addIdentifier('id')
       ->add('Example Image', null, [
         'accessor' => fn ($subject): string => $this->getExampleImageUrl($subject),
-        'template' => 'Admin/example_image.html.twig',
+        'template' => 'Admin/Projects/ExampleImage.html.twig',
       ])
       ->add('program', EntityType::class, ['class' => Program::class, 'editable' => false])
       ->add('flavor', 'string')
@@ -171,10 +168,7 @@ class ExampleProjectAdmin extends AbstractAdmin
     ;
   }
 
-  /**
-   * @param ExampleProgram $object
-   */
-  private function checkProjectID($object): void
+  private function checkProjectID(ExampleProgram $object): void
   {
     $id = $this->getForm()->get('program_id')->getData();
     $project = $this->project_manager->find($id);

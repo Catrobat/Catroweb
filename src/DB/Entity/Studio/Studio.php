@@ -138,12 +138,12 @@ class Studio
     return $this;
   }
 
-  public function getCoverPath(): ?string
+  public function getCoverAssetPath(): ?string
   {
     return $this->cover_path;
   }
 
-  public function setCoverPath(?string $cover_path): Studio
+  public function setCoverAssetPath(?string $cover_path): Studio
   {
     $this->cover_path = $cover_path;
 

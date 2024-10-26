@@ -20,7 +20,6 @@ return [
   Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
   Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
   HWI\Bundle\OAuthBundle\HWIOAuthBundle::class => ['all' => true],
-  Http\HttplugBundle\HttplugBundle::class => ['all' => true],
   FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
   JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
   OpenAPI\Server\OpenAPIServerBundle::class => ['all' => true],
@@ -33,4 +32,5 @@ return [
   Sonata\Twig\Bridge\Symfony\SonataTwigBundle::class => ['all' => true],
   Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
   Bugsnag\BugsnagBundle\BugsnagBundle::class => ['all' => true],
+  Http\HttplugBundle\HttplugBundle::class => ['all' => true],
 ];

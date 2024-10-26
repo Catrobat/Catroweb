@@ -27,7 +27,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
     private readonly User $user,
     \DateTimeInterface $expiresAt,
     string $selector,
-    string $hashedToken
+    string $hashedToken,
   ) {
     $this->initialize($expiresAt, $selector, $hashedToken);
   }
@@ -35,6 +35,13 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
   public function getId(): ?int
   {
     return $this->id;
+  }
+
+  public function setId(?int $id): ResetPasswordRequest
+  {
+    $this->id = $id;
+
+    return $this;
   }
 
   #[\Override]

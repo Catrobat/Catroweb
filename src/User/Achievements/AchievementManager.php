@@ -125,9 +125,17 @@ class AchievementManager
   /**
    * @throws \Exception
    */
-  public function unlockAchievementVerifiedDeveloper(User $user): ?UserAchievement
+  public function unlockAchievementAccountCreated(User $user): ?UserAchievement
   {
-    return $this->unlockAchievement($user, Achievement::VERIFIED_DEVELOPER, $user->getCreatedAt());
+    return $this->unlockAchievement($user, Achievement::ACCOUNT_CREATED, $user->getCreatedAt());
+  }
+
+  /**
+   * @throws \Exception
+   */
+  public function unlockAchievementAccountVerification(User $user): ?UserAchievement
+  {
+    return $this->unlockAchievement($user, Achievement::ACCOUNT_VERIFICATION, TimeUtils::getDateTime());
   }
 
   /**
@@ -142,6 +150,9 @@ class AchievementManager
     return null;
   }
 
+  /**
+   * @throws \Exception
+   */
   public static function isCodingJam092021EventActive(): bool
   {
     // is open from 00:00 UTC+12 of 25th September 2021 till 23:59 UTC-12 of 26th September 2021.

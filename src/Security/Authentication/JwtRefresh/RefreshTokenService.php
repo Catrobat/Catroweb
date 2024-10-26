@@ -10,12 +10,14 @@ use App\User\UserManager;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpKernel\Event\KernelEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class RefreshTokenService
 {
   public function __construct(
+    #[Autowire('%env(REFRESH_TOKEN_TTL)%')]
     protected int $refreshTokenLifetime,
     protected RefreshTokenManagerInterface $refresh_manager,
     protected UserManager $user_manager,
@@ -24,6 +26,9 @@ class RefreshTokenService
   ) {
   }
 
+  /**
+   * @throws \DateMalformedStringException
+   */
   public function createRefreshTokenForUsername(string $username): RefreshTokenInterface
   {
     $datetime = new \DateTime('now');

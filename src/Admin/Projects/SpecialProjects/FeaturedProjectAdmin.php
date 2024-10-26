@@ -43,14 +43,11 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly ImageRepository $featured_image_repository,
-    private readonly ProjectManager $project_manager
+    private readonly ProjectManager $project_manager,
   ) {
   }
 
-  /**
-   * @param FeaturedProgram $object
-   */
-  public function getFeaturedImageUrl($object): string
+  public function getFeaturedImageUrl(FeaturedProgram $object): string
   {
     return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType(), true);
   }
@@ -184,7 +181,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
       ])
       ->add('Featured Image', null, [
         'accessor' => fn ($subject): string => $this->getFeaturedImageUrl($subject),
-        'template' => 'Admin/featured_image.html.twig',
+        'template' => 'Admin/Projects/FeaturedImage.html.twig',
       ])
       ->add('program', EntityType::class, [
         'class' => Program::class,

@@ -20,7 +20,6 @@ Feature: Get user by id
     And I wait 500 milliseconds
 
   Scenario: Get user by id
-
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/user/2"
     Then the response status code should be "200"
@@ -30,7 +29,6 @@ Feature: Get user by id
       | Catrobat |
 
   Scenario: User not found should return 404 status code
-
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/user/5"
     Then the response status code should be "404"

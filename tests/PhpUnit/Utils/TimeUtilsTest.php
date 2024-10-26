@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Utils;
 
 use App\Utils\TimeUtils;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Utils\TimeUtils
  */
+#[CoversClass(TimeUtils::class)]
 class TimeUtilsTest extends TestCase
 {
   /**
@@ -31,7 +31,7 @@ class TimeUtilsTest extends TestCase
   }
 
   /**
-   * Test wheter the TimeUtils returns the current DateTime.
+   * Test whether the TimeUtils returns the current DateTime.
    *
    * @throws \Exception
    */

@@ -24,14 +24,14 @@ class CronJobsAdminController extends CRUDController
   public function __construct(
     protected CronJobRepository $cron_job_repository,
     protected EntityManagerInterface $entity_manager,
-    protected KernelInterface $kernel
+    protected KernelInterface $kernel,
   ) {
   }
 
   #[\Override]
   public function listAction(Request $request): Response
   {
-    return $this->renderWithExtraParams('Admin/DB_Updater/admin_cron_jobs.html.twig', [
+    return $this->render('Admin/SystemManagement/DbUpdater/CronJobs.html.twig', [
       'action' => 'reset_cron_job',
       'triggerCronJobsUrl' => $this->admin->generateUrl('trigger_cron_jobs'),
     ]);

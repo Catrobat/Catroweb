@@ -1,0 +1,129 @@
+<div class="studio-detail__header ">
+
+  <div id="studio-img-container" class="studio-detail__header__img__container">
+    <img src="{{ asset(studio.CoverAssetPath|default('')) }}" class="img-fluid" alt="">
+    {% if user_role == 'admin' %}
+      <form class="studio-detail__header__details__button--upload-image" id="std-header-form"
+            enctype="multipart/form-data" method="post">
+        <span class="material-icons">photo_camera</span>
+        <input id="std-header" name="header-img" type="file" accept="image/*">
+        <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
+      </form>
+    {% endif %}
+  </div>
+
+  <div class="container">
+    <h2 class="studio-detail__header__name container" class="ps-3 pe-2 mt-2">{{ studio.name }}</h2>
+    <div class="studio-detail__header__details container">
+
+      <div class="col-3">
+        {{ studio.isPublic ? 'studio.public'|trans({}, 'catroweb') : 'studio.private'|trans({}, 'catroweb') }}
+      </div>
+
+      <div class="col-3">
+        {% if user_role != null %}
+          <div {{ stimulus_controller('studio--member-list', {
+            url: path('studio_members_list'),
+            studioId: studio.id,
+            listElementId: 'studioDetailMembersList'
+          }) }}
+          >
+            <a type="button"
+               class="studio-detail__header__details__button studio-detail__header__details__button--member"
+               data-bs-toggle="modal"
+               data-bs-target="#studioDetailMembersListModal"
+               data-action="click->studio--member-list#loadMembers"
+            >
+              <span class="material-icons">person</span><span class="ms-2 member_count">{{ members_count }}</span>
+            </a>
+            {{ include('Components/FullscreenListModal.html.twig', {
+              modal:
+              {
+                id: 'studioDetailMembersListModal',
+                title: '' ~ 'studio.details.members_list.title'|trans({}, 'catroweb'),
+                list_id: 'studioDetailMembersList'
+              }
+            }) }}
+          </div>
+        {% else %}
+          <div class="studio-detail__header__details__info">
+            <span class="material-icons">person</span>
+            <span class="ms-2 member_count">{{ members_count }}</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="col-3">
+        {% if user_role == 'admin' %}
+          <div {{ stimulus_controller('studio--activity-list', {
+            url: path('studio_activities_list'),
+            studioId: studio.id,
+            listElementId: 'studioDetailActivityList'
+          }) }}
+          >
+            <a type="button"
+               class="studio-detail__header__details__button studio-detail__header__details__button--activity"
+               data-bs-toggle="modal"
+               data-bs-target="#studioDetailActivityListModal"
+               data-action="click->studio--activity-list#loadActivities"
+            >
+              <span class="material-icons">schedule</span>
+              <span id="activity_count" class="ms-2 activity_count">{{ activities_count }}</span>
+            </a>
+            {{ include('Components/FullscreenListModal.html.twig', {
+              modal:
+              {
+                id: 'studioDetailActivityListModal',
+                title: '' ~ 'studio.details.activity_list.title'|trans({}, 'catroweb'),
+                list_id: 'studioDetailActivityList'
+              }
+            }) }}
+          </div>
+        {% else %}
+          <div class="studio-detail__header__details__info">
+            <span class="material-icons">schedule</span>
+            <span id="activity_count" class="ms-2 activity_count">{{ activities_count }}</span>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="col-3">
+        {% if user_name %}
+          {% if user_role == 'admin' %}
+
+          {% elseif not status_public and status_private != 'pending' and status_private != 'declined' %}
+            <button
+                class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestJoin"
+                data-url="{{ path('studio_join', {id: studio.id}) }}">
+              {{ 'studio.join'|trans({}, 'catroweb') }}
+            </button>
+          {% elseif status_private == 'pending' %}
+            <button
+                class="studio-detail__header__details__pending-button btn btn-outline-primary btn-block requestPending">
+              {{ 'studio.details.pending'|trans({}, 'catroweb') }}
+            </button>
+          {% elseif status_private == 'declined' %}
+            <button
+                class="studio-detail__header__details__declined-button btn btn-outline-primary btn-block requestDecline">
+              {{ 'studio.details.decline'|trans({}, 'catroweb') }}
+            </button>
+          {% elseif status_private == 'approved' or status_public %}
+            <button
+                class="studio-detail__header__details__leave-button btn btn-outline-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestLeave"
+                data-url="{{ path('studio_leave', {id: studio.id}) }}">
+              {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+            </button>
+          {% endif %}
+        {% else %}
+          <a href="{{ path('login') }}"
+             class="studio-detail__header__details__join-button btn btn-outline-primary btn-block">
+            {{ 'studio.join'|trans({}, 'catroweb') }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    {{ include('Studio/Details/Tabs.html.twig') }}
+
+  </div>
+</div>

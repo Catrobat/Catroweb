@@ -7,6 +7,7 @@ namespace App\Application\Controller\Project;
 use App\DB\Entity\Project\Program;
 use App\Project\Scratch\AsyncHttpClient;
 use App\Project\Scratch\ScratchManager;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,9 @@ class ScratchController extends AbstractController
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);
   }
 
+  /**
+   * @throws \Exception|ORMException
+   */
   #[Route(path: '/scratch/project/{id}', name: 'scratch_program', methods: ['GET', 'POST'])]
   public function scratchProject(Request $request, int $id): Response
   {

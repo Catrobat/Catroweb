@@ -1,0 +1,14 @@
+{% extends '@SonataAdmin/CRUD/base_show_field.html.twig' %}
+{% block field %}
+  {% set strings = admin.getContainingStrings(object) %}
+  <div style="">
+    {% if strings|length == 0 %}
+      No Strings in this project
+    {% else %}
+      There are {{ strings|length }} Strings:<br/>
+      {% for string in strings %}
+        <span class="label label-primary">{{ string }}</span>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endblock %}

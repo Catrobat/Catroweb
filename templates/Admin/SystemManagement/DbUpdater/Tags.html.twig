@@ -1,0 +1,28 @@
+{% extends '@SonataAdmin/CRUD/base_list.html.twig' %}
+
+{% block list_table %}
+  <div class="col-xs-12 col-md-12 mb-5">
+      <h1 class="h1" style="margin-top: 0">Tags</h1>
+      {{ include('@SonataTwig/FlashMessage/render.html.twig') }}
+      <p style="padding: 0.5em">
+          Tags must be added directly in the source code to utilize our translation system.
+          Then, to insert/update those static tags into the database, the update button must be
+          triggered or the command executed in the command line.
+          Typically, this is done automatically during the deployment.
+      </p>
+      <h4>Step-by-step guide on how to add new tags</h4>
+      <ol>
+          <li>Add/modify the tags in `UpdateTagsCommand.php`</li>
+          <li>Add all necessary new translations</li>
+          <li>Trigger the update into the database</li>
+      </ol>
+
+      <a id="btn-update-tags" class="btn btn-large btn-primary" href="{{ updateTagsUrl }}">
+          <i class="glyphicon glyphicon-refresh"></i>
+          Manually trigger the tags update
+      </a>
+
+      <h3>Tags Overview</h3>
+  </div>
+  {{ parent() }}
+{% endblock %}

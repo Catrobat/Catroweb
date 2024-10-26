@@ -1,5 +1,5 @@
 # Use composer image for better caching
-FROM composer:2.7.7 AS composer-build
+FROM composer:2.8.1 AS composer-build
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
@@ -33,6 +33,7 @@ RUN apt-get update && \
     php8.3-xdebug \
     php8.3-xml \
     php8.3-zip \
+    php8.3-bcmath \
     libapache2-mod-php8.3 \
     acl \
     make \
@@ -70,7 +71,7 @@ COPY / ./
 # Overwrite behat config:
 COPY behat.yaml.dist ./behat.yaml
 RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb/index_test.php/|g" behat.yaml && \
-    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb:9222|g" behat.yaml
+    sed -i -r "s|(api_url:)(\s+.+)|api_url: http://chrome.catroweb:9222|g" behat.yaml
 
 # Overwrite project config:
 ARG APP_ENVIRONMENT

@@ -8,6 +8,8 @@ use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Sonata\AdminBundle\Bridge\Exporter\AdminExporter;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,18 +22,22 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 abstract class AbstractMachineTranslationAdminController extends CRUDController
 {
-  protected const TYPE_PROJECT = 'TYPE_PROJECT';
+  protected const string TYPE_PROJECT = 'TYPE_PROJECT';
 
-  protected const TYPE_COMMENT = 'TYPE_COMMENT';
+  protected const string TYPE_COMMENT = 'TYPE_COMMENT';
 
   protected string $type;
 
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
-    private readonly KernelInterface $kernel
+    private readonly KernelInterface $kernel,
   ) {
   }
 
+  /**
+   * @throws ContainerExceptionInterface
+   * @throws NotFoundExceptionInterface
+   */
   #[\Override]
   public function listAction(Request $request): Response
   {
@@ -79,7 +85,7 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
     ;
     $provider_breakdown = $qb->getQuery()->getResult();
 
-    return $this->renderWithExtraParams('Admin/Translation/admin_machine_translation.html.twig', [
+    return $this->render('Admin/Statistics/MachineTranslation.html.twig', [
       'action' => 'list',
       'trimUrl' => $this->admin->generateUrl('trim'),
       'providerBreakdown' => $provider_breakdown,

@@ -26,7 +26,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
@@ -36,8 +36,6 @@ class MigrateRemixGraphsCommand extends Command
 {
   private readonly AsyncHttpClient $async_http_client;
 
-  private readonly string $app_root_dir;
-
   private ?OutputInterface $output = null;
 
   private ?MigrationFileLock $migration_file_lock = null;
@@ -45,11 +43,12 @@ class MigrateRemixGraphsCommand extends Command
   public function __construct(private readonly UserManager $user_manager,
     private readonly ProjectManager $project_manager, private readonly RemixManager $remix_manager,
     private readonly EntityManagerInterface $entity_manager, private readonly CatrobatFileExtractor $file_extractor,
-    private readonly ProgramRepository $project_repository, ParameterBagInterface $parameter_bag)
+    private readonly ProgramRepository $project_repository,
+    #[Autowire('%kernel.project_dir%/CatrobatRemixMigration.lock')]
+    private readonly string $migration_lock_file_path)
   {
     parent::__construct();
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
-    $this->app_root_dir = (string) $parameter_bag->get('kernel.project_dir');
   }
 
   public function signalHandler(int $signal_number): void
@@ -87,7 +86,7 @@ class MigrateRemixGraphsCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     declare(ticks=1);
-    $this->migration_file_lock = new MigrationFileLock($this->app_root_dir, $output);
+    $this->migration_file_lock = new MigrationFileLock($this->migration_lock_file_path, $output);
     $this->output = $output;
     pcntl_signal(SIGTERM, $this->signalHandler(...));
     pcntl_signal(SIGHUP, $this->signalHandler(...));
@@ -116,8 +115,7 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @throws NoResultException
-   * @throws NonUniqueResultException
+   * @throws \Exception
    */
   private function migrateRemixDataOfExistingProjects(OutputInterface $output, string $directory): void
   {
@@ -158,7 +156,7 @@ class MigrateRemixGraphsCommand extends Command
 
       $project = $this->project_manager->find($project_id);
       assert(null != $project);
-      $truncated_project_name = mb_strimwidth((string) $project->getName(), 0, 12, '...');
+      $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $truncated_project_name, $output, $progress_bar);
       if ('0.0' == $result['languageVersion']) {
@@ -167,7 +165,7 @@ class MigrateRemixGraphsCommand extends Command
 
       $progress_bar->setMessage('Migrating forward remixes of "'.$truncated_project_name.'" (#'.$project_id.')');
       $remix_data_map[$project_id] = $result['fullRemixData'];
-      $this->addRemixData($project, $result['remixDataOnlyForwardParents'], false);
+      $this->addRemixData($project, $result['remixDataOnlyForwardParents']);
 
       $progress_bar->clear();
       $output->writeln('Migrated forward remix data of "'.$truncated_project_name.'" (#'.$project_id.')');
@@ -197,7 +195,7 @@ class MigrateRemixGraphsCommand extends Command
 
     foreach ($all_project_ids as $project_id) {
       $project = $this->project_manager->find($project_id);
-      $truncated_project_name = mb_strimwidth((string) $project->getName(), 0, 12, '...');
+      $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $progress_bar->setMessage('Migrating remaining remixes of "'.$truncated_project_name.'" (#'.$project_id.')');
       $this->addRemixData($project, $remix_data_map[$project_id], true);
@@ -229,7 +227,7 @@ class MigrateRemixGraphsCommand extends Command
     while (null != ($unmigrated_project = $this->project_manager->findOneByRemixMigratedAt(null))) {
       $project_file_path = $directory.$project_id.'/';
       $project_id = $unmigrated_project->getId();
-      $truncated_project_name = mb_strimwidth((string) $unmigrated_project->getName(), 0, 12, '...');
+      $truncated_project_name = mb_strimwidth($unmigrated_project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $unmigrated_project->getName(), $output, $progress_bar);
       if ('0.0' == $result['languageVersion']) {
@@ -294,7 +292,7 @@ class MigrateRemixGraphsCommand extends Command
       // NOTE: this is a workaround only needed for migration purposes in order to stay backward compatible
       //       with older XML files -> do not change order here
       // ----------------------------------------------------------------------------------------------------------
-      $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->project_repository, false);
+      $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->project_repository);
       assert(1 == count($url_data), 'WTH! This project has multiple urls with different project IDs?!!');
       assert($url_data[0]->getProgramId() == $project_id);
 

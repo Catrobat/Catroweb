@@ -26,7 +26,7 @@ class CatroNotification
   #[ORM\Column(name: 'seen', type: Types::BOOLEAN, options: ['default' => false])]
   private bool $seen = false;
 
-  private string $twig_template = 'Notifications/NotificationTypes/catro_notification.html.twig';
+  private string $twig_template = 'User/Notification/Type/Catro.html.twig';
 
   public function __construct(
     /**
@@ -41,7 +41,7 @@ class CatroNotification
     #[ORM\Column(name: 'message', type: Types::TEXT)]
     private string $message = '',
     #[ORM\Column(name: 'type', type: Types::STRING)]
-    private string $type = ''
+    private string $type = '',
   ) {
   }
 

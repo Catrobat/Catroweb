@@ -14,7 +14,7 @@ class CommentNotification extends CatroNotification
   /*
    *  You have to set this parameter otherwise the wrong template will be rendered.
    */
-  private string $twig_template = 'Notifications/NotificationTypes/comment_notification.html.twig';
+  private string $twig_template = 'User/Notification/Type/Comment.html.twig';
 
   /**
    * CommentNotification constructor.
@@ -26,7 +26,7 @@ class CommentNotification extends CatroNotification
     User $user,
     #[ORM\JoinColumn(name: 'comment_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
     #[ORM\OneToOne(targetEntity: UserComment::class, inversedBy: 'notification')]
-    private ?UserComment $comment
+    private ?UserComment $comment,
   ) {
     parent::__construct($user, '', '', 'comment');
   }

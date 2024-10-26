@@ -8,7 +8,7 @@ createNewPassword: Yeni şifre oluşturma
 accountSettings: Hesap silme
 email: E-Posta
 aboutPocketCode: Cep kodu hakkında
-about: Daha fazla
+about: Catrobat hakkında
 education: Eğitim
 chat: Sohbet ve forumlar
 privacyGuide: Privacy Awareness Guide
@@ -338,6 +338,7 @@ myprofile:
   profileSettings: Profil Ayarları
   securitySettings: Güvenlik ayarları
   accountSettings: Hesap Ayarları
+  accountVerification: Verify account
   account: Hesap
   editProfile: Profili düzenle
   edit: Düzenle
@@ -354,6 +355,10 @@ myprofile:
   editAccountSettings: Hesap ayarlarını düzenle
   profileChangeSuccess: Profiliniz başarıyla güncellendi.
   unspecifiedError: Profiliniz değiştirilirken belirtilmemiş bir hata oluştu. Lütfen bizimle iletişime geçin.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'Oynamak için lisansınız'
   title: 'Oynamak için lisans- prim ver ve paylaş'
@@ -596,6 +601,19 @@ api:
     screenshotError: 'Ekran görüntüsü okunamadı, dönüştürülemedi veya saklanamadı. Lütfen girişinizi kontrol edin.'
     notFound: 'Değiştirilecek proje bulunamadı.'
     forbidden: 'Proje değişikliğine izin verilmiyor. Hala giriş yaptın mı?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'İsim boş olamaz'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'İsim çok uzun'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Açıklama çok uzun'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Arapça
@@ -708,11 +726,8 @@ codeStatistics:
   deviceBricks: 'Cihaz'
   specialBricks: 'Özel'
 footer:
-  language: Dil
-  usefulLinks: Yararlı bağlantılar
-  legalities: Yasallık
-  communityStats: Topluluk İstatistikleri
-  download: ' Uygulamayı al'
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Gizlilik politikası
   version: Versiyon 2.2, 17 Ekim 2019
@@ -847,6 +862,9 @@ achievements:
       linguist:
         title: "Dilbilimci"
         description: "Projelerinizi 5 dile çevirin"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Etiket |]1,Inf] Etiketler'
   tag:
@@ -891,6 +909,11 @@ studio:
   cancel_studio: 'İptal et'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: 'Bildir'

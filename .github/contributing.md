@@ -48,7 +48,7 @@ git commit --amend
 Go to GitHub and **create a Pull-Request** from your forked repository into the official repository.<br/>
 
 - check that you create the PR from your correct ticket branch!
-- check that PR goes to the `develop` branch and not `master` branch!
+- check that PR goes to the `develop` branch and not `main` branch!
 - enable "allow edits from maintainers", this allows the Seniors to rebase your PR if needed
 
 ##### 7. Keep your PR up-to-date and be responsive to requested changes. Make sure the CI tests pass

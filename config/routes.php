@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\Api\Services\OverwriteController;
 use App\Application\Controller\Base\RedirectController;
-use App\Application\Controller\Security\RegistrationController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {
@@ -27,11 +26,6 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     ->controller([OverwriteController::class, 'projectIdCatrobatGet'])
     ->methods(['GET'])
     ->requirements(['id' => '^[a-zA-Z0-9\\\-]+$'])
-  ;
-
-  $routingConfigurator->add('registration_confirmation_route', '/app/verify')
-    ->controller([RegistrationController::class, 'verifyUserEmail'])
-    ->methods(['GET'])
   ;
 
   $routingConfigurator->add('legacy_hour_of_code_route', '/hourOfCode')

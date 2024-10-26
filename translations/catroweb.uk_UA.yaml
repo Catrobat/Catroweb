@@ -339,6 +339,7 @@ myprofile:
   profileSettings: Налаштування профілю
   securitySettings: Налаштування безпеки
   accountSettings: Налаштування облікового запису
+  accountVerification: Верифікувати обліковий запис
   account: Обліковий запис
   editProfile: Редагувати профіль
   edit: Редагувати
@@ -355,6 +356,10 @@ myprofile:
   editAccountSettings: Змінити налаштування облікового запису
   profileChangeSuccess: Ваш профіль успішно змінено.
   unspecifiedError: Під час змінень профілю сталася невідома помилка. Будь ласка, зв'яжіться з нами.
+  verifyAccountText: Ми відправимо вам електронного листа з посиланням для верифікації вашого облікового запису. Переконайтеся, що ви перейшли за посиланням протягом наступної години, оскільки ви маєте право запитувати лише один лист на день.
+  verifyAccountButton: Відправити лист
+  verifyAccountMailSent: Лист успішно відправлено. Будь ласка, перевірте свої вхідні листи
+  verifyAccountMailFailed: Ви можете запитувати лише один лист на день
 licenseToPlay:
   link: 'Ліцензія на гру'
   title: 'Ліцензія на гру — вказуйте джерело і діліться'
@@ -585,8 +590,8 @@ api:
     currentPasswordWrong: "Поточний пароль неправильний"
   project:
     nameEmpty: 'Назва не може бути порожньою'
-    nameTooLong: 'Назва занадто довга'
-    descriptionTooLong: 'Опис занадто довгий'
+    nameTooLong: 'Назва задовга'
+    descriptionTooLong: 'Опис задовгий'
     creditsTooLong: 'Поле «Примітки та автори» занадто довге'
     screenshotInvalid: 'Знімок екрана проєкту неприпустимий або не підтримується'
   projectsPost:
@@ -598,6 +603,19 @@ api:
     screenshotError: 'Не вдалося прочитати, перетворити або зберегти знімок екрана. Будь ласка, перевірте свій внесок.'
     notFound: 'Не вдалося знайти проєкт, який потрібно змінити.'
     forbidden: 'Зміна проєкту не дозволяється. Ви все ще ввійшли в систему?'
+  createStudio:
+    nameMissing: 'Назва відсутня'
+    nameEmpty: 'Назва не може бути порожньою'
+    nameTooShort: 'Назва закоротка'
+    nameTooLong: 'Назва задовга'
+    nameAlreadyInUse: 'Назва вже зайнята'
+    descriptionMissing: 'Опис відсутній'
+    descriptionEmpty: 'Опис порожній'
+    descriptionTooShort: 'Опис закороткий'
+    descriptionTooLong: 'Опис задовгий'
+    imageFileInvalid: 'Недійсний файл зображення'
+    imageFileInvalidType: 'Недійсний тип файлу зображення'
+    imageFileTooLarge: 'Файл зображення завеликий'
 #languages and countries
 language:
   arabic: Арабська
@@ -710,11 +728,8 @@ codeStatistics:
   deviceBricks: 'Пристрій'
   specialBricks: 'Користувацькі'
 footer:
-  language: Мова
-  usefulLinks: Корисні посилання
-  legalities: Юридичні дані
-  communityStats: Статистика Спільноти
-  download: Завантажити застосунок
+  title: "Долучайтесь до понад %user_count% творчих умів!"
+  text: "Ми вже поділилися %project_count% дивовижними проєктами, і наступний може стати вашим. Завантажте наш застосунок і почніть творити вже сьогодні"
 privacy-policy:
   header: Політика конфіденційності
   version: Версія 2.2, 17 жовтня 2019 року
@@ -849,6 +864,9 @@ achievements:
       linguist:
         title: "Лінгвіст"
         description: "Перекласти свої проєкти на 5 мов"
+      account_verification:
+        title: "Верифіковано"
+        description: "Верифікувати свій обліковий запис"
 tags:
   title: '{0} |{1} тег |]1,Inf] теги'
   tag:
@@ -893,6 +911,11 @@ studio:
   cancel_studio: 'Скасувати'
   studio_name: 'Назва студії'
   studio_description: 'Опис студії'
+  is_public: 'Зробити публічним?'
+  enable_comments: 'Увімкнути коментарі?'
+  cover_image: 'Вивантажити банер'
+  cover_image_empty: 'Зображення не вибрано. Розмір файлу повинен бути менш як 1 мегабайта.'
+  cover_image_alt: 'Ваше зображення банера'
   join: 'Долучитися'
   leave: 'Покинути'
   report: 'Скарга'

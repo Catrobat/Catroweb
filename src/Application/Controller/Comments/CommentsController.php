@@ -12,6 +12,7 @@ use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +23,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class CommentsController extends AbstractController
 {
   public function __construct(
-    private readonly EntityManagerInterface $entity_manager
+    private readonly EntityManagerInterface $entity_manager,
   ) {
   }
 
@@ -94,6 +95,9 @@ class CommentsController extends AbstractController
     return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
 
+  /**
+   * @throws ORMException
+   */
   #[Route(path: '/comment', name: 'comment', methods: ['POST'])]
   public function postComment(Request $request, NotificationManager $notification_service, ProjectManager $project_manager): Response
   {

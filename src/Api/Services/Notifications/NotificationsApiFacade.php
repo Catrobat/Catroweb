@@ -16,7 +16,7 @@ class NotificationsApiFacade extends AbstractApiFacade
     private readonly NotificationsApiLoader $loader,
     private readonly NotificationsApiProcessor $processor,
     private readonly NotificationsRequestValidator $request_validator,
-    private readonly NotificationRepository $notification_repository
+    private readonly NotificationRepository $notification_repository,
   ) {
     parent::__construct($authentication_manager);
   }

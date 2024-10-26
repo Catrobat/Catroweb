@@ -42,17 +42,10 @@ class UserAdmin extends AbstractAdmin
       ->addIdentifier('username')
       ->add('email')
       ->add('enabled', null, ['editable' => true])
+      ->add('verified', null, ['editable' => true])
       ->add('createdAt')
+      ->add('lastLogin')
     ;
-
-    //    if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
-    //      $list
-    //        ->add('impersonating', FieldDescriptionInterface::TYPE_STRING, [
-    //          'virtual_field' => true,
-    //          'template' => '@SonataUser/Admin/Field/impersonating.html.twig',
-    //        ])
-
-    //    }
 
     $list->add(ListMapper::NAME_ACTIONS, ListMapper::TYPE_ACTIONS, [
       'translation_domain' => 'SonataAdminBundle',
@@ -68,6 +61,9 @@ class UserAdmin extends AbstractAdmin
       ->add('id')
       ->add('username')
       ->add('email')
+      ->add('verified')
+      ->add('createdAt')
+      ->add('lastLogin')
     ;
   }
 
@@ -76,6 +72,7 @@ class UserAdmin extends AbstractAdmin
     $show
       ->add('username')
       ->add('email')
+      ->add('verified')
     ;
   }
 
@@ -85,10 +82,11 @@ class UserAdmin extends AbstractAdmin
       ->with('general', ['class' => 'col-md-4'])
       ->add('username')
       ->add('email')
+      ->add('verified')
       ->add('plainPassword', PasswordType::class, [
         'required' => (!$this->hasSubject() || null === $this->getSubject()->getId()),
       ])
-      ->add('enabled', null)
+      ->add('enabled')
       ->end()
       ->with('roles', ['class' => 'col-md-8'])
       ->add('realRoles', RolesMatrixType::class, [

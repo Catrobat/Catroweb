@@ -1,14 +1,14 @@
 @web @help
 Feature: Help page redirect
 
-  @disabled # flaky, we can't control the availability of the wiki
   Scenario: Navigating to "/app/help" should redirect to the wiki
-    When I go to "/app/help"
+    When I switch the language to "English"
+    And I go to "/app/help"
     And I wait for the page to be loaded
-    Then I should be on "https://wiki.catrobat.org/bin/view/Documentation/"
+    Then I should be on "https://catrobat.org/docs/"
 
-  @disabled
-  Scenario: Navigating to "/mindstorms/help" should redirect to the mindstorms wiki
-    When I go to "/mindstorms/help"
+  Scenario: Navigating to "/app/help" should redirect to a german page
+    When I switch the language to "Deutsch"
+    And I go to "/app/help"
     And I wait for the page to be loaded
-    Then I should be on "https://catrob.at/MindstormsFlavorDocumentation"
+    Then I should be on "https://catrobat.org/de/dokumentation/"

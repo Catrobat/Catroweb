@@ -8,7 +8,7 @@ createNewPassword: Crea una nuova password
 accountSettings: Impostazioni account
 email: Email
 aboutPocketCode: Su Pocket Code
-about: Informazioni
+about: Su Catrobat
 education: Istruzione
 chat: Chat e forum
 privacyGuide: Privacy Awareness Guide
@@ -343,6 +343,7 @@ myprofile:
   profileSettings: Impostazioni del profilo
   securitySettings: Impostazioni di Sicurezza
   accountSettings: Impostazioni Account
+  accountVerification: Verify account
   account: Account
   editProfile: Modifica il profilo
   edit: Modifica
@@ -359,6 +360,10 @@ myprofile:
   editAccountSettings: Modificare le impostazioni dell'account
   profileChangeSuccess: Il tuo profilo è stato modificato con successo.
   unspecifiedError: Si è verificato un errore non specificato durante la modifica del tuo profilo. Contattaci.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'Licenza per giocare'
   title: 'Licenza per il gioco - Dare credito e condividere'
@@ -602,6 +607,19 @@ api:
     screenshotError: 'Lettura, conversione o archiviazione dello screenshot non riuscita. Controlla il tuo dispositivo.'
     notFound: 'Il progetto da cambiare non è stato trovato.'
     forbidden: 'Cambi sul progetto non autorizzati. Sei ancora connesso?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Il nome non può essere vuoto'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Nome troppo lungo'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Descrizione troppo lunga'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Arabo
@@ -714,11 +732,8 @@ codeStatistics:
   deviceBricks: 'Dispositivo'
   specialBricks: 'Speciale'
 footer:
-  language: Lingua
-  usefulLinks: Link utili
-  legalities: Informazioni legali
-  communityStats: Statistiche sulla community
-  download: Scarica l'app
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Informativa sulla privacy
   version: Versione 2.2, 17 Ottobre 2019
@@ -853,6 +868,9 @@ achievements:
       linguist:
         title: "Linguista"
         description: "Traduci i tuoi progetti in 5 lingue"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -897,6 +915,11 @@ studio:
   cancel_studio: 'Annulla'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: 'Rapporto'

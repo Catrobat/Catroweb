@@ -1,0 +1,10 @@
+@import './Variables';
+@import './Mixins';
+
+.article-columns {
+  column-count: 2;
+
+  @include media-breakpoint-down(lg) {
+    column-count: 1;
+  }
+}

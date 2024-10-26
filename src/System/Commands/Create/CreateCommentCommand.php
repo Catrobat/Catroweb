@@ -11,6 +11,7 @@ use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Random\RandomException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -71,6 +72,9 @@ class CreateCommentCommand extends Command
     return 0;
   }
 
+  /**
+   * @throws RandomException
+   */
   private function postComment(User $user, Program $program, string $message, bool $reported): void
   {
     $comment = new UserComment();

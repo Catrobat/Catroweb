@@ -15,23 +15,24 @@ class RedirectController extends AbstractController
   #[Route(path: '/help', name: 'help', methods: ['GET'])]
   public function help(Request $request): Response
   {
-    $flavor = $request->attributes->get('flavor');
-    if ('mindstorms' === $flavor) {
-      return $this->redirect('https://catrob.at/MindstormsFlavorDocumentation');
+    $locale = $request->getLocale();
+    if (str_contains($locale, 'de')) {
+      return $this->redirect('https://catrobat.org/de/dokumentation/');
     }
 
-    return $this->redirect('https://wiki.catrobat.org/bin/view/Documentation/');
+    return $this->redirect('https://catrobat.org/docs/');
   }
 
   #[Route(path: '/gp', name: 'google_play_store', methods: ['GET'])]
-  public function redirectToGooglePlayStore(Request $request): Response
+  public function redirectToGooglePlayStore(): Response
   {
-    $flavor = $request->attributes->get('flavor');
-    if ('mindstorms' === $flavor) {
-      return $this->redirect('https://catrob.at/MindstormsFlavorGooglePlay');
-    }
+    return $this->redirect('https://play.google.com/store/apps/developer?id=Catrobat');
+  }
 
-    return $this->redirect('https://catrob.at/gp');
+  #[Route(path: '/as', name: 'apple_app_store', methods: ['GET'])]
+  public function redirectToAppleAppStore(): Response
+  {
+    return $this->redirect('https://apps.apple.com/at/developer/international-catrobat-association-verein-zur-foerderung/id1117935891');
   }
 
   #[Route(path: '/robots.txt', name: 'robots.txt', methods: ['GET'])]

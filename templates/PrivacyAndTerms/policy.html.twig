@@ -7,7 +7,6 @@
         <h3 class="modal-title">{{ 'privacy-policy.header'|trans({}, 'catroweb') }}</h3>
       </div>
 
-
       <div class="modal-body">
         <p>{{ 'privacy-policy.version'|trans({}, 'catroweb') }}</p>
         <p class="align_start">{{ 'privacy-policy.text1'|trans({}, 'catroweb') }}</p>
@@ -22,17 +21,17 @@
         </ul>
         <p class="align_start">{{ 'privacy-policy.text9'|trans({}, 'catroweb') }}</p>
         <p class="align_start">
-        {{ 'privacy-policy.text10' | trans( {'%privacy_policy%':'<a href="https://developer.catrobat.org/privacy_policy">
-            privacy policy</a>'},'catroweb')|raw }}</p>
+        {{ 'privacy-policy.text10'|trans({'%privacy_policy%': '<a href="https://developer.catrobat.org/privacy_policy">
+            privacy policy</a>'}, 'catroweb')|raw }}</p>
       </div>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id="agreeButton" data-bs-dismiss="modal">
-          {{ "agree"|trans({}, "catroweb") }}
+          {{ 'agree'|trans({}, 'catroweb') }}
         </button>
         <button type="button" class="btn btn-outline-primary" id="disagreeButton" data-bs-dismiss="modal" data-bs-toggle="modal"
                 data-bs-target="#disagreeModal">
-          {{ "disagree"|trans({}, "catroweb") }}
+          {{ 'disagree'|trans({}, 'catroweb') }}
         </button>
       </div>
     </div>

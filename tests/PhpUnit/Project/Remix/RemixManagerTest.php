@@ -20,14 +20,15 @@ use App\Project\Remix\RemixManager;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Project\Remix\RemixManager
  */
+#[CoversClass(RemixManager::class)]
 class RemixManagerTest extends TestCase
 {
   private RemixManager $remix_manager;
@@ -40,6 +41,9 @@ class RemixManagerTest extends TestCase
 
   private MockObject|ProgramRemixRepository $program_remix_repository;
 
+  /**
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
@@ -84,7 +88,7 @@ class RemixManagerTest extends TestCase
     $this->entity_manager
       ->expects($this->atLeastOnce())
       ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
-      ->will($this->returnCallback(function (ScratchProgram $scratch_project) use (
+      ->willReturnCallback(function (ScratchProgram $scratch_project) use (
         $expected_id_of_first_program, $expected_name_of_first_program,
         $expected_description_of_first_program, $expected_username_of_first_program
       ): void {
@@ -93,7 +97,7 @@ class RemixManagerTest extends TestCase
         $this->assertSame($expected_name_of_first_program, $scratch_project->getName());
         $this->assertSame($expected_description_of_first_program, $scratch_project->getDescription());
         $this->assertSame($expected_username_of_first_program, $scratch_project->getUsername());
-      }))
+      })
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->remix_manager->addScratchProjects($scratch_info_data);
@@ -116,13 +120,13 @@ class RemixManagerTest extends TestCase
     $this->entity_manager
       ->expects($this->atLeastOnce())
       ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
-      ->will($this->returnCallback(function (ScratchProgram $scratch_project) use ($expected_id_of_first_program): void {
+      ->willReturnCallback(function (ScratchProgram $scratch_project) use ($expected_id_of_first_program): void {
         $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
         $this->assertSame($expected_id_of_first_program, $scratch_project->getId());
         $this->assertNull($scratch_project->getName());
         $this->assertNull($scratch_project->getDescription());
         $this->assertNull($scratch_project->getUsername());
-      }))
+      })
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
@@ -163,7 +167,7 @@ class RemixManagerTest extends TestCase
     $this->entity_manager
       ->expects($this->atLeastOnce())
       ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
-      ->will($this->returnCallback(function (ScratchProgram $scratch_project) use (
+      ->willReturnCallback(function (ScratchProgram $scratch_project) use (
         $expected_id_of_first_program, $expected_name_of_first_program,
         $expected_description_of_first_program, $expected_username_of_first_program,
         $expected_id_of_second_program, $expected_name_of_second_program, $expected_username_of_second_program
@@ -178,7 +182,7 @@ class RemixManagerTest extends TestCase
           $this->assertNull($scratch_project->getDescription());
           $this->assertSame($expected_username_of_second_program, $scratch_project->getUsername());
         }
-      }))
+      })
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
@@ -187,6 +191,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testSetProgramAsRootAndDontAddRemixRelationsWhenNoParentsAreGiven(): void
   {
@@ -205,6 +210,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testSetProgramAsRootAndDontAddRemixRelationsForNonExistingParents(): void
   {
@@ -250,6 +256,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testSetProgramAsRootIfOnlyHasScratchParents(): void
   {
@@ -301,6 +308,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForOnlyOneExistingParent(): void
   {
@@ -347,6 +355,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForExistingParents(): void
   {
@@ -390,6 +399,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForExistingParentsSharingSameParent(): void
   {
@@ -454,6 +464,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForExistingParentsHavingDifferentParent(): void
   {
@@ -546,6 +557,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForScratchParent(): void
   {
@@ -617,6 +629,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph1(): void
   {
@@ -681,6 +694,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph2(): void
   {
@@ -756,6 +770,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph3(): void
   {
@@ -829,6 +844,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph4(): void
   {
@@ -917,6 +933,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph5(): void
   {
@@ -1009,6 +1026,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph6(): void
   {
@@ -1096,6 +1114,7 @@ class RemixManagerTest extends TestCase
 
   /**
    * @throws \Exception
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph7(): void
   {
@@ -1225,23 +1244,23 @@ class RemixManagerTest extends TestCase
     $this->program_repository
       ->expects($this->any())
       ->method('find')
-      ->will($this->returnCallback(static fn ($id) => $program_repository_find_map[$id] ?? null))
+      ->willReturnCallback(static fn ($id) => $program_repository_find_map[$id] ?? null)
     ;
 
     $this->program_remix_repository
       ->expects($this->any())
       ->method('findBy')
-      ->will($this->returnCallback(static function ($criteria) use ($program_remix_repository_find_map) {
+      ->willReturnCallback(static function ($criteria) use ($program_remix_repository_find_map) {
         $descendant_id = $criteria['descendant_id'] ?? null;
 
         return $program_remix_repository_find_map[$descendant_id] ?? [];
-      }))
+      })
     ;
 
     $this->entity_manager
       ->expects($this->atLeastOnce())
       ->method('persist')
-      ->will($this->returnCallback(static function ($arg) use ($program_entity, &$expected_relations_map): void {
+      ->willReturnCallback(static function ($arg) use ($program_entity, &$expected_relations_map): void {
         if ($arg instanceof ProgramRemixRelation || $arg instanceof ScratchProgramRemixRelation) {
           $relation = $arg;
           Assert::assertArrayHasKey($relation->getUniqueKey(), $expected_relations_map);
@@ -1250,7 +1269,7 @@ class RemixManagerTest extends TestCase
         if ($arg instanceof Program) {
           Assert::assertEquals($arg, $program_entity);
         }
-      }))
+      })
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
@@ -1271,6 +1290,9 @@ class RemixManagerTest extends TestCase
     Assert::assertCount(0, $expected_relations_map);
   }
 
+  /**
+   * @throws Exception
+   */
   private function getProgramEntities(int $amount): array
   {
     $array = [];
@@ -1297,6 +1319,9 @@ class RemixManagerTest extends TestCase
     return $array;
   }
 
+  /**
+   * @throws Exception
+   */
   private function getProgramEntityAndParents(string $entityReturn = '123', string $firstParentReturn = '3570', string $secParentReturn = '16267'): array
   {
     $program_entity = $this->createMock(Program::class);

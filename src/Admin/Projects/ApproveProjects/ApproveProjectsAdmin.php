@@ -52,14 +52,14 @@ class ApproveProjectsAdmin extends AbstractAdmin
     private readonly ProjectManager $project_manager,
     private readonly ExtractedFileRepository $extracted_file_repository,
     protected TokenStorageInterface $security_token_storage,
-    protected ParameterBagInterface $parameter_bag
+    protected ParameterBagInterface $parameter_bag,
   ) {
   }
 
   /**
    * @param mixed|Program $object
    */
-  public function getThumbnailImageUrl($object): string
+  public function getThumbnailImageUrl(mixed $object): string
   {
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
@@ -111,7 +111,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   /**
    * @param mixed|Program $object
    */
-  public function getContainingStrings($object): array
+  public function getContainingStrings(mixed $object): array
   {
     if (null == $this->extractedProject) {
       $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
@@ -129,7 +129,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   /**
    * @param mixed|Program $object
    */
-  public function getContainingCodeObjects($object): array
+  public function getContainingCodeObjects(mixed $object): array
   {
     if (null == $this->extractedProject) {
       $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
@@ -169,7 +169,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
        */
       ->add('thumbnail', null, [
         'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-        'template' => 'Admin/project_thumbnail_image.html.twig',
+        'template' => 'Admin/Projects/ThumbnailImage.html.twig',
       ])
       ->add('id')
       ->add('Name')
@@ -180,24 +180,24 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('visible', 'boolean')
       ->add('Images', null, [
         'accessor' => fn ($subject): array => $this->getContainingImageUrls($subject),
-        'template' => 'Admin/project_containing_image.html.twig',
+        'template' => 'Admin/Projects/ContainingImage.html.twig',
       ])
       ->add('Sounds', null, [
         'accessor' => fn ($subject): array => $this->getContainingSoundUrls($subject),
-        'template' => 'Admin/project_containing_sound.html.twig',
+        'template' => 'Admin/Projects/ContainingSound.html.twig',
       ])
       ->add('Strings', null, [
         'accessor' => fn ($subject): array => $this->getContainingStrings($subject),
-        'template' => 'Admin/project_containing_strings.html.twig',
+        'template' => 'Admin/Projects/ContainingStrings.html.twig',
       ])
       ->add('Objects', null, [
         'accessor' => fn ($subject): array => $this->getContainingCodeObjects($subject),
-        'template' => 'Admin/project_containing_code_objects.html.twig',
+        'template' => 'Admin/Projects/ContainingCodeObjects.html.twig',
       ])
       ->add('Actions', null, [
         'accessor' => static function ($subject): void {
         }, // Just some buttons, nothing to "access"!
-        'template' => 'Admin/project_approve_action.html.twig',
+        'template' => 'Admin/Projects/ApproveAction.html.twig',
       ])
     ;
   }

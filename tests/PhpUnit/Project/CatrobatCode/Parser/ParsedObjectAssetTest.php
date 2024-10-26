@@ -6,14 +6,14 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\ParsedObjectAsset;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Project\CatrobatCode\Parser\ParsedObjectAsset
  */
+#[CoversClass(ParsedObjectAsset::class)]
 class ParsedObjectAssetTest extends TestCase
 {
   /**

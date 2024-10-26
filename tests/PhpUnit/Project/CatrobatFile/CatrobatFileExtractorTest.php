@@ -8,14 +8,14 @@ use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
- *
- * @covers  \App\Project\CatrobatFile\CatrobatFileExtractor
  */
+#[CoversClass(CatrobatFileExtractor::class)]
 class CatrobatFileExtractorTest extends TestCase
 {
   private CatrobatFileExtractor $catrobat_file_extractor;

@@ -55,7 +55,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   }
 
   public function getDirectAndIndirectDescendantRelations(
-    array $ancestor_program_ids_to_exclude, array $descendant_program_ids
+    array $ancestor_program_ids_to_exclude, array $descendant_program_ids,
   ): array {
     $qb = $this->createQueryBuilder('r');
 
@@ -72,7 +72,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   }
 
   public function getDirectAndIndirectDescendantIds(
-    array $ancestor_program_ids_to_exclude, array $descendant_program_ids
+    array $ancestor_program_ids_to_exclude, array $descendant_program_ids,
   ): array {
     $direct_and_indirect_descendant_relations = $this
       ->getDirectAndIndirectDescendantRelations($ancestor_program_ids_to_exclude, $descendant_program_ids)

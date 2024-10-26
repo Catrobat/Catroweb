@@ -7,14 +7,15 @@ namespace Tests\PhpUnit\Api\Services\Base;
 use App\Api\Exceptions\ApiException;
 use App\Api\Services\Base\BearerAuthenticationTrait;
 use App\System\Testing\PhpUnit\DefaultTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
- *
- * @covers \Tests\PhpUnit\Api\Services\Base\BearerAuthenticationTraitTestClass
  */
+#[CoversClass(BearerAuthenticationTraitTestClass::class)]
 final class BearerAuthenticationTraitTest extends DefaultTestCase
 {
   protected MockObject|BearerAuthenticationTraitTestClass $object;
@@ -22,28 +23,23 @@ final class BearerAuthenticationTraitTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockForAbstractClass(BearerAuthenticationTraitTestClass::class);
+    $this->object = $this->getMockBuilder(BearerAuthenticationTraitTestClass::class)
+      ->onlyMethods([])
+      ->onlyMethods([])
+      ->getMock()
+    ;
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testTestTraitExists(): void
   {
     $this->assertTrue(trait_exists(BearerAuthenticationTrait::class));
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\Base\BearerAuthenticationTrait::setBearerAuth
-   *
    * @throws \Exception
    */
+  #[Group('unit')]
   #[DataProvider('provideBearerAuthData')]
   public function testSetBearerAuth(?string $value, bool $expect_exception, string $expected = ''): void
   {

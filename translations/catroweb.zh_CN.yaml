@@ -8,7 +8,7 @@ createNewPassword: 创建新密码
 accountSettings: 账号设置
 email: 邮箱
 aboutPocketCode: 关于口袋编程
-about: 关于统计
+about: 关于 Catrobat
 education: 教育
 chat: 聊天和论坛
 privacyGuide: Privacy Awareness Guide
@@ -344,6 +344,7 @@ myprofile:
   profileSettings: 个人资料设置
   securitySettings: 安全设置
   accountSettings: 账户设置
+  accountVerification: Verify account
   account: 帐户
   editProfile: 编辑档案
   edit: 编辑
@@ -360,6 +361,10 @@ myprofile:
   editAccountSettings: 编辑帐户设置
   profileChangeSuccess: 您的个人资料已成功更改。
   unspecifiedError: 更改您的个人资料时发生未知错误。请联系我们。
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: '授权'
   title: '授权执行-评分并分享'
@@ -603,6 +608,19 @@ api:
     screenshotError: '读取、转换或存储截图失败。请检查您的输入内容。'
     notFound: '找不到要更改的项目。'
     forbidden: '无法更改项目。请确认您是否仍然处于登录状态？'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: '名字不能为空'
+    nameTooShort: 'Name too short'
+    nameTooLong: '名字太长'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: '描述太长'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: 阿拉伯语
@@ -715,11 +733,8 @@ codeStatistics:
   deviceBricks: '设备'
   specialBricks: '特殊的'
 footer:
-  language: 语言
-  usefulLinks: 相关链接
-  legalities: 法律信息
-  communityStats: 社区统计
-  download: 获取应用
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: 隐私策略
   version: 第2.2版，2019年10月17日
@@ -854,6 +869,9 @@ achievements:
       linguist:
         title: "语言学家"
         description: "将您的项目翻译成5种语言"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} 标签 |]1,Inf] 标签'
   tag:
@@ -898,6 +916,11 @@ studio:
   cancel_studio: '取消'
   studio_name: '工作室名称'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: '加入'
   leave: '退出'
   report: '报告'

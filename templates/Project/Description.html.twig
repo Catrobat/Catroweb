@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col mt-3 mb-3">
+    <div id="description-headline">
+      <span class="h2">{{ 'description'|trans({}, 'catroweb') }}</span>
+    </div>
+    <div id="description-credits-container" style="height:auto; overflow: hidden;">
+      <div id="description" class="text-break">
+        {% if project.description %}
+          {{ project.description|nl2br }}
+        {% else %}
+          {{ 'noDescription'|trans({}, 'catroweb') }}
+        {% endif %}
+      </div>
+      <div id="description-translation" class="text-break" style="display: none;"></div>
+      <div class="mt-3" id="credits-headline">
+        <span class="h2">{{ 'credits'|trans({}, 'catroweb') }}</span>
+      </div>
+      <div id="credits" class="text-break">
+        {% if (project.credits or project.isScratchProgram()) %}
+          {% if project.credits %}
+            {{ project.credits|nl2br }}
+          {% endif %}
+          {% if project.isScratchProgram() %}
+            {{ 'projectImportedFromScratch'|trans({}, 'catroweb') }}
+            <a href={{ 'https://scratch.mit.edu/projects/' ~ project.getScratchId() }}>
+              {{ 'scratchImportedProjectLinkHere'|trans({}, 'catroweb') }}
+            </a>
+          {% endif %}
+        {% else %}
+          {{ 'noCredits'|trans({}, 'catroweb') }}
+        {% endif %}
+      </div>
+      <div id="credits-translation-wrapper" style="display: none;">
+        <div id="credits-translation" class="text-break"></div>
+        <span id="project-translation-before-languages" class="translation-credit"></span>
+        <span id="project-translation-first-language" class="translation-credit"></span>
+        <span id="project-translation-between-languages" class="translation-credit"></span>
+        <span id="project-translation-second-language" class="translation-credit"></span>
+        <span id="project-translation-after-languages" class="translation-credit"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 text-center">
+    <a id="descriptionShowMoreToggle" aria-expanded="false"
+       aria-controls="descriptionFulltext" href="#"
+       class="toggle-content d-none">
+      <i class="material-icons">keyboard_arrow_down</i>
+      <span id="descriptionShowMoreText" class="text text-capitalize">
+          {{ ('more-information')|trans({}, 'catroweb') }}
+        </span>
+    </a>
+  </div>
+</div>

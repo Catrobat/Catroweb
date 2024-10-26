@@ -16,7 +16,7 @@ class ProjectExtensionManager
   public function __construct(
     protected ExtensionRepository $extension_repository,
     protected LoggerInterface $logger,
-    protected EntityManagerInterface $entity_manager
+    protected EntityManagerInterface $entity_manager,
   ) {
   }
 
@@ -36,6 +36,9 @@ class ProjectExtensionManager
     $this->saveProject($project, $flush);
   }
 
+  /**
+   * @throws \Exception
+   */
   public function addMultiplayerExtensions(Program $project, string $code_xml): void
   {
     if ($this->isMultiplayerProject($code_xml)) {
@@ -46,6 +49,9 @@ class ProjectExtensionManager
     }
   }
 
+  /**
+   * @throws \Exception
+   */
   public function addArduinoExtensions(Program $project, string $code_xml): void
   {
     if ($this->isAnArduinoProject($code_xml)) {
@@ -56,6 +62,9 @@ class ProjectExtensionManager
     }
   }
 
+  /**
+   * @throws \Exception
+   */
   public function addEmbroideryExtensions(Program $project, string $code_xml): void
   {
     if ($this->isAnEmbroideryProject($code_xml)) {
@@ -66,6 +75,9 @@ class ProjectExtensionManager
     }
   }
 
+  /**
+   * @throws \Exception
+   */
   public function addMindstormsExtensions(Program $project, string $code_xml): void
   {
     if ($this->isAMindstormsProject($code_xml)) {
@@ -76,6 +88,9 @@ class ProjectExtensionManager
     }
   }
 
+  /**
+   * @throws \Exception
+   */
   public function addPhiroExtensions(Program $project, string $code_xml): void
   {
     if ($this->isAPhiroProject($code_xml)) {

@@ -13,11 +13,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class HwiOauthAccountConnector implements AccountConnectorInterface
 {
-  protected array $properties = ['identifier' => 'id'];
+  protected array $properties = ['identifier' => 'id', 'google' => 'google_id', 'facebook' => 'facebook_id', 'apple' => 'apple_id'];
 
-  public function __construct(protected UserManager $user_manager, array $properties)
+  public function __construct(protected UserManager $user_manager)
   {
-    $this->properties = array_merge($this->properties, $properties);
   }
 
   /**

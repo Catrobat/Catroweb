@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\UserCommunication\MaintenanceInformation;
 
-use App\DB\Entity\MaintenanceInformation;
+use App\DB\Entity\System\MaintenanceInformation;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -57,7 +57,7 @@ class MaintenanceInformationAdmin extends AbstractAdmin
     $form
       ->add('internalTitle', null, ['label' => 'Feature Name'])
       ->add('AvailableIcons', TemplateType::class, [
-        'template' => 'Admin/maintenance_information_ltmParameters.html.twig',
+        'template' => 'Admin/UserCommunication/MaintenanceInformation/LtmParameters.html.twig',
         'label' => '',
       ])
       ->add('icon', ChoiceType::class, [
@@ -128,7 +128,7 @@ class MaintenanceInformationAdmin extends AbstractAdmin
       ->add('ltm_additionalInformation', null, ['label' => 'Additional Information'])
       ->add('icon', 'string',
         [
-          'template' => 'Admin/maintenance_information_icon.html.twig',
+          'template' => 'Admin/UserCommunication/MaintenanceInformation/Icon.html.twig',
         ]
       )
       ->add(ListMapper::NAME_ACTIONS, null, [

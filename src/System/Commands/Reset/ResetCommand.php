@@ -5,11 +5,16 @@ declare(strict_types=1);
 namespace App\System\Commands\Reset;
 
 use App\DB\Entity\Project\Program;
+use App\DB\Entity\System\Statistic;
 use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\System\StatisticRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Commands\ImportProjects\ProgramImportCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Random\RandomException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,9 +25,11 @@ class ResetCommand extends Command
 {
   final public const string DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
 
-  private array $reported = [];
-
-  public function __construct(private readonly ProgramRepository $program_manager, private readonly ParameterBagInterface $parameter_bag)
+  public function __construct(
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly ProgramRepository $program_manager,
+    private readonly StatisticRepository $statistic_repository,
+    private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
   }
@@ -44,7 +51,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
    */
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -104,7 +113,7 @@ class ResetCommand extends Command
       $local_projects_dir = $this->parameter_bag->get('catrobat.resources.dir').'projects';
       $local_projects_import = $this->importLocalProjects(
         $local_projects_dir,
-        intval(20),
+        20,
         $user_array,
         intval($input->getOption('remix-layout')),
         $output
@@ -135,6 +144,7 @@ class ResetCommand extends Command
     $this->downloadProjects($program_names, $user_array, $output);
     $this->exampleProject($program_names, $output);
     $this->markNotForKids($program_names, $output);
+    $this->addStatistics();
 
     // https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
@@ -190,7 +200,8 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
    */
   private function importLocalProjects(string $local_projects_dir, int $limit, array $user_array, int $remix_layout, OutputInterface $output): bool
   {
@@ -221,6 +232,7 @@ class ResetCommand extends Command
 
   /**
    * @throws \Exception
+   * @throws ExceptionInterface
    */
   private function importProjectsFromShare(int $limit, array $user_array, int $remix_layout, OutputInterface $output): bool
   {
@@ -241,7 +253,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
    */
   private function userUploadProjects(int $limit, string $username, int $remix_layout, OutputInterface $output): int
   {
@@ -285,7 +297,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
    */
   private function commentOnProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
@@ -317,7 +331,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
    */
   private function createStudios(array $user_array, array $program_array, OutputInterface $output): void
   {
@@ -397,7 +413,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
    */
   private function reportProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
@@ -406,7 +424,6 @@ class ResetCommand extends Command
     $counter = count($program_names);
 
     for ($i = $rand_start; $i < $counter; $i += $rand_interval) {
-      $this->reported[count($this->reported)] = $i;
       $parameters = [
         'user' => $user_array[array_rand($user_array)],
         'program_name' => $program_names[$i],
@@ -421,7 +438,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
    */
   private function likeProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
@@ -442,7 +461,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
    */
   private function downloadProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
@@ -463,7 +484,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
    */
   private function featureProjects(array $program_names, OutputInterface $output): void
   {
@@ -485,7 +508,9 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws \Exception
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
    */
   private function followUsers(array $user_array, OutputInterface $output): void
   {
@@ -506,6 +531,11 @@ class ResetCommand extends Command
     }
   }
 
+  /**
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
+   */
   private function exampleProject(array $program_names, OutputInterface $output): void
   {
     $rand_start = random_int(1, 2);
@@ -525,6 +555,11 @@ class ResetCommand extends Command
     }
   }
 
+  /**
+   * @throws ExceptionInterface
+   * @throws RandomException
+   * @throws \JsonException
+   */
   private function markNotForKids(array $program_names, OutputInterface $output): void
   {
     foreach ($program_names as $program_name) {
@@ -541,5 +576,17 @@ class ResetCommand extends Command
         }
       }
     }
+  }
+
+  private function addStatistics(): void
+  {
+    $statistic = $this->statistic_repository->find(1);
+    if (!$statistic) {
+      $statistic = new Statistic();
+    }
+    $statistic->setProjects('13461234621');
+    $statistic->setUsers('345423543');
+    $this->entity_manager->persist($statistic);
+    $this->entity_manager->flush();
   }
 }

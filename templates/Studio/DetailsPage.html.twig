@@ -1,0 +1,30 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('studio_detail_page') }}
+{% endblock %}
+
+{% block body %}
+
+{{ include('Studio/Details/Header.html.twig') }}
+
+<div id="tab-content" class="tab-content container">
+  {{ include('Studio/Details/ProjectList.html.twig') }}
+  {{ include('Studio/Details/CommentList.html.twig') }}
+  {{ include('Studio/Details/CommentReply.html.twig') }}
+</div>
+
+<input id="showMore-text" type="hidden" value="{{ 'studio.details.showMore'|trans({}, 'catroweb') }}">
+    <input id="showLess-text" type="hidden" value="{{ 'studio.details.showLess'|trans({}, 'catroweb') }}">
+    <input id="project-remove-success" type="hidden" value="{{ 'studio.details.remove_project_success'|trans({}, 'catroweb') }}">
+    <input id="project-remove-error" type="hidden" value="{{ 'studio.details.remove_project_error'|trans({}, 'catroweb') }}">
+    <input id="comment-remove-error" type="hidden" value="{{ 'studio.details.comments.remove_error'|trans({}, 'catroweb') }}">
+    <input id="comment-error" type="hidden" value="{{ 'studio.details.comments.post_error'|trans({}, 'catroweb') }}">
+    <input id="update-cover-error" type="hidden" value="{{ 'studio.details.updateCoverError'|trans({}, 'catroweb') }}">
+    <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
+    <div class="js-studio-detail" data-studio-id="{{ studio.id }}"></div>
+
+{% endblock %}
+{% block javascript %}
+    {{ encore_entry_script_tags('studio_detail_page') }}
+{% endblock %}

@@ -21,7 +21,7 @@ class RemixController extends AbstractController
   #[Route(path: '/project/{id}/remix_graph', name: 'remix_graph', methods: ['GET'])]
   public function view(string $id): Response
   {
-    return $this->render('Project/remix_graph.html.twig', [
+    return $this->render('Project/RemixGraphPage.html.twig', [
       'id' => $id,
       'project_details_url_template' => $this->router->generate('program', ['id' => 0]),
     ]);

@@ -10,14 +10,14 @@ use App\Project\CatrobatCode\Parser\ParsedSimpleProject;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- *
- * @covers \App\Project\CatrobatCode\Parser\CatrobatCodeParser
  */
+#[CoversClass(CatrobatCodeParser::class)]
 class CatrobatCodeParserTest extends TestCase
 {
   protected CatrobatCodeParser $parser;
@@ -28,6 +28,9 @@ class CatrobatCodeParserTest extends TestCase
     $this->parser = new CatrobatCodeParser();
   }
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   protected function tearDown(): void
   {

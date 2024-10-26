@@ -112,6 +112,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
   /**
    * @throws \JsonException
+   * @throws \DateMalformedStringException
    */
   #[\Override]
   public function projectsGet(string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
@@ -169,11 +170,11 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
-    //    if (!$user->isVerified()) {
-    //      $responseCode = Response::HTTP_FORBIDDEN;
-    //
-    //      return null;
-    //    }
+    if (!$user->isVerified() && $this->facade->getLoader()->forceUserVerification()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
 
     $validation_wrapper = $this->facade->getRequestValidator()->validateUploadFile($checksum, $file, $accept_language);
     if ($validation_wrapper->hasError()) {
@@ -194,7 +195,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
           $user, $file, $this->facade->getLoader()->getClientIp(), $accept_language, $flavor
         )
       );
-    } catch (\Exception) {
+    } catch (\Exception $e) {
+      $this->facade->getLogger()->critical('Project Upload broken: '.$e->getMessage().$e->getTraceAsString());
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
@@ -229,6 +231,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
   /**
    * @throws \JsonException
+   * @throws \DateMalformedStringException
    */
   #[\Override]
   public function projectsCategoriesGet(string $max_version, string $flavor, string $accept_language, int &$responseCode, array &$responseHeaders): array

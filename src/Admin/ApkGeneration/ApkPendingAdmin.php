@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace App\Admin\ApkGeneration;
 
 use App\DB\Entity\Project\Program;
-use App\Storage\ScreenshotRepository;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
@@ -17,10 +14,7 @@ use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
-/**
- * @phpstan-extends AbstractAdmin<Program>
- */
-class ApkPendingAdmin extends AbstractAdmin
+class ApkPendingAdmin extends ApkAdmin
 {
   #[\Override]
   protected function generateBaseRouteName(bool $isChildAdmin = false): string
@@ -35,37 +29,11 @@ class ApkPendingAdmin extends AbstractAdmin
   }
 
   #[\Override]
-  protected function configureDefaultSortValues(array &$sortValues): void
-  {
-    $sortValues[DatagridInterface::SORT_BY] = 'apk_request_time';
-    $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
-  }
-
-  public function __construct(
-    private readonly ScreenshotRepository $screenshot_repository
-  ) {
-  }
-
-  /**
-   * @param Program $object
-   */
-  public function getThumbnailImageUrl($object): string
-  {
-    return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
-  }
-
-  #[\Override]
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
     /** @var ProxyQuery $query */
     $query = parent::configureQuery($query);
-
-    $qb = $query->getQueryBuilder();
-
-    $qb->andWhere(
-      $qb->expr()->eq($qb->getRootAliases()[0].'.apk_status', ':apk_status')
-    );
-    $qb->setParameter('apk_status', Program::APK_PENDING);
+    $query->getQueryBuilder()->setParameter('apk_status', Program::APK_PENDING);
 
     return $query;
   }
@@ -113,7 +81,7 @@ class ApkPendingAdmin extends AbstractAdmin
       ->add('apk_request_time')
       ->add('thumbnail', 'string', [
         'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-        'template' => 'Admin/project_thumbnail_image_list.html.twig',
+        'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
       ])
       ->add('apk_status', 'choice', [
         'choices' => [

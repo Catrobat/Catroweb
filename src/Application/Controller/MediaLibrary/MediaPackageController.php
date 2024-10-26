@@ -11,32 +11,33 @@ use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MediaPackageController extends AbstractController
 {
   public function __construct(
+    #[Autowire('%catrobat.mediapackage.path%')]
     private readonly string $catrobat_mediapackage_path,
-    private readonly EntityManagerInterface $entity_manager
+    private readonly EntityManagerInterface $entity_manager,
   ) {
   }
 
   /**
    * Legacy route:.
    */
-  #[Route(path: '/media-library/', name: 'media_library_overview', methods: ['GET'])]
+  #[Route(path: '/media-library/', name: 'media_library_package_overview', methods: ['GET'])]
   #[Route(path: '/pocket-library/', name: 'pocket_library_overview', methods: ['GET'])]
   public function index(): Response
   {
     /** @var MediaPackage[] $packages */
     $packages = $this->entity_manager->getRepository(MediaPackage::class)->findAll();
 
-    return $this->render('MediaLibrary/media_library_overview.html.twig',
+    return $this->render('MediaLibrary/PackageOverview.html.twig',
       [
         'packages' => $packages,
       ]
@@ -63,7 +64,7 @@ class MediaPackageController extends AbstractController
 
     $categories = $this->sortCategoriesFlavoredFirst($package->getCategories()->toArray(), $flavor, $translator);
 
-    return $this->render('MediaLibrary/media_library_package.html.twig', [
+    return $this->render('MediaLibrary/PackageDetail.html.twig', [
       'flavor' => $flavor,
       'package' => $package_name,
       'categories' => $categories,
@@ -99,14 +100,14 @@ class MediaPackageController extends AbstractController
 
     $categories = $this->sortCategoriesFlavoredFirst($categories_of_found_files, $flavor, $translator);
 
-    return $this->render('MediaLibrary/media_library_package.html.twig', [
+    return $this->render('MediaLibrary/PackageDetail.html.twig', [
       'mediasearch' => true,
       'flavor' => $flavor,
       'package' => $package_name,
       'categories' => $categories,
       'mediaDir' => '/'.$this->catrobat_mediapackage_path,
       'foundResults' => ((bool) count($found_media_files)),
-      'resultsCount' => is_countable($found_media_files) ? count($found_media_files) : 0,
+      'resultsCount' => count($found_media_files),
       'mediaSearchPath' => $url_generator->generate(
         'open_api_server_mediaLibrary_mediafilessearchget',
         [
@@ -114,7 +115,7 @@ class MediaPackageController extends AbstractController
           'flavor' => $flavor,
           'package_name' => $package_name,
         ],
-        UrlGenerator::ABSOLUTE_URL),
+        UrlGeneratorInterface::ABSOLUTE_URL),
     ]);
   }
 

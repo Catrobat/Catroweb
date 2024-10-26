@@ -1,0 +1,46 @@
+{% if user %}
+<div class="follower-item {% if following|default(false) %}following-item-{{ user.id }}{% else %}follower-item-{{ user.id }}{% endif %}">
+  <div class="row no-gutters">
+    <div class="col-2 my-auto">
+      <a href="{{ path('profile', {id: user.id}) }}">
+        <img class="img-fluid round"
+             src="{% if user.avatar is not empty %}{{ user.avatar }}
+                          {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
+             alt="">
+      </a>
+    </div>
+    <div class="col-6 ps-3 my-auto">
+      <a href="{{ path('profile', {id: user.id}) }}">
+        <span class="h4">{{ user.username }}</span>
+        <div class="text-dark">
+          <span>{{ user.project_count }} {{ 'projects'|trans({}, 'catroweb') }}</span>
+        </div>
+
+        <div class="text-muted text-uppercase follower-item__info">
+          {% if app.user != null and app.user.hasFollower(user.profile) and (hideFollowsMe is not defined or hideFollowsMe != true) %}
+            <div class="d-inline">
+              <i class="material-icons info-icon">done</i> {{ 'follower.followsMe'|trans({}, 'catroweb') }}
+            </div>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+
+    {% if app.user != null and app.user.id != user.id %}
+      <div class="col-4 text-end my-auto">
+        <div>
+          <button class="btn btn-outline-primary btn-block unfollow-btn mt-0 {{ user.profile.hasFollower(app.user) ? 'd-block' : 'd-none' }}"
+                  data-user-id="{{ user.id }}" data-user-name="{{ user.username }}">
+            {{ 'follower.follows'|trans({}, 'catroweb') }}
+          </button>
+          <button class="btn btn-primary btn-block follow-btn mt-0 {{ user.profile.hasFollower(app.user) ? 'd-none' : 'd-block' }}"
+                  data-user-id="{{ user.id }}">
+            {{ 'follower.follow'|trans({}, 'catroweb') }}
+          </button>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endif %}

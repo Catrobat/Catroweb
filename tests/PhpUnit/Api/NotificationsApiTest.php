@@ -6,88 +6,51 @@ namespace Tests\PhpUnit\Api;
 
 use App\Api\NotificationsApi;
 use App\Api\Services\AuthenticationManager;
-use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Notifications\NotificationsApiFacade;
 use App\DB\Entity\User\User;
 use App\System\Testing\PhpUnit\DefaultTestCase;
-use OpenAPI\Server\Api\NotificationsApiInterface;
 use OpenAPI\Server\Model\NotificationsCountResponse;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
- *
- * @coversDefaultClass \App\Api\NotificationsApi
  */
+#[CoversClass(NotificationsApi::class)]
 class NotificationsApiTest extends DefaultTestCase
 {
   protected MockObject|NotificationsApi $object;
 
   protected MockObject|NotificationsApiFacade $facade;
 
+  /**
+   * @throws \ReflectionException
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
     $this->object = $this->getMockBuilder(NotificationsApi::class)
       ->disableOriginalConstructor()
       ->onlyMethods(['getAuthenticationToken'])
-      ->getMockForAbstractClass()
+      ->getMock()
     ;
 
     $this->facade = $this->createMock(NotificationsApiFacade::class);
     $this->mockProperty(NotificationsApi::class, $this->object, 'facade', $this->facade);
   }
 
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExists(): void
-  {
-    $this->assertTrue(class_exists(NotificationsApi::class));
-    $this->assertInstanceOf(NotificationsApi::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExtends(): void
-  {
-    $this->assertInstanceOf(AbstractApiController::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassImplements(): void
-  {
-    $this->assertInstanceOf(NotificationsApiInterface::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
+  #[Group('integration')]
   public function testCtor(): void
   {
     $this->object = new NotificationsApi($this->facade);
     $this->assertInstanceOf(NotificationsApi::class, $this->object);
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\NotificationsApi::notificationIdReadPut
-   */
+  #[Group('unit')]
   public function testNotificationIdReadPut(): void
   {
     $response_code = 200;
@@ -99,12 +62,9 @@ class NotificationsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\NotificationsApi::notificationsCountGet
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testNotificationsCountGet(): void
   {
     $response_code = 200;
@@ -122,13 +82,7 @@ class NotificationsApiTest extends DefaultTestCase
     $this->assertInstanceOf(NotificationsCountResponse::class, $response);
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\NotificationsApi::notificationsGet
-   */
+  #[Group('unit')]
   public function testNotificationsGet(): void
   {
     $response_code = 200;
@@ -141,12 +95,9 @@ class NotificationsApiTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\NotificationsApi::notificationsReadPut
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testNotificationsReadPut(): void
   {
     $response_code = 200;

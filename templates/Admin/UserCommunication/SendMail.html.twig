@@ -1,0 +1,83 @@
+{% extends base_template %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('admin_user_communication_send_mail') }}
+{% endblock %}
+
+{% block list_table %}
+
+  <div class="col-xs-12 col-md-12">
+    <div class="box box-primary">
+      <div class="box-body table-responsive no-padding">
+
+        <h3>Send Email</h3>
+
+        <p>This tool allows you to send Emails to Users.</p>
+
+        <div class="mtable">
+          <div class="row-title">
+            <label for="template-select">Template:</label>
+          </div>
+          <div class="drop-down">
+            <select id="template-select" name="template" class="drop-down-select">
+              <option value="confirmation">Confirmation Email</option>
+              <option value="reset">Reset Email</option>
+              <option value="basic">Simple Message</option>
+            </select>
+          </div>
+          <div class="row-title">
+            User Name:
+          </div>
+          <div class="row-button-mt">
+            <label for="username"></label>
+            <input id="username" type="text" class="row-button-mt-input"/>
+          </div>
+
+          <div class="row-title">
+            Subject:
+          </div>
+          <div class="row-button-mt">
+            <label for="subject"></label>
+            <input id="subject" class="row-button-mt-input"/>
+          </div>
+
+          <div class="row-title">
+            Title:
+          </div>
+          <div class="row-button-mt">
+            <label for="title"></label>
+            <input id="title" class="row-button-mt-input"/>
+          </div>
+
+          <div class="row-title">
+            Content:
+          </div>
+          <div class="row-button-mt">
+            <label for="content"></label>
+            <textarea id="content" class="row-button-mt-textarea"></textarea>
+          </div>
+
+          <div class="row-title">
+            Submit:
+          </div>
+          <div class="row-button">
+            <input type="button" class="btn btn-send" value="Send"/>
+            <input id="preview-button"  type="button" class="btn btn-preview" value="Preview"/>
+          </div>
+          <div class="row-title">
+            Result:
+          </div>
+          <div class="row-result resultBox error">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('admin_user_communication_send_mail') }}
+{% endblock %}

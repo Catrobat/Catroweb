@@ -5,24 +5,26 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\System\Commands;
 
 use App\Storage\FileHelper;
+use App\System\Commands\Maintenance\CleanCompressedProjectsCommand;
 use App\System\Testing\DataFixtures\DataBaseUtils;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
- * Class ClearCompressedProjectsTest.
- *
  * @internal
- *
- * @covers \App\System\Commands\Maintenance\CleanCompressedProjectsCommand
  */
+#[CoversClass(CleanCompressedProjectsCommand::class)]
 class ClearCompressedProjectsTest extends KernelTestCase
 {
   private CommandTester $command_tester;
 
   private string $compressed_projects_dir;
 
+  /**
+   * @throws \Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
@@ -30,8 +32,8 @@ class ClearCompressedProjectsTest extends KernelTestCase
     $application = new Application($kernel);
     $command = $application->find('catrobat:clean:compressed');
     $this->command_tester = new CommandTester($command);
-
-    $this->compressed_projects_dir = (string) $kernel->getContainer()->getParameter('catrobat.file.storage.dir');
+    $container = static::getContainer();
+    $this->compressed_projects_dir = (string) $container->getParameter('catrobat.file.storage.dir');
 
     // create dir if not exists
     if (!file_exists($this->compressed_projects_dir)) {
@@ -67,6 +69,9 @@ class ClearCompressedProjectsTest extends KernelTestCase
     DataBaseUtils::databaseRollback();
   }
 
+  /**
+   * @throws \Exception
+   */
   private function clearCompressedProjectsDir(): void
   {
     FileHelper::emptyDirectory($this->compressed_projects_dir);

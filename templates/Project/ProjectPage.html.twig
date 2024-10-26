@@ -1,0 +1,293 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('project_page') }}
+
+  <meta property="og:image" content="{{ asset(project_details.screenshotBig) }}"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image:secure_url" content="{{ asset(project_details.screenshotBig) }}"/>
+  <meta property="og:title" content="{{ project.name|escape('html_attr') }}"/>
+
+  {% if project.description is empty %}
+    <meta property="og:description"
+          content="{{ 'project.checkout_this_project'|trans({}, 'catroweb') }}"/>
+  {% else %}
+    <meta property="og:description" content="{{ project.description|escape('html_attr') }}"/>
+  {% endif %}
+  <meta property="og:url" content="{{ url('program', {id: project.id}) }}"/>
+{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-5 col-sm-4 col-md-4 col-lg-3">
+      {{ include('Project/Thumbnail.html.twig') }}
+    </div>
+
+    <div class="col-7 col-sm-8 col-md-8 col-lg-5">
+      <div class="name-wrapper">
+        <span id="name" class="h2 project-name">{{ project.name }}</span>
+        <span id="name-translation" class="h2 project-name" style="display: none;" lang=""></span>
+
+        {% if app.user and my_project %}
+          <span>
+            <i id="edit-project-button" class="ms-3 material-icons catro-icon-button align-bottom"
+               data-bs-toggle="tooltip" title="{{ 'project.editProject'|trans({}, 'catroweb') }}">
+              edit
+            </i>
+          </span>
+        {% else %}
+          <span class="translate-project-button-wrapper">
+            <span id="project-translation-button" class="project-translation-button catro-icon-button"
+                  data-bs-toggle="tooltip" title="{{ 'project.showTranslation'|trans({}, 'catroweb') }}">
+              <i class="ms-2 material-icons">
+                translate
+              </i>
+            </span>
+            <span id="project-translation-loading-spinner" style="display: none;">
+              <i class="ms-2 material-icons">
+                {{ include('Components/LoadingSpinner.html.twig', {size: 'small'}) }}
+              </i>
+            </span>
+            <span id="remove-project-translation-button" class="remove-project-translation-button catro-icon-button"
+                  style="display: none;"
+                  data-bs-toggle="tooltip" title="Hide Translation">
+                <i class="ms-2 material-icons" data-bs-toggle="tooltip"
+                   title="{{ 'project.hideTranslation'|trans({}, 'catroweb') }}">
+                  close
+                </i>
+            </span>
+          </span>
+        {% endif %}
+      </div>
+
+      <a class="icon-text align-bottom" id="project-owner-username" style="display: block;"
+         href="{{ path('profile', {id: project.user.id}) }}">
+        <i class="material-icons pe-2" id="user-profile-icon">person</i>
+        {{ project.user }}
+      </a>
+
+      <div class="">
+        <i class="material-icons mt-2">query_builder</i>
+        <span class="icon-text ms-2 align-bottom mt-2">{{ project_details.age }}</span>
+      </div>
+
+      <div class="">
+        <i class="material-icons mt-2">description</i>
+        <span class="icon-text ms-2 align-bottom mt-2">{{ project_details.filesize }} MB</span>
+      </div>
+
+      {% if project.getNotForKids() %}
+        <div class="">
+          <img alt="Not for Kids" id="not-for-kids-logo" src="{{ asset('images/default/not_for_kids.svg') }}" style="width: 24px; height: 24px;">
+          <span class="icon-text ms-2 align-bottom mt-2">{{ 'project.notForKids'|trans({}, 'catroweb') }}</span>
+      </div>
+      {% endif %}
+
+      <div id="project-like" class="d-none d-lg-block mt-3">
+        {{ include('Project/Reactions.html.twig') }}
+      </div>
+    </div>
+
+    <div class="d-none d-lg-block col-lg-4 mt-4 ">
+      {% if logged_in %}
+        {{ include('Project/DownloadButton.html.twig') }}
+      {% else %}
+        {{ include('Project/DownloadDisabledButton.html.twig') }}
+      {% endif %}
+      {% if not isIOS() %}
+        <div class="mt-3">
+          {{ include('Project/ApkGenerationButtons.html.twig') }}
+        </div>
+      {% endif %}
+      {{ include('Project/RemixGraphButtons.html.twig') }}
+      <div class="mt-3">
+        {{ include('Project/SignAppButton.html.twig') }}
+      </div>
+      {% if logged_in and my_project %}
+        <div class="mt-3" style="display:flex; align-items: center">
+          {{ include('Project/NotForKidsButton.html.twig') }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="row d-lg-none">
+    <div class="col-5 col-sm-4 mt-3 ">
+      <div id="project-like-small">
+        {{ include('Project/Reactions.html.twig', {suffix: '-small'}) }}
+      </div>
+    </div>
+    <div class="col-7 col-sm-8 mt-3" style="padding-left: 0;">
+      {% if logged_in %}
+        {{ include('Project/DownloadButton.html.twig', {suffix: '-small'}) }}
+      {% else %}
+        {{ include('Project/DownloadDisabledButton.html.twig', {suffix: '-small'}) }}
+      {% endif %}
+    </div>
+  </div>
+
+  {{ include('Project/ReactionsModal.html.twig') }}
+
+  {{ include('Project/Description.html.twig') }}
+
+  {{ include('Project/EditorNavigation.html.twig') }}
+
+  {{ include('Project/Editor.html.twig') }}
+
+  {{ include('Project/Tags.html.twig') }}
+
+  <div class="row d-lg-none">
+    {% if not isIOS() %}
+      <div class="col-6 mt-3">
+        {{ include('Project/ApkGenerationButtons.html.twig', {suffix: '-small'}) }}
+      </div>
+      <div class="col-6 mt-3">
+        {{ include('Project/RemixGraphButtons.html.twig', {suffix: '-small'}) }}
+      </div>
+    {% else %}
+      <div class="col-12 mb-3">
+        {{ include('Project/RemixGraphButtons.html.twig', {suffix: '-small'}) }}
+      </div>
+    {% endif %}
+  </div>
+  {% if isFeatureFlagEnabled('sign-apk') %}
+     <div class="row d-lg-none">
+      <div class="col-12 mt-3 mb-3">
+        {{ include('Project/SignAppButton.html.twig') }}
+      </div>
+    </div>
+    {{ include('Project/SignAppModal.html.twig') }}
+  {% endif %}
+
+  {{ include('Project/Details.html.twig') }}
+  <div id="recommended-projects">
+    {# array values: [api project_type, translation, property to show] #}
+    {% for category in [
+      ['more_from_user', 'moreFromThisUser', 'views'],
+    ] %}
+      <div id="recommended-projects__{{ category[0] }}" data-category="{{ category[0] }}"
+           data-property="{{ category[2] }}" class="project-list loading horizontal"
+           data-theme="{{ theme() }}"
+           data-flavor="{{ flavor() }}"
+           data-base-url="{{ app.request.getBaseURL() }}"
+           data-project-id="{{ project.id }}"
+      >
+        <div class="container">
+          <div class="project-list__title">
+            <h2>{{ ('recommender.' ~ category[1])|trans({'%username%': project.user.username}, 'catroweb') }}</h2>
+            <div class="project-list__title__btn-toggle btn-view-open">
+              <div class="project-list__title__btn-toggle__text">{{ 'show-more'|trans({}, 'catroweb') }}</div>
+              <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
+            </div>
+          </div>
+          <div class="lazyload projects-spinner-container">
+            {{ include('Components/LoadingSpinner.html.twig', [], false) }}
+          </div>
+          <div class="lazyload project-list__wrapper">
+            <div class="lazyload projects-container"></div>
+            <div class="lazyload project-list__chevrons">
+              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">
+                chevron_left
+              </div>
+              <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {{ include('Project/Comment/Overview.html.twig') }}
+
+  <div class="js-project"
+       data-project-id="{{ project.id }}"
+       data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
+       data-google-translate-display-name="{{ 'project.googleTranslate'|trans({}, 'catroweb') }}"
+       data-has-description="{% if project.description %}true{% else %}false{% endif %}"
+       data-has-credits="{% if project.credits %}true{% else %}false{% endif %}"
+       data-theme="{{ theme() }}"
+       data-flavor="{{ flavor() }}"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-project-name="{{ project.name }}"
+       data-user-role="{% if app.user %}user{% else %}guest{% endif %}"
+       data-my-project="{% if my_project %}true{% else %}false{% endif %}"
+       data-path-ci-status="{{ path('ci_status', {id: project.id}) }}"
+       data-path-ci-build="{{ path('ci_build', {id: project.id}) }}"
+       data-path-project-like="{{ path('project_like', {id: project.id}) }}"
+       data-path-like-details="{{ path('api_project_likes', {id: project.id}) }}"
+       data-trans-apk-prep="{{ 'apk.preparing'|trans({}, 'catroweb') }}"
+       data-trans-apk-text="{{ 'apk.text'|trans({}, 'catroweb') }}"
+       data-trans-update-app-header="{{ 'project.updateAppHeader'|trans({}, 'catroweb') }}"
+       data-trans-update-app-text="{{ 'project.updateAppText'|trans({}, 'catroweb') }}"
+       data-trans-btn-close="{{ 'project.btnClosePopup'|trans({}, 'catroweb') }}"
+       data-const-action-add="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::ACTION_ADD') }}"
+       data-const-action-remove="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::ACTION_REMOVE') }}"
+       data-path-profile="{{ path('profile', {id: 'USERID'}) }}"
+       data-asset-wow-white="{{ asset('images/default/wow_white.svg') }}"
+       data-asset-wow-black="{{ asset('images/default/wow_black.svg') }}"
+       data-trans-reaction="{{ 'project.reactionsText'|trans({}, 'catroweb') }}"
+       data-trans-download-error="{{ 'project.downloadErrorText'|trans({}, 'catroweb') }}"
+       data-trans-download-start="{{ 'project.downloadStartText'|trans({}, 'catroweb') }}"
+  ></div>
+
+  <div class="js-project-share"
+       data-theme-display-name="{{ getThemeDisplayName() }}"
+       data-trans-check-out-project="{{ 'checkOutProject'|trans({}, 'catroweb') }}"
+       data-project-url="{{ url('program', {id: project.id}) }}"
+       data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
+       data-trans-share-error="{{ 'share.error'|trans({}, 'catroweb') }}"
+       data-trans-copy="{{ 'copy'|trans({}, 'catroweb') }}"
+       data-trans-clipboard-success="{{ 'clipboard.success_project'|trans({}, 'catroweb') }}"
+       data-trans-clipboard-fail="{{ 'clipboard.fail'|trans({}, 'catroweb') }}"
+  ></div>
+  <div class="js-project-description-credits"
+       data-project-id="{{ project.id }}"
+       data-has-description="{% if project.description %}true{% else %}false{% endif %}"
+       data-has-credits="{% if project.credits %}true{% else %}false{% endif %}"
+       data-trans-more-info="{{ 'more-information'|trans({}, 'catroweb') }}"
+       data-trans-less-info="{{ 'less-information'|trans({}, 'catroweb') }}"
+       data-trans-confirm-delete="{{ 'project.confrimDelete'|trans({}, 'catroweb') }}"
+       data-trans-close-editor-prompt="{{ 'project.closeEditorPrompt'|trans({}, 'catroweb') }}"
+       data-trans-save="{{ 'project.save'|trans({}, 'catroweb') }}"
+       data-trans-discard="{{ 'project.btnDiscard'|trans({}, 'catroweb') }}"
+       data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+       data-trans-delete="{{ 'project.delete'|trans({}, 'catroweb') }}"
+       data-trans-default="{{ 'project.default'|trans({}, 'catroweb') }}"
+       data-trans-translation-title="{{ 'project.translationTitle'|trans({}, 'catroweb') }}"
+       data-trans-edit-default="{{ 'project.editDefault'|trans({}, 'catroweb') }}"
+       data-trans-edit-translation="{{ 'project.editTranslation'|trans({}, 'catroweb') }}"
+       data-trans-create-translation="{{ 'project.createTranslation'|trans({}, 'catroweb') }}"
+       data-trans-translations="{{ 'project.translations'|trans({}, 'catroweb') }}"
+  ></div>
+  <div class="js-project-comments"
+       data-project-id="{{ project_details.id }}"
+       data-total-number-of-comments="{{ (project_details.comments|length) }}"
+       data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+       data-trans-delete-it="{{ 'deleteIt'|trans({}, 'catroweb') }}"
+       data-trans-report-it="{{ 'reportIt'|trans({}, 'catroweb') }}"
+       data-trans-are-you-sure="{{ 'areYouSure'|trans({}, 'catroweb') }}"
+       data-trans-no-way-of-return="{{ 'noWayOfReturn'|trans({}, 'catroweb') }}"
+       data-trans-delete-confirmation="{{ 'project.deleteCommentConfirmation'|trans({}, 'catroweb') }}"
+       data-trans-report-confirmation="{{ 'project.reportCommentConfirmation'|trans({}, 'catroweb') }}"
+       data-trans-pop-up-comment-reported-title="{{ 'project.report_popup_header'|trans({}, 'catroweb') }}"
+       data-trans-pop-up-comment-reported-text="{{ 'project.report_popup'|trans({}, 'catroweb') }}"
+       data-trans-pop-up-deleted-title="{{ 'project.deleted_popup_header'|trans({}, 'catroweb') }}"
+       data-trans-pop-up-deleted-text="{{ 'project.deleted_popup'|trans({}, 'catroweb') }}"
+       data-trans-no-admin-rights-message="{{ 'project.noAdminRights'|trans({}, 'catroweb') }}"
+       data-trans-default-error-message="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+  ></div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+  const projectConfiguration = {
+    id: '{{ project_details.id }}',
+    messages: {
+      forbidden: '{{ 'api.updateProject.forbidden'|trans({}, 'catroweb') }}',
+      notFound: '{{ 'api.updateProject.notFound'|trans({}, 'catroweb') }}',
+      screenshotInvalid: '{{ 'api.project.screenshotInvalid'|trans({}, 'catroweb') }}',
+    }
+  }
+</script>
+  {{ encore_entry_script_tags('project_page') }}
+{% endblock %}

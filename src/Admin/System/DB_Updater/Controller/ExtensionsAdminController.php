@@ -20,14 +20,14 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ExtensionsAdminController extends CRUDController
 {
   public function __construct(
-    protected KernelInterface $kernel
+    protected KernelInterface $kernel,
   ) {
   }
 
   #[\Override]
   public function listAction(Request $request): Response
   {
-    return $this->renderWithExtraParams('Admin/DB_Updater/admin_extensions.html.twig', [
+    return $this->render('Admin/SystemManagement/DbUpdater/Extensions.html.twig', [
       'action' => 'update_extensions',
       'updateExtensionsUrl' => $this->admin->generateUrl('update_extensions'),
     ]);

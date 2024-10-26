@@ -8,6 +8,9 @@ use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
+use App\DB\EntityRepository\System\StatisticRepository;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -19,15 +22,18 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 
+#[Autoconfigure(tags: ['twig.extension'])]
 class TwigExtension extends AbstractExtension
 {
   public function __construct(
     private readonly RequestStack $request_stack,
     private readonly MediaPackageFileRepository $media_package_file_repository,
     private readonly ParameterBagInterface $parameter_bag,
+    #[Autowire('%kernel.project_dir%/translations')]
     private readonly string $catrobat_translation_dir,
     private readonly TranslatorInterface $translator,
-    private readonly FeatureFlagManager $featureFlagManager,
+    private readonly FeatureFlagManager $feature_flag_manager,
+    private readonly StatisticRepository $statistic_repository,
   ) {
   }
 
@@ -43,7 +49,7 @@ class TwigExtension extends AbstractExtension
   /**
    * @return string|string[]|null
    */
-  public function decamelizeFilter(mixed $input)
+  public function decamelizeFilter(mixed $input): mixed
   {
     if (!is_string($input)) {
       return $input;
@@ -61,22 +67,32 @@ class TwigExtension extends AbstractExtension
 
   public static function humanFriendlyNumber(mixed $input, TranslatorInterface $translator, mixed $user_locale): bool|string
   {
+    // Check if the input is numeric or a numeric string
     if (!is_numeric($input)) {
-      return $input;
+      return $input ?? '0';
     }
+
+    // Handle the case where the input is a string representing a large number
+    $input = (string) $input;
 
     $number_formatter = new \NumberFormatter($user_locale, \NumberFormatter::DECIMAL);
 
-    if ($input >= 1_000_000) {
-      $number_formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, 1);
+    // Handle large numbers (bigint) and normal numeric values
+    if (bccomp($input, '1000000') >= 0) {
+      // Divide by 1 million
+      $formatted_number = bcdiv($input, '1000000', 1); // Result is a string
 
-      return $number_formatter->format($input / 1_000_000).' '.
+      // Convert the result to float for NumberFormatter::format
+      $formatted_number = (float) $formatted_number;
+
+      return $number_formatter->format($formatted_number).' '.
         $translator->trans('format.million_abbreviation', [], 'catroweb');
     }
 
+    // For smaller numbers, convert the input to float
     $number_formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, 0);
 
-    return $number_formatter->format($input);
+    return $number_formatter->format((float) $input);
   }
 
   #[\Override]
@@ -101,12 +117,13 @@ class TwigExtension extends AbstractExtension
       new TwigFunction('assetFileExists', $this->assetFileExists(...)),
       new TwigFunction('isVersionSupportedByCatBlocks', $this->isVersionSupportedByCatBlocks(...)),
       new TwigFunction('isFeatureFlagEnabled', $this->isFeatureFlagEnabled(...)),
+      new TwigFunction('getStatistics', $this->getStatistics(...)),
     ];
   }
 
   public function isFeatureFlagEnabled(string $featureFlag): bool
   {
-    return $this->featureFlagManager->isEnabled($featureFlag);
+    return $this->feature_flag_manager->isEnabled($featureFlag);
   }
 
   public function isVersionSupportedByCatBlocks(string $version): bool
@@ -230,11 +247,11 @@ class TwigExtension extends AbstractExtension
     $user_agent = $this->getUserAgent();
 
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    if (preg_match('/Catrobat/', $user_agent)) {
+    if (str_contains($user_agent, 'Catrobat')) {
       $user_agent_array = explode('/', $user_agent);
 
       // $user_agent_array = [ "Catrobat", "0.93 PocketCode", 0.9.14 Platform", "Android" ];
-      $catrobat_language_array = explode(' ', $user_agent_array[1]);
+      $catrobat_language_array = explode(' ', $user_agent_array[1] ?? '');
       // $catrobat_language_array = [ "0.93", "PocketCode" ];
       $catrobat_language = floatval($catrobat_language_array[0]);
 
@@ -250,14 +267,14 @@ class TwigExtension extends AbstractExtension
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request->attributes->get('flavor');
+    return $request?->attributes->get('flavor') ?? (string) $this->parameter_bag->get('defaultFlavor');
   }
 
   public function getTheme(): string
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request->attributes->get('theme');
+    return $request?->attributes->get('theme') ?? (string) $this->parameter_bag->get('umbrellaTheme');
   }
 
   public function getThemeDisplayName(): string
@@ -346,5 +363,15 @@ class TwigExtension extends AbstractExtension
     $request = $this->request_stack->getCurrentRequest();
 
     return $request->headers->get('User-Agent') ?? '';
+  }
+
+  private function getStatistics(): array
+  {
+    $statistic = $this->statistic_repository->find(1);
+
+    return [
+      'projects' => $this->humanFriendlyNumberFilter($statistic?->getProjects()),
+      'users' => $this->humanFriendlyNumberFilter($statistic?->getUsers()),
+    ];
   }
 }

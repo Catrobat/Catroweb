@@ -16,13 +16,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'catrobat:cronjob', description: 'Executing Cron Jobs')]
 class CronJobCommand extends Command
 {
-  protected const ONE_MINUTE_IN_SECONDS = 60;
+  protected const int ONE_MINUTE_IN_SECONDS = 60;
 
-  protected const ONE_HOUR_IN_SECONDS = self::ONE_MINUTE_IN_SECONDS * 60;
+  protected const int ONE_HOUR_IN_SECONDS = self::ONE_MINUTE_IN_SECONDS * 60;
 
-  protected const ONE_DAY_IN_SECONDS = self::ONE_HOUR_IN_SECONDS * 24;
+  protected const int ONE_DAY_IN_SECONDS = self::ONE_HOUR_IN_SECONDS * 24;
 
-  protected const ONE_WEEK_IN_SECONDS = self::ONE_DAY_IN_SECONDS * 7;
+  protected const int ONE_WEEK_IN_SECONDS = self::ONE_DAY_IN_SECONDS * 7;
 
   public function __construct(protected EntityManagerInterface $entity_manager, protected CronJobRepository $cron_job_repository)
   {
@@ -75,9 +75,17 @@ class CronJobCommand extends Command
 
     $this->runCronJob(
       'Add verified_developer UserAchievements',
-      ['bin/console', 'catrobat:workflow:achievement:verified_developer'],
-      ['timeout' => self::ONE_WEEK_IN_SECONDS],
-      '1 year',
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_silver'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 week',
+      $output
+    );
+
+    $this->runCronJob(
+      'Add verified_developer UserAchievements',
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_gold'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 week',
       $output
     );
 

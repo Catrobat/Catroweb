@@ -23,10 +23,10 @@ Feature:
   Scenario: changing my username must work
     Given I click "#top-app-bar__btn-settings"
     And I wait for the element "#user-settings-modal" to be visible
-    Then I should see "User Settings"
+    Then I should see "User settings"
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
     And I wait for the element "#profile-settings-modal" to be visible
-    Then I should see "Profile Settings"
+    Then I should see "Edit profile"
     And the element "#profile-username__input" should be visible
     When I fill in "username" with "Mr.Catro"
     And I click "#profile_settings-save_action"
@@ -108,7 +108,7 @@ Feature:
     And I wait for the element "#user-settings-modal" to be visible
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
     And I wait for the element "#profile-settings-modal" to be visible
-    When I fill in "currentlyWorkingOn" with "an awesome project"
+    When I fill in "currently_working_on" with "an awesome project"
     When I fill in "about" with "I am a regular Catrobat user. Welcome on my profile."
     And I click "#profile_settings-save_action"
     Then I wait for the page to be loaded
@@ -122,7 +122,7 @@ Feature:
     And I wait for the element "#user-settings-modal" to be visible
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
     And I wait for the element "#profile-settings-modal" to be visible
-    When I fill in "currentlyWorkingOn" with "an awesome project"
+    When I fill in "currently_working_on" with "an awesome project"
     When I fill in "about" with "I am a regular Catrobat user. Welcome on my profile."
     And I click "#profile_settings-save_action"
     Then I wait for the page to be loaded
@@ -133,7 +133,7 @@ Feature:
     And I wait for the element "#user-settings-modal" to be visible
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
     And I wait for the element "#profile-settings-modal" to be visible
-    When I fill in "currentlyWorkingOn" with ""
+    When I fill in "currently_working_on" with ""
     When I fill in "about" with ""
     And I click "#profile_settings-save_action"
     Then I wait for the page to be loaded
@@ -210,7 +210,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then I should see "Delete project"
     And the element "#project-action-menu" should be visible
-    When I click "#project-action-menu > ul > li:nth-child(2)"
+    When I click "#project-action-menu > ul > li:nth-child(3)"
     Then I should see "delete it"
     When I click ".swal2-cancel"
     Then I should not see "delete it"
@@ -225,7 +225,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then I should see "Delete project"
     And the element "#project-action-menu" should be visible
-    When I click "#project-action-menu > ul > li:nth-child(2)"
+    When I click "#project-action-menu > ul > li:nth-child(3)"
     Then I should see "delete it"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
@@ -305,7 +305,7 @@ Feature:
     Then I should see "User Settings"
     And I click ".profile__user-settings .nav-link[data-bs-target='#account-settings-modal']"
     And I wait for the element "#account-settings-modal" to be visible
-    Then I should see "Account Settings"
+    Then I should see "Delete account"
     And I should see "You created 2 project(s) and have 0 follower(s). All of your projects will be removed."
     And the element "#btn-delete-account" should be visible
     When I click "#btn-delete-account"

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Application\Controller\Base;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\System\MaintenanceInformation;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\Storage\ImageRepository;
@@ -29,9 +29,9 @@ class IndexController extends AbstractController
     $flavor = $request->attributes->get('flavor');
     /** @var User|null $user */
     $user = $this->getUser();
-    $maintenanceInformation = $this->sendMaintenanceInformation($request);
+    $maintenanceInformation = $this->renderMaintenanceInformation($request);
 
-    return $this->render('Index/index.html.twig', [
+    return $this->render('Index/IndexPage.html.twig', [
       'featured' => $this->getFeaturedSliderData($flavor),
       'is_first_oauth_login' => null !== $user && $user->isOauthUser() && !$user->isOauthPasswordCreated(),
       'maintenanceInformation' => $maintenanceInformation,
@@ -41,9 +41,9 @@ class IndexController extends AbstractController
   protected function getFeaturedSliderData(string $flavor): array
   {
     if (Flavor::PHIROCODE === $flavor) {
-      $featured_items = $this->featured_repository->getFeaturedItems(Flavor::POCKETCODE, 10, 0);
+      $featured_items = $this->featured_repository->getFeaturedItems(Flavor::POCKETCODE, 10);
     } else {
-      $featured_items = $this->featured_repository->getFeaturedItems($flavor, 10, 0);
+      $featured_items = $this->featured_repository->getFeaturedItems($flavor, 10);
     }
 
     $featuredData = [];
@@ -69,7 +69,7 @@ class IndexController extends AbstractController
     return $featuredData;
   }
 
-  public function sendMaintenanceInformation(Request $request): array
+  public function renderMaintenanceInformation(Request $request): array
   {
     $maintenanceInformationRepository = $this->entityManager->getRepository(MaintenanceInformation::class);
     $maintenanceInformation = $maintenanceInformationRepository->findAll();
@@ -85,7 +85,7 @@ class IndexController extends AbstractController
           'featureName' => $info->getInternalTitle(),
           'id' => $info->getId(),
         ];
-        $maintenanceInformationMessages[] = $this->renderView('/components/maintenaceinformation.html.twig', $parameters);
+        $maintenanceInformationMessages[] = $this->renderView('Index/MaintenanceInformation.html.twig', $parameters);
       }
     }
 

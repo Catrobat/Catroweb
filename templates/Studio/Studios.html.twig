@@ -1,0 +1,39 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ 'studio.title'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('studios_page') }}
+{% endblock %}
+
+{% block body %}
+        {% if user_name %}
+            <h2>{{ 'studio.overview.joined_studios'|trans({}, 'catroweb') }}</h2>
+            {{ include('Studio/StudioList.html.twig', {studios: studios, public: false, user_name: user_name, joined: true}) }}
+
+            <h2>{{ 'studio.overview.private_studios'|trans({}, 'catroweb') }}</h2>
+            {{ include('Studio/StudioList.html.twig', {studios: studios, public: false, user_name: user_name, joined: false}) }}
+        {% endif %}
+        <h2>{{ 'studio.overview.public_studios'|trans({}, 'catroweb') }}</h2>
+        {{ include('Studio/StudioList.html.twig', {studios: studios, public: true, user_name: user_name, joined: false}) }}
+
+        <div class="row">
+            {% if user_name %}
+                <div class="text-end col">
+                    <a href="{{ path('studio_new') }}" >
+                        <span id="add-button" class="material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
+                    </a>
+                </div>
+            {% else %}
+                <div class="text-end col ">
+                    <a href="{{ path('login') }}" >
+                        <span id="add-button" class="material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        {% endblock %}
+
+{% block javascript %}
+    {{ encore_entry_script_tags('studios_page') }}
+{% endblock %}

@@ -8,7 +8,7 @@ createNewPassword: Opprett nytt passord
 accountSettings: Kontoinnstillinger
 email: E-post
 aboutPocketCode: Om Pocket Code
-about: Om
+about: Om Catrobat
 education: Utdanning
 chat: Chat og forum
 privacyGuide: Privacy Awareness Guide
@@ -336,10 +336,11 @@ profile:
   changePicture: Endre bilde
   goToScratchProfile: Profil på Scratch
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: User settings
+  profileSettings: Rediger profil
+  securitySettings: Endre passord
+  accountSettings: Slett konto
+  accountVerification: Verify account
   account: Account
   editProfile: Rediger profil
   edit: Rediger
@@ -356,6 +357,10 @@ myprofile:
   editAccountSettings: Rediger kontoinnstillinger
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
+  verifyAccountButton: Send email
+  verifyAccountMailSent: Email sent successfully. Please check your inbox
+  verifyAccountMailFailed: You can only request one email per day
 licenseToPlay:
   link: 'Lisens til å spille'
   title: 'Lisens til å spille - gi anerkjennelse og del'
@@ -599,6 +604,19 @@ api:
     screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
     notFound: 'The project to change could not be found.'
     forbidden: 'Changing the project not allowed. Are you still logged in?'
+  createStudio:
+    nameMissing: 'Name missing'
+    nameEmpty: 'Name cannot be empty'
+    nameTooShort: 'Name too short'
+    nameTooLong: 'Name too long'
+    nameAlreadyInUse: 'Name already in use'
+    descriptionMissing: 'Description missing'
+    descriptionEmpty: 'Description empty'
+    descriptionTooShort: 'Description too short'
+    descriptionTooLong: 'Description too long'
+    imageFileInvalid: 'Image file invalid'
+    imageFileInvalidType: 'Image file type invalid'
+    imageFileTooLarge: 'Image file too large'
 #languages and countries
 language:
   arabic: Arabisk
@@ -711,11 +729,8 @@ codeStatistics:
   deviceBricks: 'Enhet'
   specialBricks: 'Spesiell '
 footer:
-  language: Språk
-  usefulLinks: Nyttige lenker
-  legalities: Legaliteter
-  communityStats: Samfunns statistikk
-  download: Få appen
+  title: "Join Over %user_count% Creative Minds!"
+  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
 privacy-policy:
   header: Personvernregler
   version: Versjon 2.2, 17. oktober 2019
@@ -850,6 +865,9 @@ achievements:
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
+      account_verification:
+        title: "Verified"
+        description: "Verify your Account"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -894,6 +912,11 @@ studio:
   cancel_studio: 'Avbryt'
   studio_name: 'Studio name'
   studio_description: 'Studio description'
+  is_public: 'Make it public?'
+  enable_comments: 'Enable comments?'
+  cover_image: 'Upload cover'
+  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_alt: 'Your cover image'
   join: 'Join'
   leave: 'Leave'
   report: 'Rapporter'

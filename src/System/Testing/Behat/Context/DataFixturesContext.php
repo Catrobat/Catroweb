@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\System\Testing\Behat\Context;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -17,7 +16,9 @@ use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
-use App\DB\Entity\Survey;
+use App\DB\Entity\System\MaintenanceInformation;
+use App\DB\Entity\System\Statistic;
+use App\DB\Entity\System\Survey;
 use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
@@ -40,6 +41,7 @@ use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Exception\ORMException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Process\Process;
@@ -254,6 +256,33 @@ class DataFixturesContext implements Context
 
     Assert::assertInstanceOf(User::class, $user);
     Assert::assertEquals($email, $user->getEmail());
+  }
+
+  /**
+   * @Then the user :user_name should have a last login date with the value :date
+   */
+  public function theUserShouldHaveALastLoginDate(string $user_name, string $date): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($user_name);
+    Assert::assertEquals('null' === $date ? '' : $date, $user?->getLastLogin()?->getTimestamp() ?? '');
+  }
+
+  /**
+   * @Then the user :user_name should have a verification status of :verification_state
+   */
+  public function theUserShouldHaveAVerificationStatus(string $user_name, string $verification_state): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($user_name);
+    Assert::assertEquals('true' === $verification_state, $user->isVerified());
+  }
+
+  /**
+   * @Then the user :user_name should have a verification email requested at :date
+   */
+  public function theUserShouldHaveAVerificationEmailRequestedAt(string $user_name, string $date): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($user_name);
+    Assert::assertEquals('null' === $date ? '' : $date, $user->getVerificationRequestedAt()?->getTimestamp() ?? '');
   }
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -560,6 +589,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then the project :id should have :downloads downloads
+   *
+   * @throws ORMException
    */
   public function theProjectShouldHaveDownloads(string $id, string $downloads): void
   {
@@ -593,9 +624,6 @@ class DataFixturesContext implements Context
   public function theEmbroideryProjectShouldHaveTheExtension(string $extension): void
   {
     $project_extensions = $this->getProjectManager()->findOneByName('ZigZag Stich')->getExtensions();
-
-    Assert::assertNotNull($project_extensions);
-
     foreach ($project_extensions as $project_extension) {
       /* @var $project_extension Extension */
       Assert::assertStringContainsString($project_extension->getInternalTitle(), $extension, 'The Extension was not found!');
@@ -604,13 +632,14 @@ class DataFixturesContext implements Context
 
   /**
    * @Then the project with id :id should be marked with :arg2 extensions in the database
+   *
+   * @throws ORMException
    */
   public function theProjectShouldBeMarkedWithExtensionsInTheDatabase(string $id, string $count): void
   {
     $project = $this->getProjectManager()->find($id);
     $this->getManager()->refresh($project);
     $project_extensions = $project->getExtensions();
-    Assert::assertNotNull($project_extensions);
     Assert::assertCount((int) $count, $project_extensions, 'Too much or too less extensions found!');
   }
 
@@ -765,6 +794,7 @@ class DataFixturesContext implements Context
    * @Given /^there are media package files:$/
    *
    * @throws \ImagickException
+   * @throws \ImagickDrawException
    */
   public function thereAreMediaPackageFiles(TableNode $table): void
   {
@@ -1129,6 +1159,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^the users are created at:$/
+   *
+   * @throws \Exception
    */
   public function theUsersAreCreatedAt(TableNode $table): void
   {
@@ -1150,6 +1182,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^there are studios:$/
+   *
+   * @throws \DateMalformedStringException
    */
   public function thereAreStudios(TableNode $table): void
   {
@@ -1181,6 +1215,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^there are studio users:$/
+   *
+   * @throws \DateMalformedStringException
    */
   public function thereAreStudioUsers(TableNode $table): void
   {
@@ -1277,9 +1313,9 @@ class DataFixturesContext implements Context
         ->setInternalDescription($config['internal_description'] ?? '')
         ->setTitleLtmCode($config['title_ltm_code'] ?? '')
         ->setDescriptionLtmCode($config['description_ltm_code'] ?? '')
-        ->setBadgeSvgPath($config['badge_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_1.svg')
-        ->setBadgeLockedSvgPath($config['badge_locked_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_locked_1.svg')
-        ->setBannerSvgPath($config['banner_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_banner.svg')
+        ->setBadgeSvgPath($config['badge_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'badge1.svg')
+        ->setBadgeLockedSvgPath($config['badge_locked_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'badge1-locked.svg')
+        ->setBannerSvgPath($config['banner_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'badge-banner.svg')
         ->setBannerColor($config['banner_color'] ?? '#00ff00')
         ->setEnabled((bool) ($config['enabled'] ?? true))
         ->setPriority((int) ($config['priority'] ?? 0))
@@ -1468,12 +1504,22 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given I run the add verified_developer user achievements command
+   * @Given I run the add verified_developer_silver user achievements command
    */
-  public function iRunTheAddVerifiedDeveloperAchievementsCommand(): void
+  public function iRunTheAddVerifiedDeveloperSilverAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:verified_developer'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_silver'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add verified_developer_gold user achievements command
+   */
+  public function iRunTheAddVerifiedDeveloperGoldAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_gold'], [], 'Updating user achievements'
     );
   }
 
@@ -1532,6 +1578,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then there should be project machine translations:
+   *
+   * @throws ORMException
    */
   public function thereShouldBeProjectMachineTranslations(TableNode $table): void
   {
@@ -1620,6 +1668,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then there should be comment machine translations:
+   *
+   * @throws ORMException
    */
   public function thereShouldBeCommentMachineTranslations(TableNode $table): void
   {
@@ -1675,6 +1725,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then there should be project custom translations:
+   *
+   * @throws ORMException
    */
   public function thereShouldBeProjectCustomTranslations(TableNode $table): void
   {
@@ -1706,5 +1758,83 @@ class DataFixturesContext implements Context
 
       Assert::assertEquals(1, count($matching_row), 'row not found: '.$project_id);
     }
+  }
+
+  /**
+   * @Given the uploaded file :fileName exists
+   */
+  public function theFileInTheFolderExists(string $filename): void
+  {
+    $filepath = $this->PUBLIC_DIR.$filename;
+    Assert::assertFileExists($filepath, 'File should exist: '.$filepath);
+  }
+
+  /**
+   * @Given the uploaded file :fileName does not exist
+   */
+  public function theFileInTheFolderDoesNotExists(string $filename): void
+  {
+    $filepath = $this->PUBLIC_DIR.$filename;
+    Assert::assertFileDoesNotExist($filepath, 'File should not exist: '.$filepath);
+  }
+
+  /**
+   * @Given the studio with the name :name should exist with following values:
+   */
+  public function theStudioWithNameShouldHaveValues(string $name, TableNode $table): void
+  {
+    $studio = $this->getStudioManager()->findStudioByName($name);
+    Assert::assertNotNull($studio, 'Studio does not exist!');
+    foreach ($table->getHash() as $set) {
+      $result = match ($set['key']) {
+        'description' => $studio->getDescription(),
+        'is_enabled' => $studio->isIsEnabled(),
+        'enable_comments' => $studio->isAllowComments(),
+        'is_public' => $studio->isIsPublic(),
+        'cover_path' => $studio->getCoverAssetPath(),
+        default => throw new \InvalidArgumentException(json_encode($set)),
+      };
+      switch ($set['key']) {
+        case 'is_enabled':
+        case 'enable_comments':
+        case 'is_public':
+          Assert::assertSame('true' === $set['value'], $result, 'Failed for: '.json_encode($set));
+          break;
+        case 'cover_path':
+          if ($set['value']) {
+            Assert::assertStringEndsWith($set['value'], $result, 'Failed for: '.json_encode($set));
+          }
+          break;
+        default:
+          Assert::assertSame($set['value'], $result, 'Failed for: '.json_encode($set));
+      }
+    }
+  }
+
+  /**
+   * @Given there are statistics with :user_count user and :project_count projects
+   */
+  public function thereAreStatistics(string $user_count, string $project_count): void
+  {
+    $statistic = $this->getStatisticsRepository()->findOneBy(['id' => 1]);
+    if (!$statistic) {
+      $statistic = new Statistic();
+    }
+    $statistic->setUsers($user_count);
+    $statistic->setProjects($project_count);
+    $em = $this->getManager();
+    $em->persist($statistic);
+    $em->flush();
+  }
+
+  /**
+   * @Then There should be statistics with :user_count user and :project_count projects
+   */
+  public function thereShouldBeStatistics(string $user_count, string $project_count): void
+  {
+    $statistic = $this->getStatisticsRepository()->findOneBy(['id' => 1]);
+    $this->getManager()->refresh($statistic);
+    Assert::assertSame($user_count, $statistic->getUsers(), 'Expected user count check failed');
+    Assert::assertSame($project_count, $statistic->getProjects(), 'Expected project count check failed');
   }
 }

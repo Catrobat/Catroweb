@@ -15,7 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class RolesMatrixType extends AbstractType
 {
-  public function __construct(private SecurityRolesBuilder $rolesBuilder)
+  public function __construct(private readonly SecurityRolesBuilder $rolesBuilder)
   {
   }
 

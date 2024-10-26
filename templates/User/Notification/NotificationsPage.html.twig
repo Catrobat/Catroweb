@@ -1,0 +1,118 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ 'notifications'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('user_notifications_page') }}
+{% endblock %}
+
+{% block body %}
+
+  {{ include('Components/ChipSet.html.twig', {
+    chips: [
+      {
+        id: 'all-notif',
+        icon: 'notifications',
+        title: '' ~ 'allNotifications'|trans({}, 'catroweb'),
+        controls: 'notifications'
+      },
+      {
+        id: 'follow-notif',
+        icon: 'person',
+        title: '' ~ 'FollowersNotifications'|trans({}, 'catroweb'),
+        controls: 'follow-notifications'
+      },
+      {
+        id: 'comment-notif',
+        icon: 'comment',
+        title: '' ~ 'CommentNotifications'|trans({}, 'catroweb'),
+        controls: 'comment-notifications'
+      },
+      {
+        id: 'reaction-notif',
+        icon: 'thumb_up',
+        title: '' ~ 'LikeNotifications'|trans({}, 'catroweb'),
+        controls: 'reaction-notifications'
+      },
+      {
+        id: 'remix-notif',
+        icon: 'call_split',
+        title: '' ~ 'RemixNotifications'|trans({}, 'catroweb'),
+        controls: 'remix-notifications'
+      },
+    ]
+  }) }}
+
+  <div class="tab-content mt-4">
+    {% for category in [
+      {
+        id: 'notifications',
+        notifications: allNotifications,
+        emptyID: 'no-notif-all',
+        emptyMessage: '' ~ 'notificationsReadMessage'|trans({}, 'catroweb'),
+      },
+      {
+        id: 'follow-notifications',
+        notifications: followerNotifications,
+        emptyID: 'no-notif-follow',
+        emptyMessage: '' ~ 'catro-notifications.noFollowers'|trans({}, 'catroweb'),
+      },
+      {
+        id: 'comment-notifications',
+        notifications: commentNotifications,
+        emptyID: 'no-notif-comment',
+        emptyMessage: '' ~ 'catro-notifications.noComments'|trans({}, 'catroweb'),
+      },
+      {
+        id: 'reaction-notifications',
+        notifications: reactionNotifications,
+        emptyID: 'no-notif-reaction',
+        emptyMessage: '' ~ 'catro-notifications.noReactions'|trans({}, 'catroweb'),
+      },
+      {
+        id: 'remix-notifications',
+        notifications: remixNotifications,
+        emptyID: 'no-notif-remix',
+        emptyMessage: '' ~ 'catro-notifications.noRemixes'|trans({}, 'catroweb'),
+      },
+    ] %}
+    <div id="{{ category.id }}" class="tab-pane fade {% if loop.first %} show active {% endif %}" role="tabpanel">
+        {% for notification in category.notifications %}
+          <div id="catro-notification-{{ notification.id }}"
+              class="js-notification-interaction row my-3 no-gutters ripple notif"
+              data-notification-id="{{ notification.id }}"
+              data-notification-instance="{{ instance[notification.id] }}"
+              data-notification-seen="{{ notification.getSeen() }}"
+              data-notification-redirect="{{ redirect[notification.id] }}"
+            >
+            {{ include(notification.getTwigTemplate) }}
+          </div>
+        {% endfor %}
+
+      <div id="no-notifications" class="text-center mb-5 {{ category.notifications is empty ? 'd-block' : 'd-none' }}">
+        <span id="{{ category.emptyID }}">{{ category.emptyMessage }}</span>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="js-notifications"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-fetch-url="{{ path('notifications_fetch') }}"
+       data-something-went-wrong-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+       data-notifications-clear-error="{{ 'notificationsClearError'|trans({}, 'catroweb') }}"
+       data-notifications-unauthorized-error="{{ 'notificationsUnauthorizedError'|trans({}, 'catroweb') }}"
+       data-all-notifications-count="{{ allNotificationsCount }}"
+       data-follow-notification-count="{{ followNotificationCount }}"
+       data-reaction-notification-count="{{ reactionNotificationCount }}"
+       data-comment-notification-count="{{ commentNotificationCount }}"
+       data-notification-count="{{ remixNotificationCount }}"
+       data-profile-path="{{ path('profile') }}"
+       data-project-path="{{ path('program') }}"
+       data-img-asset="{{ asset('images/default/avatar_default.png') }}"
+  ></div>
+{% endblock %}
+
+{% block javascript %}
+  {{ encore_entry_script_tags('user_notifications_page') }}
+{% endblock %}

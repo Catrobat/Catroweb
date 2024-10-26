@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\UserCommunication\Survey;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Survey;
+use App\DB\Entity\System\Survey;
 use App\DB\EntityRepository\FlavorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -35,7 +35,7 @@ class AllSurveysAdmin extends AbstractAdmin
   }
 
   public function __construct(
-    protected EntityManagerInterface $entity_manager
+    protected EntityManagerInterface $entity_manager,
   ) {
   }
 

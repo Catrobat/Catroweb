@@ -2,22 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Project\Extension;
+namespace Tests\PhpUnit\Project\Extension;
 
 use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Extension\ProjectExtensionManager;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
- *
- * @coversDefaultClass \App\Project\Extension\ProjectExtensionManager
  */
+#[CoversClass(ProjectExtensionManager::class)]
 class ProjectExtensionManagerTest extends DefaultTestCase
 {
   protected ExtractedCatrobatFile $extracted_catrobat_file_with_extensions;
@@ -31,25 +32,20 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   {
     $this->object = $this->getMockBuilder(ProjectExtensionManager::class)
       ->disableOriginalConstructor()
-      ->getMockForAbstractClass()
+      ->onlyMethods([])
+      ->getMock()
     ;
 
     $this->setUpCatrobatTestFiles();
   }
 
-  /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers ::addExtensions
-   */
+  #[Group('unit')]
   public function testAddExtensions(): void
   {
     $program = $this
       ->getMockBuilder(Program::class)
       ->onlyMethods(['removeAllExtensions'])
-      ->getMockForAbstractClass()
+      ->getMock()
     ;
 
     $this->object = $this->getMockBuilder(ProjectExtensionManager::class)
@@ -63,7 +59,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
         'getExtension',
         'saveProject',
       ])
-      ->getMockForAbstractClass()
+      ->getMock()
     ;
 
     $program->expects($this->once())->method('removeAllExtensions');
@@ -78,12 +74,9 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers ::isAnEmbroideryProject
+   * @throws \ReflectionException
    */
+  #[Group('unit')]
   #[DataProvider('provideIsAnEmbroideryProjectData')]
   public function testIsAnEmbroideryProject(string $code_xml, bool $expected): void
   {
@@ -102,12 +95,9 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers ::isAMindstormsProject
+   * @throws \ReflectionException
    */
+  #[Group('unit')]
   #[DataProvider('provideIsAMindstormsProjectData')]
   public function testIsAMindstormsProject(string $code_xml, bool $expected): void
   {
@@ -127,12 +117,9 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers ::isAPhiroProject
+   * @throws \ReflectionException
    */
+  #[Group('unit')]
   #[DataProvider('provideIsAPhiroProjectData')]
   public function testIsAPhiroProject(string $code_xml, bool $expected): void
   {

@@ -1,0 +1,73 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block head %}
+ {{ encore_entry_link_tags('media_library_package_detail_page') }}
+{% endblock %}
+
+{% block sidebar_ul %}
+  <hr>
+  {% for category in categories %}
+    <li class="nav-item" id="menu-mediacat-{{ category.displayID }}" style="display: none;">
+      <a class="nav-link" href="#category-{{ category.displayID }}">{{ category.name }}</a>
+    </li>
+  {% endfor %}
+{% endblock %}
+
+{% block body %}
+  {% if foundResults is defined %}
+    <div id="search-results" class="mb-4">
+      <h1>{{ 'media-packages.search-results'|trans({}, 'catroweb') }}</h1>
+      <div id="search-results-text">
+        {% if foundResults %}
+          {{ 'search.resultcount'|trans({'%count%': resultsCount}, 'catroweb') }}.
+        {% else %}
+          {{ 'media-packages.no-results'|trans({}, 'catroweb') }}
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div id="loading-spinner" class="medialib-spinner">
+    {{ include('Components/LoadingSpinner.html.twig') }}
+  </div>
+
+  <div id="content" class="medialib-content">
+    {% for category in categories %}
+      <div id="category-{{ category.displayID }}" data-name="{{ category.name|e('html_attr') }}"
+           style="display: none;" class="category active">
+        <div class="header">{{ category.name }}</div>
+        <div class="files"></div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {%
+    set translations = {
+      elementsSingular: 'element'|trans({}, 'catroweb'),
+      elementsPlural: 'elements'|trans({}, 'catroweb'),
+      size: 'media_library.file.size'|trans({}, 'catroweb'),
+      type: {
+        catrobat: 'media_library.file.type_description.image'|trans({}, 'catroweb'),
+        image: 'media_library.file.type_description.image'|trans({}, 'catroweb'),
+        sound: 'media_library.file.type_description.sound'|trans({}, 'catroweb'),
+        video: 'media_library.file.type_description.movie'|trans({}, 'catroweb'),
+        project: 'media_library.file.type_description.project'|trans({}, 'catroweb'),
+        unknown: 'media_library.file.type_description.default'|trans({}, 'catroweb'),
+      },
+    }
+  %}
+
+  <div class="js-media-library"
+       data-package="{{ package }}"
+       data-path-media-search="{{ mediaSearchPath|default('')|raw }}"
+       data-flavor="{{ flavor }}"
+       data-media-dir="{{ mediaDir }}"
+       data-translations="{{ translations|json_encode() }}"
+       data-is-webview="{{ isWebview() }}"
+       data-path-medialibpackagebynameurl="{{ path('open_api_server_mediaLibrary_mediapackagenameget', {name: package}) }}"
+  ></div>
+{% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('media_library_package_detail_page') }}
+{% endblock %}

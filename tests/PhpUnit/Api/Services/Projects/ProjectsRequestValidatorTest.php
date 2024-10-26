@@ -9,14 +9,16 @@ use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Api\Services\ValidationWrapper;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\UpdateProjectRequest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
- *
- * @coversDefaultClass \App\Api\Services\Projects\ProjectsRequestValidator
  */
+#[CoversClass(ProjectsRequestValidator::class)]
 final class ProjectsRequestValidatorTest extends DefaultTestCase
 {
   protected MockObject|ProjectsRequestValidator $object;
@@ -26,37 +28,13 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
   {
     $this->object = $this->getMockBuilder(ProjectsRequestValidator::class)
       ->disableOriginalConstructor()
-      ->getMockForAbstractClass()
+      ->onlyMethods([])
+      ->getMock()
     ;
   }
 
   /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExists(): void
-  {
-    $this->assertTrue(class_exists(ProjectsRequestValidator::class));
-    $this->assertInstanceOf(ProjectsRequestValidator::class, $this->object);
-  }
-
-  /**
-   * @group integration
-   *
-   * @small
-   */
-  public function testTestClassExtends(): void
-  {
-    $this->assertInstanceOf(AbstractRequestValidator::class, $this->object);
-  }
-
-  /**
    * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateName
    *
    * @throws \ReflectionException
    */
@@ -77,11 +55,8 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateName
-   *
    * @throws \ReflectionException
+   * @throws Exception
    */
   public function testValidateNameEmpty(): void
   {
@@ -99,11 +74,8 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateName
-   *
    * @throws \ReflectionException
+   * @throws Exception
    */
   public function testValidateNameTooLong(): void
   {
@@ -120,10 +92,6 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateDescription
    *
    * @throws \ReflectionException
    */
@@ -144,11 +112,8 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateDescription
-   *
    * @throws \ReflectionException
+   * @throws Exception
    */
   public function testValidateDescriptionTooLong(): void
   {
@@ -165,10 +130,6 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateCredits
    *
    * @throws \ReflectionException
    */
@@ -189,11 +150,8 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateCredits
-   *
    * @throws \ReflectionException
+   * @throws Exception
    */
   public function testValidateCreditsTooLong(): void
   {
@@ -210,10 +168,6 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateScreenshot
    *
    * @throws \ReflectionException
    */
@@ -232,11 +186,8 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
   /**
    * @group unit
    *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateCredits
-   *
    * @throws \ReflectionException
+   * @throws Exception
    */
   public function testValidateScreenshotInvalid(): void
   {
@@ -262,12 +213,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateUpdateRequest
+   * @throws \ReflectionException
    */
+  #[Group('unit')]
   public function testValidateUpdateRequest(): void
   {
     $validation_wrapper = new ValidationWrapper();
@@ -288,12 +236,10 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
   }
 
   /**
-   * @group unit
-   *
-   * @small
-   *
-   * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateUpdateRequest
+   * @throws \ReflectionException
+   * @throws Exception
    */
+  #[Group('unit')]
   public function testValidateUpdateRequestInvalid(): void
   {
     $validation_wrapper = new ValidationWrapper();
