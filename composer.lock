@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b4625fc17a66f41960f77f5f2d7f687",
+    "content-hash": "7f3933326b59511efef6857e5eb5058d",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7750,16 +7750,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v7.1.6",
+            "version": "v7.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "5c6152766251ff45a44b76affadd5287e253fb27"
+                "reference": "dc373a5cbd345354696f5dfd39c5c7a8ea23f4c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/5c6152766251ff45a44b76affadd5287e253fb27",
-                "reference": "5c6152766251ff45a44b76affadd5287e253fb27",
+                "url": "https://api.github.com/repos/symfony/config/zipball/dc373a5cbd345354696f5dfd39c5c7a8ea23f4c8",
+                "reference": "dc373a5cbd345354696f5dfd39c5c7a8ea23f4c8",
                 "shasum": ""
             },
             "require": {
@@ -7805,7 +7805,7 @@
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/config/tree/v7.1.6"
+                "source": "https://github.com/symfony/config/tree/v7.1.7"
             },
             "funding": [
                 {
@@ -7821,20 +7821,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-25T15:11:02+00:00"
+            "time": "2024-11-04T11:34:07+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v7.1.6",
+            "version": "v7.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "bb5192af6edc797cbab5c8e8ecfea2fe5f421e57"
+                "reference": "3284aafcac338b6e86fd955ee4d794cbe434151a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/bb5192af6edc797cbab5c8e8ecfea2fe5f421e57",
-                "reference": "bb5192af6edc797cbab5c8e8ecfea2fe5f421e57",
+                "url": "https://api.github.com/repos/symfony/console/zipball/3284aafcac338b6e86fd955ee4d794cbe434151a",
+                "reference": "3284aafcac338b6e86fd955ee4d794cbe434151a",
                 "shasum": ""
             },
             "require": {
@@ -7898,7 +7898,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.1.6"
+                "source": "https://github.com/symfony/console/tree/v7.1.7"
             },
             "funding": [
                 {
@@ -7914,7 +7914,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-09T08:46:59+00:00"
+            "time": "2024-11-05T15:34:55+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -10767,16 +10767,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v7.1.6",
+            "version": "v7.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "6aaa189ddb4ff6b5de8fa3210f2fb42c87b4d12e"
+                "reference": "9b8a40b7289767aa7117e957573c2a535efe6585"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/6aaa189ddb4ff6b5de8fa3210f2fb42c87b4d12e",
-                "reference": "6aaa189ddb4ff6b5de8fa3210f2fb42c87b4d12e",
+                "url": "https://api.github.com/repos/symfony/process/zipball/9b8a40b7289767aa7117e957573c2a535efe6585",
+                "reference": "9b8a40b7289767aa7117e957573c2a535efe6585",
                 "shasum": ""
             },
             "require": {
@@ -10808,7 +10808,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v7.1.6"
+                "source": "https://github.com/symfony/process/tree/v7.1.7"
             },
             "funding": [
                 {
@@ -10824,7 +10824,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:20:29+00:00"
+            "time": "2024-11-06T09:25:12+00:00"
         },
         {
             "name": "symfony/property-access",
@@ -13299,35 +13299,37 @@
         },
         {
             "name": "behat/behat",
-            "version": "v3.15.0",
+            "version": "v3.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "132e32fdad69340f503b103a5ccaf5dd72ce7d83"
+                "reference": "18f5f44c80d1cf5711ec27019afcb26b8bc6c3b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/132e32fdad69340f503b103a5ccaf5dd72ce7d83",
-                "reference": "132e32fdad69340f503b103a5ccaf5dd72ce7d83",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/18f5f44c80d1cf5711ec27019afcb26b8bc6c3b0",
+                "reference": "18f5f44c80d1cf5711ec27019afcb26b8bc6c3b0",
                 "shasum": ""
             },
             "require": {
                 "behat/gherkin": "^4.10.0",
-                "behat/transliterator": "^1.2",
+                "behat/transliterator": "^1.5",
+                "composer-runtime-api": "^2.2",
                 "ext-mbstring": "*",
-                "php": "^7.2 || ^8.0",
+                "php": "8.1.* || 8.2.* || 8.3.* || 8.4.* ",
                 "psr/container": "^1.0 || ^2.0",
-                "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/console": "^4.4 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/dependency-injection": "^4.4 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/event-dispatcher": "^4.4 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/translation": "^4.4 || ^5.0 || ^6.0 || ^7.0",
-                "symfony/yaml": "^4.4 || ^5.0 || ^6.0 || ^7.0"
+                "symfony/config": "^5.4 || ^6.4 || ^7.0",
+                "symfony/console": "^5.4 || ^6.4 || ^7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0",
+                "symfony/event-dispatcher": "^5.4 || ^6.4 || ^7.0",
+                "symfony/translation": "^5.4 || ^6.4 || ^7.0",
+                "symfony/yaml": "^5.4 || ^6.4 || ^7.0"
             },
             "require-dev": {
                 "herrera-io/box": "~1.6.1",
-                "phpunit/phpunit": "^8.5 || ^9.0",
-                "symfony/process": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+                "phpunit/phpunit": "^9.6",
+                "symfony/polyfill-php84": "^1.31",
+                "symfony/process": "^5.4 || ^6.4 || ^7.0",
                 "vimeo/psalm": "^4.8"
             },
             "suggest": {
@@ -13379,9 +13381,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Behat/Behat/issues",
-                "source": "https://github.com/Behat/Behat/tree/v3.15.0"
+                "source": "https://github.com/Behat/Behat/tree/v3.16.0"
             },
-            "time": "2024-10-30T07:54:51+00:00"
+            "time": "2024-11-08T12:25:17+00:00"
         },
         {
             "name": "behat/gherkin",
