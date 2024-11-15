@@ -111,7 +111,7 @@ jobs:
           path: tests/TestReports/CoverageReports/PhpUnit
 
       - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           file: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
           flags: phpunit # optional
@@ -265,7 +265,7 @@ jobs:
             tests/TestReports/TestScreenshots
 
       - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           file: tests/TestReports/CoverageReports/Behat/coverage.xml
           flags: behat # optional
