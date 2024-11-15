@@ -57,7 +57,7 @@
     "symfony/validator": "7.1.*",
     "symfony/webpack-encore-bundle": "2.2.*",
     "symfony/yaml": "7.1.*",
-    "symfonycasts/reset-password-bundle": "1.22.*",
+    "symfonycasts/reset-password-bundle": "1.23.*",
     "symfonycasts/verify-email-bundle": "1.17.*",
     "twig/extra-bundle": "3.13.*",
     "twig/twig": "3.14.*"
