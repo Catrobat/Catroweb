@@ -14270,33 +14270,33 @@
         },
         {
             "name": "dvdoug/behat-code-coverage",
-            "version": "v5.3.5",
+            "version": "v5.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dvdoug/behat-code-coverage.git",
-                "reference": "061491580a57bedd6a5bf74c7658f18213ec6993"
+                "reference": "c252c725a6e643e068ae873a4ad1337a13002d3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/061491580a57bedd6a5bf74c7658f18213ec6993",
-                "reference": "061491580a57bedd6a5bf74c7658f18213ec6993",
+                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/c252c725a6e643e068ae873a4ad1337a13002d3b",
+                "reference": "c252c725a6e643e068ae873a4ad1337a13002d3b",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": "^3.10",
+                "behat/behat": "^3.15",
                 "composer-runtime-api": "^2.0",
                 "composer/semver": "^3.0",
                 "php": "^8.1",
                 "phpunit/php-code-coverage": "^10.1||^11.0",
-                "symfony/config": "^5.1.4||^6.0||^7.0",
-                "symfony/console": "^5.3.7||^6.0.9||^7.0",
-                "symfony/dependency-injection": "^5.1.4||^6.0||^7.0",
-                "symfony/event-dispatcher": "^5.0||^6.0||^7.0"
+                "symfony/config": "^5.4.35||^6.3.12||^7.0.3",
+                "symfony/console": "^5.4.35||^6.3.12||^7.0.3",
+                "symfony/dependency-injection": "^5.3.35||^6.3.12||^7.0.3",
+                "symfony/event-dispatcher": "^5.4.35||^6.3.12||^7.0.3"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.49.0",
-                "phpunit/phpunit": "^10.1||^11.0",
-                "symfony/filesystem": "^5.0||^6.0||^7.0"
+                "phpunit/phpunit": "^10.5.12||^11.4.3",
+                "symfony/filesystem": "^5.4.35||^6.3.12||^7.0.3"
             },
             "suggest": {
                 "ext-pcov": "PCOV allows you to collect line coverage only, but is faster than Xdebug",
@@ -14336,7 +14336,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dvdoug/behat-code-coverage/issues",
-                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.3.5"
+                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.3.6"
             },
             "funding": [
                 {
@@ -14344,7 +14344,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-22T17:32:32+00:00"
+            "time": "2024-11-16T20:21:17+00:00"
         },
         {
             "name": "evenement/evenement",
