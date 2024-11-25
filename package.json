@@ -60,7 +60,7 @@
     "npm": "^10.9.0",
     "postcss-loader": "^8.1.1",
     "prettier": "3.3.3",
-    "purgecss-webpack-plugin": "^6.0.0",
+    "purgecss-webpack-plugin": "^7.0.2",
     "sass": "^1.81.0",
     "sass-loader": "^16.0.3",
     "standard": "^17.1.2",
