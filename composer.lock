@@ -4686,16 +4686,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "a8b564873a1d037cb4bf185b3435dcc960120db7"
+                "reference": "51173c3c3c8b13f873522b9f28e7b128241ba331"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/a8b564873a1d037cb4bf185b3435dcc960120db7",
-                "reference": "a8b564873a1d037cb4bf185b3435dcc960120db7",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/51173c3c3c8b13f873522b9f28e7b128241ba331",
+                "reference": "51173c3c3c8b13f873522b9f28e7b128241ba331",
                 "shasum": ""
             },
             "require": {
@@ -4784,40 +4784,35 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/2.0.0"
+                "source": "https://github.com/php-http/HttplugBundle/tree/2.1.0"
             },
-            "time": "2024-09-16T05:11:01+00:00"
+            "time": "2024-11-24T09:50:59+00:00"
         },
         {
             "name": "php-http/logger-plugin",
-            "version": "1.3.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/logger-plugin.git",
-                "reference": "bf47eb5cb379962d276c94da14861669c2313563"
+                "reference": "4a2b447a5ba1a95c3869512ee992f5ba7fd9aa5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/logger-plugin/zipball/bf47eb5cb379962d276c94da14861669c2313563",
-                "reference": "bf47eb5cb379962d276c94da14861669c2313563",
+                "url": "https://api.github.com/repos/php-http/logger-plugin/zipball/4a2b447a5ba1a95c3869512ee992f5ba7fd9aa5f",
+                "reference": "4a2b447a5ba1a95c3869512ee992f5ba7fd9aa5f",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0 || ^8.0",
-                "php-http/client-common": "^1.9 || ^2.0",
-                "php-http/message": "^1.0",
-                "psr/log": "^1.0 || ^2 || ^3",
-                "symfony/polyfill-php73": "^1.17"
+                "php": "^8.2",
+                "php-http/client-common": "^2.0",
+                "php-http/message": "^1.13",
+                "psr/log": "^2 || ^3"
             },
             "require-dev": {
-                "phpspec/phpspec": "^5.1 || ^6.0"
+                "nyholm/psr7": "^1.8",
+                "phpunit/phpunit": "^11.4.3"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Http\\Client\\Common\\Plugin\\": "src/"
@@ -4843,9 +4838,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/logger-plugin/issues",
-                "source": "https://github.com/php-http/logger-plugin/tree/1.3.1"
+                "source": "https://github.com/php-http/logger-plugin/tree/1.4.0"
             },
-            "time": "2024-09-01T06:51:51+00:00"
+            "time": "2024-10-31T14:52:16+00:00"
         },
         {
             "name": "php-http/message",
