@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "078fcfd1cc5cc22a5ab18d98426a99d5",
+    "content-hash": "906f0cf8ac733a420156608ef5c4d360",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7431,21 +7431,21 @@
         },
         {
             "name": "symfony/brevo-mailer",
-            "version": "v7.1.6",
+            "version": "v7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/brevo-mailer.git",
-                "reference": "91d6317b13e4eb4973f7b8387dc8d373f338cce4"
+                "reference": "f8eaa8d16fda38ce31548130aee8e90d5d94d32d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/brevo-mailer/zipball/91d6317b13e4eb4973f7b8387dc8d373f338cce4",
-                "reference": "91d6317b13e4eb4973f7b8387dc8d373f338cce4",
+                "url": "https://api.github.com/repos/symfony/brevo-mailer/zipball/f8eaa8d16fda38ce31548130aee8e90d5d94d32d",
+                "reference": "f8eaa8d16fda38ce31548130aee8e90d5d94d32d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "symfony/mailer": "^5.4.21|^6.2.7|^7.0"
+                "symfony/mailer": "^7.2"
             },
             "conflict": {
                 "symfony/mime": "<6.2"
@@ -7480,7 +7480,7 @@
             "description": "Symfony Brevo Mailer Bridge",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/brevo-mailer/tree/v7.1.6"
+                "source": "https://github.com/symfony/brevo-mailer/tree/v7.2.0"
             },
             "funding": [
                 {
@@ -7496,7 +7496,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:20:29+00:00"
+            "time": "2024-09-28T08:24:38+00:00"
         },
         {
             "name": "symfony/cache",

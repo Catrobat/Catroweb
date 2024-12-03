@@ -38,7 +38,7 @@
     "sonata-project/exporter": "3.3.*",
     "sonata-project/twig-extensions": "2.5.*",
     "symfony/asset": "7.2.*",
-    "symfony/brevo-mailer": "7.1.*",
+    "symfony/brevo-mailer": "7.2.*",
     "symfony/cache": "7.2.*",
     "symfony/console": "7.2.*",
     "symfony/dotenv": "7.2.*",
