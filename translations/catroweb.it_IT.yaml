@@ -35,8 +35,8 @@ noDescription: Nessuna descrizione disponibile.
 credits: Note e crediti
 noCredits: Nessun riconoscimento disponibile.
 notesAndCreditsDescription: Come hai creato questo progetto? Hai usato idee, script o opere altrui? Ringraziali qui.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+projectImportedFromScratch: Questo progetto è stato importato da Scratch. Puoi controllare il progetto originale
+scratchImportedProjectLinkHere: qui.
 country: Paese
 loginText: login
 privacyPolicy: Politica sulla Privacy
@@ -75,7 +75,7 @@ oauthPopUpTitle: "Informazioni accesso account esterno"
 oauthInfo: 'Hai appena usato un account esterno per accedere. Abbiamo creato un nome utente casuale. Se vuoi cambiare il tuo nome utente o creare una nuova password per il tuo account, vai alla pagina del profilo. Clicca %link_start% qui %link_end% per andare alla pagina del tuo profilo'
 oauthHere: "qui"
 statistics: "Statistiche"
-languageSelection: "Language selection"
+languageSelection: "Seleziona la lingua"
 indexPage:
   recommendedSection:
     info:
@@ -98,47 +98,47 @@ follower:
 project:
   welcome:
     title: Benvenuto nel %theme% di Catrobat
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
+    title_mindstorms: Benvenuti nel sito di Catrobat per Mindstorms EV3 e NXT
+    subtitle: Crea storie, giochi e altro ancora...
+    subtitle_embroidery: Cuci i tuoi modelli sulle tue T-shirt, borse, pantaloni o cassa per smartphone!
+    subtitle_mindstorms: Crea i tuoi progetti con i robot Lego Mindstorms EV3 e NXT
+    download: Scarica l'app
     statistics: Più statistiche
   featured: In evidenza
   example: Esempi
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+  newest: Progetti più recenti
+  recommended: Progetti consigliati
+  scratchremixes: Remix da Scratch
+  noProjects: Nessun progetto.
   shareAction: Condividi
   deleteAction: Elimina progetto
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Sei sicuro?
+    Davvero vuoi eliminare "%programName%"?
+    Non ci sarà più modo di ripristinarlo!
+    Sì, eliminalo!
+    Annulla
   deleteNotFoundError: Il progetto da eliminare non può essere trovato usando il tuo utente.
-  private: private
-  public: public
+  private: privato
+  public: pubblico
   setPrivateAction: Imposta privato
   setPublicAction: Imposta pubblico
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
+    Sei sicuro?
+    Se hai impostato '%programName%' a privato, non sarà visto o trovato da altri utenti.
+    Puoi ancora condividere il link del tuo progetto con i tuoi amici. È possibile attivare o disattivare la visibilità toccando l'icona con il lucchetto.
+    Se si imposta "%programName%" a pubblico, può essere visto e trovato da altri utenti.
+    Sì, impostato su pubblico
+    Sì, impostato su privato
     No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  reportCommentConfirmation: Sei sicuro di voler segnalare questo commento?
+  deleteCommentConfirmation: Sei sicuro/a di voler eliminare questo commento?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Eliminazione account?
+    Sei sicuro di voler eliminare il tuo account? Questo cancellerà anche i tuoi progetti caricati e i tuoi commenti!
+    Non c'è modo di ripristinare questa azione!
+    Sì, eliminalo!
+    Annulla
   tooLongName: Il nome del progetto è troppo lungo!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
@@ -806,13 +806,13 @@ checkOutUser: 'Controlla questo utente:'
 community: 'Community di Catrobat'
 back_to_app: 'Esci dalla community'
 category:
-  recent: Newest projects
+  recent: Progetti più recenti
   random: Random projects
   most_viewed: Il più visto
   most_downloaded: Il più scaricato
   example: Esempio
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: Remix da Scratch
+  recommended: Progetti consigliati
   popular: Most popular
 achievements:
   sidebar:
