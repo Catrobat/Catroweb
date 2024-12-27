@@ -20,6 +20,7 @@ import ProjectApi from '../Api/ProjectApi'
 import { ProjectEditorTextFieldModel } from './ProjectEditorTextFieldModel'
 import { ProjectEditorModel } from './ProjectEditorModel'
 import MessageDialogs from '../Components/MessageDialogs'
+import { ProjectReport } from './ProjectReport'
 
 require('./ProjectPage.scss')
 
@@ -28,6 +29,7 @@ const projectShareElement = document.querySelector('.js-project-share')
 const projectDescriptionCreditsElement = document.querySelector('.js-project-description-credits')
 const projectCommentsElement = document.querySelector('.js-project-comments')
 const appLanguageElement = document.querySelector('#app-language')
+const projectReport = document.querySelector('.js-project-report')
 
 let editorNavigation = null
 
@@ -86,7 +88,7 @@ shareLink(
   projectShareElement.dataset.transClipboardFail,
 )
 
-/* TODO: Disable Report Project for now. Needs a separate flag in database - a new concept!
+// TODO: Disable Report Project for now. Needs a separate flag in database - a new concept!
 ProjectReport(
   projectReport.dataset.projectId,
   projectReport.dataset.pathReport,
@@ -104,7 +106,7 @@ ProjectReport(
   projectReport.dataset.constOk,
   projectReport.dataset.loggedIn
 )
-*/
+
 
 Project(
   projectElement.dataset.projectId,

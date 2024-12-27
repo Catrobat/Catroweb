@@ -152,7 +152,8 @@ export function ProjectComments(
   function deleteComment(commentId) {
     const projectComments = document.querySelector('.js-project-comments')
     const deleteCommentUrl = projectComments.dataset.pathDeleteCommentUrl
-
+    console.log(deleteCommentUrl)
+    console.log("test")
     fetch(deleteCommentUrl + '/' + commentId, {
       method: 'DELETE',
     })

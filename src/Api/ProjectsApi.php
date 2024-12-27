@@ -309,9 +309,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   #[\Override]
   public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, int &$responseCode, array &$responseHeaders): void
   {
-    // TODO: Implement projectIdReportPost() method.
 
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
   }
 
   #[\Override]

@@ -95,6 +95,7 @@ export function ProjectReport(
   }
 
   function reportProgram(reason, category) {
+    console.log('Sending report:', { programId, category, reason });
     fetch(reportUrl, {
       method: 'POST',
       headers: {
@@ -102,12 +103,13 @@ export function ProjectReport(
       },
       body: JSON.stringify({
         program: programId,
-        category,
+        category: category,
         note: reason,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log('Response data:', data);
         if (data.statusCode === statusCodeOk) {
           Swal.fire({
             text: reportSentText,
@@ -118,8 +120,8 @@ export function ProjectReport(
             buttonsStyling: false,
             allowOutsideClick: false,
           }).then(() => {
-            window.location.href = '/'
-          })
+            window.location.href = '/';
+          });
         } else {
           Swal.fire({
             title: errorText,
@@ -129,10 +131,11 @@ export function ProjectReport(
             },
             buttonsStyling: false,
             allowOutsideClick: false,
-          })
+          });
         }
       })
       .catch((error) => {
+        console.error('Error reporting program:', error);
         Swal.fire({
           title: errorText,
           text: error.message,
@@ -142,8 +145,8 @@ export function ProjectReport(
           },
           buttonsStyling: false,
           allowOutsideClick: false,
-        })
-      })
+        });
+      });
   }
 
   function getReportDialogHtml(error, oldReason, oldCategory) {
