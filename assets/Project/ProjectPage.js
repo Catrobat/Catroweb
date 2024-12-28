@@ -88,7 +88,6 @@ shareLink(
   projectShareElement.dataset.transClipboardFail,
 )
 
-// TODO: Disable Report Project for now. Needs a separate flag in database - a new concept!
 ProjectReport(
   projectReport.dataset.projectId,
   projectReport.dataset.pathReport,
