@@ -47,16 +47,18 @@ export function ProjectReport(
         confirmButton: 'btn btn-primary',
         cancelButton: 'btn btn-outline-primary',
       },
+
       buttonsStyling: false,
       confirmButtonText: reportButtonText,
       cancelButtonText: cancelText,
       preConfirm: function () {
-        return new Promise(function (resolve) {
-          resolve([
-            document.getElementById('report-reason').value,
-            document.querySelector('input[name="report-category"]:checked').value,
-          ])
-        })
+        const reason = document.getElementById('report-reason').value
+        const category = document.querySelector('input[name="report-category"]:checked').value
+        if (!reason) {
+          Swal.showValidationMessage(reportDialogReason)
+          return false
+        }
+        return [reason, category]
       },
     }).then((result) => {
       if (result.value) {
@@ -110,9 +112,9 @@ export function ProjectReport(
       .then((response) => response.json())
       .then((data) => {
         console.log('Response data:', data);
-        if (data.statusCode === statusCodeOk) {
+        if (data.statusCode === 200) {
           Swal.fire({
-            text: reportSentText,
+            text: data.answer,
             icon: 'success',
             customClass: {
               confirmButton: 'btn btn-primary',
@@ -124,7 +126,8 @@ export function ProjectReport(
           });
         } else {
           Swal.fire({
-            title: errorText,
+            title: 'Error',
+            text: data.answer,
             icon: 'error',
             customClass: {
               confirmButton: 'btn btn-primary',
@@ -137,7 +140,7 @@ export function ProjectReport(
       .catch((error) => {
         console.error('Error reporting program:', error);
         Swal.fire({
-          title: errorText,
+          title: 'Error',
           text: error.message,
           icon: 'error',
           customClass: {

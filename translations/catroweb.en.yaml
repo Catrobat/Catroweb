@@ -177,6 +177,8 @@ project:
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
+  reportError: An error occurred while reporting this project.
+  reportCancel: Cancel
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.

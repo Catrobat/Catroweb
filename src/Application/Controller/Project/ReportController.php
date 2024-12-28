@@ -38,18 +38,20 @@ class ReportController extends AbstractController
     public function reportProject(Request $request): JsonResponse
     {
         $response = [];
-        if (!$request->request->get('program') || !$request->request->get('category') || !$request->request->get('note')) {
+        $data = json_decode($request->getContent(), true);
+
+        if (!isset($data['program']) || !isset($data['category']) || !isset($data['note'])) {
             $response['statusCode'] = 400; // Bad request
             $response['answer'] = $this->translator->trans('errors.post-data', [], 'catroweb');
             $response['preHeaderMessages'] = '';
-            $response ["test"] = $request->request->get('category');
+            $response['test'] = $data;
 
             return new JsonResponse($response);
         }
 
-        $category = strval($request->request->get('category'));
-        $note = strval($request->request->get('note'));
-        $projectId = strval($request->request->get('program'));
+        $category = strval($data['category']);
+        $note = strval($data['note']);
+        $projectId = strval($data['program']);
         $project = $this->project_manager->find($projectId);
         if (null == $project) {
             $response['statusCode'] = 404; // Not found
