@@ -85,7 +85,7 @@
     "symfony/phpunit-bridge": "7.2.*",
     "symfony/stopwatch": "7.0.*",
     "symfony/web-profiler-bundle": "7.1.*",
-    "vimeo/psalm": "5.26.*",
+    "vimeo/psalm": "6.4.*",
     "vincentlanglet/twig-cs-fixer": "^3.1",
     "wapmorgan/php-deprecation-detector": "2.0.*"
   },
