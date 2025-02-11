@@ -112,7 +112,7 @@
     "jwt-decode": "^4.0.0",
     "lazysizes": "^5.3.2",
     "material-icons": "^1.13.12",
-    "sweetalert2": "^11.15.10",
+    "sweetalert2": "^11.16.0",
     "textfilljs": "^1.0.3-a",
     "typeface-roboto": "^1.1.13",
     "vis": "^4.21.0-EOL"
