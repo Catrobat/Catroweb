@@ -59,7 +59,7 @@
     "noop-webpack-plugin": "^1.0.1",
     "npm": "^11.2.0",
     "postcss-loader": "^8.1.1",
-    "prettier": "3.4.2",
+    "prettier": "3.5.3",
     "purgecss-webpack-plugin": "^7.0.2",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.5",
