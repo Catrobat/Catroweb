@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8aaae939b0a913d17fd3702278aeaeb",
+    "content-hash": "d4491177f8e69e4bb7dccbf7068af098",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1569,16 +1569,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "3.3.1",
+            "version": "3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "b1f8253105aa5382c495e5f9f8ef34e297775428"
+                "reference": "c9557c588b3a70ed93caff069d0aa75737f25609"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/b1f8253105aa5382c495e5f9f8ef34e297775428",
-                "reference": "b1f8253105aa5382c495e5f9f8ef34e297775428",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/c9557c588b3a70ed93caff069d0aa75737f25609",
+                "reference": "c9557c588b3a70ed93caff069d0aa75737f25609",
                 "shasum": ""
             },
             "require": {
@@ -1653,9 +1653,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/3.3.1"
+                "source": "https://github.com/doctrine/orm/tree/3.3.2"
             },
-            "time": "2024-12-19T07:08:14+00:00"
+            "time": "2025-02-04T19:43:15+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -6922,37 +6922,37 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "4.17.1",
+            "version": "4.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "3d6b27c55594cdbf2a6e4ba440df91cf576b486b"
+                "reference": "c8f557f53c94d4395223686a31f5f46a81109da4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/3d6b27c55594cdbf2a6e4ba440df91cf576b486b",
-                "reference": "3d6b27c55594cdbf2a6e4ba440df91cf576b486b",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/c8f557f53c94d4395223686a31f5f46a81109da4",
+                "reference": "c8f557f53c94d4395223686a31f5f46a81109da4",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^3.4 || ^4.0",
                 "doctrine/doctrine-bundle": "^2.10",
                 "doctrine/orm": "^2.17 || ^3.0",
-                "doctrine/persistence": "^3.0.2",
-                "php": "^8.0",
-                "sonata-project/admin-bundle": "^4.18",
+                "doctrine/persistence": "^3.0.2 || ^4.0",
+                "php": "^8.1",
+                "sonata-project/admin-bundle": "^4.34",
                 "sonata-project/exporter": "^2.0 || ^3.0",
                 "sonata-project/form-extensions": "^1.19 || ^2.0",
-                "symfony/config": "^5.4 || ^6.2 || ^7.0",
-                "symfony/console": "^5.4 || ^6.2 || ^7.0",
-                "symfony/dependency-injection": "^5.4 || ^6.2 || ^7.0",
-                "symfony/doctrine-bridge": "^5.4 || ^6.2 || ^7.0",
-                "symfony/form": "^5.4 || ^6.2 || ^7.0",
-                "symfony/framework-bundle": "^5.4 || ^6.2 || ^7.0",
-                "symfony/http-foundation": "^5.4 || ^6.2 || ^7.0",
-                "symfony/http-kernel": "^5.4 || ^6.2 || ^7.0",
-                "symfony/options-resolver": "^5.4 || ^6.2 || ^7.0",
-                "symfony/property-access": "^5.4 || ^6.2 || ^7.0",
+                "symfony/config": "^6.4 || ^7.1",
+                "symfony/console": "^6.4 || ^7.1",
+                "symfony/dependency-injection": "^6.4 || ^7.1",
+                "symfony/doctrine-bridge": "^6.4 || ^7.1",
+                "symfony/form": "^6.4 || ^7.1",
+                "symfony/framework-bundle": "^6.4 || ^7.1",
+                "symfony/http-foundation": "^6.4 || ^7.1",
+                "symfony/http-kernel": "^6.4 || ^7.1",
+                "symfony/options-resolver": "^6.4 || ^7.1",
+                "symfony/property-access": "^6.4 || ^7.1",
                 "symfony/security-acl": "^3.0",
                 "twig/twig": "^3.0"
             },
@@ -6965,10 +6965,12 @@
             },
             "require-dev": {
                 "dama/doctrine-test-bundle": "^8.0",
-                "doctrine/doctrine-fixtures-bundle": "^3.4",
+                "doctrine/doctrine-fixtures-bundle": "^3.4 || ^4.0",
+                "ext-pdo_sqlite": "*",
                 "friendsofphp/php-cs-fixer": "^3.4",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.2 || ^5.0",
                 "phpstan/extension-installer": "^1.0",
+                "phpstan/phpdoc-parser": "^1.0",
                 "phpstan/phpstan": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.0",
@@ -6976,16 +6978,16 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.19",
+                "rector/rector": "^1.1",
                 "sonata-project/block-bundle": "^5.0",
                 "sonata-project/entity-audit-bundle": "^1.1",
-                "symfony/browser-kit": "^5.4 || ^6.2 || ^7.0",
-                "symfony/css-selector": "^5.4 || ^6.2 || ^7.0",
+                "symfony/browser-kit": "^6.4 || ^7.1",
+                "symfony/css-selector": "^6.4 || ^7.1",
                 "symfony/panther": "^2.0.1",
-                "symfony/phpunit-bridge": "^6.2 || ^7.0",
-                "symfony/templating": "^5.4 || ^6.2 || ^7.0",
-                "symfony/uid": "^5.4 || ^6.2 || ^7.0",
-                "symfony/yaml": "^5.4 || ^6.2 || ^7.0",
+                "symfony/phpunit-bridge": "^6.4 || ^7.1",
+                "symfony/templating": "^6.4 || ^7.1",
+                "symfony/uid": "^6.4 || ^7.1",
+                "symfony/yaml": "^6.4 || ^7.1",
                 "vimeo/psalm": "^5.7",
                 "weirdan/doctrine-psalm-plugin": "^2.0"
             },
@@ -7031,7 +7033,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.17.1"
+                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.18.0"
             },
             "funding": [
                 {
@@ -7051,7 +7053,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-24T11:52:46+00:00"
+            "time": "2025-02-04T10:07:23+00:00"
         },
         {
             "name": "sonata-project/exporter",
