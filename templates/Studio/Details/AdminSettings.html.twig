@@ -30,8 +30,8 @@
             label: '' ~ 'studio.details.admin_settings.studio_name'|trans({}, 'catroweb'),
             value: studio.name,
             name: 'studio_name',
-            leading_icon: 'blur_circular'
-          }
+            leading_icon: 'blur_circular',
+          },
         }) }}
 
         {{ include('Components/TextArea.html.twig', {
@@ -42,8 +42,8 @@
             value: studio.description,
             name: 'studio_description',
             max_length: '1000',
-            rows: '4'
-          }
+            rows: '4',
+          },
         }) }}
 
         {{ include('Components/Switch.html.twig', {
@@ -52,8 +52,8 @@
             id: 'studio-setting__switch-enable-comments',
             label: '' ~ 'studio.details.admin_settings.toggle_allow_comments'|trans({}, 'catroweb'),
             selected: studio.isAllowComments,
-            name: 'allow_comments'
-          }
+            name: 'allow_comments',
+          },
         }) }}
 
         {{ include('Components/Switch.html.twig', {
@@ -62,8 +62,8 @@
             id: 'studio-setting__switch-studio-privacy',
             label: '' ~ 'studio.details.admin_settings.toggle_privacy'|trans({}, 'catroweb'),
             selected: studio.isPublic,
-            name: 'is_public'
-          }
+            name: 'is_public',
+          },
         }) }}
         {% if not studio.isPublic %}
         <h3>Pending Join Requests</h3>
@@ -76,8 +76,8 @@
                 id: 'studio-setting__switch-studio-pending-join-' ~ request.id,
                 label: request.user,
                 selected: 1,
-                name: 'switches[' ~ request.id ~ ']'
-              }
+                name: 'switches[' ~ request.id ~ ']',
+              },
             }) }}
             </li>
           {% endfor %}
@@ -99,8 +99,8 @@
                   id: 'studio-setting__switch-studio-declined-join-' ~ request.id,
                   label: request.user,
                   selected: 0,
-                  name: 'approved_switches[' ~ request.id ~ ']'
-                }
+                  name: 'approved_switches[' ~ request.id ~ ']',
+                },
               }) }}
 
             </li>

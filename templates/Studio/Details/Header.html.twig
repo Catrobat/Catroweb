@@ -25,7 +25,7 @@
           <div {{ stimulus_controller('studio--member-list', {
             url: path('studio_members_list'),
             studioId: studio.id,
-            listElementId: 'studioDetailMembersList'
+            listElementId: 'studioDetailMembersList',
           }) }}
           >
             <a type="button"
@@ -41,8 +41,8 @@
               {
                 id: 'studioDetailMembersListModal',
                 title: '' ~ 'studio.details.members_list.title'|trans({}, 'catroweb'),
-                list_id: 'studioDetailMembersList'
-              }
+                list_id: 'studioDetailMembersList',
+              },
             }) }}
           </div>
         {% else %}
@@ -58,7 +58,7 @@
           <div {{ stimulus_controller('studio--activity-list', {
             url: path('studio_activities_list'),
             studioId: studio.id,
-            listElementId: 'studioDetailActivityList'
+            listElementId: 'studioDetailActivityList',
           }) }}
           >
             <a type="button"
@@ -75,8 +75,8 @@
               {
                 id: 'studioDetailActivityListModal',
                 title: '' ~ 'studio.details.activity_list.title'|trans({}, 'catroweb'),
-                list_id: 'studioDetailActivityList'
-              }
+                list_id: 'studioDetailActivityList',
+              },
             }) }}
           </div>
         {% else %}
