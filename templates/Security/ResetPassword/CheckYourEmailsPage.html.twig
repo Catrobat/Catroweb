@@ -4,7 +4,7 @@
     <h1 class="h2">{{ 'resetPassword.check.title'|trans({}, 'catroweb') }}</h1>
     <p>
         {{ 'resetPassword.check.description'|trans({
-            '%time%': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')
+            '%time%': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle'),
         }, 'catroweb') }}
     </p>
      <p>
@@ -13,7 +13,7 @@
     </p>
     <p>
         {{ 'resetPassword.check.descriptionThree'|trans({
-            '%email-webmaster%': '<a href="mailto:webmaster@catrobat.org">webmaster@catrobat.org</a>'
+            '%email-webmaster%': '<a href="mailto:webmaster@catrobat.org">webmaster@catrobat.org</a>',
         }, 'catroweb')|raw }}
     </p>
 {% endblock %}

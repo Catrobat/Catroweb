@@ -17,9 +17,9 @@
       (
       {
         '%user_link%': '<a href="' ~ path('profile', {id: notification.getLikeFrom.id|escape}) ~ '">' ~ notification.getLikeFrom.getUserName|escape ~ '</a>',
-        '%program_link%': '<a href="' ~ path('program', {id: notification.program.id|escape}) ~ '">' ~ notification.program.name|escape ~ '</a>'
+        '%program_link%': '<a href="' ~ path('program', {id: notification.program.id|escape}) ~ '">' ~ notification.program.name|escape ~ '</a>',
       },
-      'catroweb'
+      'catroweb',
     )
     |raw }}
   </div>

@@ -8,15 +8,15 @@
       id: 'security_settings-cancel_action',
       icon: 'close',
       label: '' ~ 'cancel'|trans({}, 'catroweb'),
-      dismiss: true
+      dismiss: true,
     },
     right_action:
     {
       id: 'security_settings-save_action',
       icon: 'done',
       label: '' ~ 'myprofile.done'|trans({}, 'catroweb'),
-      dismiss: false
-    }
+      dismiss: false,
+    },
   }
 %}
 {% block content %}
@@ -29,8 +29,8 @@
         name: 'current-password',
         trailing_icon: 'visibility',
         type: 'password',
-        tabindex: 1
-      }
+        tabindex: 1,
+      },
     }) }}
 
     {{ include('Components/TextField.html.twig', {
@@ -41,8 +41,8 @@
         name: 'password',
         trailing_icon: 'visibility',
         type: 'password',
-        tabindex: 2
-      }
+        tabindex: 2,
+      },
     }) }}
 
     {{ include('Components/TextField.html.twig', {
@@ -53,8 +53,8 @@
         name: 'repeat-password',
         trailing_icon: 'visibility',
         type: 'password',
-        tabindex: 3
-      }
+        tabindex: 3,
+      },
     }) }}
 
   </form>
