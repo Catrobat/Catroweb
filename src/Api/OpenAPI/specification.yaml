@@ -20,7 +20,7 @@ servers:
 tags:
   - name: 'Authentication'
     description: "
-      * To have **full access** to all our features it is necessary to be **authenticate**d.\n
+      * To have **full access** to all our features it is necessary to be **authenticated**.\n
       * Our authentication system utilizes **JWT** (https://jwt.io/introduction).\n
       * The bearer token you retrieve on login must be send in the **Authorization Header** of all following requests.\n
       - **Example**&#58; `curl -H \"Authorization: Bearer sagu4235afsyvyvdgsdqaWER22\" /route`

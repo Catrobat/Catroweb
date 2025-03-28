@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "src/Api/OpenAPI/specification.yaml"
+      - 'src/Api/OpenAPI/specification.yaml'
   workflow_dispatch:
 
 jobs:
