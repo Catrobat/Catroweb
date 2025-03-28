@@ -164,7 +164,7 @@ jobs:
       - name: PHP Copy Paste Detector
         uses: StephaneBour/actions-php-cpd@8.2
         with:
-          args: src
+          args: --exclude=src/Api/OpenAPI/Server src
 
   #
   # phpdd (Php Code Fixer):

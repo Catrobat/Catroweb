@@ -17,7 +17,7 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     ->controller([App\Api\Services\Authentication\JWTTokenRefreshService::class, 'refresh'])
   ;
 
-  $routingConfigurator->import('@OpenAPIServerBundle/Resources/config/routing.yaml')
+  $routingConfigurator->import('../src/Api/OpenAPI/Server/Resources/config/routing.yaml')
     ->prefix('/api')
     ->defaults(['_format' => 'json'])
   ;

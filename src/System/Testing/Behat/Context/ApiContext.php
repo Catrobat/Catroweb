@@ -2882,8 +2882,8 @@ class ApiContext implements Context
     foreach ($categories as $category) {
       Assert::assertIsString($category['type']);
       Assert::assertIsString($category['name']);
-      Assert::assertIsArray($category['projectsList']);
-      foreach ($category['projectsList'] as $project) {
+      Assert::assertIsArray($category['projects_list']);
+      foreach ($category['projects_list'] as $project) {
         Assert::assertEquals(count($this->default_project_structure), is_countable($project) ? count($project) : 0,
           'Number of project fields should be '.count($this->default_project_structure));
         foreach ($this->default_project_structure as $key) {
