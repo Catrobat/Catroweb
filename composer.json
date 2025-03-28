@@ -5,8 +5,8 @@
   "description": "Catrobat's Share Community Platform",
   "require": {
     "php": ">=8.3",
-    "ext-bcmath": "*",
     "ext-SimpleXML": "*",
+    "ext-bcmath": "*",
     "ext-gd": "*",
     "ext-imagick": "*",
     "ext-json": "*",
@@ -16,7 +16,6 @@
     "ext-zip": "*",
     "beberlei/doctrineextensions": "1.5.*",
     "bugsnag/bugsnag-symfony": "^1.14",
-    "catrobat/capi": "1.6.*",
     "codercat/jwk-to-pem": "1.1.*",
     "doctrine/dbal": "4.2.*",
     "doctrine/doctrine-bundle": "2.13.*",
@@ -28,6 +27,7 @@
     "google/apiclient": "2.18.*",
     "google/cloud-translate": "1.20.*",
     "hwi/oauth-bundle": "2.2.*",
+    "jms/serializer-bundle": "*",
     "lexik/jwt-authentication-bundle": "3.1.*",
     "php-http/httplug-bundle": "^2.0",
     "ramsey/uuid": "4.7.*",
@@ -117,7 +117,8 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "src/"
+      "App\\": "src/",
+      "OpenAPI\\": "src/Api/OpenAPI"
     }
   },
   "autoload-dev": {
@@ -146,11 +147,5 @@
       "allow-contrib": true,
       "require": "7.2.*"
     }
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/Catrobat/Catroweb-API"
-    }
-  ]
+  }
 }

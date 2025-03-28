@@ -21,6 +21,8 @@
             <directory name="vendor" />
             <!-- Legacy code that will be removed in the future -->
             <directory name="src/Project/CatrobatCode"/>
+            <!-- Generated code -->
+            <directory name="src/Api/OpenAPI/Server"/>
         </ignoreFiles>
     </projectFiles>
 

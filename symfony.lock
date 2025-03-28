@@ -293,24 +293,16 @@
             "config/routes/hwi_oauth_routing.yaml"
         ]
     },
-    "jms/metadata": {
-        "version": "1.7.0"
-    },
-    "jms/serializer": {
-        "version": "1.14.1"
-    },
     "jms/serializer-bundle": {
-        "version": "2.0",
+        "version": "5.5",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.0",
-            "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
+            "branch": "main",
+            "version": "4.0",
+            "ref": "cc04e10cf7171525b50c18b36004edf64cb478be"
         },
         "files": [
-            "config/packages/dev/jms_serializer.yaml",
-            "config/packages/jms_serializer.yaml",
-            "config/packages/prod/jms_serializer.yaml"
+            "config/packages/jms_serializer.yaml"
         ]
     },
     "knplabs/knp-menu": {

@@ -149,8 +149,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       __DIR__.'/../src/Kernel.php',                // Exclude Kernel, as it's not a service
       __DIR__.'/../src/System/Testing',            // Exclude testing classes
       __DIR__.'/../src/DB/Entity',                 // Exclude Doctrine entities from DI container
+      __DIR__.'/../src/Api/OpenAPI',               // OpenAPI namespace has its own service definitions
     ])
   ;
+
+  // Import OpenAPI service definitions from YAML
+  $containerConfigurator->import(__DIR__.'/../src/Api/OpenAPI/Server/Resources/config/services.yaml');
 
   // Register additional vendor classes as services
   $services->set(UuidGenerator::class);
