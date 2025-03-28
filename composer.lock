@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acfde83afee62367f395aaa9cb4add15",
+    "content-hash": "e3d47ab26620a68d47d11b1398a10ccc",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -14028,39 +14028,39 @@
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "4.0.0",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "90185317e6bb3d845667c5ebd444d9c83ae19a01"
+                "reference": "a06db6b81ff20a2980bf92063d80c013bb8b4b7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/90185317e6bb3d845667c5ebd444d9c83ae19a01",
-                "reference": "90185317e6bb3d845667c5ebd444d9c83ae19a01",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/a06db6b81ff20a2980bf92063d80c013bb8b4b7c",
+                "reference": "a06db6b81ff20a2980bf92063d80c013bb8b4b7c",
                 "shasum": ""
             },
             "require": {
                 "doctrine/data-fixtures": "^2.0",
                 "doctrine/doctrine-bundle": "^2.2",
                 "doctrine/orm": "^2.14.0 || ^3.0",
-                "doctrine/persistence": "^2.4 || ^3.0",
+                "doctrine/persistence": "^2.4 || ^3.0 || ^4.0",
                 "php": "^8.1",
                 "psr/log": "^2 || ^3",
-                "symfony/config": "^5.4 || ^6.0 || ^7.0",
-                "symfony/console": "^5.4 || ^6.0 || ^7.0",
-                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
+                "symfony/config": "^6.4 || ^7.0",
+                "symfony/console": "^6.4 || ^7.0",
+                "symfony/dependency-injection": "^6.4 || ^7.0",
                 "symfony/deprecation-contracts": "^2.1 || ^3",
-                "symfony/doctrine-bridge": "^5.4.48 || ^6.4.16 || ^7.1.9",
-                "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0"
+                "symfony/doctrine-bridge": "^6.4.16 || ^7.1.9",
+                "symfony/http-kernel": "^6.4 || ^7.0"
             },
             "conflict": {
                 "doctrine/dbal": "< 3"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^12",
-                "phpstan/phpstan": "^2",
-                "phpunit/phpunit": "^10.5.38 || ^11"
+                "doctrine/coding-standard": "13.0.0",
+                "phpstan/phpstan": "2.1.11",
+                "phpunit/phpunit": "^10.5.38 || 11.4.14"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -14094,7 +14094,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineFixturesBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineFixturesBundle/tree/4.0.0"
+                "source": "https://github.com/doctrine/DoctrineFixturesBundle/tree/4.1.0"
             },
             "funding": [
                 {
@@ -14110,7 +14110,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-05T18:35:55+00:00"
+            "time": "2025-03-26T10:56:26+00:00"
         },
         {
             "name": "dvdoug/behat-code-coverage",
