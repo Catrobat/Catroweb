@@ -1,4 +1,0 @@
-    when program started 
-        forever
-            set X to (100)
-        endless loop

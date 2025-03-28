@@ -1,7 +1,0 @@
-{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
-
-{% block field %}
-  <div>
-    <img style="height: 5em; max-width: none!important; background-color: {{ object.getBannerColor() }}" src="{{ asset(object.getBadgeLockedSvgPath()) }}" alt="Badge locked">
-  </div>
-{% endblock %}

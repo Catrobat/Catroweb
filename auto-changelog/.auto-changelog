@@ -1,6 +1,0 @@
-{
-  "output": "CHANGELOG_AUTO.md",
-  "template": "catroweb.hbs",
-  "unreleased": true,
-  "commitLimit": false
-}
