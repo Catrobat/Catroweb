@@ -339,7 +339,7 @@ myprofile:
   profileSettings: Настройки профиля
   securitySettings: Настройки безопасности
   accountSettings: Настройки аккаунта
-  accountVerification: Verify account
+  accountVerification: Верифицировать аккаунт
   account: Аккаунт
   editProfile: Изменить профиль
   edit: Изменить
@@ -356,10 +356,10 @@ myprofile:
   editAccountSettings: Изменить настройки аккаунта
   profileChangeSuccess: Ваш профиль был успешно изменен.
   unspecifiedError: Произошла неизвестная ошибка во время изменения вашего профиля. Пожалуйста, свяжитесь с нами.
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  verifyAccountText: Мы отправим вам письмо по электронной почте со ссылкой, чтобы верифицировать ваш аккаунт. Убедитесь, что вы перейдете по ссылке в течении следующего часа, так как вы можете отправить только 1 запрос за день.
+  verifyAccountButton: Отправить письмо
+  verifyAccountMailSent: Письмо было отправлено успешно. Пожалуйста, проверьте свою электронную почту
+  verifyAccountMailFailed: Вы можете отправлять запрос на письмо 1 раз в день
 licenseToPlay:
   link: 'Лицензия на игру'
   title: 'Лицензия на игру - Указывайте источник и делитесь'
@@ -728,8 +728,8 @@ codeStatistics:
   deviceBricks: 'Устройство'
   specialBricks: 'Особые'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "Присоединяйтесь к более чем %user_count% творческих умов!"
+  text: "С %project_count% уже опубликованными великолепными проектами, следующим может быть ваш. Скачайте наше приложение и начните создавать сегодня"
 privacy-policy:
   header: Политика конфиденциальности
   version: Версия 2.2, 17 октября 2019 года
@@ -865,8 +865,8 @@ achievements:
         title: "Лингвист"
         description: "Перевести ваши проекты на 5 языков"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "Верифицировано"
+        description: "Верифицировать ваш аккаунт"
 tags:
   title: '{0} |{1} Отметка |]1,Inf] Отметки'
   tag:

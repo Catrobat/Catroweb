@@ -1,0 +1,26 @@
+name: Deploy Swagger UI with API Spec
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/Api/OpenAPI/specification.yaml'
+  workflow_dispatch:
+
+jobs:
+  deploy-swagger-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Generate new Swagger UI
+        uses: Legion2/swagger-ui-action@v1
+        with:
+          output: swagger-ui
+          spec-file: src/Api/OpenAPI/specification.yaml
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: swagger-ui

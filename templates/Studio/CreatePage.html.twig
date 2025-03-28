@@ -19,8 +19,8 @@
         label: '' ~ 'studio.studio_name'|trans({}, 'catroweb'),
         name: 'name',
         leading_icon: 'badge',
-        tabindex: 1
-      }
+        tabindex: 1,
+      },
     }) }}
 
     {{ include('Components/TextField.html.twig', {
@@ -30,8 +30,8 @@
         label: '' ~ 'studio.studio_description'|trans({}, 'catroweb'),
         name: 'description',
         leading_icon: 'description',
-        tabindex: 2
-      }
+        tabindex: 2,
+      },
     }) }}
 
     {{ include('Components/Switch.html.twig', {
@@ -40,8 +40,8 @@
         id: 'studio-is-public',
         label: '' ~ 'studio.is_public'|trans({}, 'catroweb'),
         selected: 1,
-        name: 'is-public'
-      }
+        name: 'is-public',
+      },
     }) }}
 
     {{ include('Components/Switch.html.twig', {
@@ -50,8 +50,8 @@
         id: 'studio-enable-comments',
         label: '' ~ 'studio.enable_comments'|trans({}, 'catroweb'),
         selected: 1,
-        name: 'enable-comments'
-      }
+        name: 'enable-comments',
+      },
     }) }}
 
     <button class="btn btn-secondary" style="position: relative;">

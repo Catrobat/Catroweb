@@ -8,15 +8,15 @@
       id: 'profile_settings-cancel_action',
       icon: 'close',
       label: '' ~ 'cancel'|trans({}, 'catroweb'),
-      dismiss: true
+      dismiss: true,
     },
     right_action:
     {
       id: 'profile_settings-save_action',
       icon: 'done',
       label: '' ~ 'myprofile.done'|trans({}, 'catroweb'),
-      dismiss: false
-    }
+      dismiss: false,
+    },
   }
 %}
 {% block content %}
@@ -29,8 +29,8 @@
         value: username,
         name: 'username',
         leading_icon: 'person',
-        tabindex: 1
-      }
+        tabindex: 1,
+      },
     }) }}
 
     {{ include('Components/TextField.html.twig', {
@@ -41,8 +41,8 @@
         value: firstMail,
         name: 'email',
         leading_icon: 'email',
-        tabindex: 2
-      }
+        tabindex: 2,
+      },
     }) }}
 
     {{ include('Components/TextField.html.twig', {
@@ -54,8 +54,8 @@
         name: 'currently_working_on',
         leading_icon: 'schedule',
         required: false,
-        tabindex: 3
-      }
+        tabindex: 3,
+      },
     }) }}
 
     {{ include('Components/TextArea.html.twig', {
@@ -67,8 +67,8 @@
         name: 'about',
         leading_icon: 'description',
         rows: '4',
-        mb: 'mb-4'
-      }
+        mb: 'mb-4',
+      },
     }) }}
 
   </form>

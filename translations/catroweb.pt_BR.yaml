@@ -336,7 +336,7 @@ myprofile:
   profileSettings: Configurações de perfil
   securitySettings: Configurações de segurança
   accountSettings: Configurações da conta
-  accountVerification: Verify account
+  accountVerification: Verificar conta
   account: Conta
   editProfile: Editar perfil
   edit: Editar
@@ -353,10 +353,10 @@ myprofile:
   editAccountSettings: Editar configurações da conta
   profileChangeSuccess: O seu perfil foi atualizado com sucesso.
   unspecifiedError: Ocorreu um erro não especificado ao alterar seu perfil. Entre em contato conosco.
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  verifyAccountText: Enviaremos um e-mail com um link para verificar sua conta. Não se esqueça de clicar no link até a próxima hora, pois você só pode solicitar um e-mail por dia.
+  verifyAccountButton: Enviar e-mail
+  verifyAccountMailSent: E-mail enviado com sucesso. Verifique sua caixa de entrada
+  verifyAccountMailFailed: Você só pode solicitar um e-mail por dia
 licenseToPlay:
   link: 'Licença para jogar'
   title: 'Licença para jogar - Dê crédito e compartilhe'
@@ -601,18 +601,18 @@ api:
     notFound: 'O projeto a ser alterado não foi encontrado.'
     forbidden: 'Alterações no projeto não permitido. Você ainda está logado(a)?'
   createStudio:
-    nameMissing: 'Name missing'
+    nameMissing: 'Nome está faltando'
     nameEmpty: 'O nome não pode estar vazio'
-    nameTooShort: 'Name too short'
+    nameTooShort: 'Nome muito curto'
     nameTooLong: 'Nome muito longo'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
+    nameAlreadyInUse: 'Nome já em uso'
+    descriptionMissing: 'Descrição está faltando'
+    descriptionEmpty: 'Descrição vazia'
+    descriptionTooShort: 'Descrição muito curta'
     descriptionTooLong: 'Descrição muito longa '
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    imageFileInvalid: 'Arquivo de imagem inválido'
+    imageFileInvalidType: 'Tipo de arquivo de imagem inválido'
+    imageFileTooLarge: 'Arquivo de imagem muito grande'
 #languages and countries
 language:
   arabic: Árabe
@@ -725,8 +725,8 @@ codeStatistics:
   deviceBricks: 'Dispositivo'
   specialBricks: 'Especiais'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "Junte-se a mais de %user_count% mentes incríveis!"
+  text: "Com %project_count% projetos incríveis já compartilhados, o próximo pode ser o seu. Baixe nosso app e comece a criar hoje"
 privacy-policy:
   header: Política de Privacidade
   version: Versão 2.2, 17 de Outubro de 2019
@@ -862,8 +862,8 @@ achievements:
         title: "Linguista"
         description: "Traduza seus projetos para 5 idiomas"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "Verificado"
+        description: "Verifique sua conta"
 tags:
   title: 'Etiquetas'
   tag:
@@ -908,11 +908,11 @@ studio:
   cancel_studio: 'Cancelar'
   studio_name: 'Nome do estúdio'
   studio_description: 'Descrição do estúdio'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
-  cover_image_alt: 'Your cover image'
+  is_public: 'Tornar público?'
+  enable_comments: 'Permitir comentários?'
+  cover_image: 'Enviar capa'
+  cover_image_empty: 'Nenhuma imagem selecionada. O tamanho do arquivo deve ser inferior a 1mb.'
+  cover_image_alt: 'Sua imagem de capa'
   join: 'Entrar'
   leave: 'Sair'
   report: 'Reportar'

@@ -25,8 +25,8 @@
               label: '' ~ 'login.username'|trans({}, 'catroweb'),
               name: '_username',
               leading_icon: 'person',
-              tabindex: 1
-            }
+              tabindex: 1,
+            },
           }) }}
 
           {{ include('Components/TextField.html.twig', {
@@ -37,8 +37,8 @@
               name: '_email',
               type: 'email',
               leading_icon: 'email',
-              tabindex: 2
-            }
+              tabindex: 2,
+            },
           }) }}
 
           {{ include('Components/TextField.html.twig', {
@@ -50,13 +50,13 @@
               type: 'password',
               trailing_icon: 'visibility',
               leading_icon: 'lock',
-              tabindex: 3
-            }
+              tabindex: 3,
+            },
           }) }}
 
           <p class="subtext">{{ 'register.subText'|trans({
               '%var1%': '<a id="privacyPolicy" href="' ~ path('privacypolicy') ~ '">' ~ 'privacyPolicy'|trans({}, 'catroweb') ~ '</a>',
-              '%var2%': '<a id="termsOfUse" href="' ~ path('termsOfUse') ~ '">' ~ 'termsOfUse.title'|trans({}, 'catroweb') ~ '</a>'
+              '%var2%': '<a id="termsOfUse" href="' ~ path('termsOfUse') ~ '">' ~ 'termsOfUse.title'|trans({}, 'catroweb') ~ '</a>',
             }, 'catroweb')|raw }}
           </p>
 

@@ -10,7 +10,7 @@
   <i id="{{ id }}__spinner{{ suffix|default('') }}" class="material-icons d-none text-start">
     {{ include('Components/LoadingSpinner.html.twig', {
       spinner_id: id ~ '__spinner' ~ suffix|default(),
-      size: 'small'}
+      size: 'small'},
     ) }}
   </i>
 

@@ -8,18 +8,18 @@
             {% set translationParams = {} %}
             {% if maintenanceStart is not null %}
                 {% set translationParams = translationParams|merge({
-                    maintenanceStart: '<span class="maintenanceStart-start-date bold-text">' ~ maintenanceStart.format('Y-m-d') ~ '</span>'
+                    maintenanceStart: '<span class="maintenanceStart-start-date bold-text">' ~ maintenanceStart.format('Y-m-d') ~ '</span>',
                 }) %}
             {% endif %}
             {% if maintenanceEnd is not null %}
                 {% set translationParams = translationParams|merge({
-                    maintenanceEnd: '<span class="maintenanceStart-end-date bold-text">' ~ maintenanceEnd.format('Y-m-d') ~ '</span>'
+                    maintenanceEnd: '<span class="maintenanceStart-end-date bold-text">' ~ maintenanceEnd.format('Y-m-d') ~ '</span>',
                 }) %}
 
             {% endif %}
             {% if featureName is defined %}
                 {% set translationParams = translationParams|merge({
-                    featureName: '<span class="maintenance-feature-name bold-text">' ~ featureName ~ '</span>'
+                    featureName: '<span class="maintenance-feature-name bold-text">' ~ featureName ~ '</span>',
                 }) %}
             {% endif %}
             <span>
@@ -35,7 +35,7 @@
             <div class="additional-info-section" id="additional-info-{{ code }}">
              <span>
                       {% set translationParams = translationParams|merge({
-                          additionalInfo: '<span class="maintenance-additionalinfo-text  bold-text">' ~ additionalInfo ~ '</span>'
+                          additionalInfo: '<span class="maintenance-additionalinfo-text  bold-text">' ~ additionalInfo ~ '</span>',
                       }) %}
                 {{ 'maintenanceinformations.maintenance_information.additional_info'|trans(translationParams, 'catroweb')|raw }}
              </span>
