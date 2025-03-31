@@ -4,7 +4,7 @@
   "license": "MIT",
   "description": "Catrobat's Share Community Platform",
   "require": {
-    "php": ">=8.3",
+    "php": ">=8.4",
     "ext-SimpleXML": "*",
     "ext-bcmath": "*",
     "ext-gd": "*",
@@ -85,23 +85,23 @@
     "symfony/phpunit-bridge": "7.2.*",
     "symfony/stopwatch": "7.0.*",
     "symfony/web-profiler-bundle": "7.2.*",
-    "vimeo/psalm": "5.26.*",
+    "vimeo/psalm": "6.10.*",
     "vincentlanglet/twig-cs-fixer": "^3.1",
     "wapmorgan/php-deprecation-detector": "2.0.*"
   },
   "config": {
     "platform": {
-      "php": "8.3",
-      "ext-curl": "8.3",
-      "ext-gd": "8.3",
+      "php": "8.4",
+      "ext-curl": "8.4",
+      "ext-gd": "8.4",
       "ext-imagick": "3.4.4",
       "ext-json": "1.7.0",
-      "ext-mbstring": "8.3",
-      "ext-pcntl": "8.3",
-      "ext-posix": "8.3",
-      "ext-xml": "8.3",
-      "ext-zip": "8.3",
-      "ext-bcmath": "8.3"
+      "ext-mbstring": "8.4",
+      "ext-pcntl": "8.4",
+      "ext-posix": "8.4",
+      "ext-xml": "8.4",
+      "ext-zip": "8.4",
+      "ext-bcmath": "8.4"
     },
     "bin-dir": "bin",
     "preferred-install": {
