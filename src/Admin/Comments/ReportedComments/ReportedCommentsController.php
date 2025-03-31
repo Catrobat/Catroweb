@@ -36,7 +36,10 @@ class ReportedCommentsController extends CRUDController
 
     $report->setState(3);
     $this->admin->update($report);
-    $this->addFlash('sonata_flash_success', 'Project '.$report->getId().' is no longer reported');
+    $id = $report->getId();
+    if (null !== $id) {
+      $this->addFlash('sonata_flash_success', "Project {$id} is no longer reported");
+    }
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }

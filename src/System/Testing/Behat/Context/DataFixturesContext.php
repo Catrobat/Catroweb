@@ -1697,7 +1697,7 @@ class DataFixturesContext implements Context
           && $provider == $row['provider']
           && $usage_count == $row['usage_count']);
 
-      Assert::assertEquals(1, count($matching_row), 'row not found: '.$comment_id);
+      Assert::assertEquals(1, count($matching_row), "row not found with comment id: {$comment_id}");
     }
   }
 

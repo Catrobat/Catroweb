@@ -3351,7 +3351,7 @@ class ApiContext implements Context
     try {
       $file = new UploadedFile($file, basename($file));
     } catch (\Exception $exception) {
-      throw new \Exception('File to upload does not exist'.$exception, $exception->getCode(), $exception);
+      throw new \Exception('File to upload does not exist: '.$exception->getMessage(), $exception->getCode(), $exception);
     }
 
     if ('1' === $api_version) {
@@ -3414,7 +3414,7 @@ class ApiContext implements Context
 
   private function pathWithoutParam(string $path): string
   {
-    return strtok($path, '?');
+    return strtok($path, '?') ?: '';
   }
 
   private function assertProjectsEqual(array $stored_project, array $returned_project): void

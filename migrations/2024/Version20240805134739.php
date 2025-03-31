@@ -12,11 +12,13 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20240805134739 extends AbstractMigration
 {
+  #[\Override]
   public function getDescription(): string
   {
     return '';
   }
 
+  #[\Override]
   public function up(Schema $schema): void
   {
     // this up() migration is auto-generated, please modify it to your needs
@@ -24,6 +26,7 @@ final class Version20240805134739 extends AbstractMigration
     $this->addSql('ALTER TABLE studio_user CHANGE role role VARCHAR(20) NOT NULL, CHANGE status status VARCHAR(20) NOT NULL');
   }
 
+  #[\Override]
   public function down(Schema $schema): void
   {
     // this down() migration is auto-generated, please modify it to your needs

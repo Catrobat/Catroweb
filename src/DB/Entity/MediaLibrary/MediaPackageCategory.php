@@ -61,7 +61,7 @@ class MediaPackageCategory implements \Stringable
       $count = count($this->package);
 
       for ($it = 0; $it < $count; ++$it) {
-        $string .= $this->package[$it];
+        $string .= $this->package[$it]->__toString();
 
         if ($it < ($count - 1)) {
           $string .= ', ';

@@ -25,6 +25,7 @@ class UserAdmin extends AbstractAdmin
     return 'user';
   }
 
+  #[\Override]
   protected function configureFormOptions(array &$formOptions): void
   {
     $formOptions['validation_groups'] = ['Default'];
@@ -36,6 +37,7 @@ class UserAdmin extends AbstractAdmin
     }
   }
 
+  #[\Override]
   protected function configureListFields(ListMapper $list): void
   {
     $list
@@ -55,6 +57,7 @@ class UserAdmin extends AbstractAdmin
     ]);
   }
 
+  #[\Override]
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
@@ -67,6 +70,7 @@ class UserAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureShowFields(ShowMapper $show): void
   {
     $show
@@ -76,6 +80,7 @@ class UserAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
     $form
@@ -98,6 +103,7 @@ class UserAdmin extends AbstractAdmin
     ;
   }
 
+  #[\Override]
   protected function configureExportFields(): array
   {
     // Avoid sensitive properties to be exported.

@@ -47,5 +47,15 @@
                 <file name="config/routes.php"/>
             </errorLevel>
         </InvalidArgument>
+        <UndefinedMagicMethod>
+            <errorLevel type="info">
+                <directory name="tests" />
+            </errorLevel>
+        </UndefinedMagicMethod>
+        <InvalidOperand>
+            <errorLevel type="info">
+                <directory name="src" />
+            </errorLevel>
+        </InvalidOperand>
     </issueHandlers>
 </psalm>

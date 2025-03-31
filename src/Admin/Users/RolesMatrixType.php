@@ -19,6 +19,7 @@ final class RolesMatrixType extends AbstractType
   {
   }
 
+  #[\Override]
   public function configureOptions(OptionsResolver $resolver): void
   {
     $resolver->setDefaults([
@@ -64,11 +65,13 @@ final class RolesMatrixType extends AbstractType
     $resolver->addAllowedTypes('excluded_roles', 'string[]');
   }
 
+  #[\Override]
   public function getParent(): string
   {
     return ChoiceType::class;
   }
 
+  #[\Override]
   public function getBlockPrefix(): string
   {
     return 'sonata_roles_matrix';

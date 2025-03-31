@@ -508,7 +508,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
   public function getScratchUsername(): string
   {
-    return preg_replace('/^'.self::$SCRATCH_PREFIX.'/', '', (string) $this->getUsername());
+    return preg_replace('/^'.self::$SCRATCH_PREFIX.'/', '', (string) $this->getUsername()) ?? '';
   }
 
   public function setScratchUserId(?int $scratch_user_id): void
@@ -672,6 +672,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
   }
 
+  #[\Override]
   public function eraseCredentials(): void
   {
     $this->plainPassword = null;
@@ -682,6 +683,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this->username;
   }
 
+  #[\Override]
   public function getUserIdentifier(): string
   {
     return $this->getUsername() ?? '-';
@@ -707,6 +709,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this->emailCanonical;
   }
 
+  #[\Override]
   public function getPassword(): ?string
   {
     return $this->password;
@@ -727,6 +730,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this->confirmationToken;
   }
 
+  #[\Override]
   public function getRoles(): array
   {
     $roles = $this->roles;

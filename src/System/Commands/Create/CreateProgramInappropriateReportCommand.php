@@ -65,7 +65,7 @@ class CreateProgramInappropriateReportCommand extends Command
     }
 
     $output->writeln('Reporting '.$program->getName());
-    $output->writeln('ReportedUser = '.$program->getUser());
+    $output->writeln('ReportedUser = '.$program->getUser()->getUsername());
 
     return 0;
   }
