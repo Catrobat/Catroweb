@@ -143,7 +143,7 @@ export function ProjectEditorModel(programId, textFieldModels) {
           }
         })
         .catch((reason) => {
-          console.error('Unexpected error on updating project')
+          console.error('Unexpected error on updating project: ' + reason)
         })
     } else {
       Promise.all(

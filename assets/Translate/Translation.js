@@ -106,7 +106,6 @@ export class Translation {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
 export class ByLineElementContainer {
   constructor(
     beforeElement,

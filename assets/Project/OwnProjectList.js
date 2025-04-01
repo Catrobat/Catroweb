@@ -182,7 +182,6 @@ export class OwnProjectList {
       comments: 'chat',
     }
 
-    // eslint-disable-next-line no-array-constructor
     Array('downloads', 'views', 'reactions', 'comments').forEach(function (propertyKey) {
       if (Object.prototype.hasOwnProperty.call(data, propertyKey)) {
         const propEl = document.createElement('div')

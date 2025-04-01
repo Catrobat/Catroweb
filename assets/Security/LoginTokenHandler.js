@@ -28,7 +28,6 @@ export class LoginTokenHandler {
   }
 
   login(data) {
-    // eslint-disable-next-line no-undef
     fetch(this.authenticationPath, {
       method: 'POST',
       headers: {

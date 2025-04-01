@@ -34,7 +34,7 @@ export function ProjectEditorTextFieldModel(
     this.onLoading = onLoading
   }
 
-  this.collectChanges = (language) => {
+  this.collectChanges = () => {
     if (this.areChangesSaved() || !this.enabled) {
       return null
     }

@@ -75,7 +75,7 @@ export default class {
   }
 
   // Function to load replies
-  loadReplies(commentID) {
+  loadReplies() {
     showSnackbar('#share-snackbar', 'Replies not yet supported')
     // document.getElementById('modal-body').innerHTML = '';
     // document.getElementById('cmtID').value = commentID;

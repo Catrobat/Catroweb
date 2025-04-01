@@ -14,7 +14,6 @@ export class AjaxController extends Controller {
     const listElement = document.getElementById(elementId)
     listElement.innerHTML = ''
 
-    // eslint-disable-next-line no-undef
     const response = await fetch(url + '?' + params.toString())
     listElement.innerHTML = await response.text()
   }
@@ -27,7 +26,6 @@ export class AjaxController extends Controller {
    * @returns {Promise<Response>}
    */
   fetchPut(url, data) {
-    // eslint-disable-next-line no-undef
     return fetch(url, {
       method: 'PUT',
       headers: {
@@ -47,7 +45,6 @@ export class AjaxController extends Controller {
    * @returns {Promise<Response>}
    */
   fetchPost(url, data) {
-    // eslint-disable-next-line no-undef
     return fetch(url, {
       method: 'POST',
       headers: {
