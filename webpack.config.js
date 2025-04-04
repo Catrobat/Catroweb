@@ -1,6 +1,7 @@
 const Encore = require('@symfony/webpack-encore')
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins')
+const ESLintPlugin = require('eslint-webpack-plugin')
 const dotenv = require('dotenv')
 const glob = require('glob-all')
 const path = require('path')
@@ -231,6 +232,16 @@ Encore
         overwrite: true,
       })
       : noop(),
+  )
+
+  .addPlugin(
+    // Allow eslint to execute in the background during the webpack build process. No additional run necessary
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+      emitWarning: !Encore.isProduction(),
+      failOnError: Encore.isProduction(),
+      files: 'assets/',
+    }),
   )
 
 module.exports = Encore.getWebpackConfig()
