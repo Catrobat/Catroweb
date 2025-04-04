@@ -91,7 +91,7 @@
   },
   "config": {
     "platform": {
-      "php": "8.4",
+      "php": "8.4.3",
       "ext-curl": "8.4",
       "ext-gd": "8.4",
       "ext-imagick": "3.4.4",

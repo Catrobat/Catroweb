@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4639bbb35cf98774150b8e70bc5dc943",
+    "content-hash": "50ec9c4ccc71f7cc3a964b1a37ad9021",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -6400,16 +6400,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.36.0",
+            "version": "4.36.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "748306c95cc137ecca907af1bd30f886f576014c"
+                "reference": "7f94789311bc7931030fbf84cda6ca7a3b18ed03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/748306c95cc137ecca907af1bd30f886f576014c",
-                "reference": "748306c95cc137ecca907af1bd30f886f576014c",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/7f94789311bc7931030fbf84cda6ca7a3b18ed03",
+                "reference": "7f94789311bc7931030fbf84cda6ca7a3b18ed03",
                 "shasum": ""
             },
             "require": {
@@ -6516,7 +6516,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.36.0"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.36.1"
             },
             "funding": [
                 {
@@ -6536,7 +6536,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-11T13:00:04+00:00"
+            "time": "2025-04-03T18:45:18+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -19481,7 +19481,7 @@
     },
     "platform-dev": {},
     "platform-overrides": {
-        "php": "8.4",
+        "php": "8.4.3",
         "ext-curl": "8.4",
         "ext-gd": "8.4",
         "ext-imagick": "3.4.4",
