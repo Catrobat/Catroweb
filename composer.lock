@@ -19464,7 +19464,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -19479,7 +19479,7 @@
         "ext-posix": "*",
         "ext-zip": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "8.4.3",
         "ext-curl": "8.4",
@@ -19493,5 +19493,5 @@
         "ext-zip": "8.4",
         "ext-bcmath": "8.4"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
