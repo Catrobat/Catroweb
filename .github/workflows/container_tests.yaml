@@ -54,6 +54,10 @@ jobs:
         run: |
           docker exec app.catroweb bin/console about
 
+      - name: Warmup the cache
+        run: |
+          docker exec app.catroweb bin/console cache:warmup
+
       - name: Create a livid environment with dummy data
         run: |
           docker exec app.catroweb bin/console catrobat:reset --hard
