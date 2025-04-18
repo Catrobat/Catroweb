@@ -206,7 +206,7 @@ class UserController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -291,7 +291,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\RegisterRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\RegisterRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($register_request, $asserts);
     if ($response instanceof Response) {
@@ -389,7 +389,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\UpdateUserRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\UpdateUserRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($update_user_request, $asserts);
     if ($response instanceof Response) {
@@ -485,7 +485,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ResetPasswordRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ResetPasswordRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($reset_password_request, $asserts);
     if ($response instanceof Response) {
@@ -689,7 +689,7 @@ class UserController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;

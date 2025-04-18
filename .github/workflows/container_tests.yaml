@@ -56,7 +56,8 @@ jobs:
 
       - name: Warmup the cache
         run: |
-          docker exec app.catroweb bin/console cache:warmup
+          docker exec app.catroweb bin/console cache:warmup -e dev
+          docker exec app.catroweb bin/console cache:warmup -e test
 
       - name: Create a livid environment with dummy data
         run: |

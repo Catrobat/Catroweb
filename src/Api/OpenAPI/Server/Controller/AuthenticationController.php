@@ -220,7 +220,7 @@ class AuthenticationController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\OAuthLoginRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\OAuthLoginRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($o_auth_login_request, $asserts);
     if ($response instanceof Response) {
@@ -310,7 +310,7 @@ class AuthenticationController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\LoginRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\LoginRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($login_request, $asserts);
     if ($response instanceof Response) {
@@ -402,7 +402,7 @@ class AuthenticationController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\RefreshRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\RefreshRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($refresh_request, $asserts);
     if ($response instanceof Response) {
@@ -491,7 +491,7 @@ class AuthenticationController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\UpgradeTokenRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\UpgradeTokenRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($upgrade_token_request, $asserts);
     if ($response instanceof Response) {

@@ -210,7 +210,7 @@ jobs:
 
       - name: Warmup the cache
         run: |
-          docker exec app.catroweb bin/console cache:warmup
+          docker exec app.catroweb bin/console cache:warmup -e test
 
       # Test Run
       - name: Behat ${{ matrix.testSuite }} tests
