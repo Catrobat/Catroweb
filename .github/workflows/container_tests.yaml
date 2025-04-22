@@ -53,19 +53,19 @@ jobs:
         run: |
           docker exec app.catroweb bin/console about
 
+      - name: Create a livid environment with dummy data
+        run: |
+          docker exec app.catroweb bin/console catrobat:reset --hard
+
       - name: Warmup the cache
         run: |
           docker exec app.catroweb bin/console cache:warmup -e dev
           docker exec app.catroweb bin/console cache:warmup -e test
 
-      - name: Create a livid environment with dummy data
-        run: |
-          docker exec app.catroweb bin/console catrobat:reset --hard
-
       - name: Run a few dynamic software tests
         run: |
           docker exec app.catroweb chmod -R 777 var
-          docker exec app.catroweb bin/behat -s web-general tests/BehatFeatures/web/general/homepage.feature -f pretty
+          docker exec app.catroweb bin/behat -s web-general tests/BehatFeatures/web/general/homepage.feature
 
       - name: Test shared volumes, by expecting a crash with invalid changes to the test file
         id: shared-test-run-must-fail
