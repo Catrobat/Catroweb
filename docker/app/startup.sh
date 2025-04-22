@@ -2,32 +2,60 @@
 set -e
 
 log() {
-  echo "[start-with-migrations.sh] $*"
+  echo "[startup-dev.sh] $*"
 }
+
+WAIT_SCRIPT="./docker/app/wait-for-it.sh"
+
+# === Wait for MariaDB ===
+DB_HOST="db.catroweb.test"
+DB_PORT="3306"
+log "Waiting for MariaDB at $DB_HOST:$DB_PORT..."
+if "$WAIT_SCRIPT" "$DB_HOST:$DB_PORT" -t 60; then
+  log "MariaDB is available."
+else
+  log "MariaDB not available after timeout. Exiting."
+  exit 1
+fi
 
 DB_HOST="db.catroweb.dev"
 DB_PORT="3306"
-WAIT_SCRIPT="./docker/app/wait-for-it.sh"
-
-log "Waiting for database at $DB_HOST:$DB_PORT..."
+log "Waiting for MariaDB at $DB_HOST:$DB_PORT..."
 if "$WAIT_SCRIPT" "$DB_HOST:$DB_PORT" -t 60; then
-  log "Database is available. Running migrations..."
-
-  if bin/console doctrine:migrations:migrate --no-interaction; then
-    log "Migrations successful."
-
-    if ! pgrep -x apache2 > /dev/null; then
-      log "Apache not running. Starting Apache in foreground..."
-      exec /usr/sbin/apache2ctl -D FOREGROUND
-    else
-      log "Apache is already running. Keeping container alive..."
-      tail -f /dev/null
-    fi
-  else
-    log "Migration command failed!"
-    exit 2
-  fi
+  log "MariaDB is available."
 else
-  log "Database not available after timeout. Exiting."
+  log "MariaDB not available after timeout. Exiting."
   exit 1
 fi
+
+# === Wait for Headless Chrome ===
+CHROME_HOST="chrome.catroweb"
+CHROME_PORT="9222"
+log "Waiting for Chrome at $CHROME_HOST:$CHROME_PORT..."
+if "$WAIT_SCRIPT" "$CHROME_HOST:$CHROME_PORT" -t 60; then
+  log "Chrome is available."
+else
+  log "Chrome not available after timeout. Exiting."
+  exit 1
+fi
+
+# === Wait for Elasticsearch ===
+ELASTIC_HOST="elasticsearch"
+ELASTIC_PORT="9200"
+log "Waiting for Elasticsearch at $ELASTIC_HOST:$ELASTIC_PORT..."
+if "$WAIT_SCRIPT" "$ELASTIC_HOST:$ELASTIC_PORT" -t 60; then
+  log "Elasticsearch is available."
+else
+  log "Elasticsearch not available after timeout. Exiting."
+  exit 1
+fi
+
+# === Run database migrations ===
+echo "Running Symfony migrations..."
+if ! php bin/console doctrine:migrations:migrate --no-interaction; then
+  echo "⚠️ Doctrine migrations failed, but continuing..."
+fi
+
+# === Start Apache ===
+log "All services are ready. Starting Apache..."
+exec /usr/sbin/apache2ctl -D FOREGROUND
