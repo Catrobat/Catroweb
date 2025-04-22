@@ -112,7 +112,7 @@ jobs:
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          file: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
+          files: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
           flags: phpunit # optional
           name: codecov-umbrella # optional
 
@@ -269,7 +269,7 @@ jobs:
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          file: tests/TestReports/CoverageReports/Behat/coverage.xml
+          files: tests/TestReports/CoverageReports/Behat/coverage.xml
           flags: behat # optional
           name: codecov-umbrella # optional
           # fail_ci_if_error: true # optional (default = false)

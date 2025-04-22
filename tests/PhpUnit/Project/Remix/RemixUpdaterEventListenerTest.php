@@ -122,7 +122,7 @@ class RemixUpdaterEventListenerTest extends TestCase
 
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isArray())
       ->willReturn([])
     ;
 
@@ -186,7 +186,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     ];
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isArray())
       ->willReturn($expected_scratch_info)
     ;
     $this->remix_manager
@@ -197,7 +197,7 @@ class RemixUpdaterEventListenerTest extends TestCase
 
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addScratchProjects')->with($this->isType('array'))
+      ->method('addScratchProjects')->with($this->isArray())
       ->willReturnCallback(function ($scratch_programs_data) use ($expected_scratch_info): void {
         $this->assertCount(2, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
@@ -244,7 +244,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isArray())
       ->willReturn([])
     ;
     $this->remix_manager
@@ -291,7 +291,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     $expected_scratch_info = [['id' => $second_expected_scratch_id, 'creator' => ['username' => 'bubble103']]];
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isArray())
       ->willReturn($expected_scratch_info)
     ;
     $this->remix_manager
@@ -301,7 +301,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addScratchProjects')->with($this->isType('array'))
+      ->method('addScratchProjects')->with($this->isArray())
       ->willReturnCallback(function ($scratch_programs_data) use ($expected_scratch_info): void {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
@@ -345,7 +345,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isArray())
       ->willReturn($expected_scratch_info)
     ;
     $this->remix_manager
@@ -381,7 +381,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addScratchProjects')->with($this->isType('array'))
+      ->method('addScratchProjects')->with($this->isArray())
       ->willReturnCallback(function ($scratch_programs_data) use ($expected_scratch_info): void {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
@@ -466,7 +466,7 @@ class RemixUpdaterEventListenerTest extends TestCase
 
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isArray())
       ->willReturn([])
     ;
     $this->remix_manager
