@@ -96,7 +96,6 @@ jobs:
         run: |
           cd docker
           docker compose -f docker-compose.test.yaml up -d
-          sleep 30
 
       - name: Run PHPUnit Tests
         run: |
@@ -206,7 +205,6 @@ jobs:
         run: |
           cd docker
           docker compose -f docker-compose.test.yaml up -d
-          sleep 30
 
       - name: Warmup the cache
         run: |

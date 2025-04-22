@@ -50,12 +50,6 @@ else
   exit 1
 fi
 
-# === Run database migrations ===
-echo "Running Symfony migrations..."
-if ! php bin/console doctrine:migrations:migrate --no-interaction; then
-  echo "⚠️ Doctrine migrations failed, but continuing..."
-fi
-
 # === Start Apache ===
 log "All services are ready. Starting Apache..."
 exec /usr/sbin/apache2ctl -D FOREGROUND
