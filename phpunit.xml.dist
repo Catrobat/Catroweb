@@ -19,9 +19,10 @@
   <source>
     <include>
       <directory suffix=".php">src/</directory>
+      <directory suffix=".php">tests/PhpUnit/</directory>
     </include>
     <exclude>
-      <directory suffix=".php">tests/</directory>
+      <file suffix="Test.php">tests/PhpUnit/</file>
     </exclude>
   </source>
 </phpunit>
