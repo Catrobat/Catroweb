@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1486b880d599939cb6dd3207c28fd8f3",
+    "content-hash": "8da57a394101cb25d02c07fd8050aa02",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2459,16 +2459,16 @@
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.20.2",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "b2a1523da043085286d32133553fe216bbbc960e"
+                "reference": "13aa117f643cf837e9df42d59ff0dc65ddc7a05c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/b2a1523da043085286d32133553fe216bbbc960e",
-                "reference": "b2a1523da043085286d32133553fe216bbbc960e",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/13aa117f643cf837e9df42d59ff0dc65ddc7a05c",
+                "reference": "13aa117f643cf837e9df42d59ff0dc65ddc7a05c",
                 "shasum": ""
             },
             "require": {
@@ -2509,22 +2509,22 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.20.2"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v2.0.0"
             },
-            "time": "2025-01-24T21:24:06+00:00"
+            "time": "2025-02-08T00:05:17+00:00"
         },
         {
             "name": "google/common-protos",
-            "version": "4.11.0",
+            "version": "4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/common-protos-php.git",
-                "reference": "2554ed1f09aa20faae7b71b590e7063df97ff670"
+                "reference": "96f6873c65fb0289fcdb6ac3d5239f9c9e5750b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/common-protos-php/zipball/2554ed1f09aa20faae7b71b590e7063df97ff670",
-                "reference": "2554ed1f09aa20faae7b71b590e7063df97ff670",
+                "url": "https://api.github.com/repos/googleapis/common-protos-php/zipball/96f6873c65fb0289fcdb6ac3d5239f9c9e5750b0",
+                "reference": "96f6873c65fb0289fcdb6ac3d5239f9c9e5750b0",
                 "shasum": ""
             },
             "require": {
@@ -2568,9 +2568,9 @@
                 "google"
             ],
             "support": {
-                "source": "https://github.com/googleapis/common-protos-php/tree/v4.11.0"
+                "source": "https://github.com/googleapis/common-protos-php/tree/v4.12.0"
             },
-            "time": "2025-02-18T19:46:55+00:00"
+            "time": "2025-04-18T20:49:28+00:00"
         },
         {
             "name": "google/gax",
