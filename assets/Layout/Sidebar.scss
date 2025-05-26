@@ -14,7 +14,7 @@ $sidebar-width: 250px;
   height: 100vh;
   overflow-y: auto;
   background: #fff;
-  box-shadow: 3px 3px 3px rgba(0 0 0 / 20%);
+  box-shadow: 3px 3px 3px rgb(0 0 0 / 20%);
   transition: all 0.3s;
 
   &.active {
@@ -43,7 +43,7 @@ $sidebar-width: 250px;
 
     &:hover {
       text-decoration: none;
-      background: rgba(0 0 0 / 20%);
+      background: rgb(0 0 0 / 20%);
     }
 
     &:active,
@@ -110,7 +110,7 @@ $sidebar-width: 250px;
   height: 100vh;
 
   /* transparent black */
-  background: rgba(0 0 0 / 70%);
+  background: rgb(0 0 0 / 70%);
   opacity: 0;
 
   /* animate the transition */
