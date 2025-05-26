@@ -50,7 +50,7 @@ $container-padding: 1rem;
       text-decoration: none;
 
       .project-list__project__image {
-        box-shadow: 3px 3px 20px 0 rgba(50 50 50 / 35%);
+        box-shadow: 3px 3px 20px 0 rgb(50 50 50 / 35%);
       }
     }
 
@@ -59,7 +59,7 @@ $container-padding: 1rem;
       width: 6rem;
       border-radius: 10%;
       aspect-ratio: auto 1 / 1;
-      box-shadow: 3px 3px 20px 0 rgba(50 50 50 / 15%);
+      box-shadow: 3px 3px 20px 0 rgb(50 50 50 / 15%);
 
       @include media-breakpoint-up(sm) {
         width: 8rem;
@@ -80,8 +80,6 @@ $container-padding: 1rem;
         padding-bottom: 0.4rem;
 
         @include force-word-break;
-
-        word-break: break-word;
       }
 
       &__properties {
