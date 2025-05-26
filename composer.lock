@@ -6406,22 +6406,21 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.36.1",
+            "version": "4.36.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "7f94789311bc7931030fbf84cda6ca7a3b18ed03"
+                "reference": "e77b600a4ff85d46e71214995dabf96a744cbaa7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/7f94789311bc7931030fbf84cda6ca7a3b18ed03",
-                "reference": "7f94789311bc7931030fbf84cda6ca7a3b18ed03",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/e77b600a4ff85d46e71214995dabf96a744cbaa7",
+                "reference": "e77b600a4ff85d46e71214995dabf96a744cbaa7",
                 "shasum": ""
             },
             "require": {
                 "doctrine/collections": "^1.6 || ^2.0",
                 "doctrine/common": "^3.0",
-                "ext-json": "*",
                 "knplabs/knp-menu": "^3.6",
                 "knplabs/knp-menu-bundle": "^3.0",
                 "php": "^8.1",
@@ -6469,22 +6468,22 @@
                 "matthiasnoback/symfony-dependency-injection-test": "^4.2 || ^5.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpdoc-parser": "^1.0",
-                "phpstan/phpstan": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpstan/phpstan-symfony": "^1.0",
+                "phpstan/phpstan": "^1.0 || ^2.0",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2.0",
+                "phpstan/phpstan-strict-rules": "^1.0 || ^2.0",
+                "phpstan/phpstan-symfony": "^1.0 || ^2.0",
                 "phpunit/phpunit": "^9.6",
-                "psalm/plugin-phpunit": "^0.18",
+                "psalm/plugin-phpunit": "^0.18 || ^0.19",
                 "psalm/plugin-symfony": "^5.0",
                 "psr/event-dispatcher": "^1.0",
-                "rector/rector": "^1.1",
+                "rector/rector": "^1.1 || ^2.0",
                 "symfony/browser-kit": "^6.4 || ^7.1",
                 "symfony/css-selector": "^6.4 || ^7.1",
                 "symfony/filesystem": "^6.4 || ^7.1",
                 "symfony/maker-bundle": "^1.25",
                 "symfony/phpunit-bridge": "^6.4 || ^7.1",
                 "symfony/yaml": "^6.4 || ^7.1",
-                "vimeo/psalm": "^5.8.0"
+                "vimeo/psalm": "^5.8.0 || ^6.10.0"
             },
             "suggest": {
                 "twig/extra-bundle": "Auto configures the Twig Intl extension"
@@ -6522,7 +6521,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.36.1"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.36.2"
             },
             "funding": [
                 {
@@ -6542,20 +6541,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-03T18:45:18+00:00"
+            "time": "2025-05-16T20:10:49+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
-            "version": "5.1.2",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "0c5f67e1657d734bd20657d4886531b1e43e6529"
+                "reference": "3995e9a48e7f7e25d2a6a302be5cda895730250c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/0c5f67e1657d734bd20657d4886531b1e43e6529",
-                "reference": "0c5f67e1657d734bd20657d4886531b1e43e6529",
+                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/3995e9a48e7f7e25d2a6a302be5cda895730250c",
+                "reference": "3995e9a48e7f7e25d2a6a302be5cda895730250c",
                 "shasum": ""
             },
             "require": {
@@ -6590,19 +6589,19 @@
                 "matthiasnoback/symfony-config-test": "^4.2 || ^5.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.1 || ^5.0",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpstan/phpstan-symfony": "^1.0",
+                "phpstan/phpstan": "^1.0 || ^2.0",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2.0",
+                "phpstan/phpstan-strict-rules": "^1.0 || ^2.0",
+                "phpstan/phpstan-symfony": "^1.0 || ^2.0",
                 "phpunit/phpunit": "^9.5.13",
-                "psalm/plugin-phpunit": "^0.18",
+                "psalm/plugin-phpunit": "^0.18 || ^0.19",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^1.1",
+                "rector/rector": "^1.1 || ^2.0",
                 "symfony/browser-kit": "^6.4 || ^7.1",
                 "symfony/error-handler": "^6.4 || ^7.1",
                 "symfony/phpunit-bridge": "^6.4 || ^7.1",
                 "symfony/stopwatch": "^6.4 || ^7.1",
-                "vimeo/psalm": "^5.8"
+                "vimeo/psalm": "^5.8 || ^6.10"
             },
             "suggest": {
                 "knplabs/knp-menu-bundle": "Required to use the menu block"
@@ -6636,7 +6635,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataBlockBundle/issues",
-                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/5.1.2"
+                "source": "https://github.com/sonata-project/SonataBlockBundle/tree/5.2.0"
             },
             "funding": [
                 {
@@ -6656,7 +6655,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-05T19:14:35+00:00"
+            "time": "2025-05-16T20:11:22+00:00"
         },
         {
             "name": "sonata-project/doctrine-extensions",
@@ -7008,16 +7007,16 @@
         },
         {
             "name": "sonata-project/form-extensions",
-            "version": "2.4.1",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/form-extensions.git",
-                "reference": "979e362b5a33833bd491f613fe019514aefa07cf"
+                "reference": "9964f1c4c0a8d7da4d432e0bad8502dfa2087495"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/form-extensions/zipball/979e362b5a33833bd491f613fe019514aefa07cf",
-                "reference": "979e362b5a33833bd491f613fe019514aefa07cf",
+                "url": "https://api.github.com/repos/sonata-project/form-extensions/zipball/9964f1c4c0a8d7da4d432e0bad8502dfa2087495",
+                "reference": "9964f1c4c0a8d7da4d432e0bad8502dfa2087495",
                 "shasum": ""
             },
             "require": {
@@ -7038,14 +7037,14 @@
                 "matthiasnoback/symfony-dependency-injection-test": "^4.0 || ^5.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpdoc-parser": "^1.0",
-                "phpstan/phpstan": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpstan/phpstan-symfony": "^1.0",
+                "phpstan/phpstan": "^1.0 || ^2.0",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2.0",
+                "phpstan/phpstan-strict-rules": "^1.0 || ^2.0",
+                "phpstan/phpstan-symfony": "^1.0 || ^2.0",
                 "phpunit/phpunit": "^9.5",
-                "psalm/plugin-phpunit": "^0.18",
+                "psalm/plugin-phpunit": "^0.18 || ^0.19",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^1.1",
+                "rector/rector": "^1.1 || ^2.0",
                 "symfony/config": "^6.4 || ^7.1",
                 "symfony/dependency-injection": "^6.4 || ^7.1",
                 "symfony/framework-bundle": "^6.4 || ^7.1",
@@ -7054,7 +7053,7 @@
                 "symfony/phpunit-bridge": "^6.4 || ^7.1",
                 "symfony/twig-bridge": "^6.4.3 || ^7.1",
                 "symfony/twig-bundle": "^6.4 || ^7.1",
-                "vimeo/psalm": "^5.8"
+                "vimeo/psalm": "^5.8 || ^6.10"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -7085,7 +7084,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/form-extensions/issues",
-                "source": "https://github.com/sonata-project/form-extensions/tree/2.4.1"
+                "source": "https://github.com/sonata-project/form-extensions/tree/2.5.0"
             },
             "funding": [
                 {
@@ -7105,7 +7104,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-05T19:08:03+00:00"
+            "time": "2025-05-16T19:49:39+00:00"
         },
         {
             "name": "sonata-project/twig-extensions",
@@ -8582,16 +8581,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v7.2.5",
+            "version": "v7.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "81c5d4630d58a5ca3cfa7ac6f44070ed02568009"
+                "reference": "e4e75b930d7a1ccd47bd3273c859c28e13d89b08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/81c5d4630d58a5ca3cfa7ac6f44070ed02568009",
-                "reference": "81c5d4630d58a5ca3cfa7ac6f44070ed02568009",
+                "url": "https://api.github.com/repos/symfony/form/zipball/e4e75b930d7a1ccd47bd3273c859c28e13d89b08",
+                "reference": "e4e75b930d7a1ccd47bd3273c859c28e13d89b08",
                 "shasum": ""
             },
             "require": {
@@ -8659,7 +8658,7 @@
             "description": "Allows to easily create, process and reuse HTML forms",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/form/tree/v7.2.5"
+                "source": "https://github.com/symfony/form/tree/v7.2.6"
             },
             "funding": [
                 {
@@ -8675,7 +8674,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-28T12:59:59+00:00"
+            "time": "2025-04-30T07:52:47+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -9976,16 +9975,16 @@
         },
         {
             "name": "symfony/polyfill-intl-icu",
-            "version": "v1.31.0",
+            "version": "v1.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-icu.git",
-                "reference": "d80a05e9904d2c2b9b95929f3e4b5d3a8f418d78"
+                "reference": "763d2a91fea5681509ca01acbc1c5e450d127811"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/d80a05e9904d2c2b9b95929f3e4b5d3a8f418d78",
-                "reference": "d80a05e9904d2c2b9b95929f3e4b5d3a8f418d78",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/763d2a91fea5681509ca01acbc1c5e450d127811",
+                "reference": "763d2a91fea5681509ca01acbc1c5e450d127811",
                 "shasum": ""
             },
             "require": {
@@ -10040,7 +10039,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -10056,7 +10055,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-09T11:45:10+00:00"
+            "time": "2024-12-21T18:38:29+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -11183,16 +11182,16 @@
         },
         {
             "name": "symfony/security-core",
-            "version": "v7.2.3",
+            "version": "v7.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-core.git",
-                "reference": "466784ffcd0b5a16e05394335897f790b17d07e4"
+                "reference": "340e120d26b3bf5eee5cea0782aebaa2f36b6722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-core/zipball/466784ffcd0b5a16e05394335897f790b17d07e4",
-                "reference": "466784ffcd0b5a16e05394335897f790b17d07e4",
+                "url": "https://api.github.com/repos/symfony/security-core/zipball/340e120d26b3bf5eee5cea0782aebaa2f36b6722",
+                "reference": "340e120d26b3bf5eee5cea0782aebaa2f36b6722",
                 "shasum": ""
             },
             "require": {
@@ -11250,7 +11249,7 @@
             "description": "Symfony Security Component - Core Library",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-core/tree/v7.2.3"
+                "source": "https://github.com/symfony/security-core/tree/v7.2.6"
             },
             "funding": [
                 {
@@ -11266,7 +11265,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-27T11:08:17+00:00"
+            "time": "2025-04-17T08:47:02+00:00"
         },
         {
             "name": "symfony/security-csrf",
@@ -11340,16 +11339,16 @@
         },
         {
             "name": "symfony/security-http",
-            "version": "v7.2.4",
+            "version": "v7.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-http.git",
-                "reference": "8478e95e273f8daa23bf4860dbad2a09d3fb3722"
+                "reference": "324425deb859c6a59a2c2414ae60f742976a193b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-http/zipball/8478e95e273f8daa23bf4860dbad2a09d3fb3722",
-                "reference": "8478e95e273f8daa23bf4860dbad2a09d3fb3722",
+                "url": "https://api.github.com/repos/symfony/security-http/zipball/324425deb859c6a59a2c2414ae60f742976a193b",
+                "reference": "324425deb859c6a59a2c2414ae60f742976a193b",
                 "shasum": ""
             },
             "require": {
@@ -11408,7 +11407,7 @@
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-http/tree/v7.2.4"
+                "source": "https://github.com/symfony/security-http/tree/v7.2.6"
             },
             "funding": [
                 {
@@ -11424,20 +11423,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-11T16:46:20+00:00"
+            "time": "2025-04-07T19:09:28+00:00"
         },
         {
             "name": "symfony/serializer",
-            "version": "v7.2.5",
+            "version": "v7.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/serializer.git",
-                "reference": "d8b75b2c8144c29ac43b235738411f7cca6d584d"
+                "reference": "be549655b034edc1a16ed23d8164aa04318c5ec1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/serializer/zipball/d8b75b2c8144c29ac43b235738411f7cca6d584d",
-                "reference": "d8b75b2c8144c29ac43b235738411f7cca6d584d",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/be549655b034edc1a16ed23d8164aa04318c5ec1",
+                "reference": "be549655b034edc1a16ed23d8164aa04318c5ec1",
                 "shasum": ""
             },
             "require": {
@@ -11506,7 +11505,7 @@
             "description": "Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/serializer/tree/v7.2.5"
+                "source": "https://github.com/symfony/serializer/tree/v7.2.6"
             },
             "funding": [
                 {
@@ -11522,7 +11521,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-24T12:37:32+00:00"
+            "time": "2025-04-27T13:34:41+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -12837,7 +12836,7 @@
         },
         {
             "name": "twig/string-extra",
-            "version": "v3.20.0",
+            "version": "v3.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/string-extra.git",
@@ -12888,7 +12887,7 @@
                 "unicode"
             ],
             "support": {
-                "source": "https://github.com/twigphp/string-extra/tree/v3.20.0"
+                "source": "https://github.com/twigphp/string-extra/tree/v3.21.0"
             },
             "funding": [
                 {
