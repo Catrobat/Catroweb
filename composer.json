@@ -42,7 +42,7 @@
     "symfony/cache": "7.2.*",
     "symfony/console": "7.2.*",
     "symfony/dotenv": "7.2.*",
-    "symfony/flex": "2.6.*",
+    "symfony/flex": "2.7.*",
     "symfony/framework-bundle": "7.2.*",
     "symfony/intl": "7.2.*",
     "symfony/mailer": "7.2.*",
