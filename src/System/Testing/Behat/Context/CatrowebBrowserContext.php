@@ -1662,7 +1662,7 @@ class CatrowebBrowserContext extends BrowserContext
         'Wrong value for second_user_id'
       );
       Assert::assertEquals(
-        round($expected_like_similarities[$i]['similarity'], 3),
+        round((float) $expected_like_similarities[$i]['similarity'], 3),
         round($like_similarity->getSimilarity(), 3),
         'Wrong value for similarity'
       );
@@ -1690,7 +1690,7 @@ class CatrowebBrowserContext extends BrowserContext
         $expected_remix_similarities[$i]['second_user_id'], $remix_similarity->getSecondUserId(),
         'Wrong value for second_user_id'
       );
-      Assert::assertEquals(round($expected_remix_similarities[$i]['similarity'], 3),
+      Assert::assertEquals(round((float) $expected_remix_similarities[$i]['similarity'], 3),
         round($remix_similarity->getSimilarity(), 3),
         'Wrong value for similarity');
     }
