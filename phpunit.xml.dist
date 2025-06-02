@@ -29,6 +29,8 @@
   <source>
     <include>
       <directory suffix=".php">src/</directory>
+      <file>tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTestClass.php</file>
+      <file>tests/PhpUnit/Api/Services/Base/BearerAuthenticationTraitTestClass.php</file>
     </include>
   </source>
 </phpunit>
