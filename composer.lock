@@ -13884,16 +13884,16 @@
         },
         {
             "name": "behat/gherkin",
-            "version": "v4.13.0",
+            "version": "v4.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "9294d26bb75f1718441b89f3a10e15ecb2c67f70"
+                "reference": "34c9b59c59355a7b4c53b9f041c8dbd1c8acc3b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/9294d26bb75f1718441b89f3a10e15ecb2c67f70",
-                "reference": "9294d26bb75f1718441b89f3a10e15ecb2c67f70",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/34c9b59c59355a7b4c53b9f041c8dbd1c8acc3b4",
+                "reference": "34c9b59c59355a7b4c53b9f041c8dbd1c8acc3b4",
                 "shasum": ""
             },
             "require": {
@@ -13903,6 +13903,7 @@
             "require-dev": {
                 "cucumber/gherkin-monorepo": "dev-gherkin-v32.1.1",
                 "friendsofphp/php-cs-fixer": "^3.65",
+                "mikey179/vfsstream": "^1.6",
                 "phpstan/extension-installer": "^1",
                 "phpstan/phpstan": "^2",
                 "phpstan/phpstan-phpunit": "^2",
@@ -13946,9 +13947,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Behat/Gherkin/issues",
-                "source": "https://github.com/Behat/Gherkin/tree/v4.13.0"
+                "source": "https://github.com/Behat/Gherkin/tree/v4.14.0"
             },
-            "time": "2025-05-06T15:26:21+00:00"
+            "time": "2025-05-23T15:06:40+00:00"
         },
         {
             "name": "behat/mink",
@@ -15122,16 +15123,16 @@
         },
         {
             "name": "friends-of-behat/symfony-extension",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfBehat/SymfonyExtension.git",
-                "reference": "dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd"
+                "reference": "814dc0e253c527b9739072c8b84f6c9b6c51fc58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd",
-                "reference": "dfb1c9c96cc0fb7c8e1caa060695426a12e1efbd",
+                "url": "https://api.github.com/repos/FriendsOfBehat/SymfonyExtension/zipball/814dc0e253c527b9739072c8b84f6c9b6c51fc58",
+                "reference": "814dc0e253c527b9739072c8b84f6c9b6c51fc58",
                 "shasum": ""
             },
             "require": {
@@ -15184,9 +15185,9 @@
             "description": "Integrates Behat with Symfony.",
             "support": {
                 "issues": "https://github.com/FriendsOfBehat/SymfonyExtension/issues",
-                "source": "https://github.com/FriendsOfBehat/SymfonyExtension/tree/v2.6.0"
+                "source": "https://github.com/FriendsOfBehat/SymfonyExtension/tree/v2.6.1"
             },
-            "time": "2024-07-03T15:49:43+00:00"
+            "time": "2025-05-27T09:31:49+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
