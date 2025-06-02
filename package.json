@@ -72,7 +72,7 @@
     "stimulus": "^3.2.2",
     "stylelint": "^16.19.1",
     "stylelint-config-standard-scss": "^15.0.1",
-    "webpack-bugsnag-plugins": "^2.2.0",
+    "webpack-bugsnag-plugins": "^2.2.1",
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
