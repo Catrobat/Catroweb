@@ -43,7 +43,7 @@
     "symfony/console": "7.3.*",
     "symfony/dotenv": "7.3.*",
     "symfony/flex": "2.7.*",
-    "symfony/framework-bundle": "7.2.*",
+    "symfony/framework-bundle": "7.3.*",
     "symfony/intl": "7.3.*",
     "symfony/mailer": "7.3.*",
     "symfony/monolog-bundle": "3.10.*",
