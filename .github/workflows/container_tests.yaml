@@ -65,7 +65,7 @@ jobs:
       - name: Run a few dynamic software tests
         run: |
           docker exec app.catroweb chmod -R 777 var
-          if ! docker exec app.catroweb bin/behat -s web-general tests/BehatFeatures/web/general/homepage.feature; then
+          if ! docker exec app.catroweb bin/behat -s web-general; then
             echo "Initial run failed. Rerunning failed scenarios..."
             docker exec app.catroweb bin/behat -s web-general --rerun
           else
