@@ -56,7 +56,7 @@ Feature: Uploading a project
     And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a parameter "checksum" with value "wrong_checksum"
-    And I have a broken Catrobat file, API version 2
+    And I have a broken Catrobat file
     And I request "POST" "/api/projects"
     Then the response status code should be "422"
     And I should get the json object:
@@ -71,7 +71,7 @@ Feature: Uploading a project
     And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a parameter "checksum" with value "5A136BCF4179C875F61BD7505A1A63F6"
-    And I have a broken Catrobat file, API version 2
+    And I have a broken Catrobat file
     And I request "POST" "/api/projects"
     Then the response status code should be "422"
     And I should get the json object:
@@ -87,7 +87,7 @@ Feature: Uploading a project
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I have a parameter "checksum" with value "5A136BCF4179C875F61BD7505A1A63F6"
-    And I have a broken Catrobat file, API version 2
+    And I have a broken Catrobat file
     And I request "POST" "/api/projects"
     Then the response status code should be "422"
     And I should get the json object:
@@ -102,15 +102,15 @@ Feature: Uploading a project
     And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a parameter "checksum" with value "B472E2CB01AEACE0F359D0A1FE9A4036"
-    And I have a valid Catrobat file, API version 2
+    And I have a valid Catrobat file
     And I request "POST" "/api/projects"
     Then the response status code should be "201"
-    And the uploaded project should exist in the database, API version 2
+    And the uploaded project should exist in the database
     And the response should contain the URL of the uploaded project
 
   Scenario: uploading the same project again should result in an update
     Given I am "Catrobat"
-    When I upload a valid Catrobat project, API version 2
-    And I upload a valid Catrobat project with the same name, API version 2
-    Then the uploaded project should exist in the database, API version 2
-    And it should be updated, API version 2
+    When I upload a valid Catrobat project
+    And I upload a valid Catrobat project with the same name
+    Then the uploaded project should exist in the database
+    And it should be updated

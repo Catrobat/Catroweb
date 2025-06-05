@@ -4,12 +4,12 @@ Feature: Admin all projects
 
   Background:
     Given there are admins:
-      | name  | password | token      | email                | id |
-      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
+      | name  | password | email                | id |
+      | Admin | 123456   | admin@pocketcode.org | 1  |
     And there are users:
-      | name  | password | token      | email               | id |
-      | Karim | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
-      | Pauli | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
+      | name  | password | email               | id |
+      | Karim | 123456   | dev1@pocketcode.org | 2  |
+      | Pauli | 123456   | dev2@pocketcode.org | 3  |
     And there are downloadable projects:
       | id | name      | description      | owned by | downloads | flavor     | views | upload time      | visible | not_for_kids |
       | 1  | program 1 | a classy program | Karim    | 3         | pocketcode | 120   | 01.01.2019 12:00 | true    | 0            |

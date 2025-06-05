@@ -3,16 +3,12 @@
 declare(strict_types=1);
 
 use App\Project\Apk\JenkinsDispatcher;
-use App\Security\TokenGenerator;
 use App\System\Testing\DataFixtures\ProjectDataFixtures;
 use App\System\Testing\DataFixtures\UserDataFixtures;
 use App\System\Testing\FakeJenkinsDispatcher;
 use App\System\Testing\FakeTranslationDelegate;
-use App\System\Testing\ProxyTokenGenerator;
 use App\Translation\TranslationDelegate;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters = $containerConfigurator->parameters();
@@ -43,8 +39,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   // Overwrite services to ensure testability
-  $services->set('token_generator.inner', TokenGenerator::class);
-  $services->set(TokenGenerator::class, ProxyTokenGenerator::class)->autowire(false)->args([service('token_generator.inner')]);
   $services->set(JenkinsDispatcher::class, FakeJenkinsDispatcher::class)->args(['%jenkins%']);
   $services->set(TranslationDelegate::class, FakeTranslationDelegate::class);
 

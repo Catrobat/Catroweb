@@ -25,7 +25,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Table(name: 'fos_user')]
-#[ORM\Index(name: 'upload_token_idx', columns: ['upload_token'])]
 #[ORM\Index(name: 'confirmation_token_isx', columns: ['confirmation_token'])]
 #[ORM\Index(name: 'username_canonical_idx', columns: ['username_canonical'])]
 #[ORM\Index(name: 'email_canonical_idx', columns: ['email_canonical'])]
@@ -47,12 +46,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]
   #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
   protected string $id;
-
-  /**
-   * @deprecated API v1
-   */
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
-  protected ?string $upload_token = null;
 
   #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $avatar = null;
@@ -342,16 +335,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   public function getPrograms(): Collection
   {
     return $this->programs;
-  }
-
-  public function getUploadToken(): ?string
-  {
-    return $this->upload_token;
-  }
-
-  public function setUploadToken(?string $upload_token): void
-  {
-    $this->upload_token = $upload_token;
   }
 
   public function setId(string $id): void

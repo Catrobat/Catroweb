@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\System\Testing\Behat\Context;
 
-use App\Api\Exceptions\ApiVersionNotSupportedException;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
@@ -77,11 +76,6 @@ class ApiContext implements Context
   private array $request_headers;
 
   private ?string $request_content = null;
-
-  /**
-   * @var string[]
-   */
-  private array $stored_json = [];
 
   private ?KernelBrowser $kernel_browser = null;
 
@@ -412,31 +406,24 @@ class ApiContext implements Context
   }
 
   /**
-   * @When I upload a valid Catrobat project, API version :api_version
-   * @When I upload a valid Catrobat project with the same name, API version :api_version
-   *
-   * @param string $api_version The API version to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @When I upload a valid Catrobat project
+   * @When I upload a valid Catrobat project with the same name
    */
-  public function iUploadAValidCatrobatProject(string $api_version): void
+  public function iUploadAValidCatrobatProject(): void
   {
-    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat');
   }
 
   /**
-   * @When user :username uploads a valid Catrobat project, API version :api_version
+   * @When user :username uploads a valid Catrobat project
    *
-   * @param string $username    The name of the user who initiates the upload
-   * @param string $api_version The API version to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @param string $username The name of the user who initiates the upload
    */
-  public function userUploadsAValidCatrobatProject(string $username, string $api_version): void
+  public function userUploadsAValidCatrobatProject(string $username): void
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($username);
-    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', $api_version, $user);
+    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', $user);
   }
 
   /**
@@ -446,8 +433,8 @@ class ApiContext implements Context
    */
   public function iUploadAnotherProjectUsingToken(string $token): void
   {
-    $this->iHaveAValidCatrobatFile('1');
-    $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum', '1');
+    $this->iHaveAValidCatrobatFile();
+    $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum');
     $this->request_parameters['username'] = $this->username;
     $this->request_parameters['token'] = $token;
     $this->iPostTo('/app/api/upload/upload.json');
@@ -554,31 +541,25 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then the uploaded project should be a remix root, API version :api_version
+   * @Then the uploaded project should be a remix root
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldBeARemixRoot(string $api_version): void
+  public function theUploadedProjectShouldBeARemixRoot(): void
   {
-    $this->theProjectShouldBeARemixRoot($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldBeARemixRoot($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should exist in the database, API version :api_version
+   * @Then the uploaded project should exist in the database
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the requested $api_version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldExistInTheDatabase(string $api_version): void
+  public function theUploadedProjectShouldExistInTheDatabase(): void
   {
     // Trying to find the id of the last uploaded project in the database
     $uploaded_project = $this->getManager()->getRepository(Program::class)->findOneBy([
-      'id' => $this->getIDOfLastUploadedProject($api_version),
+      'id' => $this->getIDOfLastUploadedProject(),
     ]);
 
     Assert::assertNotNull($uploaded_project);
@@ -706,18 +687,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given I use a valid upload token for :username
-   */
-  public function iUseAValidUploadTokenFor(string $username): void
-  {
-    /** @var User $user */
-    $user = $this->getUserManager()->findUserByUsername($username);
-    $upload_token = $user->getUploadToken();
-
-    $this->request_headers['HTTP_authorization'] = $upload_token;
-  }
-
-  /**
    * @throws \Exception
    */
   public function getSymfonyProfile(): Profile
@@ -731,13 +700,9 @@ class ApiContext implements Context
   }
 
   /**
-   * @When I upload a project with :project_attribute, API version :api_version
-   *
-   * @param string $api_version The API version to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @When I upload a project with :project_attribute
    */
-  public function iUploadAProjectWith(string $project_attribute, string $api_version): void
+  public function iUploadAProjectWith(string $project_attribute): void
   {
     $filename = match ($project_attribute) {
       'a missing code.xml' => 'program_with_missing_code_xml.catrobat',
@@ -749,260 +714,201 @@ class ApiContext implements Context
       'tags' => 'program_with_tags.catrobat',
       default => throw new PendingException('No case defined for "'.$project_attribute.'"'),
     };
-    $this->uploadProject($this->FIXTURES_DIR.'GeneratedFixtures/'.$filename, $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'GeneratedFixtures/'.$filename);
   }
 
   /**
-   * @When I upload an invalid project file, API version :api_version
-   *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @When I upload an invalid project file
    */
-  public function iUploadAnInvalidProjectFile(string $api_version): void
+  public function iUploadAnInvalidProjectFile(): void
   {
-    $this->uploadProject($this->FIXTURES_DIR.'/invalid_archive.catrobat', $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'/invalid_archive.catrobat');
   }
 
   /**
-   * @When I upload this generated project with id :id, API version :api_version
+   * @When I upload this generated project with id :id
    *
-   * @param string $id          The desired id of the uploaded project
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @param string $id The desired id of the uploaded project
    */
-  public function iUploadThisGeneratedProjectWithId(string $id, string $api_version): void
+  public function iUploadThisGeneratedProjectWithId(string $id): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', null, $id);
   }
 
   /**
-   * @Given I upload the project with ":name" as name, API version :api_version
-   * @Given I upload the project with ":name" as name again, API version :api_version
+   * @Given I upload the project with ":name" as name
+   * @Given I upload the project with ":name" as name again
    *
-   * @param string $api_version The API version to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \Exception
    */
-  public function iUploadTheProjectWithAsName(string $name, string $api_version): void
+  public function iUploadTheProjectWithAsName(string $name): void
   {
     $this->generateProjectFileWith([
       'name' => $name,
     ]);
-    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat');
   }
 
   /**
-   * @Then the uploaded project should not be a remix root, API version :api_version
+   * @Then the uploaded project should not be a remix root
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldNotBeARemixRoot(string $api_version): void
+  public function theUploadedProjectShouldNotBeARemixRoot(): void
   {
-    $this->theProjectShouldNotBeARemixRoot($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldNotBeARemixRoot($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have remix migration date NOT NULL, API version :api_version
+   * @Then the uploaded project should have remix migration date NOT NULL
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveMigrationDateNotNull(string $api_version): void
+  public function theUploadedProjectShouldHaveMigrationDateNotNull(): void
   {
     $project_manager = $this->getProjectManager();
-    $uploaded_project = $project_manager->find($this->getIDOfLastUploadedProject($api_version));
+    $uploaded_project = $project_manager->find($this->getIDOfLastUploadedProject());
     Assert::assertNotNull($uploaded_project->getRemixMigratedAt());
   }
 
   /**
-   * @Given the uploaded project should have a Scratch parent having id :id, API version :api_version
+   * @Given the uploaded project should have a Scratch parent having id :id
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveAScratchParentHavingScratchID(string $scratch_parent_id, string $api_version): void
+  public function theUploadedProjectShouldHaveAScratchParentHavingScratchID(string $scratch_parent_id): void
   {
-    $this->theProjectShouldHaveAScratchParentHavingScratchID($this->getIDOfLastUploadedProject($api_version), $scratch_parent_id);
+    $this->theProjectShouldHaveAScratchParentHavingScratchID($this->getIDOfLastUploadedProject(), $scratch_parent_id);
   }
 
   /**
-   * @Given the uploaded project should have no further Scratch parents, API version :api_version
+   * @Given the uploaded project should have no further Scratch parents
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoFurtherScratchParents(string $api_version): void
+  public function theUploadedProjectShouldHaveNoFurtherScratchParents(): void
   {
-    $this->theProjectShouldHaveNoFurtherScratchParents($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoFurtherScratchParents($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have a Catrobat forward ancestor having id :id and depth :depth, API version :api_version
+   * @Then the uploaded project should have a Catrobat forward ancestor having id :id and depth :depth
    *
-   * @param string $api_version The API version to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(string $id, string $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(string $id, string $depth): void
   {
-    $this->theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version),
-      $id, $depth);
+    $this->theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject(), $id, $depth);
   }
 
   /**
-   * @Then the uploaded project should have a Catrobat forward ancestor having its own id and depth :depth, API version :api_version
+   * @Then the uploaded project should have a Catrobat forward ancestor having its own id and depth :depth
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth(string $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth(string $depth): void
   {
-    $this->theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $this->getIDOfLastUploadedProject($api_version), $depth);
+    $this->theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject(), $this->getIDOfLastUploadedProject(), $depth);
   }
 
   /**
-   * @Then the uploaded project should have a Catrobat backward parent having id :id, API version :api_version
+   * @Then the uploaded project should have a Catrobat backward parent having id :id
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveACatrobatBackwardParentHavingId(string $id, string $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatBackwardParentHavingId(string $id): void
   {
-    $this->theProjectShouldHaveACatrobatBackwardParentHavingId($this->getIDOfLastUploadedProject($api_version), $id);
+    $this->theProjectShouldHaveACatrobatBackwardParentHavingId($this->getIDOfLastUploadedProject(), $id);
   }
 
   /**
-   * @Then the uploaded project should have no Catrobat forward ancestors except self-relation, API version :api_version
+   * @Then the uploaded project should have no Catrobat forward ancestors except self-relation
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(string $api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(): void
   {
-    $this->theProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have no Catrobat backward parents, API version :api_version
+   * @Then the uploaded project should have no Catrobat backward parents
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoCatrobatBackwardParents(string $api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatBackwardParents(): void
   {
-    $this->theProjectShouldHaveNoCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoCatrobatBackwardParents($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have no further Catrobat backward parents, API version :api_version
+   * @Then the uploaded project should have no further Catrobat backward parents
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoFurtherCatrobatBackwardParents(string $api_version): void
+  public function theUploadedProjectShouldHaveNoFurtherCatrobatBackwardParents(): void
   {
-    $this->theProjectShouldHaveNoFurtherCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoFurtherCatrobatBackwardParents($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have no Catrobat ancestors except self-relation, API version :api_version
+   * @Then the uploaded project should have no Catrobat ancestors except self-relation
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoCatrobatAncestors(string $api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatAncestors(): void
   {
-    $this->theProjectShouldHaveNoCatrobatAncestors($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoCatrobatAncestors($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have no Scratch parents, API version :api_version
+   * @Then the uploaded project should have no Scratch parents
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoScratchParents(string $api_version): void
+  public function theUploadedProjectShouldHaveNoScratchParents(): void
   {
-    $this->theProjectShouldHaveNoScratchParents($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoScratchParents($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have a Catrobat forward descendant having id :id and depth :depth, API version :api_version
+   * @Then the uploaded project should have a Catrobat forward descendant having id :id and depth :depth
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(string $id, string $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(string $id, string $depth): void
   {
-    $this->theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $id, $depth);
+    $this->theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth($this->getIDOfLastUploadedProject(), $id, $depth);
   }
 
   /**
-   * @Then the uploaded project should have no Catrobat forward descendants except self-relation, API version :api_version
+   * @Then the uploaded project should have no Catrobat forward descendants except self-relation
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(string $api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(): void
   {
-    $this->theProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have no further Catrobat forward descendants, API version :api_version
+   * @Then the uploaded project should have no further Catrobat forward descendants
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardDescendants(string $api_version): void
+  public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardDescendants(): void
   {
-    $this->theProjectShouldHaveNoFurtherCatrobatForwardDescendants($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoFurtherCatrobatForwardDescendants($this->getIDOfLastUploadedProject());
   }
 
   /**
-   * @Then the uploaded project should have RemixOf :value in the xml, API version :api_version
+   * @Then the uploaded project should have RemixOf :value in the xml
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveRemixOfInTheXml(string $value, string $api_version): void
+  public function theUploadedProjectShouldHaveRemixOfInTheXml(string $value): void
   {
-    $this->theProjectShouldHaveRemixofInTheXml($this->getIDOfLastUploadedProject($api_version), $value);
+    $this->theProjectShouldHaveRemixofInTheXml($this->getIDOfLastUploadedProject(), $value);
   }
 
   /**
@@ -1062,16 +968,13 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then the uploaded project should have no further Catrobat forward ancestors, API version :api_version
+   * @Then the uploaded project should have no further Catrobat forward ancestors
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardAncestors(string $api_version): void
+  public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardAncestors(): void
   {
-    $this->theProjectShouldHaveNoFurtherCatrobatForwardAncestors($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoFurtherCatrobatForwardAncestors($this->getIDOfLastUploadedProject());
   }
 
   /**
@@ -1227,7 +1130,6 @@ class ApiContext implements Context
   /**
    * @When /^I update this project$/
    *
-   * @throws ApiVersionNotSupportedException
    * @throws \Exception
    * @throws \Exception
    */
@@ -1242,7 +1144,7 @@ class ApiContext implements Context
     $file = $this->generateProjectFileWith([
       'name' => $project->getName(),
     ]);
-    $this->uploadProject($file, '2', $project->getUser());
+    $this->uploadProject($file, $project->getUser());
   }
 
   /**
@@ -1514,26 +1416,6 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
     Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
-  }
-
-  /**
-   * @Given /^I store the following json object as "([^"]*)":$/
-   */
-  public function iStoreTheFollowingJsonObjectAs(string $name, PyStringNode $json): void
-  {
-    $this->stored_json[$name] = $json->getRaw();
-  }
-
-  /**
-   * @Then /^I should get the stored json object "([^"]*)"$/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetTheStoredJsonObject(string $name): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $this->assertJsonRegex($this->stored_json[$name], $response->getContent());
   }
 
   /**
@@ -1970,22 +1852,13 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given /^I have a parameter ":parameter" with the md5checksum of the file to be uploaded, API version :api_version$/
+   * @Given /^I have a parameter ":parameter" with the md5checksum of the file to be uploaded$/
    *
-   * @param string $parameter   The HTTP request parameter holding the checksum
-   * @param string $api_version The version of the API which should be used
-   *
-   * @throws ApiVersionNotSupportedException When the specified $api_version is not supported
+   * @param string $parameter The HTTP request parameter holding the checksum
    */
-  public function iHaveAParameterWithTheMdChecksumOfTheUploadFile(string $parameter, string $api_version): void
+  public function iHaveAParameterWithTheMdChecksumOfTheUploadFile(string $parameter): void
   {
-    if ('1' === $api_version) {
-      $this->request_parameters[$parameter] = md5_file($this->request_files[0]->getPathname());
-    } elseif ('2' === $api_version) {
-      $this->request_parameters[$parameter] = md5_file($this->request_files['file']->getPathname());
-    } else {
-      throw new ApiVersionNotSupportedException($api_version);
-    }
+    $this->request_parameters[$parameter] = md5_file($this->request_files['file']->getPathname());
   }
 
   /**
@@ -2024,30 +1897,17 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then it should be updated, API version :api_version
+   * @Then it should be updated
    *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException When the specified $api_version is not supported
    * @throws \JsonException
    */
-  public function itShouldBeUpdated(string $api_version): void
+  public function itShouldBeUpdated(): void
   {
-    if ('1' === $api_version) {
-      $last_json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
-      $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
-      Assert::assertEquals($last_json['projectId'], $json['projectId'],
-        $this->getKernelBrowser()->getResponse()->getContent()
-      );
-    } elseif ('2' === $api_version) {
-      $response = $this->getKernelBrowser()->getResponse();
-      $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-      $location = $responseArray['project_url'];
+    $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $location = $responseArray['project_url'];
 
-      Assert::assertNotNull($location);
-    } else {
-      throw new ApiVersionNotSupportedException($api_version);
-    }
+    Assert::assertNotNull($location);
   }
 
   /**
@@ -2082,119 +1942,80 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given I try to upload a project with unnecessary files, API version :api_version
-   *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API is not supported
+   * @Given I try to upload a project with unnecessary files
    */
-  public function iTryToUploadAProjectWithUnnecessaryFiles(string $api_version): void
+  public function iTryToUploadAProjectWithUnnecessaryFiles(): void
   {
-    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFiles.catrobat', $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFiles.catrobat');
   }
 
   /**
-   * @Given I try to upload a project with scenes and unnecessary files, API version :api_version
-   *
-   * @param string $api_version The API version to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API is not supported
+   * @Given I try to upload a project with scenes and unnecessary files
    */
-  public function iTryToUploadAProjectWithScenesAndUnnecessaryFiles(string $api_version): void
+  public function iTryToUploadAProjectWithScenesAndUnnecessaryFiles(): void
   {
-    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFilesInScenes.catrobat', $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFilesInScenes.catrobat');
   }
 
   /**
-   * @When I upload this project with id :id, API version :api_version
+   * @When I upload this project with id :id
    *
-   * @param string $id          The desired ID of the newly uploaded project
-   * @param string $api_version The version of the API to be used
+   * @param string $id The desired ID of the newly uploaded project
    *
-   * @throws ApiVersionNotSupportedException when the specified API is not supported
    * @throws \JsonException
    */
-  public function iUploadThisProjectWithId(string $id, string $api_version): void
+  public function iUploadThisProjectWithId(string $id): void
   {
-    if ('1' === $api_version) {
-      $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat',
-        $api_version, null, $id);
-
-      $resp_array = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
-      $resp_array['projectId'] = $id;
-      $this->getKernelBrowser()->getResponse()->setContent(json_encode($resp_array, JSON_THROW_ON_ERROR));
-    } elseif ('2' === $api_version) {
-      $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
-    } else {
-      throw new ApiVersionNotSupportedException($api_version);
-    }
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', null, $id);
   }
 
   /**
-   * @When I upload this generated project, API version :api_version
-   * @When I upload a generated project, API version :api_version
-   *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @When I upload this generated project
+   * @When I upload a generated project
    */
-  public function iUploadThisGeneratedProject(string $api_version): void
+  public function iUploadThisGeneratedProject(): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat');
   }
 
   /**
-   * @When user :username uploads this generated project, API version :api_version
+   * @When user :username uploads this generated project
    *
-   * @param string $username    The name of the user uploading the project
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @param string $username The name of the user uploading the project
    */
-  public function userUploadThisGeneratedProject(string $username, string $api_version): void
+  public function userUploadThisGeneratedProject(string $username): void
   {
-    $this::userUploadThisGeneratedProjectWithID($username, $api_version, '');
+    $this::userUploadThisGeneratedProjectWithID($username, '');
   }
 
   /**
-   * @When user :username uploads this generated project, API version :api_version, ID :id
+   * @When user :username uploads this generated project, ID :id
    *
-   * @param string $username    The name of the user uploading the project
-   * @param string $api_version The version of the API to be used
-   * @param string $id          Desired id of the project
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @param string $username The name of the user uploading the project
+   * @param string $id       Desired id of the project
    */
-  public function userUploadThisGeneratedProjectWithID(string $username, string $api_version, string $id): void
+  public function userUploadThisGeneratedProjectWithID(string $username, string $id): void
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($username);
     Assert::assertNotNull($user);
-    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, $user, $id);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $user, $id);
   }
 
   /**
-   * @When I upload the project with the id ":id", API version :api_version
-   *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @When I upload the project with the id ":id"
    */
-  public function iUploadAProjectWithId(string $id, string $api_version): void
+  public function iUploadAProjectWithId(string $id): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', null, $id);
   }
 
   /**
-   * @When I upload the generated project with the id :id and name :name, API version :api_version
-   *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @When I upload the generated project with the id :id and name :name
    */
-  public function iUploadTheGeneratedProjectWithIdAndName(string $id, string $name, string $api_version): void
+  public function iUploadTheGeneratedProjectWithIdAndName(string $id, string $name): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', null, $id);
 
     /** @var Program $project */
     $project = $this->getProjectManager()->find($id);
@@ -2205,62 +2026,48 @@ class ApiContext implements Context
   }
 
   /**
-   * @When I upload this generated project again without extensions, API version :api_version
-   *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API is not supported
+   * @When I upload this generated project again without extensions
    */
-  public function iUploadTheGeneratedProjectAgainWithoutExtensions(string $api_version): void
+  public function iUploadTheGeneratedProjectAgainWithoutExtensions(): void
   {
     $this->iHaveAProjectWithAs('name', 'extensions');
-    $this->iUploadThisGeneratedProject($api_version);
+    $this->iUploadThisGeneratedProject();
   }
 
   /**
-   * @When I upload another project with name set to :name and url set to :url, API version :api_version
-   *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   * @When I upload another project with name set to :name and url set to :url
    */
-  public function iUploadAnotherProjectWithNameSetToAndUrlSetTo(string $name, string $url, string $api_version): void
+  public function iUploadAnotherProjectWithNameSetToAndUrlSetTo(string $name, string $url): void
   {
     $this->iHaveAProjectWithAsTwoHeaderFields('name', $name, 'url', $url);
-    $this->iUploadThisGeneratedProject($api_version);
+    $this->iUploadThisGeneratedProject();
   }
 
   /**
    * @When I upload another project with name set to :arg1, url set to :arg2 \
-   *       and catrobatLanguageVersion set to :arg3, API version :api_version
-   *
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
+   *       and catrobatLanguageVersion set to :arg3
    */
-  public function iUploadAnotherProjectWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo(string $name, string $url, string $catrobat_language_version, string $api_version): void
+  public function iUploadAnotherProjectWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo(string $name, string $url, string $catrobat_language_version): void
   {
     $this->iHaveAProjectWithAsMultipleHeaderFields('name', $name, 'url', $url,
       'catrobatLanguageVersion', $catrobat_language_version);
-    $this->iUploadThisGeneratedProject($api_version);
+    $this->iUploadThisGeneratedProject();
   }
 
   /**
-   * @When I upload this generated project again with the tags :arg1, API version :arg2
+   * @When I upload this generated project again with the tags :arg1
    *
-   * @param string $tags        The tags of the project
-   * @param string $api_version The version of the API to be used
+   * @param string $tags The tags of the project
    *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \Exception
    */
-  public function iUploadThisProjectAgainWithTheTags(string $tags, string $api_version): void
+  public function iUploadThisProjectAgainWithTheTags(string $tags): void
   {
     $this->generateProjectFileWith([
       'tags' => $tags,
     ]);
     $file = sys_get_temp_dir().'/project_generated.catrobat';
-    $this->uploadProject($file, $api_version);
+    $this->uploadProject($file);
   }
 
   /**
@@ -2307,14 +2114,11 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given I use the :arg1 app, API version :arg2
+   * @Given I use the :language app
    *
-   * @param string $language    The desired language
-   * @param string $api_version The version of the API to be used
-   *
-   * @throws ApiVersionNotSupportedException when the specified API is not supported
+   * @param string $language The desired language
    */
-  public function iUseTheApp(string $language, string $api_version): void
+  public function iUseTheApp(string $language): void
   {
     $deviceLanguage = match ($language) {
       'english' => 'en',
@@ -2322,13 +2126,7 @@ class ApiContext implements Context
       default => 'NotExisting',
     };
 
-    if ('1' === $api_version) {
-      $this->iHaveAParameterWithValue('deviceLanguage', $deviceLanguage);
-    } elseif ('2' === $api_version) {
-      $this->iHaveARequestHeaderWithValue('HTTP_ACCEPT_LANGUAGE', $deviceLanguage);
-    } else {
-      throw new ApiVersionNotSupportedException($api_version);
-    }
+    $this->iHaveARequestHeaderWithValue('HTTP_ACCEPT_LANGUAGE', $deviceLanguage);
   }
 
   /**
@@ -2404,26 +2202,14 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given I have a valid Catrobat file, API version :api_version
-   *
-   * @param string $api_version the version of the API which should be used
-   *
-   * @throws ApiVersionNotSupportedException When a not supported version of the API is passed as parameter
-   *                                         $api_version
+   * @Given I have a valid Catrobat file
    */
-  public function iHaveAValidCatrobatFile(string $api_version): void
+  public function iHaveAValidCatrobatFile(): void
   {
     $filepath = $this->FIXTURES_DIR.'test.catrobat';
     Assert::assertTrue(file_exists($filepath), 'File not found');
     $this->request_files = [];
-
-    if ('1' === $api_version) {
-      $this->request_files[0] = new UploadedFile($filepath, 'test.catrobat');
-    } elseif ('2' === $api_version) {
-      $this->request_files['file'] = new UploadedFile($filepath, 'test.catrobat');
-    } else {
-      throw new ApiVersionNotSupportedException($api_version);
-    }
+    $this->request_files['file'] = new UploadedFile($filepath, 'test.catrobat');
   }
 
   /**
@@ -2439,24 +2225,14 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given I have a broken Catrobat file, API version :api_version
-   *
-   * @param string $api_version the version of the API which should be used
-   *
-   * @throws ApiVersionNotSupportedException When a not supported version of the API is passed as parameter
-   *                                         $api_version
+   * @Given I have a broken Catrobat file
    */
-  public function iHaveABrokenCatrobatFile(string $api_version): void
+  public function iHaveABrokenCatrobatFile(): void
   {
     $filepath = $this->FIXTURES_DIR.'broken.catrobat';
     Assert::assertTrue(file_exists($filepath), 'File not found');
     $this->request_files = [];
-
-    if ('2' === $api_version) {
-      $this->request_files['file'] = new UploadedFile($filepath, 'broken.catrobat');
-    } else {
-      throw new ApiVersionNotSupportedException($api_version);
-    }
+    $this->request_files['file'] = new UploadedFile($filepath, 'broken.catrobat');
   }
 
   /**
@@ -2791,9 +2567,9 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given /^I request from a (debug|release) build of the Catroid app$/
+   * @Given /^I use a (debug|release) catroid build useragent$/
    */
-  public function iRequestFromASpecificBuildTypeOfCatroidApp(string $build_type): void
+  public function iHaveSpecificBuild(string $build_type): void
   {
     $this->iUseTheUserAgentParameterized('0.998', Flavor::POCKETCODE, '0.9.60', $build_type);
   }
@@ -2801,7 +2577,6 @@ class ApiContext implements Context
   /**
    * @When /^I upload a catrobat project with the phiro app$/
    *
-   * @throws ApiVersionNotSupportedException
    * @throws \Exception
    * @throws \Exception
    */
@@ -2809,7 +2584,7 @@ class ApiContext implements Context
   {
     $user = $this->insertUser();
     $uploadedFile = $this->getStandardProjectFile();
-    $this->uploadProject(strval($uploadedFile), '1', $user, '1', Flavor::PHIROCODE);
+    $this->uploadProject(strval($uploadedFile), $user, '1', Flavor::PHIROCODE);
     Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
@@ -2837,22 +2612,6 @@ class ApiContext implements Context
     } catch (\Exception) {
       file_put_contents($this->ERROR_DIR.'errors.json', '');
     }
-  }
-
-  /**
-   * @When /^I upload a standard catrobat project$/
-   *
-   * @throws ApiVersionNotSupportedException
-   * @throws \Exception
-   * @throws \Exception
-   */
-  public function iUploadAStandardCatrobatProject(): void
-  {
-    $user = $this->insertUser();
-    $uploadedFile = $this->getStandardProjectFile();
-    $this->uploadProject(strval($uploadedFile), '1', $user, '1');
-    Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
-      'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
 
   /**
@@ -3323,16 +3082,14 @@ class ApiContext implements Context
   /**
    * Uploads a Catrobat Project.
    *
-   * @param string    $file        The Catrobat file to be uploaded
-   * @param User|null $user        The uploader
-   * @param string    $api_version The version of the API to be used
-   * @param string    $desired_id  Specifiy, if the uploaded project should get a desired id
-   * @param string    $flavor      The flavor of the project
+   * @param string    $file       The Catrobat file to be uploaded
+   * @param User|null $user       The uploader
+   * @param string    $desired_id Specify, if the uploaded project should get a desired id
+   * @param string    $flavor     The flavor of the project
    *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
-   * @throws \Exception                      when an error while uploading occurs
+   * @throws \Exception when an error while uploading occurs
    */
-  private function uploadProject(string $file, string $api_version, ?User $user = null, string $desired_id = '', string $flavor = Flavor::POCKETCODE): void
+  private function uploadProject(string $file, ?User $user = null, string $desired_id = '', string $flavor = Flavor::POCKETCODE): void
   {
     if (null == $user) {
       if (null !== $this->username) {
@@ -3354,47 +3111,26 @@ class ApiContext implements Context
       throw new \Exception('File to upload does not exist: '.$exception->getMessage(), $exception->getCode(), $exception);
     }
 
-    if ('1' === $api_version) {
-      $this->request_parameters['username'] = $user->getUsername();
-      $this->request_parameters['token'] = $user->getUploadToken();
-      $this->request_files[0] = $file;
-      $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum', '1');
-      $this->iRequestWith('POST', '/'.$flavor.'/api/upload/upload.json');
-    } elseif ('2' === $api_version) {
-      $this->request_headers['CONTENT_TYPE'] = 'multipart/form-data';
-      $this->request_headers['HTTP_ACCEPT'] = 'application/json';
-      $this->request_files['file'] = $file;
-      $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('checksum', '2');
-      $this->iUseAValidJwtBearerTokenFor($user->getUsername());
-      $this->iRequestWith('POST', '/api/projects');
-    } else {
-      throw new ApiVersionNotSupportedException($api_version);
-    }
+    $this->request_headers['CONTENT_TYPE'] = 'multipart/form-data';
+    $this->request_headers['HTTP_ACCEPT'] = 'application/json';
+    $this->request_files['file'] = $file;
+    $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('checksum');
+    $this->iUseAValidJwtBearerTokenFor($user->getUsername());
+    $this->iRequestWith('POST', '/api/projects');
   }
 
   /**
    * Returns the ID of the last uploaded project. The ID is retrieved from the last received response.
    *
-   * @param string $api_version The API version to be used
-   *
    * @return string the ID of the last uploaded project or null if not available
    *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \JsonException
    */
-  private function getIDOfLastUploadedProject(string $api_version): string
+  private function getIDOfLastUploadedProject(): string
   {
     $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    if ('1' === $api_version) {
-      $last_uploaded_project_id = $json['projectId'];
-    } elseif ('2' === $api_version) {
-      $last_uploaded_project_id = $json['id'];
-    } else {
-      throw new ApiVersionNotSupportedException($api_version);
-    }
-
-    return $last_uploaded_project_id;
+    return $json['id'];
   }
 
   private function iUseTheUserAgent(string $user_agent): void

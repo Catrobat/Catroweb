@@ -9,8 +9,8 @@ Feature: We keep statistic about the usage of the platform, while deleting inact
 
   Scenario: Uploading a new project should increase the projects count
     Given I have a project with "name" set to "First program"
-    When I upload a generated project, API version 2
-    Then the uploaded project should exist in the database, API version 2
+    When I upload a generated project
+    Then the uploaded project should exist in the database
     And There should be statistics with "1" user and "1" projects
 
   Scenario: Statistics are shown in the footer

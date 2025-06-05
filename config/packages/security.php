@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Api_deprecated\Security\ApiTokenAuthenticator;
 use App\DB\Entity\User\User;
-use App\Security\Authentication\WebView\WebviewAuthenticator;
 use App\Security\Authentication\WebView\WebviewJWTAuthenticator;
 use App\Security\OAuth\HwiOauthUserProvider;
 use App\Security\OAuth\OAuthSuccessHandler;
@@ -47,21 +45,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'stateless' => true,
           'jwt' => null,
         ],
-        'api_checktoken' => [
-          'provider' => 'user_provider',
-          'pattern' => '^.*?/api/checkToken/check.json',
-          'stateless' => true,
-          'custom_authenticators' => [
-            ApiTokenAuthenticator::class,
-          ],
-        ],
-        'api_upload' => [
-          'provider' => 'user_provider',
-          'pattern' => '^.*?/api/upload/upload.json',
-          'custom_authenticators' => [
-            ApiTokenAuthenticator::class,
-          ],
-        ],
         'debug' => [
           'provider' => 'user_provider',
           'pattern' => '^/debug',
@@ -75,7 +58,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'default_target_path' => '/',
           ],
           'custom_authenticators' => [
-            WebviewAuthenticator::class,
             WebviewJWTAuthenticator::class,
           ],
           'entry_point' => WebviewJWTAuthenticator::class,

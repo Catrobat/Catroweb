@@ -11,7 +11,6 @@ use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\OAuthLoginRequest;
 use OpenAPI\Server\Model\RefreshRequest;
-use OpenAPI\Server\Model\UpgradeTokenRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticationApi extends AbstractApiController implements AuthenticationApiInterface
@@ -90,33 +89,5 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
     $responseCode = Response::HTTP_OK;
 
     return $this->facade->getResponseManager()->createOAuthPostResponse($token, $refresh_token);
-  }
-
-  #[\Override]
-  public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, int &$responseCode, array &$responseHeaders): array|object|null
-  {
-    $deprecated_token = $upgrade_token_request->getUploadToken();
-    if (null === $deprecated_token || '' === $deprecated_token || '0' === $deprecated_token) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
-      return null;
-    }
-
-    $user = $this->facade->getLoader()->findUserByUploadToken($deprecated_token);
-
-    if (is_null($user)) {
-      $responseCode = Response::HTTP_UNAUTHORIZED;
-
-      return null;
-    }
-
-    $token = $this->facade->getProcessor()->createJWTByUser($user);
-    $refresh_token = $this->facade->getProcessor()->createRefreshTokenByUser($user);
-    $responseCode = Response::HTTP_OK;
-
-    return (new JWTResponse())
-      ->setToken($token)
-      ->setRefreshToken($refresh_token)
-    ;
   }
 }

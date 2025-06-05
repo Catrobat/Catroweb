@@ -18,11 +18,11 @@ Feature: Upload a program with extensions
 
   Scenario: upload a program with extensions
     Given I have a project with arduino, mindstorms and phiro extensions
-    And I upload this generated project with id "2", API version 2
+    And I upload this generated project with id "2"
     Then the project with id "2" should be marked with "3" extensions in the database
 
   Scenario: update a program with extensions
     Given I have a project with arduino, mindstorms and phiro extensions
-    And I upload this generated project with id "2", API version 2
-    When I upload this generated project again without extensions, API version 2
+    And I upload this generated project with id "2"
+    When I upload this generated project again without extensions
     Then the project with id "2" should be marked with "0" extensions in the database

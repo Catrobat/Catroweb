@@ -3,10 +3,10 @@ Feature: Search programs
 
   Background:
     Given there are users:
-      | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc | 1  |
-      | User1    | vwxyz    | aaaaaaaaaa | 2  |
-      | NewUser  | vwxyz    | aaaaaaaaaa | 3  |
+      | name     | password | id |
+      | Catrobat | 12345    | 1  |
+      | User1    | vwxyz    | 2  |
+      | NewUser  | vwxyz    | 3  |
     And there are projects:
       | id | name            | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
