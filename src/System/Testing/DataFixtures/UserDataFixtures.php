@@ -43,11 +43,10 @@ class UserDataFixtures
     $user->setUsername($config['name'] ?? 'User'.UserDataFixtures::$number_of_users);
     $user->setEmail($config['email'] ?? $user->getUsername().'@catrobat.at');
     $user->setPlainPassword($config['password'] ?? '123456');
-    $user->setUploadToken($config['token'] ?? 'default_token_'.UserDataFixtures::$number_of_users);
     $user->setSuperAdmin(isset($config['admin']) && 'true' === $config['admin']);
     $user->setEnabled(!isset($config['enabled']) || 'true' === $config['enabled']);
     $user->setVerified(!isset($config['verified']) || 'true' === $config['verified']);
-    $user->addRole($config['role'] ?? 'ROLE_USER');
+    $user->addRole($config['role'] ?? User::ROLE_DEFAULT);
     $user->setOauthUser(isset($config['oauth_user']) && 'true' === $config['oauth_user']);
 
     $this->user_manager->updateUser($user, $andFlush);
@@ -70,10 +69,6 @@ class UserDataFixtures
     if (isset($config['email'])) {
       Assert::assertEquals($user->getEmail(), $config['email'],
         'E-Mail wrong'.$config['email'].'expected, but '.$user->getEmail().' found.');
-    }
-
-    if (isset($config['token'])) {
-      Assert::assertEquals($user->getUploadToken(), $config['token'], 'Token Invalid');
     }
 
     if (isset($config['enabled'])) {

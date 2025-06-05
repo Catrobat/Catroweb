@@ -39,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
   public const string ROLE_DEFAULT = 'ROLE_USER';
   public const string ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
-
+  public const string ROLE_PROJECT_UPLOAD = 'ROLE_PROJECT_UPLOAD';
   public static string $SCRATCH_PREFIX = 'Scratch:';
 
   #[ORM\Id]
@@ -47,12 +47,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]
   #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
   protected string $id;
-
-  /**
-   * @deprecated API v1
-   */
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
-  protected ?string $upload_token = null;
 
   #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $avatar = null;
@@ -155,12 +149,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\OneToMany(targetEntity: UserRemixSimilarityRelation::class, mappedBy: 'second_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $reverse_relations_of_similar_users_based_on_remixes;
 
-  /**
-   * @deprecated
-   */
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
-  protected ?string $gplus_access_token = null;
-
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $google_id = null;
 
@@ -178,18 +166,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $apple_access_token = null;
-
-  /**
-   * @deprecated
-   */
-  #[ORM\Column(type: Types::STRING, length: 5000, nullable: true)]
-  protected ?string $gplus_id_token = null;
-
-  /**
-   * @deprecated
-   */
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
-  protected ?string $gplus_refresh_token = null;
 
   #[ORM\Column(type: Types::INTEGER, unique: true, nullable: true)]
   protected ?int $scratch_user_id = null;
@@ -292,36 +268,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this->apple_id;
   }
 
-  public function setGplusAccessToken(?string $gplus_access_token): void
-  {
-    $this->gplus_access_token = $gplus_access_token;
-  }
-
-  public function getGplusAccessToken(): ?string
-  {
-    return $this->gplus_access_token;
-  }
-
-  public function setGplusIdToken(?string $gplus_id_token): void
-  {
-    $this->gplus_id_token = $gplus_id_token;
-  }
-
-  public function getGplusIdToken(): ?string
-  {
-    return $this->gplus_id_token;
-  }
-
-  public function setGplusRefreshToken(?string $gplus_refresh_token): void
-  {
-    $this->gplus_refresh_token = $gplus_refresh_token;
-  }
-
-  public function getGplusRefreshToken(): ?string
-  {
-    return $this->gplus_refresh_token;
-  }
-
   public function getId(): ?string
   {
     return $this->id;
@@ -342,16 +288,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   public function getPrograms(): Collection
   {
     return $this->programs;
-  }
-
-  public function getUploadToken(): ?string
-  {
-    return $this->upload_token;
-  }
-
-  public function setUploadToken(?string $upload_token): void
-  {
-    $this->upload_token = $upload_token;
   }
 
   public function setId(string $id): void

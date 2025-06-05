@@ -1250,7 +1250,7 @@ class ApiContext implements Context
    */
   public function iAmALoggedInAsSuperAdmin(): void
   {
-    $this->iAmAUserWithRole('ROLE_SUPER_ADMIN');
+    $this->iAmAUserWithRole(User::ROLE_SUPER_ADMIN);
   }
 
   /**
@@ -1258,7 +1258,7 @@ class ApiContext implements Context
    */
   public function iAmLoggedInAsNormalUser(): void
   {
-    $this->iAmAUserWithRole('ROLE_USER');
+    $this->iAmAUserWithRole(User::ROLE_DEFAULT);
   }
 
   /**

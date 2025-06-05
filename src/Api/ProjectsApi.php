@@ -9,6 +9,7 @@ use App\Api\Services\Projects\ProjectsApiFacade;
 use App\DB\Entity\Api\ResponseCache;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramDownloads;
+use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
 use App\Project\Event\ProjectDownloadEvent;
 use OpenAPI\Server\Api\ProjectsApiInterface;
@@ -170,7 +171,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
-    if (!$user->isVerified() && $this->facade->getLoader()->forceUserVerification()) {
+    if (!$user->isVerified() || !$user->hasRole(User::ROLE_PROJECT_UPLOAD)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;

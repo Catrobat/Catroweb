@@ -54,7 +54,6 @@ class ExceptionEventListener
 
     // 401, 403 - redirect to login page
     if ($exception instanceof HttpException && (Response::HTTP_UNAUTHORIZED === $exception->getStatusCode() || Response::HTTP_FORBIDDEN === $exception->getStatusCode())) {
-      $this->cookie_service->clearCookie('CATRO_LOGIN_TOKEN');
       $this->cookie_service->clearCookie('BEARER');
       /** @var Session $session */
       $session = $event->getRequest()->getSession();

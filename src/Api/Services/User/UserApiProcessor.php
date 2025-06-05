@@ -6,14 +6,13 @@ namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
-use App\Security\TokenGenerator;
 use App\User\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
 
 class UserApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly TokenGenerator $token_generator)
+  public function __construct(private readonly UserManager $user_manager)
   {
   }
 
@@ -28,7 +27,6 @@ class UserApiProcessor extends AbstractApiProcessor
     $user->setPlainPassword($request->getPassword());
     $user->setEnabled(true);
     $user->setVerified(false);
-    $user->setUploadToken($this->token_generator->generateToken());
 
     $this->user_manager->updateUser($user);
 

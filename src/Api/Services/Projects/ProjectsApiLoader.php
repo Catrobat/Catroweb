@@ -135,9 +135,4 @@ class ProjectsApiLoader extends AbstractApiLoader
 
     return $zipFile;
   }
-
-  public function forceUserVerification(): bool
-  {
-    return $this->feature_flag_manager->isEnabled('force-account-verification');
-  }
 }

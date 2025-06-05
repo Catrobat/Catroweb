@@ -157,11 +157,6 @@ jobs:
           - api-tag
           - api-studio
 
-          - api-deprecated-general
-          - api-deprecated-project
-          - api-deprecated-profile
-          - api-deprecated-upload
-
           - web-achievements
           - web-admin
           - web-apk-generation

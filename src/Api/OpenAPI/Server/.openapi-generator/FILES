@@ -57,7 +57,6 @@ Model/UpdateProjectRequest.php
 Model/UpdateStudioErrorResponse.php
 Model/UpdateUserErrorResponse.php
 Model/UpdateUserRequest.php
-Model/UpgradeTokenRequest.php
 Model/UploadErrorResponse.php
 OpenAPIServerBundle.php
 README.md
@@ -114,7 +113,6 @@ Tests/Model/UpdateProjectRequestTest.php
 Tests/Model/UpdateStudioErrorResponseTest.php
 Tests/Model/UpdateUserErrorResponseTest.php
 Tests/Model/UpdateUserRequestTest.php
-Tests/Model/UpgradeTokenRequestTest.php
 Tests/Model/UploadErrorResponseTest.php
 Tests/test_config.yaml
 autoload.php
@@ -161,7 +159,6 @@ docs/Model/UpdateProjectRequest.md
 docs/Model/UpdateStudioErrorResponse.md
 docs/Model/UpdateUserErrorResponse.md
 docs/Model/UpdateUserRequest.md
-docs/Model/UpgradeTokenRequest.md
 docs/Model/UploadErrorResponse.md
 git_push.sh
 phpunit.xml.dist

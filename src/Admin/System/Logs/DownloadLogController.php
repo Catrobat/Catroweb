@@ -23,7 +23,7 @@ class DownloadLogController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (is_null($user) || !$user->hasRole('ROLE_SUPER_ADMIN')) {
+    if (is_null($user) || !$user->hasRole(User::ROLE_SUPER_ADMIN)) {
       throw new AuthenticationException();
     }
 
