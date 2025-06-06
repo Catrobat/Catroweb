@@ -5,10 +5,10 @@ Feature: Search programs
 
   Background:
     Given there are users:
-      | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc | 1  |
-      | User1    | vwxyz    | aaaaaaaaaa | 2  |
-      | NewUser  | 54321    | bbbbbbbbbb | 3  |
+      | name     | password | id |
+      | Catrobat | 12345    | 1  |
+      | User1    | vwxyz    | 2  |
+      | NewUser  | 54321    | 3  |
     And there are projects:
       | id        | name            | description               | owned by | upload time      | version |
       | qysm-rhwt | Galaxy War      | description1              | User1    | 01.01.2014 12:00 | 0.8.5   |

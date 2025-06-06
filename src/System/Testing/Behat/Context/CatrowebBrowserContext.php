@@ -12,8 +12,6 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\Project\Apk\ApkRepository;
 use App\Project\Apk\JenkinsDispatcher;
-use App\Security\TokenGenerator;
-use App\System\Testing\FixedTokenGenerator;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -1694,17 +1692,6 @@ class CatrowebBrowserContext extends BrowserContext
         round($remix_similarity->getSimilarity(), 3),
         'Wrong value for similarity');
     }
-  }
-
-  /**
-   * @Given the next generated token will be :token
-   *
-   * @throws \Exception
-   */
-  public function theNextGeneratedTokenWillBe(string $token): void
-  {
-    $token_generator = $this->getSymfonyService(TokenGenerator::class);
-    $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
 
   /**

@@ -117,7 +117,6 @@ All URIs are relative to *https://share.catrob.at/api*
 | _AuthenticationApiInterface_ | [**authenticationOauthPost**](docs/Api/AuthenticationApiInterface.md#authenticationoauthpost)     | **POST** /authentication/oauth        | OAuth Login                                                                                                |
 | _AuthenticationApiInterface_ | [**authenticationPost**](docs/Api/AuthenticationApiInterface.md#authenticationpost)               | **POST** /authentication              | Login - create a new JWT token                                                                             |
 | _AuthenticationApiInterface_ | [**authenticationRefreshPost**](docs/Api/AuthenticationApiInterface.md#authenticationrefreshpost) | **POST** /authentication/refresh      | Refresh token                                                                                              |
-| _AuthenticationApiInterface_ | [**authenticationUpgradePost**](docs/Api/AuthenticationApiInterface.md#authenticationupgradepost) | **POST** /authentication/upgrade      | Upgrade a deprecated token to JWT                                                                          |
 | _MediaLibraryApiInterface_   | [**mediaFileIdGet**](docs/Api/MediaLibraryApiInterface.md#mediafileidget)                         | **GET** /media/file/{id}              | Get the information of a specific media file                                                               |
 | _MediaLibraryApiInterface_   | [**mediaFilesGet**](docs/Api/MediaLibraryApiInterface.md#mediafilesget)                           | **GET** /media/files                  | Get _all_ content of the media library.                                                                    |
 | _MediaLibraryApiInterface_   | [**mediaFilesSearchGet**](docs/Api/MediaLibraryApiInterface.md#mediafilessearchget)               | **GET** /media/files/search           | Search for mediafiles associated with keywords                                                             |
@@ -193,7 +192,6 @@ All URIs are relative to *https://share.catrob.at/api*
 - [UpdateStudioErrorResponse](docs/Model/UpdateStudioErrorResponse.md)
 - [UpdateUserErrorResponse](docs/Model/UpdateUserErrorResponse.md)
 - [UpdateUserRequest](docs/Model/UpdateUserRequest.md)
-- [UpgradeTokenRequest](docs/Model/UpgradeTokenRequest.md)
 - [UploadErrorResponse](docs/Model/UploadErrorResponse.md)
 
 ## Documentation For Authorization

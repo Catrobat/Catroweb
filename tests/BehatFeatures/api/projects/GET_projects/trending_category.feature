@@ -20,11 +20,11 @@ Feature: Get trending projects
 
 
   Scenario: Get trending projects
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=trending"
     Then the response status code should be "200"
-    Then the response should have the default projects model structure
-    Then the response should contain projects in the following order:
+    And the response should have the default projects model structure
+    And the response should contain projects in the following order:
       | Name      |
       | project 3 |
       | project 4 |
@@ -32,44 +32,44 @@ Feature: Get trending projects
       | project 5 |
 
   Scenario: Get trending projects in german and limit = 1
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I request "GET" "/api/projects/?category=trending&limit=1"
     Then the response status code should be "200"
-    Then the response should have the default projects model structure
-    Then the response should contain projects in the following order:
+    And the response should have the default projects model structure
+    And the response should contain projects in the following order:
       | Name      |
       | project 3 |
 
   Scenario: Get trending projects in english with offset = 1
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "en"
     And I request "GET" "/api/projects/?category=trending&offset=1"
     Then the response status code should be "200"
-    Then the response should have the default projects model structure
-    Then the response should contain projects in the following order:
+    And the response should have the default projects model structure
+    And the response should contain projects in the following order:
       | Name      |
       | project 4 |
       | project 6 |
       | project 5 |
 
   Scenario: Get trending projects in french with max_version = 0.982
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "fr_FR"
     And I request "GET" "/api/projects/?category=trending&max_version=0.982"
     Then the response status code should be "200"
-    Then the response should have the default projects model structure
-    Then the response should contain projects in the following order:
+    And the response should have the default projects model structure
+    And the response should contain projects in the following order:
       | Name      |
       | project 3 |
       | project 6 |
 
   Scenario: Get trending projects with flavor = luna
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=trending&flavor=luna"
     Then the response status code should be "200"
-    Then the response should have the default projects model structure
-    Then the response should contain projects in the following order:
+    And the response should have the default projects model structure
+    And the response should contain projects in the following order:
       | Name      |
       | project 4 |
       | project 6 |

@@ -3,8 +3,8 @@ Feature: Admin featured programs
 
 Background:
     Given there are admins:
-      | name  | password | token      | email                | id |
-      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
+      | name  | password | email                | id |
+      | Admin | 123456   | admin@pocketcode.org | 1  |
 
 Scenario: List all Feature Flags:
     Given I log in as "Admin" with the password "123456"

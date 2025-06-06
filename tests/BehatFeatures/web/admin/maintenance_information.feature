@@ -3,8 +3,8 @@ Feature: Maintenance information
 
   Background:
     Given there are admins:
-      | name  | password | token      | email                | id |
-      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
+      | name  | password | email                | id |
+      | Admin | 123456   | admin@pocketcode.org | 1  |
 
     And there are maintenance information:
       | Id | Maintenance Start      | Maintenance End  | Additional Information | Icon  | Active | Title |

@@ -5,9 +5,9 @@ Feature: Search extensions programs
 
   Background:
     Given there are users:
-      | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc | 1  |
-      | User1    | vwxyz    | aaaaaaaaaa | 2  |
+      | name     | password | id |
+      | Catrobat | 12345    | 1  |
+      | User1    | vwxyz    | 2  |
     And there are extensions:
       | id | internal_title |
       | 1  | arduino        |

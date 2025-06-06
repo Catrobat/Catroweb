@@ -3,12 +3,12 @@ Feature: Admin Preview Mail
 
   Background:
     Given there are admins:
-      | name  | password | token      | email                | id |
-      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
+      | name  | password | email                | id |
+      | Admin | 123456   | admin@pocketcode.org | 1  |
 
     And there are users:
-      | name     | password | token      | email               | id |
-      | Tyrell   | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
+      | name     | password | email               | id |
+      | Tyrell   | 123456   | dev1@pocketcode.org | 2  |
 
 
 Scenario: Valid Confirmation Email Template:

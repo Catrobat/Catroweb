@@ -33,7 +33,6 @@ namespace OpenAPI\Server\Api;
 use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\OAuthLoginRequest;
 use OpenAPI\Server\Model\RefreshRequest;
-use OpenAPI\Server\Model\UpgradeTokenRequest;
 
 /**
  * AuthenticationApiInterface Interface Doc Comment.
@@ -122,21 +121,6 @@ interface AuthenticationApiInterface
    */
   public function authenticationRefreshPost(
     RefreshRequest $refresh_request,
-    int &$responseCode,
-    array &$responseHeaders,
-  ): array|object|null;
-
-  /**
-   * Operation authenticationUpgradePost.
-   *
-   * Upgrade a deprecated token to JWT
-   *
-   * @param UpgradeTokenRequest $upgrade_token_request (required)
-   * @param int                 &$responseCode         The HTTP Response Code
-   * @param array               $responseHeaders       Additional HTTP headers to return with the response ()
-   */
-  public function authenticationUpgradePost(
-    UpgradeTokenRequest $upgrade_token_request,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
