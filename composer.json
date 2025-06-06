@@ -51,7 +51,7 @@
     "symfony/process": "7.3.*",
     "symfony/routing": "7.3.*",
     "symfony/runtime": "7.3.*",
-    "symfony/stimulus-bundle": "2.25.*",
+    "symfony/stimulus-bundle": "2.26.*",
     "symfony/translation": "7.3.*",
     "symfony/twig-bundle": "7.3.*",
     "symfony/validator": "7.3.*",
