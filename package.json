@@ -48,7 +48,7 @@
     "auto-changelog": "^2.5.0",
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.25.0",
-    "core-js": "^3.42.0",
+    "core-js": "^3.43.0",
     "dotenv": "^16.5.0",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
