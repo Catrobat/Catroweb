@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "421160573c3ee93372dc97785694fe70",
+    "content-hash": "1d8cbce963f8bd820e846daf37db65de",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -14820,24 +14820,24 @@
         },
         {
             "name": "dvdoug/behat-code-coverage",
-            "version": "v5.3.7",
+            "version": "v5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dvdoug/behat-code-coverage.git",
-                "reference": "2f127985a8ae4785fd6ec9d992d1d33e16af357f"
+                "reference": "60cf243a2d846445cfec89fda137601d2a7ef0b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/2f127985a8ae4785fd6ec9d992d1d33e16af357f",
-                "reference": "2f127985a8ae4785fd6ec9d992d1d33e16af357f",
+                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/60cf243a2d846445cfec89fda137601d2a7ef0b7",
+                "reference": "60cf243a2d846445cfec89fda137601d2a7ef0b7",
                 "shasum": ""
             },
             "require": {
                 "behat/behat": "^3.15",
                 "composer-runtime-api": "^2.0",
                 "composer/semver": "^3.0",
-                "php": "^8.1",
-                "phpunit/php-code-coverage": "^10.1||^11.0||^12.0",
+                "php": "^8.3",
+                "phpunit/php-code-coverage": "^12.3",
                 "symfony/config": "^5.4.35||^6.3.12||^7.0.3",
                 "symfony/console": "^5.4.35||^6.3.12||^7.0.3",
                 "symfony/dependency-injection": "^5.3.35||^6.3.12||^7.0.3",
@@ -14886,7 +14886,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dvdoug/behat-code-coverage/issues",
-                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.3.7"
+                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.4.0"
             },
             "funding": [
                 {
@@ -14894,7 +14894,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-07T17:27:41+00:00"
+            "time": "2025-06-09T19:23:30+00:00"
         },
         {
             "name": "evenement/evenement",
