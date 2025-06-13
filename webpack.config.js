@@ -100,7 +100,6 @@ Encore
   .addEntry('password_reset_page', './assets/Security/PasswordResetPage.js')
   .addEntry('request_to_reset_password_page', './assets/Security/RequestPasswordResetPage.js')
 
-  .addEntry('legacy_search_page', './assets/Search/LegacySearchPage.js')
   .addEntry('search_page', './assets/Search/SearchPage.js')
 
   .addEntry('project_page', './assets/Project/ProjectPage.js')

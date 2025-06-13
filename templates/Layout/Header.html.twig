@@ -71,6 +71,7 @@
             {% else %}
               data-path-search-url="{{ path('empty_search') }}"
             {% endif %}
+            data-same-search-message="{{ 'search.sameSearchMessage'|trans({}, 'catroweb') }}"
         ></div>
       {% endblock %}
     </div>

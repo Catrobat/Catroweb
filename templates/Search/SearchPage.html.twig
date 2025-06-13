@@ -88,13 +88,10 @@
 
   <div class="js-search"
        data-result-container="#search-results"
-       data-path-search="{{ path('api_search_programs') }}"
        data-query="{{ q }}"
        data-theme="{{ theme() }}"
        data-flavor="{{ flavor() }}"
        data-base-url="{{ app.request.getBaseURL() }}"
-       data-project-category="search"
-       data-project-property="uploaded"
        data-project-translated="{{ 'projects'|trans({}, 'catroweb') }}"
        data-no-users="{{ 'search.noUsers'|trans({}, 'catroweb') }}"
        data-no-projects="{{ 'search.noProjects'|trans({}, 'catroweb') }}"

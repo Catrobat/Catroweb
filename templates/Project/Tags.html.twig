@@ -8,7 +8,7 @@
             <p>{{ ('extensions.title')|trans({'%count%': count}, 'catroweb') }}:</p>
             <div class="list">
               {% for extension in project.extensions %}
-                <a href="{{ url('extension_search', {q: extension.getInternalTitle()}) }}">
+                <a href="{{ url('search', {q: extension.getInternalTitle()}) }}">
                     <span class="badge rounded-pill bg-primary">{{ extension.getTitleLtmCode()|trans({}, 'catroweb') }}</span>
                 </a>
               {% endfor %}
@@ -21,7 +21,7 @@
             <p>{{ ('tags.title')|trans({'%count%': count}, 'catroweb') }}:</p>
             <div class="list">
               {% for tag in project.tags %}
-                <a href="{{ url('tag_search', {q: tag.getInternalTitle()}) }}">
+                <a href="{{ url('search', {q: tag.getInternalTitle()}) }}">
                     <span class="badge rounded-pill bg-primary">{{ tag.getTitleLtmCode()|trans({}, 'catroweb') }}</span>
                 </a>
               {% endfor %}
