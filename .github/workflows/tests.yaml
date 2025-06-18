@@ -115,6 +115,7 @@ jobs:
           files: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
           flags: phpunit # optional
           name: codecov-umbrella # optional
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Behat:
@@ -216,7 +217,7 @@ jobs:
         #   the pipe status, which contains the correct exit code.
         run: |
           docker exec app.catroweb chmod -R 777 var
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty \
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty --xdebug \
           |& tee tests/TestReports/Behat/${{ matrix.testSuite }}.log; \
           TEST_RUN_EXIT_CODE=${PIPESTATUS[0]}
           echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
@@ -268,7 +269,7 @@ jobs:
           files: tests/TestReports/CoverageReports/Behat/coverage.xml
           flags: behat # optional
           name: codecov-umbrella # optional
-          # fail_ci_if_error: true # optional (default = false)
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Rerun Behat Tests (1st Attempt)
         if: env.test-run-exit-code != '0'
