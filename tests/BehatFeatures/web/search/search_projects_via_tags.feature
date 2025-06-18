@@ -1,5 +1,5 @@
 @web @search
-Feature: Searching for programs with tags
+Feature: Searching for projects with tags
 
   Background:
     Given there are users:
@@ -18,7 +18,7 @@ Feature: Searching for programs with tags
       | 3  | project 3 | User1    | story           |
     And I wait 500 milliseconds
 
-  Scenario: Searching other programs with the same tag
+  Scenario: Searching other projects with the same tag
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     And I should see "project 1"
@@ -26,15 +26,13 @@ Feature: Searching for programs with tags
     And I should see "__Animation"
     When I press on the tag "__Animation"
     And I wait for the page to be loaded
-    Then I should see "Your search returned 2 results"
     And I should see "project 1"
     And I should see "project 2"
     But I should not see "project 3"
 
   Scenario: search for tags should work
-    When I am on "/app/tag/search/Animation"
+    When I am on "/app/search/Animation"
     And I wait for the page to be loaded
-    Then I should see "Your search returned 2 results"
     And I should see "project 1"
     And I should see "project 2"
     But I should not see "project 3"

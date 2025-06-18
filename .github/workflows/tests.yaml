@@ -156,8 +156,7 @@ jobs:
           - api-translation
           - api-tag
           - api-studio
-
-          - api-deprecated-general
+          - api-search
 
           - web-achievements
           - web-admin

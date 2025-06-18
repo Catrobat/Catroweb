@@ -49,8 +49,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *     - $this->iRequest() to send the request with the above parameters
  *     - $this->iRequestWith(string $method, string $uri) to send a request with the above parameters and the specified
  *        $method and uri.
- *     - $this->iGetFrom($uri) to send the request with the above parameters and the specified uri.
- *     - $this->iPostTo($uri) to send the request with the above parameters and the specified uri.
  *
  * 3) Retrieve the response by using $this->getKernelBrowser()->getResponse().
  */
@@ -232,16 +230,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given /^I activate the Profiler$/
-   *
-   * @throws \Exception
-   */
-  public function iActivateTheProfiler(): void
-  {
-    $this->getKernelBrowser()->enableProfiler();
-  }
-
-  /**
    * Sends a request. The following fields:
    *   $this->request_parameters
    *   $this->request_files
@@ -283,10 +271,7 @@ class ApiContext implements Context
    *
    * Get the response from $this->getKernelBrowser()->getResponse()
    *
-   * @When /^such a Request is invoked$/
-   * @When /^a Request is invoked$/
    * @When /^the Request is invoked$/
-   * @When /^I invoke the Request$/
    *
    * @throws \Exception
    */
@@ -322,51 +307,6 @@ class ApiContext implements Context
   }
 
   /**
-   * Sends a POST request. The following fields:
-   *   $this->request_parameters
-   *   $this->request_headers
-   *   $this->files
-   *   $this->request_content
-   * are automatically added to the request.
-   *
-   * Get the response from $this->getKernelBrowser()->getResponse()
-   *
-   * @When /^I POST these parameters to "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iPostTo(string $url): void
-  {
-    $this->iRequestWith('POST', $url);
-  }
-
-  /**
-   * @Given /^I search for "([^"]*)"$/
-   */
-  public function iSearchFor(string $arg1): void
-  {
-    $this->iHaveAParameterWithValue('q', $arg1);
-    $this->iGetFrom('/app/api/projects/search.json');
-  }
-
-  /**
-   * @When /^I search similar projects for project id "([^"]*)"$/
-   */
-  public function iSearchSimilarProjectsForProjectId(string $id): void
-  {
-    $this->iHaveAParameterWithValue('project_id', $id);
-    if (!isset($this->request_parameters['limit'])) {
-      $this->iHaveAParameterWithValue('limit', '1');
-    }
-
-    if (!isset($this->request_parameters['offset'])) {
-      $this->iHaveAParameterWithValue('offset', '0');
-    }
-
-    $this->iGetFrom('/app/api/projects/recsys.json');
-  }
-
-  /**
    * @When /^I want to download the apk file of "([^"]*)"$/
    *
    * @throws \Exception
@@ -382,18 +322,6 @@ class ApiContext implements Context
 
     $router = $this->getRouter();
     $url = $router->generate('ci_download', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
-    $this->iGetFrom($url);
-  }
-
-  /**
-   * @When /^I get the user\'s projects with "([^"]*)"$/
-   */
-  public function iGetTheUserSProjectsWith(string $url): void
-  {
-    /** @var User|null $user */
-    $user = $this->getUserManager()->findAll()[0];
-
-    $this->iHaveAParameterWithValue('user_id', $user->getId());
     $this->iGetFrom($url);
   }
 
@@ -427,20 +355,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I upload another project using token "([^"]*)"$/
-   *
-   * @throws \Exception when an error occurs during uploading
-   */
-  public function iUploadAnotherProjectUsingToken(string $token): void
-  {
-    $this->iHaveAValidCatrobatFile();
-    $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum');
-    $this->request_parameters['username'] = $this->username;
-    $this->request_parameters['token'] = $token;
-    $this->iPostTo('/app/api/upload/upload.json');
-  }
-
-  /**
    * @When /^jenkins uploads the apk file to the given upload url$/
    */
   public function jenkinsUploadsTheApkFileToTheGivenUploadUrl(): void
@@ -453,7 +367,7 @@ class ApiContext implements Context
     ];
     $id = 1;
     $url = '/app/ci/upload/'.$id.'?token=UPLOADTOKEN';
-    $this->iPostTo($url);
+    $this->iRequestWith('POST', $url);
   }
 
   /**
@@ -467,7 +381,7 @@ class ApiContext implements Context
       'category' => $category,
       'note' => $note,
     ];
-    $this->iPostTo($url);
+    $this->iRequestWith('POST', $url);
   }
 
   /**
@@ -481,7 +395,7 @@ class ApiContext implements Context
   public function iPostLoginUserWithPassword(string $uname, string $pwd): void
   {
     $this->request_content = $this->getAuthenticationRequestBody($uname, $pwd);
-    $this->iPostTo('/api/authentication');
+    $this->iRequestWith('POST', '/api/authentication');
     $response = json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
     $bearer_cookie = new Cookie('BEARER', $response->{'token'});
     $refresh_cookie = new Cookie('REFRESH_TOKEN', $response->{'refresh_token'});
@@ -1020,26 +934,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I get the most recent projects$/
-   */
-  public function iGetTheMostRecentProjects(): void
-  {
-    $this->iGetFrom('/app/api/projects/recent.json');
-  }
-
-  /**
-   * @When /^I get the most recent projects with limit "([^"]*)" and offset "([^"]*)"$/
-   */
-  public function iGetTheMostRecentProjectsWithLimitAndOffset(string $limit, string $offset): void
-  {
-    $this->request_parameters = [
-      'limit' => $limit,
-      'offset' => $offset,
-    ];
-    $this->iGetFrom('/app/api/projects/recent.json');
-  }
-
-  /**
    * @When /^I have downloaded a valid project$/
    */
   public function iHaveDownloadedAValidProject(): void
@@ -1233,7 +1127,7 @@ class ApiContext implements Context
   public function searchingFor(string $arg1): void
   {
     $this->method = 'GET';
-    $this->url = '/app/api/projects/search.json';
+    $this->url = '/api/search';
     $this->request_parameters = ['q' => $arg1, 'offset' => 0, 'limit' => 10];
     $this->iRequest();
   }
@@ -1844,6 +1738,92 @@ class ApiContext implements Context
   }
 
   /**
+   * @Then the search response should contain :count projects
+   */
+  public function theSearchResponseShouldContainProjects(int $count): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+
+    Assert::assertArrayHasKey('projects', $data);
+    Assert::assertCount($count, $data['projects'], "Expected {$count} projects in response.");
+  }
+
+  /**
+   * @Then the search response should contain :count users
+   */
+  public function theSearchResponseShouldContainUsers(int $count): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+
+    Assert::assertArrayHasKey('users', $data);
+    Assert::assertCount($count, $data['users'], "Expected {$count} users in response.");
+  }
+
+  /**
+   * @Then the search response should contain the following projects:
+   */
+  public function theSearchResponseShouldContainTheFollowingProjects(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $expectedProjects = $table->getHash();
+
+    Assert::assertArrayHasKey('projects', $data);
+    $returnedProjects = $data['projects'];
+
+    foreach ($expectedProjects as $expected) {
+      $found = false;
+      foreach ($returnedProjects as $project) {
+        if ($project['name'] === $expected['Name']) {
+          $found = true;
+          break;
+        }
+      }
+      Assert::assertTrue($found, 'Project "'.$expected['Name'].'" not found in search response.');
+    }
+  }
+
+  /**
+   * @Then the search response should not contain any :key
+   */
+  public function theSearchResponseShouldNotContainAny(string $key): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+
+    Assert::assertTrue(
+      !isset($data[$key]),
+      'Expected no '.$key.' in response.'
+    );
+  }
+
+  /**
+   * @Then the search response should contain the following users:
+   */
+  public function theSearchResponseShouldContainTheFollowingUsers(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $expectedUsers = $table->getHash();
+
+    Assert::assertArrayHasKey('users', $data);
+    $returnedUsers = $data['users'];
+
+    foreach ($expectedUsers as $expected) {
+      $found = false;
+      foreach ($returnedUsers as $user) {
+        if ($user['username'] === $expected['Name']) {
+          $found = true;
+          break;
+        }
+      }
+      Assert::assertTrue($found, 'User "'.$expected['Name'].'" not found in search response.');
+    }
+  }
+
+  /**
    * @Given /^I have a parameter "([^"]*)" with an invalid md5checksum of my file$/
    */
   public function iHaveAParameterWithAnInvalidMdchecksumOfMyFile(string $parameter): void
@@ -2279,34 +2259,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then The message should be:
-   *
-   * @throws \Exception
-   * @throws \JsonException
-   */
-  public function theMessageShouldBe(PyStringNode $string): void
-  {
-    $answer = json_decode($this->getKernelBrowser()
-      ->getResponse()
-      ->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    Assert::assertEquals($string->getRaw(), $answer['answer']);
-  }
-
-  /**
-   * @Then I should not get the url to the google form
-   *
-   * @throws \Exception
-   * @throws \JsonException
-   */
-  public function iShouldNotGetTheUrlToTheGoogleForm(): void
-  {
-    $answer = json_decode($this->getKernelBrowser()
-      ->getResponse()
-      ->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    Assert::assertArrayNotHasKey('form', $answer);
-  }
-
-  /**
    * @Then /^I should see the message "([^"]*)"$/
    *
    * @throws \Exception
@@ -2314,18 +2266,6 @@ class ApiContext implements Context
   public function iShouldSeeAMessage(string $arg1): void
   {
     Assert::assertStringContainsString($arg1, $this->getKernelBrowser()->getResponse()->getContent());
-  }
-
-  /**
-   * @Then /^I should see the hashtag "([^"]*)" in the project description$/
-   *
-   * @throws \Exception
-   */
-  public function iShouldSeeTheHashtagInTheProjectDescription(string $hashtag): void
-  {
-    Assert::assertStringContainsString($hashtag, $this->getKernelBrowser()
-      ->getResponse()
-      ->getContent());
   }
 
   // to df ->
@@ -3198,5 +3138,13 @@ class ApiContext implements Context
           ['http://localhost/resources/example/example_'.$example_project['id'].'.jpg']);
       }
     }
+  }
+
+  /**
+   * @When /^I wait for the search index to be updated$/
+   */
+  public function waitForSearchIndex(): void
+  {
+    sleep(1); // wait for search index to be updated
   }
 }
