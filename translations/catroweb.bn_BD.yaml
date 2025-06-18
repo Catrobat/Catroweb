@@ -424,6 +424,7 @@ search:
   fail: কমপক্ষে একটি অনুসন্ধান শব্দ লিখুন
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: আমার প্রোফাইল
   login: প্রবেশ করুন

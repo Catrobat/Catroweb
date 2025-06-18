@@ -415,6 +415,7 @@ search:
   fail: Por favor, insira ao menos um termo de busca
   noUsers: Nenhum usuário encontrado
   noProjects: Nenhum projeto encontrado
+  sameSearchMessage: "Parece que você já está aqui! Que tal tentar uma busca diferente?"
 menu:
   profile: Meu Perfil
   login: Login

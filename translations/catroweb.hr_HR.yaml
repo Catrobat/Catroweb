@@ -423,6 +423,7 @@ search:
   fail: Molimo Vas unesite najmanje jedan pojam za pretragu
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Moj profil
   login: prijava

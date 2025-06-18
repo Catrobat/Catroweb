@@ -423,6 +423,7 @@ search:
   fail: 请输入至少一个搜索字词
   noUsers: 未找到用户
   noProjects: 未找到项目
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: 我的个人资料
   login: 登录

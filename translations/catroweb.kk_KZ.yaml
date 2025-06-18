@@ -417,6 +417,7 @@ search:
   fail: Кем дегенде бір іздеу сөзін енгізіңіз
   noUsers: Ешқандай қолданылушылар табылмады
   noProjects: Ешқандай жоба табылмады
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Менің профайылым
   login: Кіру

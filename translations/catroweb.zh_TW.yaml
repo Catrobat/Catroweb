@@ -418,6 +418,7 @@ search:
   fail: 請至少輸入一個搜索詞
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: 我的個人資料
   login: 登入

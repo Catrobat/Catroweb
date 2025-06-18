@@ -417,6 +417,7 @@ search:
   fail: Please enter at least a single search term
   noUsers: Ni najdenih uporabnikov
   noProjects: Ni najdenih projektov
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Moj profil
   login: Prijava

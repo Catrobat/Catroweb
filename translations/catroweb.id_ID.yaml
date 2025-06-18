@@ -418,6 +418,7 @@ search:
   fail: Harap masukkan setidaknya satu istilah pencarian
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Profil saya
   login: Gabung

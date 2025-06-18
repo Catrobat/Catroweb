@@ -422,6 +422,7 @@ search:
   fail: لطفا حداقل یک اصطلاح جستجو را وارد کنید
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: مشخصات من
   login: ورود به سیستم
