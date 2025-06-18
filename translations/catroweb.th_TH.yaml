@@ -423,6 +423,7 @@ search:
   fail: โปรดป้อนคำค้นหาอย่างน้อยหนึ่งคำ
   noUsers: ไม่พบผู้ใช้
   noProjects: ไม่พบโครงการ
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: โปรไฟล์ของฉัน
   login: เข้าสู่ระบบ

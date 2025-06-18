@@ -413,6 +413,7 @@ search:
   fail: براہ کرم کم از کم ایک تلاش کی اصطلاح درج کریں
   noUsers: No users found
   noProjects: کوئی پروجیکٹ نہیں ملا.
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: میری پروفائل
   login: لاگ اِن

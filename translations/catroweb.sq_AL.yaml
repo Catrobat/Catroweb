@@ -418,6 +418,7 @@ search:
   fail: Ju lutemi shkruani të paktën një term të vetëm kërkimi 
   noUsers: Nuk u gjet asnjë përdorues
   noProjects: Nuk u gjet asnjë projekt
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Profili im
   login: Kyçuni

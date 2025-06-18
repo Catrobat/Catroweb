@@ -418,6 +418,7 @@ search:
   fail: الرجاء إدخال مصطلح بحث واحد على الأقل
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: الصفحة الشخصية
   login: تسجيل الدخول

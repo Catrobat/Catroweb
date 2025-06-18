@@ -422,6 +422,7 @@ search:
   fail: தயவுசெய்து ஒரு தேடல் காலத்தையாவது உள்ளிடவும்
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: என் சுயவிவரம்
   login: உள்நுழை

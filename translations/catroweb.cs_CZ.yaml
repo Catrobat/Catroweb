@@ -417,6 +417,7 @@ search:
   fail: Please enter at least a single search term
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Můj profil
   login: Přihlásit se

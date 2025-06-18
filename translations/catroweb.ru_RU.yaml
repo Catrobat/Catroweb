@@ -418,6 +418,7 @@ search:
   fail: Пожалуйста, введите хотя бы один поисковый запрос
   noUsers: Пользователи не найдены
   noProjects: Проекты не найдены
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Мой профиль
   login: Войти

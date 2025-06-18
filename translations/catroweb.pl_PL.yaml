@@ -418,6 +418,7 @@ search:
   fail: Wprowadź co najmniej jedno wyszukiwane hasło
   noUsers: Nie znaleziono użytkowników
   noProjects: Nie znaleziono projektów
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Mój profil
   login: Logowanie

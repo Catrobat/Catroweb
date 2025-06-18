@@ -417,6 +417,7 @@ search:
   fail: Lütfen en az bir arama terimi girin
   noUsers: Kullanıcı bulunamadı
   noProjects: Proje bulunamadı
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Benim profilim
   login: Oturum aç
