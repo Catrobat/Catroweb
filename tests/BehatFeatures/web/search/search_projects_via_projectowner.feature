@@ -1,5 +1,5 @@
 @web @search
-Feature: Searching for programs with ownername
+Feature: Searching for projects with ownername
 
   Background:
     Given there are users:
@@ -15,7 +15,7 @@ Feature: Searching for programs with ownername
       | 3  | project 3 | User3    |
     And I wait 500 milliseconds
 
-  Scenario: search for programs with full name should work
+  Scenario: search for projects with full name should work
     When I am on "/app/search/User3"
     And I wait for the page to be loaded
     Then I should see "Search results"
@@ -23,7 +23,7 @@ Feature: Searching for programs with ownername
     And I should not see "project 2"
     But I should see "project 3"
 
-  Scenario: search for programs with parts of name should work
+  Scenario: search for projects with parts of name should work
     When I am on "/app/search/User"
     And I wait for the page to be loaded
     Then I should see "Search results"
