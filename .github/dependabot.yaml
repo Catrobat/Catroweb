@@ -15,8 +15,6 @@ updates:
       interval: daily
       time: '04:00'
       timezone: 'Europe/Vienna'
-    reviewers:
-      - 'dmetzner'
     open-pull-requests-limit: 99
 
   - package-ecosystem: 'npm'
@@ -25,8 +23,6 @@ updates:
       interval: daily
       time: '04:00'
       timezone: 'Europe/Vienna'
-    reviewers:
-      - 'dmetzner'
     open-pull-requests-limit: 99
     groups:
       material:
@@ -39,8 +35,6 @@ updates:
       interval: daily
       time: '04:00'
       timezone: 'Europe/Vienna'
-    reviewers:
-      - 'dmetzner'
     open-pull-requests-limit: 99
     groups:
       symfony:
@@ -53,6 +47,9 @@ updates:
         patterns:
           - 'behat/*'
           - 'friends-of-behat/*'
+      doctrine:
+        patterns:
+          - 'doctrine/*'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
@@ -60,6 +57,4 @@ updates:
       interval: daily
       time: '04:00'
       timezone: 'Europe/Vienna'
-    reviewers:
-      - 'dmetzner'
     open-pull-requests-limit: 99
