@@ -100,44 +100,6 @@ class BrowserContext extends MinkContext implements Context
   }
 
   /**
-   * @Then /^at least one "([^"]*)" element should be visible$/
-   */
-  public function atLeastOneElementShouldBeVisible(string $locator): void
-  {
-    $result = false;
-    $elements = $this->getSession()->getPage()->findAll('css', $locator);
-    foreach ($elements as $e) {
-      if ($e->isVisible()) {
-        $result = true;
-        break;
-      }
-    }
-
-    Assert::assertTrue($result, 'No '.$locator.' element currently visible.');
-  }
-
-  /**
-   * @Then project :id is missing its files
-   */
-  public function projectIsMissingItsFiles(string $id): void
-  {
-    $this->getFileRepository()->deleteProjectExtractFiles($id);
-    $this->getFileRepository()->deleteProjectZipFile($id);
-  }
-
-  /**
-   * @Then /^no "([^"]*)" element should be visible$/
-   */
-  public function noElementShouldBeVisible(string $locator): void
-  {
-    $elements = $this->getSession()->getPage()->findAll('css', $locator);
-    foreach ($elements as $element) {
-      /* @var NodeElement $element */
-      Assert::assertFalse($element->isVisible(), 'Found visible '.$locator.' element.');
-    }
-  }
-
-  /**
    * @Then /^the element "([^"]*)" should have type "([^"]*)"$/
    */
   public function theElementShouldHaveType(string $locator, string $expected_type): void
@@ -470,32 +432,6 @@ class BrowserContext extends MinkContext implements Context
     }
 
     $message = sprintf("The element '%s' was not visible after a %s micro seconds timeout", $locator, $delay * $tries);
-    throw new ResponseTextException($message, $this->getSession());
-  }
-
-  /**
-   * @Then I wait for the element :selector to be not visible
-   *
-   * @throws ResponseTextException
-   */
-  public function iWaitForTheElementToBeNotVisible(string $locator): void
-  {
-    $element = $this->getSession()->getPage()->find('css', $locator);
-    if (null === $element) {
-      return; // element does not exist, so not visible
-    }
-
-    $tries = 100;
-    $delay = 100000; // every 1/10 second
-    for ($timer = 0; $timer < $tries; ++$timer) {
-      if (!$element->isValid() || !$element->isVisible()) {
-        return;
-      }
-
-      usleep($delay);
-    }
-
-    $message = sprintf("The element '%s' was still visible after a %s micro seconds timeout", $locator, $delay * $tries);
     throw new ResponseTextException($message, $this->getSession());
   }
 

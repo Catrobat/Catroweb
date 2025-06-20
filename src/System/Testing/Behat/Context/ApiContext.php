@@ -26,7 +26,6 @@ use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -38,7 +37,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * USAGE for sending a request:
  *
  * 1) Fill required fields. Those are cleared at the beginning of a new Scenario. Use $this->clearRequest() if needed additionally.
- *     - $this->method
  *     - $this->uri
  *     - $this->$request_headers
  *     - $this->$request_parameters
@@ -60,11 +58,6 @@ class ApiContext implements Context
    * Name of the user which is used for the next requests.
    */
   private ?string $username = null;
-
-  private string $method;
-
-  private string $url;
-
   private DataFixturesContext $dataFixturesContext;
 
   private array $request_parameters;
@@ -201,8 +194,6 @@ class ApiContext implements Context
    */
   public function clearRequest(): void
   {
-    $this->method = 'GET';
-    $this->url = '/';
     $this->request_parameters = [];
     $this->request_files = [];
     $this->request_headers = [];
@@ -257,27 +248,6 @@ class ApiContext implements Context
       $this->request_headers,
       $this->request_content ?? ''
     );
-  }
-
-  /**
-   * Sends a request. The following fields:
-   *   $this->method
-   *   $this->uri
-   *   $this->request_parameters
-   *   $this->request_files
-   *   $this->request_headers
-   *   $this->request_content
-   * are automatically added to the request.
-   *
-   * Get the response from $this->getKernelBrowser()->getResponse()
-   *
-   * @When /^the Request is invoked$/
-   *
-   * @throws \Exception
-   */
-  public function iRequest(): void
-  {
-    $this->iRequestWith($this->method, $this->url);
   }
 
   /**
@@ -405,28 +375,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^I should receive a "([^"]*)" file$/
-   *
-   * @throws \Exception
-   */
-  public function iShouldReceiveAFile(string $extension): void
-  {
-    $content_type = $this->getKernelBrowser()->getResponse()->headers->get('Content-Type');
-    Assert::assertEquals('image/'.$extension, $content_type);
-  }
-
-  /**
-   * @Then /^I should receive a file named "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iShouldReceiveAFileNamed(string $name): void
-  {
-    $content_disposition = $this->getKernelBrowser()->getResponse()->headers->get('Content-Disposition');
-    Assert::assertEquals('attachment; filename="'.$name.'"', $content_disposition);
-  }
-
-  /**
    * @Then /^I should receive the apk file$/
    *
    * @throws \Exception
@@ -502,14 +450,6 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
     Assert::assertJson($response->getContent());
-  }
-
-  /**
-   * @Given /^I have a request parameter "([^"]*)" with value "([^"]*)"$/
-   */
-  public function iHaveARequestParameterWithValue(string $name, string $value): void
-  {
-    $this->request_parameters[$name] = $value;
   }
 
   /**
@@ -601,19 +541,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @throws \Exception
-   */
-  public function getSymfonyProfile(): Profile
-  {
-    $profile = $this->getKernelBrowser()->getProfile();
-    if (!$profile) {
-      throw new \RuntimeException('The profiler is disabled. Activate it by setting framework.profiler.only_exceptions to false in your config');
-    }
-
-    return $profile;
-  }
-
-  /**
    * @When I upload a project with :project_attribute
    */
   public function iUploadAProjectWith(string $project_attribute): void
@@ -647,20 +574,6 @@ class ApiContext implements Context
   public function iUploadThisGeneratedProjectWithId(string $id): void
   {
     $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', null, $id);
-  }
-
-  /**
-   * @Given I upload the project with ":name" as name
-   * @Given I upload the project with ":name" as name again
-   *
-   * @throws \Exception
-   */
-  public function iUploadTheProjectWithAsName(string $name): void
-  {
-    $this->generateProjectFileWith([
-      'name' => $name,
-    ]);
-    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat');
   }
 
   /**
@@ -826,62 +739,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given /^I want to upload a project/
-   */
-  public function iWantToUploadAProject(): void
-  {
-  }
-
-  /**
-   * @Given /^I have no parameters$/
-   */
-  public function iHaveNoParameters(): void
-  {
-  }
-
-  /**
-   * @Then /^I should get no projects/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetNoProjects(): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $response->getStatusCode());
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $returned_projects = $responseArray['CatrobatProjects'];
-    Assert::assertEmpty($returned_projects, 'Projects were returned');
-  }
-
-  /**
-   * @Then /^I should get following projects:$/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetFollowingProjects(TableNode $table): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $response->getStatusCode());
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $returned_projects = $responseArray['CatrobatProjects'];
-    $expected_projects = $table->getHash();
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Wrong number of returned projects');
-    $counter = count($expected_projects);
-    for ($i = 0; $i < $counter; ++$i) {
-      $found = false;
-      for ($j = 0; $j < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$j) {
-        if ($expected_projects[$i]['name'] === $returned_projects[$j]['ProjectName']) {
-          $found = true;
-        }
-      }
-
-      Assert::assertTrue($found, $expected_projects[$i]['name'].' was not found in the returned projects');
-    }
-  }
-
-  /**
    * @Then the uploaded project should have no further Catrobat forward ancestors
    *
    * @throws \JsonException
@@ -931,17 +788,6 @@ class ApiContext implements Context
     Assert::assertEquals(200, $this->getKernelBrowser()
       ->getResponse()
       ->getStatusCode());
-  }
-
-  /**
-   * @When /^I have downloaded a valid project$/
-   */
-  public function iHaveDownloadedAValidProject(): void
-  {
-    $id = 1;
-    $this->iGetFrom('/api/project/'.$id.'/catrobat');
-    $this->iShouldReceiveAProjectFile();
-    $this->theResponseCodeShouldBe('200');
   }
 
   /**
@@ -1093,46 +939,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then the returned json object with id :id will be:
-   *
-   * @throws \JsonException
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function theReturnedJsonObjectWithIdWillBe(string $id, PyStringNode $string): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-
-    $res_array = (array) json_decode($response->getContent(), null, 512, JSON_THROW_ON_ERROR);
-
-    $res_array['projectId'] = $id;
-
-    Assert::assertJsonStringEqualsJsonString($string->getRaw(), json_encode($res_array, JSON_THROW_ON_ERROR));
-  }
-
-  /**
-   * @Then /^the response code will be "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function theResponseCodeWillBe(string $code): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
-  }
-
-  /**
-   * @When /^searching for "([^"]*)"$/
-   */
-  public function searchingFor(string $arg1): void
-  {
-    $this->method = 'GET';
-    $this->url = '/api/search';
-    $this->request_parameters = ['q' => $arg1, 'offset' => 0, 'limit' => 10];
-    $this->iRequest();
-  }
-
-  /**
    * @Then /^the project should get (.*)$/
    *
    * @throws \JsonException
@@ -1148,157 +954,6 @@ class ApiContext implements Context
       'rejected' => Assert::assertNotEquals(200, $code, 'Project was NOT rejected'),
       default => new PendingException(),
     };
-  }
-
-  /**
-   * @Then /^I should get a total of (\d+) projects$/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetATotalOfProjects(string $arg1): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    Assert::assertEquals(
-      $arg1, $responseArray['CatrobatInformation']['TotalProjects'],
-      'Wrong number of total projects'
-    );
-  }
-
-  /**
-   * @Then /^I should get (\d+) projects$/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetProjects(string $arg1): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    Assert::assertEquals(
-      $arg1, is_countable($responseArray['CatrobatProjects']) ? count($responseArray['CatrobatProjects']) : 0,
-      'Wrong number of total projects'
-    );
-  }
-
-  /**
-   * @Given /^I use the limit "([^"]*)"$/
-   */
-  public function iUseTheLimit(string $arg1): void
-  {
-    $this->iHaveAParameterWithValue('limit', $arg1);
-  }
-
-  /**
-   * @Given /^I use the offset "([^"]*)"$/
-   */
-  public function iUseTheOffset(string $arg1): void
-  {
-    $this->iHaveAParameterWithValue('offset', $arg1);
-  }
-
-  /**
-   * @Then /^I should get projects in the following order:$/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetProjectsInTheFollowingOrder(TableNode $table): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $returned_projects = $responseArray['CatrobatProjects'];
-    $expected_projects = $table->getHash();
-
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0);
-
-    for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
-      Assert::assertEquals(
-        $expected_projects[$i]['Name'], $returned_projects[$i]['ProjectName'],
-        'Wrong order of results'
-      );
-    }
-  }
-
-  /**
-   * @Then /^I should get (\d+) projects in random order:$/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetProjectsInRandomOrder(string $project_count, TableNode $table): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $random_projects = $response_array['CatrobatProjects'];
-    $random_projects_count = is_countable($random_projects) ? count($random_projects) : 0;
-    $expected_projects = $table->getHash();
-    $expected_projects_count = count($expected_projects);
-    Assert::assertEquals($project_count, $random_projects_count, 'Wrong number of random projects');
-
-    for ($i = 0; $i < $random_projects_count; ++$i) {
-      $project_found = false;
-      for ($j = 0; $j < $expected_projects_count; ++$j) {
-        if (0 === strcmp((string) $random_projects[$i]['ProjectName'], (string) $expected_projects[$j]['Name'])) {
-          $project_found = true;
-        }
-      }
-
-      Assert::assertEquals($project_found, true, 'Project does not exist in the database');
-    }
-  }
-
-  /**
-   * @Then /^I should get the projects "([^"]*)" in random order$/
-   *
-   * @throws \JsonException
-   */
-  public function iShouldGetTheProjectsInRandomOrder(string $project_list): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $random_projects = $response_array['CatrobatProjects'];
-    $random_projects_count = is_countable($random_projects) ? count($random_projects) : 0;
-    $expected_projects = explode(',', $project_list);
-    $expected_projects_count = count($expected_projects);
-    Assert::assertEquals($expected_projects_count, $random_projects_count, 'Wrong number of random projects');
-
-    for ($i = 0; $i < $random_projects_count; ++$i) {
-      $project_found = false;
-      for ($j = 0; $j < $expected_projects_count; ++$j) {
-        if (0 === strcmp((string) $random_projects[$i]['ProjectName'], $expected_projects[$j])) {
-          $project_found = true;
-        }
-      }
-
-      Assert::assertEquals($project_found, true, 'Project does not exist in the database');
-    }
-  }
-
-  /**
-   * @Then /^I should get the projects "([^"]*)"$/
-   *
-   * @throws \JsonException
-   */
-  public function iShouldGetTheProjects(string $project_list): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $returned_projects = $responseArray['CatrobatProjects'];
-    $expected_projects = explode(',', $project_list);
-
-    for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
-      $found = false;
-      $counter = count($expected_projects);
-      for ($j = 0; $j < $counter; ++$j) {
-        if ($expected_projects[$j] === $returned_projects[$i]['ProjectName']) {
-          $found = true;
-        }
-      }
-
-      Assert::assertTrue($found);
-    }
   }
 
   /**
@@ -1673,71 +1328,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^I should get (\d+) programs in the following order:$/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetScratchProgramsInTheFollowingOrder(string $project_count, TableNode $table): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $projects = $table->getHash();
-
-    $returned_projects = $responseArray['CatrobatProjects'];
-    $scratch_projects_count = count($projects);
-    Assert::assertEquals($project_count, $scratch_projects_count, 'Wrong number of Scratch projects');
-
-    $expected_projects = $table->getHash();
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0,
-      'Number of returned projects should be '.(is_countable($returned_projects) ? count($returned_projects) : 0));
-
-    for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
-      Assert::assertEquals(
-        $expected_projects[$i]['Name'], $returned_projects[$i]['ProjectName'],
-        'Wrong order of results'
-      );
-    }
-  }
-
-  /**
-   * @Given /^I have a parameter "([^"]*)" with the md5checksum of "([^"]*)"$/
-   */
-  public function iHaveAParameterWithTheMdChecksumOf(string $parameter): void
-  {
-    $this->request_parameters[$parameter] = md5_file($this->request_files[0]->getPathname());
-  }
-
-  /**
-   * @Then /^I should get (\d+) projects in the following order:$/
-   *
-   * @throws \JsonException
-   * @throws \Exception
-   */
-  public function iShouldGetScratchProjectsInTheFollowingOrder(int $project_count, TableNode $table): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-
-    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $projects = $table->getHash();
-
-    $scratch_projects_count = count($projects);
-    Assert::assertEquals($project_count, $scratch_projects_count, 'Wrong number of Scratch projects');
-
-    $expected_projects = $table->getHash();
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0,
-      'Number of returned projects should be '.(is_countable($returned_projects) ? count($returned_projects) : 0));
-
-    for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
-      Assert::assertEquals(
-        $expected_projects[$i]['Name'], $returned_projects[$i]['name'],
-        'Wrong order of results'
-      );
-    }
-  }
-
-  /**
    * @Then the search response should contain :count projects
    */
   public function theSearchResponseShouldContainProjects(int $count): void
@@ -1863,20 +1453,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I have a parameter "([^"]*)" with the returned projectId$/
-   *
-   * @throws \Exception
-   * @throws \JsonException
-   */
-  public function iHaveAParameterWithTheReturnedProjectid(string $name): void
-  {
-    $response = json_decode($this->getKernelBrowser()
-      ->getResponse()
-      ->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $this->request_parameters[$name] = $response['projectId'];
-  }
-
-  /**
    * @Then it should be updated
    *
    * @throws \JsonException
@@ -1888,37 +1464,6 @@ class ApiContext implements Context
     $location = $responseArray['project_url'];
 
     Assert::assertNotNull($location);
-  }
-
-  /**
-   * @Given /^the upload problem "([^"]*)"$/
-   */
-  public function theUploadProblem(string $problem): void
-  {
-    switch ($problem) {
-      case 'no authentication':
-        $this->method = 'POST';
-        $this->url = '/app/api/upload/upload.json';
-        break;
-      case 'missing parameters':
-        $this->method = 'POST';
-        $this->url = '/app/api/upload/upload.json';
-        $this->request_parameters['username'] = 'Catrobat';
-        $this->request_parameters['token'] = 'cccccccccc';
-        break;
-      case 'invalid program file':
-        $this->method = 'POST';
-        $this->url = '/app/api/upload/upload.json';
-        $this->request_parameters['username'] = 'Catrobat';
-        $this->request_parameters['token'] = 'cccccccccc';
-        $filepath = $this->FIXTURES_DIR.'invalid_archive.catrobat';
-        Assert::assertTrue(file_exists($filepath), 'File not found');
-        $this->request_files[] = new UploadedFile($filepath, 'test.catrobat');
-        $this->request_parameters['fileChecksum'] = md5_file($this->request_files[0]->getPathname());
-        break;
-      default:
-        throw new PendingException('No implementation of case "'.$problem.'"');
-    }
   }
 
   /**
@@ -1935,18 +1480,6 @@ class ApiContext implements Context
   public function iTryToUploadAProjectWithScenesAndUnnecessaryFiles(): void
   {
     $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFilesInScenes.catrobat');
-  }
-
-  /**
-   * @When I upload this project with id :id
-   *
-   * @param string $id The desired ID of the newly uploaded project
-   *
-   * @throws \JsonException
-   */
-  public function iUploadThisProjectWithId(string $id): void
-  {
-    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', null, $id);
   }
 
   /**
@@ -2059,41 +1592,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given /^the POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
-   */
-  public function thePostParameterContainsTheMdSumOfTheGivenFile(string $arg1): void
-  {
-    $this->request_parameters[$arg1] = md5_file($this->request_files[0]->getPathname());
-  }
-
-  /**
-   * @Given /^the check token problem "([^"]*)"$/
-   *
-   * @When /^there is a check token problem ([^"]*)$/
-   */
-  public function thereIsACheckTokenProblem(string $problem): void
-  {
-    switch ($problem) {
-      case 'invalid token':
-        $this->method = 'POST';
-        $this->url = '/app/api/checkToken/check.json';
-        $this->request_parameters['username'] = 'Catrobat';
-        $this->request_parameters['token'] = 'INVALID';
-        break;
-      default:
-        throw new PendingException('No implementation of case "'.$problem.'"');
-    }
-  }
-
-  /**
-   * @Given /^I have a parameter "([^"]*)" with the tag "([^"]*)"$/
-   */
-  public function iHaveAParameterWithTheTag(string $name, string $value): void
-  {
-    $this->request_parameters[$name] = $value;
-  }
-
-  /**
    * @Given I use the :language app
    *
    * @param string $language The desired language
@@ -2110,48 +1608,11 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given /^the HTTP Request:$/
-   * @Given /^I have the HTTP Request:$/
-   */
-  public function iHaveTheHttpRequest(TableNode $table): void
-  {
-    $values = $table->getRowsHash();
-    $this->method = $values['Method'];
-    $this->url = $values['Url'];
-  }
-
-  /**
-   * @Given /^the POST parameters:$/
-   * @Given /^I use the POST parameters:$/
-   */
-  public function iUseThePostParameters(TableNode $table): void
-  {
-    $this->request_parameters = $table->getRowsHash();
-  }
-
-  /**
-   * @Given /^the GET parameters:$/
-   * @Given /^I use the GET parameters:$/
-   */
-  public function iUseTheGetParameters(TableNode $table): void
-  {
-    $this->request_parameters = $table->getRowsHash();
-  }
-
-  /**
    * @Given /^the server name is "([^"]*)"$/
    */
   public function theServerNameIs(string $name): void
   {
     $this->request_headers['HTTP_HOST'] = $name;
-  }
-
-  /**
-   * @Given /^I use a secure connection$/
-   */
-  public function iUseASecureConnection(): void
-  {
-    $this->request_headers['HTTPS'] = true;
   }
 
   /**
@@ -2226,46 +1687,6 @@ class ApiContext implements Context
     $this->generateProjectFileWith([
       $key => $value,
     ]);
-  }
-
-  /**
-   * @Then The returned url with id :id should be
-   *
-   * @throws \Exception
-   * @throws \JsonException
-   */
-  public function theReturnedUrlShouldBe(string $id, PyStringNode $string): void
-  {
-    $answer = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
-
-    $form_url = $answer['form'];
-    $form_url = preg_replace('/&id=.*?&mail=/', '&id='.$id.'&mail=', (string) $form_url, -1);
-
-    Assert::assertEquals($string->getRaw(), $form_url);
-  }
-
-  /**
-   * @Then The submission should be rejected
-   *
-   * @throws \Exception
-   * @throws \JsonException
-   */
-  public function theSubmissionShouldBeRejected(): void
-  {
-    $answer = json_decode($this->getKernelBrowser()
-      ->getResponse()
-      ->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    Assert::assertNotEquals('200', $answer['statusCode']);
-  }
-
-  /**
-   * @Then /^I should see the message "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iShouldSeeAMessage(string $arg1): void
-  {
-    Assert::assertStringContainsString($arg1, $this->getKernelBrowser()->getResponse()->getContent());
   }
 
   // to df ->
@@ -2512,21 +1933,6 @@ class ApiContext implements Context
   public function iHaveSpecificBuild(string $build_type): void
   {
     $this->iUseTheUserAgentParameterized('0.998', Flavor::POCKETCODE, '0.9.60', $build_type);
-  }
-
-  /**
-   * @When /^I upload a catrobat project with the phiro app$/
-   *
-   * @throws \Exception
-   * @throws \Exception
-   */
-  public function iUploadACatrobatProjectWithThePhiroProApp(): void
-  {
-    $user = $this->insertUser();
-    $uploadedFile = $this->getStandardProjectFile();
-    $this->uploadProject(strval($uploadedFile), $user, '1', Flavor::PHIROCODE);
-    Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
-      'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
 
   // --------------------------------------------------------------------------------------------------------------------
