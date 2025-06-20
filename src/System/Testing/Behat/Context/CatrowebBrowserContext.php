@@ -610,78 +610,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I change upload of the entry number "([^"]*)" in the list to "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iChangeUploadOfTheEntry(string $project_number, string $approved): void
-  {
-    $page = $this->getSession()->getPage();
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$project_number.']/td[4]/span')
-      ->click()
-    ;
-
-    $this->iSelectTheOptionInThePopup($approved);
-    $this->iWaitForAjaxToFinish();
-  }
-
-  /**
-   * @Then /^I change report of the entry number "([^"]*)" in the list to "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iChangeReportOfTheEntry(string $project_number, string $approved): void
-  {
-    $page = $this->getSession()->getPage();
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$project_number.']/td[5]/span')
-      ->click()
-    ;
-
-    $this->iSelectTheOptionInThePopup($approved);
-    $this->iWaitForAjaxToFinish();
-  }
-
-  /**
-   * @Then /^I click action button "([^"]*)" of the entry number "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iClickActionButtonOfEntry(string $action_button, string $entry_number): void
-  {
-    $page = $this->getSession()->getPage();
-    switch ($action_button) {
-      case 'edit':
-        $page
-          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[1]')
-          ->click()
-        ;
-        break;
-      case 'delete':
-        $page
-          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[2]')
-          ->click()
-        ;
-        break;
-    }
-  }
-
-  /**
-   * @Then /^I check the batch action box of entry "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iCheckBatchActionBoxOfEntry(string $entry_number): void
-  {
-    $page = $this->getSession()->getPage();
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td/div')
-      ->click()
-    ;
-  }
-
-  /**
    * @Then /^I click on the username "([^"]*)"$/
    *
    * @throws ElementNotFoundException
@@ -749,40 +677,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I click on the edit button of the extension number "([^"]*)" in the extensions list$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheEditButtonInAllExtensions(string $project_number): void
-  {
-    $page = $this->getSession()->getPage();
-    $this->assertSession()->elementExists('xpath',
-      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[4]/div/a');
-
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[4]/div/a')
-      ->click()
-    ;
-  }
-
-  /**
-   * @Then /^I click on the add new button$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheAddNewButton(): void
-  {
-    $page = $this->getSession()->getPage();
-    $this->assertSession()->elementExists('xpath',
-      "//a[contains(text(),'Add new')]");
-
-    $page
-      ->find('xpath', "//a[contains(text(),'Add new')]")
-      ->click()
-    ;
-  }
-
-  /**
    * @When /^I report project (\d+) with category "([^"]*)" and note "([^"]*)" in Browser$/
    *
    * @throws ElementNotFoundException
@@ -820,16 +714,6 @@ class CatrowebBrowserContext extends BrowserContext
   public function iWriteInTextbox(string $arg1): void
   {
     $textarea = $this->getSession()->getPage()->find('css', '#comment-message');
-    Assert::assertNotNull($textarea, 'Textarea not found');
-    $textarea->setValue($arg1);
-  }
-
-  /**
-   * @Given /^I write "([^"]*)" in textarea$/
-   */
-  public function iWriteInTextarea(string $arg1): void
-  {
-    $textarea = $this->getSession()->getPage()->find('css', '#edit-text');
     Assert::assertNotNull($textarea, 'Textarea not found');
     $textarea->setValue($arg1);
   }
@@ -1278,22 +1162,6 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['#Reported Projects']);
       $this->assertSession()->pageTextContains($user_stat['Username']);
       $this->assertSession()->pageTextContains($user_stat['Email']);
-    }
-  }
-
-  /**
-   * @Then /^I should see the notifications table:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function shouldSeeNotificationTable(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat) {
-      $this->assertSession()->pageTextContains($user_stat['User']);
-      $this->assertSession()->pageTextContains($user_stat['User Email']);
-      $this->assertSession()->pageTextContains($user_stat['Upload']);
-      $this->assertSession()->pageTextContains($user_stat['Report']);
     }
   }
 
