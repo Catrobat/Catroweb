@@ -46,7 +46,6 @@ To generate the OpenAPI code (e.g., client libraries, server stubs, etc.), you n
 - **Deprecation Process:** The OpenAPI specification should **not** be changed in a way that breaks backwards compatibility without a thorough deprecation process. Any breaking changes should be communicated and coordinated with the app teams well in advance. This ensures a smooth transition and avoids breaking existing client applications that depend on the API.
 
   A proper deprecation process typically involves:
-
   - Marking the feature or endpoint as deprecated for a period of time.
   - Updating the documentation and communicating the changes to relevant teams.
   - Providing a clear timeline for the removal of deprecated features.
