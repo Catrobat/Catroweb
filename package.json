@@ -51,7 +51,7 @@
     "core-js": "^3.44.0",
     "dotenv": "^17.2.0",
     "eslint": "^9.31.0",
-    "eslint-config-prettier": "^10.1.5",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.3",
     "eslint-plugin-promise": "^7.2.1",
