@@ -77,7 +77,7 @@
   },
   "dependencies": {
     "@analytics/google-tag-manager": "^0.6.0",
-    "@bugsnag/browser-performance": "^2.14.0",
+    "@bugsnag/browser-performance": "^2.15.0",
     "@bugsnag/js": "^8.4.0",
     "@material/checkbox": "^14.0.0",
     "@material/chips": "^14.0.0",
