@@ -25,7 +25,7 @@
     "friendsofsymfony/elastica-bundle": "6.4.*",
     "gesdinet/jwt-refresh-token-bundle": "1.5.*",
     "google/apiclient": "2.18.*",
-    "google/cloud-translate": "1.20.*",
+    "google/cloud-translate": "2.0.*",
     "hwi/oauth-bundle": "2.2.*",
     "jms/serializer-bundle": "*",
     "lexik/jwt-authentication-bundle": "3.1.*",
