@@ -112,9 +112,9 @@ class TranslationDelegate
   }
 
   /**
-   * @throws \InvalidArgumentException
-   *
    * @psalm-return array<array-key, TranslationResult|null>|null
+   *
+   * @throws \InvalidArgumentException
    */
   public function translateProject(Program $project, ?string $source_language, string $target_language): ?array
   {
