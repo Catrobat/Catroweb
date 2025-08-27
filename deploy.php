@@ -68,7 +68,8 @@ host($deployShare)
   ->set('symfony_env', 'prod')
   ->set('branch', $deployBranch)
   ->set('deploy_path', '/var/www/share')
-  ->set('remote_user', $deployUser);
+  ->set('remote_user', $deployUser)
+;
 
 // ---------------------------------------------------
 // Tasks

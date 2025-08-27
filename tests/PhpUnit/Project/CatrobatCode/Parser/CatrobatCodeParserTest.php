@@ -52,6 +52,14 @@ class CatrobatCodeParserTest extends TestCase
     ));
   }
 
+  /**
+   * @return ExtractedCatrobatFile[][]
+   */
+  public static function provideValidProgramData(): array
+  {
+    return [[new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '')], [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '')], [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/', '', '')]];
+  }
+
   public function testMustReturnParsedSimpleProgramIfNoScenes(): void
   {
     $extracted_catrobat_program = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '');
@@ -74,14 +82,6 @@ class CatrobatCodeParserTest extends TestCase
   public function testMustReturnNullOnError(ExtractedCatrobatFile $faulty_program): void
   {
     $this->assertNull($this->parser->parse($faulty_program));
-  }
-
-  /**
-   * @return ExtractedCatrobatFile[][]
-   */
-  public static function provideValidProgramData(): array
-  {
-    return [[new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '')], [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '')], [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/', '', '')]];
   }
 
   public static function provideFaultyProgramData(): \Generator

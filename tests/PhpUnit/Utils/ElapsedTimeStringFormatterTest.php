@@ -55,18 +55,6 @@ class ElapsedTimeStringFormatterTest extends TestCase
     $this->object->format($timestamp);
   }
 
-  protected function getExpectedFormatterMethod(string $expected): string
-  {
-    return match ($expected) {
-      'minutes' => 'getFormattedInMinutes',
-      'hours' => 'getFormattedInHours',
-      'days' => 'getFormattedInDays',
-      'months' => 'getFormattedInMonths',
-      'years' => 'getFormattedInYears',
-      default => '',
-    };
-  }
-
   /**
    * @throws \Exception
    */
@@ -98,5 +86,17 @@ class ElapsedTimeStringFormatterTest extends TestCase
     yield ['years', $test_time - 31_557_600 * 3];
     yield ['years', $test_time - 31_557_600 * 3 - 10];
     yield ['years', $test_time - 31_557_600 * 100];
+  }
+
+  protected function getExpectedFormatterMethod(string $expected): string
+  {
+    return match ($expected) {
+      'minutes' => 'getFormattedInMinutes',
+      'hours' => 'getFormattedInHours',
+      'days' => 'getFormattedInDays',
+      'months' => 'getFormattedInMonths',
+      'years' => 'getFormattedInYears',
+      default => '',
+    };
   }
 }
