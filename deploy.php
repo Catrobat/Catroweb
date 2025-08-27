@@ -68,7 +68,8 @@ host($deployShare)
   ->set('symfony_env', 'prod')
   ->set('branch', $deployBranch)
   ->set('deploy_path', '/var/www/share')
-  ->set('remote_user', $deployUser);
+  ->set('remote_user', $deployUser)
+;
 
 // ---------------------------------------------------
 // Tasks
@@ -87,7 +88,7 @@ task('restart:nginx', function () {
 });
 
 task('restart:php-fpm', function () {
-  run('sudo /usr/sbin/service php8.3-fpm restart');
+  run('sudo /usr/sbin/service php8.4-fpm restart');
 });
 
 task('install:npm', function () {

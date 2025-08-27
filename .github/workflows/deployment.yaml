@@ -44,4 +44,3 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_BRANCH: main
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-

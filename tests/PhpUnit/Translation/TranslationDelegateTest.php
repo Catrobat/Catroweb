@@ -142,6 +142,21 @@ class TranslationDelegateTest extends TestCase
     $translation_delegate->translate('test', $invalid_code, $invalid_code);
   }
 
+  public static function provideInvalidLanguageCode(): array
+  {
+    return [
+      [''],
+      ['x'],
+      ['xx'],
+      ['EN'], // need to be lowercase en
+      ['xxxxx'],
+      ['en-XX'],
+      ['EN-US'], // need to be lowercase en
+      ['en-us'], // need to be uppercase US
+      ['xx-US'],
+    ];
+  }
+
   /**
    * @throws Exception
    */
@@ -258,20 +273,5 @@ class TranslationDelegateTest extends TestCase
     $actual_result = $translation_delegate->translateProject(new Program(), 'en', 'fr');
 
     $this->assertEquals($cached_translation, $actual_result);
-  }
-
-  public static function provideInvalidLanguageCode(): array
-  {
-    return [
-      [''],
-      ['x'],
-      ['xx'],
-      ['EN'], // need to be lowercase en
-      ['xxxxx'],
-      ['en-XX'],
-      ['EN-US'], // need to be lowercase en
-      ['en-us'], // need to be uppercase US
-      ['xx-US'],
-    ];
   }
 }
