@@ -36,15 +36,17 @@ jobs:
 
       - name: Set deployment script secrets (.env.local)
         run: |
-          printf '\nDEPLOY_GIT=https://github.com/Catrobat/Catroweb-Symfony.git\n' >> .env.local
-          printf 'SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK }}\n' >> .env.local
-          printf 'DEP_USER="Catroweb Github Action"\n' >> .env.local
-          printf 'DEPLOY_SHARE=${{ secrets.DEPLOY_SHARE }}\n' >> .env.local
-          printf 'DEPLOY_SHARE_BRANCH="main"\n' >> .env.local
+          {
+            echo "DEPLOY_GIT=https://github.com/Catrobat/Catroweb.git"
+            echo "SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK }}"
+            echo "DEP_USER=Catroweb Github Action"
+            echo "DEPLOY_SHARE=${{ secrets.DEPLOY_SHARE }}"
+            echo "DEPLOY_SHARE_BRANCH=main"
+          } >> .env.local
 
       - name: Deploy Share
         uses: deployphp/action@v1
         with:
           private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
-          dep: deploy share
+          dep: deploy stage=share
           deployer-binary: 'bin/dep'
