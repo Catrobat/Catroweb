@@ -87,7 +87,7 @@ task('restart:nginx', function () {
 });
 
 task('restart:php-fpm', function () {
-  run('sudo /usr/sbin/service php8.3-fpm restart');
+  run('sudo /usr/sbin/service php8.4-fpm restart');
 });
 
 task('install:npm', function () {
