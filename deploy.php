@@ -166,6 +166,7 @@ task('deploy', [
   'update:tags',
   'update:extensions',
   'update:special',
+  'deploy:cache:clear',
   'deploy:unlock',
   'slack:notify:success',
 ]);
