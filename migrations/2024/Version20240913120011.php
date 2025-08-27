@@ -12,11 +12,13 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20240913120011 extends AbstractMigration
 {
+  #[\Override]
   public function getDescription(): string
   {
     return '';
   }
 
+  #[\Override]
   public function up(Schema $schema): void
   {
     // this up() migration is auto-generated, please modify it to your needs
@@ -49,6 +51,7 @@ final class Version20240913120011 extends AbstractMigration
     $this->addSql('ALTER TABLE user_remix_similarity_relation CHANGE first_user_id first_user_id CHAR(36) NOT NULL, CHANGE second_user_id second_user_id CHAR(36) NOT NULL');
   }
 
+  #[\Override]
   public function down(Schema $schema): void
   {
     // this down() migration is auto-generated, please modify it to your needs

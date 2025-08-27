@@ -21,6 +21,7 @@ We work as a team and expect everyone to follow the rules. In our daily work, we
 - Code Reviews
 - Pair Programming
 - Biweekly Meetings (remote)
+- [API documentation](https://developer.catrobat.org/Catroweb/)
 
 ## Technologies
 
@@ -41,6 +42,7 @@ Below you can find an outline of the technologies we currently use at Catroweb. 
 [![Git](https://img.shields.io/badge/Git-purple)](https://git-scm.com/)
 [![Jira](https://img.shields.io/badge/Jira-purple)](https://jira.catrob.at/secure/Dashboard.jspa)
 [![Docker](https://img.shields.io/badge/Docker-purple)](https://www.docker.com/)
+[![API Documentation](https://img.shields.io/badge/API-blue)](https://developer.catrobat.org/Catroweb/)
 
 ### Knowledge Repository
 

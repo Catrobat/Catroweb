@@ -136,42 +136,12 @@ default:
                 - App\System\Testing\Behat\Context\DataFixturesContext
                 - App\System\Testing\Behat\Context\ApiContext
 
-###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###
-
-        api-deprecated-general:
+        api-search:
             paths:
-                features: "tests/BehatFeatures/api-deprecated/general"
+                features: "tests/BehatFeatures/api/search"
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
-                - App\System\Testing\Behat\Context\CatrowebBrowserContext
-                - App\System\Testing\Behat\Context\ApiContext
-
-        api-deprecated-profile:
-            paths:
-                features: "tests/BehatFeatures/api-deprecated/profile"
-            contexts:
-                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
-                - App\System\Testing\Behat\Context\DataFixturesContext
-                - App\System\Testing\Behat\Context\CatrowebBrowserContext
-                - App\System\Testing\Behat\Context\ApiContext
-
-        api-deprecated-project:
-            paths:
-                features: "tests/BehatFeatures/api-deprecated/project"
-            contexts:
-                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
-                - App\System\Testing\Behat\Context\DataFixturesContext
-                - App\System\Testing\Behat\Context\CatrowebBrowserContext
-                - App\System\Testing\Behat\Context\ApiContext
-
-        api-deprecated-upload:
-            paths:
-                features: "tests/BehatFeatures/api-deprecated/upload"
-            contexts:
-                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
-                - App\System\Testing\Behat\Context\DataFixturesContext
-                - App\System\Testing\Behat\Context\CatrowebBrowserContext
                 - App\System\Testing\Behat\Context\ApiContext
 
 ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###

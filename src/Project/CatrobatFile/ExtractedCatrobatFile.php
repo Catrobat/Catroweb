@@ -407,6 +407,6 @@ class ExtractedCatrobatFile
     $match = ['/&amp;/', '/&gt;/', '/&lt;/', '/&apos;/', '/&quot;/'];
     $replace = ['&', '<', '>', "'", '"'];
 
-    return preg_replace($match, $replace, $input);
+    return preg_replace($match, $replace, $input) ?? '';
   }
 }

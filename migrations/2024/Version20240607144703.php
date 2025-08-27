@@ -12,11 +12,13 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20240607144703 extends AbstractMigration
 {
+  #[\Override]
   public function getDescription(): string
   {
     return '';
   }
 
+  #[\Override]
   public function up(Schema $schema): void
   {
     // this up() migration is auto-generated, please modify it to your needs
@@ -94,6 +96,7 @@ final class Version20240607144703 extends AbstractMigration
     $this->addSql('ALTER TABLE user_remix_similarity_relation ADD CONSTRAINT FK_143F09C7B02C53F8 FOREIGN KEY IF NOT EXISTS (second_user_id) REFERENCES fos_user (id)');
   }
 
+  #[\Override]
   public function down(Schema $schema): void
   {
     // this down() migration is auto-generated, please modify it to your needs

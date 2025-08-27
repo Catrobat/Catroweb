@@ -418,6 +418,7 @@ search:
   fail: Унесите барем један термин за претрагу
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Мој профил
   login: Login

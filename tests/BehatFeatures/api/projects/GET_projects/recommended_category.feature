@@ -7,11 +7,11 @@ Feature: Get recommended programs on homepage
 
   Background:
     Given there are users:
-      | id | name      | password | token      | id |
-      | 1  | Catrobat1 | 12345    | cccccccccc | 1  |
-      | 2  | Catrobat2 | 12345    | cccccccccc | 2  |
-      | 3  | Catrobat3 | 12345    | cccccccccc | 3  |
-      | 4  | Catrobat4 | 12345    | cccccccccc | 4  |
+      | id | name      | password | id |
+      | 1  | Catrobat1 | 12345    | 1  |
+      | 2  | Catrobat2 | 12345    | 2  |
+      | 3  | Catrobat3 | 12345    | 3  |
+      | 4  | Catrobat4 | 12345    | 4  |
     And there are projects:
       | id | name    | description | owned by  | downloads | views | upload time      | version | language version | flavor     |
       | 1  | Game    | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | 0.985            | pocketcode |

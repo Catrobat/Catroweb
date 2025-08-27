@@ -12,7 +12,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
 
   Scenario: User should get remix notification in a remix category
     Given I have a project with "url" set to "/app/project/1"
-    And user "User" uploads this generated project, API version 2
+    And user "User" uploads this generated project
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
@@ -24,7 +24,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
 
   Scenario: Uses should not be notified about their own remixes
     Given I have a project with "url" set to "/app/project/1"
-    And user "Catrobat" uploads this generated project, API version 2
+    And user "Catrobat" uploads this generated project
     When I log in as "Catrobat"
     And I go to "/app/user_notifications"
     And I wait for the page to be loaded
@@ -32,7 +32,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
 
   Scenario: Clicking on a remix notification should redirect the user to the project page of the remix
     Given I have a project with "url" set to "/app/project/1"
-    And user "User" uploads this generated project, API version 2, ID '3'
+    And user "User" uploads this generated project, ID '3'
     And I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded

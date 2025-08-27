@@ -419,6 +419,7 @@ search:
   fail: Vennligst skriv inn minst ett søkeord
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Min profil
   login: Logg på

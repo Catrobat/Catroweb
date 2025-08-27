@@ -41,7 +41,7 @@ Feature: Follower and new programs of users you follow notifications
   Scenario: User should get new program notifications from users they are following under follower category
     Given User "Catrobat-id" is followed by user "User-id"
     And there is a project with "url" set to "/app/project/1"
-    And user "User" uploads a valid Catrobat project, API version 2
+    And user "User" uploads a valid Catrobat project
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     Then I should see "User created a new game"

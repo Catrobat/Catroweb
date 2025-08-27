@@ -422,6 +422,7 @@ search:
   fail: Bitte gib zumindest ein Wort ein
   noUsers: Keine Benutzer gefunden
   noProjects: Keine Projekte gefunden
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: Mein Profil
   login: Einloggen

@@ -1,5 +1,3 @@
-/* global sessionStorage */
-
 import { showTopBarSearch, controlTopBarSearchClearButton } from '../Layout/TopBar'
 require('./ProjectList.scss')
 

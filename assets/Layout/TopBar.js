@@ -1,3 +1,4 @@
+import { showSnackbar } from './Snackbar'
 import { MDCTopAppBar } from '@material/top-app-bar'
 
 import './TopBar.scss'
@@ -21,8 +22,8 @@ const optionsContainer = document.querySelector('#top-app-bar__options-container
 const defaultAppBarHref = title.getAttribute('href')
 const defaultTitle = title.innerHTML
 
-const PREVIOUS_SEARCH_URL_KEY = 'KEY_BEFORE_SEARCH_URL'
 const searchUrl = document.querySelector('.js-header').dataset.pathSearchUrl
+const sameSearchMessage = document.querySelector('.js-header').dataset.sameSearchMessage
 
 searchButton?.addEventListener('click', () => {
   showTopBarSearch()
@@ -96,12 +97,14 @@ export function showDefaultTopBarTitle() {
 
 function submitSearchForm(event) {
   event.preventDefault()
-  const query = searchInput.value
-  if (!window.location.pathname.includes('/search/')) {
-    // keeping track of last page that was no search page
-    window.sessionStorage.setItem(PREVIOUS_SEARCH_URL_KEY, window.location.href)
+  const query = searchInput.value.trim()
+  const targetUrl = searchUrl + encodeURIComponent(query)
+
+  if (!window.location.href.includes(targetUrl)) {
+    window.location.href = targetUrl
+  } else {
+    showSnackbar('#share-snackbar', sameSearchMessage)
   }
-  window.location.href = searchUrl + encodeURIComponent(query.trim())
 }
 
 function hideTopBars() {
@@ -111,11 +114,22 @@ function hideTopBars() {
   })
 }
 
+const PREVIOUS_NON_SEARCH_URL_KEY = 'previousNonSearchUrl'
+
 function handleSearchBackButton() {
-  const beforeSearchUrl = window.sessionStorage.getItem(PREVIOUS_SEARCH_URL_KEY)
-  if (window.location.pathname.includes('/search/') && beforeSearchUrl !== null) {
-    window.sessionStorage.removeItem(PREVIOUS_SEARCH_URL_KEY)
-    window.location.href = beforeSearchUrl
+  const previousUrl = sessionStorage.getItem(PREVIOUS_NON_SEARCH_URL_KEY)
+
+  if (!window.location.pathname.includes('/search/')) {
+    // Only the search bar was shown, no navigation happened
+    showTopBarDefault()
+    return
+  }
+
+  if (previousUrl) {
+    sessionStorage.removeItem(PREVIOUS_NON_SEARCH_URL_KEY)
+    window.location.href = previousUrl
+  } else if (window.history.length > 1) {
+    window.history.back()
   } else {
     showTopBarDefault()
   }
@@ -130,6 +144,9 @@ export function showTopBarSearch() {
   hideTopBars()
   document.querySelector('#top-app-bar__search').style.display = 'flex'
   searchInput.focus()
+  if (!window.location.pathname.includes('/search/')) {
+    sessionStorage.setItem(PREVIOUS_NON_SEARCH_URL_KEY, window.location.href)
+  }
 }
 
 export function controlTopBarSearchClearButton() {

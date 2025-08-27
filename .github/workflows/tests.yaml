@@ -14,6 +14,9 @@ on:
     branches:
       - '**' # all branches
       - '!main' # excludes main to prevent double test runs during release prep.
+  schedule:
+    - cron: '0 4 * * *' # Every day at 04:00 UTC
+  workflow_dispatch: # Allow manual trigger
 
 jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -31,7 +34,7 @@ jobs:
       image: ${{ steps.upload-artifact.outputs.artifact-path }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -79,10 +82,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Download Docker Image
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: catroweb-image
           path: docker
@@ -96,7 +99,6 @@ jobs:
         run: |
           cd docker
           docker compose -f docker-compose.test.yaml up -d
-          sleep 60
 
       - name: Run PHPUnit Tests
         run: |
@@ -113,9 +115,10 @@ jobs:
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          file: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
+          files: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
           flags: phpunit # optional
           name: codecov-umbrella # optional
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Behat:
@@ -157,11 +160,7 @@ jobs:
           - api-translation
           - api-tag
           - api-studio
-
-          - api-deprecated-general
-          - api-deprecated-project
-          - api-deprecated-profile
-          - api-deprecated-upload
+          - api-search
 
           - web-achievements
           - web-admin
@@ -189,10 +188,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Download Docker Image
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: catroweb-image
           path: docker
@@ -206,7 +205,10 @@ jobs:
         run: |
           cd docker
           docker compose -f docker-compose.test.yaml up -d
-          sleep 30
+
+      - name: Warmup the cache
+        run: |
+          docker exec app.catroweb bin/console cache:warmup -e test
 
       # Test Run
       - name: Behat ${{ matrix.testSuite }} tests
@@ -218,7 +220,7 @@ jobs:
         #   the pipe status, which contains the correct exit code.
         run: |
           docker exec app.catroweb chmod -R 777 var
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty \
+          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty --xdebug \
           |& tee tests/TestReports/Behat/${{ matrix.testSuite }}.log; \
           TEST_RUN_EXIT_CODE=${PIPESTATUS[0]}
           echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
@@ -267,10 +269,10 @@ jobs:
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          file: tests/TestReports/CoverageReports/Behat/coverage.xml
+          files: tests/TestReports/CoverageReports/Behat/coverage.xml
           flags: behat # optional
           name: codecov-umbrella # optional
-          # fail_ci_if_error: true # optional (default = false)
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Rerun Behat Tests (1st Attempt)
         if: env.test-run-exit-code != '0'

@@ -4,14 +4,14 @@ Feature: Admin featured programs
 
   Background:
     Given there are admins:
-      | name     | password | token      | email                | id |
-      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
+      | name     | password | email                | id |
+      | Adminius | 123456   | admin@pocketcode.org | 1  |
 
     And there are users:
-      | name      | password | token      | email               | id |
-      | Superman  | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
-      | Gregor    | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
-      | Frank Jr. | 123456   | qwertyuiop | dev3@pocketcode.org | 4  |
+      | name      | password | email               | id |
+      | Superman  | 123456   | dev1@pocketcode.org | 2  |
+      | Gregor    | 123456   | dev2@pocketcode.org | 3  |
+      | Frank Jr. | 123456   | dev3@pocketcode.org | 4  |
 
     And there are projects:
       | id          | name      | description             | owned by  | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |

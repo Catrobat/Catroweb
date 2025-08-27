@@ -20,8 +20,8 @@ class Search {
     const searchUsers = document.querySelector('#search-users')
     const theme = this.searchElement.dataset.theme
     const baseUrl = this.searchElement.dataset.baseUrl
-    const category = this.searchElement.dataset.projectCategory
-    const property = this.searchElement.dataset.projectProperty
+    const category = 'search'
+    const property = 'uploaded'
     const query = this.searchElement.dataset.query
     const projectString = this.searchElement.dataset.projectTranslated
     const noUsers = this.searchElement.dataset.noUsers

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\System\Testing\Behat\Context;
 
-use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -643,46 +642,6 @@ class DataFixturesContext implements Context
     Assert::assertCount((int) $count, $project_extensions, 'Too much or too less extensions found!');
   }
 
-  /**
-   * @Then /^the project should be flagged as phiro$/
-   */
-  public function theProjectShouldBeFlaggedAsPhiroPro(): void
-  {
-    $project_manager = $this->getProjectManager();
-    $project = $project_manager->find('1');
-    Assert::assertNotNull($project, 'No project added');
-    Assert::assertEquals(Flavor::PHIROCODE, $project->getFlavor(), 'Project is NOT flagged as phiro');
-  }
-
-  /**
-   * @Then /^the project should not be flagged as phiro$/
-   */
-  public function theProjectShouldNotBeFlaggedAsPhiroPro(): void
-  {
-    $project_manager = $this->getProjectManager();
-    $project = $project_manager->find('1');
-    Assert::assertNotNull($project, 'No project added');
-    Assert::assertNotEquals(Flavor::PHIROCODE, $project->getFlavor(), 'Project is flagged as a phiro');
-  }
-
-  /**
-   * @Given /^I have a project "([^"]*)" with id "([^"]*)" and a vibrator brick$/
-   *
-   * @throws \Exception
-   */
-  public function iHaveAProjectWithIdAndAVibratorBrick(string $name, string $id): void
-  {
-    MyUuidGenerator::setNextValue($id);
-    $config = [
-      'name' => $name,
-    ];
-    $project = $this->insertProject($config);
-
-    $this->getFileRepository()->saveProjectZipFile(
-      new File($this->FIXTURES_DIR.'GeneratedFixtures/phiro.catrobat'), $project->getId()
-    );
-  }
-
   // -------------------------------------------------------------------------------------------------------------------
   //  Comments
   // -------------------------------------------------------------------------------------------------------------------
@@ -817,7 +776,7 @@ class DataFixturesContext implements Context
       $old_files->add($new_file);
       $category->setFiles(new ArrayCollection($old_files->toArray()));
       if (!empty($file['flavors'])) {
-        foreach (explode(',', (string) $file['flavors']) as $flavor) {
+        foreach (explode(',', $file['flavors']) as $flavor) {
           $new_file->addFlavor($flavor_repo->getFlavorByName(trim($flavor)));
         }
       }
@@ -857,30 +816,6 @@ class DataFixturesContext implements Context
   {
     foreach ($table->getHash() as $config) {
       $this->insertFlavor($config, false);
-    }
-
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Given /^there are like similar users:$/
-   */
-  public function thereAreLikeSimilarUsers(TableNode $table): void
-  {
-    foreach ($table->getHash() as $config) {
-      $this->insertUserLikeSimilarity($config, false);
-    }
-
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Given /^there are remix similar users:$/
-   */
-  public function thereAreRemixSimilarUsers(TableNode $table): void
-  {
-    foreach ($table->getHash() as $config) {
-      $this->insertUserRemixSimilarity($config, false);
     }
 
     $this->getManager()->flush();
@@ -1444,16 +1379,6 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given I run the special update command
-   */
-  public function iRunTheSpecialUpdateCommand(): void
-  {
-    CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:special'], [], 'Updating database'
-    );
-  }
-
-  /**
    * @Given I run the cron job command
    */
   public function iRunTheCronJobsCommand(): void
@@ -1697,7 +1622,7 @@ class DataFixturesContext implements Context
           && $provider == $row['provider']
           && $usage_count == $row['usage_count']);
 
-      Assert::assertEquals(1, count($matching_row), 'row not found: '.$comment_id);
+      Assert::assertEquals(1, count($matching_row), "row not found with comment id: {$comment_id}");
     }
   }
 

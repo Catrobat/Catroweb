@@ -420,6 +420,7 @@ search:
   fail: مهرباني وکړئ لږ تر لږه د لټون یوه اصطلاح داخل کړئ
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: زما پېژنيال
   login: د ننه کیدل

@@ -21,8 +21,7 @@ jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Deployment:
   #
-  #  - requires a VPN connection to the TU Graz. (SSH is only allowed inside the university network)
-  #  - a SSH connection is required (public key must be registered on server!)
+  #  - An SSH connection is required (public key must be registered on server!)
   #  - Add all credentials hidden in secrets to the configuration files
   #  - The current script is build within the Symfony framework, hence, the container is used to run the script.
   #
@@ -30,17 +29,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
-
-      # Kept in case the VPN config switches again...
-      #          printf 'TUGraz-Angehoerige\n${{ secrets.VPN_PASSWD }}' | sudo openconnect vpn.tugraz.at --user=${{ secrets.VPN_USER }} & disown
-      - name: Connect to TUG via VPN
-        run: |
-          sudo apt-get --yes --force-yes install openconnect
-          printf '${{ secrets.VPN_PASSWD }}' | sudo openconnect vpn.tugraz.at --user=${{ secrets.VPN_USER }} & disown
 
       - name: Set deployment script secrets (.env.local)
         run: |

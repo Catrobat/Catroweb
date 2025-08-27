@@ -18,6 +18,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   {
   }
 
+  #[\Override]
   public function studioIdPost(string $id, string $accept_language, ?string $name, ?string $description, ?bool $is_public, ?bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $studio = $this->facade->getLoader()->loadStudioByID($id);
@@ -69,6 +70,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     return $response;
   }
 
+  #[\Override]
   public function studioPost(string $accept_language, ?string $name, ?string $description, bool $is_public, bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $validation_wrapper = $this->facade->getRequestValidator()->validateCreate(
@@ -106,6 +108,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     return $response;
   }
 
+  #[\Override]
   public function studioIdDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $studio = $this->facade->getLoader()->loadStudioByID($id);
@@ -127,6 +130,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     $responseCode = Response::HTTP_NO_CONTENT;
   }
 
+  #[\Override]
   public function studioIdGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $studio = $this->facade->getLoader()->loadStudioByID($id);

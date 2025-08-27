@@ -65,9 +65,6 @@
     "dnoegel/php-xdg-base-dir": {
         "version": "v0.1.1"
     },
-    "doctrine/cache": {
-        "version": "1.10.0"
-    },
     "doctrine/collections": {
         "version": "1.6.4"
     },
@@ -174,9 +171,6 @@
     },
     "ezimuel/ringphp": {
         "version": "1.1.2"
-    },
-    "felixfbecker/advanced-json-rpc": {
-        "version": "v3.1.1"
     },
     "felixfbecker/language-server-protocol": {
         "version": "v1.4.0"

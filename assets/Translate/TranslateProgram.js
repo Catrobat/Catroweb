@@ -17,22 +17,20 @@ export class TranslateProgram extends Translation {
       return
     }
 
-    document
-      .getElementById('project-translation-button')
-      .addEventListener('click', function (event) {
-        this.style.display = 'none'
+    document.getElementById('project-translation-button').addEventListener('click', function () {
+      this.style.display = 'none'
 
-        if (translateProgram.isTranslationNotAvailable('#name-translation')) {
-          document.getElementById('project-translation-loading-spinner').style.display = 'block'
-          translateProgram.translateProgram()
-        } else {
-          translateProgram.openTranslatedProgram()
-        }
-      })
+      if (translateProgram.isTranslationNotAvailable('#name-translation')) {
+        document.getElementById('project-translation-loading-spinner').style.display = 'block'
+        translateProgram.translateProgram()
+      } else {
+        translateProgram.openTranslatedProgram()
+      }
+    })
 
     document
       .getElementById('remove-project-translation-button')
-      .addEventListener('click', function (event) {
+      .addEventListener('click', function () {
         this.style.display = 'none'
         document.getElementById('project-translation-button').style.display = 'block'
 

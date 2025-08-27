@@ -37,7 +37,7 @@ class PasswordResetRequestedEventListener
         ->send()
       ;
     } catch (ResetPasswordExceptionInterface $resetPasswordException) {
-      $this->logger->info(sprintf('Can\'t create reset token for %s; Reason ', $event->getEmail()).$resetPasswordException);
+      $this->logger->info(sprintf('Can\'t create reset token for %s; Reason ', $event->getEmail()).$resetPasswordException->getMessage());
     }
   }
 }

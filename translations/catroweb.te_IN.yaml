@@ -421,6 +421,7 @@ search:
   fail: దయచేసి కనీసం ఒక్క శోధన పదాన్ని నమోదు చేయండి
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: నా జీవన వివరణ
   login: ప్రవేశించండి

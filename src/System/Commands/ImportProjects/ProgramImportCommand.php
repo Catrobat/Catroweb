@@ -82,7 +82,7 @@ class ProgramImportCommand extends Command
     /** @var SplFileInfo $file */
     foreach ($finder as $file) {
       try {
-        $output->writeln('Importing file '.$file);
+        $output->writeln('Importing file '.$file->getFilename());
         $add_program_request = new AddProjectRequest($user, new File($file->__toString()));
         $program = $this->remix_manipulation_program_manager->addProject($add_program_request);
         $program->setViews(random_int(0, 10));

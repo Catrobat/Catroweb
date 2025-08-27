@@ -33,7 +33,6 @@ export class TokenExpirationHandler {
   }
 
   refreshToken() {
-    // eslint-disable-next-line no-undef
     fetch(this.authenticationRefreshPath, {
       method: 'POST',
       headers: {

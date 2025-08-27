@@ -24,7 +24,7 @@ document.getElementById('std-header-form')?.addEventListener('change', () => {
 })
 
 document.querySelectorAll('.comment-delete-button').forEach((element) =>
-  element.addEventListener('click', (e) => {
+  element.addEventListener('click', () => {
     const studioId = document.getElementById('studio-id').value
     new StudioCommentHandler().removeComment(studioId, element, element.dataset.commentId, false, 0)
   }),
@@ -36,7 +36,7 @@ document.getElementById('studio-send-comment')?.addEventListener('click', () => 
 })
 
 document.querySelectorAll('.comment-replies').forEach((element) =>
-  element.addEventListener('click', (e) => {
+  element.addEventListener('click', () => {
     const studioId = document.getElementById('studio-id').value
     new StudioCommentHandler().loadReplies(studioId, element, element.dataset.commentId, false, 0)
   }),

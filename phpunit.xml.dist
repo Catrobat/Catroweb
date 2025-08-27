@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" colors="true" bootstrap="config/bootstrap.php">
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+        colors="true"
+        bootstrap="config/bootstrap.php"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        displayDetailsOnTestsThatTriggerErrors="true"
+        displayDetailsOnTestsThatTriggerNotices="true"
+        displayDetailsOnTestsThatTriggerWarnings="true"
+        displayDetailsOnPhpunitDeprecations="true"
+>
   <php>
     <ini name="display_errors" value="1"/>
     <ini name="error_reporting" value="-1"/>
     <server name="APP_ENV" value="test" force="true"/>
     <server name="SHELL_VERBOSITY" value="-1"/>
     <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
-    <server name="SYMFONY_PHPUNIT_VERSION" value="10.5"/>
+    <server name="SYMFONY_PHPUNIT_VERSION" value="12.1"/>
   </php>
   <testsuites>
     <testsuite name="Project Test Suite">
@@ -19,10 +29,8 @@
   <source>
     <include>
       <directory suffix=".php">src/</directory>
-      <directory suffix=".php">tests/PhpUnit/</directory>
+      <file>tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTestClass.php</file>
+      <file>tests/PhpUnit/Api/Services/Base/BearerAuthenticationTraitTestClass.php</file>
     </include>
-    <exclude>
-      <file suffix="Test.php">tests/PhpUnit/</file>
-    </exclude>
   </source>
 </phpunit>

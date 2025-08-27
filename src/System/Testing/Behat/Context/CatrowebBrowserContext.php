@@ -12,8 +12,6 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\Project\Apk\ApkRepository;
 use App\Project\Apk\JenkinsDispatcher;
-use App\Security\TokenGenerator;
-use App\System\Testing\FixedTokenGenerator;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -612,78 +610,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I change upload of the entry number "([^"]*)" in the list to "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iChangeUploadOfTheEntry(string $project_number, string $approved): void
-  {
-    $page = $this->getSession()->getPage();
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$project_number.']/td[4]/span')
-      ->click()
-    ;
-
-    $this->iSelectTheOptionInThePopup($approved);
-    $this->iWaitForAjaxToFinish();
-  }
-
-  /**
-   * @Then /^I change report of the entry number "([^"]*)" in the list to "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iChangeReportOfTheEntry(string $project_number, string $approved): void
-  {
-    $page = $this->getSession()->getPage();
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$project_number.']/td[5]/span')
-      ->click()
-    ;
-
-    $this->iSelectTheOptionInThePopup($approved);
-    $this->iWaitForAjaxToFinish();
-  }
-
-  /**
-   * @Then /^I click action button "([^"]*)" of the entry number "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iClickActionButtonOfEntry(string $action_button, string $entry_number): void
-  {
-    $page = $this->getSession()->getPage();
-    switch ($action_button) {
-      case 'edit':
-        $page
-          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[1]')
-          ->click()
-        ;
-        break;
-      case 'delete':
-        $page
-          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[2]')
-          ->click()
-        ;
-        break;
-    }
-  }
-
-  /**
-   * @Then /^I check the batch action box of entry "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iCheckBatchActionBoxOfEntry(string $entry_number): void
-  {
-    $page = $this->getSession()->getPage();
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td/div')
-      ->click()
-    ;
-  }
-
-  /**
    * @Then /^I click on the username "([^"]*)"$/
    *
    * @throws ElementNotFoundException
@@ -751,40 +677,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I click on the edit button of the extension number "([^"]*)" in the extensions list$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheEditButtonInAllExtensions(string $project_number): void
-  {
-    $page = $this->getSession()->getPage();
-    $this->assertSession()->elementExists('xpath',
-      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[4]/div/a');
-
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[4]/div/a')
-      ->click()
-    ;
-  }
-
-  /**
-   * @Then /^I click on the add new button$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheAddNewButton(): void
-  {
-    $page = $this->getSession()->getPage();
-    $this->assertSession()->elementExists('xpath',
-      "//a[contains(text(),'Add new')]");
-
-    $page
-      ->find('xpath', "//a[contains(text(),'Add new')]")
-      ->click()
-    ;
-  }
-
-  /**
    * @When /^I report project (\d+) with category "([^"]*)" and note "([^"]*)" in Browser$/
    *
    * @throws ElementNotFoundException
@@ -822,16 +714,6 @@ class CatrowebBrowserContext extends BrowserContext
   public function iWriteInTextbox(string $arg1): void
   {
     $textarea = $this->getSession()->getPage()->find('css', '#comment-message');
-    Assert::assertNotNull($textarea, 'Textarea not found');
-    $textarea->setValue($arg1);
-  }
-
-  /**
-   * @Given /^I write "([^"]*)" in textarea$/
-   */
-  public function iWriteInTextarea(string $arg1): void
-  {
-    $textarea = $this->getSession()->getPage()->find('css', '#edit-text');
     Assert::assertNotNull($textarea, 'Textarea not found');
     $textarea->setValue($arg1);
   }
@@ -1284,22 +1166,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the notifications table:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function shouldSeeNotificationTable(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat) {
-      $this->assertSession()->pageTextContains($user_stat['User']);
-      $this->assertSession()->pageTextContains($user_stat['User Email']);
-      $this->assertSession()->pageTextContains($user_stat['Upload']);
-      $this->assertSession()->pageTextContains($user_stat['Report']);
-    }
-  }
-
-  /**
    * @Then /^I should see the table with all projects in the following order:$/
    */
   public function shouldSeeFollowingTable(TableNode $table): void
@@ -1662,7 +1528,7 @@ class CatrowebBrowserContext extends BrowserContext
         'Wrong value for second_user_id'
       );
       Assert::assertEquals(
-        round($expected_like_similarities[$i]['similarity'], 3),
+        round((float) $expected_like_similarities[$i]['similarity'], 3),
         round($like_similarity->getSimilarity(), 3),
         'Wrong value for similarity'
       );
@@ -1690,21 +1556,10 @@ class CatrowebBrowserContext extends BrowserContext
         $expected_remix_similarities[$i]['second_user_id'], $remix_similarity->getSecondUserId(),
         'Wrong value for second_user_id'
       );
-      Assert::assertEquals(round($expected_remix_similarities[$i]['similarity'], 3),
+      Assert::assertEquals(round((float) $expected_remix_similarities[$i]['similarity'], 3),
         round($remix_similarity->getSimilarity(), 3),
         'Wrong value for similarity');
     }
-  }
-
-  /**
-   * @Given the next generated token will be :token
-   *
-   * @throws \Exception
-   */
-  public function theNextGeneratedTokenWillBe(string $token): void
-  {
-    $token_generator = $this->getSymfonyService(TokenGenerator::class);
-    $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
   }
 
   /**

@@ -84,7 +84,7 @@ export class TranslateComments extends Translation {
         self.setTranslatedCommentData(commentId, data)
         self.openTranslatedComment(commentId)
       })
-      .catch((e) => {
+      .catch(() => {
         self.commentNotTranslated(commentId)
       })
   }

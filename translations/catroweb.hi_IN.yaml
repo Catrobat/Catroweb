@@ -418,6 +418,7 @@ search:
   fail: कृपया कम से कम एक खोज शब्द दर्ज करें
   noUsers: कोई उपयोग्कर्ता नहीं मिले।
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: मेरी पार्श्वचित्र
   login: प्रवेश करे

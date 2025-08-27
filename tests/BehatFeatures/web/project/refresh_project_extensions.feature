@@ -10,14 +10,14 @@ Feature: Projects extensions must be added automatically
       | 3  | mindstorms     |
       | 4  | phiro          |
       | 5  | raspberry_pi   |
-    And I upload this generated project with id "1", API version 2
+    And I upload this generated project with id "1"
     Then the project with id "1" should be marked with "3" extensions in the database
     When I run the refresh project extensions command
     Then the project with id "1" should be marked with "3" extensions in the database
 
   Scenario: Projects with extensions should keep their extensions as long as the extensions do exist
     Given I have a project with arduino, mindstorms and phiro extensions
-    And I upload this generated project with id "1", API version 2
+    And I upload this generated project with id "1"
     Then the project with id "1" should be marked with "0" extensions in the database
     And there are extensions:
       | id | internal_title |

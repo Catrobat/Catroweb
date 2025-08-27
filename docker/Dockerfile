@@ -1,5 +1,5 @@
 # Use composer image for better caching
-FROM composer:2.8.6 AS composer-build
+FROM composer:2.8.11 AS composer-build
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
@@ -21,20 +21,20 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     apt-get install -yq --no-install-recommends \
-    php8.3-cli \
-    php8.3-common \
-    php8.3-curl \
-    php8.3-dom \
-    php8.3-gd \
-    php8.3-imagick \
-    php8.3-intl \
-    php8.3-mbstring \
-    php8.3-mysql \
-    php8.3-xdebug \
-    php8.3-xml \
-    php8.3-zip \
-    php8.3-bcmath \
-    libapache2-mod-php8.3 \
+    php8.4-cli \
+    php8.4-common \
+    php8.4-curl \
+    php8.4-dom \
+    php8.4-gd \
+    php8.4-imagick \
+    php8.4-intl \
+    php8.4-mbstring \
+    php8.4-mysql \
+    php8.4-xdebug \
+    php8.4-xml \
+    php8.4-zip \
+    php8.4-bcmath \
+    libapache2-mod-php8.4 \
     acl \
     make \
     libtool \
@@ -53,8 +53,8 @@ RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
 
 # Overwrite php config:
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.3/apache2/php.ini
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.3/cli/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.4/apache2/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.4/cli/php.ini
 
 # Setting working directory
 WORKDIR /var/www/catroweb

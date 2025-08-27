@@ -87,7 +87,7 @@ class ProgramLike implements \Stringable
   #[\Override]
   public function __toString(): string
   {
-    return $this->program.'';
+    return $this->program->__toString();
   }
 
   public static function isValidType(int $type): bool

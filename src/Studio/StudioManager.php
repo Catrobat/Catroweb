@@ -564,9 +564,9 @@ class StudioManager
     return $this->program_repository->getProjectByUserID($user->getId());
   }
 
-  public function getProjectByID(string $projectID): Program
+  public function getProjectByID(string $projectID): ?Program
   {
-    return current($this->program_repository->getProjectByID($projectID));
+    return current($this->program_repository->getProjectByID($projectID)) ?: null;
   }
 
   public function findOneByName(string $programName): ?Program

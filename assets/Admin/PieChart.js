@@ -28,14 +28,12 @@ export class PieChart {
   }
 
   drawChart(elementId, dataArray, title) {
-    // eslint-disable-next-line new-cap
     const dataSpace = new GoogleCharts.api.visualization.arrayToDataTable(dataArray)
     const optionsSpace = {
       title,
       is3D: true,
     }
 
-    // eslint-disable-next-line new-cap
     const chart = new GoogleCharts.api.visualization.PieChart(document.getElementById(elementId))
     chart.draw(dataSpace, optionsSpace)
   }

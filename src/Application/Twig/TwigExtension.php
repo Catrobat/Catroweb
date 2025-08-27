@@ -326,7 +326,7 @@ class TwigExtension extends AbstractExtension
 
   protected function getPublicFilenamePath(string $filename): string
   {
-    $public_dir = $this->parameter_bag->get('catrobat.pubdir');
+    $public_dir = (string) $this->parameter_bag->get('catrobat.pubdir');
     $filename = rawurldecode($filename);
 
     return $public_dir.$filename;

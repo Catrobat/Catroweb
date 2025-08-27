@@ -49,7 +49,7 @@ class CreateMediaPackageSamplesCommand extends Command
   #[\Override]
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $sample_pckg_path = $this->parameter_bag->get('catrobat.mediapackage.sample.path');
+    $sample_pckg_path = (string) $this->parameter_bag->get('catrobat.mediapackage.sample.path');
 
     /*
      * Creating MediaPackage Looks

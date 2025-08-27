@@ -51,7 +51,6 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Router;
 
@@ -251,14 +250,6 @@ trait ContextTrait
   public function getSymfonyService(string $service_class): ?object
   {
     return $this->getContainer()->get($service_class);
-  }
-
-  public function getDefaultProjectFile(): string
-  {
-    $file = $this->FIXTURES_DIR.'/test.catrobat';
-    Assert::assertTrue(is_file($file));
-
-    return $file;
   }
 
   public function insertUser(array $config = [], bool $andFlush = true): User
@@ -637,14 +628,6 @@ trait ContextTrait
     $compressor = new CatrobatFileCompressor();
 
     return $compressor->compress($new_project_dir, sys_get_temp_dir().'/', 'project_generated');
-  }
-
-  public function getStandardProjectFile(): UploadedFile
-  {
-    $filepath = $this->FIXTURES_DIR.'test.catrobat';
-    Assert::assertTrue(file_exists($filepath), 'File not found');
-
-    return new UploadedFile($filepath, 'test.catrobat');
   }
 
   /**

@@ -3,11 +3,11 @@ Feature: Get logged in user
 
   Background:
     Given there are users:
-      | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc | 1  |
-      | User1    | vwxyz    | aaaaaaaaaa | 2  |
-      | NewUser  | 54321    | bbbbbbbbbb | 3  |
-      | Catroweb | 54321    | bbbbbbbbbb | 4  |
+      | name     | password | id |
+      | Catrobat | 12345    | 1  |
+      | User1    | vwxyz    | 2  |
+      | NewUser  | 54321    | 3  |
+      | Catroweb | 54321    | 4  |
     And there are followers:
       | name     | following       |
       | Catrobat | User1, Catroweb |

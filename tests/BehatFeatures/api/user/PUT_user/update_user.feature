@@ -3,11 +3,11 @@ Feature: Update user
 
   Background:
     Given there are users:
-      | name     | password | token      | id | verified |
-      | Catrobat | 12345    | cccccccccc | 1  | true     |
-      | User1    | vwxyz    | aaaaaaaaaa | 2  | false    |
-      | NewUser  | 54321    | bbbbbbbbbb | 3  | true     |
-      | Catroweb | 54321    | bbbbbbbbbb | 4  | false    |
+      | name     | password | id | verified |
+      | Catrobat | 12345    | 1  | true     |
+      | User1    | vwxyz    | 2  | false    |
+      | NewUser  | 54321    | 3  | true     |
+      | Catroweb | 54321    | 4  | false    |
     And I wait 500 milliseconds
 
   Scenario: Update user with dry_run option

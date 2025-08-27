@@ -2,7 +2,7 @@ import './Logs.scss'
 
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.panel-heading').forEach(function (panelHeading) {
-    panelHeading.addEventListener('click', function (event) {
+    panelHeading.addEventListener('click', function () {
       const panelCollapse = panelHeading.nextElementSibling
       if (panelCollapse && panelCollapse.classList.contains('panel-collapse')) {
         panelCollapse.classList.toggle('hide')
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   document.querySelectorAll('.files').forEach(function (fileElement) {
-    fileElement.addEventListener('click', function (event) {
+    fileElement.addEventListener('click', function () {
       loadFileContent(fileElement.value)
       document.getElementById('currentFile').value = fileElement.value
     })

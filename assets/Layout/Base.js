@@ -20,7 +20,7 @@ import { showSnackbar } from './Snackbar'
 import Bugsnag from '@bugsnag/js'
 import BugsnagPerformance from '@bugsnag/browser-performance'
 
-import Analytics from 'analytics'
+import { Analytics } from 'analytics'
 import googleTagManager from '@analytics/google-tag-manager'
 
 // Start the stimulus app

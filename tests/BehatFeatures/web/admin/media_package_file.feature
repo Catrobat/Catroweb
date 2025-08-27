@@ -4,12 +4,12 @@ Feature: Media Package Files
 
   Background:
     Given there are admins:
-      | name     | password | token      | email                | id |
-      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
+      | name     | password | email                | id |
+      | Adminius | 123456   | admin@pocketcode.org | 1  |
     And there are users:
-      | name     | password | token      | email               | id |
-      | Superman | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
-      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
+      | name     | password | email               | id |
+      | Superman | 123456   | dev1@pocketcode.org | 2  |
+      | Gregor   | 123456   | dev2@pocketcode.org | 3  |
     And there are media packages:
       | id | name   | name_url |
       | 1  | Looks  | looks    |

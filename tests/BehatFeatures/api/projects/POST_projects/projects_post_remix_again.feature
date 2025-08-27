@@ -73,18 +73,18 @@ Feature: Upload a remixed program with multiple parents
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
     Given I have a project with "name" set to "program 4" and "url" set to "program 1[/pocketalice/project/1]"
-    When I upload this generated project, API version 2
-    Then the uploaded project should not be a remix root, API version 2
-    And the uploaded project should have remix migration date NOT NULL, API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "0", API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "1", API version 2
-    And the uploaded project should have no further Catrobat forward ancestors, API version 2
-    And the uploaded project should have no Catrobat backward parents, API version 2
-    And the uploaded project should have no Scratch parents, API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 2
-    And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 1[/pocketalice/project/1]" in the xml, API version 2
+    When I upload this generated project
+    Then the uploaded project should not be a remix root
+    And the uploaded project should have remix migration date NOT NULL
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the uploaded project should have no further Catrobat forward ancestors
+    And the uploaded project should have no Catrobat backward parents
+    And the uploaded project should have no Scratch parents
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1"
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2"
+    And the uploaded project should have no further Catrobat forward descendants
+    And the uploaded project should have RemixOf "program 1[/pocketalice/project/1]" in the xml
 
     And the project "1" should be a remix root
     And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -164,18 +164,18 @@ Feature: Upload a remixed program with multiple parents
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
     Given I have a project with "name" set to "program 6" and "url" set to "program 5[/pocketalice/project/5]"
-    When I upload this generated project, API version 2
-    Then the uploaded project should not be a remix root, API version 2
-    And the uploaded project should have remix migration date NOT NULL, API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "0", API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "5" and depth "1", API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "3" and depth "2", API version 2
-    And the uploaded project should have no further Catrobat forward ancestors, API version 2
-    And the uploaded project should have no Catrobat backward parents, API version 2
-    And the uploaded project should have no Scratch parents, API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1", API version 2
-    And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 5[/pocketalice/project/5]" in the xml, API version 2
+    When I upload this generated project
+    Then the uploaded project should not be a remix root
+    And the uploaded project should have remix migration date NOT NULL
+    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the uploaded project should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the uploaded project should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the uploaded project should have no further Catrobat forward ancestors
+    And the uploaded project should have no Catrobat backward parents
+    And the uploaded project should have no Scratch parents
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1"
+    And the uploaded project should have no further Catrobat forward descendants
+    And the uploaded project should have RemixOf "program 5[/pocketalice/project/5]" in the xml
 
     And the project "1" should be a remix root
     And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -251,19 +251,19 @@ Feature: Upload a remixed program with multiple parents
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
     Given I have a project with "name" set to "program 6", "url" set to "program 6[/app/project/6], Merge 1[program 5[/pocketalice/project/5], program 7[/pocketalice/project/7]]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload this generated project, API version 2
-    Then the uploaded project should not be a remix root, API version 2
-    And the uploaded project should have remix migration date NOT NULL, API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "0", API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "5" and depth "1", API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "3" and depth "2", API version 2
-    And the uploaded project should have no further Catrobat forward ancestors, API version 2
-    And the uploaded project should have a Catrobat backward parent having id "7", API version 2
-    And the uploaded project should have no further Catrobat backward parents, API version 2
-    And the uploaded project should have no Scratch parents, API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1", API version 2
-    And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 6[/app/project/6], Merge 1[program 5[/pocketalice/project/5], program 7[/pocketalice/project/7]]" in the xml, API version 2
+    When I upload this generated project
+    Then the uploaded project should not be a remix root
+    And the uploaded project should have remix migration date NOT NULL
+    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the uploaded project should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the uploaded project should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the uploaded project should have no further Catrobat forward ancestors
+    And the uploaded project should have a Catrobat backward parent having id "7"
+    And the uploaded project should have no further Catrobat backward parents
+    And the uploaded project should have no Scratch parents
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1"
+    And the uploaded project should have no further Catrobat forward descendants
+    And the uploaded project should have RemixOf "program 6[/app/project/6], Merge 1[program 5[/pocketalice/project/5], program 7[/pocketalice/project/7]]" in the xml
 
     And the project "1" should be a remix root
     And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -343,21 +343,21 @@ Feature: Upload a remixed program with multiple parents
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
     Given I have a project with "name" set to "program 1", "url" set to "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload this generated project, API version 2
-    Then the uploaded project should be a remix root, API version 2
-    And the uploaded project should have remix migration date NOT NULL, API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "0", API version 2
-    And the uploaded project should have no Catrobat forward ancestors except self-relation, API version 2
-    And the uploaded project should have a Catrobat backward parent having id "6", API version 2
-    And the uploaded project should have no further Catrobat backward parents, API version 2
-    And the uploaded project should have a Scratch parent having id "29495624", API version 2
-    And the uploaded project should have a Scratch parent having id "1", API version 2
-    And the uploaded project should have no further Scratch parents, API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 2
-    And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" in the xml, API version 2
+    When I upload this generated project
+    Then the uploaded project should be a remix root
+    And the uploaded project should have remix migration date NOT NULL
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the uploaded project should have no Catrobat forward ancestors except self-relation
+    And the uploaded project should have a Catrobat backward parent having id "6"
+    And the uploaded project should have no further Catrobat backward parents
+    And the uploaded project should have a Scratch parent having id "29495624"
+    And the uploaded project should have a Scratch parent having id "1"
+    And the uploaded project should have no further Scratch parents
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1"
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2"
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3"
+    And the uploaded project should have no further Catrobat forward descendants
+    And the uploaded project should have RemixOf "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" in the xml
 
     And the project "2" should be a remix root
     And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
@@ -449,20 +449,20 @@ Feature: Upload a remixed program with multiple parents
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
     Given I have a project with "name" set to "program 1", "url" set to "program 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload this generated project, API version 2
-    Then the uploaded project should be a remix root, API version 2
-    And the uploaded project should have remix migration date NOT NULL, API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "0", API version 2
-    And the uploaded project should have no Catrobat forward ancestors except self-relation, API version 2
-    And the uploaded project should have a Catrobat backward parent having id "7", API version 2
-    And the uploaded project should have no further Catrobat backward parents, API version 2
-    And the uploaded project should have a Scratch parent having id "29495624", API version 2
-    And the uploaded project should have no further Scratch parents, API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 2
-    And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml, API version 2
+    When I upload this generated project
+    Then the uploaded project should be a remix root
+    And the uploaded project should have remix migration date NOT NULL
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the uploaded project should have no Catrobat forward ancestors except self-relation
+    And the uploaded project should have a Catrobat backward parent having id "7"
+    And the uploaded project should have no further Catrobat backward parents
+    And the uploaded project should have a Scratch parent having id "29495624"
+    And the uploaded project should have no further Scratch parents
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1"
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2"
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3"
+    And the uploaded project should have no further Catrobat forward descendants
+    And the uploaded project should have RemixOf "program 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml
 
     And the project "2" should be a remix root
     And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
@@ -553,20 +553,20 @@ Feature: Upload a remixed program with multiple parents
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
     Given I have a project with "name" set to "program 1" and "url" set to "program 5[/app/project/5]"
-    When I upload this generated project, API version 2
-    Then the uploaded project should not be a remix root, API version 2
-    And the uploaded project should have remix migration date NOT NULL, API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "0", API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "5" and depth "1", API version 2
-    And the uploaded project should have a Catrobat forward ancestor having id "3" and depth "2", API version 2
-    And the uploaded project should have no further Catrobat forward ancestors, API version 2
-    And the uploaded project should have no Catrobat backward parents, API version 2
-    And the uploaded project should have no Scratch parents, API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 2
-    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 2
-    And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 5[/app/project/5]" in the xml, API version 2
+    When I upload this generated project
+    Then the uploaded project should not be a remix root
+    And the uploaded project should have remix migration date NOT NULL
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the uploaded project should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the uploaded project should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the uploaded project should have no further Catrobat forward ancestors
+    And the uploaded project should have no Catrobat backward parents
+    And the uploaded project should have no Scratch parents
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1"
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2"
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3"
+    And the uploaded project should have no further Catrobat forward descendants
+    And the uploaded project should have RemixOf "program 5[/app/project/5]" in the xml
 
     And the project "2" should be a remix root
     And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"

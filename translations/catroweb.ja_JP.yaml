@@ -418,6 +418,7 @@ search:
   fail: 少なくとも1つの検索語を入力してください
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: マイプロフィール
   login: ログイン

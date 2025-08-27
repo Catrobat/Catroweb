@@ -13,11 +13,13 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20240524092148 extends AbstractMigration
 {
+  #[\Override]
   public function getDescription(): string
   {
     return '';
   }
 
+  #[\Override]
   public function up(Schema $schema): void
   {
     // this up() migration is auto-generated, please modify it to your needs
@@ -311,6 +313,7 @@ final class Version20240524092148 extends AbstractMigration
     $this->addSql('CREATE TABLE flavor (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, UNIQUE INDEX UNIQ_BC2534545E237E06 (name), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB COMMENT = \'\' ');
   }
 
+  #[\Override]
   public function down(Schema $schema): void
   {
     // this down() migration is auto-generated, please modify it to your needs

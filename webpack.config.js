@@ -1,6 +1,7 @@
 const Encore = require('@symfony/webpack-encore')
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins')
+const ESLintPlugin = require('eslint-webpack-plugin')
 const dotenv = require('dotenv')
 const glob = require('glob-all')
 const path = require('path')
@@ -99,7 +100,6 @@ Encore
   .addEntry('password_reset_page', './assets/Security/PasswordResetPage.js')
   .addEntry('request_to_reset_password_page', './assets/Security/RequestPasswordResetPage.js')
 
-  .addEntry('legacy_search_page', './assets/Search/LegacySearchPage.js')
   .addEntry('search_page', './assets/Search/SearchPage.js')
 
   .addEntry('project_page', './assets/Project/ProjectPage.js')
@@ -161,15 +161,7 @@ Encore
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
 
-  .configureBabel((config) => {
-    config.plugins.push('@babel/plugin-proposal-class-properties')
-  })
-
-  // enables @babel/preset-env polyfills
-  .configureBabelPresetEnv((config) => {
-    config.useBuiltIns = 'usage'
-    config.corejs = 3
-  })
+  // Babel configured via babel.config.js instead of Encore
 
   // enables Sass/SCSS support
   .enableSassLoader()
@@ -231,6 +223,16 @@ Encore
         overwrite: true,
       })
       : noop(),
+  )
+
+  .addPlugin(
+    // Allow eslint to execute in the background during the webpack build process. No additional run necessary
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+      emitWarning: !Encore.isProduction(),
+      failOnError: Encore.isProduction(),
+      files: 'assets/',
+    }),
   )
 
 module.exports = Encore.getWebpackConfig()

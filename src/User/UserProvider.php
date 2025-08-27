@@ -24,6 +24,7 @@ readonly class UserProvider implements UserProviderInterface
     return $this->loadUserByIdentifier($username);
   }
 
+  #[\Override]
   public function loadUserByIdentifier(string $identifier): User
   {
     $user = $this->findUser($identifier);
@@ -35,6 +36,7 @@ readonly class UserProvider implements UserProviderInterface
     return $user;
   }
 
+  #[\Override]
   public function refreshUser(UserInterface $user): User
   {
     if (!$user instanceof User) {
@@ -53,6 +55,7 @@ readonly class UserProvider implements UserProviderInterface
     return $this->userManager->findUserByUsernameOrEmail($username);
   }
 
+  #[\Override]
   public function supportsClass(string $class): bool
   {
     return User::class === $class;

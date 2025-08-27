@@ -416,6 +416,7 @@ search:
   fail: 한 글자 이상 입력해 주세요.
   noUsers: No users found
   noProjects: No projects found
+  sameSearchMessage: "Looks like you're already here! Try a different search?"
 menu:
   profile: 나의 프로필
   login: 로그인
