@@ -46,5 +46,5 @@ jobs:
         uses: deployphp/action@v1
         with:
           private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
-          dep: deploy stage=share
+          dep: deploy share
           deployer-binary: 'bin/dep'
