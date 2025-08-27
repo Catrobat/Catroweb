@@ -80,7 +80,7 @@ host(getenv('DEPLOY_SHARE'))
   ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
   ->set('deploy_path', '/var/www/share')
-  ->set('remote_user', 'root')
+  ->set('remote_user', 'deploy')
 ;
 
 // Tasks
@@ -94,11 +94,11 @@ task('install:assets', function () {
 // For such sudo commands to work, the server must allow those commands without a password
 // change the sudoers file if needed!
 task('restart:nginx', function () {
-  run('/usr/sbin/service nginx restart');
+  run('sudo /usr/sbin/service nginx restart');
 });
 
 task('restart:php-fpm', function () {
-  run('/usr/sbin/service php8.3-fpm restart');
+  run('sudo /usr/sbin/service php8.3-fpm restart');
 });
 
 task('install:npm', function () {
