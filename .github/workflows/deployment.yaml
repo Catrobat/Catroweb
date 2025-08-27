@@ -33,19 +33,15 @@ jobs:
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
 
-      - name: Set deployment script secrets (.env.local)
-        run: |
-          {
-            echo "DEPLOY_GIT=https://github.com/Catrobat/Catroweb.git"
-            echo "SLACK_WEBHOOK=${{ secrets.SLACK_WEBHOOK }}"
-            echo "DEP_USER=Catroweb Github Action"
-            echo "DEPLOY_SHARE=${{ secrets.DEPLOY_SHARE }}"
-            echo "DEPLOY_SHARE_BRANCH=main"
-          } >> .env.local
-
       - name: Deploy Share
         uses: deployphp/action@v1
         with:
           private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
-          deployer-version: 'v7.5.12'
           dep: deploy
+        env:
+          APP_NAME: Catroweb
+          DEPLOY_GIT: https://github.com/Catrobat/Catroweb.git
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_BRANCH: main
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+

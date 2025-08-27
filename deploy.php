@@ -7,67 +7,51 @@ namespace Deployer;
 require 'recipe/symfony.php';
 require 'contrib/slack.php';
 
-foreach (['.env', '.env.local'] as $filename) {
-  loadEnvVariables($filename);
-}
-
-function loadEnvVariables(string $filename): void
-{
-  $file = file_get_contents($filename);
-  $lines = explode("\n", $file);
-  foreach ($lines as $line) {
-    if (!str_starts_with(trim($line), '#') && str_contains($line, '=')) {
-      putenv($line);
-    }
-  }
-}
+// ---------------------------------------------------
+// Configuration via environment variables
+// ---------------------------------------------------
 
 set('default_timeout', 6000);
 
-// Project name
-set('application', getenv('APP_NAME'));
-set('repository', getenv('DEPLOY_GIT'));
+// Project name and repository
+set('application', getenv('APP_NAME') ?: 'Catroweb');
+set('repository', getenv('DEPLOY_GIT') ?: 'https://github.com/Catrobat/Catroweb.git');
 set('git_tty', false);
 
-// Slack Data
-set('slack_webhook', getenv('SLACK_WEBHOOK'));
+// Slack configuration
+set('slack_webhook', getenv('SLACK_WEBHOOK') ?? '');
 set('slack_text', 'Web-Team deploying `{{branch}}` to *{{target}}*');
 set('slack_success_text', 'Deploy to *{{target}}* successful');
 set('slack_success_color', '#4BB543');
 
-// Symfony build set
+// Symfony environment
 set('symfony_env', 'prod');
 set('writable_recursive', true);
 
-// Symfony shared dirs
-set('shared_dirs',
-  [
-    'var/log',
-    'var/sessions',
-    'public/resources',
-    '.jwt',
-  ]);
+// Shared directories
+set('shared_dirs', [
+  'var/log',
+  'var/sessions',
+  'public/resources',
+  '.jwt',
+]);
 
-// Shared files between deploys
-add('shared_files',
-  [
-    '.env.local',
-    '.env.prod.local',
-    '.env.dev.local',
-    'google_cloud_key.json',
-    '.dkim/private.key',
-  ]);
+// Shared files between releases
+add('shared_files', [
+  '.env.prod.local',      // keep only production .env
+  'google_cloud_key.json',
+  '.dkim/private.key',
+]);
 
-// Symfony writable dirs
-set('writable_dirs',
-  [
-    'var/cache',
-    'var/log',
-    'var/sessions',
-    'public/resources',
-  ]);
+// Writable directories
+set('writable_dirs', [
+  'var/cache',
+  'var/log',
+  'var/sessions',
+  'public/resources',
+]);
 
-// Symfony executable and variable directories
+// Symfony directories
 set('bin_dir', 'bin');
 set('var_dir', 'var');
 set('web_dir', 'public');
@@ -76,15 +60,19 @@ set('public_dir', 'public');
 set('allow_anonymous_stats', false);
 
 // Hosts
-host(getenv('DEPLOY_SHARE'))
+$deployShare = getenv('DEPLOY_HOST') ?: '127.0.0.1';
+$deployUser = getenv('DEPLOY_USER') ?: 'deploy';
+$deployBranch = getenv('DEPLOY_BRANCH') ?: 'main';
+host($deployShare)
   ->set('labels', ['stage' => 'share'])
   ->set('symfony_env', 'prod')
-  ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
+  ->set('branch', $deployBranch)
   ->set('deploy_path', '/var/www/share')
-  ->set('remote_user', 'deploy')
-;
+  ->set('remote_user', $deployUser);
 
+// ---------------------------------------------------
 // Tasks
+// ---------------------------------------------------
 
 // Manually define this task because deployer uses the old symfony structure with web instead of
 // public. Change this when deployer gets updated.
@@ -153,9 +141,10 @@ task('dump:env', function () {
   run('bin/console dotenv:dump prod');
 });
 
-/*
- * Main task
- */
+// ---------------------------------------------------
+// Main deployment task
+// ---------------------------------------------------
+
 desc('Start the deployment process');
 task('deploy', [
   'deploy:prepare',
@@ -179,7 +168,7 @@ task('deploy', [
   'update:special',
   'deploy:unlock',
   'slack:notify:success',
-])->desc('Deploy Catroweb!');
+]);
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
