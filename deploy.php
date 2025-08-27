@@ -37,6 +37,7 @@ set('slack_success_color', '#4BB543');
 
 // Symfony build set
 set('symfony_env', 'prod');
+set('writable_recursive', true);
 
 // Symfony shared dirs
 set('shared_dirs',
@@ -163,7 +164,6 @@ task('deploy', [
   'install:assets',
   'dump:env',
   'deploy:cache:clear',
-  'deploy:writable',
   'deploy:symlink',
   'database:migrate',
   'install:npm',

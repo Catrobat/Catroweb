@@ -23,7 +23,6 @@ jobs:
   #
   #  - An SSH connection is required (public key must be registered on server!)
   #  - Add all credentials hidden in secrets to the configuration files
-  #  - The current script is build within the Symfony framework, hence, the container is used to run the script.
   #
   deploy:
     runs-on: ubuntu-latest
@@ -48,5 +47,5 @@ jobs:
         uses: deployphp/action@v1
         with:
           private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
-          dep: deploy stage=share
-          deployer-binary: 'bin/dep'
+          deployer-version: 'v7.5.12'
+          dep: deploy
