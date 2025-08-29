@@ -47,7 +47,7 @@
     "@symfony/webpack-encore": "^5.2.0",
     "auto-changelog": "^2.5.0",
     "autoprefixer": "^10.4.21",
-    "browserslist": "^4.25.3",
+    "browserslist": "^4.25.4",
     "core-js": "^3.45.1",
     "dotenv": "^17.2.1",
     "eslint": "^9.34.0",
