@@ -18,7 +18,7 @@
     "bugsnag/bugsnag-symfony": "^1.14",
     "codercat/jwk-to-pem": "1.1.*",
     "doctrine/dbal": "4.3.*",
-    "doctrine/doctrine-bundle": "2.15.*",
+    "doctrine/doctrine-bundle": "2.16.*",
     "doctrine/doctrine-migrations-bundle": "3.4.*",
     "doctrine/orm": "3.5.*",
     "eightpoints/guzzle-bundle": "^8.5",
