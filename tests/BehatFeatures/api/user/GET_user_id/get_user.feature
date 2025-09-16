@@ -24,9 +24,7 @@ Feature: Get user by id
     And I request "GET" "/api/user/2"
     Then the response status code should be "200"
     Then the response should have the user model structure excluding "picture"
-    Then the response should contain the following user:
-      | Name     |
-      | Catrobat |
+    Then the response should contain the user "User1"
 
   Scenario: User not found should return 404 status code
     Given I have a request header "HTTP_ACCEPT" with value "application/json"

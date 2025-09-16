@@ -1081,19 +1081,19 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the response should contain the following user:$/
+   * @Then the response should contain the user :name
    *
    * @throws \JsonException
    * @throws \Exception
    */
-  public function responseShouldContainTheFollowingUser(): void
+  public function responseShouldContainTheFollowingUser(string $name): void
   {
     $response = $this->getKernelBrowser()->getResponse();
 
     $returned_user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
     $stored_users = $this->getStoredUsers();
 
-    $stored_user = $this->findUser($stored_users, $returned_user['username']);
+    $stored_user = $this->findUser($stored_users, $name);
     $this->assertUsersEqual($stored_user, $returned_user);
   }
 
