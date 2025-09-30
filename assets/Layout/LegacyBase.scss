@@ -24,11 +24,11 @@ body {
 img {
   max-width: 100% !important;
   vertical-align: middle;
-  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 li {
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .content-container {
