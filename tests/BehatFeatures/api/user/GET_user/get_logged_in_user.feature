@@ -22,12 +22,10 @@ Feature: Get logged in user
   Scenario: Get logged in user
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/user"
+    When I request "GET" "/api/user"
     Then the response status code should be "200"
-    Then the response should have the default extended user model structure
-    Then the response should contain the following user:
-      | Name     |
-      | Catrobat |
+    And the response should have the default extended user model structure
+    And the response should contain the user "Catrobat"
 
   Scenario: Get user without logging in should return 401 status code
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
