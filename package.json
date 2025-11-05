@@ -41,7 +41,7 @@
     "@babel/eslint-parser": "^7.28.5",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/preset-env": "^7.28.5",
-    "@eslint/js": "^9.38.0",
+    "@eslint/js": "^9.39.1",
     "@hotwired/stimulus": "^3.2.2",
     "@openapitools/openapi-generator-cli": "^2.25.0",
     "@symfony/webpack-encore": "^5.2.0",
