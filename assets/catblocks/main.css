@@ -64,8 +64,8 @@
   background: none !important;
 }
 
-img {
-  border-radius: 10% !important;
+.rounded-img {
+  border-radius: 10%;
 }
 
 .list-group-item {
