@@ -46,7 +46,7 @@
     "@openapitools/openapi-generator-cli": "^2.25.2",
     "@symfony/webpack-encore": "^5.3.1",
     "auto-changelog": "^2.5.0",
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.22",
     "browserslist": "^4.28.0",
     "core-js": "^3.47.0",
     "dotenv": "^17.2.3",
