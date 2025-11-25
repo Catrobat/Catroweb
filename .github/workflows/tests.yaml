@@ -34,7 +34,7 @@ jobs:
       image: ${{ steps.upload-artifact.outputs.artifact-path }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -60,7 +60,7 @@ jobs:
           docker save app.catroweb | gzip > catroweb-image.tar.gz
 
       - name: Upload Docker Image
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         id: upload-artifact
         with:
           name: catroweb-image
@@ -82,10 +82,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download Docker Image
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: catroweb-image
           path: docker
@@ -106,7 +106,7 @@ jobs:
           --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml
 
       - name: Upload PHPUnit Code Coverage Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: PhpUnitTestReport
@@ -188,10 +188,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Download Docker Image
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           name: catroweb-image
           path: docker
@@ -259,7 +259,7 @@ jobs:
           fi
 
       - name: Upload Behat Test Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: logs_${{ matrix.testSuite }}
           path: |
