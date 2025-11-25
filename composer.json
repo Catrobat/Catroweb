@@ -63,8 +63,8 @@
     "twig/twig": "3.22.*"
   },
   "require-dev": {
-    "behat/behat": "3.26.*",
-    "behat/mink": "1.12.*",
+    "behat/behat": "3.27.*",
+    "behat/mink": "1.13.*",
     "deployer/deployer": "v7.5.*",
     "dmore/behat-chrome-extension": "1.4.*",
     "dmore/chrome-mink-driver": "2.9.*",
