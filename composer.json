@@ -77,7 +77,7 @@
     "phpstan/phpstan-doctrine": "1.5.*",
     "phpstan/phpstan-phpunit": "1.4.*",
     "phpstan/phpstan-symfony": "1.4.*",
-    "phpunit/phpunit": "12.4.*",
+    "phpunit/phpunit": "12.5.*",
     "rector/rector": "1.2.*",
     "symfony/browser-kit": "7.3.*",
     "symfony/http-client": "7.0.*",
