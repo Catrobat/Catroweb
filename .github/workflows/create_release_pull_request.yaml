@@ -66,7 +66,7 @@ jobs:
 
       - name: Create Pull Request to main branch
         id: cpr-main
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: create_release_01 release v${{ steps.calculate_version.outputs.new_version }}
@@ -110,7 +110,7 @@ jobs:
 
       - name: Create Pull Request to develop branch
         id: cpr-develop
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: create_release_01 release v${{ env.NEW_VERSION }}
