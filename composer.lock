@@ -1716,16 +1716,16 @@
         },
         {
             "name": "eightpoints/guzzle-bundle",
-            "version": "v8.5.2",
+            "version": "v8.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/8p/EightPointsGuzzleBundle.git",
-                "reference": "5df72be234fb0e22d2750e7013003968ec373bff"
+                "reference": "de8361861881828b17ca846f038ec88f7eacabdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/5df72be234fb0e22d2750e7013003968ec373bff",
-                "reference": "5df72be234fb0e22d2750e7013003968ec373bff",
+                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/de8361861881828b17ca846f038ec88f7eacabdc",
+                "reference": "de8361861881828b17ca846f038ec88f7eacabdc",
                 "shasum": ""
             },
             "require": {
@@ -1734,15 +1734,15 @@
                 "guzzlehttp/psr7": "^1.9.1|^2.5",
                 "php": ">=7.2",
                 "psr/log": "~1.0|~2.0|~3.0",
-                "symfony/expression-language": "~5.0|~6.0|~7.0",
-                "symfony/framework-bundle": "~5.0|~6.0|~7.0",
-                "symfony/stopwatch": "~5.0|~6.0|~7.0"
+                "symfony/expression-language": "~5.0|~6.0|~7.0|~8.0",
+                "symfony/framework-bundle": "~5.0|~6.0|~7.0|~8.0",
+                "symfony/stopwatch": "~5.0|~6.0|~7.0|~8.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "~5.0|~6.0|~7.0",
-                "symfony/twig-bundle": "~5.0|~6.0|~7.0",
-                "symfony/var-dumper": "~5.0|~6.0|~7.0",
-                "symfony/yaml": "~5.0|~6.0|~7.0"
+                "symfony/phpunit-bridge": "~5.0|~6.0|~7.0|~8.0",
+                "symfony/twig-bundle": "~5.0|~6.0|~7.0|~8.0",
+                "symfony/var-dumper": "~5.0|~6.0|~7.0|~8.0",
+                "symfony/yaml": "~5.0|~6.0|~7.0|~8.0"
             },
             "suggest": {
                 "namshi/cuzzle": "Outputs Curl command on profiler's page for debugging purposes"
@@ -1782,9 +1782,9 @@
             ],
             "support": {
                 "issues": "https://github.com/8p/EightPointsGuzzleBundle/issues",
-                "source": "https://github.com/8p/EightPointsGuzzleBundle/tree/v8.5.2"
+                "source": "https://github.com/8p/EightPointsGuzzleBundle/tree/v8.6.0"
             },
-            "time": "2025-01-03T09:42:03+00:00"
+            "time": "2025-12-08T12:58:18+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
