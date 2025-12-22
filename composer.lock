@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a2281dfeafedddeff1fcc79ced139eb",
+    "content-hash": "f4b623d74ef079a8c0e6383fadb36018",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -193,27 +193,27 @@
         },
         {
             "name": "bugsnag/bugsnag-symfony",
-            "version": "v1.14.3",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bugsnag/bugsnag-symfony.git",
-                "reference": "6d4b47a45970d6e4647c6ea62e57637a5ee959bd"
+                "reference": "316eddd367bb1c6325ef09fab1c45f22a2ee36e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bugsnag/bugsnag-symfony/zipball/6d4b47a45970d6e4647c6ea62e57637a5ee959bd",
-                "reference": "6d4b47a45970d6e4647c6ea62e57637a5ee959bd",
+                "url": "https://api.github.com/repos/bugsnag/bugsnag-symfony/zipball/316eddd367bb1c6325ef09fab1c45f22a2ee36e5",
+                "reference": "316eddd367bb1c6325ef09fab1c45f22a2ee36e5",
                 "shasum": ""
             },
             "require": {
                 "bugsnag/bugsnag": "^3.29.0",
-                "php": ">=5.5",
-                "symfony/config": "^2.7|^3|^4|^5|^6|^7",
-                "symfony/console": "^2.7|^3|^4|^5|^6|^7",
-                "symfony/dependency-injection": "^2.7|^3|^4|^5|^6|^7",
-                "symfony/http-foundation": "^2.7|^3|^4|^5|^6|^7",
-                "symfony/http-kernel": "^2.7|^3|^4|^5|^6|^7",
-                "symfony/security-core": "^2.7|^3|^4|^5|^6|^7"
+                "php": ">=7.2",
+                "symfony/config": "^5|^6|^7|^8",
+                "symfony/console": "^5|^6|^7|^8",
+                "symfony/dependency-injection": "^5|^6|^7|^8",
+                "symfony/http-foundation": "^5|^6|^7|^8",
+                "symfony/http-kernel": "^5|^6|^7|^8",
+                "symfony/security-core": "^5|^6|^7|^8"
             },
             "require-dev": {
                 "graham-campbell/testbench-core": "^1.1",
@@ -240,11 +240,11 @@
             ],
             "authors": [
                 {
-                    "name": "James Smith",
+                    "name": "SmartBear Software",
                     "email": "notifiers@bugsnag.com"
                 }
             ],
-            "description": "Official Bugsnag notifier for Symfony applications.",
+            "description": "Official BugSnag notifier for Symfony applications.",
             "homepage": "https://github.com/bugsnag/bugsnag-symfony",
             "keywords": [
                 "bugsnag",
@@ -256,9 +256,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bugsnag/bugsnag-symfony/issues",
-                "source": "https://github.com/bugsnag/bugsnag-symfony/tree/v1.14.3"
+                "source": "https://github.com/bugsnag/bugsnag-symfony/tree/v2.0.0"
             },
-            "time": "2025-01-30T13:59:47+00:00"
+            "time": "2025-12-09T12:30:40+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -372,16 +372,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.5.8",
+            "version": "1.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "719026bb30813accb68271fee7e39552a58e9f65"
+                "reference": "961a5e4056dd2e4a2eedcac7576075947c28bf63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/719026bb30813accb68271fee7e39552a58e9f65",
-                "reference": "719026bb30813accb68271fee7e39552a58e9f65",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/961a5e4056dd2e4a2eedcac7576075947c28bf63",
+                "reference": "961a5e4056dd2e4a2eedcac7576075947c28bf63",
                 "shasum": ""
             },
             "require": {
@@ -428,7 +428,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/ca-bundle/issues",
-                "source": "https://github.com/composer/ca-bundle/tree/1.5.8"
+                "source": "https://github.com/composer/ca-bundle/tree/1.5.10"
             },
             "funding": [
                 {
@@ -440,7 +440,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-20T18:49:47+00:00"
+            "time": "2025-12-08T15:06:51+00:00"
         },
         {
             "name": "doctrine/collections",

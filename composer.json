@@ -15,7 +15,7 @@
     "ext-posix": "*",
     "ext-zip": "*",
     "beberlei/doctrineextensions": "1.5.*",
-    "bugsnag/bugsnag-symfony": "^1.14",
+    "bugsnag/bugsnag-symfony": "^2.0",
     "codercat/jwk-to-pem": "1.1.*",
     "doctrine/dbal": "4.4.*",
     "doctrine/doctrine-bundle": "2.16.*",
