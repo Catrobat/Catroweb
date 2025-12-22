@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\Users;
 
 use App\DB\Entity\User\User;
+use App\User\UserManager;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -19,10 +20,29 @@ class UserAdmin extends AbstractAdmin
 {
   protected $classnameLabel = 'user';
 
+  public function __construct(private readonly UserManager $userManager, ?string $code = null, ?string $class = null, ?string $baseControllerName = null)
+  {
+    parent::__construct($code, $class, $baseControllerName);
+  }
+
   #[\Override]
   protected function generateBaseRoutePattern(bool $isChildAdmin = false): string
   {
     return 'user';
+  }
+
+  protected function prePersist(object $object): void
+  {
+    if ($object instanceof User) {
+      $this->userManager->updateUser($object, false);
+    }
+  }
+
+  protected function preUpdate(object $object): void
+  {
+    if ($object instanceof User) {
+      $this->userManager->updateUser($object, false);
+    }
   }
 
   #[\Override]
