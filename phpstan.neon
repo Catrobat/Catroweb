@@ -12,6 +12,7 @@ parameters:
       - var/**/*
       - vendor/**/*
       - deploy.php
+      - config/reference.php
   inferPrivatePropertyTypeFromConstructor: true
   reportUnmatchedIgnoredErrors: true
 

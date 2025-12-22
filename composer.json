@@ -4,7 +4,7 @@
   "license": "MIT",
   "description": "Catrobat's Share Community Platform",
   "require": {
-    "php": ">=8.4",
+    "php": ">=8.5",
     "ext-SimpleXML": "*",
     "ext-bcmath": "*",
     "ext-gd": "*",
@@ -37,26 +37,26 @@
     "sonata-project/doctrine-orm-admin-bundle": "4.18.*",
     "sonata-project/exporter": "3.4.*",
     "sonata-project/twig-extensions": "2.6.*",
-    "symfony/asset": "8.0.*",
-    "symfony/brevo-mailer": "7.3.*",
-    "symfony/cache": "7.3.*",
-    "symfony/console": "7.3.*",
-    "symfony/dotenv": "8.0.*",
+    "symfony/asset": "7.4.*",
+    "symfony/brevo-mailer": "7.4.*",
+    "symfony/cache": "7.4.*",
+    "symfony/console": "7.4.*",
+    "symfony/dotenv": "7.4.*",
     "symfony/flex": "2.10.*",
-    "symfony/framework-bundle": "7.3.*",
-    "symfony/intl": "8.0.*",
-    "symfony/mailer": "7.3.*",
+    "symfony/framework-bundle": "7.4.*",
+    "symfony/intl": "7.4.*",
+    "symfony/mailer": "7.4.*",
     "symfony/monolog-bundle": "4.0.*",
     "symfony/polyfill-iconv": "1.33.*",
-    "symfony/process": "8.0.*",
-    "symfony/routing": "7.3.*",
-    "symfony/runtime": "8.0.*",
+    "symfony/process": "7.4.*",
+    "symfony/routing": "7.4.*",
+    "symfony/runtime": "7.4.*",
     "symfony/stimulus-bundle": "2.31.*",
-    "symfony/translation": "7.3.*",
-    "symfony/twig-bundle": "7.3.*",
-    "symfony/validator": "7.3.*",
+    "symfony/translation": "7.4.*",
+    "symfony/twig-bundle": "7.4.*",
+    "symfony/validator": "7.4.*",
     "symfony/webpack-encore-bundle": "2.4.*",
-    "symfony/yaml": "7.3.*",
+    "symfony/yaml": "7.4.*",
     "symfonycasts/reset-password-bundle": "1.24.*",
     "symfonycasts/verify-email-bundle": "1.18.*",
     "twig/extra-bundle": "3.22.*",
@@ -79,29 +79,34 @@
     "phpstan/phpstan-symfony": "1.4.*",
     "phpunit/phpunit": "12.5.*",
     "rector/rector": "1.2.*",
-    "symfony/browser-kit": "8.0.*",
+    "symfony/browser-kit": "7.4.*",
     "symfony/http-client": "7.0.*",
     "symfony/maker-bundle": "1.65.*",
-    "symfony/phpunit-bridge": "8.0.*",
+    "symfony/phpunit-bridge": "7.4.*",
     "symfony/stopwatch": "7.0.*",
-    "symfony/web-profiler-bundle": "7.3.*",
+    "symfony/web-profiler-bundle": "7.4.*",
     "vimeo/psalm": "6.14.*",
     "vincentlanglet/twig-cs-fixer": "^3.1",
     "wapmorgan/php-deprecation-detector": "2.0.*"
   },
   "config": {
     "platform": {
-      "php": "8.4.3",
-      "ext-curl": "8.4",
-      "ext-gd": "8.4",
+      "php": "8.5.1",
+      "ext-curl": "8.5",
+      "ext-gd": "8.5",
       "ext-imagick": "3.4.4",
       "ext-json": "1.7.0",
-      "ext-mbstring": "8.4",
-      "ext-pcntl": "8.4",
-      "ext-posix": "8.4",
-      "ext-xml": "8.4",
-      "ext-zip": "8.4",
-      "ext-bcmath": "8.4"
+      "ext-mbstring": "8.5",
+      "ext-pcntl": "8.5",
+      "ext-posix": "8.5",
+      "ext-xml": "8.5",
+      "ext-zip": "8.5",
+      "ext-bcmath": "8.5"
+    },
+    "audit": {
+      "ignore": [
+        "PKSA-4k7v-pfvw-nqvp"
+      ]
     },
     "bin-dir": "bin",
     "preferred-install": {
@@ -145,7 +150,7 @@
   "extra": {
     "symfony": {
       "allow-contrib": true,
-      "require": "7.3.*"
+      "require": "7.4.*"
     }
   }
 }
