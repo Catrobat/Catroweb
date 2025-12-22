@@ -14685,16 +14685,16 @@
         },
         {
             "name": "dmore/behat-chrome-extension",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/behat-chrome/behat-chrome-extension.git",
-                "reference": "888e91f52b3ffd19afe61cea3d5edebb0a4d43a7"
+                "reference": "b4262f4bf9ea8a8874eb8684bb982c13aca66d3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/behat-chrome%2Fbehat-chrome-extension/repository/archive.zip?sha=888e91f52b3ffd19afe61cea3d5edebb0a4d43a7",
-                "reference": "888e91f52b3ffd19afe61cea3d5edebb0a4d43a7",
+                "url": "https://gitlab.com/api/v4/projects/behat-chrome%2Fbehat-chrome-extension/repository/archive.zip?sha=b4262f4bf9ea8a8874eb8684bb982c13aca66d3c",
+                "reference": "b4262f4bf9ea8a8874eb8684bb982c13aca66d3c",
                 "shasum": ""
             },
             "require": {
@@ -14732,9 +14732,9 @@
             ],
             "support": {
                 "issues": "https://gitlab.com/behat-chrome/behat-chrome-extension/-/issues",
-                "source": "https://gitlab.com/behat-chrome/behat-chrome-extension/-/tree/1.4.0"
+                "source": "https://gitlab.com/behat-chrome/behat-chrome-extension/-/tree/1.4.1"
             },
-            "time": "2022-04-10T04:25:11+00:00"
+            "time": "2025-12-19T06:39:12+00:00"
         },
         {
             "name": "dmore/chrome-mink-driver",
@@ -17030,26 +17030,26 @@
         },
         {
             "name": "phrity/util-errorhandler",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sirn-se/phrity-util-errorhandler.git",
-                "reference": "9825f15ef9b4a93252ce53ca8962278832d834da"
+                "reference": "70a669cc22db2eed6a109ec66fd95168a4332c9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sirn-se/phrity-util-errorhandler/zipball/9825f15ef9b4a93252ce53ca8962278832d834da",
-                "reference": "9825f15ef9b4a93252ce53ca8962278832d834da",
+                "url": "https://api.github.com/repos/sirn-se/phrity-util-errorhandler/zipball/70a669cc22db2eed6a109ec66fd95168a4332c9b",
+                "reference": "70a669cc22db2eed6a109ec66fd95168a4332c9b",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1"
             },
             "require-dev": {
-                "php-coveralls/php-coveralls": "^2.0",
                 "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^10.0 | ^11.0  | ^12.0",
-                "squizlabs/php_codesniffer": "^3.5"
+                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0",
+                "robiningelbrecht/phpunit-coverage-tools": "^1.9",
+                "squizlabs/php_codesniffer": "^3.5 || ^4.0"
             },
             "type": "library",
             "autoload": {
@@ -17076,9 +17076,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sirn-se/phrity-util-errorhandler/issues",
-                "source": "https://github.com/sirn-se/phrity-util-errorhandler/tree/1.2.1"
+                "source": "https://github.com/sirn-se/phrity-util-errorhandler/tree/1.2.2"
             },
-            "time": "2025-08-08T09:48:45+00:00"
+            "time": "2025-12-05T21:25:36+00:00"
         },
         {
             "name": "phrity/websocket",
@@ -18816,20 +18816,20 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v7.3.6",
+            "version": "v8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "84321188c4754e64273b46b406081ad9b18e8614"
+                "reference": "6225bd458c53ecdee056214cb4a2ffaf58bd592b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/84321188c4754e64273b46b406081ad9b18e8614",
-                "reference": "84321188c4754e64273b46b406081ad9b18e8614",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/6225bd458c53ecdee056214cb4a2ffaf58bd592b",
+                "reference": "6225bd458c53ecdee056214cb4a2ffaf58bd592b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.2"
+                "php": ">=8.4"
             },
             "type": "library",
             "autoload": {
@@ -18861,7 +18861,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v7.3.6"
+                "source": "https://github.com/symfony/css-selector/tree/v8.0.0"
             },
             "funding": [
                 {
@@ -18881,7 +18881,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-29T17:24:25+00:00"
+            "time": "2025-10-30T14:17:19+00:00"
         },
         {
             "name": "symfony/dom-crawler",
