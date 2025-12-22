@@ -21,20 +21,20 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     apt-get install -yq --no-install-recommends \
-    php8.4-cli \
-    php8.4-common \
-    php8.4-curl \
-    php8.4-dom \
-    php8.4-gd \
-    php8.4-imagick \
-    php8.4-intl \
-    php8.4-mbstring \
-    php8.4-mysql \
-    php8.4-xdebug \
-    php8.4-xml \
-    php8.4-zip \
-    php8.4-bcmath \
-    libapache2-mod-php8.4 \
+    php8.5-cli \
+    php8.5-common \
+    php8.5-curl \
+    php8.5-dom \
+    php8.5-gd \
+    php8.5-imagick \
+    php8.5-intl \
+    php8.5-mbstring \
+    php8.5-mysql \
+    php8.5-xdebug \
+    php8.5-xml \
+    php8.5-zip \
+    php8.5-bcmath \
+    libapache2-mod-php8.5 \
     acl \
     make \
     libtool \
@@ -53,8 +53,8 @@ RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
 
 # Overwrite php config:
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.4/apache2/php.ini
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.4/cli/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.5/apache2/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.5/cli/php.ini
 
 # Setting working directory
 WORKDIR /var/www/catroweb

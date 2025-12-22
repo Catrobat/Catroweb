@@ -12,7 +12,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'type' => 'fingers_crossed',
         'action_level' => 'error',
         'handler' => 'mainHandler',
-        'excluded_404s' => true,
         'excluded_http_codes' => [400, 401, 402, 403, 404, 405, 406, 429],
         'buffer_size' => 50,
         'channels' => ['!soft'],

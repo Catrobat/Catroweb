@@ -23,6 +23,7 @@
             <directory name="src/Project/CatrobatCode"/>
             <!-- Generated code -->
             <directory name="src/Api/OpenAPI/Server"/>
+            <file name="config/reference.php"/>
         </ignoreFiles>
     </projectFiles>
 
@@ -57,5 +58,10 @@
                 <directory name="src" />
             </errorLevel>
         </InvalidOperand>
+        <InvalidAttribute>
+            <errorLevel type="info">
+                <directory name="src" />
+            </errorLevel>
+        </InvalidAttribute>
     </issueHandlers>
 </psalm>
