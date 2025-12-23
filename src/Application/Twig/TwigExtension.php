@@ -9,6 +9,7 @@ use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use App\DB\EntityRepository\System\StatisticRepository;
+use Locale;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -61,8 +62,10 @@ class TwigExtension extends AbstractExtension
   public function humanFriendlyNumberFilter(mixed $input): bool|string
   {
     $user_locale = $this->request_stack->getCurrentRequest()->getLocale();
+    $locale = str_replace(' ', '_', $user_locale);
+    $locale = \Locale::canonicalize($locale) ?: 'en_US';
 
-    return TwigExtension::humanFriendlyNumber($input, $this->translator, $user_locale);
+    return TwigExtension::humanFriendlyNumber($input, $this->translator, $locale);
   }
 
   public static function humanFriendlyNumber(mixed $input, TranslatorInterface $translator, mixed $user_locale): bool|string
