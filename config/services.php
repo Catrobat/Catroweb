@@ -163,7 +163,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set('security.acl.permission.map', AdminPermissionMap::class);
 
   // Custom formatting for our logs
-  $logFormat = "[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%% %%extra%%\n[Client IP: %%extra.client_ip%%, User Agent: %%extra.user_agent%%, Session User: %%extra.session_user%%]";
+  $logFormat = "[%%datetime%%] %%level_name%% %%channel%%: %%message%% | ip=%%extra.client_ip%% user=%%extra.session_user%% %%context%% %%extra%%\n";
   $services->set('monolog.formatter.catrobat_custom_formatter', LineFormatter::class)
     ->args([$logFormat, null, true, false])
     ->call('includeStacktraces', [true])
