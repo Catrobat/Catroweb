@@ -148,28 +148,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\OneToMany(targetEntity: UserRemixSimilarityRelation::class, mappedBy: 'second_user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $reverse_relations_of_similar_users_based_on_remixes;
 
-  /**
-   * @deprecated
-   */
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
-  protected ?string $gplus_access_token = null;
-
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $google_id = null;
 
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $facebook_id = null;
 
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $google_access_token = null;
 
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $facebook_access_token = null;
 
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $apple_id = null;
 
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
+  #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $apple_access_token = null;
 
   /**
@@ -283,16 +277,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   public function getAppleId(): ?string
   {
     return $this->apple_id;
-  }
-
-  public function setGplusAccessToken(?string $gplus_access_token): void
-  {
-    $this->gplus_access_token = $gplus_access_token;
-  }
-
-  public function getGplusAccessToken(): ?string
-  {
-    return $this->gplus_access_token;
   }
 
   public function setGplusIdToken(?string $gplus_id_token): void
