@@ -200,7 +200,6 @@ class UserManager
     $password = $this->userPasswordHasher->hashPassword($user, $plainPassword);
 
     $user->setPassword($password);
-    $user->eraseCredentials();
   }
 
   public function findUserByUsername(string $username): ?User

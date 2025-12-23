@@ -9,6 +9,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     'doctrine',
     [
       'orm' => [
+        'enable_lazy_ghost_objects' => true,
         'auto_generate_proxy_classes' => false,
         'query_cache_driver' => [
           'type' => 'pool',
