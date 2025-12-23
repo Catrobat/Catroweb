@@ -31,18 +31,16 @@ class UserAdmin extends AbstractAdmin
     return 'user';
   }
 
+  #[\Override]
   protected function prePersist(object $object): void
   {
-    if ($object instanceof User) {
-      $this->userManager->updateUser($object, false);
-    }
+    $this->userManager->updateUser($object, false);
   }
 
+  #[\Override]
   protected function preUpdate(object $object): void
   {
-    if ($object instanceof User) {
-      $this->userManager->updateUser($object, false);
-    }
+    $this->userManager->updateUser($object, false);
   }
 
   #[\Override]

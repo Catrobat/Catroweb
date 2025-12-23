@@ -43,7 +43,7 @@
     "@babel/preset-env": "^7.28.5",
     "@eslint/js": "^9.39.2",
     "@hotwired/stimulus": "^3.2.2",
-    "@openapitools/openapi-generator-cli": "^2.25.2",
+    "@openapitools/openapi-generator-cli": "^2.26.0",
     "@symfony/webpack-encore": "^5.3.1",
     "auto-changelog": "^2.5.0",
     "autoprefixer": "^10.4.23",
@@ -116,7 +116,7 @@
     "jwt-decode": "^4.0.0",
     "lazysizes": "^5.3.2",
     "material-icons": "^1.13.14",
-    "sweetalert2": "^11.26.16",
+    "sweetalert2": "^11.26.17",
     "textfilljs": "^1.0.3-a",
     "typeface-roboto": "^1.1.13",
     "vis": "^4.21.0-EOL"
