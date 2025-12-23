@@ -21,10 +21,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'excluded_http_codes' => [400, 401, 402, 403, 404, 405, 406, 429],
           'buffer_size' => 50,
           'channels' => ['!soft'],
-          'formatter' => 'monolog.formatter.catrobat_custom_formatter',
         ],
         'mainHandler' => [
           'type' => 'rotating_file',
+          'formatter' => 'monolog.formatter.catrobat_custom_formatter',
           'path' => '%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log',
           'level' => 'error',
           'max_files' => 14,
