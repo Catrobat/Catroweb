@@ -20,9 +20,8 @@ class UserAdmin extends AbstractAdmin
 {
   protected $classnameLabel = 'user';
 
-  public function __construct(private readonly UserManager $userManager, ?string $code = null, ?string $class = null, ?string $baseControllerName = null)
+  public function __construct(private readonly UserManager $userManager)
   {
-    parent::__construct($code, $class, $baseControllerName);
   }
 
   #[\Override]
