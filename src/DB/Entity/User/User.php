@@ -639,9 +639,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
   }
 
-  #[Deprecated(
-    reason: 'Since Symfony 7.3, credentials are erased in __serialize()'
-  )]
+  #[\Deprecated]
   #[\Override]
   public function eraseCredentials(): void
   {
