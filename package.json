@@ -43,7 +43,7 @@
     "@babel/preset-env": "^7.28.5",
     "@eslint/js": "^9.39.2",
     "@hotwired/stimulus": "^3.2.2",
-    "@openapitools/openapi-generator-cli": "^2.26.0",
+    "@openapitools/openapi-generator-cli": "^2.27.0",
     "@symfony/webpack-encore": "^5.3.1",
     "auto-changelog": "^2.5.0",
     "autoprefixer": "^10.4.23",
