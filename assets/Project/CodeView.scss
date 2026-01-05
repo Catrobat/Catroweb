@@ -1,4 +1,5 @@
 @import '../Layout/Variables';
+@import '../Layout/Mixins';
 @import '../catblocks/main.css';
 
 // Bootstrap extending CSS
@@ -6,9 +7,9 @@
 .card {
   border-radius: 0;
   box-shadow:
-    0 2px 1px -2px rgb(0 0 0 / 20%),
-    0 2px 2px 0 rgb(0 0 0 / 14%),
-    0 1px 4px 0 rgb(0 0 0 / 12%);
+    0 2px 1px -2px light-dark(rgb(0 0 0 / 20%), rgb(255 255 255 / 20%)),
+    0 2px 2px 0 light-dark(rgb(0 0 0 / 14%), rgb(255 255 255 / 14%)),
+    0 1px 4px 0 light-dark(rgb(0 0 0 / 12%), rgb(255 255 255 / 12%)) !important;
 
   .table td,
   .table th {
@@ -22,7 +23,7 @@
   }
 
   tr:last-child td {
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid light-dark(#dee2e6, #211d19);
   }
 
   .card {
@@ -82,4 +83,51 @@
 
 [data-toggle='collapse'][aria-expanded='true'] .rotate-left {
   transform: rotate(-90deg);
+}
+
+.modal {
+  top: 64px; // top app bar
+  height: calc(100% - 64px);
+}
+
+// Dark Mode overwrites
+
+@include color-mode(dark) {
+  .card {
+    background-color: var(--theme-background);
+  }
+
+  .card-header,
+  .card-footer {
+    background-color: rgb(255 255 255 / 3%);
+    border-bottom: 1px solid rgb(255 255 255 / 12.5%);
+  }
+
+  .card-header[aria-expanded='true'],
+  .collapse.show .card-header,
+  .collapse.show .card-body {
+    background: rgb(255 255 255 / 4%) !important;
+  }
+
+  .card-header.collapsed {
+    border-bottom-color: #111 !important;
+  }
+
+  .catro-tabs .nav-link,
+  .catro-tabs .nav-link.active {
+    color: var(--bs-body-color) !important;
+  }
+  #code-view-toggler,
+  .catblocks-tab-script img {
+    filter: invert(1);
+  }
+
+  .modal-content {
+    background-color: var(--theme-background);
+  }
+
+  .close {
+    color: #fff;
+    text-shadow: 0 1px 0 #000;
+  }
 }

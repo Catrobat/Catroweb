@@ -1,0 +1,14 @@
+@use '~@material/list/mdc-list';
+@use '~@material/menu-surface/mdc-menu-surface';
+@use '~@material/menu/mdc-menu';
+
+.mdc-menu {
+  --mdc-theme-surface: var(--bs-body-bg);
+  --mdc-theme-on-surface: var(--bs-body-color);
+
+  .mdc-deprecated-list,
+  .mdc-deprecated-list-item__graphic,
+  .mdc-deprecated-list-item__text {
+    color: var(--mdc-theme-on-surface);
+  }
+}

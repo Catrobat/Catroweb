@@ -90,6 +90,7 @@ Encore
    * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
    */
   .addEntry('base_layout', './assets/Layout/Base.js')
+  .addEntry('color_scheme', './assets/Layout/ColorScheme.js')
   .addEntry('layout_language_menu', './assets/Layout/LanguageMenu.js')
   .addStyleEntry('layout_multi_column_article', './assets/Layout/MultiColumnArticle.scss')
 
@@ -184,7 +185,7 @@ Encore
       ]),
       content: ['**/*.twig', '**/*.js'],
       safelist: {
-        standard: [/^swal2/, /^modal/, /^mdc/],
+        standard: [/^swal2/, /^modal/, /^mdc/, /^data-bs-theme/],
       },
       defaultExtractor: (content) => {
         return content.match(/[\w-/:]+(?<!:)/g) || []

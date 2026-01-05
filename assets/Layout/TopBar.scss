@@ -3,10 +3,9 @@
 @use '~@material/icon-button/styles';
 @use '~@material/top-app-bar/mdc-top-app-bar';
 @use '~@material/textfield';
-@use '~@material/menu/mdc-menu';
-@use '~@material/menu-surface/mdc-menu-surface';
 @import './Variables';
 @import './Mixins';
+@import '../Components/MdcMenu';
 @include textfield.core-styles;
 @include form-field.core-styles;
 
@@ -71,7 +70,6 @@
 
 // ---- Options
 
-#top-app-bar__options-container,
 #sign-app-ellipsis-container {
   top: 0;
   right: 0;
@@ -88,11 +86,6 @@
     display: block;
     padding: 0.5em 1em;
     text-align: left;
-  }
-
-  .top-app-bar-btn-options-text {
-    display: inline-flex;
-    vertical-align: top;
   }
 }
 

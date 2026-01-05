@@ -11,8 +11,8 @@ $theme-logo-font-size: 1.5rem;
 $theme-logo-font-weight: 500;
 
 /* Footer */
-$footer-background-color: #e1e2e1;
-$footer-color: #000;
+$footer-background-color: light-dark(#e1e2e1, #1e1d1e);
+$footer-color: light-dark(#000, #fff);
 
 /* Default */
 $default-background-color: var(--theme-background, #fff);

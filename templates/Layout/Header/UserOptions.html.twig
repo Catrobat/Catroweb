@@ -1,19 +1,17 @@
 {% if '/user/' in app.request.pathinfo and profile|default(false) and profile.id|default(false) %}
 
-  <ul class="mdc-list list-unstyled"
-      role="menu"
-      aria-hidden="true">
+<ul class="mdc-deprecated-list mdc-deprecated-list--icon-list" role="menu" aria-hidden="true"
+    aria-orientation="vertical" tabindex="-1">
 
-    <li id="top-app-bar__btn-share"
-        class="btn top-app-bar-btn-options mdc-list-item mdc-ripple-upgraded"
-        role="menuitem"
-        tabindex="0"
-        data-clipboard-text="{{ url('profile', {id: profile.id}) }}">
-      <span class="material-icons me-2">share</span><span id="top-app-bar__btn-share-text" class="top-app-bar-btn-options-text">
-         {{ 'share.text'|trans({}, 'catroweb') }}
-        </span>
-    </li>
+  <li id="top-app-bar__btn-share"
+      class="mdc-deprecated-list-item"
+      role="menuitem"
+      data-clipboard-text="{{ url('profile', {id: profile.id}) }}">
+    <span class="mdc-deprecated-list-item__ripple"></span>
+    <span class="mdc-deprecated-list-item__graphic material-icons">share</span>
+    <span class="mdc-deprecated-list-item__text" id="top-app-bar__btn-share-text">{{ 'share.text'|trans({}, 'catroweb') }}</span>
+  </li>
 
-  </ul>
+</ul>
 
 {% endif %}

@@ -78,6 +78,11 @@ oauthHere: "here"
 statistics: "Statistics"
 languageSelection: "Language selection"
 
+color-scheme:
+  auto: 'Auto'
+  light: 'Light'
+  dark: 'Dark'
+
 indexPage:
   recommendedSection:
     info:

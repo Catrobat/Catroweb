@@ -55,7 +55,7 @@ $container-padding: 1rem;
 
     &:hover,
     &:active {
-      background-color: rgb(0 0 0 / 8%);
+      background-color: light-dark(rgb(0 0 0 / 8%), rgb(255 255 255 / 8%));
     }
 
     &__btn-toggle {
@@ -179,7 +179,7 @@ $container-padding: 1rem;
     padding-right: math.div($grid-gutter-width, 2);
     padding-left: math.div($grid-gutter-width, 2);
     overflow-y: auto;
-    background: #fff;
+    background: var(--theme-background);
 
     @media (width <= 599px) {
       top: 56px;
@@ -296,6 +296,12 @@ $container-padding: 1rem;
   &__not-for-kids-logo {
     width: 1.25rem;
     height: 1.25rem;
+  }
+}
+
+@include color-mode(dark) {
+  .project-list__not-for-kids-logo {
+    filter: invert(1);
   }
 }
 

@@ -2,3 +2,7 @@
 @use '~@material/tab-scroller/mdc-tab-scroller';
 @use '~@material/tab-indicator/mdc-tab-indicator';
 @use '~@material/tab/mdc-tab';
+
+.mdc-tab .mdc-tab__icon {
+  color: light-dark(rgb(0 0 0 / 54%), rgb(255 255 255 / 54%));
+}
