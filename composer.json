@@ -55,6 +55,7 @@
     "symfony/translation": "7.4.*",
     "symfony/twig-bundle": "7.4.*",
     "symfony/validator": "7.4.*",
+    "symfony/var-exporter": "7.4.*",
     "symfony/webpack-encore-bundle": "2.4.*",
     "symfony/yaml": "7.4.*",
     "symfonycasts/reset-password-bundle": "1.24.*",
@@ -138,13 +139,15 @@
       "assets:install %PUBLIC_DIR%": "symfony-cmd"
     },
     "post-install-cmd": [
-      "@auto-scripts"
+      "@auto-scripts",
+      "sh -c 'if [ \"$SKIP_FIX\" != \"1\" ]; then composer run-script fix; fi'"
     ],
     "post-update-cmd": [
-      "@auto-scripts"
+      "@auto-scripts",
+      "@fix"
     ],
     "fix": [
-      "PHP_CS_FIXER_IGNORE_ENV=1 bin/php-cs-fixer fix --allow-risky=yes --verbose --format=txt"
+      "bin/php-cs-fixer fix --allow-risky=yes --verbose --format=txt"
     ]
   },
   "extra": {
