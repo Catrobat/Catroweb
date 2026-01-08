@@ -16,11 +16,9 @@ $config
     '@PSR12' => true,
     '@PhpCsFixer' => true,
     '@Symfony' => true,
-    '@DoctrineAnnotation' => true,
     'strict_param' => true,
   ])
   ->setFinder($finder)
-  ->setUsingCache(true)
   ->setIndent('  ');
 
 return $config;
