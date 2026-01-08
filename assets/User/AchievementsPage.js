@@ -22,6 +22,7 @@ function handleNewAchievementAnimation() {
     Swal.fire({
       html: getNewAchievementAnimationHtml(),
       customClass: {
+        htmlContainer: 'popup__new-achievement',
         confirmButton: 'btn btn-primary',
       },
       confirmButtonText: ltmAchievementsPopupNewConfirm,

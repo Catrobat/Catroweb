@@ -1,7 +1,9 @@
 import { showSnackbar } from './Snackbar'
 import { MDCTopAppBar } from '@material/top-app-bar'
+import { MDCMenu } from '@material/menu'
 
 import './TopBar.scss'
+import '../Components/MdcMenu.scss'
 
 const topAppBarElement = document.querySelector('.mdc-top-app-bar')
 const mdcObject = new MDCTopAppBar(topAppBarElement)
@@ -17,7 +19,8 @@ const searchInput = document.querySelector('#top-app-bar__search-input')
 const searchForm = document.querySelector('#top-app-bar__search-form')
 
 const optionsButton = document.querySelector('#top-app-bar__btn-options')
-const optionsContainer = document.querySelector('#top-app-bar__options-container')
+const optionsMenuEl = document.querySelector('#top-app-bar__options-menu')
+const optionsMenu = optionsMenuEl ? new MDCMenu(optionsMenuEl) : null
 
 const defaultAppBarHref = title.getAttribute('href')
 const defaultTitle = title.innerHTML
@@ -46,14 +49,6 @@ searchForm?.addEventListener('submit', (event) => {
 optionsButton?.addEventListener('click', () => {
   showTopBarOptions()
 })
-
-if (optionsContainer && optionsButton) {
-  document.addEventListener('click', (event) => {
-    if (optionsButton !== event.target) {
-      optionsContainer.style.display = 'none'
-    }
-  })
-}
 
 export function showTopBarDownload() {
   hideTopBars()
@@ -136,8 +131,9 @@ function handleSearchBackButton() {
 }
 
 function showTopBarOptions() {
-  optionsContainer.style.display = 'flex'
-  optionsContainer.focus()
+  if (optionsMenu) {
+    optionsMenu.open = true
+  }
 }
 
 export function showTopBarSearch() {

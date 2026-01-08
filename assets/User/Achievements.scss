@@ -161,13 +161,18 @@
   margin-top: 0.25rem;
 }
 
-.popup__new-achievement__background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
+.popup__new-achievement {
+  color: #545454;
+
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+  }
 }
 
 .svg-new-achievement-popup-color-1 {

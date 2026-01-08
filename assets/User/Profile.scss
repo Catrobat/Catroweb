@@ -200,7 +200,7 @@
 }
 
 .loading-spinner-backdrop {
-  background: rgb(255 255 255 / 70%);
+  background: light-dark(rgb(255 255 255 / 70%), rgb(0 0 0 / 70%));
   position: absolute;
   top: 0;
   left: 0;

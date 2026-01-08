@@ -1,6 +1,8 @@
+$language-menu-border-radius: 10px;
+
 .language-body {
   display: none;
-  background: white;
+  background: var(--theme-background);
   width: 50%;
   height: 80%;
   max-height: 80%;
@@ -8,17 +10,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
   position: fixed;
-  border-radius: 10px;
+  border-radius: $language-menu-border-radius;
   box-shadow: 0 0 10px rgb(0 0 0 / 50%);
   z-index: 11001;
 }
 
 .language-header {
-  padding-left: 0.75rem;
-  padding-top: 0.75rem;
-  color: var(--primary);
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  color: var(--on-primary);
   font-size: 1.5rem;
-  border-bottom: 2px solid rgb(196 196 196 / 25500%);
+  border-top-left-radius: $language-menu-border-radius;
+  border-top-right-radius: $language-menu-border-radius;
 }
 .language-option-container {
   overflow-y: auto;
@@ -35,11 +38,11 @@
   }
 
   &:hover {
-    background-color: #dfeaf4;
+    background-color: light-dark(#dfeaf4, rgb(255 255 255 / 30%));
   }
 }
 .language-button-container {
-  background: white;
+  background: var(--theme-background);
   padding: 0.75rem;
   display: flex;
   justify-content: flex-end;

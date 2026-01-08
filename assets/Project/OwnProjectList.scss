@@ -1,12 +1,10 @@
 @use 'sass:math';
 
 // Material Menu
-@use '~@material/list/mdc-list';
-@use '~@material/menu-surface/mdc-menu-surface';
-@use '~@material/menu/mdc-menu';
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
 @import '~bootstrap/scss/mixins';
+@import '../Components/MdcMenu';
 
 $max-project-thumb-size: 160px;
 $container-padding: 1rem;

@@ -1,11 +1,11 @@
 :root {
   --primary: #442a66;
-  --on-pimary: #fff;
+  --on-primary: #fff;
   --color-primary: hsl(266deg 42% 28%);
   --color-primary-h: 266;
   --color-primary-s: 42%;
   --color-primary-l: 28%;
   --theme-logo-color-primary: #8a78a8;
   --theme-logo-color-secondary: #8a78a8;
-  --theme-background: #fff;
+  --theme-background: var(--bs-body-bg);
 }

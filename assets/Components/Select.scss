@@ -1,7 +1,5 @@
-@use '~@material/list/mdc-list';
-@use '~@material/menu-surface/mdc-menu-surface';
-@use '~@material/menu/mdc-menu';
 @use '~@material/select/styles';
+@import '../Components/MdcMenu';
 @import '../Layout/Variables';
 
 // Overwrite material Select

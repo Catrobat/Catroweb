@@ -10,7 +10,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px #fff inset !important;
+  box-shadow: 0 0 0 30px light-dark(#fff, #000) inset !important;
 }
 
 // Overwrite material Text Field
@@ -19,9 +19,38 @@ input:-webkit-autofill:active {
   width: 100%;
 }
 
+.mdc-text-field:not(.mdc-text-field--disabled) {
+  .mdc-text-field__input {
+    color: light-dark(rgb(0 0 0 / 87%), rgb(255 255 255 / 87%)) !important;
+  }
+
+  .mdc-text-field__icon--leading,
+  .mdc-text-field__icon--trailing {
+    color: light-dark(rgb(0 0 0 / 54%), rgb(255 255 255 / 54%)) !important;
+  }
+
+  &:not(.mdc-text-field--invalid) .mdc-floating-label {
+    color: light-dark(rgb(0 0 0 / 60%), rgb(255 255 255 / 60%)) !important;
+  }
+}
+
+.mdc-text-field--disabled.mdc-text-field--filled {
+  background-color: light-dark(rgb(249.9 249.9 249.9), rgb(5.1 5.1 5.1)) !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+  border-bottom-color: light-dark(rgb(0 0 0 / 42%), rgb(255 255 255 / 42%)) !important;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled) .mdc-notched-outline__trailing {
+  border-color: light-dark(rgb(0 0 0 / 38%), rgb(255 255 255 / 38%)) !important;
+}
+
 .mdc-text-field--filled:not(.mdc-text-field--disabled),
 .mdc-text-field--focused:not(.mdc-text-field--disabled) {
-  background-color: $body-bg !important;
+  background-color: var(--theme-background) !important;
 }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label,
