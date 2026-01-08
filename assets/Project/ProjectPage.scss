@@ -241,6 +241,12 @@ table td:nth-child(1) {
   white-space: nowrap;
 }
 
+@include color-mode(dark) {
+  .not-for-kids-logo {
+    filter: invert(1);
+  }
+}
+
 #project-comments {
   #user-comment-wrapper {
     padding-bottom: 15px;
@@ -314,7 +320,7 @@ table td:nth-child(1) {
 }
 
 .single-reply:nth-of-type(1) {
-  border-bottom: 0.5px solid rgb(8 8 8);
+  border-bottom: 0.5px solid light-dark(rgb(8 8 8), rgb(247 247 247));
 }
 
 .single-comment,
@@ -322,7 +328,7 @@ table td:nth-child(1) {
   min-height: 80px;
   padding-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 0.5px solid rgb(109 102 102 / 19%);
+  border-bottom: 0.5px solid light-dark(rgb(109 102 102 / 19%), rgb(146 153 153 / 19%));
 
   &.hidden {
     display: none;
@@ -330,7 +336,7 @@ table td:nth-child(1) {
 
   &:hover,
   &:active {
-    background-color: rgb(0 0 0 / 8%);
+    background-color: light-dark(rgb(0 0 0 / 8%), rgb(255 255 255 / 8%));
   }
 }
 
@@ -443,10 +449,15 @@ input[type='number'] {
   height: 26px;
 }
 
-#wow-reaction-modal {
+.wow-reaction-modal {
   width: 20px;
   height: 20px;
-  fill: var(--primary);
+}
+
+@include color-mode(dark) {
+  .wow-reaction-modal {
+    filter: invert(1);
+  }
 }
 
 #wow-reaction {
@@ -454,7 +465,7 @@ input[type='number'] {
 }
 
 .nav-tabs * {
-  color: #000;
+  color: var(--bs-body-color);
 }
 
 .mdc-form-field {
@@ -477,7 +488,7 @@ input[type='number'] {
   top: 0;
   right: 0;
   display: none;
-  color: #000;
+  color: var(--bs-body-color);
   border-radius: 0;
 }
 
@@ -644,7 +655,7 @@ input[type='number'] {
   height: calc(100vh - 50px);
   padding: 1rem math.div($grid-gutter-width, 2) 1.5rem;
   overflow-y: auto;
-  background: #fff;
+  background: var(--theme-background);
 }
 
 .translation-list {

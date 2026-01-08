@@ -23,6 +23,7 @@
 
   {% block stylesheets %}
     {{ encore_entry_link_tags('base_layout') }}
+    {{ encore_entry_link_tags('color_scheme') }}
     {{ encore_entry_link_tags(themeAssets()) }}
   {% endblock stylesheets %}
 
@@ -36,6 +37,7 @@
       },
       environment: '{{ app.environment }}',
     }</script>
+  {{ encore_entry_script_tags('color_scheme', null, '_default', {defer: false}) }}
   {{ encore_entry_script_tags('base_layout') }}
   {% block javascript %}{% endblock %}
 

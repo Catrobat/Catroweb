@@ -1,6 +1,4 @@
-@use '~@material/list/mdc-list';
-@use '~@material/menu-surface/mdc-menu-surface';
-@use '~@material/menu/mdc-menu';
+@import '../Components/MdcMenu';
 
 ul {
   padding: 0;

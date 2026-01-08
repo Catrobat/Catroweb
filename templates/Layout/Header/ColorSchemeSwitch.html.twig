@@ -1,0 +1,32 @@
+<div class="mdc-menu-surface--anchor">
+    <div class="mdc-touch-target-wrapper">
+        <button id="top-app-bar__btn-color-scheme"
+                class="mdc-top-app-bar__action-item mdc-icon-button mdc-icon-button--touch material-icons"
+                aria-label="Select color scheme">
+            <div class="mdc-icon-button__ripple"></div>
+            contrast
+            <div class="mdc-icon-button__touch"></div>
+        </button>
+    </div>
+
+    <div id="color-scheme-menu" class="mdc-menu mdc-menu-surface">
+        <ul class="mdc-deprecated-list mdc-deprecated-list--icon-list" role="menu" aria-hidden="true"
+            aria-orientation="vertical" tabindex="-1">
+            <li class="mdc-deprecated-list-item" role="menuitem" data-value="light">
+                <span class="mdc-deprecated-list-item__ripple"></span>
+                <span class="mdc-deprecated-list-item__graphic material-icons">light_mode</span>
+                <span class="mdc-deprecated-list-item__text">{{ 'color-scheme.light'|trans({}, 'catroweb') }}</span>
+            </li>
+            <li class="mdc-deprecated-list-item" role="menuitem" data-value="dark">
+                <span class="mdc-deprecated-list-item__ripple"></span>
+                <span class="mdc-deprecated-list-item__graphic material-icons">dark_mode</span>
+                <span class="mdc-deprecated-list-item__text">{{ 'color-scheme.dark'|trans({}, 'catroweb') }}</span>
+            </li>
+            <li class="mdc-deprecated-list-item" role="menuitem" data-value="auto">
+                <span class="mdc-deprecated-list-item__ripple"></span>
+                <span class="mdc-deprecated-list-item__graphic material-icons">contrast</span>
+                <span class="mdc-deprecated-list-item__text">{{ 'color-scheme.auto'|trans({}, 'catroweb') }}</span>
+            </li>
+        </ul>
+    </div>
+</div>

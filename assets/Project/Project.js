@@ -464,8 +464,7 @@ export const Project = function (
               } else {
                 const img = document.createElement('IMG')
                 img.src = wowBlack
-                img.className = 'wow'
-                img.id = 'wow-reaction-modal'
+                img.className = 'wow wow-reaction-modal'
                 img.alt = 'Wow Reaction'
                 likeTypes.appendChild(img)
               }
