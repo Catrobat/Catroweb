@@ -4,7 +4,8 @@ use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 $finder = PhpCsFixer\Finder::create()
   ->in(__DIR__)
-  ->exclude(['var', 'node_modules', 'vendor']);
+    ->exclude(['var', 'node_modules', 'vendor'])
+    ->notPath('config/reference.php');
 
 $config = new PhpCsFixer\Config();
 $config

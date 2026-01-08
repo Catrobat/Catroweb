@@ -39,5 +39,5 @@ runs:
         then
           echo "Cache hit - skipping dependency installation"
         else
-          SKIP_FIX=1 composer install --prefer-dist --no-progress
+          composer install --prefer-dist --no-progress
         fi
