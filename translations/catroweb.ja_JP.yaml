@@ -76,6 +76,10 @@ oauthInfo: '外部アカウントを使用してログインしました。ラ�
 oauthHere: "ここ"
 statistics: "統計情報"
 languageSelection: "Language selection"
+color-scheme:
+  auto: '自動'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

@@ -76,6 +76,10 @@ oauthInfo: 'คุณเพิ่งใช้บัญชีภายนอก�
 oauthHere: "ที่นี่"
 statistics: "สถิติ"
 languageSelection: "การเลือกภาษา"
+color-scheme:
+  auto: 'อัตโนมัติ'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

@@ -76,6 +76,10 @@ oauthInfo: 'آپ نے لاگ ان کرنے کے لئے صرف ایک بیرون�
 oauthHere: "یہاں"
 statistics: "اعداد و شمار"
 languageSelection: "زبان کا انتخاب"
+color-scheme:
+  auto: 'خودکار'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

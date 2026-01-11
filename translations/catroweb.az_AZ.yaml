@@ -76,6 +76,10 @@ oauthInfo: 'Giriş etmək üçün xarici bir hesab istifadə etdiniz. Sizin üç
 oauthHere: "bura"
 statistics: "Statistikalar"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Avto'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

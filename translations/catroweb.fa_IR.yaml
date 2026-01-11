@@ -76,6 +76,10 @@ oauthInfo: 'شما به تازگی از یک حساب خارجی برای ورو
 oauthHere: "اینجا"
 statistics: "آمارها"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'خودکار'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

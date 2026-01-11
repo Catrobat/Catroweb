@@ -76,6 +76,10 @@ oauthInfo: '방금 외부 계정을 사용하여 로그인했습니다. 사용�
 oauthHere: "여기"
 statistics: "통계"
 languageSelection: "Language selection"
+color-scheme:
+  auto: '자동'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

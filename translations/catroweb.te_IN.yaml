@@ -76,6 +76,10 @@ oauthInfo: 'మీరు ఇప్పుడే లాగిన్ అవ్వ�
 oauthHere: "ఇక్కడ"
 statistics: "గణాంకాలు"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Auto'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

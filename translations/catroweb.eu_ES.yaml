@@ -76,6 +76,10 @@ oauthInfo: 'Kanpoko kontu bat erabili berri duzu saioa hasteko. Ausazko izen bat
 oauthHere: "hemen"
 statistics: "Estatistikak"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Automatikoa'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

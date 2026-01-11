@@ -76,6 +76,10 @@ oauthInfo: '您刚刚使用了一个外部帐户登录。我们为您创建了�
 oauthHere: "此处"
 statistics: "统计"
 languageSelection: "Language selection"
+color-scheme:
+  auto: '自动'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:
