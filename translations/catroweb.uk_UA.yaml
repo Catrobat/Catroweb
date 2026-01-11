@@ -76,6 +76,10 @@ oauthInfo: 'Ви щойно використали зовнішній облік
 oauthHere: "тут"
 statistics: "Показники"
 languageSelection: "Вибір мови"
+color-scheme:
+  auto: 'Авто'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

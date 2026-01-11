@@ -76,6 +76,10 @@ oauthInfo: 'Vous venez d''utiliser un compte externe pour vous connecter. Nous a
 oauthHere: "ici"
 statistics: "Statistiques"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Auto'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

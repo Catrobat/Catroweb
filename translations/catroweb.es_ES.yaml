@@ -76,6 +76,10 @@ oauthInfo: 'Acabas de usar una cuenta externa para iniciar sesión. Creamos un n
 oauthHere: "aqui"
 statistics: "Estadísticas"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Auto'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

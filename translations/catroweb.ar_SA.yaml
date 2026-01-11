@@ -76,6 +76,10 @@ oauthInfo: 'لقد استخدمت للتو حساب خارجي لتسجيل ال
 oauthHere: "هنا"
 statistics: "الإحصائيات"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'تلقائي'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

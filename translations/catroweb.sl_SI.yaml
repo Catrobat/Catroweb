@@ -76,6 +76,10 @@ oauthInfo: 'You have just used an external account to log in. We created a rando
 oauthHere: "tukaj"
 statistics: "Statistike"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Samodejno'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

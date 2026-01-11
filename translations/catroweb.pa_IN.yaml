@@ -76,6 +76,10 @@ oauthInfo: 'ਤੁਸੀਂ ਲੌਗ ਇਨ ਕਰਨ ਲਈ ਹੁਣੇ ਇ�
 oauthHere: "ਇਥੇ"
 statistics: "ਅੰਕੜੇ"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'ਆਟੋ'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

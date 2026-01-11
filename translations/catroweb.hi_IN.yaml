@@ -76,6 +76,10 @@ oauthInfo: "\nआपने अभी प्रवेश करने के ल�
 oauthHere: "यहां"
 statistics: "आंकड़े"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'ऑटो'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:
