@@ -76,6 +76,10 @@ oauthInfo: 'Вы только что использовали аккаунт с�
 oauthHere: "здесь"
 statistics: "Статистика"
 languageSelection: "Выбор языка"
+color-scheme:
+  auto: 'Авто'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

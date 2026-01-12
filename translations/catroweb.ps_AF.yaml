@@ -76,6 +76,10 @@ oauthInfo: 'تاسو یوازې د ننوتلو لپاره یو بهرنی حس�
 oauthHere: "دلته"
 statistics: "احصایې"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'اتومات'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

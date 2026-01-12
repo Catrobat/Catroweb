@@ -76,6 +76,10 @@ oauthInfo: 'Du hast einen externen Account zum Einloggen benutzt. Wir haben für
 oauthHere: "hier"
 statistics: "Statistiken"
 languageSelection: "Sprachwahl"
+color-scheme:
+  auto: 'automatisch'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:
