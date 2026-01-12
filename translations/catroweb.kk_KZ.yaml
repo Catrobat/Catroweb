@@ -76,6 +76,10 @@ oauthInfo: 'Жүйеге кіру үшін жаңа ғана сыртқы тір
 oauthHere: "мұнда"
 statistics: "Статисткалар"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Авто'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

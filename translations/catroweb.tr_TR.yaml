@@ -76,6 +76,10 @@ oauthInfo: 'Oturum açmak için harici bir hesap kullandınız. Sizin için rast
 oauthHere: "buraya"
 statistics: "İstatistik"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Otomatik'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

@@ -76,6 +76,10 @@ oauthInfo: 'Sapo keni përdorur një llogari të jashtme për t''u identifikuar.
 oauthHere: "këtu"
 statistics: "Statistikat"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Automatike'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

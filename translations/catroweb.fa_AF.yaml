@@ -76,6 +76,10 @@ oauthInfo: 'شما فقط از یک حساب خارجی برای ورود به �
 oauthHere: "اینجا"
 statistics: "آمار"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'خودکار'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

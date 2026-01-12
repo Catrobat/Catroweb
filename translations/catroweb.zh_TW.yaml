@@ -76,6 +76,10 @@ oauthInfo: '您剛剛使用外部帳戶登錄。我們為您創建了一個隨�
 oauthHere: "這裡"
 statistics: "統計數據"
 languageSelection: "Language selection"
+color-scheme:
+  auto: '汽車'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:
