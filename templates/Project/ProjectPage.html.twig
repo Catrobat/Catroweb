@@ -89,11 +89,7 @@
     </div>
 
     <div class="d-none d-lg-block col-lg-4 mt-4 ">
-      {% if logged_in %}
-        {{ include('Project/DownloadButton.html.twig') }}
-      {% else %}
-        {{ include('Project/DownloadDisabledButton.html.twig') }}
-      {% endif %}
+      {{ include('Project/DownloadButton.html.twig') }}
       {% if not isIOS() %}
         <div class="mt-3">
           {{ include('Project/ApkGenerationButtons.html.twig') }}
@@ -118,11 +114,7 @@
       </div>
     </div>
     <div class="col-7 col-sm-8 mt-3" style="padding-left: 0;">
-      {% if logged_in %}
-        {{ include('Project/DownloadButton.html.twig', {suffix: '-small'}) }}
-      {% else %}
-        {{ include('Project/DownloadDisabledButton.html.twig', {suffix: '-small'}) }}
-      {% endif %}
+      {{ include('Project/DownloadButton.html.twig', {suffix: '-small'}) }}
     </div>
   </div>
 
