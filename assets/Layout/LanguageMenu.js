@@ -14,7 +14,7 @@ function hideLanguageMenu() {
   document.body.style.overflow = 'auto'
 
   const lang = getCookie('hl')
-  const radioButtons = document.querySelectorAll('.language-option.radio')
+  const radioButtons = document.querySelectorAll('.language-option-radio')
   radioButtons.forEach((radio) => {
     if (lang != null && radio.value === lang) {
       radio.checked = true
@@ -23,10 +23,18 @@ function hideLanguageMenu() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+  const radioButtons = document.querySelectorAll('.language-option-radio')
+
+  radioButtons.forEach((radio) => {
+    radio.addEventListener('change', function () {
+      updateLanguageSelection()
+    })
+  })
+
   const okButton = document.querySelector('#language_button_ok')
 
   okButton.addEventListener('click', function () {
-    const radioButtons = document.querySelectorAll('.language-option.radio')
+    const radioButtons = document.querySelectorAll('.language-option-radio')
     radioButtons.forEach((radio) => {
       if (radio.checked) {
         changeLanguage(radio.value)
@@ -35,6 +43,30 @@ document.addEventListener('DOMContentLoaded', function () {
     hideLanguageMenu()
   })
 })
+
+function updateLanguageSelection() {
+  const radioButtons = document.querySelectorAll('.language-option-radio')
+
+  radioButtons.forEach((radio) => {
+    const label = radio.closest('.language-option')
+    const checkmark = label.querySelector('.language-check')
+
+    if (radio.checked) {
+      label.classList.add('language-option-selected')
+      if (!checkmark) {
+        const check = document.createElement('span')
+        check.className = 'language-check'
+        check.textContent = '✓'
+        label.appendChild(check)
+      }
+    } else {
+      label.classList.remove('language-option-selected')
+      if (checkmark) {
+        checkmark.remove()
+      }
+    }
+  })
+}
 
 function changeLanguage(lang) {
   document.cookie = `hl=${lang}; path=/`

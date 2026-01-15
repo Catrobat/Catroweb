@@ -4,22 +4,62 @@
 
 <div class="language-body-overlay"></div>
 <div class="language-body">
-    <div class="language-header">{{ 'languageSelection'|trans({}, 'catroweb') }}</div>
+    <div class="language-header">
+        <span class="language-header-icon">🌐</span>
+        {{ 'languageSelection'|trans({}, 'catroweb') }}
+    </div>
     <div class="language-option-container" >
         {% set languageOptionList = getLanguageOptions() %}
+        {% set flagMap = {
+            af_ZA: '🇿🇦', ar_SA: '🇸🇦', az_AZ: '🇦🇿',
+            bg_BG: '🇧🇬', bn_BD: '🇧🇩', bs_BA: '🇧🇦',
+            ca_ES: '🏴', cs_CZ: '🇨🇿', da_DK: '🇩🇰',
+            de: '🇩🇪', de_DE: '🇩🇪', de_AT: '🇦🇹', de_CH: '🇨🇭',
+            el_GR: '🇬🇷',
+            en: '🇬🇧', en_GB: '🇬🇧', en_US: '🇺🇸',
+            es: '🇪🇸', es_ES: '🇪🇸', eu_ES: '🏴',
+            fa_AF: '🇦🇫', fa_IR: '🇮🇷', fi_FI: '🇫🇮',
+            fr: '🇫🇷', fr_FR: '🇫🇷', gl_ES: '🏴',
+            gu_IN: '🇮🇳', he_IL: '🇮🇱', hi_IN: '🇮🇳',
+            hr_HR: '🇭🇷', hu_HU: '🇭🇺', id_ID: '🇮🇩',
+            ig_NG: '🇳🇬', it: '🇮🇹', it_IT: '🇮🇹',
+            ja: '🇯🇵', ja_JP: '🇯🇵', ka_GE: '🇬🇪',
+            kk_KZ: '🇰🇿', kn_IN: '🇮🇳', ko: '🇰🇷', ko_KR: '🇰🇷',
+            lt_LT: '🇱🇹', mk_MK: '🇲🇰', ml_IN: '🇮🇳',
+            ms_MY: '🇲🇾', nl: '🇳🇱', nl_NL: '🇳🇱',
+            no_NO: '🇳🇴', pa_IN: '🇮🇳', pl: '🇵🇱', pl_PL: '🇵🇱',
+            ps_AF: '🇦🇫', pt: '🇵🇹', pt_BR: '🇧🇷', pt_PT: '🇵🇹',
+            ro_RO: '🇷🇴', ru: '🇷🇺', ru_RU: '🇷🇺',
+            sd_PK: '🇵🇰', si_LK: '🇱🇰', sk_SK: '🇸🇰',
+            sl_SI: '🇸🇮', sq_AL: '🇦🇱', sr_Latn: '🇷🇸',
+            sv: '🇸🇪', sv_SE: '🇸🇪', sw_KE: '🇰🇪',
+            ta_IN: '🇮🇳', te_IN: '🇮🇳', th: '🇹🇭', th_TH: '🇹🇭',
+            tl_PH: '🇵🇭', tr: '🇹🇷', tr_TR: '🇹🇷',
+            uk: '🇺🇦', uk_UA: '🇺🇦', ur_PK: '🇵🇰',
+            uz_UZ: '🇺🇿', vi: '🇻🇳', vi_VN: '🇻🇳',
+            yo_NG: '🇳🇬', zh: '🇨🇳', zh_CN: '🇨🇳', zh_TW: '🇹🇼',
+        } %}
         {% for languageOption in languageOptionList %}
-            <label for="{{ languageOption[0] }}" class="language-option" role="option">
-                <input class="language-option radio" type="radio" id="{{ languageOption[0] }}" name="language_option" value="{{ languageOption[0] }}" {% if languageOption[2] %}checked{% endif %}>
-                <span>{{ languageOption[1] }}</span>
+            <label for="{{ languageOption[0] }}" class="language-option{% if languageOption[2] %} language-option-selected{% endif %}" role="option">
+                <input class="language-option-radio" type="radio" id="{{ languageOption[0] }}" name="language_option" value="{{ languageOption[0] }}" {% if languageOption[2] %}checked{% endif %}>
+                <span class="language-flag">{{ flagMap[languageOption[0]] ?? '🏳️' }}</span>
+                <span class="language-name">{{ languageOption[1] }}</span>
+                {% if languageOption[2] %}
+                    <span class="language-check">✓</span>
+                {% endif %}
             </label>
         {% else %}
-            <div>{{ 'menu.noLanguageOptionsAvailable'|trans({}, 'catroweb') }}</div>
+            <div class="language-empty">{{ 'menu.noLanguageOptionsAvailable'|trans({}, 'catroweb') }}</div>
         {% endfor %}
 
     </div>
     <div class="language-button-container">
-        <div><button class="language-button-ok" id="language_button_ok">OK</button></div>
-        <div><button class="language-button-cancel" id="language_button_cancel">Cancel</button></div>
+        <button class="language-button language-button-cancel" id="language_button_cancel">
+            {{ 'cancel'|trans({}, 'catroweb') }}
+        </button>
+        <button class="language-button language-button-ok" id="language_button_ok">
+            {{ 'ok'|trans({}, 'catroweb') }}
+        </button>
     </div>
 
 </div>

@@ -108,8 +108,9 @@
 .expand-button {
   font-size: 24px;
   cursor: pointer;
-  transition: transform 0.2s ease,
-  opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
