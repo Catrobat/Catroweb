@@ -2,35 +2,53 @@
   --maintenance-color1: #333;
   --maintenance-color2: #0097a7;
   --maintenance-font-family1: 'Material Icons', sans-serif;
-  --maintenance-background-color1: #f0f0f0;
+  --maintenance-background-color1: #f9f9f9;
 }
 
-/* Style for the additional information section (initially hidden) */
+#maintenance-container {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+/* Style for the maintenance message */
 .maintenance {
-  border: 1px solid var(--maintenance-color1);
-  border-radius: 10px;
-  padding: 10px;
+  border: none;
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+  border-radius: 0;
+  padding: 16px 20px;
   background-color: var(--maintenance-background-color1);
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin: 10px;
-  transition: box-shadow 0.9s;
-  &:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 10px rgb(0 0 0 / 30%);
+  align-items: flex-start;
+  gap: 16px;
+
+  @media (width <= 768px) {
+    padding: 14px 16px;
+    gap: 12px;
   }
 }
 
 .maintenance-content {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-width: 0;
 }
 
 .maintenance-text {
   display: flex;
-  align-items: center;
-  margin-right: 10px;
+  align-items: flex-start;
+  gap: 12px;
+
+  @media (width <= 768px) {
+    gap: 10px;
+  }
+
+  span {
+    flex: 1;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
 }
 
 .bold-text {
@@ -45,7 +63,14 @@
 .maintenance-icon {
   font-size: 24px;
   color: var(--maintenance-color2);
-  margin-right: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (width <= 768px) {
+    font-size: 22px;
+  }
 }
 
 .material-icons {
@@ -59,22 +84,45 @@
   font: inherit;
   cursor: pointer;
   outline: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+
   &:hover {
-    font-weight: bold;
+    opacity: 1;
   }
 }
 
 .material-icons.md-48 {
-  font-size: 26px;
+  font-size: 24px;
   color: var(--maintenance-color2);
+
+  @media (width <= 768px) {
+    font-size: 22px;
+  }
 }
 
 .expand-button {
   font-size: 24px;
   cursor: pointer;
-  transition: transform 0.3s;
-  top: 50%;
-  right: 10px;
+  transition: transform 0.2s ease,
+  opacity 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  opacity: 0.5;
+
+  @media (width <= 768px) {
+    font-size: 20px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .expanded {
@@ -83,8 +131,15 @@
 
 .additional-info-section {
   display: none;
-  background-color: var(--maintenance-background-color1);
-  margin-top: 10px;
-  padding: 10px;
-  transition: display 0.3s;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgb(0 0 0 / 8%);
+  line-height: 1.6;
+  color: rgb(0 0 0 / 70%);
+
+  @media (width <= 768px) {
+    margin-top: 10px;
+    padding-top: 10px;
+    font-size: 14px;
+  }
 }
