@@ -6,7 +6,6 @@ namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\FeaturedProgram;
@@ -40,9 +39,9 @@ class ProjectsResponseManager extends AbstractResponseManager
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     private readonly ProjectManager $project_manager,
-    ResponseCacheManager $response_cache_manager,
+    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
   ) {
-    parent::__construct($translator, $serializer, $response_cache_manager);
+    parent::__construct($translator, $serializer, $cache);
   }
 
   /**
@@ -167,7 +166,8 @@ class ProjectsResponseManager extends AbstractResponseManager
         [
           'id' => $extraced_project->getId(),
         ],
-        UrlGeneratorInterface::ABSOLUTE_URL), '/');
+        UrlGeneratorInterface::ABSOLUTE_URL
+      ), '/');
     }
 
     if (in_array('filesize', $attributes_list, true)) {
@@ -269,7 +269,8 @@ class ProjectsResponseManager extends AbstractResponseManager
         'theme' => $this->parameter_bag->get('umbrellaTheme'),
         'id' => $project->getId(),
       ],
-      UrlGeneratorInterface::ABSOLUTE_URL);
+      UrlGeneratorInterface::ABSOLUTE_URL
+    );
   }
 
   public function createUploadErrorResponse(string $locale): UploadErrorResponse

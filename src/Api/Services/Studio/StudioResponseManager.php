@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Api\Services\Studio;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\Studio\Studio;
 use OpenAPI\Server\Model\StudioResponse;
 use OpenAPI\Server\Service\SerializerInterface;
@@ -19,12 +18,12 @@ class StudioResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    ResponseCacheManager $response_cache_manager,
+    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
     private readonly UrlGeneratorInterface $url_generator,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly RequestStack $request_stack,
   ) {
-    parent::__construct($translator, $serializer, $response_cache_manager);
+    parent::__construct($translator, $serializer, $cache);
   }
 
   public function createStudioResponse(Studio $studio): StudioResponse

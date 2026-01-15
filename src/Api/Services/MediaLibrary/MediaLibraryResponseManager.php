@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Api\Services\MediaLibrary;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
@@ -20,12 +19,12 @@ class MediaLibraryResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    ResponseCacheManager $response_cache_manager,
+    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
     private readonly UrlGeneratorInterface $url_generator,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly MediaPackageFileRepository $media_package_file_repository,
   ) {
-    parent::__construct($translator, $serializer, $response_cache_manager);
+    parent::__construct($translator, $serializer, $cache);
   }
 
   public function createMediaFilesDataResponse(array $media_package_files, ?string $attributes): array
@@ -86,7 +85,8 @@ class MediaLibraryResponseManager extends AbstractResponseManager
           'theme' => $this->parameter_bag->get('umbrellaTheme'),
           'id' => $media_package_file->getId(),
         ],
-        UrlGeneratorInterface::ABSOLUTE_URL);
+        UrlGeneratorInterface::ABSOLUTE_URL
+      );
     }
 
     if (in_array('size', $attributes_list, true)) {

@@ -238,7 +238,7 @@ class RemixManager
     foreach ($remixes_data as $remix_data) {
       $parent_project_id = $remix_data->getProjectId();
 
-      if ($parent_project_id <= 0) {
+      if ('' === $parent_project_id) {
         continue;
       }
 

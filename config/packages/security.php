@@ -241,12 +241,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         [
           'path' => '^/api/search/?$',
-            'roles' => 'PUBLIC_ACCESS',
-            'methods' => ['GET'],
-            'requires_channel' => '%env(SECURE_SCHEME)%',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
-          [
-              'path' => '^/api/project/[a-zA-Z0-9\\\-]+/catrobat/?$',
+        [
+          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/catrobat/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',

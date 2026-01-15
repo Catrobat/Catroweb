@@ -6,7 +6,6 @@ namespace App\Api\Services\Search;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Projects\ProjectsResponseManager;
-use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use OpenAPI\Server\Model\BasicUserDataResponse;
@@ -20,10 +19,10 @@ class SearchResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    ResponseCacheManager $response_cache_manager,
+    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
     protected ProjectsResponseManager $projectsResponseManager,
   ) {
-    parent::__construct($translator, $serializer, $response_cache_manager);
+    parent::__construct($translator, $serializer, $cache);
   }
 
   public function getSearchResponse(array $projects_response, array $users_response): SearchResponse

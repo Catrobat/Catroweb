@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\User\User;
 use App\Security\Authentication\CookieService;
 use OpenAPI\Server\Model\BasicUserDataResponse;
@@ -19,10 +18,10 @@ class UserResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    ResponseCacheManager $response_cache_manager,
+    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
     private readonly CookieService $cookie_service,
   ) {
-    parent::__construct($translator, $serializer, $response_cache_manager);
+    parent::__construct($translator, $serializer, $cache);
   }
 
   public function createBasicUserDataResponse(User $user, ?string $attributes = null): BasicUserDataResponse

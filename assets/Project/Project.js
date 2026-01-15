@@ -113,6 +113,10 @@ export const Project = function (
     // Older app version do not support new features and projects that use them
     if (isWebView && !supported) {
       showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText)
+      resetDownloadButtonIcon(icon, loadingSpinner)
+      setTimeout(() => {
+        button.disabled = false
+      }, 2000)
       return
     }
 
@@ -121,6 +125,10 @@ export const Project = function (
       downloadUrl += downloadUrl.includes('?') ? '&' : '?'
       downloadUrl += 'fname=' + encodeURIComponent(projectName)
       window.location = downloadUrl
+      resetDownloadButtonIcon(icon, loadingSpinner)
+      setTimeout(() => {
+        button.disabled = false
+      }, 2000)
       return
     }
 
@@ -150,10 +158,10 @@ export const Project = function (
       .finally(() => {
         // UX: Reset the button to further indicate the successful download
         resetDownloadButtonIcon(icon, loadingSpinner)
-        // Performance: Keep the button disabled to prevent spamming the download button
+        // UX: Keep the button disabled briefly to prevent accidental double-clicks
         setTimeout(() => {
           button.disabled = false
-        }, 15000)
+        }, 2000)
       })
   }
 
