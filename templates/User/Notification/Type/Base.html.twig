@@ -1,9 +1,15 @@
-{% block notification_leftAvatar %}{% endblock %}
-{% block notification_body %}{% endblock %}
-{% block dot %}
-  <div class="col-2 my-auto mark-as-read">
-    {% if notification.getSeen() is same as(false) %}
-      <span class="dot"></span>
-    {% endif %}
+<div class="notification-card {% if notification.getSeen() is same as(false) %}notification-unread{% endif %}">
+  <div class="notification-avatar">
+    {% block notification_leftAvatar %}{% endblock %}
   </div>
-{% endblock %}
+  <div class="notification-content">
+    {% block notification_body %}{% endblock %}
+  </div>
+  <div class="notification-indicator">
+    {% block dot %}
+      {% if notification.getSeen() is same as(false) %}
+        <span class="dot"></span>
+      {% endif %}
+    {% endblock %}
+  </div>
+</div>

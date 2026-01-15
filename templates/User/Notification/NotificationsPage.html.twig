@@ -78,7 +78,7 @@
     <div id="{{ category.id }}" class="tab-pane fade {% if loop.first %} show active {% endif %}" role="tabpanel">
         {% for notification in category.notifications %}
           <div id="catro-notification-{{ notification.id }}"
-              class="js-notification-interaction row my-3 no-gutters ripple notif"
+              class="js-notification-interaction notification-item"
               data-notification-id="{{ notification.id }}"
               data-notification-instance="{{ instance[notification.id] }}"
               data-notification-seen="{{ notification.getSeen() }}"
@@ -88,7 +88,7 @@
           </div>
         {% endfor %}
 
-      <div id="no-notifications" class="text-center mb-5 {{ category.notifications is empty ? 'd-block' : 'd-none' }}">
+      <div class="no-notifications text-center mb-5 {{ category.notifications is empty ? 'd-block' : 'd-none' }}">
         <span id="{{ category.emptyID }}">{{ category.emptyMessage }}</span>
       </div>
 

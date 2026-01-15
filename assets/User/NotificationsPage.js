@@ -253,20 +253,18 @@ class UserNotifications {
 
   updateNoNotificationsPlaceholder(type, fetchedAmount) {
     if (fetchedAmount > 0) {
-      if (type === 'all') {
-        document.getElementById('no-notif-all').style.display = 'none'
-      }
-      if (type === 'follow') {
-        document.getElementById('no-notif-follow').style.display = 'none'
-      }
-      if (type === 'comment') {
-        document.getElementById('no-notif-comment').style.display = 'none'
-      }
-      if (type === 'reaction') {
-        document.getElementById('no-notif-reaction').style.display = 'none'
-      }
-      if (type === 'remix') {
-        document.getElementById('no-notif-remix').style.display = 'none'
+      let emptyId = ''
+      if (type === 'all') emptyId = 'no-notif-all'
+      if (type === 'follow') emptyId = 'no-notif-follow'
+      if (type === 'comment') emptyId = 'no-notif-comment'
+      if (type === 'reaction') emptyId = 'no-notif-reaction'
+      if (type === 'remix') emptyId = 'no-notif-remix'
+
+      if (emptyId) {
+        const emptyElement = document.getElementById(emptyId)
+        if (emptyElement) {
+          emptyElement.parentElement.classList.replace('d-block', 'd-none')
+        }
       }
     }
   }
@@ -276,15 +274,15 @@ class UserNotifications {
     const imgLeft = self.generateNotificationImage(fetched)
     const msg = self.generateNotificationMessage(fetched)
     const notificationId = idPrefix + fetched.id
-    let notificationDot = ''
-    if (!fetched.seen) {
-      notificationDot =
-        '<div class="col-2 my-auto mark-as-read">' + '<span class="dot">' + '</span>' + '</div>'
-    }
-    const notificationBody = `<div id="${notificationId}" class="row my-3 no-gutters ripple notif">
-        <div class="col-2 my-auto">${imgLeft}</div>
-        <div class="col-8 ps-3 my-auto">${msg}</div>
-        ${notificationDot}
+    const unreadClass = !fetched.seen ? ' notification-unread' : ''
+    const notificationDot = !fetched.seen ? '<span class="dot"></span>' : ''
+
+    const notificationBody = `<div id="${notificationId}" class="notification-item">
+        <div class="notification-card${unreadClass}">
+          <div class="notification-avatar">${imgLeft}</div>
+          <div class="notification-content">${msg}</div>
+          <div class="notification-indicator">${notificationDot}</div>
+        </div>
       </div>`
     container.insertAdjacentHTML('beforeend', notificationBody)
   }
@@ -297,14 +295,14 @@ class UserNotifications {
         imgLeft = fetched.avatar
       }
       return `<a href="${self.profilePath}/${fetched.from}">
-        <img class="img-fluid notification-avatar-round" src="${imgLeft}" alt="">
+        <img class="notification-avatar-img" src="${imgLeft}" alt="${fetched.from_name || ''}">
       </a>`
     } else {
-      let imgLeft = '<span class="material-icons broadcast-icon">notifications_active</span>'
+      let iconName = 'notifications_active'
       if (fetched.prize) {
-        imgLeft = '<span class="material-icons broadcast-icon">cake</span>'
+        iconName = 'cake'
       }
-      return imgLeft
+      return `<span class="material-icons notification-broadcast-icon">${iconName}</span>`
     }
   }
 
@@ -374,12 +372,18 @@ class UserNotifications {
   markAllRead() {
     const self = this
 
-    new ApiFetch(self.markAllSeen, 'PUT')
-      .generateAuthenticatedFetch()
-      .then(() => self.hideBadge())
-      .catch((error) => {
-        self.handleError(error)
-      })
+    // We delay marking all as read by 2 seconds to allow the user to see what's new
+    setTimeout(() => {
+      const badge = document.getElementById('sidebar_badge--unseen-notifications')
+      if (badge && badge.style.display !== 'none') {
+        new ApiFetch(self.markAllSeen, 'PUT')
+          .generateAuthenticatedFetch()
+          .then(() => self.hideBadge())
+          .catch((error) => {
+            self.handleError(error)
+          })
+      }
+    }, 2000)
   }
 
   hideBadge() {

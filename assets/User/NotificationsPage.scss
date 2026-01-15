@@ -1,111 +1,208 @@
+@use "sass:color";
 @use '~@material/chips/deprecated/mdc-chips';
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
 
-.dot {
+// ===== Notification List Container =====
+.tab-content {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.tab-pane {
+  padding: 0;
+}
+
+// ===== Individual Notification Item =====
+.notification-item {
+  margin-bottom: 0.75rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ===== Notification Card =====
+.notification-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  transition: all 0.2s ease;
+  cursor: pointer;
   position: relative;
-  display: inline-flex;
-  width: 15px;
-  height: 15px;
-  background-color: var(--primary);
+
+  &:hover {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    background-color: #f5f5f5;
+  }
+
+  // Read notification styling (subtle dimming)
+  &:not(.notification-unread) {
+    background-color: #fafafa;
+    opacity: 0.8;
+
+    .notification-content {
+      color: #777;
+    }
+
+    .notification-avatar-img {
+      filter: grayscale(20%);
+    }
+  }
+
+  // Unread notification styling
+  &.notification-unread {
+    background-color: #f0f9ff;
+    border-left: 4px solid var(--primary, #007bff);
+    box-shadow: 0 2px 4px rgb(0 123 255 / 10%);
+
+    &:hover {
+      background-color: #e6f4ff;
+    }
+
+    .notification-content {
+      font-weight: 500;
+    }
+  }
+
+  // Mobile layout
+  @media screen and (width <= 576px) {
+    gap: 0.75rem;
+    padding: 0.875rem;
+  }
+}
+
+// ===== Avatar Section =====
+.notification-avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  @media screen and (width <= 576px) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.notification-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 50%;
-}
+  transition: transform 0.2s;
 
-.mark-as-read {
-  @media screen and (width <= 991px) {
-    margin-right: 0;
-    margin-left: auto;
-  }
-
-  @media screen and (width <= 250px) {
-    padding-left: 20px;
+  &:hover {
+    transform: scale(1.05);
   }
 }
 
-.notif {
-  margin-left: 8px;
-}
+// Broadcast/System notification icon
+.notification-broadcast-icon {
+  font-size: 48px;
+  color: var(--primary, #007bff);
+  transition: transform 0.2s;
 
-.avatar {
-  padding-left: 3px;
-}
-
-.ripple {
-  background-position: center;
-  transition: background 0.6s;
-}
-
-.ripple:active {
-  background-color: #d9d9d9;
-  background-size: 100%;
-  transition: background 0s;
-}
-
-.broadcast-icon {
-  font-size: 2vw;
-
-  @media screen and (width <= 2500px) {
-    font-size: 3vw;
+  &:hover {
+    transform: scale(1.1);
   }
 
-  @media screen and (width <= 1600px) {
-    font-size: 4.7vw;
-  }
-
-  @media screen and (width <= 1400px) {
-    font-size: 5vw;
-  }
-
-  @media screen and (width <= 1300px) {
-    font-size: 5.3vw;
-  }
-
-  @media screen and (width <= 1198px) {
-    font-size: 4.5vw;
-  }
-
-  @media screen and (width <= 1100px) {
-    font-size: 5.7vw;
-  }
-
-  @media screen and (width <= 991px) {
-    font-size: 4vw;
-  }
-
-  @media screen and (width <= 836px) {
-    font-size: 4.5vw;
-  }
-
-  @media screen and (width <= 767px) {
-    font-size: 5.5vw;
-  }
-
-  @media screen and (width <= 680px) {
-    font-size: 6vw;
-  }
-
-  @media screen and (width <= 575px) {
-    font-size: 15vw;
-  }
-
-  @media screen and (width <= 450px) {
-    font-size: 13.5vw;
-  }
-
-  @media screen and (width <= 350px) {
-    font-size: 12vw;
+  @media screen and (width <= 576px) {
+    font-size: 40px;
   }
 }
 
-.notification-header {
-  width: 100%;
+// ===== Content Section =====
+.notification-content {
+  flex: 1;
+  min-width: 0; // Allow text truncation
+  color: #333;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+
+  a {
+    color: var(--primary, #007bff);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: color.adjust(#007bff, $lightness: -15%);
+      text-decoration: underline;
+    }
+  }
+
+  @media screen and (width <= 576px) {
+    font-size: 0.875rem;
+  }
 }
 
-.notification-avatar-round {
-  border-radius: 100%;
-  width: 100%;
+// ===== Unread Indicator =====
+.notification-indicator {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
 }
 
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary, #007bff);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgb(0 123 255 / 40%);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgb(0 123 255 / 70%);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgb(0 123 255 / 0%);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgb(0 123 255 / 0%);
+  }
+}
+
+// ===== Empty State =====
+.no-notifications {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #6c757d;
+  font-size: 1rem;
+
+  @media screen and (width <= 576px) {
+    padding: 2rem 1rem;
+    font-size: 0.9375rem;
+  }
+}
+
+// ===== Chip Filter Styling =====
 .chip-selected {
   color: rgb(0 0 0 / 87%);
   background-color: #acacac;
@@ -121,8 +218,20 @@
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  margin-bottom: 1rem;
 
   .chip {
     flex: 0 0 auto;
   }
+}
+
+// ===== Legacy Classes (for backward compatibility) =====
+.notification-header {
+  width: 100%;
+}
+
+.notification-avatar-round {
+  border-radius: 100%;
+  width: 100%;
+  max-width: 50px;
 }
