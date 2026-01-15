@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Api\Services\Base;
 
-use App\Api\Services\ResponseCache\ResponseCacheManager;
-use App\DB\Entity\Api\ResponseCache;
 use OpenAPI\Server\Service\SerializerInterface;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -16,10 +18,12 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
 {
   use TranslatorAwareTrait;
 
+  private const int DEFAULT_CACHE_TTL = 10800; // 3 hours in seconds
+
   public function __construct(
     TranslatorInterface $translator,
     protected SerializerInterface $serializer,
-    protected ResponseCacheManager $response_cache_manager,
+    protected CacheItemPoolInterface $cache,
   ) {
     $this->initTranslator($translator);
   }
@@ -41,31 +45,123 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
   }
 
   /**
-   * @throws \DateMalformedStringException
+   * Get cached response data.
+   *
+   * @return array{response_code: int, response_headers: array, response: mixed}|null
+   *
+   * @throws InvalidArgumentException
    */
-  public function getCachedResponse(string $cache_id, string $time = '-180 minutes'): ?ResponseCache
+  public function getCachedResponse(string $cache_id): ?array
   {
-    /** @var ResponseCache|null $cache_entry */
-    $cache_entry = $this->response_cache_manager->getResponseCacheRepository()->findOneBy(['id' => $cache_id]);
-    if ('prod' !== $_ENV['APP_ENV']) {
-      return null;
-    }
-    if (null === $cache_entry) {
-      return null;
-    }
-    if ($cache_entry->getCachedAt() <= new \DateTime($time)) {
+    if ('prod' !== ($_ENV['APP_ENV'] ?? 'dev')) {
       return null;
     }
 
-    return $cache_entry;
+    $item = $this->cache->getItem($this->sanitizeCacheKey($cache_id));
+
+    return $item->isHit() ? $item->get() : null;
   }
 
   /**
-   * @throws \JsonException
+   * Cache response data.
+   *
+   * @throws InvalidArgumentException
    */
-  public function cacheResponse(string $cache_id, int $response_code, array $responseHeaders, mixed $response): void
+  public function cacheResponse(string $cache_id, int $response_code, array $responseHeaders, mixed $response, int $ttl = self::DEFAULT_CACHE_TTL): void
   {
-    $this->response_cache_manager->addCacheEntry($cache_id, $response_code, $responseHeaders, $response);
+    if ('prod' !== ($_ENV['APP_ENV'] ?? 'dev')) {
+      return;
+    }
+
+    $item = $this->cache->getItem($this->sanitizeCacheKey($cache_id));
+    $item->set([
+      'response_code' => $response_code,
+      'response_headers' => $responseHeaders,
+      'response' => $response,
+    ]);
+    $item->expiresAfter($ttl);
+    $this->cache->save($item);
+  }
+
+  /**
+   * Get cached response or compute it.
+   *
+   * @param callable(CacheItemInterface): array{response_code: int, response_headers: array, response: mixed} $callback
+   *
+   * @return array{response_code: int, response_headers: array, response: mixed}
+   *
+   * @throws InvalidArgumentException
+   */
+  public function getCachedOrCompute(string $cache_id, callable $callback, int $ttl = self::DEFAULT_CACHE_TTL): array
+  {
+    if ('prod' !== ($_ENV['APP_ENV'] ?? 'dev')) {
+      // In non-prod environments, always compute without caching
+      return $callback(new class implements CacheItemInterface, ItemInterface {
+        public function getKey(): string
+        {
+          return '';
+        }
+
+        public function get(): mixed
+        {
+          return null;
+        }
+
+        public function isHit(): bool
+        {
+          return false;
+        }
+
+        public function set(mixed $value): static
+        {
+          return $this;
+        }
+
+        public function expiresAt(?\DateTimeInterface $expiration): static
+        {
+          return $this;
+        }
+
+        public function expiresAfter(\DateInterval|int|null $time): static
+        {
+          return $this;
+        }
+
+        public function getMetadata(): array
+        {
+          return [];
+        }
+
+        public function tag(string|iterable $tags): static
+        {
+          return $this;
+        }
+      });
+    }
+
+    $cache_key = $this->sanitizeCacheKey($cache_id);
+    $item = $this->cache->getItem($cache_key);
+
+    if ($item->isHit()) {
+      return $item->get();
+    }
+
+    $result = $callback($item);
+    $item->set($result);
+    $item->expiresAfter($ttl);
+    $this->cache->save($item);
+
+    return $result;
+  }
+
+  /**
+   * Invalidate cache entry.
+   *
+   * @throws InvalidArgumentException
+   */
+  public function invalidateCache(string $cache_id): void
+  {
+    $this->cache->deleteItem($this->sanitizeCacheKey($cache_id));
   }
 
   protected function getSerializer(): SerializerInterface
@@ -73,16 +169,12 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     return $this->serializer;
   }
 
-  public function extractResponseObject(ResponseCache $cache_entry): array
-  {
-    return unserialize($cache_entry->getResponse()) ?? [];
-  }
-
   /**
-   * @throws \JsonException
+   * Sanitize cache key to be PSR-6 compliant.
    */
-  public function extractResponseHeader(ResponseCache $cache_entry): array
+  private function sanitizeCacheKey(string $key): string
   {
-    return json_decode($cache_entry->getResponseHeaders(), true, 512, JSON_THROW_ON_ERROR) ?? [];
+    // PSR-6 forbids: {}()/\@:
+    return str_replace(['/', '\\', '@', ':', '{', '}', '(', ')'], '_', $key);
   }
 }

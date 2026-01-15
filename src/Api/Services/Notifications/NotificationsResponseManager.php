@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Api\Services\Notifications;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -20,12 +19,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NotificationsResponseManager extends AbstractResponseManager
 {
-  public function __construct(TranslatorInterface $translator,
+  public function __construct(
+    TranslatorInterface $translator,
     SerializerInterface $serializer,
-    ResponseCacheManager $response_cache_manager,
-    private readonly NotificationRepository $notification_repository)
-  {
-    parent::__construct($translator, $serializer, $response_cache_manager);
+    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
+    private readonly NotificationRepository $notification_repository,
+  ) {
+    parent::__construct($translator, $serializer, $cache);
   }
 
   public function createNotificationsCountResponse(User $user): NotificationsCountResponse
