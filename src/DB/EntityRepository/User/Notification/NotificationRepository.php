@@ -84,20 +84,15 @@ class NotificationRepository extends ServiceEntityRepository
     $qb = $this->getEntityManager()->createQueryBuilder();
 
     $qb
-      ->select('n')
-      ->from(CatroNotification::class, 'n')
-      ->andWhere($qb->expr()->eq('n.user', ':user_id'))
-      ->setParameter(':user_id', $user->getId())
-      ->andWhere($qb->expr()->eq('n.seen', 0))
+      ->update(CatroNotification::class, 'n')
+      ->set('n.seen', ':seen')
+      ->where($qb->expr()->eq('n.user', ':user'))
+      ->andWhere($qb->expr()->eq('n.seen', ':unseen'))
+      ->setParameter('seen', true)
+      ->setParameter('user', $user)
+      ->setParameter('unseen', false)
+      ->getQuery()
+      ->execute()
     ;
-
-    $unseen_notifications = $qb->getQuery()->getResult();
-
-    foreach ($unseen_notifications as $unseen_notification) {
-      $unseen_notification->setSeen(true);
-      $this->getEntityManager()->persist($unseen_notification);
-    }
-
-    $this->getEntityManager()->flush();
   }
 }

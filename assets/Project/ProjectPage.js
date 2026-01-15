@@ -32,7 +32,19 @@ const appLanguageElement = document.querySelector('#app-language')
 let editorNavigation = null
 
 if (projectElement.dataset.myProject === 'true') {
-  new MDCTextField(document.querySelector('.comment-message'))
+  // Initialize MDCTextField only if a proper mdc-text-field element exists.
+  const commentMessageWrapper = document.querySelector('.comment-message')
+  if (commentMessageWrapper) {
+    // Prefer an explicit .mdc-text-field inside the wrapper, otherwise try the wrapper itself
+    const commentMdcRoot =
+      commentMessageWrapper.querySelector('.mdc-text-field') ||
+      (commentMessageWrapper.classList && commentMessageWrapper.classList.contains('mdc-text-field')
+        ? commentMessageWrapper
+        : null)
+    if (commentMdcRoot) {
+      new MDCTextField(commentMdcRoot)
+    }
+  }
 
   const nameEditorTextFieldModel = new ProjectEditorTextFieldModel(
     projectDescriptionCreditsElement.dataset.projectId,

@@ -22,7 +22,6 @@ class ExceptionEventListener
 {
   public function __construct(
     protected LoggerInterface $logger,
-    protected LoggerInterface $softLogger,
     protected TranslatorInterface $translator,
     protected ParameterBagInterface $parameter_bag,
     protected UrlGeneratorInterface $url_generator,
@@ -65,7 +64,7 @@ class ExceptionEventListener
 
     // 404 - redirect to index page
     if ($exception instanceof HttpException && Response::HTTP_NOT_FOUND === $exception->getStatusCode()) {
-      $this->softLogger->error('Http '.$exception->getStatusCode().': '.$exception->getMessage());
+      $this->logger->info('Http '.$exception->getStatusCode().': '.$exception->getMessage());
       /** @var Session $session */
       $session = $event->getRequest()->getSession();
       $session->getFlashBag()->add('snackbar', $this->translator->trans('doesNotExist', [], 'catroweb'));

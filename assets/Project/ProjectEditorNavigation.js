@@ -99,7 +99,9 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
   }
 
   function getLanguages() {
-    fetch('../languages')
+    const routing = document.getElementById('js-api-routing')
+    const languagesUrl = routing ? routing.dataset.languages : '/languages'
+    fetch(languagesUrl)
       .then((response) => response.json())
       .then((data) => {
         self.languages = data

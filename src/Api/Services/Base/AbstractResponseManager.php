@@ -97,41 +97,49 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     if ('prod' !== ($_ENV['APP_ENV'] ?? 'dev')) {
       // In non-prod environments, always compute without caching
       return $callback(new class implements CacheItemInterface, ItemInterface {
+        #[\Override]
         public function getKey(): string
         {
           return '';
         }
 
+        #[\Override]
         public function get(): mixed
         {
           return null;
         }
 
+        #[\Override]
         public function isHit(): bool
         {
           return false;
         }
 
+        #[\Override]
         public function set(mixed $value): static
         {
           return $this;
         }
 
+        #[\Override]
         public function expiresAt(?\DateTimeInterface $expiration): static
         {
           return $this;
         }
 
+        #[\Override]
         public function expiresAfter(\DateInterval|int|null $time): static
         {
           return $this;
         }
 
+        #[\Override]
         public function getMetadata(): array
         {
           return [];
         }
 
+        #[\Override]
         public function tag(string|iterable $tags): static
         {
           return $this;

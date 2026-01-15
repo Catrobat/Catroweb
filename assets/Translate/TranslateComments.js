@@ -8,38 +8,44 @@ export class TranslateComments extends Translation {
 
   _initListeners() {
     const translateComments = this
-    document.querySelectorAll('.comment-translation-button').forEach((button) => {
-      button.addEventListener('click', function (event) {
-        event.stopPropagation()
-        const commentId = this.id.substring('comment-translation-button-'.length)
-        const matchingContainer = document.querySelector(
-          '.comment-translation[data-translate-comment-id="translate-comment-' + commentId + '"]',
-        )
-        const translateCommentUrl = matchingContainer.dataset.pathTranslateComment
+    const commentsWrapper = document.querySelector('#comments-wrapper')
 
-        this.style.display = 'none'
+    if (commentsWrapper) {
+      commentsWrapper.addEventListener('click', function (event) {
+        const button = event.target.closest('.comment-translation-button')
+        if (button) {
+          event.stopPropagation()
+          const commentId = button.id.substring('comment-translation-button-'.length)
+          const matchingContainer = document.querySelector(
+            '.comment-translation[data-translate-comment-id="translate-comment-' + commentId + '"]',
+          )
+          const translateCommentUrl = matchingContainer.dataset.pathTranslateComment
 
-        if (translateComments.isTranslationNotAvailable('#comment-text-translation-' + commentId)) {
-          document.getElementById(
-            'comment-translation-loading-spinner-' + commentId,
-          ).style.display = 'block'
-          translateComments.translateComment(translateCommentUrl, commentId)
-        } else {
-          translateComments.openTranslatedComment(commentId)
+          button.style.display = 'none'
+
+          if (
+            translateComments.isTranslationNotAvailable('#comment-text-translation-' + commentId)
+          ) {
+            document.getElementById(
+              'comment-translation-loading-spinner-' + commentId,
+            ).style.display = 'block'
+            translateComments.translateComment(translateCommentUrl, commentId)
+          } else {
+            translateComments.openTranslatedComment(commentId)
+          }
+        }
+
+        const removeButton = event.target.closest('.remove-comment-translation-button')
+        if (removeButton) {
+          event.stopPropagation()
+          const commentId = removeButton.id.substring('remove-comment-translation-button-'.length)
+          removeButton.style.display = 'none'
+          document.getElementById('comment-translation-button-' + commentId).style.display = 'block'
+          document.getElementById('comment-translation-wrapper-' + commentId).style.display = 'none'
+          document.getElementById('comment-text-wrapper-' + commentId).style.display = 'block'
         }
       })
-    })
-
-    document.querySelectorAll('.remove-comment-translation-button').forEach((button) => {
-      button.addEventListener('click', function (event) {
-        event.stopPropagation()
-        const commentId = this.id.substring('remove-comment-translation-button-'.length)
-        this.style.display = 'none'
-        document.getElementById('comment-translation-button-' + commentId).style.display = 'block'
-        document.getElementById('comment-translation-wrapper-' + commentId).style.display = 'none'
-        document.getElementById('comment-text-wrapper-' + commentId).style.display = 'block'
-      })
-    })
+    }
   }
 
   setTranslatedCommentData(commentId, data) {

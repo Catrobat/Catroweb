@@ -20,6 +20,7 @@ Feature: It should be possible to mark notifications marked as read
     Given  I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I click "#catro-notification-1"
     When I reload the page
     And I wait for the page to be loaded
     Then I should see "Broadcast msg 1"

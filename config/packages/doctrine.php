@@ -20,6 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       ],
       'orm' => [
         'auto_generate_proxy_classes' => '%kernel.debug%',
+        'enable_lazy_ghost_objects' => true,
         'auto_mapping' => true,
         'mappings' => [
           'App' => [

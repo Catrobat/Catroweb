@@ -168,7 +168,8 @@ export function ProjectEditorModel(programId, textFieldModels) {
   document.addEventListener('DOMContentLoaded', () => this.getLanguages())
 
   this.getLanguages = () => {
-    const languagesPromise = fetch('../languages').then((response) => response.json())
+    const languagesUrl = this.routing ? this.routing.dataset.languages : '/languages'
+    const languagesPromise = fetch(languagesUrl).then((response) => response.json())
     const definedLanguagesPromise = this.customTranslationApi.getCustomTranslationLanguages(
       this.programId,
     )

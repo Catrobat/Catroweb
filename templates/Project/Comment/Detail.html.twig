@@ -10,31 +10,44 @@
 {% block body %}
 
   <div id="project-comments" class="row mt-3 mb-3">
+    <div id="parent-comment-container" class="col-12 mb-4">
+      {{ include('Project/Comment/Comment.html.twig', {comment: comment, hide: false, are_replies: false}) }}
+    </div>
+
     {{ include('Project/Comment/Wrapper.html.twig', {
       comments: replies,
       isAdmin: isAdmin,
     }) }}
 
     <hr style="color: transparent">
-    <div id="user-comment-wrapper" class="col-12 col-sm-8 col-md-12 col-lg-12 center" style="display: none">
-      <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label">
-      <span class="mdc-notched-outline">
-        <span class="mdc-notched-outline__leading"></span>
-        <span class="mdc-notched-outline__trailing"></span>
-      </span>
-        <span class="mdc-text-field__resizer">
-        <textarea class="mdc-text-field__input" cols="75" id="comment-message" rows="5" aria-label="Label"></textarea>
-      </span>
-      </label>
-      <hr style="color: transparent">
-      <button id="comment-post-button" class="btn btn-primary">
-        {{ 'project.send'|trans({}, 'catroweb') }}
-      </button>
+    <div id="user-comment-wrapper" class="col-12" style="display: none; margin-bottom: 2rem;">
+      <div class="comment-avatar">
+        <img class="comment-avatar-img" src="{% if app.user and app.user.avatar is not empty %}
+                        {{ app.user.avatar }}
+                      {% else %}
+                        {{ asset('images/default/avatar_default.png') }}
+                      {% endif %}" alt="Avatar">
+      </div>
+      <div class="comment-payload-wrapper">
+        <div class="comment-message">
+          <textarea id="comment-message" class="msg"
+                    placeholder="{{ 'project.addComment'|trans({}, 'catroweb') }}"
+                    title="{{ 'project.addComment'|trans({}, 'catroweb') }}"></textarea>
+        </div>
+        <div id="comment-buttons-container" class="comment-buttons-container" style="display: none;">
+          <button id="comment-cancel-button" class="btn btn-outline-secondary rounded-pill me-2">
+            {{ 'cancel'|trans({}, 'catroweb') }}
+          </button>
+          <button id="comment-post-button" class="btn btn-primary rounded-pill">
+            {{ 'project.send'|trans({}, 'catroweb') }}
+          </button>
+        </div>
+      </div>
     </div>
 
     <hr style="color: transparent">
 
-    <div class="center col-12">
+    <div class="center col-12" style="display: none;">
       <div id="show-more-comments-button" class="button-show-more" data-comments-class-selector=".single-reply">
         <a data-bs-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
           <i class="material-icons catro-round-icon-button">expand_more</i>

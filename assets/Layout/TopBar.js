@@ -6,7 +6,7 @@ import './TopBar.scss'
 import '../Components/MdcMenu.scss'
 
 const topAppBarElement = document.querySelector('.mdc-top-app-bar')
-const mdcObject = new MDCTopAppBar(topAppBarElement)
+const mdcObject = topAppBarElement ? new MDCTopAppBar(topAppBarElement) : null
 
 const title = document.querySelector('#top-app-bar__title')
 const toggleSidebarButton = document.querySelector('#top-app-bar__btn-sidebar-toggle')
@@ -68,7 +68,7 @@ export function showCustomTopBarTitle(titleText, onBack) {
   }
 
   document.querySelector('.mdc-top-app-bar').style.top = '0'
-  mdcObject.setScrollTarget(document.createElement('div'))
+  if (mdcObject) mdcObject.setScrollTarget(document.createElement('div'))
   if (typeof onBack === 'function') {
     backButton = document.createElement('button')
     backButton.id = 'top-app-bar__back__btn-back'
@@ -87,7 +87,7 @@ export function showDefaultTopBarTitle() {
   title.setAttribute('href', defaultAppBarHref)
   toggleSidebarButton.style.display = 'block'
   if (backButton) backButton.style.display = 'none'
-  mdcObject.setScrollTarget(window)
+  if (mdcObject) mdcObject.setScrollTarget(window)
 }
 
 function submitSearchForm(event) {

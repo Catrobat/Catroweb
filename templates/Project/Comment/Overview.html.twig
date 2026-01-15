@@ -2,26 +2,35 @@
 
   <h3 class="col-10 col-sm-11 mb-2">{{ 'project.comments'|trans({}, 'catroweb') }}</h3>
 
-  <div class="col-2 col-sm-1">
-    <i id="show-add-comment-button" class="add-comment-button material-icons catro-round-icon-button"
-       data-bs-toggle="tooltip" title="{{ 'project.addComment'|trans({}, 'catroweb') }}">add</i>
-    <i id="hide-add-comment-button" style="display:none;"
-       class="add-comment-button material-icons catro-round-icon-button" data-bs-toggle="tooltip"
-       title="{{ 'project.addComment'|trans({}, 'catroweb') }}">remove</i>
+  <div id="user-comment-wrapper" class="col-12" style="display: none;">
+    <div class="comment-avatar">
+      <img class="comment-avatar-img" src="{% if app.user and app.user.avatar is not empty %}
+                      {{ app.user.avatar }}
+                    {% else %}
+                      {{ asset('images/default/avatar_default.png') }}
+                    {% endif %}" alt="Avatar">
+    </div>
+    <div class="comment-payload-wrapper">
+      <div class="comment-message">
+        <textarea id="comment-message" class="msg"
+                  placeholder="{{ 'project.addComment'|trans({}, 'catroweb') }}"
+                  title="{{ 'project.addComment'|trans({}, 'catroweb') }}"></textarea>
+      </div>
+      <div id="comment-buttons-container" class="comment-buttons-container" style="display: none;">
+        <button id="comment-cancel-button" class="btn btn-outline-secondary rounded-pill me-2">
+          {{ 'cancel'|trans({}, 'catroweb') }}
+        </button>
+        <button id="comment-post-button" class="btn btn-primary rounded-pill">
+          {{ 'project.send'|trans({}, 'catroweb') }}
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div id="user-comment-wrapper" class="col-12 col-sm-8 col-md-8 col-lg-5" style="display: none">
-    <label
-        class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label comment-message">
-      <span class="mdc-text-field__ripple"></span>
-      <span class="mdc-text-field__resizer">
-        <textarea class="mdc-text-field__input msg" title="{{ 'project.comments'|trans({}, 'catroweb') }}"
-                  id="comment-message" style="width: 100%; height: 100px" cols="100"></textarea>
-      </span>
-      <span class="mdc-line-ripple"></span>
-    </label>
-    <button id="comment-post-button" class="btn btn-primary">
-      {{ 'project.send'|trans({}, 'catroweb') }}
+  <div id="add-comment-init-container" class="col-12 mb-4">
+    <button id="add-comment-button" class="btn btn-outline-primary rounded-pill w-100 d-flex align-items-center justify-content-center py-3">
+      <i class="material-icons me-2">add_comment</i>
+      <span>{{ 'project.addComment'|trans({}, 'catroweb') }}</span>
     </button>
   </div>
 
@@ -30,15 +39,17 @@
     isAdmin: project_details.isAdmin,
   }) }}
 
-  <div class="center row" style="justify-content: center">
-    <div id="show-more-comments-button" class="button-show-more col-2" data-comments-class-selector=".single-comment">
-      <a data-bs-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
-        <i class="material-icons catro-round-icon-button">expand_more</i>
+  <div class="center row mt-4" style="justify-content: center; display: none;">
+    <div id="show-more-comments-button" class="button-show-more col-auto" data-comments-class-selector=".single-comment">
+      <a class="btn btn-outline-primary rounded-pill d-flex align-items-center" data-bs-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
+        <i class="material-icons me-1">expand_more</i>
+        <span>{{ 'show-more'|trans({}, 'catroweb') }}</span>
       </a>
     </div>
-    <div id="show-less-comments-button" class="button-show-less col-2" data-comments-class-selector=".single-comment">
-      <a data-bs-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
-        <i class="material-icons catro-round-icon-button">expand_less</i>
+    <div id="show-less-comments-button" class="button-show-less col-auto" data-comments-class-selector=".single-comment">
+      <a class="btn btn-outline-secondary rounded-pill d-flex align-items-center" data-bs-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
+        <i class="material-icons me-1">expand_less</i>
+        <span>{{ 'show-less'|trans({}, 'catroweb') }}</span>
       </a>
     </div>
   </div>

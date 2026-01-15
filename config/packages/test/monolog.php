@@ -11,7 +11,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'channels' => [
         'search',
         'download',
-        'soft',
       ],
       'handlers' => [
         'main' => [
@@ -20,26 +19,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'handler' => 'mainHandler',
           'excluded_http_codes' => [400, 401, 402, 403, 404, 405, 406, 429],
           'buffer_size' => 50,
-          'channels' => ['!soft'],
           'formatter' => 'monolog.formatter.catrobat_custom_formatter',
         ],
         'mainHandler' => [
           'type' => 'rotating_file',
           'path' => '%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log',
-          'level' => 'warning',
+          'level' => 'info',
           'max_files' => 1,
-        ],
-        'soft' => [
-          'type' => 'fingers_crossed',
-          'action_level' => 'error',
-          'handler' => 'softHandler',
-        ],
-        'softHandler' => [
-          'type' => 'rotating_file',
-          'path' => '%kernel.logs_dir%/%kernel.environment%/soft/soft.log',
-          'max_files' => 1,
-          'level' => 'warning',
-          'formatter' => 'monolog.formatter.catrobat_custom_formatter',
         ],
         'search' => [
           'type' => 'rotating_file',
