@@ -76,6 +76,10 @@ oauthInfo: 'Du har nettopp brukt en ekstern konto for å logge inn. Vi opprettet
 oauthHere: "her"
 statistics: "Statistikk"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Auto'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

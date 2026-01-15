@@ -70,12 +70,6 @@ export const Project = function (
     })
   })
 
-  document.querySelectorAll('.js-btn-project-download-disabled').forEach((button) => {
-    button.addEventListener('click', (e) => {
-      downloadDisabled(e.currentTarget.dataset.redirectUrl)
-    })
-  })
-
   document.querySelectorAll('.js-btn-project-apk-download').forEach((button) => {
     button.addEventListener('click', (e) => {
       download(
@@ -161,25 +155,6 @@ export const Project = function (
           button.disabled = false
         }, 15000)
       })
-  }
-
-  function downloadDisabled(redirectUrl) {
-    /* Swal.fire({
-      icon: 'error',
-      title: 'Login',
-      text: text,
-      customClass: {
-        confirmButton: 'btn btn-primary'
-      },
-      buttonsStyling: false,
-      allowOutsideClick: false,
-      timer: 5000,
-    }).then((result) => {
-      if (result.value) {
-        window.location.replace(redirectUrl)
-      }
-    }); */
-    window.location.replace(redirectUrl)
   }
 
   function resetDownloadButtonIcon(icon, spinner) {

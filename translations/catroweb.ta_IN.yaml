@@ -76,6 +76,10 @@ oauthInfo: 'தற்போது நீங்கள் உள்நுழைய
 oauthHere: "இங்கு"
 statistics: "புள்ளிவிவரம்"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'ஆட்டோ'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

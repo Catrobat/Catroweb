@@ -76,6 +76,10 @@ oauthInfo: 'Właśnie użyłeś zewnętrznego konta, aby się zalogować. Stworz
 oauthHere: "tutaj"
 statistics: "Statystyki"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Automatycznie'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

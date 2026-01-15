@@ -76,6 +76,10 @@ oauthInfo: 'Anda baru saja menggunakan akun eksternal untuk masuk. Kami membuat 
 oauthHere: "sini"
 statistics: "Statistik"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'Mobil'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:

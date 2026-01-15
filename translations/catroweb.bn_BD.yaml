@@ -76,6 +76,10 @@ oauthInfo: 'আপনি সাইন ইন করতে সবেমাত্�
 oauthHere: "এখানে"
 statistics: "পরিসংখ্যান"
 languageSelection: "Language selection"
+color-scheme:
+  auto: 'অটো'
+  light: 'Light'
+  dark: 'Dark'
 indexPage:
   recommendedSection:
     info:
