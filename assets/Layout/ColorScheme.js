@@ -29,6 +29,8 @@ setTheme(getPreferredTheme())
 
 const showActiveTheme = (theme) => {
   const menuItemToActivate = document.querySelector(`#color-scheme-menu [data-value="${theme}"]`)
+  if (!menuItemToActivate) return
+
   const activeBtnIcon = menuItemToActivate.querySelector(
     '.mdc-deprecated-list-item__graphic',
   ).innerText
@@ -40,7 +42,10 @@ const showActiveTheme = (theme) => {
 
   menuItemToActivate.classList.add('mdc-deprecated-list-item--activated')
   menuItemToActivate.setAttribute('aria-pressed', 'true')
-  document.getElementById('top-app-bar__btn-color-scheme').childNodes[2].textContent = activeBtnIcon
+  const colorSchemeButton = document.getElementById('top-app-bar__btn-color-scheme')
+  if (colorSchemeButton) {
+    colorSchemeButton.childNodes[2].textContent = activeBtnIcon
+  }
 }
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -50,7 +55,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
   }
 })
 
-window.addEventListener('DOMContentLoaded', () => {
+const initializeColorScheme = () => {
   showActiveTheme(getPreferredTheme())
 
   document.querySelectorAll('#color-scheme-menu [role="menuitem"]').forEach((element) => {
@@ -62,4 +67,10 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     })
   })
-})
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeColorScheme)
+} else {
+  initializeColorScheme()
+}
