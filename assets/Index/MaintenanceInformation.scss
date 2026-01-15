@@ -1,8 +1,16 @@
 :root {
-  --maintenance-color1: #333;
+  --maintenance-color1: rgb(0 0 0 / 70%);
   --maintenance-color2: #0097a7;
   --maintenance-font-family1: 'Material Icons', sans-serif;
-  --maintenance-background-color1: #f9f9f9;
+  --maintenance-background-color1: rgb(0 0 0 / 3%);
+  --maintenance-border-color: rgb(0 0 0 / 8%);
+}
+
+[data-theme='dark'] {
+  --maintenance-color1: rgb(255 255 255 / 70%);
+  --maintenance-color2: #4dd0e1;
+  --maintenance-background-color1: rgb(255 255 255 / 5%);
+  --maintenance-border-color: rgb(255 255 255 / 10%);
 }
 
 #maintenance-container {
@@ -13,7 +21,7 @@
 /* Style for the maintenance message */
 .maintenance {
   border: none;
-  border-bottom: 1px solid rgb(0 0 0 / 8%);
+  border-bottom: 1px solid var(--maintenance-border-color);
   border-radius: 0;
   padding: 16px 20px;
   background-color: var(--maintenance-background-color1);
@@ -44,15 +52,17 @@
     gap: 10px;
   }
 
-  span {
+  > span {
     flex: 1;
     line-height: 1.6;
     overflow-wrap: break-word;
+    color: var(--theme-text-color);
   }
 }
 
 .bold-text {
   font-weight: bold;
+  color: var(--theme-text-color);
 }
 
 .additional-info {
@@ -134,13 +144,17 @@
   display: none;
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid rgb(0 0 0 / 8%);
+  border-top: 1px solid var(--maintenance-border-color);
   line-height: 1.6;
-  color: rgb(0 0 0 / 70%);
+  color: var(--theme-text-color);
 
   @media (width <= 768px) {
     margin-top: 10px;
     padding-top: 10px;
     font-size: 14px;
+  }
+
+  span {
+    color: var(--theme-text-color);
   }
 }
