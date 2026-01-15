@@ -21,7 +21,6 @@ class DefaultTestCase extends KernelTestCase
   {
     $reflection = new \ReflectionClass($object::class);
     $method = $reflection->getMethod($methodName);
-    $method->setAccessible(true);
 
     return $method->invokeArgs($object, $parameters);
   }
@@ -33,7 +32,6 @@ class DefaultTestCase extends KernelTestCase
   {
     $reflection = new \ReflectionClass($class);
     $property = $reflection->getProperty($property);
-    $property->setAccessible(true);
     $property->setValue($instance, $value);
   }
 }

@@ -248,39 +248,52 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   {
     $limit = 20;
     $offset = 0;
-    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
-    $cache_id = sprintf('projectsCategoriesGet_%s_%s_%s', $flavor, $locale, $max_version);
 
-    // Use getCachedOrCompute for cleaner code
-    $cached = $this->facade->getResponseManager()->getCachedOrCompute(
-      $cache_id,
-      function () use ($max_version, $limit, $offset, $flavor, $accept_language) {
-        $response = [];
-        $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch', 'trending'];
-        $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    $rm = $this->facade->getResponseManager();
+    $locale = $rm->sanitizeLocale($accept_language);
 
-        foreach ($categories as $category) {
-          $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit, $offset, $flavor, $user);
-          $response[] = $this->facade->getResponseManager()->createProjectCategoryResponse($projects, $category, $accept_language);
-        }
-
-        $responseHeaders = [];
-        $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
-        $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-
-        return [
-          'response_code' => Response::HTTP_OK,
-          'response_headers' => $responseHeaders,
-          'response' => $response,
-        ];
-      },
-      3600 // 1 hour cache for categories
+    $cache_id = sprintf(
+      'projectsCategoriesGet_%s_%s_%s',
+      $flavor,
+      $locale,
+      $max_version
     );
 
-    $responseCode = $cached['response_code'];
-    $responseHeaders = $cached['response_headers'];
+    $cached = $rm->getCachedResponse($cache_id);
+    if (null !== $cached) {
+      $responseCode = $cached['response_code'];
+      $responseHeaders = $cached['response_headers'];
 
-    return $cached['response'];
+      return $cached['response'];
+    }
+
+    $response = [];
+    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch', 'trending'];
+
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+
+    foreach ($categories as $category) {
+      $projects = $this->facade->getLoader()->getProjectsFromCategory(
+        $category,
+        $max_version,
+        $limit,
+        $offset,
+        $flavor,
+        $user
+      );
+
+      $response[] = $rm->createProjectCategoryResponse($projects, $category, $accept_language);
+    }
+
+    $responseHeaders = [];
+    $rm->addResponseHashToHeaders($responseHeaders, $response);
+    $rm->addContentLanguageToHeaders($responseHeaders);
+
+    $responseCode = 200;
+
+    $rm->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
+
+    return $response;
   }
 
   #[\Override]

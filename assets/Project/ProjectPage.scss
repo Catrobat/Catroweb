@@ -349,7 +349,7 @@ table td:nth-child(1) {
       justify-content: flex-end;
       gap: 0.5rem;
       margin-top: 0.75rem;
-      animation: fadeIn 0.3s ease;
+      animation: fade-in 0.3s ease;
     }
 
     #comment-post-button,
@@ -385,7 +385,7 @@ table td:nth-child(1) {
   }
 }
 
-@keyframes fadeIn {
+@keyframes fade-in {
   from {
     opacity: 0;
     transform: translateY(5px);
