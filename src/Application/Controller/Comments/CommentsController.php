@@ -141,7 +141,31 @@ class CommentsController extends AbstractController
       $this->entity_manager->flush();
     }
 
-    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    $isAdmin = $this->isGranted('ROLE_ADMIN');
+
+    $comment_data = [
+      'id' => $temp_comment->getId(),
+      'username' => $temp_comment->getUsername(),
+      'text' => $temp_comment->getText(),
+      'is_deleted' => $temp_comment->getIsDeleted(),
+      'upload_date' => $temp_comment->getUploadDate(),
+      'user_id' => $user->getId(),
+      'user_avatar' => $user->getAvatar(),
+    ];
+
+    if ($parent_comment_id <= 0) {
+      $comment_data['number_of_replies'] = 0;
+    }
+
+    $rendered_comment = $this->renderView('Project/Comment/Comment.html.twig', [
+      'comment' => $comment_data,
+      'isAdmin' => $isAdmin,
+      'are_replies' => $parent_comment_id > 0,
+    ]);
+
+    return new JsonResponse([
+      'rendered' => $rendered_comment,
+    ]);
   }
 
   #[Route(path: '/translate/comment/{id}', name: 'translate_comment', methods: ['GET'])]

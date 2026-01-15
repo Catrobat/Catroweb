@@ -7,7 +7,12 @@ export function ProjectEditorTextField(model) {
     '#edit-' + model.programSection + '-loading-spinner',
   )
 
-  new MDCTextField(document.querySelector('#edit-' + model.programSection + '-mdc-text-field'))
+  const editorTextMdcRoot = document.querySelector(
+    '#edit-' + model.programSection + '-mdc-text-field',
+  )
+  if (editorTextMdcRoot) {
+    new MDCTextField(editorTextMdcRoot)
+  }
 
   this.editText.addEventListener('input', () => {
     model.setText(this.editText.value.trim())

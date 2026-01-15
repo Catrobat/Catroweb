@@ -4,13 +4,16 @@ import { ApiFetch } from '../Api/ApiHelper'
 import './NotificationsPage.scss'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const chipset = new MDCChipSet(document.querySelector('.mdc-chip-set'))
+  const chipsetRoot = document.querySelector('.mdc-chip-set')
+  const chipset = chipsetRoot ? new MDCChipSet(chipsetRoot) : null
   const tabPaneElements = document.querySelectorAll('.tab-pane')
 
-  chipset.listen('MDCChip:interaction', function (event) {
-    document.querySelector('.show.active').classList.remove('show', 'active')
-    tabPaneElements[event.detail.index].classList.add('show', 'active')
-  })
+  if (chipset) {
+    chipset.listen('MDCChip:interaction', function (event) {
+      document.querySelector('.show.active').classList.remove('show', 'active')
+      tabPaneElements[event.detail.index].classList.add('show', 'active')
+    })
+  }
 
   const notificationsElement = document.querySelector('.js-notifications')
   const userNotifications = new UserNotifications(

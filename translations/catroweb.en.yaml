@@ -193,6 +193,7 @@ project:
   send: Send
   delete: Delete
   report: Report
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

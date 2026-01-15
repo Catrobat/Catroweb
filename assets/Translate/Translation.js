@@ -26,7 +26,9 @@ export class Translation {
   }
 
   setDisplayLanguageMap() {
-    fetch('../languages')
+    const routing = document.getElementById('js-api-routing')
+    const languagesUrl = routing ? routing.dataset.languages : '/languages'
+    fetch(languagesUrl)
       .then((response) => response.json())
       .then((data) => {
         this.displayLanguageMap = data

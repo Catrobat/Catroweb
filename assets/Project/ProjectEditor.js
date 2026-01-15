@@ -9,7 +9,8 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
   this.languageSelectorList = document.getElementById('edit-language-selector-list')
   this.saveButton = document.getElementById('edit-submit-button')
 
-  this.languageSelect = new MDCSelect(document.querySelector('#edit-language-selector'))
+  const languageSelectElement = document.querySelector('#edit-language-selector')
+  this.languageSelect = languageSelectElement ? new MDCSelect(languageSelectElement) : null
 
   this.closeEditorDialog = new ProjectEditorDialog(
     projectDescriptionCredits.dataset.transCloseEditorPrompt,
@@ -27,11 +28,13 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
 
   document.getElementById('edit-delete-button').addEventListener('click', model.deleteTranslation)
 
-  this.languageSelect.listen('MDCSelect:change', () => {
-    if (!this.editTextUI.classList.contains('d-none')) {
-      model.setLanguage(this.languageSelect.value)
-    }
-  })
+  if (this.languageSelect) {
+    this.languageSelect.listen('MDCSelect:change', () => {
+      if (!this.editTextUI.classList.contains('d-none')) {
+        model.setLanguage(this.languageSelect.value)
+      }
+    })
+  }
 
   Array.from(document.querySelectorAll('.mdc-text-field__input')).forEach((input) => {
     input.addEventListener('input', model.onInput)
@@ -98,7 +101,7 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
       this.languageSelectorList.appendChild(listItem)
     }
 
-    this.languageSelect.layoutOptions()
+    if (this.languageSelect) this.languageSelect.layoutOptions()
   })
 
   model.setOnDialog((dialog) => {
@@ -121,7 +124,7 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
   })
 
   model.setOnLanguageSelected((languageIndex) => {
-    this.languageSelect.selectedIndex = languageIndex
+    if (this.languageSelect) this.languageSelect.selectedIndex = languageIndex
   })
 
   model.setOnClose(() => this.close())

@@ -60,23 +60,26 @@ export class OwnProjectList {
 
   _initActionMenu() {
     const self = this
-    this.projectActionMenu = new MDCMenu(document.getElementById('project-action-menu'))
-    this.projectActionMenu.listen('MDCMenu:selected', function (event) {
-      if (event.detail.index === 0) {
-        // Set public/private
-        self._actionToggleVisibility(self.projectActionMenu.projectId)
-      } else if (event.detail.index === 1) {
-        // Share
-        self._actionShareProject(self.projectActionMenu.projectId)
-      } else if (event.detail.index === 2) {
-        // Delete
-        self._actionDeleteProject(self.projectActionMenu.projectId)
-      } else {
-        console.error('Invalid menu item selected')
-      }
-    })
-    this.projectActionMenu.setAnchorCorner(Corner.TOP_END)
-    this.projectActionMenu.setAbsolutePosition(0, 0)
+    const projectActionMenuEl = document.getElementById('project-action-menu')
+    this.projectActionMenu = projectActionMenuEl ? new MDCMenu(projectActionMenuEl) : null
+    if (this.projectActionMenu) {
+      this.projectActionMenu.listen('MDCMenu:selected', function (event) {
+        if (event.detail.index === 0) {
+          // Set public/private
+          self._actionToggleVisibility(self.projectActionMenu.projectId)
+        } else if (event.detail.index === 1) {
+          // Share
+          self._actionShareProject(self.projectActionMenu.projectId)
+        } else if (event.detail.index === 2) {
+          // Delete
+          self._actionDeleteProject(self.projectActionMenu.projectId)
+        } else {
+          console.error('Invalid menu item selected')
+        }
+      })
+      this.projectActionMenu.setAnchorCorner(Corner.TOP_END)
+      this.projectActionMenu.setAbsolutePosition(0, 0)
+    }
   }
 
   fetchMore(clear = false) {
