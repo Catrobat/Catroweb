@@ -25,18 +25,67 @@
             </ul>
           </div>
 
+          <div id="filterContainer">
+            <h5>Filters:</h5>
+            <div class="filter-controls">
+              <div class="filter-group">
+                <label>Level:</label>
+                <button class="filter-btn active" data-filter-type="level" data-filter-value="all">All</button>
+                <button class="filter-btn level-critical" data-filter-type="level" data-filter-value="CRITI">Critical</button>
+                <button class="filter-btn level-error" data-filter-type="level" data-filter-value="ERROR">Error</button>
+                <button class="filter-btn level-warning" data-filter-type="level" data-filter-value="WARNING">Warning</button>
+                <button class="filter-btn level-info" data-filter-type="level" data-filter-value="INFO">Info</button>
+                <button class="filter-btn level-debug" data-filter-type="level" data-filter-value="DEBUG">Debug</button>
+              </div>
+              <div class="filter-group">
+                <label>Search:</label>
+                <input type="text" id="searchInput" placeholder="Search logs..." class="search-input">
+              </div>
+            </div>
+          </div>
+
           <div id="outerLogContainer">
             <div id="innerLogContainer">
               {% for line in content %}
-                  <div class='logs'>
-                      <div class="panel-heading">
-                          <a data-bs-toggle="collapse" class="line-head">
-                              {{ line.title }}
-                          </a>
+                  <div class='log-entry' data-level="{{ line.level }}" data-channel="{{ line.channel }}" data-user="{{ line.user }}" data-ip="{{ line.ip }}">
+                      <div class="log-header level-{{ line.level|lower }}">
+                          <div class="log-header-main">
+                              <span class="log-level-badge level-{{ line.level|lower }}">{{ line.level }}</span>
+                              <span class="log-channel-badge">{{ line.channel }}</span>
+                              <span class="log-datetime">{{ line.datetime }}</span>
+                              {% if line.user and line.user != 'anonymous' %}
+                                  <span class="log-user">👤 {{ line.user }}</span>
+                              {% endif %}
+                              {% if line.ip %}
+                                  <span class="log-ip">🌐 {{ line.ip }}</span>
+                              {% endif %}
+                          </div>
+                          <div class="log-message-preview">{{ line.message }}</div>
                       </div>
-                      <div class="panel-collapse hide">
-                          <div class="panel-body">
-                              {{ line.message }}
+                      <div class="log-details hide">
+                          <div class="log-details-content">
+                              <div class="log-section">
+                                  <strong>Message:</strong>
+                                  <pre class="log-message">{{ line.message }}</pre>
+                              </div>
+                              {% if line.stacktrace %}
+                                  <div class="log-section">
+                                      <strong>Stack Trace:</strong>
+                                      <pre class="log-stacktrace">{{ line.stacktrace }}</pre>
+                                  </div>
+                              {% endif %}
+                              {% if line.context %}
+                                  <div class="log-section">
+                                      <strong>Context:</strong>
+                                      <pre class="log-context">{{ line.context }}</pre>
+                                  </div>
+                              {% endif %}
+                              {% if line.extra %}
+                                  <div class="log-section">
+                                      <strong>Extra:</strong>
+                                      <pre class="log-extra">{{ line.extra }}</pre>
+                                  </div>
+                              {% endif %}
                           </div>
                       </div>
                   </div>
