@@ -28,7 +28,6 @@ reportIt: Bəli, şikayət et!
 areYouSure: Əminsiniz?
 noWayOfReturn: Əməliyyatları geri qaytarmağın heç bir yolu yoxdur!
 download: Download
-downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Description
 noDescription: Açıqlama yoxdur.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Sil
   report: Şikayət et
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

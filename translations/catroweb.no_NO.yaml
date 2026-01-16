@@ -28,7 +28,6 @@ reportIt: Ja, rapporter det!
 areYouSure: Er du sikker?
 noWayOfReturn: Det er ingen måte å gjenopprette dine handlinger!
 download: Nedlasting
-downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Beskrivelse
 noDescription: Ingen beskrivelse tilgjengelig.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Slett
   report: Rapporter
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

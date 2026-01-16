@@ -28,7 +28,6 @@ reportIt: Bai, salatu!
 areYouSure: Ziur zaude?
 noWayOfReturn: Zure ekintzak ezingo dira inolaz desegin!
 download: Download
-downloadDisabledAlert: You must be logged in to download this project
 name: Izena
 description: Description
 noDescription: Ez dago deskribapenik eskuragarri.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Delete
   report: Salatu
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

@@ -28,7 +28,6 @@ reportIt: Da, prijavi!
 areYouSure: Ali si prepričan/a?
 noWayOfReturn: Tvojih dejanj ni mogoče obnoviti!
 download: Prenesi
-downloadDisabledAlert: Za prenos tega projekta moraš biti prijavljen
 name: Ime
 description: Opis
 noDescription: Opisa ni na voljo.
@@ -188,6 +187,7 @@ project:
   send: Pošlji
   delete: izbriši
   report: Prijavi
+  reply: Reply
   report_popup: Komentar je bil uspešno prijavljen.
   report_popup_header: Prijavljeno
   deleted_popup: Opomba je bila uspešno izbrisana.

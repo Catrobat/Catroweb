@@ -28,7 +28,6 @@ reportIt: Ja, melden!
 areYouSure: Bist du sicher?
 noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
 download: Herunterladen
-downloadDisabledAlert: Du musst eingeloggt sein, um dieses Projekt herunterzuladen
 name: Name
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
@@ -188,6 +187,7 @@ project:
   send: Senden
   delete: Löschen
   report: Melden
+  reply: Reply
   report_popup: Der Kommentar wurde erfolgreich gemeldet.
   report_popup_header: Gemeldet
   deleted_popup: Der Kommentar wurde erfolgreich gelöscht.

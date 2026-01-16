@@ -28,7 +28,6 @@ reportIt: Evet, bildir!
 areYouSure: Emin misiniz?
 noWayOfReturn: Eylemlerinizi geri getirmenin bir yolu yok!
 download: indir
-downloadDisabledAlert: You must be logged in to download this project
 name: Isim
 description: Açıklama
 noDescription: Açıklama mevcut değil.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Sil
   report: Bildir
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

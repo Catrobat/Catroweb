@@ -28,7 +28,6 @@ reportIt: ஆம், அதைப் புகாரளி!
 areYouSure: உறுதியாகவா?
 noWayOfReturn: உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
 download: பதிவிறக்கம்
-downloadDisabledAlert: You must be logged in to download this project
 name: பெயர்
 description: விளக்கம்
 noDescription: விளக்கவுரை ஏதும் கிடைக்கவில்லை.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: அழித்துவிடு
   report: அறிக்கையிடு
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

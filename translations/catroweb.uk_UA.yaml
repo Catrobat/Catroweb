@@ -28,7 +28,6 @@ reportIt: Так, поскаржитись на це!
 areYouSure: Ви впевнені?
 noWayOfReturn: Відновити свої дії буде неможливо!
 download: Завантажити
-downloadDisabledAlert: Ви повинні увійти в систему, щоб завантажити цей проєкт
 name: Назва
 description: Опис
 noDescription: Опис відсутній.
@@ -189,6 +188,7 @@ project:
   send: Надіслати
   delete: Видалити
   report: Скарга
+  reply: Reply
   report_popup: На коментар успішно поскаржилися.
   report_popup_header: Скарга була відправлена
   deleted_popup: Коментар успішно видалено.

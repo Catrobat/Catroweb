@@ -28,7 +28,6 @@ reportIt: ใช่ รายงานเลย!
 areYouSure: คุณแน่ใจหรือไม่?
 noWayOfReturn: ไม่มีทางที่จะกู้คืนการกระทำของคุณ!
 download: ดาวน์โหลด
-downloadDisabledAlert: คุณต้องเข้าสู่ระบบเพื่อดาวน์โหลดโครงการนี้
 name: ชื่อ
 description: คำอธิบาย
 noDescription: ไม่มีคำอธิบาย
@@ -189,6 +188,7 @@ project:
   send: ส่ง
   delete: ลบ
   report: รายงาน
+  reply: Reply
   report_popup: รายงานความคิดเห็นเรียบร้อยแล้ว
   report_popup_header: รายงานแล้ว
   deleted_popup: ลบความคิดเห็นเรียบร้อยแล้ว
