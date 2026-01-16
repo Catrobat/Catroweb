@@ -39,20 +39,6 @@
     isAdmin: project_details.isAdmin,
   }) }}
 
-  <div class="center row mt-4" style="justify-content: center; display: none;">
-    <div id="show-more-comments-button" class="button-show-more col-auto" data-comments-class-selector=".single-comment">
-      <a class="btn btn-outline-primary rounded-pill d-flex align-items-center" data-bs-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
-        <i class="material-icons me-1">expand_more</i>
-        <span>{{ 'show-more'|trans({}, 'catroweb') }}</span>
-      </a>
-    </div>
-    <div id="show-less-comments-button" class="button-show-less col-auto" data-comments-class-selector=".single-comment">
-      <a class="btn btn-outline-secondary rounded-pill d-flex align-items-center" data-bs-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
-        <i class="material-icons me-1">expand_less</i>
-        <span>{{ 'show-less'|trans({}, 'catroweb') }}</span>
-      </a>
-    </div>
-  </div>
 </div>
 
 {{ include('Project/Comment/JsData.html.twig', {
