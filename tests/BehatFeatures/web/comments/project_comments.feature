@@ -40,25 +40,25 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "Comments"
-    And the element ".add-comment-button" should be visible
+    And the element "#add-comment-button" should be visible
 
   Scenario: It should be possible to toggle the visibility of the post a comment container
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "Comments"
-    And the element "#show-add-comment-button" should be visible
-    But the element "#hide-add-comment-button" should not be visible
+    And the element "#add-comment-button" should be visible
+    But the element "#comment-cancel-button" should not be visible
     And the element "#user-comment-wrapper" should not be visible
-    When I click "#show-add-comment-button"
+    When I click "#add-comment-button"
     And I wait for the page to be loaded
-    Then the element "#show-add-comment-button" should not be visible
-    But the element "#hide-add-comment-button" should be visible
+    Then the element "#add-comment-button" should not be visible
+    But the element "#comment-cancel-button" should be visible
     And the element "#user-comment-wrapper" should be visible
 
   Scenario: I should not be able to write a comment without being logged in
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#show-add-comment-button"
+    And I click "#add-comment-button"
     And I wait for AJAX to finish
     And I write "hello" in textbox
     And I wait for AJAX to finish
@@ -70,7 +70,7 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: If a logged out user enters a comment into the textbox, it should be remembered throughout the login process and page reloads
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#show-add-comment-button"
+    And I click "#add-comment-button"
     And I wait for AJAX to finish
     And I write "comment to remember" in textbox
     And I wait for AJAX to finish
@@ -84,8 +84,8 @@ Feature: As a visitor I want to write, see and report comments.
     Then I should be on "/app/project/1#login"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And the element "#show-add-comment-button" should not be visible
-    And the element "#hide-add-comment-button" should be visible
+    And the element "#add-comment-button" should not be visible
+    And the element "#comment-cancel-button" should be visible
     And the element "#user-comment-wrapper" should be visible
     And I click "#comment-post-button"
     And I wait for AJAX to finish
@@ -97,7 +97,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I am on "/app/project/3"
     And I wait for the page to be loaded
     Then the element ".single-comment" should not exist
-    When I click "#show-add-comment-button"
+    When I click "#add-comment-button"
     And I wait for AJAX to finish
     And I write "hello" in textbox
     And I wait for AJAX to finish
@@ -262,7 +262,7 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#show-add-comment-button"
+    And I click "#add-comment-button"
     And I wait for AJAX to finish
     And I write "hello" in textbox
     And I wait for AJAX to finish
@@ -279,7 +279,7 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "Catrobat"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#show-add-comment-button"
+    And I click "#add-comment-button"
     And I wait for AJAX to finish
     And I write "hello" in textbox
     And I wait for AJAX to finish
