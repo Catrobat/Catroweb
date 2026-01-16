@@ -28,7 +28,6 @@ reportIt: Da, prijavi!
 areYouSure: Jeste li sigurni?
 noWayOfReturn: Ne postoji nacin da ponistite vase radnje!
 download: Preuzmi
-downloadDisabledAlert: You must be logged in to download this project
 name: Ime
 description: Opis
 noDescription: Opis nije dostupan.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Izbrisati
   report: Prijavi
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

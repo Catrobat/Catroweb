@@ -28,7 +28,6 @@ reportIt: Ih, azen-it!
 areYouSure: Tetḥeqqeḍ ?
 noWayOfReturn: Ulac ţawil iwakken ad d-tessuɣaleḍ tigawin-ik!
 download: Download
-downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Description
 noDescription: Ulac aglam.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Delete
   report: Cetki
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

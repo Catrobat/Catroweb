@@ -28,7 +28,6 @@ reportIt: Po, raportoje!
 areYouSure: A je i Sigurtë?
 noWayOfReturn: Nuk ka asnjë mundësi për të rikthyer veprimet tuaja!
 download: Shkarkoni
-downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Përshkrimi
 noDescription: Nuk ka përshkrim.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Fshije
   report: Raport
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

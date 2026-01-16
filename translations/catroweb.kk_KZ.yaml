@@ -28,7 +28,6 @@ reportIt: Иә, хабарлаңыз!
 areYouSure: Сіз сенімдісіз бе?
 noWayOfReturn: Сіздің әрекеттеріңізді қалпына келтіруге ешқандай мүмкіндік жоқ!
 download: Жүктеп алу
-downloadDisabledAlert: Жобаларды жүктеу үшін сіз аккаунтыңызға кіріуіңіз керексіз
 name: Аты
 description: Сипаттама
 noDescription: Сипаттама жоқ.
@@ -189,6 +188,7 @@ project:
   send: Жіберу
   delete: Жою
   report: Есеп беру
+  reply: Reply
   report_popup: Пікір сәтті хабарланды.
   report_popup_header: Хабарланды
   deleted_popup: Пікір сәтті жойылды.

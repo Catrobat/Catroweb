@@ -28,7 +28,6 @@ reportIt: అవును, నివేదించండి!
 areYouSure: మీరు చెప్పేది నిజమా?
 noWayOfReturn: మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
 download: డౌన్‌లోడ్ చేయండి
-downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: వివరణ
 noDescription: డిస్క్రిప్షన్ అంధుబాటులొ లెదు.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: తొలగించు
   report: రిపొర్ట్
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

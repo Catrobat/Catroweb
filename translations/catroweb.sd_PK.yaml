@@ -28,7 +28,6 @@ reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
 download: ڊائونلوڊ
-downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: تشريح
 noDescription: ڪا بہ تشريح دستياب نہ آهي.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: ختم ڪيو
   report: رپورٽ درج ڪريو
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

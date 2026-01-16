@@ -28,7 +28,6 @@ reportIt: हाँ, रिपोर्ट करें!
 areYouSure: वाकई में?
 noWayOfReturn: इसे दोबारा नहीं बदला जाएगा!
 download: डाउन्लोड
-downloadDisabledAlert: इस प्रोजैक्ट के पृष्ठ का उपयोग करने के लिए आपको लोग इन करना जरुरी है।
 name: नाम
 description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: मिटायें
   report: विवरण
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

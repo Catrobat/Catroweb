@@ -28,7 +28,6 @@ reportIt: نعم، أبلغ عنه!
 areYouSure: هل أنت متأكد؟
 noWayOfReturn: لاتوجد أي طريقة لإسترجاع إجراءاتك!
 download: تحميل
-downloadDisabledAlert: You must be logged in to download this project
 name: الإسم
 description: الوصف
 noDescription: لا يوجد أي وصف .
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: حذف
   report: تقرير
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

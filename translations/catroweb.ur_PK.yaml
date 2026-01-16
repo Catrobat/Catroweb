@@ -28,7 +28,6 @@ reportIt: جی ہاں، اس کو رپورٹ کریں!
 areYouSure: کیا تمہیں یقین ہے؟
 noWayOfReturn: آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
 download: ڈاؤنلوڈ
-downloadDisabledAlert: You must be logged in to download this project
 name: "نام\n"
 description: تفصیل (وضاحت)
 noDescription: کوئی وضاحت دستیاب نہیں۔
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: خارج کر دیں
   report: رپورٹ
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

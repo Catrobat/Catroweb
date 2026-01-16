@@ -28,7 +28,6 @@ reportIt: بله، گزارش بده!
 areYouSure: آیا مطمئنید؟
 noWayOfReturn: هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
 download: دانلود
-downloadDisabledAlert: You must be logged in to download this project
 name: نام
 description: توضیح
 noDescription: هیچ توضیحی در دسترس نمی باشد.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: حذف
   report: گزارش
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

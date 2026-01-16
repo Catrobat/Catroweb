@@ -28,7 +28,6 @@ reportIt: 是的，舉報！
 areYouSure: 你確定嗎？
 noWayOfReturn: 無法恢復您的操作！
 download: '&#x8209;&#x5831;'
-downloadDisabledAlert: You must be logged in to download this project
 name: 名稱
 description: 描述
 noDescription: 沒有可用的描述。
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: 刪除
   report: 報告
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

@@ -28,7 +28,6 @@ reportIt: Да, пријавите!
 areYouSure: Да ли сте сигурни?
 noWayOfReturn: Нема начина да обновите своје поступке!
 download: Преузми
-downloadDisabledAlert: You must be logged in to download this project
 name: Име
 description: Description
 noDescription: Нема доступног описа.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Обриши
   report: Пријави
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

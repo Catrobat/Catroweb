@@ -28,7 +28,6 @@ reportIt: Ja, rapportera det!
 areYouSure: Är du säker?
 noWayOfReturn: Det finns inget sätt att återställa dina åtgärder!
 download: Ladda ner
-downloadDisabledAlert: You must be logged in to download this project
 name: Namn
 description: Beskrivning
 noDescription: Ingen beskrivning tillgänglig.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Radera
   report: Rapportera
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

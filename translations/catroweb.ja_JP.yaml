@@ -28,7 +28,6 @@ reportIt: はい、報告してください！
 areYouSure: よろしいですか？
 noWayOfReturn: アクションを復元する方法はありません！
 download: ダウンロード
-downloadDisabledAlert: You must be logged in to download this project
 name: 名前
 description: 説明
 noDescription: 説明はありません。
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: 削除
   report: 不適切として報告する
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

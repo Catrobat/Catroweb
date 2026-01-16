@@ -28,7 +28,6 @@ reportIt: হ্যাঁ, রিপোর্ট করুন
 areYouSure: আপনি নিশ্চিত?
 noWayOfReturn: আপনার কাজটি পুনরুদ্ধার করার কোনও উপায় নেই!
 download: ডাউনলোড
-downloadDisabledAlert: You must be logged in to download this project
 name: নাম
 description: বর্ণনা
 noDescription: বর্ণনা পাওয়া যায় নি.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: মুছুন
   report: প্রতিবেদন করুন
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

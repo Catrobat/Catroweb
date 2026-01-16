@@ -28,7 +28,6 @@ reportIt: 是的，我要举报
 areYouSure: 您确定吗？
 noWayOfReturn: 再也无法恢复您的操作！
 download: '&#x5448;&#x62A5;&#x4E3A;&#x4E0D;&#x9002;&#x5F53;&#x7684;&#x5185;&#x5BB9;'
-downloadDisabledAlert: 您必须登录才能下载此项目
 name: 名称
 description: 描述
 noDescription: 没有可用的描述
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: 删除
   report: 报告
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
