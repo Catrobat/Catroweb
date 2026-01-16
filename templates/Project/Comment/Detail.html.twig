@@ -47,20 +47,6 @@
 
     <hr style="color: transparent">
 
-    <div class="center col-12" style="display: none;">
-      <div id="show-more-comments-button" class="button-show-more" data-comments-class-selector=".single-reply">
-        <a data-bs-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
-          <i class="material-icons catro-round-icon-button">expand_more</i>
-        </a>
-      </div>
-      <div id="show-less-comments-button" class="button-show-less" data-comments-class-selector=".single-reply">
-        <a data-bs-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
-          <i class="material-icons catro-round-icon-button">expand_less</i>
-        </a>
-      </div>
-    </div>
-    <hr style="color: transparent">
-
     {% if not comment.is_deleted %}
       <button class="mdc-fab add-reply-button reply-button--fab" aria-label="Favorite" style="display: inline-block;">
         <div class="mdc-fab__ripple"></div>

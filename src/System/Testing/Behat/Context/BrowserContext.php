@@ -36,7 +36,7 @@ class BrowserContext extends MinkContext implements Context
   public function setup(): void
   {
     $this->getSession()->start();
-    $this->getSession()->resizeWindow(360, 1_024);
+    $this->getSession()->resizeWindow(412, 823);
   }
 
   /**
@@ -295,16 +295,13 @@ class BrowserContext extends MinkContext implements Context
    */
   public function assertOneOfTheElementsContain(string $selector, string $value): void
   {
-    $contains = false;
     $elements = $this->getSession()->getPage()->findAll('css', $selector);
-    foreach ($elements as $element) {
-      if (str_contains($element->getText(), $value)) {
-        $contains = true;
-        break;
-      }
+
+    if (array_any($elements, fn ($element) => $element->isVisible() && str_contains($element->getText(), $value))) {
+      return;
     }
 
-    Assert::assertTrue($contains, "No element '".$selector."' contains '".$value."'");
+    throw new ExpectationException("No element '{$selector}' contains '{$value}'", $this->getSession());
   }
 
   /**
@@ -312,16 +309,26 @@ class BrowserContext extends MinkContext implements Context
    */
   public function assertNoneOfTheElementsContain(string $selector, string $value): void
   {
-    $contains = false;
     $elements = $this->getSession()->getPage()->findAll('css', $selector);
+
     foreach ($elements as $element) {
+      if (!$element->isVisible()) {
+        continue;
+      }
       if (str_contains($element->getText(), $value)) {
-        $contains = true;
-        break;
+        throw new ExpectationException("An element '{$selector}' contains '{$value}' (text: '{$element->getText()}')", $this->getSession());
       }
     }
+  }
 
-    Assert::assertFalse($contains, "A element '".$selector."' contains '".$value."'");
+  /**
+   * @When I scroll to the bottom of the page
+   */
+  public function iScrollToTheBottomOfThePage(): void
+  {
+    $this->getSession()->executeScript(
+      'window.scrollTo(0, Math.max(document.body.scrollHeight, document.documentElement.scrollHeight));'
+    );
   }
 
   /**
