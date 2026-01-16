@@ -28,7 +28,6 @@ reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
 download: Download
-downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Description
 noDescription: Δεν υπάρχει διαθέσιμη περιγραφή.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Διαγραφή
   report: Αναφορά
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

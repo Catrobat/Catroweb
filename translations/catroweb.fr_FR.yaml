@@ -28,7 +28,6 @@ reportIt: Oui, rapportez-le !
 areYouSure: Êtes-vous sûr(e) ?
 noWayOfReturn: Il n'y a aucun moyen de restaurer vos actions !
 download: Télécharger
-downloadDisabledAlert: You must be logged in to download this project
 name: Nom
 description: Description
 noDescription: Aucune description disponible.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: supprimer
   report: Signaler
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

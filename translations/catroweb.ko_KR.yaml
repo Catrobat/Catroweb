@@ -28,7 +28,6 @@ reportIt: 예, 신고합니다.
 areYouSure: 계속하시겠습니까?
 noWayOfReturn: 다시 되돌릴 수 없습니다!
 download: 다운로드
-downloadDisabledAlert: You must be logged in to download this project
 name: 이름
 description: 설명
 noDescription: 설명 없음
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: 삭제
   report: 보고서
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

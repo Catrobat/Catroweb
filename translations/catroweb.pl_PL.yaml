@@ -28,7 +28,6 @@ reportIt: Tak, zgłoś to!
 areYouSure: Jesteś pewien?
 noWayOfReturn: To działanie jest nieodwracalne!
 download: Pobieranie
-downloadDisabledAlert: Musisz być zalogowany, aby pobrać ten projekt
 name: Nazwa
 description: Opis
 noDescription: Brak opisu.
@@ -188,6 +187,7 @@ project:
   send: Wyślij
   delete: Usuń
   report: Zgłoś
+  reply: Reply
   report_popup: Komentarz został pomyślnie wysłany.
   report_popup_header: Zgłoszono
   deleted_popup: Komentarz został pomyślnie usunięty.

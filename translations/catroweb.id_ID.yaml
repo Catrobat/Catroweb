@@ -28,7 +28,6 @@ reportIt: Ya, laporkan!
 areYouSure: Apakah kamu yakin?
 noWayOfReturn: Tidak ada cara untuk memulihkan tindakan Anda!
 download: Unduh
-downloadDisabledAlert: You must be logged in to download this project
 name: Nama
 description: Keterangan
 noDescription: Deskripsi tidak tersedia.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: Hapus
   report: Laporkan
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

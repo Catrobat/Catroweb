@@ -28,7 +28,6 @@ reportIt: هو، راپور ورکړئ!
 areYouSure: تاسو ډاډه یاست؟
 noWayOfReturn: ستاسو د عملونو د بیرته راګرځولو لپاره هیڅ لاره نشته!
 download: ډاونلوډ کړئ
-downloadDisabledAlert: You must be logged in to download this project
 name: نوم
 description: تفصیل
 noDescription: هیڅ تفصیل شتون نلري.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: پاک کړی
   report: راپور
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.

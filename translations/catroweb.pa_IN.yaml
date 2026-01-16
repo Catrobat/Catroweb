@@ -28,7 +28,6 @@ reportIt: ਹਾਂ, ਇਸ ਦੀ ਰਿਪੋਰਟ ਕਰੋ!
 areYouSure: ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
 noWayOfReturn: ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
 download: ਡਾ .ਨਲੋਡ
-downloadDisabledAlert: You must be logged in to download this project
 name: ਨਾਮ
 description: ਵੇਰਵਾ
 noDescription: ਕੋਈ ਵੇਰਵਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
@@ -188,6 +187,7 @@ project:
   send: Send
   delete: ਮਿਟਾਓ
   report: ਰਿਪੋਰਟ
+  reply: Reply
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
