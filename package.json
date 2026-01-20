@@ -110,7 +110,7 @@
     "clipboard": "^2.0.11",
     "external-svg-loader": "^1.7.1",
     "google-charts": "^2.0.0",
-    "jquery": "^3.7.1",
+    "jquery": "^4.0.0",
     "jquery-contextmenu": "^2.10.1",
     "jquery-ui-dist": "^1.13.3",
     "jwt-decode": "^4.0.0",
