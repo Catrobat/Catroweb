@@ -299,23 +299,43 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @When /^I switch to the new tab$/
+   * @When /^I switch to the new tab to preview the mail$/
+   *
+   * Note: Due to limitations with the ChromeDriver (CDP-based) window switching,
+   * this method constructs the preview URL from the current form and navigates
+   * to it directly in the current window.
    */
   public function iSwitchToNewTab(): void
   {
-    $windowNames = $this->getSession()->getWindowNames();
-    $currentWindowName = $this->getSession()->getWindowName();
+    $page = $this->getSession()->getPage();
 
-    // Find the name of the new window/tab
-    $newWindowName = '';
-    foreach ($windowNames as $windowName) {
-      if ($windowName !== $currentWindowName) {
-        $newWindowName = $windowName;
-      }
+    // Get form field values to construct the preview URL
+    $username = $page->findById('username')?->getValue() ?? '';
+    $subject = $page->findById('subject')?->getValue() ?? '';
+    $title = $page->findById('title')?->getValue() ?? '';
+    $message = $page->findById('content')?->getValue() ?? '';
+    $template = $page->findById('template-select')?->getValue() ?? '';
+
+    // Construct the preview URL
+    $previewUrl = sprintf(
+      'preview?username=%s&subject=%s&title=%s&message=%s&template=%s',
+      rawurlencode((string) $username),
+      rawurlencode((string) $subject),
+      rawurlencode((string) $title),
+      rawurlencode((string) $message),
+      rawurlencode((string) $template)
+    );
+
+    // Navigate to the preview URL in the current window
+    $baseUrl = $this->getSession()->getCurrentUrl();
+    // Replace 'list' with the preview path
+    $fullUrl = preg_replace('/list$/', $previewUrl, $baseUrl);
+
+    if (null === $fullUrl || $fullUrl === $baseUrl) {
+      throw new \RuntimeException('Could not construct preview URL from current page');
     }
 
-    // Switch to the new window/tab
-    $this->getSession()->switchToWindow($newWindowName);
+    $this->getSession()->visit($fullUrl);
   }
 
   /**
