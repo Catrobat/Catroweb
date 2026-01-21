@@ -9,6 +9,9 @@ use App\System\Testing\Behat\ContextTrait;
 use App\System\Testing\DataFixtures\DataBaseUtils;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\Tools\ToolsException;
+use PHPUnit\TextUI\CliArguments\Builder as CliConfigurationBuilder;
+use PHPUnit\TextUI\Configuration\Registry;
+use PHPUnit\TextUI\XmlConfiguration\DefaultConfiguration;
 
 class RefreshEnvironmentContext implements Context
 {
@@ -25,7 +28,37 @@ class RefreshEnvironmentContext implements Context
    */
   public static function prepare(): void
   {
+    // Initialize PHPUnit Configuration for use with PHPUnit\Framework\Assert in Behat context
+    // PHPUnit 12+ requires the Configuration Registry to be initialized before using Assert
+    self::initializePHPUnitConfiguration();
+
     DataBaseUtils::recreateTestEnvironment();
+  }
+
+  /**
+   * Initialize PHPUnit's Configuration Registry for use outside of PHPUnit test runner.
+   * This is required for PHPUnit 12+ when using PHPUnit\Framework\Assert in Behat contexts.
+   *
+   * @psalm-suppress InternalClass
+   * @psalm-suppress InternalMethod
+   */
+  private static function initializePHPUnitConfiguration(): void
+  {
+    try {
+      // Check if already initialized by using reflection to avoid the assert() in Registry::get()
+      $reflection = new \ReflectionClass(Registry::class);
+      $instanceProperty = $reflection->getProperty('instance');
+      if (null !== $instanceProperty->getValue()) {
+        return; // Already initialized
+      }
+    } catch (\Throwable) {
+      // Reflection failed, continue to initialization
+    }
+
+    // Initialize with minimal configuration (using PHPUnit internals intentionally)
+    $cliConfiguration = (new CliConfigurationBuilder())->fromParameters([]);
+    $xmlConfiguration = DefaultConfiguration::create();
+    Registry::init($cliConfiguration, $xmlConfiguration);
   }
 
   /**

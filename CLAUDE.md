@@ -198,6 +198,44 @@ docker compose -f docker/docker-compose.dev.yaml build --no-cache app.catroweb
 curl -s -o /dev/null -w "%{http_code}" http://localhost:8080
 ```
 
+## PHP Static Analysis & Testing
+
+When making PHP changes, run these tools before committing:
+
+```bash
+# PHP CS Fixer - code style (run first, auto-fixes issues)
+docker exec app.catroweb bin/php-cs-fixer fix
+docker exec app.catroweb bin/php-cs-fixer fix src/Path/To/File.php
+
+# PHPStan - static analysis (level max)
+docker exec app.catroweb bin/phpstan analyse
+docker exec app.catroweb bin/phpstan analyse src/Path/To/File.php
+
+# Psalm - type checking
+docker exec app.catroweb bin/psalm
+docker exec app.catroweb bin/psalm src/Path/To/File.php
+
+# PHPUnit - unit tests
+docker exec app.catroweb bin/phpunit --filter ClassName
+```
+
+**All four tools must pass before merging.**
+
+## Behat Testing
+
+### Running Behat Tests
+
+```bash
+# Run all tests for a specific suite
+docker exec app.catroweb bin/behat -f pretty -s web-admin
+
+# Run a specific feature file
+docker exec app.catroweb bin/behat -f pretty tests/BehatFeatures/web/admin/login_basics.feature
+
+# Run a specific scenario by line number
+docker exec app.catroweb bin/behat -f pretty "tests/BehatFeatures/web/admin/featured_programs.feature:206"
+```
+
 ## Git Workflow
 
 - Main branch: `develop`
