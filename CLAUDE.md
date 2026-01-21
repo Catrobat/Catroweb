@@ -225,16 +225,29 @@ docker exec app.catroweb bin/phpunit --filter ClassName
 
 ### Running Behat Tests
 
+**IMPORTANT: Always use the `-s <suite>` flag when running Behat tests.** Without it, hooks run once for each suite (20+ times) even for a single test, making tests extremely slow.
+
 ```bash
 # Run all tests for a specific suite
 docker exec app.catroweb bin/behat -f pretty -s web-admin
 
-# Run a specific feature file
-docker exec app.catroweb bin/behat -f pretty tests/BehatFeatures/web/admin/login_basics.feature
+# Run a specific feature file (ALWAYS include -s <suite>)
+docker exec app.catroweb bin/behat -f pretty -s web-profile tests/BehatFeatures/web/profile/profile_user_projects.feature
 
-# Run a specific scenario by line number
-docker exec app.catroweb bin/behat -f pretty "tests/BehatFeatures/web/admin/featured_programs.feature:206"
+# Run a specific scenario by line number (ALWAYS include -s <suite>)
+docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/web/admin/featured_programs.feature:206"
 ```
+
+### Common Suites
+
+| Suite       | Path                            |
+| ----------- | ------------------------------- |
+| web-admin   | tests/BehatFeatures/web/admin   |
+| web-profile | tests/BehatFeatures/web/profile |
+| web-general | tests/BehatFeatures/web/general |
+| api         | tests/BehatFeatures/api         |
+
+Suite configuration is in `behat.yaml.dist`.
 
 ## Git Workflow
 

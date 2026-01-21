@@ -97,14 +97,14 @@ Feature: There should be all projects of a user presented on a profile page
     And I should see "project 27"
     And I should see "project 28"
 
-  Scenario: at my profile page there should always all projects be visible up to 20 until i scroll to the end of the screen
+  Scenario: at my profile page lazy loading loads more projects when scrolling
     Given I log in as "User3"
     And I am on "/app/user"
     And I wait for the page to be loaded
     Then I should see 20 ".own-project-list__project"
-    When I scroll vertical on "own-projects" using a value of "30"
+    When I scroll to the bottom of the page
     And I wait for AJAX to finish
-    Then I should see 5 ".own-project-list__project"
+    Then I should see "project 4"
 
   Scenario: at a profile page there should always all projects be visible
     Given I am on "/app/user/1"
