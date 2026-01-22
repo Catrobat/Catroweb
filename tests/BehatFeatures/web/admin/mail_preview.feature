@@ -18,7 +18,7 @@ Scenario: Valid Confirmation Email Template:
   When I select option 1 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field
   And I click "#preview-button"
-  And I switch to the new tab
+  And I switch to the new tab to preview the mail
   And I wait for the page to be loaded
   Then I should see "Catrobat"
 
@@ -29,7 +29,7 @@ Scenario: Valid Reset Email Template:
   When I select option 2 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field
   And I click "#preview-button"
-  And I switch to the new tab
+  And I switch to the new tab to preview the mail
   And I wait for the page to be loaded
   Then I should see "Catrobat"
 
@@ -42,7 +42,7 @@ Scenario: Valid Simple Message Email Template:
   And I enter "Subject" into the "subject" field
   And I enter "Content" into the "content" field
   And I click "#preview-button"
-  And I switch to the new tab
+  And I switch to the new tab to preview the mail
   And I wait for the page to be loaded
   Then I should see "Catrobat"
 
@@ -53,7 +53,7 @@ Scenario: Invalid Subject Simple Message Email Template:
   When I select option 3 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field
   And I click "#preview-button"
-  And I switch to the new tab
+  And I switch to the new tab to preview the mail
   And I wait for the page to be loaded
   Then I should see "Empty subject!"
 
@@ -65,6 +65,6 @@ Scenario: Invalid Content Simple Message Email Template:
   And I enter "Tyrell" into the "username" field
   And I enter "Subject" into the "subject" field
   And I click "#preview-button"
-  And I switch to the new tab
+  And I switch to the new tab to preview the mail
   And I wait for the page to be loaded
   Then I should see "Empty message!"

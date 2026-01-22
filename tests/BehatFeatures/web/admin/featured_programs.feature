@@ -217,7 +217,8 @@ Feature: Admin featured programs
     And I wait for the page to be loaded
     Then I should be on "/admin/project/featured/create"
     When I attach the avatar "galaxy.jpg" to "File"
-    Then I write "1" in textarea with label "Use Url"
+    When I click ".iCheck-helper"
+    Then the "Use Url" checkbox should be checked
     Then I write "catrobat.at/app/project/dead-beef" in textarea with label "Program Id Or Url"
     Then I write "3" in textarea with label "Priority"
     Then I click ".btn-success"

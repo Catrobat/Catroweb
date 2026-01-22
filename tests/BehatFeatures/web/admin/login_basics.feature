@@ -12,7 +12,7 @@ Feature: Admin Role Restrictions
   Scenario: As a ordinary user i want not to be able to log in the backend
     Given I am logged in as normal user
     When I GET "/admin/dashboard"
-    Then the client response should contain "403 Forbidden"
+    Then the client response should contain "Access Denied"
 
   Scenario: As user i should not see the admin button
     Given I am logged in as normal user

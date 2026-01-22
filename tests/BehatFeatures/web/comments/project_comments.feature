@@ -116,7 +116,7 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "c1"
-    And I should see "0 replies"
+    And one of the "#comment-1 .comment-replies-count span" elements should contain "0"
     But I should not see "c2"
 
   Scenario: I should be able to see the number of replies that belong to a comment - comment with more than one reply
@@ -128,20 +128,19 @@ Feature: As a visitor I want to write, see and report comments.
     And I should see "c5"
     And I should see "c6"
 
-    And I should not see "3 replies"
+    And none of the ".comment-replies-count span" elements should contain "3"
     But I should not see "c7"
     And I should not see "c8"
     And I should not see "c9"
     And I should not see "c10"
     And I should not see "c11"
 
-    And the element "#show-more-comments-button" should be visible
-    But the element "#show-less-comments-button" should not be visible
+    When I scroll to the bottom of the page
+    And I wait 500 milliseconds
 
-    When I click "#show-more-comments-button"
     Then I should see "c7"
     And I should see "c8"
-    And I should see "3 replies"
+    And one of the ".comment-replies-count span" elements should contain "3"
     But I should not see "c9"
     But I should not see "c10"
     But I should not see "c11"
@@ -150,13 +149,13 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/app/project/4"
     And I wait for the page to be loaded
     Then I should see "c12"
-    And I should see "1 reply"
+    And one of the "#comment-12 .comment-replies-count span" elements should contain "1"
 
   Scenario: I should be able to see the deleted comments, however, not their text.
     Given I am on "/app/project/5"
     And I wait for the page to be loaded
-    Then I should see "**Deleted**"
-    And I should see "1 reply"
+    And one of the "#comment-14 .comment-text" elements should contain "**Deleted**"
+    And one of the "#comment-14 .comment-replies-count span" elements should contain "1"
 
     And the element ".comment-translation-button" should not exist
     And the element ".comment-report-button" should not exist
@@ -167,13 +166,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for the page to be loaded
     Then the element ".single-comment" should not exist
 
-  Scenario: When there are less than 5 comments i should not see the show more/less buttons
-    Given I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then the element "#show-more-comments-button" should not be visible
-    And the element "#show-more-comments-button" should not be visible
-
-  Scenario: I should be able to see only the first 5 existing comments (order newest first)
+  Scenario: I should be able to see only the first 5 existing comments (order newest first) without scrolling
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
     Then I should see "c2"
@@ -182,23 +175,6 @@ Feature: As a visitor I want to write, see and report comments.
     And I should see "c5"
     And I should see "c6"
     But I should not see "c7"
-    And the element "#show-more-comments-button" should be visible
-    But the element "#show-less-comments-button" should not be visible
-
-  Scenario: Pressing the show more/less button should result in more/less displayed comments
-    Given I am on "/app/project/2"
-    And I wait for the page to be loaded
-    And I should not see "c7"
-    When I click "#show-more-comments-button"
-    And I wait for AJAX to finish
-    Then I should see "c7"
-    And the element "#show-less-comments-button" should be visible
-    But the element "#show-more-comments-button" should not be visible
-    When I click "#show-less-comments-button"
-    And I wait for AJAX to finish
-    Then I should not see "c7"
-    And the element "#show-less-comments-button" should not be visible
-    But the element "#show-more-comments-button" should be visible
 
   Scenario: I can't report my own comment
     Given I log in as "Catrobat"
@@ -219,11 +195,11 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click ".comment-report-button"
-    And I wait for AJAX to finish
+    And I click "#comment-report-button-1"
+    And I wait 500 milliseconds
     Then I should see "Are you sure?"
     When I click ".swal2-confirm"
-    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     Then I should see "Reported"
 
   Scenario: When I am logged in as an admin, I should see a delete button
@@ -242,8 +218,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for the page to be loaded
     Then the element ".comment-delete-button" should not exist
 
-  Scenario: When I am logged in as an admin and I delete a comment it should be gone, but there
-  should be a confirmation pop up
+  Scenario: When I am logged in as an admin and I delete a comment it should be gone, but there should be a confirmation pop up
     Given I log in as "Admin"
     And I am on "/app/project/1"
     And I wait for the page to be loaded

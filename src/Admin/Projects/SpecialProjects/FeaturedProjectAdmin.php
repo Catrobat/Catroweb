@@ -77,7 +77,20 @@ class FeaturedProjectAdmin extends AbstractAdmin
     $id = $this->getForm()->get('Program_Id_or_Url')->getData();
 
     if ($this->getForm()->get('Use_Url')->getData()) {
-      if (filter_var($id, FILTER_VALIDATE_URL)) {
+      // Check if this is a project URL (contains /project/) - extract project ID
+      if (null !== $id && str_contains((string) $id, '/project/')) {
+        $projectId = preg_replace('$(.*)/project/$', '', (string) $id);
+        $project = $this->project_manager->find($projectId);
+
+        if (null !== $project) {
+          $object->setProgram($project);
+          if (null !== $object->getURL()) {
+            $object->setURL(null);
+          }
+        } else {
+          $this->getForm()->addError(new FormError('Unable to find project with given ID.'));
+        }
+      } elseif (filter_var($id, FILTER_VALIDATE_URL)) {
         $object->setUrl($id);
         if (null !== $object->getId()) {
           $object->setProgram(null);
