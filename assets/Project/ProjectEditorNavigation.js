@@ -26,12 +26,18 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
     this.openEditor(null, true, false, this.createTranslationText)
   })
 
-  document.addEventListener('DOMContentLoaded', getLanguages)
+  // Handle both cases: script runs before or after DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', getLanguages)
+  } else {
+    getLanguages()
+  }
 
   document.addEventListener('click', function (event) {
-    if (event.target && event.target.matches('.edit-defined-translation')) {
-      const language = event.target.dataset.value
-      const languageName = event.target.dataset.language
+    const translationButton = event.target.closest('.edit-defined-translation')
+    if (translationButton) {
+      const language = translationButton.dataset.value
+      const languageName = translationButton.dataset.language
 
       if (language === 'default') {
         self.openEditor(language, false, false, self.editDefaultText)
