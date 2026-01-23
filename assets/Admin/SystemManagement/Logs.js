@@ -90,7 +90,7 @@ function applyFilters() {
 function loadFileContent(file) {
   document.getElementById('loading-spinner').style.display = 'block'
   document.getElementById('innerLogContainer').innerHTML = ''
-  document.getElementById('currentFileName').innerHTML = file
+  document.getElementById('currentFileName').textContent = file
 
   fetch(`${window.location.href}?file=${file}&count=1000`)
     .then((response) => {
