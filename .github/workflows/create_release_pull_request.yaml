@@ -13,6 +13,10 @@
 #
 name: Create Release PR
 
+permissions:
+  contents: write
+  pull-requests: write
+
 on:
   workflow_dispatch:
 
