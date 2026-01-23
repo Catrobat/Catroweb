@@ -42,6 +42,11 @@ Model/OAuthLoginRequest.php
 Model/ProjectReportRequest.php
 Model/ProjectResponse.php
 Model/ProjectsCategory.php
+Model/ReactionRequest.php
+Model/ReactionSummaryResponse.php
+Model/ReactionUserEntry.php
+Model/ReactionUserInfo.php
+Model/ReactionUsersResponse.php
 Model/RefreshRequest.php
 Model/RegisterErrorResponse.php
 Model/RegisterRequest.php
@@ -98,6 +103,11 @@ Tests/Model/OAuthLoginRequestTest.php
 Tests/Model/ProjectReportRequestTest.php
 Tests/Model/ProjectResponseTest.php
 Tests/Model/ProjectsCategoryTest.php
+Tests/Model/ReactionRequestTest.php
+Tests/Model/ReactionSummaryResponseTest.php
+Tests/Model/ReactionUserEntryTest.php
+Tests/Model/ReactionUserInfoTest.php
+Tests/Model/ReactionUsersResponseTest.php
 Tests/Model/RefreshRequestTest.php
 Tests/Model/RegisterErrorResponseTest.php
 Tests/Model/RegisterRequestTest.php
@@ -144,6 +154,11 @@ docs/Model/OAuthLoginRequest.md
 docs/Model/ProjectReportRequest.md
 docs/Model/ProjectResponse.md
 docs/Model/ProjectsCategory.md
+docs/Model/ReactionRequest.md
+docs/Model/ReactionSummaryResponse.md
+docs/Model/ReactionUserEntry.md
+docs/Model/ReactionUserInfo.md
+docs/Model/ReactionUsersResponse.md
 docs/Model/RefreshRequest.md
 docs/Model/RegisterErrorResponse.md
 docs/Model/RegisterRequest.md

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * LoginRequest.
+ * ReactionUserInfo.
  *
  * PHP version 8.1.1
  *
@@ -35,47 +35,44 @@ use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the LoginRequest model.
+ * Class representing the ReactionUserInfo model.
  *
  * @author  OpenAPI Generator team
  */
-class LoginRequest
+class ReactionUserInfo
 {
   /**
-   * Name of the user.
+   * Unique ID of the user.
+   *
+   * @SerializedName("id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $id = null;
+
+  /**
+   * Username of the user.
    *
    * @SerializedName("username")
    *
    * @Assert\Type("string")
    *
    * @Type("string")
-   *
-   * @Assert\Length(
-   *   max = 180
-   * )
-   * @Assert\Length(
-   *   min = 3
-   * )
    */
   protected ?string $username = null;
 
   /**
-   * A secure password.
+   * URL to the users avatar image.
    *
-   * @SerializedName("password")
+   * @SerializedName("avatar")
    *
    * @Assert\Type("string")
    *
    * @Type("string")
-   *
-   * @Assert\Length(
-   *   max = 4096
-   * )
-   * @Assert\Length(
-   *   min = 6
-   * )
    */
-  protected ?string $password = null;
+  protected ?string $avatar = null;
 
   /**
    * Constructor.
@@ -85,9 +82,32 @@ class LoginRequest
   public function __construct(?array $data = null)
   {
     if (is_array($data)) {
+      $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->username = array_key_exists('username', $data) ? $data['username'] : $this->username;
-      $this->password = array_key_exists('password', $data) ? $data['password'] : $this->password;
+      $this->avatar = array_key_exists('avatar', $data) ? $data['avatar'] : $this->avatar;
     }
+  }
+
+  /**
+   * Gets id.
+   */
+  public function getId(): ?string
+  {
+    return $this->id;
+  }
+
+  /**
+   * Sets id.
+   *
+   * @param string|null $id Unique ID of the user
+   *
+   * @return $this
+   */
+  public function setId(?string $id = null): self
+  {
+    $this->id = $id;
+
+    return $this;
   }
 
   /**
@@ -101,7 +121,7 @@ class LoginRequest
   /**
    * Sets username.
    *
-   * @param string|null $username Name of the user
+   * @param string|null $username Username of the user
    *
    * @return $this
    */
@@ -113,23 +133,23 @@ class LoginRequest
   }
 
   /**
-   * Gets password.
+   * Gets avatar.
    */
-  public function getPassword(): ?string
+  public function getAvatar(): ?string
   {
-    return $this->password;
+    return $this->avatar;
   }
 
   /**
-   * Sets password.
+   * Sets avatar.
    *
-   * @param string|null $password A secure password
+   * @param string|null $avatar URL to the users avatar image
    *
    * @return $this
    */
-  public function setPassword(?string $password = null): self
+  public function setAvatar(?string $avatar = null): self
   {
-    $this->password = $password;
+    $this->avatar = $avatar;
 
     return $this;
   }

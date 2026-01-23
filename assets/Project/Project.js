@@ -11,8 +11,9 @@ export const Project = function (
   myProgram,
   statusUrl,
   createUrl,
-  likeUrl,
-  likeDetailUrl,
+  apiReactionUrl,
+  apiReactionsUrl,
+  apiReactionsUsersUrl,
   apkPreparing,
   apkText,
   updateAppHeader,
@@ -373,17 +374,27 @@ export const Project = function (
       : document.getElementById('project-reactions-spinner')
     spinner.classList.remove('d-none')
 
-    fetch(likeDetailUrl, {
+    fetch(apiReactionsUsersUrl + '?limit=100', {
       method: 'GET',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
+        Accept: 'application/json',
       },
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then((responseData) => {
+        // Transform new API response to old format for compatibility
+        const data = (responseData.data || []).map((entry) => ({
+          user: {
+            id: entry.user?.id || '',
+            name: entry.user?.username || '',
+          },
+          types: entry.types || [],
+        }))
+
         if (!Array.isArray(data)) {
           showErrorAlert()
-          console.error('Invalid data returned by likeDetailUrl', data)
+          console.error('Invalid data returned by apiReactionsUsersUrl', responseData)
           return
         }
 
@@ -510,21 +521,49 @@ export const Project = function (
     likeDetail,
     smallScreen,
   ) {
-    const url = `${likeUrl}?type=${encodeURIComponent(likeType)}&action=${encodeURIComponent(likeAction)}`
+    // Map numeric type to string type name
+    const typeMap = { 1: 'thumbs_up', 2: 'smile', 3: 'love', 4: 'wow' }
+    const typeName = typeMap[likeType] || likeType
 
     if (userRole === 'guest') {
-      window.location.href = url
+      // Redirect to login - use reactions summary page as return URL
+      window.location.href = '/login'
       return false
     }
 
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-      },
-    })
-      .then((response) => response.json())
+    const isAdd = likeAction === likeActionAdd
+    let url = apiReactionUrl
+    if (!isAdd) {
+      url = `${apiReactionUrl}?type=${encodeURIComponent(typeName)}`
+    }
+
+    // Use ApiFetch to include JWT Bearer token for authenticated requests
+    const apiFetch = new ApiFetch(
+      url,
+      isAdd ? 'POST' : 'DELETE',
+      isAdd ? { type: typeName } : undefined,
+    )
+    apiFetch
+      .generateAuthenticatedFetch()
+      .then((response) => {
+        if (response.status === 401) {
+          window.location.href = '/login'
+          throw new Error('Unauthorized')
+        }
+        // Both POST (201/200) and DELETE (204) need to fetch summary for updated counts
+        // POST returns ReactionResponse with just {type}, DELETE returns 204 No Content
+        if (response.ok) {
+          return fetch(apiReactionsUrl, {
+            method: 'GET',
+            headers: { Accept: 'application/json' },
+          }).then((r) => r.json())
+        }
+        // Handle other errors
+        throw new Error(`Request failed with status ${response.status}`)
+      })
       .then((data) => {
+        if (!data) return
+
         const typeBtn = likeDetail.querySelector(`.btn[data-like-type="${likeType}"]`)
         if (likeAction === likeActionAdd) {
           typeBtn.classList.add('active')
@@ -533,36 +572,38 @@ export const Project = function (
         }
 
         const iconSize = smallScreen ? 'md-24' : 'md-28'
-        likeCounter.textContent = `${data.totalLikeCount.stringValue} ${reactionsText}`
+        const totalCount = data.total || 0
+        likeCounter.textContent = `${totalCount} ${reactionsText}`
 
-        if (data.totalLikeCount.value === 0) {
+        if (totalCount === 0) {
           likeCounter.classList.add('d-none')
         } else {
           likeCounter.classList.remove('d-none')
         }
 
-        if (!Array.isArray(data.activeLikeTypes) || data.activeLikeTypes.length === 0) {
+        const activeLikeTypes = data.active_types || []
+        if (!Array.isArray(activeLikeTypes) || activeLikeTypes.length === 0) {
           likeButtons.innerHTML = `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
                     <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
         } else {
           let html = ''
 
-          if (data.activeLikeTypes.includes('thumbs_up')) {
+          if (activeLikeTypes.includes('thumbs_up')) {
             html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
                         <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
           }
 
-          if (data.activeLikeTypes.includes('smile')) {
+          if (activeLikeTypes.includes('smile')) {
             html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
                         <i class="material-icons smile ${iconSize}">sentiment_very_satisfied</i></div>`
           }
 
-          if (data.activeLikeTypes.includes('love')) {
+          if (activeLikeTypes.includes('love')) {
             html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
                         <i class="material-icons love ${iconSize}">favorite</i></div>`
           }
 
-          if (data.activeLikeTypes.includes('wow')) {
+          if (activeLikeTypes.includes('wow')) {
             const img = document.createElement('IMG')
             const div = document.createElement('DIV')
             div.className =
@@ -578,9 +619,7 @@ export const Project = function (
         }
       })
       .catch((error) => {
-        if (error.status === 401) {
-          window.location.href = url
-        } else {
+        if (error.message !== 'Unauthorized') {
           console.error('Like failure', error)
           showErrorAlert()
         }

@@ -129,6 +129,10 @@ All URIs are relative to *https://share.catrob.at/api*
 | _ProjectsApiInterface_       | [**projectIdDelete**](docs/Api/ProjectsApiInterface.md#projectiddelete)                           | **DELETE** /project/{id}              | Delete a project                                                                                           |
 | _ProjectsApiInterface_       | [**projectIdGet**](docs/Api/ProjectsApiInterface.md#projectidget)                                 | **GET** /project/{id}                 | Get the information of a project                                                                           |
 | _ProjectsApiInterface_       | [**projectIdPut**](docs/Api/ProjectsApiInterface.md#projectidput)                                 | **PUT** /project/{id}                 | Update details of a project                                                                                |
+| _ProjectsApiInterface_       | [**projectIdReactionDelete**](docs/Api/ProjectsApiInterface.md#projectidreactiondelete)           | **DELETE** /project/{id}/reaction     | Remove a reaction from a project                                                                           |
+| _ProjectsApiInterface_       | [**projectIdReactionPost**](docs/Api/ProjectsApiInterface.md#projectidreactionpost)               | **POST** /project/{id}/reaction       | Add a reaction to a project                                                                                |
+| _ProjectsApiInterface_       | [**projectIdReactionsGet**](docs/Api/ProjectsApiInterface.md#projectidreactionsget)               | **GET** /project/{id}/reactions       | Get reaction summary for a project                                                                         |
+| _ProjectsApiInterface_       | [**projectIdReactionsUsersGet**](docs/Api/ProjectsApiInterface.md#projectidreactionsusersget)     | **GET** /project/{id}/reactions/users | Get users who reacted to a project                                                                         |
 | _ProjectsApiInterface_       | [**projectIdRecommendationsGet**](docs/Api/ProjectsApiInterface.md#projectidrecommendationsget)   | **GET** /project/{id}/recommendations | Get recommended projects related to the specific project                                                   |
 | _ProjectsApiInterface_       | [**projectIdReportPost**](docs/Api/ProjectsApiInterface.md#projectidreportpost)                   | **POST** /project/{id}/report         | Report a project -- StatusCode: 501 - Not yet implemented                                                  |
 | _ProjectsApiInterface_       | [**projectsCategoriesGet**](docs/Api/ProjectsApiInterface.md#projectscategoriesget)               | **GET** /projects/categories          | Get default number of projects per category (Most downloaded etc.)                                         |
@@ -177,6 +181,11 @@ All URIs are relative to *https://share.catrob.at/api*
 - [ProjectReportRequest](docs/Model/ProjectReportRequest.md)
 - [ProjectResponse](docs/Model/ProjectResponse.md)
 - [ProjectsCategory](docs/Model/ProjectsCategory.md)
+- [ReactionRequest](docs/Model/ReactionRequest.md)
+- [ReactionSummaryResponse](docs/Model/ReactionSummaryResponse.md)
+- [ReactionUserEntry](docs/Model/ReactionUserEntry.md)
+- [ReactionUserInfo](docs/Model/ReactionUserInfo.md)
+- [ReactionUsersResponse](docs/Model/ReactionUsersResponse.md)
 - [RefreshRequest](docs/Model/RefreshRequest.md)
 - [RegisterErrorResponse](docs/Model/RegisterErrorResponse.md)
 - [RegisterRequest](docs/Model/RegisterRequest.md)

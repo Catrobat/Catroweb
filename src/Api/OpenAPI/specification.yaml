@@ -963,6 +963,153 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  '/project/{id}/reaction':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Projects'
+      summary: 'Add a reaction to a project'
+      description: 'Add a reaction (like) to a project. A user can add multiple reaction types to the same project. Requires authentication.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReactionRequest'
+      responses:
+        '201':
+          description: 'Reaction successfully added'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReactionSummaryResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          description: 'Reaction already exists'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Projects'
+      summary: 'Remove a reaction from a project'
+      description: 'Remove a specific reaction type from a project. Requires authentication.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - name: type
+          in: query
+          required: true
+          description: 'The type of reaction to remove'
+          schema:
+            type: string
+            enum:
+              - 'thumbs_up'
+              - 'smile'
+              - 'love'
+              - 'wow'
+      responses:
+        '204':
+          description: 'Reaction successfully removed'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/project/{id}/reactions':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Projects'
+      summary: 'Get reaction summary for a project'
+      description: 'Get the count of reactions by type for a project. Returns 404 if project is not visible to the current user.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReactionSummaryResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/project/{id}/reactions/users':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Projects'
+      summary: 'Get users who reacted to a project'
+      description: 'Get a paginated list of users who reacted to a project with their reaction types. Uses cursor-based pagination for efficient handling of large datasets. Returns 404 if project is not visible to the current user.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - name: type
+          in: query
+          required: false
+          description: 'Filter by reaction type. If not specified, returns all reactions.'
+          schema:
+            type: string
+            enum:
+              - 'thumbs_up'
+              - 'smile'
+              - 'love'
+              - 'wow'
+        - $ref: '#/components/parameters/Limit'
+        - name: cursor
+          in: query
+          required: false
+          description: 'Cursor for pagination (user_id from last result for next page)'
+          schema:
+            type: string
+            example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReactionUsersResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
   ################################################
   # Notifications
   #
@@ -2538,3 +2685,123 @@ components:
         users_total:
           type: integer
           example: 15
+
+    ######################################################
+    # Reaction Schemas
+    ###
+    ReactionRequest:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - 'thumbs_up'
+            - 'smile'
+            - 'love'
+            - 'wow'
+          description: 'The type of reaction'
+          example: 'thumbs_up'
+
+    ReactionSummaryResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: 'Total number of reactions across all types'
+          example: 42
+        thumbs_up:
+          type: integer
+          description: 'Number of thumbs_up reactions'
+          example: 20
+        smile:
+          type: integer
+          description: 'Number of smile reactions'
+          example: 10
+        love:
+          type: integer
+          description: 'Number of love reactions'
+          example: 8
+        wow:
+          type: integer
+          description: 'Number of wow reactions'
+          example: 4
+        user_reactions:
+          type: array
+          description: 'Current users reaction types (empty if not authenticated)'
+          items:
+            type: string
+            enum:
+              - 'thumbs_up'
+              - 'smile'
+              - 'love'
+              - 'wow'
+          example: ['thumbs_up', 'love']
+        active_types:
+          type: array
+          description: 'All reaction types that have at least one reaction'
+          items:
+            type: string
+            enum:
+              - 'thumbs_up'
+              - 'smile'
+              - 'love'
+              - 'wow'
+          example: ['thumbs_up', 'smile', 'love', 'wow']
+
+    ReactionUsersResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: 'Array of users who reacted'
+          items:
+            $ref: '#/components/schemas/ReactionUserEntry'
+        next_cursor:
+          type: string
+          nullable: true
+          description: 'Cursor for the next page, null if no more results'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        has_more:
+          type: boolean
+          description: 'Whether there are more results available'
+          example: true
+
+    ReactionUserEntry:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/ReactionUserInfo'
+        types:
+          type: array
+          description: 'Reaction types by this user'
+          items:
+            type: string
+            enum:
+              - 'thumbs_up'
+              - 'smile'
+              - 'love'
+              - 'wow'
+          example: ['thumbs_up', 'love']
+        reacted_at:
+          type: string
+          format: date-time
+          description: 'When the most recent reaction was added'
+          example: '2024-01-15T10:30:00Z'
+
+    ReactionUserInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique ID of the user'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        username:
+          type: string
+          description: 'Username of the user'
+          example: 'Catrobat'
+        avatar:
+          type: string
+          description: 'URL to the users avatar image'
+          example: 'https://share.catrob.at/images/default/avatar_default.png'

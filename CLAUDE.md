@@ -1,5 +1,16 @@
 # Catroweb - Project Guide for Claude
 
+## Important: Keep This Document Updated
+
+**Always update CLAUDE.md with new learnings** discovered during development sessions. This includes:
+
+- Gotchas and non-obvious behaviors
+- Patterns that work vs patterns that don't
+- Correct tool/command usage discovered through trial and error
+- API quirks and workarounds
+
+This ensures future sessions benefit from past discoveries.
+
 ## Overview
 
 Catroweb is the share/communication platform for the Catrobat community. It's a Symfony-based PHP application with a modern frontend using Webpack Encore.
@@ -240,14 +251,68 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 
 ### Common Suites
 
-| Suite       | Path                            |
-| ----------- | ------------------------------- |
-| web-admin   | tests/BehatFeatures/web/admin   |
-| web-profile | tests/BehatFeatures/web/profile |
-| web-general | tests/BehatFeatures/web/general |
-| api         | tests/BehatFeatures/api         |
+| Suite               | Path                                    |
+| ------------------- | --------------------------------------- |
+| web-admin           | tests/BehatFeatures/web/admin           |
+| web-profile         | tests/BehatFeatures/web/profile         |
+| web-general         | tests/BehatFeatures/web/general         |
+| web-translation     | tests/BehatFeatures/web/translation     |
+| web-project-details | tests/BehatFeatures/web/project-details |
+| web-reactions       | tests/BehatFeatures/web/reactions       |
+| api-projects        | tests/BehatFeatures/api/projects        |
+| api-authentication  | tests/BehatFeatures/api/authentication  |
 
 Suite configuration is in `behat.yaml.dist`.
+
+### Behat Assertion Contexts
+
+Different contexts use different assertion step definitions:
+
+- **API tests** (`ApiContext`): Use `the client response should contain` for JSON response assertions
+- **Web tests** (`CatrowebBrowserContext`): Use `the response should contain` for HTML page assertions
+
+```gherkin
+# API test (JSON)
+And the client response should contain "total"
+And the client response should not contain "Catrobat"
+
+# Web test (HTML)
+And the response should contain "Welcome"
+```
+
+### Debugging Behat Tests
+
+After running a Behat scenario, you can browse the test state live at:
+`http://localhost:8080/index_test.php/`
+
+This helps debug failing tests by seeing the actual page state.
+
+## JavaScript Patterns
+
+### DOMContentLoaded with Deferred Scripts
+
+Scripts loaded with `defer` (Webpack Encore default) run AFTER DOMContentLoaded fires. Use this pattern:
+
+```javascript
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFunction)
+} else {
+  initFunction()
+}
+```
+
+### Event Delegation with Child Elements
+
+When using event delegation, use `.closest()` instead of `.matches()` to handle clicks on child elements:
+
+```javascript
+// Bad - won't work if clicking on child elements
+if (event.target.matches('.my-button')) { ... }
+
+// Good - works for clicks anywhere inside the button
+const button = event.target.closest('.my-button')
+if (button) { ... }
+```
 
 ## Git Workflow
 
@@ -259,3 +324,57 @@ Suite configuration is in `behat.yaml.dist`.
 
 - OpenAPI spec in `src/Api/OpenAPI/`
 - Generate API client: `npm run generate-api`
+
+### OpenAPI Enum Serialization (Important!)
+
+**Never use `$ref` to a separate schema for enums in response models.** The OpenAPI generator creates PHP backed enums that JMS Serializer serializes as objects instead of strings:
+
+```
+// BAD - using $ref: '#/components/schemas/ReactionType'
+"types": [{"name": "LOVE", "value": "love"}]
+// GOOD - using inline enum
+"types": ["love"]
+```
+
+**Pattern that works:** Use inline enum definitions directly where needed:
+
+```yaml
+# GOOD - inline enum (serializes as string)
+type: string
+enum:
+  - 'thumbs_up'
+  - 'smile'
+  - 'love'
+  - 'wow'
+
+# BAD - separate schema reference (serializes as object)
+$ref: '#/components/schemas/ReactionType'
+```
+
+This applies to:
+
+- Response model properties (arrays of enums)
+- Request body properties
+- Query parameters
+
+For query parameters, you can still define reusable parameters, just use inline enum in the schema.
+
+### API Architecture
+
+The API follows a facade pattern with these components per feature:
+
+```
+src/Api/Services/{Feature}/
+├── {Feature}ApiFacade.php           # Orchestrates the feature
+├── {Feature}ApiLoader.php           # Data loading/queries
+├── {Feature}ApiProcessor.php        # Business logic
+├── {Feature}RequestValidator.php    # Input validation
+└── {Feature}ResponseManager.php     # Response formatting
+```
+
+The main `ProjectsApi.php` delegates to these facades.
+
+### HTTP Status Codes for Validation
+
+- **400 Bad Request**: Query parameter validation failures (enum values in URL)
+- **422 Unprocessable Entity**: Request body validation failures (JSON body content)

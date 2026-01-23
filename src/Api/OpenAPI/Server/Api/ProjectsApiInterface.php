@@ -31,6 +31,7 @@
 namespace OpenAPI\Server\Api;
 
 use OpenAPI\Server\Model\ProjectReportRequest;
+use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -112,6 +113,84 @@ interface ProjectsApiInterface
     string $id,
     UpdateProjectRequest $update_project_request,
     string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation projectIdReactionDelete.
+   *
+   * Remove a reaction from a project
+   *
+   * @param string $id              (required)
+   * @param string $type            The type of reaction to remove (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectIdReactionDelete(
+    string $id,
+    string $type,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation projectIdReactionPost.
+   *
+   * Add a reaction to a project
+   *
+   * @param string          $id               (required)
+   * @param ReactionRequest $reaction_request (required)
+   * @param string          $accept_language  (optional, default to 'en')
+   * @param int             &$responseCode    The HTTP Response Code
+   * @param array           $responseHeaders  Additional HTTP headers to return with the response ()
+   */
+  public function projectIdReactionPost(
+    string $id,
+    ReactionRequest $reaction_request,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation projectIdReactionsGet.
+   *
+   * Get reaction summary for a project
+   *
+   * @param string $id              (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectIdReactionsGet(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation projectIdReactionsUsersGet.
+   *
+   * Get users who reacted to a project
+   *
+   * @param string      $id              (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param string|null $type            Filter by reaction type. If not specified, returns all reactions. (optional)
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (user_id from last result for next page) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectIdReactionsUsersGet(
+    string $id,
+    string $accept_language,
+    ?string $type,
+    int $limit,
+    ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
