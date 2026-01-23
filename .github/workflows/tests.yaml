@@ -7,6 +7,9 @@
 #
 name: 'Dynamic analysis'
 
+permissions:
+  contents: read
+
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request is a branch on the same repository. (E.g dependabot)
 on:
