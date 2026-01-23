@@ -15,6 +15,9 @@
 #
 name: 'Docker Container tests'
 
+permissions:
+  contents: read
+
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
 # For example, this happens with dependabot.
