@@ -125,6 +125,7 @@ Project(
   projectElement.dataset.myProject === 'true',
   projectElement.dataset.pathCiStatus,
   projectElement.dataset.pathCiBuild,
+  projectElement.dataset.loginUrl,
   projectElement.dataset.apiReactionUrl,
   projectElement.dataset.apiReactionsUrl,
   projectElement.dataset.apiReactionsUsersUrl,

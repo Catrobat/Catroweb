@@ -205,6 +205,7 @@
        data-my-project="{% if my_project %}true{% else %}false{% endif %}"
        data-path-ci-status="{{ path('ci_status', {id: project.id}) }}"
        data-path-ci-build="{{ path('ci_build', {id: project.id}) }}"
+       data-login-url="{{ url('login') }}"
        data-api-reaction-url="{{ path('open_api_server_projects_projectidreactionpost', {id: project.id}) }}"
        data-api-reactions-url="{{ path('open_api_server_projects_projectidreactionsget', {id: project.id}) }}"
        data-api-reactions-users-url="{{ path('open_api_server_projects_projectidreactionsusersget', {id: project.id}) }}"

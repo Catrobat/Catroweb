@@ -9,7 +9,7 @@
 - Correct tool/command usage discovered through trial and error
 - API quirks and workarounds
 
-This ensures future sessions benefit from past discoveries.
+This ensures future sessions benefit from past discoveries. Also run `npm run fix-asset` after updating.
 
 ## Overview
 
@@ -23,6 +23,24 @@ Catroweb is the share/communication platform for the Catrobat community. It's a 
 - **Search**: Elasticsearch 7.17
 - **CSS Framework**: Bootstrap 5, Material Design Components
 - **Package Managers**: Composer (PHP), npm (JS)
+
+## Command Execution Environment
+
+- **npm commands**: Run **locally** (npm, eslint, stylelint, prettier, webpack)
+- **PHP commands**: Try **native first** (`bin/phpstan`, `bin/psalm`, etc.), fall back to **Docker** if not available
+
+```bash
+# Prefer native if available
+bin/php-cs-fixer fix src/Path/To/File.php
+bin/phpstan analyse src/Path/To/File.php
+bin/psalm src/Path/To/File.php
+bin/phpunit --filter ClassName
+
+# Fall back to Docker if native commands don't work
+docker exec app.catroweb bin/php-cs-fixer fix src/Path/To/File.php
+docker exec app.catroweb bin/phpstan analyse src/Path/To/File.php
+# etc.
+```
 
 ## Key Commands
 
@@ -286,6 +304,50 @@ After running a Behat scenario, you can browse the test state live at:
 `http://localhost:8080/index_test.php/`
 
 This helps debug failing tests by seeing the actual page state.
+
+## Development Workflow Checklist
+
+### After PHP Changes (src/)
+
+Always run (in order):
+
+1. `bin/php-cs-fixer fix <file>` - auto-fix style
+2. `bin/phpstan analyse <file>` - static analysis
+3. `bin/psalm <file>` - type checking
+4. Run relevant unit tests if applicable
+
+### After PHP Test Changes (tests/PhpUnit/)
+
+Always run (in order):
+
+1. `bin/php-cs-fixer fix <file>` - auto-fix style
+2. `bin/phpstan analyse <file>` - static analysis
+3. `bin/psalm <file>` - type checking
+4. `bin/phpunit <file>` - run the tests you changed
+
+### After JS/CSS/Asset Changes
+
+Always run:
+
+- `npm run fix-js` - ESLint
+- `npm run fix-css` - Stylelint
+- `npm run fix-asset` - Prettier
+
+**Rebuild required**: SCSS/JS changes require rebuilding assets:
+
+- Run `npm run dev` after changes, OR
+- Keep `npm run watch` running in the background (auto-rebuilds on save)
+
+### When to Run Tests
+
+| Change Type        | Run These                           |
+| ------------------ | ----------------------------------- |
+| PHP business logic | PHPUnit (`bin/phpunit --filter`)    |
+| PHPUnit test files | PHPUnit (`bin/phpunit <test-file>`) |
+| API endpoints      | PHPUnit API tests + Behat API suite |
+| UI/Templates       | Behat web tests                     |
+
+Note: Use `docker exec app.catroweb` prefix if native commands don't work.
 
 ## JavaScript Patterns
 

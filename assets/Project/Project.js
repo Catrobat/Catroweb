@@ -11,6 +11,7 @@ export const Project = function (
   myProgram,
   statusUrl,
   createUrl,
+  loginUrl,
   apiReactionUrl,
   apiReactionsUrl,
   apiReactionsUsersUrl,
@@ -527,7 +528,7 @@ export const Project = function (
 
     if (userRole === 'guest') {
       // Redirect to login - use reactions summary page as return URL
-      window.location.href = '/login'
+      window.location.href = loginUrl
       return false
     }
 
@@ -547,7 +548,7 @@ export const Project = function (
       .generateAuthenticatedFetch()
       .then((response) => {
         if (response.status === 401) {
-          window.location.href = '/login'
+          window.location.href = loginUrl
           throw new Error('Unauthorized')
         }
         // Both POST (201/200) and DELETE (204) need to fetch summary for updated counts
