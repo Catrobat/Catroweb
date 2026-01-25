@@ -35,7 +35,7 @@ export const Project = function (
   function createLinks() {
     document.querySelectorAll('#description').forEach((element) => {
       element.innerHTML = element.innerHTML.replace(
-        /((http|https|ftp):\/\/[\w?=&./+-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g,
+        /((http|https|ftp):\/\/[\w?=&./+\-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g,
         '<a href="$1" target="_blank">$1</a> ',
       )
     })
