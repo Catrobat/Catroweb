@@ -368,7 +368,11 @@ class UserNotifications {
       window.location.assign('follower')
     }
     if (['comment', 'reaction', 'remix', 'program'].includes(type)) {
-      window.location.assign(`project/${id}`)
+      const safeId =
+        typeof id === 'string'
+          ? encodeURIComponent(id.replace(/[^A-Za-z0-9_-]/g, ''))
+          : ''
+      window.location.assign(`project/${safeId}`)
     }
   }
 
