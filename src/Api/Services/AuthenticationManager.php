@@ -47,7 +47,7 @@ class AuthenticationManager
     $token = $this->token_storage->getToken();
 
     $user = $token->getUser();
-    if (!($user instanceof User)) {
+    if (!$user instanceof User) {
       return null;
     }
 
