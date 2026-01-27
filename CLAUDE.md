@@ -305,6 +305,18 @@ After running a Behat scenario, you can browse the test state live at:
 
 This helps debug failing tests by seeing the actual page state.
 
+### JavaScript Changes and Behat Tests
+
+**CRITICAL:** After making JavaScript changes in `assets/`, you MUST run `npm run dev` to compile the changes before running Behat tests. The Docker container serves the compiled assets from `public/build/`, not the source files.
+
+```bash
+# Always do this after JS changes:
+npm run dev
+docker exec app.catroweb bin/behat -f pretty -s web-reactions "tests/BehatFeatures/..."
+```
+
+If Behat tests fail after JavaScript changes but the logic looks correct, check if you forgot to rebuild the assets.
+
 ## Development Workflow Checklist
 
 ### After PHP Changes (src/)
@@ -375,6 +387,52 @@ if (event.target.matches('.my-button')) { ... }
 const button = event.target.closest('.my-button')
 if (button) { ... }
 ```
+
+### Handling Guest User Actions (Redirect to Login Pattern)
+
+When implementing features where guests need to log in before performing an action (e.g., liking a project):
+
+**Pattern:** Store pending action in `sessionStorage`, redirect to login, then execute action after successful login.
+
+```javascript
+// Before redirecting guest to login
+if (userRole === 'guest') {
+  sessionStorage.setItem(
+    'pendingAction',
+    JSON.stringify({
+      projectId: projectId,
+      actionType: 'reaction',
+      actionData: { type: reactionType, action: 'add' },
+    }),
+  )
+  window.location.href = loginUrl
+  return false
+}
+
+// After successful login, in page initialization
+const pendingAction = sessionStorage.getItem('pendingAction')
+if (pendingAction && userRole !== 'guest') {
+  try {
+    const action = JSON.parse(pendingAction)
+    if (action.projectId === projectId) {
+      sessionStorage.removeItem('pendingAction')
+      // Execute the pending action immediately
+      executePendingAction(action)
+    }
+  } catch (e) {
+    console.error('Failed to process pending action', e)
+    sessionStorage.removeItem('pendingAction')
+  }
+}
+```
+
+**Important notes:**
+
+- Use `sessionStorage` (not `localStorage`) so the pending action doesn't persist across browser sessions
+- Always validate the stored data matches the current context (e.g., same project ID)
+- Remove the item immediately after reading to prevent duplicate execution
+- Execute the action synchronously during page initialization to ensure it completes before tests check the results
+- Browser globals like `sessionStorage` are already defined in `eslint.config.js` via `globals.browser`
 
 ## Git Workflow
 
