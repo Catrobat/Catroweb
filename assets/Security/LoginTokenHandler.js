@@ -11,9 +11,22 @@ export class LoginTokenHandler {
   getRedirectUri() {
     const self = this
     const targetPath = document.getElementById('target-path')
-    return targetPath && targetPath.value && targetPath.value !== ''
-      ? targetPath.value
-      : self.indexPath
+    const rawValue = targetPath && typeof targetPath.value === 'string' ? targetPath.value.trim() : ''
+
+    // Only use a provided target path if it results in a same-origin URL.
+    if (rawValue !== '') {
+      try {
+        // The URL constructor will resolve relative paths against the current origin.
+        const url = new URL(rawValue, window.location.origin)
+        if (url.origin === window.location.origin) {
+          return url.pathname + url.search + url.hash
+        }
+      } catch (e) {
+        // If URL construction fails, fall through to the safe default.
+      }
+    }
+
+    return self.indexPath
   }
 
   initListeners() {
