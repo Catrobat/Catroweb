@@ -11,7 +11,7 @@ use OpenAPI\Server\Model\SearchResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -22,7 +22,7 @@ final class SearchApiTest extends DefaultTestCase
 {
   protected SearchApi $search_api;
 
-  protected MockObject|SearchApiFacade $facade;
+  protected SearchApiFacade|Stub $facade;
 
   /**
    * @throws Exception
@@ -30,15 +30,8 @@ final class SearchApiTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->facade = $this->createMock(SearchApiFacade::class);
+    $this->facade = $this->createStub(SearchApiFacade::class);
     $this->search_api = new SearchApi($this->facade);
-  }
-
-  #[Group('integration')]
-  public function testCtor(): void
-  {
-    $this->search_api = new SearchApi($this->facade);
-    $this->assertInstanceOf(SearchApi::class, $this->search_api);
   }
 
   /**

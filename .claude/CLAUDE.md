@@ -498,3 +498,14 @@ The main `ProjectsApi.php` delegates to these facades.
 
 - **400 Bad Request**: Query parameter validation failures (enum values in URL)
 - **422 Unprocessable Entity**: Request body validation failures (JSON body content)
+
+## PHPUnit Testing Best Practices
+
+**See [CLAUDE_PHPUNIT_MOCKING.md](CLAUDE_PHPUNIT_MOCKING.md) for comprehensive guidelines on:**
+
+- When to use `createStub()` vs `createMock()`
+- Common patterns and anti-patterns
+- Refactoring checklist for mock warnings
+- Real examples from the codebase
+
+**Quick Rule:** Use `createStub()` when you need return values. Use `createMock()` only when you verify behavior with `expects()`.

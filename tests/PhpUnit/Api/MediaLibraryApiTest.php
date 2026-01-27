@@ -15,7 +15,7 @@ use OpenAPI\Server\Model\MediaFileResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -26,7 +26,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
 {
   protected MediaLibraryApi $media_library_api;
 
-  protected MediaLibraryApiFacade|MockObject $facade;
+  protected MediaLibraryApiFacade|Stub $facade;
 
   /**
    * @throws Exception
@@ -34,7 +34,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->facade = $this->createMock(MediaLibraryApiFacade::class);
+    $this->facade = $this->createStub(MediaLibraryApiFacade::class);
     $this->media_library_api = new MediaLibraryApi($this->facade);
   }
 
@@ -47,7 +47,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(MediaLibraryApiLoader::class);
+    $loader = $this->createStub(MediaLibraryApiLoader::class);
     $loader->method('searchMediaLibraryFiles')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -65,7 +65,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(MediaLibraryApiLoader::class);
+    $loader = $this->createStub(MediaLibraryApiLoader::class);
     $loader->method('getMediaPackageByName')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -84,8 +84,8 @@ final class MediaLibraryApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(MediaLibraryApiLoader::class);
-    $mediaPackage = $this->createMock(MediaPackage::class);
+    $loader = $this->createStub(MediaLibraryApiLoader::class);
+    $mediaPackage = $this->createStub(MediaPackage::class);
     $mediaPackage->method('getCategories')->willReturn(new ArrayCollection());
     $loader->method('getMediaPackageByName')->willReturn($mediaPackage);
     $this->facade->method('getLoader')->willReturn($loader);
@@ -106,7 +106,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(MediaLibraryApiLoader::class);
+    $loader = $this->createStub(MediaLibraryApiLoader::class);
     $loader->method('getMediaPackageFileByID')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -125,8 +125,8 @@ final class MediaLibraryApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(MediaLibraryApiLoader::class);
-    $loader->method('getMediaPackageFileByID')->willReturn($this->createMock(MediaPackageFile::class));
+    $loader = $this->createStub(MediaLibraryApiLoader::class);
+    $loader->method('getMediaPackageFileByID')->willReturn($this->createStub(MediaPackageFile::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->media_library_api->mediaFileIdGet(1, '', $response_code, $response_headers);
@@ -145,7 +145,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(MediaLibraryApiLoader::class);
+    $loader = $this->createStub(MediaLibraryApiLoader::class);
     $loader->method('getMediaPackageFiles')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 

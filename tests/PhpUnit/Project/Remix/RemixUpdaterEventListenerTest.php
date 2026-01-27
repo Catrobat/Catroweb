@@ -15,8 +15,8 @@ use App\Project\Scratch\AsyncHttpClient;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -38,17 +38,14 @@ class RemixUpdaterEventListenerTest extends TestCase
 
   private MockObject|Program $program_entity;
 
-  /**
-   * @throws Exception
-   */
   #[\Override]
   protected function setUp(): void
   {
     $this->remix_manager = $this->createMock(RemixManager::class);
 
     $this->async_http_client = $this->createMock(AsyncHttpClient::class);
-    $router = $this->createMock(RouterInterface::class);
-    $logger = $this->createMock(LoggerInterface::class);
+    $router = $this->createStub(RouterInterface::class);
+    $logger = $this->createStub(LoggerInterface::class);
 
     $route_map = [
       // It is important to explicitly define all optional parameters!
@@ -57,7 +54,6 @@ class RemixUpdaterEventListenerTest extends TestCase
     ];
 
     $router
-      ->expects($this->any())
       ->method('generate')
       ->willReturnMap($route_map)
     ;
@@ -69,16 +65,14 @@ class RemixUpdaterEventListenerTest extends TestCase
     $filesystem = new Filesystem();
     $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', BootstrapExtension::$CACHE_DIR.'base/');
 
-    $user = $this->createMock(User::class);
+    $user = $this->createStub(User::class);
 
     $user
-      ->expects($this->any())
       ->method('getUsername')
       ->willReturn('catroweb')
     ;
 
     $this->program_entity
-      ->expects($this->any())
       ->method('getUser')
       ->willReturn($user)
     ;
@@ -91,11 +85,6 @@ class RemixUpdaterEventListenerTest extends TestCase
   protected function tearDown(): void
   {
     FileHelper::removeDirectory(BootstrapExtension::$CACHE_DIR.'base/');
-  }
-
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(RemixUpdaterEventListener::class, $this->remix_updater);
   }
 
   /**
@@ -394,8 +383,27 @@ class RemixUpdaterEventListenerTest extends TestCase
   /**
    * @throws \Exception
    */
+  #[AllowMockObjectsWithoutExpectations]
   public function testSavesTheOldUrlToRemixOf(): void
   {
+    // Use stubs instead of mocks since we're not verifying behavior in this test
+    $remix_manager_stub = $this->createStub(RemixManager::class);
+    $async_http_client_stub = $this->createStub(AsyncHttpClient::class);
+    $router_stub = $this->createStub(RouterInterface::class);
+    $logger_stub = $this->createStub(LoggerInterface::class);
+
+    $route_map = [
+      ['program', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['program', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+    ];
+
+    $router_stub
+      ->method('generate')
+      ->willReturnMap($route_map)
+    ;
+
+    $remix_updater_stub = new RemixUpdaterEventListener($remix_manager_stub, $async_http_client_stub, $router_stub, $logger_stub, './CatrobatRemixMigration.lock');
+
     $current_url = 'http://share.catrob.at/details/3570';
     $new_url = 'http://share.catrob.at/details/3571';
 
@@ -404,7 +412,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
-    $this->remix_updater->update($file, $this->program_entity);
+    $remix_updater_stub->update($file, $this->program_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
     Assert::assertEquals($xml->header->url, $new_url);
@@ -491,15 +499,34 @@ class RemixUpdaterEventListenerTest extends TestCase
   /**
    * @throws \Exception
    */
+  #[AllowMockObjectsWithoutExpectations]
   public function testUpdateTheRemixOfOfTheEntity(): void
   {
+    // Use stubs instead of mocks since we're not verifying behavior in this test
+    $remix_manager_stub = $this->createStub(RemixManager::class);
+    $async_http_client_stub = $this->createStub(AsyncHttpClient::class);
+    $router_stub = $this->createStub(RouterInterface::class);
+    $logger_stub = $this->createStub(LoggerInterface::class);
+
+    $route_map = [
+      ['program', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['program', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+    ];
+
+    $router_stub
+      ->method('generate')
+      ->willReturnMap($route_map)
+    ;
+
+    $remix_updater_stub = new RemixUpdaterEventListener($remix_manager_stub, $async_http_client_stub, $router_stub, $logger_stub, './CatrobatRemixMigration.lock');
+
     $current_url = 'http://share.catrob.at/details/3570';
     $this->getBaseXmlWithUrl($current_url);
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
-    $this->remix_updater->update($file, $this->program_entity);
+    $remix_updater_stub->update($file, $this->program_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
     /* @psalm-suppress UndefinedPropertyAssignment */

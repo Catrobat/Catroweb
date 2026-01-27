@@ -36,6 +36,7 @@
   <source>
     <include>
       <directory suffix=".php">src/</directory>
+      <directory suffix="Class.php">tests/</directory>
     </include>
     <exclude>
     </exclude>

@@ -14,7 +14,7 @@ use OpenAPI\Server\Model\RefreshRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -25,7 +25,7 @@ final class AuthenticationApiTest extends DefaultTestCase
 {
   protected AuthenticationApi $authentication_api;
 
-  protected AuthenticationApiFacade|MockObject $facade;
+  protected AuthenticationApiFacade|Stub $facade;
 
   /**
    * @throws Exception
@@ -33,7 +33,7 @@ final class AuthenticationApiTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->facade = $this->createMock(AuthenticationApiFacade::class);
+    $this->facade = $this->createStub(AuthenticationApiFacade::class);
     $this->authentication_api = new AuthenticationApi($this->facade);
   }
 
@@ -57,7 +57,7 @@ final class AuthenticationApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $login_request = $this->createMock(LoginRequest::class);
+    $login_request = $this->createStub(LoginRequest::class);
     $response = $this->authentication_api->authenticationPost($login_request, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
@@ -73,7 +73,7 @@ final class AuthenticationApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $processor = $this->createMock(AuthenticationApiProcessor::class);
+    $processor = $this->createStub(AuthenticationApiProcessor::class);
     $processor->method('deleteRefreshToken')->willReturn(true);
     $this->facade->method('getProcessor')->willReturn($processor);
 
@@ -91,7 +91,7 @@ final class AuthenticationApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $refresh_request = $this->createMock(RefreshRequest::class);
+    $refresh_request = $this->createStub(RefreshRequest::class);
     $response = $this->authentication_api->authenticationRefreshPost($refresh_request, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
