@@ -58,7 +58,7 @@
     "eslint-webpack-plugin": "^5.0.2",
     "file-loader": "^6.2.0",
     "glob-all": "^3.3.1",
-    "globals": "^17.0.0",
+    "globals": "^17.1.0",
     "n": "^10.2.0",
     "noop-webpack-plugin": "^1.0.1",
     "npm": "^11.8.0",
