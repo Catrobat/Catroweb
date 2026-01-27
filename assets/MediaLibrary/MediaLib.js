@@ -171,7 +171,7 @@ export function MediaLib(
                 .prepend(mediafileContainer)
             } // else ignore
           } else {
-            const catEscaped = file.category.replace(/"/g, '\\"')
+            const catEscaped = file.category.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
             document
               .querySelector('#content .category[data-name="' + catEscaped + '"] .files')
               .prepend(mediafileContainer)
