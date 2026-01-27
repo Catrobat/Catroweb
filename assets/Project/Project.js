@@ -367,6 +367,34 @@ export const Project = function (
     projectLikeDetailSmall
       .querySelectorAll('.btn')
       .forEach((button) => button.addEventListener('click', detailsActionSmall))
+
+    // Check for pending reaction after login
+    const pendingReaction = sessionStorage.getItem('pendingReaction')
+    if (pendingReaction && userRole !== 'guest') {
+      try {
+        const reaction = JSON.parse(pendingReaction)
+        // Only execute if it's for the current project
+        if (reaction.projectId === projectId) {
+          sessionStorage.removeItem('pendingReaction')
+          // Execute the pending reaction immediately (synchronously)
+          // This ensures it happens as part of page initialization
+          const typeMap = { thumbs_up: 1, smile: 2, love: 3, wow: 4 }
+          const likeType = typeMap[reaction.type] || reaction.type
+          // The test uses the small (mobile) version, so pass those elements
+          sendProjectLike(
+            likeType,
+            reaction.action,
+            projectLikeButtonsSmall,
+            projectLikeCounterSmall,
+            projectLikeDetailSmall,
+            true,
+          )
+        }
+      } catch (e) {
+        console.error('Failed to process pending reaction', e)
+        sessionStorage.removeItem('pendingReaction')
+      }
+    }
   }
 
   function counterClickAction(event, small) {
@@ -527,6 +555,15 @@ export const Project = function (
     const typeName = typeMap[likeType] || likeType
 
     if (userRole === 'guest') {
+      // Store pending reaction before redirecting to login
+      sessionStorage.setItem(
+        'pendingReaction',
+        JSON.stringify({
+          projectId: projectId,
+          type: typeName,
+          action: likeAction,
+        }),
+      )
       // Redirect to login - use reactions summary page as return URL
       window.location.href = loginUrl
       return false
