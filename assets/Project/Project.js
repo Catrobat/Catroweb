@@ -673,6 +673,26 @@ document.addEventListener('DOMContentLoaded', function () {
 // --------------------------------
 // Not 4 kids!
 
+// Allow only relative, same-origin URLs without dangerous characters.
+function isSafeRelativeUrl(url) {
+  if (!url || typeof url !== 'string') {
+    return false
+  }
+  // Disallow explicit schemes like "http:", "javascript:", etc.
+  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(url)) {
+    return false
+  }
+  // Disallow protocol-relative URLs like "//example.com"
+  if (url.startsWith('//')) {
+    return false
+  }
+  // Basic guard against HTML-like injection
+  if (/[<>]/.test(url)) {
+    return false
+  }
+  return true
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const button = document.getElementById('projectNotForKidsButton')
   if (button != null) {
@@ -681,6 +701,10 @@ document.addEventListener('DOMContentLoaded', function () {
       const markSafeForKidsText = document.getElementById('markSafeForKidsText')
       const markNotForKidsText = document.getElementById('markNotForKidsText')
       const url = document.getElementById('projectNotForKidsButton').getAttribute('data-url')
+      if (!isSafeRelativeUrl(url)) {
+        showSnackbar('Invalid target URL for this action.', 'error')
+        return
+      }
       let text = ''
       if (markSafeForKidsText != null) {
         text = 'Are you sure you want to remove the not for kids flag from this project?'
@@ -711,13 +735,17 @@ function askForConfirmation(continueWithAction, url, text) {
     confirmButtonText: okayText,
     cancelButtonText: cancel,
   }).then((result) => {
-    if (result.value) {
+    if (result.value && isSafeRelativeUrl(url)) {
       continueWithAction(url)
     }
   })
 }
 
 function submitNotForKidsForm(url) {
+  if (!isSafeRelativeUrl(url)) {
+    showSnackbar('Invalid target URL for this action.', 'error')
+    return
+  }
   const form = document.createElement('form')
   form.setAttribute('method', 'post')
   form.setAttribute('action', url)
