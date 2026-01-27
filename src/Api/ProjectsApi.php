@@ -6,6 +6,8 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
+use App\Api\Services\Reactions\ReactionsApiFacade;
+use App\Api\Services\Reactions\ReactionsApiProcessor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramDownloads;
 use App\Project\AddProjectRequest;
@@ -13,6 +15,7 @@ use App\Project\Event\ProjectDownloadEvent;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
+use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\UpdateProjectErrorResponse;
 use OpenAPI\Server\Model\UpdateProjectFailureResponse;
 use OpenAPI\Server\Model\UpdateProjectRequest;
@@ -24,8 +27,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
-  public function __construct(private readonly ProjectsApiFacade $facade)
-  {
+  public function __construct(
+    private readonly ProjectsApiFacade $facade,
+    private readonly ReactionsApiFacade $reactions_facade,
+  ) {
   }
 
   #[\Override]
@@ -422,6 +427,148 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $this->facade->getEventDispatcher()->dispatch(
       new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_PROJECT)
     );
+
+    return $response;
+  }
+
+  #[\Override]
+  public function projectIdReactionPost(
+    string $id,
+    ReactionRequest $reaction_request,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null {
+    $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (null === $user) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $type_name = $reaction_request->getType();
+    if (null === $type_name) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return null;
+    }
+
+    $type = ReactionsApiProcessor::getTypeFromName($type_name);
+    if (null === $type) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return null;
+    }
+
+    $added = $this->reactions_facade->getProcessor()->addReaction($project, $user, $type);
+    if (!$added) {
+      $responseCode = Response::HTTP_CONFLICT;
+
+      return null;
+    }
+
+    $counts = $this->reactions_facade->getLoader()->getReactionCounts($id);
+    $user_reactions = $this->reactions_facade->getLoader()->getUserReactions($id, $user);
+
+    $responseCode = Response::HTTP_CREATED;
+    $response = $this->reactions_facade->getResponseManager()->createReactionSummaryResponse($counts, $user_reactions);
+    $this->reactions_facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+
+    return $response;
+  }
+
+  #[\Override]
+  public function projectIdReactionDelete(
+    string $id,
+    string $type,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void {
+    $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (null === $user) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return;
+    }
+
+    $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return;
+    }
+
+    $type_int = ReactionsApiProcessor::getTypeFromName($type);
+    if (null === $type_int) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return;
+    }
+
+    $this->reactions_facade->getProcessor()->removeReaction($project, $user, $type_int);
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function projectIdReactionsGet(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null {
+    $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
+    $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
+
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $counts = $this->reactions_facade->getLoader()->getReactionCounts($id);
+    $user_reactions = null !== $user ? $this->reactions_facade->getLoader()->getUserReactions($id, $user) : [];
+
+    $responseCode = Response::HTTP_OK;
+    $response = $this->reactions_facade->getResponseManager()->createReactionSummaryResponse($counts, $user_reactions);
+    $this->reactions_facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+
+    return $response;
+  }
+
+  #[\Override]
+  public function projectIdReactionsUsersGet(
+    string $id,
+    string $accept_language,
+    ?string $type,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null {
+    $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
+    $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
+
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $type_int = null !== $type ? ReactionsApiProcessor::getTypeFromName($type) : null;
+
+    $paginated_data = $this->reactions_facade->getLoader()->getReactionUsersPaginated($id, $type_int, $limit, $cursor);
+
+    $responseCode = Response::HTTP_OK;
+    $response = $this->reactions_facade->getResponseManager()->createReactionUsersResponse($paginated_data);
+    $this->reactions_facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
 
     return $response;
   }

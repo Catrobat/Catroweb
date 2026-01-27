@@ -252,6 +252,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/reactions/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/reactions/users/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api',
           'roles' => 'IS_AUTHENTICATED_FULLY',
         ],

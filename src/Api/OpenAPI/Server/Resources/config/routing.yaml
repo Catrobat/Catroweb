@@ -122,6 +122,38 @@ open_api_server_projects_projectidput:
   requirements:
     id: '^[a-zA-Z0-9\\-]+$'
 
+open_api_server_projects_projectidreactiondelete:
+  path: /project/{id}/reaction
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.projects::projectIdReactionDeleteAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_projects_projectidreactionpost:
+  path: /project/{id}/reaction
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.projects::projectIdReactionPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_projects_projectidreactionsget:
+  path: /project/{id}/reactions
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectIdReactionsGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_projects_projectidreactionsusersget:
+  path: /project/{id}/reactions/users
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectIdReactionsUsersGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
 open_api_server_projects_projectidrecommendationsget:
   path: /project/{id}/recommendations
   methods: [GET]

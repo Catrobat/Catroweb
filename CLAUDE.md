@@ -1,5 +1,16 @@
 # Catroweb - Project Guide for Claude
 
+## Important: Keep This Document Updated
+
+**Always update CLAUDE.md with new learnings** discovered during development sessions. This includes:
+
+- Gotchas and non-obvious behaviors
+- Patterns that work vs patterns that don't
+- Correct tool/command usage discovered through trial and error
+- API quirks and workarounds
+
+This ensures future sessions benefit from past discoveries. Also run `npm run fix-asset` after updating.
+
 ## Overview
 
 Catroweb is the share/communication platform for the Catrobat community. It's a Symfony-based PHP application with a modern frontend using Webpack Encore.
@@ -12,6 +23,24 @@ Catroweb is the share/communication platform for the Catrobat community. It's a 
 - **Search**: Elasticsearch 7.17
 - **CSS Framework**: Bootstrap 5, Material Design Components
 - **Package Managers**: Composer (PHP), npm (JS)
+
+## Command Execution Environment
+
+- **npm commands**: Run **locally** (npm, eslint, stylelint, prettier, webpack)
+- **PHP commands**: Try **native first** (`bin/phpstan`, `bin/psalm`, etc.), fall back to **Docker** if not available
+
+```bash
+# Prefer native if available
+bin/php-cs-fixer fix src/Path/To/File.php
+bin/phpstan analyse src/Path/To/File.php
+bin/psalm src/Path/To/File.php
+bin/phpunit --filter ClassName
+
+# Fall back to Docker if native commands don't work
+docker exec app.catroweb bin/php-cs-fixer fix src/Path/To/File.php
+docker exec app.catroweb bin/phpstan analyse src/Path/To/File.php
+# etc.
+```
 
 ## Key Commands
 
@@ -240,14 +269,170 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 
 ### Common Suites
 
-| Suite       | Path                            |
-| ----------- | ------------------------------- |
-| web-admin   | tests/BehatFeatures/web/admin   |
-| web-profile | tests/BehatFeatures/web/profile |
-| web-general | tests/BehatFeatures/web/general |
-| api         | tests/BehatFeatures/api         |
+| Suite               | Path                                    |
+| ------------------- | --------------------------------------- |
+| web-admin           | tests/BehatFeatures/web/admin           |
+| web-profile         | tests/BehatFeatures/web/profile         |
+| web-general         | tests/BehatFeatures/web/general         |
+| web-translation     | tests/BehatFeatures/web/translation     |
+| web-project-details | tests/BehatFeatures/web/project-details |
+| web-reactions       | tests/BehatFeatures/web/reactions       |
+| api-projects        | tests/BehatFeatures/api/projects        |
+| api-authentication  | tests/BehatFeatures/api/authentication  |
 
 Suite configuration is in `behat.yaml.dist`.
+
+### Behat Assertion Contexts
+
+Different contexts use different assertion step definitions:
+
+- **API tests** (`ApiContext`): Use `the client response should contain` for JSON response assertions
+- **Web tests** (`CatrowebBrowserContext`): Use `the response should contain` for HTML page assertions
+
+```gherkin
+# API test (JSON)
+And the client response should contain "total"
+And the client response should not contain "Catrobat"
+
+# Web test (HTML)
+And the response should contain "Welcome"
+```
+
+### Debugging Behat Tests
+
+After running a Behat scenario, you can browse the test state live at:
+`http://localhost:8080/index_test.php/`
+
+This helps debug failing tests by seeing the actual page state.
+
+### JavaScript Changes and Behat Tests
+
+**CRITICAL:** After making JavaScript changes in `assets/`, you MUST run `npm run dev` to compile the changes before running Behat tests. The Docker container serves the compiled assets from `public/build/`, not the source files.
+
+```bash
+# Always do this after JS changes:
+npm run dev
+docker exec app.catroweb bin/behat -f pretty -s web-reactions "tests/BehatFeatures/..."
+```
+
+If Behat tests fail after JavaScript changes but the logic looks correct, check if you forgot to rebuild the assets.
+
+## Development Workflow Checklist
+
+### After PHP Changes (src/)
+
+Always run (in order):
+
+1. `bin/php-cs-fixer fix <file>` - auto-fix style
+2. `bin/phpstan analyse <file>` - static analysis
+3. `bin/psalm <file>` - type checking
+4. Run relevant unit tests if applicable
+
+### After PHP Test Changes (tests/PhpUnit/)
+
+Always run (in order):
+
+1. `bin/php-cs-fixer fix <file>` - auto-fix style
+2. `bin/phpstan analyse <file>` - static analysis
+3. `bin/psalm <file>` - type checking
+4. `bin/phpunit <file>` - run the tests you changed
+
+### After JS/CSS/Asset Changes
+
+Always run:
+
+- `npm run fix-js` - ESLint
+- `npm run fix-css` - Stylelint
+- `npm run fix-asset` - Prettier
+
+**Rebuild required**: SCSS/JS changes require rebuilding assets:
+
+- Run `npm run dev` after changes, OR
+- Keep `npm run watch` running in the background (auto-rebuilds on save)
+
+### When to Run Tests
+
+| Change Type        | Run These                           |
+| ------------------ | ----------------------------------- |
+| PHP business logic | PHPUnit (`bin/phpunit --filter`)    |
+| PHPUnit test files | PHPUnit (`bin/phpunit <test-file>`) |
+| API endpoints      | PHPUnit API tests + Behat API suite |
+| UI/Templates       | Behat web tests                     |
+
+Note: Use `docker exec app.catroweb` prefix if native commands don't work.
+
+## JavaScript Patterns
+
+### DOMContentLoaded with Deferred Scripts
+
+Scripts loaded with `defer` (Webpack Encore default) run AFTER DOMContentLoaded fires. Use this pattern:
+
+```javascript
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFunction)
+} else {
+  initFunction()
+}
+```
+
+### Event Delegation with Child Elements
+
+When using event delegation, use `.closest()` instead of `.matches()` to handle clicks on child elements:
+
+```javascript
+// Bad - won't work if clicking on child elements
+if (event.target.matches('.my-button')) { ... }
+
+// Good - works for clicks anywhere inside the button
+const button = event.target.closest('.my-button')
+if (button) { ... }
+```
+
+### Handling Guest User Actions (Redirect to Login Pattern)
+
+When implementing features where guests need to log in before performing an action (e.g., liking a project):
+
+**Pattern:** Store pending action in `sessionStorage`, redirect to login, then execute action after successful login.
+
+```javascript
+// Before redirecting guest to login
+if (userRole === 'guest') {
+  sessionStorage.setItem(
+    'pendingAction',
+    JSON.stringify({
+      projectId: projectId,
+      actionType: 'reaction',
+      actionData: { type: reactionType, action: 'add' },
+    }),
+  )
+  window.location.href = loginUrl
+  return false
+}
+
+// After successful login, in page initialization
+const pendingAction = sessionStorage.getItem('pendingAction')
+if (pendingAction && userRole !== 'guest') {
+  try {
+    const action = JSON.parse(pendingAction)
+    if (action.projectId === projectId) {
+      sessionStorage.removeItem('pendingAction')
+      // Execute the pending action immediately
+      executePendingAction(action)
+    }
+  } catch (e) {
+    console.error('Failed to process pending action', e)
+    sessionStorage.removeItem('pendingAction')
+  }
+}
+```
+
+**Important notes:**
+
+- Use `sessionStorage` (not `localStorage`) so the pending action doesn't persist across browser sessions
+- Always validate the stored data matches the current context (e.g., same project ID)
+- Remove the item immediately after reading to prevent duplicate execution
+- Execute the action synchronously during page initialization to ensure it completes before tests check the results
+- Browser globals like `sessionStorage` are already defined in `eslint.config.js` via `globals.browser`
 
 ## Git Workflow
 
@@ -259,3 +444,57 @@ Suite configuration is in `behat.yaml.dist`.
 
 - OpenAPI spec in `src/Api/OpenAPI/`
 - Generate API client: `npm run generate-api`
+
+### OpenAPI Enum Serialization (Important!)
+
+**Never use `$ref` to a separate schema for enums in response models.** The OpenAPI generator creates PHP backed enums that JMS Serializer serializes as objects instead of strings:
+
+```
+// BAD - using $ref: '#/components/schemas/ReactionType'
+"types": [{"name": "LOVE", "value": "love"}]
+// GOOD - using inline enum
+"types": ["love"]
+```
+
+**Pattern that works:** Use inline enum definitions directly where needed:
+
+```yaml
+# GOOD - inline enum (serializes as string)
+type: string
+enum:
+  - 'thumbs_up'
+  - 'smile'
+  - 'love'
+  - 'wow'
+
+# BAD - separate schema reference (serializes as object)
+$ref: '#/components/schemas/ReactionType'
+```
+
+This applies to:
+
+- Response model properties (arrays of enums)
+- Request body properties
+- Query parameters
+
+For query parameters, you can still define reusable parameters, just use inline enum in the schema.
+
+### API Architecture
+
+The API follows a facade pattern with these components per feature:
+
+```
+src/Api/Services/{Feature}/
+├── {Feature}ApiFacade.php           # Orchestrates the feature
+├── {Feature}ApiLoader.php           # Data loading/queries
+├── {Feature}ApiProcessor.php        # Business logic
+├── {Feature}RequestValidator.php    # Input validation
+└── {Feature}ResponseManager.php     # Response formatting
+```
+
+The main `ProjectsApi.php` delegates to these facades.
+
+### HTTP Status Codes for Validation
+
+- **400 Bad Request**: Query parameter validation failures (enum values in URL)
+- **422 Unprocessable Entity**: Request body validation failures (JSON body content)

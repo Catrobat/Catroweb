@@ -11,6 +11,7 @@ use App\Api\Services\Projects\ProjectsApiLoader;
 use App\Api\Services\Projects\ProjectsApiProcessor;
 use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Api\Services\Projects\ProjectsResponseManager;
+use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\Api\Services\ValidationWrapper;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
@@ -44,6 +45,8 @@ final class ProjectsApiTest extends DefaultTestCase
 
   protected MockObject|ProjectsApiFacade $facade;
 
+  protected MockObject|ReactionsApiFacade $reactions_facade;
+
   protected mixed $full_validator;
 
   protected mixed $full_response_manager;
@@ -62,7 +65,9 @@ final class ProjectsApiTest extends DefaultTestCase
     ;
 
     $this->facade = $this->createMock(ProjectsApiFacade::class);
+    $this->reactions_facade = $this->createMock(ReactionsApiFacade::class);
     $this->mockProperty(ProjectsApi::class, $this->object, 'facade', $this->facade);
+    $this->mockProperty(ProjectsApi::class, $this->object, 'reactions_facade', $this->reactions_facade);
 
     ProjectsApiTest::bootKernel();
     $this->full_validator = ProjectsApiTest::getContainer()->get(ProjectsRequestValidator::class);
@@ -72,7 +77,7 @@ final class ProjectsApiTest extends DefaultTestCase
   #[Group('integration')]
   public function testCtor(): void
   {
-    $this->object = new ProjectsApi($this->facade);
+    $this->object = new ProjectsApi($this->facade, $this->reactions_facade);
     $this->assertInstanceOf(ProjectsApi::class, $this->object);
   }
 
