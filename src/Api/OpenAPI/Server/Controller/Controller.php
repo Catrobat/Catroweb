@@ -175,7 +175,7 @@ class Controller extends AbstractController
   protected function getOutputFormat(string $accept, array $produced): ?string
   {
     // Figure out what the client accepts
-    $accept = preg_split('/[\s,]+/', $accept);
+    $accept = preg_split('/[\\s,]+/', $accept);
 
     // Remove q-factor weighting. E.g. "application/json;q=0.8" becomes "application/json"
     $accept = array_map(function ($type) {return explode(';', $type)[0]; }, $accept);

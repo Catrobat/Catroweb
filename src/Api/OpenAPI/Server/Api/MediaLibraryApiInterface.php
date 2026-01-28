@@ -30,6 +30,10 @@
 
 namespace OpenAPI\Server\Api;
 
+use OpenAPI\Server\Model\MediaAssetUpdateRequest;
+use OpenAPI\Server\Model\MediaCategoryRequest;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 /**
  * MediaLibraryApiInterface Interface Doc Comment.
  *
@@ -42,85 +46,252 @@ namespace OpenAPI\Server\Api;
 interface MediaLibraryApiInterface
 {
   /**
-   * Operation mediaFileIdGet.
+   * Sets authentication method BearerAuth.
    *
-   * Get the information of a specific media file
-   *
-   * @param int    $id              ID of any given media file (required)
-   * @param string $attributes      (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string|null $value value of the BearerAuth authentication method
    */
-  public function mediaFileIdGet(
-    int $id,
-    string $attributes,
-    int &$responseCode,
-    array &$responseHeaders,
-  ): array|object|null;
+  public function setBearerAuth(?string $value): void;
 
   /**
-   * Operation mediaFilesGet.
+   * Operation mediaAssetsGet.
    *
-   * Get *all* content of the media library.
+   * Get media library assets with pagination and filtering
    *
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $flavor          (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          (optional, default to 0)
+   * @param string|null $category_id     Filter by category UUID (optional)
+   * @param string|null $file_type       (optional)
+   * @param string|null $flavor          Filter by flavor name (optional)
+   * @param string|null $search          Search in name and description (optional)
+   * @param string      $sort_by         (optional, default to 'created_at')
+   * @param string      $sort_order      (optional, default to 'DESC')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
-  public function mediaFilesGet(
+  public function mediaAssetsGet(
+    string $accept_language,
     int $limit,
     int $offset,
-    string $attributes,
-    string $flavor,
+    ?string $category_id,
+    ?string $file_type,
+    ?string $flavor,
+    ?string $search,
+    string $sort_by,
+    string $sort_order,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
 
   /**
-   * Operation mediaFilesSearchGet.
+   * Operation mediaAssetsIdDelete.
    *
-   * Search for mediafiles associated with keywords
+   * Delete a media asset (Admin only)
    *
-   * @param string $query           (required)
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $flavor          (optional, default to '')
-   * @param string $package_name    In which package you want to search (for more fine tuned results) (optional, default to '')
+   * @param string $id              Asset UUID (required)
+   * @param string $accept_language (optional, default to 'en')
    * @param int    &$responseCode   The HTTP Response Code
    * @param array  $responseHeaders Additional HTTP headers to return with the response ()
    */
-  public function mediaFilesSearchGet(
-    string $query,
-    int $limit,
-    int $offset,
-    string $attributes,
-    string $flavor,
-    string $package_name,
+  public function mediaAssetsIdDelete(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation mediaAssetsIdDownloadGet.
+   *
+   * Download a media asset file
+   *
+   * @param string $id              Asset UUID (required)
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function mediaAssetsIdDownloadGet(
+    string $id,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
 
   /**
-   * Operation mediaPackageNameGet.
+   * Operation mediaAssetsIdGet.
    *
-   * Get media-library asstes of a named package
+   * Get details of a specific media asset
    *
-   * @param string $name            Name of the package (required)
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
+   * @param string $id              Asset UUID (required)
+   * @param string $accept_language (optional, default to 'en')
    * @param int    &$responseCode   The HTTP Response Code
    * @param array  $responseHeaders Additional HTTP headers to return with the response ()
    */
-  public function mediaPackageNameGet(
+  public function mediaAssetsIdGet(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation mediaAssetsIdPatch.
+   *
+   * Update a media asset metadata (Admin only)
+   *
+   * @param string                  $id                         Asset UUID (required)
+   * @param MediaAssetUpdateRequest $media_asset_update_request (required)
+   * @param string                  $accept_language            (optional, default to 'en')
+   * @param int                     &$responseCode              The HTTP Response Code
+   * @param array                   $responseHeaders            Additional HTTP headers to return with the response ()
+   */
+  public function mediaAssetsIdPatch(
+    string $id,
+    MediaAssetUpdateRequest $media_asset_update_request,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation mediaAssetsPost.
+   *
+   * Upload a new media asset (Admin only)
+   *
+   * @param UploadedFile $file            The media file to upload (max 10MB) (required)
+   * @param string       $name            (required)
+   * @param string       $category_id     (required)
+   * @param array        $flavors         Array of flavor names (required)
+   * @param string       $accept_language (optional, default to 'en')
+   * @param string|null  $description     (optional)
+   * @param string|null  $author          (optional)
+   * @param int          &$responseCode   The HTTP Response Code
+   * @param array        $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function mediaAssetsPost(
+    UploadedFile $file,
     string $name,
+    string $category_id,
+    array $flavors,
+    string $accept_language,
+    ?string $description,
+    ?string $author,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation mediaCategoriesGet.
+   *
+   * Get all media library categories
+   *
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    $limit           (optional, default to 20)
+   * @param int    $offset          (optional, default to 0)
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function mediaCategoriesGet(
+    string $accept_language,
     int $limit,
     int $offset,
-    string $attributes,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation mediaCategoriesIdDelete.
+   *
+   * Delete a media category (Admin only)
+   *
+   * @param string $id              Category UUID (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function mediaCategoriesIdDelete(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation mediaCategoriesIdGet.
+   *
+   * Get a specific media category with its assets
+   *
+   * @param string $id              Category UUID (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    $limit           (optional, default to 20)
+   * @param int    $offset          (optional, default to 0)
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function mediaCategoriesIdGet(
+    string $id,
+    string $accept_language,
+    int $limit,
+    int $offset,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation mediaCategoriesIdPatch.
+   *
+   * Update a media category (Admin only)
+   *
+   * @param string               $id                     Category UUID (required)
+   * @param MediaCategoryRequest $media_category_request (required)
+   * @param string               $accept_language        (optional, default to 'en')
+   * @param int                  &$responseCode          The HTTP Response Code
+   * @param array                $responseHeaders        Additional HTTP headers to return with the response ()
+   */
+  public function mediaCategoriesIdPatch(
+    string $id,
+    MediaCategoryRequest $media_category_request,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation mediaCategoriesPost.
+   *
+   * Create a new media category (Admin only)
+   *
+   * @param MediaCategoryRequest $media_category_request (required)
+   * @param string               $accept_language        (optional, default to 'en')
+   * @param int                  &$responseCode          The HTTP Response Code
+   * @param array                $responseHeaders        Additional HTTP headers to return with the response ()
+   */
+  public function mediaCategoriesPost(
+    MediaCategoryRequest $media_category_request,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation mediaLibraryGet.
+   *
+   * Get media library overview with categories and preview assets
+   *
+   * @param string      $accept_language     (optional, default to 'en')
+   * @param int         $limit               (optional, default to 20)
+   * @param int         $offset              (optional, default to 0)
+   * @param string|null $file_type           Filter categories and assets by file type (optional)
+   * @param string|null $flavor              Filter assets by flavor name (optional)
+   * @param int         $assets_per_category Number of preview assets to return per category (optional, default to 5)
+   * @param int         &$responseCode       The HTTP Response Code
+   * @param array       $responseHeaders     Additional HTTP headers to return with the response ()
+   */
+  public function mediaLibraryGet(
+    string $accept_language,
+    int $limit,
+    int $offset,
+    ?string $file_type,
+    ?string $flavor,
+    int $assets_per_category,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;

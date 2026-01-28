@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MediaCategoryResponse.
+ * MediaCategoryDetailResponse.
  *
  * PHP version 8.1.1
  *
@@ -35,11 +35,11 @@ use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the MediaCategoryResponse model.
+ * Class representing the MediaCategoryDetailResponse model.
  *
  * @author  OpenAPI Generator team
  */
-class MediaCategoryResponse
+class MediaCategoryDetailResponse
 {
   /**
    * @SerializedName("id")
@@ -100,6 +100,29 @@ class MediaCategoryResponse
   protected ?\DateTime $updated_at = null;
 
   /**
+   * @var MediaAssetResponse[]|null
+   *
+   * @SerializedName("assets")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\MediaAssetResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\MediaAssetResponse>")
+   */
+  protected ?array $assets = null;
+
+  /**
+   * @SerializedName("assets_pagination")
+   *
+   * @Assert\Type("OpenAPI\Server\Model\PaginationInfo")
+   *
+   * @Type("OpenAPI\Server\Model\PaginationInfo")
+   */
+  protected ?PaginationInfo $assets_pagination = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -113,6 +136,8 @@ class MediaCategoryResponse
       $this->priority = array_key_exists('priority', $data) ? $data['priority'] : $this->priority;
       $this->created_at = array_key_exists('created_at', $data) ? $data['created_at'] : $this->created_at;
       $this->updated_at = array_key_exists('updated_at', $data) ? $data['updated_at'] : $this->updated_at;
+      $this->assets = array_key_exists('assets', $data) ? $data['assets'] : $this->assets;
+      $this->assets_pagination = array_key_exists('assets_pagination', $data) ? $data['assets_pagination'] : $this->assets_pagination;
     }
   }
 
@@ -236,6 +261,50 @@ class MediaCategoryResponse
   public function setUpdatedAt(?\DateTime $updated_at = null): self
   {
     $this->updated_at = $updated_at;
+
+    return $this;
+  }
+
+  /**
+   * Gets assets.
+   *
+   * @return MediaAssetResponse[]|null
+   */
+  public function getAssets(): ?array
+  {
+    return $this->assets;
+  }
+
+  /**
+   * Sets assets.
+   *
+   * @param MediaAssetResponse[]|null $assets
+   *
+   * @return $this
+   */
+  public function setAssets(?array $assets = null): self
+  {
+    $this->assets = $assets;
+
+    return $this;
+  }
+
+  /**
+   * Gets assets_pagination.
+   */
+  public function getAssetsPagination(): ?PaginationInfo
+  {
+    return $this->assets_pagination;
+  }
+
+  /**
+   * Sets assets_pagination.
+   *
+   * @return $this
+   */
+  public function setAssetsPagination(?PaginationInfo $assets_pagination = null): self
+  {
+    $this->assets_pagination = $assets_pagination;
 
     return $this;
   }

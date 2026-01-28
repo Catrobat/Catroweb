@@ -19,9 +19,4 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     ->prefix('/admin/')
     ->requirements(['theme' => 'admin'])
   ;
-
-  $routingConfigurator->import('../../src/Api_deprecated/Controller', 'attribute')
-    ->prefix('/{theme}/')
-    ->requirements(['theme' => '%themeRoutes%'])
-  ;
 };

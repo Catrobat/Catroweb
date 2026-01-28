@@ -195,7 +195,7 @@ class NotificationsController extends Controller
   /**
    * Operation notificationsGet.
    *
-   * Get user notifications -- StatusCode: 501 - Not yet implemented
+   * Get user notifications
    *
    * @param Request $request the Symfony request to handle
    *
@@ -260,7 +260,7 @@ class NotificationsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;

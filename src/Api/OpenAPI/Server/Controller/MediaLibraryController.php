@@ -48,15 +48,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MediaLibraryController extends Controller
 {
   /**
-   * Operation mediaFileIdGet.
+   * Operation mediaAssetsGet.
    *
-   * Get the information of a specific media file
+   * Get media library assets with pagination and filtering
    *
    * @param Request $request the Symfony request to handle
    *
    * @return Response the Symfony response
    */
-  public function mediaFileIdGetAction(Request $request, $id)
+  public function mediaAssetsGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -70,14 +70,151 @@ class MediaLibraryController extends Controller
     // Handle authentication
 
     // Read out all input parameter values into variables
-    $attributes = $request->query->get('attributes', '');
+    $limit = $request->query->get('limit', 20);
+    $offset = $request->query->get('offset', 0);
+    $category_id = $request->query->get('category_id');
+    $file_type = $request->query->get('file_type');
+    $flavor = $request->query->get('flavor');
+    $search = $request->query->get('search');
+    $sort_by = $request->query->get('sort_by', 'created_at');
+    $sort_order = $request->query->get('sort_order', 'DESC');
+    $accept_language = $request->headers->get('Accept-Language', 'en');
 
     // Use the default value if no value was provided
 
     // Deserialize the input values that needs it
     try {
-      $id = $this->deserialize($id, 'int', 'string');
-      $attributes = $this->deserialize($attributes, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $offset = $this->deserialize($offset, 'int', 'string');
+      $category_id = $this->deserialize($category_id, 'string', 'string');
+      $file_type = $this->deserialize($file_type, 'string', 'string');
+      $flavor = $this->deserialize($flavor, 'string', 'string');
+      $search = $this->deserialize($search, 'string', 'string');
+      $sort_by = $this->deserialize($sort_by, 'string', 'string');
+      $sort_order = $this->deserialize($sort_order, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($offset, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($category_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Choice(['IMAGE', 'SOUND']);
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($file_type, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($flavor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($search, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Choice(['name', 'created_at', 'downloads', 'updated_at']);
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($sort_by, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Choice(['ASC', 'DESC']);
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($sort_order, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->mediaAssetsGet($accept_language, $limit, $offset, $category_id, $file_type, $flavor, $search, $sort_by, $sort_order, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        406 => 'Not acceptable - client must accept application/json as content type',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaAssetsIdDelete.
+   *
+   * Delete a media asset (Admin only)
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaAssetsIdDeleteAction(Request $request, $id)
+  {
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -85,15 +222,91 @@ class MediaLibraryController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\Type('string');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
-    $response = $this->validate($attributes, $asserts);
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 204;
+      $responseHeaders = [];
+
+      $handler->mediaAssetsIdDelete($id, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        204 => 'Asset deleted',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaAssetsIdDownloadGet.
+   *
+   * Download a media asset file
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaAssetsIdDownloadGetAction(Request $request, $id)
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/octet-stream'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -105,11 +318,92 @@ class MediaLibraryController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->mediaFileIdGet($id, $attributes, $responseCode, $responseHeaders);
+      $result = $handler->mediaAssetsIdDownloadGet($id, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'File downloaded',
+        404 => 'Not found',
+        429 => 'Rate limit exceeded',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaAssetsIdGet.
+   *
+   * Get details of a specific media asset
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaAssetsIdGetAction(Request $request, $id)
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->mediaAssetsIdGet($id, $accept_language, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
-        400 => 'Bad request (Invalid, or missing parameters)',
         404 => 'Not found',
         406 => 'Not acceptable - client must accept application/json as content type',
         default => '',
@@ -132,16 +426,23 @@ class MediaLibraryController extends Controller
   }
 
   /**
-   * Operation mediaFilesGet.
+   * Operation mediaAssetsIdPatch.
    *
-   * Get *all* content of the media library.
+   * Update a media asset metadata (Admin only)
    *
    * @param Request $request the Symfony request to handle
    *
    * @return Response the Symfony response
    */
-  public function mediaFilesGetAction(Request $request)
+  public function mediaAssetsIdPatchAction(Request $request, $id)
   {
+    // Make sure that the client is providing something that we can consume
+    $consumes = ['application/json'];
+    if (!static::isContentTypeAllowed($request, $consumes)) {
+      // We can't consume the content that the client is sending us
+      return new Response('', 415);
+    }
+
     // Figure out what data format to return to the client
     $produces = ['application/json'];
     // Figure out what the client accepts
@@ -152,126 +453,22 @@ class MediaLibraryController extends Controller
     }
 
     // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
 
     // Read out all input parameter values into variables
-    $limit = $request->query->get('limit', 20);
-    $offset = $request->query->get('offset', 0);
-    $attributes = $request->query->get('attributes', '');
-    $flavor = $request->query->get('flavor', '');
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+    $media_asset_update_request = $request->getContent();
 
     // Use the default value if no value was provided
 
     // Deserialize the input values that needs it
     try {
-      $limit = $this->deserialize($limit, 'int', 'string');
-      $offset = $this->deserialize($offset, 'int', 'string');
-      $attributes = $this->deserialize($attributes, 'string', 'string');
-      $flavor = $this->deserialize($flavor, 'string', 'string');
-    } catch (SerializerRuntimeException $exception) {
-      return $this->createBadRequestResponse($exception->getMessage());
-    }
-
-    // Validate the input values
-    $asserts = [];
-    $asserts[] = new Assert\Type('int');
-    $asserts[] = new Assert\GreaterThanOrEqual(0);
-    $response = $this->validate($limit, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('int');
-    $asserts[] = new Assert\GreaterThanOrEqual(0);
-    $response = $this->validate($offset, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
-    $response = $this->validate($attributes, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('string');
-    $response = $this->validate($flavor, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-
-    try {
-      $handler = $this->getApiHandler();
-
-      // Make the call to the business logic
-      $responseCode = 200;
-      $responseHeaders = [];
-
-      $result = $handler->mediaFilesGet($limit, $offset, $attributes, $flavor, $responseCode, $responseHeaders);
-
-      $message = match ($responseCode) {
-        200 => 'OK',
-        400 => 'Bad request (Invalid, or missing parameters)',
-        406 => 'Not acceptable - client must accept application/json as content type',
-        default => '',
-      };
-
-      return new Response(
-        null !== $result ? $this->serialize($result, $responseFormat) : '',
-        $responseCode,
-        array_merge(
-          $responseHeaders,
-          [
-            'Content-Type' => $responseFormat,
-            'X-OpenAPI-Message' => $message,
-          ]
-        )
-      );
-    } catch (\Throwable $fallthrough) {
-      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
-    }
-  }
-
-  /**
-   * Operation mediaFilesSearchGet.
-   *
-   * Search for mediafiles associated with keywords
-   *
-   * @param Request $request the Symfony request to handle
-   *
-   * @return Response the Symfony response
-   */
-  public function mediaFilesSearchGetAction(Request $request)
-  {
-    // Figure out what data format to return to the client
-    $produces = ['application/json'];
-    // Figure out what the client accepts
-    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
-    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
-    if (null === $responseFormat) {
-      return new Response('', 406);
-    }
-
-    // Handle authentication
-
-    // Read out all input parameter values into variables
-    $query = $request->query->get('query');
-    $limit = $request->query->get('limit', 20);
-    $offset = $request->query->get('offset', 0);
-    $attributes = $request->query->get('attributes', '');
-    $flavor = $request->query->get('flavor', '');
-    $package_name = $request->query->get('package_name', '');
-
-    // Use the default value if no value was provided
-
-    // Deserialize the input values that needs it
-    try {
-      $query = $this->deserialize($query, 'string', 'string');
-      $limit = $this->deserialize($limit, 'int', 'string');
-      $offset = $this->deserialize($offset, 'int', 'string');
-      $attributes = $this->deserialize($attributes, 'string', 'string');
-      $flavor = $this->deserialize($flavor, 'string', 'string');
-      $package_name = $this->deserialize($package_name, 'string', 'string');
+      $id = $this->deserialize($id, 'string', 'string');
+      $inputFormat = $request->getMimeType($request->getContentTypeFormat());
+      $media_asset_update_request = $this->deserialize($media_asset_update_request, 'OpenAPI\Server\Model\MediaAssetUpdateRequest', $inputFormat);
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -280,40 +477,21 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $response = $this->validate($query, $asserts);
+    $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Type('int');
-    $asserts[] = new Assert\GreaterThanOrEqual(0);
-    $response = $this->validate($limit, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('int');
-    $asserts[] = new Assert\GreaterThanOrEqual(0);
-    $response = $this->validate($offset, $asserts);
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaAssetUpdateRequest');
+    $asserts[] = new Assert\Valid();
+    $response = $this->validate($media_asset_update_request, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
-    $response = $this->validate($attributes, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('string');
-    $response = $this->validate($flavor, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('string');
-    $response = $this->validate($package_name, $asserts);
+    $response = $this->validate($accept_language, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -321,16 +499,22 @@ class MediaLibraryController extends Controller
     try {
       $handler = $this->getApiHandler();
 
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
       // Make the call to the business logic
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->mediaFilesSearchGet($query, $limit, $offset, $attributes, $flavor, $package_name, $responseCode, $responseHeaders);
+      $result = $handler->mediaAssetsIdPatch($id, $media_asset_update_request, $accept_language, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
-        200 => 'OK',
+        200 => 'Asset updated',
         400 => 'Bad request (Invalid, or missing parameters)',
-        406 => 'Not acceptable - client must accept application/json as content type',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        422 => 'Unprocessable Entity',
         default => '',
       };
 
@@ -351,15 +535,15 @@ class MediaLibraryController extends Controller
   }
 
   /**
-   * Operation mediaPackageNameGet.
+   * Operation mediaAssetsPost.
    *
-   * Get media-library asstes of a named package
+   * Upload a new media asset (Admin only)
    *
    * @param Request $request the Symfony request to handle
    *
    * @return Response the Symfony response
    */
-  public function mediaPackageNameGetAction(Request $request, $name)
+  public function mediaAssetsPostAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -371,20 +555,238 @@ class MediaLibraryController extends Controller
     }
 
     // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
 
     // Read out all input parameter values into variables
-    $limit = $request->query->get('limit', 20);
-    $offset = $request->query->get('offset', 0);
-    $attributes = $request->query->get('attributes', '');
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+    $file = $request->files->get('file');
+    $name = $request->request->get('name');
+    $description = $request->request->get('description');
+    $category_id = $request->request->get('category_id');
+    $flavors = $request->request->get('flavors');
+    $author = $request->request->get('author');
 
     // Use the default value if no value was provided
 
     // Deserialize the input values that needs it
     try {
       $name = $this->deserialize($name, 'string', 'string');
+      $category_id = $this->deserialize($category_id, 'string', 'string');
+      $flavors = $this->deserialize($flavors, 'array<csv,string>', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+      $description = $this->deserialize($description, 'string', 'string');
+      $author = $this->deserialize($author, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\File();
+    $response = $this->validate($file, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($name, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($category_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\All([
+      new Assert\Type('string'),
+    ]);
+    $asserts[] = new Assert\Valid();
+    $response = $this->validate($flavors, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($description, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($author, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->mediaAssetsPost($file, $name, $category_id, $flavors, $accept_language, $description, $author, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        201 => 'Asset created',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        422 => 'Unprocessable Entity',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaCategoriesGet.
+   *
+   * Get all media library categories
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaCategoriesGetAction(Request $request)
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 20);
+    $offset = $request->query->get('offset', 0);
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
-      $attributes = $this->deserialize($attributes, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($offset, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->mediaCategoriesGet($accept_language, $limit, $offset, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        406 => 'Not acceptable - client must accept application/json as content type',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaCategoriesIdDelete.
+   *
+   * Delete a media category (Admin only)
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaCategoriesIdDeleteAction(Request $request, $id)
+  {
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -393,8 +795,410 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9-_]+$/');
-    $response = $this->validate($name, $asserts);
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 204;
+      $responseHeaders = [];
+
+      $handler->mediaCategoriesIdDelete($id, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        204 => 'Category deleted',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        409 => 'Cannot delete category with assets',
+        default => '',
+      };
+
+      return new Response(
+        '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaCategoriesIdGet.
+   *
+   * Get a specific media category with its assets
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaCategoriesIdGetAction(Request $request, $id)
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 20);
+    $offset = $request->query->get('offset', 0);
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $offset = $this->deserialize($offset, 'int', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($offset, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->mediaCategoriesIdGet($id, $accept_language, $limit, $offset, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        404 => 'Not found',
+        406 => 'Not acceptable - client must accept application/json as content type',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaCategoriesIdPatch.
+   *
+   * Update a media category (Admin only)
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaCategoriesIdPatchAction(Request $request, $id)
+  {
+    // Make sure that the client is providing something that we can consume
+    $consumes = ['application/json'];
+    if (!static::isContentTypeAllowed($request, $consumes)) {
+      // We can't consume the content that the client is sending us
+      return new Response('', 415);
+    }
+
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+    $media_category_request = $request->getContent();
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $inputFormat = $request->getMimeType($request->getContentTypeFormat());
+      $media_category_request = $this->deserialize($media_category_request, 'OpenAPI\Server\Model\MediaCategoryRequest', $inputFormat);
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaCategoryRequest');
+    $asserts[] = new Assert\Valid();
+    $response = $this->validate($media_category_request, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->mediaCategoriesIdPatch($id, $media_category_request, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'Category updated',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        422 => 'Unprocessable Entity',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaCategoriesPost.
+   *
+   * Create a new media category (Admin only)
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaCategoriesPostAction(Request $request)
+  {
+    // Make sure that the client is providing something that we can consume
+    $consumes = ['application/json'];
+    if (!static::isContentTypeAllowed($request, $consumes)) {
+      // We can't consume the content that the client is sending us
+      return new Response('', 415);
+    }
+
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+    $media_category_request = $request->getContent();
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $inputFormat = $request->getMimeType($request->getContentTypeFormat());
+      $media_category_request = $this->deserialize($media_category_request, 'OpenAPI\Server\Model\MediaCategoryRequest', $inputFormat);
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaCategoryRequest');
+    $asserts[] = new Assert\Valid();
+    $response = $this->validate($media_category_request, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->mediaCategoriesPost($media_category_request, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        201 => 'Category created',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        422 => 'Unprocessable Entity',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation mediaLibraryGet.
+   *
+   * Get media library overview with categories and preview assets
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function mediaLibraryGetAction(Request $request)
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 20);
+    $offset = $request->query->get('offset', 0);
+    $file_type = $request->query->get('file_type');
+    $flavor = $request->query->get('flavor');
+    $assets_per_category = $request->query->get('assets_per_category', 5);
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $offset = $this->deserialize($offset, 'int', 'string');
+      $file_type = $this->deserialize($file_type, 'string', 'string');
+      $flavor = $this->deserialize($flavor, 'string', 'string');
+      $assets_per_category = $this->deserialize($assets_per_category, 'int', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -413,9 +1217,23 @@ class MediaLibraryController extends Controller
       return $response;
     }
     $asserts = [];
+    $asserts[] = new Assert\Choice(['IMAGE', 'SOUND']);
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
-    $response = $this->validate($attributes, $asserts);
+    $response = $this->validate($file_type, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($flavor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(1);
+    $asserts[] = new Assert\LessThanOrEqual(20);
+    $response = $this->validate($assets_per_category, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -427,12 +1245,11 @@ class MediaLibraryController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->mediaPackageNameGet($name, $limit, $offset, $attributes, $responseCode, $responseHeaders);
+      $result = $handler->mediaLibraryGet($accept_language, $limit, $offset, $file_type, $flavor, $assets_per_category, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
         400 => 'Bad request (Invalid, or missing parameters)',
-        404 => 'Not found',
         406 => 'Not acceptable - client must accept application/json as content type',
         default => '',
       };
