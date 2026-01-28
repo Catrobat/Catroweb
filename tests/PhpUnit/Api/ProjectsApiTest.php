@@ -32,6 +32,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,11 +42,11 @@ use Symfony\Component\HttpFoundation\Response;
 #[CoversClass(ProjectsApi::class)]
 final class ProjectsApiTest extends DefaultTestCase
 {
-  protected MockObject|ProjectsApi $object;
+  protected ProjectsApi $object;
 
-  protected MockObject|ProjectsApiFacade $facade;
+  protected Stub|ProjectsApiFacade $facade;
 
-  protected MockObject|ReactionsApiFacade $reactions_facade;
+  protected Stub|ReactionsApiFacade $reactions_facade;
 
   protected mixed $full_validator;
 
@@ -58,27 +59,13 @@ final class ProjectsApiTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockBuilder(ProjectsApi::class)
-      ->disableOriginalConstructor()
-      ->onlyMethods(['getAuthenticationToken'])
-      ->getMock()
-    ;
-
-    $this->facade = $this->createMock(ProjectsApiFacade::class);
-    $this->reactions_facade = $this->createMock(ReactionsApiFacade::class);
-    $this->mockProperty(ProjectsApi::class, $this->object, 'facade', $this->facade);
-    $this->mockProperty(ProjectsApi::class, $this->object, 'reactions_facade', $this->reactions_facade);
+    $this->facade = $this->createStub(ProjectsApiFacade::class);
+    $this->reactions_facade = $this->createStub(ReactionsApiFacade::class);
+    $this->object = new ProjectsApi($this->facade, $this->reactions_facade);
 
     ProjectsApiTest::bootKernel();
     $this->full_validator = ProjectsApiTest::getContainer()->get(ProjectsRequestValidator::class);
     $this->full_response_manager = ProjectsApiTest::getContainer()->get(ProjectsResponseManager::class);
-  }
-
-  #[Group('integration')]
-  public function testCtor(): void
-  {
-    $this->object = new ProjectsApi($this->facade, $this->reactions_facade);
-    $this->assertInstanceOf(ProjectsApi::class, $this->object);
   }
 
   /**
@@ -90,7 +77,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(ProjectsApiLoader::class);
+    $loader = $this->createStub(ProjectsApiLoader::class);
     $loader->method('findProjectByID')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -110,8 +97,8 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(ProjectsApiLoader::class);
-    $loader->method('findProjectByID')->willReturn($this->createMock(Program::class));
+    $loader = $this->createStub(ProjectsApiLoader::class);
+    $loader->method('findProjectByID')->willReturn($this->createStub(Program::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->object->projectIdGet('id', $response_code, $response_headers);
@@ -126,11 +113,11 @@ final class ProjectsApiTest extends DefaultTestCase
   private function projectIdPut_setLoaderAndAuthManager(MockObject|Program|null $project = null, MockObject|User|null $user = null): void
   {
     if (is_null($user)) {
-      $user = $this->createMock(User::class);
+      $user = $this->createStub(User::class);
     }
 
     if (is_null($project)) {
-      $project = $this->createMock(Program::class);
+      $project = $this->createStub(Program::class);
       $project->method('getUser')->willReturn($user);
     }
 
@@ -143,7 +130,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   private function projectIdPut_setLoader(MockObject|Program|null $project): void
   {
-    $loader = $this->createMock(ProjectsApiLoader::class);
+    $loader = $this->createStub(ProjectsApiLoader::class);
     $loader->method('findProjectByID')->willReturn($project);
     $this->facade->method('getLoader')->willReturn($loader);
   }
@@ -153,7 +140,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   private function projectIdPut_setAuthManager(MockObject|User|null $user): void
   {
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
   }
@@ -178,20 +165,20 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $this->projectIdPut_setLoaderAndAuthManager($project, $user);
 
-    $extracted_file_repository = $this->createMock(ExtractedFileRepository::class);
+    $extracted_file_repository = $this->createStub(ExtractedFileRepository::class);
     $extracted_file_repository->method('loadProjectExtractedFile')->willReturn(null);
     $processor = new ProjectsApiProcessor(
-      $this->createMock(ProjectManager::class),
-      $this->createMock(EntityManagerInterface::class),
+      $this->createStub(ProjectManager::class),
+      $this->createStub(EntityManagerInterface::class),
       $extracted_file_repository,
-      $this->createMock(ProjectFileRepository::class),
-      $this->createMock(ScreenshotRepository::class)
+      $this->createStub(ProjectFileRepository::class),
+      $this->createStub(ScreenshotRepository::class)
     );
     $this->facade->method('getProcessor')->willReturn($processor);
 
     $this->facade->method('getRequestValidator')->willReturn($this->full_validator);
 
-    $update_project_request = $this->createMock(UpdateProjectRequest::class);
+    $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
     $project_name = 'My special 🐼 project!';
     $project_description = 'Integer lobortis lacus efficitur arcu blandit hendrerit. In hac habitasse platea accumsan.';
@@ -223,7 +210,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $this->projectIdPut_setLoader(null);
 
-    $update_project_request = $this->createMock(UpdateProjectRequest::class);
+    $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
     $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
 
@@ -240,10 +227,10 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->projectIdPut_setLoader($this->createMock(Program::class));
+    $this->projectIdPut_setLoader($this->createStub(Program::class));
     $this->projectIdPut_setAuthManager(null);
 
-    $update_project_request = $this->createMock(UpdateProjectRequest::class);
+    $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
     $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
 
@@ -271,7 +258,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $this->projectIdPut_setLoaderAndAuthManager($project, $user);
 
-    $update_project_request = $this->createMock(UpdateProjectRequest::class);
+    $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
     $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
 
@@ -292,7 +279,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $this->facade->method('getRequestValidator')->willReturn($this->full_validator);
 
-    $update_project_request = $this->createMock(UpdateProjectRequest::class);
+    $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
     $project_name = '';
     $project_description = str_pad('a', 10_001, 'a');
@@ -325,29 +312,29 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $this->projectIdPut_setLoaderAndAuthManager();
 
-    $extracted_file_repository = $this->createMock(ExtractedFileRepository::class);
-    $extracted_file = $this->createMock(ExtractedCatrobatFile::class);
+    $extracted_file_repository = $this->createStub(ExtractedFileRepository::class);
+    $extracted_file = $this->createStub(ExtractedCatrobatFile::class);
     $extracted_file_repository->method('loadProjectExtractedFile')->willReturn($extracted_file);
     $extracted_file_repository->method('saveProjectExtractedFile')->willThrowException(new \Exception(''));
 
     $processor = new ProjectsApiProcessor(
-      $this->createMock(ProjectManager::class),
-      $this->createMock(EntityManagerInterface::class),
+      $this->createStub(ProjectManager::class),
+      $this->createStub(EntityManagerInterface::class),
       $extracted_file_repository,
-      $this->createMock(ProjectFileRepository::class),
-      $this->createMock(ScreenshotRepository::class)
+      $this->createStub(ProjectFileRepository::class),
+      $this->createStub(ScreenshotRepository::class)
     );
     $this->facade->method('getProcessor')->willReturn($processor);
 
-    $validator = $this->createMock(ProjectsRequestValidator::class);
-    $validation_wrapper = $this->createMock(ValidationWrapper::class);
+    $validator = $this->createStub(ProjectsRequestValidator::class);
+    $validation_wrapper = $this->createStub(ValidationWrapper::class);
     $validation_wrapper->method('hasError')->willReturn(false);
     $validator->method('validateUpdateRequest')->willReturn($validation_wrapper);
 
     $this->facade->method('getRequestValidator')->willReturn($validator);
     $this->facade->method('getResponseManager')->willReturn($this->full_response_manager);
 
-    $update_project_request = $this->createMock(UpdateProjectRequest::class);
+    $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
     $update_project_request->method('getName')->willReturn('New name');
 
@@ -370,7 +357,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(ProjectsApiLoader::class);
+    $loader = $this->createStub(ProjectsApiLoader::class);
     $loader->method('getFeaturedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -420,8 +407,8 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(ProjectsApiLoader::class);
-    $loader->method('findProjectByID')->willReturn($this->createMock(Program::class));
+    $loader = $this->createStub(ProjectsApiLoader::class);
+    $loader->method('findProjectByID')->willReturn($this->createStub(Program::class));
     $loader->method('getRecommendedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -472,7 +459,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
@@ -493,8 +480,8 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
-    $user = $this->createMock(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
     $user->method('getId')->willReturn('1');
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
@@ -516,7 +503,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $request_validator = $this->createMock(ProjectsRequestValidator::class);
+    $request_validator = $this->createStub(ProjectsRequestValidator::class);
     $request_validator->method('validateUserExists')->willReturn(true);
     $this->facade->method('getRequestValidator')->willReturn($request_validator);
 
@@ -537,7 +524,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $request_validator = $this->createMock(ProjectsRequestValidator::class);
+    $request_validator = $this->createStub(ProjectsRequestValidator::class);
     $request_validator->method('validateUserExists')->willReturn(false);
     $this->facade->method('getRequestValidator')->willReturn($request_validator);
 
@@ -558,7 +545,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $project_report_request = $this->createMock(ProjectReportRequest::class);
+    $project_report_request = $this->createStub(ProjectReportRequest::class);
 
     $this->object->projectIdReportPost('id', $project_report_request, $response_code, $response_headers);
 
@@ -576,16 +563,16 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
+    $user = $this->createStub(User::class);
     $user->method('isVerified')->willReturn(true);
-    $processor = $this->createMock(ProjectsApiProcessor::class);
-    $processor->method('addProject')->willReturn($this->createMock(Program::class));
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $processor = $this->createStub(ProjectsApiProcessor::class);
+    $processor->method('addProject')->willReturn($this->createStub(Program::class));
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
     $this->facade->method('getProcessor')->willReturn($processor);
 
-    $file = $this->createMock(UploadedFile::class);
+    $file = $this->createStub(UploadedFile::class);
     $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_CREATED, $response_code);
@@ -604,21 +591,21 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $validator = $this->createMock(ProjectsRequestValidator::class);
-    $validation_wrapper = $this->createMock(ValidationWrapper::class);
+    $validator = $this->createStub(ProjectsRequestValidator::class);
+    $validation_wrapper = $this->createStub(ValidationWrapper::class);
     $validation_wrapper->method('hasError')->willReturn(true);
     $validator->method('validateUploadFile')->willReturn($validation_wrapper);
-    $processor = $this->createMock(ProjectsApiProcessor::class);
-    $processor->method('addProject')->willReturn($this->createMock(Program::class));
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
-    $user = $this->createMock(User::class);
+    $processor = $this->createStub(ProjectsApiProcessor::class);
+    $processor->method('addProject')->willReturn($this->createStub(Program::class));
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
     $user->method('isVerified')->willReturn(true);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
     $this->facade->method('getProcessor')->willReturn($processor);
     $this->facade->method('getRequestValidator')->willReturn($validator);
 
-    $file = $this->createMock(UploadedFile::class);
+    $file = $this->createStub(UploadedFile::class);
     $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
@@ -636,16 +623,16 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $processor = $this->createMock(ProjectsApiProcessor::class);
+    $processor = $this->createStub(ProjectsApiProcessor::class);
     $processor->method('addProject')->willThrowException(new \Exception());
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
-    $user = $this->createMock(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
     $user->method('isVerified')->willReturn(true);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
     $this->facade->method('getProcessor')->willReturn($processor);
 
-    $file = $this->createMock(UploadedFile::class);
+    $file = $this->createStub(UploadedFile::class);
     $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);

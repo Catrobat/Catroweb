@@ -9,7 +9,7 @@ use Google\Cloud\Core\Exception\ServiceException;
 use Google\Cloud\Translate\V2\TranslateClient;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -21,7 +21,7 @@ class GoogleTranslateApiTest extends TestCase
 {
   private GoogleTranslateApi $api;
 
-  private MockObject|TranslateClient $client;
+  private Stub|TranslateClient $client;
 
   /**
    * @throws Exception
@@ -29,42 +29,60 @@ class GoogleTranslateApiTest extends TestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->client = $this->createMock(TranslateClient::class);
-    $this->api = new GoogleTranslateApi($this->client, $this->createMock(LoggerInterface::class), 5);
+    // Use a stub by default; tests that verify behavior will create their own mock
+    $this->client = $this->createStub(TranslateClient::class);
+    $this->api = new GoogleTranslateApi($this->client, $this->createStub(LoggerInterface::class), 5);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testSuccessDetectedLanguage(): void
   {
+    $client = $this->createMock(TranslateClient::class);
     $response = [
       'source' => 'en',
       'text' => 'translated',
     ];
-    $this->client->expects($this->once())->method('translate')->willReturn($response);
+    $client->expects($this->once())->method('translate')->willReturn($response);
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5);
 
-    $result = $this->api->translate('testing', null, 'fr');
+    $result = $api->translate('testing', null, 'fr');
 
     $this->assertEquals('en', $result->detected_source_language);
     $this->assertEquals('translated', $result->translation);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testSuccessSpecifiedLanguage(): void
   {
+    $client = $this->createMock(TranslateClient::class);
     $response = [
       'source' => 'en',
       'text' => 'test',
     ];
-    $this->client->expects($this->once())->method('translate')->willReturn($response);
+    $client->expects($this->once())->method('translate')->willReturn($response);
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5);
 
-    $result = $this->api->translate('testing', 'en', 'fr');
+    $result = $api->translate('testing', 'en', 'fr');
 
     $this->assertNull($result->detected_source_language);
     $this->assertEquals('test', $result->translation);
   }
 
+  /**
+   * @throws Exception
+   */
   public function testNullResponse(): void
   {
-    $this->client->expects($this->once())->method('translate')->willReturn(null);
-    $result = $this->api->translate('testing', null, 'fr');
+    $client = $this->createMock(TranslateClient::class);
+    $client->expects($this->once())->method('translate')->willReturn(null);
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5);
+
+    $result = $api->translate('testing', null, 'fr');
+
     $this->assertNull($result);
   }
 
@@ -73,9 +91,13 @@ class GoogleTranslateApiTest extends TestCase
    */
   public function testExceptionThrown(): void
   {
-    $exception = $this->createMock(ServiceException::class);
-    $this->client->expects($this->once())->method('translate')->willThrowException($exception);
-    $result = $this->api->translate('testing', null, 'fr');
+    $client = $this->createMock(TranslateClient::class);
+    $exception = $this->createStub(ServiceException::class);
+    $client->expects($this->once())->method('translate')->willThrowException($exception);
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5);
+
+    $result = $api->translate('testing', null, 'fr');
+
     $this->assertNull($result);
   }
 

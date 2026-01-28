@@ -13,7 +13,7 @@ use OpenAPI\Server\Model\NotificationsCountResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -22,9 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
 #[CoversClass(NotificationsApi::class)]
 class NotificationsApiTest extends DefaultTestCase
 {
-  protected MockObject|NotificationsApi $object;
+  protected NotificationsApi $object;
 
-  protected MockObject|NotificationsApiFacade $facade;
+  protected Stub|NotificationsApiFacade $facade;
 
   /**
    * @throws \ReflectionException
@@ -33,21 +33,8 @@ class NotificationsApiTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockBuilder(NotificationsApi::class)
-      ->disableOriginalConstructor()
-      ->onlyMethods(['getAuthenticationToken'])
-      ->getMock()
-    ;
-
-    $this->facade = $this->createMock(NotificationsApiFacade::class);
-    $this->mockProperty(NotificationsApi::class, $this->object, 'facade', $this->facade);
-  }
-
-  #[Group('integration')]
-  public function testCtor(): void
-  {
+    $this->facade = $this->createStub(NotificationsApiFacade::class);
     $this->object = new NotificationsApi($this->facade);
-    $this->assertInstanceOf(NotificationsApi::class, $this->object);
   }
 
   #[Group('unit')]
@@ -70,8 +57,8 @@ class NotificationsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
-    $user = $this->createMock(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
     $user->method('getId')->willReturn('1');
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
@@ -103,8 +90,8 @@ class NotificationsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
-    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
     $this->object->notificationsReadPut($response_code, $response_headers);

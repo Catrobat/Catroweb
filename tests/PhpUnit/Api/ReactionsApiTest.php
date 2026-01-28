@@ -20,7 +20,7 @@ use OpenAPI\Server\Model\ReactionUsersResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -29,11 +29,11 @@ use Symfony\Component\HttpFoundation\Response;
 #[CoversClass(ProjectsApi::class)]
 final class ReactionsApiTest extends DefaultTestCase
 {
-  protected MockObject|ProjectsApi $object;
+  protected ProjectsApi $object;
 
-  protected MockObject|ProjectsApiFacade $facade;
+  protected Stub|ProjectsApiFacade $facade;
 
-  protected MockObject|ReactionsApiFacade $reactions_facade;
+  protected Stub|ReactionsApiFacade $reactions_facade;
 
   /**
    * @throws \ReflectionException
@@ -42,26 +42,9 @@ final class ReactionsApiTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockBuilder(ProjectsApi::class)
-      ->disableOriginalConstructor()
-      ->onlyMethods([])
-      ->getMock()
-    ;
-
-    $this->facade = $this->createMock(ProjectsApiFacade::class);
-    $this->reactions_facade = $this->createMock(ReactionsApiFacade::class);
-    $this->mockProperty(ProjectsApi::class, $this->object, 'facade', $this->facade);
-    $this->mockProperty(ProjectsApi::class, $this->object, 'reactions_facade', $this->reactions_facade);
-  }
-
-  #[Group('integration')]
-  public function testCtor(): void
-  {
-    $this->object = new ProjectsApi(
-      $this->createMock(ProjectsApiFacade::class),
-      $this->createMock(ReactionsApiFacade::class)
-    );
-    $this->assertInstanceOf(ProjectsApi::class, $this->object);
+    $this->facade = $this->createStub(ProjectsApiFacade::class);
+    $this->reactions_facade = $this->createStub(ReactionsApiFacade::class);
+    $this->object = new ProjectsApi($this->facade, $this->reactions_facade);
   }
 
   // ==================== projectIdReactionPost Tests ====================
@@ -75,11 +58,11 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $reaction_request = $this->createMock(ReactionRequest::class);
+    $reaction_request = $this->createStub(ReactionRequest::class);
 
     $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
 
@@ -96,16 +79,16 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn(null);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $reaction_request = $this->createMock(ReactionRequest::class);
+    $reaction_request = $this->createStub(ReactionRequest::class);
 
     $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
 
@@ -122,17 +105,17 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $reaction_request = $this->createMock(ReactionRequest::class);
+    $reaction_request = $this->createStub(ReactionRequest::class);
     $reaction_request->method('getType')->willReturn(null);
 
     $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
@@ -150,17 +133,17 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $reaction_request = $this->createMock(ReactionRequest::class);
+    $reaction_request = $this->createStub(ReactionRequest::class);
     $reaction_request->method('getType')->willReturn('invalid_type');
 
     $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
@@ -178,21 +161,21 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $processor = $this->createMock(ReactionsApiProcessor::class);
+    $processor = $this->createStub(ReactionsApiProcessor::class);
     $processor->method('addReaction')->willReturn(false);
     $this->reactions_facade->method('getProcessor')->willReturn($processor);
 
-    $reaction_request = $this->createMock(ReactionRequest::class);
+    $reaction_request = $this->createStub(ReactionRequest::class);
     $reaction_request->method('getType')->willReturn('thumbs_up');
 
     $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
@@ -210,13 +193,13 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionCounts')->willReturn([
       'total' => 1, 'thumbs_up' => 1, 'smile' => 0, 'love' => 0, 'wow' => 0, 'active_types' => ['thumbs_up'],
@@ -224,17 +207,17 @@ final class ReactionsApiTest extends DefaultTestCase
     $loader->method('getUserReactions')->willReturn(['thumbs_up']);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $processor = $this->createMock(ReactionsApiProcessor::class);
+    $processor = $this->createStub(ReactionsApiProcessor::class);
     $processor->method('addReaction')->willReturn(true);
     $this->reactions_facade->method('getProcessor')->willReturn($processor);
 
-    $response_manager = $this->createMock(ReactionsResponseManager::class);
+    $response_manager = $this->createStub(ReactionsResponseManager::class);
     $response_manager->method('createReactionSummaryResponse')
-      ->willReturn($this->createMock(ReactionSummaryResponse::class))
+      ->willReturn($this->createStub(ReactionSummaryResponse::class))
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 
-    $reaction_request = $this->createMock(ReactionRequest::class);
+    $reaction_request = $this->createStub(ReactionRequest::class);
     $reaction_request->method('getType')->willReturn('thumbs_up');
 
     $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
@@ -254,7 +237,7 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
@@ -272,12 +255,12 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn(null);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
@@ -295,13 +278,13 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
@@ -319,17 +302,17 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $processor = $this->createMock(ReactionsApiProcessor::class);
+    $processor = $this->createStub(ReactionsApiProcessor::class);
     $this->reactions_facade->method('getProcessor')->willReturn($processor);
 
     $this->object->projectIdReactionDelete('id', 'thumbs_up', 'en', $response_code, $response_headers);
@@ -348,11 +331,11 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn(null);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
@@ -371,13 +354,13 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $user = $this->createMock(User::class);
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createStub(User::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionCounts')->willReturn([
       'total' => 5, 'thumbs_up' => 2, 'smile' => 1, 'love' => 1, 'wow' => 1, 'active_types' => ['thumbs_up', 'smile', 'love', 'wow'],
@@ -385,9 +368,9 @@ final class ReactionsApiTest extends DefaultTestCase
     $loader->method('getUserReactions')->willReturn(['thumbs_up', 'love']);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $response_manager = $this->createMock(ReactionsResponseManager::class);
+    $response_manager = $this->createStub(ReactionsResponseManager::class);
     $response_manager->method('createReactionSummaryResponse')
-      ->willReturn($this->createMock(ReactionSummaryResponse::class))
+      ->willReturn($this->createStub(ReactionSummaryResponse::class))
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 
@@ -406,21 +389,21 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionCounts')->willReturn([
       'total' => 3, 'thumbs_up' => 1, 'smile' => 1, 'love' => 1, 'wow' => 0, 'active_types' => ['thumbs_up', 'smile', 'love'],
     ]);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $response_manager = $this->createMock(ReactionsResponseManager::class);
+    $response_manager = $this->createStub(ReactionsResponseManager::class);
     $response_manager->method('createReactionSummaryResponse')
-      ->willReturn($this->createMock(ReactionSummaryResponse::class))
+      ->willReturn($this->createStub(ReactionSummaryResponse::class))
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 
@@ -441,11 +424,11 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn(null);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
@@ -464,12 +447,12 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionUsersPaginated')->willReturn([
       'data' => [],
@@ -478,9 +461,9 @@ final class ReactionsApiTest extends DefaultTestCase
     ]);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $response_manager = $this->createMock(ReactionsResponseManager::class);
+    $response_manager = $this->createStub(ReactionsResponseManager::class);
     $response_manager->method('createReactionUsersResponse')
-      ->willReturn($this->createMock(ReactionUsersResponse::class))
+      ->willReturn($this->createStub(ReactionUsersResponse::class))
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 
@@ -499,12 +482,12 @@ final class ReactionsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createMock(Program::class);
-    $loader = $this->createMock(ReactionsApiLoader::class);
+    $project = $this->createStub(Program::class);
+    $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionUsersPaginated')->willReturn([
       'data' => [],
@@ -513,9 +496,9 @@ final class ReactionsApiTest extends DefaultTestCase
     ]);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $response_manager = $this->createMock(ReactionsResponseManager::class);
+    $response_manager = $this->createStub(ReactionsResponseManager::class);
     $response_manager->method('createReactionUsersResponse')
-      ->willReturn($this->createMock(ReactionUsersResponse::class))
+      ->willReturn($this->createStub(ReactionUsersResponse::class))
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 

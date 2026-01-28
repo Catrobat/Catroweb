@@ -137,12 +137,12 @@ class TwigExtensionTest extends TestCase
    */
   private function createTwigExtension(string $locale): TwigExtension
   {
-    $repo = $this->createMock(MediaPackageFileRepository::class);
+    $repo = $this->createStub(MediaPackageFileRepository::class);
     $request_stack = $this->mockRequestStack($locale);
-    $parameter_bag = $this->createMock(ParameterBag::class);
-    $translator = $this->createMock(TranslatorInterface::class);
-    $feature_flag_manager = $this->createMock(FeatureFlagManager::class);
-    $statistics_repository = $this->createMock(StatisticRepository::class);
+    $parameter_bag = $this->createStub(ParameterBag::class);
+    $translator = $this->createStub(TranslatorInterface::class);
+    $feature_flag_manager = $this->createStub(FeatureFlagManager::class);
+    $statistics_repository = $this->createStub(StatisticRepository::class);
 
     return new TwigExtension(
       $request_stack,

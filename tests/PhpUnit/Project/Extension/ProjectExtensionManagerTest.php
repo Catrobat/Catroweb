@@ -9,6 +9,7 @@ use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Extension\ProjectExtensionManager;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
@@ -17,8 +18,13 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
+ *
+ * Note: Uses getMockBuilder with onlyMethods([]) as a workaround to enable
+ * testing of protected methods via reflection (isAnEmbroideryProject, isAMindstormsProject, isAPhiroProject).
+ * The mock has no expectations and doesn't override any methods - it's just needed for the invokeMethod helper.
  */
 #[CoversClass(ProjectExtensionManager::class)]
+#[AllowMockObjectsWithoutExpectations]
 class ProjectExtensionManagerTest extends DefaultTestCase
 {
   protected ExtractedCatrobatFile $extracted_catrobat_file_with_extensions;

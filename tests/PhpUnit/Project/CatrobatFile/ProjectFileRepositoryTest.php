@@ -11,7 +11,6 @@ use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -56,23 +55,17 @@ class ProjectFileRepositoryTest extends TestCase
     $this->assertInstanceOf(ProjectFileRepository::class, $this->program_file_repository);
   }
 
-  /**
-   * @throws Exception
-   */
   public function testThrowsAnExceptionIfDirectoryIsNotFound(): void
   {
     $this->expectException(\Exception::class);
-    $file_compressor = $this->createMock(CatrobatFileCompressor::class);
+    $file_compressor = new CatrobatFileCompressor();
     $this->program_file_repository = new ProjectFileRepository(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
   }
 
-  /**
-   * @throws Exception
-   */
   public function testThrowsAnExceptionIfDirectoryIsNotFound2(): void
   {
     $this->expectException(\Exception::class);
-    $file_compressor = $this->createMock(CatrobatFileCompressor::class);
+    $file_compressor = new CatrobatFileCompressor();
     $this->program_file_repository = new ProjectFileRepository($this->storage_dir, __DIR__.'/invalid_directory/', $file_compressor);
   }
 

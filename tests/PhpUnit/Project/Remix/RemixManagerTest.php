@@ -20,6 +20,7 @@ use App\Project\Remix\RemixManager;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -29,6 +30,7 @@ use PHPUnit\Framework\TestCase;
  * @internal
  */
 #[CoversClass(RemixManager::class)]
+#[AllowMockObjectsWithoutExpectations]
 class RemixManagerTest extends TestCase
 {
   private RemixManager $remix_manager;
