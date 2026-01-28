@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e9c593fdad8fb87b42dd576bf999b4e9",
+    "content-hash": "6ec272c3c9dbf92cc58ceafff2157944",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2383,16 +2383,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.69.0",
+            "version": "v1.71.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "a35bcf9d79f7007eaaf325e00011d08f40494fb1"
+                "reference": "b170c5d2095f05def125a1f7452f7fcca0a9ffaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/a35bcf9d79f7007eaaf325e00011d08f40494fb1",
-                "reference": "a35bcf9d79f7007eaaf325e00011d08f40494fb1",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/b170c5d2095f05def125a1f7452f7fcca0a9ffaf",
+                "reference": "b170c5d2095f05def125a1f7452f7fcca0a9ffaf",
                 "shasum": ""
             },
             "require": {
@@ -2412,7 +2412,7 @@
                 "nikic/php-parser": "^5.6",
                 "opis/closure": "^3.7|^4.0",
                 "phpdocumentor/reflection": "^6.0",
-                "phpdocumentor/reflection-docblock": "^5.3",
+                "phpdocumentor/reflection-docblock": "^5.3.3||^6.0",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.0",
                 "squizlabs/php_codesniffer": "2.*"
@@ -2444,33 +2444,33 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.69.0"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.71.1"
             },
-            "time": "2025-12-06T04:51:04+00:00"
+            "time": "2026-01-23T22:57:13+00:00"
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.20.2",
+            "version": "v2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "b2a1523da043085286d32133553fe216bbbc960e"
+                "reference": "f1247e8a75843eed11bba1632c0425edcac93ed1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/b2a1523da043085286d32133553fe216bbbc960e",
-                "reference": "b2a1523da043085286d32133553fe216bbbc960e",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/f1247e8a75843eed11bba1632c0425edcac93ed1",
+                "reference": "f1247e8a75843eed11bba1632c0425edcac93ed1",
                 "shasum": ""
             },
             "require": {
                 "google/cloud-core": "^1.57",
-                "google/gax": "^1.36.0",
-                "php": "^8.0"
+                "google/gax": "^1.38.0",
+                "php": "^8.1"
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
                 "phpdocumentor/reflection": "^5.3.3||^6.0",
-                "phpdocumentor/reflection-docblock": "^5.3",
+                "phpdocumentor/reflection-docblock": "^5.3.3||^6.0",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.0",
                 "squizlabs/php_codesniffer": "2.*"
@@ -2500,9 +2500,9 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.20.2"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v2.1.2"
             },
-            "time": "2025-01-24T21:24:06+00:00"
+            "time": "2026-01-16T19:46:18+00:00"
         },
         {
             "name": "google/common-protos",
@@ -2565,16 +2565,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.40.0",
+            "version": "v1.42.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "1d3834d60b3f0794427c64d2b27d7c627fbba92c"
+                "reference": "7ad13e5b9ca201a5f60e7b3342842d1217bc23a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/1d3834d60b3f0794427c64d2b27d7c627fbba92c",
-                "reference": "1d3834d60b3f0794427c64d2b27d7c627fbba92c",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/7ad13e5b9ca201a5f60e7b3342842d1217bc23a6",
+                "reference": "7ad13e5b9ca201a5f60e7b3342842d1217bc23a6",
                 "shasum": ""
             },
             "require": {
@@ -2616,9 +2616,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.40.0"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.42.0"
             },
-            "time": "2025-12-04T18:45:15+00:00"
+            "time": "2026-01-22T20:31:50+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -2711,16 +2711,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v4.33.2",
+            "version": "v4.33.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "fbd96b7bf1343f4b0d8fb358526c7ba4d72f1318"
+                "reference": "22d28025cda0d223a2e48c2e16c5284ecc9f5402"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/fbd96b7bf1343f4b0d8fb358526c7ba4d72f1318",
-                "reference": "fbd96b7bf1343f4b0d8fb358526c7ba4d72f1318",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/22d28025cda0d223a2e48c2e16c5284ecc9f5402",
+                "reference": "22d28025cda0d223a2e48c2e16c5284ecc9f5402",
                 "shasum": ""
             },
             "require": {
@@ -2749,9 +2749,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.33.2"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.33.4"
             },
-            "time": "2025-12-05T22:12:22+00:00"
+            "time": "2026-01-12T17:58:43+00:00"
         },
         {
             "name": "grpc/grpc",
