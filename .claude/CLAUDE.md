@@ -317,6 +317,102 @@ docker exec app.catroweb bin/behat -f pretty -s web-reactions "tests/BehatFeatur
 
 If Behat tests fail after JavaScript changes but the logic looks correct, check if you forgot to rebuild the assets.
 
+### Preventing Flaky Behat Tests
+
+Flaky tests are tests that intermittently pass and fail without code changes. Follow these guidelines to prevent race conditions and timing issues:
+
+#### 1. Always Wait for DOM Updates After AJAX/Async Operations
+
+**Bad (flaky):**
+
+```gherkin
+When I click ".swal2-confirm"
+And I wait for the element ".loading-spinner-backdrop" to appear and if so to disappear again
+Then the ".visibility-text" element should contain "private"
+```
+
+**Good (robust):**
+
+```gherkin
+When I click ".swal2-confirm"
+And I wait for the element ".loading-spinner-backdrop" to appear and if so to disappear again
+And I wait for AJAX to finish
+Then I wait for the element ".visibility-text" to contain "private"
+And the ".visibility-text" element should contain "private"
+```
+
+**Why:** After a spinner disappears, the DOM might still be updating. Add explicit waits for the final state.
+
+#### 2. Layer Your Wait Steps
+
+Use multiple complementary wait strategies:
+
+1. **Spinner wait:** `I wait for the element ".loading-spinner" to appear and if so to disappear again`
+2. **AJAX wait:** `I wait for AJAX to finish`
+3. **Content wait:** `I wait for the element ".result" to contain "expected text"`
+4. **Final assertion:** `the ".result" element should contain "expected text"`
+
+#### 3. Wait for Content Changes, Not Just Existence
+
+**Bad:**
+
+```gherkin
+When I click button
+Then the ".status" element should contain "updated"
+```
+
+**Good:**
+
+```gherkin
+When I click button
+And I wait for AJAX to finish
+Then I wait for the element ".status" to contain "updated"
+And the ".status" element should contain "updated"
+```
+
+#### 4. Always Include -s <suite> Flag
+
+Running Behat without the suite flag causes hooks to run 20+ times, making tests extremely slow and prone to timeouts.
+
+**Bad:** `bin/behat tests/BehatFeatures/web/profile/profile_edit.feature:268`
+
+**Good:** `bin/behat -s web-profile tests/BehatFeatures/web/profile/profile_edit.feature:268`
+
+#### 5. Use Fixed Delays as a Last Resort
+
+When other wait strategies don't work (e.g., AJAX wait doesn't capture DOM mutations), add a small fixed delay:
+
+```gherkin
+And I wait for AJAX to finish
+And I wait 1000 milliseconds
+Then the ".result" element should contain "expected"
+```
+
+**Note:** Only use fixed delays when:
+
+- The DOM update happens after AJAX completes
+- There's no reliable element/condition to wait for
+- Other wait strategies have proven insufficient
+
+#### 6. Test Scenarios That Often Need Extra Waits
+
+- Project visibility toggles (privacy changes)
+- Like/reaction buttons (guest → login → action)
+- Form submissions with validation
+- Modal dialogs with animations
+- Infinite scroll / lazy loading
+- Any operation that shows a loading spinner
+
+#### 7. Debugging Flaky Tests
+
+If a test passes locally but fails in CI:
+
+1. Check if there are missing wait steps after async operations
+2. Verify all AJAX calls have completed before assertions
+3. Look for DOM mutations that happen after spinners disappear
+4. Check network timing differences (CI might be slower)
+5. Use `http://localhost:8080/index_test.php/` to inspect test state after failure
+
 ## Development Workflow Checklist
 
 ### After PHP Changes (src/)

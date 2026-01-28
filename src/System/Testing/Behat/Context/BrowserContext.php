@@ -493,19 +493,18 @@ class BrowserContext extends MinkContext implements Context
    */
   public function iWaitForTheElementToContain(string $locator, string $text): void
   {
-    /** @var NodeElement $element */
-    $element = $this->getSession()->getPage()->find('css', $locator);
     $tries = 100;
-    $delay = 100000; // every 1/10 second
+    $delay = 100_000; // every 1/10 second
     for ($timer = 0; $timer < $tries; ++$timer) {
-      if ($element->getText() === $text) {
+      $element = $this->getSession()->getPage()->find('css', $locator);
+      if (null !== $element && str_contains($element->getText(), $text)) {
         return;
       }
 
       usleep($delay);
     }
 
-    $message = sprintf("The text '%s' was not found after a %s seconds timeout", $text, $delay * $tries);
+    $message = sprintf("The text '%s' was not found in element '%s' after %s seconds timeout", $text, $locator, ($delay * $tries) / 1_000_000);
     throw new ResponseTextException($message, $this->getSession());
   }
 
