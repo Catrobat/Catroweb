@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\System\Testing\Behat\Context;
 
-use App\DB\Entity\MediaLibrary\MediaPackage;
-use App\DB\Entity\MediaLibrary\MediaPackageCategory;
-use App\DB\Entity\MediaLibrary\MediaPackageFile;
+use App\DB\Entity\MediaLibrary\MediaAsset;
+use App\DB\Entity\MediaLibrary\MediaCategory;
+use App\DB\Entity\MediaLibrary\MediaFileType;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
@@ -39,7 +39,6 @@ use App\System\Testing\Behat\ContextTrait;
 use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Exception\ORMException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -705,108 +704,62 @@ class DataFixturesContext implements Context
   // -------------------------------------------------------------------------------------------------------------------
 
   /**
-   * @Given /^there are media packages:$/
+   * @Given /^there are media categories:$/
    */
-  public function thereAreMediaPackages(TableNode $table): void
+  public function thereAreMediaCategories(TableNode $table): void
   {
     $em = $this->getManager();
-    $packages = $table->getHash();
-    foreach ($packages as $package) {
-      $new_package = new MediaPackage();
-      $new_package->setName($package['name']);
-      $new_package->setNameUrl($package['name_url']);
-      $em->persist($new_package);
-    }
-
-    $em->flush();
-  }
-
-  /**
-   * @Given /^there are media package categories:$/
-   */
-  public function thereAreMediaPackageCategories(TableNode $table): void
-  {
-    $em = $this->getManager();
-    $categories = $table->getHash();
-    foreach ($categories as $category) {
-      $new_category = new MediaPackageCategory();
-      $new_category->setName($category['name']);
-      if (!empty($category['priority'])) {
-        $new_category->setPriority((int) $category['priority']);
+    foreach ($table->getHash() as $row) {
+      $category = new MediaCategory();
+      if (isset($row['id'])) {
+        MyUuidGenerator::setNextValue($row['id']);
       }
+      $category->setName($row['name']);
+      $category->setDescription($row['description'] ?? '');
+      $category->setPriority((int) ($row['priority'] ?? 0));
 
-      /** @var MediaPackage|null $package */
-      $package = $em->getRepository(MediaPackage::class)->findOneBy(['name' => $category['package']]);
-      Assert::assertNotNull($package, 'Fatal error package not found');
-
-      $new_category->setPackage(new ArrayCollection([$package]));
-      $current_categories = $package->getCategories();
-      $current_categories->add($new_category);
-      $package->setCategories($current_categories);
-      $em->persist($new_category);
+      $em->persist($category);
+      $em->flush();
     }
-
-    $em->flush();
   }
 
   /**
-   * @Given /^there are media package files:$/
-   *
-   * @throws \ImagickException
-   * @throws \ImagickDrawException
+   * @Given /^there are media assets:$/
    */
-  public function thereAreMediaPackageFiles(TableNode $table): void
+  public function thereAreMediaAssets(TableNode $table): void
   {
     $em = $this->getManager();
-    $file_repo = $this->getMediaPackageFileRepository();
     $flavor_repo = $this->getFlavorRepository();
-    $files = $table->getHash();
-    foreach ($files as $file) {
-      $new_file = new MediaPackageFile();
-      $new_file->setName($file['name']);
-      $new_file->setDownloads(0);
-      $new_file->setExtension($file['extension']);
-      $new_file->setActive((bool) $file['active']);
+    foreach ($table->getHash() as $row) {
+      $asset = new MediaAsset();
+      if (isset($row['id'])) {
+        MyUuidGenerator::setNextValue($row['id']);
+      }
+      $asset->setName($row['name']);
+      $asset->setExtension($row['extension'] ?? 'png');
+      $asset->setFileType(MediaFileType::from($row['file_type']));
+      $asset->setDownloads((int) ($row['downloads'] ?? 0));
+      $asset->setAuthor($row['author'] ?? '');
+      $asset->setActive((bool) ($row['active'] ?? true));
 
-      /** @var MediaPackageCategory|null $category */
-      $category = $em->getRepository(MediaPackageCategory::class)->findOneBy(['name' => $file['category']]);
-      Assert::assertNotNull($category, 'Fatal error category not found');
-      $new_file->setCategory($category);
-      $old_files = $category->getFiles();
-      $old_files->add($new_file);
-      $category->setFiles(new ArrayCollection($old_files->toArray()));
-      if (!empty($file['flavors'])) {
-        foreach (explode(',', $file['flavors']) as $flavor) {
-          $new_file->addFlavor($flavor_repo->getFlavorByName(trim($flavor)));
+      // Set category
+      $category = $em->getRepository(MediaCategory::class)->find($row['category']);
+      Assert::assertNotNull($category, 'Category not found: '.$row['category']);
+      $asset->setCategory($category);
+
+      // Set flavors
+      if (!empty($row['flavors'])) {
+        foreach (explode(',', $row['flavors']) as $flavor_name) {
+          $flavor = $flavor_repo->getFlavorByName(trim($flavor_name));
+          if ($flavor) {
+            $asset->addFlavor($flavor);
+          }
         }
       }
 
-      $new_file->setAuthor($file['author']);
-
-      $file_repo->saveFile(
-        new File($this->MEDIA_PACKAGE_DIR.$file['id'].'.'.$file['extension']),
-        (int) $file['id'],
-        $file['extension']
-      );
-
-      $em->persist($new_file);
-
-      /** @var MediaPackage $mediaPackage */
-      $mediaPackage = $category->getPackage()->getValues()[0];
-      $this->media_files[] = [
-        'id' => $file['id'],
-        'name' => $file['name'],
-        'flavor' => $new_file->getFlavor(),
-        'flavors' => $new_file->getFlavorNames(),
-        'package' => $mediaPackage->getName(),
-        'category' => $file['category'],
-        'author' => $file['author'],
-        'extension' => $file['extension'],
-        'download_url' => 'http://localhost/app/download-media/'.$file['id'],
-      ];
+      $em->persist($asset);
+      $em->flush();
     }
-
-    $em->flush();
   }
 
   /**

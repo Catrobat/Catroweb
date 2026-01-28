@@ -5,43 +5,82 @@ declare(strict_types=1);
 namespace App\Api\Services\MediaLibrary;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\DB\Entity\MediaLibrary\MediaPackage;
-use App\DB\Entity\MediaLibrary\MediaPackageFile;
-use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
-use App\DB\EntityRepository\MediaLibrary\MediaPackageRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\DB\Entity\MediaLibrary\MediaAsset;
+use App\DB\Entity\MediaLibrary\MediaCategory;
+use App\DB\Entity\MediaLibrary\MediaFileType;
+use App\DB\EntityRepository\MediaLibrary\MediaAssetRepository;
+use App\DB\EntityRepository\MediaLibrary\MediaCategoryRepository;
 
 class MediaLibraryApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly MediaPackageFileRepository $media_package_file_repository, private readonly MediaPackageRepository $media_package_repository, private readonly EntityManagerInterface $entity_manager)
-  {
+  public function __construct(
+    private readonly MediaCategoryRepository $category_repository,
+    private readonly MediaAssetRepository $asset_repository,
+  ) {
   }
 
-  public function searchMediaLibraryFiles(string $query, string $flavor, string $package_name, int $limit, int $offset): ?array
+  public function getCategoryById(string $id): ?MediaCategory
   {
-    return $this->media_package_file_repository->search($query, $flavor, $package_name, $limit, $offset);
+    return $this->category_repository->find($id);
   }
 
-  public function getMediaPackageByName(string $name): ?MediaPackage
+  public function getCategories(int $limit, int $offset): array
   {
-    return $this->media_package_repository->findOneBy(['nameUrl' => $name]);
+    return $this->category_repository->findPaginated($limit, $offset);
   }
 
-  public function getMediaPackageFileByID(int $id): ?MediaPackageFile
+  public function getAllCategories(): array
   {
-    return $this->media_package_file_repository->findOneBy(['id' => $id]);
+    return $this->category_repository->findAll();
   }
 
-  public function getMediaPackageFiles(int $limit, int $offset, string $flavor): ?array
+  public function countCategories(): int
   {
-    $qb = $this->entity_manager->createQueryBuilder()
-      ->select('f')
-      ->from(MediaPackageFile::class, 'f')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-    $qb = $this->media_package_file_repository->addFileFlavorsCondition($qb, $flavor, 'f');
+    return $this->category_repository->countAll();
+  }
 
-    return $qb->getQuery()->getResult();
+  public function getAssetById(string $id): ?MediaAsset
+  {
+    return $this->asset_repository->find($id);
+  }
+
+  public function getAssets(
+    int $limit,
+    int $offset,
+    ?string $category_id,
+    ?MediaFileType $file_type,
+    ?string $flavor,
+    ?string $search,
+    string $sort_by,
+    string $sort_order,
+  ): array {
+    $category = $category_id ? $this->category_repository->find($category_id) : null;
+
+    return $this->asset_repository->findPaginated(
+      $limit,
+      $offset,
+      $category,
+      $file_type,
+      $flavor,
+      $search,
+      $sort_by,
+      $sort_order
+    );
+  }
+
+  public function countAssets(
+    ?string $category_id,
+    ?MediaFileType $file_type,
+    ?string $flavor,
+    ?string $search,
+  ): int {
+    $category = $category_id ? $this->category_repository->find($category_id) : null;
+
+    return $this->asset_repository->countAll(
+      $category,
+      $file_type,
+      $flavor,
+      $search
+    );
   }
 }

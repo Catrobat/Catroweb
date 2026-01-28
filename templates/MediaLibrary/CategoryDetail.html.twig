@@ -1,0 +1,58 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('media_library_category_detail_page') }}
+{% endblock %}
+
+{% block top_bar_page_title %}{{ category_name }}{% endblock %}
+{% block top_bar_back_path %}{{ path('media_library_overview') }}{% endblock %}
+
+{% block body %}
+  <div id="search-results" class="mb-4" style="display: none;">
+    <h1>{{ 'media-packages.search-results'|trans({}, 'catroweb') }}</h1>
+    <div id="search-results-text"></div>
+  </div>
+
+  <div id="loading-spinner" class="medialib-spinner">
+    {{ include('Components/LoadingSpinner.html.twig') }}
+  </div>
+
+  <div id="content" class="medialib-content">
+    <div id="category-{{ category.id }}" data-name="{{ category_name|e('html_attr') }}"
+         style="display: none;" class="category active">
+      <div class="files"></div>
+    </div>
+  </div>
+
+  {%
+    set translations = {
+      elementsSingular: 'element'|trans({}, 'catroweb'),
+      elementsPlural: 'elements'|trans({}, 'catroweb'),
+      noResults: 'media_library.no_results'|trans({}, 'catroweb'),
+      size: 'media_library.file.size'|trans({}, 'catroweb'),
+      type: {
+        catrobat: 'media_library.file.type_description.image'|trans({}, 'catroweb'),
+        image: 'media_library.file.type_description.image'|trans({}, 'catroweb'),
+        sound: 'media_library.file.type_description.sound'|trans({}, 'catroweb'),
+        video: 'media_library.file.type_description.movie'|trans({}, 'catroweb'),
+        project: 'media_library.file.type_description.project'|trans({}, 'catroweb'),
+        unknown: 'media_library.file.type_description.default'|trans({}, 'catroweb'),
+      },
+    }
+  %}
+
+  <div class="js-media-library"
+       data-category-id="{{ category.id }}"
+       data-category-name="{{ category.name }}"
+       data-search-query="{{ searchQuery|default('')|e('html_attr') }}"
+       data-path-media-search="{% if searchQuery is defined and searchQuery %}{{ path('open_api_server_mediaLibrary_mediaassetsget') }}?category_id={{ category.id }}&search={{ searchQuery|url_encode }}{% endif %}"
+       data-flavor="{{ flavor }}"
+       data-translations="{{ translations|json_encode() }}"
+       data-is-webview="{{ isWebview() }}"
+       data-path-media-assets-api="{{ path('open_api_server_mediaLibrary_mediaassetsget') }}?category_id={{ category.id }}"
+  ></div>
+{% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('media_library_category_detail_page') }}
+{% endblock %}

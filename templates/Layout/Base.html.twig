@@ -80,7 +80,7 @@
   <div class="js-flash-snackbar" data-msg="{{ snackbarMsg }}"></div>
 {% endfor %}
 <div id="js-api-routing"
-     data-base-url="{{ app.request.baseUrl }}"
+     data-base-url="{{ app.request.getBaseURL }}"
      data-index="{{ path('index') }}"
      data-languages="{{ path('languages') }}"
      data-authentication="{{ path('open_api_server_authentication_authenticationpost') }}"

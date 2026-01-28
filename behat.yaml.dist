@@ -67,9 +67,9 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
-        api-mediapackage:
+        api-media-library:
             paths:
-                - tests/BehatFeatures/api/medialibrary
+                - tests/BehatFeatures/api/media-library
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext

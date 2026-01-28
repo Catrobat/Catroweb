@@ -68,8 +68,10 @@
         {{ include('Layout/Header/MediaLibraryDownload.html.twig') }}
 
         <div class="js-header"
-            {% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
-              data-path-search-url="{{ path('medialibrary_empty_search', {package_name: package}) }}"
+            {% if category|default and ('/media-library' in app.request.pathinfo) %}
+              data-path-search-url="{{ path('media_library_category', {id: category.id}) }}?search="
+            {% elseif '/media-library' in app.request.pathinfo %}
+              data-path-search-url="{{ path('media_library_overview') }}?search="
             {% else %}
               data-path-search-url="{{ path('empty_search') }}"
             {% endif %}

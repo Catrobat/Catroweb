@@ -6,10 +6,7 @@ namespace App\Application\Twig;
 
 use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Flavor;
-use App\DB\Entity\MediaLibrary\MediaPackageFile;
-use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use App\DB\EntityRepository\System\StatisticRepository;
-use Locale;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -17,7 +14,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Locales;
-use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -28,7 +24,6 @@ class TwigExtension extends AbstractExtension
 {
   public function __construct(
     private readonly RequestStack $request_stack,
-    private readonly MediaPackageFileRepository $media_package_file_repository,
     private readonly ParameterBagInterface $parameter_bag,
     #[Autowire('%kernel.project_dir%/translations')]
     private readonly string $catrobat_translation_dir,
@@ -110,8 +105,6 @@ class TwigExtension extends AbstractExtension
       new TwigFunction('isIOS', $this->isIOS(...)),
       new TwigFunction('checkCatrobatLanguage', $this->checkCatrobatLanguage(...)),
       new TwigFunction('getLanguageOptions', $this->getLanguageOptions(...)),
-      new TwigFunction('getMediaPackageImageUrl', $this->getMediaPackageImageUrl(...)),
-      new TwigFunction('getMediaPackageSoundUrl', $this->getMediaPackageSoundUrl(...)),
       new TwigFunction('flavor', $this->getFlavor(...)),
       new TwigFunction('theme', $this->getTheme(...)),
       new TwigFunction('themeAssets', $this->getFlavor(...)),
@@ -289,27 +282,6 @@ class TwigExtension extends AbstractExtension
       Flavor::EMBROIDERY => 'Embroidery Designer',
       Flavor::ARDUINO => 'Arduino Code',
       default => 'Pocket Code',
-    };
-  }
-
-  /**
-   * @deprecated
-   */
-  #[Route(path: '/api/twig/getMediaPackageImageUrl', name: 'catrobat_twig_getMediaPackageImageUrl', methods: ['POST'])]
-  public function getMediaPackageImageUrl(MediaPackageFile $object): ?string
-  {
-    return match ($object->getExtension()) {
-      'jpg', 'jpeg', 'png', 'gif' => $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension()),
-      'catrobat' => $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension()),
-      default => null,
-    };
-  }
-
-  public function getMediaPackageSoundUrl(MediaPackageFile $object): ?string
-  {
-    return match ($object->getExtension()) {
-      'mp3', 'mpga', 'wav', 'ogg' => $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension()),
-      default => null,
     };
   }
 

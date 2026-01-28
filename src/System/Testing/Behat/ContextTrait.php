@@ -21,7 +21,6 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\FlavorRepository;
-use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
 use App\DB\EntityRepository\Project\ProgramRemixRepository;
@@ -172,11 +171,6 @@ trait ContextTrait
   public function getExtractedFileRepository(): ?ExtractedFileRepository
   {
     return $this->getContainer()->get(ExtractedFileRepository::class);
-  }
-
-  public function getMediaPackageFileRepository(): ?MediaPackageFileRepository
-  {
-    return $this->getContainer()->get(MediaPackageFileRepository::class);
   }
 
   public function getUserLikeSimilarityRelationRepository(): ?UserLikeSimilarityRelationRepository

@@ -71,8 +71,8 @@ class PurgeCommand extends Command
     FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.apk.dir'));
     $progress->advance();
 
-    $progress->setMessage('Deleting Media Packages');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.mediapackage.dir'));
+    $progress->setMessage('Deleting Media Assets');
+    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.media.path'));
     $progress->advance();
 
     $progress->setMessage('Deleting Templates');

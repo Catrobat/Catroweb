@@ -42,18 +42,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MediaCategoryResponse
 {
   /**
-   * ID of the category.
-   *
    * @SerializedName("id")
    *
-   * @Assert\Type("int")
+   * @Assert\Type("string")
    *
-   * @Type("int")
+   * @Type("string")
    */
-  protected ?int $id = null;
+  protected ?string $id = null;
 
   /**
-   * Name of the category.
+   * Category name.
    *
    * @SerializedName("name")
    *
@@ -64,17 +62,42 @@ class MediaCategoryResponse
   protected ?string $name = null;
 
   /**
-   * Shows how important a category is (0 is the least priority).
+   * Category description.
    *
+   * @SerializedName("description")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $description = null;
+
+  /**
    * @SerializedName("priority")
    *
    * @Assert\Type("int")
    *
    * @Type("int")
-   *
-   * @Assert\GreaterThanOrEqual(0)
    */
   protected ?int $priority = null;
+
+  /**
+   * @SerializedName("created_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
+  protected ?\DateTime $created_at = null;
+
+  /**
+   * @SerializedName("updated_at")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
+  protected ?\DateTime $updated_at = null;
 
   /**
    * Constructor.
@@ -86,14 +109,17 @@ class MediaCategoryResponse
     if (is_array($data)) {
       $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->name = array_key_exists('name', $data) ? $data['name'] : $this->name;
+      $this->description = array_key_exists('description', $data) ? $data['description'] : $this->description;
       $this->priority = array_key_exists('priority', $data) ? $data['priority'] : $this->priority;
+      $this->created_at = array_key_exists('created_at', $data) ? $data['created_at'] : $this->created_at;
+      $this->updated_at = array_key_exists('updated_at', $data) ? $data['updated_at'] : $this->updated_at;
     }
   }
 
   /**
    * Gets id.
    */
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
@@ -101,11 +127,9 @@ class MediaCategoryResponse
   /**
    * Sets id.
    *
-   * @param int|null $id ID of the category
-   *
    * @return $this
    */
-  public function setId(?int $id = null): self
+  public function setId(?string $id = null): self
   {
     $this->id = $id;
 
@@ -123,13 +147,35 @@ class MediaCategoryResponse
   /**
    * Sets name.
    *
-   * @param string|null $name Name of the category
+   * @param string|null $name Category name
    *
    * @return $this
    */
   public function setName(?string $name = null): self
   {
     $this->name = $name;
+
+    return $this;
+  }
+
+  /**
+   * Gets description.
+   */
+  public function getDescription(): ?string
+  {
+    return $this->description;
+  }
+
+  /**
+   * Sets description.
+   *
+   * @param string|null $description Category description
+   *
+   * @return $this
+   */
+  public function setDescription(?string $description = null): self
+  {
+    $this->description = $description;
 
     return $this;
   }
@@ -145,13 +191,51 @@ class MediaCategoryResponse
   /**
    * Sets priority.
    *
-   * @param int|null $priority Shows how important a category is (0 is the least priority)
-   *
    * @return $this
    */
   public function setPriority(?int $priority = null): self
   {
     $this->priority = $priority;
+
+    return $this;
+  }
+
+  /**
+   * Gets created_at.
+   */
+  public function getCreatedAt(): ?\DateTime
+  {
+    return $this->created_at;
+  }
+
+  /**
+   * Sets created_at.
+   *
+   * @return $this
+   */
+  public function setCreatedAt(?\DateTime $created_at = null): self
+  {
+    $this->created_at = $created_at;
+
+    return $this;
+  }
+
+  /**
+   * Gets updated_at.
+   */
+  public function getUpdatedAt(): ?\DateTime
+  {
+    return $this->updated_at;
+  }
+
+  /**
+   * Sets updated_at.
+   *
+   * @return $this
+   */
+  public function setUpdatedAt(?\DateTime $updated_at = null): self
+  {
+    $this->updated_at = $updated_at;
 
     return $this;
   }

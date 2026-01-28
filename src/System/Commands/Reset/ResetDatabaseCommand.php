@@ -23,11 +23,15 @@ class ResetDatabaseCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $entity_manager = $this->entity_manager;
+    $metadata_cache = $entity_manager->getConfiguration()->getMetadataCache();
+    if (null !== $metadata_cache) {
+      $metadata_cache->clear();
+    }
     $metaData = $entity_manager->getMetadataFactory()->getAllMetadata();
     $tool = new SchemaTool($entity_manager);
     $tool->dropSchema($metaData);
     $tool->createSchema($metaData);
 
-    return 0;
+    return Command::SUCCESS;
   }
 }

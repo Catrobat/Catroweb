@@ -155,7 +155,7 @@ jobs:
       matrix:
         testSuite:
           - api-authentication
-          - api-mediapackage
+          - api-media-library
           - api-projects
           - api-user
           - api-notifications
