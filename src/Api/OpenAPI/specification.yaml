@@ -1121,7 +1121,7 @@ paths:
         - BearerAuth: []
       tags:
         - 'Notifications'
-      summary: 'Get user notifications -- StatusCode: 501 - Not yet implemented'
+      summary: 'Get user notifications'
       parameters:
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
@@ -1207,90 +1207,49 @@ paths:
   ################################################
   # Media Library
   #
-  '/media/package/{name}':
+  '/media/library':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
     get:
       tags:
         - 'Media Library'
-      summary: 'Get media-library asstes of a named package'
+      summary: 'Get media library overview with categories and preview assets'
+      description: 'Returns all categories with a preview of assets per category. Similar to /projects/categories for browsing the media library.'
       parameters:
-        - in: path
-          name: name
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - name: file_type
+          in: query
+          required: false
+          description: 'Filter categories and assets by file type'
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9-_]+$'
-            example: 'looks'
-          required: true
-          description: 'Name of the package'
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Attributes'
-      responses:
-        '200':
-          description: 'OK'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MediaFilesResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
-
-  '/media/files':
-    get:
-      tags:
-        - 'Media Library'
-      summary: 'Get *all* content of the media library.'
-      parameters:
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Attributes'
-        - $ref: '#/components/parameters/Flavor'
-      responses:
-        '200':
-          description: 'OK'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MediaFilesResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
-
-  '/media/file/{id}':
-    get:
-      tags:
-        - 'Media Library'
-      summary: 'Get the information of a specific media file'
-      parameters:
-        - in: path
-          name: id
+            enum:
+              - IMAGE
+              - SOUND
+        - name: flavor
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Filter assets by flavor name'
+        - name: assets_per_category
+          in: query
+          required: false
           schema:
             type: integer
-            example: 123
-          required: true
-          description: 'ID of any given media file'
-        - $ref: '#/components/parameters/Attributes'
+            default: 5
+            minimum: 1
+            maximum: 20
+          description: 'Number of preview assets to return per category'
       responses:
         '200':
-          description: OK
+          description: 'OK'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediaFileResponse'
+                $ref: '#/components/schemas/MediaLibraryResponse'
           headers:
             X-Response-Hash:
               $ref: '#/components/headers/X-Response-Hash'
@@ -1298,40 +1257,207 @@ paths:
               $ref: '#/components/headers/Content-Language'
         '400':
           $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/media/categories':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Media Library'
+      summary: 'Get all media library categories'
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaCategoriesResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Media Library'
+      summary: 'Create a new media category (Admin only)'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaCategoryRequest'
+      responses:
+        '201':
+          description: 'Category created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaCategoryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/media/categories/{id}':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: 'Category UUID'
+
+    get:
+      tags:
+        - 'Media Library'
+      summary: 'Get a specific media category with its assets'
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaCategoryDetailResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
         '404':
           $ref: '#/components/responses/NotFound'
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
-  '/media/files/search':
-    get:
+    patch:
+      security:
+        - BearerAuth: []
       tags:
-        - Media Library
-      summary: 'Search for mediafiles associated with keywords'
-      parameters:
-        - name: query
-          in: query
-          required: true
-          schema:
-            type: string
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Attributes'
-        - $ref: '#/components/parameters/Flavor'
-        - name: package_name
-          description: 'In which package you want to search (for more fine tuned results)'
-          example: 'looks'
-          in: query
-          schema:
-            type: string
-            default: ''
+        - 'Media Library'
+      summary: 'Update a media category (Admin only)'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaCategoryRequest'
       responses:
         '200':
-          description: OK
+          description: 'Category updated'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediaFilesResponse'
+                $ref: '#/components/schemas/MediaCategoryResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Media Library'
+      summary: 'Delete a media category (Admin only)'
+      responses:
+        '204':
+          description: 'Category deleted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'Cannot delete category with assets'
+
+  '/media/assets':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Media Library'
+      summary: 'Get media library assets with pagination and filtering'
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - name: category_id
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+          description: 'Filter by category UUID'
+        - name: file_type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - IMAGE
+              - SOUND
+        - name: flavor
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Filter by flavor name'
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Search in name and description'
+        - name: sort_by
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [name, created_at, downloads, updated_at]
+            default: created_at
+        - name: sort_order
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [ASC, DESC]
+            default: DESC
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaAssetsResponse'
           headers:
             X-Response-Hash:
               $ref: '#/components/headers/X-Response-Hash'
@@ -1341,6 +1467,145 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '406':
           $ref: '#/components/responses/NotAcceptable'
+
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Media Library'
+      summary: 'Upload a new media asset (Admin only)'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MediaAssetUploadRequest'
+      responses:
+        '201':
+          description: 'Asset created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaAssetResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/media/assets/{id}':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: 'Asset UUID'
+
+    get:
+      tags:
+        - 'Media Library'
+      summary: 'Get details of a specific media asset'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaAssetResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+    patch:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Media Library'
+      summary: 'Update a media asset metadata (Admin only)'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MediaAssetUpdateRequest'
+      responses:
+        '200':
+          description: 'Asset updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MediaAssetResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Media Library'
+      summary: 'Delete a media asset (Admin only)'
+      responses:
+        '204':
+          description: 'Asset deleted'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/media/assets/{id}/download':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: 'Asset UUID'
+
+    get:
+      tags:
+        - 'Media Library'
+      summary: 'Download a media asset file'
+      description: 'Downloads the actual file and increments the download counter. Rate limited.'
+      responses:
+        '200':
+          description: 'File downloaded'
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+                example: 'attachment; filename="asset-name.png"'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          description: 'Rate limit exceeded'
 
   ######################################################
   # Search
@@ -1790,102 +2055,257 @@ components:
     ##############################################
     # Media Library Schemas
     ###
-    MediaPackagesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/MediaPackageResponse'
 
-    MediaPackageResponse:
+    # Pagination
+    PaginationInfo:
       type: object
       properties:
-        id:
+        total:
           type: integer
-          example: 123
-          description: 'ID of the package'
-        name:
-          type: string
-          example: 'Looks'
-          description: 'Name of the package'
-        url:
-          type: string
-          example: 'https://share.catrob.at/app/media-library/looks'
-          description: 'Absolute path to the package'
+          example: 150
+          description: 'Total number of items'
+        limit:
+          type: integer
+          example: 20
+        offset:
+          type: integer
+          example: 0
+        has_more:
+          type: boolean
+          example: true
+
+    # Library Overview Response
+    MediaLibraryResponse:
+      type: object
+      properties:
         categories:
           type: array
           items:
-            $ref: '#/components/schemas/MediaCategoriesResponse'
+            $ref: '#/components/schemas/MediaLibraryCategoryPreview'
+        pagination:
+          $ref: '#/components/schemas/PaginationInfo'
 
+    MediaLibraryCategoryPreview:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: '123e4567-e89b-12d3-a456-426614174000'
+        name:
+          type: string
+          example: 'Figures'
+          description: 'Category name'
+        description:
+          type: string
+          example: 'Character figures for your projects'
+          description: 'Category description'
+        priority:
+          type: integer
+          example: 1
+        assets_count:
+          type: integer
+          example: 42
+          description: 'Total number of assets in this category'
+        preview_assets:
+          type: array
+          description: 'Preview of assets in this category'
+          items:
+            $ref: '#/components/schemas/MediaAssetResponse'
+
+    # Category Responses
     MediaCategoriesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/MediaCategoryResponse'
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaCategoryResponse'
+        pagination:
+          $ref: '#/components/schemas/PaginationInfo'
 
     MediaCategoryResponse:
       type: object
       properties:
         id:
-          type: integer
-          example: 123
-          description: 'ID of the category'
+          type: string
+          format: uuid
+          example: '123e4567-e89b-12d3-a456-426614174000'
         name:
           type: string
-          example: 'Portrait'
-          description: 'Name of the category'
+          example: 'Figures'
+          description: 'Category name'
+        description:
+          type: string
+          example: 'Character figures for your projects'
+          description: 'Category description'
         priority:
           type: integer
-          example: 10
-          description: 'Shows how important a category is (0 is the least priority)'
-          minimum: 0
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
 
-    MediaFilesResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/MediaFileResponse'
+    MediaCategoryDetailResponse:
+      allOf:
+        - $ref: '#/components/schemas/MediaCategoryResponse'
+        - type: object
+          properties:
+            assets:
+              type: array
+              items:
+                $ref: '#/components/schemas/MediaAssetResponse'
+            assets_pagination:
+              $ref: '#/components/schemas/PaginationInfo'
 
-    MediaFileResponse:
+    # Category Requests
+    MediaCategoryRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          example: 'Figures'
+          description: 'Category name'
+        description:
+          type: string
+          example: 'Character figures for your projects'
+          description: 'Category description'
+        priority:
+          type: integer
+          example: 1
+          default: 0
+
+    # Asset Responses
+    MediaAssetsResponse:
+      type: object
+      properties:
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/MediaAssetResponse'
+        pagination:
+          $ref: '#/components/schemas/PaginationInfo'
+
+    MediaAssetResponse:
       type: object
       properties:
         id:
-          type: integer
-          example: 1
+          type: string
+          format: uuid
+          example: '123e4567-e89b-12d3-a456-426614174000'
         name:
           type: string
-          example: 'luna_sinde_2'
+          example: 'Penguin'
+        description:
+          type: string
+          example: 'A cute penguin character'
+        file_type:
+          type: string
+          enum:
+            - IMAGE
+            - SOUND
+          example: IMAGE
+        extension:
+          type: string
+          example: 'png'
+        size:
+          type: integer
+          description: 'File size in bytes'
+          example: 524288
+        author:
+          type: string
+          example: 'Catrobat'
+        downloads:
+          type: integer
+          example: 42
+        active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        category_id:
+          type: string
+          format: uuid
+          example: '123e4567-e89b-12d3-a456-426614174000'
+          description: 'Category UUID'
+        category_name:
+          type: string
+          example: 'Figures'
+          description: 'Translated category name'
         flavors:
           type: array
           items:
             type: string
-          example: ['luna', 'pocketcode']
-        packages:
+          example: ['pocketcode', 'luna']
+        download_url:
+          type: string
+          example: 'https://share.catrob.at/api/media/assets/123e4567-e89b-12d3-a456-426614174000/download'
+        thumbnail_url:
+          type: string
+          example: 'https://share.catrob.at/resources/media/thumbs/123e4567-e89b-12d3-a456-426614174000.png'
+
+    # Asset Requests
+    MediaAssetUploadRequest:
+      type: object
+      required:
+        - file
+        - name
+        - category_id
+        - flavors
+      properties:
+        file:
+          type: string
+          format: binary
+          description: 'The media file to upload (max 10MB)'
+        name:
+          type: string
+          example: 'Penguin'
+        description:
+          type: string
+          example: 'A cute penguin character'
+        category_id:
+          type: string
+          format: uuid
+          example: '123e4567-e89b-12d3-a456-426614174000'
+        flavors:
           type: array
           items:
             type: string
-          example: ['Looks', 'Sounds']
-        category:
-          type: string
-          example: 'Luna&Cat'
+          example: ['pocketcode', 'luna']
+          description: 'Array of flavor names'
         author:
           type: string
-          example: 'CatrowebAdmin'
-        extension:
+          example: 'Catrobat'
+
+    MediaAssetUpdateRequest:
+      type: object
+      properties:
+        name:
           type: string
-          example: 'png'
-        download_url:
+          example: 'Penguin Updated'
+        description:
           type: string
-          example: 'https://share.catrob.at/pocketcode/download-media/983.png'
-        size:
-          type: integer
-          description: Size of the file in bytes
-          example: 1048576
-        file_type:
+          example: 'An even cuter penguin'
+        category_id:
           type: string
-          description: Type of the media file
-          enum:
-            - 'project'
-            - 'image'
-            - 'sound'
-            - 'video'
-            - 'other'
+          format: uuid
+        flavors:
+          type: array
+          items:
+            type: string
+        author:
+          type: string
+        active:
+          type: boolean
 
     ##############################################
     # Authentication Schemas

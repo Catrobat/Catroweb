@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MediaCategoryResponse.
+ * MediaLibraryCategoryPreview.
  *
  * PHP version 8.1.1
  *
@@ -35,11 +35,11 @@ use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the MediaCategoryResponse model.
+ * Class representing the MediaLibraryCategoryPreview model.
  *
  * @author  OpenAPI Generator team
  */
-class MediaCategoryResponse
+class MediaLibraryCategoryPreview
 {
   /**
    * @SerializedName("id")
@@ -82,22 +82,31 @@ class MediaCategoryResponse
   protected ?int $priority = null;
 
   /**
-   * @SerializedName("created_at")
+   * Total number of assets in this category.
    *
-   * @Assert\Type("\DateTime"))
+   * @SerializedName("assets_count")
    *
-   * @Type("DateTime")
+   * @Assert\Type("int")
+   *
+   * @Type("int")
    */
-  protected ?\DateTime $created_at = null;
+  protected ?int $assets_count = null;
 
   /**
-   * @SerializedName("updated_at")
+   * Preview of assets in this category.
    *
-   * @Assert\Type("\DateTime"))
+   * @var MediaAssetResponse[]|null
    *
-   * @Type("DateTime")
+   * @SerializedName("preview_assets")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\MediaAssetResponse")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\MediaAssetResponse>")
    */
-  protected ?\DateTime $updated_at = null;
+  protected ?array $preview_assets = null;
 
   /**
    * Constructor.
@@ -111,8 +120,8 @@ class MediaCategoryResponse
       $this->name = array_key_exists('name', $data) ? $data['name'] : $this->name;
       $this->description = array_key_exists('description', $data) ? $data['description'] : $this->description;
       $this->priority = array_key_exists('priority', $data) ? $data['priority'] : $this->priority;
-      $this->created_at = array_key_exists('created_at', $data) ? $data['created_at'] : $this->created_at;
-      $this->updated_at = array_key_exists('updated_at', $data) ? $data['updated_at'] : $this->updated_at;
+      $this->assets_count = array_key_exists('assets_count', $data) ? $data['assets_count'] : $this->assets_count;
+      $this->preview_assets = array_key_exists('preview_assets', $data) ? $data['preview_assets'] : $this->preview_assets;
     }
   }
 
@@ -201,41 +210,47 @@ class MediaCategoryResponse
   }
 
   /**
-   * Gets created_at.
+   * Gets assets_count.
    */
-  public function getCreatedAt(): ?\DateTime
+  public function getAssetsCount(): ?int
   {
-    return $this->created_at;
+    return $this->assets_count;
   }
 
   /**
-   * Sets created_at.
+   * Sets assets_count.
+   *
+   * @param int|null $assets_count Total number of assets in this category
    *
    * @return $this
    */
-  public function setCreatedAt(?\DateTime $created_at = null): self
+  public function setAssetsCount(?int $assets_count = null): self
   {
-    $this->created_at = $created_at;
+    $this->assets_count = $assets_count;
 
     return $this;
   }
 
   /**
-   * Gets updated_at.
+   * Gets preview_assets.
+   *
+   * @return MediaAssetResponse[]|null
    */
-  public function getUpdatedAt(): ?\DateTime
+  public function getPreviewAssets(): ?array
   {
-    return $this->updated_at;
+    return $this->preview_assets;
   }
 
   /**
-   * Sets updated_at.
+   * Sets preview_assets.
+   *
+   * @param MediaAssetResponse[]|null $preview_assets Preview of assets in this category
    *
    * @return $this
    */
-  public function setUpdatedAt(?\DateTime $updated_at = null): self
+  public function setPreviewAssets(?array $preview_assets = null): self
   {
-    $this->updated_at = $updated_at;
+    $this->preview_assets = $preview_assets;
 
     return $this;
   }

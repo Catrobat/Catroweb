@@ -34,33 +34,91 @@ open_api_server_authentication_authenticationrefreshpost:
     _controller: open_api_server.controller.authentication::authenticationRefreshPostAction
 
 # mediaLibrary
-open_api_server_mediaLibrary_mediafileidget:
-  path: /media/file/{id}
+open_api_server_mediaLibrary_mediaassetsget:
+  path: /media/assets
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaFileIdGetAction
+    _controller: open_api_server.controller.mediaLibrary::mediaAssetsGetAction
+
+open_api_server_mediaLibrary_mediaassetsiddelete:
+  path: /media/assets/{id}
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdDeleteAction
   requirements:
-    id: '\d+'
+    id: '[a-z0-9]+'
 
-open_api_server_mediaLibrary_mediafilesget:
-  path: /media/files
+open_api_server_mediaLibrary_mediaassetsiddownloadget:
+  path: /media/assets/{id}/download
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaFilesGetAction
-
-open_api_server_mediaLibrary_mediafilessearchget:
-  path: /media/files/search
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaFilesSearchGetAction
-
-open_api_server_mediaLibrary_mediapackagenameget:
-  path: /media/package/{name}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaPackageNameGetAction
+    _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdDownloadGetAction
   requirements:
-    name: '^[a-zA-Z0-9-_]+$'
+    id: '[a-z0-9]+'
+
+open_api_server_mediaLibrary_mediaassetsidget:
+  path: /media/assets/{id}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdGetAction
+  requirements:
+    id: '[a-z0-9]+'
+
+open_api_server_mediaLibrary_mediaassetsidpatch:
+  path: /media/assets/{id}
+  methods: [PATCH]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdPatchAction
+  requirements:
+    id: '[a-z0-9]+'
+
+open_api_server_mediaLibrary_mediaassetspost:
+  path: /media/assets
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaAssetsPostAction
+
+open_api_server_mediaLibrary_mediacategoriesget:
+  path: /media/categories
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesGetAction
+
+open_api_server_mediaLibrary_mediacategoriesiddelete:
+  path: /media/categories/{id}
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdDeleteAction
+  requirements:
+    id: '[a-z0-9]+'
+
+open_api_server_mediaLibrary_mediacategoriesidget:
+  path: /media/categories/{id}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdGetAction
+  requirements:
+    id: '[a-z0-9]+'
+
+open_api_server_mediaLibrary_mediacategoriesidpatch:
+  path: /media/categories/{id}
+  methods: [PATCH]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdPatchAction
+  requirements:
+    id: '[a-z0-9]+'
+
+open_api_server_mediaLibrary_mediacategoriespost:
+  path: /media/categories
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesPostAction
+
+open_api_server_mediaLibrary_medialibraryget:
+  path: /media/library
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaLibraryGetAction
 
 # notifications
 open_api_server_notifications_notificationidreadput:

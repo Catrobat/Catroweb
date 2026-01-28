@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MediaCategoryResponse.
+ * MediaCategoryRequest.
  *
  * PHP version 8.1.1
  *
@@ -35,25 +35,18 @@ use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the MediaCategoryResponse model.
+ * Class representing the MediaCategoryRequest model.
  *
  * @author  OpenAPI Generator team
  */
-class MediaCategoryResponse
+class MediaCategoryRequest
 {
-  /**
-   * @SerializedName("id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
-  protected ?string $id = null;
-
   /**
    * Category name.
    *
    * @SerializedName("name")
+   *
+   * @Assert\NotNull()
    *
    * @Assert\Type("string")
    *
@@ -79,25 +72,7 @@ class MediaCategoryResponse
    *
    * @Type("int")
    */
-  protected ?int $priority = null;
-
-  /**
-   * @SerializedName("created_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
-  protected ?\DateTime $created_at = null;
-
-  /**
-   * @SerializedName("updated_at")
-   *
-   * @Assert\Type("\DateTime"))
-   *
-   * @Type("DateTime")
-   */
-  protected ?\DateTime $updated_at = null;
+  protected ?int $priority = 0;
 
   /**
    * Constructor.
@@ -107,33 +82,10 @@ class MediaCategoryResponse
   public function __construct(?array $data = null)
   {
     if (is_array($data)) {
-      $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->name = array_key_exists('name', $data) ? $data['name'] : $this->name;
       $this->description = array_key_exists('description', $data) ? $data['description'] : $this->description;
       $this->priority = array_key_exists('priority', $data) ? $data['priority'] : $this->priority;
-      $this->created_at = array_key_exists('created_at', $data) ? $data['created_at'] : $this->created_at;
-      $this->updated_at = array_key_exists('updated_at', $data) ? $data['updated_at'] : $this->updated_at;
     }
-  }
-
-  /**
-   * Gets id.
-   */
-  public function getId(): ?string
-  {
-    return $this->id;
-  }
-
-  /**
-   * Sets id.
-   *
-   * @return $this
-   */
-  public function setId(?string $id = null): self
-  {
-    $this->id = $id;
-
-    return $this;
   }
 
   /**
@@ -151,7 +103,7 @@ class MediaCategoryResponse
    *
    * @return $this
    */
-  public function setName(?string $name = null): self
+  public function setName(?string $name): self
   {
     $this->name = $name;
 
@@ -196,46 +148,6 @@ class MediaCategoryResponse
   public function setPriority(?int $priority = null): self
   {
     $this->priority = $priority;
-
-    return $this;
-  }
-
-  /**
-   * Gets created_at.
-   */
-  public function getCreatedAt(): ?\DateTime
-  {
-    return $this->created_at;
-  }
-
-  /**
-   * Sets created_at.
-   *
-   * @return $this
-   */
-  public function setCreatedAt(?\DateTime $created_at = null): self
-  {
-    $this->created_at = $created_at;
-
-    return $this;
-  }
-
-  /**
-   * Gets updated_at.
-   */
-  public function getUpdatedAt(): ?\DateTime
-  {
-    return $this->updated_at;
-  }
-
-  /**
-   * Sets updated_at.
-   *
-   * @return $this
-   */
-  public function setUpdatedAt(?\DateTime $updated_at = null): self
-  {
-    $this->updated_at = $updated_at;
 
     return $this;
   }
