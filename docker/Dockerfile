@@ -1,13 +1,19 @@
+# syntax=docker/dockerfile:1.7
+
 # Use composer image for better caching
 FROM composer:2.9.5 AS composer-build
+WORKDIR /app
+ENV COMPOSER_CACHE_DIR=/tmp/composer-cache
 COPY composer.json composer.lock ./
-RUN composer install --no-scripts
+RUN --mount=type=cache,target=/tmp/composer-cache \
+    composer install --no-scripts --prefer-dist --no-progress --no-interaction
 
 # Use node image for better caching
 FROM node:lts AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install && npm install -g @symfony/webpack-encore
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --no-audit --no-fund && npm install -g @symfony/webpack-encore
 
 # Run on:
 FROM debian:bullseye
@@ -42,9 +48,9 @@ RUN apt-get update && \
     git \
     curl \
     libgconf-2-4 \
-    npm
-RUN npm install -g n
-RUN n lts
+    npm && \
+    rm -rf /var/lib/apt/lists/*
+RUN npm install -g n && n lts
 
 # Overwrite default apache config
 RUN a2enmod rewrite
@@ -59,6 +65,10 @@ RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.5/cli/php.ini
 # Setting working directory
 WORKDIR /var/www/catroweb
 
+# Add libraries and modules
+COPY --from=composer-build /app/vendor vendor
+COPY --from=node-build /app/node_modules node_modules
+
 # Generate jwt config in container (will be overwritten with host keys if they exist)
 COPY /docker/app/init-jwt-config.sh ./docker/app/init-jwt-config.sh
 RUN sh docker/app/init-jwt-config.sh
@@ -66,7 +76,7 @@ RUN sh docker/app/init-jwt-config.sh
 # Copy all files to the container.
 # A change to any project file clears the cache of all layers defined after this command!
 # Make sure to define all project code indepandant commands above to improve performance.
-COPY / ./
+COPY . ./
 
 # Overwrite behat config:
 COPY behat.yaml.dist ./behat.yaml
@@ -90,10 +100,6 @@ RUN echo "\n" >> .env.local && \
 
 # Add composer executable to the container
 COPY --from=composer-build /usr/bin/composer /usr/bin/composer
-
-# Add libraries and modules
-COPY --from=composer-build /app/vendor vendor
-COPY --from=node-build /app/node_modules node_modules
 
 # Add library scripts symlinks
 COPY --from=composer-build /app/bin bin
