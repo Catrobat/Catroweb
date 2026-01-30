@@ -80,6 +80,7 @@ class MediaAssetRepository extends ServiceEntityRepository
     $sortOrder = 'ASC' === strtoupper($sortOrder) ? 'ASC' : 'DESC';
 
     $qb->orderBy('a.'.$sortBy, $sortOrder)
+      ->addOrderBy('a.id', 'DESC')
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
