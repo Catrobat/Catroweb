@@ -114,7 +114,8 @@ Encore
   .addEntry('user_my_profile_page', './assets/User/MyProfilePage.js')
   .addEntry('user_profile_page', './assets/User/ProfilePage.js')
 
-  .addEntry('media_library_package_detail_page', './assets/MediaLibrary/PackageDetailPage.js')
+  .addEntry('media_library_overview_page', './assets/MediaLibrary/OverviewPage.js')
+  .addEntry('media_library_category_detail_page', './assets/MediaLibrary/CategoryDetailPage.js')
 
   .addEntry('studio_detail_page', './assets/Studio/StudioDetailPage.js')
   .addEntry('studios_page', './assets/Studio/StudiosPage.js')

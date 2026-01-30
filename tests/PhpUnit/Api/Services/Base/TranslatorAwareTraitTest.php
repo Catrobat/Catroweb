@@ -19,16 +19,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 #[CoversClass(TranslatorAwareTraitTestClass::class)]
 final class TranslatorAwareTraitTest extends DefaultTestCase
 {
-  protected MockObject|TranslatorAwareTraitTestClass $object;
+  protected TranslatorAwareTraitTestClass|MockObject $object;
 
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockBuilder(TranslatorAwareTraitTestClass::class)
-      ->onlyMethods([])
-      ->onlyMethods([])
-      ->getMock()
-    ;
+    $this->object = new TranslatorAwareTraitTestClass();
   }
 
   #[Group('integration')]
@@ -74,7 +70,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
   #[Group('unit')]
   public function testTransFailureHandling(): void
   {
-    $translator = $this->createMock(Translator::class);
+    $translator = $this->createStub(Translator::class);
     $translator->method('trans')
       ->willReturnCallback(function () {
         static $callCount = 0;

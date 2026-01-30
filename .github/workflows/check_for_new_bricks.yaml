@@ -12,6 +12,9 @@
 #
 name: Check for new bricks
 
+permissions:
+  contents: read
+
 #
 # This check is independent of a pull request, hence, it is executed once a day on a schedule.
 # In case, an additional run is required, a manual dispatch trigger is also enabled.

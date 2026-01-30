@@ -1,36 +1,44 @@
-import { showTopBarDownload, showTopBarDefault } from '../Layout/TopBar'
+import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
 
 export function MediaLib(
-  packageName,
+  categoryId,
+  categoryName,
   mediaSearchPath,
   flavor,
-  assetsDir,
   translations,
-  isWebView,
-  mediaLibPackageByNameUrlApi,
+  mediaAssetsApi,
+  searchQuery,
 ) {
-  // Removing the project navigation items and showing just the category menu items
-  const element = document.getElementById('project-navigation')
-  element.parentNode.removeChild(element)
+  getCategoryFiles(categoryId, mediaSearchPath, flavor)
 
-  getPackageFiles(packageName, mediaSearchPath, flavor)
-
-  function getPackageFiles(packageName, mediaSearchPath, flavor) {
+  function getCategoryFiles(categoryId, mediaSearchPath, flavor) {
     let downloadList = []
+    let displayedAssets = 0
 
-    document.getElementById('top-app-bar__btn-download-selection').onclick = function () {
-      for (let i = 0; i < downloadList.length; i++) {
-        medialibDownloadSelectedFile(downloadList[i])
+    const downloadBtn = document.getElementById('top-app-bar__btn-download-selection')
+    const cancelBtn = document.getElementById('top-app-bar__btn-cancel-download-selection')
+
+    if (downloadBtn) {
+      downloadBtn.onclick = function () {
+        for (let i = 0; i < downloadList.length; i++) {
+          medialibDownloadSelectedFile(downloadList[i])
+        }
+        if (cancelBtn) {
+          cancelBtn.click()
+        }
       }
-      document.getElementById('top-app-bar__btn-cancel-download-selection').click()
     }
 
-    document.getElementById('top-app-bar__btn-cancel-download-selection').onclick = function () {
-      for (let i = 0; i < downloadList.length; i++) {
-        document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
+    if (cancelBtn) {
+      cancelBtn.onclick = function () {
+        for (let i = 0; i < downloadList.length; i++) {
+          document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
+        }
+        downloadList = []
+        if (typeof showTopBarDefault === 'function') {
+          showTopBarDefault()
+        }
       }
-      downloadList = []
-      showTopBarDefault()
     }
 
     // accepted flavors
@@ -39,48 +47,65 @@ export function MediaLib(
       acceptedFlavors.push(flavor)
     }
 
-    // api url
-    let url
-    const attributes = 'id,name,flavors,packages,category,extension,file_type,size,download_url'
-    const limit = 1000
-    if (mediaSearchPath !== '') {
-      url = mediaSearchPath + '&attributes=' + attributes + '&limit=' + limit
-    } else {
-      url = mediaLibPackageByNameUrlApi + '?attributes=' + attributes + '&limit=' + limit
+    // api url - new media library API
+    const limit = 20
+    let offset = 0
+    let isLoading = false
+    let hasMore = true
+    let totalAssets = null
+
+    function buildUrl(pageOffset) {
+      let url
+      if (mediaSearchPath !== '' && mediaSearchPath) {
+        // Search path already has query string
+        url = `${mediaSearchPath}&limit=${limit}&offset=${pageOffset}`
+      } else {
+        // Regular category assets endpoint
+        url = `${mediaAssetsApi}&limit=${limit}&offset=${pageOffset}`
+      }
+      return url
     }
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        data.forEach((file) => {
-          let fileFlavorArray = []
-          if ('flavors' in file && Array.isArray(file.flavors)) {
-            fileFlavorArray = file.flavors
-          } else if ('flavor' in file) {
-            fileFlavorArray.push(file.flavor)
+    function loadMoreAssets() {
+      if (isLoading || !hasMore) {
+        return
+      }
+
+      isLoading = true
+      fetch(buildUrl(offset))
+        .then((response) => response.json())
+        .then((responseData) => {
+          // New API returns {assets: [], pagination: {...}}
+          const assets = responseData.assets || responseData
+          const pagination = responseData.pagination
+          if (pagination && Number.isInteger(pagination.total)) {
+            totalAssets = pagination.total
           }
 
-          const isFlavored = !fileFlavorArray.includes('pocketcode')
-          const flavorFound = fileFlavorArray.some((item) => acceptedFlavors.includes(item))
-          if (!flavorFound) {
-            return
-          }
+          assets.forEach((file) => {
+            // Normalize file_type to lowercase (API returns uppercase)
+            if (file.file_type) {
+              file.file_type = file.file_type.toLowerCase()
+            }
 
-          // media container
-          const mediafileContainer = document.createElement('a')
-          mediafileContainer.classList.add('mediafile')
-          mediafileContainer.id = 'mediafile-' + file.id
-          mediafileContainer.addEventListener('click', function () {
-            // !!! Due to missing android web view support the download multiple files feature was "disabled" !!!!!
-            // For now it is only possible to select one element!
-            if (isWebView) {
-              mediafileContainer.href = file.download_url
-              mediafileContainer.dataset.extension = file.extension
-              mediafileContainer.addEventListener('click', function () {
-                medialibOnDownload(mediafileContainer)
-              })
-            } else {
-              // -- end of disable
+            let fileFlavorArray = []
+            if ('flavors' in file && Array.isArray(file.flavors)) {
+              fileFlavorArray = file.flavors
+            } else if ('flavor' in file) {
+              fileFlavorArray.push(file.flavor)
+            }
+
+            const isFlavored = !fileFlavorArray.includes('pocketcode')
+            const flavorFound = fileFlavorArray.some((item) => acceptedFlavors.includes(item))
+            if (!flavorFound) {
+              return
+            }
+
+            // media container
+            const mediafileContainer = document.createElement('a')
+            mediafileContainer.classList.add('mediafile')
+            mediafileContainer.id = 'mediafile-' + file.id
+            mediafileContainer.addEventListener('click', function () {
               mediafileContainer.classList.toggle('selected')
               const indexInDownloadList = downloadList.indexOf(file)
 
@@ -99,101 +124,118 @@ export function MediaLib(
                 elementsText += translations.elementsPlural
               }
 
-              document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
+              const downloadCountEl = document.getElementById('top-app-bar__download-nr-selected')
+              if (downloadCountEl) {
+                downloadCountEl.innerText = elementsText
+              }
 
               if (downloadList.length > 0) {
-                showTopBarDownload()
+                if (typeof showTopBarDownload === 'function') {
+                  showTopBarDownload()
+                }
               } else {
-                showTopBarDefault()
+                if (typeof showTopBarDefault === 'function') {
+                  showTopBarDefault()
+                }
               }
+            })
+
+            if (isFlavored) {
+              mediafileContainer.classList.add('flavored')
+            }
+
+            // check circle
+            const checkCircle = document.createElement('i')
+            checkCircle.classList.add('checkbox')
+            checkCircle.classList.add('material-icons')
+            checkCircle.textContent = 'check_circle'
+            mediafileContainer.appendChild(checkCircle)
+
+            // build image
+            mediafileContainer.appendChild(buildImageContainer(file))
+
+            // list item
+            const listItemElement = document.createElement('div')
+            listItemElement.classList.add('text-container')
+
+            let listItemNameElement
+            if ('project_url' in file && file.project_url) {
+              listItemNameElement = document.createElement('a')
+              listItemNameElement.classList.add('name')
+              listItemNameElement.classList.add('name--link')
+              listItemNameElement.href = file.project_url
+              listItemNameElement.textContent = getFileName(file)
+            } else {
+              listItemNameElement = document.createElement('div')
+              listItemNameElement.classList.add('name')
+              listItemNameElement.textContent = getFileName(file)
+            }
+
+            const listItemDescriptionElement = document.createElement('div')
+            listItemDescriptionElement.classList.add('description')
+            listItemDescriptionElement.innerHTML = getFileDescription(file)
+
+            listItemElement.appendChild(listItemNameElement)
+            listItemElement.appendChild(listItemDescriptionElement)
+
+            mediafileContainer.appendChild(listItemElement)
+
+            // Add to category container (single category per page now)
+            const categoryContainer = document.querySelector('#content .category .files')
+            if (categoryContainer) {
+              categoryContainer.appendChild(mediafileContainer)
+              displayedAssets += 1
             }
           })
 
-          if (isFlavored) {
-            mediafileContainer.classList.add('flavored')
-          }
-
-          // check circle
-          const checkCircle = document.createElement('i')
-          checkCircle.classList.add('checkbox')
-          checkCircle.classList.add('material-icons')
-          checkCircle.textContent = 'check_circle'
-          mediafileContainer.appendChild(checkCircle)
-
-          // build image
-          mediafileContainer.appendChild(buildImageContainer(file))
-
-          // list item
-          const listItemElement = document.createElement('div')
-          listItemElement.classList.add('text-container')
-
-          let listItemNameElement
-          if ('project_url' in file && file.project_url) {
-            listItemNameElement = document.createElement('a')
-            listItemNameElement.classList.add('name')
-            listItemNameElement.classList.add('name--link')
-            listItemNameElement.href = file.project_url
-            listItemNameElement.textContent = getFileName(file)
+          offset += assets.length
+          if (totalAssets !== null) {
+            hasMore = offset < totalAssets
           } else {
-            listItemNameElement = document.createElement('div')
-            listItemNameElement.classList.add('name')
-            listItemNameElement.textContent = getFileName(file)
+            hasMore = assets.length === limit
           }
 
-          const listItemDescriptionElement = document.createElement('div')
-          listItemDescriptionElement.classList.add('description')
-          listItemDescriptionElement.innerHTML = getFileDescription(file)
-
-          listItemElement.appendChild(listItemNameElement)
-          listItemElement.appendChild(listItemDescriptionElement)
-
-          mediafileContainer.appendChild(listItemElement)
-
-          // download button
-          if (isWebView) {
-            const listItemDownloadButton = document.createElement('div')
-            listItemDownloadButton.classList.add('button-container')
-
-            const listItemDownloadIcon = document.createElement('i')
-            listItemDownloadIcon.classList.add('material-icons')
-            listItemDownloadIcon.textContent = 'get_app'
-
-            listItemDownloadButton.appendChild(listItemDownloadIcon)
-
-            mediafileContainer.appendChild(listItemDownloadButton)
+          const searchResultsEl = document.getElementById('search-results')
+          const searchResultsText = document.getElementById('search-results-text')
+          if (searchQuery && searchResultsEl && searchResultsText) {
+            if (displayedAssets === 0 && !hasMore) {
+              searchResultsText.textContent = translations.noResults
+              searchResultsEl.style.display = 'block'
+            } else {
+              searchResultsEl.style.display = 'none'
+            }
           }
 
-          // flavor
-          if (file.category.startsWith('ThemeSpecial')) {
-            if (flavorFound) {
-              document
-                .querySelector('#content #category-theme-special .files')
-                .prepend(mediafileContainer)
-            } // else ignore
-          } else {
-            const catEscaped = file.category.replace(/"/g, '\\"')
-            document
-              .querySelector('#content .category[data-name="' + catEscaped + '"] .files')
-              .prepend(mediafileContainer)
+          // Show the category container
+          const categoryEl = document.querySelector('#content .category')
+          if (categoryEl) {
+            categoryEl.style.display = 'block'
           }
+
+          document.getElementById('loading-spinner').style.display = 'none'
         })
-
-        document.querySelectorAll('#content .category').forEach((item) => {
-          if (item.children.length === 0) {
-            return
-          }
-
-          const catId = /^category-(.+)$/.exec(item.id)[1]
-
-          item.style.display = 'block'
-          document.querySelector('#sidebar #menu-mediacat-' + catId).style.display = 'block'
+        .catch((error) => {
+          console.error('Error loading media library category ' + categoryName, error)
+          document.getElementById('loading-spinner').style.display = 'none'
         })
+        .finally(() => {
+          isLoading = false
+        })
+    }
 
-        document.getElementById('loading-spinner').style.display = 'none'
-      })
-      .catch(() => {
-        console.error('Error loading media lib package ' + packageName)
-      })
+    window.addEventListener('scroll', () => {
+      if (isLoading || !hasMore) {
+        return
+      }
+      const threshold = 240
+      const scrollPosition = window.innerHeight + window.scrollY
+      const pageHeight = document.documentElement.scrollHeight
+      if (scrollPosition >= pageHeight - threshold) {
+        loadMoreAssets()
+      }
+    })
+
+    loadMoreAssets()
   }
 
   function getFileName(file) {
@@ -210,8 +252,14 @@ export function MediaLib(
     } else {
       type = translations.type.unknown
     }
-    const size = (file.size / (1024 * 1024)).toFixed(2) + 'MB'
-    return type + '<br>' + translations.size.replace('%size%', size)
+
+    let sizeText = ''
+    if (file.size) {
+      const size = (file.size / (1024 * 1024)).toFixed(2) + 'MB'
+      sizeText = '<br>' + translations.size.replace('%size%', size)
+    }
+
+    return type + sizeText
   }
 
   function buildImageContainer(file) {
@@ -264,10 +312,10 @@ export function MediaLib(
   }
 
   function buildImageFromFile(file) {
-    const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
     const image = document.createElement('img')
     image.setAttribute('alt', file.id)
-    image.setAttribute('src', assetsDir + 'thumbs/' + file.id + '.' + imgExtension)
+    // Use thumbnail_url from API response
+    image.setAttribute('src', file.thumbnail_url || file.download_url)
     image.setAttribute('title', file.name)
     image.addEventListener('error', function () {
       image.remove()
@@ -283,19 +331,5 @@ function medialibDownloadSelectedFile(file) {
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
-  return false
-}
-
-function medialibOnDownload(link) {
-  if (link.href !== 'javascript:void(0)') {
-    const downloadHref = link.href
-    link.href = 'javascript:void(0)'
-
-    setTimeout(function () {
-      link.href = downloadHref
-    }, 5000)
-
-    window.location = downloadHref
-  }
   return false
 }

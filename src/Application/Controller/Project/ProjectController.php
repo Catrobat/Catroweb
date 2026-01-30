@@ -5,23 +5,17 @@ declare(strict_types=1);
 namespace App\Application\Controller\Project;
 
 use App\Api\Services\Projects\ProjectsRequestValidator;
-use App\Application\Twig\TwigExtension;
 use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
-use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use App\Translation\TranslationDelegate;
-use App\User\Notification\NotificationManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -44,8 +38,6 @@ class ProjectController extends AbstractController
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly ProjectManager $project_manager,
     private readonly ElapsedTimeStringFormatter $elapsed_time,
-    private readonly NotificationRepository $notification_repo,
-    private readonly NotificationManager $notification_service,
     private readonly TranslatorInterface $translator,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly EventDispatcherInterface $event_dispatcher,
@@ -110,106 +102,6 @@ class ProjectController extends AbstractController
     ]);
   }
 
-  /**
-   * @throws NoResultException
-   */
-  #[Route(path: '/project/like/{id}', name: 'project_like', methods: ['GET'])]
-  public function projectLike(Request $request, string $id): Response
-  {
-    $type = $request->query->getInt('type');
-    $action = (string) $request->query->get('action');
-    if (!ProgramLike::isValidType($type)) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse([
-          'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-          'message' => 'Invalid like type given!',
-        ], Response::HTTP_BAD_REQUEST);
-      }
-
-      throw $this->createAccessDeniedException('Invalid like-type for project given!');
-    }
-
-    $project = $this->project_manager->find($id);
-    if (null === $project) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse([
-          'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-          'message' => 'Project with given ID does not exist!',
-        ], Response::HTTP_NOT_FOUND);
-      }
-
-      throw $this->createNotFoundException('Project with given ID does not exist!');
-    }
-
-    /** @var User|null $user */
-    $user = $this->getUser();
-    if (!$user) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse(['statusCode' => 401], Response::HTTP_UNAUTHORIZED);
-      }
-
-      $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
-        'project_like',
-        ['id' => $id, 'type' => $type, 'action' => $action],
-        UrlGeneratorInterface::ABSOLUTE_URL
-      ));
-
-      return $this->redirectToRoute('login');
-    }
-
-    try {
-      $this->project_manager->changeLike($project, $user, $type, $action);
-    } catch (\InvalidArgumentException) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse([
-          'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-          'message' => 'Invalid action given!',
-        ], Response::HTTP_BAD_REQUEST);
-      }
-
-      throw $this->createAccessDeniedException('Invalid action given!');
-    }
-
-    if ($project->getUser() !== $user) {
-      $existing_notifications = $this->notification_repo->getLikeNotificationsForProject(
-        $project, $project->getUser(), $user
-      );
-
-      if (ProgramLike::ACTION_ADD === $action) {
-        if ([] === $existing_notifications) {
-          $notification = new LikeNotification($project->getUser(), $user, $project);
-          $this->notification_service->addNotification($notification);
-        }
-      } elseif (ProgramLike::ACTION_REMOVE === $action) {
-        // check if there is no other reaction
-        if (!$this->project_manager->areThereOtherLikeTypes($project, $user, $type)) {
-          foreach ($existing_notifications as $notification) {
-            $this->notification_service->removeNotification($notification);
-          }
-        }
-      }
-    }
-
-    if (!$request->isXmlHttpRequest()) {
-      return $this->redirectToRoute('program', ['id' => $id]);
-    }
-
-    $user_locale = $request->getLocale();
-    $total_like_count = $this->project_manager->totalLikeCount($project->getId());
-    $active_like_types = array_map(static fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->project_manager->findProjectLikeTypes($project->getId()));
-
-    return new JsonResponse([
-      'totalLikeCount' => [
-        'value' => $total_like_count,
-        'stringValue' => TwigExtension::humanFriendlyNumber($total_like_count, $this->translator, $user_locale),
-      ],
-      'activeLikeTypes' => $active_like_types,
-    ]);
-  }
-
-  /**
-   * @throws NoResultException
-   */
   #[Route(path: '/translate/project/{id}', name: 'translate_project', methods: ['GET'])]
   public function translateProject(Request $request, string $id): Response
   {

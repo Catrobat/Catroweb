@@ -105,14 +105,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.comments.reported',
             ],
           ],
-          'sonata.admin.group.mediapackage' => [
-            'label' => 'Media Package',
+          'sonata.admin.group.media_library' => [
+            'label' => 'Media Library',
             'translation_domain' => 'catroweb',
             'icon' => '<i class="fa fa-newspaper-o"></i>',
             'items' => [
-              'admin.block.mediapackage.package',
-              'admin.block.mediapackage.category',
-              'admin.block.mediapackage.file',
+              'admin.media_library.category',
+              'admin.media_library.asset',
             ],
           ],
           'sonata.admin.group.apk' => [

@@ -1,0 +1,20 @@
+{% set asset = object %}
+{% set extension = asset.extension ?? '' %}
+{% if extension == '' %}
+  <span class="text-muted">No file available</span>
+{% else %}
+  {% set file_path = 'resources/media/' ~ asset.id ~ '.' ~ extension %}
+  {% set thumb_path = 'resources/media/thumbs/' ~ asset.id ~ '.' ~ extension %}
+
+  {% if asset.isImage() %}
+    <a href="{{ asset(file_path) }}" target="_blank" rel="noopener">
+      <img src="{{ asset(thumb_path) }}" alt="{{ asset.name }}" style="max-width: 240px; height: auto; border: 1px solid #ddd;" />
+    </a>
+  {% elseif asset.isSound() %}
+    <audio controls preload="none" style="width: 100%; max-width: 360px;">
+      <source src="{{ asset(file_path) }}" />
+    </audio>
+  {% else %}
+    <a href="{{ asset(file_path) }}" target="_blank" rel="noopener">Download file</a>
+  {% endif %}
+{% endif %}

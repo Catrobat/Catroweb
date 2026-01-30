@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity;
 
-use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\FlavorRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -53,15 +50,8 @@ class Flavor implements \Stringable
   #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
   protected ?string $name = null;
 
-  /**
-   * @var Collection<int, MediaPackageFile>
-   */
-  #[ORM\ManyToMany(targetEntity: MediaPackageFile::class, mappedBy: 'flavors', fetch: 'EXTRA_LAZY')]
-  protected Collection $media_package_files;
-
   public function __construct()
   {
-    $this->media_package_files = new ArrayCollection();
   }
 
   #[\Override]
@@ -92,28 +82,5 @@ class Flavor implements \Stringable
   public function getName(): ?string
   {
     return $this->name;
-  }
-
-  public function addMediaPackageFile(MediaPackageFile $media_package_file): void
-  {
-    if ($this->media_package_files->contains($media_package_file)) {
-      return;
-    }
-
-    $this->media_package_files[] = $media_package_file;
-  }
-
-  public function removeMediaPackageFile(MediaPackageFile $media_package_file): void
-  {
-    if (!$this->media_package_files->contains($media_package_file)) {
-      return;
-    }
-
-    $this->media_package_files->removeElement($media_package_file);
-  }
-
-  public function getMediaPackageFiles(): Collection
-  {
-    return $this->media_package_files;
   }
 }

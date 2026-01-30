@@ -14,7 +14,7 @@ use OpenAPI\Server\Model\SurveyResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -25,7 +25,7 @@ class UtilityApiTest extends DefaultTestCase
 {
   protected UtilityApi $utility_api;
 
-  protected MockObject|UtilityApiFacade $facade;
+  protected UtilityApiFacade|Stub $facade;
 
   /**
    * @throws Exception
@@ -33,7 +33,7 @@ class UtilityApiTest extends DefaultTestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->facade = $this->createMock(UtilityApiFacade::class);
+    $this->facade = $this->createStub(UtilityApiFacade::class);
     $this->utility_api = new UtilityApi($this->facade);
   }
 
@@ -57,7 +57,7 @@ class UtilityApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(UtilityApiLoader::class);
+    $loader = $this->createStub(UtilityApiLoader::class);
     $loader->method('getSurvey')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -76,8 +76,8 @@ class UtilityApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(UtilityApiLoader::class);
-    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $loader = $this->createStub(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createStub(Survey::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->utility_api->surveyLangCodeGet('de', '', '', $response_code, $response_headers);
@@ -96,8 +96,8 @@ class UtilityApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(UtilityApiLoader::class);
-    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $loader = $this->createStub(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createStub(Survey::class));
     $flavor = new Flavor();
     $flavor->setName('embroidery');
     $loader->method('getSurveyFlavor')->willReturn($flavor);
@@ -119,8 +119,8 @@ class UtilityApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(UtilityApiLoader::class);
-    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $loader = $this->createStub(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createStub(Survey::class));
     $flavor = new Flavor();
     $flavor->setName(Flavor::POCKETCODE);
     $loader->method('getSurveyFlavor')->willReturn($flavor);
@@ -142,8 +142,8 @@ class UtilityApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(UtilityApiLoader::class);
-    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $loader = $this->createStub(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createStub(Survey::class));
     $loader->method('getSurveyFlavor')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -163,8 +163,8 @@ class UtilityApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(UtilityApiLoader::class);
-    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $loader = $this->createStub(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createStub(Survey::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->utility_api->surveyLangCodeGet('de', '', 'ios', $response_code, $response_headers);
@@ -183,8 +183,8 @@ class UtilityApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $loader = $this->createMock(UtilityApiLoader::class);
-    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $loader = $this->createStub(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createStub(Survey::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->utility_api->surveyLangCodeGet('de', '', 'windows', $response_code, $response_headers);

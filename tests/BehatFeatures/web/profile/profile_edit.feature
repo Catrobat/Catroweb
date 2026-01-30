@@ -276,15 +276,17 @@ Feature:
     When I click "#project-action-menu > ul > li:nth-child(1)"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
-    And I wait for the element ".own-project-list__project[data-id='1'] .loading-spinner-backdrop" to appear and if so to disappear again
-    And the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "private"
+    And I wait for AJAX to finish
+    And I wait 1000 milliseconds
+    Then the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "private"
     When I click ".own-project-list__project[data-id='2'] .own-project-list__project__action"
     Then the element "#project-action-menu" should be visible
     And I should see "Set public"
     When I click "#project-action-menu > ul > li:nth-child(1)"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
-    And I wait for the element ".own-project-list__project[data-id='2'] .loading-spinner-backdrop" to appear and if so to disappear again
+    And I wait for AJAX to finish
+    And I wait 1000 milliseconds
     Then the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "public"
 
   Scenario: Programs with too high language version can also be set to visible

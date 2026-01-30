@@ -10,7 +10,9 @@ use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Service\JmsSerializer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Exception;
+use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
@@ -18,27 +20,24 @@ use PHPUnit\Framework\MockObject\MockObject;
 #[CoversClass(AbstractResponseManager::class)]
 final class AbstractResponseManagerTest extends DefaultTestCase
 {
-  protected AbstractResponseManager|MockObject $object;
+  protected AbstractResponseManagerTestClass $object;
 
-  /** @noinspection PhpMultipleClassDeclarationsInspection */
+  /**
+   * @throws Exception
+   */
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockBuilder(AbstractResponseManager::class)
-      ->disableOriginalConstructor()
-      ->onlyMethods([])
-      ->getMock()
-    ;
+    $translator = $this->createStub(TranslatorInterface::class);
+    $serializer = new JmsSerializer();
+    $cache = $this->createStub(CacheItemPoolInterface::class);
+
+    $this->object = new AbstractResponseManagerTestClass($translator, $serializer, $cache);
   }
 
-  /**
-   * @throws \ReflectionException
-   */
   #[Group('integration')]
   public function testAddResponseHashToHeaders(): void
   {
-    $this->mockProperty(AbstractResponseManager::class, $this->object, 'serializer', new JmsSerializer());
-
     $responseHeaders = [];
     $response = new ProjectResponse(['id' => '1']);
     $this->object->addResponseHashToHeaders($responseHeaders, $response);

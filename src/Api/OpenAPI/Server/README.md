@@ -117,18 +117,29 @@ All URIs are relative to *https://share.catrob.at/api*
 | _AuthenticationApiInterface_ | [**authenticationOauthPost**](docs/Api/AuthenticationApiInterface.md#authenticationoauthpost)     | **POST** /authentication/oauth        | OAuth Login                                                                                                |
 | _AuthenticationApiInterface_ | [**authenticationPost**](docs/Api/AuthenticationApiInterface.md#authenticationpost)               | **POST** /authentication              | Login - create a new JWT token                                                                             |
 | _AuthenticationApiInterface_ | [**authenticationRefreshPost**](docs/Api/AuthenticationApiInterface.md#authenticationrefreshpost) | **POST** /authentication/refresh      | Refresh token                                                                                              |
-| _MediaLibraryApiInterface_   | [**mediaFileIdGet**](docs/Api/MediaLibraryApiInterface.md#mediafileidget)                         | **GET** /media/file/{id}              | Get the information of a specific media file                                                               |
-| _MediaLibraryApiInterface_   | [**mediaFilesGet**](docs/Api/MediaLibraryApiInterface.md#mediafilesget)                           | **GET** /media/files                  | Get _all_ content of the media library.                                                                    |
-| _MediaLibraryApiInterface_   | [**mediaFilesSearchGet**](docs/Api/MediaLibraryApiInterface.md#mediafilessearchget)               | **GET** /media/files/search           | Search for mediafiles associated with keywords                                                             |
-| _MediaLibraryApiInterface_   | [**mediaPackageNameGet**](docs/Api/MediaLibraryApiInterface.md#mediapackagenameget)               | **GET** /media/package/{name}         | Get media-library asstes of a named package                                                                |
+| _MediaLibraryApiInterface_   | [**mediaAssetsGet**](docs/Api/MediaLibraryApiInterface.md#mediaassetsget)                         | **GET** /media/assets                 | Get media library assets with pagination and filtering                                                     |
+| _MediaLibraryApiInterface_   | [**mediaAssetsIdDelete**](docs/Api/MediaLibraryApiInterface.md#mediaassetsiddelete)               | **DELETE** /media/assets/{id}         | Delete a media asset (Admin only)                                                                          |
+| _MediaLibraryApiInterface_   | [**mediaAssetsIdGet**](docs/Api/MediaLibraryApiInterface.md#mediaassetsidget)                     | **GET** /media/assets/{id}            | Get details of a specific media asset                                                                      |
+| _MediaLibraryApiInterface_   | [**mediaAssetsIdPatch**](docs/Api/MediaLibraryApiInterface.md#mediaassetsidpatch)                 | **PATCH** /media/assets/{id}          | Update a media asset metadata (Admin only)                                                                 |
+| _MediaLibraryApiInterface_   | [**mediaAssetsPost**](docs/Api/MediaLibraryApiInterface.md#mediaassetspost)                       | **POST** /media/assets                | Upload a new media asset (Admin only)                                                                      |
+| _MediaLibraryApiInterface_   | [**mediaCategoriesGet**](docs/Api/MediaLibraryApiInterface.md#mediacategoriesget)                 | **GET** /media/categories             | Get all media library categories                                                                           |
+| _MediaLibraryApiInterface_   | [**mediaCategoriesIdDelete**](docs/Api/MediaLibraryApiInterface.md#mediacategoriesiddelete)       | **DELETE** /media/categories/{id}     | Delete a media category (Admin only)                                                                       |
+| _MediaLibraryApiInterface_   | [**mediaCategoriesIdGet**](docs/Api/MediaLibraryApiInterface.md#mediacategoriesidget)             | **GET** /media/categories/{id}        | Get a specific media category with its assets                                                              |
+| _MediaLibraryApiInterface_   | [**mediaCategoriesIdPatch**](docs/Api/MediaLibraryApiInterface.md#mediacategoriesidpatch)         | **PATCH** /media/categories/{id}      | Update a media category (Admin only)                                                                       |
+| _MediaLibraryApiInterface_   | [**mediaCategoriesPost**](docs/Api/MediaLibraryApiInterface.md#mediacategoriespost)               | **POST** /media/categories            | Create a new media category (Admin only)                                                                   |
+| _MediaLibraryApiInterface_   | [**mediaLibraryGet**](docs/Api/MediaLibraryApiInterface.md#medialibraryget)                       | **GET** /media/library                | Get media library overview with categories and preview assets                                              |
 | _NotificationsApiInterface_  | [**notificationIdReadPut**](docs/Api/NotificationsApiInterface.md#notificationidreadput)          | **PUT** /notification/{id}/read       | Mark specified notification as read                                                                        |
 | _NotificationsApiInterface_  | [**notificationsCountGet**](docs/Api/NotificationsApiInterface.md#notificationscountget)          | **GET** /notifications/count          | Count the number of unseen notifications                                                                   |
-| _NotificationsApiInterface_  | [**notificationsGet**](docs/Api/NotificationsApiInterface.md#notificationsget)                    | **GET** /notifications                | Get user notifications -- StatusCode: 501 - Not yet implemented                                            |
+| _NotificationsApiInterface_  | [**notificationsGet**](docs/Api/NotificationsApiInterface.md#notificationsget)                    | **GET** /notifications                | Get user notifications                                                                                     |
 | _NotificationsApiInterface_  | [**notificationsReadPut**](docs/Api/NotificationsApiInterface.md#notificationsreadput)            | **PUT** /notifications/read           | Mark all notifications as read                                                                             |
 | _ProjectsApiInterface_       | [**projectIdCatrobatGet**](docs/Api/ProjectsApiInterface.md#projectidcatrobatget)                 | **GET** /project/{id}/catrobat        | Download the .catrobat (&#x3D;zip) file of a project                                                       |
 | _ProjectsApiInterface_       | [**projectIdDelete**](docs/Api/ProjectsApiInterface.md#projectiddelete)                           | **DELETE** /project/{id}              | Delete a project                                                                                           |
 | _ProjectsApiInterface_       | [**projectIdGet**](docs/Api/ProjectsApiInterface.md#projectidget)                                 | **GET** /project/{id}                 | Get the information of a project                                                                           |
 | _ProjectsApiInterface_       | [**projectIdPut**](docs/Api/ProjectsApiInterface.md#projectidput)                                 | **PUT** /project/{id}                 | Update details of a project                                                                                |
+| _ProjectsApiInterface_       | [**projectIdReactionDelete**](docs/Api/ProjectsApiInterface.md#projectidreactiondelete)           | **DELETE** /project/{id}/reaction     | Remove a reaction from a project                                                                           |
+| _ProjectsApiInterface_       | [**projectIdReactionPost**](docs/Api/ProjectsApiInterface.md#projectidreactionpost)               | **POST** /project/{id}/reaction       | Add a reaction to a project                                                                                |
+| _ProjectsApiInterface_       | [**projectIdReactionsGet**](docs/Api/ProjectsApiInterface.md#projectidreactionsget)               | **GET** /project/{id}/reactions       | Get reaction summary for a project                                                                         |
+| _ProjectsApiInterface_       | [**projectIdReactionsUsersGet**](docs/Api/ProjectsApiInterface.md#projectidreactionsusersget)     | **GET** /project/{id}/reactions/users | Get users who reacted to a project                                                                         |
 | _ProjectsApiInterface_       | [**projectIdRecommendationsGet**](docs/Api/ProjectsApiInterface.md#projectidrecommendationsget)   | **GET** /project/{id}/recommendations | Get recommended projects related to the specific project                                                   |
 | _ProjectsApiInterface_       | [**projectIdReportPost**](docs/Api/ProjectsApiInterface.md#projectidreportpost)                   | **POST** /project/{id}/report         | Report a project -- StatusCode: 501 - Not yet implemented                                                  |
 | _ProjectsApiInterface_       | [**projectsCategoriesGet**](docs/Api/ProjectsApiInterface.md#projectscategoriesget)               | **GET** /projects/categories          | Get default number of projects per category (Most downloaded etc.)                                         |
@@ -167,16 +178,28 @@ All URIs are relative to *https://share.catrob.at/api*
 - [FeaturedProjectResponse](docs/Model/FeaturedProjectResponse.md)
 - [JWTResponse](docs/Model/JWTResponse.md)
 - [LoginRequest](docs/Model/LoginRequest.md)
+- [MediaAssetResponse](docs/Model/MediaAssetResponse.md)
+- [MediaAssetUpdateRequest](docs/Model/MediaAssetUpdateRequest.md)
+- [MediaAssetsResponse](docs/Model/MediaAssetsResponse.md)
+- [MediaCategoriesResponse](docs/Model/MediaCategoriesResponse.md)
+- [MediaCategoryDetailResponse](docs/Model/MediaCategoryDetailResponse.md)
+- [MediaCategoryRequest](docs/Model/MediaCategoryRequest.md)
 - [MediaCategoryResponse](docs/Model/MediaCategoryResponse.md)
-- [MediaFileResponse](docs/Model/MediaFileResponse.md)
-- [MediaPackageResponse](docs/Model/MediaPackageResponse.md)
+- [MediaLibraryCategoryPreview](docs/Model/MediaLibraryCategoryPreview.md)
+- [MediaLibraryResponse](docs/Model/MediaLibraryResponse.md)
 - [NotificationContent](docs/Model/NotificationContent.md)
 - [NotificationResponse](docs/Model/NotificationResponse.md)
 - [NotificationsCountResponse](docs/Model/NotificationsCountResponse.md)
 - [OAuthLoginRequest](docs/Model/OAuthLoginRequest.md)
+- [PaginationInfo](docs/Model/PaginationInfo.md)
 - [ProjectReportRequest](docs/Model/ProjectReportRequest.md)
 - [ProjectResponse](docs/Model/ProjectResponse.md)
 - [ProjectsCategory](docs/Model/ProjectsCategory.md)
+- [ReactionRequest](docs/Model/ReactionRequest.md)
+- [ReactionSummaryResponse](docs/Model/ReactionSummaryResponse.md)
+- [ReactionUserEntry](docs/Model/ReactionUserEntry.md)
+- [ReactionUserInfo](docs/Model/ReactionUserInfo.md)
+- [ReactionUsersResponse](docs/Model/ReactionUsersResponse.md)
 - [RefreshRequest](docs/Model/RefreshRequest.md)
 - [RegisterErrorResponse](docs/Model/RegisterErrorResponse.md)
 - [RegisterRequest](docs/Model/RegisterRequest.md)

@@ -81,7 +81,7 @@ interface NotificationsApiInterface
   /**
    * Operation notificationsGet.
    *
-   * Get user notifications -- StatusCode: 501 - Not yet implemented
+   * Get user notifications
    *
    * @param string $accept_language (optional, default to 'en')
    * @param int    $limit           (optional, default to 20)

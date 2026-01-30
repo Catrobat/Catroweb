@@ -1,3 +1,9 @@
 vendor/
 node_modules/
 var/
+.git/
+.github/
+.idea/
+tmp/
+tests/TestReports/
+.phpunit.cache

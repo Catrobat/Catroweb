@@ -7,6 +7,9 @@
 #
 name: 'Dynamic analysis'
 
+permissions:
+  contents: read
+
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request is a branch on the same repository. (E.g dependabot)
 on:
@@ -39,20 +42,16 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Cache Docker layers
-        uses: actions/cache@v5
-        with:
-          path: |
-            ~/.docker/cache
-            ~/.docker/buildx-cache
-          key: ${{ runner.os }}-docker-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-docker-
-
       - name: Build Catroweb App Image
-        run: |
-          cd docker
-          docker compose -f docker-compose.test.yaml build app.catroweb
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          load: true
+          tags: app.catroweb
+          build-args: APP_ENVIRONMENT=test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Save Docker Image
         run: |
@@ -152,7 +151,7 @@ jobs:
       matrix:
         testSuite:
           - api-authentication
-          - api-mediapackage
+          - api-media-library
           - api-projects
           - api-user
           - api-notifications

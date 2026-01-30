@@ -15,7 +15,6 @@
 
 #maintenance-container {
   width: 100%;
-  margin-bottom: 0.5rem;
 }
 
 /* Style for the maintenance message */
@@ -29,6 +28,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
+  margin-bottom: 0.5rem;
 
   @media (width <= 768px) {
     padding: 14px 16px;

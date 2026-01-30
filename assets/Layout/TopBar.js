@@ -28,6 +28,21 @@ const defaultTitle = title.innerHTML
 const searchUrl = document.querySelector('.js-header').dataset.pathSearchUrl
 const sameSearchMessage = document.querySelector('.js-header').dataset.sameSearchMessage
 
+const SEARCH_PARAM = 'search'
+
+function getSearchQuery() {
+  return new URLSearchParams(window.location.search).get(SEARCH_PARAM)
+}
+
+function hasSearchQuery() {
+  const query = getSearchQuery()
+  return query !== null && query.trim() !== ''
+}
+
+function isOnSearchPage() {
+  return window.location.pathname.includes('/search/') || hasSearchQuery()
+}
+
 searchButton?.addEventListener('click', () => {
   showTopBarSearch()
 })
@@ -114,7 +129,7 @@ const PREVIOUS_NON_SEARCH_URL_KEY = 'previousNonSearchUrl'
 function handleSearchBackButton() {
   const previousUrl = sessionStorage.getItem(PREVIOUS_NON_SEARCH_URL_KEY)
 
-  if (!window.location.pathname.includes('/search/')) {
+  if (!isOnSearchPage()) {
     // Only the search bar was shown, no navigation happened
     showTopBarDefault()
     return
@@ -140,7 +155,7 @@ export function showTopBarSearch() {
   hideTopBars()
   document.querySelector('#top-app-bar__search').style.display = 'flex'
   searchInput.focus()
-  if (!window.location.pathname.includes('/search/')) {
+  if (!isOnSearchPage()) {
     sessionStorage.setItem(PREVIOUS_NON_SEARCH_URL_KEY, window.location.href)
   }
 }
@@ -156,5 +171,19 @@ export function controlTopBarSearchClearButton() {
 function clearTopBarSearch() {
   searchInput.value = ''
   searchClearButton.style.display = 'none'
+
+  if (hasSearchQuery()) {
+    const url = new URL(window.location.href)
+    url.searchParams.delete(SEARCH_PARAM)
+    window.location.href = url.pathname + (url.search ? `?${url.searchParams.toString()}` : '')
+    return
+  }
+
   searchInput.focus()
+}
+
+if (searchInput && hasSearchQuery()) {
+  showTopBarSearch()
+  searchInput.value = getSearchQuery()
+  controlTopBarSearchClearButton()
 }

@@ -14,6 +14,9 @@
 #
 name: Synchronize Crowdin
 
+permissions:
+  contents: read
+
 #
 # New base strings could be uploaded on the merge of a new feature.
 # However, the translation download process is independent from a pull request.

@@ -9,7 +9,7 @@ use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -23,7 +23,7 @@ class AddProjectRequestTest extends TestCase
 
   private AddProjectRequest $add_program_request;
 
-  private MockObject|User $user;
+  private Stub|User $user;
 
   /**
    * @throws Exception
@@ -31,7 +31,7 @@ class AddProjectRequestTest extends TestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->user = $this->createMock(User::class);
+    $this->user = $this->createStub(User::class);
     fopen('/tmp/PhpUnitTest', 'w');
     $this->file = new File('/tmp/PhpUnitTest');
     $this->add_program_request = new AddProjectRequest($this->user, $this->file);
@@ -47,7 +47,7 @@ class AddProjectRequestTest extends TestCase
    */
   public function testHoldsAUser(): void
   {
-    $new_user = $this->createMock(User::class);
+    $new_user = $this->createStub(User::class);
     $this->assertSame($this->user, $this->add_program_request->getUser());
     $this->add_program_request->setUser($new_user);
     $this->assertSame($new_user, $this->add_program_request->getUser());

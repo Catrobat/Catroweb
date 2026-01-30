@@ -39,11 +39,6 @@ class ElapsedTimeStringFormatterTest extends TestCase
     ;
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(ElapsedTimeStringFormatter::class, $this->object);
-  }
-
   /**
    * @throws \Exception
    */

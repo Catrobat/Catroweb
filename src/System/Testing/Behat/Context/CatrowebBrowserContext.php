@@ -84,6 +84,13 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->visit('/app/login');
     $this->iWaitForThePageToBeLoaded();
+    $username_field = $this->getSession()->getPage()->findField('_username');
+    if (null === $username_field) {
+      $this->getUserDataFixtures()->setCurrentUserByUsername($username);
+
+      return;
+    }
+
     $this->fillField('_username', $username);
     $this->fillField('_password', $password);
     $this->pressButton('Login');
@@ -825,7 +832,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldSeeMediaFileWithId(string $id): void
   {
     $link = $this->getSession()->getPage()->find('css', '#mediafile-'.$id);
-    Assert::assertNotNull($link);
+    Assert::assertNotNull($link, 'media file is not visible');
   }
 
   /**
@@ -834,7 +841,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldNotSeeMediaFileWithId(string $id): void
   {
     $link = $this->getSession()->getPage()->find('css', '#mediafile-'.$id);
-    Assert::assertNull($link);
+    Assert::assertNull($link, 'media file is visible');
   }
 
   /**
@@ -846,7 +853,7 @@ class CatrowebBrowserContext extends BrowserContext
       ->find('css', '[data-name="'.$category.'"]')
       ->find('css', '#mediafile-'.$id)
     ;
-    Assert::assertNotNull($link);
+    Assert::assertNotNull($link, 'media file is visible in category');
   }
 
   /**

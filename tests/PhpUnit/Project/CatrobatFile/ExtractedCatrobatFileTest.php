@@ -11,7 +11,6 @@ use App\Project\Remix\RemixData;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -27,11 +26,6 @@ class ExtractedCatrobatFileTest extends TestCase
   protected function setUp(): void
   {
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
-  }
-
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(ExtractedCatrobatFile::class, $this->extracted_catrobat_file);
   }
 
   public function testGetsTheProgramNameFromXml(): void
@@ -131,12 +125,9 @@ class ExtractedCatrobatFileTest extends TestCase
       .'The Periodic Table [/app/project/3570]', $this->extracted_catrobat_file->getRemixUrlsString());
   }
 
-  /**
-   * @throws Exception
-   */
   public function testGetsRelativeAndAbsoluteRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/app/project/3570';
     $new_program_id = '3571';
@@ -165,12 +156,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testCanExtractSimpleCatrobatAbsoluteRemixUrl(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://pocketcode.org/details/1234/';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
     $new_program_id = '1300';
@@ -181,12 +170,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testNotExtractNumberFromNormalText(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'SomeText 123';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
     $new_program_id = '124';
@@ -196,12 +183,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testCanExtractSimpleScratchAbsoluteRemixUrl(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
     $new_program_id = '1';
@@ -212,12 +197,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testCanExtractSimpleRelativeCatrobatRemixUrl(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = '/app/flavors/3570/';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
     $new_program_id = '6310';
@@ -231,7 +214,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractMergedProgramRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/3570/';
     $new_program_id = '3571';
@@ -245,12 +228,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testExtractUniqueProgramRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/1234/';
     $new_program_id = '3571';
@@ -263,12 +244,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testDontExtractProgramRemixUrlsReferencingToCurrentProgram(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/790/';
     $new_program_id = '1234';
@@ -281,12 +260,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testExtractOnlyOlderProgramRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/790/';
     $new_program_id = '791';
@@ -299,12 +276,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testCanExtractDoubleMergedProgramRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/3570/';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
@@ -321,12 +296,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testExtractUniqueProgramRemixUrlsOfDoubleMergedProgram(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'https://scratch.mit.edu/projects/121648946/';
     $third_expected_url = 'http://pocketcode.org/details/1234/';
@@ -343,12 +316,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testDontExtractProgramRemixUrlsReferencingToCurrentDoubleMergedProgram(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/7901';
     $third_expected_url = 'http://pocketcode.org/details/1234/';
@@ -365,12 +336,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testCanExtractMultipleMergedRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/3570';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
@@ -388,12 +357,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testExtractUniqueProgramRemixUrlsOfMultipleMergedProgram(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16267';
     $third_expected_url = $first_expected_url;
@@ -411,12 +378,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testExtractOnlyOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsAnInitialVersion(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16268';
     $third_expected_url = $first_expected_url;
@@ -434,12 +399,10 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @psalm-suppress UndefinedPropertyAssignment
-   *
-   * @throws Exception
    */
   public function testExtractOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsNotAnInitialVersion(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16267';
     $third_expected_url = $first_expected_url;

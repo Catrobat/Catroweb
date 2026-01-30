@@ -8,7 +8,6 @@ use App\Api\Services\ValidationWrapper;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
@@ -16,16 +15,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 #[CoversClass(ValidationWrapper::class)]
 final class ValidationWrapperTest extends DefaultTestCase
 {
-  protected MockObject|ValidationWrapper $object;
+  protected ValidationWrapper $object;
 
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockBuilder(ValidationWrapper::class)
-      ->disableOriginalConstructor()
-      ->onlyMethods([])
-      ->getMock()
-    ;
+    $this->object = new ValidationWrapper();
   }
 
   #[Group('unit')]

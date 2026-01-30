@@ -15,6 +15,9 @@
 #
 name: 'Docker Container tests'
 
+permissions:
+  contents: read
+
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
 # For example, this happens with dependabot.
@@ -43,6 +46,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Catroweb App Image (cached)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          load: true
+          tags: app.catroweb
+          build-args: APP_ENVIRONMENT=dev
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build and start all containers (Docker Compose)
         run: |

@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -23,7 +23,7 @@ class ItranslateApiTest extends TestCase
 {
   private ItranslateApi $api;
 
-  protected MockObject $httpClient;
+  protected Stub $httpClient;
 
   /**
    * @throws Exception
@@ -31,9 +31,9 @@ class ItranslateApiTest extends TestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->httpClient = $this->getMockBuilder(Client::class)->getMock();
-
-    $this->api = new ItranslateApi($this->httpClient, 'fake', $this->createMock(LoggerInterface::class));
+    // Use a stub by default; tests that verify behavior will create their own mock
+    $this->httpClient = $this->createStub(Client::class);
+    $this->api = new ItranslateApi($this->httpClient, 'fake', $this->createStub(LoggerInterface::class));
   }
 
   /**
@@ -42,7 +42,8 @@ class ItranslateApiTest extends TestCase
    */
   public function testDetectLanguageCode(): void
   {
-    $this->httpClient
+    $httpClient = $this->getMockBuilder(Client::class)->getMock();
+    $httpClient
       ->expects($this->once())
       ->method('request')
       ->with('POST', '/translate/v1',
@@ -56,7 +57,8 @@ class ItranslateApiTest extends TestCase
       ->willReturn($this->mockGenericResponse())
     ;
 
-    $this->api->translate('testing', null, 'en');
+    $api = new ItranslateApi($httpClient, 'fake', $this->createStub(LoggerInterface::class));
+    $api->translate('testing', null, 'en');
   }
 
   /**
@@ -65,6 +67,7 @@ class ItranslateApiTest extends TestCase
    */
   public function testSuccessDetectedLanguage(): void
   {
+    $httpClient = $this->getMockBuilder(Client::class)->getMock();
     $response = $this->createMock(ResponseInterface::class);
     $response->expects($this->once())->method('getStatusCode')->willReturn(200);
 
@@ -84,9 +87,10 @@ class ItranslateApiTest extends TestCase
     $body->expects($this->once())->method('getContents')->willReturn($json);
     $response->expects($this->once())->method('getBody')->willReturn($body);
 
-    $this->httpClient->expects($this->once())->method('request')->willReturn($response);
+    $httpClient->expects($this->once())->method('request')->willReturn($response);
 
-    $result = $this->api->translate('testing', null, 'fr');
+    $api = new ItranslateApi($httpClient, 'fake', $this->createStub(LoggerInterface::class));
+    $result = $api->translate('testing', null, 'fr');
 
     $this->assertEquals('en', $result->detected_source_language);
     $this->assertEquals('test', $result->translation);
@@ -98,6 +102,7 @@ class ItranslateApiTest extends TestCase
    */
   public function testSuccessSpecifiedLanguage(): void
   {
+    $httpClient = $this->getMockBuilder(Client::class)->getMock();
     $response = $this->createMock(ResponseInterface::class);
     $response->expects($this->once())->method('getStatusCode')->willReturn(200);
 
@@ -116,9 +121,10 @@ class ItranslateApiTest extends TestCase
     $body->expects($this->once())->method('getContents')->willReturn($json);
     $response->expects($this->once())->method('getBody')->willReturn($body);
 
-    $this->httpClient->expects($this->once())->method('request')->willReturn($response);
+    $httpClient->expects($this->once())->method('request')->willReturn($response);
 
-    $result = $this->api->translate('testing', 'en', 'fr');
+    $api = new ItranslateApi($httpClient, 'fake', $this->createStub(LoggerInterface::class));
+    $result = $api->translate('testing', 'en', 'fr');
 
     $this->assertNull($result->detected_source_language);
     $this->assertEquals('test', $result->translation);
@@ -130,11 +136,13 @@ class ItranslateApiTest extends TestCase
    */
   public function testNon200StatusCode(): void
   {
+    $httpClient = $this->getMockBuilder(Client::class)->getMock();
     $response = $this->createMock(ResponseInterface::class);
     $response->expects($this->once())->method('getStatusCode')->willReturn(400);
-    $this->httpClient->expects($this->once())->method('request')->willReturn($response);
+    $httpClient->expects($this->once())->method('request')->willReturn($response);
 
-    $result = $this->api->translate('testing', null, 'fr');
+    $api = new ItranslateApi($httpClient, 'fake', $this->createStub(LoggerInterface::class));
+    $result = $api->translate('testing', null, 'fr');
 
     $this->assertNull($result);
   }
@@ -145,10 +153,12 @@ class ItranslateApiTest extends TestCase
    */
   public function testExceptionThrown(): void
   {
-    $exception = $this->createMock(GuzzleException::class);
-    $this->httpClient->expects($this->once())->method('request')->willThrowException($exception);
+    $httpClient = $this->getMockBuilder(Client::class)->getMock();
+    $exception = $this->createStub(GuzzleException::class);
+    $httpClient->expects($this->once())->method('request')->willThrowException($exception);
 
-    $result = $this->api->translate('testing', null, 'fr');
+    $api = new ItranslateApi($httpClient, 'fake', $this->createStub(LoggerInterface::class));
+    $result = $api->translate('testing', null, 'fr');
 
     $this->assertNull($result);
   }

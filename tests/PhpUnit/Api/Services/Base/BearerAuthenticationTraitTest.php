@@ -10,7 +10,6 @@ use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
@@ -18,16 +17,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 #[CoversClass(BearerAuthenticationTraitTestClass::class)]
 final class BearerAuthenticationTraitTest extends DefaultTestCase
 {
-  protected MockObject|BearerAuthenticationTraitTestClass $object;
+  protected BearerAuthenticationTraitTestClass $object;
 
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->getMockBuilder(BearerAuthenticationTraitTestClass::class)
-      ->onlyMethods([])
-      ->onlyMethods([])
-      ->getMock()
-    ;
+    $this->object = new BearerAuthenticationTraitTestClass();
   }
 
   #[Group('integration')]

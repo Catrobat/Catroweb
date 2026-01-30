@@ -86,13 +86,13 @@ json;
    */
   public function testLoadUserByOauthResponse(): void
   {
-    $httpClient = $this->createMock(HttpClientInterface::class);
+    $httpClient = $this->createStub(HttpClientInterface::class);
 
-    $storage = $this->createMock(RequestDataStorageInterface::class);
+    $storage = $this->createStub(RequestDataStorageInterface::class);
 
     $response_test = new PathUserResponse();
 
-    $httpUtils = $this->createMock(HttpUtils::class);
+    $httpUtils = $this->createStub(HttpUtils::class);
     $resourceOwner = new GoogleResourceOwner(
       $httpClient,
       $httpUtils,

@@ -51,10 +51,10 @@ class LoginRequest
    * @Type("string")
    *
    * @Assert\Length(
-   *     max=180
+   *   max = 180
    * )
    * @Assert\Length(
-   *     min=3
+   *   min = 3
    * )
    */
   protected ?string $username = null;
@@ -69,10 +69,10 @@ class LoginRequest
    * @Type("string")
    *
    * @Assert\Length(
-   *     max=4096
+   *   max = 4096
    * )
    * @Assert\Length(
-   *     min=6
+   *   min = 6
    * )
    */
   protected ?string $password = null;

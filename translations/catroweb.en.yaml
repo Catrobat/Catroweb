@@ -432,6 +432,7 @@ search:
   dotdotdot: Search...
   search: Search
   inMediaLib: Search in media library
+  inMediaCategory: Search in media category
   results: Search results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
@@ -827,8 +828,8 @@ next: Next
 previous: Previous
 
 media-packages:
-  title: Media-Packages
-  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  title: Media Library
+  description: In the following categories you can find actors and objects to add to your projects.
   thumb-size:
     description: Preview size
     sm: small
@@ -1059,6 +1060,11 @@ media_library:
       sound: 'Type: sound'
       movie: 'Type: video'
       default: 'Type: unknown'
+  no_categories: 'No media categories available yet.'
+  no_results: 'No results found.'
+  assets_count: 'assets'
+  view_all: 'View all'
+  view_all_category: 'View all %category%'
 
 snackbar:
   project_not_found: 'The requested project is not available'
@@ -1078,4 +1084,3 @@ maintenanceinformations:
 
 MarkNotForKids: Mark as not safe for kids
 MarkSafeForKids: Mark as safe for kids
-

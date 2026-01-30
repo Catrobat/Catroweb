@@ -1,5 +1,6 @@
 ### Catroweb ###
 .idea/
+.phpunit.cache/
 composer.phar
 phpspec.yaml
 phpunit.xml
