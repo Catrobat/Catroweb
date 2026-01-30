@@ -148,9 +148,9 @@ class ResetCommand extends Command
 
     // https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
-    // Creating sample MediaPackages
+    // Creating sample Media Samples
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:create:media-packages-samples'], [], 'Creating sample Media Packages', $output
+      ['bin/console', 'catrobat:create:media-assets-samples'], [], 'Creating media asset samples', $output
     );
 
     // Insert static achievements

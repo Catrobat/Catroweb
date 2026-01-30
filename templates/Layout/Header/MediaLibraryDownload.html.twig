@@ -1,4 +1,4 @@
-{% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
+{% if '/media-library' in app.request.pathinfo %}
 
   <div id="top-app-bar__media-library-download" class="mdc-top-app-bar__row" style="display: none;">
 

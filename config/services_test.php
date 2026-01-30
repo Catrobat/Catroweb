@@ -23,8 +23,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.featuredimage.dir', '%catrobat.pubdir%resources_test/featured/');
   $parameters->set('catrobat.featuredimage.path', 'resources_test/featured/');
   $parameters->set('catrobat.apk.dir', '%catrobat.pubdir%resources_test/apk/');
-  $parameters->set('catrobat.mediapackage.dir', '%catrobat.pubdir%resources_test/mediapackage/');
-  $parameters->set('catrobat.mediapackage.path', 'resources_test/mediapackage/');
+  $parameters->set('catrobat.media.dir', '%catrobat.pubdir%resources_test/media/');
+  $parameters->set('catrobat.media.path', 'resources_test/media/');
   $parameters->set('catrobat.tests.upld-dwnld-dir', 'tests/TestData/UploadDownloadTemp');
   $parameters->set('catrobat.logs.dir', '%kernel.project_dir%/tests/TestData/Cache/log/');
   $parameters->set('catrobat.testreports.behat', 'tests/TestReports/Behat/');

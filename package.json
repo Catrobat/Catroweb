@@ -17,6 +17,7 @@
     "test-php": "php bin/php-cs-fixer fix --dry-run --allow-risky=yes --verbose --format=txt",
     "fix-php": "php bin/php-cs-fixer fix --allow-risky=yes --verbose --format=txt",
     "chrome": "google-chrome-stable --headless --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 --disable-gpu --log-level=0",
+    "chrome-mac": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222 --disable-gpu --log-level=0",
     "test-e2e": "bin/behat",
     "dev-server": "encore dev-server",
     "dev": "encore dev",

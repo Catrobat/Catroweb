@@ -5,13 +5,18 @@ declare(strict_types=1);
 namespace App\Api\Services\MediaLibrary;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\DB\Entity\MediaLibrary\MediaPackageCategory;
-use App\DB\Entity\MediaLibrary\MediaPackageFile;
-use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
-use OpenAPI\Server\Model\MediaFileResponse;
+use App\DB\Entity\MediaLibrary\MediaAsset;
+use App\DB\Entity\MediaLibrary\MediaCategory;
+use App\DB\Entity\User\User;
+use App\DB\EntityRepository\MediaLibrary\MediaAssetRepository;
+use OpenAPI\Server\Model\MediaAssetResponse;
+use OpenAPI\Server\Model\MediaAssetsResponse;
+use OpenAPI\Server\Model\MediaCategoriesResponse;
+use OpenAPI\Server\Model\MediaCategoryDetailResponse;
+use OpenAPI\Server\Model\MediaCategoryResponse;
+use OpenAPI\Server\Model\PaginationInfo;
 use OpenAPI\Server\Service\SerializerInterface;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MediaLibraryResponseManager extends AbstractResponseManager
@@ -20,145 +25,223 @@ class MediaLibraryResponseManager extends AbstractResponseManager
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
-    private readonly UrlGeneratorInterface $url_generator,
-    private readonly ParameterBagInterface $parameter_bag,
-    private readonly MediaPackageFileRepository $media_package_file_repository,
+    private readonly MediaLibraryApiLoader $loader,
+    private readonly MediaAssetRepository $asset_repository,
+    private readonly ?UrlHelper $url_helper,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
 
-  public function createMediaFilesDataResponse(array $media_package_files, ?string $attributes): array
+  public function createPaginationInfo(int $total, int $limit, int $offset): PaginationInfo
   {
-    $media_files_data_response = [];
-
-    /** @var MediaPackageFile $media_package_file */
-    foreach ($media_package_files as $media_package_file) {
-      $media_files_data_response[] = $this->createMediaFileResponse($media_package_file, $attributes);
-    }
-
-    return $media_files_data_response;
+    return new PaginationInfo([
+      'total' => $total,
+      'limit' => $limit,
+      'offset' => $offset,
+    ]);
   }
 
-  public function createMediaFileResponse(MediaPackageFile $media_package_file, ?string $attributes): MediaFileResponse
+  public function createCategoriesResponse(array $categories, int $total, int $limit, int $offset): MediaCategoriesResponse
   {
-    if (null === $attributes || '' === $attributes || '0' === $attributes) {
-      $attributes_list = ['id', 'name'];
-    } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'name', 'flavors', 'packages', 'category', 'author', 'extension', 'download_url', 'size', 'file_type'];
-    } else {
-      $attributes_list = explode(',', $attributes);
+    $category_responses = array_map(
+      fn (MediaCategory $category) => $this->createCategoryResponse($category),
+      $categories
+    );
+
+    return new MediaCategoriesResponse([
+      'categories' => $category_responses,
+      'pagination' => $this->createPaginationInfo($total, $limit, $offset),
+    ]);
+  }
+
+  public function createCategoryResponse(MediaCategory $category): MediaCategoryResponse
+  {
+    return new MediaCategoryResponse([
+      'id' => $category->getId(),
+      'name' => $this->trans($category->getName()),
+      'description' => $category->getDescription() ? $this->trans($category->getDescription()) : null,
+      'priority' => $category->getPriority(),
+    ]);
+  }
+
+  public function createCategoryDetailResponse(MediaCategory $category, array $assets, int $total_assets, int $limit, int $offset): MediaCategoryDetailResponse
+  {
+    $asset_responses = array_map(
+      fn (MediaAsset $asset) => $this->createAssetResponse($asset),
+      $assets
+    );
+
+    return new MediaCategoryDetailResponse([
+      'id' => $category->getId(),
+      'name' => $this->trans($category->getName()),
+      'description' => $category->getDescription() ? $this->trans($category->getDescription()) : null,
+      'priority' => $category->getPriority(),
+      'assets' => $asset_responses,
+      'pagination' => $this->createPaginationInfo($total_assets, $limit, $offset),
+    ]);
+  }
+
+  public function createAssetsResponse(array $assets, int $total, int $limit, int $offset): MediaAssetsResponse
+  {
+    $asset_responses = array_map(
+      fn (MediaAsset $asset) => $this->createAssetResponse($asset),
+      $assets
+    );
+
+    return new MediaAssetsResponse([
+      'assets' => $asset_responses,
+      'pagination' => $this->createPaginationInfo($total, $limit, $offset),
+    ]);
+  }
+
+  public function createAssetResponse(MediaAsset $asset, ?User $user = null): MediaAssetResponse
+  {
+    $base_url = $this->url_helper?->getAbsoluteUrl('/') ?? '';
+    $download_path = $this->asset_repository->getWebPath($asset->getId(), $asset->getExtension());
+    $download_url = $base_url.$download_path;
+
+    $thumbnail_url = null;
+    if ($asset->isImage()) {
+      $thumbnail_path = $this->asset_repository->getThumbnailWebPath($asset->getId(), $asset->getExtension());
+      $thumbnail_url = $base_url.$thumbnail_path;
     }
 
-    $data = [];
-    if (in_array('id', $attributes_list, true)) {
-      $data['id'] = $media_package_file->getId();
+    // Calculate file size
+    $size = null;
+    try {
+      $file_path = $this->asset_repository->getFilePath($asset->getId(), $asset->getExtension());
+      if (file_exists($file_path)) {
+        $size = filesize($file_path);
+      }
+    } catch (\Exception $e) {
+      // If file doesn't exist or can't be accessed, size remains null
     }
 
-    if (in_array('name', $attributes_list, true)) {
-      $data['name'] = $media_package_file->getName();
+    return new MediaAssetResponse([
+      'id' => $asset->getId(),
+      'name' => $asset->getName(),
+      'description' => $asset->getDescription(),
+      'category_id' => $asset->getCategory()->getId(),
+      'category_name' => $this->trans($asset->getCategory()->getName()),
+      'file_type' => $this->convertFileType($asset->getFileType()),
+      'extension' => $asset->getExtension(),
+      'size' => $size,
+      'author' => $asset->getAuthor(),
+      'downloads' => $asset->getDownloads(),
+      'active' => $asset->getActive(),
+      'flavors' => array_map(fn ($flavor) => $flavor->getName(), $asset->getFlavors()->toArray()),
+      'download_url' => $download_url,
+      'thumbnail_url' => $thumbnail_url,
+      'created_at' => $asset->getCreatedAt(),
+      'updated_at' => $asset->getUpdatedAt(),
+    ]);
+  }
+
+  /**
+   * @param MediaCategory[] $categories
+   */
+  public function createLibraryOverviewResponse(
+    array $categories,
+    int $total_categories,
+    int $limit,
+    int $offset,
+    int $assets_per_category,
+    ?\App\DB\Entity\MediaLibrary\MediaFileType $file_type,
+    ?string $flavor,
+    ?string $search = null,
+  ): \OpenAPI\Server\Model\MediaLibraryResponse {
+    $search = null !== $search ? trim($search) : null;
+    if ('' === $search) {
+      $search = null;
     }
 
-    if (in_array('flavors', $attributes_list, true)) {
-      $data['flavors'] = $media_package_file->getFlavorNames();
-    }
+    if (null === $search) {
+      $category_previews = array_map(
+        function (MediaCategory $category) use ($assets_per_category, $file_type, $flavor) {
+          // Get preview assets for this category
+          $preview_assets = $this->loader->getAssets(
+            $assets_per_category,
+            0,
+            $category->getId(),
+            $file_type,
+            $flavor,
+            null,
+            'created_at',
+            'DESC'
+          );
 
-    if (in_array('packages', $attributes_list, true)) {
-      $data['packages'] = $media_package_file->getCategory()->getPackageNames();
-    }
+          $total_assets = $this->loader->countAssets($category->getId(), $file_type, $flavor, null);
 
-    if (in_array('category', $attributes_list, true)) {
-      $data['category'] = $media_package_file->getCategory()->getName();
-    }
+          $preview_responses = array_map(
+            fn (MediaAsset $asset) => $this->createAssetResponse($asset),
+            $preview_assets
+          );
 
-    if (in_array('author', $attributes_list, true)) {
-      $data['author'] = $media_package_file->getAuthor();
-    }
-
-    if (in_array('extension', $attributes_list, true)) {
-      $data['extension'] = $media_package_file->getExtension();
-    }
-
-    if (in_array('download_url', $attributes_list, true)) {
-      $data['download_url'] = $this->url_generator->generate(
-        'download_media',
-        [
-          'theme' => $this->parameter_bag->get('umbrellaTheme'),
-          'id' => $media_package_file->getId(),
-        ],
-        UrlGeneratorInterface::ABSOLUTE_URL
+          return new \OpenAPI\Server\Model\MediaLibraryCategoryPreview([
+            'id' => $category->getId(),
+            'name' => $this->trans($category->getName()),
+            'description' => $category->getDescription() ? $this->trans($category->getDescription()) : null,
+            'priority' => $category->getPriority(),
+            'assets_count' => $total_assets,
+            'preview_assets' => $preview_responses,
+          ]);
+        },
+        $categories
       );
-    }
+    } else {
+      $category_previews = [];
+      foreach ($categories as $category) {
+        $translated_name = $this->trans($category->getName());
+        $translated_description = $category->getDescription() ? $this->trans($category->getDescription()) : '';
+        $search_lower = strtolower($search);
+        $name_match = str_contains(strtolower($translated_name), $search_lower);
+        $desc_match = '' !== $translated_description && str_contains(strtolower($translated_description), $search_lower);
 
-    if (in_array('size', $attributes_list, true)) {
-      $file = $this->media_package_file_repository->getMediaFile($media_package_file->getId(), $media_package_file->getExtension());
-      $data['size'] = $file->getSize();
-    }
+        $asset_search = ($name_match || $desc_match) ? null : $search;
 
-    if (in_array('file_type', $attributes_list, true)) {
-      $extension = $media_package_file->getExtension();
+        $preview_assets = $this->loader->getAssets(
+          $assets_per_category,
+          0,
+          $category->getId(),
+          $file_type,
+          $flavor,
+          $asset_search,
+          'created_at',
+          'DESC'
+        );
 
-      $imageExtensions = [
-        'bmp', 'cgm', 'g3', 'gif', 'ief', 'jpeg', 'ktx', 'png', 'btif', 'sgi', 'svg', 'tiff', 'psd', 'uvi', 'sub', 'djvu',
-        'dwg', 'dxf', 'fbs', 'fpx', 'fst', 'mmr', 'rlc', 'mdi', 'wdp', 'npx', 'wbmp', 'xif', 'webp', '3ds', 'ras', 'cmx',
-        'fh', 'ico', 'sid', 'pcx', 'pic', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'tga', 'xbm', 'xpm', 'xwd',
-      ];
-      $soundExtensions = [
-        'adp', 'au', 'mid', 'mp4a', 'mpga', 'oga', 's3m', 'sil', 'uva', 'eol', 'dra', 'dts', 'dtshd', 'lvp', 'pya',
-        'ecelp4800', 'ecelp7470', 'ecelp9600', 'rip', 'weba', 'aac', 'aif', 'caf', 'flac', 'mka', 'm3u', 'wax', 'wma',
-        'ram', 'rmp', 'wav', 'xm',
-      ];
-      $videoExtensions = [
-        '3gp', '3g2', 'h261', 'h263', 'h264', 'jpgv', 'jpm', 'mj2', 'mp4', 'mpeg', 'ogv', 'qt', 'uvh', 'uvm', 'uvp',
-        'uvs', 'uvv', 'dvb', 'fvt', 'mxu', 'pyv', 'uvu', 'viv', 'webm', 'f4v', 'fli', 'flv', 'm4v', 'mkv', 'mng', 'asf',
-        'vob', 'wm', 'wmv', 'wmx', 'wvx', 'avi', 'movie', 'smv',
-      ];
-
-      if ('catrobat' === $extension) {
-        $data['file_type'] = 'project';
-      } elseif (in_array($extension, $imageExtensions, true)) {
-        $data['file_type'] = 'image';
-      } elseif (in_array($extension, $soundExtensions, true)) {
-        $data['file_type'] = 'sound';
-      } elseif (in_array($extension, $videoExtensions, true)) {
-        $data['file_type'] = 'video';
-      } else {
-        $data['file_type'] = 'other';
-      }
-    }
-
-    return new MediaFileResponse($data);
-  }
-
-  public function createMediaPackageCategoriesResponse(array $media_package_categories, int $limit, int $offset, ?string $attributes): array
-  {
-    $response_array = [];
-
-    /** @var MediaPackageCategory $media_package_category */
-    foreach ($media_package_categories as $media_package_category) {
-      $media_package_files = $media_package_category->getFiles();
-      if ((0 != $offset && count($media_package_files) <= $offset) || count($response_array) === $limit) {
-        if (0 != $offset) {
-          $offset -= count($media_package_files);
-        }
-
-        continue;
-      }
-
-      /** @var MediaPackageFile $media_package_file */
-      foreach ($media_package_files as $media_package_file) {
-        if (0 != $offset) {
-          --$offset;
+        $total_assets = $this->loader->countAssets($category->getId(), $file_type, $flavor, $asset_search);
+        if (0 === $total_assets && !$name_match && !$desc_match) {
           continue;
         }
 
-        if (count($response_array) >= $limit) {
-          break;
-        }
+        $preview_responses = array_map(
+          fn (MediaAsset $asset) => $this->createAssetResponse($asset),
+          $preview_assets
+        );
 
-        $response_array[] = $this->createMediaFileResponse($media_package_file, $attributes);
+        $category_previews[] = new \OpenAPI\Server\Model\MediaLibraryCategoryPreview([
+          'id' => $category->getId(),
+          'name' => $translated_name,
+          'description' => '' !== $translated_description ? $translated_description : null,
+          'priority' => $category->getPriority(),
+          'assets_count' => $total_assets,
+          'preview_assets' => $preview_responses,
+        ]);
       }
+
+      $total_categories = count($category_previews);
+      $category_previews = array_slice($category_previews, $offset, $limit);
     }
 
-    return $response_array;
+    return new \OpenAPI\Server\Model\MediaLibraryResponse([
+      'categories' => $category_previews,
+      'pagination' => $this->createPaginationInfo($total_categories, $limit, $offset),
+    ]);
+  }
+
+  private function convertFileType(\App\DB\Entity\MediaLibrary\MediaFileType $file_type): string
+  {
+    return $file_type->value;
   }
 }

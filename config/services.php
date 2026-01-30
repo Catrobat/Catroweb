@@ -8,10 +8,8 @@ use App\Admin\ApkGeneration\ApkReadyAdmin;
 use App\Admin\Comments\CommentsAdmin;
 use App\Admin\Comments\ReportedComments\ReportedCommentsAdmin;
 use App\Admin\Comments\ReportedComments\ReportedCommentsController;
-use App\Admin\MediaPackage\MediaPackageAdmin;
-use App\Admin\MediaPackage\MediaPackageCategoriesAdmin;
-use App\Admin\MediaPackage\MediaPackageCategoryController;
-use App\Admin\MediaPackage\MediaPackageFileAdmin;
+use App\Admin\MediaLibrary\MediaAssetAdmin;
+use App\Admin\MediaLibrary\MediaCategoryAdmin;
 use App\Admin\Projects\ApproveProjects\ApproveProjectsAdmin;
 use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
 use App\Admin\Projects\ProjectsAdmin;
@@ -64,9 +62,8 @@ use App\Api\StudioApi;
 use App\Api\UserApi;
 use App\Api\UtilityApi;
 use App\DB\Entity\Flavor;
-use App\DB\Entity\MediaLibrary\MediaPackage;
-use App\DB\Entity\MediaLibrary\MediaPackageCategory;
-use App\DB\Entity\MediaLibrary\MediaPackageFile;
+use App\DB\Entity\MediaLibrary\MediaAsset;
+use App\DB\Entity\MediaLibrary\MediaCategory;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramInappropriateReport;
@@ -106,12 +103,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.file.storage.dir', '%kernel.project_dir%/public/resources/programs/');
   $parameters->set('catrobat.file.storage.path', 'resources/programs/');
   $parameters->set('catrobat.logs.dir', '%kernel.project_dir%/var/log/');
-  $parameters->set('catrobat.mediapackage.dir', '%catrobat.pubdir%resources/mediapackage/');
-  $parameters->set('catrobat.mediapackage.path', 'resources/mediapackage/');
-  $parameters->set('catrobat.mediapackage.sample.dir', '%catrobat.pubdir%tests/TestData/DataFixtures/MediaPackage/SampleMediaPackage/');
-  $parameters->set('catrobat.mediapackage.sample.path', 'tests/TestData/DataFixtures/MediaPackage/SampleMediaPackage/');
-  $parameters->set('catrobat.mediapackage.font.dir', '%catrobat.pubdir%/build/fonts/Roboto-Regular-webfont.ttf');
-  $parameters->set('catrobat.mediapackage.font.path', 'build/fonts/Roboto-Regular-webfont.ttf');
+  $parameters->set('catrobat.media.dir', '%catrobat.pubdir%resources/media/');
+  $parameters->set('catrobat.media.path', 'resources/media/');
+  $parameters->set('catrobat.media.sample.dir', '%kernel.project_dir%/tests/TestData/DataFixtures/Media/SampleMedia/');
+  $parameters->set('catrobat.media.sample.path', 'tests/TestData/DataFixtures/Media/SampleMedia/');
+  $parameters->set('catrobat.media.font.dir', '%catrobat.pubdir%/build/fonts/Roboto-Regular-webfont.ttf');
+  $parameters->set('catrobat.media.font.path', 'build/fonts/Roboto-Regular-webfont.ttf');
   $parameters->set('catrobat.pubdir', '%kernel.project_dir%/public/');
   $parameters->set('catrobat.resources.dir', '%kernel.project_dir%/public/resources/');
   $parameters->set('catrobat.resources.path', '%catrobat.pubdir%resources/');
@@ -246,6 +243,28 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'controller' => ReportedCommentsController::class,
       ])
   ;
+  $services->set('admin.media_library.category', MediaCategoryAdmin::class)
+    ->tag('sonata.admin',
+      [
+        'manager_type' => 'orm',
+        'label' => 'Media Library Categories',
+        'show_mosaic_button' => false,
+        'code' => null,
+        'model_class' => MediaCategory::class,
+        'controller' => null,
+      ])
+  ;
+  $services->set('admin.media_library.asset', MediaAssetAdmin::class)
+    ->tag('sonata.admin',
+      [
+        'manager_type' => 'orm',
+        'label' => 'Media Library Assets',
+        'show_mosaic_button' => false,
+        'code' => null,
+        'model_class' => MediaAsset::class,
+        'controller' => null,
+      ])
+  ;
   $services->set('admin.block.featured.projects', FeaturedProjectAdmin::class)
     ->tag('sonata.admin',
       [
@@ -263,36 +282,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'label' => 'Example Projects',
         'code' => null,
         'model_class' => ExampleProgram::class,
-        'controller' => null,
-      ])
-  ;
-  $services->set('admin.block.mediapackage.package', MediaPackageAdmin::class)
-    ->tag('sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Packages',
-        'code' => null,
-        'model_class' => MediaPackage::class,
-        'controller' => null,
-      ])
-  ;
-  $services->set('admin.block.mediapackage.category', MediaPackageCategoriesAdmin::class)
-    ->tag('sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Categories',
-        'code' => null,
-        'model_class' => MediaPackageCategory::class,
-        'controller' => MediaPackageCategoryController::class,
-      ])
-  ;
-  $services->set('admin.block.mediapackage.file', MediaPackageFileAdmin::class)
-    ->tag('sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Files',
-        'code' => null,
-        'model_class' => MediaPackageFile::class,
         'controller' => null,
       ])
   ;

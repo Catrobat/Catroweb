@@ -1,0 +1,148 @@
+@import '../Layout/Variables';
+
+.category-section {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 2rem;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.asset-card {
+  position: relative;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+  }
+
+  &.selected {
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+}
+
+.asset-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 1.25rem;
+  color: var(--primary);
+  background: light-dark(#fff, #1a1a1a);
+  border-radius: 999px;
+  padding: 2px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.asset-card.selected .asset-check {
+  opacity: 1;
+}
+
+.asset-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  background-color: #f8f9fa;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .asset-icon {
+    font-size: 48px;
+    color: #6c757d;
+  }
+}
+
+.media-assets-row {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.media-asset-col {
+  flex: 0 0 auto;
+  width: clamp(120px, 40vw, 180px);
+  scroll-snap-align: start;
+}
+
+.media-assets-wrapper {
+  position: relative;
+}
+
+.media-assets-chevrons {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.25rem;
+  pointer-events: none;
+}
+
+.media-assets-chevron {
+  pointer-events: auto;
+  border: none;
+  background: light-dark(#fff, #1a1a1a);
+  color: var(--primary);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 15%);
+  opacity: 0.9;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.media-assets-chevron--right {
+  margin-left: auto;
+}
+
+@media (width <= 767.98px) {
+  .media-assets-chevrons {
+    display: none;
+  }
+}
+
+.medialib-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+#categories-container,
+#pagination-container {
+  opacity: 0;
+  animation: fade-in 0.3s forwards;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,51 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('media_library_overview_page') }}
+{% endblock %}
+
+{% block top_bar_page_title %}{{ 'media-packages.title'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <p>{{ 'media-packages.description'|trans({}, 'catroweb') }}</p>
+
+    <div id="loading-spinner" class="medialib-spinner">
+      {{ include('Components/LoadingSpinner.html.twig') }}
+    </div>
+
+    <div id="categories-container" style="display: none;">
+      <!-- Categories will be loaded dynamically -->
+    </div>
+
+    <div id="pagination-container" class="d-flex justify-content-center mt-4" style="display: none;">
+      <!-- Pagination will be loaded dynamically -->
+    </div>
+
+    <div id="no-categories" class="alert alert-info mt-4" style="display: none;">
+      {{ 'media_library.no_categories'|trans({}, 'catroweb') }}
+    </div>
+  </div>
+
+  {%
+    set translations = {
+      assets_count: 'media_library.assets_count'|trans({}, 'catroweb'),
+      elementsSingular: 'element'|trans({}, 'catroweb'),
+      elementsPlural: 'elements'|trans({}, 'catroweb'),
+      no_results: 'media_library.no_results'|trans({}, 'catroweb'),
+      view_all: 'media_library.view_all'|trans({}, 'catroweb'),
+    }
+  %}
+
+  <div class="js-media-library-overview"
+       data-path-media-library-api="{{ path('open_api_server_mediaLibrary_medialibraryget') }}"
+       data-path-media-assets-api="{{ path('open_api_server_mediaLibrary_mediaassetsget') }}"
+       data-path-media-category-web="{{ path('media_library_category', {id: 'CATEGORY-ID'}) }}"
+       data-translations="{{ translations|json_encode() }}"
+       data-theme="{{ theme }}"
+  ></div>
+{% endblock %}
+
+{% block javascript %}
+  {{ encore_entry_script_tags('media_library_overview_page') }}
+{% endblock %}

@@ -38,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
   public const string ROLE_DEFAULT = 'ROLE_USER';
   public const string ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+  public const string ROLE_MEDIA_ADMIN = 'ROLE_MEDIA_ADMIN';
 
   public static string $SCRATCH_PREFIX = 'Scratch:';
 

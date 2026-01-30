@@ -195,7 +195,7 @@ class NotificationsController extends Controller
   /**
    * Operation notificationsGet.
    *
-   * Get user notifications -- StatusCode: 501 - Not yet implemented
+   * Get user notifications
    *
    * @param Request $request the Symfony request to handle
    *

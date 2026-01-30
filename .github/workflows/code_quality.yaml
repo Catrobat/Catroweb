@@ -167,12 +167,12 @@ jobs:
       - name: PHP Copy Paste Detector
         uses: StephaneBour/actions-php-cpd@8.2
         with:
-          args: --exclude=src/Api/OpenAPI/Server src
+          args: --exclude=src/Api/OpenAPI/Server --exclude=src/DB/Entity src
 
   #
   # phpdd (Php Code Fixer):
   #
-  #  - to search issues with deprecated functionality in newer interpreter versions..
+  #  - to search issues with deprecated functionality in newer interpreter versions.
   #  - More information at: https://github.com/wapmorgan/PhpDeprecationDetector
   #
   #  phpdd:
