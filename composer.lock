@@ -7677,16 +7677,16 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v7.4.4",
+            "version": "v7.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "dbbaba1cc65ccfa29106e931f68b51cd2f4b32bb"
+                "reference": "76a02cddca45a5254479ad68f9fa274ead0a7ef2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/dbbaba1cc65ccfa29106e931f68b51cd2f4b32bb",
-                "reference": "dbbaba1cc65ccfa29106e931f68b51cd2f4b32bb",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/76a02cddca45a5254479ad68f9fa274ead0a7ef2",
+                "reference": "76a02cddca45a5254479ad68f9fa274ead0a7ef2",
                 "shasum": ""
             },
             "require": {
@@ -7737,7 +7737,7 @@
             "description": "Allows you to standardize and centralize the way objects are constructed in your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/dependency-injection/tree/v7.4.4"
+                "source": "https://github.com/symfony/dependency-injection/tree/v7.4.5"
             },
             "funding": [
                 {
@@ -7757,7 +7757,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-01-23T12:59:19+00:00"
+            "time": "2026-01-27T16:16:02+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -11990,16 +11990,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v7.4.3",
+            "version": "v7.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "7ef27c65d78886f7599fdd5c93d12c9243ecf44d"
+                "reference": "bfde13711f53f549e73b06d27b35a55207528877"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/7ef27c65d78886f7599fdd5c93d12c9243ecf44d",
-                "reference": "7ef27c65d78886f7599fdd5c93d12c9243ecf44d",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/bfde13711f53f549e73b06d27b35a55207528877",
+                "reference": "bfde13711f53f549e73b06d27b35a55207528877",
                 "shasum": ""
             },
             "require": {
@@ -12066,7 +12066,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v7.4.3"
+                "source": "https://github.com/symfony/translation/tree/v7.4.4"
             },
             "funding": [
                 {
@@ -12086,7 +12086,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-29T09:31:36+00:00"
+            "time": "2026-01-13T10:40:19+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -15043,33 +15043,33 @@
         },
         {
             "name": "dvdoug/behat-code-coverage",
-            "version": "v5.4.0",
+            "version": "v5.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dvdoug/behat-code-coverage.git",
-                "reference": "60cf243a2d846445cfec89fda137601d2a7ef0b7"
+                "reference": "091fbdeda57a8b27785de5643266000c7fa94d54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/60cf243a2d846445cfec89fda137601d2a7ef0b7",
-                "reference": "60cf243a2d846445cfec89fda137601d2a7ef0b7",
+                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/091fbdeda57a8b27785de5643266000c7fa94d54",
+                "reference": "091fbdeda57a8b27785de5643266000c7fa94d54",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": "^3.15",
+                "behat/behat": "^3.27",
                 "composer-runtime-api": "^2.0",
                 "composer/semver": "^3.0",
                 "php": "^8.3",
-                "phpunit/php-code-coverage": "^12.3",
-                "symfony/config": "^5.4.35||^6.3.12||^7.0.3",
-                "symfony/console": "^5.4.35||^6.3.12||^7.0.3",
-                "symfony/dependency-injection": "^5.3.35||^6.3.12||^7.0.3",
-                "symfony/event-dispatcher": "^5.4.35||^6.3.12||^7.0.3"
+                "phpunit/php-code-coverage": "^12.3||^13.0",
+                "symfony/config": "^5.4.45||^6.4.24||^7.3",
+                "symfony/console": "^5.4.45||^6.4.24||^7.3",
+                "symfony/dependency-injection": "^5.4.45||^6.4.24||^7.3",
+                "symfony/event-dispatcher": "^5.4.45||^6.4.24||^7.0.3"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.49.0",
-                "phpunit/phpunit": "^10.5.27||^11.4.3||^12.0",
-                "symfony/filesystem": "^5.4.35||^6.3.12||^7.0.3"
+                "friendsofphp/php-cs-fixer": "^3.88.2",
+                "phpunit/phpunit": "^12.3||^13.0",
+                "symfony/filesystem": "^5.4.45||^6.4.24||^7.3"
             },
             "suggest": {
                 "ext-pcov": "PCOV allows you to collect line coverage only, but is faster than Xdebug",
@@ -15109,7 +15109,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dvdoug/behat-code-coverage/issues",
-                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.4.0"
+                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.4.1"
             },
             "funding": [
                 {
@@ -15117,7 +15117,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-09T19:23:30+00:00"
+            "time": "2026-02-07T19:53:16+00:00"
         },
         {
             "name": "evenement/evenement",
@@ -16541,16 +16541,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "12.5.2",
+            "version": "12.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "4a9739b51cbcb355f6e95659612f92e282a7077b"
+                "reference": "b015312f28dd75b75d3422ca37dff2cd1a565e8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/4a9739b51cbcb355f6e95659612f92e282a7077b",
-                "reference": "4a9739b51cbcb355f6e95659612f92e282a7077b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/b015312f28dd75b75d3422ca37dff2cd1a565e8d",
+                "reference": "b015312f28dd75b75d3422ca37dff2cd1a565e8d",
                 "shasum": ""
             },
             "require": {
@@ -16606,7 +16606,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.5.2"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.5.3"
             },
             "funding": [
                 {
@@ -16626,7 +16626,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-24T07:03:04+00:00"
+            "time": "2026-02-06T06:01:44+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
