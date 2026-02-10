@@ -319,7 +319,7 @@ export class OwnProjectList {
 
     const shareButton = document.querySelector('#project-share-action')
 
-    if (navigator.share) {
+    if (navigator.share && shareButton) {
       shareButton.addEventListener('click', function () {
         navigator
           .share({
