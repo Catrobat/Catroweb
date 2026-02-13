@@ -75,3 +75,46 @@ docker compose exec app php bin/console <command>
 
 Example:
 docker compose exec app php bin/console doctrine:migrations:migrate
+
+
+---
+
+## Windows Users – Important Notes
+
+If you are setting up Catroweb on Windows using Docker, please check the following:
+
+### 1. Make Sure Docker Desktop is Running
+
+Before running any docker commands, ensure Docker Desktop is started.
+
+Check with:
+
+docker info
+
+---
+
+### 2. Fix Line Ending Issues (CRLF Problem)
+
+Windows may cause build errors because of CRLF line endings.
+
+To fix this, run:
+
+git config --global core.autocrlf input
+
+Then re-clone the repository if needed.
+
+---
+
+### 3. Run Symfony Commands Inside Docker
+
+Do NOT run:
+
+php bin/console
+
+Instead use:
+
+docker compose exec php bin/console <command>
+
+Example:
+
+docker compose exec php bin/console doctrine:migrations:migrate
