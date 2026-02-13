@@ -12,6 +12,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<UserComment>
+ */
 class UserCommentRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

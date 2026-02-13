@@ -60,11 +60,6 @@ class RemixManagerTest extends TestCase
     $this->remix_manager = new RemixManager($this->entity_manager, $this->program_repository, $this->scratch_program_repository, $this->program_remix_repository, $program_remix_backward_repository, $scratch_program_remix_repository, $remix_graph_manipulator, $catro_notification_service);
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(RemixManager::class, $this->remix_manager);
-  }
-
   /**
    * @throws \Exception
    */
@@ -94,7 +89,6 @@ class RemixManagerTest extends TestCase
         $expected_id_of_first_program, $expected_name_of_first_program,
         $expected_description_of_first_program, $expected_username_of_first_program
       ): void {
-        $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
         $this->assertSame($expected_id_of_first_program, $scratch_project->getId());
         $this->assertSame($expected_name_of_first_program, $scratch_project->getName());
         $this->assertSame($expected_description_of_first_program, $scratch_project->getDescription());
@@ -123,7 +117,6 @@ class RemixManagerTest extends TestCase
       ->expects($this->atLeastOnce())
       ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
       ->willReturnCallback(function (ScratchProgram $scratch_project) use ($expected_id_of_first_program): void {
-        $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
         $this->assertSame($expected_id_of_first_program, $scratch_project->getId());
         $this->assertNull($scratch_project->getName());
         $this->assertNull($scratch_project->getDescription());
@@ -174,7 +167,6 @@ class RemixManagerTest extends TestCase
         $expected_description_of_first_program, $expected_username_of_first_program,
         $expected_id_of_second_program, $expected_name_of_second_program, $expected_username_of_second_program
       ): void {
-        $this->assertInstanceOf(ScratchProgram::class, $scratch_project);
         if ($scratch_project->getId() === $expected_id_of_first_program) {
           $this->assertSame($expected_name_of_first_program, $scratch_project->getName());
           $this->assertSame($expected_description_of_first_program, $scratch_project->getDescription());
@@ -222,17 +214,11 @@ class RemixManagerTest extends TestCase
 
     $first_parent_entity = $this->createMock(Program::class);
     $first_parent_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3570');
-    $first_parent_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $first_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
 
     $second_parent_entity = $this->createMock(Program::class);
     $second_parent_entity->expects($this->atLeastOnce())->method('getId')->willReturn('16267');
-    $second_parent_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $second_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
 
     $parent_data = [
       $first_parent_entity->getId() ?? 'first' => [
@@ -278,10 +264,7 @@ class RemixManagerTest extends TestCase
     $program_entity->expects($this->atLeastOnce())
       ->method('isInitialVersion')->willReturn(true)
     ;
-    $program_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $program_entity->method('getUser')->willReturn($this->createMock(User::class));
     $first_scratch_parent_id = '1';
     $second_scratch_parent_id = '2';
     $parent_data = [
@@ -418,10 +401,7 @@ class RemixManagerTest extends TestCase
     $parent_entity_of_both_parents->expects($this->atLeastOnce())
       ->method('getId')->willReturn('1')
     ;
-    $parent_entity_of_both_parents->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $parent_entity_of_both_parents->method('getUser')->willReturn($this->createMock(User::class));
 
     $entities = $this->getProgramEntityAndParents('4', '2', '3');
     $program_entity = $entities[0];
@@ -482,34 +462,22 @@ class RemixManagerTest extends TestCase
     $parent_entity_of_first_parent->expects($this->atLeastOnce())
       ->method('getId')->willReturn('1')
     ;
-    $parent_entity_of_first_parent->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $parent_entity_of_first_parent->method('getUser')->willReturn($this->createMock(User::class));
     $parent_entity_of_second_parent = $this->createMock(Program::class);
     $parent_entity_of_second_parent->expects($this->atLeastOnce())
       ->method('getId')->willReturn('2')
     ;
-    $parent_entity_of_second_parent->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $parent_entity_of_second_parent->method('getUser')->willReturn($this->createMock(User::class));
     $first_parent_entity = $this->createMock(Program::class);
     $first_parent_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn('3')
     ;
-    $first_parent_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $first_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
     $second_parent_entity = $this->createMock(Program::class);
     $second_parent_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn('4')
     ;
-    $second_parent_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $second_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
     $program_entity = $this->createMock(Program::class);
     $program_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn('5')
@@ -517,10 +485,7 @@ class RemixManagerTest extends TestCase
     $program_entity->expects($this->atLeastOnce())
       ->method('isInitialVersion')->willReturn(true)
     ;
-    $program_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $program_entity->method('getUser')->willReturn($this->createMock(User::class));
     $parent_data = [
       $first_parent_entity->getId() ?? 'first' => [
         'isScratch' => false,
@@ -577,10 +542,7 @@ class RemixManagerTest extends TestCase
     $parent_entity_of_first_parent->expects($this->atLeastOnce())
       ->method('getId')->willReturn('1')
     ;
-    $parent_entity_of_first_parent->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $parent_entity_of_first_parent->method('getUser')->willReturn($this->createMock(User::class));
 
     $entities = $this->getProgramEntityAndParents('4', '2', '3');
     $program_entity = $entities[0];
@@ -1244,13 +1206,11 @@ class RemixManagerTest extends TestCase
     }
 
     $this->program_repository
-      ->expects($this->any())
       ->method('find')
       ->willReturnCallback(static fn ($id) => $program_repository_find_map[$id] ?? null)
     ;
 
     $this->program_remix_repository
-      ->expects($this->any())
       ->method('findBy')
       ->willReturnCallback(static function ($criteria) use ($program_remix_repository_find_map) {
         $descendant_id = $criteria['descendant_id'] ?? null;
@@ -1304,10 +1264,7 @@ class RemixManagerTest extends TestCase
         ->method('getId')
         ->willReturn(strval($i))
       ;
-      $program_entity->expects($this->any())
-        ->method('getUser')
-        ->willReturn($this->createMock(User::class))
-      ;
+      $program_entity->method('getUser')->willReturn($this->createMock(User::class));
       if ($i === $amount) {
         $program_entity->expects($this->atLeastOnce())
           ->method('isInitialVersion')
@@ -1333,29 +1290,20 @@ class RemixManagerTest extends TestCase
     $program_entity->expects($this->atLeastOnce())
       ->method('isInitialVersion')->willReturn(true)
     ;
-    $program_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $program_entity->method('getUser')->willReturn($this->createMock(User::class));
 
     $first_parent_entity = $this->createMock(Program::class);
     $first_parent_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn($firstParentReturn)
     ;
-    $first_parent_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $first_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
 
     $second_parent_entity = $this->createMock(Program::class);
     $second_parent_entity->expects($this->atLeastOnce())
       ->method('getId')
       ->willReturn($secParentReturn)
     ;
-    $second_parent_entity->expects($this->any())
-      ->method('getUser')
-      ->willReturn($this->createMock(User::class))
-    ;
+    $second_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
 
     $array = [];
     $array[] = $program_entity;

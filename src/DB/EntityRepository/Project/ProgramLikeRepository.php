@@ -13,6 +13,9 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<ProgramLike>
+ */
 class ProgramLikeRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

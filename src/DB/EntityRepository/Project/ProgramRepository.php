@@ -21,6 +21,9 @@ use Elastica\Query\MatchQuery;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
+/**
+ * @extends ServiceEntityRepository<Program>
+ */
 class ProgramRepository extends ServiceEntityRepository
 {
   public function __construct(

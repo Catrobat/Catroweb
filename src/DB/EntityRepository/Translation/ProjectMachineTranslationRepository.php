@@ -11,6 +11,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<ProjectMachineTranslation>
+ */
 class ProjectMachineTranslationRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

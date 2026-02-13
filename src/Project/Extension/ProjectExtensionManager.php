@@ -101,27 +101,27 @@ class ProjectExtensionManager
     }
   }
 
-  protected function isAnArduinoProject(string $code_xml): bool
+  public function isAnArduinoProject(string $code_xml): bool
   {
     return str_contains($code_xml, '<brick type="Arduino');
   }
 
-  protected function isMultiplayerProject(string $code_xml): bool
+  public function isMultiplayerProject(string $code_xml): bool
   {
     return str_contains($code_xml, '<programMultiplayerVariableList>') && str_contains($code_xml, '</programMultiplayerVariableList>');
   }
 
-  protected function isAnEmbroideryProject(string $code_xml): bool
+  public function isAnEmbroideryProject(string $code_xml): bool
   {
     return str_contains($code_xml, '<brick type="StitchBrick">');
   }
 
-  protected function isAMindstormsProject(string $code_xml): bool
+  public function isAMindstormsProject(string $code_xml): bool
   {
     return 1 === preg_match('/\"legonxt|\"legoev3/i', $code_xml);
   }
 
-  protected function isAPhiroProject(string $code_xml): bool
+  public function isAPhiroProject(string $code_xml): bool
   {
     return str_contains($code_xml, '<brick type="Phiro');
   }

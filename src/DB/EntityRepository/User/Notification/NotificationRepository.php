@@ -12,6 +12,9 @@ use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<CatroNotification>
+ */
 class NotificationRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

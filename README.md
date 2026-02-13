@@ -65,13 +65,19 @@ Found a bug?
    👉 https://github.com/Catrobat/Catroweb/issues
 2. If it hasn’t been reported yet, open a new issue using the bug report template:  
    👉 https://github.com/Catrobat/Catroweb/issues/new?labels=bug&template=bug_report.md
+
 ## Running PHP Commands in Docker
 
 If you are using Docker, do NOT run `php` commands on host machine.
 
 Instead run:
 
+```
 docker compose exec app php bin/console <command>
+```
 
 Example:
+
+```
 docker compose exec app php bin/console doctrine:migrations:migrate
+```

@@ -76,11 +76,6 @@ json;
     $this->object->setProperties($this->properties);
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(HwiOauthUserProvider::class, $this->object);
-  }
-
   /**
    * @throws Exception
    */
@@ -110,7 +105,6 @@ json;
      * @var User $response
      */
     $response = $this->object->loadUserByOAuthUserResponse($response_test);
-    $this->assertInstanceOf(User::class, $response);
     $this->assertEquals('testuser', $response->getUsername());
     $this->assertEquals('test@localhost.org', $response->getEmail());
     $this->assertEquals('token', $response->getGoogleAccessToken());

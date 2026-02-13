@@ -25,7 +25,7 @@ class ParsedSceneTest extends TestCase
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_scene = $xml_properties->xpath('//scene');
-    Assert::assertNotFalse($xml_scene);
+    Assert::assertNotNull($xml_scene);
     $this->scene = new ParsedScene($xml_scene[0]);
   }
 

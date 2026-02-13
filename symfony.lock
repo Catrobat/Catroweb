@@ -166,12 +166,6 @@
     "elasticsearch/elasticsearch": {
         "version": "v6.7.2"
     },
-    "ezimuel/guzzlestreams": {
-        "version": "3.0.1"
-    },
-    "ezimuel/ringphp": {
-        "version": "1.1.2"
-    },
     "felixfbecker/language-server-protocol": {
         "version": "v1.4.0"
     },
@@ -337,9 +331,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.3.0"
-    },
-    "nyholm/dsn": {
-        "version": "2.0.1"
     },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
@@ -820,9 +811,6 @@
     "symfony/polyfill-php72": {
         "version": "v1.14.0"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.14.0"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.17.0"
     },
@@ -854,9 +842,6 @@
             "config/packages/routing.yaml",
             "config/routes.yaml"
         ]
-    },
-    "symfony/security-acl": {
-        "version": "v3.0.4"
     },
     "symfony/security-bundle": {
         "version": "4.4",

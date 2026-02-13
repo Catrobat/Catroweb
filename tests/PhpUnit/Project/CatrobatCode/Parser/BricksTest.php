@@ -106,7 +106,6 @@ class BricksTest extends TestCase
   public function testFactoryMustGenerateUnknownBrickOtherwise(): ?Brick
   {
     $brick_xml_properties = $this->brick_xml_properties_list[0];
-    // @phpstan-ignore-next-line
     $brick_xml_properties[Constants::TYPE_ATTRIBUTE] = 'Foo'; // Fake random script
     $actual = BrickFactory::generate($brick_xml_properties);
 

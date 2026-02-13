@@ -25,11 +25,6 @@ class NameValidatorEventListenerTest extends TestCase
     $this->name_validator = new NameValidatorEventListener();
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(NameValidatorEventListener::class, $this->name_validator);
-  }
-
   /**
    * @throws Exception
    */

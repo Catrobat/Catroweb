@@ -8,6 +8,9 @@ use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<ScratchProgramRemixRelation>
+ */
 class ScratchProgramRemixRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

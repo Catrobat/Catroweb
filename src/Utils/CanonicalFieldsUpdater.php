@@ -31,13 +31,11 @@ class CanonicalFieldsUpdater
     }
 
     $detectedOrder = mb_detect_order();
-    assert(is_array($detectedOrder));
-
-    $encoding = mb_detect_encoding($string, $detectedOrder, true);
+    // @phpstan-ignore-next-line
+    $encoding = mb_detect_encoding($string, is_array($detectedOrder) ? $detectedOrder : null, true);
 
     return false !== $encoding
             ? mb_convert_case($string, MB_CASE_LOWER, $encoding)
-            : mb_convert_case($string, MB_CASE_LOWER
-            );
+            : mb_convert_case($string, MB_CASE_LOWER);
   }
 }

@@ -46,6 +46,7 @@ class RefreshEnvironmentContext implements Context
   {
     try {
       // Check if already initialized by using reflection to avoid the assert() in Registry::get()
+      // @phpstan-ignore-next-line
       $reflection = new \ReflectionClass(Registry::class);
       $instanceProperty = $reflection->getProperty('instance');
       if (null !== $instanceProperty->getValue()) {
@@ -56,8 +57,11 @@ class RefreshEnvironmentContext implements Context
     }
 
     // Initialize with minimal configuration (using PHPUnit internals intentionally)
+    // @phpstan-ignore-next-line
     $cliConfiguration = (new CliConfigurationBuilder())->fromParameters([]);
+    // @phpstan-ignore-next-line
     $xmlConfiguration = DefaultConfiguration::create();
+    // @phpstan-ignore-next-line
     Registry::init($cliConfiguration, $xmlConfiguration);
   }
 
