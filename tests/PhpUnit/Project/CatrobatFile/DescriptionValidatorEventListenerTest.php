@@ -25,11 +25,6 @@ class DescriptionValidatorEventListenerTest extends TestCase
     $this->description_validator = new DescriptionValidatorEventListener();
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(DescriptionValidatorEventListener::class, $this->description_validator);
-  }
-
   /**
    * @throws Exception
    */

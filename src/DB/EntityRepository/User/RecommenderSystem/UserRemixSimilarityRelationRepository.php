@@ -11,6 +11,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<UserRemixSimilarityRelation>
+ */
 class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

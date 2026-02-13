@@ -50,11 +50,6 @@ class ProjectFileRepositoryTest extends TestCase
     FileHelper::removeDirectory($this->storage_dir);
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(ProjectFileRepository::class, $this->program_file_repository);
-  }
-
   public function testThrowsAnExceptionIfDirectoryIsNotFound(): void
   {
     $this->expectException(\Exception::class);

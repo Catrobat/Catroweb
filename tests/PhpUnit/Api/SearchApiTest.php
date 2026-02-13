@@ -6,19 +6,19 @@ namespace Tests\PhpUnit\Api;
 
 use App\Api\SearchApi;
 use App\Api\Services\Search\SearchApiFacade;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\SearchResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
  */
 #[CoversClass(SearchApi::class)]
-final class SearchApiTest extends DefaultTestCase
+final class SearchApiTest extends TestCase
 {
   protected SearchApi $search_api;
 

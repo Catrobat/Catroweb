@@ -248,6 +248,20 @@ docker exec app.catroweb bin/psalm src/Path/To/File.php
 docker exec app.catroweb bin/phpunit --filter ClassName
 ```
 
+Local equivalents (non-Docker):
+
+```bash
+composer run fix
+./bin/phpstan analyse
+./bin/psalm
+./bin/phpunit
+```
+
+Notes:
+
+- PHPUnit 13: avoid `expects($this->any())` and don't use `with()` without `expects()`. Prefer `method()` on stubs/mocks; if you need argument matching, use `createMock()` with explicit expectations.
+- PHPStan is configured to analyze `src/` only (tests are excluded to avoid PHPUnit static-analysis noise).
+
 **All four tools must pass before merging.**
 
 ## Behat Testing

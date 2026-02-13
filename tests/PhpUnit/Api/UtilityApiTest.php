@@ -9,19 +9,19 @@ use App\Api\Services\Utility\UtilityApiLoader;
 use App\Api\UtilityApi;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\System\Survey;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\SurveyResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
  */
 #[CoversClass(UtilityApi::class)]
-class UtilityApiTest extends DefaultTestCase
+class UtilityApiTest extends TestCase
 {
   protected UtilityApi $utility_api;
 

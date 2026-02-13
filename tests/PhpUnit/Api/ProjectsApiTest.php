@@ -20,7 +20,6 @@ use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
@@ -33,6 +32,7 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,7 +40,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @internal
  */
 #[CoversClass(ProjectsApi::class)]
-final class ProjectsApiTest extends DefaultTestCase
+final class ProjectsApiTest extends KernelTestCase
 {
   protected ProjectsApi $object;
 
@@ -196,7 +196,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->assertSame($project_name, $project->getName(), 'Project name not changed');
     $this->assertSame($project_description, $project->getDescription(), 'Project description not changed');
     $this->assertSame($project_credits, $project->getCredits(), 'Project credits not changed');
-    $this->assertSame(true, $project->getPrivate(), 'Project not set to private');
+    $this->assertTrue($project->getPrivate(), 'Project not set to private');
   }
 
   /**

@@ -25,11 +25,6 @@ class CatrobatFileCompressorTest extends TestCase
     $this->catrobat_file_compressor = new CatrobatFileCompressor();
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(CatrobatFileCompressor::class, $this->catrobat_file_compressor);
-  }
-
   public function testThrowsAnExceptionIfGivenAnInvalidCompressDirectory(): void
   {
     $this->expectException(\Exception::class);

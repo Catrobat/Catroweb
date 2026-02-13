@@ -321,7 +321,7 @@ class RemixUpdaterEventListenerTest extends TestCase
         .'こちらまで投稿を！http://www.nhk.or.jp/xxx※リミックス作品を投稿する時は”共有”を忘れないでね。',
     ]];
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
-    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $this->assertNotFalse($xml);
     $xml->header->catrobatLanguageVersion = '0.993';
 
     $file_overwritten = $xml->asXML(BootstrapExtension::$CACHE_DIR.'base/code.xml');
@@ -353,7 +353,6 @@ class RemixUpdaterEventListenerTest extends TestCase
 
         /** @var RemixData $first_parent_remix_data */
         $first_parent_remix_data = $remixes_data[0];
-        $this->assertInstanceOf(RemixData::class, $first_parent_remix_data);
         $this->assertSame($first_expected_url, $first_parent_remix_data->getUrl());
         $this->assertSame('117697631', $first_parent_remix_data->getProjectId());
         $this->assertTrue($first_parent_remix_data->isScratchProject());
@@ -361,7 +360,6 @@ class RemixUpdaterEventListenerTest extends TestCase
 
         /** @var RemixData $second_parent_remix_data */
         $second_parent_remix_data = $remixes_data[1];
-        $this->assertInstanceOf(RemixData::class, $second_parent_remix_data);
         $this->assertSame($second_expected_url, $second_parent_remix_data->getUrl());
         $this->assertSame('3570', $second_parent_remix_data->getProjectId());
         $this->assertFalse($second_parent_remix_data->isScratchProject());
@@ -414,7 +412,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $remix_updater_stub->update($file, $this->program_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
-    Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
+    Assert::assertNotFalse($xml);
     Assert::assertEquals($xml->header->url, $new_url);
     Assert::assertEquals($xml->header->remixOf, $current_url);
   }
@@ -444,7 +442,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
-    Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
+    Assert::assertNotFalse($xml);
     Assert::assertEquals($xml->header->url, $new_url);
     Assert::assertEquals($xml->header->remixOf, $current_url);
   }

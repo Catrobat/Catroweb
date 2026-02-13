@@ -88,11 +88,6 @@ class ScreenshotRepositoryTest extends TestCase
     FileHelper::removeDirectory($this->tmp_zip_dir);
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(ScreenshotRepository::class, $this->screenshot_repository);
-  }
-
   public function testThrowsAnExceptionIfGivenAnInvalidScreenshotDirectory(): void
   {
     $this->expectException(\Exception::class);

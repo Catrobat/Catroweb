@@ -19,8 +19,9 @@ class MediaCategoryRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return array<MediaCategory>
+   * @return list<MediaCategory>
    */
+  #[\Override]
   public function findAll(): array
   {
     return $this->findBy([], ['priority' => 'ASC', 'name' => 'ASC']);

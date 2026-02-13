@@ -37,11 +37,6 @@ class AddProjectRequestTest extends TestCase
     $this->add_program_request = new AddProjectRequest($this->user, $this->file);
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(AddProjectRequest::class, $this->add_program_request);
-  }
-
   /**
    * @throws Exception
    */

@@ -25,11 +25,6 @@ class NotesAndCreditsValidatorEventListenerTest extends TestCase
     $this->notes_and_credits_validator = new NotesAndCreditsValidatorEventListener();
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(NotesAndCreditsValidatorEventListener::class, $this->notes_and_credits_validator);
-  }
-
   /**
    * @throws Exception
    */

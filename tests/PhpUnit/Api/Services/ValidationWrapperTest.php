@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api\Services;
 
 use App\Api\Services\ValidationWrapper;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
  */
 #[CoversClass(ValidationWrapper::class)]
-final class ValidationWrapperTest extends DefaultTestCase
+final class ValidationWrapperTest extends TestCase
 {
   protected ValidationWrapper $object;
 
