@@ -89,7 +89,7 @@ function applyFilters() {
 
 function loadFileContent(file) {
   document.getElementById('loading-spinner').style.display = 'block'
-  document.getElementById('innerLogContainer').innerHTML = ''
+  document.getElementById('inner-log-container').innerHTML = ''
   document.getElementById('currentFileName').textContent = file
 
   fetch(`${window.location.href}?file=${file}&count=1000`)
@@ -103,8 +103,8 @@ function loadFileContent(file) {
       document.getElementById('loading-spinner').style.display = 'none'
       const tempDiv = document.createElement('div')
       tempDiv.innerHTML = data
-      document.getElementById('innerLogContainer').innerHTML =
-        tempDiv.querySelector('#innerLogContainer').innerHTML
+      document.getElementById('inner-log-container').innerHTML =
+        tempDiv.querySelector('#inner-log-container').innerHTML
 
       // Reinitialize event listeners for new content
       initializeColorScheme()

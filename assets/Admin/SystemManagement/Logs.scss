@@ -31,15 +31,15 @@ h5 {
 }
 
 // ===== Log Files Container =====
-#logFilesContainer {
+#log-files-container {
   margin: 1rem;
   padding: 1rem;
   background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
-.chipButton {
+.chip-button {
   background-color: #333;
   border: none;
   color: #fff;
@@ -54,7 +54,7 @@ h5 {
   &:hover {
     background-color: #495659;
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
   }
 
   &.files {
@@ -62,7 +62,7 @@ h5 {
   }
 }
 
-ul#logFiles {
+ul#log-files {
   list-style-type: none;
   padding-left: 0;
   display: flex;
@@ -75,12 +75,12 @@ ul#logFiles {
 }
 
 // ===== Filter Container =====
-#filterContainer {
+#filter-container {
   margin: 1rem;
   padding: 1rem;
   background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .filter-controls {
@@ -177,16 +177,16 @@ ul#logFiles {
 }
 
 // ===== Log Container =====
-#outerLogContainer {
+#outer-log-container {
   display: flex;
   min-width: 100%;
   padding: 1rem;
   background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
   border-radius: 0.5rem;
 }
 
-#innerLogContainer {
+#inner-log-container {
   width: 70%;
   padding: 1rem;
   overflow-y: auto;
@@ -198,11 +198,11 @@ ul#logFiles {
   margin-bottom: 0.75rem;
   border-radius: 0.375rem;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
   transition: box-shadow 0.2s;
 
   &:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 15%);
   }
 }
 
@@ -372,7 +372,7 @@ ul#logFiles {
   overflow-x: auto;
   margin: 0;
   white-space: pre-wrap;
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .log-stacktrace {
@@ -383,7 +383,7 @@ ul#logFiles {
 }
 
 // ===== Current File Container =====
-#currentFileContainer {
+#current-file-container {
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -391,7 +391,7 @@ ul#logFiles {
   border-left: 2px solid #dee2e6;
 
   h5 {
-    margin: 0 0 1rem 0;
+    margin: 0 0 1rem;
     text-align: right;
     font-size: 0.9rem;
 
@@ -402,7 +402,7 @@ ul#logFiles {
   }
 
   form {
-    margin: 0 0 1rem 0;
+    margin: 0 0 1rem;
     text-align: right;
   }
 }
@@ -420,7 +420,7 @@ ul#logFiles {
   &:hover {
     background-color: #218838;
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
   }
 
   &:active {

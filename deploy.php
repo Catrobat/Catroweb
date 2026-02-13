@@ -91,14 +91,16 @@ task('restart:php-fpm', function () {
   run('sudo /usr/sbin/service php8.5-fpm restart');
 });
 
-task('install:npm', function () {
+task('install:yarn', function () {
   cd('{{release_path}}');
-  run('npm install');
+  run('corepack enable');
+  run('corepack prepare yarn@4.12.0 --activate');
+  run('yarn install --immutable');
 });
 
 task('deploy:encore', function () {
   cd('{{release_path}}');
-  run('npm run prod');
+  run('yarn run prod');
 });
 
 task('deploy:jwt', function () {
@@ -156,7 +158,7 @@ task('deploy', [
   'deploy:cache:clear',
   'deploy:symlink',
   'database:migrate',
-  'install:npm',
+  'install:yarn',
   'deploy:encore',
   'deploy:jwt',
   'restart:nginx',
