@@ -105,6 +105,15 @@ Then re-clone the repository if needed.
 
 ---
 
+## Windows + Docker Setup Guide
+
+### 1. Start Docker Desktop
+Make sure Docker Desktop is running before executing any commands.
+
+### 2. Start the containers
+```bash
+docker compose up -d
+
 ### 3. Run Symfony Commands Inside Docker
 
 Do NOT run:
