@@ -69,12 +69,12 @@ services:
       #        A script doing exactly this can be found in `docker/app/import-container-libraries.sh`
       #
       #   - Option 2: Install Php and node.js locally.
-      #               Then just run composer install and npm install locally.
+      #               Then just run composer install and yarn install locally.
       #
       #        This option might be a bit redundant, but it also comes with benefits like locally installing
       #        new libraries. Especially installing node_modules in the container can be problematic (on windows).
-      #        Sharing package(-lock)?.json is not possible (on windows) due to file locks. There for the package files
-      #        must be copied out of the container manually after every npm install.
+      #        Sharing yarn.lock is not possible (on windows) due to file locks. There for the package files
+      #        must be copied out of the container manually after every yarn install.
       #        The drawback - using a wrong node / php version may result in errors or missing functionality
       #
       #
@@ -92,7 +92,8 @@ services:
       - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
       # sharing package files on windows might not work as expected
       - ./../package.json:/var/www/catroweb/package.json
-      - ./../package-lock.json:/var/www/catroweb/package-lock.json
+      - ./../yarn.lock:/var/www/catroweb/yarn.lock
+      - ./../.yarnrc.yml:/var/www/catroweb/.yarnrc.yml
 
   db.catroweb.dev:
     image: mariadb:10.11

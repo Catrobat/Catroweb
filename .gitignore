@@ -25,6 +25,8 @@ bin/
 
 ### Node ###
 node_modules/
+.yarn/
+.pnp.*
 
 ### public ###
 public/**

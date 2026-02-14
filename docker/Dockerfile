@@ -11,9 +11,10 @@ RUN --mount=type=cache,target=/tmp/composer-cache \
 # Use node image for better caching
 FROM node:lts AS node-build
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --no-audit --no-fund && npm install -g @symfony/webpack-encore
+COPY package.json yarn.lock .yarnrc.yml ./
+RUN corepack enable && corepack prepare yarn@4.12.0 --activate
+RUN --mount=type=cache,target=/root/.yarn/berry/cache \
+    yarn install --immutable
 
 # Run on:
 FROM debian:bullseye
@@ -47,10 +48,12 @@ RUN apt-get update && \
     apache2 \
     git \
     curl \
-    libgconf-2-4 \
-    npm && \
+    libgconf-2-4 && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -yq --no-install-recommends nodejs && \
+    corepack enable && \
+    corepack prepare yarn@4.12.0 --activate && \
     rm -rf /var/lib/apt/lists/*
-RUN npm install -g n && n lts
 
 # Overwrite default apache config
 RUN a2enmod rewrite
@@ -108,6 +111,6 @@ COPY --from=composer-build /app/bin bin
 RUN sh docker/app/prepare-test-env.sh
 
 # Run webpack encore to (re-)compile public css/js files
-RUN npm run dev
+RUN yarn run dev
 
 EXPOSE 80
