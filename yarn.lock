@@ -1343,7 +1343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/css-calc@npm:^3.0.0":
+"@csstools/css-calc@npm:^3.1.1":
   version: 3.1.1
   resolution: "@csstools/css-calc@npm:3.1.1"
   peerDependencies:
@@ -3925,7 +3925,7 @@ __metadata:
     sass-loader: "npm:^16.0.7"
     standard: "npm:^17.1.2"
     stimulus: "npm:^3.2.2"
-    stylelint: "npm:^17.2.0"
+    stylelint: "npm:^17.3.0"
     stylelint-config-standard-scss: "npm:^17.0.0"
     sweetalert2: "npm:^11.26.18"
     textfilljs: "npm:^1.0.3-a"
@@ -9442,7 +9442,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string-width@npm:^8.1.0":
+"string-width@npm:^8.1.1":
   version: 8.1.1
   resolution: "string-width@npm:8.1.1"
   dependencies:
@@ -9663,11 +9663,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:^17.2.0":
-  version: 17.2.0
-  resolution: "stylelint@npm:17.2.0"
+"stylelint@npm:^17.3.0":
+  version: 17.3.0
+  resolution: "stylelint@npm:17.3.0"
   dependencies:
-    "@csstools/css-calc": "npm:^3.0.0"
+    "@csstools/css-calc": "npm:^3.1.1"
     "@csstools/css-parser-algorithms": "npm:^4.0.0"
     "@csstools/css-syntax-patches-for-csstree": "npm:^1.0.26"
     "@csstools/css-tokenizer": "npm:^4.0.0"
@@ -9701,14 +9701,14 @@ __metadata:
     postcss-safe-parser: "npm:^7.0.1"
     postcss-selector-parser: "npm:^7.1.1"
     postcss-value-parser: "npm:^4.2.0"
-    string-width: "npm:^8.1.0"
+    string-width: "npm:^8.1.1"
     supports-hyperlinks: "npm:^4.4.0"
     svg-tags: "npm:^1.0.0"
     table: "npm:^6.9.0"
     write-file-atomic: "npm:^7.0.0"
   bin:
     stylelint: bin/stylelint.mjs
-  checksum: 10c0/97de2bd9801fc77f8c8b98add7b3d1072e68b3576e0d19a85142e3cca90ad216f1f03d3e5c23b1cde273503ec228aa88c9128a4b5a52e44a406e76b56101a81c
+  checksum: 10c0/94d136e4fe29bdf269613706fe19cfe0872de9c7d63c38c42d463be9ccec349b64a3a94539be73bc243a8e3ebdb20ca208b642725cfa7ba2e315dc2656575d51
   languageName: node
   linkType: hard
 
