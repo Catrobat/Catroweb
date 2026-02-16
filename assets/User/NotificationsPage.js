@@ -369,9 +369,7 @@ class UserNotifications {
     }
     if (['comment', 'reaction', 'remix', 'program'].includes(type)) {
       const safeId =
-        typeof id === 'string'
-          ? encodeURIComponent(id.replace(/[^A-Za-z0-9_-]/g, ''))
-          : ''
+        typeof id === 'string' ? encodeURIComponent(id.replace(/[^A-Za-z0-9_-]/g, '')) : ''
       window.location.assign(`project/${safeId}`)
     }
   }

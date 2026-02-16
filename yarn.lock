@@ -3918,6 +3918,7 @@ __metadata:
     lazysizes: "npm:^5.3.2"
     material-icons: "npm:^1.13.14"
     noop-webpack-plugin: "npm:^1.0.1"
+    postcss: "npm:^8.4.38"
     postcss-loader: "npm:^8.2.1"
     prettier: "npm:^3.8.1"
     purgecss-webpack-plugin: "npm:^8.0.0"
@@ -3931,6 +3932,7 @@ __metadata:
     textfilljs: "npm:^1.0.3-a"
     typeface-roboto: "npm:^1.1.13"
     vis: "npm:^4.21.0-EOL"
+    webpack: "npm:^5.95.0"
     webpack-bugsnag-plugins: "npm:^2.2.3"
     webpack-cli: "npm:^6.0.1"
     webpack-notifier: "npm:^1.15.0"
@@ -8480,7 +8482,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.14, postcss@npm:^8.4.40, postcss@npm:^8.4.47, postcss@npm:^8.5.6":
+"postcss@npm:^8.2.14, postcss@npm:^8.4.38, postcss@npm:^8.4.40, postcss@npm:^8.4.47, postcss@npm:^8.5.6":
   version: 8.5.6
   resolution: "postcss@npm:8.5.6"
   dependencies:
@@ -10365,7 +10367,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:>=5.95.0":
+"webpack@npm:>=5.95.0, webpack@npm:^5.95.0":
   version: 5.105.2
   resolution: "webpack@npm:5.105.2"
   dependencies:
