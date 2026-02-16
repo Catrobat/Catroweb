@@ -62,6 +62,7 @@
     "glob-all": "^3.3.1",
     "globals": "^17.3.0",
     "noop-webpack-plugin": "^1.0.1",
+    "postcss": "^8.4.38",
     "postcss-loader": "^8.2.1",
     "prettier": "^3.8.1",
     "purgecss-webpack-plugin": "^8.0.0",
@@ -71,6 +72,7 @@
     "stimulus": "^3.2.2",
     "stylelint": "^17.3.0",
     "stylelint-config-standard-scss": "^17.0.0",
+    "webpack": "^5.95.0",
     "webpack-bugsnag-plugins": "^2.2.3",
     "webpack-cli": "^6.0.1",
     "webpack-notifier": "^1.15.0"
