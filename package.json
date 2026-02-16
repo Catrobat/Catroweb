@@ -62,7 +62,7 @@
     "glob-all": "^3.3.1",
     "globals": "^17.3.0",
     "noop-webpack-plugin": "^1.0.1",
-    "postcss-loader": "^8.2.0",
+    "postcss-loader": "^8.2.1",
     "prettier": "^3.8.1",
     "purgecss-webpack-plugin": "^8.0.0",
     "sass": "^1.97.3",
