@@ -75,10 +75,6 @@ docker compose exec app php bin/console <command>
 
 Example:
 docker compose exec app php bin/console doctrine:migrations:migrate
-<<<<<<< HEAD
-
-
----
 
 ## Windows Users – Important Notes
 
@@ -128,5 +124,3 @@ docker compose exec php bin/console <command>
 Example:
 
 docker compose exec php bin/console doctrine:migrations:migrate
-=======
->>>>>>> 2c733156e (Docs: clarify Windows Docker setup and CLI usage)
