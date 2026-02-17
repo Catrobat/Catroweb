@@ -14,7 +14,6 @@ use App\Api\Services\MediaLibrary\MediaLibraryResponseManager;
 use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
 use App\DB\Entity\User\User;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\MediaAssetResponse;
 use OpenAPI\Server\Model\MediaAssetsResponse;
 use OpenAPI\Server\Model\MediaAssetUpdateRequest;
@@ -27,6 +26,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,7 +34,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @internal
  */
 #[CoversClass(MediaLibraryApi::class)]
-final class MediaLibraryApiTest extends DefaultTestCase
+final class MediaLibraryApiTest extends TestCase
 {
   protected MediaLibraryApi $api;
 

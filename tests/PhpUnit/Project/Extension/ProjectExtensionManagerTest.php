@@ -7,13 +7,13 @@ namespace Tests\PhpUnit\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Extension\ProjectExtensionManager;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -25,7 +25,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 #[CoversClass(ProjectExtensionManager::class)]
 #[AllowMockObjectsWithoutExpectations]
-class ProjectExtensionManagerTest extends DefaultTestCase
+class ProjectExtensionManagerTest extends TestCase
 {
   protected ExtractedCatrobatFile $extracted_catrobat_file_with_extensions;
 
@@ -79,16 +79,13 @@ class ProjectExtensionManagerTest extends DefaultTestCase
     $this->object->addExtensions($this->extracted_catrobat_file_with_extensions, $program);
   }
 
-  /**
-   * @throws \ReflectionException
-   */
   #[Group('unit')]
   #[DataProvider('provideIsAnEmbroideryProjectData')]
   public function testIsAnEmbroideryProject(string $code_xml, bool $expected): void
   {
     $this->assertEquals(
       $expected,
-      $this->invokeMethod($this->object, 'isAnEmbroideryProject', [$code_xml])
+      $this->object->isAnEmbroideryProject($code_xml)
     );
   }
 
@@ -109,7 +106,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   {
     $this->assertEquals(
       $expected,
-      $this->invokeMethod($this->object, 'isAMindstormsProject', [$code_xml])
+      $this->object->isAMindstormsProject($code_xml)
     );
   }
 
@@ -131,7 +128,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   {
     $this->assertEquals(
       $expected,
-      $this->invokeMethod($this->object, 'isAPhiroProject', [$code_xml])
+      $this->object->isAPhiroProject($code_xml)
     );
   }
 

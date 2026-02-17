@@ -8,19 +8,19 @@ use App\Api\NotificationsApi;
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Notifications\NotificationsApiFacade;
 use App\DB\Entity\User\User;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\NotificationsCountResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
  */
 #[CoversClass(NotificationsApi::class)]
-class NotificationsApiTest extends DefaultTestCase
+class NotificationsApiTest extends TestCase
 {
   protected NotificationsApi $object;
 

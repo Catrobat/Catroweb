@@ -72,9 +72,13 @@ If you are using Docker, do NOT run `php` commands on host machine.
 
 Instead run:
 
+```
 docker compose exec app php bin/console <command>
+```
 
 Example:
+
+```
 docker compose exec app php bin/console doctrine:migrations:migrate
 
 ## Windows Users – Important Notes

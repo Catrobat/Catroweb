@@ -6,16 +6,16 @@ namespace Tests\PhpUnit\Api\Services\Base;
 
 use App\Api\Exceptions\ApiException;
 use App\Api\Services\Base\BearerAuthenticationTrait;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
  */
 #[CoversClass(BearerAuthenticationTraitTestClass::class)]
-final class BearerAuthenticationTraitTest extends DefaultTestCase
+final class BearerAuthenticationTraitTest extends TestCase
 {
   protected BearerAuthenticationTraitTestClass $object;
 

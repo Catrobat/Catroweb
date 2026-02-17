@@ -11,6 +11,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<ProgramRemixRelation>
+ */
 class ProgramRemixRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

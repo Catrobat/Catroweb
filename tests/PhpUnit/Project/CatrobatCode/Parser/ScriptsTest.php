@@ -36,7 +36,7 @@ class ScriptsTest extends TestCase
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_script = $xml_properties->xpath('//script');
-    Assert::assertNotFalse($xml_script);
+    Assert::assertNotNull($xml_script);
     $this->script_xml_properties_list = $xml_script;
   }
 
@@ -81,7 +81,6 @@ class ScriptsTest extends TestCase
 
     $reference_output =
       file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/script_reference.output', FILE_IGNORE_NEW_LINES);
-    Assert::assertNotFalse($reference_output);
 
     $reference_output_index = 0;
 
@@ -89,7 +88,7 @@ class ScriptsTest extends TestCase
     Assert::assertNotFalse($xml_properties);
 
     $xml_script = $xml_properties->xpath('//script');
-    Assert::assertNotFalse($xml_script);
+    Assert::assertNotNull($xml_script);
 
     foreach ($xml_script as $script_xml_properties) {
       $expected = [
@@ -115,7 +114,6 @@ class ScriptsTest extends TestCase
   public function testFactoryMustGenerateUnknownScriptOtherwise(): ?Script
   {
     $script_xml_properties = $this->script_xml_properties_list[0];
-    // @phpstan-ignore-next-line
     $script_xml_properties[Constants::TYPE_ATTRIBUTE] = 'Foo'; // Fake random script
     $actual = ScriptFactory::generate($script_xml_properties);
 

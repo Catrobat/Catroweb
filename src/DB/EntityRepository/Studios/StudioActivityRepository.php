@@ -10,6 +10,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<StudioActivity>
+ */
 class StudioActivityRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

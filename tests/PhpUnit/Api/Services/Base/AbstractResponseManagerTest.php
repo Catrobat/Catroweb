@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api\Services\Base;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Service\JmsSerializer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
+use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -18,7 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @internal
  */
 #[CoversClass(AbstractResponseManager::class)]
-final class AbstractResponseManagerTest extends DefaultTestCase
+final class AbstractResponseManagerTest extends TestCase
 {
   protected AbstractResponseManagerTestClass $object;
 

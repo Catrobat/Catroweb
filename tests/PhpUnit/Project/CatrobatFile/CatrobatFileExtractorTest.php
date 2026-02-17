@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Project\CatrobatFile;
 
 use App\Project\CatrobatFile\CatrobatFileExtractor;
-use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -26,11 +25,6 @@ class CatrobatFileExtractorTest extends TestCase
     $this->catrobat_file_extractor = new CatrobatFileExtractor(BootstrapExtension::$CACHE_DIR, '/webpath');
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(CatrobatFileExtractor::class, $this->catrobat_file_extractor);
-  }
-
   public function testThrowsAnExceptionIfGivenAnValidExtractionDirectory(): void
   {
     $this->expectException(\Exception::class);
@@ -42,9 +36,9 @@ class CatrobatFileExtractorTest extends TestCase
    */
   public function testExtractsAValidFile(): void
   {
+    self::expectNotToPerformAssertions();
     $valid_catrobat_file = new File(BootstrapExtension::$FIXTURES_DIR.'/test.catrobat');
-    $extracted_file = $this->catrobat_file_extractor->extract($valid_catrobat_file);
-    $this->assertInstanceOf(ExtractedCatrobatFile::class, $extracted_file);
+    $this->catrobat_file_extractor->extract($valid_catrobat_file);
   }
 
   /**

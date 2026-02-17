@@ -9,6 +9,9 @@ use App\DB\Entity\Translation\ProjectCustomTranslation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<ProjectCustomTranslation>
+ */
 class ProjectCustomTranslationRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $manager_registry)

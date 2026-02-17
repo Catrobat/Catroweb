@@ -26,11 +26,6 @@ class ProjectXmlHeaderValidatorEventListenerTest extends TestCase
     $this->program_xml_header_validator = new ProjectXmlHeaderValidatorEventListener();
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(ProjectXmlHeaderValidatorEventListener::class, $this->program_xml_header_validator);
-  }
-
   /**
    * @throws Exception
    */
@@ -38,7 +33,7 @@ class ProjectXmlHeaderValidatorEventListenerTest extends TestCase
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/code.xml');
-    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $this->assertNotFalse($xml);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->program_xml_header_validator->validate($file);
   }
@@ -50,7 +45,7 @@ class ProjectXmlHeaderValidatorEventListenerTest extends TestCase
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/code.xml');
-    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $this->assertNotFalse($xml);
     unset($xml->header);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
@@ -64,7 +59,7 @@ class ProjectXmlHeaderValidatorEventListenerTest extends TestCase
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/code.xml');
-    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $this->assertNotFalse($xml);
     unset($xml->header->applicationName);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
@@ -78,7 +73,7 @@ class ProjectXmlHeaderValidatorEventListenerTest extends TestCase
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'/base/code.xml');
-    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $this->assertNotFalse($xml);
     unset($xml->header->programName);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
@@ -92,7 +87,7 @@ class ProjectXmlHeaderValidatorEventListenerTest extends TestCase
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'/base/code.xml');
-    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $this->assertNotFalse($xml);
     unset($xml->header->description);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);

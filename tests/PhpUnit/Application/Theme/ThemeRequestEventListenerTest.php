@@ -6,12 +6,12 @@ namespace Tests\PhpUnit\Application\Theme;
 
 use App\Application\Theme\ThemeRequestEventListener;
 use App\DB\Entity\Flavor;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\Utils\RequestHelper;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ use Symfony\Component\Routing\RouterInterface;
  * @internal
  */
 #[CoversClass(ThemeRequestEventListener::class)]
-class ThemeRequestEventListenerTest extends DefaultTestCase
+class ThemeRequestEventListenerTest extends TestCase
 {
   protected ThemeRequestEventListener $object;
 
@@ -233,13 +233,12 @@ class ThemeRequestEventListenerTest extends DefaultTestCase
     }
 
     if (null !== $attributes) {
-      $this->mockProperty(Request::class, $request, 'attributes', $attributes);
+      $reflection = new \ReflectionClass(Request::class);
+      $property = $reflection->getProperty('attributes');
+      $property->setValue($request, $attributes);
     }
 
-    $event->expects($this->any())
-      ->method('getRequest')
-      ->willReturn($request)
-    ;
+    $event->method('getRequest')->willReturn($request);
 
     return $event;
   }

@@ -15,21 +15,21 @@ We use OpenAPI for the following reasons:
 
 ## How to Run the OpenAPI Generation
 
-To generate the OpenAPI code (e.g., client libraries, server stubs, etc.), you need to use the OpenAPI generator. This process is handled by the `npm run generate-api` script.
+To generate the OpenAPI code (e.g., client libraries, server stubs, etc.), you need to use the OpenAPI generator. This process is handled by the `yarn run generate-api` script.
 
 ### Prerequisites
 
-- **Node.js and npm**: You need to have Node.js and npm (Node Package Manager) installed to run the generator.
+- **Node.js and Corepack (Yarn)**: You need to have Node.js with Corepack enabled to run the generator.
 - **OpenAPI Generator**: We use the OpenAPI Generator to generate API code and documentation. It's a popular tool that works with the OpenAPI specification.
 
 ### Steps to Run OpenAPI Generation
 
 1. **Install Dependencies**
 
-   Make sure you have all the required dependencies installed. If you haven't installed them already, run the following command to install the necessary npm packages:
+   Make sure you have all the required dependencies installed. If you haven't installed them already, run the following command to install the necessary yarn packages:
 
    ```bash
-   npm install
+   yarn install
    composer install
    ```
 
@@ -38,7 +38,7 @@ To generate the OpenAPI code (e.g., client libraries, server stubs, etc.), you n
    To generate the API server, simply run the following command. Old files will be overwritten with the new ones
 
    ```bash
-   npm run generate-api
+   yarn run generate-api
    ```
 
 ### Breaking Changes in the OpenAPI Spec
