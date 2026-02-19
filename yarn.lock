@@ -1210,15 +1210,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bugsnag/browser-performance@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@bugsnag/browser-performance@npm:3.2.0"
+"@bugsnag/browser-performance@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "@bugsnag/browser-performance@npm:3.4.1"
   dependencies:
     "@bugsnag/core-performance": "npm:^3.2.0"
     "@bugsnag/cuid": "npm:^3.1.1"
     "@bugsnag/delivery-fetch-performance": "npm:^3.2.0"
     "@bugsnag/request-tracker-performance": "npm:^3.2.0"
-  checksum: 10c0/5f987e93d70b20e2d682f59fd2c37def7a2db0cf377e9e7a5ac7232db34a8f329d76b66891d719987f2c06c7114431d2416848bb1a9e44e084678b4b724f2e92
+  checksum: 10c0/16816c90f092d8a71657c9c28de62997cf9ab91e14c720f70d26cb7a820fb7afe3c5496f370cbcabf3583b7058189a926c6acfdf178687548ee25fbbb6e1ad1e
   languageName: node
   linkType: hard
 
@@ -3860,7 +3860,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.28.6"
     "@babel/plugin-proposal-class-properties": "npm:^7.18.6"
     "@babel/preset-env": "npm:^7.29.0"
-    "@bugsnag/browser-performance": "npm:^3.2.0"
+    "@bugsnag/browser-performance": "npm:^3.4.1"
     "@bugsnag/js": "npm:^8.8.1"
     "@eslint/js": "npm:^9.39.2"
     "@hotwired/stimulus": "npm:^3.2.2"
