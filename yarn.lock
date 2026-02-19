@@ -2493,9 +2493,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openapitools/openapi-generator-cli@npm:^2.28.3":
-  version: 2.28.3
-  resolution: "@openapitools/openapi-generator-cli@npm:2.28.3"
+"@openapitools/openapi-generator-cli@npm:^2.29.0":
+  version: 2.29.0
+  resolution: "@openapitools/openapi-generator-cli@npm:2.29.0"
   dependencies:
     "@nestjs/axios": "npm:4.0.1"
     "@nestjs/common": "npm:11.1.13"
@@ -2508,7 +2508,7 @@ __metadata:
     concurrently: "npm:9.2.1"
     console.table: "npm:0.10.0"
     fs-extra: "npm:11.3.3"
-    glob: "npm:13.0.1"
+    glob: "npm:13.0.3"
     inquirer: "npm:8.2.7"
     proxy-agent: "npm:6.5.0"
     reflect-metadata: "npm:0.2.2"
@@ -2516,7 +2516,7 @@ __metadata:
     tslib: "npm:2.8.1"
   bin:
     openapi-generator-cli: main.js
-  checksum: 10c0/aabab864a46a9a453a7d7c89c7c7de071d782537d4a08b6ca47a4ddb90db732f1fa47dd22079a0de7610e42e4237950ecc8ff27e3220889dd628e77972d6b72a
+  checksum: 10c0/eb2f8c86dde295c5e4e0effe9bef446242c92b68dc8272cdf640551758be2e90e073690e5855fe7a519589bb61ba0ba6265541b98d56e3d413e268fdc58f05f9
   languageName: node
   linkType: hard
 
@@ -3887,7 +3887,7 @@ __metadata:
     "@material/tab-scroller": "npm:^14.0.0"
     "@material/textfield": "npm:^14.0.0"
     "@material/top-app-bar": "npm:^14.0.0"
-    "@openapitools/openapi-generator-cli": "npm:^2.28.3"
+    "@openapitools/openapi-generator-cli": "npm:^2.29.0"
     "@popperjs/core": "npm:^2.11.8"
     "@symfony/stimulus-bridge": "npm:^4.0.1"
     "@symfony/webpack-encore": "npm:^5.3.1"
@@ -5967,18 +5967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:13.0.1":
-  version: 13.0.1
-  resolution: "glob@npm:13.0.1"
-  dependencies:
-    minimatch: "npm:^10.1.2"
-    minipass: "npm:^7.1.2"
-    path-scurry: "npm:^2.0.0"
-  checksum: 10c0/af7b863dec8dff74f61d7d6e53104e1f6bbdd482157a196cade8ed857481e876ec35181b38a059b2a7b93ea3b08248f4ff0792fef6dc91814fd5097a716f48e4
-  languageName: node
-  linkType: hard
-
-"glob@npm:^13.0.0":
+"glob@npm:13.0.3, glob@npm:^13.0.0":
   version: 13.0.3
   resolution: "glob@npm:13.0.3"
   dependencies:
@@ -7432,7 +7421,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^10.1.2, minimatch@npm:^10.2.0":
+"minimatch@npm:^10.2.0":
   version: 10.2.0
   resolution: "minimatch@npm:10.2.0"
   dependencies:
