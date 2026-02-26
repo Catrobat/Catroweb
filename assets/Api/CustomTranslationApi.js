@@ -80,7 +80,7 @@ export class CustomTranslationApi {
 
       return await response.json()
     } catch (error) {
-      throw new Error(`Error fetching languages: ${error.message}`)
+      throw new Error(`Error fetching languages: ${error.message}`, { cause: error })
     }
   }
 }
