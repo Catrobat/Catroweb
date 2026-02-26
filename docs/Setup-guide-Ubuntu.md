@@ -14,7 +14,6 @@ git pull catroweb develop
 Then run this script: `./bin/initial_setup.sh`
 Just use root as the new DB password, and also answer Y to all DB related questions :)
 
-
 ```
 #!/bin/bash
 
@@ -121,29 +120,32 @@ echo "Setup complete. You can now access the project at http://catroweb"
 
 ---- Or manually:
 
-
 ### 1. Setup operating system
 
 Download and install **Ubuntu** from [here.](http://www.ubuntu.com/) You need Ubuntu 24.04 or higher to install MariaDB from apt for this step to work smoothly! Also works with WSL, just visit the Microsoft Store.
 
 If you are already using an old Ubuntu version, here is a quick how-to upgrade:
-  ```
+
+```
 sudo apt update
 sudo apt upgrade
 sudo do-release-upgrade
-  ```
+```
+
 _(if this command fails, you have to open the file /etc/update-manager/release-upgrades with Sudo rights and change promt=lts to promt=normal)_
 _Follow the installation guide (several times pressing y)_
 
-### 2. Install prerequisites: 
-  ```
+### 2. Install prerequisites:
+
+```
 sudo apt install php8.5-common php8.5-ldap php8.5-cli php8.5-curl php8.5-intl php8.5-apcu php8.5-imagick php8.5-mbstring php8.5-xml php8.5-fpm php8.5-mysql php8.5-gd php8.5-zip
 sudo apt install apache2 curl npm composer acl
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 nvm install node
-  ```
+```
 
 #### Install and Setup Git
+
 ```
 sudo apt install git
 git config --global user.name "user_name"
@@ -155,31 +157,35 @@ git config --global user.email "email_id"
 ```
 sudo apt install mariadb-server
 ```
+
 ```
 sudo mysql_secure_installation
 ```
+
 ```
 sudo apt install mariadb-client
 ```
 
-#### Configure and **set up MariaDb**: 
- 
-  ```
-  sudo phpenmod mbstring
-  sudo systemctl restart apache2
-  sudo mysql
-  update mysql.user set plugin='' where user='root';
-  update mysql.user set password=password('root') where user='root';
-  FLUSH PRIVILEGES;
-  create database catroweb_test;
-  create database catroweb_dev;
-  exit
-  ```
+#### Configure and **set up MariaDb**:
+
+```
+sudo phpenmod mbstring
+sudo systemctl restart apache2
+sudo mysql
+update mysql.user set plugin='' where user='root';
+update mysql.user set password=password('root') where user='root';
+FLUSH PRIVILEGES;
+create database catroweb_test;
+create database catroweb_dev;
+exit
+```
 
 Now you should be able to login to phpMyAdmin with **username**: root **passsword**: 'root'
 
 ### 4. Install **elasticsearch**
+
 https://ourcodeworld.com/articles/read/1508/how-to-install-elasticsearch-7-in-ubuntu-2004
+
 ```
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
@@ -188,16 +194,17 @@ sudo apt install elasticsearch
 sudo systemctl start elasticsearch
 sudo systemctl enable elasticsearch
 ```
-Check if it works with: 
+
+Check if it works with:
+
 ```
 curl -X GET "localhost:9200/?pretty"
 ```
 
-
 ### 5. Go to https://github.com/Catrobat/Catroweb and **fork** the repository
 
-
 ### 6. Setup Catroweb:
+
 ```
   git clone <your-forked-repo>
   cd Catroweb
@@ -206,50 +213,60 @@ curl -X GET "localhost:9200/?pretty"
   git pull catroweb develop
 ```
 
- ```
-  yarn install
-  composer install
-  php bin/console catrobat:reset --hard
-  yarn dev
-  ```
+```
+ yarn install
+ composer install
+ php bin/console catrobat:reset --hard
+ yarn dev
+```
 
 ### 8. Setup Apache :
-  ```
-  sudo ln -s PATH/TO/YOUR/CATROWEB_PUBLIC/FOLDER /var/www/catroweb
-  sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/catroweb.conf
-  ```
-   Edit the catroweb.conf file
-  ```
-  sudo gedit /etc/apache2/sites-available/catroweb.conf
-  ```
-to look like this:
-  ```
-        ...
- 
-	ServerName catroweb 
-	ServerAdmin webmaster@localhost 
-	DocumentRoot /var/www/catroweb 
-	<Directory /var/www/catroweb> 
-		DirectoryIndex /index.php 
-		FallbackResource /index.php 
-	</Directory>
-        SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-        ...
-  ```
 
-  Add at the top of the hosts file:
-  > 127.0.0.1                                  catroweb
-  ```
-  sudo gedit /etc/hosts
-  ```
-  Then set the correct configuration and restart apache2
-  ```
-  sudo a2dissite 000-default.conf
-  sudo a2ensite catroweb.conf
-  sudo service apache2 restart
-  ```
-  
-### 9.  Install **Google Chrome** for testing
+```
+sudo ln -s PATH/TO/YOUR/CATROWEB_PUBLIC/FOLDER /var/www/catroweb
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/catroweb.conf
+```
+
+Edit the catroweb.conf file
+
+```
+sudo gedit /etc/apache2/sites-available/catroweb.conf
+```
+
+to look like this:
+
+```
+      ...
+
+	ServerName catroweb
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/catroweb
+	<Directory /var/www/catroweb>
+		DirectoryIndex /index.php
+		FallbackResource /index.php
+	</Directory>
+      SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+      ...
+```
+
+Add at the top of the hosts file:
+
+> 127.0.0.1 catroweb
+
+```
+sudo gedit /etc/hosts
+```
+
+Then set the correct configuration and restart apache2
+
+```
+sudo a2dissite 000-default.conf
+sudo a2ensite catroweb.conf
+sudo service apache2 restart
+```
+
+### 9. Install **Google Chrome** for testing
+
 ```
 sudo apt install gdebi-core wget
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -257,8 +274,8 @@ sudo gdebi google-chrome-stable_current_amd64.deb
 ```
 
 ### 10. Go to the root of the project & and generate the ssh keys and set the **permissions**:
- 
-  ```
-  sh ./docker/app/init-jwt-config.sh
-  sh ./docker/app/set-permissions.sh
-  ```
+
+```
+sh ./docker/app/init-jwt-config.sh
+sh ./docker/app/set-permissions.sh
+```

@@ -15,7 +15,7 @@ Choose one setup approach:
 
 - Recommended: [Docker setup](./Docker.md)
 - Native Linux: [Ubuntu setup guide](./Setup-guide-Ubuntu.md)
-- Native macOS: [macOS setup guide](./Setup-guide-macOS-(native,-no-Docker).md)
+- Native macOS: [macOS setup guide](<./Setup-guide-macOS-(native,-no-Docker).md>)
 
 ## Development Guidelines
 
@@ -30,4 +30,4 @@ Before opening a pull request, review:
 Additional how-tos and cheat sheets are listed in:
 
 - [Tutorials](./Tutorials.md)
-- [_Sidebar index](./_Sidebar.md)
+- [\_Sidebar index](./_Sidebar.md)

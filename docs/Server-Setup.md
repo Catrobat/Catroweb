@@ -1,38 +1,42 @@
 ## Warning: Outdated!
 
 1. **Connect** (via SSH) to the server.
-     Make sure to replace 'username' and 'host' with the correct username and host!
+   Make sure to replace 'username' and 'host' with the correct username and host!
+
 ```
 ssh username@host
 ```
 
-2. **Install**: 
-  ```
-  sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
-  sudo apt update
-  sudo apt upgrade
-  sudo apt install php8.4-common php8.4-ldap php8.4-cli php8.4-curl php8.4-intl php-apcu php-imagick php-mbstring php8.4-gettext git curl nginx php8.4-fpm php8.4-mysql npm mariadb-server php8.4-gd php8.4-zip php8.4-xml php-bcmath
-  sudo apt autoremove 
-  sudo apt install -y unzip php-zip
-  ```
+2. **Install**:
 
-3. Configure and **set up MariaDb** + DB. 
-   Don't forget to create a different root password and optional a new user+password: 
- ```
-  sudo mysql
-  update mysql.user set plugin='' where user='root';
-  update mysql.user set password=password('root') where user='root';
+```
+sudo LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
+sudo apt update
+sudo apt upgrade
+sudo apt install php8.4-common php8.4-ldap php8.4-cli php8.4-curl php8.4-intl php-apcu php-imagick php-mbstring php8.4-gettext git curl nginx php8.4-fpm php8.4-mysql npm mariadb-server php8.4-gd php8.4-zip php8.4-xml php-bcmath
+sudo apt autoremove
+sudo apt install -y unzip php-zip
+```
 
-  CREATE USER 'catroweb' IDENTIFIED BY 'catroweb';
-  GRANT ALL PRIVILEGES ON * . * TO 'catroweb';
+3. Configure and **set up MariaDb** + DB.
+   Don't forget to create a different root password and optional a new user+password:
 
-  FLUSH PRIVILEGES;
+```
+ sudo mysql
+ update mysql.user set plugin='' where user='root';
+ update mysql.user set password=password('root') where user='root';
 
-  CREATE DATABASE catroweb;
-  ```
+ CREATE USER 'catroweb' IDENTIFIED BY 'catroweb';
+ GRANT ALL PRIVILEGES ON * . * TO 'catroweb';
+
+ FLUSH PRIVILEGES;
+
+ CREATE DATABASE catroweb;
+```
 
 4. To be able to use our **deploy script** the /etc/sudoers file needs to be updated. Add the following lines at the bottom of the file.
    Make sure to replace 'username' with the correct username!
+
 ```
 username ALL = (ALL:ALL) ALL
 username ALL = (www-data) NOPASSWD:/usr/bin/php*
@@ -42,6 +46,7 @@ username ALL = NOPASSWD:/usr/sbin/service php*
 ```
 
 5. Update the following values in the **/etc/php/X/fpm/php.ini** file. Make sure to replace X by the correct version number. (Eg. 8.1) Else the project upload will not work. Specify the values as you need them. The following are only example values!
+
 ```
 memory_limit = 2G
 post_max_size = 256M
@@ -49,10 +54,13 @@ upload_max_filesize = 256M
 ```
 
 6. Create the sites-available in the nginx config:
+
 ```
 sudo nano /etc/nginx/sites-available/catroweb
 ```
+
 with
+
 ```
 server {
     listen 80;
@@ -148,15 +156,18 @@ server {
     }
 }
 ```
+
 Make sure to update the php version number if needed!
 
 7. Now we enable the site
+
 ```
-sudo ln -s /etc/nginx/sites-available/catroweb /etc/nginx/sites-enabled 
+sudo ln -s /etc/nginx/sites-available/catroweb /etc/nginx/sites-enabled
 sudo rm /etc/nginx/sites-enabled/default
 ```
 
 8. Create our web folder and give the correct rights
+
 ```
 sudo mkdir /var/www/share
 sudo chmod -R 0777 /var/www/share
@@ -165,16 +176,11 @@ sudo chmod -R 0777 /var/www/share
 9. Deploy onto the server. For more details look into the "How to Deploy" section.
 
 Make sure to use the correct db name, and define a secret! Credentials can only be found on Confluence.
- (https://confluence.catrob.at/display/MAN/%5BCredentials%5D+Catroweb+Servers+Parameters#space-menu-link-content)
+(https://confluence.catrob.at/display/MAN/%5BCredentials%5D+Catroweb+Servers+Parameters#space-menu-link-content)
 
     The same accounts for the local .env files. (.env.dev.local  .env.prod.local).
     (E.g. the mail system -> https://confluence.catrob.at/display/MAN/%5BCredentials%5D+No-Reply+Mail)
 
- Those files keep the same content between every deployment and will not be overwritten!
+Those files keep the same content between every deployment and will not be overwritten!
 
 10. Now deploy again. It should work. Might need to restart the services on the server.
-
-
-
-    
- 

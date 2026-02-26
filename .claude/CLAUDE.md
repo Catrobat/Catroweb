@@ -8,8 +8,14 @@
 - Patterns that work vs patterns that don't
 - Correct tool/command usage discovered through trial and error
 - API quirks and workarounds
+- Documentation gaps or stale instructions found during implementation
 
 This ensures future sessions benefit from past discoveries. Also run `yarn run fix-asset` after updating.
+
+## Documentation Maintenance
+
+When code, tooling, workflows, or setup commands change, review related docs in `docs/`, `README.md`, and `.github/*.md`.
+Update any stale guidance in the same PR/branch instead of deferring doc fixes.
 
 ## Overview
 

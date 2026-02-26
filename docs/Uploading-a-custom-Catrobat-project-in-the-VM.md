@@ -4,11 +4,9 @@
 4. Invoke the import command: `bin/console catrobat:import ~/share_projects catroweb`
 5. The imported project should be now imported/uploaded, and owned by the used called catroweb.
 
-
 Using **docker** you need to move the projects first into the container:
+
 ```
 docker cp ~/share_projects app.catroweb:/var/www/catroweb/import_dir
 docker exec -it app.catroweb bin/console catrobat:import import_dir catroweb
 ```
-
-

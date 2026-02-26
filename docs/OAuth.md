@@ -3,14 +3,17 @@
 The HWIOAuthBundle is already installed and configured inside our project.
 If you want to add support for a new provider then first head to https://github.com/hwi/HWIOAuthBundle to check
 if the provider you want to add is currently supported in HWIOAuthBundle.
+
 ## Configure new resource owner
+
 In order to configure a new resource owner you should go to the hwi_oauth.yaml file.
 
 First add under fosub properties tag the following line:
 
-``your_provider_name: your_provider_name_id``
+`your_provider_name: your_provider_name_id`
 
 Then under the resource_owners tag add the following lines:
+
 ```
    hwi_oauth:
     resource_owners:
@@ -22,6 +25,7 @@ Then under the resource_owners tag add the following lines:
                 display: popup
                 csrf: true
 ```
+
 Some providers also allow to add scope as a parameter and some other parameters. If you want to check which parameters can be added for the specific provider please refer to the HWIOAuthBundle documentation and official OAuth documentation of the specific provider.
 
 Client Secrets and ID's can be created in the developers console of the selected resource owner. You should first head to the developers console of the resource owner that you want to add and create there application. When you create the app you will get client secret and ID and these should be stored in our env file in order that they can be accessed by HWIOAuthBundle
@@ -29,6 +33,7 @@ Client Secrets and ID's can be created in the developers console of the selected
 ## Configure oauth firewall
 
 In order to configure oauth firewall go to security.yaml file and under the oauth resource_owners tag add the login path:
+
 ```
          oauth:
                 remember_me: true
@@ -38,7 +43,9 @@ In order to configure oauth firewall go to security.yaml file and under the oaut
                     apple:              "/login/check-apple"
                     provider_name:      "login/check-your_provider_name"
 ```
-After this you will need also configure FOSUBUserProvider service. In order to do that go to the services.yaml file and under   my.oauth_aware.user_provider.service arguments tag add your provider id as the parameter in the array:
+
+After this you will need also configure FOSUBUserProvider service. In order to do that go to the services.yaml file and under my.oauth_aware.user_provider.service arguments tag add your provider id as the parameter in the array:
+
 ```
   my.oauth_aware.user_provider.service:
     class: App\Catrobat\Security\FOSUBUserProvider
@@ -53,8 +60,10 @@ The login path that we added in security.yaml should also be added to the routes
 provider_name_login:
     path: /login/check-your_provider_name
 ```
-After configuring everything in yaml files you need to create  two new fileds and their setters and getters in the User entity for storing provider id and access token.
+
+After configuring everything in yaml files you need to create two new fileds and their setters and getters in the User entity for storing provider id and access token.
 Please follow the naming convetions!
+
 ```
 /**
    * @ORM\Column(type="string", length=300, nullable=true)

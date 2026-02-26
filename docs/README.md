@@ -19,7 +19,7 @@ This directory contains the project documentation that was migrated from the for
 ## Setup Guides
 
 - [Setup guide Ubuntu](./Setup-guide-Ubuntu.md)
-- [Setup guide macOS (native, no Docker)](./Setup-guide-macOS-(native,-no-Docker).md)
+- [Setup guide macOS (native, no Docker)](<./Setup-guide-macOS-(native,-no-Docker).md>)
 - [Installing Elasticsearch](./Installing-Elasticsearch.md)
 
 ## Additional References
@@ -27,6 +27,6 @@ This directory contains the project documentation that was migrated from the for
 - [Tutorials](./Tutorials.md)
 - [Symfony Commands Cheat Sheet](./Symfony-Commands-Cheat-Sheet.md)
 - [Testing Cheat Sheet](./Testing-Cheat-Sheet.md)
-- [GitHub Actions FAQ (Workflow Automation)](./GitHub-Actions-FAQ-(Workflow-Automation).md)
+- [GitHub Actions FAQ (Workflow Automation)](<./GitHub-Actions-FAQ-(Workflow-Automation).md>)
 - [Catroweb API](./Catroweb-API.md)
-- [_Sidebar index](./_Sidebar.md)
+- [\_Sidebar index](./_Sidebar.md)

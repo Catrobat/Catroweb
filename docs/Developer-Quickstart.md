@@ -76,7 +76,7 @@ docker exec -it app.catroweb bin/behat
 
 If you explicitly want a non-Docker setup:
 
-- [Setup guide macOS (native, no Docker)](./Setup-guide-macOS-(native,-no-Docker).md)
+- [Setup guide macOS (native, no Docker)](<./Setup-guide-macOS-(native,-no-Docker).md>)
 - [Setup guide Ubuntu](./Setup-guide-Ubuntu.md)
 
 ## Where to go next
