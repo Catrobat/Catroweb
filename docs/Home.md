@@ -1,41 +1,28 @@
-## Editing Welcome to the Catroweb wiki!
-This space contains everything you need to set up the project, understand our workflow, and start contributing effectively.
+# Catroweb Documentation
 
-Please read the following sections carefully.  
-If anything is unclear or missing, feel free to improve the documentation via a pull request.
+This directory contains setup guides, workflow documentation, and technical references for Catroweb contributors.
 
----
+If anything is unclear or missing, update the docs via pull request.
 
-## 🚀 Project Setup
+## Project Setup
 
-To get Catroweb running locally, choose **one** of the following setup options:
+Choose one setup approach:
 
-- **Recommended (more automated)**  
-  👉 [Docker setup](https://github.com/Catrobat/Catroweb/wiki/Docker)
+- Recommended: [Docker setup](./Docker.md)
+- Native Linux: [Ubuntu setup guide](./Setup-guide-Ubuntu.md)
+- Native macOS: [macOS setup guide](./Setup-guide-macOS-(native,-no-Docker).md)
 
-- **Manual setup**  
-  👉 [Ubuntu setup guide](https://github.com/Catrobat/Catroweb/wiki/Setup-guide-Ubuntu)
+## Development Guidelines
 
----
+Before opening a pull request, review:
 
-## 🧭 Development Guidelines
+- [Workflow](./Workflow.md)
+- [Coding Standard](./Coding-Standard.md)
+- [How to Test](./How-To-Test.md)
 
-Before starting your first contribution, make sure you are familiar with how we work:
+## Tutorials and Reference
 
-- 🔄 [Workflow](https://github.com/Catrobat/Catroweb-Symfony/wiki/Workflow)  
-- 🧹 [Coding Standard](https://github.com/Catrobat/Catroweb/wiki/Coding-Standard)  
-- 🧪 [How to Test](https://github.com/Catrobat/Catroweb/wiki/How-To-Test)
+Additional how-tos and cheat sheets are listed in:
 
-These guidelines help us maintain high code quality and a smooth collaboration.
-
----
-
-## 📚 Tutorials & Cheat Sheets
-
-Additional how-tos, tips, and reference material can be found in the  
-**Tutorials & Cheat-sheets** section of this wiki.
-
----
-
-Happy coding ❤️  
-**– The Catroweb Team**
+- [Tutorials](./Tutorials.md)
+- [_Sidebar index](./_Sidebar.md)

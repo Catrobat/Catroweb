@@ -20,5 +20,6 @@
 - Working with [SASS](https://sass-lang.com/)
   -  [CheatSheet](https://sass-cheatsheet.brunoscopelliti.com/)
 ---
-- Working with [GRUNT](https://gruntjs.com/getting-started)
+- Working with [Webpack Encore](https://symfony.com/doc/current/frontend/encore/simple-example.html)
+  - Project-specific notes: [Using Webpack (material components)](./Using-Webpack-(material-components).md)
 ---

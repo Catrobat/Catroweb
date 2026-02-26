@@ -1,5 +1,5 @@
 # Deployer
-We are using deployer to deploy to our development- and production-Server. 
+We use Deployer to deploy to development and production servers.
 
 - You may need to modify the file deploy.php. Ask our coordinator if specific settings are unclear.
 - Make sure you are in the correct network. (vpn)
@@ -10,11 +10,11 @@ We also have a slack webhook for our deployment system. For more information ask
 ### Credentials
 If you need the credentials, ask your coordinator.
 
-### To deploy to the server, 
+### To deploy to the server
 
-#### 1) Update your env.local file to with the correct values for:
+#### 1) Update your `.env.local` file with the correct values:
   ```
-  #DEPLOY_GIT=https://github.com/Catrobat/Catroweb-Symfony.git
+  #DEPLOY_GIT=https://github.com/Catrobat/Catroweb.git
   #SLACK_WEBHOOK=
   #DEPLOY_SHARE=
   #DEPLOY_WEBTEST=
@@ -28,7 +28,7 @@ If you need the credentials, ask your coordinator.
 
   E.g for web-test without credentials:
   ```
-  DEPLOY_GIT=https://github.com/Catrobat/Catroweb-Symfony.git
+  DEPLOY_GIT=https://github.com/Catrobat/Catroweb.git
   SLACK_WEBHOOK=https://hooks.slack.com/services/_KEY_
   DEPLOY_WEBTEST=_USERNAME_@_HOST_
   DEPLOY_WEBTEST_BRANCH=develop
@@ -51,4 +51,3 @@ If you need the credentials, ask your coordinator.
 
 #### 4) In case of errors
 You might need to check the server configs (Take a look into "How to set up a server")
-

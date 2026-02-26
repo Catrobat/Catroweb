@@ -2,7 +2,7 @@
 
 In the Catroweb project, we use a mix up between behavior-driven and test-driven development. Both philosophies require developers to write tests before implementing code. New lines of code must only be written if a test case fails! Therefore, the project should easily high code coverage and developers have to think about a problem before starting to code. Hence, the quality should be improved. The main difference between BDD and TDD: BDD tests are written in a human-readable language (Gherkin + PHP) and TDD uses regular code PHP).
 
-To ensure the quality of every contribution to the project, a CI system runs various static and dynamic analysis checks on every pull request. After that, a developer of the Catroweb team does a manual code review (mainly Seniors, but everyone is allowed and encouraged to do so). After that, the product owners do an additional review. More information about the CI system (=GitHub Actions) can be found [here](https://github.com/Catrobat/Catroweb/wiki/GitHub-Actions---Workflow-Automation-(CI-CD)). 
+To ensure the quality of every contribution to the project, a CI system runs various static and dynamic analysis checks on every pull request. After that, a developer of the Catroweb team does a manual code review (mainly Seniors, but everyone is allowed and encouraged to do so). After that, the product owners do an additional review. More information about the CI system (=GitHub Actions) can be found [here](./GitHub-Actions-FAQ-(Workflow-Automation).md).
 
 This section focuses on what you as a developer can do to test your contributions locally. It is recommended to test your contributions already on your own machine before creating a pull request. This section describes how to test the Share community platform. Besides, you find various tips on how to improve the testing process. However, the provided information is only a short overview, for more information just search the web - It is full of tutorials and documentation. Besides, you can always take a look into the automated workflows of the GitHub Actions to see how tests are executed automatically (`.github`).
 
@@ -14,7 +14,7 @@ To run the tests for the Catroweb project you need a full set up dev or test env
 You can either follow the tutorial to set up the project natively or use Docker.
 
 E.g.:
-For testing with docker, there is a [testing container](https://github.com/Catrobat/Catroweb/wiki/Docker#running-catroweb-test-in-docker) available. 
+For testing with docker, there is a [testing container](./Docker.md#running-catroweb-test-in-docker) available.
 
 ##### Step 1:
 Before starting your tests clear the cache for the test environment! 
@@ -105,7 +105,7 @@ bin/console cache:clear -e test
 ---
 # Static Analysis
 
-Static analysis does not require the software to be executed. Every path and its implementation is tested by just looking at the source code. Compared to dynamic tests, automated static testing is cheap since no test cases have to be developed. The included checks in this project vary between code style issues and programming errors to the detection of deprecated functionality or duplicated code. All static checks are also integrated into the CI services. However, the CI system will not fix the errors for you, just highlight them. Hence to locally run the tools, the following tools are the most important ones for you. More information about the coding standards can be found [here](https://github.com/Catrobat/Catroweb/wiki/Coding-Standard).
+Static analysis does not require the software to be executed. Every path and its implementation is tested by just looking at the source code. Compared to dynamic tests, automated static testing is cheap since no test cases have to be developed. The included checks in this project vary between code style issues and programming errors to the detection of deprecated functionality or duplicated code. All static checks are also integrated into the CI services. However, the CI system will not fix the errors for you, just highlight them. Hence to locally run the tools, the following tools are the most important ones for you. More information about the coding standards can be found [here](./Coding-Standard.md).
 
 - [Eslint](https://eslint.org/):
   - Statically analyzes javascript code (depends on node and npm)
@@ -151,4 +151,3 @@ bin/console lint:container
 
 
  
-

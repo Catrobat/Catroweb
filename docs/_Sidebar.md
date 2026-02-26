@@ -1,30 +1,31 @@
-# [Home](https://github.com/Catrobat/Catroweb/wiki)
- 
-### Setting up the Project
-* [Docker - Linux/Mac/Windows](https://github.com/Catrobat/Catroweb/wiki/Docker)
-* [Ubuntu - VM/Native](https://github.com/Catrobat/Catroweb/wiki/Setup-guide-Ubuntu)
-* [Installing Elasticsearch](https://github.com/Catrobat/Catroweb/wiki/Installing-Elasticsearch)
-* [Server Setup](https://github.com/Catrobat/Catroweb/wiki/Server-Setup)
-* [Using Webpack (material components)](https://github.com/Catrobat/Catroweb/wiki/Using-Webpack-(material-components))
+# [Home](./Home.md)
 
-### How to contribute 
-* [Workflow](https://github.com/Catrobat/Catroweb/wiki/Workflow)
-* [Coding-Standard](https://github.com/Catrobat/Catroweb/wiki/Coding-Standard)
-* [Testing](https://github.com/Catrobat/Catroweb/wiki/How-To-Test)
-* [Behat Guidelines](https://github.com/Catrobat/Catroweb/wiki/Behat-Test-Guidelines)
+### Setting Up the Project
+* [Docker - Linux/Mac/Windows](./Docker.md)
+* [Ubuntu - VM/Native](./Setup-guide-Ubuntu.md)
+* [macOS - Native](./Setup-guide-macOS-(native,-no-Docker).md)
+* [Installing Elasticsearch](./Installing-Elasticsearch.md)
+* [Server Setup](./Server-Setup.md)
+* [Using Webpack (material components)](./Using-Webpack-(material-components).md)
+
+### How to Contribute
+* [Workflow](./Workflow.md)
+* [Coding Standard](./Coding-Standard.md)
+* [Testing](./How-To-Test.md)
+* [Behat Guidelines](./Behat-Test-Guidelines.md)
 
 ### Tutorials and Cheat Sheets
-* [Resetting Project Permissions](https://github.com/Catrobat/Catroweb/wiki/Resetting-project-permissions)
-* [Clearing the Cache](https://github.com/Catrobat/Catroweb/wiki/Clearing-the-Cache)
-* [Testing Cheat Sheet](https://github.com/Catrobat/Catroweb/wiki/Testing-Cheat-Sheet)
-* [Commands Cheat Sheet](https://github.com/Catrobat/Catroweb/wiki/Symfony-Commands-Cheat-Sheet)
-* [Working with flavors](https://github.com/Catrobat/Catroweb/wiki/Flavors)
-* [Working with Migrations](https://github.com/Catrobat/Catroweb/wiki/Migrations)
-* [OAuth](https://github.com/Catrobat/Catroweb/wiki/OAuth)
-* [Official Tutorials and Documentations](https://github.com/Catrobat/Catroweb/wiki/Tutorials)
-* [Uploading Catrobat project in VM](https://github.com/Catrobat/Catroweb/wiki/Uploading-a-custom-Catrobat-project-in-the-VM)
-* [Debugging with xDebug & PhpStorm](https://github.com/Catrobat/Catroweb/wiki/Debugging-with-xDebug-&-PhpStorm)
-### [How to deploy](https://github.com/Catrobat/Catroweb/wiki/How-To-Deploy)
+* [Resetting Project Permissions](./Resetting-project-permissions.md)
+* [Clearing the Cache](./Clearing-the-Cache.md)
+* [Testing Cheat Sheet](./Testing-Cheat-Sheet.md)
+* [Commands Cheat Sheet](./Symfony-Commands-Cheat-Sheet.md)
+* [Working with Flavors](./Flavors.md)
+* [Working with Migrations](./Migrations.md)
+* [OAuth](./OAuth.md)
+* [Official Tutorials and Documentation](./Tutorials.md)
+* [Uploading Catrobat Project in VM](./Uploading-a-custom-Catrobat-project-in-the-VM.md)
+* [Debugging with xDebug and PhpStorm](./Debugging-with-xDebug-&-PhpStorm.md)
+* [How to Deploy](./How-To-Deploy.md)
 
 ### API
-* [Catroweb-API (CAPI)](https://github.com/Catrobat/Catroweb/wiki/Catroweb-API)
+* [Catroweb-API (CAPI)](./Catroweb-API.md)

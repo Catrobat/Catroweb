@@ -2,7 +2,7 @@ Take a look at the official [documentation](https://material.io/develop/web) by 
 
 1. Installation
 ```
-npm install @material/PACKAGE NAME
+yarn add @material/PACKAGE_NAME
 ```
 
 2. Rebuild the docker Container
@@ -27,9 +27,7 @@ Insert into the js block at the end of the file:
 {{ encore_entry_script_tags('ENTRY NAME') }}
 ```
 
-7. Run npm:
+7. Run the asset build:
 ```
-docker exec -it app.catroweb npm run dev
+docker exec -it app.catroweb yarn dev
 ```
-
-8. After you finished implementation, you need to push the generated files from public/build/ to git
