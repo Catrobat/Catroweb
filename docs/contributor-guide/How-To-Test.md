@@ -7,14 +7,14 @@ This page covers practical local testing for Catroweb.
 - Dynamic tests: PHPUnit + Behat
 - Static analysis: ESLint, Stylelint, Prettier, PHP-CS-Fixer, PhpStan, Psalm, and Symfony linters
 
-For CI implementation details, see [GitHub Actions FAQ (Workflow Automation)](<./GitHub-Actions-FAQ-(Workflow-Automation).md>) and `.github/workflows/`.
+For CI implementation details, see [GitHub Actions FAQ (Workflow Automation)](<../references/GitHub-Actions-FAQ-(Workflow-Automation).md>) and `.github/workflows/`.
 
 ## Prerequisites
 
 Use one of:
 
-- Docker setup: [Docker](./Docker.md)
-- Native setup: [Setup guide Ubuntu](./Setup-guide-Ubuntu.md) or [Setup guide macOS](<./Setup-guide-macOS-(native,-no-Docker).md>)
+- Docker setup: [Docker](../setup/Docker.md)
+- Native setup: [Setup guide Ubuntu](../setup/Setup-guide-Ubuntu.md) or [Setup guide macOS](<../setup/Setup-guide-macOS-(native,-no-Docker).md>)
 
 If you use Docker, run tests inside `app.catroweb`.
 

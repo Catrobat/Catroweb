@@ -2,7 +2,7 @@
 
 ### Your checklist for this pull request
 
-Please review the [contributing guidelines](./contributing.md) and [wiki pages](../docs/Home.md) of this repository.
+Please review the [contributing guidelines](./contributing.md) and [wiki pages](../docs/README.md) of this repository.
 
 - [ ] Include the name and id of the Jira ticket in the PR’s title eg.: `SHARE-666 The devils ticket`
 - [ ] Choose the proper base branch (_develop_)

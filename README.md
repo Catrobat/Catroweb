@@ -61,9 +61,9 @@ If you feel confident that your tech stack matches our requirements, we invite y
 
 Core project docs are maintained in-repo:
 
-- [docs/Home.md](./docs/Home.md)
-- [docs/Developer-Quickstart.md](./docs/Developer-Quickstart.md)
-- [docs/Architecture-Overview.md](./docs/Architecture-Overview.md)
+- [docs/README.md](./docs/README.md)
+- [docs/setup/Developer-Quickstart.md](./docs/setup/Developer-Quickstart.md)
+- [docs/architecture/Architecture-Overview.md](./docs/architecture/Architecture-Overview.md)
 
 ## Issues
 
