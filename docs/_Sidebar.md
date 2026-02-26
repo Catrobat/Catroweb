@@ -1,5 +1,9 @@
 # [Home](./Home.md)
 
+### Start Here
+* [Developer Quickstart](./Developer-Quickstart.md)
+* [Architecture Overview](./Architecture-Overview.md)
+
 ### Setting Up the Project
 * [Docker - Linux/Mac/Windows](./Docker.md)
 * [Ubuntu - VM/Native](./Setup-guide-Ubuntu.md)

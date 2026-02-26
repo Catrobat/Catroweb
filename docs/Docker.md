@@ -1,10 +1,10 @@
-> For now catroweb with docker is for **local development** and **github actions**.
+> Docker is the recommended setup for local Catroweb development and matches CI behavior.
 
 ### Content
 - [Install Docker](#install-docker)
 - [Introduction to Catroweb with docker](#introduction-to-catroweb-with-docker)
 - [Running Catroweb dev](#running-catroweb-dev-in-docker)
-- [Testing](#testing-for-more-details-checkout-the-testing-wiki)
+- [Testing](#testing)
 - [Running Catroweb test](#running-a-reduced-container-containing-only-testing-tools-used-by-ci)
 - [Docker commands](#docker-commands)
 - [Docker in phpStorm](#docker-in-phpstorm)
@@ -60,22 +60,22 @@ You want to use your own fork of `https://github.com/Catrobat/Catroweb.git`. Add
 * Optionally: you could just add the project directly via PHPStorm - "get project from version control"
 
 
-## Introduction to Catroweb with docker
-In this section we discuss the general usage of docker and what docker does.
+## Introduction to Catroweb with Docker
+In this section we discuss the general usage of Docker and what Docker does.
 \
 Docker is a tool that makes it easy to run complex applications (like Catroweb) on different operating systems.
 This is accomplished by bundling the application into a container. Every container can be imagined as a virtual machine.
 We specifically use 'docker compose' which automatically bundles different services each into one container.
 
-#### Catroweb needs 3 services for development purposes:
-- The application itself is the container with the name app.catroweb.dev, which runs ubuntu with the whole catroweb code.
+#### Catroweb needs multiple services for development:
+- The application container is `app.catroweb`, which runs the Catroweb codebase.
   This container has **shared folders** with the host (so folders where changes are synchronized with the container):
     - src
     - tests (because this is shared you can view the testreport screens on the host)
     - translations
     - templates
-  If you change these files on the host or container you must **NOT REBUILD** the container! :)
-  Only rebuild the container if changes to con
+  If you change these files on the host or container you must **NOT REBUILD** the container.
+  Rebuild the container only when Docker image inputs change (for example Dockerfile/build dependencies).
 - One MariaDB which runs with the name db.catroweb.dev
 - And a phpMyAdmin container with the name phpmyadmin.catroweb.dev
 
@@ -92,12 +92,12 @@ And here are some **helpful links** if you want to dive deeper into docker or ju
 - <https://acadgild.com/blog/what-is-docker-container-an-introduction>
 
 
-## Running Catroweb dev in Docker
+## Running Catroweb Dev in Docker
 
 ```bash
 cd docker
 docker compose -f docker-compose.dev.yaml build
-docker compose -f docker-compose.dev.yaml up
+docker compose -f docker-compose.dev.yaml up -d
 ```
 
 This will start up the following containers:
@@ -143,7 +143,7 @@ This will start up the following containers:
          ```
          Be patient. This command might take a minute or two ;)
 
-       -- Option B: run composer install and npm on the host (if you have it on your system anyway)
+       -- Option B: run `composer install` and `yarn install` on the host (if you have the toolchain locally)
 
 #### Notes:
 
@@ -154,14 +154,14 @@ you can deactivate xdebug in the container - just execute:
     ```
 
 
-## Testing (for more details checkout the testing wiki)
+## Testing
 
-* #### phpUnit:
+* #### PHPUnit:
     ```bash
     docker exec -it app.catroweb bin/phpunit tests
     ```
 
-* #### behat:
+* #### Behat:
     ```bash
     docker exec -it app.catroweb bin/behat
     ```
@@ -172,7 +172,7 @@ you can deactivate xdebug in the container - just execute:
 ```bash
 cd docker
 docker compose -f docker-compose.test.yaml build
-docker compose -f docker-compose.test.yaml up
+docker compose -f docker-compose.test.yaml up -d
 ```
 
 
@@ -209,7 +209,7 @@ docker compose -f docker-compose.test.yaml up
   ```
 - copy something from the container to the host.
   ```bash
-  docker cp CONTAINER_ID:PATH_IN_CONTAINER PATH_ON_HOSTeens
+  docker cp CONTAINER_ID:PATH_IN_CONTAINER PATH_ON_HOST
   ```
   E.g. copy screens. (screens dir must exist!)
   ```bash

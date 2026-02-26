@@ -90,15 +90,15 @@ Yes. However, not out of the box. You have to set the step you expect to fail to
 **Never**, I repeat, **never** store them directly in the workflow files. Else everyone can easily steal your credentials.
 Add them to the GitHub secrets storage. GitHub Action workflows can access the secrets. However, ensure your workflows do not leak the secrets. GitHub only blacks them out in the GitHub feedback. In case you have to add secrets in a repository where you have no permissions. Ask a project maintainer to add the secrets for you.
 
-### I do not have a single docker container, but use docker-compose
-No problem, boot up any OS you like (e.g Ubuntu) and run docker-compose to build and start your containers. Finally, just run your actions inside the docker containers.
+### I do not have a single docker container, but use docker compose
+No problem, boot up any OS you like (e.g Ubuntu) and run docker compose to build and start your containers. Finally, just run your actions inside the docker containers.
 
 ```
 runs-on: ubuntu-latest
 steps:
   - uses: actions/checkout@v2
   - run: |
-    docker-compose -f <docker-compose-path> up -d
+    docker compose -f <docker compose-path> up -d
     docker exec <container> <your-command>
 ```
 

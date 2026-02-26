@@ -11,8 +11,8 @@ Do not create any branches on the official public repository. Instead: Fork the 
 
 Never push any changes directly to those branches! Always create Pull Requests!
 - **develop**: The develop branch is our development branch and represents the current state of the project including all already merged changes for the next release. This is the branch you should be working with and merge your PRs into. 
-- **master**: The master branch represents the current state of the [share](https://share.catrob.at/pocketcode/) and should be the only branch that gets released to the public. 
-- **release/XYZ**: Before releasing a new release branch is created (from _develop_). This branch will be tested and hot-fixed, but no new features will be added. When releasing this branch will be merged into _develop_ and _master_ and then deleted.
+- **main**: The main branch represents the current public release state and is not the default target for regular feature PRs.
+- **release/XYZ**: Before releasing a new release branch is created (from _develop_). This branch will be tested and hot-fixed, but no new features will be added. When releasing this branch will be merged into _develop_ and _main_ and then deleted.
 
 
 ## Checking out the newest version of the project
@@ -27,13 +27,13 @@ Do not forget to reset the project.
   ```
   # install packages
   composer install
-  npm install
+  yarn install
 
   # reset db
   bin/console catrobat:reset --hard
 
   # build assets
-  npm run dev
+  yarn dev
   ```
 
 Then create and check out a new branch for your ticket XXX.
@@ -70,7 +70,7 @@ When there is only one commit and you just need to change the commit message you
 
 Go to GitHub and **create a Pull-Request** from your forked repository into the official repository.
   - check that you create the PR from your correct ticket branch!
-  - check that PR goes to the _develop_ branch and not _master_ branch!
+  - check that PR goes to the _develop_ branch and not _main_ branch!
   - "allow edits from maintainers" must be ticked off, this allows the Seniors to rebase your PR if needed
 
 

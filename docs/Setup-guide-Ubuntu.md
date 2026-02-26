@@ -11,7 +11,7 @@ git checkout develop
 git pull catroweb develop
 ```
 
-Then just run this script `./bin/inital_setup`
+Then run this script: `./bin/initial_setup.sh`
 Just use root as the new DB password, and also answer Y to all DB related questions :)
 
 
@@ -70,10 +70,10 @@ sudo apt install elasticsearch
 sudo service elasticsearch start
 
 ## Install the project dependencies
-npm install
+yarn install
 composer install
 php bin/console catrobat:reset --hard
-npm run dev
+yarn dev
 
 ## Setup the database with a development and test database
 sudo phpenmod mbstring
@@ -207,10 +207,10 @@ curl -X GET "localhost:9200/?pretty"
 ```
 
  ```
-  npm install
+  yarn install
   composer install
   php bin/console catrobat:reset --hard
-  npm run dev
+  yarn dev
   ```
 
 ### 8. Setup Apache :

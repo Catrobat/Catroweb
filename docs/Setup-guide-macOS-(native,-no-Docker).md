@@ -287,7 +287,7 @@ Clone and install dependencies:
 git clone https://github.com/Catrobat/Catroweb.git
 cd Catroweb
 composer install
-npm install
+yarn install
 ```
 
 Reset dev DB + dummy data:
@@ -299,7 +299,7 @@ php bin/console catrobat:reset --hard
 Build assets:
 
 ```
-npm run dev
+yarn dev
 ```
 
 ## 6) Troubleshooting

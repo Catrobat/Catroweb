@@ -4,6 +4,11 @@ This directory contains setup guides, workflow documentation, and technical refe
 
 If anything is unclear or missing, update the docs via pull request.
 
+## Start Here
+
+- [Developer Quickstart](./Developer-Quickstart.md)
+- [Architecture Overview](./Architecture-Overview.md)
+
 ## Project Setup
 
 Choose one setup approach:

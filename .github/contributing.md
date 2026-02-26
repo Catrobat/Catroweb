@@ -3,7 +3,7 @@
 :tada: Firstly, thank you for contributing to Catroweb! You are one of the pandas now! :tada:
 
 **PR's** are always appreciated! Please be sure to fill out the
-[PR Template](https://github.com/Catrobat/Catroweb-Symfony/blob/develop/.github/pull_request_template.md)
+[PR Template](./pull_request_template.md)
 as detailed as possible. You will be the hero of everyone who does code reviews. Every pull request will be automatically
 checked against various tests in our GitHub Actions CI system. Make sure all tests are passing!
 When tests are failing the PR will not be accepted.
