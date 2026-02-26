@@ -55,7 +55,15 @@ Your tech stack should cover **most** of them — but don’t worry if something
 
 If you feel confident that your tech stack matches our requirements, we invite you to start contributing 🎉
 
-👉 https://github.com/Catrobat/Catroweb/blob/develop/.github/onboarding.md
+👉 [.github/onboarding.md](./.github/onboarding.md)
+
+## Documentation
+
+Core project docs are maintained in-repo:
+
+- [docs/Home.md](./docs/Home.md)
+- [docs/Developer-Quickstart.md](./docs/Developer-Quickstart.md)
+- [docs/Architecture-Overview.md](./docs/Architecture-Overview.md)
 
 ## Issues
 
@@ -73,11 +81,11 @@ If you are using Docker, do NOT run `php` commands on host machine.
 Instead run:
 
 ```
-docker compose exec app php bin/console <command>
+docker exec -it app.catroweb php bin/console <command>
 ```
 
 Example:
 
 ```
-docker compose exec app php bin/console doctrine:migrations:migrate
+docker exec -it app.catroweb php bin/console doctrine:migrations:migrate
 ```

@@ -1,0 +1,39 @@
+- [Symfony Framework](https://symfony.com/)
+  - For a quick start: Symfony ["Quick Tour"](https://symfony.com/doc/current/quick_tour/the_big_picture.html)
+  - Good overview: [Symfony Best Practice](http://symfony.com/doc/current/best_practices/index.html)
+
+---
+
+- Writing tests with [Behat](http://behat.org/en/latest/)
+  - [CheatSheet](https://confluence.catrob.at/download/attachments/4948000/2012-03-behat-cheat-sheet-en.pdf?version=1&modificationDate=1439212004789&api=v2)
+
+---
+
+- Writing tests with [phpSpec](http://www.phpspec.net/en/latest)
+
+---
+
+- Writing tests with [phpUnit](https://phpunit.de/)
+
+---
+
+- Working with [Composer](https://getcomposer.org/)
+  - [CheatSheet](https://devhints.io/composer)
+  - [Packagist](https://packagist.org/) The PHP Package Repository
+
+---
+
+- Working with [Bootstrap 4](https://getbootstrap.com/)
+  - [CheatSheet](https://www.creative-tim.com/bootstrap-cheat-sheet)
+
+---
+
+- Working with [SASS](https://sass-lang.com/)
+  - [CheatSheet](https://sass-cheatsheet.brunoscopelliti.com/)
+
+---
+
+- Working with [Webpack Encore](https://symfony.com/doc/current/frontend/encore/simple-example.html)
+  - Project-specific notes: [Using Webpack (material components)](<./Using-Webpack-(material-components).md>)
+
+---

@@ -27,15 +27,15 @@ If you are unfamiliar with Git or have not used it recently, the official guide 
 
 Now that you know how to work with Git, it is time to set up your fork by executing the following steps. We recommend to use Docker for an easy and seamless setup process:
 
-- [Install Docker](https://github.com/Catrobat/Catroweb/wiki/Docker#install-docker)
+- [Install Docker](../docs/Docker.md#install-docker)
 - [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) the [repository of Catroweb](https://github.com/Catrobat/Catroweb)
-- [Clone](https://github.com/Catrobat/Catroweb/wiki/Docker#checkout-the-catroweb-project) the repository
+- [Clone](../docs/Docker.md#checkout-the-catroweb-project) the repository
 
-You can find more information about using Catroweb with Docker [here](https://github.com/Catrobat/Catroweb/wiki/Docker#introduction-to-catroweb-with-docker).
+You can find more information about using Catroweb with Docker [here](../docs/Docker.md#introduction-to-catroweb-with-docker).
 
 ## c. Setup Verification
 
-Now you should be able to [run Catroweb in Docker](https://github.com/Catrobat/Catroweb/wiki/Docker#running-catroweb-dev-in-docker) to display the sharing platform similar to our [current version online](https://share.catrob.at/app/).
+Now you should be able to [run Catroweb in Docker](../docs/Docker.md#running-catroweb-dev-in-docker) to display the sharing platform similar to our [current version online](https://share.catrob.at/app/).
 
 Note: Make sure that you run the commands through [Git Bash in PhpStorm](https://medium.com/code-complete/using-git-bash-with-phpstorm-10f8d54a96da).
 

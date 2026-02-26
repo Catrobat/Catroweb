@@ -3,14 +3,14 @@
 :tada: Firstly, thank you for contributing to Catroweb! You are one of the pandas now! :tada:
 
 **PR's** are always appreciated! Please be sure to fill out the
-[PR Template](https://github.com/Catrobat/Catroweb-Symfony/blob/develop/.github/pull_request_template.md)
+[PR Template](./pull_request_template.md)
 as detailed as possible. You will be the hero of everyone who does code reviews. Every pull request will be automatically
 checked against various tests in our GitHub Actions CI system. Make sure all tests are passing!
 When tests are failing the PR will not be accepted.
 
 ### Guides
 
-There are comprehensive Guides and Cheat Sheets available in our [wiki](https://github.com/Catrobat/Catroweb-Symfony/wiki/).
+There are comprehensive Guides and Cheat Sheets available in our [wiki](../docs/Home.md).
 Make sure to check them out if you have any questions, before asking a project maintainer.
 
 #### Workflow (TDD/BDD)
