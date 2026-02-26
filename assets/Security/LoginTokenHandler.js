@@ -14,16 +14,22 @@ export class LoginTokenHandler {
     const rawValue =
       targetPath && typeof targetPath.value === 'string' ? targetPath.value.trim() : ''
 
-    // Only use a provided target path if it results in a same-origin URL.
+    // Only use a provided target path if it results in a safe same-origin HTTP(S) URL.
     if (rawValue !== '') {
-      try {
-        // The URL constructor will resolve relative paths against the current origin.
-        const url = new URL(rawValue, window.location.origin)
-        if (url.origin === window.location.origin) {
-          return url.pathname + url.search + url.hash
+      // Reject values that look like they contain a URL scheme (for example, "javascript:" or "http:").
+      if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(rawValue)) {
+        try {
+          // The URL constructor will resolve relative paths against the current origin.
+          const url = new URL(rawValue, window.location.origin)
+          // Enforce same origin and restrict to HTTP(S) protocols.
+          const isSameOrigin = url.origin === window.location.origin
+          const isHttpProtocol = url.protocol === 'http:' || url.protocol === 'https:'
+          if (isSameOrigin && isHttpProtocol) {
+            return url.pathname + url.search + url.hash
+          }
+        } catch {
+          // If URL construction fails, fall through to the safe default.
         }
-      } catch {
-        // If URL construction fails, fall through to the safe default.
       }
     }
 
