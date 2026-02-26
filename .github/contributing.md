@@ -10,7 +10,7 @@ When tests are failing the PR will not be accepted.
 
 ### Guides
 
-There are comprehensive Guides and Cheat Sheets available in our [wiki](../docs/Home.md).
+There are comprehensive Guides and Cheat Sheets available in our [wiki](../docs/README.md).
 Make sure to check them out if you have any questions, before asking a project maintainer.
 
 #### Workflow (TDD/BDD)
