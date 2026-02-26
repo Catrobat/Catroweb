@@ -2,7 +2,7 @@
 
 ### Your checklist for this pull request
 
-Please review the [contributing guidelines](https://github.com/Catrobat/Catroweb-Symfony/blob/develop/.github/contributing.md) and [wiki pages](https://github.com/Catrobat/catroweb-Symfony/wiki/) of this repository.
+Please review the [contributing guidelines](https://github.com/Catrobat/Catroweb-Symfony/blob/develop/.github/contributing.md) and [wiki pages](../docs/Home.md) of this repository.
 
 - [ ] Include the name and id of the Jira ticket in the PR’s title eg.: `SHARE-666 The devils ticket`
 - [ ] Choose the proper base branch (_develop_)
