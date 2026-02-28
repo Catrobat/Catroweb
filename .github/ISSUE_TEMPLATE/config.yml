@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📱 Pocket Code App Bug
+    url: https://github.com/Catrobat/Catroid/issues/new/choose
+    about: Please report Pocket Code or Pocket Paint Android app issues here.
+  - name: 💬 Ask a question or submit an idea
+    url: https://github.com/Catrobat/Catroweb/discussions
+    about: Got a question or an idea for Catroweb? Let's discuss it!
