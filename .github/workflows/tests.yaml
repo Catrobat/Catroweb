@@ -59,7 +59,7 @@ jobs:
           docker save app.catroweb | gzip > catroweb-image.tar.gz
 
       - name: Upload Docker Image
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         id: upload-artifact
         with:
           name: catroweb-image
@@ -105,7 +105,7 @@ jobs:
           --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml
 
       - name: Upload PHPUnit Code Coverage Report
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: PhpUnitTestReport
@@ -258,7 +258,7 @@ jobs:
           fi
 
       - name: Upload Behat Test Artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: logs_${{ matrix.testSuite }}
           path: |
