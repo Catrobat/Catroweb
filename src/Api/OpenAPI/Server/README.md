@@ -117,6 +117,12 @@ All URIs are relative to *https://share.catrob.at/api*
 | _AuthenticationApiInterface_ | [**authenticationOauthPost**](docs/Api/AuthenticationApiInterface.md#authenticationoauthpost)     | **POST** /authentication/oauth        | OAuth Login                                                                                                |
 | _AuthenticationApiInterface_ | [**authenticationPost**](docs/Api/AuthenticationApiInterface.md#authenticationpost)               | **POST** /authentication              | Login - create a new JWT token                                                                             |
 | _AuthenticationApiInterface_ | [**authenticationRefreshPost**](docs/Api/AuthenticationApiInterface.md#authenticationrefreshpost) | **POST** /authentication/refresh      | Refresh token                                                                                              |
+| _CommentsApiInterface_       | [**commentsIdDelete**](docs/Api/CommentsApiInterface.md#commentsiddelete)                         | **DELETE** /comments/{id}             | Delete a comment                                                                                           |
+| _CommentsApiInterface_       | [**commentsIdRepliesGet**](docs/Api/CommentsApiInterface.md#commentsidrepliesget)                 | **GET** /comments/{id}/replies        | Get replies for a comment                                                                                  |
+| _CommentsApiInterface_       | [**commentsIdReportPost**](docs/Api/CommentsApiInterface.md#commentsidreportpost)                 | **POST** /comments/{id}/report        | Report a comment                                                                                           |
+| _CommentsApiInterface_       | [**commentsIdTranslationGet**](docs/Api/CommentsApiInterface.md#commentsidtranslationget)         | **GET** /comments/{id}/translation    | Translate a comment                                                                                        |
+| _CommentsApiInterface_       | [**projectIdCommentsGet**](docs/Api/CommentsApiInterface.md#projectidcommentsget)                 | **GET** /project/{id}/comments        | Get project comments                                                                                       |
+| _CommentsApiInterface_       | [**projectIdCommentsPost**](docs/Api/CommentsApiInterface.md#projectidcommentspost)               | **POST** /project/{id}/comments       | Create a comment on a project                                                                              |
 | _MediaLibraryApiInterface_   | [**mediaAssetsGet**](docs/Api/MediaLibraryApiInterface.md#mediaassetsget)                         | **GET** /media/assets                 | Get media library assets with pagination and filtering                                                     |
 | _MediaLibraryApiInterface_   | [**mediaAssetsIdDelete**](docs/Api/MediaLibraryApiInterface.md#mediaassetsiddelete)               | **DELETE** /media/assets/{id}         | Delete a media asset (Admin only)                                                                          |
 | _MediaLibraryApiInterface_   | [**mediaAssetsIdGet**](docs/Api/MediaLibraryApiInterface.md#mediaassetsidget)                     | **GET** /media/assets/{id}            | Get details of a specific media asset                                                                      |
@@ -171,6 +177,11 @@ All URIs are relative to *https://share.catrob.at/api*
 
 - [BaseUser](docs/Model/BaseUser.md)
 - [BasicUserDataResponse](docs/Model/BasicUserDataResponse.md)
+- [CommentCreateRequest](docs/Model/CommentCreateRequest.md)
+- [CommentListResponse](docs/Model/CommentListResponse.md)
+- [CommentResponse](docs/Model/CommentResponse.md)
+- [CommentTranslationResponse](docs/Model/CommentTranslationResponse.md)
+- [CommentUserInfo](docs/Model/CommentUserInfo.md)
 - [CreateStudioErrorResponse](docs/Model/CreateStudioErrorResponse.md)
 - [DryRun](docs/Model/DryRun.md)
 - [ExtendedUserDataResponse](docs/Model/ExtendedUserDataResponse.md)

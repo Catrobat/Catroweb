@@ -39,18 +39,21 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: There should be a commend section on every program page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Comments"
     And the element "#add-comment-button" should be visible
 
   Scenario: It should be possible to toggle the visibility of the post a comment container
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Comments"
     And the element "#add-comment-button" should be visible
     But the element "#comment-cancel-button" should not be visible
     And the element "#user-comment-wrapper" should not be visible
     When I click "#add-comment-button"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element "#add-comment-button" should not be visible
     But the element "#comment-cancel-button" should be visible
     And the element "#user-comment-wrapper" should be visible
@@ -58,32 +61,38 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should not be able to write a comment without being logged in
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I click "#add-comment-button"
     And I wait for AJAX to finish
     And I write "hello" in textbox
     And I wait for AJAX to finish
     When I click "#comment-post-button"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should be on "/app/login"
 
 
   Scenario: If a logged out user enters a comment into the textbox, it should be remembered throughout the login process and page reloads
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I click "#add-comment-button"
     And I wait for AJAX to finish
     And I write "comment to remember" in textbox
     And I wait for AJAX to finish
     When I click "#comment-post-button"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should be on "/app/login"
     And I fill in "_username" with "Catrobat"
     And I fill in "_password" with "123456"
     Then I press "Login"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should be on "/app/project/1#login"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element "#add-comment-button" should not be visible
     And the element "#comment-cancel-button" should be visible
     And the element "#user-comment-wrapper" should be visible
@@ -96,6 +105,7 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "Catrobat"
     And I am on "/app/project/3"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".single-comment" should not exist
     When I click "#add-comment-button"
     And I wait for AJAX to finish
@@ -109,12 +119,14 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should be able to see existing comments
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "c1"
     But I should not see "c2"
 
   Scenario: I should be able to see the number of replies that belong to a comment - comment with zero replies
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "c1"
     And one of the "#comment-1 .comment-replies-count span" elements should contain "0"
     But I should not see "c2"
@@ -122,6 +134,7 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should be able to see the number of replies that belong to a comment - comment with more than one reply
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "c2"
     And I should see "c3"
     And I should see "c4"
@@ -148,12 +161,14 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should be able to see the number of replies that belong to a comment - comment with one reply
     Given I am on "/app/project/4"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "c12"
     And one of the "#comment-12 .comment-replies-count span" elements should contain "1"
 
   Scenario: I should be able to see the deleted comments, however, not their text.
     Given I am on "/app/project/5"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And one of the "#comment-14 .comment-text" elements should contain "**Deleted**"
     And one of the "#comment-14 .comment-replies-count span" elements should contain "1"
 
@@ -164,11 +179,13 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should not see any comments when there are none
     Given I am on "/app/project/3"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".single-comment" should not exist
 
   Scenario: I should be able to see only the first 5 existing comments (order newest first) without scrolling
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "c2"
     And I should see "c3"
     And I should see "c4"
@@ -180,11 +197,13 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "Catrobat"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".comment-report-button" should not exist
 
   Scenario: When I click the report button and I am not logged in, I should be redirected to the login page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I click ".comment-report-button"
     And I wait for AJAX to finish
     When I click ".swal2-confirm"

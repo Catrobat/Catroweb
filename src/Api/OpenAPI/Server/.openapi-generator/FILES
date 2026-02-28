@@ -5,6 +5,7 @@
 .travis.yml
 Api/ApiServer.php
 Api/AuthenticationApiInterface.php
+Api/CommentsApiInterface.php
 Api/MediaLibraryApiInterface.php
 Api/NotificationsApiInterface.php
 Api/ProjectsApiInterface.php
@@ -13,6 +14,7 @@ Api/StudioApiInterface.php
 Api/UserApiInterface.php
 Api/UtilityApiInterface.php
 Controller/AuthenticationController.php
+Controller/CommentsController.php
 Controller/Controller.php
 Controller/MediaLibraryController.php
 Controller/NotificationsController.php
@@ -25,6 +27,11 @@ DependencyInjection/Compiler/OpenAPIServerApiPass.php
 DependencyInjection/OpenAPIServerExtension.php
 Model/BaseUser.php
 Model/BasicUserDataResponse.php
+Model/CommentCreateRequest.php
+Model/CommentListResponse.php
+Model/CommentResponse.php
+Model/CommentTranslationResponse.php
+Model/CommentUserInfo.php
 Model/CreateStudioErrorResponse.php
 Model/DryRun.php
 Model/ExtendedUserDataResponse.php
@@ -82,6 +89,7 @@ Service/SymfonyValidator.php
 Service/TypeMismatchException.php
 Service/ValidatorInterface.php
 Tests/Api/AuthenticationApiInterfaceTest.php
+Tests/Api/CommentsApiInterfaceTest.php
 Tests/Api/MediaLibraryApiInterfaceTest.php
 Tests/Api/NotificationsApiInterfaceTest.php
 Tests/Api/ProjectsApiInterfaceTest.php
@@ -93,6 +101,11 @@ Tests/AppKernel.php
 Tests/Controller/ControllerTest.php
 Tests/Model/BaseUserTest.php
 Tests/Model/BasicUserDataResponseTest.php
+Tests/Model/CommentCreateRequestTest.php
+Tests/Model/CommentListResponseTest.php
+Tests/Model/CommentResponseTest.php
+Tests/Model/CommentTranslationResponseTest.php
+Tests/Model/CommentUserInfoTest.php
 Tests/Model/CreateStudioErrorResponseTest.php
 Tests/Model/DryRunTest.php
 Tests/Model/ExtendedUserDataResponseTest.php
@@ -142,6 +155,7 @@ Tests/test_config.yaml
 autoload.php
 composer.json
 docs/Api/AuthenticationApiInterface.md
+docs/Api/CommentsApiInterface.md
 docs/Api/MediaLibraryApiInterface.md
 docs/Api/NotificationsApiInterface.md
 docs/Api/ProjectsApiInterface.md
@@ -151,6 +165,11 @@ docs/Api/UserApiInterface.md
 docs/Api/UtilityApiInterface.md
 docs/Model/BaseUser.md
 docs/Model/BasicUserDataResponse.md
+docs/Model/CommentCreateRequest.md
+docs/Model/CommentListResponse.md
+docs/Model/CommentResponse.md
+docs/Model/CommentTranslationResponse.md
+docs/Model/CommentUserInfo.md
 docs/Model/CreateStudioErrorResponse.md
 docs/Model/DryRun.md
 docs/Model/ExtendedUserDataResponse.md

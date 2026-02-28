@@ -264,7 +264,6 @@ ProjectComments(
   5,
   5,
   5,
-  projectCommentsElement.dataset.totalNumberOfComments,
   projectCommentsElement.dataset.transCancel,
   projectCommentsElement.dataset.transDeleteIt,
   projectCommentsElement.dataset.transReportIt,

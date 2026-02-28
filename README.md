@@ -74,6 +74,7 @@ Please report app crashes, memory issues, or physics glitches in the Catroid rep
 👉 https://github.com/Catrobat/Catroid/issues
 
 **For Catroweb (Web Platform) bugs:**
+
 1. Please check the existing issues first to avoid duplicates:  
    👉 https://github.com/Catrobat/Catroweb/issues
 2. If it hasn’t been reported yet, open a new issue using the bug report template:  

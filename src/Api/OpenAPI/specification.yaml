@@ -32,6 +32,9 @@ tags:
   - name: 'Projects'
     description: 'Everything related to projects'
 
+  - name: 'Comments'
+    description: 'Everything related to project comments'
+
   - name: 'Media Library'
     description: 'Everything related to the media library'
 
@@ -1111,6 +1114,186 @@ paths:
           $ref: '#/components/responses/NotAcceptable'
 
   ################################################
+  # Comments
+  #
+  '/project/{id}/comments':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Comments'
+      summary: 'Get project comments'
+      description: 'Get top-level comments for a project ordered by newest first. Uses cursor-based pagination. Returns 404 if project is not visible to the current user.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Comments'
+      summary: 'Create a comment on a project'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentCreateRequest'
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+
+  '/comments/{id}/replies':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Comments'
+      summary: 'Get replies for a comment'
+      description: 'Get direct replies for a comment ordered by newest first. Uses cursor-based pagination.'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/comments/{id}':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Comments'
+      summary: 'Delete a comment'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/comments/{id}/report':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Comments'
+      summary: 'Report a comment'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/comments/{id}/translation':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Comments'
+      summary: 'Translate a comment'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+        - name: target_language
+          in: query
+          required: true
+          description: 'Target language for the translation'
+          schema:
+            type: string
+            example: 'de'
+        - name: source_language
+          in: query
+          required: false
+          description: 'Optional source language override'
+          schema:
+            type: string
+            example: 'en'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentTranslationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  ################################################
   # Notifications
   #
   /notifications:
@@ -1897,6 +2080,14 @@ components:
       schema:
         $ref: '#/components/schemas/Offset'
 
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Cursor for pagination (opaque string from the previous response)'
+      schema:
+        type: string
+
     Attributes:
       name: attributes
       in: query
@@ -1924,6 +2115,13 @@ components:
       in: path
       schema:
         $ref: '#/components/schemas/NotificationsId'
+      required: true
+
+    CommentId:
+      name: id
+      in: path
+      schema:
+        $ref: '#/components/schemas/CommentId'
       required: true
 
     NotificationsType:
@@ -2042,6 +2240,11 @@ components:
       description: 'How many objects should be skipped'
       default: 0
       example: 2
+
+    CommentId:
+      type: integer
+      description: 'Unique ID of the comment'
+      example: 123
 
     ##############################################
     # Media Library Schemas
@@ -3216,3 +3419,110 @@ components:
           type: string
           description: 'URL to the users avatar image'
           example: 'https://share.catrob.at/images/default/avatar_default.png'
+
+    ######################################################
+    # Comment Schemas
+    ###
+
+    CommentUserInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique ID of the user'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        username:
+          type: string
+          description: 'Username of the user'
+          example: 'Catrobat'
+        avatar:
+          type: string
+          description: 'URL to the users avatar image'
+          example: 'https://share.catrob.at/images/default/avatar_default.png'
+
+    CommentResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CommentId'
+        project_id:
+          $ref: '#/components/schemas/Uuid'
+        parent_id:
+          $ref: '#/components/schemas/CommentId'
+          nullable: true
+        user:
+          $ref: '#/components/schemas/CommentUserInfo'
+        message:
+          type: string
+          nullable: true
+          description: 'Comment text (null if deleted)'
+          example: 'Nice project!'
+        created_at:
+          type: string
+          format: date-time
+          example: '2024-01-15T10:30:00Z'
+        reply_count:
+          type: integer
+          example: 3
+        is_deleted:
+          type: boolean
+          example: false
+        is_reported:
+          type: boolean
+          example: false
+        rendered:
+          type: string
+          nullable: true
+          description: 'Rendered HTML for web clients (optional)'
+
+    CommentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: 'Array of comments'
+          items:
+            $ref: '#/components/schemas/CommentResponse'
+        next_cursor:
+          type: string
+          nullable: true
+          description: 'Cursor for the next page, null if no more results'
+          example: '2024-01-15T10:30:00Z:123'
+        has_more:
+          type: boolean
+          description: 'Whether there are more results available'
+          example: true
+
+    CommentCreateRequest:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: 'Comment text'
+          example: 'Nice project!'
+        parent_id:
+          $ref: '#/components/schemas/CommentId'
+          nullable: true
+
+    CommentTranslationResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CommentId'
+        source_language:
+          type: string
+          example: 'en'
+        target_language:
+          type: string
+          example: 'de'
+        translation:
+          type: string
+          example: 'Tolles Projekt!'
+        provider:
+          type: string
+          example: 'Google'
+        _cache:
+          type: boolean
+          nullable: true

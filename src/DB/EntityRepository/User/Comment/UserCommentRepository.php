@@ -98,7 +98,9 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.username',
         'c.text',
         'c.is_deleted',
+        'c.isReported as is_reported',
         'c.uploadDate as upload_date',
+        'c.parent_id as parent_id',
         'cu.id as user_id',
         'cu.avatar as user_avatar',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
@@ -108,6 +110,110 @@ class UserCommentRepository extends ServiceEntityRepository
       ->getQuery()
       ->getResult()
     ;
+  }
+
+  public function getProjectCommentsPageData(Program $project, int $limit, ?\DateTimeInterface $cursor_date, ?int $cursor_id): array
+  {
+    $qb = $this->createQueryBuilder('c');
+
+    $qb->innerJoin('c.user', 'cu')
+      ->select(
+        'c.id',
+        'c.username',
+        'c.text',
+        'c.is_deleted',
+        'c.isReported as is_reported',
+        'c.uploadDate as upload_date',
+        'c.parent_id as parent_id',
+        'cu.id as user_id',
+        'cu.avatar as user_avatar',
+        '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
+      ->where('c.program = :program')
+      ->andWhere($qb->expr()->orX()->addMultiple([
+        $qb->expr()->isNull('c.parent_id'),
+        $qb->expr()->eq('c.parent_id', 0),
+      ]))
+      ->setParameter('program', $project)
+      ->orderBy('c.uploadDate', 'ASC')
+      ->addOrderBy('c.id', 'ASC')
+      ->setMaxResults($limit + 1)
+    ;
+
+    if (null !== $cursor_date && null !== $cursor_id) {
+      $qb->andWhere(
+        $qb->expr()->orX(
+          $qb->expr()->gt('c.uploadDate', ':cursorDate'),
+          $qb->expr()->andX(
+            $qb->expr()->eq('c.uploadDate', ':cursorDate'),
+            $qb->expr()->gt('c.id', ':cursorId')
+          )
+        )
+      )
+        ->setParameter('cursorDate', $cursor_date)
+        ->setParameter('cursorId', $cursor_id)
+      ;
+    }
+
+    $results = $qb->getQuery()->getResult();
+    $has_more = count($results) > $limit;
+    if ($has_more) {
+      $results = array_slice($results, 0, $limit);
+    }
+
+    return [
+      'comments' => $results,
+      'has_more' => $has_more,
+    ];
+  }
+
+  public function getCommentRepliesPageData(int $comment_id, int $limit, ?\DateTimeInterface $cursor_date, ?int $cursor_id): array
+  {
+    $qb = $this->createQueryBuilder('c');
+
+    $qb->innerJoin('c.user', 'cu')
+      ->select(
+        'c.id',
+        'c.username',
+        'c.text',
+        'c.is_deleted',
+        'c.isReported as is_reported',
+        'c.uploadDate as upload_date',
+        'c.parent_id as parent_id',
+        'cu.id as user_id',
+        'cu.avatar as user_avatar',
+        '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
+      ->where('c.parent_id = :parentId')
+      ->setParameter('parentId', $comment_id)
+      ->orderBy('c.uploadDate', 'ASC')
+      ->addOrderBy('c.id', 'ASC')
+      ->setMaxResults($limit + 1)
+    ;
+
+    if (null !== $cursor_date && null !== $cursor_id) {
+      $qb->andWhere(
+        $qb->expr()->orX(
+          $qb->expr()->gt('c.uploadDate', ':cursorDate'),
+          $qb->expr()->andX(
+            $qb->expr()->eq('c.uploadDate', ':cursorDate'),
+            $qb->expr()->gt('c.id', ':cursorId')
+          )
+        )
+      )
+        ->setParameter('cursorDate', $cursor_date)
+        ->setParameter('cursorId', $cursor_id)
+      ;
+    }
+
+    $results = $qb->getQuery()->getResult();
+    $has_more = count($results) > $limit;
+    if ($has_more) {
+      $results = array_slice($results, 0, $limit);
+    }
+
+    return [
+      'comments' => $results,
+      'has_more' => $has_more,
+    ];
   }
 
   /**
@@ -123,10 +229,13 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.username',
         'c.text',
         'c.is_deleted',
+        'c.isReported as is_reported',
         'c.uploadDate as upload_date',
+        'c.parent_id as parent_id',
         'cp.id as program_id',
         'cu.id as user_id',
-        'cu.avatar as user_avatar'
+        'cu.avatar as user_avatar',
+        '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies'
       )
       ->where('c.id = :id')
       ->setParameter('id', $comment_id)

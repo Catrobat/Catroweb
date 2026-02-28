@@ -33,6 +33,55 @@ open_api_server_authentication_authenticationrefreshpost:
   defaults:
     _controller: open_api_server.controller.authentication::authenticationRefreshPostAction
 
+# comments
+open_api_server_comments_commentsiddelete:
+  path: /comments/{id}
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.comments::commentsIdDeleteAction
+  requirements:
+    id: '\d+'
+
+open_api_server_comments_commentsidrepliesget:
+  path: /comments/{id}/replies
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.comments::commentsIdRepliesGetAction
+  requirements:
+    id: '\d+'
+
+open_api_server_comments_commentsidreportpost:
+  path: /comments/{id}/report
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.comments::commentsIdReportPostAction
+  requirements:
+    id: '\d+'
+
+open_api_server_comments_commentsidtranslationget:
+  path: /comments/{id}/translation
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.comments::commentsIdTranslationGetAction
+  requirements:
+    id: '\d+'
+
+open_api_server_comments_projectidcommentsget:
+  path: /project/{id}/comments
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.comments::projectIdCommentsGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_comments_projectidcommentspost:
+  path: /project/{id}/comments
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.comments::projectIdCommentsPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
 # mediaLibrary
 open_api_server_mediaLibrary_mediaassetsget:
   path: /media/assets
