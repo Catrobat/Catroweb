@@ -4,7 +4,6 @@ about: Create a report to help us improve the Catroweb platform. Please DO NOT u
 title: ''
 labels: bug
 assignees: ''
-
 ---
 
 **⚠️ ATTENTION: Is this a bug in the Pocket Code or Pocket Paint Android apps?**
@@ -16,6 +15,7 @@ A clear and concise description of what the bug is on the web platform (http://s
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
