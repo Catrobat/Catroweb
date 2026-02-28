@@ -212,6 +212,60 @@ Default dev credentials (from docker-compose):
 
 ## Common Issues
 
+### Doctrine DQL Uses PHP Property Names (Not Column Names)
+
+In DQL queries, always use the PHP property name, not the database column name:
+
+```php
+// WRONG: $isReported property has column name "isReported" but DQL needs property name
+'c.is_reported'  // ❌ fails with "no field named is_reported"
+
+// CORRECT: use the PHP property name
+'c.isReported as is_reported'  // ✓ works, aliases to is_reported for array access
+```
+
+Rule: DQL uses PHP property names (e.g., `isReported`) not snake_case column names.
+
+### Forcing IDs in Behat Fixtures (MySQL AUTO_INCREMENT)
+
+`setId()` after `persist()` is ignored by Doctrine's `AUTO` strategy. To force specific IDs in test fixtures, use raw DBAL SQL:
+
+```php
+$em->getConnection()->executeStatement(
+    'INSERT INTO user_comment (id, ...) VALUES (:id, ...)',
+    ['id' => $forced_id, ...]
+);
+$entity = $em->find(UserComment::class, $forced_id);
+```
+
+See `insertUserComment()` in `ContextTrait.php` for the implementation pattern.
+
+### Twig path() Inherits Theme from Current Request Context
+
+Routes with `/{theme}/...` prefix require explicit `theme` in `path()` when rendering from a non-themed context (e.g., API):
+
+```twig
+{# WRONG: inherits "api" from URL /api/... which fails validation #}
+{{ path('project_comment', {id: comment.id}) }}
+
+{# CORRECT: explicit theme with fallback #}
+{{ path('project_comment', {id: comment.id, theme: request_theme|default('pocketcode')}) }}
+```
+
+When rendering Twig from an API controller, the router context has no valid theme, so the path generator inherits the URL prefix (e.g., "api"), which fails route validation.
+
+### index_test.php Always Uses debug=false
+
+`public/index_test.php` hardcodes `new Kernel('test', false)` — the second arg is debug mode. Setting `APP_DEBUG=1` in `.env.test` does NOT affect this. Error responses always show minimal info (no stack traces). For debugging 500s, add temporary `file_put_contents('/tmp/debug.txt', ...)` logging.
+
+### POST Endpoints Require Content-Type in Behat
+
+`ApiContext::iHaveTheFollowingJsonRequestBody()` only sets the request body, NOT the Content-Type header. The CommentsController returns 415 if Content-Type is not `application/json`. Always add:
+
+```gherkin
+And I have a request header "CONTENT_TYPE" with value "application/json"
+```
+
 ### After changing package.json
 
 ```bash
@@ -306,6 +360,7 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 | web-reactions       | tests/BehatFeatures/web/reactions       |
 | api-projects        | tests/BehatFeatures/api/projects        |
 | api-authentication  | tests/BehatFeatures/api/authentication  |
+| api-comments        | tests/BehatFeatures/api/comments        |
 
 Suite configuration is in `behat.yaml.dist`.
 

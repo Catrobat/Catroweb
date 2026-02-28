@@ -13,6 +13,7 @@
     "test-asset": "yarn prettier . --check",
     "fix-asset": "yarn prettier . --write",
     "generate-api": "sh -c 'src/Api/OpenAPI/code-generation.sh'",
+    "openapi-generate": "npm run generate-api",
     "test-twig": "php bin/twig-cs-fixer lint",
     "fix-twig": "php bin/twig-cs-fixer lint --fix",
     "test-php": "php bin/php-cs-fixer fix --dry-run --allow-risky=yes --verbose --format=txt",

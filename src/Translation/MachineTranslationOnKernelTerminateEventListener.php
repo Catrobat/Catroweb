@@ -39,7 +39,7 @@ class MachineTranslationOnKernelTerminateEventListener
     $request = $event->getRequest();
     $path = $request->getPathInfo();
 
-    if (str_contains($path, '/translate/comment/')) {
+    if (str_contains($path, '/comments/') && str_contains($path, '/translation')) {
       if (200 === $status_code) {
         $this->persistCommentTranslation($event);
       } else {
@@ -72,7 +72,7 @@ class MachineTranslationOnKernelTerminateEventListener
 
   private function persistCachedCommentTranslation(Request $request): void
   {
-    $comment_id = intval($this->getId($request->getPathInfo()));
+    $comment_id = $this->getCommentIdFromPath($request->getPathInfo());
     [$source_language, $target_language] = $this->getLanguages($request);
 
     $this->findCommentAndIncrement($comment_id, $source_language, $target_language, self::CACHED_PROVIDER);
@@ -98,13 +98,22 @@ class MachineTranslationOnKernelTerminateEventListener
       $json['source_language'],
       $json['target_language'],
       $json['provider'],
-      $json['_cache'],
+      $json['_cache'] ?? null,
     ];
   }
 
   private function getId(string $path): string
   {
     return substr((string) strrchr($path, '/'), 1);
+  }
+
+  private function getCommentIdFromPath(string $path): int
+  {
+    if (1 === preg_match('/\/comments\/(\d+)\//', $path, $matches)) {
+      return (int) $matches[1];
+    }
+
+    return 0;
   }
 
   private function getLanguages(Request $request): array

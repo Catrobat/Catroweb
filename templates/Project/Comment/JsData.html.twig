@@ -1,6 +1,5 @@
 <div class="js-project-comments"
      data-project-id="{{ project.id }}"
-     data-total-number-of-comments="{{ (comments|length) }}"
      data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
      data-trans-delete-it="{{ 'deleteIt'|trans({}, 'catroweb') }}"
      data-trans-report-it="{{ 'reportIt'|trans({}, 'catroweb') }}"
@@ -15,9 +14,8 @@
      data-trans-deleted-comment="{{ 'project.deletedComment'|trans({}, 'catroweb') }}"
      data-trans-no-admin-rights-message="{{ 'project.noAdminRights'|trans({}, 'catroweb') }}"
      data-trans-default-error-message="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
-     data-path-report-comment-url="{{ path('report') }}"
-     data-path-post-comment-url="{{ path('comment') }}"
-     data-path-delete-comment-url="{{ path('delete') }}"
+     data-path-comments-list-url="{{ path('open_api_server_comments_projectidcommentsget', {id: project.id}) }}"
+     data-path-comments-base-url="{{ path('open_api_server_comments_commentsiddelete', {id: 0})|replace({'/0': ''}) }}"
      data-path-login-url="{{ path('login') }}"
      data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
      data-google-translate-display-name="{{ 'project.googleTranslate'|trans({}, 'catroweb') }}">

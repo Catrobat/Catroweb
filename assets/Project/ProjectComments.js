@@ -1,11 +1,11 @@
 import Swal from 'sweetalert2'
+import { getCookie } from '../Security/CookieHelper'
 
 export function ProjectComments(
   programId,
   visibleComments,
   showStep,
   minAmountOfVisibleComments,
-  totalAmountOfComments,
   cancel,
   deleteIt,
   reportIt,
@@ -20,8 +20,17 @@ export function ProjectComments(
   noAdminRightsMessage,
   defaultErrorMessage,
 ) {
-  let amountOfVisibleComments
   let fetchActive = false
+  let nextCursor = null
+  let hasMore = true
+
+  const projectComments = document.querySelector('.js-project-comments')
+  const commentsWrapper = document.querySelector('#comments-wrapper')
+  const commentsListUrl = projectComments?.dataset.pathCommentsListUrl
+  const commentsBaseUrl = projectComments?.dataset.pathCommentsBaseUrl
+  const parentCommentContainer = document.querySelector('.js-project-parentComment')
+  const repliesParentId = parentCommentContainer?.dataset.parentCommentId
+  const isRepliesPage = Boolean(parentCommentContainer && repliesParentId)
 
   const commentUploadDates = document.getElementsByClassName('comment-upload-date')
   for (const element of commentUploadDates) {
@@ -29,27 +38,7 @@ export function ProjectComments(
     element.innerHTML = commentUploadDate.toLocaleString('en-GB')
   }
 
-  amountOfVisibleComments = visibleComments
-  restoreAmountOfVisibleCommentsFromSession()
-  updateCommentsVisibility()
-
-  // If we are on a comment detail page, ensure the parent comment shows the reply count
-  try {
-    const parentCommentEl = document.querySelector('.js-project-parentComment')
-    if (parentCommentEl) {
-      const parentId = parentCommentEl.dataset.parentCommentId
-      const commentsData = document.querySelector('.js-project-comments')
-      if (parentId && commentsData) {
-        const repliesCount = parseInt(commentsData.dataset.totalNumberOfComments || '0', 10)
-        if (!Number.isNaN(repliesCount)) {
-          setReplyCount(parentId, repliesCount)
-        }
-      }
-    }
-  } catch (e) {
-    // non-fatal
-    console.warn('Failed to initialize parent reply count', e)
-  }
+  loadMoreComments()
 
   document.querySelector('#comment-post-button')?.addEventListener('click', postComment)
 
@@ -205,14 +194,7 @@ export function ProjectComments(
     if (bottom <= 0) return
     const pctVertical = position / bottom
     if (pctVertical >= 0.7) {
-      if (amountOfVisibleComments < totalAmountOfComments) {
-        fetchActive = true
-        showMore(showStep)
-        // Add a small delay to prevent multiple triggers
-        setTimeout(() => {
-          fetchActive = false
-        }, 100)
-      }
+      loadMoreComments()
     }
   })
 
@@ -242,20 +224,29 @@ export function ProjectComments(
       return
     }
 
-    const postCommentUrl = document.querySelector('.js-project-comments').dataset.pathPostCommentUrl
+    const postCommentUrl = projectComments?.dataset.pathCommentsListUrl
+    if (!postCommentUrl) {
+      showErrorPopUp(defaultErrorMessage)
+      return
+    }
     const parentCommentId =
       document.querySelector('.js-project-parentComment')?.dataset?.parentCommentId ?? 0
+
+    const payload = {
+      message: msg,
+    }
+
+    if (parentCommentId > 0) {
+      payload.parent_id = Number(parentCommentId)
+    }
 
     fetch(postCommentUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + getCookie('BEARER'),
       },
-      body: JSON.stringify({
-        Message: msg,
-        ProgramId: programId,
-        ParentCommentId: parentCommentId,
-      }),
+      body: JSON.stringify(payload),
     })
       .then((response) => {
         if (response.ok) {
@@ -286,9 +277,6 @@ export function ProjectComments(
             }
           } else {
             commentsWrapper.prepend(newComment)
-            totalAmountOfComments++
-            amountOfVisibleComments++
-            setVisibleCommentsSessionVar()
           }
 
           // Format date for the new comment
@@ -306,6 +294,67 @@ export function ProjectComments(
       .catch(() => {
         showErrorPopUp(defaultErrorMessage)
       })
+  }
+
+  function buildListUrl() {
+    const baseUrl = isRepliesPage
+      ? `${commentsBaseUrl}/${repliesParentId}/replies`
+      : commentsListUrl
+
+    if (!baseUrl) return null
+
+    const params = new URLSearchParams()
+    params.set('limit', String(showStep || minAmountOfVisibleComments || 20))
+    if (nextCursor) {
+      params.set('cursor', nextCursor)
+    }
+
+    return `${baseUrl}?${params.toString()}`
+  }
+
+  function loadMoreComments() {
+    if (fetchActive || !hasMore || !commentsWrapper) return
+
+    const listUrl = buildListUrl()
+    if (!listUrl) return
+
+    fetchActive = true
+    const loadHeaders = {}
+    const bearerToken = getCookie('BEARER')
+    if (bearerToken) {
+      loadHeaders['Authorization'] = 'Bearer ' + bearerToken
+    }
+    fetch(listUrl, { headers: loadHeaders })
+      .then((response) => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error('Network response was not ok')
+      })
+      .then((data) => {
+        const comments = data?.data || []
+        comments.forEach((comment) => {
+          if (!comment?.rendered) return
+          appendRenderedComment(comment.rendered)
+        })
+
+        nextCursor = data?.next_cursor || null
+        hasMore = Boolean(data?.has_more)
+      })
+      .catch(() => {
+        showErrorPopUp(defaultErrorMessage)
+      })
+      .finally(() => {
+        fetchActive = false
+      })
+  }
+
+  function appendRenderedComment(rendered) {
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = rendered
+    const newComment = tempDiv.firstChild
+    if (!newComment) return
+    commentsWrapper.appendChild(newComment)
   }
 
   // Helper to update/create the visible reply count for a parent comment
@@ -333,29 +382,6 @@ export function ProjectComments(
     }
   }
 
-  // Set absolute count for a parent comment (create element if missing)
-  function setReplyCount(parentId, count) {
-    const parentSelector = '#comment-' + parentId
-    const parentEl = document.querySelector(parentSelector)
-    if (!parentEl) return
-
-    let repliesCountWrapper = parentEl.querySelector('.comment-replies-count')
-    if (!repliesCountWrapper) {
-      const actionsEl = parentEl.querySelector('.comment-actions')
-      if (!actionsEl) return
-      repliesCountWrapper = document.createElement('div')
-      repliesCountWrapper.className = 'comment-replies-count'
-      repliesCountWrapper.innerHTML = `<i class="material-icons">comment</i><span>${count}</span>`
-      actionsEl.insertBefore(repliesCountWrapper, actionsEl.firstChild)
-      return
-    }
-
-    const span = repliesCountWrapper.querySelector('span')
-    if (span) {
-      span.textContent = String(Math.max(0, count))
-    }
-  }
-
   function setPopUpDeletedRefresh(refresh) {
     Swal.fire({
       title: popUpDeletedTitle,
@@ -374,11 +400,16 @@ export function ProjectComments(
   }
 
   function deleteComment(commentId) {
-    const projectComments = document.querySelector('.js-project-comments')
-    const deleteCommentUrl = projectComments.dataset.pathDeleteCommentUrl
+    if (!commentsBaseUrl) {
+      showErrorPopUp(defaultErrorMessage)
+      return
+    }
 
-    fetch(deleteCommentUrl + '/' + commentId, {
+    fetch(`${commentsBaseUrl}/${commentId}`, {
       method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + getCookie('BEARER'),
+      },
     })
       .then((response) => {
         if (response.ok) {
@@ -425,11 +456,16 @@ export function ProjectComments(
   }
 
   function reportComment(commentId) {
-    const projectComments = document.querySelector('.js-project-comments')
-    const reportCommentPath = projectComments.dataset.pathReportCommentUrl
+    if (!commentsBaseUrl) {
+      showErrorPopUp(defaultErrorMessage)
+      return
+    }
 
-    fetch(reportCommentPath + '/' + commentId, {
-      method: 'DELETE',
+    fetch(`${commentsBaseUrl}/${commentId}/report`, {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + getCookie('BEARER'),
+      },
     })
       .then((response) => {
         if (response.ok) {
@@ -536,64 +572,5 @@ export function ProjectComments(
   function redirectToLogin() {
     const projectComments = document.querySelector('.js-project-comments')
     window.location.href = projectComments.dataset.pathLoginUrl
-  }
-
-  function restoreAmountOfVisibleCommentsFromSession() {
-    const lastSessionAmount = getVisibleCommentsSessionVar()
-    if (lastSessionAmount !== null) {
-      amountOfVisibleComments = lastSessionAmount
-    }
-    if (amountOfVisibleComments > totalAmountOfComments) {
-      amountOfVisibleComments = totalAmountOfComments
-    }
-  }
-
-  function updateCommentsVisibility() {
-    const commentsClassSelectorElement = document.querySelector('.comments-class-selector')
-    if (!commentsClassSelectorElement) return
-
-    const commentsClassSelector = commentsClassSelectorElement.dataset.commentsClassSelector
-
-    document.querySelectorAll(commentsClassSelector).forEach((comment, index) => {
-      if (index < amountOfVisibleComments) {
-        comment.style.display = 'flex'
-      } else {
-        comment.style.display = 'none'
-      }
-    })
-    // Ensure parent comment is always visible if it exists
-    const parentComment = document.querySelector('#parent-comment-container .single-comment')
-    if (parentComment) {
-      parentComment.style.display = 'flex'
-    }
-  }
-
-  function showMore(step) {
-    amountOfVisibleComments = Math.min(amountOfVisibleComments + step, totalAmountOfComments)
-    setVisibleCommentsSessionVar()
-    updateCommentsVisibility()
-  }
-
-  function getVisibleCommentsSessionVarName() {
-    const sessionVarsNames = document.querySelector('.session-vars-names')
-    return sessionVarsNames ? sessionVarsNames.dataset.visibleCommentsSessionVar : 'visibleComments'
-  }
-
-  function setVisibleCommentsSessionVar() {
-    const visibleCommentSessionVarName = getVisibleCommentsSessionVarName()
-    window.sessionStorage.setItem(
-      visibleCommentSessionVarName,
-      JSON.stringify(amountOfVisibleComments),
-    )
-  }
-
-  function getVisibleCommentsSessionVar() {
-    const visibleCommentSessionVarName = getVisibleCommentsSessionVarName()
-    return JSON.parse(
-      window.sessionStorage.getItem(
-        visibleCommentSessionVarName,
-        JSON.stringify(amountOfVisibleComments),
-      ),
-    )
   }
 }

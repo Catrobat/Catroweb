@@ -16,20 +16,18 @@ export class LoginTokenHandler {
 
     // Only use a provided target path if it results in a safe same-origin HTTP(S) URL.
     if (rawValue !== '') {
-      // Reject values that look like they contain a URL scheme (for example, "javascript:" or "http:").
-      if (!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(rawValue)) {
-        try {
-          // The URL constructor will resolve relative paths against the current origin.
-          const url = new URL(rawValue, window.location.origin)
-          // Enforce same origin and restrict to HTTP(S) protocols.
-          const isSameOrigin = url.origin === window.location.origin
-          const isHttpProtocol = url.protocol === 'http:' || url.protocol === 'https:'
-          if (isSameOrigin && isHttpProtocol) {
-            return url.pathname + url.search + url.hash
-          }
-        } catch {
-          // If URL construction fails, fall through to the safe default.
+      try {
+        // The URL constructor resolves relative paths against the current origin and
+        // also handles absolute URLs, allowing the same-origin check to be the security boundary.
+        const url = new URL(rawValue, window.location.origin)
+        // Enforce same origin and restrict to HTTP(S) protocols to prevent open redirects.
+        const isSameOrigin = url.origin === window.location.origin
+        const isHttpProtocol = url.protocol === 'http:' || url.protocol === 'https:'
+        if (isSameOrigin && isHttpProtocol) {
+          return url.pathname + url.search + url.hash
         }
+      } catch {
+        // If URL construction fails, fall through to the safe default.
       }
     }
 

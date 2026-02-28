@@ -1,0 +1,453 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Api;
+
+use App\Api\Services\AuthenticationManager;
+use App\Api\Services\Base\AbstractApiController;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\User\Comment\UserComment;
+use App\DB\Entity\User\Notifications\CommentNotification;
+use App\DB\Entity\User\User;
+use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\Project\ProjectManager;
+use App\Translation\TranslationDelegate;
+use App\Translation\TranslationResult;
+use App\User\Notification\NotificationManager;
+use Doctrine\ORM\EntityManagerInterface;
+use OpenAPI\Server\Api\CommentsApiInterface;
+use OpenAPI\Server\Model\CommentCreateRequest;
+use OpenAPI\Server\Model\CommentListResponse;
+use OpenAPI\Server\Model\CommentResponse;
+use OpenAPI\Server\Model\CommentTranslationResponse;
+use OpenAPI\Server\Model\CommentUserInfo;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Twig\Environment;
+
+class CommentsApi extends AbstractApiController implements CommentsApiInterface
+{
+  private const DEFAULT_LIMIT = 20;
+  private const MAX_LIMIT = 50;
+
+  public function __construct(
+    private readonly AuthenticationManager $authentication_manager,
+    private readonly ProjectManager $project_manager,
+    private readonly UserCommentRepository $comment_repository,
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly TranslationDelegate $translation_delegate,
+    private readonly NotificationManager $notification_manager,
+    private readonly RequestStack $request_stack,
+    private readonly Environment $twig,
+    private readonly AuthorizationCheckerInterface $authorization_checker,
+  ) {
+  }
+
+  #[\Override]
+  public function projectIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
+    if (!$project instanceof Program) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $limit = $this->normalizeLimit($limit);
+    $cursor_data = $this->decodeCursor($cursor);
+    if (null === $cursor_data && null !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $page = $this->comment_repository->getProjectCommentsPageData(
+      $project,
+      $limit,
+      $cursor_data['date'] ?? null,
+      $cursor_data['id'] ?? null,
+    );
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project->getId(), false);
+  }
+
+  #[\Override]
+  public function projectIdCommentsPost(string $id, CommentCreateRequest $comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $user = $this->authentication_manager->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
+    if (!$project instanceof Program) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $message = trim((string) $comment_create_request->getMessage());
+    if ('' === $message) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $parent_id = $comment_create_request->getParentId();
+    $parent_comment = null;
+    if (null !== $parent_id) {
+      $parent_comment = $this->comment_repository->findOneBy(['id' => $parent_id]);
+      if (!$parent_comment instanceof UserComment) {
+        $responseCode = Response::HTTP_NOT_FOUND;
+
+        return null;
+      }
+
+      if ($parent_comment->getProgram()?->getId() !== $project->getId()) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return null;
+      }
+    }
+
+    $comment = new UserComment();
+    $comment->setUser($user);
+    $comment->setUsername($user->getUsername() ?? '');
+    $comment->setText($message);
+    $comment->setProgram($project);
+    $comment->setUploadDate(new \DateTime('now', new \DateTimeZone('UTC')));
+    $comment->setIsReported(false);
+    $comment->setIsDeleted(false);
+    if (null !== $parent_id) {
+      $comment->setParentId($parent_id);
+    }
+
+    $this->entity_manager->persist($comment);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($comment);
+
+    if ($project->getUser() instanceof User && $project->getUser()->getId() !== $user->getId()) {
+      $notification = new CommentNotification($project->getUser(), $comment);
+      $comment->setNotification($notification);
+      $this->notification_manager->addNotification($notification);
+      $this->entity_manager->persist($comment);
+      $this->entity_manager->flush();
+    }
+
+    $comment_data = $this->buildCommentDataFromEntity($comment, 0);
+    $response = $this->createCommentResponse($comment_data, $project->getId(), null !== $parent_id);
+    $responseCode = Response::HTTP_CREATED;
+
+    return $response;
+  }
+
+  #[\Override]
+  public function commentsIdDelete(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    if ($id <= 0) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return;
+    }
+
+    $user = $this->authentication_manager->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return;
+    }
+
+    $comment = $this->comment_repository->findOneBy(['id' => $id]);
+    if (!$comment instanceof UserComment) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return;
+    }
+
+    if (true === $comment->getIsDeleted()) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return;
+    }
+
+    if ($comment->getUser()?->getId() !== $user->getId() && !$this->authorization_checker->isGranted('ROLE_ADMIN')) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
+    $comment->setIsDeleted(true);
+    $this->entity_manager->persist($comment);
+    $this->entity_manager->flush();
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function commentsIdReportPost(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    if ($id <= 0) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return;
+    }
+
+    $user = $this->authentication_manager->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return;
+    }
+
+    $comment = $this->comment_repository->findOneBy(['id' => $id]);
+    if (!$comment instanceof UserComment) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return;
+    }
+
+    if (true === $comment->getIsDeleted()) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return;
+    }
+
+    $comment->setIsReported(true);
+    $this->entity_manager->persist($comment);
+    $this->entity_manager->flush();
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function commentsIdRepliesGet(int $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $comment = $this->comment_repository->findOneBy(['id' => $id]);
+    if (!$comment instanceof UserComment) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $project = $comment->getProgram();
+    if (!$project instanceof Program || null === $this->project_manager->findProjectIfVisibleToCurrentUser($project->getId())) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $limit = $this->normalizeLimit($limit);
+    $cursor_data = $this->decodeCursor($cursor);
+    if (null === $cursor_data && null !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $page = $this->comment_repository->getCommentRepliesPageData(
+      $id,
+      $limit,
+      $cursor_data['date'] ?? null,
+      $cursor_data['id'] ?? null,
+    );
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project->getId(), true);
+  }
+
+  #[\Override]
+  public function commentsIdTranslationGet(int $id, string $target_language, string $accept_language, ?string $source_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $comment = $this->comment_repository->findOneBy(['id' => $id]);
+    if (!$comment instanceof UserComment) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    if (true === $comment->getIsDeleted()) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    if ($source_language === $target_language) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return null;
+    }
+
+    $etag_value = md5((string) $comment->getText()).$target_language;
+    $etag_header = '"'.$etag_value.'"';
+    $responseHeaders['ETag'] = $etag_header;
+    $request = $this->request_stack->getCurrentRequest();
+    $if_none_match = $request?->headers->get('If-None-Match');
+    if (null !== $if_none_match) {
+      $candidates = array_map('trim', explode(',', $if_none_match));
+      foreach ($candidates as $candidate) {
+        if (trim($candidate, '"') === $etag_value) {
+          $responseCode = Response::HTTP_NOT_MODIFIED;
+
+          return null;
+        }
+      }
+    }
+
+    try {
+      $translation_result = $this->translation_delegate->translate($comment->getText(), $source_language, $target_language);
+    } catch (\InvalidArgumentException $exception) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    if (!$translation_result instanceof TranslationResult) {
+      $responseCode = Response::HTTP_SERVICE_UNAVAILABLE;
+
+      return null;
+    }
+
+    $response = new CommentTranslationResponse();
+    $response->setId($comment->getId());
+    $response->setSourceLanguage($source_language ?? $translation_result->detected_source_language);
+    $response->setTargetLanguage($target_language);
+    $response->setTranslation($translation_result->translation);
+    $response->setProvider($translation_result->provider);
+    $response->setCache(null !== $translation_result->cache ? true : null);
+
+    $responseCode = Response::HTTP_OK;
+
+    return $response;
+  }
+
+  private function createCommentListResponse(array $comments, bool $has_more, string $project_id, bool $are_replies): CommentListResponse
+  {
+    $response = new CommentListResponse();
+    $data = [];
+
+    foreach ($comments as $comment_data) {
+      $data[] = $this->createCommentResponse($comment_data, $project_id, $are_replies);
+    }
+
+    $next_cursor = null;
+    if ($has_more && !empty($comments)) {
+      $last = $comments[array_key_last($comments)];
+      $next_cursor = $this->encodeCursor($last['upload_date'], (int) $last['id']);
+    }
+
+    $response->setData($data);
+    $response->setHasMore($has_more);
+    $response->setNextCursor($next_cursor);
+
+    return $response;
+  }
+
+  private function createCommentResponse(array $comment_data, string $project_id, bool $are_replies): CommentResponse
+  {
+    $response = new CommentResponse();
+    $response->setId((int) $comment_data['id']);
+    $response->setProjectId($project_id);
+    $parent_id = isset($comment_data['parent_id']) ? (int) $comment_data['parent_id'] : null;
+    if (0 === $parent_id) {
+      $parent_id = null;
+    }
+    $response->setParentId($parent_id);
+    $response->setMessage(true === $comment_data['is_deleted'] ? null : (string) $comment_data['text']);
+    $response->setCreatedAt($comment_data['upload_date']);
+    $response->setReplyCount((int) ($comment_data['number_of_replies'] ?? 0));
+    $response->setIsDeleted((bool) $comment_data['is_deleted']);
+    $response->setIsReported((bool) $comment_data['is_reported']);
+
+    $user_info = new CommentUserInfo();
+    $user_info->setId((string) $comment_data['user_id']);
+    $user_info->setUsername((string) $comment_data['username']);
+    $user_info->setAvatar($comment_data['user_avatar'] ?? null);
+    $response->setUser($user_info);
+
+    $response->setRendered($this->renderCommentHtml($comment_data, $are_replies));
+
+    return $response;
+  }
+
+  private function renderCommentHtml(array $comment_data, bool $are_replies): string
+  {
+    return $this->twig->render('Project/Comment/Comment.html.twig', [
+      'comment' => $comment_data,
+      'isAdmin' => $this->authorization_checker->isGranted('ROLE_ADMIN'),
+      'are_replies' => $are_replies,
+    ]);
+  }
+
+  private function buildCommentDataFromEntity(UserComment $comment, int $reply_count): array
+  {
+    return [
+      'id' => $comment->getId(),
+      'username' => $comment->getUsername(),
+      'text' => $comment->getText(),
+      'is_deleted' => $comment->getIsDeleted(),
+      'is_reported' => $comment->getIsReported(),
+      'upload_date' => $comment->getUploadDate(),
+      'user_id' => $comment->getUser()?->getId(),
+      'user_avatar' => $comment->getUser()?->getAvatar(),
+      'parent_id' => $comment->getParentId(),
+      'number_of_replies' => $reply_count,
+    ];
+  }
+
+  private function normalizeLimit(int $limit): int
+  {
+    $limit = $limit > 0 ? $limit : self::DEFAULT_LIMIT;
+
+    return min($limit, self::MAX_LIMIT);
+  }
+
+  private function decodeCursor(?string $cursor): ?array
+  {
+    if (null === $cursor || '' === $cursor) {
+      return null;
+    }
+
+    $decoded = base64_decode($cursor, true);
+    if (false === $decoded) {
+      return null;
+    }
+
+    $parts = explode('|', $decoded);
+    if (2 !== count($parts)) {
+      return null;
+    }
+
+    [$date_string, $id_string] = $parts;
+    $date = \DateTimeImmutable::createFromFormat('Y-m-d\TH:i:s.u\Z', $date_string, new \DateTimeZone('UTC'));
+    if (false === $date) {
+      $date = \DateTimeImmutable::createFromFormat('Y-m-d\TH:i:s\Z', $date_string, new \DateTimeZone('UTC'));
+    }
+
+    if (false === $date) {
+      return null;
+    }
+
+    $id = filter_var($id_string, FILTER_VALIDATE_INT);
+    if (false === $id) {
+      return null;
+    }
+
+    return [
+      'date' => $date,
+      'id' => $id,
+    ];
+  }
+
+  private function encodeCursor(\DateTimeInterface $date, int $id): string
+  {
+    $utc_date = \DateTimeImmutable::createFromInterface($date)->setTimezone(new \DateTimeZone('UTC'));
+    $value = $utc_date->format('Y-m-d\TH:i:s.u\Z').'|'.$id;
+
+    return base64_encode($value);
+  }
+}

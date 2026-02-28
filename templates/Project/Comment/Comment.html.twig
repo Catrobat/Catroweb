@@ -1,5 +1,5 @@
 <div id="comment-{{ comment.id }}"
-     data-path-project-comment="{{ path('project_comment', {id: comment.id}) }}"
+     data-path-project-comment="{{ path('project_comment', {id: comment.id, theme: app.request.attributes.get('flavor')|default('pocketcode')}) }}"
      data-comment-id="{{ comment.id }}"
      class="{% if are_replies is defined and are_replies %}single-reply{% else %}single-comment{% endif %}"
       {% if hide is defined and hide %}
@@ -7,7 +7,7 @@
       {% endif %}>
 
   <div class="comment-avatar">
-    <a href="{{ url('profile', {id: comment.user_id}) }}">
+    <a href="{{ url('profile', {id: comment.user_id, theme: app.request.attributes.get('flavor')|default('pocketcode')}) }}">
       <img class="comment-avatar-img" src="{% if comment.user_avatar is defined and comment.user_avatar is not null %}
                       {{ comment.user_avatar }}
                     {% else %}
@@ -19,7 +19,7 @@
   <div class="comment-payload-wrapper">
     <div class="comment-header">
       <div class="comment-user-info">
-        <a href="{{ url('profile', {id: comment.user_id}) }}" class="usr-name no-overflow">
+        <a href="{{ url('profile', {id: comment.user_id, theme: app.request.attributes.get('flavor')|default('pocketcode')}) }}" class="usr-name no-overflow">
           <span id="profile-comment-user-id-{{ comment.user_id }}">
             {{ comment.username }}
           </span>
@@ -63,7 +63,7 @@
           </div>
         {% endif %}
 
-        {% if (isAdmin or not app.user or comment.id != app.user.id) and (not comment.is_deleted) %}
+        {% if (isAdmin or not app.user or comment.user_id != app.user.id) and (not comment.is_deleted) %}
           <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
              data-bs-toggle="tooltip" title="{{ 'project.report'|trans({}, 'catroweb') }}">
             <i class="material-icons">report</i>
@@ -89,9 +89,9 @@
 
     <div class="comment-translation-container">
       {% if (not app.user or comment.user_id != app.user.id) and (not comment.is_deleted) %}
-        <div class="comment-translation"
-             data-translate-comment-id="translate-comment-{{ comment.id }}"
-             data-path-translate-comment="{{ path('translate_comment', {id: comment.id}) }}"></div>
+         <div class="comment-translation"
+              data-translate-comment-id="translate-comment-{{ comment.id }}"
+              data-path-translate-comment="{{ path('open_api_server_comments_commentsidtranslationget', {id: comment.id}) }}"></div>
       {% endif %}
 
       <div id="comment-translation-wrapper-{{ comment.id }}" class="comment-translation-wrapper"

@@ -53,6 +53,7 @@ use App\Admin\Users\UserAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportController;
 use App\Api\AuthenticationApi;
+use App\Api\CommentsApi;
 use App\Api\MediaLibraryApi;
 use App\Api\NotificationsApi;
 use App\Api\ProjectsApi;
@@ -175,6 +176,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   //
   $services->set(MediaLibraryApi::class)->tag('open_api_server.api', ['api' => 'mediaLibrary']);
   $services->set(ProjectsApi::class)->tag('open_api_server.api', ['api' => 'projects']);
+  $services->set(CommentsApi::class)->tag('open_api_server.api', ['api' => 'comments']);
   $services->set(UserApi::class)->tag('open_api_server.api', ['api' => 'user']);
   $services->set(AuthenticationApi::class)->tag('open_api_server.api', ['api' => 'authentication']);
   $services->set(UtilityApi::class)->tag('open_api_server.api', ['api' => 'utility']);
