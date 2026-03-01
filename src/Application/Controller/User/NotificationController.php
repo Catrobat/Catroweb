@@ -80,6 +80,9 @@ class NotificationController extends AbstractController
       }
     }
 
+    $last_notification = end($notifications) ?: null;
+    $initial_cursor = $last_notification ? base64_encode((string) $last_notification->getId()) : null;
+
     return $this->render('User/Notification/NotificationsPage.html.twig', [
       'allNotifications' => $all_notifications,
       'followerNotifications' => $follower_notifications,
@@ -88,6 +91,8 @@ class NotificationController extends AbstractController
       'remixNotifications' => $remix_notifications,
       'instance' => $notification_instance,
       'redirect' => $redirect_array,
+      'initialCursor' => $initial_cursor,
+      'hasMoreNotifications' => count($notifications) >= self::LOAD_LIMIT,
     ]);
   }
 }

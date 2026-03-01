@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     notificationsElement.dataset.profilePath,
     notificationsElement.dataset.projectPath,
     notificationsElement.dataset.imgAsset,
+    notificationsElement.dataset.initialCursor || null,
+    notificationsElement.dataset.hasMoreNotifications === '1',
   )
 
   userNotifications.markAllRead()
@@ -47,6 +49,8 @@ class UserNotifications {
     profilePath,
     projectPath,
     imgAsset,
+    initialCursor,
+    hasMoreInitial,
   ) {
     this.all = true
     this.follower = false
@@ -64,8 +68,8 @@ class UserNotifications {
     this.projectPath = projectPath
     this.imgAsset = imgAsset
 
-    this.cursors = { all: null, follow: null, comment: null, reaction: null, remix: null }
-    this.hasMore = { all: true, follow: true, comment: true, reaction: true, remix: true }
+    this.cursors = { all: initialCursor, follow: null, comment: null, reaction: null, remix: null }
+    this.hasMore = { all: hasMoreInitial, follow: true, comment: true, reaction: true, remix: true }
 
     this._initListeners()
   }
@@ -202,9 +206,7 @@ class UserNotifications {
         })
         self.cursors[type] = data.next_cursor
         self.hasMore[type] = data.has_more
-        if (!data.has_more) {
-          self.updateNoNotificationsPlaceholder(type, data.data.length)
-        }
+        self.updateNoNotificationsPlaceholder(type, data.data.length)
         self.fetchActive = false
       })
       .catch((error) => {

@@ -81,9 +81,9 @@ class NotificationsResponseManager extends AbstractResponseManager
     }
 
     $next_cursor = null;
-    if ($has_more && [] !== $response_items) {
-      $last = end($response_items);
-      $next_cursor = base64_encode((string) $last->getId());
+    if ($has_more && [] !== $notifications) {
+      $last_notification = end($notifications);
+      $next_cursor = base64_encode((string) $last_notification->getId());
     }
 
     return new NotificationListResponse([

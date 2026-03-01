@@ -143,7 +143,7 @@ class NotificationRepository extends ServiceEntityRepository
   {
     match ($type) {
       'reaction' => $qb->andWhere('n INSTANCE OF '.LikeNotification::class),
-      'follow' => $qb->andWhere('n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class),
+      'follow' => $qb->andWhere('(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')'),
       'comment' => $qb->andWhere('n INSTANCE OF '.CommentNotification::class),
       'remix' => $qb->andWhere('n INSTANCE OF '.RemixNotification::class),
       default => null,
