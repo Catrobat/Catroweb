@@ -1305,10 +1305,10 @@ paths:
       tags:
         - 'Notifications'
       summary: 'Get user notifications'
+      description: 'Returns paginated notifications using cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page.'
       parameters:
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Attributes'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/NotificationsType'
       responses:
         '200':
@@ -1316,7 +1316,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationsResponse'
+                $ref: '#/components/schemas/NotificationListResponse'
           headers:
             X-Response-Hash:
               $ref: '#/components/headers/X-Response-Hash'
@@ -3113,10 +3113,21 @@ components:
           type: integer
           example: 3
 
-    NotificationsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/NotificationResponse'
+    NotificationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: 'Array of notifications'
+          items:
+            $ref: '#/components/schemas/NotificationResponse'
+        next_cursor:
+          type: string
+          nullable: true
+          description: 'Cursor for the next page, null if no more results'
+        has_more:
+          type: boolean
+          description: 'Whether there are more results available'
 
     NotificationResponse:
       type: object
@@ -3127,19 +3138,16 @@ components:
           description: 'Id of the notification'
         type:
           type: string
-          example: 'remix'
+          enum:
+            - 'reaction'
+            - 'follow'
+            - 'comment'
+            - 'remix'
+            - 'other'
           description: 'Notification Type'
         seen:
           type: boolean
           description: 'Seen status of the notification'
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/NotificationContent'
-
-    NotificationContent:
-      type: object
-      properties:
         from:
           description: 'Id of the user who caused the notification'
           allOf:

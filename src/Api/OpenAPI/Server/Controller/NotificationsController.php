@@ -219,8 +219,7 @@ class NotificationsController extends Controller
 
     // Read out all input parameter values into variables
     $limit = $request->query->get('limit', 20);
-    $offset = $request->query->get('offset', 0);
-    $attributes = $request->query->get('attributes', '');
+    $cursor = $request->query->get('cursor');
     $type = $request->query->get('type', 'all');
     $accept_language = $request->headers->get('Accept-Language', 'en');
 
@@ -230,8 +229,7 @@ class NotificationsController extends Controller
     try {
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
-      $offset = $this->deserialize($offset, 'int', 'string');
-      $attributes = $this->deserialize($attributes, 'string', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $type = $this->deserialize($type, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -252,16 +250,8 @@ class NotificationsController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Type('int');
-    $asserts[] = new Assert\GreaterThanOrEqual(0);
-    $response = $this->validate($offset, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
-    $response = $this->validate($attributes, $asserts);
+    $response = $this->validate($cursor, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -283,7 +273,7 @@ class NotificationsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->notificationsGet($accept_language, $limit, $offset, $attributes, $type, $responseCode, $responseHeaders);
+      $result = $handler->notificationsGet($accept_language, $limit, $cursor, $type, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',

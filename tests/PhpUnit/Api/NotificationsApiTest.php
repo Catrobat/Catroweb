@@ -70,14 +70,14 @@ class NotificationsApiTest extends TestCase
   }
 
   #[Group('unit')]
-  public function testNotificationsGet(): void
+  public function testNotificationsGetUnauthorized(): void
   {
     $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->notificationsGet('en', 20, 0, '', 'all', $response_code, $response_headers);
+    $response = $this->object->notificationsGet('en', 20, null, 'all', $response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
+    $this->assertEquals(Response::HTTP_UNAUTHORIZED, $response_code);
     $this->assertNull($response);
   }
 

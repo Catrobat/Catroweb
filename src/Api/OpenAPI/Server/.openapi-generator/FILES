@@ -48,7 +48,7 @@ Model/MediaCategoryRequest.php
 Model/MediaCategoryResponse.php
 Model/MediaLibraryCategoryPreview.php
 Model/MediaLibraryResponse.php
-Model/NotificationContent.php
+Model/NotificationListResponse.php
 Model/NotificationResponse.php
 Model/NotificationsCountResponse.php
 Model/OAuthLoginRequest.php
@@ -122,7 +122,7 @@ Tests/Model/MediaCategoryRequestTest.php
 Tests/Model/MediaCategoryResponseTest.php
 Tests/Model/MediaLibraryCategoryPreviewTest.php
 Tests/Model/MediaLibraryResponseTest.php
-Tests/Model/NotificationContentTest.php
+Tests/Model/NotificationListResponseTest.php
 Tests/Model/NotificationResponseTest.php
 Tests/Model/NotificationsCountResponseTest.php
 Tests/Model/OAuthLoginRequestTest.php
@@ -186,7 +186,7 @@ docs/Model/MediaCategoryRequest.md
 docs/Model/MediaCategoryResponse.md
 docs/Model/MediaLibraryCategoryPreview.md
 docs/Model/MediaLibraryResponse.md
-docs/Model/NotificationContent.md
+docs/Model/NotificationListResponse.md
 docs/Model/NotificationResponse.md
 docs/Model/NotificationsCountResponse.md
 docs/Model/OAuthLoginRequest.md
