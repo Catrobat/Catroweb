@@ -266,6 +266,44 @@ When rendering Twig from an API controller, the router context has no valid them
 And I have a request header "CONTENT_TYPE" with value "application/json"
 ```
 
+### PHP-CS-Fixer Cache Hides Issues (Use --using-cache=no)
+
+Local `bin/php-cs-fixer fix` uses a `.php-cs-fixer.cache` file. If generated files were already cached as "clean", changes to those files won't be re-checked. CI runs without cache, so it catches issues that local runs miss.
+
+**Always use `--using-cache=no` when checking generated OpenAPI files:**
+
+```bash
+bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
+```
+
+Common issue: after `yarn run generate-api`, the generated files may have `string_implicit_backslashes` violations that the cached local fixer won't detect.
+
+### Doctrine DQL INSTANCE OF Does NOT Support Parameters
+
+DQL's `INSTANCE OF` operator requires class names directly in the query string — it does NOT support bound parameters:
+
+```php
+// WRONG: INSTANCE OF does not support parameters
+$qb->andWhere('n INSTANCE OF :type')->setParameter('type', LikeNotification::class);
+
+// CORRECT: concatenate class name directly
+$qb->andWhere('n INSTANCE OF '.LikeNotification::class);
+```
+
+### TranslatorAwareTrait: Use trans(), Not $translator
+
+`AbstractResponseManager` uses `TranslatorAwareTrait`. The `$translator` property is **private** in the trait — you cannot access it directly. Use the trait's `trans()` method instead:
+
+```php
+// WRONG: $translator is private in TranslatorAwareTrait
+$this->translator->trans('key', [], 'catroweb');
+
+// CORRECT: use the trait method (no domain argument — 3rd arg is locale, not domain)
+$this->trans('catro-notifications.like.message');
+```
+
+Note: The `trans()` method signature is `trans(string $id, array $parameters = [], ?string $locale = null)` — there is no `$domain` parameter. The domain is set elsewhere.
+
 ### After changing package.json
 
 ```bash
@@ -671,6 +709,27 @@ src/Api/Services/{Feature}/
 ```
 
 The main `ProjectsApi.php` delegates to these facades.
+
+### Cursor-Based Pagination Pattern
+
+API list endpoints use cursor-based pagination (not offset). Pattern:
+
+1. **Repository**: Fetch `$limit + 1` results; if count > limit, `has_more = true` and `array_pop()` the extra
+2. **Response**: Cursor is `base64_encode((string) $last_item_id)`; decode with `base64_decode($cursor, true)` + validation
+3. **Response model**: `{ data: [...], next_cursor: string|null, has_more: boolean }`
+
+See `CommentsApi` and `NotificationsApi` for reference implementations.
+
+### After Running `yarn run generate-api`
+
+Always run CS fixer on the generated files with no cache:
+
+```bash
+yarn run generate-api
+bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
+```
+
+Then update any existing PHP code that calls the regenerated interface methods (check tests too — method signatures change).
 
 ### HTTP Status Codes for Validation
 

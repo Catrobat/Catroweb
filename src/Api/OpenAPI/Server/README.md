@@ -198,7 +198,7 @@ All URIs are relative to *https://share.catrob.at/api*
 - [MediaCategoryResponse](docs/Model/MediaCategoryResponse.md)
 - [MediaLibraryCategoryPreview](docs/Model/MediaLibraryCategoryPreview.md)
 - [MediaLibraryResponse](docs/Model/MediaLibraryResponse.md)
-- [NotificationContent](docs/Model/NotificationContent.md)
+- [NotificationListResponse](docs/Model/NotificationListResponse.md)
 - [NotificationResponse](docs/Model/NotificationResponse.md)
 - [NotificationsCountResponse](docs/Model/NotificationsCountResponse.md)
 - [OAuthLoginRequest](docs/Model/OAuthLoginRequest.md)
