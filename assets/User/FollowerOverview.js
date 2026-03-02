@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const userId = container.dataset.userId
   const baseUrl = container.dataset.baseUrl || ''
+  const theme = container.dataset.theme || 'pocketcode'
   const loginUrl = container.dataset.loginUrl
   const userRole = container.dataset.userRole || 'guest'
 
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderFollowerCard(user, showFollowsMe, itemClassPrefix) {
     const avatarSrc = user.avatar || baseUrl + '/images/default/avatar_default.png'
-    const profileUrl = baseUrl + '/user/' + escapeAttr(user.id)
+    const profileUrl = baseUrl + '/' + escapeAttr(theme) + '/user/' + escapeAttr(user.id)
     const itemClass = itemClassPrefix + '-' + escapeAttr(user.id)
 
     let followsMeHtml = ''
