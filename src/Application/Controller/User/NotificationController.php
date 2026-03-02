@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class NotificationController extends AbstractController
 {
   #[Route(path: '/user_notifications', name: 'notifications', methods: ['GET'])]
-  public function Notifications(): Response
+  public function notifications(): Response
   {
     if (!$this->getUser()) {
       return $this->redirectToRoute('login');
