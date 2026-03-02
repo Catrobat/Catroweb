@@ -10,6 +10,9 @@ use App\DB\Entity\Studio\StudioUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Studio>
+ */
 class StudioRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

@@ -84,7 +84,7 @@ class ProjectController extends AbstractController
     $total_like_count = $this->project_manager->totalLikeCount($project->getId());
     $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-    $project_comment_list = $this->comment_repository->getProjectCommentOverviewListData($project);
+    $project_comment_list = [];
     $project_details = $this->createProjectDetailsArray(
       $project, $active_like_types, $active_user_like_types, $total_like_count,
       $referrer, $project_comment_list
@@ -180,7 +180,7 @@ class ProjectController extends AbstractController
       return $this->redirectToIndexOnError();
     }
 
-    $comment_list = $this->comment_repository->getProjectCommentDetailViewCommentListData($id);
+    $comment_list = [];
 
     return $this->render('Project/Comment/Detail.html.twig', [
       'comment' => $arr_comment,

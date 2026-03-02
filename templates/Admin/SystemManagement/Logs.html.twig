@@ -14,18 +14,18 @@
       <div class="box-body table-responsive no-padding">
         {% if files|length > 0 %}
 
-          <div id="logFilesContainer">
+          <div id="log-files-container">
             <h5>Log files:</h5>
-            <ul id="logFiles">
+            <ul id="log-files">
               {% for file in files %}
                 <li>
-                  <button class="chipButton files" value="{{ file }}">{{ file }}</button>
+                  <button class="chip-button files" value="{{ file }}">{{ file }}</button>
                 </li>
               {% endfor %}
             </ul>
           </div>
 
-          <div id="filterContainer">
+          <div id="filter-container">
             <h5>Filters:</h5>
             <div class="filter-controls">
               <div class="filter-group">
@@ -44,8 +44,8 @@
             </div>
           </div>
 
-          <div id="outerLogContainer">
-            <div id="innerLogContainer">
+          <div id="outer-log-container">
+            <div id="inner-log-container">
               {% for line in content %}
                   <div class='log-entry' data-level="{{ line.level }}" data-channel="{{ line.channel }}" data-user="{{ line.user }}" data-ip="{{ line.ip }}">
                       <div class="log-header level-{{ line.level|lower }}">
@@ -92,7 +92,7 @@
               {% endfor %}
             </div>
 
-            <div id="currentFileContainer">
+            <div id="current-file-container">
               <h5>Current file: <span id="currentFileName">{{ files[0] }}</span></h5>
               <form action="/admin/downloadLogs/" method="post">
                 <input id="currentFile" name="file" type="hidden" value="{{ files[0] }}">

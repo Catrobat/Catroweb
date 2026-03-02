@@ -8,6 +8,9 @@ use App\DB\Entity\Flavor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Flavor>
+ */
 class FlavorRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

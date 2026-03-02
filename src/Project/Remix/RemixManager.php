@@ -68,8 +68,7 @@ class RemixManager
   }
 
   /**
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
+   * ATTENTION! Internal use only! (no visible/private/debug check).
    *
    * @throws \Exception
    */

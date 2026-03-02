@@ -57,29 +57,11 @@
     </div>
   </div>
 
-  {% if achievements|length > 0 %}
-    <div id="user-achievements" class="mt-4 mb-2">
-      <hr>
-      <h3>{{ 'achievements.profile.title'|trans({}, 'catroweb') }}</h3>
-      <div class="horizontal-scrolling-wrapper">
-        {% for achievement in achievements %}
-          <div class="achievement__badge">
-            <svg class="achievement__badge__coin achievement__badge__coin--profile"
-                 data-src="{{ asset(achievement.getBadgeSvgPath()) }}"
-                 data-unique-ids="disabled"/>
-            <svg class="achievement__badge__banner achievement__badge__banner--profile"
-                 style="color: {{ achievement.getBannerColor() }}"
-                 data-src="{{ asset(achievement.getBannerSvgPath()) }}"
-                 data-unique-ids="disabled"/>
-            <div class="achievement__badge__banner__text achievement__badge__banner__text--profile">
-              {{ achievement.getTitleLtmCode()|trans({}, 'catroweb') }}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-      <hr>
-    </div>
-  {% endif %}
+  <div id="user-achievements" class="js-profile-achievements d-none mt-4 mb-2"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-user-id="{{ profile.id }}"
+       data-trans-title="{{ 'achievements.profile.title'|trans({}, 'catroweb') }}"
+  ></div>
 
   <div class="tab-bar-container mt-3">
     <div class="mdc-tab-bar" role="tablist">
@@ -98,7 +80,7 @@
 
             <button class="mdc-tab mdc-tab--stacked" id="test" role="tab" aria-selected="false" tabindex="0">
               <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="followers-count">{{ followers_list|length }}</span>
+                <span class="mdc-tab__icon" id="followers-count">-</span>
                 <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
               </span>
               <span class="mdc-tab-indicator">
@@ -108,7 +90,7 @@
 
             <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
               <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="following-count">{{ following_list|length }}</span>
+                <span class="mdc-tab__icon" id="following-count">-</span>
                 <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
               </span>
               <span class="mdc-tab-indicator">
@@ -145,6 +127,11 @@
 
     {{ include('User/Followers/FollowersTabs.twig') }}
   </div>
+
+  {{ include('User/Followers/FollowerOverviewData.html.twig', {
+    follower_user_id: profile.id,
+    follower_user_role: app.user is not null ? 'user' : 'guest',
+  }) }}
 
   <div class="js-user-share"
        data-theme-display-name="{{ getThemeDisplayName() }}"

@@ -12,16 +12,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     [
       'clients' => [
         'default' => [
-          'connections' => [
-            [
-              'url' => '%env(ELASTICSEARCH_URL)%',
-            ],
-            [
-              'host' => '%env(ES_HOST)%',
-            ],
-            [
-              'port' => '%env(ES_PORT)%',
-            ],
+          'hosts' => [
+            '%env(ELASTICSEARCH_URL)%',
+            '%env(ES_HOST)%:%env(ES_PORT)%',
           ],
         ],
       ],

@@ -23,11 +23,6 @@ class AsyncHttpClientTest extends TestCase
     $this->async_http_client = new AsyncHttpClient(['timeout' => 8.0, 'max_number_of_concurrent_requests' => 4]);
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(AsyncHttpClient::class, $this->async_http_client);
-  }
-
   public function testReturnsEmptyArrayWhenNoDetailsCanBeFetched(): void
   {
     $invalid_scratch_program_id = 0;

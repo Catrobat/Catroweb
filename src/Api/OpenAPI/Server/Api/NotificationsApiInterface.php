@@ -83,19 +83,17 @@ interface NotificationsApiInterface
    *
    * Get user notifications
    *
-   * @param string $accept_language (optional, default to 'en')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $type            (optional, default to 'all')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $type            (optional, default to 'all')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function notificationsGet(
     string $accept_language,
     int $limit,
-    int $offset,
-    string $attributes,
+    ?string $cursor,
     string $type,
     int &$responseCode,
     array &$responseHeaders,

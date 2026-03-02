@@ -19,6 +19,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User reacted to"
 
   Scenario: Users should not be notified about their own reactions
@@ -29,6 +30,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should not see "Catrobat reacted"
 
   Scenario: Clicking on a reaction notification should redirect the user to the project page for which the reaction was given
@@ -38,6 +40,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     And I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     When I click "#catro-notification-1"
     And I wait for the page to be loaded
     Then I should be on "/app/project/1"

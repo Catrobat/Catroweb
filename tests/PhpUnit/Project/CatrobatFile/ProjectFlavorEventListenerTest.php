@@ -30,11 +30,6 @@ class ProjectFlavorEventListenerTest extends TestCase
     $this->program_flavor_listener = new ProjectFlavorEventListener($this->stack);
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(ProjectFlavorEventListener::class, $this->program_flavor_listener);
-  }
-
   public function testSetsTheFlavorOfAProgramBasedOnItsRequestFlavor(): void
   {
     $program = new Program();

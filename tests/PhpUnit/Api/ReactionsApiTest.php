@@ -13,7 +13,6 @@ use App\Api\Services\Reactions\ReactionsApiProcessor;
 use App\Api\Services\Reactions\ReactionsResponseManager;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\ReactionSummaryResponse;
 use OpenAPI\Server\Model\ReactionUsersResponse;
@@ -21,13 +20,14 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
  */
 #[CoversClass(ProjectsApi::class)]
-final class ReactionsApiTest extends DefaultTestCase
+final class ReactionsApiTest extends TestCase
 {
   protected ProjectsApi $object;
 

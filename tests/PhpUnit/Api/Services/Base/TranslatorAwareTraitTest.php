@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api\Services\Base;
 
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use Behat\Behat\Definition\Translator\Translator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
  */
 #[CoversClass(TranslatorAwareTraitTestClass::class)]
-final class TranslatorAwareTraitTest extends DefaultTestCase
+final class TranslatorAwareTraitTest extends TestCase
 {
   protected TranslatorAwareTraitTestClass|MockObject $object;
 

@@ -21,8 +21,6 @@ class StudioRequestValidator extends AbstractRequestValidator
 
   protected const int MAX_NAME_LENGTH = 180;
 
-  protected const int MIN_DESCRIPTION_LENGTH = 1;
-
   protected const int MAX_DESCRIPTION_LENGTH = 3000;
 
   public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, private readonly StudioManager $studio_manager)
@@ -85,8 +83,6 @@ class StudioRequestValidator extends AbstractRequestValidator
 
     if ('' === trim($description)) {
       $this->getValidationWrapper()->addError($this->__('api.createStudio.descriptionEmpty', [], $locale), $KEY);
-    } elseif (strlen($description) < self::MIN_DESCRIPTION_LENGTH) {
-      $this->getValidationWrapper()->addError($this->__('api.createStudio.descriptionTooShort', [], $locale), $KEY);
     } elseif (strlen($description) > self::MAX_DESCRIPTION_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.createStudio.descriptionTooLong', [], $locale), $KEY);
     }

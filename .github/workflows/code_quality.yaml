@@ -15,7 +15,7 @@
 #
 #  - Tool integration:
 #
-#       Most tools are integrated directly using a package manager (npm, composer). This allows to Dependabot to update
+#       Most tools are integrated directly using a package manager (yarn, composer). This allows to Dependabot to update
 #       the dependencies of the GitHub Actions. Besides, the CI system uses the same versions like developers would
 #       locally. However, this approach also a a drawback. More "artificial" dependencies on the static analysis tools
 #       which are not necessary to run the Share community platform. In case, one they there arise dependency conflicts
@@ -49,10 +49,10 @@ jobs:
   # ** Javascript **
   #
   # Eslint:
-  #  - Statically analyzes javascript code (depends on node and npm)
+  #  - Statically analyzes javascript code (depends on node and yarn)
   #  - Config defined in .eslint.config.js
   #  - Automatic fix support
-  #  - npm "test" script must be defined in package.json
+  #  - yarn "test" script must be defined in package.json
   #  - More information at: (https://eslint.org/)
   #
   eslint:
@@ -60,15 +60,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: 'Setup Node and npm modules'
-        uses: ./.github/actions/setup-npm-node-modules
-      - run: npm run test-js
+      - name: 'Setup Node and yarn dependencies'
+        uses: ./.github/actions/setup-yarn-node-modules
+      - run: yarn run test-js
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Sass,CSS **
   #
   # StyleLint:
-  #  - Statically analyzes Sass and css files (depends on node and npm)
+  #  - Statically analyzes Sass and css files (depends on node and yarn)
   #  - Config defined in .stylelintrc.json
   #  - Automatic fix support
   #  - More information at: https://stylelint.io/
@@ -79,15 +79,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: 'Setup Node and npm modules'
-        uses: ./.github/actions/setup-npm-node-modules
-      - run: npm run test-css
+      - name: 'Setup Node and yarn dependencies'
+        uses: ./.github/actions/setup-yarn-node-modules
+      - run: yarn run test-css
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Sass,CSS,MD,YAML **
   #
   # Prettier:
-  #  - Check formatting style (depends on node and npm)
+  #  - Check formatting style (depends on node and yarn)
   #  - Config defined in .prettierrc.json and .prettierignore
   #  - Automatic fix support npx prettier . --check
   #  - More information at: https://prettier.io/
@@ -97,9 +97,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: 'Setup Node and npm modules'
-        uses: ./.github/actions/setup-npm-node-modules
-      - run: npm run test-asset
+      - name: 'Setup Node and yarn dependencies'
+        uses: ./.github/actions/setup-yarn-node-modules
+      - run: yarn run test-asset
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** PHP **

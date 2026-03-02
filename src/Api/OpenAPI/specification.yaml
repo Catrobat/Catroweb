@@ -32,6 +32,9 @@ tags:
   - name: 'Projects'
     description: 'Everything related to projects'
 
+  - name: 'Comments'
+    description: 'Everything related to project comments'
+
   - name: 'Media Library'
     description: 'Everything related to the media library'
 
@@ -41,11 +44,17 @@ tags:
   - name: 'Notifications'
     description: 'Everything related for notifications'
 
+  - name: 'Achievements'
+    description: 'Everything related to achievements'
+
   - name: 'Search'
     description: 'Everything related to searching'
 
   - name: 'Studio'
     description: 'Create, join and update studios'
+
+  - name: 'Followers'
+    description: 'Everything related to user follow relationships'
 
 paths:
   ##############################################
@@ -1111,6 +1120,186 @@ paths:
           $ref: '#/components/responses/NotAcceptable'
 
   ################################################
+  # Comments
+  #
+  '/project/{id}/comments':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Comments'
+      summary: 'Get project comments'
+      description: 'Get top-level comments for a project ordered by newest first. Uses cursor-based pagination. Returns 404 if project is not visible to the current user.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Comments'
+      summary: 'Create a comment on a project'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentCreateRequest'
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaType'
+
+  '/comments/{id}/replies':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Comments'
+      summary: 'Get replies for a comment'
+      description: 'Get direct replies for a comment ordered by newest first. Uses cursor-based pagination.'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/comments/{id}':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Comments'
+      summary: 'Delete a comment'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/comments/{id}/report':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Comments'
+      summary: 'Report a comment'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/comments/{id}/translation':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Comments'
+      summary: 'Translate a comment'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+        - name: target_language
+          in: query
+          required: true
+          description: 'Target language for the translation'
+          schema:
+            type: string
+            example: 'de'
+        - name: source_language
+          in: query
+          required: false
+          description: 'Optional source language override'
+          schema:
+            type: string
+            example: 'en'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentTranslationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  ################################################
   # Notifications
   #
   /notifications:
@@ -1122,10 +1311,10 @@ paths:
       tags:
         - 'Notifications'
       summary: 'Get user notifications'
+      description: 'Returns paginated notifications using cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page.'
       parameters:
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Attributes'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/NotificationsType'
       responses:
         '200':
@@ -1133,7 +1322,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NotificationsResponse'
+                $ref: '#/components/schemas/NotificationListResponse'
           headers:
             X-Response-Hash:
               $ref: '#/components/headers/X-Response-Hash'
@@ -1203,6 +1392,95 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/Forbidden'
+
+  ################################################
+  # Achievements
+  #
+  /achievements:
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Achievements'
+      summary: 'Get user achievements'
+      description: 'Returns all achievements for the authenticated user, split into unlocked and locked lists.'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AchievementsListResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /achievements/count:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Achievements'
+      summary: 'Count unseen achievements'
+      description: 'Returns the number of unseen achievements for the authenticated user.'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AchievementsCountResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /achievements/read:
+    put:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Achievements'
+      summary: 'Mark all achievements as seen'
+      description: 'Marks all unseen achievements as seen for the authenticated user.'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  '/user/{id}/achievements':
+    get:
+      tags:
+        - 'Achievements'
+      summary: 'Get unlocked achievements for a user'
+      description: 'Returns all unlocked achievements for the specified user. This is a public endpoint.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Locale'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AchievementResponse'
+          headers:
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   ################################################
   # Media Library
@@ -1787,6 +2065,82 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  ##############################################
+  # Followers
+  ###
+
+  '/user/{id}/followers':
+    get:
+      tags:
+        - 'Followers'
+      summary: 'Get users following a user'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowersListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/user/{id}/following':
+    get:
+      tags:
+        - 'Followers'
+      summary: 'Get users a user is following'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowersListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/user/{id}/follow':
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Followers'
+      summary: 'Follow a user'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/user/{id}/unfollow':
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Followers'
+      summary: 'Unfollow a user'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
 components:
   ##############################################
   # Default Response messages
@@ -1897,6 +2251,14 @@ components:
       schema:
         $ref: '#/components/schemas/Offset'
 
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      description: 'Cursor for pagination (opaque string from the previous response)'
+      schema:
+        type: string
+
     Attributes:
       name: attributes
       in: query
@@ -1924,6 +2286,13 @@ components:
       in: path
       schema:
         $ref: '#/components/schemas/NotificationsId'
+      required: true
+
+    CommentId:
+      name: id
+      in: path
+      schema:
+        $ref: '#/components/schemas/CommentId'
       required: true
 
     NotificationsType:
@@ -2042,6 +2411,11 @@ components:
       description: 'How many objects should be skipped'
       default: 0
       example: 2
+
+    CommentId:
+      type: integer
+      description: 'Unique ID of the comment'
+      example: 123
 
     ##############################################
     # Media Library Schemas
@@ -2910,10 +3284,21 @@ components:
           type: integer
           example: 3
 
-    NotificationsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/NotificationResponse'
+    NotificationListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: 'Array of notifications'
+          items:
+            $ref: '#/components/schemas/NotificationResponse'
+        next_cursor:
+          type: string
+          nullable: true
+          description: 'Cursor for the next page, null if no more results'
+        has_more:
+          type: boolean
+          description: 'Whether there are more results available'
 
     NotificationResponse:
       type: object
@@ -2924,19 +3309,16 @@ components:
           description: 'Id of the notification'
         type:
           type: string
-          example: 'remix'
+          enum:
+            - 'reaction'
+            - 'follow'
+            - 'comment'
+            - 'remix'
+            - 'other'
           description: 'Notification Type'
         seen:
           type: boolean
           description: 'Seen status of the notification'
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/NotificationContent'
-
-    NotificationContent:
-      type: object
-      properties:
         from:
           description: 'Id of the user who caused the notification'
           allOf:
@@ -2972,6 +3354,75 @@ components:
         prize:
           type: string
           description: 'Prize for anniversary notifications'
+
+    ######################################################
+    # Achievement Schemas
+    ###
+
+    AchievementsListResponse:
+      type: object
+      properties:
+        unlocked:
+          type: array
+          items:
+            $ref: '#/components/schemas/AchievementResponse'
+        locked:
+          type: array
+          items:
+            $ref: '#/components/schemas/AchievementResponse'
+        most_recent:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/AchievementResponse'
+        most_recent_unlocked_at:
+          type: string
+          nullable: true
+          description: 'Date when the most recent achievement was unlocked (Y-m-d)'
+        show_animation:
+          type: boolean
+          description: 'Whether to show the new achievement animation'
+        total_count:
+          type: integer
+          description: 'Total number of enabled achievements'
+        unlocked_count:
+          type: integer
+          description: 'Number of achievements unlocked by this user'
+
+    AchievementResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Achievement ID'
+        internal_title:
+          type: string
+          description: 'Internal title of the achievement'
+        title:
+          type: string
+          description: 'Translated title of the achievement'
+        description:
+          type: string
+          description: 'Translated description of the achievement'
+        badge_svg_path:
+          type: string
+          description: 'Path to the badge SVG'
+        badge_locked_svg_path:
+          type: string
+          description: 'Path to the locked badge SVG'
+        banner_svg_path:
+          type: string
+          description: 'Path to the banner SVG'
+        banner_color:
+          type: string
+          description: 'Banner color'
+
+    AchievementsCountResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: 'Number of unseen achievements'
+          example: 2
 
     ######################################################
     # Studio Schema
@@ -3216,3 +3667,155 @@ components:
           type: string
           description: 'URL to the users avatar image'
           example: 'https://share.catrob.at/images/default/avatar_default.png'
+
+    ######################################################
+    # Comment Schemas
+    ###
+
+    CommentUserInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique ID of the user'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        username:
+          type: string
+          description: 'Username of the user'
+          example: 'Catrobat'
+        avatar:
+          type: string
+          description: 'URL to the users avatar image'
+          example: 'https://share.catrob.at/images/default/avatar_default.png'
+
+    CommentResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CommentId'
+        project_id:
+          $ref: '#/components/schemas/Uuid'
+        parent_id:
+          $ref: '#/components/schemas/CommentId'
+          nullable: true
+        user:
+          $ref: '#/components/schemas/CommentUserInfo'
+        message:
+          type: string
+          nullable: true
+          description: 'Comment text (null if deleted)'
+          example: 'Nice project!'
+        created_at:
+          type: string
+          format: date-time
+          example: '2024-01-15T10:30:00Z'
+        reply_count:
+          type: integer
+          example: 3
+        is_deleted:
+          type: boolean
+          example: false
+        is_reported:
+          type: boolean
+          example: false
+        rendered:
+          type: string
+          nullable: true
+          description: 'Rendered HTML for web clients (optional)'
+
+    CommentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: 'Array of comments'
+          items:
+            $ref: '#/components/schemas/CommentResponse'
+        next_cursor:
+          type: string
+          nullable: true
+          description: 'Cursor for the next page, null if no more results'
+          example: '2024-01-15T10:30:00Z:123'
+        has_more:
+          type: boolean
+          description: 'Whether there are more results available'
+          example: true
+
+    CommentCreateRequest:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: 'Comment text'
+          example: 'Nice project!'
+        parent_id:
+          $ref: '#/components/schemas/CommentId'
+          nullable: true
+
+    CommentTranslationResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CommentId'
+        source_language:
+          type: string
+          example: 'en'
+        target_language:
+          type: string
+          example: 'de'
+        translation:
+          type: string
+          example: 'Tolles Projekt!'
+        provider:
+          type: string
+          example: 'Google'
+        _cache:
+          type: boolean
+          nullable: true
+
+    ##############################################
+    # Followers
+    ###
+
+    FollowerResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Uuid'
+        username:
+          type: string
+          example: 'john_doe'
+        avatar:
+          type: string
+          nullable: true
+          format: uri
+          description: 'User avatar URL'
+        project_count:
+          type: integer
+          description: 'Number of public projects'
+          example: 5
+        is_following:
+          type: boolean
+          description: 'Does the authenticated user follow this user?'
+        follows_you:
+          type: boolean
+          description: 'Does this user follow the authenticated user?'
+
+    FollowersListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: 'Array of follower items'
+          items:
+            $ref: '#/components/schemas/FollowerResponse'
+        total_followers:
+          type: integer
+          description: 'Total number of followers'
+          example: 10
+        total_following:
+          type: integer
+          description: 'Total number of users being followed'
+          example: 5

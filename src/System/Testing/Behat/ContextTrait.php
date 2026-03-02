@@ -519,13 +519,34 @@ trait ContextTrait
     $new_comment->setIsReported((bool) ($config['reported'] ?? false));
     $new_comment->setText($config['text']);
 
-    $this->getManager()->persist($new_comment);
-
     if (isset($config['id'])) {
-      // overwrite id if desired
-      $new_comment->setId((int) $config['id']);
-      $this->getManager()->persist($new_comment);
+      // Force a specific ID via raw SQL (Doctrine AUTO_INCREMENT ignores setId())
+      $forced_id = (int) $config['id'];
+      $upload_date_str = isset($config['upload_date']) ?
+        (new \DateTime($config['upload_date'], new \DateTimeZone('UTC')))->format('Y-m-d H:i:s') :
+        (new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
+
+      $this->getManager()->getConnection()->executeStatement(
+        'INSERT INTO user_comment (id, user_id, programId, uploadDate, text, username, isReported, parent_id, is_deleted)
+         VALUES (:id, :user_id, :program_id, :upload_date, :text, :username, :is_reported, :parent_id, :is_deleted)',
+        [
+          'id' => $forced_id,
+          'user_id' => $user->getId(),
+          'program_id' => $project->getId(),
+          'upload_date' => $upload_date_str,
+          'text' => (string) $config['text'],
+          'username' => $user->getUserIdentifier(),
+          'is_reported' => (int) (bool) ($config['reported'] ?? false),
+          'parent_id' => $parent_id,
+          'is_deleted' => (int) $is_deleted,
+        ]
+      );
+
+      return $this->getManager()->find(UserComment::class, $forced_id)
+        ?? throw new \RuntimeException("Comment with id {$forced_id} not found after insert");
     }
+
+    $this->getManager()->persist($new_comment);
 
     if ($andFlush) {
       $this->getManager()->flush();

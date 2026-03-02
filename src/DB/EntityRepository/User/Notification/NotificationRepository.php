@@ -6,12 +6,19 @@ namespace App\DB\EntityRepository\User\Notification;
 
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\Notifications\CatroNotification;
+use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
+use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<CatroNotification>
+ */
 class NotificationRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -94,5 +101,94 @@ class NotificationRepository extends ServiceEntityRepository
       ->getQuery()
       ->execute()
     ;
+  }
+
+  /**
+   * @return array{notifications: CatroNotification[], has_more: bool}
+   */
+  public function getNotificationsPageData(User $user, string $type, int $limit, ?int $cursor_id): array
+  {
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    $qb
+      ->select('n')
+      ->from(CatroNotification::class, 'n')
+      ->where('n.user = :user')
+      ->setParameter('user', $user)
+      ->orderBy('n.id', 'DESC')
+      ->setMaxResults($limit + 1)
+    ;
+
+    $this->applyTypeFilter($qb, $type);
+
+    if (null !== $cursor_id) {
+      $qb
+        ->andWhere('n.id < :cursor_id')
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    /** @var CatroNotification[] $results */
+    $results = $qb->getQuery()->getResult();
+
+    $has_more = count($results) > $limit;
+    if ($has_more) {
+      array_pop($results);
+    }
+
+    return ['notifications' => $results, 'has_more' => $has_more];
+  }
+
+  /**
+   * @return array{total: int, like: int, follower: int, comment: int, remix: int}
+   */
+  public function getUnseenCounts(User $user): array
+  {
+    $em = $this->getEntityManager();
+    $baseWhere = ['n.user = :user', 'n.seen = false'];
+
+    $total = (int) $em->createQueryBuilder()
+      ->select('COUNT(n.id)')
+      ->from(CatroNotification::class, 'n')
+      ->where($baseWhere[0])
+      ->andWhere($baseWhere[1])
+      ->setParameter('user', $user)
+      ->getQuery()
+      ->getSingleScalarResult()
+    ;
+
+    $typeFilters = [
+      'like' => 'n INSTANCE OF '.LikeNotification::class,
+      'follower' => '(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')',
+      'comment' => 'n INSTANCE OF '.CommentNotification::class,
+      'remix' => 'n INSTANCE OF '.RemixNotification::class,
+    ];
+
+    $result = ['total' => $total];
+    foreach ($typeFilters as $key => $filter) {
+      $result[$key] = (int) $em->createQueryBuilder()
+        ->select('COUNT(n.id)')
+        ->from(CatroNotification::class, 'n')
+        ->where($baseWhere[0])
+        ->andWhere($baseWhere[1])
+        ->andWhere($filter)
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+    }
+
+    return $result;
+  }
+
+  private function applyTypeFilter(QueryBuilder $qb, string $type): void
+  {
+    match ($type) {
+      'reaction' => $qb->andWhere('n INSTANCE OF '.LikeNotification::class),
+      'follow' => $qb->andWhere('(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')'),
+      'comment' => $qb->andWhere('n INSTANCE OF '.CommentNotification::class),
+      'remix' => $qb->andWhere('n INSTANCE OF '.RemixNotification::class),
+      default => null,
+    };
   }
 }

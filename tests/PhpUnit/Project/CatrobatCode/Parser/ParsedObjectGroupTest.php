@@ -26,7 +26,7 @@ class ParsedObjectGroupTest extends TestCase
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_object = $xml_properties->xpath('//object[@type="GroupSprite"]');
-    Assert::assertNotFalse($xml_object);
+    Assert::assertNotNull($xml_object);
     $this->group = new ParsedObjectGroup($xml_object[0]);
   }
 
@@ -70,7 +70,7 @@ class ParsedObjectGroupTest extends TestCase
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_object = $xml_properties->xpath('//object');
-    Assert::assertNotFalse($xml_object);
+    Assert::assertNotNull($xml_object);
     $this->group->addObject(new ParsedObject($xml_object[0]));
     $this->assertNotEmpty($this->group->getObjects());
   }

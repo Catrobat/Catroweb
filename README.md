@@ -55,13 +55,45 @@ Your tech stack should cover **most** of them — but don’t worry if something
 
 If you feel confident that your tech stack matches our requirements, we invite you to start contributing 🎉
 
-👉 https://github.com/Catrobat/Catroweb/blob/develop/.github/onboarding.md
+👉 [.github/onboarding.md](./.github/onboarding.md)
+
+## Documentation
+
+Core project docs are maintained in-repo:
+
+- [docs/README.md](./docs/README.md)
+- [docs/setup/Developer-Quickstart.md](./docs/setup/Developer-Quickstart.md)
+- [docs/architecture/Architecture-Overview.md](./docs/architecture/Architecture-Overview.md)
 
 ## Issues
 
 Found a bug?
 
+**⚠️ Is this a Pocket Code or Pocket Paint Android app bug?**
+Please report app crashes, memory issues, or physics glitches in the Catroid repository:
+👉 https://github.com/Catrobat/Catroid/issues
+
+**For Catroweb (Web Platform) bugs:**
+
 1. Please check the existing issues first to avoid duplicates:  
    👉 https://github.com/Catrobat/Catroweb/issues
 2. If it hasn’t been reported yet, open a new issue using the bug report template:  
-   👉 https://github.com/Catrobat/Catroweb/issues/new?labels=bug&template=bug_report.md
+   👉 https://github.com/Catrobat/Catroweb/issues/new/choose
+
+> **Note on Scratch2Catrobat:** The Scratch to Catrobat converter is currently unmaintained and abandoned. Feature requests or bug reports related to converting Scratch projects will not be addressed at this time.
+
+## Running PHP Commands in Docker
+
+If you are using Docker, do NOT run `php` commands on host machine.
+
+Instead run:
+
+```
+docker exec -it app.catroweb php bin/console <command>
+```
+
+Example:
+
+```
+docker exec -it app.catroweb php bin/console doctrine:migrations:migrate
+```

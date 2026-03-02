@@ -10,7 +10,6 @@ ProjectComments(
   5,
   5,
   5,
-  projectComments.dataset.totalNumberOfComments,
   projectComments.dataset.transCancel,
   projectComments.dataset.transDeleteIt,
   projectComments.dataset.transReportIt,

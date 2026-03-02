@@ -28,18 +28,13 @@ class VersionValidatorEventListenerTest extends TestCase
     $this->version_validator = new VersionValidatorEventListener();
   }
 
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(VersionValidatorEventListener::class, $this->version_validator);
-  }
-
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
   public function testChecksIfTheLanguageVersionIsUpToDate(): void
   {
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
-    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $this->assertNotFalse($xml);
     $xml->header->catrobatLanguageVersion = '0.92';
     $this->version_validator->validate($xml);
   }
@@ -50,7 +45,7 @@ class VersionValidatorEventListenerTest extends TestCase
   public function testThrowsAnExceptionIfLanguageVersionIsTooOld(): void
   {
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
-    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $this->assertNotFalse($xml);
     $xml->header->catrobatLanguageVersion = '0.90';
     $this->expectException(InvalidCatrobatFileException::class);
     $this->version_validator->validate($xml);

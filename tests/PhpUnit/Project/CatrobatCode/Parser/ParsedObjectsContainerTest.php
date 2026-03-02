@@ -28,7 +28,7 @@ class ParsedObjectsContainerTest extends TestCase
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_scene = $xml_properties->xpath('//scene');
-    Assert::assertNotFalse($xml_scene);
+    Assert::assertNotNull($xml_scene);
     $this->container = new ParsedScene($xml_scene[0]);
   }
 
@@ -91,7 +91,7 @@ class ParsedObjectsContainerTest extends TestCase
     Assert::assertNotFalse($xml_properties);
 
     $xml_scene = $xml_properties->xpath('//scene');
-    Assert::assertNotFalse($xml_scene);
+    Assert::assertNotNull($xml_scene);
 
     if (!array_key_exists(0, $xml_scene)) {
       new ParsedScene($xml_scene[0]);

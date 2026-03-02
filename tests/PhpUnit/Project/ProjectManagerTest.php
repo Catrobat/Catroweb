@@ -31,6 +31,7 @@ use Doctrine\ORM\Exception\ORMException;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -45,25 +46,21 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 #[CoversClass(ProjectManager::class)]
 class ProjectManagerTest extends TestCase
 {
-  private ProjectManager $program_manager;
+  private Stub|ProjectFileRepository $file_repository;
 
-  // Stubs used across multiple tests - converted to stubs to avoid needing AllowMockObjectsWithoutExpectations
-  // Tests that need to verify behavior will create local mocks
-  private ProjectFileRepository $file_repository;
+  private Stub|ScreenshotRepository $screenshot_repository;
 
-  private ScreenshotRepository $screenshot_repository;
+  private Stub|EntityManager $entity_manager;
 
-  private EntityManager $entity_manager;
+  private Stub|EventDispatcherInterface $event_dispatcher;
 
-  private EventDispatcherInterface $event_dispatcher;
+  private Stub|AddProjectRequest $request;
 
-  private AddProjectRequest $request;
+  private Stub|ExtractedCatrobatFile $extracted_file;
 
-  private ExtractedCatrobatFile $extracted_file;
+  private Stub|ProjectBeforeInsertEvent $programBeforeInsertEvent;
 
-  private ProjectBeforeInsertEvent $programBeforeInsertEvent;
-
-  private ProjectAfterInsertEvent $programAfterInsertEvent;
+  private Stub|ProjectAfterInsertEvent $programAfterInsertEvent;
 
   /**
    * @throws \Exception|Exception
@@ -88,8 +85,6 @@ class ProjectManagerTest extends TestCase
     $user = $this->createStub(User::class);
     $inserted_program = $this->createStub(Program::class);
 
-    // All dependencies are stubs to avoid AllowMockObjectsWithoutExpectations
-    // Tests that need to verify behavior will create local mocks and new ProjectManager instances
     $this->file_repository = $this->createStub(ProjectFileRepository::class);
     $this->screenshot_repository = $this->createStub(ScreenshotRepository::class);
     $this->extracted_file = $this->createStub(ExtractedCatrobatFile::class);
@@ -98,15 +93,6 @@ class ProjectManagerTest extends TestCase
     $this->request = $this->createStub(AddProjectRequest::class);
     $this->programBeforeInsertEvent = $this->createStub(ProjectBeforeInsertEvent::class);
     $this->programAfterInsertEvent = $this->createStub(ProjectAfterInsertEvent::class);
-
-    $url_helper = new UrlHelper(new RequestStack());
-
-    $this->program_manager = new ProjectManager(
-      $file_extractor, $this->file_repository, $this->screenshot_repository,
-      $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
-      $example_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository,
-      $catrobat_file_sanitizer, $notification_service, $program_finder, $url_helper, $security
-    );
 
     // Configure stub/mock return values (using method() instead of expects()->method())
     $this->extracted_file->method('getName')->willReturn('TestProject');
@@ -121,7 +107,7 @@ class ProjectManagerTest extends TestCase
     $this->request->method('getIp')->willReturn('127.0.0.1');
     $this->request->method('getLanguage')->willReturn('en');
     $this->request->method('getFlavor')->willReturn(Flavor::POCKETCODE);
-    $file_extractor->method('extract')->with($file)->willReturn($this->extracted_file);
+    $file_extractor->method('extract')->willReturn($this->extracted_file);
     $inserted_program->method('getId')->willReturn('1');
 
     $this->programBeforeInsertEvent->method('isPropagationStopped')->willReturn(false);
@@ -159,7 +145,7 @@ class ProjectManagerTest extends TestCase
 
     fopen('/tmp/PhpUnitTest', 'w');
     $file = new File('/tmp/PhpUnitTest');
-    $file_extractor->method('extract')->with($file)->willReturn($extracted);
+    $file_extractor->method('extract')->willReturn($extracted);
 
     return new ProjectManager(
       $file_extractor,
@@ -181,11 +167,6 @@ class ProjectManagerTest extends TestCase
       $url_helper,
       $security
     );
-  }
-
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(ProjectManager::class, $this->program_manager);
   }
 
   /**

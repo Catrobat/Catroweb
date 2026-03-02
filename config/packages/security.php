@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\DB\Entity\User\User;
+use App\Security\Authentication\FormLoginSuccessHandler;
 use App\Security\Authentication\WebView\WebviewJWTAuthenticator;
 use App\Security\OAuth\HwiOauthUserProvider;
 use App\Security\OAuth\OAuthSuccessHandler;
@@ -56,6 +57,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'stateless' => false,
           'form_login' => [
             'default_target_path' => '/',
+            'success_handler' => FormLoginSuccessHandler::class,
           ],
           'custom_authenticators' => [
             WebviewJWTAuthenticator::class,
@@ -265,6 +267,42 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         [
           'path' => '^/api/project/[a-zA-Z0-9\\\-]+/reactions/users/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/comments/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/comments/[0-9]+/replies/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/comments/[0-9]+/translation/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/user/[a-zA-Z0-9\\\-]+/followers/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/user/[a-zA-Z0-9\\\-]+/following/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/user/[a-zA-Z0-9\\\-]+/achievements/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',

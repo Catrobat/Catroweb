@@ -27,7 +27,9 @@ if (overviewContainer) {
 
   const categoryStates = new Map()
 
-  paginationContainer.style.display = 'none'
+  if (paginationContainer) {
+    paginationContainer.style.display = 'none'
+  }
 
   setupDownloadActions()
   setupInfiniteScroll()

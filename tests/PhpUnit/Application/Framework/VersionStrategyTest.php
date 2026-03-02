@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Application\Framework;
 
 use App\Application\Framework\VersionStrategy;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
  */
 #[CoversClass(VersionStrategy::class)]
-class VersionStrategyTest extends DefaultTestCase
+class VersionStrategyTest extends TestCase
 {
   /**
    * @group unit

@@ -8,6 +8,9 @@ use App\DB\Entity\User\Achievements\Achievement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Achievement>
+ */
 class AchievementRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

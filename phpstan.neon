@@ -1,18 +1,21 @@
 includes:
-	- phar://phpstan.phar/conf/bleedingEdge.neon
+  - phar://phpstan.phar/conf/bleedingEdge.neon
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - vendor/phpstan/phpstan-phpunit/rules.neon
+
 parameters:
   bootstrapFiles:
-      - config/bootstrap.php
-  level: 6  # 0 is the loosest lvl and 9 is the strictest (https://phpstan.org/user-guide/rule-levels)
+    - config/bootstrap.php
+  level: 6 # 0 is the loosest lvl and 9 is the strictest (https://phpstan.org/user-guide/rule-levels)
   paths:
-      - .  # Analyze all directories in the project
+    - . # Analyze all directories in the project
   excludePaths:
-      - src/Api/OpenAPI/Server
-      - node_modules/**/*
-      - var/**/*
-      - vendor/**/*
-      - deploy.php
-      - config/reference.php
+    - src/Api/OpenAPI/Server
+    - node_modules/***
+    - var/***
+    - vendor/***
+    - deploy.php
+    - config/reference.php
   inferPrivatePropertyTypeFromConstructor: true
   reportUnmatchedIgnoredErrors: true
 

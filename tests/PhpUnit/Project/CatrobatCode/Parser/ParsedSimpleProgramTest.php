@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
-use App\Project\CatrobatCode\Parser\CodeStatistic;
 use App\Project\CatrobatCode\Parser\ParsedSimpleProject;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
@@ -51,16 +50,5 @@ class ParsedSimpleProgramTest extends TestCase
   public function testHasScenesMustReturnFalse(): void
   {
     $this->assertFalse($this->program->hasScenes());
-  }
-
-  /**
-   * @depends testMustHaveMethod
-   */
-  public function testGetCodeStatisticMustReturnCodeStatistic(): void
-  {
-    $actual = $this->program->getCodeStatistic();
-    $expected = CodeStatistic::class;
-
-    $this->assertInstanceOf($expected, $actual);
   }
 }

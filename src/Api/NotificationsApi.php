@@ -7,11 +7,15 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Notifications\NotificationsApiFacade;
 use OpenAPI\Server\Api\NotificationsApiInterface;
+use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationsCountResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
 {
+  private const int DEFAULT_LIMIT = 20;
+  private const int MAX_LIMIT = 50;
+
   public function __construct(private readonly NotificationsApiFacade $facade)
   {
   }
@@ -50,13 +54,41 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
   }
 
   #[\Override]
-  public function notificationsGet(string $accept_language, int $limit, int $offset, string $attributes, string $type, int &$responseCode, array &$responseHeaders): array|object|null
+  public function notificationsGet(string $accept_language, int $limit, ?string $cursor, string $type, int &$responseCode, array &$responseHeaders): ?NotificationListResponse
   {
-    // TODO: Implement notificationsGet() method.
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (is_null($user)) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
 
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+      return null;
+    }
 
-    return null;
+    $limit = $this->normalizeLimit($limit);
+
+    $cursor_id = null;
+    if (null !== $cursor) {
+      $decoded = base64_decode($cursor, true);
+      if (false === $decoded || !ctype_digit($decoded)) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return null;
+      }
+      $cursor_id = (int) $decoded;
+    }
+
+    $page_data = $this->facade->getLoader()->getNotificationsPage($user, $type, $limit, $cursor_id);
+
+    $response = $this->facade->getResponseManager()->createNotificationListResponse(
+      $page_data['notifications'],
+      $page_data['has_more'],
+      $user,
+    );
+
+    $responseCode = Response::HTTP_OK;
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    return $response;
   }
 
   #[\Override]
@@ -72,5 +104,12 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
     $this->facade->getProcessor()->markAllAsSeen($user);
 
     $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  private function normalizeLimit(int $limit): int
+  {
+    $limit = $limit > 0 ? $limit : self::DEFAULT_LIMIT;
+
+    return min($limit, self::MAX_LIMIT);
   }
 }

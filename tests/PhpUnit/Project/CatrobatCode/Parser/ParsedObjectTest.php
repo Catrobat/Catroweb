@@ -27,7 +27,7 @@ class ParsedObjectTest extends TestCase
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_object = $xml_properties->xpath('//object');
-    Assert::assertNotFalse($xml_object);
+    Assert::assertNotNull($xml_object);
     $this->object = new ParsedObject($xml_object[0]);
   }
 

@@ -8,8 +8,14 @@
 - Patterns that work vs patterns that don't
 - Correct tool/command usage discovered through trial and error
 - API quirks and workarounds
+- Documentation gaps or stale instructions found during implementation
 
-This ensures future sessions benefit from past discoveries. Also run `npm run fix-asset` after updating.
+This ensures future sessions benefit from past discoveries. Also run `yarn run fix-asset` after updating.
+
+## Documentation Maintenance
+
+When code, tooling, workflows, or setup commands change, review related docs in `docs/`, `README.md`, and `.github/*.md`.
+Update any stale guidance in the same PR/branch instead of deferring doc fixes.
 
 ## Overview
 
@@ -22,12 +28,19 @@ Catroweb is the share/communication platform for the Catrobat community. It's a 
 - **Database**: MariaDB 10.11
 - **Search**: Elasticsearch 7.17
 - **CSS Framework**: Bootstrap 5, Material Design Components
-- **Package Managers**: Composer (PHP), npm (JS)
+- **Package Managers**: Composer (PHP), Yarn (JS)
 
 ## Command Execution Environment
 
-- **npm commands**: Run **locally** (npm, eslint, stylelint, prettier, webpack)
+- **yarn commands**: Run **locally** (yarn, eslint, stylelint, prettier, webpack)
 - **PHP commands**: Try **native first** (`bin/phpstan`, `bin/psalm`, etc.), fall back to **Docker** if not available
+
+### Yarn (Berry) Notes
+
+- Use Corepack (`corepack enable`) to manage Yarn 4.12.0.
+- Keep `.yarnrc.yml` with `nodeLinker: node-modules` for compatibility.
+- Prefer `yarn install --immutable` in CI/Docker.
+- In GitHub Actions, avoid `actions/setup-node` with `cache: yarn` because it calls the system Yarn before Corepack; use manual cache + Corepack instead.
 
 ```bash
 # Prefer native if available
@@ -49,48 +62,48 @@ docker exec app.catroweb bin/phpstan analyse src/Path/To/File.php
 ```bash
 # Install dependencies
 composer install
-npm install
+yarn install
 
 # Development build
-npm run dev
+yarn run dev
 
 # Production build
-npm run build
+yarn run build
 
 # Watch mode (auto-rebuild on changes)
-npm run watch
+yarn run watch
 
 # Development server with hot reload
-npm run dev-server
+yarn run dev-server
 ```
 
 ### Testing & Linting
 
 ```bash
 # Run all tests
-npm test
+yarn test
 
 # Individual test commands
-npm run test-js      # ESLint
-npm run test-css     # Stylelint for SCSS
-npm run test-asset   # Prettier
-npm run test-php     # PHP CS Fixer
-npm run test-twig    # Twig CS Fixer
+yarn run test-js      # ESLint
+yarn run test-css     # Stylelint for SCSS
+yarn run test-asset   # Prettier
+yarn run test-php     # PHP CS Fixer
+yarn run test-twig    # Twig CS Fixer
 
 # Fix commands
-npm run fix          # Fix all
-npm run fix-js       # Fix JS
-npm run fix-css      # Fix SCSS
-npm run fix-asset    # Fix assets
-npm run fix-php      # Fix PHP
-npm run fix-twig     # Fix Twig
+yarn run fix          # Fix all
+yarn run fix-js       # Fix JS
+yarn run fix-css      # Fix SCSS
+yarn run fix-asset    # Fix assets
+yarn run fix-php      # Fix PHP
+yarn run fix-twig     # Fix Twig
 ```
 
 ### Symfony Console
 
 ```bash
 # Reset database with sample data (limit 20 projects)
-npm run reset
+yarn run reset
 # or
 bin/console catro:reset --hard --limit 20
 ```
@@ -129,7 +142,7 @@ The docker-compose.dev.yaml mounts these directories for live editing:
 - `config/` - Symfony configuration
 - `tests/` - Test files
 
-**Note**: `node_modules/` and `vendor/` are NOT shared - they're built inside the container. After npm/composer changes, rebuild the container.
+**Note**: `node_modules/` and `vendor/` are NOT shared - they're built inside the container. After yarn/composer changes, rebuild the container.
 
 ## Project Structure
 
@@ -153,7 +166,7 @@ Catroweb/
 ├── tests/                 # Test files
 ├── translations/          # i18n files
 ├── webpack.config.js      # Webpack Encore config
-└── package.json           # npm dependencies
+└── package.json           # js dependencies
 ```
 
 ## SCSS/Sass
@@ -199,12 +212,104 @@ Default dev credentials (from docker-compose):
 
 ## Common Issues
 
+### Doctrine DQL Uses PHP Property Names (Not Column Names)
+
+In DQL queries, always use the PHP property name, not the database column name:
+
+```php
+// WRONG: $isReported property has column name "isReported" but DQL needs property name
+'c.is_reported'  // ❌ fails with "no field named is_reported"
+
+// CORRECT: use the PHP property name
+'c.isReported as is_reported'  // ✓ works, aliases to is_reported for array access
+```
+
+Rule: DQL uses PHP property names (e.g., `isReported`) not snake_case column names.
+
+### Forcing IDs in Behat Fixtures (MySQL AUTO_INCREMENT)
+
+`setId()` after `persist()` is ignored by Doctrine's `AUTO` strategy. To force specific IDs in test fixtures, use raw DBAL SQL:
+
+```php
+$em->getConnection()->executeStatement(
+    'INSERT INTO user_comment (id, ...) VALUES (:id, ...)',
+    ['id' => $forced_id, ...]
+);
+$entity = $em->find(UserComment::class, $forced_id);
+```
+
+See `insertUserComment()` in `ContextTrait.php` for the implementation pattern.
+
+### Twig path() Inherits Theme from Current Request Context
+
+Routes with `/{theme}/...` prefix require explicit `theme` in `path()` when rendering from a non-themed context (e.g., API):
+
+```twig
+{# WRONG: inherits "api" from URL /api/... which fails validation #}
+{{ path('project_comment', {id: comment.id}) }}
+
+{# CORRECT: explicit theme with fallback #}
+{{ path('project_comment', {id: comment.id, theme: request_theme|default('pocketcode')}) }}
+```
+
+When rendering Twig from an API controller, the router context has no valid theme, so the path generator inherits the URL prefix (e.g., "api"), which fails route validation.
+
+### index_test.php Always Uses debug=false
+
+`public/index_test.php` hardcodes `new Kernel('test', false)` — the second arg is debug mode. Setting `APP_DEBUG=1` in `.env.test` does NOT affect this. Error responses always show minimal info (no stack traces). For debugging 500s, add temporary `file_put_contents('/tmp/debug.txt', ...)` logging.
+
+### POST Endpoints Require Content-Type in Behat
+
+`ApiContext::iHaveTheFollowingJsonRequestBody()` only sets the request body, NOT the Content-Type header. The CommentsController returns 415 if Content-Type is not `application/json`. Always add:
+
+```gherkin
+And I have a request header "CONTENT_TYPE" with value "application/json"
+```
+
+### PHP-CS-Fixer Cache Hides Issues (Use --using-cache=no)
+
+Local `bin/php-cs-fixer fix` uses a `.php-cs-fixer.cache` file. If generated files were already cached as "clean", changes to those files won't be re-checked. CI runs without cache, so it catches issues that local runs miss.
+
+**Always use `--using-cache=no` when checking generated OpenAPI files:**
+
+```bash
+bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
+```
+
+Common issue: after `yarn run generate-api`, the generated files may have `string_implicit_backslashes` violations that the cached local fixer won't detect.
+
+### Doctrine DQL INSTANCE OF Does NOT Support Parameters
+
+DQL's `INSTANCE OF` operator requires class names directly in the query string — it does NOT support bound parameters:
+
+```php
+// WRONG: INSTANCE OF does not support parameters
+$qb->andWhere('n INSTANCE OF :type')->setParameter('type', LikeNotification::class);
+
+// CORRECT: concatenate class name directly
+$qb->andWhere('n INSTANCE OF '.LikeNotification::class);
+```
+
+### TranslatorAwareTrait: Use trans(), Not $translator
+
+`AbstractResponseManager` uses `TranslatorAwareTrait`. The `$translator` property is **private** in the trait — you cannot access it directly. Use the trait's `trans()` method instead:
+
+```php
+// WRONG: $translator is private in TranslatorAwareTrait
+$this->translator->trans('key', [], 'catroweb');
+
+// CORRECT: use the trait method (no domain argument — 3rd arg is locale, not domain)
+$this->trans('catro-notifications.like.message');
+```
+
+Note: The `trans()` method signature is `trans(string $id, array $parameters = [], ?string $locale = null)` — there is no `$domain` parameter. The domain is set elsewhere.
+
 ### After changing package.json
 
 ```bash
 # Local development
-rm -rf node_modules package-lock.json
-npm install
+rm -rf node_modules yarn.lock
+yarn install
 
 # Docker - rebuild container
 docker compose -f docker/docker-compose.dev.yaml build --no-cache app.catroweb
@@ -248,6 +353,20 @@ docker exec app.catroweb bin/psalm src/Path/To/File.php
 docker exec app.catroweb bin/phpunit --filter ClassName
 ```
 
+Local equivalents (non-Docker):
+
+```bash
+composer run fix
+./bin/phpstan analyse
+./bin/psalm
+./bin/phpunit
+```
+
+Notes:
+
+- PHPUnit 13: avoid `expects($this->any())` and don't use `with()` without `expects()`. Prefer `method()` on stubs/mocks; if you need argument matching, use `createMock()` with explicit expectations.
+- PHPStan is configured to analyze `src/` only (tests are excluded to avoid PHPUnit static-analysis noise).
+
 **All four tools must pass before merging.**
 
 ## Behat Testing
@@ -279,6 +398,11 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 | web-reactions       | tests/BehatFeatures/web/reactions       |
 | api-projects        | tests/BehatFeatures/api/projects        |
 | api-authentication  | tests/BehatFeatures/api/authentication  |
+| api-comments        | tests/BehatFeatures/api/comments        |
+| api-notifications   | tests/BehatFeatures/api/notifications   |
+| api-achievements    | tests/BehatFeatures/api/achievements    |
+| web-notifications   | tests/BehatFeatures/web/notifications   |
+| web-achievements    | tests/BehatFeatures/web/achievements    |
 
 Suite configuration is in `behat.yaml.dist`.
 
@@ -307,15 +431,21 @@ This helps debug failing tests by seeing the actual page state.
 
 ### JavaScript Changes and Behat Tests
 
-**CRITICAL:** After making JavaScript changes in `assets/`, you MUST run `npm run dev` to compile the changes before running Behat tests. The Docker container serves the compiled assets from `public/build/`, not the source files.
+**CRITICAL:** After making JavaScript changes in `assets/`, you MUST run `yarn run dev` to compile the changes before running Behat tests. The Docker container serves the compiled assets from `public/build/`, not the source files.
+
+**IMPORTANT:** `public/build/` is NOT volume-mounted into the Docker container — only specific files from `public/` are shared (like `index.php` and `index_test.php`). After building JS locally with `yarn run dev`, you must copy the built assets into the container:
 
 ```bash
 # Always do this after JS changes:
-npm run dev
+yarn run dev
+docker cp public/build/. app.catroweb:/var/www/catroweb/public/build/
+docker exec app.catroweb bin/console cache:clear --env=test
 docker exec app.catroweb bin/behat -f pretty -s web-reactions "tests/BehatFeatures/..."
 ```
 
-If Behat tests fail after JavaScript changes but the logic looks correct, check if you forgot to rebuild the assets.
+Also clear the Symfony cache (especially `--env=test` for Behat) after copying — stale cache can cause template/routing issues even when the assets are correct.
+
+If Behat tests fail after JavaScript changes but the logic looks correct, check if you forgot to rebuild the assets or copy them to the container.
 
 ### Preventing Flaky Behat Tests
 
@@ -437,14 +567,14 @@ Always run (in order):
 
 Always run:
 
-- `npm run fix-js` - ESLint
-- `npm run fix-css` - Stylelint
-- `npm run fix-asset` - Prettier
+- `yarn run fix-js` - ESLint
+- `yarn run fix-css` - Stylelint
+- `yarn run fix-asset` - Prettier
 
 **Rebuild required**: SCSS/JS changes require rebuilding assets:
 
-- Run `npm run dev` after changes, OR
-- Keep `npm run watch` running in the background (auto-rebuilds on save)
+- Run `yarn run dev` after changes, OR
+- Keep `yarn run watch` running in the background (auto-rebuilds on save)
 
 ### When to Run Tests
 
@@ -461,7 +591,7 @@ Note: Use `docker exec app.catroweb` prefix if native commands don't work.
 
 ### DOMContentLoaded with Deferred Scripts
 
-Scripts loaded with `defer` (Webpack Encore default) run AFTER DOMContentLoaded fires. Use this pattern:
+Webpack Encore loads scripts with `defer`. Per HTML spec, deferred scripts execute before `DOMContentLoaded` fires, so `document.addEventListener('DOMContentLoaded', ...)` works correctly — this is the standard pattern used throughout the codebase. If you encounter edge cases where it doesn't fire, use this fallback:
 
 ```javascript
 if (document.readyState === 'loading') {
@@ -539,7 +669,7 @@ if (pendingAction && userRole !== 'guest') {
 ## API
 
 - OpenAPI spec in `src/Api/OpenAPI/`
-- Generate API client: `npm run generate-api`
+- Generate API client: `yarn run generate-api`
 
 ### OpenAPI Enum Serialization (Important!)
 
@@ -589,6 +719,40 @@ src/Api/Services/{Feature}/
 ```
 
 The main `ProjectsApi.php` delegates to these facades.
+
+### Cursor-Based Pagination Pattern
+
+API list endpoints use cursor-based pagination (not offset). Pattern:
+
+1. **Repository**: Fetch `$limit + 1` results; if count > limit, `has_more = true` and `array_pop()` the extra
+2. **Response**: Cursor is `base64_encode((string) $last_item_id)`; decode with `base64_decode($cursor, true)` + validation
+3. **Response model**: `{ data: [...], next_cursor: string|null, has_more: boolean }`
+
+See `CommentsApi` and `NotificationsApi` for reference implementations.
+
+### After Running `yarn run generate-api`
+
+Always run CS fixer on the generated files with no cache:
+
+```bash
+yarn run generate-api
+bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
+```
+
+Then update any existing PHP code that calls the regenerated interface methods (check tests too — method signatures change).
+
+### Registering New API Handlers (Critical!)
+
+After creating a new `{Feature}Api.php` that implements a generated interface, you **must** register it in `config/services.php`:
+
+```php
+use App\Api\AchievementsApi;
+
+$services->set(AchievementsApi::class)
+    ->tag('open_api_server.api', ['api' => 'achievements']);
+```
+
+The `'api'` tag value must match the OpenAPI tag name (lowercase). Without this, the generated controller's `getApiHandler()` will fail to find the handler and return 500.
 
 ### HTTP Status Codes for Validation
 

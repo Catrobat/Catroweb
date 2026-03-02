@@ -52,7 +52,10 @@ use App\Admin\Users\ReportedUsers\ReportedUsersController;
 use App\Admin\Users\UserAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportController;
+use App\Api\AchievementsApi;
 use App\Api\AuthenticationApi;
+use App\Api\CommentsApi;
+use App\Api\FollowersApi;
 use App\Api\MediaLibraryApi;
 use App\Api\NotificationsApi;
 use App\Api\ProjectsApi;
@@ -175,11 +178,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   //
   $services->set(MediaLibraryApi::class)->tag('open_api_server.api', ['api' => 'mediaLibrary']);
   $services->set(ProjectsApi::class)->tag('open_api_server.api', ['api' => 'projects']);
+  $services->set(CommentsApi::class)->tag('open_api_server.api', ['api' => 'comments']);
   $services->set(UserApi::class)->tag('open_api_server.api', ['api' => 'user']);
   $services->set(AuthenticationApi::class)->tag('open_api_server.api', ['api' => 'authentication']);
   $services->set(UtilityApi::class)->tag('open_api_server.api', ['api' => 'utility']);
   $services->set(SearchApi::class)->tag('open_api_server.api', ['api' => 'search']);
   $services->set(NotificationsApi::class)->tag('open_api_server.api', ['api' => 'notifications']);
+  $services->set(AchievementsApi::class)->tag('open_api_server.api', ['api' => 'achievements']);
+  $services->set(FollowersApi::class)->tag('open_api_server.api', ['api' => 'followers']);
   $services->set(StudioApi::class)->tag('open_api_server.api', ['api' => 'studio']);
   $services->set(OverwriteController::class);
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');

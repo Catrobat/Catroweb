@@ -8,6 +8,9 @@ use App\DB\Entity\Project\Extension;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Extension>
+ */
 class ExtensionRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

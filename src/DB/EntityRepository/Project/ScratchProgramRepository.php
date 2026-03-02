@@ -8,6 +8,9 @@ use App\DB\Entity\Project\Scratch\ScratchProgram;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<ScratchProgram>
+ */
 class ScratchProgramRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)

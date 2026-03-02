@@ -7,21 +7,20 @@ namespace Tests\PhpUnit\Api;
 use App\Api\AuthenticationApi;
 use App\Api\Services\Authentication\AuthenticationApiFacade;
 use App\Api\Services\Authentication\AuthenticationApiProcessor;
-use App\System\Testing\PhpUnit\DefaultTestCase;
-use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\RefreshRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
  */
 #[CoversClass(AuthenticationApi::class)]
-final class AuthenticationApiTest extends DefaultTestCase
+final class AuthenticationApiTest extends TestCase
 {
   protected AuthenticationApi $authentication_api;
 
@@ -61,7 +60,6 @@ final class AuthenticationApiTest extends DefaultTestCase
     $response = $this->authentication_api->authenticationPost($login_request, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
-    $this->assertInstanceOf(JWTResponse::class, $response);
   }
 
   /**
@@ -95,6 +93,5 @@ final class AuthenticationApiTest extends DefaultTestCase
     $response = $this->authentication_api->authenticationRefreshPost($refresh_request, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
-    $this->assertInstanceOf(JWTResponse::class, $response);
   }
 }

@@ -13,6 +13,9 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<ExampleProgram>
+ */
 class ExampleRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
@@ -62,7 +65,7 @@ class ExampleRepository extends ServiceEntityRepository
       $projects_count = 0;
     }
 
-    return $projects_count;
+    return (int) $projects_count;
   }
 
   /**

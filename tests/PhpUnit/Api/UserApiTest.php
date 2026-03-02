@@ -13,7 +13,6 @@ use App\Api\Services\User\UserResponseManager;
 use App\Api\Services\ValidationWrapper;
 use App\Api\UserApi;
 use App\DB\Entity\User\User;
-use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
@@ -25,13 +24,14 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
  */
 #[CoversClass(UserApi::class)]
-final class UserApiTest extends DefaultTestCase
+final class UserApiTest extends TestCase
 {
   protected UserApi $object;
 
@@ -175,8 +175,6 @@ final class UserApiTest extends DefaultTestCase
     $response = $this->object->userGet($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
-
-    $this->assertInstanceOf(ExtendedUserDataResponse::class, $response);
   }
 
   /**

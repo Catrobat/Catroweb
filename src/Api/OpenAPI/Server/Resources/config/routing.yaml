@@ -2,6 +2,33 @@
 # https://github.com/openapitools/openapi-generator
 # Do not edit the class manually.
 
+# achievements
+open_api_server_achievements_achievementscountget:
+  path: /achievements/count
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.achievements::achievementsCountGetAction
+
+open_api_server_achievements_achievementsget:
+  path: /achievements
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.achievements::achievementsGetAction
+
+open_api_server_achievements_achievementsreadput:
+  path: /achievements/read
+  methods: [PUT]
+  defaults:
+    _controller: open_api_server.controller.achievements::achievementsReadPutAction
+
+open_api_server_achievements_useridachievementsget:
+  path: /user/{id}/achievements
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.achievements::userIdAchievementsGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
 # authentication
 open_api_server_authentication_authenticationdelete:
   path: /authentication
@@ -32,6 +59,88 @@ open_api_server_authentication_authenticationrefreshpost:
   methods: [POST]
   defaults:
     _controller: open_api_server.controller.authentication::authenticationRefreshPostAction
+
+# comments
+open_api_server_comments_commentsiddelete:
+  path: /comments/{id}
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.comments::commentsIdDeleteAction
+  requirements:
+    id: '\d+'
+
+open_api_server_comments_commentsidrepliesget:
+  path: /comments/{id}/replies
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.comments::commentsIdRepliesGetAction
+  requirements:
+    id: '\d+'
+
+open_api_server_comments_commentsidreportpost:
+  path: /comments/{id}/report
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.comments::commentsIdReportPostAction
+  requirements:
+    id: '\d+'
+
+open_api_server_comments_commentsidtranslationget:
+  path: /comments/{id}/translation
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.comments::commentsIdTranslationGetAction
+  requirements:
+    id: '\d+'
+
+open_api_server_comments_projectidcommentsget:
+  path: /project/{id}/comments
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.comments::projectIdCommentsGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_comments_projectidcommentspost:
+  path: /project/{id}/comments
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.comments::projectIdCommentsPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+# followers
+open_api_server_followers_useridfollowpost:
+  path: /user/{id}/follow
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.followers::userIdFollowPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_followers_useridfollowersget:
+  path: /user/{id}/followers
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.followers::userIdFollowersGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_followers_useridfollowingget:
+  path: /user/{id}/following
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.followers::userIdFollowingGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_followers_useridunfollowdelete:
+  path: /user/{id}/unfollow
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.followers::userIdUnfollowDeleteAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
 
 # mediaLibrary
 open_api_server_mediaLibrary_mediaassetsget:

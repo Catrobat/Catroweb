@@ -4,6 +4,9 @@ import './FollowerOverview'
 
 import { shareLink } from '../Components/ShareLink'
 import { ProjectList } from '../Project/ProjectList'
+import { ApiFetch } from '../Api/ApiHelper'
+import { escapeHtml } from '../Components/HtmlEscape'
+import { achievementBadgeHtml } from './AchievementBadge'
 
 import './Profile.scss'
 import './Achievements.scss'
@@ -22,6 +25,7 @@ shareLink(
 )
 
 initUserProjects()
+initProfileAchievements()
 
 function initUserProjects() {
   const userProjects = document.querySelector('#projects-section')
@@ -40,4 +44,47 @@ function initUserProjects() {
       new ProjectList(projectList, 'user-projects', url, property, theme, 999, emptyMessage),
     )
   })
+}
+
+function initProfileAchievements() {
+  const container = document.querySelector('.js-profile-achievements')
+  if (!container) {
+    return
+  }
+
+  const baseUrl = container.dataset.baseUrl
+  const userId = container.dataset.userId
+  const title = container.dataset.transTitle
+
+  new ApiFetch(baseUrl + '/api/user/' + userId + '/achievements', 'GET', undefined, 'json')
+    .run()
+    .then((achievements) => {
+      if (!achievements || achievements.length === 0) {
+        return
+      }
+
+      const badgesHtml = achievements
+        .map(
+          (achievement) =>
+            '<div class="achievement__badge">' +
+            achievementBadgeHtml(achievement, 'profile') +
+            '</div>',
+        )
+        .join('')
+
+      container.innerHTML =
+        '<hr>' +
+        '<h3>' +
+        escapeHtml(title) +
+        '</h3>' +
+        '<div class="horizontal-scrolling-wrapper">' +
+        badgesHtml +
+        '</div>' +
+        '<hr>'
+
+      container.classList.remove('d-none')
+    })
+    .catch((error) => {
+      console.error('Failed to load profile achievements:', error)
+    })
 }
