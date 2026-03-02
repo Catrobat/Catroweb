@@ -93,7 +93,7 @@ task('restart:php-fpm', function () {
 
 task('install:yarn', function () {
   cd('{{release_path}}');
-  run('corepack enable --install-directory=.corepack-bin');
+  run('mkdir -p .corepack-bin && corepack enable --install-directory=.corepack-bin');
   run('export PATH={{release_path}}/.corepack-bin:$PATH && corepack prepare yarn@4.12.0 --activate && yarn install --immutable');
 });
 
