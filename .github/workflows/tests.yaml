@@ -157,6 +157,7 @@ jobs:
           - api-notifications
           - api-projects
           - api-search
+          - api-followers
           - api-studio
           - api-tag
           - api-translation

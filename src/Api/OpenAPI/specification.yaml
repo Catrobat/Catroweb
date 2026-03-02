@@ -53,6 +53,9 @@ tags:
   - name: 'Studio'
     description: 'Create, join and update studios'
 
+  - name: 'Followers'
+    description: 'Everything related to user follow relationships'
+
 paths:
   ##############################################
   # Authentication
@@ -2038,6 +2041,82 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  ##############################################
+  # Followers
+  ###
+
+  '/user/{id}/followers':
+    get:
+      tags:
+        - 'Followers'
+      summary: 'Get users following a user'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowersListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/user/{id}/following':
+    get:
+      tags:
+        - 'Followers'
+      summary: 'Get users a user is following'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FollowersListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/user/{id}/follow':
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Followers'
+      summary: 'Follow a user'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/user/{id}/unfollow':
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Followers'
+      summary: 'Unfollow a user'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
 components:
   ##############################################
   # Default Response messages
@@ -3671,3 +3750,48 @@ components:
         _cache:
           type: boolean
           nullable: true
+
+    ##############################################
+    # Followers
+    ###
+
+    FollowerResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/Uuid'
+        username:
+          type: string
+          example: 'john_doe'
+        avatar:
+          type: string
+          nullable: true
+          format: uri
+          description: 'User avatar URL'
+        project_count:
+          type: integer
+          description: 'Number of public projects'
+          example: 5
+        is_following:
+          type: boolean
+          description: 'Does the authenticated user follow this user?'
+        follows_you:
+          type: boolean
+          description: 'Does this user follow the authenticated user?'
+
+    FollowersListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: 'Array of follower items'
+          items:
+            $ref: '#/components/schemas/FollowerResponse'
+        total_followers:
+          type: integer
+          description: 'Total number of followers'
+          example: 10
+        total_following:
+          type: integer
+          description: 'Total number of users being followed'
+          example: 5

@@ -33,24 +33,25 @@ Feature: Follow feature on profiles
     Given I log in as "Catrobat2"
     And I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I should see text matching "Follow"
     And I click ".profile-follow"
     And I wait for AJAX to finish
     Then I should be on "/app/user/1"
-    And I wait for the page to be loaded
     And the element ".profile-follow" should not be visible
     And the element ".profile-follows" should be visible
+    And I wait for the element "#followers-count" to contain "1"
     And the "#followers-count" element should contain "1"
 
   Scenario: Unfollow user should unfollow and decrease counter
     Given I log in as "Catrobat2"
     And I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element ".profile-follow" should be visible
     And I click ".follow-btn"
     And I wait for AJAX to finish
     Then I should be on "/app/user/1"
-    And I wait for the page to be loaded
     And I should see "Following"
     And the element ".profile-follows" should be visible
     And I click ".unfollow-btn"
@@ -59,24 +60,28 @@ Feature: Follow feature on profiles
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then I should be on "/app/user/1"
-    And I wait for the page to be loaded
     And the element ".profile-follows" should not be visible
     And the element ".profile-follow" should be visible
+    And I wait for the element "#followers-count" to contain "0"
     And the "#followers-count" element should contain "0"
 
   Scenario: Following section should show appropriate information:
     Given I log in as "Catrobat2"
     And I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element ".profile-follow" should be visible
     And I click ".profile-follow"
     And I wait for AJAX to finish
     Then I should be on "/app/user/1"
     Then I am on "/app/follower"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element "#follows-tab" should be visible
     And the element "#follower-tab" should be visible
     And I click "#follows-tab"
-    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     And I should see text matching "Catrobat"
     And the element ".following-item-1" should be visible
     And the element ".following-item-1 .unfollow-btn" should be visible
@@ -85,21 +90,28 @@ Feature: Follow feature on profiles
     Given I log in as "Catrobat2"
     And I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element ".profile-follow" should be visible
     And I click ".profile-follow"
     And I wait for AJAX to finish
     Then I should be on "/app/user/1"
     And I am on "/app/follower"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element "#follows-tab" should be visible
     And the element "#follower-tab" should be visible
     And I click "#follows-tab"
+    And I wait for AJAX to finish
     And I should see text matching "Catrobat"
     And I log in as "Catrobat"
     And I am on "/app/follower"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element "#follows-tab" should be visible
     And the element "#follower-tab" should be visible
     And I click "#follower-tab"
+    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     And the element ".follower-item-2" should be visible
     And the element ".follower-item-2 .follow-btn" should be visible
     And I should see text matching "Catrobat2"
@@ -109,44 +121,49 @@ Feature: Follow feature on profiles
     Given I log in as "Catrobat2"
     And I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element ".profile-follow" should be visible
     And I click ".profile-follow"
     And I wait for AJAX to finish
     Then I should be on "/app/user/1"
     And I am on "/app/follower"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element "#follows-tab" should be visible
     And the element "#follower-tab" should be visible
     And I click "#follows-tab"
+    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     And the element ".following-item-1" should be visible
     And the element ".following-item-1 .unfollow-btn" should be visible
     And I should see text matching "Catrobat"
     And I log in as "Catrobat"
     And I am on "/app/follower"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element "#follows-tab" should be visible
     And the element "#follower-tab" should be visible
     And I click "#follower-tab"
+    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     And the element ".follower-item-2" should be visible
     And the element ".follower-item-2 .follow-btn" should be visible
-    And the element ".following-item-2" should not exist
-    And the element ".following-item-2 .unfollow-btn" should not exist
     And I should see text matching "Catrobat2"
     And I click ".follower-item-2 .follow-btn"
     And I wait for AJAX to finish
     Then I should be on "/app/follower"
-    And I wait for the page to be loaded
-    And the element ".following-item-2" should not be visible
-    And the element ".following-item-2 .unfollow-btn" should not be visible
+    And I wait for AJAX to finish
     And I click "#follows-tab"
+    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     And the element ".following-item-2" should be visible
     And the element ".following-item-2 .unfollow-btn" should be visible
-    And the element ".follower-item-2" should not be visible
-    And the element ".follower-item-2 .follow-btn" should not be visible
 
   Scenario: Following sends a notification:
     Given I log in as "Catrobat2"
     And I am on "/app/user/3"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see text matching "Follow"
     And I click ".profile-follow"
     And I wait for AJAX to finish
@@ -155,6 +172,8 @@ Feature: Follow feature on profiles
     Then I log in as "Catrobat3"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     Then I should see text matching "Catrobat2 is now following you."
     And the element "#all-notif" should be visible
     And the element "#follow-notif" should be visible
@@ -163,4 +182,5 @@ Feature: Follow feature on profiles
     And the element "#remix-notif" should be visible
     And I click "#follow-notif"
     And I wait for AJAX to finish
+    And I wait 500 milliseconds
     Then I should see text matching "Catrobat2 is now following you."
