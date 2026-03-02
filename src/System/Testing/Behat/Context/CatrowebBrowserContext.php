@@ -19,9 +19,6 @@ use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use PHPUnit\Framework\Assert;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
@@ -58,20 +55,6 @@ class CatrowebBrowserContext extends BrowserContext
   // -------------------------------------------------------------------------------------------------------------------
   //  Hook
   // -------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * @BeforeScenario
-   *
-   * @throws \Exception
-   */
-  public function initACL(): void
-  {
-    $application = new Application($this->getKernel());
-    $application->setAutoExit(false);
-
-    $input = new ArrayInput(['command' => 'sonata:admin:setup-acl']);
-    $application->run($input, new NullOutput());
-  }
 
   // --------------------------------------------------------------------------------------------------------------------
   //  Authentication
