@@ -44,6 +44,9 @@ tags:
   - name: 'Notifications'
     description: 'Everything related for notifications'
 
+  - name: 'Achievements'
+    description: 'Everything related to achievements'
+
   - name: 'Search'
     description: 'Everything related to searching'
 
@@ -1386,6 +1389,71 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '403':
           $ref: '#/components/responses/Forbidden'
+
+  ################################################
+  # Achievements
+  #
+  /achievements:
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Achievements'
+      summary: 'Get user achievements'
+      description: 'Returns all achievements for the authenticated user, split into unlocked and locked lists.'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AchievementsListResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /achievements/count:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Achievements'
+      summary: 'Count unseen achievements'
+      description: 'Returns the number of unseen achievements for the authenticated user.'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AchievementsCountResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /achievements/read:
+    put:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Achievements'
+      summary: 'Mark all achievements as seen'
+      description: 'Marks all unseen achievements as seen for the authenticated user.'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
 
   ################################################
   # Media Library
@@ -3183,6 +3251,75 @@ components:
         prize:
           type: string
           description: 'Prize for anniversary notifications'
+
+    ######################################################
+    # Achievement Schemas
+    ###
+
+    AchievementsListResponse:
+      type: object
+      properties:
+        unlocked:
+          type: array
+          items:
+            $ref: '#/components/schemas/AchievementResponse'
+        locked:
+          type: array
+          items:
+            $ref: '#/components/schemas/AchievementResponse'
+        most_recent:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/AchievementResponse'
+        most_recent_unlocked_at:
+          type: string
+          nullable: true
+          description: 'Date when the most recent achievement was unlocked (Y-m-d)'
+        show_animation:
+          type: boolean
+          description: 'Whether to show the new achievement animation'
+        total_count:
+          type: integer
+          description: 'Total number of enabled achievements'
+        unlocked_count:
+          type: integer
+          description: 'Number of achievements unlocked by this user'
+
+    AchievementResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 'Achievement ID'
+        internal_title:
+          type: string
+          description: 'Internal title of the achievement'
+        title:
+          type: string
+          description: 'Translated title of the achievement'
+        description:
+          type: string
+          description: 'Translated description of the achievement'
+        badge_svg_path:
+          type: string
+          description: 'Path to the badge SVG'
+        badge_locked_svg_path:
+          type: string
+          description: 'Path to the locked badge SVG'
+        banner_svg_path:
+          type: string
+          description: 'Path to the banner SVG'
+        banner_color:
+          type: string
+          description: 'Banner color'
+
+    AchievementsCountResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: 'Number of unseen achievements'
+          example: 2
 
     ######################################################
     # Studio Schema

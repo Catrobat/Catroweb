@@ -400,7 +400,9 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 | api-authentication  | tests/BehatFeatures/api/authentication  |
 | api-comments        | tests/BehatFeatures/api/comments        |
 | api-notifications   | tests/BehatFeatures/api/notifications   |
+| api-achievements    | tests/BehatFeatures/api/achievements    |
 | web-notifications   | tests/BehatFeatures/web/notifications   |
+| web-achievements    | tests/BehatFeatures/web/achievements    |
 
 Suite configuration is in `behat.yaml.dist`.
 
@@ -738,6 +740,19 @@ bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
 ```
 
 Then update any existing PHP code that calls the regenerated interface methods (check tests too — method signatures change).
+
+### Registering New API Handlers (Critical!)
+
+After creating a new `{Feature}Api.php` that implements a generated interface, you **must** register it in `config/services.php`:
+
+```php
+use App\Api\AchievementsApi;
+
+$services->set(AchievementsApi::class)
+    ->tag('open_api_server.api', ['api' => 'achievements']);
+```
+
+The `'api'` tag value must match the OpenAPI tag name (lowercase). Without this, the generated controller's `getApiHandler()` will fail to find the handler and return 500.
 
 ### HTTP Status Codes for Validation
 

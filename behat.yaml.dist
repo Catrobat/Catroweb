@@ -111,6 +111,15 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
+        api-achievements:
+            paths:
+                - tests/BehatFeatures/api/achievements
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+
         api-utility:
             paths:
                 - tests/BehatFeatures/api/utility

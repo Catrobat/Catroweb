@@ -2,6 +2,25 @@
 # https://github.com/openapitools/openapi-generator
 # Do not edit the class manually.
 
+# achievements
+open_api_server_achievements_achievementscountget:
+  path: /achievements/count
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.achievements::achievementsCountGetAction
+
+open_api_server_achievements_achievementsget:
+  path: /achievements
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.achievements::achievementsGetAction
+
+open_api_server_achievements_achievementsreadput:
+  path: /achievements/read
+  methods: [PUT]
+  defaults:
+    _controller: open_api_server.controller.achievements::achievementsReadPutAction
+
 # authentication
 open_api_server_authentication_authenticationdelete:
   path: /authentication

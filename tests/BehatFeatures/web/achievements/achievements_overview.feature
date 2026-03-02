@@ -34,18 +34,23 @@ Feature: Users have an achievement page for their overviews
     Given I log in as "ZeroAchiever"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#no-unlocked-achievements" to contain "unlocked"
     And the element "#no-unlocked-achievements" should be visible
 
   Scenario: Users without achievements can't have a category for their most recent achievement
     Given I log in as "ZeroAchiever"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".achievement-top__wrapper" should not exist
 
   Scenario: Users can see their most recent achievement in a specific category
     Given I log in as "Achiever"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element ".achievement__badge__banner__text--top" to contain "best__"
     Then the element ".achievement-top__wrapper" should be visible
     And the "h2" element should contain "Newest Achievement"
     And the ".achievement__badge__banner__text--top" element should contain "best__"
@@ -57,6 +62,8 @@ Feature: Users have an achievement page for their overviews
     Given I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element ".achievement__badge__banner__text--top" to contain "ups__"
     Then the element ".achievement-top__wrapper" should be visible
     And the ".achievement__badge__banner__text--top" element should contain "ups__"
     And the ".achievement-top__text-wrapper" element should contain "ups__desc"
@@ -67,6 +74,7 @@ Feature: Users have an achievement page for their overviews
     Given I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the ".mdc-tab-bar" element should contain "locked"
     And the ".mdc-tab-bar" element should contain "unlocked"
     And the element "#unlocked-achievements" should be visible
@@ -82,6 +90,8 @@ Feature: Users have an achievement page for their overviews
     Given I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#unlocked-achievements" to contain "ups__"
     Then the "#unlocked-achievements" element should contain "ups__"
     And the "#unlocked-achievements" element should not contain "best__"
     And the "#unlocked-achievements" element should not contain "first__"
@@ -96,6 +106,8 @@ Feature: Users have an achievement page for their overviews
     Given I log in as "Achiever"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#unlocked-achievements" to contain "ups__"
     Then the "#unlocked-achievements" element should contain "ups__"
     And the "#unlocked-achievements" element should contain "best__"
     And the "#unlocked-achievements" element should contain "first__"
@@ -110,6 +122,8 @@ Feature: Users have an achievement page for their overviews
     Given I log in as "ZeroAchiever"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#no-unlocked-achievements" to contain "unlocked"
     Then the "#unlocked-achievements" element should not contain "ups__"
     And the "#unlocked-achievements" element should not contain "best__"
     And the "#unlocked-achievements" element should not contain "first__"

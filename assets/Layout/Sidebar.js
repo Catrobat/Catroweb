@@ -18,14 +18,13 @@ function initSidebarBadges() {
     updateBadge(
       sidebarJs.dataset.baseUrl + '/api/notifications/count',
       'sidebar_badge--unseen-notifications',
-      'new',
+      'total',
     )
 
     updateBadge(
-      sidebarJs.dataset.pathAchievementsCount,
+      sidebarJs.dataset.baseUrl + '/api/achievements/count',
       'sidebar_badge--unseen-achievements',
-      'old',
-      sidebarJs.dataset.transAchievementsBadeText,
+      'count',
     )
   }
 }
@@ -33,8 +32,7 @@ function initSidebarBadges() {
 function updateBadge(
   url,
   badgeID,
-  apiToCall = 'old',
-  badgeText = null,
+  countField = 'count',
   maxAmountToFetch = 99,
   refreshRate = 300000, // 5 minutes
 ) {
@@ -46,28 +44,15 @@ function updateBadge(
     .generateAuthenticatedFetch()
     .then((response) => response.json())
     .then((data) => {
-      const count = apiToCall === 'new' ? data.total : data.count
+      const count = data[countField]
       if (count > 0) {
-        if (badgeText === null) {
-          badge.innerHTML = count <= maxAmountToFetch ? count.toString() : maxAmountToFetch + '+'
-        } else {
-          badge.innerHTML = badgeText
-        }
+        badge.innerHTML = count <= maxAmountToFetch ? count.toString() : maxAmountToFetch + '+'
         badge.style.display = 'block'
       } else {
         badge.innerHTML = ''
         badge.style.display = 'none'
       }
-      setTimeout(
-        updateBadge,
-        refreshRate,
-        url,
-        badgeID,
-        apiToCall,
-        badgeText,
-        maxAmountToFetch,
-        refreshRate,
-      )
+      setTimeout(updateBadge, refreshRate, url, badgeID, countField, maxAmountToFetch, refreshRate)
     })
     .catch((error) => {
       console.error('Unable to update sidebar badge! Error: ', error)
