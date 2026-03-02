@@ -21,6 +21,14 @@ open_api_server_achievements_achievementsreadput:
   defaults:
     _controller: open_api_server.controller.achievements::achievementsReadPutAction
 
+open_api_server_achievements_useridachievementsget:
+  path: /user/{id}/achievements
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.achievements::userIdAchievementsGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
 # authentication
 open_api_server_authentication_authenticationdelete:
   path: /authentication

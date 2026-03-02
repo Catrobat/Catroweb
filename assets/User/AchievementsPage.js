@@ -2,6 +2,7 @@ import Swal from 'sweetalert2'
 import 'external-svg-loader'
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { achievementBadgeHtml } from './AchievementBadge'
 
 import '../Components/TabBar'
 
@@ -81,20 +82,7 @@ function createUnlockedAchievementElement(achievement) {
   div.className = 'achievement'
   div.innerHTML =
     '<div class="achievement__badge">' +
-    '<svg class="achievement__badge__coin achievement__badge__coin--tab"' +
-    ' data-src="' +
-    escapeAttr(achievement.badge_svg_path) +
-    '" data-unique-ids="disabled"></svg>' +
-    '<svg class="achievement__badge__banner achievement__badge__banner--tab"' +
-    ' style="color: ' +
-    escapeAttr(achievement.banner_color) +
-    '"' +
-    ' data-src="' +
-    escapeAttr(achievement.banner_svg_path) +
-    '" data-unique-ids="disabled"></svg>' +
-    '<div class="achievement__badge__banner__text achievement__badge__banner__text--tab">' +
-    escapeHtml(achievement.title) +
-    '</div>' +
+    achievementBadgeHtml(achievement, 'tab') +
     '</div>' +
     '<p class="achievement__badge__text">' +
     escapeHtml(achievement.description) +
@@ -142,20 +130,7 @@ function renderMostRecentSection(data) {
     '</h2>' +
     '<div class="mt-4 mb-4 achievement-top__wrapper">' +
     '<div class="achievement__badge">' +
-    '<svg class="achievement__badge__coin achievement__badge__coin--top"' +
-    ' data-src="' +
-    escapeAttr(achievement.badge_svg_path) +
-    '" data-unique-ids="disabled"></svg>' +
-    '<svg class="achievement__badge__banner achievement__badge__banner--top"' +
-    ' style="color: ' +
-    escapeAttr(achievement.banner_color) +
-    '"' +
-    ' data-src="' +
-    escapeAttr(achievement.banner_svg_path) +
-    '" data-unique-ids="disabled"></svg>' +
-    '<div class="achievement__badge__banner__text achievement__badge__banner__text--top">' +
-    escapeHtml(achievement.title) +
-    '</div>' +
+    achievementBadgeHtml(achievement, 'top') +
     '</div>' +
     '<div class="achievement-top__text-wrapper">' +
     '<div>' +
@@ -224,20 +199,7 @@ function getNewAchievementAnimationHtml(achievement) {
     escapeHtml(trans.popupSubtitle) +
     '</h3>' +
     '<div class="achievement__badge achievement__badge--popup">' +
-    '<svg class="achievement__badge__coin achievement__badge__coin--popup"' +
-    ' data-src="' +
-    escapeAttr(achievement.badge_svg_path) +
-    '" data-unique-ids="disabled"></svg>' +
-    '<svg class="achievement__badge__banner achievement__badge__banner--popup"' +
-    ' style="color: ' +
-    escapeAttr(achievement.banner_color) +
-    '"' +
-    ' data-src="' +
-    escapeAttr(achievement.banner_svg_path) +
-    '" data-unique-ids="disabled"></svg>' +
-    '<div class="achievement__badge__banner__text achievement__badge__banner__text--popup">' +
-    escapeHtml(achievement.title) +
-    '</div>' +
+    achievementBadgeHtml(achievement, 'popup') +
     '</div>'
   )
 }

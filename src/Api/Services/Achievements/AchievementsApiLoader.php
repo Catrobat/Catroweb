@@ -39,6 +39,14 @@ class AchievementsApiLoader extends AbstractApiLoader
     ];
   }
 
+  /**
+   * @return Achievement[]
+   */
+  public function getUnlockedAchievements(User $user): array
+  {
+    return $this->achievement_manager->findUnlockedAchievements($user);
+  }
+
   public function getUnseenCount(User $user): int
   {
     return $this->achievement_manager->countUnseenUserAchievements($user);

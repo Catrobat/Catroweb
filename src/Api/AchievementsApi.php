@@ -6,6 +6,7 @@ namespace App\Api;
 
 use App\Api\Services\Achievements\AchievementsApiFacade;
 use App\Api\Services\Base\AbstractApiController;
+use App\User\UserManager;
 use OpenAPI\Server\Api\AchievementsApiInterface;
 use OpenAPI\Server\Model\AchievementsCountResponse;
 use OpenAPI\Server\Model\AchievementsListResponse;
@@ -13,8 +14,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AchievementsApi extends AbstractApiController implements AchievementsApiInterface
 {
-  public function __construct(private readonly AchievementsApiFacade $facade)
-  {
+  public function __construct(
+    private readonly AchievementsApiFacade $facade,
+    private readonly UserManager $user_manager,
+  ) {
   }
 
   #[\Override]
@@ -76,5 +79,24 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
     $this->facade->getProcessor()->markAllAsSeen($user);
 
     $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function userIdAchievementsGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $user = $this->user_manager->find($id);
+    if (null === $user) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $unlocked = $this->facade->getLoader()->getUnlockedAchievements($user);
+    $responses = $this->facade->getResponseManager()->createAchievementResponseList($unlocked, $accept_language);
+
+    $responseCode = Response::HTTP_OK;
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    return $responses;
   }
 }
