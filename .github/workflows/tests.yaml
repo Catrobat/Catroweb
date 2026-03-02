@@ -151,15 +151,17 @@ jobs:
       matrix:
         testSuite:
           - api-authentication
+          - api-achievements
+          - api-comments
           - api-media-library
-          - api-projects
-          - api-user
           - api-notifications
-          - api-utility
-          - api-translation
-          - api-tag
-          - api-studio
+          - api-projects
           - api-search
+          - api-studio
+          - api-tag
+          - api-translation
+          - api-user
+          - api-utility
 
           - web-achievements
           - web-admin
