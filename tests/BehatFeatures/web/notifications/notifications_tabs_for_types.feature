@@ -20,6 +20,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     And I open the menu
     And I click "#sidebar-notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should be on "/app/user_notifications"
     And I should see "It looks like you don't have any notifications."
     And the element "#all-notif" should be visible
@@ -31,6 +32,8 @@ Feature: User gets notifications for new followers, reactions, comments, ..
   Scenario: Every empty notification tab shows a message
     Given I log in as "Catrobat"
     And I am on "/app/user_notifications"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     When I click "#follow-notif"
     And I wait for AJAX to finish
     Then I should see "It looks like you don't have any follower notifications."
@@ -53,40 +56,41 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User is now following you."
     And I should see "User created a remix program 1 of your game program 1."
     And I should see "User commented on program 1."
     And I should see "User reacted to program 1."
 
     When I click "#reaction-notif"
+    And I wait for AJAX to finish
     Then I should not see "User is now following you."
     And I should not see "User created a remix program 1 of your game program 1."
     And I should not see "User commented on program 1."
     But I should see "User reacted to program 1."
 
     When I click "#follow-notif"
-    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User is now following you."
     But I should not see "User created a remix program 1 of your game program 1."
     And I should not see "User commented on program 1."
     And I should not see "User reacted to program 1."
 
     When I click "#comment-notif"
-    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should not see "User is now following you."
     And I should not see "User created a remix program 1 of your game program 1."
     And I should not see "User reacted to program 1."
     But I should see "User commented on program 1."
 
     When I click "#remix-notif"
-    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User created a remix program 1 of your game program 1."
     But I should not see "User is now following you."
     And I should not see "User commented on program 1."
     And I should not see "User reacted to program 1."
 
     When I click "#all-notif"
-    And I wait for the page to be loaded
     Then I should see "User is now following you."
     And I should see "User created a remix program 1 of your game program 1."
     And I should see "User commented on program 1."

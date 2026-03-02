@@ -24,19 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
     notificationsElement.dataset.profilePath,
     notificationsElement.dataset.projectPath,
     notificationsElement.dataset.imgAsset,
-    notificationsElement.dataset.initialCursor || null,
-    notificationsElement.dataset.hasMoreNotifications === '1',
   )
 
   userNotifications.markAllRead()
 
-  document.querySelectorAll('.js-notification-interaction').forEach((element) => {
-    element.addEventListener('click', () => {
+  // Fetch initial "all" tab data via API
+  userNotifications.fetchMoreNotifications(
+    userNotifications.notificationsFetchCount,
+    'all',
+    'catro-notification-',
+    document.getElementById('notifications'),
+  )
+
+  // Event delegation for click handling on API-rendered notifications
+  document.querySelector('.tab-content').addEventListener('click', (event) => {
+    const item = event.target.closest('.notification-item')
+    if (item) {
       userNotifications.redirectUser(
-        element.getAttribute('data-notification-instance'),
-        element.getAttribute('data-notification-redirect'),
+        item.getAttribute('data-notification-instance'),
+        item.getAttribute('data-notification-redirect'),
       )
-    })
+    }
   })
 })
 
@@ -49,8 +57,6 @@ class UserNotifications {
     profilePath,
     projectPath,
     imgAsset,
-    initialCursor,
-    hasMoreInitial,
   ) {
     this.all = true
     this.follower = false
@@ -68,8 +74,8 @@ class UserNotifications {
     this.projectPath = projectPath
     this.imgAsset = imgAsset
 
-    this.cursors = { all: initialCursor, follow: null, comment: null, reaction: null, remix: null }
-    this.hasMore = { all: hasMoreInitial, follow: true, comment: true, reaction: true, remix: true }
+    this.cursors = { all: null, follow: null, comment: null, reaction: null, remix: null }
+    this.hasMore = { all: true, follow: true, comment: true, reaction: true, remix: true }
 
     this._initListeners()
   }
@@ -240,8 +246,12 @@ class UserNotifications {
     const notificationId = idPrefix + fetched.id
     const unreadClass = !fetched.seen ? ' notification-unread' : ''
     const notificationDot = !fetched.seen ? '<span class="dot"></span>' : ''
+    const instanceType = self.getInstanceType(fetched)
+    const redirectTarget = self.getRedirectTarget(fetched)
 
-    const notificationBody = `<div id="${notificationId}" class="notification-item">
+    const notificationBody = `<div id="${notificationId}" class="notification-item"
+          data-notification-instance="${instanceType}"
+          data-notification-redirect="${redirectTarget}">
         <div class="notification-card${unreadClass}">
           <div class="notification-avatar">${imgLeft}</div>
           <div class="notification-content">${msg}</div>
@@ -249,6 +259,17 @@ class UserNotifications {
         </div>
       </div>`
     container.insertAdjacentHTML('beforeend', notificationBody)
+  }
+
+  getInstanceType(fetched) {
+    if (fetched.type === 'follow' && fetched.project) return 'program'
+    return fetched.type
+  }
+
+  getRedirectTarget(fetched) {
+    if (fetched.project) return fetched.project
+    if (fetched.type === 'follow' && fetched.from) return fetched.from
+    return ''
   }
 
   generateNotificationImage(fetched) {

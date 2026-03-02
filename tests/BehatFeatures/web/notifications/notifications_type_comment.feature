@@ -20,6 +20,8 @@ Feature: User gets notifications about comments on their programs
       | 1  | Catrobat | comment | 2         |
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User commented"
     When I click "#comment-notif"
     And I wait for AJAX to finish
@@ -31,6 +33,8 @@ Feature: User gets notifications about comments on their programs
       | 1  | Catrobat | comment | 1         |
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should not see "Catrobat commented"
 
   Scenario:  Clicking on a comment notification should redirect the user to the project page for which the comment was posted
@@ -39,6 +43,8 @@ Feature: User gets notifications about comments on their programs
       | 1  | Catrobat | comment | 2         |
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User commented"
     Then I click "#catro-notification-1"
     And I wait for the page to be loaded

@@ -399,6 +399,8 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 | api-projects        | tests/BehatFeatures/api/projects        |
 | api-authentication  | tests/BehatFeatures/api/authentication  |
 | api-comments        | tests/BehatFeatures/api/comments        |
+| api-notifications   | tests/BehatFeatures/api/notifications   |
+| web-notifications   | tests/BehatFeatures/web/notifications   |
 
 Suite configuration is in `behat.yaml.dist`.
 
@@ -429,13 +431,19 @@ This helps debug failing tests by seeing the actual page state.
 
 **CRITICAL:** After making JavaScript changes in `assets/`, you MUST run `yarn run dev` to compile the changes before running Behat tests. The Docker container serves the compiled assets from `public/build/`, not the source files.
 
+**IMPORTANT:** `public/build/` is NOT volume-mounted into the Docker container — only specific files from `public/` are shared (like `index.php` and `index_test.php`). After building JS locally with `yarn run dev`, you must copy the built assets into the container:
+
 ```bash
 # Always do this after JS changes:
 yarn run dev
+docker cp public/build/. app.catroweb:/var/www/catroweb/public/build/
+docker exec app.catroweb bin/console cache:clear --env=test
 docker exec app.catroweb bin/behat -f pretty -s web-reactions "tests/BehatFeatures/..."
 ```
 
-If Behat tests fail after JavaScript changes but the logic looks correct, check if you forgot to rebuild the assets.
+Also clear the Symfony cache (especially `--env=test` for Behat) after copying — stale cache can cause template/routing issues even when the assets are correct.
+
+If Behat tests fail after JavaScript changes but the logic looks correct, check if you forgot to rebuild the assets or copy them to the container.
 
 ### Preventing Flaky Behat Tests
 
@@ -581,7 +589,7 @@ Note: Use `docker exec app.catroweb` prefix if native commands don't work.
 
 ### DOMContentLoaded with Deferred Scripts
 
-Scripts loaded with `defer` (Webpack Encore default) run AFTER DOMContentLoaded fires. Use this pattern:
+Webpack Encore loads scripts with `defer`. Per HTML spec, deferred scripts execute before `DOMContentLoaded` fires, so `document.addEventListener('DOMContentLoaded', ...)` works correctly — this is the standard pattern used throughout the codebase. If you encounter edge cases where it doesn't fire, use this fallback:
 
 ```javascript
 if (document.readyState === 'loading') {
