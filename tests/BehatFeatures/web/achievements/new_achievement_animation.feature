@@ -17,6 +17,8 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
       | 1  | Catrobat | best_user   | 2021-03-03 | 2021-03-03  |
     Given I log in as "Catrobat"
     And I am on "/app/achievements"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should not see "Congratulations"
 
   Scenario: If users confirm the new achievement animation the badge should disappear
@@ -28,7 +30,10 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
     And I log in as "Catrobat"
     When I am on "/app/achievements"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait 1000 milliseconds
     Then I should see "Congratulations"
     When I click ".swal2-confirm"
+    And I wait for AJAX to finish
     And I wait 500 milliseconds
     Then I should not see "Congratulations"

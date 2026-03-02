@@ -1,6 +1,7 @@
 import { showSnackbar } from '../Layout/Snackbar'
 import { MDCChipSet } from '@material/chips'
 import { ApiFetch } from '../Api/ApiHelper'
+import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import './NotificationsPage.scss'
 
 const TAB_CONFIG = [
@@ -30,12 +31,6 @@ const TAB_CONFIG = [
     prefix: 'remix-notification-',
   },
 ]
-
-function escapeHtml(str) {
-  const div = document.createElement('div')
-  div.textContent = str
-  return div.innerHTML
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   const chipsetRoot = document.querySelector('.mdc-chip-set')
@@ -201,11 +196,11 @@ class UserNotifications {
     const self = this
     const imgLeft = self.generateNotificationImage(fetched)
     const msg = self.generateNotificationMessage(fetched)
-    const notificationId = idPrefix + fetched.id
+    const notificationId = escapeAttr(idPrefix + fetched.id)
     const unreadClass = !fetched.seen ? ' notification-unread' : ''
     const notificationDot = !fetched.seen ? '<span class="dot"></span>' : ''
-    const instanceType = escapeHtml(self.getInstanceType(fetched))
-    const redirectTarget = escapeHtml(String(self.getRedirectTarget(fetched)))
+    const instanceType = escapeAttr(self.getInstanceType(fetched))
+    const redirectTarget = escapeAttr(String(self.getRedirectTarget(fetched)))
 
     const notificationBody = `<div id="${notificationId}" class="notification-item"
           data-notification-instance="${instanceType}"
@@ -238,9 +233,9 @@ class UserNotifications {
         imgLeft = fetched.avatar
       }
       const safeFrom = encodeURIComponent(fetched.from)
-      const safeName = escapeHtml(fetched.from_name || '')
+      const safeName = escapeAttr(fetched.from_name || '')
       return `<a href="${self.profilePath}/${safeFrom}">
-        <img class="notification-avatar-img" src="${escapeHtml(imgLeft)}" alt="${safeName}">
+        <img class="notification-avatar-img" src="${escapeAttr(imgLeft)}" alt="${safeName}">
       </a>`
     } else {
       let iconName = 'notifications_active'

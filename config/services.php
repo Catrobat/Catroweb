@@ -52,6 +52,7 @@ use App\Admin\Users\ReportedUsers\ReportedUsersController;
 use App\Admin\Users\UserAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportController;
+use App\Api\AchievementsApi;
 use App\Api\AuthenticationApi;
 use App\Api\CommentsApi;
 use App\Api\MediaLibraryApi;
@@ -182,6 +183,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(UtilityApi::class)->tag('open_api_server.api', ['api' => 'utility']);
   $services->set(SearchApi::class)->tag('open_api_server.api', ['api' => 'search']);
   $services->set(NotificationsApi::class)->tag('open_api_server.api', ['api' => 'notifications']);
+  $services->set(AchievementsApi::class)->tag('open_api_server.api', ['api' => 'achievements']);
   $services->set(StudioApi::class)->tag('open_api_server.api', ['api' => 'studio']);
   $services->set(OverwriteController::class);
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');

@@ -3,6 +3,7 @@
 .openapi-generator-ignore
 .php_cs.dist
 .travis.yml
+Api/AchievementsApiInterface.php
 Api/ApiServer.php
 Api/AuthenticationApiInterface.php
 Api/CommentsApiInterface.php
@@ -13,6 +14,7 @@ Api/SearchApiInterface.php
 Api/StudioApiInterface.php
 Api/UserApiInterface.php
 Api/UtilityApiInterface.php
+Controller/AchievementsController.php
 Controller/AuthenticationController.php
 Controller/CommentsController.php
 Controller/Controller.php
@@ -25,6 +27,9 @@ Controller/UserController.php
 Controller/UtilityController.php
 DependencyInjection/Compiler/OpenAPIServerApiPass.php
 DependencyInjection/OpenAPIServerExtension.php
+Model/AchievementResponse.php
+Model/AchievementsCountResponse.php
+Model/AchievementsListResponse.php
 Model/BaseUser.php
 Model/BasicUserDataResponse.php
 Model/CommentCreateRequest.php
@@ -88,6 +93,7 @@ Service/StrictJsonDeserializationVisitorFactory.php
 Service/SymfonyValidator.php
 Service/TypeMismatchException.php
 Service/ValidatorInterface.php
+Tests/Api/AchievementsApiInterfaceTest.php
 Tests/Api/AuthenticationApiInterfaceTest.php
 Tests/Api/CommentsApiInterfaceTest.php
 Tests/Api/MediaLibraryApiInterfaceTest.php
@@ -99,6 +105,9 @@ Tests/Api/UserApiInterfaceTest.php
 Tests/Api/UtilityApiInterfaceTest.php
 Tests/AppKernel.php
 Tests/Controller/ControllerTest.php
+Tests/Model/AchievementResponseTest.php
+Tests/Model/AchievementsCountResponseTest.php
+Tests/Model/AchievementsListResponseTest.php
 Tests/Model/BaseUserTest.php
 Tests/Model/BasicUserDataResponseTest.php
 Tests/Model/CommentCreateRequestTest.php
@@ -154,6 +163,7 @@ Tests/Model/UploadErrorResponseTest.php
 Tests/test_config.yaml
 autoload.php
 composer.json
+docs/Api/AchievementsApiInterface.md
 docs/Api/AuthenticationApiInterface.md
 docs/Api/CommentsApiInterface.md
 docs/Api/MediaLibraryApiInterface.md
@@ -163,6 +173,9 @@ docs/Api/SearchApiInterface.md
 docs/Api/StudioApiInterface.md
 docs/Api/UserApiInterface.md
 docs/Api/UtilityApiInterface.md
+docs/Model/AchievementResponse.md
+docs/Model/AchievementsCountResponse.md
+docs/Model/AchievementsListResponse.md
 docs/Model/BaseUser.md
 docs/Model/BasicUserDataResponse.md
 docs/Model/CommentCreateRequest.md
