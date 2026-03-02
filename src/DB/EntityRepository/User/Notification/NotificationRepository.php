@@ -139,6 +139,48 @@ class NotificationRepository extends ServiceEntityRepository
     return ['notifications' => $results, 'has_more' => $has_more];
   }
 
+  /**
+   * @return array{total: int, like: int, follower: int, comment: int, remix: int}
+   */
+  public function getUnseenCounts(User $user): array
+  {
+    $em = $this->getEntityManager();
+    $baseWhere = ['n.user = :user', 'n.seen = false'];
+
+    $total = (int) $em->createQueryBuilder()
+      ->select('COUNT(n.id)')
+      ->from(CatroNotification::class, 'n')
+      ->where($baseWhere[0])
+      ->andWhere($baseWhere[1])
+      ->setParameter('user', $user)
+      ->getQuery()
+      ->getSingleScalarResult()
+    ;
+
+    $typeFilters = [
+      'like' => 'n INSTANCE OF '.LikeNotification::class,
+      'follower' => '(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')',
+      'comment' => 'n INSTANCE OF '.CommentNotification::class,
+      'remix' => 'n INSTANCE OF '.RemixNotification::class,
+    ];
+
+    $result = ['total' => $total];
+    foreach ($typeFilters as $key => $filter) {
+      $result[$key] = (int) $em->createQueryBuilder()
+        ->select('COUNT(n.id)')
+        ->from(CatroNotification::class, 'n')
+        ->where($baseWhere[0])
+        ->andWhere($baseWhere[1])
+        ->andWhere($filter)
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+    }
+
+    return $result;
+  }
+
   private function applyTypeFilter(QueryBuilder $qb, string $type): void
   {
     match ($type) {

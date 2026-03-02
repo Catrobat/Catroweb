@@ -32,38 +32,9 @@ class NotificationsResponseManager extends AbstractResponseManager
 
   public function createNotificationsCountResponse(User $user): NotificationsCountResponse
   {
-    $notifications_all = $this->notification_repository->findBy(['user' => $user]);
-    $likes = 0;
-    $followers = 0;
-    $comments = 0;
-    $remixes = 0;
-    $all = 0;
-    foreach ($notifications_all as $notification) {
-      /** @var CatroNotification $notification */
-      if ($notification->getSeen()) {
-        continue;
-      }
+    $counts = $this->notification_repository->getUnseenCounts($user);
 
-      if ($notification instanceof LikeNotification) {
-        ++$likes;
-      } elseif ($notification instanceof FollowNotification || $notification instanceof NewProgramNotification) {
-        ++$followers;
-      } elseif ($notification instanceof CommentNotification) {
-        ++$comments;
-      } elseif ($notification instanceof RemixNotification) {
-        ++$remixes;
-      }
-
-      ++$all;
-    }
-
-    return new NotificationsCountResponse([
-      'total' => $all,
-      'like' => $likes,
-      'follower' => $followers,
-      'comment' => $comments,
-      'remix' => $remixes,
-    ]);
+    return new NotificationsCountResponse($counts);
   }
 
   /**
