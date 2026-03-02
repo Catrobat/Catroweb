@@ -93,14 +93,13 @@ task('restart:php-fpm', function () {
 
 task('install:yarn', function () {
   cd('{{release_path}}');
-  run('corepack enable');
-  run('corepack prepare yarn@4.12.0 --activate');
-  run('yarn install --immutable');
+  run('corepack enable --install-directory=.corepack-bin');
+  run('export PATH={{release_path}}/.corepack-bin:$PATH && corepack prepare yarn@4.12.0 --activate && yarn install --immutable');
 });
 
 task('deploy:encore', function () {
   cd('{{release_path}}');
-  run('yarn run prod');
+  run('export PATH={{release_path}}/.corepack-bin:$PATH && yarn run prod');
 });
 
 task('deploy:jwt', function () {
