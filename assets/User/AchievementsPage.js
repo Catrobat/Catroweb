@@ -81,7 +81,7 @@ function createUnlockedAchievementElement(achievement) {
   const div = document.createElement('div')
   div.className = 'achievement'
   div.innerHTML =
-    '<div class="achievement__badge">' +
+    '<div class="achievement__badge achievement__badge--tab">' +
     achievementBadgeHtml(achievement, 'tab') +
     '</div>' +
     '<p class="achievement__badge__text">' +
@@ -94,8 +94,9 @@ function createLockedAchievementElement(achievement) {
   const div = document.createElement('div')
   div.className = 'achievement'
   div.innerHTML =
-    '<div class="achievement__badge">' +
+    '<div class="achievement__badge achievement__badge--tab">' +
     '<svg class="achievement__badge__coin achievement__badge__coin--tab"' +
+    ' width="100%" height="100%"' +
     ' data-src="' +
     escapeAttr(achievement.badge_locked_svg_path) +
     '" data-unique-ids="disabled"></svg>' +
@@ -112,13 +113,14 @@ function renderMostRecentSection(data) {
   }
 
   const achievement = data.most_recent
-  const tabContent = document.querySelector('.tab-content')
-  if (!tabContent) {
+  const tabBar = document.querySelector('.mdc-tab-bar')
+  if (!tabBar) {
     return
   }
 
   const section = document.createElement('div')
   section.id = 'most-recent-achievement'
+  section.className = 'mb-4'
 
   const xOutOfYText = trans.xOutOfY
     .replace('__UNLOCKED__', data.unlocked_count)
@@ -129,7 +131,7 @@ function renderMostRecentSection(data) {
     escapeHtml(trans.mostRecentTitle) +
     '</h2>' +
     '<div class="mt-4 mb-4 achievement-top__wrapper">' +
-    '<div class="achievement__badge">' +
+    '<div class="achievement__badge achievement__badge--top">' +
     achievementBadgeHtml(achievement, 'top') +
     '</div>' +
     '<div class="achievement-top__text-wrapper">' +
@@ -145,7 +147,7 @@ function renderMostRecentSection(data) {
     '</div>' +
     '</div>'
 
-  tabContent.parentNode.insertBefore(section, tabContent)
+  tabBar.parentNode.insertBefore(section, tabBar)
 }
 
 function updateEmptyStates(data) {

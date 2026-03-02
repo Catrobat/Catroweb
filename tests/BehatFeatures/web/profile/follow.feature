@@ -65,6 +65,31 @@ Feature: Follow feature on profiles
     And I wait for the element "#followers-count" to contain "0"
     And the "#followers-count" element should contain "0"
 
+  Scenario: Follower page tabs should show correct counts
+    Given there are followers:
+      | name     | following |
+      | Catrobat2 | Catrobat |
+      | Catrobat3 | Catrobat |
+      | Catrobat  | Catrobat4 |
+    And I log in as "Catrobat"
+    And I am on "/app/follower"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then I wait for the element "#followers-count" to contain "2"
+    And the "#followers-count" element should contain "2"
+    And I wait for the element "#following-count" to contain "1"
+    And the "#following-count" element should contain "1"
+
+  Scenario: Follower page tabs should show 0 when user has no followers
+    Given I log in as "Catrobat"
+    And I am on "/app/follower"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then I wait for the element "#followers-count" to contain "0"
+    And the "#followers-count" element should contain "0"
+    And I wait for the element "#following-count" to contain "0"
+    And the "#following-count" element should contain "0"
+
   Scenario: Following section should show appropriate information:
     Given I log in as "Catrobat2"
     And I am on "/app/user/1"
