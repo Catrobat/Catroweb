@@ -1,0 +1,26 @@
+import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+
+export function achievementBadgeHtml(achievement, variant) {
+  return (
+    '<svg class="achievement__badge__coin achievement__badge__coin--' +
+    variant +
+    '"' +
+    ' data-src="' +
+    escapeAttr(achievement.badge_svg_path) +
+    '" data-unique-ids="disabled"></svg>' +
+    '<svg class="achievement__badge__banner achievement__badge__banner--' +
+    variant +
+    '"' +
+    ' style="color: ' +
+    escapeAttr(achievement.banner_color) +
+    '"' +
+    ' data-src="' +
+    escapeAttr(achievement.banner_svg_path) +
+    '" data-unique-ids="disabled"></svg>' +
+    '<div class="achievement__badge__banner__text achievement__badge__banner__text--' +
+    variant +
+    '">' +
+    escapeHtml(achievement.title) +
+    '</div>'
+  )
+}

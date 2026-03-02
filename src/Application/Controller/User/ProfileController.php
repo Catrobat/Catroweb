@@ -6,7 +6,6 @@ namespace App\Application\Controller\User;
 
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
-use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +20,6 @@ class ProfileController extends AbstractController
   public function __construct(
     protected ProjectManager $project_manager,
     protected UserManager $user_manager,
-    protected AchievementManager $achievement_manager,
   ) {
   }
 
@@ -59,7 +57,6 @@ class ProfileController extends AbstractController
       'minPassLength' => self::MIN_PASSWORD_LENGTH,
       'maxPassLength' => self::MAX_PASSWORD_LENGTH,
       'username' => $user->getUsername(),
-      'achievements' => $this->achievement_manager->findUnlockedAchievements($user),
     ]);
   }
 }

@@ -20,6 +20,7 @@ Feature: As a user i want to see other users achievements on a user page
   Scenario: If a user has achievements, they should be shown in a horizontal scroller
     Given I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element "#user-achievements" should be visible
     Then the element ".horizontal-scrolling-wrapper" should be visible
     And the "#user-achievements" element should contain "Achievements"
@@ -31,4 +32,5 @@ Feature: As a user i want to see other users achievements on a user page
   Scenario: User achievements
     Given I am on "/app/user/2"
     And I wait for the page to be loaded
-    Then the element "#user-achievements" should not exist
+    And I wait for AJAX to finish
+    Then the element "#user-achievements" should not be visible

@@ -11,6 +11,8 @@ use App\Api\Services\Achievements\AchievementsApiProcessor;
 use App\Api\Services\Achievements\AchievementsResponseManager;
 use App\Api\Services\AuthenticationManager;
 use App\DB\Entity\User\User;
+use App\User\UserManager;
+use OpenAPI\Server\Model\AchievementResponse;
 use OpenAPI\Server\Model\AchievementsCountResponse;
 use OpenAPI\Server\Model\AchievementsListResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -29,11 +31,14 @@ class AchievementsApiTest extends TestCase
 
   protected Stub|AchievementsApiFacade $facade;
 
+  protected Stub|UserManager $user_manager;
+
   #[\Override]
   protected function setUp(): void
   {
     $this->facade = $this->createStub(AchievementsApiFacade::class);
-    $this->object = new AchievementsApi($this->facade);
+    $this->user_manager = $this->createStub(UserManager::class);
+    $this->object = new AchievementsApi($this->facade, $this->user_manager);
   }
 
   #[Group('unit')]
@@ -154,5 +159,55 @@ class AchievementsApiTest extends TestCase
     $this->object->achievementsReadPut($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
+  }
+
+  #[Group('unit')]
+  public function testUserIdAchievementsGetNotFound(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $this->user_manager->method('find')->willReturn(null);
+
+    $response = $this->object->userIdAchievementsGet('non-existent-id', 'en', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
+    $this->assertNull($response);
+  }
+
+  #[Group('unit')]
+  public function testUserIdAchievementsGetSuccess(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $user = $this->createStub(User::class);
+    $this->user_manager->method('find')->willReturn($user);
+
+    $loader = $this->createStub(AchievementsApiLoader::class);
+    $loader->method('getUnlockedAchievements')->willReturn([]);
+    $this->facade->method('getLoader')->willReturn($loader);
+
+    $achievement_response = new AchievementResponse([
+      'id' => 1,
+      'internal_title' => 'test',
+      'title' => 'Test',
+      'description' => 'Test desc',
+      'badge_svg_path' => '/images/achievements/badge.svg',
+      'badge_locked_svg_path' => '/images/achievements/badge_locked.svg',
+      'banner_svg_path' => '/images/achievements/banner.svg',
+      'banner_color' => '#000',
+    ]);
+
+    $response_manager = $this->createStub(AchievementsResponseManager::class);
+    $response_manager->method('createAchievementResponseList')->willReturn([$achievement_response]);
+    $this->facade->method('getResponseManager')->willReturn($response_manager);
+
+    $response = $this->object->userIdAchievementsGet('valid-id', 'en', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertIsArray($response);
+    $this->assertCount(1, $response);
+    $this->assertInstanceOf(AchievementResponse::class, $response[0]);
   }
 }

@@ -57,6 +57,16 @@ class AchievementsResponseManager extends AbstractResponseManager
     ]);
   }
 
+  /**
+   * @param Achievement[] $achievements
+   *
+   * @return AchievementResponse[]
+   */
+  public function createAchievementResponseList(array $achievements, ?string $locale = null): array
+  {
+    return array_values(array_map(fn (Achievement $a) => $this->createAchievementResponse($a, $locale), $achievements));
+  }
+
   public function createAchievementsCountResponse(int $count): AchievementsCountResponse
   {
     return new AchievementsCountResponse([
@@ -71,9 +81,9 @@ class AchievementsResponseManager extends AbstractResponseManager
       'internal_title' => $achievement->getInternalTitle(),
       'title' => $this->trans($achievement->getTitleLtmCode(), [], $locale),
       'description' => $this->trans($achievement->getDescriptionLtmCode(), [], $locale),
-      'badge_svg_path' => $achievement->getBadgeSvgPath(),
-      'badge_locked_svg_path' => $achievement->getBadgeLockedSvgPath(),
-      'banner_svg_path' => $achievement->getBannerSvgPath(),
+      'badge_svg_path' => '/'.$achievement->getBadgeSvgPath(),
+      'badge_locked_svg_path' => '/'.$achievement->getBadgeLockedSvgPath(),
+      'banner_svg_path' => '/'.$achievement->getBannerSvgPath(),
       'banner_color' => $achievement->getBannerColor(),
     ]);
   }

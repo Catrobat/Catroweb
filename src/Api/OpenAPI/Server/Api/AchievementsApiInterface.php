@@ -88,4 +88,21 @@ interface AchievementsApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): void;
+
+  /**
+   * Operation userIdAchievementsGet.
+   *
+   * Get unlocked achievements for a user
+   *
+   * @param string $id              (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function userIdAchievementsGet(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
 }

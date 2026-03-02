@@ -1458,6 +1458,30 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 
+  '/user/{id}/achievements':
+    get:
+      tags:
+        - 'Achievements'
+      summary: 'Get unlocked achievements for a user'
+      description: 'Returns all unlocked achievements for the specified user. This is a public endpoint.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Locale'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AchievementResponse'
+          headers:
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   ################################################
   # Media Library
   #
