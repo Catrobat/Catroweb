@@ -46,52 +46,34 @@
     {% for category in [
       {
         id: 'notifications',
-        notifications: allNotifications,
         emptyID: 'no-notif-all',
         emptyMessage: '' ~ 'notificationsReadMessage'|trans({}, 'catroweb'),
       },
       {
         id: 'follow-notifications',
-        notifications: followerNotifications,
         emptyID: 'no-notif-follow',
         emptyMessage: '' ~ 'catro-notifications.noFollowers'|trans({}, 'catroweb'),
       },
       {
         id: 'comment-notifications',
-        notifications: commentNotifications,
         emptyID: 'no-notif-comment',
         emptyMessage: '' ~ 'catro-notifications.noComments'|trans({}, 'catroweb'),
       },
       {
         id: 'reaction-notifications',
-        notifications: reactionNotifications,
         emptyID: 'no-notif-reaction',
         emptyMessage: '' ~ 'catro-notifications.noReactions'|trans({}, 'catroweb'),
       },
       {
         id: 'remix-notifications',
-        notifications: remixNotifications,
         emptyID: 'no-notif-remix',
         emptyMessage: '' ~ 'catro-notifications.noRemixes'|trans({}, 'catroweb'),
       },
     ] %}
     <div id="{{ category.id }}" class="tab-pane fade {% if loop.first %} show active {% endif %}" role="tabpanel">
-        {% for notification in category.notifications %}
-          <div id="catro-notification-{{ notification.id }}"
-              class="js-notification-interaction notification-item"
-              data-notification-id="{{ notification.id }}"
-              data-notification-instance="{{ instance[notification.id] }}"
-              data-notification-seen="{{ notification.getSeen() }}"
-              data-notification-redirect="{{ redirect[notification.id] }}"
-            >
-            {{ include(notification.getTwigTemplate) }}
-          </div>
-        {% endfor %}
-
-      <div class="no-notifications text-center mb-5 {{ category.notifications is empty ? 'd-block' : 'd-none' }}">
+      <div class="no-notifications text-center mb-5 d-block">
         <span id="{{ category.emptyID }}">{{ category.emptyMessage }}</span>
       </div>
-
     </div>
     {% endfor %}
   </div>
@@ -104,8 +86,6 @@
        data-profile-path="{{ path('profile') }}"
        data-project-path="{{ path('program') }}"
        data-img-asset="{{ asset('images/default/avatar_default.png') }}"
-       data-initial-cursor="{{ initialCursor }}"
-       data-has-more-notifications="{{ hasMoreNotifications ? '1' : '0' }}"
   ></div>
 {% endblock %}
 

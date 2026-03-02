@@ -3,6 +3,40 @@ import { MDCChipSet } from '@material/chips'
 import { ApiFetch } from '../Api/ApiHelper'
 import './NotificationsPage.scss'
 
+const TAB_CONFIG = [
+  { chipId: 'all-notif', paneId: 'notifications', type: 'all', prefix: 'catro-notification-' },
+  {
+    chipId: 'follow-notif',
+    paneId: 'follow-notifications',
+    type: 'follow',
+    prefix: 'follow-notification-',
+  },
+  {
+    chipId: 'comment-notif',
+    paneId: 'comment-notifications',
+    type: 'comment',
+    prefix: 'comment-notification-',
+  },
+  {
+    chipId: 'reaction-notif',
+    paneId: 'reaction-notifications',
+    type: 'reaction',
+    prefix: 'reaction-notification-',
+  },
+  {
+    chipId: 'remix-notif',
+    paneId: 'remix-notifications',
+    type: 'remix',
+    prefix: 'remix-notification-',
+  },
+]
+
+function escapeHtml(str) {
+  const div = document.createElement('div')
+  div.textContent = str
+  return div.innerHTML
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const chipsetRoot = document.querySelector('.mdc-chip-set')
   const chipset = chipsetRoot ? new MDCChipSet(chipsetRoot) : null
@@ -24,19 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
     notificationsElement.dataset.profilePath,
     notificationsElement.dataset.projectPath,
     notificationsElement.dataset.imgAsset,
-    notificationsElement.dataset.initialCursor || null,
-    notificationsElement.dataset.hasMoreNotifications === '1',
   )
 
   userNotifications.markAllRead()
 
-  document.querySelectorAll('.js-notification-interaction').forEach((element) => {
-    element.addEventListener('click', () => {
+  // Fetch initial "all" tab data via API
+  const allTab = TAB_CONFIG[0]
+  userNotifications.fetchMoreNotifications(
+    userNotifications.notificationsFetchCount,
+    allTab.type,
+    allTab.prefix,
+    userNotifications.containers[allTab.type],
+  )
+
+  // Event delegation for click handling on API-rendered notifications
+  document.querySelector('.tab-content').addEventListener('click', (event) => {
+    const item = event.target.closest('.notification-item')
+    if (item) {
       userNotifications.redirectUser(
-        element.getAttribute('data-notification-instance'),
-        element.getAttribute('data-notification-redirect'),
+        item.getAttribute('data-notification-instance'),
+        item.getAttribute('data-notification-redirect'),
       )
-    })
+    }
   })
 })
 
@@ -49,157 +92,87 @@ class UserNotifications {
     profilePath,
     projectPath,
     imgAsset,
-    initialCursor,
-    hasMoreInitial,
   ) {
-    this.all = true
-    this.follower = false
-    this.comment = false
-    this.reactions = false
-    this.remixes = false
+    this.activeTab = 'all'
     this.baseUrl = baseUrl
     this.markAllSeenUrl = baseUrl + '/api/notifications/read'
     this.somethingWentWrongError = somethingWentWrongError
     this.notificationsClearError = notificationsClearError
     this.notificationsUnauthorizedError = notificationsUnauthorizedError
     this.notificationsFetchCount = 20
-    this.fetchActive = false
     this.profilePath = profilePath
     this.projectPath = projectPath
     this.imgAsset = imgAsset
 
-    this.cursors = { all: initialCursor, follow: null, comment: null, reaction: null, remix: null }
-    this.hasMore = { all: hasMoreInitial, follow: true, comment: true, reaction: true, remix: true }
+    this.cursors = { all: null, follow: null, comment: null, reaction: null, remix: null }
+    this.hasMore = { all: true, follow: true, comment: true, reaction: true, remix: true }
+    this.fetchActive = { all: false, follow: false, comment: false, reaction: false, remix: false }
+
+    this.containers = {}
+    for (const tab of TAB_CONFIG) {
+      this.containers[tab.type] = document.getElementById(tab.paneId)
+    }
 
     this._initListeners()
   }
 
   _initListeners() {
     const self = this
-    document.getElementById('all-notif').addEventListener('click', function () {
-      if (!self.all) {
-        self.resetChips()
-        self.selectChip('all-notif', 'notifications')
-        self.all = true
-      }
-    })
 
-    document.getElementById('follow-notif').addEventListener('click', function () {
-      if (!self.follower) {
-        self.resetChips()
-        self.selectChip('follow-notif', 'follow-notifications')
-        self.follower = true
-        self.fetchMoreNotifications(
-          self.notificationsFetchCount,
-          'follow',
-          'follow-notification-',
-          document.getElementById('follow-notifications'),
-        )
-      }
-    })
-
-    document.getElementById('comment-notif').addEventListener('click', function () {
-      if (!self.comment) {
-        self.resetChips()
-        self.selectChip('comment-notif', 'comment-notifications')
-        self.comment = true
-        self.fetchMoreNotifications(
-          self.notificationsFetchCount,
-          'comment',
-          'comment-notification-',
-          document.getElementById('comment-notifications'),
-        )
-      }
-    })
-
-    document.getElementById('reaction-notif').addEventListener('click', function () {
-      if (!self.reactions) {
-        self.resetChips()
-        self.selectChip('reaction-notif', 'reaction-notifications')
-        self.reactions = true
-        self.fetchMoreNotifications(
-          self.notificationsFetchCount,
-          'reaction',
-          'reaction-notification-',
-          document.getElementById('reaction-notifications'),
-        )
-      }
-    })
-
-    document.getElementById('remix-notif').addEventListener('click', function () {
-      if (!self.remixes) {
-        self.resetChips()
-        self.selectChip('remix-notif', 'remix-notifications')
-        self.remixes = true
-        self.fetchMoreNotifications(
-          self.notificationsFetchCount,
-          'remix',
-          'remix-notification-',
-          document.getElementById('remix-notifications'),
-        )
-      }
-    })
-
-    window.addEventListener('scroll', function () {
-      const position = window.scrollY
-      const bottom = document.documentElement.scrollHeight - window.innerHeight
-      const pctVertical = position / bottom
-      if (pctVertical >= 0.7) {
-        if (self.all) {
+    for (const tab of TAB_CONFIG) {
+      document.getElementById(tab.chipId).addEventListener('click', function () {
+        if (self.activeTab !== tab.type) {
+          self.resetChips()
+          self.selectChip(tab.chipId, tab.paneId)
+          self.activeTab = tab.type
           self.fetchMoreNotifications(
             self.notificationsFetchCount,
-            'all',
-            'catro-notification-',
-            document.getElementById('notifications'),
-          )
-        } else if (self.follower) {
-          self.fetchMoreNotifications(
-            self.notificationsFetchCount,
-            'follow',
-            'follow-notification-',
-            document.getElementById('follow-notifications'),
-          )
-        } else if (self.comment) {
-          self.fetchMoreNotifications(
-            self.notificationsFetchCount,
-            'comment',
-            'comment-notification-',
-            document.getElementById('comment-notifications'),
-          )
-        } else if (self.reactions) {
-          self.fetchMoreNotifications(
-            self.notificationsFetchCount,
-            'reaction',
-            'reaction-notification-',
-            document.getElementById('reaction-notifications'),
-          )
-        } else if (self.remixes) {
-          self.fetchMoreNotifications(
-            self.notificationsFetchCount,
-            'remix',
-            'remix-notification-',
-            document.getElementById('remix-notifications'),
+            tab.type,
+            tab.prefix,
+            self.containers[tab.type],
           )
         }
-      }
+      })
+    }
+
+    let scrollTicking = false
+    window.addEventListener('scroll', function () {
+      if (scrollTicking) return
+      scrollTicking = true
+      requestAnimationFrame(function () {
+        const position = window.scrollY
+        const bottom = document.documentElement.scrollHeight - window.innerHeight
+        const pctVertical = position / bottom
+        if (pctVertical >= 0.7 && self.activeTab) {
+          const tab = TAB_CONFIG.find((t) => t.type === self.activeTab)
+          if (tab) {
+            self.fetchMoreNotifications(
+              self.notificationsFetchCount,
+              tab.type,
+              tab.prefix,
+              self.containers[tab.type],
+            )
+          }
+        }
+        scrollTicking = false
+      })
     })
   }
 
   fetchMoreNotifications(limit, type, idPrefix, container) {
     const self = this
-    if (!this.hasMore[type] || this.fetchActive) {
+    if (!this.hasMore[type] || this.fetchActive[type]) {
       return
     }
-    this.fetchActive = true
+    this.fetchActive[type] = true
 
     const params = new URLSearchParams({ limit, type })
     if (self.cursors[type]) {
       params.set('cursor', self.cursors[type])
     }
 
-    new ApiFetch(`${self.baseUrl}/api/notifications?${params}`)
-      .generateAuthenticatedFetch()
-      .then((response) => response.json())
+    new ApiFetch(`${self.baseUrl}/api/notifications?${params}`, 'GET', undefined, 'json')
+      .run()
       .then((data) => {
         data.data.forEach((fetched) => {
           self.generateNotificationBody(fetched, idPrefix, container)
@@ -207,28 +180,19 @@ class UserNotifications {
         self.cursors[type] = data.next_cursor
         self.hasMore[type] = data.has_more
         self.updateNoNotificationsPlaceholder(type, data.data.length)
-        self.fetchActive = false
+        self.fetchActive[type] = false
       })
       .catch((error) => {
-        self.fetchActive = false
+        self.fetchActive[type] = false
         self.handleError(error)
       })
   }
 
   updateNoNotificationsPlaceholder(type, fetchedAmount) {
     if (fetchedAmount > 0) {
-      let emptyId = ''
-      if (type === 'all') emptyId = 'no-notif-all'
-      if (type === 'follow') emptyId = 'no-notif-follow'
-      if (type === 'comment') emptyId = 'no-notif-comment'
-      if (type === 'reaction') emptyId = 'no-notif-reaction'
-      if (type === 'remix') emptyId = 'no-notif-remix'
-
-      if (emptyId) {
-        const emptyElement = document.getElementById(emptyId)
-        if (emptyElement) {
-          emptyElement.parentElement.classList.replace('d-block', 'd-none')
-        }
+      const emptyElement = document.getElementById(`no-notif-${type}`)
+      if (emptyElement) {
+        emptyElement.parentElement.classList.replace('d-block', 'd-none')
       }
     }
   }
@@ -240,8 +204,12 @@ class UserNotifications {
     const notificationId = idPrefix + fetched.id
     const unreadClass = !fetched.seen ? ' notification-unread' : ''
     const notificationDot = !fetched.seen ? '<span class="dot"></span>' : ''
+    const instanceType = escapeHtml(self.getInstanceType(fetched))
+    const redirectTarget = escapeHtml(String(self.getRedirectTarget(fetched)))
 
-    const notificationBody = `<div id="${notificationId}" class="notification-item">
+    const notificationBody = `<div id="${notificationId}" class="notification-item"
+          data-notification-instance="${instanceType}"
+          data-notification-redirect="${redirectTarget}">
         <div class="notification-card${unreadClass}">
           <div class="notification-avatar">${imgLeft}</div>
           <div class="notification-content">${msg}</div>
@@ -251,6 +219,17 @@ class UserNotifications {
     container.insertAdjacentHTML('beforeend', notificationBody)
   }
 
+  getInstanceType(fetched) {
+    if (fetched.type === 'follow' && fetched.project) return 'program'
+    return fetched.type
+  }
+
+  getRedirectTarget(fetched) {
+    if (fetched.project) return fetched.project
+    if (fetched.type === 'follow' && fetched.from) return fetched.from
+    return ''
+  }
+
   generateNotificationImage(fetched) {
     const self = this
     if (fetched.type !== 'other') {
@@ -258,8 +237,10 @@ class UserNotifications {
       if (fetched.avatar) {
         imgLeft = fetched.avatar
       }
-      return `<a href="${self.profilePath}/${fetched.from}">
-        <img class="notification-avatar-img" src="${imgLeft}" alt="${fetched.from_name || ''}">
+      const safeFrom = encodeURIComponent(fetched.from)
+      const safeName = escapeHtml(fetched.from_name || '')
+      return `<a href="${self.profilePath}/${safeFrom}">
+        <img class="notification-avatar-img" src="${escapeHtml(imgLeft)}" alt="${safeName}">
       </a>`
     } else {
       let iconName = 'notifications_active'
@@ -272,51 +253,39 @@ class UserNotifications {
 
   generateNotificationMessage(fetched) {
     const self = this
-    let msg = fetched.message
+    let msg = escapeHtml(fetched.message)
     if (msg.includes('%user_link%')) {
+      const safeFrom = encodeURIComponent(fetched.from)
       msg = msg.replace(
         '%user_link%',
-        `<a href="${self.profilePath}/${fetched.from}">${fetched.from_name}</a>`,
+        `<a href="${self.profilePath}/${safeFrom}">${escapeHtml(fetched.from_name)}</a>`,
       )
     }
     if (msg.includes('%program_link%')) {
+      const safeProject = encodeURIComponent(fetched.project)
       msg = msg.replace(
         '%program_link%',
-        `<a href="${self.projectPath}/${fetched.project}">${fetched.project_name}</a>`,
+        `<a href="${self.projectPath}/${safeProject}">${escapeHtml(fetched.project_name)}</a>`,
       )
     }
     if (msg.includes('%remix_program_link%')) {
+      const safeRemixed = encodeURIComponent(fetched.remixed_project)
       msg = msg.replace(
         '%remix_program_link%',
-        `<a href="${self.projectPath}/${fetched.remixed_project}">${fetched.remixed_project_name}</a>`,
+        `<a href="${self.projectPath}/${safeRemixed}">${escapeHtml(fetched.remixed_project_name)}</a>`,
       )
     }
     if (fetched.prize) {
-      msg = `<div class="message">${fetched.message}</div><div class="prize">${fetched.prize}</div>`
+      msg = `<div class="message">${escapeHtml(fetched.message)}</div><div class="prize">${escapeHtml(fetched.prize)}</div>`
     }
     return msg
   }
 
   resetChips() {
-    this.remixes = false
-    this.all = false
-    this.follower = false
-    this.comment = false
-    this.reactions = false
-    this.resetColor()
-  }
-
-  resetColor() {
-    document.getElementById('all-notif').classList.replace('chip-selected', 'chip-default')
-    document.getElementById('follow-notif').classList.replace('chip-selected', 'chip-default')
-    document.getElementById('comment-notif').classList.replace('chip-selected', 'chip-default')
-    document.getElementById('reaction-notif').classList.replace('chip-selected', 'chip-default')
-    document.getElementById('remix-notif').classList.replace('chip-selected', 'chip-default')
-    document.getElementById('notifications').classList.remove('show', 'active')
-    document.getElementById('follow-notifications').classList.remove('show', 'active')
-    document.getElementById('comment-notifications').classList.remove('show', 'active')
-    document.getElementById('reaction-notifications').classList.remove('show', 'active')
-    document.getElementById('remix-notifications').classList.remove('show', 'active')
+    for (const tab of TAB_CONFIG) {
+      document.getElementById(tab.chipId).classList.replace('chip-selected', 'chip-default')
+      document.getElementById(tab.paneId).classList.remove('show', 'active')
+    }
   }
 
   selectChip(elementId, paneID) {
@@ -327,6 +296,7 @@ class UserNotifications {
   redirectUser(type, id) {
     if (type === 'follow') {
       window.location.assign('follower')
+      return
     }
     if (['comment', 'reaction', 'remix', 'program'].includes(type)) {
       const safeId =
@@ -343,7 +313,7 @@ class UserNotifications {
       const badge = document.getElementById('sidebar_badge--unseen-notifications')
       if (badge && badge.style.display !== 'none') {
         new ApiFetch(self.markAllSeenUrl, 'PUT')
-          .generateAuthenticatedFetch()
+          .run()
           .then(() => self.hideBadge())
           .catch((error) => {
             self.handleError(error)
@@ -357,13 +327,14 @@ class UserNotifications {
     badge.style.display = 'none'
   }
 
-  handleError(xhr) {
+  handleError(error) {
     const self = this
-    if (xhr.status === 401) {
+    const status = error?.status || (error?.message && parseInt(error.message.match(/\d+/)?.[0]))
+    if (status === 401) {
       showSnackbar('#share-snackbar', self.notificationsUnauthorizedError)
       return
     }
-    if (xhr.status === 404) {
+    if (status === 404) {
       showSnackbar('#share-snackbar', self.notificationsClearError)
     }
   }

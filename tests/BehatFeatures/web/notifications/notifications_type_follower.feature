@@ -15,6 +15,7 @@ Feature: Follower and new programs of users you follow notifications
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User is now following you"
     Then I click "#follow-notif"
     And I wait for AJAX to finish
@@ -25,6 +26,7 @@ Feature: Follower and new programs of users you follow notifications
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I should not see "Catrobat is now following you"
 
   Scenario: Clicking on a follow notification should redirect the user to his follower page
@@ -32,6 +34,7 @@ Feature: Follower and new programs of users you follow notifications
     And I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User is now following you"
     And I click "#catro-notification-1"
     And I wait for the page to be loaded
@@ -44,6 +47,8 @@ Feature: Follower and new programs of users you follow notifications
     And user "User" uploads a valid Catrobat project
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User created a new game"
     When I click "#follow-notif"
     And I wait for AJAX to finish
@@ -55,6 +60,8 @@ Feature: Follower and new programs of users you follow notifications
       | 1  | User | follow_project |             | 1          |
     And I log in as "User"
     And I am on "/app/user_notifications"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
     When I click "#catro-notification-1"
     And I wait for the page to be loaded
     Then I should be on "/app/project/1"

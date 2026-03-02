@@ -16,6 +16,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User created a remix"
     And the element "#remix-notif" should be visible
     And I click "#remix-notif"
@@ -28,6 +29,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
     When I log in as "Catrobat"
     And I go to "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "It looks like you don't have any notifications."
 
   Scenario: Clicking on a remix notification should redirect the user to the project page of the remix
@@ -36,6 +38,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
     And I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     When I click "#catro-notification-1"
     And I wait for the page to be loaded
     Then I should be on "/app/project/3"
