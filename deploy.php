@@ -132,11 +132,6 @@ task('update:special', function () {
   run('bin/console catrobat:update:special');
 });
 
-task('sonata:admin:setup:acl', function () {
-  cd('{{release_path}}');
-  run('bin/console sonata:admin:setup-acl');
-});
-
 // dump the .env file as .env.local.php to speed up the loading of the env vars
 task('dump:env', function () {
   cd('{{release_path}}');
@@ -162,7 +157,6 @@ task('deploy', [
   'deploy:jwt',
   'restart:nginx',
   'restart:php-fpm',
-  'sonata:admin:setup:acl',
   'update:flavors',
   'update:achievements',
   'update:tags',
