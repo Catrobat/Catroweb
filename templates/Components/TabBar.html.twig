@@ -34,6 +34,9 @@
                   role="tab" aria-controls="{{ tab.controls }}" aria-selected="{{ loop.first }}">
 
             <span class="mdc-tab__content">
+              {% if tab.count_id is defined %}
+                <span class="mdc-tab__icon" id="{{ tab.count_id }}">-</span>
+              {% endif %}
               <span class="mdc-tab__icon-text">{{ tab.title }}</span>
             </span>
               <span class="mdc-tab-indicator {% if loop.first %} mdc-tab-indicator--active {% endif %}">

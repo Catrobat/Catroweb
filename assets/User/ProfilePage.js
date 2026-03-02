@@ -4,7 +4,6 @@ import './FollowerOverview'
 
 import { shareLink } from '../Components/ShareLink'
 import { ProjectList } from '../Project/ProjectList'
-import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml } from '../Components/HtmlEscape'
 import { achievementBadgeHtml } from './AchievementBadge'
 
@@ -56,8 +55,10 @@ function initProfileAchievements() {
   const userId = container.dataset.userId
   const title = container.dataset.transTitle
 
-  new ApiFetch(baseUrl + '/api/user/' + userId + '/achievements', 'GET', undefined, 'json')
-    .run()
+  fetch(baseUrl + '/api/user/' + userId + '/achievements', {
+    headers: { Accept: 'application/json' },
+  })
+    .then((r) => r.json())
     .then((achievements) => {
       if (!achievements || achievements.length === 0) {
         return
@@ -66,7 +67,7 @@ function initProfileAchievements() {
       const badgesHtml = achievements
         .map(
           (achievement) =>
-            '<div class="achievement__badge">' +
+            '<div class="achievement__badge achievement__badge--profile">' +
             achievementBadgeHtml(achievement, 'profile') +
             '</div>',
         )

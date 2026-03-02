@@ -11,12 +11,14 @@
       tabs: [
         {
           id: 'follower-tab',
-          title: '- ' ~ 'follower.followers'|trans({}, 'catroweb'),
+          title: 'follower.followers'|trans({}, 'catroweb'),
+          count_id: 'followers-count',
           controls: 'follower-section',
         },
         {
           id: 'follows-tab',
-          title: '- ' ~ 'follower.follows'|trans({}, 'catroweb'),
+          title: 'follower.follows'|trans({}, 'catroweb'),
+          count_id: 'following-count',
           controls: 'following-section',
         },
       ],

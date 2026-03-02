@@ -47,6 +47,13 @@
     }
   }
 
+  img.round {
+    max-width: 4rem;
+    max-height: 4rem;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
   &__info {
     font-size: 0.7em;
     white-space: normal;

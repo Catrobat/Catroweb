@@ -2,6 +2,7 @@
 <div class="js-follower-overview"
      data-user-id="{{ follower_user_id }}"
      data-base-url="{{ app.request.getBaseURL() }}"
+     data-theme="{{ theme() }}"
      data-login-url="{{ url('login') }}"
      data-something-went-wrong-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
      data-follow-error="{{ 'follower.followError'|trans({}, 'catroweb') }}"
