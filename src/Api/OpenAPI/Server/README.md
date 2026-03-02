@@ -126,6 +126,10 @@ All URIs are relative to *https://share.catrob.at/api*
 | _CommentsApiInterface_       | [**commentsIdTranslationGet**](docs/Api/CommentsApiInterface.md#commentsidtranslationget)         | **GET** /comments/{id}/translation    | Translate a comment                                                                                        |
 | _CommentsApiInterface_       | [**projectIdCommentsGet**](docs/Api/CommentsApiInterface.md#projectidcommentsget)                 | **GET** /project/{id}/comments        | Get project comments                                                                                       |
 | _CommentsApiInterface_       | [**projectIdCommentsPost**](docs/Api/CommentsApiInterface.md#projectidcommentspost)               | **POST** /project/{id}/comments       | Create a comment on a project                                                                              |
+| _FollowersApiInterface_      | [**userIdFollowPost**](docs/Api/FollowersApiInterface.md#useridfollowpost)                        | **POST** /user/{id}/follow            | Follow a user                                                                                              |
+| _FollowersApiInterface_      | [**userIdFollowersGet**](docs/Api/FollowersApiInterface.md#useridfollowersget)                    | **GET** /user/{id}/followers          | Get users following a user                                                                                 |
+| _FollowersApiInterface_      | [**userIdFollowingGet**](docs/Api/FollowersApiInterface.md#useridfollowingget)                    | **GET** /user/{id}/following          | Get users a user is following                                                                              |
+| _FollowersApiInterface_      | [**userIdUnfollowDelete**](docs/Api/FollowersApiInterface.md#useridunfollowdelete)                | **DELETE** /user/{id}/unfollow        | Unfollow a user                                                                                            |
 | _MediaLibraryApiInterface_   | [**mediaAssetsGet**](docs/Api/MediaLibraryApiInterface.md#mediaassetsget)                         | **GET** /media/assets                 | Get media library assets with pagination and filtering                                                     |
 | _MediaLibraryApiInterface_   | [**mediaAssetsIdDelete**](docs/Api/MediaLibraryApiInterface.md#mediaassetsiddelete)               | **DELETE** /media/assets/{id}         | Delete a media asset (Admin only)                                                                          |
 | _MediaLibraryApiInterface_   | [**mediaAssetsIdGet**](docs/Api/MediaLibraryApiInterface.md#mediaassetsidget)                     | **GET** /media/assets/{id}            | Get details of a specific media asset                                                                      |
@@ -193,6 +197,8 @@ All URIs are relative to *https://share.catrob.at/api*
 - [ExtendedUserDataResponse](docs/Model/ExtendedUserDataResponse.md)
 - [ExtensionResponse](docs/Model/ExtensionResponse.md)
 - [FeaturedProjectResponse](docs/Model/FeaturedProjectResponse.md)
+- [FollowerResponse](docs/Model/FollowerResponse.md)
+- [FollowersListResponse](docs/Model/FollowersListResponse.md)
 - [JWTResponse](docs/Model/JWTResponse.md)
 - [LoginRequest](docs/Model/LoginRequest.md)
 - [MediaAssetResponse](docs/Model/MediaAssetResponse.md)

@@ -1,0 +1,17 @@
+{# Shared data-attributes for FollowerOverview.js — include in any page that loads user_follower_overview #}
+<div class="js-follower-overview"
+     data-user-id="{{ follower_user_id }}"
+     data-base-url="{{ app.request.getBaseURL() }}"
+     data-login-url="{{ url('login') }}"
+     data-something-went-wrong-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+     data-follow-error="{{ 'follower.followError'|trans({}, 'catroweb') }}"
+     data-unfollow-error="{{ 'follower.unfollowError'|trans({}, 'catroweb') }}"
+     data-unfollow-button="{{ 'follower.unfollowButton'|trans({}, 'catroweb') }}"
+     data-unfollow-question="{{ 'follower.unfollowQuestion'|trans({}, 'catroweb') }}"
+     data-cancel-button="{{ 'cancelMessage'|trans({}, 'catroweb') }}"
+     data-trans-projects="{{ 'projects'|trans({}, 'catroweb') }}"
+     data-trans-follows="{{ 'follower.follows'|trans({}, 'catroweb') }}"
+     data-trans-follow="{{ 'follower.follow'|trans({}, 'catroweb') }}"
+     data-trans-follows-me="{{ 'follower.followsMe'|trans({}, 'catroweb') }}"
+     data-user-role="{{ follower_user_role }}"
+></div>

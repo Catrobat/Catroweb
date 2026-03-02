@@ -118,7 +118,6 @@ default:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
                 - App\System\Testing\Behat\Context\ApiContext
-                - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
         api-utility:
             paths:
@@ -156,6 +155,14 @@ default:
         api-search:
             paths:
                 - tests/BehatFeatures/api/search
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+
+        api-followers:
+            paths:
+                - tests/BehatFeatures/api/followers
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
