@@ -13,7 +13,6 @@ use App\DB\Entity\Project\ProgramDownloads;
 use App\Project\AddProjectRequest;
 use App\Project\Event\ProjectDownloadEvent;
 use OpenAPI\Server\Api\ProjectsApiInterface;
-use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\UpdateProjectErrorResponse;
@@ -24,12 +23,17 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
+  use RateLimitTrait;
+
   public function __construct(
     private readonly ProjectsApiFacade $facade,
     private readonly ReactionsApiFacade $reactions_facade,
+    private readonly RateLimiterFactory $uploadDailyLimiter,
+    private readonly RateLimiterFactory $reactionBurstLimiter,
   ) {
   }
 
@@ -185,8 +189,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
-    if (!$user->isVerified() && $this->facade->getLoader()->forceUserVerification()) {
-      $responseCode = Response::HTTP_FORBIDDEN;
+    if (null !== $user && !$this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }
@@ -341,14 +345,6 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, int &$responseCode, array &$responseHeaders): void
-  {
-    // TODO: Implement projectIdReportPost() method.
-
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
-  }
-
-  #[\Override]
   public function projectIdDelete(string $id, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -442,6 +438,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
     if (null === $user) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    if (!$this->checkUserRateLimit($user, $this->reactionBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }

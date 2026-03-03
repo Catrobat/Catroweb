@@ -1,0 +1,4 @@
+{% if object.state == 1 %}
+  <a class="btn btn-sm btn-success" href="{{ admin.generateObjectUrl('approveAppeal', object) }}"><i
+        class="fa fa-check"></i> Approve </a>
+{% endif %}

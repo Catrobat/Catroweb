@@ -25,7 +25,10 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -65,7 +68,23 @@ final class UserApiTest extends TestCase
     $authentication_manager->method('createRefreshTokenByUser')->willReturn('refresh_token');
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $this->object = new UserApi($this->facade);
+    $this->object = new UserApi(
+      $this->facade,
+      $this->createNoLimitRateLimiterFactory('phpunit_user_registration'),
+      $this->createNoLimitRateLimiterFactory('phpunit_user_password_reset'),
+      new RequestStack(),
+    );
+  }
+
+  private function createNoLimitRateLimiterFactory(string $id): RateLimiterFactory
+  {
+    return new RateLimiterFactory(
+      [
+        'id' => $id,
+        'policy' => 'no_limit',
+      ],
+      new InMemoryStorage(),
+    );
   }
 
   /**
@@ -207,6 +226,7 @@ final class UserApiTest extends TestCase
 
     $loader = $this->createStub(UserApiLoader::class);
     $loader->method('findUserByID')->willReturn($this->createStub(User::class));
+    $loader->method('canAccessProfile')->willReturn(true);
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->object->userIdGet('id', $response_code, $response_headers);

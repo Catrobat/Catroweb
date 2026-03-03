@@ -154,6 +154,7 @@ jobs:
           - api-achievements
           - api-comments
           - api-media-library
+          - api-moderation
           - api-notifications
           - api-projects
           - api-search
@@ -181,6 +182,7 @@ jobs:
           - web-reactions
           - web-recommendations
           - web-remix-system
+          - web-reports
           - web-scratch-integration
           - web-search
           - web-studio

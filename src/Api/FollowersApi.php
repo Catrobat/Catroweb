@@ -11,12 +11,16 @@ use App\User\UserManager;
 use OpenAPI\Server\Api\FollowersApiInterface;
 use OpenAPI\Server\Model\FollowersListResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class FollowersApi extends AbstractApiController implements FollowersApiInterface
 {
+  use RateLimitTrait;
+
   public function __construct(
     private readonly FollowersApiFacade $facade,
     private readonly UserManager $user_manager,
+    private readonly RateLimiterFactory $followBurstLimiter,
   ) {
   }
 
@@ -67,6 +71,12 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
       return;
     }
 
+    if (!$this->checkUserRateLimit($user, $this->followBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return;
+    }
+
     if ($user->getId() === $id) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
@@ -97,6 +107,12 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (null === $user) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return;
+    }
+
+    if (!$this->checkUserRateLimit($user, $this->followBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return;
     }

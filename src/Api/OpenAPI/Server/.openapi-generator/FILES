@@ -9,6 +9,7 @@ Api/AuthenticationApiInterface.php
 Api/CommentsApiInterface.php
 Api/FollowersApiInterface.php
 Api/MediaLibraryApiInterface.php
+Api/ModerationApiInterface.php
 Api/NotificationsApiInterface.php
 Api/ProjectsApiInterface.php
 Api/SearchApiInterface.php
@@ -21,6 +22,7 @@ Controller/CommentsController.php
 Controller/Controller.php
 Controller/FollowersController.php
 Controller/MediaLibraryController.php
+Controller/ModerationController.php
 Controller/NotificationsController.php
 Controller/ProjectsController.php
 Controller/SearchController.php
@@ -32,6 +34,8 @@ DependencyInjection/OpenAPIServerExtension.php
 Model/AchievementResponse.php
 Model/AchievementsCountResponse.php
 Model/AchievementsListResponse.php
+Model/AppealListResponse.php
+Model/AppealResponse.php
 Model/BaseUser.php
 Model/BasicUserDataResponse.php
 Model/CommentCreateRequest.php
@@ -39,6 +43,8 @@ Model/CommentListResponse.php
 Model/CommentResponse.php
 Model/CommentTranslationResponse.php
 Model/CommentUserInfo.php
+Model/ContentAppealRequest.php
+Model/ContentReportRequest.php
 Model/CreateStudioErrorResponse.php
 Model/DryRun.php
 Model/ExtendedUserDataResponse.php
@@ -62,7 +68,6 @@ Model/NotificationResponse.php
 Model/NotificationsCountResponse.php
 Model/OAuthLoginRequest.php
 Model/PaginationInfo.php
-Model/ProjectReportRequest.php
 Model/ProjectResponse.php
 Model/ProjectsCategory.php
 Model/ReactionRequest.php
@@ -73,8 +78,12 @@ Model/ReactionUsersResponse.php
 Model/RefreshRequest.php
 Model/RegisterErrorResponse.php
 Model/RegisterRequest.php
+Model/ReportListResponse.php
+Model/ReportResponse.php
 Model/ResetPasswordErrorResponse.php
 Model/ResetPasswordRequest.php
+Model/ResolveAppealRequest.php
+Model/ResolveReportRequest.php
 Model/SearchResponse.php
 Model/StudioResponse.php
 Model/SurveyResponse.php
@@ -102,6 +111,7 @@ Tests/Api/AuthenticationApiInterfaceTest.php
 Tests/Api/CommentsApiInterfaceTest.php
 Tests/Api/FollowersApiInterfaceTest.php
 Tests/Api/MediaLibraryApiInterfaceTest.php
+Tests/Api/ModerationApiInterfaceTest.php
 Tests/Api/NotificationsApiInterfaceTest.php
 Tests/Api/ProjectsApiInterfaceTest.php
 Tests/Api/SearchApiInterfaceTest.php
@@ -113,6 +123,8 @@ Tests/Controller/ControllerTest.php
 Tests/Model/AchievementResponseTest.php
 Tests/Model/AchievementsCountResponseTest.php
 Tests/Model/AchievementsListResponseTest.php
+Tests/Model/AppealListResponseTest.php
+Tests/Model/AppealResponseTest.php
 Tests/Model/BaseUserTest.php
 Tests/Model/BasicUserDataResponseTest.php
 Tests/Model/CommentCreateRequestTest.php
@@ -120,6 +132,8 @@ Tests/Model/CommentListResponseTest.php
 Tests/Model/CommentResponseTest.php
 Tests/Model/CommentTranslationResponseTest.php
 Tests/Model/CommentUserInfoTest.php
+Tests/Model/ContentAppealRequestTest.php
+Tests/Model/ContentReportRequestTest.php
 Tests/Model/CreateStudioErrorResponseTest.php
 Tests/Model/DryRunTest.php
 Tests/Model/ExtendedUserDataResponseTest.php
@@ -143,7 +157,6 @@ Tests/Model/NotificationResponseTest.php
 Tests/Model/NotificationsCountResponseTest.php
 Tests/Model/OAuthLoginRequestTest.php
 Tests/Model/PaginationInfoTest.php
-Tests/Model/ProjectReportRequestTest.php
 Tests/Model/ProjectResponseTest.php
 Tests/Model/ProjectsCategoryTest.php
 Tests/Model/ReactionRequestTest.php
@@ -154,8 +167,12 @@ Tests/Model/ReactionUsersResponseTest.php
 Tests/Model/RefreshRequestTest.php
 Tests/Model/RegisterErrorResponseTest.php
 Tests/Model/RegisterRequestTest.php
+Tests/Model/ReportListResponseTest.php
+Tests/Model/ReportResponseTest.php
 Tests/Model/ResetPasswordErrorResponseTest.php
 Tests/Model/ResetPasswordRequestTest.php
+Tests/Model/ResolveAppealRequestTest.php
+Tests/Model/ResolveReportRequestTest.php
 Tests/Model/SearchResponseTest.php
 Tests/Model/StudioResponseTest.php
 Tests/Model/SurveyResponseTest.php
@@ -175,6 +192,7 @@ docs/Api/AuthenticationApiInterface.md
 docs/Api/CommentsApiInterface.md
 docs/Api/FollowersApiInterface.md
 docs/Api/MediaLibraryApiInterface.md
+docs/Api/ModerationApiInterface.md
 docs/Api/NotificationsApiInterface.md
 docs/Api/ProjectsApiInterface.md
 docs/Api/SearchApiInterface.md
@@ -184,6 +202,8 @@ docs/Api/UtilityApiInterface.md
 docs/Model/AchievementResponse.md
 docs/Model/AchievementsCountResponse.md
 docs/Model/AchievementsListResponse.md
+docs/Model/AppealListResponse.md
+docs/Model/AppealResponse.md
 docs/Model/BaseUser.md
 docs/Model/BasicUserDataResponse.md
 docs/Model/CommentCreateRequest.md
@@ -191,6 +211,8 @@ docs/Model/CommentListResponse.md
 docs/Model/CommentResponse.md
 docs/Model/CommentTranslationResponse.md
 docs/Model/CommentUserInfo.md
+docs/Model/ContentAppealRequest.md
+docs/Model/ContentReportRequest.md
 docs/Model/CreateStudioErrorResponse.md
 docs/Model/DryRun.md
 docs/Model/ExtendedUserDataResponse.md
@@ -214,7 +236,6 @@ docs/Model/NotificationResponse.md
 docs/Model/NotificationsCountResponse.md
 docs/Model/OAuthLoginRequest.md
 docs/Model/PaginationInfo.md
-docs/Model/ProjectReportRequest.md
 docs/Model/ProjectResponse.md
 docs/Model/ProjectsCategory.md
 docs/Model/ReactionRequest.md
@@ -225,8 +246,12 @@ docs/Model/ReactionUsersResponse.md
 docs/Model/RefreshRequest.md
 docs/Model/RegisterErrorResponse.md
 docs/Model/RegisterRequest.md
+docs/Model/ReportListResponse.md
+docs/Model/ReportResponse.md
 docs/Model/ResetPasswordErrorResponse.md
 docs/Model/ResetPasswordRequest.md
+docs/Model/ResolveAppealRequest.md
+docs/Model/ResolveReportRequest.md
 docs/Model/SearchResponse.md
 docs/Model/StudioResponse.md
 docs/Model/SurveyResponse.md

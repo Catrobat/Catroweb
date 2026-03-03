@@ -89,23 +89,6 @@ interface CommentsApiInterface
   ): array|object|null;
 
   /**
-   * Operation commentsIdReportPost.
-   *
-   * Report a comment
-   *
-   * @param int    $id              (required)
-   * @param string $accept_language (optional, default to 'en')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
-   */
-  public function commentsIdReportPost(
-    int $id,
-    string $accept_language,
-    int &$responseCode,
-    array &$responseHeaders,
-  ): void;
-
-  /**
    * Operation commentsIdTranslationGet.
    *
    * Translate a comment

@@ -1,0 +1,4 @@
+{% if object.state == 1 %}
+  <a class="btn btn-sm btn-warning" href="{{ admin.generateObjectUrl('rejectReport', object) }}"><i
+        class="fa fa-times"></i> Reject </a>
+{% endif %}

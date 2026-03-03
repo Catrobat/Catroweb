@@ -107,8 +107,28 @@ export function ProjectComments(
     const reportButton = event.target.closest('.comment-report-button')
     if (reportButton) {
       event.stopPropagation()
-      const commentId = reportButton.id.substring('comment-report-button-'.length)
-      askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
+      import('../Moderation/ReportDialog').then(({ showReportDialog }) => {
+        showReportDialog({
+          contentType: reportButton.dataset.contentType || 'comment',
+          contentId: reportButton.dataset.contentId,
+          apiUrl: reportButton.dataset.reportUrl,
+          loginUrl: projectComments?.dataset.pathLoginUrl,
+          isLoggedIn: Boolean(getCookie('BEARER')),
+          translations: {
+            title: projectComments?.dataset.transReportTitle,
+            submit: projectComments?.dataset.transReportSubmit,
+            cancel: projectComments?.dataset.transReportCancel,
+            success: projectComments?.dataset.transReportSuccess,
+            error: projectComments?.dataset.transReportError,
+            duplicate: projectComments?.dataset.transReportDuplicate,
+            trustTooLow: projectComments?.dataset.transReportTrustTooLow,
+            unverified: projectComments?.dataset.transReportUnverified,
+            suspended: projectComments?.dataset.transReportSuspended,
+            rateLimited: projectComments?.dataset.transReportRateLimited,
+            notePlaceholder: projectComments?.dataset.transReportPlaceholder,
+          },
+        })
+      })
     }
 
     const deleteButton = event.target.closest('.comment-delete-button')
@@ -253,6 +273,32 @@ export function ProjectComments(
           return response.json()
         } else if (response.status === 401) {
           redirectToLogin()
+          return undefined
+        } else if (response.status === 429) {
+          const msg =
+            projectComments?.dataset.transRateLimited ||
+            "You're posting comments too quickly. Please wait a moment."
+          showPopUp('warning', msg)
+          return undefined
+        } else if (response.status === 403) {
+          return response
+            .json()
+            .then((body) => {
+              if (body?.error === 'Email verification required.') {
+                const msg =
+                  projectComments?.dataset.transAccountNotVerified ||
+                  'Please make sure you are logged in and your account\u2019s email is verified.'
+                showPopUp('warning', msg)
+              } else if (body?.error === 'Your account has been suspended.') {
+                const msg =
+                  projectComments?.dataset.transAccountSuspended ||
+                  'Your account has been suspended due to community reports.'
+                showPopUp('warning', msg)
+              } else {
+                showErrorPopUp(defaultErrorMessage)
+              }
+            })
+            .catch(() => showErrorPopUp(defaultErrorMessage))
         } else {
           throw new Error('Network response was not ok')
         }
@@ -455,32 +501,6 @@ export function ProjectComments(
       })
   }
 
-  function reportComment(commentId) {
-    if (!commentsBaseUrl) {
-      showErrorPopUp(defaultErrorMessage)
-      return
-    }
-
-    fetch(`${commentsBaseUrl}/${commentId}/report`, {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + getCookie('BEARER'),
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          showSuccessPopUp(popUpCommentReportedTitle, popUpCommentReportedText)
-        } else if (response.status === 401) {
-          redirectToLogin()
-        } else {
-          throw new Error('Network response was not ok')
-        }
-      })
-      .catch(() => {
-        showErrorPopUp(defaultErrorMessage)
-      })
-  }
-
   function askForConfirmation(continueWithAction, commentId, text, okayText) {
     Swal.fire({
       title: areYouSure,
@@ -500,10 +520,6 @@ export function ProjectComments(
         continueWithAction(commentId)
       }
     })
-  }
-
-  function showSuccessPopUp(title, text) {
-    showPopUp('success', title, text, true)
   }
 
   function showErrorPopUp(title, text) {

@@ -31,6 +31,37 @@ Feature: Get user by id
     And I request "GET" "/api/user/5"
     Then the response status code should be "404"
 
+  Scenario: Hidden profile returns 404 for public callers
+    Given the users are profile-hidden:
+      | name  |
+      | User1 |
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I request "GET" "/api/user/2"
+    Then the response status code should be "404"
+
+  Scenario: Hidden profile is accessible to owner
+    Given the users are profile-hidden:
+      | name  |
+      | User1 |
+    And I use a valid JWT Bearer token for "User1"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I request "GET" "/api/user/2"
+    Then the response status code should be "200"
+    And the response should contain the user "User1"
+
+  Scenario: Hidden profile is accessible to admins
+    Given there are admins:
+      | name  |
+      | Admin |
+    And the users are profile-hidden:
+      | name  |
+      | User1 |
+    And I use a valid JWT Bearer token for "Admin"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    When I request "GET" "/api/user/2"
+    Then the response status code should be "200"
+    And the response should contain the user "User1"
+
   Scenario: Get user without setting accept header should return 406 status code
     Given I have a request header "HTTP_ACCEPT" with value "invalid"
     When I request "GET" "/api/user/2"

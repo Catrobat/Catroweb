@@ -18,6 +18,8 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -34,7 +36,11 @@ final class FollowersApiTest extends TestCase
   {
     $this->facade = $this->createStub(FollowersApiFacade::class);
     $this->user_manager = $this->createStub(UserManager::class);
-    $this->object = new FollowersApi($this->facade, $this->user_manager);
+    $this->object = new FollowersApi(
+      $this->facade,
+      $this->user_manager,
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+    );
   }
 
   #[Group('unit')]

@@ -30,7 +30,6 @@
 
 namespace OpenAPI\Server\Api;
 
-use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -223,23 +222,6 @@ interface ProjectsApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
-
-  /**
-   * Operation projectIdReportPost.
-   *
-   * Report a project -- StatusCode: 501 - Not yet implemented
-   *
-   * @param string               $id                     (required)
-   * @param ProjectReportRequest $project_report_request (required)
-   * @param int                  &$responseCode          The HTTP Response Code
-   * @param array                $responseHeaders        Additional HTTP headers to return with the response ()
-   */
-  public function projectIdReportPost(
-    string $id,
-    ProjectReportRequest $project_report_request,
-    int &$responseCode,
-    array &$responseHeaders,
-  ): void;
 
   /**
    * Operation projectsCategoriesGet.

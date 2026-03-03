@@ -66,6 +66,15 @@ services:
       - [setContainer, ['@service_container']]
     tags: ['controller.service_arguments']
 
+  open_api_server.controller.moderation:
+    class: OpenAPI\Server\Controller\ModerationController
+    calls:
+      - [setSerializer, ['@open_api_server.service.serializer']]
+      - [setValidator, ['@open_api_server.service.validator']]
+      - [setApiServer, ['@open_api_server.api.api_server']]
+      - [setContainer, ['@service_container']]
+    tags: ['controller.service_arguments']
+
   open_api_server.controller.notifications:
     class: OpenAPI\Server\Controller\NotificationsController
     calls:

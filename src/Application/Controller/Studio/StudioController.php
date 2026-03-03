@@ -77,6 +77,10 @@ class StudioController extends AbstractController
       throw $this->createNotFoundException('Unable to find this studio');
     }
 
+    if ($studio->getAutoHidden()) {
+      throw $this->createNotFoundException('Unable to find this studio');
+    }
+
     /** @var User|null $user */
     $user = $this->getUser();
     $user_role = $this->studio_manager->getStudioUserRole($user, $studio);

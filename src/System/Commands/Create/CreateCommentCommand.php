@@ -34,7 +34,6 @@ class CreateCommentCommand extends Command
       ->addArgument('user', InputArgument::REQUIRED, 'User who comments on program')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Program name of program to comment on')
       ->addArgument('message', InputArgument::REQUIRED, 'Comment message')
-      ->addArgument('reported', InputArgument::REQUIRED, 'Boolean if it should be a reported comment')
     ;
   }
 
@@ -47,10 +46,6 @@ class CreateCommentCommand extends Command
     $username = $input->getArgument('user');
     $program_name = $input->getArgument('program_name');
     $message = $input->getArgument('message');
-    $reported = false;
-    if (intval($input->getArgument('reported')) >= 1) {
-      $reported = true;
-    }
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
@@ -62,7 +57,7 @@ class CreateCommentCommand extends Command
     }
 
     try {
-      $this->postComment($user, $program, $message, $reported);
+      $this->postComment($user, $program, $message);
     } catch (\Exception) {
       return 2;
     }
@@ -75,7 +70,7 @@ class CreateCommentCommand extends Command
   /**
    * @throws RandomException
    */
-  private function postComment(User $user, Program $program, string $message, bool $reported): void
+  private function postComment(User $user, Program $program, string $message): void
   {
     $comment = new UserComment();
     $comment->setUsername($user->getUsername());
@@ -83,7 +78,6 @@ class CreateCommentCommand extends Command
     $comment->setText($message);
     $comment->setProgram($program);
     $comment->setUploadDate(date_create());
-    $comment->setIsReported($reported);
 
     $this->em->persist($comment);
 

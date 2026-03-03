@@ -18,6 +18,29 @@
       {{ 'success.imgUpload'|trans({}, 'catroweb') }}
     </div>
   {% endif %}
+  {% if app.user.profileHidden %}
+    <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
+      <i class="material-icons me-2">block</i>
+      <div class="flex-grow-1">
+        {{ 'moderation.hidden_notice.user_own'|trans({}, 'catroweb') }}
+      </div>
+      <button id="btn-appeal-user" class="btn btn-outline-danger btn-sm ms-2"
+              data-content-type="user"
+              data-content-id="{{ app.user.id }}"
+              data-appeal-url="{{ url('open_api_server_moderation_useridappealpost', {id: app.user.id}) }}"
+              data-trans-appeal-title="{{ 'moderation.appeal.title'|trans({}, 'catroweb') }}"
+              data-trans-appeal-placeholder="{{ 'moderation.appeal.placeholder'|trans({}, 'catroweb') }}"
+              data-trans-appeal-submit="{{ 'moderation.appeal.submit'|trans({}, 'catroweb') }}"
+              data-trans-appeal-cancel="{{ 'moderation.appeal.cancel'|trans({}, 'catroweb') }}"
+              data-trans-appeal-success="{{ 'moderation.appeal.success'|trans({}, 'catroweb') }}"
+              data-trans-appeal-already-pending="{{ 'moderation.appeal.already_pending'|trans({}, 'catroweb') }}"
+              data-trans-appeal-error="{{ 'moderation.appeal.error'|trans({}, 'catroweb') }}"
+              data-trans-appeal-rate-limited="{{ 'moderation.appeal.rate_limited'|trans({}, 'catroweb') }}">
+        <i class="material-icons" style="font-size: 16px; vertical-align: middle;">gavel</i>
+        {{ 'moderation.appeal.button'|trans({}, 'catroweb')|default('Appeal') }}
+      </button>
+    </div>
+  {% endif %}
   <div class="profile__basic-info">
     <div class="profile__basic-info__avatar">
       <img class="profile__basic-info__avatar__img" alt="{{ 'profile.picture'|trans({}, 'catroweb') }}"

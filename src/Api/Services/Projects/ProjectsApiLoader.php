@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Api\Services\Projects;
 
-use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
@@ -30,7 +29,6 @@ class ProjectsApiLoader extends AbstractApiLoader
     protected ProjectFileRepository $file_repository,
     protected ExtractedFileRepository $extracted_file_repository,
     protected LoggerInterface $logger,
-    protected FeatureFlagManager $feature_flag_manager,
   ) {
   }
 
@@ -134,10 +132,5 @@ class ProjectsApiLoader extends AbstractApiLoader
     }
 
     return $zipFile;
-  }
-
-  public function forceUserVerification(): bool
-  {
-    return $this->feature_flag_manager->isEnabled('force-account-verification');
   }
 }

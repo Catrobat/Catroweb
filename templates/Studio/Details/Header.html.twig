@@ -123,6 +123,29 @@
       </div>
     </div>
 
+    {% if user_name is defined and user_name and user_role != 'admin' %}
+      <div class="mt-2">
+        <button id="btn-report-studio" class="btn btn-outline-danger btn-sm"
+                data-content-type="studio"
+                data-content-id="{{ studio.id }}"
+                data-report-url="{{ url('open_api_server_moderation_studioidreportpost', {id: studio.id}) }}"
+                data-login-url="{{ url('login') }}"
+                data-logged-in="{{ user_name ? 'true' : 'false' }}"
+                data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'studio'}, 'catroweb') }}"
+                data-trans-report-submit="{{ 'moderation.report.submit'|trans({}, 'catroweb') }}"
+                data-trans-report-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+                data-trans-report-success="{{ 'moderation.report.success'|trans({}, 'catroweb') }}"
+                data-trans-report-error="{{ 'moderation.report.error'|trans({}, 'catroweb') }}"
+                data-trans-report-duplicate="{{ 'moderation.report.duplicate'|trans({}, 'catroweb') }}"
+                data-trans-report-trust-too-low="{{ 'moderation.report.trust_too_low'|trans({}, 'catroweb') }}"
+                data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb') }}"
+                data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb') }}">
+          <i class="material-icons" style="font-size: 16px; vertical-align: middle;">flag</i>
+          {{ 'report'|trans({}, 'catroweb') }}
+        </button>
+      </div>
+    {% endif %}
+
     {{ include('Studio/Details/Tabs.html.twig') }}
 
   </div>

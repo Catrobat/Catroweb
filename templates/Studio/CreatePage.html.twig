@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block body %}
-  <form id="studio-create-form" class="container">
+  <form id="studio-create-form" class="container"
+        data-trans-rate-limited="{{ 'moderation.studio.rate_limited'|trans({}, 'catroweb') }}">
 
     {{ include('Components/TextField.html.twig', {
       text_field:

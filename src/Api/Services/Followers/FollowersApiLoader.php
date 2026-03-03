@@ -55,6 +55,7 @@ class FollowersApiLoader extends AbstractApiLoader
       ->from(User::class, 'f')
       ->join($joinRelation, 'u')
       ->where('u.id = :userId')
+      ->andWhere('f.profile_hidden = false')
       ->setParameter('userId', $user->getId())
       ->orderBy('f.username', 'ASC')
     ;
@@ -69,6 +70,7 @@ class FollowersApiLoader extends AbstractApiLoader
       ->from(User::class, 'f')
       ->join($joinRelation, 'u')
       ->where('u.id = :userId')
+      ->andWhere('f.profile_hidden = false')
       ->setParameter('userId', $user->getId())
       ->getQuery()
       ->getSingleScalarResult()

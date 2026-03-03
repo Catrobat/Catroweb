@@ -25,6 +25,61 @@ shareLink(
 
 initUserProjects()
 initProfileAchievements()
+initReportUser()
+
+function initReportUser() {
+  const reportBtn = document.getElementById('top-app-bar__btn-report-user')
+  if (!reportBtn) return
+
+  import('../Moderation/ReportDialog').then(({ showReportDialog }) => {
+    const buildReportDialogConfig = () => ({
+      contentType: reportBtn.dataset.contentType,
+      contentId: reportBtn.dataset.contentId,
+      apiUrl: reportBtn.dataset.reportUrl,
+      loginUrl: reportBtn.dataset.loginUrl,
+      isLoggedIn: reportBtn.dataset.loggedIn === 'true',
+      translations: {
+        title: reportBtn.dataset.transReportTitle,
+        submit: reportBtn.dataset.transReportSubmit,
+        cancel: reportBtn.dataset.transReportCancel,
+        success: reportBtn.dataset.transReportSuccess,
+        error: reportBtn.dataset.transReportError,
+        duplicate: reportBtn.dataset.transReportDuplicate,
+        trustTooLow: reportBtn.dataset.transReportTrustTooLow,
+        unverified: reportBtn.dataset.transReportUnverified,
+        suspended: reportBtn.dataset.transReportSuspended,
+        rateLimited: reportBtn.dataset.transReportRateLimited,
+        notePlaceholder: reportBtn.dataset.transReportPlaceholder,
+      },
+    })
+
+    reportBtn.addEventListener('click', () => {
+      showReportDialog(buildReportDialogConfig())
+    })
+
+    if (reportBtn.dataset.loggedIn === 'true') {
+      const pending = sessionStorage.getItem('pendingAction')
+      if (pending) {
+        try {
+          const pendingAction = JSON.parse(pending)
+          const isMatchingReportHandoff =
+            pendingAction?.actionType === 'report' &&
+            String(pendingAction?.contentType || '') ===
+              String(reportBtn.dataset.contentType || '') &&
+            String(pendingAction?.contentId || '') === String(reportBtn.dataset.contentId || '')
+
+          if (isMatchingReportHandoff) {
+            sessionStorage.removeItem('pendingAction')
+            showReportDialog(buildReportDialogConfig())
+          }
+        } catch (e) {
+          console.error('Failed to parse pending report handoff', e)
+          sessionStorage.removeItem('pendingAction')
+        }
+      }
+    }
+  })
+}
 
 function initUserProjects() {
   const userProjects = document.querySelector('#projects-section')

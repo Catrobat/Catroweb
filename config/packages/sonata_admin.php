@@ -81,7 +81,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'items' => [
               'admin.block.projects.overview',
               'admin.block.projects.approve',
-              'admin.block.projects.reported',
               'admin.block.featured.projects',
               'admin.block.example.projects',
             ],
@@ -93,7 +92,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'items' => [
               'admin.block.users.overview',
               'admin.block.users.data_report',
-              'admin.block.users.reported',
             ],
           ],
           'sonata.admin.group.comments' => [
@@ -102,7 +100,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'icon' => '<i class="fa fa-comments"></i>',
             'items' => [
               'admin.block.comments.overview',
-              'admin.block.comments.reported',
+            ],
+          ],
+          'sonata.admin.group.moderation' => [
+            'label' => 'Moderation',
+            'translation_domain' => 'catroweb',
+            'icon' => '<i class="fa fa-shield"></i>',
+            'items' => [
+              'admin.block.moderation.reports',
+              'admin.block.moderation.appeals',
             ],
           ],
           'sonata.admin.group.media_library' => [

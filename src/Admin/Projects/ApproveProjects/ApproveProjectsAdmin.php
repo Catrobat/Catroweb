@@ -247,7 +247,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('user')
       ->addIdentifier('name')
       ->add('visible', 'boolean', ['editable' => true, 'sortable' => false])
-      ->add('approved', 'boolean', ['editable' => true, 'sortable' => false])
+      ->add('approved', 'boolean', ['editable' => true, 'sortable' => false, 'label' => 'Whitelisted'])
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => ['show' => []]])
     ;
   }

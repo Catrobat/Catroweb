@@ -22,6 +22,8 @@ use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -44,7 +46,12 @@ final class ReactionsApiTest extends TestCase
   {
     $this->facade = $this->createStub(ProjectsApiFacade::class);
     $this->reactions_facade = $this->createStub(ReactionsApiFacade::class);
-    $this->object = new ProjectsApi($this->facade, $this->reactions_facade);
+    $this->object = new ProjectsApi(
+      $this->facade,
+      $this->reactions_facade,
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+    );
   }
 
   // ==================== projectIdReactionPost Tests ====================

@@ -68,6 +68,33 @@ async function uploadCoverImage(url, file) {
   }
 }
 
+// Report studio button
+const reportStudioBtn = document.getElementById('btn-report-studio')
+if (reportStudioBtn) {
+  import('../Moderation/ReportDialog').then(({ showReportDialog }) => {
+    reportStudioBtn.addEventListener('click', () => {
+      showReportDialog({
+        contentType: reportStudioBtn.dataset.contentType,
+        contentId: reportStudioBtn.dataset.contentId,
+        apiUrl: reportStudioBtn.dataset.reportUrl,
+        loginUrl: reportStudioBtn.dataset.loginUrl,
+        isLoggedIn: reportStudioBtn.dataset.loggedIn === 'true',
+        translations: {
+          title: reportStudioBtn.dataset.transReportTitle,
+          submit: reportStudioBtn.dataset.transReportSubmit,
+          cancel: reportStudioBtn.dataset.transReportCancel,
+          success: reportStudioBtn.dataset.transReportSuccess,
+          error: reportStudioBtn.dataset.transReportError,
+          duplicate: reportStudioBtn.dataset.transReportDuplicate,
+          trustTooLow: reportStudioBtn.dataset.transReportTrustTooLow,
+          rateLimited: reportStudioBtn.dataset.transReportRateLimited,
+          notePlaceholder: reportStudioBtn.dataset.transReportPlaceholder,
+        },
+      })
+    })
+  })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const bodyContentParent = document.getElementById('main_container_content')
   if (bodyContentParent) {

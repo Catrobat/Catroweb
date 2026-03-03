@@ -9,6 +9,8 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\DB\Enum\ContentType;
+use App\Moderation\ContentVisibilityManager;
 use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
@@ -45,6 +47,7 @@ class ProjectController extends AbstractController
     private readonly EntityManagerInterface $entity_manager,
     private readonly UserCommentRepository $comment_repository,
     private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
+    private readonly ContentVisibilityManager $content_visibility_manager,
   ) {
   }
 
@@ -96,6 +99,7 @@ class ProjectController extends AbstractController
       'project_details' => $project_details,
       'my_project' => $my_project,
       'logged_in' => $logged_in,
+      'is_whitelisted' => $this->content_visibility_manager->isWhitelisted(ContentType::Project, $project->getId()),
       'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
       'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
@@ -175,9 +179,25 @@ class ProjectController extends AbstractController
   public function projectCommentDetail(string $id): Response
   {
     $arr_comment = $this->comment_repository->getProjectCommentDetailViewData($id);
-    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($arr_comment['program_id'] ?? null);
+    if (!isset($arr_comment['program_id'])) {
+      return $this->redirectToIndexOnError();
+    }
+
+    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($arr_comment['program_id']);
     if (!$project instanceof Program) {
       return $this->redirectToIndexOnError();
+    }
+
+    $is_hidden = (bool) ($arr_comment['is_reported'] ?? false);
+    if ($is_hidden && !$this->isGranted('ROLE_ADMIN')) {
+      $current_user = $this->getUser();
+      $is_owner = $current_user instanceof User
+        && isset($arr_comment['user_id'])
+        && $current_user->getId() === (string) $arr_comment['user_id'];
+
+      if (!$is_owner) {
+        return $this->redirectToIndexOnError();
+      }
     }
 
     $comment_list = [];
