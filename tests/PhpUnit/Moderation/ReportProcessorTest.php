@@ -301,7 +301,20 @@ final class ReportProcessorTest extends TestCase
   #[Group('unit')]
   public function testRateLimitBurstRejectsReport(): void
   {
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $visibility->method('contentExists')->willReturn(true);
+    $visibility->method('getContentOwnerId')->willReturn('other-user');
+
+    $trust = $this->createStub(TrustScoreCalculator::class);
+    $trust->method('calculate')->willReturn(5.0);
+
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('hasUserAlreadyReported')->willReturn(false);
+
     $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      trust_calculator: $trust,
+      visibility_manager: $visibility,
       burst_limiter: $this->createRejectingLimiterFactory(),
     );
 
@@ -319,7 +332,20 @@ final class ReportProcessorTest extends TestCase
   #[Group('unit')]
   public function testRateLimitDailyRejectsReport(): void
   {
+    $visibility = $this->createStub(ContentVisibilityManager::class);
+    $visibility->method('contentExists')->willReturn(true);
+    $visibility->method('getContentOwnerId')->willReturn('other-user');
+
+    $trust = $this->createStub(TrustScoreCalculator::class);
+    $trust->method('calculate')->willReturn(5.0);
+
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('hasUserAlreadyReported')->willReturn(false);
+
     $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      trust_calculator: $trust,
+      visibility_manager: $visibility,
       daily_limiter: $this->createRejectingLimiterFactory(),
     );
 

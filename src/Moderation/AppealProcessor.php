@@ -16,6 +16,7 @@ use App\DB\Enum\AppealState;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportState;
 use App\Utils\TimeUtils;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 
 class AppealProcessor
@@ -38,7 +39,15 @@ class AppealProcessor
     string $content_id,
     string $reason,
   ): ContentAppeal {
+    if ('' === trim($reason)) {
+      throw AppealException::reasonRequired();
+    }
+
     $this->validateAppeal($appellant, $content_type, $content_id);
+
+    // Remove any resolved (approved/rejected) appeals for the same content+user
+    // to make room in the unique constraint for the new appeal.
+    $this->appeal_repository->removeResolvedAppeals($content_type->value, $content_id, $appellant->getId());
 
     $appeal = new ContentAppeal();
     $appeal->setContentType($content_type->value);
@@ -54,7 +63,14 @@ class AppealProcessor
 
     $this->entity_manager->persist($appeal);
     $this->entity_manager->persist($action);
-    $this->entity_manager->flush();
+
+    try {
+      $this->entity_manager->flush();
+    } catch (UniqueConstraintViolationException) {
+      $this->entity_manager->detach($appeal);
+      $this->entity_manager->detach($action);
+      throw AppealException::appealAlreadyExists();
+    }
 
     return $appeal;
   }

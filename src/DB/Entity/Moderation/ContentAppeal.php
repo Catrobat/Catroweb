@@ -12,7 +12,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'content_appeal')]
-#[ORM\UniqueConstraint(name: 'unique_content_appeal', columns: ['content_type', 'content_id', 'appellant_id'])]
+#[ORM\UniqueConstraint(name: 'unique_pending_appeal', columns: ['content_type', 'content_id', 'appellant_id', 'state'])]
 #[ORM\Index(name: 'ca_state_created_idx', columns: ['state', 'created_at'])]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ContentAppealRepository::class)]
@@ -29,9 +29,9 @@ class ContentAppeal
   #[ORM\Column(name: 'content_id', type: Types::STRING, length: 255)]
   private string $content_id;
 
-  #[ORM\JoinColumn(name: 'appellant_id', referencedColumnName: 'id', nullable: false)]
+  #[ORM\JoinColumn(name: 'appellant_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
   #[ORM\ManyToOne(targetEntity: User::class)]
-  private User $appellant;
+  private ?User $appellant = null;
 
   #[ORM\Column(name: 'reason', type: Types::TEXT)]
   private string $reason;
@@ -99,12 +99,12 @@ class ContentAppeal
     return $this;
   }
 
-  public function getAppellant(): User
+  public function getAppellant(): ?User
   {
     return $this->appellant;
   }
 
-  public function setAppellant(User $appellant): ContentAppeal
+  public function setAppellant(?User $appellant): ContentAppeal
   {
     $this->appellant = $appellant;
 

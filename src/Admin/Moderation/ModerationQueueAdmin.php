@@ -86,8 +86,8 @@ class ModerationQueueAdmin extends AbstractAdmin
   #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
-    $collection->add('acceptReport');
-    $collection->add('rejectReport');
+    $collection->add('acceptReport', $this->getRouterIdParameter().'/acceptReport');
+    $collection->add('rejectReport', $this->getRouterIdParameter().'/rejectReport');
     $collection->remove('create')->remove('delete')->remove('export');
   }
 }

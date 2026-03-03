@@ -83,8 +83,8 @@ class AppealQueueAdmin extends AbstractAdmin
   #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
-    $collection->add('approveAppeal');
-    $collection->add('rejectAppeal');
+    $collection->add('approveAppeal', $this->getRouterIdParameter().'/approveAppeal');
+    $collection->add('rejectAppeal', $this->getRouterIdParameter().'/rejectAppeal');
     $collection->remove('create')->remove('delete')->remove('export');
   }
 }

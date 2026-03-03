@@ -47,6 +47,18 @@ class ContentVisibilityManager
       return;
     }
 
+    // For non-User content, skip restore if the content owner is suspended.
+    // This prevents unhiding content belonging to a banned user via report rejection or appeal approval.
+    if (ContentType::User !== $content_type) {
+      $owner_id = $this->getContentOwnerId($content_type, $content_id);
+      if (null !== $owner_id) {
+        $owner = $this->entity_manager->find(User::class, $owner_id);
+        if ($owner instanceof User && $owner->getProfileHidden()) {
+          return;
+        }
+      }
+    }
+
     match ($content_type) {
       ContentType::Project => $entity->setAutoHidden(false),
       ContentType::Comment => $entity->setAutoHidden(false),

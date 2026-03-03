@@ -10,6 +10,7 @@ class AppealException extends \RuntimeException
   public const int CODE_NOT_HIDDEN = 400;
   public const int CODE_NOT_OWNER = 403;
   public const int CODE_ALREADY_PENDING = 409;
+  public const int CODE_REASON_REQUIRED = 400;
 
   private function __construct(string $message, int $code)
   {
@@ -34,5 +35,10 @@ class AppealException extends \RuntimeException
   public static function appealAlreadyExists(): self
   {
     return new self('You have already filed an appeal for this content.', self::CODE_ALREADY_PENDING);
+  }
+
+  public static function reasonRequired(): self
+  {
+    return new self('An appeal reason is required.', self::CODE_REASON_REQUIRED);
   }
 }

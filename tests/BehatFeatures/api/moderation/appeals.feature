@@ -247,7 +247,7 @@ Feature: Moderation Appeals API
     And moderation report 302 should have state "rejected"
     And the project "project1" should be visible
 
-  Scenario: Repeated appeal attempt after prior resolution still returns 409
+  Scenario: Re-appeal allowed after prior rejection
     Given the project "project1" is auto-hidden
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -265,11 +265,24 @@ Feature: Moderation Appeals API
       """
     When I request "PUT" "/api/moderation/appeals/1/resolve"
     Then the response status code should be "200"
-    Given I use a valid JWT Bearer token for "Catrobat"
+    # Content must be re-hidden for a second appeal to be valid
+    Given the project "project1" is auto-hidden
+    And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
-      {"reason": "Second appeal after resolution"}
+      {"reason": "Second appeal after rejection"}
       """
     When I request "POST" "/api/project/1/appeal"
-    Then the response status code should be "409"
+    Then the response status code should be "201"
+
+  Scenario: Appeal with empty reason returns 400
+    Given the project "project1" is auto-hidden
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"reason": ""}
+      """
+    When I request "POST" "/api/project/1/appeal"
+    Then the response status code should be "400"

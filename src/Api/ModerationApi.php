@@ -127,6 +127,13 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null {
+    if (!$this->isGranted('ROLE_ADMIN')) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    $limit = min(max($limit, 1), 100);
     $cursor_data = $this->decodeModerationCursor($cursor);
     $cursor_created_at = $cursor_data['created_at'] ?? null;
     $cursor_id = $cursor_data['id'] ?? null;
@@ -186,6 +193,12 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     int &$responseCode,
     array &$responseHeaders,
   ): void {
+    if (!$this->isGranted('ROLE_ADMIN')) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
     $admin = $this->authentication_manager->getAuthenticatedUser();
     if (!$admin instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
@@ -231,6 +244,13 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null {
+    if (!$this->isGranted('ROLE_ADMIN')) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    $limit = min(max($limit, 1), 100);
     $cursor_data = $this->decodeModerationCursor($cursor);
     $cursor_created_at = $cursor_data['created_at'] ?? null;
     $cursor_id = $cursor_data['id'] ?? null;
@@ -261,7 +281,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       'id' => $a->getId(),
       'content_type' => $a->getContentType(),
       'content_id' => $a->getContentId(),
-      'appellant_id' => $a->getAppellant()->getId(),
+      'appellant_id' => $a->getAppellant()?->getId(),
       'reason' => $a->getReason(),
       'state' => $a->getState(),
       'created_at' => $a->getCreatedAt()?->format(\DateTimeInterface::ATOM),
@@ -289,6 +309,12 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     int &$responseCode,
     array &$responseHeaders,
   ): void {
+    if (!$this->isGranted('ROLE_ADMIN')) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
     $admin = $this->authentication_manager->getAuthenticatedUser();
     if (!$admin instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;

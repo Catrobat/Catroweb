@@ -29,11 +29,34 @@ class ContentAppealRepository extends ServiceEntityRepository
       ->where('a.content_type = :content_type')
       ->andWhere('a.content_id = :content_id')
       ->andWhere('u.id = :user_id')
+      ->andWhere('a.state = :pending')
       ->setParameter('content_type', $content_type)
       ->setParameter('content_id', $content_id)
       ->setParameter('user_id', $user_id)
+      ->setParameter('pending', AppealState::Pending->value)
       ->getQuery()
       ->getSingleScalarResult() > 0
+    ;
+  }
+
+  /**
+   * Removes resolved (approved/rejected) appeals for the same content+user,
+   * making room in the unique constraint for a new appeal.
+   */
+  public function removeResolvedAppeals(string $content_type, string $content_id, string $user_id): void
+  {
+    $this->createQueryBuilder('a')
+      ->delete()
+      ->where('a.content_type = :content_type')
+      ->andWhere('a.content_id = :content_id')
+      ->andWhere('a.state != :pending')
+      ->andWhere('a.appellant = :user_id')
+      ->setParameter('content_type', $content_type)
+      ->setParameter('content_id', $content_id)
+      ->setParameter('pending', AppealState::Pending->value)
+      ->setParameter('user_id', $user_id)
+      ->getQuery()
+      ->execute()
     ;
   }
 

@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'content_moderation_action')]
 #[ORM\Index(name: 'cma_content_idx', columns: ['content_type', 'content_id'])]
 #[ORM\Index(name: 'cma_created_idx', columns: ['created_at'])]
+#[ORM\Index(name: 'cma_action_type_created_idx', columns: ['action', 'content_type', 'created_at'])]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ContentModerationActionRepository::class)]
 class ContentModerationAction

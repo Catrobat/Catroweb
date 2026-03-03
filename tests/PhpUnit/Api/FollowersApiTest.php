@@ -10,6 +10,7 @@ use App\Api\Services\Followers\FollowersApiFacade;
 use App\Api\Services\Followers\FollowersApiLoader;
 use App\Api\Services\Followers\FollowersApiProcessor;
 use App\Api\Services\Followers\FollowersResponseManager;
+use App\Api\Services\User\UserApiLoader;
 use App\DB\Entity\User\User;
 use App\User\UserManager;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -30,15 +31,19 @@ final class FollowersApiTest extends TestCase
   private FollowersApi $object;
   private FollowersApiFacade|\PHPUnit\Framework\MockObject\Stub $facade;
   private UserManager|\PHPUnit\Framework\MockObject\Stub $user_manager;
+  private UserApiLoader|\PHPUnit\Framework\MockObject\Stub $user_api_loader;
 
   #[\Override]
   protected function setUp(): void
   {
     $this->facade = $this->createStub(FollowersApiFacade::class);
     $this->user_manager = $this->createStub(UserManager::class);
+    $this->user_api_loader = $this->createStub(UserApiLoader::class);
+    $this->user_api_loader->method('canAccessProfile')->willReturn(true);
     $this->object = new FollowersApi(
       $this->facade,
       $this->user_manager,
+      $this->user_api_loader,
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
     );
   }
@@ -52,6 +57,35 @@ final class FollowersApiTest extends TestCase
     $this->user_manager->method('find')->willReturn(null);
 
     $result = $this->object->userIdFollowersGet('nonexistent', $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
+    $this->assertNull($result);
+  }
+
+  #[Group('unit')]
+  public function testFollowersGetHiddenProfileReturns404(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $user = $this->createStub(User::class);
+    $this->user_manager->method('find')->willReturn($user);
+
+    $auth_manager = $this->createStub(AuthenticationManager::class);
+    $auth_manager->method('getAuthenticatedUser')->willReturn(null);
+    $this->facade->method('getAuthenticationManager')->willReturn($auth_manager);
+
+    $user_api_loader = $this->createStub(UserApiLoader::class);
+    $user_api_loader->method('canAccessProfile')->willReturn(false);
+
+    $this->object = new FollowersApi(
+      $this->facade,
+      $this->user_manager,
+      $user_api_loader,
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+    );
+
+    $result = $this->object->userIdFollowersGet('hidden-user', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);

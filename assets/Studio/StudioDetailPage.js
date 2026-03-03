@@ -89,6 +89,8 @@ if (reportStudioBtn) {
           trustTooLow: reportStudioBtn.dataset.transReportTrustTooLow,
           rateLimited: reportStudioBtn.dataset.transReportRateLimited,
           notePlaceholder: reportStudioBtn.dataset.transReportPlaceholder,
+          unverified: reportStudioBtn.dataset.transReportUnverified,
+          suspended: reportStudioBtn.dataset.transReportSuspended,
         },
       })
     })

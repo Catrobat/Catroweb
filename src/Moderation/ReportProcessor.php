@@ -47,9 +47,9 @@ class ReportProcessor
     string $category,
     ?string $note = null,
   ): array {
-    $this->checkRateLimit($reporter);
-
     $trust_score = $this->validateReport($reporter, $content_type, $content_id, $category);
+
+    $this->checkRateLimit($reporter);
 
     $effective_weight = $this->isPrivilegedReporter($reporter)
         ? $trust_score
