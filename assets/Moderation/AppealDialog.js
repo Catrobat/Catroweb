@@ -37,19 +37,15 @@ export function showAppealDialog({ apiUrl, translations }) {
         Swal.showValidationMessage('Please provide a reason for your appeal')
         return false
       }
-      return { reason }
+      return submitAppeal(apiUrl, reason, translations)
     },
-  }).then((result) => {
-    if (result.isConfirmed && result.value) {
-      submitAppeal(apiUrl, result.value.reason, translations)
-    }
   })
 }
 
 function submitAppeal(apiUrl, reason, translations) {
   const token = getCookie('BEARER')
 
-  fetch(apiUrl, {
+  return fetch(apiUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -65,39 +61,27 @@ function submitAppeal(apiUrl, reason, translations) {
           customClass: { confirmButton: 'btn btn-primary' },
           buttonsStyling: false,
         })
+        return true
       } else if (response.status === 409) {
-        Swal.fire({
-          text: translations.alreadyPending || 'You already have a pending appeal.',
-          icon: 'info',
-          customClass: { confirmButton: 'btn btn-primary' },
-          buttonsStyling: false,
-        })
+        Swal.showValidationMessage(
+          translations.alreadyPending || 'You already have a pending appeal.',
+        )
+        return false
       } else if (response.status === 403) {
-        handleAccountState403(response, translations)
+        return handleAccountState403(response, translations).then(() => false)
       } else if (response.status === 429) {
-        Swal.fire({
-          text:
-            translations.rateLimited ||
+        Swal.showValidationMessage(
+          translations.rateLimited ||
             "You're submitting appeals too quickly. Please wait and try again.",
-          icon: 'warning',
-          customClass: { confirmButton: 'btn btn-primary' },
-          buttonsStyling: false,
-        })
+        )
+        return false
       } else {
-        Swal.fire({
-          text: translations.error || 'Something went wrong.',
-          icon: 'error',
-          customClass: { confirmButton: 'btn btn-primary' },
-          buttonsStyling: false,
-        })
+        Swal.showValidationMessage(translations.error || 'Something went wrong.')
+        return false
       }
     })
     .catch(() => {
-      Swal.fire({
-        text: translations.error || 'Something went wrong.',
-        icon: 'error',
-        customClass: { confirmButton: 'btn btn-primary' },
-        buttonsStyling: false,
-      })
+      Swal.showValidationMessage(translations.error || 'Something went wrong.')
+      return false
     })
 }

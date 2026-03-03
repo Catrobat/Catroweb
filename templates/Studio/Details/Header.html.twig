@@ -123,7 +123,7 @@
       </div>
     </div>
 
-    {% if user_name is defined and user_name and user_role != 'admin' %}
+    {% if user_name is defined and user_name and user_role != 'admin' and not studio.autoHidden %}
       <div class="mt-2">
         <button id="btn-report-studio" class="btn btn-outline-danger btn-sm"
                 data-content-type="studio"

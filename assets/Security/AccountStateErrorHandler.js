@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
  * @param {string} fallbackMsg  - Default message when 403 is not an account-state error
  */
 export function handleAccountState403(response, translations, fallbackMsg) {
-  response
+  return response
     .json()
     .then((body) => {
       let msg = fallbackMsg || translations.error || 'Something went wrong.'

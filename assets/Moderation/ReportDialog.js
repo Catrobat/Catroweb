@@ -53,7 +53,7 @@ export function showReportDialog({
         return false
       }
 
-      return { category: checked.value, note }
+      return submitReport(apiUrl, { category: checked.value, note }, translations, sessionKey)
     },
     didOpen: (popup) => {
       // Persist form state in session (scoped to popup to avoid listener leak)
@@ -70,17 +70,13 @@ export function showReportDialog({
         }
       })
     },
-  }).then((result) => {
-    if (result.isConfirmed && result.value) {
-      submitReport(apiUrl, result.value, translations, sessionKey)
-    }
   })
 }
 
 function submitReport(apiUrl, { category, note }, translations, sessionKey) {
   const token = getCookie('BEARER')
 
-  fetch(apiUrl, {
+  return fetch(apiUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -97,44 +93,32 @@ function submitReport(apiUrl, { category, note }, translations, sessionKey) {
           customClass: { confirmButton: 'btn btn-primary' },
           buttonsStyling: false,
         })
+        return true
       } else if (response.status === 409) {
-        Swal.fire({
-          text: translations.duplicate || "You've already reported this content.",
-          icon: 'info',
-          customClass: { confirmButton: 'btn btn-primary' },
-          buttonsStyling: false,
-        })
+        Swal.showValidationMessage(
+          translations.duplicate || "You've already reported this content.",
+        )
+        return false
       } else if (response.status === 429) {
-        Swal.fire({
-          text:
-            translations.rateLimited ||
+        Swal.showValidationMessage(
+          translations.rateLimited ||
             "You're submitting reports too quickly. Please wait and try again.",
-          icon: 'warning',
-          customClass: { confirmButton: 'btn btn-primary' },
-          buttonsStyling: false,
-        })
+        )
+        return false
       } else if (response.status === 403) {
-        handleAccountState403(
+        return handleAccountState403(
           response,
           translations,
           translations.trustTooLow || 'Your account is too new to file reports.',
-        )
+        ).then(() => false)
       } else {
-        Swal.fire({
-          text: translations.error || 'Something went wrong.',
-          icon: 'error',
-          customClass: { confirmButton: 'btn btn-primary' },
-          buttonsStyling: false,
-        })
+        Swal.showValidationMessage(translations.error || 'Something went wrong.')
+        return false
       }
     })
     .catch(() => {
-      Swal.fire({
-        text: translations.error || 'Something went wrong.',
-        icon: 'error',
-        customClass: { confirmButton: 'btn btn-primary' },
-        buttonsStyling: false,
-      })
+      Swal.showValidationMessage(translations.error || 'Something went wrong.')
+      return false
     })
 }
 

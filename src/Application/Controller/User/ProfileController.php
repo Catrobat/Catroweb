@@ -46,7 +46,7 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('index');
       }
 
-      if ($user->getProfileHidden()) {
+      if ($user->getProfileHidden() && !$this->isGranted('ROLE_ADMIN')) {
         return $this->redirectToRoute('index');
       }
 

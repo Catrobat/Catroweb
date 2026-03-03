@@ -39,8 +39,13 @@ class AppealProcessor
     string $content_id,
     string $reason,
   ): ContentAppeal {
-    if ('' === trim($reason)) {
+    $reason = trim($reason);
+    if ('' === $reason) {
       throw AppealException::reasonRequired();
+    }
+
+    if (mb_strlen($reason) > ReportProcessor::MAX_NOTE_LENGTH) {
+      $reason = mb_substr($reason, 0, ReportProcessor::MAX_NOTE_LENGTH);
     }
 
     $this->validateAppeal($appellant, $content_type, $content_id);
@@ -98,7 +103,9 @@ class AppealProcessor
 
     $this->entity_manager->flush();
 
-    $this->trust_calculator->invalidate($appeal->getAppellant());
+    if (null !== $appeal->getAppellant()) {
+      $this->trust_calculator->invalidate($appeal->getAppellant());
+    }
   }
 
   public function rejectAppeal(ContentAppeal $appeal, User $admin, ?string $note = null): void

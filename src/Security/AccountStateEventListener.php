@@ -15,11 +15,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 #[AsEventListener(event: KernelEvents::REQUEST, priority: -10)]
 class AccountStateEventListener
 {
-  private const array EXEMPT_PATTERNS = [
-    '#^/api/authentication#',
-    '#^/api/user/?$#',
-    '#^/api/user/reset-password#',
-    '#^/api/.+/appeal$#',
+  /** @var array<array{pattern: string, methods?: list<string>}> */
+  private const array EXEMPT_RULES = [
+    ['pattern' => '#^/api/authentication#'],
+    ['pattern' => '#^/api/user/?$#', 'methods' => ['POST', 'PUT']],
+    ['pattern' => '#^/api/user/reset-password#'],
+    ['pattern' => '#^/api/(project|comments|user|studio)/[^/]+/appeal$#'],
   ];
 
   public function __construct(
@@ -41,9 +42,11 @@ class AccountStateEventListener
       return;
     }
 
-    foreach (self::EXEMPT_PATTERNS as $pattern) {
-      if (preg_match($pattern, $path)) {
-        return;
+    foreach (self::EXEMPT_RULES as $rule) {
+      if (preg_match($rule['pattern'], $path)) {
+        if (!isset($rule['methods']) || \in_array($method, $rule['methods'], true)) {
+          return;
+        }
       }
     }
 

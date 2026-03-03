@@ -12,7 +12,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'content_appeal')]
-#[ORM\UniqueConstraint(name: 'unique_pending_appeal', columns: ['content_type', 'content_id', 'appellant_id', 'state'])]
+#[ORM\UniqueConstraint(name: 'unique_content_appeal', columns: ['content_type', 'content_id', 'appellant_id'])]
 #[ORM\Index(name: 'ca_state_created_idx', columns: ['state', 'created_at'])]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ContentAppealRepository::class)]

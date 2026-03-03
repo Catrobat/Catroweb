@@ -77,7 +77,7 @@ class StudioController extends AbstractController
       throw $this->createNotFoundException('Unable to find this studio');
     }
 
-    if ($studio->getAutoHidden()) {
+    if ($studio->getAutoHidden() && !$this->isGranted('ROLE_ADMIN')) {
       throw $this->createNotFoundException('Unable to find this studio');
     }
 

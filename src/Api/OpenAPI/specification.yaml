@@ -4168,6 +4168,7 @@ components:
         note:
           type: string
           nullable: true
+          maxLength: 5000
           description: 'Optional additional details'
           example: 'This content appears to be spam'
 
@@ -4178,6 +4179,7 @@ components:
       properties:
         reason:
           type: string
+          maxLength: 5000
           description: 'Justification for the appeal'
           example: 'My content was hidden in error. It does not violate any rules.'
 

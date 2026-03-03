@@ -149,7 +149,7 @@
             <div class="lrow">User name</div><div class="rrow">{{ uc.userName }}</div>
             <div class="lrow">Uploaded at</div><div class="rrow">{{ uc.uploadDate|date('Y-m-d h:m:s') }}</div>
             <div class="lrow">Text</div><div class="rrow">{{ uc.text }}</div>
-            <div class="lrow">Is Reported</div><div class="rrow">{{ uc.isReported }}</div>
+            <div class="lrow">Auto Hidden</div><div class="rrow">{{ uc.autoHidden ? 'Yes' : 'No' }}</div>
             <div class="lrow separator"></div><div class="rrow separator"></div>
           {% endfor %}
 

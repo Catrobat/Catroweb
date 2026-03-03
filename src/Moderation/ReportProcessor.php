@@ -23,6 +23,7 @@ class ReportProcessor
   private const float MAX_REPORT_WEIGHT = 5.0;
   private const int VELOCITY_REPORTER_THRESHOLD = 5;
   private const int VELOCITY_WINDOW_MINUTES = 30;
+  public const int MAX_NOTE_LENGTH = 5000;
 
   public function __construct(
     private readonly ContentReportRepository $report_repository,
@@ -54,6 +55,10 @@ class ReportProcessor
     $effective_weight = $this->isPrivilegedReporter($reporter)
         ? $trust_score
         : min($trust_score, self::MAX_REPORT_WEIGHT);
+
+    if (null !== $note && mb_strlen($note) > self::MAX_NOTE_LENGTH) {
+      $note = mb_substr($note, 0, self::MAX_NOTE_LENGTH);
+    }
 
     $report = new ContentReport();
     $report->setReporter($reporter);
