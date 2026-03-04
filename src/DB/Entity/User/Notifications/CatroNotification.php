@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'notification_type', type: 'string')]
-#[ORM\DiscriminatorMap(['default' => 'CatroNotification', 'comment' => 'CommentNotification', 'like' => 'LikeNotification', 'follow' => 'FollowNotification', 'follow_project' => 'NewProgramNotification', 'broadcast_notification' => 'BroadcastNotification', 'remix_notification' => 'RemixNotification'])]
+#[ORM\DiscriminatorMap(['default' => 'CatroNotification', 'comment' => 'CommentNotification', 'like' => 'LikeNotification', 'follow' => 'FollowNotification', 'follow_project' => 'NewProgramNotification', 'broadcast_notification' => 'BroadcastNotification', 'remix_notification' => 'RemixNotification', 'moderation' => 'ModerationNotification'])]
 class CatroNotification
 {
   #[ORM\Column(name: 'id', type: Types::INTEGER)]

@@ -8,12 +8,19 @@ use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Search\SearchApiFacade;
 use OpenAPI\Server\Api\SearchApiInterface;
 use OpenAPI\Server\Model\SearchResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class SearchApi extends AbstractApiController implements SearchApiInterface
 {
-  public function __construct(private readonly SearchApiFacade $facade)
-  {
+  use RateLimitTrait;
+
+  public function __construct(
+    private readonly SearchApiFacade $facade,
+    private readonly RateLimiterFactory $searchBurstLimiter,
+    private readonly RequestStack $request_stack,
+  ) {
   }
 
   /**
@@ -22,6 +29,13 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
   #[\Override]
   public function searchGet(string $query, string $type, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|SearchResponse
   {
+    $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
+    if (!$this->checkIpRateLimit($ip, $this->searchBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return [];
+    }
+
     if ('' === $query || ctype_space($query)) {
       return [];
     }

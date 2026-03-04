@@ -46,6 +46,7 @@ class UserDataFixtures
     $user->setSuperAdmin(isset($config['admin']) && 'true' === $config['admin']);
     $user->setEnabled(!isset($config['enabled']) || 'true' === $config['enabled']);
     $user->setVerified(!isset($config['verified']) || 'true' === $config['verified']);
+    $user->setApproved(isset($config['approved']) && 'true' === $config['approved']);
     $user->addRole($config['role'] ?? 'ROLE_USER');
     $user->setOauthUser(isset($config['oauth_user']) && 'true' === $config['oauth_user']);
 

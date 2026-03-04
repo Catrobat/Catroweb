@@ -20,6 +20,23 @@ class UserApiLoader extends AbstractApiLoader
     return $this->user_manager->find($id);
   }
 
+  public function canAccessProfile(User $user, ?User $viewer): bool
+  {
+    if (!$user->getProfileHidden()) {
+      return true;
+    }
+
+    if (!$viewer instanceof User) {
+      return false;
+    }
+
+    if ($viewer->getId() === $user->getId()) {
+      return true;
+    }
+
+    return $viewer->hasRole('ROLE_ADMIN') || $viewer->hasRole('ROLE_SUPER_ADMIN');
+  }
+
   public function searchUsers(string $query, int $limit, int $offset): array
   {
     if ('' === trim($query) || ctype_space($query)) {

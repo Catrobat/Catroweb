@@ -56,6 +56,9 @@ tags:
   - name: 'Followers'
     description: 'Everything related to user follow relationships'
 
+  - name: 'Moderation'
+    description: 'Content moderation: reporting, appeals, and admin review'
+
 paths:
   ##############################################
   # Authentication
@@ -183,6 +186,8 @@ paths:
           $ref: '#/components/responses/UnsupportedMediaType'
         422:
           description: 'Unprocessable Entity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   ##############################################
   # Utility
@@ -439,6 +444,8 @@ paths:
               $ref: '#/components/headers/X-Response-Hash'
             Content-Language:
               $ref: '#/components/headers/Content-Language'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   /users/search:
     get:
@@ -581,6 +588,8 @@ paths:
               $ref: '#/components/headers/X-Response-Hash'
             Content-Language:
               $ref: '#/components/headers/Content-Language'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   /projects/featured:
     get:
@@ -917,8 +926,8 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Projects
-      summary: 'Report a project -- StatusCode: 501 - Not yet implemented'
+        - Moderation
+      summary: 'Report a project'
       parameters:
         - $ref: '#/components/parameters/Uuid'
       requestBody:
@@ -926,7 +935,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProjectReportRequest'
+              $ref: '#/components/schemas/ContentReportRequest'
       responses:
         '204':
           description: 'Project successfully reported'
@@ -934,10 +943,45 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          description: 'Duplicate report'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  '/project/{id}/appeal':
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'Appeal a hidden project'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentAppealRequest'
+      responses:
+        '201':
+          description: 'Appeal submitted'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'Appeal already pending'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   '/project/{id}/recommendations':
     parameters:
@@ -1013,6 +1057,8 @@ paths:
           description: 'Reaction already exists'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
     delete:
       security:
@@ -1181,6 +1227,8 @@ paths:
           $ref: '#/components/responses/NotAcceptable'
         '415':
           $ref: '#/components/responses/UnsupportedMediaType'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   '/comments/{id}/replies':
     parameters:
@@ -1236,28 +1284,66 @@ paths:
           $ref: '#/components/responses/NotAcceptable'
 
   '/comments/{id}/report':
-    parameters:
-      - $ref: '#/components/parameters/Locale'
-
     post:
       security:
         - BearerAuth: []
       tags:
-        - 'Comments'
+        - Moderation
       summary: 'Report a comment'
       parameters:
         - $ref: '#/components/parameters/CommentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentReportRequest'
       responses:
         '204':
-          $ref: '#/components/responses/NoContent'
+          description: 'Comment successfully reported'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
+        '409':
+          description: 'Duplicate report'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  '/comments/{id}/appeal':
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'Appeal a hidden comment'
+      parameters:
+        - $ref: '#/components/parameters/CommentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentAppealRequest'
+      responses:
+        '201':
+          description: 'Appeal submitted'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'Appeal already pending'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   '/comments/{id}/translation':
     parameters:
@@ -1910,6 +1996,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '406':
           $ref: '#/components/responses/NotAcceptable'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   ################################################
   # Studios
@@ -1960,6 +2048,8 @@ paths:
               $ref: '#/components/headers/X-Response-Hash'
             Content-Language:
               $ref: '#/components/headers/Content-Language'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   '/studio/{id}':
     parameters:
@@ -2121,6 +2211,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   '/user/{id}/unfollow':
     delete:
@@ -2140,6 +2232,258 @@ paths:
           $ref: '#/components/responses/NotFound'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  ##############################################
+  # Moderation
+  ###
+
+  '/user/{id}/report':
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'Report a user'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentReportRequest'
+      responses:
+        '204':
+          description: 'User successfully reported'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'Duplicate report'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  '/user/{id}/appeal':
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'Appeal a hidden user profile'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentAppealRequest'
+      responses:
+        '201':
+          description: 'Appeal submitted'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'Appeal already pending'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  '/studio/{id}/report':
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'Report a studio'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentReportRequest'
+      responses:
+        '204':
+          description: 'Studio successfully reported'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'Duplicate report'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  '/studio/{id}/appeal':
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'Appeal a hidden studio'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentAppealRequest'
+      responses:
+        '201':
+          description: 'Appeal submitted'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: 'Appeal already pending'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  '/moderation/reports':
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'List pending reports (admin only)'
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  '/moderation/reports/{id}/resolve':
+    put:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'Resolve a report (accept or reject, admin only)'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolveReportRequest'
+      responses:
+        '200':
+          description: 'Report resolved'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/moderation/appeals':
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'List pending appeals (admin only)'
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: cursor
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppealListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  '/moderation/appeals/{id}/resolve':
+    put:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'Resolve an appeal (approve or reject, admin only)'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResolveAppealRequest'
+      responses:
+        '200':
+          description: 'Appeal resolved'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
 components:
   ##############################################
@@ -2184,6 +2528,9 @@ components:
 
     Forbidden:
       description: 'Insufficient privileges, action not allowed.'
+
+    TooManyRequests:
+      description: 'Too Many Requests'
 
   ##############################################
   # Security Schemes
@@ -2788,20 +3135,6 @@ components:
               example: current password
               description: 'The current password of the user. Required for changing the password.'
 
-    ProjectReportRequest:
-      type: object
-      properties:
-        category:
-          type: string
-          enum:
-            - 'Sexual content'
-            - 'Graphic violence'
-            - 'Hateful or abusive content'
-            - 'Improper content rating'
-            - 'Illegal prescription or other drug'
-            - 'Copycat or impersonation'
-            - 'Other objection'
-
     DryRun:
       type: object
       properties:
@@ -3314,6 +3647,7 @@ components:
             - 'follow'
             - 'comment'
             - 'remix'
+            - 'moderation'
             - 'other'
           description: 'Notification Type'
         seen:
@@ -3819,3 +4153,145 @@ components:
           type: integer
           description: 'Total number of users being followed'
           example: 5
+
+    # Moderation
+
+    ContentReportRequest:
+      type: object
+      required:
+        - category
+      properties:
+        category:
+          type: string
+          description: 'Report reason category'
+          example: 'spam'
+        note:
+          type: string
+          nullable: true
+          maxLength: 5000
+          description: 'Optional additional details'
+          example: 'This content appears to be spam'
+
+    ContentAppealRequest:
+      type: object
+      required:
+        - reason
+      properties:
+        reason:
+          type: string
+          maxLength: 5000
+          description: 'Justification for the appeal'
+          example: 'My content was hidden in error. It does not violate any rules.'
+
+    ResolveReportRequest:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          enum:
+            - 'accept'
+            - 'reject'
+          description: 'Whether to accept or reject the report'
+
+    ResolveAppealRequest:
+      type: object
+      required:
+        - action
+      properties:
+        action:
+          type: string
+          enum:
+            - 'approve'
+            - 'reject'
+          description: 'Whether to approve or reject the appeal'
+        note:
+          type: string
+          nullable: true
+          description: 'Admin note for the appellant'
+
+    ReportResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        reporter_id:
+          type: string
+          nullable: true
+        content_type:
+          type: string
+          example: 'project'
+        content_id:
+          type: string
+          example: '550e8400-e29b-41d4-a716-446655440000'
+        category:
+          type: string
+          example: 'spam'
+        note:
+          type: string
+          nullable: true
+        state:
+          type: integer
+          description: '1=new, 2=accepted, 3=rejected'
+          example: 1
+        reporter_trust_score:
+          type: number
+          format: float
+          example: 3.5
+        created_at:
+          type: string
+          format: date-time
+
+    ReportListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportResponse'
+        next_cursor:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
+
+    AppealResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        content_type:
+          type: string
+          example: 'project'
+        content_id:
+          type: string
+        appellant_id:
+          type: string
+        reason:
+          type: string
+        state:
+          type: integer
+          description: '1=pending, 2=approved, 3=rejected'
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+        resolution_note:
+          type: string
+          nullable: true
+
+    AppealListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppealResponse'
+        next_cursor:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean

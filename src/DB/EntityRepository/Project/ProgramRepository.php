@@ -401,6 +401,9 @@ class ProgramRepository extends ServiceEntityRepository
       if (false !== $program->getPrivate()) {
         continue;
       }
+      if ($program->getAutoHidden()) {
+        continue;
+      }
       if (!$this->app_request->isDebugBuildRequest() && false !== $program->isDebugBuild()) {
         continue;
       }
@@ -525,9 +528,10 @@ class ProgramRepository extends ServiceEntityRepository
 
   private function excludeInvisibleProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
   {
-    return $query_builder->andwhere(
-      $query_builder->expr()->eq($alias.'.visible', $query_builder->expr()->literal(true))
-    );
+    return $query_builder
+      ->andWhere($query_builder->expr()->eq($alias.'.visible', $query_builder->expr()->literal(true)))
+      ->andWhere($query_builder->expr()->eq($alias.'.auto_hidden', $query_builder->expr()->literal(false)))
+    ;
   }
 
   private function excludePrivateProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
@@ -591,6 +595,7 @@ class ProgramRepository extends ServiceEntityRepository
   private function excludeInvisibleProjectsElastica(BoolQuery $qb): void
   {
     $qb->addMust(new Query\Term(['visible' => true]));
+    $qb->addMust(new Query\Term(['auto_hidden' => false]));
   }
 
   private function excludePrivateProjectsElastica(BoolQuery $qb): void

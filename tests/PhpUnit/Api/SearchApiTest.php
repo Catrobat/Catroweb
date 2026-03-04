@@ -12,7 +12,10 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -31,7 +34,11 @@ final class SearchApiTest extends TestCase
   protected function setUp(): void
   {
     $this->facade = $this->createStub(SearchApiFacade::class);
-    $this->search_api = new SearchApi($this->facade);
+    $this->search_api = new SearchApi(
+      $this->facade,
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      $this->createStub(RequestStack::class),
+    );
   }
 
   /**

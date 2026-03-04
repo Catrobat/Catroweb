@@ -98,10 +98,19 @@ class ProjectManager
       return true;
     }
 
-    // featured or approved projects should never be invisible
-    if (!$project->isVisible() && (!$this->featured_repository->isFeatured($project) && !$project->getApproved())) {
+    if (!$project->isVisible() && !$this->featured_repository->isFeatured($project)) {
       return false;
     }
+
+    // Auto-hidden projects (community moderation) are visible to the owner and admins
+    if ($project->getAutoHidden()) {
+      if (null === $user) {
+        return false;
+      }
+
+      return $project->getUser() === $user || $this->security->isGranted('ROLE_ADMIN');
+    }
+
     // SHARE-49: Private projects are visible to everyone.
     // -
     // SHARE-70/SHARE-296: Debug projects must only be seen in the dev env or if explicitly requested

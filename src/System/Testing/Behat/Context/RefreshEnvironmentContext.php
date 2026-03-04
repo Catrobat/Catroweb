@@ -12,6 +12,7 @@ use Doctrine\ORM\Tools\ToolsException;
 use PHPUnit\TextUI\CliArguments\Builder as CliConfigurationBuilder;
 use PHPUnit\TextUI\Configuration\Registry;
 use PHPUnit\TextUI\XmlConfiguration\DefaultConfiguration;
+use Symfony\Component\Dotenv\Dotenv;
 
 class RefreshEnvironmentContext implements Context
 {
@@ -28,6 +29,8 @@ class RefreshEnvironmentContext implements Context
    */
   public static function prepare(): void
   {
+    self::loadEnvironmentVariables();
+
     // Initialize PHPUnit Configuration for use with PHPUnit\Framework\Assert in Behat context
     // PHPUnit 12+ requires the Configuration Registry to be initialized before using Assert
     self::initializePHPUnitConfiguration();
@@ -63,6 +66,22 @@ class RefreshEnvironmentContext implements Context
     $xmlConfiguration = DefaultConfiguration::create();
     // @phpstan-ignore-next-line
     Registry::init($cliConfiguration, $xmlConfiguration);
+  }
+
+  /**
+   * Behat can start without Symfony Runtime bootstrap, so ensure .env/.env.test are loaded.
+   */
+  private static function loadEnvironmentVariables(): void
+  {
+    if (false !== getenv('DATABASE_URL') || isset($_ENV['DATABASE_URL']) || isset($_SERVER['DATABASE_URL'])) {
+      return;
+    }
+
+    putenv('APP_ENV=test');
+    $_ENV['APP_ENV'] = 'test';
+    $_SERVER['APP_ENV'] = 'test';
+
+    (new Dotenv())->bootEnv(dirname(__DIR__, 5).'/.env');
   }
 
   /**

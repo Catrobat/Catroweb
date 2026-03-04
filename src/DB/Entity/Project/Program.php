@@ -164,6 +164,9 @@ class Program implements \Stringable
   protected bool $visible = true;
 
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+  protected bool $auto_hidden = false;
+
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $private = false;
 
   #[ORM\Column(type: Types::STRING, options: ['default' => Flavor::POCKETCODE])]
@@ -236,12 +239,6 @@ class Program implements \Stringable
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $debug_build = false;
 
-  /**
-   * @var Collection<int, ProgramInappropriateReport>
-   */
-  #[ORM\OneToMany(targetEntity: ProgramInappropriateReport::class, mappedBy: 'program', fetch: 'EXTRA_LAZY')]
-  protected Collection $reports;
-
   #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
   protected int $rand = 0;
 
@@ -277,7 +274,6 @@ class Program implements \Stringable
     $this->catrobat_remix_backward_child_relations = new ArrayCollection();
     $this->scratch_remix_parent_relations = new ArrayCollection();
     $this->likes = new ArrayCollection();
-    $this->reports = new ArrayCollection();
     $this->custom_translations = new ArrayCollection();
   }
 
@@ -524,6 +520,18 @@ class Program implements \Stringable
   public function setVisible(bool $visible): Program
   {
     $this->visible = $visible;
+
+    return $this;
+  }
+
+  public function getAutoHidden(): bool
+  {
+    return $this->auto_hidden;
+  }
+
+  public function setAutoHidden(bool $auto_hidden): Program
+  {
+    $this->auto_hidden = $auto_hidden;
 
     return $this;
   }
@@ -789,16 +797,6 @@ class Program implements \Stringable
   public function setNewProgramNotificationMentions(Collection $new_program_notification_mentions): void
   {
     $this->new_program_notification_mentions = $new_program_notification_mentions;
-  }
-
-  public function getReports(): Collection
-  {
-    return $this->reports;
-  }
-
-  public function getReportsCount(): int
-  {
-    return $this->getReports()->count();
   }
 
   /**

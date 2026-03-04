@@ -229,86 +229,6 @@ class CommentsController extends Controller
   }
 
   /**
-   * Operation commentsIdReportPost.
-   *
-   * Report a comment
-   *
-   * @param Request $request the Symfony request to handle
-   *
-   * @return Response the Symfony response
-   */
-  public function commentsIdReportPostAction(Request $request, $id)
-  {
-    // Handle authentication
-    // Authentication 'BearerAuth' required
-    // HTTP bearer authentication required
-    $securityBearerAuth = $request->headers->get('authorization');
-
-    // Read out all input parameter values into variables
-    $accept_language = $request->headers->get('Accept-Language', 'en');
-
-    // Use the default value if no value was provided
-
-    // Deserialize the input values that needs it
-    try {
-      $id = $this->deserialize($id, 'int', 'string');
-      $accept_language = $this->deserialize($accept_language, 'string', 'string');
-    } catch (SerializerRuntimeException $exception) {
-      return $this->createBadRequestResponse($exception->getMessage());
-    }
-
-    // Validate the input values
-    $asserts = [];
-    $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('int');
-    $response = $this->validate($id, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\Type('string');
-    $response = $this->validate($accept_language, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-
-    try {
-      $handler = $this->getApiHandler();
-
-      // Set authentication method 'BearerAuth'
-      $handler->setBearerAuth($securityBearerAuth);
-
-      // Make the call to the business logic
-      $responseCode = 204;
-      $responseHeaders = [];
-
-      $handler->commentsIdReportPost($id, $accept_language, $responseCode, $responseHeaders);
-
-      $message = match ($responseCode) {
-        204 => 'No Content',
-        400 => 'Bad request (Invalid, or missing parameters)',
-        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
-        404 => 'Not found',
-        406 => 'Not acceptable - client must accept application/json as content type',
-        default => '',
-      };
-
-      return new Response(
-        '',
-        $responseCode,
-        array_merge(
-          $responseHeaders,
-          [
-            'X-OpenAPI-Message' => $message,
-          ]
-        )
-      );
-    } catch (\Throwable $fallthrough) {
-      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
-    }
-  }
-
-  /**
    * Operation commentsIdTranslationGet.
    *
    * Translate a comment
@@ -600,6 +520,7 @@ class CommentsController extends Controller
         404 => 'Not found',
         406 => 'Not acceptable - client must accept application/json as content type',
         415 => 'Unsupported Media Type - request must use application/json as content type',
+        429 => 'Too Many Requests',
         default => '',
       };
 

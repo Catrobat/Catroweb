@@ -46,6 +46,10 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('index');
       }
 
+      if ($user->getProfileHidden() && !$this->isGranted('ROLE_ADMIN')) {
+        return $this->redirectToRoute('index');
+      }
+
       $project_count = $this->project_manager->countPublicUserProjects($id);
       $view = 'User/Profile/ProfilePage.html.twig';
     }

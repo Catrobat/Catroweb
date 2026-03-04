@@ -449,6 +449,7 @@ class StudioController extends Controller
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         406 => 'Not acceptable - client must accept application/json as content type',
         422 => 'Unprocessable Entity (Specific error messages will be translated to the locale)',
+        429 => 'Too Many Requests',
         default => '',
       };
 

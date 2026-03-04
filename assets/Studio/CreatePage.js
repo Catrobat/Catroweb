@@ -49,6 +49,15 @@ document.addEventListener('DOMContentLoaded', function () {
       return
     }
 
+    if (response.status === 429) {
+      showValidationMessage(
+        createForm.dataset.transRateLimited ||
+          "You're performing studio actions too quickly. Please wait a moment.",
+        'studio-name',
+      )
+      return
+    }
+
     if (response.status === 422) {
       response.text().then(function (text) {
         handleValidationError(text)

@@ -243,6 +243,7 @@ class AuthenticationController extends Controller
         406 => 'Not acceptable - client must accept application/json as content type',
         415 => 'Unsupported Media Type - request must use application/json as content type',
         422 => 'Unprocessable Entity',
+        429 => 'Too Many Requests',
         default => '',
       };
 

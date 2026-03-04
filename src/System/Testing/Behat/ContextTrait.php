@@ -8,7 +8,6 @@ use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
 use App\DB\Entity\Project\Remix\ProgramRemixRelation;
@@ -516,7 +515,6 @@ trait ContextTrait
     $new_comment->setParentId($parent_id);
     $new_comment->setIsDeleted($is_deleted);
     $new_comment->setUsername($user->getUserIdentifier());
-    $new_comment->setIsReported((bool) ($config['reported'] ?? false));
     $new_comment->setText($config['text']);
 
     if (isset($config['id'])) {
@@ -527,8 +525,8 @@ trait ContextTrait
         (new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
 
       $this->getManager()->getConnection()->executeStatement(
-        'INSERT INTO user_comment (id, user_id, programId, uploadDate, text, username, isReported, parent_id, is_deleted)
-         VALUES (:id, :user_id, :program_id, :upload_date, :text, :username, :is_reported, :parent_id, :is_deleted)',
+        'INSERT INTO user_comment (id, user_id, programId, uploadDate, text, username, parent_id, is_deleted)
+         VALUES (:id, :user_id, :program_id, :upload_date, :text, :username, :parent_id, :is_deleted)',
         [
           'id' => $forced_id,
           'user_id' => $user->getId(),
@@ -536,7 +534,6 @@ trait ContextTrait
           'upload_date' => $upload_date_str,
           'text' => (string) $config['text'],
           'username' => $user->getUserIdentifier(),
-          'is_reported' => (int) (bool) ($config['reported'] ?? false),
           'parent_id' => $parent_id,
           'is_deleted' => (int) $is_deleted,
         ]
@@ -553,32 +550,6 @@ trait ContextTrait
     }
 
     return $new_comment;
-  }
-
-  /**
-   * @throws \Exception
-   */
-  public function insertProjectReport(array $config, bool $andFlush = true): ProgramInappropriateReport
-  {
-    /** @var Program $project */
-    $project = $this->getProjectManager()->find($config['project_id']);
-
-    /** @var User|null $user */
-    $user = $this->getUserManager()->find($config['user_id']);
-
-    $new_report = new ProgramInappropriateReport();
-    $new_report->setCategory($config['category']);
-    $new_report->setProgram($project);
-    $new_report->setReportingUser($user);
-    $new_report->setTime(new \DateTime($config['time'], new \DateTimeZone('UTC')));
-    $new_report->setNote($config['note']);
-    $this->getManager()->persist($new_report);
-
-    if ($andFlush) {
-      $this->getManager()->flush();
-    }
-
-    return $new_report;
   }
 
   /**

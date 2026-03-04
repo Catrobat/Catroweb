@@ -37,6 +37,9 @@ class Studio
   #[ORM\Column(name: 'allow_comments', type: Types::BOOLEAN, options: ['default' => true])]
   protected bool $allow_comments = true;
 
+  #[ORM\Column(name: 'auto_hidden', type: Types::BOOLEAN, options: ['default' => false])]
+  protected bool $auto_hidden = false;
+
   #[ORM\Column(name: 'cover_path', type: Types::STRING, length: 300, nullable: true)]
   protected ?string $cover_path = null;
 
@@ -134,6 +137,18 @@ class Studio
   public function setAllowComments(bool $allow_comments): Studio
   {
     $this->allow_comments = $allow_comments;
+
+    return $this;
+  }
+
+  public function getAutoHidden(): bool
+  {
+    return $this->auto_hidden;
+  }
+
+  public function setAutoHidden(bool $auto_hidden): Studio
+  {
+    $this->auto_hidden = $auto_hidden;
 
     return $this;
   }

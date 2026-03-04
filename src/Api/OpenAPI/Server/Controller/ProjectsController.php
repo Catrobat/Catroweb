@@ -567,6 +567,7 @@ class ProjectsController extends Controller
         406 => 'Not acceptable - client must accept application/json as content type',
         409 => 'Reaction already exists',
         422 => 'Unprocessable Entity',
+        429 => 'Too Many Requests',
         default => '',
       };
 
@@ -905,97 +906,6 @@ class ProjectsController extends Controller
           $responseHeaders,
           [
             'Content-Type' => $responseFormat,
-            'X-OpenAPI-Message' => $message,
-          ]
-        )
-      );
-    } catch (\Throwable $fallthrough) {
-      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
-    }
-  }
-
-  /**
-   * Operation projectIdReportPost.
-   *
-   * Report a project -- StatusCode: 501 - Not yet implemented
-   *
-   * @param Request $request the Symfony request to handle
-   *
-   * @return Response the Symfony response
-   */
-  public function projectIdReportPostAction(Request $request, $id)
-  {
-    // Make sure that the client is providing something that we can consume
-    $consumes = ['application/json'];
-    if (!static::isContentTypeAllowed($request, $consumes)) {
-      // We can't consume the content that the client is sending us
-      return new Response('', 415);
-    }
-
-    // Handle authentication
-    // Authentication 'BearerAuth' required
-    // HTTP bearer authentication required
-    $securityBearerAuth = $request->headers->get('authorization');
-
-    // Read out all input parameter values into variables
-    $project_report_request = $request->getContent();
-
-    // Use the default value if no value was provided
-
-    // Deserialize the input values that needs it
-    try {
-      $id = $this->deserialize($id, 'string', 'string');
-      $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $project_report_request = $this->deserialize($project_report_request, 'OpenAPI\Server\Model\ProjectReportRequest', $inputFormat);
-    } catch (SerializerRuntimeException $exception) {
-      return $this->createBadRequestResponse($exception->getMessage());
-    }
-
-    // Validate the input values
-    $asserts = [];
-    $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
-    $response = $this->validate($id, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-    $asserts = [];
-    $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ProjectReportRequest');
-    $asserts[] = new Assert\Valid();
-    $response = $this->validate($project_report_request, $asserts);
-    if ($response instanceof Response) {
-      return $response;
-    }
-
-    try {
-      $handler = $this->getApiHandler();
-
-      // Set authentication method 'BearerAuth'
-      $handler->setBearerAuth($securityBearerAuth);
-
-      // Make the call to the business logic
-      $responseCode = 204;
-      $responseHeaders = [];
-
-      $handler->projectIdReportPost($id, $project_report_request, $responseCode, $responseHeaders);
-
-      $message = match ($responseCode) {
-        204 => 'Project successfully reported',
-        400 => 'Bad request (Invalid, or missing parameters)',
-        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
-        404 => 'Not found',
-        406 => 'Not acceptable - client must accept application/json as content type',
-        default => '',
-      };
-
-      return new Response(
-        '',
-        $responseCode,
-        array_merge(
-          $responseHeaders,
-          [
             'X-OpenAPI-Message' => $message,
           ]
         )
@@ -1510,6 +1420,7 @@ class ProjectsController extends Controller
         403 => 'Insufficient privileges, action not allowed.',
         406 => 'Not acceptable - client must accept application/json as content type',
         422 => 'Upload Error',
+        429 => 'Too Many Requests',
         default => '',
       };
 

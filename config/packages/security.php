@@ -308,6 +308,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/moderation/',
+          'roles' => 'ROLE_ADMIN',
+          'methods' => ['GET', 'PUT'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api',
           'roles' => 'IS_AUTHENTICATED_FULLY',
         ],
@@ -342,7 +348,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
       ],
       'role_hierarchy' => [
+        'ROLE_MODERATOR' => [
+          'ROLE_USER',
+        ],
         'ROLE_ADMIN' => [
+          'ROLE_MODERATOR',
           'ROLE_USER',
           'ROLE_SONATA_ADMIN',
         ],

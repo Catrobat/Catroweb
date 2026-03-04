@@ -62,6 +62,7 @@ class UserAdmin extends AbstractAdmin
       ->add('email')
       ->add('enabled', null, ['editable' => true])
       ->add('verified', null, ['editable' => true])
+      ->add('approved', null, ['editable' => true, 'label' => 'Whitelisted'])
       ->add('createdAt')
       ->add('lastLogin')
     ;
@@ -82,6 +83,7 @@ class UserAdmin extends AbstractAdmin
       ->add('username')
       ->add('email')
       ->add('verified')
+      ->add('approved', null, ['label' => 'Whitelisted'])
       ->add('createdAt')
       ->add('lastLogin')
     ;
@@ -94,6 +96,7 @@ class UserAdmin extends AbstractAdmin
       ->add('username')
       ->add('email')
       ->add('verified')
+      ->add('approved', null, ['label' => 'Whitelisted'])
     ;
   }
 
@@ -105,6 +108,7 @@ class UserAdmin extends AbstractAdmin
       ->add('username')
       ->add('email')
       ->add('verified')
+      ->add('approved', null, ['label' => 'Whitelisted'])
       ->add('plainPassword', PasswordType::class, [
         'required' => (!$this->hasSubject() || null === $this->getSubject()->getId()),
       ])

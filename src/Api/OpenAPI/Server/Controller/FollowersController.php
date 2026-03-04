@@ -101,6 +101,7 @@ class FollowersController extends Controller
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         404 => 'Not found',
         422 => 'Unprocessable Entity',
+        429 => 'Too Many Requests',
         default => '',
       };
 
@@ -321,6 +322,7 @@ class FollowersController extends Controller
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         404 => 'Not found',
         422 => 'Unprocessable Entity',
+        429 => 'Too Many Requests',
         default => '',
       };
 

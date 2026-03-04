@@ -6,6 +6,7 @@ namespace App\System\Commands\Reset;
 
 use App\Storage\FileHelper;
 use App\System\Commands\Helpers\CommandHelper;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -17,8 +18,10 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 #[AsCommand(name: 'catrobat:purge', description: 'Purge all database and file data')]
 class PurgeCommand extends Command
 {
-  public function __construct(private readonly ParameterBagInterface $parameter_bag)
-  {
+  public function __construct(
+    private readonly ParameterBagInterface $parameter_bag,
+    private readonly EntityManagerInterface $entity_manager,
+  ) {
     parent::__construct();
   }
 
@@ -79,15 +82,9 @@ class PurgeCommand extends Command
     FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.template.dir'));
     $progress->advance();
 
-    $progress->setMessage('Dropping Database');
-    CommandHelper::executeShellCommand(
-      ['bin/console', 'doctrine:schema:drop', '--force'], [], 'Dropping database', $output
-    );
+    $progress->setMessage('Dropping all tables');
+    $this->dropAllTables($output);
     $progress->advance();
-
-    $progress->setMessage('Dropping migrations');
-    CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:drop:migration'], [], 'Dropping the doctrine_migration_versions table', $output);
     $progress->advance();
 
     $progress->setMessage('(Re-) Creating Database; executing migrations');
@@ -102,5 +99,26 @@ class PurgeCommand extends Command
     $output->writeln('');
 
     return 0;
+  }
+
+  private function dropAllTables(OutputInterface $output): void
+  {
+    $connection = $this->entity_manager->getConnection();
+    $schema_manager = $connection->createSchemaManager();
+    $tables = $schema_manager->listTableNames();
+
+    if ([] === $tables) {
+      $output->writeln('No tables to drop.');
+
+      return;
+    }
+
+    $connection->executeStatement('SET FOREIGN_KEY_CHECKS = 0');
+    foreach ($tables as $table) {
+      $connection->executeStatement('DROP TABLE IF EXISTS '.$connection->quoteIdentifier($table));
+    }
+    $connection->executeStatement('SET FOREIGN_KEY_CHECKS = 1');
+
+    $output->writeln(sprintf('Dropped %d tables.', count($tables)));
   }
 }

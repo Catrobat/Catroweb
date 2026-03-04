@@ -63,8 +63,11 @@
           </div>
         {% endif %}
 
-        {% if (isAdmin or not app.user or comment.user_id != app.user.id) and (not comment.is_deleted) %}
+        {% if (isAdmin or not app.user or comment.user_id != app.user.id) and (not comment.is_deleted) and not comment.user_approved|default(false) %}
           <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
+             data-content-type="comment"
+             data-content-id="{{ comment.id }}"
+             data-report-url="/api/comments/{{ comment.id }}/report"
              data-bs-toggle="tooltip" title="{{ 'project.report'|trans({}, 'catroweb') }}">
             <i class="material-icons">report</i>
           </a>

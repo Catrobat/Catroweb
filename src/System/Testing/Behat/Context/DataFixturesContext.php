@@ -7,6 +7,8 @@ namespace App\System\Testing\Behat\Context;
 use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
 use App\DB\Entity\MediaLibrary\MediaFileType;
+use App\DB\Entity\Moderation\ContentAppeal;
+use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
@@ -29,9 +31,12 @@ use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
+use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\Notifications\NewProgramNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
+use App\DB\Enum\AppealState;
+use App\DB\Enum\ReportState;
 use App\DB\Generator\MyUuidGenerator;
 use App\System\Commands\DBUpdater\UpdateAchievementsCommand;
 use App\System\Commands\Helpers\CommandHelper;
@@ -524,7 +529,8 @@ class DataFixturesContext implements Context
     ];
     $this->insertProject($config);
     $this->getFileRepository()->saveProjectZipFile(
-      new File($this->FIXTURES_DIR.'test.catrobat'), $id
+      new File($this->FIXTURES_DIR.'test.catrobat'),
+      $id
     );
   }
 
@@ -570,7 +576,8 @@ class DataFixturesContext implements Context
     foreach ($project_tags as $project_tag) {
       /* @var Tag $project_tag */
       Assert::assertTrue(
-        in_array($project_tag->getInternalTitle(), $tags, true), 'The tag is not found!'
+        in_array($project_tag->getInternalTitle(), $tags, true),
+        'The tag is not found!'
       );
     }
   }
@@ -654,24 +661,6 @@ class DataFixturesContext implements Context
   {
     foreach ($table->getHash() as $config) {
       $this->insertUserComment($config, false);
-    }
-
-    $this->getManager()->flush();
-  }
-
-  // -------------------------------------------------------------------------------------------------------------------
-  //  Reports
-  // -------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * @Given /^there are inappropriate reports:$/
-   *
-   * @throws \Exception
-   */
-  public function thereAreInappropriateReports(TableNode $table): void
-  {
-    foreach ($table->getHash() as $config) {
-      $this->insertProjectReport($config, false);
     }
 
     $this->getManager()->flush();
@@ -941,6 +930,15 @@ class DataFixturesContext implements Context
           $child_project = $this->getProjectManager()->find($notification['child_project']);
           $to_create = new RemixNotification($user, $parent_project->getUser(), $parent_project, $child_project);
           break;
+        case 'moderation':
+          $to_create = new ModerationNotification(
+            $user,
+            $notification['content_type'] ?? 'project',
+            $notification['content_id'] ?? null,
+            $notification['action'] ?? 'auto_hidden',
+            $notification['message'],
+          );
+          break;
         default:
           $to_create = new CatroNotification($user, $notification['title'], $notification['message']);
           break;
@@ -1019,7 +1017,6 @@ class DataFixturesContext implements Context
           $temp_comment->setText('This is a comment');
           $temp_comment->setProgram($project);
           $temp_comment->setUploadDate(date_create());
-          $temp_comment->setIsReported(false);
           $em->persist($temp_comment);
           $to_create = new CommentNotification($project->getUser(), $temp_comment);
           $em->persist($to_create);
@@ -1060,6 +1057,90 @@ class DataFixturesContext implements Context
   }
 
   /**
+   * @Given /^the projects are approved:$/
+   */
+  public function theProjectsAreApproved(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      /** @var Program $project */
+      $project = $this->getProjectManager()->find($config['id']);
+      $project->setApproved(true);
+    }
+
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^the projects are auto-hidden:$/
+   */
+  public function theProjectsAreAutoHidden(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      /** @var Program $project */
+      $project = $this->getProjectManager()->find($config['id']);
+      $project->setAutoHidden(true);
+    }
+
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^the comments are auto-hidden:$/
+   */
+  public function theCommentsAreAutoHidden(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      /** @var UserComment $comment */
+      $comment = $this->getManager()->getRepository(UserComment::class)->find((int) $config['id']);
+      $comment->setAutoHidden(true);
+    }
+
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^the users are approved:$/
+   */
+  public function theUsersAreApproved(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      /** @var User $user */
+      $user = $this->getUserManager()->findUserByUsername($config['name']);
+      $user->setApproved(true);
+    }
+
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^the users are unverified:$/
+   */
+  public function theUsersAreUnverified(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      /** @var User $user */
+      $user = $this->getUserManager()->findUserByUsername($config['name']);
+      $user->setVerified(false);
+    }
+
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^the users are profile-hidden:$/
+   */
+  public function theUsersAreProfileHidden(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      /** @var User $user */
+      $user = $this->getUserManager()->findUserByUsername($config['name']);
+      $user->setProfileHidden(true);
+    }
+
+    $this->getManager()->flush();
+  }
+
+  /**
    * @Then /^there should be "([^"]*)" users in the database$/
    */
   public function thereShouldBeUsersInTheDatabase(string $number_of_users): void
@@ -1090,7 +1171,8 @@ class DataFixturesContext implements Context
         ->setAllowComments($allowComments)
         ->setIsPublic($isPublic)
         ->setIsEnabled($isEnabled)
-        ->setCreatedOn(isset($config['created_on']) ?
+        ->setCreatedOn(
+          isset($config['created_on']) ?
             new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
             new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
         )
@@ -1121,7 +1203,8 @@ class DataFixturesContext implements Context
         ->setUser($user)
         ->setStudio($studio)
         ->setType('user')
-        ->setCreatedOn(isset($config['created_on']) ?
+        ->setCreatedOn(
+          isset($config['created_on']) ?
           new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
           new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
         )
@@ -1135,7 +1218,8 @@ class DataFixturesContext implements Context
         ->setRole($config['role'] ?? 'member')
         ->setActivity($activity)
         ->setStatus($config['status'] ?? 'active')
-        ->setCreatedOn(isset($config['created_on']) ?
+        ->setCreatedOn(
+          isset($config['created_on']) ?
           new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
           new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
         )
@@ -1297,7 +1381,9 @@ class DataFixturesContext implements Context
   public function iRunTheUpdateAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements'
+      ['bin/console', 'catrobat:update:achievements'],
+      [],
+      'Creating Achievements'
     );
   }
 
@@ -1307,7 +1393,9 @@ class DataFixturesContext implements Context
   public function iRunTheUpdateTagsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:tags'], [], 'Creating Tags'
+      ['bin/console', 'catrobat:update:tags'],
+      [],
+      'Creating Tags'
     );
   }
 
@@ -1317,7 +1405,9 @@ class DataFixturesContext implements Context
   public function iRunTheUpdateExtensionsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:extensions'], [], 'Creating Extensions'
+      ['bin/console', 'catrobat:update:extensions'],
+      [],
+      'Creating Extensions'
     );
   }
 
@@ -1327,7 +1417,9 @@ class DataFixturesContext implements Context
   public function iRunTheUpdateFlavorsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:flavors'], [], 'Creating Flavors'
+      ['bin/console', 'catrobat:update:flavors'],
+      [],
+      'Creating Flavors'
     );
   }
 
@@ -1337,7 +1429,9 @@ class DataFixturesContext implements Context
   public function iRunTheCronJobsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:cronjob'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:cronjob'],
+      [],
+      'Updating user achievements'
     );
   }
 
@@ -1347,7 +1441,9 @@ class DataFixturesContext implements Context
   public function iRunTheAddBronzeUserAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:bronze_user'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:bronze_user'],
+      [],
+      'Updating user achievements'
     );
   }
 
@@ -1357,7 +1453,9 @@ class DataFixturesContext implements Context
   public function iRunTheAddSilverUserAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:silver_user'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:silver_user'],
+      [],
+      'Updating user achievements'
     );
   }
 
@@ -1367,7 +1465,9 @@ class DataFixturesContext implements Context
   public function iRunTheAddGoldUserAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:gold_user'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:gold_user'],
+      [],
+      'Updating user achievements'
     );
   }
 
@@ -1377,7 +1477,9 @@ class DataFixturesContext implements Context
   public function iRunTheAddDiamondUserAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:diamond_user'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:diamond_user'],
+      [],
+      'Updating user achievements'
     );
   }
 
@@ -1387,7 +1489,9 @@ class DataFixturesContext implements Context
   public function iRunTheAddVerifiedDeveloperSilverAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:verified_developer_silver'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_silver'],
+      [],
+      'Updating user achievements'
     );
   }
 
@@ -1397,7 +1501,9 @@ class DataFixturesContext implements Context
   public function iRunTheAddVerifiedDeveloperGoldAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:verified_developer_gold'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer_gold'],
+      [],
+      'Updating user achievements'
     );
   }
 
@@ -1407,7 +1513,9 @@ class DataFixturesContext implements Context
   public function iRunTheAddPerfectProfileAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:perfect_profile'], [], 'Updating user achievements'
+      ['bin/console', 'catrobat:workflow:achievement:perfect_profile'],
+      [],
+      'Updating user achievements'
     );
   }
 
@@ -1417,7 +1525,8 @@ class DataFixturesContext implements Context
   public function iRunTheAddTranslationAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:achievement:translation'], []
+      ['bin/console', 'catrobat:workflow:achievement:translation'],
+      []
     );
   }
 
@@ -1427,7 +1536,9 @@ class DataFixturesContext implements Context
   public function iRunTheRefreshProjectExtensionsCommand(): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:workflow:project:refresh_extensions'], [], 'Refreshing project extensions'
+      ['bin/console', 'catrobat:workflow:project:refresh_extensions'],
+      [],
+      'Refreshing project extensions'
     );
   }
 
@@ -1568,12 +1679,14 @@ class DataFixturesContext implements Context
       $provider = $translation->getProvider();
       $usage_count = $translation->getUsageCount();
 
-      $matching_row = array_filter($table_rows,
+      $matching_row = array_filter(
+        $table_rows,
         static fn ($row): bool => $comment_id == $row['comment_id']
           && $source_language == $row['source_language']
           && $target_language == $row['target_language']
           && $provider == $row['provider']
-          && $usage_count == $row['usage_count']);
+          && $usage_count == $row['usage_count']
+      );
 
       Assert::assertEquals(1, count($matching_row), "row not found with comment id: {$comment_id}");
     }
@@ -1627,12 +1740,14 @@ class DataFixturesContext implements Context
       $description = $translation->getDescription();
       $credit = $translation->getCredits();
 
-      $matching_row = array_filter($table_rows,
+      $matching_row = array_filter(
+        $table_rows,
         static fn ($row): bool => $project_id == $row['project_id']
           && $language == $row['language']
           && $name == $row['name']
           && $description == $row['description']
-          && $credit == $row['credit']);
+          && $credit == $row['credit']
+      );
 
       Assert::assertEquals(1, count($matching_row), 'row not found: '.$project_id);
     }
@@ -1714,5 +1829,373 @@ class DataFixturesContext implements Context
     $this->getManager()->refresh($statistic);
     Assert::assertSame($user_count, $statistic->getUsers(), 'Expected user count check failed');
     Assert::assertSame($project_count, $statistic->getProjects(), 'Expected project count check failed');
+  }
+
+  // ---------------------------------------------------------------------------
+  // Moderation fixture steps
+  // ---------------------------------------------------------------------------
+
+  /**
+   * @Given /^the project "([^"]*)" is auto-hidden$/
+   */
+  public function theProjectIsAutoHidden(string $project_name): void
+  {
+    $project = $this->getProjectManager()->findOneByName($project_name);
+    Assert::assertNotNull($project, sprintf('Project "%s" not found', $project_name));
+    $project->setAutoHidden(true);
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^the comment (\d+) is auto-hidden$/
+   */
+  public function theCommentIsAutoHidden(int $comment_id): void
+  {
+    $comment = $this->getManager()->find(UserComment::class, $comment_id);
+    Assert::assertNotNull($comment, sprintf('Comment %d not found', $comment_id));
+    $comment->setAutoHidden(true);
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^the user "([^"]*)" profile is hidden$/
+   */
+  public function theUserProfileIsHidden(string $username): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertNotNull($user, sprintf('User "%s" not found', $username));
+    $user->setProfileHidden(true);
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^the studio "([^"]*)" is auto-hidden$/
+   */
+  public function theStudioIsAutoHidden(string $studio_name): void
+  {
+    $repo = $this->getManager()->getRepository(Studio::class);
+    $studio = $repo->findOneBy(['name' => $studio_name]);
+    Assert::assertNotNull($studio, sprintf('Studio "%s" not found', $studio_name));
+    $studio->setAutoHidden(true);
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are moderation reports:$/
+   *
+   * Supported columns:
+   *   id, reporter, content_type, content_id, category, note,
+   *   state, reporter_trust_score, created_at, resolved_at, resolved_by
+   *
+   * @throws \Exception
+   */
+  public function thereAreModerationReports(TableNode $table): void
+  {
+    $em = $this->getManager();
+
+    foreach ($table->getHash() as $config) {
+      $forced_id = (isset($config['id']) && '' !== trim((string) $config['id'])) ? (int) $config['id'] : null;
+      if (isset($config['reporter']) && '' !== trim((string) $config['reporter'])) {
+        $reporter = $this->findUserByUsernameOrId((string) $config['reporter']);
+        Assert::assertNotNull($reporter, sprintf('Reporter "%s" not found', $config['reporter']));
+      } else {
+        $reporter = null;
+      }
+
+      $content_type = strtolower((string) ($config['content_type'] ?? 'project'));
+      $content_id = (string) ($config['content_id'] ?? '');
+      $category = (string) ($config['category'] ?? 'spam');
+      $note = $config['note'] ?? null;
+      $state = $this->parseReportState((string) ($config['state'] ?? 'new'));
+      $trust_score = isset($config['reporter_trust_score']) ? (float) $config['reporter_trust_score'] : 1.0;
+      $resolution = $this->parseResolutionFields($config);
+      $created_at = $resolution['created_at'];
+      $resolved_at = $resolution['resolved_at'];
+      $resolved_by = $resolution['resolved_by'];
+
+      if (null !== $forced_id) {
+        $em->getConnection()->executeStatement(
+          'INSERT INTO content_report (
+            id, reporter_id, content_type, content_id, category, note, state,
+            reporter_trust_score, created_at, resolved_at, resolved_by_id
+          ) VALUES (
+            :id, :reporter_id, :content_type, :content_id, :category, :note, :state,
+            :reporter_trust_score, :created_at, :resolved_at, :resolved_by_id
+          )',
+          [
+            'id' => $forced_id,
+            'reporter_id' => $reporter?->getId(),
+            'content_type' => $content_type,
+            'content_id' => $content_id,
+            'category' => $category,
+            'note' => $note,
+            'state' => $state,
+            'reporter_trust_score' => $trust_score,
+            'created_at' => $created_at->format('Y-m-d H:i:s'),
+            'resolved_at' => $resolved_at?->format('Y-m-d H:i:s'),
+            'resolved_by_id' => $resolved_by?->getId(),
+          ]
+        );
+
+        continue;
+      }
+
+      $report = new ContentReport();
+      if ($reporter instanceof User) {
+        $report->setReporter($reporter);
+      }
+      $report->setContentType($content_type);
+      $report->setContentId($content_id);
+      $report->setCategory($category);
+      $report->setNote($note);
+      $report->setState($state);
+      $report->setReporterTrustScore($trust_score);
+      $report->setCreatedAt($created_at);
+      if ($resolved_at instanceof \DateTime) {
+        $report->setResolvedAt($resolved_at);
+      }
+      if ($resolved_by instanceof User) {
+        $report->setResolvedBy($resolved_by);
+      }
+
+      $em->persist($report);
+    }
+
+    $em->flush();
+  }
+
+  /**
+   * @Given /^there are moderation appeals:$/
+   *
+   * Supported columns:
+   *   id, appellant, content_type, content_id, reason, state,
+   *   created_at, resolved_at, resolved_by, resolution_note
+   *
+   * @throws \Exception
+   */
+  public function thereAreModerationAppeals(TableNode $table): void
+  {
+    $em = $this->getManager();
+
+    foreach ($table->getHash() as $config) {
+      $forced_id = (isset($config['id']) && '' !== trim((string) $config['id'])) ? (int) $config['id'] : null;
+
+      $appellant_identifier = (string) ($config['appellant'] ?? '');
+      $appellant = $this->findUserByUsernameOrId($appellant_identifier);
+      Assert::assertNotNull($appellant, sprintf('Appellant "%s" not found', $appellant_identifier));
+
+      $content_type = strtolower((string) ($config['content_type'] ?? 'project'));
+      $content_id = (string) ($config['content_id'] ?? '');
+      $reason = (string) ($config['reason'] ?? 'Please review');
+      $state = $this->parseAppealState((string) ($config['state'] ?? 'pending'));
+      $resolution_note = $config['resolution_note'] ?? null;
+      $resolution = $this->parseResolutionFields($config);
+      $created_at = $resolution['created_at'];
+      $resolved_at = $resolution['resolved_at'];
+      $resolved_by = $resolution['resolved_by'];
+
+      if (null !== $forced_id) {
+        $em->getConnection()->executeStatement(
+          'INSERT INTO content_appeal (
+            id, content_type, content_id, appellant_id, reason, state,
+            created_at, resolved_at, resolved_by_id, resolution_note
+          ) VALUES (
+            :id, :content_type, :content_id, :appellant_id, :reason, :state,
+            :created_at, :resolved_at, :resolved_by_id, :resolution_note
+          )',
+          [
+            'id' => $forced_id,
+            'content_type' => $content_type,
+            'content_id' => $content_id,
+            'appellant_id' => $appellant->getId(),
+            'reason' => $reason,
+            'state' => $state,
+            'created_at' => $created_at->format('Y-m-d H:i:s'),
+            'resolved_at' => $resolved_at?->format('Y-m-d H:i:s'),
+            'resolved_by_id' => $resolved_by?->getId(),
+            'resolution_note' => $resolution_note,
+          ]
+        );
+
+        continue;
+      }
+
+      $appeal = new ContentAppeal();
+      $appeal->setAppellant($appellant);
+      $appeal->setContentType($content_type);
+      $appeal->setContentId($content_id);
+      $appeal->setReason($reason);
+      $appeal->setState($state);
+      $appeal->setResolutionNote($resolution_note);
+      $appeal->setCreatedAt($created_at);
+      if ($resolved_at instanceof \DateTime) {
+        $appeal->setResolvedAt($resolved_at);
+      }
+      if ($resolved_by instanceof User) {
+        $appeal->setResolvedBy($resolved_by);
+      }
+
+      $em->persist($appeal);
+    }
+
+    $em->flush();
+  }
+
+  /**
+   * @Then /^moderation report (\d+) should have state "([^"]*)"$/
+   */
+  public function moderationReportShouldHaveState(int $report_id, string $expected_state): void
+  {
+    $report = $this->getManager()->find(ContentReport::class, $report_id);
+    Assert::assertNotNull($report, sprintf('Report %d not found', $report_id));
+    Assert::assertSame($this->parseReportState($expected_state), $report->getState());
+  }
+
+  /**
+   * @Then /^moderation appeal (\d+) should have state "([^"]*)"$/
+   */
+  public function moderationAppealShouldHaveState(int $appeal_id, string $expected_state): void
+  {
+    $appeal = $this->getManager()->find(ContentAppeal::class, $appeal_id);
+    Assert::assertNotNull($appeal, sprintf('Appeal %d not found', $appeal_id));
+    Assert::assertSame($this->parseAppealState($expected_state), $appeal->getState());
+  }
+
+  /**
+   * @Then /^moderation reports for "([^"]*)" "([^"]*)" should all have state "([^"]*)"$/
+   */
+  public function moderationReportsForContentShouldHaveState(string $content_type, string $content_id, string $expected_state): void
+  {
+    $reports = $this->getManager()->getRepository(ContentReport::class)->findBy([
+      'content_type' => strtolower($content_type),
+      'content_id' => $content_id,
+    ]);
+    Assert::assertNotEmpty($reports, sprintf('No reports found for %s %s', $content_type, $content_id));
+
+    $expected = $this->parseReportState($expected_state);
+    foreach ($reports as $report) {
+      Assert::assertSame($expected, $report->getState());
+    }
+  }
+
+  /**
+   * @Then /^moderation appeals for "([^"]*)" "([^"]*)" should all have state "([^"]*)"$/
+   */
+  public function moderationAppealsForContentShouldHaveState(string $content_type, string $content_id, string $expected_state): void
+  {
+    $appeals = $this->getManager()->getRepository(ContentAppeal::class)->findBy([
+      'content_type' => strtolower($content_type),
+      'content_id' => $content_id,
+    ]);
+    Assert::assertNotEmpty($appeals, sprintf('No appeals found for %s %s', $content_type, $content_id));
+
+    $expected = $this->parseAppealState($expected_state);
+    foreach ($appeals as $appeal) {
+      Assert::assertSame($expected, $appeal->getState());
+    }
+  }
+
+  /**
+   * @Then /^the project "([^"]*)" should be (hidden|visible)$/
+   */
+  public function theProjectShouldBeHiddenOrVisible(string $project_identifier, string $visibility): void
+  {
+    $project = ctype_digit($project_identifier)
+      ? $this->getProjectManager()->find($project_identifier)
+      : $this->getProjectManager()->findOneByName($project_identifier);
+
+    Assert::assertNotNull($project, sprintf('Project "%s" not found', $project_identifier));
+    Assert::assertSame('hidden' === $visibility, $project->getAutoHidden());
+  }
+
+  /**
+   * @Then /^the comment (\d+) should be (hidden|visible)$/
+   */
+  public function theCommentShouldBeHiddenOrVisible(int $comment_id, string $visibility): void
+  {
+    $comment = $this->getManager()->find(UserComment::class, $comment_id);
+    Assert::assertNotNull($comment, sprintf('Comment %d not found', $comment_id));
+    Assert::assertSame('hidden' === $visibility, $comment->getAutoHidden());
+  }
+
+  /**
+   * @Then /^the user "([^"]*)" profile should be (hidden|visible)$/
+   */
+  public function theUserProfileShouldBeHiddenOrVisible(string $user_identifier, string $visibility): void
+  {
+    $user = $this->findUserByUsernameOrId($user_identifier);
+    Assert::assertNotNull($user, sprintf('User "%s" not found', $user_identifier));
+    Assert::assertSame('hidden' === $visibility, $user->getProfileHidden());
+  }
+
+  /**
+   * @Then /^the studio "([^"]*)" should be (hidden|visible)$/
+   */
+  public function theStudioShouldBeHiddenOrVisible(string $studio_identifier, string $visibility): void
+  {
+    $repo = $this->getManager()->getRepository(Studio::class);
+    $studio = $repo->find($studio_identifier);
+    if (!$studio instanceof Studio) {
+      $studio = $repo->findOneBy(['name' => $studio_identifier]);
+    }
+
+    Assert::assertNotNull($studio, sprintf('Studio "%s" not found', $studio_identifier));
+    Assert::assertSame('hidden' === $visibility, $studio->getAutoHidden());
+  }
+
+  private function findUserByUsernameOrId(string $identifier): ?User
+  {
+    $user = $this->getUserManager()->findUserByUsername($identifier);
+    if ($user instanceof User) {
+      return $user;
+    }
+
+    return $this->getUserManager()->find($identifier);
+  }
+
+  /**
+   * @param array<string, mixed> $config
+   *
+   * @return array{created_at: \DateTime, resolved_at: ?\DateTime, resolved_by: ?User}
+   *
+   * @throws \Exception
+   */
+  private function parseResolutionFields(array $config): array
+  {
+    $created_at = isset($config['created_at']) && '' !== trim((string) $config['created_at'])
+      ? new \DateTime($config['created_at'], new \DateTimeZone('UTC'))
+      : new \DateTime('now', new \DateTimeZone('UTC'));
+    $resolved_at = isset($config['resolved_at']) && '' !== trim((string) $config['resolved_at'])
+      ? new \DateTime($config['resolved_at'], new \DateTimeZone('UTC'))
+      : null;
+
+    if (isset($config['resolved_by']) && '' !== trim((string) $config['resolved_by'])) {
+      $resolved_by = $this->findUserByUsernameOrId((string) $config['resolved_by']);
+      Assert::assertNotNull($resolved_by, sprintf('Resolved-by user "%s" not found', $config['resolved_by']));
+    } else {
+      $resolved_by = null;
+    }
+
+    return ['created_at' => $created_at, 'resolved_at' => $resolved_at, 'resolved_by' => $resolved_by];
+  }
+
+  private function parseReportState(string $state): int
+  {
+    return match (strtolower(trim($state))) {
+      '', '1', 'new' => ReportState::New->value,
+      '2', 'accepted' => ReportState::Accepted->value,
+      '3', 'rejected' => ReportState::Rejected->value,
+      default => throw new \InvalidArgumentException(sprintf('Unknown report state "%s"', $state)),
+    };
+  }
+
+  private function parseAppealState(string $state): int
+  {
+    return match (strtolower(trim($state))) {
+      '', '1', 'pending' => AppealState::Pending->value,
+      '2', 'approved' => AppealState::Approved->value,
+      '3', 'rejected' => AppealState::Rejected->value,
+      default => throw new \InvalidArgumentException(sprintf('Unknown appeal state "%s"', $state)),
+    };
   }
 }

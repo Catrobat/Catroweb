@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Reset;
 
+use App\DB\Entity\Moderation\ContentAppeal;
+use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\System\Statistic;
+use App\DB\Entity\User\Comment\UserComment;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\EntityRepository\System\StatisticRepository;
+use App\DB\Enum\ContentType;
+use App\DB\Enum\ReportCategory;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Commands\ImportProjects\ProgramImportCommand;
+use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Random\RandomException;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -29,7 +35,8 @@ class ResetCommand extends Command
     private readonly EntityManagerInterface $entity_manager,
     private readonly ProgramRepository $program_manager,
     private readonly StatisticRepository $statistic_repository,
-    private readonly ParameterBagInterface $parameter_bag)
+    private readonly ParameterBagInterface $parameter_bag,
+    private readonly UserManager $user_manager)
   {
     parent::__construct();
   }
@@ -127,7 +134,7 @@ class ResetCommand extends Command
     }
 
     $this->createStudios($user_array, $programs, $output);
-    $this->reportProjects($program_names, $user_array, $output);
+    $this->createModerationData($programs, $user_array, $output);
     // if ($input->hasOption('with-remixes')) {
     // $this->remixGen($program_names, $output);  // Currently not working
     // }
@@ -298,13 +305,7 @@ class ResetCommand extends Command
    */
   private function commentOnProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
-    $i = 0;
     foreach ($program_names as $program_name) {
-      $random_reported = random_int(-10, 2);
-      if ($random_reported <= 0) {
-        $random_reported = 0;
-      }
-
       $random_comment_amount = random_int(0, 3);
       for ($j = 0; $j <= $random_comment_amount; ++$j) {
         $user_id = array_rand($user_array);
@@ -312,7 +313,6 @@ class ResetCommand extends Command
           'user' => $user_array[$user_id],
           'program_name' => $program_name,
           'message' => $this->randomCommentGenerator(),
-          'reported' => $random_reported,
         ];
 
         $ret = CommandHelper::executeSymfonyCommand('catrobat:comment', $this->getApplication(), $parameters, $output);
@@ -320,8 +320,6 @@ class ResetCommand extends Command
           $output->writeln('Comment creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
         }
       }
-
-      ++$i;
     }
   }
 
@@ -408,28 +406,79 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws ExceptionInterface
+   * @param Program[] $programs
+   *
    * @throws RandomException
-   * @throws \JsonException
    */
-  private function reportProjects(array $program_names, array $user_array, OutputInterface $output): void
+  private function createModerationData(array $programs, array $user_array, OutputInterface $output): void
   {
-    $rand_start = random_int(0, 2);
+    $output->writeln('Creating moderation test data...');
+
+    $project_categories = ReportCategory::getValidCategories(ContentType::Project);
+    $comment_categories = ReportCategory::getValidCategories(ContentType::Comment);
+    $report_count = 0;
+
+    // Report a subset of projects
     $rand_interval = random_int(4, 6);
-    $counter = count($program_names);
+    foreach ($programs as $i => $program) {
+      if (0 !== $i % $rand_interval) {
+        continue;
+      }
 
-    for ($i = $rand_start; $i < $counter; $i += $rand_interval) {
-      $parameters = [
-        'user' => $user_array[array_rand($user_array)],
-        'program_name' => $program_names[$i],
-        'note' => 'bad',
-      ];
-      $ret = CommandHelper::executeSymfonyCommand('catrobat:report', $this->getApplication(), $parameters, $output);
+      $reporter_name = $user_array[array_rand($user_array)];
+      $reporter = $this->user_manager->findUserByUsername($reporter_name);
+      if (null === $reporter || $reporter->getId() === $program->getUser()?->getId()) {
+        continue;
+      }
 
-      if (0 !== $ret) {
-        $output->writeln('Report project creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
+      $report = new ContentReport();
+      $report->setReporter($reporter);
+      $report->setContentType(ContentType::Project->value);
+      $report->setContentId($program->getId());
+      $report->setCategory($project_categories[array_rand($project_categories)]);
+      $report->setNote('This project seems problematic');
+      $report->setReporterTrustScore(random_int(10, 30) / 10.0);
+      $this->entity_manager->persist($report);
+      ++$report_count;
+    }
+
+    // Report some comments
+    $comments = $this->entity_manager->getRepository(UserComment::class)->findBy([], ['id' => 'ASC'], 5);
+    foreach ($comments as $comment) {
+      $reporter_name = $user_array[array_rand($user_array)];
+      $reporter = $this->user_manager->findUserByUsername($reporter_name);
+      if (null === $reporter || $reporter->getId() === $comment->getUser()?->getId()) {
+        continue;
+      }
+
+      $report = new ContentReport();
+      $report->setReporter($reporter);
+      $report->setContentType(ContentType::Comment->value);
+      $report->setContentId((string) $comment->getId());
+      $report->setCategory($comment_categories[array_rand($comment_categories)]);
+      $report->setReporterTrustScore(random_int(10, 30) / 10.0);
+      $this->entity_manager->persist($report);
+      ++$report_count;
+    }
+
+    // Auto-hide one project and create an appeal
+    if (count($programs) > 2) {
+      $hidden_project = $programs[1];
+      $hidden_project->setAutoHidden(true);
+
+      $owner = $hidden_project->getUser();
+      if (null !== $owner) {
+        $appeal = new ContentAppeal();
+        $appeal->setContentType(ContentType::Project->value);
+        $appeal->setContentId($hidden_project->getId());
+        $appeal->setAppellant($owner);
+        $appeal->setReason('This project was hidden by mistake, it follows all community guidelines.');
+        $this->entity_manager->persist($appeal);
       }
     }
+
+    $this->entity_manager->flush();
+    $output->writeln(sprintf('  Created %d reports, 1 auto-hidden project with appeal', $report_count));
   }
 
   /**

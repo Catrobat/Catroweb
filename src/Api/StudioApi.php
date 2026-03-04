@@ -6,22 +6,28 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Studio\StudioApiFacade;
+use App\DB\Entity\User\User;
 use OpenAPI\Server\Api\StudioApiInterface;
 use OpenAPI\Server\Model\CreateStudioErrorResponse;
 use OpenAPI\Server\Model\UpdateStudioErrorResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class StudioApi extends AbstractApiController implements StudioApiInterface
 {
-  public function __construct(private readonly StudioApiFacade $facade)
-  {
+  use RateLimitTrait;
+
+  public function __construct(
+    private readonly StudioApiFacade $facade,
+    private readonly RateLimiterFactory $studioCreateDailyLimiter,
+  ) {
   }
 
   #[\Override]
   public function studioIdPost(string $id, string $accept_language, ?string $name, ?string $description, ?bool $is_public, ?bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $studio = $this->facade->getLoader()->loadStudioByID($id);
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (null === $studio) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
@@ -73,6 +79,13 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   #[\Override]
   public function studioPost(string $accept_language, ?string $name, ?string $description, bool $is_public, bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
   {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if ($user instanceof User && !$this->checkUserRateLimit($user, $this->studioCreateDailyLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     $validation_wrapper = $this->facade->getRequestValidator()->validateCreate(
       $name,
       $description,
@@ -89,7 +102,6 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
       return $error_response;
     }
 
-    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $studio = $this->facade->getProcessor()->create(
       $user,
       $name,
@@ -111,7 +123,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   #[\Override]
   public function studioIdDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    $studio = $this->facade->getLoader()->loadStudioByID($id);
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (null === $studio) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
@@ -133,7 +145,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   #[\Override]
   public function studioIdGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $studio = $this->facade->getLoader()->loadStudioByID($id);
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (null === $studio) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
