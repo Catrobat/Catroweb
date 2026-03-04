@@ -18,6 +18,31 @@
 {% endblock %}
 
 {% block body %}
+  {% if project.autoHidden is defined and project.autoHidden and (my_project|default(false) or is_granted('ROLE_ADMIN')) %}
+    <div class="alert alert-warning d-flex align-items-center mb-3" role="alert">
+      <i class="material-icons me-2">visibility_off</i>
+      <div class="flex-grow-1">
+        {{ 'moderation.hidden_notice.project'|trans({}, 'catroweb') }}
+      </div>
+      {% if my_project|default(false) %}
+        <button id="btn-appeal-project" class="btn btn-outline-warning btn-sm ms-2"
+                data-content-type="project"
+                data-content-id="{{ project.id }}"
+                data-appeal-url="{{ url('open_api_server_moderation_projectidappealpost', {id: project.id}) }}"
+                data-trans-appeal-title="{{ 'moderation.appeal.title'|trans({}, 'catroweb') }}"
+                data-trans-appeal-placeholder="{{ 'moderation.appeal.placeholder'|trans({}, 'catroweb') }}"
+                data-trans-appeal-submit="{{ 'moderation.appeal.submit'|trans({}, 'catroweb') }}"
+                data-trans-appeal-cancel="{{ 'moderation.appeal.cancel'|trans({}, 'catroweb') }}"
+                data-trans-appeal-success="{{ 'moderation.appeal.success'|trans({}, 'catroweb') }}"
+                data-trans-appeal-error="{{ 'moderation.appeal.error'|trans({}, 'catroweb') }}"
+                data-trans-appeal-already-pending="{{ 'moderation.appeal.already_pending'|trans({}, 'catroweb') }}"
+                data-trans-appeal-rate-limited="{{ 'moderation.appeal.rate_limited'|trans({}, 'catroweb') }}">
+          <i class="material-icons" style="font-size: 16px; vertical-align: middle;">gavel</i>
+          {{ 'moderation.appeal.button'|trans({}, 'catroweb')|default('Appeal') }}
+        </button>
+      {% endif %}
+    </div>
+  {% endif %}
   <div class="row">
     <div class="col-5 col-sm-4 col-md-4 col-lg-3">
       {{ include('Project/Thumbnail.html.twig') }}
@@ -222,6 +247,9 @@
        data-trans-reaction="{{ 'project.reactionsText'|trans({}, 'catroweb') }}"
        data-trans-download-error="{{ 'project.downloadErrorText'|trans({}, 'catroweb') }}"
        data-trans-download-start="{{ 'project.downloadStartText'|trans({}, 'catroweb') }}"
+       data-trans-account-not-verified="{{ 'accountNotVerified'|trans({}, 'catroweb') }}"
+       data-trans-account-suspended="{{ 'accountSuspended'|trans({}, 'catroweb') }}"
+       data-trans-rate-limited="{{ 'moderation.reaction.rate_limited'|trans({}, 'catroweb') }}"
   ></div>
 
   <div class="js-project-share"

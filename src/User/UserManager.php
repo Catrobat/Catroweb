@@ -17,6 +17,7 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\Query\Expr\Join;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
+use Elastica\Query\Term;
 use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -185,6 +186,8 @@ class UserManager
 
     $bool_query = new BoolQuery();
     $bool_query->addMust($query_string);
+    $bool_query->addFilter(new Term(['verified' => true]));
+    $bool_query->addFilter(new Term(['profile_hidden' => false]));
 
     return $bool_query;
   }

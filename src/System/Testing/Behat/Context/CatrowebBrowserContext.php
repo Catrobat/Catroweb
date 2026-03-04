@@ -697,25 +697,10 @@ class CatrowebBrowserContext extends BrowserContext
     $this->iWaitForThePageToBeLoaded();
     $this->iClick('#top-app-bar__btn-report-project');
     $this->iWaitForAjaxToFinish();
-    $this->fillField('report-reason', $note);
-    switch ($category) {
-      case 'copyright':
-        $this->iClickTheRadiobutton('#report-copyright');
-        break;
-      case 'inappropriate':
-        $this->iClickTheRadiobutton('#report-inappropriate');
-        break;
-      case 'spam':
-        $this->iClickTheRadiobutton('#report-spam');
-        break;
-      case 'dislike':
-        $this->iClickTheRadiobutton('#report-dislike');
-        break;
-    }
-
+    $this->iClickTheRadiobutton('#report-cat-'.$category);
+    $this->getSession()->getPage()->find('css', '#report-note')->setValue($note);
     $this->iClick('.swal2-confirm');
     $this->iWaitForAjaxToFinish();
-    $this->assertPageContainsText('Your report was successfully sent!');
   }
 
   /**

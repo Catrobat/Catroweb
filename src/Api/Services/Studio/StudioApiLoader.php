@@ -21,6 +21,17 @@ class StudioApiLoader extends AbstractApiLoader
     return $this->studio_manager->findStudioById($id);
   }
 
+  public function loadVisibleStudio(string $id): ?Studio
+  {
+    $studio = $this->studio_manager->findStudioById($id);
+
+    if (null === $studio || $studio->getAutoHidden()) {
+      return null;
+    }
+
+    return $studio;
+  }
+
   public function loadStudioUser(?User $user, Studio $studio): ?StudioUser
   {
     return $this->studio_manager->findStudioUser($user, $studio);

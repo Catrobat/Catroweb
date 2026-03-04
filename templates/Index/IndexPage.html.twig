@@ -41,7 +41,8 @@
   <div id="home-projects">
     {# array values: [api project_type, translation, property to show] #}
     {# disabled due to performance issues: ['recent', 'newest', 'uploaded'], #}
-    {% for category in [
+    
+    {% set categories = [
       ['example', 'example', 'author'],
       ['most_downloaded', 'most.downloaded', 'downloads'],
       ['trending', 'trending', 'downloads'],
@@ -49,6 +50,16 @@
       ['scratch', 'scratchremixes', 'views'],
       ['popular', 'popular', 'author'],
     ] %}
+
+    {% if isWebview() %}
+      {% set categories = [
+        ['example', 'example', 'author'],
+        ['trending', 'trending', 'downloads'],
+        ['popular', 'popular', 'author']
+      ] %}
+    {% endif %}
+
+    {% for category in categories %}
       <div id="home-projects__{{ category[0] }}" data-category="{{ category[0] }}" data-property="{{ category[2] }}"
            data-theme="{{ theme() }}" data-flavor="{{ flavor() }}" data-base-url="{{ app.request.getBaseURL() }}"
            class="project-list loading horizontal">

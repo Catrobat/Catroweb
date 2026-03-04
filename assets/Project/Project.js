@@ -588,6 +588,33 @@ export const Project = function (
           window.location.href = loginUrl
           throw new Error('Unauthorized')
         }
+        if (response.status === 429) {
+          const msg =
+            document.querySelector('.js-project')?.dataset.transRateLimited ||
+            "You're reacting too quickly. Please wait a moment."
+          showErrorAlert(msg)
+          return undefined
+        }
+        if (response.status === 403) {
+          return response
+            .json()
+            .then((body) => {
+              if (body?.error === 'Email verification required.') {
+                const msg =
+                  document.querySelector('.js-project')?.dataset.transAccountNotVerified ||
+                  'Please make sure you are logged in and your account\u2019s email is verified.'
+                showErrorAlert(msg)
+              } else if (body?.error === 'Your account has been suspended.') {
+                const msg =
+                  document.querySelector('.js-project')?.dataset.transAccountSuspended ||
+                  'Your account has been suspended due to community reports.'
+                showErrorAlert(msg)
+              } else {
+                showErrorAlert()
+              }
+            })
+            .catch(() => showErrorAlert())
+        }
         // Both POST (201/200) and DELETE (204) need to fetch summary for updated counts
         // POST returns ReactionResponse with just {type}, DELETE returns 204 No Content
         if (response.ok) {

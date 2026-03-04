@@ -21,7 +21,6 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\UpdateProjectErrorResponse;
 use OpenAPI\Server\Model\UpdateProjectFailureResponse;
@@ -35,6 +34,8 @@ use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -61,11 +62,27 @@ final class ProjectsApiTest extends KernelTestCase
   {
     $this->facade = $this->createStub(ProjectsApiFacade::class);
     $this->reactions_facade = $this->createStub(ReactionsApiFacade::class);
-    $this->object = new ProjectsApi($this->facade, $this->reactions_facade);
+    $this->object = new ProjectsApi(
+      $this->facade,
+      $this->reactions_facade,
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_upload_daily'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_reaction_burst'),
+    );
 
     ProjectsApiTest::bootKernel();
     $this->full_validator = ProjectsApiTest::getContainer()->get(ProjectsRequestValidator::class);
     $this->full_response_manager = ProjectsApiTest::getContainer()->get(ProjectsResponseManager::class);
+  }
+
+  private function createNoLimitRateLimiterFactory(string $id): RateLimiterFactory
+  {
+    return new RateLimiterFactory(
+      [
+        'id' => $id,
+        'policy' => 'no_limit',
+      ],
+      new InMemoryStorage(),
+    );
   }
 
   /**
@@ -532,24 +549,6 @@ final class ProjectsApiTest extends KernelTestCase
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
-  }
-
-  /**
-   * @group unit
-   *
-   * @throws \Exception
-   * @throws Exception
-   */
-  public function testProjectIdReportPost(): void
-  {
-    $response_code = 200;
-    $response_headers = [];
-
-    $project_report_request = $this->createStub(ProjectReportRequest::class);
-
-    $this->object->projectIdReportPost('id', $project_report_request, $response_code, $response_headers);
-
-    $this->assertSame(Response::HTTP_NOT_IMPLEMENTED, $response_code);
   }
 
   /**

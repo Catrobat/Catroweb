@@ -120,19 +120,18 @@
         </div>
 
         <div class="mtable">
-          <div class="table-name">Project Inappropriate Reports (filed by this user)</div>
+          <div class="table-name">Content Reports (filed by this user)</div>
 
           {% if project_inappropriate_reports is empty %} <div>No entries for this user</div> {% endif %}
 
-          {% for pir in project_inappropriate_reports %}
-            <div class="lrow">ID</div><div class="rrow">{{ pir.id }}</div>
-            <div class="lrow">Reporting user</div><div class="rrow">{{ pir.reportingUser }}</div>
-            <div class="lrow">Category</div><div class="rrow">{{ pir.category }}</div>
-            <div class="lrow">Note</div><div class="rrow">{{ pir.note }}</div>
-            <div class="lrow">Time</div><div class="rrow">{{ pir.time|date('Y-m-d h:m:s') }}</div>
-            <div class="lrow">State</div><div class="rrow">{{ pir.state }}</div>
-            <div class="lrow">Project</div><div class="rrow">{{ pir.program }}</div>
-            <div class="lrow">Project Version</div><div class="rrow">{{ pir.projectVersion }}</div>
+          {% for report in project_inappropriate_reports %}
+            <div class="lrow">ID</div><div class="rrow">{{ report.id }}</div>
+            <div class="lrow">Content Type</div><div class="rrow">{{ report.contentType }}</div>
+            <div class="lrow">Content ID</div><div class="rrow">{{ report.contentId }}</div>
+            <div class="lrow">Category</div><div class="rrow">{{ report.category }}</div>
+            <div class="lrow">Note</div><div class="rrow">{{ report.note }}</div>
+            <div class="lrow">Created At</div><div class="rrow">{{ report.createdAt|date('Y-m-d H:i:s') }}</div>
+            <div class="lrow">State</div><div class="rrow">{{ report.state }}</div>
             <div class="lrow separator"></div><div class="rrow separator"></div>
           {% endfor %}
 
@@ -150,7 +149,7 @@
             <div class="lrow">User name</div><div class="rrow">{{ uc.userName }}</div>
             <div class="lrow">Uploaded at</div><div class="rrow">{{ uc.uploadDate|date('Y-m-d h:m:s') }}</div>
             <div class="lrow">Text</div><div class="rrow">{{ uc.text }}</div>
-            <div class="lrow">Is Reported</div><div class="rrow">{{ uc.isReported }}</div>
+            <div class="lrow">Auto Hidden</div><div class="rrow">{{ uc.autoHidden ? 'Yes' : 'No' }}</div>
             <div class="lrow separator"></div><div class="rrow separator"></div>
           {% endfor %}
 

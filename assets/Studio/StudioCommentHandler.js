@@ -63,6 +63,11 @@ export default class {
             this.updateCommentCount(1)
           }
           this.increaseActivityCount()
+        } else if (response.status === 429) {
+          const rateLimitedMsg =
+            document.getElementById('comment-rate-limited')?.value ||
+            "You're posting comments too quickly. Please wait a moment."
+          showSnackbar('#share-snackbar', rateLimitedMsg)
         } else {
           console.error(response.status)
           showSnackbar('#share-snackbar', commentError)

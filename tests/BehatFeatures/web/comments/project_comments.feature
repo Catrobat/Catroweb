@@ -204,22 +204,19 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    And I click ".comment-report-button"
-    And I wait for AJAX to finish
-    When I click ".swal2-confirm"
+    When I click ".comment-report-button"
     And I wait for AJAX to finish
     Then I should be on "/app/login"
 
-  Scenario: There should be a confirmation pop up to report comments
+  Scenario: There should be a report dialog with category selection
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#comment-report-button-1"
+    And I wait for AJAX to finish
+    When I click "#comment-report-button-1"
     And I wait 500 milliseconds
-    Then I should see "Are you sure?"
-    When I click ".swal2-confirm"
-    And I wait 500 milliseconds
-    Then I should see "Reported"
+    Then I should see "Report"
+    And the element "input[name='report-category']" should exist
 
   Scenario: When I am logged in as an admin, I should see a delete button
     Given I log in as "Admin"

@@ -513,6 +513,7 @@ class UserController extends Controller
         406 => 'Not acceptable - client must accept application/json as content type',
         415 => 'Unsupported Media Type - request must use application/json as content type',
         422 => 'Unprocessable Entity. (Specific error messages will be translated to the locale)',
+        429 => 'Too Many Requests',
         default => '',
       };
 

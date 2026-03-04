@@ -11,12 +11,19 @@ use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\OAuthLoginRequest;
 use OpenAPI\Server\Model\RefreshRequest;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class AuthenticationApi extends AbstractApiController implements AuthenticationApiInterface
 {
-  public function __construct(private readonly AuthenticationApiFacade $facade)
-  {
+  use RateLimitTrait;
+
+  public function __construct(
+    private readonly AuthenticationApiFacade $facade,
+    private readonly RateLimiterFactory $authBurstLimiter,
+    private readonly RequestStack $request_stack,
+  ) {
   }
 
   #[\Override]
@@ -66,6 +73,13 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
   #[\Override]
   public function authenticationOauthPost(OAuthLoginRequest $o_auth_login_request, int &$responseCode, array &$responseHeaders): array|object|null
   {
+    $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
+    if (!$this->checkIpRateLimit($ip, $this->authBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     $resource_owner = $o_auth_login_request->getResourceOwner() ?? '';
     $id_token = $o_auth_login_request->getIdToken() ?? '';
 

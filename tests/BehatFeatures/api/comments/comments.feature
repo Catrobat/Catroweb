@@ -51,6 +51,62 @@ Feature: Comments API
     Given I request "GET" "/api/comments/9999/replies"
     Then the response status code should be "404"
 
+  Scenario: Public caller cannot access replies for a hidden comment
+    Given the comments are auto-hidden:
+      | id |
+      | 10 |
+    When I request "GET" "/api/comments/10/replies?limit=1"
+    Then the response status code should be "404"
+
+  Scenario: Owner can access replies for a hidden comment
+    Given the comments are auto-hidden:
+      | id |
+      | 10 |
+    And I use a valid JWT Bearer token for "Catrobat"
+    When I request "GET" "/api/comments/10/replies?limit=1"
+    Then the response status code should be "200"
+
+  Scenario: Admin can access replies for a hidden comment
+    Given there are admins:
+      | name  |
+      | Admin |
+    And the comments are auto-hidden:
+      | id |
+      | 10 |
+    And I use a valid JWT Bearer token for "Admin"
+    When I request "GET" "/api/comments/10/replies?limit=1"
+    Then the response status code should be "200"
+
+  # ---------------------------------------------------------------------------
+  # GET /api/comments/{id}/translation
+  # ---------------------------------------------------------------------------
+
+  Scenario: Public caller cannot translate a hidden comment
+    Given the comments are auto-hidden:
+      | id |
+      | 10 |
+    When I request "GET" "/api/comments/10/translation?target_language=de"
+    Then the response status code should be "404"
+
+  Scenario: Owner can translate a hidden comment
+    Given the comments are auto-hidden:
+      | id |
+      | 10 |
+    And I use a valid JWT Bearer token for "Catrobat"
+    When I request "GET" "/api/comments/10/translation?target_language=de"
+    Then the response status code should be "200"
+
+  Scenario: Admin can translate a hidden comment
+    Given there are admins:
+      | name  |
+      | Admin |
+    And the comments are auto-hidden:
+      | id |
+      | 10 |
+    And I use a valid JWT Bearer token for "Admin"
+    When I request "GET" "/api/comments/10/translation?target_language=de"
+    Then the response status code should be "200"
+
   # ---------------------------------------------------------------------------
   # POST /api/project/{id}/comments
   # ---------------------------------------------------------------------------
@@ -92,6 +148,57 @@ Feature: Comments API
     When I request "POST" "/api/project/9999/comments"
     Then the response status code should be "404"
 
+  Scenario: Non-owner cannot reply to a hidden parent comment
+    Given the comments are auto-hidden:
+      | id |
+      | 10 |
+    And I use a valid JWT Bearer token for "User2"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {
+        "message": "hidden parent reply should fail",
+        "parent_id": 10
+      }
+      """
+    When I request "POST" "/api/project/1/comments"
+    Then the response status code should be "404"
+
+  Scenario: Owner can reply to a hidden parent comment
+    Given the comments are auto-hidden:
+      | id |
+      | 10 |
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {
+        "message": "owner hidden parent reply",
+        "parent_id": 10
+      }
+      """
+    When I request "POST" "/api/project/1/comments"
+    Then the response status code should be "201"
+
+  Scenario: Admin can reply to a hidden parent comment
+    Given there are admins:
+      | name  |
+      | Admin |
+    And the comments are auto-hidden:
+      | id |
+      | 10 |
+    And I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {
+        "message": "admin hidden parent reply",
+        "parent_id": 10
+      }
+      """
+    When I request "POST" "/api/project/1/comments"
+    Then the response status code should be "201"
+
   # ---------------------------------------------------------------------------
   # DELETE /api/comments/{id}
   # ---------------------------------------------------------------------------
@@ -122,14 +229,29 @@ Feature: Comments API
 
   Scenario: Report a comment
     Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"category": "spam"}
+      """
     When I request "POST" "/api/comments/11/report"
     Then the response status code should be "204"
 
   Scenario: Report a comment requires authentication
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"category": "spam"}
+      """
     When I request "POST" "/api/comments/11/report"
     Then the response status code should be "401"
 
   Scenario: Report a comment returns 404 for non-existent comment
     Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"category": "spam"}
+      """
     When I request "POST" "/api/comments/9999/report"
     Then the response status code should be "404"

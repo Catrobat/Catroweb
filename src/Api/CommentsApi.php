@@ -24,11 +24,14 @@ use OpenAPI\Server\Model\CommentTranslationResponse;
 use OpenAPI\Server\Model\CommentUserInfo;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
 class CommentsApi extends AbstractApiController implements CommentsApiInterface
 {
+  use RateLimitTrait;
+
   private const DEFAULT_LIMIT = 20;
   private const MAX_LIMIT = 50;
 
@@ -42,6 +45,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly RequestStack $request_stack,
     private readonly Environment $twig,
     private readonly AuthorizationCheckerInterface $authorization_checker,
+    private readonly RateLimiterFactory $commentBurstLimiter,
+    private readonly RateLimiterFactory $commentDailyLimiter,
   ) {
   }
 
@@ -85,6 +90,14 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
+    if (!$this->authorization_checker->isGranted('ROLE_ADMIN')
+      && (!$this->checkUserRateLimit($user, $this->commentBurstLimiter)
+        || !$this->checkUserRateLimit($user, $this->commentDailyLimiter))) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
     if (!$project instanceof Program) {
       $responseCode = Response::HTTP_NOT_FOUND;
@@ -114,6 +127,12 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
 
         return null;
       }
+
+      if ($parent_comment->getAutoHidden() && !$this->canAccessHiddenComment($parent_comment)) {
+        $responseCode = Response::HTTP_NOT_FOUND;
+
+        return null;
+      }
     }
 
     $comment = new UserComment();
@@ -122,7 +141,6 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $comment->setText($message);
     $comment->setProgram($project);
     $comment->setUploadDate(new \DateTime('now', new \DateTimeZone('UTC')));
-    $comment->setIsReported(false);
     $comment->setIsDeleted(false);
     if (null !== $parent_id) {
       $comment->setParentId($parent_id);
@@ -189,45 +207,16 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function commentsIdReportPost(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
-  {
-    if ($id <= 0) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
-      return;
-    }
-
-    $user = $this->authentication_manager->getAuthenticatedUser();
-    if (!$user instanceof User) {
-      $responseCode = Response::HTTP_UNAUTHORIZED;
-
-      return;
-    }
-
-    $comment = $this->comment_repository->findOneBy(['id' => $id]);
-    if (!$comment instanceof UserComment) {
-      $responseCode = Response::HTTP_NOT_FOUND;
-
-      return;
-    }
-
-    if (true === $comment->getIsDeleted()) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
-      return;
-    }
-
-    $comment->setIsReported(true);
-    $this->entity_manager->persist($comment);
-    $this->entity_manager->flush();
-    $responseCode = Response::HTTP_NO_CONTENT;
-  }
-
-  #[\Override]
   public function commentsIdRepliesGet(int $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $comment = $this->comment_repository->findOneBy(['id' => $id]);
     if (!$comment instanceof UserComment) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    if ($comment->getAutoHidden() && !$this->canAccessHiddenComment($comment)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -265,6 +254,12 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   {
     $comment = $this->comment_repository->findOneBy(['id' => $id]);
     if (!$comment instanceof UserComment) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    if ($comment->getAutoHidden() && !$this->canAccessHiddenComment($comment)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -390,13 +385,32 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       'username' => $comment->getUsername(),
       'text' => $comment->getText(),
       'is_deleted' => $comment->getIsDeleted(),
-      'is_reported' => $comment->getIsReported(),
+      'is_reported' => $comment->getAutoHidden(),
       'upload_date' => $comment->getUploadDate(),
       'user_id' => $comment->getUser()?->getId(),
       'user_avatar' => $comment->getUser()?->getAvatar(),
+      'user_approved' => $comment->getUser()?->isApproved() ?? false,
       'parent_id' => $comment->getParentId(),
       'number_of_replies' => $reply_count,
     ];
+  }
+
+  private function canAccessHiddenComment(UserComment $comment): bool
+  {
+    if (!$comment->getAutoHidden()) {
+      return true;
+    }
+
+    if ($this->authorization_checker->isGranted('ROLE_ADMIN')) {
+      return true;
+    }
+
+    $current_user = $this->authentication_manager->getAuthenticatedUser();
+    if (!$current_user instanceof User) {
+      return false;
+    }
+
+    return $comment->getUser()?->getId() === $current_user->getId();
   }
 
   private function normalizeLimit(int $limit): int

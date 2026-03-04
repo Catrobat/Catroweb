@@ -39,6 +39,30 @@ document.addEventListener('DOMContentLoaded', () => {
   new OwnProjectList(projectsContainer, url, theme, emptyMessage, baseUrl).initialize()
   new OwnProfile(baseUrl).initializeAll()
   new VerifyAccountHandler().init()
+
+  // Appeal button for suspended accounts
+  const appealBtn = document.getElementById('btn-appeal-user')
+  if (appealBtn) {
+    import('../Moderation/AppealDialog').then(({ showAppealDialog }) => {
+      appealBtn.addEventListener('click', () => {
+        showAppealDialog({
+          contentType: appealBtn.dataset.contentType,
+          contentId: appealBtn.dataset.contentId,
+          apiUrl: appealBtn.dataset.appealUrl,
+          translations: {
+            title: appealBtn.dataset.transAppealTitle,
+            placeholder: appealBtn.dataset.transAppealPlaceholder,
+            submit: appealBtn.dataset.transAppealSubmit,
+            cancel: appealBtn.dataset.transAppealCancel,
+            success: appealBtn.dataset.transAppealSuccess,
+            alreadyPending: appealBtn.dataset.transAppealAlreadyPending,
+            error: appealBtn.dataset.transAppealError,
+            rateLimited: appealBtn.dataset.transAppealRateLimited,
+          },
+        })
+      })
+    })
+  }
 })
 
 class OwnProfile {

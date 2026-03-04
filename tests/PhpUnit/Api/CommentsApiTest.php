@@ -24,6 +24,8 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
@@ -46,6 +48,8 @@ final class CommentsApiTest extends TestCase
     ?RequestStack $request_stack = null,
     ?Environment $twig = null,
     ?AuthorizationCheckerInterface $authorization_checker = null,
+    ?RateLimiterFactory $comment_burst_limiter = null,
+    ?RateLimiterFactory $comment_daily_limiter = null,
   ): CommentsApi {
     return new CommentsApi(
       $authentication_manager ?? $this->createStub(AuthenticationManager::class),
@@ -57,6 +61,19 @@ final class CommentsApiTest extends TestCase
       $request_stack ?? new RequestStack(),
       $twig ?? $this->createStub(Environment::class),
       $authorization_checker ?? $this->createStub(AuthorizationCheckerInterface::class),
+      $comment_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_burst'),
+      $comment_daily_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_daily'),
+    );
+  }
+
+  private function createNoLimitRateLimiterFactory(string $id): RateLimiterFactory
+  {
+    return new RateLimiterFactory(
+      [
+        'id' => $id,
+        'policy' => 'no_limit',
+      ],
+      new InMemoryStorage(),
     );
   }
 
@@ -342,109 +359,6 @@ final class CommentsApiTest extends TestCase
     $response_headers = [];
 
     $api->commentsIdDelete(1, 'en', $response_code, $response_headers);
-
-    $this->assertSame(Response::HTTP_NO_CONTENT, $response_code);
-  }
-
-  // ==================== commentsIdReportPost ====================
-
-  #[Group('unit')]
-  public function testCommentsIdReportPostRejectsInvalidId(): void
-  {
-    $api = $this->buildApi();
-
-    $response_code = 200;
-    $response_headers = [];
-
-    $api->commentsIdReportPost(0, 'en', $response_code, $response_headers);
-
-    $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
-  }
-
-  #[Group('unit')]
-  public function testCommentsIdReportPostRequiresAuthentication(): void
-  {
-    $authentication_manager = $this->createStub(AuthenticationManager::class);
-    $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
-
-    $api = $this->buildApi(authentication_manager: $authentication_manager);
-
-    $response_code = 200;
-    $response_headers = [];
-
-    $api->commentsIdReportPost(1, 'en', $response_code, $response_headers);
-
-    $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
-  }
-
-  #[Group('unit')]
-  public function testCommentsIdReportPostReturnsNotFoundForMissingComment(): void
-  {
-    $authentication_manager = $this->createStub(AuthenticationManager::class);
-    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
-
-    $comment_repository = $this->createStub(UserCommentRepository::class);
-    $comment_repository->method('findOneBy')->willReturn(null);
-
-    $api = $this->buildApi(
-      authentication_manager: $authentication_manager,
-      comment_repository: $comment_repository,
-    );
-
-    $response_code = 200;
-    $response_headers = [];
-
-    $api->commentsIdReportPost(1, 'en', $response_code, $response_headers);
-
-    $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
-  }
-
-  #[Group('unit')]
-  public function testCommentsIdReportPostReturnsBadRequestWhenCommentAlreadyDeleted(): void
-  {
-    $authentication_manager = $this->createStub(AuthenticationManager::class);
-    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
-
-    $comment = $this->createStub(UserComment::class);
-    $comment->method('getIsDeleted')->willReturn(true);
-
-    $comment_repository = $this->createStub(UserCommentRepository::class);
-    $comment_repository->method('findOneBy')->willReturn($comment);
-
-    $api = $this->buildApi(
-      authentication_manager: $authentication_manager,
-      comment_repository: $comment_repository,
-    );
-
-    $response_code = 200;
-    $response_headers = [];
-
-    $api->commentsIdReportPost(1, 'en', $response_code, $response_headers);
-
-    $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
-  }
-
-  #[Group('unit')]
-  public function testCommentsIdReportPostReturnsNoContentOnSuccess(): void
-  {
-    $authentication_manager = $this->createStub(AuthenticationManager::class);
-    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
-
-    $comment = $this->createStub(UserComment::class);
-    $comment->method('getIsDeleted')->willReturn(false);
-
-    $comment_repository = $this->createStub(UserCommentRepository::class);
-    $comment_repository->method('findOneBy')->willReturn($comment);
-
-    $api = $this->buildApi(
-      authentication_manager: $authentication_manager,
-      comment_repository: $comment_repository,
-    );
-
-    $response_code = 200;
-    $response_headers = [];
-
-    $api->commentsIdReportPost(1, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NO_CONTENT, $response_code);
   }

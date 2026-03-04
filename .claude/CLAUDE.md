@@ -403,6 +403,8 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 | api-achievements    | tests/BehatFeatures/api/achievements    |
 | web-notifications   | tests/BehatFeatures/web/notifications   |
 | web-achievements    | tests/BehatFeatures/web/achievements    |
+| api-moderation      | tests/BehatFeatures/api/moderation      |
+| web-reports         | tests/BehatFeatures/web/reports         |
 
 Suite configuration is in `behat.yaml.dist`.
 
@@ -758,6 +760,198 @@ The `'api'` tag value must match the OpenAPI tag name (lowercase). Without this,
 
 - **400 Bad Request**: Query parameter validation failures (enum values in URL)
 - **422 Unprocessable Entity**: Request body validation failures (JSON body content)
+
+### Behat JSON Request Body Uses Heredoc (PyStringNode), NOT Tables
+
+The `I have the following JSON request body:` step expects a `PyStringNode` (heredoc with `"""`), NOT a Gherkin `TableNode`. This is a common mistake:
+
+```gherkin
+# WRONG - table format (parsed as TableNode, causes step definition mismatch)
+And I have the following JSON request body:
+  | key      | value |
+  | category | spam  |
+
+# CORRECT - heredoc format (parsed as PyStringNode)
+And I have the following JSON request body:
+  """
+  {"category": "spam", "note": "This is spam"}
+  """
+```
+
+### Security Config: Admin Endpoint Rules Must Come BEFORE Catch-All
+
+In `config/packages/security.php`, the `^/api` catch-all requires `IS_AUTHENTICATED_FULLY`. Admin-only rules like `/api/moderation/` must be placed BEFORE the catch-all or they'll never be evaluated:
+
+```php
+// Admin endpoints (MUST be before ^/api catch-all)
+['path' => '^/api/moderation/', 'roles' => 'ROLE_ADMIN', 'methods' => ['GET', 'PUT']],
+// ... other specific rules ...
+// Catch-all (last)
+['path' => '^/api', 'roles' => 'IS_AUTHENTICATED_FULLY'],
+```
+
+### Behat Fixture: `there are admins:` Step
+
+To create admin users in Behat tests, use the dedicated step (NOT a column in `there are users:`):
+
+```gherkin
+And there are admins:
+  | name  |
+  | Admin |
+```
+
+This grants `ROLE_ADMIN` to the named user (creates the user if it doesn't exist).
+
+### SweetAlert2 Dialog IDs in Behat Steps
+
+When testing SweetAlert2 dialogs (used by ReportDialog.js, AppealDialog.js), the HTML structure uses:
+
+- Radio buttons: `#report-cat-{category_value}` (e.g., `#report-cat-spam`)
+- Text area: `#report-note`
+- Confirm button: `.swal2-confirm`
+
+Old legacy IDs like `#report-copyright`, `#report-inappropriate` no longer exist.
+
+### Polymorphic Content Pattern: content_type + content_id
+
+The moderation system uses a polymorphic pattern instead of Doctrine STI:
+
+- `content_type` is a PHP backed enum (`ContentType::Project`, etc.)
+- `content_id` is stored as VARCHAR(255) — UUIDs for projects/users/studios, int-as-string for comments
+- Cast comment IDs: `(int) $content_id` when looking up `UserComment`
+- This avoids Doctrine STI complexity while supporting all 4 content types in a single table
+
+### Adding New Behat Suites to CI
+
+When adding a new Behat suite, you must update **three places**:
+
+1. `behat.yaml.dist` — define the suite with contexts and paths
+2. `.github/workflows/tests.yaml` — add the suite name to the `matrix.testSuite` list (alphabetical order within api/web groups)
+3. `.claude/CLAUDE.md` — add to the Common Suites table
+
+The CI matrix runs each suite as a separate parallel job. Missing from the matrix = not tested in CI.
+
+### Behat Fixture: `there are users:` Does NOT Set `created_at`
+
+The `there are users:` step only creates users with id/name/password. To set `created_at` (needed for trust score calculations), use the separate step:
+
+```gherkin
+Given there are users:
+  | id | name  |
+  | 1  | User1 |
+And the users are created at:
+  | name  | created_at          |
+  | User1 | 2024-01-01 12:00:00 |
+```
+
+Without `the users are created at:`, users get `created_at = now()` which gives trust score ~0.0 (too low to report).
+
+### Behat Fixture: Studio IDs Are UUIDs
+
+Studios use UUID primary keys via `MyUuidGenerator`. To reference studios by predictable ID in Behat tests, specify `id` in the fixture:
+
+```gherkin
+And there are studios:
+  | id | name    | description |
+  | 1  | studio1 | test studio |
+```
+
+`MyUuidGenerator::setNextValue()` maps short IDs like `1` to deterministic UUIDs.
+
+### Moderation System Architecture
+
+The trust-weighted moderation system lives in `src/Moderation/` with these key services:
+
+| Service                    | Responsibility                                                                   |
+| -------------------------- | -------------------------------------------------------------------------------- |
+| `TrustScoreCalculator`     | Compute user trust score (account age + activity + report accuracy + role bonus) |
+| `ReportProcessor`          | Create reports, validate, check auto-hide threshold, batch-resolve related       |
+| `AppealProcessor`          | Create appeals, validate ownership + hidden state                                |
+| `AutoModerationService`    | Hide content + create audit trail + send notifications                           |
+| `ContentVisibilityManager` | Polymorphic hide/show/check + cascade hide/show for banned users                 |
+
+Key design decisions:
+
+- **Polymorphic pattern**: `content_type` (enum) + `content_id` (string) — NOT Doctrine STI
+- **Auto-hide threshold**: cumulative trust score >= 10.0 triggers auto-hide
+- **Min trust to report**: 0.5 (prevents brand-new accounts from reporting)
+- **ContentVisibilityManager does NOT flush** — callers own the transaction boundary
+- **Studio appeals**: `getContentOwnerId()` returns null for studios (any authenticated user can appeal)
+- **Batch resolution**: when admin accepts/rejects one report, ALL pending reports for same content are auto-resolved
+- **Cascade hide/show**: banning a user (hiding profile) also hides all their projects and comments via bulk DQL UPDATE
+- **Trust score accuracy**: +1.5 per accepted report, -2.0 per rejected, clamped [-5.0, +5.0] — asymmetric to penalize bad reporters
+- **No whitelisting on rejection**: rejected reports do NOT whitelist content — it can be reported again, but bad reporters lose trust score
+- **Whitelist = report immunity**: `User.approved` / `Program.approved` means immune from community reports (button hidden + API rejects)
+- **auto_hidden vs visible**: `auto_hidden` is community-moderation-driven, `visible` is admin-only control — they are independent
+
+### Rate Limiting
+
+**Config**: `config/packages/rate_limiter.php` — uses Symfony's `sliding_window` policy.
+
+**Trait**: `src/Api/RateLimitTrait.php` — provides `checkUserRateLimit(User, Factory)` and `checkIpRateLimit(string $ip, Factory)`.
+
+| Limiter                | Limit | Interval   | Key  | Used In           |
+| ---------------------- | ----- | ---------- | ---- | ----------------- |
+| `report_burst`         | 3     | 15 minutes | User | ReportProcessor   |
+| `report_daily`         | 10    | 24 hours   | User | ReportProcessor   |
+| `comment_burst`        | 5     | 5 minutes  | User | CommentsApi       |
+| `comment_daily`        | 50    | 24 hours   | User | CommentsApi       |
+| `reaction_burst`       | 30    | 5 minutes  | User | ProjectsApi       |
+| `follow_burst`         | 20    | 5 minutes  | User | FollowersApi      |
+| `appeal_daily`         | 3     | 24 hours   | User | ModerationApi     |
+| `upload_daily`         | 10    | 24 hours   | User | ProjectsApi       |
+| `auth_burst`           | 10    | 15 minutes | IP   | AuthenticationApi |
+| `registration_burst`   | 3     | 1 hour     | IP   | UserApi           |
+| `password_reset_burst` | 5     | 1 hour     | IP   | UserApi           |
+| `search_burst`         | 30    | 1 minute   | IP   | SearchApi         |
+| `studio_create_daily`  | 5     | 24 hours   | User | StudioApi         |
+
+**Wiring pattern**: Symfony autowires `RateLimiterFactory` by camelCase convention — config key `report_burst` → constructor param `$reportBurstLimiter`. Add `use RateLimitTrait;` to the API class, inject the factory via constructor, then call `checkUserRateLimit()` or `checkIpRateLimit()` and return 429 if rejected.
+
+**User-based vs IP-based**: Use IP-based (`checkIpRateLimit`) for unauthenticated endpoints (login, registration). Use user-based (`checkUserRateLimit`) for authenticated endpoints. Admins are typically exempt from user-based limits (check `isGranted('ROLE_ADMIN')` before consuming).
+
+**Response**: Return `Response::HTTP_TOO_MANY_REQUESTS` (429) with `null` body when rate limit is exceeded.
+
+**Testing**: `RateLimiterFactory` is `final` in Symfony 7.4 — it cannot be stubbed/mocked with PHPUnit. In unit tests, create a real instance with `no_limit` policy:
+
+```php
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
+
+new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage())
+```
+
+### AccountStateEventListener (Write API Guard)
+
+**File**: `src/Security/AccountStateEventListener.php`
+
+Symfony `kernel.request` listener (priority -10) that blocks write API endpoints for:
+
+1. **Unverified users** (`!isVerified()`) → 403 `"Email verification required."`
+2. **Suspended users** (`getProfileHidden()`) → 403 `"Your account has been suspended."`
+
+Exempt paths: `/api/authentication*`, `/api/user` (POST), `/api/user/reset-password*`, `/api/.+/appeal$`
+
+Only applies to POST/PUT/DELETE/PATCH on `/api/` paths. GET/HEAD/OPTIONS always pass through.
+
+### JS 403 Error Handling Pattern
+
+All JS files that make write API calls must distinguish 403 sub-types by parsing the JSON body:
+
+- `"Email verification required."` → show "verify email" message
+- `"Your account has been suspended."` → show suspension message
+- Other 403s → generic error
+
+Pattern used in `ReportDialog.js`, `Project.js`, `ProjectComments.js`, `FollowerOverview.js`.
+Data attributes: `data-trans-account-suspended`, `data-trans-report-suspended` on Twig templates.
+
+### Template Whitelist/Hidden Conditions
+
+Report buttons should be hidden when content is whitelisted OR already auto-hidden:
+
+- **Project**: `not my_project and not is_whitelisted and not project.autoHidden` — use entity getter directly, no extra template var needed
+- **User**: `not profile.approved` — User entity getter
+- **Comment**: `not comment.user_approved|default(false)` — requires adding `cu.approved as user_approved` to the comment query SELECT
 
 ## PHPUnit Testing Best Practices
 

@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     somethingWentWrong: container.dataset.somethingWentWrongError,
     followError: container.dataset.followError,
     unfollowError: container.dataset.unfollowError,
+    accountNotVerified: container.dataset.accountNotVerified,
+    accountSuspended: container.dataset.accountSuspended,
+    rateLimited: container.dataset.rateLimited,
     unfollowButton: container.dataset.unfollowButton,
     unfollowQuestion: container.dataset.unfollowQuestion,
     cancelButton: container.dataset.cancelButton,
@@ -35,6 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
       headers['Authorization'] = 'Bearer ' + token
     }
     return headers
+  }
+
+  function showVerificationAlert(message) {
+    Swal.fire({
+      text: message,
+      icon: 'warning',
+      customClass: { confirmButton: 'btn btn-primary' },
+      buttonsStyling: false,
+    })
   }
 
   function renderFollowerCard(user, showFollowsMe, itemClassPrefix) {
@@ -167,6 +179,26 @@ document.addEventListener('DOMContentLoaded', () => {
           loadFollowData()
         } else if (response.status === 401) {
           window.location.href = loginUrl
+        } else if (response.status === 429) {
+          showSnackbar(
+            '#share-snackbar',
+            trans.rateLimited || "You're following/unfollowing too quickly. Please wait a moment.",
+          )
+        } else if (response.status === 403) {
+          return response
+            .json()
+            .then((body) => {
+              if (body?.error === 'Email verification required.') {
+                showVerificationAlert(trans.accountNotVerified)
+              } else if (body?.error === 'Your account has been suspended.') {
+                showVerificationAlert(trans.accountSuspended)
+              } else {
+                showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.followError)
+              }
+            })
+            .catch(() =>
+              showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.followError),
+            )
         } else {
           throw new Error('Unexpected error: ' + response.status)
         }
@@ -203,6 +235,27 @@ document.addEventListener('DOMContentLoaded', () => {
               loadFollowData()
             } else if (response.status === 401) {
               window.location.href = loginUrl
+            } else if (response.status === 429) {
+              showSnackbar(
+                '#share-snackbar',
+                trans.rateLimited ||
+                  "You're following/unfollowing too quickly. Please wait a moment.",
+              )
+            } else if (response.status === 403) {
+              return response
+                .json()
+                .then((body) => {
+                  if (body?.error === 'Email verification required.') {
+                    showVerificationAlert(trans.accountNotVerified)
+                  } else if (body?.error === 'Your account has been suspended.') {
+                    showVerificationAlert(trans.accountSuspended)
+                  } else {
+                    showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.unfollowError)
+                  }
+                })
+                .catch(() =>
+                  showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.unfollowError),
+                )
             } else {
               throw new Error('Unexpected error: ' + response.status)
             }

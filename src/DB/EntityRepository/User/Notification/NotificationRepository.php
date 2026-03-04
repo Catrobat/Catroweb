@@ -9,6 +9,7 @@ use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
+use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\Notifications\NewProgramNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
@@ -140,7 +141,7 @@ class NotificationRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return array{total: int, like: int, follower: int, comment: int, remix: int}
+   * @return array{total: int, like: int, follower: int, comment: int, remix: int, moderation: int}
    */
   public function getUnseenCounts(User $user): array
   {
@@ -162,6 +163,7 @@ class NotificationRepository extends ServiceEntityRepository
       'follower' => '(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')',
       'comment' => 'n INSTANCE OF '.CommentNotification::class,
       'remix' => 'n INSTANCE OF '.RemixNotification::class,
+      'moderation' => 'n INSTANCE OF '.ModerationNotification::class,
     ];
 
     $result = ['total' => $total];
@@ -188,6 +190,7 @@ class NotificationRepository extends ServiceEntityRepository
       'follow' => $qb->andWhere('(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')'),
       'comment' => $qb->andWhere('n INSTANCE OF '.CommentNotification::class),
       'remix' => $qb->andWhere('n INSTANCE OF '.RemixNotification::class),
+      'moderation' => $qb->andWhere('n INSTANCE OF '.ModerationNotification::class),
       default => null,
     };
   }

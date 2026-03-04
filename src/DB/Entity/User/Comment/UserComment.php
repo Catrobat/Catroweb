@@ -50,9 +50,6 @@ class UserComment implements \Stringable
   #[ORM\Column(type: Types::STRING)]
   protected ?string $username = null;
 
-  #[ORM\Column(type: Types::BOOLEAN)]
-  protected bool $isReported = false;
-
   /**
    * The Program which this UserComment comments. If this Program gets deleted, this UserComment gets deleted as well.
    */
@@ -69,6 +66,9 @@ class UserComment implements \Stringable
 
   #[ORM\Column(type: Types::BOOLEAN, nullable: false, options: ['default' => false])]
   protected bool $is_deleted = false;
+
+  #[ORM\Column(type: Types::BOOLEAN, nullable: false, options: ['default' => false])]
+  protected bool $auto_hidden = false;
 
   #[ORM\JoinColumn(name: 'activity', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
   #[ORM\OneToOne(targetEntity: StudioActivity::class, cascade: ['persist'])]
@@ -169,18 +169,6 @@ class UserComment implements \Stringable
     return $this;
   }
 
-  public function getIsReported(): bool
-  {
-    return $this->isReported;
-  }
-
-  public function setIsReported(bool $isReported): UserComment
-  {
-    $this->isReported = $isReported;
-
-    return $this;
-  }
-
   /**
    * Returns the CommentNotification triggered by creating this UserComment.
    */
@@ -243,6 +231,18 @@ class UserComment implements \Stringable
   public function setIsDeleted(?bool $is_deleted): UserComment
   {
     $this->is_deleted = $is_deleted;
+
+    return $this;
+  }
+
+  public function getAutoHidden(): bool
+  {
+    return $this->auto_hidden;
+  }
+
+  public function setAutoHidden(bool $auto_hidden): UserComment
+  {
+    $this->auto_hidden = $auto_hidden;
 
     return $this;
   }

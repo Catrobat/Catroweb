@@ -77,14 +77,6 @@ open_api_server_comments_commentsidrepliesget:
   requirements:
     id: '\d+'
 
-open_api_server_comments_commentsidreportpost:
-  path: /comments/{id}/report
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.comments::commentsIdReportPostAction
-  requirements:
-    id: '\d+'
-
 open_api_server_comments_commentsidtranslationget:
   path: /comments/{id}/translation
   methods: [GET]
@@ -221,6 +213,99 @@ open_api_server_mediaLibrary_medialibraryget:
   defaults:
     _controller: open_api_server.controller.mediaLibrary::mediaLibraryGetAction
 
+# moderation
+open_api_server_moderation_commentsidappealpost:
+  path: /comments/{id}/appeal
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.moderation::commentsIdAppealPostAction
+  requirements:
+    id: '\d+'
+
+open_api_server_moderation_commentsidreportpost:
+  path: /comments/{id}/report
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.moderation::commentsIdReportPostAction
+  requirements:
+    id: '\d+'
+
+open_api_server_moderation_moderationappealsget:
+  path: /moderation/appeals
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.moderation::moderationAppealsGetAction
+
+open_api_server_moderation_moderationappealsidresolveput:
+  path: /moderation/appeals/{id}/resolve
+  methods: [PUT]
+  defaults:
+    _controller: open_api_server.controller.moderation::moderationAppealsIdResolvePutAction
+  requirements:
+    id: '\d+'
+
+open_api_server_moderation_moderationreportsget:
+  path: /moderation/reports
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.moderation::moderationReportsGetAction
+
+open_api_server_moderation_moderationreportsidresolveput:
+  path: /moderation/reports/{id}/resolve
+  methods: [PUT]
+  defaults:
+    _controller: open_api_server.controller.moderation::moderationReportsIdResolvePutAction
+  requirements:
+    id: '\d+'
+
+open_api_server_moderation_projectidappealpost:
+  path: /project/{id}/appeal
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.moderation::projectIdAppealPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_moderation_projectidreportpost:
+  path: /project/{id}/report
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.moderation::projectIdReportPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_moderation_studioidappealpost:
+  path: /studio/{id}/appeal
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.moderation::studioIdAppealPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_moderation_studioidreportpost:
+  path: /studio/{id}/report
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.moderation::studioIdReportPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_moderation_useridappealpost:
+  path: /user/{id}/appeal
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.moderation::userIdAppealPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_moderation_useridreportpost:
+  path: /user/{id}/report
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.moderation::userIdReportPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
 # notifications
 open_api_server_notifications_notificationidreadput:
   path: /notification/{id}/read
@@ -318,14 +403,6 @@ open_api_server_projects_projectidrecommendationsget:
   methods: [GET]
   defaults:
     _controller: open_api_server.controller.projects::projectIdRecommendationsGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidreportpost:
-  path: /project/{id}/report
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReportPostAction
   requirements:
     id: '^[a-zA-Z0-9\\-]+$'
 

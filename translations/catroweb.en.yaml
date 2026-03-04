@@ -42,6 +42,8 @@ privacyPolicy: Privacy Policy
 imprint: Imprint
 projectDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
+accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
+accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Please try again!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
@@ -1084,3 +1086,44 @@ maintenanceinformations:
 
 MarkNotForKids: Mark as not safe for kids
 MarkSafeForKids: Mark as safe for kids
+
+moderation:
+  report:
+    title: "Report this %content_type%"
+    reason_placeholder: "Please describe why you're reporting this..."
+    submit: "Submit Report"
+    success: "Your report has been submitted. Thank you."
+    error: "Something went wrong. Please try again."
+    duplicate: "You've already reported this content."
+    trust_too_low: "Your account is too new to file reports."
+    unverified: "Please make sure you are logged in and your account's email is verified."
+    rate_limited: "You're submitting reports too quickly. Please wait and try again."
+  appeal:
+    button: "Appeal"
+    title: "Appeal this decision"
+    placeholder: "Explain why this content should not be hidden..."
+    submit: "Submit Appeal"
+    cancel: "Cancel"
+    success: "Your appeal has been submitted for review."
+    already_pending: "You already have a pending appeal."
+    error: "Something went wrong. Please try again."
+    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+  comment:
+    rate_limited: "You're posting comments too quickly. Please wait a moment."
+  reaction:
+    rate_limited: "You're reacting too quickly. Please wait a moment."
+  follow:
+    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+  studio:
+    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+  hidden_notice:
+    project: "This project has been hidden due to community reports."
+    comment: "This comment has been hidden due to community reports."
+    user: "This profile has been hidden due to community reports."
+    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
+    studio: "This studio has been hidden due to community reports."
+  notification:
+    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
+    appeal_approved: "Your appeal has been approved. Your content is now visible again."
+    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
+    admin_review_needed: "Content has been auto-hidden and requires review."

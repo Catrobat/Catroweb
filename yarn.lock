@@ -2388,9 +2388,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/common@npm:11.1.14":
-  version: 11.1.14
-  resolution: "@nestjs/common@npm:11.1.14"
+"@nestjs/common@npm:11.1.15":
+  version: 11.1.15
+  resolution: "@nestjs/common@npm:11.1.15"
   dependencies:
     file-type: "npm:21.3.0"
     iterare: "npm:1.2.1"
@@ -2407,13 +2407,13 @@ __metadata:
       optional: true
     class-validator:
       optional: true
-  checksum: 10c0/bba35fabdc350dfd362009e15a2cb6b660a53325ee6c1863f04667df0201b51b334226ace2985505969727aaf5b494396dd33f682ce75d0f3b1cab1d206a11e9
+  checksum: 10c0/833fc5a556be5bc81af6cefe5d5e396694d6d0c7ead7d8feb1c7375f11a468dfd63deccc301b5981a30b518207af0ea8967163f95853f41e31163d5c4a7ef7c7
   languageName: node
   linkType: hard
 
-"@nestjs/core@npm:11.1.14":
-  version: 11.1.14
-  resolution: "@nestjs/core@npm:11.1.14"
+"@nestjs/core@npm:11.1.15":
+  version: 11.1.15
+  resolution: "@nestjs/core@npm:11.1.15"
   dependencies:
     "@nuxt/opencollective": "npm:0.4.1"
     fast-safe-stringify: "npm:2.1.1"
@@ -2435,7 +2435,7 @@ __metadata:
       optional: true
     "@nestjs/websockets":
       optional: true
-  checksum: 10c0/842c8048fb83bc6df70975d91ec357bacb6d2cc42791e709d122fda16c6343d279cf9f4ec88c5427b02de5c3f40f3271b9c62367c662c39cdad838b5962669e9
+  checksum: 10c0/50a59514c7f9249a4af2765058ba16a76a105b08ae8e16c27b4eecbe47c975b5d000b6cbe0340876af266ad1e867749f1ec777b4f9026de99a05a31dc8fae084
   languageName: node
   linkType: hard
 
@@ -2526,22 +2526,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openapitools/openapi-generator-cli@npm:^2.30.0":
-  version: 2.30.0
-  resolution: "@openapitools/openapi-generator-cli@npm:2.30.0"
+"@openapitools/openapi-generator-cli@npm:^2.30.1":
+  version: 2.30.1
+  resolution: "@openapitools/openapi-generator-cli@npm:2.30.1"
   dependencies:
     "@inquirer/select": "npm:1.3.3"
     "@nestjs/axios": "npm:4.0.1"
-    "@nestjs/common": "npm:11.1.14"
-    "@nestjs/core": "npm:11.1.14"
+    "@nestjs/common": "npm:11.1.15"
+    "@nestjs/core": "npm:11.1.15"
     "@nuxtjs/opencollective": "npm:0.3.2"
-    axios: "npm:1.13.5"
+    axios: "npm:^1.13.6"
     chalk: "npm:4.1.2"
     commander: "npm:8.3.0"
     compare-versions: "npm:6.1.1"
     concurrently: "npm:9.2.1"
     console.table: "npm:0.10.0"
-    fs-extra: "npm:11.3.3"
+    fs-extra: "npm:11.3.4"
     glob: "npm:13.0.6"
     proxy-agent: "npm:6.5.0"
     reflect-metadata: "npm:0.2.2"
@@ -2549,7 +2549,7 @@ __metadata:
     tslib: "npm:2.8.1"
   bin:
     openapi-generator-cli: main.js
-  checksum: 10c0/dc0830dfafee27a4243eb3cce58ee179fea44adbb05889ab5d95a7123679a34b47c90c776dabae42ce7932d3919ea1f9d8da2773bbbd0a742cb60332e11293ea
+  checksum: 10c0/6e972c288d4940d093c54385690b460bc98cac65d8165966803498557cf35e6f4252714f160851840cb848b3212a49802883818f6c6fc430aabe2fa3884f76dd
   languageName: node
   linkType: hard
 
@@ -3764,14 +3764,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.13.5":
-  version: 1.13.5
-  resolution: "axios@npm:1.13.5"
+"axios@npm:^1.13.6":
+  version: 1.13.6
+  resolution: "axios@npm:1.13.6"
   dependencies:
     follow-redirects: "npm:^1.15.11"
     form-data: "npm:^4.0.5"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/abf468c34f2d145f3dc7dbc0f1be67e520630624307bda69a41bbe8d386bd672d87b4405c4ee77f9ff54b235ab02f96a9968fb00e75b13ce64706e352a3068fd
+  checksum: 10c0/51fb5af055c3b85662fa97df17d986ae2c37d13bf86d50b6bb36b6b3a2dec6966a1d3a14ab3774b71707b155ae3597ed9b7babdf1a1a863d1a31840cb8e7ec71
   languageName: node
   linkType: hard
 
@@ -4083,7 +4083,7 @@ __metadata:
     "@material/tab-scroller": "npm:^14.0.0"
     "@material/textfield": "npm:^14.0.0"
     "@material/top-app-bar": "npm:^14.0.0"
-    "@openapitools/openapi-generator-cli": "npm:^2.30.0"
+    "@openapitools/openapi-generator-cli": "npm:^2.30.1"
     "@popperjs/core": "npm:^2.11.8"
     "@symfony/stimulus-bridge": "npm:^4.0.1"
     "@symfony/webpack-encore": "npm:^5.3.1"
@@ -4114,7 +4114,7 @@ __metadata:
     lazysizes: "npm:^5.3.2"
     material-icons: "npm:^1.13.14"
     noop-webpack-plugin: "npm:^1.0.1"
-    postcss: "npm:^8.4.38"
+    postcss: "npm:^8.5.8"
     postcss-loader: "npm:^8.2.1"
     prettier: "npm:^3.8.1"
     purgecss-webpack-plugin: "npm:^8.0.0"
@@ -4128,7 +4128,7 @@ __metadata:
     textfilljs: "npm:^1.0.3-a"
     typeface-roboto: "npm:^1.1.13"
     vis: "npm:^4.21.0-EOL"
-    webpack: "npm:^5.105.3"
+    webpack: "npm:^5.105.4"
     webpack-bugsnag-plugins: "npm:^2.2.3"
     webpack-cli: "npm:^6.0.1"
     webpack-notifier: "npm:^1.15.0"
@@ -4992,6 +4992,16 @@ __metadata:
     graceful-fs: "npm:^4.2.4"
     tapable: "npm:^2.3.0"
   checksum: 10c0/966b1dffb82d5f6a4d6a86e904e812104a999066aa29f9223040aaa751e7c453b462a3f5ef91f8bd4408131ff6f7f90651dd1c804bdcb7944e2099a9c2e45ee2
+  languageName: node
+  linkType: hard
+
+"enhanced-resolve@npm:^5.20.0":
+  version: 5.20.0
+  resolution: "enhanced-resolve@npm:5.20.0"
+  dependencies:
+    graceful-fs: "npm:^4.2.4"
+    tapable: "npm:^2.3.0"
+  checksum: 10c0/4ed5f38406fc9ad74c58a3d63b8215862243ab0ed6b0efc51ccdb72cdcedd3ac8638abe298680b279d7a83c3cb140e5eea7a5f8bd99696c74588f07ad89a95a7
   languageName: node
   linkType: hard
 
@@ -6013,14 +6023,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:11.3.3":
-  version: 11.3.3
-  resolution: "fs-extra@npm:11.3.3"
+"fs-extra@npm:11.3.4":
+  version: 11.3.4
+  resolution: "fs-extra@npm:11.3.4"
   dependencies:
     graceful-fs: "npm:^4.2.0"
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
-  checksum: 10c0/984924ff4104e3e9f351b658a864bf3b354b2c90429f57aec0acd12d92c4e6b762cbacacdffb4e745b280adce882e1f980c485d9f02c453f769ab4e7fc646ce3
+  checksum: 10c0/e08276f767a62496ae97d711aaa692c6a478177f24a85979b6a2881c9db9c68b8c2ad5da0bcf92c0b2a474cea6e935ec245656441527958fd8372cb647087df0
   languageName: node
   linkType: hard
 
@@ -8647,7 +8657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.14, postcss@npm:^8.4.38, postcss@npm:^8.4.40, postcss@npm:^8.4.47, postcss@npm:^8.5.6":
+"postcss@npm:^8.2.14, postcss@npm:^8.4.40, postcss@npm:^8.4.47, postcss@npm:^8.5.6":
   version: 8.5.6
   resolution: "postcss@npm:8.5.6"
   dependencies:
@@ -8655,6 +8665,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/5127cc7c91ed7a133a1b7318012d8bfa112da9ef092dddf369ae699a1f10ebbd89b1b9f25f3228795b84585c72aabd5ced5fc11f2ba467eedf7b081a66fad024
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.8":
+  version: 8.5.8
+  resolution: "postcss@npm:8.5.8"
+  dependencies:
+    nanoid: "npm:^3.3.11"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/dd918f7127ee7c60a0295bae2e72b3787892296e1d1c3c564d7a2a00c68d8df83cadc3178491259daa19ccc54804fb71ed8c937c6787e08d8bd4bedf8d17044c
   languageName: node
   linkType: hard
 
@@ -10000,6 +10021,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"terser-webpack-plugin@npm:^5.3.17":
+  version: 5.3.17
+  resolution: "terser-webpack-plugin@npm:5.3.17"
+  dependencies:
+    "@jridgewell/trace-mapping": "npm:^0.3.25"
+    jest-worker: "npm:^27.4.5"
+    schema-utils: "npm:^4.3.0"
+    terser: "npm:^5.31.1"
+  peerDependencies:
+    webpack: ^5.1.0
+  peerDependenciesMeta:
+    "@swc/core":
+      optional: true
+    esbuild:
+      optional: true
+    uglify-js:
+      optional: true
+  checksum: 10c0/bfe08fbb3e5e5a8b2525dcc1705c370ca67f218051f0df241f86531ab0f1a93d5b290176ba09cff28cd5f774836684a7e436421d0641c0f4dfd07110d8d907bf
+  languageName: node
+  linkType: hard
+
 "terser@npm:^5.31.1":
   version: 5.46.0
   resolution: "terser@npm:5.46.0"
@@ -10619,9 +10661,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.105.3":
-  version: 5.105.3
-  resolution: "webpack@npm:5.105.3"
+"webpack@npm:^5.105.4":
+  version: 5.105.4
+  resolution: "webpack@npm:5.105.4"
   dependencies:
     "@types/eslint-scope": "npm:^3.7.7"
     "@types/estree": "npm:^1.0.8"
@@ -10633,7 +10675,7 @@ __metadata:
     acorn-import-phases: "npm:^1.0.3"
     browserslist: "npm:^4.28.1"
     chrome-trace-event: "npm:^1.0.2"
-    enhanced-resolve: "npm:^5.19.0"
+    enhanced-resolve: "npm:^5.20.0"
     es-module-lexer: "npm:^2.0.0"
     eslint-scope: "npm:5.1.1"
     events: "npm:^3.2.0"
@@ -10645,7 +10687,7 @@ __metadata:
     neo-async: "npm:^2.6.2"
     schema-utils: "npm:^4.3.3"
     tapable: "npm:^2.3.0"
-    terser-webpack-plugin: "npm:^5.3.16"
+    terser-webpack-plugin: "npm:^5.3.17"
     watchpack: "npm:^2.5.1"
     webpack-sources: "npm:^3.3.4"
   peerDependenciesMeta:
@@ -10653,7 +10695,7 @@ __metadata:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: 10c0/a9a9a3a369d14f24348bd932feb07eef74a9fe194ad16704dc4f125b6055fe51a5ef1c6fdb3aa398c6f180f59aa14cb1b360695d8ea862a5ed130103ebd255e0
+  checksum: 10c0/e9896d20bac351b119d59942b7efae5b117056ecf203acc0d1a84ecbf0a5a9a80ca733735f96bd163e3530be6ab7f615cd67e5320bd3c47d709c9bfe376c3280
   languageName: node
   linkType: hard
 

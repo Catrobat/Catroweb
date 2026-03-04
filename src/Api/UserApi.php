@@ -17,12 +17,20 @@ use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
 use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class UserApi extends AbstractApiController implements UserApiInterface
 {
-  public function __construct(private readonly UserApiFacade $facade)
-  {
+  use RateLimitTrait;
+
+  public function __construct(
+    private readonly UserApiFacade $facade,
+    private readonly RateLimiterFactory $registrationBurstLimiter,
+    private readonly RateLimiterFactory $passwordResetBurstLimiter,
+    private readonly RequestStack $request_stack,
+  ) {
   }
 
   /**
@@ -31,6 +39,13 @@ class UserApi extends AbstractApiController implements UserApiInterface
   #[\Override]
   public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
   {
+    $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
+    if (!$this->checkIpRateLimit($ip, $this->registrationBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     $validation_wrapper = $this->facade->getRequestValidator()->validateRegistration($register_request, $accept_language);
 
     if ($validation_wrapper->hasError()) {
@@ -95,6 +110,13 @@ class UserApi extends AbstractApiController implements UserApiInterface
       return null;
     }
 
+    $viewer = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$this->facade->getLoader()->canAccessProfile($user, $viewer)) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createBasicUserDataResponse($user, 'ALL');
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
@@ -151,6 +173,13 @@ class UserApi extends AbstractApiController implements UserApiInterface
   #[\Override]
   public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language, int &$responseCode, array &$responseHeaders): ?RegisterErrorResponse
   {
+    $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
+    if (!$this->checkIpRateLimit($ip, $this->passwordResetBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     $validation_wrapper = $this->facade->getRequestValidator()->validateResetPasswordRequest($reset_password_request, $accept_language);
 
     if ($validation_wrapper->hasError()) {

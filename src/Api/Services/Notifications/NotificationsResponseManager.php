@@ -9,10 +9,13 @@ use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
+use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\Notifications\NewProgramNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
+use App\DB\Enum\ContentType;
+use App\Moderation\ContentVisibilityManager;
 use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationResponse;
 use OpenAPI\Server\Model\NotificationsCountResponse;
@@ -26,6 +29,7 @@ class NotificationsResponseManager extends AbstractResponseManager
     SerializerInterface $serializer,
     \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
     private readonly NotificationRepository $notification_repository,
+    private readonly ContentVisibilityManager $content_visibility_manager,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -154,6 +158,28 @@ class NotificationsResponseManager extends AbstractResponseManager
         'remixed_project_name' => $notification->getProgram()?->getName(),
         'message' => $this->trans('catro-notifications.remix.message'),
       ]);
+    }
+
+    if ($notification instanceof ModerationNotification) {
+      $response = [
+        'id' => $notification->getId(),
+        'type' => 'moderation',
+        'seen' => $notification->getSeen(),
+        'message' => $notification->getMessage(),
+      ];
+
+      $content_type = $notification->getContentType();
+      $content_id = $notification->getContentId();
+
+      if ('project' === $content_type && null !== $content_id) {
+        $response['project'] = $content_id;
+        $response['project_name'] = $this->content_visibility_manager->getContentName(ContentType::Project, $content_id);
+      } elseif ('comment' === $content_type && null !== $content_id) {
+        $response['project'] = $this->content_visibility_manager->getCommentProjectId($content_id);
+        $response['project_name'] = $this->content_visibility_manager->getCommentProjectName($content_id);
+      }
+
+      return new NotificationResponse($response);
     }
 
     return new NotificationResponse([

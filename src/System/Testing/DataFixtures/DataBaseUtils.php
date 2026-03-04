@@ -21,6 +21,11 @@ class DataBaseUtils
       ['bin/console', 'catrobat:db:reset', '--env=test', '--no-interaction'], [], 'Reset database'
     );
 
+    // Keep test schema in sync with current metadata to avoid drift between reset and entities.
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'doctrine:schema:update', '--force', '--env=test', '--no-interaction'], [], 'Sync test schema'
+    );
+
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [], 'Generating test data'
     );

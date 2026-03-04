@@ -57,6 +57,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'private' => null,
             'visible' => null,
             'debug_build' => null,
+            'auto_hidden' => null,
             'getTagsString' => null,
             'getExtensionsString' => null,
             'getUsernameString' => null,
@@ -113,6 +114,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'username' => [
               'boost' => 3,
             ],
+            'profile_hidden' => null,
+            'verified' => null,
           ],
           'persistence' => [
             'driver' => 'orm',

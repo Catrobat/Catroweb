@@ -12,17 +12,31 @@
       <span class="mdc-deprecated-list-item__text" id="top-app-bar__btn-share-text">{{ 'share.text'|trans({}, 'catroweb') }}</span>
     </li>
 
-  {# TODO: Disable Report Project for now. Needs a separate flag in database - a new concept!
-  {% if not my_project|default(false) %}
+  {% if not my_project|default(false) and not is_whitelisted|default(false) and not project.autoHidden %}
     <li id="top-app-bar__btn-report-project"
         class="mdc-deprecated-list-item"
-        role="menuitem">
+        role="menuitem"
+        data-content-type="project"
+        data-content-id="{{ project.id }}"
+        data-report-url="{{ url('open_api_server_moderation_projectidreportpost', {id: project.id}) }}"
+        data-login-url="{{ url('login') }}"
+        data-logged-in="{{ app.user ? 'true' : 'false' }}"
+        data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'project'}, 'catroweb') }}"
+        data-trans-report-submit="{{ 'moderation.report.submit'|trans({}, 'catroweb') }}"
+        data-trans-report-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+        data-trans-report-success="{{ 'moderation.report.success'|trans({}, 'catroweb') }}"
+        data-trans-report-error="{{ 'moderation.report.error'|trans({}, 'catroweb') }}"
+        data-trans-report-duplicate="{{ 'moderation.report.duplicate'|trans({}, 'catroweb') }}"
+        data-trans-report-trust-too-low="{{ 'moderation.report.trust_too_low'|trans({}, 'catroweb') }}"
+        data-trans-report-unverified="{{ 'moderation.report.unverified'|trans({}, 'catroweb') }}"
+        data-trans-report-suspended="{{ 'accountSuspended'|trans({}, 'catroweb') }}"
+        data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb') }}"
+        data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb') }}">
       <span class="mdc-deprecated-list-item__ripple"></span>
       <span class="mdc-deprecated-list-item__graphic material-icons">flag</span>
-      <span class="mdc-deprecated-list-item__text">{{ "report"|trans({}, "catroweb") }}</span>
+      <span class="mdc-deprecated-list-item__text">{{ 'report'|trans({}, 'catroweb') }}</span>
     </li>
   {% endif %}
-  #}
   </ul>
 
 {% endif %}

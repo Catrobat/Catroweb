@@ -6,15 +6,15 @@ use App\Admin\ApkGeneration\ApkController;
 use App\Admin\ApkGeneration\ApkPendingAdmin;
 use App\Admin\ApkGeneration\ApkReadyAdmin;
 use App\Admin\Comments\CommentsAdmin;
-use App\Admin\Comments\ReportedComments\ReportedCommentsAdmin;
-use App\Admin\Comments\ReportedComments\ReportedCommentsController;
 use App\Admin\MediaLibrary\MediaAssetAdmin;
 use App\Admin\MediaLibrary\MediaCategoryAdmin;
+use App\Admin\Moderation\AppealQueueAdmin;
+use App\Admin\Moderation\AppealQueueController;
+use App\Admin\Moderation\ModerationQueueAdmin;
+use App\Admin\Moderation\ModerationQueueController;
 use App\Admin\Projects\ApproveProjects\ApproveProjectsAdmin;
 use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
 use App\Admin\Projects\ProjectsAdmin;
-use App\Admin\Projects\ReportedProjects\ReportedProjectsAdmin;
-use App\Admin\Projects\ReportedProjects\ReportedProjectsController;
 use App\Admin\Projects\SpecialProjects\ExampleProjectAdmin;
 use App\Admin\Projects\SpecialProjects\FeaturedProjectAdmin;
 use App\Admin\Statistics\Translation\CommentMachineTranslationAdmin;
@@ -47,8 +47,6 @@ use App\Admin\UserCommunication\MaintenanceInformation\MaintenanceInformationCon
 use App\Admin\UserCommunication\SendMailToUser\SendMailToUserAdmin;
 use App\Admin\UserCommunication\SendMailToUser\SendMailToUserController;
 use App\Admin\UserCommunication\Survey\AllSurveysAdmin;
-use App\Admin\Users\ReportedUsers\ReportedUsersAdmin;
-use App\Admin\Users\ReportedUsers\ReportedUsersController;
 use App\Admin\Users\UserAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportController;
@@ -57,6 +55,7 @@ use App\Api\AuthenticationApi;
 use App\Api\CommentsApi;
 use App\Api\FollowersApi;
 use App\Api\MediaLibraryApi;
+use App\Api\ModerationApi;
 use App\Api\NotificationsApi;
 use App\Api\ProjectsApi;
 use App\Api\SearchApi;
@@ -67,9 +66,10 @@ use App\Api\UtilityApi;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
+use App\DB\Entity\Moderation\ContentAppeal;
+use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
 use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
@@ -187,6 +187,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(AchievementsApi::class)->tag('open_api_server.api', ['api' => 'achievements']);
   $services->set(FollowersApi::class)->tag('open_api_server.api', ['api' => 'followers']);
   $services->set(StudioApi::class)->tag('open_api_server.api', ['api' => 'studio']);
+  $services->set(ModerationApi::class)->tag('open_api_server.api', ['api' => 'moderation']);
   $services->set(OverwriteController::class);
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 
@@ -218,16 +219,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'controller' => ApproveProjectsController::class,
       ])
   ;
-  $services->set('admin.block.projects.reported', ReportedProjectsAdmin::class)
-    ->tag('sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Reported Projects',
-        'code' => null,
-        'model_class' => ProgramInappropriateReport::class,
-        'controller' => ReportedProjectsController::class,
-      ])
-  ;
   $services->set('admin.block.comments.overview', CommentsAdmin::class)
     ->tag('sonata.admin',
       [
@@ -239,14 +230,24 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'controller' => null,
       ])
   ;
-  $services->set('admin.block.comments.reported', ReportedCommentsAdmin::class)
+  $services->set('admin.block.moderation.reports', ModerationQueueAdmin::class)
     ->tag('sonata.admin',
       [
         'manager_type' => 'orm',
-        'label' => 'Reported Comments',
+        'label' => 'Moderation Queue',
         'code' => null,
-        'model_class' => UserComment::class,
-        'controller' => ReportedCommentsController::class,
+        'model_class' => ContentReport::class,
+        'controller' => ModerationQueueController::class,
+      ])
+  ;
+  $services->set('admin.block.moderation.appeals', AppealQueueAdmin::class)
+    ->tag('sonata.admin',
+      [
+        'manager_type' => 'orm',
+        'label' => 'Appeal Queue',
+        'code' => null,
+        'model_class' => ContentAppeal::class,
+        'controller' => AppealQueueController::class,
       ])
   ;
   $services->set('admin.media_library.category', MediaCategoryAdmin::class)
@@ -332,17 +333,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => User::class,
         'controller' => UserDataReportController::class,
-      ])
-  ;
-  $services->set('admin.block.users.reported', ReportedUsersAdmin::class)
-    ->tag('sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Reported Users',
-        'pager_type' => 'simple',
-        'code' => null,
-        'model_class' => User::class,
-        'controller' => ReportedUsersController::class,
       ])
   ;
   $services->set('admin.block.survey', AllSurveysAdmin::class)

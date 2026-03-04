@@ -130,6 +130,7 @@ class SearchController extends Controller
         200 => 'OK',
         400 => 'Bad request (Invalid, or missing parameters)',
         406 => 'Not acceptable - client must accept application/json as content type',
+        429 => 'Too Many Requests',
         default => '',
       };
 

@@ -216,6 +216,7 @@ class UserNotifications {
 
   getInstanceType(fetched) {
     if (fetched.type === 'follow' && fetched.project) return 'program'
+    if (fetched.type === 'moderation' && fetched.project) return 'program'
     return fetched.type
   }
 
@@ -227,6 +228,9 @@ class UserNotifications {
 
   generateNotificationImage(fetched) {
     const self = this
+    if (fetched.type === 'moderation') {
+      return '<span class="material-icons notification-broadcast-icon">flag</span>'
+    }
     if (fetched.type !== 'other') {
       let imgLeft = self.imgAsset
       if (fetched.avatar) {

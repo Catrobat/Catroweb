@@ -75,6 +75,14 @@ default:
                 - App\System\Testing\Behat\Context\DataFixturesContext
                 - App\System\Testing\Behat\Context\ApiContext
 
+        api-moderation:
+            paths:
+                - tests/BehatFeatures/api/moderation
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+
         api-media-library:
             paths:
                 - tests/BehatFeatures/api/media-library
@@ -361,6 +369,15 @@ default:
         web-translation:
             paths:
                 - tests/BehatFeatures/web/translation
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+                - App\System\Testing\Behat\Context\ApiContext
+
+        web-reports:
+            paths:
+                - tests/BehatFeatures/web/reports
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext

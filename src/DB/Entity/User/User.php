@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\DB\Entity\User;
 
 use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
@@ -18,7 +17,6 @@ use App\DB\Generator\MyUuidGenerator;
 use App\Utils\CanonicalFieldsUpdater;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -110,7 +108,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   /**
    * @var Collection<int, User>
    */
-  #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'following')]
+  #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'following', fetch: 'EXTRA_LAZY')]
   protected Collection $followers;
 
   /**
@@ -191,17 +189,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $verified = false;
 
-  /**
-   * @var Collection<int, ProgramInappropriateReport>
-   */
-  #[ORM\OneToMany(targetEntity: ProgramInappropriateReport::class, mappedBy: 'reporting_user', fetch: 'EXTRA_LAZY')]
-  protected Collection $reports_triggered_by_this_user;
-
-  /**
-   * @var Collection<int, ProgramInappropriateReport>
-   */
-  #[ORM\OneToMany(targetEntity: ProgramInappropriateReport::class, mappedBy: 'reported_user', fetch: 'EXTRA_LAZY')]
-  protected Collection $reports_of_this_user;
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+  protected bool $approved = false;
 
   #[ORM\Column(type: Types::TEXT, length: 65535, nullable: true)]
   protected ?string $about = null;
@@ -226,6 +215,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
   #[ORM\Column(type: 'boolean')]
   protected bool $enabled = false;
+
+  #[ORM\Column(type: 'boolean', options: ['default' => false])]
+  protected bool $profile_hidden = false;
 
   #[ORM\Column(type: 'string', nullable: true)]
   protected ?string $salt = null;
@@ -271,8 +263,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     $this->reverse_relations_of_similar_users_based_on_likes = new ArrayCollection();
     $this->relations_of_similar_users_based_on_remixes = new ArrayCollection();
     $this->reverse_relations_of_similar_users_based_on_remixes = new ArrayCollection();
-    $this->reports_triggered_by_this_user = new ArrayCollection();
-    $this->reports_of_this_user = new ArrayCollection();
   }
 
   public function getAppleId(): ?string
@@ -405,33 +395,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     $this->follow_notification_mentions = $follow_notification_mentions;
   }
 
-  public function getReportsTriggeredByThisUser(): Collection
-  {
-    return $this->reports_triggered_by_this_user;
-  }
-
-  public function getReportsOfThisUser(): Collection
-  {
-    return $this->reports_of_this_user;
-  }
-
-  public function getReportsOfThisUserCount(): int
-  {
-    return count($this->getReportsOfThisUser());
-  }
-
   public function getComments(): Collection
   {
     return $this->comments;
-  }
-
-  public function getReportedCommentsCount(): int
-  {
-    /** @var ArrayCollection $comments_collection */
-    $comments_collection = $this->getComments();
-    $criteria = Criteria::create()->andWhere(Criteria::expr()->eq('isReported', 1));
-
-    return $comments_collection->matching($criteria)->count();
   }
 
   public function setGoogleId(?string $google_id): void
@@ -549,6 +515,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   public function isVerified(): bool
   {
     return $this->verified;
+  }
+
+  public function setApproved(bool $approved): self
+  {
+    $this->approved = $approved;
+
+    return $this;
+  }
+
+  public function isApproved(): bool
+  {
+    return $this->approved;
   }
 
   public function getAbout(): ?string
@@ -764,6 +742,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   public function setEnabled(bool $enabled): void
   {
     $this->enabled = $enabled;
+  }
+
+  public function getProfileHidden(): bool
+  {
+    return $this->profile_hidden;
+  }
+
+  public function setProfileHidden(bool $profile_hidden): void
+  {
+    $this->profile_hidden = $profile_hidden;
   }
 
   public function setPassword(?string $password): void
