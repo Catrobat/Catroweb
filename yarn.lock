@@ -2388,9 +2388,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nestjs/common@npm:11.1.15":
-  version: 11.1.15
-  resolution: "@nestjs/common@npm:11.1.15"
+"@nestjs/common@npm:11.1.16":
+  version: 11.1.16
+  resolution: "@nestjs/common@npm:11.1.16"
   dependencies:
     file-type: "npm:21.3.0"
     iterare: "npm:1.2.1"
@@ -2407,13 +2407,13 @@ __metadata:
       optional: true
     class-validator:
       optional: true
-  checksum: 10c0/833fc5a556be5bc81af6cefe5d5e396694d6d0c7ead7d8feb1c7375f11a468dfd63deccc301b5981a30b518207af0ea8967163f95853f41e31163d5c4a7ef7c7
+  checksum: 10c0/bcc2a22e47f9ad49ade83e299e832183a83782e3fa9f81c0cd9d00b494a1f0193e88c6379e9aa193527dcc959d6de10c795d343af5185a1c085bea0533497bf1
   languageName: node
   linkType: hard
 
-"@nestjs/core@npm:11.1.15":
-  version: 11.1.15
-  resolution: "@nestjs/core@npm:11.1.15"
+"@nestjs/core@npm:11.1.16":
+  version: 11.1.16
+  resolution: "@nestjs/core@npm:11.1.16"
   dependencies:
     "@nuxt/opencollective": "npm:0.4.1"
     fast-safe-stringify: "npm:2.1.1"
@@ -2435,7 +2435,7 @@ __metadata:
       optional: true
     "@nestjs/websockets":
       optional: true
-  checksum: 10c0/50a59514c7f9249a4af2765058ba16a76a105b08ae8e16c27b4eecbe47c975b5d000b6cbe0340876af266ad1e867749f1ec777b4f9026de99a05a31dc8fae084
+  checksum: 10c0/1bbd899da0bd1cdde3053c258099e27aa8abb6a87e3fa2d58ebbfb74d2fab4d291ad818719eaef2a0eb0e447dbb24d5d4c1f704e5ff1029937a76aa2af0763ae
   languageName: node
   linkType: hard
 
@@ -2526,14 +2526,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openapitools/openapi-generator-cli@npm:^2.30.1":
-  version: 2.30.1
-  resolution: "@openapitools/openapi-generator-cli@npm:2.30.1"
+"@openapitools/openapi-generator-cli@npm:^2.30.2":
+  version: 2.30.2
+  resolution: "@openapitools/openapi-generator-cli@npm:2.30.2"
   dependencies:
     "@inquirer/select": "npm:1.3.3"
     "@nestjs/axios": "npm:4.0.1"
-    "@nestjs/common": "npm:11.1.15"
-    "@nestjs/core": "npm:11.1.15"
+    "@nestjs/common": "npm:11.1.16"
+    "@nestjs/core": "npm:11.1.16"
     "@nuxtjs/opencollective": "npm:0.3.2"
     axios: "npm:^1.13.6"
     chalk: "npm:4.1.2"
@@ -2549,7 +2549,7 @@ __metadata:
     tslib: "npm:2.8.1"
   bin:
     openapi-generator-cli: main.js
-  checksum: 10c0/6e972c288d4940d093c54385690b460bc98cac65d8165966803498557cf35e6f4252714f160851840cb848b3212a49802883818f6c6fc430aabe2fa3884f76dd
+  checksum: 10c0/19061232ed03d575a0a3650b2d4d698a7f2b913f936233a04b32a662175f79479cbc512957461730813346dea27b2a9254d652bb0027a459c9d63dde0de1f60f
   languageName: node
   linkType: hard
 
@@ -4083,7 +4083,7 @@ __metadata:
     "@material/tab-scroller": "npm:^14.0.0"
     "@material/textfield": "npm:^14.0.0"
     "@material/top-app-bar": "npm:^14.0.0"
-    "@openapitools/openapi-generator-cli": "npm:^2.30.1"
+    "@openapitools/openapi-generator-cli": "npm:^2.30.2"
     "@popperjs/core": "npm:^2.11.8"
     "@symfony/stimulus-bridge": "npm:^4.0.1"
     "@symfony/webpack-encore": "npm:^5.3.1"
