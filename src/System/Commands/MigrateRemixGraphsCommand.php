@@ -293,7 +293,7 @@ class MigrateRemixGraphsCommand extends Command
       //       with older XML files -> do not change order here
       // ----------------------------------------------------------------------------------------------------------
       $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->project_repository);
-      assert(1 == count($url_data), 'WTH! This project has multiple urls with different project IDs?!!');
+      assert(1 === count($url_data), 'WTH! This project has multiple urls with different project IDs?!!');
       assert($url_data[0]->getProgramId() == $project_id);
 
       // $remix_of_string = $extracted_file->getRemixMigrationUrlsString();
@@ -356,7 +356,7 @@ class MigrateRemixGraphsCommand extends Command
     $finder = new Finder();
     $finder->files()->name('*.catrobat')->in($directory)->depth(0);
 
-    if (0 == $finder->count()) {
+    if (0 === $finder->count()) {
       $output->writeln('No catrobat files found');
 
       return;

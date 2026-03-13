@@ -32,8 +32,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
 {
   use RateLimitTrait;
 
-  private const DEFAULT_LIMIT = 20;
-  private const MAX_LIMIT = 50;
+  private const int DEFAULT_LIMIT = 20;
+  private const int MAX_LIMIT = 50;
 
   public function __construct(
     private readonly AuthenticationManager $authentication_manager,
@@ -223,7 +223,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $project = $comment->getProgram();
-    if (!$project instanceof Program || null === $this->project_manager->findProjectIfVisibleToCurrentUser($project->getId())) {
+    if (!$project instanceof Program || !$this->project_manager->findProjectIfVisibleToCurrentUser($project->getId()) instanceof Program) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -283,7 +283,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $request = $this->request_stack->getCurrentRequest();
     $if_none_match = $request?->headers->get('If-None-Match');
     if (null !== $if_none_match) {
-      $candidates = array_map('trim', explode(',', $if_none_match));
+      $candidates = array_map(trim(...), explode(',', $if_none_match));
       foreach ($candidates as $candidate) {
         if (trim($candidate, '"') === $etag_value) {
           $responseCode = Response::HTTP_NOT_MODIFIED;
@@ -295,7 +295,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
 
     try {
       $translation_result = $this->translation_delegate->translate($comment->getText(), $source_language, $target_language);
-    } catch (\InvalidArgumentException $exception) {
+    } catch (\InvalidArgumentException) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return null;
@@ -330,8 +330,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $next_cursor = null;
-    if ($has_more && !empty($comments)) {
-      $last = $comments[array_key_last($comments)];
+    if ($has_more && [] !== $comments) {
+      $last = array_last($comments);
       $next_cursor = $this->encodeCursor($last['upload_date'], (int) $last['id']);
     }
 

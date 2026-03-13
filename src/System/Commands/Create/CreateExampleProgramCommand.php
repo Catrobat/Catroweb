@@ -43,7 +43,7 @@ class CreateExampleProgramCommand extends Command
 
     $program = $this->program_manager->findOneByName($program_name);
 
-    if (null === $program) {
+    if (!$program instanceof Program) {
       return 1;
     }
 

@@ -20,7 +20,7 @@ class ArrayType extends Type
   #[\Override]
   public function convertToPHPValue(mixed $value, AbstractPlatform $platform): mixed
   {
-    return json_decode($value, true) ?? [];
+    return json_decode((string) $value, true) ?? [];
   }
 
   #[\Override]

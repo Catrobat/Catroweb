@@ -85,7 +85,7 @@ class ContentReportRepository extends ServiceEntityRepository
    */
   public function getRecentReportVelocity(string $content_type, string $content_id, int $minute_window): int
   {
-    $since = (new \DateTime())->modify("-{$minute_window} minutes");
+    $since = new \DateTime()->modify("-{$minute_window} minutes");
 
     $qb = $this->createQueryBuilder('r');
 
@@ -163,7 +163,7 @@ class ContentReportRepository extends ServiceEntityRepository
       ->setMaxResults($limit + 1)
     ;
 
-    if (null !== $cursor_created_at && null !== $cursor_id) {
+    if ($cursor_created_at instanceof \DateTimeInterface && null !== $cursor_id) {
       $qb->andWhere(
         $qb->expr()->orX(
           $qb->expr()->gt('r.created_at', ':cursor_created_at'),

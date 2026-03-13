@@ -64,7 +64,7 @@ final class AuthenticationApiTest extends TestCase
     $response_headers = [];
 
     $login_request = $this->createStub(LoginRequest::class);
-    $response = $this->authentication_api->authenticationPost($login_request, $response_code, $response_headers);
+    $this->authentication_api->authenticationPost($login_request, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
   }
@@ -97,7 +97,7 @@ final class AuthenticationApiTest extends TestCase
     $response_headers = [];
 
     $refresh_request = $this->createStub(RefreshRequest::class);
-    $response = $this->authentication_api->authenticationRefreshPost($refresh_request, $response_code, $response_headers);
+    $this->authentication_api->authenticationRefreshPost($refresh_request, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
   }

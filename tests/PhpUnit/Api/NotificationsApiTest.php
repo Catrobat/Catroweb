@@ -226,7 +226,7 @@ class NotificationsApiTest extends TestCase
     $this->assertEquals(Response::HTTP_OK, $response_code);
 
     // Test with excessive limit (should cap at 50)
-    $response = $this->object->notificationsGet('en', 999, null, 'all', $response_code, $response_headers);
+    $this->object->notificationsGet('en', 999, null, 'all', $response_code, $response_headers);
     $this->assertEquals(Response::HTTP_OK, $response_code);
   }
 

@@ -39,13 +39,13 @@ readonly class CustomTranslationAchievementEventListener
 
       $project = $this->project_manager->find($project_id);
 
-      if (null === $project) {
+      if (!$project instanceof \App\DB\Entity\Project\Program) {
         return;
       }
 
       $user = $project->getUser();
 
-      if (null === $user) {
+      if (!$user instanceof \App\DB\Entity\User\User) {
         return;
       }
 

@@ -8,7 +8,6 @@ use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\EntityRepository\Project\Special\ExampleRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
@@ -28,7 +27,6 @@ use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Exception\ORMException;
-use FOS\ElasticaBundle\Finder\TransformedFinder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
@@ -70,18 +68,16 @@ class ProjectManagerTest extends TestCase
   {
     // Use stubs for dependencies that only return values (no behavior verification needed)
     $file_extractor = $this->createStub(CatrobatFileExtractor::class);
-    $program_repository = $this->createStub(ProgramRepository::class);
-    $tag_repository = $this->createStub(TagRepository::class);
-    $program_like_repository = $this->createStub(ProgramLikeRepository::class);
-    $featured_repository = $this->createStub(FeaturedRepository::class);
-    $example_repository = $this->createStub(ExampleRepository::class);
-    $logger = $this->createStub(LoggerInterface::class);
-    $app_request = $this->createStub(RequestHelper::class);
-    $extension_repository = $this->createStub(ExtensionRepository::class);
-    $catrobat_file_sanitizer = $this->createStub(CatrobatFileSanitizer::class);
-    $notification_service = $this->createStub(NotificationManager::class);
-    $program_finder = $this->createStub(TransformedFinder::class);
-    $security = $this->createStub(Security::class);
+    $this->createStub(ProgramRepository::class);
+    $this->createStub(TagRepository::class);
+    $this->createStub(FeaturedRepository::class);
+    $this->createStub(ExampleRepository::class);
+    $this->createStub(LoggerInterface::class);
+    $this->createStub(RequestHelper::class);
+    $this->createStub(ExtensionRepository::class);
+    $this->createStub(CatrobatFileSanitizer::class);
+    $this->createStub(NotificationManager::class);
+    $this->createStub(Security::class);
     $user = $this->createStub(User::class);
     $inserted_program = $this->createStub(Program::class);
 
@@ -128,7 +124,6 @@ class ProjectManagerTest extends TestCase
     $file_extractor = $this->createStub(CatrobatFileExtractor::class);
     $program_repository = $this->createStub(ProgramRepository::class);
     $tag_repository = $this->createStub(TagRepository::class);
-    $program_like_repository = $this->createStub(ProgramLikeRepository::class);
     $featured_repository = $this->createStub(FeaturedRepository::class);
     $example_repository = $this->createStub(ExampleRepository::class);
     $logger = $this->createStub(LoggerInterface::class);
@@ -136,15 +131,14 @@ class ProjectManagerTest extends TestCase
     $extension_repository = $this->createStub(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createStub(CatrobatFileSanitizer::class);
     $notification_service = $this->createStub(NotificationManager::class);
-    $program_finder = $this->createStub(TransformedFinder::class);
     $security = $this->createStub(Security::class);
     $url_helper = new UrlHelper(new RequestStack());
 
-    $user = $this->createStub(User::class);
+    $this->createStub(User::class);
     $extracted = $extracted_file ?? $this->extracted_file;
 
     fopen('/tmp/PhpUnitTest', 'w');
-    $file = new File('/tmp/PhpUnitTest');
+    new File('/tmp/PhpUnitTest');
     $file_extractor->method('extract')->willReturn($extracted);
 
     return new ProjectManager(
@@ -154,7 +148,6 @@ class ProjectManagerTest extends TestCase
       $entity_manager ?? $this->entity_manager,
       $program_repository,
       $tag_repository,
-      $program_like_repository,
       $featured_repository,
       $example_repository,
       $event_dispatcher ?? $this->event_dispatcher,
@@ -163,7 +156,6 @@ class ProjectManagerTest extends TestCase
       $extension_repository,
       $catrobat_file_sanitizer,
       $notification_service,
-      $program_finder,
       $url_helper,
       $security
     );

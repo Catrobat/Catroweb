@@ -28,7 +28,7 @@ class StudioResponseManager extends AbstractResponseManager
 
   public function createStudioResponse(Studio $studio): StudioResponse
   {
-    return (new StudioResponse())
+    return new StudioResponse()
       ->setId($studio->getId())
       ->setName($studio->getName())
       ->setDescription($studio->getDescription())
@@ -58,7 +58,7 @@ class StudioResponseManager extends AbstractResponseManager
   protected function generateImagePath(Studio $studio): string
   {
     $assetPath = $studio->getCoverAssetPath();
-    if (empty($assetPath)) {
+    if (in_array($assetPath, [null, '', '0'], true)) {
       return '';
     }
 

@@ -150,7 +150,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('downloads')
       ->add('thumbnail', 'string',
         [
-          'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
+          'accessor' => $this->getThumbnailImageUrl(...),
           'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
         ]
       )
@@ -195,7 +195,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('downloads')
       ->add('thumbnail', 'string',
         [
-          'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
+          'accessor' => $this->getThumbnailImageUrl(...),
           'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
         ]
       )

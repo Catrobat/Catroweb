@@ -185,7 +185,7 @@ class TranslationDelegate
 
   private function validateLanguage(?string $language): void
   {
-    if (2 == strlen((string) $language)) {
+    if (2 === strlen((string) $language)) {
       if (strtolower((string) $language) != $language) {
         throw new \InvalidArgumentException('2-character language code has to be lower case');
       }
@@ -193,7 +193,7 @@ class TranslationDelegate
       if (!Languages::exists($language)) {
         throw new \InvalidArgumentException('2-character language code is invalid');
       }
-    } elseif (5 == strlen((string) $language)) {
+    } elseif (5 === strlen((string) $language)) {
       if ('-' !== $language[2]) {
         throw new \InvalidArgumentException('Invalid 5-character language code format');
       }

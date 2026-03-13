@@ -42,8 +42,8 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
 
     switch ($type) {
       case 'projects':
-        $projects = $this->facade->getProjectManager()->search($query, $limit, $offset);
-        $projects_total = $this->facade->getProjectManager()->searchCount($query);
+        $projects = $this->facade->getProjectSearchService()->search($query, $limit, $offset);
+        $projects_total = $this->facade->getProjectSearchService()->searchCount($query);
 
         $result = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
         break;
@@ -54,8 +54,8 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
         break;
       case 'all':
       default:
-        $projects = $this->facade->getProjectManager()->search($query, $limit, $offset);
-        $projects_total = $this->facade->getProjectManager()->searchCount($query);
+        $projects = $this->facade->getProjectSearchService()->search($query, $limit, $offset);
+        $projects_total = $this->facade->getProjectSearchService()->searchCount($query);
         $projects_response = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
 
         $users = $this->facade->getUserManager()->search($query, $limit, $offset);

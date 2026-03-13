@@ -24,7 +24,7 @@ class ResetDatabaseCommand extends Command
   {
     $entity_manager = $this->entity_manager;
     $metadata_cache = $entity_manager->getConfiguration()->getMetadataCache();
-    if (null !== $metadata_cache) {
+    if ($metadata_cache instanceof \Psr\Cache\CacheItemPoolInterface) {
       $metadata_cache->clear();
     }
     $metaData = $entity_manager->getMetadataFactory()->getAllMetadata();

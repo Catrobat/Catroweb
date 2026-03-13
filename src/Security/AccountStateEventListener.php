@@ -43,15 +43,13 @@ class AccountStateEventListener
     }
 
     foreach (self::EXEMPT_RULES as $rule) {
-      if (preg_match($rule['pattern'], $path)) {
-        if (!isset($rule['methods']) || \in_array($method, $rule['methods'], true)) {
-          return;
-        }
+      if (preg_match($rule['pattern'], $path) && (!isset($rule['methods']) || \in_array($method, $rule['methods'], true))) {
+        return;
       }
     }
 
     $token = $this->token_storage->getToken();
-    if (null === $token) {
+    if (!$token instanceof \Symfony\Component\Security\Core\Authentication\Token\TokenInterface) {
       return;
     }
 

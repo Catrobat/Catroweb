@@ -427,7 +427,10 @@ class ResetCommand extends Command
 
       $reporter_name = $user_array[array_rand($user_array)];
       $reporter = $this->user_manager->findUserByUsername($reporter_name);
-      if (null === $reporter || $reporter->getId() === $program->getUser()?->getId()) {
+      if (!$reporter instanceof \App\DB\Entity\User\User) {
+        continue;
+      }
+      if ($reporter->getId() === $program->getUser()?->getId()) {
         continue;
       }
 
@@ -447,7 +450,10 @@ class ResetCommand extends Command
     foreach ($comments as $comment) {
       $reporter_name = $user_array[array_rand($user_array)];
       $reporter = $this->user_manager->findUserByUsername($reporter_name);
-      if (null === $reporter || $reporter->getId() === $comment->getUser()?->getId()) {
+      if (!$reporter instanceof \App\DB\Entity\User\User) {
+        continue;
+      }
+      if ($reporter->getId() === $comment->getUser()?->getId()) {
         continue;
       }
 
@@ -625,7 +631,7 @@ class ResetCommand extends Command
   private function addStatistics(): void
   {
     $statistic = $this->statistic_repository->find(1);
-    if (!$statistic) {
+    if (!$statistic instanceof Statistic) {
       $statistic = new Statistic();
     }
     $statistic->setProjects('13461234621');

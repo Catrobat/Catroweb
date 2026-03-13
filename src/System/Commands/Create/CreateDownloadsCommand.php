@@ -45,7 +45,7 @@ class CreateDownloadsCommand extends Command
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if (null === $program || null === $user) {
+    if (!$program instanceof Program || null === $user) {
       return 1;
     }
 

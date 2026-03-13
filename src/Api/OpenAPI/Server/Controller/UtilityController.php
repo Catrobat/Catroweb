@@ -56,7 +56,7 @@ class UtilityController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function healthGetAction(Request $request)
+  public function healthGetAction(Request $request): Response
   {
     // Handle authentication
 
@@ -104,7 +104,7 @@ class UtilityController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function surveyLangCodeGetAction(Request $request, $lang_code)
+  public function surveyLangCodeGetAction(Request $request, $lang_code): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

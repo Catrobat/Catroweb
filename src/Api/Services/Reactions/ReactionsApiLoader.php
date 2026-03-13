@@ -8,14 +8,14 @@ use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
+use App\Project\ProjectLikeService;
 use App\Project\ProjectManager;
 
 class ReactionsApiLoader extends AbstractApiLoader
 {
   public function __construct(
     private readonly ProjectManager $project_manager,
-    private readonly ProgramLikeRepository $program_like_repository,
+    private readonly ProjectLikeService $project_like_service,
   ) {
   }
 
@@ -23,7 +23,7 @@ class ReactionsApiLoader extends AbstractApiLoader
   {
     $project = $this->project_manager->find($id);
 
-    if (null === $project) {
+    if (!$project instanceof Program) {
       return null;
     }
 
@@ -33,7 +33,7 @@ class ReactionsApiLoader extends AbstractApiLoader
     }
 
     // Private/invisible projects are only visible to their owner
-    if (null !== $user && $project->getUser() === $user) {
+    if ($user instanceof User && $project->getUser() === $user) {
       return $project;
     }
 
@@ -48,14 +48,14 @@ class ReactionsApiLoader extends AbstractApiLoader
   public function getReactionCounts(string $project_id): array
   {
     $counts = [
-      'total' => $this->program_like_repository->totalLikeCount($project_id),
-      'thumbs_up' => $this->program_like_repository->likeTypeCount($project_id, ProgramLike::TYPE_THUMBS_UP),
-      'smile' => $this->program_like_repository->likeTypeCount($project_id, ProgramLike::TYPE_SMILE),
-      'love' => $this->program_like_repository->likeTypeCount($project_id, ProgramLike::TYPE_LOVE),
-      'wow' => $this->program_like_repository->likeTypeCount($project_id, ProgramLike::TYPE_WOW),
+      'total' => $this->project_like_service->totalLikeCount($project_id),
+      'thumbs_up' => $this->project_like_service->likeTypeCount($project_id, ProgramLike::TYPE_THUMBS_UP),
+      'smile' => $this->project_like_service->likeTypeCount($project_id, ProgramLike::TYPE_SMILE),
+      'love' => $this->project_like_service->likeTypeCount($project_id, ProgramLike::TYPE_LOVE),
+      'wow' => $this->project_like_service->likeTypeCount($project_id, ProgramLike::TYPE_WOW),
     ];
 
-    $active_type_ids = $this->program_like_repository->likeTypesOfProject($project_id);
+    $active_type_ids = $this->project_like_service->findProjectLikeTypes($project_id);
     $counts['active_types'] = array_map(
       static fn (int $type_id): string => ProgramLike::$TYPE_NAMES[$type_id] ?? '',
       $active_type_ids
@@ -76,7 +76,7 @@ class ReactionsApiLoader extends AbstractApiLoader
       return [];
     }
 
-    $likes = $this->project_manager->findUserLikes($project_id, $user_id);
+    $likes = $this->project_like_service->findUserLikes($project_id, $user_id);
 
     return array_map(
       static fn (ProgramLike $like): string => ProgramLike::$TYPE_NAMES[$like->getType()] ?? '',
@@ -94,15 +94,9 @@ class ReactionsApiLoader extends AbstractApiLoader
       return false;
     }
 
-    $likes = $this->project_manager->findUserLikes($project_id, $user_id);
+    $likes = $this->project_like_service->findUserLikes($project_id, $user_id);
 
-    foreach ($likes as $like) {
-      if ($like->getType() === $type) {
-        return true;
-      }
-    }
-
-    return false;
+    return array_any($likes, fn ($like): bool => $like->getType() === $type);
   }
 
   /**
@@ -112,6 +106,6 @@ class ReactionsApiLoader extends AbstractApiLoader
    */
   public function getReactionUsersPaginated(string $project_id, ?int $type, int $limit, ?string $cursor): array
   {
-    return $this->program_like_repository->getReactionUsersPaginated($project_id, $type, $limit, $cursor);
+    return $this->project_like_service->getReactionUsersPaginated($project_id, $type, $limit, $cursor);
   }
 }

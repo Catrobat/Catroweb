@@ -46,7 +46,7 @@ class MediaLibraryRequestValidator extends AbstractRequestValidator
   {
     $errors = [];
 
-    if (empty($translations)) {
+    if ([] === $translations) {
       $errors[] = 'At least one translation is required';
 
       return $errors;

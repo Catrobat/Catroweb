@@ -4,20 +4,13 @@ declare(strict_types=1);
 
 namespace App\Api;
 
-use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiController;
-use App\DB\Entity\Moderation\ContentAppeal;
-use App\DB\Entity\Moderation\ContentReport;
+use App\Api\Services\Moderation\ModerationApiFacade;
+use App\Api\Services\Moderation\ModerationRequestValidator;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Moderation\ContentAppealRepository;
-use App\DB\EntityRepository\Moderation\ContentReportRepository;
-use App\DB\Enum\AppealState;
 use App\DB\Enum\ContentType;
-use App\DB\Enum\ReportState;
 use App\Moderation\AppealException;
-use App\Moderation\AppealProcessor;
 use App\Moderation\ReportException;
-use App\Moderation\ReportProcessor;
 use OpenAPI\Server\Api\ModerationApiInterface;
 use OpenAPI\Server\Model\ContentAppealRequest;
 use OpenAPI\Server\Model\ContentReportRequest;
@@ -31,11 +24,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
   use RateLimitTrait;
 
   public function __construct(
-    private readonly AuthenticationManager $authentication_manager,
-    private readonly ReportProcessor $report_processor,
-    private readonly AppealProcessor $appeal_processor,
-    private readonly ContentReportRepository $report_repository,
-    private readonly ContentAppealRepository $appeal_repository,
+    private readonly ModerationApiFacade $facade,
     private readonly RateLimiterFactory $appealDailyLimiter,
   ) {
   }
@@ -133,57 +122,14 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return null;
     }
 
-    $limit = min(max($limit, 1), 100);
-    $cursor_data = $this->decodeModerationCursor($cursor);
-    $cursor_created_at = $cursor_data['created_at'] ?? null;
-    $cursor_id = $cursor_data['id'] ?? null;
-    $legacy_cursor_id = $cursor_data['legacy_id'] ?? null;
-
-    if (null !== $legacy_cursor_id && (null === $cursor_created_at || null === $cursor_id)) {
-      $legacy_report = $this->report_repository->find($legacy_cursor_id);
-      if ($legacy_report instanceof ContentReport && $legacy_report->getCreatedAt() instanceof \DateTimeInterface) {
-        $cursor_created_at = $legacy_report->getCreatedAt();
-        $cursor_id = $legacy_report->getId();
-        $legacy_cursor_id = null;
-      }
-    }
-
-    $reports = $this->report_repository->findPendingReports(
-      $limit,
-      $cursor_created_at,
-      $cursor_id,
-      $legacy_cursor_id,
-    );
-
-    $has_more = count($reports) > $limit;
-    if ($has_more) {
-      array_pop($reports);
-    }
-
-    $data = array_map(fn (ContentReport $r) => [
-      'id' => $r->getId(),
-      'reporter_id' => $r->getReporter()?->getId(),
-      'content_type' => $r->getContentType(),
-      'content_id' => $r->getContentId(),
-      'category' => $r->getCategory(),
-      'note' => $r->getNote(),
-      'state' => $r->getState(),
-      'reporter_trust_score' => $r->getReporterTrustScore(),
-      'created_at' => $r->getCreatedAt()?->format(\DateTimeInterface::ATOM),
-    ], $reports);
-
-    $last = end($reports);
-    $next_cursor = $has_more && false !== $last
-      ? $this->encodeModerationCursor($last->getCreatedAt(), $last->getId())
-      : null;
-
+    $result = $this->facade->getLoader()->loadPendingReports($limit, $cursor);
     $responseCode = Response::HTTP_OK;
 
-    return [
-      'data' => $data,
-      'next_cursor' => $next_cursor,
-      'has_more' => $has_more,
-    ];
+    return $this->facade->getResponseManager()->buildReportsResponse(
+      $result['data'],
+      $result['has_more'],
+      $result['next_cursor'],
+    );
   }
 
   #[\Override]
@@ -199,35 +145,31 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return;
     }
 
-    $admin = $this->authentication_manager->getAuthenticatedUser();
+    $admin = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$admin instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return;
     }
 
-    $report = $this->report_repository->find($id);
-    if (!$report instanceof ContentReport) {
+    $report = $this->facade->getLoader()->findReport($id);
+    if (null === $report) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;
     }
 
-    if (ReportState::New->value !== $report->getState()) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
-      return;
-    }
-
+    $validator = $this->facade->getRequestValidator();
     $action = $resolve_report_request->getAction();
-    if ('accept' !== $action && 'reject' !== $action) {
+
+    if (!$validator->isReportPending($report) || !$validator->isValidReportResolveAction($action)) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return;
     }
 
     try {
-      $this->report_processor->resolveReport($report, $admin, $action);
+      $this->facade->getProcessor()->resolveReport($report, $admin, $action);
     } catch (\InvalidArgumentException) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
@@ -250,56 +192,14 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return null;
     }
 
-    $limit = min(max($limit, 1), 100);
-    $cursor_data = $this->decodeModerationCursor($cursor);
-    $cursor_created_at = $cursor_data['created_at'] ?? null;
-    $cursor_id = $cursor_data['id'] ?? null;
-    $legacy_cursor_id = $cursor_data['legacy_id'] ?? null;
-
-    if (null !== $legacy_cursor_id && (null === $cursor_created_at || null === $cursor_id)) {
-      $legacy_appeal = $this->appeal_repository->find($legacy_cursor_id);
-      if ($legacy_appeal instanceof ContentAppeal && $legacy_appeal->getCreatedAt() instanceof \DateTimeInterface) {
-        $cursor_created_at = $legacy_appeal->getCreatedAt();
-        $cursor_id = $legacy_appeal->getId();
-        $legacy_cursor_id = null;
-      }
-    }
-
-    $appeals = $this->appeal_repository->findPendingAppeals(
-      $limit,
-      $cursor_created_at,
-      $cursor_id,
-      $legacy_cursor_id,
-    );
-
-    $has_more = count($appeals) > $limit;
-    if ($has_more) {
-      array_pop($appeals);
-    }
-
-    $data = array_map(fn (ContentAppeal $a) => [
-      'id' => $a->getId(),
-      'content_type' => $a->getContentType(),
-      'content_id' => $a->getContentId(),
-      'appellant_id' => $a->getAppellant()?->getId(),
-      'reason' => $a->getReason(),
-      'state' => $a->getState(),
-      'created_at' => $a->getCreatedAt()?->format(\DateTimeInterface::ATOM),
-      'resolution_note' => $a->getResolutionNote(),
-    ], $appeals);
-
-    $last = end($appeals);
-    $next_cursor = $has_more && false !== $last
-      ? $this->encodeModerationCursor($last->getCreatedAt(), $last->getId())
-      : null;
-
+    $result = $this->facade->getLoader()->loadPendingAppeals($limit, $cursor);
     $responseCode = Response::HTTP_OK;
 
-    return [
-      'data' => $data,
-      'next_cursor' => $next_cursor,
-      'has_more' => $has_more,
-    ];
+    return $this->facade->getResponseManager()->buildAppealsResponse(
+      $result['data'],
+      $result['has_more'],
+      $result['next_cursor'],
+    );
   }
 
   #[\Override]
@@ -315,37 +215,41 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return;
     }
 
-    $admin = $this->authentication_manager->getAuthenticatedUser();
+    $admin = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$admin instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return;
     }
 
-    $appeal = $this->appeal_repository->find($id);
-    if (!$appeal instanceof ContentAppeal) {
+    $appeal = $this->facade->getLoader()->findAppeal($id);
+    if (null === $appeal) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;
     }
 
-    if (AppealState::Pending->value !== $appeal->getState()) {
+    $validator = $this->facade->getRequestValidator();
+    $action = $resolve_appeal_request->getAction();
+    $note = $resolve_appeal_request->getNote();
+
+    if (!$validator->isAppealPending($appeal)) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return;
     }
 
-    $action = $resolve_appeal_request->getAction();
-    $note = $resolve_appeal_request->getNote();
-
-    if ('approve' === $action) {
-      $this->appeal_processor->approveAppeal($appeal, $admin, $note);
-    } elseif ('reject' === $action) {
-      $this->appeal_processor->rejectAppeal($appeal, $admin, $note);
-    } else {
+    if (!$validator->isValidAppealResolveAction($action)) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return;
+    }
+
+    $processor = $this->facade->getProcessor();
+    if (ModerationRequestValidator::ACTION_APPEAL_APPROVE === $action) {
+      $processor->approveAppeal($appeal, $admin, $note);
+    } else {
+      $processor->rejectAppeal($appeal, $admin, $note);
     }
 
     $responseCode = Response::HTTP_OK;
@@ -357,7 +261,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     ContentReportRequest $request,
     int &$responseCode,
   ): void {
-    $user = $this->authentication_manager->getAuthenticatedUser();
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
@@ -365,13 +269,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     }
 
     try {
-      $this->report_processor->processReport(
-        $user,
-        $content_type,
-        $content_id,
-        $request->getCategory() ?? '',
-        $request->getNote(),
-      );
+      $this->facade->getProcessor()->processReport($user, $content_type, $content_id, $request);
       $responseCode = Response::HTTP_NO_CONTENT;
     } catch (ReportException $e) {
       $responseCode = $e->getCode();
@@ -384,7 +282,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     ContentAppealRequest $request,
     int &$responseCode,
   ): void {
-    $user = $this->authentication_manager->getAuthenticatedUser();
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
@@ -398,69 +296,10 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     }
 
     try {
-      $this->appeal_processor->processAppeal(
-        $user,
-        $content_type,
-        $content_id,
-        $request->getReason() ?? '',
-      );
+      $this->facade->getProcessor()->processAppeal($user, $content_type, $content_id, $request);
       $responseCode = Response::HTTP_CREATED;
     } catch (AppealException $e) {
       $responseCode = $e->getCode();
     }
-  }
-
-  private function decodeModerationCursor(?string $cursor): ?array
-  {
-    if (null === $cursor || '' === trim($cursor)) {
-      return null;
-    }
-
-    $decoded = base64_decode($cursor, true);
-    if (false === $decoded || '' === trim($decoded)) {
-      return null;
-    }
-
-    if (!str_contains($decoded, '|')) {
-      $legacy_id = filter_var($decoded, FILTER_VALIDATE_INT);
-      if (false === $legacy_id) {
-        return null;
-      }
-
-      return [
-        'created_at' => null,
-        'id' => null,
-        'legacy_id' => $legacy_id,
-      ];
-    }
-
-    [$created_at_raw, $id_raw] = explode('|', $decoded, 2);
-    $id = filter_var($id_raw, FILTER_VALIDATE_INT);
-    if (false === $id) {
-      return null;
-    }
-
-    try {
-      $created_at = new \DateTimeImmutable($created_at_raw, new \DateTimeZone('UTC'));
-    } catch (\Exception) {
-      return null;
-    }
-
-    return [
-      'created_at' => $created_at->setTimezone(new \DateTimeZone('UTC')),
-      'id' => $id,
-      'legacy_id' => null,
-    ];
-  }
-
-  private function encodeModerationCursor(?\DateTimeInterface $created_at, ?int $id): ?string
-  {
-    if (!($created_at instanceof \DateTimeInterface) || null === $id) {
-      return null;
-    }
-
-    $utc_created_at = \DateTimeImmutable::createFromInterface($created_at)->setTimezone(new \DateTimeZone('UTC'));
-
-    return base64_encode($utc_created_at->format(\DateTimeInterface::ATOM).'|'.$id);
   }
 }

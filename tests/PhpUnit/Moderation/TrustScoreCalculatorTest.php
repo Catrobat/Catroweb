@@ -33,7 +33,7 @@ final class TrustScoreCalculatorTest extends TestCase
     ?ContentModerationActionRepository $action_repository = null,
     ?EntityManagerInterface $entity_manager = null,
   ): TrustScoreCalculator {
-    if (null === $cache) {
+    if (!$cache instanceof CacheItemPoolInterface) {
       $cache_item = $this->createStub(CacheItemInterface::class);
       $cache_item->method('isHit')->willReturn(false);
 
@@ -41,7 +41,7 @@ final class TrustScoreCalculatorTest extends TestCase
       $cache->method('getItem')->willReturn($cache_item);
     }
 
-    if (null === $report_repository) {
+    if (!$report_repository instanceof ContentReportRepository) {
       $report_repository = $this->createStub(ContentReportRepository::class);
       $report_repository->method('getWeightedReportAccuracy')->willReturn(['accepted' => 0.0, 'rejected' => 0.0]);
     }
@@ -83,7 +83,7 @@ final class TrustScoreCalculatorTest extends TestCase
     $user = $this->createStub(User::class);
     $user->method('getId')->willReturn('test-user-id');
     $user->method('getCreatedAt')->willReturn($created_at);
-    $user->method('hasRole')->willReturnCallback(fn (string $role) => in_array($role, $roles, true));
+    $user->method('hasRole')->willReturnCallback(fn (string $role): bool => in_array($role, $roles, true));
     $user->method('isVerified')->willReturn($verified);
 
     return $user;
@@ -245,7 +245,7 @@ final class TrustScoreCalculatorTest extends TestCase
   #[Group('unit')]
   public function testNullCreatedAtGivesZeroBaseScore(): void
   {
-    $user = $this->createUserStub(created_at: null);
+    $user = $this->createUserStub();
     $calculator = $this->buildCalculator();
 
     $score = $calculator->calculate($user);

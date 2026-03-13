@@ -268,7 +268,7 @@ class StatementFactory
   public function createStatement(\SimpleXMLElement $xmlTree, ?int $spaces): array
   {
     $statements = [];
-    if (0 == $xmlTree->count()) {
+    if (0 === $xmlTree->count()) {
       return $statements;
     }
 
@@ -556,7 +556,7 @@ class StatementFactory
   {
     $siblings = $statement->xpath('preceding-sibling::* | following-sibling::*');
     foreach ($siblings as $element) {
-      if (self::TYPE_ATTRIBUTE == $element->getName()) {
+      if (self::TYPE_ATTRIBUTE === $element->getName()) {
         return (string) $element;
       }
     }
@@ -645,7 +645,7 @@ class StatementFactory
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $userListReference = $statement->xpath($reference)[0];
       foreach ($userListReference->children() as $child) {
-        if (self::NAME_ATTRIBUTE == $child->getName()) {
+        if (self::NAME_ATTRIBUTE === $child->getName()) {
           $name = (string) $child;
         }
       }

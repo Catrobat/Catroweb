@@ -168,7 +168,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
        * The default option is to just display the value as text (for boolean this will be 1 or 0)
        */
       ->add('thumbnail', null, [
-        'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
+        'accessor' => $this->getThumbnailImageUrl(...),
         'template' => 'Admin/Projects/ThumbnailImage.html.twig',
       ])
       ->add('id')
@@ -179,19 +179,19 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('upload_ip')
       ->add('visible', 'boolean')
       ->add('Images', null, [
-        'accessor' => fn ($subject): array => $this->getContainingImageUrls($subject),
+        'accessor' => $this->getContainingImageUrls(...),
         'template' => 'Admin/Projects/ContainingImage.html.twig',
       ])
       ->add('Sounds', null, [
-        'accessor' => fn ($subject): array => $this->getContainingSoundUrls($subject),
+        'accessor' => $this->getContainingSoundUrls(...),
         'template' => 'Admin/Projects/ContainingSound.html.twig',
       ])
       ->add('Strings', null, [
-        'accessor' => fn ($subject): array => $this->getContainingStrings($subject),
+        'accessor' => $this->getContainingStrings(...),
         'template' => 'Admin/Projects/ContainingStrings.html.twig',
       ])
       ->add('Objects', null, [
-        'accessor' => fn ($subject): array => $this->getContainingCodeObjects($subject),
+        'accessor' => $this->getContainingCodeObjects(...),
         'template' => 'Admin/Projects/ContainingCodeObjects.html.twig',
       ])
       ->add('Actions', null, [

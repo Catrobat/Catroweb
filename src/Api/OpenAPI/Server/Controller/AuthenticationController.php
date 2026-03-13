@@ -56,7 +56,7 @@ class AuthenticationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function authenticationDeleteAction(Request $request)
+  public function authenticationDeleteAction(Request $request): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -129,7 +129,7 @@ class AuthenticationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function authenticationGetAction(Request $request)
+  public function authenticationGetAction(Request $request): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -184,7 +184,7 @@ class AuthenticationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function authenticationOauthPostAction(Request $request)
+  public function authenticationOauthPostAction(Request $request): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -212,7 +212,7 @@ class AuthenticationController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $o_auth_login_request = $this->deserialize($o_auth_login_request, 'OpenAPI\Server\Model\OAuthLoginRequest', $inputFormat);
+      $o_auth_login_request = $this->deserialize($o_auth_login_request, \OpenAPI\Server\Model\OAuthLoginRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -220,7 +220,7 @@ class AuthenticationController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\OAuthLoginRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\OAuthLoginRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($o_auth_login_request, $asserts);
     if ($response instanceof Response) {
@@ -272,7 +272,7 @@ class AuthenticationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function authenticationPostAction(Request $request)
+  public function authenticationPostAction(Request $request): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -303,7 +303,7 @@ class AuthenticationController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $login_request = $this->deserialize($login_request, 'OpenAPI\Server\Model\LoginRequest', $inputFormat);
+      $login_request = $this->deserialize($login_request, \OpenAPI\Server\Model\LoginRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -311,7 +311,7 @@ class AuthenticationController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\LoginRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\LoginRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($login_request, $asserts);
     if ($response instanceof Response) {
@@ -364,7 +364,7 @@ class AuthenticationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function authenticationRefreshPostAction(Request $request)
+  public function authenticationRefreshPostAction(Request $request): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -395,7 +395,7 @@ class AuthenticationController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $refresh_request = $this->deserialize($refresh_request, 'OpenAPI\Server\Model\RefreshRequest', $inputFormat);
+      $refresh_request = $this->deserialize($refresh_request, \OpenAPI\Server\Model\RefreshRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -403,7 +403,7 @@ class AuthenticationController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\RefreshRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\RefreshRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($refresh_request, $asserts);
     if ($response instanceof Response) {

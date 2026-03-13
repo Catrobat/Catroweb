@@ -61,7 +61,7 @@ class RefreshEnvironmentContext implements Context
 
     // Initialize with minimal configuration (using PHPUnit internals intentionally)
     // @phpstan-ignore-next-line
-    $cliConfiguration = (new CliConfigurationBuilder())->fromParameters([]);
+    $cliConfiguration = new CliConfigurationBuilder()->fromParameters([]);
     // @phpstan-ignore-next-line
     $xmlConfiguration = DefaultConfiguration::create();
     // @phpstan-ignore-next-line
@@ -81,7 +81,7 @@ class RefreshEnvironmentContext implements Context
     $_ENV['APP_ENV'] = 'test';
     $_SERVER['APP_ENV'] = 'test';
 
-    (new Dotenv())->bootEnv(dirname(__DIR__, 5).'/.env');
+    new Dotenv()->bootEnv(dirname(__DIR__, 5).'/.env');
   }
 
   /**

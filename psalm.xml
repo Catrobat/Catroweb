@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <!-- 1 is the highest and 8 the lowest error level  -->
 <psalm
-        errorLevel="4"
+        errorLevel="3"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://getpsalm.org/schema/config"
         xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
         findUnusedBaselineEntry="true"
         findUnusedCode="false"
+    errorBaseline="psalm-baseline.xml"
 >
     <projectFiles>
         <directory name="bin" />

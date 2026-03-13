@@ -191,7 +191,7 @@ final class UserApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->userGet($response_code, $response_headers);
+    $this->object->userGet($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
   }

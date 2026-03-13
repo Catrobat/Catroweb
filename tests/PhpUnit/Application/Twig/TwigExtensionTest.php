@@ -154,13 +154,7 @@ class TwigExtensionTest extends TestCase
 
   private function inArray(string $needle, array $haystack): bool
   {
-    foreach ($haystack as $value) {
-      if (0 === strcmp($needle, (string) $value[1])) {
-        return true;
-      }
-    }
-
-    return false;
+    return array_any($haystack, fn ($value): bool => 0 === strcmp($needle, (string) $value[1]));
   }
 
   private function isSelected(string $short, array $locales): bool

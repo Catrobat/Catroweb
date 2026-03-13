@@ -13,6 +13,7 @@ use App\DB\EntityRepository\Project\TagRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
+use App\Project\ProjectSearchService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
@@ -22,6 +23,7 @@ class ProjectsApiLoader extends AbstractApiLoader
 {
   public function __construct(
     private readonly ProjectManager $project_manager,
+    private readonly ProjectSearchService $project_search_service,
     private readonly FeaturedRepository $featured_repository,
     private readonly TagRepository $tag_repository,
     private readonly ExtensionRepository $extension_repository,
@@ -50,7 +52,7 @@ class ProjectsApiLoader extends AbstractApiLoader
       return [];
     }
 
-    return $this->project_manager->search($query, $limit, $offset, $max_version, $flavor);
+    return $this->project_search_service->search($query, $limit, $offset, $max_version, $flavor);
   }
 
   public function getProjectsFromCategory(string $category, string $max_version, int $limit, int $offset, string $flavor, ?User $user = null): array

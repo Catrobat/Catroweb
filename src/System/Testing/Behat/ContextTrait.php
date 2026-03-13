@@ -521,8 +521,8 @@ trait ContextTrait
       // Force a specific ID via raw SQL (Doctrine AUTO_INCREMENT ignores setId())
       $forced_id = (int) $config['id'];
       $upload_date_str = isset($config['upload_date']) ?
-        (new \DateTime($config['upload_date'], new \DateTimeZone('UTC')))->format('Y-m-d H:i:s') :
-        (new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
+        new \DateTime($config['upload_date'], new \DateTimeZone('UTC'))->format('Y-m-d H:i:s') :
+        new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))->format('Y-m-d H:i:s');
 
       $this->getManager()->getConnection()->executeStatement(
         'INSERT INTO user_comment (id, user_id, programId, uploadDate, text, username, parent_id, is_deleted)
@@ -640,7 +640,7 @@ trait ContextTrait
 
     // define regex wildcards
     $pattern = str_replace('REGEX_STRING_WILDCARD', '(.+?)', $pattern);
-    $pattern = str_replace('"REGEX_INT_WILDCARD"', '([0-9]+?)', $pattern);
+    $pattern = str_replace('"REGEX_INT_WILDCARD"', '(\d+?)', $pattern);
 
     $delimiter = '#';
     try {

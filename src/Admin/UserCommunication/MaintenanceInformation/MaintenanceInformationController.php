@@ -11,7 +11,4 @@ use Sonata\AdminBundle\Controller\CRUDController;
  */
 class MaintenanceInformationController extends CRUDController
 {
-  public function __construct()
-  {
-  }
 }

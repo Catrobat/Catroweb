@@ -52,7 +52,7 @@ class CreateLikeCommand extends Command
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if (null === $program || null === $user) {
+    if (!$program instanceof Program || null === $user) {
       $output->writeln('Liking '.$program_name.' with user '.$user_name.' failed');
 
       return 1;

@@ -48,7 +48,7 @@ class OpenAPIServerApiPass implements CompilerPassInterface
   /**
    * You can modify the container here before it is dumped to PHP code.
    */
-  public function process(ContainerBuilder $container)
+  public function process(ContainerBuilder $container): void
   {
     // always first check if the primary service is defined
     if (!$container->has('open_api_server.api.api_server')) {

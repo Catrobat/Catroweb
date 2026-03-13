@@ -52,6 +52,7 @@ class OpenAPIServerExtension extends Extension
     $loader->load('services.yaml');
   }
 
+  #[\Override]
   public function getAlias(): string
   {
     return 'open_api_server';

@@ -101,7 +101,7 @@ class MediaLibraryApiProcessor extends AbstractApiProcessor
       $asset->setDescription($description);
     }
 
-    if (null !== $category) {
+    if ($category instanceof MediaCategory) {
       $asset->setCategory($category);
     }
 

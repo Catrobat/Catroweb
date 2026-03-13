@@ -65,7 +65,7 @@ class ProgramImportCommand extends Command
     $finder = new Finder();
     $finder->files()->name('*.catrobat')->in($directory)->depth(0);
 
-    if (0 == $finder->count()) {
+    if (0 === $finder->count()) {
       $output->writeln('No catrobat files found');
 
       return 1;

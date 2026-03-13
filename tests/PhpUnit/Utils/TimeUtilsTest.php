@@ -21,7 +21,7 @@ class TimeUtilsTest extends TestCase
    */
   public function testTheCurrentTimestampShouldBeReturned(): void
   {
-    $current_timestamp = (new \DateTime())->getTimestamp();
+    $current_timestamp = new \DateTime()->getTimestamp();
 
     TimeUtils::unfreezeTime();
 

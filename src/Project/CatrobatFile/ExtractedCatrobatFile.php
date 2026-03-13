@@ -61,7 +61,7 @@ class ExtractedCatrobatFile
 
   public function isDebugBuild(): bool
   {
-    if (!isset($this->project_xml_properties->header->applicationBuildType)) {
+    if (!property_exists($this->project_xml_properties->header, 'applicationBuildType') || null === $this->project_xml_properties->header->applicationBuildType) {
       return false; // old project do not have this field, + they should be release projects
     }
 
@@ -107,7 +107,7 @@ class ExtractedCatrobatFile
   public function getTags(): array
   {
     $tags = (string) $this->project_xml_properties->header->tags;
-    if (strlen($tags) > 0) {
+    if ('' !== $tags) {
       return explode(',', (string) $this->project_xml_properties->header->tags);
     }
 
@@ -267,16 +267,16 @@ class ExtractedCatrobatFile
       $current_character = $remixes_string[$index];
 
       if (RemixUrlIndicator::PREFIX_INDICATOR === $current_character) {
-        if (RemixUrlParsingState::STARTING == $state) {
+        if (RemixUrlParsingState::STARTING === $state) {
           $state = RemixUrlParsingState::BETWEEN;
-        } elseif (RemixUrlParsingState::TOKEN == $state) {
+        } elseif (RemixUrlParsingState::TOKEN === $state) {
           $temp = '';
           $state = RemixUrlParsingState::BETWEEN;
         }
       } elseif (RemixUrlIndicator::SUFFIX_INDICATOR === $current_character) {
-        if (RemixUrlParsingState::TOKEN == $state) {
+        if (RemixUrlParsingState::TOKEN === $state) {
           $extracted_url = trim($temp);
-          if (!str_contains($extracted_url, RemixUrlIndicator::SEPARATOR) && strlen($extracted_url) > 0) {
+          if (!str_contains($extracted_url, RemixUrlIndicator::SEPARATOR) && '' !== $extracted_url) {
             $extracted_remixes[] = new RemixData($extracted_url);
           }
 
@@ -289,7 +289,7 @@ class ExtractedCatrobatFile
       }
     }
 
-    if (0 == count($extracted_remixes) && strlen($remixes_string) > 0
+    if (0 === count($extracted_remixes) && '' !== $remixes_string
       && !str_contains($remixes_string, RemixUrlIndicator::SEPARATOR)) {
       $extracted_remixes[] = new RemixData($remixes_string);
     }

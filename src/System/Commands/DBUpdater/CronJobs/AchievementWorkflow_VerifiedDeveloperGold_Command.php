@@ -35,7 +35,7 @@ class AchievementWorkflow_VerifiedDeveloperGold_Command extends Command
   protected function addVerifiedDeveloperAchievementToEveryUser(OutputInterface $output): void
   {
     $achievement = $this->achievement_manager->findAchievementByInternalTitle(Achievement::ACCOUNT_VERIFICATION);
-    if (!$achievement) {
+    if (!$achievement instanceof Achievement) {
       $output->writeln('Achievement not found');
 
       return;
