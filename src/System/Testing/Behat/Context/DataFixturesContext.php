@@ -358,10 +358,10 @@ class DataFixturesContext implements Context
       $maintenanceInformation = new MaintenanceInformation();
       $maintenance_start = $maintenanceinformation_config['Maintenance Start'];
       $format = 'Y-m-d';
-      $date = \DateTime::createFromFormat($format, $maintenance_start);
+      $date = \DateTime::createFromFormat($format, $maintenance_start) ?: null;
       $maintenanceInformation->setLtmMaintenanceStart($date);
       $maintenance_end = $maintenanceinformation_config['Maintenance End'];
-      $date = \DateTime::createFromFormat($format, $maintenance_end);
+      $date = \DateTime::createFromFormat($format, $maintenance_end) ?: null;
       $maintenanceInformation->setLtmMaintenanceEnd($date);
       $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
       $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_'.$maintenanceinformation_config['Id']);
@@ -866,6 +866,7 @@ class DataFixturesContext implements Context
         if (false === $type) {
           throw new \Exception('Unknown type "'.$data['type'].'" given.');
         }
+        $type = (int) $type;
       }
 
       if (!ProgramLike::isValidType($type)) {
@@ -1016,7 +1017,7 @@ class DataFixturesContext implements Context
           $temp_comment->setUser($user);
           $temp_comment->setText('This is a comment');
           $temp_comment->setProgram($project);
-          $temp_comment->setUploadDate(date_create());
+          $temp_comment->setUploadDate(new \DateTime());
           $em->persist($temp_comment);
           $to_create = new CommentNotification($project->getUser(), $temp_comment);
           $em->persist($to_create);
@@ -1774,7 +1775,7 @@ class DataFixturesContext implements Context
         'enable_comments' => $studio->isAllowComments(),
         'is_public' => $studio->isIsPublic(),
         'cover_path' => $studio->getCoverAssetPath(),
-        default => throw new \InvalidArgumentException(json_encode($set)),
+        default => throw new \InvalidArgumentException(json_encode($set) ?: 'unknown key'),
       };
       switch ($set['key']) {
         case 'is_enabled':
@@ -1784,6 +1785,7 @@ class DataFixturesContext implements Context
           break;
         case 'cover_path':
           if ($set['value']) {
+            Assert::assertIsString($result);
             Assert::assertStringEndsWith($set['value'], $result, 'Failed for: '.json_encode($set));
           }
           break;

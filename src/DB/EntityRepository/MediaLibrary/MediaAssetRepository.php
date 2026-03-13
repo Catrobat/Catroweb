@@ -37,11 +37,11 @@ class MediaAssetRepository extends ServiceEntityRepository
   ) {
     parent::__construct($manager_registry, MediaAsset::class);
 
-    /** Directory where media asset files are stored */
-    $dir = (string) $parameter_bag->get('catrobat.media.dir');
+    /** @var string $dir Directory where media asset files are stored */
+    $dir = $parameter_bag->get('catrobat.media.dir');
 
-    /** Path where files in $dir can be accessed via web */
-    $path = (string) $parameter_bag->get('catrobat.media.path');
+    /** @var string $path Path where files in $dir can be accessed via web */
+    $path = $parameter_bag->get('catrobat.media.path');
     $thumb_dir = $dir.'thumbs/';
 
     if (!is_dir($thumb_dir)) {

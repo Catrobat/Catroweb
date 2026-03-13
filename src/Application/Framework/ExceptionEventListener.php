@@ -35,7 +35,9 @@ class ExceptionEventListener
     $request = $event->getRequest();
 
     // check request
-    $themes = explode('|', (string) $this->parameter_bag->get('themeRoutes'));
+    /** @var string $themeRoutes */
+    $themeRoutes = $this->parameter_bag->get('themeRoutes');
+    $themes = explode('|', $themeRoutes);
     $theme = 'app';
     $applicationRequest = false;
     $requestUri = str_replace('/index_test.php', '', $request->getRequestUri());

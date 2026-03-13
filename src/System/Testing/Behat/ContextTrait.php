@@ -91,7 +91,12 @@ trait ContextTrait
   private function getContainer(): Container
   {
     try {
-      return $this->getKernel()->getContainer()->get('test.service_container');
+      $container = $this->getKernel()->getContainer()->get('test.service_container');
+      if (!$container instanceof Container) {
+        throw new \LogicException('Service "test.service_container" is not an instance of Container.');
+      }
+
+      return $container;
     } catch (ServiceNotFoundException $e) {
       throw new \LogicException('Could not find service "test.service_container". Try updating the "framework.test" config to "true".', 0, $e);
     }
@@ -104,127 +109,180 @@ trait ContextTrait
 
   public function getUserManager(): ?UserManager
   {
-    return $this->getContainer()->get(UserManager::class);
+    $service = $this->getContainer()->get(UserManager::class);
+
+    return $service instanceof UserManager ? $service : null;
   }
 
   public function getUserDataFixtures(): ?UserDataFixtures
   {
-    return $this->getContainer()->get(UserDataFixtures::class);
+    $service = $this->getContainer()->get(UserDataFixtures::class);
+
+    return $service instanceof UserDataFixtures ? $service : null;
   }
 
   public function getProjectManager(): ?ProjectManager
   {
-    return $this->getContainer()->get(ProjectManager::class);
+    $service = $this->getContainer()->get(ProjectManager::class);
+
+    return $service instanceof ProjectManager ? $service : null;
   }
 
   public function getProjectDataFixtures(): ?ProjectDataFixtures
   {
-    return $this->getContainer()->get(ProjectDataFixtures::class);
+    $service = $this->getContainer()->get(ProjectDataFixtures::class);
+
+    return $service instanceof ProjectDataFixtures ? $service : null;
   }
 
   public function getJwtManager(): ?JWTManager
   {
-    return $this->getContainer()->get('lexik_jwt_authentication.jwt_manager');
+    $service = $this->getContainer()->get('lexik_jwt_authentication.jwt_manager');
+
+    return $service instanceof JWTManager ? $service : null;
   }
 
   public function getJwtEncoder(): ?JWTEncoderInterface
   {
-    return $this->getContainer()->get('lexik_jwt_authentication.encoder');
+    $service = $this->getContainer()->get('lexik_jwt_authentication.encoder');
+
+    return $service instanceof JWTEncoderInterface ? $service : null;
   }
 
   public function getTagRepository(): ?TagRepository
   {
-    return $this->getContainer()->get(TagRepository::class);
+    $service = $this->getContainer()->get(TagRepository::class);
+
+    return $service instanceof TagRepository ? $service : null;
   }
 
   public function getExtensionRepository(): ?ExtensionRepository
   {
-    return $this->getContainer()->get(ExtensionRepository::class);
+    $service = $this->getContainer()->get(ExtensionRepository::class);
+
+    return $service instanceof ExtensionRepository ? $service : null;
   }
 
   public function getProjectRemixForwardRepository(): ?ProgramRemixRepository
   {
-    return $this->getContainer()->get(ProgramRemixRepository::class);
+    $service = $this->getContainer()->get(ProgramRemixRepository::class);
+
+    return $service instanceof ProgramRemixRepository ? $service : null;
   }
 
   public function getProjectRemixBackwardRepository(): ?ProgramRemixBackwardRepository
   {
-    return $this->getContainer()->get(ProgramRemixBackwardRepository::class);
+    $service = $this->getContainer()->get(ProgramRemixBackwardRepository::class);
+
+    return $service instanceof ProgramRemixBackwardRepository ? $service : null;
   }
 
   public function getScratchProjectRepository(): ?ScratchProgramRepository
   {
-    return $this->getContainer()->get(ScratchProgramRepository::class);
+    $service = $this->getContainer()->get(ScratchProgramRepository::class);
+
+    return $service instanceof ScratchProgramRepository ? $service : null;
   }
 
   public function getScratchProjectRemixRepository(): ?ScratchProgramRemixRepository
   {
-    return $this->getContainer()->get(ScratchProgramRemixRepository::class);
+    $service = $this->getContainer()->get(ScratchProgramRemixRepository::class);
+
+    return $service instanceof ScratchProgramRemixRepository ? $service : null;
   }
 
   public function getFileRepository(): ?ProjectFileRepository
   {
-    return $this->getContainer()->get(ProjectFileRepository::class);
+    $service = $this->getContainer()->get(ProjectFileRepository::class);
+
+    return $service instanceof ProjectFileRepository ? $service : null;
   }
 
   public function getExtractedFileRepository(): ?ExtractedFileRepository
   {
-    return $this->getContainer()->get(ExtractedFileRepository::class);
+    $service = $this->getContainer()->get(ExtractedFileRepository::class);
+
+    return $service instanceof ExtractedFileRepository ? $service : null;
   }
 
   public function getUserLikeSimilarityRelationRepository(): ?UserLikeSimilarityRelationRepository
   {
-    return $this->getContainer()->get(UserLikeSimilarityRelationRepository::class);
+    $service = $this->getContainer()->get(UserLikeSimilarityRelationRepository::class);
+
+    return $service instanceof UserLikeSimilarityRelationRepository ? $service : null;
   }
 
   public function getUserRemixSimilarityRelationRepository(): ?UserRemixSimilarityRelationRepository
   {
-    return $this->getContainer()->get(UserRemixSimilarityRelationRepository::class);
+    $service = $this->getContainer()->get(UserRemixSimilarityRelationRepository::class);
+
+    return $service instanceof UserRemixSimilarityRelationRepository ? $service : null;
   }
 
   public function getCatroNotificationRepository(): ?NotificationRepository
   {
-    return $this->getContainer()->get(NotificationRepository::class);
+    $service = $this->getContainer()->get(NotificationRepository::class);
+
+    return $service instanceof NotificationRepository ? $service : null;
   }
 
   public function getFlavorRepository(): ?FlavorRepository
   {
-    return $this->getContainer()->get(FlavorRepository::class);
+    $service = $this->getContainer()->get(FlavorRepository::class);
+
+    return $service instanceof FlavorRepository ? $service : null;
   }
 
   public function getFeatureFlagManager(): ?FeatureFlagManager
   {
-    return $this->getContainer()->get(FeatureFlagManager::class);
+    $service = $this->getContainer()->get(FeatureFlagManager::class);
+
+    return $service instanceof FeatureFlagManager ? $service : null;
   }
 
   public function getManager(): ?EntityManagerInterface
   {
-    return $this->getContainer()->get('doctrine')->getManager();
+    /** @var \Doctrine\Persistence\ManagerRegistry $doctrine */
+    $doctrine = $this->getContainer()->get('doctrine');
+
+    $manager = $doctrine->getManager();
+
+    return $manager instanceof EntityManagerInterface ? $manager : null;
   }
 
   public function getRouter(): ?Router
   {
-    return $this->getContainer()->get('router');
+    $service = $this->getContainer()->get('router');
+
+    return $service instanceof Router ? $service : null;
   }
 
   public function getAchievementManager(): ?AchievementManager
   {
-    return $this->getContainer()->get(AchievementManager::class);
+    $service = $this->getContainer()->get(AchievementManager::class);
+
+    return $service instanceof AchievementManager ? $service : null;
   }
 
   public function getCronJobRepository(): ?CronJobRepository
   {
-    return $this->getContainer()->get(CronJobRepository::class);
+    $service = $this->getContainer()->get(CronJobRepository::class);
+
+    return $service instanceof CronJobRepository ? $service : null;
   }
 
   public function getStudioManager(): ?StudioManager
   {
-    return $this->getContainer()->get(StudioManager::class);
+    $service = $this->getContainer()->get(StudioManager::class);
+
+    return $service instanceof StudioManager ? $service : null;
   }
 
   public function getStatisticsRepository(): ?StatisticRepository
   {
-    return $this->getContainer()->get(StatisticRepository::class);
+    $service = $this->getContainer()->get(StatisticRepository::class);
+
+    return $service instanceof StatisticRepository ? $service : null;
   }
 
   public function getSymfonyParameter(string $param): mixed
@@ -234,7 +292,15 @@ trait ContextTrait
 
   public function getSymfonyParameterAsString(string $param): string
   {
-    return strval($this->getContainer()->getParameter($param));
+    $value = $this->getContainer()->getParameter($param);
+    if (\is_string($value)) {
+      return $value;
+    }
+    if (\is_scalar($value) || null === $value) {
+      return (string) $value;
+    }
+
+    throw new \LogicException(sprintf('Parameter "%s" is not a scalar value.', $param));
   }
 
   /**

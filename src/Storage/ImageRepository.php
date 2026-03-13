@@ -10,13 +10,13 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 class ImageRepository
 {
-  private readonly ?string $example_dir;
+  private readonly string $example_dir;
 
-  private readonly ?string $featured_dir;
+  private readonly string $featured_dir;
 
-  private readonly ?string $example_path;
+  private readonly string $example_path;
 
-  private readonly ?string $featured_path;
+  private readonly string $featured_path;
 
   private ?\Imagick $imagick = null;
 
@@ -25,11 +25,15 @@ class ImageRepository
    */
   public function __construct(ParameterBagInterface $parameter_bag, private readonly ?UrlHelper $urlHelper = null)
   {
-    $example_dir = (string) $parameter_bag->get('catrobat.exampleimage.dir');
-    $example_path = (string) $parameter_bag->get('catrobat.exampleimage.path');
+    /** @var string $example_dir */
+    $example_dir = $parameter_bag->get('catrobat.exampleimage.dir');
+    /** @var string $example_path */
+    $example_path = $parameter_bag->get('catrobat.exampleimage.path');
 
-    $featured_dir = (string) $parameter_bag->get('catrobat.featuredimage.dir');
-    $featured_path = (string) $parameter_bag->get('catrobat.featuredimage.path');
+    /** @var string $featured_dir */
+    $featured_dir = $parameter_bag->get('catrobat.featuredimage.dir');
+    /** @var string $featured_path */
+    $featured_path = $parameter_bag->get('catrobat.featuredimage.path');
 
     FileHelper::verifyDirectoryExists($example_dir);
     FileHelper::verifyDirectoryExists($featured_dir);

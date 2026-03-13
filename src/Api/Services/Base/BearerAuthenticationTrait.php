@@ -33,7 +33,7 @@ trait BearerAuthenticationTrait
   private function extractAuthenticationToken(string $value): string
   {
     $split = preg_split('#\s+#', $value);
-    if (count($split) < 2 || empty($split[1])) {
+    if (!\is_array($split) || count($split) < 2 || empty($split[1])) {
       throw new ApiException('The route must be registered under the jwt_token_authenticator! (security.yaml)', Response::HTTP_UNAUTHORIZED);
     }
 

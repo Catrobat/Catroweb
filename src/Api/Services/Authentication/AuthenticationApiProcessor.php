@@ -43,6 +43,9 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     $client = new \Google\Client(['client_id' => getenv('GOOGLE_ID')]);
 
     $payload = $client->verifyIdToken($id_token);
+    if (false === $payload) {
+      throw new \RuntimeException('Invalid Google ID token');
+    }
 
     return [
       'id' => $payload['sub'],

@@ -41,7 +41,8 @@ class CreateMediaAssetSamplesCommand extends Command
   {
     $output->writeln('Creating media library sample data...');
 
-    $sample_path = (string) $this->parameter_bag->get('catrobat.media.sample.dir');
+    /** @var string $sample_path */
+    $sample_path = $this->parameter_bag->get('catrobat.media.sample.dir');
 
     $pocketcode_flavor = $this->flavor_repo->getFlavorByName(Flavor::POCKETCODE);
 

@@ -33,9 +33,9 @@ final class ReactionsApiTest extends TestCase
 {
   protected ProjectsApi $object;
 
-  protected Stub|ProjectsApiFacade $facade;
+  protected Stub&ProjectsApiFacade $facade;
 
-  protected Stub|ReactionsApiFacade $reactions_facade;
+  protected Stub&ReactionsApiFacade $reactions_facade;
 
   /**
    * @throws \ReflectionException

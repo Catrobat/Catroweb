@@ -112,7 +112,9 @@ class ResetCommand extends Command
     );
 
     if (!$share_projects_import) {
-      $local_projects_dir = $this->parameter_bag->get('catrobat.resources.dir').'projects';
+      /** @var string $resources_dir */
+      $resources_dir = $this->parameter_bag->get('catrobat.resources.dir');
+      $local_projects_dir = $resources_dir.'projects';
       $local_projects_import = $this->importLocalProjects(
         $local_projects_dir,
         20,
@@ -133,7 +135,10 @@ class ResetCommand extends Command
       $program_names[] = $program->getName();
     }
 
-    $this->createStudios($user_array, $programs, $output);
+    if ([] !== $programs) {
+      $this->createStudios($user_array, $programs, $output);
+    }
+
     $this->createModerationData($programs, $user_array, $output);
     // if ($input->hasOption('with-remixes')) {
     // $this->remixGen($program_names, $output);  // Currently not working
@@ -183,6 +188,9 @@ class ResetCommand extends Command
     );
   }
 
+  /**
+   * @param non-empty-array<string> $user_array
+   */
   private function createUsers(array $user_array, OutputInterface $output): void
   {
     $password = 'catroweb';
@@ -202,6 +210,8 @@ class ResetCommand extends Command
   }
 
   /**
+   * @param non-empty-array<string> $user_array
+   *
    * @throws ExceptionInterface
    * @throws RandomException
    */
@@ -213,7 +223,7 @@ class ResetCommand extends Command
 
     $projects_to_download = $limit;
     while ($projects_to_download > 0) {
-      $amount = random_int(1, intval(floor($projects_to_download / 5)) + 1);
+      $amount = random_int(1, max(1, intval(floor($projects_to_download / 5)) + 1));
       $username = $user_array[random_int(0, count($user_array) - 1)];
 
       CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
@@ -233,6 +243,8 @@ class ResetCommand extends Command
   }
 
   /**
+   * @param non-empty-array<string> $user_array
+   *
    * @throws \Exception
    * @throws ExceptionInterface
    */
@@ -244,7 +256,7 @@ class ResetCommand extends Command
 
     $projects_to_download = $limit;
     while ($projects_to_download > 0) {
-      $amount = random_int(1, intval(floor($projects_to_download / 5)) + 1);
+      $amount = random_int(1, max(1, intval(floor($projects_to_download / 5)) + 1));
       $this->userUploadProjects($amount, $user_array[random_int(0, count($user_array) - 1)], $remix_layout, $output);
       $projects_to_download -= $amount;
     }
@@ -299,6 +311,8 @@ class ResetCommand extends Command
   }
 
   /**
+   * @param non-empty-array<string> $user_array
+   *
    * @throws ExceptionInterface
    * @throws RandomException
    * @throws \JsonException
@@ -324,6 +338,9 @@ class ResetCommand extends Command
   }
 
   /**
+   * @param non-empty-array<string>  $user_array
+   * @param non-empty-array<Program> $program_array
+   *
    * @throws ExceptionInterface
    * @throws RandomException
    * @throws \JsonException
@@ -400,13 +417,15 @@ class ResetCommand extends Command
 
   private function getRandomStatus(): string
   {
+    /** @var non-empty-array<string> $statuses */
     $statuses = ['pending', 'declined'];
 
     return $statuses[array_rand($statuses)];
   }
 
   /**
-   * @param Program[] $programs
+   * @param Program[]               $programs
+   * @param non-empty-array<string> $user_array
    *
    * @throws RandomException
    */
@@ -414,7 +433,9 @@ class ResetCommand extends Command
   {
     $output->writeln('Creating moderation test data...');
 
+    /** @var non-empty-array<string> $project_categories */
     $project_categories = ReportCategory::getValidCategories(ContentType::Project);
+    /** @var non-empty-array<string> $comment_categories */
     $comment_categories = ReportCategory::getValidCategories(ContentType::Comment);
     $report_count = 0;
 
@@ -511,6 +532,8 @@ class ResetCommand extends Command
   }
 
   /**
+   * @param non-empty-array<string> $user_array
+   *
    * @throws ExceptionInterface
    * @throws RandomException
    * @throws \JsonException
@@ -558,6 +581,8 @@ class ResetCommand extends Command
   }
 
   /**
+   * @param non-empty-array<string> $user_array
+   *
    * @throws ExceptionInterface
    * @throws RandomException
    * @throws \JsonException

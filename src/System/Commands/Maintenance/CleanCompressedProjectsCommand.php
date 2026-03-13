@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 #[AsCommand(name: 'catrobat:clean:compressed', description: 'Removes all compressed project data.')]
 class CleanCompressedProjectsCommand extends Command
 {
-  private readonly ?string $compressed_path;
+  private readonly string $compressed_path;
 
   /**
    * @throws \Exception
@@ -21,7 +21,9 @@ class CleanCompressedProjectsCommand extends Command
   public function __construct(ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
-    $this->compressed_path = (string) $parameter_bag->get('catrobat.file.storage.dir');
+    /** @var string $compressed_path */
+    $compressed_path = $parameter_bag->get('catrobat.file.storage.dir');
+    $this->compressed_path = $compressed_path;
     if (!$this->compressed_path) {
       throw new \Exception('Invalid extract path given');
     }
@@ -34,6 +36,10 @@ class CleanCompressedProjectsCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $files = glob($this->compressed_path.'*'); // get all file names
+    if (false === $files) {
+      return 0;
+    }
+
     foreach ($files as $file) {
       if (is_file($file)) {
         unlink($file);

@@ -7,6 +7,7 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 use App\Project\CatrobatCode\Parser\Constants;
 use App\Project\CatrobatCode\Parser\FormulaResolver;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -34,8 +35,10 @@ class FormulaResolverTest extends TestCase
     $data = [];
 
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllFormulaProgram/code.xml');
+    Assert::assertNotFalse($xml_properties);
     $reference_output =
       file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllFormulaProgram/reference.output', FILE_IGNORE_NEW_LINES);
+    Assert::assertIsArray($reference_output);
 
     $reference_output_index = 0;
     foreach ($xml_properties->xpath('//formulaList') as $formula_list_xml_properties) {

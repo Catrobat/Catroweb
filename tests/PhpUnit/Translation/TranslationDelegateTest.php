@@ -22,9 +22,9 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(TranslationDelegate::class)]
 class TranslationDelegateTest extends TestCase
 {
-  private Stub|ProjectCustomTranslationRepository $project_custom_translation_repository;
+  private Stub&ProjectCustomTranslationRepository $project_custom_translation_repository;
 
-  private Stub|ProjectMachineTranslationRepository $project_machine_translation_repository;
+  private Stub&ProjectMachineTranslationRepository $project_machine_translation_repository;
 
   /**
    * @throws Exception

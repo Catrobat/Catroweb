@@ -65,7 +65,7 @@ class CreateDownloadsCommand extends Command
     $download = new ProgramDownloads();
     $download->setUser($user);
     $download->setProgram($program);
-    $download->setDownloadedAt(date_create());
+    $download->setDownloadedAt(new \DateTime());
 
     $program->setDownloads($program->getDownloads() + 1);
 

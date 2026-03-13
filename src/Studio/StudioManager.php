@@ -321,7 +321,9 @@ class StudioManager
     $cover_asset_path = null;
     if ($image_file instanceof UploadedFile) {
       $cover_asset_path = TimeUtils::getTimestamp().'-'.str_replace(' ', '-', $name).'.'.$image_file->getClientOriginalExtension();
-      $studio_image_dir = $this->parameter_bag->get('catrobat.resources.dir').'images/studio/';
+      /** @var string $resources_dir */
+      $resources_dir = $this->parameter_bag->get('catrobat.resources.dir');
+      $studio_image_dir = $resources_dir.'images/studio/';
       $image_file->move($studio_image_dir, $cover_asset_path);
       $cover_asset_path = 'resources/images/studio/'.$cover_asset_path;
     }
@@ -335,7 +337,9 @@ class StudioManager
       return false;
     }
 
-    $file = new File($this->parameter_bag->get('catrobat.pubdir').$cover_asset_path);
+    /** @var string $pubdir */
+    $pubdir = $this->parameter_bag->get('catrobat.pubdir');
+    $file = new File($pubdir.$cover_asset_path);
 
     return unlink($file->getPathname());
   }

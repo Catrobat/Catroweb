@@ -10,7 +10,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(TranslatorAwareTraitTestClass::class)]
 final class TranslatorAwareTraitTest extends TestCase
 {
-  protected TranslatorAwareTraitTestClass|MockObject $object;
+  protected TranslatorAwareTraitTestClass $object;
 
   #[\Override]
   protected function setUp(): void

@@ -28,13 +28,13 @@ class ThemeRequestEventListenerTest extends TestCase
 {
   protected ThemeRequestEventListener $object;
 
-  protected ParameterBagInterface|MockObject $parameter_bag;
+  protected ParameterBagInterface $parameter_bag;
 
   #[\Override]
   protected function setUp(): void
   {
-    $this->object = $this->mockThemeRequestEventListener();
     $this->parameter_bag = $this->mockParameterBag();
+    $this->object = $this->mockThemeRequestEventListener();
   }
 
   /**
@@ -155,7 +155,7 @@ class ThemeRequestEventListenerTest extends TestCase
     $this->object->onKernelRequest($event);
   }
 
-  private function expectRoutingThemeToEqual(RequestContext|MockObject $request_context, string $theme): void
+  private function expectRoutingThemeToEqual(MockObject&RequestContext $request_context, string $theme): void
   {
     $request_context->expects($this->once())
       ->method('setParameter')
@@ -163,7 +163,7 @@ class ThemeRequestEventListenerTest extends TestCase
     ;
   }
 
-  private function expectAttributesToEqual(MockObject|ParameterBag $request_attributes, string $theme, string $flavor): void
+  private function expectAttributesToEqual(MockObject&ParameterBag $request_attributes, string $theme, string $flavor): void
   {
     $request_attributes->expects($this->exactly(2))
       ->method('set')
@@ -185,18 +185,13 @@ class ThemeRequestEventListenerTest extends TestCase
   private function mockThemeRequestEventListener(?array $ctor_args = null): ThemeRequestEventListener
   {
     if (null === $ctor_args) {
-      // Cannot instantiate without constructor - create stub dependencies
-      $stub_parameter_bag = $this->createStub(ParameterBagInterface::class);
-      $stub_router = $this->createStub(RouterInterface::class);
-      $stub_app_request = $this->createStub(RequestHelper::class);
-
-      return new ThemeRequestEventListener($stub_parameter_bag, $stub_router, $stub_app_request);
+      $ctor_args = [$this->parameter_bag, $this->createStub(RouterInterface::class), $this->createStub(RequestHelper::class)];
     }
 
     return new ThemeRequestEventListener($ctor_args[0], $ctor_args[1], $ctor_args[2]);
   }
 
-  private function mockParameterBag(): ParameterBagInterface|MockObject
+  private function mockParameterBag(): ParameterBagInterface
   {
     $parameter_bag = $this->createStub(ParameterBagInterface::class);
     $parameter_bag
@@ -218,7 +213,7 @@ class ThemeRequestEventListenerTest extends TestCase
   /**
    * @throws \ReflectionException
    */
-  private function mockRequestEvent(int $request_type, ParameterBag|MockObject|null $attributes = null, ?string $uri = null): MockObject|RequestEvent
+  private function mockRequestEvent(int $request_type, (MockObject&ParameterBag)|null $attributes = null, ?string $uri = null): MockObject&RequestEvent
   {
     $event = $this->createMock(RequestEvent::class);
     $event->expects($this->once())
@@ -243,7 +238,7 @@ class ThemeRequestEventListenerTest extends TestCase
     return $event;
   }
 
-  private function mockRequestAttributes(): ParameterBag
+  private function mockRequestAttributes(): MockObject&ParameterBag
   {
     return $this->getMockBuilder(ParameterBag::class)
       ->disableOriginalConstructor()
@@ -251,7 +246,7 @@ class ThemeRequestEventListenerTest extends TestCase
     ;
   }
 
-  private function mockRequestContext(): RequestContext|MockObject
+  private function mockRequestContext(): MockObject&RequestContext
   {
     return $this->getMockBuilder(RequestContext::class)
       ->disableOriginalConstructor()
@@ -259,7 +254,7 @@ class ThemeRequestEventListenerTest extends TestCase
     ;
   }
 
-  private function mockAppRequest(string $response = ''): RequestHelper|MockObject
+  private function mockAppRequest(string $response = ''): RequestHelper
   {
     if ('' === $response) {
       // No expectations needed - use stub
@@ -276,7 +271,7 @@ class ThemeRequestEventListenerTest extends TestCase
     return $app_request;
   }
 
-  private function mockRouter(RequestContext|MockObject|null $request_context = null): RouterInterface|MockObject
+  private function mockRouter((MockObject&RequestContext)|null $request_context = null): RouterInterface
   {
     if (null === $request_context) {
       // No expectations needed - use stub

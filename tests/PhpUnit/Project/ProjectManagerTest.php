@@ -44,21 +44,21 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 #[CoversClass(ProjectManager::class)]
 class ProjectManagerTest extends TestCase
 {
-  private Stub|ProjectFileRepository $file_repository;
+  private Stub&ProjectFileRepository $file_repository;
 
-  private Stub|ScreenshotRepository $screenshot_repository;
+  private Stub&ScreenshotRepository $screenshot_repository;
 
-  private Stub|EntityManager $entity_manager;
+  private Stub&EntityManager $entity_manager;
 
-  private Stub|EventDispatcherInterface $event_dispatcher;
+  private Stub&EventDispatcherInterface $event_dispatcher;
 
-  private Stub|AddProjectRequest $request;
+  private Stub&AddProjectRequest $request;
 
-  private Stub|ExtractedCatrobatFile $extracted_file;
+  private Stub&ExtractedCatrobatFile $extracted_file;
 
-  private Stub|ProjectBeforeInsertEvent $programBeforeInsertEvent;
+  private Stub&ProjectBeforeInsertEvent $programBeforeInsertEvent;
 
-  private Stub|ProjectAfterInsertEvent $programAfterInsertEvent;
+  private Stub&ProjectAfterInsertEvent $programAfterInsertEvent;
 
   /**
    * @throws \Exception|Exception

@@ -77,7 +77,7 @@ class CreateCommentCommand extends Command
     $comment->setUser($user);
     $comment->setText($message);
     $comment->setProgram($program);
-    $comment->setUploadDate(date_create());
+    $comment->setUploadDate(new \DateTime());
 
     $this->em->persist($comment);
 

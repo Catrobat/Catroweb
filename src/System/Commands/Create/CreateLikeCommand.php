@@ -80,7 +80,9 @@ class CreateLikeCommand extends Command
   {
     $program_like = $this->entity_manager->getRepository(ProgramLike::class)->findOneBy(['program' => $program, 'user' => $user]);
     if (null === $program_like) {
-      $like = new ProgramLike($program, $user, array_rand(ProgramLike::$TYPE_NAMES));
+      /** @var non-empty-array<int, string> $type_names */
+      $type_names = ProgramLike::$TYPE_NAMES;
+      $like = new ProgramLike($program, $user, (int) array_rand($type_names));
       $this->entity_manager->persist($like);
       $this->entity_manager->flush();
     }

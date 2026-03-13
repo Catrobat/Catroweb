@@ -93,6 +93,7 @@ class MigrateRemixGraphsCommand extends Command
     pcntl_signal(SIGINT, $this->signalHandler(...));
     pcntl_signal(SIGUSR1, $this->signalHandler(...));
 
+    /** @var string $directory */
     $directory = $input->getArgument('directory');
     $is_debug_import_missing_projects = $input->getOption('debug-import-missing-programs');
 
@@ -102,9 +103,10 @@ class MigrateRemixGraphsCommand extends Command
       return 2;
     }
 
-    $directory = (str_ends_with((string) $directory, '/')) ? $directory : $directory.'/';
+    $directory = str_ends_with($directory, '/') ? $directory : $directory.'/';
 
     if ($is_debug_import_missing_projects) {
+      /** @var string $username */
       $username = $input->getArgument('user');
       $this->debugImportMissingProjects($output, $directory, $username);
     }
@@ -310,10 +312,12 @@ class MigrateRemixGraphsCommand extends Command
 
     // ignore remix parents of old Catrobat projects, Catroid had a bug until Catrobat Language Version 0.992
     // For more details on this, please have a look at: https://jira.catrob.at/browse/CAT-2149
-    if (version_compare($result['languageVersion'], '0.992', '<=') && (count($result['fullRemixData']) >= 2)) {
+    /** @var string $resultLanguageVersion */
+    $resultLanguageVersion = $result['languageVersion'];
+    if (version_compare($resultLanguageVersion, '0.992', '<=') && (count($result['fullRemixData']) >= 2)) {
       $progress_bar->clear();
       $output->writeln('<error>Could not migrate remixes of MERGED project '.$project_id.
-        ' - version too old: '.$result['languageVersion'].'</error>');
+        ' - version too old: '.$resultLanguageVersion.'</error>');
       $progress_bar->display();
       $result = $empty_result;
     }

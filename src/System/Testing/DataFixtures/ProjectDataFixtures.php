@@ -43,9 +43,15 @@ class ProjectDataFixtures
     private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
     ParameterBagInterface $parameter_bag)
   {
-    $this->FIXTURE_DIR = (string) $parameter_bag->get('catrobat.test.directory.source');
-    $this->GENERATED_FIXTURE_DIR = (string) $parameter_bag->get('catrobat.test.directory.target');
-    $this->EXTRACT_DIR = (string) $parameter_bag->get('catrobat.file.extract.dir');
+    $fixtureDir = $parameter_bag->get('catrobat.test.directory.source');
+    \assert(\is_string($fixtureDir));
+    $this->FIXTURE_DIR = $fixtureDir;
+    $generatedFixtureDir = $parameter_bag->get('catrobat.test.directory.target');
+    \assert(\is_string($generatedFixtureDir));
+    $this->GENERATED_FIXTURE_DIR = $generatedFixtureDir;
+    $extractDir = $parameter_bag->get('catrobat.file.extract.dir');
+    \assert(\is_string($extractDir));
+    $this->EXTRACT_DIR = $extractDir;
     FileHelper::verifyDirectoryExists($this->FIXTURE_DIR);
     FileHelper::verifyDirectoryExists($this->EXTRACT_DIR);
   }
