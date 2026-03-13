@@ -55,7 +55,11 @@ class StudioManagerTest extends KernelTestCase
     self::bootKernel();
     $container = static::getContainer();
 
-    $this->entity_manager = $container->get('doctrine')->getManager();
+    /** @var \Doctrine\Persistence\ManagerRegistry $doctrine */
+    $doctrine = $container->get('doctrine');
+    $manager = $doctrine->getManager();
+    \assert($manager instanceof EntityManager);
+    $this->entity_manager = $manager;
     /** @var StudioRepository $studio_repository */
     $studio_repository = $this->entity_manager->getRepository(Studio::class);
     /** @var StudioActivityRepository $studio_activity_repository */
@@ -82,9 +86,15 @@ class StudioManagerTest extends KernelTestCase
       $studio_program_repository,
       $parameter_bag,
     );
-    $this->user_manager = $container->get(UserManager::class);
-    $this->user_fixture = $container->get(UserDataFixtures::class);
-    $this->project_fixture = $container->get(ProjectDataFixtures::class);
+    $user_manager = $container->get(UserManager::class);
+    \assert($user_manager instanceof UserManager);
+    $this->user_manager = $user_manager;
+    $user_fixture = $container->get(UserDataFixtures::class);
+    \assert($user_fixture instanceof UserDataFixtures);
+    $this->user_fixture = $user_fixture;
+    $project_fixture = $container->get(ProjectDataFixtures::class);
+    \assert($project_fixture instanceof ProjectDataFixtures);
+    $this->project_fixture = $project_fixture;
     $this->user = $this->user_manager->findUserByUsername('catroweb') ?? $this->user_fixture->insertUser(['name' => 'catroweb', 'password' => '123456']);
     $studio_name = 'testname_'.uniqid();
     $this->studio = $this->object->createStudio($this->user, $studio_name, 'test description');

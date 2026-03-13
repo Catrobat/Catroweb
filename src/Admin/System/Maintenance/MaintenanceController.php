@@ -167,8 +167,8 @@ class MaintenanceController extends CRUDController
     $rm->setArchiveCommandLink($this->admin->generateUrl('archive_logs'));
     $rm->setArchiveCommandName('Archive logs files');
     $RemovableObjects[] = $rm;
-    $freeSpace = disk_free_space('/');
-    $usedSpace = disk_total_space('/') - $freeSpace;
+    $freeSpace = disk_free_space('/') ?: 0.0;
+    $usedSpace = (disk_total_space('/') ?: 0.0) - $freeSpace;
     $usedSpace = max($usedSpace, 0);
 
     $usedSpaceRaw = $usedSpace;
@@ -215,7 +215,11 @@ class MaintenanceController extends CRUDController
   {
     $count_size = 0;
     $count = 0;
-    $dir_array = preg_grep('#^([^.])#', scandir($directory)); // no hidden files
+    $dir_array = preg_grep('#^([^.])#', scandir($directory) ?: []); // no hidden files
+    if (false === $dir_array) {
+      return 0;
+    }
+
     foreach ($dir_array as $filename) {
       if (null !== $extension && !in_array(pathinfo((string) $filename, PATHINFO_EXTENSION), $extension, true)) {
         continue;

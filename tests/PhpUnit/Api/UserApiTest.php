@@ -38,7 +38,7 @@ final class UserApiTest extends TestCase
 {
   protected UserApi $object;
 
-  protected Stub|UserApiFacade $facade;
+  protected Stub&UserApiFacade $facade;
 
   /**
    * @throws Exception

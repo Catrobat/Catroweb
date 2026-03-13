@@ -480,9 +480,9 @@ class StudioController extends AbstractController
 
       /** @var User $user */
       $user = $this->getUser();
-      $clickedProjectsJson = $request->request->get('projects_add');
+      $clickedProjectsJson = (string) $request->request->get('projects_add');
 
-      if ('' !== (string) $clickedProjectsJson) {
+      if ('' !== $clickedProjectsJson) {
         $clickedProjects = json_decode($clickedProjectsJson, true);
         foreach ($clickedProjects as $projectId) {
           $project = $this->studio_manager->getProjectByID($projectId);
@@ -491,8 +491,8 @@ class StudioController extends AbstractController
         }
       }
 
-      $clickedRemoveProjectsJson = $request->request->get('projects_remove');
-      if ('' !== (string) $clickedRemoveProjectsJson) {
+      $clickedRemoveProjectsJson = (string) $request->request->get('projects_remove');
+      if ('' !== $clickedRemoveProjectsJson) {
         $clickedRemoveProjects = json_decode($clickedRemoveProjectsJson, true);
         foreach ($clickedRemoveProjects as $projectId) {
           $project = $this->studio_manager->getProjectByID($projectId);
@@ -518,9 +518,9 @@ class StudioController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        $clickedRemoveProjectsJson = $request->request->get('projects_remove');
+        $clickedRemoveProjectsJson = (string) $request->request->get('projects_remove');
 
-        if ('' !== (string) $clickedRemoveProjectsJson) {
+        if ('' !== $clickedRemoveProjectsJson) {
           $clickedRemoveProjects = json_decode($clickedRemoveProjectsJson, true);
 
           foreach ($clickedRemoveProjects as $projectId) {

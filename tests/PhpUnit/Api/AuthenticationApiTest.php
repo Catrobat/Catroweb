@@ -27,7 +27,7 @@ final class AuthenticationApiTest extends TestCase
 {
   protected AuthenticationApi $authentication_api;
 
-  protected AuthenticationApiFacade|Stub $facade;
+  protected Stub&AuthenticationApiFacade $facade;
 
   /**
    * @throws Exception

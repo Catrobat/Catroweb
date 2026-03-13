@@ -81,6 +81,7 @@ class ScriptsTest extends TestCase
 
     $reference_output =
       file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/script_reference.output', FILE_IGNORE_NEW_LINES);
+    Assert::assertIsArray($reference_output);
 
     $reference_output_index = 0;
 

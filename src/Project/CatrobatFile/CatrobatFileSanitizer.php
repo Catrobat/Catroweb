@@ -6,6 +6,7 @@ namespace App\Project\CatrobatFile;
 
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatCode\Parser\ParsedScene;
+use App\Project\CatrobatCode\Parser\ParsedSceneProject;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -142,7 +143,7 @@ class CatrobatFileSanitizer
   {
     $scenes = [];
     $parsed_project = $this->catrobat_code_parser->parse($extracted_file);
-    if (null !== $parsed_project && $parsed_project->hasScenes()) {
+    if ($parsed_project instanceof ParsedSceneProject) {
       $scenes_array = $parsed_project->getScenes();
       foreach ($scenes_array as $scene) {
         /* @var $scene ParsedScene */
@@ -162,8 +163,16 @@ class CatrobatFileSanitizer
     $limit = -1;
     $pattern = '@/@';
     $array = preg_split($pattern, (string) $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY);
-    $needle = @end($array);
-    $relative_filepath = strstr($filepath, (string) $needle);
+    if (false === $array) {
+      return '';
+    }
+
+    $needle = end($array);
+    if (false === $needle) {
+      return '';
+    }
+
+    $relative_filepath = strstr($filepath, $needle);
 
     return str_replace($needle, '', (string) $relative_filepath);
   }

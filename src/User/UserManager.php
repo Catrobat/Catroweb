@@ -43,13 +43,16 @@ class UserManager
     try {
       $tokenParts = explode('.', $token);
       $tokenPayload = base64_decode($tokenParts[1], true);
+      if (false === $tokenPayload) {
+        return [];
+      }
 
       $payload = json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
       if (!is_array($payload)) {
         return [];
       }
 
-      return json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
+      return $payload;
     } catch (\Exception) {
       return [];
     }

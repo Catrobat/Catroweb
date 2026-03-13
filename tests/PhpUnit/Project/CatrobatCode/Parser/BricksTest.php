@@ -8,6 +8,7 @@ use App\Project\CatrobatCode\Parser\Bricks\Brick;
 use App\Project\CatrobatCode\Parser\Bricks\BrickFactory;
 use App\Project\CatrobatCode\Parser\Constants;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -25,15 +26,17 @@ class BricksTest extends TestCase
   public const string IMG_FILE = 'img_file';
 
   /**
-   * @var \SimpleXMLElement[]|bool
+   * @var \SimpleXMLElement[]
    */
-  protected array|bool|null $brick_xml_properties_list;
+  protected array $brick_xml_properties_list;
 
   #[\Override]
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    Assert::assertNotFalse($xml_properties);
     $this->brick_xml_properties_list = $xml_properties->xpath('//brick');
+    Assert::assertIsArray($this->brick_xml_properties_list);
   }
 
   #[DataProvider('provideMethodNames')]
@@ -79,9 +82,11 @@ class BricksTest extends TestCase
 
     $reference_output =
       file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/brick_reference.output', FILE_IGNORE_NEW_LINES);
+    Assert::assertIsArray($reference_output);
     $reference_output_index = 0;
 
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    Assert::assertNotFalse($xml_properties);
     foreach ($xml_properties->xpath('//brick') as $brick_xml_properties) {
       $expected = [
         self::TYPE => $reference_output[$reference_output_index++],

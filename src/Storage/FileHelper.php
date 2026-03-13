@@ -21,6 +21,10 @@ class FileHelper
   public static function copyDirectory(string $src, string $dst): void
   {
     $dir = opendir($src);
+    if (false === $dir) {
+      throw new \RuntimeException('Could not open directory: '.$src);
+    }
+
     mkdir($dst);
     while (false !== ($file = readdir($dir))) {
       if ('.' === $file) {

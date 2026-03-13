@@ -633,7 +633,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   #[\Override]
   public function getUserIdentifier(): string
   {
-    return $this->getUsername() ?? '-';
+    $username = $this->getUsername();
+
+    return (null !== $username && '' !== $username) ? $username : '-';
   }
 
   public function getUsernameCanonical(): ?string

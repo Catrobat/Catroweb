@@ -8,7 +8,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrationFileLock
 {
-  private mixed $lock_file;
+  /** @var resource|null */
+  private mixed $lock_file = null;
 
   public function __construct(private readonly string $lock_file_path, private readonly OutputInterface $output)
   {
@@ -16,7 +17,12 @@ class MigrationFileLock
 
   public function lock(): void
   {
-    $this->lock_file = fopen($this->lock_file_path, 'w+');
+    $file = fopen($this->lock_file_path, 'w+');
+    if (false === $file) {
+      throw new \RuntimeException('Could not open lock file: '.$this->lock_file_path);
+    }
+
+    $this->lock_file = $file;
     $this->output->writeln('[MigrationFileLock] Trying to acquire lock...');
     while (false === flock($this->lock_file, LOCK_EX)) {
       $this->output->writeln('[MigrationFileLock] Waiting for file lock to be released...');

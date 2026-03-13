@@ -589,6 +589,9 @@ class ProjectManager
   {
     $tokenParts = explode('.', $token);
     $tokenPayload = base64_decode($tokenParts[1], true);
+    if (false === $tokenPayload) {
+      return [];
+    }
 
     return json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
   }

@@ -24,7 +24,9 @@ class CleanLogsTest extends KernelTestCase
     $command = $application->find('catrobat:clean:logs');
 
     $container = static::getContainer();
-    $log_dir = (string) $container->getParameter('catrobat.logs.dir');
+    $log_dir_param = $container->getParameter('catrobat.logs.dir');
+    \assert(\is_string($log_dir_param));
+    $log_dir = $log_dir_param;
 
     // create test log folder under TestData -> we don't want to remove our real logs
     if (!file_exists($log_dir)) {
@@ -40,13 +42,17 @@ class CleanLogsTest extends KernelTestCase
     for ($i = 0; $i < 10; ++$i) {
       $filename = uniqid('', true);
       $tmp_file = fopen($test_log_dir.DIRECTORY_SEPARATOR.$filename, 'w');
-      fclose($tmp_file);
+      if (false !== $tmp_file) {
+        fclose($tmp_file);
+      }
     }
 
     for ($i = 0; $i < 4; ++$i) {
       $filename = uniqid('', true);
       $tmp_file = fopen($log_dir.$filename, 'w');
-      fclose($tmp_file);
+      if (false !== $tmp_file) {
+        fclose($tmp_file);
+      }
     }
 
     // run command

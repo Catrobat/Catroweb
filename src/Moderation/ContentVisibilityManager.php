@@ -28,14 +28,10 @@ class ContentVisibilityManager
       return;
     }
 
-    match ($content_type) {
-      ContentType::Project => $entity->setAutoHidden(true),
-      ContentType::Comment => $entity->setAutoHidden(true),
-      ContentType::User => $entity->setProfileHidden(true),
-      ContentType::Studio => $entity->setAutoHidden(true),
-    };
-
-    if (ContentType::User === $content_type) {
+    if ($entity instanceof Program || $entity instanceof UserComment || $entity instanceof Studio) {
+      $entity->setAutoHidden(true);
+    } else {
+      $entity->setProfileHidden(true);
       $this->hideAllUserContent($entity);
     }
   }
@@ -59,14 +55,10 @@ class ContentVisibilityManager
       }
     }
 
-    match ($content_type) {
-      ContentType::Project => $entity->setAutoHidden(false),
-      ContentType::Comment => $entity->setAutoHidden(false),
-      ContentType::User => $entity->setProfileHidden(false),
-      ContentType::Studio => $entity->setAutoHidden(false),
-    };
-
-    if (ContentType::User === $content_type) {
+    if ($entity instanceof Program || $entity instanceof UserComment || $entity instanceof Studio) {
+      $entity->setAutoHidden(false);
+    } else {
+      $entity->setProfileHidden(false);
       $this->restoreUserContentNotIndependentlyReported($entity);
     }
   }
@@ -78,12 +70,11 @@ class ContentVisibilityManager
       return false;
     }
 
-    return match ($content_type) {
-      ContentType::Project => $entity->getAutoHidden(),
-      ContentType::Comment => $entity->getAutoHidden(),
-      ContentType::User => $entity->getProfileHidden(),
-      ContentType::Studio => $entity->getAutoHidden(),
-    };
+    if ($entity instanceof Program || $entity instanceof UserComment || $entity instanceof Studio) {
+      return $entity->getAutoHidden();
+    }
+
+    return $entity->getProfileHidden();
   }
 
   public function getContentOwnerId(ContentType $content_type, string $content_id): ?string
@@ -93,23 +84,27 @@ class ContentVisibilityManager
       return null;
     }
 
-    return match ($content_type) {
-      ContentType::Project => $entity->getUser()?->getId(),
-      ContentType::Comment => $entity->getUser()?->getId(),
-      ContentType::User => $entity->getId(),
-      ContentType::Studio => $this->entity_manager
-        ->getRepository(StudioUser::class)
-        ->findOneBy(
-          [
-            'studio' => $entity,
-            'role' => StudioUser::ROLE_ADMIN,
-            'status' => StudioUser::STATUS_ACTIVE,
-          ],
-          ['created_on' => 'ASC']
-        )
-        ?->getUser()
-        ?->getId(),
-    };
+    if ($entity instanceof Program || $entity instanceof UserComment) {
+      return $entity->getUser()?->getId();
+    }
+
+    if ($entity instanceof User) {
+      return $entity->getId();
+    }
+
+    return $this->entity_manager
+      ->getRepository(StudioUser::class)
+      ->findOneBy(
+        [
+          'studio' => $entity,
+          'role' => StudioUser::ROLE_ADMIN,
+          'status' => StudioUser::STATUS_ACTIVE,
+        ],
+        ['created_on' => 'ASC']
+      )
+      ?->getUser()
+      ?->getId()
+    ;
   }
 
   public function getContentName(ContentType $content_type, string $content_id): ?string
@@ -119,12 +114,17 @@ class ContentVisibilityManager
       return null;
     }
 
-    return match ($content_type) {
-      ContentType::Project => $entity->getName(),
-      ContentType::Comment => mb_substr((string) $entity->getText(), 0, 50).(mb_strlen((string) $entity->getText()) > 50 ? '...' : ''),
-      ContentType::User => $entity->getUserIdentifier(),
-      ContentType::Studio => $entity->getName(),
-    };
+    if ($entity instanceof Program || $entity instanceof Studio) {
+      return $entity->getName();
+    }
+
+    if ($entity instanceof UserComment) {
+      $text = (string) $entity->getText();
+
+      return mb_substr($text, 0, 50).(mb_strlen($text) > 50 ? '...' : '');
+    }
+
+    return $entity->getUserIdentifier();
   }
 
   /**
@@ -154,12 +154,19 @@ class ContentVisibilityManager
       return false;
     }
 
-    return match ($content_type) {
-      ContentType::Project => $entity->getApproved() || ($entity->getUser()?->isApproved() ?? false),
-      ContentType::Comment => $entity->getUser()?->isApproved() ?? false,
-      ContentType::User => $entity->isApproved(),
-      ContentType::Studio => false,
-    };
+    if ($entity instanceof Program) {
+      return $entity->getApproved() || ($entity->getUser()?->isApproved() ?? false);
+    }
+
+    if ($entity instanceof UserComment) {
+      return $entity->getUser()?->isApproved() ?? false;
+    }
+
+    if ($entity instanceof User) {
+      return $entity->isApproved();
+    }
+
+    return false;
   }
 
   public function contentExists(ContentType $content_type, string $content_id): bool

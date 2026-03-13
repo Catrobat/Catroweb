@@ -197,7 +197,13 @@ class ExtractedCatrobatFile
       $screenshots = iterator_to_array($finder->in($this->path)->files()->name('screenshot.png'));
     }
 
-    return $finder->hasResults() ? reset($screenshots)->getPathname() : null;
+    if (!$finder->hasResults()) {
+      return null;
+    }
+
+    $first = reset($screenshots);
+
+    return false !== $first ? $first->getPathname() : null;
   }
 
   public function getApplicationVersion(): string
@@ -241,6 +247,9 @@ class ExtractedCatrobatFile
     }
 
     $xml_string = file_get_contents($this->path.'code.xml');
+    if (false === $xml_string) {
+      return;
+    }
 
     $xml_string = preg_replace('#<receivedMessage>(.*)&lt;-&gt;ANYTHING</receivedMessage>#',
       '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>', $xml_string);

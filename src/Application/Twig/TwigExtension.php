@@ -263,14 +263,20 @@ class TwigExtension extends AbstractExtension
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request?->attributes->get('flavor') ?? (string) $this->parameter_bag->get('defaultFlavor');
+    /** @var string $defaultFlavor */
+    $defaultFlavor = $this->parameter_bag->get('defaultFlavor');
+
+    return $request?->attributes->get('flavor') ?? $defaultFlavor;
   }
 
   public function getTheme(): string
   {
     $request = $this->request_stack->getCurrentRequest();
 
-    return $request?->attributes->get('theme') ?? (string) $this->parameter_bag->get('umbrellaTheme');
+    /** @var string $umbrellaTheme */
+    $umbrellaTheme = $this->parameter_bag->get('umbrellaTheme');
+
+    return $request?->attributes->get('theme') ?? $umbrellaTheme;
   }
 
   public function getThemeDisplayName(): string
@@ -301,7 +307,8 @@ class TwigExtension extends AbstractExtension
 
   protected function getPublicFilenamePath(string $filename): string
   {
-    $public_dir = (string) $this->parameter_bag->get('catrobat.pubdir');
+    /** @var string $public_dir */
+    $public_dir = $this->parameter_bag->get('catrobat.pubdir');
     $filename = rawurldecode($filename);
 
     return $public_dir.$filename;

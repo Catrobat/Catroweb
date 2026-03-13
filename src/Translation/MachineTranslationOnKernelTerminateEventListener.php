@@ -144,6 +144,9 @@ class MachineTranslationOnKernelTerminateEventListener
   private function getJson(TerminateEvent $event): array
   {
     $json_response = $event->getResponse()->getContent();
+    if (false === $json_response) {
+      return [];
+    }
 
     return json_decode($json_response, true, 512, JSON_THROW_ON_ERROR);
   }

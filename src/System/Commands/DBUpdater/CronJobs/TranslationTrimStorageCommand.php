@@ -76,6 +76,9 @@ class TranslationTrimStorageCommand extends Command
     return 0;
   }
 
+  /**
+   * @param class-string $entity
+   */
   private function deleteEntries(string $entity, \DateTimeImmutable $older_than_date): void
   {
     $qb = $this->entity_manager->createQueryBuilder();

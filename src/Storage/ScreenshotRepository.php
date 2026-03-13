@@ -36,13 +36,20 @@ class ScreenshotRepository
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
-    $screenshot_dir = strval($parameter_bag->get('catrobat.screenshot.dir'));
-    $screenshot_path = strval($parameter_bag->get('catrobat.screenshot.path'));
-    $thumbnail_dir = strval($parameter_bag->get('catrobat.thumbnail.dir'));
-    $thumbnail_path = strval($parameter_bag->get('catrobat.thumbnail.path'));
-    $tmp_dir = strval($parameter_bag->get('catrobat.upload.temp.dir'));
-    $extracted_project_dir = strval($parameter_bag->get('catrobat.file.extract.dir'));
-    $project_zip_dir = strval($parameter_bag->get('catrobat.file.storage.dir'));
+    /** @var string $screenshot_dir */
+    $screenshot_dir = $parameter_bag->get('catrobat.screenshot.dir');
+    /** @var string $screenshot_path */
+    $screenshot_path = $parameter_bag->get('catrobat.screenshot.path');
+    /** @var string $thumbnail_dir */
+    $thumbnail_dir = $parameter_bag->get('catrobat.thumbnail.dir');
+    /** @var string $thumbnail_path */
+    $thumbnail_path = $parameter_bag->get('catrobat.thumbnail.path');
+    /** @var string $tmp_dir */
+    $tmp_dir = $parameter_bag->get('catrobat.upload.temp.dir');
+    /** @var string $extracted_project_dir */
+    $extracted_project_dir = $parameter_bag->get('catrobat.file.extract.dir');
+    /** @var string $project_zip_dir */
+    $project_zip_dir = $parameter_bag->get('catrobat.file.storage.dir');
 
     FileHelper::verifyDirectoryExists($screenshot_dir);
     FileHelper::verifyDirectoryExists($thumbnail_dir);
@@ -110,6 +117,10 @@ class ScreenshotRepository
   {
     $screen = $this->getImagick();
     $image = file_get_contents('https://cdn2.scratch.mit.edu/get_image/project/'.$Scratch_id.'_480x360.png');
+    if (false === $image) {
+      throw new \RuntimeException('Could not download scratch screenshot for project '.$Scratch_id);
+    }
+
     $screen->readImageBlob($image);
     $this->saveImagickScreenshot($screen, $id);
     $screen->destroy();

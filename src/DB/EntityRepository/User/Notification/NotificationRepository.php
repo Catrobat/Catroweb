@@ -166,7 +166,7 @@ class NotificationRepository extends ServiceEntityRepository
       'moderation' => 'n INSTANCE OF '.ModerationNotification::class,
     ];
 
-    $result = ['total' => $total];
+    $result = ['total' => $total, 'like' => 0, 'follower' => 0, 'comment' => 0, 'remix' => 0, 'moderation' => 0];
     foreach ($typeFilters as $key => $filter) {
       $result[$key] = (int) $em->createQueryBuilder()
         ->select('COUNT(n.id)')

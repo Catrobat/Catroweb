@@ -6,6 +6,7 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\ParsedObjectAsset;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -25,8 +26,13 @@ class ParsedObjectAssetTest extends TestCase
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
-    $this->assets[] = new ParsedObjectAsset($xml_properties->xpath('//look')[0]);
-    $this->assets[] = new ParsedObjectAsset($xml_properties->xpath('//sound')[0]);
+    Assert::assertNotFalse($xml_properties);
+    $looks = $xml_properties->xpath('//look');
+    Assert::assertIsArray($looks);
+    $sounds = $xml_properties->xpath('//sound');
+    Assert::assertIsArray($sounds);
+    $this->assets[] = new ParsedObjectAsset($looks[0]);
+    $this->assets[] = new ParsedObjectAsset($sounds[0]);
   }
 
   #[DataProvider('provideMethodNames')]

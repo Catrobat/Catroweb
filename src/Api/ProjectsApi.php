@@ -98,7 +98,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
-    $error_response = $this->facade->getResponseManager()->createUpdateFailureResponse($result, $accept_language);
+    $error_response = $this->facade->getResponseManager()->createUpdateFailureResponse((int) $result, $accept_language);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 

@@ -106,12 +106,6 @@
       <code><![CDATA[getName]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/Admin/Projects/SpecialProjects/Forms/FeaturedImageConstraintValidator.php">
-    <PossiblyInvalidArrayAccess>
-      <code><![CDATA[$image_info[0]]]></code>
-      <code><![CDATA[$image_info[1]]]></code>
-    </PossiblyInvalidArrayAccess>
-  </file>
   <file src="src/Admin/System/CronJobs/CronJobsAdminController.php">
     <PossiblyNullArgument>
       <code><![CDATA[$cron_job]]></code>
@@ -137,18 +131,6 @@
     <PossiblyNullReference>
       <code><![CDATA[get]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/Admin/System/Logs/LogsController.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$file]]></code>
-      <code><![CDATA[$file]]></code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="src/Admin/System/Maintenance/MaintenanceController.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$freeSpace]]></code>
-      <code><![CDATA[scandir($directory)]]></code>
-    </PossiblyFalseArgument>
   </file>
   <file src="src/Admin/UserCommunication/SendMailToUser/SendMailToUserController.php">
     <PossiblyNullArgument>
@@ -181,9 +163,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Api/ProjectsApi.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$result]]></code>
-    </PossiblyFalseArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$user]]></code>
@@ -194,21 +173,12 @@
     </PossiblyNullReference>
   </file>
   <file src="src/Api/Services/Authentication/AuthenticationApiProcessor.php">
-    <PossiblyInvalidArrayAccess>
-      <code><![CDATA[$payload['email']]]></code>
-      <code><![CDATA[$payload['name']]]></code>
-      <code><![CDATA[$payload['sub']]]></code>
-    </PossiblyInvalidArrayAccess>
     <PossiblyNullArrayAccess>
       <code><![CDATA[$header['kid']]]></code>
       <code><![CDATA[$jwt['header']]]></code>
     </PossiblyNullArrayAccess>
   </file>
   <file src="src/Api/Services/Authentication/AuthenticationRequestValidator.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[base64_decode($header, true)]]></code>
-      <code><![CDATA[base64_decode($payload, true)]]></code>
-    </PossiblyFalseArgument>
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$payload]]></code>
     </PossiblyUndefinedArrayOffset>
@@ -221,11 +191,6 @@
       <code><![CDATA[getUser]]></code>
       <code><![CDATA[has]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/Api/Services/Base/BearerAuthenticationTrait.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$split]]></code>
-    </PossiblyFalseArgument>
   </file>
   <file src="src/Api/Services/Followers/FollowersResponseManager.php">
     <PossiblyNullArgument>
@@ -332,9 +297,6 @@
     </PossiblyNullReference>
   </file>
   <file src="src/Api/Services/User/UserRequestValidator.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$pslFile]]></code>
-    </PossiblyFalseArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$email]]></code>
       <code><![CDATA[$request->getPicture()]]></code>
@@ -429,15 +391,7 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Application/Controller/Studio/StudioController.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$clickedProjectsJson]]></code>
-      <code><![CDATA[$clickedRemoveProjectsJson]]></code>
-      <code><![CDATA[$clickedRemoveProjectsJson]]></code>
-    </ArgumentTypeCoercion>
     <PossiblyNullArgument>
-      <code><![CDATA[$clickedProjectsJson]]></code>
-      <code><![CDATA[$clickedRemoveProjectsJson]]></code>
-      <code><![CDATA[$clickedRemoveProjectsJson]]></code>
       <code><![CDATA[$comment->getStudio()]]></code>
       <code><![CDATA[$comment->getStudio()]]></code>
       <code><![CDATA[$joinRequest]]></code>
@@ -485,32 +439,12 @@
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Application/Framework/ExceptionEventListener.php">
-    <PossiblyInvalidCast>
-      <code><![CDATA[$this->parameter_bag->get('themeRoutes')]]></code>
-    </PossiblyInvalidCast>
-  </file>
   <file src="src/Application/Framework/VersionStrategy.php">
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$_ENV['APP_ENV']]]></code>
     </PossiblyUndefinedArrayOffset>
   </file>
-  <file src="src/Application/Theme/ThemeRequestEventListener.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$flavors]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$parameter_bag->get('defaultFlavor')]]></code>
-      <code><![CDATA[$parameter_bag->get('umbrellaTheme')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('umbrellaTheme')]]></code>
-    </PossiblyInvalidCast>
-  </file>
   <file src="src/Application/Twig/TwigExtension.php">
-    <PossiblyInvalidCast>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.pubdir')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('defaultFlavor')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('umbrellaTheme')]]></code>
-    </PossiblyInvalidCast>
     <PossiblyNullReference>
       <code><![CDATA[get]]></code>
       <code><![CDATA[getLocale]]></code>
@@ -569,12 +503,6 @@
     </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="src/DB/Entity/User/User.php">
-    <LessSpecificReturnStatement>
-      <code><![CDATA[$this->getUsername() ?? '-']]></code>
-    </LessSpecificReturnStatement>
-    <MoreSpecificReturnType>
-      <code><![CDATA[string]]></code>
-    </MoreSpecificReturnType>
     <PossiblyNullPropertyAssignmentValue>
       <code><![CDATA[$createdAt]]></code>
       <code><![CDATA[$updatedAt]]></code>
@@ -584,10 +512,6 @@
     <PossiblyFalseArgument>
       <code><![CDATA[realpath($source_file)]]></code>
     </PossiblyFalseArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$parameter_bag->get('catrobat.media.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.media.path')]]></code>
-    </PossiblyInvalidCast>
   </file>
   <file src="src/DB/EntityRepository/Project/ProgramLikeRepository.php">
     <ArgumentTypeCoercion>
@@ -617,11 +541,6 @@
       <code><![CDATA[$_ENV['APP_ENV']]]></code>
     </PossiblyUndefinedArrayOffset>
   </file>
-  <file src="src/DB/EntityRepository/User/ResetPasswordRequestRepository.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$user]]></code>
-    </ArgumentTypeCoercion>
-  </file>
   <file src="src/Moderation/AppealProcessor.php">
     <PossiblyNullArgument>
       <code><![CDATA[$appeal->getAppellant()]]></code>
@@ -630,37 +549,6 @@
       <code><![CDATA[$appellant->getId()]]></code>
       <code><![CDATA[$report->getReporter()]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/Moderation/ContentVisibilityManager.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$entity]]></code>
-      <code><![CDATA[$entity]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[getApproved]]></code>
-      <code><![CDATA[getAutoHidden]]></code>
-      <code><![CDATA[getAutoHidden]]></code>
-      <code><![CDATA[getAutoHidden]]></code>
-      <code><![CDATA[getName]]></code>
-      <code><![CDATA[getName]]></code>
-      <code><![CDATA[getProfileHidden]]></code>
-      <code><![CDATA[getText]]></code>
-      <code><![CDATA[getText]]></code>
-      <code><![CDATA[getUser]]></code>
-      <code><![CDATA[getUser]]></code>
-      <code><![CDATA[getUser]]></code>
-      <code><![CDATA[getUser]]></code>
-      <code><![CDATA[getUserIdentifier]]></code>
-      <code><![CDATA[isApproved]]></code>
-      <code><![CDATA[setAutoHidden]]></code>
-      <code><![CDATA[setAutoHidden]]></code>
-      <code><![CDATA[setAutoHidden]]></code>
-      <code><![CDATA[setAutoHidden]]></code>
-      <code><![CDATA[setAutoHidden]]></code>
-      <code><![CDATA[setAutoHidden]]></code>
-      <code><![CDATA[setProfileHidden]]></code>
-      <code><![CDATA[setProfileHidden]]></code>
-    </PossiblyUndefinedMethod>
   </file>
   <file src="src/Moderation/ReportProcessor.php">
     <PossiblyNullArgument>
@@ -681,18 +569,7 @@
       <code><![CDATA[$project->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Project/Apk/ApkRepository.php">
-    <PossiblyInvalidCast>
-      <code><![CDATA[$parameter_bag->get('catrobat.apk.dir')]]></code>
-    </PossiblyInvalidCast>
-    <PossiblyNullArgument>
-      <code><![CDATA[$this->dir]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/Project/CatrobatFile/CatrobatFileSanitizer.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$array]]></code>
-    </PossiblyFalseArgument>
     <PossiblyFalseIterator>
       <code><![CDATA[scandir($dir)]]></code>
     </PossiblyFalseIterator>
@@ -704,17 +581,8 @@
       <code><![CDATA[$this->scenes]]></code>
       <code><![CDATA[$this->scenes]]></code>
     </PossiblyNullIterator>
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[getScenes]]></code>
-    </PossiblyUndefinedMethod>
   </file>
   <file src="src/Project/CatrobatFile/ExtractedCatrobatFile.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$xml_string]]></code>
-    </PossiblyFalseArgument>
-    <PossiblyFalseReference>
-      <code><![CDATA[getPathname]]></code>
-    </PossiblyFalseReference>
     <PossiblyNullArgument>
       <code><![CDATA[$this->project_xml_properties->header]]></code>
       <code><![CDATA[$this->project_xml_properties->xpath('//scenes')]]></code>
@@ -742,11 +610,6 @@
     </PossiblyNullReference>
   </file>
   <file src="src/Project/CatrobatFile/ExtractedFileRepository.php">
-    <PossiblyInvalidCast>
-      <code><![CDATA[$parameter_bag->get('catrobat.file.extract.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.file.extract.path')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.file.storage.dir')]]></code>
-    </PossiblyInvalidCast>
     <PossiblyNullArgument>
       <code><![CDATA[$project_id]]></code>
     </PossiblyNullArgument>
@@ -796,9 +659,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Project/ProjectManager.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$tokenPayload]]></code>
-    </PossiblyFalseArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$extracted_file->getScreenshotPath()]]></code>
       <code><![CDATA[$project->getId()]]></code>
@@ -909,38 +769,14 @@
     </PossiblyNullReference>
   </file>
   <file src="src/Storage/FileHelper.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$dir]]></code>
-      <code><![CDATA[$dir]]></code>
-    </PossiblyFalseArgument>
     <PossiblyFalseIterator>
       <code><![CDATA[$files]]></code>
     </PossiblyFalseIterator>
   </file>
   <file src="src/Storage/ImageRepository.php">
-    <PossiblyInvalidCast>
-      <code><![CDATA[$parameter_bag->get('catrobat.exampleimage.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.exampleimage.path')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.featuredimage.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.featuredimage.path')]]></code>
-    </PossiblyInvalidCast>
     <PossiblyNullReference>
       <code><![CDATA[getAbsoluteUrl]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/Storage/ScreenshotRepository.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$image]]></code>
-    </PossiblyFalseArgument>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$parameter_bag->get('catrobat.file.extract.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.file.storage.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.screenshot.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.screenshot.path')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.thumbnail.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.thumbnail.path')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.upload.temp.dir')]]></code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="src/Studio/StudioManager.php">
     <PossiblyNullArgument>
@@ -961,18 +797,10 @@
     </PossiblyNullReference>
   </file>
   <file src="src/System/Commands/Create/CreateCommentCommand.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[date_create()]]></code>
-    </PossiblyFalseArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$program->getUser()]]></code>
       <code><![CDATA[$user->getUsername()]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/System/Commands/Create/CreateDownloadsCommand.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[date_create()]]></code>
-    </PossiblyFalseArgument>
   </file>
   <file src="src/System/Commands/Create/CreateExampleProgramCommand.php">
     <PossiblyNullArgument>
@@ -988,11 +816,6 @@
     <PossiblyNullArgument>
       <code><![CDATA[$program->getUser()]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/System/Commands/Create/CreateMediaAssetSamplesCommand.php">
-    <PossiblyInvalidCast>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.media.sample.dir')]]></code>
-    </PossiblyInvalidCast>
   </file>
   <file src="src/System/Commands/Create/CreateRemixCommand.php">
     <PossiblyNullArgument>
@@ -1016,24 +839,12 @@
       <code><![CDATA[$_ENV['APP_ENV']]]></code>
     </PossiblyUndefinedArrayOffset>
   </file>
-  <file src="src/System/Commands/DBUpdater/CronJobs/TranslationTrimStorageCommand.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$entity]]></code>
-    </ArgumentTypeCoercion>
-  </file>
   <file src="src/System/Commands/DBUpdater/CronJobs/UpdateRandomProjectCategoryCommand.php">
     <PossiblyNullReference>
       <code><![CDATA[setRand]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/System/Commands/GenerateTestDataCommand.php">
-    <PossiblyFalseReference>
-      <code><![CDATA[asXML]]></code>
-    </PossiblyFalseReference>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$parameter_bag->get('catrobat.test.directory.source')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.test.directory.target')]]></code>
-    </PossiblyInvalidCast>
     <PossiblyNullPropertyAssignment>
       <code><![CDATA[$properties->header]]></code>
     </PossiblyNullPropertyAssignment>
@@ -1044,10 +855,9 @@
     </PossiblyUndefinedArrayOffset>
   </file>
   <file src="src/System/Commands/Helpers/MigrationFileLock.php">
-    <PossiblyFalseArgument>
+    <InvalidPropertyAssignmentValue>
       <code><![CDATA[$this->lock_file]]></code>
-      <code><![CDATA[$this->lock_file]]></code>
-    </PossiblyFalseArgument>
+    </InvalidPropertyAssignmentValue>
   </file>
   <file src="src/System/Commands/Helpers/RemixManipulationCatrobatFileExtractor.php">
     <PossiblyNullPropertyAssignment>
@@ -1073,29 +883,6 @@
       <code><![CDATA[setViews]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/System/Commands/Maintenance/CleanApkCommand.php">
-    <PossiblyInvalidCast>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.apk.dir')]]></code>
-    </PossiblyInvalidCast>
-  </file>
-  <file src="src/System/Commands/Maintenance/CleanCompressedProjectsCommand.php">
-    <PossiblyFalseIterator>
-      <code><![CDATA[$files]]></code>
-    </PossiblyFalseIterator>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$parameter_bag->get('catrobat.file.storage.dir')]]></code>
-    </PossiblyInvalidCast>
-  </file>
-  <file src="src/System/Commands/Maintenance/CleanLogsCommand.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.logs.dir')]]></code>
-    </PossiblyInvalidArgument>
-  </file>
-  <file src="src/System/Commands/Maintenance/CleanOldApkCommand.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$directory]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/System/Commands/MigrateRemixGraphsCommand.php">
     <PossiblyNullReference>
       <code><![CDATA[getName]]></code>
@@ -1106,18 +893,6 @@
     <PossiblyUndefinedVariable>
       <code><![CDATA[$project_id]]></code>
     </PossiblyUndefinedVariable>
-  </file>
-  <file src="src/System/Commands/Reset/PurgeCommand.php">
-    <PossiblyInvalidCast>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.apk.dir')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.featuredimage.dir')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.file.extract.dir')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.file.storage.dir')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.media.path')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.screenshot.dir')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.template.dir')]]></code>
-      <code><![CDATA[$this->parameter_bag->get('catrobat.thumbnail.dir')]]></code>
-    </PossiblyInvalidCast>
   </file>
   <file src="src/System/Commands/Reset/ResetCommand.php">
     <PossiblyNullArgument>
@@ -1141,9 +916,6 @@
     </PossiblyNullReference>
   </file>
   <file src="src/System/Log/LoggerProcessor.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[strpos((string) $ip, ',')]]></code>
-    </PossiblyFalseArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$request]]></code>
     </PossiblyNullArgument>
@@ -1158,56 +930,12 @@
   </file>
   <file src="src/System/Testing/Behat/Context/ApiContext.php">
     <PossiblyFalseArgument>
-      <code><![CDATA[$content]]></code>
       <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$response->getContent()]]></code>
-      <code><![CDATA[$this->getKernelBrowser()->getResponse()->getContent()]]></code>
-      <code><![CDATA[$this->getKernelBrowser()->getResponse()->getContent()]]></code>
-      <code><![CDATA[$this->getKernelBrowser()->getResponse()->getContent()]]></code>
     </PossiblyFalseArgument>
     <PossiblyInvalidArgument>
       <code><![CDATA[$exception->getCode()]]></code>
       <code><![CDATA[$project]]></code>
-      <code><![CDATA[$project]]></code>
-      <code><![CDATA[$project]]></code>
-      <code><![CDATA[$project]]></code>
-      <code><![CDATA[$survey]]></code>
-      <code><![CDATA[$user]]></code>
-      <code><![CDATA[$user]]></code>
-      <code><![CDATA[$user]]></code>
     </PossiblyInvalidArgument>
-    <PossiblyInvalidArrayAccess>
-      <code><![CDATA[$parsedUrl['path']]]></code>
-    </PossiblyInvalidArrayAccess>
     <PossiblyNullArgument>
       <code><![CDATA[$user->getUsername()]]></code>
     </PossiblyNullArgument>
@@ -1258,12 +986,6 @@
       <code><![CDATA[loadProjectExtractedFile]]></code>
       <code><![CDATA[save]]></code>
     </PossiblyNullReference>
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$parsedUrl['path']]]></code>
-    </PossiblyUndefinedArrayOffset>
-    <PropertyTypeCoercion>
-      <code><![CDATA[$this->getSymfonyService('test.client')]]></code>
-    </PropertyTypeCoercion>
   </file>
   <file src="src/System/Testing/Behat/Context/BrowserContext.php">
     <PossiblyNullArgument>
@@ -1284,23 +1006,9 @@
     </PossiblyNullReference>
   </file>
   <file src="src/System/Testing/Behat/Context/CatrowebBrowserContext.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$file_path]]></code>
-      <code><![CDATA[$file_path]]></code>
-      <code><![CDATA[$file_path]]></code>
-      <code><![CDATA[file_get_contents(self::AVATAR_DIR.'fail.tif')]]></code>
-      <code><![CDATA[file_get_contents(self::AVATAR_DIR.'logo.png')]]></code>
-      <code><![CDATA[realpath(self::AVATAR_DIR.$path)]]></code>
-    </PossiblyFalseArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$message]]></code>
-      <code><![CDATA[$subject]]></code>
-      <code><![CDATA[$template]]></code>
-      <code><![CDATA[$title]]></code>
-      <code><![CDATA[$username]]></code>
-    </PossiblyInvalidCast>
     <PossiblyNullArgument>
       <code><![CDATA[$feature_url]]></code>
+      <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$user]]></code>
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
@@ -1366,13 +1074,10 @@
       <code><![CDATA[getApkStatus]]></code>
       <code><![CDATA[getApkStatus]]></code>
       <code><![CDATA[getApkStatus]]></code>
-      <code><![CDATA[getLastParameters]]></code>
-      <code><![CDATA[getLastParameters]]></code>
       <code><![CDATA[getRepository]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[isVisible]]></code>
-      <code><![CDATA[save]]></code>
       <code><![CDATA[setApkStatus]]></code>
       <code><![CDATA[setApkStatus]]></code>
       <code><![CDATA[setApkStatus]]></code>
@@ -1382,15 +1087,19 @@
       <code><![CDATA[setValue]]></code>
       <code><![CDATA[setValue]]></code>
     </PossiblyNullReference>
+    <TypeDoesNotContainType>
+      <code><![CDATA[\assert($pm instanceof ProjectManager)]]></code>
+    </TypeDoesNotContainType>
+    <UndefinedClass>
+      <code><![CDATA[$pm]]></code>
+      <code><![CDATA[ProjectManager]]></code>
+    </UndefinedClass>
+    <UndefinedMethod>
+      <code><![CDATA[getLastParameters]]></code>
+      <code><![CDATA[getLastParameters]]></code>
+    </UndefinedMethod>
   </file>
   <file src="src/System/Testing/Behat/Context/DataFixturesContext.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[date_create()]]></code>
-      <code><![CDATA[json_encode($set)]]></code>
-    </PossiblyFalseArgument>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$result]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$achievement]]></code>
       <code><![CDATA[$comment]]></code>
@@ -1616,39 +1325,9 @@
     </PossiblyNullReference>
   </file>
   <file src="src/System/Testing/Behat/ContextTrait.php">
-    <MoreSpecificReturnType>
-      <code><![CDATA[?AchievementManager]]></code>
-      <code><![CDATA[?CronJobRepository]]></code>
-      <code><![CDATA[?ExtensionRepository]]></code>
-      <code><![CDATA[?ExtractedFileRepository]]></code>
-      <code><![CDATA[?FeatureFlagManager]]></code>
-      <code><![CDATA[?FlavorRepository]]></code>
-      <code><![CDATA[?JWTEncoderInterface]]></code>
-      <code><![CDATA[?JWTManager]]></code>
-      <code><![CDATA[?NotificationRepository]]></code>
-      <code><![CDATA[?ProgramRemixBackwardRepository]]></code>
-      <code><![CDATA[?ProgramRemixRepository]]></code>
-      <code><![CDATA[?ProjectDataFixtures]]></code>
-      <code><![CDATA[?ProjectFileRepository]]></code>
-      <code><![CDATA[?ProjectManager]]></code>
-      <code><![CDATA[?Router]]></code>
-      <code><![CDATA[?ScratchProgramRemixRepository]]></code>
-      <code><![CDATA[?ScratchProgramRepository]]></code>
-      <code><![CDATA[?StatisticRepository]]></code>
-      <code><![CDATA[?StudioManager]]></code>
-      <code><![CDATA[?TagRepository]]></code>
-      <code><![CDATA[?UserDataFixtures]]></code>
-      <code><![CDATA[?UserLikeSimilarityRelationRepository]]></code>
-      <code><![CDATA[?UserManager]]></code>
-      <code><![CDATA[?UserRemixSimilarityRelationRepository]]></code>
-      <code><![CDATA[Container]]></code>
-    </MoreSpecificReturnType>
     <PossiblyFalseArgument>
       <code><![CDATA[$temp_path]]></code>
     </PossiblyFalseArgument>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$this->getContainer()->getParameter($param)]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$project]]></code>
       <code><![CDATA[$user]]></code>
@@ -1719,11 +1398,6 @@
       <code><![CDATA[$temp_path]]></code>
       <code><![CDATA[$temp_path]]></code>
     </PossiblyFalseArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$parameter_bag->get('catrobat.file.extract.dir')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.test.directory.source')]]></code>
-      <code><![CDATA[$parameter_bag->get('catrobat.test.directory.target')]]></code>
-    </PossiblyInvalidCast>
     <PossiblyNullArgument>
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getId()]]></code>
@@ -1751,11 +1425,6 @@
       <code><![CDATA[$target_language]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Translation/MachineTranslationOnKernelTerminateEventListener.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$json_response]]></code>
-    </PossiblyFalseArgument>
-  </file>
   <file src="src/Translation/TranslationDelegate.php">
     <PossiblyNullArgument>
       <code><![CDATA[$language]]></code>
@@ -1771,131 +1440,6 @@
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/User/UserManager.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$tokenPayload]]></code>
-      <code><![CDATA[$tokenPayload]]></code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="tests/PhpUnit/Api/AchievementsApiTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Api/AuthenticationApiTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Api/FollowersApiTest.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$this->facade]]></code>
-      <code><![CDATA[$this->user_manager]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Api/MediaLibraryApiTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Api/NotificationsApiTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
   <file src="tests/PhpUnit/Api/ProjectsApiTest.php">
     <PossiblyNullArgument>
       <code><![CDATA[$response->getCredits()]]></code>
@@ -1904,144 +1448,14 @@
       <code><![CDATA[$response->getName()]]></code>
       <code><![CDATA[$response->getScreenshot()]]></code>
     </PossiblyNullArgument>
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Api/ReactionsApiTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[isLocaleAValidLocaleWithUnderscore]]></code>
-      <code><![CDATA[isLocaleAValidTwoLetterLocale]]></code>
-      <code><![CDATA[mapLocaleWithUnderscoreToTwoLetterCode]]></code>
-      <code><![CDATA[mapTwoLetterCodeToLocaleWithUnderscore]]></code>
-      <code><![CDATA[normalizeLocaleFormatToLocaleWithUnderscore]]></code>
-      <code><![CDATA[sanitizeLocale]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Api/UserApiTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Api/UtilityApiTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-      <code><![CDATA[method]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Application/Theme/ThemeRequestEventListenerTest.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$event]]></code>
-      <code><![CDATA[$event]]></code>
-    </PossiblyInvalidArgument>
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[expects]]></code>
-      <code><![CDATA[expects]]></code>
-    </PossiblyUndefinedMethod>
   </file>
   <file src="tests/PhpUnit/Project/CatrobatCode/Parser/BricksTest.php">
-    <PossiblyFalseReference>
-      <code><![CDATA[xpath]]></code>
-      <code><![CDATA[xpath]]></code>
-    </PossiblyFalseReference>
-    <PossiblyInvalidArrayAccess>
-      <code><![CDATA[$reference_output[$reference_output_index++]]]></code>
-      <code><![CDATA[$reference_output[$reference_output_index++]]]></code>
-      <code><![CDATA[$reference_output[$reference_output_index++]]]></code>
-      <code><![CDATA[$this->brick_xml_properties_list[0]]]></code>
-    </PossiblyInvalidArrayAccess>
-    <PossiblyNullArgument>
-      <code><![CDATA[$brick_xml_properties]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullArrayAccess>
-      <code><![CDATA[$this->brick_xml_properties_list[0]]]></code>
-    </PossiblyNullArrayAccess>
     <PossiblyNullIterator>
-      <code><![CDATA[$this->brick_xml_properties_list]]></code>
       <code><![CDATA[$xml_properties->xpath('//brick')]]></code>
     </PossiblyNullIterator>
+    <PossiblyNullPropertyAssignmentValue>
+      <code><![CDATA[$xml_properties->xpath('//brick')]]></code>
+    </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="tests/PhpUnit/Project/CatrobatCode/Parser/CategoriesTest.php">
     <PossiblyNullArgument>
@@ -2060,46 +1474,11 @@
     </PossiblyNullArrayAccess>
   </file>
   <file src="tests/PhpUnit/Project/CatrobatCode/Parser/FormulaResolverTest.php">
-    <PossiblyFalseReference>
-      <code><![CDATA[xpath]]></code>
-    </PossiblyFalseReference>
-    <PossiblyInvalidArrayAccess>
-      <code><![CDATA[$reference_output[$reference_output_index++]]]></code>
-    </PossiblyInvalidArrayAccess>
     <PossiblyNullIterator>
       <code><![CDATA[$xml_properties->xpath('//formulaList')]]></code>
     </PossiblyNullIterator>
   </file>
-  <file src="tests/PhpUnit/Project/CatrobatCode/Parser/ParsedObjectAssetTest.php">
-    <PossiblyFalseReference>
-      <code><![CDATA[xpath]]></code>
-    </PossiblyFalseReference>
-    <PossiblyNullArgument>
-      <code><![CDATA[$xml_properties->xpath('//look')[0]]]></code>
-      <code><![CDATA[$xml_properties->xpath('//sound')[0]]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullArrayAccess>
-      <code><![CDATA[$xml_properties->xpath('//look')[0]]]></code>
-      <code><![CDATA[$xml_properties->xpath('//sound')[0]]]></code>
-    </PossiblyNullArrayAccess>
-  </file>
-  <file src="tests/PhpUnit/Project/CatrobatCode/Parser/ScriptsTest.php">
-    <PossiblyInvalidArrayAccess>
-      <code><![CDATA[$reference_output[$reference_output_index++]]]></code>
-      <code><![CDATA[$reference_output[$reference_output_index++]]]></code>
-      <code><![CDATA[$reference_output[$reference_output_index++]]]></code>
-    </PossiblyInvalidArrayAccess>
-  </file>
   <file src="tests/PhpUnit/Project/CatrobatFile/ExtractedCatrobatFileTest.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$base_xml_string]]></code>
-      <code><![CDATA[$base_xml_string]]></code>
-      <code><![CDATA[$base_xml_string]]></code>
-      <code><![CDATA[$base_xml_string]]></code>
-      <code><![CDATA[$content]]></code>
-      <code><![CDATA[$content]]></code>
-      <code><![CDATA[$content]]></code>
-    </PossiblyFalseArgument>
     <PossiblyNullPropertyAssignment>
       <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
       <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
@@ -2139,37 +1518,23 @@
       <code><![CDATA[$xml->header]]></code>
     </PossiblyNullPropertyAssignment>
   </file>
-  <file src="tests/PhpUnit/Project/Extension/ProjectExtensionManagerTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[isAMindstormsProject]]></code>
-      <code><![CDATA[isAPhiroProject]]></code>
-      <code><![CDATA[isAnEmbroideryProject]]></code>
-    </PossiblyUndefinedMethod>
-  </file>
-  <file src="tests/PhpUnit/Project/ProjectManagerTest.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$entity_manager ?? $this->entity_manager]]></code>
-      <code><![CDATA[$event_dispatcher ?? $this->event_dispatcher]]></code>
-      <code><![CDATA[$file_repository ?? $this->file_repository]]></code>
-      <code><![CDATA[$screenshot_repository ?? $this->screenshot_repository]]></code>
-      <code><![CDATA[$this->request]]></code>
-      <code><![CDATA[$this->request]]></code>
-      <code><![CDATA[$this->request]]></code>
-      <code><![CDATA[$this->request]]></code>
-      <code><![CDATA[$this->request]]></code>
-      <code><![CDATA[$this->request]]></code>
-    </PossiblyInvalidArgument>
-  </file>
   <file src="tests/PhpUnit/Project/Remix/RemixManagerTest.php">
-    <PossiblyInvalidArgument>
+    <InvalidArgument>
       <code><![CDATA[$program_entity]]></code>
-    </PossiblyInvalidArgument>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+      <code><![CDATA[$program_entity]]></code>
+    </InvalidArgument>
     <PossiblyNullArrayOffset>
       <code><![CDATA[$program_remix_repository_find_map]]></code>
     </PossiblyNullArrayOffset>
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[expects]]></code>
-    </PossiblyUndefinedMethod>
   </file>
   <file src="tests/PhpUnit/Project/Remix/RemixUpdaterEventListenerTest.php">
     <PossiblyNullPropertyAssignment>
@@ -2247,50 +1612,31 @@
       <code><![CDATA[insertUser]]></code>
       <code><![CDATA[insertUser]]></code>
     </PossiblyNullReference>
-    <PropertyTypeCoercion>
-      <code><![CDATA[$container->get(ProjectDataFixtures::class)]]></code>
-      <code><![CDATA[$container->get(UserDataFixtures::class)]]></code>
-      <code><![CDATA[$container->get(UserManager::class)]]></code>
-    </PropertyTypeCoercion>
   </file>
   <file src="tests/PhpUnit/System/Commands/ArchiveLogsTest.php">
     <PossiblyFalseArgument>
       <code><![CDATA[scandir($log_dir)]]></code>
     </PossiblyFalseArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$container->getParameter('catrobat.logs.dir')]]></code>
-    </PossiblyInvalidCast>
   </file>
   <file src="tests/PhpUnit/System/Commands/CleanApkTest.php">
     <PossiblyFalseArgument>
       <code><![CDATA[scandir($this->apk_dir)]]></code>
       <code><![CDATA[scandir($this->apk_dir)]]></code>
     </PossiblyFalseArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$container->getParameter('catrobat.apk.dir')]]></code>
-    </PossiblyInvalidCast>
   </file>
   <file src="tests/PhpUnit/System/Commands/CleanLogsTest.php">
     <PossiblyFalseArgument>
-      <code><![CDATA[$tmp_file]]></code>
-      <code><![CDATA[$tmp_file]]></code>
       <code><![CDATA[scandir($log_dir)]]></code>
     </PossiblyFalseArgument>
     <PossiblyFalseOperand>
       <code><![CDATA[json_encode(scandir($log_dir))]]></code>
     </PossiblyFalseOperand>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$container->getParameter('catrobat.logs.dir')]]></code>
-    </PossiblyInvalidCast>
   </file>
   <file src="tests/PhpUnit/System/Commands/ClearCompressedProjectsTest.php">
     <PossiblyFalseArgument>
       <code><![CDATA[scandir($this->compressed_projects_dir)]]></code>
       <code><![CDATA[scandir($this->compressed_projects_dir)]]></code>
     </PossiblyFalseArgument>
-    <PossiblyInvalidCast>
-      <code><![CDATA[$container->getParameter('catrobat.file.storage.dir')]]></code>
-    </PossiblyInvalidCast>
   </file>
   <file src="tests/PhpUnit/Translation/GoogleTranslateApiTest.php">
     <PossiblyNullPropertyFetch>
@@ -2308,32 +1654,9 @@
       <code><![CDATA[$result->translation]]></code>
     </PossiblyNullPropertyFetch>
   </file>
-  <file src="tests/PhpUnit/Translation/TranslationDelegateTest.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_custom_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-      <code><![CDATA[$this->project_machine_translation_repository]]></code>
-    </PossiblyInvalidArgument>
-  </file>
   <file src="tests/PhpUnit/Utils/ElapsedTimeStringFormatterTest.php">
-    <PossiblyUndefinedMethod>
-      <code><![CDATA[expects]]></code>
-      <code><![CDATA[format]]></code>
-    </PossiblyUndefinedMethod>
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->getExpectedFormatterMethod($expected)]]></code>
+    </ArgumentTypeCoercion>
   </file>
 </files>
