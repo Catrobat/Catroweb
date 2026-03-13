@@ -23,7 +23,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
   {
     $entry_count = $this->count($this->getCriteria($project, $language));
 
-    if (1 != $entry_count) {
+    if (1 !== $entry_count) {
       $translation = new ProjectCustomTranslation($project, $language);
       $translation->setName($name_translation);
       $this->getEntityManager()->persist($translation);
@@ -50,7 +50,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
   {
     $entry_count = $this->count($this->getCriteria($project, $language));
 
-    if (1 != $entry_count) {
+    if (1 !== $entry_count) {
       $translation = new ProjectCustomTranslation($project, $language);
       $translation->setDescription($description_translation);
       $this->getEntityManager()->persist($translation);
@@ -77,7 +77,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
   {
     $entry_count = $this->count($this->getCriteria($project, $language));
 
-    if (1 != $entry_count) {
+    if (1 !== $entry_count) {
       $translation = new ProjectCustomTranslation($project, $language);
       $translation->setCredits($credit_translation);
       $this->getEntityManager()->persist($translation);
@@ -193,7 +193,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     ;
 
     return array_map(
-      static fn ($e): mixed => $e['language'], $result
+      static fn (array $e): mixed => $e['language'], $result
     );
   }
 

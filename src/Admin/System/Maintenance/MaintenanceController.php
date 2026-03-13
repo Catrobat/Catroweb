@@ -49,7 +49,7 @@ class MaintenanceController extends CRUDController
     ]);
 
     $return = $application->run($input, new NullOutput());
-    if (0 == $return) {
+    if (0 === $return) {
       $this->addFlash('sonata_flash_success', 'Reset compressed files OK');
     }
 
@@ -73,7 +73,7 @@ class MaintenanceController extends CRUDController
     ]);
 
     $return = $application->run($input, new NullOutput());
-    if (0 == $return) {
+    if (0 === $return) {
       $this->addFlash('sonata_flash_success', 'Archive log files OK');
     }
 
@@ -131,7 +131,7 @@ class MaintenanceController extends CRUDController
 
     $return = $application->run($input, $output);
 
-    if (0 == $return) {
+    if (0 === $return) {
       $this->addFlash('sonata_flash_success', 'Reset APK Projects OK');
     }
 

@@ -72,7 +72,7 @@ final class TranslatorAwareTraitTest extends TestCase
   {
     $translator = $this->createStub(Translator::class);
     $translator->method('trans')
-      ->willReturnCallback(function () {
+      ->willReturnCallback(function (): string {
         static $callCount = 0;
         ++$callCount;
         if (1 === $callCount) {

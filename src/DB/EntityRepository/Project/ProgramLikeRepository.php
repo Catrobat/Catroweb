@@ -221,7 +221,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
 
       // Keep the most recent reaction time
       $created_at = $like->getCreatedAt();
-      if (null !== $created_at && (null === $users_data[$user_id]['reacted_at'] || $created_at > $users_data[$user_id]['reacted_at'])) {
+      if (null !== $created_at && (!$users_data[$user_id]['reacted_at'] instanceof \DateTime || $created_at > $users_data[$user_id]['reacted_at'])) {
         $users_data[$user_id]['reacted_at'] = $created_at;
       }
     }

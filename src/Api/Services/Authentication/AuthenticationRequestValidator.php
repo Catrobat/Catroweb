@@ -35,11 +35,7 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
       return false;
     }
 
-    if ($decoded->expires_at < time() || $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email) || !isset($decoded->name)) {
-      return false;
-    }
-
-    return true;
+    return !($decoded->expires_at < time() || $decoded->issued_at > time() || empty($decoded->user_id) || !isset($decoded->email) || !isset($decoded->name));
   }
 
   /**

@@ -35,13 +35,13 @@ class RemixManagerTest extends TestCase
 {
   private RemixManager $remix_manager;
 
-  private EntityManager|MockObject $entity_manager;
+  private MockObject $entity_manager;
 
-  private MockObject|ProgramRepository $program_repository;
+  private MockObject $program_repository;
 
-  private MockObject|ScratchProgramRepository $scratch_program_repository;
+  private MockObject $scratch_program_repository;
 
-  private MockObject|ProgramRemixRepository $program_remix_repository;
+  private MockObject $program_remix_repository;
 
   /**
    * @throws Exception
@@ -1212,7 +1212,7 @@ class RemixManagerTest extends TestCase
 
     $this->program_remix_repository
       ->method('findBy')
-      ->willReturnCallback(static function ($criteria) use ($program_remix_repository_find_map) {
+      ->willReturnCallback(static function (array $criteria) use ($program_remix_repository_find_map): array {
         $descendant_id = $criteria['descendant_id'] ?? null;
 
         return $program_remix_repository_find_map[$descendant_id] ?? [];

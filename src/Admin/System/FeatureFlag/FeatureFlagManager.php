@@ -36,7 +36,7 @@ class FeatureFlagManager
       $entityManagerFlags = $this->entityManager->getRepository(FeatureFlag::class)->findAll();
       foreach ($entityManagerFlags as $flag) {
         $flagName = $flag->getName();
-        if (!array_key_exists($flagName, $flagMap)) {
+        if (!array_key_exists((string) $flagName, $flagMap)) {
           $this->entityManager->remove($flag);
         }
       }

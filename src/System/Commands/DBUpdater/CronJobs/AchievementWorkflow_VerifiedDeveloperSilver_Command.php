@@ -35,7 +35,7 @@ class AchievementWorkflow_VerifiedDeveloperSilver_Command extends Command
   protected function addVerifiedDeveloperAchievementToEveryUser(OutputInterface $output): void
   {
     $achievement = $this->achievement_manager->findAchievementByInternalTitle(Achievement::ACCOUNT_CREATED);
-    if (!$achievement) {
+    if (!$achievement instanceof Achievement) {
       $output->writeln('Achievement not found');
 
       return;

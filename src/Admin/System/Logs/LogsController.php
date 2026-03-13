@@ -34,7 +34,7 @@ class LogsController extends CRUDController
     $searchParam = [];
     $searchParam['line_count'] = $line_count;
     $allFiles = $this->getAllFilesInDirByPattern(self::LOG_DIR, self::LOG_PATTERN);
-    if (empty($file) && !empty($allFiles)) {
+    if (empty($file) && [] !== $allFiles) {
       $file = $allFiles[0];
     }
     $content = empty($file) ? null : $this->getLogFileContent($file, self::LOG_DIR, $searchParam);
@@ -136,14 +136,12 @@ class LogsController extends CRUDController
           ++$index;
         }
         $currentLogEntry = $parsedEntry;
-      } else {
+      } elseif (null !== $currentLogEntry) {
         // This is a continuation line (probably stack trace or multi-line message)
-        if (null !== $currentLogEntry) {
-          if (!empty($currentLogEntry['stacktrace'])) {
-            $currentLogEntry['stacktrace'] .= "\n";
-          }
-          $currentLogEntry['stacktrace'] .= $trimmedLine;
+        if ('' !== $currentLogEntry['stacktrace'] && '0' !== $currentLogEntry['stacktrace']) {
+          $currentLogEntry['stacktrace'] .= "\n";
         }
+        $currentLogEntry['stacktrace'] .= $trimmedLine;
       }
     }
 
@@ -197,7 +195,7 @@ class LogsController extends CRUDController
       }
 
       // Store full JSON as extra
-      if (!empty($allJsonData)) {
+      if ([] !== $allJsonData) {
         $result['extra'] = json_encode($allJsonData, JSON_PRETTY_PRINT);
       }
     } else {
@@ -217,7 +215,7 @@ class LogsController extends CRUDController
       'extra' => '',
     ];
 
-    if (empty($metadata)) {
+    if ('' === $metadata || '0' === $metadata) {
       return $result;
     }
 

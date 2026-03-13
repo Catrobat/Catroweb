@@ -149,7 +149,7 @@ class ApiContext implements Context
       $this->kernel_browser = $this->getSymfonyService('test.client');
     }
 
-    if (null === $this->kernel_browser) {
+    if (!$this->kernel_browser instanceof KernelBrowser) {
       throw new \Exception("Can't get KernelBrowser");
     }
 
@@ -286,7 +286,7 @@ class ApiContext implements Context
     $project_manager = $this->getProjectManager();
 
     $project = $project_manager->findOneByName($arg1);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       throw new \Exception('Project not found: '.$arg1);
     }
 
@@ -877,7 +877,7 @@ class ApiContext implements Context
   {
     $pm = $this->getProjectManager();
     $project = $pm->find('1');
-    if (null === $project) {
+    if (!$project instanceof Program) {
       throw new \Exception('last project not found');
     }
 
@@ -1233,7 +1233,7 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $returned_languages = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    $all_locales = array_filter(Locales::getNames(), static fn ($key): bool => 2 == strlen((string) $key) || 5 == strlen((string) $key), ARRAY_FILTER_USE_KEY);
+    $all_locales = array_filter(Locales::getNames(), static fn ($key): bool => 2 === strlen((string) $key) || 5 === strlen((string) $key), ARRAY_FILTER_USE_KEY);
     $all_locales_count = count($all_locales);
 
     Assert::assertEquals($all_locales_count, is_countable($returned_languages) ? count($returned_languages) : 0,
@@ -1241,7 +1241,7 @@ class ApiContext implements Context
 
     foreach ($returned_languages as $language_code => $display_text) {
       Assert::assertEquals('string', gettype($language_code));
-      Assert::assertTrue(2 == strlen((string) $language_code) || 5 == strlen((string) $language_code));
+      Assert::assertTrue(2 === strlen((string) $language_code) || 5 === strlen((string) $language_code));
       Assert::assertEquals('string', gettype($display_text));
     }
   }
@@ -2077,13 +2077,7 @@ class ApiContext implements Context
 
   private function expectProject(array $projects, string $value): bool
   {
-    foreach ($projects as $project) {
-      if ($project['Name'] === $value) {
-        return true;
-      }
-    }
-
-    return false;
+    return array_any($projects, fn ($project): bool => $project['Name'] === $value);
   }
 
   private function getStoredProjects(array $expected_projects): array
@@ -2424,18 +2418,16 @@ class ApiContext implements Context
   // --------------------------------------------------------------------------------------------------------------------
   //  Upload Request process
   // --------------------------------------------------------------------------------------------------------------------
-
   /**
    * Uploads a Catrobat Project.
    *
    * @param string    $file       The Catrobat file to be uploaded
    * @param User|null $user       The uploader
    * @param string    $desired_id Specify, if the uploaded project should get a desired id
-   * @param string    $flavor     The flavor of the project
    *
    * @throws \Exception when an error while uploading occurs
    */
-  private function uploadProject(string $file, ?User $user = null, string $desired_id = '', string $flavor = Flavor::POCKETCODE): void
+  private function uploadProject(string $file, ?User $user = null, string $desired_id = ''): void
   {
     if (null == $user) {
       if (null !== $this->username) {

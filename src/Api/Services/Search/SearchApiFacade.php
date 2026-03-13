@@ -6,7 +6,7 @@ namespace App\Api\Services\Search;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
-use App\Project\ProjectManager;
+use App\Project\ProjectSearchService;
 use App\Storage\ImageRepository;
 use App\User\UserManager;
 use App\Utils\ElapsedTimeStringFormatter;
@@ -23,7 +23,7 @@ class SearchApiFacade extends AbstractApiFacade
     private readonly SearchApiLoader $loader,
     private readonly SearchApiProcessor $processor,
     private readonly SearchRequestValidator $request_validator,
-    private readonly ProjectManager $project_manager,
+    private readonly ProjectSearchService $project_search_service,
     private readonly UserManager $user_manager,
     private readonly TranslatorInterface $translator,
     private readonly ElapsedTimeStringFormatter $time_formatter,
@@ -59,9 +59,9 @@ class SearchApiFacade extends AbstractApiFacade
     return $this->request_validator;
   }
 
-  public function getProjectManager(): ProjectManager
+  public function getProjectSearchService(): ProjectSearchService
   {
-    return $this->project_manager;
+    return $this->project_search_service;
   }
 
   public function getUserManager(): UserManager

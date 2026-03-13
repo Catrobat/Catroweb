@@ -43,7 +43,7 @@ class RemixController extends AbstractController
     $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
     $catrobat_project_thumbnails = [];
     foreach ($remix_graph_data['catrobatNodes'] as $node_id) {
-      if (!array_key_exists($node_id, $remix_graph_data['catrobatNodesData'])) {
+      if (!array_key_exists((string) $node_id, $remix_graph_data['catrobatNodesData'])) {
         $catrobat_project_thumbnails[$node_id] = '/images/default/not_available.png';
         continue;
       }

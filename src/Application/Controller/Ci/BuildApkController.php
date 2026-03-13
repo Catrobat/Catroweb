@@ -76,11 +76,11 @@ class BuildApkController extends AbstractController
       throw new AccessDeniedException();
     }
 
-    if (1 != $request->files->count()) {
+    if (1 !== $request->files->count()) {
       throw new BadRequestHttpException('Wrong number of files: '.$request->files->count());
     }
 
-    $file = array_values($request->files->all())[0];
+    $file = array_first($request->files->all());
     $this->apk_repository->save($file, $project->getId());
     $project->setApkStatus(Program::APK_READY);
     $this->project_manager->save($project);

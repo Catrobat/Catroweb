@@ -1,0 +1,1753 @@
+parameters:
+	ignoreErrors:
+		-
+			rawMessage: 'Parameter #3 $length of function substr expects int|null, int|false given.'
+			identifier: argument.type
+			count: 1
+			path: public/webp-on-demand.php
+
+		-
+			rawMessage: 'Method App\Admin\ApkGeneration\ApkAdmin::configureQuery() should return Sonata\AdminBundle\Datagrid\ProxyQueryInterface<App\DB\Entity\Project\Program> but returns Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery.'
+			identifier: return.type
+			count: 1
+			path: src/Admin/ApkGeneration/ApkAdmin.php
+
+		-
+			rawMessage: 'Method App\Admin\ApkGeneration\ApkPendingAdmin::configureQuery() should return Sonata\AdminBundle\Datagrid\ProxyQueryInterface<App\DB\Entity\Project\Program> but returns Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery.'
+			identifier: return.type
+			count: 1
+			path: src/Admin/ApkGeneration/ApkPendingAdmin.php
+
+		-
+			rawMessage: 'Method App\Admin\ApkGeneration\ApkReadyAdmin::configureQuery() should return Sonata\AdminBundle\Datagrid\ProxyQueryInterface<App\DB\Entity\Project\Program> but returns Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery.'
+			identifier: return.type
+			count: 1
+			path: src/Admin/ApkGeneration/ApkReadyAdmin.php
+
+		-
+			rawMessage: 'Method App\Admin\Projects\ApproveProjects\ApproveProjectsAdmin::configureQuery() should return Sonata\AdminBundle\Datagrid\ProxyQueryInterface<App\DB\Entity\Project\Program> but returns Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery.'
+			identifier: return.type
+			count: 1
+			path: src/Admin/Projects/ApproveProjects/ApproveProjectsAdmin.php
+
+		-
+			rawMessage: 'Method App\Admin\Projects\SpecialProjects\ExampleProjectAdmin::configureQuery() should return Sonata\AdminBundle\Datagrid\ProxyQueryInterface<App\DB\Entity\Project\Special\ExampleProgram> but returns Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery.'
+			identifier: return.type
+			count: 1
+			path: src/Admin/Projects/SpecialProjects/ExampleProjectAdmin.php
+
+		-
+			rawMessage: 'Cannot access offset 0 on array{0: int<0, max>, 1: int<0, max>, 2: int, 3: string, mime: string, channels?: int, bits?: int}|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Admin/Projects/SpecialProjects/Forms/FeaturedImageConstraintValidator.php
+
+		-
+			rawMessage: 'Parameter #1 $stream of function fclose expects resource, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Admin/System/Logs/LogsController.php
+
+		-
+			rawMessage: 'Parameter #1 $stream of function fgets expects resource, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Admin/System/Logs/LogsController.php
+
+		-
+			rawMessage: 'Argument of an invalid type array|false supplied for foreach, only iterables are supported.'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/Admin/System/Maintenance/MaintenanceController.php
+
+		-
+			rawMessage: 'Parameter #1 $bytes of method App\Admin\System\Maintenance\MaintenanceController::getSymbolByQuantity() expects float, float|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Admin/System/Maintenance/MaintenanceController.php
+
+		-
+			rawMessage: 'Parameter #1 $failure of method App\Api\Services\Projects\ProjectsResponseManager::createUpdateFailureResponse() expects int, int|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/ProjectsApi.php
+
+		-
+			rawMessage: Cannot access offset 'email' on array|false.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Api/Services/Authentication/AuthenticationApiProcessor.php
+
+		-
+			rawMessage: Cannot access offset 'name' on array|false.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Api/Services/Authentication/AuthenticationApiProcessor.php
+
+		-
+			rawMessage: Cannot access offset 'sub' on array|false.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Api/Services/Authentication/AuthenticationApiProcessor.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, string|false given.'
+			identifier: argument.type
+			count: 2
+			path: src/Api/Services/Authentication/AuthenticationRequestValidator.php
+
+		-
+			rawMessage: 'Parameter #1 $value of function count expects array|Countable, list<string>|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Services/Base/AbstractApiController.php
+
+		-
+			rawMessage: 'Parameter #3 $cache of method App\Api\Services\Base\AbstractResponseManager::__construct() expects Psr\Cache\CacheItemPoolInterface, Psr\Cache\CacheItemPoolInterface|Symfony\Contracts\Cache\CacheInterface given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Services/MediaLibrary/MediaLibraryResponseManager.php
+
+		-
+			rawMessage: 'Parameter #3 $cache of method App\Api\Services\Base\AbstractResponseManager::__construct() expects Psr\Cache\CacheItemPoolInterface, Psr\Cache\CacheItemPoolInterface|Symfony\Contracts\Cache\CacheInterface given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Services/Notifications/NotificationsResponseManager.php
+
+		-
+			rawMessage: 'Parameter #3 $cache of method App\Api\Services\Base\AbstractResponseManager::__construct() expects Psr\Cache\CacheItemPoolInterface, Psr\Cache\CacheItemPoolInterface|Symfony\Contracts\Cache\CacheInterface given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Services/Projects/ProjectsResponseManager.php
+
+		-
+			rawMessage: 'Parameter #3 $cache of method App\Api\Services\Base\AbstractResponseManager::__construct() expects Psr\Cache\CacheItemPoolInterface, Psr\Cache\CacheItemPoolInterface|Symfony\Contracts\Cache\CacheInterface given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Services/Search/SearchResponseManager.php
+
+		-
+			rawMessage: 'Parameter #3 $cache of method App\Api\Services\Base\AbstractResponseManager::__construct() expects Psr\Cache\CacheItemPoolInterface, Psr\Cache\CacheItemPoolInterface|Symfony\Contracts\Cache\CacheInterface given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Services/Studio/StudioResponseManager.php
+
+		-
+			rawMessage: 'Parameter #2 $string of function explode expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Services/User/UserRequestValidator.php
+
+		-
+			rawMessage: 'Parameter #3 $cache of method App\Api\Services\Base\AbstractResponseManager::__construct() expects Psr\Cache\CacheItemPoolInterface, Psr\Cache\CacheItemPoolInterface|Symfony\Contracts\Cache\CacheInterface given.'
+			identifier: argument.type
+			count: 1
+			path: src/Api/Services/User/UserResponseManager.php
+
+		-
+			rawMessage: Binary operation "/" between array|bool|float|int|string|UnitEnum|null and 3600 results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Application/Controller/Security/ResetPasswordController.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, bool|float|int|string|null given.'
+			identifier: argument.type
+			count: 3
+			path: src/Application/Controller/Studio/StudioController.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: src/Application/Framework/ExceptionEventListener.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 3
+			path: src/Application/Theme/ThemeRequestEventListener.php
+
+		-
+			rawMessage: 'Parameter #2 $haystack of function in_array expects array, array|bool|float|int|string|UnitEnum|null given.'
+			identifier: argument.type
+			count: 1
+			path: src/Application/Theme/ThemeRequestEventListener.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 3
+			path: src/Application/Twig/TwigExtension.php
+
+		-
+			rawMessage: 'Method App\DB\Entity\User\User::getUserIdentifier() should return non-empty-string but returns string.'
+			identifier: return.type
+			count: 1
+			path: src/DB/Entity/User/User.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 2
+			path: src/DB/EntityRepository/MediaLibrary/MediaAssetRepository.php
+
+		-
+			rawMessage: 'Method App\DB\EntityRepository\User\Notification\NotificationRepository::getUnseenCounts() should return array{total: int, like: int, follower: int, comment: int, remix: int, moderation: int} but returns non-empty-array<''comment''|''follower''|''like''|''moderation''|''remix''|''total'', int>.'
+			identifier: return.type
+			count: 1
+			path: src/DB/EntityRepository/User/Notification/NotificationRepository.php
+
+		-
+			rawMessage: 'Parameter #1 $user of class App\DB\Entity\User\ResetPasswordRequest constructor expects App\DB\Entity\User\User, object given.'
+			identifier: argument.type
+			count: 1
+			path: src/DB/EntityRepository/User/ResetPasswordRequestRepository.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::getApproved().'
+			identifier: method.notFound
+			count: 1
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::getAutoHidden().'
+			identifier: method.notFound
+			count: 3
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::getName().'
+			identifier: method.notFound
+			count: 2
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::getProfileHidden().'
+			identifier: method.notFound
+			count: 1
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::getText().'
+			identifier: method.notFound
+			count: 2
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::getUser().'
+			identifier: method.notFound
+			count: 4
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::getUserIdentifier().'
+			identifier: method.notFound
+			count: 1
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::isApproved().'
+			identifier: method.notFound
+			count: 1
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::setAutoHidden().'
+			identifier: method.notFound
+			count: 6
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User::setProfileHidden().'
+			identifier: method.notFound
+			count: 2
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Method App\Moderation\ContentVisibilityManager::getContentOwnerId() should return string|null but returns int|string|null.'
+			identifier: return.type
+			count: 1
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Parameter #1 $user of method App\Moderation\ContentVisibilityManager::hideAllUserContent() expects App\DB\Entity\User\User, App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User given.'
+			identifier: argument.type
+			count: 1
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: 'Parameter #1 $user of method App\Moderation\ContentVisibilityManager::restoreUserContentNotIndependentlyReported() expects App\DB\Entity\User\User, App\DB\Entity\Project\Program|App\DB\Entity\Studio\Studio|App\DB\Entity\User\Comment\UserComment|App\DB\Entity\User\User given.'
+			identifier: argument.type
+			count: 1
+			path: src/Moderation/ContentVisibilityManager.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: src/Project/Apk/ApkRepository.php
+
+		-
+			rawMessage: Cannot access offset 0 on array<SimpleXMLElement>|false|null.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Project/CatrobatCode/Parser/ParsedObject.php
+
+		-
+			rawMessage: Cannot access offset 0 on array<SimpleXMLElement>|false|null.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Project/CatrobatCode/Parser/Scripts/Script.php
+
+		-
+			rawMessage: 'Argument of an invalid type array<SimpleXMLElement>|false supplied for foreach, only iterables are supported.'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/Project/CatrobatCode/StatementFactory.php
+
+		-
+			rawMessage: Cannot access offset 0 on array<SimpleXMLElement>|false|null.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: src/Project/CatrobatCode/StatementFactory.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Project\CatrobatCode\Parser\ParsedSceneProject|App\Project\CatrobatCode\Parser\ParsedSimpleProject::getScenes().'
+			identifier: method.notFound
+			count: 1
+			path: src/Project/CatrobatFile/CatrobatFileSanitizer.php
+
+		-
+			rawMessage: 'Parameter #1 $array of function end expects array|object, list<string>|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Project/CatrobatFile/CatrobatFileSanitizer.php
+
+		-
+			rawMessage: 'Cannot call method getPathname() on Symfony\Component\Finder\SplFileInfo|false.'
+			identifier: method.nonObject
+			count: 1
+			path: src/Project/CatrobatFile/ExtractedCatrobatFile.php
+
+		-
+			rawMessage: 'Parameter #3 $subject of function preg_replace expects array<float|int|string>|string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Project/CatrobatFile/ExtractedCatrobatFile.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 3
+			path: src/Project/CatrobatFile/ExtractedFileRepository.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Project/ProjectManager.php
+
+		-
+			rawMessage: 'Parameter #1 $dir_handle of function closedir expects resource|null, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Storage/FileHelper.php
+
+		-
+			rawMessage: 'Parameter #1 $dir_handle of function readdir expects resource|null, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Storage/FileHelper.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 4
+			path: src/Storage/ImageRepository.php
+
+		-
+			rawMessage: 'Parameter #1 $image of method Imagick::readImageBlob() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Storage/ScreenshotRepository.php
+
+		-
+			rawMessage: 'Parameter #1 $value of function strval expects bool|float|int|resource|string|null, array|bool|float|int|string|UnitEnum|null given.'
+			identifier: argument.type
+			count: 7
+			path: src/Storage/ScreenshotRepository.php
+
+		-
+			rawMessage: Binary operation "." between array|bool|float|int|string|UnitEnum|null and 'images/studio/' results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Studio/StudioManager.php
+
+		-
+			rawMessage: Binary operation "." between array|bool|float|int|string|UnitEnum|null and string results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Studio/StudioManager.php
+
+		-
+			rawMessage: 'Parameter #1 $uploadDate of method App\DB\Entity\User\Comment\UserComment::setUploadDate() expects DateTime, DateTime|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/Create/CreateCommentCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $downloaded_at of method App\DB\Entity\Project\ProgramDownloads::setDownloadedAt() expects DateTime|null, DateTime|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/Create/CreateDownloadsCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $input of function array_rand expects non-empty-array, array given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/Create/CreateLikeCommand.php
+
+		-
+			rawMessage: 'Parameter #3 $type of class App\DB\Entity\Project\ProgramLike constructor expects int, int|string given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/Create/CreateLikeCommand.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: src/System/Commands/Create/CreateMediaAssetSamplesCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $delete of method Doctrine\ORM\QueryBuilder::delete() expects class-string|null, string given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/DBUpdater/CronJobs/TranslationTrimStorageCommand.php
+
+		-
+			rawMessage: Cannot access property $header on SimpleXMLElement|false.
+			identifier: property.nonObject
+			count: 1
+			path: src/System/Commands/GenerateTestDataCommand.php
+
+		-
+			rawMessage: 'Cannot call method asXML() on SimpleXMLElement|false.'
+			identifier: method.nonObject
+			count: 1
+			path: src/System/Commands/GenerateTestDataCommand.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 2
+			path: src/System/Commands/GenerateTestDataCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $stream of function flock expects resource, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/Helpers/MigrationFileLock.php
+
+		-
+			rawMessage: 'Parameter #1 $stream of function fwrite expects resource, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/Helpers/MigrationFileLock.php
+
+		-
+			rawMessage: Binary operation "." between array|bool|float|int|string|UnitEnum|null and 'old_logs' results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/System/Commands/Maintenance/ArchiveLogsCommand.php
+
+		-
+			rawMessage: Binary operation "." between non-falsy-string and array|bool|float|int|string|UnitEnum|null results in an error.
+			identifier: binaryOp.invalid
+			count: 2
+			path: src/System/Commands/Maintenance/ArchiveLogsCommand.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: src/System/Commands/Maintenance/CleanApkCommand.php
+
+		-
+			rawMessage: 'Argument of an invalid type list<string>|false supplied for foreach, only iterables are supported.'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/System/Commands/Maintenance/CleanCompressedProjectsCommand.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: src/System/Commands/Maintenance/CleanCompressedProjectsCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $value of function strval expects bool|float|int|resource|string|null, array|bool|float|int|string|UnitEnum|null given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/Maintenance/CleanLogsCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $dirs of method Symfony\Component\Finder\Finder::in() expects array<string>|string, array|bool|float|int|string|UnitEnum|null given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Commands/Maintenance/CleanOldApkCommand.php
+
+		-
+			rawMessage: 'Binary operation "." between string and 0.0|array{}|int|string|false|null results in an error.'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/System/Commands/MigrateRemixGraphsCommand.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 8
+			path: src/System/Commands/Reset/PurgeCommand.php
+
+		-
+			rawMessage: Binary operation "." between array|bool|float|int|string|UnitEnum|null and 'projects' results in an error.
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/System/Commands/Reset/ResetCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $input of function array_rand expects non-empty-array, array given.'
+			identifier: argument.type
+			count: 7
+			path: src/System/Commands/Reset/ResetCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $input of function array_rand expects non-empty-array, array<string> given.'
+			identifier: argument.type
+			count: 2
+			path: src/System/Commands/Reset/ResetCommand.php
+
+		-
+			rawMessage: 'Parameter #1 $min (0) of function random_int expects lower number than parameter #2 $max (int<-1, max>).'
+			identifier: argument.type
+			count: 2
+			path: src/System/Commands/Reset/ResetCommand.php
+
+		-
+			rawMessage: 'Parameter #3 $length of function substr expects int|null, int<0, max>|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Log/LoggerProcessor.php
+
+		-
+			rawMessage: 'Call to an undefined method object::createSession().'
+			identifier: method.notFound
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Cannot access offset ''path'' on array{scheme?: string, host?: string, port?: int<0, 65535>, user?: string, pass?: string, path?: string, query?: string, fragment?: string}|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getAchievementManager() should return App\User\Achievements\AchievementManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getCatroNotificationRepository() should return App\DB\EntityRepository\User\Notification\NotificationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getContainer() should return Symfony\Component\DependencyInjection\Container but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getCronJobRepository() should return App\DB\EntityRepository\System\CronJobRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getExtensionRepository() should return App\DB\EntityRepository\Project\ExtensionRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getExtractedFileRepository() should return App\Project\CatrobatFile\ExtractedFileRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getFeatureFlagManager() should return App\Admin\System\FeatureFlag\FeatureFlagManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getFileRepository() should return App\Project\CatrobatFile\ProjectFileRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getFlavorRepository() should return App\DB\EntityRepository\FlavorRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getJwtEncoder() should return Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getJwtManager() should return Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getProjectDataFixtures() should return App\System\Testing\DataFixtures\ProjectDataFixtures|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getProjectManager() should return App\Project\ProjectManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getProjectRemixBackwardRepository() should return App\DB\EntityRepository\Project\ProgramRemixBackwardRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getProjectRemixForwardRepository() should return App\DB\EntityRepository\Project\ProgramRemixRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getRouter() should return Symfony\Component\Routing\Router|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getScratchProjectRemixRepository() should return App\DB\EntityRepository\Project\ScratchProgramRemixRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getScratchProjectRepository() should return App\DB\EntityRepository\Project\ScratchProgramRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getStatisticsRepository() should return App\DB\EntityRepository\System\StatisticRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getStudioManager() should return App\Studio\StudioManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getTagRepository() should return App\DB\EntityRepository\Project\TagRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getUserDataFixtures() should return App\System\Testing\DataFixtures\UserDataFixtures|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getUserLikeSimilarityRelationRepository() should return App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getUserManager() should return App\User\UserManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\ApiContext::getUserRemixSimilarityRelationRepository() should return App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #1 $actual of static method PHPUnit\Framework\Assert::assertJson() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, string|false given.'
+			identifier: argument.type
+			count: 29
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #1 $project of method App\System\Testing\Behat\Context\ApiContext::checkFeaturedProjectFieldsValue() expects array, ArrayAccess|non-empty-array given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #1 $project of method App\System\Testing\Behat\Context\ApiContext::checkMediaFileFieldsValue() expects array, ArrayAccess|non-empty-array given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #1 $project of method App\System\Testing\Behat\Context\ApiContext::checkProjectFieldsValue() expects array, ArrayAccess|non-empty-array given.'
+			identifier: argument.type
+			count: 2
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #1 $user of method App\System\Testing\Behat\Context\ApiContext::checkSurveyFieldsValue() expects array, ArrayAccess|non-empty-array given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #1 $user of method App\System\Testing\Behat\Context\ApiContext::checkUserFieldsValue() expects array, ArrayAccess|non-empty-array given.'
+			identifier: argument.type
+			count: 3
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #1 $value of function strval expects bool|float|int|resource|string|null, array|bool|float|int|string|UnitEnum|null given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #2 $haystack of static method PHPUnit\Framework\Assert::assertStringContainsString() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #2 $haystack of static method PHPUnit\Framework\Assert::assertStringNotContainsString() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #2 $json of method App\System\Testing\Behat\Context\ApiContext::assertJsonRegex() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Parameter #2 $string of static method PHPUnit\Framework\Assert::assertMatchesRegularExpression() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Property App\System\Testing\Behat\Context\ApiContext::$kernel_browser (Symfony\Bundle\FrameworkBundle\KernelBrowser|null) does not accept object|null.'
+			identifier: assign.propertyType
+			count: 1
+			path: src/System/Testing/Behat/Context/ApiContext.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getAchievementManager() should return App\User\Achievements\AchievementManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getCatroNotificationRepository() should return App\DB\EntityRepository\User\Notification\NotificationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getContainer() should return Symfony\Component\DependencyInjection\Container but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getCronJobRepository() should return App\DB\EntityRepository\System\CronJobRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getExtensionRepository() should return App\DB\EntityRepository\Project\ExtensionRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getExtractedFileRepository() should return App\Project\CatrobatFile\ExtractedFileRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getFeatureFlagManager() should return App\Admin\System\FeatureFlag\FeatureFlagManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getFileRepository() should return App\Project\CatrobatFile\ProjectFileRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getFlavorRepository() should return App\DB\EntityRepository\FlavorRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getJwtEncoder() should return Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getJwtManager() should return Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getProjectDataFixtures() should return App\System\Testing\DataFixtures\ProjectDataFixtures|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getProjectManager() should return App\Project\ProjectManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getProjectRemixBackwardRepository() should return App\DB\EntityRepository\Project\ProgramRemixBackwardRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getProjectRemixForwardRepository() should return App\DB\EntityRepository\Project\ProgramRemixRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getRouter() should return Symfony\Component\Routing\Router|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getScratchProjectRemixRepository() should return App\DB\EntityRepository\Project\ScratchProgramRemixRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getScratchProjectRepository() should return App\DB\EntityRepository\Project\ScratchProgramRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getStatisticsRepository() should return App\DB\EntityRepository\System\StatisticRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getStudioManager() should return App\Studio\StudioManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getTagRepository() should return App\DB\EntityRepository\Project\TagRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getUserDataFixtures() should return App\System\Testing\DataFixtures\UserDataFixtures|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getUserLikeSimilarityRelationRepository() should return App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getUserManager() should return App\User\UserManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\BrowserContext::getUserRemixSimilarityRelationRepository() should return App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Parameter #1 $value of function strval expects bool|float|int|resource|string|null, array|bool|float|int|string|UnitEnum|null given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/BrowserContext.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getLastParameters().'
+			identifier: method.notFound
+			count: 2
+			path: src/System/Testing/Behat/Context/CatrowebBrowserContext.php
+
+		-
+			rawMessage: 'Call to an undefined method object::save().'
+			identifier: method.notFound
+			count: 1
+			path: src/System/Testing/Behat/Context/CatrowebBrowserContext.php
+
+		-
+			rawMessage: Cannot cast bool|list<string>|string to string.
+			identifier: cast.string
+			count: 5
+			path: src/System/Testing/Behat/Context/CatrowebBrowserContext.php
+
+		-
+			rawMessage: 'Parameter #1 $stream of function fclose expects resource, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/CatrowebBrowserContext.php
+
+		-
+			rawMessage: 'Parameter #1 $stream of function fseek expects resource, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/CatrowebBrowserContext.php
+
+		-
+			rawMessage: 'Parameter #1 $stream of function fwrite expects resource, resource|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/CatrowebBrowserContext.php
+
+		-
+			rawMessage: 'Parameter #1 $string of function base64_encode expects string, string|false given.'
+			identifier: argument.type
+			count: 2
+			path: src/System/Testing/Behat/Context/CatrowebBrowserContext.php
+
+		-
+			rawMessage: 'Parameter #2 $path of method Behat\Mink\Element\TraversableElement::attachFileToField() expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/CatrowebBrowserContext.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getAchievementManager() should return App\User\Achievements\AchievementManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getCatroNotificationRepository() should return App\DB\EntityRepository\User\Notification\NotificationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getContainer() should return Symfony\Component\DependencyInjection\Container but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getCronJobRepository() should return App\DB\EntityRepository\System\CronJobRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getExtensionRepository() should return App\DB\EntityRepository\Project\ExtensionRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getExtractedFileRepository() should return App\Project\CatrobatFile\ExtractedFileRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getFeatureFlagManager() should return App\Admin\System\FeatureFlag\FeatureFlagManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getFileRepository() should return App\Project\CatrobatFile\ProjectFileRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getFlavorRepository() should return App\DB\EntityRepository\FlavorRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getJwtEncoder() should return Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getJwtManager() should return Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getProjectDataFixtures() should return App\System\Testing\DataFixtures\ProjectDataFixtures|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getProjectManager() should return App\Project\ProjectManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getProjectRemixBackwardRepository() should return App\DB\EntityRepository\Project\ProgramRemixBackwardRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getProjectRemixForwardRepository() should return App\DB\EntityRepository\Project\ProgramRemixRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getRouter() should return Symfony\Component\Routing\Router|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getScratchProjectRemixRepository() should return App\DB\EntityRepository\Project\ScratchProgramRemixRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getScratchProjectRepository() should return App\DB\EntityRepository\Project\ScratchProgramRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getStatisticsRepository() should return App\DB\EntityRepository\System\StatisticRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getStudioManager() should return App\Studio\StudioManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getTagRepository() should return App\DB\EntityRepository\Project\TagRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getUserDataFixtures() should return App\System\Testing\DataFixtures\UserDataFixtures|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getUserLikeSimilarityRelationRepository() should return App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getUserManager() should return App\User\UserManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\DataFixturesContext::getUserRemixSimilarityRelationRepository() should return App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Parameter #1 $ltm_maintenanceEnd of method App\DB\Entity\System\MaintenanceInformation::setLtmMaintenanceEnd() expects DateTime|null, DateTime|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Parameter #1 $ltm_maintenanceStart of method App\DB\Entity\System\MaintenanceInformation::setLtmMaintenanceStart() expects DateTime|null, DateTime|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Parameter #1 $message of class InvalidArgumentException constructor expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Parameter #1 $type of static method App\DB\Entity\Project\ProgramLike::isValidType() expects int, int|string given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Parameter #1 $uploadDate of method App\DB\Entity\User\Comment\UserComment::setUploadDate() expects DateTime, DateTime|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Parameter #1 $value of function strval expects bool|float|int|resource|string|null, array|bool|float|int|string|UnitEnum|null given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Parameter #2 $string of static method PHPUnit\Framework\Assert::assertStringEndsWith() expects string, bool|string|null given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Parameter #3 $type of class App\DB\Entity\Project\ProgramLike constructor expects int, int|string given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/DataFixturesContext.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getAchievementManager() should return App\User\Achievements\AchievementManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getCatroNotificationRepository() should return App\DB\EntityRepository\User\Notification\NotificationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getContainer() should return Symfony\Component\DependencyInjection\Container but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getCronJobRepository() should return App\DB\EntityRepository\System\CronJobRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getExtensionRepository() should return App\DB\EntityRepository\Project\ExtensionRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getExtractedFileRepository() should return App\Project\CatrobatFile\ExtractedFileRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getFeatureFlagManager() should return App\Admin\System\FeatureFlag\FeatureFlagManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getFileRepository() should return App\Project\CatrobatFile\ProjectFileRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getFlavorRepository() should return App\DB\EntityRepository\FlavorRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getJwtEncoder() should return Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getJwtManager() should return Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getProjectDataFixtures() should return App\System\Testing\DataFixtures\ProjectDataFixtures|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getProjectManager() should return App\Project\ProjectManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getProjectRemixBackwardRepository() should return App\DB\EntityRepository\Project\ProgramRemixBackwardRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getProjectRemixForwardRepository() should return App\DB\EntityRepository\Project\ProgramRemixRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getRouter() should return Symfony\Component\Routing\Router|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getScratchProjectRemixRepository() should return App\DB\EntityRepository\Project\ScratchProgramRemixRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getScratchProjectRepository() should return App\DB\EntityRepository\Project\ScratchProgramRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getStatisticsRepository() should return App\DB\EntityRepository\System\StatisticRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getStudioManager() should return App\Studio\StudioManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getTagRepository() should return App\DB\EntityRepository\Project\TagRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getUserDataFixtures() should return App\System\Testing\DataFixtures\UserDataFixtures|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getUserLikeSimilarityRelationRepository() should return App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getUserManager() should return App\User\UserManager|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Method App\System\Testing\Behat\Context\RefreshEnvironmentContext::getUserRemixSimilarityRelationRepository() should return App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository|null but returns object.'
+			identifier: return.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: 'Parameter #1 $value of function strval expects bool|float|int|resource|string|null, array|bool|float|int|string|UnitEnum|null given.'
+			identifier: argument.type
+			count: 1
+			path: src/System/Testing/Behat/Context/RefreshEnvironmentContext.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 3
+			path: src/System/Testing/DataFixtures/ProjectDataFixtures.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, string|false given.'
+			identifier: argument.type
+			count: 1
+			path: src/Translation/MachineTranslationOnKernelTerminateEventListener.php
+
+		-
+			rawMessage: 'Parameter #1 $json of function json_decode expects string, string|false given.'
+			identifier: argument.type
+			count: 2
+			path: src/User/UserManager.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\Achievements\AchievementsApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 10
+			path: tests/PhpUnit/Api/AchievementsApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\User\UserManager|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 2
+			path: tests/PhpUnit/Api/AchievementsApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\Authentication\AuthenticationApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Api/AuthenticationApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\Followers\FollowersApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 18
+			path: tests/PhpUnit/Api/FollowersApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\User\UserManager|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 10
+			path: tests/PhpUnit/Api/FollowersApiTest.php
+
+		-
+			rawMessage: 'Parameter #1 $facade of class App\Api\FollowersApi constructor expects App\Api\Services\Followers\FollowersApiFacade, App\Api\Services\Followers\FollowersApiFacade|PHPUnit\Framework\MockObject\Stub given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Api/FollowersApiTest.php
+
+		-
+			rawMessage: 'Parameter #2 $user_manager of class App\Api\FollowersApi constructor expects App\User\UserManager, App\User\UserManager|PHPUnit\Framework\MockObject\Stub given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Api/FollowersApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\MediaLibrary\MediaLibraryApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 41
+			path: tests/PhpUnit/Api/MediaLibraryApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\Notifications\NotificationsApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 13
+			path: tests/PhpUnit/Api/NotificationsApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\Projects\ProjectsApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 23
+			path: tests/PhpUnit/Api/ProjectsApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\Reactions\ReactionsApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 38
+			path: tests/PhpUnit/Api/ReactionsApiTest.php
+
+		-
+			rawMessage: 'Parameter #1 $value of function count expects array|Countable, list<string>|false given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Api/Services/Base/BearerAuthenticationTraitTestClass.php
+
+		-
+			rawMessage: 'Call to an undefined method PHPUnit\Framework\MockObject\MockObject|Tests\PhpUnit\Api\Services\Base\TranslatorAwareTraitTestClass::isLocaleAValidLocaleWithUnderscore().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTest.php
+
+		-
+			rawMessage: 'Call to an undefined method PHPUnit\Framework\MockObject\MockObject|Tests\PhpUnit\Api\Services\Base\TranslatorAwareTraitTestClass::isLocaleAValidTwoLetterLocale().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTest.php
+
+		-
+			rawMessage: 'Call to an undefined method PHPUnit\Framework\MockObject\MockObject|Tests\PhpUnit\Api\Services\Base\TranslatorAwareTraitTestClass::mapLocaleWithUnderscoreToTwoLetterCode().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTest.php
+
+		-
+			rawMessage: 'Call to an undefined method PHPUnit\Framework\MockObject\MockObject|Tests\PhpUnit\Api\Services\Base\TranslatorAwareTraitTestClass::mapTwoLetterCodeToLocaleWithUnderscore().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTest.php
+
+		-
+			rawMessage: 'Call to an undefined method PHPUnit\Framework\MockObject\MockObject|Tests\PhpUnit\Api\Services\Base\TranslatorAwareTraitTestClass::normalizeLocaleFormatToLocaleWithUnderscore().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTest.php
+
+		-
+			rawMessage: 'Call to an undefined method PHPUnit\Framework\MockObject\MockObject|Tests\PhpUnit\Api\Services\Base\TranslatorAwareTraitTestClass::sanitizeLocale().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Api/Services/Base/TranslatorAwareTraitTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\User\UserApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 14
+			path: tests/PhpUnit/Api/UserApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Api\Services\Utility\UtilityApiFacade|PHPUnit\Framework\MockObject\Stub::method().'
+			identifier: method.notFound
+			count: 7
+			path: tests/PhpUnit/Api/UtilityApiTest.php
+
+		-
+			rawMessage: 'Call to an undefined method PHPUnit\Framework\MockObject\MockObject|Symfony\Component\HttpFoundation\ParameterBag::expects().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Application/Theme/ThemeRequestEventListenerTest.php
+
+		-
+			rawMessage: 'Call to an undefined method PHPUnit\Framework\MockObject\MockObject|Symfony\Component\Routing\RequestContext::expects().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Application/Theme/ThemeRequestEventListenerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $event of method App\Application\Theme\ThemeRequestEventListener::onKernelRequest() expects Symfony\Component\HttpKernel\Event\RequestEvent, PHPUnit\Framework\MockObject\MockObject|Symfony\Component\HttpKernel\Event\RequestEvent given.'
+			identifier: argument.type
+			count: 2
+			path: tests/PhpUnit/Application/Theme/ThemeRequestEventListenerTest.php
+
+		-
+			rawMessage: 'Argument of an invalid type array<SimpleXMLElement>|bool supplied for foreach, only iterables are supported.'
+			identifier: foreach.nonIterable
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/BricksTest.php
+
+		-
+			rawMessage: Cannot access offset 0 on array<SimpleXMLElement>|bool|null.
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/BricksTest.php
+
+		-
+			rawMessage: 'Cannot access offset 0|int<4, max> on list<string>|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/BricksTest.php
+
+		-
+			rawMessage: 'Cannot access offset 1|int<5, max> on list<string>|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/BricksTest.php
+
+		-
+			rawMessage: 'Cannot access offset 2|int<6, max> on list<string>|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/BricksTest.php
+
+		-
+			rawMessage: 'Cannot call method xpath() on SimpleXMLElement|false.'
+			identifier: method.nonObject
+			count: 2
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/BricksTest.php
+
+		-
+			rawMessage: 'Cannot access offset int<0, max> on list<string>|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/FormulaResolverTest.php
+
+		-
+			rawMessage: 'Cannot call method xpath() on SimpleXMLElement|false.'
+			identifier: method.nonObject
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/FormulaResolverTest.php
+
+		-
+			rawMessage: 'Cannot call method xpath() on SimpleXMLElement|false.'
+			identifier: method.nonObject
+			count: 2
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/ParsedObjectAssetTest.php
+
+		-
+			rawMessage: 'Cannot access offset 0|int<4, max> on list<string>|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/ScriptsTest.php
+
+		-
+			rawMessage: 'Cannot access offset 1|int<5, max> on list<string>|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/ScriptsTest.php
+
+		-
+			rawMessage: 'Cannot access offset 2|int<6, max> on list<string>|false.'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: tests/PhpUnit/Project/CatrobatCode/Parser/ScriptsTest.php
+
+		-
+			rawMessage: Cannot access property $header on SimpleXMLElement|false.
+			identifier: property.nonObject
+			count: 3
+			path: tests/PhpUnit/Project/CatrobatFile/ExtractedCatrobatFileTest.php
+
+		-
+			rawMessage: 'Parameter #1 $data of function simplexml_load_string expects string, string|false given.'
+			identifier: argument.type
+			count: 3
+			path: tests/PhpUnit/Project/CatrobatFile/ExtractedCatrobatFileTest.php
+
+		-
+			rawMessage: 'Parameter #1 $haystack of function substr_count expects string, string|false given.'
+			identifier: argument.type
+			count: 4
+			path: tests/PhpUnit/Project/CatrobatFile/ExtractedCatrobatFileTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Project\Extension\ProjectExtensionManager|PHPUnit\Framework\MockObject\MockObject::isAMindstormsProject().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Project/Extension/ProjectExtensionManagerTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Project\Extension\ProjectExtensionManager|PHPUnit\Framework\MockObject\MockObject::isAPhiroProject().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Project/Extension/ProjectExtensionManagerTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Project\Extension\ProjectExtensionManager|PHPUnit\Framework\MockObject\MockObject::isAnEmbroideryProject().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Project/Extension/ProjectExtensionManagerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $request of method App\Project\ProjectManager::addProject() expects App\Project\AddProjectRequest, App\Project\AddProjectRequest|PHPUnit\Framework\MockObject\Stub given.'
+			identifier: argument.type
+			count: 6
+			path: tests/PhpUnit/Project/ProjectManagerTest.php
+
+		-
+			rawMessage: 'Parameter #2 $file_repository of class App\Project\ProjectManager constructor expects App\Project\CatrobatFile\ProjectFileRepository, App\Project\CatrobatFile\ProjectFileRepository|PHPUnit\Framework\MockObject\Stub given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Project/ProjectManagerTest.php
+
+		-
+			rawMessage: 'Parameter #3 $screenshot_repository of class App\Project\ProjectManager constructor expects App\Storage\ScreenshotRepository, App\Storage\ScreenshotRepository|PHPUnit\Framework\MockObject\Stub given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Project/ProjectManagerTest.php
+
+		-
+			rawMessage: 'Parameter #4 $entity_manager of class App\Project\ProjectManager constructor expects Doctrine\ORM\EntityManagerInterface, Doctrine\ORM\EntityManager|PHPUnit\Framework\MockObject\Stub given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Project/ProjectManagerTest.php
+
+		-
+			rawMessage: 'Parameter #9 $event_dispatcher of class App\Project\ProjectManager constructor expects Symfony\Component\EventDispatcher\EventDispatcherInterface, PHPUnit\Framework\MockObject\Stub|Symfony\Component\EventDispatcher\EventDispatcherInterface given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Project/ProjectManagerTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\DB\Entity\Project\Program|PHPUnit\Framework\MockObject\MockObject::expects().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Project/Remix/RemixManagerTest.php
+
+		-
+			rawMessage: 'Parameter #1 $project of method App\Project\Remix\RemixManager::addRemixes() expects App\DB\Entity\Project\Program, App\DB\Entity\Project\Program|PHPUnit\Framework\MockObject\MockObject given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Project/Remix/RemixManagerTest.php
+
+		-
+			rawMessage: 'Call to an undefined method object::getManager().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Studio/StudioManagerTest.php
+
+		-
+			rawMessage: 'Property Tests\PhpUnit\Studio\StudioManagerTest::$project_fixture (App\System\Testing\DataFixtures\ProjectDataFixtures|null) does not accept object.'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/PhpUnit/Studio/StudioManagerTest.php
+
+		-
+			rawMessage: 'Property Tests\PhpUnit\Studio\StudioManagerTest::$user_fixture (App\System\Testing\DataFixtures\UserDataFixtures|null) does not accept object.'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/PhpUnit/Studio/StudioManagerTest.php
+
+		-
+			rawMessage: 'Property Tests\PhpUnit\Studio\StudioManagerTest::$user_manager (App\User\UserManager|null) does not accept object.'
+			identifier: assign.propertyType
+			count: 1
+			path: tests/PhpUnit/Studio/StudioManagerTest.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: tests/PhpUnit/System/Commands/ArchiveLogsTest.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: tests/PhpUnit/System/Commands/CleanApkTest.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: tests/PhpUnit/System/Commands/CleanLogsTest.php
+
+		-
+			rawMessage: 'Parameter #1 $stream of function fclose expects resource, resource|false given.'
+			identifier: argument.type
+			count: 2
+			path: tests/PhpUnit/System/Commands/CleanLogsTest.php
+
+		-
+			rawMessage: Cannot cast array|bool|float|int|string|UnitEnum|null to string.
+			identifier: cast.string
+			count: 1
+			path: tests/PhpUnit/System/Commands/ClearCompressedProjectsTest.php
+
+		-
+			rawMessage: 'Parameter #1 $project_custom_translation_repository of class App\Translation\TranslationDelegate constructor expects App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository, App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository|PHPUnit\Framework\MockObject\Stub given.'
+			identifier: argument.type
+			count: 9
+			path: tests/PhpUnit/Translation/TranslationDelegateTest.php
+
+		-
+			rawMessage: 'Parameter #2 $project_machine_translation_repository of class App\Translation\TranslationDelegate constructor expects App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository, App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository|PHPUnit\Framework\MockObject\Stub given.'
+			identifier: argument.type
+			count: 9
+			path: tests/PhpUnit/Translation/TranslationDelegateTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Utils\ElapsedTimeStringFormatter|PHPUnit\Framework\MockObject\MockObject::expects().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Utils/ElapsedTimeStringFormatterTest.php
+
+		-
+			rawMessage: 'Call to an undefined method App\Utils\ElapsedTimeStringFormatter|PHPUnit\Framework\MockObject\MockObject::format().'
+			identifier: method.notFound
+			count: 1
+			path: tests/PhpUnit/Utils/ElapsedTimeStringFormatterTest.php
+
+		-
+			rawMessage: 'Parameter #1 $constraint of method PHPUnit\Framework\MockObject\InvocationStubber::method() expects PHPUnit\Framework\Constraint\Constraint|PHPUnit\Framework\MockObject\Runtime\PropertyHook|non-empty-string, string given.'
+			identifier: argument.type
+			count: 1
+			path: tests/PhpUnit/Utils/ElapsedTimeStringFormatterTest.php

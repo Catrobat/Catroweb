@@ -81,7 +81,7 @@ class UpdateProjectPopularityCommand extends Command
   // Currently just min max scaling
   protected function scale(int $x, int $min, int $max): float
   {
-    if (0 == $max - $min) {
+    if (0 === $max - $min) {
       return 0;
     }
 

@@ -32,7 +32,7 @@ final class ContentVisibilityManagerTest extends TestCase
 
     $em = $this->createStub(EntityManagerInterface::class);
     $em->method('find')
-      ->willReturnCallback(function (string $class, mixed $id) use ($project, $owner) {
+      ->willReturnCallback(function (string $class, mixed $id) use ($project, $owner): ?\PHPUnit\Framework\MockObject\Stub {
         if (Program::class === $class) {
           return $project;
         }
@@ -71,7 +71,7 @@ final class ContentVisibilityManagerTest extends TestCase
 
     $em = $this->createStub(EntityManagerInterface::class);
     $em->method('find')
-      ->willReturnCallback(function (string $class, mixed $id) use ($project, $owner) {
+      ->willReturnCallback(function (string $class, mixed $id) use ($project, $owner): \PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\Stub|null {
         if (Program::class === $class) {
           return $project;
         }

@@ -30,7 +30,7 @@ class RemixManager
   {
     $scratch_project_data = $this->scratch_project_repository->getProgramDataByIds($scratch_ids);
 
-    return array_map(static fn ($data) => $data['id'], $scratch_project_data);
+    return array_map(static fn (array $data) => $data['id'], $scratch_project_data);
   }
 
   /**
@@ -84,7 +84,7 @@ class RemixManager
     } else {
       // case: new project
       $all_project_remix_relations = $this->createNewRemixRelations($project, $remixes_data);
-      $catrobat_remix_relations = array_filter($all_project_remix_relations, static fn ($relation): bool => !($relation instanceof ScratchProgramRemixRelation));
+      $catrobat_remix_relations = array_filter($all_project_remix_relations, static fn (ProgramRemixRelationInterface $relation): bool => !($relation instanceof ScratchProgramRemixRelation));
 
       $contains_only_catrobat_self_relation = (1 === count($catrobat_remix_relations));
       $project->setRemixRoot($contains_only_catrobat_self_relation);

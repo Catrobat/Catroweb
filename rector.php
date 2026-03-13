@@ -12,7 +12,7 @@ return RectorConfig::configure()
     __DIR__.'/tests',
   ])
 
-  ->withPhpSets(php83: true)
+  ->withPhpSets(php85: true)
 
   // here we can define, what prepared sets of rules will be applied
   ->withPreparedSets(

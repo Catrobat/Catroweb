@@ -30,7 +30,7 @@ class InfoController extends AbstractController
     echo '<tr style="background-color: #f2f2f2;"><th>Database Variable</th><th>Value</th></tr>';
     $i = 0;
     while ($variable = $result->fetchAssociative()) {
-      $color = (0 == $i % 2) ? '#f2f2f2' : '#ffffff';
+      $color = (0 === $i % 2) ? '#f2f2f2' : '#ffffff';
       echo '<tr style="background-color: '.$color.';"><td>'.$variable['Variable_name'].'</td><td>'.$variable['Value'].'</td></tr>';
       ++$i;
     }

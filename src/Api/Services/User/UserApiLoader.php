@@ -33,8 +33,11 @@ class UserApiLoader extends AbstractApiLoader
     if ($viewer->getId() === $user->getId()) {
       return true;
     }
+    if ($viewer->hasRole('ROLE_ADMIN')) {
+      return true;
+    }
 
-    return $viewer->hasRole('ROLE_ADMIN') || $viewer->hasRole('ROLE_SUPER_ADMIN');
+    return $viewer->hasRole('ROLE_SUPER_ADMIN');
   }
 
   public function searchUsers(string $query, int $limit, int $offset): array

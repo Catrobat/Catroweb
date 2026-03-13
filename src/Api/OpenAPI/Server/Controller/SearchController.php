@@ -56,7 +56,7 @@ class SearchController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function searchGetAction(Request $request)
+  public function searchGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

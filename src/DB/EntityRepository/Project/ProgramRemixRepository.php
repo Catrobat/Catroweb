@@ -99,7 +99,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->getResult()
     ;
 
-    return array_unique(array_map(static fn ($row): mixed => $row['ancestor_id'], $result_data));
+    return array_unique(array_map(static fn (array $row): mixed => $row['ancestor_id'], $result_data));
   }
 
   public function getDescendantRelations(array $ancestor_program_ids): array

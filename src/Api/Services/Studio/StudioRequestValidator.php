@@ -90,7 +90,7 @@ class StudioRequestValidator extends AbstractRequestValidator
 
   private function validateImageFile(?UploadedFile $image_file, string $locale): void
   {
-    if (null === $image_file) {
+    if (!$image_file instanceof UploadedFile) {
       return;
     }
 

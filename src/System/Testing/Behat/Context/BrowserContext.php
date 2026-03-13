@@ -297,7 +297,7 @@ class BrowserContext extends MinkContext implements Context
   {
     $elements = $this->getSession()->getPage()->findAll('css', $selector);
 
-    if (array_any($elements, fn ($element) => $element->isVisible() && str_contains($element->getText(), $value))) {
+    if (array_any($elements, fn ($element): bool => $element->isVisible() && str_contains((string) $element->getText(), $value))) {
       return;
     }
 

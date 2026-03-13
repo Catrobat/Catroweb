@@ -223,13 +223,13 @@ class MediaAssetRepository extends ServiceEntityRepository
       ->setParameter('active', true)
     ;
 
-    if (null !== $category) {
+    if ($category instanceof MediaCategory) {
       $qb->andWhere('a.category = :category')
         ->setParameter('category', $category)
       ;
     }
 
-    if (null !== $fileType) {
+    if ($fileType instanceof MediaFileType) {
       $qb->andWhere('a.file_type = :file_type')
         ->setParameter('file_type', $fileType)
       ;

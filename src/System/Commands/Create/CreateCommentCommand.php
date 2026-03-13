@@ -52,7 +52,7 @@ class CreateCommentCommand extends Command
 
     $program = $this->project_manager->findOneByName($program_name);
 
-    if (null === $user || null === $program) {
+    if (null === $user || !$program instanceof Program) {
       return 1;
     }
 

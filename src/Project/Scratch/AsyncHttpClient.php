@@ -16,7 +16,7 @@ class AsyncHttpClient
 
   public function __construct(private array $config = [])
   {
-    if (empty($this->config)) {
+    if ([] === $this->config) {
       $this->config = [
         'timeout' => 8.0,
         'max_number_of_total_requests' => 12,
@@ -48,7 +48,7 @@ class AsyncHttpClient
 
     $this->scratch_info_data = [];
 
-    (new EachPromise($promises, [
+    new EachPromise($promises, [
       'concurrency' => $max_number_of_concurrent_requests,
       'fulfilled' => function (ResponseInterface $responses): void {
         $data = json_decode($responses->getBody()->__toString(), true, 512, JSON_THROW_ON_ERROR);
@@ -56,10 +56,10 @@ class AsyncHttpClient
           $this->scratch_info_data[(int) $data['id']] = $data;
         }
       },
-      'rejected' => function ($reason, $index) {
+      'rejected' => function ($reason, $index): void {
         // Do nothing
       },
-    ]))->promise()->wait();
+    ])->promise()->wait();
 
     return $this->scratch_info_data;
   }

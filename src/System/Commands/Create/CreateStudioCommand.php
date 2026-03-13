@@ -68,7 +68,7 @@ class CreateStudioCommand extends Command
 
     try {
       $ret = $this->createStudio($adminUser, $name, $description, $isPublic, $isEnabled, $usernames, $status, $allowComments, $projects, $coverPath);
-      if (1 == $ret) {
+      if (1 === $ret) {
         $output->writeln('User not found.');
       }
 
@@ -87,7 +87,7 @@ class CreateStudioCommand extends Command
    */
   private function createStudio(User $admin, string $name, string $description, bool $is_public, bool $is_enabled, array $usernames, array $statuses, bool $allow_comments, array $projects, ?string $cover_path = null): int
   {
-    $studio = (new Studio())
+    $studio = new Studio()
       ->setName($name)
       ->setDescription($description)
       ->setIsPublic($is_public)

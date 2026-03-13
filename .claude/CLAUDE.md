@@ -734,10 +734,11 @@ See `CommentsApi` and `NotificationsApi` for reference implementations.
 
 ### After Running `yarn run generate-api`
 
-Always run CS fixer on the generated files with no cache:
+Always run Rector and CS fixer on the generated files:
 
 ```bash
 yarn run generate-api
+bin/rector process src/Api/OpenAPI/Server/
 bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
 ```
 

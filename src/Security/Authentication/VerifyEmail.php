@@ -58,7 +58,7 @@ class VerifyEmail
       'signedUrl' => $this->signature_components->getSignedUrl(),
       'deleteUrl' => $this->delete_url,
       'user' => $this->user,
-      'expire' => (new \DateTime($this->signature_components->getExpiresAt()->format('Y-m-d H:i:s')))
+      'expire' => new \DateTime($this->signature_components->getExpiresAt()->format('Y-m-d H:i:s'))
         ->setTimezone(new \DateTimeZone('Europe/Vienna'))
         ->format('H:i'),
     ];

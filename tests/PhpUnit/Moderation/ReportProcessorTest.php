@@ -51,7 +51,7 @@ final class ReportProcessorTest extends TestCase
     $user = $this->createStub(User::class);
     $user->method('getId')->willReturn($id);
     $user->method('isVerified')->willReturn($verified);
-    $user->method('hasRole')->willReturnCallback(fn (string $role) => in_array($role, $roles, true));
+    $user->method('hasRole')->willReturnCallback(fn (string $role): bool => in_array($role, $roles, true));
 
     return $user;
   }

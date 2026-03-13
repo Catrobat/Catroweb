@@ -121,7 +121,7 @@ class ContentVisibilityManager
 
     return match ($content_type) {
       ContentType::Project => $entity->getName(),
-      ContentType::Comment => mb_substr($entity->getText(), 0, 50).(mb_strlen($entity->getText()) > 50 ? '...' : ''),
+      ContentType::Comment => mb_substr((string) $entity->getText(), 0, 50).(mb_strlen((string) $entity->getText()) > 50 ? '...' : ''),
       ContentType::User => $entity->getUserIdentifier(),
       ContentType::Studio => $entity->getName(),
     };
@@ -222,7 +222,7 @@ class ContentVisibilityManager
 
       // For comments, content_id is stored as string in reports but entity id is int
       $string_ids = UserComment::class === $entity_class
-        ? array_map('strval', $user_content_ids)
+        ? array_map(strval(...), $user_content_ids)
         : $user_content_ids;
 
       // Find which of this user's content has active reports (should stay hidden)
@@ -252,7 +252,7 @@ class ContentVisibilityManager
 
       if ([] !== $reported_ids) {
         $typed_ids = UserComment::class === $entity_class
-          ? array_map('intval', $reported_ids)
+          ? array_map(intval(...), $reported_ids)
           : $reported_ids;
 
         $qb->andWhere($qb->expr()->notIn($alias.'.id', ':reported_ids'))

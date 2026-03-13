@@ -82,7 +82,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
         $projectId = preg_replace('$(.*)/project/$', '', (string) $id);
         $project = $this->project_manager->find($projectId);
 
-        if (null !== $project) {
+        if ($project instanceof Program) {
           $object->setProgram($project);
           if (null !== $object->getURL()) {
             $object->setURL(null);
@@ -105,7 +105,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
       $project = $this->project_manager->find($id);
 
-      if (null !== $project) {
+      if ($project instanceof Program) {
         $object->setProgram($project);
         if (null !== $object->getURL()) {
           $object->setURL(null);
@@ -193,7 +193,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
         'sortable' => false,
       ])
       ->add('Featured Image', null, [
-        'accessor' => fn ($subject): string => $this->getFeaturedImageUrl($subject),
+        'accessor' => $this->getFeaturedImageUrl(...),
         'template' => 'Admin/Projects/FeaturedImage.html.twig',
       ])
       ->add('program', EntityType::class, [

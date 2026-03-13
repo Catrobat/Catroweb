@@ -143,7 +143,7 @@ class UserManager
       ->execute()
     ;
 
-    return array_map(static fn ($value): mixed => $value['id'], $associative_array);
+    return array_map(static fn (array $value): mixed => $value['id'], $associative_array);
   }
 
   /**
@@ -163,7 +163,7 @@ class UserManager
       ->execute()
     ;
 
-    return array_map(static fn ($value): mixed => $value['id'], $result);
+    return array_map(static fn (array $value): mixed => $value['id'], $result);
   }
 
   protected function userSearchQuery(string $query): BoolQuery

@@ -43,7 +43,7 @@ class StudioManager
 
   public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, ?UploadedFile $image_file = null): Studio
   {
-    $studio = (new Studio())
+    $studio = new Studio()
       ->setName($name)
       ->setDescription($description)
       ->setIsPublic($is_public)
@@ -78,7 +78,7 @@ class StudioManager
       $studio->setAllowComments($enable_comments);
       $somethingChanged = true;
     }
-    if (null !== $image_file) {
+    if ($image_file instanceof UploadedFile) {
       $this->deleteCoverImage($studio->getCoverAssetPath());
       $cover_name = $this->storeCoverImage($image_file, $studio->getName());
       $studio->setCoverAssetPath($cover_name);
@@ -90,7 +90,7 @@ class StudioManager
 
   protected function createActivity(User $user, Studio $studio, string $type): StudioActivity
   {
-    $activity = (new StudioActivity())
+    $activity = new StudioActivity()
       ->setStudio($studio)
       ->setType($type)
       ->setUser($user)
@@ -105,7 +105,7 @@ class StudioManager
 
   protected function createStudioUser(User $user, Studio $studio, StudioActivity $activity, string $role, string $status = StudioUser::STATUS_ACTIVE): StudioUser
   {
-    $studioUser = (new StudioUser())
+    $studioUser = new StudioUser()
       ->setStudio($studio)
       ->setActivity($activity)
       ->setUser($user)
@@ -122,7 +122,7 @@ class StudioManager
 
   protected function createStudioComment(User $user, Studio $studio, StudioActivity $activity, string $text, int $parent_id): UserComment
   {
-    $comment = (new UserComment())
+    $comment = new UserComment()
       ->setStudio($studio)
       ->setActivity($activity)
       ->setText($text)
@@ -140,7 +140,7 @@ class StudioManager
 
   protected function createStudioProgram(User $user, Studio $studio, StudioActivity $activity, Program $project): StudioProgram
   {
-    $studioProject = (new StudioProgram())
+    $studioProject = new StudioProgram()
       ->setStudio($studio)
       ->setActivity($activity)
       ->setUser($user)
@@ -319,7 +319,7 @@ class StudioManager
   public function storeCoverImage(?UploadedFile $image_file, string $name): ?string
   {
     $cover_asset_path = null;
-    if (null !== $image_file) {
+    if ($image_file instanceof UploadedFile) {
       $cover_asset_path = TimeUtils::getTimestamp().'-'.str_replace(' ', '-', $name).'.'.$image_file->getClientOriginalExtension();
       $studio_image_dir = $this->parameter_bag->get('catrobat.resources.dir').'images/studio/';
       $image_file->move($studio_image_dir, $cover_asset_path);

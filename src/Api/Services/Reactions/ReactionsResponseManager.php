@@ -75,9 +75,7 @@ class ReactionsResponseManager extends AbstractResponseManager
   {
     $user = $user_data['user'];
     $types = array_filter(array_map(
-      static function (int $type_id): ?string {
-        return ProgramLike::$TYPE_NAMES[$type_id] ?? null;
-      },
+      static fn (int $type_id): ?string => ProgramLike::$TYPE_NAMES[$type_id] ?? null,
       $user_data['types']
     ));
 

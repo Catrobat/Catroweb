@@ -69,7 +69,7 @@ class ApkReadyAdmin extends ApkAdmin
       ->add('name')
       ->add('apk_request_time')
       ->add('thumbnail', 'string', [
-        'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
+        'accessor' => $this->getThumbnailImageUrl(...),
         'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
       ])
       ->add(ListMapper::NAME_ACTIONS, null, [

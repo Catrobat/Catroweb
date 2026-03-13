@@ -103,7 +103,7 @@ class AppealProcessor
 
     $this->entity_manager->flush();
 
-    if (null !== $appeal->getAppellant()) {
+    if ($appeal->getAppellant() instanceof User) {
       $this->trust_calculator->invalidate($appeal->getAppellant());
     }
   }

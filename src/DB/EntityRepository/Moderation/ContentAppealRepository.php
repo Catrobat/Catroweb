@@ -78,7 +78,7 @@ class ContentAppealRepository extends ServiceEntityRepository
       ->setMaxResults($limit + 1)
     ;
 
-    if (null !== $cursor_created_at && null !== $cursor_id) {
+    if ($cursor_created_at instanceof \DateTimeInterface && null !== $cursor_id) {
       $qb->andWhere(
         $qb->expr()->orX(
           $qb->expr()->gt('a.created_at', ':cursor_created_at'),

@@ -56,7 +56,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function commentsIdAppealPostAction(Request $request, $id)
+  public function commentsIdAppealPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -79,7 +79,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'int', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $content_appeal_request = $this->deserialize($content_appeal_request, 'OpenAPI\Server\Model\ContentAppealRequest', $inputFormat);
+      $content_appeal_request = $this->deserialize($content_appeal_request, \OpenAPI\Server\Model\ContentAppealRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -94,7 +94,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentAppealRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ContentAppealRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -148,7 +148,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function commentsIdReportPostAction(Request $request, $id)
+  public function commentsIdReportPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -171,7 +171,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'int', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $content_report_request = $this->deserialize($content_report_request, 'OpenAPI\Server\Model\ContentReportRequest', $inputFormat);
+      $content_report_request = $this->deserialize($content_report_request, \OpenAPI\Server\Model\ContentReportRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -186,7 +186,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentReportRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ContentReportRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_report_request, $asserts);
     if ($response instanceof Response) {
@@ -240,7 +240,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function moderationAppealsGetAction(Request $request)
+  public function moderationAppealsGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -328,7 +328,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function moderationAppealsIdResolvePutAction(Request $request, $id)
+  public function moderationAppealsIdResolvePutAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -351,7 +351,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'int', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $resolve_appeal_request = $this->deserialize($resolve_appeal_request, 'OpenAPI\Server\Model\ResolveAppealRequest', $inputFormat);
+      $resolve_appeal_request = $this->deserialize($resolve_appeal_request, \OpenAPI\Server\Model\ResolveAppealRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -366,7 +366,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ResolveAppealRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ResolveAppealRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($resolve_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -418,7 +418,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function moderationReportsGetAction(Request $request)
+  public function moderationReportsGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -506,7 +506,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function moderationReportsIdResolvePutAction(Request $request, $id)
+  public function moderationReportsIdResolvePutAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -529,7 +529,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'int', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $resolve_report_request = $this->deserialize($resolve_report_request, 'OpenAPI\Server\Model\ResolveReportRequest', $inputFormat);
+      $resolve_report_request = $this->deserialize($resolve_report_request, \OpenAPI\Server\Model\ResolveReportRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -544,7 +544,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ResolveReportRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ResolveReportRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($resolve_report_request, $asserts);
     if ($response instanceof Response) {
@@ -596,7 +596,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdAppealPostAction(Request $request, $id)
+  public function projectIdAppealPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -619,7 +619,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $content_appeal_request = $this->deserialize($content_appeal_request, 'OpenAPI\Server\Model\ContentAppealRequest', $inputFormat);
+      $content_appeal_request = $this->deserialize($content_appeal_request, \OpenAPI\Server\Model\ContentAppealRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -635,7 +635,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentAppealRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ContentAppealRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -689,7 +689,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReportPostAction(Request $request, $id)
+  public function projectIdReportPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -712,7 +712,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $content_report_request = $this->deserialize($content_report_request, 'OpenAPI\Server\Model\ContentReportRequest', $inputFormat);
+      $content_report_request = $this->deserialize($content_report_request, \OpenAPI\Server\Model\ContentReportRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -728,7 +728,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentReportRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ContentReportRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_report_request, $asserts);
     if ($response instanceof Response) {
@@ -782,7 +782,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdAppealPostAction(Request $request, $id)
+  public function studioIdAppealPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -805,7 +805,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $content_appeal_request = $this->deserialize($content_appeal_request, 'OpenAPI\Server\Model\ContentAppealRequest', $inputFormat);
+      $content_appeal_request = $this->deserialize($content_appeal_request, \OpenAPI\Server\Model\ContentAppealRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -821,7 +821,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentAppealRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ContentAppealRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -875,7 +875,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdReportPostAction(Request $request, $id)
+  public function studioIdReportPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -898,7 +898,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $content_report_request = $this->deserialize($content_report_request, 'OpenAPI\Server\Model\ContentReportRequest', $inputFormat);
+      $content_report_request = $this->deserialize($content_report_request, \OpenAPI\Server\Model\ContentReportRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -914,7 +914,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentReportRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ContentReportRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_report_request, $asserts);
     if ($response instanceof Response) {
@@ -968,7 +968,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdAppealPostAction(Request $request, $id)
+  public function userIdAppealPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -991,7 +991,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $content_appeal_request = $this->deserialize($content_appeal_request, 'OpenAPI\Server\Model\ContentAppealRequest', $inputFormat);
+      $content_appeal_request = $this->deserialize($content_appeal_request, \OpenAPI\Server\Model\ContentAppealRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -1007,7 +1007,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentAppealRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ContentAppealRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -1061,7 +1061,7 @@ class ModerationController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdReportPostAction(Request $request, $id)
+  public function userIdReportPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -1084,7 +1084,7 @@ class ModerationController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $content_report_request = $this->deserialize($content_report_request, 'OpenAPI\Server\Model\ContentReportRequest', $inputFormat);
+      $content_report_request = $this->deserialize($content_report_request, \OpenAPI\Server\Model\ContentReportRequest::class, $inputFormat);
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -1100,7 +1100,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentReportRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ContentReportRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_report_request, $asserts);
     if ($response instanceof Response) {

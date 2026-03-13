@@ -13,7 +13,7 @@ class NotificationController extends AbstractController
   #[Route(path: '/user_notifications', name: 'notifications', methods: ['GET'])]
   public function notifications(): Response
   {
-    if (!$this->getUser()) {
+    if (!$this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
       return $this->redirectToRoute('login');
     }
 

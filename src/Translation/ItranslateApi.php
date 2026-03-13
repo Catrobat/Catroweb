@@ -125,7 +125,7 @@ class ItranslateApi implements TranslationApiInterface
 
     $statusCode = $response->getStatusCode();
 
-    if (200 != $statusCode) {
+    if (200 !== $statusCode) {
       $this->logger->error(sprintf('Itranslate returned status code %s, source: %s, target: %s, text: %s, body: %s', $statusCode, $source_language, $target_language, $text, $response->getBody()));
 
       return null;

@@ -30,15 +30,8 @@ class RemixGraphManipulator
     ;
 
     foreach ($backward_relations_to_be_converted as $backward_relation) {
-      $cycle_exists = false;
-      foreach ($removed_forward_parents_ancestor_descendant_relations as $descendant_relation) {
-        if ($backward_relation->getParentId() === $descendant_relation->getDescendantId()
-          && $backward_relation->getChildId() === $descendant_relation->getAncestorId()) {
-          $cycle_exists = true;
-          break;
-        }
-      }
-
+      $cycle_exists = array_any($removed_forward_parents_ancestor_descendant_relations, fn ($descendant_relation): bool => $backward_relation->getParentId() === $descendant_relation->getDescendantId()
+        && $backward_relation->getChildId() === $descendant_relation->getAncestorId());
       if ($cycle_exists) {
         continue;
       }

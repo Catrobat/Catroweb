@@ -42,7 +42,7 @@ class MailerAdapter
       $this->logger->error('Can\'t render mail template: '.$template.$exception->getMessage());
     }
 
-    return (new TemplatedEmail())
+    return new TemplatedEmail()
       ->from(new Address('support@catrob.at'))
       ->to($to)
       ->subject($subject)
@@ -55,7 +55,7 @@ class MailerAdapter
   protected function signEmail(Message $email): Message
   {
     try {
-      return (new DkimSigner('file://'.$this->dkim_private_key_path, 'share.catrob.at', 'sf'))->sign($email);
+      return new DkimSigner('file://'.$this->dkim_private_key_path, 'share.catrob.at', 'sf')->sign($email);
     } catch (InvalidArgumentException $invalidArgumentException) {
       if ('prod' === $_ENV['APP_ENV']) {
         $this->logger->error(sprintf('Private dkim key is missing (%s): ', $this->dkim_private_key_path).$invalidArgumentException->getMessage());

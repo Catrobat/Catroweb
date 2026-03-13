@@ -12,7 +12,9 @@ use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
 use App\Project\Event\CheckScratchProjectEvent;
+use App\Project\ProjectLikeService;
 use App\Project\ProjectManager;
+use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
 use App\Translation\TranslationDelegate;
 use App\Utils\ElapsedTimeStringFormatter;
@@ -39,6 +41,7 @@ class ProjectController extends AbstractController
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly ProjectManager $project_manager,
+    private readonly ProjectLikeService $project_like_service,
     private readonly ElapsedTimeStringFormatter $elapsed_time,
     private readonly TranslatorInterface $translator,
     private readonly ParameterBagInterface $parameter_bag,
@@ -48,6 +51,7 @@ class ProjectController extends AbstractController
     private readonly UserCommentRepository $comment_repository,
     private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
     private readonly ContentVisibilityManager $content_visibility_manager,
+    private readonly ProjectStatisticsService $project_statistics_service,
   ) {
   }
 
@@ -77,14 +81,14 @@ class ProjectController extends AbstractController
     $my_project = $logged_in && $project->getUser() === $user;
     $active_user_like_types = [];
     if ($logged_in) {
-      $likes = $this->project_manager->findUserLikes($project->getId(), $user->getId());
+      $likes = $this->project_like_service->findUserLikes($project->getId(), $user->getId());
       foreach ($likes as $like) {
         $active_user_like_types[] = $like->getType();
       }
     }
 
-    $active_like_types = $this->project_manager->findProjectLikeTypes($project->getId());
-    $total_like_count = $this->project_manager->totalLikeCount($project->getId());
+    $active_like_types = $this->project_like_service->findProjectLikeTypes($project->getId());
+    $total_like_count = $this->project_like_service->totalLikeCount($project->getId());
     $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
     $project_comment_list = [];
@@ -215,13 +219,13 @@ class ProjectController extends AbstractController
   public function markNotForKids(string $id): Response
   {
     $project = $this->project_manager->find($id);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       return $this->redirectToIndexOnError();
     }
 
-    if (self::NOT_FOR_KIDS_MODERATOR == $project->getNotForKids()) {
+    if (self::NOT_FOR_KIDS_MODERATOR === $project->getNotForKids()) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_for_kids_moderator', [], 'catroweb'));
-    } elseif (self::NOT_FOR_KIDS == $project->getNotForKids()) {
+    } elseif (self::NOT_FOR_KIDS === $project->getNotForKids()) {
       $project->setNotForKids(0);
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_safe_for_kids', [], 'catroweb'));
     } else {
@@ -245,7 +249,7 @@ class ProjectController extends AbstractController
   private function checkAndAddViewed(Request $request, Program $project, array $viewed): void
   {
     if (!in_array($project->getId(), $viewed, true)) {
-      $this->project_manager->increaseViews($project);
+      $this->project_statistics_service->increaseViews($project);
       $viewed[] = $project->getId();
       $request->getSession()->set('viewed', $viewed);
     }
@@ -289,7 +293,7 @@ class ProjectController extends AbstractController
     }
 
     $project = $this->project_manager->find($id);
-    if (null === $project || $project->getUser() !== $user) {
+    if (!$project instanceof Program || $project->getUser() !== $user) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
@@ -366,7 +370,7 @@ class ProjectController extends AbstractController
     }
 
     $project = $this->project_manager->find($id);
-    if (null === $project || $project->getUser() !== $user) {
+    if (!$project instanceof Program || $project->getUser() !== $user) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 

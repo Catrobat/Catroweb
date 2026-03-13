@@ -110,7 +110,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): ?MediaCategoryResponse {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
+    if (!$user instanceof User || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;
@@ -145,7 +145,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): ?MediaCategoryDetailResponse {
     $category = $this->facade->getLoader()->getCategoryById($id);
-    if (null === $category) {
+    if (!$category instanceof \App\DB\Entity\MediaLibrary\MediaCategory) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -171,14 +171,14 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): ?MediaCategoryResponse {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
+    if (!$user instanceof User || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;
     }
 
     $category = $this->facade->getLoader()->getCategoryById($id);
-    if (null === $category) {
+    if (!$category instanceof \App\DB\Entity\MediaLibrary\MediaCategory) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -206,14 +206,14 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): void {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
+    if (!$user instanceof User || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return;
     }
 
     $category = $this->facade->getLoader()->getCategoryById($id);
-    if (null === $category) {
+    if (!$category instanceof \App\DB\Entity\MediaLibrary\MediaCategory) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;
@@ -280,14 +280,14 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): ?MediaAssetResponse {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
+    if (!$user instanceof User || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;
     }
 
     $category = $this->facade->getLoader()->getCategoryById($category_id);
-    if (null === $category) {
+    if (!$category instanceof \App\DB\Entity\MediaLibrary\MediaCategory) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -295,7 +295,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
 
     $file_mime_type = $file->getMimeType() ?? '';
     $validation_errors = $this->facade->getRequestValidator()->validateFile($file, $file_mime_type);
-    if (!empty($validation_errors)) {
+    if ([] !== $validation_errors) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
       return null;
@@ -333,7 +333,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): ?MediaAssetResponse {
     $asset = $this->facade->getLoader()->getAssetById($id);
-    if (null === $asset) {
+    if (!$asset instanceof \App\DB\Entity\MediaLibrary\MediaAsset) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -357,14 +357,14 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): ?MediaAssetResponse {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
+    if (!$user instanceof User || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;
     }
 
     $asset = $this->facade->getLoader()->getAssetById($id);
-    if (null === $asset) {
+    if (!$asset instanceof \App\DB\Entity\MediaLibrary\MediaAsset) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -373,7 +373,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     $category = null;
     if ($media_asset_update_request->getCategoryId()) {
       $category = $this->facade->getLoader()->getCategoryById($media_asset_update_request->getCategoryId());
-      if (null === $category) {
+      if (!$category instanceof \App\DB\Entity\MediaLibrary\MediaCategory) {
         $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
 
         return null;
@@ -410,14 +410,14 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): void {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
+    if (!$user instanceof User || !$user->hasRole(User::ROLE_MEDIA_ADMIN)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return;
     }
 
     $asset = $this->facade->getLoader()->getAssetById($id);
-    if (null === $asset) {
+    if (!$asset instanceof \App\DB\Entity\MediaLibrary\MediaAsset) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;

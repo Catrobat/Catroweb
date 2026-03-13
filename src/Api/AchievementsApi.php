@@ -24,7 +24,7 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
   public function achievementsGet(string $accept_language, int &$responseCode, array &$responseHeaders): ?AchievementsListResponse
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user) {
+    if (!$user instanceof \App\DB\Entity\User\User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return null;
@@ -52,7 +52,7 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
   public function achievementsCountGet(int &$responseCode, array &$responseHeaders): ?AchievementsCountResponse
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user) {
+    if (!$user instanceof \App\DB\Entity\User\User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return null;
@@ -70,7 +70,7 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
   public function achievementsReadPut(int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user) {
+    if (!$user instanceof \App\DB\Entity\User\User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return;
@@ -85,7 +85,7 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
   public function userIdAchievementsGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->user_manager->find($id);
-    if (null === $user) {
+    if (!$user instanceof \App\DB\Entity\User\User) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;

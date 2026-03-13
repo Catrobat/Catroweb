@@ -32,11 +32,11 @@ class RemixUpdaterEventListenerTest extends TestCase
 {
   private RemixUpdaterEventListener $remix_updater;
 
-  private MockObject|RemixManager $remix_manager;
+  private MockObject&RemixManager $remix_manager;
 
-  private AsyncHttpClient|MockObject $async_http_client;
+  private MockObject&AsyncHttpClient $async_http_client;
 
-  private MockObject|Program $program_entity;
+  private MockObject&Program $program_entity;
 
   #[\Override]
   protected function setUp(): void

@@ -151,7 +151,7 @@ class ExampleProjectAdmin extends AbstractAdmin
     $list
       ->addIdentifier('id')
       ->add('Example Image', null, [
-        'accessor' => fn ($subject): string => $this->getExampleImageUrl($subject),
+        'accessor' => $this->getExampleImageUrl(...),
         'template' => 'Admin/Projects/ExampleImage.html.twig',
       ])
       ->add('program', EntityType::class, ['class' => Program::class, 'editable' => false])
@@ -173,7 +173,7 @@ class ExampleProjectAdmin extends AbstractAdmin
     $id = $this->getForm()->get('program_id')->getData();
     $project = $this->project_manager->find($id);
 
-    if (null !== $project) {
+    if ($project instanceof Program) {
       $object->setProgram($project);
     } else {
       throw new NotFoundHttpException(sprintf('Unable to find project with id : %s', $id));

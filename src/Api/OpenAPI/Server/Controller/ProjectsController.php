@@ -56,7 +56,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdCatrobatGetAction(Request $request, $id)
+  public function projectIdCatrobatGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/zip'];
@@ -132,7 +132,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdDeleteAction(Request $request, $id)
+  public function projectIdDeleteAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -205,7 +205,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdGetAction(Request $request, $id)
+  public function projectIdGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -281,7 +281,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdPutAction(Request $request, $id)
+  public function projectIdPutAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -314,7 +314,7 @@ class ProjectsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $update_project_request = $this->deserialize($update_project_request, 'OpenAPI\Server\Model\UpdateProjectRequest', $inputFormat);
+      $update_project_request = $this->deserialize($update_project_request, \OpenAPI\Server\Model\UpdateProjectRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -331,7 +331,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\UpdateProjectRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\UpdateProjectRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($update_project_request, $asserts);
     if ($response instanceof Response) {
@@ -392,7 +392,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReactionDeleteAction(Request $request, $id)
+  public function projectIdReactionDeleteAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -484,7 +484,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReactionPostAction(Request $request, $id)
+  public function projectIdReactionPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -517,7 +517,7 @@ class ProjectsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $reaction_request = $this->deserialize($reaction_request, 'OpenAPI\Server\Model\ReactionRequest', $inputFormat);
+      $reaction_request = $this->deserialize($reaction_request, \OpenAPI\Server\Model\ReactionRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -534,7 +534,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ReactionRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ReactionRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($reaction_request, $asserts);
     if ($response instanceof Response) {
@@ -596,7 +596,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReactionsGetAction(Request $request, $id)
+  public function projectIdReactionsGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -679,7 +679,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReactionsUsersGetAction(Request $request, $id)
+  public function projectIdReactionsUsersGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -788,7 +788,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdRecommendationsGetAction(Request $request, $id)
+  public function projectIdRecommendationsGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -924,7 +924,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsCategoriesGetAction(Request $request)
+  public function projectsCategoriesGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1014,7 +1014,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsExtensionsGetAction(Request $request)
+  public function projectsExtensionsGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1087,7 +1087,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsFeaturedGetAction(Request $request)
+  public function projectsFeaturedGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1205,7 +1205,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsGetAction(Request $request)
+  public function projectsGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1332,7 +1332,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsPostAction(Request $request)
+  public function projectsPostAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1449,7 +1449,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsSearchGetAction(Request $request)
+  public function projectsSearchGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1567,7 +1567,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsTagsGetAction(Request $request)
+  public function projectsTagsGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1640,7 +1640,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsUserGetAction(Request $request)
+  public function projectsUserGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1757,7 +1757,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsUserIdGetAction(Request $request, $id)
+  public function projectsUserIdGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

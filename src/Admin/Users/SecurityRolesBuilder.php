@@ -121,12 +121,6 @@ final readonly class SecurityRolesBuilder
    */
   private function recursiveArraySearch(string $role, array $roles): bool
   {
-    foreach ($roles as $key => $value) {
-      if ($role === $key || (\is_array($value) && true === $this->recursiveArraySearch($role, $value))) {
-        return true;
-      }
-    }
-
-    return false;
+    return array_any($roles, fn (mixed $value, $key): bool => $role === $key || (\is_array($value) && $this->recursiveArraySearch($role, $value)));
   }
 }

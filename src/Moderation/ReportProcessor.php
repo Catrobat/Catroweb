@@ -150,7 +150,7 @@ class ReportProcessor
     $audit->setNote('Report #'.$report->getId().' '.$action.'ed via admin');
     $this->entity_manager->persist($audit);
 
-    if (null !== $report->getReporter()) {
+    if ($report->getReporter() instanceof User) {
       $this->trust_calculator->invalidate($report->getReporter());
     }
 
@@ -162,9 +162,14 @@ class ReportProcessor
    */
   private function isPrivilegedReporter(User $reporter): bool
   {
-    return $reporter->hasRole('ROLE_ADMIN')
-      || $reporter->hasRole('ROLE_SUPER_ADMIN')
-      || $reporter->hasRole('ROLE_MODERATOR');
+    if ($reporter->hasRole('ROLE_ADMIN')) {
+      return true;
+    }
+    if ($reporter->hasRole('ROLE_SUPER_ADMIN')) {
+      return true;
+    }
+
+    return $reporter->hasRole('ROLE_MODERATOR');
   }
 
   private function checkRateLimit(User $reporter): void

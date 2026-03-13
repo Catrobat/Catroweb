@@ -50,7 +50,7 @@ class NotificationsResponseManager extends AbstractResponseManager
 
     foreach ($notifications as $notification) {
       $item = $this->createNotificationResponse($notification, $user);
-      if (null !== $item) {
+      if ($item instanceof NotificationResponse) {
         $response_items[] = $item;
       }
     }
