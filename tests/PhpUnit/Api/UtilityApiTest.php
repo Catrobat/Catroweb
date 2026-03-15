@@ -25,7 +25,7 @@ class UtilityApiTest extends TestCase
 {
   protected UtilityApi $utility_api;
 
-  protected UtilityApiFacade|Stub $facade;
+  protected Stub&UtilityApiFacade $facade;
 
   /**
    * @throws Exception

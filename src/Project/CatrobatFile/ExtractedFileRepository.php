@@ -23,9 +23,12 @@ class ExtractedFileRepository
     private readonly ProjectManager $project_manager,
     private readonly LoggerInterface $logger)
   {
-    $local_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.dir');
-    $web_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.path');
-    $local_storage_path = (string) $parameter_bag->get('catrobat.file.storage.dir');
+    /** @var string $local_extracted_path */
+    $local_extracted_path = $parameter_bag->get('catrobat.file.extract.dir');
+    /** @var string $web_extracted_path */
+    $web_extracted_path = $parameter_bag->get('catrobat.file.extract.path');
+    /** @var string $local_storage_path */
+    $local_storage_path = $parameter_bag->get('catrobat.file.storage.dir');
 
     FileHelper::verifyDirectoryExists($local_extracted_path);
     FileHelper::verifyDirectoryExists($local_storage_path);

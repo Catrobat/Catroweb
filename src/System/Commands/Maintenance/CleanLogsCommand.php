@@ -25,7 +25,8 @@ class CleanLogsCommand extends Command
     $output1 = $output;
     $output1->writeln('Deleting log files');
 
-    $log_dir = strval($this->parameter_bag->get('catrobat.logs.dir'));
+    /** @var string $log_dir */
+    $log_dir = $this->parameter_bag->get('catrobat.logs.dir');
     try {
       FileHelper::emptyDirectory($log_dir);
     } catch (\Exception $exception) {

@@ -29,7 +29,9 @@ class CleanApkTest extends KernelTestCase
     $application = new Application($kernel);
     $command = $application->find('catrobat:clean:apk');
     $this->command_tester = new CommandTester($command);
-    $this->apk_dir = (string) $container->getParameter('catrobat.apk.dir');
+    $apk_dir_param = $container->getParameter('catrobat.apk.dir');
+    \assert(\is_string($apk_dir_param));
+    $this->apk_dir = $apk_dir_param;
     fopen('/tmp/PhpUnitTestCleanApk', 'w');
     $file = new File('/tmp/PhpUnitTestCleanApk');
     $file->move($this->apk_dir, 'test');

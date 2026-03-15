@@ -38,7 +38,7 @@ final class MediaLibraryApiTest extends TestCase
 {
   protected MediaLibraryApi $api;
 
-  protected Stub|MediaLibraryApiFacade $facade;
+  protected Stub&MediaLibraryApiFacade $facade;
 
   /**
    * @throws Exception

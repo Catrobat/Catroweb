@@ -10,14 +10,15 @@ use Symfony\Component\HttpFoundation\File\File;
 
 readonly class ApkRepository
 {
-  private ?string $dir;
+  private string $dir;
 
   /**
    * @throws \Exception
    */
   public function __construct(ParameterBagInterface $parameter_bag)
   {
-    $apk_dir = (string) $parameter_bag->get('catrobat.apk.dir');
+    /** @var string $apk_dir */
+    $apk_dir = $parameter_bag->get('catrobat.apk.dir');
     FileHelper::verifyDirectoryExists($apk_dir);
     $this->dir = $apk_dir;
   }

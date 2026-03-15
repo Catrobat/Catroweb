@@ -1181,7 +1181,7 @@ class RemixManagerTest extends TestCase
   /**
    * @throws \Exception
    */
-  private function checkRemixRelations(Program|MockObject $program_entity, array $parent_data, array $expected_relations): void
+  private function checkRemixRelations(MockObject&Program $program_entity, array $parent_data, array $expected_relations): void
   {
     $expected_relations_map = [];
     $expected_catrobat_relations = [];

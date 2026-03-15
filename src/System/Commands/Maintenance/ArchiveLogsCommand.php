@@ -26,6 +26,7 @@ class ArchiveLogsCommand extends Command
 
     $output1->writeln('Archiving log files');
 
+    /** @var string $log_dir */
     $log_dir = $this->parameter_bag->get('catrobat.logs.dir');
     $old_log_dir = $log_dir.'old_logs';
     $compression_command = 'tar -zcvf '.$old_log_dir.'/log_backup_'.date('Y-m-d_His').'.tar.gz -C '.$log_dir;

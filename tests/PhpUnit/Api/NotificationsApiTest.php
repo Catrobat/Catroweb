@@ -27,7 +27,7 @@ class NotificationsApiTest extends TestCase
 {
   protected NotificationsApi $object;
 
-  protected Stub|NotificationsApiFacade $facade;
+  protected Stub&NotificationsApiFacade $facade;
 
   /**
    * @throws \ReflectionException

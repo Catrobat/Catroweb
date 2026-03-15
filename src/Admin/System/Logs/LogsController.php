@@ -66,6 +66,10 @@ class LogsController extends CRUDController
     }
 
     $file = fopen($filePath, 'r');
+    if (false === $file) {
+      return [];
+    }
+
     $content = [];
     $currentLogEntry = null;
     $index = 0;

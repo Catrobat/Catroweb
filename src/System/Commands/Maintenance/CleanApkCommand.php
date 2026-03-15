@@ -31,7 +31,8 @@ class CleanApkCommand extends Command
 
     $output1->writeln('Deleting APKs');
 
-    $apk_dir = (string) $this->parameter_bag->get('catrobat.apk.dir');
+    /** @var string $apk_dir */
+    $apk_dir = $this->parameter_bag->get('catrobat.apk.dir');
     FileHelper::emptyDirectory($apk_dir);
 
     $query = $this->entity_manager

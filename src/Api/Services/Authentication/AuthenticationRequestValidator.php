@@ -96,7 +96,12 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
     }
 
     try {
-      $header = json_decode(base64_decode($header, true), true, 512, JSON_THROW_ON_ERROR);
+      $decoded_header = base64_decode($header, true);
+      if (false === $decoded_header) {
+        return null;
+      }
+
+      $header = json_decode($decoded_header, true, 512, JSON_THROW_ON_ERROR);
     } catch (\JsonException) {
       return null;
     }
@@ -116,7 +121,12 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
         return null;
     }
 
-    $payload = json_decode(base64_decode($payload, true), true, 512, JSON_THROW_ON_ERROR);
+    $decoded_payload = base64_decode($payload, true);
+    if (false === $decoded_payload) {
+      return null;
+    }
+
+    $payload = json_decode($decoded_payload, true, 512, JSON_THROW_ON_ERROR);
 
     return ['header' => $header, 'payload' => $payload];
   }

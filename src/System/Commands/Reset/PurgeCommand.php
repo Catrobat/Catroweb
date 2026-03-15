@@ -51,35 +51,51 @@ class PurgeCommand extends Command
     $progress->start();
 
     $progress->setMessage('Deleting Screenshots');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.screenshot.dir'));
+    /** @var string $dir */
+    $dir = $this->parameter_bag->get('catrobat.screenshot.dir');
+    FileHelper::emptyDirectory($dir);
     $progress->advance();
 
     $progress->setMessage('Deleting Thumbnails');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.thumbnail.dir'));
+    /** @var string $dir */
+    $dir = $this->parameter_bag->get('catrobat.thumbnail.dir');
+    FileHelper::emptyDirectory($dir);
     $progress->advance();
 
     $progress->setMessage('Deleting Catrobat Files');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.file.storage.dir'));
+    /** @var string $dir */
+    $dir = $this->parameter_bag->get('catrobat.file.storage.dir');
+    FileHelper::emptyDirectory($dir);
     $progress->advance();
 
     $progress->setMessage('Deleting Extracted Catrobat Files');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.file.extract.dir'));
+    /** @var string $dir */
+    $dir = $this->parameter_bag->get('catrobat.file.extract.dir');
+    FileHelper::emptyDirectory($dir);
     $progress->advance();
 
     $progress->setMessage('Deleting Featured Images');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.featuredimage.dir'));
+    /** @var string $dir */
+    $dir = $this->parameter_bag->get('catrobat.featuredimage.dir');
+    FileHelper::emptyDirectory($dir);
     $progress->advance();
 
     $progress->setMessage('Deleting APKs');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.apk.dir'));
+    /** @var string $dir */
+    $dir = $this->parameter_bag->get('catrobat.apk.dir');
+    FileHelper::emptyDirectory($dir);
     $progress->advance();
 
     $progress->setMessage('Deleting Media Assets');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.media.path'));
+    /** @var string $dir */
+    $dir = $this->parameter_bag->get('catrobat.media.path');
+    FileHelper::emptyDirectory($dir);
     $progress->advance();
 
     $progress->setMessage('Deleting Templates');
-    FileHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.template.dir'));
+    /** @var string $dir */
+    $dir = $this->parameter_bag->get('catrobat.template.dir');
+    FileHelper::emptyDirectory($dir);
     $progress->advance();
 
     $progress->setMessage('Dropping all tables');

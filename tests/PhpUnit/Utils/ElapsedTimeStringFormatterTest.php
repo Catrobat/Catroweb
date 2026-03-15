@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ElapsedTimeStringFormatter::class)]
 class ElapsedTimeStringFormatterTest extends TestCase
 {
-  private ElapsedTimeStringFormatter|MockObject $object;
+  private MockObject&ElapsedTimeStringFormatter $object;
 
   /**
    * @throws \Exception

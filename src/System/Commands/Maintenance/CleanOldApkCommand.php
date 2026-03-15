@@ -55,6 +55,7 @@ class CleanOldApkCommand extends Command
     $output->writeln('Deleting all APKs older than '.$days.' days.');
     $last_point_of_time_to_save = TimeUtils::getTimestamp() - ((int) $days * self::HOURS * self::MINUTES * self::SECONDS);
 
+    /** @var string $directory */
     $directory = $this->parameter_bag->get('catrobat.apk.dir');
     $finder = new Finder();
     $finder->in($directory)->depth(0);

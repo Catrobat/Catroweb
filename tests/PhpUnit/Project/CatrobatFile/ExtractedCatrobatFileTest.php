@@ -60,7 +60,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
+    Assert::assertIsString($content);
     $xml = @simplexml_load_string($content);
+    Assert::assertNotFalse($xml);
     $this->assertSame($new_name, (string) $xml->header->programName);
   }
 
@@ -82,7 +84,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
+    Assert::assertIsString($content);
     $xml = @simplexml_load_string($content);
+    Assert::assertNotFalse($xml);
     $this->assertSame($new_description, (string) $xml->header->description);
   }
 
@@ -104,7 +108,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
+    Assert::assertIsString($content);
     $xml = @simplexml_load_string($content);
+    Assert::assertNotFalse($xml);
     $this->assertSame($new_credits, (string) $xml->header->notesAndCredits);
   }
 
@@ -467,6 +473,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $filesystem->mirror(BootstrapExtension::$FIXTURES_DIR.'program_with_0_xmlchar/', BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/');
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    Assert::assertIsString($base_xml_string);
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
     Assert::assertEquals(1, $count);
 
@@ -475,6 +482,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    Assert::assertIsString($base_xml_string);
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
     Assert::assertEquals(1, $count);
   }
@@ -488,6 +496,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $filesystem->mirror(BootstrapExtension::$FIXTURES_DIR.'/program_with_0_xmlchar/', BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/');
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    Assert::assertIsString($base_xml_string);
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals(1, $count);
 
@@ -496,6 +505,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    Assert::assertIsString($base_xml_string);
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals(1, $count);
   }

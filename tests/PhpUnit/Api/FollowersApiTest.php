@@ -29,9 +29,9 @@ use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 final class FollowersApiTest extends TestCase
 {
   private FollowersApi $object;
-  private FollowersApiFacade|\PHPUnit\Framework\MockObject\Stub $facade;
-  private UserManager|\PHPUnit\Framework\MockObject\Stub $user_manager;
-  private UserApiLoader|\PHPUnit\Framework\MockObject\Stub $user_api_loader;
+  private \PHPUnit\Framework\MockObject\Stub&FollowersApiFacade $facade;
+  private \PHPUnit\Framework\MockObject\Stub&UserManager $user_manager;
+  private \PHPUnit\Framework\MockObject\Stub&UserApiLoader $user_api_loader;
 
   #[\Override]
   protected function setUp(): void

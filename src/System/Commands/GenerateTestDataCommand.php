@@ -31,8 +31,12 @@ class GenerateTestDataCommand extends Command
     protected CatrobatFileCompressor $compressor, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
-    $this->source = (string) $parameter_bag->get('catrobat.test.directory.source');
-    $this->target_directory = (string) $parameter_bag->get('catrobat.test.directory.target');
+    /** @var string $source */
+    $source = $parameter_bag->get('catrobat.test.directory.source');
+    $this->source = $source;
+    /** @var string $target */
+    $target = $parameter_bag->get('catrobat.test.directory.target');
+    $this->target_directory = $target;
   }
 
   #[\Override]
@@ -180,6 +184,10 @@ class GenerateTestDataCommand extends Command
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
+    if (false === $properties) {
+      throw new \Exception("Can't load code.xml file");
+    }
+
     $properties->header->tags = 'Games,Story';
     $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
     if (!$file_overwritten) {
