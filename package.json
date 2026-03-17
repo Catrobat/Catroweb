@@ -74,7 +74,7 @@
     "stylelint-config-standard-scss": "^17.0.0",
     "webpack": "^5.105.4",
     "webpack-bugsnag-plugins": "^2.2.3",
-    "webpack-cli": "^6.0.1",
+    "webpack-cli": "^7.0.1",
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
