@@ -4140,7 +4140,7 @@ __metadata:
     stimulus: "npm:^3.2.2"
     stylelint: "npm:^17.4.0"
     stylelint-config-standard-scss: "npm:^17.0.0"
-    sweetalert2: "npm:^11.26.22"
+    sweetalert2: "npm:^11.26.23"
     textfilljs: "npm:^1.0.3-a"
     typeface-roboto: "npm:^1.1.13"
     vis: "npm:^4.21.0-EOL"
@@ -9967,10 +9967,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sweetalert2@npm:^11.26.22":
-  version: 11.26.22
-  resolution: "sweetalert2@npm:11.26.22"
-  checksum: 10c0/3913585b462b2790b5e896ac61600b1c0a18d19761551d5de79c87fcf9b97a593a6c629d4942c95c60bd773d59b03e16afc54206a81a62f9f668e24266b72236
+"sweetalert2@npm:^11.26.23":
+  version: 11.26.23
+  resolution: "sweetalert2@npm:11.26.23"
+  checksum: 10c0/7d5d9ddce6d33ad1721a33014084c6ddd4bf50ded4a537adb1b2266dd3b13f188768ff3476defab3c13bbcdcb67d14b6fed462c1d828992a1457bf2783972ae1
   languageName: node
   linkType: hard
 
