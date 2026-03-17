@@ -133,7 +133,7 @@ class LogsController extends CRUDController
         $isNewEntry = true;
       }
 
-      if ($isNewEntry && $parsedEntry) {
+      if ($isNewEntry) {
         // Save previous log entry if exists
         if (null !== $currentLogEntry) {
           $content[] = $currentLogEntry;
