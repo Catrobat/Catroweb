@@ -92,7 +92,7 @@ class TrustScoreCalculator
     $follower_count = (int) $this->entity_manager->createQueryBuilder()
       ->select('COUNT(f)')
       ->from(User::class, 'f')
-      ->join('f.following', 'u')
+      ->join('f.followers', 'u')
       ->where('u.id = :user_id')
       ->setParameter('user_id', $user_id)
       ->getQuery()

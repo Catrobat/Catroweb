@@ -20,8 +20,8 @@ class FollowersApiLoader extends AbstractApiLoader
    */
   public function getFollowers(User $user): array
   {
-    $followers = $this->queryRelatedUsers($user, 'f.following');
-    $total_following = $this->countRelatedUsers($user, 'f.followers');
+    $followers = $this->queryRelatedUsers($user, 'f.followers');
+    $total_following = $this->countRelatedUsers($user, 'f.following');
 
     return [
       'users' => $followers,
@@ -35,8 +35,8 @@ class FollowersApiLoader extends AbstractApiLoader
    */
   public function getFollowing(User $user): array
   {
-    $following = $this->queryRelatedUsers($user, 'f.followers');
-    $total_followers = $this->countRelatedUsers($user, 'f.following');
+    $following = $this->queryRelatedUsers($user, 'f.following');
+    $total_followers = $this->countRelatedUsers($user, 'f.followers');
 
     return [
       'users' => $following,
