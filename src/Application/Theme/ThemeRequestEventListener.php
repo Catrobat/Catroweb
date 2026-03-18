@@ -84,7 +84,7 @@ class ThemeRequestEventListener
     $current_url = $event->getRequest()->getUri();
     preg_match('#http(s)?://(.*?)(/.*?\.php)?/(.*)#', $current_url, $parsed_url);
 
-    return explode('/', $parsed_url[4])[0];
+    return explode('/', $parsed_url[4] ?? '')[0];
   }
 
   private function getFlavorFromTheme(string $theme): string

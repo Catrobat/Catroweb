@@ -62,7 +62,15 @@
         <InvalidAttribute>
             <errorLevel type="info">
                 <directory name="src" />
+                <directory name="tests" />
+                <directory name="migrations" />
             </errorLevel>
         </InvalidAttribute>
+        <InvalidArrayOffset>
+            <errorLevel type="info">
+                <directory name="src" />
+                <directory name="tests" />
+            </errorLevel>
+        </InvalidArrayOffset>
     </issueHandlers>
 </psalm>
