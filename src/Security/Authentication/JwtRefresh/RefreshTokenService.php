@@ -7,6 +7,7 @@ namespace App\Security\Authentication\JwtRefresh;
 use App\DB\Entity\User\User;
 use App\Security\Authentication\CookieService;
 use App\User\UserManager;
+use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -20,6 +21,7 @@ class RefreshTokenService
     #[Autowire('%env(REFRESH_TOKEN_TTL)%')]
     protected int $refreshTokenLifetime,
     protected RefreshTokenManagerInterface $refresh_manager,
+    protected RefreshTokenGeneratorInterface $refresh_token_generator,
     protected UserManager $user_manager,
     protected JWTTokenManagerInterface $jwt_manager,
     protected CookieService $cookie_service,
@@ -31,17 +33,12 @@ class RefreshTokenService
    */
   public function createRefreshTokenForUsername(string $username): RefreshTokenInterface
   {
-    $datetime = new \DateTime('now');
-    $datetime->modify('+'.$this->refreshTokenLifetime.' seconds');
+    $user = $this->user_manager->findUserByUsername($username);
+    if (!$user instanceof User) {
+      throw new \InvalidArgumentException(\sprintf('User "%s" not found.', $username));
+    }
 
-    $refreshToken = $this->refresh_manager->create();
-    $refreshToken->setUsername($username);
-    $refreshToken->setRefreshToken();
-    $refreshToken->setValid($datetime);
-
-    $this->refresh_manager->save($refreshToken);
-
-    return $refreshToken;
+    return $this->refresh_token_generator->createForUserWithTtl($user, $this->refreshTokenLifetime);
   }
 
   public function invalidateRefreshTokenOfUser(string $username): void
