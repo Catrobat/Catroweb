@@ -62,6 +62,8 @@
         <InvalidAttribute>
             <errorLevel type="info">
                 <directory name="src" />
+                <directory name="tests" />
+                <directory name="migrations" />
             </errorLevel>
         </InvalidAttribute>
     </issueHandlers>
