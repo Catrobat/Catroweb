@@ -1,9 +1,6 @@
 <?php
-
 declare(strict_types=1);
-
 namespace App\Admin\ApkGeneration;
-
 use App\DB\Entity\Project\Program;
 use App\Project\Apk\JenkinsDispatcher;
 use App\Project\ProjectManager;
@@ -13,7 +10,6 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
 /**
  * @phpstan-extends CRUDController<Program>
  */
@@ -25,7 +21,6 @@ class ApkController extends CRUDController
     protected EntityManagerInterface $entity_manager,
   ) {
   }
-
   /**
    * @throws LockException
    * @throws ModelManagerThrowable
@@ -38,10 +33,8 @@ class ApkController extends CRUDController
     $project->setApkRequestTime(null);
     $this->admin->update($project);
     $this->addFlash('sonata_flash_success', 'Reset APK status of '.$project->getName().' successful');
-
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
-
   /**
    * @throws \Exception
    */
@@ -54,10 +47,8 @@ class ApkController extends CRUDController
     $project->setApkStatus(Program::APK_PENDING);
     $this->admin->update($project);
     $this->addFlash('sonata_flash_success', 'Requested a rebuild of '.$project->getName());
-
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
-
   public function resetPendingProjectsAction(): RedirectResponse
   {
     $this->entity_manager->createQueryBuilder()
@@ -71,29 +62,22 @@ class ApkController extends CRUDController
       ->getQuery()
       ->execute()
     ;
-
     $this->addFlash('sonata_flash_success', 'All pending APKs have been reset');
-
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
-
   /**
    * @throws \Exception
    */
   public function rebuildAllApkAction(): RedirectResponse
   {
     $projects = $this->project_manager->findBy(['apk_status' => Program::APK_PENDING]);
-
-    /* @var $project Program */
+    /** @var Program $project */
     foreach ($projects as $project) {
       $this->jenkins_dispatcher->sendBuildRequest($project->getId());
       $project->setApkRequestTime(TimeUtils::getDateTime());
-      $project->setApkStatus(Program::APK_PENDING);
       $this->admin->update($project);
     }
-
     $this->addFlash('sonata_flash_success', 'A new build request for all pending APKs has been sent');
-
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 }
