@@ -1415,6 +1415,7 @@
     <PossiblyNullArgument>
       <code><![CDATA[$source_language]]></code>
       <code><![CDATA[$target_language]]></code>
+      <code><![CDATA[$target_language]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/Translation/ItranslateApi.php">

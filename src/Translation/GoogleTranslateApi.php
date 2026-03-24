@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translation;
 
-use Google\Cloud\Core\Exception\ServiceException;
-use Google\Cloud\Translate\V2\TranslateClient;
+use Google\ApiCore\ApiException;
 use Psr\Log\LoggerInterface;
 
 class GoogleTranslateApi implements TranslationApiInterface
@@ -127,8 +126,12 @@ class GoogleTranslateApi implements TranslationApiInterface
 
   private readonly TranslationApiHelper $helper;
 
-  public function __construct(private readonly TranslateClient $client, private readonly LoggerInterface $logger, private readonly int $short_text_length)
-  {
+  public function __construct(
+    private readonly GoogleTranslateClientInterface $client,
+    private readonly LoggerInterface $logger,
+    private readonly int $short_text_length,
+    private readonly string $google_cloud_project_id,
+  ) {
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
 
@@ -139,28 +142,28 @@ class GoogleTranslateApi implements TranslationApiInterface
     $source_language = $this->helper->transformLanguageCode($source_language);
 
     try {
-      $result = $this->client->translate($text, [
-        'source' => $source_language,
-        'target' => $target_language,
-        'format' => 'text',
-      ]);
-    } catch (ServiceException $serviceException) {
-      $this->logger->error(sprintf('Google translate client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $serviceException->getMessage()));
+      $parent = sprintf('projects/%s/locations/global', $this->google_cloud_project_id);
+      $response = $this->client->translateText([$text], $target_language, $parent, $source_language);
+    } catch (ApiException $apiException) {
+      $this->logger->error(sprintf('Google translate client exception, source: %s, target: %s, text: %s, message: %s', $source_language, $target_language, $text, $apiException->getMessage()));
 
       return null;
     }
 
-    if (null === $result) {
+    $translations = $response->getTranslations();
+    if (0 === count($translations)) {
       return null;
     }
+
+    $translation = $translations[0];
 
     $translation_result = new TranslationResult();
     $translation_result->provider = 'google';
     if (null == $source_language) {
-      $translation_result->detected_source_language = $result['source'];
+      $translation_result->detected_source_language = $translation->getDetectedLanguageCode();
     }
 
-    $translation_result->translation = $result['text'];
+    $translation_result->translation = $translation->getTranslatedText();
 
     return $translation_result;
   }
