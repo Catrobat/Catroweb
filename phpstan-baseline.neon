@@ -85,7 +85,7 @@ parameters:
 			path: src/System/Testing/Behat/Context/ApiContext.php
 
 		-
-			rawMessage: 'Parameter #1 $project of method App\System\Testing\Behat\Context\ApiContext::checkProjectFieldsValue() expects array, ArrayAccess|non-empty-array given.'
+			rawMessage: 'Parameter #1 $project of method App\System\Testing\Behat\Context\ApiContext::checkProjectFieldsValue() expects array, array|ArrayAccess given.'
 			identifier: argument.type
 			count: 1
 			path: src/System/Testing/Behat/Context/ApiContext.php
