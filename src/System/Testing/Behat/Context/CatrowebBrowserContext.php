@@ -12,7 +12,6 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\Project\Apk\ApkRepository;
 use App\Project\Apk\JenkinsDispatcher;
-use App\Project\ProjectManager;
 use App\System\Testing\FakeJenkinsDispatcher;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;

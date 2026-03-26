@@ -47,8 +47,12 @@ class FormulaResolverTest extends TestCase
     foreach ($formula_xpath_result as $formula_list_xml_properties) {
       $categories = [];
       $expected = [];
+      $formulas = $formula_list_xml_properties->formula;
+      if (null === $formulas) {
+        continue;
+      }
 
-      foreach ($formula_list_xml_properties->formula as $formula_xml_properties) {
+      foreach ($formulas as $formula_xml_properties) {
         $category = (string) $formula_xml_properties[Constants::CATEGORY_ATTRIBUTE];
 
         $categories[] = $category;

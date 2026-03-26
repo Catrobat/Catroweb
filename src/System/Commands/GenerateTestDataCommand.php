@@ -189,7 +189,7 @@ class GenerateTestDataCommand extends Command
     }
 
     if (null === $properties->header) {
-      throw new \Exception("code.xml file has no header element");
+      throw new \Exception('code.xml file has no header element');
     }
 
     $properties->header->tags = 'Games,Story';

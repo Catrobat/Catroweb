@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.15.1@28dc127af1b5aecd52314f6f645bafc10d0e11f9">
+<files psalm-version="6.16.1@f1f5de594dc76faf8784e02d3dc4716c91c6f6ac">
   <file src="src/Admin/ApkGeneration/ApkAdmin.php">
     <LessSpecificReturnStatement>
       <code><![CDATA[$query]]></code>
@@ -7,14 +7,6 @@
     <MoreSpecificReturnType>
       <code><![CDATA[ProxyQueryInterface]]></code>
     </MoreSpecificReturnType>
-    <PossiblyNullArgument>
-      <code><![CDATA[$object->getId()]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Admin/ApkGeneration/ApkController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$project->getId()]]></code>
-    </PossiblyNullArgument>
   </file>
   <file src="src/Admin/ApkGeneration/ApkPendingAdmin.php">
     <LessSpecificReturnStatement>
@@ -39,29 +31,6 @@
     <MoreSpecificReturnType>
       <code><![CDATA[ProxyQueryInterface]]></code>
     </MoreSpecificReturnType>
-    <PossiblyNullArgument>
-      <code><![CDATA[$object->getId()]]></code>
-      <code><![CDATA[$object->getId()]]></code>
-      <code><![CDATA[$object->getId()]]></code>
-      <code><![CDATA[$this->project_manager->find($object->getId())]]></code>
-      <code><![CDATA[$this->project_manager->find($object->getId())]]></code>
-      <code><![CDATA[$this->project_manager->find($object->getId())]]></code>
-      <code><![CDATA[$this->project_manager->find($object->getId())]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Admin/Projects/ApproveProjects/ApproveProjectsController.php">
-    <PossiblyNullReference>
-      <code><![CDATA[setApproved]]></code>
-    </PossiblyNullReference>
-  </file>
-  <file src="src/Admin/Projects/ProjectPreUpdateTrait.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$object]]></code>
-      <code><![CDATA[$object]]></code>
-    </ArgumentTypeCoercion>
-    <PossiblyNullReference>
-      <code><![CDATA[getUser]]></code>
-    </PossiblyNullReference>
   </file>
   <file src="src/Admin/Projects/SpecialProjects/ExampleProjectAdmin.php">
     <LessSpecificReturnStatement>
@@ -70,25 +39,13 @@
     <MoreSpecificReturnType>
       <code><![CDATA[ProxyQueryInterface]]></code>
     </MoreSpecificReturnType>
-    <PossiblyNullArgument>
-      <code><![CDATA[$object->getId()]]></code>
-    </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code><![CDATA[getDescription]]></code>
       <code><![CDATA[getId]]></code>
-      <code><![CDATA[getName]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/Admin/Projects/SpecialProjects/FeaturedProjectAdmin.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$id]]></code>
-      <code><![CDATA[$object->getId()]]></code>
-      <code><![CDATA[$projectId]]></code>
-    </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code><![CDATA[getDescription]]></code>
       <code><![CDATA[getId]]></code>
-      <code><![CDATA[getName]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/Admin/System/CronJobs/CronJobsAdminController.php">
@@ -109,30 +66,10 @@
       <code><![CDATA[$object->getValue()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Admin/System/Logs/DownloadLogController.php">
-    <PossiblyNullPropertyFetch>
-      <code><![CDATA[$request->request]]></code>
-    </PossiblyNullPropertyFetch>
-    <PossiblyNullReference>
-      <code><![CDATA[get]]></code>
-    </PossiblyNullReference>
-  </file>
   <file src="src/Admin/UserCommunication/SendMailToUser/SendMailToUserController.php">
     <PossiblyNullArgument>
       <code><![CDATA[$mailTo]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/Api/CommentsApi.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$comment->getText()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getUser()]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[getId]]></code>
-    </PossiblyNullReference>
   </file>
   <file src="src/Api/MediaLibraryApi.php">
     <PossiblyNullArgument>
@@ -146,22 +83,6 @@
       <code><![CDATA[$action]]></code>
       <code><![CDATA[$action]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/Api/ProjectsApi.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$user]]></code>
-      <code><![CDATA[$user->getId()]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[setPrivate]]></code>
-    </PossiblyNullReference>
-  </file>
-  <file src="src/Api/Services/Authentication/AuthenticationApiProcessor.php">
-    <PossiblyNullArrayAccess>
-      <code><![CDATA[$header['kid']]]></code>
-      <code><![CDATA[$jwt['header']]]></code>
-    </PossiblyNullArrayAccess>
   </file>
   <file src="src/Api/Services/Authentication/AuthenticationRequestValidator.php">
     <PossiblyUndefinedArrayOffset>
@@ -183,9 +104,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Api/Services/MediaLibrary/MediaLibraryResponseManager.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$cache]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$category->getDescription()]]></code>
       <code><![CDATA[$category->getDescription()]]></code>
@@ -201,11 +119,6 @@
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$id_raw]]></code>
     </PossiblyUndefinedArrayOffset>
-  </file>
-  <file src="src/Api/Services/Notifications/NotificationsResponseManager.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$cache]]></code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="src/Api/Services/OverwriteController.php">
     <PossiblyNullArgument>
@@ -239,9 +152,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Api/Services/Projects/ProjectsResponseManager.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$cache]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$extraced_project->getId()]]></code>
       <code><![CDATA[$extraced_project->getId()]]></code>
@@ -251,9 +161,6 @@
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getProgram()]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullArrayOffset>
-      <code><![CDATA[$tags]]></code>
-    </PossiblyNullArrayOffset>
     <PossiblyNullReference>
       <code><![CDATA[getId]]></code>
       <code><![CDATA[getName]]></code>
@@ -262,11 +169,6 @@
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/Api/Services/Search/SearchResponseManager.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$cache]]></code>
-    </PossiblyInvalidArgument>
-  </file>
   <file src="src/Api/Services/Studio/StudioApiProcessor.php">
     <PossiblyNullArgument>
       <code><![CDATA[$name]]></code>
@@ -274,17 +176,9 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Api/Services/Studio/StudioResponseManager.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$cache]]></code>
-    </PossiblyInvalidArgument>
     <PossiblyNullReference>
       <code><![CDATA[getSchemeAndHttpHost]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/Api/Services/User/UserResponseManager.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$cache]]></code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="src/Api/Services/User/UserRequestValidator.php">
     <PossiblyNullArgument>
@@ -297,7 +191,6 @@
   </file>
   <file src="src/Api/StudioApi.php">
     <PossiblyNullArgument>
-      <code><![CDATA[$description]]></code>
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
   </file>
@@ -318,56 +211,10 @@
       <code><![CDATA[getId]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/Application/Controller/Ci/BuildApkController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/Application/Controller/Ci/DownloadApkController.php">
     <PossiblyNullReference>
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/Application/Controller/Project/CodeViewController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$project]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Application/Controller/Project/ProjectController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getScratchId()]]></code>
-      <code><![CDATA[$user->getId()]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullPropertyFetch>
-      <code><![CDATA[$translation_result[0]->cache]]></code>
-      <code><![CDATA[$translation_result[0]->detected_source_language]]></code>
-      <code><![CDATA[$translation_result[0]->provider]]></code>
-      <code><![CDATA[$translation_result[0]->translation]]></code>
-    </PossiblyNullPropertyFetch>
-    <PossiblyUndefinedVariable>
-      <code><![CDATA[$result]]></code>
-      <code><![CDATA[$result]]></code>
-      <code><![CDATA[$result]]></code>
-      <code><![CDATA[$result]]></code>
-    </PossiblyUndefinedVariable>
-  </file>
-  <file src="src/Application/Controller/Project/RemixController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$remix_graph_data['catrobatNodesData']]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullArrayAccess>
-      <code><![CDATA[$remix_graph_data['catrobatNodes']]]></code>
-      <code><![CDATA[$remix_graph_data['catrobatNodesData']]]></code>
-    </PossiblyNullArrayAccess>
-    <PossiblyNullIterator>
-      <code><![CDATA[$remix_graph_data['catrobatNodes']]]></code>
-    </PossiblyNullIterator>
   </file>
   <file src="src/Application/Controller/Security/RegistrationController.php">
     <PossiblyNullArgument>
@@ -384,7 +231,6 @@
       <code><![CDATA[$joinRequest->getUser()]]></code>
       <code><![CDATA[$joinRequest->getUser()]]></code>
       <code><![CDATA[$logged_in_user]]></code>
-      <code><![CDATA[$logged_in_user]]></code>
       <code><![CDATA[$project]]></code>
       <code><![CDATA[$project]]></code>
       <code><![CDATA[$project]]></code>
@@ -397,17 +243,12 @@
       <code><![CDATA[$studio]]></code>
       <code><![CDATA[$studio]]></code>
       <code><![CDATA[$studio]]></code>
-      <code><![CDATA[$studio]]></code>
-      <code><![CDATA[$studio]]></code>
       <code><![CDATA[$user]]></code>
       <code><![CDATA[$user]]></code>
       <code><![CDATA[$user]]></code>
       <code><![CDATA[$user->getUsername()]]></code>
       <code><![CDATA[$user->getUsername()]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullArrayOffset>
-      <code><![CDATA[$projects_per_member]]></code>
-    </PossiblyNullArrayOffset>
     <PossiblyNullReference>
       <code><![CDATA[format]]></code>
       <code><![CDATA[getAvatar]]></code>
@@ -415,7 +256,6 @@
       <code><![CDATA[getText]]></code>
       <code><![CDATA[getUser]]></code>
       <code><![CDATA[getUser]]></code>
-      <code><![CDATA[getUserIdentifier]]></code>
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
   </file>
@@ -489,63 +329,11 @@
       <code><![CDATA[$project->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Project/CatrobatFile/CatrobatFileSanitizer.php">
-    <PossiblyFalseIterator>
-      <code><![CDATA[scandir($dir)]]></code>
-    </PossiblyFalseIterator>
-    <PossiblyNullArgument>
-      <code><![CDATA[$this->image_paths]]></code>
-      <code><![CDATA[$this->sound_paths]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullIterator>
-      <code><![CDATA[$this->scenes]]></code>
-      <code><![CDATA[$this->scenes]]></code>
-    </PossiblyNullIterator>
-  </file>
-  <file src="src/Project/CatrobatFile/ExtractedCatrobatFile.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$this->project_xml_properties->header]]></code>
-      <code><![CDATA[$this->project_xml_properties->xpath('//scenes')]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullIterator>
-      <code><![CDATA[$objectList]]></code>
-    </PossiblyNullIterator>
-    <PossiblyNullPropertyAssignment>
-      <code><![CDATA[$this->project_xml_properties->header]]></code>
-      <code><![CDATA[$this->project_xml_properties->header]]></code>
-      <code><![CDATA[$this->project_xml_properties->header]]></code>
-    </PossiblyNullPropertyAssignment>
-    <PossiblyNullPropertyFetch>
-      <code><![CDATA[$this->project_xml_properties->header->applicationVersion]]></code>
-      <code><![CDATA[$this->project_xml_properties->header->catrobatLanguageVersion]]></code>
-      <code><![CDATA[$this->project_xml_properties->header->description]]></code>
-      <code><![CDATA[$this->project_xml_properties->header->notesAndCredits]]></code>
-      <code><![CDATA[$this->project_xml_properties->header->programName]]></code>
-      <code><![CDATA[$this->project_xml_properties->header->remixOf]]></code>
-      <code><![CDATA[$this->project_xml_properties->header->tags]]></code>
-      <code><![CDATA[$this->project_xml_properties->header->url]]></code>
-    </PossiblyNullPropertyFetch>
-    <PossiblyNullReference>
-      <code><![CDATA[children]]></code>
-    </PossiblyNullReference>
-  </file>
-  <file src="src/Project/CatrobatFile/ExtractedFileRepository.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$project_id]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/Project/CatrobatFile/LicenseUpdaterEventListener.php">
     <PossiblyNullPropertyAssignment>
       <code><![CDATA[$project_xml_properties->header]]></code>
       <code><![CDATA[$project_xml_properties->header]]></code>
     </PossiblyNullPropertyAssignment>
-  </file>
-  <file src="src/Project/CatrobatFile/VersionValidatorEventListener.php">
-    <PossiblyNullPropertyFetch>
-      <code><![CDATA[$xml->header->applicationVersion]]></code>
-      <code><![CDATA[$xml->header->catrobatLanguageVersion]]></code>
-      <code><![CDATA[$xml->header->platform]]></code>
-    </PossiblyNullPropertyFetch>
   </file>
   <file src="src/Project/EntityListener/ExampleProjectImageEntityListeners.php">
     <PossiblyNullArgument>
@@ -716,12 +504,6 @@
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/System/Commands/Create/CreateCommentCommand.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$program->getUser()]]></code>
-      <code><![CDATA[$user->getUsername()]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/System/Commands/Create/CreateExampleProgramCommand.php">
     <PossiblyNullArgument>
       <code><![CDATA[0 !== random_int(0, 1) ? $this->flavor_repository->getFlavorByName(Flavor::ARDUINO) : $this->flavor_repository->getFlavorByName(Flavor::EMBROIDERY)]]></code>
@@ -730,11 +512,6 @@
   <file src="src/System/Commands/Create/CreateFeatureProgramCommand.php">
     <PossiblyNullArgument>
       <code><![CDATA[$this->flavor_repository->getFlavorByName(Flavor::POCKETCODE)]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/System/Commands/Create/CreateLikeCommand.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$program->getUser()]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/System/Commands/Create/CreateRemixCommand.php">
@@ -764,20 +541,10 @@
       <code><![CDATA[setRand]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/System/Commands/GenerateTestDataCommand.php">
-    <PossiblyNullPropertyAssignment>
-      <code><![CDATA[$properties->header]]></code>
-    </PossiblyNullPropertyAssignment>
-  </file>
   <file src="src/System/Commands/Helpers/CommandHelper.php">
     <PossiblyUndefinedArrayOffset>
       <code><![CDATA[$_ENV['APP_ENV']]]></code>
     </PossiblyUndefinedArrayOffset>
-  </file>
-  <file src="src/System/Commands/Helpers/MigrationFileLock.php">
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$this->lock_file]]></code>
-    </InvalidPropertyAssignmentValue>
   </file>
   <file src="src/System/Commands/Helpers/RemixManipulationCatrobatFileExtractor.php">
     <PossiblyNullPropertyAssignment>
@@ -804,34 +571,14 @@
     </PossiblyNullReference>
   </file>
   <file src="src/System/Commands/MigrateRemixGraphsCommand.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$project_id]]></code>
-    </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code><![CDATA[getName]]></code>
-      <code><![CDATA[lock]]></code>
       <code><![CDATA[unlock]]></code>
-      <code><![CDATA[writeln]]></code>
     </PossiblyNullReference>
-    <PossiblyUndefinedVariable>
-      <code><![CDATA[$project_id]]></code>
-    </PossiblyUndefinedVariable>
   </file>
   <file src="src/System/Commands/Reset/ResetCommand.php">
     <PossiblyNullArgument>
       <code><![CDATA[$hidden_project->getId()]]></code>
       <code><![CDATA[$program->getId()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
       <code><![CDATA[getUserIdentifier]]></code>
@@ -866,47 +613,16 @@
     </PossiblyNullPropertyFetch>
     <PossiblyNullReference>
       <code><![CDATA[__toString]]></code>
-      <code><![CDATA[encode]]></code>
-      <code><![CDATA[encode]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[findBy]]></code>
-      <code><![CDATA[findBy]]></code>
-      <code><![CDATA[findBy]]></code>
-      <code><![CDATA[findBy]]></code>
-      <code><![CDATA[findBy]]></code>
-      <code><![CDATA[findBy]]></code>
-      <code><![CDATA[findBy]]></code>
-      <code><![CDATA[findBy]]></code>
-      <code><![CDATA[findOneBy]]></code>
-      <code><![CDATA[findOneBy]]></code>
-      <code><![CDATA[findOneBy]]></code>
-      <code><![CDATA[findOneBy]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[generate]]></code>
-      <code><![CDATA[getDefaultUser]]></code>
       <code><![CDATA[getId]]></code>
       <code><![CDATA[getId]]></code>
       <code><![CDATA[getName]]></code>
       <code><![CDATA[getName]]></code>
       <code><![CDATA[getProjectXmlProperties]]></code>
       <code><![CDATA[getRemixMigratedAt]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
       <code><![CDATA[getUser]]></code>
       <code><![CDATA[getUserIdentifier]]></code>
       <code><![CDATA[getUserIdentifier]]></code>
       <code><![CDATA[isRemixRoot]]></code>
-      <code><![CDATA[loadProjectExtractedFile]]></code>
-      <code><![CDATA[save]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/System/Testing/Behat/Context/BrowserContext.php">
@@ -979,39 +695,21 @@
       <code><![CDATA[click]]></code>
       <code><![CDATA[click]]></code>
       <code><![CDATA[click]]></code>
-      <code><![CDATA[create]]></code>
-      <code><![CDATA[create]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
       <code><![CDATA[find]]></code>
       <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[generate]]></code>
       <code><![CDATA[getApkStatus]]></code>
       <code><![CDATA[getApkStatus]]></code>
       <code><![CDATA[getApkStatus]]></code>
       <code><![CDATA[getApkStatus]]></code>
-      <code><![CDATA[getRepository]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[setApkStatus]]></code>
       <code><![CDATA[setApkStatus]]></code>
       <code><![CDATA[setApkStatus]]></code>
-      <code><![CDATA[setCurrentUser]]></code>
-      <code><![CDATA[setCurrentUserByUsername]]></code>
-      <code><![CDATA[setCurrentUserByUsername]]></code>
       <code><![CDATA[setValue]]></code>
       <code><![CDATA[setValue]]></code>
     </PossiblyNullReference>
-    <RedundantCondition>
-      <code><![CDATA[\assert($pm instanceof ProjectManager)]]></code>
-    </RedundantCondition>
   </file>
   <file src="src/System/Testing/Behat/Context/DataFixturesContext.php">
     <PossiblyNullArgument>
@@ -1046,196 +744,26 @@
       <code><![CDATA[addFollowing]]></code>
       <code><![CDATA[addFollowing]]></code>
       <code><![CDATA[addProjectToStudio]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
       <code><![CDATA[findAchievementByInternalTitle]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
-      <code><![CDATA[findAll]]></code>
       <code><![CDATA[findAll]]></code>
       <code><![CDATA[findAllAchievements]]></code>
       <code><![CDATA[findAllUserAchievements]]></code>
       <code><![CDATA[findOneBy]]></code>
       <code><![CDATA[findOneBy]]></code>
-      <code><![CDATA[findOneBy]]></code>
-      <code><![CDATA[findOneBy]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findOneByName]]></code>
       <code><![CDATA[findStudioById]]></code>
       <code><![CDATA[findStudioById]]></code>
       <code><![CDATA[findStudioById]]></code>
       <code><![CDATA[findStudioByName]]></code>
       <code><![CDATA[findStudioByName]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[getConnection]]></code>
-      <code><![CDATA[getConnection]]></code>
       <code><![CDATA[getExtensions]]></code>
       <code><![CDATA[getExtensions]]></code>
-      <code><![CDATA[getFlavorByName]]></code>
-      <code><![CDATA[getFlavorByName]]></code>
       <code><![CDATA[getId]]></code>
       <code><![CDATA[getId]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
-      <code><![CDATA[getRepository]]></code>
       <code><![CDATA[getTags]]></code>
       <code><![CDATA[getUser]]></code>
       <code><![CDATA[getUser]]></code>
       <code><![CDATA[getVerificationRequestedAt]]></code>
       <code><![CDATA[isVerified]]></code>
-      <code><![CDATA[overwriteCreatedAt]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[refresh]]></code>
-      <code><![CDATA[refresh]]></code>
-      <code><![CDATA[refresh]]></code>
-      <code><![CDATA[refresh]]></code>
-      <code><![CDATA[refresh]]></code>
-      <code><![CDATA[refresh]]></code>
-      <code><![CDATA[saveProjectZipFile]]></code>
-      <code><![CDATA[saveProjectZipFile]]></code>
-      <code><![CDATA[setFlagValue]]></code>
-      <code><![CDATA[updateUser]]></code>
-      <code><![CDATA[updateUser]]></code>
-      <code><![CDATA[updateUser]]></code>
-      <code><![CDATA[updateUser]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/System/Testing/Behat/ContextTrait.php">
@@ -1257,55 +785,6 @@
       <code><![CDATA[$properties->header]]></code>
       <code><![CDATA[$properties->header]]></code>
     </PossiblyNullPropertyAssignment>
-    <PossiblyNullReference>
-      <code><![CDATA[assertProject]]></code>
-      <code><![CDATA[assertUser]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[find]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findOneByName]]></code>
-      <code><![CDATA[findUserByUsername]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[flush]]></code>
-      <code><![CDATA[getConnection]]></code>
-      <code><![CDATA[getFlavorByName]]></code>
-      <code><![CDATA[getFlavorByName]]></code>
-      <code><![CDATA[insertProject]]></code>
-      <code><![CDATA[insertUser]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-      <code><![CDATA[persist]]></code>
-    </PossiblyNullReference>
   </file>
   <file src="src/System/Testing/DataFixtures/ProjectDataFixtures.php">
     <PossiblyFalseArgument>
@@ -1364,45 +843,8 @@
       <code><![CDATA[$response->getScreenshot()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="tests/PhpUnit/Project/CatrobatCode/Parser/BricksTest.php">
-    <PossiblyNullIterator>
-      <code><![CDATA[$xml_properties->xpath('//brick')]]></code>
-    </PossiblyNullIterator>
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$xml_properties->xpath('//brick')]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
-  <file src="tests/PhpUnit/Project/CatrobatCode/Parser/CategoriesTest.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$xml->xpath('//scene')[0]]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullArrayAccess>
-      <code><![CDATA[$xml->xpath('//scene')[0]]]></code>
-    </PossiblyNullArrayAccess>
-  </file>
-  <file src="tests/PhpUnit/Project/CatrobatCode/Parser/CodeStatisticTest.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$this->xml_properties->xpath('//scene')[0]]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullArrayAccess>
-      <code><![CDATA[$this->xml_properties->xpath('//scene')[0]]]></code>
-    </PossiblyNullArrayAccess>
-  </file>
-  <file src="tests/PhpUnit/Project/CatrobatCode/Parser/FormulaResolverTest.php">
-    <PossiblyNullIterator>
-      <code><![CDATA[$xml_properties->xpath('//formulaList')]]></code>
-    </PossiblyNullIterator>
-  </file>
   <file src="tests/PhpUnit/Project/CatrobatFile/ExtractedCatrobatFileTest.php">
     <PossiblyNullPropertyAssignment>
-      <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
-      <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
-      <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
-      <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
-      <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
-      <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
-      <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
-      <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
       <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
       <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
       <code><![CDATA[$this->extracted_catrobat_file->getProjectXmlProperties()->header]]></code>
@@ -1432,11 +874,6 @@
       <code><![CDATA[$xml->header]]></code>
       <code><![CDATA[$xml->header]]></code>
     </PossiblyNullPropertyAssignment>
-  </file>
-  <file src="tests/PhpUnit/Project/Remix/RemixManagerTest.php">
-    <PossiblyNullArrayOffset>
-      <code><![CDATA[$program_remix_repository_find_map]]></code>
-    </PossiblyNullArrayOffset>
   </file>
   <file src="tests/PhpUnit/Project/Remix/RemixUpdaterEventListenerTest.php">
     <PossiblyNullPropertyAssignment>
@@ -1555,10 +992,5 @@
       <code><![CDATA[$result->translation]]></code>
       <code><![CDATA[$result->translation]]></code>
     </PossiblyNullPropertyFetch>
-  </file>
-  <file src="tests/PhpUnit/Utils/ElapsedTimeStringFormatterTest.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$this->getExpectedFormatterMethod($expected)]]></code>
-    </ArgumentTypeCoercion>
   </file>
 </files>

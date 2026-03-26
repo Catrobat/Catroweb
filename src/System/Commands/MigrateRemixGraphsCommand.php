@@ -62,7 +62,7 @@ class MigrateRemixGraphsCommand extends Command
       default => $this->output?->writeln('[SignalHandler] Signal '.$signal_number.' detected'),
     };
 
-    $this->migration_file_lock?->unlock();
+    $this->migration_file_lock->unlock();
     exit(-1);
   }
 
@@ -271,7 +271,7 @@ class MigrateRemixGraphsCommand extends Command
     // ==============================================================================================================
     // (6) unlock
     // ==============================================================================================================
-    $this->migration_file_lock?->unlock();
+    $this->migration_file_lock->unlock();
 
     // ==============================================================================================================
     // (7) finally mark all relations as seen, so the users will not get bothered with many remix user notifications

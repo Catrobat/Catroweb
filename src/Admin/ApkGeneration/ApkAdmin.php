@@ -48,7 +48,7 @@ class ApkAdmin extends AbstractAdmin
       $qb->expr()->eq($qb->getRootAliases()[0].'.apk_status', ':apk_status')
     );
 
-    /** @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
     return $query; // @phpstan-ignore return.type
   }
 }

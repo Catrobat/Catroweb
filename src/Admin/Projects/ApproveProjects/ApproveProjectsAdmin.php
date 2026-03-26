@@ -141,7 +141,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
       $qb->expr()->eq($qb->getRootAliases()[0].'.approved', $qb->expr()->literal(false))
     );
 
-    /** @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
     return $query; // @phpstan-ignore return.type
   }
 

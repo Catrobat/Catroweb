@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MigrationFileLock
 {
   /** @var resource|closed-resource|null */
-  private $lock_file = null;
+  private $lock_file;
 
   public function __construct(private readonly string $lock_file_path, private readonly OutputInterface $output)
   {
@@ -39,9 +39,16 @@ class MigrationFileLock
       return;
     }
 
+    $lock_file = $this->lock_file;
+    $this->lock_file = null;
+
+    if (!is_resource($lock_file)) {
+      return;
+    }
+
     $this->output->writeln('[MigrationFileLock] Lock released...');
-    flock($this->lock_file, LOCK_UN);
-    fclose($this->lock_file);
+    flock($lock_file, LOCK_UN);
+    fclose($lock_file);
     @unlink($this->lock_file_path);
   }
 }

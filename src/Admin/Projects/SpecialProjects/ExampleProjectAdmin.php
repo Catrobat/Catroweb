@@ -99,7 +99,7 @@ class ExampleProjectAdmin extends AbstractAdmin
       $qb->expr()->isNotNull($qb->getRootAliases()[0].'.program')
     );
 
-    /** @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
     return $query; // @phpstan-ignore return.type
   }
 
