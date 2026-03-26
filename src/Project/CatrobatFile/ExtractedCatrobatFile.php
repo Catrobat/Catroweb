@@ -48,7 +48,7 @@ class ExtractedCatrobatFile
 
   public function getName(): string
   {
-    return (string) $this->project_xml_properties->header->programName;
+    return (string) $this->getHeader()->programName;
   }
 
   /**
@@ -56,26 +56,27 @@ class ExtractedCatrobatFile
    */
   public function setName(string $name): void
   {
-    $this->project_xml_properties->header->programName = $name;
+    $this->getHeader()->programName = $name;
   }
 
   public function isDebugBuild(): bool
   {
-    if (!property_exists($this->project_xml_properties->header, 'applicationBuildType') || null === $this->project_xml_properties->header->applicationBuildType) {
+    $header = $this->getHeader();
+    if (!property_exists($header, 'applicationBuildType') || null === $header->applicationBuildType) {
       return false; // old project do not have this field, + they should be release projects
     }
 
-    return 'debug' === (string) $this->project_xml_properties->header->applicationBuildType;
+    return 'debug' === (string) $header->applicationBuildType;
   }
 
   public function getLanguageVersion(): string
   {
-    return (string) $this->project_xml_properties->header->catrobatLanguageVersion;
+    return (string) $this->getHeader()->catrobatLanguageVersion;
   }
 
   public function getDescription(): string
   {
-    return (string) $this->project_xml_properties->header->description;
+    return (string) $this->getHeader()->description;
   }
 
   /**
@@ -83,12 +84,12 @@ class ExtractedCatrobatFile
    */
   public function setDescription(string $description): void
   {
-    $this->project_xml_properties->header->description = $description;
+    $this->getHeader()->description = $description;
   }
 
   public function getNotesAndCredits(): string
   {
-    return (string) $this->project_xml_properties->header->notesAndCredits;
+    return (string) $this->getHeader()->notesAndCredits;
   }
 
   /**
@@ -96,7 +97,7 @@ class ExtractedCatrobatFile
    */
   public function setNotesAndCredits(string $notesAndCredits): void
   {
-    $this->project_xml_properties->header->notesAndCredits = $notesAndCredits;
+    $this->getHeader()->notesAndCredits = $notesAndCredits;
   }
 
   public function getDirHash(): ?string
@@ -106,9 +107,9 @@ class ExtractedCatrobatFile
 
   public function getTags(): array
   {
-    $tags = (string) $this->project_xml_properties->header->tags;
+    $tags = (string) $this->getHeader()->tags;
     if ('' !== $tags) {
-      return explode(',', (string) $this->project_xml_properties->header->tags);
+      return explode(',', $tags);
     }
 
     return [];
@@ -208,17 +209,17 @@ class ExtractedCatrobatFile
 
   public function getApplicationVersion(): string
   {
-    return (string) $this->project_xml_properties->header->applicationVersion;
+    return (string) $this->getHeader()->applicationVersion;
   }
 
   public function getRemixUrlsString(): string
   {
-    return trim((string) $this->project_xml_properties->header->url);
+    return trim((string) $this->getHeader()->url);
   }
 
   public function getRemixMigrationUrlsString(): string
   {
-    return trim((string) $this->project_xml_properties->header->remixOf);
+    return trim((string) $this->getHeader()->remixOf);
   }
 
   public function getPath(): string
@@ -360,7 +361,11 @@ class ExtractedCatrobatFile
   public function getCodeObjects(): array
   {
     $objects = [];
-    $objectList = $this->project_xml_properties->objectList->children();
+    $objectList = $this->project_xml_properties->objectList?->children();
+    if (null === $objectList) {
+      return [];
+    }
+
     foreach ($objectList as $object) {
       $newObject = $this->getObject($object);
       if (null != $newObject) {
@@ -373,7 +378,19 @@ class ExtractedCatrobatFile
 
   public function hasScenes(): bool
   {
-    return 0 !== count($this->project_xml_properties->xpath('//scenes'));
+    $scenes = $this->project_xml_properties->xpath('//scenes');
+
+    return [] !== $scenes;
+  }
+
+  private function getHeader(): \SimpleXMLElement
+  {
+    $header = $this->project_xml_properties->header;
+    if (null === $header) {
+      throw new InvalidCatrobatFileException('errors.xml.missing.header', 509);
+    }
+
+    return $header;
   }
 
   private function getObject(\SimpleXMLElement $objectTree): ?CodeObject

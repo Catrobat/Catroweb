@@ -18,7 +18,7 @@ class UserResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
+    \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly CookieService $cookie_service,
   ) {
     parent::__construct($translator, $serializer, $cache);

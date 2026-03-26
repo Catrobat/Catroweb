@@ -205,6 +205,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return $error_response;
     }
 
+    if (!$user instanceof \App\DB\Entity\User\User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
     // Needed (for tests) to make sure everything is up to date (followers, ..)
     $this->facade->getProcessor()->refreshUser($user);
 
@@ -222,6 +228,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
       return $error_response;
+    }
+
+    if (!$project instanceof Program) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
     }
 
     // Setting the project's attributes
@@ -315,7 +327,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $user_projects = $this->facade->getLoader()->getUserProjects($user->getId(), $limit, $offset, $flavor, $max_version);
+    $user_id = $user->getId();
+    if (null === $user_id) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
+    }
+
+    $user_projects = $this->facade->getLoader()->getUserProjects($user_id, $limit, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($user_projects, $attributes);
@@ -416,7 +435,13 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project->getId(), $zipFile);
+    $project_id = $project->getId();
+    if (null === $project_id) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
+    }
+    $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project_id, $zipFile);
     $responseCode = Response::HTTP_OK;
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();

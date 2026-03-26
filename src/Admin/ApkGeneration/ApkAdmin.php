@@ -30,7 +30,12 @@ class ApkAdmin extends AbstractAdmin
 
   public function getThumbnailImageUrl(Program $object): string
   {
-    return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
+    $id = $object->getId();
+    if (null === $id) {
+      return '';
+    }
+
+    return '/'.$this->screenshot_repository->getThumbnailWebPath($id);
   }
 
   #[\Override]
@@ -43,6 +48,7 @@ class ApkAdmin extends AbstractAdmin
       $qb->expr()->eq($qb->getRootAliases()[0].'.apk_status', ':apk_status')
     );
 
-    return $query;
+    /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    return $query; // @phpstan-ignore return.type
   }
 }

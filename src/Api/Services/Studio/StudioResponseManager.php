@@ -18,7 +18,7 @@ class StudioResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
+    \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly UrlGeneratorInterface $url_generator,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly RequestStack $request_stack,

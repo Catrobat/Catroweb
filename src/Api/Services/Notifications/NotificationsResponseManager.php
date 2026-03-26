@@ -27,7 +27,7 @@ class NotificationsResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
+    \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly NotificationRepository $notification_repository,
     private readonly ContentVisibilityManager $content_visibility_manager,
   ) {

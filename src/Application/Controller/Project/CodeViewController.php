@@ -46,6 +46,10 @@ class CodeViewController extends AbstractController
   {
     try {
       $project = $this->project_manager->find($id);
+      if (!$project instanceof Program) {
+        throw new \Exception();
+      }
+
       $extracted_project = $this->extracted_file_repository->loadProjectExtractedFile($project);
       if (!$extracted_project instanceof ExtractedCatrobatFile) {
         throw new \Exception();

@@ -46,6 +46,9 @@ class ExtractedFileRepository
   {
     try {
       $project_id = $project->getId();
+      if (null === $project_id) {
+        return null;
+      }
 
       return new ExtractedCatrobatFile($this->getBaseDir($project_id), $this->web_path.$project_id.'/', $project_id);
     } catch (InvalidCatrobatFileException) {

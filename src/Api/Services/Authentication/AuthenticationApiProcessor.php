@@ -80,8 +80,15 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
   protected function getPayloadFromAppleIdToken(string $id_token): array
   {
     $jwt = AuthenticationRequestValidator::jwt_decode($id_token);
+    if (null === $jwt || !isset($jwt['header'])) {
+      throw new \RuntimeException('Invalid Apple ID token');
+    }
 
     $header = $jwt['header'];
+    if (!isset($header['kid'])) {
+      throw new \RuntimeException('Invalid Apple ID token: missing kid');
+    }
+
     $client = new Client();
     $res = $client->request('GET', 'https://appleid.apple.com/auth/keys');
     $body = $res->getBody()->getContents();

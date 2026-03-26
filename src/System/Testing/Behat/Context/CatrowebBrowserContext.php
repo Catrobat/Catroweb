@@ -12,6 +12,7 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\Project\Apk\ApkRepository;
 use App\Project\Apk\JenkinsDispatcher;
+use App\System\Testing\FakeJenkinsDispatcher;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -1052,7 +1053,7 @@ class CatrowebBrowserContext extends BrowserContext
     }
 
     $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
-    \assert($dispatcher instanceof JenkinsDispatcher);
+    \assert($dispatcher instanceof FakeJenkinsDispatcher);
     $parameters = $dispatcher->getLastParameters();
 
     foreach ($expected_parameters as $i => $expected_parameter) {
@@ -1111,16 +1112,16 @@ class CatrowebBrowserContext extends BrowserContext
         break;
       case 'ready':
         $project->setApkStatus(Program::APK_READY);
-        /* @var $apk_repository ApkRepository */
         $apk_repository = $this->getSymfonyService(ApkRepository::class);
-        \assert($apk_repository instanceof ApkRepository);
+        if (!$apk_repository instanceof ApkRepository) {
+          throw new \LogicException('ApkRepository service not found');
+        }
         $apk_repository->save(new File(strval($this->getTempCopy($this->FIXTURES_DIR.'/test.catrobat'))), $project->getId());
         break;
       default:
         $project->setApkStatus(Program::APK_NONE);
     }
 
-    \assert($pm instanceof ProjectManager);
     $pm->save($project);
   }
 
@@ -1132,7 +1133,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function noBuildRequestWillBeSentToJenkins(): void
   {
     $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
-    \assert($dispatcher instanceof JenkinsDispatcher);
+    \assert($dispatcher instanceof FakeJenkinsDispatcher);
     $parameters = $dispatcher->getLastParameters();
     Assert::assertNull($parameters);
   }

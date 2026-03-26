@@ -223,12 +223,12 @@ class UserComment implements \Stringable
     return $this;
   }
 
-  public function getIsDeleted(): ?bool
+  public function getIsDeleted(): bool
   {
     return $this->is_deleted;
   }
 
-  public function setIsDeleted(?bool $is_deleted): UserComment
+  public function setIsDeleted(bool $is_deleted): UserComment
   {
     $this->is_deleted = $is_deleted;
 

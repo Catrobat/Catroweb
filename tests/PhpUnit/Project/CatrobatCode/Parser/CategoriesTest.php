@@ -44,8 +44,11 @@ class CategoriesTest extends TestCase
   {
     $xml = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/CategoryPrograms/'.$category.'.xml');
     $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
+    $xpath_result = $xml->xpath('//scene');
+    $this->assertIsArray($xpath_result);
+    $this->assertArrayHasKey(0, $xpath_result);
     $code_statistic = new CodeStatistic();
-    $code_statistic->update(new ParsedScene($xml->xpath('//scene')[0]));
+    $code_statistic->update(new ParsedScene($xpath_result[0]));
 
     return $code_statistic;
   }

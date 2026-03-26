@@ -35,7 +35,8 @@ class ApkPendingAdmin extends ApkAdmin
     $query = parent::configureQuery($query);
     $query->getQueryBuilder()->setParameter('apk_status', Program::APK_PENDING);
 
-    return $query;
+    /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    return $query; // @phpstan-ignore return.type
   }
 
   /**

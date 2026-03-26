@@ -57,8 +57,11 @@ class CodeStatisticTest extends TestCase
   #[Depends('testMustHaveMethod')]
   public function testMustComputeCorrectScriptStatistic(): CodeStatistic
   {
+    $xpath_result = $this->xml_properties->xpath('//scene');
+    $this->assertIsArray($xpath_result);
+    $this->assertArrayHasKey(0, $xpath_result);
     $code_statistic = new CodeStatistic();
-    $code_statistic->update(new ParsedScene($this->xml_properties->xpath('//scene')[0]));
+    $code_statistic->update(new ParsedScene($xpath_result[0]));
 
     $expected = 34;
     $actual = $code_statistic->getScriptStatistic();

@@ -834,7 +834,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     return $this->username === $user->getUsername();
   }
 
-  public function setCreatedAt(?\DateTimeInterface $createdAt = null): void
+  public function setCreatedAt(\DateTimeInterface $createdAt): void
   {
     $this->createdAt = $createdAt;
   }
@@ -844,7 +844,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     return $this->createdAt;
   }
 
-  public function setUpdatedAt(?\DateTimeInterface $updatedAt = null): void
+  public function setUpdatedAt(\DateTimeInterface $updatedAt): void
   {
     $this->updatedAt = $updatedAt;
   }

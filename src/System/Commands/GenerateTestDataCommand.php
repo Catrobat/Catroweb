@@ -188,6 +188,10 @@ class GenerateTestDataCommand extends Command
       throw new \Exception("Can't load code.xml file");
     }
 
+    if (null === $properties->header) {
+      throw new \Exception('code.xml file has no header element');
+    }
+
     $properties->header->tags = 'Games,Story';
     $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
     if (!$file_overwritten) {
