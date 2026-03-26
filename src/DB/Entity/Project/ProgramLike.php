@@ -109,7 +109,7 @@ class ProgramLike implements \Stringable
   public function setProgram(Program $program): ProgramLike
   {
     $this->program = $program;
-    $this->program_id = $program->getId();
+    $this->program_id = $program->getId() ?? throw new \LogicException('Program must have an ID before being used in a ProgramLike.');
 
     return $this;
   }
@@ -127,7 +127,7 @@ class ProgramLike implements \Stringable
   public function setUser(User $user): ProgramLike
   {
     $this->user = $user;
-    $this->user_id = $user->getId();
+    $this->user_id = $user->getId() ?? throw new \LogicException('User must have an ID before being used in a ProgramLike.');
 
     return $this;
   }

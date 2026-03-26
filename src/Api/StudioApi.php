@@ -102,10 +102,16 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
       return $error_response;
     }
 
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
     $studio = $this->facade->getProcessor()->create(
       $user,
       $name,
-      $description,
+      $description ?? '',
       $is_public,
       $enable_comments,
       $image_file

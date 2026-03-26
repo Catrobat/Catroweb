@@ -53,7 +53,8 @@ class BuildApkController extends AbstractController
       return new JsonResponse(['status' => 'pending']);
     }
 
-    $this->dispatcher->sendBuildRequest($project->getId());
+    $projectId = $project->getId() ?? throw new \RuntimeException('Project ID must not be null');
+    $this->dispatcher->sendBuildRequest($projectId);
     $project->setApkStatus(Program::APK_PENDING);
     $project->setApkRequestTime(TimeUtils::getDateTime());
 
@@ -81,7 +82,8 @@ class BuildApkController extends AbstractController
     }
 
     $file = array_first($request->files->all());
-    $this->apk_repository->save($file, $project->getId());
+    $projectId = $project->getId() ?? throw new \RuntimeException('Project ID must not be null');
+    $this->apk_repository->save($file, $projectId);
     $project->setApkStatus(Program::APK_READY);
     $this->project_manager->save($project);
 

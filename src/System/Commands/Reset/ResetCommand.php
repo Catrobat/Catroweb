@@ -19,6 +19,7 @@ use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Random\RandomException;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\InputInterface;
@@ -78,7 +79,7 @@ class ResetCommand extends Command
 
     // Delete data and recreate clean DB
     CommandHelper::executeSymfonyCommand(
-      'catrobat:purge', $this->getApplication(), ['--force' => true], $output
+      'catrobat:purge', $this->getApplicationOrFail(), ['--force' => true], $output
     );
 
     // Create static flavors
@@ -226,7 +227,7 @@ class ResetCommand extends Command
       $amount = random_int(1, max(1, intval(floor($projects_to_download / 5)) + 1));
       $username = $user_array[random_int(0, count($user_array) - 1)];
 
-      CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
+      CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplicationOrFail(),
         [
           'directory' => $local_projects_dir,
           'user' => $username,
@@ -273,7 +274,7 @@ class ResetCommand extends Command
   {
     return CommandHelper::executeSymfonyCommand(
       'catrobat:import:share',
-      $this->getApplication(),
+      $this->getApplicationOrFail(),
       [
         '--limit' => $limit,
         '--user' => $username,
@@ -329,7 +330,7 @@ class ResetCommand extends Command
           'message' => $this->randomCommentGenerator(),
         ];
 
-        $ret = CommandHelper::executeSymfonyCommand('catrobat:comment', $this->getApplication(), $parameters, $output);
+        $ret = CommandHelper::executeSymfonyCommand('catrobat:comment', $this->getApplicationOrFail(), $parameters, $output);
         if (0 !== $ret) {
           $output->writeln('Comment creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
         }
@@ -406,7 +407,7 @@ class ResetCommand extends Command
         'status' => $status,
       ];
 
-      $ret = CommandHelper::executeSymfonyCommand('catrobat:studio', $this->getApplication(), $parameters, $output);
+      $ret = CommandHelper::executeSymfonyCommand('catrobat:studio', $this->getApplicationOrFail(), $parameters, $output);
       if (0 !== $ret) {
         $output->writeln('Failed to create studio'.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
       }
@@ -522,7 +523,7 @@ class ResetCommand extends Command
           'program_name' => $program_name,
           'user_name' => $user_array[($i + $like_amount) % count($user_array)],
         ];
-        $ret = CommandHelper::executeSymfonyCommand('catrobat:like', $this->getApplication(), $parameters, $output);
+        $ret = CommandHelper::executeSymfonyCommand('catrobat:like', $this->getApplicationOrFail(), $parameters, $output);
 
         if (0 !== $ret) {
           $output->writeln('Project like creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
@@ -547,7 +548,7 @@ class ResetCommand extends Command
           'program_name' => $program_name,
           'user_name' => $user_array[array_rand($user_array)],
         ];
-        $ret = CommandHelper::executeSymfonyCommand('catrobat:download', $this->getApplication(), $parameters, $output);
+        $ret = CommandHelper::executeSymfonyCommand('catrobat:download', $this->getApplicationOrFail(), $parameters, $output);
 
         if (0 !== $ret) {
           $output->writeln('Project Download creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
@@ -571,7 +572,7 @@ class ResetCommand extends Command
       $parameters = [
         'program_name' => $program_names[$i % count($program_names)],
       ];
-      $ret = CommandHelper::executeSymfonyCommand('catrobat:feature', $this->getApplication(), $parameters, $output);
+      $ret = CommandHelper::executeSymfonyCommand('catrobat:feature', $this->getApplicationOrFail(), $parameters, $output);
 
       if (0 !== $ret) {
         // Might fail because of missing screenshots!
@@ -598,7 +599,7 @@ class ResetCommand extends Command
         'user_name' => $user_array[$user_id],
         'follower' => $user_array[$follower_id],
       ];
-      $ret = CommandHelper::executeSymfonyCommand('catrobat:follow', $this->getApplication(), $parameters, $output);
+      $ret = CommandHelper::executeSymfonyCommand('catrobat:follow', $this->getApplicationOrFail(), $parameters, $output);
 
       if (0 !== $ret) {
         $output->writeln('Follow Action failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
@@ -621,7 +622,7 @@ class ResetCommand extends Command
       $parameters = [
         'program_name' => $program_names[$i % count($program_names)],
       ];
-      $ret = CommandHelper::executeSymfonyCommand('catrobat:example', $this->getApplication(), $parameters, $output);
+      $ret = CommandHelper::executeSymfonyCommand('catrobat:example', $this->getApplicationOrFail(), $parameters, $output);
 
       if (0 !== $ret) {
         // Might fail because of missing screenshots!
@@ -644,7 +645,7 @@ class ResetCommand extends Command
           'program_name' => $program_name,
           'type' => random_int(1, 2),
         ];
-        $ret = CommandHelper::executeSymfonyCommand('catrobat:notforkids', $this->getApplication(), $parameters, $output);
+        $ret = CommandHelper::executeSymfonyCommand('catrobat:notforkids', $this->getApplicationOrFail(), $parameters, $output);
 
         if (0 !== $ret) {
           $output->writeln('Marking project not safe for kids failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
@@ -663,5 +664,15 @@ class ResetCommand extends Command
     $statistic->setUsers('345423543');
     $this->entity_manager->persist($statistic);
     $this->entity_manager->flush();
+  }
+
+  private function getApplicationOrFail(): Application
+  {
+    $application = $this->getApplication();
+    if (null === $application) {
+      throw new \RuntimeException('Application not available');
+    }
+
+    return $application;
   }
 }

@@ -24,7 +24,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
+    \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly MediaLibraryApiLoader $loader,
     private readonly MediaAssetRepository $asset_repository,
     private readonly ?UrlHelper $url_helper,

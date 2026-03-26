@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.15.1@28dc127af1b5aecd52314f6f645bafc10d0e11f9">
-  <file src="config/services.php">
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$_SERVER['APP_ENV']]]></code>
-    </PossiblyUndefinedArrayOffset>
-  </file>
-  <file src="public/webp-on-demand.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[strrpos($source, '.')]]></code>
-    </PossiblyFalseArgument>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$source]]></code>
-      <code><![CDATA[$source]]></code>
-      <code><![CDATA[$source]]></code>
-    </PossiblyInvalidArgument>
-  </file>
   <file src="src/Admin/ApkGeneration/ApkAdmin.php">
     <LessSpecificReturnStatement>
       <code><![CDATA[$query]]></code>
@@ -296,6 +281,11 @@
       <code><![CDATA[getSchemeAndHttpHost]]></code>
     </PossiblyNullReference>
   </file>
+  <file src="src/Api/Services/User/UserResponseManager.php">
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$cache]]></code>
+    </PossiblyInvalidArgument>
+  </file>
   <file src="src/Api/Services/User/UserRequestValidator.php">
     <PossiblyNullArgument>
       <code><![CDATA[$email]]></code>
@@ -304,11 +294,6 @@
       <code><![CDATA[$user->getPassword()]]></code>
       <code><![CDATA[$username]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/Api/Services/User/UserResponseManager.php">
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$cache]]></code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="src/Api/StudioApi.php">
     <PossiblyNullArgument>
@@ -456,76 +441,11 @@
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/DB/Entity/Project/ProgramLike.php">
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$program->getId()]]></code>
-      <code><![CDATA[$user->getId()]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
-  <file src="src/DB/Entity/Project/Remix/ProgramRemixBackwardRelation.php">
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$child->getId()]]></code>
-      <code><![CDATA[$parent->getId()]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
-  <file src="src/DB/Entity/Project/Remix/ProgramRemixRelation.php">
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$ancestor->getId()]]></code>
-      <code><![CDATA[$descendant->getId()]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
-  <file src="src/DB/Entity/Project/Scratch/ScratchProgramRemixRelation.php">
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$catrobat_child->getId()]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
   <file src="src/DB/Entity/Project/Special/SpecialProgram.php">
     <PossiblyNullReference>
       <code><![CDATA[getName]]></code>
       <code><![CDATA[getUser]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/DB/Entity/Studio/StudioJoinRequest.php">
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$studio]]></code>
-      <code><![CDATA[$user]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
-  <file src="src/DB/Entity/User/Comment/UserComment.php">
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$is_deleted]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
-  <file src="src/DB/Entity/User/RecommenderSystem/AbstractSimilarityRelation.php">
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$first_user->getId()]]></code>
-      <code><![CDATA[$second_user->getId()]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
-  <file src="src/DB/Entity/User/User.php">
-    <PossiblyNullPropertyAssignmentValue>
-      <code><![CDATA[$createdAt]]></code>
-      <code><![CDATA[$updatedAt]]></code>
-    </PossiblyNullPropertyAssignmentValue>
-  </file>
-  <file src="src/DB/EntityRepository/MediaLibrary/MediaAssetRepository.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[realpath($source_file)]]></code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="src/DB/EntityRepository/Project/ProgramLikeRepository.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$count]]></code>
-    </ArgumentTypeCoercion>
-    <PossiblyNullArgument>
-      <code><![CDATA[$count]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullArrayOffset>
-      <code><![CDATA[$users_data]]></code>
-      <code><![CDATA[$users_data]]></code>
-      <code><![CDATA[$users_data]]></code>
-      <code><![CDATA[$users_data]]></code>
-    </PossiblyNullArrayOffset>
   </file>
   <file src="src/DB/EntityRepository/Project/ProgramRepository.php">
     <PossiblyNullArgument>
@@ -884,6 +804,9 @@
     </PossiblyNullReference>
   </file>
   <file src="src/System/Commands/MigrateRemixGraphsCommand.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$project_id]]></code>
+    </PossiblyNullArgument>
     <PossiblyNullReference>
       <code><![CDATA[getName]]></code>
       <code><![CDATA[lock]]></code>
@@ -934,7 +857,6 @@
     </PossiblyFalseArgument>
     <PossiblyInvalidArgument>
       <code><![CDATA[$exception->getCode()]]></code>
-      <code><![CDATA[$project]]></code>
     </PossiblyInvalidArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$user->getUsername()]]></code>
@@ -1087,17 +1009,9 @@
       <code><![CDATA[setValue]]></code>
       <code><![CDATA[setValue]]></code>
     </PossiblyNullReference>
-    <TypeDoesNotContainType>
+    <RedundantCondition>
       <code><![CDATA[\assert($pm instanceof ProjectManager)]]></code>
-    </TypeDoesNotContainType>
-    <UndefinedClass>
-      <code><![CDATA[$pm]]></code>
-      <code><![CDATA[ProjectManager]]></code>
-    </UndefinedClass>
-    <UndefinedMethod>
-      <code><![CDATA[getLastParameters]]></code>
-      <code><![CDATA[getLastParameters]]></code>
-    </UndefinedMethod>
+    </RedundantCondition>
   </file>
   <file src="src/System/Testing/Behat/Context/DataFixturesContext.php">
     <PossiblyNullArgument>
@@ -1520,19 +1434,6 @@
     </PossiblyNullPropertyAssignment>
   </file>
   <file src="tests/PhpUnit/Project/Remix/RemixManagerTest.php">
-    <InvalidArgument>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-      <code><![CDATA[$program_entity]]></code>
-    </InvalidArgument>
     <PossiblyNullArrayOffset>
       <code><![CDATA[$program_remix_repository_find_map]]></code>
     </PossiblyNullArrayOffset>

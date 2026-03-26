@@ -5,10 +5,15 @@ require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 use WebPConvert\WebPConvert;
 
 // Absolute file path to source file. Comes from the server config! (.htaccess no used due performance reasons)
-$source = $_GET['source'];
+$source = $_GET['source'] ?? '';
+if (!is_string($source) || '' === $source) {
+  http_response_code(400);
+  exit;
+}
 
 // Store the converted images besides the original images (other options are available!)
-$destination = substr($source, 0, strrpos($source, '.')).'.webp';
+$lastDotPos = strrpos($source, '.');
+$destination = (false !== $lastDotPos ? substr($source, 0, $lastDotPos) : $source).'.webp';
 
 $options = [
   // failure handling

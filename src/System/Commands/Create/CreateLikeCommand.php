@@ -59,9 +59,10 @@ class CreateLikeCommand extends Command
     }
 
     try {
-      if ($program->getUser() !== $user) {
+      $program_user = $program->getUser();
+      if (null !== $program_user && $program_user !== $user) {
         $this->likeProgram($program, $user);
-        $notification = new LikeNotification($program->getUser(), $user, $program);
+        $notification = new LikeNotification($program_user, $user, $program);
         $notification->setSeen(boolval(random_int(0, 3)));
         $this->notification_service->addNotification($notification);
       }

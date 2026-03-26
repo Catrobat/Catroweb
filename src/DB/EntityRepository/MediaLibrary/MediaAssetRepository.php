@@ -171,7 +171,11 @@ class MediaAssetRepository extends ServiceEntityRepository
     $thumb_file = $this->thumb_dir.$id.'.'.$extension;
 
     try {
-      $imagick = new \Imagick(realpath($source_file));
+      $real_path = realpath($source_file);
+      if (false === $real_path) {
+        return;
+      }
+      $imagick = new \Imagick($real_path);
       $imagick->setImageFormat($extension);
       $imagick->thumbnailImage(300, 300, true);
       $imagick->writeImage($thumb_file);

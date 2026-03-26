@@ -41,6 +41,14 @@ class RemixController extends AbstractController
   public function getRemixGraphData(string $id): JsonResponse
   {
     $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
+    if (null === $remix_graph_data) {
+      return new JsonResponse([
+        'id' => $id,
+        'remixGraph' => null,
+        'catrobatProgramThumbnails' => [],
+      ]);
+    }
+
     $catrobat_project_thumbnails = [];
     foreach ($remix_graph_data['catrobatNodes'] as $node_id) {
       if (!array_key_exists((string) $node_id, $remix_graph_data['catrobatNodesData'])) {

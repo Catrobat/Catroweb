@@ -49,7 +49,12 @@ class ApkController extends CRUDController
   {
     /** @var Program $project */
     $project = $this->admin->getSubject();
-    $this->jenkins_dispatcher->sendBuildRequest($project->getId());
+    $id = $project->getId();
+    if (null === $id) {
+      return new RedirectResponse($this->admin->generateUrl('list'));
+    }
+
+    $this->jenkins_dispatcher->sendBuildRequest($id);
     $project->setApkRequestTime(TimeUtils::getDateTime());
     $project->setApkStatus(Program::APK_PENDING);
     $this->admin->update($project);
@@ -86,7 +91,12 @@ class ApkController extends CRUDController
 
     /* @var $project Program */
     foreach ($projects as $project) {
-      $this->jenkins_dispatcher->sendBuildRequest($project->getId());
+      $id = $project->getId();
+      if (null === $id) {
+        continue;
+      }
+
+      $this->jenkins_dispatcher->sendBuildRequest($id);
       $project->setApkRequestTime(TimeUtils::getDateTime());
       $project->setApkStatus(Program::APK_PENDING);
       $this->admin->update($project);

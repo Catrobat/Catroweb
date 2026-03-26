@@ -53,16 +53,16 @@ class MigrateRemixGraphsCommand extends Command
 
   public function signalHandler(int $signal_number): void
   {
-    $this->output->writeln('[SignalHandler] Called Signal Handler');
+    $this->output?->writeln('[SignalHandler] Called Signal Handler');
     match ($signal_number) {
-      SIGTERM => $this->output->writeln('[SignalHandler] User aborted the process'),
-      SIGHUP => $this->output->writeln('[SignalHandler] SigHup detected'),
-      SIGINT => $this->output->writeln('[SignalHandler] SigInt detected'),
-      SIGUSR1 => $this->output->writeln('[SignalHandler] SigUsr1 detected'),
-      default => $this->output->writeln('[SignalHandler] Signal '.$signal_number.' detected'),
+      SIGTERM => $this->output?->writeln('[SignalHandler] User aborted the process'),
+      SIGHUP => $this->output?->writeln('[SignalHandler] SigHup detected'),
+      SIGINT => $this->output?->writeln('[SignalHandler] SigInt detected'),
+      SIGUSR1 => $this->output?->writeln('[SignalHandler] SigUsr1 detected'),
+      default => $this->output?->writeln('[SignalHandler] Signal '.$signal_number.' detected'),
     };
 
-    $this->migration_file_lock->unlock();
+    $this->migration_file_lock?->unlock();
     exit(-1);
   }
 
@@ -131,6 +131,10 @@ class MigrateRemixGraphsCommand extends Command
     // ==============================================================================================================
     // (1) lock
     // ==============================================================================================================
+    if (null === $this->migration_file_lock) {
+      throw new \RuntimeException('Migration file lock not initialized');
+    }
+
     $this->migration_file_lock->lock();
 
     // ==============================================================================================================
@@ -154,10 +158,15 @@ class MigrateRemixGraphsCommand extends Command
     $remix_data_map = [];
 
     while (null != ($project_id = $this->project_manager->findNext($previous_project_id))) {
+      $project_id = (string) $project_id;
       $project_file_path = $directory.$project_id.'.catrobat';
 
       $project = $this->project_manager->find($project_id);
-      assert(null != $project);
+      if (null === $project) {
+        $previous_project_id = $project_id;
+        continue;
+      }
+
       $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $truncated_project_name, $output, $progress_bar);
@@ -197,6 +206,10 @@ class MigrateRemixGraphsCommand extends Command
 
     foreach ($all_project_ids as $project_id) {
       $project = $this->project_manager->find($project_id);
+      if (null === $project) {
+        continue;
+      }
+
       $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $progress_bar->setMessage('Migrating remaining remixes of "'.$truncated_project_name.'" (#'.$project_id.')');
@@ -227,8 +240,8 @@ class MigrateRemixGraphsCommand extends Command
     $skipped = 0;
 
     while (null != ($unmigrated_project = $this->project_manager->findOneByRemixMigratedAt(null))) {
+      $project_id = (string) $unmigrated_project->getId();
       $project_file_path = $directory.$project_id.'/';
-      $project_id = $unmigrated_project->getId();
       $truncated_project_name = mb_strimwidth($unmigrated_project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $unmigrated_project->getName(), $output, $progress_bar);
@@ -258,7 +271,7 @@ class MigrateRemixGraphsCommand extends Command
     // ==============================================================================================================
     // (6) unlock
     // ==============================================================================================================
-    $this->migration_file_lock->unlock();
+    $this->migration_file_lock?->unlock();
 
     // ==============================================================================================================
     // (7) finally mark all relations as seen, so the users will not get bothered with many remix user notifications
@@ -269,7 +282,7 @@ class MigrateRemixGraphsCommand extends Command
     $this->remix_manager->markAllUnseenRemixRelationsAsSeen($seen_at);
   }
 
-  private function extractRemixData(mixed $project_file_path, mixed $project_id, mixed $project_name, OutputInterface $output, ProgressBar $progress_bar): array
+  private function extractRemixData(string $project_file_path, string $project_id, string $project_name, OutputInterface $output, ProgressBar $progress_bar): array
   {
     $extracted_file = null;
 

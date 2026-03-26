@@ -59,7 +59,7 @@ class AbstractSimilarityRelation
   public function setFirstUser(User $first_user): self
   {
     $this->first_user = $first_user;
-    $this->first_user_id = $first_user->getId();
+    $this->first_user_id = $first_user->getId() ?? throw new \LogicException('First user must have an ID.');
 
     return $this;
   }
@@ -67,7 +67,7 @@ class AbstractSimilarityRelation
   public function setSecondUser(User $second_user): self
   {
     $this->second_user = $second_user;
-    $this->second_user_id = $second_user->getId();
+    $this->second_user_id = $second_user->getId() ?? throw new \LogicException('Second user must have an ID.');
 
     return $this;
   }

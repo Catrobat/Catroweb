@@ -40,8 +40,11 @@ class FormulaResolverTest extends TestCase
       file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllFormulaProgram/reference.output', FILE_IGNORE_NEW_LINES);
     Assert::assertIsArray($reference_output);
 
+    $formula_xpath_result = $xml_properties->xpath('//formulaList');
+    Assert::assertIsArray($formula_xpath_result);
+
     $reference_output_index = 0;
-    foreach ($xml_properties->xpath('//formulaList') as $formula_list_xml_properties) {
+    foreach ($formula_xpath_result as $formula_list_xml_properties) {
       $categories = [];
       $expected = [];
 

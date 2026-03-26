@@ -513,7 +513,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   // -------------------------------------------------------------------------------------------------------------------
   // Load additional services, or overwrite them for the test environment by defining them in services_test.php
   //
-  if ('test' === $_SERVER['APP_ENV']) {
+  if ('test' === ($_SERVER['APP_ENV'] ?? 'dev')) {
     $containerConfigurator->import('services_test.php');
   }
 };

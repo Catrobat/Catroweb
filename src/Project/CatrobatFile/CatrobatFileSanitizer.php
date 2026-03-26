@@ -88,7 +88,7 @@ class CatrobatFileSanitizer
   private function isAValidSceneDirectory(string $relative_filepath): bool
   {
     // Besides image and sound directories the root directory can contain a directory for every scene.
-    foreach ($this->scenes as $scene) {
+    foreach ($this->scenes ?? [] as $scene) {
       if ($relative_filepath === '/'.$scene) {
         return true;
       }
@@ -99,12 +99,12 @@ class CatrobatFileSanitizer
 
   private function isAValidSoundFile(string $filename, string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
-    return $this->isAValidFile('/sounds', $this->sound_paths, $filename, $relative_filepath, $extracted_file);
+    return $this->isAValidFile('/sounds', $this->sound_paths ?? [], $filename, $relative_filepath, $extracted_file);
   }
 
   private function isAValidImageFile(string $filename, string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
-    return $this->isAValidFile('/images', $this->image_paths, $filename, $relative_filepath, $extracted_file);
+    return $this->isAValidFile('/images', $this->image_paths ?? [], $filename, $relative_filepath, $extracted_file);
   }
 
   private function isAValidFile(string $dir_name, array $paths_array, string $filename,
@@ -119,7 +119,7 @@ class CatrobatFileSanitizer
       return true;
     }
 
-    foreach ($this->scenes as $scene) {
+    foreach ($this->scenes ?? [] as $scene) {
       if ($relative_filepath === '/'.$scene.$dir_name) {
         return true;
       }
@@ -187,7 +187,12 @@ class CatrobatFileSanitizer
       return unlink($dir);
     }
 
-    foreach (scandir($dir) as $item) {
+    $items = scandir($dir);
+    if (false === $items) {
+      return false;
+    }
+
+    foreach ($items as $item) {
       if ('.' === $item) {
         continue;
       }

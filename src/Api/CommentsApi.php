@@ -76,8 +76,14 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     );
 
     $responseCode = Response::HTTP_OK;
+    $project_id = $project->getId();
+    if (null === $project_id) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 
-    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project->getId(), false);
+      return null;
+    }
+
+    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project_id, false);
   }
 
   #[\Override]
@@ -150,8 +156,9 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $this->entity_manager->flush();
     $this->entity_manager->refresh($comment);
 
-    if ($project->getUser() instanceof User && $project->getUser()->getId() !== $user->getId()) {
-      $notification = new CommentNotification($project->getUser(), $comment);
+    $project_owner = $project->getUser();
+    if ($project_owner instanceof User && $project_owner->getId() !== $user->getId()) {
+      $notification = new CommentNotification($project_owner, $comment);
       $comment->setNotification($notification);
       $this->notification_manager->addNotification($notification);
       $this->entity_manager->persist($comment);
@@ -159,7 +166,13 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $comment_data = $this->buildCommentDataFromEntity($comment, 0);
-    $response = $this->createCommentResponse($comment_data, $project->getId(), null !== $parent_id);
+    $project_id = $project->getId();
+    if (null === $project_id) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
+    }
+    $response = $this->createCommentResponse($comment_data, $project_id, null !== $parent_id);
     $responseCode = Response::HTTP_CREATED;
 
     return $response;
@@ -245,8 +258,14 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     );
 
     $responseCode = Response::HTTP_OK;
+    $project_id = $project->getId();
+    if (null === $project_id) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 
-    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project->getId(), true);
+      return null;
+    }
+
+    return $this->createCommentListResponse($page['comments'], $page['has_more'], $project_id, true);
   }
 
   #[\Override]
@@ -277,7 +296,14 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
-    $etag_value = md5((string) $comment->getText()).$target_language;
+    $comment_text = $comment->getText();
+    if (null === $comment_text) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $etag_value = md5($comment_text).$target_language;
     $etag_header = '"'.$etag_value.'"';
     $responseHeaders['ETag'] = $etag_header;
     $request = $this->request_stack->getCurrentRequest();
@@ -294,7 +320,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     try {
-      $translation_result = $this->translation_delegate->translate($comment->getText(), $source_language, $target_language);
+      $translation_result = $this->translation_delegate->translate($comment_text, $source_language, $target_language);
     } catch (\InvalidArgumentException) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
@@ -308,7 +334,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $response = new CommentTranslationResponse();
-    $response->setId($comment->getId());
+    $response->setId($comment->getId() ?? 0);
     $response->setSourceLanguage($source_language ?? $translation_result->detected_source_language);
     $response->setTargetLanguage($target_language);
     $response->setTranslation($translation_result->translation);

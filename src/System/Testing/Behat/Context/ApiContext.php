@@ -1008,7 +1008,7 @@ class ApiContext implements Context
     $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredProjects($expected_projects);
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Number of returned projects should be '.count($expected_projects));
+    Assert::assertEquals(count($expected_projects), count($returned_projects), 'Number of returned projects should be '.count($expected_projects));
 
     foreach ($returned_projects as $returned_project) {
       $stored_project = $this->findProject($stored_projects, $returned_project['name']);
@@ -1029,7 +1029,7 @@ class ApiContext implements Context
     $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredFeaturedProjects($expected_projects);
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0,
+    Assert::assertEquals(count($expected_projects), count($returned_projects),
       'Number of returned projects should be '.count($expected_projects));
 
     foreach ($returned_projects as $returned_project) {
@@ -1080,7 +1080,7 @@ class ApiContext implements Context
     $expected_users = $table->getHash();
     $stored_users = $this->getStoredUsers();
 
-    Assert::assertEquals(is_countable($returned_users) ? count($returned_users) : 0, count($expected_users), 'Number of returned users should be '.count($expected_users));
+    Assert::assertEquals(count($returned_users), count($expected_users), 'Number of returned users should be '.count($expected_users));
 
     foreach ($returned_users as $returned_user) {
       $stored_user = $this->findUser($stored_users, $returned_user['username']);
@@ -1118,7 +1118,7 @@ class ApiContext implements Context
     $returned_users = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_users as $user) {
-      Assert::assertEquals(count($this->default_user_structure), is_countable($user) ? count($user) : 0,
+      Assert::assertEquals(count($this->default_user_structure), count($user),
         'Number of user fields should be '.count($this->default_user_structure));
       foreach ($this->default_user_structure as $key) {
         Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
@@ -1143,7 +1143,7 @@ class ApiContext implements Context
 
     Assert::assertEquals(
       count($structure),
-      is_countable($user) ? count($user) : 0,
+      count($user),
       'Number of user fields should be '.count($structure)
     );
     foreach ($structure as $key) {
@@ -1164,7 +1164,7 @@ class ApiContext implements Context
     /** @var array<string,mixed> $survey */
     $survey = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(count($this->survey_structure), is_countable($survey) ? count($survey) : 0,
+    Assert::assertEquals(count($this->survey_structure), count($survey),
       'Number of survey fields should be '.count($this->survey_structure));
     foreach ($this->survey_structure as $key) {
       Assert::assertArrayHasKey($key, $survey, 'Survey should contain '.$key);
@@ -1184,7 +1184,7 @@ class ApiContext implements Context
     /** @var array<string,mixed> $project */
     $project = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(is_countable($project) ? count($project) : 0, count($this->full_project_structure),
+    Assert::assertEquals(count($project), count($this->full_project_structure),
       'Number of project fields should be '.count($this->full_project_structure));
     foreach ($this->full_project_structure as $key) {
       Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
@@ -1205,7 +1205,7 @@ class ApiContext implements Context
     $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_projects as $project) {
-      Assert::assertEquals(count($this->default_featured_project_structure), is_countable($project) ? count($project) : 0,
+      Assert::assertEquals(count($this->default_featured_project_structure), count($project),
         'Number of project fields should be '.count($this->default_featured_project_structure));
       foreach ($this->default_featured_project_structure as $key) {
         Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
@@ -1227,7 +1227,7 @@ class ApiContext implements Context
     $returned_media_files = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_media_files as $project) {
-      Assert::assertEquals(is_countable($project) ? count($project) : 0, count($this->default_media_file_structure),
+      Assert::assertEquals(count($project), count($this->default_media_file_structure),
         'Number of project fields should be '.count($this->default_media_file_structure));
       foreach ($this->default_media_file_structure as $key) {
         Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
@@ -1250,7 +1250,7 @@ class ApiContext implements Context
     $all_locales = array_filter(Locales::getNames(), static fn ($key): bool => 2 === strlen((string) $key) || 5 === strlen((string) $key), ARRAY_FILTER_USE_KEY);
     $all_locales_count = count($all_locales);
 
-    Assert::assertEquals($all_locales_count, is_countable($returned_languages) ? count($returned_languages) : 0,
+    Assert::assertEquals($all_locales_count, count($returned_languages),
       'Number of languages should be '.$all_locales_count);
 
     foreach ($returned_languages as $language_code => $display_text) {
@@ -1314,7 +1314,7 @@ class ApiContext implements Context
     $expected_files = $table->getHash();
     $stored_files = $this->getStoredMediaFiles($expected_files);
 
-    Assert::assertEquals(is_countable($returned_files) ? count($returned_files) : 0, count($expected_files),
+    Assert::assertEquals(count($returned_files), count($expected_files),
       'Number of returned projects should be '.count($expected_files));
     foreach ($returned_files as $returned_file) {
       $stored_file = $this->findProject($stored_files, $returned_file['name']);
@@ -1337,8 +1337,8 @@ class ApiContext implements Context
 
     $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(is_countable($returned_projects) ? count($returned_projects) : 0, $projects,
-      'Number of returned projects should be '.(is_countable($returned_projects) ? count($returned_projects) : 0));
+    Assert::assertEquals(count($returned_projects), $projects,
+      'Number of returned projects should be '.count($returned_projects));
   }
 
   /**
@@ -1996,14 +1996,15 @@ class ApiContext implements Context
 
     $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch', 'trending'];
     $categories = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
-    Assert::assertEquals(count($expected_categories), is_countable($categories) ? count($categories) : 0, 'Number of returned projects should be '.count($expected_categories));
+    Assert::assertEquals(count($expected_categories), count($categories), 'Number of returned projects should be '.count($expected_categories));
 
     foreach ($categories as $category) {
       Assert::assertIsString($category['type']);
       Assert::assertIsString($category['name']);
       Assert::assertIsArray($category['projects_list']);
       foreach ($category['projects_list'] as $project) {
-        Assert::assertEquals(count($this->default_project_structure), is_countable($project) ? count($project) : 0,
+        Assert::assertIsArray($project);
+        Assert::assertEquals(count($this->default_project_structure), count($project),
           'Number of project fields should be '.count($this->default_project_structure));
         foreach ($this->default_project_structure as $key) {
           Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
@@ -2026,7 +2027,7 @@ class ApiContext implements Context
     $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredProjects($expected_projects);
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Number of returned projects should be '.count($expected_projects));
+    Assert::assertEquals(count($expected_projects), count($returned_projects), 'Number of returned projects should be '.count($expected_projects));
 
     foreach ($returned_projects as $returned_project) {
       $stored_project = $this->findProject($stored_projects, $returned_project['name']);
@@ -2047,7 +2048,7 @@ class ApiContext implements Context
     /** @var array<string,mixed> $user */
     $user = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(count($this->default_user_structure_extended), is_countable($user) ? count($user) : 0,
+    Assert::assertEquals(count($this->default_user_structure_extended), count($user),
       'Number of user fields should be '.count($this->default_user_structure_extended));
     foreach ($this->default_user_structure_extended as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
@@ -2193,7 +2194,7 @@ class ApiContext implements Context
     return $users;
   }
 
-  private function checkProjectFieldsValue(array $project, string $key): bool
+  private function checkProjectFieldsValue(array|\ArrayAccess $project, string $key): bool
   {
     $fields = [
       'id' => static function ($id): void {

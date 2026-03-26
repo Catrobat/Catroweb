@@ -35,8 +35,9 @@ class BricksTest extends TestCase
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
-    $this->brick_xml_properties_list = $xml_properties->xpath('//brick');
-    Assert::assertIsArray($this->brick_xml_properties_list);
+    $xpath_result = $xml_properties->xpath('//brick');
+    Assert::assertIsArray($xpath_result);
+    $this->brick_xml_properties_list = $xpath_result;
   }
 
   #[DataProvider('provideMethodNames')]
@@ -87,7 +88,9 @@ class BricksTest extends TestCase
 
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
-    foreach ($xml_properties->xpath('//brick') as $brick_xml_properties) {
+    $brick_xpath_result = $xml_properties->xpath('//brick');
+    Assert::assertIsArray($brick_xpath_result);
+    foreach ($brick_xpath_result as $brick_xml_properties) {
       $expected = [
         self::TYPE => $reference_output[$reference_output_index++],
         self::CAPTION => $reference_output[$reference_output_index++],

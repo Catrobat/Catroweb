@@ -8,8 +8,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrationFileLock
 {
-  /** @var resource|null */
-  private mixed $lock_file = null;
+  /** @var resource|closed-resource|null */
+  private $lock_file = null;
 
   public function __construct(private readonly string $lock_file_path, private readonly OutputInterface $output)
   {

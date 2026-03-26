@@ -32,7 +32,8 @@ class ApkReadyAdmin extends ApkAdmin
     $query = parent::configureQuery($query);
     $query->getQueryBuilder()->setParameter('apk_status', Program::APK_READY);
 
-    return $query;
+    /** @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    return $query; // @phpstan-ignore return.type
   }
 
   /**

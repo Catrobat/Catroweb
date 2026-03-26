@@ -1181,7 +1181,7 @@ class RemixManagerTest extends TestCase
   /**
    * @throws \Exception
    */
-  private function checkRemixRelations(MockObject&Program $program_entity, array $parent_data, array $expected_relations): void
+  private function checkRemixRelations(Program $program_entity, array $parent_data, array $expected_relations): void
   {
     $expected_relations_map = [];
     $expected_catrobat_relations = [];
@@ -1245,6 +1245,7 @@ class RemixManagerTest extends TestCase
     Assert::assertCount(count($expected_relations), $expected_relations_map);
 
     $expected_to_be_root = (1 === count($expected_catrobat_relations));
+    assert($program_entity instanceof MockObject);
     $program_entity->expects($this->atLeastOnce())
       ->method('isRemixRoot')->willReturn($expected_to_be_root)
     ;
