@@ -4,17 +4,17 @@
     <span>
       {% if activity.getType() == 'user' %}
         {{ 'studio.details.activity_list.join_studio'|trans({
-          '%user%': '<a href="/">' ~ activity.getUser().getUserName() ~ '</a>',
+          '%user%': '<a href="/">' ~ activity.getUser().getUserName()|e('html') ~ '</a>',
         }, 'catroweb')|raw }}
       {% endif %}
       {% if activity.getType() == 'project' %}
         {{ 'studio.details.activity_list.add_project'|trans({
-          '%user%': '<a href="/">' ~ activity.getUser().getUserName() ~ '</a>',
+          '%user%': '<a href="/">' ~ activity.getUser().getUserName()|e('html') ~ '</a>',
         }, 'catroweb')|raw }}
       {% endif %}
       {% if activity.getType() == 'comment' %}
         {{ 'studio.details.activity_list.add_comment'|trans({
-          '%user%': '<a href="/">' ~ activity.getUser().getUserName() ~ '</a>',
+          '%user%': '<a href="/">' ~ activity.getUser().getUserName()|e('html') ~ '</a>',
         }, 'catroweb')|raw }}
       {% endif %}
     </span>
