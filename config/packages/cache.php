@@ -8,7 +8,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $containerConfigurator->extension(
     'framework',
     [
-      'cache' => null,
+      'cache' => [
+        'app' => 'cache.adapter.filesystem',
+        'system' => 'cache.adapter.system',
+      ],
     ]
   );
 };
