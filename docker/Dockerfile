@@ -112,8 +112,10 @@ COPY src/ src/
 COPY templates/ templates/
 COPY tests/ tests/
 
-# Copy pre-built frontend assets from node stage (replaces `yarn run dev` in runtime)
-COPY --from=node-build /app/public/build/ public/build/
+# Copy all pre-built frontend assets from node stage (replaces `yarn run dev` in runtime).
+# Must copy entire public/ because webpack CopyPlugin places legacy files outside build/:
+# public/js/ (RemixGraph, jQuery), public/vis/, public/css/modules/, public/images/, etc.
+COPY --from=node-build /app/public/ public/
 
 # Overwrite behat config:
 RUN cp behat.yaml.dist behat.yaml && \
