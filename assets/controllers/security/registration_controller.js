@@ -2,11 +2,28 @@ import { showSnackbar } from '../../Layout/Snackbar'
 import { showValidationMessage } from '../../Components/TextField'
 import { AjaxController } from '../ajax_controller'
 import { LoginTokenHandler } from '../../Security/LoginTokenHandler'
+import { initCaptchaWidget } from '../../Security/CaptchaWidget'
 
 export default class extends AjaxController {
   static values = {
     baseUrl: String,
     apiPath: String,
+    captchaEndpoint: String,
+  }
+
+  captchaWidget = null
+
+  connect() {
+    if (this.captchaEndpointValue) {
+      initCaptchaWidget(this.captchaEndpointValue).then((widget) => {
+        this.captchaWidget = widget
+      })
+    }
+  }
+
+  disconnect() {
+    this.captchaWidget?.destroy()
+    this.captchaWidget = null
   }
 
   /**
@@ -24,10 +41,16 @@ export default class extends AjaxController {
       username: document.getElementById('username__input').value,
       email: document.getElementById('email__input').value,
       password: document.getElementById('password__input').value,
+      captcha_token: this.captchaWidget?.getToken() ?? '',
     }
 
     const response = await this.fetchPost(this.apiPathValue, data)
     this.resetRegistrationButton()
+
+    if (response.status === 403) {
+      showSnackbar('#share-snackbar', 'CAPTCHA verification failed. Please try again.')
+      return
+    }
 
     if (response.status === 201) {
       const loginTokenHandler = new LoginTokenHandler()

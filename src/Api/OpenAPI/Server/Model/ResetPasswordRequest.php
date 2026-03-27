@@ -53,6 +53,17 @@ class ResetPasswordRequest
   protected ?string $email = null;
 
   /**
+   * CAPTCHA response token for bot detection.
+   *
+   * @SerializedName("captcha_token")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $captcha_token = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -61,6 +72,7 @@ class ResetPasswordRequest
   {
     if (is_array($data)) {
       $this->email = array_key_exists('email', $data) ? $data['email'] : $this->email;
+      $this->captcha_token = array_key_exists('captcha_token', $data) ? $data['captcha_token'] : $this->captcha_token;
     }
   }
 
@@ -82,6 +94,28 @@ class ResetPasswordRequest
   public function setEmail(?string $email = null): self
   {
     $this->email = $email;
+
+    return $this;
+  }
+
+  /**
+   * Gets captcha_token.
+   */
+  public function getCaptchaToken(): ?string
+  {
+    return $this->captcha_token;
+  }
+
+  /**
+   * Sets captcha_token.
+   *
+   * @param string|null $captcha_token CAPTCHA response token for bot detection
+   *
+   * @return $this
+   */
+  public function setCaptchaToken(?string $captcha_token = null): self
+  {
+    $this->captcha_token = $captcha_token;
 
     return $this;
   }

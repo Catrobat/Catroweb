@@ -3165,11 +3165,19 @@ components:
           format: email
           example: 'foo.bar@catrob.at'
           description: 'Email of the user'
+        captcha_token:
+          type: string
+          description: 'CAPTCHA response token for bot detection'
 
     RegisterRequest:
       allOf:
         - $ref: '#/components/schemas/DryRun'
         - $ref: '#/components/schemas/BaseUser'
+        - type: object
+          properties:
+            captcha_token:
+              type: string
+              description: 'CAPTCHA response token for bot detection'
 
     UpdateUserRequest:
       allOf:
