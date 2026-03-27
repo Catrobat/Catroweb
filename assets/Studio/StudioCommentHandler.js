@@ -1,4 +1,4 @@
-import { showSnackbar } from '../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 
 export default class {
   removeComment(studioID, element, commentID, isReply, parentID) {
@@ -22,12 +22,12 @@ export default class {
           }
         } else {
           console.error(response.status)
-          showSnackbar('#share-snackbar', removeError)
+          showSnackbar('#share-snackbar', removeError, SnackbarDuration.error)
         }
       })
       .catch((e) => {
         console.error(e)
-        showSnackbar('#share-snackbar', removeError)
+        showSnackbar('#share-snackbar', removeError, SnackbarDuration.error)
       })
   }
 
@@ -67,15 +67,15 @@ export default class {
           const rateLimitedMsg =
             document.getElementById('comment-rate-limited')?.value ||
             "You're posting comments too quickly. Please wait a moment."
-          showSnackbar('#share-snackbar', rateLimitedMsg)
+          showSnackbar('#share-snackbar', rateLimitedMsg, SnackbarDuration.error)
         } else {
           console.error(response.status)
-          showSnackbar('#share-snackbar', commentError)
+          showSnackbar('#share-snackbar', commentError, SnackbarDuration.error)
         }
       })
       .catch((e) => {
         console.error(e)
-        showSnackbar('#share-snackbar', commentError)
+        showSnackbar('#share-snackbar', commentError, SnackbarDuration.error)
       })
   }
 

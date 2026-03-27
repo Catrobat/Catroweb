@@ -1,4 +1,4 @@
-import { showSnackbar } from '../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { MDCChipSet } from '@material/chips'
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
@@ -330,11 +330,11 @@ class UserNotifications {
     const self = this
     const status = error?.status || (error?.message && parseInt(error.message.match(/\d+/)?.[0]))
     if (status === 401) {
-      showSnackbar('#share-snackbar', self.notificationsUnauthorizedError)
+      showSnackbar('#share-snackbar', self.notificationsUnauthorizedError, SnackbarDuration.error)
       return
     }
     if (status === 404) {
-      showSnackbar('#share-snackbar', self.notificationsClearError)
+      showSnackbar('#share-snackbar', self.notificationsClearError, SnackbarDuration.error)
     }
   }
 }

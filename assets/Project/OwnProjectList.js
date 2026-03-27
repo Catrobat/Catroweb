@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
 import Clipboard from 'clipboard'
-import { showSnackbar } from '../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 
 require('./OwnProjectList.scss')
 
@@ -332,7 +332,7 @@ export class OwnProjectList {
           })
           .catch((e) => {
             console.error(e)
-            showSnackbar('#share-snackbar', shareFailMessage)
+            showSnackbar('#share-snackbar', shareFailMessage, SnackbarDuration.error)
           })
       })
     } else {
@@ -345,7 +345,7 @@ export class OwnProjectList {
         showSnackbar('#share-snackbar', clipboardSuccessMessage)
       })
       cb.on('error', function () {
-        showSnackbar('#share-snackbar', clipboardFailMessage)
+        showSnackbar('#share-snackbar', clipboardFailMessage, SnackbarDuration.error)
       })
     }
   }

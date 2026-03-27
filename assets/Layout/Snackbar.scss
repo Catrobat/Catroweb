@@ -14,3 +14,19 @@
   transform: none;
   opacity: 1 !important;
 }
+
+.snackbar-dismiss {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  opacity: 0.8;
+  line-height: 1;
+
+  &:hover {
+    opacity: 1;
+  }
+}

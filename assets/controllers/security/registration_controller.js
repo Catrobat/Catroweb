@@ -1,4 +1,4 @@
-import { showSnackbar } from '../../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { showValidationMessage } from '../../Components/TextField'
 import { AjaxController } from '../ajax_controller'
 import { LoginTokenHandler } from '../../Security/LoginTokenHandler'
@@ -48,7 +48,11 @@ export default class extends AjaxController {
     this.resetRegistrationButton()
 
     if (response.status === 403) {
-      showSnackbar('#share-snackbar', 'CAPTCHA verification failed. Please try again.')
+      showSnackbar(
+        '#share-snackbar',
+        'CAPTCHA check did not pass. Please try again!',
+        SnackbarDuration.error,
+      )
       return
     }
 
@@ -69,7 +73,11 @@ export default class extends AjaxController {
     response.text().then(function (text) {
       console.error('Registration error: ' + response.status + text)
     })
-    showSnackbar('#share-snackbar', 'Unexpected Error. Try again later.')
+    showSnackbar(
+      '#share-snackbar',
+      'Oops, that did not work. Please try again!',
+      SnackbarDuration.error,
+    )
   }
 
   registrationButton = null
