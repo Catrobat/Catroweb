@@ -139,6 +139,26 @@ class StudioManagerTest extends KernelTestCase
   }
 
   #[Group('integration')]
+  public function testCreateStudioAndCommentsSanitizeHighRiskText(): void
+  {
+    $suffix = uniqid();
+    $studio = $this->object->createStudio(
+      $this->user,
+      "safe f\u{200B}uck studio ".$suffix,
+      'Reach me at kid@example.com'
+    );
+
+    $comment = $this->object->addCommentToStudio($this->user, $studio, 'Join discord.gg/catroweb');
+
+    $this->assertSame('safe **** studio '.$suffix, $studio->getName());
+    $this->assertSame('Reach me at [contact removed]', $studio->getDescription());
+    $this->assertNotNull($comment);
+    $this->assertSame('Join [contact removed]', $comment?->getText());
+
+    $this->object->deleteStudio($studio, $this->user);
+  }
+
+  #[Group('integration')]
   public function testAddAndRemoveStudioUsers(): void
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'amrdiab_'.uniqid(), 'password' => '123456']);

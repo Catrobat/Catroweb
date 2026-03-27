@@ -253,6 +253,62 @@ final class CommentsApiTest extends TestCase
     $this->assertNull($result);
   }
 
+  #[Group('unit')]
+  public function testProjectIdCommentsPostSanitizesHighRiskCommentText(): void
+  {
+    $user = new User();
+    $user->setId('user-1');
+    $user->setUsername('alice');
+
+    $authentication_manager = $this->createStub(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
+
+    $project = $this->createStub(Program::class);
+    $project->method('getId')->willReturn('project-1');
+    $project->method('getUser')->willReturn($user);
+
+    $project_manager = $this->createStub(ProjectManager::class);
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
+
+    $entity_manager = $this->createMock(EntityManagerInterface::class);
+    $entity_manager->expects($this->once())
+      ->method('persist')
+      ->with($this->callback(function (UserComment $comment): bool {
+        $this->assertSame('Reach me at [contact removed] you ****', $comment->getText());
+        $comment->setId(42);
+
+        return true;
+      }))
+    ;
+    $entity_manager->expects($this->once())->method('flush');
+    $entity_manager->expects($this->once())->method('refresh')->with($this->isInstanceOf(UserComment::class));
+
+    $twig = $this->createStub(Environment::class);
+    $twig->method('render')->willReturn('<div></div>');
+
+    $authorization_checker = $this->createStub(AuthorizationCheckerInterface::class);
+    $authorization_checker->method('isGranted')->willReturn(false);
+
+    $api = $this->buildApi(
+      authentication_manager: $authentication_manager,
+      project_manager: $project_manager,
+      entity_manager: $entity_manager,
+      twig: $twig,
+      authorization_checker: $authorization_checker,
+    );
+
+    $response_code = 200;
+    $response_headers = [];
+    $request = new CommentCreateRequest();
+    $request->setMessage('Reach me at kid@example.com you fuck');
+
+    $result = $api->projectIdCommentsPost('project-1', $request, 'en', $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_CREATED, $response_code);
+    $this->assertNotNull($result);
+    $this->assertSame('Reach me at [contact removed] you ****', $result->getMessage());
+  }
+
   // ==================== commentsIdDelete ====================
 
   #[Group('unit')]

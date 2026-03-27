@@ -62,6 +62,10 @@ class CatrobatFileSanitizer
 
       is_file($filepath) ? unlink($filepath) : $this->deleteDirectory($filepath);
     }
+
+    $extracted_file->setName($extracted_file->getName());
+    $extracted_file->setDescription($extracted_file->getDescription());
+    $extracted_file->setNotesAndCredits($extracted_file->getNotesAndCredits());
   }
 
   private function isTheOnlyCodeXmlFile(string $relative_filepath): bool

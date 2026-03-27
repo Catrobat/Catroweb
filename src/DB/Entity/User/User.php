@@ -14,6 +14,7 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\DB\EntityRepository\User\UserRepository;
 use App\DB\Generator\MyUuidGenerator;
+use App\Moderation\TextSanitizer;
 use App\Utils\CanonicalFieldsUpdater;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -536,7 +537,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
   public function setAbout(?string $about): void
   {
-    $this->about = $about;
+    $this->about = TextSanitizer::sanitize($about);
   }
 
   public function getCurrentlyWorkingOn(): ?string
@@ -546,7 +547,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
   public function setCurrentlyWorkingOn(?string $currently_working_on): void
   {
-    $this->currently_working_on = $currently_working_on;
+    $this->currently_working_on = TextSanitizer::sanitize($currently_working_on);
   }
 
   public function getRankingScore(): ?int

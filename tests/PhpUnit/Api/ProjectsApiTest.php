@@ -220,6 +220,54 @@ final class ProjectsApiTest extends KernelTestCase
    * @throws Exception
    */
   #[Group('unit')]
+  public function testProjectIdPutSanitizesHighRiskMetadata(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $project = new Program();
+    $user = new User();
+    $project->setId('id');
+    $project->setName('Old name');
+    $project->setDescription('Old description');
+    $project->setCredits('Old credits');
+    $project->setPrivate(false);
+    $project->setUser($user);
+
+    $this->projectIdPut_setLoaderAndAuthManager($project, $user);
+
+    $extracted_file_repository = $this->createStub(ExtractedFileRepository::class);
+    $extracted_file_repository->method('loadProjectExtractedFile')->willReturn(null);
+    $processor = new ProjectsApiProcessor(
+      $this->createStub(ProjectManager::class),
+      $this->createStub(EntityManagerInterface::class),
+      $extracted_file_repository,
+      $this->createStub(ProjectFileRepository::class),
+      $this->createStub(ScreenshotRepository::class)
+    );
+    $this->facade->method('getProcessor')->willReturn($processor);
+
+    $this->facade->method('getRequestValidator')->willReturn($this->full_validator);
+
+    $update_project_request = $this->createStub(UpdateProjectRequest::class);
+    $update_project_request->method('getName')->willReturn("My f\u{200B}uck project");
+    $update_project_request->method('getDescription')->willReturn('Contact me at kid@example.com');
+    $update_project_request->method('getCredits')->willReturn('Join discord.gg/catroweb');
+    $update_project_request->method('isPrivate')->willReturn(null);
+
+    $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
+
+    $this->assertSame(Response::HTTP_NO_CONTENT, $response_code);
+    $this->assertNull($response);
+    $this->assertSame('My **** project', $project->getName());
+    $this->assertSame('Contact me at [contact removed]', $project->getDescription());
+    $this->assertSame('Join [contact removed]', $project->getCredits());
+  }
+
+  /**
+   * @throws Exception
+   */
+  #[Group('unit')]
   public function testProjectIdPutNotFound(): void
   {
     $response_code = 200;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Project\CatrobatFile;
 
 use App\DB\EntityRepository\Project\ProgramRepository;
+use App\Moderation\TextSanitizer;
 use App\Project\CatrobatCode\CodeObject;
 use App\Project\CatrobatCode\StatementFactory;
 use App\Project\Remix\RemixData;
@@ -56,7 +57,7 @@ class ExtractedCatrobatFile
    */
   public function setName(string $name): void
   {
-    $this->getHeader()->programName = $name;
+    $this->getHeader()->programName = TextSanitizer::sanitize($name) ?? '';
   }
 
   public function isDebugBuild(): bool
@@ -84,7 +85,7 @@ class ExtractedCatrobatFile
    */
   public function setDescription(string $description): void
   {
-    $this->getHeader()->description = $description;
+    $this->getHeader()->description = TextSanitizer::sanitize($description) ?? '';
   }
 
   public function getNotesAndCredits(): string
@@ -97,7 +98,7 @@ class ExtractedCatrobatFile
    */
   public function setNotesAndCredits(string $notesAndCredits): void
   {
-    $this->getHeader()->notesAndCredits = $notesAndCredits;
+    $this->getHeader()->notesAndCredits = TextSanitizer::sanitize($notesAndCredits) ?? '';
   }
 
   public function getDirHash(): ?string

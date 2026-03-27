@@ -114,6 +114,32 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->assertSame($new_credits, (string) $xml->header->notesAndCredits);
   }
 
+  /**
+   * @throws \Exception
+   *
+   * @psalm-suppress InvalidPropertyFetch
+   */
+  public function testSettersSanitizeHighRiskMetadata(): void
+  {
+    $target_dir = BootstrapExtension::$CACHE_DIR.'base/';
+    $filesystem = new Filesystem();
+    $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
+
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile($target_dir, '/webpath', 'hash');
+    $this->extracted_catrobat_file->setName("f\u{200B}uck");
+    $this->extracted_catrobat_file->setDescription('Reach me at kid@example.com');
+    $this->extracted_catrobat_file->setNotesAndCredits('discord.gg/catroweb');
+    $this->extracted_catrobat_file->saveProjectXmlProperties();
+
+    $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
+    Assert::assertIsString($content);
+    $xml = @simplexml_load_string($content);
+    Assert::assertNotFalse($xml);
+    $this->assertSame('****', (string) $xml->header->programName);
+    $this->assertSame('Reach me at [contact removed]', (string) $xml->header->description);
+    $this->assertSame('[contact removed]', (string) $xml->header->notesAndCredits);
+  }
+
   public function testGetsTheLanguageVersionFromXml(): void
   {
     $this->assertSame('0.92', $this->extracted_catrobat_file->getLanguageVersion());

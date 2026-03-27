@@ -10,6 +10,7 @@ use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\Moderation\TextSanitizer;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -152,7 +153,7 @@ class UserComment implements \Stringable
 
   public function setText(string $text): UserComment
   {
-    $this->text = $text;
+    $this->text = TextSanitizer::sanitize($text);
 
     return $this;
   }

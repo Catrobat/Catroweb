@@ -7,6 +7,7 @@ namespace App\DB\Entity\Studio;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\Generator\MyUuidGenerator;
+use App\Moderation\TextSanitizer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -88,7 +89,7 @@ class Studio
 
   public function setName(string $name): Studio
   {
-    $this->name = $name;
+    $this->name = TextSanitizer::sanitize($name) ?? '';
 
     return $this;
   }
@@ -100,7 +101,7 @@ class Studio
 
   public function setDescription(string $description): Studio
   {
-    $this->description = $description;
+    $this->description = TextSanitizer::sanitize($description) ?? '';
 
     return $this;
   }
