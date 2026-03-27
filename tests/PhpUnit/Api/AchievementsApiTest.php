@@ -29,9 +29,9 @@ class AchievementsApiTest extends TestCase
 {
   protected AchievementsApi $object;
 
-  protected Stub|AchievementsApiFacade $facade;
+  protected Stub&AchievementsApiFacade $facade;
 
-  protected Stub|UserManager $user_manager;
+  protected Stub&UserManager $user_manager;
 
   #[\Override]
   protected function setUp(): void

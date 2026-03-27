@@ -152,9 +152,9 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->setParameter(':type', $type)
     ;
 
-    $count = $qb->getQuery()->getSingleScalarResult();
+    $count = (int) $qb->getQuery()->getSingleScalarResult();
 
-    return ctype_digit($count) && $count > 0;
+    return $count > 0;
   }
 
   /**
@@ -207,7 +207,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
     // Group reactions by user
     $users_data = [];
     foreach ($results as $like) {
-      $user_id = $like->getUser()->getId();
+      $user_id = $like->getUser()->getId() ?? throw new \LogicException('User must have an ID.');
 
       if (!isset($users_data[$user_id])) {
         $users_data[$user_id] = [
@@ -221,7 +221,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
 
       // Keep the most recent reaction time
       $created_at = $like->getCreatedAt();
-      if (null !== $created_at && (null === $users_data[$user_id]['reacted_at'] || $created_at > $users_data[$user_id]['reacted_at'])) {
+      if (null !== $created_at && (!$users_data[$user_id]['reacted_at'] instanceof \DateTime || $created_at > $users_data[$user_id]['reacted_at'])) {
         $users_data[$user_id]['reacted_at'] = $created_at;
       }
     }

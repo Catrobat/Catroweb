@@ -59,7 +59,7 @@ class ProjectsController extends Controller
   public function projectIdCatrobatGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
-    $produces = ['application/zip'];
+    $produces = ['application/zip', 'application/json'];
     // Figure out what the client accepts
     $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
     $responseFormat = $this->getOutputFormat($clientAccepts, $produces);

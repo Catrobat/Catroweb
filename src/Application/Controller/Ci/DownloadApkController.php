@@ -74,13 +74,13 @@ class DownloadApkController extends AbstractController
       }
     } catch (\Exception $exception) {
       $project = $this->project_manager->find($id);
-      if (null !== $project) {
+      if ($project instanceof Program) {
         $project->setApkStatus(Program::APK_NONE);
         $this->project_manager->save($project);
         $this->logger->error(sprintf('Project apk for id: "%s" not found; Status reset', $id));
       }
 
-      throw new NotFoundHttpException($exception->getMessage());
+      throw new NotFoundHttpException($exception->getMessage(), $exception);
     }
 
     return $file;
@@ -90,7 +90,7 @@ class DownloadApkController extends AbstractController
   {
     /* @var $project Program|null */
     $project = $this->project_manager->find($id);
-    if (null === $project || !$project->isVisible() || Program::APK_READY != $project->getApkStatus()) {
+    if (!$project instanceof Program || !$project->isVisible() || Program::APK_READY !== $project->getApkStatus()) {
       $this->logger->warning('Project with ID: '.$id.' not found');
       throw new NotFoundHttpException();
     }

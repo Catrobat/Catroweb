@@ -23,6 +23,10 @@ class ApproveProjectsController extends CRUDController
   {
     /** @var Program|null $object */
     $object = $this->admin->getSubject();
+    if (null === $object) {
+      return new RedirectResponse($this->admin->generateUrl('list'));
+    }
+
     $object->setApproved(true);
     $object->setVisible(true);
 

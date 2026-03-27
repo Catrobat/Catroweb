@@ -51,6 +51,10 @@ class ContentAppealRequest
    * @Assert\Type("string")
    *
    * @Type("string")
+   *
+   * @Assert\Length(
+   *   max = 5000
+   * )
    */
   protected ?string $reason = null;
 

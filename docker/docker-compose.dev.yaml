@@ -140,6 +140,19 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=catroweb_test
 
+  # --- CAPTCHA (Cap - self-hosted, proof-of-work):
+
+  cap.catroweb:
+    image: tiago2/cap:latest
+    container_name: cap.catroweb
+    ports:
+      - '3000:3000'
+    environment:
+      ADMIN_KEY: catroweb-dev-admin
+    volumes:
+      - cap-data:/usr/src/app/.data
+    restart: unless-stopped
+
   # --- Tools:
 
   phpmyadmin.catroweb.dev:
@@ -181,4 +194,6 @@ services:
 
 volumes:
   esdata1:
+    driver: local
+  cap-data:
     driver: local

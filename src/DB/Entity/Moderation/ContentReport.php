@@ -63,7 +63,7 @@ class ContentReport
   #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
-    if (null === $this->created_at) {
+    if (!$this->created_at instanceof \DateTime) {
       $this->created_at = TimeUtils::getDateTime();
     }
   }

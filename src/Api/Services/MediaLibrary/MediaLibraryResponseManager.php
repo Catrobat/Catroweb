@@ -24,7 +24,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
+    \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly MediaLibraryApiLoader $loader,
     private readonly MediaAssetRepository $asset_repository,
     private readonly ?UrlHelper $url_helper,
@@ -44,7 +44,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
   public function createCategoriesResponse(array $categories, int $total, int $limit, int $offset): MediaCategoriesResponse
   {
     $category_responses = array_map(
-      fn (MediaCategory $category) => $this->createCategoryResponse($category),
+      $this->createCategoryResponse(...),
       $categories
     );
 
@@ -67,7 +67,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
   public function createCategoryDetailResponse(MediaCategory $category, array $assets, int $total_assets, int $limit, int $offset): MediaCategoryDetailResponse
   {
     $asset_responses = array_map(
-      fn (MediaAsset $asset) => $this->createAssetResponse($asset),
+      fn (MediaAsset $asset): MediaAssetResponse => $this->createAssetResponse($asset),
       $assets
     );
 
@@ -84,7 +84,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
   public function createAssetsResponse(array $assets, int $total, int $limit, int $offset): MediaAssetsResponse
   {
     $asset_responses = array_map(
-      fn (MediaAsset $asset) => $this->createAssetResponse($asset),
+      fn (MediaAsset $asset): MediaAssetResponse => $this->createAssetResponse($asset),
       $assets
     );
 
@@ -113,7 +113,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       if (file_exists($file_path)) {
         $size = filesize($file_path);
       }
-    } catch (\Exception $e) {
+    } catch (\Exception) {
       // If file doesn't exist or can't be accessed, size remains null
     }
 
@@ -157,7 +157,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
 
     if (null === $search) {
       $category_previews = array_map(
-        function (MediaCategory $category) use ($assets_per_category, $file_type, $flavor) {
+        function (MediaCategory $category) use ($assets_per_category, $file_type, $flavor): \OpenAPI\Server\Model\MediaLibraryCategoryPreview {
           // Get preview assets for this category
           $preview_assets = $this->loader->getAssets(
             $assets_per_category,
@@ -173,7 +173,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
           $total_assets = $this->loader->countAssets($category->getId(), $file_type, $flavor, null);
 
           $preview_responses = array_map(
-            fn (MediaAsset $asset) => $this->createAssetResponse($asset),
+            fn (MediaAsset $asset): MediaAssetResponse => $this->createAssetResponse($asset),
             $preview_assets
           );
 
@@ -216,7 +216,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
         }
 
         $preview_responses = array_map(
-          fn (MediaAsset $asset) => $this->createAssetResponse($asset),
+          fn (MediaAsset $asset): MediaAssetResponse => $this->createAssetResponse($asset),
           $preview_assets
         );
 

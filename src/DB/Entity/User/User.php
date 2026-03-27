@@ -32,7 +32,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Index(name: 'apple_id_idx', columns: ['google_id'])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
   public const string ROLE_DEFAULT = 'ROLE_USER';
   public const string ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
@@ -572,6 +572,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     $this->updatedAt = new \DateTime();
   }
 
+  #[\Override]
   public function __toString(): string
   {
     return $this->getUserIdentifier();
@@ -632,7 +633,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   #[\Override]
   public function getUserIdentifier(): string
   {
-    return $this->getUsername() ?? '-';
+    $username = $this->getUsername();
+
+    return (null !== $username && '' !== $username) ? $username : '-';
   }
 
   public function getUsernameCanonical(): ?string
@@ -761,7 +764,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
   public function setSuperAdmin(bool $boolean): void
   {
-    if (true === $boolean) {
+    if ($boolean) {
       $this->addRole(self::ROLE_SUPER_ADMIN);
     } else {
       $this->removeRole(self::ROLE_SUPER_ADMIN);
@@ -802,7 +805,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   {
     $passwordRequestedAt = $this->getPasswordRequestedAt();
 
-    return null !== $passwordRequestedAt && $passwordRequestedAt->getTimestamp() + $ttl > time();
+    return $passwordRequestedAt instanceof \DateTimeInterface && $passwordRequestedAt->getTimestamp() + $ttl > time();
   }
 
   public function setRoles(array $roles): void
@@ -828,14 +831,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
       return false;
     }
 
-    if ($this->username !== $user->getUsername()) {
-      return false;
-    }
-
-    return true;
+    return $this->username === $user->getUsername();
   }
 
-  public function setCreatedAt(?\DateTimeInterface $createdAt = null): void
+  public function setCreatedAt(\DateTimeInterface $createdAt): void
   {
     $this->createdAt = $createdAt;
   }
@@ -845,7 +844,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     return $this->createdAt;
   }
 
-  public function setUpdatedAt(?\DateTimeInterface $updatedAt = null): void
+  public function setUpdatedAt(\DateTimeInterface $updatedAt): void
   {
     $this->updatedAt = $updatedAt;
   }

@@ -31,7 +31,7 @@ class ProjectExtensionManagerTest extends TestCase
 
   protected ExtractedCatrobatFile $extracted_catrobat_file_without_extensions;
 
-  protected MockObject|ProjectExtensionManager $object;
+  protected MockObject&ProjectExtensionManager $object;
 
   #[\Override]
   protected function setUp(): void

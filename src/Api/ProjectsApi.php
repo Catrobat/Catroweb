@@ -98,7 +98,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
-    $error_response = $this->facade->getResponseManager()->createUpdateFailureResponse($result, $accept_language);
+    $error_response = $this->facade->getResponseManager()->createUpdateFailureResponse((int) $result, $accept_language);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -189,7 +189,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
-    if (null !== $user && !$this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
+    if ($user instanceof \App\DB\Entity\User\User && !$this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
@@ -203,6 +203,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
       return $error_response;
+    }
+
+    if (!$user instanceof \App\DB\Entity\User\User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
     }
 
     // Needed (for tests) to make sure everything is up to date (followers, ..)
@@ -222,6 +228,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
       return $error_response;
+    }
+
+    if (!$project instanceof Program) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
     }
 
     // Setting the project's attributes
@@ -315,7 +327,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $user_projects = $this->facade->getLoader()->getUserProjects($user->getId(), $limit, $offset, $flavor, $max_version);
+    $user_id = $user->getId();
+    if (null === $user_id) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
+    }
+
+    $user_projects = $this->facade->getLoader()->getUserProjects($user_id, $limit, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($user_projects, $attributes);
@@ -416,7 +435,13 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project->getId(), $zipFile);
+    $project_id = $project->getId();
+    if (null === $project_id) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
+    }
+    $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project_id, $zipFile);
     $responseCode = Response::HTTP_OK;
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -436,7 +461,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     array &$responseHeaders,
   ): array|object|null {
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user) {
+    if (!$user instanceof \App\DB\Entity\User\User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return null;
@@ -449,7 +474,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -495,14 +520,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     array &$responseHeaders,
   ): void {
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user) {
+    if (!$user instanceof \App\DB\Entity\User\User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return;
     }
 
     $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;
@@ -529,14 +554,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
     $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
 
-    if (null === $project) {
+    if (!$project instanceof Program) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
     }
 
     $counts = $this->reactions_facade->getLoader()->getReactionCounts($id);
-    $user_reactions = null !== $user ? $this->reactions_facade->getLoader()->getUserReactions($id, $user) : [];
+    $user_reactions = $user instanceof \App\DB\Entity\User\User ? $this->reactions_facade->getLoader()->getUserReactions($id, $user) : [];
 
     $responseCode = Response::HTTP_OK;
     $response = $this->reactions_facade->getResponseManager()->createReactionSummaryResponse($counts, $user_reactions);
@@ -558,7 +583,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
     $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
 
-    if (null === $project) {
+    if (!$project instanceof Program) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;

@@ -33,7 +33,7 @@ class FormLoginSuccessHandler extends DefaultAuthenticationSuccessHandler
   {
     $response = parent::onAuthenticationSuccess($request, $token);
 
-    if (null === $response) {
+    if (!$response instanceof Response) {
       return null;
     }
 

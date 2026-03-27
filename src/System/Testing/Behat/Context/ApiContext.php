@@ -146,14 +146,21 @@ class ApiContext implements Context
   public function getKernelBrowser(): KernelBrowser
   {
     if (!$this->kernel_browser instanceof KernelBrowser) {
-      $this->kernel_browser = $this->getSymfonyService('test.client');
-    }
-
-    if (null === $this->kernel_browser) {
-      throw new \Exception("Can't get KernelBrowser");
+      $service = $this->getSymfonyService('test.client');
+      if (!$service instanceof KernelBrowser) {
+        throw new \Exception("Can't get KernelBrowser");
+      }
+      $this->kernel_browser = $service;
     }
 
     return $this->kernel_browser;
+  }
+
+  private function getResponseContent(): string
+  {
+    $content = $this->getKernelBrowser()->getResponse()->getContent();
+
+    return false === $content ? '' : $content;
   }
 
   // -------------------------------------------------------------------------------------------------------------------
@@ -179,11 +186,12 @@ class ApiContext implements Context
   {
     $client = $this->getKernelBrowser();
 
-    $session = $this->getKernelBrowser()
+    /** @var \Symfony\Component\HttpFoundation\Session\SessionFactoryInterface $sessionFactory */
+    $sessionFactory = $this->getKernelBrowser()
       ->getContainer()
       ->get('session.factory')
-      ->createSession()
     ;
+    $session = $sessionFactory->createSession();
 
     $cookie = new Cookie($session->getName(), $session->getId());
     $client->getCookieJar()->set($cookie);
@@ -286,7 +294,7 @@ class ApiContext implements Context
     $project_manager = $this->getProjectManager();
 
     $project = $project_manager->findOneByName($arg1);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       throw new \Exception('Project not found: '.$arg1);
     }
 
@@ -366,7 +374,7 @@ class ApiContext implements Context
   {
     $this->request_content = $this->getAuthenticationRequestBody($uname, $pwd);
     $this->iRequestWith('POST', '/api/authentication');
-    $response = json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
+    $response = json_decode($this->getResponseContent(), null, 512, JSON_THROW_ON_ERROR);
     $bearer_cookie = new Cookie('BEARER', $response->{'token'});
     $refresh_cookie = new Cookie('REFRESH_TOKEN', $response->{'refresh_token'});
     $cookieJar = $this->getKernelBrowser()->getCookieJar();
@@ -449,7 +457,7 @@ class ApiContext implements Context
   public function theResponseShouldBeInJsonFormat(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertJson($response->getContent());
+    Assert::assertJson($response->getContent() ?: '');
   }
 
   /**
@@ -478,7 +486,7 @@ class ApiContext implements Context
   public function iShouldGetTheJsonObject(PyStringNode $string): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $this->assertJsonRegex($string->getRaw(), $response->getContent());
+    $this->assertJsonRegex($string->getRaw(), $response->getContent() ?: '');
   }
 
   /**
@@ -804,7 +812,7 @@ class ApiContext implements Context
 
     $pattern = json_encode(json_decode($string->getRaw(), null, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
     $pattern = str_replace('\\', '\\\\', $pattern);
-    Assert::assertMatchesRegularExpression($pattern, $response->getContent());
+    Assert::assertMatchesRegularExpression($pattern, $response->getContent() ?: '');
   }
 
   /**
@@ -829,7 +837,7 @@ class ApiContext implements Context
    */
   public function theResponseShouldContain(string $needle): void
   {
-    $content = $this->getKernelBrowser()->getResponse()->getContent();
+    $content = $this->getResponseContent();
     Assert::assertStringContainsString($needle, $content, $needle.' not found in the response');
   }
 
@@ -852,7 +860,7 @@ class ApiContext implements Context
     Assert::assertEquals('http://localhost/app/project/'.$uploaded_project->getId(), $location_header);
 
     $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     Assert::assertEquals('http://localhost/app/project/'.$uploaded_project->getId(), $responseArray['project_url']);
   }
@@ -864,7 +872,7 @@ class ApiContext implements Context
    */
   public function theResponseShouldNotContain(string $needle): void
   {
-    Assert::assertStringNotContainsString($needle, $this->getKernelBrowser()->getResponse()->getContent());
+    Assert::assertStringNotContainsString($needle, $this->getResponseContent());
   }
 
   /**
@@ -877,7 +885,7 @@ class ApiContext implements Context
   {
     $pm = $this->getProjectManager();
     $project = $pm->find('1');
-    if (null === $project) {
+    if (!$project instanceof Program) {
       throw new \Exception('last project not found');
     }
 
@@ -921,7 +929,7 @@ class ApiContext implements Context
     $link = $this->getKernelBrowser()->getCrawler()->selectLink($arg1)->link();
     $absoluteUrl = $link->getUri();
     $parsedUrl = parse_url($absoluteUrl);
-    $relativePath = $parsedUrl['path'];
+    $relativePath = \is_array($parsedUrl) ? ($parsedUrl['path'] ?? '') : '';
     Assert::assertEquals($arg2, $relativePath, 'expected: '.$arg2.'  get: '.$relativePath);
   }
 
@@ -947,7 +955,7 @@ class ApiContext implements Context
   public function theProjectShouldGet(string $result): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $response_array = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $code = $response_array['statusCode'];
     match ($result) {
       'accepted' => Assert::assertEquals(200, $code, 'Project was rejected (Status code 200)'),
@@ -977,7 +985,7 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_project = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_project = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     $expected_project = $table->getHash();
     $stored_projects = $this->getStoredProjects($expected_project);
@@ -997,10 +1005,10 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredProjects($expected_projects);
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Number of returned projects should be '.count($expected_projects));
+    Assert::assertEquals(count($expected_projects), count($returned_projects), 'Number of returned projects should be '.count($expected_projects));
 
     foreach ($returned_projects as $returned_project) {
       $stored_project = $this->findProject($stored_projects, $returned_project['name']);
@@ -1018,10 +1026,10 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredFeaturedProjects($expected_projects);
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0,
+    Assert::assertEquals(count($expected_projects), count($returned_projects),
       'Number of returned projects should be '.count($expected_projects));
 
     foreach ($returned_projects as $returned_project) {
@@ -1042,7 +1050,7 @@ class ApiContext implements Context
   public function responseShouldHaveDefaultProjectsModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     /** @var array $project */
     foreach ($responseArray as $project) {
@@ -1068,11 +1076,11 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_users = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_users = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expected_users = $table->getHash();
     $stored_users = $this->getStoredUsers();
 
-    Assert::assertEquals(is_countable($returned_users) ? count($returned_users) : 0, count($expected_users), 'Number of returned users should be '.count($expected_users));
+    Assert::assertEquals(count($returned_users), count($expected_users), 'Number of returned users should be '.count($expected_users));
 
     foreach ($returned_users as $returned_user) {
       $stored_user = $this->findUser($stored_users, $returned_user['username']);
@@ -1090,7 +1098,7 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_user = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $stored_users = $this->getStoredUsers();
 
     $stored_user = $this->findUser($stored_users, $name);
@@ -1106,10 +1114,11 @@ class ApiContext implements Context
   public function responseShouldHaveDefaultUsersModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $returned_users = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    /** @var array<int,array<string,mixed>> $returned_users */
+    $returned_users = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_users as $user) {
-      Assert::assertEquals(count($this->default_user_structure), is_countable($user) ? count($user) : 0,
+      Assert::assertEquals(count($this->default_user_structure), count($user),
         'Number of user fields should be '.count($this->default_user_structure));
       foreach ($this->default_user_structure as $key) {
         Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
@@ -1127,13 +1136,14 @@ class ApiContext implements Context
   public function responseShouldHaveUserModelStructure(string $excluded = ''): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    /** @var array<string,mixed> $user */
+    $user = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     $structure = array_diff($this->full_user_structure, '' === $excluded || '0' === $excluded ? [] : explode(',', $excluded));
 
     Assert::assertEquals(
       count($structure),
-      is_countable($user) ? count($user) : 0,
+      count($user),
       'Number of user fields should be '.count($structure)
     );
     foreach ($structure as $key) {
@@ -1151,9 +1161,10 @@ class ApiContext implements Context
   public function responseShouldHaveSurveyModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $survey = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    /** @var array<string,mixed> $survey */
+    $survey = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(count($this->survey_structure), is_countable($survey) ? count($survey) : 0,
+    Assert::assertEquals(count($this->survey_structure), count($survey),
       'Number of survey fields should be '.count($this->survey_structure));
     foreach ($this->survey_structure as $key) {
       Assert::assertArrayHasKey($key, $survey, 'Survey should contain '.$key);
@@ -1170,9 +1181,10 @@ class ApiContext implements Context
   public function responseShouldHaveProjectModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $project = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    /** @var array<string,mixed> $project */
+    $project = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(is_countable($project) ? count($project) : 0, count($this->full_project_structure),
+    Assert::assertEquals(count($project), count($this->full_project_structure),
       'Number of project fields should be '.count($this->full_project_structure));
     foreach ($this->full_project_structure as $key) {
       Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
@@ -1189,10 +1201,11 @@ class ApiContext implements Context
   public function responseShouldHaveDefaultFeaturedProjectsModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    /** @var array<int,array<string,mixed>> $returned_projects */
+    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_projects as $project) {
-      Assert::assertEquals(count($this->default_featured_project_structure), is_countable($project) ? count($project) : 0,
+      Assert::assertEquals(count($this->default_featured_project_structure), count($project),
         'Number of project fields should be '.count($this->default_featured_project_structure));
       foreach ($this->default_featured_project_structure as $key) {
         Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
@@ -1210,10 +1223,11 @@ class ApiContext implements Context
   public function responseShouldHaveDefaultMediaFilesModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $returned_media_files = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    /** @var array<int,array<string,mixed>> $returned_media_files */
+    $returned_media_files = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_media_files as $project) {
-      Assert::assertEquals(is_countable($project) ? count($project) : 0, count($this->default_media_file_structure),
+      Assert::assertEquals(count($project), count($this->default_media_file_structure),
         'Number of project fields should be '.count($this->default_media_file_structure));
       foreach ($this->default_media_file_structure as $key) {
         Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
@@ -1231,17 +1245,17 @@ class ApiContext implements Context
   public function responseShouldHaveLanguageListStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $returned_languages = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_languages = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    $all_locales = array_filter(Locales::getNames(), static fn ($key): bool => 2 == strlen((string) $key) || 5 == strlen((string) $key), ARRAY_FILTER_USE_KEY);
+    $all_locales = array_filter(Locales::getNames(), static fn ($key): bool => 2 === strlen((string) $key) || 5 === strlen((string) $key), ARRAY_FILTER_USE_KEY);
     $all_locales_count = count($all_locales);
 
-    Assert::assertEquals($all_locales_count, is_countable($returned_languages) ? count($returned_languages) : 0,
+    Assert::assertEquals($all_locales_count, count($returned_languages),
       'Number of languages should be '.$all_locales_count);
 
     foreach ($returned_languages as $language_code => $display_text) {
       Assert::assertEquals('string', gettype($language_code));
-      Assert::assertTrue(2 == strlen((string) $language_code) || 5 == strlen((string) $language_code));
+      Assert::assertTrue(2 === strlen((string) $language_code) || 5 === strlen((string) $language_code));
       Assert::assertEquals('string', gettype($display_text));
     }
   }
@@ -1255,7 +1269,7 @@ class ApiContext implements Context
   public function responseShouldContainTheFollowingLanguages(TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $returned_languages = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_languages = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($table as $row) {
       Assert::assertArrayHasKey($row['Language Code'], $returned_languages);
@@ -1296,11 +1310,11 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_files = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_files = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expected_files = $table->getHash();
     $stored_files = $this->getStoredMediaFiles($expected_files);
 
-    Assert::assertEquals(is_countable($returned_files) ? count($returned_files) : 0, count($expected_files),
+    Assert::assertEquals(count($returned_files), count($expected_files),
       'Number of returned projects should be '.count($expected_files));
     foreach ($returned_files as $returned_file) {
       $stored_file = $this->findProject($stored_files, $returned_file['name']);
@@ -1321,10 +1335,10 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(is_countable($returned_projects) ? count($returned_projects) : 0, $projects,
-      'Number of returned projects should be '.(is_countable($returned_projects) ? count($returned_projects) : 0));
+    Assert::assertEquals(count($returned_projects), $projects,
+      'Number of returned projects should be '.count($returned_projects));
   }
 
   /**
@@ -1333,7 +1347,7 @@ class ApiContext implements Context
   public function theSearchResponseShouldContainProjects(int $count): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     Assert::assertArrayHasKey('projects', $data);
     Assert::assertCount($count, $data['projects'], "Expected {$count} projects in response.");
@@ -1345,7 +1359,7 @@ class ApiContext implements Context
   public function theSearchResponseShouldContainUsers(int $count): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     Assert::assertArrayHasKey('users', $data);
     Assert::assertCount($count, $data['users'], "Expected {$count} users in response.");
@@ -1357,7 +1371,7 @@ class ApiContext implements Context
   public function theSearchResponseShouldContainTheFollowingProjects(TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expectedProjects = $table->getHash();
 
     Assert::assertArrayHasKey('projects', $data);
@@ -1381,7 +1395,7 @@ class ApiContext implements Context
   public function theSearchResponseShouldNotContainAny(string $key): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
     Assert::assertTrue(
       !isset($data[$key]),
@@ -1395,7 +1409,7 @@ class ApiContext implements Context
   public function theSearchResponseShouldContainTheFollowingUsers(TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $data = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expectedUsers = $table->getHash();
 
     Assert::assertArrayHasKey('users', $data);
@@ -1460,7 +1474,7 @@ class ApiContext implements Context
   public function itShouldBeUpdated(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $location = $responseArray['project_url'];
 
     Assert::assertNotNull($location);
@@ -1981,15 +1995,16 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
 
     $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch', 'trending'];
-    $categories = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    Assert::assertEquals(count($expected_categories), is_countable($categories) ? count($categories) : 0, 'Number of returned projects should be '.count($expected_categories));
+    $categories = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    Assert::assertEquals(count($expected_categories), count($categories), 'Number of returned projects should be '.count($expected_categories));
 
     foreach ($categories as $category) {
       Assert::assertIsString($category['type']);
       Assert::assertIsString($category['name']);
       Assert::assertIsArray($category['projects_list']);
       foreach ($category['projects_list'] as $project) {
-        Assert::assertEquals(count($this->default_project_structure), is_countable($project) ? count($project) : 0,
+        Assert::assertIsArray($project);
+        Assert::assertEquals(count($this->default_project_structure), count($project),
           'Number of project fields should be '.count($this->default_project_structure));
         foreach ($this->default_project_structure as $key) {
           Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
@@ -2009,10 +2024,10 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredProjects($expected_projects);
-    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Number of returned projects should be '.count($expected_projects));
+    Assert::assertEquals(count($expected_projects), count($returned_projects), 'Number of returned projects should be '.count($expected_projects));
 
     foreach ($returned_projects as $returned_project) {
       $stored_project = $this->findProject($stored_projects, $returned_project['name']);
@@ -2030,9 +2045,10 @@ class ApiContext implements Context
   public function theResponseShouldHaveTheExtendedUserModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    /** @var array<string,mixed> $user */
+    $user = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(count($this->default_user_structure_extended), is_countable($user) ? count($user) : 0,
+    Assert::assertEquals(count($this->default_user_structure_extended), count($user),
       'Number of user fields should be '.count($this->default_user_structure_extended));
     foreach ($this->default_user_structure_extended as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
@@ -2077,13 +2093,7 @@ class ApiContext implements Context
 
   private function expectProject(array $projects, string $value): bool
   {
-    foreach ($projects as $project) {
-      if ($project['Name'] === $value) {
-        return true;
-      }
-    }
-
-    return false;
+    return array_any($projects, fn ($project): bool => $project['Name'] === $value);
   }
 
   private function getStoredProjects(array $expected_projects): array
@@ -2184,7 +2194,7 @@ class ApiContext implements Context
     return $users;
   }
 
-  private function checkProjectFieldsValue(array $project, string $key): bool
+  private function checkProjectFieldsValue(array|\ArrayAccess $project, string $key): bool
   {
     $fields = [
       'id' => static function ($id): void {
@@ -2424,18 +2434,16 @@ class ApiContext implements Context
   // --------------------------------------------------------------------------------------------------------------------
   //  Upload Request process
   // --------------------------------------------------------------------------------------------------------------------
-
   /**
    * Uploads a Catrobat Project.
    *
    * @param string    $file       The Catrobat file to be uploaded
    * @param User|null $user       The uploader
    * @param string    $desired_id Specify, if the uploaded project should get a desired id
-   * @param string    $flavor     The flavor of the project
    *
    * @throws \Exception when an error while uploading occurs
    */
-  private function uploadProject(string $file, ?User $user = null, string $desired_id = '', string $flavor = Flavor::POCKETCODE): void
+  private function uploadProject(string $file, ?User $user = null, string $desired_id = ''): void
   {
     if (null == $user) {
       if (null !== $this->username) {
@@ -2474,7 +2482,7 @@ class ApiContext implements Context
    */
   private function getIDOfLastUploadedProject(): string
   {
-    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $json = json_decode($this->getResponseContent(), true, 512, JSON_THROW_ON_ERROR);
 
     return $json['id'];
   }

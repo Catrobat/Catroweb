@@ -4,25 +4,24 @@ declare(strict_types=1);
 
 namespace App\Api\Services\Authentication;
 
-use Gesdinet\JWTRefreshTokenBundle\Service\RefreshToken;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\HttpFoundation\Request;
+use OpenAPI\Server\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Placeholder controller for the /api/authentication/refresh route.
+ *
+ * The actual refresh token logic is handled by the refresh_jwt authenticator
+ * in the security firewall (gesdinet/jwt-refresh-token-bundle 2.x).
+ * This controller is only reached if the authenticator does not intercept the request.
+ */
 readonly class JWTTokenRefreshService
 {
-  public function __construct(
-    #[Autowire(service: 'gesdinet.jwtrefreshtoken')]
-    private RefreshToken $refreshToken,
-  ) {
-  }
-
-  public function refresh(Request $request): Response
+  public function refresh(): Response
   {
-    if ($bearer = $request->cookies->get('REFRESH_TOKEN')) {
-      $request->request->set('refresh_token', $bearer);
-    }
-
-    return $this->refreshToken->refresh($request);
+    return Controller::createStructuredErrorResponse(
+      Response::HTTP_UNAUTHORIZED,
+      'unauthorized',
+      'Refresh token not provided or invalid.'
+    );
   }
 }

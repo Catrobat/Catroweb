@@ -25,14 +25,14 @@ class AchievementsResponseManager extends AbstractResponseManager
     int $unlocked_count,
     ?string $locale = null,
   ): AchievementsListResponse {
-    $unlocked_responses = array_map(fn (Achievement $a) => $this->createAchievementResponse($a, $locale), $unlocked);
-    $locked_responses = array_map(fn (Achievement $a) => $this->createAchievementResponse($a, $locale), $locked);
+    $unlocked_responses = array_map(fn (Achievement $a): AchievementResponse => $this->createAchievementResponse($a, $locale), $unlocked);
+    $locked_responses = array_map(fn (Achievement $a): AchievementResponse => $this->createAchievementResponse($a, $locale), $locked);
 
     $most_recent_response = null;
     $most_recent_unlocked_at = null;
     $show_animation = false;
 
-    if (null !== $most_recent_user_achievement) {
+    if ($most_recent_user_achievement instanceof UserAchievement) {
       $most_recent_achievement = $most_recent_user_achievement->getAchievement();
       $most_recent_id = $most_recent_achievement->getId();
       foreach ($unlocked_responses as $r) {
@@ -43,7 +43,7 @@ class AchievementsResponseManager extends AbstractResponseManager
       }
       $most_recent_response ??= $this->createAchievementResponse($most_recent_achievement, $locale);
       $most_recent_unlocked_at = $most_recent_user_achievement->getUnlockedAt()?->format('Y-m-d');
-      $show_animation = null === $most_recent_user_achievement->getSeenAt();
+      $show_animation = !$most_recent_user_achievement->getSeenAt() instanceof \DateTimeInterface;
     }
 
     return new AchievementsListResponse([
@@ -64,7 +64,7 @@ class AchievementsResponseManager extends AbstractResponseManager
    */
   public function createAchievementResponseList(array $achievements, ?string $locale = null): array
   {
-    return array_values(array_map(fn (Achievement $a) => $this->createAchievementResponse($a, $locale), $achievements));
+    return array_values(array_map(fn (Achievement $a): AchievementResponse => $this->createAchievementResponse($a, $locale), $achievements));
   }
 
   public function createAchievementsCountResponse(int $count): AchievementsCountResponse

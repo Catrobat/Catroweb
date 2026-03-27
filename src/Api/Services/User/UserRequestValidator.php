@@ -185,6 +185,10 @@ class UserRequestValidator extends AbstractRequestValidator
   {
     $validTLDs = [];
     $pslFile = file_get_contents('https://publicsuffix.org/list/public_suffix_list.dat');
+    if (false === $pslFile) {
+      return $validTLDs;
+    }
+
     $pslLines = explode("\n", $pslFile);
 
     foreach ($pslLines as $line) {

@@ -43,9 +43,15 @@ class ProjectDataFixtures
     private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
     ParameterBagInterface $parameter_bag)
   {
-    $this->FIXTURE_DIR = (string) $parameter_bag->get('catrobat.test.directory.source');
-    $this->GENERATED_FIXTURE_DIR = (string) $parameter_bag->get('catrobat.test.directory.target');
-    $this->EXTRACT_DIR = (string) $parameter_bag->get('catrobat.file.extract.dir');
+    $fixtureDir = $parameter_bag->get('catrobat.test.directory.source');
+    \assert(\is_string($fixtureDir));
+    $this->FIXTURE_DIR = $fixtureDir;
+    $generatedFixtureDir = $parameter_bag->get('catrobat.test.directory.target');
+    \assert(\is_string($generatedFixtureDir));
+    $this->GENERATED_FIXTURE_DIR = $generatedFixtureDir;
+    $extractDir = $parameter_bag->get('catrobat.file.extract.dir');
+    \assert(\is_string($extractDir));
+    $this->EXTRACT_DIR = $extractDir;
     FileHelper::verifyDirectoryExists($this->FIXTURE_DIR);
     FileHelper::verifyDirectoryExists($this->EXTRACT_DIR);
   }
@@ -73,7 +79,7 @@ class ProjectDataFixtures
     $project->setName($config['name'] ?? 'Project '.ProjectDataFixtures::$number_of_projects);
     $project->setDescription($config['description'] ?? '');
     $project->setCredits($config['credit'] ?? '');
-    $project->setScratchId((isset($config['scratch_id']) && 0 != (int) $config['scratch_id']) ? (int) $config['scratch_id'] : null);
+    $project->setScratchId((isset($config['scratch_id']) && 0 !== (int) $config['scratch_id']) ? (int) $config['scratch_id'] : null);
     $project->setViews(isset($config['views']) ? (int) $config['views'] : 0);
     $project->setDownloads(isset($config['downloads']) ? (int) $config['downloads'] : 0);
     $project->setApkDownloads(isset($config['apk_downloads']) ? (int) $config['apk_downloads'] : 0);
@@ -165,7 +171,7 @@ class ProjectDataFixtures
     }
 
     if (isset($config['author'])) {
-      $author = $project->getUser() ? $project->getUser()->getUserIdentifier() : 'null';
+      $author = $project->getUser() instanceof User ? $project->getUser()->getUserIdentifier() : 'null';
       Assert::assertEquals($config['author'], $author, 'Project author wrong.');
     }
 

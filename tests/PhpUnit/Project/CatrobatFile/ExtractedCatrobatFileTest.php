@@ -60,7 +60,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
+    Assert::assertIsString($content);
     $xml = @simplexml_load_string($content);
+    Assert::assertNotFalse($xml);
     $this->assertSame($new_name, (string) $xml->header->programName);
   }
 
@@ -82,7 +84,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
+    Assert::assertIsString($content);
     $xml = @simplexml_load_string($content);
+    Assert::assertNotFalse($xml);
     $this->assertSame($new_description, (string) $xml->header->description);
   }
 
@@ -104,7 +108,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
+    Assert::assertIsString($content);
     $xml = @simplexml_load_string($content);
+    Assert::assertNotFalse($xml);
     $this->assertSame($new_credits, (string) $xml->header->notesAndCredits);
   }
 
@@ -160,7 +166,9 @@ class ExtractedCatrobatFileTest extends TestCase
   {
     $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://pocketcode.org/details/1234/';
-    $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
+    $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
+    $this->assertNotNull($xml->header);
+    $xml->header->url = $first_expected_url;
     $new_program_id = '1300';
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
@@ -174,7 +182,9 @@ class ExtractedCatrobatFileTest extends TestCase
   {
     $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'SomeText 123';
-    $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
+    $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
+    $this->assertNotNull($xml->header);
+    $xml->header->url = $first_expected_url;
     $new_program_id = '124';
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
     $this->assertCount(0, $urls);
@@ -187,7 +197,9 @@ class ExtractedCatrobatFileTest extends TestCase
   {
     $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
-    $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
+    $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
+    $this->assertNotNull($xml->header);
+    $xml->header->url = $first_expected_url;
     $new_program_id = '1';
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
@@ -201,7 +213,9 @@ class ExtractedCatrobatFileTest extends TestCase
   {
     $program_repository = $this->createStub(ProgramRepository::class);
     $first_expected_url = '/app/flavors/3570/';
-    $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
+    $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
+    $this->assertNotNull($xml->header);
+    $xml->header->url = $first_expected_url;
     $new_program_id = '6310';
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
@@ -219,7 +233,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $new_program_id = '3571';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     /* @psalm-suppress UndefinedPropertyAssignment */
-    $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
+    $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
+    $this->assertNotNull($xml->header);
+    $xml->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(2, $urls, [$first_expected_url, $second_expected_url], ['1234', '3570'], [false, false], [true, true]);
@@ -235,7 +251,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $second_expected_url = 'http://pocketcode.org/details/1234/';
     $new_program_id = '3571';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
-    $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
+    $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
+    $this->assertNotNull($xml->header);
+    $xml->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$first_expected_url, $second_expected_url], ['1234'], [false], [true]);
@@ -251,7 +269,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $second_expected_url = 'http://pocketcode.org/details/790/';
     $new_program_id = '1234';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
-    $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
+    $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
+    $this->assertNotNull($xml->header);
+    $xml->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$second_expected_url], ['790'], [false], [true]);
@@ -267,7 +287,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $second_expected_url = 'http://pocketcode.org/details/790/';
     $new_program_id = '791';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
-    $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
+    $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
+    $this->assertNotNull($xml->header);
+    $xml->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$second_expected_url], ['790'], [false], [true]);
@@ -467,6 +489,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $filesystem->mirror(BootstrapExtension::$FIXTURES_DIR.'program_with_0_xmlchar/', BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/');
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    Assert::assertIsString($base_xml_string);
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
     Assert::assertEquals(1, $count);
 
@@ -475,6 +498,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    Assert::assertIsString($base_xml_string);
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
     Assert::assertEquals(1, $count);
   }
@@ -488,6 +512,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $filesystem->mirror(BootstrapExtension::$FIXTURES_DIR.'/program_with_0_xmlchar/', BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/');
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    Assert::assertIsString($base_xml_string);
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals(1, $count);
 
@@ -496,6 +521,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    Assert::assertIsString($base_xml_string);
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals(1, $count);
   }

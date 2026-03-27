@@ -26,8 +26,12 @@ class ThemeRequestEventListener
     private readonly RouterInterface $router,
     private readonly RequestHelper $app_request,
   ) {
-    $this->routing_theme = (string) $parameter_bag->get('umbrellaTheme');
-    $this->flavor = (string) $parameter_bag->get('defaultFlavor');
+    /** @var string $umbrellaTheme */
+    $umbrellaTheme = $parameter_bag->get('umbrellaTheme');
+    /** @var string $defaultFlavor */
+    $defaultFlavor = $parameter_bag->get('defaultFlavor');
+    $this->routing_theme = $umbrellaTheme;
+    $this->flavor = $defaultFlavor;
   }
 
   public function onKernelRequest(RequestEvent $event): void
@@ -44,7 +48,9 @@ class ThemeRequestEventListener
     $requested_theme = $this->app_request->getThemeDefinedInRequest();
 
     // URI should not contain a flavor but the umbrella theme
-    $this->routing_theme = (string) $this->parameter_bag->get('umbrellaTheme');
+    /** @var string $umbrellaTheme */
+    $umbrellaTheme = $this->parameter_bag->get('umbrellaTheme');
+    $this->routing_theme = $umbrellaTheme;
 
     if ('' === $requested_theme) { // - @deprecated
       // However, we still support legacy theming
@@ -78,7 +84,7 @@ class ThemeRequestEventListener
     $current_url = $event->getRequest()->getUri();
     preg_match('#http(s)?://(.*?)(/.*?\.php)?/(.*)#', $current_url, $parsed_url);
 
-    return explode('/', $parsed_url[4])[0];
+    return explode('/', $parsed_url[4] ?? '')[0];
   }
 
   private function getFlavorFromTheme(string $theme): string
@@ -88,6 +94,7 @@ class ThemeRequestEventListener
 
   private function flavorExists(?string $flavor): bool
   {
+    /** @var array<string> $flavors */
     $flavors = $this->parameter_bag->get('flavors');
 
     return in_array($flavor, $flavors, true);

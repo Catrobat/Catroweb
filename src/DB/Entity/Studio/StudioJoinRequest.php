@@ -47,7 +47,7 @@ class StudioJoinRequest
     return $this->user;
   }
 
-  public function setUser(?User $user): self
+  public function setUser(User $user): self
   {
     $this->user = $user;
 
@@ -59,7 +59,7 @@ class StudioJoinRequest
     return $this->studio;
   }
 
-  public function setStudio(?Studio $studio): self
+  public function setStudio(Studio $studio): self
   {
     $this->studio = $studio;
 

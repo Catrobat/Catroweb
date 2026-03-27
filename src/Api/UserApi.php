@@ -7,6 +7,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
 use App\DB\Entity\User\User;
+use App\Security\Captcha\CaptchaVerifier;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
@@ -30,6 +31,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     private readonly RateLimiterFactory $registrationBurstLimiter,
     private readonly RateLimiterFactory $passwordResetBurstLimiter,
     private readonly RequestStack $request_stack,
+    private readonly CaptchaVerifier $captchaVerifier,
   ) {
   }
 
@@ -59,6 +61,14 @@ class UserApi extends AbstractApiController implements UserApiInterface
 
     if (true === $register_request->isDryRun()) {
       $responseCode = Response::HTTP_NO_CONTENT;
+
+      return null;
+    }
+
+    $captchaResult = $this->captchaVerifier->verify($register_request->getCaptchaToken(), $ip);
+    $responseHeaders['X-Captcha-Result'] = $captchaResult['result'];
+    if (!$captchaResult['success']) {
+      $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;
     }
@@ -189,6 +199,14 @@ class UserApi extends AbstractApiController implements UserApiInterface
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
       return $error_response;
+    }
+
+    $captchaResult = $this->captchaVerifier->verify($reset_password_request->getCaptchaToken(), $ip);
+    $responseHeaders['X-Captcha-Result'] = $captchaResult['result'];
+    if (!$captchaResult['success']) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
     }
 
     // Do not reveal whether a user account was found or not.

@@ -25,7 +25,7 @@ class StudioApiLoader extends AbstractApiLoader
   {
     $studio = $this->studio_manager->findStudioById($id);
 
-    if (null === $studio || $studio->getAutoHidden()) {
+    if (!$studio instanceof Studio || $studio->getAutoHidden()) {
       return null;
     }
 

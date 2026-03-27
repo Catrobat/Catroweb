@@ -668,6 +668,62 @@ if (pendingAction && userRole !== 'guest') {
 - Feature branches merged via PR
 - CI runs on GitHub Actions (Static analysis, Dynamic analysis)
 
+### Use Worktrees for New Issues
+
+When starting work on a new issue, always create a git worktree with a fresh branch from `origin/develop`. This keeps the main working directory clean and allows parallel work on multiple issues.
+
+```bash
+git fetch origin develop
+git worktree add .claude/worktrees/<short-name> -b feature/<issue-number>-<short-desc> origin/develop
+```
+
+All work happens inside `.claude/worktrees/<short-name>/`. Run yarn/composer commands from there. When done, the worktree can be cleaned up:
+
+```bash
+git worktree remove .claude/worktrees/<short-name>
+```
+
+### Running a Second Docker Setup from a Worktree
+
+If Docker containers are already running for another branch, use a compose override with `-p` (project name) and unique container names/ports to avoid conflicts:
+
+```bash
+cd .claude/worktrees/<short-name>
+docker compose \
+  -p <project-name> \
+  -f docker/docker-compose.dev.yaml \
+  -f docker/docker-compose.override.yaml \
+  up -d
+```
+
+Create `docker/docker-compose.override.yaml` (not committed) with unique container names and non-conflicting ports:
+
+```yaml
+services:
+  app.catroweb:
+    container_name: <project-name>.app
+    ports: !override
+      - '8090:80'
+  db.catroweb.dev:
+    container_name: <project-name>.db.dev
+  db.catroweb.test:
+    container_name: <project-name>.db.test
+  chrome.catroweb:
+    container_name: <project-name>.chrome
+  elasticsearch:
+    container_name: <project-name>.elasticsearch
+    ports: !override
+      - '9201:9200'
+  phpmyadmin.catroweb.dev:
+    container_name: <project-name>.phpmyadmin
+    ports: !override
+      - '8091:80'
+```
+
+Teardown: `docker compose -p <project-name> -f docker/docker-compose.dev.yaml -f docker/docker-compose.override.yaml down`
+
+**Key**: The `container_name` overrides are required because the base compose file uses hardcoded names — `-p` alone doesn't prevent conflicts. Use `ports: !override` (compose v5+) to replace rather than merge port lists.
+
 ## API
 
 - OpenAPI spec in `src/Api/OpenAPI/`
@@ -734,10 +790,11 @@ See `CommentsApi` and `NotificationsApi` for reference implementations.
 
 ### After Running `yarn run generate-api`
 
-Always run CS fixer on the generated files with no cache:
+Always run Rector and CS fixer on the generated files:
 
 ```bash
 yarn run generate-api
+bin/rector process src/Api/OpenAPI/Server/
 bin/php-cs-fixer fix src/Api/OpenAPI/Server/ --using-cache=no
 ```
 

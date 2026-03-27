@@ -105,7 +105,7 @@ class StudioController extends AbstractController
       'status_public' => $statusPublicStudio,
       'status_private' => $statusPrivateStudio,
       'studio' => $studio,
-      'user_name' => is_null($this->getUser()) ? '' : $this->getUser()->getUserIdentifier(),
+      'user_name' => is_null($user) ? '' : $user->getUserIdentifier(),
       'user_role' => $user_role,
       'members_count' => $members_count,
       'activities_count' => $activities_count,
@@ -194,8 +194,8 @@ class StudioController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     $studio = $this->studio_manager->findStudioById(trim((string) $request->query->get('studio_id')));
-    if (!is_null($studio)) {
-      $this->redirectToRoute('index');
+    if (is_null($studio)) {
+      return $this->redirectToRoute('index');
     }
 
     $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
@@ -247,6 +247,10 @@ class StudioController extends AbstractController
 
     /** @var User|null $logged_in_user */
     $logged_in_user = $this->getUser();
+    if (is_null($logged_in_user)) {
+      return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
+    }
+
     $studio_user = $this->studio_manager->changeStudioUserRole($logged_in_user, $studio, $user, StudioUser::ROLE_ADMIN);
     if (is_null($studio_user)) {
       return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
@@ -296,7 +300,7 @@ class StudioController extends AbstractController
     $user = $this->getUser();
     $studio = $this->studio_manager->findStudioById(trim((string) $request->query->get('studio_id')));
     if (is_null($studio)) {
-      $this->redirectToRoute('index');
+      return $this->redirectToRoute('index');
     }
 
     $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
@@ -425,7 +429,7 @@ class StudioController extends AbstractController
       }
 
       $name = trim(strval($request->request->get('studio_name')));
-      if (strlen($name) > 0) {
+      if ('' !== $name) {
         $studio->setName($name);
       }
 
@@ -480,9 +484,9 @@ class StudioController extends AbstractController
 
       /** @var User $user */
       $user = $this->getUser();
-      $clickedProjectsJson = $request->request->get('projects_add');
+      $clickedProjectsJson = (string) $request->request->get('projects_add');
 
-      if (strlen($clickedProjectsJson) > 0) {
+      if ('' !== $clickedProjectsJson) {
         $clickedProjects = json_decode($clickedProjectsJson, true);
         foreach ($clickedProjects as $projectId) {
           $project = $this->studio_manager->getProjectByID($projectId);
@@ -491,8 +495,8 @@ class StudioController extends AbstractController
         }
       }
 
-      $clickedRemoveProjectsJson = $request->request->get('projects_remove');
-      if (strlen($clickedRemoveProjectsJson) > 0) {
+      $clickedRemoveProjectsJson = (string) $request->request->get('projects_remove');
+      if ('' !== $clickedRemoveProjectsJson) {
         $clickedRemoveProjects = json_decode($clickedRemoveProjectsJson, true);
         foreach ($clickedRemoveProjects as $projectId) {
           $project = $this->studio_manager->getProjectByID($projectId);
@@ -518,9 +522,9 @@ class StudioController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-        $clickedRemoveProjectsJson = $request->request->get('projects_remove');
+        $clickedRemoveProjectsJson = (string) $request->request->get('projects_remove');
 
-        if (strlen($clickedRemoveProjectsJson) > 0) {
+        if ('' !== $clickedRemoveProjectsJson) {
           $clickedRemoveProjects = json_decode($clickedRemoveProjectsJson, true);
 
           foreach ($clickedRemoveProjects as $projectId) {

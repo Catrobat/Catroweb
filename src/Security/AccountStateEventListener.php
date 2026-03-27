@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\DB\Entity\User\User;
+use OpenAPI\Server\Controller\Controller;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -43,15 +43,13 @@ class AccountStateEventListener
     }
 
     foreach (self::EXEMPT_RULES as $rule) {
-      if (preg_match($rule['pattern'], $path)) {
-        if (!isset($rule['methods']) || \in_array($method, $rule['methods'], true)) {
-          return;
-        }
+      if (preg_match($rule['pattern'], $path) && (!isset($rule['methods']) || \in_array($method, $rule['methods'], true))) {
+        return;
       }
     }
 
     $token = $this->token_storage->getToken();
-    if (null === $token) {
+    if (!$token instanceof \Symfony\Component\Security\Core\Authentication\Token\TokenInterface) {
       return;
     }
 
@@ -61,18 +59,20 @@ class AccountStateEventListener
     }
 
     if (!$user->isVerified()) {
-      $event->setResponse(new JsonResponse(
-        ['error' => 'Email verification required.'],
-        Response::HTTP_FORBIDDEN
+      $event->setResponse(Controller::createStructuredErrorResponse(
+        Response::HTTP_FORBIDDEN,
+        'forbidden',
+        'Email verification required.'
       ));
 
       return;
     }
 
     if ($user->getProfileHidden()) {
-      $event->setResponse(new JsonResponse(
-        ['error' => 'Your account has been suspended.'],
-        Response::HTTP_FORBIDDEN
+      $event->setResponse(Controller::createStructuredErrorResponse(
+        Response::HTTP_FORBIDDEN,
+        'forbidden',
+        'Your account has been suspended.'
       ));
     }
   }

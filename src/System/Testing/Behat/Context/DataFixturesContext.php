@@ -358,10 +358,10 @@ class DataFixturesContext implements Context
       $maintenanceInformation = new MaintenanceInformation();
       $maintenance_start = $maintenanceinformation_config['Maintenance Start'];
       $format = 'Y-m-d';
-      $date = \DateTime::createFromFormat($format, $maintenance_start);
+      $date = \DateTime::createFromFormat($format, $maintenance_start) ?: null;
       $maintenanceInformation->setLtmMaintenanceStart($date);
       $maintenance_end = $maintenanceinformation_config['Maintenance End'];
-      $date = \DateTime::createFromFormat($format, $maintenance_end);
+      $date = \DateTime::createFromFormat($format, $maintenance_end) ?: null;
       $maintenanceInformation->setLtmMaintenanceEnd($date);
       $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
       $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_'.$maintenanceinformation_config['Id']);
@@ -740,7 +740,7 @@ class DataFixturesContext implements Context
       if (!empty($row['flavors'])) {
         foreach (explode(',', $row['flavors']) as $flavor_name) {
           $flavor = $flavor_repo->getFlavorByName(trim($flavor_name));
-          if ($flavor) {
+          if ($flavor instanceof \App\DB\Entity\Flavor) {
             $asset->addFlavor($flavor);
           }
         }
@@ -848,7 +848,7 @@ class DataFixturesContext implements Context
 
     foreach ($table->getHash() as $data) {
       $project = $this->getProjectManager()->find($data['project']);
-      if (null === $project) {
+      if (!$project instanceof Program) {
         throw new \Exception('Project with id '.$data['project'].' does not exist.');
       }
 
@@ -866,6 +866,7 @@ class DataFixturesContext implements Context
         if (false === $type) {
           throw new \Exception('Unknown type "'.$data['type'].'" given.');
         }
+        $type = (int) $type;
       }
 
       if (!ProgramLike::isValidType($type)) {
@@ -874,7 +875,7 @@ class DataFixturesContext implements Context
 
       $like = new ProgramLike($project, $user, $type);
 
-      if (array_key_exists('created at', $data) && ('' !== trim((string) $data['created at']) && '0' !== trim((string) $data['created at']))) {
+      if (array_key_exists('created at', $data) && ('' !== trim($data['created at']) && '0' !== trim($data['created at']))) {
         $like->setCreatedAt(new \DateTime($data['created at'], new \DateTimeZone('UTC')));
       }
 
@@ -1016,7 +1017,7 @@ class DataFixturesContext implements Context
           $temp_comment->setUser($user);
           $temp_comment->setText('This is a comment');
           $temp_comment->setProgram($project);
-          $temp_comment->setUploadDate(date_create());
+          $temp_comment->setUploadDate(new \DateTime());
           $em->persist($temp_comment);
           $to_create = new CommentNotification($project->getUser(), $temp_comment);
           $em->persist($to_create);
@@ -1165,7 +1166,7 @@ class DataFixturesContext implements Context
       $allowComments = filter_var($config['allow_comments'] ?? true, FILTER_VALIDATE_BOOLEAN);
       $isEnabled = filter_var($config['is_enabled'] ?? true, FILTER_VALIDATE_BOOLEAN);
 
-      $studio = (new Studio())
+      $studio = new Studio()
         ->setName($config['name'])
         ->setDescription($config['description'] ?? '')
         ->setAllowComments($allowComments)
@@ -1199,7 +1200,7 @@ class DataFixturesContext implements Context
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
 
-      $activity = (new StudioActivity())
+      $activity = new StudioActivity()
         ->setUser($user)
         ->setStudio($studio)
         ->setType('user')
@@ -1212,7 +1213,7 @@ class DataFixturesContext implements Context
 
       $this->getManager()->persist($activity);
 
-      $studio_user = (new StudioUser())
+      $studio_user = new StudioUser()
         ->setUser($user)
         ->setStudio($studio)
         ->setRole($config['role'] ?? 'member')
@@ -1280,7 +1281,7 @@ class DataFixturesContext implements Context
   public function thereAreAchievements(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      $achievement = (new Achievement())
+      $achievement = new Achievement()
         ->setInternalTitle($config['internal_title'])
         ->setInternalDescription($config['internal_description'] ?? '')
         ->setTitleLtmCode($config['title_ltm_code'] ?? '')
@@ -1309,7 +1310,7 @@ class DataFixturesContext implements Context
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
       $achievement = $this->getAchievementManager()->findAchievementByInternalTitle($config['achievement']);
-      $user_achievement = (new UserAchievement())
+      $user_achievement = new UserAchievement()
         ->setUser($user)
         ->setAchievement($achievement)
         ->setSeenAt(empty($config['seen_at']) ? null : new \DateTime($config['seen_at']))
@@ -1595,25 +1596,14 @@ class DataFixturesContext implements Context
       $cached_credits = $translation->getCachedCredits();
 
       // Filter rows to find matching entries
-      $matching_row = array_filter($table_rows, static function ($row) use (
-        $project_id,
-        $source_language,
-        $target_language,
-        $provider,
-        $usage_count,
-        $cached_name,
-        $cached_description,
-        $cached_credits
-      ) {
-        return $project_id == $row['project_id']
-          && $source_language == $row['source_language']
-          && $target_language == $row['target_language']
-          && $provider == $row['provider']
-          && $usage_count == (int) $row['usage_count']
-          && $cached_name == ($row['cached_name'] ?? null)
-          && $cached_description == ($row['cached_description'] ?? null)
-          && $cached_credits == ($row['cached_credits'] ?? null);
-      });
+      $matching_row = array_filter($table_rows, static fn (array $row) => $project_id == $row['project_id']
+        && $source_language == $row['source_language']
+        && $target_language == $row['target_language']
+        && $provider == $row['provider']
+        && $usage_count == (int) $row['usage_count']
+        && $cached_name == ($row['cached_name'] ?? null)
+        && $cached_description == ($row['cached_description'] ?? null)
+        && $cached_credits == ($row['cached_credits'] ?? null));
 
       // Assert that exactly one matching row was found
       $matching_row_count = count($matching_row);
@@ -1681,7 +1671,7 @@ class DataFixturesContext implements Context
 
       $matching_row = array_filter(
         $table_rows,
-        static fn ($row): bool => $comment_id == $row['comment_id']
+        static fn (array $row): bool => $comment_id == $row['comment_id']
           && $source_language == $row['source_language']
           && $target_language == $row['target_language']
           && $provider == $row['provider']
@@ -1742,7 +1732,7 @@ class DataFixturesContext implements Context
 
       $matching_row = array_filter(
         $table_rows,
-        static fn ($row): bool => $project_id == $row['project_id']
+        static fn (array $row): bool => $project_id == $row['project_id']
           && $language == $row['language']
           && $name == $row['name']
           && $description == $row['description']
@@ -1785,7 +1775,7 @@ class DataFixturesContext implements Context
         'enable_comments' => $studio->isAllowComments(),
         'is_public' => $studio->isIsPublic(),
         'cover_path' => $studio->getCoverAssetPath(),
-        default => throw new \InvalidArgumentException(json_encode($set)),
+        default => throw new \InvalidArgumentException(json_encode($set) ?: 'unknown key'),
       };
       switch ($set['key']) {
         case 'is_enabled':
@@ -1795,6 +1785,7 @@ class DataFixturesContext implements Context
           break;
         case 'cover_path':
           if ($set['value']) {
+            Assert::assertIsString($result);
             Assert::assertStringEndsWith($set['value'], $result, 'Failed for: '.json_encode($set));
           }
           break;
@@ -1810,7 +1801,7 @@ class DataFixturesContext implements Context
   public function thereAreStatistics(string $user_count, string $project_count): void
   {
     $statistic = $this->getStatisticsRepository()->findOneBy(['id' => 1]);
-    if (!$statistic) {
+    if (!$statistic instanceof Statistic) {
       $statistic = new Statistic();
     }
     $statistic->setUsers($user_count);
@@ -1894,9 +1885,9 @@ class DataFixturesContext implements Context
     $em = $this->getManager();
 
     foreach ($table->getHash() as $config) {
-      $forced_id = (isset($config['id']) && '' !== trim((string) $config['id'])) ? (int) $config['id'] : null;
-      if (isset($config['reporter']) && '' !== trim((string) $config['reporter'])) {
-        $reporter = $this->findUserByUsernameOrId((string) $config['reporter']);
+      $forced_id = (isset($config['id']) && '' !== trim($config['id'])) ? (int) $config['id'] : null;
+      if (isset($config['reporter']) && '' !== trim($config['reporter'])) {
+        $reporter = $this->findUserByUsernameOrId($config['reporter']);
         Assert::assertNotNull($reporter, sprintf('Reporter "%s" not found', $config['reporter']));
       } else {
         $reporter = null;
@@ -1978,7 +1969,7 @@ class DataFixturesContext implements Context
     $em = $this->getManager();
 
     foreach ($table->getHash() as $config) {
-      $forced_id = (isset($config['id']) && '' !== trim((string) $config['id'])) ? (int) $config['id'] : null;
+      $forced_id = (isset($config['id']) && '' !== trim($config['id'])) ? (int) $config['id'] : null;
 
       $appellant_identifier = (string) ($config['appellant'] ?? '');
       $appellant = $this->findUserByUsernameOrId($appellant_identifier);

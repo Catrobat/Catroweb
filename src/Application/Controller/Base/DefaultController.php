@@ -43,7 +43,7 @@ class DefaultController extends AbstractController
     }
 
     $all_locales = Locales::getNames($display_locale);
-    $all_locales = array_filter($all_locales, static fn ($key): bool => 2 == strlen((string) $key) || 5 == strlen((string) $key), ARRAY_FILTER_USE_KEY);
+    $all_locales = array_filter($all_locales, static fn ($key): bool => 2 === strlen((string) $key) || 5 === strlen((string) $key), ARRAY_FILTER_USE_KEY);
 
     $locales = [];
     foreach ($all_locales as $key => $value) {

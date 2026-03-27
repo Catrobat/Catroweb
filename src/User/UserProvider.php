@@ -29,7 +29,7 @@ readonly class UserProvider implements UserProviderInterface
   {
     $user = $this->findUser($identifier);
 
-    if (null === $user || !$user->isEnabled()) {
+    if (!$user instanceof User || !$user->isEnabled()) {
       throw new UserNotFoundException(sprintf('Username "%s" does not exist.', $identifier));
     }
 
@@ -43,7 +43,7 @@ readonly class UserProvider implements UserProviderInterface
       throw new UnsupportedUserException(sprintf('Expected an instance of %s, but got "%s".', User::class, $user::class));
     }
 
-    if (null === $reloadedUser = $this->userManager->findOneBy(['id' => $user->getId()])) {
+    if (!($reloadedUser = $this->userManager->findOneBy(['id' => $user->getId()])) instanceof User) {
       throw new UserNotFoundException(sprintf('User with ID "%s" could not be reloaded.', $user->getId() ?? ''));
     }
 

@@ -91,7 +91,12 @@ trait ContextTrait
   private function getContainer(): Container
   {
     try {
-      return $this->getKernel()->getContainer()->get('test.service_container');
+      $container = $this->getKernel()->getContainer()->get('test.service_container');
+      if (!$container instanceof Container) {
+        throw new \LogicException('Service "test.service_container" is not an instance of Container.');
+      }
+
+      return $container;
     } catch (ServiceNotFoundException $e) {
       throw new \LogicException('Could not find service "test.service_container". Try updating the "framework.test" config to "true".', 0, $e);
     }
@@ -102,129 +107,203 @@ trait ContextTrait
     return $this->kernel;
   }
 
-  public function getUserManager(): ?UserManager
+  public function getUserManager(): UserManager
   {
-    return $this->getContainer()->get(UserManager::class);
+    $service = $this->getContainer()->get(UserManager::class);
+    \assert($service instanceof UserManager, 'UserManager service not found');
+
+    return $service;
   }
 
-  public function getUserDataFixtures(): ?UserDataFixtures
+  public function getUserDataFixtures(): UserDataFixtures
   {
-    return $this->getContainer()->get(UserDataFixtures::class);
+    $service = $this->getContainer()->get(UserDataFixtures::class);
+    \assert($service instanceof UserDataFixtures, 'UserDataFixtures service not found');
+
+    return $service;
   }
 
-  public function getProjectManager(): ?ProjectManager
+  public function getProjectManager(): ProjectManager
   {
-    return $this->getContainer()->get(ProjectManager::class);
+    $service = $this->getContainer()->get(ProjectManager::class);
+    \assert($service instanceof ProjectManager, 'ProjectManager service not found');
+
+    return $service;
   }
 
-  public function getProjectDataFixtures(): ?ProjectDataFixtures
+  public function getProjectDataFixtures(): ProjectDataFixtures
   {
-    return $this->getContainer()->get(ProjectDataFixtures::class);
+    $service = $this->getContainer()->get(ProjectDataFixtures::class);
+    \assert($service instanceof ProjectDataFixtures, 'ProjectDataFixtures service not found');
+
+    return $service;
   }
 
-  public function getJwtManager(): ?JWTManager
+  public function getJwtManager(): JWTManager
   {
-    return $this->getContainer()->get('lexik_jwt_authentication.jwt_manager');
+    $service = $this->getContainer()->get('lexik_jwt_authentication.jwt_manager');
+    \assert($service instanceof JWTManager, 'JWTManager service not found');
+
+    return $service;
   }
 
-  public function getJwtEncoder(): ?JWTEncoderInterface
+  public function getJwtEncoder(): JWTEncoderInterface
   {
-    return $this->getContainer()->get('lexik_jwt_authentication.encoder');
+    $service = $this->getContainer()->get('lexik_jwt_authentication.encoder');
+    \assert($service instanceof JWTEncoderInterface, 'JWTEncoder service not found');
+
+    return $service;
   }
 
-  public function getTagRepository(): ?TagRepository
+  public function getTagRepository(): TagRepository
   {
-    return $this->getContainer()->get(TagRepository::class);
+    $service = $this->getContainer()->get(TagRepository::class);
+    \assert($service instanceof TagRepository, 'TagRepository service not found');
+
+    return $service;
   }
 
-  public function getExtensionRepository(): ?ExtensionRepository
+  public function getExtensionRepository(): ExtensionRepository
   {
-    return $this->getContainer()->get(ExtensionRepository::class);
+    $service = $this->getContainer()->get(ExtensionRepository::class);
+    \assert($service instanceof ExtensionRepository, 'ExtensionRepository service not found');
+
+    return $service;
   }
 
-  public function getProjectRemixForwardRepository(): ?ProgramRemixRepository
+  public function getProjectRemixForwardRepository(): ProgramRemixRepository
   {
-    return $this->getContainer()->get(ProgramRemixRepository::class);
+    $service = $this->getContainer()->get(ProgramRemixRepository::class);
+    \assert($service instanceof ProgramRemixRepository, 'ProgramRemixRepository service not found');
+
+    return $service;
   }
 
-  public function getProjectRemixBackwardRepository(): ?ProgramRemixBackwardRepository
+  public function getProjectRemixBackwardRepository(): ProgramRemixBackwardRepository
   {
-    return $this->getContainer()->get(ProgramRemixBackwardRepository::class);
+    $service = $this->getContainer()->get(ProgramRemixBackwardRepository::class);
+    \assert($service instanceof ProgramRemixBackwardRepository, 'ProgramRemixBackwardRepository service not found');
+
+    return $service;
   }
 
-  public function getScratchProjectRepository(): ?ScratchProgramRepository
+  public function getScratchProjectRepository(): ScratchProgramRepository
   {
-    return $this->getContainer()->get(ScratchProgramRepository::class);
+    $service = $this->getContainer()->get(ScratchProgramRepository::class);
+    \assert($service instanceof ScratchProgramRepository, 'ScratchProgramRepository service not found');
+
+    return $service;
   }
 
-  public function getScratchProjectRemixRepository(): ?ScratchProgramRemixRepository
+  public function getScratchProjectRemixRepository(): ScratchProgramRemixRepository
   {
-    return $this->getContainer()->get(ScratchProgramRemixRepository::class);
+    $service = $this->getContainer()->get(ScratchProgramRemixRepository::class);
+    \assert($service instanceof ScratchProgramRemixRepository, 'ScratchProgramRemixRepository service not found');
+
+    return $service;
   }
 
-  public function getFileRepository(): ?ProjectFileRepository
+  public function getFileRepository(): ProjectFileRepository
   {
-    return $this->getContainer()->get(ProjectFileRepository::class);
+    $service = $this->getContainer()->get(ProjectFileRepository::class);
+    \assert($service instanceof ProjectFileRepository, 'ProjectFileRepository service not found');
+
+    return $service;
   }
 
-  public function getExtractedFileRepository(): ?ExtractedFileRepository
+  public function getExtractedFileRepository(): ExtractedFileRepository
   {
-    return $this->getContainer()->get(ExtractedFileRepository::class);
+    $service = $this->getContainer()->get(ExtractedFileRepository::class);
+    \assert($service instanceof ExtractedFileRepository, 'ExtractedFileRepository service not found');
+
+    return $service;
   }
 
-  public function getUserLikeSimilarityRelationRepository(): ?UserLikeSimilarityRelationRepository
+  public function getUserLikeSimilarityRelationRepository(): UserLikeSimilarityRelationRepository
   {
-    return $this->getContainer()->get(UserLikeSimilarityRelationRepository::class);
+    $service = $this->getContainer()->get(UserLikeSimilarityRelationRepository::class);
+    \assert($service instanceof UserLikeSimilarityRelationRepository, 'UserLikeSimilarityRelationRepository service not found');
+
+    return $service;
   }
 
-  public function getUserRemixSimilarityRelationRepository(): ?UserRemixSimilarityRelationRepository
+  public function getUserRemixSimilarityRelationRepository(): UserRemixSimilarityRelationRepository
   {
-    return $this->getContainer()->get(UserRemixSimilarityRelationRepository::class);
+    $service = $this->getContainer()->get(UserRemixSimilarityRelationRepository::class);
+    \assert($service instanceof UserRemixSimilarityRelationRepository, 'UserRemixSimilarityRelationRepository service not found');
+
+    return $service;
   }
 
-  public function getCatroNotificationRepository(): ?NotificationRepository
+  public function getCatroNotificationRepository(): NotificationRepository
   {
-    return $this->getContainer()->get(NotificationRepository::class);
+    $service = $this->getContainer()->get(NotificationRepository::class);
+    \assert($service instanceof NotificationRepository, 'NotificationRepository service not found');
+
+    return $service;
   }
 
-  public function getFlavorRepository(): ?FlavorRepository
+  public function getFlavorRepository(): FlavorRepository
   {
-    return $this->getContainer()->get(FlavorRepository::class);
+    $service = $this->getContainer()->get(FlavorRepository::class);
+    \assert($service instanceof FlavorRepository, 'FlavorRepository service not found');
+
+    return $service;
   }
 
-  public function getFeatureFlagManager(): ?FeatureFlagManager
+  public function getFeatureFlagManager(): FeatureFlagManager
   {
-    return $this->getContainer()->get(FeatureFlagManager::class);
+    $service = $this->getContainer()->get(FeatureFlagManager::class);
+    \assert($service instanceof FeatureFlagManager, 'FeatureFlagManager service not found');
+
+    return $service;
   }
 
-  public function getManager(): ?EntityManagerInterface
+  public function getManager(): EntityManagerInterface
   {
-    return $this->getContainer()->get('doctrine')->getManager();
+    /** @var \Doctrine\Persistence\ManagerRegistry $doctrine */
+    $doctrine = $this->getContainer()->get('doctrine');
+
+    $manager = $doctrine->getManager();
+    \assert($manager instanceof EntityManagerInterface, 'EntityManager not found');
+
+    return $manager;
   }
 
-  public function getRouter(): ?Router
+  public function getRouter(): Router
   {
-    return $this->getContainer()->get('router');
+    $service = $this->getContainer()->get('router');
+    \assert($service instanceof Router, 'Router service not found');
+
+    return $service;
   }
 
   public function getAchievementManager(): ?AchievementManager
   {
-    return $this->getContainer()->get(AchievementManager::class);
+    $service = $this->getContainer()->get(AchievementManager::class);
+
+    return $service instanceof AchievementManager ? $service : null;
   }
 
   public function getCronJobRepository(): ?CronJobRepository
   {
-    return $this->getContainer()->get(CronJobRepository::class);
+    $service = $this->getContainer()->get(CronJobRepository::class);
+
+    return $service instanceof CronJobRepository ? $service : null;
   }
 
   public function getStudioManager(): ?StudioManager
   {
-    return $this->getContainer()->get(StudioManager::class);
+    $service = $this->getContainer()->get(StudioManager::class);
+
+    return $service instanceof StudioManager ? $service : null;
   }
 
   public function getStatisticsRepository(): ?StatisticRepository
   {
-    return $this->getContainer()->get(StatisticRepository::class);
+    $service = $this->getContainer()->get(StatisticRepository::class);
+
+    return $service instanceof StatisticRepository ? $service : null;
   }
 
   public function getSymfonyParameter(string $param): mixed
@@ -234,7 +313,15 @@ trait ContextTrait
 
   public function getSymfonyParameterAsString(string $param): string
   {
-    return strval($this->getContainer()->getParameter($param));
+    $value = $this->getContainer()->getParameter($param);
+    if (\is_string($value)) {
+      return $value;
+    }
+    if (\is_scalar($value) || null === $value) {
+      return (string) $value;
+    }
+
+    throw new \LogicException(sprintf('Parameter "%s" is not a scalar value.', $param));
   }
 
   /**
@@ -521,8 +608,8 @@ trait ContextTrait
       // Force a specific ID via raw SQL (Doctrine AUTO_INCREMENT ignores setId())
       $forced_id = (int) $config['id'];
       $upload_date_str = isset($config['upload_date']) ?
-        (new \DateTime($config['upload_date'], new \DateTimeZone('UTC')))->format('Y-m-d H:i:s') :
-        (new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
+        new \DateTime($config['upload_date'], new \DateTimeZone('UTC'))->format('Y-m-d H:i:s') :
+        new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))->format('Y-m-d H:i:s');
 
       $this->getManager()->getConnection()->executeStatement(
         'INSERT INTO user_comment (id, user_id, programId, uploadDate, text, username, parent_id, is_deleted)
@@ -640,7 +727,7 @@ trait ContextTrait
 
     // define regex wildcards
     $pattern = str_replace('REGEX_STRING_WILDCARD', '(.+?)', $pattern);
-    $pattern = str_replace('"REGEX_INT_WILDCARD"', '([0-9]+?)', $pattern);
+    $pattern = str_replace('"REGEX_INT_WILDCARD"', '(\d+?)', $pattern);
 
     $delimiter = '#';
     try {

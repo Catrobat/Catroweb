@@ -13,7 +13,7 @@ class AchievementsController extends AbstractController
   #[Route(path: '/achievements', name: 'achievements_overview', methods: ['GET'])]
   public function achievementsOverview(): Response
   {
-    if (null === $this->getUser()) {
+    if (!$this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {
       return $this->redirectToRoute('login');
     }
 

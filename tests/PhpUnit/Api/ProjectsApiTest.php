@@ -45,9 +45,9 @@ final class ProjectsApiTest extends KernelTestCase
 {
   protected ProjectsApi $object;
 
-  protected Stub|ProjectsApiFacade $facade;
+  protected Stub&ProjectsApiFacade $facade;
 
-  protected Stub|ReactionsApiFacade $reactions_facade;
+  protected Stub&ReactionsApiFacade $reactions_facade;
 
   protected mixed $full_validator;
 
@@ -312,9 +312,13 @@ final class ProjectsApiTest extends KernelTestCase
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertInstanceOf(UpdateProjectErrorResponse::class, $response);
+    $this->assertNotNull($response->getName(), 'Name should not be null');
     $this->assertStringContainsString('empty', $response->getName(), 'Name Validation failed');
+    $this->assertNotNull($response->getDescription(), 'Description should not be null');
     $this->assertStringContainsString('long', $response->getDescription(), 'Description Validation failed');
+    $this->assertNotNull($response->getCredits(), 'Credits should not be null');
     $this->assertStringContainsString('long', $response->getCredits(), 'Credits Validation failed');
+    $this->assertNotNull($response->getScreenshot(), 'Screenshot should not be null');
     $this->assertStringContainsString('invalid', $response->getScreenshot(), 'Screenshot Validation failed');
   }
 
@@ -359,6 +363,7 @@ final class ProjectsApiTest extends KernelTestCase
 
     $this->assertSame(Response::HTTP_INTERNAL_SERVER_ERROR, $response_code);
     $this->assertInstanceOf(UpdateProjectFailureResponse::class, $response);
+    $this->assertNotNull($response->getError());
     $this->assertNotEmpty($response->getError());
     $this->assertStringContainsString('Failed saving', $response->getError());
   }

@@ -188,9 +188,9 @@ document.addEventListener('DOMContentLoaded', () => {
           return response
             .json()
             .then((body) => {
-              if (body?.error === 'Email verification required.') {
+              if (body?.error?.message === 'Email verification required.') {
                 showVerificationAlert(trans.accountNotVerified)
-              } else if (body?.error === 'Your account has been suspended.') {
+              } else if (body?.error?.message === 'Your account has been suspended.') {
                 showVerificationAlert(trans.accountSuspended)
               } else {
                 showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.followError)
@@ -245,9 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
               return response
                 .json()
                 .then((body) => {
-                  if (body?.error === 'Email verification required.') {
+                  if (body?.error?.message === 'Email verification required.') {
                     showVerificationAlert(trans.accountNotVerified)
-                  } else if (body?.error === 'Your account has been suspended.') {
+                  } else if (body?.error?.message === 'Your account has been suspended.') {
                     showVerificationAlert(trans.accountSuspended)
                   } else {
                     showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.unfollowError)

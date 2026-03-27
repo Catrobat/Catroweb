@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
  */
 class UserAdmin extends AbstractAdmin
 {
+  #[\Override]
   protected $classnameLabel = 'user';
 
   public function __construct(private readonly UserManager $userManager)

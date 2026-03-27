@@ -268,7 +268,7 @@ class StatementFactory
   public function createStatement(\SimpleXMLElement $xmlTree, ?int $spaces): array
   {
     $statements = [];
-    if (0 == $xmlTree->count()) {
+    if (0 === $xmlTree->count()) {
       return $statements;
     }
 
@@ -555,8 +555,12 @@ class StatementFactory
   private function getTypeOfValue(\SimpleXMLElement $statement): ?string
   {
     $siblings = $statement->xpath('preceding-sibling::* | following-sibling::*');
+    if (!is_array($siblings)) {
+      return null;
+    }
+
     foreach ($siblings as $element) {
-      if (self::TYPE_ATTRIBUTE == $element->getName()) {
+      if (self::TYPE_ATTRIBUTE === $element->getName()) {
         return (string) $element;
       }
     }
@@ -569,7 +573,8 @@ class StatementFactory
     $variableName = (string) $statement;
     if (null == $variableName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
-      $variableName = (string) $statement->xpath($reference)[0];
+      $result = $statement->xpath($reference);
+      $variableName = (is_array($result) && isset($result[0])) ? (string) $result[0] : '';
     }
 
     $parent = 'parent::*';
@@ -585,6 +590,10 @@ class StatementFactory
   private function isTypeExisting(\SimpleXMLElement $statement, mixed $reference, mixed $type): bool
   {
     $elements = $statement->xpath($reference);
+    if (false === $elements) {
+      return false;
+    }
+
     foreach ($elements as $element) {
       if ((string) $element[self::TYPE_ATTRIBUTE] == $type) {
         return true;
@@ -622,8 +631,10 @@ class StatementFactory
     $lookName = (string) $statement[self::NAME_ATTRIBUTE];
     if (null == $lookName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
-      $look = $statement->xpath($reference)[0];
-      $lookName = (string) $look[self::NAME_ATTRIBUTE];
+      $result = $statement->xpath($reference);
+      if (is_array($result) && isset($result[0])) {
+        $lookName = (string) $result[0][self::NAME_ATTRIBUTE];
+      }
     }
 
     return new LookStatement($this, $statement, $spaces, $lookName);
@@ -643,9 +654,14 @@ class StatementFactory
 
     if (null != $reference) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
-      $userListReference = $statement->xpath($reference)[0];
+      $result = $statement->xpath($reference);
+      if (!is_array($result) || !isset($result[0])) {
+        return $name;
+      }
+
+      $userListReference = $result[0];
       foreach ($userListReference->children() as $child) {
-        if (self::NAME_ATTRIBUTE == $child->getName()) {
+        if (self::NAME_ATTRIBUTE === $child->getName()) {
           $name = (string) $child;
         }
       }

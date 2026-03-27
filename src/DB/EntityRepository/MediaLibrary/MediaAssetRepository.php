@@ -37,11 +37,11 @@ class MediaAssetRepository extends ServiceEntityRepository
   ) {
     parent::__construct($manager_registry, MediaAsset::class);
 
-    /** Directory where media asset files are stored */
-    $dir = (string) $parameter_bag->get('catrobat.media.dir');
+    /** @var string $dir Directory where media asset files are stored */
+    $dir = $parameter_bag->get('catrobat.media.dir');
 
-    /** Path where files in $dir can be accessed via web */
-    $path = (string) $parameter_bag->get('catrobat.media.path');
+    /** @var string $path Path where files in $dir can be accessed via web */
+    $path = $parameter_bag->get('catrobat.media.path');
     $thumb_dir = $dir.'thumbs/';
 
     if (!is_dir($thumb_dir)) {
@@ -171,7 +171,11 @@ class MediaAssetRepository extends ServiceEntityRepository
     $thumb_file = $this->thumb_dir.$id.'.'.$extension;
 
     try {
-      $imagick = new \Imagick(realpath($source_file));
+      $real_path = realpath($source_file);
+      if (false === $real_path) {
+        return;
+      }
+      $imagick = new \Imagick($real_path);
       $imagick->setImageFormat($extension);
       $imagick->thumbnailImage(300, 300, true);
       $imagick->writeImage($thumb_file);
@@ -223,13 +227,13 @@ class MediaAssetRepository extends ServiceEntityRepository
       ->setParameter('active', true)
     ;
 
-    if (null !== $category) {
+    if ($category instanceof MediaCategory) {
       $qb->andWhere('a.category = :category')
         ->setParameter('category', $category)
       ;
     }
 
-    if (null !== $fileType) {
+    if ($fileType instanceof MediaFileType) {
       $qb->andWhere('a.file_type = :file_type')
         ->setParameter('file_type', $fileType)
       ;

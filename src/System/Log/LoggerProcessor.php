@@ -57,7 +57,9 @@ class LoggerProcessor
     $ip = $request->getClientIp();
 
     if (str_contains((string) $ip, ',')) {
-      return substr((string) $ip, 0, strpos((string) $ip, ','));
+      $pos = strpos((string) $ip, ',');
+
+      return false !== $pos ? substr((string) $ip, 0, $pos) : $ip;
     }
 
     return $ip;

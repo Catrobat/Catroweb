@@ -6,5 +6,6 @@ namespace App\Admin\Statistics\Translation\Controller;
 
 class CommentMachineTranslationAdminController extends AbstractMachineTranslationAdminController
 {
+  #[\Override]
   protected string $type = self::TYPE_COMMENT;
 }

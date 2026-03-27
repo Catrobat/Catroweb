@@ -75,11 +75,11 @@ class TrustScoreCalculator
   private function computeBaseScore(User $user): float
   {
     $created_at = $user->getCreatedAt();
-    if (null === $created_at) {
+    if (!$created_at instanceof \DateTimeInterface) {
       return 0.0;
     }
 
-    $age_days = (new \DateTime())->diff($created_at)->days;
+    $age_days = new \DateTime()->diff($created_at)->days;
 
     return min($age_days / 365.0, self::MAX_BASE_SCORE);
   }

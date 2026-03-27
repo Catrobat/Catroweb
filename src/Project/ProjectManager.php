@@ -6,12 +6,10 @@ namespace App\Project;
 
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramDownloads;
-use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\Notifications\NewProgramNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\EntityRepository\Project\Special\ExampleRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
@@ -32,15 +30,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Elastica\Query\BoolQuery;
-use Elastica\Query\QueryString;
-use Elastica\Query\Range;
-use Elastica\Query\Terms;
-use Elastica\Util;
-use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -56,7 +47,6 @@ class ProjectManager
     protected EntityManagerInterface $entity_manager,
     protected ProgramRepository $project_repository,
     protected TagRepository $tag_repository,
-    protected ProgramLikeRepository $project_like_repository,
     protected FeaturedRepository $featured_repository,
     protected ExampleRepository $example_repository,
     protected EventDispatcherInterface $event_dispatcher,
@@ -65,8 +55,6 @@ class ProjectManager
     protected ExtensionRepository $extension_repository,
     protected CatrobatFileSanitizer $file_sanitizer,
     protected NotificationManager $notification_service,
-    #[Autowire(service: 'fos_elastica.finder.app_program')]
-    private readonly TransformedFinder $program_finder,
     private readonly ?UrlHelper $urlHelper,
     protected Security $security,
   ) {
@@ -107,8 +95,11 @@ class ProjectManager
       if (null === $user) {
         return false;
       }
+      if ($project->getUser() === $user) {
+        return true;
+      }
 
-      return $project->getUser() === $user || $this->security->isGranted('ROLE_ADMIN');
+      return $this->security->isGranted('ROLE_ADMIN');
     }
 
     // SHARE-49: Private projects are visible to everyone.
@@ -241,14 +232,14 @@ class ProjectManager
     $this->notifyFollower($project);
     $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$project->getId();
     if (is_dir($compressed_file_directory)) {
-      (new Filesystem())->remove($compressed_file_directory);
+      new Filesystem()->remove($compressed_file_directory);
     }
 
     if (is_dir($extracted_file->getPath())) {
-      (new Filesystem())->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$project->getId());
+      new Filesystem()->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$project->getId());
     }
 
-    (new Filesystem())->remove($extracted_file->getPath());
+    new Filesystem()->remove($extracted_file->getPath());
 
     // remove old "cached" zips - they will be re-generated on a project download
     if (!$this->file_repository->checkIfProjectZipFileExists($project->getId())) {
@@ -327,55 +318,6 @@ class ProjectManager
     }
 
     return $project;
-  }
-
-  /**
-   * @return ProgramLike[]
-   */
-  public function findUserLikes(string $project_id, string $user_id): array
-  {
-    return $this->project_like_repository->findBy(['program_id' => $project_id, 'user_id' => $user_id]);
-  }
-
-  public function findProjectLikeTypes(string $project_id): array
-  {
-    return $this->project_like_repository->likeTypesOfProject($project_id);
-  }
-
-  /**
-   * @throws NoResultException|\InvalidArgumentException
-   */
-  public function changeLike(Program $project, User $user, int $type, string $action): void
-  {
-    if (ProgramLike::ACTION_ADD === $action) {
-      $this->project_like_repository->addLike($project, $user, $type);
-    } elseif (ProgramLike::ACTION_REMOVE === $action) {
-      $this->project_like_repository->removeLike($project, $user, $type);
-    } else {
-      throw new \InvalidArgumentException('Invalid action: '.$action);
-    }
-  }
-
-  /**
-   * @throws NoResultException
-   */
-  public function areThereOtherLikeTypes(Program $project, User $user, int $type): bool
-  {
-    try {
-      return $this->project_like_repository->areThereOtherLikeTypes($project, $user, $type);
-    } catch (NonUniqueResultException) {
-      return false;
-    }
-  }
-
-  public function likeTypeCount(string $project_id, int $type): int
-  {
-    return $this->project_like_repository->likeTypeCount($project_id, $type);
-  }
-
-  public function totalLikeCount(string $project_id): int
-  {
-    return $this->project_like_repository->totalLikeCount($project_id);
   }
 
   public function addTags(Program $project, ExtractedCatrobatFile $extracted_file): void
@@ -593,80 +535,6 @@ class ProjectManager
     return $this->project_repository->countProjects($flavor, $max_version);
   }
 
-  public function search(string $query, ?int $limit = 20, int $offset = 0, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): array
-  {
-    $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
-
-    return $this->program_finder->find($project_query, $limit, ['from' => $offset]);
-  }
-
-  public function searchCount(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): int
-  {
-    $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
-
-    $paginator = $this->program_finder->findPaginated($project_query);
-
-    return $paginator->getNbResults();
-  }
-
-  public function increaseViews(Program $project): void
-  {
-    $this->entity_manager
-      ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.views = p.views + 1 WHERE p.id = :pid')
-      ->setParameter('pid', $project->getId())
-      ->execute()
-    ;
-  }
-
-  public function increaseDownloads(Program $project, ?User $user): void
-  {
-    $this->increaseNumberOfDownloads($project, $user, ProgramDownloads::TYPE_PROJECT);
-  }
-
-  public function increaseApkDownloads(Program $project, ?User $user): void
-  {
-    $this->increaseNumberOfDownloads($project, $user, ProgramDownloads::TYPE_APK);
-  }
-
-  protected function increaseNumberOfDownloads(Program $project, ?User $user, string $download_type): void
-  {
-    if (!is_null($user)) {
-      $download_repo = $this->entity_manager->getRepository(ProgramDownloads::class);
-      // No matter which type it should only count once!
-      $download = $download_repo->findOneBy(['program' => $project, 'user' => $user, 'type' => $download_type]);
-      // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
-      if (is_null($download)) {
-        if (ProgramDownloads::TYPE_PROJECT === $download_type) {
-          $this->entity_manager
-            ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.downloads = p.downloads + 1 WHERE p.id = :pid')
-            ->setParameter('pid', $project->getId())
-            ->execute()
-          ;
-        } elseif (ProgramDownloads::TYPE_APK === $download_type) {
-          $this->entity_manager
-            ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.apk_downloads = p.apk_downloads + 1 WHERE p.id = :pid')
-            ->setParameter('pid', $project->getId())
-            ->execute()
-          ;
-        }
-
-        $this->addDownloadEntry($project, $user, $download_type);
-      }
-    }
-  }
-
-  protected function addDownloadEntry(Program $project, ?User $user, string $download_type): void
-  {
-    $download = new ProgramDownloads();
-    $download->setUser($user);
-    $download->setProgram($project);
-    $download->setType($download_type);
-    $download->setDownloadedAt(new \DateTime('now'));
-
-    $this->entity_manager->persist($download);
-    $this->entity_manager->flush();
-  }
-
   public function save(Program $project, ?ProgramDownloads $downloads = null): void
   {
     $this->entity_manager->persist($project);
@@ -721,6 +589,9 @@ class ProjectManager
   {
     $tokenParts = explode('.', $token);
     $tokenPayload = base64_decode($tokenParts[1], true);
+    if (false === $tokenPayload) {
+      return [];
+    }
 
     return json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
   }
@@ -749,46 +620,6 @@ class ProjectManager
       'scratch' => $this->getScratchRemixesProjectsCount($flavor, $max_version),
       default => 0,
     };
-  }
-
-  private function projectSearchQuery(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): BoolQuery
-  {
-    $query = Util::escapeTerm($query);
-
-    $words = explode(' ', $query);
-    foreach ($words as &$word) {
-      $word .= '*';
-    }
-
-    unset($word);
-    $query = implode(' ', $words);
-
-    $query_string = new QueryString();
-    $query_string->setQuery($query);
-    $query_string->setFields(['id', 'name', 'description', 'getUsernameString', 'getTagsString', 'getExtensionsString']);
-    $query_string->setAnalyzeWildcard();
-    $query_string->setDefaultOperator('AND');
-
-    $bool_query = new BoolQuery();
-
-    $bool_query->addMust(new Terms('private', [false]));
-    $bool_query->addMust(new Terms('visible', [true]));
-
-    if (!$is_debug_request) {
-      $bool_query->addMust(new Terms('debug_build', [false]));
-    }
-
-    if ('' !== $max_version) {
-      $bool_query->addMust(new Range('language_version', ['lte' => $max_version]));
-    }
-
-    if (null !== $flavor && '' !== trim($flavor)) {
-      $bool_query->addMust(new Terms('flavor', [$flavor]));
-    }
-
-    $bool_query->addMust($query_string);
-
-    return $bool_query;
   }
 
   private function notifyFollower(Program $project): void

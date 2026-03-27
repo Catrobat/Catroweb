@@ -83,7 +83,7 @@ class Controller extends AbstractController
    */
   public function createBadRequestResponse(string $message = 'Bad Request.'): Response
   {
-    return new Response($message, 400);
+    return self::createStructuredErrorResponse(400, 'bad_request', $message);
   }
 
   /**
@@ -95,12 +95,55 @@ class Controller extends AbstractController
   public function createErrorResponse(HttpException $exception): Response
   {
     $statusCode = $exception->getStatusCode();
-    $headers = array_merge($exception->getHeaders(), ['Content-Type' => 'application/json']);
+    $type = self::httpStatusToErrorType($statusCode);
 
-    $json = $this->exceptionToArray($exception);
-    $json['statusCode'] = $statusCode;
+    return self::createStructuredErrorResponse($statusCode, $type, $exception->getMessage(), [], $exception->getHeaders());
+  }
 
-    return new Response(json_encode($json, 15), $statusCode, $headers);
+  /**
+   * Creates a standardized JSON error response.
+   *
+   * @param int                                          $code    HTTP status code
+   * @param string                                       $type    Machine-readable error type
+   * @param string                                       $message Human-readable error summary
+   * @param array<array{field: string, message: string}> $details Optional field-level error details
+   * @param array<string, string>                        $headers Optional additional headers
+   */
+  public static function createStructuredErrorResponse(int $code, string $type, string $message, array $details = [], array $headers = []): Response
+  {
+    $body = [
+      'error' => [
+        'code' => $code,
+        'type' => $type,
+        'message' => $message,
+      ],
+    ];
+
+    if ([] !== $details) {
+      $body['error']['details'] = $details;
+    }
+
+    $headers = array_merge($headers, ['Content-Type' => 'application/json']);
+
+    return new Response(json_encode($body, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES), $code, $headers);
+  }
+
+  /**
+   * Maps an HTTP status code to a machine-readable error type string.
+   */
+  public static function httpStatusToErrorType(int $statusCode): string
+  {
+    return match ($statusCode) {
+      400 => 'bad_request',
+      401 => 'unauthorized',
+      403 => 'forbidden',
+      404 => 'not_found',
+      406 => 'not_acceptable',
+      415 => 'unsupported_media_type',
+      422 => 'validation_error',
+      429 => 'too_many_requests',
+      default => 'internal_error',
+    };
   }
 
   /**
@@ -135,38 +178,26 @@ class Controller extends AbstractController
     $errors = $this->validator->validate($data, $asserts);
 
     if (count($errors) > 0) {
-      $errorsString = '';
+      $details = [];
       /** @var ConstraintViolation $violation */
       foreach ($errors as $violation) {
-        $errorsString .= $violation->getMessage()."\n";
+        $details[] = [
+          'field' => $violation->getPropertyPath() ?: 'unknown',
+          'message' => $violation->getMessage(),
+        ];
       }
 
-      return $this->createBadRequestResponse($errorsString);
+      $messages = array_map(static fn (array $d): string => $d['message'], $details);
+
+      return self::createStructuredErrorResponse(
+        400,
+        'bad_request',
+        implode(' ', $messages),
+        $details
+      );
     }
 
     return null;
-  }
-
-  /**
-   * Converts an exception to a serializable array.
-   */
-  private function exceptionToArray(?\Throwable $exception = null): ?array
-  {
-    if (null === $exception) {
-      return null;
-    }
-
-    if (!$this->container->get('kernel')->isDebug()) {
-      return [
-        'message' => $exception->getMessage(),
-      ];
-    }
-
-    return [
-      'message' => $exception->getMessage(),
-      'type' => get_class($exception),
-      'previous' => $this->exceptionToArray($exception->getPrevious()),
-    ];
   }
 
   /**
@@ -178,7 +209,7 @@ class Controller extends AbstractController
     $accept = preg_split('/[\s,]+/', $accept);
 
     // Remove q-factor weighting. E.g. "application/json;q=0.8" becomes "application/json"
-    $accept = array_map(function ($type) {return explode(';', $type)[0]; }, $accept);
+    $accept = array_map(fn ($type) => explode(';', (string) $type)[0], $accept);
 
     if (in_array('*/*', $accept, true) || in_array('application/*', $accept, true)) {
       // Prefer JSON if the client has no preference
@@ -212,7 +243,7 @@ class Controller extends AbstractController
    */
   public static function isContentTypeAllowed(Request $request, array $consumes = []): bool
   {
-    if (!empty($consumes) && '*/*' !== $consumes[0]) {
+    if ([] !== $consumes && '*/*' !== $consumes[0]) {
       $currentFormat = $request->getContentTypeFormat();
       foreach ($consumes as $mimeType) {
         // canonize mime type

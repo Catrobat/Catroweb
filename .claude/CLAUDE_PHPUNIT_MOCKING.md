@@ -90,26 +90,29 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class TranslateClientTest extends TestCase
 {
-  private Stub|TranslateClient $client;
+  private Stub|TranslationServiceClient $client;
   private GoogleTranslateApi $api;
 
   protected function setUp(): void
   {
     // Stub by default - many tests don't need to verify behavior
-    $this->client = $this->createStub(TranslateClient::class);
-    $this->api = new GoogleTranslateApi($this->client, $this->createStub(LoggerInterface::class), 5);
+    $this->client = $this->createStub(TranslationServiceClient::class);
+    $this->api = new GoogleTranslateApi($this->client, $this->createStub(LoggerInterface::class), 5, 'test-project');
   }
 
   public function testTranslatesText(): void
   {
     // For this test, we need to verify the client is called correctly
-    $client = $this->createMock(TranslateClient::class);
+    $client = $this->createMock(TranslationServiceClient::class);
+    $translation = $this->createStub(Translation::class);
+    $translation->method('getTranslatedText')->willReturn('bonjour');
+    $response = $this->createStub(TranslateTextResponse::class);
+    $response->method('getTranslations')->willReturn([$translation]);
     $client->expects($this->once())
-      ->method('translate')
-      ->with('hello', ['target' => 'fr'])
-      ->willReturn(['text' => 'bonjour']);
+      ->method('translateText')
+      ->willReturn($response);
 
-    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5);
+    $api = new GoogleTranslateApi($client, $this->createStub(LoggerInterface::class), 5, 'test-project');
     $result = $api->translate('hello', null, 'fr');
 
     $this->assertEquals('bonjour', $result->translation);
@@ -290,12 +293,12 @@ public function testAddTranslation(): void
 **Before:**
 
 ```php
-private MockObject|TranslateClient $client;
+private MockObject|TranslationServiceClient $client;
 
 protected function setUp(): void
 {
-  $this->client = $this->createMock(TranslateClient::class);
-  $this->api = new GoogleTranslateApi($this->client, ...);
+  $this->client = $this->createMock(TranslationServiceClient::class);
+  $this->api = new GoogleTranslateApi($this->client, ..., 'test-project');
 }
 
 #[AllowMockObjectsWithoutExpectations]
@@ -309,12 +312,12 @@ public function testGetPreference(): void
 **After:**
 
 ```php
-private Stub|TranslateClient $client;
+private Stub|TranslationServiceClient $client;
 
 protected function setUp(): void
 {
-  $this->client = $this->createStub(TranslateClient::class);
-  $this->api = new GoogleTranslateApi($this->client, ...);
+  $this->client = $this->createStub(TranslationServiceClient::class);
+  $this->api = new GoogleTranslateApi($this->client, ..., 'test-project');
 }
 
 public function testGetPreference(): void
@@ -326,9 +329,13 @@ public function testGetPreference(): void
 public function testTranslate(): void
 {
   // Create a mock when we need to verify behavior
-  $client = $this->createMock(TranslateClient::class);
-  $client->expects($this->once())->method('translate')->willReturn(['text' => 'bonjour']);
-  $api = new GoogleTranslateApi($client, ...);
+  $client = $this->createMock(TranslationServiceClient::class);
+  $response = $this->createStub(TranslateTextResponse::class);
+  $translation = $this->createStub(Translation::class);
+  $translation->method('getTranslatedText')->willReturn('bonjour');
+  $response->method('getTranslations')->willReturn([$translation]);
+  $client->expects($this->once())->method('translateText')->willReturn($response);
+  $api = new GoogleTranslateApi($client, ..., 'test-project');
 
   $result = $api->translate('hello', null, 'fr');
   $this->assertEquals('bonjour', $result->translation);

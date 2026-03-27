@@ -16,21 +16,25 @@ trait ProjectPreUpdateTrait
    */
   public function preUpdate(object $object): void
   {
-    /** @var Program $object */
+    /** @var Program $program */
+    $program = $object;
     /** @var ModelManager $model_manager */
     $model_manager = $this->getModelManager();
     $old_project = $model_manager->getEntityManager($this->getClass())
-      ->getUnitOfWork()->getOriginalEntityData($object)
+      ->getUnitOfWork()->getOriginalEntityData($program)
     ;
 
-    if (!$old_project['approved'] && $object->getApproved()) {
-      /** @var User $user */
-      $user = $this->security_token_storage->getToken()->getUser();
-      $object->setApprovedByUser($user);
-      $this->getModelManager()->update($object);
-    } elseif ($old_project['approved'] && !$object->getApproved()) {
-      $object->setApprovedByUser(null);
-      $this->getModelManager()->update($object);
+    if (!$old_project['approved'] && $program->getApproved()) {
+      $token = $this->security_token_storage->getToken();
+      $user = $token?->getUser();
+      if ($user instanceof User) {
+        $program->setApprovedByUser($user);
+      }
+
+      $this->getModelManager()->update($program);
+    } elseif ($old_project['approved'] && !$program->getApproved()) {
+      $program->setApprovedByUser(null);
+      $this->getModelManager()->update($program);
     }
   }
 }

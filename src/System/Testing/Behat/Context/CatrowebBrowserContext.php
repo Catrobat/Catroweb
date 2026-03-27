@@ -12,6 +12,7 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\Project\Apk\ApkRepository;
 use App\Project\Apk\JenkinsDispatcher;
+use App\System\Testing\FakeJenkinsDispatcher;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -309,11 +310,11 @@ class CatrowebBrowserContext extends BrowserContext
     // Construct the preview URL
     $previewUrl = sprintf(
       'preview?username=%s&subject=%s&title=%s&message=%s&template=%s',
-      rawurlencode((string) $username),
-      rawurlencode((string) $subject),
-      rawurlencode((string) $title),
-      rawurlencode((string) $message),
-      rawurlencode((string) $template)
+      rawurlencode(\is_string($username) ? $username : ''),
+      rawurlencode(\is_string($subject) ? $subject : ''),
+      rawurlencode(\is_string($title) ? $title : ''),
+      rawurlencode(\is_string($message) ? $message : ''),
+      rawurlencode(\is_string($template) ? $template : '')
     );
 
     // Navigate to the preview URL in the current window
@@ -742,7 +743,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function attachAvatarToField(string $field, string $path): void
   {
     $field = $this->fixStepArgument($field);
-    $this->getSession()->getPage()->attachFileToField($field, realpath(self::AVATAR_DIR.$path));
+    $this->getSession()->getPage()->attachFileToField($field, realpath(self::AVATAR_DIR.$path) ?: self::AVATAR_DIR.$path);
   }
 
   /**
@@ -760,13 +761,13 @@ class CatrowebBrowserContext extends BrowserContext
 
     switch ($name) {
       case 'logo.png':
-        $logoUrl = 'data:image/png;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'logo.png'));
+        $logoUrl = 'data:image/png;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'logo.png') ?: '');
         $isSame = ($source === $logoUrl);
         'not' === $not ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
         break;
 
       case 'fail.tif':
-        $failUrl = 'data:image/tiff;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'fail.tif'));
+        $failUrl = 'data:image/tiff;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'fail.tif') ?: '');
         $isSame = ($source === $failUrl);
         'not' === $not ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
         break;
@@ -1052,6 +1053,7 @@ class CatrowebBrowserContext extends BrowserContext
     }
 
     $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
+    \assert($dispatcher instanceof FakeJenkinsDispatcher);
     $parameters = $dispatcher->getLastParameters();
 
     foreach ($expected_parameters as $i => $expected_parameter) {
@@ -1110,8 +1112,10 @@ class CatrowebBrowserContext extends BrowserContext
         break;
       case 'ready':
         $project->setApkStatus(Program::APK_READY);
-        /* @var $apk_repository ApkRepository */
         $apk_repository = $this->getSymfonyService(ApkRepository::class);
+        if (!$apk_repository instanceof ApkRepository) {
+          throw new \LogicException('ApkRepository service not found');
+        }
         $apk_repository->save(new File(strval($this->getTempCopy($this->FIXTURES_DIR.'/test.catrobat'))), $project->getId());
         break;
       default:
@@ -1129,6 +1133,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function noBuildRequestWillBeSentToJenkins(): void
   {
     $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
+    \assert($dispatcher instanceof FakeJenkinsDispatcher);
     $parameters = $dispatcher->getLastParameters();
     Assert::assertNull($parameters);
   }
@@ -1684,9 +1689,11 @@ class CatrowebBrowserContext extends BrowserContext
     }
 
     $file_path = fopen($full_filename, 'w'); // open in write mode.
-    fseek($file_path, (int) $size - 1, SEEK_CUR); // seek to SIZE-1
-    fwrite($file_path, 'a'); // write a dummy char at SIZE position
-    fclose($file_path); // close the file.
+    if (false !== $file_path) {
+      fseek($file_path, (int) $size - 1, SEEK_CUR); // seek to SIZE-1
+      fwrite($file_path, 'a'); // write a dummy char at SIZE position
+      fclose($file_path); // close the file.
+    }
   }
 
   /**

@@ -70,7 +70,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   public function setParent(Program $parent): ProgramRemixBackwardRelation
   {
     $this->parent = $parent;
-    $this->parent_id = $parent->getId();
+    $this->parent_id = $parent->getId() ?? throw new \LogicException('Parent program must have an ID.');
 
     return $this;
   }
@@ -88,7 +88,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   public function setChild(Program $child): ProgramRemixBackwardRelation
   {
     $this->child = $child;
-    $this->child_id = $child->getId();
+    $this->child_id = $child->getId() ?? throw new \LogicException('Child program must have an ID.');
 
     return $this;
   }

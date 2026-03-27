@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ElapsedTimeStringFormatter::class)]
 class ElapsedTimeStringFormatterTest extends TestCase
 {
-  private ElapsedTimeStringFormatter|MockObject $object;
+  private MockObject&ElapsedTimeStringFormatter $object;
 
   /**
    * @throws \Exception
@@ -83,6 +83,7 @@ class ElapsedTimeStringFormatterTest extends TestCase
     yield ['years', $test_time - 31_557_600 * 100];
   }
 
+  /** @phpstan-return non-empty-string */
   protected function getExpectedFormatterMethod(string $expected): string
   {
     return match ($expected) {
@@ -91,7 +92,7 @@ class ElapsedTimeStringFormatterTest extends TestCase
       'days' => 'getFormattedInDays',
       'months' => 'getFormattedInMonths',
       'years' => 'getFormattedInYears',
-      default => '',
+      default => throw new \InvalidArgumentException("Unexpected value: {$expected}"),
     };
   }
 }

@@ -28,15 +28,24 @@ class LogsController extends CRUDController
     }
 
     if ($request->query->get('file')) {
-      $file = (string) $request->query->get('file');
+      $file = basename((string) $request->query->get('file'));
     }
 
     $searchParam = [];
     $searchParam['line_count'] = $line_count;
     $allFiles = $this->getAllFilesInDirByPattern(self::LOG_DIR, self::LOG_PATTERN);
-    if (empty($file) && !empty($allFiles)) {
+    if (empty($file) && [] !== $allFiles) {
       $file = $allFiles[0];
     }
+
+    if (!empty($file)) {
+      $realLogDir = realpath(self::LOG_DIR);
+      $realFilePath = realpath(self::LOG_DIR.$file);
+      if (false === $realLogDir || false === $realFilePath || !str_starts_with($realFilePath, $realLogDir.DIRECTORY_SEPARATOR)) {
+        $file = null;
+      }
+    }
+
     $content = empty($file) ? null : $this->getLogFileContent($file, self::LOG_DIR, $searchParam);
 
     return $this->render('Admin/SystemManagement/Logs.html.twig', [
@@ -66,6 +75,10 @@ class LogsController extends CRUDController
     }
 
     $file = fopen($filePath, 'r');
+    if (false === $file) {
+      return [];
+    }
+
     $content = [];
     $currentLogEntry = null;
     $index = 0;
@@ -129,21 +142,19 @@ class LogsController extends CRUDController
         $isNewEntry = true;
       }
 
-      if ($isNewEntry && $parsedEntry) {
+      if ($isNewEntry) {
         // Save previous log entry if exists
         if (null !== $currentLogEntry) {
           $content[] = $currentLogEntry;
           ++$index;
         }
         $currentLogEntry = $parsedEntry;
-      } else {
+      } elseif (null !== $currentLogEntry) {
         // This is a continuation line (probably stack trace or multi-line message)
-        if (null !== $currentLogEntry) {
-          if (!empty($currentLogEntry['stacktrace'])) {
-            $currentLogEntry['stacktrace'] .= "\n";
-          }
-          $currentLogEntry['stacktrace'] .= $trimmedLine;
+        if ('' !== $currentLogEntry['stacktrace'] && '0' !== $currentLogEntry['stacktrace']) {
+          $currentLogEntry['stacktrace'] .= "\n";
         }
+        $currentLogEntry['stacktrace'] .= $trimmedLine;
       }
     }
 
@@ -197,7 +208,7 @@ class LogsController extends CRUDController
       }
 
       // Store full JSON as extra
-      if (!empty($allJsonData)) {
+      if ([] !== $allJsonData) {
         $result['extra'] = json_encode($allJsonData, JSON_PRETTY_PRINT);
       }
     } else {
@@ -217,7 +228,7 @@ class LogsController extends CRUDController
       'extra' => '',
     ];
 
-    if (empty($metadata)) {
+    if ('' === $metadata || '0' === $metadata) {
       return $result;
     }
 

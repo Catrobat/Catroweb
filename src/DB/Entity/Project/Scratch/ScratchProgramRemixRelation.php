@@ -60,7 +60,7 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
   public function setCatrobatChild(Program $catrobat_child): ScratchProgramRemixRelation
   {
     $this->catrobat_child = $catrobat_child;
-    $this->catrobat_child_id = $catrobat_child->getId();
+    $this->catrobat_child_id = $catrobat_child->getId() ?? throw new \LogicException('Catrobat child program must have an ID.');
 
     return $this;
   }

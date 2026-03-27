@@ -67,7 +67,7 @@ class ReactionsApiProcessor extends AbstractApiProcessor
     $project_owner = $project->getUser();
 
     // Don't notify if no owner or if user owns the project
-    if (null === $project_owner || $project_owner === $user) {
+    if (!$project_owner instanceof User || $project_owner === $user) {
       return;
     }
 

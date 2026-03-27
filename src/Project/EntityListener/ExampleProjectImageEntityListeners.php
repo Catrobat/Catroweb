@@ -30,7 +30,7 @@ readonly class ExampleProjectImageEntityListeners
   public function prePersist(ExampleProgram $example_project, PrePersistEventArgs $args): void
   {
     $file = $example_project->file;
-    if (null === $file) {
+    if (!$file instanceof \Symfony\Component\HttpFoundation\File\File) {
       return;
     }
 
@@ -43,7 +43,7 @@ readonly class ExampleProjectImageEntityListeners
   public function postPersist(ExampleProgram $example_project, PostPersistEventArgs $args): void
   {
     $file = $example_project->file;
-    if (null === $file) {
+    if (!$file instanceof \Symfony\Component\HttpFoundation\File\File) {
       return;
     }
 
@@ -53,7 +53,7 @@ readonly class ExampleProjectImageEntityListeners
   public function preUpdate(ExampleProgram $example_project, PreUpdateEventArgs $args): void
   {
     $file = $example_project->file;
-    if (null === $file) {
+    if (!$file instanceof \Symfony\Component\HttpFoundation\File\File) {
       $example_project->setImageType($example_project->old_image_type);
 
       return;
@@ -68,7 +68,7 @@ readonly class ExampleProjectImageEntityListeners
   public function postUpdate(ExampleProgram $example_project, PostUpdateEventArgs $args): void
   {
     $file = $example_project->file;
-    if (null === $file) {
+    if (!$file instanceof \Symfony\Component\HttpFoundation\File\File) {
       return;
     }
 

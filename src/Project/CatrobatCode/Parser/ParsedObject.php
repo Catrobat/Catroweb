@@ -83,7 +83,10 @@ class ParsedObject
   private function dereference(\SimpleXMLElement $xml_properties): \SimpleXMLElement
   {
     if (null != $xml_properties[Constants::REFERENCE_ATTRIBUTE]) {
-      return $xml_properties->xpath($xml_properties[Constants::REFERENCE_ATTRIBUTE]->__toString())[0];
+      $result = $xml_properties->xpath($xml_properties[Constants::REFERENCE_ATTRIBUTE]->__toString());
+      if (is_array($result) && isset($result[0])) {
+        return $result[0];
+      }
     }
 
     return $xml_properties;

@@ -52,7 +52,7 @@ class CreateCommentCommand extends Command
 
     $program = $this->project_manager->findOneByName($program_name);
 
-    if (null === $user || null === $program) {
+    if (null === $user || !$program instanceof Program) {
       return 1;
     }
 
@@ -73,15 +73,20 @@ class CreateCommentCommand extends Command
   private function postComment(User $user, Program $program, string $message): void
   {
     $comment = new UserComment();
-    $comment->setUsername($user->getUsername());
+    $comment->setUsername($user->getUsername() ?? '');
     $comment->setUser($user);
     $comment->setText($message);
     $comment->setProgram($program);
-    $comment->setUploadDate(date_create());
+    $comment->setUploadDate(new \DateTime());
 
     $this->em->persist($comment);
 
-    $notification = new CommentNotification($program->getUser(), $comment);
+    $program_user = $program->getUser();
+    if (null === $program_user) {
+      throw new \RuntimeException('Program has no user');
+    }
+
+    $notification = new CommentNotification($program_user, $comment);
     $notification->setComment($comment);
     $notification->setSeen(random_int(0, 2) > 1);
 

@@ -19,6 +19,14 @@ class FeaturedImageConstraintValidator extends ConstraintValidator
     $featured_constraint = $constraint;
 
     $image_info = getimagesize($value);
+    if (false === $image_info) {
+      $this->context->buildViolation('Unable to read image dimensions.')
+        ->addViolation()
+      ;
+
+      return;
+    }
+
     if ($image_info[0] != $featured_constraint->required_width || $image_info[1] != $featured_constraint->required_height) {
       $this->context->buildViolation($constraint->message)
         ->setParameter('%width%', (string) $constraint->required_width)

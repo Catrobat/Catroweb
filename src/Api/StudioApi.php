@@ -28,7 +28,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   public function studioIdPost(string $id, string $accept_language, ?string $name, ?string $description, ?bool $is_public, ?bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
-    if (null === $studio) {
+    if (!$studio instanceof \App\DB\Entity\Studio\Studio) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -36,7 +36,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
-    if (null === $studioUser || !$studioUser->isAdmin()) {
+    if (!$studioUser instanceof \App\DB\Entity\Studio\StudioUser || !$studioUser->isAdmin()) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;
@@ -102,10 +102,16 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
       return $error_response;
     }
 
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
     $studio = $this->facade->getProcessor()->create(
       $user,
       $name,
-      $description,
+      $description ?? '',
       $is_public,
       $enable_comments,
       $image_file
@@ -124,7 +130,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   public function studioIdDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
-    if (null === $studio) {
+    if (!$studio instanceof \App\DB\Entity\Studio\Studio) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;
@@ -132,7 +138,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
-    if (null === $studioUser || !$studioUser->isAdmin()) {
+    if (!$studioUser instanceof \App\DB\Entity\Studio\StudioUser || !$studioUser->isAdmin()) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return;
@@ -146,7 +152,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   public function studioIdGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
-    if (null === $studio) {
+    if (!$studio instanceof \App\DB\Entity\Studio\Studio) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -154,7 +160,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
-    if (!$studio->isIsPublic() && null === $studioUser) {
+    if (!$studio->isIsPublic() && !$studioUser instanceof \App\DB\Entity\Studio\StudioUser) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;

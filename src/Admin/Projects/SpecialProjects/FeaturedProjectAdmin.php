@@ -49,7 +49,12 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
   public function getFeaturedImageUrl(FeaturedProgram $object): string
   {
-    return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType(), true);
+    $id = $object->getId();
+    if (null === $id) {
+      return '';
+    }
+
+    return '../../'.$this->featured_image_repository->getWebPath($id, $object->getImageType(), true);
   }
 
   #[\Override]
@@ -57,9 +62,13 @@ class FeaturedProjectAdmin extends AbstractAdmin
   {
     /** @var FeaturedProgram $featured_project */
     $featured_project = $object;
+    $program = $featured_project->getProgram();
 
-    return new Metadata($featured_project->getProgram()->getName(), $featured_project->getProgram()->getDescription(),
-      $this->getFeaturedImageUrl($featured_project));
+    return new Metadata(
+      $program?->getName() ?? '',
+      $program?->getDescription() ?? '',
+      $this->getFeaturedImageUrl($featured_project),
+    );
   }
 
   #[\Override]
@@ -79,10 +88,10 @@ class FeaturedProjectAdmin extends AbstractAdmin
     if ($this->getForm()->get('Use_Url')->getData()) {
       // Check if this is a project URL (contains /project/) - extract project ID
       if (null !== $id && str_contains((string) $id, '/project/')) {
-        $projectId = preg_replace('$(.*)/project/$', '', (string) $id);
+        $projectId = preg_replace('$(.*)/project/$', '', (string) $id) ?? '';
         $project = $this->project_manager->find($projectId);
 
-        if (null !== $project) {
+        if ($project instanceof Program) {
           $object->setProgram($project);
           if (null !== $object->getURL()) {
             $object->setURL(null);
@@ -103,9 +112,15 @@ class FeaturedProjectAdmin extends AbstractAdmin
         $id = preg_replace('$(.*)/project/$', '', (string) $id);
       }
 
+      if (null === $id) {
+        $this->getForm()->addError(new FormError('Please enter a valid project ID.'));
+
+        return;
+      }
+
       $project = $this->project_manager->find($id);
 
-      if (null !== $project) {
+      if ($project instanceof Program) {
         $object->setProgram($project);
         if (null !== $object->getURL()) {
           $object->setURL(null);
@@ -193,7 +208,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
         'sortable' => false,
       ])
       ->add('Featured Image', null, [
-        'accessor' => fn ($subject): string => $this->getFeaturedImageUrl($subject),
+        'accessor' => $this->getFeaturedImageUrl(...),
         'template' => 'Admin/Projects/FeaturedImage.html.twig',
       ])
       ->add('program', EntityType::class, [

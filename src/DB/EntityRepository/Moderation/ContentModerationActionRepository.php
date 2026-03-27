@@ -37,7 +37,7 @@ class ContentModerationActionRepository extends ServiceEntityRepository
    */
   public function countRecentAutoHidesForUser(string $user_id, int $days): int
   {
-    $since = (new \DateTime())->modify("-{$days} days");
+    $since = new \DateTime()->modify("-{$days} days");
 
     // Count auto-hide actions on projects owned by this user
     $project_count = (int) $this->getEntityManager()->createQueryBuilder()

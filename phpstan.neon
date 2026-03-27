@@ -6,7 +6,7 @@ includes:
 parameters:
   bootstrapFiles:
     - config/bootstrap.php
-  level: 6 # 0 is the loosest lvl and 9 is the strictest (https://phpstan.org/user-guide/rule-levels)
+  level: 7 # 0 is the loosest lvl and 9 is the strictest (https://phpstan.org/user-guide/rule-levels)
   paths:
     - . # Analyze all directories in the project
   excludePaths:

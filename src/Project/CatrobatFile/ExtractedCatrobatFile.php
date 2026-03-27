@@ -48,7 +48,7 @@ class ExtractedCatrobatFile
 
   public function getName(): string
   {
-    return (string) $this->project_xml_properties->header->programName;
+    return (string) $this->getHeader()->programName;
   }
 
   /**
@@ -56,26 +56,27 @@ class ExtractedCatrobatFile
    */
   public function setName(string $name): void
   {
-    $this->project_xml_properties->header->programName = $name;
+    $this->getHeader()->programName = $name;
   }
 
   public function isDebugBuild(): bool
   {
-    if (!isset($this->project_xml_properties->header->applicationBuildType)) {
+    $header = $this->getHeader();
+    if (!property_exists($header, 'applicationBuildType') || null === $header->applicationBuildType) {
       return false; // old project do not have this field, + they should be release projects
     }
 
-    return 'debug' === (string) $this->project_xml_properties->header->applicationBuildType;
+    return 'debug' === (string) $header->applicationBuildType;
   }
 
   public function getLanguageVersion(): string
   {
-    return (string) $this->project_xml_properties->header->catrobatLanguageVersion;
+    return (string) $this->getHeader()->catrobatLanguageVersion;
   }
 
   public function getDescription(): string
   {
-    return (string) $this->project_xml_properties->header->description;
+    return (string) $this->getHeader()->description;
   }
 
   /**
@@ -83,12 +84,12 @@ class ExtractedCatrobatFile
    */
   public function setDescription(string $description): void
   {
-    $this->project_xml_properties->header->description = $description;
+    $this->getHeader()->description = $description;
   }
 
   public function getNotesAndCredits(): string
   {
-    return (string) $this->project_xml_properties->header->notesAndCredits;
+    return (string) $this->getHeader()->notesAndCredits;
   }
 
   /**
@@ -96,7 +97,7 @@ class ExtractedCatrobatFile
    */
   public function setNotesAndCredits(string $notesAndCredits): void
   {
-    $this->project_xml_properties->header->notesAndCredits = $notesAndCredits;
+    $this->getHeader()->notesAndCredits = $notesAndCredits;
   }
 
   public function getDirHash(): ?string
@@ -106,9 +107,9 @@ class ExtractedCatrobatFile
 
   public function getTags(): array
   {
-    $tags = (string) $this->project_xml_properties->header->tags;
-    if (strlen($tags) > 0) {
-      return explode(',', (string) $this->project_xml_properties->header->tags);
+    $tags = (string) $this->getHeader()->tags;
+    if ('' !== $tags) {
+      return explode(',', $tags);
     }
 
     return [];
@@ -197,22 +198,28 @@ class ExtractedCatrobatFile
       $screenshots = iterator_to_array($finder->in($this->path)->files()->name('screenshot.png'));
     }
 
-    return $finder->hasResults() ? reset($screenshots)->getPathname() : null;
+    if (!$finder->hasResults()) {
+      return null;
+    }
+
+    $first = reset($screenshots);
+
+    return false !== $first ? $first->getPathname() : null;
   }
 
   public function getApplicationVersion(): string
   {
-    return (string) $this->project_xml_properties->header->applicationVersion;
+    return (string) $this->getHeader()->applicationVersion;
   }
 
   public function getRemixUrlsString(): string
   {
-    return trim((string) $this->project_xml_properties->header->url);
+    return trim((string) $this->getHeader()->url);
   }
 
   public function getRemixMigrationUrlsString(): string
   {
-    return trim((string) $this->project_xml_properties->header->remixOf);
+    return trim((string) $this->getHeader()->remixOf);
   }
 
   public function getPath(): string
@@ -241,6 +248,9 @@ class ExtractedCatrobatFile
     }
 
     $xml_string = file_get_contents($this->path.'code.xml');
+    if (false === $xml_string) {
+      return;
+    }
 
     $xml_string = preg_replace('#<receivedMessage>(.*)&lt;-&gt;ANYTHING</receivedMessage>#',
       '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>', $xml_string);
@@ -267,16 +277,16 @@ class ExtractedCatrobatFile
       $current_character = $remixes_string[$index];
 
       if (RemixUrlIndicator::PREFIX_INDICATOR === $current_character) {
-        if (RemixUrlParsingState::STARTING == $state) {
+        if (RemixUrlParsingState::STARTING === $state) {
           $state = RemixUrlParsingState::BETWEEN;
-        } elseif (RemixUrlParsingState::TOKEN == $state) {
+        } elseif (RemixUrlParsingState::TOKEN === $state) {
           $temp = '';
           $state = RemixUrlParsingState::BETWEEN;
         }
       } elseif (RemixUrlIndicator::SUFFIX_INDICATOR === $current_character) {
-        if (RemixUrlParsingState::TOKEN == $state) {
+        if (RemixUrlParsingState::TOKEN === $state) {
           $extracted_url = trim($temp);
-          if (!str_contains($extracted_url, RemixUrlIndicator::SEPARATOR) && strlen($extracted_url) > 0) {
+          if (!str_contains($extracted_url, RemixUrlIndicator::SEPARATOR) && '' !== $extracted_url) {
             $extracted_remixes[] = new RemixData($extracted_url);
           }
 
@@ -289,7 +299,7 @@ class ExtractedCatrobatFile
       }
     }
 
-    if (0 == count($extracted_remixes) && strlen($remixes_string) > 0
+    if (0 === count($extracted_remixes) && '' !== $remixes_string
       && !str_contains($remixes_string, RemixUrlIndicator::SEPARATOR)) {
       $extracted_remixes[] = new RemixData($remixes_string);
     }
@@ -351,7 +361,11 @@ class ExtractedCatrobatFile
   public function getCodeObjects(): array
   {
     $objects = [];
-    $objectList = $this->project_xml_properties->objectList->children();
+    $objectList = $this->project_xml_properties->objectList?->children();
+    if (null === $objectList) {
+      return [];
+    }
+
     foreach ($objectList as $object) {
       $newObject = $this->getObject($object);
       if (null != $newObject) {
@@ -364,7 +378,19 @@ class ExtractedCatrobatFile
 
   public function hasScenes(): bool
   {
-    return 0 !== count($this->project_xml_properties->xpath('//scenes'));
+    $scenes = $this->project_xml_properties->xpath('//scenes');
+
+    return [] !== $scenes;
+  }
+
+  private function getHeader(): \SimpleXMLElement
+  {
+    $header = $this->project_xml_properties->header;
+    if (null === $header) {
+      throw new InvalidCatrobatFileException('errors.xml.missing.header', 509);
+    }
+
+    return $header;
   }
 
   private function getObject(\SimpleXMLElement $objectTree): ?CodeObject

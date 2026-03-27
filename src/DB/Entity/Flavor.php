@@ -50,10 +50,6 @@ class Flavor implements \Stringable
   #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
   protected ?string $name = null;
 
-  public function __construct()
-  {
-  }
-
   #[\Override]
   public function __toString(): string
   {

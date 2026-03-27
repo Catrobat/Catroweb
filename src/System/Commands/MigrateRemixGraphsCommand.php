@@ -53,13 +53,13 @@ class MigrateRemixGraphsCommand extends Command
 
   public function signalHandler(int $signal_number): void
   {
-    $this->output->writeln('[SignalHandler] Called Signal Handler');
+    $this->output?->writeln('[SignalHandler] Called Signal Handler');
     match ($signal_number) {
-      SIGTERM => $this->output->writeln('[SignalHandler] User aborted the process'),
-      SIGHUP => $this->output->writeln('[SignalHandler] SigHup detected'),
-      SIGINT => $this->output->writeln('[SignalHandler] SigInt detected'),
-      SIGUSR1 => $this->output->writeln('[SignalHandler] SigUsr1 detected'),
-      default => $this->output->writeln('[SignalHandler] Signal '.$signal_number.' detected'),
+      SIGTERM => $this->output?->writeln('[SignalHandler] User aborted the process'),
+      SIGHUP => $this->output?->writeln('[SignalHandler] SigHup detected'),
+      SIGINT => $this->output?->writeln('[SignalHandler] SigInt detected'),
+      SIGUSR1 => $this->output?->writeln('[SignalHandler] SigUsr1 detected'),
+      default => $this->output?->writeln('[SignalHandler] Signal '.$signal_number.' detected'),
     };
 
     $this->migration_file_lock->unlock();
@@ -93,6 +93,7 @@ class MigrateRemixGraphsCommand extends Command
     pcntl_signal(SIGINT, $this->signalHandler(...));
     pcntl_signal(SIGUSR1, $this->signalHandler(...));
 
+    /** @var string $directory */
     $directory = $input->getArgument('directory');
     $is_debug_import_missing_projects = $input->getOption('debug-import-missing-programs');
 
@@ -102,9 +103,10 @@ class MigrateRemixGraphsCommand extends Command
       return 2;
     }
 
-    $directory = (str_ends_with((string) $directory, '/')) ? $directory : $directory.'/';
+    $directory = str_ends_with($directory, '/') ? $directory : $directory.'/';
 
     if ($is_debug_import_missing_projects) {
+      /** @var string $username */
       $username = $input->getArgument('user');
       $this->debugImportMissingProjects($output, $directory, $username);
     }
@@ -129,6 +131,10 @@ class MigrateRemixGraphsCommand extends Command
     // ==============================================================================================================
     // (1) lock
     // ==============================================================================================================
+    if (null === $this->migration_file_lock) {
+      throw new \RuntimeException('Migration file lock not initialized');
+    }
+
     $this->migration_file_lock->lock();
 
     // ==============================================================================================================
@@ -152,10 +158,15 @@ class MigrateRemixGraphsCommand extends Command
     $remix_data_map = [];
 
     while (null != ($project_id = $this->project_manager->findNext($previous_project_id))) {
+      $project_id = (string) $project_id;
       $project_file_path = $directory.$project_id.'.catrobat';
 
       $project = $this->project_manager->find($project_id);
-      assert(null != $project);
+      if (null === $project) {
+        $previous_project_id = $project_id;
+        continue;
+      }
+
       $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $truncated_project_name, $output, $progress_bar);
@@ -195,6 +206,10 @@ class MigrateRemixGraphsCommand extends Command
 
     foreach ($all_project_ids as $project_id) {
       $project = $this->project_manager->find($project_id);
+      if (null === $project) {
+        continue;
+      }
+
       $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $progress_bar->setMessage('Migrating remaining remixes of "'.$truncated_project_name.'" (#'.$project_id.')');
@@ -225,8 +240,8 @@ class MigrateRemixGraphsCommand extends Command
     $skipped = 0;
 
     while (null != ($unmigrated_project = $this->project_manager->findOneByRemixMigratedAt(null))) {
+      $project_id = (string) $unmigrated_project->getId();
       $project_file_path = $directory.$project_id.'/';
-      $project_id = $unmigrated_project->getId();
       $truncated_project_name = mb_strimwidth($unmigrated_project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $unmigrated_project->getName(), $output, $progress_bar);
@@ -267,7 +282,7 @@ class MigrateRemixGraphsCommand extends Command
     $this->remix_manager->markAllUnseenRemixRelationsAsSeen($seen_at);
   }
 
-  private function extractRemixData(mixed $project_file_path, mixed $project_id, mixed $project_name, OutputInterface $output, ProgressBar $progress_bar): array
+  private function extractRemixData(string $project_file_path, string $project_id, string $project_name, OutputInterface $output, ProgressBar $progress_bar): array
   {
     $extracted_file = null;
 
@@ -293,7 +308,7 @@ class MigrateRemixGraphsCommand extends Command
       //       with older XML files -> do not change order here
       // ----------------------------------------------------------------------------------------------------------
       $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->project_repository);
-      assert(1 == count($url_data), 'WTH! This project has multiple urls with different project IDs?!!');
+      assert(1 === count($url_data), 'WTH! This project has multiple urls with different project IDs?!!');
       assert($url_data[0]->getProgramId() == $project_id);
 
       // $remix_of_string = $extracted_file->getRemixMigrationUrlsString();
@@ -310,10 +325,12 @@ class MigrateRemixGraphsCommand extends Command
 
     // ignore remix parents of old Catrobat projects, Catroid had a bug until Catrobat Language Version 0.992
     // For more details on this, please have a look at: https://jira.catrob.at/browse/CAT-2149
-    if (version_compare($result['languageVersion'], '0.992', '<=') && (count($result['fullRemixData']) >= 2)) {
+    /** @var string $resultLanguageVersion */
+    $resultLanguageVersion = $result['languageVersion'];
+    if (version_compare($resultLanguageVersion, '0.992', '<=') && (count($result['fullRemixData']) >= 2)) {
       $progress_bar->clear();
       $output->writeln('<error>Could not migrate remixes of MERGED project '.$project_id.
-        ' - version too old: '.$result['languageVersion'].'</error>');
+        ' - version too old: '.$resultLanguageVersion.'</error>');
       $progress_bar->display();
       $result = $empty_result;
     }
@@ -356,7 +373,7 @@ class MigrateRemixGraphsCommand extends Command
     $finder = new Finder();
     $finder->files()->name('*.catrobat')->in($directory)->depth(0);
 
-    if (0 == $finder->count()) {
+    if (0 === $finder->count()) {
       $output->writeln('No catrobat files found');
 
       return;

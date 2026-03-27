@@ -12,7 +12,9 @@ use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
 use App\Project\Event\CheckScratchProjectEvent;
+use App\Project\ProjectLikeService;
 use App\Project\ProjectManager;
+use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
 use App\Translation\TranslationDelegate;
 use App\Utils\ElapsedTimeStringFormatter;
@@ -39,6 +41,7 @@ class ProjectController extends AbstractController
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly ProjectManager $project_manager,
+    private readonly ProjectLikeService $project_like_service,
     private readonly ElapsedTimeStringFormatter $elapsed_time,
     private readonly TranslatorInterface $translator,
     private readonly ParameterBagInterface $parameter_bag,
@@ -48,6 +51,7 @@ class ProjectController extends AbstractController
     private readonly UserCommentRepository $comment_repository,
     private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
     private readonly ContentVisibilityManager $content_visibility_manager,
+    private readonly ProjectStatisticsService $project_statistics_service,
   ) {
   }
 
@@ -63,8 +67,13 @@ class ProjectController extends AbstractController
       return $this->redirectToRoute('index');
     }
 
+    $projectId = $project->getId() ?? throw new \RuntimeException('Project ID must not be null');
+
     if ($project->isScratchProgram()) {
-      $this->event_dispatcher->dispatch(new CheckScratchProjectEvent($project->getScratchId()));
+      $scratchId = $project->getScratchId();
+      if (null !== $scratchId) {
+        $this->event_dispatcher->dispatch(new CheckScratchProjectEvent($scratchId));
+      }
     }
 
     $viewed = $request->getSession()->get('viewed', []);
@@ -77,14 +86,15 @@ class ProjectController extends AbstractController
     $my_project = $logged_in && $project->getUser() === $user;
     $active_user_like_types = [];
     if ($logged_in) {
-      $likes = $this->project_manager->findUserLikes($project->getId(), $user->getId());
+      $userId = $user->getId() ?? throw new \RuntimeException('User ID must not be null');
+      $likes = $this->project_like_service->findUserLikes($projectId, $userId);
       foreach ($likes as $like) {
         $active_user_like_types[] = $like->getType();
       }
     }
 
-    $active_like_types = $this->project_manager->findProjectLikeTypes($project->getId());
-    $total_like_count = $this->project_manager->totalLikeCount($project->getId());
+    $active_like_types = $this->project_like_service->findProjectLikeTypes($projectId);
+    $total_like_count = $this->project_like_service->totalLikeCount($projectId);
     $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
     $project_comment_list = [];
@@ -99,7 +109,7 @@ class ProjectController extends AbstractController
       'project_details' => $project_details,
       'my_project' => $my_project,
       'logged_in' => $logged_in,
-      'is_whitelisted' => $this->content_visibility_manager->isWhitelisted(ContentType::Project, $project->getId()),
+      'is_whitelisted' => $this->content_visibility_manager->isWhitelisted(ContentType::Project, $projectId),
       'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
       'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
@@ -138,15 +148,20 @@ class ProjectController extends AbstractController
       return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
     }
 
+    $title_translation = $translation_result[0] ?? null;
+    if (null === $title_translation) {
+      return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
+    }
+
     return $response->setData([
       'id' => $project->getId(),
-      'source_language' => $source_language ?? $translation_result[0]->detected_source_language,
+      'source_language' => $source_language ?? $title_translation->detected_source_language,
       'target_language' => $target_language,
-      'translated_title' => $translation_result[0]->translation,
+      'translated_title' => $title_translation->translation,
       'translated_description' => $translation_result[1]?->translation,
       'translated_credit' => $translation_result[2]?->translation,
-      'provider' => $translation_result[0]->provider,
-      '_cache' => $translation_result[0]->cache,
+      'provider' => $title_translation->provider,
+      '_cache' => $title_translation->cache,
     ]);
   }
 
@@ -215,13 +230,13 @@ class ProjectController extends AbstractController
   public function markNotForKids(string $id): Response
   {
     $project = $this->project_manager->find($id);
-    if (null === $project) {
+    if (!$project instanceof Program) {
       return $this->redirectToIndexOnError();
     }
 
-    if (self::NOT_FOR_KIDS_MODERATOR == $project->getNotForKids()) {
+    if (self::NOT_FOR_KIDS_MODERATOR === $project->getNotForKids()) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_for_kids_moderator', [], 'catroweb'));
-    } elseif (self::NOT_FOR_KIDS == $project->getNotForKids()) {
+    } elseif (self::NOT_FOR_KIDS === $project->getNotForKids()) {
       $project->setNotForKids(0);
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_safe_for_kids', [], 'catroweb'));
     } else {
@@ -245,7 +260,7 @@ class ProjectController extends AbstractController
   private function checkAndAddViewed(Request $request, Program $project, array $viewed): void
   {
     if (!in_array($project->getId(), $viewed, true)) {
-      $this->project_manager->increaseViews($project);
+      $this->project_statistics_service->increaseViews($project);
       $viewed[] = $project->getId();
       $request->getSession()->set('viewed', $viewed);
     }
@@ -261,10 +276,11 @@ class ProjectController extends AbstractController
     ?string $referrer,
     array $project_comments): array
   {
-    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $project->getId()]);
+    $projectId = $project->getId() ?? throw new \RuntimeException('Project ID must not be null');
+    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $projectId]);
 
     return [
-      'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($project->getId()),
+      'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($projectId),
       'downloadUrl' => $url,
       'languageVersion' => $project->getLanguageVersion(),
       'downloads' => $project->getDownloads() + $project->getApkDownloads(),
@@ -272,7 +288,7 @@ class ProjectController extends AbstractController
       'filesize' => sprintf('%.2f', $project->getFilesize() / 1_048_576),
       'age' => $this->elapsed_time->format($project->getUploadedAt()->getTimestamp()),
       'referrer' => $referrer,
-      'id' => $project->getId(),
+      'id' => $projectId,
       'comments' => $project_comments,
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
@@ -289,7 +305,7 @@ class ProjectController extends AbstractController
     }
 
     $project = $this->project_manager->find($id);
-    if (null === $project || $project->getUser() !== $user) {
+    if (!$project instanceof Program || $project->getUser() !== $user) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
@@ -301,6 +317,7 @@ class ProjectController extends AbstractController
     $field = (string) $request->query->get('field');
     $language = (string) $request->query->get('language');
 
+    $result = false;
     try {
       switch ($field) {
         case 'name':
@@ -337,6 +354,7 @@ class ProjectController extends AbstractController
     $field = (string) $request->query->get('field');
     $language = (string) $request->query->get('language');
 
+    $result = null;
     try {
       switch ($field) {
         case 'name':
@@ -366,7 +384,7 @@ class ProjectController extends AbstractController
     }
 
     $project = $this->project_manager->find($id);
-    if (null === $project || $project->getUser() !== $user) {
+    if (!$project instanceof Program || $project->getUser() !== $user) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
@@ -384,6 +402,7 @@ class ProjectController extends AbstractController
       return new Response(null, Response::HTTP_BAD_REQUEST);
     }
 
+    $result = false;
     try {
       switch ($field) {
         case 'name':

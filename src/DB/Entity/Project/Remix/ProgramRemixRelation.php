@@ -75,7 +75,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   public function setAncestor(Program $ancestor): void
   {
     $this->ancestor = $ancestor;
-    $this->ancestor_id = $ancestor->getId();
+    $this->ancestor_id = $ancestor->getId() ?? throw new \LogicException('Ancestor program must have an ID.');
   }
 
   #[\Override]
@@ -92,7 +92,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   public function setDescendant(Program $descendant): void
   {
     $this->descendant = $descendant;
-    $this->descendant_id = $descendant->getId();
+    $this->descendant_id = $descendant->getId() ?? throw new \LogicException('Descendant program must have an ID.');
   }
 
   #[\Override]

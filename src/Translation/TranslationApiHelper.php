@@ -16,7 +16,7 @@ readonly class TranslationApiHelper
       return null;
     }
 
-    if (2 == strlen($language)) {
+    if (2 === strlen($language)) {
       return $language;
     }
 

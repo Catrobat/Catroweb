@@ -27,7 +27,7 @@ class FollowersResponseManager extends AbstractResponseManager
     ?User $authenticated_user,
   ): FollowersListResponse {
     $data = array_map(
-      fn (User $user) => $this->createFollowerResponse($user, $authenticated_user),
+      fn (User $user): FollowerResponse => $this->createFollowerResponse($user, $authenticated_user),
       $users,
     );
 
@@ -43,7 +43,7 @@ class FollowersResponseManager extends AbstractResponseManager
     $is_following = false;
     $follows_you = false;
 
-    if (null !== $authenticated_user) {
+    if ($authenticated_user instanceof User) {
       $is_following = $authenticated_user->getFollowing()->contains($user);
       $follows_you = $user->getFollowing()->contains($authenticated_user);
     }

@@ -143,7 +143,7 @@ class UserCommentRepository extends ServiceEntityRepository
       ->setMaxResults($limit + 1)
     ;
 
-    if (null !== $cursor_date && null !== $cursor_id) {
+    if ($cursor_date instanceof \DateTimeInterface && null !== $cursor_id) {
       $qb->andWhere(
         $qb->expr()->orX(
           $qb->expr()->gt('c.uploadDate', ':cursorDate'),
@@ -195,7 +195,7 @@ class UserCommentRepository extends ServiceEntityRepository
       ->setMaxResults($limit + 1)
     ;
 
-    if (null !== $cursor_date && null !== $cursor_id) {
+    if ($cursor_date instanceof \DateTimeInterface && null !== $cursor_id) {
       $qb->andWhere(
         $qb->expr()->orX(
           $qb->expr()->gt('c.uploadDate', ':cursorDate'),

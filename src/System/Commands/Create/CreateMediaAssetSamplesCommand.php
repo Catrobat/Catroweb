@@ -41,11 +41,12 @@ class CreateMediaAssetSamplesCommand extends Command
   {
     $output->writeln('Creating media library sample data...');
 
-    $sample_path = (string) $this->parameter_bag->get('catrobat.media.sample.dir');
+    /** @var string $sample_path */
+    $sample_path = $this->parameter_bag->get('catrobat.media.sample.dir');
 
     $pocketcode_flavor = $this->flavor_repo->getFlavorByName(Flavor::POCKETCODE);
 
-    if (null === $pocketcode_flavor) {
+    if (!$pocketcode_flavor instanceof Flavor) {
       $output->writeln('<error>Pocketcode flavor not found!</error>');
 
       return Command::FAILURE;
@@ -155,10 +156,12 @@ class CreateMediaAssetSamplesCommand extends Command
     }
 
     foreach ($files as $filename) {
-      if ('.' === $filename || '..' === $filename) {
+      if ('.' === $filename) {
         continue;
       }
-
+      if ('..' === $filename) {
+        continue;
+      }
       $file_path = $directory_path.$filename;
       if (!is_file($file_path)) {
         continue;

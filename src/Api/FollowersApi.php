@@ -29,13 +29,13 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
   #[\Override]
   public function userIdFollowersGet(string $id, int &$responseCode, array &$responseHeaders): ?FollowersListResponse
   {
-    return $this->handleGetList($id, $responseCode, fn ($user) => $this->facade->getLoader()->getFollowers($user));
+    return $this->handleGetList($id, $responseCode, fn (User $user): array => $this->facade->getLoader()->getFollowers($user));
   }
 
   #[\Override]
   public function userIdFollowingGet(string $id, int &$responseCode, array &$responseHeaders): ?FollowersListResponse
   {
-    return $this->handleGetList($id, $responseCode, fn ($user) => $this->facade->getLoader()->getFollowing($user));
+    return $this->handleGetList($id, $responseCode, fn (User $user): array => $this->facade->getLoader()->getFollowing($user));
   }
 
   /**
@@ -44,7 +44,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
   private function handleGetList(string $id, int &$responseCode, callable $load_data): ?FollowersListResponse
   {
     $user = $this->user_manager->find($id);
-    if (null === $user) {
+    if (!$user instanceof User) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -73,7 +73,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
   public function userIdFollowPost(string $id, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user) {
+    if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return;
@@ -92,7 +92,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
     }
 
     $user_to_follow = $this->user_manager->find($id);
-    if (null === $user_to_follow) {
+    if (!$user_to_follow instanceof User) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;
@@ -113,7 +113,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
   public function userIdUnfollowDelete(string $id, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if (null === $user) {
+    if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return;
@@ -132,7 +132,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
     }
 
     $user_to_unfollow = $this->user_manager->find($id);
-    if (null === $user_to_unfollow) {
+    if (!$user_to_unfollow instanceof User) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;

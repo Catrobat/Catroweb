@@ -35,7 +35,8 @@ class ApkPendingAdmin extends ApkAdmin
     $query = parent::configureQuery($query);
     $query->getQueryBuilder()->setParameter('apk_status', Program::APK_PENDING);
 
-    return $query;
+    /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    return $query; // @phpstan-ignore return.type
   }
 
   /**
@@ -80,7 +81,7 @@ class ApkPendingAdmin extends ApkAdmin
       ->add('name')
       ->add('apk_request_time')
       ->add('thumbnail', 'string', [
-        'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
+        'accessor' => $this->getThumbnailImageUrl(...),
         'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
       ])
       ->add('apk_status', 'choice', [

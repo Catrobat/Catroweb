@@ -14,8 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
 class UserRemixSimilarityRelation extends AbstractSimilarityRelation
 {
   #[ORM\ManyToOne(targetEntity: User::class, fetch: 'LAZY', inversedBy: 'relations_of_similar_users_based_on_remixes')]
+  #[\Override]
   protected User $first_user;
 
   #[ORM\ManyToOne(targetEntity: User::class, fetch: 'LAZY', inversedBy: 'reverse_relations_of_similar_users_based_on_remixes')]
+  #[\Override]
   protected User $second_user;
 }

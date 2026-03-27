@@ -35,13 +35,13 @@ class RemixManagerTest extends TestCase
 {
   private RemixManager $remix_manager;
 
-  private EntityManager|MockObject $entity_manager;
+  private MockObject $entity_manager;
 
-  private MockObject|ProgramRepository $program_repository;
+  private MockObject $program_repository;
 
-  private MockObject|ScratchProgramRepository $scratch_program_repository;
+  private MockObject $scratch_program_repository;
 
-  private MockObject|ProgramRemixRepository $program_remix_repository;
+  private MockObject $program_remix_repository;
 
   /**
    * @throws Exception
@@ -1181,7 +1181,7 @@ class RemixManagerTest extends TestCase
   /**
    * @throws \Exception
    */
-  private function checkRemixRelations(Program|MockObject $program_entity, array $parent_data, array $expected_relations): void
+  private function checkRemixRelations(Program $program_entity, array $parent_data, array $expected_relations): void
   {
     $expected_relations_map = [];
     $expected_catrobat_relations = [];
@@ -1212,7 +1212,7 @@ class RemixManagerTest extends TestCase
 
     $this->program_remix_repository
       ->method('findBy')
-      ->willReturnCallback(static function ($criteria) use ($program_remix_repository_find_map) {
+      ->willReturnCallback(static function (array $criteria) use ($program_remix_repository_find_map): array {
         $descendant_id = $criteria['descendant_id'] ?? null;
 
         return $program_remix_repository_find_map[$descendant_id] ?? [];
@@ -1245,6 +1245,7 @@ class RemixManagerTest extends TestCase
     Assert::assertCount(count($expected_relations), $expected_relations_map);
 
     $expected_to_be_root = (1 === count($expected_catrobat_relations));
+    assert($program_entity instanceof MockObject);
     $program_entity->expects($this->atLeastOnce())
       ->method('isRemixRoot')->willReturn($expected_to_be_root)
     ;

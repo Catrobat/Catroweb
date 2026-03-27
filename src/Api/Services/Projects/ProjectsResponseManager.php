@@ -39,7 +39,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     private readonly ProjectManager $project_manager,
-    \Psr\Cache\CacheItemPoolInterface|\Symfony\Contracts\Cache\CacheInterface $cache,
+    \Psr\Cache\CacheItemPoolInterface $cache,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }

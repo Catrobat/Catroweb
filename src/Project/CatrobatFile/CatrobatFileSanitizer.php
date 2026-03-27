@@ -6,6 +6,7 @@ namespace App\Project\CatrobatFile;
 
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatCode\Parser\ParsedScene;
+use App\Project\CatrobatCode\Parser\ParsedSceneProject;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -87,7 +88,7 @@ class CatrobatFileSanitizer
   private function isAValidSceneDirectory(string $relative_filepath): bool
   {
     // Besides image and sound directories the root directory can contain a directory for every scene.
-    foreach ($this->scenes as $scene) {
+    foreach ($this->scenes ?? [] as $scene) {
       if ($relative_filepath === '/'.$scene) {
         return true;
       }
@@ -98,12 +99,12 @@ class CatrobatFileSanitizer
 
   private function isAValidSoundFile(string $filename, string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
-    return $this->isAValidFile('/sounds', $this->sound_paths, $filename, $relative_filepath, $extracted_file);
+    return $this->isAValidFile('/sounds', $this->sound_paths ?? [], $filename, $relative_filepath, $extracted_file);
   }
 
   private function isAValidImageFile(string $filename, string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
-    return $this->isAValidFile('/images', $this->image_paths, $filename, $relative_filepath, $extracted_file);
+    return $this->isAValidFile('/images', $this->image_paths ?? [], $filename, $relative_filepath, $extracted_file);
   }
 
   private function isAValidFile(string $dir_name, array $paths_array, string $filename,
@@ -118,7 +119,7 @@ class CatrobatFileSanitizer
       return true;
     }
 
-    foreach ($this->scenes as $scene) {
+    foreach ($this->scenes ?? [] as $scene) {
       if ($relative_filepath === '/'.$scene.$dir_name) {
         return true;
       }
@@ -142,7 +143,7 @@ class CatrobatFileSanitizer
   {
     $scenes = [];
     $parsed_project = $this->catrobat_code_parser->parse($extracted_file);
-    if (null !== $parsed_project && $parsed_project->hasScenes()) {
+    if ($parsed_project instanceof ParsedSceneProject) {
       $scenes_array = $parsed_project->getScenes();
       foreach ($scenes_array as $scene) {
         /* @var $scene ParsedScene */
@@ -162,8 +163,16 @@ class CatrobatFileSanitizer
     $limit = -1;
     $pattern = '@/@';
     $array = preg_split($pattern, (string) $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY);
-    $needle = @end($array);
-    $relative_filepath = strstr($filepath, (string) $needle);
+    if (false === $array) {
+      return '';
+    }
+
+    $needle = end($array);
+    if (false === $needle) {
+      return '';
+    }
+
+    $relative_filepath = strstr($filepath, $needle);
 
     return str_replace($needle, '', (string) $relative_filepath);
   }
@@ -178,7 +187,12 @@ class CatrobatFileSanitizer
       return unlink($dir);
     }
 
-    foreach (scandir($dir) as $item) {
+    $items = scandir($dir);
+    if (false === $items) {
+      return false;
+    }
+
+    foreach ($items as $item) {
       if ('.' === $item) {
         continue;
       }

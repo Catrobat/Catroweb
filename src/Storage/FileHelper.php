@@ -21,6 +21,10 @@ class FileHelper
   public static function copyDirectory(string $src, string $dst): void
   {
     $dir = opendir($src);
+    if (false === $dir) {
+      throw new \RuntimeException('Could not open directory: '.$src);
+    }
+
     mkdir($dst);
     while (false !== ($file = readdir($dir))) {
       if ('.' === $file) {
@@ -121,7 +125,7 @@ class FileHelper
   protected static function verifyDirectoryCanBeCleared(string $directory_path): void
   {
     foreach (self::getRemovableDirAllowList() as $allowedDir) {
-      if (str_contains($directory_path, $allowedDir)) {
+      if (str_contains($directory_path, (string) $allowedDir)) {
         return;
       }
     }

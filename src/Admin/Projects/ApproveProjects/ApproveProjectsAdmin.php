@@ -61,21 +61,18 @@ class ApproveProjectsAdmin extends AbstractAdmin
    */
   public function getThumbnailImageUrl(mixed $object): string
   {
-    return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
+    $id = $object->getId();
+    if (null === $id) {
+      return '';
+    }
+
+    return '/'.$this->screenshot_repository->getThumbnailWebPath($id);
   }
 
   public function getContainingImageUrls(mixed $object): array
   {
-    /*
-     * @var $extractedFileRepository ExtractedFileRepository
-     * @var $project_manager ProjectManager
-     * @var $object Project
-     */
-
     if (null == $this->extractedProject) {
-      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
-        $this->project_manager->find($object->getId())
-      );
+      $this->extractedProject = $this->loadExtractedProject($object);
     }
 
     if (null == $this->extractedProject) {
@@ -89,16 +86,8 @@ class ApproveProjectsAdmin extends AbstractAdmin
 
   public function getContainingSoundUrls(mixed $object): array
   {
-    /*
-     * @var $extractedFileRepository ExtractedFileRepository
-     * @var $projectManager ProjectManager
-     * @var $object Project
-     */
-
     if (null == $this->extractedProject) {
-      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
-        $this->project_manager->find($object->getId())
-      );
+      $this->extractedProject = $this->loadExtractedProject($object);
     }
 
     if (null == $this->extractedProject) {
@@ -114,9 +103,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   public function getContainingStrings(mixed $object): array
   {
     if (null == $this->extractedProject) {
-      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
-        $this->project_manager->find($object->getId())
-      );
+      $this->extractedProject = $this->loadExtractedProject($object);
     }
 
     if (null == $this->extractedProject) {
@@ -132,9 +119,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   public function getContainingCodeObjects(mixed $object): array
   {
     if (null == $this->extractedProject) {
-      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
-        $this->project_manager->find($object->getId())
-      );
+      $this->extractedProject = $this->loadExtractedProject($object);
     }
 
     if (null == $this->extractedProject || $this->extractedProject->hasScenes()) {
@@ -156,7 +141,8 @@ class ApproveProjectsAdmin extends AbstractAdmin
       $qb->expr()->eq($qb->getRootAliases()[0].'.approved', $qb->expr()->literal(false))
     );
 
-    return $query;
+    /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    return $query; // @phpstan-ignore return.type
   }
 
   #[\Override]
@@ -168,7 +154,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
        * The default option is to just display the value as text (for boolean this will be 1 or 0)
        */
       ->add('thumbnail', null, [
-        'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
+        'accessor' => $this->getThumbnailImageUrl(...),
         'template' => 'Admin/Projects/ThumbnailImage.html.twig',
       ])
       ->add('id')
@@ -179,19 +165,19 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('upload_ip')
       ->add('visible', 'boolean')
       ->add('Images', null, [
-        'accessor' => fn ($subject): array => $this->getContainingImageUrls($subject),
+        'accessor' => $this->getContainingImageUrls(...),
         'template' => 'Admin/Projects/ContainingImage.html.twig',
       ])
       ->add('Sounds', null, [
-        'accessor' => fn ($subject): array => $this->getContainingSoundUrls($subject),
+        'accessor' => $this->getContainingSoundUrls(...),
         'template' => 'Admin/Projects/ContainingSound.html.twig',
       ])
       ->add('Strings', null, [
-        'accessor' => fn ($subject): array => $this->getContainingStrings($subject),
+        'accessor' => $this->getContainingStrings(...),
         'template' => 'Admin/Projects/ContainingStrings.html.twig',
       ])
       ->add('Objects', null, [
-        'accessor' => fn ($subject): array => $this->getContainingCodeObjects($subject),
+        'accessor' => $this->getContainingCodeObjects(...),
         'template' => 'Admin/Projects/ContainingCodeObjects.html.twig',
       ])
       ->add('Actions', null, [
@@ -261,6 +247,21 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('invisible', $this->getRouterIdParameter().'/invisible')
       ->add('skip', $this->getRouterIdParameter().'/skip')
     ;
+  }
+
+  private function loadExtractedProject(mixed $object): ?ExtractedCatrobatFile
+  {
+    $id = $object->getId();
+    if (null === $id) {
+      return null;
+    }
+
+    $project = $this->project_manager->find($id);
+    if (null === $project) {
+      return null;
+    }
+
+    return $this->extracted_file_repository->loadProjectExtractedFile($project);
   }
 
   private function encodeFileNameOfPathsArray(mixed $paths): array

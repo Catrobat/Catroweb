@@ -49,7 +49,12 @@ class ExampleProjectAdmin extends AbstractAdmin
 
   public function getExampleImageUrl(ExampleProgram $object): string
   {
-    return '../../'.$this->example_image_repository->getWebPath($object->getId(), $object->getImageType(), false);
+    $id = $object->getId();
+    if (null === $id) {
+      return '';
+    }
+
+    return '../../'.$this->example_image_repository->getWebPath($id, $object->getImageType(), false);
   }
 
   #[\Override]
@@ -57,9 +62,13 @@ class ExampleProjectAdmin extends AbstractAdmin
   {
     /** @var ExampleProgram $example_project */
     $example_project = $object;
+    $program = $example_project->getProgram();
 
-    return new Metadata($example_project->getProgram()->getName(), $example_project->getProgram()->getDescription(),
-      $this->getExampleImageUrl($example_project));
+    return new Metadata(
+      $program?->getName() ?? '',
+      $program?->getDescription() ?? '',
+      $this->getExampleImageUrl($example_project),
+    );
   }
 
   #[\Override]
@@ -90,7 +99,8 @@ class ExampleProjectAdmin extends AbstractAdmin
       $qb->expr()->isNotNull($qb->getRootAliases()[0].'.program')
     );
 
-    return $query;
+    /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
+    return $query; // @phpstan-ignore return.type
   }
 
   /**
@@ -151,7 +161,7 @@ class ExampleProjectAdmin extends AbstractAdmin
     $list
       ->addIdentifier('id')
       ->add('Example Image', null, [
-        'accessor' => fn ($subject): string => $this->getExampleImageUrl($subject),
+        'accessor' => $this->getExampleImageUrl(...),
         'template' => 'Admin/Projects/ExampleImage.html.twig',
       ])
       ->add('program', EntityType::class, ['class' => Program::class, 'editable' => false])
@@ -173,7 +183,7 @@ class ExampleProjectAdmin extends AbstractAdmin
     $id = $this->getForm()->get('program_id')->getData();
     $project = $this->project_manager->find($id);
 
-    if (null !== $project) {
+    if ($project instanceof Program) {
       $object->setProgram($project);
     } else {
       throw new NotFoundHttpException(sprintf('Unable to find project with id : %s', $id));

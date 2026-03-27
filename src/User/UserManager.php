@@ -43,13 +43,16 @@ class UserManager
     try {
       $tokenParts = explode('.', $token);
       $tokenPayload = base64_decode($tokenParts[1], true);
+      if (false === $tokenPayload) {
+        return [];
+      }
 
       $payload = json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
       if (!is_array($payload)) {
         return [];
       }
 
-      return json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
+      return $payload;
     } catch (\Exception) {
       return [];
     }
@@ -143,7 +146,7 @@ class UserManager
       ->execute()
     ;
 
-    return array_map(static fn ($value): mixed => $value['id'], $associative_array);
+    return array_map(static fn (array $value): mixed => $value['id'], $associative_array);
   }
 
   /**
@@ -163,7 +166,7 @@ class UserManager
       ->execute()
     ;
 
-    return array_map(static fn ($value): mixed => $value['id'], $result);
+    return array_map(static fn (array $value): mixed => $value['id'], $result);
   }
 
   protected function userSearchQuery(string $query): BoolQuery

@@ -119,6 +119,17 @@ class RegisterRequest
   protected ?string $currently_working_on = null;
 
   /**
+   * CAPTCHA response token for bot detection.
+   *
+   * @SerializedName("captcha_token")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $captcha_token = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -133,6 +144,7 @@ class RegisterRequest
       $this->picture = array_key_exists('picture', $data) ? $data['picture'] : $this->picture;
       $this->about = array_key_exists('about', $data) ? $data['about'] : $this->about;
       $this->currently_working_on = array_key_exists('currently_working_on', $data) ? $data['currently_working_on'] : $this->currently_working_on;
+      $this->captcha_token = array_key_exists('captcha_token', $data) ? $data['captcha_token'] : $this->captcha_token;
     }
   }
 
@@ -286,6 +298,28 @@ class RegisterRequest
   public function setCurrentlyWorkingOn(?string $currently_working_on = null): self
   {
     $this->currently_working_on = $currently_working_on;
+
+    return $this;
+  }
+
+  /**
+   * Gets captcha_token.
+   */
+  public function getCaptchaToken(): ?string
+  {
+    return $this->captcha_token;
+  }
+
+  /**
+   * Sets captcha_token.
+   *
+   * @param string|null $captcha_token CAPTCHA response token for bot detection
+   *
+   * @return $this
+   */
+  public function setCaptchaToken(?string $captcha_token = null): self
+  {
+    $this->captcha_token = $captcha_token;
 
     return $this;
   }

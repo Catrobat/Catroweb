@@ -10,7 +10,7 @@ class FormulaResolver
   {
     $formulas = [];
     foreach ($formula_list->children() as $formula) {
-      $formulas[(string) $formula[Constants::CATEGORY_ATTRIBUTE]] = (new FormulaResolver())->resolveFormula($formula);
+      $formulas[(string) $formula[Constants::CATEGORY_ATTRIBUTE]] = new FormulaResolver()->resolveFormula($formula);
     }
 
     return $formulas;
@@ -20,11 +20,11 @@ class FormulaResolver
   {
     if ($formula instanceof \SimpleXMLElement) {
       return match ((string) $formula->type) {
-        Constants::OPERATOR_FORMULA_TYPE => (new FormulaResolver())->resolveFormula($formula->leftChild)
-          .' '.(new FormulaResolver())->resolveOperator($formula->value)
-          .' '.(new FormulaResolver())->resolveFormula($formula->rightChild),
-        Constants::FUNCTION_FORMULA_TYPE => (new FormulaResolver())->resolveFunction($formula),
-        Constants::BRACKET_FORMULA_TYPE => '('.(new FormulaResolver())->resolveFormula($formula->rightChild).')',
+        Constants::OPERATOR_FORMULA_TYPE => new FormulaResolver()->resolveFormula($formula->leftChild)
+          .' '.new FormulaResolver()->resolveOperator($formula->value)
+          .' '.new FormulaResolver()->resolveFormula($formula->rightChild),
+        Constants::FUNCTION_FORMULA_TYPE => new FormulaResolver()->resolveFunction($formula),
+        Constants::BRACKET_FORMULA_TYPE => '('.new FormulaResolver()->resolveFormula($formula->rightChild).')',
         default => (string) $formula->value,
       };
     }
@@ -40,10 +40,10 @@ class FormulaResolver
       $resolved_function = 'false';
     } else {
       if (null != $formula->rightChild) {
-        $function_input_formula = (new FormulaResolver())->resolveFormula($formula->leftChild)
-          .', '.(new FormulaResolver())->resolveFormula($formula->rightChild);
+        $function_input_formula = new FormulaResolver()->resolveFormula($formula->leftChild)
+          .', '.new FormulaResolver()->resolveFormula($formula->rightChild);
       } else {
-        $function_input_formula = (new FormulaResolver())->resolveFormula($formula->leftChild);
+        $function_input_formula = new FormulaResolver()->resolveFormula($formula->leftChild);
       }
 
       $resolved_function = strtolower((string) $formula->value).'( '.$function_input_formula.' )';

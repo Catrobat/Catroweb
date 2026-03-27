@@ -52,16 +52,17 @@ class CreateLikeCommand extends Command
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if (null === $program || null === $user) {
+    if (!$program instanceof Program || null === $user) {
       $output->writeln('Liking '.$program_name.' with user '.$user_name.' failed');
 
       return 1;
     }
 
     try {
-      if ($program->getUser() !== $user) {
+      $program_user = $program->getUser();
+      if (null !== $program_user && $program_user !== $user) {
         $this->likeProgram($program, $user);
-        $notification = new LikeNotification($program->getUser(), $user, $program);
+        $notification = new LikeNotification($program_user, $user, $program);
         $notification->setSeen(boolval(random_int(0, 3)));
         $this->notification_service->addNotification($notification);
       }
@@ -80,7 +81,9 @@ class CreateLikeCommand extends Command
   {
     $program_like = $this->entity_manager->getRepository(ProgramLike::class)->findOneBy(['program' => $program, 'user' => $user]);
     if (null === $program_like) {
-      $like = new ProgramLike($program, $user, array_rand(ProgramLike::$TYPE_NAMES));
+      /** @var non-empty-array<int, string> $type_names */
+      $type_names = ProgramLike::$TYPE_NAMES;
+      $like = new ProgramLike($program, $user, (int) array_rand($type_names));
       $this->entity_manager->persist($like);
       $this->entity_manager->flush();
     }

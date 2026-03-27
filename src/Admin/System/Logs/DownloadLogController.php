@@ -27,6 +27,10 @@ class DownloadLogController extends AbstractController
       throw new AuthenticationException();
     }
 
+    if (null === $request) {
+      throw new NotFoundHttpException();
+    }
+
     $fileName = (string) $request->request->get('file');
     $path = LogsController::LOG_DIR;
     $finder = new Finder();
