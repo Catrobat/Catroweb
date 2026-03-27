@@ -169,7 +169,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function usersSearchGet(string $query, int $limit, int $offset, string $attributes, int &$responseCode, array &$responseHeaders): array
+  public function usersSearchGet(string $query, int $limit, int $offset, ?string $cursor, string $attributes, int &$responseCode, array &$responseHeaders): array
   {
     $users = $this->facade->getLoader()->searchUsers($query, $limit, $offset);
 
@@ -218,7 +218,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function usersGet(string $query, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|object|null
+  public function usersGet(string $query, int $limit, int $offset, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $users = $this->facade->getLoader()->getAllUsers($query, $limit, $offset);
 

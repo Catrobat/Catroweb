@@ -806,6 +806,7 @@ class ProjectsController extends Controller
     $max_version = $request->query->get('max_version', '');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $attributes = $request->query->get('attributes', '');
     $flavor = $request->query->get('flavor', '');
     $accept_language = $request->headers->get('Accept-Language', 'en');
@@ -820,6 +821,7 @@ class ProjectsController extends Controller
       $max_version = $this->deserialize($max_version, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $attributes = $this->deserialize($attributes, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
@@ -871,6 +873,12 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
     $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
@@ -890,7 +898,7 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectIdRecommendationsGet($id, $category, $accept_language, $max_version, $limit, $offset, $attributes, $flavor, $responseCode, $responseHeaders);
+      $result = $handler->projectIdRecommendationsGet($id, $category, $accept_language, $max_version, $limit, $offset, $cursor, $attributes, $flavor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -1105,6 +1113,7 @@ class ProjectsController extends Controller
     $max_version = $request->query->get('max_version', '');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $attributes = $request->query->get('attributes', '');
     $flavor = $request->query->get('flavor', '');
 
@@ -1116,6 +1125,7 @@ class ProjectsController extends Controller
       $max_version = $this->deserialize($max_version, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $attributes = $this->deserialize($attributes, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
@@ -1152,6 +1162,12 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
     $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
@@ -1171,7 +1187,7 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectsFeaturedGet($platform, $max_version, $limit, $offset, $attributes, $flavor, $responseCode, $responseHeaders);
+      $result = $handler->projectsFeaturedGet($platform, $max_version, $limit, $offset, $cursor, $attributes, $flavor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -1223,6 +1239,7 @@ class ProjectsController extends Controller
     $max_version = $request->query->get('max_version', '');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $attributes = $request->query->get('attributes', '');
     $flavor = $request->query->get('flavor', '');
     $accept_language = $request->headers->get('Accept-Language', 'en');
@@ -1236,6 +1253,7 @@ class ProjectsController extends Controller
       $max_version = $this->deserialize($max_version, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $attributes = $this->deserialize($attributes, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
@@ -1279,6 +1297,12 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
     $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
@@ -1298,7 +1322,7 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectsGet($category, $accept_language, $max_version, $limit, $offset, $attributes, $flavor, $responseCode, $responseHeaders);
+      $result = $handler->projectsGet($category, $accept_language, $max_version, $limit, $offset, $cursor, $attributes, $flavor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -1467,6 +1491,7 @@ class ProjectsController extends Controller
     $max_version = $request->query->get('max_version', '');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $attributes = $request->query->get('attributes', '');
     $flavor = $request->query->get('flavor', '');
 
@@ -1478,6 +1503,7 @@ class ProjectsController extends Controller
       $max_version = $this->deserialize($max_version, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $attributes = $this->deserialize($attributes, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
@@ -1514,6 +1540,12 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
     $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
@@ -1533,7 +1565,7 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectsSearchGet($query, $max_version, $limit, $offset, $attributes, $flavor, $responseCode, $responseHeaders);
+      $result = $handler->projectsSearchGet($query, $max_version, $limit, $offset, $cursor, $attributes, $flavor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -1660,6 +1692,7 @@ class ProjectsController extends Controller
     $max_version = $request->query->get('max_version', '');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $attributes = $request->query->get('attributes', '');
     $flavor = $request->query->get('flavor', '');
 
@@ -1670,6 +1703,7 @@ class ProjectsController extends Controller
       $max_version = $this->deserialize($max_version, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $attributes = $this->deserialize($attributes, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
@@ -1699,6 +1733,12 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
     $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
@@ -1721,7 +1761,7 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectsUserGet($max_version, $limit, $offset, $attributes, $flavor, $responseCode, $responseHeaders);
+      $result = $handler->projectsUserGet($max_version, $limit, $offset, $cursor, $attributes, $flavor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -1774,6 +1814,7 @@ class ProjectsController extends Controller
     $max_version = $request->query->get('max_version', '');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $attributes = $request->query->get('attributes', '');
     $flavor = $request->query->get('flavor', '');
 
@@ -1785,6 +1826,7 @@ class ProjectsController extends Controller
       $max_version = $this->deserialize($max_version, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $attributes = $this->deserialize($attributes, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
@@ -1822,6 +1864,12 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
     $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
@@ -1841,7 +1889,7 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectsUserIdGet($id, $max_version, $limit, $offset, $attributes, $flavor, $responseCode, $responseHeaders);
+      $result = $handler->projectsUserIdGet($id, $max_version, $limit, $offset, $cursor, $attributes, $flavor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',

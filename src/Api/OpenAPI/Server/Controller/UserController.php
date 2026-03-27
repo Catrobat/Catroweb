@@ -559,6 +559,7 @@ class UserController extends Controller
     $query = $request->query->get('query');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
 
     // Use the default value if no value was provided
 
@@ -567,6 +568,7 @@ class UserController extends Controller
       $query = $this->deserialize($query, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -593,6 +595,12 @@ class UserController extends Controller
     if ($response instanceof Response) {
       return $response;
     }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
 
     try {
       $handler = $this->getApiHandler();
@@ -601,7 +609,7 @@ class UserController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->usersGet($query, $limit, $offset, $responseCode, $responseHeaders);
+      $result = $handler->usersGet($query, $limit, $offset, $cursor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -652,6 +660,7 @@ class UserController extends Controller
     $query = $request->query->get('query');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $attributes = $request->query->get('attributes', '');
 
     // Use the default value if no value was provided
@@ -661,6 +670,7 @@ class UserController extends Controller
       $query = $this->deserialize($query, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $attributes = $this->deserialize($attributes, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -690,6 +700,12 @@ class UserController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
     $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
@@ -703,7 +719,7 @@ class UserController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->usersSearchGet($query, $limit, $offset, $attributes, $responseCode, $responseHeaders);
+      $result = $handler->usersSearchGet($query, $limit, $offset, $cursor, $attributes, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',

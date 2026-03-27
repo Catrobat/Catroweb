@@ -27,7 +27,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
    * @throws \JsonException
    */
   #[\Override]
-  public function searchGet(string $query, string $type, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|SearchResponse
+  public function searchGet(string $query, string $type, int $limit, int $offset, ?string $cursor, int &$responseCode, array &$responseHeaders): array|SearchResponse
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
     if (null === $this->checkIpRateLimit($ip, $this->searchBurstLimiter)) {

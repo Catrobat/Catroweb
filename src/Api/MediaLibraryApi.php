@@ -40,6 +40,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     string $accept_language,
     int $limit,
     int $offset,
+    ?string $cursor,
     ?string $file_type,
     ?string $flavor,
     ?string $search,
@@ -93,6 +94,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     string $accept_language,
     int $limit,
     int $offset,
+    ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
   ): ?MediaCategoriesResponse {
@@ -157,6 +159,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     string $accept_language,
     int $limit,
     int $offset,
+    ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
   ): ?MediaCategoryDetailResponse {
@@ -251,6 +254,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     string $accept_language,
     int $limit,
     int $offset,
+    ?string $cursor,
     ?string $category_id,
     ?string $file_type,
     ?string $flavor,

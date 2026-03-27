@@ -59,7 +59,8 @@ interface MediaLibraryApiInterface
    *
    * @param string      $accept_language (optional, default to 'en')
    * @param int         $limit           (optional, default to 20)
-   * @param int         $offset          (optional, default to 0)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
    * @param string|null $category_id     Filter by category UUID (optional)
    * @param string|null $file_type       (optional)
    * @param string|null $flavor          Filter by flavor name (optional)
@@ -73,6 +74,7 @@ interface MediaLibraryApiInterface
     string $accept_language,
     int $limit,
     int $offset,
+    ?string $cursor,
     ?string $category_id,
     ?string $file_type,
     ?string $flavor,
@@ -168,16 +170,18 @@ interface MediaLibraryApiInterface
    *
    * Get all media library categories
    *
-   * @param string $accept_language (optional, default to 'en')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function mediaCategoriesGet(
     string $accept_language,
     int $limit,
     int $offset,
+    ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
@@ -204,18 +208,20 @@ interface MediaLibraryApiInterface
    *
    * Get a specific media category with its assets
    *
-   * @param string $id              Category UUID (required)
-   * @param string $accept_language (optional, default to 'en')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $id              Category UUID (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function mediaCategoriesIdGet(
     string $id,
     string $accept_language,
     int $limit,
     int $offset,
+    ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
@@ -263,7 +269,8 @@ interface MediaLibraryApiInterface
    *
    * @param string      $accept_language     (optional, default to 'en')
    * @param int         $limit               (optional, default to 20)
-   * @param int         $offset              (optional, default to 0)
+   * @param int         $offset              Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor              Cursor for pagination (opaque string from the previous response) (optional)
    * @param string|null $file_type           Filter categories and assets by file type (optional)
    * @param string|null $flavor              Filter assets by flavor name (optional)
    * @param string|null $search              Search query for assets and categories (optional)
@@ -275,6 +282,7 @@ interface MediaLibraryApiInterface
     string $accept_language,
     int $limit,
     int $offset,
+    ?string $cursor,
     ?string $file_type,
     ?string $flavor,
     ?string $search,

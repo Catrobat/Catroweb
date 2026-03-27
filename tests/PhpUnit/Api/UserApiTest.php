@@ -254,7 +254,7 @@ final class UserApiTest extends TestCase
     $loader->method('searchUsers')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $this->object->usersSearchGet('query', 20, 0, '', $response_code, $response_headers);
+    $this->object->usersSearchGet('query', 20, 0, null, '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
   }

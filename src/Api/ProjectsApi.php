@@ -109,7 +109,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsFeaturedGet(string $platform, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
+  public function projectsFeaturedGet(string $platform, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
     $featured_projects = $this->facade->getLoader()->getFeaturedProjects($flavor, $limit, $offset, $platform, $max_version);
 
@@ -126,10 +126,10 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
    * @throws \Psr\Cache\InvalidArgumentException
    */
   #[\Override]
-  public function projectsGet(string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
+  public function projectsGet(string $category, string $accept_language, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
-    $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%d', $category, $locale, $flavor, $max_version, $limit, $offset);
+    $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%d_%s', $category, $locale, $flavor, $max_version, $limit, $offset, $cursor ?? '');
 
     // Don't cache 'recent' category as it changes frequently
     if ('recent' === $category) {
@@ -165,7 +165,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
+  public function projectIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -251,7 +251,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsSearchGet(string $query, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
+  public function projectsSearchGet(string $query, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
     $projects = $this->facade->getLoader()->searchProjects($query, $limit, $offset, $max_version, $flavor);
 
@@ -321,7 +321,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsUserGet(string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
+  public function projectsUserGet(string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
@@ -348,7 +348,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsUserIdGet(string $id, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
+  public function projectsUserIdGet(string $id, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
   {
     if (!$this->facade->getRequestValidator()->validateUserExists($id)) {
       $responseCode = Response::HTTP_NOT_FOUND;
