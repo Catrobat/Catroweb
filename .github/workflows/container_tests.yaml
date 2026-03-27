@@ -72,7 +72,7 @@ jobs:
 
       - name: Create a livid environment with dummy data
         run: |
-          docker exec app.catroweb bin/console catrobat:reset --hard
+          docker exec app.catroweb bin/console catrobat:reset --hard --limit 5
 
       - name: Warmup the cache
         run: |
