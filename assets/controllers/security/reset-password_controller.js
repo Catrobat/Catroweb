@@ -1,11 +1,28 @@
 import { showSnackbar } from '../../Layout/Snackbar'
 import { showValidationMessage } from '../../Components/TextField'
 import { AjaxController } from '../ajax_controller'
+import { initCaptchaWidget } from '../../Security/CaptchaWidget'
 
 export default class extends AjaxController {
   static values = {
     apiPath: String,
     checkYourMailsUrl: String,
+    captchaEndpoint: String,
+  }
+
+  captchaWidget = null
+
+  connect() {
+    if (this.captchaEndpointValue) {
+      initCaptchaWidget(this.captchaEndpointValue).then((widget) => {
+        this.captchaWidget = widget
+      })
+    }
+  }
+
+  disconnect() {
+    this.captchaWidget?.destroy()
+    this.captchaWidget = null
   }
 
   /**
@@ -18,8 +35,14 @@ export default class extends AjaxController {
   async requestPasswordResetEmail() {
     const data = {
       email: document.getElementById('email__input').value,
+      captcha_token: this.captchaWidget?.getToken() ?? '',
     }
     const response = await this.fetchPost(this.apiPathValue, data)
+
+    if (response.status === 403) {
+      showSnackbar('#share-snackbar', 'CAPTCHA verification failed. Please try again.')
+      return
+    }
 
     if (response.status === 204) {
       window.location.href = this.checkYourMailsUrlValue
@@ -35,7 +58,7 @@ export default class extends AjaxController {
     }
 
     response.text().then(function (text) {
-      console.error('Registration error: ' + response.status + text)
+      console.error('Password reset error: ' + response.status + text)
     })
     showSnackbar('#share-snackbar', 'Unexpected Error. Try again later.')
   }

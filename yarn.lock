@@ -1329,6 +1329,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cap.js/widget@npm:^0.1.42":
+  version: 0.1.42
+  resolution: "@cap.js/widget@npm:0.1.42"
+  checksum: 10c0/24056e51504c9fc4a2122666b6fbab1e88ccbe90b31a6fba052d6d19278d0b25f8b6ea134676b47492c58c983c09c580a37b4d01a963c49685fcdcd143d4894e
+  languageName: node
+  linkType: hard
+
 "@csstools/css-calc@npm:^3.1.1":
   version: 3.1.1
   resolution: "@csstools/css-calc@npm:3.1.1"
@@ -4025,6 +4032,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.29.2"
     "@bugsnag/browser-performance": "npm:^3.4.1"
     "@bugsnag/js": "npm:^8.8.1"
+    "@cap.js/widget": "npm:^0.1.42"
     "@eslint/js": "npm:^10.0.0"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@material/checkbox": "npm:^14.0.0"

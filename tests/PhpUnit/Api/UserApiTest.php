@@ -13,6 +13,7 @@ use App\Api\Services\User\UserResponseManager;
 use App\Api\Services\ValidationWrapper;
 use App\Api\UserApi;
 use App\DB\Entity\User\User;
+use App\Security\Captcha\CaptchaVerifier;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
@@ -68,11 +69,15 @@ final class UserApiTest extends TestCase
     $authentication_manager->method('createRefreshTokenByUser')->willReturn('refresh_token');
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
+    $captchaVerifier = $this->createStub(CaptchaVerifier::class);
+    $captchaVerifier->method('verify')->willReturn(['success' => true, 'result' => 'test-auto-pass']);
+
     $this->object = new UserApi(
       $this->facade,
       $this->createNoLimitRateLimiterFactory('phpunit_user_registration'),
       $this->createNoLimitRateLimiterFactory('phpunit_user_password_reset'),
       new RequestStack(),
+      $captchaVerifier,
     );
   }
 
@@ -334,6 +339,42 @@ final class UserApiTest extends TestCase
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
 
+    $this->assertNull($response);
+  }
+
+  /**
+   * @throws \Exception|Exception
+   */
+  #[Group('unit')]
+  public function testUserPostCaptchaFailure(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $request_validator = $this->createStub(UserRequestValidator::class);
+    $validator_wrapper = $this->createStub(ValidationWrapper::class);
+    $validator_wrapper->method('hasError')->willReturn(false);
+    $request_validator->method('validateRegistration')->willReturn($validator_wrapper);
+    $this->facade->method('getRequestValidator')->willReturn($request_validator);
+
+    $captchaVerifier = $this->createStub(CaptchaVerifier::class);
+    $captchaVerifier->method('verify')->willReturn(['success' => false, 'result' => 'verification-failed']);
+
+    $object = new UserApi(
+      $this->facade,
+      $this->createNoLimitRateLimiterFactory('phpunit_user_registration'),
+      $this->createNoLimitRateLimiterFactory('phpunit_user_password_reset'),
+      new RequestStack(),
+      $captchaVerifier,
+    );
+
+    $register_request = $this->createStub(RegisterRequest::class);
+    $register_request->method('isDryRun')->willReturn(false);
+
+    $response = $object->userPost($register_request, 'de', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_FORBIDDEN, $response_code);
+    $this->assertSame('verification-failed', $response_headers['X-Captcha-Result']);
     $this->assertNull($response);
   }
 }

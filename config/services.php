@@ -84,6 +84,7 @@ use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\BroadcastNotification;
 use App\DB\Entity\User\User;
+use App\Security\Captcha\CaptchaVerifier;
 use App\User\UserProvider;
 use Monolog\Formatter\LineFormatter;
 use OpenAPI\Server\Service\SerializerInterface;
@@ -170,6 +171,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->call('setBasePath', ['/var/www/my_project'])
     ->call('indentStacktraces', ['    '])
     ->call('setMaxLevelNameLength', [5])
+  ;
+
+  $services->set(CaptchaVerifier::class)
+    ->arg('$captchaVerifyUrl', '%env(CAPTCHA_API_ENDPOINT)%/%env(CAPTCHA_SITE_KEY)%/siteverify')
+    ->arg('$captchaSecret', '%env(CAPTCHA_SECRET)%')
+    ->arg('$captchaEnabled', '%env(bool:CAPTCHA_ENABLED)%')
+    ->arg('$appEnv', '%env(APP_ENV)%')
   ;
 
   // -------------------------------------------------------------------------------------------------------------------

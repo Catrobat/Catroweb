@@ -16,6 +16,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'app_env' => '%env(APP_ENV)%',
         'bugsnag_api_key' => '%env(BUGSNAG_API_KEY)%',
         'gtm_container_id' => '%env(GTM_CONTAINER_ID)%',
+        'captcha_enabled' => '%env(bool:CAPTCHA_ENABLED)%',
+        'captcha_public_url' => '%env(CAPTCHA_PUBLIC_URL)%',
+        'captcha_site_key' => '%env(CAPTCHA_SITE_KEY)%',
       ],
       'form_themes' => [
         '@SonataForm/Form/datepicker.html.twig',
