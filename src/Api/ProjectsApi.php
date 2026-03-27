@@ -22,6 +22,7 @@ use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 
@@ -34,6 +35,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     private readonly ReactionsApiFacade $reactions_facade,
     private readonly RateLimiterFactory $uploadDailyLimiter,
     private readonly RateLimiterFactory $reactionBurstLimiter,
+    private readonly RateLimiterFactory $downloadBurstLimiter,
+    private readonly RequestStack $request_stack,
   ) {
   }
 
@@ -421,6 +424,13 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
    */
   public function customProjectIdCatrobatGet(string $id, int &$responseCode, ?array &$responseHeaders = null): ?BinaryFileResponse
   {
+    $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
+    if (!$this->checkIpRateLimit($ip, $this->downloadBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (!$project instanceof Program) {
       $responseCode = Response::HTTP_NOT_FOUND;

@@ -26,6 +26,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
   public function __construct(
     private readonly ModerationApiFacade $facade,
     private readonly RateLimiterFactory $appealDailyLimiter,
+    private readonly RateLimiterFactory $moderationAdminBurstLimiter,
   ) {
   }
 
@@ -122,6 +123,13 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return null;
     }
 
+    $admin = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if ($admin instanceof User && !$this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     $result = $this->facade->getLoader()->loadPendingReports($limit, $cursor);
     $responseCode = Response::HTTP_OK;
 
@@ -148,6 +156,12 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     $admin = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$admin instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return;
+    }
+
+    if (!$this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return;
     }
@@ -192,6 +206,13 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return null;
     }
 
+    $admin = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if ($admin instanceof User && !$this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
     $result = $this->facade->getLoader()->loadPendingAppeals($limit, $cursor);
     $responseCode = Response::HTTP_OK;
 
@@ -218,6 +239,12 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     $admin = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$admin instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return;
+    }
+
+    if (!$this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return;
     }

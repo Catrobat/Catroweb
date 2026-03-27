@@ -19,13 +19,19 @@ use OpenAPI\Server\Model\MediaCategoryDetailResponse;
 use OpenAPI\Server\Model\MediaCategoryRequest;
 use OpenAPI\Server\Model\MediaCategoryResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiInterface
 {
+  use RateLimitTrait;
+
   public function __construct(
     private readonly MediaLibraryApiFacade $facade,
     private readonly FlavorRepository $flavor_repository,
+    private readonly RateLimiterFactory $mediaLibraryBurstLimiter,
+    private readonly RequestStack $request_stack,
   ) {
   }
 
@@ -41,6 +47,15 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null {
+    $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
+    if (!$this->checkIpRateLimit($ip, $this->mediaLibraryBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    $this->addRateLimitHeaders($responseHeaders, $this->mediaLibraryBurstLimiter, $ip);
+
     $db_file_type = $file_type ? $this->convertToDbFileType($file_type) : null;
     $search = null !== $search ? trim($search) : null;
     if ('' === $search) {
@@ -244,6 +259,15 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     int &$responseCode,
     array &$responseHeaders,
   ): ?MediaAssetsResponse {
+    $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
+    if (!$this->checkIpRateLimit($ip, $this->mediaLibraryBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    $this->addRateLimitHeaders($responseHeaders, $this->mediaLibraryBurstLimiter, $ip);
+
     $db_file_type = $file_type ? $this->convertToDbFileType($file_type) : null;
 
     $assets = $this->facade->getLoader()->getAssets(

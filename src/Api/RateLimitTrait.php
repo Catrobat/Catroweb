@@ -22,4 +22,17 @@ trait RateLimitTrait
 
     return $rate_limiter->consume()->isAccepted();
   }
+
+  /**
+   * @param array<string, string> $responseHeaders
+   */
+  private function addRateLimitHeaders(array &$responseHeaders, RateLimiterFactory $limiter, string $key): void
+  {
+    $rate_limiter = $limiter->create($key);
+    $limit = $rate_limiter->consume(0);
+
+    $responseHeaders['X-RateLimit-Limit'] = (string) $limit->getLimit();
+    $responseHeaders['X-RateLimit-Remaining'] = (string) $limit->getRemainingTokens();
+    $responseHeaders['X-RateLimit-Reset'] = (string) $limit->getRetryAfter()->getTimestamp();
+  }
 }
