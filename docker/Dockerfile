@@ -56,7 +56,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Overwrite default apache config
-RUN a2enmod rewrite
+RUN a2enmod rewrite deflate headers
 COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf
 RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
