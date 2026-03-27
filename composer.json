@@ -17,6 +17,7 @@
     "beberlei/doctrineextensions": "1.5.*",
     "bugsnag/bugsnag-symfony": "^2.0",
     "codercat/jwk-to-pem": "1.1.*",
+    "consoletvs/profanity": "^3.5",
     "doctrine/dbal": "4.4.*",
     "doctrine/doctrine-bundle": "3.2.*",
     "doctrine/doctrine-migrations-bundle": "4.0.*",

@@ -24,6 +24,12 @@ final class TextSanitizerTest extends TestCase
   }
 
   #[Group('unit')]
+  public function testSanitizeUsesPackageDictionaryForAdditionalProfanity(): void
+  {
+    $this->assertSame('***** please', TextSanitizer::sanitize('bitch please'));
+  }
+
+  #[Group('unit')]
   public function testSanitizeRedactsContactVectors(): void
   {
     $input = 'Mail me at kid@example.com or join discord.gg/catroweb';
