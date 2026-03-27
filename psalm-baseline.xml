@@ -556,7 +556,6 @@
     </PossiblyFalseArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$this->getApplication()]]></code>
-      <code><![CDATA[$this->getApplication()]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/System/Commands/ImportProjects/ProgramImportCommand.php">
