@@ -70,15 +70,7 @@
     background-color 0.2s ease,
     border-color 0.2s ease;
 
-  &.cookie-consent-decline {
-    background-color: transparent;
-    color: light-dark(#555, #ccc);
-
-    &:hover {
-      background-color: light-dark(#e9ecef, #3a3a3a);
-    }
-  }
-
+  &.cookie-consent-decline,
   &.cookie-consent-accept {
     background-color: transparent;
     color: light-dark(#555, #ccc);

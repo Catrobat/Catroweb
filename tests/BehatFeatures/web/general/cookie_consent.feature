@@ -22,7 +22,7 @@ Feature: Cookie consent banner for GDPR compliance
     And I wait for the element ".cookie-consent-banner" to be visible
     When I click ".cookie-consent-accept"
     And I wait 500 milliseconds
-    Then the element ".cookie-consent-banner" should not be visible
+    Then the element ".cookie-consent-banner" should not exist
     And cookie "cookie_consent" with value "accepted" should exist"
 
   Scenario: Declining cookies hides the banner and sets consent cookie
@@ -31,7 +31,7 @@ Feature: Cookie consent banner for GDPR compliance
     And I wait for the element ".cookie-consent-banner" to be visible
     When I click ".cookie-consent-decline"
     And I wait 500 milliseconds
-    Then the element ".cookie-consent-banner" should not be visible
+    Then the element ".cookie-consent-banner" should not exist
     And cookie "cookie_consent" with value "declined" should exist"
 
   Scenario: Banner does not reappear after accepting cookies

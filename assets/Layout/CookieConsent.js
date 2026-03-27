@@ -1,4 +1,5 @@
-import { getCookie, setCookie } from '../Security/CookieHelper'
+import { deleteCookie, getCookie, setCookie } from '../Security/CookieHelper'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 
 const COOKIE_NAME = 'cookie_consent'
 const COOKIE_EXPIRY_DAYS = 365
@@ -19,15 +20,15 @@ function initGTM() {
   const gtmContainerId = gtmEl.dataset.gtmContainerId
   if (!gtmContainerId) return
 
-  import('analytics').then(({ Analytics }) => {
-    import('@analytics/google-tag-manager').then(({ default: googleTagManager }) => {
+  Promise.all([import('analytics'), import('@analytics/google-tag-manager')]).then(
+    ([{ Analytics }, { default: googleTagManager }]) => {
       const analytics = Analytics({
         app: 'share.catrob.at',
         plugins: [googleTagManager({ containerId: gtmContainerId })],
       })
       analytics.page()
-    })
-  })
+    },
+  )
 }
 
 function createBanner() {
@@ -90,22 +91,9 @@ function showBanner() {
 
 function hideBanner(banner) {
   banner.classList.remove('cookie-consent-visible')
-  banner.addEventListener('transitionend', () => banner.remove(), { once: true })
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div')
-  div.appendChild(document.createTextNode(str))
-  return div.innerHTML
-}
-
-function escapeAttr(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+  const remove = () => banner.remove()
+  banner.addEventListener('transitionend', remove, { once: true })
+  setTimeout(remove, 400)
 }
 
 export function initAnalyticsIfConsented() {
@@ -118,6 +106,6 @@ export function initAnalyticsIfConsented() {
 }
 
 export function showCookieSettings() {
-  setCookie(COOKIE_NAME, '', 'Thu, 01 Jan 1970 00:00:01 GMT', '/')
+  deleteCookie(COOKIE_NAME, '/')
   showBanner()
 }

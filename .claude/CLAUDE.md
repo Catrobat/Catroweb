@@ -535,7 +535,21 @@ Then the ".result" element should contain "expected"
 - Infinite scroll / lazy loading
 - Any operation that shows a loading spinner
 
-#### 7. Debugging Flaky Tests
+#### 7. Use `should not exist` When JS Removes Elements from DOM
+
+When JS calls `element.remove()`, the element is gone from the DOM entirely. Use `should not exist`, NOT `should not be visible`:
+
+```gherkin
+# WRONG — element is removed, not just hidden; isVisible() can't find it
+Then the element ".my-banner" should not be visible
+
+# CORRECT — element.remove() means it no longer exists in the DOM
+Then the element ".my-banner" should not exist
+```
+
+Rule: if the JS code calls `.remove()` on an element, assert with `should not exist`. Only use `should not be visible` when the element stays in the DOM but is hidden via CSS (`display: none`, `visibility: hidden`, etc.).
+
+#### 8. Debugging Flaky Tests
 
 If a test passes locally but fails in CI:
 
