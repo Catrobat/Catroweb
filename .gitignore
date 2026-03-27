@@ -27,6 +27,7 @@ bin/
 node_modules/
 .yarn/
 .pnp.*
+bundle-report.html
 
 ### public ###
 public/**

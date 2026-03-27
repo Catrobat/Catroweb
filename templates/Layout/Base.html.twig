@@ -12,6 +12,13 @@
 
   <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
 
+  {% if bugsnag_api_key %}
+    <link rel="dns-prefetch" href="https://sessions.bugsnag.com">
+    <link rel="dns-prefetch" href="https://notify.bugsnag.com">
+    <link rel="preconnect" href="https://sessions.bugsnag.com" crossorigin>
+    <link rel="preconnect" href="https://notify.bugsnag.com" crossorigin>
+  {% endif %}
+
   {% block stylesheets %}
     {{ encore_entry_link_tags('base_layout') }}
     {{ encore_entry_link_tags('color_scheme') }}
