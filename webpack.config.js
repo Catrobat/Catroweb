@@ -186,7 +186,7 @@ Encore
       ]),
       content: ['**/*.twig', '**/*.js'],
       safelist: {
-        standard: [/^swal2/, /^modal/, /^mdc/, /^data-bs-theme/],
+        standard: [/^swal2/, /^modal/, /^mdc/, /^data-bs-theme/, /^cookie-consent/],
       },
       defaultExtractor: (content) => {
         return content.match(/[\w-/:]+(?<!:)/g) || []
