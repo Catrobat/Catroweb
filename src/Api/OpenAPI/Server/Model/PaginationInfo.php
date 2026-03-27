@@ -37,6 +37,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class representing the PaginationInfo model.
  *
+ * Deprecated: Use cursor-based pagination (next_cursor + has_more) instead.
+ *
  * @author  OpenAPI Generator team
  */
 class PaginationInfo

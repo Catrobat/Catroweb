@@ -72,6 +72,7 @@ class MediaLibraryController extends Controller
     // Read out all input parameter values into variables
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $category_id = $request->query->get('category_id');
     $file_type = $request->query->get('file_type');
     $flavor = $request->query->get('flavor');
@@ -87,6 +88,7 @@ class MediaLibraryController extends Controller
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $category_id = $this->deserialize($category_id, 'string', 'string');
       $file_type = $this->deserialize($file_type, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
@@ -115,6 +117,12 @@ class MediaLibraryController extends Controller
     $asserts[] = new Assert\Type('int');
     $asserts[] = new Assert\GreaterThanOrEqual(0);
     $response = $this->validate($offset, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -165,7 +173,7 @@ class MediaLibraryController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->mediaAssetsGet($accept_language, $limit, $offset, $category_id, $file_type, $flavor, $search, $sort_by, $sort_order, $responseCode, $responseHeaders);
+      $result = $handler->mediaAssetsGet($accept_language, $limit, $offset, $cursor, $category_id, $file_type, $flavor, $search, $sort_by, $sort_order, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -627,6 +635,7 @@ class MediaLibraryController extends Controller
     // Read out all input parameter values into variables
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $accept_language = $request->headers->get('Accept-Language', 'en');
 
     // Use the default value if no value was provided
@@ -636,6 +645,7 @@ class MediaLibraryController extends Controller
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -661,6 +671,12 @@ class MediaLibraryController extends Controller
     if ($response instanceof Response) {
       return $response;
     }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
 
     try {
       $handler = $this->getApiHandler();
@@ -669,7 +685,7 @@ class MediaLibraryController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->mediaCategoriesGet($accept_language, $limit, $offset, $responseCode, $responseHeaders);
+      $result = $handler->mediaCategoriesGet($accept_language, $limit, $offset, $cursor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -801,6 +817,7 @@ class MediaLibraryController extends Controller
     // Read out all input parameter values into variables
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $accept_language = $request->headers->get('Accept-Language', 'en');
 
     // Use the default value if no value was provided
@@ -811,6 +828,7 @@ class MediaLibraryController extends Controller
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -844,6 +862,12 @@ class MediaLibraryController extends Controller
     if ($response instanceof Response) {
       return $response;
     }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
 
     try {
       $handler = $this->getApiHandler();
@@ -852,7 +876,7 @@ class MediaLibraryController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->mediaCategoriesIdGet($id, $accept_language, $limit, $offset, $responseCode, $responseHeaders);
+      $result = $handler->mediaCategoriesIdGet($id, $accept_language, $limit, $offset, $cursor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -1116,6 +1140,7 @@ class MediaLibraryController extends Controller
     // Read out all input parameter values into variables
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
     $file_type = $request->query->get('file_type');
     $flavor = $request->query->get('flavor');
     $search = $request->query->get('search');
@@ -1129,6 +1154,7 @@ class MediaLibraryController extends Controller
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
       $file_type = $this->deserialize($file_type, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
       $search = $this->deserialize($search, 'string', 'string');
@@ -1155,6 +1181,12 @@ class MediaLibraryController extends Controller
     $asserts[] = new Assert\Type('int');
     $asserts[] = new Assert\GreaterThanOrEqual(0);
     $response = $this->validate($offset, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
@@ -1193,7 +1225,7 @@ class MediaLibraryController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->mediaLibraryGet($accept_language, $limit, $offset, $file_type, $flavor, $search, $assets_per_category, $responseCode, $responseHeaders);
+      $result = $handler->mediaLibraryGet($accept_language, $limit, $offset, $cursor, $file_type, $flavor, $search, $assets_per_category, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',

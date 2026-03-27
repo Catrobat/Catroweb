@@ -74,6 +74,7 @@ class SearchController extends Controller
     $type = $request->query->get('type', 'all');
     $limit = $request->query->get('limit', 20);
     $offset = $request->query->get('offset', 0);
+    $cursor = $request->query->get('cursor');
 
     // Use the default value if no value was provided
 
@@ -83,6 +84,7 @@ class SearchController extends Controller
       $type = $this->deserialize($type, 'string', 'string');
       $limit = $this->deserialize($limit, 'int', 'string');
       $offset = $this->deserialize($offset, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -116,6 +118,12 @@ class SearchController extends Controller
     if ($response instanceof Response) {
       return $response;
     }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
 
     try {
       $handler = $this->getApiHandler();
@@ -124,7 +132,7 @@ class SearchController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->searchGet($query, $type, $limit, $offset, $responseCode, $responseHeaders);
+      $result = $handler->searchGet($query, $type, $limit, $offset, $cursor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',

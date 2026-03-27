@@ -149,16 +149,18 @@ interface UserApiInterface
    *
    * Get users
    *
-   * @param string $query           (required)
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $query           (required)
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function usersGet(
     string $query,
     int $limit,
     int $offset,
+    ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
@@ -168,17 +170,19 @@ interface UserApiInterface
    *
    * Search for users
    *
-   * @param string $query           (required)
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $query           (required)
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $attributes      (optional, default to '')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function usersSearchGet(
     string $query,
     int $limit,
     int $offset,
+    ?string $cursor,
     string $attributes,
     int &$responseCode,
     array &$responseHeaders,
