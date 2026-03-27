@@ -94,7 +94,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ContentAppealRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentAppealRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -186,7 +186,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ContentReportRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentReportRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_report_request, $asserts);
     if ($response instanceof Response) {
@@ -366,7 +366,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ResolveAppealRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ResolveAppealRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($resolve_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -544,7 +544,7 @@ class ModerationController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ResolveReportRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ResolveReportRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($resolve_report_request, $asserts);
     if ($response instanceof Response) {
@@ -628,14 +628,14 @@ class ModerationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ContentAppealRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentAppealRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -721,14 +721,14 @@ class ModerationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ContentReportRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentReportRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_report_request, $asserts);
     if ($response instanceof Response) {
@@ -814,14 +814,14 @@ class ModerationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ContentAppealRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentAppealRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -907,14 +907,14 @@ class ModerationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ContentReportRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentReportRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_report_request, $asserts);
     if ($response instanceof Response) {
@@ -1000,14 +1000,14 @@ class ModerationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ContentAppealRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentAppealRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_appeal_request, $asserts);
     if ($response instanceof Response) {
@@ -1093,14 +1093,14 @@ class ModerationController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ContentReportRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ContentReportRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($content_report_request, $asserts);
     if ($response instanceof Response) {

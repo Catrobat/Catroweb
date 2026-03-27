@@ -27,7 +27,9 @@ class ErrorResponseTest extends TestCase
     self::assertSame(400, $response->getStatusCode());
     self::assertSame('application/json', $response->headers->get('Content-Type'));
 
-    $body = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $content = $response->getContent();
+    self::assertIsString($content);
+    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
     self::assertArrayHasKey('error', $body);
     self::assertSame(400, $body['error']['code']);
     self::assertSame('bad_request', $body['error']['type']);
@@ -44,7 +46,9 @@ class ErrorResponseTest extends TestCase
 
     $response = Controller::createStructuredErrorResponse(422, 'validation_error', 'Validation failed', $details);
 
-    $body = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $content = $response->getContent();
+    self::assertIsString($content);
+    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
     self::assertSame(422, $body['error']['code']);
     self::assertSame('validation_error', $body['error']['type']);
     self::assertCount(2, $body['error']['details']);
@@ -80,7 +84,9 @@ class ErrorResponseTest extends TestCase
     self::assertNotNull($response);
     self::assertSame(404, $response->getStatusCode());
 
-    $body = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $content = $response->getContent();
+    self::assertIsString($content);
+    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
     self::assertSame(404, $body['error']['code']);
     self::assertSame('not_found', $body['error']['type']);
     self::assertSame('Resource not found', $body['error']['message']);
@@ -100,7 +106,9 @@ class ErrorResponseTest extends TestCase
     self::assertNotNull($response);
     self::assertSame(500, $response->getStatusCode());
 
-    $body = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $content = $response->getContent();
+    self::assertIsString($content);
+    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
     self::assertSame(500, $body['error']['code']);
     self::assertSame('internal_error', $body['error']['type']);
     self::assertSame('An unexpected error occurred.', $body['error']['message']);
@@ -130,7 +138,10 @@ class ErrorResponseTest extends TestCase
     $listener->setExceptionResponse($event);
 
     $response = $event->getResponse();
-    $body = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    self::assertNotNull($response);
+    $content = $response->getContent();
+    self::assertIsString($content);
+    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
     self::assertSame('Bad Request', $body['error']['message']);
   }
 }
