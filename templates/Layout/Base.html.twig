@@ -6,13 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
 
-  {% if gtm_container_id %}
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id={{ gtm_container_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-  {% endif %}
+  {# GTM noscript fallback only loads if user has accepted cookies (checked client-side) #}
 
   <title>
     {% block title %}{{ 'title'|trans({}, 'catroweb') }}{% endblock %}
@@ -81,6 +75,13 @@
 <div id="app-language" data-app-language="{{ app.request.locale }}"></div>
 <div class="js-app-env" data-app-env="'{{ app_env }}"></div>
 <div class="js-user-state" data-is-user-logged-in="{% if app.user != null %}true{% else %}false{% endif %}"></div>
+<div id="cookie-consent-config" style="display: none;"
+     data-trans-message="{{ 'cookie-consent.message'|trans({}, 'catroweb')|escape('html_attr') }}"
+     data-trans-accept="{{ 'cookie-consent.accept'|trans({}, 'catroweb')|escape('html_attr') }}"
+     data-trans-decline="{{ 'cookie-consent.decline'|trans({}, 'catroweb')|escape('html_attr') }}"
+     data-trans-privacy-link-text="{{ 'cookie-consent.privacy-link'|trans({}, 'catroweb')|escape('html_attr') }}"
+     data-privacy-url="{{ url('privacypolicy') }}"
+></div>
 {% for snackbarMsg in app.flashes('snackbar') %}
   <div class="js-flash-snackbar" data-msg="{{ snackbarMsg }}"></div>
 {% endfor %}
