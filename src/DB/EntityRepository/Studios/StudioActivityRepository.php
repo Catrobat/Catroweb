@@ -45,7 +45,8 @@ class StudioActivityRepository extends ServiceEntityRepository
     $qb = $this->getEntityManager()->createQueryBuilder();
 
     return $qb->addselect('a')->from(StudioActivity::class, 'a')
-      ->where($qb->expr()->eq('a.studio', "'".$studio->getId()."'"))
+      ->where($qb->expr()->eq('a.studio', ':studio'))
+      ->setParameter('studio', $studio)
       ->orderBy('a.created_on', Criteria::DESC)
       ->getQuery()
       ->getResult()
