@@ -27,18 +27,15 @@ class ProgramLikeRepository extends ServiceEntityRepository
   {
     $qb = $this->createQueryBuilder('l');
 
-    $result = $qb
-      ->select('l')
+    return (int) $qb
+      ->select('COUNT(l)')
       ->where($qb->expr()->eq('l.program_id', ':program_id'))
       ->andWhere($qb->expr()->eq('l.type', ':type'))
       ->setParameter(':program_id', $program_id)
       ->setParameter(':type', $type)
-      ->distinct()
       ->getQuery()
-      ->getResult()
+      ->getSingleScalarResult()
     ;
-
-    return is_countable($result) ? count($result) : 0;
   }
 
   /**
@@ -64,16 +61,13 @@ class ProgramLikeRepository extends ServiceEntityRepository
   {
     $qb = $this->createQueryBuilder('l');
 
-    $result = $qb
-      ->select('l')
+    return (int) $qb
+      ->select('COUNT(l)')
       ->where($qb->expr()->eq('l.program_id', ':program_id'))
       ->setParameter(':program_id', $program_id)
-      ->distinct()
       ->getQuery()
-      ->getResult()
+      ->getSingleScalarResult()
     ;
-
-    return is_countable($result) ? count($result) : 0;
   }
 
   /**

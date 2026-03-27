@@ -26,7 +26,7 @@ Catroweb is the share/communication platform for the Catrobat community. It's a 
 - **Backend**: PHP 8.5, Symfony 7.4
 - **Frontend**: JavaScript (ES6+), SCSS, Webpack Encore
 - **Database**: MariaDB 10.11
-- **Search**: Elasticsearch 7.17
+- **Search**: Elasticsearch 8.17
 - **CSS Framework**: Bootstrap 5, Material Design Components
 - **Package Managers**: Composer (PHP), Yarn (JS)
 

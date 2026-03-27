@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Generic Notification.
  */
+#[ORM\Table(name: 'CatroNotification')]
+#[ORM\Index(name: 'notif_user_seen_idx', columns: ['user', 'seen'])]
+#[ORM\Index(name: 'notif_user_id_idx', columns: ['user', 'id'])]
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'notification_type', type: 'string')]

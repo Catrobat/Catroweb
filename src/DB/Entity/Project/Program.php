@@ -34,6 +34,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(name: 'private_idx', columns: ['private'])]
 #[ORM\Index(name: 'debug_build_idx', columns: ['debug_build'])]
 #[ORM\Index(name: 'flavor_idx', columns: ['flavor'])]
+#[ORM\Index(name: 'program_listing_idx', columns: ['visible', 'auto_hidden', 'private', 'debug_build', 'uploaded_at'])]
+#[ORM\Index(name: 'program_popularity_idx', columns: ['visible', 'auto_hidden', 'private', 'debug_build', 'popularity'])]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program implements \Stringable

@@ -1,15 +1,15 @@
 # Configure Elasticsearch on Ubuntu
 
-Check out this blog:
-https://ourcodeworld.com/articles/read/1508/how-to-install-elasticsearch-7-in-ubuntu-2004
-
-In summary:
-
 ```
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
 sudo apt update
 sudo apt install elasticsearch
+# Disable security for local development (ES 8.x enables it by default)
+# Replace if present, otherwise append
+grep -q '^xpack.security.enabled' /etc/elasticsearch/elasticsearch.yml \
+  && sudo sed -i 's/^xpack.security.enabled:.*/xpack.security.enabled: false/' /etc/elasticsearch/elasticsearch.yml \
+  || echo 'xpack.security.enabled: false' | sudo tee -a /etc/elasticsearch/elasticsearch.yml
 sudo systemctl start elasticsearch
 sudo systemctl enable elasticsearch
 ```

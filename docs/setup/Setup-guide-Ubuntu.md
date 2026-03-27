@@ -61,12 +61,9 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install ./google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
-## Install elastic search
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
-sudo apt update
-sudo apt install elasticsearch
-sudo service elasticsearch start
+## Install Elasticsearch
+
+Follow the steps in [Installing Elasticsearch](./Installing-Elasticsearch.md), then continue here.
 
 ## Install the project dependencies
 yarn install
@@ -182,18 +179,9 @@ exit
 
 Now you should be able to login to phpMyAdmin with **username**: root **passsword**: 'root'
 
-### 4. Install **elasticsearch**
+### 4. Install **Elasticsearch**
 
-https://ourcodeworld.com/articles/read/1508/how-to-install-elasticsearch-7-in-ubuntu-2004
-
-```
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
-sudo apt update
-sudo apt install elasticsearch
-sudo systemctl start elasticsearch
-sudo systemctl enable elasticsearch
-```
+Follow the steps in [Installing Elasticsearch](./Installing-Elasticsearch.md).
 
 Check if it works with:
 

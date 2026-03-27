@@ -2,7 +2,7 @@
 
 This guide sets up **Catroweb** on **macOS** using **system Apache**, **PHP-FPM**, **MariaDB**, **Node**, and **Elasticsearch**.
 
-> Note: Catroweb’s default config expects Elasticsearch on plain HTTP at `http://localhost:9200/` (`ELASTICSEARCH_URL`, `ES_HOST`, `ES_PORT`). The Docker dev setup also uses `http://localhost:9200`. The Ubuntu setup script installs Elasticsearch from the 7.x channel, so we recommend ES 7.17.x for local development too.
+> Note: Catroweb’s default config expects Elasticsearch on plain HTTP at `http://localhost:9200/` (`ELASTICSEARCH_URL`, `ES_HOST`, `ES_PORT`). The Docker dev setup also uses `http://localhost:9200`. We recommend ES 8.17.x for local development.
 
 ## 1) Prerequisites
 
@@ -207,9 +207,9 @@ Open:
 
 http://catroweb
 
-## 4) Elasticsearch (recommended: 7.17.x via archive)
+## 4) Elasticsearch (recommended: 8.17.x via archive)
 
-Homebrew no longer provides `elasticsearch@7` in the Elastic tap, so install ES 7.17.x from the official archive.
+Install ES 8.17.x from the official archive.
 
 ### 4.1 Download (choose your architecture)
 
@@ -222,39 +222,39 @@ uname -m
 - `arm64` → Apple Silicon
 - `x86_64` → Intel
 
-Example for 7.17.26 (replace version if needed):
+Example for 8.17.0 (replace version if needed):
 
 For Apple Silicon:
 
 ```
 cd ~/Downloads
-curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.26-darwin-aarch64.tar.gz
-curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.26-darwin-aarch64.tar.gz.sha512
-shasum -a 512 -c elasticsearch-7.17.26-darwin-aarch64.tar.gz.sha512
-tar -xzf elasticsearch-7.17.26-darwin-aarch64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-darwin-aarch64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-darwin-aarch64.tar.gz.sha512
+shasum -a 512 -c elasticsearch-8.17.0-darwin-aarch64.tar.gz.sha512
+tar -xzf elasticsearch-8.17.0-darwin-aarch64.tar.gz
 ```
 
 For Intel:
 
 ```
 cd ~/Downloads
-curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.26-darwin-x86_64.tar.gz
-curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.26-darwin-x86_64.tar.gz.sha512
-shasum -a 512 -c elasticsearch-7.17.26-darwin-x86_64.tar.gz.sha512
-tar -xzf elasticsearch-7.17.26-darwin-x86_64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-darwin-x86_64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-darwin-x86_64.tar.gz.sha512
+shasum -a 512 -c elasticsearch-8.17.0-darwin-x86_64.tar.gz.sha512
+tar -xzf elasticsearch-8.17.0-darwin-x86_64.tar.gz
 ```
 
 Move it:
 
 ```
 sudo mkdir -p /usr/local/elasticsearch
-sudo mv elasticsearch-7.17.26 /usr/local/elasticsearch/elasticsearch-7
+sudo mv elasticsearch-8.17.0 /usr/local/elasticsearch/elasticsearch-8
 ```
 
 ### 4.2 Configure local dev settings
 
 ```
-sudo nano /usr/local/elasticsearch/elasticsearch-7/config/elasticsearch.yml
+sudo nano /usr/local/elasticsearch/elasticsearch-8/config/elasticsearch.yml
 ```
 
 Add/ensure:
@@ -264,12 +264,15 @@ cluster.name: catroweb-dev
 node.name: node-1
 network.host: 127.0.0.1
 http.port: 9200
+xpack.security.enabled: false
 ```
+
+> **Note:** `xpack.security.enabled: false` disables TLS/auth for local development. ES 8.x enables security by default; without this setting, you'd need HTTPS and credentials.
 
 ### 4.3 Start Elasticsearch
 
 ```
-cd /usr/local/elasticsearch/elasticsearch-7
+cd /usr/local/elasticsearch/elasticsearch-8
 ./bin/elasticsearch
 ```
 
@@ -332,10 +335,10 @@ And make sure Apache can traverse the symlink target folders (on macOS, `_www` n
 
 ### Elasticsearch errors like “Unknown error:52”
 
-Usually means Catroweb uses HTTP but ES is HTTPS/TLS (ES 8 default). Use ES 7.17.x with HTTP on 9200, matching defaults.
+Usually means ES has security/TLS enabled (ES 8.x default). Ensure `xpack.security.enabled: false` in `elasticsearch.yml` for local development, or set up TLS certificates.
 
 ## 7) Useful references
 
 - Default Elasticsearch env vars in Catroweb `.env`: `ELASTICSEARCH_URL=http://localhost:9200/`, `ES_HOST=localhost`, `ES_PORT=9200`.
 - Docker dev env sets `ELASTICSEARCH_URL=http://elasticsearch:9200/`.
-- Ubuntu setup installs Elasticsearch from 7.x repo.
+- Ubuntu setup installs Elasticsearch from the 8.x repo.

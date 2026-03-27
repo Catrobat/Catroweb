@@ -145,42 +145,35 @@ class NotificationRepository extends ServiceEntityRepository
    */
   public function getUnseenCounts(User $user): array
   {
-    $em = $this->getEntityManager();
-    $baseWhere = ['n.user = :user', 'n.seen = false'];
+    $conn = $this->getEntityManager()->getConnection();
+    $tableName = $this->getClassMetadata()->getTableName();
 
-    $total = (int) $em->createQueryBuilder()
-      ->select('COUNT(n.id)')
-      ->from(CatroNotification::class, 'n')
-      ->where($baseWhere[0])
-      ->andWhere($baseWhere[1])
-      ->setParameter('user', $user)
-      ->getQuery()
-      ->getSingleScalarResult()
-    ;
+    $sql = <<<'SQL'
+      SELECT
+        COUNT(*) AS total,
+        SUM(CASE WHEN notification_type = 'like' THEN 1 ELSE 0 END) AS `like`,
+        SUM(CASE WHEN notification_type IN ('follow', 'follow_project') THEN 1 ELSE 0 END) AS follower,
+        SUM(CASE WHEN notification_type = 'comment' THEN 1 ELSE 0 END) AS comment,
+        SUM(CASE WHEN notification_type = 'remix_notification' THEN 1 ELSE 0 END) AS remix,
+        SUM(CASE WHEN notification_type = 'moderation' THEN 1 ELSE 0 END) AS moderation
+      FROM %s
+      WHERE user = :user_id AND seen = 0
+      SQL;
 
-    $typeFilters = [
-      'like' => 'n INSTANCE OF '.LikeNotification::class,
-      'follower' => '(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')',
-      'comment' => 'n INSTANCE OF '.CommentNotification::class,
-      'remix' => 'n INSTANCE OF '.RemixNotification::class,
-      'moderation' => 'n INSTANCE OF '.ModerationNotification::class,
-    ];
+    $row = $conn->fetchAssociative(sprintf($sql, $tableName), ['user_id' => $user->getId()]);
 
-    $result = ['total' => $total, 'like' => 0, 'follower' => 0, 'comment' => 0, 'remix' => 0, 'moderation' => 0];
-    foreach ($typeFilters as $key => $filter) {
-      $result[$key] = (int) $em->createQueryBuilder()
-        ->select('COUNT(n.id)')
-        ->from(CatroNotification::class, 'n')
-        ->where($baseWhere[0])
-        ->andWhere($baseWhere[1])
-        ->andWhere($filter)
-        ->setParameter('user', $user)
-        ->getQuery()
-        ->getSingleScalarResult()
-      ;
+    if (false === $row) {
+      return ['total' => 0, 'like' => 0, 'follower' => 0, 'comment' => 0, 'remix' => 0, 'moderation' => 0];
     }
 
-    return $result;
+    return [
+      'total' => (int) $row['total'],
+      'like' => (int) $row['like'],
+      'follower' => (int) $row['follower'],
+      'comment' => (int) $row['comment'],
+      'remix' => (int) $row['remix'],
+      'moderation' => (int) $row['moderation'],
+    ];
   }
 
   private function applyTypeFilter(QueryBuilder $qb, string $type): void
