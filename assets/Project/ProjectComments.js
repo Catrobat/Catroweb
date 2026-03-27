@@ -284,12 +284,12 @@ export function ProjectComments(
           return response
             .json()
             .then((body) => {
-              if (body?.error === 'Email verification required.') {
+              if (body?.error?.message === 'Email verification required.') {
                 const msg =
                   projectComments?.dataset.transAccountNotVerified ||
                   'Please make sure you are logged in and your account\u2019s email is verified.'
                 showPopUp('warning', msg)
-              } else if (body?.error === 'Your account has been suspended.') {
+              } else if (body?.error?.message === 'Your account has been suspended.') {
                 const msg =
                   projectComments?.dataset.transAccountSuspended ||
                   'Your account has been suspended due to community reports.'

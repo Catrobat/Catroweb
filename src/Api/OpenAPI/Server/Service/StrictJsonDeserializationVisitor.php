@@ -71,7 +71,7 @@ class StrictJsonDeserializationVisitor implements DeserializationVisitorInterfac
 
   public function visitDouble($data, array $type): float
   {
-    if (!is_float($data) && !is_int($data)) {
+    if (!is_float($data) && !is_integer($data)) {
       throw TypeMismatchException::fromValue('double', $data);
     }
 

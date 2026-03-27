@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ContentReportRequest.
+ * ErrorResponseErrorDetailsInner.
  *
  * PHP version 8.1.1
  *
@@ -35,16 +35,16 @@ use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the ContentReportRequest model.
+ * Class representing the ErrorResponseErrorDetailsInner model.
  *
  * @author  OpenAPI Generator team
  */
-class ContentReportRequest
+class ErrorResponseErrorDetailsInner
 {
   /**
-   * Report reason category.
+   * The field that caused the error.
    *
-   * @SerializedName("category")
+   * @SerializedName("field")
    *
    * @Assert\NotNull()
    *
@@ -52,22 +52,20 @@ class ContentReportRequest
    *
    * @Type("string")
    */
-  protected ?string $category = null;
+  protected ?string $field = null;
 
   /**
-   * Optional additional details.
+   * Human-readable error message for this field.
    *
-   * @SerializedName("note")
+   * @SerializedName("message")
+   *
+   * @Assert\NotNull()
    *
    * @Assert\Type("string")
    *
    * @Type("string")
-   *
-   * @Assert\Length(
-   *   max = 5000
-   * )
    */
-  protected ?string $note = null;
+  protected ?string $message = null;
 
   /**
    * Constructor.
@@ -77,51 +75,51 @@ class ContentReportRequest
   public function __construct(?array $data = null)
   {
     if (is_array($data)) {
-      $this->category = array_key_exists('category', $data) ? $data['category'] : $this->category;
-      $this->note = array_key_exists('note', $data) ? $data['note'] : $this->note;
+      $this->field = array_key_exists('field', $data) ? $data['field'] : $this->field;
+      $this->message = array_key_exists('message', $data) ? $data['message'] : $this->message;
     }
   }
 
   /**
-   * Gets category.
+   * Gets field.
    */
-  public function getCategory(): ?string
+  public function getField(): ?string
   {
-    return $this->category;
+    return $this->field;
   }
 
   /**
-   * Sets category.
+   * Sets field.
    *
-   * @param string|null $category Report reason category
+   * @param string|null $field The field that caused the error
    *
    * @return $this
    */
-  public function setCategory(?string $category): self
+  public function setField(?string $field): self
   {
-    $this->category = $category;
+    $this->field = $field;
 
     return $this;
   }
 
   /**
-   * Gets note.
+   * Gets message.
    */
-  public function getNote(): ?string
+  public function getMessage(): ?string
   {
-    return $this->note;
+    return $this->message;
   }
 
   /**
-   * Sets note.
+   * Sets message.
    *
-   * @param string|null $note Optional additional details
+   * @param string|null $message Human-readable error message for this field
    *
    * @return $this
    */
-  public function setNote(?string $note = null): self
+  public function setMessage(?string $message): self
   {
-    $this->note = $note;
+    $this->message = $message;
 
     return $this;
   }

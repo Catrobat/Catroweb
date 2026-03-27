@@ -56,7 +56,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function commentsIdDeleteAction(Request $request, $id): Response
+  public function commentsIdDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -137,7 +137,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function commentsIdRepliesGetAction(Request $request, $id): Response
+  public function commentsIdRepliesGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -237,7 +237,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function commentsIdTranslationGetAction(Request $request, $id): Response
+  public function commentsIdTranslationGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -338,7 +338,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdCommentsGetAction(Request $request, $id): Response
+  public function projectIdCommentsGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -438,7 +438,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdCommentsPostAction(Request $request, $id): Response
+  public function projectIdCommentsPostAction(Request $request, $id)
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -471,7 +471,7 @@ class CommentsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $comment_create_request = $this->deserialize($comment_create_request, \OpenAPI\Server\Model\CommentCreateRequest::class, $inputFormat);
+      $comment_create_request = $this->deserialize($comment_create_request, 'OpenAPI\Server\Model\CommentCreateRequest', $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -488,7 +488,7 @@ class CommentsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\CommentCreateRequest::class);
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\CommentCreateRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($comment_create_request, $asserts);
     if ($response instanceof Response) {

@@ -56,7 +56,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdDeleteAction(Request $request, $id): Response
+  public function studioIdDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -138,7 +138,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdGetAction(Request $request, $id): Response
+  public function studioIdGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -224,7 +224,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdPostAction(Request $request, $id): Response
+  public function studioIdPostAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -356,7 +356,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioPostAction(Request $request): Response
+  public function studioPostAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

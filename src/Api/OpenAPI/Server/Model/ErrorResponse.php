@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ContentAppealRequest.
+ * ErrorResponse.
  *
  * PHP version 8.1.1
  *
@@ -35,28 +35,26 @@ use JMS\Serializer\Annotation\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the ContentAppealRequest model.
+ * Class representing the ErrorResponse model.
+ *
+ * Standard error response format used across all API endpoints
  *
  * @author  OpenAPI Generator team
  */
-class ContentAppealRequest
+class ErrorResponse
 {
   /**
-   * Justification for the appeal.
-   *
-   * @SerializedName("reason")
+   * @SerializedName("error")
    *
    * @Assert\NotNull()
    *
-   * @Assert\Type("string")
+   * @Assert\Valid()
    *
-   * @Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ErrorResponseError")
    *
-   * @Assert\Length(
-   *   max = 5000
-   * )
+   * @Type("OpenAPI\Server\Model\ErrorResponseError")
    */
-  protected ?string $reason = null;
+  protected ?ErrorResponseError $error = null;
 
   /**
    * Constructor.
@@ -66,28 +64,26 @@ class ContentAppealRequest
   public function __construct(?array $data = null)
   {
     if (is_array($data)) {
-      $this->reason = array_key_exists('reason', $data) ? $data['reason'] : $this->reason;
+      $this->error = array_key_exists('error', $data) ? $data['error'] : $this->error;
     }
   }
 
   /**
-   * Gets reason.
+   * Gets error.
    */
-  public function getReason(): ?string
+  public function getError(): ?ErrorResponseError
   {
-    return $this->reason;
+    return $this->error;
   }
 
   /**
-   * Sets reason.
-   *
-   * @param string|null $reason Justification for the appeal
+   * Sets error.
    *
    * @return $this
    */
-  public function setReason(?string $reason): self
+  public function setError(?ErrorResponseError $error): self
   {
-    $this->reason = $reason;
+    $this->error = $error;
 
     return $this;
   }
