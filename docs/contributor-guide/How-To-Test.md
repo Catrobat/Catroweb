@@ -83,6 +83,32 @@ Useful failure artifacts:
 - Screenshots: `tests/TestReports/TestScreenshots/`
 - Behat logs: `tests/TestReports/Behat/`
 
+### Playwright
+
+Experimental browser comparison for the `web/general` suite:
+
+- Configuration: `playwright.config.js`
+- Tests: `tests/Playwright/web-general/`
+- Reports: `tests/TestReports/Playwright/`
+
+Run the migrated browser tests:
+
+```bash
+yarn test-e2e:playwright:web-general
+```
+
+Install the Playwright browser locally if needed:
+
+```bash
+yarn test-e2e:playwright:install
+```
+
+Notes:
+
+- The Playwright suite assumes the Docker test stack is already running on `http://127.0.0.1:8080`.
+- It prepares and seeds test data by calling test-only Symfony console commands inside `app.catroweb`.
+- The current migration focuses on browser-facing `web/general` behavior so it can be compared against the existing Behat `web-general` matrix job.
+
 ## Static Analysis
 
 ### One-by-one

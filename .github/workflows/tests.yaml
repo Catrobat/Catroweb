@@ -120,6 +120,79 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # Playwright:
+  #
+  #  - This job mirrors the browser-facing `web-general` Behat coverage with Playwright so we can compare authoring
+  #    style, stability, and runtime directly inside the same workflow.
+  #  - The Symfony app still runs inside Docker; Playwright executes on the GitHub runner and seeds named fixtures
+  #    through test-only Symfony console commands.
+  #
+  tests_playwright_web_general:
+    name: Playwright web-general
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node and yarn dependencies
+        uses: ./.github/actions/setup-yarn-node-modules
+
+      - name: Install Playwright Chromium
+        run: yarn run test-e2e:playwright:install
+
+      - name: Download Docker Image
+        uses: actions/download-artifact@v8
+        with:
+          name: catroweb-image
+          path: docker
+
+      - name: Load Docker Image
+        run: |
+          cd docker
+          gunzip -c catroweb-image.tar.gz | docker load
+
+      - name: Build and Start Docker Containers
+        run: |
+          cd docker
+          docker compose -f docker-compose.test.yaml up -d
+
+      - name: Warmup the cache
+        run: |
+          docker exec app.catroweb bin/console cache:warmup -e test
+
+      - name: Run Playwright web-general tests
+        id: playwright-run
+        env:
+          PLAYWRIGHT_APP_CONTAINER: app.catroweb
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:8080
+        run: |
+          start=$(date +%s)
+          set +e
+          yarn run test-e2e:playwright:web-general
+          exit_code=$?
+          end=$(date +%s)
+          echo "duration_seconds=$((end-start))" >> $GITHUB_OUTPUT
+          exit $exit_code
+
+      - name: Summarize Playwright runtime
+        if: always()
+        run: |
+          {
+            echo "### Playwright web-general runtime"
+            echo
+            echo "- Duration: ${{ steps.playwright-run.outputs.duration_seconds || 'n/a' }} seconds"
+            echo "- Compare this with the existing \`Behat (web-general)\` matrix job in the same workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: PlaywrightWebGeneralReport
+          path: tests/TestReports/Playwright
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Behat:
   #
   #  - This job runs all Behat suites parallel using a matrix strategy. This is done since integrations tests which
