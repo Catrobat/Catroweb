@@ -20,6 +20,8 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -38,7 +40,11 @@ class AchievementsApiTest extends TestCase
   {
     $this->facade = $this->createStub(AchievementsApiFacade::class);
     $this->user_manager = $this->createStub(UserManager::class);
-    $this->object = new AchievementsApi($this->facade, $this->user_manager);
+    $this->object = new AchievementsApi(
+      $this->facade,
+      $this->user_manager,
+      $this->createNoLimitRateLimiterFactory('phpunit_achievements_burst'),
+    );
   }
 
   #[Group('unit')]
@@ -209,5 +215,16 @@ class AchievementsApiTest extends TestCase
     $this->assertIsArray($response);
     $this->assertCount(1, $response);
     $this->assertInstanceOf(AchievementResponse::class, $response[0]);
+  }
+
+  private function createNoLimitRateLimiterFactory(string $id): RateLimiterFactory
+  {
+    return new RateLimiterFactory(
+      [
+        'id' => $id,
+        'policy' => 'no_limit',
+      ],
+      new InMemoryStorage(),
+    );
   }
 }

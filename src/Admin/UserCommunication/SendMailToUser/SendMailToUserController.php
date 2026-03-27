@@ -62,7 +62,6 @@ class SendMailToUserController extends CRUDController
       return new Response('Empty title!', Response::HTTP_BAD_REQUEST);
     }
 
-    $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
     $mailTo = $user->getEmail();
     $this->mailer->send(
       $mailTo,
@@ -71,7 +70,7 @@ class SendMailToUserController extends CRUDController
       [
         'subject' => $subject,
         'title' => $title,
-        'message' => $htmlText,
+        'message' => $messageText,
       ]
     );
 

@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2'
-import { getCookie } from '../Security/CookieHelper'
 import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 import { escapeAttr } from '../Components/HtmlEscape'
 
@@ -43,13 +42,11 @@ export function showAppealDialog({ apiUrl, translations }) {
 }
 
 function submitAppeal(apiUrl, reason, translations) {
-  const token = getCookie('BEARER')
-
   return fetch(apiUrl, {
     method: 'POST',
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
     },
     body: JSON.stringify({ reason }),
   })

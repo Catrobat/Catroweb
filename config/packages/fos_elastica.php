@@ -14,7 +14,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'default' => [
           'hosts' => [
             '%env(ELASTICSEARCH_URL)%',
-            '%env(ES_HOST)%:%env(ES_PORT)%',
           ],
         ],
       ],
@@ -51,9 +50,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'language_version' => [
               'type' => 'float',
             ],
-            'name' => [
-              'boost' => 3,
-            ],
+            'name' => null,
             'private' => null,
             'visible' => null,
             'debug_build' => null,
@@ -111,9 +108,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
           'properties' => [
             'id' => null,
-            'username' => [
-              'boost' => 3,
-            ],
+            'username' => null,
             'profile_hidden' => null,
             'verified' => null,
           ],

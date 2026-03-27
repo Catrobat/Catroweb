@@ -13,15 +13,13 @@ import 'material-icons/iconfont/material-icons.css'
 import textFillDefault from '../Components/TextFillDefault'
 import './TopBar'
 import './Sidebar'
-import { TokenExpirationHandler } from '../Security/TokenExpirationHandler'
 import { LogoutTokenHandler } from '../Security/LogoutTokenHandler'
 import { showSnackbar } from './Snackbar'
 
 import Bugsnag from '@bugsnag/js'
 import BugsnagPerformance from '@bugsnag/browser-performance'
 
-import { Analytics } from 'analytics'
-import googleTagManager from '@analytics/google-tag-manager'
+import { initAnalyticsIfConsented, showCookieSettings } from './CookieConsent'
 
 // Start the stimulus app
 import '../bootstrap'
@@ -35,30 +33,29 @@ if (bugsnagApiKey) {
   BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion })
 }
 
-const gtmContainerId = document.getElementById('gtm-container-id').dataset.gtmContainerId
-if (gtmContainerId) {
-  const analytics = Analytics({
-    app: 'share.catrob.at',
-    plugins: [
-      googleTagManager({
-        containerId: gtmContainerId,
-      }),
-    ],
-  })
-  analytics.page() /* Track a page view */
-}
+initAnalyticsIfConsented()
 
 require('./Base.scss')
 require('./Footer.scss')
 
-new TokenExpirationHandler()
 new LogoutTokenHandler()
 
 document.addEventListener('DOMContentLoaded', () => {
   showFlashSnackbar()
   fitHeadingFontSizeToAvailableWidth()
   initScrollToHash()
+  initCookieSettingsLink()
 })
+
+function initCookieSettingsLink() {
+  const link = document.querySelector('.js-cookie-settings')
+  if (link) {
+    link.addEventListener('click', (e) => {
+      e.preventDefault()
+      showCookieSettings()
+    })
+  }
+}
 
 function showFlashSnackbar() {
   const snackbarFlashMessages = document.getElementsByClassName('js-flash-snackbar')

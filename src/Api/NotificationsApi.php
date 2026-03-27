@@ -10,14 +10,19 @@ use OpenAPI\Server\Api\NotificationsApiInterface;
 use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationsCountResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
 {
+  use RateLimitTrait;
+
   private const int DEFAULT_LIMIT = 20;
   private const int MAX_LIMIT = 50;
 
-  public function __construct(private readonly NotificationsApiFacade $facade)
-  {
+  public function __construct(
+    private readonly NotificationsApiFacade $facade,
+    private readonly RateLimiterFactory $notificationBurstLimiter,
+  ) {
   }
 
   #[\Override]
@@ -44,6 +49,15 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
       return null;
     }
 
+    $rate_limit = $this->checkUserRateLimit($user, $this->notificationBurstLimiter);
+    if (null === $rate_limit) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
+
     $response = $this->facade->getResponseManager()->createNotificationsCountResponse($user);
 
     $responseCode = Response::HTTP_OK;
@@ -62,6 +76,15 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
 
       return null;
     }
+
+    $rate_limit = $this->checkUserRateLimit($user, $this->notificationBurstLimiter);
+    if (null === $rate_limit) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $limit = $this->normalizeLimit($limit);
 

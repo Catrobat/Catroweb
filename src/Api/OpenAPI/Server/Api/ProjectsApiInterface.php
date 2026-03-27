@@ -199,16 +199,17 @@ interface ProjectsApiInterface
    *
    * Get recommended projects related to the specific project
    *
-   * @param string $id              (required)
-   * @param string $category        * &#x60;similar&#x60; - Get similar projects to the specific project  * &#x60;also_downloaded&#x60; - Get projects that users who downloaded the specific project also downloaded  * &#x60;more_from_user&#x60; - Get more projects from the owner of the specific project (required)
-   * @param string $accept_language (optional, default to 'en')
-   * @param string $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $flavor          (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $id              (required)
+   * @param string      $category        * &#x60;similar&#x60; - Get similar projects to the specific project  * &#x60;also_downloaded&#x60; - Get projects that users who downloaded the specific project also downloaded  * &#x60;more_from_user&#x60; - Get more projects from the owner of the specific project (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param string      $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $attributes      (optional, default to '')
+   * @param string      $flavor          (optional, default to '')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function projectIdRecommendationsGet(
     string $id,
@@ -217,6 +218,7 @@ interface ProjectsApiInterface
     string $max_version,
     int $limit,
     int $offset,
+    ?string $cursor,
     string $attributes,
     string $flavor,
     int &$responseCode,
@@ -262,20 +264,22 @@ interface ProjectsApiInterface
    *
    * Get the currently featured projects
    *
-   * @param string $platform        Indication for which platform the response should be optimized (ios, android) (optional, default to '')
-   * @param string $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $flavor          (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $platform        Indication for which platform the response should be optimized (ios, android) (optional, default to '')
+   * @param string      $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $attributes      (optional, default to '')
+   * @param string      $flavor          (optional, default to '')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function projectsFeaturedGet(
     string $platform,
     string $max_version,
     int $limit,
     int $offset,
+    ?string $cursor,
     string $attributes,
     string $flavor,
     int &$responseCode,
@@ -287,15 +291,16 @@ interface ProjectsApiInterface
    *
    * Get projects
    *
-   * @param string $category        (required)
-   * @param string $accept_language (optional, default to 'en')
-   * @param string $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $flavor          (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $category        (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param string      $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $attributes      (optional, default to '')
+   * @param string      $flavor          (optional, default to '')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function projectsGet(
     string $category,
@@ -303,6 +308,7 @@ interface ProjectsApiInterface
     string $max_version,
     int $limit,
     int $offset,
+    ?string $cursor,
     string $attributes,
     string $flavor,
     int &$responseCode,
@@ -337,20 +343,22 @@ interface ProjectsApiInterface
    *
    * Search for projects associated with a keywords
    *
-   * @param string $query           (required)
-   * @param string $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $flavor          (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $query           (required)
+   * @param string      $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $attributes      (optional, default to '')
+   * @param string      $flavor          (optional, default to '')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function projectsSearchGet(
     string $query,
     string $max_version,
     int $limit,
     int $offset,
+    ?string $cursor,
     string $attributes,
     string $flavor,
     int &$responseCode,
@@ -377,18 +385,20 @@ interface ProjectsApiInterface
    *
    * Get the projects of the logged in user
    *
-   * @param string $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $flavor          (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $attributes      (optional, default to '')
+   * @param string      $flavor          (optional, default to '')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function projectsUserGet(
     string $max_version,
     int $limit,
     int $offset,
+    ?string $cursor,
     string $attributes,
     string $flavor,
     int &$responseCode,
@@ -400,20 +410,22 @@ interface ProjectsApiInterface
    *
    * Get the public projects of a given user
    *
-   * @param string $id              (required)
-   * @param string $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param string $attributes      (optional, default to '')
-   * @param string $flavor          (optional, default to '')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $id              (required)
+   * @param string      $max_version     Only shows project with a smaller version number than max version.  &#x60;Warning!&#x60; Current implementation is kinda broken. To ensure correct results use the following format &#39;[0-9].[0-9]{3}&#39; (optional, default to '')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param string      $attributes      (optional, default to '')
+   * @param string      $flavor          (optional, default to '')
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function projectsUserIdGet(
     string $id,
     string $max_version,
     int $limit,
     int $offset,
+    ?string $cursor,
     string $attributes,
     string $flavor,
     int &$responseCode,

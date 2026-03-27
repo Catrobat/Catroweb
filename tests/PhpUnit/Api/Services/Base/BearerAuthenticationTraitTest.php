@@ -10,6 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @internal
@@ -23,6 +24,12 @@ final class BearerAuthenticationTraitTest extends TestCase
   protected function setUp(): void
   {
     $this->object = new BearerAuthenticationTraitTestClass();
+  }
+
+  #[\Override]
+  protected function tearDown(): void
+  {
+    $this->object->setCurrentRequest(null);
   }
 
   #[Group('integration')]
@@ -73,5 +80,20 @@ final class BearerAuthenticationTraitTest extends TestCase
         'expected' => 'Abcdefghijklmnopqrstuvwxyz1234567890',
       ],
     ];
+  }
+
+  /**
+   * @throws \Exception
+   */
+  #[Group('unit')]
+  public function testSetBearerAuthFallsBackToBearerCookie(): void
+  {
+    $request = Request::create('/api/projects', 'GET');
+    $request->cookies->set('BEARER', 'cookie-token');
+    $this->object->setCurrentRequest($request);
+
+    $this->object->setBearerAuth(null);
+
+    $this->assertSame('cookie-token', $this->object->getAuthenticationToken());
   }
 }

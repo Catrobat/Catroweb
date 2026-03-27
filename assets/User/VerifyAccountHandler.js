@@ -1,4 +1,3 @@
-import { getCookie } from '../Security/CookieHelper'
 import AcceptLanguage from '../Api/AcceptLanguage'
 import { showSnackbar } from '../Layout/Snackbar'
 
@@ -11,9 +10,9 @@ export default class {
       btn.setAttribute('disabled', 'disabled')
       fetch(baseUrl + 'verify', {
         method: 'POST',
+        credentials: 'same-origin',
         headers: {
           Accept: 'application/json',
-          Authorization: 'Bearer ' + getCookie('BEARER'),
           'Accept-Language': new AcceptLanguage().get(),
         },
       }).then((response) => {

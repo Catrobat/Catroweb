@@ -42,7 +42,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->registrationBurstLimiter)) {
+    if (null === $this->checkIpRateLimit($ip, $this->registrationBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
@@ -91,6 +91,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     $responseCode = Response::HTTP_NO_CONTENT;
 
     $this->facade->getProcessor()->deleteUser($this->facade->getAuthenticationManager()->getAuthenticatedUser());
+    $this->facade->getResponseManager()->addClearedAuthenticationCookiesToHeader($responseHeaders);
   }
 
   /**
@@ -168,7 +169,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function usersSearchGet(string $query, int $limit, int $offset, string $attributes, int &$responseCode, array &$responseHeaders): array
+  public function usersSearchGet(string $query, int $limit, int $offset, ?string $cursor, string $attributes, int &$responseCode, array &$responseHeaders): array
   {
     $users = $this->facade->getLoader()->searchUsers($query, $limit, $offset);
 
@@ -184,7 +185,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language, int &$responseCode, array &$responseHeaders): ?RegisterErrorResponse
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->passwordResetBurstLimiter)) {
+    if (null === $this->checkIpRateLimit($ip, $this->passwordResetBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
@@ -217,7 +218,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function usersGet(string $query, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|object|null
+  public function usersGet(string $query, int $limit, int $offset, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $users = $this->facade->getLoader()->getAllUsers($query, $limit, $offset);
 

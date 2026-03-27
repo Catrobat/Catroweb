@@ -8,7 +8,6 @@ import { Modal } from 'bootstrap'
 import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle'
 import { OwnProjectList } from '../Project/OwnProjectList'
 import Swal from 'sweetalert2'
-import { deleteCookie } from '../Security/CookieHelper'
 import MessageDialogs from '../Components/MessageDialogs'
 import { ApiDeleteFetch, ApiPutFetch } from '../Api/ApiHelper'
 import VerifyAccountHandler from './VerifyAccountHandler'
@@ -232,7 +231,6 @@ class OwnProfile {
             'Delete User',
             myProfileConfiguration.messages.unspecifiedErrorText,
             function () {
-              deleteCookie('BEARER', routingDataset.baseUrl + '/')
               window.location.href = routingDataset.index
             },
           ).run()

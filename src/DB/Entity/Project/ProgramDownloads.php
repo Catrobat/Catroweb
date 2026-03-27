@@ -9,6 +9,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_downloads')]
+#[ORM\Index(name: 'pd_program_idx', columns: ['program_id'])]
+#[ORM\Index(name: 'pd_downloaded_at_idx', columns: ['downloaded_at'])]
+#[ORM\Index(name: 'pd_user_idx', columns: ['user'])]
 #[ORM\Entity]
 class ProgramDownloads
 {

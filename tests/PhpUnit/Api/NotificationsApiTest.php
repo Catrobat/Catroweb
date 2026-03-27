@@ -18,6 +18,8 @@ use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -37,7 +39,10 @@ class NotificationsApiTest extends TestCase
   protected function setUp(): void
   {
     $this->facade = $this->createStub(NotificationsApiFacade::class);
-    $this->object = new NotificationsApi($this->facade);
+    $this->object = new NotificationsApi(
+      $this->facade,
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+    );
   }
 
   #[Group('unit')]

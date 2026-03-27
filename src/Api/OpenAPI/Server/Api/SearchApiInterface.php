@@ -46,18 +46,20 @@ interface SearchApiInterface
    *
    * Search for projects, users,..
    *
-   * @param string $query           (required)
-   * @param string $type            (optional, default to 'all')
-   * @param int    $limit           (optional, default to 20)
-   * @param int    $offset          (optional, default to 0)
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   * @param string      $query           (required)
+   * @param string      $type            (optional, default to 'all')
+   * @param int         $limit           (optional, default to 20)
+   * @param int         $offset          Deprecated: Use cursor-based pagination instead. How many objects should be skipped. (optional, default to 0) (deprecated)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function searchGet(
     string $query,
     string $type,
     int $limit,
     int $offset,
+    ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;

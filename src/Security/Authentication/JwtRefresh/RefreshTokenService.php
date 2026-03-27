@@ -10,13 +10,17 @@ use App\User\UserManager;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTDecodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\HttpKernel\Event\KernelEvent;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class RefreshTokenService
 {
+  public const string REFRESHED_BEARER_COOKIE_ATTRIBUTE = '_refreshed_bearer_cookie';
+  public const string CLEAR_AUTHENTICATION_COOKIES_ATTRIBUTE = '_clear_authentication_cookies';
+
   public function __construct(
     #[Autowire('%env(REFRESH_TOKEN_TTL)%')]
     protected int $refreshTokenLifetime,
@@ -49,15 +53,28 @@ class RefreshTokenService
     }
   }
 
-  public function refreshBearerCookie(ResponseEvent $event): void
+  public function refreshRequestAuthentication(Request $request): void
   {
-    $refresh_token = $this->getRefreshTokenFromEvent($event);
+    if ($request->headers->has('Authorization') || !$request->cookies->has('REFRESH_TOKEN')) {
+      return;
+    }
+
+    if ($this->hasValidBearerCookie($request)) {
+      return;
+    }
+
+    $refresh_token = $this->getRefreshTokenFromRequest($request);
     if ($this->isValidRefreshToken($refresh_token)) {
       /** @var User|null $user */
       $user = $this->user_manager->findUserByUsername($refresh_token->getUsername());
       if (null !== $user) {
         $new_bearer = $this->jwt_manager->create($user);
-        $event->getResponse()->headers->setCookie($this->cookie_service->createBearerTokenCookie($new_bearer));
+        $request->attributes->set(self::REFRESHED_BEARER_COOKIE_ATTRIBUTE, $new_bearer);
+        // Update both Symfony's ParameterBag and the PHP superglobal so that
+        // downstream code works regardless of which source it reads from.
+        $request->cookies->set('BEARER', $new_bearer);
+        $_COOKIE['BEARER'] = $new_bearer;
+        $this->setAuthorizationHeader($request, $new_bearer);
 
         return;
       }
@@ -65,12 +82,21 @@ class RefreshTokenService
       $this->refresh_manager->delete($refresh_token);
     }
 
-    $this->cookie_service->clearCookie('REFRESH_TOKEN');
+    $this->markAuthenticationCookiesForClearing($request);
   }
 
-  protected function getRefreshTokenFromEvent(KernelEvent $event): ?RefreshTokenInterface
+  public function syncAuthenticationCookies(ResponseEvent $event): void
   {
-    return $this->refresh_manager->get($this->getRefreshCookieValue($event));
+    $request = $event->getRequest();
+    $refreshed_bearer = $request->attributes->get(self::REFRESHED_BEARER_COOKIE_ATTRIBUTE);
+    if (\is_string($refreshed_bearer) && '' !== $refreshed_bearer) {
+      $event->getResponse()->headers->setCookie($this->cookie_service->createBearerTokenCookie($refreshed_bearer));
+    }
+
+    if (true === $request->attributes->get(self::CLEAR_AUTHENTICATION_COOKIES_ATTRIBUTE)) {
+      $event->getResponse()->headers->setCookie($this->cookie_service->createClearedCookie('BEARER'));
+      $event->getResponse()->headers->setCookie($this->cookie_service->createClearedCookie('REFRESH_TOKEN'));
+    }
   }
 
   protected function isValidRefreshToken(?RefreshTokenInterface $refresh_token): bool
@@ -78,28 +104,47 @@ class RefreshTokenService
     return $refresh_token instanceof RefreshTokenInterface && $refresh_token->isValid() && !empty($refresh_token->getUsername());
   }
 
-  public function isBearerCookieSet(): bool
+  protected function getRefreshTokenFromRequest(Request $request): ?RefreshTokenInterface
   {
-    return isset($_COOKIE['BEARER']);
+    return $this->refresh_manager->get($this->getRefreshCookieValue($request));
   }
 
-  public function isRefreshTokenCookieSet(KernelEvent $event): bool
+  protected function getBearerCookieValue(Request $request): string
   {
-    return $event->getRequest()->cookies->has('REFRESH_TOKEN');
+    return strval($request->cookies->get('BEARER'));
   }
 
-  protected function getBearerCookieValue(KernelEvent $event): string
+  protected function getRefreshCookieValue(Request $request): string
   {
-    return strval($event->getRequest()->cookies->get('BEARER'));
+    return strval($request->cookies->get('REFRESH_TOKEN'));
   }
 
-  protected function getRefreshCookieValue(KernelEvent $event): string
+  protected function hasValidBearerCookie(Request $request): bool
   {
-    return strval($event->getRequest()->cookies->get('REFRESH_TOKEN'));
+    $bearer_token = $this->getBearerCookieValue($request);
+    if ('' === $bearer_token) {
+      return false;
+    }
+
+    try {
+      $this->jwt_manager->parse($bearer_token);
+
+      return true;
+    } catch (JWTDecodeFailureException) {
+      return false;
+    }
   }
 
-  protected function setAuthorizationHeader(KernelEvent $event, string $bearer_token): void
+  protected function setAuthorizationHeader(Request $request, string $bearer_token): void
   {
-    $event->getRequest()->headers->set('Authorization', 'Bearer '.$bearer_token);
+    $request->headers->set('Authorization', 'Bearer '.$bearer_token);
+  }
+
+  protected function markAuthenticationCookiesForClearing(Request $request): void
+  {
+    $request->attributes->set(self::CLEAR_AUTHENTICATION_COOKIES_ATTRIBUTE, true);
+    $request->cookies->remove('BEARER');
+    $request->cookies->remove('REFRESH_TOKEN');
+    unset($_COOKIE['BEARER'], $_COOKIE['REFRESH_TOKEN']);
   }
 }

@@ -222,9 +222,9 @@ class ResetCommand extends Command
       $limit = 0;
     }
 
-    $projects_to_download = $limit;
-    while ($projects_to_download > 0) {
-      $amount = random_int(1, max(1, intval(floor($projects_to_download / 5)) + 1));
+    $projects_remaining = $limit;
+    while ($projects_remaining > 0) {
+      $amount = random_int(1, max(1, intval(floor($projects_remaining / 5)) + 1));
       $username = $user_array[random_int(0, count($user_array) - 1)];
 
       CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplicationOrFail(),
@@ -232,10 +232,11 @@ class ResetCommand extends Command
           'directory' => $local_projects_dir,
           'user' => $username,
           '--remix-layout' => $remix_layout,
+          '--limit' => $amount,
         ],
         $output
       );
-      $projects_to_download -= $amount;
+      $projects_remaining -= $amount;
     }
 
     $projects_count = count($this->program_manager->findAll());

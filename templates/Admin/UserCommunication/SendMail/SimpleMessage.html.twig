@@ -1,25 +1,19 @@
 {% extends 'Email/email.html.twig' %}
 
 {% block head_title %}
-  {% autoescape false %}
-    {{ subject }}
-  {% endautoescape %}
+  {{ subject }}
 {% endblock %}
 
 {% block body_title %}
-  {% autoescape false %}
-    <div align="center">
-      {{ title }}
-    </div>
-  {% endautoescape %}
+  <div align="center">
+    {{ title }}
+  </div>
 {% endblock %}
 
 {% block body_content %}
 
-  {% autoescape false %}
-    <div align="center">
-      {{ message }}
-    </div>
-  {% endautoescape %}
+  <div align="center">
+    {{ message|nl2br }}
+  </div>
 
 {% endblock %}

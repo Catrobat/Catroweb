@@ -67,6 +67,8 @@ final class ProjectsApiTest extends KernelTestCase
       $this->reactions_facade,
       $this->createNoLimitRateLimiterFactory('phpunit_projects_upload_daily'),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_reaction_burst'),
+      $this->createNoLimitRateLimiterFactory('phpunit_projects_download_burst'),
+      new \Symfony\Component\HttpFoundation\RequestStack(),
     );
 
     ProjectsApiTest::bootKernel();
@@ -383,7 +385,7 @@ final class ProjectsApiTest extends KernelTestCase
     $loader->method('getFeaturedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $this->object->projectsFeaturedGet('', '', 20, 0, '', '', $response_code, $response_headers);
+    $this->object->projectsFeaturedGet('', '', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
@@ -398,7 +400,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->projectsGet('category', 'en', '', 20, 0, '', '', $response_code, $response_headers);
+    $this->object->projectsGet('category', 'en', '', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
@@ -413,7 +415,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->projectIdRecommendationsGet('id', 'category', 'en', '', 20, 0, '', '', $response_code, $response_headers);
+    $this->object->projectIdRecommendationsGet('id', 'category', 'en', '', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
   }
@@ -434,7 +436,7 @@ final class ProjectsApiTest extends KernelTestCase
     $loader->method('getRecommendedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectIdRecommendationsGet('id', 'category', 'en', '', 20, 0, '', '', $response_code, $response_headers);
+    $response = $this->object->projectIdRecommendationsGet('id', 'category', 'en', '', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -450,7 +452,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->projectsSearchGet('query', '', 20, 0, '', '', $response_code, $response_headers);
+    $this->object->projectsSearchGet('query', '', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
@@ -485,7 +487,7 @@ final class ProjectsApiTest extends KernelTestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->projectsUserGet('', 20, 0, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsUserGet('', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
     $this->assertNull($response);
@@ -508,7 +510,7 @@ final class ProjectsApiTest extends KernelTestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->projectsUserGet('', 20, 0, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsUserGet('', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -529,7 +531,7 @@ final class ProjectsApiTest extends KernelTestCase
     $request_validator->method('validateUserExists')->willReturn(true);
     $this->facade->method('getRequestValidator')->willReturn($request_validator);
 
-    $response = $this->object->projectsUserIdGet('id', '', 20, 0, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsUserIdGet('id', '', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -550,7 +552,7 @@ final class ProjectsApiTest extends KernelTestCase
     $request_validator->method('validateUserExists')->willReturn(false);
     $this->facade->method('getRequestValidator')->willReturn($request_validator);
 
-    $response = $this->object->projectsUserIdGet('id', '', 20, 0, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsUserIdGet('id', '', 20, 0, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);

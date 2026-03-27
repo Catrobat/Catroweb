@@ -42,6 +42,9 @@ class ProgramImportCommand extends Command
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED,
         'Generates remix graph based on given layout',
         self::REMIX_GRAPH_NO_LAYOUT)
+      ->addOption('limit', 'l', InputOption::VALUE_REQUIRED,
+        'Maximum number of programs to import',
+        '0')
     ;
   }
 
@@ -59,6 +62,8 @@ class ProgramImportCommand extends Command
     $all_layouts = RemixGraphLayout::$REMIX_GRAPH_MAPPING;
     $num_of_layouts = count($all_layouts);
     $remix_graph_mapping = (($layout_idx >= 0) && ($layout_idx < $num_of_layouts)) ? $all_layouts[$layout_idx] : [];
+
+    $limit = intval($input->getOption('limit'));
 
     $this->remix_manipulation_program_manager->useRemixManipulationFileExtractor($remix_graph_mapping);
 
@@ -79,14 +84,21 @@ class ProgramImportCommand extends Command
       return 1;
     }
 
+    $imported = 0;
+
     /** @var SplFileInfo $file */
     foreach ($finder as $file) {
+      if ($limit > 0 && $imported >= $limit) {
+        break;
+      }
+
       try {
         $output->writeln('Importing file '.$file->getFilename());
         $add_program_request = new AddProjectRequest($user, new File($file->__toString()));
         $program = $this->remix_manipulation_program_manager->addProject($add_program_request);
         $program->setViews(random_int(0, 10));
         $output->writeln('Added program <'.$program->getName().'> for user: <'.$username.'>');
+        ++$imported;
       } catch (InvalidCatrobatFileException $e) {
         $output->writeln('FAILED to add program!');
         $output->writeln($e->getMessage().' ('.$e->getCode().')');

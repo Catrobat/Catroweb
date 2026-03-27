@@ -51,6 +51,8 @@ final class ReactionsApiTest extends TestCase
       $this->reactions_facade,
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new \Symfony\Component\HttpFoundation\RequestStack(),
     );
   }
 

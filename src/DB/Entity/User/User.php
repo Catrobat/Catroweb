@@ -28,8 +28,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Index(name: 'email_canonical_idx', columns: ['email_canonical'])]
 #[ORM\Index(name: 'scratch_user_id_idx', columns: ['scratch_user_id'])]
 #[ORM\Index(name: 'google_id_idx', columns: ['google_id'])]
-#[ORM\Index(name: 'facebook_id_idx', columns: ['google_id'])]
-#[ORM\Index(name: 'apple_id_idx', columns: ['google_id'])]
+#[ORM\Index(name: 'facebook_id_idx', columns: ['facebook_id'])]
+#[ORM\Index(name: 'apple_id_idx', columns: ['apple_id'])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable

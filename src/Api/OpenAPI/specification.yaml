@@ -452,7 +452,7 @@ paths:
       tags:
         - 'User'
       summary: 'Search for users'
-      description: 'Search for users associated by keywords.'
+      description: 'Search for users associated by keywords. Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - name: query
           in: query
@@ -461,6 +461,7 @@ paths:
             type: string
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
       responses:
         '200':
@@ -484,7 +485,7 @@ paths:
       tags:
         - 'User'
       summary: 'Get users'
-      description: 'Get all users with their corresponding data'
+      description: 'Get all users with their corresponding data. Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - name: query
           in: query
@@ -493,6 +494,7 @@ paths:
             type: string
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
           description: 'OK'
@@ -521,11 +523,13 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get projects'
+      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/ProjectType'
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
       responses:
@@ -596,11 +600,13 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get the currently featured projects'
+      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/Platform'
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
       responses:
@@ -651,6 +657,7 @@ paths:
       tags:
         - 'Projects'
       summary: 'Search for projects associated with a keywords'
+      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - name: query
           in: query
@@ -660,6 +667,7 @@ paths:
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
       responses:
@@ -686,10 +694,12 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get the projects of the logged in user'
+      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
       responses:
@@ -718,11 +728,13 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get the public projects of a given user'
+      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/Uuid'
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
       responses:
@@ -991,12 +1003,14 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get recommended projects related to the specific project'
+      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/Uuid'
         - $ref: '#/components/parameters/RecommendedProjectType'
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
       responses:
@@ -1579,10 +1593,11 @@ paths:
       tags:
         - 'Media Library'
       summary: 'Get media library overview with categories and preview assets'
-      description: 'Returns all categories with a preview of assets per category. Similar to /projects/categories for browsing the media library.'
+      description: 'Returns all categories with a preview of assets per category. Similar to /projects/categories for browsing the media library. Supports cursor-based pagination. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - name: file_type
           in: query
           required: false
@@ -1638,9 +1653,11 @@ paths:
       tags:
         - 'Media Library'
       summary: 'Get all media library categories'
+      description: 'Supports cursor-based pagination. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
           description: 'OK'
@@ -1706,9 +1723,11 @@ paths:
       tags:
         - 'Media Library'
       summary: 'Get a specific media category with its assets'
+      description: 'Supports cursor-based pagination. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
           description: 'OK'
@@ -1788,9 +1807,11 @@ paths:
       tags:
         - 'Media Library'
       summary: 'Get media library assets with pagination and filtering'
+      description: 'Supports cursor-based pagination. The offset parameter is deprecated.'
       parameters:
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
         - name: category_id
           in: query
           required: false
@@ -1970,7 +1991,7 @@ paths:
       tags:
         - Search
       summary: 'Search for projects, users,..'
-      description: 'The default is to search in all categories.'
+      description: 'The default is to search in all categories. Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
       parameters:
         - name: query
           in: query
@@ -1980,6 +2001,7 @@ paths:
         - $ref: '#/components/parameters/SearchType'
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
           description: OK
@@ -2643,6 +2665,8 @@ components:
     Offset:
       name: offset
       in: query
+      deprecated: true
+      description: 'Deprecated: Use cursor-based pagination instead. How many objects should be skipped.'
       schema:
         $ref: '#/components/schemas/Offset'
 
@@ -2803,9 +2827,10 @@ components:
     Offset:
       type: integer
       minimum: 0
-      description: 'How many objects should be skipped'
+      description: 'Deprecated: Use cursor-based pagination instead. How many objects should be skipped.'
       default: 0
       example: 2
+      deprecated: true
 
     CommentId:
       type: integer
@@ -2819,6 +2844,8 @@ components:
     # Pagination
     PaginationInfo:
       type: object
+      deprecated: true
+      description: 'Deprecated: Use cursor-based pagination (next_cursor + has_more) instead.'
       properties:
         total:
           type: integer

@@ -29,6 +29,8 @@ use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -48,7 +50,9 @@ final class MediaLibraryApiTest extends TestCase
   {
     $this->facade = $this->createStub(MediaLibraryApiFacade::class);
     $flavor_repository = $this->createStub(\App\DB\EntityRepository\FlavorRepository::class);
-    $this->api = new MediaLibraryApi($this->facade, $flavor_repository);
+    $no_limit = new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage());
+    $request_stack = new \Symfony\Component\HttpFoundation\RequestStack();
+    $this->api = new MediaLibraryApi($this->facade, $flavor_repository, $no_limit, $request_stack);
   }
 
   // ==================== mediaLibraryGet Tests ====================
@@ -72,7 +76,7 @@ final class MediaLibraryApiTest extends TestCase
     $response_manager->method('createLibraryOverviewResponse')->willReturn($library_response);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->api->mediaLibraryGet('en', 10, 0, null, null, null, 5, $response_code, $response_headers);
+    $response = $this->api->mediaLibraryGet('en', 10, 0, null, null, null, null, 5, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(MediaLibraryResponse::class, $response);
@@ -96,7 +100,7 @@ final class MediaLibraryApiTest extends TestCase
     $response_manager->method('createLibraryOverviewResponse')->willReturn($library_response);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->api->mediaLibraryGet('en', 10, 0, null, null, 'dog', 5, $response_code, $response_headers);
+    $response = $this->api->mediaLibraryGet('en', 10, 0, null, null, null, 'dog', 5, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(MediaLibraryResponse::class, $response);
@@ -126,7 +130,7 @@ final class MediaLibraryApiTest extends TestCase
     $this->facade->method('getLoader')->willReturn($loader);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->api->mediaCategoriesGet('en', 20, 0, $response_code, $response_headers);
+    $response = $this->api->mediaCategoriesGet('en', 20, 0, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(MediaCategoriesResponse::class, $response);
@@ -204,7 +208,7 @@ final class MediaLibraryApiTest extends TestCase
     $loader->method('getCategoryById')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->api->mediaCategoriesIdGet('uuid', 'en', 20, 0, $response_code, $response_headers);
+    $response = $this->api->mediaCategoriesIdGet('uuid', 'en', 20, 0, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -229,7 +233,7 @@ final class MediaLibraryApiTest extends TestCase
     $response_manager->method('createCategoryDetailResponse')->willReturn($category_response);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->api->mediaCategoriesIdGet('uuid', 'en', 20, 0, $response_code, $response_headers);
+    $response = $this->api->mediaCategoriesIdGet('uuid', 'en', 20, 0, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(MediaCategoryDetailResponse::class, $response);
@@ -350,7 +354,7 @@ final class MediaLibraryApiTest extends TestCase
     $response_manager->method('createAssetsResponse')->willReturn($assets_response);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->api->mediaAssetsGet('en', 20, 0, null, null, null, null, 'name', 'asc', $response_code, $response_headers);
+    $response = $this->api->mediaAssetsGet('en', 20, 0, null, null, null, null, null, 'name', 'asc', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(MediaAssetsResponse::class, $response);

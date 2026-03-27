@@ -97,8 +97,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     if (!$this->authorization_checker->isGranted('ROLE_ADMIN')
-      && (!$this->checkUserRateLimit($user, $this->commentBurstLimiter)
-        || !$this->checkUserRateLimit($user, $this->commentDailyLimiter))) {
+      && (null === $this->checkUserRateLimit($user, $this->commentBurstLimiter)
+        || null === $this->checkUserRateLimit($user, $this->commentDailyLimiter))) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;

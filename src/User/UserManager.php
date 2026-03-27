@@ -183,7 +183,7 @@ class UserManager
 
     $query_string = new QueryString();
     $query_string->setQuery($query);
-    $query_string->setFields(['id', 'username']);
+    $query_string->setFields(['id', 'username^3']);
     $query_string->setAnalyzeWildcard();
     $query_string->setDefaultOperator('AND');
 
