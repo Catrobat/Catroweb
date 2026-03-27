@@ -104,6 +104,8 @@ Model/UserDataExportResponseFollowersInner.php
 Model/UserDataExportResponseProfile.php
 Model/UserDataExportResponseProjectsInner.php
 Model/UserDataExportResponseReactionsInner.php
+Model/UserReportListResponse.php
+Model/UserReportResponse.php
 OpenAPIServerBundle.php
 README.md
 Resources/config/routing.yaml
@@ -202,6 +204,8 @@ Tests/Model/UserDataExportResponseProfileTest.php
 Tests/Model/UserDataExportResponseProjectsInnerTest.php
 Tests/Model/UserDataExportResponseReactionsInnerTest.php
 Tests/Model/UserDataExportResponseTest.php
+Tests/Model/UserReportListResponseTest.php
+Tests/Model/UserReportResponseTest.php
 Tests/test_config.yaml
 autoload.php
 composer.json
@@ -290,5 +294,7 @@ docs/Model/UserDataExportResponseFollowersInner.md
 docs/Model/UserDataExportResponseProfile.md
 docs/Model/UserDataExportResponseProjectsInner.md
 docs/Model/UserDataExportResponseReactionsInner.md
+docs/Model/UserReportListResponse.md
+docs/Model/UserReportResponse.md
 git_push.sh
 phpunit.xml.dist

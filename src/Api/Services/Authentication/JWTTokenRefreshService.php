@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Api\Services\Authentication;
 
-use OpenAPI\Server\Controller\Controller;
+use App\Api\Exceptions\ApiErrorResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -18,7 +18,7 @@ readonly class JWTTokenRefreshService
 {
   public function refresh(): Response
   {
-    return Controller::createStructuredErrorResponse(
+    return ApiErrorResponse::create(
       Response::HTTP_UNAUTHORIZED,
       'unauthorized',
       'Refresh token not provided or invalid.'

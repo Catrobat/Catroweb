@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Api;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\Exceptions\ApiExceptionEventListener;
-use OpenAPI\Server\Controller\Controller;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -22,7 +22,7 @@ class ErrorResponseTest extends TestCase
 {
   public function testCreateStructuredErrorResponseReturnsValidJson(): void
   {
-    $response = Controller::createStructuredErrorResponse(400, 'bad_request', 'Invalid input');
+    $response = ApiErrorResponse::create(400, 'bad_request', 'Invalid input');
 
     self::assertSame(400, $response->getStatusCode());
     self::assertSame('application/json', $response->headers->get('Content-Type'));
@@ -34,40 +34,20 @@ class ErrorResponseTest extends TestCase
     self::assertSame(400, $body['error']['code']);
     self::assertSame('bad_request', $body['error']['type']);
     self::assertSame('Invalid input', $body['error']['message']);
-    self::assertArrayNotHasKey('details', $body['error']);
-  }
-
-  public function testCreateStructuredErrorResponseWithDetails(): void
-  {
-    $details = [
-      ['field' => 'email', 'message' => 'Email is required'],
-      ['field' => 'username', 'message' => 'Username too short'],
-    ];
-
-    $response = Controller::createStructuredErrorResponse(422, 'validation_error', 'Validation failed', $details);
-
-    $content = $response->getContent();
-    self::assertIsString($content);
-    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
-    self::assertSame(422, $body['error']['code']);
-    self::assertSame('validation_error', $body['error']['type']);
-    self::assertCount(2, $body['error']['details']);
-    self::assertSame('email', $body['error']['details'][0]['field']);
-    self::assertSame('Email is required', $body['error']['details'][0]['message']);
   }
 
   public function testHttpStatusToErrorType(): void
   {
-    self::assertSame('bad_request', Controller::httpStatusToErrorType(400));
-    self::assertSame('unauthorized', Controller::httpStatusToErrorType(401));
-    self::assertSame('forbidden', Controller::httpStatusToErrorType(403));
-    self::assertSame('not_found', Controller::httpStatusToErrorType(404));
-    self::assertSame('not_acceptable', Controller::httpStatusToErrorType(406));
-    self::assertSame('unsupported_media_type', Controller::httpStatusToErrorType(415));
-    self::assertSame('validation_error', Controller::httpStatusToErrorType(422));
-    self::assertSame('too_many_requests', Controller::httpStatusToErrorType(429));
-    self::assertSame('internal_error', Controller::httpStatusToErrorType(500));
-    self::assertSame('internal_error', Controller::httpStatusToErrorType(503));
+    self::assertSame('bad_request', ApiErrorResponse::httpStatusToErrorType(400));
+    self::assertSame('unauthorized', ApiErrorResponse::httpStatusToErrorType(401));
+    self::assertSame('forbidden', ApiErrorResponse::httpStatusToErrorType(403));
+    self::assertSame('not_found', ApiErrorResponse::httpStatusToErrorType(404));
+    self::assertSame('not_acceptable', ApiErrorResponse::httpStatusToErrorType(406));
+    self::assertSame('unsupported_media_type', ApiErrorResponse::httpStatusToErrorType(415));
+    self::assertSame('validation_error', ApiErrorResponse::httpStatusToErrorType(422));
+    self::assertSame('too_many_requests', ApiErrorResponse::httpStatusToErrorType(429));
+    self::assertSame('internal_error', ApiErrorResponse::httpStatusToErrorType(500));
+    self::assertSame('internal_error', ApiErrorResponse::httpStatusToErrorType(503));
   }
 
   public function testApiExceptionEventListenerReturnsStructuredJsonForHttpException(): void

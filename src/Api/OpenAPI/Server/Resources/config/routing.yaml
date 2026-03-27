@@ -4,570 +4,577 @@
 
 # achievements
 open_api_server_achievements_achievementscountget:
-  path: /achievements/count
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.achievements::achievementsCountGetAction
+    path:     /achievements/count
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.achievements::achievementsCountGetAction
 
 open_api_server_achievements_achievementsget:
-  path: /achievements
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.achievements::achievementsGetAction
+    path:     /achievements
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.achievements::achievementsGetAction
 
 open_api_server_achievements_achievementsreadput:
-  path: /achievements/read
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.achievements::achievementsReadPutAction
+    path:     /achievements/read
+    methods:  [PUT]
+    defaults:
+        _controller: open_api_server.controller.achievements::achievementsReadPutAction
 
 open_api_server_achievements_useridachievementsget:
-  path: /user/{id}/achievements
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.achievements::userIdAchievementsGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /user/{id}/achievements
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.achievements::userIdAchievementsGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 # authentication
 open_api_server_authentication_authenticationdelete:
-  path: /authentication
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.authentication::authenticationDeleteAction
+    path:     /authentication
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.authentication::authenticationDeleteAction
 
 open_api_server_authentication_authenticationget:
-  path: /authentication
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.authentication::authenticationGetAction
+    path:     /authentication
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.authentication::authenticationGetAction
 
 open_api_server_authentication_authenticationoauthpost:
-  path: /authentication/oauth
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.authentication::authenticationOauthPostAction
+    path:     /authentication/oauth
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.authentication::authenticationOauthPostAction
 
 open_api_server_authentication_authenticationpost:
-  path: /authentication
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.authentication::authenticationPostAction
+    path:     /authentication
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.authentication::authenticationPostAction
 
 open_api_server_authentication_authenticationrefreshpost:
-  path: /authentication/refresh
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.authentication::authenticationRefreshPostAction
+    path:     /authentication/refresh
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.authentication::authenticationRefreshPostAction
 
 # comments
 open_api_server_comments_commentsiddelete:
-  path: /comments/{id}
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.comments::commentsIdDeleteAction
-  requirements:
-    id: '\d+'
+    path:     /comments/{id}
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.comments::commentsIdDeleteAction
+    requirements:
+        id: '\d+'
 
 open_api_server_comments_commentsidrepliesget:
-  path: /comments/{id}/replies
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.comments::commentsIdRepliesGetAction
-  requirements:
-    id: '\d+'
+    path:     /comments/{id}/replies
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.comments::commentsIdRepliesGetAction
+    requirements:
+        id: '\d+'
 
 open_api_server_comments_commentsidtranslationget:
-  path: /comments/{id}/translation
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.comments::commentsIdTranslationGetAction
-  requirements:
-    id: '\d+'
+    path:     /comments/{id}/translation
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.comments::commentsIdTranslationGetAction
+    requirements:
+        id: '\d+'
 
 open_api_server_comments_projectidcommentsget:
-  path: /project/{id}/comments
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.comments::projectIdCommentsGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/comments
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.comments::projectIdCommentsGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_comments_projectidcommentspost:
-  path: /project/{id}/comments
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.comments::projectIdCommentsPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/comments
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.comments::projectIdCommentsPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 # followers
 open_api_server_followers_useridfollowpost:
-  path: /user/{id}/follow
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.followers::userIdFollowPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /user/{id}/follow
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.followers::userIdFollowPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_followers_useridfollowersget:
-  path: /user/{id}/followers
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.followers::userIdFollowersGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /user/{id}/followers
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.followers::userIdFollowersGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_followers_useridfollowingget:
-  path: /user/{id}/following
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.followers::userIdFollowingGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /user/{id}/following
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.followers::userIdFollowingGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_followers_useridunfollowdelete:
-  path: /user/{id}/unfollow
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.followers::userIdUnfollowDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /user/{id}/unfollow
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.followers::userIdUnfollowDeleteAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 # mediaLibrary
 open_api_server_mediaLibrary_mediaassetsget:
-  path: /media/assets
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaAssetsGetAction
+    path:     /media/assets
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaAssetsGetAction
 
 open_api_server_mediaLibrary_mediaassetsiddelete:
-  path: /media/assets/{id}
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /media/assets/{id}
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdDeleteAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_mediaLibrary_mediaassetsidget:
-  path: /media/assets/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /media/assets/{id}
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_mediaLibrary_mediaassetsidpatch:
-  path: /media/assets/{id}
-  methods: [PATCH]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdPatchAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /media/assets/{id}
+    methods:  [PATCH]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdPatchAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_mediaLibrary_mediaassetspost:
-  path: /media/assets
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaAssetsPostAction
+    path:     /media/assets
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaAssetsPostAction
 
 open_api_server_mediaLibrary_mediacategoriesget:
-  path: /media/categories
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesGetAction
+    path:     /media/categories
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaCategoriesGetAction
 
 open_api_server_mediaLibrary_mediacategoriesiddelete:
-  path: /media/categories/{id}
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /media/categories/{id}
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdDeleteAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_mediaLibrary_mediacategoriesidget:
-  path: /media/categories/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /media/categories/{id}
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_mediaLibrary_mediacategoriesidpatch:
-  path: /media/categories/{id}
-  methods: [PATCH]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdPatchAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /media/categories/{id}
+    methods:  [PATCH]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdPatchAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_mediaLibrary_mediacategoriespost:
-  path: /media/categories
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaCategoriesPostAction
+    path:     /media/categories
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaCategoriesPostAction
 
 open_api_server_mediaLibrary_medialibraryget:
-  path: /media/library
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.mediaLibrary::mediaLibraryGetAction
+    path:     /media/library
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.mediaLibrary::mediaLibraryGetAction
 
 # moderation
 open_api_server_moderation_commentsidappealpost:
-  path: /comments/{id}/appeal
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.moderation::commentsIdAppealPostAction
-  requirements:
-    id: '\d+'
+    path:     /comments/{id}/appeal
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.moderation::commentsIdAppealPostAction
+    requirements:
+        id: '\d+'
 
 open_api_server_moderation_commentsidreportpost:
-  path: /comments/{id}/report
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.moderation::commentsIdReportPostAction
-  requirements:
-    id: '\d+'
+    path:     /comments/{id}/report
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.moderation::commentsIdReportPostAction
+    requirements:
+        id: '\d+'
 
 open_api_server_moderation_moderationappealsget:
-  path: /moderation/appeals
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.moderation::moderationAppealsGetAction
+    path:     /moderation/appeals
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.moderation::moderationAppealsGetAction
 
 open_api_server_moderation_moderationappealsidresolveput:
-  path: /moderation/appeals/{id}/resolve
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.moderation::moderationAppealsIdResolvePutAction
-  requirements:
-    id: '\d+'
+    path:     /moderation/appeals/{id}/resolve
+    methods:  [PUT]
+    defaults:
+        _controller: open_api_server.controller.moderation::moderationAppealsIdResolvePutAction
+    requirements:
+        id: '\d+'
 
 open_api_server_moderation_moderationreportsget:
-  path: /moderation/reports
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.moderation::moderationReportsGetAction
+    path:     /moderation/reports
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.moderation::moderationReportsGetAction
 
 open_api_server_moderation_moderationreportsidresolveput:
-  path: /moderation/reports/{id}/resolve
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.moderation::moderationReportsIdResolvePutAction
-  requirements:
-    id: '\d+'
+    path:     /moderation/reports/{id}/resolve
+    methods:  [PUT]
+    defaults:
+        _controller: open_api_server.controller.moderation::moderationReportsIdResolvePutAction
+    requirements:
+        id: '\d+'
 
 open_api_server_moderation_projectidappealpost:
-  path: /project/{id}/appeal
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.moderation::projectIdAppealPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/appeal
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.moderation::projectIdAppealPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_moderation_projectidreportpost:
-  path: /project/{id}/report
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.moderation::projectIdReportPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/report
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.moderation::projectIdReportPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_moderation_studioidappealpost:
-  path: /studio/{id}/appeal
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.moderation::studioIdAppealPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /studio/{id}/appeal
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.moderation::studioIdAppealPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_moderation_studioidreportpost:
-  path: /studio/{id}/report
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.moderation::studioIdReportPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /studio/{id}/report
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.moderation::studioIdReportPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_moderation_useridappealpost:
-  path: /user/{id}/appeal
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.moderation::userIdAppealPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /user/{id}/appeal
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.moderation::userIdAppealPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_moderation_useridreportpost:
-  path: /user/{id}/report
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.moderation::userIdReportPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /user/{id}/report
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.moderation::userIdReportPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
+
+open_api_server_moderation_userreportsget:
+    path:     /user/reports
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.moderation::userReportsGetAction
 
 # notifications
 open_api_server_notifications_notificationidreadput:
-  path: /notification/{id}/read
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.notifications::notificationIdReadPutAction
-  requirements:
-    id: '\d+'
+    path:     /notification/{id}/read
+    methods:  [PUT]
+    defaults:
+        _controller: open_api_server.controller.notifications::notificationIdReadPutAction
+    requirements:
+        id: '\d+'
 
 open_api_server_notifications_notificationscountget:
-  path: /notifications/count
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.notifications::notificationsCountGetAction
+    path:     /notifications/count
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.notifications::notificationsCountGetAction
 
 open_api_server_notifications_notificationsget:
-  path: /notifications
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.notifications::notificationsGetAction
+    path:     /notifications
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.notifications::notificationsGetAction
 
 open_api_server_notifications_notificationsreadput:
-  path: /notifications/read
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.notifications::notificationsReadPutAction
+    path:     /notifications/read
+    methods:  [PUT]
+    defaults:
+        _controller: open_api_server.controller.notifications::notificationsReadPutAction
 
 # projects
 open_api_server_projects_projectidcatrobatget:
-  path: /project/{id}/catrobat
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdCatrobatGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/catrobat
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdCatrobatGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectiddelete:
-  path: /project/{id}
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdDeleteAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectidget:
-  path: /project/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectidput:
-  path: /project/{id}
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdPutAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}
+    methods:  [PUT]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdPutAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectidreactiondelete:
-  path: /project/{id}/reaction
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReactionDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/reaction
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdReactionDeleteAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectidreactionpost:
-  path: /project/{id}/reaction
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReactionPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/reaction
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdReactionPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectidreactionsget:
-  path: /project/{id}/reactions
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReactionsGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/reactions
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdReactionsGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectidreactionsusersget:
-  path: /project/{id}/reactions/users
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReactionsUsersGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/reactions/users
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdReactionsUsersGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectidrecommendationsget:
-  path: /project/{id}/recommendations
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdRecommendationsGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /project/{id}/recommendations
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectIdRecommendationsGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_projects_projectscategoriesget:
-  path: /projects/categories
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsCategoriesGetAction
+    path:     /projects/categories
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsCategoriesGetAction
 
 open_api_server_projects_projectsextensionsget:
-  path: /projects/extensions
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsExtensionsGetAction
+    path:     /projects/extensions
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsExtensionsGetAction
 
 open_api_server_projects_projectsfeaturedget:
-  path: /projects/featured
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsFeaturedGetAction
+    path:     /projects/featured
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsFeaturedGetAction
 
 open_api_server_projects_projectsget:
-  path: /projects
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsGetAction
+    path:     /projects
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsGetAction
 
 open_api_server_projects_projectspost:
-  path: /projects
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsPostAction
+    path:     /projects
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsPostAction
 
 open_api_server_projects_projectssearchget:
-  path: /projects/search
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsSearchGetAction
+    path:     /projects/search
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsSearchGetAction
 
 open_api_server_projects_projectstagsget:
-  path: /projects/tags
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsTagsGetAction
+    path:     /projects/tags
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsTagsGetAction
 
 open_api_server_projects_projectsuserget:
-  path: /projects/user
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsUserGetAction
+    path:     /projects/user
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsUserGetAction
 
 open_api_server_projects_projectsuseridget:
-  path: /projects/user/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsUserIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /projects/user/{id}
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.projects::projectsUserIdGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 # search
 open_api_server_search_searchget:
-  path: /search
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.search::searchGetAction
+    path:     /search
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.search::searchGetAction
 
 # studio
 open_api_server_studio_studioiddelete:
-  path: /studio/{id}
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.studio::studioIdDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /studio/{id}
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.studio::studioIdDeleteAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_studio_studioidget:
-  path: /studio/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.studio::studioIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /studio/{id}
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.studio::studioIdGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_studio_studioidpost:
-  path: /studio/{id}
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.studio::studioIdPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /studio/{id}
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.studio::studioIdPostAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_studio_studiopost:
-  path: /studio
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.studio::studioPostAction
+    path:     /studio
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.studio::studioPostAction
 
 # user
 open_api_server_user_userdataexportget:
-  path: /user/data-export
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.user::userDataExportGetAction
+    path:     /user/data-export
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.user::userDataExportGetAction
 
 open_api_server_user_userdelete:
-  path: /user
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.user::userDeleteAction
+    path:     /user
+    methods:  [DELETE]
+    defaults:
+        _controller: open_api_server.controller.user::userDeleteAction
 
 open_api_server_user_userget:
-  path: /user
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.user::userGetAction
+    path:     /user
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.user::userGetAction
 
 open_api_server_user_useridget:
-  path: /user/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.user::userIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    path:     /user/{id}
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.user::userIdGetAction
+    requirements:
+        id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_user_userpost:
-  path: /user
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.user::userPostAction
+    path:     /user
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.user::userPostAction
 
 open_api_server_user_userput:
-  path: /user
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.user::userPutAction
+    path:     /user
+    methods:  [PUT]
+    defaults:
+        _controller: open_api_server.controller.user::userPutAction
 
 open_api_server_user_userresetpasswordpost:
-  path: /user/reset-password
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.user::userResetPasswordPostAction
+    path:     /user/reset-password
+    methods:  [POST]
+    defaults:
+        _controller: open_api_server.controller.user::userResetPasswordPostAction
 
 open_api_server_user_usersget:
-  path: /users
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.user::usersGetAction
+    path:     /users
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.user::usersGetAction
 
 open_api_server_user_userssearchget:
-  path: /users/search
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.user::usersSearchGetAction
+    path:     /users/search
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.user::usersSearchGetAction
 
 # utility
 open_api_server_utility_healthget:
-  path: /health
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.utility::healthGetAction
+    path:     /health
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.utility::healthGetAction
 
 open_api_server_utility_surveylangcodeget:
-  path: /survey/{lang_code}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.utility::surveyLangCodeGetAction
-  requirements:
-    lang_code: '[a-z0-9]+'
+    path:     /survey/{lang_code}
+    methods:  [GET]
+    defaults:
+        _controller: open_api_server.controller.utility::surveyLangCodeGetAction
+    requirements:
+        lang_code: '[a-z0-9]+'
+

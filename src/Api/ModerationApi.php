@@ -282,6 +282,37 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     $responseCode = Response::HTTP_OK;
   }
 
+  #[\Override]
+  public function userReportsGet(
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $user_id = $user->getId();
+    if (null === $user_id) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $result = $this->facade->getLoader()->loadUserReports($user_id, $limit, $cursor);
+    $responseCode = Response::HTTP_OK;
+
+    return $this->facade->getResponseManager()->buildUserReportsResponse(
+      $result['data'],
+      $result['has_more'],
+      $result['next_cursor'],
+    );
+  }
+
   private function handleReport(
     ContentType $content_type,
     string $content_id,
