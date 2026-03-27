@@ -74,7 +74,7 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
   public function authenticationOauthPost(OAuthLoginRequest $o_auth_login_request, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->authBurstLimiter)) {
+    if (null === $this->checkIpRateLimit($ip, $this->authBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;

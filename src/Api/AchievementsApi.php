@@ -11,12 +11,16 @@ use OpenAPI\Server\Api\AchievementsApiInterface;
 use OpenAPI\Server\Model\AchievementsCountResponse;
 use OpenAPI\Server\Model\AchievementsListResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class AchievementsApi extends AbstractApiController implements AchievementsApiInterface
 {
+  use RateLimitTrait;
+
   public function __construct(
     private readonly AchievementsApiFacade $facade,
     private readonly UserManager $user_manager,
+    private readonly RateLimiterFactory $achievementBurstLimiter,
   ) {
   }
 
@@ -29,6 +33,15 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
 
       return null;
     }
+
+    $rate_limit = $this->checkUserRateLimit($user, $this->achievementBurstLimiter);
+    if (null === $rate_limit) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $page_data = $this->facade->getLoader()->getAchievementsPageData($user);
 
@@ -57,6 +70,15 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
 
       return null;
     }
+
+    $rate_limit = $this->checkUserRateLimit($user, $this->achievementBurstLimiter);
+    if (null === $rate_limit) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $count = $this->facade->getLoader()->getUnseenCount($user);
     $response = $this->facade->getResponseManager()->createAchievementsCountResponse($count);

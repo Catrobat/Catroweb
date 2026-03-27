@@ -72,6 +72,31 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 5,
         'interval' => '24 hours',
       ],
+      'notification_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 30,
+        'interval' => '1 minute',
+      ],
+      'achievement_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 30,
+        'interval' => '1 minute',
+      ],
+      'media_library_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 60,
+        'interval' => '1 minute',
+      ],
+      'download_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 10,
+        'interval' => '1 minute',
+      ],
+      'moderation_admin_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 60,
+        'interval' => '1 minute',
+      ],
     ],
   ]);
 };

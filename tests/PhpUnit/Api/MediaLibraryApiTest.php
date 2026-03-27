@@ -29,6 +29,8 @@ use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 /**
  * @internal
@@ -48,7 +50,9 @@ final class MediaLibraryApiTest extends TestCase
   {
     $this->facade = $this->createStub(MediaLibraryApiFacade::class);
     $flavor_repository = $this->createStub(\App\DB\EntityRepository\FlavorRepository::class);
-    $this->api = new MediaLibraryApi($this->facade, $flavor_repository);
+    $no_limit = new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage());
+    $request_stack = new \Symfony\Component\HttpFoundation\RequestStack();
+    $this->api = new MediaLibraryApi($this->facade, $flavor_repository, $no_limit, $request_stack);
   }
 
   // ==================== mediaLibraryGet Tests ====================

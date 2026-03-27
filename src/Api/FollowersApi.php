@@ -79,7 +79,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
       return;
     }
 
-    if (!$this->checkUserRateLimit($user, $this->followBurstLimiter)) {
+    if (null === $this->checkUserRateLimit($user, $this->followBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return;
@@ -119,7 +119,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
       return;
     }
 
-    if (!$this->checkUserRateLimit($user, $this->followBurstLimiter)) {
+    if (null === $this->checkUserRateLimit($user, $this->followBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return;

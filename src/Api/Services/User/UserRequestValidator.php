@@ -12,10 +12,13 @@ use App\User\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserRequestValidator extends AbstractRequestValidator
@@ -34,9 +37,15 @@ class UserRequestValidator extends AbstractRequestValidator
 
   public const string MODE_UPDATE = 'update_mode';
 
+  private const int PSL_CACHE_TTL = 86400;
+
   public function __construct(
-    ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager,
+    ValidatorInterface $validator,
+    TranslatorInterface $translator,
+    private readonly UserManager $user_manager,
     private readonly PasswordHasherFactoryInterface $password_hasher_factory,
+    private readonly CacheInterface $cache,
+    private readonly LoggerInterface $logger,
   ) {
     parent::__construct($validator, $translator);
   }
@@ -181,42 +190,48 @@ class UserRequestValidator extends AbstractRequestValidator
     }
   }
 
+  /**
+   * @return array<string, true>
+   */
   private function getValidTLDs(): array
   {
-    $validTLDs = [];
-    $pslFile = file_get_contents('https://publicsuffix.org/list/public_suffix_list.dat');
-    if (false === $pslFile) {
+    return $this->cache->get('public_suffix_list_tlds', function (ItemInterface $item): array {
+      $item->expiresAfter(self::PSL_CACHE_TTL);
+
+      $validTLDs = [];
+
+      try {
+        $pslFile = file_get_contents('https://publicsuffix.org/list/public_suffix_list.dat');
+      } catch (\Exception $e) {
+        $this->logger->warning('Failed to fetch Public Suffix List: '.$e->getMessage());
+
+        return $validTLDs;
+      }
+
+      if (false === $pslFile) {
+        $this->logger->warning('Failed to fetch Public Suffix List: file_get_contents returned false');
+
+        return $validTLDs;
+      }
+
+      $pslLines = explode("\n", $pslFile);
+
+      foreach ($pslLines as $line) {
+        $line = trim($line);
+        if ('' === $line || '/' === $line[0] || '!' === $line[0]) {
+          continue;
+        }
+
+        $validTLDs[ltrim($line, '*.')] = true;
+      }
+
       return $validTLDs;
-    }
-
-    $pslLines = explode("\n", $pslFile);
-
-    foreach ($pslLines as $line) {
-      $line = trim($line);
-      if ('' === $line) {
-        continue;
-      }
-      if ('/' === $line[0]) {
-        continue;
-      }
-      if ('!' === $line[0]) {
-        continue;
-      }
-
-      $tld = ltrim($line, '*.');
-      if (!in_array($tld, $validTLDs, true)) {
-        $validTLDs[] = $tld;
-      }
-    }
-
-    return $validTLDs;
+    });
   }
 
   private function isValidTLD(string $tld): bool
   {
-    $validTLDs = $this->getValidTLDs();
-
-    return in_array($tld, $validTLDs, true);
+    return isset($this->getValidTLDs()[$tld]);
   }
 
   private function validate(?string $value, ?Email $constraints = null): ConstraintViolationListInterface
