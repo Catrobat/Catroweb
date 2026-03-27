@@ -11,7 +11,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\ExceptionInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -110,13 +109,6 @@ class ImportProjectsFromShare extends Command
    */
   private function importProjects(string $import_dir, string $username, int $remix_layout, OutputInterface $output): void
   {
-    CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
-      [
-        'directory' => $import_dir,
-        'user' => $username,
-      ],
-      new NullOutput()
-    );
     CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
       [
         'directory' => $import_dir,
