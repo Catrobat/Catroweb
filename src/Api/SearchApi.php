@@ -30,7 +30,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
   public function searchGet(string $query, string $type, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|SearchResponse
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->searchBurstLimiter)) {
+    if (null === $this->checkIpRateLimit($ip, $this->searchBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return [];

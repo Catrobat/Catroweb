@@ -42,7 +42,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->registrationBurstLimiter)) {
+    if (null === $this->checkIpRateLimit($ip, $this->registrationBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
@@ -184,7 +184,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language, int &$responseCode, array &$responseHeaders): ?RegisterErrorResponse
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->passwordResetBurstLimiter)) {
+    if (null === $this->checkIpRateLimit($ip, $this->passwordResetBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;

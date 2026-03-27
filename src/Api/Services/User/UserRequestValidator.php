@@ -37,7 +37,7 @@ class UserRequestValidator extends AbstractRequestValidator
 
   public const string MODE_UPDATE = 'update_mode';
 
-  private const int PSL_CACHE_TTL = 86400; // 24 hours
+  private const int PSL_CACHE_TTL = 86400;
 
   public function __construct(
     ValidatorInterface $validator,
@@ -191,7 +191,7 @@ class UserRequestValidator extends AbstractRequestValidator
   }
 
   /**
-   * @return array<string>
+   * @return array<string, true>
    */
   private function getValidTLDs(): array
   {
@@ -218,20 +218,11 @@ class UserRequestValidator extends AbstractRequestValidator
 
       foreach ($pslLines as $line) {
         $line = trim($line);
-        if ('' === $line) {
-          continue;
-        }
-        if ('/' === $line[0]) {
-          continue;
-        }
-        if ('!' === $line[0]) {
+        if ('' === $line || '/' === $line[0] || '!' === $line[0]) {
           continue;
         }
 
-        $tld = ltrim($line, '*.');
-        if (!in_array($tld, $validTLDs, true)) {
-          $validTLDs[] = $tld;
-        }
+        $validTLDs[ltrim($line, '*.')] = true;
       }
 
       return $validTLDs;
@@ -240,9 +231,7 @@ class UserRequestValidator extends AbstractRequestValidator
 
   private function isValidTLD(string $tld): bool
   {
-    $validTLDs = $this->getValidTLDs();
-
-    return in_array($tld, $validTLDs, true);
+    return isset($this->getValidTLDs()[$tld]);
   }
 
   private function validate(?string $value, ?Email $constraints = null): ConstraintViolationListInterface

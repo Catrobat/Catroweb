@@ -124,7 +124,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     }
 
     $admin = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if ($admin instanceof User && !$this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
+    if ($admin instanceof User && null === $this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
@@ -160,7 +160,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return;
     }
 
-    if (!$this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
+    if (null === $this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return;
@@ -207,7 +207,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     }
 
     $admin = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if ($admin instanceof User && !$this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
+    if ($admin instanceof User && null === $this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
@@ -243,7 +243,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return;
     }
 
-    if (!$this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
+    if (null === $this->checkUserRateLimit($admin, $this->moderationAdminBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return;
@@ -316,7 +316,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return;
     }
 
-    if (!$this->checkUserRateLimit($user, $this->appealDailyLimiter)) {
+    if (null === $this->checkUserRateLimit($user, $this->appealDailyLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return;

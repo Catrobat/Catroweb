@@ -80,7 +80,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   public function studioPost(string $accept_language, ?string $name, ?string $description, bool $is_public, bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    if ($user instanceof User && !$this->checkUserRateLimit($user, $this->studioCreateDailyLimiter)) {
+    if ($user instanceof User && null === $this->checkUserRateLimit($user, $this->studioCreateDailyLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;

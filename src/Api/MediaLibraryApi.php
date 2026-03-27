@@ -48,13 +48,14 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): array|object|null {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->mediaLibraryBurstLimiter)) {
+    $rate_limit = $this->checkIpRateLimit($ip, $this->mediaLibraryBurstLimiter);
+    if (null === $rate_limit) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }
 
-    $this->addRateLimitHeaders($responseHeaders, $this->mediaLibraryBurstLimiter, $ip);
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $db_file_type = $file_type ? $this->convertToDbFileType($file_type) : null;
     $search = null !== $search ? trim($search) : null;
@@ -260,13 +261,14 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     array &$responseHeaders,
   ): ?MediaAssetsResponse {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->mediaLibraryBurstLimiter)) {
+    $rate_limit = $this->checkIpRateLimit($ip, $this->mediaLibraryBurstLimiter);
+    if (null === $rate_limit) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }
 
-    $this->addRateLimitHeaders($responseHeaders, $this->mediaLibraryBurstLimiter, $ip);
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $db_file_type = $file_type ? $this->convertToDbFileType($file_type) : null;
 

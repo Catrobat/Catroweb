@@ -34,13 +34,14 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
       return null;
     }
 
-    if (!$this->checkUserRateLimit($user, $this->achievementBurstLimiter)) {
+    $rate_limit = $this->checkUserRateLimit($user, $this->achievementBurstLimiter);
+    if (null === $rate_limit) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }
 
-    $this->addRateLimitHeaders($responseHeaders, $this->achievementBurstLimiter, $user->getId());
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $page_data = $this->facade->getLoader()->getAchievementsPageData($user);
 
@@ -70,13 +71,14 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
       return null;
     }
 
-    if (!$this->checkUserRateLimit($user, $this->achievementBurstLimiter)) {
+    $rate_limit = $this->checkUserRateLimit($user, $this->achievementBurstLimiter);
+    if (null === $rate_limit) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }
 
-    $this->addRateLimitHeaders($responseHeaders, $this->achievementBurstLimiter, $user->getId());
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $count = $this->facade->getLoader()->getUnseenCount($user);
     $response = $this->facade->getResponseManager()->createAchievementsCountResponse($count);

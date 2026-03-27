@@ -192,7 +192,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
-    if ($user instanceof \App\DB\Entity\User\User && !$this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
+    if ($user instanceof \App\DB\Entity\User\User && null === $this->checkUserRateLimit($user, $this->uploadDailyLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
@@ -420,12 +420,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   /**
-   * @psalm-param 200|404|500 $responseCode
+   * @psalm-param 200|404|429|500 $responseCode
    */
   public function customProjectIdCatrobatGet(string $id, int &$responseCode, ?array &$responseHeaders = null): ?BinaryFileResponse
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
-    if (!$this->checkIpRateLimit($ip, $this->downloadBurstLimiter)) {
+    if (null === $this->checkIpRateLimit($ip, $this->downloadBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
@@ -477,7 +477,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    if (!$this->checkUserRateLimit($user, $this->reactionBurstLimiter)) {
+    if (null === $this->checkUserRateLimit($user, $this->reactionBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;

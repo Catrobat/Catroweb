@@ -49,13 +49,14 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
       return null;
     }
 
-    if (!$this->checkUserRateLimit($user, $this->notificationBurstLimiter)) {
+    $rate_limit = $this->checkUserRateLimit($user, $this->notificationBurstLimiter);
+    if (null === $rate_limit) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }
 
-    $this->addRateLimitHeaders($responseHeaders, $this->notificationBurstLimiter, $user->getId());
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $response = $this->facade->getResponseManager()->createNotificationsCountResponse($user);
 
@@ -76,13 +77,14 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
       return null;
     }
 
-    if (!$this->checkUserRateLimit($user, $this->notificationBurstLimiter)) {
+    $rate_limit = $this->checkUserRateLimit($user, $this->notificationBurstLimiter);
+    if (null === $rate_limit) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }
 
-    $this->addRateLimitHeaders($responseHeaders, $this->notificationBurstLimiter, $user->getId());
+    $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $limit = $this->normalizeLimit($limit);
 
