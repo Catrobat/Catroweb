@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
-  <meta name='viewport' content='width=device-width, user-scalable=no'/>
 
   {% if gtm_container_id %}
     <!-- Google Tag Manager (noscript) -->
@@ -46,6 +45,12 @@
 
 <body class="body-with-sidebar">
 
+<noscript>
+  <div class="noscript-warning" style="background-color: #fff3cd; color: #856404; text-align: center; padding: 1rem; font-size: 1rem;">
+    This site requires JavaScript to function. Please enable JavaScript in your browser.
+  </div>
+</noscript>
+
 {{ include('Layout/Header.html.twig',
   {
     top_bar_page_title: block('top_bar_page_title') ?? '',
@@ -62,11 +67,11 @@
 
 {{ include(('Layout/LanguageMenu.html.twig')) }}
 
-<div id="main_container_content" class="body-content">
+<main id="main_container_content" class="body-content">
   <div class="page-content{% if app.request.attributes.get('_route') != 'studio_details' %} container{% endif %}">
     {% block body %}{% endblock %}
   </div>
-</div>
+</main>
 
 {{ include('Layout/Footer.html.twig') }}
 
