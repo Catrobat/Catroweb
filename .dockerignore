@@ -1,9 +1,38 @@
+# Dependencies (built inside container via multi-stage builds)
 vendor/
 node_modules/
-var/
+
+# Version control
 .git/
+.gitignore
+
+# CI/CD
 .github/
+
+# IDE
 .idea/
+.vscode/
+
+# Build artifacts and caches
+var/
 tmp/
-tests/TestReports/
+public/build/
 .phpunit.cache
+.php-cs-fixer.cache
+
+# Test reports (generated at runtime)
+tests/TestReports/
+
+# Claude Code
+.claude/
+
+# Docker (avoid recursive copy)
+docker/docker-compose.*.yaml
+
+# Documentation
+*.md
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
