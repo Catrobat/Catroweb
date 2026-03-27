@@ -83,21 +83,36 @@ Useful failure artifacts:
 - Screenshots: `tests/TestReports/TestScreenshots/`
 - Behat logs: `tests/TestReports/Behat/`
 
-### Playwright
+### Browser Comparison Suites
 
-Experimental browser comparison for the `web/general` suite:
+Experimental browser comparisons for the `web/general` suite:
 
 - Configuration: `playwright.config.js`
 - Tests: `tests/Playwright/web-general/`
-- Reports: `tests/TestReports/Playwright/`
+- Shared Gherkin features: `tests/Gherkin/web-general/`
+- Cucumber.js + Playwright glue: `tests/CucumberPlaywright/`
+- WebdriverIO + Cucumber glue: `tests/WdioCucumber/`
+- Reports: `tests/TestReports/Playwright/`, `tests/TestReports/CucumberPlaywright/`, `tests/TestReports/WdioCucumber/`
 
-Run the migrated browser tests:
+Run the plain Playwright suite:
 
 ```bash
 yarn test-e2e:playwright:web-general
 ```
 
-Install the Playwright browser locally if needed:
+Run the Gherkin suite on top of Playwright:
+
+```bash
+yarn test-e2e:cucumber-playwright:web-general
+```
+
+Run the Gherkin suite on top of WebdriverIO:
+
+```bash
+yarn test-e2e:wdio:web-general
+```
+
+Install the shared Chromium browser locally if needed:
 
 ```bash
 yarn test-e2e:playwright:install
@@ -105,8 +120,8 @@ yarn test-e2e:playwright:install
 
 Notes:
 
-- The Playwright suite assumes the Docker test stack is already running on `http://127.0.0.1:8080`.
-- It prepares and seeds test data by calling test-only Symfony console commands inside `app.catroweb`.
+- All three comparison suites assume the Docker test stack is already running on `http://127.0.0.1:8080`.
+- They prepare and seed test data by calling test-only PHP scripts inside `app.catroweb`.
 - The current migration focuses on browser-facing `web/general` behavior so it can be compared against the existing Behat `web-general` matrix job.
 
 ## Static Analysis
