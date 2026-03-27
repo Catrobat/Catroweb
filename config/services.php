@@ -84,6 +84,8 @@ use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\BroadcastNotification;
 use App\DB\Entity\User\User;
+use App\Security\Authentication\ApiAuthenticationSuccessHandler;
+use App\Security\Authentication\JwtRefresh\ApiRefreshTokenSuccessHandler;
 use App\Security\Captcha\CaptchaVerifier;
 use App\User\UserProvider;
 use Monolog\Formatter\LineFormatter;
@@ -93,6 +95,7 @@ use Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Dotenv\Command\DotenvDumpCommand;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters = $containerConfigurator->parameters();
@@ -162,6 +165,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->alias(Sonata\AdminBundle\SonataConfiguration::class, 'sonata.admin.configuration');
   $services->alias(UserProviderInterface::class, UserProvider::class);
   $services->set('security.acl.permission.map', AdminPermissionMap::class);
+  $services->set(ApiAuthenticationSuccessHandler::class)
+    ->args([
+      service('lexik_jwt_authentication.handler.authentication_success'),
+      service(App\Security\Authentication\AuthenticationModeResolver::class),
+      service(App\Security\Authentication\MainFirewallSessionLogin::class),
+      service(App\Security\Authentication\AuthenticationSuccessResponseProcessor::class),
+    ])
+  ;
+  $services->set(ApiRefreshTokenSuccessHandler::class)
+    ->args([
+      service('gesdinet_jwt_refresh_token.security.authentication.success_handler'),
+      service(App\Security\Authentication\AuthenticationSuccessResponseProcessor::class),
+    ])
+  ;
 
   // Custom formatting for our logs
   $logFormat = "[%%datetime%%] %%level_name%% %%channel%%: %%message%% | ip=%%extra.client_ip%% user=%%extra.session_user%% %%context%% %%extra%%\n";
@@ -205,7 +222,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   //   - each services defines a page in the admin interface - go to /admin
   //
   $services->set('admin.block.projects.overview', ProjectsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Projects Overview',
@@ -215,20 +233,24 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'model_class' => Program::class,
         'controller' => null,
         'pager_type' => 'simple',
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.projects.approve', ApproveProjectsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Approve Projects',
         'code' => null,
         'model_class' => Program::class,
         'controller' => ApproveProjectsController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.comments.overview', CommentsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Comments Overview',
@@ -236,30 +258,36 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => UserComment::class,
         'controller' => null,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.moderation.reports', ModerationQueueAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Moderation Queue',
         'code' => null,
         'model_class' => ContentReport::class,
         'controller' => ModerationQueueController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.moderation.appeals', AppealQueueAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Appeal Queue',
         'code' => null,
         'model_class' => ContentAppeal::class,
         'controller' => AppealQueueController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.media_library.category', MediaCategoryAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Media Library Categories',
@@ -267,10 +295,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => MediaCategory::class,
         'controller' => null,
-      ])
+      ]
+    )
   ;
   $services->set('admin.media_library.asset', MediaAssetAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Media Library Assets',
@@ -278,50 +308,60 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => MediaAsset::class,
         'controller' => null,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.featured.projects', FeaturedProjectAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Featured Projects',
         'code' => null,
         'model_class' => FeaturedProgram::class,
         'controller' => null,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.example.projects', ExampleProjectAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Example Projects',
         'code' => null,
         'model_class' => ExampleProgram::class,
         'controller' => null,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.apk.pending', ApkPendingAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Pending',
         'code' => null,
         'model_class' => Program::class,
         'controller' => ApkController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.apk.list', ApkReadyAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Ready',
         'code' => null,
         'model_class' => Program::class,
         'controller' => ApkController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.users.overview', UserAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'model_class' => User::class,
@@ -331,20 +371,24 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'controller' => null,
         'pager_type' => 'simple',
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.users.data_report', UserDataReportAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'User Data Report',
         'code' => null,
         'model_class' => User::class,
         'controller' => UserDataReportController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.survey', AllSurveysAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Surveys',
@@ -353,10 +397,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => Survey::class,
         'controller' => null,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.special_updater', SpecialUpdaterAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'DB Special Updater',
@@ -364,10 +410,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => CronJob::class,
         'controller' => SpecialUpdaterAdminController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.cron_jobs', CronJobsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Cron Jobs',
@@ -375,50 +423,60 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => CronJob::class,
         'controller' => CronJobsAdminController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.achievements', AchievementsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'DB-Updater Achievements',
         'code' => null,
         'model_class' => Achievement::class,
         'controller' => AchievementsAdminController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.flavors', FlavorsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'DB-Updater Flavors',
         'code' => null,
         'model_class' => Flavor::class,
         'controller' => FlavorsAdminController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.extensions', ExtensionsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'DB-Updater Extensions',
         'code' => null,
         'model_class' => Extension::class,
         'controller' => ExtensionsAdminController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.tags', TagsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'DB-Updater Tags',
         'code' => null,
         'model_class' => Tag::class,
         'controller' => TagsAdminController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.tools.maintain', MaintenanceAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'System Dashboard',
@@ -426,10 +484,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => CronJob::class,
         'controller' => MaintenanceController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.tools.logs', LogsAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Logs',
@@ -437,77 +497,92 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => CronJob::class,
         'controller' => LogsController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.tools.broadcast', BroadcastNotificationAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Send Notification',
         'code' => null,
         'model_class' => BroadcastNotification::class,
         'controller' => BroadcastNotificationController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.tools.mail', SendMailToUserAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Send Mail',
         'code' => null,
         'model_class' => CronJob::class,
         'controller' => SendMailToUserController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.tools.feature_flag', FeatureFlagAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Feature Flag',
         'code' => null,
         'model_class' => FeatureFlag::class,
         'controller' => FeatureFlagController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.tools.maintenance_information', MaintenanceInformationAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Maintenance Information',
         'code' => null,
         'model_class' => MaintenanceInformation::class,
         'controller' => MaintenanceInformationController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.statistics.project_machine_translation', ProjectMachineTranslationAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Project Machine Translation',
         'code' => null,
         'model_class' => ProjectMachineTranslation::class,
         'controller' => ProjectMachineTranslationAdminController::class,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.statistics.project_custom_translation', ProjectCustomTranslationAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Project Custom Translation',
         'code' => null,
         'model_class' => ProjectCustomTranslation::class,
         'controller' => null,
-      ])
+      ]
+    )
   ;
   $services->set('admin.block.statistics.comment_machine_translation', CommentMachineTranslationAdmin::class)
-    ->tag('sonata.admin',
+    ->tag(
+      'sonata.admin',
       [
         'manager_type' => 'orm',
         'label' => 'Comment Machine Translation',
         'code' => null,
         'model_class' => CommentMachineTranslation::class,
         'controller' => CommentMachineTranslationAdminController::class,
-      ])
+      ]
+    )
   ;
 
   // enable prod env dumping without composer

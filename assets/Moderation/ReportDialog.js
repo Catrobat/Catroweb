@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2'
-import { getCookie } from '../Security/CookieHelper'
 import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import { REPORT_CATEGORIES } from './ReportCategories'
@@ -74,13 +73,11 @@ export function showReportDialog({
 }
 
 function submitReport(apiUrl, { category, note }, translations, sessionKey) {
-  const token = getCookie('BEARER')
-
   return fetch(apiUrl, {
     method: 'POST',
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
     },
     body: JSON.stringify({ category, note: note || null }),
   })

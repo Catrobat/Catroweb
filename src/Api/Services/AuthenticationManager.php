@@ -82,6 +82,15 @@ class AuthenticationManager
   {
     $refreshToken = $this->refresh_manager->get($x_refresh);
     if (null === $refreshToken) {
+      // The web logout flow sends the sentinel value "cookie" in X-Refresh and lets the
+      // server resolve the actual refresh token from the HttpOnly cookie.
+      $refresh_token_cookie = $this->request_helper->getCurrentRequest()?->cookies->get('REFRESH_TOKEN');
+      if (\is_string($refresh_token_cookie) && '' !== $refresh_token_cookie) {
+        $refreshToken = $this->refresh_manager->get($refresh_token_cookie);
+      }
+    }
+
+    if (null === $refreshToken) {
       return false;
     }
 

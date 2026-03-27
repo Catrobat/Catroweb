@@ -2,8 +2,7 @@ import Swal from 'sweetalert2'
 import '../Components/TabBar'
 import './Profile.scss'
 import { showSnackbar } from '../Layout/Snackbar'
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
-import { getCookie } from '../Security/CookieHelper'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.js-follower-overview')
@@ -29,15 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     follows: container.dataset.transFollows,
     follow: container.dataset.transFollow,
     followsMe: container.dataset.transFollowsMe,
-  }
-
-  function getAuthHeaders() {
-    const token = getCookie('BEARER')
-    const headers = { Accept: 'application/json' }
-    if (token) {
-      headers['Authorization'] = 'Bearer ' + token
-    }
-    return headers
   }
 
   function showVerificationAlert(message) {
@@ -141,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const followingUrl = baseUrl + '/api/user/' + userId + '/following'
 
     Promise.all([
-      fetch(followersUrl, { headers: getAuthHeaders() }).then((r) => r.json()),
-      fetch(followingUrl, { headers: getAuthHeaders() }).then((r) => r.json()),
+      fetch(followersUrl, { credentials: 'same-origin' }).then((r) => r.json()),
+      fetch(followingUrl, { credentials: 'same-origin' }).then((r) => r.json()),
     ])
       .then(([followersData, followingData]) => {
         updateTabCounts(followersData.total_followers, followersData.total_following)
@@ -171,7 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const url = baseUrl + '/api/user/' + targetUserId + '/follow'
     fetch(url, {
       method: 'POST',
-      headers: getAuthHeaders(),
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' },
     })
       .then((response) => {
         if (response.ok) {
@@ -227,7 +218,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = baseUrl + '/api/user/' + targetUserId + '/unfollow'
         fetch(url, {
           method: 'DELETE',
-          headers: getAuthHeaders(),
+          credentials: 'same-origin',
+          headers: { Accept: 'application/json' },
         })
           .then((response) => {
             if (response.ok || response.status === 204) {

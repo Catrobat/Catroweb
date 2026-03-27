@@ -1,9 +1,6 @@
-import { setCookie } from './CookieHelper'
-
 export class LoginTokenHandler {
   constructor() {
     const routingDataset = document.getElementById('js-api-routing').dataset
-    this.baseUrl = routingDataset.baseUrl
     this.indexPath = routingDataset.index
     this.authenticationPath = routingDataset.authentication
   }
@@ -48,25 +45,19 @@ export class LoginTokenHandler {
   login(data) {
     fetch(this.authenticationPath, {
       method: 'POST',
+      credentials: 'same-origin',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'X-Auth-Mode': 'cookie',
       },
       body: JSON.stringify(data),
     })
       .then((response) => {
-        if (response.status === 200) {
-          return response.json()
+        if (!response.ok) {
+          throw new Error('Login failed')
         }
-      })
-      .then((data) => {
-        setCookie('BEARER', data.token, 'Tue, 19 Jan 2038 00:00:01 GMT', this.baseUrl + '/')
-        setCookie(
-          'REFRESH_TOKEN',
-          data.refresh_token,
-          'Tue, 19 Jan 2038 00:00:01 GMT',
-          this.baseUrl + '/',
-        )
+
         window.location.href = this.getRedirectUri()
       })
       .catch(() => {

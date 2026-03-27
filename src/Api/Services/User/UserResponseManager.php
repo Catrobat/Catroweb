@@ -121,4 +121,9 @@ class UserResponseManager extends AbstractResponseManager
       $this->cookie_service->createRefreshTokenCookie($refresh_token),
     ];
   }
+
+  public function addClearedAuthenticationCookiesToHeader(array &$responseHeaders): void
+  {
+    $this->cookie_service->addClearedAuthenticationCookiesToHeader($responseHeaders);
+  }
 }

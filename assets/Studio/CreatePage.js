@@ -1,5 +1,4 @@
 import '../Components/Switch'
-import { getCookie } from '../Security/CookieHelper'
 import { showValidationMessage } from '../Components/TextField'
 import AcceptLanguage from '../Api/AcceptLanguage'
 
@@ -36,10 +35,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const response = await fetch(config.url, {
       method: 'POST',
+      credentials: 'same-origin',
       body: formData,
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + getCookie('BEARER'),
         'Accept-Language': new AcceptLanguage().get(),
       },
     })

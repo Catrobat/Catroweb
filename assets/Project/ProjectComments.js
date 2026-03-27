@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2'
-import { getCookie } from '../Security/CookieHelper'
 
 export function ProjectComments(
   programId,
@@ -31,6 +30,7 @@ export function ProjectComments(
   const parentCommentContainer = document.querySelector('.js-project-parentComment')
   const repliesParentId = parentCommentContainer?.dataset.parentCommentId
   const isRepliesPage = Boolean(parentCommentContainer && repliesParentId)
+  const isLoggedIn = projectComments?.dataset.isLoggedIn === 'true'
 
   const commentUploadDates = document.getElementsByClassName('comment-upload-date')
   for (const element of commentUploadDates) {
@@ -113,7 +113,7 @@ export function ProjectComments(
           contentId: reportButton.dataset.contentId,
           apiUrl: reportButton.dataset.reportUrl,
           loginUrl: projectComments?.dataset.pathLoginUrl,
-          isLoggedIn: Boolean(getCookie('BEARER')),
+          isLoggedIn,
           translations: {
             title: projectComments?.dataset.transReportTitle,
             submit: projectComments?.dataset.transReportSubmit,
@@ -262,9 +262,9 @@ export function ProjectComments(
 
     fetch(postCommentUrl, {
       method: 'POST',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + getCookie('BEARER'),
       },
       body: JSON.stringify(payload),
     })
@@ -365,12 +365,7 @@ export function ProjectComments(
     if (!listUrl) return
 
     fetchActive = true
-    const loadHeaders = {}
-    const bearerToken = getCookie('BEARER')
-    if (bearerToken) {
-      loadHeaders['Authorization'] = 'Bearer ' + bearerToken
-    }
-    fetch(listUrl, { headers: loadHeaders })
+    fetch(listUrl, { credentials: 'same-origin' })
       .then((response) => {
         if (response.ok) {
           return response.json()
@@ -453,9 +448,7 @@ export function ProjectComments(
 
     fetch(`${commentsBaseUrl}/${commentId}`, {
       method: 'DELETE',
-      headers: {
-        Authorization: 'Bearer ' + getCookie('BEARER'),
-      },
+      credentials: 'same-origin',
     })
       .then((response) => {
         if (response.ok) {
