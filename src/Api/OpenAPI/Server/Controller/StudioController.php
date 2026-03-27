@@ -56,7 +56,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdDeleteAction(Request $request, $id)
+  public function studioIdDeleteAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -80,7 +80,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -138,7 +138,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdGetAction(Request $request, $id)
+  public function studioIdGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -168,7 +168,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -224,7 +224,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdPostAction(Request $request, $id)
+  public function studioIdPostAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -266,7 +266,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -356,7 +356,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioPostAction(Request $request)
+  public function studioPostAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

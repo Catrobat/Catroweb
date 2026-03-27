@@ -501,6 +501,12 @@ open_api_server_studio_studiopost:
     _controller: open_api_server.controller.studio::studioPostAction
 
 # user
+open_api_server_user_userdataexportget:
+  path: /user/data-export
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.user::userDataExportGetAction
+
 open_api_server_user_userdelete:
   path: /user
   methods: [DELETE]

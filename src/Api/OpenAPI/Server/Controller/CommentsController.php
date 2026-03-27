@@ -31,6 +31,7 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\CommentsApiInterface;
+use OpenAPI\Server\Model\CommentCreateRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -56,7 +57,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function commentsIdDeleteAction(Request $request, $id)
+  public function commentsIdDeleteAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -137,7 +138,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function commentsIdRepliesGetAction(Request $request, $id)
+  public function commentsIdRepliesGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -237,7 +238,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function commentsIdTranslationGetAction(Request $request, $id)
+  public function commentsIdTranslationGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -338,7 +339,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdCommentsGetAction(Request $request, $id)
+  public function projectIdCommentsGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -372,7 +373,7 @@ class CommentsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -438,7 +439,7 @@ class CommentsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdCommentsPostAction(Request $request, $id)
+  public function projectIdCommentsPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -471,7 +472,7 @@ class CommentsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $comment_create_request = $this->deserialize($comment_create_request, 'OpenAPI\Server\Model\CommentCreateRequest', $inputFormat);
+      $comment_create_request = $this->deserialize($comment_create_request, CommentCreateRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -481,14 +482,14 @@ class CommentsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\CommentCreateRequest');
+    $asserts[] = new Assert\Type(CommentCreateRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($comment_create_request, $asserts);
     if ($response instanceof Response) {
