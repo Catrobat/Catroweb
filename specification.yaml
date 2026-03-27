@@ -2498,39 +2498,87 @@ components:
 
     UnauthorizedError:
       description: 'Invalid JWT token | JWT token not found | JWT token expired'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     BadRequest:
       description: 'Bad request (Invalid, or missing parameters)'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     InvalidCredentials:
       description: 'Invalid credentials'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     InvalidRefreshToken:
       description: 'Refresh Token expired | Refresh Token has been used more than once (single use)'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     InvalidUploadToken:
       description: 'The provided deprecated upload token is invalid or has expired'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     NotAcceptable:
       description: 'Not acceptable - client must accept application/json as content type'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     UnsupportedMediaType:
       description: 'Unsupported Media Type - request must use application/json as content type'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     NotFound:
       description: 'Not found'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     UnprocessableEntity:
       description: 'Unprocessable Entity'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     InvalidIdToken:
       description: 'Invalid Client ID token'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     Forbidden:
       description: 'Insufficient privileges, action not allowed.'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
     TooManyRequests:
       description: 'Too Many Requests'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 
   ##############################################
   # Security Schemes
@@ -3117,11 +3165,19 @@ components:
           format: email
           example: 'foo.bar@catrob.at'
           description: 'Email of the user'
+        captcha_token:
+          type: string
+          description: 'CAPTCHA response token for bot detection'
 
     RegisterRequest:
       allOf:
         - $ref: '#/components/schemas/DryRun'
         - $ref: '#/components/schemas/BaseUser'
+        - type: object
+          properties:
+            captcha_token:
+              type: string
+              description: 'CAPTCHA response token for bot detection'
 
     UpdateUserRequest:
       allOf:
@@ -3201,6 +3257,60 @@ components:
               format: email
               example: 'foo.bar@catrob.at'
               description: 'EMail of the user'
+
+    ErrorResponse:
+      type: object
+      description: 'Standard error response format used across all API endpoints'
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - type
+            - message
+          properties:
+            code:
+              type: integer
+              description: 'HTTP status code'
+              example: 422
+            type:
+              type: string
+              description: 'Machine-readable error type'
+              example: 'validation_error'
+              enum:
+                - 'validation_error'
+                - 'bad_request'
+                - 'unauthorized'
+                - 'forbidden'
+                - 'not_found'
+                - 'not_acceptable'
+                - 'unsupported_media_type'
+                - 'unprocessable_entity'
+                - 'too_many_requests'
+                - 'internal_error'
+            message:
+              type: string
+              description: 'Human-readable error summary'
+              example: 'Validation failed'
+            details:
+              type: array
+              description: 'Optional field-level error details (for validation errors)'
+              items:
+                type: object
+                required:
+                  - field
+                  - message
+                properties:
+                  field:
+                    type: string
+                    description: 'The field that caused the error'
+                    example: 'email'
+                  message:
+                    type: string
+                    description: 'Human-readable error message for this field'
+                    example: 'Email is required'
 
     RegisterErrorResponse:
       type: object
