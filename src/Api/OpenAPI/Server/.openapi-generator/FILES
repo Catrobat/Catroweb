@@ -47,6 +47,9 @@ Model/ContentAppealRequest.php
 Model/ContentReportRequest.php
 Model/CreateStudioErrorResponse.php
 Model/DryRun.php
+Model/ErrorResponse.php
+Model/ErrorResponseError.php
+Model/ErrorResponseErrorDetailsInner.php
 Model/ExtendedUserDataResponse.php
 Model/ExtensionResponse.php
 Model/FeaturedProjectResponse.php
@@ -136,6 +139,9 @@ Tests/Model/ContentAppealRequestTest.php
 Tests/Model/ContentReportRequestTest.php
 Tests/Model/CreateStudioErrorResponseTest.php
 Tests/Model/DryRunTest.php
+Tests/Model/ErrorResponseErrorDetailsInnerTest.php
+Tests/Model/ErrorResponseErrorTest.php
+Tests/Model/ErrorResponseTest.php
 Tests/Model/ExtendedUserDataResponseTest.php
 Tests/Model/ExtensionResponseTest.php
 Tests/Model/FeaturedProjectResponseTest.php
@@ -215,6 +221,9 @@ docs/Model/ContentAppealRequest.md
 docs/Model/ContentReportRequest.md
 docs/Model/CreateStudioErrorResponse.md
 docs/Model/DryRun.md
+docs/Model/ErrorResponse.md
+docs/Model/ErrorResponseError.md
+docs/Model/ErrorResponseErrorDetailsInner.md
 docs/Model/ExtendedUserDataResponse.md
 docs/Model/ExtensionResponse.md
 docs/Model/FeaturedProjectResponse.md

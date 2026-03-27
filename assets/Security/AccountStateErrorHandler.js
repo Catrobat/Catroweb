@@ -13,11 +13,11 @@ export function handleAccountState403(response, translations, fallbackMsg) {
     .json()
     .then((body) => {
       let msg = fallbackMsg || translations.error || 'Something went wrong.'
-      if (body?.error === 'Email verification required.') {
+      if (body?.error?.message === 'Email verification required.') {
         msg =
           translations.unverified ||
           'Please make sure you are logged in and your account\u2019s email is verified.'
-      } else if (body?.error === 'Your account has been suspended.') {
+      } else if (body?.error?.message === 'Your account has been suspended.') {
         msg = translations.suspended || 'Your account has been suspended due to community reports.'
       }
       Swal.fire({

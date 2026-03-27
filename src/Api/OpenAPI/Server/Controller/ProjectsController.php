@@ -56,10 +56,10 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdCatrobatGetAction(Request $request, $id): Response
+  public function projectIdCatrobatGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
-    $produces = ['application/zip'];
+    $produces = ['application/zip', 'application/json'];
     // Figure out what the client accepts
     $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
     $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
@@ -84,7 +84,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -132,7 +132,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdDeleteAction(Request $request, $id): Response
+  public function projectIdDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -154,7 +154,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -205,7 +205,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdGetAction(Request $request, $id): Response
+  public function projectIdGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -233,7 +233,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -281,7 +281,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdPutAction(Request $request, $id): Response
+  public function projectIdPutAction(Request $request, $id)
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -314,7 +314,7 @@ class ProjectsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $update_project_request = $this->deserialize($update_project_request, \OpenAPI\Server\Model\UpdateProjectRequest::class, $inputFormat);
+      $update_project_request = $this->deserialize($update_project_request, 'OpenAPI\Server\Model\UpdateProjectRequest', $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -324,14 +324,14 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\UpdateProjectRequest::class);
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\UpdateProjectRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($update_project_request, $asserts);
     if ($response instanceof Response) {
@@ -392,7 +392,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReactionDeleteAction(Request $request, $id): Response
+  public function projectIdReactionDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -418,7 +418,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -484,7 +484,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReactionPostAction(Request $request, $id): Response
+  public function projectIdReactionPostAction(Request $request, $id)
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -517,7 +517,7 @@ class ProjectsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $reaction_request = $this->deserialize($reaction_request, \OpenAPI\Server\Model\ReactionRequest::class, $inputFormat);
+      $reaction_request = $this->deserialize($reaction_request, 'OpenAPI\Server\Model\ReactionRequest', $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -527,14 +527,14 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ReactionRequest::class);
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ReactionRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($reaction_request, $asserts);
     if ($response instanceof Response) {
@@ -596,7 +596,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReactionsGetAction(Request $request, $id): Response
+  public function projectIdReactionsGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -626,7 +626,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -679,7 +679,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdReactionsUsersGetAction(Request $request, $id): Response
+  public function projectIdReactionsUsersGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -715,7 +715,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -788,7 +788,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectIdRecommendationsGetAction(Request $request, $id): Response
+  public function projectIdRecommendationsGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -830,7 +830,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -871,7 +871,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -924,7 +924,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsCategoriesGetAction(Request $request): Response
+  public function projectsCategoriesGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1014,7 +1014,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsExtensionsGetAction(Request $request): Response
+  public function projectsExtensionsGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1087,7 +1087,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsFeaturedGetAction(Request $request): Response
+  public function projectsFeaturedGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1152,7 +1152,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1205,7 +1205,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsGetAction(Request $request): Response
+  public function projectsGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1279,7 +1279,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1332,7 +1332,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsPostAction(Request $request): Response
+  public function projectsPostAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1449,7 +1449,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsSearchGetAction(Request $request): Response
+  public function projectsSearchGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1514,7 +1514,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1567,7 +1567,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsTagsGetAction(Request $request): Response
+  public function projectsTagsGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1640,7 +1640,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsUserGetAction(Request $request): Response
+  public function projectsUserGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1699,7 +1699,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1757,7 +1757,7 @@ class ProjectsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function projectsUserIdGetAction(Request $request, $id): Response
+  public function projectsUserIdGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1795,7 +1795,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1822,7 +1822,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
