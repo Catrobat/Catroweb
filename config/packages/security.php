@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 use App\DB\Entity\User\User;
+use App\Security\Authentication\ApiAuthenticationSuccessHandler;
 use App\Security\Authentication\FormLoginSuccessHandler;
+use App\Security\Authentication\JwtRefresh\ApiRefreshTokenSuccessHandler;
 use App\Security\Authentication\WebView\WebviewJWTAuthenticator;
 use App\Security\OAuth\HwiOauthUserProvider;
 use App\Security\OAuth\OAuthSuccessHandler;
@@ -33,11 +35,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'stateless' => true,
           'json_login' => [
             'check_path' => '/api/authentication',
-            'success_handler' => 'lexik_jwt_authentication.handler.authentication_success',
+            'success_handler' => ApiAuthenticationSuccessHandler::class,
             'failure_handler' => 'lexik_jwt_authentication.handler.authentication_failure',
           ],
           'refresh_jwt' => [
             'check_path' => '/api/authentication/refresh',
+            'success_handler' => ApiRefreshTokenSuccessHandler::class,
           ],
         ],
         'api' => [

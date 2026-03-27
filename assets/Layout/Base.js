@@ -13,7 +13,6 @@ import 'material-icons/iconfont/material-icons.css'
 import textFillDefault from '../Components/TextFillDefault'
 import './TopBar'
 import './Sidebar'
-import { TokenExpirationHandler } from '../Security/TokenExpirationHandler'
 import { LogoutTokenHandler } from '../Security/LogoutTokenHandler'
 import { showSnackbar } from './Snackbar'
 
@@ -39,7 +38,6 @@ initAnalyticsIfConsented()
 require('./Base.scss')
 require('./Footer.scss')
 
-new TokenExpirationHandler()
 new LogoutTokenHandler()
 
 document.addEventListener('DOMContentLoaded', () => {

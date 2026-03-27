@@ -6,7 +6,6 @@ import '../Components/TextField'
 import { showSnackbar } from '../Layout/Snackbar'
 import Swal from 'sweetalert2'
 import StudioCommentHandler from './StudioCommentHandler'
-import { getCookie } from '../Security/CookieHelper'
 import AcceptLanguage from '../Api/AcceptLanguage'
 require('../Project/ProjectList.scss')
 require('./AdminSettings.scss')
@@ -47,10 +46,10 @@ async function uploadCoverImage(url, file) {
 
   const response = await fetch(url, {
     method: 'POST',
+    credentials: 'same-origin',
     body: formData,
     headers: {
       Accept: 'application/json',
-      Authorization: 'Bearer ' + getCookie('BEARER'),
       'Accept-Language': new AcceptLanguage().get(),
     },
   })

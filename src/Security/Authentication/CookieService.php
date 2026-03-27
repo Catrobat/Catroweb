@@ -28,18 +28,12 @@ readonly class CookieService
       'BEARER',
       $bearer_token,
       time() + $this->jwtTokenLifetime,
-      // expiration
-      $this->router->getContext()->getBaseUrl().'/',
-      // path
+      $this->getCookiePath(),
       null,
-      // domain, null means that Symfony will generate it on its own.
-      'prod' === $_ENV['APP_ENV'],
-      // secure (HTTPS only)
+      $this->isSecureCookie(),
+      true,
       false,
-      // httpOnly
-      false,
-      // raw
-      'lax'
+      Cookie::SAMESITE_LAX
     );
   }
 
@@ -52,27 +46,72 @@ readonly class CookieService
       'REFRESH_TOKEN',
       $refresh_token,
       time() + $this->refreshTokenLifetime,
-      // expiration
-      $this->router->getContext()->getBaseUrl().'/',
-      // path - optional /api/authentication
+      $this->getCookiePath(),
       null,
-      // domain, null means that Symfony will generate it on its own.
-      'prod' === $_ENV['APP_ENV'],
-      // secure (HTTPS only)
+      $this->isSecureCookie(),
       true,
-      // httpOnly
       false,
-      // raw
-      'strict'
+      Cookie::SAMESITE_STRICT
     );
+  }
+
+  public function createClearedCookie(string $cookie): Cookie
+  {
+    return Cookie::create(
+      $cookie,
+      '',
+      time() - 3600,
+      $this->getCookiePath(),
+      null,
+      $this->isSecureCookie(),
+      true,
+      false,
+      $this->getSameSite($cookie)
+    );
+  }
+
+  /**
+   * @return array{0: Cookie, 1: Cookie}
+   */
+  public function createClearedAuthenticationCookies(): array
+  {
+    return [
+      $this->createClearedCookie('BEARER'),
+      $this->createClearedCookie('REFRESH_TOKEN'),
+    ];
+  }
+
+  public function addClearedAuthenticationCookiesToHeader(array &$responseHeaders): void
+  {
+    $responseHeaders['Set-Cookie'] = $this->createClearedAuthenticationCookies();
   }
 
   public function clearCookie(string $cookie): void
   {
     if (isset($_COOKIE[$cookie])) {
-      setcookie($cookie, '', ['expires' => time() - 3600, 'path' => $this->router->getContext()->getBaseUrl().'/']);
-      setcookie($cookie, '', ['expires' => time() - 3600, 'path' => '/']);
+      $same_site = $this->getSameSite($cookie);
+
+      setcookie($cookie, '', ['expires' => time() - 3600, 'path' => $this->getCookiePath(), 'secure' => $this->isSecureCookie(), 'httponly' => true, 'samesite' => $same_site]);
+      setcookie($cookie, '', ['expires' => time() - 3600, 'path' => '/', 'secure' => $this->isSecureCookie(), 'httponly' => true, 'samesite' => $same_site]);
       unset($_COOKIE[$cookie]);
     }
+  }
+
+  private function getCookiePath(): string
+  {
+    return $this->router->getContext()->getBaseUrl().'/';
+  }
+
+  private function isSecureCookie(): bool
+  {
+    return 'prod' === ($_ENV['APP_ENV'] ?? 'dev');
+  }
+
+  /**
+   * @return 'lax'|'strict'
+   */
+  private function getSameSite(string $cookie): string
+  {
+    return 'REFRESH_TOKEN' === $cookie ? Cookie::SAMESITE_STRICT : Cookie::SAMESITE_LAX;
   }
 }

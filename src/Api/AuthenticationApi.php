@@ -48,6 +48,8 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
   #[\Override]
   public function authenticationDelete(string $x_refresh, int &$responseCode, array &$responseHeaders): void
   {
+    $this->facade->getResponseManager()->addClearedAuthenticationCookiesToHeader($responseHeaders);
+
     if ($this->facade->getProcessor()->deleteRefreshToken($x_refresh)) {
       $responseCode = Response::HTTP_OK;
 

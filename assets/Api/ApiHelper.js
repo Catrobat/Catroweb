@@ -1,6 +1,5 @@
 /* global globalConfiguration */
 
-import { getCookie } from '../Security/CookieHelper'
 import MessageDialogs from '../Components/MessageDialogs'
 
 export class ApiFetch {
@@ -14,9 +13,8 @@ export class ApiFetch {
   generateAuthenticatedFetch() {
     const config = {
       method: this.method,
-      headers: {
-        Authorization: 'Bearer ' + getCookie('BEARER'),
-      },
+      credentials: 'same-origin',
+      headers: {},
     }
 
     if (this.data !== undefined) {

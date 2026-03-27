@@ -424,12 +424,6 @@
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Security/Authentication/CookieService.php">
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$_ENV['APP_ENV']]]></code>
-      <code><![CDATA[$_ENV['APP_ENV']]]></code>
-    </PossiblyUndefinedArrayOffset>
-  </file>
   <file src="src/Security/Authentication/FormLoginSuccessHandler.php">
     <PossiblyNullArgument>
       <code><![CDATA[$refresh_token->getRefreshToken()]]></code>

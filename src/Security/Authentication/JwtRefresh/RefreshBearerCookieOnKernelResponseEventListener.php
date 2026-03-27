@@ -17,13 +17,10 @@ class RefreshBearerCookieOnKernelResponseEventListener
 
   public function refreshBearerCookie(ResponseEvent $event): void
   {
-    if ($this->refresh_token_service->isBearerCookieSet()) {
+    if (!$event->isMainRequest()) {
       return;
     }
-    if (!$this->refresh_token_service->isRefreshTokenCookieSet($event)) {
-      return;
-    }
-    // Bearer is missing, however we can try to create a new cookie one from the refresh token
-    $this->refresh_token_service->refreshBearerCookie($event);
+
+    $this->refresh_token_service->syncAuthenticationCookies($event);
   }
 }

@@ -91,6 +91,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     $responseCode = Response::HTTP_NO_CONTENT;
 
     $this->facade->getProcessor()->deleteUser($this->facade->getAuthenticationManager()->getAuthenticatedUser());
+    $this->facade->getResponseManager()->addClearedAuthenticationCookiesToHeader($responseHeaders);
   }
 
   /**

@@ -1,5 +1,4 @@
 import { CustomTranslationApi } from '../Api/CustomTranslationApi'
-import { getCookie } from '../Security/CookieHelper'
 import AcceptLanguage from '../Api/AcceptLanguage'
 
 export const DIALOG = {
@@ -115,10 +114,10 @@ export function ProjectEditorModel(programId, textFieldModels) {
 
       fetch(`${this.baseUrl}/api/project/${this.programId}`, {
         method: 'PUT',
+        credentials: 'same-origin',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + getCookie('BEARER'),
           'Accept-Language': new AcceptLanguage().get(),
         },
         body: JSON.stringify(requestData),
