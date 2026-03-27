@@ -28,7 +28,7 @@ class LogsController extends CRUDController
     }
 
     if ($request->query->get('file')) {
-      $file = (string) $request->query->get('file');
+      $file = basename((string) $request->query->get('file'));
     }
 
     $searchParam = [];
@@ -37,6 +37,15 @@ class LogsController extends CRUDController
     if (empty($file) && [] !== $allFiles) {
       $file = $allFiles[0];
     }
+
+    if (!empty($file)) {
+      $realLogDir = realpath(self::LOG_DIR);
+      $realFilePath = realpath(self::LOG_DIR.$file);
+      if (false === $realLogDir || false === $realFilePath || !str_starts_with($realFilePath, $realLogDir.DIRECTORY_SEPARATOR)) {
+        $file = null;
+      }
+    }
+
     $content = empty($file) ? null : $this->getLogFileContent($file, self::LOG_DIR, $searchParam);
 
     return $this->render('Admin/SystemManagement/Logs.html.twig', [
