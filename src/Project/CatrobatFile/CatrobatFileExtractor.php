@@ -38,12 +38,42 @@ class CatrobatFileExtractor
     $zip = new \ZipArchive();
     $res = $zip->open($file->getPathname());
 
-    if (true === $res) {
-      $zip->extractTo($full_extract_dir);
-      $zip->close();
-    } else {
+    if (true !== $res) {
       throw new InvalidCatrobatFileException('errors.file.invalid', 505);
     }
+
+    $max_total_size = 200 * 1024 * 1024; // 200 MB
+    $max_file_count = 5_000;
+    $total_size = 0;
+    $num_entries = $zip->numFiles;
+
+    if ($num_entries > $max_file_count) {
+      $zip->close();
+      throw new InvalidCatrobatFileException('errors.file.invalid', 505, 'Too many files in archive');
+    }
+
+    for ($i = 0; $i < $num_entries; ++$i) {
+      $stat = $zip->statIndex($i);
+      if (false === $stat) {
+        $zip->close();
+        throw new InvalidCatrobatFileException('errors.file.invalid', 505, 'Cannot read archive entry');
+      }
+
+      $entry_name = $stat['name'];
+      if (str_contains($entry_name, '..') || str_starts_with($entry_name, '/')) {
+        $zip->close();
+        throw new InvalidCatrobatFileException('errors.file.invalid', 505, 'Path traversal detected');
+      }
+
+      $total_size += $stat['size'];
+      if ($total_size > $max_total_size) {
+        $zip->close();
+        throw new InvalidCatrobatFileException('errors.file.invalid', 505, 'Uncompressed size exceeds limit');
+      }
+    }
+
+    $zip->extractTo($full_extract_dir);
+    $zip->close();
 
     return new ExtractedCatrobatFile($full_extract_dir, $full_extract_path, $temp_path);
   }
