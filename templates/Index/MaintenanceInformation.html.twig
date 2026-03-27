@@ -19,7 +19,7 @@
             {% endif %}
             {% if featureName is defined %}
                 {% set translationParams = translationParams|merge({
-                    featureName: '<span class="maintenance-feature-name bold-text">' ~ featureName ~ '</span>',
+                    featureName: '<span class="maintenance-feature-name bold-text">' ~ featureName|e('html') ~ '</span>',
                 }) %}
             {% endif %}
             <span>
@@ -35,7 +35,7 @@
             <div class="additional-info-section" id="additional-info-{{ code }}">
              <span>
                       {% set translationParams = translationParams|merge({
-                          additionalInfo: '<span class="maintenance-additionalinfo-text  bold-text">' ~ additionalInfo ~ '</span>',
+                          additionalInfo: '<span class="maintenance-additionalinfo-text  bold-text">' ~ additionalInfo|e('html') ~ '</span>',
                       }) %}
                 {{ 'maintenanceinformations.maintenance_information.additional_info'|trans(translationParams, 'catroweb')|raw }}
              </span>
