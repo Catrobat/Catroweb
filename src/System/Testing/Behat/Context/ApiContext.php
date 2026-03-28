@@ -285,6 +285,26 @@ class ApiContext implements Context
   }
 
   /**
+   * @When /^I POST "([^"]*)"$/
+   *
+   * @throws \Exception
+   */
+  public function iPostTo(string $url): void
+  {
+    $this->iRequestWith('POST', $url);
+  }
+
+  /**
+   * @When /^I DELETE "([^"]*)"$/
+   *
+   * @throws \Exception
+   */
+  public function iDeleteFrom(string $url): void
+  {
+    $this->iRequestWith('DELETE', $url);
+  }
+
+  /**
    * @When /^I want to download the apk file of "([^"]*)"$/
    *
    * @throws \Exception

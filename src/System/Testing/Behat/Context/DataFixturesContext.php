@@ -1196,7 +1196,11 @@ class DataFixturesContext implements Context
         MyUuidGenerator::setNextValue($config['id']);
       }
 
-      $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+      if (array_key_exists('studio_name', $config)) {
+        $studio = $this->getStudioManager()->findStudioByName($config['studio_name']);
+      } else {
+        $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+      }
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
 
@@ -1242,8 +1246,13 @@ class DataFixturesContext implements Context
         MyUuidGenerator::setNextValue($config['id']);
       }
 
-      $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
-      $project = $this->getProjectManager()->findOneByName($config['project']);
+      if (array_key_exists('studio_name', $config)) {
+        $studio = $this->getStudioManager()->findStudioByName($config['studio_name']);
+      } else {
+        $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+      }
+      $projectName = $config['project_name'] ?? $config['project'];
+      $project = $this->getProjectManager()->findOneByName($projectName);
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
 
@@ -1264,7 +1273,11 @@ class DataFixturesContext implements Context
         MyUuidGenerator::setNextValue($config['id']);
       }
 
-      $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+      if (array_key_exists('studio_name', $config)) {
+        $studio = $this->getStudioManager()->findStudioByName($config['studio_name']);
+      } else {
+        $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+      }
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
 
