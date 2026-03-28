@@ -22,6 +22,7 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Event\ProjectBeforeInsertEvent;
 use App\Project\Event\ProjectBeforePersistEvent;
+use App\Security\Malware\MalwareScanner;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
@@ -57,6 +58,7 @@ class ProjectManager
     protected NotificationManager $notification_service,
     private readonly ?UrlHelper $urlHelper,
     protected Security $security,
+    private readonly MalwareScanner $malware_scanner,
   ) {
   }
 
@@ -126,6 +128,15 @@ class ProjectManager
   public function addProject(AddProjectRequest $request): ?Program
   {
     $file = $request->getProjectFile();
+
+    $scan_result = $this->malware_scanner->scanFile($file->getPathname());
+    if (!$scan_result->is_clean) {
+      $this->logger->error('Malware scan rejected upload', [
+        'threat' => $scan_result->threat_name,
+        'error' => $scan_result->error_message,
+      ]);
+      throw new InvalidCatrobatFileException('errors.file.malware', 422, $scan_result->threat_name ?? $scan_result->error_message ?? 'Malware detected');
+    }
 
     $extracted_file = $this->file_extractor->extract($file);
 
