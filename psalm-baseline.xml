@@ -452,11 +452,7 @@
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Security/Authentication/WebView/WebviewJWTAuthenticator.php">
-    <PossiblyNullReference>
-      <code><![CDATA[getStatusCode]]></code>
-    </PossiblyNullReference>
-  </file>
+
   <file src="src/Security/OAuth/HwiOauthUserProvider.php">
     <PossiblyNullArgument>
       <code><![CDATA[$response->getEmail()]]></code>
