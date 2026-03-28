@@ -27,7 +27,6 @@ export const Project = function (
   wowBlack,
   reactionsText,
   downloadErrorText,
-  downloadStartedText,
 ) {
   createLinks()
   // getApkStatus() - APKs are disabled
@@ -56,94 +55,165 @@ export const Project = function (
   })
 
   // -------------------------- Download
+  const activeDownloads = {}
+
   document.querySelectorAll('.js-btn-project-download').forEach((button) => {
     button.addEventListener('click', (e) => {
-      download(
-        e.currentTarget.dataset.pathUrl,
-        `${e.currentTarget.dataset.projectId}.catrobat`,
-        e.currentTarget.dataset.buttonId,
-        e.currentTarget.dataset.spinnerId,
-        e.currentTarget.dataset.iconId,
-        e.currentTarget.dataset.isWebview,
-        e.currentTarget.dataset.isSupported,
-        e.currentTarget.dataset.isNotSupportedTitle,
-        e.currentTarget.dataset.isNotSupportedText,
+      const btn = e.currentTarget
+      downloadWithProgress(
+        btn.dataset.pathUrl,
+        `${btn.dataset.projectId}.catrobat`,
+        btn.dataset.projectId,
+        btn.dataset.suffix || '',
+        btn.dataset.isWebview === 'true',
+        btn.dataset.isSupported === 'true',
+        btn.dataset.isNotSupportedTitle,
+        btn.dataset.isNotSupportedText,
       )
+    })
+  })
+
+  document.querySelectorAll('.js-btn-download-cancel').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const suffix = e.currentTarget.dataset.suffix || ''
+      if (activeDownloads[suffix]) {
+        activeDownloads[suffix].abort()
+        delete activeDownloads[suffix]
+        showDownloadState('default', suffix)
+      }
+    })
+  })
+
+  document.querySelectorAll('.js-btn-download-open').forEach((button) => {
+    button.addEventListener('click', () => {
+      const deepLink =
+        window.location.origin + window.location.pathname.replace(/\/+$/, '') + '?download'
+      window.location.href = deepLink
     })
   })
 
   document.querySelectorAll('.js-btn-project-apk-download').forEach((button) => {
     button.addEventListener('click', (e) => {
-      download(
-        e.currentTarget.dataset.pathUrl,
-        `${e.currentTarget.dataset.projectId}.apk`,
-        e.currentTarget.dataset.buttonId,
-        e.currentTarget.dataset.spinnerId,
-        e.currentTarget.dataset.iconId,
-        e.currentTarget.dataset.isWebview,
-        e.currentTarget.dataset.isSupported,
-        e.currentTarget.dataset.isNotSupportedTitle,
-        e.currentTarget.dataset.isNotSupportedText,
+      const btn = e.currentTarget
+      downloadWithProgress(
+        btn.dataset.pathUrl,
+        `${btn.dataset.projectId}.apk`,
+        btn.dataset.projectId,
+        btn.dataset.suffix || '',
+        btn.dataset.isWebview === 'true',
+        btn.dataset.isSupported === 'true',
+        btn.dataset.isNotSupportedTitle,
+        btn.dataset.isNotSupportedText,
       )
     })
   })
 
-  function download(
+  function showDownloadState(state, suffix) {
+    const defaultBtn = document.getElementById('projectDownloadButton' + suffix)
+    const progressEl = document.getElementById('downloadProgress' + suffix)
+    const completeBtn = document.getElementById('downloadComplete' + suffix)
+
+    if (!defaultBtn || !progressEl || !completeBtn) return
+
+    defaultBtn.classList.toggle('d-none', state !== 'default')
+    progressEl.classList.toggle('d-none', state !== 'progress')
+    completeBtn.classList.toggle('d-none', state !== 'complete')
+  }
+
+  function updateProgressBar(suffix, percent) {
+    const bar = document.getElementById('downloadProgressBar' + suffix)
+    const text = document.getElementById('downloadProgressText' + suffix)
+    const btn = document.getElementById('projectDownloadButton' + suffix)
+    const downloadingText = btn
+      ? btn.dataset.transDownloading || 'Downloading...'
+      : 'Downloading...'
+
+    if (bar) {
+      bar.style.width = percent + '%'
+    }
+    if (text) {
+      text.textContent = downloadingText.replace('...', '') + ' ' + Math.round(percent) + '%'
+    }
+  }
+
+  function downloadWithProgress(
     downloadUrl,
     filename,
-    buttonId,
-    spinnerId,
-    iconId,
+    downloadProjectId,
+    suffix,
     isWebView = false,
     supported = true,
     isNotSupportedTitle = '',
     isNotSupportedText = '',
   ) {
-    const button = document.getElementById(buttonId)
-    const loadingSpinner = document.getElementById(spinnerId)
-    const icon = document.getElementById(iconId)
-
-    // UX - feedback loop: downloads of large projects can take a few seconds / minutes
-    showSnackbar('#share-snackbar', downloadStartedText)
-
-    // UX + Performance: prevent multiple same downloads
-    button.disabled = true
-    icon.classList.add('d-none')
-    loadingSpinner.classList.remove('d-none')
-    loadingSpinner.classList.add('d-inline-block')
-
     // Older app version do not support new features and projects that use them
     if (isWebView && !supported) {
       showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText)
-      resetDownloadButtonIcon(icon, loadingSpinner)
-      setTimeout(() => {
-        button.disabled = false
-      }, 2000)
       return
     }
 
-    // Unfortunately the android implementation of pocket code has its issues with the new download implementation
+    // Unfortunately the android implementation of pocket code has its issues with the new download
     if (isWebView) {
       downloadUrl += downloadUrl.includes('?') ? '&' : '?'
       downloadUrl += 'fname=' + encodeURIComponent(projectName)
       window.location = downloadUrl
-      resetDownloadButtonIcon(icon, loadingSpinner)
-      setTimeout(() => {
-        button.disabled = false
-      }, 2000)
       return
     }
 
-    new ApiFetch(downloadUrl)
-      .generateAuthenticatedFetch()
+    // Show progress state
+    showDownloadState('progress', suffix)
+    updateProgressBar(suffix, 0)
+
+    const controller = new AbortController()
+    activeDownloads[suffix] = controller
+
+    fetch(downloadUrl, {
+      credentials: 'same-origin',
+      signal: controller.signal,
+    })
       .then((response) => {
-        // fetching the data in the background; this allows us to detect when the download is finished!
-        if (response.ok) {
-          return response.blob()
+        if (!response.ok) {
+          throw new Error('Download failed with status ' + response.status)
         }
+
+        const contentLength = response.headers.get('Content-Length')
+        const total = contentLength ? parseInt(contentLength, 10) : 0
+
+        if (!response.body || total === 0) {
+          // Fallback: no streaming support or unknown size
+          return response.blob().then((blob) => {
+            updateProgressBar(suffix, 100)
+            return blob
+          })
+        }
+
+        const reader = response.body.getReader()
+        let received = 0
+        const chunks = []
+
+        function read() {
+          return reader.read().then(({ done, value }) => {
+            if (done) {
+              updateProgressBar(suffix, 100)
+              const blob = new Blob(chunks)
+              return blob
+            }
+
+            chunks.push(value)
+            received += value.length
+            const percent = Math.min((received / total) * 100, 100)
+            updateProgressBar(suffix, percent)
+
+            return read()
+          })
+        }
+
+        return read()
       })
       .then((blob) => {
-        // once the data was fetched the downloaded data can be saved
+        delete activeDownloads[suffix]
+
+        // Trigger browser download
         const url = window.URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.style.display = 'none'
@@ -152,30 +222,24 @@ export const Project = function (
         document.body.appendChild(a)
         a.click()
         window.URL.revokeObjectURL(url)
+        a.remove()
+
+        // Switch to complete state
+        showDownloadState('complete', suffix)
       })
-      .catch(() => {
-        // UX: Tell the user that something went wrong
+      .catch((error) => {
+        delete activeDownloads[suffix]
+        if (error.name === 'AbortError') {
+          // User cancelled, already reset by cancel handler
+          return
+        }
         showDownloadFailedSnackbar(downloadErrorText, filename)
-      })
-      .finally(() => {
-        // UX: Reset the button to further indicate the successful download
-        resetDownloadButtonIcon(icon, loadingSpinner)
-        // UX: Keep the button disabled briefly to prevent accidental double-clicks
-        setTimeout(() => {
-          button.disabled = false
-        }, 2000)
+        showDownloadState('default', suffix)
       })
   }
 
-  function resetDownloadButtonIcon(icon, spinner) {
-    icon.classList.remove('d-none')
-    icon.classList.add('d-inline-block')
-    spinner.classList.remove('d-inline-block')
-    spinner.classList.add('d-none')
-  }
-
-  function showDownloadFailedSnackbar(downloadErrorText, filename) {
-    showSnackbar('#share-snackbar', downloadErrorText, SnackbarDuration.error)
+  function showDownloadFailedSnackbar(errorText, filename) {
+    showSnackbar('#share-snackbar', errorText, SnackbarDuration.error)
     console.error('Downloading ' + filename + ' failed')
   }
 

@@ -188,7 +188,6 @@ Project(
   projectElement.dataset.assetWowBlack,
   projectElement.dataset.transReaction,
   projectElement.dataset.transDownloadError,
-  projectElement.dataset.transDownloadStart,
 )
 
 ProjectName(
