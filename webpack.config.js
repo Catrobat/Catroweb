@@ -65,11 +65,6 @@ Encore
     },
     {
       from: './node_modules/jquery-contextmenu/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-contextmenu/dist/',
       pattern: /\.css$/,
       to: '../css/modules/[path][name].[ext]',
     },
