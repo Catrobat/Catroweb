@@ -9,7 +9,7 @@ import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle
 import { OwnProjectList } from '../Project/OwnProjectList'
 import Swal from 'sweetalert2'
 import MessageDialogs from '../Components/MessageDialogs'
-import { ApiDeleteFetch, ApiPutFetch } from '../Api/ApiHelper'
+import { ApiFetch, ApiDeleteFetch, ApiPutFetch } from '../Api/ApiHelper'
 import VerifyAccountHandler from './VerifyAccountHandler'
 
 require('./Profile.scss')
@@ -73,6 +73,7 @@ class OwnProfile {
     this.initProfilePictureChange()
     this.initSaveProfileSettings()
     this.initSaveSecuritySettings()
+    this.initExportData()
     this.initDeleteAccount()
   }
 
@@ -203,6 +204,58 @@ class OwnProfile {
           )
         }
       }
+    })
+  }
+
+  initExportData() {
+    const btn = document.getElementById('btn-export-data')
+    if (!btn) return
+
+    const originalHTML = btn.innerHTML
+    const loadingText = btn.dataset.transExportLoading
+    const errorText = btn.dataset.transExportError
+    const rateLimitedText = btn.dataset.transExportRateLimited
+
+    btn.addEventListener('click', async () => {
+      btn.disabled = true
+      btn.innerHTML =
+        '<span class="spinner-border spinner-border-sm me-1" role="status"></span> ' + loadingText
+
+      try {
+        const response = await new ApiFetch(
+          this.baseUrl + '/api/user/data-export',
+          'GET',
+          undefined,
+          'none',
+        ).generateAuthenticatedFetch()
+
+        if (response.ok) {
+          const data = await response.json()
+          const blob = new Blob([JSON.stringify(data, null, 2)], {
+            type: 'application/json',
+          })
+          const url = URL.createObjectURL(blob)
+          const a = document.createElement('a')
+          a.href = url
+          a.download = 'my-data-export.json'
+          document.body.appendChild(a)
+          a.click()
+          document.body.removeChild(a)
+          URL.revokeObjectURL(url)
+        } else if (response.status === 401) {
+          window.location.href = this.baseUrl + '/app/login'
+          return
+        } else if (response.status === 429) {
+          MessageDialogs.showErrorMessage(rateLimitedText)
+        } else {
+          MessageDialogs.showErrorMessage(errorText)
+        }
+      } catch {
+        MessageDialogs.showErrorMessage(errorText)
+      }
+
+      btn.innerHTML = originalHTML
+      btn.disabled = false
     })
   }
 

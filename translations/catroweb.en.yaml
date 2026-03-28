@@ -357,7 +357,7 @@ myprofile:
   userSettings: User settings
   profileSettings: Edit profile
   securitySettings: Change password
-  accountSettings: Delete account
+  accountSettings: Account settings
   accountVerification: Verify account
   account: Account
   editProfile: Edit profile
@@ -372,6 +372,11 @@ myprofile:
     Be aware:
     You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
     Are you sure you want to leave us?
+  exportData: Download my data
+  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
+  exportDataLoading: Downloading...
+  exportDataError: Something went wrong while exporting your data. Please try again later.
+  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
   editAccountSettings: Edit account settings
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
