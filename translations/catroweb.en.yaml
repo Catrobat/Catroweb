@@ -852,6 +852,9 @@ flavor:
 
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
 
+noscript:
+  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+
 cookie-consent:
   message: "We use cookies to help improve our services. No data is sold or shared."
   accept: "Accept"
