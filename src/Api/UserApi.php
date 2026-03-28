@@ -309,7 +309,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     $following = $this->loadRelatedUsers($user, 'f.followers');
 
     return new UserDataExportResponse([
-      'exported_at' => \DateTime::createFromInterface(new \DateTimeImmutable()),
+      'exported_at' => new \DateTime(),
       'profile' => $profile,
       'projects' => $projects,
       'comments' => $comments,
