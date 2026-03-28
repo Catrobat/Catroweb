@@ -12,7 +12,8 @@ export function handleAccountState403(response, translations, fallbackMsg) {
   return response
     .json()
     .then((body) => {
-      let msg = fallbackMsg || translations.error || 'Something went wrong.'
+      let msg =
+        fallbackMsg || translations.error || 'Oops, something did not work. Please try again!'
       if (body?.error?.message === 'Email verification required.') {
         msg =
           translations.unverified ||
@@ -29,7 +30,7 @@ export function handleAccountState403(response, translations, fallbackMsg) {
     })
     .catch(() => {
       Swal.fire({
-        text: translations.error || 'Something went wrong.',
+        text: translations.error || 'Oops, something did not work. Please try again!',
         icon: 'warning',
         customClass: { confirmButton: 'btn btn-primary' },
         buttonsStyling: false,

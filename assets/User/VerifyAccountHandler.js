@@ -1,5 +1,5 @@
 import AcceptLanguage from '../Api/AcceptLanguage'
-import { showSnackbar } from '../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 
 export default class {
   init() {
@@ -24,7 +24,7 @@ export default class {
             window.location.href = baseUrl + 'login'
             break
           case 403:
-            showSnackbar('#share-snackbar', btn.dataset.failed)
+            showSnackbar('#share-snackbar', btn.dataset.failed, SnackbarDuration.error)
             break
         }
       })

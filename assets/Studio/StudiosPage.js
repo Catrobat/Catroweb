@@ -39,14 +39,14 @@ function makeAjaxRequest(url) {
   })
     .then((response) => {
       if (!response.ok) {
-        console.error('There was a problem with the server.')
+        console.error('Studio request failed:', response.status)
       } else {
         return response.json()
       }
     })
     .then((data) => {
       if (!data) {
-        console.error('There was a problem with the server.')
+        console.error('Studio request returned empty data')
       } else {
         showSnackbar('#share-snackbar', data.message.toString())
         window.location.reload()

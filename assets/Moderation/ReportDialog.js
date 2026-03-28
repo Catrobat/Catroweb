@@ -109,12 +109,14 @@ function submitReport(apiUrl, { category, note }, translations, sessionKey) {
           translations.trustTooLow || 'Your account is too new to file reports.',
         ).then(() => false)
       } else {
-        Swal.showValidationMessage(translations.error || 'Something went wrong.')
+        Swal.showValidationMessage(
+          translations.error || 'Oops, that did not work. Please try again!',
+        )
         return false
       }
     })
     .catch(() => {
-      Swal.showValidationMessage(translations.error || 'Something went wrong.')
+      Swal.showValidationMessage(translations.error || 'Oops, that did not work. Please try again!')
       return false
     })
 }

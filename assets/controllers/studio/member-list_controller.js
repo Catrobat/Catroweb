@@ -1,5 +1,5 @@
 import { AjaxController } from '../ajax_controller'
-import { showSnackbar } from '../../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { MDCMenu } from '@material/menu'
 
 export default class extends AjaxController {
@@ -65,7 +65,7 @@ export default class extends AjaxController {
     })
 
     if (response.status !== 204) {
-      showSnackbar('#share-snackbar', errorMessage)
+      showSnackbar('#share-snackbar', errorMessage, SnackbarDuration.error)
       return
     }
 
@@ -94,7 +94,7 @@ export default class extends AjaxController {
     })
 
     if (response.status !== 204) {
-      showSnackbar('#share-snackbar', errorMessage)
+      showSnackbar('#share-snackbar', errorMessage, SnackbarDuration.error)
       return
     }
 

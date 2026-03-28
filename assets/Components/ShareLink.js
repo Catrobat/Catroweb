@@ -1,5 +1,5 @@
 import Clipboard from 'clipboard'
-import { showSnackbar } from '../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 
 export function shareLink(
   themeDisplayName,
@@ -26,7 +26,7 @@ export function shareLink(
         })
         .catch((e) => {
           console.error(e)
-          showSnackbar('#share-snackbar', shareError)
+          showSnackbar('#share-snackbar', shareError, SnackbarDuration.error)
         })
     })
   } else {
@@ -37,7 +37,7 @@ export function shareLink(
       showSnackbar('#share-snackbar', clipboardSuccess)
     })
     cb.on('error', function () {
-      showSnackbar('#share-snackbar', clipboardFail)
+      showSnackbar('#share-snackbar', clipboardFail, SnackbarDuration.error)
     })
   }
 }

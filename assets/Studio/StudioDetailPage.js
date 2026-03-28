@@ -3,7 +3,7 @@ import '../Components/FullscreenListModal'
 import '../Components/Switch'
 import '../Components/TextArea'
 import '../Components/TextField'
-import { showSnackbar } from '../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import Swal from 'sweetalert2'
 import StudioCommentHandler from './StudioCommentHandler'
 import AcceptLanguage from '../Api/AcceptLanguage'
@@ -233,16 +233,24 @@ function makeAjaxRequest(url) {
   })
     .then((response) => {
       if (!response.ok) {
-        showSnackbar('#share-snackbar', 'There was a problem with the server.')
-        console.error('There was a problem with the server.')
+        showSnackbar(
+          '#share-snackbar',
+          'Oops, that did not work. Please try again!',
+          SnackbarDuration.error,
+        )
+        console.error('Studio request failed:', response.status)
       } else {
         return response.json()
       }
     })
     .then((data) => {
       if (!data) {
-        showSnackbar('#share-snackbar', 'There was a problem with the server.')
-        console.error('There was a problem with the server.')
+        showSnackbar(
+          '#share-snackbar',
+          'Oops, that did not work. Please try again!',
+          SnackbarDuration.error,
+        )
+        console.error('Studio request returned empty data')
       } else {
         showSnackbar('#share-snackbar', data.message.toString())
         window.location.reload()

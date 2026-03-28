@@ -20,7 +20,7 @@ huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
 discordChat: Discord chat
 passwordsNoMatch: The passwords didn't match.
-error: Error
+error: Oops!
 cancel: Cancel
 report: Report
 deleteIt: Yes, delete it!
@@ -41,11 +41,12 @@ loginText: login
 privacyPolicy: Privacy Policy
 imprint: Imprint
 projectDetails: Details
-somethingWentWrong: 'Ooooops something went wrong.'
+somethingWentWrong: 'Oops, something did not work. Please try again!'
 accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
 accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Please try again!'
+tryAgainButton: 'Try again'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'
 less: 'less'
@@ -53,7 +54,7 @@ show-more: 'Show more'
 show-less: 'Show less'
 more-information: 'More information'
 less-information: 'Less information'
-ok: Ok
+ok: Got it
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
 notifications: 'Notifications'
@@ -101,8 +102,8 @@ follower:
   noFollowers: You have no followers currently.
   noOtherFollowing: There are no following users currently.
   noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
+  followError: " We could not follow this user right now."
+  unfollowError: " We could not unfollow this user right now."
   unfollowQuestion: "Are you sure you want to unfollow this user?"
   unfollowButton: "Unfollow %username%"
 
@@ -373,7 +374,7 @@ myprofile:
     Are you sure you want to leave us?
   editAccountSettings: Edit account settings
   profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
   verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
   verifyAccountButton: Send email
   verifyAccountMailSent: Email sent successfully. Please check your inbox
@@ -542,7 +543,7 @@ format:
 
 #api
 errors:
-  unspecified: An unspecified error occurred. Please contact us.
+  unspecified: Something did not work. Please try again or let us know if it keeps happening!
   username:
     blank: Username must not be blank
     invalid: Your username is invalid
@@ -584,9 +585,9 @@ errors:
   projectversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: Login did not work
     webview: |
-      Your user credentials are wrong.
+      It looks like your username or password was not right.
       Please try to log in again in the app.
 
 success:
