@@ -12,4 +12,4 @@ RUN python -c "from transformers import pipeline; pipeline('image-classification
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "--timeout", "30", "app:app"]

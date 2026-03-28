@@ -19,7 +19,7 @@ class ContentSafetyScannerTest extends TestCase
 {
   public function testScanReturnsSafeForCleanImage(): void
   {
-    $mockResponse = new MockResponse(json_encode([
+    $mockResponse = new MockResponse((string) json_encode([
       'safe' => true,
       'nsfw_score' => 0.05,
       'safe_score' => 0.95,
@@ -43,7 +43,7 @@ class ContentSafetyScannerTest extends TestCase
 
   public function testScanReturnsUnsafeForNsfwImage(): void
   {
-    $mockResponse = new MockResponse(json_encode([
+    $mockResponse = new MockResponse((string) json_encode([
       'safe' => false,
       'nsfw_score' => 0.95,
       'safe_score' => 0.05,
@@ -100,7 +100,7 @@ class ContentSafetyScannerTest extends TestCase
 
   public function testScanDataUri(): void
   {
-    $mockResponse = new MockResponse(json_encode([
+    $mockResponse = new MockResponse((string) json_encode([
       'safe' => true,
       'nsfw_score' => 0.1,
       'safe_score' => 0.9,
