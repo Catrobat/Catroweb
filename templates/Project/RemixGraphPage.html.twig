@@ -3,10 +3,11 @@
 {% block top_bar_back_path %}{{ path('program', {id: id}) }}{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ asset('css/modules/jquery.contextMenu.min.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('vis/vis.min.css') }}"/> {# We need acces to all images #}
+    {# Legacy: remix-graph feature flag is disabled. CDN libs loaded only if re-enabled. #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-contextmenu@2.9.2/dist/jquery.contextMenu.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis@4.21.0-EOL/dist/vis.min.css"/>
     <link rel="stylesheet" href="{{ asset('build/css/Remixgraph.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/modules/animate.min.css') }}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"/>
 {% endblock %}
 
 {% block body %}
@@ -22,10 +23,11 @@
 {% endblock %}
 
 {% block javascript %}
-    <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/modules/jquery.contextMenu.min.js') }}"></script>
-    <script src="{{ asset('js/modules/jquery.ui.position.min.js') }}"></script>
-    <script src="{{ asset('vis/vis.min.js') }}"></script>
+    {# Legacy: remix-graph feature flag is disabled. CDN libs loaded only if re-enabled. #}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-contextmenu@2.9.2/dist/jquery.contextMenu.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-ui-dist@1.13.3/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vis@4.21.0-EOL/dist/vis.min.js"></script>
     <script src="{{ asset('js/RemixGraph/remixgraph.configuration.js') }}"></script>
     <script src="{{ asset('js/RemixGraph/remixgraph.builder.js') }}"></script>
     <script src="{{ asset('js/RemixGraph/remixgraph.visualization.js') }}"></script>
