@@ -15,7 +15,10 @@ export class FeaturedProjects {
     const apiUrl = `${baseUrl}/api/projects/featured?flavor=${flavor}&attributes=url,project_url,featured_image`
 
     fetch(apiUrl)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        return response.json()
+      })
       .then((items) => {
         if (!Array.isArray(items) || items.length === 0) {
           this.container.style.display = 'none'
@@ -31,7 +34,6 @@ export class FeaturedProjects {
           const heading = document.createElement('h2')
           heading.textContent = transFeatured
           this.container.before(heading)
-          this.headingElement = heading
         }
 
         this.renderCarousel(slides)

@@ -200,20 +200,22 @@ class ProjectsResponseManager extends AbstractResponseManager
     }
 
     $data = [];
+    $program = $featured_project->getProgram();
+
     if (in_array('id', $attributes_list, true)) {
       $data['id'] = $featured_project->getId() ?? -1;
     }
 
     if (in_array('project_id', $attributes_list, true)) {
-      $data['project_id'] = $featured_project->getProgram()->getId() ?? '';
+      $data['project_id'] = $program?->getId() ?? '';
     }
 
     if (in_array('name', $attributes_list, true)) {
-      $data['name'] = $featured_project->getProgram()->getName();
+      $data['name'] = $program?->getName() ?? '';
     }
 
     if (in_array('author', $attributes_list, true)) {
-      $data['author'] = $featured_project->getProgram()->getUser()->getUserIdentifier();
+      $data['author'] = $program?->getUser()->getUserIdentifier() ?? '';
     }
 
     if (in_array('featured_image', $attributes_list, true)) {
