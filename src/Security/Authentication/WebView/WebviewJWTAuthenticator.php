@@ -19,6 +19,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /** @psalm-suppress UnimplementedInterfaceMethod */
 class WebviewJWTAuthenticator extends JWTAuthenticator
 {
+  private const string LOGIN_PATH = '/app/login';
+
   public function __construct(
     private readonly CookieService $cookie_service,
     JWTTokenManagerInterface $jwtManager,
@@ -30,6 +32,12 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
     parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $userProvider, $translator);
   }
 
+  #[\Override]
+  public function start(Request $request, ?AuthenticationException $authException = null): Response
+  {
+    return new RedirectResponse(self::LOGIN_PATH);
+  }
+
   /**
    * @psalm-suppress ParamNameMismatch
    */
@@ -38,11 +46,11 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
   {
     $response = parent::onAuthenticationFailure($request, $exception);
 
-    if (Response::HTTP_UNAUTHORIZED === $response->getStatusCode() && !$request->headers->get('Authorization')) {
+    if (null !== $response && Response::HTTP_UNAUTHORIZED === $response->getStatusCode() && !$request->headers->get('Authorization')) {
       $this->cookie_service->clearCookie('BEARER');
       // RefreshBearerCookieOnKernelResponse will try to create a new Bearer or is going to remove the refresh token!
 
-      return new RedirectResponse('' === $request->getBaseUrl() || '0' === $request->getBaseUrl() ? '/' : $request->getBaseUrl());
+      return new RedirectResponse(self::LOGIN_PATH);
     }
 
     return $response;
