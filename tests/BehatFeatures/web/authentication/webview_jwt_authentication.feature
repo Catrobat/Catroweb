@@ -17,7 +17,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "BEARER" to "invalid"
     When I go to "/app/user"
     And I wait for the page to be loaded
-    Then I should be on "app/"
+    Then I should be on "/app/login"
 
   Scenario: Log in using Catrobat user and show profile
     Given I use a valid JWT token for "WebViewUser"

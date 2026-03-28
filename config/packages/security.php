@@ -59,6 +59,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'provider' => 'user_provider',
           'stateless' => false,
           'form_login' => [
+            'login_path' => '/app/login',
             'default_target_path' => '/',
             'success_handler' => FormLoginSuccessHandler::class,
             'enable_csrf' => true,
@@ -74,7 +75,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'facebook' => '/login/check-facebook',
               'apple' => '/login/check-apple',
             ],
-            'login_path' => '/login',
+            'login_path' => '/app/login',
             'use_forward' => false,
             'failure_path' => '/app/login',
             'success_handler' => OAuthSuccessHandler::class,
