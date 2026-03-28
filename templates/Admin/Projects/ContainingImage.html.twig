@@ -2,14 +2,14 @@
 {% block field %}
   <div style="">
     {% for image in admin.getContainingImageUrls(object) %}
-      <img src="{{ image }}" width="100">
+      <img src="{{ image }}" width="100" alt="Project image">
     {% endfor %}
   </div>
   <div id="onedialogplease"></div>
   <script>
     $('img').on('click', function () {
       $('#onedialogplease').empty()
-      $('#onedialogplease').append('<div id="dialog" title="Image"><img src="' + $(this).attr('src') + '" width="300" /></div>')
+      $('#onedialogplease').append('<div id="dialog" title="Image"><img src="' + $(this).attr('src') + '" width="300" alt="Project image preview" /></div>')
       $('#dialog').dialog()
     })
   </script>

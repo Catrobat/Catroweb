@@ -61,7 +61,7 @@
     </button>
     <div id="studio-file-name">{{ 'studio.cover_image_empty'|trans({}, 'catroweb') }}</div>
     <div id="studio-image-preview">
-      <button id="studio-delete-button"><span class="material-icons">close</span></button>
+      <button id="studio-delete-button" aria-label="{{ 'studio.cover_image_remove'|trans({}, 'catroweb')|default('Remove image') }}"><span class="material-icons">close</span></button>
       <img id="studio-preview-image" alt="{{ 'studio.cover_image_alt'|trans({}, 'catroweb') }}">
     </div>
 
