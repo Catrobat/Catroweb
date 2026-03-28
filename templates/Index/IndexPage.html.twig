@@ -16,27 +16,14 @@
     {{ include('Index/WelcomeSection.html.twig') }}
   {% endif %}
 
-  {% if featured|length > 0 %}
-    {% if not app.user and not isWebview() %}
-      <h2>{{ 'project.featured'|trans({}, 'catroweb') }}</h2>
-    {% endif %}
-    <div id="featured-slider" class="featured-slider">
-      {{ include('Components/Carousel.html.twig',
-        {carousel:
-          {
-            id: 'feature-slider',
-            slideCount: featured|length,
-            slides: featured,
-            classes: '',
-            controls: true,
-            width: '1024',
-            height: '400',
-            alt: '',
-          },
-        },
-      ) }}
-    </div>
-  {% endif %}
+  <div id="featured-slider" class="featured-slider"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-theme="{{ theme() }}"
+       data-flavor="{{ flavor() }}"
+       data-is-guest="{{ app.user ? '0' : '1' }}"
+       data-is-webview="{{ isWebview() ? '1' : '0' }}"
+       data-trans-featured="{{ 'project.featured'|trans({}, 'catroweb') }}"
+  ></div>
 
   <div id="home-projects">
     {# array values: [api project_type, translation, property to show] #}
