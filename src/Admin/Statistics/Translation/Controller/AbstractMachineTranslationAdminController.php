@@ -98,7 +98,7 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
 
   public function trimAction(Request $request): Response
   {
-    // TODO check permission
+    $this->admin->checkAccess('list');
 
     $days = (string) $request->query->get('days');
 
