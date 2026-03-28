@@ -6,20 +6,40 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Utility\UtilityApiFacade;
+use Doctrine\DBAL\Connection;
 use OpenAPI\Server\Api\UtilityApiInterface;
+use OpenAPI\Server\Model\HealthResponse;
 use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
-  public function __construct(private readonly UtilityApiFacade $facade)
-  {
+  public function __construct(
+    private readonly UtilityApiFacade $facade,
+    private readonly Connection $connection,
+  ) {
   }
 
   #[\Override]
-  public function healthGet(int &$responseCode, array &$responseHeaders): void
+  public function healthGet(int &$responseCode, array &$responseHeaders): HealthResponse
   {
-    $responseCode = Response::HTTP_NO_CONTENT;
+    $dbStatus = 'ok';
+
+    try {
+      $this->connection->executeQuery('SELECT 1');
+    } catch (\Throwable) {
+      $dbStatus = 'error';
+    }
+
+    $overallStatus = 'error' === $dbStatus ? 'degraded' : 'ok';
+    $responseCode = 'ok' === $overallStatus ? Response::HTTP_OK : Response::HTTP_SERVICE_UNAVAILABLE;
+
+    $response = new HealthResponse();
+    $response->setStatus($overallStatus);
+    $response->setTimestamp(new \DateTime('now', new \DateTimeZone('UTC')));
+    $response->setDatabase($dbStatus);
+
+    return $response;
   }
 
   #[\Override]

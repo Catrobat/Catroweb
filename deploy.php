@@ -138,6 +138,26 @@ task('dump:env', function () {
   run('bin/console dotenv:dump prod');
 });
 
+// Smoke test: verify the health endpoint after deployment
+task('smoke_test', function () {
+  $maxRetries = 5;
+  $retryDelay = 5;
+  for ($i = 1; $i <= $maxRetries; ++$i) {
+    $result = run('curl -sf -o /dev/null -w "%{http_code}" http://localhost/api/health --max-time 10 || echo "000"');
+    if ('200' === trim($result)) {
+      info("Health check passed (attempt {$i})");
+
+      return;
+    }
+    warning("Health check attempt {$i}/{$maxRetries} returned HTTP {$result}");
+    if ($i < $maxRetries) {
+      sleep($retryDelay);
+    }
+  }
+
+  throw new \RuntimeException("Health check failed after {$maxRetries} attempts");
+});
+
 // ---------------------------------------------------
 // Main deployment task
 // ---------------------------------------------------
@@ -163,6 +183,7 @@ task('deploy', [
   'update:extensions',
   'update:special',
   'deploy:cache:clear',
+  'smoke_test',
   'deploy:unlock',
   'slack:notify:success',
 ]);

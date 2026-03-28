@@ -9,6 +9,8 @@ use App\Api\Services\Utility\UtilityApiLoader;
 use App\Api\UtilityApi;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\System\Survey;
+use Doctrine\DBAL\Connection;
+use OpenAPI\Server\Model\HealthResponse;
 use OpenAPI\Server\Model\SurveyResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -27,6 +29,8 @@ class UtilityApiTest extends TestCase
 
   protected Stub&UtilityApiFacade $facade;
 
+  protected Stub&Connection $connection;
+
   /**
    * @throws Exception
    */
@@ -34,18 +38,41 @@ class UtilityApiTest extends TestCase
   protected function setUp(): void
   {
     $this->facade = $this->createStub(UtilityApiFacade::class);
-    $this->utility_api = new UtilityApi($this->facade);
+    $this->connection = $this->createStub(Connection::class);
+    $this->utility_api = new UtilityApi($this->facade, $this->connection);
   }
 
   #[Group('unit')]
-  public function testHealthCheck(): void
+  public function testHealthCheckOk(): void
   {
     $response_code = 200;
     $response_headers = [];
 
-    $this->utility_api->healthGet($response_code, $response_headers);
+    $result = $this->utility_api->healthGet($response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertInstanceOf(HealthResponse::class, $result);
+    $this->assertSame('ok', $result->getStatus());
+    $this->assertSame('ok', $result->getDatabase());
+    $this->assertNotNull($result->getTimestamp());
+  }
+
+  #[Group('unit')]
+  public function testHealthCheckDatabaseError(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $this->connection = $this->createStub(Connection::class);
+    $this->connection->method('executeQuery')->willThrowException(new \RuntimeException('Connection refused'));
+    $this->utility_api = new UtilityApi($this->facade, $this->connection);
+
+    $result = $this->utility_api->healthGet($response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_SERVICE_UNAVAILABLE, $response_code);
+    $this->assertInstanceOf(HealthResponse::class, $result);
+    $this->assertSame('degraded', $result->getStatus());
+    $this->assertSame('error', $result->getDatabase());
   }
 
   /**

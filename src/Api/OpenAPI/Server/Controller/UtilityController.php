@@ -58,6 +58,15 @@ class UtilityController extends Controller
    */
   public function healthGetAction(Request $request): Response
   {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
     // Handle authentication
 
     // Read out all input parameter values into variables
@@ -70,22 +79,24 @@ class UtilityController extends Controller
       $handler = $this->getApiHandler();
 
       // Make the call to the business logic
-      $responseCode = 204;
+      $responseCode = 200;
       $responseHeaders = [];
 
-      $handler->healthGet($responseCode, $responseHeaders);
+      $result = $handler->healthGet($responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
-        204 => 'System is alive and healthy!',
+        200 => 'System is alive and healthy',
+        503 => 'System is unhealthy (e.g. database unreachable)',
         default => '',
       };
 
       return new Response(
-        '',
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
         $responseCode,
         array_merge(
           $responseHeaders,
           [
+            'Content-Type' => $responseFormat,
             'X-OpenAPI-Message' => $message,
           ]
         )

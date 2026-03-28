@@ -197,9 +197,20 @@ paths:
       tags:
         - 'Utility'
       summary: 'Health Check'
+      description: 'Returns application health status including database connectivity. Used for deployment smoke tests and monitoring.'
       responses:
-        '204':
-          description: 'System is alive and healthy!'
+        '200':
+          description: 'System is alive and healthy'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          description: 'System is unhealthy (e.g. database unreachable)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
 
   /survey/{lang_code}:
     get:
@@ -2864,6 +2875,32 @@ components:
     ##############################################
     # Default Schemas
     ###
+
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - timestamp
+      properties:
+        status:
+          type: string
+          description: 'Overall health status'
+          enum:
+            - 'ok'
+            - 'degraded'
+          example: 'ok'
+        timestamp:
+          type: string
+          format: date-time
+          description: 'Current server time in ISO 8601 format'
+          example: '2026-03-28T12:00:00+00:00'
+        database:
+          type: string
+          description: 'Database connectivity status'
+          enum:
+            - 'ok'
+            - 'error'
+          example: 'ok'
 
     Uuid:
       type: string
