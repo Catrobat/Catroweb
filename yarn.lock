@@ -1520,6 +1520,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/roboto@npm:^5.2.6":
+  version: 5.2.10
+  resolution: "@fontsource/roboto@npm:5.2.10"
+  checksum: 10c0/abadfcaefbe2196bbd36d9258b336063f721894a3624a9639da00792583c565bfd0748ef978f91a38c3c0de8d247615c9be92a763184c085c630fa43f04b1cd9
+  languageName: node
+  linkType: hard
+
 "@gar/promise-retry@npm:^1.0.0":
   version: 1.0.3
   resolution: "@gar/promise-retry@npm:1.0.3"
@@ -1527,7 +1534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/stimulus-webpack-helpers@npm:^1.0.0, @hotwired/stimulus-webpack-helpers@npm:^1.0.1":
+"@hotwired/stimulus-webpack-helpers@npm:^1.0.1":
   version: 1.0.1
   resolution: "@hotwired/stimulus-webpack-helpers@npm:1.0.1"
   peerDependencies:
@@ -3835,6 +3842,7 @@ __metadata:
     "@bugsnag/js": "npm:^8.8.1"
     "@cap.js/widget": "npm:^0.1.42"
     "@eslint/js": "npm:^10.0.0"
+    "@fontsource/roboto": "npm:^5.2.6"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@material/checkbox": "npm:^14.0.0"
     "@material/chips": "npm:^14.0.0"
@@ -3892,12 +3900,10 @@ __metadata:
     purgecss-webpack-plugin: "npm:^8.0.0"
     sass: "npm:^1.98.0"
     sass-loader: "npm:^16.0.7"
-    stimulus: "npm:^3.2.2"
     stylelint: "npm:^17.6.0"
     stylelint-config-standard-scss: "npm:^17.0.0"
     sweetalert2: "npm:^11.26.24"
     textfilljs: "npm:^1.0.3-a"
-    typeface-roboto: "npm:^1.1.13"
     webpack: "npm:^5.105.4"
     webpack-bugsnag-plugins: "npm:^2.2.3"
     webpack-bundle-analyzer: "npm:^4.10.2"
@@ -7952,16 +7958,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stimulus@npm:^3.2.2":
-  version: 3.2.2
-  resolution: "stimulus@npm:3.2.2"
-  dependencies:
-    "@hotwired/stimulus": "npm:^3.2.2"
-    "@hotwired/stimulus-webpack-helpers": "npm:^1.0.0"
-  checksum: 10c0/cca027b9fd054f46c7c02920a14298bb6df4ee2c4c77346cc5d4d9d27907b051e452c3e7ba325ebbdcd9cdf65cc09e0e3c28c14989c57726dffa36a80cbab1df
-  languageName: node
-  linkType: hard
-
 "string-width@npm:^4.1.0, string-width@npm:^4.2.0, string-width@npm:^4.2.3":
   version: 4.2.3
   resolution: "string-width@npm:4.2.3"
@@ -8392,13 +8388,6 @@ __metadata:
   version: 0.21.3
   resolution: "type-fest@npm:0.21.3"
   checksum: 10c0/902bd57bfa30d51d4779b641c2bc403cdf1371fb9c91d3c058b0133694fcfdb817aef07a47f40faf79039eecbaa39ee9d3c532deff244f3a19ce68cea71a61e8
-  languageName: node
-  linkType: hard
-
-"typeface-roboto@npm:^1.1.13":
-  version: 1.1.13
-  resolution: "typeface-roboto@npm:1.1.13"
-  checksum: 10c0/7a6caf5aa084d7e968311ab23415cb921f30bc6c89fe9886fb998b1095673cde2e5d77386a0249a3493f93ed58046c4685d4e718b08d129bc88fd46c798f37dd
   languageName: node
   linkType: hard
 
