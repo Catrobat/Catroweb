@@ -422,6 +422,10 @@ class StudioController extends AbstractController
   public function editStudioDetails(Request $request): Response
   {
     if ($request->isMethod('POST')) {
+      if (!$this->isCsrfTokenValid('studio_settings', $request->request->getString('_csrf_token'))) {
+        throw $this->createAccessDeniedException('Invalid CSRF token.');
+      }
+
       $studio_id = trim(strval($request->request->get('studio_id')));
       $studio = $this->studio_manager->findStudioById($studio_id);
       if (is_null($this->getUser()) || is_null($studio)) {
@@ -476,6 +480,10 @@ class StudioController extends AbstractController
   public function updateStudioProjects(Request $request): Response
   {
     if ($request->isMethod('POST')) {
+      if (!$this->isCsrfTokenValid('studio_projects', $request->request->getString('_csrf_token'))) {
+        throw $this->createAccessDeniedException('Invalid CSRF token.');
+      }
+
       $studio_id = trim(strval($request->request->get('studio_id')));
       $studio = $this->studio_manager->findStudioById($studio_id);
       if (is_null($this->getUser()) || is_null($studio)) {

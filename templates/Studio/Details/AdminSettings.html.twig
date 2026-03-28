@@ -21,6 +21,7 @@
 
       <form id="studio-settings" class="container-fluid justify-content-center" action="{{ path('update_studio_details') }}" method="post">
 
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('studio_settings') }}">
         <input type="hidden" name="studio_id" value="{{ studio.id }}">
 
         {{ include('Components/TextField.html.twig', {
