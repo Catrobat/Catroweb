@@ -143,7 +143,7 @@ task('smoke_test', function () {
   $maxRetries = 5;
   $retryDelay = 5;
   for ($i = 1; $i <= $maxRetries; ++$i) {
-    $result = run('curl -sf -o /dev/null -w "%{http_code}" http://localhost/api/health --max-time 10 || echo "000"');
+    $result = run('curl -sf -o /dev/null -w "%{http_code}" -H "Host: share.catrob.at" http://localhost/api/health --max-time 10 || echo "000"');
     if ('200' === trim($result)) {
       info("Health check passed (attempt {$i})");
 
