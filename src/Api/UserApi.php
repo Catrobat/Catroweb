@@ -7,6 +7,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
 use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Security\Captcha\CaptchaVerifier;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
@@ -286,8 +287,18 @@ class UserApi extends AbstractApiController implements UserApiInterface
       ]);
     }
 
+    /** @var UserComment[] $userComments */
+    $userComments = $this->entity_manager->createQueryBuilder()
+      ->select('c')
+      ->from(UserComment::class, 'c')
+      ->where('c.user = :userId')
+      ->setParameter('userId', $user->getId())
+      ->getQuery()
+      ->getResult()
+    ;
+
     $comments = [];
-    foreach ($user->getComments() as $comment) {
+    foreach ($userComments as $comment) {
       $comments[] = new UserDataExportResponseCommentsInner([
         'id' => $comment->getId(),
         'text' => $comment->getText(),
