@@ -7,6 +7,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
 use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Security\Captcha\CaptchaVerifier;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
@@ -270,7 +271,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
       'email' => $user->getEmail(),
       'about' => $user->getAbout(),
       'currently_working_on' => $user->getCurrentlyWorkingOn(),
-      'created_at' => $user->getCreatedAt()?->format(\DateTimeInterface::ATOM),
+      'created_at' => $this->toDateTime($user->getCreatedAt()),
     ]);
 
     $projects = [];
@@ -279,19 +280,29 @@ class UserApi extends AbstractApiController implements UserApiInterface
         'id' => $program->getId(),
         'name' => $program->getName(),
         'description' => $program->getDescription(),
-        'uploaded_at' => $program->getUploadedAt()?->format(\DateTimeInterface::ATOM),
+        'uploaded_at' => $program->getUploadedAt(),
         'views' => $program->getViews(),
         'downloads' => $program->getDownloads(),
         'private' => $program->getPrivate(),
       ]);
     }
 
+    /** @var UserComment[] $userComments */
+    $userComments = $this->entity_manager->createQueryBuilder()
+      ->select('c')
+      ->from(UserComment::class, 'c')
+      ->where('c.user = :userId')
+      ->setParameter('userId', $user->getId())
+      ->getQuery()
+      ->getResult()
+    ;
+
     $comments = [];
-    foreach ($user->getComments() as $comment) {
+    foreach ($userComments as $comment) {
       $comments[] = new UserDataExportResponseCommentsInner([
         'id' => $comment->getId(),
         'text' => $comment->getText(),
-        'posted_at' => $comment->getUploadDate()?->format(\DateTimeInterface::ATOM),
+        'posted_at' => $comment->getUploadDate(),
         'parent_id' => 0 === $comment->getParentId() ? null : $comment->getParentId(),
       ]);
     }
@@ -301,7 +312,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
       $reactions[] = new UserDataExportResponseReactionsInner([
         'project_id' => $like->getProgramId(),
         'type' => ProgramLike::$TYPE_NAMES[$like->getType()] ?? 'unknown',
-        'created_at' => $like->getCreatedAt()?->format(\DateTimeInterface::ATOM),
+        'created_at' => $like->getCreatedAt(),
       ]);
     }
 
@@ -309,7 +320,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     $following = $this->loadRelatedUsers($user, 'f.followers');
 
     return new UserDataExportResponse([
-      'exported_at' => (new \DateTimeImmutable())->format(\DateTimeInterface::ATOM),
+      'exported_at' => new \DateTime(),
       'profile' => $profile,
       'projects' => $projects,
       'comments' => $comments,
@@ -342,5 +353,18 @@ class UserApi extends AbstractApiController implements UserApiInterface
       ]),
       $users,
     );
+  }
+
+  private function toDateTime(?\DateTimeInterface $dateTime): ?\DateTime
+  {
+    if (null === $dateTime) {
+      return null;
+    }
+
+    if ($dateTime instanceof \DateTime) {
+      return $dateTime;
+    }
+
+    return \DateTime::createFromInterface($dateTime);
   }
 }
