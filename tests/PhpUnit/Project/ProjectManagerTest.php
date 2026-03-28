@@ -22,6 +22,10 @@ use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Event\ProjectBeforeInsertEvent;
 use App\Project\Event\ProjectBeforePersistEvent;
 use App\Project\ProjectManager;
+use App\Security\ContentSafety\ContentSafetyResult;
+use App\Security\ContentSafety\ContentSafetyScanner;
+use App\Security\Malware\MalwareScanner;
+use App\Security\Malware\MalwareScanResult;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
@@ -120,6 +124,7 @@ class ProjectManagerTest extends TestCase
     ?EntityManager $entity_manager = null,
     ?EventDispatcherInterface $event_dispatcher = null,
     ?ExtractedCatrobatFile $extracted_file = null,
+    ?MalwareScanner $malware_scanner = null,
   ): ProjectManager {
     $file_extractor = $this->createStub(CatrobatFileExtractor::class);
     $program_repository = $this->createStub(ProgramRepository::class);
@@ -133,6 +138,11 @@ class ProjectManagerTest extends TestCase
     $notification_service = $this->createStub(NotificationManager::class);
     $security = $this->createStub(Security::class);
     $url_helper = new UrlHelper(new RequestStack());
+
+    if (null === $malware_scanner) {
+      $malware_scanner = $this->createStub(MalwareScanner::class);
+      $malware_scanner->method('scanFile')->willReturn(MalwareScanResult::clean());
+    }
 
     $this->createStub(User::class);
     $extracted = $extracted_file ?? $this->extracted_file;
@@ -157,8 +167,20 @@ class ProjectManagerTest extends TestCase
       $catrobat_file_sanitizer,
       $notification_service,
       $url_helper,
-      $security
+      $security,
+      $malware_scanner,
+      $this->createContentSafetyScanner(),
     );
+  }
+
+  private function createContentSafetyScanner(): ContentSafetyScanner
+  {
+    $safeResult = new ContentSafetyResult(safe: true, nsfwScore: 0.05, label: 'safe');
+    $scanner = $this->createStub(ContentSafetyScanner::class);
+    $scanner->method('scanImageBlob')->willReturn($safeResult);
+    $scanner->method('scanDataUri')->willReturn($safeResult);
+
+    return $scanner;
   }
 
   /**
@@ -337,6 +359,82 @@ class ProjectManagerTest extends TestCase
     );
 
     $program_manager->addProject($this->request);
+  }
+
+  /**
+   * @throws ORMException
+   * @throws Exception
+   */
+  public function testRejectsUploadWhenMalwareDetected(): void
+  {
+    $malware_scanner = $this->createStub(MalwareScanner::class);
+    $malware_scanner->method('scanFile')->willReturn(MalwareScanResult::infected('Win.Test.EICAR_HDB-1'));
+
+    $this->expectException(InvalidCatrobatFileException::class);
+    $this->expectExceptionMessage('errors.file.malware');
+
+    $program_manager = $this->createProjectManagerWithMocks(
+      malware_scanner: $malware_scanner,
+    );
+
+    $program_manager->addProject($this->request);
+  }
+
+  /**
+   * @throws ORMException
+   * @throws Exception
+   */
+  public function testRejectsUploadWhenMalwareScanErrors(): void
+  {
+    $malware_scanner = $this->createStub(MalwareScanner::class);
+    $malware_scanner->method('scanFile')->willReturn(MalwareScanResult::error('ClamAV unavailable'));
+
+    $this->expectException(InvalidCatrobatFileException::class);
+    $this->expectExceptionMessage('errors.file.malware');
+
+    $program_manager = $this->createProjectManagerWithMocks(
+      malware_scanner: $malware_scanner,
+    );
+
+    $program_manager->addProject($this->request);
+  }
+
+  /**
+   * @throws ORMException
+   * @throws Exception
+   */
+  public function testAllowsUploadWhenMalwareScanSkipped(): void
+  {
+    $func = static function (Program $project): Program {
+      $project->setId('1');
+
+      return $project;
+    };
+
+    $entity_manager = $this->createMock(EntityManager::class);
+    $entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Program::class))
+      ->willReturnCallback($func)
+    ;
+    $entity_manager->expects($this->atLeastOnce())->method('flush');
+    $entity_manager->expects($this->atLeastOnce())->method('refresh')
+      ->with($this->isInstanceOf(Program::class))
+    ;
+
+    $event_dispatcher = $this->createMock(EventDispatcherInterface::class);
+    $event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
+      ->willReturn($this->programBeforeInsertEvent)
+    ;
+
+    $malware_scanner = $this->createStub(MalwareScanner::class);
+    $malware_scanner->method('scanFile')->willReturn(MalwareScanResult::skipped('Scanning disabled'));
+
+    $program_manager = $this->createProjectManagerWithMocks(
+      entity_manager: $entity_manager,
+      event_dispatcher: $event_dispatcher,
+      malware_scanner: $malware_scanner,
+    );
+
+    $this->assertInstanceOf(Program::class, $program_manager->addProject($this->request));
   }
 
   /**

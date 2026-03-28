@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use App\DB\Entity\User\User;
-use OpenAPI\Server\Controller\Controller;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -59,7 +59,7 @@ class AccountStateEventListener
     }
 
     if (!$user->isVerified()) {
-      $event->setResponse(Controller::createStructuredErrorResponse(
+      $event->setResponse(ApiErrorResponse::create(
         Response::HTTP_FORBIDDEN,
         'forbidden',
         'Email verification required.'
@@ -69,7 +69,7 @@ class AccountStateEventListener
     }
 
     if ($user->getProfileHidden()) {
-      $event->setResponse(Controller::createStructuredErrorResponse(
+      $event->setResponse(ApiErrorResponse::create(
         Response::HTTP_FORBIDDEN,
         'forbidden',
         'Your account has been suspended.'

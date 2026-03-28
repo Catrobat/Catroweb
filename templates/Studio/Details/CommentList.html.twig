@@ -4,7 +4,7 @@
       <img class="comment-avatar"
            src="{% if comment.avatar != null %}{{ comment.avatar }}
                     {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
-           alt="Card image">
+           alt="">
       <div class="comment-content">
         <a href="{{ url('profile', {id: comment.user.id}) }}">{{ comment.username }}</a>
         {% if user_role == 'admin' or comment.username == user_name %}

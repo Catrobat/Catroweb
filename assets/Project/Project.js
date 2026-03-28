@@ -1,6 +1,6 @@
 import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
-import { showSnackbar } from '../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { redirect } from '../Components/RedirectButton'
 import { ApiFetch } from '../Api/ApiHelper'
 
@@ -175,7 +175,7 @@ export const Project = function (
   }
 
   function showDownloadFailedSnackbar(downloadErrorText, filename) {
-    showSnackbar('#share-snackbar', downloadErrorText)
+    showSnackbar('#share-snackbar', downloadErrorText, SnackbarDuration.error)
     console.error('Downloading ' + filename + ' failed')
   }
 
@@ -297,12 +297,12 @@ export const Project = function (
 
   function showErrorAlert(message) {
     if (typeof message !== 'string' || message === '') {
-      message = 'Something went wrong! Please try again later.'
+      message = 'Oops, that did not work. Please try again!'
     }
 
     Swal.fire({
       icon: 'error',
-      title: 'Oops...',
+      title: 'Oops!',
       text: message,
       customClass: {
         confirmButton: 'btn btn-primary',
@@ -806,7 +806,11 @@ document.addEventListener('DOMContentLoaded', function () {
       const markNotForKidsText = document.getElementById('markNotForKidsText')
       const url = document.getElementById('projectNotForKidsButton').getAttribute('data-url')
       if (!isSafeRelativeUrl(url)) {
-        showSnackbar('Invalid target URL for this action.', 'error')
+        showSnackbar(
+          '#share-snackbar',
+          'Oops, that action could not be completed. Please try again!',
+          SnackbarDuration.error,
+        )
         return
       }
       let text = ''
@@ -847,7 +851,11 @@ function askForConfirmation(continueWithAction, url, text) {
 
 function submitNotForKidsForm(url) {
   if (!isSafeRelativeUrl(url)) {
-    showSnackbar('Invalid target URL for this action.', 'error')
+    showSnackbar(
+      '#share-snackbar',
+      'Oops, that action could not be completed. Please try again!',
+      SnackbarDuration.error,
+    )
     return
   }
   const form = document.createElement('form')

@@ -1,7 +1,7 @@
 @import './Variables';
 @import './Mixins';
 @import '~material-icons/iconfont/material-icons';
-@import '~typeface-roboto';
+@import '~@fontsource/roboto/index.css';
 
 .body {
   font-size: $default-font-size;

@@ -14,6 +14,7 @@ use App\Api\Services\ValidationWrapper;
 use App\Api\UserApi;
 use App\DB\Entity\User\User;
 use App\Security\Captcha\CaptchaVerifier;
+use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
@@ -76,8 +77,10 @@ final class UserApiTest extends TestCase
       $this->facade,
       $this->createNoLimitRateLimiterFactory('phpunit_user_registration'),
       $this->createNoLimitRateLimiterFactory('phpunit_user_password_reset'),
+      $this->createNoLimitRateLimiterFactory('phpunit_data_export_daily'),
       new RequestStack(),
       $captchaVerifier,
+      $this->createStub(EntityManagerInterface::class),
     );
   }
 
@@ -364,8 +367,10 @@ final class UserApiTest extends TestCase
       $this->facade,
       $this->createNoLimitRateLimiterFactory('phpunit_user_registration'),
       $this->createNoLimitRateLimiterFactory('phpunit_user_password_reset'),
+      $this->createNoLimitRateLimiterFactory('phpunit_data_export_daily'),
       new RequestStack(),
       $captchaVerifier,
+      $this->createStub(EntityManagerInterface::class),
     );
 
     $register_request = $this->createStub(RegisterRequest::class);

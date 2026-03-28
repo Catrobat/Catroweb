@@ -59,8 +59,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'provider' => 'user_provider',
           'stateless' => false,
           'form_login' => [
+            'login_path' => '/app/login',
             'default_target_path' => '/',
             'success_handler' => FormLoginSuccessHandler::class,
+            'enable_csrf' => true,
           ],
           'custom_authenticators' => [
             WebviewJWTAuthenticator::class,
@@ -73,7 +75,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'facebook' => '/login/check-facebook',
               'apple' => '/login/check-apple',
             ],
-            'login_path' => '/login',
+            'login_path' => '/app/login',
             'use_forward' => false,
             'failure_path' => '/app/login',
             'success_handler' => OAuthSuccessHandler::class,
@@ -131,6 +133,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/user/data-export/?$',
+          'roles' => 'IS_AUTHENTICATED_FULLY',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/user/reports/?$',
+          'roles' => 'IS_AUTHENTICATED_FULLY',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/user/[a-zA-Z0-9_-]+/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
@@ -140,6 +154,30 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'path' => '^/api/user/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['POST'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/studio/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/studio/[a-zA-Z0-9_-]+/members/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/studio/[a-zA-Z0-9_-]+/projects/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/studio/[a-zA-Z0-9_-]+/comments/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [

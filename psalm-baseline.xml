@@ -162,22 +162,7 @@
       <code><![CDATA[$project->getProgram()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code><![CDATA[getId]]></code>
-      <code><![CDATA[getName]]></code>
-      <code><![CDATA[getUser]]></code>
       <code><![CDATA[getUserIdentifier]]></code>
-      <code><![CDATA[getUserIdentifier]]></code>
-    </PossiblyNullReference>
-  </file>
-  <file src="src/Api/Services/Studio/StudioApiProcessor.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$name]]></code>
-      <code><![CDATA[$user]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Api/Services/Studio/StudioResponseManager.php">
-    <PossiblyNullReference>
-      <code><![CDATA[getSchemeAndHttpHost]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/Api/Services/User/UserRequestValidator.php">
@@ -201,15 +186,6 @@
       <code><![CDATA[$this->facade->getAuthenticationManager()->getAuthenticatedUser()]]></code>
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/Application/Controller/Base/IndexController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$item->getId()]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[getId]]></code>
-      <code><![CDATA[getId]]></code>
-    </PossiblyNullReference>
   </file>
   <file src="src/Application/Controller/Ci/DownloadApkController.php">
     <PossiblyNullReference>
@@ -451,11 +427,6 @@
       <code><![CDATA[$user->getEmail()]]></code>
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/Security/Authentication/WebView/WebviewJWTAuthenticator.php">
-    <PossiblyNullReference>
-      <code><![CDATA[getStatusCode]]></code>
-    </PossiblyNullReference>
   </file>
   <file src="src/Security/OAuth/HwiOauthUserProvider.php">
     <PossiblyNullArgument>
@@ -732,11 +703,9 @@
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code><![CDATA[addCommentToStudio]]></code>
       <code><![CDATA[addFollowing]]></code>
       <code><![CDATA[addFollowing]]></code>
       <code><![CDATA[addFollowing]]></code>
-      <code><![CDATA[addProjectToStudio]]></code>
       <code><![CDATA[findAchievementByInternalTitle]]></code>
       <code><![CDATA[findAll]]></code>
       <code><![CDATA[findAllAchievements]]></code>

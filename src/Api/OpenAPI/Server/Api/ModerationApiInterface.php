@@ -256,4 +256,21 @@ interface ModerationApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): void;
+
+  /**
+   * Operation userReportsGet.
+   *
+   * List reports filed by the current user
+   *
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function userReportsGet(
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
 }

@@ -103,7 +103,9 @@ Feature: Updating an existing studio
         "description": "Updated description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": ""
+        "image_path": "",
+        "members_count": 2,
+        "projects_count": 0
       }
     """
 
@@ -125,7 +127,9 @@ Feature: Updating an existing studio
         "description": "Updated description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": ""
+        "image_path": "",
+        "members_count": 2,
+        "projects_count": 0
       }
     """
 
@@ -146,7 +150,9 @@ Feature: Updating an existing studio
         "description": "cool description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": ""
+        "image_path": "",
+        "members_count": 2,
+        "projects_count": 0
       }
     """
 
@@ -171,7 +177,9 @@ Feature: Updating an existing studio
         "description": "Updated description",
         "is_public": false,
         "enable_comments": false,
-        "image_path": "REGEX_STRING_WILDCARDUpdated-Studio.jpg"
+        "image_path": "REGEX_STRING_WILDCARDUpdated-Studio.jpg",
+        "members_count": 2,
+        "projects_count": 0
       }
     """
 
@@ -191,7 +199,9 @@ Feature: Updating an existing studio
         "description": "cool description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": "REGEX_STRING_WILDCARD1725019200-Cool-Studio.jpg"
+        "image_path": "REGEX_STRING_WILDCARD1725019200-Cool-Studio.jpg",
+        "members_count": 2,
+        "projects_count": 0
       }
     """
     And the uploaded file "resources/images/studio/1725019200-Cool-Studio.jpg" exists
@@ -210,7 +220,9 @@ Feature: Updating an existing studio
         "description": "cool description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": "REGEX_STRING_WILDCARD1756558800-Cool-Studio.jpg"
+        "image_path": "REGEX_STRING_WILDCARD1756558800-Cool-Studio.jpg",
+        "members_count": 2,
+        "projects_count": 0
       }
     """
     And the uploaded file "resources/images/studio/1725019200-Cool-Studio.jpg" does not exist

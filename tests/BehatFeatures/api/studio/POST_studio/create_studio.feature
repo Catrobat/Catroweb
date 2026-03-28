@@ -102,7 +102,9 @@ Feature: Creating a new studio
         "description": "with description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": ""
+        "image_path": "",
+        "members_count": 1,
+        "projects_count": 0
       }
     """
 
@@ -127,7 +129,9 @@ Feature: Creating a new studio
         "description": "with description",
         "is_public": false,
         "enable_comments": false,
-        "image_path": "REGEX_STRING_WILDCARD-New-Studio.jpg"
+        "image_path": "REGEX_STRING_WILDCARD-New-Studio.jpg",
+        "members_count": 1,
+        "projects_count": 0
       }
     """
 

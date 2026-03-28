@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 import '../Components/TabBar'
 import './Profile.scss'
-import { showSnackbar } from '../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch((error) => {
         console.error('Failed to load follower data:', error)
-        showSnackbar('#share-snackbar', trans.somethingWentWrong)
+        showSnackbar('#share-snackbar', trans.somethingWentWrong, SnackbarDuration.error)
       })
   }
 
@@ -184,18 +184,30 @@ document.addEventListener('DOMContentLoaded', () => {
               } else if (body?.error?.message === 'Your account has been suspended.') {
                 showVerificationAlert(trans.accountSuspended)
               } else {
-                showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.followError)
+                showSnackbar(
+                  '#share-snackbar',
+                  trans.somethingWentWrong + trans.followError,
+                  SnackbarDuration.error,
+                )
               }
             })
             .catch(() =>
-              showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.followError),
+              showSnackbar(
+                '#share-snackbar',
+                trans.somethingWentWrong + trans.followError,
+                SnackbarDuration.error,
+              ),
             )
         } else {
-          throw new Error('Unexpected error: ' + response.status)
+          throw new Error('Request failed with status:' + response.status)
         }
       })
       .catch((error) => {
-        showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.followError)
+        showSnackbar(
+          '#share-snackbar',
+          trans.somethingWentWrong + trans.followError,
+          SnackbarDuration.error,
+        )
         console.error('Follow failed:', error)
       })
   }
@@ -242,18 +254,30 @@ document.addEventListener('DOMContentLoaded', () => {
                   } else if (body?.error?.message === 'Your account has been suspended.') {
                     showVerificationAlert(trans.accountSuspended)
                   } else {
-                    showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.unfollowError)
+                    showSnackbar(
+                      '#share-snackbar',
+                      trans.somethingWentWrong + trans.unfollowError,
+                      SnackbarDuration.error,
+                    )
                   }
                 })
                 .catch(() =>
-                  showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.unfollowError),
+                  showSnackbar(
+                    '#share-snackbar',
+                    trans.somethingWentWrong + trans.unfollowError,
+                    SnackbarDuration.error,
+                  ),
                 )
             } else {
-              throw new Error('Unexpected error: ' + response.status)
+              throw new Error('Request failed with status:' + response.status)
             }
           })
           .catch((error) => {
-            showSnackbar('#share-snackbar', trans.somethingWentWrong + trans.unfollowError)
+            showSnackbar(
+              '#share-snackbar',
+              trans.somethingWentWrong + trans.unfollowError,
+              SnackbarDuration.error,
+            )
             console.error('Unfollow failed:', error)
           })
       }

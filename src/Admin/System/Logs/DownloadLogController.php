@@ -31,6 +31,10 @@ class DownloadLogController extends AbstractController
       throw new NotFoundHttpException();
     }
 
+    if (!$this->isCsrfTokenValid('log_download', $request->request->getString('_csrf_token'))) {
+      throw $this->createAccessDeniedException('Invalid CSRF token.');
+    }
+
     $fileName = (string) $request->request->get('file');
     $path = LogsController::LOG_DIR;
     $finder = new Finder();

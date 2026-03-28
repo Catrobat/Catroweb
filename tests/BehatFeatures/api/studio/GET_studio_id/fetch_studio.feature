@@ -29,7 +29,9 @@ Feature: Updating an existing studio
         "description": "cool description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": ""
+        "image_path": "",
+        "members_count": 0,
+        "projects_count": 0
       }
     """
 
@@ -54,6 +56,8 @@ Feature: Updating an existing studio
         "description": "nothing to see here..",
         "is_public": false,
         "enable_comments": true,
-        "image_path": ""
+        "image_path": "",
+        "members_count": 1,
+        "projects_count": 0
       }
     """

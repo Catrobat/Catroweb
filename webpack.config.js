@@ -7,6 +7,7 @@ const glob = require('glob-all')
 const path = require('path')
 const webpack = require('webpack')
 const noop = require('noop-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -45,39 +46,8 @@ Encore
     // Fonts
     { from: './assets/Fonts', to: '/fonts/[path][name].[ext]' },
 
-    // Remix graph (deprecated!) - Complete rework needed
+    // Remix graph (deprecated!) - Legacy files kept for reference, feature flag disabled
     { from: './assets/Legacy', to: '../js/[path][name].[ext]' },
-    { from: './node_modules/vis/dist/', to: '../vis/[path][name].[ext]' },
-    {
-      from: './node_modules/jquery/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-ui-dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-contextmenu/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-contextmenu/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-contextmenu/dist/',
-      pattern: /\.css$/,
-      to: '../css/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/animate.css/',
-      pattern: /\.css$/,
-      to: '../css/modules/[path][name].[ext]',
-    },
   ])
 
   /*
@@ -111,6 +81,7 @@ Encore
 
   .addEntry('user_achievements_page', './assets/User/AchievementsPage.js')
   .addEntry('user_notifications_page', './assets/User/NotificationsPage.js')
+  .addEntry('user_reports_page', './assets/User/ReportsPage.js')
   .addEntry('user_my_profile_page', './assets/User/MyProfilePage.js')
   .addEntry('user_profile_page', './assets/User/ProfilePage.js')
 
@@ -235,6 +206,16 @@ Encore
       failOnError: Encore.isProduction(),
       files: 'assets/',
     }),
+  )
+
+  .addPlugin(
+    process.env.ANALYZE
+      ? new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          reportFilename: 'bundle-report.html',
+          openAnalyzer: true,
+        })
+      : noop(),
   )
 
 module.exports = Encore.getWebpackConfig()

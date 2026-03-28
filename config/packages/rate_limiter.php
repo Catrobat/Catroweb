@@ -72,6 +72,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 5,
         'interval' => '24 hours',
       ],
+      'studio_comment_burst' => [
+        'policy' => 'sliding_window',
+        'limit' => 10,
+        'interval' => '5 minutes',
+      ],
       'notification_burst' => [
         'policy' => 'sliding_window',
         'limit' => 30,
@@ -96,6 +101,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'policy' => 'sliding_window',
         'limit' => 60,
         'interval' => '1 minute',
+      ],
+      'data_export_daily' => [
+        'policy' => 'sliding_window',
+        'limit' => 3,
+        'interval' => '24 hours',
       ],
     ],
   ]);

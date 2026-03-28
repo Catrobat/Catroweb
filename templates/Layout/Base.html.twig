@@ -12,6 +12,13 @@
 
   <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
 
+  {% if bugsnag_api_key %}
+    <link rel="dns-prefetch" href="https://sessions.bugsnag.com">
+    <link rel="dns-prefetch" href="https://notify.bugsnag.com">
+    <link rel="preconnect" href="https://sessions.bugsnag.com" crossorigin>
+    <link rel="preconnect" href="https://notify.bugsnag.com" crossorigin>
+  {% endif %}
+
   {% block stylesheets %}
     {{ encore_entry_link_tags('base_layout') }}
     {{ encore_entry_link_tags('color_scheme') }}
@@ -25,6 +32,7 @@
         okayButtonText: '{{ 'ok'|trans({}, 'catroweb')|escape('js')|raw }}',
         authenticationErrorText: '{{ 'errors.authentication.webview'|trans({}, 'catroweb')|replace({'\r': '', '\n': ' '})|trim|escape('js')|raw }}',
         unspecifiedErrorText: '{{ 'errors.unspecified'|trans({}, 'catroweb')|escape('js')|raw }}',
+        retryButtonText: '{{ 'tryAgainButton'|trans({}, 'catroweb')|escape('js')|raw }}',
       },
       environment: '{{ app.environment }}',
     }</script>
@@ -37,9 +45,11 @@
 
 <body class="body-with-sidebar">
 
+<a href="#main_container_content" class="skip-to-content">{{ 'skipToContent'|trans({}, 'catroweb')|default('Skip to content') }}</a>
+
 <noscript>
-  <div class="noscript-warning" style="background-color: #fff3cd; color: #856404; text-align: center; padding: 1rem; font-size: 1rem;">
-    This site requires JavaScript to function. Please enable JavaScript in your browser.
+  <div class="noscript-warning">
+    {{ 'noscript.warning'|trans({}, 'catroweb') }}
   </div>
 </noscript>
 

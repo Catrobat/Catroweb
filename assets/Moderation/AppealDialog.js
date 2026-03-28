@@ -73,12 +73,14 @@ function submitAppeal(apiUrl, reason, translations) {
         )
         return false
       } else {
-        Swal.showValidationMessage(translations.error || 'Something went wrong.')
+        Swal.showValidationMessage(
+          translations.error || 'Oops, that did not work. Please try again!',
+        )
         return false
       }
     })
     .catch(() => {
-      Swal.showValidationMessage(translations.error || 'Something went wrong.')
+      Swal.showValidationMessage(translations.error || 'Oops, that did not work. Please try again!')
       return false
     })
 }

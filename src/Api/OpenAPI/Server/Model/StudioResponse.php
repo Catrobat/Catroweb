@@ -108,6 +108,28 @@ class StudioResponse
   protected ?string $image_path = null;
 
   /**
+   * Number of members in the studio.
+   *
+   * @SerializedName("members_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $members_count = null;
+
+  /**
+   * Number of projects in the studio.
+   *
+   * @SerializedName("projects_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $projects_count = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -121,6 +143,8 @@ class StudioResponse
       $this->is_public = array_key_exists('is_public', $data) ? $data['is_public'] : $this->is_public;
       $this->enable_comments = array_key_exists('enable_comments', $data) ? $data['enable_comments'] : $this->enable_comments;
       $this->image_path = array_key_exists('image_path', $data) ? $data['image_path'] : $this->image_path;
+      $this->members_count = array_key_exists('members_count', $data) ? $data['members_count'] : $this->members_count;
+      $this->projects_count = array_key_exists('projects_count', $data) ? $data['projects_count'] : $this->projects_count;
     }
   }
 
@@ -252,6 +276,50 @@ class StudioResponse
   public function setImagePath(?string $image_path = null): self
   {
     $this->image_path = $image_path;
+
+    return $this;
+  }
+
+  /**
+   * Gets members_count.
+   */
+  public function getMembersCount(): ?int
+  {
+    return $this->members_count;
+  }
+
+  /**
+   * Sets members_count.
+   *
+   * @param int|null $members_count Number of members in the studio
+   *
+   * @return $this
+   */
+  public function setMembersCount(?int $members_count = null): self
+  {
+    $this->members_count = $members_count;
+
+    return $this;
+  }
+
+  /**
+   * Gets projects_count.
+   */
+  public function getProjectsCount(): ?int
+  {
+    return $this->projects_count;
+  }
+
+  /**
+   * Sets projects_count.
+   *
+   * @param int|null $projects_count Number of projects in the studio
+   *
+   * @return $this
+   */
+  public function setProjectsCount(?int $projects_count = null): self
+  {
+    $this->projects_count = $projects_count;
 
     return $this;
   }

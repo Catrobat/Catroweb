@@ -584,7 +584,9 @@ trait ContextTrait
     $project = $this->getProjectManager()->find($config['project_id']);
 
     /** @var User|null $user */
-    $user = $this->getUserManager()->find($config['user_id']);
+    $user = isset($config['user_id'])
+      ? $this->getUserManager()->find($config['user_id'])
+      : $this->getUserManager()->findUserByUsername($config['user']);
 
     $parent_id = $config['parent_id'] ?? null;
     $parent_id = ('NULL' === $parent_id || is_null($parent_id)) ? null : intval($parent_id);

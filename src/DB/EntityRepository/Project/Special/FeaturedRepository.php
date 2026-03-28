@@ -30,7 +30,6 @@ class FeaturedRepository extends ServiceEntityRepository
     $qb
       ->select('e')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->isNotNull('e.program'))
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
@@ -50,7 +49,6 @@ class FeaturedRepository extends ServiceEntityRepository
     $qb
       ->select('count(e.id)')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->isNotNull('e.program'))
     ;
     $qb->orderBy('e.priority', 'DESC');
     $qb->leftJoin('e.program', 'program');

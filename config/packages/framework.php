@@ -14,7 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'translator' => [
         'fallback' => 'en',
       ],
-      'csrf_protection' => false,
+      'csrf_protection' => true,
       'http_method_override' => false,
       'session' => [
         'handler_id' => null,

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Api\Exceptions;
 
-use OpenAPI\Server\Controller\Controller;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -22,14 +21,13 @@ class ApiExceptionEventListener
 
     $exception = $event->getThrowable();
     $statusCode = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
-    $type = Controller::httpStatusToErrorType($statusCode);
+    $type = ApiErrorResponse::httpStatusToErrorType($statusCode);
     $message = $exception instanceof HttpExceptionInterface ? $exception->getMessage() : 'An unexpected error occurred.';
 
     if ('' === $message) {
       $message = Response::$statusTexts[$statusCode] ?? 'An unexpected error occurred.';
     }
 
-    $response = Controller::createStructuredErrorResponse($statusCode, $type, $message);
-    $event->setResponse($response);
+    $event->setResponse(ApiErrorResponse::create($statusCode, $type, $message));
   }
 }

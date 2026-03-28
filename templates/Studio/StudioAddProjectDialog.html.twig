@@ -21,6 +21,7 @@
             </div>
 
             <form id="studio-settings_projects" class="container-fluid justify-content-center page-content container" style="margin-top: 0px;" action="{{ path('update_studio_projects') }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('studio_projects') }}">
                 <input type="hidden" name="studio_id" value="{{ studio.id }}">
                 <h3 class="mt-3 mb-4">Your Projects</h3>
                 <div class="studio-projects-container project-list horizontal">

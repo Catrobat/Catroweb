@@ -1,4 +1,4 @@
-import { showSnackbar } from '../../Layout/Snackbar'
+import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { showValidationMessage } from '../../Components/TextField'
 import { AjaxController } from '../ajax_controller'
 import { initCaptchaWidget } from '../../Security/CaptchaWidget'
@@ -40,7 +40,11 @@ export default class extends AjaxController {
     const response = await this.fetchPost(this.apiPathValue, data)
 
     if (response.status === 403) {
-      showSnackbar('#share-snackbar', 'CAPTCHA verification failed. Please try again.')
+      showSnackbar(
+        '#share-snackbar',
+        'CAPTCHA check did not pass. Please try again!',
+        SnackbarDuration.error,
+      )
       return
     }
 
@@ -60,7 +64,11 @@ export default class extends AjaxController {
     response.text().then(function (text) {
       console.error('Password reset error: ' + response.status + text)
     })
-    showSnackbar('#share-snackbar', 'Unexpected Error. Try again later.')
+    showSnackbar(
+      '#share-snackbar',
+      'Oops, that did not work. Please try again!',
+      SnackbarDuration.error,
+    )
   }
 
   handleValidationError(responseText) {

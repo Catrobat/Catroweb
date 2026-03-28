@@ -239,3 +239,16 @@ jobs:
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:container
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** Secrets **
+  #
+  #  - Ensures committed .env files contain only known dev defaults
+  #  - Prevents accidental commit of production secrets
+  #
+  check-secrets:
+    name: Secrets [Check Default Secrets]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: bin/check-default-secrets

@@ -30,6 +30,7 @@
 
 namespace OpenAPI\Server\Controller;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use OpenAPI\Server\Api\ApiServer;
 use OpenAPI\Server\Service\SerializerInterface;
 use OpenAPI\Server\Service\ValidatorInterface;
@@ -83,7 +84,7 @@ class Controller extends AbstractController
    */
   public function createBadRequestResponse(string $message = 'Bad Request.'): Response
   {
-    return self::createStructuredErrorResponse(400, 'bad_request', $message);
+    return ApiErrorResponse::create(400, 'bad_request', $message);
   }
 
   /**
@@ -95,55 +96,9 @@ class Controller extends AbstractController
   public function createErrorResponse(HttpException $exception): Response
   {
     $statusCode = $exception->getStatusCode();
-    $type = self::httpStatusToErrorType($statusCode);
+    $type = ApiErrorResponse::httpStatusToErrorType($statusCode);
 
-    return self::createStructuredErrorResponse($statusCode, $type, $exception->getMessage(), [], $exception->getHeaders());
-  }
-
-  /**
-   * Creates a standardized JSON error response.
-   *
-   * @param int                                          $code    HTTP status code
-   * @param string                                       $type    Machine-readable error type
-   * @param string                                       $message Human-readable error summary
-   * @param array<array{field: string, message: string}> $details Optional field-level error details
-   * @param array<string, string>                        $headers Optional additional headers
-   */
-  public static function createStructuredErrorResponse(int $code, string $type, string $message, array $details = [], array $headers = []): Response
-  {
-    $body = [
-      'error' => [
-        'code' => $code,
-        'type' => $type,
-        'message' => $message,
-      ],
-    ];
-
-    if ([] !== $details) {
-      $body['error']['details'] = $details;
-    }
-
-    $headers = array_merge($headers, ['Content-Type' => 'application/json']);
-
-    return new Response(json_encode($body, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES), $code, $headers);
-  }
-
-  /**
-   * Maps an HTTP status code to a machine-readable error type string.
-   */
-  public static function httpStatusToErrorType(int $statusCode): string
-  {
-    return match ($statusCode) {
-      400 => 'bad_request',
-      401 => 'unauthorized',
-      403 => 'forbidden',
-      404 => 'not_found',
-      406 => 'not_acceptable',
-      415 => 'unsupported_media_type',
-      422 => 'validation_error',
-      429 => 'too_many_requests',
-      default => 'internal_error',
-    };
+    return ApiErrorResponse::create($statusCode, $type, $exception->getMessage(), [], $exception->getHeaders());
   }
 
   /**
@@ -189,7 +144,7 @@ class Controller extends AbstractController
 
       $messages = array_map(static fn (array $d): string => $d['message'], $details);
 
-      return self::createStructuredErrorResponse(
+      return ApiErrorResponse::create(
         400,
         'bad_request',
         implode(' ', $messages),
