@@ -32,13 +32,15 @@ final class TextSanitizer
 
     return self::getProfanityBlocker()
       ->text($sanitized)
-      ->filter();
+      ->filter()
+    ;
   }
 
   private static function getProfanityBlocker(): Blocker
   {
     return self::$profanity_blocker ??= Builder::blocker('', '*')
       ->strict(false)
-      ->strictClean(true);
+      ->strictClean(true)
+    ;
   }
 }

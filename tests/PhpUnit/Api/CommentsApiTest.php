@@ -16,6 +16,7 @@ use App\Translation\TranslationResult;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\CommentCreateRequest;
+use OpenAPI\Server\Model\CommentResponse;
 use OpenAPI\Server\Model\CommentTranslationResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -306,6 +307,7 @@ final class CommentsApiTest extends TestCase
 
     $this->assertSame(Response::HTTP_CREATED, $response_code);
     $this->assertNotNull($result);
+    $this->assertInstanceOf(CommentResponse::class, $result);
     $this->assertSame('Reach me at [contact removed] you ****', $result->getMessage());
   }
 

@@ -156,9 +156,11 @@ class StudioManagerTest extends KernelTestCase
     $comment = $this->object->addCommentToStudio($this->user, $this->studio, 'Join discord.gg/catroweb');
 
     $this->assertNotNull($comment);
-    $this->assertSame('Join [contact removed]', $comment?->getText());
+    $this->assertSame('Join [contact removed]', $comment->getText());
 
-    $this->object->deleteCommentFromStudio($this->user, $comment->getId());
+    $comment_id = $comment->getId();
+    $this->assertNotNull($comment_id);
+    $this->object->deleteCommentFromStudio($this->user, $comment_id);
   }
 
   #[Group('integration')]
@@ -280,12 +282,15 @@ class StudioManagerTest extends KernelTestCase
   public function testAddRemoveStudioCommentReplies(): void
   {
     $studioComment = $this->object->addCommentToStudio($this->user, $this->studio, 'test comment');
+    $this->assertNotNull($studioComment);
+    $studioCommentId = $studioComment->getId();
+    $this->assertNotNull($studioCommentId);
     $replies = ['test reply 1', 'test reply 2'];
-    $this->object->addCommentToStudio($this->user, $this->studio, $replies[0], $studioComment->getId());
-    $this->object->addCommentToStudio($this->user, $this->studio, $replies[1], $studioComment->getId());
-    $this->assertEquals(2, $this->object->countCommentReplies($studioComment->getId()));
+    $this->object->addCommentToStudio($this->user, $this->studio, $replies[0], $studioCommentId);
+    $this->object->addCommentToStudio($this->user, $this->studio, $replies[1], $studioCommentId);
+    $this->assertEquals(2, $this->object->countCommentReplies($studioCommentId));
     $i = 0;
-    foreach ($this->object->findCommentReplies($studioComment->getId()) as $reply) {
+    foreach ($this->object->findCommentReplies($studioCommentId) as $reply) {
       $this->assertInstanceOf(UserComment::class, $reply);
       $this->assertEquals($replies[$i], $reply->getText());
       ++$i;
@@ -294,7 +299,7 @@ class StudioManagerTest extends KernelTestCase
       }
     }
 
-    $this->object->deleteCommentFromStudio($this->user, $studioComment->getId());
+    $this->object->deleteCommentFromStudio($this->user, $studioCommentId);
 
     $this->assertEquals(0, $this->object->countStudioComments($this->studio));
   }
