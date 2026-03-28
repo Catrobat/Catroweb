@@ -48,7 +48,7 @@
     <hr style="color: transparent">
 
     {% if not comment.is_deleted %}
-      <button class="mdc-fab add-reply-button reply-button--fab" aria-label="Favorite" style="display: inline-block;">
+      <button class="mdc-fab add-reply-button reply-button--fab" aria-label="{{ 'project.reply'|trans({}, 'catroweb') }}" style="display: inline-block;">
         <div class="mdc-fab__ripple"></div>
         <span class="mdc-fab__icon material-icons">reply</span>
       </button>

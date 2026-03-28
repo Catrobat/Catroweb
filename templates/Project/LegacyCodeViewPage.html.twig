@@ -16,10 +16,10 @@
 
     {% if scene_name is null and assetFileExists(path ~ 'images/' ~ object.getLooks()[0].getFileName()) %}
       <img src="{{ asset(path ~ 'images/' ~ object.getLooks()[0].getFileName()) }}"
-           class="object-icon">
+           class="object-icon" alt="{{ object.getName() }}">
     {% elseif assetFileExists(path ~ scene_name ~ '/images/' ~ object.getLooks()[0].getFileName()) %}
       <img src="{{ asset(path ~ scene_name ~ '/images/' ~ object.getLooks()[0].getFileName()) }}"
-           class="object-icon">
+           class="object-icon" alt="{{ object.getName() }}">
     {% else %}
       <div class="object-icon">
         <i class="no-image-found-icon material-icons">close</i>
