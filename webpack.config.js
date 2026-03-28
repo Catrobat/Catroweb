@@ -46,34 +46,8 @@ Encore
     // Fonts
     { from: './assets/Fonts', to: '/fonts/[path][name].[ext]' },
 
-    // Remix graph (deprecated!) - Complete rework needed
+    // Remix graph (deprecated!) - Legacy files kept for reference, feature flag disabled
     { from: './assets/Legacy', to: '../js/[path][name].[ext]' },
-    { from: './node_modules/vis/dist/', to: '../vis/[path][name].[ext]' },
-    {
-      from: './node_modules/jquery/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-ui-dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-contextmenu/dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-contextmenu/dist/',
-      pattern: /\.css$/,
-      to: '../css/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/animate.css/',
-      pattern: /\.css$/,
-      to: '../css/modules/[path][name].[ext]',
-    },
   ])
 
   /*
