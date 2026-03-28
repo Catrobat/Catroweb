@@ -176,9 +176,6 @@
     </PossiblyNullArgument>
   </file>
   <file src="src/Api/Services/Studio/StudioResponseManager.php">
-    <PossiblyNullReference>
-      <code><![CDATA[getSchemeAndHttpHost]]></code>
-    </PossiblyNullReference>
   </file>
   <file src="src/Api/Services/User/UserRequestValidator.php">
     <PossiblyNullArgument>

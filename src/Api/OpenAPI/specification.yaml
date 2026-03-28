@@ -2064,6 +2064,23 @@ paths:
   '/studio':
     parameters:
       - $ref: '#/components/parameters/Locale'
+    get:
+      tags:
+        - Studio
+      summary: List public studios
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
     post:
       security:
         - BearerAuth: []
@@ -2213,6 +2230,201 @@ paths:
           $ref: '#/components/responses/NotFound'
         '406':
           $ref: '#/components/responses/NotAcceptable'
+
+  '/studio/{id}/members':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      tags:
+        - Studio
+      summary: List studio members
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioMemberListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/join':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Join a studio
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Already a member or join request pending
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  '/studio/{id}/leave':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Leave a studio
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/studio/{id}/projects':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      tags:
+        - Studio
+      summary: List studio projects
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioProjectListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Add a project to a studio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudioAddProjectRequest'
+      responses:
+        '201':
+          description: Project added to studio
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Project already in studio
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
+  '/studio/{id}/projects/{projectId}':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+          pattern: '^[a-zA-Z0-9\-]+'
+      - $ref: '#/components/parameters/Locale'
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Remove a project from a studio
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/comments':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      tags:
+        - Studio
+      summary: List studio comments
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioCommentListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Add a comment to a studio
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudioCommentCreateRequest'
+      responses:
+        '201':
+          description: Comment added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioCommentResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
 
   ##############################################
   # Followers
@@ -4175,6 +4387,155 @@ components:
           type: string
           example: https://share.catrob.at/resources/studio/panda.png
           description: Cover image
+        members_count:
+          type: integer
+          example: 5
+          description: Number of members in the studio
+        projects_count:
+          type: integer
+          example: 12
+          description: Number of projects in the studio
+
+    StudioListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioResponse'
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+          nullable: true
+
+    StudioMemberResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Studio membership ID
+        user_id:
+          type: string
+          description: User UUID
+        username:
+          type: string
+        avatar:
+          type: string
+          nullable: true
+        role:
+          type: string
+          enum:
+            - 'admin'
+            - 'member'
+        status:
+          type: string
+          enum:
+            - 'active'
+            - 'banned'
+            - 'pending_request'
+        joined_at:
+          type: string
+          format: date-time
+
+    StudioMemberListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioMemberResponse'
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+          nullable: true
+
+    StudioProjectResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Project UUID
+        name:
+          type: string
+        added_by:
+          type: string
+          description: Username of the user who added the project
+        added_at:
+          type: string
+          format: date-time
+
+    StudioProjectListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioProjectResponse'
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+          nullable: true
+
+    StudioAddProjectRequest:
+      type: object
+      required:
+        - project_id
+      properties:
+        project_id:
+          type: string
+          description: The project UUID to add
+
+    StudioCommentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+        username:
+          type: string
+        user_id:
+          type: string
+        user_avatar:
+          type: string
+          nullable: true
+        parent_id:
+          type: integer
+          nullable: true
+        reply_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+
+    StudioCommentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioCommentResponse'
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+          nullable: true
+
+    StudioCommentCreateRequest:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: The comment text
+        parent_id:
+          type: integer
+          nullable: true
+          description: Parent comment ID for replies
 
     ######################################################
     # Utility Schemas
