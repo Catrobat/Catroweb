@@ -441,10 +441,12 @@ class ProgramRepository extends ServiceEntityRepository
   private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC'): QueryBuilder
   {
     if ('' !== trim($order_by)) {
-      return $query_builder
-        ->orderBy('e.'.$order_by, $order)
-      ;
+      $query_builder->orderBy('e.'.$order_by, $order);
     }
+
+    // Always add a deterministic tiebreaker to ensure stable pagination
+    // when multiple rows share the same primary sort value.
+    $query_builder->addOrderBy('e.name', 'ASC');
 
     return $query_builder;
   }
