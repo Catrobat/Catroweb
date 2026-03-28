@@ -14,12 +14,14 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(TextSanitizer::class)]
 class TextSanitizerTest extends TestCase
 {
+  #[\Override]
   protected function setUp(): void
   {
     // Use the real word list from the project
     TextSanitizer::setWordListPath(dirname(__DIR__, 3).'/config/moderation/profanity_words.txt');
   }
 
+  #[\Override]
   protected function tearDown(): void
   {
     TextSanitizer::setWordListPath(null);
@@ -244,6 +246,7 @@ class TextSanitizerTest extends TestCase
   {
     // Create a temporary empty word list
     $tmpFile = tempnam(sys_get_temp_dir(), 'profanity_test_');
+    $this->assertIsString($tmpFile);
     file_put_contents($tmpFile, '');
     TextSanitizer::setWordListPath($tmpFile);
 
@@ -262,6 +265,7 @@ class TextSanitizerTest extends TestCase
   public function testWordListIgnoresCommentLines(): void
   {
     $tmpFile = tempnam(sys_get_temp_dir(), 'profanity_test_');
+    $this->assertIsString($tmpFile);
     file_put_contents($tmpFile, "# this is a comment\nbadword\n");
     TextSanitizer::setWordListPath($tmpFile);
 
@@ -274,6 +278,7 @@ class TextSanitizerTest extends TestCase
   public function testWordListIgnoresBlankLines(): void
   {
     $tmpFile = tempnam(sys_get_temp_dir(), 'profanity_test_');
+    $this->assertIsString($tmpFile);
     file_put_contents($tmpFile, "\n\nbadword\n\n");
     TextSanitizer::setWordListPath($tmpFile);
 

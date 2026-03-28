@@ -51,7 +51,7 @@ class TextSanitizer
     // Zero-width space (U+200B), zero-width non-joiner (U+200C),
     // zero-width joiner (U+200D), word joiner (U+2060),
     // soft hyphen (U+00AD), BOM / zero-width no-break space (U+FEFF)
-    return preg_replace('/[\\x{200B}\\x{200C}\\x{200D}\\x{2060}\\x{00AD}\\x{FEFF}]/u', '', $text) ?? $text;
+    return preg_replace('/[\x{200B}\x{200C}\x{200D}\x{2060}\x{00AD}\x{FEFF}]/u', '', $text) ?? $text;
   }
 
   /**
