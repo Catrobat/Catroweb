@@ -428,7 +428,6 @@
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-
   <file src="src/Security/OAuth/HwiOauthUserProvider.php">
     <PossiblyNullArgument>
       <code><![CDATA[$response->getEmail()]]></code>

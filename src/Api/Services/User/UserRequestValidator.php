@@ -8,6 +8,7 @@ use App\Api\Services\Base\AbstractRequestValidator;
 use App\Api\Services\GeneralValidator;
 use App\Api\Services\ValidationWrapper;
 use App\DB\Entity\User\User;
+use App\Security\ContentSafety\ContentSafetyScanner;
 use App\User\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
@@ -46,6 +47,7 @@ class UserRequestValidator extends AbstractRequestValidator
     private readonly PasswordHasherFactoryInterface $password_hasher_factory,
     private readonly CacheInterface $cache,
     private readonly LoggerInterface $logger,
+    private readonly ContentSafetyScanner $content_safety_scanner,
   ) {
     parent::__construct($validator, $translator);
   }
@@ -181,7 +183,16 @@ class UserRequestValidator extends AbstractRequestValidator
     if ($result instanceof \Imagick) {
       try {
         $result->cropThumbnailImage($image_size, $image_size);
-        $picture_out = 'data:'.$result->getImageMimeType().';base64,'.base64_encode($result->getImageBlob());
+
+        $resizedBlob = $result->getImageBlob();
+        $scanResult = $this->content_safety_scanner->scanImageBlob($resizedBlob);
+        if (!$scanResult->safe) {
+          $this->getValidationWrapper()->addError($this->__('api.registerUser.pictureNsfw', [], $locale), $KEY);
+
+          return;
+        }
+
+        $picture_out = 'data:'.$result->getImageMimeType().';base64,'.base64_encode($resizedBlob);
       } catch (\ImagickException) {
         $this->getValidationWrapper()->addError($this->__('api.registerUser.pictureInvalid', [], $locale), $KEY);
       }
