@@ -28,6 +28,7 @@ Feature: Searching for projects with extensions
     And I should see "__phiro"
     When I press on the extension "__mindstorms"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "project 1"
     And I should see "project 2"
