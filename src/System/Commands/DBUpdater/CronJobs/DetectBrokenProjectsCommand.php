@@ -48,7 +48,7 @@ class DetectBrokenProjectsCommand extends Command
         ->getArrayResult()
       ;
 
-      if (0 === count($projects)) {
+      if ([] === $projects) {
         break;
       }
 
@@ -70,7 +70,7 @@ class DetectBrokenProjectsCommand extends Command
 
       // Batch update broken projects that were not already flagged
       if ([] !== $broken_ids) {
-        $updated = $this->entity_manager->createQueryBuilder()
+        $updated = (int) $this->entity_manager->createQueryBuilder()
           ->update(Program::class, 'p')
           ->set('p.has_missing_files', ':true')
           ->where('p.id IN (:ids)')
@@ -86,7 +86,7 @@ class DetectBrokenProjectsCommand extends Command
 
       // Batch update projects that were flagged but are now fixed
       if ([] !== $fixed_ids) {
-        $updated = $this->entity_manager->createQueryBuilder()
+        $updated = (int) $this->entity_manager->createQueryBuilder()
           ->update(Program::class, 'p')
           ->set('p.has_missing_files', ':false')
           ->where('p.id IN (:ids)')
