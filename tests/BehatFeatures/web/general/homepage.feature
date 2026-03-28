@@ -52,6 +52,7 @@ Feature: Pocketcode homepage
   Scenario: Scratch remixes project should be visible:
     Given I am on homepage
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see the featured slider
     Then the element "#home-projects__scratch" should exist
     And the "#home-projects__scratch" element should contain "project 6"
@@ -61,6 +62,7 @@ Feature: Pocketcode homepage
   Scenario: Viewing the homepage at website root
     Given I am on homepage
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see the featured slider
     Then one of the ".project-list__title" elements should contain "Examples"
     Then one of the ".project-list__title" elements should contain "Most downloaded"
@@ -115,6 +117,7 @@ Feature: Pocketcode homepage
   Scenario: Featured Programs and Urls
     Given I am on homepage
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see the featured slider
     And I should see the slider with the values "http://www.google.at/,project 2,project 3"
 

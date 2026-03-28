@@ -5,7 +5,7 @@ import { MaintenanceHandler } from './MaintenanceHandler'
 require('./IndexPage.scss')
 
 document.addEventListener('DOMContentLoaded', () => {
-  new FeaturedProjects('feature-slider').init()
+  new FeaturedProjects('featured-slider').init()
   new DefaultProjectLists('home-projects').init()
   new OAuthHandler().showOAuthFirstLoginInformationIfNecessary()
   new MaintenanceHandler()

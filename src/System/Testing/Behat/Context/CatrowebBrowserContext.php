@@ -332,11 +332,11 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I should see the featured slider$/
    *
-   * @throws ExpectationException
+   * @throws ResponseTextException
    */
   public function iShouldSeeTheFeaturedSlider(): void
   {
-    $this->assertSession()->responseContains('featured');
+    $this->iWaitForTheElementToBeVisible('#feature-slider');
     Assert::assertTrue($this->getSession()->getPage()->findById('feature-slider')->isVisible());
   }
 
@@ -853,6 +853,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iShouldSeeTheSliderWithTheValues(string $values): void
   {
+    $this->iWaitForTheElementToBeVisible('#feature-slider');
     $slider_items = explode(',', $values);
     $owl_items = $this->getSession()->getPage()->findAll('css', '.carousel-item');
     $owl_items_count = count($owl_items);

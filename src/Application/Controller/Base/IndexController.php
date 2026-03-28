@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\Base;
 
-use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\System\MaintenanceInformation;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\Special\FeaturedRepository;
-use App\Storage\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,54 +15,21 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-  public function __construct(protected ImageRepository $image_repository, protected FeaturedRepository $featured_repository, private readonly EntityManagerInterface $entityManager)
+  public function __construct(private readonly EntityManagerInterface $entityManager)
   {
   }
 
   #[Route(path: '/', name: 'index', methods: ['GET'])]
   public function index(Request $request): Response
   {
-    $flavor = $request->attributes->get('flavor');
     /** @var User|null $user */
     $user = $this->getUser();
     $maintenanceInformation = $this->renderMaintenanceInformation($request);
 
     return $this->render('Index/IndexPage.html.twig', [
-      'featured' => $this->getFeaturedSliderData($flavor),
       'is_first_oauth_login' => null !== $user && $user->isOauthUser() && !$user->isOauthPasswordCreated(),
       'maintenanceInformation' => $maintenanceInformation,
     ]);
-  }
-
-  protected function getFeaturedSliderData(string $flavor): array
-  {
-    if (Flavor::PHIROCODE === $flavor) {
-      $featured_items = $this->featured_repository->getFeaturedItems(Flavor::POCKETCODE, 10);
-    } else {
-      $featured_items = $this->featured_repository->getFeaturedItems($flavor, 10);
-    }
-
-    $featuredData = [];
-    /** @var FeaturedProgram $item */
-    foreach ($featured_items as $item) {
-      $info = [];
-      if (null !== $item->getProgram()) {
-        if ('' !== $flavor && '0' !== $flavor) {
-          $info['url'] = $this->generateUrl('program',
-            ['id' => $item->getProgram()->getId(), 'theme' => $flavor]);
-        } else {
-          $info['url'] = $this->generateUrl('program', ['id' => $item->getProgram()->getId()]);
-        }
-      } else {
-        $info['url'] = $item->getUrl();
-      }
-
-      $info['image'] = $this->image_repository->getWebPath($item->getId(), $item->getImageType(), true);
-
-      $featuredData[] = $info;
-    }
-
-    return $featuredData;
   }
 
   public function renderMaintenanceInformation(Request $request): array
