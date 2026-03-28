@@ -428,7 +428,6 @@
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-
   <file src="src/Security/OAuth/HwiOauthUserProvider.php">
     <PossiblyNullArgument>
       <code><![CDATA[$response->getEmail()]]></code>
@@ -713,8 +712,6 @@
       <code><![CDATA[findAllUserAchievements]]></code>
       <code><![CDATA[findOneBy]]></code>
       <code><![CDATA[findOneBy]]></code>
-      <code><![CDATA[findStudioById]]></code>
-      <code><![CDATA[findStudioById]]></code>
       <code><![CDATA[findStudioById]]></code>
       <code><![CDATA[findStudioByName]]></code>
       <code><![CDATA[findStudioByName]]></code>
