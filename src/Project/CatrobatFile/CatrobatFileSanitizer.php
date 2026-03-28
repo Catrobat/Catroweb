@@ -26,6 +26,11 @@ class CatrobatFileSanitizer
 
   public function sanitize(ExtractedCatrobatFile $extracted_file): void
   {
+    // Sanitize user-provided text fields via setters (triggers TextSanitizer)
+    $extracted_file->setName($extracted_file->getName());
+    $extracted_file->setDescription($extracted_file->getDescription());
+    $extracted_file->setNotesAndCredits($extracted_file->getNotesAndCredits());
+
     $this->extracted_file_root_path = $extracted_file->getPath();
     $this->sound_paths = $extracted_file->getContainingSoundPaths();
     $this->image_paths = $extracted_file->getContainingImagePaths();

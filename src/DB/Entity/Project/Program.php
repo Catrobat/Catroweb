@@ -16,6 +16,7 @@ use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\Generator\MyUuidGenerator;
+use App\Moderation\TextSanitizer;
 use App\Utils\TimeUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -334,7 +335,7 @@ class Program implements \Stringable
 
   public function setName(string $name): Program
   {
-    $this->name = $name;
+    $this->name = TextSanitizer::sanitize($name) ?? $name;
     $this->should_invalidate_translation_cache = true;
 
     return $this;
@@ -347,7 +348,7 @@ class Program implements \Stringable
 
   public function setDescription(?string $description): Program
   {
-    $this->description = $description;
+    $this->description = TextSanitizer::sanitize($description);
     $this->should_invalidate_translation_cache = true;
 
     return $this;
@@ -360,7 +361,7 @@ class Program implements \Stringable
 
   public function setCredits(?string $credits): Program
   {
-    $this->credits = $credits;
+    $this->credits = TextSanitizer::sanitize($credits);
     $this->should_invalidate_translation_cache = true;
 
     return $this;
