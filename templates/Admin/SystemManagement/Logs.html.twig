@@ -95,6 +95,7 @@
             <div id="current-file-container">
               <h5>Current file: <span id="currentFileName">{{ files[0] }}</span></h5>
               <form action="/admin/downloadLogs/" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('log_download') }}">
                 <input id="currentFile" name="file" type="hidden" value="{{ files[0] }}">
                 <input value="Download" type="submit" formtarget="_blank" class="btn">
               </form>

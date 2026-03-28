@@ -61,6 +61,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'form_login' => [
             'default_target_path' => '/',
             'success_handler' => FormLoginSuccessHandler::class,
+            'enable_csrf' => true,
           ],
           'custom_authenticators' => [
             WebviewJWTAuthenticator::class,

@@ -52,6 +52,7 @@
             </div>
             <div class="modal-body">
                 <form action="" method="post" class="form-horizontal sign-app-form">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('sign_app') }}">
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="package_name" type="text" name="package_name"
