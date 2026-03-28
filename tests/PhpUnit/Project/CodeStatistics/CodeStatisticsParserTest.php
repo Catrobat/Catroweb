@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project\CodeStatistics;
 
-use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\Project\CodeStatistics\CodeStatisticsParser;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -29,8 +28,6 @@ class CodeStatisticsParserTest extends TestCase
   public function testParseSampleProject(): void
   {
     $stats = $this->parser->parse($this->fixtures_path.'sample_code.xml');
-
-    self::assertInstanceOf(ProjectCodeStatistics::class, $stats);
 
     // No <scene> tags in sample project (non-scene project)
     self::assertSame(0, $stats->getScenes());
