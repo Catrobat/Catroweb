@@ -280,7 +280,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'path' => '^/api/health/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
-          'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
           'path' => '^/api/survey/[a-zA-Z0-9_-]+/?$',
