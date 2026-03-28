@@ -442,11 +442,11 @@ class ProgramRepository extends ServiceEntityRepository
   {
     if ('' !== trim($order_by)) {
       $query_builder->orderBy('e.'.$order_by, $order);
+      // Add deterministic tiebreakers to ensure stable pagination
+      // when multiple rows share the same primary sort value.
+      $query_builder->addOrderBy('e.name', 'ASC');
+      $query_builder->addOrderBy('e.id', 'ASC');
     }
-
-    // Always add a deterministic tiebreaker to ensure stable pagination
-    // when multiple rows share the same primary sort value.
-    $query_builder->addOrderBy('e.name', 'ASC');
 
     return $query_builder;
   }
