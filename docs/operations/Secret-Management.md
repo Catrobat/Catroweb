@@ -27,6 +27,8 @@ Real environment variables always take precedence over all `.env` files.
 | `DATABASE_PASSWORD`    | `root`                                | `.env.prod.local` or real env var |
 | `GOOGLE_CLIENT_SECRET` | `'secret'`                            | `.env.prod.local` or real env var |
 | `MAILER_DSN`           | `null://null`                         | `.env.prod.local` or real env var |
+| `CLAMAV_HOST`          | `clamav`                              | `.env.prod.local` or real env var |
+| `CLAMAV_PORT`          | `3310`                                | `.env.prod.local` or real env var |
 
 ## Production Setup
 

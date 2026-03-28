@@ -153,6 +153,17 @@ services:
       - cap-data:/usr/src/app/.data
     restart: unless-stopped
 
+  # --- Malware scanning:
+
+  clamav:
+    image: clamav/clamav:stable
+    container_name: clamav.catroweb
+    ports:
+      - '3310:3310'
+    volumes:
+      - clamav-data:/var/lib/clamav
+    restart: unless-stopped
+
   # --- Tools:
 
   phpmyadmin.catroweb.dev:
@@ -198,4 +209,6 @@ volumes:
   esdata1:
     driver: local
   cap-data:
+    driver: local
+  clamav-data:
     driver: local
