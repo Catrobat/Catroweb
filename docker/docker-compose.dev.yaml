@@ -164,6 +164,21 @@ services:
       - clamav-data:/var/lib/clamav
     restart: unless-stopped
 
+  # --- NSFW content safety scanning:
+
+  nsfw-scanner:
+    container_name: nsfw-scanner.catroweb
+    build:
+      context: ./nsfw-scanner
+      dockerfile: Dockerfile
+    ports:
+      - '5050:5000'
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   # --- Tools:
 
   phpmyadmin.catroweb.dev:

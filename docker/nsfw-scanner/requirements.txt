@@ -1,0 +1,4 @@
+flask==3.1.*
+transformers==4.48.*
+torch==2.6.*
+Pillow==11.*

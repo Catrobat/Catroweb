@@ -22,6 +22,7 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Event\ProjectBeforeInsertEvent;
 use App\Project\Event\ProjectBeforePersistEvent;
+use App\Security\ContentSafety\ContentSafetyScanner;
 use App\Security\Malware\MalwareScanner;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
@@ -36,6 +37,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -59,6 +61,7 @@ class ProjectManager
     private readonly ?UrlHelper $urlHelper,
     protected Security $security,
     private readonly MalwareScanner $malware_scanner,
+    private readonly ContentSafetyScanner $content_safety_scanner,
   ) {
   }
 
@@ -141,6 +144,8 @@ class ProjectManager
     $extracted_file = $this->file_extractor->extract($file);
 
     $this->file_sanitizer->sanitize($extracted_file);
+
+    $this->scanExtractedImagesForNsfw($extracted_file);
 
     try {
       $event = $this->event_dispatcher->dispatch(new ProjectBeforeInsertEvent($extracted_file));
@@ -631,6 +636,29 @@ class ProjectManager
       'scratch' => $this->getScratchRemixesProjectsCount($flavor, $max_version),
       default => 0,
     };
+  }
+
+  private function scanExtractedImagesForNsfw(ExtractedCatrobatFile $extracted_file): void
+  {
+    $imagesDir = $extracted_file->getPath().'images/';
+    if (!is_dir($imagesDir)) {
+      return;
+    }
+
+    $finder = new Finder();
+    $finder->files()->in($imagesDir);
+    foreach ($finder as $file) {
+      try {
+        $result = $this->content_safety_scanner->scanImageFile($file->getRealPath());
+        if (!$result->safe) {
+          throw new InvalidCatrobatFileException('upload.nsfwImage', 422);
+        }
+      } catch (InvalidCatrobatFileException $e) {
+        throw $e;
+      } catch (\Throwable $e) {
+        $this->logger->warning('Content safety scan failed for file: '.$file->getRealPath().': '.$e->getMessage());
+      }
+    }
   }
 
   private function notifyFollower(Program $project): void
