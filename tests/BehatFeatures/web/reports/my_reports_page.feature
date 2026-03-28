@@ -107,7 +107,7 @@ Feature: My Reports page shows user's filed reports
     Given there are moderation reports:
       | id | reporter | content_type | content_id | category | state    | created_at          | resolved_at         | resolved_by |
       | 1  | Catrobat | project      | 1          | spam     | new      | 2024-06-01 12:00:00 |                     |             |
-      | 2  | Catrobat | project      | 1          | spam     | accepted | 2024-06-02 12:00:00 | 2024-06-05 12:00:00 | User2       |
+      | 2  | Catrobat | user         | 2          | spam     | accepted | 2024-06-02 12:00:00 | 2024-06-05 12:00:00 | User2       |
     And I log in as "Catrobat"
     And I am on "/app/user_reports"
     And I wait for the page to be loaded
