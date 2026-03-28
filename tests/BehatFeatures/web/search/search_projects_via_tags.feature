@@ -26,6 +26,7 @@ Feature: Searching for projects with tags
     And I should see "__Animation"
     When I press on the tag "__Animation"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I should see "project 1"
     And I should see "project 2"
     But I should not see "project 3"
@@ -33,6 +34,7 @@ Feature: Searching for projects with tags
   Scenario: search for tags should work
     When I am on "/app/search/Animation"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I should see "project 1"
     And I should see "project 2"
     But I should not see "project 3"
