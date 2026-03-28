@@ -30,6 +30,7 @@
 
 namespace OpenAPI\Server\Controller;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use OpenAPI\Server\Api\ApiServer;
 use OpenAPI\Server\Service\SerializerInterface;
 use OpenAPI\Server\Service\ValidatorInterface;
@@ -83,7 +84,7 @@ class Controller extends AbstractController
    */
   public function createBadRequestResponse(string $message = 'Bad Request.'): Response
   {
-    return new Response($message, 400);
+    return ApiErrorResponse::create(400, 'bad_request', $message);
   }
 
   /**
@@ -95,12 +96,9 @@ class Controller extends AbstractController
   public function createErrorResponse(HttpException $exception): Response
   {
     $statusCode = $exception->getStatusCode();
-    $headers = array_merge($exception->getHeaders(), ['Content-Type' => 'application/json']);
+    $type = ApiErrorResponse::httpStatusToErrorType($statusCode);
 
-    $json = $this->exceptionToArray($exception);
-    $json['statusCode'] = $statusCode;
-
-    return new Response(json_encode($json, 15), $statusCode, $headers);
+    return ApiErrorResponse::create($statusCode, $type, $exception->getMessage(), [], $exception->getHeaders());
   }
 
   /**
@@ -135,38 +133,26 @@ class Controller extends AbstractController
     $errors = $this->validator->validate($data, $asserts);
 
     if (count($errors) > 0) {
-      $errorsString = '';
+      $details = [];
       /** @var ConstraintViolation $violation */
       foreach ($errors as $violation) {
-        $errorsString .= $violation->getMessage()."\n";
+        $details[] = [
+          'field' => $violation->getPropertyPath() ?: 'unknown',
+          'message' => $violation->getMessage(),
+        ];
       }
 
-      return $this->createBadRequestResponse($errorsString);
+      $messages = array_map(static fn (array $d): string => $d['message'], $details);
+
+      return ApiErrorResponse::create(
+        400,
+        'bad_request',
+        implode(' ', $messages),
+        $details
+      );
     }
 
     return null;
-  }
-
-  /**
-   * Converts an exception to a serializable array.
-   */
-  private function exceptionToArray(?\Throwable $exception = null): ?array
-  {
-    if (!$exception instanceof \Throwable) {
-      return null;
-    }
-
-    if (!$this->container->get('kernel')->isDebug()) {
-      return [
-        'message' => $exception->getMessage(),
-      ];
-    }
-
-    return [
-      'message' => $exception->getMessage(),
-      'type' => $exception::class,
-      'previous' => $this->exceptionToArray($exception->getPrevious()),
-    ];
   }
 
   /**

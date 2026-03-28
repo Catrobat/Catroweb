@@ -52,7 +52,7 @@ interface UtilityApiInterface
   public function healthGet(
     int &$responseCode,
     array &$responseHeaders,
-  ): void;
+  ): array|object|null;
 
   /**
    * Operation surveyLangCodeGet.

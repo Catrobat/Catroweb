@@ -219,6 +219,7 @@ All URIs are relative to *https://share.catrob.at/api*
 - [FeaturedProjectResponse](docs/Model/FeaturedProjectResponse.md)
 - [FollowerResponse](docs/Model/FollowerResponse.md)
 - [FollowersListResponse](docs/Model/FollowersListResponse.md)
+- [HealthResponse](docs/Model/HealthResponse.md)
 - [JWTResponse](docs/Model/JWTResponse.md)
 - [LoginRequest](docs/Model/LoginRequest.md)
 - [MediaAssetResponse](docs/Model/MediaAssetResponse.md)

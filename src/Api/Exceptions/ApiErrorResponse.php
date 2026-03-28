@@ -6,9 +6,25 @@ namespace App\Api\Exceptions;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Utility class for creating standardized JSON error responses across the API.
+ *
+ * This is intentionally NOT in the generated OpenAPI Server directory, because
+ * code generation overwrites files there. All non-generated API code that needs
+ * structured error responses should use this class.
+ */
 final class ApiErrorResponse
 {
-  public static function create(int $code, string $type, string $message): Response
+  /**
+   * Creates a standardized JSON error response.
+   *
+   * @param int                                          $code    HTTP status code
+   * @param string                                       $type    Machine-readable error type
+   * @param string                                       $message Human-readable error summary
+   * @param array<array{field: string, message: string}> $details Optional field-level error details
+   * @param array<string, string>                        $headers Optional additional headers
+   */
+  public static function create(int $code, string $type, string $message, array $details = [], array $headers = []): Response
   {
     $body = [
       'error' => [
@@ -18,11 +34,13 @@ final class ApiErrorResponse
       ],
     ];
 
-    return new Response(
-      json_encode($body, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
-      $code,
-      ['Content-Type' => 'application/json']
-    );
+    if ([] !== $details) {
+      $body['error']['details'] = $details;
+    }
+
+    $headers = array_merge($headers, ['Content-Type' => 'application/json']);
+
+    return new Response(json_encode($body, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES), $code, $headers);
   }
 
   public static function httpStatusToErrorType(int $statusCode): string

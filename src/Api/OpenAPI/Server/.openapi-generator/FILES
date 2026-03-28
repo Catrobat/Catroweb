@@ -55,6 +55,7 @@ Model/ExtensionResponse.php
 Model/FeaturedProjectResponse.php
 Model/FollowerResponse.php
 Model/FollowersListResponse.php
+Model/HealthResponse.php
 Model/JWTResponse.php
 Model/LoginRequest.php
 Model/MediaAssetResponse.php
@@ -155,6 +156,7 @@ Tests/Model/ExtensionResponseTest.php
 Tests/Model/FeaturedProjectResponseTest.php
 Tests/Model/FollowerResponseTest.php
 Tests/Model/FollowersListResponseTest.php
+Tests/Model/HealthResponseTest.php
 Tests/Model/JWTResponseTest.php
 Tests/Model/LoginRequestTest.php
 Tests/Model/MediaAssetResponseTest.php
@@ -245,6 +247,7 @@ docs/Model/ExtensionResponse.md
 docs/Model/FeaturedProjectResponse.md
 docs/Model/FollowerResponse.md
 docs/Model/FollowersListResponse.md
+docs/Model/HealthResponse.md
 docs/Model/JWTResponse.md
 docs/Model/LoginRequest.md
 docs/Model/MediaAssetResponse.md
