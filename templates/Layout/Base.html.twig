@@ -40,12 +40,11 @@
   {{ encore_entry_script_tags('base_layout') }}
   {% block javascript %}{% endblock %}
 
+  <meta property="og:site_name" content="Catrobat">
   {% block head %}{% endblock %}
 </head>
 
 <body class="body-with-sidebar">
-
-<a href="#main_container_content" class="skip-to-content">{{ 'skipToContent'|trans({}, 'catroweb')|default('Skip to content') }}</a>
 
 <noscript>
   <div class="noscript-warning">
