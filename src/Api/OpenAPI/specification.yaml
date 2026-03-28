@@ -238,6 +238,32 @@ paths:
   ##############################################
   # User
   ###
+  /user/data-export:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'User'
+      summary: 'Export your personal data (GDPR)'
+      description: '
+        Returns a JSON export of all personal data associated with
+        the authenticated user (GDPR right to data portability).
+        Rate limited to 3 requests per day.
+        '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDataExportResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+
   /user:
     get:
       security:
@@ -3284,6 +3310,106 @@ components:
               format: email
               example: 'foo.bar@catrob.at'
               description: 'EMail of the user'
+
+    UserDataExportResponse:
+      type: object
+      description: 'Full personal data export for GDPR data portability'
+      properties:
+        exported_at:
+          type: string
+          format: date-time
+          description: 'Timestamp when the export was generated'
+        profile:
+          type: object
+          description: 'User profile data'
+          properties:
+            id:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+            about:
+              type: string
+              nullable: true
+            currently_working_on:
+              type: string
+              nullable: true
+            created_at:
+              type: string
+              format: date-time
+        projects:
+          type: array
+          description: 'Projects uploaded by the user'
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              description:
+                type: string
+                nullable: true
+              uploaded_at:
+                type: string
+                format: date-time
+              views:
+                type: integer
+              downloads:
+                type: integer
+              private:
+                type: boolean
+        comments:
+          type: array
+          description: 'Comments written by the user'
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              text:
+                type: string
+              posted_at:
+                type: string
+                format: date-time
+              parent_id:
+                type: integer
+                nullable: true
+        reactions:
+          type: array
+          description: 'Reactions (likes) given by the user'
+          items:
+            type: object
+            properties:
+              project_id:
+                type: string
+              type:
+                type: string
+              created_at:
+                type: string
+                format: date-time
+                nullable: true
+        followers:
+          type: array
+          description: 'Users who follow this user'
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              username:
+                type: string
+        following:
+          type: array
+          description: 'Users followed by this user'
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              username:
+                type: string
 
     ErrorResponse:
       type: object

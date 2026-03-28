@@ -53,6 +53,19 @@ interface UserApiInterface
   public function setBearerAuth(?string $value): void;
 
   /**
+   * Operation userDataExportGet.
+   *
+   * Export your personal data (GDPR)
+   *
+   * @param int   &$responseCode   The HTTP Response Code
+   * @param array $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function userDataExportGet(
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation userDelete.
    *
    * Delete user account

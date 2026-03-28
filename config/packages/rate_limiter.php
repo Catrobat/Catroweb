@@ -97,6 +97,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 60,
         'interval' => '1 minute',
       ],
+      'data_export_daily' => [
+        'policy' => 'sliding_window',
+        'limit' => 3,
+        'interval' => '24 hours',
+      ],
     ],
   ]);
 };

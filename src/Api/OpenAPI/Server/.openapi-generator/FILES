@@ -98,6 +98,12 @@ Model/UpdateStudioErrorResponse.php
 Model/UpdateUserErrorResponse.php
 Model/UpdateUserRequest.php
 Model/UploadErrorResponse.php
+Model/UserDataExportResponse.php
+Model/UserDataExportResponseCommentsInner.php
+Model/UserDataExportResponseFollowersInner.php
+Model/UserDataExportResponseProfile.php
+Model/UserDataExportResponseProjectsInner.php
+Model/UserDataExportResponseReactionsInner.php
 OpenAPIServerBundle.php
 README.md
 Resources/config/routing.yaml
@@ -190,6 +196,12 @@ Tests/Model/UpdateStudioErrorResponseTest.php
 Tests/Model/UpdateUserErrorResponseTest.php
 Tests/Model/UpdateUserRequestTest.php
 Tests/Model/UploadErrorResponseTest.php
+Tests/Model/UserDataExportResponseCommentsInnerTest.php
+Tests/Model/UserDataExportResponseFollowersInnerTest.php
+Tests/Model/UserDataExportResponseProfileTest.php
+Tests/Model/UserDataExportResponseProjectsInnerTest.php
+Tests/Model/UserDataExportResponseReactionsInnerTest.php
+Tests/Model/UserDataExportResponseTest.php
 Tests/test_config.yaml
 autoload.php
 composer.json
@@ -272,5 +284,11 @@ docs/Model/UpdateStudioErrorResponse.md
 docs/Model/UpdateUserErrorResponse.md
 docs/Model/UpdateUserRequest.md
 docs/Model/UploadErrorResponse.md
+docs/Model/UserDataExportResponse.md
+docs/Model/UserDataExportResponseCommentsInner.md
+docs/Model/UserDataExportResponseFollowersInner.md
+docs/Model/UserDataExportResponseProfile.md
+docs/Model/UserDataExportResponseProjectsInner.md
+docs/Model/UserDataExportResponseReactionsInner.md
 git_push.sh
 phpunit.xml.dist

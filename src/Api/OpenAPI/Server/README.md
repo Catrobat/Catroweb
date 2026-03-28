@@ -180,6 +180,7 @@ All URIs are relative to *https://share.catrob.at/api*
 | _StudioApiInterface_         | [**studioIdGet**](docs/Api/StudioApiInterface.md#studioidget)                                         | **GET** /studio/{id}                     | Get studio details (private studios are only available to members)                                         |
 | _StudioApiInterface_         | [**studioIdPost**](docs/Api/StudioApiInterface.md#studioidpost)                                       | **POST** /studio/{id}                    | Update a Studio (only available to studio admins)                                                          |
 | _StudioApiInterface_         | [**studioPost**](docs/Api/StudioApiInterface.md#studiopost)                                           | **POST** /studio                         | Create a new Studio                                                                                        |
+| _UserApiInterface_           | [**userDataExportGet**](docs/Api/UserApiInterface.md#userdataexportget)                               | **GET** /user/data-export                | Export your personal data (GDPR)                                                                           |
 | _UserApiInterface_           | [**userDelete**](docs/Api/UserApiInterface.md#userdelete)                                             | **DELETE** /user                         | Delete user account                                                                                        |
 | _UserApiInterface_           | [**userGet**](docs/Api/UserApiInterface.md#userget)                                                   | **GET** /user                            | Get your private user data                                                                                 |
 | _UserApiInterface_           | [**userIdGet**](docs/Api/UserApiInterface.md#useridget)                                               | **GET** /user/{id}                       | Get public user data                                                                                       |
@@ -260,6 +261,12 @@ All URIs are relative to *https://share.catrob.at/api*
 - [UpdateUserErrorResponse](docs/Model/UpdateUserErrorResponse.md)
 - [UpdateUserRequest](docs/Model/UpdateUserRequest.md)
 - [UploadErrorResponse](docs/Model/UploadErrorResponse.md)
+- [UserDataExportResponse](docs/Model/UserDataExportResponse.md)
+- [UserDataExportResponseCommentsInner](docs/Model/UserDataExportResponseCommentsInner.md)
+- [UserDataExportResponseFollowersInner](docs/Model/UserDataExportResponseFollowersInner.md)
+- [UserDataExportResponseProfile](docs/Model/UserDataExportResponseProfile.md)
+- [UserDataExportResponseProjectsInner](docs/Model/UserDataExportResponseProjectsInner.md)
+- [UserDataExportResponseReactionsInner](docs/Model/UserDataExportResponseReactionsInner.md)
 
 ## Documentation For Authorization
 

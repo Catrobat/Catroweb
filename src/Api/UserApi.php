@@ -6,9 +6,11 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
+use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\User;
 use App\Security\Captcha\CaptchaVerifier;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
+use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
@@ -18,6 +20,12 @@ use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
 use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
+use OpenAPI\Server\Model\UserDataExportResponse;
+use OpenAPI\Server\Model\UserDataExportResponseCommentsInner;
+use OpenAPI\Server\Model\UserDataExportResponseFollowersInner;
+use OpenAPI\Server\Model\UserDataExportResponseProfile;
+use OpenAPI\Server\Model\UserDataExportResponseProjectsInner;
+use OpenAPI\Server\Model\UserDataExportResponseReactionsInner;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
@@ -30,9 +38,33 @@ class UserApi extends AbstractApiController implements UserApiInterface
     private readonly UserApiFacade $facade,
     private readonly RateLimiterFactory $registrationBurstLimiter,
     private readonly RateLimiterFactory $passwordResetBurstLimiter,
+    private readonly RateLimiterFactory $dataExportDailyLimiter,
     private readonly RequestStack $request_stack,
     private readonly CaptchaVerifier $captchaVerifier,
+    private readonly EntityManagerInterface $entity_manager,
   ) {
+  }
+
+  #[\Override]
+  public function userDataExportGet(int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    if (null === $this->checkUserRateLimit($user, $this->dataExportDailyLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
+
+      return null;
+    }
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->buildDataExportResponse($user);
   }
 
   /**
@@ -228,5 +260,87 @@ class UserApi extends AbstractApiController implements UserApiInterface
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
+  }
+
+  private function buildDataExportResponse(User $user): UserDataExportResponse
+  {
+    $profile = new UserDataExportResponseProfile([
+      'id' => $user->getId(),
+      'username' => $user->getUsername(),
+      'email' => $user->getEmail(),
+      'about' => $user->getAbout(),
+      'currently_working_on' => $user->getCurrentlyWorkingOn(),
+      'created_at' => $user->getCreatedAt()?->format(\DateTimeInterface::ATOM),
+    ]);
+
+    $projects = [];
+    foreach ($user->getPrograms() as $program) {
+      $projects[] = new UserDataExportResponseProjectsInner([
+        'id' => $program->getId(),
+        'name' => $program->getName(),
+        'description' => $program->getDescription(),
+        'uploaded_at' => $program->getUploadedAt()?->format(\DateTimeInterface::ATOM),
+        'views' => $program->getViews(),
+        'downloads' => $program->getDownloads(),
+        'private' => $program->getPrivate(),
+      ]);
+    }
+
+    $comments = [];
+    foreach ($user->getComments() as $comment) {
+      $comments[] = new UserDataExportResponseCommentsInner([
+        'id' => $comment->getId(),
+        'text' => $comment->getText(),
+        'posted_at' => $comment->getUploadDate()?->format(\DateTimeInterface::ATOM),
+        'parent_id' => 0 === $comment->getParentId() ? null : $comment->getParentId(),
+      ]);
+    }
+
+    $reactions = [];
+    foreach ($user->getLikes() as $like) {
+      $reactions[] = new UserDataExportResponseReactionsInner([
+        'project_id' => $like->getProgramId(),
+        'type' => ProgramLike::$TYPE_NAMES[$like->getType()] ?? 'unknown',
+        'created_at' => $like->getCreatedAt()?->format(\DateTimeInterface::ATOM),
+      ]);
+    }
+
+    $followers = $this->loadRelatedUsers($user, 'f.following');
+    $following = $this->loadRelatedUsers($user, 'f.followers');
+
+    return new UserDataExportResponse([
+      'exported_at' => (new \DateTimeImmutable())->format(\DateTimeInterface::ATOM),
+      'profile' => $profile,
+      'projects' => $projects,
+      'comments' => $comments,
+      'reactions' => $reactions,
+      'followers' => $followers,
+      'following' => $following,
+    ]);
+  }
+
+  /**
+   * @return UserDataExportResponseFollowersInner[]
+   */
+  private function loadRelatedUsers(User $user, string $joinRelation): array
+  {
+    /** @var User[] $users */
+    $users = $this->entity_manager->createQueryBuilder()
+      ->select('f')
+      ->from(User::class, 'f')
+      ->join($joinRelation, 'u')
+      ->where('u.id = :userId')
+      ->setParameter('userId', $user->getId())
+      ->getQuery()
+      ->getResult()
+    ;
+
+    return array_map(
+      static fn (User $f): UserDataExportResponseFollowersInner => new UserDataExportResponseFollowersInner([
+        'id' => $f->getId(),
+        'username' => $f->getUsername(),
+      ]),
+      $users,
+    );
   }
 }
