@@ -107,6 +107,7 @@ Encore
 
   .addEntry('user_achievements_page', './assets/User/AchievementsPage.js')
   .addEntry('user_notifications_page', './assets/User/NotificationsPage.js')
+  .addEntry('user_reports_page', './assets/User/ReportsPage.js')
   .addEntry('user_my_profile_page', './assets/User/MyProfilePage.js')
   .addEntry('user_profile_page', './assets/User/ProfilePage.js')
 

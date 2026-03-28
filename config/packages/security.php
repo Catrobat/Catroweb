@@ -132,6 +132,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/user/reports/?$',
+          'roles' => 'IS_AUTHENTICATED_FULLY',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/user/[a-zA-Z0-9_-]+/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],

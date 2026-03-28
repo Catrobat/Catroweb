@@ -24,15 +24,7 @@ class ModerationApiLoader extends AbstractApiLoader
   public function loadPendingReports(int $limit, ?string $cursor): array
   {
     [$limit, $cursor_created_at, $cursor_id, $legacy_cursor_id] = $this->parseCursorParams($limit, $cursor);
-
-    if (null !== $legacy_cursor_id && (null === $cursor_created_at || null === $cursor_id)) {
-      $legacy_report = $this->report_repository->find($legacy_cursor_id);
-      if ($legacy_report instanceof ContentReport && $legacy_report->getCreatedAt() instanceof \DateTimeInterface) {
-        $cursor_created_at = $legacy_report->getCreatedAt();
-        $cursor_id = $legacy_report->getId();
-        $legacy_cursor_id = null;
-      }
-    }
+    [$cursor_created_at, $cursor_id, $legacy_cursor_id] = $this->resolveReportLegacyCursor($cursor_created_at, $cursor_id, $legacy_cursor_id);
 
     $reports = $this->report_repository->findPendingReports($limit, $cursor_created_at, $cursor_id, $legacy_cursor_id);
 
@@ -60,6 +52,19 @@ class ModerationApiLoader extends AbstractApiLoader
     return $this->paginateResults($appeals, $limit);
   }
 
+  /**
+   * @return array{data: ContentReport[], has_more: bool, next_cursor: ?string}
+   */
+  public function loadUserReports(string $user_id, int $limit, ?string $cursor): array
+  {
+    [$limit, $cursor_created_at, $cursor_id, $legacy_cursor_id] = $this->parseCursorParams($limit, $cursor);
+    [$cursor_created_at, $cursor_id, $legacy_cursor_id] = $this->resolveReportLegacyCursor($cursor_created_at, $cursor_id, $legacy_cursor_id);
+
+    $reports = $this->report_repository->findReportsByUser($user_id, $limit, $cursor_created_at, $cursor_id);
+
+    return $this->paginateResults($reports, $limit);
+  }
+
   public function findReport(int $id): ?ContentReport
   {
     return $this->report_repository->find($id);
@@ -68,6 +73,26 @@ class ModerationApiLoader extends AbstractApiLoader
   public function findAppeal(int $id): ?ContentAppeal
   {
     return $this->appeal_repository->find($id);
+  }
+
+  /**
+   * Resolve a legacy (id-only) report cursor into created_at+id components.
+   *
+   * @return array{?\DateTimeInterface, ?int, ?int}
+   */
+  private function resolveReportLegacyCursor(
+    ?\DateTimeInterface $cursor_created_at,
+    ?int $cursor_id,
+    ?int $legacy_cursor_id = null,
+  ): array {
+    if (null !== $legacy_cursor_id && (null === $cursor_created_at || null === $cursor_id)) {
+      $legacy_report = $this->report_repository->find($legacy_cursor_id);
+      if ($legacy_report instanceof ContentReport && $legacy_report->getCreatedAt() instanceof \DateTimeInterface) {
+        return [$legacy_report->getCreatedAt(), $legacy_report->getId(), null];
+      }
+    }
+
+    return [$cursor_created_at, $cursor_id, $legacy_cursor_id];
   }
 
   /**

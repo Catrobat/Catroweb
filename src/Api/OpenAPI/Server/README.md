@@ -153,6 +153,7 @@ All URIs are relative to *https://share.catrob.at/api*
 | _ModerationApiInterface_     | [**studioIdReportPost**](docs/Api/ModerationApiInterface.md#studioidreportpost)                       | **POST** /studio/{id}/report             | Report a studio                                                                                            |
 | _ModerationApiInterface_     | [**userIdAppealPost**](docs/Api/ModerationApiInterface.md#useridappealpost)                           | **POST** /user/{id}/appeal               | Appeal a hidden user profile                                                                               |
 | _ModerationApiInterface_     | [**userIdReportPost**](docs/Api/ModerationApiInterface.md#useridreportpost)                           | **POST** /user/{id}/report               | Report a user                                                                                              |
+| _ModerationApiInterface_     | [**userReportsGet**](docs/Api/ModerationApiInterface.md#userreportsget)                               | **GET** /user/reports                    | List reports filed by the current user                                                                     |
 | _NotificationsApiInterface_  | [**notificationIdReadPut**](docs/Api/NotificationsApiInterface.md#notificationidreadput)              | **PUT** /notification/{id}/read          | Mark specified notification as read                                                                        |
 | _NotificationsApiInterface_  | [**notificationsCountGet**](docs/Api/NotificationsApiInterface.md#notificationscountget)              | **GET** /notifications/count             | Count the number of unseen notifications                                                                   |
 | _NotificationsApiInterface_  | [**notificationsGet**](docs/Api/NotificationsApiInterface.md#notificationsget)                        | **GET** /notifications                   | Get user notifications                                                                                     |
@@ -267,6 +268,8 @@ All URIs are relative to *https://share.catrob.at/api*
 - [UserDataExportResponseProfile](docs/Model/UserDataExportResponseProfile.md)
 - [UserDataExportResponseProjectsInner](docs/Model/UserDataExportResponseProjectsInner.md)
 - [UserDataExportResponseReactionsInner](docs/Model/UserDataExportResponseReactionsInner.md)
+- [UserReportListResponse](docs/Model/UserReportListResponse.md)
+- [UserReportResponse](docs/Model/UserReportResponse.md)
 
 ## Documentation For Authorization
 

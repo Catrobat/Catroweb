@@ -1,0 +1,86 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ 'My Reports'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('user_reports_page') }}
+{% endblock %}
+
+{% block body %}
+
+  {{ include('Components/ChipSet.html.twig', {
+    chips: [
+      {
+        id: 'all-reports',
+        icon: 'flag',
+        title: '' ~ 'All'|trans({}, 'catroweb'),
+        controls: 'reports-all',
+      },
+      {
+        id: 'pending-reports',
+        icon: 'hourglass_empty',
+        title: '' ~ 'Pending'|trans({}, 'catroweb'),
+        controls: 'reports-pending',
+      },
+      {
+        id: 'accepted-reports',
+        icon: 'check_circle',
+        title: '' ~ 'Accepted'|trans({}, 'catroweb'),
+        controls: 'reports-accepted',
+      },
+      {
+        id: 'rejected-reports',
+        icon: 'cancel',
+        title: '' ~ 'Rejected'|trans({}, 'catroweb'),
+        controls: 'reports-rejected',
+      },
+    ],
+  }) }}
+
+  <div class="tab-content mt-4">
+    {% for category in [
+      {
+        id: 'reports-all',
+        emptyID: 'no-reports-all',
+        emptyMessage: '' ~ 'You haven\'t filed any reports yet.'|trans({}, 'catroweb'),
+      },
+      {
+        id: 'reports-pending',
+        emptyID: 'no-reports-pending',
+        emptyMessage: '' ~ 'No pending reports.'|trans({}, 'catroweb'),
+      },
+      {
+        id: 'reports-accepted',
+        emptyID: 'no-reports-accepted',
+        emptyMessage: '' ~ 'No accepted reports.'|trans({}, 'catroweb'),
+      },
+      {
+        id: 'reports-rejected',
+        emptyID: 'no-reports-rejected',
+        emptyMessage: '' ~ 'No rejected reports.'|trans({}, 'catroweb'),
+      },
+    ] %}
+    <div id="{{ category.id }}" class="tab-pane fade {% if loop.first %} show active {% endif %}" role="tabpanel">
+      <div class="no-reports text-center mb-5 d-block">
+        <span id="{{ category.emptyID }}">{{ category.emptyMessage }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="js-reports"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-error-message="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+       data-empty-message="{{ 'You haven\'t filed any reports yet.'|trans({}, 'catroweb') }}"
+       data-trans-project="{{ 'Project'|trans({}, 'catroweb') }}"
+       data-trans-comment="{{ 'Comment'|trans({}, 'catroweb') }}"
+       data-trans-user="{{ 'User'|trans({}, 'catroweb') }}"
+       data-trans-studio="{{ 'Studio'|trans({}, 'catroweb') }}"
+       data-trans-pending="{{ 'Pending'|trans({}, 'catroweb') }}"
+       data-trans-accepted="{{ 'Accepted'|trans({}, 'catroweb') }}"
+       data-trans-rejected="{{ 'Rejected'|trans({}, 'catroweb') }}"
+  ></div>
+{% endblock %}
+
+{% block javascript %}
+  {{ encore_entry_script_tags('user_reports_page') }}
+{% endblock %}

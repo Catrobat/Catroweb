@@ -306,6 +306,12 @@ open_api_server_moderation_useridreportpost:
   requirements:
     id: '^[a-zA-Z0-9\\-]+$'
 
+open_api_server_moderation_userreportsget:
+  path: /user/reports
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.moderation::userReportsGetAction
+
 # notifications
 open_api_server_notifications_notificationidreadput:
   path: /notification/{id}/read

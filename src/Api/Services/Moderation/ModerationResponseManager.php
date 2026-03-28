@@ -7,6 +7,7 @@ namespace App\Api\Services\Moderation;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\Moderation\ContentAppeal;
 use App\DB\Entity\Moderation\ContentReport;
+use App\DB\Enum\ReportState;
 
 class ModerationResponseManager extends AbstractResponseManager
 {
@@ -34,6 +35,39 @@ class ModerationResponseManager extends AbstractResponseManager
       'next_cursor' => $next_cursor,
       'has_more' => $has_more,
     ];
+  }
+
+  /**
+   * @param ContentReport[] $reports
+   *
+   * @return array{data: array<int, array<string, mixed>>, next_cursor: ?string, has_more: bool}
+   */
+  public function buildUserReportsResponse(array $reports, bool $has_more, ?string $next_cursor): array
+  {
+    $data = array_map(static fn (ContentReport $r): array => [
+      'id' => $r->getId(),
+      'content_type' => $r->getContentType(),
+      'content_id' => $r->getContentId(),
+      'category' => $r->getCategory(),
+      'status' => self::mapStateToStatus($r->getState()),
+      'created_at' => $r->getCreatedAt()?->format(\DateTimeInterface::ATOM),
+      'resolved_at' => $r->getResolvedAt()?->format(\DateTimeInterface::ATOM),
+    ], $reports);
+
+    return [
+      'data' => $data,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ];
+  }
+
+  private static function mapStateToStatus(int $state): string
+  {
+    return match (ReportState::tryFrom($state)) {
+      ReportState::Accepted => 'accepted',
+      ReportState::Rejected => 'rejected',
+      default => 'pending',
+    };
   }
 
   /**

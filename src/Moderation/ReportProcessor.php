@@ -6,6 +6,7 @@ namespace App\Moderation;
 
 use App\DB\Entity\Moderation\ContentModerationAction;
 use App\DB\Entity\Moderation\ContentReport;
+use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentReportRepository;
 use App\DB\Enum\ContentType;
@@ -140,7 +141,7 @@ class ReportProcessor
       }
     }
 
-    $this->resolveRelatedReports($report, $state, $admin, $now);
+    $all_reports = $this->resolveRelatedReports($report, $state, $admin, $now);
 
     $audit = new ContentModerationAction();
     $audit->setContentType($report->getContentType());
@@ -153,6 +154,8 @@ class ReportProcessor
     if ($report->getReporter() instanceof User) {
       $this->trust_calculator->invalidate($report->getReporter());
     }
+
+    $this->notifyReporters($report, $all_reports, $state, $content_type);
 
     $this->entity_manager->flush();
   }
@@ -191,7 +194,10 @@ class ReportProcessor
     }
   }
 
-  private function resolveRelatedReports(ContentReport $primary, ReportState $state, User $admin, \DateTime $now): void
+  /**
+   * @return ContentReport[]
+   */
+  private function resolveRelatedReports(ContentReport $primary, ReportState $state, User $admin, \DateTime $now): array
   {
     $related_reports = $this->report_repository->findReportsForContent(
       $primary->getContentType(),
@@ -211,6 +217,42 @@ class ReportProcessor
       if (null !== $related->getReporter()) {
         $this->trust_calculator->invalidate($related->getReporter());
       }
+    }
+
+    return $related_reports;
+  }
+
+  /**
+   * @param ContentReport[] $all_reports
+   */
+  private function notifyReporters(ContentReport $primary_report, array $all_reports, ReportState $state, ContentType $content_type): void
+  {
+    $notified_users = [];
+    $action = ReportState::Accepted === $state ? 'report_accepted' : 'report_rejected';
+    $message = ReportState::Accepted === $state
+      ? 'Your report regarding a '.$content_type->value.' has been reviewed and accepted.'
+      : 'Your report regarding a '.$content_type->value.' has been reviewed and rejected.';
+
+    foreach ($all_reports as $report) {
+      $reporter = $report->getReporter();
+      if (!$reporter instanceof User) {
+        continue;
+      }
+
+      $reporter_id = $reporter->getId();
+      if (isset($notified_users[$reporter_id])) {
+        continue;
+      }
+      $notified_users[$reporter_id] = true;
+
+      $notification = new ModerationNotification(
+        $reporter,
+        $content_type->value,
+        $primary_report->getContentId(),
+        $action,
+        $message,
+      );
+      $this->entity_manager->persist($notification);
     }
   }
 

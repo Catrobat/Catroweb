@@ -35,6 +35,13 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ url('user_reports') }}" id="sidebar-reports">
+          <span class="sidebar-link-icon material-icons">flag</span>
+          <span class="sidebar-link-text">{{ 'My Reports'|trans({}, 'catroweb') }}</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
           <span class="sidebar-link-icon material-icons">person</span>
           <span class="sidebar-link-text">{{ 'menu.profile'|trans({}, 'catroweb') }}</span>

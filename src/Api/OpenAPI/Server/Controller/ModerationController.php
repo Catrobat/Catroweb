@@ -1150,6 +1150,93 @@ class ModerationController extends Controller
   }
 
   /**
+   * Operation userReportsGet.
+   *
+   * List reports filed by the current user
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function userReportsGetAction(Request $request): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 20);
+    $cursor = $request->query->get('cursor');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->userReportsGet($limit, $cursor, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Returns the handler for this API controller.
    *
    * @return ModerationApiInterface

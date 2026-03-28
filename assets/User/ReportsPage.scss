@@ -1,0 +1,182 @@
+@use 'sass:color';
+@use '~@material/chips/deprecated/mdc-chips';
+@import '../Layout/Variables';
+@import '../Layout/Mixins';
+
+// ===== Report List Container =====
+.tab-content {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.tab-pane {
+  padding: 0;
+}
+
+// ===== Individual Report Item =====
+.report-item {
+  margin-bottom: 0.75rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ===== Report Card =====
+.report-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  transition: all 0.2s ease;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    transform: translateY(-1px);
+  }
+
+  @media screen and (width <= 576px) {
+    gap: 0.75rem;
+    padding: 0.875rem;
+    flex-wrap: wrap;
+  }
+}
+
+// ===== Report Icon =====
+.report-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+
+  .material-icons {
+    font-size: 24px;
+    color: #555;
+  }
+
+  @media screen and (width <= 576px) {
+    width: 40px;
+    height: 40px;
+
+    .material-icons {
+      font-size: 20px;
+    }
+  }
+}
+
+// ===== Report Content =====
+.report-content {
+  flex: 1;
+  min-width: 0;
+
+  @media screen and (width <= 576px) {
+    font-size: 0.875rem;
+  }
+}
+
+.report-title {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.report-category {
+  font-size: 0.8125rem;
+  color: #666;
+  margin-top: 0.125rem;
+  text-transform: capitalize;
+}
+
+.report-date {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 0.25rem;
+}
+
+.report-resolved {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 0.125rem;
+}
+
+// ===== Status Badge =====
+.report-status {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+
+  @media screen and (width <= 576px) {
+    margin-left: auto;
+  }
+}
+
+.report-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+}
+
+.report-badge-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.report-badge-accepted {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.report-badge-rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+// ===== Empty State =====
+.no-reports {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #6c757d;
+  font-size: 1rem;
+
+  @media screen and (width <= 576px) {
+    padding: 2rem 1rem;
+    font-size: 0.9375rem;
+  }
+}
+
+// ===== Chip Filter Styling =====
+.chip-selected {
+  color: rgb(0 0 0 / 87%);
+  background-color: #acacac;
+}
+
+.chip-default {
+  color: rgb(0 0 0 / 87%);
+  background-color: #e0e0e0;
+}
+
+.scroll-wrapper {
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+
+  .chip {
+    flex: 0 0 auto;
+  }
+}

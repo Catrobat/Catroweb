@@ -189,6 +189,42 @@ class ContentReportRepository extends ServiceEntityRepository
   /**
    * @return ContentReport[]
    */
+  public function findReportsByUser(
+    string $user_id,
+    int $limit,
+    ?\DateTimeInterface $cursor_created_at = null,
+    ?int $cursor_id = null,
+  ): array {
+    $qb = $this->createQueryBuilder('r');
+    $qb
+      ->where('IDENTITY(r.reporter) = :user_id')
+      ->setParameter('user_id', $user_id)
+      ->orderBy('r.created_at', 'DESC')
+      ->addOrderBy('r.id', 'DESC')
+      ->setMaxResults($limit + 1)
+    ;
+
+    if ($cursor_created_at instanceof \DateTimeInterface && null !== $cursor_id) {
+      $qb->andWhere(
+        $qb->expr()->orX(
+          $qb->expr()->lt('r.created_at', ':cursor_created_at'),
+          $qb->expr()->andX(
+            $qb->expr()->eq('r.created_at', ':cursor_created_at'),
+            $qb->expr()->lt('r.id', ':cursor_id')
+          )
+        )
+      )
+        ->setParameter('cursor_created_at', $cursor_created_at)
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    return $qb->getQuery()->getResult();
+  }
+
+  /**
+   * @return ContentReport[]
+   */
   public function findReportsForContent(string $content_type, string $content_id): array
   {
     return $this->findBy(
