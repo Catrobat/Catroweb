@@ -5,7 +5,6 @@ import { MDCMenuSurfaceFoundation } from '@material/menu-surface'
 import Swal from 'sweetalert2'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
-import Clipboard from 'clipboard'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 
 require('./OwnProjectList.scss')
@@ -317,36 +316,29 @@ export class OwnProjectList {
     const titleMessage = myProfileConfiguration.messages.displayName
     const textMessage = myProfileConfiguration.messages.checkoutMessage
 
-    const shareButton = document.querySelector('#project-share-action')
-
-    if (navigator.share && shareButton) {
-      shareButton.addEventListener('click', function () {
-        navigator
-          .share({
-            title: titleMessage,
-            text: textMessage,
-            url: projectUrl,
-          })
-          .then(() => {
-            showSnackbar('#share-snackbar', shareSuccessMessage)
-          })
-          .catch((e) => {
-            console.error(e)
-            showSnackbar('#share-snackbar', shareFailMessage, SnackbarDuration.error)
-          })
-      })
+    if (navigator.share) {
+      navigator
+        .share({
+          title: titleMessage,
+          text: textMessage,
+          url: projectUrl,
+        })
+        .then(() => {
+          showSnackbar('#share-snackbar', shareSuccessMessage)
+        })
+        .catch((e) => {
+          console.error(e)
+          showSnackbar('#share-snackbar', shareFailMessage, SnackbarDuration.error)
+        })
     } else {
-      const cb = new Clipboard('#project-share-action', {
-        text: function () {
-          return projectUrl
-        },
-      })
-      cb.on('success', function () {
-        showSnackbar('#share-snackbar', clipboardSuccessMessage)
-      })
-      cb.on('error', function () {
-        showSnackbar('#share-snackbar', clipboardFailMessage, SnackbarDuration.error)
-      })
+      navigator.clipboard
+        .writeText(projectUrl)
+        .then(() => {
+          showSnackbar('#share-snackbar', clipboardSuccessMessage)
+        })
+        .catch(() => {
+          showSnackbar('#share-snackbar', clipboardFailMessage, SnackbarDuration.error)
+        })
     }
   }
 
