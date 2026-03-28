@@ -23,7 +23,7 @@ class StudioApiProcessor extends AbstractApiProcessor
   ) {
   }
 
-  public function create(?User $user, ?string $name, string $description, bool $is_public, bool $enable_comments, ?UploadedFile $image_file): Studio
+  public function create(User $user, string $name, string $description, bool $is_public, bool $enable_comments, ?UploadedFile $image_file): Studio
   {
     return $this->studio_manager->createStudio(
       $user,

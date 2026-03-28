@@ -62,17 +62,10 @@ class StudioResponseManager extends AbstractResponseManager
       $data[] = $this->createStudioResponse($studio);
     }
 
-    $next_cursor = null;
-    if ($has_more && [] !== $studios) {
-      // For studios (UUID-based), we use offset-based cursor
-      // The cursor value represents how many items have been fetched so far
-      // This is handled by the caller who knows the offset
-    }
-
     return (new StudioListResponse())
       ->setData($data)
       ->setHasMore($has_more)
-      ->setNextCursor($next_cursor)
+      ->setNextCursor(null)
     ;
   }
 

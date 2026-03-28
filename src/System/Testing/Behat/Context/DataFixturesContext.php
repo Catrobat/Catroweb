@@ -1241,22 +1241,25 @@ class DataFixturesContext implements Context
    */
   public function thereAreStudioProjects(TableNode $table): void
   {
+    $studioManager = $this->getStudioManager();
+    \assert(null !== $studioManager);
+
     foreach ($table->getHash() as $config) {
       if (array_key_exists('id', $config)) {
         MyUuidGenerator::setNextValue($config['id']);
       }
 
       if (array_key_exists('studio_name', $config)) {
-        $studio = $this->getStudioManager()->findStudioByName($config['studio_name']);
+        $studio = $studioManager->findStudioByName($config['studio_name']);
       } else {
-        $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+        $studio = $studioManager->findStudioById($config['studio_id']);
       }
       $projectName = $config['project_name'] ?? $config['project'];
       $project = $this->getProjectManager()->findOneByName($projectName);
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
 
-      $studio_project = $this->getStudioManager()->addProjectToStudio($user, $studio, $project);
+      $studio_project = $studioManager->addProjectToStudio($user, $studio, $project);
       $this->getManager()->persist($studio_project);
     }
 
@@ -1268,20 +1271,23 @@ class DataFixturesContext implements Context
    */
   public function thereAreStudioComments(TableNode $table): void
   {
+    $studioManager = $this->getStudioManager();
+    \assert(null !== $studioManager);
+
     foreach ($table->getHash() as $config) {
       if (array_key_exists('id', $config)) {
         MyUuidGenerator::setNextValue($config['id']);
       }
 
       if (array_key_exists('studio_name', $config)) {
-        $studio = $this->getStudioManager()->findStudioByName($config['studio_name']);
+        $studio = $studioManager->findStudioByName($config['studio_name']);
       } else {
-        $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+        $studio = $studioManager->findStudioById($config['studio_id']);
       }
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
 
-      $studio_comment = $this->getStudioManager()->addCommentToStudio($user, $studio, $config['comment']);
+      $studio_comment = $studioManager->addCommentToStudio($user, $studio, $config['comment']);
       $this->getManager()->persist($studio_comment);
     }
 
@@ -1779,7 +1785,9 @@ class DataFixturesContext implements Context
    */
   public function theStudioWithNameShouldHaveValues(string $name, TableNode $table): void
   {
-    $studio = $this->getStudioManager()->findStudioByName($name);
+    $studioManager = $this->getStudioManager();
+    \assert(null !== $studioManager);
+    $studio = $studioManager->findStudioByName($name);
     Assert::assertNotNull($studio, 'Studio does not exist!');
     foreach ($table->getHash() as $set) {
       $result = match ($set['key']) {

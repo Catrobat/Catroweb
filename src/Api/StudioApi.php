@@ -113,7 +113,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
 
     $studio = $this->facade->getProcessor()->create(
       $user,
-      $name,
+      $name ?? '',
       $description ?? '',
       $is_public,
       $enable_comments,
