@@ -162,10 +162,6 @@
       <code><![CDATA[$project->getProgram()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code><![CDATA[getId]]></code>
-      <code><![CDATA[getName]]></code>
-      <code><![CDATA[getUser]]></code>
-      <code><![CDATA[getUserIdentifier]]></code>
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
   </file>
@@ -201,15 +197,6 @@
       <code><![CDATA[$this->facade->getAuthenticationManager()->getAuthenticatedUser()]]></code>
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
-  </file>
-  <file src="src/Application/Controller/Base/IndexController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$item->getId()]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[getId]]></code>
-      <code><![CDATA[getId]]></code>
-    </PossiblyNullReference>
   </file>
   <file src="src/Application/Controller/Ci/DownloadApkController.php">
     <PossiblyNullReference>

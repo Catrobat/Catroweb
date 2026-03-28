@@ -215,7 +215,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     }
 
     if (in_array('author', $attributes_list, true)) {
-      $data['author'] = $program?->getUser()->getUserIdentifier() ?? '';
+      $data['author'] = $program?->getUser()?->getUserIdentifier() ?? '';
     }
 
     if (in_array('featured_image', $attributes_list, true)) {

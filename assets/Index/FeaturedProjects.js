@@ -10,7 +10,7 @@ export class FeaturedProjects {
       return
     }
 
-    const { baseUrl, theme, flavor, isGuest, isWebview, transFeatured } = this.container.dataset
+    const { baseUrl, flavor, isGuest, isWebview, transFeatured } = this.container.dataset
 
     const apiUrl = `${baseUrl}/api/projects/featured?flavor=${flavor}&attributes=url,project_url,featured_image`
 
@@ -26,7 +26,7 @@ export class FeaturedProjects {
         }
 
         const slides = items.map((item) => ({
-          url: item.project_url ? item.project_url.replace('/app/', `/${theme}/`) : item.url,
+          url: item.project_url ? item.project_url.replace('/app/', `/${flavor}/`) : item.url,
           image: item.featured_image,
         }))
 
