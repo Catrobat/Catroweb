@@ -38,6 +38,7 @@ Feature: Searching for projects & users
   Scenario: search for projects, which contain the word "project"
     Given I am on "/app/search/project"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "project 1"
     Then I should see "test project"
@@ -49,6 +50,7 @@ Feature: Searching for projects & users
   Scenario: search for projects, which contain the word "Test"
     Given I am on "/app/search/Test"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "test advanced games"
     Then I should see "test advanced app"
@@ -61,6 +63,7 @@ Feature: Searching for projects & users
   Scenario: search for projects, which contain the word "test advanced"
     Given I am on "/app/search/Test%20advanced"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "test advanced games"
     Then I should see "test advanced app"
@@ -68,6 +71,7 @@ Feature: Searching for projects & users
   Scenario: search for projects, which contain the word "game"
     Given I am on "/app/search/game"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "test advanced games"
     Then I should see "project 1"
@@ -77,11 +81,13 @@ Feature: Searching for projects & users
   Scenario: search for projects, which contain the word "project and app"
     Given I am on "/app/search/project%20and%20app"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
 
   Scenario: search for projects, which contain the word "mindstorms"
     Given I am on "/app/search/mindstorms"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "Test advanced games"
     Then I should see "Catrobat"
@@ -91,6 +97,7 @@ Feature: Searching for projects & users
   Scenario: search for gmail should find no project
     Given I am on "/app/search/gmail"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "No projects found"
     Then I should see "No users found"
@@ -98,6 +105,7 @@ Feature: Searching for projects & users
   Scenario: search for gmx should find no project
     Given I am on "/app/search/gmx.at"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "No projects found"
     Then I should see "No users found"
@@ -106,6 +114,7 @@ Feature: Searching for projects & users
   Scenario: search for projects, which contain the word "User"
     Given I am on "/app/search/user"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "User1"
     Then I should see "User2"
@@ -120,6 +129,7 @@ Feature: Searching for projects & users
   Scenario: search for projects, which contain the word "Cat"
     Given I am on "/app/search/cat"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Search results"
     Then I should see "Cat"
     Then I should not see "User1"
@@ -138,6 +148,7 @@ Feature: Searching for projects & users
   Scenario: search for projects, which contain the word "Story"
     Given I am on "/app/search/story"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Test advanced app"
     Then I should see "Catrobat"
     Then I should see "test"
@@ -145,11 +156,6 @@ Feature: Searching for projects & users
   Scenario: search for projects with string "Test advanced app"
     Given I am on "/app/search/Test%20advanced%20app"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Test advanced app"
     Then I should see "No users found"
-
-
-
-
-
-
