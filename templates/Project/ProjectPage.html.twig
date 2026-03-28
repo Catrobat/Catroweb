@@ -1,20 +1,28 @@
 {% extends 'Layout/Base.html.twig' %}
 
+{% block title %}{{ project.name }} – Catrobat{% endblock %}
+
 {% block head %}
   {{ encore_entry_link_tags('project_page') }}
 
-  <meta property="og:image" content="{{ asset(project_details.screenshotBig) }}"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:image:secure_url" content="{{ asset(project_details.screenshotBig) }}"/>
-  <meta property="og:title" content="{{ project.name|escape('html_attr') }}"/>
-
-  {% if project.description is empty %}
-    <meta property="og:description"
-          content="{{ 'project.checkout_this_project'|trans({}, 'catroweb') }}"/>
+  {% set og_image_url = absolute_url(asset(project_details.screenshotBig)) %}
+  {% if project.description is not empty %}
+    {% set og_description = project.description|striptags|slice(0, 200)|escape('html_attr') %}
   {% else %}
-    <meta property="og:description" content="{{ project.description|escape('html_attr') }}"/>
+    {% set og_description = 'project.checkout_this_project'|trans({}, 'catroweb')|escape('html_attr') %}
   {% endif %}
-  <meta property="og:url" content="{{ url('program', {id: project.id}) }}"/>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ project.name|escape('html_attr') }} – Catrobat">
+  <meta property="og:description" content="{{ og_description }}">
+  <meta property="og:image" content="{{ og_image_url }}">
+  <meta property="og:image:secure_url" content="{{ og_image_url }}">
+  <meta property="og:url" content="{{ url('program', {id: project.id}) }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ project.name|escape('html_attr') }} – Catrobat">
+  <meta name="twitter:description" content="{{ og_description }}">
+  <meta name="twitter:image" content="{{ og_image_url }}">
 {% endblock %}
 
 {% block body %}
