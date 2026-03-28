@@ -7,6 +7,7 @@ const glob = require('glob-all')
 const path = require('path')
 const webpack = require('webpack')
 const noop = require('noop-webpack-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -55,11 +56,6 @@ Encore
     },
     {
       from: './node_modules/jquery-ui-dist/',
-      pattern: /\.js$/,
-      to: '../js/modules/[path][name].[ext]',
-    },
-    {
-      from: './node_modules/jquery-contextmenu/dist/',
       pattern: /\.js$/,
       to: '../js/modules/[path][name].[ext]',
     },
@@ -235,6 +231,16 @@ Encore
       failOnError: Encore.isProduction(),
       files: 'assets/',
     }),
+  )
+
+  .addPlugin(
+    process.env.ANALYZE
+      ? new BundleAnalyzerPlugin({
+          analyzerMode: 'static',
+          reportFilename: 'bundle-report.html',
+          openAnalyzer: true,
+        })
+      : noop(),
   )
 
 module.exports = Encore.getWebpackConfig()
