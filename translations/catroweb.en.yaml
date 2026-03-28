@@ -154,6 +154,7 @@ project:
   tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
+  my_projects: My projects
   trending: Trending projects
   popular: Popular projects
   most:
@@ -613,9 +614,6 @@ time:
 failure:
   upload: There was an error during the upload of your app.
 
-upload:
-  nsfwImage: "Upload rejected: an image in this project violates community guidelines"
-
 user:
   verification:
     email: 'Verify your email'
@@ -640,7 +638,6 @@ api:
     usernameContainsEmail: "Username must not contain an email address"
     countryCodeInvalid: "Country code invalid"
     pictureInvalid: "Profile picture invalid or not supported"
-    pictureNsfw: "Image rejected: content violates community guidelines"
   updateUser:
     currentPasswordMissing: "Current password is missing"
     currentPasswordWrong: "Current password is wrong"
