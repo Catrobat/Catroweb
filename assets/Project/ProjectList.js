@@ -2,6 +2,12 @@ import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../Layout/TopBar'
 
 require('./ProjectList.scss')
 
+const projectListRegistry = new Map()
+
+export function getProjectListInstance(containerId) {
+  return projectListRegistry.get(containerId) || null
+}
+
 export class ProjectList {
   constructor(
     container,
@@ -29,6 +35,10 @@ export class ProjectList {
     this.$chevronRight = container.querySelector('.project-list__chevrons__right')
     this.apiUrl = this.formatApiUrl(apiUrl)
     this.popStateHandler = this.closeFullView.bind(this)
+
+    if (container.id) {
+      projectListRegistry.set(container.id, this)
+    }
 
     this.fetchMore(true)
     this.initListeners()
@@ -202,7 +212,10 @@ export class ProjectList {
 
   handlePopState(event) {
     if (event.state && event.state.type === 'ProjectList' && event.state.full === true) {
-      document.querySelector(`#${event.state.id}`).data('list').openFullView()
+      const list = getProjectListInstance(event.state.id)
+      if (list) {
+        list.openFullView()
+      }
     }
   }
 

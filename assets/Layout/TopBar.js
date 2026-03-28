@@ -125,13 +125,25 @@ function hideTopBars() {
 }
 
 const PREVIOUS_NON_SEARCH_URL_KEY = 'previousNonSearchUrl'
+let searchBarPushedState = false
+
+function closeSearchBar() {
+  searchBarPushedState = false
+  sessionStorage.removeItem(PREVIOUS_NON_SEARCH_URL_KEY)
+  showTopBarDefault()
+}
 
 function handleSearchBackButton() {
   const previousUrl = sessionStorage.getItem(PREVIOUS_NON_SEARCH_URL_KEY)
 
   if (!isOnSearchPage()) {
     // Only the search bar was shown, no navigation happened
-    showTopBarDefault()
+    if (searchBarPushedState) {
+      // Pop the state we pushed when opening the search bar
+      window.history.back()
+    } else {
+      closeSearchBar()
+    }
     return
   }
 
@@ -145,6 +157,12 @@ function handleSearchBackButton() {
   }
 }
 
+window.addEventListener('popstate', function (event) {
+  if (searchBarPushedState && (!event.state || event.state.type !== 'search-bar-open')) {
+    closeSearchBar()
+  }
+})
+
 function showTopBarOptions() {
   if (optionsMenu) {
     optionsMenu.open = true
@@ -157,6 +175,10 @@ export function showTopBarSearch() {
   searchInput.focus()
   if (!isOnSearchPage()) {
     sessionStorage.setItem(PREVIOUS_NON_SEARCH_URL_KEY, window.location.href)
+    if (!searchBarPushedState) {
+      searchBarPushedState = true
+      window.history.pushState({ type: 'search-bar-open' }, '', window.location.href)
+    }
   }
 }
 

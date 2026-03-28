@@ -23,13 +23,7 @@ export class DefaultProjectLists {
         url += `&flavor=${flavor}`
       }
 
-      projectList.dataset.list = new ProjectList(
-        projectList,
-        category,
-        url,
-        property,
-        theme,
-      ).toString()
+      new ProjectList(projectList, category, url, property, theme)
     })
   }
 }
