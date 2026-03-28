@@ -6,6 +6,7 @@ namespace Tests\PhpUnit\Api;
 
 use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\Exceptions\ApiExceptionEventListener;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -15,25 +16,39 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversClass(ApiErrorResponse::class)]
+#[CoversClass(ApiExceptionEventListener::class)]
 class ErrorResponseTest extends TestCase
 {
-  public function testCreateStructuredErrorResponseReturnsValidJson(): void
+  public function testCreateReturnsValidJson(): void
   {
     $response = ApiErrorResponse::create(400, 'bad_request', 'Invalid input');
 
     self::assertSame(400, $response->getStatusCode());
     self::assertSame('application/json', $response->headers->get('Content-Type'));
 
-    $content = $response->getContent();
-    self::assertIsString($content);
-    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
-    self::assertArrayHasKey('error', $body);
+    $body = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
     self::assertSame(400, $body['error']['code']);
     self::assertSame('bad_request', $body['error']['type']);
     self::assertSame('Invalid input', $body['error']['message']);
+    self::assertArrayNotHasKey('details', $body['error']);
+  }
+
+  public function testCreateWithDetails(): void
+  {
+    $details = [
+      ['field' => 'email', 'message' => 'Email is required'],
+      ['field' => 'username', 'message' => 'Username too short'],
+    ];
+
+    $response = ApiErrorResponse::create(422, 'validation_error', 'Validation failed', $details);
+
+    $body = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    self::assertSame(422, $body['error']['code']);
+    self::assertSame('validation_error', $body['error']['type']);
+    self::assertCount(2, $body['error']['details']);
+    self::assertSame('email', $body['error']['details'][0]['field']);
   }
 
   public function testHttpStatusToErrorType(): void
@@ -50,7 +65,7 @@ class ErrorResponseTest extends TestCase
     self::assertSame('internal_error', ApiErrorResponse::httpStatusToErrorType(503));
   }
 
-  public function testApiExceptionEventListenerReturnsStructuredJsonForHttpException(): void
+  public function testListenerReturnsStructuredJsonForHttpException(): void
   {
     $listener = new ApiExceptionEventListener();
     $kernel = $this->createStub(HttpKernelInterface::class);
@@ -64,15 +79,13 @@ class ErrorResponseTest extends TestCase
     self::assertNotNull($response);
     self::assertSame(404, $response->getStatusCode());
 
-    $content = $response->getContent();
-    self::assertIsString($content);
-    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+    $body = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
     self::assertSame(404, $body['error']['code']);
     self::assertSame('not_found', $body['error']['type']);
     self::assertSame('Resource not found', $body['error']['message']);
   }
 
-  public function testApiExceptionEventListenerReturns500ForGenericException(): void
+  public function testListenerReturns500ForGenericException(): void
   {
     $listener = new ApiExceptionEventListener();
     $kernel = $this->createStub(HttpKernelInterface::class);
@@ -86,15 +99,13 @@ class ErrorResponseTest extends TestCase
     self::assertNotNull($response);
     self::assertSame(500, $response->getStatusCode());
 
-    $content = $response->getContent();
-    self::assertIsString($content);
-    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+    $body = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
     self::assertSame(500, $body['error']['code']);
     self::assertSame('internal_error', $body['error']['type']);
     self::assertSame('An unexpected error occurred.', $body['error']['message']);
   }
 
-  public function testApiExceptionEventListenerIgnoresNonApiRequests(): void
+  public function testListenerIgnoresNonApiRequests(): void
   {
     $listener = new ApiExceptionEventListener();
     $kernel = $this->createStub(HttpKernelInterface::class);
@@ -107,7 +118,7 @@ class ErrorResponseTest extends TestCase
     self::assertNull($event->getResponse());
   }
 
-  public function testApiExceptionEventListenerUsesStatusTextForEmptyMessage(): void
+  public function testListenerUsesStatusTextForEmptyMessage(): void
   {
     $listener = new ApiExceptionEventListener();
     $kernel = $this->createStub(HttpKernelInterface::class);
@@ -119,9 +130,7 @@ class ErrorResponseTest extends TestCase
 
     $response = $event->getResponse();
     self::assertNotNull($response);
-    $content = $response->getContent();
-    self::assertIsString($content);
-    $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+    $body = json_decode((string) $response->getContent(), true, 512, JSON_THROW_ON_ERROR);
     self::assertSame('Bad Request', $body['error']['message']);
   }
 }

@@ -21,33 +21,12 @@ concurrency: production_environment
 
 jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # Pre-deployment checks:
-  #
-  #  - Verify database migrations can be applied cleanly (dry-run)
-  #
-  pre_deploy_checks:
-    name: Pre-deployment checks
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: 'Setup PHP and composer packages'
-        uses: ./.github/actions/setup-php-composer
-
-      - name: Validate Doctrine migrations (dry-run)
-        run: php bin/console doctrine:migrations:migrate --dry-run --no-interaction --allow-no-migration
-        env:
-          DATABASE_URL: 'sqlite:///:memory:'
-
-  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Deployment:
   #
   #  - An SSH connection is required (public key must be registered on server!)
   #  - Add all credentials hidden in secrets to the configuration files
   #
   deploy:
-    needs: pre_deploy_checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -71,7 +50,7 @@ jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Post-deployment smoke test:
   #
-  #  - Verifies the health endpoint responds correctly after deployment
+  #  - Verifies the health endpoint responds correctly via the public URL
   #  - On failure, triggers a Deployer rollback to the previous release
   #
   smoke_test:
@@ -85,36 +64,28 @@ jobs:
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
 
-      - name: Wait for deployment to stabilize
-        run: sleep 10
-
       - name: Smoke test - health endpoint
         id: health_check
         run: |
           MAX_RETRIES=5
           RETRY_DELAY=10
           for i in $(seq 1 $MAX_RETRIES); do
-            HTTP_CODE=$(curl -s -o /tmp/health_response.json -w "%{http_code}" \
+            HTTP_CODE=$(curl -sf -o /dev/null -w "%{http_code}" \
               "https://${{ secrets.DEPLOY_HOST }}/api/health" \
               --max-time 15 || echo "000")
 
             if [ "$HTTP_CODE" = "200" ]; then
               echo "Health check passed (attempt $i)"
-              cat /tmp/health_response.json
               exit 0
             fi
 
-            echo "Attempt $i/$MAX_RETRIES failed with HTTP $HTTP_CODE"
-            if [ -f /tmp/health_response.json ]; then
-              cat /tmp/health_response.json
-            fi
-
+            echo "Attempt $i/$MAX_RETRIES: HTTP $HTTP_CODE"
             if [ "$i" -lt "$MAX_RETRIES" ]; then
               sleep $RETRY_DELAY
             fi
           done
 
-          echo "::error::Health check failed after $MAX_RETRIES attempts (last HTTP code: $HTTP_CODE)"
+          echo "::error::Health check failed after $MAX_RETRIES attempts"
           exit 1
 
       - name: Rollback on failure

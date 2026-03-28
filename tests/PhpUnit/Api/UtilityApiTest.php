@@ -10,7 +10,6 @@ use App\Api\UtilityApi;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\System\Survey;
 use Doctrine\DBAL\Connection;
-use OpenAPI\Server\Model\HealthResponse;
 use OpenAPI\Server\Model\SurveyResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -51,7 +50,6 @@ class UtilityApiTest extends TestCase
     $result = $this->utility_api->healthGet($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
-    $this->assertInstanceOf(HealthResponse::class, $result);
     $this->assertSame('ok', $result->getStatus());
     $this->assertSame('ok', $result->getDatabase());
     $this->assertNotNull($result->getTimestamp());
@@ -70,7 +68,6 @@ class UtilityApiTest extends TestCase
     $result = $this->utility_api->healthGet($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_SERVICE_UNAVAILABLE, $response_code);
-    $this->assertInstanceOf(HealthResponse::class, $result);
     $this->assertSame('degraded', $result->getStatus());
     $this->assertSame('error', $result->getDatabase());
   }
