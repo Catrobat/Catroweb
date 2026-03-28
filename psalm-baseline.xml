@@ -165,17 +165,6 @@
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/Api/Services/Studio/StudioApiProcessor.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$name]]></code>
-      <code><![CDATA[$user]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Api/Services/Studio/StudioResponseManager.php">
-    <PossiblyNullReference>
-      <code><![CDATA[getSchemeAndHttpHost]]></code>
-    </PossiblyNullReference>
-  </file>
   <file src="src/Api/Services/User/UserRequestValidator.php">
     <PossiblyNullArgument>
       <code><![CDATA[$email]]></code>
@@ -715,11 +704,9 @@
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
-      <code><![CDATA[addCommentToStudio]]></code>
       <code><![CDATA[addFollowing]]></code>
       <code><![CDATA[addFollowing]]></code>
       <code><![CDATA[addFollowing]]></code>
-      <code><![CDATA[addProjectToStudio]]></code>
       <code><![CDATA[findAchievementByInternalTitle]]></code>
       <code><![CDATA[findAll]]></code>
       <code><![CDATA[findAllAchievements]]></code>

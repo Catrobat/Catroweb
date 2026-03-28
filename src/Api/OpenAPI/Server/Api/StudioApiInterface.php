@@ -30,6 +30,8 @@
 
 namespace OpenAPI\Server\Api;
 
+use OpenAPI\Server\Model\StudioAddProjectRequest;
+use OpenAPI\Server\Model\StudioCommentCreateRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -49,6 +51,65 @@ interface StudioApiInterface
    * @param string|null $value value of the BearerAuth authentication method
    */
   public function setBearerAuth(?string $value): void;
+
+  /**
+   * Operation studioGet.
+   *
+   * List public studios
+   *
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioGet(
+    string $accept_language,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studioIdCommentsGet.
+   *
+   * List studio comments
+   *
+   * @param string      $id              (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdCommentsGet(
+    string $id,
+    string $accept_language,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studioIdCommentsPost.
+   *
+   * Add a comment to a studio
+   *
+   * @param string                     $id                            (required)
+   * @param StudioCommentCreateRequest $studio_comment_create_request (required)
+   * @param string                     $accept_language               (optional, default to 'en')
+   * @param int                        &$responseCode                 The HTTP Response Code
+   * @param array                      $responseHeaders               Additional HTTP headers to return with the response ()
+   */
+  public function studioIdCommentsPost(
+    string $id,
+    StudioCommentCreateRequest $studio_comment_create_request,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
 
   /**
    * Operation studioIdDelete.
@@ -85,6 +146,61 @@ interface StudioApiInterface
   ): array|object|null;
 
   /**
+   * Operation studioIdJoinPost.
+   *
+   * Join a studio
+   *
+   * @param string $id              (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdJoinPost(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation studioIdLeaveDelete.
+   *
+   * Leave a studio
+   *
+   * @param string $id              (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdLeaveDelete(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation studioIdMembersGet.
+   *
+   * List studio members
+   *
+   * @param string      $id              (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdMembersGet(
+    string $id,
+    string $accept_language,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation studioIdPost.
    *
    * Update a Studio (only available to studio admins)
@@ -110,6 +226,65 @@ interface StudioApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
+
+  /**
+   * Operation studioIdProjectsGet.
+   *
+   * List studio projects
+   *
+   * @param string      $id              (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdProjectsGet(
+    string $id,
+    string $accept_language,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studioIdProjectsPost.
+   *
+   * Add a project to a studio
+   *
+   * @param string                  $id                         (required)
+   * @param StudioAddProjectRequest $studio_add_project_request (required)
+   * @param string                  $accept_language            (optional, default to 'en')
+   * @param int                     &$responseCode              The HTTP Response Code
+   * @param array                   $responseHeaders            Additional HTTP headers to return with the response ()
+   */
+  public function studioIdProjectsPost(
+    string $id,
+    StudioAddProjectRequest $studio_add_project_request,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation studioIdProjectsProjectIdDelete.
+   *
+   * Remove a project from a studio
+   *
+   * @param string $id              (required)
+   * @param string $project_id      (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdProjectsProjectIdDelete(
+    string $id,
+    string $project_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
 
   /**
    * Operation studioPost.
