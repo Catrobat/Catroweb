@@ -30,7 +30,7 @@
 
 namespace OpenAPI\Server\Controller;
 
-use App\Api\ApiErrorResponse;
+use App\Api\Exceptions\ApiErrorResponse;
 use OpenAPI\Server\Api\ApiServer;
 use OpenAPI\Server\Service\SerializerInterface;
 use OpenAPI\Server\Service\ValidatorInterface;
