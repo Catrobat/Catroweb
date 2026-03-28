@@ -24,6 +24,14 @@
       <code><![CDATA[ProxyQueryInterface]]></code>
     </MoreSpecificReturnType>
   </file>
+  <file src="src/Admin/Projects/BrokenProjects/BrokenProjectsAdmin.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$query]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code><![CDATA[ProxyQueryInterface]]></code>
+    </MoreSpecificReturnType>
+  </file>
   <file src="src/Admin/Projects/ApproveProjects/ApproveProjectsAdmin.php">
     <LessSpecificReturnStatement>
       <code><![CDATA[$query]]></code>
@@ -348,9 +356,6 @@
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getScratchId()]]></code>
       <code><![CDATA[$project_id]]></code>
       <code><![CDATA[$project_id]]></code>
@@ -428,6 +433,7 @@
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
+
   <file src="src/Security/OAuth/HwiOauthUserProvider.php">
     <PossiblyNullArgument>
       <code><![CDATA[$response->getEmail()]]></code>
@@ -712,6 +718,8 @@
       <code><![CDATA[findAllUserAchievements]]></code>
       <code><![CDATA[findOneBy]]></code>
       <code><![CDATA[findOneBy]]></code>
+      <code><![CDATA[findStudioById]]></code>
+      <code><![CDATA[findStudioById]]></code>
       <code><![CDATA[findStudioById]]></code>
       <code><![CDATA[findStudioByName]]></code>
       <code><![CDATA[findStudioByName]]></code>
