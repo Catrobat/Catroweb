@@ -36,6 +36,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(name: 'flavor_idx', columns: ['flavor'])]
 #[ORM\Index(name: 'program_listing_idx', columns: ['visible', 'auto_hidden', 'private', 'debug_build', 'uploaded_at'])]
 #[ORM\Index(name: 'program_popularity_idx', columns: ['visible', 'auto_hidden', 'private', 'debug_build', 'popularity'])]
+#[ORM\Index(name: 'has_missing_files_idx', columns: ['has_missing_files'])]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program implements \Stringable
@@ -262,6 +263,9 @@ class Program implements \Stringable
 
   #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
   protected int $not_for_kids = 0;
+
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+  protected bool $has_missing_files = false;
 
   /**
    * No ORM entry.
@@ -934,5 +938,17 @@ class Program implements \Stringable
     }
 
     return $this->code_statistics->first() ?: null;
+  }
+
+  public function hasMissingFiles(): bool
+  {
+    return $this->has_missing_files;
+  }
+
+  public function setHasMissingFiles(bool $has_missing_files): Program
+  {
+    $this->has_missing_files = $has_missing_files;
+
+    return $this;
   }
 }

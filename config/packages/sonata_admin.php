@@ -81,6 +81,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'items' => [
               'admin.block.projects.overview',
               'admin.block.projects.approve',
+              'admin.block.projects.broken',
               'admin.block.featured.projects',
               'admin.block.example.projects',
               'admin.block.projects.upload',

@@ -14,6 +14,7 @@ use App\Admin\Moderation\ModerationQueueAdmin;
 use App\Admin\Moderation\ModerationQueueController;
 use App\Admin\Projects\ApproveProjects\ApproveProjectsAdmin;
 use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
+use App\Admin\Projects\BrokenProjects\BrokenProjectsAdmin;
 use App\Admin\Projects\ProjectsAdmin;
 use App\Admin\Projects\SpecialProjects\ExampleProjectAdmin;
 use App\Admin\Projects\SpecialProjects\FeaturedProjectAdmin;
@@ -248,6 +249,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => Program::class,
         'controller' => ApproveProjectsController::class,
+      ]
+    )
+  ;
+  $services->set('admin.block.projects.broken', BrokenProjectsAdmin::class)
+    ->tag(
+      'sonata.admin',
+      [
+        'manager_type' => 'orm',
+        'label' => 'Broken Projects',
+        'show_mosaic_button' => false,
+        'code' => null,
+        'model_class' => Program::class,
+        'controller' => null,
+        'pager_type' => 'simple',
       ]
     )
   ;

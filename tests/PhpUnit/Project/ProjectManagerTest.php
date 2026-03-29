@@ -22,8 +22,6 @@ use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Event\ProjectBeforeInsertEvent;
 use App\Project\Event\ProjectBeforePersistEvent;
 use App\Project\ProjectManager;
-use App\Security\ContentSafety\ContentSafetyResult;
-use App\Security\ContentSafety\ContentSafetyScanner;
 use App\Security\Malware\MalwareScanner;
 use App\Security\Malware\MalwareScanResult;
 use App\Storage\ScreenshotRepository;
@@ -86,6 +84,7 @@ class ProjectManagerTest extends TestCase
     $inserted_program = $this->createStub(Program::class);
 
     $this->file_repository = $this->createStub(ProjectFileRepository::class);
+    $this->file_repository->zip_dir = sys_get_temp_dir().'/catroweb_test_zips/';
     $this->screenshot_repository = $this->createStub(ScreenshotRepository::class);
     $this->extracted_file = $this->createStub(ExtractedCatrobatFile::class);
     $this->entity_manager = $this->createStub(EntityManager::class);
@@ -169,18 +168,7 @@ class ProjectManagerTest extends TestCase
       $url_helper,
       $security,
       $malware_scanner,
-      $this->createContentSafetyScanner(),
     );
-  }
-
-  private function createContentSafetyScanner(): ContentSafetyScanner
-  {
-    $safeResult = new ContentSafetyResult(safe: true, nsfwScore: 0.05, label: 'safe');
-    $scanner = $this->createStub(ContentSafetyScanner::class);
-    $scanner->method('scanImageBlob')->willReturn($safeResult);
-    $scanner->method('scanDataUri')->willReturn($safeResult);
-
-    return $scanner;
   }
 
   /**
@@ -238,6 +226,7 @@ class ProjectManagerTest extends TestCase
     $file = new File('/tmp/PhpUnitTest');
 
     $file_repository = $this->createMock(ProjectFileRepository::class);
+    $file_repository->zip_dir = sys_get_temp_dir().'/catroweb_test_zips/';
     $file_repository->expects($this->atLeastOnce())->method('saveProjectZipFile')->with($file, 1);
 
     $event_dispatcher = $this->createMock(EventDispatcherInterface::class);
