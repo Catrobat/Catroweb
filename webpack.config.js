@@ -77,7 +77,7 @@ Encore
   .addEntry('project_comments_page', './assets/Project/ProjectCommentsPage.js')
   .addEntry('project_code_view', './assets/Project/CodeView.js')
   .addStyleEntry('project_legacy_code_view', './assets/Project/LegacyCodeView.scss')
-  .addEntry('project_code_statistics', './assets/Project/CodeStatistics.js')
+  .addEntry('project_code_statistics_inline', './assets/Project/CodeStatisticsInline.js')
 
   .addEntry('user_achievements_page', './assets/User/AchievementsPage.js')
   .addEntry('user_notifications_page', './assets/User/NotificationsPage.js')

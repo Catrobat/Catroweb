@@ -795,6 +795,17 @@ codeStatistics:
   dataBricks: 'Data'
   deviceBricks: 'Device'
   specialBricks: 'Special'
+  yourScore: 'Your score:'
+  points: 'points'
+  abstraction: 'Abstraction and problem decomposition'
+  parallelism: 'Parallelism'
+  logicalThinking: 'Logical thinking'
+  synchronization: 'Synchronization'
+  flowControl: 'Flow control'
+  userInteractivity: 'User interactivity'
+  dataRepresentation: 'Data representation'
+  loading: 'Loading...'
+  bonus: 'Bonus'
 
 footer:
   title: "Join Over %user_count% Creative Minds!"

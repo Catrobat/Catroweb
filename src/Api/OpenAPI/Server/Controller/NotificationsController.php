@@ -56,7 +56,7 @@ class NotificationsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function notificationIdReadPutAction(Request $request, $id): Response
+  public function notificationIdReadPutAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -135,7 +135,7 @@ class NotificationsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function notificationsCountGetAction(Request $request): Response
+  public function notificationsCountGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -201,7 +201,7 @@ class NotificationsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function notificationsGetAction(Request $request): Response
+  public function notificationsGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -307,7 +307,7 @@ class NotificationsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function notificationsReadPutAction(Request $request): Response
+  public function notificationsReadPutAction(Request $request)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required

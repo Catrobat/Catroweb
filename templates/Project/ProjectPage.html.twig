@@ -4,6 +4,7 @@
 
 {% block head %}
   {{ encore_entry_link_tags('project_page') }}
+  {{ encore_entry_link_tags('project_code_statistics_inline') }}
 
   {% set og_image_url = absolute_url(asset(project_details.screenshotBig)) %}
   {% if project.description is not empty %}
@@ -191,6 +192,9 @@
   {% endif %}
 
   {{ include('Project/Details.html.twig') }}
+
+  {{ include('Project/CodeStatisticsInline.html.twig') }}
+
   <div id="recommended-projects">
     {# array values: [api project_type, translation, property to show] #}
     {% for category in [
@@ -316,4 +320,5 @@
   }
 </script>
   {{ encore_entry_script_tags('project_page') }}
+  {{ encore_entry_script_tags('project_code_statistics_inline') }}
 {% endblock %}

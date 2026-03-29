@@ -8,12 +8,14 @@ use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Base\TranslatorAwareTrait;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Special\SpecialProgram;
 use App\DB\Entity\Project\Tag;
 use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use App\Utils\ElapsedTimeStringFormatter;
+use OpenAPI\Server\Model\CodeStatisticsResponse;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ProjectsCategory;
@@ -331,6 +333,19 @@ class ProjectsResponseManager extends AbstractResponseManager
     $response->headers->set('Content-Type', 'application/zip');
 
     return $response;
+  }
+
+  public function createCodeStatisticsResponse(ProjectCodeStatistics $stats): CodeStatisticsResponse
+  {
+    return new CodeStatisticsResponse([
+      'score_abstraction' => $stats->getScoreAbstraction(),
+      'score_parallelism' => $stats->getScoreParallelism(),
+      'score_synchronization' => $stats->getScoreSynchronization(),
+      'score_logical_thinking' => $stats->getScoreLogicalThinking(),
+      'score_flow_control' => $stats->getScoreFlowControl(),
+      'score_user_interactivity' => $stats->getScoreUserInteractivity(),
+      'score_data_representation' => $stats->getScoreDataRepresentation(),
+    ]);
   }
 
   public function createUpdateFailureResponse(int $failure, string $locale): UpdateProjectFailureResponse

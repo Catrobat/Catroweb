@@ -15,10 +15,10 @@
     </div>
     <div class="d-none d-lg-block col-lg-4">
       {{ include('Components/RedirectButton.twig', {
-        id: 'projectCodeStatsButton',
-        url: path('code_statistics', {id: project.id}),
-        icon: 'show_chart',
-        text: 'statistics'|trans({}, 'catroweb'),
+        id: 'projectCodeViewButton',
+        url: path('code_view', {id: project.id}),
+        icon: 'extension',
+        text: 'codeview.title'|trans({}, 'catroweb'),
       }) }}
     </div>
   </div>
@@ -32,14 +32,6 @@
       <i class="material-icons ">get_app</i>
       <span class="icon-text ms-2">{{ 'project.downloads'|trans({'%downloads%': project_details.downloads}, 'catroweb') }}</span>
     </div>
-    <div class="d-none d-lg-block col-lg-4 mt-2">
-      {{ include('Components/RedirectButton.twig', {
-        id: 'projectCodeViewButton',
-        url: path('code_view', {id: project.id}),
-        icon: 'extension',
-        text: 'codeview.title'|trans({}, 'catroweb'),
-      }) }}
-    </div>
   </div>
 
   {% if project.getNotForKids() %}
@@ -52,15 +44,6 @@
   {% endif %}
 
   <div class="row mb-4">
-    <div class="col-6 mb-3 d-lg-none mt-3">
-      {{ include('Components/RedirectButton.twig', {
-        id: 'projectCodeStatsButton',
-        suffix: '-small',
-        url: path('code_statistics', {id: project.id}),
-        icon: 'show_chart',
-        text: 'statistics'|trans({}, 'catroweb'),
-      }) }}
-    </div>
     <div class="col-6 mb-3 d-lg-none mt-3">
       {{ include('Components/RedirectButton.twig', {
         id: 'projectCodeViewButton',

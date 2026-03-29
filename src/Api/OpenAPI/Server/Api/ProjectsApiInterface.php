@@ -68,6 +68,21 @@ interface ProjectsApiInterface
   ): array|object|null;
 
   /**
+   * Operation projectIdCodeStatisticsGet.
+   *
+   * Get computational thinking scores for a project
+   *
+   * @param string $id              (required)
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectIdCodeStatisticsGet(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation projectIdDelete.
    *
    * Delete a project

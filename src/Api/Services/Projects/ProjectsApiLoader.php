@@ -6,12 +6,14 @@ namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\CodeStatistics\CodeStatisticsService;
 use App\Project\ProjectManager;
 use App\Project\ProjectSearchService;
 use Psr\Log\LoggerInterface;
@@ -28,6 +30,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     private readonly TagRepository $tag_repository,
     private readonly ExtensionRepository $extension_repository,
     private readonly RequestStack $request_stack,
+    private readonly CodeStatisticsService $code_statistics_service,
     protected ProjectFileRepository $file_repository,
     protected ExtractedFileRepository $extracted_file_repository,
     protected LoggerInterface $logger,
@@ -134,5 +137,10 @@ class ProjectsApiLoader extends AbstractApiLoader
     }
 
     return $zipFile;
+  }
+
+  public function getCodeStatistics(Program $project): ?ProjectCodeStatistics
+  {
+    return $this->code_statistics_service->getStatistics($project);
   }
 }
