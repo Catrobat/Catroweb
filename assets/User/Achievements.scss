@@ -30,7 +30,12 @@
   justify-content: center;
   width: 50%;
   padding: 0 0.5rem;
+  margin-bottom: 1rem;
   text-align: center;
+
+  @media (width <= 767.98px) {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .achievement__badge {
