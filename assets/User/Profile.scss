@@ -41,17 +41,47 @@
 
 /* follower section */
 .follower-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
   a {
     &:hover {
       text-decoration: none;
     }
   }
 
-  img.round {
-    max-width: 4rem;
-    max-height: 4rem;
-    aspect-ratio: 1;
-    object-fit: cover;
+  &__avatar {
+    flex-shrink: 0;
+    width: 3.5rem;
+
+    img.round {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    @include media-breakpoint-up(sm) {
+      width: 4rem;
+    }
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+
+    .h4 {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__action {
+    flex-shrink: 0;
+    text-align: end;
   }
 
   &__info {

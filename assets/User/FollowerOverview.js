@@ -72,25 +72,23 @@ document.addEventListener('DOMContentLoaded', () => {
     return `
       <div class="col-12 my-3 ${itemClass}">
         <div class="follower-item">
-          <div class="row no-gutters">
-            <div class="col-2 my-auto">
-              <a href="${profileUrl}">
-                <img class="img-fluid round" src="${escapeAttr(avatarSrc)}" alt="">
-              </a>
-            </div>
-            <div class="col-6 ps-3 my-auto">
-              <a href="${profileUrl}">
-                <span class="h4">${escapeHtml(user.username)}</span>
-                <div class="text-dark">
-                  <span>${user.project_count} ${escapeHtml(trans.projects)}</span>
-                </div>
-                <div class="text-muted text-uppercase follower-item__info">
-                  ${followsMeHtml}
-                </div>
-              </a>
-            </div>
-            ${buttonHtml ? `<div class="col-4 text-end my-auto"><div>${buttonHtml}</div></div>` : ''}
+          <div class="follower-item__avatar">
+            <a href="${profileUrl}">
+              <img class="round" src="${escapeAttr(avatarSrc)}" alt="">
+            </a>
           </div>
+          <div class="follower-item__text">
+            <a href="${profileUrl}">
+              <span class="h4">${escapeHtml(user.username)}</span>
+              <div class="text-dark">
+                <span>${user.project_count} ${escapeHtml(trans.projects)}</span>
+              </div>
+              <div class="text-muted text-uppercase follower-item__info">
+                ${followsMeHtml}
+              </div>
+            </a>
+          </div>
+          ${buttonHtml ? `<div class="follower-item__action">${buttonHtml}</div>` : ''}
         </div>
       </div>`
   }
