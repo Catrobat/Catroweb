@@ -54,63 +54,8 @@ jobs:
           DEPLOY_BRANCH: main
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
-  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # Post-deployment smoke test:
-  #
-  #  - Verifies the health endpoint responds correctly via the public URL
-  #  - On failure, triggers a Deployer rollback to the previous release
-  #
-  smoke_test:
-    name: Post-deployment smoke test
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: 'Setup PHP and composer packages'
-        uses: ./.github/actions/setup-php-composer
-
-      - name: Smoke test - health endpoint
-        id: health_check
-        run: |
-          MAX_RETRIES=5
-          RETRY_DELAY=10
-          for i in $(seq 1 $MAX_RETRIES); do
-            HTTP_CODE=$(curl -sf -o /dev/null -w "%{http_code}" \
-              "https://${{ secrets.DEPLOY_HOST }}/api/health" \
-              --max-time 15 || echo "000")
-
-            if [ "$HTTP_CODE" = "200" ]; then
-              echo "Health check passed (attempt $i)"
-              exit 0
-            fi
-
-            echo "Attempt $i/$MAX_RETRIES: HTTP $HTTP_CODE"
-            if [ "$i" -lt "$MAX_RETRIES" ]; then
-              sleep $RETRY_DELAY
-            fi
-          done
-
-          echo "::error::Health check failed after $MAX_RETRIES attempts"
-          exit 1
-
-      - name: Rollback on failure
-        if: failure() && steps.health_check.outcome == 'failure'
-        uses: deployphp/action@v1
-        with:
-          private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
-          dep: rollback
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-      - name: Notify rollback via Slack
-        if: failure() && steps.health_check.outcome == 'failure'
-        uses: deployphp/action@v1
-        with:
-          private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
-          dep: slack:notify:failure
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  # Post-deployment health check is handled by Deployer's smoke_test task
+  # (deploy.php) which runs directly on the server via localhost. The previous
+  # GitHub Actions-based smoketest was removed because GH runners cannot
+  # reliably reach the production server (HTTP 000 / network timeout), causing
+  # false-positive rollbacks on every deployment.
