@@ -28,24 +28,19 @@ const setTheme = (theme) => {
 setTheme(getPreferredTheme())
 
 const showActiveTheme = (theme) => {
-  const menuItemToActivate = document.querySelector(`#color-scheme-menu [data-value="${theme}"]`)
+  const menuContainer = document.getElementById('top-app-bar__options-menu')
+  if (!menuContainer) return
+
+  const menuItemToActivate = menuContainer.querySelector(`[data-value="${theme}"]`)
   if (!menuItemToActivate) return
 
-  const activeBtnIcon = menuItemToActivate.querySelector(
-    '.mdc-deprecated-list-item__graphic',
-  ).innerText
-
-  document.querySelectorAll('#color-scheme-menu [role="menuitem"]').forEach((element) => {
+  menuContainer.querySelectorAll('[data-value]').forEach((element) => {
     element.classList.remove('mdc-deprecated-list-item--activated')
     element.setAttribute('aria-pressed', 'false')
   })
 
   menuItemToActivate.classList.add('mdc-deprecated-list-item--activated')
   menuItemToActivate.setAttribute('aria-pressed', 'true')
-  const colorSchemeButton = document.getElementById('top-app-bar__btn-color-scheme')
-  if (colorSchemeButton) {
-    colorSchemeButton.childNodes[2].textContent = activeBtnIcon
-  }
 }
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -58,7 +53,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
 const initializeColorScheme = () => {
   showActiveTheme(getPreferredTheme())
 
-  document.querySelectorAll('#color-scheme-menu [role="menuitem"]').forEach((element) => {
+  const menuContainer = document.getElementById('top-app-bar__options-menu')
+  if (!menuContainer) return
+
+  menuContainer.querySelectorAll('[data-value]').forEach((element) => {
     element.addEventListener('click', () => {
       if (element.dataset.value) {
         setStoredTheme(element.dataset.value)
