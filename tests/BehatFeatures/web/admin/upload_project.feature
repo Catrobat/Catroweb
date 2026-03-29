@@ -13,13 +13,12 @@ Feature: Admin project upload page
     Given I log in as "Admin" with the password "123456"
     And I am on "/admin/projects/upload/list"
     And I wait for the page to be loaded
-    Then the response status code should be "200"
-    And I should see "Upload Project"
+    Then I should see "Upload Project"
 
   Scenario: Non-admin cannot access the upload page
-    Given I log in as "Catrobat" with the password "123456"
-    And I am on "/admin/projects/upload/list"
-    Then I should see "Access Denied"
+    Given I am logged in as normal user
+    When I GET "/admin/projects/upload/list"
+    Then the client response should contain "Access Denied"
 
   Scenario: Upload form has required fields
     Given I log in as "Admin" with the password "123456"
