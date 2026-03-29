@@ -84,7 +84,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -160,7 +160,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -229,7 +229,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -308,7 +308,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -399,14 +399,14 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\UpdateProjectRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\UpdateProjectRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($update_project_request, $asserts);
     if ($response instanceof Response) {
@@ -493,7 +493,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -602,14 +602,14 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\ReactionRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ReactionRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($reaction_request, $asserts);
     if ($response instanceof Response) {
@@ -701,7 +701,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -790,7 +790,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -907,7 +907,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -954,7 +954,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1243,7 +1243,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1378,7 +1378,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1621,7 +1621,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1814,7 +1814,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1912,7 +1912,7 @@ class ProjectsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1945,7 +1945,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-_]+(,[a-zA-Z0-9\\-_]+)*$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-_]+(,[a-zA-Z0-9\-_]+)*$/');
     $response = $this->validate($attributes, $asserts);
     if ($response instanceof Response) {
       return $response;

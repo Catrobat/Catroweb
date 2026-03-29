@@ -372,7 +372,7 @@ class CommentsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -481,14 +481,14 @@ class CommentsController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\CommentCreateRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\CommentCreateRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($comment_create_request, $asserts);
     if ($response instanceof Response) {

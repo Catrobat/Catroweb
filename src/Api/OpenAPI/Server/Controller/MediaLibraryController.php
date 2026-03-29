@@ -231,7 +231,7 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -317,7 +317,7 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -413,14 +413,14 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaAssetUpdateRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\MediaAssetUpdateRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_asset_update_request, $asserts);
     if ($response instanceof Response) {
@@ -743,7 +743,7 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -837,7 +837,7 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -953,14 +953,14 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaCategoryRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\MediaCategoryRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_category_request, $asserts);
     if ($response instanceof Response) {
@@ -1063,7 +1063,7 @@ class MediaLibraryController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaCategoryRequest');
+    $asserts[] = new Assert\Type('OpenAPI\Server\Model\MediaCategoryRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_category_request, $asserts);
     if ($response instanceof Response) {

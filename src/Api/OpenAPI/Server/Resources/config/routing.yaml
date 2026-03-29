@@ -571,7 +571,7 @@ open_api_server_studio_studioidprojectspost:
     id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_studio_studioidprojectsprojectiddelete:
-  path: /studio/{id}/projects/{projectId}
+  path: /studio/{id}/projects/{project_id}
   methods: [DELETE]
   defaults:
     _controller: open_api_server.controller.studio::studioIdProjectsProjectIdDeleteAction
