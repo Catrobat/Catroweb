@@ -1,0 +1,61 @@
+{% extends base_template %}
+
+{% block list_table %}
+  <div class="col-xs-12 col-md-8">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Upload Project</h3>
+      </div>
+      <div class="box-body">
+        <p class="text-muted">
+          Upload a <code>.catrobat</code> project file on behalf of a user.
+          Maximum file size: <strong>100 MB</strong>.
+        </p>
+
+        <form method="post" action="{{ path('admin_upload_project_upload') }}" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="project_file">Project File (.catrobat) <span class="text-danger">*</span></label>
+            <input type="file" class="form-control" id="project_file" name="project_file" accept=".catrobat,.zip" required>
+            <p class="help-block">
+              The project name, description, and credits will be extracted from the uploaded file.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="username">Owner (Username) <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter the username of the project owner" required>
+            <p class="help-block">
+              The project will be uploaded as this user.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="flavor">Flavor</label>
+            <select class="form-control" id="flavor" name="flavor">
+              {% for f in flavors %}
+                <option value="{{ f }}" {{ f == 'pocketcode' ? 'selected' : '' }}>{{ f }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="private" value="1"> Private project
+              </label>
+              <p class="help-block">
+                If checked, the project will not be visible to other users.
+              </p>
+            </div>
+          </div>
+
+          <hr>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-upload"></i> Upload Project
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
