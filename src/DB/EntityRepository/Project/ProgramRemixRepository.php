@@ -102,6 +102,25 @@ class ProgramRemixRepository extends ServiceEntityRepository
     return array_unique(array_map(static fn (array $row): mixed => $row['ancestor_id'], $result_data));
   }
 
+  public function getDescendantIdsOfRootsByDescendantIds(array $program_ids): array
+  {
+    $qb = $this->createQueryBuilder('r1');
+
+    $result_data = $qb
+      ->select('r2.descendant_id')
+      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('r1.ancestor_id', 'p.id')->__toString())
+      ->innerJoin(ProgramRemixRelation::class, 'r2', Join::WITH, $qb->expr()->eq('r1.ancestor_id', 'r2.ancestor_id')->__toString())
+      ->where('r1.descendant_id IN (:program_ids)')
+      ->andWhere($qb->expr()->eq('p.remix_root', $qb->expr()->literal(true)))
+      ->setParameter('program_ids', $program_ids)
+      ->distinct()
+      ->getQuery()
+      ->getResult()
+    ;
+
+    return array_unique(array_map(static fn (array $row): mixed => $row['descendant_id'], $result_data));
+  }
+
   public function getDescendantRelations(array $ancestor_program_ids): array
   {
     $qb = $this->createQueryBuilder('r');
