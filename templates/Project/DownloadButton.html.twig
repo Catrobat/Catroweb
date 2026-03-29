@@ -35,13 +35,23 @@
     </button>
   </div>
 
-  {# State 3: Complete (Open in Pocket Code) #}
-  <button id="downloadComplete{{ suffix|default('') }}"
-          class="btn btn-download btn-download-complete d-none js-btn-download-open"
-          data-project-id='{{ project.id }}'
-          data-suffix='{{ suffix|default('') }}'
-  >
-    <i class="material-icons align-bottom">open_in_new</i>
-    <span>{{ 'project.openInApp'|trans({}, 'catroweb') }}</span>
-  </button>
+  {# State 3: Complete - context-dependent #}
+  {% if isWebview() %}
+    <button id="downloadComplete{{ suffix|default('') }}"
+            class="btn btn-download btn-download-complete d-none js-btn-download-open"
+            data-project-id='{{ project.id }}'
+            data-suffix='{{ suffix|default('') }}'
+    >
+      <i class="material-icons align-bottom">open_in_new</i>
+      <span>{{ 'project.openInApp'|trans({}, 'catroweb') }}</span>
+    </button>
+  {% else %}
+    <button id="downloadComplete{{ suffix|default('') }}"
+            class="btn btn-download btn-download-complete d-none"
+            disabled
+    >
+      <i class="material-icons align-bottom">check_circle</i>
+      <span>{{ 'project.downloaded'|trans({}, 'catroweb') }}</span>
+    </button>
+  {% endif %}
 </div>
