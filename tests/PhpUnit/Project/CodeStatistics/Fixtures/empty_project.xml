@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <programName>Empty Project</programName>
+    <catrobatLanguageVersion>0.998</catrobatLanguageVersion>
+  </header>
+  <objectList>
+    <object type="SingleSprite" name="Background">
+      <lookList/>
+      <soundList/>
+      <scriptList/>
+    </object>
+  </objectList>
+</program>

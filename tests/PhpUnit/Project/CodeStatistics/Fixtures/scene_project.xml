@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <programName>Scene Project</programName>
+    <catrobatLanguageVersion>0.998</catrobatLanguageVersion>
+  </header>
+  <scenes>
+    <scene>
+      <name>Scene 1</name>
+      <objectList>
+        <object type="SingleSprite" name="Background">
+          <lookList>
+            <look fileName="bg1.png" name="BG1"/>
+          </lookList>
+          <soundList/>
+          <scriptList>
+            <script type="StartScript">
+              <brickList>
+                <brick type="SetXBrick"/>
+                <brick type="BroadcastWaitBrick"/>
+              </brickList>
+            </script>
+          </scriptList>
+        </object>
+      </objectList>
+    </scene>
+    <scene>
+      <name>Scene 2</name>
+      <objectList>
+        <object type="SingleSprite" name="Player">
+          <lookList>
+            <look fileName="player.png" name="Player"/>
+          </lookList>
+          <soundList>
+            <sound fileName="jump.mp3" name="Jump"/>
+          </soundList>
+          <scriptList>
+            <script type="WhenScript">
+              <brickList>
+                <brick type="RepeatUntilBrick"/>
+                <brick type="SetVariableBrick"/>
+                <brick type="LoopEndBrick"/>
+              </brickList>
+            </script>
+          </scriptList>
+        </object>
+      </objectList>
+    </scene>
+  </scenes>
+  <programVariableList>
+    <userVariable>score</userVariable>
+  </programVariableList>
+</program>

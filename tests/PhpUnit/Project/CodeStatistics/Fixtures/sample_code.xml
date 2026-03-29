@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <programName>Test Project</programName>
+    <catrobatLanguageVersion>0.998</catrobatLanguageVersion>
+    <applicationVersion>1.0.0</applicationVersion>
+    <description>A test project for code statistics parsing.</description>
+  </header>
+  <settings/>
+  <programVariableList>
+    <userVariable>globalVar1</userVariable>
+    <userVariable>globalVar2</userVariable>
+  </programVariableList>
+  <programListOfLists>
+    <userVariable>globalList1</userVariable>
+  </programListOfLists>
+  <objectList>
+    <object type="SingleSprite" name="Background">
+      <lookList>
+        <look fileName="background.png" name="Background"/>
+      </lookList>
+      <soundList>
+        <sound fileName="sound1.mp3" name="Sound 1"/>
+      </soundList>
+      <scriptList>
+        <script type="StartScript">
+          <brickList>
+            <brick type="SetVariableBrick"/>
+            <brick type="ChangeVariableBrick"/>
+            <brick type="BroadcastBrick"/>
+          </brickList>
+        </script>
+        <script type="BroadcastScript">
+          <brickList>
+            <brick type="PlaySoundBrick"/>
+            <brick type="WaitBrick"/>
+          </brickList>
+        </script>
+      </scriptList>
+    </object>
+    <object type="SingleSprite" name="Cat">
+      <lookList>
+        <look fileName="cat1.png" name="Cat Look 1"/>
+        <look fileName="cat2.png" name="Cat Look 2"/>
+      </lookList>
+      <soundList>
+        <sound fileName="meow.mp3" name="Meow"/>
+        <sound fileName="purr.mp3" name="Purr"/>
+      </soundList>
+      <scriptList>
+        <script type="WhenScript">
+          <brickList>
+            <brick type="PlaceAtBrick"/>
+            <brick type="SetXBrick"/>
+            <brick type="ForeverBrick"/>
+            <brick type="MoveNStepsBrick"/>
+            <brick type="IfLogicBeginBrick"/>
+            <brick type="SetLookBrick"/>
+            <brick type="IfLogicElseBrick"/>
+            <brick type="HideBrick"/>
+            <brick type="IfLogicEndBrick"/>
+            <brick type="LoopEndBrick"/>
+          </brickList>
+        </script>
+        <script type="WhenClonedScript">
+          <brickList>
+            <brick type="ShowBrick"/>
+            <brick type="RepeatBrick"/>
+            <brick type="TurnLeftBrick"/>
+            <brick type="LoopEndBrick"/>
+            <brick type="DeleteThisCloneBrick"/>
+          </brickList>
+        </script>
+        <script type="WhenTouchDownScript">
+          <brickList>
+            <brick type="AskBrick"/>
+            <brick type="SpeakBrick"/>
+          </brickList>
+        </script>
+      </scriptList>
+      <objectVariableList>
+        <userVariable>localVar1</userVariable>
+        <userVariable>localVar2</userVariable>
+        <userVariable>localVar3</userVariable>
+      </objectVariableList>
+    </object>
+    <object type="GroupSprite" name="Group">
+      <objectList>
+        <object type="GroupItemSprite" name="Item1">
+          <lookList>
+            <look fileName="item1.png" name="Item Look"/>
+          </lookList>
+          <soundList/>
+          <scriptList>
+            <script type="StartScript">
+              <brickList>
+                <brick type="UserDefinedBrick"/>
+                <brick type="CloneBrick"/>
+                <brick type="AddItemToUserListBrick"/>
+              </brickList>
+            </script>
+            <script type="UserDefinedScript">
+              <brickList>
+                <brick type="SetSizeToBrick"/>
+              </brickList>
+            </script>
+          </scriptList>
+        </object>
+      </objectList>
+    </object>
+  </objectList>
+</program>
