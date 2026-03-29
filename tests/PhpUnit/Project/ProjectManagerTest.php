@@ -84,6 +84,7 @@ class ProjectManagerTest extends TestCase
     $inserted_program = $this->createStub(Program::class);
 
     $this->file_repository = $this->createStub(ProjectFileRepository::class);
+    $this->file_repository->zip_dir = sys_get_temp_dir().'/catroweb_test_zips/';
     $this->screenshot_repository = $this->createStub(ScreenshotRepository::class);
     $this->extracted_file = $this->createStub(ExtractedCatrobatFile::class);
     $this->entity_manager = $this->createStub(EntityManager::class);
@@ -225,6 +226,7 @@ class ProjectManagerTest extends TestCase
     $file = new File('/tmp/PhpUnitTest');
 
     $file_repository = $this->createMock(ProjectFileRepository::class);
+    $file_repository->zip_dir = sys_get_temp_dir().'/catroweb_test_zips/';
     $file_repository->expects($this->atLeastOnce())->method('saveProjectZipFile')->with($file, 1);
 
     $event_dispatcher = $this->createMock(EventDispatcherInterface::class);
