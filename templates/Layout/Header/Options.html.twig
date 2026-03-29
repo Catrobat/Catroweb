@@ -61,6 +61,9 @@
 
         {# Share current page (always shown) #}
         <li id="top-app-bar__btn-share-page" class="mdc-deprecated-list-item" role="menuitem"
+            {% if page_context == 'my_profile' and app.user.id|default(false) %}
+              data-share-url="{{ url('profile', {id: app.user.id}) }}"
+            {% endif %}
             data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
             data-trans-clipboard-success="{{ 'clipboard.success'|trans({}, 'catroweb') }}"
             data-trans-clipboard-fail="{{ 'clipboard.fail'|trans({}, 'catroweb') }}">
