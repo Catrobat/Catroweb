@@ -15,21 +15,19 @@ export class DefaultProjectLists {
     const projectLists = this.containerElement.querySelectorAll('.project-list')
 
     projectLists.forEach((projectList) => {
-      const { category, property, theme, flavor, baseUrl } = projectList.dataset
+      const { category, property, theme, flavor, baseUrl, url: customUrl } = projectList.dataset
 
-      let url = `${baseUrl}/api/projects?category=${category}`
-
-      if (flavor !== 'pocketcode' || category === 'example') {
-        url += `&flavor=${flavor}`
+      let url
+      if (customUrl) {
+        url = customUrl
+      } else {
+        url = `${baseUrl}/api/projects?category=${category}`
+        if (flavor !== 'pocketcode' || category === 'example') {
+          url += `&flavor=${flavor}`
+        }
       }
 
-      projectList.dataset.list = new ProjectList(
-        projectList,
-        category,
-        url,
-        property,
-        theme,
-      ).toString()
+      new ProjectList(projectList, category, url, property, theme)
     })
   }
 }

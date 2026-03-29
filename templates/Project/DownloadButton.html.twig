@@ -1,24 +1,57 @@
-<button id="projectDownloadButton{{ suffix|default('') }}" class="btn btn-primary btn-block js-btn-project-download"
-        data-path-url='{{ project_details.downloadUrl }}'
-        data-project-id='{{ project.id }}'
-        data-button-id='projectDownloadButton{{ suffix|default('') }}'
-        data-spinner-id='projectDownloadButton__loadingSpinner{{ suffix|default('') }}'
-        data-icon-id='projectDownloadButton__icon{{ suffix|default('') }}'
-        data-is-webview='{% if isWebview() %}true{% else %}false{% endif %}'
-        data-is-supported='{% if checkCatrobatLanguage(project_details.languageVersion) %}true{% else %}false{% endif %}'
-        data-is-not-supported-title="{{ 'project.updateAppHeaderDownload'|trans({}, 'catroweb') }}"
-        data-is-not-supported-text="{{ 'project.updateAppTextDownload'|trans({}, 'catroweb') }}"
->
+<div id="downloadButtonWrapper{{ suffix|default('') }}" class="download-button-wrapper">
+  {# State 1: Default (Download) #}
+  <button id="projectDownloadButton{{ suffix|default('') }}"
+          class="btn btn-primary btn-download js-btn-project-download"
+          data-path-url='{{ project_details.downloadUrl }}'
+          data-project-id='{{ project.id }}'
+          data-suffix='{{ suffix|default('') }}'
+          data-is-webview='{% if isWebview() %}true{% else %}false{% endif %}'
+          data-is-supported='{% if checkCatrobatLanguage(project_details.languageVersion) %}true{% else %}false{% endif %}'
+          data-is-not-supported-title="{{ 'project.updateAppHeaderDownload'|trans({}, 'catroweb') }}"
+          data-is-not-supported-text="{{ 'project.updateAppTextDownload'|trans({}, 'catroweb') }}"
+          data-trans-downloading="{{ 'project.downloading'|trans({}, 'catroweb') }}"
+          data-trans-open-in-app="{{ 'project.openInApp'|trans({}, 'catroweb') }}"
+          data-trans-download-error="{{ 'project.downloadErrorText'|trans({}, 'catroweb') }}"
+          data-trans-download-start="{{ 'project.downloadStartText'|trans({}, 'catroweb') }}"
+  >
+    <i class="material-icons align-bottom">get_app</i>
+    <span>{{ 'download'|trans({}, 'catroweb') }}</span>
+  </button>
 
-  {# Loading spinner during download #}
-  <i id="projectDownloadButton__loadingSpinner{{ suffix|default('') }}" class="material-icons text-start d-none">
-    {{ include('Components/LoadingSpinner.html.twig', {spinner_id: 'download-progressbar' ~ suffix|default(), size: 'small'}, false) }}
-  </i>
+  {# State 2: Downloading (progress bar + cancel) #}
+  <div id="downloadProgress{{ suffix|default('') }}" class="btn-download-progress d-none">
+    <div class="download-progress-track">
+      <div id="downloadProgressBar{{ suffix|default('') }}" class="download-progress-bar"></div>
+    </div>
+    <span id="downloadProgressText{{ suffix|default('') }}" class="download-progress-text">
+      {{ 'project.downloading'|trans({}, 'catroweb') }} 0%
+    </span>
+    <button id="downloadCancelBtn{{ suffix|default('') }}"
+            class="btn-download-cancel js-btn-download-cancel"
+            aria-label="Cancel download"
+            data-suffix='{{ suffix|default('') }}'
+    >
+      <i class="material-icons">close</i>
+    </button>
+  </div>
 
-  {# Icon #}
-  <i id="projectDownloadButton__icon{{ suffix|default('') }}" class="material-icons align-bottom">get_app</i>
-
-  {# Text #}
-  <span>{{ 'download'|trans({}, 'catroweb') }}</span>
-
-</button>
+  {# State 3: Complete - context-dependent #}
+  {% if isWebview() %}
+    <button id="downloadComplete{{ suffix|default('') }}"
+            class="btn btn-download btn-download-complete d-none js-btn-download-open"
+            data-project-id='{{ project.id }}'
+            data-suffix='{{ suffix|default('') }}'
+    >
+      <i class="material-icons align-bottom">open_in_new</i>
+      <span>{{ 'project.openInApp'|trans({}, 'catroweb') }}</span>
+    </button>
+  {% else %}
+    <button id="downloadComplete{{ suffix|default('') }}"
+            class="btn btn-download btn-download-complete d-none"
+            disabled
+    >
+      <i class="material-icons align-bottom">check_circle</i>
+      <span>{{ 'project.downloaded'|trans({}, 'catroweb') }}</span>
+    </button>
+  {% endif %}
+</div>

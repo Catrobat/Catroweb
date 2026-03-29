@@ -22,6 +22,10 @@ on:
     - cron: '0 4 * * *' # Every day at 04:00 UTC
   workflow_dispatch: # Allow manual trigger
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: catrobat/catroweb-test
@@ -162,45 +166,36 @@ jobs:
       fail-fast: false
       matrix:
         testSuite:
+          # --- API suites ---
           - api-authentication
-          - api-achievements
+          - api-achievements api-notifications # 11 + 13 scenarios
           - api-comments
           - api-media-library
           - api-moderation
-          - api-notifications
           - api-projects
-          - api-search
-          - api-followers
+          - api-search api-translation # 24 + 17 scenarios
+          - api-followers api-utility # 14 + 12 scenarios
           - api-studio
-          - api-tag
-          - api-translation
           - api-user
-          - api-utility
 
+          # --- Web suites ---
           - web-achievements
           - web-admin
-          - web-apk-generation
+          - web-apk-generation web-media-library # 13 + 14 scenarios
           - web-authentication
           - web-code-statistics
-          - web-code-view
+          - web-code-view web-scratch-integration web-system web-recommendations # 5 + 4 + 6 + 3 scenarios
           - web-comments
           - web-general
-          - web-media-library
           - web-notifications
           - web-profile
           - web-project
           - web-project-details
-          - web-project-list
-          - web-reactions
-          - web-recommendations
-          - web-remix-system
+          - web-project-list web-remix-system web-reactions # 8 + 11 + 12 scenarios
           - web-reports
-          - web-scratch-integration
-          - web-search
+          - web-search web-top-bar # 17 + 18 scenarios
           - web-studio
-          - web-top-bar
           - web-translation
-          - web-system
 
     steps:
       - name: Checkout
@@ -228,7 +223,15 @@ jobs:
         run: |
           docker exec app.catroweb bin/console cache:warmup -e test
 
+      # Derive a slug for log file names (replace spaces with underscores)
+      - name: Prepare suite variables
+        id: suite-vars
+        run: |
+          SLUG=$(echo "${{ matrix.testSuite }}" | tr ' ' '_')
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+
       # Test Run
+      # Matrix entries may contain multiple space-separated suites that run sequentially.
       - name: Behat ${{ matrix.testSuite }} tests
         id: test-run
         continue-on-error: true
@@ -238,11 +241,17 @@ jobs:
         #   the pipe status, which contains the correct exit code.
         run: |
           docker exec app.catroweb chmod -R 777 var
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty --xdebug \
-          |& tee tests/TestReports/Behat/${{ matrix.testSuite }}.log; \
-          TEST_RUN_EXIT_CODE=${PIPESTATUS[0]}
-          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
-          ( exit $TEST_RUN_EXIT_CODE )
+          OVERALL_EXIT=0
+          for suite in ${{ matrix.testSuite }}; do
+            docker exec app.catroweb bin/behat -s "$suite" -f pretty --xdebug \
+            |& tee -a tests/TestReports/Behat/${{ steps.suite-vars.outputs.slug }}.log; \
+            EXIT_CODE=${PIPESTATUS[0]}
+            if [ "$EXIT_CODE" -ne 0 ]; then
+              OVERALL_EXIT=$EXIT_CODE
+            fi
+          done
+          echo "test-run-exit-code=$OVERALL_EXIT" > $GITHUB_ENV
+          ( exit $OVERALL_EXIT )
 
       # Missing steps are not rerun by behat, without this step they will be lost in the process
       # We must explicitly kill the pipeline if the log contains undefined steps
@@ -250,8 +259,8 @@ jobs:
         if: always()
         id: missing-check
         run: |
-          if grep -q 'has missing steps. Define them with these snippets:' tests/TestReports/Behat/${{ matrix.testSuite }}.log; then
-            cat tests/TestReports/Behat/${{ matrix.testSuite }}.log
+          if grep -q 'has missing steps. Define them with these snippets:' tests/TestReports/Behat/${{ steps.suite-vars.outputs.slug }}.log; then
+            cat tests/TestReports/Behat/${{ steps.suite-vars.outputs.slug }}.log
             exit 1
           fi
 
@@ -261,8 +270,8 @@ jobs:
         if: always()
         id: pending-check
         run: |
-          if grep -q 'pending)' tests/TestReports/Behat/${{ matrix.testSuite }}.log; then
-            cat tests/TestReports/Behat/${{ matrix.testSuite }}.log
+          if grep -q 'pending)' tests/TestReports/Behat/${{ steps.suite-vars.outputs.slug }}.log; then
+            cat tests/TestReports/Behat/${{ steps.suite-vars.outputs.slug }}.log
             exit 1
           fi
 
@@ -271,17 +280,19 @@ jobs:
         if: always()
         id: chrome-exception-check
         run: |
-          if grep -q '\[DMore\\ChromeDriver\\StreamReadException\]' tests/TestReports/Behat/${{ matrix.testSuite }}.log; then
-            cat tests/TestReports/Behat/${{ matrix.testSuite }}.log
-            docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty
+          if grep -q '\[DMore\\ChromeDriver\\StreamReadException\]' tests/TestReports/Behat/${{ steps.suite-vars.outputs.slug }}.log; then
+            cat tests/TestReports/Behat/${{ steps.suite-vars.outputs.slug }}.log
+            for suite in ${{ matrix.testSuite }}; do
+              docker exec app.catroweb bin/behat -s "$suite" -f pretty
+            done
           fi
 
       - name: Upload Behat Test Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: logs_${{ matrix.testSuite }}
+          name: logs_${{ steps.suite-vars.outputs.slug }}
           path: |
-            tests/TestReports/Behat/${{ matrix.testSuite }}.log
+            tests/TestReports/Behat/${{ steps.suite-vars.outputs.slug }}.log
             tests/TestReports/TestScreenshots
 
       - name: Upload Coverage to Codecov
@@ -298,26 +309,36 @@ jobs:
         continue-on-error: true
         run: |
           docker exec app.catroweb chmod -R 777 var
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
-          TEST_RUN_EXIT_CODE=$?
-          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
-          ( exit $TEST_RUN_EXIT_CODE )
+          OVERALL_EXIT=0
+          for suite in ${{ matrix.testSuite }}; do
+            docker exec app.catroweb bin/behat -s "$suite" --rerun
+            EXIT_CODE=$?
+            if [ "$EXIT_CODE" -ne 0 ]; then OVERALL_EXIT=$EXIT_CODE; fi
+          done
+          echo "test-run-exit-code=$OVERALL_EXIT" > $GITHUB_ENV
+          ( exit $OVERALL_EXIT )
 
       - name: Rerun Behat Tests (2nd Attempt)
         if: env.test-run-exit-code != '0'
         id: test-rerun-2
         continue-on-error: true
         run: |
-          docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
-          TEST_RUN_EXIT_CODE=$?
-          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
-          ( exit $TEST_RUN_EXIT_CODE )
+          OVERALL_EXIT=0
+          for suite in ${{ matrix.testSuite }}; do
+            docker exec app.catroweb bin/behat -s "$suite" --rerun
+            EXIT_CODE=$?
+            if [ "$EXIT_CODE" -ne 0 ]; then OVERALL_EXIT=$EXIT_CODE; fi
+          done
+          echo "test-run-exit-code=$OVERALL_EXIT" > $GITHUB_ENV
+          ( exit $OVERALL_EXIT )
 
       - name: Rerun Behat Tests (3rd Attempt)
         if: env.test-run-exit-code != '0'
         id: test-rerun-3
         run: |
-          docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
+          for suite in ${{ matrix.testSuite }}; do
+            docker exec app.catroweb bin/behat -f pretty -s "$suite" --rerun || exit 1
+          done
 
       ## Failure debugging
       - name: Debug Failure

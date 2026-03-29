@@ -139,16 +139,6 @@
     follower_user_role: app.user is not null ? 'user' : 'guest',
   }) }}
 
-  <div class="js-user-share"
-       data-theme-display-name="{{ getThemeDisplayName() }}"
-       data-trans-check-out-user="{{ 'checkOutUser'|trans({}, 'catroweb') }}"
-       data-user-url="{{ url('profile', {id: profile.id}) }}"
-       data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
-       data-trans-share-error="{{ 'share.error'|trans({}, 'catroweb') }}"
-       data-trans-copy="{{ 'copy'|trans({}, 'catroweb') }}"
-       data-trans-clipboard-success="{{ 'clipboard.success_user'|trans({}, 'catroweb') }}"
-       data-trans-clipboard-fail="{{ 'clipboard.fail'|trans({}, 'catroweb') }}"
-  ></div>
 
 {% endblock %}
 

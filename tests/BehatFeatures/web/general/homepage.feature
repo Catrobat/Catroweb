@@ -129,6 +129,29 @@ Feature: Pocketcode homepage
     And the "#home-projects__example" element should contain "project 5"
     And the "#home-projects__example" element should contain "project 6"
 
+  Scenario: Guest user does not see My Projects section on the landing page
+    Given I am on homepage
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then the element "#home-projects__my_projects" should not exist
+
+  Scenario: Logged-in user with projects sees My Projects section on the landing page
+    Given I log in as "Catrobat"
+    And I go to the homepage
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then the element "#home-projects__my_projects" should exist
+    And one of the ".project-list__title" elements should contain "My projects"
+
+  Scenario: My Projects section appears before other categories on the landing page
+    Given I log in as "Catrobat"
+    And I go to the homepage
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then the element "#home-projects__my_projects" should exist
+    And the element "#home-projects__most_downloaded" should exist
+    And the element "#home-projects__my_projects ~ #home-projects__most_downloaded" should exist
+
   Scenario: User should be able to see legally required links
     Given I am on homepage
     And I wait for the page to be loaded

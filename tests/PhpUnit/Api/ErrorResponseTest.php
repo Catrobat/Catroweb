@@ -67,7 +67,7 @@ class ErrorResponseTest extends TestCase
 
   public function testListenerReturnsStructuredJsonForHttpException(): void
   {
-    $listener = new ApiExceptionEventListener();
+    $listener = new ApiExceptionEventListener(new \Psr\Log\NullLogger());
     $kernel = $this->createStub(HttpKernelInterface::class);
     $request = Request::create('/api/test');
     $exception = new NotFoundHttpException('Resource not found');
@@ -87,7 +87,7 @@ class ErrorResponseTest extends TestCase
 
   public function testListenerReturns500ForGenericException(): void
   {
-    $listener = new ApiExceptionEventListener();
+    $listener = new ApiExceptionEventListener(new \Psr\Log\NullLogger());
     $kernel = $this->createStub(HttpKernelInterface::class);
     $request = Request::create('/api/test');
     $exception = new \RuntimeException('Something broke');
@@ -107,7 +107,7 @@ class ErrorResponseTest extends TestCase
 
   public function testListenerIgnoresNonApiRequests(): void
   {
-    $listener = new ApiExceptionEventListener();
+    $listener = new ApiExceptionEventListener(new \Psr\Log\NullLogger());
     $kernel = $this->createStub(HttpKernelInterface::class);
     $request = Request::create('/some/web/page');
     $exception = new \RuntimeException('Something broke');
@@ -120,7 +120,7 @@ class ErrorResponseTest extends TestCase
 
   public function testListenerUsesStatusTextForEmptyMessage(): void
   {
-    $listener = new ApiExceptionEventListener();
+    $listener = new ApiExceptionEventListener(new \Psr\Log\NullLogger());
     $kernel = $this->createStub(HttpKernelInterface::class);
     $request = Request::create('/api/test');
     $exception = new BadRequestHttpException('');

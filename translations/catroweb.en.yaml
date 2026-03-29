@@ -154,6 +154,7 @@ project:
   tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
+  my_projects: My projects
   trending: Trending projects
   popular: Popular projects
   most:
@@ -216,6 +217,9 @@ project:
   reactionsText: Reactions
   downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
+  downloading: Downloading...
+  openInApp: Open in Pocket Code
+  downloaded: Downloaded
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
@@ -613,9 +617,6 @@ time:
 failure:
   upload: There was an error during the upload of your app.
 
-upload:
-  nsfwImage: "Upload rejected: an image in this project violates community guidelines"
-
 user:
   verification:
     email: 'Verify your email'
@@ -640,7 +641,6 @@ api:
     usernameContainsEmail: "Username must not contain an email address"
     countryCodeInvalid: "Country code invalid"
     pictureInvalid: "Profile picture invalid or not supported"
-    pictureNsfw: "Image rejected: content violates community guidelines"
   updateUser:
     currentPasswordMissing: "Current password is missing"
     currentPasswordWrong: "Current password is wrong"
@@ -832,6 +832,7 @@ catro-notifications:
     message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
 
 clipboard:
+  success: Link copied to clipboard!
   success_project: Link to project copied to clipboard!
   success_user: Link to user copied to clipboard!
   fail: Failed to copy link to clipboard! :(

@@ -2,26 +2,12 @@ import 'external-svg-loader'
 import '../Components/TabBar'
 import './FollowerOverview'
 
-import { shareLink } from '../Components/ShareLink'
 import { ProjectList } from '../Project/ProjectList'
 import { escapeHtml } from '../Components/HtmlEscape'
 import { achievementBadgeHtml } from './AchievementBadge'
 
 import './Profile.scss'
 import './Achievements.scss'
-
-const userShare = document.querySelector('.js-user-share')
-
-shareLink(
-  userShare.dataset.themeDisplayName,
-  userShare.dataset.transCheckOutUser,
-  userShare.dataset.userUrl,
-  userShare.dataset.transShareSuccess,
-  userShare.dataset.transShareError,
-  userShare.dataset.transCopy,
-  userShare.dataset.transClipboardSuccess,
-  userShare.dataset.transClipboardFail,
-)
 
 initUserProjects()
 initProfileAchievements()
@@ -94,9 +80,7 @@ function initUserProjects() {
 
     const url = `${baseUrl}/api/projects/user/${userId}`
 
-    projectList.dataset.list = JSON.stringify(
-      new ProjectList(projectList, 'user-projects', url, property, theme, 999, emptyMessage),
-    )
+    new ProjectList(projectList, 'user-projects', url, property, theme, 999, emptyMessage)
   })
 }
 

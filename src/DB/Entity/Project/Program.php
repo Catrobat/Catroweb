@@ -253,6 +253,13 @@ class Program implements \Stringable
   #[ORM\OneToMany(targetEntity: ProjectCustomTranslation::class, mappedBy: 'project', cascade: ['remove'])]
   private Collection $custom_translations;
 
+  /**
+   * @var Collection<int, ProjectCodeStatistics>
+   */
+  #[ORM\OneToMany(targetEntity: ProjectCodeStatistics::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OrderBy(['created_at' => 'DESC'])]
+  private Collection $code_statistics;
+
   #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
   protected int $not_for_kids = 0;
 
@@ -277,6 +284,7 @@ class Program implements \Stringable
     $this->scratch_remix_parent_relations = new ArrayCollection();
     $this->likes = new ArrayCollection();
     $this->custom_translations = new ArrayCollection();
+    $this->code_statistics = new ArrayCollection();
   }
 
   #[\Override]
@@ -909,5 +917,22 @@ class Program implements \Stringable
     $this->not_for_kids = $not_for_kids;
 
     return $this;
+  }
+
+  /**
+   * @return Collection<int, ProjectCodeStatistics>
+   */
+  public function getCodeStatistics(): Collection
+  {
+    return $this->code_statistics;
+  }
+
+  public function getLatestCodeStatistics(): ?ProjectCodeStatistics
+  {
+    if ($this->code_statistics->isEmpty()) {
+      return null;
+    }
+
+    return $this->code_statistics->first() ?: null;
   }
 }

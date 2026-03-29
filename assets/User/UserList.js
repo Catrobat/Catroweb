@@ -2,6 +2,12 @@ import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../Layout/TopBar'
 
 import './UserList.scss'
 
+const userListRegistry = new Map()
+
+export function getUserListInstance(containerId) {
+  return userListRegistry.get(containerId) || null
+}
+
 export class UserList {
   constructor(
     container,
@@ -34,6 +40,10 @@ export class UserList {
     const self = this
     this.popStateHandler = function () {
       self.closeFullView()
+    }
+
+    if (container.id) {
+      userListRegistry.set(container.id, this)
     }
 
     this.fetchMore(true)
@@ -138,7 +148,10 @@ export class UserList {
     window.addEventListener('popstate', function (event) {
       if (event.state != null) {
         if (event.state.type === 'UserList' && event.state.full === true) {
-          document.getElementById(event.state.id).dataset.list.openFullView()
+          const list = getUserListInstance(event.state.id)
+          if (list) {
+            list.openFullView()
+          }
         }
       }
     })
