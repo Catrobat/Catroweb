@@ -31,8 +31,6 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
-use OpenAPI\Server\Model\MediaAssetUpdateRequest;
-use OpenAPI\Server\Model\MediaCategoryRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -58,7 +56,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaAssetsGetAction(Request $request): Response
+  public function mediaAssetsGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -209,7 +207,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaAssetsIdDeleteAction(Request $request, $id): Response
+  public function mediaAssetsIdDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -233,7 +231,7 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -289,7 +287,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaAssetsIdGetAction(Request $request, $id): Response
+  public function mediaAssetsIdGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -319,7 +317,7 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -372,7 +370,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaAssetsIdPatchAction(Request $request, $id): Response
+  public function mediaAssetsIdPatchAction(Request $request, $id)
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -405,7 +403,7 @@ class MediaLibraryController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $media_asset_update_request = $this->deserialize($media_asset_update_request, MediaAssetUpdateRequest::class, $inputFormat);
+      $media_asset_update_request = $this->deserialize($media_asset_update_request, 'OpenAPI\Server\Model\MediaAssetUpdateRequest', $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -415,14 +413,14 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(MediaAssetUpdateRequest::class);
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaAssetUpdateRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_asset_update_request, $asserts);
     if ($response instanceof Response) {
@@ -484,7 +482,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaAssetsPostAction(Request $request): Response
+  public function mediaAssetsPostAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -621,7 +619,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaCategoriesGetAction(Request $request): Response
+  public function mediaCategoriesGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -721,7 +719,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaCategoriesIdDeleteAction(Request $request, $id): Response
+  public function mediaCategoriesIdDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -745,7 +743,7 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -803,7 +801,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaCategoriesIdGetAction(Request $request, $id): Response
+  public function mediaCategoriesIdGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -839,7 +837,7 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -912,7 +910,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaCategoriesIdPatchAction(Request $request, $id): Response
+  public function mediaCategoriesIdPatchAction(Request $request, $id)
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -945,7 +943,7 @@ class MediaLibraryController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $media_category_request = $this->deserialize($media_category_request, MediaCategoryRequest::class, $inputFormat);
+      $media_category_request = $this->deserialize($media_category_request, 'OpenAPI\Server\Model\MediaCategoryRequest', $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -955,14 +953,14 @@ class MediaLibraryController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(MediaCategoryRequest::class);
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaCategoryRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_category_request, $asserts);
     if ($response instanceof Response) {
@@ -1024,7 +1022,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaCategoriesPostAction(Request $request): Response
+  public function mediaCategoriesPostAction(Request $request)
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -1056,7 +1054,7 @@ class MediaLibraryController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $media_category_request = $this->deserialize($media_category_request, MediaCategoryRequest::class, $inputFormat);
+      $media_category_request = $this->deserialize($media_category_request, 'OpenAPI\Server\Model\MediaCategoryRequest', $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -1065,7 +1063,7 @@ class MediaLibraryController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(MediaCategoryRequest::class);
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\MediaCategoryRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_category_request, $asserts);
     if ($response instanceof Response) {
@@ -1126,7 +1124,7 @@ class MediaLibraryController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function mediaLibraryGetAction(Request $request): Response
+  public function mediaLibraryGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

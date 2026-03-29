@@ -31,8 +31,6 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\StudioApiInterface;
-use OpenAPI\Server\Model\StudioAddProjectRequest;
-use OpenAPI\Server\Model\StudioCommentCreateRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -58,7 +56,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioGetAction(Request $request): Response
+  public function studioGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -148,7 +146,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdCommentsGetAction(Request $request, $id): Response
+  public function studioIdCommentsGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -182,7 +180,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -248,7 +246,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdCommentsPostAction(Request $request, $id): Response
+  public function studioIdCommentsPostAction(Request $request, $id)
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -281,7 +279,7 @@ class StudioController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_comment_create_request = $this->deserialize($studio_comment_create_request, StudioCommentCreateRequest::class, $inputFormat);
+      $studio_comment_create_request = $this->deserialize($studio_comment_create_request, 'OpenAPI\Server\Model\StudioCommentCreateRequest', $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -291,14 +289,14 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(StudioCommentCreateRequest::class);
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\StudioCommentCreateRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_comment_create_request, $asserts);
     if ($response instanceof Response) {
@@ -358,7 +356,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdDeleteAction(Request $request, $id): Response
+  public function studioIdDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -382,7 +380,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -440,7 +438,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdGetAction(Request $request, $id): Response
+  public function studioIdGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -470,7 +468,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -526,7 +524,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdJoinPostAction(Request $request, $id): Response
+  public function studioIdJoinPostAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -550,7 +548,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -608,7 +606,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdLeaveDeleteAction(Request $request, $id): Response
+  public function studioIdLeaveDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -632,7 +630,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -688,7 +686,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdMembersGetAction(Request $request, $id): Response
+  public function studioIdMembersGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -722,7 +720,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -788,7 +786,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdPostAction(Request $request, $id): Response
+  public function studioIdPostAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -830,7 +828,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -920,7 +918,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdProjectsGetAction(Request $request, $id): Response
+  public function studioIdProjectsGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -954,7 +952,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1020,7 +1018,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdProjectsPostAction(Request $request, $id): Response
+  public function studioIdProjectsPostAction(Request $request, $id)
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -1044,7 +1042,7 @@ class StudioController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_add_project_request = $this->deserialize($studio_add_project_request, StudioAddProjectRequest::class, $inputFormat);
+      $studio_add_project_request = $this->deserialize($studio_add_project_request, 'OpenAPI\Server\Model\StudioAddProjectRequest', $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -1054,14 +1052,14 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(StudioAddProjectRequest::class);
+    $asserts[] = new Assert\Type('OpenAPI\\Server\\Model\\StudioAddProjectRequest');
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_add_project_request, $asserts);
     if ($response instanceof Response) {
@@ -1121,7 +1119,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdProjectsProjectIdDeleteAction(Request $request, $id, $project_id): Response
+  public function studioIdProjectsProjectIdDeleteAction(Request $request, $id, $project_id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -1146,7 +1144,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1154,7 +1152,7 @@ class StudioController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+/');
     $response = $this->validate($project_id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -1210,7 +1208,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioPostAction(Request $request): Response
+  public function studioPostAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

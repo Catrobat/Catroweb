@@ -609,4 +609,29 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     return $response;
   }
+
+  #[\Override]
+  public function projectIdCodeStatisticsGet(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null {
+    $project = $this->facade->getLoader()->findProjectByID($id, true);
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $stats = $this->facade->getLoader()->getCodeStatistics($project);
+    if (null === $stats) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->facade->getResponseManager()->createCodeStatisticsResponse($stats);
+  }
 }

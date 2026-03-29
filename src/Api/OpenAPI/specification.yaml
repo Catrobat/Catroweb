@@ -1067,6 +1067,26 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  '/project/{id}/code-statistics':
+    get:
+      tags:
+        - 'Projects'
+      summary: 'Get computational thinking scores for a project'
+      description: 'Returns the 7 computational thinking category scores for a project. Scores are computed from the project code.xml and cached.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeStatisticsResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
   '/project/{id}/reaction':
     parameters:
       - $ref: '#/components/parameters/Locale'
@@ -5028,3 +5048,35 @@ components:
           nullable: true
         has_more:
           type: boolean
+
+    CodeStatisticsResponse:
+      type: object
+      properties:
+        score_abstraction:
+          type: integer
+          description: 'Abstraction score (0-3)'
+          example: 2
+        score_parallelism:
+          type: integer
+          description: 'Parallelism score (0-3)'
+          example: 1
+        score_synchronization:
+          type: integer
+          description: 'Synchronization score (0-3)'
+          example: 3
+        score_logical_thinking:
+          type: integer
+          description: 'Logical thinking score (0-3)'
+          example: 2
+        score_flow_control:
+          type: integer
+          description: 'Flow control score (0-3)'
+          example: 2
+        score_user_interactivity:
+          type: integer
+          description: 'User interactivity score (0-3)'
+          example: 1
+        score_data_representation:
+          type: integer
+          description: 'Data representation score (0-3)'
+          example: 3

@@ -56,7 +56,7 @@ class FollowersController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdFollowPostAction(Request $request, $id): Response
+  public function userIdFollowPostAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -78,7 +78,7 @@ class FollowersController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -129,7 +129,7 @@ class FollowersController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdFollowersGetAction(Request $request, $id): Response
+  public function userIdFollowersGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -157,7 +157,7 @@ class FollowersController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -203,7 +203,7 @@ class FollowersController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdFollowingGetAction(Request $request, $id): Response
+  public function userIdFollowingGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -231,7 +231,7 @@ class FollowersController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
@@ -277,7 +277,7 @@ class FollowersController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdUnfollowDeleteAction(Request $request, $id): Response
+  public function userIdUnfollowDeleteAction(Request $request, $id)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -299,7 +299,7 @@ class FollowersController extends Controller
     $asserts = [];
     $asserts[] = new Assert\NotNull();
     $asserts[] = new Assert\Type('string');
-    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\\-]+$/');
     $response = $this->validate($id, $asserts);
     if ($response instanceof Response) {
       return $response;
