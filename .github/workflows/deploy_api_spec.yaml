@@ -7,6 +7,10 @@ on:
       - 'src/Api/OpenAPI/specification.yaml'
   workflow_dispatch:
 
+concurrency:
+  group: deploy-api-spec
+  cancel-in-progress: false
+
 jobs:
   deploy-swagger-ui:
     runs-on: ubuntu-latest

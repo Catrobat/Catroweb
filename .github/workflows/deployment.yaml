@@ -16,8 +16,11 @@ on:
     branches:
       - main
 
-# The concurrency: production_environment is important as it prevents concurrent deploys.
-concurrency: production_environment
+# The concurrency group prevents concurrent deploys. cancel-in-progress is false
+# to avoid leaving the server in a half-deployed state.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
 
 env:
   # Opt in to Node.js 24 for all actions (Node.js 20 is deprecated, deadline June 2nd, 2026)
