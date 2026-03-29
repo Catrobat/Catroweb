@@ -102,6 +102,13 @@ class ProjectsApiProcessor extends AbstractApiProcessor
       $project_touched = true;
     }
 
+    if (!is_null($request->isNotForKids())) {
+      if (2 !== $project->getNotForKids()) {
+        $project->setNotForKids($request->isNotForKids() ? 1 : 0);
+        $project_touched = true;
+      }
+    }
+
     if (!is_null($request->getScreenshot())) {
       try {
         $this->screenshot_repository->updateProjectAssets($request->getScreenshot(), $project->getId());

@@ -55,3 +55,51 @@ Feature: Update project
     And the following projects exist in the database:
       | id | name        | description   | credits | private |
       | 1  | Project One | First project |         | true    |
+
+  Scenario: Mark project as not safe for kids via API
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "not_for_kids": true
+      }
+    """
+    And I request "PUT" "/api/project/1"
+    Then the response status code should be "204"
+
+  Scenario: Mark project as safe for kids via API
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "not_for_kids": true
+      }
+    """
+    And I request "PUT" "/api/project/1"
+    Then the response status code should be "204"
+    Given I have the following JSON request body:
+    """
+      {
+        "not_for_kids": false
+      }
+    """
+    And I request "PUT" "/api/project/1"
+    Then the response status code should be "204"
+
+  Scenario: Cannot toggle not-for-kids when moderator-locked
+    Given the not-for-kids status of project "1" is set to "2"
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "not_for_kids": false
+      }
+    """
+    And I request "PUT" "/api/project/1"
+    Then the response status code should be "204"

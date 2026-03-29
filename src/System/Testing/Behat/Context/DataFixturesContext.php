@@ -395,6 +395,18 @@ class DataFixturesContext implements Context
   }
 
   /**
+   * @Given /^the not-for-kids status of project "([^"]*)" is set to "([^"]*)"$/
+   */
+  public function theNotForKidsStatusOfProjectIsSetTo(string $project_id, string $value): void
+  {
+    $em = $this->getManager();
+    $project = $em->getRepository(Program::class)->find($project_id);
+    Assert::assertNotNull($project, sprintf('Project "%s" not found', $project_id));
+    $project->setNotForKids((int) $value);
+    $em->flush();
+  }
+
+  /**
    * @Given /^there are project code statistics:$/
    */
   public function thereAreProjectCodeStatistics(TableNode $table): void

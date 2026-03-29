@@ -149,17 +149,24 @@
 
   <div class="mdc-menu mdc-menu-surface" id="project-action-menu">
     <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-      <li class="mdc-list-item" role="menuitem">
+      <li class="mdc-list-item" role="menuitem" data-action="toggle-visibility">
         <span class="mdc-list-item__ripple"></span>
         <span class="mdc-list-item__text"
               data-text-private="{{ 'project.setPrivateAction'|trans({}, 'catroweb') }}"
               data-text-public="{{ 'project.setPublicAction'|trans({}, 'catroweb') }}"></span>
       </li>
-      <li class="mdc-list-item" role="menuitem" id="project-share-action">
+      <li class="mdc-list-item" role="menuitem" data-action="share" id="project-share-action">
         <span class="mdc-list-item__ripple"></span>
         <span class="mdc-list-item__text">{{ 'project.shareAction'|trans({}, 'catroweb') }}</span>
       </li>
-      <li class="mdc-list-item" role="menuitem">
+      <li class="mdc-list-item" role="menuitem" data-action="not-for-kids" id="project-not-for-kids-action">
+        <span class="mdc-list-item__ripple"></span>
+        <span class="mdc-list-item__text"
+              data-text-not-for-kids="{{ 'MarkNotForKids'|trans({}, 'catroweb') }}"
+              data-text-safe-for-kids="{{ 'MarkSafeForKids'|trans({}, 'catroweb') }}"
+              data-text-moderator-locked="{{ 'snackbar.project_not_for_kids_moderator'|trans({}, 'catroweb') }}"></span>
+      </li>
+      <li class="mdc-list-item" role="menuitem" data-action="delete">
         <span class="mdc-list-item__ripple"></span>
         <span class="mdc-list-item__text">{{ 'project.deleteAction'|trans({}, 'catroweb') }}</span>
       </li>
@@ -187,6 +194,15 @@
       },
       visibility: {
         confirmationText: `{{ 'project.changeVisibility'|trans({}, 'catroweb')|escape('js')|raw }}`,
+      },
+      notForKids: {
+        confirmTitle: `{{ 'notForKids.confirmTitle'|trans({}, 'catroweb')|escape('js')|raw }}`,
+        confirmMark: `{{ 'notForKids.confirmMark'|trans({}, 'catroweb')|escape('js')|raw }}`,
+        confirmUnmark: `{{ 'notForKids.confirmUnmark'|trans({}, 'catroweb')|escape('js')|raw }}`,
+        confirmYes: `{{ 'notForKids.confirmYes'|trans({}, 'catroweb')|escape('js')|raw }}`,
+        moderatorLocked: `{{ 'snackbar.project_not_for_kids_moderator'|trans({}, 'catroweb')|escape('js')|raw }}`,
+        successMarked: `{{ 'snackbar.project_not_for_kids'|trans({}, 'catroweb')|escape('js')|raw }}`,
+        successUnmarked: `{{ 'snackbar.project_safe_for_kids'|trans({}, 'catroweb')|escape('js')|raw }}`,
       }
     },
     securitySettings: {
