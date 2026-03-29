@@ -17,10 +17,9 @@ Feature: As a visitor I want to be able to download projects
     And I wait for the page to be loaded
     Then the element "#projectDownloadButton-small" should be visible
     And I click "#projectDownloadButton-small"
-    And I wait 150 milliseconds
-    And the element "#share-snackbar" should be visible
-    And I should not see "Error occurred while downloading the project"
-    And I should see "Download has started..."
+    And I wait 500 milliseconds
+    Then the element "#downloadProgress-small" should be visible
+    And I should see "Downloading"
 
   @disabled
   Scenario: If download fails user should see popup and the file should not be downloaded | not testable because of timing issues
@@ -29,24 +28,24 @@ Feature: As a visitor I want to be able to download projects
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#projectDownloadButton-small" should be visible
-    And the element "#share-snackbar" should not be visible
     And I click "#projectDownloadButton-small"
-    And I wait 150 milliseconds
+    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     Then the element "#share-snackbar" should be visible
     And I should see "Error occurred while downloading the project"
     When I am on "/app/project/2"
     And I wait for the page to be loaded
     Then the element "#projectDownloadButton-small" should be visible
     And I click "#projectDownloadButton-small"
-    And I wait 150 milliseconds
+    And I wait for AJAX to finish
+    And I wait 500 milliseconds
     Then the element "#share-snackbar" should be visible
     And I should see "Error occurred while downloading the project"
 
   @disabled
-  Scenario: Clicking the download button should deactivate the download button until download is finished
-    # Disabled due to its flakiness
+  Scenario: Clicking the download button should show progress and hide the download button
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     When I click "#projectDownloadButton-small"
-    Then the element "#download-progressbar-small" should be visible
-    Then the button "#projectDownloadButton-small" should be disabled until download is finished
+    Then the element "#downloadProgress-small" should be visible
+    And the element "#projectDownloadButton-small" should not be visible
