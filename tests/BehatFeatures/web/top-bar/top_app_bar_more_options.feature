@@ -1,11 +1,11 @@
 @web
 Feature: On some page the top app bar should provide the user with additional functionalities.
 
-  Scenario: The options button should only be visible on specific pages
+  Scenario: The options button should be visible on the homepage
     Given I am on "/app"
     And I wait for the page to be loaded
     Then the element "#top-app-bar__default" should be visible
-    And the element "#top-app-bar__btn-options" should not exist
+    And the element "#top-app-bar__btn-options" should be visible
 
   Scenario: The options button should be visible on project pages
     Given there are users:
@@ -46,9 +46,9 @@ Feature: On some page the top app bar should provide the user with additional fu
     And I wait for the page to be loaded
     Then the element "#top-app-bar__default" should be visible
     And the element "#top-app-bar__btn-options" should be visible
-    Then the element "#top-app-bar__btn-share" should not be visible
+    Then the element "#top-app-bar__btn-share-page" should not be visible
     When I click "#top-app-bar__btn-options"
-    Then the element "#top-app-bar__btn-share" should be visible
+    Then the element "#top-app-bar__btn-share-page" should be visible
 
   Scenario: The options should contain a share button on user pages
     Given there are users:
@@ -61,6 +61,6 @@ Feature: On some page the top app bar should provide the user with additional fu
     And I wait for the page to be loaded
     Then the element "#top-app-bar__default" should be visible
     And the element "#top-app-bar__btn-options" should be visible
-    Then the element "#top-app-bar__btn-share" should not be visible
+    Then the element "#top-app-bar__btn-share-page" should not be visible
     When I click "#top-app-bar__btn-options"
-    Then the element "#top-app-bar__btn-share" should be visible
+    Then the element "#top-app-bar__btn-share-page" should be visible

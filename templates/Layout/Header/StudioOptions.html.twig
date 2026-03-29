@@ -1,15 +1,5 @@
 {% if '/studio/' in app.request.pathinfo and studio|default(false) and studio.id|default(false) %}
-  <ul class="mdc-deprecated-list mdc-deprecated-list--icon-list" role="menu" aria-hidden="true"
-      aria-orientation="vertical" tabindex="-1">
 
-    <li id="top-app-bar__btn-share"
-        class="mdc-deprecated-list-item"
-        role="menuitem"
-        data-clipboard-text="{{ url('studio_details', {id: studio.id}) }}">
-      <span class="mdc-deprecated-list-item__ripple"></span>
-      <span class="mdc-deprecated-list-item__graphic material-icons">share</span>
-      <span class="mdc-deprecated-list-item__text" id="top-app-bar__btn-share-text">{{ 'share.text'|trans({}, 'catroweb') }}</span>
-    </li>
     <li id="top-app-bar__btn-report-studio"
         class="mdc-deprecated-list-item"
         role="menuitem">
@@ -17,7 +7,5 @@
       <span class="mdc-deprecated-list-item__graphic material-icons">share</span>
       <span class="mdc-deprecated-list-item__text">{{ 'report'|trans({}, 'catroweb') }}</span>
     </li>
-
-  </ul>
 
 {% endif %}

@@ -829,6 +829,7 @@ catro-notifications:
     message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
 
 clipboard:
+  success: Link copied to clipboard!
   success_project: Link to project copied to clipboard!
   success_user: Link to user copied to clipboard!
   fail: Failed to copy link to clipboard! :(

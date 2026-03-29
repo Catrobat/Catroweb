@@ -24,8 +24,6 @@ import { initAnalyticsIfConsented, showCookieSettings } from './CookieConsent'
 // Start the stimulus app
 import '../bootstrap'
 
-import './ColorSchemeMenu'
-
 const appVersion = document.getElementById('app-version').dataset.appVersion
 const bugsnagApiKey = document.getElementById('bugsnag').dataset.apiKey
 if (bugsnagApiKey) {

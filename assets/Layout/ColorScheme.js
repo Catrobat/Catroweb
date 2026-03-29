@@ -5,6 +5,8 @@
  * Adapted by the Catroweb Project
  */
 
+import { showSnackbar, SnackbarDuration } from './Snackbar'
+
 const getStoredTheme = () => localStorage.getItem('theme')
 const setStoredTheme = (theme) => localStorage.setItem('theme', theme)
 
@@ -28,24 +30,19 @@ const setTheme = (theme) => {
 setTheme(getPreferredTheme())
 
 const showActiveTheme = (theme) => {
-  const menuItemToActivate = document.querySelector(`#color-scheme-menu [data-value="${theme}"]`)
+  const menuContainer = document.getElementById('top-app-bar__options-menu')
+  if (!menuContainer) return
+
+  const menuItemToActivate = menuContainer.querySelector(`[data-value="${theme}"]`)
   if (!menuItemToActivate) return
 
-  const activeBtnIcon = menuItemToActivate.querySelector(
-    '.mdc-deprecated-list-item__graphic',
-  ).innerText
-
-  document.querySelectorAll('#color-scheme-menu [role="menuitem"]').forEach((element) => {
+  menuContainer.querySelectorAll('[data-value]').forEach((element) => {
     element.classList.remove('mdc-deprecated-list-item--activated')
     element.setAttribute('aria-pressed', 'false')
   })
 
   menuItemToActivate.classList.add('mdc-deprecated-list-item--activated')
   menuItemToActivate.setAttribute('aria-pressed', 'true')
-  const colorSchemeButton = document.getElementById('top-app-bar__btn-color-scheme')
-  if (colorSchemeButton) {
-    colorSchemeButton.childNodes[2].textContent = activeBtnIcon
-  }
 }
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
@@ -58,7 +55,10 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
 const initializeColorScheme = () => {
   showActiveTheme(getPreferredTheme())
 
-  document.querySelectorAll('#color-scheme-menu [role="menuitem"]').forEach((element) => {
+  const menuContainer = document.getElementById('top-app-bar__options-menu')
+  if (!menuContainer) return
+
+  menuContainer.querySelectorAll('[data-value]').forEach((element) => {
     element.addEventListener('click', () => {
       if (element.dataset.value) {
         setStoredTheme(element.dataset.value)
@@ -69,8 +69,50 @@ const initializeColorScheme = () => {
   })
 }
 
+const initializeShareButton = () => {
+  const shareItem = document.getElementById('top-app-bar__btn-share-page')
+  if (!shareItem) return
+
+  const clipboardSuccess = shareItem.dataset.transClipboardSuccess
+  const clipboardFail = shareItem.dataset.transClipboardFail
+  const shareSuccess = shareItem.dataset.transShareSuccess
+
+  shareItem.addEventListener('click', async () => {
+    const url = window.location.href
+    const title = document.title
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, url })
+        showSnackbar('#share-snackbar', shareSuccess)
+      } catch (e) {
+        if (e.name !== 'AbortError') {
+          copyToClipboard(url, clipboardSuccess, clipboardFail)
+        }
+      }
+    } else {
+      copyToClipboard(url, clipboardSuccess, clipboardFail)
+    }
+  })
+}
+
+function copyToClipboard(text, successMessage, failMessage) {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      showSnackbar('#share-snackbar', successMessage)
+    })
+    .catch(() => {
+      showSnackbar('#share-snackbar', failMessage, SnackbarDuration.error)
+    })
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeColorScheme)
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeColorScheme()
+    initializeShareButton()
+  })
 } else {
   initializeColorScheme()
+  initializeShareButton()
 }
