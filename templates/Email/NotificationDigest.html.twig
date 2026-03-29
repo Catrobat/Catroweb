@@ -1,0 +1,109 @@
+{% extends 'Email/email.html.twig' %}
+
+{% block head_title %}
+  {{ 'emailDigest.title'|trans({}, 'catroweb') }}
+{% endblock %}
+
+{% block body_title %}
+  <div align="center">
+    {{ 'emailDigest.greeting'|trans({'%username%': user.username}, 'catroweb') }}
+  </div>
+{% endblock %}
+
+{% block body_content %}
+  <style>
+    .digest-section { margin-bottom: 20px; }
+    .digest-section h3 { font-size: 16px; color: #00acc1; margin-bottom: 8px; font-family: Arial, sans-serif; }
+    .digest-item { padding: 6px 0; border-bottom: 1px solid #eee; font-family: Arial, sans-serif; font-size: 14px; color: #333; }
+    .digest-count { background: #00acc1; color: #fff; border-radius: 12px; padding: 2px 8px; font-size: 12px; font-weight: bold; }
+    .btn-view-all { display: inline-block; padding: 12px 40px; background: #00acc1; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; font-family: Arial, sans-serif; margin-top: 20px; }
+  </style>
+
+  <div align="center" style="padding-bottom: 16px;">
+    <p style="font-family: Arial, sans-serif; font-size: 15px; color: #555;">
+      {{ 'emailDigest.intro'|trans({'%count%': total_count}, 'catroweb') }}
+    </p>
+  </div>
+
+  {% if grouped.comment is defined and grouped.comment|length > 0 %}
+    <div class="digest-section">
+      <h3>{{ 'emailDigest.section.comments'|trans({}, 'catroweb') }} <span class="digest-count">{{ grouped.comment|length }}</span></h3>
+      {% for notification in grouped.comment|slice(0, 5) %}
+        <div class="digest-item">{{ notification.message }}</div>
+      {% endfor %}
+      {% if grouped.comment|length > 5 %}
+        <div class="digest-item" style="color: #999;">
+          {{ 'emailDigest.andMore'|trans({'%count%': grouped.comment|length - 5}, 'catroweb') }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if grouped.reaction is defined and grouped.reaction|length > 0 %}
+    <div class="digest-section">
+      <h3>{{ 'emailDigest.section.reactions'|trans({}, 'catroweb') }} <span class="digest-count">{{ grouped.reaction|length }}</span></h3>
+      {% for notification in grouped.reaction|slice(0, 5) %}
+        <div class="digest-item">{{ notification.message }}</div>
+      {% endfor %}
+      {% if grouped.reaction|length > 5 %}
+        <div class="digest-item" style="color: #999;">
+          {{ 'emailDigest.andMore'|trans({'%count%': grouped.reaction|length - 5}, 'catroweb') }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if grouped.follower is defined and grouped.follower|length > 0 %}
+    <div class="digest-section">
+      <h3>{{ 'emailDigest.section.followers'|trans({}, 'catroweb') }} <span class="digest-count">{{ grouped.follower|length }}</span></h3>
+      {% for notification in grouped.follower|slice(0, 5) %}
+        <div class="digest-item">{{ notification.message }}</div>
+      {% endfor %}
+      {% if grouped.follower|length > 5 %}
+        <div class="digest-item" style="color: #999;">
+          {{ 'emailDigest.andMore'|trans({'%count%': grouped.follower|length - 5}, 'catroweb') }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if grouped.remix is defined and grouped.remix|length > 0 %}
+    <div class="digest-section">
+      <h3>{{ 'emailDigest.section.remixes'|trans({}, 'catroweb') }} <span class="digest-count">{{ grouped.remix|length }}</span></h3>
+      {% for notification in grouped.remix|slice(0, 5) %}
+        <div class="digest-item">{{ notification.message }}</div>
+      {% endfor %}
+      {% if grouped.remix|length > 5 %}
+        <div class="digest-item" style="color: #999;">
+          {{ 'emailDigest.andMore'|trans({'%count%': grouped.remix|length - 5}, 'catroweb') }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if grouped.moderation is defined and grouped.moderation|length > 0 %}
+    <div class="digest-section">
+      <h3>{{ 'emailDigest.section.moderation'|trans({}, 'catroweb') }} <span class="digest-count">{{ grouped.moderation|length }}</span></h3>
+      {% for notification in grouped.moderation|slice(0, 5) %}
+        <div class="digest-item">{{ notification.message }}</div>
+      {% endfor %}
+      {% if grouped.moderation|length > 5 %}
+        <div class="digest-item" style="color: #999;">
+          {{ 'emailDigest.andMore'|trans({'%count%': grouped.moderation|length - 5}, 'catroweb') }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div align="center">
+    <a href="{{ url('notifications', {theme: 'pocketcode'}) }}" class="btn-view-all">
+      {{ 'emailDigest.viewAll'|trans({}, 'catroweb') }}
+    </a>
+  </div>
+
+  <div align="center" style="padding-top: 20px;">
+    <small style="font-family: Arial, sans-serif; font-size: 12px; color: #999;">
+      {{ 'emailDigest.unsubscribe'|trans({}, 'catroweb') }}
+    </small>
+  </div>
+{% endblock %}

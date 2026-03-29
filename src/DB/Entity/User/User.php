@@ -14,6 +14,7 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\DB\EntityRepository\User\UserRepository;
 use App\DB\Generator\MyUuidGenerator;
+use App\User\Notification\EmailNotificationPreference;
 use App\Utils\CanonicalFieldsUpdater;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -191,6 +192,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $approved = false;
+
+  #[ORM\Column(type: Types::STRING, length: 20, options: ['default' => 'immediate'])]
+  protected string $emailNotificationPreference = 'immediate';
 
   #[ORM\Column(type: Types::TEXT, length: 65535, nullable: true)]
   protected ?string $about = null;
@@ -874,5 +878,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     $this->verification_requested_at = $verification_requested_at;
 
     return $this;
+  }
+
+  public function getEmailNotificationPreference(): EmailNotificationPreference
+  {
+    return EmailNotificationPreference::tryFrom($this->emailNotificationPreference)
+      ?? EmailNotificationPreference::IMMEDIATE;
+  }
+
+  public function setEmailNotificationPreference(EmailNotificationPreference $preference): void
+  {
+    $this->emailNotificationPreference = $preference->value;
   }
 }

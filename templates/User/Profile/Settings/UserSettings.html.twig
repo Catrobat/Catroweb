@@ -35,6 +35,12 @@
     </li>
     {% endif %}
     <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="modal" data-bs-target="#notification-settings-modal">
+        <span class="link-icon material-icons">notifications</span>
+        <span class="link-text">{{ 'emailNotificationPreference.title'|trans({}, 'catroweb') }}</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" data-bs-toggle="modal" data-bs-target="#account-settings-modal">
         <span class="link-icon material-icons">settings</span>
         <span class="link-text">{{ 'myprofile.accountSettings'|trans({}, 'catroweb') }}</span>

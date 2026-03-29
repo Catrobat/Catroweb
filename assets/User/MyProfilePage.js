@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const url = baseUrl + '/api/projects/user'
 
   new OwnProjectList(projectsContainer, url, theme, emptyMessage, baseUrl).initialize()
-  new OwnProfile(baseUrl).initializeAll()
+  new OwnProfile(baseUrl, theme).initializeAll()
   new VerifyAccountHandler().init()
 
   // Appeal button for suspended accounts
@@ -65,14 +65,16 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 class OwnProfile {
-  constructor(baseUrl) {
+  constructor(baseUrl, theme) {
     this.baseUrl = baseUrl
+    this.theme = theme
   }
 
   initializeAll() {
     this.initProfilePictureChange()
     this.initSaveProfileSettings()
     this.initSaveSecuritySettings()
+    this.initNotificationPreference()
     this.initExportData()
     this.initDeleteAccount()
   }
@@ -204,6 +206,45 @@ class OwnProfile {
           )
         }
       }
+    })
+  }
+
+  initNotificationPreference() {
+    const container = document.getElementById('notification-settings')
+    if (!container) return
+
+    const savedMsg = container.dataset.transSaved
+    const errorMsg = container.dataset.transError
+    const btn = document.getElementById('btn-save-notification-preference')
+    if (!btn) return
+
+    btn.addEventListener('click', async () => {
+      const selected = container.querySelector(
+        'input[name="email_notification_preference"]:checked',
+      )
+      if (!selected) return
+
+      btn.disabled = true
+      try {
+        const formData = new FormData()
+        formData.append('preference', selected.value)
+
+        const response = await fetch(this.baseUrl + '/' + this.theme + '/notification-preference', {
+          method: 'POST',
+          body: formData,
+        })
+
+        if (response.ok) {
+          MessageDialogs.showSuccessMessage(savedMsg).then(() => {
+            Modal.getInstance(document.getElementById('notification-settings-modal')).hide()
+          })
+        } else {
+          MessageDialogs.showErrorMessage(errorMsg)
+        }
+      } catch {
+        MessageDialogs.showErrorMessage(errorMsg)
+      }
+      btn.disabled = false
     })
   }
 

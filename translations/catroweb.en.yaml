@@ -1144,3 +1144,32 @@ moderation:
     appeal_approved: "Your appeal has been approved. Your content is now visible again."
     appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
     admin_review_needed: "Content has been auto-hidden and requires review."
+
+emailDigest:
+  subject: "You have %count% new notification(s) on Catrobat"
+  title: "Your Notification Digest"
+  greeting: "Hi %username%!"
+  intro: "You have %count% new notification(s) since your last digest."
+  section:
+    comments: "Comments"
+    reactions: "Reactions"
+    followers: "Followers"
+    remixes: "Remixes"
+    moderation: "Moderation"
+  andMore: "...and %count% more"
+  viewAll: "View all notifications"
+  unsubscribe: "You can change your email notification preferences in your profile settings."
+
+emailNotificationPreference:
+  title: "Email notifications"
+  description: "Choose how often you receive email notifications about activity on your projects."
+  immediate: "Immediate"
+  immediateDescription: "Get notified right away"
+  daily: "Daily digest"
+  dailyDescription: "One email per day with all notifications"
+  weekly: "Weekly digest"
+  weeklyDescription: "One email per week with all notifications"
+  none: "None"
+  noneDescription: "No email notifications"
+  saved: "Email notification preference saved."
+  error: "Could not save your email notification preference."

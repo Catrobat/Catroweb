@@ -29,6 +29,12 @@ class CatroNotification
   #[ORM\Column(name: 'seen', type: Types::BOOLEAN, options: ['default' => false])]
   private bool $seen = false;
 
+  #[ORM\Column(name: 'created_at', type: Types::DATETIME_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
+  private \DateTimeInterface $createdAt;
+
+  #[ORM\Column(name: 'email_sent', type: Types::BOOLEAN, options: ['default' => false])]
+  private bool $emailSent = false;
+
   private string $twig_template = 'User/Notification/Type/Catro.html.twig';
 
   public function __construct(
@@ -46,6 +52,7 @@ class CatroNotification
     #[ORM\Column(name: 'type', type: Types::STRING)]
     private string $type = '',
   ) {
+    $this->createdAt = new \DateTime();
   }
 
   public function getId(): ?int
@@ -132,5 +139,25 @@ class CatroNotification
   public function getType(): string
   {
     return $this->type;
+  }
+
+  public function getCreatedAt(): \DateTimeInterface
+  {
+    return $this->createdAt;
+  }
+
+  public function setCreatedAt(\DateTimeInterface $createdAt): void
+  {
+    $this->createdAt = $createdAt;
+  }
+
+  public function isEmailSent(): bool
+  {
+    return $this->emailSent;
+  }
+
+  public function setEmailSent(bool $emailSent): void
+  {
+    $this->emailSent = $emailSent;
   }
 }

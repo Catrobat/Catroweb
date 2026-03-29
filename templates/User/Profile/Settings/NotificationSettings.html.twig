@@ -1,0 +1,61 @@
+{% extends 'Components/FullscreenModal.html.twig' %}
+{% set modal =
+  {
+    id: 'notification-settings-modal',
+    title: '' ~ 'emailNotificationPreference.title'|trans({}, 'catroweb'),
+    left_action:
+    {
+      id: 'notification_settings-cancel_action',
+      icon: 'close',
+      label: '' ~ 'cancel'|trans({}, 'catroweb'),
+      dismiss: true,
+    },
+  } %}
+{% block content %}
+  <div id="notification-settings"
+       data-current-preference="{{ profile.emailNotificationPreference.value }}"
+       data-trans-saved="{{ 'emailNotificationPreference.saved'|trans({}, 'catroweb') }}"
+       data-trans-error="{{ 'emailNotificationPreference.error'|trans({}, 'catroweb') }}">
+
+    <p class="text-muted small mb-3">{{ 'emailNotificationPreference.description'|trans({}, 'catroweb') }}</p>
+
+    <div class="list-group">
+      <label class="list-group-item list-group-item-action d-flex align-items-start">
+        <input type="radio" name="email_notification_preference" value="immediate" class="form-check-input me-3 mt-1"
+               {% if profile.emailNotificationPreference.value == 'immediate' %}checked{% endif %}>
+        <div>
+          <strong>{{ 'emailNotificationPreference.immediate'|trans({}, 'catroweb') }}</strong>
+          <div class="text-muted small">{{ 'emailNotificationPreference.immediateDescription'|trans({}, 'catroweb') }}</div>
+        </div>
+      </label>
+      <label class="list-group-item list-group-item-action d-flex align-items-start">
+        <input type="radio" name="email_notification_preference" value="daily" class="form-check-input me-3 mt-1"
+               {% if profile.emailNotificationPreference.value == 'daily' %}checked{% endif %}>
+        <div>
+          <strong>{{ 'emailNotificationPreference.daily'|trans({}, 'catroweb') }}</strong>
+          <div class="text-muted small">{{ 'emailNotificationPreference.dailyDescription'|trans({}, 'catroweb') }}</div>
+        </div>
+      </label>
+      <label class="list-group-item list-group-item-action d-flex align-items-start">
+        <input type="radio" name="email_notification_preference" value="weekly" class="form-check-input me-3 mt-1"
+               {% if profile.emailNotificationPreference.value == 'weekly' %}checked{% endif %}>
+        <div>
+          <strong>{{ 'emailNotificationPreference.weekly'|trans({}, 'catroweb') }}</strong>
+          <div class="text-muted small">{{ 'emailNotificationPreference.weeklyDescription'|trans({}, 'catroweb') }}</div>
+        </div>
+      </label>
+      <label class="list-group-item list-group-item-action d-flex align-items-start">
+        <input type="radio" name="email_notification_preference" value="none" class="form-check-input me-3 mt-1"
+               {% if profile.emailNotificationPreference.value == 'none' %}checked{% endif %}>
+        <div>
+          <strong>{{ 'emailNotificationPreference.none'|trans({}, 'catroweb') }}</strong>
+          <div class="text-muted small">{{ 'emailNotificationPreference.noneDescription'|trans({}, 'catroweb') }}</div>
+        </div>
+      </label>
+    </div>
+
+    <button id="btn-save-notification-preference" class="btn btn-primary w-100 mt-3">
+      {{ 'done'|trans({}, 'catroweb') }}
+    </button>
+  </div>
+{% endblock %}
