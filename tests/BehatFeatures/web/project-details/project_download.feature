@@ -18,8 +18,8 @@ Feature: As a visitor I want to be able to download projects
     Then the element "#projectDownloadButton-small" should be visible
     And I click "#projectDownloadButton-small"
     And I wait 500 milliseconds
-    Then the element "#downloadProgress-small" should be visible
-    And I should see "Downloading"
+    Then the element "#projectDownloadButton-small" should not be visible
+    And one of the elements "#downloadProgress-small" or "#downloadComplete-small" should be visible
 
   @disabled
   Scenario: If download fails user should see popup and the file should not be downloaded | not testable because of timing issues

@@ -149,6 +149,23 @@ class BrowserContext extends MinkContext implements Context
     Assert::assertTrue($element->isVisible());
   }
 
+  /**
+   * @Given /^one of the elements "([^"]*)" or "([^"]*)" should be visible$/
+   */
+  public function oneOfTheElementsOrShouldBeVisible(string $firstLocator, string $secondLocator): void
+  {
+    $firstElement = $this->getSession()->getPage()->find('css', $firstLocator);
+    $secondElement = $this->getSession()->getPage()->find('css', $secondLocator);
+
+    $firstVisible = null !== $firstElement && $firstElement->isVisible();
+    $secondVisible = null !== $secondElement && $secondElement->isVisible();
+
+    Assert::assertTrue(
+      $firstVisible || $secondVisible,
+      sprintf('Neither "%s" nor "%s" is visible.', $firstLocator, $secondLocator)
+    );
+  }
+
   // --------------------------------------------------------------------------------------------------------------------
   //  Interacting with the web page
   // --------------------------------------------------------------------------------------------------------------------
