@@ -1,17 +1,23 @@
 {% extends 'Layout/Base.html.twig' %}
 
+{% block title %}{{ profile.username }} – Catrobat{% endblock %}
+
 {% block head %}
 
   {{ encore_entry_link_tags('user_profile_page') }}
   {{ encore_entry_link_tags('user_follower_overview') }}
 
-  <meta property="og:type" content="website"/>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ profile.username|escape('html_attr') }} – Catrobat">
+  <meta property="og:url" content="{{ url('profile', {id: profile.id}) }}">
   {% if profile.avatar is not empty %}
-    <meta property="og:image" content="{{ asset(profile.avatar) }}"/>
-    <meta property="og:image:secure_url" content="{{ asset(profile.avatar) }}"/>
+    {% set og_avatar_url = absolute_url(asset(profile.avatar)) %}
+    <meta property="og:image" content="{{ og_avatar_url }}">
+    <meta property="og:image:secure_url" content="{{ og_avatar_url }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ profile.username|escape('html_attr') }} – Catrobat">
+    <meta name="twitter:image" content="{{ og_avatar_url }}">
   {% endif %}
-  <meta property="og:title" content="{{ profile.username|escape('html_attr') }}"/>
-  <meta property="og:url" content="{{ url('profile', {id: profile.id}) }}"/>
 
 {% endblock %}
 
