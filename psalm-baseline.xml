@@ -32,6 +32,14 @@
       <code><![CDATA[ProxyQueryInterface]]></code>
     </MoreSpecificReturnType>
   </file>
+  <file src="src/Admin/Projects/BrokenProjects/BrokenProjectsAdmin.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$query]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code><![CDATA[ProxyQueryInterface]]></code>
+    </MoreSpecificReturnType>
+  </file>
   <file src="src/Admin/Projects/SpecialProjects/ExampleProjectAdmin.php">
     <LessSpecificReturnStatement>
       <code><![CDATA[$query]]></code>
@@ -345,9 +353,6 @@
   <file src="src/Project/ProjectManager.php">
     <PossiblyNullArgument>
       <code><![CDATA[$extracted_file->getScreenshotPath()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getId()]]></code>

@@ -22,7 +22,6 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Event\ProjectBeforeInsertEvent;
 use App\Project\Event\ProjectBeforePersistEvent;
-use App\Security\ContentSafety\ContentSafetyScanner;
 use App\Security\Malware\MalwareScanner;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
@@ -37,7 +36,6 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -61,7 +59,6 @@ class ProjectManager
     private readonly ?UrlHelper $urlHelper,
     protected Security $security,
     private readonly MalwareScanner $malware_scanner,
-    private readonly ContentSafetyScanner $content_safety_scanner,
   ) {
   }
 
@@ -144,8 +141,6 @@ class ProjectManager
     $extracted_file = $this->file_extractor->extract($file);
 
     $this->file_sanitizer->sanitize($extracted_file);
-
-    $this->scanExtractedImagesForNsfw($extracted_file);
 
     try {
       $event = $this->event_dispatcher->dispatch(new ProjectBeforeInsertEvent($extracted_file));
@@ -242,25 +237,48 @@ class ProjectManager
     $this->entity_manager->flush();
     $this->entity_manager->refresh($project);
 
-    $this->file_repository->saveProjectZipFile($file, $project->getId());
+    // Safe file replacement: rename old zip before saving new one, restore on failure
+    $project_id = $project->getId() ?? throw new \RuntimeException('Project ID must not be null after persist');
+    $has_old_zip = $this->file_repository->checkIfProjectZipFileExists($project_id);
+    $backup_path = $this->file_repository->zip_dir.$project_id.'.catrobat.bak';
+    $filesystem = new Filesystem();
+
+    if ($has_old_zip) {
+      $filesystem->rename(
+        $this->file_repository->zip_dir.$project_id.'.catrobat',
+        $backup_path,
+        true,
+      );
+    }
+
+    try {
+      $this->file_repository->saveProjectZipFile($file, $project_id);
+    } catch (\Exception $e) {
+      $this->logger->error('UploadError -> saveProjectZipFile failed, restoring backup', ['exception' => $e->getMessage()]);
+      if ($has_old_zip && file_exists($backup_path)) {
+        $filesystem->rename($backup_path, $this->file_repository->zip_dir.$project_id.'.catrobat', true);
+      }
+
+      throw $e;
+    }
+
+    // New zip saved successfully, remove backup
+    if (file_exists($backup_path)) {
+      $filesystem->remove($backup_path);
+    }
 
     $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project));
     $this->notifyFollower($project);
-    $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$project->getId();
+    $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$project_id;
     if (is_dir($compressed_file_directory)) {
-      new Filesystem()->remove($compressed_file_directory);
+      $filesystem->remove($compressed_file_directory);
     }
 
     if (is_dir($extracted_file->getPath())) {
-      new Filesystem()->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$project->getId());
+      $filesystem->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$project_id);
     }
 
-    new Filesystem()->remove($extracted_file->getPath());
-
-    // remove old "cached" zips - they will be re-generated on a project download
-    if (!$this->file_repository->checkIfProjectZipFileExists($project->getId())) {
-      $this->file_repository->deleteProjectZipFile($project->getId());
-    }
+    $filesystem->remove($extracted_file->getPath());
 
     return $project;
   }
@@ -636,29 +654,6 @@ class ProjectManager
       'scratch' => $this->getScratchRemixesProjectsCount($flavor, $max_version),
       default => 0,
     };
-  }
-
-  private function scanExtractedImagesForNsfw(ExtractedCatrobatFile $extracted_file): void
-  {
-    $imagesDir = $extracted_file->getPath().'images/';
-    if (!is_dir($imagesDir)) {
-      return;
-    }
-
-    $finder = new Finder();
-    $finder->files()->in($imagesDir);
-    foreach ($finder as $file) {
-      try {
-        $result = $this->content_safety_scanner->scanImageFile($file->getRealPath());
-        if (!$result->safe) {
-          throw new InvalidCatrobatFileException('upload.nsfwImage', 422);
-        }
-      } catch (InvalidCatrobatFileException $e) {
-        throw $e;
-      } catch (\Throwable $e) {
-        $this->logger->warning('Content safety scan failed for file: '.$file->getRealPath().': '.$e->getMessage());
-      }
-    }
   }
 
   private function notifyFollower(Program $project): void
