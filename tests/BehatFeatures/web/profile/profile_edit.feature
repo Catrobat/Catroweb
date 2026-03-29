@@ -210,7 +210,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then I should see "Delete project"
     And the element "#project-action-menu" should be visible
-    When I click "#project-action-menu > ul > li:nth-child(3)"
+    When I click "#project-action-menu > ul > li[data-action='delete']"
     Then I should see "delete it"
     When I click ".swal2-cancel"
     Then I should not see "delete it"
@@ -225,7 +225,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then I should see "Delete project"
     And the element "#project-action-menu" should be visible
-    When I click "#project-action-menu > ul > li:nth-child(3)"
+    When I click "#project-action-menu > ul > li[data-action='delete']"
     Then I should see "delete it"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
@@ -239,7 +239,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then the element "#project-action-menu" should be visible
     And I should see "Set private"
-    When I click "#project-action-menu > ul > li:nth-child(1)"
+    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for the element ".own-project-list__project[data-id='1'] .loading-spinner-backdrop" to appear and if so to disappear again
@@ -247,7 +247,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then the element "#project-action-menu" should be visible
     And I should see "Set public"
-    When I click "#project-action-menu > ul > li:nth-child(1)"
+    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for the element ".own-project-list__project[data-id='1'] .loading-spinner-backdrop" to appear and if so to disappear again
@@ -259,7 +259,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then the element "#project-action-menu" should be visible
     And I should see "Set private"
-    When I click "#project-action-menu > ul > li:nth-child(1)"
+    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
     Then the element ".swal2-shown" should be visible
     When I click ".swal2-cancel"
     And I wait for AJAX to finish
@@ -273,7 +273,7 @@ Feature:
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then the element "#project-action-menu" should be visible
     And I should see "Set private"
-    When I click "#project-action-menu > ul > li:nth-child(1)"
+    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
@@ -282,7 +282,7 @@ Feature:
     When I click ".own-project-list__project[data-id='2'] .own-project-list__project__action"
     Then the element "#project-action-menu" should be visible
     And I should see "Set public"
-    When I click "#project-action-menu > ul > li:nth-child(1)"
+    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
@@ -295,7 +295,7 @@ Feature:
     When I click ".own-project-list__project[data-id='2'] .own-project-list__project__action"
     Then the element "#project-action-menu" should be visible
     And I should see "Set public"
-    When I click "#project-action-menu > ul > li:nth-child(1)"
+    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for the element ".own-project-list__project[data-id='2'] .loading-spinner-backdrop" to appear and if so to disappear again
