@@ -83,6 +83,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.projects.approve',
               'admin.block.featured.projects',
               'admin.block.example.projects',
+              'admin.block.projects.upload',
             ],
           ],
           'sonata.admin.group.user' => [

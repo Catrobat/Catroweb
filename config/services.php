@@ -17,6 +17,8 @@ use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
 use App\Admin\Projects\ProjectsAdmin;
 use App\Admin\Projects\SpecialProjects\ExampleProjectAdmin;
 use App\Admin\Projects\SpecialProjects\FeaturedProjectAdmin;
+use App\Admin\Projects\UploadProject\UploadProjectAdmin;
+use App\Admin\Projects\UploadProject\UploadProjectController;
 use App\Admin\Statistics\Translation\CommentMachineTranslationAdmin;
 use App\Admin\Statistics\Translation\Controller\CommentMachineTranslationAdminController;
 use App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController;
@@ -333,6 +335,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => ExampleProgram::class,
         'controller' => null,
+      ]
+    )
+  ;
+  $services->set('admin.block.projects.upload', UploadProjectAdmin::class)
+    ->tag(
+      'sonata.admin',
+      [
+        'manager_type' => 'orm',
+        'label' => 'Upload Project',
+        'code' => null,
+        'model_class' => Program::class,
+        'controller' => UploadProjectController::class,
       ]
     )
   ;
