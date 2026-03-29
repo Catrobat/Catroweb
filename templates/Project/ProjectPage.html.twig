@@ -260,16 +260,6 @@
        data-trans-rate-limited="{{ 'moderation.reaction.rate_limited'|trans({}, 'catroweb') }}"
   ></div>
 
-  <div class="js-project-share"
-       data-theme-display-name="{{ getThemeDisplayName() }}"
-       data-trans-check-out-project="{{ 'checkOutProject'|trans({}, 'catroweb') }}"
-       data-project-url="{{ url('program', {id: project.id}) }}"
-       data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
-       data-trans-share-error="{{ 'share.error'|trans({}, 'catroweb') }}"
-       data-trans-copy="{{ 'copy'|trans({}, 'catroweb') }}"
-       data-trans-clipboard-success="{{ 'clipboard.success_project'|trans({}, 'catroweb') }}"
-       data-trans-clipboard-fail="{{ 'clipboard.fail'|trans({}, 'catroweb') }}"
-  ></div>
   <div class="js-project-description-credits"
        data-project-id="{{ project.id }}"
        data-has-description="{% if project.description %}true{% else %}false{% endif %}"

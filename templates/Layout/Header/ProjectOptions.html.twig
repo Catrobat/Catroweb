@@ -1,14 +1,5 @@
 {% if '/project/' in app.request.pathinfo and project|default(false) and project.id|default(false) %}
 
-    <li id="top-app-bar__btn-share"
-        class="mdc-deprecated-list-item"
-        role="menuitem"
-        data-clipboard-text="{{ url('program', {id: project.id}) }}">
-      <span class="mdc-deprecated-list-item__ripple"></span>
-      <span class="mdc-deprecated-list-item__graphic material-icons">share</span>
-      <span class="mdc-deprecated-list-item__text" id="top-app-bar__btn-share-text">{{ 'share.text'|trans({}, 'catroweb') }}</span>
-    </li>
-
   {% if not my_project|default(false) and not is_whitelisted|default(false) and not project.autoHidden %}
     <li id="top-app-bar__btn-report-project"
         class="mdc-deprecated-list-item"

@@ -1,14 +1,5 @@
 {% if '/user/' in app.request.pathinfo and profile|default(false) and profile.id|default(false) %}
 
-  <li id="top-app-bar__btn-share"
-      class="mdc-deprecated-list-item"
-      role="menuitem"
-      data-clipboard-text="{{ url('profile', {id: profile.id}) }}">
-    <span class="mdc-deprecated-list-item__ripple"></span>
-    <span class="mdc-deprecated-list-item__graphic material-icons">share</span>
-    <span class="mdc-deprecated-list-item__text" id="top-app-bar__btn-share-text">{{ 'share.text'|trans({}, 'catroweb') }}</span>
-  </li>
-
   {% if (app.user is null or app.user.id != profile.id) and not profile.approved %}
     <li id="top-app-bar__btn-report-user"
         class="mdc-deprecated-list-item"

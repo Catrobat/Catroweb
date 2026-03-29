@@ -7,7 +7,7 @@ import { TranslateProgram } from '../Translate/TranslateProgram'
 import { TranslateComments } from '../Translate/TranslateComments'
 import { ProjectList } from './ProjectList'
 import { Project } from './Project'
-import { shareLink } from '../Components/ShareLink'
+
 import { ProjectDescription } from './ProjectDescription'
 import { ProjectCredits } from './ProjectCredits'
 import { ProjectComments } from './ProjectComments'
@@ -24,7 +24,7 @@ import MessageDialogs from '../Components/MessageDialogs'
 require('./ProjectPage.scss')
 
 const projectElement = document.querySelector('.js-project')
-const projectShareElement = document.querySelector('.js-project-share')
+
 const projectDescriptionCreditsElement = document.querySelector('.js-project-description-credits')
 const projectCommentsElement = document.querySelector('.js-project-comments')
 const appLanguageElement = document.querySelector('#app-language')
@@ -86,17 +86,6 @@ if (projectElement.dataset.myProject === 'true') {
     projectEditor,
   )
 }
-
-shareLink(
-  projectShareElement.dataset.themeDisplayName,
-  projectShareElement.dataset.transCheckOutProject,
-  projectShareElement.dataset.projectUrl,
-  projectShareElement.dataset.transShareSuccess,
-  projectShareElement.dataset.transShareError,
-  projectShareElement.dataset.transCopy,
-  projectShareElement.dataset.transClipboardSuccess,
-  projectShareElement.dataset.transClipboardFail,
-)
 
 // Report project button
 const reportBtn = document.getElementById('top-app-bar__btn-report-project')

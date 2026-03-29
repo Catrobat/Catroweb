@@ -54,10 +54,23 @@
           {{ include('Layout/Header/UserOptions.html.twig') }}
         {% endif %}
 
-        {# Divider between page-specific and color scheme items #}
+        {# Divider between page-specific and share items #}
         {% if page_context in ['project', 'studio', 'user'] %}
           <li class="mdc-deprecated-list-divider" role="separator"></li>
         {% endif %}
+
+        {# Share current page (always shown) #}
+        <li id="top-app-bar__btn-share-page" class="mdc-deprecated-list-item" role="menuitem"
+            data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
+            data-trans-clipboard-success="{{ 'clipboard.success'|trans({}, 'catroweb') }}"
+            data-trans-clipboard-fail="{{ 'clipboard.fail'|trans({}, 'catroweb') }}">
+          <span class="mdc-deprecated-list-item__ripple"></span>
+          <span class="mdc-deprecated-list-item__graphic material-icons">share</span>
+          <span class="mdc-deprecated-list-item__text">{{ 'share.text'|trans({}, 'catroweb') }}</span>
+        </li>
+
+        {# Divider between page-specific/share and color scheme items #}
+        <li class="mdc-deprecated-list-divider" role="separator"></li>
 
         {# Color scheme items (always shown) #}
         <li class="mdc-deprecated-list-item" role="menuitem" data-value="light">

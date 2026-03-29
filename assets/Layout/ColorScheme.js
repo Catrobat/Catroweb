@@ -5,6 +5,8 @@
  * Adapted by the Catroweb Project
  */
 
+import { showSnackbar, SnackbarDuration } from './Snackbar'
+
 const getStoredTheme = () => localStorage.getItem('theme')
 const setStoredTheme = (theme) => localStorage.setItem('theme', theme)
 
@@ -67,8 +69,50 @@ const initializeColorScheme = () => {
   })
 }
 
+const initializeShareButton = () => {
+  const shareItem = document.getElementById('top-app-bar__btn-share-page')
+  if (!shareItem) return
+
+  const clipboardSuccess = shareItem.dataset.transClipboardSuccess
+  const clipboardFail = shareItem.dataset.transClipboardFail
+  const shareSuccess = shareItem.dataset.transShareSuccess
+
+  shareItem.addEventListener('click', async () => {
+    const url = window.location.href
+    const title = document.title
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, url })
+        showSnackbar('#share-snackbar', shareSuccess)
+      } catch (e) {
+        if (e.name !== 'AbortError') {
+          copyToClipboard(url, clipboardSuccess, clipboardFail)
+        }
+      }
+    } else {
+      copyToClipboard(url, clipboardSuccess, clipboardFail)
+    }
+  })
+}
+
+function copyToClipboard(text, successMessage, failMessage) {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      showSnackbar('#share-snackbar', successMessage)
+    })
+    .catch(() => {
+      showSnackbar('#share-snackbar', failMessage, SnackbarDuration.error)
+    })
+}
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeColorScheme)
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeColorScheme()
+    initializeShareButton()
+  })
 } else {
   initializeColorScheme()
+  initializeShareButton()
 }
