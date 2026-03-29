@@ -3,6 +3,7 @@ import Swal from 'sweetalert2'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { redirect } from '../Components/RedirectButton'
 import { ApiFetch } from '../Api/ApiHelper'
+import ProjectApi from '../Api/ProjectApi'
 
 export const Project = function (
   projectId,
@@ -839,63 +840,14 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 // --------------------------------
-// Not 4 kids!
+// Project settings (options menu toggles)
 
-// Allow only relative, same-origin URLs without dangerous characters.
-function isSafeRelativeUrl(url) {
-  if (!url || typeof url !== 'string') {
-    return false
-  }
-  // Disallow explicit schemes like "http:", "javascript:", etc.
-  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(url)) {
-    return false
-  }
-  // Disallow protocol-relative URLs like "//example.com"
-  if (url.startsWith('//')) {
-    return false
-  }
-  // Basic guard against HTML-like injection
-  if (/[<>]/.test(url)) {
-    return false
-  }
-  return true
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  const button = document.getElementById('projectNotForKidsButton')
-  if (button != null) {
-    button.addEventListener('click', function (event) {
-      event.preventDefault()
-      const markSafeForKidsText = document.getElementById('markSafeForKidsText')
-      const markNotForKidsText = document.getElementById('markNotForKidsText')
-      const url = document.getElementById('projectNotForKidsButton').getAttribute('data-url')
-      if (!isSafeRelativeUrl(url)) {
-        showSnackbar(
-          '#share-snackbar',
-          'Oops, that action could not be completed. Please try again!',
-          SnackbarDuration.error,
-        )
-        return
-      }
-      let text = ''
-      if (markSafeForKidsText != null) {
-        text = 'Are you sure you want to remove the not for kids flag from this project?'
-      } else if (markNotForKidsText != null) {
-        text = 'Are you sure you want to mark this project as not for kids?'
-      }
-      askForConfirmation(submitNotForKidsForm, url, text)
-    })
-  }
-})
-
-function askForConfirmation(continueWithAction, url, text) {
-  const areYouSure = 'Confirmation'
-  const cancel = 'Cancel'
-  const okayText = 'Yes, proceed!'
+function confirmAndUpdate(item, confirmText, payload, onSuccess) {
+  const projectId = item.dataset.projectId
 
   Swal.fire({
-    title: areYouSure,
-    html: text + '<br><br>',
+    title: item.dataset.transConfirmTitle,
+    html: confirmText,
     icon: 'warning',
     showCancelButton: true,
     allowOutsideClick: false,
@@ -904,28 +856,83 @@ function askForConfirmation(continueWithAction, url, text) {
       cancelButton: 'btn btn-outline-primary',
     },
     buttonsStyling: false,
-    confirmButtonText: okayText,
-    cancelButtonText: cancel,
+    confirmButtonText: item.dataset.transConfirmYes,
+    cancelButtonText: item.dataset.transCancel,
   }).then((result) => {
-    if (result.value && isSafeRelativeUrl(url)) {
-      continueWithAction(url)
-    }
+    if (!result.value) return
+
+    new ProjectApi().updateProject(projectId, payload, onSuccess)
   })
 }
 
-function submitNotForKidsForm(url) {
-  if (!isSafeRelativeUrl(url)) {
-    showSnackbar(
-      '#share-snackbar',
-      'Oops, that action could not be completed. Please try again!',
-      SnackbarDuration.error,
-    )
-    return
-  }
-  const form = document.createElement('form')
-  form.setAttribute('method', 'post')
-  form.setAttribute('action', url)
-  form.style.display = 'hidden'
-  document.body.appendChild(form)
-  form.submit()
+function updateMenuItemUI(item, iconName, textContent) {
+  const icon = item.querySelector('.mdc-deprecated-list-item__graphic')
+  const text = item.querySelector('.mdc-deprecated-list-item__text')
+  if (icon) icon.textContent = iconName
+  if (text) text.textContent = textContent
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const nfkItem = document.getElementById('top-app-bar__btn-toggle-not-for-kids')
+  if (nfkItem) {
+    nfkItem.addEventListener('click', function () {
+      const currentValue = parseInt(nfkItem.dataset.notForKids, 10)
+
+      if (currentValue === 2) {
+        showSnackbar(
+          '#share-snackbar',
+          nfkItem.dataset.transModeratorLocked,
+          SnackbarDuration.error,
+        )
+        return
+      }
+
+      const newValue = currentValue === 0
+      const confirmText = newValue
+        ? nfkItem.dataset.transConfirmMark
+        : nfkItem.dataset.transConfirmUnmark
+
+      confirmAndUpdate(nfkItem, confirmText, { not_for_kids: newValue }, function () {
+        nfkItem.dataset.notForKids = String(newValue ? 1 : 0)
+        updateMenuItemUI(
+          nfkItem,
+          newValue ? 'no_stroller' : 'child_care',
+          newValue ? nfkItem.dataset.transMarkSafe : nfkItem.dataset.transMarkNotForKids,
+        )
+
+        const indicatorWrapper = document.getElementById('not-for-kids-indicator')
+        if (indicatorWrapper) indicatorWrapper.classList.toggle('d-none', !newValue)
+
+        showSnackbar(
+          '#share-snackbar',
+          newValue ? nfkItem.dataset.transSuccessMarked : nfkItem.dataset.transSuccessUnmarked,
+        )
+      })
+    })
+  }
+
+  const visItem = document.getElementById('top-app-bar__btn-toggle-visibility')
+  if (visItem) {
+    visItem.addEventListener('click', function () {
+      const isPrivate = visItem.dataset.private === 'true'
+      const newValue = !isPrivate
+      const confirmText = newValue
+        ? visItem.dataset.transConfirmPrivate
+        : visItem.dataset.transConfirmPublic
+
+      confirmAndUpdate(visItem, confirmText, { private: newValue }, function () {
+        visItem.dataset.private = String(newValue)
+        updateMenuItemUI(
+          visItem,
+          newValue ? 'lock' : 'lock_open',
+          newValue ? visItem.dataset.transSetPublic : visItem.dataset.transSetPrivate,
+        )
+
+        showSnackbar(
+          '#share-snackbar',
+          newValue ? visItem.dataset.transSuccessPrivate : visItem.dataset.transSuccessPublic,
+        )
+      })
+    })
+  }
+})

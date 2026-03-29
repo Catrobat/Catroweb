@@ -1,5 +1,55 @@
 {% if '/project/' in app.request.pathinfo and project|default(false) and project.id|default(false) %}
 
+  {% if my_project|default(false) %}
+    <li id="top-app-bar__btn-toggle-visibility"
+        class="mdc-deprecated-list-item"
+        role="menuitem"
+        data-project-id="{{ project.id }}"
+        data-private="{{ project.private ? 'true' : 'false' }}"
+        data-trans-set-private="{{ 'project.setPrivateAction'|trans({}, 'catroweb') }}"
+        data-trans-set-public="{{ 'project.setPublicAction'|trans({}, 'catroweb') }}"
+        data-trans-confirm-title="{{ 'notForKids.confirmTitle'|trans({}, 'catroweb') }}"
+        data-trans-confirm-private="{{ 'project.confirmSetPrivate'|trans({}, 'catroweb') }}"
+        data-trans-confirm-public="{{ 'project.confirmSetPublic'|trans({}, 'catroweb') }}"
+        data-trans-confirm-yes="{{ 'notForKids.confirmYes'|trans({}, 'catroweb') }}"
+        data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+        data-trans-success-private="{{ 'snackbar.project_set_private'|trans({}, 'catroweb') }}"
+        data-trans-success-public="{{ 'snackbar.project_set_public'|trans({}, 'catroweb') }}"
+        data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}">
+      <span class="mdc-deprecated-list-item__ripple"></span>
+      <span class="mdc-deprecated-list-item__graphic material-icons">
+        {{ project.private ? 'lock' : 'lock_open' }}
+      </span>
+      <span class="mdc-deprecated-list-item__text">
+        {{ project.private ? 'project.setPublicAction'|trans({}, 'catroweb') : 'project.setPrivateAction'|trans({}, 'catroweb') }}
+      </span>
+    </li>
+    <li id="top-app-bar__btn-toggle-not-for-kids"
+        class="mdc-deprecated-list-item"
+        role="menuitem"
+        data-project-id="{{ project.id }}"
+        data-not-for-kids="{{ project.notForKids }}"
+        data-trans-mark-not-for-kids="{{ 'MarkNotForKids'|trans({}, 'catroweb') }}"
+        data-trans-mark-safe="{{ 'MarkSafeForKids'|trans({}, 'catroweb') }}"
+        data-trans-confirm-title="{{ 'notForKids.confirmTitle'|trans({}, 'catroweb') }}"
+        data-trans-confirm-mark="{{ 'notForKids.confirmMark'|trans({}, 'catroweb') }}"
+        data-trans-confirm-unmark="{{ 'notForKids.confirmUnmark'|trans({}, 'catroweb') }}"
+        data-trans-confirm-yes="{{ 'notForKids.confirmYes'|trans({}, 'catroweb') }}"
+        data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+        data-trans-moderator-locked="{{ 'snackbar.project_not_for_kids_moderator'|trans({}, 'catroweb') }}"
+        data-trans-success-marked="{{ 'snackbar.project_not_for_kids'|trans({}, 'catroweb') }}"
+        data-trans-success-unmarked="{{ 'snackbar.project_safe_for_kids'|trans({}, 'catroweb') }}"
+        data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}">
+      <span class="mdc-deprecated-list-item__ripple"></span>
+      <span class="mdc-deprecated-list-item__graphic material-icons">
+        {{ project.notForKids ? 'no_stroller' : 'child_care' }}
+      </span>
+      <span class="mdc-deprecated-list-item__text">
+        {{ project.notForKids ? 'MarkSafeForKids'|trans({}, 'catroweb') : 'MarkNotForKids'|trans({}, 'catroweb') }}
+      </span>
+    </li>
+  {% endif %}
+
   {% if not my_project|default(false) and not is_whitelisted|default(false) and not project.autoHidden %}
     <li id="top-app-bar__btn-report-project"
         class="mdc-deprecated-list-item"

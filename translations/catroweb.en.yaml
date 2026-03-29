@@ -135,6 +135,8 @@ project:
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
+  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
+  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -1105,6 +1107,8 @@ snackbar:
   project_not_for_kids: 'The project was marked as not safe for kids!'
   project_safe_for_kids: 'The project was marked safe for kids!'
   project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
+  project_set_private: 'The project has been set to private.'
+  project_set_public: 'The project has been set to public.'
 
 
 
@@ -1118,6 +1122,12 @@ maintenanceinformations:
 
 MarkNotForKids: Mark as not safe for kids
 MarkSafeForKids: Mark as safe for kids
+
+notForKids:
+  confirmTitle: Confirmation
+  confirmMark: Are you sure you want to mark this project as not safe for kids?
+  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
+  confirmYes: 'Yes, proceed!'
 
 moderation:
   report:
