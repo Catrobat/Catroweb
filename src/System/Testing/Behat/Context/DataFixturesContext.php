@@ -12,6 +12,7 @@ use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
@@ -391,6 +392,40 @@ class DataFixturesContext implements Context
     }
 
     $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are project code statistics:$/
+   */
+  public function thereAreProjectCodeStatistics(TableNode $table): void
+  {
+    $em = $this->getManager();
+    foreach ($table->getHash() as $config) {
+      $project = $em->getRepository(Program::class)->find($config['project_id']);
+      Assert::assertNotNull($project, sprintf('Project "%s" not found for code statistics fixture', $config['project_id']));
+
+      $stats = new ProjectCodeStatistics();
+      $stats->setProgram($project);
+      $stats->setScenes((int) ($config['scenes'] ?? 0));
+      $stats->setScripts((int) ($config['scripts'] ?? 0));
+      $stats->setBricks((int) ($config['bricks'] ?? 0));
+      $stats->setObjects((int) ($config['objects'] ?? 0));
+      $stats->setLooks((int) ($config['looks'] ?? 0));
+      $stats->setSounds((int) ($config['sounds'] ?? 0));
+      $stats->setGlobalVariables((int) ($config['global_variables'] ?? 0));
+      $stats->setLocalVariables((int) ($config['local_variables'] ?? 0));
+      $stats->setScoreAbstraction((int) ($config['score_abstraction'] ?? 0));
+      $stats->setScoreParallelism((int) ($config['score_parallelism'] ?? 0));
+      $stats->setScoreSynchronization((int) ($config['score_synchronization'] ?? 0));
+      $stats->setScoreLogicalThinking((int) ($config['score_logical_thinking'] ?? 0));
+      $stats->setScoreFlowControl((int) ($config['score_flow_control'] ?? 0));
+      $stats->setScoreUserInteractivity((int) ($config['score_user_interactivity'] ?? 0));
+      $stats->setScoreDataRepresentation((int) ($config['score_data_representation'] ?? 0));
+
+      $em->persist($stats);
+    }
+
+    $em->flush();
   }
 
   /**

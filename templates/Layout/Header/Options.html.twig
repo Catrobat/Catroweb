@@ -4,7 +4,7 @@
   {% set page_context = 'studio' %}
 {% elseif '/user/' in app.request.pathinfo and profile|default(false) and profile.id|default(false) %}
   {% set page_context = 'user' %}
-{% elseif app.request.pathinfo ends with '/user' %}
+{% elseif app.request.attributes.get('_route') == 'profile' and app.request.attributes.get('id', 0) == 0 %}
   {% set page_context = 'my_profile' %}
 {% else %}
   {% set page_context = 'default' %}
@@ -61,6 +61,9 @@
 
         {# Share current page (always shown) #}
         <li id="top-app-bar__btn-share-page" class="mdc-deprecated-list-item" role="menuitem"
+            {% if page_context == 'my_profile' and app.user.id|default(false) %}
+              data-share-url="{{ url('profile', {id: app.user.id}) }}"
+            {% endif %}
             data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
             data-trans-clipboard-success="{{ 'clipboard.success'|trans({}, 'catroweb') }}"
             data-trans-clipboard-fail="{{ 'clipboard.fail'|trans({}, 'catroweb') }}">

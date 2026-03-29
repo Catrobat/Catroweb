@@ -78,7 +78,7 @@ const initializeShareButton = () => {
   const shareSuccess = shareItem.dataset.transShareSuccess
 
   shareItem.addEventListener('click', async () => {
-    const url = window.location.href
+    const url = shareItem.dataset.shareUrl || window.location.href
     const title = document.title
 
     if (navigator.share) {
@@ -97,14 +97,35 @@ const initializeShareButton = () => {
 }
 
 function copyToClipboard(text, successMessage, failMessage) {
-  navigator.clipboard
-    .writeText(text)
-    .then(() => {
-      showSnackbar('#share-snackbar', successMessage)
-    })
-    .catch(() => {
-      showSnackbar('#share-snackbar', failMessage, SnackbarDuration.error)
-    })
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        showSnackbar('#share-snackbar', successMessage)
+      })
+      .catch(() => {
+        fallbackCopyToClipboard(text, successMessage, failMessage)
+      })
+  } else {
+    fallbackCopyToClipboard(text, successMessage, failMessage)
+  }
+}
+
+function fallbackCopyToClipboard(text, successMessage, failMessage) {
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.style.position = 'fixed'
+  textarea.style.left = '-9999px'
+  textarea.style.top = '-9999px'
+  document.body.appendChild(textarea)
+  textarea.select()
+  try {
+    document.execCommand('copy')
+    showSnackbar('#share-snackbar', successMessage)
+  } catch {
+    showSnackbar('#share-snackbar', failMessage, SnackbarDuration.error)
+  }
+  document.body.removeChild(textarea)
 }
 
 if (document.readyState === 'loading') {

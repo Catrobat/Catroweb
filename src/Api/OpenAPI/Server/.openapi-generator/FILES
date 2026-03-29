@@ -38,6 +38,7 @@ Model/AppealListResponse.php
 Model/AppealResponse.php
 Model/BaseUser.php
 Model/BasicUserDataResponse.php
+Model/CodeStatisticsResponse.php
 Model/CommentCreateRequest.php
 Model/CommentListResponse.php
 Model/CommentResponse.php
@@ -148,6 +149,7 @@ Tests/Model/AppealListResponseTest.php
 Tests/Model/AppealResponseTest.php
 Tests/Model/BaseUserTest.php
 Tests/Model/BasicUserDataResponseTest.php
+Tests/Model/CodeStatisticsResponseTest.php
 Tests/Model/CommentCreateRequestTest.php
 Tests/Model/CommentListResponseTest.php
 Tests/Model/CommentResponseTest.php
@@ -248,6 +250,7 @@ docs/Model/AppealListResponse.md
 docs/Model/AppealResponse.md
 docs/Model/BaseUser.md
 docs/Model/BasicUserDataResponse.md
+docs/Model/CodeStatisticsResponse.md
 docs/Model/CommentCreateRequest.md
 docs/Model/CommentListResponse.md
 docs/Model/CommentResponse.md

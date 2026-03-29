@@ -56,7 +56,7 @@ class AchievementsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function achievementsCountGetAction(Request $request): Response
+  public function achievementsCountGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -121,7 +121,7 @@ class AchievementsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function achievementsGetAction(Request $request): Response
+  public function achievementsGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -200,7 +200,7 @@ class AchievementsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function achievementsReadPutAction(Request $request): Response
+  public function achievementsReadPutAction(Request $request)
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -255,7 +255,7 @@ class AchievementsController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdAchievementsGetAction(Request $request, $id): Response
+  public function userIdAchievementsGetAction(Request $request, $id)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

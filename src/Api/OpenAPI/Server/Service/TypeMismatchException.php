@@ -27,13 +27,15 @@ class TypeMismatchException extends RuntimeException
    * A handy method for building exception instance.
    *
    * @param string $expected_type
+   *
+   * @return TypeMismatchException
    */
   public static function fromValue(
     $expected_type,
     $actual_value,
     ?DeserializationContext $context = null,
-  ): static {
-    if ($context instanceof DeserializationContext && count($context->getCurrentPath()) > 0) {
+  ) {
+    if (null !== $context && count($context->getCurrentPath()) > 0) {
       $property = sprintf('property "%s" to be ', implode('.', $context->getCurrentPath()));
     } else {
       $property = '';

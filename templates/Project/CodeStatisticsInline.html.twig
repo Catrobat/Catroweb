@@ -1,0 +1,23 @@
+<div id="code-statistics-inline"
+     class="code-stats-inline d-none"
+     data-stats-url="{{ path('open_api_server_projects_projectidcodestatisticsget', {id: project.id}) }}"
+     data-trans-your-score="{{ 'codeStatistics.yourScore'|trans({}, 'catroweb') }}"
+     data-trans-points="{{ 'codeStatistics.points'|trans({}, 'catroweb') }}"
+     data-trans-abstraction="{{ 'codeStatistics.abstraction'|trans({}, 'catroweb') }}"
+     data-trans-parallelism="{{ 'codeStatistics.parallelism'|trans({}, 'catroweb') }}"
+     data-trans-logical-thinking="{{ 'codeStatistics.logicalThinking'|trans({}, 'catroweb') }}"
+     data-trans-synchronization="{{ 'codeStatistics.synchronization'|trans({}, 'catroweb') }}"
+     data-trans-flow-control="{{ 'codeStatistics.flowControl'|trans({}, 'catroweb') }}"
+     data-trans-user-interactivity="{{ 'codeStatistics.userInteractivity'|trans({}, 'catroweb') }}"
+     data-trans-data-representation="{{ 'codeStatistics.dataRepresentation'|trans({}, 'catroweb') }}"
+     data-trans-loading="{{ 'codeStatistics.loading'|trans({}, 'catroweb') }}"
+     data-trans-error="{{ 'codeStatistics.error'|trans({}, 'catroweb') }}"
+     data-trans-bonus="{{ 'codeStatistics.bonus'|trans({}, 'catroweb') }}"
+>
+  <button id="code-stats-toggle" type="button" aria-expanded="false" aria-controls="code-stats-panel">
+    <i class="material-icons">show_chart</i>
+    <span>{{ 'codeStatistics.title'|trans({}, 'catroweb') }}</span>
+    <i class="material-icons code-stats-chevron">expand_more</i>
+  </button>
+  <div id="code-stats-panel" class="code-stats-panel d-none"></div>
+</div>

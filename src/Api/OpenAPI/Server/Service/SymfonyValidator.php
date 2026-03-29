@@ -6,11 +6,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface as SymfonyValidator
 
 class SymfonyValidator implements ValidatorInterface
 {
-  public function __construct(protected SymfonyValidatorInterface $validator)
+  protected SymfonyValidatorInterface $validator;
+
+  public function __construct(SymfonyValidatorInterface $validator)
   {
+    $this->validator = $validator;
   }
 
-  public function validate($value, $constraints = null, $groups = null): \Symfony\Component\Validator\ConstraintViolationListInterface
+  public function validate($value, $constraints = null, $groups = null)
   {
     return $this->validator->validate($value, $constraints, $groups);
   }
