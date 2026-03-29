@@ -27,13 +27,7 @@ export class DefaultProjectLists {
         }
       }
 
-      projectList.dataset.list = new ProjectList(
-        projectList,
-        category,
-        url,
-        property,
-        theme,
-      ).toString()
+      new ProjectList(projectList, category, url, property, theme)
     })
   }
 }

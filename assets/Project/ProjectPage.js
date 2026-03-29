@@ -307,8 +307,7 @@ function initProjects() {
       url += `&flavor=${flavor}`
     }
 
-    const list = new ProjectList(element, category, url, property, theme)
-    element.dataset.list = list
+    new ProjectList(element, category, url, property, theme)
   })
 }
 
