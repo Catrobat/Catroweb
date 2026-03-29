@@ -4,7 +4,7 @@
   {% set page_context = 'studio' %}
 {% elseif '/user/' in app.request.pathinfo and profile|default(false) and profile.id|default(false) %}
   {% set page_context = 'user' %}
-{% elseif app.request.pathinfo == '/app/user' %}
+{% elseif app.request.attributes.get('_route') == 'profile' and app.request.attributes.get('id', 0) == 0 %}
   {% set page_context = 'my_profile' %}
 {% else %}
   {% set page_context = 'default' %}
