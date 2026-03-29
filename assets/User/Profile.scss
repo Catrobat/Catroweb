@@ -173,13 +173,13 @@
       justify-content: flex-start;
       padding-top: 1rem;
       padding-bottom: 1rem;
-      color: #222;
+      color: light-dark(#222, #ddd);
       text-decoration: none;
       cursor: pointer;
 
       &:hover {
         text-decoration: none;
-        background: rgb(0 0 0 / 20%);
+        background: light-dark(rgb(0 0 0 / 20%), rgb(255 255 255 / 20%));
       }
 
       &:active,
