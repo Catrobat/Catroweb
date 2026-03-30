@@ -222,16 +222,7 @@ class RemixManager
     // be only two loop iterations, so this still keeps the query count low while resolving the connected component.
     do {
       $previous_descendant_ids = $catrobat_ids_of_whole_graph;
-      $catrobat_ancestor_ids = $this->project_remix_repository->getAncestorIds($catrobat_ids_of_whole_graph);
-
-      if ([] === $catrobat_ancestor_ids) {
-        break;
-      }
-
-      $resolved_descendant_ids = $this->project_remix_repository->getDescendantIds($catrobat_ancestor_ids);
-      if ([] !== $resolved_descendant_ids) {
-        $catrobat_ids_of_whole_graph = $resolved_descendant_ids;
-      }
+      $catrobat_ids_of_whole_graph = $this->project_remix_repository->getGraphDescendantIds($catrobat_ids_of_whole_graph);
 
       $diff_new = array_diff($catrobat_ids_of_whole_graph, $previous_descendant_ids);
       $diff_previous = array_diff($previous_descendant_ids, $catrobat_ids_of_whole_graph);
