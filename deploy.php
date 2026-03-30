@@ -91,7 +91,6 @@ task('restart:php-fpm', function () {
   run('sudo /usr/sbin/service php{{php_fpm_version}}-fpm restart');
 });
 
-
 task('install:yarn', function () {
   cd('{{release_path}}');
   run('mkdir -p .corepack-bin && corepack enable --install-directory=.corepack-bin');
@@ -163,7 +162,6 @@ task('smoke_test', function () {
   throw new \RuntimeException("Health check failed after {$maxRetries} attempts (Final HTTP Code: {$result})");
 });
 
-
 // ---------------------------------------------------
 // Main deployment task
 // ---------------------------------------------------
@@ -192,7 +190,6 @@ task('deploy', [
   'deploy:unlock',
   'slack:notify:success',
 ]);
-
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
