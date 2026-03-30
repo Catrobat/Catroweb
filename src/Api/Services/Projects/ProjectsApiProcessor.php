@@ -7,6 +7,7 @@ namespace App\Api\Services\Projects;
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
+use App\Moderation\TextSanitizer;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
@@ -27,7 +28,8 @@ class ProjectsApiProcessor extends AbstractApiProcessor
     private readonly EntityManagerInterface $entity_manager,
     private readonly ExtractedFileRepository $extracted_file_repository,
     private readonly ProjectFileRepository $file_repository,
-    private readonly ScreenshotRepository $screenshot_repository)
+    private readonly ScreenshotRepository $screenshot_repository,
+    private readonly TextSanitizer $textSanitizer)
   {
   }
 
@@ -52,9 +54,9 @@ class ProjectsApiProcessor extends AbstractApiProcessor
     $extracted_file_properties_before_update = [];
 
     if (!is_null($request->getName()) || !is_null($request->getDescription()) || !is_null($request->getCredits())) {
-      $name = $request->getName();
-      $description = $request->getDescription();
-      $credits = $request->getCredits();
+      $name = $this->textSanitizer->sanitize($request->getName());
+      $description = $this->textSanitizer->sanitize($request->getDescription());
+      $credits = $this->textSanitizer->sanitize($request->getCredits());
 
       $project_touched = true;
 
@@ -100,6 +102,13 @@ class ProjectsApiProcessor extends AbstractApiProcessor
     if (!is_null($request->isPrivate())) {
       $project->setPrivate($request->isPrivate());
       $project_touched = true;
+    }
+
+    if (!is_null($request->isNotForKids())) {
+      if (2 !== $project->getNotForKids()) {
+        $project->setNotForKids($request->isNotForKids() ? 1 : 0);
+        $project_touched = true;
+      }
     }
 
     if (!is_null($request->getScreenshot())) {

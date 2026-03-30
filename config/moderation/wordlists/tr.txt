@@ -1,0 +1,359 @@
+# Turkish profanity word list
+# Sources: GLINCKER/glin-profanity, readme-SVG/Banned-words
+aardappels afgieteng
+achter het raam zitten
+afberen
+aflebberen
+afrossen
+afrukken
+aftrekken
+afwerkplaats
+afzeiken
+afzuigen
+am
+amcı*
+amcık
+amcıklar
+amcıklara
+amcıklarda
+amcıklardan
+amcıkları
+amcıkların
+amcıkta
+amcıktan
+amcığa
+amcığı
+amcığın
+amlar
+amı
+anderhalve man en een paardekop
+anita
+asbak
+aso
+bagger schijten
+balen
+bedonderen
+befborstelg
+beffen
+bekken
+belazeren
+besodemieterd zijn
+besodemieteren
+beurt
+boemelen
+boerelul
+boerenpummelg
+bokkelul
+botergeil
+broekhoesten
+brugpieperg
+buffelen
+buiten de pot piesen
+da's kloten van de bok
+de ballen
+de hoer spelen
+de hond uitlaten
+de koffer induiken
+de pijp aan maarten geven
+de pijp uitgaan
+delg
+dombo
+draaikontg
+driehoog achter wonen
+drolg
+drooggeiler
+droogkloot
+een beurt geven
+een nummertje maken
+een wip maken
+eikel
+engerd
+flamoes
+flikken
+flikker
+gadverdamme
+galbak
+gat
+gedoogzone
+geilneef
+gesodemieter
+godverdomme
+graftak
+gras maaien
+gratenkutg
+greppeldel
+griet
+göt
+göt*
+göte
+götler
+götlerde
+götlerden
+götlere
+götleri
+götlerin
+götte
+götten
+götveren
+götverende
+götverenden
+götverene
+götvereni
+götverenin
+götverenler
+götverenlerde
+götverenlerden
+götverenlere
+götverenleri
+götverenlerin
+götü
+götün
+hoempert
+hoer
+hoerenbuurt
+hoerenloper
+hoerig
+hol
+hufter
+huisdealer
+johny
+kalta*
+kaltak
+kaltaklar
+kaltaklara
+kaltaklarda
+kaltaklardan
+kaltakları
+kaltakların
+kaltakta
+kaltaktan
+kaltağa
+kaltağı
+kaltağın
+kanen
+kettingzeugg
+klaarkomen
+klerebeer
+klojo
+klooien
+klootjesvolk
+klootoog
+klootzak
+kloten
+knor
+kontg
+kontneuken
+krentekakker
+kut
+kuttelikkertje
+kwakkieg
+liefdesgrot
+lul
+lul-de-behanger
+lulhannes
+lummel
+mafketel
+matennaaierg
+matje
+mof
+mutsg
+naaien
+naakt
+neuken
+neukstier
+nicht
+oetlul
+op z'n hondjes
+op z'n sodemieter geven
+opgeilen
+opkankeren
+oprotten
+opsodemieteren
+opzouten
+orospu
+orospu*
+orospuda
+orospudan
+orospular
+orospulara
+orospularda
+orospulardan
+orospuları
+orospuların
+orospunun
+orospuya
+orospuyu
+otuz && birci
+otuz && bircide
+otuz && birciden
+otuz && birciler
+otuz && bircilerde
+otuz && bircilerden
+otuz && bircilere
+otuz && bircileri
+otuz && bircilerin
+otuz && bircinin
+otuz && birciye
+otuz && birciyi
+otuz birci
+otuz bircide
+otuz birciden
+otuz birciler
+otuz bircilerde
+otuz bircilerden
+otuz bircilere
+otuz bircileri
+otuz bircilerin
+otuz bircinin
+otuz birciye
+otuz birciyi
+ouwe rukker
+ouwehoer
+ouwehoeren
+paal
+paardelul
+palen
+penozeg
+piesen
+pijpbekkieg
+pijpen
+pik
+pleurislaaier
+poep
+poepen
+poot
+portiekslet
+pot
+potverdorie
+publiciteitsgeil
+raaskallen
+reet
+reet trappen, voor zijn
+reetridder
+remsporeng
+reutelen
+rothoer
+rotzak
+rukhond
+rukken
+saksocu
+saksocu*
+saksocuda
+saksocudan
+saksocular
+saksoculara
+saksocularda
+saksoculardan
+saksocuları
+saksocuların
+saksocunun
+saksocuya
+saksocuyu
+schatje
+schijt
+schijten
+schoft
+schuinsmarcheerder
+shit
+sik
+sik*
+sike
+siker && sikmez
+siker sikmez
+siki
+sikilir && sikilmez
+sikilir sikilmez
+sikin
+sikler
+siklerde
+siklerden
+siklere
+sikleri
+siklerin
+sikmek
+sikmemek
+sikte
+sikten
+siktir
+siktirir && siktirmez
+siktirir siktirmez
+slempen
+sletg
+sletterig
+slik mijn zaad
+snolg
+spuiten
+standje
+standje-69g
+stoephoer
+stootje
+strontg
+sufferdg
+sıçmak
+tapijtnek
+taşa*
+taşak
+taşaklar
+taşaklara
+taşaklarda
+taşaklardan
+taşakları
+taşakların
+taşakta
+taşaktan
+taşağa
+taşağı
+taşağın
+teefg
+temeier
+teringlijer
+toeter
+tongzoeng
+triootjeg
+trottoir prostituée
+trottoirteef
+vergallen
+verkloten
+verneuken
+viespeuk
+vingeren
+vleesroos
+voor jan lul
+voor jan-met-de-korte-achternaam
+watje
+welzijnsmafia
+wijf
+wippen
+wuftje
+yara*
+yarak
+yaraklar
+yaraklara
+yaraklarda
+yaraklardan
+yarakları
+yarakların
+yarakta
+yaraktan
+yarağa
+yarağı
+yarağın
+zaadje
+zakkenwasser
+zeiken
+zeiker
+zuigen
+zuiplap
+çingene
+çingene*
+çingenede
+çingeneden
+çingeneler
+çingenelerde
+çingenelerden
+çingenelere
+çingeneleri
+çingenelerin
+çingenenin
+çingeneye
+çingeneyi

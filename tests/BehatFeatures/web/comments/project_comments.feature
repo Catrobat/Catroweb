@@ -150,6 +150,7 @@ Feature: As a visitor I want to write, see and report comments.
 
     When I scroll to the bottom of the page
     And I wait 500 milliseconds
+    And I wait for AJAX to finish
 
     Then I should see "c7"
     And I should see "c8"

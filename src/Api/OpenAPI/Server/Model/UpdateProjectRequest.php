@@ -97,6 +97,17 @@ class UpdateProjectRequest
   protected ?string $screenshot = null;
 
   /**
+   * Mark the project as not suitable for kids (true) or safe for kids (false). Cannot be changed if set by a moderator.
+   *
+   * @SerializedName("not_for_kids")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
+  protected ?bool $not_for_kids = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -109,6 +120,7 @@ class UpdateProjectRequest
       $this->credits = array_key_exists('credits', $data) ? $data['credits'] : $this->credits;
       $this->private = array_key_exists('private', $data) ? $data['private'] : $this->private;
       $this->screenshot = array_key_exists('screenshot', $data) ? $data['screenshot'] : $this->screenshot;
+      $this->not_for_kids = array_key_exists('not_for_kids', $data) ? $data['not_for_kids'] : $this->not_for_kids;
     }
   }
 
@@ -218,6 +230,28 @@ class UpdateProjectRequest
   public function setScreenshot(?string $screenshot = null): self
   {
     $this->screenshot = $screenshot;
+
+    return $this;
+  }
+
+  /**
+   * Gets not_for_kids.
+   */
+  public function isNotForKids(): ?bool
+  {
+    return $this->not_for_kids;
+  }
+
+  /**
+   * Sets not_for_kids.
+   *
+   * @param bool|null $not_for_kids Mark the project as not suitable for kids (true) or safe for kids (false). Cannot be changed if set by a moderator.
+   *
+   * @return $this
+   */
+  public function setNotForKids(?bool $not_for_kids = null): self
+  {
+    $this->not_for_kids = $not_for_kids;
 
     return $this;
   }

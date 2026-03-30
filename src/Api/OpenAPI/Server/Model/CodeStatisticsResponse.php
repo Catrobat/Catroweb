@@ -42,7 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CodeStatisticsResponse
 {
   /**
-   * Abstraction score (0-3).
+   * Abstraction score (0-6).
    *
    * @SerializedName("score_abstraction")
    *
@@ -53,7 +53,7 @@ class CodeStatisticsResponse
   protected ?int $score_abstraction = null;
 
   /**
-   * Parallelism score (0-3).
+   * Parallelism score (0-6).
    *
    * @SerializedName("score_parallelism")
    *
@@ -64,7 +64,7 @@ class CodeStatisticsResponse
   protected ?int $score_parallelism = null;
 
   /**
-   * Synchronization score (0-3).
+   * Synchronization score (0-6).
    *
    * @SerializedName("score_synchronization")
    *
@@ -75,7 +75,7 @@ class CodeStatisticsResponse
   protected ?int $score_synchronization = null;
 
   /**
-   * Logical thinking score (0-3).
+   * Logical thinking score (0-6).
    *
    * @SerializedName("score_logical_thinking")
    *
@@ -86,7 +86,7 @@ class CodeStatisticsResponse
   protected ?int $score_logical_thinking = null;
 
   /**
-   * Flow control score (0-3).
+   * Flow control score (0-6).
    *
    * @SerializedName("score_flow_control")
    *
@@ -97,7 +97,7 @@ class CodeStatisticsResponse
   protected ?int $score_flow_control = null;
 
   /**
-   * User interactivity score (0-3).
+   * User interactivity score (0-6).
    *
    * @SerializedName("score_user_interactivity")
    *
@@ -108,7 +108,7 @@ class CodeStatisticsResponse
   protected ?int $score_user_interactivity = null;
 
   /**
-   * Data representation score (0-3).
+   * Data representation score (0-6).
    *
    * @SerializedName("score_data_representation")
    *
@@ -117,6 +117,39 @@ class CodeStatisticsResponse
    * @Type("int")
    */
   protected ?int $score_data_representation = null;
+
+  /**
+   * Bonus points awarded for physics or extension usage.
+   *
+   * @SerializedName("score_bonus")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $score_bonus = null;
+
+  /**
+   * Sum of all category scores and bonus points.
+   *
+   * @SerializedName("score_total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $score_total = null;
+
+  /**
+   * Identifier of the rubric version used to compute the scores.
+   *
+   * @SerializedName("scoring_version")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $scoring_version = null;
 
   /**
    * Constructor.
@@ -133,6 +166,9 @@ class CodeStatisticsResponse
       $this->score_flow_control = array_key_exists('score_flow_control', $data) ? $data['score_flow_control'] : $this->score_flow_control;
       $this->score_user_interactivity = array_key_exists('score_user_interactivity', $data) ? $data['score_user_interactivity'] : $this->score_user_interactivity;
       $this->score_data_representation = array_key_exists('score_data_representation', $data) ? $data['score_data_representation'] : $this->score_data_representation;
+      $this->score_bonus = array_key_exists('score_bonus', $data) ? $data['score_bonus'] : $this->score_bonus;
+      $this->score_total = array_key_exists('score_total', $data) ? $data['score_total'] : $this->score_total;
+      $this->scoring_version = array_key_exists('scoring_version', $data) ? $data['scoring_version'] : $this->scoring_version;
     }
   }
 
@@ -147,7 +183,7 @@ class CodeStatisticsResponse
   /**
    * Sets score_abstraction.
    *
-   * @param int|null $score_abstraction Abstraction score (0-3)
+   * @param int|null $score_abstraction Abstraction score (0-6)
    *
    * @return $this
    */
@@ -169,7 +205,7 @@ class CodeStatisticsResponse
   /**
    * Sets score_parallelism.
    *
-   * @param int|null $score_parallelism Parallelism score (0-3)
+   * @param int|null $score_parallelism Parallelism score (0-6)
    *
    * @return $this
    */
@@ -191,7 +227,7 @@ class CodeStatisticsResponse
   /**
    * Sets score_synchronization.
    *
-   * @param int|null $score_synchronization Synchronization score (0-3)
+   * @param int|null $score_synchronization Synchronization score (0-6)
    *
    * @return $this
    */
@@ -213,7 +249,7 @@ class CodeStatisticsResponse
   /**
    * Sets score_logical_thinking.
    *
-   * @param int|null $score_logical_thinking Logical thinking score (0-3)
+   * @param int|null $score_logical_thinking Logical thinking score (0-6)
    *
    * @return $this
    */
@@ -235,7 +271,7 @@ class CodeStatisticsResponse
   /**
    * Sets score_flow_control.
    *
-   * @param int|null $score_flow_control Flow control score (0-3)
+   * @param int|null $score_flow_control Flow control score (0-6)
    *
    * @return $this
    */
@@ -257,7 +293,7 @@ class CodeStatisticsResponse
   /**
    * Sets score_user_interactivity.
    *
-   * @param int|null $score_user_interactivity User interactivity score (0-3)
+   * @param int|null $score_user_interactivity User interactivity score (0-6)
    *
    * @return $this
    */
@@ -279,13 +315,79 @@ class CodeStatisticsResponse
   /**
    * Sets score_data_representation.
    *
-   * @param int|null $score_data_representation Data representation score (0-3)
+   * @param int|null $score_data_representation Data representation score (0-6)
    *
    * @return $this
    */
   public function setScoreDataRepresentation(?int $score_data_representation = null): self
   {
     $this->score_data_representation = $score_data_representation;
+
+    return $this;
+  }
+
+  /**
+   * Gets score_bonus.
+   */
+  public function getScoreBonus(): ?int
+  {
+    return $this->score_bonus;
+  }
+
+  /**
+   * Sets score_bonus.
+   *
+   * @param int|null $score_bonus Bonus points awarded for physics or extension usage
+   *
+   * @return $this
+   */
+  public function setScoreBonus(?int $score_bonus = null): self
+  {
+    $this->score_bonus = $score_bonus;
+
+    return $this;
+  }
+
+  /**
+   * Gets score_total.
+   */
+  public function getScoreTotal(): ?int
+  {
+    return $this->score_total;
+  }
+
+  /**
+   * Sets score_total.
+   *
+   * @param int|null $score_total Sum of all category scores and bonus points
+   *
+   * @return $this
+   */
+  public function setScoreTotal(?int $score_total = null): self
+  {
+    $this->score_total = $score_total;
+
+    return $this;
+  }
+
+  /**
+   * Gets scoring_version.
+   */
+  public function getScoringVersion(): ?string
+  {
+    return $this->scoring_version;
+  }
+
+  /**
+   * Sets scoring_version.
+   *
+   * @param string|null $scoring_version Identifier of the rubric version used to compute the scores
+   *
+   * @return $this
+   */
+  public function setScoringVersion(?string $scoring_version = null): self
+  {
+    $this->scoring_version = $scoring_version;
 
     return $this;
   }

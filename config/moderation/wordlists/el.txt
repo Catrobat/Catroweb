@@ -1,0 +1,68 @@
+# Greek profanity word list
+# Sources: readme-SVG/Banned-words
+gam*
+gamísou
+gamó
+gamó && tin && poutána && sou
+gamó && to && spíti && sou
+gamó tin poutána sou
+gamó to spíti sou
+gamóto
+ilíthios
+kariólis
+kol*
+kolomparás
+kolopaídi
+kolotoúmpa
+kológeros
+malak*
+malaka
+malakas
+malakía
+moun*
+mounáki
+mouní
+poutána
+poústis
+sichtír)
+skatá
+vlákas
+ái && gamísou
+ái && sichtír
+ái gamísou
+ái sichtír
+ánte && gamísou
+ánte gamísou
+άι && γαμήσου
+άι && σιχτίρ
+άι γαμήσου
+άι σιχτίρ
+άντε && γαμήσου
+άντε γαμήσου
+βλάκας
+γαμ*
+γαμήσου
+γαμώ
+γαμώ && την && πουτάνα && σου
+γαμώ && το && σπίτι && σου
+γαμώ την πουτάνα σου
+γαμώ το σπίτι σου
+γαμώτο
+ηλίθιος
+καριόλης
+κωλ*
+κωλομπαράς
+κωλοπαίδι
+κωλοτούμπα
+κωλόγερος
+μαλ*
+μαλάκα
+μαλάκας
+μαλακία
+μουν*
+μουνάκι
+μουνί
+πουτάνα
+πούστης
+σιχτίρ
+σκατά

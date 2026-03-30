@@ -1,0 +1,140 @@
+# French profanity word list
+# Sources: GLINCKER/glin-profanity, readme-SVG/Banned-words
+baiser
+bander
+bigornette
+bit*
+bite
+bitte
+bloblos
+bordel
+bosser
+bourré
+bourré*
+bourrée
+bra*
+brackmard
+branlage
+branler
+branlette
+branleur
+branleuse
+brouter && le && cresson
+brouter le cresson
+bâtard
+caca
+cailler
+casse‑toi
+chatte
+chi*
+chiant
+chiasse
+chier
+chiottes
+clito
+clito*
+clitoris
+con
+con*
+connard
+connasse
+conne
+couill*
+couille
+couilles
+couillon
+cramouille
+cul
+drague
+déconne
+déconne*
+déconner
+emmerd*
+emmerdant
+emmerder
+emmerdeur
+emmerdeuse
+encul*
+enculeur
+enculeurs
+enculé
+enculée
+enfoiré
+enfoiré*
+enfoirée
+ferme && ta && gueule
+ferme ta gueule
+fille && de && pute
+fille de pute
+fils && de && pute
+fils de pute
+folle
+foutre
+gerbe
+gerbe*
+gerber
+gouine
+grande && folle
+grande folle
+grogniasse
+gros && con
+gros con
+gueule
+jouir
+la && putain && de && ta && mère
+la putain de ta mère
+malpt
+MALPT
+merde
+merde*
+merdeuse
+merdeux
+meuf
+ménage && à && trois
+ménage à trois
+negro
+nique && ta && mère
+nique && ta && race
+nique ta mère
+nique ta race
+nègre
+palucher
+pipi
+pisser
+pouffiasse
+pousse-crotte
+put*
+putain
+pute
+péd*
+pédale
+pédé
+péter
+ramoner
+sac && à && foutre
+sac && à && merde
+sac à foutre
+sac à merde
+sal*
+salaud
+salope
+suce
+ta && gueule
+ta gueule
+tanche
+tapette
+teuch
+teuf
+tri*
+tringler
+trique
+troncher
+trou && du && cul
+trou du cul
+turlute
+va && te && faire && foutre
+va te faire foutre
+veuve
+zigounette
+zizi
+étron

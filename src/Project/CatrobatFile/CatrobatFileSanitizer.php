@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\CatrobatFile;
 
+use App\Moderation\TextSanitizer;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatCode\Parser\ParsedScene;
 use App\Project\CatrobatCode\Parser\ParsedSceneProject;
@@ -20,12 +21,18 @@ class CatrobatFileSanitizer
 
   private ?string $extracted_file_root_path = null;
 
-  public function __construct(private readonly CatrobatCodeParser $catrobat_code_parser)
-  {
+  public function __construct(
+    private readonly CatrobatCodeParser $catrobat_code_parser,
+    private readonly TextSanitizer $textSanitizer,
+  ) {
   }
 
   public function sanitize(ExtractedCatrobatFile $extracted_file): void
   {
+    $extracted_file->setName($this->textSanitizer->sanitize($extracted_file->getName()) ?? $extracted_file->getName());
+    $extracted_file->setDescription($this->textSanitizer->sanitize($extracted_file->getDescription()) ?? $extracted_file->getDescription());
+    $extracted_file->setNotesAndCredits($this->textSanitizer->sanitize($extracted_file->getNotesAndCredits()) ?? $extracted_file->getNotesAndCredits());
+
     $this->extracted_file_root_path = $extracted_file->getPath();
     $this->sound_paths = $extracted_file->getContainingSoundPaths();
     $this->image_paths = $extracted_file->getContainingImagePaths();

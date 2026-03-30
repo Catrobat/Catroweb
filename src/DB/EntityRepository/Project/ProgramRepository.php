@@ -344,10 +344,10 @@ class ProgramRepository extends ServiceEntityRepository
     ;
   }
 
-  public function getProjectDataByIds(array $program_ids): array
+  public function getProjectDataByIds(array $program_ids, ?bool $is_debug_build_request = null): array
   {
     $query_builder = $this->createQueryBuilder('e');
-    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder);
+    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, null, '', $is_debug_build_request);
     $query_builder
       ->select(['e.id', 'e.name', 'e.uploaded_at', 'u.username'])
       ->innerJoin('e.user', 'u')
@@ -357,6 +357,27 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     return $query_builder->getQuery()->getResult();
+  }
+
+  /**
+   * Fetches project data without visibility filtering — used by the remix graph
+   * which must show all connected projects regardless of visibility state.
+   */
+  public function getProjectDataByIdsUnfiltered(array $program_ids): array
+  {
+    if ([] === $program_ids) {
+      return [];
+    }
+
+    return $this->createQueryBuilder('e')
+      ->select(['e.id', 'e.name', 'e.uploaded_at', 'u.username'])
+      ->innerJoin('e.user', 'u')
+      ->andWhere('e.id IN (:program_ids)')
+      ->setParameter('program_ids', $program_ids)
+      ->distinct()
+      ->getQuery()
+      ->getResult()
+    ;
   }
 
   public function getMostLikedPrograms(?string $flavor, string $max_version, int $limit = 0, int $offset = 0): array
@@ -464,17 +485,17 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = ''): QueryBuilder
+  private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', ?bool $is_debug_build_request = null): QueryBuilder
   {
-    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, 'e');
+    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, 'e', $is_debug_build_request);
 
     return $this->excludePrivateProjects($qb, 'e');
   }
 
-  private function excludeUnavailableProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
+  private function excludeUnavailableProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', string $alias = 'e', ?bool $is_debug_build_request = null): QueryBuilder
   {
     $qb = $this->excludeInvisibleProjects($qb, $alias);
-    $qb = $this->excludeDebugProjects($qb, $alias);
+    $qb = $this->excludeDebugProjects($qb, $alias, $is_debug_build_request);
     $qb = $this->setFlavorConstraint($qb, $flavor, $alias);
 
     return $this->excludeProjectsWithTooHighLanguageVersion($qb, $max_version, $alias);
@@ -517,9 +538,19 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function excludeDebugProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  private function excludeDebugProjects(QueryBuilder $query_builder, string $alias = 'e', ?bool $is_debug_build_request = null): QueryBuilder
   {
-    if (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
+    if (null === $is_debug_build_request) {
+      if (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
+        $query_builder->andWhere(
+          $query_builder->expr()->eq($alias.'.debug_build', $query_builder->expr()->literal(false))
+        );
+      }
+
+      return $query_builder;
+    }
+
+    if (!$is_debug_build_request) {
       $query_builder->andWhere(
         $query_builder->expr()->eq($alias.'.debug_build', $query_builder->expr()->literal(false))
       );

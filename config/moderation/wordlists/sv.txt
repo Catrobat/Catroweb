@@ -1,0 +1,55 @@
+# Swedish profanity word list
+# Sources: GLINCKER/glin-profanity, readme-SVG/Banned-words
+arsle
+brutta
+discofitta
+dra && åt && helvete
+dra åt helvete
+fan
+fitt*
+fitta
+fittig
+för && helvete
+för helvete
+helvete
+hård
+jävlar
+knulla
+kuk
+kuk*
+kuksås
+kött*
+kötthuvud
+köttnacke
+moona
+moona*
+moonade
+moonar
+moonat
+mutta
+neger
+nigger
+olla
+pippa
+pitt
+prutt
+pök
+runka
+röv
+röv*
+rövhål
+rövknulla
+satan
+skit && ner && dig
+skit ner dig
+skita
+skäggbiff
+sne*fitta
+snedfitta
+snefitta
+stake
+subba
+sätta && på
+sätta på
+sås
+tusan

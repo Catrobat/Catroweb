@@ -20,6 +20,7 @@ import ProjectApi from '../Api/ProjectApi'
 import { ProjectEditorTextFieldModel } from './ProjectEditorTextFieldModel'
 import { ProjectEditorModel } from './ProjectEditorModel'
 import MessageDialogs from '../Components/MessageDialogs'
+import './RemixGraphInline'
 
 require('./ProjectPage.scss')
 

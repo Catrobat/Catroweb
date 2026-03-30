@@ -75,6 +75,15 @@ default:
                 - App\System\Testing\Behat\Context\DataFixturesContext
                 - App\System\Testing\Behat\Context\ApiContext
 
+        api-sanitizer:
+            paths:
+                - tests/BehatFeatures/api/sanitizer
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+                - App\System\Testing\Behat\Context\SanitizerContext
+
         api-moderation:
             paths:
                 - tests/BehatFeatures/api/moderation
@@ -95,6 +104,39 @@ default:
         api-projects:
             paths:
                 - tests/BehatFeatures/api/projects
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+
+        api-projects-get:
+            paths:
+                - tests/BehatFeatures/api/projects/GET_project_id
+                - tests/BehatFeatures/api/projects/GET_project_id_catrobat
+                - tests/BehatFeatures/api/projects/GET_project_id_code_statistics
+                - tests/BehatFeatures/api/projects/GET_project_id_recommendations
+                - tests/BehatFeatures/api/projects/GET_projects
+                - tests/BehatFeatures/api/projects/GET_projects_categories
+                - tests/BehatFeatures/api/projects/GET_projects_extensions
+                - tests/BehatFeatures/api/projects/GET_projects_featured
+                - tests/BehatFeatures/api/projects/GET_projects_search
+                - tests/BehatFeatures/api/projects/GET_projects_tags
+                - tests/BehatFeatures/api/projects/GET_projects_user
+                - tests/BehatFeatures/api/projects/GET_projects_user_id
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+
+        api-projects-write:
+            paths:
+                - tests/BehatFeatures/api/projects/POST_projects
+                - tests/BehatFeatures/api/projects/DELETE_project_id
+                - tests/BehatFeatures/api/projects/PUT_project_id
+                - tests/BehatFeatures/api/projects/reactions
+                - tests/BehatFeatures/api/projects/flavor_use_extension.feature
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -135,14 +177,6 @@ default:
                 - App\System\Testing\Behat\Context\DataFixturesContext
                 - App\System\Testing\Behat\Context\ApiContext
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
-
-        api-tag:
-            paths:
-                - tests/BehatFeatures/api/tag
-            contexts:
-                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
-                - App\System\Testing\Behat\Context\DataFixturesContext
-                - App\System\Testing\Behat\Context\ApiContext
 
         api-translation:
             paths:
@@ -189,6 +223,41 @@ default:
         web-admin:
             paths:
                 - tests/BehatFeatures/web/admin
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+                - App\System\Testing\Behat\Context\ApiContext
+
+        web-admin-1:
+            paths:
+                - tests/BehatFeatures/web/admin/projects_overview.feature
+                - tests/BehatFeatures/web/admin/featured_programs.feature
+                - tests/BehatFeatures/web/admin/approve_projects.feature
+                - tests/BehatFeatures/web/admin/login_basics.feature
+                - tests/BehatFeatures/web/admin/moderation_queue.feature
+                - tests/BehatFeatures/web/admin/server_maintenance.feature
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+                - App\System\Testing\Behat\Context\ApiContext
+
+        web-admin-2:
+            paths:
+                - tests/BehatFeatures/web/admin/apk_generation_pending.feature
+                - tests/BehatFeatures/web/admin/apk_generation_ready.feature
+                - tests/BehatFeatures/web/admin/broadcast_notification.feature
+                - tests/BehatFeatures/web/admin/db_updater
+                - tests/BehatFeatures/web/admin/example_programs.feature
+                - tests/BehatFeatures/web/admin/feature_flag.feature
+                - tests/BehatFeatures/web/admin/mail_preview.feature
+                - tests/BehatFeatures/web/admin/maintenance_information.feature
+                - tests/BehatFeatures/web/admin/media_library_assets.feature
+                - tests/BehatFeatures/web/admin/media_library_categories.feature
+                - tests/BehatFeatures/web/admin/survey.feature
+                - tests/BehatFeatures/web/admin/upload_project.feature
+                - tests/BehatFeatures/web/admin/users_users.feature
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext
@@ -270,6 +339,31 @@ default:
         web-profile:
             paths:
                 - tests/BehatFeatures/web/profile
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+                - App\System\Testing\Behat\Context\ApiContext
+
+        web-profile-1:
+            paths:
+                - tests/BehatFeatures/web/profile/profile_edit.feature
+                - tests/BehatFeatures/web/profile/profile.feature
+                - tests/BehatFeatures/web/profile/profile_image.feature
+                - tests/BehatFeatures/web/profile/profile_data_export.feature
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+                - App\System\Testing\Behat\Context\ApiContext
+
+        web-profile-2:
+            paths:
+                - tests/BehatFeatures/web/profile/follow.feature
+                - tests/BehatFeatures/web/profile/profile_user_projects.feature
+                - tests/BehatFeatures/web/profile/profile_verification.feature
+                - tests/BehatFeatures/web/profile/profile_suspended.feature
+                - tests/BehatFeatures/web/profile/many_follower.feature
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext

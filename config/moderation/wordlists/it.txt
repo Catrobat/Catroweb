@@ -1,0 +1,238 @@
+# Italian profanity word list
+# Sources: GLINCKER/glin-profanity, readme-SVG/Banned-words
+allupato
+ammucchiata
+anale
+arr*
+arrapato
+arrusa
+arruso
+assatanato
+bag*
+bagascia
+bagassa
+bagnarsi
+bal*
+baldracca
+balle
+batt*
+battere
+battona
+belino
+biga
+bocchin*
+bocchinara
+bocchino
+bofilo
+boiata
+bordello
+brinca
+bucaiolo
+budiùlo
+buona donna
+busone
+cac*
+cacca
+caccati in mano e prenditi a schiaffi
+caciocappella
+cadavere
+cag*
+cagare
+cagata
+cagna
+cammello
+cappella
+carciofo
+carità
+casci
+cazz*
+cazzata
+cazzimma
+cazzo
+cazzone
+cesso
+checca
+chia*
+chiappa
+chiavare
+chiavata
+ciospo
+ciucciami && il && cazzo
+ciucciami il cazzo
+coglion*
+coglione
+coglioni
+cornuto
+cozza
+cul*
+culattina
+culattone
+culo
+di merda
+ditalino
+duro
+fare unaŠ
+fava
+femminuccia
+fica
+fig*
+figa
+figlio && di && buona && donna
+figlio && di && puttana
+figlio di buona donna
+figlio di puttana
+figone
+finocchio
+fotter*
+fottere
+fottersi
+fracicone
+fregna
+fro*cio
+frocio
+froscio
+fuori come un balcone
+goldone
+grilletto
+guanto
+guardone
+imbecille
+inc*rsi
+incazzarsi
+incoglionirsi
+ingoio
+l'arte bolognese
+lecc*
+leccaculo
+lecchino
+lof*
+lofare
+loffa
+loffare
+lumaca
+manico
+mannaggia
+merd*
+merda
+merdata
+merdoso
+mignotta
+minchi*
+minchia
+minchione
+mon*
+mona
+monta
+montare
+mussa
+nave && scuola
+nave scuola
+nerchia
+nudo
+padulo
+pall*
+palle
+palloso
+pat*
+patacca
+patonza
+pecorina
+pesce
+picio
+pin*
+pincare
+pinnolone
+pip*
+pipa
+pippa
+pippone
+pipì
+pirla
+pis*
+pisciare
+piscio
+pisello
+pistola
+pistolotto
+pom*
+pomiciare
+pompa
+pompino
+porc*
+porca
+porca && madonna
+porca && miseria
+porca && puttana
+porca madonna
+porca miseria
+porca puttana
+porco
+porco && due
+porco && zio
+porco due
+porco zio
+potta
+puppami
+puttana
+quaglia
+recchione
+regina
+rincoglionire
+rizzarsi
+rompi*alle
+rompiballe
+rompipalle
+ruffiano
+sbatter*
+sbattere
+sbattersi
+sborr*
+sborra
+sborrata
+sborrone
+sbrodolata
+sco*
+scopare
+scopata
+scorreggiare
+sega
+slingua*
+slinguare
+slinguata
+smandrappata
+soc*
+soccia
+socmel
+sorca
+spagnola
+spompinare
+sticchio
+stronz*
+stronza
+stronzata
+stronzo
+succhi*
+succhiami
+succhione
+sve*
+sveltina
+sverginare
+tarzanello
+terrone
+testa && di && cazzo
+testa di cazzo
+tette
+tirare
+topa
+tro*
+troia
+trombare
+uccello
+vacca
+vaffanculo
+vangare
+venire
+zinne
+zio && cantante
+zio cantante
+zoccola

@@ -45,7 +45,6 @@ Feature: As a visitor I want to see a project page
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "Download"
-    And I should not see "Remix Graph"
     And I should not see "Download as app"
     And I should see "Statistics"
     And I should see "Code View"

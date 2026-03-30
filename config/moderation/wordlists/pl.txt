@@ -1,0 +1,78 @@
+# Polish profanity word list
+# Sources: GLINCKER/glin-profanity, readme-SVG/Banned-words
+burdel
+burdel*
+burdelmama
+chuj
+chuj*
+chujnia
+ciota
+cipa
+cyc
+debil
+dmuchać
+do && kurwy && nędzy
+do kurwy nędzy
+dup*
+dupa
+dupek
+duperele
+dziwka
+fiut
+gówno
+gówno && prawda
+gówno prawda
+huj
+huj && ci && w && dupę
+huj ci w dupę
+ja && pierdolę
+ja pierdolę
+jaj*
+jajco
+jajeczko
+jajko
+jajo
+jeba*
+jebany
+jebać
+kurw*
+kurwa
+kurwy
+kuta*
+kutafon
+kutas
+lizać && pałę
+lizać pałę
+obciągać && chuja
+obciągać && fiuta
+obciągać && loda
+obciągać chuja
+obciągać fiuta
+obciągać loda
+pie*
+pieprzyć
+pierdolec
+pierdolić
+pierdolnięty
+pierdolnąć
+pierdoła
+pierdzieć
+pizda
+pojeb
+pojeb*
+pojebany
+popierdolony
+robic && loda
+robic loda
+robić && loda
+robić loda
+ruchać
+rzygać
+skurwysyn
+sra*
+sraczka
+srać
+suka
+syf
+wkurwiać
+zajebisty

@@ -1,0 +1,94 @@
+# Portuguese profanity word list
+# Sources: GLINCKER/glin-profanity, readme-SVG/Banned-words
+aborto
+amador
+aranha
+ariano
+balalao
+bastardo
+bicha
+bis*
+biscate
+bissexual
+boceta
+boob
+bosta
+braulio && de && borracha
+braulio de borracha
+bumbum
+burro
+cabrao
+cacete
+cagar
+camisinha
+caralho
+cerveja
+chochota
+chupar
+clitoris
+cocaína
+coito
+colhoes
+comer
+con*
+cona
+consolo
+corno
+cu
+dar && o && rabo
+dar o rabo
+dum && raio
+dum raio
+esporra
+fecal
+filho && da && puta
+filho da puta
+fod*
+foda
+foda-se
+foder
+frango && assado
+frango assado
+gozar
+grelho
+heroína
+heterosexual
+homem && gay
+homem gay
+homo*
+homoerótico
+homosexual
+inferno
+lolita
+lésbica
+mama
+merda
+paneleiro
+passar && um && cheque
+passar um cheque
+pau
+peidar
+pinto
+porra
+puta
+puta && que && pariu
+puta && que && te && pariu
+puta que pariu
+puta que te pariu
+pênis
+queca
+sac*
+sacanagem
+saco
+torneira
+transar
+vadia
+vai && tomar && no && cu
+vai tomar no cu
+vai-te && foder
+vai-te foder
+veado
+vibrador
+xana
+xochota
+ânus

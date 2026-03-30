@@ -14,7 +14,7 @@ export class OwnProjectList {
     this.container = container
     this.projectsContainer = container.getElementsByClassName('projects-container')[0]
     const attributes =
-      'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private'
+      'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private,not_for_kids'
     this.baseUrl = baseUrl
     this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' + attributes : apiUrl + '?' + attributes
     this.projectsLoaded = 0
@@ -63,17 +63,18 @@ export class OwnProjectList {
     this.projectActionMenu = projectActionMenuEl ? new MDCMenu(projectActionMenuEl) : null
     if (this.projectActionMenu) {
       this.projectActionMenu.listen('MDCMenu:selected', function (event) {
-        if (event.detail.index === 0) {
-          // Set public/private
-          self._actionToggleVisibility(self.projectActionMenu.projectId)
-        } else if (event.detail.index === 1) {
-          // Share
-          self._actionShareProject(self.projectActionMenu.projectId)
-        } else if (event.detail.index === 2) {
-          // Delete
-          self._actionDeleteProject(self.projectActionMenu.projectId)
+        const action = event.detail.item.dataset.action
+        const id = self.projectActionMenu.projectId
+        const handlers = {
+          'toggle-visibility': () => self._actionToggleVisibility(id),
+          share: () => self._actionShareProject(id),
+          'not-for-kids': () => self._actionToggleNotForKids(id),
+          delete: () => self._actionDeleteProject(id),
+        }
+        if (handlers[action]) {
+          handlers[action]()
         } else {
-          console.error('Invalid menu item selected')
+          console.error('Unknown menu action:', action)
         }
       })
       this.projectActionMenu.setAnchorCorner(Corner.TOP_END)
@@ -235,10 +236,18 @@ export class OwnProjectList {
           const visibilityItem =
             self.projectActionMenu.items[0].getElementsByClassName('mdc-list-item__text')[0]
           if (self.projectsData[data.id].private) {
-            // private project
             visibilityItem.innerText = visibilityItem.dataset.textPublic
           } else {
             visibilityItem.innerText = visibilityItem.dataset.textPrivate
+          }
+
+          const nfkEl = self.projectActionMenu.root.querySelector('[data-action="not-for-kids"]')
+          const nfkItem = nfkEl ? nfkEl.querySelector('.mdc-list-item__text') : null
+          if (nfkItem) {
+            const nfkValue = self.projectsData[data.id].not_for_kids || 0
+            nfkItem.innerText = nfkValue
+              ? nfkItem.dataset.textSafeForKids
+              : nfkItem.dataset.textNotForKids
           }
 
           self.projectActionMenu.setAnchorElement(event.target)
@@ -393,6 +402,55 @@ export class OwnProjectList {
                 '.own-project-list__project__details__visibility__text',
               ).innerText = self.projectInfoConfiguration.visibilityPrivateText
             }
+          },
+          function () {
+            self._removeLoadingSpinner(projectElem)
+          },
+        )
+      }
+    })
+  }
+
+  _actionToggleNotForKids(id) {
+    const self = this
+    const project = this.projectsData[id]
+    const nfkConfig = this.actionConfiguration.notForKids
+    const currentValue = project.not_for_kids || 0
+
+    if (currentValue === 2) {
+      showSnackbar('#share-snackbar', nfkConfig.moderatorLocked, SnackbarDuration.error)
+      return
+    }
+
+    const newValue = currentValue === 0
+    Swal.fire({
+      title: nfkConfig.confirmTitle,
+      html: newValue ? nfkConfig.confirmMark : nfkConfig.confirmUnmark,
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary',
+      },
+      buttonsStyling: false,
+      confirmButtonText: nfkConfig.confirmYes,
+    }).then((result) => {
+      if (result.value) {
+        const projectElem = document.querySelector(
+          '.own-project-list__project[data-id="' + id + '"]',
+        )
+        self._addLoadingSpinner(projectElem)
+        const projectApi = new ProjectApi()
+        projectApi.updateProject(
+          id,
+          { not_for_kids: newValue },
+          function () {
+            project.not_for_kids = newValue ? 1 : 0
+            showSnackbar(
+              '#share-snackbar',
+              newValue ? nfkConfig.successMarked : nfkConfig.successUnmarked,
+            )
           },
           function () {
             self._removeLoadingSpinner(projectElem)

@@ -3924,6 +3924,10 @@ components:
           type: string
           example: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ…'
           description: 'An image representing the project in data URI scheme.'
+        not_for_kids:
+          type: boolean
+          example: false
+          description: 'Mark the project as not suitable for kids (true) or safe for kids (false). Cannot be changed if set by a moderator.'
 
     ## Response
 
@@ -5054,29 +5058,41 @@ components:
       properties:
         score_abstraction:
           type: integer
-          description: 'Abstraction score (0-3)'
-          example: 2
+          description: 'Abstraction score (0-6)'
+          example: 6
         score_parallelism:
           type: integer
-          description: 'Parallelism score (0-3)'
-          example: 1
+          description: 'Parallelism score (0-6)'
+          example: 3
         score_synchronization:
           type: integer
-          description: 'Synchronization score (0-3)'
+          description: 'Synchronization score (0-6)'
           example: 3
         score_logical_thinking:
           type: integer
-          description: 'Logical thinking score (0-3)'
-          example: 2
+          description: 'Logical thinking score (0-6)'
+          example: 3
         score_flow_control:
           type: integer
-          description: 'Flow control score (0-3)'
-          example: 2
+          description: 'Flow control score (0-6)'
+          example: 4
         score_user_interactivity:
           type: integer
-          description: 'User interactivity score (0-3)'
-          example: 1
+          description: 'User interactivity score (0-6)'
+          example: 3
         score_data_representation:
           type: integer
-          description: 'Data representation score (0-3)'
-          example: 3
+          description: 'Data representation score (0-6)'
+          example: 6
+        score_bonus:
+          type: integer
+          description: 'Bonus points awarded for physics or extension usage'
+          example: 2
+        score_total:
+          type: integer
+          description: 'Sum of all category scores and bonus points'
+          example: 27
+        scoring_version:
+          type: string
+          description: 'Identifier of the rubric version used to compute the scores'
+          example: 'rubric_2021_v1'

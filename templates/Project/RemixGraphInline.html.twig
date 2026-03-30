@@ -1,0 +1,75 @@
+<div id="remix-graph-inline"
+     class="remix-graph-inline"
+     data-graph-url="{{ path('project_remix_graph_api', {id: project.id}) }}"
+     data-project-id="{{ project.id }}"
+     data-project-url-template="{{ path('program', {id: 0})|replace({'/0': '/__PROJECT_ID__'}) }}"
+     data-scratch-project-base-url="https://scratch.mit.edu/projects"
+     data-not-available-image-url="{{ asset('images/default/not_available.png') }}"
+     data-trans-ok="{{ 'ok'|trans({}, 'catroweb') }}"
+     data-trans-title="{{ 'remixGraph.showRemixGraph'|trans({}, 'catroweb') }}"
+     data-trans-by="{{ 'remixGraph.by'|trans({}, 'catroweb') }}"
+     data-trans-open="{{ 'remixGraph.open'|trans({}, 'catroweb') }}"
+     data-trans-show-paths="{{ 'remixGraph.showPaths'|trans({}, 'catroweb') }}"
+     data-trans-loading="{{ 'remixGraph.loading'|trans({}, 'catroweb') }}"
+     data-trans-error="{{ 'remixGraph.error'|trans({}, 'catroweb') }}"
+     data-trans-empty="{{ 'remixGraph.empty'|trans({}, 'catroweb') }}"
+     data-trans-remixes-label="{{ 'remixGraph.remixesLabel'|trans({}, 'catroweb') }}"
+     data-trans-projects-label="{{ 'remixGraph.projectsLabel'|trans({}, 'catroweb') }}"
+     data-trans-scratch-label="{{ 'remixGraph.scratchLabel'|trans({}, 'catroweb') }}"
+     data-trans-interact-hint="{{ 'remixGraph.interactHint'|trans({}, 'catroweb') }}"
+     data-trans-zoom-in="{{ 'remixGraph.zoomIn'|trans({}, 'catroweb') }}"
+     data-trans-zoom-out="{{ 'remixGraph.zoomOut'|trans({}, 'catroweb') }}"
+     data-trans-reset-view="{{ 'remixGraph.resetView'|trans({}, 'catroweb') }}"
+     data-trans-project-not-available-title="{{ 'remixGraph.projectNotAvailableErrorTitle'|trans({}, 'catroweb') }}"
+     data-trans-project-not-available-description="{{ 'remixGraph.projectNotAvailableErrorDescription'|trans({}, 'catroweb') }}"
+     data-trans-project-not-available="{{ 'remixGraph.projectNotAvailable'|trans({}, 'catroweb') }}"
+     data-trans-project-unknown-user="{{ 'remixGraph.projectUnknownUser'|trans({}, 'catroweb') }}"
+>
+  <button id="remix-graph-toggle" type="button" aria-expanded="false" aria-controls="remix-graph-panel">
+    <i class="material-icons">call_split</i>
+    <span>{{ 'remixGraph.showRemixGraph'|trans({}, 'catroweb') }}</span>
+    <i class="material-icons remix-graph-chevron">expand_more</i>
+  </button>
+
+  <div id="remix-graph-panel" class="remix-graph-panel d-none">
+    <div id="remix-graph-status" class="remix-graph-status"></div>
+
+    <div id="remix-graph-content" class="remix-graph-content d-none">
+      <div class="remix-graph-toolbar">
+        <div class="remix-graph-badges">
+          <div class="remix-graph-badge">
+            <span class="remix-graph-badge__label">{{ 'remixGraph.remixesLabel'|trans({}, 'catroweb') }}</span>
+            <span id="remix-graph-remix-count" class="remix-graph-badge__value">0</span>
+          </div>
+          <div class="remix-graph-badge">
+            <span class="remix-graph-badge__label">{{ 'remixGraph.projectsLabel'|trans({}, 'catroweb') }}</span>
+            <span id="remix-graph-project-count" class="remix-graph-badge__value">0</span>
+          </div>
+          <div class="remix-graph-badge">
+            <span class="remix-graph-badge__label">{{ 'remixGraph.scratchLabel'|trans({}, 'catroweb') }}</span>
+            <span id="remix-graph-scratch-count" class="remix-graph-badge__value">0</span>
+          </div>
+        </div>
+
+        <div class="remix-graph-controls">
+          <button id="remix-graph-zoom-out" type="button" aria-label="{{ 'remixGraph.zoomOut'|trans({}, 'catroweb') }}" title="{{ 'remixGraph.zoomOut'|trans({}, 'catroweb') }}">
+            <i class="material-icons">remove</i>
+          </button>
+          <button id="remix-graph-reset" type="button" aria-label="{{ 'remixGraph.resetView'|trans({}, 'catroweb') }}" title="{{ 'remixGraph.resetView'|trans({}, 'catroweb') }}">
+            <i class="material-icons">center_focus_strong</i>
+          </button>
+          <button id="remix-graph-zoom-in" type="button" aria-label="{{ 'remixGraph.zoomIn'|trans({}, 'catroweb') }}" title="{{ 'remixGraph.zoomIn'|trans({}, 'catroweb') }}">
+            <i class="material-icons">add</i>
+          </button>
+        </div>
+      </div>
+
+      <p class="remix-graph-hint">{{ 'remixGraph.interactHint'|trans({}, 'catroweb') }}</p>
+
+      <div id="remix-graph-network" class="remix-graph-network" aria-label="{{ 'remixGraph.showRemixGraph'|trans({}, 'catroweb') }}"></div>
+    </div>
+  </div>
+
+  <div id="remix-graph-menu-backdrop" class="remix-graph-menu-backdrop d-none"></div>
+  <div id="remix-graph-menu" class="remix-graph-menu d-none" role="dialog" aria-modal="true"></div>
+</div>
