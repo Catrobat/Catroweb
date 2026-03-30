@@ -99,69 +99,24 @@ class RemixManager
     }
   }
 
-  public function getFullRemixGraph(string $project_id): ?array
+  public function getRenderableRemixGraph(string $project_id): array
   {
-    static $MAX_RECURSION_DEPTH = 6;
-    $recursion_depth = 0;
-    $catrobat_ids_of_whole_graph = [$project_id];
-
-    // NOTE: This loop is only needed for exceptional cases (very flat graphs)! In *almost* every case there will
-    //       be only *two* loop-iterations. So you can assume that the number of SQL-queries has already been
-    //       minimized as much as possible.
-    do {
-      $previous_descendant_ids = $catrobat_ids_of_whole_graph;
-
-      $catrobat_ids_of_whole_graph = $this->project_remix_repository->getGraphDescendantIds($catrobat_ids_of_whole_graph);
-
-      $diff_new = array_diff($catrobat_ids_of_whole_graph, $previous_descendant_ids);
-      $diff_previous = array_diff($previous_descendant_ids, $catrobat_ids_of_whole_graph);
-      $diff = array_merge($diff_new, $diff_previous);
-      $stop_criterion = ([] === $diff);
-    } while (!$stop_criterion && (++$recursion_depth < $MAX_RECURSION_DEPTH));
-
-    sort($catrobat_ids_of_whole_graph);
+    $catrobat_ids_of_whole_graph = $this->getConnectedCatrobatProgramIds($project_id);
 
     $catrobat_forward_edge_relations = $this
       ->project_remix_repository
       ->getDirectEdgeRelationsBetweenProgramIds($catrobat_ids_of_whole_graph, $catrobat_ids_of_whole_graph)
     ;
 
-    $catrobat_forward_relations = $this
-      ->project_remix_repository
-      ->getDescendantRelations($catrobat_ids_of_whole_graph)
-    ;
-
-    $catrobat_forward_edge_data = array_map(static fn (ProgramRemixRelation $relation): array => [
-      'ancestor_id' => $relation->getAncestorId(),
-      'descendant_id' => $relation->getDescendantId(),
-      'depth' => $relation->getDepth(),
-    ], $catrobat_forward_edge_relations);
-
-    $catrobat_forward_data = array_map(static fn (ProgramRemixRelation $relation): array => [
-      'ancestor_id' => $relation->getAncestorId(),
-      'descendant_id' => $relation->getDescendantId(),
-      'depth' => $relation->getDepth(),
-    ], $catrobat_forward_relations);
-
     $scratch_edge_relations =
       $this->scratch_project_remix_repository->getDirectEdgeRelationsOfProgramIds($catrobat_ids_of_whole_graph);
     $scratch_node_ids = array_values(array_unique(array_map(static fn (ScratchProgramRemixRelation $relation): string => $relation->getScratchParentId(), $scratch_edge_relations)));
     sort($scratch_node_ids);
 
-    $scratch_edge_data = array_map(static fn (ScratchProgramRemixRelation $relation): array => [
-      'ancestor_id' => $relation->getScratchParentId(),
-      'descendant_id' => $relation->getCatrobatChildId(),
-    ], $scratch_edge_relations);
-
     $catrobat_backward_edge_relations = $this
       ->project_remix_backward_repository
       ->getDirectEdgeRelations($catrobat_ids_of_whole_graph, $catrobat_ids_of_whole_graph)
     ;
-
-    $catrobat_backward_edge_data = array_map(static fn (ProgramRemixBackwardRelation $relation): array => [
-      'ancestor_id' => $relation->getParentId(),
-      'descendant_id' => $relation->getChildId(),
-    ], $catrobat_backward_edge_relations);
 
     $catrobat_nodes_data = [];
     $projects_data = $this->project_repository->getProjectDataByIds($catrobat_ids_of_whole_graph);
@@ -175,15 +130,63 @@ class RemixManager
       $scratch_nodes_data[$scratch_project_data['id']] = $scratch_project_data;
     }
 
+    $nodes = [];
+    foreach ($catrobat_ids_of_whole_graph as $node_id) {
+      $nodes[] = [
+        'id' => 'catrobat_'.$node_id,
+        'projectId' => $node_id,
+        'source' => 'catrobat',
+        'available' => array_key_exists((string) $node_id, $catrobat_nodes_data),
+        'name' => $catrobat_nodes_data[$node_id]['name'] ?? null,
+        'username' => $catrobat_nodes_data[$node_id]['username'] ?? null,
+      ];
+    }
+
+    foreach ($scratch_node_ids as $node_id) {
+      $nodes[] = [
+        'id' => 'scratch_'.$node_id,
+        'projectId' => $node_id,
+        'source' => 'scratch',
+        'available' => array_key_exists((string) $node_id, $scratch_nodes_data),
+        'name' => $scratch_nodes_data[$node_id]['name'] ?? null,
+        'username' => $scratch_nodes_data[$node_id]['username'] ?? null,
+      ];
+    }
+
+    $edges = [];
+    $edge_index = 0;
+
+    foreach ($catrobat_forward_edge_relations as $relation) {
+      $edges[] = [
+        'id' => 'edge_'.$edge_index++,
+        'from' => 'catrobat_'.$relation->getAncestorId(),
+        'to' => 'catrobat_'.$relation->getDescendantId(),
+      ];
+    }
+
+    foreach ($catrobat_backward_edge_relations as $relation) {
+      $edges[] = [
+        'id' => 'edge_'.$edge_index++,
+        'from' => 'catrobat_'.$relation->getParentId(),
+        'to' => 'catrobat_'.$relation->getChildId(),
+      ];
+    }
+
+    foreach ($scratch_edge_relations as $relation) {
+      $edges[] = [
+        'id' => 'edge_'.$edge_index++,
+        'from' => 'scratch_'.$relation->getScratchParentId(),
+        'to' => 'catrobat_'.$relation->getCatrobatChildId(),
+      ];
+    }
+
     return [
-      'catrobatNodes' => $catrobat_ids_of_whole_graph,
-      'catrobatNodesData' => $catrobat_nodes_data,
-      'scratchNodes' => $scratch_node_ids,
-      'scratchNodesData' => $scratch_nodes_data,
-      'catrobatForwardEdgeRelations' => $catrobat_forward_edge_data,
-      'catrobatBackwardEdgeRelations' => $catrobat_backward_edge_data,
-      'catrobatForwardRelations' => $catrobat_forward_data,
-      'scratchEdgeRelations' => $scratch_edge_data,
+      'projectId' => $project_id,
+      'projectCount' => count($catrobat_ids_of_whole_graph),
+      'scratchCount' => count($scratch_node_ids),
+      'remixCount' => max(count($catrobat_ids_of_whole_graph) - 1, 0),
+      'nodes' => $nodes,
+      'edges' => $edges,
     ];
   }
 
@@ -200,24 +203,45 @@ class RemixManager
     $this->project_remix_backward_repository->markAllUnseenRelationsAsSeen($seen_at);
   }
 
-  public function remixCount(string $project_id): int
-  {
-    $result = $this->getFullRemixGraph($project_id);
-
-    if (null === $result) {
-      return 0;
-    }
-
-    if (null === $result['catrobatNodes'] || 0 === (is_countable($result['catrobatNodes']) ? count($result['catrobatNodes']) : 0)) {
-      return 0;
-    }
-
-    return (is_countable($result['catrobatNodes']) ? count($result['catrobatNodes']) : 0) - 1;
-  }
-
   public function getProjectRepository(): ProgramRepository
   {
     return $this->project_repository;
+  }
+
+  /**
+   * @return string[]
+   */
+  private function getConnectedCatrobatProgramIds(string $project_id): array
+  {
+    static $MAX_RECURSION_DEPTH = 6;
+
+    $recursion_depth = 0;
+    $catrobat_ids_of_whole_graph = [$project_id];
+
+    // NOTE: This loop is only needed for exceptional cases (very flat graphs)! In almost every case there will
+    // be only two loop iterations, so this still keeps the query count low while resolving the connected component.
+    do {
+      $previous_descendant_ids = $catrobat_ids_of_whole_graph;
+      $catrobat_root_ids = $this->project_remix_repository->getRootProgramIds($catrobat_ids_of_whole_graph);
+
+      if ([] === $catrobat_root_ids) {
+        break;
+      }
+
+      $resolved_descendant_ids = $this->project_remix_repository->getDescendantIds($catrobat_root_ids);
+      if ([] !== $resolved_descendant_ids) {
+        $catrobat_ids_of_whole_graph = $resolved_descendant_ids;
+      }
+
+      $diff_new = array_diff($catrobat_ids_of_whole_graph, $previous_descendant_ids);
+      $diff_previous = array_diff($previous_descendant_ids, $catrobat_ids_of_whole_graph);
+      $diff = array_merge($diff_new, $diff_previous);
+      $stop_criterion = ([] === $diff);
+    } while (!$stop_criterion && (++$recursion_depth < $MAX_RECURSION_DEPTH));
+
+    sort($catrobat_ids_of_whole_graph);
+
+    return array_values(array_unique($catrobat_ids_of_whole_graph));
   }
 
   /**

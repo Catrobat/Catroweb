@@ -1,5 +1,5 @@
 @homepage @remixgraph
-Feature: As a visitor I want to see the full remix graph of a program on the program page
+Feature: As a visitor I want to see the full remix graph inline on the program page
 
   Background:
     Given there are users:
@@ -18,7 +18,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
       | 8  | project 8 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true       | false |
       | 9  | project 9 | abcef                   | Superman | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
 
-    #-------------------------------------------------------------------------------------------------------------------
+    #---------------------------------------------------------------------------------------------------------------
     # this is how the remix graph looks like according to the following forward remix relations (closure table):
     #              (1)
     #               \
@@ -29,7 +29,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
     #             (5) (6)__/        (9)
     #               \ /
     #               (7)
-    #-------------------------------------------------------------------------------------------------------------------
+    #---------------------------------------------------------------------------------------------------------------
     And there are forward remix relations:
       | ancestor_id | descendant_id | depth |
       | 1           | 1             | 0     |
@@ -65,74 +65,65 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
       | 8           | 9             | 1     |
       | 9           | 9             | 0     |
 
-    And there are feature flags:
-      | name          | value |
-      | remix-graph   | true  |
-
-  Scenario: For performance reasons the remix graph is on its own page
+  Scenario: Project page shows the remix graph toggle button
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#remixGraphButton-small"
-    And I wait for the page to be loaded
-    Then I should be on "/app/project/1/remix_graph"
-    And the "#top-app-bar__title" element should contain "Remixes"
+    Then the element "#remix-graph-inline" should exist
+    And the element "#remix-graph-toggle" should be visible
 
-  Scenario: Remix graphs provides means to return to the project page
-    Given I am on "/app"
-    When I go to "/app/project/1/remix_graph"
+  Scenario: Remix graph panel is hidden by default
+    Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#top-app-bar__back__btn-back"
-    Then I should be on "/app/project/1"
+    Then the element "#remix-graph-panel" should not be visible
 
-  Scenario: Remix graph title is no link
-    Given I am on "/app/project/1/remix_graph"
-    And I click "#top-app-bar__title"
-    Then I should be on "/app/project/1/remix_graph"
-
-  Scenario: Viewing details of project 8 and number of remixes
-    Given I am on "/app/project/8/remix_graph"
+  Scenario: Clicking the toggle button loads the remix graph inline
+    Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I should see "Remixes (1)"
+    When I click "#remix-graph-toggle"
+    And I wait for AJAX to finish
+    And I wait 2500 milliseconds
+    Then the element "#remix-graph-panel" should be visible
+    And the element "#remix-graph-network" should exist
+    And the element "#remix-graph-remix-count" should contain "6"
+    And the element "#remix-graph-project-count" should contain "7"
 
-  Scenario: Viewing details of project 9 and number of remixes
-    Given I am on "/app/project/9/remix_graph"
+  Scenario: Clicking the toggle again hides the remix graph panel
+    Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I should see "Remixes (1)"
+    When I click "#remix-graph-toggle"
+    And I wait for AJAX to finish
+    And I wait 1500 milliseconds
+    Then the element "#remix-graph-panel" should be visible
+    When I click "#remix-graph-toggle"
+    Then the element "#remix-graph-panel" should not be visible
 
-  Scenario: Viewing remix graph of project 8
-    Given I am on "/app/project/8/remix_graph"
+  Scenario: Viewing remix graph of project 8 inline
+    Given I am on "/app/project/8"
     And I wait for the page to be loaded
+    When I click "#remix-graph-toggle"
+    And I wait for AJAX to finish
+    And I wait 2500 milliseconds
+    Then the element "#remix-graph-remix-count" should contain "1"
     And I should see a node with id "catrobat_8" having name "project 8" and username "Gangster"
     And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
-
-  Scenario: Viewing remix graph of project 9
-    Given I am on "/app/project/9/remix_graph"
-    And I wait for the page to be loaded
-    And I should see a node with id "catrobat_8" having name "project 8" and username "Gangster"
-    And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
-    And I should see an edge from "catrobat_8" to "catrobat_9"
-
-  Scenario: Viewing details of project 1 and number of remixes
-    Given I am on "/app/project/1/remix_graph"
-    And I wait for the page to be loaded
-    And I should see "Remixes (6)"
-
-  Scenario: Viewing details of project 2 and number of remixes
-    Given I am on "/app/project/2/remix_graph"
-    And I wait for the page to be loaded
-    And I should see "Remixes (6)"
 
   Scenario: Viewing details of project 2 using debug app
     Given I use a debug build of the Catroid app
-    And I am on "/app/project/2/remix_graph"
+    And I am on "/app/project/2"
     And I wait for the page to be loaded
+    When I click "#remix-graph-toggle"
+    And I wait for AJAX to finish
+    And I wait 2500 milliseconds
     Then I should see a node with id "catrobat_7" having name "project 7" and username "Superman"
     And I should see an edge from "catrobat_5" to "catrobat_7"
 
   Scenario: Viewing remix graph using release app
     Given I use a release build of the Catroid app
-    And I am on "/app/project/2/remix_graph"
+    And I am on "/app/project/2"
     And I wait for the page to be loaded
+    When I click "#remix-graph-toggle"
+    And I wait for AJAX to finish
+    And I wait 2500 milliseconds
     Then I should see an unavailable node with id "catrobat_7"
     And I should see an edge from "catrobat_5" to "catrobat_7"

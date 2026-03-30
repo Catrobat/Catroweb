@@ -46,8 +46,6 @@ Encore
     // Fonts
     { from: './assets/Fonts', to: '/fonts/[path][name].[ext]' },
 
-    // Remix graph (deprecated!) - Legacy files kept for reference, feature flag disabled
-    { from: './assets/Legacy', to: '../js/[path][name].[ext]' },
   ])
 
   /*
