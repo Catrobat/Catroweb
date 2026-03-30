@@ -129,7 +129,6 @@
           </div>
         {% endif %}
       {% endif %}
-      {{ include('Project/RemixGraphButtons.html.twig') }}
       <div class="mt-3">
         {{ include('Project/SignAppButton.html.twig') }}
       </div>
@@ -161,20 +160,13 @@
 
   {{ include('Project/Tags.html.twig') }}
 
-  <div class="row d-lg-none">
-    {% if not isIOS() %}
-      <div class="col-6 mt-3">
+  {% if not isIOS() %}
+    <div class="row d-lg-none">
+      <div class="col-12 mt-3">
         {{ include('Project/ApkGenerationButtons.html.twig', {suffix: '-small'}) }}
       </div>
-      <div class="col-6 mt-3">
-        {{ include('Project/RemixGraphButtons.html.twig', {suffix: '-small'}) }}
-      </div>
-    {% else %}
-      <div class="col-12 mb-3">
-        {{ include('Project/RemixGraphButtons.html.twig', {suffix: '-small'}) }}
-      </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
   {% if isFeatureFlagEnabled('sign-apk') %}
      <div class="row d-lg-none">
       <div class="col-12 mt-3 mb-3">
@@ -185,6 +177,8 @@
   {% endif %}
 
   {{ include('Project/Details.html.twig') }}
+
+  {{ include('Project/RemixGraphInline.html.twig') }}
 
   {{ include('Project/CodeStatisticsInline.html.twig') }}
 

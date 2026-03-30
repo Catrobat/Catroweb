@@ -10,61 +10,48 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\RouterInterface;
 
 class RemixController extends AbstractController
 {
-  public function __construct(private readonly RouterInterface $router, private readonly ScreenshotRepository $screenshot_repository, private readonly RemixManager $remix_manager)
-  {
+  private const string SCRATCH_THUMBNAIL_URL_TEMPLATE = 'https://cdn2.scratch.mit.edu/get_image/project/%s_140x140.png';
+  private const string IMAGE_NOT_AVAILABLE_URL = '/images/default/not_available.png';
+
+  public function __construct(
+    private readonly ScreenshotRepository $screenshot_repository,
+    private readonly RemixManager $remix_manager,
+  ) {
   }
 
-  #[Route(path: '/project/{id}/remix_graph', name: 'remix_graph', methods: ['GET'])]
-  public function view(string $id): Response
+  #[Route(path: '/api/project/{id}/remix-graph', name: 'project_remix_graph_api', methods: ['GET'])]
+  public function getRemixGraph(string $id): JsonResponse
   {
-    return $this->render('Project/RemixGraphPage.html.twig', [
-      'id' => $id,
-      'project_details_url_template' => $this->router->generate('program', ['id' => 0]),
-    ]);
-  }
+    $remix_graph = $this->remix_manager->getRenderableRemixGraph($id);
 
-  #[Route(path: '/project/{id}/remix_graph_count', name: 'remix_graph_count', methods: ['GET'])]
-  public function getRemixCount(string $id): Response
-  {
-    // very computation intensive!
-    return new JsonResponse(['count' => $this->remix_manager->remixCount($id)], Response::HTTP_OK);
-  }
+    $nodes = array_map(function (array $node): array {
+      if (!$node['available']) {
+        $node['thumbnailUrl'] = self::IMAGE_NOT_AVAILABLE_URL;
 
-  /**
-   * @throws \Exception
-   */
-  #[Route(path: '/project/{id}/remix_graph_data', name: 'remix_graph_data', methods: ['GET'])]
-  public function getRemixGraphData(string $id): JsonResponse
-  {
-    $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
-    if (null === $remix_graph_data) {
-      return new JsonResponse([
-        'id' => $id,
-        'remixGraph' => null,
-        'catrobatProgramThumbnails' => [],
-      ]);
-    }
-
-    $catrobat_project_thumbnails = [];
-    foreach ($remix_graph_data['catrobatNodes'] as $node_id) {
-      if (!array_key_exists((string) $node_id, $remix_graph_data['catrobatNodesData'])) {
-        $catrobat_project_thumbnails[$node_id] = '/images/default/not_available.png';
-        continue;
+        return $node;
       }
 
-      $catrobat_project_thumbnails[$node_id] = '/'.$this->screenshot_repository
-        ->getThumbnailWebPath($node_id)
-      ;
-    }
+      if ('scratch' === $node['source']) {
+        $node['thumbnailUrl'] = sprintf(self::SCRATCH_THUMBNAIL_URL_TEMPLATE, $node['projectId']);
 
-    return new JsonResponse([
-      'id' => $id,
-      'remixGraph' => $remix_graph_data,
-      'catrobatProgramThumbnails' => $catrobat_project_thumbnails,
-    ]);
+        return $node;
+      }
+
+      $node['thumbnailUrl'] = '/'.$this->screenshot_repository->getThumbnailWebPath($node['projectId']);
+
+      return $node;
+    }, $remix_graph['nodes']);
+
+    $response = new JsonResponse([
+      ...$remix_graph,
+      'nodes' => $nodes,
+    ], Response::HTTP_OK);
+    $response->setPrivate();
+    $response->setMaxAge(300);
+
+    return $response;
   }
 }
