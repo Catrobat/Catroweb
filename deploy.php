@@ -15,6 +15,8 @@ set('default_timeout', 6000);
 
 // Project name and repository
 set('application', getenv('APP_NAME') ?: 'Catroweb');
+set('php_fpm_version', getenv('PHP_FPM_VERSION') ?: '8.5');
+
 set('repository', getenv('DEPLOY_GIT') ?: 'https://github.com/Catrobat/Catroweb.git');
 set('git_tty', false);
 
@@ -56,9 +58,7 @@ set('bin_dir', 'bin');
 set('var_dir', 'var');
 set('web_dir', 'public');
 set('public_dir', 'public');
-
 set('allow_anonymous_stats', false);
-
 // Hosts
 $deployShare = getenv('DEPLOY_HOST') ?: '127.0.0.1';
 $deployUser = getenv('DEPLOY_USER') ?: 'deploy';
@@ -88,7 +88,7 @@ task('restart:nginx', function () {
 });
 
 task('restart:php-fpm', function () {
-  run('sudo /usr/sbin/service php8.5-fpm restart');
+  run('sudo /usr/sbin/service php{{php_fpm_version}}-fpm restart');
 });
 
 task('install:yarn', function () {
@@ -150,12 +150,16 @@ task('smoke_test', function () {
       return;
     }
     warning("Health check attempt {$i}/{$maxRetries} returned HTTP {$result}");
+    if ($i === $maxRetries) {
+      $body = run('curl -s -H "Host: share.catrob.at" http://localhost/api/health --max-time 10 || echo "N/A"');
+      warning("Final health check failed. Response body: {$body}");
+    }
     if ($i < $maxRetries) {
       sleep($retryDelay);
     }
   }
 
-  throw new \RuntimeException("Health check failed after {$maxRetries} attempts");
+  throw new \RuntimeException("Health check failed after {$maxRetries} attempts (Final HTTP Code: {$result})");
 });
 
 // ---------------------------------------------------
@@ -182,7 +186,6 @@ task('deploy', [
   'update:tags',
   'update:extensions',
   'update:special',
-  'deploy:cache:clear',
   'smoke_test',
   'deploy:unlock',
   'slack:notify:success',
