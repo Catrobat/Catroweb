@@ -1,0 +1,48 @@
+# Vietnamese profanity word list
+# Sources: readme-SVG/Banned-words
+buồi
+chó && chết
+chó chết
+con && đĩ
+con đĩ
+cặc
+cặc && mẹ && mày
+cặc mẹ mày
+cứt
+lồn
+lồn && mẹ && mày
+lồn mẹ mày
+má && mày
+má mày
+mẹ && mày
+mẹ mày
+ngu
+ngu && như && bò
+ngu như bò
+phân
+vcl
+vãi
+vãi && lồn
+vãi lồn
+ăn && cặc
+ăn && lồn
+ăn cặc
+ăn lồn
+đm
+đái
+đéo
+đéo && hiểu
+đéo hiểu
+đĩ
+đần
+đầu && buồi
+đầu buồi
+địt
+địt && mẹ
+địt mẹ
+đụ
+đụ && má
+đụ && đĩ
+đụ má
+đụ đĩ
+ỉa

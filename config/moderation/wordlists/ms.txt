@@ -1,0 +1,46 @@
+# Malay profanity word list
+# Sources: readme-SVG/Banned-words
+anjing
+babi
+bang*
+bangang
+bangsat
+bapak && kau && pink
+bapak kau pink
+bodoh
+but*
+butoh
+butu
+celaka
+cipap
+eh && butoh && uh
+eh butoh uh
+goblok
+haram && jadah
+haram jadah
+jalang
+kepala && buto
+kepala buto
+kimak
+kontol
+kurang && ajar
+kurang ajar
+lancau
+lonte
+mak && hang && belen
+mak && kau && hijau
+mak hang belen
+mak kau hijau
+memek
+pantat
+pantat && ko
+pantat ko
+perempuan && murah
+perempuan murah
+puki
+puki*
+pukimak
+setan
+sial
+sial*
+sialan

@@ -1,0 +1,87 @@
+# Indonesian profanity word list
+# Sources: readme-SVG/Banned-words
+anj*
+anjay
+anjim
+anjing
+anjir
+anjrit
+anjrot
+asu
+babi
+bajing*
+bajingan
+bajingke
+ban*
+banci
+bangke
+bangor
+bangsat
+bego
+bejad
+bencong
+bjir
+bod*
+bodat
+bodoh
+brengsek
+bugil
+bundir
+bunuh && diri
+bunuh diri
+buri*
+burik
+burit
+cawek
+cemen
+colai
+dungu
+garing
+goblok
+haram && jadah
+haram jadah
+jalang
+janc*
+jancok
+jancuk
+jembut
+kamp*
+kampret
+kampungan
+kirik
+kontol
+kontol*
+kontolan
+kunyuk
+lonte
+maho
+memek
+memek && basah
+memek basah
+monyet
+ngaceng
+ngentot
+ngentot*
+ngentotin
+ngocok
+pantat
+peju
+peju*
+pejuh
+perek
+puting
+puting && beliung
+puting beliung
+sampah
+setan
+sialan
+sundal
+tai
+tai && kucing
+tai kucing
+tai*
+taik
+tolol
+tolol*
+tololan
+vagin

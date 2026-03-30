@@ -1,0 +1,246 @@
+# Dutch profanity word list
+# Sources: readme-SVG/Banned-words
+aardappels && afgieten
+aardappels afgieten
+achter && het && raam && zitten
+achter het raam zitten
+afberen
+aflebberen
+afr*
+afrossen
+afrukken
+aftrekken
+afwerkplaats
+afz*
+afzeiken
+afzuigen
+anita
+asbak
+aso
+bagger && schijten
+bagger schijten
+balen
+bedonderen
+bef*
+befborstel
+beffen
+bekken
+belazeren
+besodemieterd && zijn
+besodemieterd zijn
+besodemieteren
+beurt
+boe*
+boemelen
+boerelul
+boerenpummel
+bokkelul
+botergeil
+broekhoesten
+brugpieper
+buffelen
+buiten && de && pot && piesen
+buiten de pot piesen
+da's && kloten && van && de && bok
+da's kloten van de bok
+de && ballen
+de && hoer && spelen
+de && hond && uitlaten
+de && koffer && induiken
+de && pijp && uitgaan
+de ballen
+de hoer spelen
+de hond uitlaten
+de koffer induiken
+de pijp uitgaan
+del
+dombo
+draaikont
+driehoog && achter && wonen
+driehoog achter wonen
+dro*
+drol
+drooggeiler
+droogkloot
+een && beurt && geven
+een && halve && man && en && een && paardekop
+een && nummertje && maken
+een && wip && maken
+een beurt geven
+een halve man en een paardekop
+een nummertje maken
+een wip maken
+eikel
+engerd
+flamoes
+flikke*
+flikken
+flikker
+gadverdamme
+galbak
+gat
+gedoogzone
+geilneef
+gesodemieter
+godverdomme
+gra*
+graftak
+gras && maaien
+gras maaien
+gratenkut
+greppeldel
+griet
+hoe*
+hoempert
+hoer
+hoerenbuurt
+hoerenloper
+hoerig
+hol
+hufter
+huisdealer
+johny
+kanen
+kettingzeug
+klaarkomen
+klerebeer
+klo*
+klojo
+klooien
+klootjesvolk
+klootoog
+klootzak
+kloten
+knor
+kont
+kont*
+kontneuken
+krentekakker
+kut
+kut*
+kuttelikkertje
+kwakkie
+liefdesgrot
+lul
+lul*
+lul-de-behanger
+lulhannes
+lummel
+mafketel
+mat*
+matennaaier
+matje
+mof
+muts
+naa*
+naaien
+naakt
+neuk*
+neuken
+neukstier
+nicht
+oetlul
+op && z'n && hondjes
+op && z'n && sodemieter && geven
+op z'n hondjes
+op z'n sodemieter geven
+opgeilen
+opkankeren
+oprotten
+opsodemieteren
+opzouten
+ouwe && rukker
+ouwe rukker
+ouwehoer
+ouwehoer*
+ouwehoeren
+paa*
+paal
+paardelul
+palen
+penoze
+piesen
+pijp*
+pijpbekkieg
+pijpen
+pik
+pleurislaaier
+poep
+poep*
+poepen
+poot
+portiekslet
+pot
+pot*
+potverdorie
+publiciteitsgeil
+raaskallen
+reet
+reet && trappen, && voor && zijn
+reet trappen, voor zijn
+reet*
+reetridder
+remsporen
+reutelen
+rot*
+rothoer
+rotzak
+ruk*
+rukhond
+rukken
+sch*
+schatje
+schijt
+schijten
+schoft
+schuinsmarcheerder
+shit
+sle*
+slempen
+slet
+sletterig
+slik && mijn && zaad
+slik mijn zaad
+snol
+spuiten
+standje
+standje-69
+sto*
+stoephoer
+stootje
+stront
+sufferd
+tapijtnek
+teef
+temeier
+teringlijer
+toeter
+tongzoeng
+triootjeg
+trottoir && prostituée
+trottoir prostituée
+trottoirteef
+ver*
+vergallen
+verkloten
+verneuken
+viespeuk
+vingeren
+vleesroos
+voor && jan && lul
+voor && jan-met-de-korte-achternaam
+voor jan lul
+voor jan-met-de-korte-achternaam
+watje
+welzijnsmafia
+wijf
+wippen
+wuftje
+zaadje
+zakkenwasser
+zeike*
+zeiken
+zeiker
+zui*
+zuigen
+zuiplap
