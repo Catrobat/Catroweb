@@ -75,6 +75,15 @@ default:
                 - App\System\Testing\Behat\Context\DataFixturesContext
                 - App\System\Testing\Behat\Context\ApiContext
 
+        api-sanitizer:
+            paths:
+                - tests/BehatFeatures/api/sanitizer
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+                - App\System\Testing\Behat\Context\SanitizerContext
+
         api-moderation:
             paths:
                 - tests/BehatFeatures/api/moderation

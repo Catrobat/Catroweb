@@ -10,43 +10,30 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class TextSanitizer
 {
   private const string REPLACEMENT_CONTACT = '[contact removed]';
-  private const int WORDS_PER_PATTERN = 200;
 
   private const string CONTACT_LINKS_PATTERN = '/('
-    // Discord
     .'https?:\/\/(?:www\.)?discord(?:app)?(?:\.gg|\.com\/invite)\/[a-zA-Z0-9\-]+'
     .'|'
-    // Telegram
     .'https?:\/\/(?:www\.)?(?:t\.me|telegram\.me|telegram\.org)\/[a-zA-Z0-9_]+'
     .'|'
-    // WhatsApp
     .'https?:\/\/(?:www\.)?(?:chat\.whatsapp\.com|wa\.me|api\.whatsapp\.com)\/[a-zA-Z0-9\-+]+'
     .'|'
-    // Snapchat
     .'https?:\/\/(?:www\.)?(?:snapchat\.com\/add|t\.snapchat\.com)\/[a-zA-Z0-9._\-]+'
     .'|'
-    // Instagram
     .'https?:\/\/(?:www\.)?(?:instagram\.com|instagr\.am|ig\.me)\/[a-zA-Z0-9._\-]+'
     .'|'
-    // Kik
     .'https?:\/\/(?:www\.)?kik\.me\/[a-zA-Z0-9._\-]+'
     .'|'
-    // TikTok
     .'https?:\/\/(?:www\.)?(?:tiktok\.com\/@|vm\.tiktok\.com\/|vt\.tiktok\.com\/)[a-zA-Z0-9._\-]+'
     .'|'
-    // Facebook / Messenger
     .'https?:\/\/(?:www\.)?(?:facebook\.com|fb\.com|fb\.me|m\.me|messenger\.com)\/[a-zA-Z0-9._\-]+'
     .'|'
-    // Signal
     .'https?:\/\/(?:www\.)?(?:signal\.me|signal\.group)\/[a-zA-Z0-9._\-#\/]+'
     .'|'
-    // Skype
     .'https?:\/\/(?:www\.)?(?:join\.skype\.com\/|skype\.com\/)[a-zA-Z0-9._\-]+'
     .'|'
-    // Twitter / X
     .'https?:\/\/(?:www\.)?(?:twitter\.com|x\.com|t\.co)\/[a-zA-Z0-9._\-]+'
     .'|'
-    // Twitch
     .'https?:\/\/(?:www\.)?twitch\.tv\/[a-zA-Z0-9._\-]+'
     .')/i';
 
@@ -57,43 +44,34 @@ class TextSanitizer
   ];
 
   private const array HOMOGLYPH_MAP = [
-    // Cyrillic → Latin
-    "\u{0430}" => 'a', // а
-    "\u{0435}" => 'e', // е
-    "\u{0456}" => 'i', // і
-    "\u{043E}" => 'o', // о
-    "\u{0440}" => 'p', // р
-    "\u{0441}" => 'c', // с
-    "\u{0443}" => 'y', // у
-    "\u{0445}" => 'x', // х
-    "\u{0410}" => 'a', // А
-    "\u{0415}" => 'e', // Е
-    "\u{041E}" => 'o', // О
-    "\u{0420}" => 'p', // Р
-    "\u{0421}" => 'c', // С
-    "\u{0422}" => 't', // Т
-    "\u{041D}" => 'h', // Н
-    "\u{0412}" => 'b', // В
-    "\u{041A}" => 'k', // К
-    "\u{041C}" => 'm', // М
+    "\u{0430}" => 'a', "\u{0435}" => 'e', "\u{0456}" => 'i', "\u{043E}" => 'o',
+    "\u{0440}" => 'p', "\u{0441}" => 'c', "\u{0443}" => 'y', "\u{0445}" => 'x',
+    "\u{0410}" => 'a', "\u{0415}" => 'e', "\u{041E}" => 'o', "\u{0420}" => 'p',
+    "\u{0421}" => 'c', "\u{0422}" => 't', "\u{041D}" => 'h', "\u{0412}" => 'b',
+    "\u{041A}" => 'k', "\u{041C}" => 'm',
   ];
 
   /** @var array<string, string[]> */
   private array $wordListCache = [];
 
+  private const int WORDS_PER_PATTERN = 1000;
+  private const int SPACED_WORDS_PER_PATTERN = 200;
+
   /** @var array<string, non-empty-string[]> */
   private array $compiledPatterns = [];
 
-  /** @var array<string, string[]> */
-  private array $shortWordsCache = [];
+  /** @var array<string, int> */
+  private array $minWordLength = [];
 
   /** @var array<string, non-empty-string[]> */
-  private array $spacedPatternsCache = [];
+  private array $spacedPatterns = [];
 
   public function __construct(
     private readonly RequestStack $requestStack,
     #[Autowire('%kernel.project_dir%/config/moderation/wordlists')]
     private readonly string $wordListDir,
+    #[Autowire('%env(bool:TEXT_SANITIZER_ENABLED)%')]
+    private readonly bool $enabled = true,
   ) {
   }
 
@@ -106,7 +84,7 @@ class TextSanitizer
 
   public function sanitizeWithLocale(?string $text, string $locale = 'en'): ?string
   {
-    if (null === $text || '' === $text) {
+    if (!$this->enabled || null === $text || '' === $text) {
       return $text;
     }
 
@@ -163,13 +141,16 @@ class TextSanitizer
   private function filterProfanity(string $text, string $locale): string
   {
     $lang = substr($locale, 0, 2);
-    $words = $this->getWordList($lang);
-    if ([] === $words) {
-      return $text;
-    }
 
     $patterns = $this->getCompiledPatterns($lang);
     if ([] === $patterns) {
+      return $text;
+    }
+
+    $min_len = $this->minWordLength[$this->langKey($lang)] ?? 2;
+
+    // Early exit: text shorter than the shortest profanity word cannot match
+    if (mb_strlen($text) < $min_len) {
       return $text;
     }
 
@@ -203,21 +184,20 @@ class TextSanitizer
       return $text;
     }
 
+    // Build byte-to-char offset map once for all patterns
     $normalized_chars = mb_str_split($normalized);
-    $char_count = count($normalized_chars);
+    $byte_to_char = [];
+    $byte_pos = 0;
+    foreach ($normalized_chars as $i => $char) {
+      $byte_to_char[$byte_pos] = $i;
+      $byte_pos += strlen($char);
+    }
 
-    $result = $text;
+    // Collect all matches from all patterns
+    $replacements = [];
     foreach ($patterns as $pattern) {
       if (!preg_match_all($pattern, $normalized, $matches, PREG_OFFSET_CAPTURE)) {
         continue;
-      }
-
-      // Build byte-to-char offset map for the normalized string
-      $byte_to_char = [];
-      $byte_pos = 0;
-      for ($i = 0; $i < $char_count; ++$i) {
-        $byte_to_char[$byte_pos] = $i;
-        $byte_pos += strlen($normalized_chars[$i]);
       }
 
       foreach ($matches[0] as [$match, $byte_offset]) {
@@ -225,15 +205,25 @@ class TextSanitizer
         if (null === $char_offset) {
           continue;
         }
-        $match_char_len = mb_strlen($match);
-        $original_segment = mb_substr($result, $char_offset, $match_char_len);
+        $replacements[] = [$char_offset, mb_strlen($match)];
+      }
+    }
 
-        if (!preg_match('/^\*+$/', $original_segment)) {
-          $replacement = str_repeat('*', mb_strlen(mb_substr($text, $char_offset, $match_char_len)));
-          $result = mb_substr($result, 0, $char_offset)
-            .$replacement
-            .mb_substr($result, $char_offset + $match_char_len);
-        }
+    if ([] === $replacements) {
+      return $text;
+    }
+
+    // Sort by offset descending so replacements don't shift positions
+    usort($replacements, static fn (array $a, array $b): int => $b[0] <=> $a[0]);
+
+    $result = $text;
+    foreach ($replacements as [$char_offset, $match_char_len]) {
+      $original_segment = mb_substr($result, $char_offset, $match_char_len);
+      if (!preg_match('/^\*+$/', $original_segment)) {
+        $replacement = str_repeat('*', mb_strlen($original_segment));
+        $result = mb_substr($result, 0, $char_offset)
+          .$replacement
+          .mb_substr($result, $char_offset + $match_char_len);
       }
     }
 
@@ -263,12 +253,17 @@ class TextSanitizer
     return strtr($text, self::LEETSPEAK_MAP);
   }
 
+  private function langKey(string $lang): string
+  {
+    return 'en' === $lang ? 'en' : "en+{$lang}";
+  }
+
   /**
    * @return string[]
    */
   private function getWordList(string $lang): array
   {
-    $key = 'en' === $lang ? 'en' : "en+{$lang}";
+    $key = $this->langKey($lang);
 
     if (isset($this->wordListCache[$key])) {
       return $this->wordListCache[$key];
@@ -285,6 +280,11 @@ class TextSanitizer
     usort($words, static fn (string $a, string $b): int => mb_strlen($b) <=> mb_strlen($a));
 
     $this->wordListCache[$key] = $words;
+
+    // Cache minimum word length for early exit
+    if ([] !== $words) {
+      $this->minWordLength[$key] = mb_strlen(end($words));
+    }
 
     return $words;
   }
@@ -317,7 +317,7 @@ class TextSanitizer
    */
   private function getCompiledPatterns(string $lang): array
   {
-    $key = 'en' === $lang ? 'en' : "en+{$lang}";
+    $key = $this->langKey($lang);
 
     if (isset($this->compiledPatterns[$key])) {
       return $this->compiledPatterns[$key];
@@ -331,8 +331,7 @@ class TextSanitizer
     }
 
     $patterns = [];
-    $chunks = array_chunk($words, self::WORDS_PER_PATTERN);
-    foreach ($chunks as $chunk) {
+    foreach (array_chunk($words, self::WORDS_PER_PATTERN) as $chunk) {
       $escaped = array_map(static fn (string $w): string => preg_quote($w, '/'), $chunk);
       $patterns[] = '/\b('.implode('|', $escaped).')\b/iu';
     }
@@ -343,14 +342,14 @@ class TextSanitizer
   }
 
   /**
-   * @return string[]
+   * @return non-empty-string[]
    */
-  private function getShortWords(string $lang): array
+  private function getSpacedPatterns(string $lang): array
   {
-    $key = 'en' === $lang ? 'en' : "en+{$lang}";
+    $key = $this->langKey($lang);
 
-    if (isset($this->shortWordsCache[$key])) {
-      return $this->shortWordsCache[$key];
+    if (isset($this->spacedPatterns[$key])) {
+      return $this->spacedPatterns[$key];
     }
 
     $words = $this->getWordList($lang);
@@ -359,26 +358,14 @@ class TextSanitizer
       static fn (string $w): bool => mb_strlen($w) >= 3 && mb_strlen($w) <= 8 && !str_contains($w, ' ')
     ));
 
-    $this->shortWordsCache[$key] = $short;
+    if ([] === $short) {
+      $this->spacedPatterns[$key] = [];
 
-    return $short;
-  }
-
-  /**
-   * @return non-empty-string[]
-   */
-  private function getSpacedPatterns(string $lang): array
-  {
-    $key = 'en' === $lang ? 'en' : "en+{$lang}";
-
-    if (isset($this->spacedPatternsCache[$key])) {
-      return $this->spacedPatternsCache[$key];
+      return [];
     }
 
-    $short_words = $this->getShortWords($lang);
     $patterns = [];
-    $chunks = array_chunk($short_words, self::WORDS_PER_PATTERN);
-    foreach ($chunks as $chunk) {
+    foreach (array_chunk($short, self::SPACED_WORDS_PER_PATTERN) as $chunk) {
       $alts = [];
       foreach ($chunk as $word) {
         $chars = mb_str_split($word);
@@ -390,7 +377,7 @@ class TextSanitizer
       $patterns[] = '/\b(?:'.implode('|', $alts).')\b/iu';
     }
 
-    $this->spacedPatternsCache[$key] = $patterns;
+    $this->spacedPatterns[$key] = $patterns;
 
     return $patterns;
   }

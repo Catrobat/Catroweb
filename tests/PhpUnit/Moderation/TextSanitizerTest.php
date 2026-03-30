@@ -335,4 +335,11 @@ class TextSanitizerTest extends TestCase
     $sanitizer = new TextSanitizer($requestStack, $this->wordListDir);
     $this->assertSame('What the ****', $sanitizer->sanitize('What the fuck'));
   }
+
+  public function testSanitizePassesThroughWhenDisabled(): void
+  {
+    $requestStack = $this->createStub(RequestStack::class);
+    $sanitizer = new TextSanitizer($requestStack, $this->wordListDir, enabled: false);
+    $this->assertSame('What the fuck', $sanitizer->sanitizeWithLocale('What the fuck'));
+  }
 }
