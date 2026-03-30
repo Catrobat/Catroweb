@@ -1,0 +1,186 @@
+# Hindi profanity word list
+# Sources: GLINCKER/glin-profanity, readme-SVG/Banned-words
+aand
+aand*
+aandu
+balatkar
+balatkar*
+balatkari
+behen && chod
+behen chod
+beti && chod
+beti chod
+bha*
+bhadva
+bhadve
+bhandve
+bhangi
+bhootni && ke
+bhootni ke
+bhosad
+bhosadi && ke
+bhosadi ke
+boobe
+chakke
+chin*
+chinaal
+chinki
+cho*
+chod
+chodu
+chodu && bhagat
+chodu bhagat
+chooche
+choochi
+choope
+choot
+choot && ke && baal
+choot ke baal
+chootia
+chootiya
+chu*
+chuche
+chuchi
+chudaap
+chudai && khanaa
+chudai khanaa
+chudam && chudai
+chudam chudai
+chudan chudai
+chude
+chut
+chut && ka && chuha
+chut && ka && churan
+chut && ka && mail
+chut && ke && baal
+chut && ke && dhakkan
+chut && maarli
+chut ka chuha
+chut ka churan
+chut ka mail
+chut ke baal
+chut ke dhakkan
+chut maarli
+chutad
+chutadd
+chutan
+chutia
+chutiya
+gaand
+gaand*
+gaandfat
+gaandmasti
+gaandufad
+gand*
+gandfattu
+gandu
+gas*
+gashti
+gasti
+ghas*
+ghassa
+ghasti
+gucch*
+gucchi
+gucchu
+haram*
+harami
+haramzade
+hawas
+hawas && ke && pujari
+hawas ke pujari
+hij*
+hijda
+hijra
+jhant
+jhant && chaatu
+jhant && ka && keeda
+jhant && ke && baal
+jhant && ke && pissu
+jhant chaatu
+jhant ka keeda
+jhant ke baal
+jhant ke pissu
+jhant*
+jhantu
+kamine
+kamine*
+kaminey
+kanjar
+kutt*
+kutta
+kutta && kamina
+kutta kamina
+kutte && ki && aulad
+kutte && ki && jat
+kutte ki aulad
+kutte ki jat
+kuttiya
+lod*
+loda
+lodu
+lund
+lund && choos
+lund && ka && bakkal
+lund && khajoor
+lund choos
+lund ka bakkal
+lund khajoor
+lund*
+lundtopi
+lundure
+maa && ki && chut
+maa ki chut
+maal
+madar chod
+madarchod
+madarchod*
+madhavchod
+mooh && mein && le
+mooh mein le
+mutth
+mutth*
+mutthal
+najayaz
+najayaz && aulaad
+najayaz && paidaish
+najayaz aulaad
+najayaz paidaish
+paki
+patak*
+pataka
+patakha
+raand
+rand*
+randaap
+randi
+randi && rona
+randi rona
+saala
+saala && kutta
+saala kutta
+saali && kutti
+saali && randi
+saali kutti
+saali randi
+suar
+suar && ke && lund
+suar && ki && aulad
+suar ke lund
+suar ki aulad
+tatt*
+tatte
+tatti
+teri && maa && ka && bhosada
+teri && maa && ka && boba && chusu
+teri && maa && ki && behenchod
+teri && maa && ki && chut
+teri maa ka bhosada
+teri maa ka boba chusu
+teri maa ki behenchod
+teri maa ki chut
+thar*
+tharak
+tharki
+tu && chuda
+tu chuda

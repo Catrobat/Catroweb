@@ -6,14 +6,17 @@ namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
+use App\Moderation\TextSanitizer;
 use App\User\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
 
 class UserApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager)
-  {
+  public function __construct(
+    private readonly UserManager $user_manager,
+    private readonly TextSanitizer $textSanitizer,
+  ) {
   }
 
   /**
@@ -36,11 +39,11 @@ class UserApiProcessor extends AbstractApiProcessor
     }
 
     if (null !== $request->getAbout() && '' !== $request->getAbout() && '0' !== $request->getAbout()) {
-      $user->setAbout($request->getAbout());
+      $user->setAbout($this->textSanitizer->sanitize($request->getAbout()));
     }
 
     if (null !== $request->getCurrentlyWorkingOn() && '' !== $request->getCurrentlyWorkingOn() && '0' !== $request->getCurrentlyWorkingOn()) {
-      $user->setCurrentlyWorkingOn($request->getCurrentlyWorkingOn());
+      $user->setCurrentlyWorkingOn($this->textSanitizer->sanitize($request->getCurrentlyWorkingOn()));
     }
 
     return $user;
@@ -75,11 +78,11 @@ class UserApiProcessor extends AbstractApiProcessor
     }
 
     if (!is_null($request->getAbout())) {
-      $user->setAbout($request->getAbout());
+      $user->setAbout($this->textSanitizer->sanitize($request->getAbout()));
     }
 
     if (!is_null($request->getCurrentlyWorkingOn())) {
-      $user->setCurrentlyWorkingOn($request->getCurrentlyWorkingOn());
+      $user->setCurrentlyWorkingOn($this->textSanitizer->sanitize($request->getCurrentlyWorkingOn()));
     }
 
     $this->user_manager->updateUser($user);

@@ -11,6 +11,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
@@ -47,6 +48,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly AuthorizationCheckerInterface $authorization_checker,
     private readonly RateLimiterFactory $commentBurstLimiter,
     private readonly RateLimiterFactory $commentDailyLimiter,
+    private readonly TextSanitizer $textSanitizer,
   ) {
   }
 
@@ -111,7 +113,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
-    $message = trim((string) $comment_create_request->getMessage());
+    $message = $this->textSanitizer->sanitize(trim((string) $comment_create_request->getMessage())) ?? '';
     if ('' === $message) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 

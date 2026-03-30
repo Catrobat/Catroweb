@@ -223,7 +223,7 @@ jobs:
         testSuite:
           # --- API suites ---
           - api-achievements api-notifications api-media-library api-studio # ~10m combined
-          - api-authentication api-comments api-followers api-utility # ~8m combined
+          - api-authentication api-comments api-followers api-sanitizer api-utility # ~8m combined
           - api-moderation
           - api-projects-get # split from api-projects (~10m)
           - api-projects-write # split from api-projects (~10m)

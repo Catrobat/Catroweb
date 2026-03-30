@@ -11,6 +11,7 @@ use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
+use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
 use App\Studio\StudioManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -20,6 +21,7 @@ class StudioApiProcessor extends AbstractApiProcessor
   public function __construct(
     private readonly StudioManager $studio_manager,
     private readonly ProjectManager $project_manager,
+    private readonly TextSanitizer $textSanitizer,
   ) {
   }
 
@@ -27,8 +29,8 @@ class StudioApiProcessor extends AbstractApiProcessor
   {
     return $this->studio_manager->createStudio(
       $user,
-      $name,
-      $description,
+      $this->textSanitizer->sanitize($name) ?? '',
+      $this->textSanitizer->sanitize($description) ?? '',
       $is_public,
       true,
       $enable_comments,
@@ -40,8 +42,8 @@ class StudioApiProcessor extends AbstractApiProcessor
   {
     return $this->studio_manager->updateStudio(
       $studio,
-      $name,
-      $description,
+      $this->textSanitizer->sanitize($name),
+      $this->textSanitizer->sanitize($description),
       $is_public,
       $enable_comments,
       $image_file
@@ -123,6 +125,6 @@ class StudioApiProcessor extends AbstractApiProcessor
 
   public function addComment(User $user, Studio $studio, string $text, int $parent_id): ?UserComment
   {
-    return $this->studio_manager->addCommentToStudio($user, $studio, $text, $parent_id);
+    return $this->studio_manager->addCommentToStudio($user, $studio, $this->textSanitizer->sanitize($text) ?? '', $parent_id);
   }
 }

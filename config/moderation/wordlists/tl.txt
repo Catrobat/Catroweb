@@ -1,0 +1,19 @@
+# Tagalog profanity word list
+# Sources: readme-SVG/Banned-words
+anak && ka && ng && puta
+anak ka ng puta
+bayag
+bobo
+burat
+jakol
+kantot
+nognog
+puta && ka
+puta ka
+putang && ina
+putang ina
+tang ina
+tanga
+tangina
+tangina*
+ulol

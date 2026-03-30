@@ -1,0 +1,54 @@
+# Norwegian profanity word list
+# Sources: GLINCKER/glin-profanity, readme-SVG/Banned-words
+asshole
+dritt
+dritt*
+drittsekk
+faen
+faen && i && helvete
+faen i helvete
+fan
+fan*
+fanken
+fitte
+for*
+forbanna
+forbannet
+forjævlig
+fuck
+fy && faen
+fy faen
+føkk
+føkk*
+føkka
+føkkings
+helvete
+helvete*
+helvetet
+jævl*
+jævla
+jævlig
+kuk
+kuk*
+kukene
+kuker
+morra*ler
+morraknuller
+morrapuler
+nigger
+pakkis
+pikk
+pokker
+ræv*
+ræva
+ræven
+satan
+shit
+sinnsykt
+skitt
+sotrør
+ståpikk
+ståpikk*
+ståpikkene
+ståpikker
+svartheiteste

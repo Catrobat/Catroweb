@@ -1,0 +1,67 @@
+# Hebrew profanity word list
+# Sources: readme-SVG/Banned-words
+bat && zona
+bat zona
+ben && zona
+ben zona
+cha*
+chamor
+chara
+fak
+hara
+idiot
+kalba
+kelev
+kus && emak
+kus && ima && shelcha
+kus && rabbak
+kus emak
+kus ima shelcha
+kus rabbak
+lech && tizdayen
+lech tizdayen
+manyak
+metumtam
+putana
+sharmuta
+shit
+shmuck
+tipesh
+tistom
+tistom && et && hape
+tistom et hape
+tizdayen
+zay*
+zayin
+zayn
+zona
+אידיוט
+בן && זונה
+בן זונה
+בת && זונה
+בת זונה
+זונה
+זין
+חמור
+חרה
+טיפש
+כוס && אמך
+כוס && רבאק
+כוס אמך
+כוס רבאק
+כלב
+כלב*
+כלבה
+לך && תזדיין
+לך תזדיין
+מטומטם
+מניאק
+פאק
+פוטנה
+שיט
+שמוק
+שרמוטה
+תזדיין
+תסתום
+תסתום && את && הפה
+תסתום את הפה

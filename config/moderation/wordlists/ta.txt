@@ -1,0 +1,122 @@
+# Tamil profanity word list
+# Sources: readme-SVG/Banned-words
+adhigaprasangi
+arivu && ketta && mundam
+arivu ketta mundam
+baadu
+badu
+dhanda soru
+dhandam
+dhandasoru
+dhandasoru*
+erumai
+erumai && maadu
+erumai maadu
+gomma
+gomma*
+gommaala
+gotha
+gumbal
+izhavu
+kammanatti
+karuma*
+karumaandharam
+karumam
+kasmalam
+kattai
+koo*
+koomuttai
+koothi
+koothi && kalutha
+koothi kalutha
+kutti && sevuru
+kutti sevuru
+loosu
+maalam
+mairamandi
+maramanda
+maramanda*
+maramandai
+mayir
+moodevi
+mund*irikottai
+mundhirikottai
+mundirikottai
+muttaal
+naayae
+nakkittu
+nakkittu && po
+nakkittu po
+okkaali
+olemari
+omma
+omma*
+ommala
+oomb*
+oombaatha
+oombaatha && vaaya
+oombaatha vaaya
+oombu
+oombu && naayae
+oombu naayae
+oth*
+otha
+othittu
+othittu && po
+othittu po
+paithiyam
+panni
+panni && gumbal
+panni gumbal
+pavadaiya
+pee
+pee && thinnu
+pee thinnu
+penins && detached
+penins detached
+pisasu
+pochu
+poolu
+poolu && aruntha
+poolu && oombu
+poolu aruntha
+poolu oombu
+por*
+porambokku
+porukki
+punda
+punda && mavan
+punda && naayae
+punda mavan
+punda naayae
+punda*
+pundai
+pundai && mavan
+pundai mavan
+puramboku
+saavugrakki
+saniyan
+soothu
+sori && naai
+sori naai
+sunni
+sutha && moodu
+sutha moodu
+thayo*
+thayoli
+thayoli && mavan
+thayoli mavan
+thayozhi
+thev*
+thevidiya
+thevidiyapillai
+thevudiya
+thinnu
+ungo*
+ungommala
+ungoya
+vaaya
+yeruma
+yeruma*
+yerumama
+yerumamaadu

@@ -1,0 +1,303 @@
+# Romanian profanity word list
+# Sources: readme-SVG/Banned-words
+a && da && la && buci
+a da la buci
+altaru && mă-tii
+altaru mă-tii
+anafura && mă-tii
+anafura mă-tii
+baborniță
+bag && pula
+bag && pula-n && mă-ta
+bag && slobozul
+bag && slobozul && în && tine
+bag pula
+bag pula-n mă-ta
+bag slobozul
+bag slobozul în tine
+bagă && pula
+bagă pula
+bagă-mi && pula
+bagă-mi pula
+bagă-ți && pula
+bagă-ți && pula-n && cur
+bagă-ți pula
+bagă-ți pula-n cur
+bahorniță
+bijbocu && mă-tii
+bijbocu mă-tii
+borăsc && căcat && în && pizda && lu && ma-ta
+borăsc căcat în pizda lu ma-ta
+bou
+bou && mă-tii
+bou mă-tii
+bou*
+boule
+bulangiu
+băbăciune
+băga-mi-aș && pula
+băga-mi-aș pula
+caca-m-aș && în && pizda && mă-tii
+caca-m-aș în pizda mă-tii
+caca-mas && la && ma-ta-n && pizda
+caca-mas la ma-ta-n pizda
+cacat
+ceapa && mă-tii
+ceapa mă-tii
+coaie
+coaie*
+coaiele
+coaiele && mă-tii
+coaiele mă-tii
+cocalar
+coi
+cristelnița && mă-tii
+cristelnița mă-tii
+cur
+cur*
+curul
+curule
+curva
+curvă
+curvă && mă-tii
+curvă mă-tii
+căcat
+căcatu && mă-tii
+căcatu mă-tii
+dracu
+dracu && să && te && ia
+dracu să te ia
+du-te && dracu
+du-te && naiba
+du-te dracu
+du-te naiba
+du-te-n && curul && mă-tii
+du-te-n && mă-ta-n && cur
+du-te-n && pizda && mă-tii
+du-te-n && pula && mea
+du-te-n curul mă-tii
+du-te-n mă-ta-n cur
+du-te-n pizda mă-tii
+du-te-n pula mea
+dă-te-n && pula && mea
+dă-te-n pula mea
+evanghelia && mă-tii
+evanghelia mă-tii
+fundaș
+fut
+fut*
+futu-i
+futu-le
+futu-le && muma-n && cur
+futu-le muma-n cur
+futu-te
+futu-te-n && cur && pe && mă-ta
+futu-te-n && gura
+futu-te-n cur pe mă-ta
+futu-te-n gura
+futu-vă
+futu-ți
+futu-ți && altarul && mă-tii
+futu-ți && anafura
+futu-ți && arhanghelul && mă-tii
+futu-ți && bijbocul && mă-tii
+futu-ți && biserica
+futu-ți && biserica && mă-tii
+futu-ți && cristelnița && mă-tii
+futu-ți && crucea
+futu-ți && crucea && mă-tii
+futu-ți && cădelnița && mă-tii
+futu-ți && căpetenia && mă-tii
+futu-ți && dumnetoru && mă-tii
+futu-ți && dumnezeii
+futu-ți && dumnezeii && mă-tii
+futu-ți && dumnezeii && și && grijania && mă-tii
+futu-ți && evanghelia && mă-tii
+futu-ți && grijania
+futu-ți && hristosul
+futu-ți && lumina && mă-tii
+futu-ți && maiul && mă-tii
+futu-ți && morții
+futu-ți && morții && mă-tii
+futu-ți && neamu
+futu-ți && neamu && mă-tii
+futu-ți && neamul
+futu-ți && neamul && mă-tii
+futu-ți && năsălia && mă-tii
+futu-ți && parastasul && mă-tii
+futu-ți && patrafirul && mă-tii
+futu-ți && pizda && mă-tii
+futu-ți && tămădăul && mă-tii
+futu-ți && închinarea && mă-tii
+futu-ți altarul mă-tii
+futu-ți anafura
+futu-ți arhanghelul mă-tii
+futu-ți bijbocul mă-tii
+futu-ți biserica
+futu-ți biserica mă-tii
+futu-ți cristelnița mă-tii
+futu-ți crucea
+futu-ți crucea mă-tii
+futu-ți cădelnița mă-tii
+futu-ți căpetenia mă-tii
+futu-ți dumnetoru mă-tii
+futu-ți dumnezeii
+futu-ți dumnezeii mă-tii
+futu-ți dumnezeii și grijania mă-tii
+futu-ți evanghelia mă-tii
+futu-ți grijania
+futu-ți hristosul
+futu-ți lumina mă-tii
+futu-ți maiul mă-tii
+futu-ți morții
+futu-ți morții mă-tii
+futu-ți neamu
+futu-ți neamu mă-tii
+futu-ți neamul
+futu-ți neamul mă-tii
+futu-ți năsălia mă-tii
+futu-ți parastasul mă-tii
+futu-ți patrafirul mă-tii
+futu-ți pizda mă-tii
+futu-ți tămădăul mă-tii
+futu-ți închinarea mă-tii
+futut
+fututule
+futută
+grijania && mă-tii
+grijania mă-tii
+gura
+găozar
+hali-mi-ai && pizda
+hali-mi-ai && pula
+hali-mi-ai pizda
+hali-mi-ai pula
+hoanghină
+iau && morții && la && pula
+iau morții la pula
+in && cur
+in cur
+inecate-ai && cu && sperma && lu' && tac-tu
+inecate-ai cu sperma lu' tac-tu
+koi
+linge-ma
+linge-ma && in && cur
+linge-ma && pizda
+linge-ma in cur
+linge-ma pizda
+linge-mi
+linge-mi && brânza
+linge-mi && curul
+linge-mi && pizda
+linge-mi brânza
+linge-mi curul
+linge-mi pizda
+maiu && mă-tii
+maiu mă-tii
+muie
+muie && mă-tii
+muie mă-tii
+mânca-mi-ai
+mânca-mi-ai && căcatul
+mânca-mi-ai && pula
+mânca-mi-ai && slobozul
+mânca-mi-ai căcatul
+mânca-mi-ai pula
+mânca-mi-ai slobozul
+mă-ta
+mă-ta && curva
+mă-ta curva
+mă-ta-n && cur
+mă-ta-n cur
+mă-tii
+mănâncă && căcat
+mănâncă && căcatul
+mănâncă căcat
+mănâncă căcatul
+naiba && să && te && ia
+naiba să te ia
+nici && o && pulă
+nici o pulă
+năsălia && mă-tii
+năsălia mă-tii
+o && pulă
+o pulă
+parastasu && mă-tii
+parastasu mă-tii
+patrafiru && mă-tii
+patrafiru mă-tii
+pisat
+pisatu && mă-tii
+pisatu mă-tii
+pisă-mas && în && gura && ta
+pisă-mas în gura ta
+piticanie
+pizd*
+pizda
+pizda && mă-tii
+pizda mă-tii
+pizdă
+poaca && mă-tii
+poaca mă-tii
+poacă
+poponar
+prost
+prost*
+prostule
+pula && mea
+pula mea
+pulă
+puț*
+puța && mă-tii
+puța mă-tii
+puțoi
+puțoiule
+puță
+rahat
+rahatul && mă-tii
+rahatul mă-tii
+sloboz
+sloboz*
+slobozul
+sugi && pula
+sugi pula
+să && bag && pula-n && școală
+să && mă && cac && unde && pupi && tu
+să && mă && fut && în && mă-ta
+să && te && bag && în && pizda && mă-tii
+să && te && fut
+să bag pula-n școală
+să mă cac unde pupi tu
+să mă fut în mă-ta
+să te bag în pizda mă-tii
+să te fut
+să-mi && bag && pula && în && mă-ta && de && polițai
+să-mi && sugi && pula
+să-mi && sugi && pula && până && îmi && intră && un && coi && în && comă
+să-mi bag pula în mă-ta de polițai
+să-mi sugi pula
+să-mi sugi pula până îmi intră un coi în comă
+să-ți
+să-ți && bag && pula && pe && gât
+să-ți && bag && pula && în && inimă
+să-ți && bag && pula-n && gură
+să-ți && dau && muie
+să-ți bag pula pe gât
+să-ți bag pula în inimă
+să-ți bag pula-n gură
+să-ți dau muie
+tac-tu
+te && fut
+te && fut && în && cur
+te && fut && în && gură
+te fut
+te fut în cur
+te fut în gură
+târtan
+târtan*
+târtane
+tămădăul && mă-tii
+tămădăul mă-tii
+zdreanță
+îmi && bag && pula
+îmi bag pula
