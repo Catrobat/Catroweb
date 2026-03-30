@@ -119,7 +119,7 @@ class RemixManager
     ;
 
     $catrobat_nodes_data = [];
-    $projects_data = $this->project_repository->getProjectDataByIds($catrobat_ids_of_whole_graph);
+    $projects_data = $this->project_repository->getProjectDataByIdsUnfiltered($catrobat_ids_of_whole_graph);
     foreach ($projects_data as $project_data) {
       $catrobat_nodes_data[$project_data['id']] = $project_data;
     }

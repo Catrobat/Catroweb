@@ -75,6 +75,12 @@ function createStatusMarkup(iconMarkup, message, extraClass = '') {
   )
 }
 
+function waitForNextFrame() {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => resolve())
+  })
+}
+
 function getNodeDisplayName(node, container) {
   const fallbackName =
     container.dataset.transProjectNotAvailable || container.dataset.transTitle || 'Remix graph'
@@ -91,13 +97,11 @@ function createNetworkNode(node, currentProjectId, container) {
   const username = node.username || container.dataset.transProjectUnknownUser || 'Unknown user'
   const labelLimit = node.source === 'scratch' ? 18 : 15
 
-  return {
+  const networkNode = {
     id: node.id,
     projectId: String(node.projectId),
     source: node.source,
     unavailable: isUnavailable,
-    name: isUnavailable ? undefined : displayName,
-    username: isUnavailable ? undefined : username,
     displayName,
     displayUsername: username,
     label: truncateLabel(displayName, labelLimit),
@@ -122,6 +126,13 @@ function createNetworkNode(node, currentProjectId, container) {
     },
     shadow: false,
   }
+
+  if (!isUnavailable) {
+    networkNode.name = displayName
+    networkNode.username = username
+  }
+
+  return networkNode
 }
 
 function createNetworkEdge(edge) {
@@ -143,6 +154,23 @@ function createNetworkEdge(edge) {
       },
     },
   }
+}
+
+const SHARED_INTERACTION = {
+  dragNodes: false,
+  dragView: true,
+  hideEdgesOnDrag: true,
+  hover: false,
+  hoverConnectedEdges: false,
+  keyboard: {
+    enabled: true,
+    bindToWindow: true,
+    speed: { x: 24, y: 24, zoom: 0.08 },
+  },
+  multiselect: false,
+  navigationButtons: false,
+  selectConnectedEdges: false,
+  zoomView: true,
 }
 
 function createNetworkOptions(hasCycles) {
@@ -172,22 +200,7 @@ function createNetworkOptions(hasCycles) {
           type: 'dynamic',
         },
       },
-      interaction: {
-        dragNodes: false,
-        dragView: true,
-        hideEdgesOnDrag: true,
-        hover: false,
-        hoverConnectedEdges: false,
-        keyboard: {
-          enabled: true,
-          bindToWindow: true,
-          speed: { x: 24, y: 24, zoom: 0.08 },
-        },
-        multiselect: false,
-        navigationButtons: false,
-        selectConnectedEdges: false,
-        zoomView: true,
-      },
+      interaction: SHARED_INTERACTION,
     }
   }
 
@@ -217,22 +230,7 @@ function createNetworkOptions(hasCycles) {
         roundness: 0.4,
       },
     },
-    interaction: {
-      dragNodes: false,
-      dragView: true,
-      hideEdgesOnDrag: true,
-      hover: false,
-      hoverConnectedEdges: false,
-      keyboard: {
-        enabled: true,
-        bindToWindow: true,
-        speed: { x: 24, y: 24, zoom: 0.08 },
-      },
-      multiselect: false,
-      navigationButtons: false,
-      selectConnectedEdges: false,
-      zoomView: true,
-    },
+    interaction: SHARED_INTERACTION,
   }
 }
 
@@ -305,43 +303,40 @@ function resetGraphAppearance(state) {
     return
   }
 
+  const nodeUpdates = []
   state.nodes.getIds().forEach((nodeId) => {
     const node = state.nodes.get(nodeId)
     if (!node) {
       return
     }
 
-    state.nodes.update([
-      {
-        id: nodeId,
-        borderWidth: node.baseBorderWidth,
-        size: node.baseSize,
-        color: {
-          border: node.baseSize > 20 ? ACTIVE_NODE_BORDER : DEFAULT_NODE_BORDER,
+    nodeUpdates.push({
+      id: nodeId,
+      borderWidth: node.baseBorderWidth,
+      size: node.baseSize,
+      color: {
+        border: node.baseSize > 20 ? ACTIVE_NODE_BORDER : DEFAULT_NODE_BORDER,
+        background: '#ffffff',
+        highlight: {
+          border: ACTIVE_NODE_BORDER,
           background: '#ffffff',
-          highlight: {
-            border: ACTIVE_NODE_BORDER,
-            background: '#ffffff',
-          },
         },
       },
-    ])
+    })
   })
+  state.nodes.update(nodeUpdates)
 
-  state.edges.getIds().forEach((edgeId) => {
-    state.edges.update([
-      {
-        id: edgeId,
-        width: 1.6,
-        color: {
-          color: DEFAULT_EDGE_COLOR,
-          highlight: DEFAULT_EDGE_COLOR,
-          hover: DEFAULT_EDGE_COLOR,
-          opacity: 1,
-        },
-      },
-    ])
-  })
+  const edgeUpdates = state.edges.getIds().map((edgeId) => ({
+    id: edgeId,
+    width: 1.6,
+    color: {
+      color: DEFAULT_EDGE_COLOR,
+      highlight: DEFAULT_EDGE_COLOR,
+      hover: DEFAULT_EDGE_COLOR,
+      opacity: 1,
+    },
+  }))
+  state.edges.update(edgeUpdates)
 }
 
 function highlightNode(state, nodeId) {
@@ -524,19 +519,23 @@ function showActionMenu(state, node, pointer) {
   })
 }
 
-function renderLoadingState(state) {
+function renderStatusState(state, iconMarkup, message, extraClass = '') {
   state.elements.status.classList.remove('d-none')
   state.elements.content.classList.add('d-none')
-  state.elements.status.innerHTML = createStatusMarkup(
+  state.elements.status.innerHTML = createStatusMarkup(iconMarkup, message, extraClass)
+}
+
+function renderLoadingState(state) {
+  renderStatusState(
+    state,
     '<div class="remix-graph-loading-spinner"></div>',
     state.container.dataset.transLoading || 'Loading remix graph...',
   )
 }
 
 function renderErrorState(state) {
-  state.elements.status.classList.remove('d-none')
-  state.elements.content.classList.add('d-none')
-  state.elements.status.innerHTML = createStatusMarkup(
+  renderStatusState(
+    state,
     '<i class="material-icons">warning</i>',
     state.container.dataset.transError || 'Could not load the remix graph.',
     'remix-graph-error',
@@ -544,9 +543,8 @@ function renderErrorState(state) {
 }
 
 function renderEmptyState(state) {
-  state.elements.status.classList.remove('d-none')
-  state.elements.content.classList.add('d-none')
-  state.elements.status.innerHTML = createStatusMarkup(
+  renderStatusState(
+    state,
     '<i class="material-icons">info</i>',
     state.container.dataset.transEmpty || 'No remix graph data is available for this project yet.',
     'remix-graph-empty',
@@ -645,6 +643,12 @@ async function loadAndRenderGraph(state) {
 
     const hasCycles = hasCyclesInCatrobatEdges(graphData.edges)
 
+    updateSummary(state, graphData)
+    state.elements.status.classList.add('d-none')
+    state.elements.content.classList.remove('d-none')
+
+    await waitForNextFrame()
+
     state.network = new Network(
       state.elements.network,
       { nodes, edges },
@@ -685,11 +689,8 @@ async function loadAndRenderGraph(state) {
       })
     }
 
-    updateSummary(state, graphData)
-    state.elements.status.classList.add('d-none')
-    state.elements.content.classList.remove('d-none')
-
     requestAnimationFrame(() => {
+      state.network.redraw()
       state.network.fit({ animation: false })
     })
 

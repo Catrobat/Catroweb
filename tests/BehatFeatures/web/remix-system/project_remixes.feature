@@ -108,22 +108,11 @@ Feature: As a visitor I want to see the full remix graph inline on the program p
     And I should see a node with id "catrobat_9" having name "project 9" and username "Superman"
     And I should see an edge from "catrobat_8" to "catrobat_9"
 
-  Scenario: Viewing details of project 2 using debug app
-    Given I use a debug build of the Catroid app
-    And I am on "/app/project/2"
+  Scenario: Remix graph always shows all connected projects regardless of debug flag
+    Given I am on "/app/project/2"
     And I wait for the page to be loaded
     When I click "#remix-graph-toggle"
     And I wait for AJAX to finish
     And I wait 2500 milliseconds
     Then I should see a node with id "catrobat_7" having name "project 7" and username "Superman"
-    And I should see an edge from "catrobat_5" to "catrobat_7"
-
-  Scenario: Viewing remix graph using release app
-    Given I use a release build of the Catroid app
-    And I am on "/app/project/2"
-    And I wait for the page to be loaded
-    When I click "#remix-graph-toggle"
-    And I wait for AJAX to finish
-    And I wait 2500 milliseconds
-    Then I should see an unavailable node with id "catrobat_7"
     And I should see an edge from "catrobat_5" to "catrobat_7"
