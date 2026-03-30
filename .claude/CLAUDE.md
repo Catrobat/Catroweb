@@ -388,23 +388,36 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 
 ### Common Suites
 
-| Suite               | Path                                    |
-| ------------------- | --------------------------------------- |
-| web-admin           | tests/BehatFeatures/web/admin           |
-| web-profile         | tests/BehatFeatures/web/profile         |
-| web-general         | tests/BehatFeatures/web/general         |
-| web-translation     | tests/BehatFeatures/web/translation     |
-| web-project-details | tests/BehatFeatures/web/project-details |
-| web-reactions       | tests/BehatFeatures/web/reactions       |
-| api-projects        | tests/BehatFeatures/api/projects        |
-| api-authentication  | tests/BehatFeatures/api/authentication  |
-| api-comments        | tests/BehatFeatures/api/comments        |
-| api-notifications   | tests/BehatFeatures/api/notifications   |
-| api-achievements    | tests/BehatFeatures/api/achievements    |
-| web-notifications   | tests/BehatFeatures/web/notifications   |
-| web-achievements    | tests/BehatFeatures/web/achievements    |
-| api-moderation      | tests/BehatFeatures/api/moderation      |
-| web-reports         | tests/BehatFeatures/web/reports         |
+| Suite               | Path                                                                               |
+| ------------------- | ---------------------------------------------------------------------------------- |
+| api-achievements    | tests/BehatFeatures/api/achievements                                               |
+| api-authentication  | tests/BehatFeatures/api/authentication                                             |
+| api-comments        | tests/BehatFeatures/api/comments                                                   |
+| api-followers       | tests/BehatFeatures/api/followers                                                  |
+| api-media-library   | tests/BehatFeatures/api/media-library                                              |
+| api-moderation      | tests/BehatFeatures/api/moderation                                                 |
+| api-notifications   | tests/BehatFeatures/api/notifications                                              |
+| api-projects        | tests/BehatFeatures/api/projects                                                   |
+| api-projects-get    | (split) api/projects/GET\_\* dirs                                                  |
+| api-projects-write  | (split) api/projects/POST,DELETE,PUT,reactions                                     |
+| api-search          | tests/BehatFeatures/api/search                                                     |
+| api-studio          | tests/BehatFeatures/api/studio                                                     |
+| api-translation     | tests/BehatFeatures/api/translation                                                |
+| api-user            | tests/BehatFeatures/api/user                                                       |
+| api-utility         | tests/BehatFeatures/api/utility                                                    |
+| web-achievements    | tests/BehatFeatures/web/achievements                                               |
+| web-admin           | tests/BehatFeatures/web/admin                                                      |
+| web-admin-1         | (split) admin: projects, featured, approve, login, moderation, maintenance         |
+| web-admin-2         | (split) admin: apk, db_updater, example, flags, mail, media, survey, upload, users |
+| web-general         | tests/BehatFeatures/web/general                                                    |
+| web-notifications   | tests/BehatFeatures/web/notifications                                              |
+| web-profile         | tests/BehatFeatures/web/profile                                                    |
+| web-profile-1       | (split) profile: edit, profile, image, data_export                                 |
+| web-profile-2       | (split) profile: follow, user_projects, verification, suspended, many_follower     |
+| web-project-details | tests/BehatFeatures/web/project-details                                            |
+| web-reactions       | tests/BehatFeatures/web/reactions                                                  |
+| web-reports         | tests/BehatFeatures/web/reports                                                    |
+| web-translation     | tests/BehatFeatures/web/translation                                                |
 
 Suite configuration is in `behat.yaml.dist`.
 
