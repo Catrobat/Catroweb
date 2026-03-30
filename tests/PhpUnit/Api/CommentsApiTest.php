@@ -10,6 +10,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
@@ -50,6 +51,7 @@ final class CommentsApiTest extends TestCase
     ?AuthorizationCheckerInterface $authorization_checker = null,
     ?RateLimiterFactory $comment_burst_limiter = null,
     ?RateLimiterFactory $comment_daily_limiter = null,
+    ?TextSanitizer $text_sanitizer = null,
   ): CommentsApi {
     return new CommentsApi(
       $authentication_manager ?? $this->createStub(AuthenticationManager::class),
@@ -63,6 +65,7 @@ final class CommentsApiTest extends TestCase
       $authorization_checker ?? $this->createStub(AuthorizationCheckerInterface::class),
       $comment_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_burst'),
       $comment_daily_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_daily'),
+      $text_sanitizer ?? $this->createPassthroughTextSanitizer(),
     );
   }
 
@@ -75,6 +78,15 @@ final class CommentsApiTest extends TestCase
       ],
       new InMemoryStorage(),
     );
+  }
+
+  private function createPassthroughTextSanitizer(): TextSanitizer
+  {
+    $stub = $this->createStub(TextSanitizer::class);
+    $stub->method('sanitize')->willReturnArgument(0);
+    $stub->method('sanitizeWithLocale')->willReturnArgument(0);
+
+    return $stub;
   }
 
   // ==================== projectIdCommentsGet ====================

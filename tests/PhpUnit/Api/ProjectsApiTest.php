@@ -15,6 +15,7 @@ use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\Api\Services\ValidationWrapper;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
+use App\Moderation\TextSanitizer;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
@@ -129,6 +130,15 @@ final class ProjectsApiTest extends KernelTestCase
   /**
    * @throws Exception
    */
+  private function createPassthroughTextSanitizer(): TextSanitizer
+  {
+    $stub = $this->createStub(TextSanitizer::class);
+    $stub->method('sanitize')->willReturnArgument(0);
+    $stub->method('sanitizeWithLocale')->willReturnArgument(0);
+
+    return $stub;
+  }
+
   private function projectIdPut_setLoaderAndAuthManager(MockObject|Program|null $project = null, MockObject|User|null $user = null): void
   {
     if (is_null($user)) {
@@ -191,7 +201,8 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createStub(EntityManagerInterface::class),
       $extracted_file_repository,
       $this->createStub(ProjectFileRepository::class),
-      $this->createStub(ScreenshotRepository::class)
+      $this->createStub(ScreenshotRepository::class),
+      $this->createPassthroughTextSanitizer()
     );
     $this->facade->method('getProcessor')->willReturn($processor);
 
@@ -345,7 +356,8 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createStub(EntityManagerInterface::class),
       $extracted_file_repository,
       $this->createStub(ProjectFileRepository::class),
-      $this->createStub(ScreenshotRepository::class)
+      $this->createStub(ScreenshotRepository::class),
+      $this->createPassthroughTextSanitizer()
     );
     $this->facade->method('getProcessor')->willReturn($processor);
 

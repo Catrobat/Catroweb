@@ -20,7 +20,7 @@ final class Version20260330120000 extends AbstractMigration
   {
     // No schema changes needed. The text sanitization is applied at the API boundary.
     // Run `bin/console catro:moderation:sanitize-existing` to sanitize existing content.
-    $this->addSql("SELECT 1 -- text-sanitization-marker");
+    $this->addSql('SELECT 1 -- text-sanitization-marker');
   }
 
   #[\Override]
