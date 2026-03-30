@@ -77,6 +77,12 @@ class ProjectCodeStatistics
   #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
   private int $score_data_representation = 0;
 
+  #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
+  private int $score_bonus = 0;
+
+  #[ORM\Column(type: Types::STRING, length: 64, options: ['default' => 'rubric_2021_v2'])]
+  private string $scoring_version = 'rubric_2021_v2';
+
   public function __construct()
   {
     $this->created_at = new \DateTime();
@@ -324,5 +330,44 @@ class ProjectCodeStatistics
     $this->score_data_representation = $score_data_representation;
 
     return $this;
+  }
+
+  public function getScoreBonus(): int
+  {
+    return $this->score_bonus;
+  }
+
+  public function setScoreBonus(int $score_bonus): self
+  {
+    $this->score_bonus = $score_bonus;
+
+    return $this;
+  }
+
+  public function getScoringVersion(): string
+  {
+    return $this->scoring_version;
+  }
+
+  public function setScoringVersion(string $scoring_version): self
+  {
+    $this->scoring_version = $scoring_version;
+
+    return $this;
+  }
+
+  /**
+   * Derived on read so the stored category scores remain the single source of truth.
+   */
+  public function getScoreTotal(): int
+  {
+    return $this->score_abstraction
+      + $this->score_parallelism
+      + $this->score_synchronization
+      + $this->score_logical_thinking
+      + $this->score_flow_control
+      + $this->score_user_interactivity
+      + $this->score_data_representation
+      + $this->score_bonus;
   }
 }

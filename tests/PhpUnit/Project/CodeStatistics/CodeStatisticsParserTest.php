@@ -84,26 +84,32 @@ class CodeStatisticsParserTest extends TestCase
   {
     $stats = $this->parser->parse($this->fixtures_path.'sample_code.xml');
 
-    // Abstraction: UserDefinedScript(1) + UserDefinedBrick(1) + CloneBrick(1) + DeleteThisCloneBrick(1) + WhenClonedScript(1) = 5
-    self::assertSame(5, $stats->getScoreAbstraction());
+    self::assertSame(CodeStatisticsParser::CURRENT_SCORING_VERSION, $stats->getScoringVersion());
 
-    // Parallelism: BroadcastScript(1) + WhenClonedScript(1) = 2 (only script types in PARALLELISM_SCRIPTS)
-    self::assertSame(2, $stats->getScoreParallelism());
+    // Abstraction: multiple scripts + abstraction bricks/scripts + clone handling
+    self::assertSame(6, $stats->getScoreAbstraction());
 
-    // Synchronization: BroadcastBrick(1) + WaitBrick(1) = 2
-    self::assertSame(2, $stats->getScoreSynchronization());
+    // Parallelism: multiple start scripts + multiple tap entry points on the same object
+    self::assertSame(3, $stats->getScoreParallelism());
 
-    // Logical thinking: IfLogicBeginBrick(1) + IfLogicElseBrick(1) = 2
-    self::assertSame(2, $stats->getScoreLogicalThinking());
+    // Synchronization: Wait + Broadcast
+    self::assertSame(3, $stats->getScoreSynchronization());
 
-    // Flow control: ForeverBrick(1) + RepeatBrick(1) = 2
-    self::assertSame(2, $stats->getScoreFlowControl());
+    // Logical thinking: If + Else, no formula-level logical operator
+    self::assertSame(3, $stats->getScoreLogicalThinking());
 
-    // User interactivity: WhenScript(1) + WhenTouchDownScript(1) + AskBrick(1) = 3
+    // User interactivity: start script + tap-oriented entries on the same object
     self::assertSame(3, $stats->getScoreUserInteractivity());
 
-    // Data representation: SetVariableBrick(1) + ChangeVariableBrick(1) + AddItemToUserListBrick(1) = 3
-    self::assertSame(3, $stats->getScoreDataRepresentation());
+    // Flow control: script with bricks + forever/repeat
+    self::assertSame(3, $stats->getScoreFlowControl());
+
+    // Data representation: looks/motion + variables + user list
+    self::assertSame(6, $stats->getScoreDataRepresentation());
+
+    // Breadth bonus: all 7 categories >= 1
+    self::assertSame(1, $stats->getScoreBonus());
+    self::assertSame(28, $stats->getScoreTotal());
   }
 
   public function testParseEmptyProject(): void
@@ -122,6 +128,8 @@ class CodeStatisticsParserTest extends TestCase
     self::assertSame([], $stats->getBrickCounts());
     self::assertSame(0, $stats->getScoreAbstraction());
     self::assertSame(0, $stats->getScoreFlowControl());
+    self::assertSame(0, $stats->getScoreBonus());
+    self::assertSame(0, $stats->getScoreTotal());
   }
 
   public function testParseSceneProject(): void
@@ -149,14 +157,27 @@ class CodeStatisticsParserTest extends TestCase
     // 1 global variable
     self::assertSame(1, $stats->getGlobalVariables());
 
-    // Flow control score: RepeatUntilBrick(1) = 1
-    self::assertSame(1, $stats->getScoreFlowControl());
+    // Abstraction: only the "more than one script" basic criterion is met
+    self::assertSame(1, $stats->getScoreAbstraction());
 
-    // Synchronization score: BroadcastWaitBrick(1) = 1
-    self::assertSame(1, $stats->getScoreSynchronization());
+    self::assertSame(0, $stats->getScoreParallelism());
+    self::assertSame(0, $stats->getScoreLogicalThinking());
 
-    // Data representation: SetVariableBrick(1) = 1
-    self::assertSame(1, $stats->getScoreDataRepresentation());
+    // Synchronization: BroadcastWait qualifies for proficiency directly
+    self::assertSame(3, $stats->getScoreSynchronization());
+
+    // Flow control: script body + RepeatUntil
+    self::assertSame(4, $stats->getScoreFlowControl());
+
+    // User interactivity: start script is enough for the basic level
+    self::assertSame(1, $stats->getScoreUserInteractivity());
+
+    // Data representation: sprite state brick + variable brick
+    self::assertSame(3, $stats->getScoreDataRepresentation());
+
+    // Breadth bonus: 5 of 7 categories >= 1
+    self::assertSame(1, $stats->getScoreBonus());
+    self::assertSame(13, $stats->getScoreTotal());
   }
 
   public function testParseNonexistentFile(): void
@@ -188,5 +209,14 @@ class CodeStatisticsParserTest extends TestCase
     $script_counts = $stats->getScriptCounts();
     $sum = array_sum($script_counts);
     self::assertSame($stats->getScripts(), $sum);
+  }
+
+  public function testPhysicsAndExtensionsAwardBonusPoints(): void
+  {
+    $stats = $this->parser->parse($this->fixtures_path.'bonus_code.xml');
+
+    self::assertSame(2, $stats->getScoreBonus());
+    self::assertSame(CodeStatisticsParser::CURRENT_SCORING_VERSION, $stats->getScoringVersion());
+    self::assertSame(4, $stats->getScoreTotal());
   }
 }

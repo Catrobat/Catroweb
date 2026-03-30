@@ -9,17 +9,35 @@ const CHARACTERS = [
   { url: penguinSvgUrl, className: 'code-stats-animation--penguin' },
 ]
 
+const MAX_LEVELS = 3
+
 const SCORE_KEYS = [
-  { key: 'score_abstraction', transAttr: 'transAbstraction' },
-  { key: 'score_parallelism', transAttr: 'transParallelism' },
-  { key: 'score_logical_thinking', transAttr: 'transLogicalThinking' },
-  { key: 'score_synchronization', transAttr: 'transSynchronization' },
-  { key: 'score_flow_control', transAttr: 'transFlowControl' },
-  { key: 'score_user_interactivity', transAttr: 'transUserInteractivity' },
-  { key: 'score_data_representation', transAttr: 'transDataRepresentation' },
+  { key: 'score_abstraction', transAttr: 'transAbstraction', icon: 'extension' },
+  { key: 'score_parallelism', transAttr: 'transParallelism', icon: 'call_split' },
+  { key: 'score_logical_thinking', transAttr: 'transLogicalThinking', icon: 'psychology' },
+  { key: 'score_synchronization', transAttr: 'transSynchronization', icon: 'sync' },
+  { key: 'score_flow_control', transAttr: 'transFlowControl', icon: 'loop' },
+  { key: 'score_user_interactivity', transAttr: 'transUserInteractivity', icon: 'touch_app' },
+  { key: 'score_data_representation', transAttr: 'transDataRepresentation', icon: 'storage' },
 ]
 
-const BONUS_POINTS = 5
+function normalizeScoreValue(value) {
+  const numericValue = Number.parseInt(String(value ?? 0), 10)
+
+  return Number.isNaN(numericValue) ? 0 : numericValue
+}
+
+/**
+ * Map a 0–6 rubric score to a level count (0–3).
+ * basic = 1 pt, developing = 2 pts, proficiency = 3 pts.
+ * Thresholds: >= 1 -> level 1, >= 3 -> level 2, >= 6 -> level 3.
+ */
+function scoreToLevelCount(score) {
+  if (score >= 6) return 3
+  if (score >= 3) return 2
+  if (score >= 1) return 1
+  return 0
+}
 
 function animateNumber(el, from, to, duration) {
   if (from === to) {
@@ -79,12 +97,13 @@ function buildScoreArea(container) {
 }
 
 function buildTable(container) {
+  const levelLabel = escapeHtml(container.dataset.transLevel || 'Level')
   return (
     '<div class="code-stats-table">' +
     '<div class="code-stats-table-header">' +
     '<span></span>' +
     '<span>' +
-    escapeHtml(container.dataset.transPoints || 'points') +
+    levelLabel +
     '</span>' +
     '</div>' +
     '<div id="code-stats-detail-table"></div>' +
@@ -92,15 +111,59 @@ function buildTable(container) {
   )
 }
 
-function createRow(label, value, extraClass) {
+function createRow(label, score, icon) {
+  const levelCount = scoreToLevelCount(score)
   const row = document.createElement('div')
-  row.className = 'code-stats-row' + (extraClass ? ' ' + extraClass : '')
+  row.className = 'code-stats-row code-stats-row--level-' + levelCount
+
+  let segmentsHtml = ''
+  for (let i = 0; i < MAX_LEVELS; i++) {
+    const filled = i < levelCount
+    segmentsHtml +=
+      '<div class="code-stats-segment' +
+      (filled ? ' code-stats-segment--filled' : '') +
+      '">' +
+      '<div class="code-stats-segment__fill"></div>' +
+      '</div>'
+  }
+
   row.innerHTML =
     '<div class="code-stats-category">' +
+    '<i class="material-icons code-stats-icon">' +
+    escapeHtml(icon) +
+    '</i>' +
+    '<span class="code-stats-label">' +
     escapeHtml(label) +
+    '</span>' +
     '</div>' +
-    '<div class="code-stats-value">' +
-    escapeHtml(String(value)) +
+    '<div class="code-stats-level">' +
+    '<div class="code-stats-bar">' +
+    segmentsHtml +
+    '</div>' +
+    '<span class="code-stats-fraction">' +
+    levelCount +
+    '/' +
+    MAX_LEVELS +
+    '</span>' +
+    '</div>'
+
+  return row
+}
+
+function createBonusRow(label, score) {
+  const row = document.createElement('div')
+  row.className = 'code-stats-row code-stats-row--bonus'
+  row.innerHTML =
+    '<div class="code-stats-category">' +
+    '<i class="material-icons code-stats-icon">star</i>' +
+    '<span class="code-stats-label">' +
+    escapeHtml(label) +
+    '</span>' +
+    '</div>' +
+    '<div class="code-stats-level">' +
+    '<span class="code-stats-bonus-value">+' +
+    escapeHtml(String(score)) +
+    '</span>' +
     '</div>'
   return row
 }
@@ -108,61 +171,98 @@ function createRow(label, value, extraClass) {
 async function runAnimation(data, container) {
   const scores = SCORE_KEYS.map((s) => ({
     label: container.dataset[s.transAttr] || s.key,
-    value: data[s.key] || 0,
+    value: normalizeScoreValue(data[s.key]),
+    icon: s.icon,
   }))
 
-  const baseTotal = scores.reduce((sum, s) => sum + s.value, 0)
-  const finalTotal = baseTotal + BONUS_POINTS
+  const bonusScore = normalizeScoreValue(data.score_bonus)
+  const baseTotal = normalizeScoreValue(data.score_total)
+  const scoreBeforeBonus = baseTotal - bonusScore
 
-  // Animate total score (base only first)
+  // Animate total score to base (before bonus)
   const totalEl = container.querySelector('#code-stats-total-number')
-  const scorePromise = animateNumber(totalEl, 0, baseTotal, 900)
+  const scorePromise = animateNumber(
+    totalEl,
+    0,
+    bonusScore > 0 ? scoreBeforeBonus : baseTotal,
+    1000,
+  )
 
-  // Load random character (runs in parallel with score animation)
+  // Load random character
   const animEl = container.querySelector('#code-stats-animation')
   const randomIndex = Math.floor(Math.random() * CHARACTERS.length)
   loadCharacterSvg(animEl, CHARACTERS[randomIndex])
 
-  // Build category rows with staggered entrance
+  // Build category rows (without bonus — bonus gets its own phase)
   const tableEl = container.querySelector('#code-stats-detail-table')
   tableEl.innerHTML = ''
 
+  const categoryRows = []
   for (let i = 0; i < scores.length; i++) {
-    const row = createRow(scores[i].label, scores[i].value)
-    row.style.animationDelay = i * 60 + 'ms'
-    row.classList.add('code-stats-row-enter')
-    tableEl.appendChild(row)
+    categoryRows.push(createRow(scores[i].label, scores[i].value, scores[i].icon))
   }
 
-  // Wait for score animation + row stagger to settle
+  // Stagger entrance for category rows
+  for (let i = 0; i < categoryRows.length; i++) {
+    categoryRows[i].style.animationDelay = i * 80 + 'ms'
+    categoryRows[i].classList.add('code-stats-row-enter')
+    tableEl.appendChild(categoryRows[i])
+  }
+
+  // Wait for row entrance animations to settle
+  await sleep(categoryRows.length * 80 + 350)
+
+  // Animate bar segments filling in (cascade across rows and segments)
+  const rowEls = tableEl.querySelectorAll('.code-stats-row')
+  for (let i = 0; i < rowEls.length; i++) {
+    const fills = rowEls[i].querySelectorAll(
+      '.code-stats-segment--filled .code-stats-segment__fill',
+    )
+    fills.forEach((fill, j) => {
+      setTimeout(
+        () => {
+          fill.classList.add('code-stats-fill--active')
+        },
+        i * 120 + j * 180,
+      )
+    })
+  }
+
+  // Wait for score count-up and bar animations to finish
   await scorePromise
-  await sleep(500)
+  await sleep(800)
 
-  // --- Bonus points phase ---
-  // Show the star burst
-  const scoreArea = container.querySelector('.code-stats-score-area')
-  const starEl = document.createElement('div')
-  starEl.className = 'code-stats-star'
-  starEl.innerHTML =
-    '<svg viewBox="0 0 24 24" class="star-svg">' +
-    '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/>' +
-    '</svg>'
-  scoreArea.appendChild(starEl)
+  // --- Bonus phase: star burst + score bump ---
+  if (bonusScore > 0) {
+    // Show the star burst
+    const scoreArea = container.querySelector('.code-stats-score-area')
+    const starEl = document.createElement('div')
+    starEl.className = 'code-stats-star'
+    starEl.innerHTML =
+      '<svg viewBox="0 0 24 24" class="star-svg">' +
+      '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01z"/>' +
+      '</svg>'
+    scoreArea.appendChild(starEl)
 
-  await sleep(600)
+    await sleep(600)
 
-  // Animate score from base to final
-  totalEl.classList.add('score-bump')
-  await animateNumber(totalEl, baseTotal, finalTotal, 600)
+    // Bump score from base to final total
+    totalEl.classList.add('score-bump')
+    await animateNumber(totalEl, scoreBeforeBonus, baseTotal, 600)
 
-  await sleep(200)
-  totalEl.classList.remove('score-bump')
+    await sleep(200)
+    totalEl.classList.remove('score-bump')
 
-  // Add bonus row to table
-  const bonusLabel = container.dataset.transBonus || 'Bonus'
-  const bonusRow = createRow(bonusLabel, '+' + BONUS_POINTS, 'code-stats-row-bonus')
-  bonusRow.classList.add('code-stats-row-enter')
-  tableEl.appendChild(bonusRow)
+    // Add bonus row to table with entrance animation
+    const bonusRow = createBonusRow(container.dataset.transBonus || 'Bonus', bonusScore)
+    bonusRow.classList.add('code-stats-row-enter')
+    tableEl.appendChild(bonusRow)
+
+    await sleep(400)
+  }
+
+  // Final celebration pulse
+  totalEl.classList.add('score-celebration')
 }
 
 async function loadStats(url, container, panel) {
