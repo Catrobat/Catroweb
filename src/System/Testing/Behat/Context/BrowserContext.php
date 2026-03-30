@@ -322,11 +322,10 @@ class BrowserContext extends MinkContext implements Context
   }
 
   /**
-   * @Then /^the "(?P<selector>[^"]*)" element should contain "(?P<value>(?:[^"]|\\")*)"$/
+   * @Then /^the element "(?P<selector>[^"]*)" should contain "(?P<value>(?:[^"]|\\")*)"$/
    */
-  public function theElementShouldContain($element, $value): void
+  public function theElementSelectorShouldContain(string $selector, string $value): void
   {
-    $selector = (string) $element;
     $element = $this->getSession()->getPage()->find('css', $selector);
 
     if (null === $element) {
@@ -336,14 +335,6 @@ class BrowserContext extends MinkContext implements Context
     if (!$element->isVisible() || !str_contains((string) $element->getText(), $value)) {
       throw new ExpectationException("Element '{$selector}' does not contain '{$value}'", $this->getSession());
     }
-  }
-
-  /**
-   * @Then /^the element "(?P<selector>[^"]*)" should contain "(?P<value>(?:[^"]|\\")*)"$/
-   */
-  public function theElementSelectorShouldContain($selector, $value): void
-  {
-    $this->theElementShouldContain($selector, $value);
   }
 
   /**
