@@ -30,12 +30,21 @@ class CodeStatisticsService
    */
   public function getStatistics(Program $project): ?ProjectCodeStatistics
   {
-    $latest = $project->getLatestCodeStatistics();
-    if (null !== $latest) {
+    // Query the latest row directly so lazy collections do not hand us an older
+    // in-memory snapshot after additional statistics rows have been persisted.
+    /** @var ?ProjectCodeStatistics $latest */
+    $latest = $this->entity_manager->getRepository(ProjectCodeStatistics::class)->findOneBy(
+      ['program' => $project],
+      ['created_at' => 'DESC'],
+    );
+
+    if (null !== $latest && CodeStatisticsParser::CURRENT_SCORING_VERSION === $latest->getScoringVersion()) {
       return $latest;
     }
 
-    return $this->parseAndPersist($project);
+    $refreshed = $this->parseAndPersist($project);
+
+    return $refreshed ?? $latest;
   }
 
   /**

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+  <header>
+    <programName>Bonus Project</programName>
+    <catrobatLanguageVersion>0.998</catrobatLanguageVersion>
+  </header>
+  <objectList>
+    <object type="SingleSprite" name="Drone Sprite">
+      <lookList/>
+      <soundList/>
+      <scriptList>
+        <script type="StartScript">
+          <brickList>
+            <brick type="SetPhysicsObjectTypeBrick"/>
+            <brick type="DroneTakeOffLandBrick"/>
+          </brickList>
+        </script>
+      </scriptList>
+    </object>
+  </objectList>
+</program>

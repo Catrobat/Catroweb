@@ -39,6 +39,7 @@ use App\DB\Entity\User\User;
 use App\DB\Enum\AppealState;
 use App\DB\Enum\ReportState;
 use App\DB\Generator\MyUuidGenerator;
+use App\Project\CodeStatistics\CodeStatisticsParser;
 use App\System\Commands\DBUpdater\UpdateAchievementsCommand;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Testing\Behat\ContextTrait;
@@ -412,9 +413,18 @@ class DataFixturesContext implements Context
   public function thereAreProjectCodeStatistics(TableNode $table): void
   {
     $em = $this->getManager();
+    $cleared_project_ids = [];
     foreach ($table->getHash() as $config) {
       $project = $em->getRepository(Program::class)->find($config['project_id']);
       Assert::assertNotNull($project, sprintf('Project "%s" not found for code statistics fixture', $config['project_id']));
+
+      if (!in_array($config['project_id'], $cleared_project_ids, true)) {
+        foreach ($em->getRepository(ProjectCodeStatistics::class)->findBy(['program' => $project]) as $existing_stats) {
+          $em->remove($existing_stats);
+        }
+
+        $cleared_project_ids[] = $config['project_id'];
+      }
 
       $stats = new ProjectCodeStatistics();
       $stats->setProgram($project);
@@ -433,6 +443,8 @@ class DataFixturesContext implements Context
       $stats->setScoreFlowControl((int) ($config['score_flow_control'] ?? 0));
       $stats->setScoreUserInteractivity((int) ($config['score_user_interactivity'] ?? 0));
       $stats->setScoreDataRepresentation((int) ($config['score_data_representation'] ?? 0));
+      $stats->setScoreBonus((int) ($config['score_bonus'] ?? 0));
+      $stats->setScoringVersion((string) ($config['scoring_version'] ?? CodeStatisticsParser::CURRENT_SCORING_VERSION));
 
       $em->persist($stats);
     }

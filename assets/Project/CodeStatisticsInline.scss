@@ -111,7 +111,212 @@
   }
 }
 
-// ─── Star Animation ──────────────────────────────────────────
+// ─── Table ───────────────────────────────────────────────────
+.code-stats-table {
+  margin-top: 0.75rem;
+  background: light-dark(rgb(255 255 255 / 85%), rgb(30 30 30 / 85%));
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
+}
+
+.code-stats-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  border-bottom: 2px solid light-dark(#e0e0e0, #444);
+
+  span:last-child {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: light-dark(#333, #ddd);
+    min-width: 10rem;
+    text-align: right;
+  }
+}
+
+// ─── Category Row ────────────────────────────────────────────
+.code-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid light-dark(#f0f0f0, #333);
+  opacity: 0;
+  animation: code-stats-row-fade-in 0.3s ease-out forwards;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:nth-child(even) {
+    background: light-dark(rgb(0 0 0 / 2.5%), rgb(255 255 255 / 3%));
+  }
+}
+
+.code-stats-category {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.code-stats-icon {
+  font-size: 1.1rem;
+  color: var(--primary);
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+.code-stats-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: light-dark(#333, #ddd);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (width <= 576px) {
+    font-size: 0.8rem;
+  }
+}
+
+// ─── Level Bars ──────────────────────────────────────────────
+.code-stats-level {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.code-stats-bar {
+  display: flex;
+  gap: 3px;
+  width: 100px;
+
+  @media (width <= 576px) {
+    width: 72px;
+  }
+}
+
+.code-stats-segment {
+  flex: 1;
+  height: 22px;
+  background: light-dark(#e8e8e8, #3a3a3a);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+
+  @media (width <= 576px) {
+    height: 18px;
+    border-radius: 3px;
+  }
+}
+
+.code-stats-segment__fill {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+
+  @media (width <= 576px) {
+    border-radius: 3px;
+  }
+}
+
+.code-stats-fill--active {
+  width: 100% !important;
+}
+
+// ─── Level Colors ────────────────────────────────────────────
+$segment-stripe: repeating-linear-gradient(
+  -45deg,
+  transparent,
+  transparent 3px,
+  rgb(255 255 255 / 20%) 3px,
+  rgb(255 255 255 / 20%) 6px
+);
+
+// Level 1 — red
+.code-stats-row--level-1 .code-stats-segment--filled {
+  box-shadow: 0 0 6px rgb(239 83 80 / 35%);
+}
+
+.code-stats-row--level-1 .code-stats-segment__fill {
+  background-color: #ef5350;
+  background-image: $segment-stripe;
+}
+
+// Level 2 — orange
+.code-stats-row--level-2 .code-stats-segment--filled {
+  box-shadow: 0 0 6px rgb(255 152 0 / 35%);
+}
+
+.code-stats-row--level-2 .code-stats-segment__fill {
+  background-color: #ff9800;
+  background-image: $segment-stripe;
+}
+
+// Level 3 — green
+.code-stats-row--level-3 .code-stats-segment--filled {
+  box-shadow: 0 0 6px rgb(76 175 80 / 35%);
+}
+
+.code-stats-row--level-3 .code-stats-segment__fill {
+  background-color: #4caf50;
+  background-image: $segment-stripe;
+}
+
+// Fraction label colors
+.code-stats-fraction {
+  font-weight: 700;
+  font-size: 0.85rem;
+  min-width: 2rem;
+  text-align: right;
+}
+
+.code-stats-row--level-0 .code-stats-fraction {
+  color: light-dark(#999, #666);
+}
+
+.code-stats-row--level-1 .code-stats-fraction {
+  color: #ef5350;
+}
+
+.code-stats-row--level-2 .code-stats-fraction {
+  color: #e68a00;
+}
+
+.code-stats-row--level-3 .code-stats-fraction {
+  color: #4caf50;
+}
+
+// ─── Bonus Row ───────────────────────────────────────────────
+.code-stats-row--bonus {
+  background: light-dark(rgb(255 193 7 / 8%), rgb(255 193 7 / 10%)) !important;
+  border-top: 2px solid #ffc107;
+
+  .code-stats-icon {
+    color: #ffc107;
+    opacity: 1;
+  }
+
+  .code-stats-label {
+    color: light-dark(#b8860b, #ffd54f);
+    font-weight: 600;
+  }
+}
+
+.code-stats-bonus-value {
+  font-weight: 800;
+  font-size: 1rem;
+  color: light-dark(#b8860b, #ffd54f);
+}
+
+// ─── Star Burst Animation ────────────────────────────────────
 .code-stats-star {
   position: absolute;
   top: 0;
@@ -138,82 +343,6 @@
 
 .score-bump {
   animation: score-bump-pulse 0.4s ease-out;
-}
-
-// ─── Table ───────────────────────────────────────────────────
-.code-stats-table {
-  margin-top: 0.75rem;
-  background: light-dark(rgb(255 255 255 / 85%), rgb(30 30 30 / 85%));
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
-}
-
-.code-stats-table-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 1rem;
-  border-bottom: 2px solid light-dark(#e0e0e0, #444);
-
-  span:last-child {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: light-dark(#333, #ddd);
-    min-width: 3rem;
-    text-align: right;
-  }
-}
-
-.code-stats-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.65rem 1rem;
-  border-bottom: 1px solid light-dark(#f0f0f0, #333);
-  opacity: 0;
-  animation: code-stats-row-fade-in 0.3s ease-out forwards;
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &:nth-child(even) {
-    background: light-dark(rgb(0 0 0 / 2.5%), rgb(255 255 255 / 3%));
-  }
-}
-
-.code-stats-row-bonus {
-  background: light-dark(rgb(255 193 7 / 12%), rgb(255 193 7 / 15%)) !important;
-  border-top: 2px solid #ffc107;
-
-  .code-stats-category {
-    font-weight: 700;
-    color: light-dark(#b8860b, #ffd54f);
-  }
-
-  .code-stats-value {
-    color: light-dark(#b8860b, #ffd54f);
-    font-weight: 800;
-  }
-}
-
-.code-stats-category {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: light-dark(#333, #ddd);
-
-  @media (width <= 576px) {
-    font-size: 0.82rem;
-  }
-}
-
-.code-stats-value {
-  min-width: 2.5rem;
-  text-align: right;
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--primary);
 }
 
 // ─── Loading / Error ─────────────────────────────────────────
@@ -629,6 +758,11 @@
   }
 }
 
+.score-animate-in {
+  animation: code-stats-count-up 0.5s ease-out;
+}
+
+// ─── Star Keyframes ──────────────────────────────────────────
 @keyframes star-entrance {
   0% {
     opacity: 0;
@@ -673,6 +807,26 @@
   }
 }
 
-.score-animate-in {
-  animation: code-stats-count-up 0.5s ease-out;
+// ─── Celebration ─────────────────────────────────────────────
+.score-celebration {
+  animation: score-celebration-pulse 0.6s ease-out;
+  text-shadow: 0 0 24px custom-alpha(--color-primary, 0.45);
+}
+
+@keyframes score-celebration-pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.15);
+  }
+
+  60% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }

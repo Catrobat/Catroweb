@@ -345,6 +345,9 @@ class ProjectsResponseManager extends AbstractResponseManager
       'score_flow_control' => $stats->getScoreFlowControl(),
       'score_user_interactivity' => $stats->getScoreUserInteractivity(),
       'score_data_representation' => $stats->getScoreDataRepresentation(),
+      'score_bonus' => $stats->getScoreBonus(),
+      'score_total' => $stats->getScoreTotal(),
+      'scoring_version' => $stats->getScoringVersion(),
     ]);
   }
 

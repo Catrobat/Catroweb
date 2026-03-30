@@ -806,6 +806,7 @@ codeStatistics:
   flowControl: 'Flow control'
   userInteractivity: 'User interactivity'
   dataRepresentation: 'Data representation'
+  level: 'Level'
   loading: 'Loading...'
   bonus: 'Bonus'
 
