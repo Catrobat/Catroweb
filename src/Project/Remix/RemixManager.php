@@ -111,7 +111,7 @@ class RemixManager
     do {
       $previous_descendant_ids = $catrobat_ids_of_whole_graph;
 
-      $catrobat_ids_of_whole_graph = $this->project_remix_repository->getDescendantIdsOfRootsByDescendantIds($catrobat_ids_of_whole_graph);
+      $catrobat_ids_of_whole_graph = $this->project_remix_repository->getGraphDescendantIds($catrobat_ids_of_whole_graph);
 
       $diff_new = array_diff($catrobat_ids_of_whole_graph, $previous_descendant_ids);
       $diff_previous = array_diff($previous_descendant_ids, $catrobat_ids_of_whole_graph);
