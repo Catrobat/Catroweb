@@ -36,7 +36,13 @@ class NotificationRepository extends ServiceEntityRepository
 
     $qb
       ->select('n')
+      ->addSelect('nu')
+      ->addSelect('lf')
+      ->addSelect('p')
       ->from(LikeNotification::class, 'n')
+      ->leftJoin('n.user', 'nu')
+      ->leftJoin('n.like_from', 'lf')
+      ->leftJoin('n.program', 'p')
       ->where($qb->expr()->eq('n.program', ':program_id'))
       ->setParameter(':program_id', $project->getId())
     ;
@@ -67,7 +73,11 @@ class NotificationRepository extends ServiceEntityRepository
 
     $qb
       ->select('n')
+      ->addSelect('nu')
+      ->addSelect('f')
       ->from(FollowNotification::class, 'n')
+      ->leftJoin('n.user', 'nu')
+      ->leftJoin('n.follower', 'f')
     ;
 
     if ($owner instanceof User) {
@@ -113,7 +123,9 @@ class NotificationRepository extends ServiceEntityRepository
 
     $qb
       ->select('n')
+      ->addSelect('nu')
       ->from(CatroNotification::class, 'n')
+      ->leftJoin('n.user', 'nu')
       ->where('n.user = :user')
       ->setParameter('user', $user)
       ->orderBy('n.id', 'DESC')

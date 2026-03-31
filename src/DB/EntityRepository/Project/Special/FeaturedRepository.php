@@ -29,6 +29,7 @@ class FeaturedRepository extends ServiceEntityRepository
 
     $qb
       ->select('e')
+      ->addSelect('program')
       ->where('e.active = true')
       ->setFirstResult($offset)
       ->setMaxResults($limit)

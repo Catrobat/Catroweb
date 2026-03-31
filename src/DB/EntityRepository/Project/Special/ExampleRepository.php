@@ -32,6 +32,7 @@ class ExampleRepository extends ServiceEntityRepository
 
     $qb
       ->select('e')
+      ->addSelect('program')
       ->where('e.active = true')
       ->andWhere($qb->expr()->isNotNull('e.program'))
       ->setFirstResult($offset)
