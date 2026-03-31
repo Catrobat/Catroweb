@@ -66,6 +66,8 @@ class UserCommentRepository extends ServiceEntityRepository
     $qb = $this->createQueryBuilder('uc');
 
     return $qb->select('uc')
+      ->addSelect('u')
+      ->leftJoin('uc.user', 'u')
       ->where('uc.program = :program_id')
       ->setParameter('program_id', $program_id)
       ->andWhere($qb->expr()->orX()->addMultiple([
@@ -82,6 +84,8 @@ class UserCommentRepository extends ServiceEntityRepository
     $qb = $this->createQueryBuilder('uc');
 
     return $qb->select('uc')
+      ->addSelect('u')
+      ->leftJoin('uc.user', 'u')
       ->where('uc.parent_id = :parent_id')
       ->setParameter('parent_id', $parent_id)
       ->orderBy('uc.uploadDate', 'DESC')
