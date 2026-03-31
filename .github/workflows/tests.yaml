@@ -235,7 +235,7 @@ jobs:
           - web-admin-1 # split: projects_overview, featured_programs, approve_projects, login, moderation, maintenance (~7m)
           - web-admin-2 # split: apk, db_updater, example, feature_flag, mail, media_library, survey, upload, users (~7m)
           - web-authentication web-apk-generation web-media-library # ~8m combined
-          - web-code-statistics web-project web-code-view web-scratch-integration web-system web-recommendations # ~9m combined
+          - web-code-statistics web-project web-scratch-integration web-system web-recommendations # ~8m combined
           - web-comments web-reports # ~9m combined
           - web-general web-notifications # ~10m combined
           - web-profile-1 # split: profile_edit, profile, profile_image, data_export (~9m)

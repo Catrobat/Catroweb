@@ -159,6 +159,7 @@ All URIs are relative to *https://share.catrob.at/api*
 | _NotificationsApiInterface_  | [**notificationsGet**](docs/Api/NotificationsApiInterface.md#notificationsget)                        | **GET** /notifications                       | Get user notifications                                                                                     |
 | _NotificationsApiInterface_  | [**notificationsReadPut**](docs/Api/NotificationsApiInterface.md#notificationsreadput)                | **PUT** /notifications/read                  | Mark all notifications as read                                                                             |
 | _ProjectsApiInterface_       | [**projectIdCatrobatGet**](docs/Api/ProjectsApiInterface.md#projectidcatrobatget)                     | **GET** /project/{id}/catrobat               | Download the .catrobat (&#x3D;zip) file of a project                                                       |
+| _ProjectsApiInterface_       | [**projectIdCodeGet**](docs/Api/ProjectsApiInterface.md#projectidcodeget)                             | **GET** /project/{id}/code                   | Get the code tree of a project                                                                             |
 | _ProjectsApiInterface_       | [**projectIdCodeStatisticsGet**](docs/Api/ProjectsApiInterface.md#projectidcodestatisticsget)         | **GET** /project/{id}/code-statistics        | Get computational thinking scores for a project                                                            |
 | _ProjectsApiInterface_       | [**projectIdDelete**](docs/Api/ProjectsApiInterface.md#projectiddelete)                               | **DELETE** /project/{id}                     | Delete a project                                                                                           |
 | _ProjectsApiInterface_       | [**projectIdGet**](docs/Api/ProjectsApiInterface.md#projectidget)                                     | **GET** /project/{id}                        | Get the information of a project                                                                           |
@@ -213,6 +214,12 @@ All URIs are relative to *https://share.catrob.at/api*
 - [BaseUser](docs/Model/BaseUser.md)
 - [BasicUserDataResponse](docs/Model/BasicUserDataResponse.md)
 - [CodeStatisticsResponse](docs/Model/CodeStatisticsResponse.md)
+- [CodeViewAsset](docs/Model/CodeViewAsset.md)
+- [CodeViewBrick](docs/Model/CodeViewBrick.md)
+- [CodeViewObject](docs/Model/CodeViewObject.md)
+- [CodeViewResponse](docs/Model/CodeViewResponse.md)
+- [CodeViewScene](docs/Model/CodeViewScene.md)
+- [CodeViewScript](docs/Model/CodeViewScript.md)
 - [CommentCreateRequest](docs/Model/CommentCreateRequest.md)
 - [CommentListResponse](docs/Model/CommentListResponse.md)
 - [CommentResponse](docs/Model/CommentResponse.md)

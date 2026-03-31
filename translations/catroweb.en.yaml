@@ -793,6 +793,16 @@ codeview:
   dataBricks: 'Data bricks'
   specialBricks: 'Special bricks'
 
+codeView:
+  title: 'Code View'
+  loading: 'Loading code view...'
+  error: 'Could not load code view.'
+  retry: 'Try again'
+  empty: 'This project has no code.'
+  scripts: 'Scripts'
+  looks: 'Looks'
+  sounds: 'Sounds'
+
 codeStatistics:
   title: "Code statistics"
   error: "Code statistics can't be displayed."

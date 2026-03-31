@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+    <header>
+        <applicationBuildName/>
+        <applicationBuildNumber>0</applicationBuildNumber>
+        <applicationName>Pocket Code</applicationName>
+        <applicationVersion>1.0.0</applicationVersion>
+        <catrobatLanguageVersion>0.99</catrobatLanguageVersion>
+        <description>Project with nested control bricks</description>
+        <programName>NestedControlTest</programName>
+        <screenHeight>1920</screenHeight>
+        <screenWidth>1080</screenWidth>
+    </header>
+    <objectList>
+        <object name="Background">
+            <lookList/>
+            <soundList/>
+            <scriptList/>
+        </object>
+        <object name="Sprite1">
+            <lookList/>
+            <soundList/>
+            <scriptList>
+                <script type="StartScript">
+                    <brickList>
+                        <brick type="ForeverBrick">
+                            <loopBricks>
+                                <brick type="MoveNStepsBrick">
+                                    <formulaList>
+                                        <formula category="STEPS">
+                                            <type>NUMBER</type>
+                                            <value>10</value>
+                                        </formula>
+                                    </formulaList>
+                                </brick>
+                                <brick type="WaitBrick">
+                                    <formulaList>
+                                        <formula category="TIME_TO_WAIT_IN_SECONDS">
+                                            <type>NUMBER</type>
+                                            <value>0.5</value>
+                                        </formula>
+                                    </formulaList>
+                                </brick>
+                            </loopBricks>
+                        </brick>
+                    </brickList>
+                </script>
+                <script type="WhenScript">
+                    <brickList>
+                        <brick type="IfLogicBeginBrick">
+                            <formulaList>
+                                <formula category="IF_CONDITION">
+                                    <type>NUMBER</type>
+                                    <value>1</value>
+                                </formula>
+                            </formulaList>
+                            <ifBranchBricks>
+                                <brick type="ShowBrick"/>
+                            </ifBranchBricks>
+                            <elseBranchBricks>
+                                <brick type="HideBrick"/>
+                            </elseBranchBricks>
+                        </brick>
+                        <brick type="IfThenLogicBeginBrick">
+                            <formulaList>
+                                <formula category="IF_CONDITION">
+                                    <type>NUMBER</type>
+                                    <value>0</value>
+                                </formula>
+                            </formulaList>
+                            <ifBranchBricks>
+                                <brick type="PlaceAtBrick">
+                                    <formulaList>
+                                        <formula category="X_POSITION">
+                                            <type>NUMBER</type>
+                                            <value>0</value>
+                                        </formula>
+                                        <formula category="Y_POSITION">
+                                            <type>NUMBER</type>
+                                            <value>0</value>
+                                        </formula>
+                                    </formulaList>
+                                </brick>
+                            </ifBranchBricks>
+                        </brick>
+                    </brickList>
+                </script>
+            </scriptList>
+        </object>
+    </objectList>
+</program>

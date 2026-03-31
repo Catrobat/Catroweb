@@ -348,6 +348,14 @@ open_api_server_projects_projectidcatrobatget:
   requirements:
     id: '^[a-zA-Z0-9\\-]+$'
 
+open_api_server_projects_projectidcodeget:
+  path: /project/{id}/code
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectIdCodeGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
 open_api_server_projects_projectidcodestatisticsget:
   path: /project/{id}/code-statistics
   methods: [GET]
@@ -571,7 +579,7 @@ open_api_server_studio_studioidprojectspost:
     id: '^[a-zA-Z0-9\\-]+$'
 
 open_api_server_studio_studioidprojectsprojectiddelete:
-  path: /studio/{id}/projects/{project_id}
+  path: /studio/{id}/projects/{projectId}
   methods: [DELETE]
   defaults:
     _controller: open_api_server.controller.studio::studioIdProjectsProjectIdDeleteAction
