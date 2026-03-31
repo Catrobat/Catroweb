@@ -6,7 +6,6 @@ import '../Components/TextField'
 import '../Components/TabBar'
 import { Modal } from 'bootstrap'
 import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle'
-import { OwnProjectList } from '../Project/OwnProjectList'
 import Swal from 'sweetalert2'
 import MessageDialogs from '../Components/MessageDialogs'
 import { ApiFetch, ApiDeleteFetch, ApiPutFetch } from '../Api/ApiHelper'
@@ -28,14 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new PasswordVisibilityToggle()
 
-  const projectsContainer = document.getElementById('own-projects')
-  const theme = projectsContainer.dataset.theme
-  const baseUrl = projectsContainer.dataset.baseUrl
-  const emptyMessage = projectsContainer.dataset.emptyMessage
-
-  const url = baseUrl + '/api/projects/user'
-
-  new OwnProjectList(projectsContainer, url, theme, emptyMessage, baseUrl).initialize()
+  const baseUrl = document.getElementById('own-projects').dataset.baseUrl
   new OwnProfile(baseUrl).initializeAll()
   new VerifyAccountHandler().init()
 
