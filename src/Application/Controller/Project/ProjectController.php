@@ -12,7 +12,6 @@ use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
 use App\Project\Event\CheckScratchProjectEvent;
-use App\Project\ProjectLikeService;
 use App\Project\ProjectManager;
 use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
@@ -27,7 +26,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -36,7 +34,6 @@ class ProjectController extends AbstractController
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
     private readonly ProjectManager $project_manager,
-    private readonly ProjectLikeService $project_like_service,
     private readonly ElapsedTimeStringFormatter $elapsed_time,
     private readonly TranslatorInterface $translator,
     private readonly ParameterBagInterface $parameter_bag,
@@ -78,35 +75,20 @@ class ProjectController extends AbstractController
     $user = $this->getUser();
     $logged_in = null !== $user;
     $my_project = $logged_in && $project->getUser() === $user;
-    $active_user_like_types = [];
-    if ($logged_in) {
-      $userId = $user->getId() ?? throw new \RuntimeException('User ID must not be null');
-      $likes = $this->project_like_service->findUserLikes($projectId, $userId);
-      foreach ($likes as $like) {
-        $active_user_like_types[] = $like->getType();
-      }
-    }
-
-    $active_like_types = $this->project_like_service->findProjectLikeTypes($projectId);
-    $total_like_count = $this->project_like_service->totalLikeCount($projectId);
-    $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
-
-    $project_comment_list = [];
-    $project_details = $this->createProjectDetailsArray(
-      $project, $active_like_types, $active_user_like_types, $total_like_count,
-      $referrer, $project_comment_list
-    );
 
     return $this->render('Project/ProjectPage.html.twig', [
       'project' => $project,
-      'login_redirect' => $login_redirect,
-      'project_details' => $project_details,
       'my_project' => $my_project,
       'logged_in' => $logged_in,
       'is_whitelisted' => $this->content_visibility_manager->isWhitelisted(ContentType::Project, $projectId),
       'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
       'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
+      'screenshot_big' => $this->screenshot_repository->getScreenshotWebPath($projectId),
+      'download_url' => $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $projectId]),
+      'age' => $this->elapsed_time->format($project->getUploadedAt()->getTimestamp()),
+      'filesize_mb' => sprintf('%.2f', $project->getFilesize() / 1_048_576),
+      'total_downloads' => $project->getDownloads() + $project->getApkDownloads(),
     ]);
   }
 
@@ -234,37 +216,6 @@ class ProjectController extends AbstractController
       $viewed[] = $project->getId();
       $request->getSession()->set('viewed', $viewed);
     }
-  }
-
-  /**
-   * @throws \Exception
-   */
-  private function createProjectDetailsArray(Program $project,
-    array $active_like_types,
-    array $active_user_like_types,
-    int $total_like_count,
-    ?string $referrer,
-    array $project_comments): array
-  {
-    $projectId = $project->getId() ?? throw new \RuntimeException('Project ID must not be null');
-    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $projectId]);
-
-    return [
-      'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($projectId),
-      'downloadUrl' => $url,
-      'languageVersion' => $project->getLanguageVersion(),
-      'downloads' => $project->getDownloads() + $project->getApkDownloads(),
-      'views' => $project->getViews(),
-      'filesize' => sprintf('%.2f', $project->getFilesize() / 1_048_576),
-      'age' => $this->elapsed_time->format($project->getUploadedAt()->getTimestamp()),
-      'referrer' => $referrer,
-      'id' => $projectId,
-      'comments' => $project_comments,
-      'activeLikeTypes' => $active_like_types,
-      'activeUserLikeTypes' => $active_user_like_types,
-      'totalLikeCount' => $total_like_count,
-      'isAdmin' => $this->isGranted('ROLE_ADMIN'),
-    ];
   }
 
   private function projectCustomTranslationDeleteAction(Request $request, string $id): Response

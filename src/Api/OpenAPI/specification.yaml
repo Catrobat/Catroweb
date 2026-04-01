@@ -2388,10 +2388,10 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/studio/{id}/projects/{projectId}':
+  '/studio/{id}/projects/{project_id}':
     parameters:
       - $ref: '#/components/parameters/Uuid'
-      - name: projectId
+      - name: project_id
         in: path
         required: true
         schema:
@@ -4060,6 +4060,15 @@ components:
           type: string
           description: "The name of the projects' author"
           example: 'Catrobat'
+        author_id:
+          type: string
+          description: "The unique identifier of the projects' author"
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        scratch_id:
+          type: integer
+          nullable: true
+          description: 'The scratch project ID if this project was imported from Scratch, null otherwise'
+          example: null
         description:
           type: string
           description: 'A description of the project.'

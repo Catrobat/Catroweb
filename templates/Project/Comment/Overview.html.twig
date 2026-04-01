@@ -1,6 +1,14 @@
-<div id="project-comments" class="row mb-3 mt-5">
+<div id="project-comments" class="row mb-3">
 
-  <h3 class="col-10 col-sm-11 mb-2">{{ 'project.comments'|trans({}, 'catroweb') }}</h3>
+  <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+    <h3 class="mb-0">{{ 'project.comments'|trans({}, 'catroweb') }}</h3>
+    <div id="add-comment-init-container">
+      <button id="add-comment-button" class="btn btn-outline-primary btn-sm rounded-pill d-inline-flex align-items-center gap-1">
+        <i class="material-icons" style="font-size: 1.1rem;">add_comment</i>
+        <span>{{ 'project.addComment'|trans({}, 'catroweb') }}</span>
+      </button>
+    </div>
+  </div>
 
   <div id="user-comment-wrapper" class="col-12" style="display: none;">
     <div class="comment-avatar">
@@ -27,23 +35,15 @@
     </div>
   </div>
 
-  <div id="add-comment-init-container" class="col-12 mb-4">
-    <button id="add-comment-button" class="btn btn-outline-primary rounded-pill w-100 d-flex align-items-center justify-content-center py-3">
-      <i class="material-icons me-2">add_comment</i>
-      <span>{{ 'project.addComment'|trans({}, 'catroweb') }}</span>
-    </button>
-  </div>
-
   {{ include('Project/Comment/Wrapper.html.twig', {
-    comments: project_details.comments,
-    isAdmin: project_details.isAdmin,
+    comments: [],
+    isAdmin: is_granted('ROLE_ADMIN'),
   }) }}
 
 </div>
 
 {{ include('Project/Comment/JsData.html.twig', {
   project: project,
-  comments: project_details.comments,
 }) }}
 <div class="session-vars-names" data-visible-comments-session-var="visibleComments"></div>
 <div class="comments-class-selector" data-comments-class-selector=".single-comment"></div>

@@ -12,10 +12,13 @@ Feature: As a visitor I want to see a project page
   Scenario: Viewing project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "project 1"
+    And I wait for the element "#description" to contain "my description"
     Then I should see "Description"
     And I should see "my description"
     Then I should see "Notes and credits"
+    And I wait for the element "#credits" to contain "No notes and credits available."
     And I should see "No notes and credits available."
     And I should see "Download"
 #    And I should see "Remix Graph"
@@ -44,6 +47,7 @@ Feature: As a visitor I want to see a project page
     Given I use an ios app
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Download"
     And I should not see "Download as app"
     And I should see "Statistics"
