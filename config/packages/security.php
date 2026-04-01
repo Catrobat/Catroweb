@@ -300,6 +300,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/code/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/project/[a-zA-Z0-9\\\-]+/code-statistics/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],

@@ -75,6 +75,10 @@ COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf
 RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
 
+# Increase PHP upload limits for project file uploads (admin upload page allows up to 100 MB)
+RUN printf "\n%s\n%s\n" "upload_max_filesize = 100M" "post_max_size = 105M" >> /etc/php/8.5/apache2/php.ini && \
+    printf "\n%s\n%s\n" "upload_max_filesize = 100M" "post_max_size = 105M" >> /etc/php/8.5/cli/php.ini
+
 # Overwrite php config (only if xdebug is installed)
 RUN if [ "$INSTALL_XDEBUG" = "true" ]; then \
     printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.5/apache2/php.ini; \

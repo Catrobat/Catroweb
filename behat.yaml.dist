@@ -282,17 +282,9 @@ default:
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
                 - App\System\Testing\Behat\Context\ApiContext
 
-        web-code-statistics:
+        web-code:
             paths:
                 - tests/BehatFeatures/web/code-statistics
-            contexts:
-                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
-                - App\System\Testing\Behat\Context\DataFixturesContext
-                - App\System\Testing\Behat\Context\CatrowebBrowserContext
-                - App\System\Testing\Behat\Context\ApiContext
-
-        web-code-view:
-            paths:
                 - tests/BehatFeatures/web/code-view
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext

@@ -6,14 +6,7 @@ const importPlugin = require('eslint-plugin-import-x')
 // const pluginPromise = require('eslint-plugin-promise')
 
 module.exports = defineConfig([
-  globalIgnores([
-    'assets/vendor',
-    'assets/catblocks',
-    'assets/Legacy',
-    'vendor',
-    'public',
-    'node_modules',
-  ]),
+  globalIgnores(['assets/vendor', 'assets/Legacy', 'vendor', 'public', 'node_modules']),
   {
     files: ['**/*.js'],
     languageOptions: {

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+    <header>
+        <applicationBuildName/>
+        <applicationBuildNumber>0</applicationBuildNumber>
+        <applicationName>Pocket Code</applicationName>
+        <applicationVersion>1.0.0</applicationVersion>
+        <catrobatLanguageVersion>0.993</catrobatLanguageVersion>
+        <description>Multi-scene project</description>
+        <programName>SceneTest</programName>
+        <scenesEnabled>true</scenesEnabled>
+        <screenHeight>1920</screenHeight>
+        <screenWidth>1080</screenWidth>
+    </header>
+    <scenes>
+        <scene>
+            <name>Scene 1</name>
+            <objectList>
+                <object name="Background">
+                    <lookList/>
+                    <soundList/>
+                    <scriptList/>
+                </object>
+                <object name="Cat">
+                    <lookList/>
+                    <soundList/>
+                    <scriptList>
+                        <script type="StartScript">
+                            <brickList>
+                                <brick type="ShowBrick"/>
+                            </brickList>
+                        </script>
+                    </scriptList>
+                </object>
+            </objectList>
+        </scene>
+        <scene>
+            <name>Scene 2</name>
+            <objectList>
+                <object name="Background">
+                    <lookList/>
+                    <soundList/>
+                    <scriptList/>
+                </object>
+                <object name="Dog">
+                    <lookList/>
+                    <soundList/>
+                    <scriptList>
+                        <script type="StartScript">
+                            <brickList>
+                                <brick type="HideBrick"/>
+                            </brickList>
+                        </script>
+                    </scriptList>
+                </object>
+            </objectList>
+        </scene>
+    </scenes>
+</program>

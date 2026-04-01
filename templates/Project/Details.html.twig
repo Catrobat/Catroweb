@@ -14,12 +14,7 @@
       <span class="icon-text ms-2 align-bottom">{{ project_details.age }}</span>
     </div>
     <div class="d-none d-lg-block col-lg-4">
-      {{ include('Components/RedirectButton.twig', {
-        id: 'projectCodeViewButton',
-        url: path('code_view', {id: project.id}),
-        icon: 'extension',
-        text: 'codeview.title'|trans({}, 'catroweb'),
-      }) }}
+      {# Code View is now inline on the project page — old button removed #}
     </div>
   </div>
 
@@ -45,13 +40,7 @@
 
   <div class="row mb-4">
     <div class="col-6 mb-3 d-lg-none mt-3">
-      {{ include('Components/RedirectButton.twig', {
-        id: 'projectCodeViewButton',
-        suffix: '-small',
-        url: path('code_view', {id: project.id}),
-        icon: 'extension',
-        text: 'codeview.title'|trans({}, 'catroweb'),
-      }) }}
+      {# Code View is now inline on the project page — old button removed #}
     </div>
   </div>
 

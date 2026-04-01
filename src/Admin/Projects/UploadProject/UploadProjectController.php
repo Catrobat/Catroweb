@@ -52,6 +52,14 @@ class UploadProjectController extends CRUDController
       return $this->redirectToRoute('admin_upload_project_list');
     }
 
+    $contentLength = $request->server->get('CONTENT_LENGTH');
+    if (null !== $contentLength && 0 === $request->request->count() && 0 === $request->files->count()) {
+      $maxSize = ini_get('post_max_size') ?: '8M';
+      $this->addFlash('sonata_flash_error', sprintf('The uploaded file is too large. PHP post_max_size is %s — increase it in php.ini or upload a smaller file.', $maxSize));
+
+      return $this->redirectToRoute('admin_upload_project_list');
+    }
+
     $username = trim((string) $request->request->get('username'));
     if ('' === $username) {
       $this->addFlash('sonata_flash_error', 'Please enter a username.');

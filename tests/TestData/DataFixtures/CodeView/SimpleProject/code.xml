@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program>
+    <header>
+        <applicationBuildName/>
+        <applicationBuildNumber>0</applicationBuildNumber>
+        <applicationName>Pocket Code</applicationName>
+        <applicationVersion>1.0.0</applicationVersion>
+        <catrobatLanguageVersion>0.99</catrobatLanguageVersion>
+        <description>Simple test project</description>
+        <programName>SimpleTest</programName>
+        <screenHeight>1920</screenHeight>
+        <screenWidth>1080</screenWidth>
+    </header>
+    <objectList>
+        <object name="Background">
+            <lookList/>
+            <soundList/>
+            <scriptList>
+                <script type="StartScript">
+                    <brickList>
+                        <brick type="WaitBrick">
+                            <formulaList>
+                                <formula category="TIME_TO_WAIT_IN_SECONDS">
+                                    <type>NUMBER</type>
+                                    <value>1</value>
+                                </formula>
+                            </formulaList>
+                        </brick>
+                    </brickList>
+                </script>
+            </scriptList>
+        </object>
+        <object name="Sprite1">
+            <lookList/>
+            <soundList/>
+            <scriptList>
+                <script type="StartScript">
+                    <brickList>
+                        <brick type="PlaceAtBrick">
+                            <formulaList>
+                                <formula category="X_POSITION">
+                                    <type>NUMBER</type>
+                                    <value>100</value>
+                                </formula>
+                                <formula category="Y_POSITION">
+                                    <type>NUMBER</type>
+                                    <value>200</value>
+                                </formula>
+                            </formulaList>
+                        </brick>
+                        <brick type="ShowBrick"/>
+                        <brick type="HideBrick"/>
+                    </brickList>
+                </script>
+            </scriptList>
+        </object>
+    </objectList>
+</program>

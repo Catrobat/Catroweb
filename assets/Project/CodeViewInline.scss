@@ -1,0 +1,492 @@
+@use 'sass:color';
+@import '../Layout/Variables';
+
+// ── Category colours (used for border + tinted background) ──
+$cv-categories: (
+  'event': #cf5717,
+  'control': #e89025,
+  'motion': #408ac5,
+  'sound': #9553af,
+  'looks': #6b9c49,
+  'data': #d32f2f,
+  'pen': #2e7d32,
+  'device': #ffc107,
+  'user_defined': #03a9f4,
+  'lego': #ffeb3b,
+  'embroidery': #e91e63,
+  'extension': #03a9f4,
+  'unknown': #9e9e9e,
+);
+
+// ── Container ───────────────────────────────────────────────
+.code-view-inline {
+  margin: 1.5rem 0;
+}
+
+// ── Toggle Button ───────────────────────────────────────────
+#code-view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--primary);
+  background: transparent;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    border-radius 0.25s ease;
+
+  &:hover {
+    background: custom-alpha(--color-primary, 0.06);
+  }
+
+  &:active {
+    background: custom-alpha(--color-primary, 0.12);
+  }
+
+  .material-icons {
+    font-size: 1.25rem;
+  }
+
+  .code-view-chevron {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+  }
+
+  &[aria-expanded='true'] {
+    background: custom-alpha(--color-primary, 0.04);
+    border-bottom-color: transparent;
+    border-radius: 10px 10px 0 0;
+
+    .code-view-chevron {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ── Panel ───────────────────────────────────────────────────
+.code-view-panel {
+  border: 2px solid var(--primary);
+  border-top: none;
+  border-radius: 0 0 14px 14px;
+  background: light-dark(#fafafa, #1e1e1e);
+  padding: 1rem 0.75rem;
+  animation: cv-slide-down 0.3s ease-out;
+}
+
+// ── Loading / Error / Empty ─────────────────────────────────
+.cv-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  gap: 0.75rem;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.cv-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid custom-alpha(--color-primary, 0.25);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: cv-spin 0.7s linear infinite;
+}
+
+.cv-retry-btn {
+  margin-top: 0.5rem;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: transparent;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: custom-alpha(--color-primary, 0.08);
+  }
+}
+
+// ── Toolbar (expand/collapse all) ───────────────────────────
+.cv-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.cv-toolbar__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid light-dark(#ddd, #444);
+  border-radius: 6px;
+  color: light-dark(#666, #aaa);
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background: light-dark(#f0f0f0, #333);
+  }
+
+  .material-icons {
+    font-size: 1.1rem;
+  }
+}
+
+// ── Scene Header ────────────────────────────────────────────
+.cv-scene {
+  margin-bottom: 0.75rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.cv-scene__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: light-dark(#333, #eee);
+  background: light-dark(#e8e8e8, #2a2a2a);
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: light-dark(#ddd, #333);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+
+  .material-icons {
+    font-size: 1.1rem;
+    transition: transform 0.25s ease;
+  }
+
+  &[aria-expanded='true'] .material-icons {
+    transform: rotate(180deg);
+  }
+}
+
+.cv-scene__body {
+  padding-top: 0.5rem;
+}
+
+// ── Sprite Card ─────────────────────────────────────────────
+.cv-sprite {
+  background: light-dark(#fff, #252525);
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 8%);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.cv-sprite__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: light-dark(#333, #ddd);
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid light-dark(#eee, #333);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: light-dark(#f5f5f5, #2a2a2a);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: -2px;
+  }
+
+  .cv-sprite__chevron {
+    margin-left: auto;
+    font-size: 1.1rem;
+    color: light-dark(#888, #777);
+    transition: transform 0.25s ease;
+  }
+
+  &[aria-expanded='true'] .cv-sprite__chevron {
+    transform: rotate(180deg);
+  }
+}
+
+.cv-sprite__thumb {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: light-dark(#eee, #333);
+  flex-shrink: 0;
+}
+
+.cv-sprite__icon {
+  font-size: 1.2rem;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.cv-sprite__name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cv-sprite__badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: light-dark(#888, #999);
+  white-space: nowrap;
+}
+
+.cv-sprite__body {
+  padding: 0.5rem 0.75rem 0.75rem;
+}
+
+// ── Tabs ────────────────────────────────────────────────────
+.cv-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid light-dark(#e0e0e0, #444);
+  margin-bottom: 0.75rem;
+}
+
+.cv-tab {
+  padding: 0.45rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: light-dark(#888, #999);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+
+  &:hover {
+    color: light-dark(#555, #ccc);
+  }
+
+  &.cv-tab--active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+}
+
+.cv-tab-panel {
+  display: none;
+
+  &.cv-tab-panel--active {
+    display: block;
+  }
+}
+
+// ── Block (script / brick) — visual programming block style ─
+.cv-block {
+  position: relative;
+  padding: 0.35rem 0.65rem;
+  margin-bottom: 2px;
+  border-left: 4px solid #9e9e9e;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: light-dark(#1a1a1a, #f0f0f0);
+  background: light-dark(#f0f0f0, #333);
+  overflow-wrap: break-word;
+
+  // Script hat blocks — more prominent
+  > strong {
+    font-weight: 700;
+  }
+
+  // Top-level scripts get extra spacing between them
+  + .cv-block {
+    margin-top: 0.75rem;
+  }
+}
+
+// Category-specific colours — tinted backgrounds with solid left accent
+@each $cat, $colour in $cv-categories {
+  .cv-block--#{$cat} {
+    border-left-color: $colour;
+    background: light-dark(rgba($colour, 0.1), rgba($colour, 0.18));
+
+    > strong {
+      color: light-dark(
+        color.adjust($colour, $lightness: -12%),
+        color.adjust($colour, $lightness: 12%)
+      );
+    }
+  }
+}
+
+// Commented-out blocks
+.cv-block--commented {
+  opacity: 0.35;
+  background: light-dark(#eee, #2a2a2a) !important;
+  border-left-color: light-dark(#ccc, #555) !important;
+  font-style: italic;
+}
+
+// ── Children (nesting) — indented brick container ───────────
+.cv-block__children {
+  padding: 3px 0 3px 14px;
+  margin: 2px 0 2px 4px;
+  border-left: 2px solid light-dark(rgb(0 0 0 / 10%), rgb(255 255 255 / 12%));
+  border-radius: 0 0 0 4px;
+
+  // No extra top margin between nested bricks
+  .cv-block + .cv-block {
+    margin-top: 0;
+  }
+}
+
+.cv-branch-label {
+  display: inline-block;
+  padding: 0.05rem 0.4rem;
+  margin-bottom: 2px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: light-dark(#888, #999);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: light-dark(rgb(0 0 0 / 5%), rgb(255 255 255 / 6%));
+  border-radius: 3px;
+}
+
+// ── Asset list (looks / sounds) ─────────────────────────────
+.cv-asset-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cv-asset-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.82rem;
+  color: light-dark(#555, #bbb);
+  border-bottom: 1px solid light-dark(#f0f0f0, #333);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .material-icons {
+    font-size: 1.1rem;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  span {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.cv-asset-thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid light-dark(#e0e0e0, #444);
+  background: light-dark(#f5f5f5, #1a1a1a);
+  flex-shrink: 0;
+}
+
+.cv-asset-audio {
+  height: 28px;
+  max-width: 180px;
+  flex-shrink: 0;
+}
+
+// ── Group sprite indicator ──────────────────────────────────
+.cv-group {
+  margin-left: 1rem;
+  padding-left: 0.5rem;
+  border-left: 2px dashed light-dark(#ccc, #555);
+}
+
+// ── Responsive ──────────────────────────────────────────────
+@media (width <= 576px) {
+  .code-view-panel {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .cv-block {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .cv-sprite__header {
+    font-size: 0.85rem;
+    padding: 0.55rem 0.7rem;
+  }
+}
+
+// ── Keyframes ───────────────────────────────────────────────
+@keyframes cv-slide-down {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    max-height: 4000px;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cv-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
