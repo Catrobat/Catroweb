@@ -346,10 +346,7 @@ $cv-categories: (
 @each $cat, $colour in $cv-categories {
   .cv-block--#{$cat} {
     border-left-color: $colour;
-    background: light-dark(
-      rgba($colour, 0.1),
-      rgba($colour, 0.18)
-    );
+    background: light-dark(rgba($colour, 0.1), rgba($colour, 0.18));
 
     > strong {
       color: light-dark(
