@@ -40,6 +40,8 @@ class ProgramRepository extends ServiceEntityRepository
   {
     $query_builder = $this->createQueryBuilder('e');
     $query_builder
+      ->addSelect('u')
+      ->leftJoin('e.user', 'u')
       ->where($query_builder->expr()->eq('e.user', $query_builder->expr()->literal($user_id)))
     ;
 
@@ -57,6 +59,8 @@ class ProgramRepository extends ServiceEntityRepository
   {
     $query_builder = $this->createQueryBuilder('e');
     $query_builder
+      ->addSelect('u')
+      ->leftJoin('e.user', 'u')
       ->where($query_builder->expr()->eq('e.id', $query_builder->expr()->literal($program_id)))
     ;
 
@@ -442,7 +446,11 @@ class ProgramRepository extends ServiceEntityRepository
   //
   private function createQueryAllBuilder(): QueryBuilder
   {
-    return $this->createQueryBuilder('e')->select('e');
+    return $this->createQueryBuilder('e')
+      ->select('e')
+      ->addSelect('u')
+      ->leftJoin('e.user', 'u')
+    ;
   }
 
   private function createQueryCountBuilder(): QueryBuilder

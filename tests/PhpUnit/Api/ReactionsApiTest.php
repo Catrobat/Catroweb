@@ -13,6 +13,7 @@ use App\Api\Services\Reactions\ReactionsApiProcessor;
 use App\Api\Services\Reactions\ReactionsResponseManager;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
+use App\Project\CodeView\CodeTreeBuilder;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\ReactionSummaryResponse;
 use OpenAPI\Server\Model\ReactionUsersResponse;
@@ -49,6 +50,7 @@ final class ReactionsApiTest extends TestCase
     $this->object = new ProjectsApi(
       $this->facade,
       $this->reactions_facade,
+      $this->createStub(CodeTreeBuilder::class),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),

@@ -58,6 +58,11 @@ class ImageRepository
       $filename = $this->example_dir.$this->generateFileNameFromId($id, $extension, false);
     }
 
+    $dir = dirname($filename);
+    if (!is_dir($dir)) {
+      mkdir($dir, 0777, true);
+    }
+
     if (file_exists($filename)) {
       unlink($filename);
     }

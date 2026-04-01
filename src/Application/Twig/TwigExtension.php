@@ -111,7 +111,6 @@ class TwigExtension extends AbstractExtension
       new TwigFunction('getThemeDisplayName', $this->getThemeDisplayName(...)),
       new TwigFunction('assetExists', $this->assetExists(...)),
       new TwigFunction('assetFileExists', $this->assetFileExists(...)),
-      new TwigFunction('isVersionSupportedByCatBlocks', $this->isVersionSupportedByCatBlocks(...)),
       new TwigFunction('isFeatureFlagEnabled', $this->isFeatureFlagEnabled(...)),
       new TwigFunction('getStatistics', $this->getStatistics(...)),
     ];
@@ -120,14 +119,6 @@ class TwigExtension extends AbstractExtension
   public function isFeatureFlagEnabled(string $featureFlag): bool
   {
     return $this->feature_flag_manager->isEnabled($featureFlag);
-  }
-
-  public function isVersionSupportedByCatBlocks(string $version): bool
-  {
-    $MIN_VERSION_SUPPORTED = '0.994';
-    $EPSILON = 0.0000001;
-
-    return floatval($MIN_VERSION_SUPPORTED) - floatval($version) < $EPSILON;
   }
 
   public function getName(): string

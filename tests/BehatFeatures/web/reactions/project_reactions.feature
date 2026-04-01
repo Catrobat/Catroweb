@@ -25,6 +25,7 @@ Feature: Reactions to projects "likes"
   Scenario: Thumbs up button with on-click bubble should appear for projects without reactions
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element "#project-like-buttons-small" should be visible
     And I should see 1 "#project-like-buttons-small > *"
     And the element "#project-like-buttons-small .thumbs-up" should be visible
@@ -42,7 +43,9 @@ Feature: Reactions to projects "likes"
   Scenario: Thumbs up and smile button with on-click bubble and counter should appear for project 2
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#project-like-buttons-small" should be visible
+    And I wait for AJAX to finish
+    Then I wait for the element "#project-like-counter-small" to contain "2"
+    And the element "#project-like-buttons-small" should be visible
     And I should see 2 "#project-like-buttons-small > *"
     And the element "#project-like-buttons-small .thumbs-up" should be visible
     And the element "#project-like-buttons-small .smile" should be visible
@@ -57,7 +60,9 @@ Feature: Reactions to projects "likes"
   Scenario: Detail dialog for project 2 should open and show reactions
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#project-like-modal" should not be visible
+    And I wait for AJAX to finish
+    Then I wait for the element "#project-like-counter-small" to contain "2"
+    And the element "#project-like-modal" should not be visible
     And I click "#project-like-counter-small"
     And I wait for AJAX to finish
     Then the element "#project-like-modal" should be visible
@@ -93,8 +98,9 @@ Feature: Reactions to projects "likes"
   Scenario: Detail dialog for project 3 should open and show reactions
     Given I am on "/app/project/3"
     And I wait for the page to be loaded
-    Then the element "#project-like-modal" should not be visible
-    And the ".like-counter" element should contain "3"
+    And I wait for AJAX to finish
+    Then I wait for the element "#project-like-counter-small" to contain "3"
+    And the element "#project-like-modal" should not be visible
     And I click ".like-counter"
     And I wait for AJAX to finish
     Then the element "#project-like-modal" should be visible
@@ -130,6 +136,8 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#project-like-counter-small" to contain "2"
     And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
     Then the element "#project-like-detail-small" should be visible
@@ -145,7 +153,7 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the "#project-like-counter-small" element should contain "0"
+    And I wait for AJAX to finish
     And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
     Then the element "#project-like-detail-small" should be visible
@@ -163,7 +171,9 @@ Feature: Reactions to projects "likes"
     And the element "#project-like-buttons-small .smile" should be visible
     And the element "#project-like-buttons-small .wow" should be visible
     When I reload the page
-    Then the "#project-like-counter-small" element should contain "2"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then I wait for the element "#project-like-counter-small" to contain "2"
     And I should see 2 "#project-like-buttons-small > *"
     And the element "#project-like-buttons-small .smile" should be visible
     And the element "#project-like-buttons-small .wow" should be visible
@@ -180,7 +190,7 @@ Feature: Reactions to projects "likes"
   Scenario: Guests should be redirected to login page if they react to a project and the reaction should count after login
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And the "#project-like-counter-small" element should contain "0"
+    And I wait for AJAX to finish
     And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
     # click on Smile button
@@ -301,7 +311,8 @@ Feature: Reactions to projects "likes"
       | 1       | User199 | thumbs_up |
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the "#project-like-counter-small" element should contain "100"
+    And I wait for AJAX to finish
+    Then I wait for the element "#project-like-counter-small" to contain "100"
     When I click "#project-like-counter-small"
     And I wait for AJAX to finish
     Then I should see 2 "#project-like-modal .modal-body .nav-tabs .nav-item"

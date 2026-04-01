@@ -40,11 +40,13 @@ use App\DB\Enum\AppealState;
 use App\DB\Enum\ReportState;
 use App\DB\Generator\MyUuidGenerator;
 use App\Project\CodeStatistics\CodeStatisticsParser;
+use App\Storage\FileHelper;
 use App\System\Commands\DBUpdater\UpdateAchievementsCommand;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Testing\Behat\ContextTrait;
 use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
+use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\ORM\Exception\ORMException;
 use PHPUnit\Framework\Assert;
@@ -450,6 +452,31 @@ class DataFixturesContext implements Context
     }
 
     $em->flush();
+  }
+
+  /**
+   * @Given /^project "([^"]*)" has extracted code xml:$/
+   */
+  public function projectHasExtractedCodeXml(string $project_id, PyStringNode $xml): void
+  {
+    $extract_dir = $this->EXTRACT_RESOURCES_DIR.$project_id.'/';
+    if (!is_dir($extract_dir)) {
+      mkdir($extract_dir, 0777, true);
+    }
+
+    file_put_contents($extract_dir.'code.xml', (string) $xml);
+  }
+
+  /**
+   * @Given /^project "([^"]*)" has no extracted files$/
+   */
+  public function projectHasNoExtractedFiles(string $project_id): void
+  {
+    $extract_dir = $this->EXTRACT_RESOURCES_DIR.$project_id.'/';
+    if (is_dir($extract_dir)) {
+      FileHelper::emptyDirectory($extract_dir);
+      rmdir($extract_dir);
+    }
   }
 
   /**

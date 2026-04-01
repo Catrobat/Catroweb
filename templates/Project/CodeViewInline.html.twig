@@ -1,0 +1,19 @@
+<div id="code-view-inline"
+     class="code-view-inline"
+     data-code-url="{{ path('open_api_server_projects_projectidcodeget', {id: project.id}) }}"
+     data-trans-title="{{ 'codeView.title'|trans({}, 'catroweb') }}"
+     data-trans-loading="{{ 'codeView.loading'|trans({}, 'catroweb') }}"
+     data-trans-error="{{ 'codeView.error'|trans({}, 'catroweb') }}"
+     data-trans-retry="{{ 'codeView.retry'|trans({}, 'catroweb') }}"
+     data-trans-empty="{{ 'codeView.empty'|trans({}, 'catroweb') }}"
+     data-trans-scripts="{{ 'codeView.scripts'|trans({}, 'catroweb') }}"
+     data-trans-looks="{{ 'codeView.looks'|trans({}, 'catroweb') }}"
+     data-trans-sounds="{{ 'codeView.sounds'|trans({}, 'catroweb') }}"
+>
+  <button id="code-view-toggle" type="button" aria-expanded="false" aria-controls="code-view-panel">
+    <i class="material-icons">code</i>
+    <span>{{ 'codeView.title'|trans({}, 'catroweb') }}</span>
+    <i class="material-icons code-view-chevron">expand_more</i>
+  </button>
+  <div id="code-view-panel" class="code-view-panel d-none"></div>
+</div>

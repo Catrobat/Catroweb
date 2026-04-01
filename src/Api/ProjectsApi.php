@@ -11,8 +11,11 @@ use App\Api\Services\Reactions\ReactionsApiProcessor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramDownloads;
 use App\Project\AddProjectRequest;
+use App\Project\CodeView\CodeTreeBuilder;
+use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Event\ProjectDownloadEvent;
 use OpenAPI\Server\Api\ProjectsApiInterface;
+use OpenAPI\Server\Model\CodeViewResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\UpdateProjectErrorResponse;
@@ -33,6 +36,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   public function __construct(
     private readonly ProjectsApiFacade $facade,
     private readonly ReactionsApiFacade $reactions_facade,
+    private readonly CodeTreeBuilder $code_tree_builder,
     private readonly RateLimiterFactory $uploadDailyLimiter,
     private readonly RateLimiterFactory $reactionBurstLimiter,
     private readonly RateLimiterFactory $downloadBurstLimiter,
@@ -606,6 +610,34 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $responseCode = Response::HTTP_OK;
     $response = $this->reactions_facade->getResponseManager()->createReactionUsersResponse($paginated_data);
     $this->reactions_facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+
+    return $response;
+  }
+
+  #[\Override]
+  public function projectIdCodeGet(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null {
+    $project = $this->facade->getLoader()->findProjectByID($id, true);
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    try {
+      $tree = $this->code_tree_builder->buildCodeTree($project);
+    } catch (CodeTreeBuildException) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return null;
+    }
+
+    $responseCode = Response::HTTP_OK;
+    $response = new CodeViewResponse($tree);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
 
     return $response;
   }

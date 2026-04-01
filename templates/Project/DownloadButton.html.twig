@@ -2,11 +2,11 @@
   {# State 1: Default (Download) #}
   <button id="projectDownloadButton{{ suffix|default('') }}"
           class="btn btn-primary btn-download js-btn-project-download"
-          data-path-url='{{ project_details.downloadUrl }}'
+          data-path-url='{{ download_url }}'
           data-project-id='{{ project.id }}'
           data-suffix='{{ suffix|default('') }}'
           data-is-webview='{% if isWebview() %}true{% else %}false{% endif %}'
-          data-is-supported='{% if checkCatrobatLanguage(project_details.languageVersion) %}true{% else %}false{% endif %}'
+          data-is-supported='{% if checkCatrobatLanguage(project.languageVersion) %}true{% else %}false{% endif %}'
           data-is-not-supported-title="{{ 'project.updateAppHeaderDownload'|trans({}, 'catroweb') }}"
           data-is-not-supported-text="{{ 'project.updateAppTextDownload'|trans({}, 'catroweb') }}"
           data-trans-downloading="{{ 'project.downloading'|trans({}, 'catroweb') }}"

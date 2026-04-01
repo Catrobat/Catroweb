@@ -14,8 +14,10 @@ Feature: As a visitor I want to see a project page
   Scenario: Showing statistics on project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "project 1"
     And I should see "Catrobat"
+    And I wait for the element "#project-age" to contain "more than one year ago"
     And I should see "more than one year ago"
     And I should see "0.00 MB"
     And I should see "5 downloads"
@@ -90,16 +92,24 @@ Feature: As a visitor I want to see a project page
   Scenario: Increasing view counter after new session page visit
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#details-views" to contain "42 views"
     Then I should see "42 views"
     When I start a new session
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#details-views" to contain "43 views"
     Then I should see "43 views"
 
   Scenario: View counter is not increased on same session
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#details-views" to contain "42 views"
     Then I should see "42 views"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#details-views" to contain "43 views"
     Then I should see "43 views"

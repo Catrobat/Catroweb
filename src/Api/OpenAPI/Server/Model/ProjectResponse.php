@@ -75,6 +75,28 @@ class ProjectResponse
   protected ?string $author = null;
 
   /**
+   * The unique identifier of the projects&#39; author.
+   *
+   * @SerializedName("author_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $author_id = null;
+
+  /**
+   * The scratch project ID if this project was imported from Scratch, null otherwise.
+   *
+   * @SerializedName("scratch_id")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $scratch_id = null;
+
+  /**
    * A description of the project.
    *
    * @SerializedName("description")
@@ -293,6 +315,8 @@ class ProjectResponse
       $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->name = array_key_exists('name', $data) ? $data['name'] : $this->name;
       $this->author = array_key_exists('author', $data) ? $data['author'] : $this->author;
+      $this->author_id = array_key_exists('author_id', $data) ? $data['author_id'] : $this->author_id;
+      $this->scratch_id = array_key_exists('scratch_id', $data) ? $data['scratch_id'] : $this->scratch_id;
       $this->description = array_key_exists('description', $data) ? $data['description'] : $this->description;
       $this->credits = array_key_exists('credits', $data) ? $data['credits'] : $this->credits;
       $this->version = array_key_exists('version', $data) ? $data['version'] : $this->version;
@@ -377,6 +401,50 @@ class ProjectResponse
   public function setAuthor(?string $author = null): self
   {
     $this->author = $author;
+
+    return $this;
+  }
+
+  /**
+   * Gets author_id.
+   */
+  public function getAuthorId(): ?string
+  {
+    return $this->author_id;
+  }
+
+  /**
+   * Sets author_id.
+   *
+   * @param string|null $author_id The unique identifier of the projects' author
+   *
+   * @return $this
+   */
+  public function setAuthorId(?string $author_id = null): self
+  {
+    $this->author_id = $author_id;
+
+    return $this;
+  }
+
+  /**
+   * Gets scratch_id.
+   */
+  public function getScratchId(): ?int
+  {
+    return $this->scratch_id;
+  }
+
+  /**
+   * Sets scratch_id.
+   *
+   * @param int|null $scratch_id The scratch project ID if this project was imported from Scratch, null otherwise
+   *
+   * @return $this
+   */
+  public function setScratchId(?int $scratch_id = null): self
+  {
+    $this->scratch_id = $scratch_id;
 
     return $this;
   }

@@ -1,7 +1,7 @@
 {% if isWebview() %}
-  <a href="{{ project_details.downloadUrl }}">
+  <a href="{{ download_url }}">
 {% endif %}
-    <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big{% if project.notForKids() %} blurred{% endif %}" src="{{ asset(project_details.screenshotBig) }}"/>
+    <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big{% if project.notForKids() %} blurred{% endif %}" src="{{ asset(screenshot_big) }}"/>
 {% if isWebview() %}
   </a>
 {% endif %}

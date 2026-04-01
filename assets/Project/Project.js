@@ -433,6 +433,8 @@ export const Project = function (
       .querySelectorAll('.btn')
       .forEach((button) => button.addEventListener('click', detailsActionSmall))
 
+    fetchInitialReactions()
+
     // Check for pending reaction after login
     const pendingReaction = sessionStorage.getItem('pendingReaction')
     if (pendingReaction && userRole !== 'guest') {
@@ -702,51 +704,7 @@ export const Project = function (
         }
 
         const iconSize = smallScreen ? 'md-24' : 'md-28'
-        const totalCount = data.total || 0
-        likeCounter.textContent = `${totalCount} ${reactionsText}`
-
-        if (totalCount === 0) {
-          likeCounter.classList.add('d-none')
-        } else {
-          likeCounter.classList.remove('d-none')
-        }
-
-        const activeLikeTypes = data.active_types || []
-        if (!Array.isArray(activeLikeTypes) || activeLikeTypes.length === 0) {
-          likeButtons.innerHTML = `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
-                    <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
-        } else {
-          let html = ''
-
-          if (activeLikeTypes.includes('thumbs_up')) {
-            html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
-                        <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
-          }
-
-          if (activeLikeTypes.includes('smile')) {
-            html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
-                        <i class="material-icons smile ${iconSize}">sentiment_very_satisfied</i></div>`
-          }
-
-          if (activeLikeTypes.includes('love')) {
-            html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
-                        <i class="material-icons love ${iconSize}">favorite</i></div>`
-          }
-
-          if (activeLikeTypes.includes('wow')) {
-            const img = document.createElement('IMG')
-            const div = document.createElement('DIV')
-            div.className =
-              'btn btn-primary btn-round d-inline-flex justify-content-center align-items-center'
-            div.id = 'wow-reaction'
-            img.src = wowWhite
-            img.id = smallScreen ? 'wow-reaction-img-small' : 'wow-reaction-img'
-            img.className = 'wow'
-            div.appendChild(img)
-            html += div.outerHTML
-          }
-          likeButtons.innerHTML = html
-        }
+        updateReactionButtons(data, likeButtons, likeCounter, iconSize)
       })
       .catch((error) => {
         if (error.message !== 'Unauthorized') {
@@ -754,6 +712,69 @@ export const Project = function (
           showErrorAlert()
         }
       })
+  }
+
+  function updateReactionButtons(data, likeButtons, likeCounter, iconSize) {
+    const totalCount = data.total || 0
+    likeCounter.textContent = `${totalCount} ${reactionsText}`
+
+    if (totalCount === 0) {
+      likeCounter.classList.add('d-none')
+    } else {
+      likeCounter.classList.remove('d-none')
+    }
+
+    const activeLikeTypes = data.active_types || []
+    if (!Array.isArray(activeLikeTypes) || activeLikeTypes.length === 0) {
+      likeButtons.innerHTML = `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
+    } else {
+      let html = ''
+      if (activeLikeTypes.includes('thumbs_up')) {
+        html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                    <i class="material-icons thumbs-up ${iconSize}">thumb_up</i></div>`
+      }
+      if (activeLikeTypes.includes('smile')) {
+        html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                    <i class="material-icons smile ${iconSize}">sentiment_very_satisfied</i></div>`
+      }
+      if (activeLikeTypes.includes('love')) {
+        html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center">
+                    <i class="material-icons love ${iconSize}">favorite</i></div>`
+      }
+      if (activeLikeTypes.includes('wow')) {
+        html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center" id="wow-reaction">
+                    <img src="${wowWhite}" id="${iconSize === 'md-24' ? 'wow-reaction-img-small' : 'wow-reaction-img'}" class="wow"></div>`
+      }
+      likeButtons.innerHTML = html
+    }
+  }
+
+  function fetchInitialReactions() {
+    fetch(apiReactionsUrl, {
+      method: 'GET',
+      headers: { Accept: 'application/json' },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        updateReactionButtons(data, projectLikeButton, projectLikeCounter, 'md-28')
+        updateReactionButtons(data, projectLikeButtonsSmall, projectLikeCounterSmall, 'md-24')
+
+        // Mark active user reactions on the detail buttons
+        const userReactions = data.user_reactions || []
+        const typeNumToName = { 1: 'thumbs_up', 2: 'smile', 3: 'love', 4: 'wow' }
+        const allDetailBtns = [
+          ...projectLikeDetail.querySelectorAll('.btn[data-like-type]'),
+          ...projectLikeDetailSmall.querySelectorAll('.btn[data-like-type]'),
+        ]
+        allDetailBtns.forEach((btn) => {
+          const typeName = typeNumToName[btn.dataset.likeType]
+          if (typeName && userReactions.includes(typeName)) {
+            btn.classList.add('active')
+          }
+        })
+      })
+      .catch((e) => console.error('Failed to load initial reactions', e))
   }
 
   document.addEventListener('DOMContentLoaded', initProjectLike)

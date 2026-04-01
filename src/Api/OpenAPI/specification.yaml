@@ -1067,6 +1067,26 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  '/project/{id}/code':
+    get:
+      tags:
+        - 'Projects'
+      summary: 'Get the code tree of a project'
+      description: 'Returns a structured tree representation of the project code: scenes > objects > scripts > bricks. Bricks include their type, category, display text, parameters, and nested children for control-flow bricks.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeViewResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
   '/project/{id}/code-statistics':
     get:
       tags:
@@ -2368,10 +2388,10 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/studio/{id}/projects/{projectId}':
+  '/studio/{id}/projects/{project_id}':
     parameters:
       - $ref: '#/components/parameters/Uuid'
-      - name: projectId
+      - name: project_id
         in: path
         required: true
         schema:
@@ -4040,6 +4060,15 @@ components:
           type: string
           description: "The name of the projects' author"
           example: 'Catrobat'
+        author_id:
+          type: string
+          description: "The unique identifier of the projects' author"
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        scratch_id:
+          type: integer
+          nullable: true
+          description: 'The scratch project ID if this project was imported from Scratch, null otherwise'
+          example: null
         description:
           type: string
           description: 'A description of the project.'
@@ -5052,6 +5081,117 @@ components:
           nullable: true
         has_more:
           type: boolean
+
+    CodeViewResponse:
+      type: object
+      properties:
+        scenes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewScene'
+
+    CodeViewScene:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Scene 1'
+        objects:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewObject'
+
+    CodeViewObject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'Sprite1'
+        is_group:
+          type: boolean
+          example: false
+        scripts:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewScript'
+        looks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewAsset'
+        sounds:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewAsset'
+        children:
+          type: array
+          nullable: true
+          description: 'Child objects if this is a group sprite'
+          items:
+            $ref: '#/components/schemas/CodeViewObject'
+
+    CodeViewAsset:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'cat_look'
+        url:
+          type: string
+          nullable: true
+          example: '/resources/extract/abc123/images/cat_look.png'
+
+    CodeViewScript:
+      type: object
+      properties:
+        type:
+          type: string
+          example: 'StartScript'
+        category:
+          type: string
+          example: 'event'
+        display_text:
+          type: string
+          example: 'When program started'
+        commented_out:
+          type: boolean
+          example: false
+        bricks:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeViewBrick'
+
+    CodeViewBrick:
+      type: object
+      properties:
+        type:
+          type: string
+          example: 'PlaceAtBrick'
+        category:
+          type: string
+          example: 'motion'
+        display_text:
+          type: string
+          example: 'Place at X: 100 Y: 200'
+        commented_out:
+          type: boolean
+          example: false
+        parameters:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: string
+          example:
+            X_POSITION: '100'
+            Y_POSITION: '200'
+        children:
+          type: object
+          nullable: true
+          description: 'Nested bricks for control-flow structures (if/else, loops)'
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/CodeViewBrick'
+          example: null
 
     CodeStatisticsResponse:
       type: object

@@ -5,8 +5,9 @@
 {% block head %}
   {{ encore_entry_link_tags('project_page') }}
   {{ encore_entry_link_tags('project_code_statistics_inline') }}
+  {{ encore_entry_link_tags('project_code_view_inline') }}
 
-  {% set og_image_url = absolute_url(asset(project_details.screenshotBig)) %}
+  {% set og_image_url = absolute_url(asset(screenshot_big)) %}
   {% if project.description is not empty %}
     {% set og_description = project.description|striptags|slice(0, 200)|escape('html_attr') %}
   {% else %}
@@ -102,12 +103,12 @@
 
       <div class="">
         <i class="material-icons mt-2">query_builder</i>
-        <span class="icon-text ms-2 align-bottom mt-2">{{ project_details.age }}</span>
+        <span class="icon-text ms-2 align-bottom mt-2" id="project-age">{{ age }}</span>
       </div>
 
       <div class="">
         <i class="material-icons mt-2">description</i>
-        <span class="icon-text ms-2 align-bottom mt-2">{{ project_details.filesize }} MB</span>
+        <span class="icon-text ms-2 align-bottom mt-2" id="project-filesize">{{ filesize_mb }} MB</span>
       </div>
 
       <div id="not-for-kids-indicator" class="{{ not project.getNotForKids() ? 'd-none' : '' }}">
@@ -136,18 +137,16 @@
   </div>
 
   <div class="row d-lg-none">
-    <div class="col-5 col-sm-4 mt-3 ">
-      <div id="project-like-small">
-        {{ include('Project/Reactions.html.twig', {suffix: '-small'}) }}
-      </div>
-    </div>
     {% if not project.hasMissingFiles %}
-      <div class="col-7 col-sm-8 mt-3" style="padding-left: 0;">
-      </div>
       <div class="col-12 mt-3">
         {{ include('Project/DownloadButton.html.twig', {suffix: '-small'}) }}
       </div>
     {% endif %}
+    <div class="col-12 mt-3">
+      <div id="project-like-small">
+        {{ include('Project/Reactions.html.twig', {suffix: '-small'}) }}
+      </div>
+    </div>
   </div>
 
   {{ include('Project/ReactionsModal.html.twig') }}
@@ -181,6 +180,8 @@
   {{ include('Project/RemixGraphInline.html.twig') }}
 
   {{ include('Project/CodeStatisticsInline.html.twig') }}
+
+  {{ include('Project/CodeViewInline.html.twig') }}
 
   <div id="recommended-projects">
     {# array values: [api project_type, translation, property to show] #}
@@ -277,8 +278,8 @@
        data-trans-translations="{{ 'project.translations'|trans({}, 'catroweb') }}"
   ></div>
   <div class="js-project-comments"
-       data-project-id="{{ project_details.id }}"
-       data-total-number-of-comments="{{ (project_details.comments|length) }}"
+       data-project-id="{{ project.id }}"
+       data-total-number-of-comments="{{ 0 }}"
        data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
        data-trans-delete-it="{{ 'deleteIt'|trans({}, 'catroweb') }}"
        data-trans-report-it="{{ 'reportIt'|trans({}, 'catroweb') }}"
@@ -298,7 +299,7 @@
 {% block javascript %}
 <script>
   const projectConfiguration = {
-    id: '{{ project_details.id }}',
+    id: '{{ project.id }}',
     messages: {
       forbidden: '{{ 'api.updateProject.forbidden'|trans({}, 'catroweb') }}',
       notFound: '{{ 'api.updateProject.notFound'|trans({}, 'catroweb') }}',
@@ -308,4 +309,5 @@
 </script>
   {{ encore_entry_script_tags('project_page') }}
   {{ encore_entry_script_tags('project_code_statistics_inline') }}
+  {{ encore_entry_script_tags('project_code_view_inline') }}
 {% endblock %}
