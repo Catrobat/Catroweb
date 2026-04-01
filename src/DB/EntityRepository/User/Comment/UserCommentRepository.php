@@ -142,18 +142,18 @@ class UserCommentRepository extends ServiceEntityRepository
       ]))
       ->andWhere('c.auto_hidden = false')
       ->setParameter('program', $project)
-      ->orderBy('c.uploadDate', 'ASC')
-      ->addOrderBy('c.id', 'ASC')
+      ->orderBy('c.uploadDate', 'DESC')
+      ->addOrderBy('c.id', 'DESC')
       ->setMaxResults($limit + 1)
     ;
 
     if ($cursor_date instanceof \DateTimeInterface && null !== $cursor_id) {
       $qb->andWhere(
         $qb->expr()->orX(
-          $qb->expr()->gt('c.uploadDate', ':cursorDate'),
+          $qb->expr()->lt('c.uploadDate', ':cursorDate'),
           $qb->expr()->andX(
             $qb->expr()->eq('c.uploadDate', ':cursorDate'),
-            $qb->expr()->gt('c.id', ':cursorId')
+            $qb->expr()->lt('c.id', ':cursorId')
           )
         )
       )
@@ -194,18 +194,18 @@ class UserCommentRepository extends ServiceEntityRepository
       ->where('c.parent_id = :parentId')
       ->andWhere('c.auto_hidden = false')
       ->setParameter('parentId', $comment_id)
-      ->orderBy('c.uploadDate', 'ASC')
-      ->addOrderBy('c.id', 'ASC')
+      ->orderBy('c.uploadDate', 'DESC')
+      ->addOrderBy('c.id', 'DESC')
       ->setMaxResults($limit + 1)
     ;
 
     if ($cursor_date instanceof \DateTimeInterface && null !== $cursor_id) {
       $qb->andWhere(
         $qb->expr()->orX(
-          $qb->expr()->gt('c.uploadDate', ':cursorDate'),
+          $qb->expr()->lt('c.uploadDate', ':cursorDate'),
           $qb->expr()->andX(
             $qb->expr()->eq('c.uploadDate', ':cursorDate'),
-            $qb->expr()->gt('c.id', ':cursorId')
+            $qb->expr()->lt('c.id', ':cursorId')
           )
         )
       )
