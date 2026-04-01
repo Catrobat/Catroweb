@@ -21,6 +21,12 @@ Catroweb is the share/communication platform for the Catrobat community. Symfony
 - **CSS**: Bootstrap 5, Material Design Components
 - **Package Managers**: Composer (PHP), Yarn (JS)
 
+## Frontend JS Pattern
+
+- Prefer Stimulus controllers for all new page-level UI behavior.
+- For existing vanilla files, migrate incrementally when touching related code (no big-bang rewrites).
+- Keep page entrypoints lean: avoid new `DOMContentLoaded` bootstrapping when a Stimulus controller can own the lifecycle.
+
 ## Command Execution
 
 - **yarn commands**: Run **locally**
