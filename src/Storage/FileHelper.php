@@ -18,6 +18,22 @@ class FileHelper
     }
   }
 
+  /**
+   * @throws \Exception
+   */
+  public static function ensureDirectoryExists(?string $dir): void
+  {
+    if (null === $dir || '' === $dir) {
+      throw new \Exception('Directory path must not be null or empty');
+    }
+
+    if (!is_dir($dir)) {
+      if (!mkdir($dir, 0777, true) && !is_dir($dir)) {
+        throw new \Exception('Failed to create directory: '.$dir);
+      }
+    }
+  }
+
   public static function copyDirectory(string $src, string $dst): void
   {
     $dir = opendir($src);

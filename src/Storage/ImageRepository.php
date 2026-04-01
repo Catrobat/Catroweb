@@ -35,8 +35,8 @@ class ImageRepository
     /** @var string $featured_path */
     $featured_path = $parameter_bag->get('catrobat.featuredimage.path');
 
-    FileHelper::verifyDirectoryExists($example_dir);
-    FileHelper::verifyDirectoryExists($featured_dir);
+    FileHelper::ensureDirectoryExists($example_dir);
+    FileHelper::ensureDirectoryExists($featured_dir);
 
     $this->example_dir = $example_dir;
     $this->example_path = $example_path;
