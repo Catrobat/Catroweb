@@ -1,3 +1,4 @@
+{% if not app.user or not app.user.isMinor() %}
 <div id="project-comments" class="row mb-3">
 
   <div class="col-12 d-flex align-items-center justify-content-between mb-3">
@@ -47,3 +48,4 @@
 }) }}
 <div class="session-vars-names" data-visible-comments-session-var="visibleComments"></div>
 <div class="comments-class-selector" data-comments-class-selector=".single-comment"></div>
+{% endif %}

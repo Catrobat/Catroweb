@@ -40,7 +40,7 @@
             </button>
           </a>
         {% endif %}
-        {% if app.user != null and app.user.id != profile.id %}
+        {% if app.user != null and app.user.id != profile.id and not app.user.isMinor() and not profile.isMinor() %}
           <button class="btn btn-outline-primary profile-follows unfollow-btn mt-0 ms-auto"
                   style="{{ profile.hasFollower(app.user) ? 'display: block' : 'display:none' }}"
                   data-user-id="{{ profile.id }}"
@@ -84,25 +84,27 @@
               </span>
             </button>
 
-            <button class="mdc-tab mdc-tab--stacked" id="test" role="tab" aria-selected="false" tabindex="0">
-              <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="followers-count">-</span>
-                <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
-              </span>
-              <span class="mdc-tab-indicator">
-                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-              </span>
-            </button>
+            {% if (not app.user or not app.user.isMinor()) and not profile.isMinor() %}
+              <button class="mdc-tab mdc-tab--stacked" id="test" role="tab" aria-selected="false" tabindex="0">
+                <span class="mdc-tab__content">
+                  <span class="mdc-tab__icon" id="followers-count">-</span>
+                  <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
+                </span>
+                <span class="mdc-tab-indicator">
+                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+              </button>
 
-            <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
-              <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="following-count">-</span>
-                <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
-              </span>
-              <span class="mdc-tab-indicator">
-                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-              </span>
-            </button>
+              <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
+                <span class="mdc-tab__content">
+                  <span class="mdc-tab__icon" id="following-count">-</span>
+                  <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
+                </span>
+                <span class="mdc-tab-indicator">
+                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                </span>
+              </button>
+            {% endif %}
 
           </div>
         </div>
@@ -131,13 +133,17 @@
       </div>
     </div>
 
-    {{ include('User/Followers/FollowersTabs.twig') }}
+    {% if (not app.user or not app.user.isMinor()) and not profile.isMinor() %}
+      {{ include('User/Followers/FollowersTabs.twig') }}
+    {% endif %}
   </div>
 
-  {{ include('User/Followers/FollowerOverviewData.html.twig', {
-    follower_user_id: profile.id,
-    follower_user_role: app.user is not null ? 'user' : 'guest',
-  }) }}
+  {% if (not app.user or not app.user.isMinor()) and not profile.isMinor() %}
+    {{ include('User/Followers/FollowerOverviewData.html.twig', {
+      follower_user_id: profile.id,
+      follower_user_role: app.user is not null ? 'user' : 'guest',
+    }) }}
+  {% endif %}
 
 {% endblock %}
 

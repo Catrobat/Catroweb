@@ -36,15 +36,8 @@ Feature: As a visitor I want to see if a user is verified
     And I wait for the element "#user-settings-modal" to be visible
     Then I should not see "Verify Account"
 
-  Scenario: I should be able to request the email to verify my account
+  Scenario: Unverified user should be redirected to verify-pending page
     Given I log in as "OtherUser"
     And I am on "/app/user"
-    Given I click "#top-app-bar__btn-settings"
-    And I wait for the element "#user-settings-modal" to be visible
-    Then I should see "Verify Account"
-    And I click ".profile__user-settings .nav-link[data-bs-target='#verify-settings-modal']"
-    And I wait for the element "#verify-settings-modal" to be visible
-    Then I should see "Verify account"
-    And the element "#btn-verify-account" should be visible
-    When I click "#btn-verify-account"
-    Then the element "#btn-verify-account" should be disabled
+    And I wait for the page to be loaded
+    Then I should be on "/app/verify-pending"

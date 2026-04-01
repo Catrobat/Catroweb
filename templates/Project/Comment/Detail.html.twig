@@ -21,39 +21,41 @@
       isAdmin: isAdmin,
     }) }}
 
-    <hr style="color: transparent">
-    <div id="user-comment-wrapper" class="col-12" style="display: none; margin-bottom: 2rem;">
-      <div class="comment-avatar">
-        <img class="comment-avatar-img" src="{% if app.user and app.user.avatar is not empty %}
-                        {{ app.user.avatar }}
-                      {% else %}
-                        {{ asset('images/default/avatar_default.png') }}
-                      {% endif %}" alt="Avatar">
-      </div>
-      <div class="comment-payload-wrapper">
-        <div class="comment-message">
-          <textarea id="comment-message" class="msg"
-                    placeholder="{{ 'project.addComment'|trans({}, 'catroweb') }}"
-                    title="{{ 'project.addComment'|trans({}, 'catroweb') }}"></textarea>
+    {% if not app.user or not app.user.isMinor() %}
+      <hr style="color: transparent">
+      <div id="user-comment-wrapper" class="col-12" style="display: none; margin-bottom: 2rem;">
+        <div class="comment-avatar">
+          <img class="comment-avatar-img" src="{% if app.user and app.user.avatar is not empty %}
+                          {{ app.user.avatar }}
+                        {% else %}
+                          {{ asset('images/default/avatar_default.png') }}
+                        {% endif %}" alt="Avatar">
         </div>
-        <div id="comment-buttons-container" class="comment-buttons-container" style="display: none;">
-          <button id="comment-cancel-button" class="btn btn-outline-secondary rounded-pill me-2">
-            {{ 'cancel'|trans({}, 'catroweb') }}
-          </button>
-          <button id="comment-post-button" class="btn btn-primary rounded-pill">
-            {{ 'project.send'|trans({}, 'catroweb') }}
-          </button>
+        <div class="comment-payload-wrapper">
+          <div class="comment-message">
+            <textarea id="comment-message" class="msg"
+                      placeholder="{{ 'project.addComment'|trans({}, 'catroweb') }}"
+                      title="{{ 'project.addComment'|trans({}, 'catroweb') }}"></textarea>
+          </div>
+          <div id="comment-buttons-container" class="comment-buttons-container" style="display: none;">
+            <button id="comment-cancel-button" class="btn btn-outline-secondary rounded-pill me-2">
+              {{ 'cancel'|trans({}, 'catroweb') }}
+            </button>
+            <button id="comment-post-button" class="btn btn-primary rounded-pill">
+              {{ 'project.send'|trans({}, 'catroweb') }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <hr style="color: transparent">
+      <hr style="color: transparent">
 
-    {% if not comment.is_deleted %}
-      <button class="mdc-fab add-reply-button reply-button--fab" aria-label="Favorite" style="display: inline-block;">
-        <div class="mdc-fab__ripple"></div>
-        <span class="mdc-fab__icon material-icons">reply</span>
-      </button>
+      {% if not comment.is_deleted %}
+        <button class="mdc-fab add-reply-button reply-button--fab" aria-label="Favorite" style="display: inline-block;">
+          <div class="mdc-fab__ripple"></div>
+          <span class="mdc-fab__icon material-icons">reply</span>
+        </button>
+      {% endif %}
     {% endif %}
   </div>
   <div class="js-project-parentComment"

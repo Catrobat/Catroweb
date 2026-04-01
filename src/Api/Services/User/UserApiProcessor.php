@@ -31,8 +31,6 @@ class UserApiProcessor extends AbstractApiProcessor
     $user->setEnabled(true);
     $user->setVerified(false);
 
-    $this->user_manager->updateUser($user);
-
     if (null !== $request->getPicture() && '' !== $request->getPicture() && '0' !== $request->getPicture()) {
       // Resize happens in UserRequestValidator::validateAndResizePicture
       $user->setAvatar($request->getPicture());
@@ -45,6 +43,26 @@ class UserApiProcessor extends AbstractApiProcessor
     if (null !== $request->getCurrentlyWorkingOn() && '' !== $request->getCurrentlyWorkingOn() && '0' !== $request->getCurrentlyWorkingOn()) {
       $user->setCurrentlyWorkingOn($this->textSanitizer->sanitize($request->getCurrentlyWorkingOn()));
     }
+
+    $dobString = $request->getDateOfBirth();
+    $dob = (null !== $dobString && '' !== $dobString)
+      ? \DateTimeImmutable::createFromFormat('Y-m-d|', $dobString) : false;
+
+    if (false !== $dob) {
+      $user->setDateOfBirth(\DateTime::createFromImmutable($dob));
+      $age = $dob->diff(new \DateTimeImmutable('today'))->y;
+      $user->setMinor($age < 16);
+
+      $needsConsent = $age < UserRequestValidator::PARENTAL_CONSENT_AGE;
+      $user->setConsentStatus($needsConsent ? 'pending' : 'not_required');
+
+      $parentEmail = $request->getParentEmail();
+      if ($needsConsent && null !== $parentEmail && '' !== $parentEmail) {
+        $user->setParentEmail($parentEmail);
+      }
+    }
+
+    $this->user_manager->updateUser($user);
 
     return $user;
   }

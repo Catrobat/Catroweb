@@ -64,6 +64,8 @@ class UserAdmin extends AbstractAdmin
       ->add('enabled', null, ['editable' => true])
       ->add('verified', null, ['editable' => true])
       ->add('approved', null, ['editable' => true, 'label' => 'Whitelisted'])
+      ->add('is_minor', null, ['label' => 'Minor'])
+      ->add('consent_status', null, ['label' => 'Consent'])
       ->add('createdAt')
       ->add('lastLogin')
     ;
@@ -85,6 +87,8 @@ class UserAdmin extends AbstractAdmin
       ->add('email')
       ->add('verified')
       ->add('approved', null, ['label' => 'Whitelisted'])
+      ->add('is_minor', null, ['label' => 'Minor'])
+      ->add('consent_status')
       ->add('createdAt')
       ->add('lastLogin')
     ;

@@ -304,7 +304,7 @@ class CatrowebBrowserContext extends BrowserContext
     $username = $page->findById('username')?->getValue() ?? '';
     $subject = $page->findById('subject')?->getValue() ?? '';
     $title = $page->findById('title')?->getValue() ?? '';
-    $message = $page->findById('content')?->getValue() ?? '';
+    $message = $page->findById('message-content')?->getValue() ?? '';
     $template = $page->findById('template-select')?->getValue() ?? '';
 
     // Construct the preview URL

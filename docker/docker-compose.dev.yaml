@@ -185,6 +185,16 @@ services:
       timeout: 10s
       retries: 3
 
+  # --- Email testing:
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit.catroweb
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+    restart: unless-stopped
+
   # --- Tools:
 
   phpmyadmin.catroweb.dev:

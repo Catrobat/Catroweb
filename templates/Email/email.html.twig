@@ -3,87 +3,73 @@
 <html lang="{{ app.request.locale|default('en')|slice(0, 2) }}" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <title> - No Reply - </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block head_title %}Catrobat{% endblock %}</title>
+  <!--[if mso]>
+  <style type="text/css">
+    table { border-collapse: collapse; }
+    .button-link { padding: 14px 32px !important; }
+  </style>
+  <![endif]-->
 </head>
-{% block stylesheets %}
-  {{ encore_entry_link_tags('base_layout') }}
-  {{ encore_entry_link_tags(themeAssets()) }}
-{% endblock stylesheets %}
-<body style="margin: 0; padding: 0;">
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-  <tr>
-    <td style="padding: 10px 0 30px 0;">
-      <table align="center" border="0" cellpadding="0" cellspacing="0"
-             style="border: 1px solid #cccccc; border-collapse: collapse;">
-        <td bgcolor="#fff">
-          <div style="display: flex; justify-content: center; align-items: center; padding: 30px;">
-            <img src="https://catrobat.org/wp-content/uploads/2019/04/cropped-logo-e1555606660543-1.png" width="50%" height="auto" alt="Catrobat"/>
-          </div>
-        </td>
-        <tr>
-          <td align="center" bgcolor="#00acc1" class="header" style="padding: 20px 0 16px 0;">
-            <table>
-              <tr>
-                <td align="center" bgcolor="#00acc1" class="title" style="color: white; text-decoration:none; font-size: 28px; font-weight: bold;
-                  font-family: Arial, sans-serif;">
-                  <b>{% block head_title %}{% endblock %}</b>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td bgcolor="#fff" style="padding: 40px 30px 40px 30px;">
-            <table border="0" cellpadding="0" cellspacing="0" width="100%">
-              <tr>
-                <td style="color: #153643; font-family: Arial, sans-serif; font-size: 18px;">
-                  <b>{% block body_title %}{% endblock %}</b>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding: 20px 0 0 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-                  {% block body_content %}{% endblock %}
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td bgcolor="#e1e1e1" style="padding: 30px 30px 30px 30px;">
-            <table border="0" cellpadding="10" cellspacing="0" width="100%">
-              <div class="social">
-                <div class="title" style="text-align:center; font-family: Arial, sans-serif;">
-                  <strong>Get the App</strong>
-                </div>
-                <div align="center" class= "social-icons" style="padding: 20px 0 20px 0; display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                  <a href="https://apps.apple.com/us/developer/international-catrobat-association-verein-zur-foerderung/id1117935891" target="_blank">
-                    <img src="{{ asset('images/social/download-on-app-store.svg') }}" width="90%" height="auto" alt="Download on the App Store" />
-                  </a>
-                  <a href="https://appgallery.huawei.com/#/app/C100085769" target="_blank">
-                    <img src="{{ asset('images/social/huawei-app-gallery.svg') }}" width="89%" height="auto" style="padding-left: 3px" alt="Huawei AppGallery"/>
-                  </a>
-                  <a href="https://play.google.com/store/apps/developer?id=Catrobat" target="_blank">
-                    <img src="{{ asset('images/social/google-play.svg') }}" width="87%" height="auto" alt="Google Play"/>
-                  </a>
-                </div>
-              </div>
-              <tr>
-                <td style=" font-family: Arial, sans-serif; font-size: 12px;" width="75%">
-                  {{ 'noReply'|trans({}, 'catroweb') }}
-                </td>
-              </tr>
-              <tr>
-                <td style="font-family: Arial, sans-serif; font-size: 14px;" width="75%">
-                  {{ 'copyright'|trans({'%year%': 'now'|date('Y')}, 'catroweb')|raw }}
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+<body style="margin: 0; padding: 0; background-color: #f4f4f7; -webkit-font-smoothing: antialiased;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f4f4f7;">
+    <tr>
+      <td align="center" style="padding: 24px 16px;">
+
+        <!-- Main container -->
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="560" style="max-width: 560px; width: 100%; background-color: #ffffff; border-radius: 8px; overflow: hidden;">
+
+          <!-- Logo -->
+          <tr>
+            <td align="center" style="padding: 32px 32px 16px 32px;">
+              <img src="{{ absolute_url(asset('images/logo/logo_catrobat_text.png')) }}" width="180" height="auto" alt="Catrobat" style="display: block; border: 0;"/>
+            </td>
+          </tr>
+
+          <!-- Title bar -->
+          <tr>
+            <td align="center" style="padding: 16px 32px; background-color: #00acc1;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 600; line-height: 28px; text-align: center;">
+                    {% block title %}{% endblock %}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Body content -->
+          <tr>
+            <td style="padding: 32px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; color: #333333;">
+              {% block body %}{% endblock %}
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 24px 32px; background-color: #f4f4f7; border-top: 1px solid #e8e8eb;">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 18px; color: #888888; text-align: center;">
+                    {{ 'noReply'|trans({}, 'catroweb') }}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 18px; color: #888888; text-align: center; padding-top: 8px;">
+                    {{ 'copyright'|trans({'%year%': 'now'|date('Y')}, 'catroweb')|raw }}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+        <!-- /Main container -->
+
+      </td>
+    </tr>
+  </table>
 </body>
 </html>

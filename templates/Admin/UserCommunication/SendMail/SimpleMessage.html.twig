@@ -4,16 +4,12 @@
   {{ subject }}
 {% endblock %}
 
-{% block body_title %}
-  <div align="center">
-    {{ title }}
-  </div>
+{% block title %}
+  {{ title }}
 {% endblock %}
 
-{% block body_content %}
-
-  <div align="center">
-    {{ message|nl2br }}
-  </div>
-
+{% block body %}
+  <p style="margin: 0; text-align: center;">
+    {{ message|raw }}
+  </p>
 {% endblock %}

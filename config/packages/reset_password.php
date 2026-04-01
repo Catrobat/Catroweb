@@ -10,7 +10,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     'symfonycasts_reset_password',
     [
       'request_password_repository' => ResetPasswordRequestRepository::class,
-      'lifetime' => 3600,
+      'lifetime' => 86400,
       'throttle_limit' => '%reset_password.throttle_limit%',
     ]
   );

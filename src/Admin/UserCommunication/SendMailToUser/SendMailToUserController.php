@@ -7,6 +7,7 @@ namespace App\Admin\UserCommunication\SendMailToUser;
 use App\DB\Entity\User\User;
 use App\Security\Authentication\ResetPasswordEmail;
 use App\Security\Authentication\VerifyEmail;
+use App\Security\ParentalConsent\ParentalConsentService;
 use App\System\Mail\MailerAdapter;
 use App\User\UserManager;
 use Psr\Log\LoggerInterface;
@@ -30,6 +31,7 @@ class SendMailToUserController extends CRUDController
     protected ParameterBagInterface $parameter_bag,
     protected VerifyEmail $verify_email,
     protected ResetPasswordEmail $reset_password_email,
+    protected ParentalConsentService $parental_consent_service,
   ) {
   }
 
@@ -47,6 +49,57 @@ class SendMailToUserController extends CRUDController
       return new Response('User does not exist', Response::HTTP_BAD_REQUEST);
     }
 
+    $template = (string) $request->query->get('template', 'basic');
+
+    return match ($template) {
+      'confirmation' => $this->sendVerifyEmail($user),
+      'consent' => $this->sendConsentEmail($user),
+      'management' => $this->sendManagementEmail($user),
+      'reset' => $this->sendResetPasswordEmail($user),
+      default => $this->sendBasicEmail($user, $request),
+    };
+  }
+
+  private function sendVerifyEmail(User $user): Response
+  {
+    $this->verify_email->init($user)->send();
+
+    return new Response('OK - verification email sent to '.$user->getEmail(), Response::HTTP_OK);
+  }
+
+  private function sendConsentEmail(User $user): Response
+  {
+    $parentEmail = $user->getParentEmail();
+    if (null === $parentEmail || '' === $parentEmail) {
+      return new Response('User has no parent email set', Response::HTTP_BAD_REQUEST);
+    }
+
+    $this->parental_consent_service->sendConsentRequest($user);
+
+    return new Response('OK - consent email sent to '.$parentEmail, Response::HTTP_OK);
+  }
+
+  private function sendManagementEmail(User $user): Response
+  {
+    $parentEmail = $user->getParentEmail();
+    if (null === $parentEmail || '' === $parentEmail) {
+      return new Response('User has no parent email set', Response::HTTP_BAD_REQUEST);
+    }
+
+    $this->parental_consent_service->sendManagementLink($parentEmail);
+
+    return new Response('OK - management email sent to '.$parentEmail, Response::HTTP_OK);
+  }
+
+  private function sendResetPasswordEmail(User $user): Response
+  {
+    $this->reset_password_email->init($user, '')->send();
+
+    return new Response('OK - reset password email sent to '.$user->getEmail(), Response::HTTP_OK);
+  }
+
+  private function sendBasicEmail(User $user, Request $request): Response
+  {
     $subject = (string) $request->query->get('subject');
     if ('' === $subject) {
       return new Response('Empty subject!', Response::HTTP_BAD_REQUEST);
@@ -62,9 +115,8 @@ class SendMailToUserController extends CRUDController
       return new Response('Empty title!', Response::HTTP_BAD_REQUEST);
     }
 
-    $mailTo = $user->getEmail();
     $this->mailer->send(
-      $mailTo,
+      $user->getEmail() ?? '',
       $subject,
       'Admin/UserCommunication/SendMail/SimpleMessage.html.twig',
       [
@@ -74,7 +126,7 @@ class SendMailToUserController extends CRUDController
       ]
     );
 
-    return new Response('OK - message sent', Response::HTTP_OK);
+    return new Response('OK - message sent to '.$user->getEmail(), Response::HTTP_OK);
   }
 
   public function previewAction(Request $request): Response
@@ -83,6 +135,8 @@ class SendMailToUserController extends CRUDController
 
     return match ($template) {
       'confirmation' => $this->renderVerifyEmail($request),
+      'consent' => $this->renderConsentEmail($request),
+      'management' => $this->renderManagementEmail($request),
       'reset' => $this->renderResetPasswordEmail($request),
       'basic' => $this->renderBasicEmail($request),
       default => new Response('Not Found', Response::HTTP_NOT_FOUND),
@@ -99,6 +153,35 @@ class SendMailToUserController extends CRUDController
     $this->verify_email->init($user);
 
     return $this->render($this->verify_email->getTemplate(), $this->verify_email->getContext());
+  }
+
+  public function renderConsentEmail(Request $request): Response
+  {
+    $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
+    if (!$user instanceof UserInterface) {
+      return new Response('User does not exist', Response::HTTP_NOT_FOUND);
+    }
+
+    return $this->render('Email/ParentalConsentEmail.html.twig', [
+      'signedUrl' => '#preview-link',
+      'username' => $user->getUsername(),
+      'parentPortalUrl' => '#preview-portal',
+      'parentInfoUrl' => '#preview-info',
+    ]);
+  }
+
+  public function renderManagementEmail(Request $request): Response
+  {
+    $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
+    if (!$user instanceof UserInterface) {
+      return new Response('User does not exist', Response::HTTP_NOT_FOUND);
+    }
+
+    return $this->render('Email/ParentManagementEmail.html.twig', [
+      'signedUrl' => '#preview-link',
+      'childCount' => 1,
+      'usernames' => [$user->getUsername()],
+    ]);
   }
 
   public function renderResetPasswordEmail(Request $request): Response

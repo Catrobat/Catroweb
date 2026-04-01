@@ -28,6 +28,10 @@ class UserRequestValidator extends AbstractRequestValidator
 
   public const int MAX_PASSWORD_LENGTH = 4096;
 
+  public const int MINIMUM_AGE = 3;
+
+  public const int PARENTAL_CONSENT_AGE = 14;
+
   public const int MIN_USERNAME_LENGTH = 3;
 
   public const int MAX_USERNAME_LENGTH = 180;
@@ -57,6 +61,8 @@ class UserRequestValidator extends AbstractRequestValidator
     $this->validateEmail($request->getEmail(), $locale, self::MODE_REGISTER);
     $this->validateUsername($request->getUsername(), $locale, self::MODE_REGISTER);
     $this->validatePassword($request->getPassword(), $locale, self::MODE_REGISTER);
+    $age = $this->validateDateOfBirth($request->getDateOfBirth(), $locale);
+    $this->validateParentEmail($age, $request->getParentEmail(), $request->getEmail(), $locale);
 
     if (!is_null($request->getPicture())) {
       $picture_out = null;
@@ -243,6 +249,81 @@ class UserRequestValidator extends AbstractRequestValidator
   private function isValidTLD(string $tld): bool
   {
     return isset($this->getValidTLDs()[$tld]);
+  }
+
+  private function validateDateOfBirth(?string $dob, string $locale): ?int
+  {
+    if (null === $dob || '' === $dob) {
+      $this->getValidationWrapper()->addError(
+        $this->__('api.registerUser.dateOfBirthMissing', [], $locale),
+        'date_of_birth'
+      );
+
+      return null;
+    }
+
+    $date = \DateTimeImmutable::createFromFormat('Y-m-d|', $dob);
+    if (false === $date || $date->format('Y-m-d') !== $dob) {
+      $this->getValidationWrapper()->addError(
+        $this->__('api.registerUser.dateOfBirthInvalid', [], $locale),
+        'date_of_birth'
+      );
+
+      return null;
+    }
+
+    $today = new \DateTimeImmutable('today');
+    if ($date > $today) {
+      $this->getValidationWrapper()->addError(
+        $this->__('api.registerUser.dateOfBirthInvalid', [], $locale),
+        'date_of_birth'
+      );
+
+      return null;
+    }
+
+    $age = $date->diff($today)->y;
+    if ($age < self::MINIMUM_AGE) {
+      $this->getValidationWrapper()->addError(
+        $this->__('api.registerUser.tooYoung', [], $locale),
+        'date_of_birth'
+      );
+    }
+
+    return $age;
+  }
+
+  private function validateParentEmail(?int $age, ?string $parent_email, ?string $user_email, string $locale): void
+  {
+    if (null === $age || $age >= self::PARENTAL_CONSENT_AGE) {
+      return;
+    }
+
+    if (null === $parent_email || '' === $parent_email) {
+      $this->getValidationWrapper()->addError(
+        $this->__('api.registerUser.parentEmailMissing', [], $locale),
+        'parent_email'
+      );
+
+      return;
+    }
+
+    $violations = $this->validate($parent_email, new Email());
+    if ($violations->count() > 0) {
+      $this->getValidationWrapper()->addError(
+        $this->__('api.registerUser.parentEmailInvalid', [], $locale),
+        'parent_email'
+      );
+
+      return;
+    }
+
+    if (null !== $user_email && mb_strtolower($parent_email) === mb_strtolower($user_email)) {
+      $this->getValidationWrapper()->addError(
+        $this->__('api.registerUser.parentEmailSameAsUser', [], $locale),
+        'parent_email'
+      );
+    }
   }
 
   private function validate(?string $value, ?Email $constraints = null): ConstraintViolationListInterface
