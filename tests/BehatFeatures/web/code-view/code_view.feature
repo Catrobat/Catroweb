@@ -121,7 +121,8 @@ Feature: As a visitor I want to see inline code view on the project page
     Then the element "#code-view-panel" should not be visible
 
   Scenario: Code view shows error state when no extracted files exist
-    Given I am on "/app/project/1"
+    Given project "1" has no extracted files
+    And I am on "/app/project/1"
     And I wait for the page to be loaded
     When I click "#code-view-toggle"
     And I wait for AJAX to finish
