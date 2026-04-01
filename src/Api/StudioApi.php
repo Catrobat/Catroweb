@@ -444,6 +444,12 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
       return null;
     }
 
+    if ($user->isMinor()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (!$studio instanceof Studio) {
       $responseCode = Response::HTTP_NOT_FOUND;

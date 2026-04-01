@@ -40,7 +40,7 @@
     </p>
   {% endif %}
 
-  {% if user_role != null and studio.isAllowComments == '1' %}
+  {% if user_role != null and studio.isAllowComments == '1' and not app.user.isMinor() %}
 
     <div style="display: flex; align-items: center;">
       <a href="{{ path('profile', {id: app.user.id}) }}">

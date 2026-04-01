@@ -4,37 +4,39 @@
   {{ 'newAccountConfirmation.subject'|trans({}, 'catroweb') }}
 {% endblock %}
 
-{% block body_title %}
-  <div align="center">
-    {{ 'newAccountConfirmation.welcome'|trans({}, 'catroweb') }}
-  </div>
+{% block title %}
+  {{ 'newAccountConfirmation.welcome'|trans({}, 'catroweb') }}
 {% endblock %}
 
-{% block body_content %}
-  <style>
+{% block body %}
+  <p style="margin: 0 0 16px 0;">
+    {{ 'newAccountConfirmation.greeting'|trans({}, 'catroweb') }}
+  </p>
+  <p style="margin: 0 0 24px 0;">
+    {{ 'newAccountConfirmation.message'|trans({'%time%': expire}, 'catroweb') }}
+  </p>
 
-  .btn-confirm {
-    padding: 20px 65px 0 65px;
-  }
+  <!-- Bulletproof button -->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td align="center" style="padding: 8px 0 24px 0;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="center" style="border-radius: 6px; background-color: #00acc1;">
+              <a href="{{ signedUrl }}" target="_blank" class="button-link" style="display: inline-block; padding: 14px 32px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; color: #ffffff; text-decoration: none; border-radius: 6px;">
+                {{ 'newAccountConfirmation.button'|trans({}, 'catroweb') }}
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 
-  .container {
-    padding: 50px 0 20px 0;
-  }
-
-  </style>
-
-  <div align="center">
-    {{ 'newAccountConfirmation.messageHtml'|trans({'%time%': expire}, 'catroweb') }}
-    <div align="center" class="container">
-      <a href="{{ signedUrl }}">
-        <button id="confirm-account-button" class="btn btn-primary btn-confirm">
-          <p><strong><big>{{ 'newAccountConfirmation.button'|trans({}, 'catroweb') }}</big></strong></p>
-        </button>
-      </a>
-    </div>
-    <small>
-      {{ 'newAccountConfirmation.deleteHtml'|trans({'%deleteUrl%': deleteUrl}, 'catroweb') }}
-    </small>
-  </div>
-
+  <p style="margin: 0 0 8px 0; font-size: 14px; color: #666666;">
+    {{ 'newAccountConfirmation.ignore'|trans({}, 'catroweb') }}
+  </p>
+  <p style="margin: 0; font-size: 14px; color: #666666;">
+    {{ 'newAccountConfirmation.autoDelete'|trans({}, 'catroweb') }}
+  </p>
 {% endblock %}

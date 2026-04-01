@@ -50,6 +50,7 @@ use App\Admin\UserCommunication\MaintenanceInformation\MaintenanceInformationCon
 use App\Admin\UserCommunication\SendMailToUser\SendMailToUserAdmin;
 use App\Admin\UserCommunication\SendMailToUser\SendMailToUserController;
 use App\Admin\UserCommunication\Survey\AllSurveysAdmin;
+use App\Admin\Users\ConsentLog\ConsentLogAdmin;
 use App\Admin\Users\UserAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportController;
@@ -85,6 +86,7 @@ use App\DB\Entity\Translation\ProjectCustomTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\Entity\User\Comment\UserComment;
+use App\DB\Entity\User\ConsentLog;
 use App\DB\Entity\User\Notifications\BroadcastNotification;
 use App\DB\Entity\User\User;
 use App\Security\Authentication\ApiAuthenticationSuccessHandler;
@@ -413,6 +415,19 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => User::class,
         'controller' => UserDataReportController::class,
+      ]
+    )
+  ;
+  $services->set('admin.block.users.consent_log', ConsentLogAdmin::class)
+    ->tag(
+      'sonata.admin',
+      [
+        'manager_type' => 'orm',
+        'label' => 'Consent Log',
+        'show_mosaic_button' => false,
+        'code' => null,
+        'model_class' => ConsentLog::class,
+        'controller' => null,
       ]
     )
   ;

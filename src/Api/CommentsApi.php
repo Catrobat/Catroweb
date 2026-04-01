@@ -98,6 +98,12 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
+    if ($user->isMinor()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
     if (!$this->authorization_checker->isGranted('ROLE_ADMIN')
       && (null === $this->checkUserRateLimit($user, $this->commentBurstLimiter)
         || null === $this->checkUserRateLimit($user, $this->commentDailyLimiter))) {

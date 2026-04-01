@@ -1,19 +1,41 @@
 {% extends 'Layout/Base.html.twig' %}
 
+{% block head %}
+  {{ encore_entry_link_tags('request_to_reset_password_page') }}
+{% endblock %}
+
 {% block body %}
-    <h1 class="h2">{{ 'resetPassword.check.title'|trans({}, 'catroweb') }}</h1>
-    <p>
+
+<div class="content-card">
+  <div class="row justify-content-center">
+    <div class="login-container mb-4">
+
+      <div class="text-center mb-3">
+        <span class="material-icons check-email-icon">mark_email_read</span>
+      </div>
+
+      <h1>{{ 'resetPassword.check.title'|trans({}, 'catroweb') }}</h1>
+
+      <p>
         {{ 'resetPassword.check.description'|trans({
             '%time%': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle'),
         }, 'catroweb') }}
-    </p>
-     <p>
+      </p>
+      <p>
         {{ 'resetPassword.check.descriptionTwo'|trans({
             '%throttleLimit%': throttleLimit}, 'catroweb') }}
-    </p>
-    <p>
+      </p>
+      <p>
         {{ 'resetPassword.check.descriptionThree'|trans({
             '%email-webmaster%': '<a href="mailto:webmaster@catrobat.org">webmaster@catrobat.org</a>',
         }, 'catroweb')|raw }}
-    </p>
+      </p>
+
+      <div class="mt-3">
+        <a href="{{ path('login') }}" class="btn btn-primary">{{ 'resetPassword.request.button.cancel'|trans({}, 'catroweb') }}</a>
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

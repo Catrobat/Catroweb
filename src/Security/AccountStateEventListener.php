@@ -21,6 +21,7 @@ class AccountStateEventListener
     ['pattern' => '#^/api/user/?$#', 'methods' => ['POST', 'PUT']],
     ['pattern' => '#^/api/user/reset-password#'],
     ['pattern' => '#^/api/(project|comments|user|studio)/[^/]+/appeal$#'],
+    ['pattern' => '#^/api/project/[^/]+/reaction#'],
   ];
 
   public function __construct(
@@ -58,11 +59,31 @@ class AccountStateEventListener
       return;
     }
 
+    if (null === $user->getDateOfBirth()) {
+      $event->setResponse(ApiErrorResponse::create(
+        Response::HTTP_FORBIDDEN,
+        'forbidden',
+        'Please complete your registration.'
+      ));
+
+      return;
+    }
+
     if (!$user->isVerified()) {
       $event->setResponse(ApiErrorResponse::create(
         Response::HTTP_FORBIDDEN,
         'forbidden',
         'Email verification required.'
+      ));
+
+      return;
+    }
+
+    if (in_array($user->getConsentStatus(), ['pending', 'revoked'], true)) {
+      $event->setResponse(ApiErrorResponse::create(
+        Response::HTTP_FORBIDDEN,
+        'forbidden',
+        'Parental consent is required for users under 14.'
       ));
 
       return;

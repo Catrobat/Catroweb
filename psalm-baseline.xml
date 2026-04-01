@@ -74,11 +74,6 @@
       <code><![CDATA[$object->getValue()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Admin/UserCommunication/SendMailToUser/SendMailToUserController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$mailTo]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/Api/MediaLibraryApi.php">
     <PossiblyNullArgument>
       <code><![CDATA[$media_asset_update_request->getCategoryId()]]></code>

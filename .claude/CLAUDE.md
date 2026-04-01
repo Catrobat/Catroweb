@@ -76,14 +76,15 @@ docker compose -f docker/docker-compose.dev.yaml up -d
 docker compose -f docker/docker-compose.dev.yaml build --no-cache app.catroweb
 ```
 
-| Service                 | Port | Description     |
-| ----------------------- | ---- | --------------- |
-| app.catroweb            | 8080 | Main app        |
-| db.catroweb.dev         | 3306 | MariaDB (dev)   |
-| db.catroweb.test        | 3306 | MariaDB (test)  |
-| phpmyadmin.catroweb.dev | 8081 | phpMyAdmin      |
-| elasticsearch           | 9200 | Elasticsearch   |
-| chrome.catroweb         | 9222 | Headless Chrome |
+| Service                 | Port | Description      |
+| ----------------------- | ---- | ---------------- |
+| app.catroweb            | 8080 | Main app         |
+| db.catroweb.dev         | 3306 | MariaDB (dev)    |
+| db.catroweb.test        | 3306 | MariaDB (test)   |
+| phpmyadmin.catroweb.dev | 8081 | phpMyAdmin       |
+| elasticsearch           | 9200 | Elasticsearch    |
+| chrome.catroweb         | 9222 | Headless Chrome  |
+| mailpit.catroweb        | 8025 | Email testing UI |
 
 **Volume-mounted**: `assets/`, `src/`, `templates/`, `config/`, `tests/`
 **NOT mounted**: `node_modules/`, `vendor/` (built inside container), `public/build/`
@@ -97,6 +98,8 @@ docker exec app.catroweb bin/console cache:clear --env=test
 ```
 
 **Dev DB**: host `db.catroweb.dev`, database `catroweb_dev`, user/password `root`/`root`
+
+**Email testing**: Mailpit catches all outgoing emails in dev. Open http://localhost:8025 to view them (verification emails, parental consent emails, etc.). Configured via `MAILER_DSN=smtp://mailpit:1025` in `.env.dev`.
 
 ## Project Structure
 

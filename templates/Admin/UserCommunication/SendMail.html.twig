@@ -7,74 +7,61 @@
 
 {% block list_table %}
 
-  <div class="col-xs-12 col-md-12">
-    <div class="box box-primary">
-      <div class="box-body table-responsive no-padding">
+  <div class="send-mail-page">
+    <div class="send-mail-card">
 
-        <h3>Send Email</h3>
+      <h3 class="send-mail-heading">Send Email</h3>
+      <p class="send-mail-description">Preview or send emails to users using the available templates.</p>
 
-        <p>This tool allows you to send Emails to Users.</p>
+      <div class="send-mail-form">
 
-        <div class="mtable">
-          <div class="row-title">
-            <label for="template-select">Template:</label>
-          </div>
-          <div class="drop-down">
-            <select id="template-select" name="template" class="drop-down-select">
-              <option value="confirmation">Confirmation Email</option>
-              <option value="reset">Reset Email</option>
-              <option value="basic">Simple Message</option>
-            </select>
-          </div>
-          <div class="row-title">
-            User Name:
-          </div>
-          <div class="row-button-mt">
-            <label for="username"></label>
-            <input id="username" type="text" class="row-button-mt-input"/>
-          </div>
-
-          <div class="row-title">
-            Subject:
-          </div>
-          <div class="row-button-mt">
-            <label for="subject"></label>
-            <input id="subject" class="row-button-mt-input"/>
-          </div>
-
-          <div class="row-title">
-            Title:
-          </div>
-          <div class="row-button-mt">
-            <label for="title"></label>
-            <input id="title" class="row-button-mt-input"/>
-          </div>
-
-          <div class="row-title">
-            Content:
-          </div>
-          <div class="row-button-mt">
-            <label for="content"></label>
-            <textarea id="content" class="row-button-mt-textarea"></textarea>
-          </div>
-
-          <div class="row-title">
-            Submit:
-          </div>
-          <div class="row-button">
-            <input type="button" class="btn btn-send" value="Send"/>
-            <input id="preview-button"  type="button" class="btn btn-preview" value="Preview"/>
-          </div>
-          <div class="row-title">
-            Result:
-          </div>
-          <div class="row-result resultBox error">
-          </div>
+        <div class="form-group">
+          <label for="template-select">Template</label>
+          <select id="template-select" name="template" class="form-control" data-sonata-select2="false">
+            <option value="confirmation">Verification Email</option>
+            <option value="consent">Parental Consent Email</option>
+            <option value="reset">Reset Password Email</option>
+            <option value="management">Parent Management Email</option>
+            <option value="basic">Simple Message</option>
+          </select>
         </div>
 
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" type="text" class="form-control" placeholder="Enter any existing username"/>
+        </div>
+
+        <div class="form-group" id="subject-group">
+          <label for="subject">Subject <span class="field-hint">(Simple Message only)</span></label>
+          <input id="subject" type="text" class="form-control" placeholder="Email subject line"/>
+        </div>
+
+        <div class="form-group" id="title-group">
+          <label for="title">Title <span class="field-hint">(Simple Message only)</span></label>
+          <input id="title" type="text" class="form-control" placeholder="Email title"/>
+        </div>
+
+        <div class="form-group" id="content-group">
+          <label for="message-content">Content <span class="field-hint">(Simple Message only)</span></label>
+          <textarea id="message-content" class="form-control" rows="5" placeholder="Email body text"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary btn-preview" id="preview-button">
+            <i class="fa fa-eye"></i> Preview
+          </button>
+          <button type="button" class="btn btn-success btn-send">
+            <i class="fa fa-paper-plane"></i> Send
+          </button>
+        </div>
+
+        <div class="result-box" style="display: none;"></div>
+
       </div>
+
     </div>
   </div>
+
 {% endblock %}
 
 {% block javascripts %}

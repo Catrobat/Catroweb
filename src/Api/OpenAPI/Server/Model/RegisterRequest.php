@@ -130,6 +130,28 @@ class RegisterRequest
   protected ?string $captcha_token = null;
 
   /**
+   * Date of birth for age verification (COPPA compliance). Format: YYYY-MM-DD.
+   *
+   * @SerializedName("date_of_birth")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $date_of_birth = null;
+
+  /**
+   * Email address of parent/guardian. Required for users under 13 for parental consent.
+   *
+   * @SerializedName("parent_email")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $parent_email = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -145,6 +167,8 @@ class RegisterRequest
       $this->about = array_key_exists('about', $data) ? $data['about'] : $this->about;
       $this->currently_working_on = array_key_exists('currently_working_on', $data) ? $data['currently_working_on'] : $this->currently_working_on;
       $this->captcha_token = array_key_exists('captcha_token', $data) ? $data['captcha_token'] : $this->captcha_token;
+      $this->date_of_birth = array_key_exists('date_of_birth', $data) ? $data['date_of_birth'] : $this->date_of_birth;
+      $this->parent_email = array_key_exists('parent_email', $data) ? $data['parent_email'] : $this->parent_email;
     }
   }
 
@@ -320,6 +344,50 @@ class RegisterRequest
   public function setCaptchaToken(?string $captcha_token = null): self
   {
     $this->captcha_token = $captcha_token;
+
+    return $this;
+  }
+
+  /**
+   * Gets date_of_birth.
+   */
+  public function getDateOfBirth(): ?string
+  {
+    return $this->date_of_birth;
+  }
+
+  /**
+   * Sets date_of_birth.
+   *
+   * @param string|null $date_of_birth Date of birth for age verification (COPPA compliance). Format: YYYY-MM-DD
+   *
+   * @return $this
+   */
+  public function setDateOfBirth(?string $date_of_birth = null): self
+  {
+    $this->date_of_birth = $date_of_birth;
+
+    return $this;
+  }
+
+  /**
+   * Gets parent_email.
+   */
+  public function getParentEmail(): ?string
+  {
+    return $this->parent_email;
+  }
+
+  /**
+   * Sets parent_email.
+   *
+   * @param string|null $parent_email Email address of parent/guardian. Required for users under 13 for parental consent.
+   *
+   * @return $this
+   */
+  public function setParentEmail(?string $parent_email = null): self
+  {
+    $this->parent_email = $parent_email;
 
     return $this;
   }

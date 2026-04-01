@@ -1,0 +1,92 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('registration_page') }}
+{% endblock %}
+
+{% block header '' %}
+
+{% block body %}
+
+  <div class="content-card">
+
+    <div class="row justify-content-center">
+      <div class="login-container mb-4">
+
+        <h1>{{ 'register.completeRegistration.title'|trans({}, 'catroweb') }}</h1>
+        <p class="mb-4">{{ 'register.completeRegistration.info'|trans({}, 'catroweb') }}</p>
+
+        {% for message in app.flashes('error') %}
+          <div class="alert alert-danger mb-3">{{ message }}</div>
+        {% endfor %}
+
+        <form method="post" action="{{ path('complete_registration_submit') }}" id="complete-registration-form">
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token('complete_registration') }}">
+
+          <div class="mb-2">
+            <label id="date-of-birth" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon">
+              <span class="mdc-text-field__ripple"></span>
+              <span class="mdc-floating-label mdc-floating-label--float-above" id="date-of-birth__label">{{ 'register.dateOfBirth'|trans({}, 'catroweb') }}</span>
+              <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" role="button">cake</span>
+              <input type="date" id="date-of-birth__input" name="date_of_birth"
+                     class="mdc-text-field__input" max="{{ 'now'|date('Y-m-d') }}" required
+                     aria-labelledby="date-of-birth__label" tabindex="1">
+              <span class="mdc-line-ripple"></span>
+            </label>
+            <div class="mdc-text-field-helper-line mb-2">
+              <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="date-of-birth__helper" aria-hidden="true">
+                {{ 'register.dateOfBirthInfo'|trans({}, 'catroweb') }}
+              </div>
+            </div>
+          </div>
+
+          <div id="parent-email-section" style="display: none;">
+            <div class="mb-2">
+              <label id="parent-email" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label mdc-floating-label--float-above" id="parent-email__label">{{ 'register.parentEmail'|trans({}, 'catroweb') }}</span>
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" role="button">family_restroom</span>
+                <input type="email" id="parent-email__input" name="parent_email"
+                       class="mdc-text-field__input"
+                       aria-labelledby="parent-email__label" tabindex="2">
+                <span class="mdc-line-ripple"></span>
+              </label>
+              <div class="mdc-text-field-helper-line mb-2">
+                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="parent-email__helper" aria-hidden="true">
+                  {{ 'register.parentEmailInfo'|trans({}, 'catroweb') }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <button type="submit" class="btn btn-primary">
+              {{ 'register.completeRegistration.submit'|trans({}, 'catroweb') }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const dobInput = document.getElementById('date-of-birth__input')
+      const parentSection = document.getElementById('parent-email-section')
+      if (dobInput && parentSection) {
+        dobInput.addEventListener('change', function () {
+          const dob = dobInput.value
+          if (!dob) {
+            parentSection.style.display = 'none'
+            return
+          }
+          const msPerYear = 365.25 * 24 * 60 * 60 * 1000
+          const age = Math.floor((new Date() - new Date(dob)) / msPerYear)
+          parentSection.style.display = age < 14 ? '' : 'none'
+        })
+      }
+    })
+  </script>
+
+{% endblock body %}

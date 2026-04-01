@@ -62,6 +62,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'limit' => 5,
         'interval' => '1 hour',
       ],
+      'parent_portal_daily' => [
+        'policy' => 'sliding_window',
+        'limit' => 1,
+        'interval' => '24 hours',
+      ],
       'search_burst' => [
         'policy' => 'sliding_window',
         'limit' => 30,
