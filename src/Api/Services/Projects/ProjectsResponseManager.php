@@ -57,7 +57,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = array_merge($default_attributes, $catroid_catty_hotfixes);
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'name', 'author', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids', 'download'];
+      $attributes_list = ['id', 'name', 'author', 'author_id', 'scratch_id', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids', 'download'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -77,6 +77,14 @@ class ProjectsResponseManager extends AbstractResponseManager
 
     if (in_array('author', $attributes_list, true)) {
       $data['author'] = $extraced_project->getUser()->getUserIdentifier();
+    }
+
+    if (in_array('author_id', $attributes_list, true)) {
+      $data['author_id'] = $extraced_project->getUser()?->getId();
+    }
+
+    if (in_array('scratch_id', $attributes_list, true)) {
+      $data['scratch_id'] = $extraced_project->getScratchId();
     }
 
     if (in_array('description', $attributes_list, true)) {

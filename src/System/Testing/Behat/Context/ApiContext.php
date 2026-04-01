@@ -104,7 +104,7 @@ class ApiContext implements Context
   /**
    * @var string[]
    */
-  private array $full_project_structure = ['id', 'name', 'author', 'description', 'credits', 'version', 'views',
+  private array $full_project_structure = ['id', 'name', 'author', 'author_id', 'description', 'credits', 'version', 'views',
     'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string',
     'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', 'not_for_kids', ];
 
@@ -2226,6 +2226,10 @@ class ApiContext implements Context
       },
       'author' => static function ($author): void {
         Assert::assertIsString($author, 'Author is not a string!');
+      },
+      'author_id' => static function ($author_id): void {
+        Assert::assertIsString($author_id, 'author_id is not a string!');
+        Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $author_id, 'author_id is not in the correct format!');
       },
       'description' => static function ($description): void {
         Assert::assertIsString($description, 'Description is not a string!');

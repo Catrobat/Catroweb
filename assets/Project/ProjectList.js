@@ -116,11 +116,10 @@ export class ProjectList {
     projectElement.appendChild(nameSpan)
 
     const propDiv = this.createPropertyElement(data)
-    projectElement.appendChild(propDiv)
-
     if (data.not_for_kids) {
-      this.addNotForKidsElement(projectElement)
+      this.addNotForKidsIcon(propDiv)
     }
+    projectElement.appendChild(propDiv)
 
     return projectElement
   }
@@ -164,21 +163,12 @@ export class ProjectList {
     return propDiv
   }
 
-  addNotForKidsElement(projectElement) {
-    const notForKidsDiv = document.createElement('div')
-    notForKidsDiv.className = 'lazyload project-list__project__property__not-for-kids'
-
+  addNotForKidsIcon(propDiv) {
     const notForKidsImg = document.createElement('img')
-    notForKidsImg.className = 'lazyload project-list__not-for-kids-logo'
+    notForKidsImg.className = 'project-list__not-for-kids-logo'
     notForKidsImg.src = '/images/default/not_for_kids.svg'
-    notForKidsDiv.appendChild(notForKidsImg)
-
-    const notForKidsValueSpan = document.createElement('span')
-    notForKidsValueSpan.className = 'project-list__project__property__value'
-    notForKidsValueSpan.textContent = 'Not for kids'
-    notForKidsDiv.appendChild(notForKidsValueSpan)
-
-    projectElement.appendChild(notForKidsDiv)
+    notForKidsImg.alt = 'Not for kids'
+    propDiv.appendChild(notForKidsImg)
   }
 
   updateChevronVisibility() {

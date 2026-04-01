@@ -14,6 +14,7 @@ Feature: As a project owner, I should be able to give credits for my project.
   Scenario: There should be a credits section on every project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Notes and credits"
     But the element "#edit-project-button" should not exist
 
@@ -21,6 +22,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "Catrobat"
     When I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Notes and credits"
     And the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
@@ -39,6 +41,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
     And I wait for AJAX to finish
@@ -59,6 +62,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
     And I wait for AJAX to finish
@@ -80,6 +84,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
     And I wait for AJAX to finish

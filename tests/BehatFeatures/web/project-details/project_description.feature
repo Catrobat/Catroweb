@@ -29,7 +29,7 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Then the element "#description" should be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "This is a new description"
-  
+
   Scenario: Editing description, closing the editor while saving edits
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
