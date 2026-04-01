@@ -34,27 +34,35 @@ class FeatureFlagManager
       return;
     }
 
-    $flagRepository = $this->entityManager->getRepository(FeatureFlag::class);
-
-    $existingFlags = [];
-    foreach ($flagRepository->findAll() as $flag) {
-      $existingFlags[(string) $flag->getName()] = $flag;
+    if (!$this->entityManager->isOpen()) {
+      return;
     }
 
-    foreach ($this->defaultFlags as $name => $value) {
-      if (!isset($existingFlags[$name])) {
-        $this->entityManager->persist(new FeatureFlag($name, $value));
+    try {
+      $flagRepository = $this->entityManager->getRepository(FeatureFlag::class);
+
+      $existingFlags = [];
+      foreach ($flagRepository->findAll() as $flag) {
+        $existingFlags[(string) $flag->getName()] = $flag;
       }
-    }
 
-    foreach ($existingFlags as $name => $flag) {
-      if (!array_key_exists($name, $this->defaultFlags)) {
-        $this->entityManager->remove($flag);
+      foreach ($this->defaultFlags as $name => $value) {
+        if (!isset($existingFlags[$name])) {
+          $this->entityManager->persist(new FeatureFlag($name, $value));
+        }
       }
-    }
 
-    $this->entityManager->flush();
-    $this->defaultsSynchronized = true;
+      foreach ($existingFlags as $name => $flag) {
+        if (!array_key_exists($name, $this->defaultFlags)) {
+          $this->entityManager->remove($flag);
+        }
+      }
+
+      $this->entityManager->flush();
+      $this->defaultsSynchronized = true;
+    } catch (\Throwable) {
+      // Prevent cascade failures when called during error page rendering
+    }
   }
 
   public function setFlagValue(string $flagName, bool $value): void
