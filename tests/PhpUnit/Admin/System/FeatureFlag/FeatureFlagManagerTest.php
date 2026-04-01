@@ -26,6 +26,8 @@ final class FeatureFlagManagerTest extends TestCase
     $existingFlag = new FeatureFlag('Sidebar-Studio-Link-Feature', false);
     $staleFlag = new FeatureFlag('Deprecated-Flag', true);
 
+    $entityManager->method('isOpen')->willReturn(true);
+
     $entityManager
       ->expects($this->once())
       ->method('getRepository')
