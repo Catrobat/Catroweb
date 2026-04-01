@@ -20,13 +20,13 @@ Feature: Comments API
   # GET /api/project/{id}/comments
   # ---------------------------------------------------------------------------
 
-  Scenario: Get project comments with cursor pagination
+  Scenario: Get project comments with cursor pagination returns newest first
     Given I request "GET" "/api/project/1/comments?limit=2"
     Then the response status code should be "200"
     And the response should be in json format
     And the client response should contain "has_more"
     And the client response should contain "next_cursor"
-    And the client response should contain "first comment"
+    And the client response should contain "third comment"
     And the client response should contain "second comment"
 
   Scenario: Get project comments returns 404 for non-existent project
@@ -41,11 +41,11 @@ Feature: Comments API
   # GET /api/comments/{id}/replies
   # ---------------------------------------------------------------------------
 
-  Scenario: Get comment replies with cursor pagination
+  Scenario: Get comment replies with cursor pagination returns newest first
     Given I request "GET" "/api/comments/10/replies?limit=1"
     Then the response status code should be "200"
     And the response should be in json format
-    And the client response should contain "reply comment 1"
+    And the client response should contain "reply comment 2"
 
   Scenario: Get replies returns 404 for non-existent comment
     Given I request "GET" "/api/comments/9999/replies"
