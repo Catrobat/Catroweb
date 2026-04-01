@@ -49,6 +49,12 @@ class UserDataFixtures
     $user->setApproved(isset($config['approved']) && 'true' === $config['approved']);
     $user->addRole($config['role'] ?? 'ROLE_USER');
     $user->setOauthUser(isset($config['oauth_user']) && 'true' === $config['oauth_user']);
+    $user->setDateOfBirth(new \DateTime($config['date_of_birth'] ?? '2000-01-15'));
+    $user->setMinor(isset($config['is_minor']) && 'true' === $config['is_minor']);
+    $user->setConsentStatus($config['consent_status'] ?? 'not_required');
+    if (isset($config['parent_email'])) {
+      $user->setParentEmail($config['parent_email']);
+    }
 
     $this->user_manager->updateUser($user, $andFlush);
 

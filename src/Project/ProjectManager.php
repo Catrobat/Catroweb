@@ -104,6 +104,11 @@ class ProjectManager
       return $this->security->isGranted('ROLE_ADMIN');
     }
 
+    // Minor users cannot see projects marked as not safe for kids
+    if ($project->getNotForKids() > 0 && null !== $user && $user->isMinor()) {
+      return false;
+    }
+
     // SHARE-49: Private projects are visible to everyone.
     // -
     // SHARE-70/SHARE-296: Debug projects must only be seen in the dev env or if explicitly requested

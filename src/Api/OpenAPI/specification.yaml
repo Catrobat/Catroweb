@@ -3548,6 +3548,14 @@ components:
             captcha_token:
               type: string
               description: 'CAPTCHA response token for bot detection'
+            date_of_birth:
+              type: string
+              example: '2000-01-15'
+              description: 'Date of birth for age verification (COPPA compliance). Format: YYYY-MM-DD'
+            parent_email:
+              type: string
+              example: 'parent@example.com'
+              description: 'Email address of parent/guardian. Required for users under 13 for parental consent.'
 
     UpdateUserRequest:
       allOf:
@@ -3806,6 +3814,17 @@ components:
             - 'Password too long'
             - 'Password contains invalid chars'
             - 'Password missing'
+        date_of_birth:
+          type: string
+          enum:
+            - 'Date of birth is required'
+            - 'Date of birth is invalid'
+            - 'You must be at least 3 years old to create an account'
+        parent_email:
+          type: string
+          enum:
+            - 'Parent email is required for users under 13'
+            - 'Parent email is invalid'
 
     UpdateUserErrorResponse:
       type: object

@@ -192,6 +192,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $approved = false;
 
+  #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+  protected ?\DateTimeInterface $date_of_birth = null;
+
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+  protected bool $is_minor = false;
+
+  #[ORM\Column(type: Types::STRING, length: 20, options: ['default' => 'not_required'])]
+  protected string $consent_status = 'not_required';
+
+  #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+  protected ?string $parent_email = null;
+
   #[ORM\Column(type: Types::TEXT, length: 65535, nullable: true)]
   protected ?string $about = null;
 
@@ -527,6 +539,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   public function isApproved(): bool
   {
     return $this->approved;
+  }
+
+  public function getDateOfBirth(): ?\DateTimeInterface
+  {
+    return $this->date_of_birth;
+  }
+
+  public function setDateOfBirth(?\DateTimeInterface $date_of_birth): void
+  {
+    $this->date_of_birth = $date_of_birth;
+  }
+
+  public function isMinor(): bool
+  {
+    return $this->is_minor;
+  }
+
+  public function setMinor(bool $is_minor): void
+  {
+    $this->is_minor = $is_minor;
+  }
+
+  public function getConsentStatus(): string
+  {
+    return $this->consent_status;
+  }
+
+  public function setConsentStatus(string $consent_status): void
+  {
+    $this->consent_status = $consent_status;
+  }
+
+  public function getParentEmail(): ?string
+  {
+    return $this->parent_email;
+  }
+
+  public function setParentEmail(?string $parent_email): void
+  {
+    $this->parent_email = $parent_email;
   }
 
   public function getAbout(): ?string

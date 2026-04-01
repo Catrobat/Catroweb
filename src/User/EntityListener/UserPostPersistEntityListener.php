@@ -18,8 +18,8 @@ class UserPostPersistEntityListener
   public function __construct(
     protected AchievementManager $achievement_manager,
     protected VerifyEmail $verify_email,
-    protected StatisticRepository $statistic_repository)
-  {
+    protected StatisticRepository $statistic_repository,
+  ) {
   }
 
   /**

@@ -1,0 +1,95 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block body %}
+
+<div class="content-card">
+  <div class="row justify-content-center">
+    <div class="login-container mb-4" style="max-width: 700px;">
+
+      <h1>{{ 'parent.manage.title'|trans({}, 'catroweb') }}</h1>
+      <p class="mb-4">{{ 'parent.manage.description'|trans({'%email%': parent_email}, 'catroweb') }}</p>
+
+      {% for message in app.flashes('error') %}
+        <div class="alert alert-danger mb-3">{{ message }}</div>
+      {% endfor %}
+      {% for message in app.flashes('success') %}
+        <div class="alert alert-success mb-3">{{ message }}</div>
+      {% endfor %}
+
+      {% for child in children %}
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4 class="card-title mb-3">
+              <i class="material-icons" style="vertical-align: middle;">person</i>
+              {{ child.username }}
+            </h4>
+
+            <table class="table table-sm mb-3">
+              <tr>
+                <td class="fw-bold" style="width: 40%;">{{ 'parent.manage.consentStatus'|trans({}, 'catroweb') }}</td>
+                <td>
+                  {% if child.consentStatus == 'granted' %}
+                    <span class="badge bg-success">{{ 'parent.manage.status.granted'|trans({}, 'catroweb') }}</span>
+                  {% elseif child.consentStatus == 'pending' %}
+                    <span class="badge bg-warning text-dark">{{ 'parent.manage.status.pending'|trans({}, 'catroweb') }}</span>
+                  {% elseif child.consentStatus == 'revoked' %}
+                    <span class="badge bg-danger">{{ 'parent.manage.status.revoked'|trans({}, 'catroweb') }}</span>
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <td class="fw-bold">{{ 'parent.manage.accountCreated'|trans({}, 'catroweb') }}</td>
+                <td>{{ child.createdAt ? child.createdAt|date('Y-m-d') : '-' }}</td>
+              </tr>
+              <tr>
+                <td class="fw-bold">{{ 'parent.manage.email'|trans({}, 'catroweb') }}</td>
+                <td>{{ child.email }}</td>
+              </tr>
+            </table>
+
+            <div class="d-flex flex-wrap gap-2">
+              {% if child.consentStatus == 'granted' %}
+                <form method="post" action="{{ path('parent_revoke_consent', {id: child.id}) }}"
+                      onsubmit="return confirm('{{ 'parent.manage.revokeConfirm'|trans({}, 'catroweb') }}')">
+                  <input type="hidden" name="_csrf_token" value="{{ csrf_token('parent_revoke_' ~ child.id) }}">
+                  <button type="submit" class="btn btn-outline-warning btn-sm">
+                    <i class="material-icons" style="font-size: 1rem; vertical-align: middle;">block</i>
+                    {{ 'parent.manage.revokeButton'|trans({}, 'catroweb') }}
+                  </button>
+                </form>
+              {% elseif child.consentStatus == 'revoked' or child.consentStatus == 'pending' %}
+                <form method="post" action="{{ path('parent_grant_consent', {id: child.id}) }}">
+                  <input type="hidden" name="_csrf_token" value="{{ csrf_token('parent_grant_' ~ child.id) }}">
+                  <button type="submit" class="btn btn-success btn-sm">
+                    <i class="material-icons" style="font-size: 1rem; vertical-align: middle;">check_circle</i>
+                    {{ 'parent.manage.grantButton'|trans({}, 'catroweb') }}
+                  </button>
+                </form>
+              {% endif %}
+
+              <form method="post" action="{{ path('parent_request_export', {id: child.id}) }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('parent_export_' ~ child.id) }}">
+                <button type="submit" class="btn btn-outline-primary btn-sm">
+                  <i class="material-icons" style="font-size: 1rem; vertical-align: middle;">download</i>
+                  {{ 'parent.manage.exportButton'|trans({}, 'catroweb') }}
+                </button>
+              </form>
+
+              <form method="post" action="{{ path('parent_delete_account', {id: child.id}) }}"
+                    onsubmit="return confirm('{{ 'parent.manage.deleteConfirm'|trans({}, 'catroweb') }}')">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('parent_delete_' ~ child.id) }}">
+                <button type="submit" class="btn btn-outline-danger btn-sm">
+                  <i class="material-icons" style="font-size: 1rem; vertical-align: middle;">delete_forever</i>
+                  {{ 'parent.manage.deleteButton'|trans({}, 'catroweb') }}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

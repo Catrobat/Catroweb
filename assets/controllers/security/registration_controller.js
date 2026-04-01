@@ -19,6 +19,21 @@ export default class extends AjaxController {
         this.captchaWidget = widget
       })
     }
+
+    const dobInput = document.getElementById('date-of-birth__input')
+    const parentSection = document.getElementById('parent-email-section')
+    if (dobInput && parentSection) {
+      dobInput.addEventListener('change', () => {
+        const dob = dobInput.value
+        if (!dob) {
+          parentSection.style.display = 'none'
+          return
+        }
+        const msPerYear = 365.25 * 24 * 60 * 60 * 1000
+        const age = Math.floor((new Date() - new Date(dob)) / msPerYear)
+        parentSection.style.display = age < 14 ? '' : 'none'
+      })
+    }
   }
 
   disconnect() {
@@ -42,10 +57,21 @@ export default class extends AjaxController {
       email: document.getElementById('email__input').value,
       password: document.getElementById('password__input').value,
       captcha_token: this.captchaWidget?.getToken() ?? '',
+      date_of_birth: document.getElementById('date-of-birth__input').value,
+      parent_email: document.getElementById('parent-email__input').value || undefined,
     }
 
     const response = await this.fetchPost(this.apiPathValue, data)
     this.resetRegistrationButton()
+
+    if (response.status === 429) {
+      showSnackbar(
+        '#share-snackbar',
+        'Too many registration attempts. Please wait a while and try again.',
+        SnackbarDuration.error,
+      )
+      return
+    }
 
     if (response.status === 403) {
       showSnackbar(
@@ -107,5 +133,7 @@ export default class extends AjaxController {
     showValidationMessage(responseObj.username, 'username')
     showValidationMessage(responseObj.email, 'email')
     showValidationMessage(responseObj.password, 'password')
+    showValidationMessage(responseObj.date_of_birth, 'date-of-birth')
+    showValidationMessage(responseObj.parent_email, 'parent-email')
   }
 }

@@ -65,7 +65,7 @@ Feature:
     And I wait for the page to be loaded
     Then I should see "Username too long"
 
-  Scenario: changing email should work
+  Scenario: changing email should work and redirect to verify-pending
     Given I click "#top-app-bar__btn-settings"
     And I wait for the element "#user-settings-modal" to be visible
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
@@ -73,11 +73,7 @@ Feature:
     When I fill in "email" with "first@email.com"
     And I click "#profile_settings-save_action"
     And I wait for the page to be loaded
-    Then I should be on "/app/user"
-    And I should see "Your profile has been successfully changed."
-    When I reload the page
-    And I wait for the page to be loaded
-    Then the "email" field should contain "first@email.com"
+    Then I should be on "/app/verify-pending"
 
   Scenario: changing email addresses with an invalid email should not work
     Given I click "#top-app-bar__btn-settings"

@@ -93,6 +93,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'icon' => '<i class="fa fa-users"></i>',
             'items' => [
               'admin.block.users.overview',
+              'admin.block.users.consent_log',
               'admin.block.users.data_report',
             ],
           ],

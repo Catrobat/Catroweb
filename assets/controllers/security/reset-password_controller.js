@@ -39,6 +39,15 @@ export default class extends AjaxController {
     }
     const response = await this.fetchPost(this.apiPathValue, data)
 
+    if (response.status === 429) {
+      showSnackbar(
+        '#share-snackbar',
+        'Too many password reset attempts. Please wait a while and try again.',
+        SnackbarDuration.error,
+      )
+      return
+    }
+
     if (response.status === 403) {
       showSnackbar(
         '#share-snackbar',

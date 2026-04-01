@@ -326,6 +326,12 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return;
     }
 
+    if ($user->isMinor()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
     try {
       $this->facade->getProcessor()->processReport($user, $content_type, $content_id, $request);
       $responseCode = Response::HTTP_NO_CONTENT;

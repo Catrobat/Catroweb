@@ -75,6 +75,28 @@ class RegisterErrorResponse
   protected ?string $password = null;
 
   /**
+   * @SerializedName("date_of_birth")
+   *
+   * @Assert\Choice({ "Date of birth is required", "Date of birth is invalid", "You must be at least 3 years old to create an account" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $date_of_birth = null;
+
+  /**
+   * @SerializedName("parent_email")
+   *
+   * @Assert\Choice({ "Parent email is required for users under 13", "Parent email is invalid" })
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $parent_email = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -85,6 +107,8 @@ class RegisterErrorResponse
       $this->email = array_key_exists('email', $data) ? $data['email'] : $this->email;
       $this->username = array_key_exists('username', $data) ? $data['username'] : $this->username;
       $this->password = array_key_exists('password', $data) ? $data['password'] : $this->password;
+      $this->date_of_birth = array_key_exists('date_of_birth', $data) ? $data['date_of_birth'] : $this->date_of_birth;
+      $this->parent_email = array_key_exists('parent_email', $data) ? $data['parent_email'] : $this->parent_email;
     }
   }
 
@@ -144,6 +168,46 @@ class RegisterErrorResponse
   public function setPassword(?string $password = null): self
   {
     $this->password = $password;
+
+    return $this;
+  }
+
+  /**
+   * Gets date_of_birth.
+   */
+  public function getDateOfBirth(): ?string
+  {
+    return $this->date_of_birth;
+  }
+
+  /**
+   * Sets date_of_birth.
+   *
+   * @return $this
+   */
+  public function setDateOfBirth(?string $date_of_birth = null): self
+  {
+    $this->date_of_birth = $date_of_birth;
+
+    return $this;
+  }
+
+  /**
+   * Gets parent_email.
+   */
+  public function getParentEmail(): ?string
+  {
+    return $this->parent_email;
+  }
+
+  /**
+   * Sets parent_email.
+   *
+   * @return $this
+   */
+  public function setParentEmail(?string $parent_email = null): self
+  {
+    $this->parent_email = $parent_email;
 
     return $this;
   }

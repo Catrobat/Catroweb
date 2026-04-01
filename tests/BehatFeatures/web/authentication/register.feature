@@ -15,10 +15,11 @@ Feature:
     And I fill in "username__input" with "CatrobatNew"
     And I fill in "email__input" with "CatrobatNew@gmail.com"
     And I fill in "password__input" with "123456"
+    And I fill in "date-of-birth__input" with "2000-01-15"
     Then I click "#register-btn"
     And I wait for AJAX to finish
-    And I wait 500 milliseconds
-    Then I should be on "/app/"
+    And I wait 2000 milliseconds
+    Then I should be on "/app/verify-pending"
 
   Scenario: Trying to register with a too short password should fail
     Given I am on "/app/register"
@@ -26,8 +27,9 @@ Feature:
     And I fill in "username__input" with "CatrobatNew"
     And I fill in "email__input" with "CatrobatNew@gmail.com"
     And I fill in "password__input" with "12345"
-    Then I press "Create account"
-    And I wait for the page to be loaded
+    And I fill in "date-of-birth__input" with "2000-01-15"
+    Then I click "#register-btn"
+    And I wait for AJAX to finish
     Then I should be on "/app/register"
     And I should see "Password too short"
 
@@ -41,8 +43,9 @@ Feature:
     And I fill in "username__input" with "Catrobat"
     And I fill in "email__input" with "Catrobat@gmail.com"
     And I fill in "password__input" with "123456"
-    Then I press "Create account"
-    And I wait for the page to be loaded
+    And I fill in "date-of-birth__input" with "2000-01-15"
+    Then I click "#register-btn"
+    And I wait for AJAX to finish
     Then I should be on "/app/register"
     And I should see "Username already in use"
 
@@ -56,9 +59,9 @@ Feature:
     And I fill in "username__input" with "CatrobatNew"
     And I fill in "email__input" with "dev1@pocketcode.org"
     And I fill in "password__input" with "123456"
-    Then I press "Create account"
-    And I wait for the page to be loaded
-    Then I should be on "/app/register"
+    And I fill in "date-of-birth__input" with "2000-01-15"
+    Then I click "#register-btn"
+    And I wait for AJAX to finish
     Then I should be on "/app/register"
     And I should see "Email already in use"
 
@@ -68,23 +71,23 @@ Feature:
     And I fill in "username__input" with "catro@bat.org"
     And I fill in "email__input" with "dev1337@pocketcode.org"
     And I fill in "password__input" with "123456"
-    Then I press "Create account"
-    And I wait for the page to be loaded
+    And I fill in "date-of-birth__input" with "2000-01-15"
+    Then I click "#register-btn"
+    And I wait for AJAX to finish
     Then I should be on "/app/register"
     And I should see "Username must not contain an email address"
 
-  Scenario: Registering should automatically log me in
+  Scenario: Registering should automatically log me in and show verify-pending
     Given I am on "/app/register"
     And I wait for the page to be loaded
     And I fill in "username__input" with "CatrobatNew"
     And I fill in "email__input" with "CatrobatNew@gmail.com"
     And I fill in "password__input" with "123456"
-    Then I press "Create account"
-    And I wait for the page to be loaded
-    And I wait 500 milliseconds
-    Then I should be on "/app/"
-    When I am on "app/user"
-    Then the "#top-app-bar__title" element should contain "My Profile"
+    And I fill in "date-of-birth__input" with "2000-01-15"
+    Then I click "#register-btn"
+    And I wait for AJAX to finish
+    And I wait 2000 milliseconds
+    Then I should be on "/app/verify-pending"
 
   Scenario: The password should be hidden as default behaviour
     Given I am on "/app/register"

@@ -22,7 +22,7 @@ Scenario: Valid Confirmation Email Template:
   And I wait for the page to be loaded
   Then I should see "Catrobat"
 
-Scenario: Valid Reset Email Template:
+Scenario: Valid Consent Email Template:
   Given I log in as "Admin" with the password "123456"
   And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
@@ -33,14 +33,26 @@ Scenario: Valid Reset Email Template:
   And I wait for the page to be loaded
   Then I should see "Catrobat"
 
-Scenario: Valid Simple Message Email Template:
+Scenario: Valid Reset Email Template:
   Given I log in as "Admin" with the password "123456"
   And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
   When I select option 3 from the dropdown "template-select"
   And I enter "Tyrell" into the "username" field
+  And I click "#preview-button"
+  And I switch to the new tab to preview the mail
+  And I wait for the page to be loaded
+  Then I should see "Catrobat"
+
+Scenario: Valid Simple Message Email Template:
+  Given I log in as "Admin" with the password "123456"
+  And I am on "/admin/user-communication/email/list"
+  And I wait for the page to be loaded
+  When I select option 5 from the dropdown "template-select"
+  And I wait 500 milliseconds
+  And I enter "Tyrell" into the "username" field
   And I enter "Subject" into the "subject" field
-  And I enter "Content" into the "content" field
+  And I enter "Content" into the "message-content" field
   And I click "#preview-button"
   And I switch to the new tab to preview the mail
   And I wait for the page to be loaded
@@ -50,7 +62,8 @@ Scenario: Invalid Subject Simple Message Email Template:
   Given I log in as "Admin" with the password "123456"
   And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
-  When I select option 3 from the dropdown "template-select"
+  When I select option 5 from the dropdown "template-select"
+  And I wait 500 milliseconds
   And I enter "Tyrell" into the "username" field
   And I click "#preview-button"
   And I switch to the new tab to preview the mail
@@ -61,7 +74,8 @@ Scenario: Invalid Content Simple Message Email Template:
   Given I log in as "Admin" with the password "123456"
   And I am on "/admin/user-communication/email/list"
   And I wait for the page to be loaded
-  When I select option 3 from the dropdown "template-select"
+  When I select option 5 from the dropdown "template-select"
+  And I wait 500 milliseconds
   And I enter "Tyrell" into the "username" field
   And I enter "Subject" into the "subject" field
   And I click "#preview-button"

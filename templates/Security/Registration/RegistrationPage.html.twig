@@ -54,6 +54,42 @@
             },
           }) }}
 
+          <div class="mb-2">
+            <label id="date-of-birth" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon">
+              <span class="mdc-text-field__ripple"></span>
+              <span class="mdc-floating-label mdc-floating-label--float-above" id="date-of-birth__label">{{ 'register.dateOfBirth'|trans({}, 'catroweb') }}</span>
+              <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" role="button">cake</span>
+              <input type="date" id="date-of-birth__input" name="_date_of_birth"
+                     class="mdc-text-field__input" max="{{ 'now'|date('Y-m-d') }}" required
+                     aria-labelledby="date-of-birth__label" tabindex="4">
+              <span class="mdc-line-ripple"></span>
+            </label>
+            <div class="mdc-text-field-helper-line mb-2">
+              <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="date-of-birth__helper" aria-hidden="true">
+                {{ 'register.dateOfBirthInfo'|trans({}, 'catroweb') }}
+              </div>
+            </div>
+          </div>
+
+          <div id="parent-email-section" style="display: none;">
+            <div class="mb-2">
+              <label id="parent-email" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label mdc-floating-label--float-above" id="parent-email__label">{{ 'register.parentEmail'|trans({}, 'catroweb') }}</span>
+                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" role="button">family_restroom</span>
+                <input type="email" id="parent-email__input" name="_parent_email"
+                       class="mdc-text-field__input"
+                       aria-labelledby="parent-email__label" tabindex="5">
+                <span class="mdc-line-ripple"></span>
+              </label>
+              <div class="mdc-text-field-helper-line mb-2">
+                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="parent-email__helper" aria-hidden="true">
+                  {{ 'register.parentEmailInfo'|trans({}, 'catroweb') }}
+                </div>
+              </div>
+            </div>
+          </div>
+
           <p class="subtext">{{ 'register.subText'|trans({
               '%var1%': '<a id="privacyPolicy" href="' ~ path('privacypolicy') ~ '">' ~ 'privacyPolicy'|trans({}, 'catroweb') ~ '</a>',
               '%var2%': '<a id="termsOfUse" href="' ~ path('termsOfUse') ~ '">' ~ 'termsOfUse.title'|trans({}, 'catroweb') ~ '</a>',

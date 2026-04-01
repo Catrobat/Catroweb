@@ -135,15 +135,15 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "c2"
-    And I should see "c3"
-    And I should see "c4"
-    And I should see "c5"
+    Then I should see "c8"
+    And I should see "c7"
     And I should see "c6"
+    And I should see "c5"
+    And I should see "c4"
 
-    And none of the ".comment-replies-count span" elements should contain "3"
-    But I should not see "c7"
-    And I should not see "c8"
+    And one of the ".comment-replies-count span" elements should contain "3"
+    But I should not see "c3"
+    And I should not see "c2"
     And I should not see "c9"
     And I should not see "c10"
     And I should not see "c11"
@@ -152,9 +152,8 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait 500 milliseconds
     And I wait for AJAX to finish
 
-    Then I should see "c7"
-    And I should see "c8"
-    And one of the ".comment-replies-count span" elements should contain "3"
+    Then I should see "c3"
+    And I should see "c2"
     But I should not see "c9"
     But I should not see "c10"
     But I should not see "c11"
@@ -187,12 +186,12 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "c2"
-    And I should see "c3"
-    And I should see "c4"
-    And I should see "c5"
+    Then I should see "c8"
+    And I should see "c7"
     And I should see "c6"
-    But I should not see "c7"
+    And I should see "c5"
+    And I should see "c4"
+    But I should not see "c3"
 
   Scenario: I can't report my own comment
     Given I log in as "Catrobat"

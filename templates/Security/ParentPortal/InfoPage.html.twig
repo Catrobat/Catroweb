@@ -1,0 +1,33 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block body %}
+
+<div class="content-card">
+  <div class="row justify-content-center">
+    <div class="login-container mb-4" style="max-width: 700px;">
+
+      <h1>{{ 'parent.info.title'|trans({}, 'catroweb') }}</h1>
+
+      <p class="mb-4">{{ 'parent.info.intro'|trans({}, 'catroweb') }}</p>
+
+      <h3>{{ 'parent.info.whatIsCatrobat.title'|trans({}, 'catroweb') }}</h3>
+      <p>{{ 'parent.info.whatIsCatrobat.text'|trans({}, 'catroweb') }}</p>
+
+      <h3>{{ 'parent.info.dataCollected.title'|trans({}, 'catroweb') }}</h3>
+      <p>{{ 'parent.info.dataCollected.text'|trans({}, 'catroweb') }}</p>
+
+      <h3>{{ 'parent.info.yourRights.title'|trans({}, 'catroweb') }}</h3>
+      <p>{{ 'parent.info.yourRights.text'|trans({}, 'catroweb') }}</p>
+
+      <h3>{{ 'parent.info.minorRestrictions.title'|trans({}, 'catroweb') }}</h3>
+      <p>{{ 'parent.info.minorRestrictions.text'|trans({}, 'catroweb') }}</p>
+
+      <div class="mt-4">
+        <a href="{{ path('parent_portal') }}" class="btn btn-primary">{{ 'parent.info.manageButton'|trans({}, 'catroweb') }}</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
