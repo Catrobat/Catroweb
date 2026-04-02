@@ -52,7 +52,7 @@
     "autoprefixer": "^10.4.27",
     "browserslist": "^4.28.2",
     "core-js": "^3.49.0",
-    "dotenv": "^17.3.1",
+    "dotenv": "^17.4.0",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import-x": "^4.16.2",
