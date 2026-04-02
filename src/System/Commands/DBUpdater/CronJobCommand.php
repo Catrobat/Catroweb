@@ -134,6 +134,15 @@ class CronJobCommand extends Command
       $output
     );
 
+    // Storage lifecycle: delete expired projects
+    $this->runCronJob(
+      'Delete expired projects based on retention rules',
+      ['bin/console', 'catrobat:storage:lifecycle'],
+      ['timeout' => self::ONE_DAY_IN_SECONDS],
+      '1 day',
+      $output
+    );
+
     return 0;
   }
 

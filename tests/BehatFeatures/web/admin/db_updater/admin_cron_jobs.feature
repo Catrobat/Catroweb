@@ -36,7 +36,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     Then I should see "Cron jobs finished successfully"
     When I am on "/admin/system/cron-job/list"
     And I wait for the page to be loaded
-    And there should be "10" cron jobs in the database
+    And there should be "11" cron jobs in the database
 
   Scenario: Cron jobs can be reset
     Given I log in as "Admin"
