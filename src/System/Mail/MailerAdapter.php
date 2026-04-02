@@ -23,14 +23,24 @@ class MailerAdapter
     protected Environment $templateWrapper,
     #[Autowire('%dkim.private.key%')]
     protected string $dkim_private_key_path,
+    protected EmailBudgetManager $budgetManager,
   ) {
   }
 
-  public function send(string $to, string $subject, string $template, array $context = []): void
+  public function send(string $to, string $subject, string $template, array $context = [], string $emailType = 'admin'): bool
   {
+    if (!$this->budgetManager->canSend($emailType)) {
+      $this->logger->warning(sprintf('Email budget exhausted for type "%s". Email to %s with subject "%s" was not sent.', $emailType, $to, $subject));
+
+      return false;
+    }
+
     $email = $this->buildEmail($to, $subject, $template, $context);
     // $email = $this->signEmail($email); // Signing is currently disabled due to breveo
     $this->sendEmail($email, $to);
+    $this->budgetManager->recordSend($emailType);
+
+    return true;
   }
 
   protected function buildEmail(string $to, string $subject, string $template, array $context): Message

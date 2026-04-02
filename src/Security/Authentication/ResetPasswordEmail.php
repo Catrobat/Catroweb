@@ -61,7 +61,8 @@ class ResetPasswordEmail
       $this->user->getEmail(),
       $this->translator->trans('passwordRecovery.subject', [], 'catroweb', $this->locale),
       $this->getTemplate(),
-      $this->getContext()
+      $this->getContext(),
+      'reset'
     );
   }
 }

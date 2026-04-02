@@ -73,7 +73,8 @@ class VerifyEmail
       $this->user->getEmail(),
       $this->translator->trans('user.verification.email', [], 'catroweb'),
       $this->getTemplate(),
-      $this->getContext()
+      $this->getContext(),
+      'verification'
     );
   }
 }
