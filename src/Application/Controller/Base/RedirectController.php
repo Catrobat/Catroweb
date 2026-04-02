@@ -38,7 +38,7 @@ class RedirectController extends AbstractController
   #[Route(path: '/robots.txt', name: 'robots.txt', methods: ['GET'])]
   public function robotsTxt(): Response
   {
-    return $this->redirect('../../robots.txt', Response::HTTP_MOVED_PERMANENTLY);
+    return $this->redirect('/robots.txt', Response::HTTP_MOVED_PERMANENTLY);
     // The file is only hosted without flavors/themes!
   }
 
