@@ -143,6 +143,16 @@ class CronJobCommand extends Command
       $output
     );
 
+    // Storage cleanup
+
+    $this->runCronJob(
+      'Clean old extracted project files',
+      ['bin/console', 'catrobat:clean:extracts'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 day',
+      $output
+    );
+
     return 0;
   }
 
