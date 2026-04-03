@@ -165,18 +165,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $apple_access_token = null;
 
-  /**
-   * @deprecated
-   */
-  #[ORM\Column(type: Types::STRING, length: 5000, nullable: true)]
-  protected ?string $gplus_id_token = null;
-
-  /**
-   * @deprecated
-   */
-  #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
-  protected ?string $gplus_refresh_token = null;
-
   #[ORM\Column(type: Types::INTEGER, unique: true, nullable: true)]
   protected ?int $scratch_user_id = null;
 
@@ -280,26 +268,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   public function getAppleId(): ?string
   {
     return $this->apple_id;
-  }
-
-  public function setGplusIdToken(?string $gplus_id_token): void
-  {
-    $this->gplus_id_token = $gplus_id_token;
-  }
-
-  public function getGplusIdToken(): ?string
-  {
-    return $this->gplus_id_token;
-  }
-
-  public function setGplusRefreshToken(?string $gplus_refresh_token): void
-  {
-    $this->gplus_refresh_token = $gplus_refresh_token;
-  }
-
-  public function getGplusRefreshToken(): ?string
-  {
-    return $this->gplus_refresh_token;
   }
 
   public function getId(): ?string
