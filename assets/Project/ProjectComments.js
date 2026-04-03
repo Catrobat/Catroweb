@@ -510,13 +510,16 @@ export function ProjectComments(
       translationIcon.textContent = 'translate'
       translationButton.appendChild(translationIcon)
 
-      const loadingSpinner = createLoadingSpinner(`comment-translation-loading-spinner-${comment.id}`)
+      const loadingSpinner = createLoadingSpinner(
+        `comment-translation-loading-spinner-${comment.id}`,
+      )
 
       const removeTranslationButton = document.createElement('span')
       removeTranslationButton.id = `remove-comment-translation-button-${comment.id}`
       removeTranslationButton.className = 'remove-comment-translation-button catro-icon-button'
       removeTranslationButton.dataset.bsToggle = 'tooltip'
-      removeTranslationButton.title = projectComments?.dataset.transHideTranslation || 'Hide translation'
+      removeTranslationButton.title =
+        projectComments?.dataset.transHideTranslation || 'Hide translation'
       removeTranslationButton.style.display = 'none'
 
       const removeTranslationIcon = document.createElement('i')

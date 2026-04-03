@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Twig\Environment;
 
 class CommentsApi extends AbstractApiController implements CommentsApiInterface
 {
@@ -44,7 +43,6 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly TranslationDelegate $translation_delegate,
     private readonly NotificationManager $notification_manager,
     private readonly RequestStack $request_stack,
-    private readonly Environment $twig,
     private readonly AuthorizationCheckerInterface $authorization_checker,
     private readonly RateLimiterFactory $commentBurstLimiter,
     private readonly RateLimiterFactory $commentDailyLimiter,
