@@ -30,3 +30,18 @@ Feature: List studio projects
   Scenario: List projects of non-existent studio returns 404
     When I GET "/api/studio/nonexistent/projects"
     Then the response status code should be "404"
+
+  Scenario: List projects with limit
+    When I GET "/api/studio/1/projects?limit=1"
+    Then the response status code should be "200"
+    And the client response should contain "has_more"
+
+  Scenario: Response contains project details
+    When I GET "/api/studio/1/projects"
+    Then the response status code should be "200"
+    And the client response should contain "added_by"
+    And the client response should contain "added_at"
+
+  Scenario: Invalid cursor returns 400
+    When I GET "/api/studio/1/projects?cursor=invalid!!"
+    Then the response status code should be "400"

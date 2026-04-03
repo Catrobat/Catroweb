@@ -4,8 +4,9 @@ export default class {
   removeComment(studioID, element, commentID, isReply, parentID) {
     const removeError = document.getElementById('comment-remove-error').value
 
-    fetch('../removeStudioComment/', {
+    fetch('/removeStudioComment/', {
       method: 'DELETE',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -31,7 +32,6 @@ export default class {
       })
   }
 
-  // Function to post a comment
   postComment(studioID, isReply) {
     const comment = isReply
       ? document.querySelector('#add-reply input').value
@@ -43,8 +43,9 @@ export default class {
       return
     }
 
-    fetch('../postCommentToStudio/', {
+    fetch('/postCommentToStudio/', {
       method: 'POST',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -53,16 +54,10 @@ export default class {
       .then((response) => {
         if (response.ok) {
           if (isReply) {
-            // ToDo: create template just for comment, and make it injectable via js but use twig
-            // document.querySelector('#add-reply input').value = '';
-            // document.getElementById('info-' + parentID).textContent = response.replies_count;
-          } else {
-            // ToDo: create template just for comment, and make it injectable via js but use twig
             window.location.reload()
-            document.querySelector('#add-comment textarea').value = ''
-            this.updateCommentCount(1)
+          } else {
+            window.location.reload()
           }
-          this.increaseActivityCount()
         } else if (response.status === 429) {
           const rateLimitedMsg =
             document.getElementById('comment-rate-limited')?.value ||
@@ -79,26 +74,30 @@ export default class {
       })
   }
 
-  // Function to load replies
-  loadReplies() {
-    showSnackbar('#share-snackbar', 'Replies not yet supported')
-    // document.getElementById('modal-body').innerHTML = '';
-    // document.getElementById('cmtID').value = commentID;
-    //
-    // fetch('../loadCommentReplies/', {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({ commentID })
-    // })
-    //   .then(response => response.text())
-    //   .then(data => {
-    //     document.getElementById('comment-replies-body').innerHTML = data;
-    //   })
-    //   .catch(() => {
-    //     document.getElementById('comment-replies-body').innerHTML = '<h1>Failed to load replies</h1>';
-    //   });
+  loadReplies(studioID, element, commentID) {
+    const commentError = document.getElementById('comment-error')?.value || 'Failed to load replies'
+
+    document.getElementById('modal-body').innerHTML = ''
+    document.getElementById('cmtID').value = commentID
+
+    fetch(`/loadCommentReplies/?commentID=${encodeURIComponent(commentID)}`, {
+      method: 'GET',
+      credentials: 'same-origin',
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error('Failed to load replies')
+      })
+      .then((html) => {
+        document.getElementById('modal-body').innerHTML = html
+      })
+      .catch((e) => {
+        console.error(e)
+        document.getElementById('modal-body').innerHTML =
+          '<p class="text-center text-muted mt-3">' + commentError + '</p>'
+      })
   }
 
   showNoCommentsInfoMessage() {

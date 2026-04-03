@@ -28,18 +28,16 @@ function handleImageClickAdd(projectId) {
   }
   document.getElementById('clicked-projects_own_projects').value =
     clickedProjectsAdd.length > 0 ? JSON.stringify(clickedProjectsAdd) : ''
-
-  console.log(document.getElementById('clicked-projects_own_projects').value)
 }
 
 function handleImageClickRemove(projectId) {
   const index = clickedProjectsRemove.indexOf(projectId)
   const image = document.getElementById(projectId)
   if (index === -1) {
-    clickedProjectsAdd.push(projectId)
+    clickedProjectsRemove.push(projectId)
     image.classList.add('red-background')
   } else {
-    clickedProjectsAdd.splice(index, 1)
+    clickedProjectsRemove.splice(index, 1)
     image.classList.remove('red-background')
   }
 

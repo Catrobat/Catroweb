@@ -1,6 +1,7 @@
 import '../Components/Switch'
 import { showValidationMessage } from '../Components/TextField'
 import AcceptLanguage from '../Api/AcceptLanguage'
+import { getCookie } from '../Security/CookieHelper'
 
 require('./CreateStudio.scss')
 
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
       headers: {
         Accept: 'application/json',
         'Accept-Language': new AcceptLanguage().get(),
+        Authorization: 'Bearer ' + getCookie('BEARER'),
       },
     })
 

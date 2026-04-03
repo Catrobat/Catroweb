@@ -24,3 +24,19 @@ Feature: List studio members
   Scenario: List members of non-existent studio returns 404
     When I GET "/api/studio/nonexistent/members"
     Then the response status code should be "404"
+
+  Scenario: List members with limit
+    When I GET "/api/studio/1/members?limit=1"
+    Then the response status code should be "200"
+    And the client response should contain "has_more"
+
+  Scenario: Response contains role information
+    When I GET "/api/studio/1/members"
+    Then the response status code should be "200"
+    And the client response should contain "role"
+    And the client response should contain "admin"
+    And the client response should contain "member"
+
+  Scenario: Invalid cursor returns 400
+    When I GET "/api/studio/1/members?cursor=invalid!!"
+    Then the response status code should be "400"
