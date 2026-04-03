@@ -95,8 +95,12 @@ export default class {
       })
       .catch((e) => {
         console.error(e)
-        document.getElementById('modal-body').innerHTML =
-          '<p class="text-center text-muted mt-3">' + commentError + '</p>'
+        const modalBody = document.getElementById('modal-body')
+        modalBody.innerHTML = ''
+        const p = document.createElement('p')
+        p.className = 'text-center text-muted mt-3'
+        p.textContent = commentError
+        modalBody.appendChild(p)
       })
   }
 
