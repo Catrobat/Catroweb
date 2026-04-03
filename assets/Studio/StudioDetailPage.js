@@ -7,7 +7,6 @@ import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import Swal from 'sweetalert2'
 import StudioCommentHandler from './StudioCommentHandler'
 import AcceptLanguage from '../Api/AcceptLanguage'
-import { getCookie } from '../Security/CookieHelper'
 require('../Project/ProjectList.scss')
 require('./AdminSettings.scss')
 require('./MembersList.scss')
@@ -98,7 +97,6 @@ async function uploadCoverImage(url, file) {
     headers: {
       Accept: 'application/json',
       'Accept-Language': new AcceptLanguage().get(),
-      Authorization: 'Bearer ' + getCookie('BEARER'),
     },
   })
 
