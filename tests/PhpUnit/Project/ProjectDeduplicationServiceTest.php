@@ -37,8 +37,6 @@ class ProjectDeduplicationServiceTest extends TestCase
 
   private Stub&LoggerInterface $logger;
 
-  private ProjectDeduplicationService $service;
-
   private string $test_extract_dir;
 
   #[\Override]
@@ -49,14 +47,6 @@ class ProjectDeduplicationServiceTest extends TestCase
     $this->mapping_repository = $this->createStub(ProjectAssetMappingRepository::class);
     $this->entity_manager = $this->createStub(EntityManagerInterface::class);
     $this->logger = $this->createStub(LoggerInterface::class);
-
-    $this->service = new ProjectDeduplicationService(
-      $this->store,
-      $this->asset_repository,
-      $this->mapping_repository,
-      $this->entity_manager,
-      $this->logger,
-    );
 
     $this->test_extract_dir = BootstrapExtension::$CACHE_DIR.'dedup_test/';
     $filesystem = new Filesystem();
@@ -90,7 +80,7 @@ class ProjectDeduplicationServiceTest extends TestCase
     // Expect hashFile called for each asset (3 times)
     $store->expects($this->exactly(3))
       ->method('hashFile')
-      ->willReturnCallback(fn (string $path) => hash('sha256', file_get_contents($path)))
+      ->willReturnCallback(fn (string $path) => hash('sha256', (string) file_get_contents($path)))
     ;
 
     // Expect store called for each new asset (3 times, all new)
@@ -208,7 +198,7 @@ class ProjectDeduplicationServiceTest extends TestCase
     // Only 1 asset file (images/sprite.png) should be hashed
     $store->expects($this->once())
       ->method('hashFile')
-      ->willReturnCallback(fn (string $path) => hash('sha256', file_get_contents($path)))
+      ->willReturnCallback(fn (string $path) => hash('sha256', (string) file_get_contents($path)))
     ;
 
     $store->expects($this->once())->method('store')->willReturn('ab/cd/hash');
@@ -269,7 +259,7 @@ class ProjectDeduplicationServiceTest extends TestCase
     // Expect 3 assets from nested scenes
     $store->expects($this->exactly(3))
       ->method('hashFile')
-      ->willReturnCallback(fn (string $path) => hash('sha256', file_get_contents($path)))
+      ->willReturnCallback(fn (string $path) => hash('sha256', (string) file_get_contents($path)))
     ;
 
     $store->expects($this->exactly(3))->method('store')->willReturn('ab/cd/hash');

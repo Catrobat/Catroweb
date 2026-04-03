@@ -26,7 +26,6 @@ class ProjectAssetTest extends TestCase
     $this->assertSame('image/png', $asset->getMimeType());
     $this->assertSame('ab/cd/'.$hash, $asset->getStoragePath());
     $this->assertSame(0, $asset->getReferenceCount());
-    $this->assertInstanceOf(\DateTimeImmutable::class, $asset->getCreatedAt());
   }
 
   #[Group('unit')]

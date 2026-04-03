@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\DB\Entity\Project;
 
 use App\DB\EntityRepository\Project\ProjectAssetRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,21 +22,17 @@ class ProjectAsset
   #[ORM\Column(type: Types::BIGINT)]
   private int $size;
 
-  #[ORM\Column(type: Types::STRING, length: 127)]
+  #[ORM\Column(name: 'mime_type', type: Types::STRING, length: 127)]
   private string $mimeType;
 
-  #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
+  #[ORM\Column(name: 'reference_count', type: Types::INTEGER, options: ['default' => 0])]
   private int $referenceCount = 0;
 
-  #[ORM\Column(type: Types::STRING, length: 255)]
+  #[ORM\Column(name: 'storage_path', type: Types::STRING, length: 255)]
   private string $storagePath;
 
-  #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
+  #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
   private \DateTimeImmutable $createdAt;
-
-  /** @var Collection<int, ProjectAssetMapping> */
-  #[ORM\OneToMany(targetEntity: ProjectAssetMapping::class, mappedBy: 'asset')]
-  private Collection $mappings;
 
   public function __construct(string $hash, int $size, string $mimeType, string $storagePath)
   {
@@ -47,7 +41,6 @@ class ProjectAsset
     $this->mimeType = $mimeType;
     $this->storagePath = $storagePath;
     $this->createdAt = new \DateTimeImmutable();
-    $this->mappings = new ArrayCollection();
   }
 
   public function getHash(): string

@@ -18,20 +18,20 @@ class ProjectAssetMapping
   #[ORM\Id]
   #[ORM\GeneratedValue]
   #[ORM\Column(type: Types::INTEGER)]
-  private ?int $id = null;
+  private ?int $id = null; /* @phpstan-ignore-line (Doctrine hydrates the int value) */
 
   #[ORM\ManyToOne(targetEntity: Program::class)]
   #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
   private Program $project;
 
-  #[ORM\ManyToOne(targetEntity: ProjectAsset::class, inversedBy: 'mappings')]
+  #[ORM\ManyToOne(targetEntity: ProjectAsset::class)]
   #[ORM\JoinColumn(name: 'asset_hash', referencedColumnName: 'hash', nullable: false)]
   private ProjectAsset $asset;
 
-  #[ORM\Column(type: Types::STRING, length: 255)]
+  #[ORM\Column(name: 'original_filename', type: Types::STRING, length: 255)]
   private string $originalFilename;
 
-  #[ORM\Column(type: Types::STRING, length: 512)]
+  #[ORM\Column(name: 'path_in_zip', type: Types::STRING, length: 512)]
   private string $pathInZip;
 
   public function __construct(Program $project, ProjectAsset $asset, string $originalFilename, string $pathInZip)

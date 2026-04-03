@@ -239,8 +239,9 @@ class ProjectZipReconstructorTest extends TestCase
   #[Group('unit')]
   public function testInvalidateCacheDoesNothingIfNoCache(): void
   {
+    $this->expectNotToPerformAssertions();
+
     // Should not throw
     $this->reconstructor->invalidateCache('no-cache-project');
-    $this->assertTrue(true);
   }
 }
