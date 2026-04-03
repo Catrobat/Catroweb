@@ -15,8 +15,8 @@ Feature: As a visitor I want to see the full remix graph inline on the program p
       | 5  | project 5 | abcef                   | Gangster | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
       | 6  | project 6 | abcef                   | Superman | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
       | 7  | project 7 | abcef                   | Superman | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | true  |
-      | 8  | project 8 | abcef                   | Gangster | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true       | false |
-      | 9  | project 9 | abcef                   | Superman | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
+      | 8  | project 8 | abcef                   | Gangster | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true       | false |
+      | 9  | project 9 | abcef                   | Superman | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | false      | false |
 
     #---------------------------------------------------------------------------------------------------------------
     # this is how the remix graph looks like according to the following forward remix relations (closure table):
