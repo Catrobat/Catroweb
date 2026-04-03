@@ -659,6 +659,85 @@ export const Project = function (
   document.addEventListener('DOMContentLoaded', initProjectLike)
 }
 
+// -------------------------- Sign App UI
+//
+
+document.addEventListener('click', function (e) {
+  const ellipsisContainer = document.getElementById('sign-app-ellipsis-container')
+  const ellipsis = document.getElementById('sign-app-ellipsis')
+
+  if (
+    ellipsisContainer &&
+    !(ellipsisContainer.contains(e.target) || ellipsis?.contains(e.target))
+  ) {
+    ellipsisContainer.style.display = 'none'
+  }
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('sign-app-ellipsis')?.addEventListener('click', function () {
+    document.getElementById('sign-app-ellipsis-container').style.display = 'block'
+  })
+
+  document.getElementById('toggle_ads')?.addEventListener('click', function () {
+    const adsInfo = document.getElementById('ads_info')
+    const showAdsChk = document.getElementById('show_ads_chk')
+
+    if (showAdsChk.checked) {
+      adsInfo.style.display = 'block'
+    } else {
+      adsInfo.style.display = 'none'
+    }
+  })
+
+  const keyStoreFile = document.getElementById('key_store_file')
+  const keyStoreFileText = document.getElementById('key_store_file_text')
+  const keyStoreIcon = document.getElementById('key_store_icon')
+  const keyStorePath = document.getElementById('key_store_path')
+  const keyStorePathText = document.getElementById('key_store_path_text')
+  const keyFilePathIcon = document.getElementById('key_file_path_icon')
+
+  keyStoreFile?.addEventListener('change', function () {
+    keyStoreFileText.value = keyStoreFile.value
+  })
+
+  keyStoreFileText?.addEventListener('click', function () {
+    keyStoreFile.click()
+    keyStoreFileText.blur()
+  })
+
+  keyStoreIcon?.addEventListener('click', function () {
+    keyStoreFile.click()
+  })
+
+  keyStorePath?.addEventListener('change', function () {
+    keyStorePathText.value = keyStorePath.value
+  })
+
+  keyFilePathIcon?.addEventListener('click', function () {
+    keyStorePath.click()
+  })
+
+  keyStorePathText?.addEventListener('click', function () {
+    keyStorePath.click()
+    keyStorePathText.blur()
+  })
+
+  document.getElementById('inc_years')?.addEventListener('click', function () {
+    const yearsField = document.getElementById('key_validity')
+    if (yearsField.value < 99) {
+      yearsField.value = parseInt(yearsField.value) + 1
+    }
+  })
+
+  document.getElementById('dec_years')?.addEventListener('click', function () {
+    const yearsField = document.getElementById('key_validity')
+    if (yearsField.value > 0) {
+      yearsField.value = parseInt(yearsField.value) - 1
+    }
+  })
+})
+
 // --------------------------------
 // Project settings (options menu toggles)
 
