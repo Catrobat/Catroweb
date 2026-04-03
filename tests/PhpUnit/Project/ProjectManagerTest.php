@@ -21,6 +21,7 @@ use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Event\ProjectBeforeInsertEvent;
 use App\Project\Event\ProjectBeforePersistEvent;
+use App\Project\ProjectDeduplicationService;
 use App\Project\ProjectManager;
 use App\Security\Malware\MalwareScanner;
 use App\Security\Malware\MalwareScanResult;
@@ -168,6 +169,7 @@ class ProjectManagerTest extends TestCase
       $url_helper,
       $security,
       $malware_scanner,
+      $this->createStub(ProjectDeduplicationService::class),
     );
   }
 

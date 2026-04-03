@@ -13,6 +13,7 @@ use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\CatrobatFile\ProjectZipReconstructor;
 use App\Project\CodeStatistics\CodeStatisticsService;
 use App\Project\ProjectManager;
 use App\Project\ProjectSearchService;
@@ -36,6 +37,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     protected ExtractedFileRepository $extracted_file_repository,
     protected LoggerInterface $logger,
     private readonly Security $security,
+    private readonly ProjectZipReconstructor $zip_reconstructor,
   ) {
   }
 
@@ -138,7 +140,12 @@ class ProjectsApiLoader extends AbstractApiLoader
   {
     try {
       if (!$this->file_repository->checkIfProjectZipFileExists($id)) {
-        $this->file_repository->zipProject($this->extracted_file_repository->getBaseDir($id), $id);
+        // Try reconstructing from content-addressable store first
+        $reconstructed = $this->zip_reconstructor->reconstruct($id);
+        if (null === $reconstructed) {
+          // Fall back to existing behavior: zip from extracted files
+          $this->file_repository->zipProject($this->extracted_file_repository->getBaseDir($id), $id);
+        }
       }
 
       $zipFile = $this->file_repository->getProjectZipFile($id);

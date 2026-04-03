@@ -115,6 +115,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.file.extract.path', 'resources/extract/');
   $parameters->set('catrobat.file.storage.dir', '%kernel.project_dir%/public/resources/programs/');
   $parameters->set('catrobat.file.storage.path', 'resources/programs/');
+  $parameters->set('catrobat.file.assets.dir', '%kernel.project_dir%/public/resources/assets/');
   $parameters->set('catrobat.logs.dir', '%kernel.project_dir%/var/log/');
   $parameters->set('catrobat.media.dir', '%catrobat.pubdir%resources/media/');
   $parameters->set('catrobat.media.path', 'resources/media/');
