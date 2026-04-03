@@ -88,7 +88,7 @@ class ProjectController extends AbstractController
       'download_url' => $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $projectId]),
       'age' => $this->elapsed_time->format($project->getUploadedAt()->getTimestamp()),
       'filesize_mb' => sprintf('%.2f', $project->getFilesize() / 1_048_576),
-      'total_downloads' => $project->getDownloads() + $project->getApkDownloads(),
+      'total_downloads' => $project->getDownloads(),
     ]);
   }
 
