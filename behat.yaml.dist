@@ -245,8 +245,6 @@ default:
 
         web-admin-2:
             paths:
-                - tests/BehatFeatures/web/admin/apk_generation_pending.feature
-                - tests/BehatFeatures/web/admin/apk_generation_ready.feature
                 - tests/BehatFeatures/web/admin/broadcast_notification.feature
                 - tests/BehatFeatures/web/admin/db_updater
                 - tests/BehatFeatures/web/admin/example_programs.feature
@@ -258,15 +256,6 @@ default:
                 - tests/BehatFeatures/web/admin/survey.feature
                 - tests/BehatFeatures/web/admin/upload_project.feature
                 - tests/BehatFeatures/web/admin/users_users.feature
-            contexts:
-                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
-                - App\System\Testing\Behat\Context\DataFixturesContext
-                - App\System\Testing\Behat\Context\CatrowebBrowserContext
-                - App\System\Testing\Behat\Context\ApiContext
-
-        web-apk-generation:
-            paths:
-                - tests/BehatFeatures/web/apk-generation
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext

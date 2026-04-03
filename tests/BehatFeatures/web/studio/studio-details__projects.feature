@@ -13,9 +13,9 @@ Feature: A studio has a project section
       | 1  | CatrobatStudio01 | hasADescription | true           | true      |
 
     And there are projects:
-      | id | name      | description    | owned by | apk_ready |
-      | 1  | project 1 | my description | StudioAdmin | true      |
-      | 2  | project 2 | my description | StudioAdmin | true      |
+      | id | name      | description    | owned by    |
+      | 1  | project 1 | my description | StudioAdmin |
+      | 2  | project 2 | my description | StudioAdmin |
 
     And there are studio users:
       | id | user          | studio_id | role   |

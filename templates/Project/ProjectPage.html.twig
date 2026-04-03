@@ -124,11 +124,6 @@
     <div class="d-none d-lg-block col-lg-4 mt-4 ">
       {% if not project.hasMissingFiles %}
         {{ include('Project/DownloadButton.html.twig') }}
-        {% if not isIOS() %}
-          <div class="mt-3">
-            {{ include('Project/ApkGenerationButtons.html.twig') }}
-          </div>
-        {% endif %}
       {% endif %}
       <div class="mt-3">
         {{ include('Project/SignAppButton.html.twig') }}
@@ -159,13 +154,6 @@
 
   {{ include('Project/Tags.html.twig') }}
 
-  {% if not isIOS() %}
-    <div class="row d-lg-none">
-      <div class="col-12 mt-3">
-        {{ include('Project/ApkGenerationButtons.html.twig', {suffix: '-small'}) }}
-      </div>
-    </div>
-  {% endif %}
   {% if isFeatureFlagEnabled('sign-apk') %}
      <div class="row d-lg-none">
       <div class="col-12 mt-3 mb-3">

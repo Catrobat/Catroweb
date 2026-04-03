@@ -214,36 +214,36 @@ docker exec app.catroweb bin/behat -f pretty -s web-admin "tests/BehatFeatures/w
 
 ### Common Suites
 
-| Suite               | Path / Description                                                    |
-| ------------------- | --------------------------------------------------------------------- |
-| api-achievements    | api/achievements                                                      |
-| api-authentication  | api/authentication                                                    |
-| api-comments        | api/comments                                                          |
-| api-followers       | api/followers                                                         |
-| api-media-library   | api/media-library                                                     |
-| api-moderation      | api/moderation                                                        |
-| api-notifications   | api/notifications                                                     |
-| api-projects        | api/projects                                                          |
-| api-projects-get    | api/projects GET\_\* dirs (split)                                     |
-| api-projects-write  | api/projects POST,DELETE,PUT,reactions (split)                        |
-| api-search          | api/search                                                            |
-| api-studio          | api/studio                                                            |
-| api-translation     | api/translation                                                       |
-| api-user            | api/user                                                              |
-| api-utility         | api/utility                                                           |
-| web-achievements    | web/achievements                                                      |
-| web-admin           | web/admin                                                             |
-| web-admin-1         | admin split: projects, featured, approve, login, moderation, maint.   |
-| web-admin-2         | admin split: apk, db_updater, example, flags, mail, media, survey etc |
-| web-general         | web/general                                                           |
-| web-notifications   | web/notifications                                                     |
-| web-profile         | web/profile                                                           |
-| web-profile-1       | profile split: edit, profile, image, data_export                      |
-| web-profile-2       | profile split: follow, user_projects, verification, suspended         |
-| web-project-details | web/project-details                                                   |
-| web-reactions       | web/reactions                                                         |
-| web-reports         | web/reports                                                           |
-| web-translation     | web/translation                                                       |
+| Suite               | Path / Description                                                  |
+| ------------------- | ------------------------------------------------------------------- |
+| api-achievements    | api/achievements                                                    |
+| api-authentication  | api/authentication                                                  |
+| api-comments        | api/comments                                                        |
+| api-followers       | api/followers                                                       |
+| api-media-library   | api/media-library                                                   |
+| api-moderation      | api/moderation                                                      |
+| api-notifications   | api/notifications                                                   |
+| api-projects        | api/projects                                                        |
+| api-projects-get    | api/projects GET\_\* dirs (split)                                   |
+| api-projects-write  | api/projects POST,DELETE,PUT,reactions (split)                      |
+| api-search          | api/search                                                          |
+| api-studio          | api/studio                                                          |
+| api-translation     | api/translation                                                     |
+| api-user            | api/user                                                            |
+| api-utility         | api/utility                                                         |
+| web-achievements    | web/achievements                                                    |
+| web-admin           | web/admin                                                           |
+| web-admin-1         | admin split: projects, featured, approve, login, moderation, maint. |
+| web-admin-2         | admin split: db_updater, example, flags, mail, media, survey etc    |
+| web-general         | web/general                                                         |
+| web-notifications   | web/notifications                                                   |
+| web-profile         | web/profile                                                         |
+| web-profile-1       | profile split: edit, profile, image, data_export                    |
+| web-profile-2       | profile split: follow, user_projects, verification, suspended       |
+| web-project-details | web/project-details                                                 |
+| web-reactions       | web/reactions                                                       |
+| web-reports         | web/reports                                                         |
+| web-translation     | web/translation                                                     |
 
 Suite config in `behat.yaml.dist`. Adding a new suite requires updating: `behat.yaml.dist`, `.github/workflows/tests.yaml` (matrix), and this table.
 

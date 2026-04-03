@@ -10,15 +10,12 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
-use App\Project\Apk\ApkRepository;
-use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class ProjectDataFixtures.
@@ -39,8 +36,8 @@ class ProjectDataFixtures
    * @throws \Exception
    */
   public function __construct(private readonly UserManager $user_manager, private readonly ProjectManager $project_manager,
-    private readonly EntityManagerInterface $entity_manager, private readonly ProjectFileRepository $project_file_repository,
-    private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly UserDataFixtures $user_data_fixtures,
     ParameterBagInterface $parameter_bag)
   {
     $fixtureDir = $parameter_bag->get('catrobat.test.directory.source');
@@ -82,16 +79,6 @@ class ProjectDataFixtures
     $project->setScratchId((isset($config['scratch_id']) && 0 !== (int) $config['scratch_id']) ? (int) $config['scratch_id'] : null);
     $project->setViews(isset($config['views']) ? (int) $config['views'] : 0);
     $project->setDownloads(isset($config['downloads']) ? (int) $config['downloads'] : 0);
-    $project->setApkDownloads(isset($config['apk_downloads']) ? (int) $config['apk_downloads'] : 0);
-    if (isset($config['apk_status']) && 'ready' === $config['apk_status']
-      || (isset($config['apk_ready']) && 'true' === $config['apk_ready'])) {
-      $project->setApkStatus(Program::APK_READY);
-    } elseif (isset($config['apk_status']) && 'pending' === $config['apk_status']) {
-      $project->setApkStatus(Program::APK_PENDING);
-    } else {
-      $project->setApkStatus(Program::APK_NONE);
-    }
-
     $project->setUploadedAt(
       isset($config['upload time']) ?
         new \DateTime($config['upload time'], new \DateTimeZone('UTC')) :
@@ -114,10 +101,6 @@ class ProjectDataFixtures
     $project->setNotForKids((int) ($config['not_for_kids'] ?? 0));
     $project->setAutoHidden(isset($config['auto_hidden']) && 'true' === $config['auto_hidden']);
 
-    if (isset($config['apk request time'])) {
-      $project->setApkRequestTime(new \DateTime($config['apk request time'], new \DateTimeZone('UTC')));
-    }
-
     $this->entity_manager->persist($project);
 
     if (!empty($config['tags'])) {
@@ -138,15 +121,6 @@ class ProjectDataFixtures
         $extension = $extension_repo->findOneBy(['internal_title' => $internal_title]);
         $project->addExtension($extension);
       }
-    }
-
-    if (Program::APK_READY === $project->getApkStatus()) {
-      $temp_path = tempnam(sys_get_temp_dir(), 'apktest');
-      copy($this->FIXTURE_DIR.'test.catrobat', $temp_path);
-      $this->apk_repository->save(new File($temp_path), $project->getId());
-      $this->project_file_repository->saveProjectZipFile(
-        new File($this->FIXTURE_DIR.'test.catrobat'), $project->getId()
-      );
     }
 
     if ($andFlush) {

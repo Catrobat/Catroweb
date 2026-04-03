@@ -25,8 +25,6 @@ class MaintenanceController extends CRUDController
     protected KernelInterface $kernel,
     #[Autowire('%catrobat.file.storage.dir%')]
     private readonly string $file_storage_dir,
-    #[Autowire('%catrobat.apk.dir%')]
-    private readonly string $apk_dir,
     #[Autowire('%catrobat.logs.dir%')]
     private readonly string $log_dir,
   ) {
@@ -111,33 +109,6 @@ class MaintenanceController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  /**
-   * @throws \Exception
-   */
-  public function apkAction(): RedirectResponse
-  {
-    if (!$this->admin->isGranted('APK')) {
-      throw new AccessDeniedException();
-    }
-
-    $application = new Application($this->kernel);
-    $application->setAutoExit(false);
-
-    $input = new ArrayInput([
-      'command' => 'catrobat:clean:apk',
-    ]);
-
-    $output = new NullOutput();
-
-    $return = $application->run($input, $output);
-
-    if (0 === $return) {
-      $this->addFlash('sonata_flash_success', 'Reset APK Projects OK');
-    }
-
-    return new RedirectResponse($this->admin->generateUrl('list'));
-  }
-
   #[\Override]
   public function listAction(Request $request): Response
   {
@@ -152,12 +123,6 @@ class MaintenanceController extends CRUDController
     $this->setSizeOfObject($rm, $this->file_storage_dir);
     $rm->setCommandName('Delete compressed files');
     $rm->setCommandLink($this->admin->generateUrl('compressed'));
-    $RemovableObjects[] = $rm;
-    $description = "This will remove all generated apk-files in the 'apk'-directory and flag the projects accordingly";
-    $rm = new RemovableMemory('Generated APKs', $description);
-    $this->setSizeOfObject($rm, $this->apk_dir, ['apk']);
-    $rm->setCommandName('Delete APKs');
-    $rm->setCommandLink($this->admin->generateUrl('apk'));
     $RemovableObjects[] = $rm;
     $description = 'This will remove all log files.';
     $rm = new RemovableMemory('Logs', $description);

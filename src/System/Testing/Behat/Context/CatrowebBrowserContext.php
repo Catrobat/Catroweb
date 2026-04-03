@@ -10,10 +10,6 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
-use App\Project\Apk\ApkRepository;
-use App\Project\Apk\JenkinsDispatcher;
-use App\System\Testing\FakeJenkinsDispatcher;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
@@ -21,8 +17,6 @@ use Behat\Mink\Exception\ResponseTextException;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -1017,140 +1011,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^the token to upload an apk file is "([^"]*)"$/
-   */
-  public function theTokenToUploadAnApkFileIs(): void
-  {
-    // Defined in config_test.yaml
-  }
-
-  /**
-   * @Given /^the jenkins job id is "([^"]*)"$/
-   */
-  public function theJenkinsJobIdIs(): void
-  {
-    // Defined in config_test.yaml
-  }
-
-  /**
-   * @Given /^the jenkins token is "([^"]*)"$/
-   */
-  public function theJenkinsTokenIs(): void
-  {
-    // Defined in config_test.yaml
-  }
-
-  /**
-   * @Then /^following parameters are sent to jenkins:$/
-   *
-   * @throws \Exception
-   */
-  public function followingParametersAreSentToJenkins(TableNode $table): void
-  {
-    $parameter_defs = $table->getHash();
-    $expected_parameters = [];
-    foreach ($parameter_defs as $parameter_def) {
-      $expected_parameters[$parameter_def['parameter']] = $parameter_def['value'];
-    }
-
-    $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
-    \assert($dispatcher instanceof FakeJenkinsDispatcher);
-    $parameters = $dispatcher->getLastParameters();
-
-    foreach ($expected_parameters as $i => $expected_parameter) {
-      Assert::assertMatchesRegularExpression(
-        $expected_parameter,
-        $parameters[$i]
-      );
-    }
-  }
-
-  /**
-   * @Then /^the project apk status will.* be flagged "([^"]*)"$/
-   */
-  public function theProjectApkStatusWillBeFlagged(string $arg1): void
-  {
-    $pm = $this->getProjectManager();
-    $project = $pm->find('1');
-    match ($arg1) {
-      'pending' => Assert::assertEquals(Program::APK_PENDING, $project->getApkStatus()),
-      'ready' => Assert::assertEquals(Program::APK_READY, $project->getApkStatus()),
-      'none' => Assert::assertEquals(Program::APK_NONE, $project->getApkStatus()),
-      default => throw new PendingException('Unknown state: '.$arg1),
-    };
-  }
-
-  /**
-   * @Given /^I requested jenkins to build it$/
-   */
-  public function iRequestedJenkinsToBuildIt(): void
-  {
-  }
-
-  /**
-   * @Then /^it will be stored on the server$/
-   */
-  public function itWillBeStoredOnTheServer(): void
-  {
-    $directory = $this->getSymfonyParameterAsString('catrobat.apk.dir');
-    $finder = new Finder();
-    $finder->in($directory)->depth(0);
-    Assert::assertEquals(1, $finder->count());
-  }
-
-  /**
-   * @Given /^the project apk status is flagged "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function theProjectApkStatusIsFlagged(string $arg1): void
-  {
-    $pm = $this->getProjectManager();
-    $project = $pm->find('1');
-    switch ($arg1) {
-      case 'pending':
-        $project->setApkStatus(Program::APK_PENDING);
-        break;
-      case 'ready':
-        $project->setApkStatus(Program::APK_READY);
-        $apk_repository = $this->getSymfonyService(ApkRepository::class);
-        if (!$apk_repository instanceof ApkRepository) {
-          throw new \LogicException('ApkRepository service not found');
-        }
-        $apk_repository->save(new File(strval($this->getTempCopy($this->FIXTURES_DIR.'/test.catrobat'))), $project->getId());
-        break;
-      default:
-        $project->setApkStatus(Program::APK_NONE);
-    }
-
-    $pm->save($project);
-  }
-
-  /**
-   * @Then /^no build request will be sent to jenkins$/
-   *
-   * @throws \Exception
-   */
-  public function noBuildRequestWillBeSentToJenkins(): void
-  {
-    $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
-    \assert($dispatcher instanceof FakeJenkinsDispatcher);
-    $parameters = $dispatcher->getLastParameters();
-    Assert::assertNull($parameters);
-  }
-
-  /**
-   * @Then /^the apk file will be deleted$/
-   */
-  public function theApkFileWillBeDeleted(): void
-  {
-    $directory = $this->getSymfonyParameter('catrobat.apk.dir');
-    $finder = new Finder();
-    $finder->in($directory)->depth(0);
-    Assert::assertEquals(0, $finder->count());
-  }
-
-  /**
    * @Then /^I should see the reported table:$/
    *
    * @throws ResponseTextException
@@ -1246,22 +1106,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the ready apks table:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function seeReadyApksTable(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat) {
-      $this->assertSession()->pageTextContains($user_stat['Id']);
-      $this->assertSession()->pageTextContains($user_stat['User']);
-      $this->assertSession()->pageTextContains($user_stat['Name']);
-      $this->assertSession()->pageTextContains($user_stat['Apk Request Time']);
-    }
-  }
-
-  /**
    * @Then /^I should see the ready maintenance information table:$/
    *
    * @throws ResponseTextException
@@ -1278,23 +1122,6 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['Additional Information']);
       $this->assertSession()->pageTextContains($user_stat['Icon']);
       $this->assertSession()->pageTextContains($user_stat['Actions']);
-    }
-  }
-
-  /**
-   * @Then /^I should see the pending apk table:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function seePendingApkTable(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat) {
-      $this->assertSession()->pageTextContains($user_stat['Id']);
-      $this->assertSession()->pageTextContains($user_stat['User']);
-      $this->assertSession()->pageTextContains($user_stat['Name']);
-      $this->assertSession()->pageTextContains($user_stat['Apk Request Time']);
-      $this->assertSession()->pageTextContains($user_stat['Apk Status']);
     }
   }
 
@@ -1448,24 +1275,6 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['Downloads']);
       $this->assertSession()->pageTextContains($user_stat['Active']);
     }
-  }
-
-  /**
-   * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the APK-folder$/
-   */
-  public function thereIsAFileWithSizeBytesInTheApkFolder(string $filename, string $size): void
-  {
-    $this->generateFileInPath($this->getSymfonyParameter('catrobat.apk.dir'), $filename, $size);
-  }
-
-  /**
-   * @Then /^project with id "([^"]*)" should have no apk$/
-   */
-  public function projectWithIdShouldHaveNoApk(string $project_id): void
-  {
-    $project_manager = $this->getProjectManager();
-    $project = $project_manager->find($project_id);
-    Assert::assertEquals(Program::APK_NONE, $project->getApkStatus());
   }
 
   /**

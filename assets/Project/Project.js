@@ -10,17 +10,12 @@ export const Project = function (
   projectName,
   userRole,
   myProgram,
-  statusUrl,
-  createUrl,
   loginUrl,
   apiReactionUrl,
   apiReactionsUrl,
   apiReactionsUsersUrl,
-  apkPreparing,
-  apkText,
   updateAppHeader,
   updateAppText,
-  btnClosePopup,
   likeActionAdd,
   likeActionRemove,
   profileUrl,
@@ -30,7 +25,6 @@ export const Project = function (
   downloadErrorText,
 ) {
   createLinks()
-  // getApkStatus() - APKs are disabled
 
   // -------------------------- FileHelper
 
@@ -90,22 +84,6 @@ export const Project = function (
       const deepLink =
         window.location.origin + window.location.pathname.replace(/\/+$/, '') + '?download'
       window.location.href = deepLink
-    })
-  })
-
-  document.querySelectorAll('.js-btn-project-apk-download').forEach((button) => {
-    button.addEventListener('click', (e) => {
-      const btn = e.currentTarget
-      downloadWithProgress(
-        btn.dataset.pathUrl,
-        `${btn.dataset.projectId}.apk`,
-        btn.dataset.projectId,
-        btn.dataset.suffix || '',
-        btn.dataset.isWebview === 'true',
-        btn.dataset.isSupported === 'true',
-        btn.dataset.isNotSupportedTitle,
-        btn.dataset.isNotSupportedText,
-      )
     })
   })
 
@@ -255,105 +233,6 @@ export const Project = function (
       buttonsStyling: false,
       allowOutsideClick: false,
     }).then()
-  }
-
-  // -------------------------- APK Logic
-  // Refactoring would be nice!
-  //
-
-  function getApkStatus() {
-    fetch(statusUrl)
-      .then((response) => response.json())
-      .then(onResult)
-  }
-
-  function createApk() {
-    document.getElementById('apk-generate').classList.add('d-none')
-    document.getElementById('apk-generate-small').classList.add('d-none')
-    document.getElementById('apk-pending').classList.remove('d-none')
-    document.getElementById('apk-pending-small').classList.remove('d-none')
-    fetch(createUrl)
-      .then((response) => response.json())
-      .then(onResult)
-    showPreparingApkPopup()
-  }
-
-  function onResult(data) {
-    const apkPending = document.querySelectorAll('#apk-pending, #apk-pending-small')
-    const apkDownload = document.querySelectorAll(
-      '#projectApkDownloadButton, #projectApkDownloadButton-small',
-    )
-    const apkGenerate = document.querySelectorAll('#apk-generate, #apk-generate-small')
-    apkGenerate.forEach((el) => el.classList.add('d-none'))
-    apkDownload.forEach((el) => el.classList.add('d-none'))
-    apkPending.forEach((el) => el.classList.add('d-none'))
-
-    if (data && data.status === 'ready') {
-      apkDownload.forEach((el) => el.classList.remove('d-none'))
-    } else if (data && data.status === 'pending') {
-      apkPending.forEach((el) => el.classList.remove('d-none'))
-      setTimeout(getApkStatus, 5000)
-    } else if (data && data.status === 'none') {
-      apkGenerate.forEach((el) => el.classList.remove('d-none'))
-      apkGenerate.forEach((el) => el.addEventListener('click', createApk))
-    } else {
-      apkGenerate.forEach((el) => el.classList.remove('d-none'))
-    }
-
-    const bgDarkPopupInfo = document.querySelectorAll('#bg-dark, #popup-info')
-    if (bgDarkPopupInfo.length > 0) {
-      bgDarkPopupInfo.forEach((el) => el.classList.add('d-none'))
-    }
-  }
-
-  function showPreparingApkPopup() {
-    const popupBackground = createPopupBackgroundDiv()
-    const popupDiv = createPopupDiv()
-    const body = document.body
-    const apkSpinner = document.getElementById('apk-pb')
-    apkSpinner.classList.remove('d-none')
-
-    const h2 = document.createElement('h2')
-    h2.textContent = apkPreparing
-    popupDiv.appendChild(h2)
-    popupDiv.appendChild(document.createElement('br'))
-    popupDiv.appendChild(apkSpinner)
-
-    const p = document.createElement('p')
-    p.textContent = apkText
-    popupDiv.appendChild(p)
-
-    const closePopupButton = document.createElement('button')
-    closePopupButton.id = 'btn-close-popup'
-    closePopupButton.className = 'btn btn-primary btn-close-popup'
-    closePopupButton.textContent = btnClosePopup
-    popupDiv.appendChild(closePopupButton)
-
-    body.appendChild(popupBackground)
-    body.appendChild(popupDiv)
-
-    popupBackground.addEventListener('click', closePopup)
-    closePopupButton.addEventListener('click', closePopup)
-
-    function closePopup() {
-      apkSpinner.classList.add('d-none')
-      popupDiv.remove()
-      popupBackground.remove()
-    }
-  }
-
-  function createPopupDiv() {
-    const div = document.createElement('div')
-    div.id = 'popup-info'
-    div.className = 'popup-div'
-    return div
-  }
-
-  function createPopupBackgroundDiv() {
-    const div = document.createElement('div')
-    div.id = 'popup-background'
-    div.className = 'popup-bg'
-    return div
   }
 
   // -------------------------- Project Likes / Reactions
@@ -779,86 +658,6 @@ export const Project = function (
 
   document.addEventListener('DOMContentLoaded', initProjectLike)
 }
-
-// -------------------------- APK Logic
-// Implementation not finished
-//
-
-document.addEventListener('click', function (e) {
-  const ellipsisContainer = document.getElementById('sign-app-ellipsis-container')
-  const ellipsis = document.getElementById('sign-app-ellipsis')
-
-  if (
-    ellipsisContainer &&
-    !(ellipsisContainer.contains(e.target) || ellipsis?.contains(e.target))
-  ) {
-    ellipsisContainer.style.display = 'none'
-  }
-})
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('sign-app-ellipsis')?.addEventListener('click', function () {
-    document.getElementById('sign-app-ellipsis-container').style.display = 'block'
-  })
-
-  document.getElementById('toggle_ads')?.addEventListener('click', function () {
-    const adsInfo = document.getElementById('ads_info')
-    const showAdsChk = document.getElementById('show_ads_chk')
-
-    if (showAdsChk.checked) {
-      adsInfo.style.display = 'block'
-    } else {
-      adsInfo.style.display = 'none'
-    }
-  })
-
-  const keyStoreFile = document.getElementById('key_store_file')
-  const keyStoreFileText = document.getElementById('key_store_file_text')
-  const keyStoreIcon = document.getElementById('key_store_icon')
-  const keyStorePath = document.getElementById('key_store_path')
-  const keyStorePathText = document.getElementById('key_store_path_text')
-  const keyFilePathIcon = document.getElementById('key_file_path_icon')
-
-  keyStoreFile?.addEventListener('change', function () {
-    keyStoreFileText.value = keyStoreFile.value
-  })
-
-  keyStoreFileText?.addEventListener('click', function () {
-    keyStoreFile.click()
-    keyStoreFileText.blur()
-  })
-
-  keyStoreIcon?.addEventListener('click', function () {
-    keyStoreFile.click()
-  })
-
-  keyStorePath?.addEventListener('change', function () {
-    keyStorePathText.value = keyStorePath.value
-  })
-
-  keyFilePathIcon?.addEventListener('click', function () {
-    keyStorePath.click()
-  })
-
-  keyStorePathText?.addEventListener('click', function () {
-    keyStorePath.click()
-    keyStorePathText.blur()
-  })
-
-  document.getElementById('inc_years')?.addEventListener('click', function () {
-    const yearsField = document.getElementById('key_validity')
-    if (yearsField.value < 99) {
-      yearsField.value = parseInt(yearsField.value) + 1
-    }
-  })
-
-  document.getElementById('dec_years')?.addEventListener('click', function () {
-    const yearsField = document.getElementById('key_validity')
-    if (yearsField.value > 0) {
-      yearsField.value = parseInt(yearsField.value) - 1
-    }
-  })
-})
 
 // --------------------------------
 // Project settings (options menu toggles)
