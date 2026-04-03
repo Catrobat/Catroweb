@@ -20,6 +20,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
       | Add perfect_profile UserAchievements                         | idle  | 1 week        |          |        | 0           |
       | Add silver_user UserAchievements                             | idle  | 1 week        |          |        | 0           |
       | Add verified_developer UserAchievements                      | idle  | 1 year        |          |        | 0           |
+      | Clean old extracted project files                            | idle  | 1 day         |          |        | 0           |
       | Delete old entries in machine translation table              | idle  | 1 month       |          |        | 0           |
       | Remove and add new projects to the random projects' category | idle  | 1 week        |          |        | 0           |
       | Retroactively unlock custom translation achievements         | idle  | 1 month       |          |        | 0           |
@@ -36,7 +37,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     Then I should see "Cron jobs finished successfully"
     When I am on "/admin/system/cron-job/list"
     And I wait for the page to be loaded
-    And there should be "11" cron jobs in the database
+    And there should be "12" cron jobs in the database
 
   Scenario: Cron jobs can be reset
     Given I log in as "Admin"

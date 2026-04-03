@@ -9,6 +9,8 @@ use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 
 class ExtractedFileRepository
 {
@@ -16,11 +18,14 @@ class ExtractedFileRepository
 
   private readonly string $web_path;
 
+  private readonly string $storage_path;
+
   /**
    * @throws \Exception
    */
   public function __construct(ParameterBagInterface $parameter_bag,
     private readonly ProjectManager $project_manager,
+    private readonly CatrobatFileExtractor $file_extractor,
     private readonly LoggerInterface $logger)
   {
     /** @var string $local_extracted_path */
@@ -35,6 +40,7 @@ class ExtractedFileRepository
 
     $this->local_path = $local_extracted_path;
     $this->web_path = $web_extracted_path;
+    $this->storage_path = $local_storage_path;
   }
 
   public function getBaseDir(string $id): string
@@ -50,7 +56,13 @@ class ExtractedFileRepository
         return null;
       }
 
-      return new ExtractedCatrobatFile($this->getBaseDir($project_id), $this->web_path.$project_id.'/', $project_id);
+      $base_dir = $this->getBaseDir($project_id);
+
+      if (!is_dir($base_dir)) {
+        $this->reExtractProject($project_id);
+      }
+
+      return new ExtractedCatrobatFile($base_dir, $this->web_path.$project_id.'/', $project_id);
     } catch (InvalidCatrobatFileException) {
       return null;
     }
@@ -84,6 +96,35 @@ class ExtractedFileRepository
     $file_overwritten = $extracted_file->getProjectXmlProperties()->asXML($extracted_file->getPath().'code.xml');
     if (!$file_overwritten) {
       throw new \Exception("Can't overwrite code.xml file");
+    }
+  }
+
+  /**
+   * Re-extracts a project from its .catrobat zip file into the extract directory.
+   */
+  private function reExtractProject(string $project_id): void
+  {
+    $zip_path = $this->storage_path.$project_id.'.catrobat';
+
+    if (!file_exists($zip_path)) {
+      $this->logger->warning('Cannot re-extract project '.$project_id.': zip file not found at '.$zip_path);
+
+      return;
+    }
+
+    try {
+      $extracted = $this->file_extractor->extract(new File($zip_path));
+
+      $target_dir = $this->local_path.$project_id;
+      $filesystem = new Filesystem();
+
+      if (is_dir($target_dir)) {
+        $filesystem->remove($target_dir);
+      }
+
+      $filesystem->rename($extracted->getPath(), $target_dir);
+    } catch (\Exception $e) {
+      $this->logger->error('Failed to re-extract project '.$project_id.': '.$e->getMessage());
     }
   }
 }
