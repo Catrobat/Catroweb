@@ -27,6 +27,11 @@ export function ProjectComments(
   const commentsWrapper = document.querySelector('#comments-wrapper')
   const commentsListUrl = projectComments?.dataset.pathCommentsListUrl
   const commentsBaseUrl = projectComments?.dataset.pathCommentsBaseUrl
+  const commentDetailUrlTemplate = projectComments?.dataset.commentDetailUrlTemplate
+  const profileUrlTemplate = projectComments?.dataset.profileUrlTemplate
+  const translateCommentUrlTemplate = projectComments?.dataset.translateCommentUrlTemplate
+  const currentUserId = projectComments?.dataset.currentUserId ?? ''
+  const isAdmin = projectComments?.dataset.isAdmin === 'true'
   const parentCommentContainer = document.querySelector('.js-project-parentComment')
   const repliesParentId = parentCommentContainer?.dataset.parentCommentId
   const isRepliesPage = Boolean(parentCommentContainer && repliesParentId)
@@ -34,8 +39,8 @@ export function ProjectComments(
 
   const commentUploadDates = document.getElementsByClassName('comment-upload-date')
   for (const element of commentUploadDates) {
-    const commentUploadDate = new Date(element.innerHTML)
-    element.innerHTML = commentUploadDate.toLocaleString('en-GB')
+    const commentUploadDate = new Date(element.textContent || '')
+    element.textContent = commentUploadDate.toLocaleString('en-GB')
   }
 
   loadMoreComments()
@@ -304,13 +309,12 @@ export function ProjectComments(
         }
       })
       .then((data) => {
-        if (!data || !data.rendered) return
+        if (!data) return
 
         const commentsWrapper = document.querySelector('#comments-wrapper')
         if (commentsWrapper) {
-          const tempDiv = document.createElement('div')
-          tempDiv.innerHTML = data.rendered
-          const newComment = tempDiv.firstChild
+          const newComment = createCommentElement(data, parentCommentId > 0)
+          if (!newComment) return
 
           if (parentCommentId > 0) {
             commentsWrapper.appendChild(newComment)
@@ -328,8 +332,7 @@ export function ProjectComments(
           // Format date for the new comment
           const uploadDateElement = newComment.querySelector('.comment-upload-date')
           if (uploadDateElement) {
-            const commentUploadDate = new Date(uploadDateElement.innerHTML)
-            uploadDateElement.innerHTML = commentUploadDate.toLocaleString('en-GB')
+            uploadDateElement.textContent = formatCommentDate(data.created_at)
           }
         }
 
@@ -375,8 +378,7 @@ export function ProjectComments(
       .then((data) => {
         const comments = data?.data || []
         comments.forEach((comment) => {
-          if (!comment?.rendered) return
-          appendRenderedComment(comment.rendered)
+          appendRenderedComment(comment, isRepliesPage || comment?.parent_id > 0)
         })
 
         nextCursor = data?.next_cursor || null
@@ -390,12 +392,322 @@ export function ProjectComments(
       })
   }
 
-  function appendRenderedComment(rendered) {
-    const tempDiv = document.createElement('div')
-    tempDiv.innerHTML = rendered
-    const newComment = tempDiv.firstChild
+  function appendRenderedComment(comment, isReply) {
+    const newComment = createCommentElement(comment, isReply)
     if (!newComment) return
     commentsWrapper.appendChild(newComment)
+  }
+
+  function createCommentElement(comment, isReply) {
+    if (!comment?.id || !comment?.user) return null
+
+    const commentElement = document.createElement('div')
+    commentElement.id = `comment-${comment.id}`
+    commentElement.dataset.commentId = String(comment.id)
+    commentElement.className = isReply ? 'single-reply' : 'single-comment'
+
+    const commentDetailUrl = buildCommentDetailUrl(comment.id)
+    if (commentDetailUrl) {
+      commentElement.dataset.pathProjectComment = commentDetailUrl
+    }
+
+    const commentAvatar = document.createElement('div')
+    commentAvatar.className = 'comment-avatar'
+
+    const avatarLink = document.createElement('a')
+    avatarLink.href = buildProfileUrl(comment.user.id)
+
+    const avatarImage = document.createElement('img')
+    avatarImage.className = 'comment-avatar-img'
+    avatarImage.src = comment.user.avatar || '/images/default/avatar_default.png'
+    avatarImage.alt = 'Avatar'
+    avatarLink.appendChild(avatarImage)
+    commentAvatar.appendChild(avatarLink)
+
+    const payloadWrapper = document.createElement('div')
+    payloadWrapper.className = 'comment-payload-wrapper'
+
+    const commentHeader = document.createElement('div')
+    commentHeader.className = 'comment-header'
+
+    const userInfo = document.createElement('div')
+    userInfo.className = 'comment-user-info'
+
+    const userLink = document.createElement('a')
+    userLink.href = buildProfileUrl(comment.user.id)
+    userLink.className = 'usr-name no-overflow'
+
+    const userName = document.createElement('span')
+    userName.id = `profile-comment-user-id-${comment.user.id}`
+    userName.textContent = comment.user.username || ''
+    userLink.appendChild(userName)
+
+    const commentMeta = document.createElement('div')
+    commentMeta.className = 'comment-meta'
+
+    const commentIcon = document.createElement('i')
+    commentIcon.className = 'material-icons'
+    commentIcon.textContent = 'access_time_filled'
+
+    const uploadDate = document.createElement('span')
+    uploadDate.className = 'comment-upload-date'
+    uploadDate.textContent = formatCommentDate(comment.created_at)
+
+    commentMeta.appendChild(commentIcon)
+    commentMeta.appendChild(uploadDate)
+    userInfo.appendChild(userLink)
+    userInfo.appendChild(commentMeta)
+
+    const commentActions = document.createElement('div')
+    commentActions.className = 'comment-actions d-flex align-items-center gap-2'
+
+    const replyAction = document.createElement('div')
+    replyAction.className = 'comment-reply-action'
+
+    const replyButton = document.createElement('span')
+    replyButton.className = 'comment-reply-button catro-icon-button'
+    replyButton.dataset.bsToggle = 'tooltip'
+    replyButton.title = projectComments?.dataset.transReply || 'Reply'
+
+    const replyIcon = document.createElement('i')
+    replyIcon.className = 'material-icons'
+    replyIcon.textContent = 'reply'
+    replyButton.appendChild(replyIcon)
+    replyAction.appendChild(replyButton)
+    commentActions.appendChild(replyAction)
+
+    if (comment.reply_count !== undefined && comment.reply_count !== null) {
+      const repliesCountWrapper = document.createElement('div')
+      repliesCountWrapper.className = 'comment-replies-count'
+
+      const repliesIcon = document.createElement('i')
+      repliesIcon.className = 'material-icons'
+      repliesIcon.textContent = 'comment'
+
+      const repliesCount = document.createElement('span')
+      repliesCount.textContent = String(comment.reply_count)
+
+      repliesCountWrapper.appendChild(repliesIcon)
+      repliesCountWrapper.appendChild(repliesCount)
+      commentActions.appendChild(repliesCountWrapper)
+    }
+
+    const isOwnComment = String(comment.user.id) === String(currentUserId)
+    const isDeleted = Boolean(comment.is_deleted)
+
+    if (!isDeleted && !isOwnComment) {
+      const translationActions = document.createElement('div')
+      translationActions.className = 'comment-translation-actions'
+
+      const translationButton = document.createElement('span')
+      translationButton.id = `comment-translation-button-${comment.id}`
+      translationButton.className = 'comment-translation-button catro-icon-button'
+      translationButton.dataset.bsToggle = 'tooltip'
+      translationButton.title = projectComments?.dataset.transShowTranslation || 'Show translation'
+
+      const translationIcon = document.createElement('i')
+      translationIcon.className = 'material-icons'
+      translationIcon.textContent = 'translate'
+      translationButton.appendChild(translationIcon)
+
+      const loadingSpinner = createLoadingSpinner(`comment-translation-loading-spinner-${comment.id}`)
+
+      const removeTranslationButton = document.createElement('span')
+      removeTranslationButton.id = `remove-comment-translation-button-${comment.id}`
+      removeTranslationButton.className = 'remove-comment-translation-button catro-icon-button'
+      removeTranslationButton.dataset.bsToggle = 'tooltip'
+      removeTranslationButton.title = projectComments?.dataset.transHideTranslation || 'Hide translation'
+      removeTranslationButton.style.display = 'none'
+
+      const removeTranslationIcon = document.createElement('i')
+      removeTranslationIcon.className = 'material-icons'
+      removeTranslationIcon.textContent = 'close'
+      removeTranslationButton.appendChild(removeTranslationIcon)
+
+      translationActions.appendChild(translationButton)
+      translationActions.appendChild(loadingSpinner)
+      translationActions.appendChild(removeTranslationButton)
+      commentActions.appendChild(translationActions)
+    }
+
+    if (!isDeleted && (isAdmin || !isOwnComment || !isLoggedIn)) {
+      const reportButton = document.createElement('a')
+      reportButton.id = `comment-report-button-${comment.id}`
+      reportButton.className = 'comment-report-button'
+      reportButton.dataset.contentType = 'comment'
+      reportButton.dataset.contentId = String(comment.id)
+      reportButton.dataset.reportUrl = `/api/comments/${comment.id}/report`
+      reportButton.dataset.bsToggle = 'tooltip'
+      reportButton.title = projectComments?.dataset.transReport || 'Report'
+
+      const reportIcon = document.createElement('i')
+      reportIcon.className = 'material-icons'
+      reportIcon.textContent = 'report'
+      reportButton.appendChild(reportIcon)
+      commentActions.appendChild(reportButton)
+    }
+
+    if (!isDeleted && (isAdmin || isOwnComment)) {
+      const deleteButton = document.createElement('a')
+      deleteButton.id = `comment-delete-button-${comment.id}`
+      deleteButton.className = 'comment-delete-button'
+      deleteButton.dataset.bsToggle = 'tooltip'
+      deleteButton.title = projectComments?.dataset.transDeleteComment || 'Delete'
+
+      const deleteIcon = document.createElement('i')
+      deleteIcon.className = 'material-icons text-danger'
+      deleteIcon.textContent = 'delete'
+      deleteButton.appendChild(deleteIcon)
+      commentActions.appendChild(deleteButton)
+    }
+
+    commentHeader.appendChild(userInfo)
+    commentHeader.appendChild(commentActions)
+
+    const commentTextWrapper = document.createElement('div')
+    commentTextWrapper.id = `comment-text-wrapper-${comment.id}`
+    commentTextWrapper.className = 'comment-text'
+
+    if (isDeleted) {
+      const deletedParagraph = document.createElement('p')
+      const deletedLabel = document.createElement('span')
+      deletedLabel.className = 'deleted-comment'
+      deletedLabel.textContent = projectComments?.dataset.transDeletedComment || 'Deleted'
+      deletedParagraph.appendChild(deletedLabel)
+      commentTextWrapper.appendChild(deletedParagraph)
+    } else {
+      const commentParagraph = document.createElement('p')
+      commentParagraph.id = `comment-text-${comment.id}`
+      commentParagraph.textContent = comment.message || ''
+      commentTextWrapper.appendChild(commentParagraph)
+    }
+
+    const translationContainer = document.createElement('div')
+    translationContainer.className = 'comment-translation-container'
+
+    if (!isDeleted && (!isOwnComment || !isLoggedIn)) {
+      const translationPlaceholder = document.createElement('div')
+      translationPlaceholder.className = 'comment-translation'
+      translationPlaceholder.dataset.translateCommentId = `translate-comment-${comment.id}`
+      const translateCommentUrl = buildTranslateCommentUrl(comment.id)
+      if (translateCommentUrl) {
+        translationPlaceholder.dataset.pathTranslateComment = translateCommentUrl
+      }
+      translationContainer.appendChild(translationPlaceholder)
+    }
+
+    const translationWrapper = document.createElement('div')
+    translationWrapper.id = `comment-translation-wrapper-${comment.id}`
+    translationWrapper.className = 'comment-translation-wrapper'
+    translationWrapper.style.display = 'none'
+
+    const creditWrapper = document.createElement('div')
+    creditWrapper.id = `comment-translation-credit-wrapper-${comment.id}`
+    creditWrapper.className = 'translation-credit-wrapper'
+
+    const beforeLanguages = document.createElement('span')
+    beforeLanguages.id = `comment-translation-before-languages-${comment.id}`
+    beforeLanguages.className = 'translation-credit'
+
+    const firstLanguage = document.createElement('span')
+    firstLanguage.id = `comment-translation-first-language-${comment.id}`
+    firstLanguage.className = 'translation-credit'
+
+    const betweenLanguages = document.createElement('span')
+    betweenLanguages.id = `comment-translation-between-languages-${comment.id}`
+    betweenLanguages.className = 'translation-credit'
+
+    const secondLanguage = document.createElement('span')
+    secondLanguage.id = `comment-translation-second-language-${comment.id}`
+    secondLanguage.className = 'translation-credit'
+
+    const afterLanguages = document.createElement('span')
+    afterLanguages.id = `comment-translation-after-languages-${comment.id}`
+    afterLanguages.className = 'translation-credit'
+
+    creditWrapper.appendChild(beforeLanguages)
+    creditWrapper.appendChild(firstLanguage)
+    creditWrapper.appendChild(betweenLanguages)
+    creditWrapper.appendChild(secondLanguage)
+    creditWrapper.appendChild(afterLanguages)
+
+    const translatedParagraph = document.createElement('p')
+    translatedParagraph.id = `comment-text-translation-${comment.id}`
+    translatedParagraph.className = 'comment-text-translation'
+    translatedParagraph.lang = ''
+
+    translationWrapper.appendChild(creditWrapper)
+    translationWrapper.appendChild(translatedParagraph)
+    translationContainer.appendChild(translationWrapper)
+
+    payloadWrapper.appendChild(commentHeader)
+    payloadWrapper.appendChild(commentTextWrapper)
+    payloadWrapper.appendChild(translationContainer)
+
+    commentElement.appendChild(commentAvatar)
+    commentElement.appendChild(payloadWrapper)
+
+    return commentElement
+  }
+
+  function createLoadingSpinner(spinnerId) {
+    const spinnerWrapper = document.createElement('span')
+    spinnerWrapper.className = 'comment-translation-loading-spinner'
+    spinnerWrapper.id = spinnerId
+    spinnerWrapper.style.display = 'none'
+
+    spinnerWrapper.innerHTML = `
+      <div class="circular-progress">
+        <div class="mdc-circular-progress mdc-circular-progress--indeterminate" style="width:24px;height:24px;" role="progressbar" aria-label="Circular Progress Bar" aria-valuemin="0" aria-valuemax="1">
+          <div class="mdc-circular-progress__indeterminate-container">
+            <div class="mdc-circular-progress__spinner-layer">
+              <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">
+                <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="8.75" stroke-dasharray="54.978" stroke-dashoffset="27.489" stroke-width="2.5"></circle>
+                </svg>
+              </div>
+              <div class="mdc-circular-progress__gap-patch">
+                <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="8.75" stroke-dasharray="54.978" stroke-dashoffset="27.489" stroke-width="2"></circle>
+                </svg>
+              </div>
+              <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">
+                <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="8.75" stroke-dasharray="54.978" stroke-dashoffset="27.489" stroke-width="2.5"></circle>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+
+    return spinnerWrapper
+  }
+
+  function buildCommentDetailUrl(commentId) {
+    if (!commentDetailUrlTemplate) return null
+
+    return commentDetailUrlTemplate.replace('__COMMENT_ID__', String(commentId))
+  }
+
+  function buildProfileUrl(userId) {
+    if (!profileUrlTemplate) return '#'
+
+    return profileUrlTemplate.replace('__USER_ID__', String(userId))
+  }
+
+  function buildTranslateCommentUrl(commentId) {
+    if (!translateCommentUrlTemplate) return null
+
+    return translateCommentUrlTemplate.replace('__COMMENT_ID__', String(commentId))
+  }
+
+  function formatCommentDate(commentDate) {
+    if (!commentDate) return ''
+
+    const date = new Date(commentDate)
+    return Number.isNaN(date.getTime()) ? String(commentDate) : date.toLocaleString('en-GB')
   }
 
   // Helper to update/create the visible reply count for a parent comment
@@ -417,7 +729,13 @@ export function ProjectComments(
       if (!actionsEl) return
       const div = document.createElement('div')
       div.className = 'comment-replies-count'
-      div.innerHTML = `<i class="material-icons">comment</i><span>${delta}</span>`
+      const icon = document.createElement('i')
+      icon.className = 'material-icons'
+      icon.textContent = 'comment'
+      const span = document.createElement('span')
+      span.textContent = String(delta)
+      div.appendChild(icon)
+      div.appendChild(span)
       // Insert near the beginning of action area
       actionsEl.insertBefore(div, actionsEl.firstChild)
     }
@@ -461,7 +779,13 @@ export function ProjectComments(
               'Deleted'
             const textWrapper = commentElement.querySelector('#comment-text-wrapper-' + commentId)
             if (textWrapper) {
-              textWrapper.innerHTML = `<p><span class="deleted-comment">${deletedText}</span></p>`
+              textWrapper.replaceChildren()
+              const deletedParagraph = document.createElement('p')
+              const deletedSpan = document.createElement('span')
+              deletedSpan.className = 'deleted-comment'
+              deletedSpan.textContent = deletedText
+              deletedParagraph.appendChild(deletedSpan)
+              textWrapper.appendChild(deletedParagraph)
             }
 
             // hide actions (reply, translate, report, delete) and show nothing or minimal UI

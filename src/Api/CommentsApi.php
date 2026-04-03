@@ -398,18 +398,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $user_info->setAvatar($comment_data['user_avatar'] ?? null);
     $response->setUser($user_info);
 
-    $response->setRendered($this->renderCommentHtml($comment_data, $are_replies));
-
     return $response;
-  }
-
-  private function renderCommentHtml(array $comment_data, bool $are_replies): string
-  {
-    return $this->twig->render('Project/Comment/Comment.html.twig', [
-      'comment' => $comment_data,
-      'isAdmin' => $this->authorization_checker->isGranted('ROLE_ADMIN'),
-      'are_replies' => $are_replies,
-    ]);
   }
 
   private function buildCommentDataFromEntity(UserComment $comment, int $reply_count): array
