@@ -65,4 +65,5 @@ Feature: Users can choose between multiple languages. Text should be automatical
     Then I should see "Download"
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "Скачать"
