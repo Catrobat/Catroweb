@@ -75,6 +75,9 @@ Feature: Every studio provides a list of all members
     When I click ".member__list-entry__admin-button"
     And I wait for the page to be loaded
     When I click ".member__list-entry__admin-button__promote"
+    And I wait for the element ".swal2-confirm" to be visible
+    And I click ".swal2-confirm"
+    And I wait 3000 milliseconds
     And I wait for the page to be loaded
     And I should see 2 ".member__list-entry__admin-indicator"
 
@@ -91,6 +94,9 @@ Feature: Every studio provides a list of all members
     When I click ".member__list-entry__admin-button"
     And I wait for the page to be loaded
     When I click ".member__list-entry__admin-button__ban"
+    And I wait for the element ".swal2-confirm" to be visible
+    And I click ".swal2-confirm"
+    And I wait 3000 milliseconds
     And I wait for the page to be loaded
     Then I should see 1 ".member__list-entry"
     And I am on "/app/studio/1"

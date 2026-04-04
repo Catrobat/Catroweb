@@ -25,7 +25,30 @@ document.getElementById('std-header-form')?.addEventListener('change', () => {
 document.querySelectorAll('.comment-delete-button').forEach((element) =>
   element.addEventListener('click', () => {
     const studioId = document.getElementById('studio-id').value
-    new StudioCommentHandler().removeComment(studioId, element, element.dataset.commentId, false, 0)
+    Swal.fire({
+      title: document.getElementById('trans-are-you-sure')?.value || 'Are you sure?',
+      text: document.getElementById('trans-no-way-of-return')?.value || 'This cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary',
+      },
+      buttonsStyling: false,
+      confirmButtonText: document.getElementById('trans-delete-it')?.value || 'Delete',
+      cancelButtonText: document.getElementById('trans-cancel')?.value || 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        new StudioCommentHandler().removeComment(
+          studioId,
+          element,
+          element.dataset.commentId,
+          false,
+          0,
+        )
+      }
+    })
   }),
 )
 
@@ -41,6 +64,29 @@ document.querySelectorAll('.comment-replies').forEach((element) =>
   }),
 )
 async function uploadCoverImage(url, file) {
+  const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
+  const maxFileSize = 1048576 // 1MB
+
+  if (!allowedMimeTypes.includes(file.type)) {
+    showSnackbar(
+      '#share-snackbar',
+      document.getElementById('trans-image-invalid-type')?.value ||
+        'Invalid image type. Please use JPEG, PNG, or GIF.',
+      SnackbarDuration.error,
+    )
+    return
+  }
+
+  if (file.size > maxFileSize) {
+    showSnackbar(
+      '#share-snackbar',
+      document.getElementById('trans-image-too-large')?.value ||
+        'Image is too large. Maximum size is 1 MB.',
+      SnackbarDuration.error,
+    )
+    return
+  }
+
   const formData = new FormData()
   formData.append('image_file', file)
 
@@ -62,7 +108,7 @@ async function uploadCoverImage(url, file) {
 
   if (response.status === 422) {
     response.text().then(function (text) {
-      showSnackbar('#share-snackbar', text)
+      showSnackbar('#share-snackbar', text, SnackbarDuration.error)
     })
   }
 }
@@ -120,55 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-  const pendingJoinButton = document.querySelectorAll('#pending-join-requests button.mdc-switch')
-  const buttonsDeclined = document.querySelectorAll('#declined-join-requests button.mdc-switch')
-  pendingJoinButton.forEach(function (button) {
-    button.addEventListener('click', function () {
-      const buttonAriaChecked = button.getAttribute('aria-checked')
-      const labelFor = button.getAttribute('id')
-      const label = document.querySelector(`label[for="${labelFor}"]`)
-
-      if (buttonAriaChecked === 'true') {
-        Swal.fire({
-          title: `${label.textContent} gets declined`,
-          text: 'Pending Join Requests Button!',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        })
-      } else {
-        Swal.fire({
-          title: `${label.textContent} gets approved`,
-          text: 'Pending Join Requests!',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        })
-      }
-    })
-  })
-
-  buttonsDeclined.forEach(function (button) {
-    button.addEventListener('click', function () {
-      const buttonAriaChecked = button.getAttribute('aria-checked')
-      const labelFor = button.getAttribute('id')
-      const label = document.querySelector(`label[for="${labelFor}"]`)
-
-      if (buttonAriaChecked === 'true') {
-        Swal.fire({
-          title: `${label.textContent} stay declined`,
-          text: 'Declined Join Requests Button Clicked!',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        })
-      } else {
-        Swal.fire({
-          title: `${label.textContent} gets approved`,
-          text: 'Declined Join Requests Button Clicked!',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        })
-      }
-    })
-  })
+  // Join request switches are handled by the settings form submission.
+  // Toggle state is persisted when the admin clicks the "done" (submit) button.
 })
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -199,29 +198,48 @@ document.addEventListener('DOMContentLoaded', function () {
   if (ajaxRequestDeleteProject) {
     ajaxRequestDeleteProject.addEventListener('click', function () {
       if (AJAXdata !== '') {
-        const formData = new FormData()
-        formData.append('projects_remove', AJAXdata)
-        formData.append('studio_id', event.currentTarget.dataset.studioId)
+        Swal.fire({
+          title: document.getElementById('trans-are-you-sure')?.value || 'Are you sure?',
+          text:
+            document.getElementById('trans-no-way-of-return')?.value || 'This cannot be undone.',
+          icon: 'warning',
+          showCancelButton: true,
+          allowOutsideClick: false,
+          customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-primary',
+          },
+          buttonsStyling: false,
+          confirmButtonText: document.getElementById('trans-delete-it')?.value || 'Delete',
+          cancelButtonText: document.getElementById('trans-cancel')?.value || 'Cancel',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const formData = new FormData()
+            formData.append('projects_remove', AJAXdata)
+            formData.append('studio_id', ajaxRequestDeleteProject.dataset.studioId)
 
-        const url = event.currentTarget.dataset.url
-        fetch(url, {
-          method: 'POST',
-          body: formData,
+            const url = ajaxRequestDeleteProject.dataset.url
+            fetch(url, {
+              method: 'POST',
+              credentials: 'same-origin',
+              body: formData,
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok')
+                }
+                return response.json()
+              })
+              .then((data) => {
+                if (data.redirect_url) {
+                  window.location.href = data.redirect_url
+                }
+              })
+              .catch((error) => {
+                console.error('There was an error with the fetch operation:', error)
+              })
+          }
         })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok')
-            }
-            return response.json()
-          })
-          .then((data) => {
-            if (data.redirect_url) {
-              window.location.href = data.redirect_url
-            }
-          })
-          .catch((error) => {
-            console.error('There was an error with the fetch operation:', error)
-          })
       }
     })
   }
@@ -230,6 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function makeAjaxRequest(url) {
   fetch(url, {
     method: 'POST',
+    credentials: 'same-origin',
   })
     .then((response) => {
       if (!response.ok) {

@@ -27,3 +27,16 @@ Feature: Leave a studio
     Given I use a valid JWT Bearer token for "Admin"
     When I DELETE "/api/studio/1/leave"
     Then the response status code should be "422"
+
+  Scenario: Non-member trying to leave returns 404
+    Given there are users:
+      | id | name     |
+      | 3  | Outsider |
+    Given I use a valid JWT Bearer token for "Outsider"
+    When I DELETE "/api/studio/1/leave"
+    Then the response status code should be "404"
+
+  Scenario: Leave non-existent studio returns 404
+    Given I use a valid JWT Bearer token for "Member"
+    When I DELETE "/api/studio/nonexistent/leave"
+    Then the response status code should be "404"

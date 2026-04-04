@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function makeAjaxRequest(url) {
   fetch(url, {
     method: 'POST',
+    credentials: 'same-origin',
   })
     .then((response) => {
       if (!response.ok) {

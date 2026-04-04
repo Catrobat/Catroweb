@@ -79,9 +79,10 @@ class StudioManager
       $somethingChanged = true;
     }
     if ($image_file instanceof UploadedFile) {
-      $this->deleteCoverImage($studio->getCoverAssetPath());
+      $old_cover = $studio->getCoverAssetPath();
       $cover_name = $this->storeCoverImage($image_file, $studio->getName());
       $studio->setCoverAssetPath($cover_name);
+      $this->deleteCoverImage($old_cover);
       $somethingChanged = true;
     }
 
@@ -308,6 +309,7 @@ class StudioManager
   public function deleteStudio(Studio $studio, User $user): void
   {
     if ($this->isUserAStudioAdmin($user, $studio)) {
+      $this->deleteCoverImage($studio->getCoverAssetPath());
       $this->entity_manager->remove($studio);
       $this->entity_manager->flush();
     }

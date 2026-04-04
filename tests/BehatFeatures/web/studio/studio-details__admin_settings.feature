@@ -182,7 +182,6 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-settings"
     And I wait for the page to be loaded
     When I click "#studio-setting__switch-studio-pending-join-3"
-    And I click ".swal2-backdrop-show"
     When I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
     Then I should see "private"
@@ -214,7 +213,6 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-settings"
     And I wait for the page to be loaded
     When I click "#studio-setting__switch-studio-declined-join-4"
-    And I click ".swal2-backdrop-show"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
     Then I should see "private"

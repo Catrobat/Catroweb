@@ -28,3 +28,18 @@ Feature: List studio comments
   Scenario: List comments of non-existent studio returns 404
     When I GET "/api/studio/nonexistent/comments"
     Then the response status code should be "404"
+
+  Scenario: List comments with limit
+    When I GET "/api/studio/1/comments?limit=1"
+    Then the response status code should be "200"
+    And the client response should contain "has_more"
+
+  Scenario: Response contains comment details
+    When I GET "/api/studio/1/comments"
+    Then the response status code should be "200"
+    And the client response should contain "username"
+    And the client response should contain "created_at"
+
+  Scenario: Invalid cursor returns 400
+    When I GET "/api/studio/1/comments?cursor=invalid!!"
+    Then the response status code should be "400"

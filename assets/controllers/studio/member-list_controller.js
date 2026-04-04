@@ -1,6 +1,7 @@
 import { AjaxController } from '../ajax_controller'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { MDCMenu } from '@material/menu'
+import Swal from 'sweetalert2'
 
 export default class extends AjaxController {
   static values = {
@@ -56,10 +57,28 @@ export default class extends AjaxController {
    */
   async promoteMemberToAdmin(event) {
     const studioId = this.studioIdValue
-    const userId = event.currentTarget.dataset.userId
-    const errorMessage = event.currentTarget.dataset.errorMessage
+    const { url, userId, errorMessage, confirmButton, cancelButton, confirmText } =
+      event.currentTarget.dataset
 
-    const response = await this.fetchPut(event.currentTarget.dataset.url, {
+    const result = await Swal.fire({
+      title: confirmText || 'Promote this member to admin?',
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary',
+      },
+      buttonsStyling: false,
+      confirmButtonText: confirmButton || 'Promote',
+      cancelButtonText: cancelButton || 'Cancel',
+    })
+
+    if (!result.isConfirmed) {
+      return
+    }
+
+    const response = await this.fetchPut(url, {
       studio_id: studioId,
       user_id: userId,
     })
@@ -85,10 +104,28 @@ export default class extends AjaxController {
    */
   async banUserFromStudio(event) {
     const studioId = this.studioIdValue
-    const userId = event.currentTarget.dataset.userId
-    const errorMessage = event.currentTarget.dataset.errorMessage
+    const { url, userId, errorMessage, confirmButton, cancelButton, confirmText } =
+      event.currentTarget.dataset
 
-    const response = await this.fetchPut(event.currentTarget.dataset.url, {
+    const result = await Swal.fire({
+      title: confirmText || 'Remove this member from the studio?',
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary',
+      },
+      buttonsStyling: false,
+      confirmButtonText: confirmButton || 'Remove',
+      cancelButtonText: cancelButton || 'Cancel',
+    })
+
+    if (!result.isConfirmed) {
+      return
+    }
+
+    const response = await this.fetchPut(url, {
       studio_id: studioId,
       user_id: userId,
     })

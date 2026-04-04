@@ -174,7 +174,10 @@ class StudioController extends AbstractController
       return new JsonResponse(['message' => 'studio not found'], Response::HTTP_NOT_FOUND);
     }
 
-    $this->studio_manager->isUserAStudioAdmin($user, $studio);
+    if ($this->studio_manager->isUserAStudioAdmin($user, $studio)) {
+      return new JsonResponse(['message' => 'Studio admins cannot leave the studio'], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
     $this->studio_manager->deleteUserFromStudio($user, $studio, $user);
 
     $joinRequest = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
@@ -389,8 +392,8 @@ class StudioController extends AbstractController
   public function loadCommentReplies(Request $request): Response
   {
     $rs = '';
-    $data = json_decode($request->getContent(), true);
-    $comment_id = (int) $data['commentID'];
+    $data = json_decode($request->getContent(), true) ?? [];
+    $comment_id = (int) ($data['commentID'] ?? $request->query->get('commentID', 0));
     $comment = $this->studio_manager->findStudioCommentById($comment_id);
     if (is_null($comment)) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);

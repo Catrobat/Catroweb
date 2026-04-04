@@ -46,3 +46,46 @@ Feature: Add a project to a studio
       """
     When I POST "/api/studio/1/projects"
     Then the response status code should be "201"
+
+  Scenario: Add project to non-existent studio returns 404
+    Given I use a valid JWT Bearer token for "Member"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"project_id": "1"}
+      """
+    When I POST "/api/studio/nonexistent/projects"
+    Then the response status code should be "404"
+
+  Scenario: Add non-existent project returns 404
+    Given I use a valid JWT Bearer token for "Member"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"project_id": "nonexistent"}
+      """
+    When I POST "/api/studio/1/projects"
+    Then the response status code should be "404"
+
+  Scenario: Add duplicate project returns 409
+    Given there are studio projects:
+      | user  | studio_name | project_name |
+      | Admin | Studio1     | Project1     |
+    And I use a valid JWT Bearer token for "Member"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"project_id": "1"}
+      """
+    When I POST "/api/studio/1/projects"
+    Then the response status code should be "409"
+
+  Scenario: Add project with empty project_id returns 400
+    Given I use a valid JWT Bearer token for "Member"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"project_id": ""}
+      """
+    When I POST "/api/studio/1/projects"
+    Then the response status code should be "400"
