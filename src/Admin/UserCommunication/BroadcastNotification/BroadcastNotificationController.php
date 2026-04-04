@@ -6,7 +6,6 @@ namespace App\Admin\UserCommunication\BroadcastNotification;
 
 use App\DB\Entity\User\Notifications\BroadcastNotification;
 use App\DB\Entity\User\User;
-use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,6 @@ class BroadcastNotificationController extends CRUDController
   private const int BATCH_SIZE = 100;
 
   public function __construct(
-    protected NotificationManager $notification_manager,
     protected EntityManagerInterface $entity_manager,
   ) {
   }
@@ -38,12 +36,11 @@ class BroadcastNotificationController extends CRUDController
       return new Response('Message must not be empty', Response::HTTP_BAD_REQUEST);
     }
 
-    $title = '';
     $count = 0;
 
     $query = $this->entity_manager->createQuery('SELECT u FROM '.User::class.' u');
     foreach ($query->toIterable() as $user) {
-      $notification = new BroadcastNotification($user, $title, $message);
+      $notification = new BroadcastNotification($user, '', $message);
       $this->entity_manager->persist($notification);
       ++$count;
 
