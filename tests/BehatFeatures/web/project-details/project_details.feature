@@ -7,8 +7,8 @@ Feature: As a visitor I want to see a project page
       | 1  | Catrobat  |
       | 2  | Catrobat2 |
     And there are projects:
-      | id | name      | downloads | owned by | views | apk_ready | upload time      |
-      | 1  | project 1 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 |
+      | id | name      | downloads | owned by | views | upload time      |
+      | 1  | project 1 | 5         | Catrobat | 42    | 01.01.2013 12:00 |
     And I start a new session
 
   Scenario: Showing statistics on project page
@@ -28,11 +28,6 @@ Feature: As a visitor I want to see a project page
     Then I should receive an application file
 
   @disabled
-  Scenario: Downloading a project apk is possible
-    When I want to download the apk file of "project 1"
-    Then I should receive the apk file
-
-  @disabled
   Scenario: Download counter must not increase of not logged in
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
@@ -44,28 +39,6 @@ Feature: As a visitor I want to see a project page
     And I reload the page
     And I wait for the page to be loaded
     Then I should see "5 downloads"
-
-  @disabled
-  Scenario: Increasing download counter after download only once! (APK)
-    Given I log in as "Catrobat2"
-    And I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then I should see "5 downloads"
-    When I click "#projectApkDownloadButton-small"
-    When I reload the page
-    And I wait for the page to be loaded
-    Then I should see "6 downloads"
-    When I start a new session
-    And I log in as "Catrobat2"
-    And I am on "/app/project/1"
-    When I click "#projectApkDownloadButton-small"
-    And I reload the page
-    And I wait for the page to be loaded
-    Then I should see "6 downloads"
-    When I click "#projectDownloadButton-small"
-    When I reload the page
-    And I wait for the page to be loaded
-    Then I should see "6 downloads"
 
   @disabled
   Scenario: Increasing download counter after download only once!

@@ -47,7 +47,7 @@ class PurgeCommand extends Command
 
     $output->writeln('Deleting all catrobat data');
 
-    $progress = new ProgressBar($output, 10);
+    $progress = new ProgressBar($output, 9);
     $progress->start();
 
     $progress->setMessage('Deleting Screenshots');
@@ -77,12 +77,6 @@ class PurgeCommand extends Command
     $progress->setMessage('Deleting Featured Images');
     /** @var string $dir */
     $dir = $this->parameter_bag->get('catrobat.featuredimage.dir');
-    FileHelper::emptyDirectory($dir);
-    $progress->advance();
-
-    $progress->setMessage('Deleting APKs');
-    /** @var string $dir */
-    $dir = $this->parameter_bag->get('catrobat.apk.dir');
     FileHelper::emptyDirectory($dir);
     $progress->advance();
 

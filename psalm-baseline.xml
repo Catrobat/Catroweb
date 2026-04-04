@@ -1,29 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.16.1@f1f5de594dc76faf8784e02d3dc4716c91c6f6ac">
-  <file src="src/Admin/ApkGeneration/ApkAdmin.php">
-    <LessSpecificReturnStatement>
-      <code><![CDATA[$query]]></code>
-    </LessSpecificReturnStatement>
-    <MoreSpecificReturnType>
-      <code><![CDATA[ProxyQueryInterface]]></code>
-    </MoreSpecificReturnType>
-  </file>
-  <file src="src/Admin/ApkGeneration/ApkPendingAdmin.php">
-    <LessSpecificReturnStatement>
-      <code><![CDATA[$query]]></code>
-    </LessSpecificReturnStatement>
-    <MoreSpecificReturnType>
-      <code><![CDATA[ProxyQueryInterface]]></code>
-    </MoreSpecificReturnType>
-  </file>
-  <file src="src/Admin/ApkGeneration/ApkReadyAdmin.php">
-    <LessSpecificReturnStatement>
-      <code><![CDATA[$query]]></code>
-    </LessSpecificReturnStatement>
-    <MoreSpecificReturnType>
-      <code><![CDATA[ProxyQueryInterface]]></code>
-    </MoreSpecificReturnType>
-  </file>
   <file src="src/Admin/Projects/ApproveProjects/ApproveProjectsAdmin.php">
     <LessSpecificReturnStatement>
       <code><![CDATA[$query]]></code>
@@ -190,11 +166,6 @@
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Application/Controller/Ci/DownloadApkController.php">
-    <PossiblyNullReference>
-      <code><![CDATA[getUserIdentifier]]></code>
-    </PossiblyNullReference>
-  </file>
   <file src="src/Application/Controller/Security/RegistrationController.php">
     <PossiblyNullArgument>
       <code><![CDATA[$user->getEmail()]]></code>
@@ -301,11 +272,6 @@
     <PossiblyNullArgument>
       <code><![CDATA[$user->getId()]]></code>
       <code><![CDATA[$user->getId()]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="src/Project/Apk/ApkCleanupEventListener.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$project->getId()]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="src/Project/CatrobatFile/LicenseUpdaterEventListener.php">
@@ -610,7 +576,6 @@
   <file src="src/System/Testing/Behat/Context/CatrowebBrowserContext.php">
     <PossiblyNullArgument>
       <code><![CDATA[$feature_url]]></code>
-      <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$user]]></code>
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
@@ -661,16 +626,9 @@
       <code><![CDATA[click]]></code>
       <code><![CDATA[find]]></code>
       <code><![CDATA[findAll]]></code>
-      <code><![CDATA[getApkStatus]]></code>
-      <code><![CDATA[getApkStatus]]></code>
-      <code><![CDATA[getApkStatus]]></code>
-      <code><![CDATA[getApkStatus]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[isVisible]]></code>
       <code><![CDATA[isVisible]]></code>
-      <code><![CDATA[setApkStatus]]></code>
-      <code><![CDATA[setApkStatus]]></code>
-      <code><![CDATA[setApkStatus]]></code>
       <code><![CDATA[setValue]]></code>
       <code><![CDATA[setValue]]></code>
     </PossiblyNullReference>
@@ -747,14 +705,6 @@
     </PossiblyNullPropertyAssignment>
   </file>
   <file src="src/System/Testing/DataFixtures/ProjectDataFixtures.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[$temp_path]]></code>
-      <code><![CDATA[$temp_path]]></code>
-    </PossiblyFalseArgument>
-    <PossiblyNullArgument>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-    </PossiblyNullArgument>
     <PossiblyNullReference>
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
@@ -915,12 +865,6 @@
   <file src="tests/PhpUnit/System/Commands/ArchiveLogsTest.php">
     <PossiblyFalseArgument>
       <code><![CDATA[scandir($log_dir)]]></code>
-    </PossiblyFalseArgument>
-  </file>
-  <file src="tests/PhpUnit/System/Commands/CleanApkTest.php">
-    <PossiblyFalseArgument>
-      <code><![CDATA[scandir($this->apk_dir)]]></code>
-      <code><![CDATA[scandir($this->apk_dir)]]></code>
     </PossiblyFalseArgument>
   </file>
   <file src="tests/PhpUnit/System/Commands/CleanLogsTest.php">

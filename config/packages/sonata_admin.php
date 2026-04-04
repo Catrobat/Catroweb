@@ -123,15 +123,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.media_library.asset',
             ],
           ],
-          'sonata.admin.group.apk' => [
-            'label' => 'Apk Generation',
-            'translation_domain' => 'catroweb',
-            'icon' => '<i class="fa fa-android"></i>',
-            'items' => [
-              'admin.block.apk.pending',
-              'admin.block.apk.list',
-            ],
-          ],
           'sonata.admin.group.user_communication' => [
             'label' => 'User communication',
             'translation_domain' => 'catroweb',

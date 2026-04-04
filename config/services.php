@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Admin\ApkGeneration\ApkController;
-use App\Admin\ApkGeneration\ApkPendingAdmin;
-use App\Admin\ApkGeneration\ApkReadyAdmin;
 use App\Admin\Comments\CommentsAdmin;
 use App\Admin\MediaLibrary\MediaAssetAdmin;
 use App\Admin\MediaLibrary\MediaCategoryAdmin;
@@ -106,7 +103,6 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters = $containerConfigurator->parameters();
 
-  $parameters->set('catrobat.apk.dir', '%catrobat.pubdir%resources/apk/');
   $parameters->set('catrobat.featuredimage.dir', '%catrobat.pubdir%resources/featured/');
   $parameters->set('catrobat.featuredimage.path', 'resources/featured/');
   $parameters->set('catrobat.exampleimage.dir', '%catrobat.pubdir%resources/example/');
@@ -364,30 +360,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => Program::class,
         'controller' => UploadProjectController::class,
-      ]
-    )
-  ;
-  $services->set('admin.block.apk.pending', ApkPendingAdmin::class)
-    ->tag(
-      'sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Pending',
-        'code' => null,
-        'model_class' => Program::class,
-        'controller' => ApkController::class,
-      ]
-    )
-  ;
-  $services->set('admin.block.apk.list', ApkReadyAdmin::class)
-    ->tag(
-      'sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Ready',
-        'code' => null,
-        'model_class' => Program::class,
-        'controller' => ApkController::class,
       ]
     )
   ;

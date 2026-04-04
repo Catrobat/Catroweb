@@ -7,9 +7,9 @@ Feature: As a visitor I want to be able to download projects
       | 1  | Catrobat |
       | 2  | User     |
     And there are projects:
-      | id | name      | downloads | owned by | apk_ready |
-      | 1  | project 1 | 5         | Catrobat | true      |
-      | 2  | project 2 | 5         | Catrobat | true      |
+      | id | name      | downloads | owned by |
+      | 1  | project 1 | 5         | Catrobat |
+      | 2  | project 2 | 5         | Catrobat |
 
   Scenario: I want to download a project via the button
     Given I log in as "Catrobat"

@@ -6,11 +6,11 @@ Feature: As a visitor I want to the correct display of notes and credits on a pr
       | id | name      |
       | 1  | Catrobat  |
     And there are projects:
-      | id | name      | downloads | owned by | views | apk_ready | upload time      | credit            | scratch_id |
-      | 1  | project 1 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 |                   |            |
-      | 2  | project 2 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 | These are credits |            |
-      | 3  | project 3 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 | These are credits | 826633052  |
-      | 4  | project 4 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 |                   | 833098332  |
+      | id | name      | downloads | owned by | views | upload time      | credit            | scratch_id |
+      | 1  | project 1 | 5         | Catrobat | 42    | 01.01.2013 12:00 |                   |            |
+      | 2  | project 2 | 5         | Catrobat | 42    | 01.01.2013 12:00 | These are credits |            |
+      | 3  | project 3 | 5         | Catrobat | 42    | 01.01.2013 12:00 | These are credits | 826633052  |
+      | 4  | project 4 | 5         | Catrobat | 42    | 01.01.2013 12:00 |                   | 833098332  |
     And I start a new session
 
   Scenario: Showing no credits on project page when the project has nocredits

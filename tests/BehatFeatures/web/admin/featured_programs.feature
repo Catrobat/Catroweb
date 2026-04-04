@@ -14,12 +14,12 @@ Feature: Admin featured programs
       | Frank Jr. | 123456   | dev3@pocketcode.org | 4  |
 
     And there are projects:
-      | id          | name      | description             | owned by  | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
-      | 1337-c0ffee | program 1 | my superman description | Superman  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |
-      | c0ffee-b00b | program 2 | abcef                   | Gregor    | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
-      | c01d-cafe   | program 3 | abcef                   | Gregor    | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
-      | b100d-c01d  | program 4 | abc                     | Superman  | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
-      | dead-beef   | to add    | add me if u can         | Frank Jr. | 123       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
+      | id          | name      | description             | owned by  | downloads | views | upload time      | version | language version | visible |
+      | 1337-c0ffee | program 1 | my superman description | Superman  | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    |
+      | c0ffee-b00b | program 2 | abcef                   | Gregor    | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    |
+      | c01d-cafe   | program 3 | abcef                   | Gregor    | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    |
+      | b100d-c01d  | program 4 | abc                     | Superman  | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    |
+      | dead-beef   | to add    | add me if u can         | Frank Jr. | 123       | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    |
 
     And there are flavors:
       | id | name       |
