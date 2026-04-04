@@ -57,11 +57,11 @@ export default class extends AjaxController {
    */
   async promoteMemberToAdmin(event) {
     const studioId = this.studioIdValue
-    const { url, userId, errorMessage, confirmButton, cancelButton } = event.currentTarget.dataset
-    const confirmText = event.currentTarget.dataset.confirmText || 'Promote this member to admin?'
+    const { url, userId, errorMessage, confirmButton, cancelButton, confirmText } =
+      event.currentTarget.dataset
 
     const result = await Swal.fire({
-      title: confirmText,
+      title: confirmText || 'Promote this member to admin?',
       icon: 'warning',
       showCancelButton: true,
       allowOutsideClick: false,
@@ -104,12 +104,11 @@ export default class extends AjaxController {
    */
   async banUserFromStudio(event) {
     const studioId = this.studioIdValue
-    const { url, userId, errorMessage, confirmButton, cancelButton } = event.currentTarget.dataset
-    const confirmText =
-      event.currentTarget.dataset.confirmText || 'Remove this member from the studio?'
+    const { url, userId, errorMessage, confirmButton, cancelButton, confirmText } =
+      event.currentTarget.dataset
 
     const result = await Swal.fire({
-      title: confirmText,
+      title: confirmText || 'Remove this member from the studio?',
       icon: 'warning',
       showCancelButton: true,
       allowOutsideClick: false,
