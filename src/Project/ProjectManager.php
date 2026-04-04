@@ -59,6 +59,7 @@ class ProjectManager
     private readonly ?UrlHelper $urlHelper,
     protected Security $security,
     private readonly MalwareScanner $malware_scanner,
+    private readonly ProjectDeduplicationService $deduplication_service,
   ) {
   }
 
@@ -284,6 +285,21 @@ class ProjectManager
     }
 
     $filesystem->remove($extracted_file->getPath());
+
+    // Deduplicate project assets in content-addressable store
+    $permanentExtractDir = $this->file_extractor->getExtractDir().'/'.$project_id;
+    try {
+      if (null !== $old_project) {
+        $this->deduplication_service->removeProjectMappings($project_id);
+      }
+
+      $this->deduplication_service->deduplicateProject($project, $permanentExtractDir);
+    } catch (\Throwable $e) {
+      $this->logger->error('Asset deduplication failed (non-fatal)', [
+        'project_id' => $project_id,
+        'error' => $e->getMessage(),
+      ]);
+    }
 
     return $project;
   }
