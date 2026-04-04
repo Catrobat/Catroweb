@@ -57,8 +57,7 @@ export default class extends AjaxController {
    */
   async promoteMemberToAdmin(event) {
     const studioId = this.studioIdValue
-    const userId = event.currentTarget.dataset.userId
-    const errorMessage = event.currentTarget.dataset.errorMessage
+    const { url, userId, errorMessage, confirmButton, cancelButton } = event.currentTarget.dataset
     const confirmText = event.currentTarget.dataset.confirmText || 'Promote this member to admin?'
 
     const result = await Swal.fire({
@@ -71,15 +70,15 @@ export default class extends AjaxController {
         cancelButton: 'btn btn-outline-primary',
       },
       buttonsStyling: false,
-      confirmButtonText: event.currentTarget.dataset.confirmButton || 'Promote',
-      cancelButtonText: event.currentTarget.dataset.cancelButton || 'Cancel',
+      confirmButtonText: confirmButton || 'Promote',
+      cancelButtonText: cancelButton || 'Cancel',
     })
 
     if (!result.isConfirmed) {
       return
     }
 
-    const response = await this.fetchPut(event.currentTarget.dataset.url, {
+    const response = await this.fetchPut(url, {
       studio_id: studioId,
       user_id: userId,
     })
@@ -105,8 +104,7 @@ export default class extends AjaxController {
    */
   async banUserFromStudio(event) {
     const studioId = this.studioIdValue
-    const userId = event.currentTarget.dataset.userId
-    const errorMessage = event.currentTarget.dataset.errorMessage
+    const { url, userId, errorMessage, confirmButton, cancelButton } = event.currentTarget.dataset
     const confirmText =
       event.currentTarget.dataset.confirmText || 'Remove this member from the studio?'
 
@@ -120,15 +118,15 @@ export default class extends AjaxController {
         cancelButton: 'btn btn-outline-primary',
       },
       buttonsStyling: false,
-      confirmButtonText: event.currentTarget.dataset.confirmButton || 'Remove',
-      cancelButtonText: event.currentTarget.dataset.cancelButton || 'Cancel',
+      confirmButtonText: confirmButton || 'Remove',
+      cancelButtonText: cancelButton || 'Cancel',
     })
 
     if (!result.isConfirmed) {
       return
     }
 
-    const response = await this.fetchPut(event.currentTarget.dataset.url, {
+    const response = await this.fetchPut(url, {
       studio_id: studioId,
       user_id: userId,
     })
