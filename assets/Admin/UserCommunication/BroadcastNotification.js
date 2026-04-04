@@ -7,12 +7,14 @@ function broadcastNotification() {
 
       const message = document.querySelector('#msg').value
 
-      fetch(`send?Message=${encodeURIComponent(message)}`, {
-        method: 'GET',
+      fetch('send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ Message: message }),
       })
         .then((response) => response.text())
         .then((data) => {
-          if (data === 'OK') {
+          if (data.startsWith('OK')) {
             resultBox.classList.remove('error')
             resultBox.classList.add('success')
           } else {
