@@ -133,6 +133,15 @@ class CommentResponse
   protected ?bool $is_reported = null;
 
   /**
+   * @SerializedName("user_approved")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
+  protected ?bool $user_approved = null;
+
+  /**
    * Rendered HTML for web clients (optional).
    *
    * @SerializedName("rendered")
@@ -160,6 +169,7 @@ class CommentResponse
       $this->reply_count = array_key_exists('reply_count', $data) ? $data['reply_count'] : $this->reply_count;
       $this->is_deleted = array_key_exists('is_deleted', $data) ? $data['is_deleted'] : $this->is_deleted;
       $this->is_reported = array_key_exists('is_reported', $data) ? $data['is_reported'] : $this->is_reported;
+      $this->user_approved = array_key_exists('user_approved', $data) ? $data['user_approved'] : $this->user_approved;
       $this->rendered = array_key_exists('rendered', $data) ? $data['rendered'] : $this->rendered;
     }
   }
@@ -348,6 +358,26 @@ class CommentResponse
   public function setIsReported(?bool $is_reported = null): self
   {
     $this->is_reported = $is_reported;
+
+    return $this;
+  }
+
+  /**
+   * Gets user_approved.
+   */
+  public function isUserApproved(): ?bool
+  {
+    return $this->user_approved;
+  }
+
+  /**
+   * Sets user_approved.
+   *
+   * @return $this
+   */
+  public function setUserApproved(?bool $user_approved = null): self
+  {
+    $this->user_approved = $user_approved;
 
     return $this;
   }

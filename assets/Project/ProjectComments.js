@@ -533,7 +533,9 @@ export function ProjectComments(
       commentActions.appendChild(translationActions)
     }
 
-    if (!isDeleted && (isAdmin || !isOwnComment || !isLoggedIn)) {
+    const isApproved = Boolean(comment.user_approved)
+
+    if (!isDeleted && !isApproved && (isAdmin || !isOwnComment || !isLoggedIn)) {
       const reportButton = document.createElement('a')
       reportButton.id = `comment-report-button-${comment.id}`
       reportButton.className = 'comment-report-button'
