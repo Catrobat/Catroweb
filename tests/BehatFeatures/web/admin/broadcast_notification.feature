@@ -19,7 +19,8 @@ Feature: Admin Broadcast Notification
     And I fill in "msg" with "Test Message"
     And I click on the button named "Send notifications"
     And I wait for AJAX to finish
-    Then I should see "OK"
+    And I wait 2000 milliseconds
+    Then I should see "Notifications sent to"
     When I am on "/app/user_notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish

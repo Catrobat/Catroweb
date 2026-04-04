@@ -29,6 +29,5 @@ class BroadcastNotificationAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);
-    $collection->add('send', null, [], [], [], '', [], ['POST']);
   }
 }
