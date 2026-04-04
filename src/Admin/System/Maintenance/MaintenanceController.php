@@ -27,6 +27,7 @@ class MaintenanceController extends CRUDController
     private readonly string $file_storage_dir,
     #[Autowire('%catrobat.logs.dir%')]
     private readonly string $log_dir,
+    private readonly SystemHealthService $healthService,
   ) {
   }
 
@@ -154,9 +155,12 @@ class MaintenanceController extends CRUDController
     $shared_ram_percentage = ($shared_ram / $whole_ram) * 100;
     $cached_ram_percentage = ($cached_ram / $whole_ram) * 100;
 
+    $totalSpace = $usedSpace + $freeSpace;
+    $usedPercentage = $totalSpace > 0 ? ($usedSpace / $totalSpace) * 100.0 : 0.0;
+
     return $this->render('Admin/SystemManagement/Maintain.html.twig', [
       'RemovableObjects' => $RemovableObjects,
-      'wholeSpace' => $this->getSymbolByQuantity($usedSpace + $freeSpace),
+      'wholeSpace' => $this->getSymbolByQuantity($totalSpace),
       'usedSpace' => $this->getSymbolByQuantity($usedSpaceRaw),
       'usedSpace_raw' => $usedSpaceRaw,
       'freeSpace_raw' => $freeSpace,
@@ -173,6 +177,10 @@ class MaintenanceController extends CRUDController
       'sharedRam' => $this->getSymbolByQuantity($shared_ram),
       'cachedRam' => $this->getSymbolByQuantity($cached_ram),
       'availableRam' => $this->getSymbolByQuantity($available_ram),
+      'storagePressureLevel' => $this->healthService->getStoragePressureLevel($usedPercentage, (int) $freeSpace),
+      'emailBudget' => $this->healthService->getEmailBudget(),
+      'emailBudgetLevel' => $this->healthService->getEmailBudgetLevel(),
+      'projectCounts' => $this->healthService->getProjectCounts(),
     ]);
   }
 
