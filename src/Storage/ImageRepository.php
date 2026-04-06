@@ -60,7 +60,11 @@ class ImageRepository
 
     $dir = dirname($filename);
     if (!is_dir($dir)) {
-      mkdir($dir, 0777, true);
+      mkdir($dir, 0775, true);
+    }
+
+    if (!is_writable($dir)) {
+      throw new \RuntimeException(sprintf('Directory "%s" is not writable. Check file ownership and permissions.', $dir));
     }
 
     if (file_exists($filename)) {
@@ -68,7 +72,7 @@ class ImageRepository
     }
 
     $thumb->writeImage($filename);
-    chmod($filename, 0777);
+    chmod($filename, 0664);
     $thumb->destroy();
   }
 

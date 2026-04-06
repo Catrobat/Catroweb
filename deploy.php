@@ -138,6 +138,12 @@ task('dump:env', function () {
   run('bin/console dotenv:dump prod');
 });
 
+// Fix ownership on shared resource directories so www-data (PHP-FPM) can write
+task('fix:resource_permissions', function () {
+  run('sudo chown -R www-data:www-data {{deploy_path}}/shared/public/resources/featured {{deploy_path}}/shared/public/resources/example');
+  run('sudo chmod -R 775 {{deploy_path}}/shared/public/resources/featured {{deploy_path}}/shared/public/resources/example');
+});
+
 // Smoke test: verify the health endpoint after deployment
 task('smoke_test', function () {
   $maxRetries = 5;
@@ -179,6 +185,7 @@ task('deploy', [
   'deploy:cache:clear',
   'database:migrate',
   'deploy:symlink',
+  'fix:resource_permissions',
   'restart:nginx',
   'restart:php-fpm',
   'update:flavors',
