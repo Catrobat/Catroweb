@@ -20,39 +20,37 @@ class IndexController extends AbstractController
   }
 
   #[Route(path: '/', name: 'index', methods: ['GET'])]
-  public function index(Request $request): Response
+  public function index(): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    $maintenanceInformation = $this->renderMaintenanceInformation($request);
 
     return $this->render('Index/IndexPage.html.twig', [
       'is_first_oauth_login' => null !== $user && $user->isOauthUser() && !$user->isOauthPasswordCreated(),
-      'maintenanceInformation' => $maintenanceInformation,
     ]);
   }
 
-  public function renderMaintenanceInformation(Request $request): array
+  #[Route(path: '/maintenance/list', name: 'maintenance_list', methods: ['GET'])]
+  public function getMaintenanceInformation(Request $request): JsonResponse
   {
     $maintenanceInformationRepository = $this->entityManager->getRepository(MaintenanceInformation::class);
     $maintenanceInformation = $maintenanceInformationRepository->findAll();
-    $maintenanceInformationMessages = [];
+    $result = [];
     foreach ($maintenanceInformation as $info) {
       if ($info->isActive() && !$request->getSession()->has((string) $info->getId())) {
-        $parameters = [
-          'maintenanceStart' => $info->getLtmMaintenanceStart(),
-          'maintenanceEnd' => $info->getLtmMaintenanceEnd(),
-          'additionalInfo' => $info->getLtmAdditionalInformation(),
-          'code' => $info->getLtmCode(),
-          'icon' => $info->getIcon(),
-          'featureName' => $info->getInternalTitle(),
+        $result[] = [
           'id' => $info->getId(),
+          'icon' => $info->getIcon(),
+          'code' => $info->getLtmCode(),
+          'feature_name' => $info->getInternalTitle(),
+          'maintenance_start' => $info->getLtmMaintenanceStart()?->format('Y-m-d'),
+          'maintenance_end' => $info->getLtmMaintenanceEnd()?->format('Y-m-d'),
+          'additional_info' => $info->getLtmAdditionalInformation(),
         ];
-        $maintenanceInformationMessages[] = $this->renderView('Index/MaintenanceInformation.html.twig', $parameters);
       }
     }
 
-    return $maintenanceInformationMessages;
+    return new JsonResponse($result);
   }
 
   #[Route(path: '/maintenance/close/{viewId}', name: 'close_maintenance_view', methods: ['POST'])]
