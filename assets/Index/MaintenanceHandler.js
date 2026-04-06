@@ -73,7 +73,7 @@ export class MaintenanceHandler {
         '<div class="additional-info-section" id="additional-info-' +
         escapeHtml(code) +
         '" style="display:none;">' +
-        '<span>' +
+        '<span>Additional information: ' +
         escapeHtml(additionalInfo) +
         '</span></div>'
     }
