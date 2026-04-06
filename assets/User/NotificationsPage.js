@@ -36,6 +36,12 @@ const TAB_CONFIG = [
     type: 'studio',
     prefix: 'studio-notification-',
   },
+  {
+    chipId: 'project-notif',
+    paneId: 'project-notifications',
+    type: 'project',
+    prefix: 'project-notification-',
+  },
 ]
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -245,6 +251,8 @@ class UserNotifications {
     if (fetched.type === 'follow' && fetched.project) return 'program'
     if (fetched.type === 'moderation' && fetched.project) return 'program'
     if (fetched.type === 'studio') return 'studio'
+    if (fetched.type === 'project' && fetched.project) return 'program'
+    if (fetched.type === 'project') return 'other'
     return fetched.type
   }
 

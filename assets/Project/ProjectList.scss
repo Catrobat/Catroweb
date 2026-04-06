@@ -2,6 +2,7 @@
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
 @import '~bootstrap/scss/mixins';
+@import 'RetentionTooltip';
 
 $max-project-thumb-size: 160px;
 $container-padding: 1rem;
@@ -385,6 +386,31 @@ $container-padding: 1rem;
 
   .material-icons {
     font-size: 0.85rem;
+  }
+
+  &--retention {
+    font-size: 0.6rem;
+    color: light-dark(#bbb, #666);
+
+    .material-icons {
+      font-size: 0.65rem;
+    }
+
+    .retention-info-icon {
+      font-size: 10px !important;
+    }
+  }
+
+  &--protected {
+    color: light-dark(#8cb88e, #7dab7f);
+  }
+
+  &--warning {
+    color: light-dark(#c9a070, #c9975a);
+  }
+
+  &--critical {
+    color: light-dark(#c08080, #c97070);
   }
 }
 

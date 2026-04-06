@@ -15,6 +15,7 @@ use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
+use App\Storage\StorageLifecycleService;
 use App\Translation\TranslationDelegate;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\NonUniqueResultException;
@@ -43,6 +44,7 @@ class ProjectController extends AbstractController
     private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
     private readonly ContentVisibilityManager $content_visibility_manager,
     private readonly ProjectStatisticsService $project_statistics_service,
+    private readonly StorageLifecycleService $storage_lifecycle,
   ) {
   }
 
@@ -111,6 +113,10 @@ class ProjectController extends AbstractController
       'age' => $this->elapsed_time->format($project->getUploadedAt()->getTimestamp()),
       'filesize_mb' => sprintf('%.2f', $project->getFilesize() / 1_048_576),
       'total_downloads' => $project->getDownloads(),
+      'retention_days' => $this->storage_lifecycle->getRetentionDays($project),
+      'retention_expiry' => StorageLifecycleService::PROTECTED_DAYS === $this->storage_lifecycle->getRetentionDays($project)
+        ? null
+        : (clone $project->getUploadedAt())->modify('+'.$this->storage_lifecycle->getRetentionDays($project).' days'),
     ]);
   }
 

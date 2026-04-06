@@ -87,6 +87,33 @@ class NotificationsCountResponse
   protected ?int $remix = null;
 
   /**
+   * @SerializedName("moderation")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $moderation = null;
+
+  /**
+   * @SerializedName("studio")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $studio = null;
+
+  /**
+   * @SerializedName("project")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $project = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -99,6 +126,9 @@ class NotificationsCountResponse
       $this->follower = array_key_exists('follower', $data) ? $data['follower'] : $this->follower;
       $this->comment = array_key_exists('comment', $data) ? $data['comment'] : $this->comment;
       $this->remix = array_key_exists('remix', $data) ? $data['remix'] : $this->remix;
+      $this->moderation = array_key_exists('moderation', $data) ? $data['moderation'] : $this->moderation;
+      $this->studio = array_key_exists('studio', $data) ? $data['studio'] : $this->studio;
+      $this->project = array_key_exists('project', $data) ? $data['project'] : $this->project;
     }
   }
 
@@ -198,6 +228,66 @@ class NotificationsCountResponse
   public function setRemix(?int $remix = null): self
   {
     $this->remix = $remix;
+
+    return $this;
+  }
+
+  /**
+   * Gets moderation.
+   */
+  public function getModeration(): ?int
+  {
+    return $this->moderation;
+  }
+
+  /**
+   * Sets moderation.
+   *
+   * @return $this
+   */
+  public function setModeration(?int $moderation = null): self
+  {
+    $this->moderation = $moderation;
+
+    return $this;
+  }
+
+  /**
+   * Gets studio.
+   */
+  public function getStudio(): ?int
+  {
+    return $this->studio;
+  }
+
+  /**
+   * Sets studio.
+   *
+   * @return $this
+   */
+  public function setStudio(?int $studio = null): self
+  {
+    $this->studio = $studio;
+
+    return $this;
+  }
+
+  /**
+   * Gets project.
+   */
+  public function getProject(): ?int
+  {
+    return $this->project;
+  }
+
+  /**
+   * Sets project.
+   *
+   * @return $this
+   */
+  public function setProject(?int $project = null): self
+  {
+    $this->project = $project;
 
     return $this;
   }

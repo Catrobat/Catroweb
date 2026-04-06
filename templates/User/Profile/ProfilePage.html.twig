@@ -157,6 +157,11 @@
            data-trans-report-suspended="{{ 'report.suspended'|trans({}, 'catroweb')|default('Account suspended')|e('html_attr') }}"
            data-trans-report-rate-limited="{{ 'report.rateLimited'|trans({}, 'catroweb')|default('Too many reports')|e('html_attr') }}"
            data-trans-report-placeholder="{{ 'report.placeholder'|trans({}, 'catroweb')|default('Please describe the issue...')|e('html_attr') }}"
+           data-trans-retention-protected="{{ 'project.retention.protected'|trans({}, 'catroweb')|default('Protected')|e('html_attr') }}"
+           data-trans-retention-day="{{ 'project.retention.day_left'|trans({}, 'catroweb')|default('1 day left')|e('html_attr') }}"
+           data-trans-retention-days="{{ 'project.retention.days_left'|trans({'%days%': '%days%'}, 'catroweb')|default('%days% days left')|e('html_attr') }}"
+           data-trans-retention-tooltip="{{ 'project.retention.tooltip'|trans({}, 'catroweb')|default('Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.')|e('html_attr') }}"
+           data-trans-retention-tooltip-protected="{{ 'project.retention.tooltip_protected'|trans({}, 'catroweb')|default('This project is protected and will not be automatically deleted.')|e('html_attr') }}"
            class="project-list loading project-list--full">
         <div class="container">
           <div class="lazyload projects-spinner-container">

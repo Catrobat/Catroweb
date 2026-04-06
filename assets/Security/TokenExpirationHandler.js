@@ -1,69 +1,37 @@
-import { jwtDecode } from 'jwt-decode'
-import { deleteCookie, getCookie, setCookie } from './CookieHelper'
-
+/**
+ * Keeps the BEARER JWT cookie alive by periodically pinging the server.
+ *
+ * Since both BEARER and REFRESH_TOKEN are HttpOnly, JS cannot read or
+ * refresh them directly. Instead, we make a lightweight request every
+ * 45 minutes. The server-side RefreshBearerCookieOnKernelRequestEventListener
+ * detects the expired BEARER, validates the REFRESH_TOKEN, and sets a
+ * fresh BEARER cookie in the response.
+ *
+ * The JWT_TTL is 3600 seconds (1 hour), so pinging every 45 minutes
+ * ensures the token is refreshed before it expires.
+ */
 export class TokenExpirationHandler {
   constructor() {
-    const routingDataset = document.getElementById('js-api-routing').dataset
-    this.baseUrl = routingDataset.baseUrl
-    this.indexPath = routingDataset.index
-    this.authenticationRefreshPath = routingDataset.authenticationRefresh
-    this.checkBearerTokenExpiration()
-    this.interval = this.setScopedInterval(this.checkBearerTokenExpiration, 60000, this)
+    const routingDataset = document.getElementById('js-api-routing')?.dataset
+    if (!routingDataset) return
+
+    this.baseUrl = routingDataset.baseUrl || ''
+
+    // Ping every 45 minutes (JWT_TTL is 3600s = 60min)
+    this.interval = setInterval(() => this.pingServer(), 45 * 60 * 1000)
   }
 
-  checkBearerTokenExpiration() {
-    const refreshToken = getCookie('REFRESH_TOKEN')
-    if (!refreshToken) {
+  pingServer() {
+    // A simple HEAD request to the notifications count endpoint.
+    // It's lightweight (no body), authenticated (sends cookies),
+    // and triggers the server-side BEARER refresh if needed.
+    fetch(this.baseUrl + '/api/notifications/count', {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' },
+    }).catch(() => {
+      // If the ping fails (e.g., no network), stop retrying
       clearInterval(this.interval)
-      return
-    }
-
-    const bearerToken = getCookie('BEARER')
-    if (bearerToken && jwtDecode) {
-      const decodedToken = jwtDecode(bearerToken)
-      if (decodedToken && decodedToken.exp) {
-        const now = Date.now().valueOf() / 1000
-        if (decodedToken.exp < now || decodedToken.exp < now + 60) {
-          this.refreshToken()
-        }
-      }
-    } else if (getCookie('REFRESH_TOKEN')) {
-      this.refreshToken()
-    }
-  }
-
-  refreshToken() {
-    fetch(this.authenticationRefreshPath, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ refresh_token: getCookie('REFRESH_TOKEN') }),
     })
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json()
-        }
-      })
-      .then((data) => {
-        setCookie('BEARER', data.token, 'Tue, 19 Jan 2038 00:00:01 GMT', this.baseUrl + '/')
-        setCookie(
-          'REFRESH_TOKEN',
-          data.refresh_token,
-          'Tue, 19 Jan 2038 00:00:01 GMT',
-          this.baseUrl + '/',
-        )
-      })
-      .catch(() => {
-        deleteCookie('BEARER', this.baseUrl + '/')
-        deleteCookie('REFRESH_TOKEN', this.baseUrl + '/')
-      })
-  }
-
-  setScopedInterval(func, millis, scope) {
-    return setInterval(function () {
-      func.apply(scope)
-    }, millis)
   }
 }

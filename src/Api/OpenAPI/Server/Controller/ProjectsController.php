@@ -31,6 +31,8 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\ProjectsApiInterface;
+use OpenAPI\Server\Model\ReactionRequest;
+use OpenAPI\Server\Model\UpdateProjectRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -464,7 +466,7 @@ class ProjectsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $update_project_request = $this->deserialize($update_project_request, \OpenAPI\Server\Model\UpdateProjectRequest::class, $inputFormat);
+      $update_project_request = $this->deserialize($update_project_request, UpdateProjectRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -481,7 +483,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\UpdateProjectRequest::class);
+    $asserts[] = new Assert\Type(UpdateProjectRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($update_project_request, $asserts);
     if ($response instanceof Response) {
@@ -667,7 +669,7 @@ class ProjectsController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $reaction_request = $this->deserialize($reaction_request, \OpenAPI\Server\Model\ReactionRequest::class, $inputFormat);
+      $reaction_request = $this->deserialize($reaction_request, ReactionRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -684,7 +686,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ReactionRequest::class);
+    $asserts[] = new Assert\Type(ReactionRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($reaction_request, $asserts);
     if ($response instanceof Response) {

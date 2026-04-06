@@ -9,12 +9,15 @@ use App\Api\Services\Base\TranslatorAwareTrait;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProjectCodeStatistics;
+use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Special\SpecialProgram;
 use App\DB\Entity\Project\Tag;
 use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
+use App\Storage\StorageLifecycleService;
 use App\Utils\ElapsedTimeStringFormatter;
+use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\CodeStatisticsResponse;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectResponse;
@@ -42,6 +45,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     SerializerInterface $serializer,
     private readonly ProjectManager $project_manager,
     \Psr\Cache\CacheItemPoolInterface $cache,
+    private readonly EntityManagerInterface $entity_manager,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -180,6 +184,21 @@ class ProjectsResponseManager extends AbstractResponseManager
       $data['not_for_kids'] = $project->getNotForKids();
     }
 
+    if (in_array('retention_days', $attributes_list, true) || in_array('retention_expiry', $attributes_list, true)) {
+      $retention_days = $this->computeRetentionDays($extraced_project);
+      if (in_array('retention_days', $attributes_list, true)) {
+        $data['retention_days'] = $retention_days;
+      }
+      if (in_array('retention_expiry', $attributes_list, true)) {
+        if (StorageLifecycleService::PROTECTED_DAYS === $retention_days) {
+          $data['retention_expiry'] = null;
+        } else {
+          $uploaded = $extraced_project->getUploadedAt();
+          $data['retention_expiry'] = \DateTime::createFromInterface($uploaded)->modify("+{$retention_days} days");
+        }
+      }
+    }
+
     return new ProjectResponse($data);
   }
 
@@ -191,6 +210,58 @@ class ProjectsResponseManager extends AbstractResponseManager
     }
 
     return $response;
+  }
+
+  private function computeRetentionDays(Program $project): int
+  {
+    if ($project->isStorageProtected()) {
+      return StorageLifecycleService::PROTECTED_DAYS;
+    }
+
+    $projectId = $project->getId();
+    if (null !== $projectId) {
+      $featured = (int) $this->entity_manager->createQueryBuilder()
+        ->select('COUNT(f.id)')
+        ->from(FeaturedProgram::class, 'f')
+        ->where('f.program = :project')
+        ->setParameter('project', $project)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+      if ($featured > 0) {
+        return StorageLifecycleService::PROTECTED_DAYS;
+      }
+
+      $example = (int) $this->entity_manager->createQueryBuilder()
+        ->select('COUNT(e.id)')
+        ->from(ExampleProgram::class, 'e')
+        ->where('e.program = :project')
+        ->setParameter('project', $project)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+      if ($example > 0) {
+        return StorageLifecycleService::PROTECTED_DAYS;
+      }
+    }
+
+    if ($project->getDownloads() >= 10) {
+      return StorageLifecycleService::ACTIVE_DAYS;
+    }
+
+    $user = $project->getUser();
+    if (null !== $user) {
+      $lastLogin = $user->getLastLogin();
+      if (null !== $lastLogin && $lastLogin > new \DateTime('-180 days')) {
+        return StorageLifecycleService::ACTIVE_DAYS;
+      }
+    }
+
+    if ($project->isVisible() && !$project->getAutoHidden() && null !== $user && $user->isVerified()) {
+      return StorageLifecycleService::STANDARD_DAYS;
+    }
+
+    return StorageLifecycleService::SHORT_DAYS;
   }
 
   public function createFeaturedProjectResponse(FeaturedProgram $featured_project, ?string $attributes = null): FeaturedProjectResponse

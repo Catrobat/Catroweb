@@ -51,7 +51,7 @@ readonly class CookieService
       $this->isSecureCookie(),
       true,
       false,
-      Cookie::SAMESITE_STRICT
+      Cookie::SAMESITE_LAX
     );
   }
 
@@ -112,6 +112,6 @@ readonly class CookieService
    */
   private function getSameSite(string $cookie): string
   {
-    return 'REFRESH_TOKEN' === $cookie ? Cookie::SAMESITE_STRICT : Cookie::SAMESITE_LAX;
+    return Cookie::SAMESITE_LAX;
   }
 }

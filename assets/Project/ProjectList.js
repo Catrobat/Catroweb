@@ -1,6 +1,7 @@
 import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../Layout/TopBar'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
+import '../Components/RetentionTooltip'
 
 require('./ProjectList.scss')
 
@@ -60,7 +61,7 @@ export class ProjectList {
 
   formatApiUrl(apiUrl) {
     let attributes =
-      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,uploaded_string,'
+      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,uploaded_string,retention_days,retention_expiry,'
 
     if (this.propertyToShow && !attributes.includes(`,${this.propertyToShow},`)) {
       attributes += this.propertyToShow
@@ -147,6 +148,18 @@ export class ProjectList {
     }
     projectElement.appendChild(propDiv)
 
+    if (data.retention_days !== undefined) {
+      const retDiv = document.createElement('div')
+      retDiv.innerHTML = this._buildRetentionMeta(
+        data.retention_days,
+        data.retention_expiry,
+        this.container.dataset,
+      )
+      if (retDiv.firstChild) {
+        projectElement.appendChild(retDiv.firstChild)
+      }
+    }
+
     return projectElement
   }
 
@@ -173,9 +186,12 @@ export class ProjectList {
     if (uploadedString) {
       meta +=
         '<span class="projects-meta__item">' +
-        '<i class="material-icons">schedule</i>' +
+        '<i class="material-icons">calendar_today</i>' +
         uploadedString +
         '</span>'
+    }
+    if (data.retention_days !== undefined) {
+      meta += this._buildRetentionMeta(data.retention_days, data.retention_expiry, ds)
     }
 
     // Common menu items
@@ -465,7 +481,7 @@ export class ProjectList {
     const icons = {
       views: 'visibility',
       downloads: 'get_app',
-      uploaded: 'schedule',
+      uploaded: 'calendar_today',
       author: 'person',
     }
 
@@ -608,5 +624,64 @@ export class ProjectList {
     this.container.classList.remove('vertical')
     this.$body.classList.remove('overflow-hidden')
     return false
+  }
+
+  _buildRetentionMeta(retentionDays, retentionExpiry, ds) {
+    const tooltip = escapeAttr(
+      retentionDays === -1
+        ? ds.transRetentionTooltipProtected ||
+            'This project is protected and will not be automatically deleted.'
+        : ds.transRetentionTooltip ||
+            'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.',
+    )
+    const infoBtn =
+      '<span class="retention-info-wrap" onclick="event.preventDefault();event.stopPropagation()">' +
+      '<span class="material-icons retention-info-icon">info_outline</span>' +
+      '<span class="retention-tooltip">' +
+      tooltip +
+      '</span>' +
+      '</span>'
+
+    if (retentionDays === -1) {
+      return (
+        '<span class="projects-meta__item projects-meta__item--retention projects-meta__item--protected">' +
+        '<i class="material-icons">verified</i>' +
+        escapeHtml(ds.transRetentionProtected || 'Protected') +
+        infoBtn +
+        '</span>'
+      )
+    }
+
+    let daysLeft = 0
+    if (retentionExpiry) {
+      daysLeft = Math.max(0, Math.ceil((new Date(retentionExpiry) - Date.now()) / 86400000))
+    }
+
+    let icon = 'schedule'
+    let cssModifier = ''
+    if (daysLeft <= 7) {
+      icon = 'warning'
+      cssModifier = ' projects-meta__item--critical'
+    } else if (daysLeft <= 30) {
+      icon = 'hourglass_bottom'
+      cssModifier = ' projects-meta__item--warning'
+    }
+
+    const label =
+      daysLeft === 1
+        ? ds.transRetentionDay || '1 day left'
+        : (ds.transRetentionDays || '%days% days left').replace('%days%', String(daysLeft))
+
+    return (
+      '<span class="projects-meta__item projects-meta__item--retention' +
+      cssModifier +
+      '">' +
+      '<i class="material-icons">' +
+      icon +
+      '</i>' +
+      escapeHtml(label) +
+      infoBtn +
+      '</span>'
+    )
   }
 }

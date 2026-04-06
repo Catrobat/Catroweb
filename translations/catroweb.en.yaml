@@ -189,6 +189,12 @@ project:
     no_explore: 'No projects found'
     load_more: 'Load More'
     upload: 'Upload Project'
+  retention:
+    protected: 'Protected'
+    day_left: '1 day left'
+    days_left: '%days% days left'
+    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
+    tooltip_protected: 'This project is protected and will not be automatically deleted.'
   downloads: '%downloads% downloads'
   sample: Example projects
   views: '%views% views'
@@ -965,6 +971,7 @@ catro-notifications:
   noStudios: "It looks like you don't have any studio notifications."
   tab:
     studio: Studio
+    project: Projects
   comment:
     message: '%user_link% commented on %program_link%.'
   like:
@@ -979,6 +986,11 @@ catro-notifications:
     message: '%user_link% commented in studio %studio_name%.'
   studio-project:
     message: '%user_link% added %program_link% to studio %studio_name%.'
+  project-expiring:
+    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+  project-deleted:
+    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
+  noProjects: "It looks like you don't have any project notifications."
 
 clipboard:
   success: Link copied to clipboard!

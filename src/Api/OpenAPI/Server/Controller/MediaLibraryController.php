@@ -31,6 +31,8 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
+use OpenAPI\Server\Model\MediaAssetUpdateRequest;
+use OpenAPI\Server\Model\MediaCategoryRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -403,7 +405,7 @@ class MediaLibraryController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $media_asset_update_request = $this->deserialize($media_asset_update_request, \OpenAPI\Server\Model\MediaAssetUpdateRequest::class, $inputFormat);
+      $media_asset_update_request = $this->deserialize($media_asset_update_request, MediaAssetUpdateRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -420,7 +422,7 @@ class MediaLibraryController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\MediaAssetUpdateRequest::class);
+    $asserts[] = new Assert\Type(MediaAssetUpdateRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_asset_update_request, $asserts);
     if ($response instanceof Response) {
@@ -943,7 +945,7 @@ class MediaLibraryController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $media_category_request = $this->deserialize($media_category_request, \OpenAPI\Server\Model\MediaCategoryRequest::class, $inputFormat);
+      $media_category_request = $this->deserialize($media_category_request, MediaCategoryRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -960,7 +962,7 @@ class MediaLibraryController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\MediaCategoryRequest::class);
+    $asserts[] = new Assert\Type(MediaCategoryRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_category_request, $asserts);
     if ($response instanceof Response) {
@@ -1054,7 +1056,7 @@ class MediaLibraryController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $media_category_request = $this->deserialize($media_category_request, \OpenAPI\Server\Model\MediaCategoryRequest::class, $inputFormat);
+      $media_category_request = $this->deserialize($media_category_request, MediaCategoryRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -1063,7 +1065,7 @@ class MediaLibraryController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\MediaCategoryRequest::class);
+    $asserts[] = new Assert\Type(MediaCategoryRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($media_category_request, $asserts);
     if ($response instanceof Response) {
