@@ -4,6 +4,7 @@
 {% block head %}
   {{ encore_entry_link_tags('user_my_profile_page') }}
   {{ encore_entry_link_tags('user_follower_overview') }}
+  {{ encore_entry_link_tags('user_profile_studios') }}
 {% endblock %}
 
 {% block body %}
@@ -73,6 +74,12 @@
     </div>
   {% endif %}
 
+  <div id="user-achievements" class="js-profile-achievements d-none mt-4 mb-2"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-user-id="{{ profile.id }}"
+       data-trans-title="{{ 'achievements.profile.title'|trans({}, 'catroweb') }}"
+  ></div>
+
   {{ include('User/Profile/Settings/UserSettings.html.twig') }}
   {{ include('User/Profile/Settings/ProfileSettings.html.twig') }}
   {{ include('User/Profile/Settings/SecuritySettings.html.twig') }}
@@ -116,6 +123,16 @@
               </button>
             {% endif %}
 
+            <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
+              <span class="mdc-tab__content">
+                <span class="mdc-tab__icon" id="studios-count">-</span>
+                <span class="mdc-tab__icon-text">{{ 'menu.studio'|trans({}, 'catroweb') }}</span>
+              </span>
+              <span class="mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+              </span>
+            </button>
+
           </div>
         </div>
       </div>
@@ -130,6 +147,12 @@
            data-base-url="{{ app.request.getBaseURL() }}"
            data-flavor="{{ flavor() }}"
            data-empty-message="{{ 'project.noProjects'|trans({}, 'catroweb') }}"
+           data-trans-set-private="{{ 'project.setPrivateAction'|trans({}, 'catroweb') }}"
+           data-trans-set-public="{{ 'project.setPublicAction'|trans({}, 'catroweb') }}"
+           data-trans-share="{{ 'project.shareAction'|trans({}, 'catroweb') }}"
+           data-trans-mark-not-for-kids="{{ 'MarkNotForKids'|trans({}, 'catroweb') }}"
+           data-trans-mark-safe-for-kids="{{ 'MarkSafeForKids'|trans({}, 'catroweb') }}"
+           data-trans-delete="{{ 'project.deleteAction'|trans({}, 'catroweb') }}"
            class="own-project-list loading">
         <div class="container">
           <div class="lazyload projects-spinner-container">
@@ -145,6 +168,17 @@
     {% if not app.user.isMinor() %}
       {{ include('User/Followers/FollowersTabs.twig') }}
     {% endif %}
+
+    <div id="studios-section" class="tab-pane fade" role="tabpanel" aria-labelledby="studios-tab">
+      <div id="no-studios" class="text-center mb-5 d-none">
+        {{ 'studio.overview.no_studios'|trans({}, 'catroweb') }}
+      </div>
+      <div id="studio-cards" class="row mb-5">
+        <div class="text-center py-3 studios-loading">
+          {{ include('Components/LoadingSpinner.html.twig', [], false) }}
+        </div>
+      </div>
+    </div>
   </div>
 
   {% if not app.user.isMinor() %}
@@ -154,31 +188,12 @@
     }) }}
   {% endif %}
 
-  <div class="mdc-menu mdc-menu-surface" id="project-action-menu">
-    <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-      <li class="mdc-list-item" role="menuitem" data-action="toggle-visibility">
-        <span class="mdc-list-item__ripple"></span>
-        <span class="mdc-list-item__text"
-              data-text-private="{{ 'project.setPrivateAction'|trans({}, 'catroweb') }}"
-              data-text-public="{{ 'project.setPublicAction'|trans({}, 'catroweb') }}"></span>
-      </li>
-      <li class="mdc-list-item" role="menuitem" data-action="share" id="project-share-action">
-        <span class="mdc-list-item__ripple"></span>
-        <span class="mdc-list-item__text">{{ 'project.shareAction'|trans({}, 'catroweb') }}</span>
-      </li>
-      <li class="mdc-list-item" role="menuitem" data-action="not-for-kids" id="project-not-for-kids-action">
-        <span class="mdc-list-item__ripple"></span>
-        <span class="mdc-list-item__text"
-              data-text-not-for-kids="{{ 'MarkNotForKids'|trans({}, 'catroweb') }}"
-              data-text-safe-for-kids="{{ 'MarkSafeForKids'|trans({}, 'catroweb') }}"
-              data-text-moderator-locked="{{ 'snackbar.project_not_for_kids_moderator'|trans({}, 'catroweb') }}"></span>
-      </li>
-      <li class="mdc-list-item" role="menuitem" data-action="delete">
-        <span class="mdc-list-item__ripple"></span>
-        <span class="mdc-list-item__text">{{ 'project.deleteAction'|trans({}, 'catroweb') }}</span>
-      </li>
-    </ul>
-  </div>
+  <div class="js-profile-studios"
+       data-user-id="{{ profile.id }}"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-studio-details-path="{{ path('studio_details', {theme: theme(), id: '__ID__'}) }}"
+       data-trans-no-studios="{{ 'studio.overview.no_studios'|trans({}, 'catroweb') }}"
+  ></div>
 
   <template id="profile-loading-spinner-template" class="d-none">
     <div class="loading-spinner-backdrop">
@@ -245,4 +260,5 @@
 </script>
   {{ encore_entry_script_tags('user_my_profile_page') }}
   {{ encore_entry_script_tags('user_follower_overview') }}
+  {{ encore_entry_script_tags('user_profile_studios') }}
 {% endblock %}

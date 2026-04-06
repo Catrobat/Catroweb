@@ -72,6 +72,8 @@ Encore
   .addEntry('project_comments_page', './assets/Project/ProjectCommentsPage.js')
   .addEntry('project_code_statistics_inline', './assets/Project/CodeStatisticsInline.js')
   .addEntry('project_code_view_inline', './assets/Project/CodeViewInline.js')
+  .addEntry('projects_browse_page', './assets/Project/ProjectsBrowsePage.js')
+  .addEntry('project_upload_page', './assets/Project/ProjectUploadPage.js')
 
   .addEntry('user_achievements_page', './assets/User/AchievementsPage.js')
   .addEntry('user_notifications_page', './assets/User/NotificationsPage.js')
@@ -85,11 +87,12 @@ Encore
   .addEntry('studio_detail_page', './assets/Studio/StudioDetailPage.js')
   .addEntry('studios_page', './assets/Studio/StudiosPage.js')
   .addEntry('studio_create_page', './assets/Studio/CreatePage.js')
-  .addEntry('studio_add_project_page', './assets/Studio/AddProject.js')
+
 
   .addStyleEntry('twig_bundle_error', './assets/bundles/TwigBundle/Exception/error.scss')
 
   .addEntry('user_follower_overview', './assets/User/FollowerOverview.js')
+  .addEntry('user_profile_studios', './assets/User/ProfileStudios.js')
 
   // Admin interface
   .addEntry('admin_standard_layout', './assets/Admin/Layout.js')

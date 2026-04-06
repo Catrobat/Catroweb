@@ -19,13 +19,13 @@ Feature: My Reports page shows user's filed reports
   # ---------------------------------------------------------------------------
 
   Scenario: Guest is redirected to login
-    Given I am on "/app/user_reports"
+    Given I am on "/app/reports"
     And I wait for the page to be loaded
     Then I should be on "/app/login"
 
   Scenario: Logged-in user can access My Reports page
     Given I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     Then I should see "My Reports"
 
@@ -36,7 +36,7 @@ Feature: My Reports page shows user's filed reports
     And I open the menu
     And I click "#sidebar-reports"
     And I wait for the page to be loaded
-    Then I should be on "/app/user_reports"
+    Then I should be on "/app/reports"
     And I should see "My Reports"
 
   # ---------------------------------------------------------------------------
@@ -45,7 +45,7 @@ Feature: My Reports page shows user's filed reports
 
   Scenario: User with no reports sees empty state message
     Given I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "You haven't filed any reports yet."
@@ -56,7 +56,7 @@ Feature: My Reports page shows user's filed reports
 
   Scenario: Reports page has filter chips
     Given I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     Then the element "#all-reports" should be visible
     And the element "#pending-reports" should be visible
@@ -72,7 +72,7 @@ Feature: My Reports page shows user's filed reports
       | id | reporter | content_type | content_id | category | state | created_at          |
       | 1  | Catrobat | project      | 1          | spam     | new   | 2024-06-01 12:00:00 |
     And I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Project report"
@@ -84,7 +84,7 @@ Feature: My Reports page shows user's filed reports
       | id | reporter | content_type | content_id | category | state    | created_at          | resolved_at         | resolved_by |
       | 1  | Catrobat | project      | 1          | spam     | accepted | 2024-06-01 12:00:00 | 2024-06-05 12:00:00 | User2       |
     And I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Accepted"
@@ -94,7 +94,7 @@ Feature: My Reports page shows user's filed reports
       | id | reporter | content_type | content_id | category      | state    | created_at          | resolved_at         | resolved_by |
       | 1  | Catrobat | project      | 1          | inappropriate | rejected | 2024-06-01 12:00:00 | 2024-06-05 12:00:00 | User2       |
     And I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Rejected"
@@ -109,7 +109,7 @@ Feature: My Reports page shows user's filed reports
       | 1  | Catrobat | project      | 1          | spam     | new      | 2024-06-01 12:00:00 |                     |             |
       | 2  | Catrobat | user         | 2          | spam     | accepted | 2024-06-02 12:00:00 | 2024-06-05 12:00:00 | User2       |
     And I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     When I click "#pending-reports"
@@ -131,7 +131,7 @@ Feature: My Reports page shows user's filed reports
       | 1  | Catrobat | project      | 1          | spam     | new   | 2024-06-01 12:00:00 |
       | 2  | Catrobat | comment      | 10         | spam     | new   | 2024-06-02 12:00:00 |
     And I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Project report"
@@ -146,7 +146,7 @@ Feature: My Reports page shows user's filed reports
       | id | reporter | content_type | content_id | category | state | created_at          |
       | 1  | User2    | project      | 1          | spam     | new   | 2024-06-01 12:00:00 |
     And I log in as "Catrobat"
-    And I am on "/app/user_reports"
+    And I am on "/app/reports"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "You haven't filed any reports yet."

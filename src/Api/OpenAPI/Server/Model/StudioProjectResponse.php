@@ -82,6 +82,39 @@ class StudioProjectResponse
   protected ?\DateTime $added_at = null;
 
   /**
+   * Path to the project thumbnail.
+   *
+   * @SerializedName("screenshot_small")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $screenshot_small = null;
+
+  /**
+   * Username of the project author.
+   *
+   * @SerializedName("author")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $author = null;
+
+  /**
+   * UUID of the project author.
+   *
+   * @SerializedName("author_id")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $author_id = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -93,6 +126,9 @@ class StudioProjectResponse
       $this->name = array_key_exists('name', $data) ? $data['name'] : $this->name;
       $this->added_by = array_key_exists('added_by', $data) ? $data['added_by'] : $this->added_by;
       $this->added_at = array_key_exists('added_at', $data) ? $data['added_at'] : $this->added_at;
+      $this->screenshot_small = array_key_exists('screenshot_small', $data) ? $data['screenshot_small'] : $this->screenshot_small;
+      $this->author = array_key_exists('author', $data) ? $data['author'] : $this->author;
+      $this->author_id = array_key_exists('author_id', $data) ? $data['author_id'] : $this->author_id;
     }
   }
 
@@ -176,6 +212,72 @@ class StudioProjectResponse
   public function setAddedAt(?\DateTime $added_at = null): self
   {
     $this->added_at = $added_at;
+
+    return $this;
+  }
+
+  /**
+   * Gets screenshot_small.
+   */
+  public function getScreenshotSmall(): ?string
+  {
+    return $this->screenshot_small;
+  }
+
+  /**
+   * Sets screenshot_small.
+   *
+   * @param string|null $screenshot_small Path to the project thumbnail
+   *
+   * @return $this
+   */
+  public function setScreenshotSmall(?string $screenshot_small = null): self
+  {
+    $this->screenshot_small = $screenshot_small;
+
+    return $this;
+  }
+
+  /**
+   * Gets author.
+   */
+  public function getAuthor(): ?string
+  {
+    return $this->author;
+  }
+
+  /**
+   * Sets author.
+   *
+   * @param string|null $author Username of the project author
+   *
+   * @return $this
+   */
+  public function setAuthor(?string $author = null): self
+  {
+    $this->author = $author;
+
+    return $this;
+  }
+
+  /**
+   * Gets author_id.
+   */
+  public function getAuthorId(): ?string
+  {
+    return $this->author_id;
+  }
+
+  /**
+   * Sets author_id.
+   *
+   * @param string|null $author_id UUID of the project author
+   *
+   * @return $this
+   */
+  public function setAuthorId(?string $author_id = null): self
+  {
+    $this->author_id = $author_id;
 
     return $this;
   }

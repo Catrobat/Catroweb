@@ -59,6 +59,7 @@ Model/ErrorResponseError.php
 Model/ErrorResponseErrorDetailsInner.php
 Model/ExtendedUserDataResponse.php
 Model/ExtensionResponse.php
+Model/FeaturedBannerResponse.php
 Model/FeaturedProjectResponse.php
 Model/FollowerResponse.php
 Model/FollowersListResponse.php
@@ -96,6 +97,9 @@ Model/ResetPasswordRequest.php
 Model/ResolveAppealRequest.php
 Model/ResolveReportRequest.php
 Model/SearchResponse.php
+Model/SearchResponseStudiosInner.php
+Model/StudioActivityListResponse.php
+Model/StudioActivityResponse.php
 Model/StudioAddProjectRequest.php
 Model/StudioCommentCreateRequest.php
 Model/StudioCommentListResponse.php
@@ -106,6 +110,8 @@ Model/StudioMemberResponse.php
 Model/StudioProjectListResponse.php
 Model/StudioProjectResponse.php
 Model/StudioResponse.php
+Model/StudioUserProjectResponse.php
+Model/StudioUserProjectsResponse.php
 Model/SurveyResponse.php
 Model/TagResponse.php
 Model/UpdateProjectErrorResponse.php
@@ -176,6 +182,7 @@ Tests/Model/ErrorResponseErrorTest.php
 Tests/Model/ErrorResponseTest.php
 Tests/Model/ExtendedUserDataResponseTest.php
 Tests/Model/ExtensionResponseTest.php
+Tests/Model/FeaturedBannerResponseTest.php
 Tests/Model/FeaturedProjectResponseTest.php
 Tests/Model/FollowerResponseTest.php
 Tests/Model/FollowersListResponseTest.php
@@ -212,7 +219,10 @@ Tests/Model/ResetPasswordErrorResponseTest.php
 Tests/Model/ResetPasswordRequestTest.php
 Tests/Model/ResolveAppealRequestTest.php
 Tests/Model/ResolveReportRequestTest.php
+Tests/Model/SearchResponseStudiosInnerTest.php
 Tests/Model/SearchResponseTest.php
+Tests/Model/StudioActivityListResponseTest.php
+Tests/Model/StudioActivityResponseTest.php
 Tests/Model/StudioAddProjectRequestTest.php
 Tests/Model/StudioCommentCreateRequestTest.php
 Tests/Model/StudioCommentListResponseTest.php
@@ -223,6 +233,8 @@ Tests/Model/StudioMemberResponseTest.php
 Tests/Model/StudioProjectListResponseTest.php
 Tests/Model/StudioProjectResponseTest.php
 Tests/Model/StudioResponseTest.php
+Tests/Model/StudioUserProjectResponseTest.php
+Tests/Model/StudioUserProjectsResponseTest.php
 Tests/Model/SurveyResponseTest.php
 Tests/Model/TagResponseTest.php
 Tests/Model/UpdateProjectErrorResponseTest.php
@@ -283,6 +295,7 @@ docs/Model/ErrorResponseError.md
 docs/Model/ErrorResponseErrorDetailsInner.md
 docs/Model/ExtendedUserDataResponse.md
 docs/Model/ExtensionResponse.md
+docs/Model/FeaturedBannerResponse.md
 docs/Model/FeaturedProjectResponse.md
 docs/Model/FollowerResponse.md
 docs/Model/FollowersListResponse.md
@@ -320,6 +333,9 @@ docs/Model/ResetPasswordRequest.md
 docs/Model/ResolveAppealRequest.md
 docs/Model/ResolveReportRequest.md
 docs/Model/SearchResponse.md
+docs/Model/SearchResponseStudiosInner.md
+docs/Model/StudioActivityListResponse.md
+docs/Model/StudioActivityResponse.md
 docs/Model/StudioAddProjectRequest.md
 docs/Model/StudioCommentCreateRequest.md
 docs/Model/StudioCommentListResponse.md
@@ -330,6 +346,8 @@ docs/Model/StudioMemberResponse.md
 docs/Model/StudioProjectListResponse.md
 docs/Model/StudioProjectResponse.md
 docs/Model/StudioResponse.md
+docs/Model/StudioUserProjectResponse.md
+docs/Model/StudioUserProjectsResponse.md
 docs/Model/SurveyResponse.md
 docs/Model/TagResponse.md
 docs/Model/UpdateProjectErrorResponse.md

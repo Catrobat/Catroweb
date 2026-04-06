@@ -41,6 +41,7 @@ Feature: There should be all projects of a user presented on a profile page
   Scenario: Show User1's public profile
     Given I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User1"
     And I should see "2 projects"
     And I should see "Projects"
@@ -52,6 +53,7 @@ Feature: There should be all projects of a user presented on a profile page
   Scenario: Show User2's profile
     Given I am on "/app/user/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "User2"
     And I should see "1 projects"
     And I should see "Projects"
@@ -71,6 +73,7 @@ Feature: There should be all projects of a user presented on a profile page
   Scenario: at a profile page there should always all projects be visible
     Given I am on "/app/user/3"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "project 4"
     And I should see "project 5"
     And I should see "project 6"
@@ -109,7 +112,8 @@ Feature: There should be all projects of a user presented on a profile page
   Scenario: at a profile page there should always all projects be visible
     Given I am on "/app/user/1"
     And I wait for the page to be loaded
-    Then I should see 2 "#user-projects .project-list__project"
+    And I wait for AJAX to finish
+    Then I should see 2 ".project-list__project"
     But the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist
 
@@ -124,7 +128,8 @@ Feature: There should be all projects of a user presented on a profile page
   Scenario: at a profile page there should always all projects be visible
     Given I am on "/app/user/3"
     And I wait for the page to be loaded
-    Then I should see 25 "#user-projects .project-list__project"
+    And I wait for AJAX to finish
+    Then I should see 25 ".project-list__project"
     But the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist
 

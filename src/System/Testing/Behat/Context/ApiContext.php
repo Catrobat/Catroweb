@@ -1372,6 +1372,42 @@ class ApiContext implements Context
   }
 
   /**
+   * @Then the search response should contain :count studios
+   */
+  public function theSearchResponseShouldContainStudios(int $count): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+
+    Assert::assertArrayHasKey('studios', $data);
+    Assert::assertCount($count, $data['studios'], "Expected {$count} studios in response.");
+  }
+
+  /**
+   * @Then the search response should contain the following studios:
+   */
+  public function theSearchResponseShouldContainTheFollowingStudios(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $expectedStudios = $table->getHash();
+
+    Assert::assertArrayHasKey('studios', $data);
+    $returnedStudios = $data['studios'];
+
+    foreach ($expectedStudios as $expected) {
+      $found = false;
+      foreach ($returnedStudios as $studio) {
+        if ($studio['name'] === $expected['Name']) {
+          $found = true;
+          break;
+        }
+      }
+      Assert::assertTrue($found, 'Studio "'.$expected['Name'].'" not found in search response.');
+    }
+  }
+
+  /**
    * @Given /^I have a parameter "([^"]*)" with an invalid md5checksum of my file$/
    */
   public function iHaveAParameterWithAnInvalidMdchecksumOfMyFile(string $parameter): void

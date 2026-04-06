@@ -23,6 +23,7 @@ passwordsNoMatch: The passwords didn't match.
 error: Oops!
 cancel: Cancel
 report: Report
+report.title: Report
 deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure:  Are you sure?
@@ -72,7 +73,8 @@ notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
 projects: "Projects"
-users: "Users"
+users: "User"
+studios: "Studios"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want
             to change your username or create a new password for your account please go to your profile page.'
@@ -117,6 +119,23 @@ project:
     download: Download the app
     statistics: More statistics
   featured: Featured
+  open: Open
+  download: Download
+  upload:
+    title: Upload Project
+    drop_here: Drag & drop your .catrobat file here
+    or_browse: or click to browse
+    button: Upload
+    uploading: Uploading...
+    success: Project uploaded successfully!
+    view_project: View Project
+    upload_another: Upload Another
+    invalid_file: Please select a .catrobat file
+    file_too_large: File is too large
+    error: Upload failed. Please try again.
+    unauthorized: You must be logged in to upload.
+    rate_limited: Too many uploads. Please try again later.
+    selected_file: 'Selected file:'
   example: Examples
   newest: Newest projects
   recommended: Recommended projects
@@ -164,6 +183,12 @@ project:
     downloaded: Most downloaded
   random: Random projects
   related: Related projects
+  browse:
+    explore: 'Explore Projects'
+    no_projects: "You haven't created any projects yet"
+    no_explore: 'No projects found'
+    load_more: 'Load More'
+    upload: 'Upload Project'
   downloads: '%downloads% downloads'
   sample: Example projects
   views: '%views% views'
@@ -509,18 +534,19 @@ termsOfUse:
 
 search:
   dotdotdot: Search...
-  search: Search
+  search: Search projects, users & studios
   inMediaLib: Search in media library
   inMediaCategory: Search in media category
-  results: Search results
+  results: Results for
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
   noUsers: No users found
   noProjects: No projects found
+  noStudios: No studios found
   sameSearchMessage: "Looks like you're already here! Try a different search?"
 
 menu:
-  profile: My Profile
+  profile: Profile
   login: Login
   logout: Logout
   admin: Admin
@@ -936,6 +962,9 @@ catro-notifications:
   noComments: "It looks like you don't have any comment notifications."
   noReactions: "It looks like you don't have any reaction notifications."
   noRemixes: "It looks like you don't have any remix notifications."
+  noStudios: "It looks like you don't have any studio notifications."
+  tab:
+    studio: Studio
   comment:
     message: '%user_link% commented on %program_link%.'
   like:
@@ -946,6 +975,10 @@ catro-notifications:
     message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
+  studio-comment:
+    message: '%user_link% commented in studio %studio_name%.'
+  studio-project:
+    message: '%user_link% added %program_link% to studio %studio_name%.'
 
 clipboard:
   success: Link copied to clipboard!
@@ -1127,6 +1160,7 @@ studio:
   cover_image: 'Upload cover'
   cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
   cover_image_alt: 'Your cover image'
+  popular: 'Popular Studios'
   join: 'Join'
   leave: 'Leave'
   report: 'Report'
@@ -1137,6 +1171,12 @@ studio:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
     private_studios: 'Private studios'
+    no_studios: 'No studios yet'
+    my_studios: 'My Studios'
+    explore: 'Explore Studios'
+    no_joined: "You haven't joined any studios yet"
+    joined: 'Joined'
+    load_more: 'Load More'
 
 
   details:
@@ -1147,16 +1187,24 @@ studio:
     remove_project_error: 'Failed to remove project from studio.'
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
+    projects:
+      title: 'Projects'
+      addProject: 'Add Projects'
+      open_project: 'Open project'
+      download: 'Download'
+      share: 'Share'
+      remove_from_studio: 'Remove from studio'
+      share_success: 'Link copied to clipboard!'
+      share_fail: 'Failed to copy link.'
+      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
+      add_selected: 'Add Selected'
+    no_available_projects: 'No projects available to add.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
     join: 'Join'
     leave: 'Leave'
     report: 'Report'
     pending: 'Pending'
     decline: 'Declined'
-
-    projects:
-      title: 'Projects'
-      addProject: 'Add your own projects'
 
     comments:
       title: 'Comments'
@@ -1178,6 +1226,9 @@ studio:
     members_list:
       title: 'Studio members'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      no_studio_projects: 'No studio projects'
+      one_studio_project: '1 studio project'
+      n_studio_projects: '%count% studio projects'
       promote_member: 'Promote member to admin'
       promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
       ban_member: 'Ban member from studio'

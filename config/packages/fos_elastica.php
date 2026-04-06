@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\DB\Entity\Project\Program;
+use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -115,6 +116,50 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'persistence' => [
             'driver' => 'orm',
             'model' => User::class,
+          ],
+        ],
+        'app_studio' => [
+          'settings' => [
+            'analysis' => [
+              'analyzer' => [
+                'default' => [
+                  'type' => 'custom',
+                  'tokenizer' => 'standard',
+                  'filter' => [
+                    'lowercase',
+                    'elision',
+                    'language_stop',
+                  ],
+                ],
+              ],
+              'filter' => [
+                'language_stop' => [
+                  'type' => 'stop',
+                  'ignore_case' => true,
+                  'stopwords' => [
+                    '_english_',
+                  ],
+                ],
+              ],
+            ],
+          ],
+          'properties' => [
+            'id' => null,
+            'name' => null,
+            'description' => null,
+            'is_public' => [
+              'type' => 'boolean',
+            ],
+            'auto_hidden' => [
+              'type' => 'boolean',
+            ],
+            'is_enabled' => [
+              'type' => 'boolean',
+            ],
+          ],
+          'persistence' => [
+            'driver' => 'orm',
+            'model' => Studio::class,
           ],
         ],
       ],

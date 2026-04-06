@@ -195,7 +195,7 @@ Feature: Follow feature on profiles
     Then I should be on "/app/user/3"
     Then I should see "Following"
     Then I log in as "Catrobat3"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     And I wait 500 milliseconds

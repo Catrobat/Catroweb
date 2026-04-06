@@ -11,22 +11,22 @@ Feature: As a visitor I want to see public user profiles
     Given I log in as "Catrobat"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
+    Then I should see "Profile"
     When I am on "/app/user/"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
+    Then I should see "Profile"
 
   Scenario: Calling the profile route with the id 0 should bring me to myProfile
     Given I log in as "Catrobat"
     And I am on "/app/user/0"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
+    Then I should see "Profile"
 
   Scenario: Calling the profile route with my user id should bring me to myProfile
     Given I log in as "Catrobat"
     And I am on "/app/user/1"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
+    Then I should see "Profile"
 
   Scenario: Calling the profile route with another id should bring me to the users profile
     Given I log in as "Catrobat"
@@ -38,3 +38,29 @@ Feature: As a visitor I want to see public user profiles
     Given I am on "/app/user"
     And I wait for the page to be loaded
     Then I should be on "/app/login"
+
+  Scenario: My profile shows studios tab
+    Given I log in as "Catrobat"
+    And I am on "/app/user"
+    And I wait for the page to be loaded
+    Then the element "#studios-count" should exist
+    And I should see "Studios"
+
+  Scenario: My profile shows achievements section
+    Given I log in as "Catrobat"
+    And I am on "/app/user"
+    And I wait for the page to be loaded
+    Then the element "#user-achievements" should exist
+
+  Scenario: Other user profile shows studios tab
+    Given I log in as "Catrobat"
+    And I am on "/app/user/2"
+    And I wait for the page to be loaded
+    Then the element "#studios-count" should exist
+    And I should see "Studios"
+
+  Scenario: Other user profile shows achievements section
+    Given I log in as "Catrobat"
+    And I am on "/app/user/2"
+    And I wait for the page to be loaded
+    Then the element "#user-achievements" should exist

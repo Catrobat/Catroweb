@@ -28,14 +28,14 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background-color: #fff;
+  background-color: light-dark(#fff, #2d2d3d);
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  box-shadow: 0 1px 3px light-dark(rgb(0 0 0 / 10%), rgb(0 0 0 / 30%));
   transition: all 0.2s ease;
   position: relative;
 
   &:hover {
-    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    box-shadow: 0 2px 8px light-dark(rgb(0 0 0 / 15%), rgb(0 0 0 / 40%));
     transform: translateY(-1px);
   }
 
@@ -55,11 +55,11 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: #f0f0f0;
+  background-color: light-dark(#f0f0f0, #3a3a4a);
 
   .material-icons {
     font-size: 24px;
-    color: #555;
+    color: light-dark(#555, #b0b0c0);
   }
 
   @media screen and (width <= 576px) {
@@ -85,26 +85,26 @@
 .report-title {
   font-weight: 500;
   font-size: 0.9375rem;
-  color: #333;
+  color: light-dark(#333, #e2e8f0);
   line-height: 1.4;
 }
 
 .report-category {
   font-size: 0.8125rem;
-  color: #666;
+  color: light-dark(#666, #a0a0b0);
   margin-top: 0.125rem;
   text-transform: capitalize;
 }
 
 .report-date {
   font-size: 0.75rem;
-  color: #999;
+  color: light-dark(#999, #888);
   margin-top: 0.25rem;
 }
 
 .report-resolved {
   font-size: 0.75rem;
-  color: #999;
+  color: light-dark(#999, #888);
   margin-top: 0.125rem;
 }
 
@@ -131,25 +131,25 @@
 }
 
 .report-badge-pending {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: light-dark(#fff3cd, #4a4320);
+  color: light-dark(#856404, #ffd866);
 }
 
 .report-badge-accepted {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: light-dark(#d4edda, #1e3a2a);
+  color: light-dark(#155724, #6ee7a0);
 }
 
 .report-badge-rejected {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: light-dark(#f8d7da, #3a1e22);
+  color: light-dark(#721c24, #f88090);
 }
 
 // ===== Empty State =====
 .no-reports {
   padding: 3rem 1rem;
   text-align: center;
-  color: #6c757d;
+  color: light-dark(#6c757d, #a0a0b0);
   font-size: 1rem;
 
   @media screen and (width <= 576px) {

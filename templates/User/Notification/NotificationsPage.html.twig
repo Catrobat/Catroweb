@@ -39,6 +39,12 @@
         title: '' ~ 'RemixNotifications'|trans({}, 'catroweb'),
         controls: 'remix-notifications',
       },
+      {
+        id: 'studio-notif',
+        icon: 'groups',
+        title: '' ~ 'catro-notifications.tab.studio'|trans({}, 'catroweb'),
+        controls: 'studio-notifications',
+      },
     ],
   }) }}
 
@@ -68,6 +74,11 @@
         id: 'remix-notifications',
         emptyID: 'no-notif-remix',
         emptyMessage: '' ~ 'catro-notifications.noRemixes'|trans({}, 'catroweb'),
+      },
+      {
+        id: 'studio-notifications',
+        emptyID: 'no-notif-studio',
+        emptyMessage: '' ~ 'catro-notifications.noStudios'|trans({}, 'catroweb'),
       },
     ] %}
     <div id="{{ category.id }}" class="tab-pane fade {% if loop.first %} show active {% endif %}" role="tabpanel">

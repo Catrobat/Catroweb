@@ -8,6 +8,7 @@ use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Utility\UtilityApiFacade;
 use Doctrine\DBAL\Connection;
 use OpenAPI\Server\Api\UtilityApiInterface;
+use OpenAPI\Server\Model\FeaturedBannerResponse;
 use OpenAPI\Server\Model\HealthResponse;
 use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,25 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
     private readonly UtilityApiFacade $facade,
     private readonly Connection $connection,
   ) {
+  }
+
+  /**
+   * @return FeaturedBannerResponse[]
+   */
+  #[\Override]
+  public function featuredBannersGet(int $limit, int $offset, int &$responseCode, array &$responseHeaders): array
+  {
+    $limit = min(max($limit, 1), 50);
+    $offset = max($offset, 0);
+
+    $banners = $this->facade->getLoader()->getActiveBanners($limit, $offset);
+
+    $responseCode = Response::HTTP_OK;
+
+    return array_map(
+      fn ($banner): FeaturedBannerResponse => $this->facade->getResponseManager()->createFeaturedBannerResponse($banner),
+      $banners,
+    );
   }
 
   #[\Override]

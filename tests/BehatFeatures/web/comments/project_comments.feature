@@ -261,7 +261,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for AJAX to finish
     Then I should see "hello"
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for AJAX to finish
     Then the element "#catro-notification-1" should be visible
     And I should see "OtherUser"
@@ -277,5 +277,5 @@ Feature: As a visitor I want to write, see and report comments.
     When I click "#comment-post-button"
     And I wait for AJAX to finish
     Then I should see "hello"
-    When I am on "/app/user_notifications"
+    When I am on "/app/notifications"
     Then the element "#catro-notification-1" should not exist

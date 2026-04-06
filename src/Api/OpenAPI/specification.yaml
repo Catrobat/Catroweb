@@ -246,6 +246,33 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  /featured-banners:
+    get:
+      tags:
+        - Utility
+      summary: Get active featured banners
+      operationId: featuredBannersGet
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FeaturedBannerResponse'
+
   ##############################################
   # User
   ###
@@ -1659,6 +1686,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  '/user/{id}/studios':
+    get:
+      tags:
+        - 'User'
+      summary: 'Get studios a user has joined'
+      operationId: userIdStudiosGet
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   ################################################
   # Media Library
   #
@@ -2466,6 +2513,132 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
+  '/studio/{id}/comments/{comment_id}':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: comment_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Locale'
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Delete a studio comment
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/members/{userId}/promote':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Promote a studio member to admin
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/members/{userId}/ban':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Ban a studio member
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/activities':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: List studio activities
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioActivityListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/user-projects':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: List current user's projects with in_studio flag
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioUserProjectsResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   ##############################################
   # Followers
   ###
@@ -3042,6 +3215,7 @@ components:
           - 'follow'
           - 'comment'
           - 'remix'
+          - 'studio'
         default: 'all'
 
     ##
@@ -3105,6 +3279,7 @@ components:
           - 'all'
           - 'projects'
           - 'users'
+          - 'studios'
 
   ##############################################
   # Response Headers
@@ -4467,6 +4642,14 @@ components:
           type: integer
           example: 12
           description: Number of projects in the studio
+        is_member:
+          type: boolean
+          nullable: true
+          description: Whether the authenticated user is a member of this studio (null if not authenticated)
+        join_request_status:
+          type: string
+          nullable: true
+          description: Status of the authenticated user's join request (pending, approved, declined) or null
 
     StudioListResponse:
       type: object
@@ -4475,6 +4658,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/StudioResponse'
+        total:
+          type: integer
         has_more:
           type: boolean
         next_cursor:
@@ -4509,6 +4694,9 @@ components:
         joined_at:
           type: string
           format: date-time
+        studio_project_count:
+          type: integer
+          description: Number of projects this member has in the studio
 
     StudioMemberListResponse:
       type: object
@@ -4537,6 +4725,18 @@ components:
         added_at:
           type: string
           format: date-time
+        screenshot_small:
+          type: string
+          nullable: true
+          description: Path to the project thumbnail
+        author:
+          type: string
+          nullable: true
+          description: Username of the project author
+        author_id:
+          type: string
+          nullable: true
+          description: UUID of the project author
 
     StudioProjectListResponse:
       type: object
@@ -4550,6 +4750,59 @@ components:
         next_cursor:
           type: string
           nullable: true
+
+    StudioActivityResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum:
+            - 'user'
+            - 'project'
+            - 'comment'
+        user_id:
+          type: string
+        username:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    StudioActivityListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioActivityResponse'
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+          nullable: true
+
+    StudioUserProjectResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        in_studio:
+          type: boolean
+        screenshot_small:
+          type: string
+          nullable: true
+
+    StudioUserProjectsResponse:
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioUserProjectResponse'
 
     StudioAddProjectRequest:
       type: object
@@ -4620,6 +4873,24 @@ components:
           example: https://www.surveylegend.com/survey/#/d29yZHByZXNzMTQzODU2~-MRPPYfbYj7-rPUTK3HH
           description: Url to a survey for the given language
 
+    FeaturedBannerResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum: [project, studio, link, image]
+        title:
+          type: string
+        image_url:
+          type: string
+        link_url:
+          type: string
+          nullable: true
+        priority:
+          type: integer
+
     ######################################################
     # Search Schemas
     ###
@@ -4642,6 +4913,27 @@ components:
         users_total:
           type: integer
           example: 15
+        studios:
+          type: array
+          description: 'Array of studios'
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              description:
+                type: string
+              image_path:
+                type: string
+              members_count:
+                type: integer
+              projects_count:
+                type: integer
+        studios_total:
+          type: integer
+          example: 5
 
     ######################################################
     # Reaction Schemas

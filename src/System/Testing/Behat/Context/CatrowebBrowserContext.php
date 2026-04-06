@@ -1537,4 +1537,34 @@ class CatrowebBrowserContext extends BrowserContext
       ->click()
     ;
   }
+
+  /**
+   * @When I fill in the element :selector with :value
+   *
+   * @throws ExpectationException
+   */
+  public function iFillInTheElementWith(string $selector, string $value): void
+  {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (null === $element) {
+      throw new ExpectationException("Element '{$selector}' was not found", $this->getSession());
+    }
+    $element->setValue($value);
+  }
+
+  /**
+   * @Then the element :selector should not contain :value
+   *
+   * @throws ExpectationException
+   */
+  public function theElementShouldNotContain(string $selector, string $value): void
+  {
+    $element = $this->getSession()->getPage()->find('css', $selector);
+    if (null === $element) {
+      throw new ExpectationException("Element '{$selector}' was not found", $this->getSession());
+    }
+    if (str_contains((string) $element->getText(), $value)) {
+      throw new ExpectationException("Element '{$selector}' contains '{$value}' but should not", $this->getSession());
+    }
+  }
 }

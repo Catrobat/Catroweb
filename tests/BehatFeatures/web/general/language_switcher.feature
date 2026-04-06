@@ -16,41 +16,44 @@ Feature: Users can choose between multiple languages. Text should be automatical
       | Catrobat  | 1       | 1    | 01.01.2017 12:00 |
       | Catrobat  | 2       | 2    | 01.01.2017 12:00 |
       | OtherUser | 1       | 4    | 01.01.2017 12:00 |
-    And there are featured projects:
-      | id | name    | active | flavor     | priority | ios_only |
-      | 1  | Minions | 1      | pocketcode | 1        | no       |
 
 
   Scenario: user can choose their language from a dropdown menu in the footer
     Given I am on homepage
     Then the selected language should be "English"
     And I wait for the page to be loaded
-    And I should see "featured"
-    But I should not see "Empfohlen"
+    And I wait for AJAX to finish
+    Then one of the ".project-list__title" elements should contain "Trending projects"
+    But I should not see "Interessante Projekte"
     Then I switch the language to "Deutsch"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the selected language should be "Deutsch"
-    And I should see "Empfohlen"
-    But I should not see "featured"
+    And one of the ".project-list__title" elements should contain "Interessante Projekte"
+    But I should not see "Trending projects"
 
   Scenario: Users should be able to switch the language
     Given the selected language is "English"
     And I am on the homepage
     And I wait for the page to be loaded
-    Then one of the ".project-list__title" elements should contain "Most downloaded"
-    And the element "#home-projects__most_downloaded" should be visible
+    And I wait for AJAX to finish
+    Then one of the ".project-list__title" elements should contain "Popular projects"
+    And the element "#home-projects__popular" should be visible
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
-    Then one of the ".project-list__title" elements should contain "Самые скачиваемые"
-    And the element "#home-projects__most_downloaded" should be visible
+    And I wait for AJAX to finish
+    Then one of the ".project-list__title" elements should contain "Популярные проекты"
+    And the element "#home-projects__popular" should be visible
     When I switch the language to "French"
     And I wait for the page to be loaded
-    Then one of the ".project-list__title" elements should contain "Les plus téléchargés"
-    And the element "#home-projects__most_downloaded" should be visible
+    And I wait for AJAX to finish
+    Then one of the ".project-list__title" elements should contain "Popular projects"
+    And the element "#home-projects__popular" should be visible
     When I switch the language to "Deutsch"
     And I wait for the page to be loaded
-    Then one of the ".project-list__title" elements should contain "heruntergeladen"
-    And the element "#home-projects__most_downloaded" should be visible
+    And I wait for AJAX to finish
+    Then one of the ".project-list__title" elements should contain "Beliebte Projekte"
+    And the element "#home-projects__popular" should be visible
 
   Scenario: User with selected russian language see details on program page
     Given there are forward remix relations:

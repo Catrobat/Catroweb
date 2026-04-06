@@ -6,11 +6,14 @@ namespace App\Api\Services\Studio;
 
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioProgram;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
+use App\Storage\ScreenshotRepository;
 use App\Studio\StudioManager;
+use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 class StudioApiLoader extends AbstractApiLoader
@@ -18,6 +21,8 @@ class StudioApiLoader extends AbstractApiLoader
   public function __construct(
     private readonly StudioManager $studio_manager,
     private readonly EntityManagerInterface $entity_manager,
+    private readonly UserManager $user_manager,
+    private readonly ScreenshotRepository $screenshot_repository,
   ) {
   }
 
@@ -30,7 +35,7 @@ class StudioApiLoader extends AbstractApiLoader
   {
     $studio = $this->studio_manager->findStudioById($id);
 
-    if (!$studio instanceof Studio || $studio->getAutoHidden()) {
+    if (!$studio instanceof Studio || $studio->getAutoHidden() || !$studio->isIsEnabled()) {
       return null;
     }
 
@@ -51,6 +56,7 @@ class StudioApiLoader extends AbstractApiLoader
     $qb->select('s')
       ->from(Studio::class, 's')
       ->where('s.auto_hidden = false')
+      ->andWhere('s.is_enabled = true')
       ->andWhere('s.is_public = true')
       ->orderBy('s.created_on', 'DESC')
       ->addOrderBy('s.id', 'DESC')
@@ -58,10 +64,7 @@ class StudioApiLoader extends AbstractApiLoader
     ;
 
     if (null !== $cursor_id) {
-      // cursor_id is a studio_user id used for offset — but studios use UUID.
-      // For studios we use a simple offset-based cursor: the encoded ID is the row number
-      // Actually, for UUID-based entities, we encode the created_on timestamp.
-      // Simplest approach: use offset-based with cursor = base64(offset_number)
+      // Studios use UUID primary keys, so cursor is offset-based: base64(row_offset)
       $qb->setFirstResult($cursor_id);
     }
 
@@ -149,6 +152,169 @@ class StudioApiLoader extends AbstractApiLoader
       'projects' => $projects,
       'has_more' => $has_more,
     ];
+  }
+
+  /**
+   * @return array{studios: Studio[], total: int, has_more: bool}
+   */
+  public function loadUserStudiosPage(User $user, int $limit, ?int $cursor_id, bool $include_private = false): array
+  {
+    $qb = $this->entity_manager->createQueryBuilder();
+    $qb->select('s')
+      ->from(Studio::class, 's')
+      ->join(StudioUser::class, 'su', 'WITH', 'su.studio = s')
+      ->where('su.user = :user')
+      ->andWhere('su.status = :status')
+      ->andWhere('s.auto_hidden = false')
+      ->andWhere('s.is_enabled = true')
+      ->setParameter('user', $user)
+      ->setParameter('status', StudioUser::STATUS_ACTIVE)
+    ;
+
+    if (!$include_private) {
+      $qb->andWhere('s.is_public = true');
+    }
+
+    $qb->orderBy('su.created_on', 'DESC')
+      ->addOrderBy('su.id', 'DESC')
+      ->setMaxResults($limit + 1)
+    ;
+
+    if (null !== $cursor_id) {
+      $qb->andWhere('su.id < :cursor_id')
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    /** @var Studio[] $studios */
+    $studios = $qb->getQuery()->getResult();
+
+    $has_more = count($studios) > $limit;
+    if ($has_more) {
+      array_pop($studios);
+    }
+
+    $totalQb = $this->entity_manager->createQueryBuilder();
+    $totalQb->select('COUNT(su.id)')
+      ->from(StudioUser::class, 'su')
+      ->join('su.studio', 's')
+      ->where('su.user = :user')
+      ->andWhere('su.status = :status')
+      ->andWhere('s.auto_hidden = false')
+      ->andWhere('s.is_enabled = true')
+      ->setParameter('user', $user)
+      ->setParameter('status', StudioUser::STATUS_ACTIVE)
+    ;
+
+    if (!$include_private) {
+      $totalQb->andWhere('s.is_public = true');
+    }
+
+    $total = (int) $totalQb->getQuery()->getSingleScalarResult();
+
+    return [
+      'studios' => $studios,
+      'total' => $total,
+      'has_more' => $has_more,
+    ];
+  }
+
+  /**
+   * Returns the StudioUser ID for the last studio in the list (used for cursor pagination).
+   */
+  public function getStudioUserIdForCursor(User $user, Studio $studio): ?int
+  {
+    $qb = $this->entity_manager->createQueryBuilder();
+    $qb->select('su.id')
+      ->from(StudioUser::class, 'su')
+      ->where('su.user = :user')
+      ->andWhere('su.studio = :studio')
+      ->andWhere('su.status = :status')
+      ->setParameter('user', $user)
+      ->setParameter('studio', $studio)
+      ->setParameter('status', StudioUser::STATUS_ACTIVE)
+      ->setMaxResults(1)
+    ;
+
+    $result = $qb->getQuery()->getOneOrNullResult();
+
+    return $result ? (int) $result['id'] : null;
+  }
+
+  public function loadUserById(string $id): ?User
+  {
+    return $this->user_manager->findOneBy(['id' => $id]);
+  }
+
+  /**
+   * @return array{activities: StudioActivity[], has_more: bool}
+   */
+  public function loadActivitiesPage(Studio $studio, int $limit, ?int $cursor_id): array
+  {
+    $qb = $this->entity_manager->createQueryBuilder();
+    $qb->select('a')
+      ->from(StudioActivity::class, 'a')
+      ->where('a.studio = :studio')
+      ->setParameter('studio', $studio)
+      ->orderBy('a.created_on', 'DESC')
+      ->addOrderBy('a.id', 'DESC')
+      ->setMaxResults($limit + 1)
+    ;
+
+    if (null !== $cursor_id) {
+      $qb->andWhere('a.id < :cursor_id')
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    /** @var StudioActivity[] $activities */
+    $activities = $qb->getQuery()->getResult();
+
+    $has_more = count($activities) > $limit;
+    if ($has_more) {
+      array_pop($activities);
+    }
+
+    return [
+      'activities' => $activities,
+      'has_more' => $has_more,
+    ];
+  }
+
+  /**
+   * @return list<array{id: string|null, name: string, in_studio: bool, screenshot_small: string|null}>
+   */
+  public function loadUserProjectsWithStudioFlag(User $user, Studio $studio): array
+  {
+    $user_projects = $this->studio_manager->getUserProjects($user);
+
+    // Load all studio project IDs for this studio in one query to avoid N+1
+    $qb = $this->entity_manager->createQueryBuilder();
+    $studioProjectIds = $qb->select('IDENTITY(sp.program)')
+      ->from(StudioProgram::class, 'sp')
+      ->where('sp.studio = :studio')
+      ->setParameter('studio', $studio)
+      ->getQuery()
+      ->getSingleColumnResult()
+    ;
+
+    $projects = [];
+    foreach ($user_projects as $project) {
+      $projectId = $project->getId();
+      $projects[] = [
+        'id' => $projectId,
+        'name' => $project->getName(),
+        'in_studio' => in_array($projectId, $studioProjectIds, true),
+        'screenshot_small' => null !== $projectId ? '/'.$this->screenshot_repository->getThumbnailWebPath($projectId) : null,
+      ];
+    }
+
+    return $projects;
+  }
+
+  public function loadStudioComment(int $comment_id): ?UserComment
+  {
+    return $this->studio_manager->findStudioCommentById($comment_id);
   }
 
   /**

@@ -17,16 +17,24 @@
     <div class="studio-detail__header__details container">
 
       <div class="col-3">
-        {{ studio.isPublic ? 'studio.public'|trans({}, 'catroweb') : 'studio.private'|trans({}, 'catroweb') }}
+        {{ is_public ? 'studio.public'|trans({}, 'catroweb') : 'studio.private'|trans({}, 'catroweb') }}
       </div>
 
       <div class="col-3">
         {% if user_role != null %}
           <div {{ stimulus_controller('studio--member-list', {
-            url: path('studio_members_list'),
+            membersUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/members',
             studioId: studio.id,
             listElementId: 'studioDetailMembersList',
           }) }}
+               data-is-studio-admin="{{ user_role == 'admin' ? 'true' : 'false' }}"
+               data-trans-promote-member="{{ 'studio.details.members_list.promote_member'|trans({}, 'catroweb') }}"
+               data-trans-ban-member="{{ 'studio.details.members_list.ban_member'|trans({}, 'catroweb') }}"
+               data-trans-promotion-failed="{{ 'studio.details.members_list.promotion_failed'|trans({}, 'catroweb') }}"
+               data-trans-ban-failed="{{ 'studio.details.members_list.ban_failed'|trans({}, 'catroweb') }}"
+               data-trans-no-studio-projects="{{ 'studio.details.members_list.no_studio_projects'|trans({}, 'catroweb') }}"
+               data-trans-one-studio-project="{{ 'studio.details.members_list.one_studio_project'|trans({}, 'catroweb') }}"
+               data-trans-n-studio-projects="{{ 'studio.details.members_list.n_studio_projects'|trans({'%count%': '%count%'}, 'catroweb') }}"
           >
             <a type="button"
                class="studio-detail__header__details__button studio-detail__header__details__button--member"
@@ -56,10 +64,13 @@
       <div class="col-3">
         {% if user_role == 'admin' %}
           <div {{ stimulus_controller('studio--activity-list', {
-            url: path('studio_activities_list'),
+            activitiesUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/activities',
             studioId: studio.id,
             listElementId: 'studioDetailActivityList',
           }) }}
+               data-trans-join-studio="{{ 'studio.details.activity_list.join_studio'|trans({'%user%': '%user%'}, 'catroweb') }}"
+               data-trans-add-project="{{ 'studio.details.activity_list.add_project'|trans({'%user%': '%user%'}, 'catroweb') }}"
+               data-trans-add-comment="{{ 'studio.details.activity_list.add_comment'|trans({'%user%': '%user%'}, 'catroweb') }}"
           >
             <a type="button"
                class="studio-detail__header__details__button studio-detail__header__details__button--activity"
@@ -90,28 +101,30 @@
       <div class="col-3">
         {% if user_name %}
           {% if user_role == 'admin' %}
-
-          {% elseif not status_public and status_private != 'pending' and status_private != 'declined' %}
-            <button
-                class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestJoin"
-                data-url="{{ path('studio_join', {id: studio.id}) }}">
-              {{ 'studio.join'|trans({}, 'catroweb') }}
-            </button>
-          {% elseif status_private == 'pending' %}
-            <button
-                class="studio-detail__header__details__pending-button btn btn-outline-primary btn-block requestPending">
-              {{ 'studio.details.pending'|trans({}, 'catroweb') }}
-            </button>
-          {% elseif status_private == 'declined' %}
-            <button
-                class="studio-detail__header__details__declined-button btn btn-outline-primary btn-block requestDecline">
-              {{ 'studio.details.decline'|trans({}, 'catroweb') }}
-            </button>
-          {% elseif status_private == 'approved' or status_public %}
+            {# Admins cannot leave — show nothing #}
+          {% elseif is_member %}
             <button
                 class="studio-detail__header__details__leave-button btn btn-outline-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestLeave"
-                data-url="{{ path('studio_leave', {id: studio.id}) }}">
+                data-url="{{ app.request.getBaseURL() }}/api/studio/{{ studio.id }}/leave"
+                data-method="DELETE">
               {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+            </button>
+          {% elseif join_request_status == 'pending' %}
+            <button
+                class="studio-detail__header__details__pending-button btn btn-outline-primary btn-block requestPending" disabled>
+              {{ 'studio.details.pending'|trans({}, 'catroweb') }}
+            </button>
+          {% elseif join_request_status == 'declined' %}
+            <button
+                class="studio-detail__header__details__declined-button btn btn-outline-danger btn-block requestDecline" disabled>
+              {{ 'studio.details.decline'|trans({}, 'catroweb') }}
+            </button>
+          {% else %}
+            <button
+                class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestJoin"
+                data-url="{{ app.request.getBaseURL() }}/api/studio/{{ studio.id }}/join"
+                data-method="POST">
+              {{ 'studio.join'|trans({}, 'catroweb') }}
             </button>
           {% endif %}
         {% else %}
@@ -122,31 +135,6 @@
         {% endif %}
       </div>
     </div>
-
-    {% if user_name is defined and user_name and user_role != 'admin' and not studio.autoHidden %}
-      <div class="mt-2">
-        <button id="btn-report-studio" class="btn btn-outline-danger btn-sm"
-                data-content-type="studio"
-                data-content-id="{{ studio.id }}"
-                data-report-url="{{ url('open_api_server_moderation_studioidreportpost', {id: studio.id}) }}"
-                data-login-url="{{ url('login') }}"
-                data-logged-in="{{ user_name ? 'true' : 'false' }}"
-                data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'studio'}, 'catroweb') }}"
-                data-trans-report-submit="{{ 'moderation.report.submit'|trans({}, 'catroweb') }}"
-                data-trans-report-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
-                data-trans-report-success="{{ 'moderation.report.success'|trans({}, 'catroweb') }}"
-                data-trans-report-error="{{ 'moderation.report.error'|trans({}, 'catroweb') }}"
-                data-trans-report-duplicate="{{ 'moderation.report.duplicate'|trans({}, 'catroweb') }}"
-                data-trans-report-trust-too-low="{{ 'moderation.report.trust_too_low'|trans({}, 'catroweb') }}"
-                data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb') }}"
-                data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb') }}"
-                data-trans-report-unverified="{{ 'moderation.report.unverified'|trans({}, 'catroweb') }}"
-                data-trans-report-suspended="{{ 'accountSuspended'|trans({}, 'catroweb') }}">
-          <i class="material-icons" style="font-size: 16px; vertical-align: middle;">flag</i>
-          {{ 'report'|trans({}, 'catroweb') }}
-        </button>
-      </div>
-    {% endif %}
 
     {{ include('Studio/Details/Tabs.html.twig') }}
 

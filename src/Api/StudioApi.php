@@ -28,6 +28,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   public function __construct(
     private readonly StudioApiFacade $facade,
     private readonly RateLimiterFactory $studioCreateDailyLimiter,
+    private readonly RateLimiterFactory $studioCommentBurstLimiter,
   ) {
   }
 
@@ -43,12 +44,15 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     }
 
     $page = $this->facade->getLoader()->loadStudiosPage($limit, $cursor_id);
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     $responseCode = Response::HTTP_OK;
 
     return $this->facade->getResponseManager()->createStudioListResponse(
       $page['studios'],
       $page['has_more'],
+      $user,
+      $cursor_id,
     );
   }
 
@@ -206,22 +210,12 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   #[\Override]
   public function studioIdMembersGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
-    if (!$studio instanceof Studio) {
-      $responseCode = Response::HTTP_NOT_FOUND;
-
+    $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
+    if (null === $result) {
       return null;
     }
 
-    $limit = $this->normalizeLimit($limit);
-    $cursor_id = $this->decodeIdCursor($cursor);
-    if (null === $cursor_id && null !== $cursor) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
-      return null;
-    }
-
-    $page = $this->facade->getLoader()->loadMembersPage($studio, $limit, $cursor_id);
+    $page = $this->facade->getLoader()->loadMembersPage($result['studio'], $this->normalizeLimit($limit), $result['cursor_id']);
 
     $responseCode = Response::HTTP_OK;
 
@@ -255,8 +249,8 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
       return;
     }
 
-    $this->facade->getProcessor()->joinStudio($user, $studio);
-    $responseCode = Response::HTTP_OK;
+    $joined = $this->facade->getProcessor()->joinStudio($user, $studio);
+    $responseCode = $joined ? Response::HTTP_OK : Response::HTTP_UNPROCESSABLE_ENTITY;
   }
 
   #[\Override]
@@ -296,22 +290,12 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   #[\Override]
   public function studioIdProjectsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
-    if (!$studio instanceof Studio) {
-      $responseCode = Response::HTTP_NOT_FOUND;
-
+    $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
+    if (null === $result) {
       return null;
     }
 
-    $limit = $this->normalizeLimit($limit);
-    $cursor_id = $this->decodeIdCursor($cursor);
-    if (null === $cursor_id && null !== $cursor) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
-      return null;
-    }
-
-    $page = $this->facade->getLoader()->loadProjectsPage($studio, $limit, $cursor_id);
+    $page = $this->facade->getLoader()->loadProjectsPage($result['studio'], $this->normalizeLimit($limit), $result['cursor_id']);
 
     $responseCode = Response::HTTP_OK;
 
@@ -407,24 +391,57 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studioIdCommentsCommentIdDelete(string $id, int $comment_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return;
+    }
+
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (!$studio instanceof Studio) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
+      return;
+    }
+
+    $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
+    if (!$studioUser instanceof StudioUser) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
+    $comment = $this->facade->getLoader()->loadStudioComment($comment_id);
+    if (null === $comment || $comment->getStudio()?->getId() !== $studio->getId()) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return;
+    }
+
+    $isAdmin = $studioUser->isAdmin();
+    $isOwner = $comment->getUser()?->getId() === $user->getId();
+    if (!$isAdmin && !$isOwner) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
+    $this->facade->getProcessor()->deleteComment($user, $comment_id);
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function studioIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
+    if (null === $result) {
       return null;
     }
 
-    $limit = $this->normalizeLimit($limit);
-    $cursor_id = $this->decodeIdCursor($cursor);
-    if (null === $cursor_id && null !== $cursor) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
-      return null;
-    }
-
-    $page = $this->facade->getLoader()->loadCommentsPage($studio, $limit, $cursor_id);
+    $page = $this->facade->getLoader()->loadCommentsPage($result['studio'], $this->normalizeLimit($limit), $result['cursor_id']);
 
     $responseCode = Response::HTTP_OK;
 
@@ -440,6 +457,12 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    if (null === $this->checkUserRateLimit($user, $this->studioCommentBurstLimiter)) {
+      $responseCode = Response::HTTP_TOO_MANY_REQUESTS;
 
       return null;
     }
@@ -491,11 +514,181 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     return $this->facade->getResponseManager()->createCommentResponse($comment);
   }
 
+  #[\Override]
+  public function studioIdMembersUserIdPromotePost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $context = $this->loadMemberActionContext($id, $user_id, $responseCode);
+    if (null === $context) {
+      return;
+    }
+
+    $result = $this->facade->getProcessor()->promoteMember($context['logged_in_user'], $context['studio'], $context['target_user']);
+    if (null === $result) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function studioIdMembersUserIdBanPost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $context = $this->loadMemberActionContext($id, $user_id, $responseCode);
+    if (null === $context) {
+      return;
+    }
+
+    $result = $this->facade->getProcessor()->banMember($context['logged_in_user'], $context['studio'], $context['target_user']);
+    if (null === $result) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
+  public function studioIdActivitiesGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $logged_in_user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$logged_in_user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $studioUser = $this->facade->getLoader()->loadStudioUser($logged_in_user, $studio);
+    if (!$studioUser instanceof StudioUser || !$studioUser->isAdmin()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    $limit = $this->normalizeLimit($limit);
+    $cursor_id = $this->decodeIdCursor($cursor);
+    if (null === $cursor_id && null !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $page = $this->facade->getLoader()->loadActivitiesPage($studio, $limit, $cursor_id);
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->facade->getResponseManager()->createActivityListResponse(
+      $page['activities'],
+      $page['has_more'],
+    );
+  }
+
+  #[\Override]
+  public function studioIdUserProjectsGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->facade->getResponseManager()->createUserProjectsResponse(
+      $this->facade->getLoader()->loadUserProjectsWithStudioFlag($user, $studio),
+    );
+  }
+
+  /**
+   * @return array{studio: Studio, cursor_id: ?int}|null null if response was set (error)
+   */
+  private function loadStudioForListing(string $id, int $limit, ?string $cursor, int &$responseCode): ?array
+  {
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    if (!$studio->isIsPublic()) {
+      $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+      $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
+      if (!$studioUser instanceof StudioUser) {
+        $responseCode = Response::HTTP_FORBIDDEN;
+
+        return null;
+      }
+    }
+
+    $cursor_id = $this->decodeIdCursor($cursor);
+    if (null === $cursor_id && null !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    return ['studio' => $studio, 'cursor_id' => $cursor_id];
+  }
+
   private function normalizeLimit(int $limit): int
   {
     $limit = $limit > 0 ? $limit : self::DEFAULT_LIMIT;
 
     return min($limit, self::MAX_LIMIT);
+  }
+
+  /**
+   * @return array{logged_in_user: User, studio: Studio, target_user: User, studio_user: StudioUser}|null
+   */
+  private function loadMemberActionContext(string $studio_id, string $user_id, int &$responseCode): ?array
+  {
+    $logged_in_user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$logged_in_user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $studio = $this->facade->getLoader()->loadVisibleStudio($studio_id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $target_user = $this->facade->getLoader()->loadUserById($user_id);
+    if (!$target_user instanceof User) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $studio_user = $this->facade->getLoader()->loadStudioUser($target_user, $studio);
+    if (!$studio_user instanceof StudioUser) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    return ['logged_in_user' => $logged_in_user, 'studio' => $studio, 'target_user' => $target_user, 'studio_user' => $studio_user];
   }
 
   private function decodeIdCursor(?string $cursor): ?int

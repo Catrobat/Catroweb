@@ -2,9 +2,25 @@
 
     <li id="top-app-bar__btn-report-studio"
         class="mdc-deprecated-list-item"
-        role="menuitem">
+        role="menuitem"
+        data-content-type="studio"
+        data-content-id="{{ studio.id }}"
+        data-report-url="{{ url('open_api_server_moderation_studioidreportpost', {id: studio.id}) }}"
+        data-logged-in="{{ app.user ? 'true' : 'false' }}"
+        data-login-url="{{ url('login') }}"
+        data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'studio'}, 'catroweb') }}"
+        data-trans-report-submit="{{ 'moderation.report.submit'|trans({}, 'catroweb') }}"
+        data-trans-report-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+        data-trans-report-success="{{ 'moderation.report.success'|trans({}, 'catroweb') }}"
+        data-trans-report-error="{{ 'moderation.report.error'|trans({}, 'catroweb') }}"
+        data-trans-report-duplicate="{{ 'moderation.report.duplicate'|trans({}, 'catroweb') }}"
+        data-trans-report-trust-too-low="{{ 'moderation.report.trust_too_low'|trans({}, 'catroweb') }}"
+        data-trans-report-unverified="{{ 'moderation.report.unverified'|trans({}, 'catroweb') }}"
+        data-trans-report-suspended="{{ 'accountSuspended'|trans({}, 'catroweb') }}"
+        data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb') }}"
+        data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb') }}">
       <span class="mdc-deprecated-list-item__ripple"></span>
-      <span class="mdc-deprecated-list-item__graphic material-icons">share</span>
+      <span class="mdc-deprecated-list-item__graphic material-icons">flag</span>
       <span class="mdc-deprecated-list-item__text">{{ 'report'|trans({}, 'catroweb') }}</span>
     </li>
 

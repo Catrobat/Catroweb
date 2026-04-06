@@ -17,7 +17,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
       | id | user     | type | like_from | project_id |
       | 1  | Catrobat | like | User-id   | 1          |
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "User reacted to"
@@ -28,7 +28,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
       | 1  | Catrobat | like | Catrobat-id | 1          |
       | 2  | User     | like | Catrobat-id | 2          |
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should not see "Catrobat reacted"
@@ -38,7 +38,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
       | id | user     | type | like_from | project_id |
       | 1  | Catrobat | like | User-id   | 1          |
     And I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     When I click "#catro-notification-1"

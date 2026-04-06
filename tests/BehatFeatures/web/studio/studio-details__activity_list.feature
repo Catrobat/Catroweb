@@ -27,6 +27,7 @@ Feature: Every studio provides a list of all members
   Scenario: If I am not logged in I should not be able see all members
     Given I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".studio-detail__header__details__button--activity" should not exist
     And the ".activity_count" element should contain "4"
 
@@ -34,6 +35,7 @@ Feature: Every studio provides a list of all members
     Given I log in as "Catrobat"
     Given I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".studio-detail__header__details__button--activity" should not exist
     And the ".activity_count" element should contain "4"
 
@@ -41,6 +43,7 @@ Feature: Every studio provides a list of all members
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".studio-detail__header__details__button--activity" should be visible
     And the ".activity_count" element should contain "4"
     When I click ".studio-detail__header__details__button--activity"

@@ -12,6 +12,8 @@ use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\Notifications\NewProgramNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
+use App\DB\Entity\User\Notifications\StudioCommentNotification;
+use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
@@ -180,6 +182,41 @@ class NotificationsResponseManager extends AbstractResponseManager
       }
 
       return new NotificationResponse($response);
+    }
+
+    if ($notification instanceof StudioCommentNotification) {
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'studio',
+        'seen' => $notification->getSeen(),
+        'from' => $notification->getCommentUser()?->getId(),
+        'from_name' => $notification->getCommentUser()?->getUserIdentifier(),
+        'avatar' => $notification->getCommentUser()?->getAvatar(),
+        'studio' => $notification->getStudio()?->getId(),
+        'message' => $this->trans('catro-notifications.studio-comment.message', [
+          '%user_link%' => '%user_link%',
+          '%studio_name%' => $notification->getStudio()?->getName() ?? '',
+        ]),
+      ]);
+    }
+
+    if ($notification instanceof StudioProjectNotification) {
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'studio',
+        'seen' => $notification->getSeen(),
+        'from' => $notification->getProjectUser()?->getId(),
+        'from_name' => $notification->getProjectUser()?->getUserIdentifier(),
+        'project' => $notification->getProgram()?->getId(),
+        'project_name' => $notification->getProgram()?->getName(),
+        'avatar' => $notification->getProjectUser()?->getAvatar(),
+        'studio' => $notification->getStudio()?->getId(),
+        'message' => $this->trans('catro-notifications.studio-project.message', [
+          '%user_link%' => '%user_link%',
+          '%program_link%' => '%program_link%',
+          '%studio_name%' => $notification->getStudio()?->getName() ?? '',
+        ]),
+      ]);
     }
 
     return new NotificationResponse([

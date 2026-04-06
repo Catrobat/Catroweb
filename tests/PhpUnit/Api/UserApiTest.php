@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api;
 
 use App\Api\Services\AuthenticationManager;
+use App\Api\Services\Studio\StudioApiLoader;
+use App\Api\Services\Studio\StudioResponseManager;
 use App\Api\Services\User\UserApiFacade;
 use App\Api\Services\User\UserApiLoader;
 use App\Api\Services\User\UserApiProcessor;
@@ -81,6 +83,8 @@ final class UserApiTest extends TestCase
       new RequestStack(),
       $captchaVerifier,
       $this->createStub(EntityManagerInterface::class),
+      $this->createStub(StudioApiLoader::class),
+      $this->createStub(StudioResponseManager::class),
     );
   }
 
@@ -371,6 +375,8 @@ final class UserApiTest extends TestCase
       new RequestStack(),
       $captchaVerifier,
       $this->createStub(EntityManagerInterface::class),
+      $this->createStub(StudioApiLoader::class),
+      $this->createStub(StudioResponseManager::class),
     );
 
     $register_request = $this->createStub(RegisterRequest::class);

@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ReportsController extends AbstractController
 {
-  #[Route(path: '/user_reports', name: 'user_reports', methods: ['GET'])]
+  #[Route(path: '/reports', name: 'user_reports', methods: ['GET'])]
   public function reports(): Response
   {
     if (!$this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {

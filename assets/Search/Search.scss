@@ -10,3 +10,170 @@
   position: relative;
   height: auto;
 }
+
+// Search page sections — card-style with distinct backgrounds
+.search-section {
+  min-height: 160px;
+  margin-bottom: 1.25rem;
+  padding: 1.25rem 0 1rem;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 8px rgb(0 0 0 / 6%);
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 16px rgb(0 0 0 / 10%);
+  }
+
+  &--projects {
+    background: light-dark(
+      linear-gradient(135deg, #f8faf8 0%, #f0f4f0 100%),
+      linear-gradient(135deg, #1a2a1a 0%, #1e2e1e 100%)
+    );
+    border-color: light-dark(#e4ece4, #2a3a2a);
+  }
+
+  &--users {
+    background: light-dark(
+      linear-gradient(135deg, #f7f8fc 0%, #eff1f9 100%),
+      linear-gradient(135deg, #1a1a2a 0%, #1e1e30 100%)
+    );
+    border-color: light-dark(#e2e4ee, #2a2a3e);
+  }
+
+  &--studios {
+    background: light-dark(
+      linear-gradient(135deg, #fdf8f4 0%, #f9f0e8 100%),
+      linear-gradient(135deg, #2a1e14 0%, #2e2218 100%)
+    );
+    border-color: light-dark(#eee4d8, #3e3228);
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.25rem 0.75rem;
+
+    h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    &__show-more {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--mdc-theme-primary, #689f38);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      transition: background 0.15s;
+
+      &:hover {
+        background: rgb(0 0 0 / 5%);
+        text-decoration: none;
+      }
+
+      .material-icons {
+        font-size: 1rem;
+      }
+
+      &.d-none {
+        display: none !important;
+      }
+    }
+  }
+
+  &__items {
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.25rem 1.25rem 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgb(0 0 0 / 15%);
+      border-radius: 2px;
+    }
+  }
+
+  &__empty {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: $text-muted;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+}
+
+// Unified search cards — consistent across all 3 categories
+.search-card {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 25vw;
+  max-width: 150px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease;
+
+  @media (width >= 768px) {
+    width: 10vw;
+  }
+
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+
+    .search-card__image {
+      box-shadow: 0 4px 16px rgb(0 0 0 / 20%);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #e8e8e8;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    transition: box-shadow 0.15s ease;
+  }
+
+  &__name {
+    display: -webkit-box;
+    max-width: 100%;
+    height: 2.5rem;
+    margin-top: 0.4rem;
+    overflow: hidden;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    margin-top: 0.1rem;
+    font-size: 0.72rem;
+    color: $text-muted;
+
+    .material-icons {
+      font-size: 0.85rem;
+    }
+  }
+}

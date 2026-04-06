@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Admin\Comments\CommentsAdmin;
+use App\Admin\FeaturedBannerAdmin;
 use App\Admin\MediaLibrary\MediaAssetAdmin;
 use App\Admin\MediaLibrary\MediaCategoryAdmin;
 use App\Admin\Moderation\AppealQueueAdmin;
@@ -14,7 +15,6 @@ use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
 use App\Admin\Projects\BrokenProjects\BrokenProjectsAdmin;
 use App\Admin\Projects\ProjectsAdmin;
 use App\Admin\Projects\SpecialProjects\ExampleProjectAdmin;
-use App\Admin\Projects\SpecialProjects\FeaturedProjectAdmin;
 use App\Admin\Projects\UploadProject\UploadProjectAdmin;
 use App\Admin\Projects\UploadProject\UploadProjectController;
 use App\Admin\Statistics\Translation\CommentMachineTranslationAdmin;
@@ -64,6 +64,7 @@ use App\Api\Services\OverwriteController;
 use App\Api\StudioApi;
 use App\Api\UserApi;
 use App\Api\UtilityApi;
+use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
@@ -72,7 +73,6 @@ use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\ExampleProgram;
-use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\System\CronJob;
 use App\DB\Entity\System\FeatureFlag;
@@ -328,14 +328,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       ]
     )
   ;
-  $services->set('admin.block.featured.projects', FeaturedProjectAdmin::class)
+  $services->set('admin.block.featured.banners', FeaturedBannerAdmin::class)
     ->tag(
       'sonata.admin',
       [
         'manager_type' => 'orm',
-        'label' => 'Featured Projects',
+        'label' => 'Featured Banners',
         'code' => null,
-        'model_class' => FeaturedProgram::class,
+        'model_class' => FeaturedBanner::class,
         'controller' => null,
       ]
     )

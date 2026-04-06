@@ -56,7 +56,7 @@ class FollowersController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdFollowPostAction(Request $request, $id)
+  public function userIdFollowPostAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -129,7 +129,7 @@ class FollowersController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdFollowersGetAction(Request $request, $id)
+  public function userIdFollowersGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -203,7 +203,7 @@ class FollowersController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdFollowingGetAction(Request $request, $id)
+  public function userIdFollowingGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -277,7 +277,7 @@ class FollowersController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdUnfollowDeleteAction(Request $request, $id)
+  public function userIdUnfollowDeleteAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required

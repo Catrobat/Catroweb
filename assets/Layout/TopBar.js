@@ -110,7 +110,9 @@ function submitSearchForm(event) {
   const query = searchInput.value.trim()
   const targetUrl = searchUrl + encodeURIComponent(query)
 
-  if (!window.location.href.includes(targetUrl)) {
+  const target = new URL(targetUrl, window.location.origin)
+  const current = new URL(window.location.href)
+  if (target.pathname !== current.pathname || target.search !== current.search) {
     window.location.href = targetUrl
   } else {
     showSnackbar('#share-snackbar', sameSearchMessage)

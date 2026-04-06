@@ -18,6 +18,15 @@
     {# logged in #}
     {% if app.user %}
 
+      {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
+            <span class="sidebar-link-icon material-icons">security</span>
+            <span class="sidebar-link-text">{{ 'menu.admin'|trans({}, 'catroweb') }}</span>
+          </a>
+        </li>
+      {% endif %}
+
       <li class="nav-item">
         <a class="nav-link" href="{{ url('notifications') }}" id="sidebar-notifications">
           <span class="sidebar-link-icon material-icons">notifications</span>
@@ -34,39 +43,12 @@
         </a>
       </li>
 
-      {% if not app.user.isMinor() %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('user_reports') }}" id="sidebar-reports">
-            <span class="sidebar-link-icon material-icons">flag</span>
-            <span class="sidebar-link-text">{{ 'My Reports'|trans({}, 'catroweb') }}</span>
-          </a>
-        </li>
-      {% endif %}
-
       <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">
           <span class="sidebar-link-icon material-icons">person</span>
           <span class="sidebar-link-text">{{ 'menu.profile'|trans({}, 'catroweb') }}</span>
         </a>
       </li>
-
-      {% if is_granted('ROLE_ADMIN') %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">
-            <span class="sidebar-link-icon material-icons">security</span>
-            <span class="sidebar-link-text">{{ 'menu.admin'|trans({}, 'catroweb') }}</span>
-          </a>
-        </li>
-      {% endif %}
-
-      {% if not app.user.isMinor() %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url('catrobat_follower') }}" id="btn-follow">
-            <span class="sidebar-link-icon material-icons">people</span>
-            <span class="sidebar-link-text">{{ 'menu.followersAndFollowing'|trans({}, 'catroweb') }}</span>
-          </a>
-        </li>
-      {% endif %}
 
     {% else %} {# not logged in #}
       <li class="nav-item">
@@ -125,20 +107,34 @@
     {# Always visible #}
 
     <li class="nav-item">
+      <a class="nav-link" href="{{ url('projects_browse') }}" id="btn-projects">
+        <span class="sidebar-link-icon material-icons">apps</span>
+        <span class="sidebar-link-text">{{ 'projects'|trans({}, 'catroweb') }}</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('studios_overview') }}" id="btn-studio">
+        <span class="sidebar-link-icon material-icons">group_work</span>
+        <span class="sidebar-link-text">{{ 'menu.studio'|trans({}, 'catroweb') }}</span>
+      </a>
+    </li>
+
+    {% if app.user and not app.user.isMinor() %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('catrobat_follower') }}" id="btn-follow">
+          <span class="sidebar-link-icon material-icons">people</span>
+          <span class="sidebar-link-text">{{ 'menu.followersAndFollowing'|trans({}, 'catroweb') }}</span>
+        </a>
+      </li>
+    {% endif %}
+
+    <li class="nav-item">
       <a class="nav-link" href="{{ url('media_library_overview') }}">
         <span class="sidebar-link-icon material-icons">collections</span>
         <span class="sidebar-link-text">{{ 'menu.mediaLibrary'|trans({}, 'catroweb') }}</span>
       </a>
     </li>
-
-    {% if isFeatureFlagEnabled('Sidebar-Studio-Link-Feature') %}
-      <li class="nav-item" >
-        <a class="nav-link" href="{{ url('studios_overview') }}" id="btn-studio">
-          <span class="sidebar-link-icon material-icons">group_work</span>
-          <span class="sidebar-link-text">{{ 'menu.studio'|trans({}, 'catroweb') }}</span>
-        </a>
-      </li>
-    {% endif %}
 
     <li class="nav-item dropdown">
       <a class="nav-link" id="btn-language">
@@ -154,11 +150,20 @@
       </a>
     </li>
 
+    {% if app.user and not app.user.isMinor() %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url('user_reports') }}" id="sidebar-reports">
+          <span class="sidebar-link-icon material-icons">flag</span>
+          <span class="sidebar-link-text">{{ 'Reports'|trans({}, 'catroweb') }}</span>
+        </a>
+      </li>
+    {% endif %}
+
     {% if not isWebview() and app.user %}
       {# logout #}
       <li class="nav-item" id="logout-nav-item">
         <a class="nav-link" href="#" id="btn-logout" data-logout-path="{{ url('logout') }}">
-          <span class="sidebar-link-icon material-icons ">exit_to_app</span>
+          <span class="sidebar-link-icon material-icons">exit_to_app</span>
           <span class="sidebar-link-text">{{ 'menu.logout'|trans({}, 'catroweb') }}</span>
         </a>
       </li>

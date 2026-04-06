@@ -28,30 +28,30 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: #fff;
+  background-color: light-dark(#fff, #2d2d3d);
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  box-shadow: 0 1px 3px light-dark(rgb(0 0 0 / 10%), rgb(0 0 0 / 30%));
   transition: all 0.2s ease;
   cursor: pointer;
   position: relative;
 
   &:hover {
-    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    box-shadow: 0 2px 8px light-dark(rgb(0 0 0 / 15%), rgb(0 0 0 / 40%));
     transform: translateY(-1px);
   }
 
   &:active {
     transform: translateY(0);
-    background-color: #f5f5f5;
+    background-color: light-dark(#f5f5f5, #353548);
   }
 
   // Read notification styling (subtle dimming)
   &:not(.notification-unread) {
-    background-color: #fafafa;
+    background-color: light-dark(#fafafa, #26263a);
     opacity: 0.8;
 
     .notification-content {
-      color: #777;
+      color: light-dark(#777, #999);
     }
 
     .notification-avatar-img {
@@ -61,12 +61,12 @@
 
   // Unread notification styling
   &.notification-unread {
-    background-color: #f0f9ff;
+    background-color: light-dark(#f0f9ff, #1e2a3d);
     border-left: 4px solid var(--primary, #007bff);
-    box-shadow: 0 2px 4px rgb(0 123 255 / 10%);
+    box-shadow: 0 2px 4px light-dark(rgb(0 123 255 / 10%), rgb(0 123 255 / 20%));
 
     &:hover {
-      background-color: #e6f4ff;
+      background-color: light-dark(#e6f4ff, #243248);
     }
 
     .notification-content {
@@ -135,7 +135,7 @@
 .notification-content {
   flex: 1;
   min-width: 0; // Allow text truncation
-  color: #333;
+  color: light-dark(#333, #e2e8f0);
   font-size: 0.9375rem;
   line-height: 1.5;
 
@@ -193,7 +193,7 @@
 .no-notifications {
   padding: 3rem 1rem;
   text-align: center;
-  color: #6c757d;
+  color: light-dark(#6c757d, #a0a0b0);
   font-size: 1rem;
 
   @media screen and (width <= 576px) {

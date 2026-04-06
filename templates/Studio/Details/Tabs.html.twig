@@ -8,7 +8,8 @@
                     href="#projects-pane" role="tab" aria-selected="true" tabindex="0">
                                                 <span class="mdc-tab__content"><span
                                                       class="tab-text">{{ 'studio.details.projects.title'|trans({}, 'catroweb') }}&nbsp;</span><span
-                                                      id="projects-count">({{ projects_count }})</span></span>
+                                                      id="projects-count"
+                                                      data-studio--project-list-target="count">({{ projects_count }})</span></span>
               <span class="mdc-tab-indicator mdc-tab-indicator--active">
                                 <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
                             </span>
@@ -19,7 +20,8 @@
                     href="#comments-pane" role="tab" aria-selected="false" tabindex="0">
                                                 <span class="mdc-tab__content">
                                                   <span class="tab-text">{{ 'studio.details.comments.title'|trans({}, 'catroweb') }}&nbsp;</span>
-                                                  (<span id="comments-count">{{ comments_count }}</span>)
+                                                  (<span id="comments-count"
+                                                         data-studio--comment-target="count">{{ comments_count }}</span>)
                                                 </span>
               <span class="mdc-tab-indicator">
                                 <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>

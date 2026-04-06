@@ -11,6 +11,9 @@ use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProgram;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
+use App\DB\Entity\User\Notifications\CatroNotification;
+use App\DB\Entity\User\Notifications\StudioCommentNotification;
+use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
@@ -19,6 +22,7 @@ use App\DB\EntityRepository\Studios\StudioProgramRepository;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\User\Notification\NotificationManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -38,6 +42,7 @@ class StudioManager
     protected StudioJoinRequestRepository $studio_join_request_repository,
     protected ProgramRepository $program_repository,
     protected ParameterBagInterface $parameter_bag,
+    protected NotificationManager $notification_manager,
   ) {
   }
 
@@ -195,8 +200,11 @@ class StudioManager
     }
 
     $activity = $this->createActivity($user, $studio, StudioActivity::TYPE_COMMENT);
+    $comment = $this->createStudioComment($user, $studio, $activity, $comment_text, $parent_id);
 
-    return $this->createStudioComment($user, $studio, $activity, $comment_text, $parent_id);
+    $this->notifyStudioMembers($studio, $user, fn (User $member) => new StudioCommentNotification($member, $studio, $user));
+
+    return $comment;
   }
 
   public function addProjectToStudio(User $user, Studio $studio, Program $project): ?StudioProgram
@@ -206,8 +214,11 @@ class StudioManager
     }
 
     $activity = $this->createActivity($user, $studio, StudioActivity::TYPE_PROJECT);
+    $studioProgram = $this->createStudioProgram($user, $studio, $activity, $project);
 
-    return $this->createStudioProgram($user, $studio, $activity, $project);
+    $this->notifyStudioMembers($studio, $user, fn (User $member) => new StudioProjectNotification($member, $studio, $user, $project));
+
+    return $studioProgram;
   }
 
   public function changeStudio(User $user, Studio $studio): ?Studio
@@ -322,7 +333,14 @@ class StudioManager
   {
     $cover_asset_path = null;
     if ($image_file instanceof UploadedFile) {
-      $cover_asset_path = TimeUtils::getTimestamp().'-'.str_replace(' ', '-', $name).'.'.$image_file->getClientOriginalExtension();
+      $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+      $extension = strtolower($image_file->getClientOriginalExtension());
+      if (!in_array($extension, $allowed_extensions, true)) {
+        throw new \InvalidArgumentException('Invalid image file extension.');
+      }
+      $safe_name = str_replace(' ', '-', $name);
+      $safe_name = preg_replace('/[^a-zA-Z0-9_-]/', '', $safe_name) ?: 'studio';
+      $cover_asset_path = TimeUtils::getTimestamp().'-'.$safe_name.'.'.$extension;
       /** @var string $resources_dir */
       $resources_dir = $this->parameter_bag->get('catrobat.resources.dir');
       $studio_image_dir = $resources_dir.'images/studio/';
@@ -365,6 +383,11 @@ class StudioManager
   public function findAllStudiosWithUsersAndProjectsCount(): array
   {
     return $this->studio_repository->findAllStudiosWithUsersAndProjectsCount();
+  }
+
+  public function findStudiosWithUserContext(?User $user): array
+  {
+    return $this->studio_repository->findStudiosWithUserContext($user);
   }
 
   public function findAllStudioActivities(Studio $studio): array
@@ -578,5 +601,29 @@ class StudioManager
   public function findOneByName(string $programName): ?Program
   {
     return $this->program_repository->findOneByName($programName);
+  }
+
+  /**
+   * Notify all active studio members except the actor.
+   *
+   * @param \Closure(User): CatroNotification $notificationFactory
+   */
+  protected function notifyStudioMembers(Studio $studio, User $actor, \Closure $notificationFactory): void
+  {
+    $studioUsers = $this->studio_user_repository->findAllStudioUsers($studio);
+
+    $notifications = [];
+    foreach ($studioUsers as $studioUser) {
+      $member = $studioUser->getUser();
+      if ($member->getId() === $actor->getId()) {
+        continue;
+      }
+
+      $notifications[] = $notificationFactory($member);
+    }
+
+    if ([] !== $notifications) {
+      $this->notification_manager->addNotifications($notifications);
+    }
   }
 }

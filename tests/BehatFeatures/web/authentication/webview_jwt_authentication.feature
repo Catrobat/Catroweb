@@ -10,7 +10,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I use a valid BEARER cookie for "WebViewUser"
     When I go to "/app/user"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
+    Then I should see "Profile"
     And the "profile-email__input" field should contain "dev1@catrob.at"
 
   Scenario: Log in using Catrobat user and show profile (cookie)
@@ -23,7 +23,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I use a valid JWT token for "WebViewUser"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
+    Then I should see "Profile"
     And the "profile-email__input" field should contain "dev1@catrob.at"
 
   Scenario: Log in using Catrobat user with wrong token
@@ -31,20 +31,20 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I am on "/app/user"
     And I wait for the page to be loaded
     Then I should not see "WebViewUser"
-    Then I should not see "My Profile"
+    Then I should not see "Profile"
 
   Scenario: Log in using empty token should be ignored
     Given I use an empty JWT token for "WebViewUser"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should not see "My Profile"
+    Then I should not see "Profile"
     And I should be on "/app/login"
     And I should see 1 "#password"
 
   Scenario: Log in without user auth header should be ignored
     Given I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should not see "My Profile"
+    Then I should not see "Profile"
     And I should be on "/app/login"
     And I should see 1 "#password__input"
 
@@ -68,5 +68,5 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Then I should see 1 "#btn-profile"
     And I go to "/app/user"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
+    Then I should see "Profile"
     And the "profile-email__input" field should contain "dev1@catrob.at"

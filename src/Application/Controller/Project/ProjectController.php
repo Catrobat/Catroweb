@@ -46,6 +46,28 @@ class ProjectController extends AbstractController
   ) {
   }
 
+  #[Route(path: '/projects', name: 'projects_browse', methods: ['GET'])]
+  public function projectsBrowse(): Response
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+
+    return $this->render('Project/ProjectsBrowse.html.twig', [
+      'is_logged_in' => null !== $user,
+      'user_id' => null !== $user ? ($user->getId() ?? '') : '',
+    ]);
+  }
+
+  #[Route(path: '/project/upload', name: 'project_upload', methods: ['GET'], priority: 10)]
+  public function projectUpload(): Response
+  {
+    if (!$this->getUser()) {
+      return $this->redirectToRoute('login');
+    }
+
+    return $this->render('Project/ProjectUpload.html.twig');
+  }
+
   #[Route(path: '/project/{id}', name: 'program', defaults: ['id' => 0])]
   #[Route(path: '/program/{id}', name: 'program_deprecated')]
   #[Route(path: '/details/{id}', name: 'catrobat_web_detail', methods: ['GET'])]

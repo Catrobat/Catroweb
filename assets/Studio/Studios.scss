@@ -6,42 +6,73 @@
 
 $list-item-padding-overflow-x: 1.5rem;
 
+.studios-section {
+  margin-bottom: 1.5rem;
+}
+
+.studios-section__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+}
+
 .studios-list {
   padding: 0;
   margin: 0 0 2rem;
 }
 
-.studios-list-item {
+.studios-list-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem $list-item-padding-overflow-x;
   width: calc(100% + (2 * $list-item-padding-overflow-x));
   margin: 0 (-$list-item-padding-overflow-x);
-  padding: 0.75rem $list-item-padding-overflow-x;
+  border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: custom-alpha(--color-primary, 0.06);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.studios-list-item-link {
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  min-width: 0;
+}
+
+.studios-list-item {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   color: var(--bs-body-color);
 }
 
-.studios-list-item:hover,
-.studios-list-item:focus,
-.studios-list-item:active {
-  background: custom-alpha(--color-primary, 0.12);
-}
-
 .studios-list-item--image {
-  height: 5rem;
-  width: 5rem;
+  height: 60px;
+  width: 60px;
   margin: 0 1rem 0 0;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   flex: 0 0 auto;
   object-fit: cover;
 }
 
 .studios-list-item--content {
   flex: 1 1 auto;
+  min-width: 0;
 }
 
 .studios-list-item--buttons {
   flex: 0 0 auto;
+  margin-left: auto;
 }
 
 .studios-list-item--heading {
@@ -326,5 +357,44 @@ $list-item-padding-overflow-x: 1.5rem;
   &:hover {
     transform: scale(1.1);
     transition: transform 0.3s ease;
+  }
+}
+
+// Floating action button for "Create Studio"
+.studios-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.25rem;
+  height: 48px;
+  border-radius: 24px;
+  background: var(--primary, #00acc1);
+  color: var(--on-primary, #fff);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+
+  .material-icons {
+    font-size: 1.25rem;
+  }
+
+  &__text {
+    // Always show text, same design on mobile and desktop
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 30%);
+    color: var(--on-primary, #fff);
+    text-decoration: none;
   }
 }

@@ -14,7 +14,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
     Given I have a project with "url" set to "/app/project/1"
     And user "User" uploads this generated project
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "User created a remix"
@@ -27,7 +27,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
     Given I have a project with "url" set to "/app/project/1"
     And user "Catrobat" uploads this generated project
     When I log in as "Catrobat"
-    And I go to "/app/user_notifications"
+    And I go to "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "It looks like you don't have any notifications."
@@ -36,7 +36,7 @@ Feature: User gets notifications when somebody uploads a remix of his project
     Given I have a project with "url" set to "/app/project/1"
     And user "User" uploads this generated project, ID '3'
     And I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     When I click "#catro-notification-1"

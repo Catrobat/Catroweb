@@ -42,7 +42,8 @@
                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                         {% if not studio.is_joined and studio.status != 'pending' and studio.status != 'declined' %}
                                             <span id="requestJoin-{{ studio.id }}" class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestJoin"
-                                                  data-url="{{ path('studio_join', {id: studio.id}) }}">
+                                                  data-url="/api/studio/{{ studio.id }}/join"
+                                                  data-method="POST">
                                                  {{ 'studio.details.join'|trans({}, 'catroweb') }}
                                            </span>
                                         {% else %}
@@ -57,7 +58,8 @@
                                                  </span>
                                             {% elseif studio.status == 'approved' or studio.is_joined %}
                                                 <span id="requestLeave-{{ studio.id }}" class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestLeave"
-                                                      data-url="{{ path('studio_leave', {id: studio.id}) }}">
+                                                      data-url="/api/studio/{{ studio.id }}/leave"
+                                                      data-method="DELETE">
                                                    {{ 'studio.details.leave'|trans({}, 'catroweb') }}
                                                 </span>
                                             {% endif %}

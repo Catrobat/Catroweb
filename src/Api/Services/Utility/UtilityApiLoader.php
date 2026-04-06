@@ -5,14 +5,26 @@ declare(strict_types=1);
 namespace App\Api\Services\Utility;
 
 use App\Api\Services\Base\AbstractApiLoader;
+use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\System\Survey;
+use App\DB\EntityRepository\FeaturedBannerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UtilityApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly EntityManagerInterface $entity_manager)
+  public function __construct(
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly FeaturedBannerRepository $featured_banner_repository,
+  ) {
+  }
+
+  /**
+   * @return FeaturedBanner[]
+   */
+  public function getActiveBanners(int $limit, int $offset): array
   {
+    return $this->featured_banner_repository->findActiveBanners($limit, $offset);
   }
 
   public function getSurvey(array $criteria): ?Survey

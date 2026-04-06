@@ -1,6 +1,6 @@
 import { Carousel } from 'bootstrap'
 
-export class FeaturedProjects {
+export class FeaturedBanner {
   constructor(containerId) {
     this.container = document.getElementById(containerId)
   }
@@ -10,14 +10,14 @@ export class FeaturedProjects {
       return
     }
 
-    const { baseUrl, flavor, isGuest, isWebview, transFeatured } = this.container.dataset
+    const { baseUrl, flavor } = this.container.dataset
 
-    const apiUrl = `${baseUrl}/api/projects/featured?flavor=${flavor}&attributes=url,project_url,featured_image`
+    const apiUrl = `${baseUrl}/api/featured-banners`
 
     fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`)
-        return response.json()
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
       })
       .then((items) => {
         if (!Array.isArray(items) || items.length === 0) {
@@ -25,21 +25,22 @@ export class FeaturedProjects {
           return
         }
 
-        const slides = items.map((item) => ({
-          url: item.project_url ? item.project_url.replace('/app/', `/${flavor}/`) : item.url,
-          image: item.featured_image,
-        }))
-
-        if (isGuest === '1' && isWebview !== '1') {
-          const heading = document.createElement('h2')
-          heading.textContent = transFeatured
-          this.container.before(heading)
-        }
+        const slides = items.map((item) => {
+          let url = item.link_url
+          if (url && flavor) {
+            url = url.replace('/app/', `/${flavor}/`)
+          }
+          return {
+            url: url || null,
+            image: item.image_url || '/images/default/screenshot.png',
+            title: item.title || '',
+          }
+        })
 
         this.renderCarousel(slides)
       })
       .catch((error) => {
-        console.error('Failed to load featured projects', error)
+        console.error('Failed to load featured banners', error)
         this.container.style.display = 'none'
       })
   }
@@ -49,7 +50,7 @@ export class FeaturedProjects {
 
     const carouselDiv = document.createElement('div')
     carouselDiv.id = carouselId
-    carouselDiv.className = 'carousel slide center mb-4'
+    carouselDiv.className = 'carousel slide center mb-2 featured-banner'
     carouselDiv.setAttribute('data-bs-ride', 'carousel')
 
     // Indicators
@@ -73,23 +74,35 @@ export class FeaturedProjects {
     const inner = document.createElement('div')
     inner.className = 'carousel-inner'
     slides.forEach((slide, i) => {
-      const link = document.createElement('a')
-      link.className = i === 0 ? 'carousel-item active' : 'carousel-item'
-      link.href = slide.url
+      const wrapper = slide.url ? document.createElement('a') : document.createElement('div')
+      wrapper.className = i === 0 ? 'carousel-item active' : 'carousel-item'
+      if (slide.url) {
+        wrapper.href = slide.url
+      }
       if (i > 0) {
-        link.style.background = '#fff'
+        wrapper.style.background = '#fff'
       }
 
       const img = document.createElement('img')
       img.src = slide.image
       img.className = 'carousel-item__image d-block w-100'
-      img.alt = ''
+      img.alt = slide.title || ''
       img.width = 1024
       img.height = 400
       img.loading = i === 0 ? 'eager' : 'lazy'
 
-      link.appendChild(img)
-      inner.appendChild(link)
+      wrapper.appendChild(img)
+
+      if (slide.title) {
+        const caption = document.createElement('div')
+        caption.className = 'carousel-caption d-block'
+        const captionTitle = document.createElement('h5')
+        captionTitle.textContent = slide.title
+        caption.appendChild(captionTitle)
+        wrapper.appendChild(caption)
+      }
+
+      inner.appendChild(wrapper)
     })
     carouselDiv.appendChild(inner)
 
