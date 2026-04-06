@@ -130,6 +130,28 @@ class StudioResponse
   protected ?int $projects_count = null;
 
   /**
+   * Whether the authenticated user is a member of this studio (null if not authenticated).
+   *
+   * @SerializedName("is_member")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
+  protected ?bool $is_member = null;
+
+  /**
+   * Status of the authenticated user&#39;s join request (pending, approved, declined) or null.
+   *
+   * @SerializedName("join_request_status")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $join_request_status = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -145,6 +167,8 @@ class StudioResponse
       $this->image_path = array_key_exists('image_path', $data) ? $data['image_path'] : $this->image_path;
       $this->members_count = array_key_exists('members_count', $data) ? $data['members_count'] : $this->members_count;
       $this->projects_count = array_key_exists('projects_count', $data) ? $data['projects_count'] : $this->projects_count;
+      $this->is_member = array_key_exists('is_member', $data) ? $data['is_member'] : $this->is_member;
+      $this->join_request_status = array_key_exists('join_request_status', $data) ? $data['join_request_status'] : $this->join_request_status;
     }
   }
 
@@ -320,6 +344,50 @@ class StudioResponse
   public function setProjectsCount(?int $projects_count = null): self
   {
     $this->projects_count = $projects_count;
+
+    return $this;
+  }
+
+  /**
+   * Gets is_member.
+   */
+  public function isIsMember(): ?bool
+  {
+    return $this->is_member;
+  }
+
+  /**
+   * Sets is_member.
+   *
+   * @param bool|null $is_member Whether the authenticated user is a member of this studio (null if not authenticated)
+   *
+   * @return $this
+   */
+  public function setIsMember(?bool $is_member = null): self
+  {
+    $this->is_member = $is_member;
+
+    return $this;
+  }
+
+  /**
+   * Gets join_request_status.
+   */
+  public function getJoinRequestStatus(): ?string
+  {
+    return $this->join_request_status;
+  }
+
+  /**
+   * Sets join_request_status.
+   *
+   * @param string|null $join_request_status Status of the authenticated user's join request (pending, approved, declined) or null
+   *
+   * @return $this
+   */
+  public function setJoinRequestStatus(?string $join_request_status = null): self
+  {
+    $this->join_request_status = $join_request_status;
 
     return $this;
   }

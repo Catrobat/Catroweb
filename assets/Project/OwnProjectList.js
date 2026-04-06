@@ -1,11 +1,12 @@
 /* global myProfileConfiguration */
 
-import { Corner, MDCMenu } from '@material/menu'
-import { MDCMenuSurfaceFoundation } from '@material/menu-surface'
 import Swal from 'sweetalert2'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
+import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { shareOrCopy } from '../Components/ClipboardHelper'
+import '../Components/RetentionTooltip'
 
 require('./OwnProjectList.scss')
 
@@ -14,7 +15,7 @@ export class OwnProjectList {
     this.container = container
     this.projectsContainer = container.getElementsByClassName('projects-container')[0]
     const attributes =
-      'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private,not_for_kids'
+      'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private,not_for_kids,retention_days,retention_expiry'
     this.baseUrl = baseUrl
     this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' + attributes : apiUrl + '?' + attributes
     this.projectsLoaded = 0
@@ -24,14 +25,34 @@ export class OwnProjectList {
     this.fetchActive = false
     this.theme = theme
     this.emptyMessage = emptyMessage
-    this.projectActionMenu = undefined
     this.actionConfiguration = myProfileConfiguration.projectActions
     this.projectInfoConfiguration = myProfileConfiguration.projectInfo
+    // Translation strings from data attributes
+    const ds = container.dataset
+    this.translations = {
+      setPrivate: ds.transSetPrivate || 'Set private',
+      setPublic: ds.transSetPublic || 'Set public',
+      open: ds.transOpen || 'Open',
+      download: ds.transDownload || 'Download',
+      share: ds.transShare || 'Share',
+      markNotForKids: ds.transMarkNotForKids || 'Mark not for kids',
+      markSafeForKids: ds.transMarkSafeForKids || 'Mark safe for kids',
+      delete: ds.transDelete || 'Delete project',
+      retentionProtected: ds.transRetentionProtected || 'Protected',
+      retentionDay: ds.transRetentionDay || '1 day left',
+      retentionDays: ds.transRetentionDays || '%days% days left',
+      retentionTooltip:
+        ds.transRetentionTooltip ||
+        'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.',
+      retentionTooltipProtected:
+        ds.transRetentionTooltipProtected ||
+        'This project is protected and will not be automatically deleted.',
+    }
   }
 
   initialize() {
     this.fetchMore(true)
-    this._initActionMenu()
+    this._initOutsideClickHandler()
     this.initScrollFetchMoreHandler()
 
     // remove loading spinners when loading from cache (e.g. browser back button)
@@ -57,29 +78,12 @@ export class OwnProjectList {
     }
   }
 
-  _initActionMenu() {
-    const self = this
-    const projectActionMenuEl = document.getElementById('project-action-menu')
-    this.projectActionMenu = projectActionMenuEl ? new MDCMenu(projectActionMenuEl) : null
-    if (this.projectActionMenu) {
-      this.projectActionMenu.listen('MDCMenu:selected', function (event) {
-        const action = event.detail.item.dataset.action
-        const id = self.projectActionMenu.projectId
-        const handlers = {
-          'toggle-visibility': () => self._actionToggleVisibility(id),
-          share: () => self._actionShareProject(id),
-          'not-for-kids': () => self._actionToggleNotForKids(id),
-          delete: () => self._actionDeleteProject(id),
-        }
-        if (handlers[action]) {
-          handlers[action]()
-        } else {
-          console.error('Unknown menu action:', action)
-        }
+  _initOutsideClickHandler() {
+    document.addEventListener('click', () => {
+      this.projectsContainer.querySelectorAll('.projects-list-item--dropdown').forEach((d) => {
+        d.style.display = 'none'
       })
-      this.projectActionMenu.setAnchorCorner(Corner.TOP_END)
-      this.projectActionMenu.setAbsolutePosition(0, 0)
-    }
+    })
   }
 
   fetchMore(clear = false) {
@@ -111,13 +115,12 @@ export class OwnProjectList {
           self.projectsData[project.id] = project
           const projectElement = self._generate(project)
           self.projectsContainer.appendChild(projectElement)
-          projectElement.addEventListener(
-            'click',
-            function () {
+          const projectLink = projectElement.querySelector('a[href]')
+          if (projectLink) {
+            projectLink.addEventListener('click', function () {
               self._addLoadingSpinner(projectElement)
-            },
-            false,
-          )
+            })
+          }
         })
         self.container.classList.remove('loading')
 
@@ -138,11 +141,11 @@ export class OwnProjectList {
       .catch(function (reason) {
         console.error('Failed loading own projects', reason)
         self.container.classList.remove('loading')
+        self.fetchActive = false
       })
   }
 
   _generate(data) {
-    const self = this
     /*
      * Necessary to support legacy flavoring with URL:
      *   Absolute url always uses new 'app' routing flavor. We have to replace it!
@@ -151,32 +154,8 @@ export class OwnProjectList {
     projectUrl = projectUrl.replace('/app/', '/' + this.theme + '/')
     //
 
-    const proj = document.createElement('a')
-    proj.className = 'own-project-list__project'
-    proj.setAttribute('href', projectUrl)
-    proj.dataset.id = data.id
-
-    const img = document.createElement('img')
-    img.className = 'lazyload own-project-list__project__image'
-    img.dataset.src = data.screenshot_small
-    // TODO: generate larger thumbnails and adapt here (change 80w to width of thumbs)
-    img.dataset.srcset = data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w'
-    img.dataset.sizes = '(min-width: 768px) 10vw, 25vw'
-
-    proj.appendChild(img)
-
-    const details = document.createElement('div')
-    details.className = 'own-project-list__project__details'
-    proj.appendChild(details)
-
-    const name = document.createElement('div')
-    name.className = 'own-project-list__project__details__name'
-    name.appendChild(document.createTextNode(data.name))
-    details.appendChild(name)
-
-    const properties = document.createElement('div')
-    properties.className = 'own-project-list__project__details__properties'
-    details.appendChild(properties)
+    const id = escapeAttr(String(data.id))
+    const screenshotSmall = data.screenshot_small || '/images/default/screenshot.png'
 
     const icons = {
       downloads: 'get_app',
@@ -185,105 +164,207 @@ export class OwnProjectList {
       comments: 'chat',
     }
 
-    Array('downloads', 'views', 'reactions', 'comments').forEach(function (propertyKey) {
-      if (Object.prototype.hasOwnProperty.call(data, propertyKey)) {
-        const propEl = document.createElement('div')
-        propEl.className = 'own-project-list__project__details__properties__property'
-
-        const iconEl = document.createElement('span')
-        iconEl.className = 'material-icons'
-        iconEl.appendChild(document.createTextNode(icons[propertyKey]))
-        propEl.appendChild(iconEl)
-
-        const valueEl = document.createElement('span')
-        valueEl.className = 'own-project-list__project__details__properties__property__value'
-        valueEl.appendChild(document.createTextNode(data[propertyKey]))
-        propEl.appendChild(valueEl)
-
-        properties.appendChild(propEl)
+    let metaHtml = ''
+    ;['downloads', 'views', 'reactions', 'comments'].forEach(function (key) {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        metaHtml +=
+          '<div class="own-project-list__project__details__properties__property">' +
+          '<span class="material-icons">' +
+          icons[key] +
+          '</span>' +
+          '<span class="own-project-list__project__details__properties__property__value">' +
+          escapeHtml(String(data[key])) +
+          '</span>' +
+          '</div>'
       }
     })
 
-    const visibility = document.createElement('div')
-    visibility.className = 'own-project-list__project__details__visibility'
-    details.appendChild(visibility)
+    const visibilityIcon = data.private ? 'lock' : 'lock_open'
+    const visibilityText = data.private
+      ? this.projectInfoConfiguration.visibilityPrivateText
+      : this.projectInfoConfiguration.visibilityPublicText
 
-    const visibilityIcon = document.createElement('span')
-    visibilityIcon.className = 'material-icons own-project-list__project__details__visibility__icon'
-    visibilityIcon.appendChild(document.createTextNode(data.private ? 'lock' : 'lock_open'))
-    visibility.appendChild(visibilityIcon)
+    let retentionHtml = ''
+    if (data.retention_days !== undefined) {
+      retentionHtml = this._buildRetentionBadge(data.retention_days, data.retention_expiry)
+    }
 
-    const visibilityText = document.createElement('span')
-    visibilityText.className = 'own-project-list__project__details__visibility__text'
-    visibilityText.appendChild(
-      document.createTextNode(
-        data.private
-          ? this.projectInfoConfiguration.visibilityPrivateText
-          : this.projectInfoConfiguration.visibilityPublicText,
-      ),
-    )
-    visibility.appendChild(visibilityText)
+    const transVisibility = data.private
+      ? escapeHtml(this.translations.setPublic)
+      : escapeHtml(this.translations.setPrivate)
+    const nfkValue = data.not_for_kids || 0
+    const nfkLabel = nfkValue
+      ? escapeHtml(this.translations.markSafeForKids)
+      : escapeHtml(this.translations.markNotForKids)
 
-    const action = document.createElement('div')
-    action.className = 'own-project-list__project__action'
-    action.addEventListener(
-      'click',
-      function (event) {
+    const menuItems =
+      '<a href="' +
+      escapeAttr(projectUrl) +
+      '" class="projects-list-item--dropdown-item">' +
+      '<i class="material-icons">open_in_new</i>' +
+      escapeHtml(this.translations.open) +
+      '</a>' +
+      '<a href="/api/project/' +
+      id +
+      '/catrobat" download class="projects-list-item--dropdown-item">' +
+      '<i class="material-icons">download</i>' +
+      escapeHtml(this.translations.download) +
+      '</a>' +
+      '<button class="projects-list-item--dropdown-item" data-action="share" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">share</i>' +
+      escapeHtml(this.translations.share) +
+      '</button>' +
+      '<div class="projects-list-item--dropdown-divider"></div>' +
+      '<button class="projects-list-item--dropdown-item" data-action="toggle-visibility" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">' +
+      visibilityIcon +
+      '</i>' +
+      '<span class="own-project-dropdown-visibility-text">' +
+      transVisibility +
+      '</span>' +
+      '</button>' +
+      '<button class="projects-list-item--dropdown-item" data-action="not-for-kids" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">child_care</i>' +
+      '<span class="own-project-dropdown-nfk-text">' +
+      nfkLabel +
+      '</span>' +
+      '</button>' +
+      '<div class="projects-list-item--dropdown-divider"></div>' +
+      '<button class="projects-list-item--dropdown-item text-danger" data-action="delete" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">delete</i>' +
+      escapeHtml(this.translations.delete) +
+      '</button>'
+
+    const wrapper = document.createElement('div')
+    wrapper.className = 'own-project-list__project'
+    wrapper.dataset.id = data.id
+    wrapper.innerHTML =
+      '<a href="' +
+      escapeAttr(projectUrl) +
+      '">' +
+      '<img src="' +
+      escapeAttr(screenshotSmall) +
+      '" class="lazyload own-project-list__project__image" alt="" loading="lazy">' +
+      '</a>' +
+      '<div class="own-project-list__project__details">' +
+      '<div class="own-project-list__project__details__name">' +
+      escapeHtml(data.name) +
+      '</div>' +
+      '<div class="own-project-list__project__details__properties">' +
+      metaHtml +
+      '</div>' +
+      '<div class="own-project-list__project__details__visibility">' +
+      '<span class="material-icons own-project-list__project__details__visibility__icon">' +
+      visibilityIcon +
+      '</span>' +
+      '<span class="own-project-list__project__details__visibility__text">' +
+      escapeHtml(visibilityText) +
+      '</span>' +
+      '</div>' +
+      retentionHtml +
+      '</div>' +
+      '<div class="projects-list-item--actions">' +
+      '<button class="btn projects-list-item--menu-btn own-project-list__project__action" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">more_vert</i>' +
+      '</button>' +
+      '<div class="projects-list-item--dropdown" style="display:none;">' +
+      menuItems +
+      '</div>' +
+      '</div>'
+
+    this._bindDropdownActions(wrapper, data)
+
+    return wrapper
+  }
+
+  _bindDropdownActions(wrapper, data) {
+    const self = this
+    const id = data.id
+
+    // Toggle dropdown
+    const menuBtn = wrapper.querySelector('.projects-list-item--menu-btn')
+    if (menuBtn) {
+      menuBtn.addEventListener('click', function (event) {
         event.preventDefault()
         event.stopPropagation()
-
-        const refreshAndOpenMenu = function () {
-          const visibilityItem =
-            self.projectActionMenu.items[0].getElementsByClassName('mdc-list-item__text')[0]
-          if (self.projectsData[data.id].private) {
-            visibilityItem.innerText = visibilityItem.dataset.textPublic
-          } else {
-            visibilityItem.innerText = visibilityItem.dataset.textPrivate
-          }
-
-          const nfkEl = self.projectActionMenu.root.querySelector('[data-action="not-for-kids"]')
-          const nfkItem = nfkEl ? nfkEl.querySelector('.mdc-list-item__text') : null
-          if (nfkItem) {
-            const nfkValue = self.projectsData[data.id].not_for_kids || 0
-            nfkItem.innerText = nfkValue
-              ? nfkItem.dataset.textSafeForKids
-              : nfkItem.dataset.textNotForKids
-          }
-
-          self.projectActionMenu.setAnchorElement(event.target)
-          self.projectActionMenu.projectId = data.id
-          self.projectActionMenu.open = true
+        const dropdown = menuBtn.nextElementSibling
+        const isOpen = dropdown.style.display !== 'none'
+        // Close all dropdowns first
+        self.projectsContainer.querySelectorAll('.projects-list-item--dropdown').forEach((d) => {
+          d.style.display = 'none'
+        })
+        if (!isOpen) {
+          // Refresh dynamic text before opening
+          self._refreshDropdownTexts(wrapper, id)
+          dropdown.style.display = 'block'
         }
+      })
+    }
 
-        if (
-          self.projectActionMenu.root.classList.contains(
-            MDCMenuSurfaceFoundation.cssClasses.ANIMATING_CLOSED,
-          )
-        ) {
-          setTimeout(
-            refreshAndOpenMenu,
-            MDCMenuSurfaceFoundation.numbers.TRANSITION_CLOSE_DURATION + 25,
-          )
-        } else {
-          refreshAndOpenMenu()
+    // Action handlers via event delegation
+    wrapper.querySelectorAll('[data-action]').forEach((btn) => {
+      btn.addEventListener('click', function (event) {
+        event.preventDefault()
+        event.stopPropagation()
+        const dropdown = btn.closest('.projects-list-item--dropdown')
+        if (dropdown) {
+          dropdown.style.display = 'none'
         }
-      },
-      false,
-    )
-    proj.appendChild(action)
+        const action = btn.dataset.action
+        const handlers = {
+          'toggle-visibility': () => self._actionToggleVisibility(id),
+          share: () => self._actionShareProject(id),
+          'not-for-kids': () => self._actionToggleNotForKids(id),
+          delete: () => self._actionDeleteProject(id),
+        }
+        if (handlers[action]) {
+          handlers[action]()
+        }
+      })
+    })
+  }
 
-    const actionIcon = document.createElement('span')
-    actionIcon.className = 'material-icons'
-    actionIcon.appendChild(document.createTextNode('more_vert'))
-    action.appendChild(actionIcon)
+  _refreshDropdownTexts(wrapper, id) {
+    const project = this.projectsData[id]
 
-    return proj
+    // Update visibility toggle text
+    const visText = wrapper.querySelector('.own-project-dropdown-visibility-text')
+    if (visText) {
+      visText.textContent = project.private
+        ? this.translations.setPublic
+        : this.translations.setPrivate
+    }
+
+    // Update visibility icon in dropdown
+    const visIcon = wrapper.querySelector('[data-action="toggle-visibility"] .material-icons')
+    if (visIcon) {
+      visIcon.textContent = project.private ? 'lock' : 'lock_open'
+    }
+
+    // Update not-for-kids text
+    const nfkText = wrapper.querySelector('.own-project-dropdown-nfk-text')
+    if (nfkText) {
+      const nfkValue = project.not_for_kids || 0
+      nfkText.textContent = nfkValue
+        ? this.translations.markSafeForKids
+        : this.translations.markNotForKids
+    }
   }
 
   _actionDeleteProject(id) {
-    const projectName = this.projectsData[id].name
+    const projectName = escapeHtml(this.projectsData[id].name)
     const msgParts = this.actionConfiguration.delete.confirmationText
-      .replace('%programName%', '“' + projectName + '”')
+      .replace('%programName%', '”' + projectName + '”')
       .split('\n')
     Swal.fire({
       title: msgParts[0],
@@ -317,45 +398,16 @@ export class OwnProjectList {
   }
 
   _actionShareProject(id) {
-    const clipboardSuccessMessage = myProfileConfiguration.messages.clipboardSuccessMessage
-    const clipboardFailMessage = myProfileConfiguration.messages.clipboardFailMessage
-    const shareSuccessMessage = myProfileConfiguration.messages.shareSuccessMessage
-    const shareFailMessage = myProfileConfiguration.messages.shareFailMessage
+    const successMsg = myProfileConfiguration.messages.clipboardSuccessMessage || 'Link copied!'
     const projectUrl = this.projectsData[id].project_url
-    const titleMessage = myProfileConfiguration.messages.displayName
-    const textMessage = myProfileConfiguration.messages.checkoutMessage
-
-    if (navigator.share) {
-      navigator
-        .share({
-          title: titleMessage,
-          text: textMessage,
-          url: projectUrl,
-        })
-        .then(() => {
-          showSnackbar('#share-snackbar', shareSuccessMessage)
-        })
-        .catch((e) => {
-          console.error(e)
-          showSnackbar('#share-snackbar', shareFailMessage, SnackbarDuration.error)
-        })
-    } else {
-      navigator.clipboard
-        .writeText(projectUrl)
-        .then(() => {
-          showSnackbar('#share-snackbar', clipboardSuccessMessage)
-        })
-        .catch(() => {
-          showSnackbar('#share-snackbar', clipboardFailMessage, SnackbarDuration.error)
-        })
-    }
+    shareOrCopy(projectUrl, () => showSnackbar('#share-snackbar', successMsg))
   }
 
   _actionToggleVisibility(id) {
     const self = this
     const project = this.projectsData[id]
     const msgParts = this.actionConfiguration.visibility.confirmationText
-      .replaceAll('%programName%', '“' + project.name + '”')
+      .replaceAll('%programName%', '”' + escapeHtml(project.name) + '”')
       .split('\n')
     Swal.fire({
       title: msgParts[0],
@@ -472,5 +524,72 @@ export class OwnProjectList {
     if (spinner) {
       fromElement.removeChild(spinner)
     }
+  }
+
+  _buildRetentionBadge(retentionDays, retentionExpiry) {
+    const tooltip = escapeAttr(
+      retentionDays === -1
+        ? this.translations.retentionTooltipProtected ||
+            'This project is protected and will not be automatically deleted.'
+        : this.translations.retentionTooltip ||
+            'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.',
+    )
+
+    const infoBtn =
+      '<span class="retention-info-wrap" onclick="event.preventDefault();event.stopPropagation()">' +
+      '<span class="material-icons retention-info-icon">info_outline</span>' +
+      '<span class="retention-tooltip">' +
+      tooltip +
+      '</span>' +
+      '</span>'
+
+    if (retentionDays === -1) {
+      return (
+        '<div class="own-project-list__project__details__retention own-project-list__project__details__retention--protected">' +
+        '<span class="material-icons">verified</span>' +
+        '<span>' +
+        escapeHtml(this.translations.retentionProtected || 'Protected') +
+        '</span>' +
+        infoBtn +
+        '</div>'
+      )
+    }
+
+    let daysLeft = 0
+    if (retentionExpiry) {
+      daysLeft = Math.max(0, Math.ceil((new Date(retentionExpiry) - Date.now()) / 86400000))
+    }
+
+    let icon = 'schedule'
+    let cssModifier = ''
+    if (daysLeft <= 7) {
+      icon = 'warning'
+      cssModifier = ' own-project-list__project__details__retention--critical'
+    } else if (daysLeft <= 30) {
+      icon = 'hourglass_bottom'
+      cssModifier = ' own-project-list__project__details__retention--warning'
+    }
+
+    const label =
+      daysLeft === 1
+        ? this.translations.retentionDay || '1 day left'
+        : (this.translations.retentionDays || '%days% days left').replace(
+            '%days%',
+            String(daysLeft),
+          )
+
+    return (
+      '<div class="own-project-list__project__details__retention' +
+      cssModifier +
+      '">' +
+      '<span class="material-icons">' +
+      icon +
+      '</span>' +
+      '<span>' +
+      escapeHtml(label) +
+      '</span>' +
+      infoBtn +
+      '</div>'
+    )
   }
 }

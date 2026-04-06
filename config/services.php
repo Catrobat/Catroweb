@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Admin\ApkGeneration\ApkController;
-use App\Admin\ApkGeneration\ApkPendingAdmin;
-use App\Admin\ApkGeneration\ApkReadyAdmin;
 use App\Admin\Comments\CommentsAdmin;
+use App\Admin\FeaturedBannerAdmin;
 use App\Admin\MediaLibrary\MediaAssetAdmin;
 use App\Admin\MediaLibrary\MediaCategoryAdmin;
 use App\Admin\Moderation\AppealQueueAdmin;
@@ -17,7 +15,6 @@ use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
 use App\Admin\Projects\BrokenProjects\BrokenProjectsAdmin;
 use App\Admin\Projects\ProjectsAdmin;
 use App\Admin\Projects\SpecialProjects\ExampleProjectAdmin;
-use App\Admin\Projects\SpecialProjects\FeaturedProjectAdmin;
 use App\Admin\Projects\UploadProject\UploadProjectAdmin;
 use App\Admin\Projects\UploadProject\UploadProjectController;
 use App\Admin\Statistics\Translation\CommentMachineTranslationAdmin;
@@ -67,6 +64,7 @@ use App\Api\Services\OverwriteController;
 use App\Api\StudioApi;
 use App\Api\UserApi;
 use App\Api\UtilityApi;
+use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
@@ -75,7 +73,6 @@ use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\ExampleProgram;
-use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\System\CronJob;
 use App\DB\Entity\System\FeatureFlag;
@@ -106,7 +103,6 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters = $containerConfigurator->parameters();
 
-  $parameters->set('catrobat.apk.dir', '%catrobat.pubdir%resources/apk/');
   $parameters->set('catrobat.featuredimage.dir', '%catrobat.pubdir%resources/featured/');
   $parameters->set('catrobat.featuredimage.path', 'resources/featured/');
   $parameters->set('catrobat.exampleimage.dir', '%catrobat.pubdir%resources/example/');
@@ -115,6 +111,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.file.extract.path', 'resources/extract/');
   $parameters->set('catrobat.file.storage.dir', '%kernel.project_dir%/public/resources/programs/');
   $parameters->set('catrobat.file.storage.path', 'resources/programs/');
+  $parameters->set('catrobat.file.assets.dir', '%kernel.project_dir%/public/resources/assets/');
   $parameters->set('catrobat.logs.dir', '%kernel.project_dir%/var/log/');
   $parameters->set('catrobat.media.dir', '%catrobat.pubdir%resources/media/');
   $parameters->set('catrobat.media.path', 'resources/media/');
@@ -331,14 +328,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       ]
     )
   ;
-  $services->set('admin.block.featured.projects', FeaturedProjectAdmin::class)
+  $services->set('admin.block.featured.banners', FeaturedBannerAdmin::class)
     ->tag(
       'sonata.admin',
       [
         'manager_type' => 'orm',
-        'label' => 'Featured Projects',
+        'label' => 'Featured Banners',
         'code' => null,
-        'model_class' => FeaturedProgram::class,
+        'model_class' => FeaturedBanner::class,
         'controller' => null,
       ]
     )
@@ -364,30 +361,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => Program::class,
         'controller' => UploadProjectController::class,
-      ]
-    )
-  ;
-  $services->set('admin.block.apk.pending', ApkPendingAdmin::class)
-    ->tag(
-      'sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Pending',
-        'code' => null,
-        'model_class' => Program::class,
-        'controller' => ApkController::class,
-      ]
-    )
-  ;
-  $services->set('admin.block.apk.list', ApkReadyAdmin::class)
-    ->tag(
-      'sonata.admin',
-      [
-        'manager_type' => 'orm',
-        'label' => 'Ready',
-        'code' => null,
-        'model_class' => Program::class,
-        'controller' => ApkController::class,
       ]
     )
   ;

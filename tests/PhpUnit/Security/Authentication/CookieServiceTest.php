@@ -35,7 +35,7 @@ final class CookieServiceTest extends TestCase
     $this->assertSame('REFRESH_TOKEN', $cookie->getName());
     $this->assertTrue($cookie->isHttpOnly());
     $this->assertSame('/base/', $cookie->getPath());
-    $this->assertSame('strict', $cookie->getSameSite());
+    $this->assertSame('lax', $cookie->getSameSite());
   }
 
   #[Group('unit')]
@@ -46,6 +46,6 @@ final class CookieServiceTest extends TestCase
     $this->assertSame('REFRESH_TOKEN', $cookie->getName());
     $this->assertTrue($cookie->isHttpOnly());
     $this->assertSame('/base/', $cookie->getPath());
-    $this->assertSame('strict', $cookie->getSameSite());
+    $this->assertSame('lax', $cookie->getSameSite());
   }
 }

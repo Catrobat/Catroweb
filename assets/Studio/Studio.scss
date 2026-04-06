@@ -1,9 +1,11 @@
 @use 'sass:math';
 @import '../Layout/Variables';
+@import '../Layout/Mixins';
 
 .studio-detail__header {
   margin-top: -1.5rem;
-  background-color: $gray-200;
+  background-color: light-dark($gray-200, #2d2d3d);
+  color: light-dark(inherit, #e2e8f0);
 }
 
 .studio-detail__header__name {
@@ -26,7 +28,7 @@
 
 .mdc-tab-bar {
   width: 100%;
-  background-color: $gray-200;
+  background-color: light-dark($gray-200, #2d2d3d);
 
   .nav-tabs {
     width: 100%;
@@ -106,6 +108,67 @@
   padding: 0 !important;
 }
 
+.studio-project-card {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $gray-300;
+
+  &__screenshot {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+  }
+
+  &__image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10%;
+    object-fit: cover;
+    box-shadow: 2px 2px 10px 0 rgb(50 50 50 / 15%);
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    padding: 0 0.75rem;
+  }
+
+  &__name {
+    display: block;
+    overflow: hidden;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.15rem;
+    font-size: 0.85rem;
+    color: $text-muted;
+  }
+
+  &__author {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__date {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 .studio-project-list-admin {
   grid-template-areas: 'image name remove' 'image property remove' !important;
 }
@@ -115,114 +178,233 @@
   cursor: pointer;
 }
 
-.studio-comment {
-  display: flex;
-  align-items: flex-start;
-  padding: 2% 5% 0;
-}
-
-.comment-content {
-  width: 100%;
-  padding-left: 4%;
-}
-
-.comment-content > p {
-  margin-bottom: 0.5rem !important;
-}
-
-.comment-avatar {
-  width: 2.7rem;
-  border: solid 1px var(--primary);
-  border-radius: 50%;
-}
-
 #tab-content {
   width: 100%;
 }
 
-.comment-info {
-  display: flex;
-  margin-bottom: 2%;
-  font-size: 0.8rem !important;
+// ---------- Studio Comments (matching project comment styles) ----------
+
+#studio-comments {
+  .single-comment,
+  .single-reply,
+  #user-comment-wrapper {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    background: light-dark(#fff, #1a202c);
+    border: 1px solid light-dark(#edf2f7, #2d3748);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: light-dark(#fcfcfc, #2d3748);
+      box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+      border-color: light-dark(#e2e8f0, #4a5568);
+    }
+
+    .comment-avatar {
+      flex-shrink: 0;
+      width: 3rem;
+      height: 3rem;
+      border: none;
+      margin-right: 0;
+      display: block;
+
+      .comment-avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+      }
+    }
+
+    .comment-payload-wrapper {
+      flex-grow: 1;
+      min-width: 0;
+    }
+  }
+
+  #user-comment-wrapper {
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 5%);
+    align-items: flex-start;
+
+    .comment-avatar {
+      margin-top: 0.25rem;
+    }
+
+    .comment-message {
+      width: 100%;
+      margin-bottom: 0;
+      background: transparent;
+
+      textarea {
+        width: 100%;
+        min-height: 40px;
+        height: 40px;
+        padding: 0.5rem 0.75rem;
+        border: none;
+        border-bottom: 2px solid light-dark(#edf2f7, #2d3748);
+        border-radius: 0;
+        background: transparent;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        resize: none;
+        color: light-dark(#2d3748, #e2e8f0);
+        font-size: 0.95rem;
+
+        &:focus {
+          border-bottom-color: var(--primary);
+          outline: none;
+          height: 100px;
+        }
+
+        &::placeholder {
+          color: light-dark(#a0aec0, #718096);
+        }
+      }
+    }
+
+    .comment-buttons-container {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      animation: studio-fade-in 0.3s ease;
+
+      .btn {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+      }
+    }
+  }
+
+  .single-comment,
+  .single-reply {
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .comment-user-info {
+      flex: 1 1 auto;
+      min-width: 0;
+
+      .usr-name {
+        display: block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 600;
+        font-size: 1rem;
+        color: light-dark(#2d3748, #e2e8f0);
+        text-decoration: none;
+        line-height: 1.2;
+
+        span {
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        &:hover {
+          color: var(--primary);
+        }
+      }
+
+      .comment-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+        color: light-dark(#718096, #a0aec0);
+        margin-top: 0.25rem;
+
+        i {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+    .comment-actions {
+      flex: 0 0 auto;
+      margin-left: auto;
+      white-space: nowrap;
+
+      .material-icons {
+        font-size: 1.25rem;
+        cursor: pointer;
+        color: light-dark(#a0aec0, #718096);
+        transition: color 0.2s;
+
+        &:hover {
+          color: light-dark(#4a5568, #cbd5e0);
+        }
+
+        &.text-danger:hover {
+          color: #e53e3e;
+        }
+      }
+
+      .comment-replies-count {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.85rem;
+        color: light-dark(#718096, #a0aec0);
+        padding-right: 0.5rem;
+        border-right: 1px solid light-dark(#e2e8f0, #4a5568);
+
+        i {
+          font-size: 1.1rem;
+          cursor: default;
+        }
+      }
+    }
+
+    .comment-text {
+      padding-top: 0;
+      color: light-dark(#4a5568, #cbd5e0);
+      line-height: 1.5;
+      font-size: 0.95rem;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      .deleted-comment {
+        background-color: light-dark(#f7fafc, #2d3748);
+        color: light-dark(#a0aec0, #718096);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-style: italic;
+      }
+    }
+  }
 }
 
-.comment-time {
-  display: flex;
-  align-items: center;
-  padding: 0;
+@keyframes studio-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.comment-replies {
-  display: flex;
-  align-items: center;
-  padding: 0;
-  color: $black;
-}
-
-.comment-replies:hover {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.comment-hr {
-  margin: 0;
-}
-
-.comment-info-icons {
-  margin-right: 6px;
-  font-size: 1.2rem !important;
-}
-
-#add-comment {
-  position: sticky;
-}
-
-#add-reply {
-  position: fixed;
-  width: calc(100% - 250px);
-}
-
-.add-comment-section {
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 2% 0;
-  background-color: #eee;
-}
-
-#add-comment > input,
-#add-reply > input {
-  width: 77%;
-  padding: 2% 0;
-  margin-left: 3%;
-  background-color: inherit;
-  border-color: #adb5bd;
-  border-width: 0 0 1px;
-}
-
-#add-comment > a,
-#add-reply > a {
-  width: 20%;
-  font-size: x-large;
-  font-variant: petite-caps;
-  text-align: center;
-}
-
-#add-comment > a:hover,
-#add-reply > a:hover {
-  text-decoration: none;
-}
-
-.comment-delete-button {
-  position: relative;
-  float: right;
-  cursor: pointer;
-}
-
-#comment-replies-body {
-  padding-bottom: 20%;
-}
+// ---------- End Studio Comments ----------
 
 .green-background {
   transition: transform 0.3s ease;
@@ -238,8 +420,39 @@
   transform: scale(0.8);
 }
 
-@media screen and (width >= 768px) {
-  #add-reply {
-    width: calc(100% - 250px);
+// Floating action button (shared across studio pages)
+.studios-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1.25rem;
+  height: 48px;
+  border-radius: 24px;
+  background: var(--primary, #00acc1);
+  color: var(--on-primary, #fff);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+
+  .material-icons {
+    font-size: 1.25rem;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 30%);
+    color: var(--on-primary, #fff);
+    text-decoration: none;
   }
 }

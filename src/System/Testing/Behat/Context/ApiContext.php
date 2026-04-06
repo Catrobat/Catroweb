@@ -305,25 +305,6 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I want to download the apk file of "([^"]*)"$/
-   *
-   * @throws \Exception
-   */
-  public function iWantToDownloadTheApkFileOf(string $arg1): void
-  {
-    $project_manager = $this->getProjectManager();
-
-    $project = $project_manager->findOneByName($arg1);
-    if (!$project instanceof Program) {
-      throw new \Exception('Project not found: '.$arg1);
-    }
-
-    $router = $this->getRouter();
-    $url = $router->generate('ci_download', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
-    $this->iGetFrom($url);
-  }
-
-  /**
    * @Given /^I am "([^"]*)"$/
    */
   public function iAm(string $username): void
@@ -350,22 +331,6 @@ class ApiContext implements Context
     /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($username);
     $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', $user);
-  }
-
-  /**
-   * @When /^jenkins uploads the apk file to the given upload url$/
-   */
-  public function jenkinsUploadsTheApkFileToTheGivenUploadUrl(): void
-  {
-    $filepath = $this->FIXTURES_DIR.'test.catrobat';
-    Assert::assertFileExists($filepath, 'File not found');
-    $temp_path = strval($this->getTempCopy($filepath));
-    $this->request_files = [
-      new UploadedFile($temp_path, 'test.apk'),
-    ];
-    $id = 1;
-    $url = '/app/ci/upload/'.$id.'?token=UPLOADTOKEN';
-    $this->iRequestWith('POST', $url);
   }
 
   /**
@@ -400,20 +365,6 @@ class ApiContext implements Context
     $cookieJar = $this->getKernelBrowser()->getCookieJar();
     $cookieJar->set($bearer_cookie);
     $cookieJar->set($refresh_cookie);
-  }
-
-  /**
-   * @Then /^I should receive the apk file$/
-   *
-   * @throws \Exception
-   * @throws \Exception
-   */
-  public function iShouldReceiveTheApkFile(): void
-  {
-    $content_type = $this->getKernelBrowser()->getResponse()->headers->get('Content-Type');
-    $code = $this->getKernelBrowser()->getResponse()->getStatusCode();
-    Assert::assertEquals(200, $code);
-    Assert::assertEquals('application/vnd.android.package-archive', $content_type);
   }
 
   /**
@@ -774,33 +725,6 @@ class ApiContext implements Context
   public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardAncestors(): void
   {
     $this->theProjectShouldHaveNoFurtherCatrobatForwardAncestors($this->getIDOfLastUploadedProject());
-  }
-
-  /**
-   * @When /^I start an apk generation of my project$/
-   *
-   * @throws \Exception
-   */
-  public function iStartAnApkGenerationOfMyProject(): void
-  {
-    $id = 1;
-    $this->iGetFrom('/app/ci/build/'.$id);
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
-  }
-
-  /**
-   * @Then /^the apk file will not be found$/
-   *
-   * @throws \Exception
-   */
-  public function theApkFileWillNotBeFound(): void
-  {
-    $code = $this->getKernelBrowser()
-      ->getResponse()
-      ->getStatusCode()
-    ;
-    Assert::assertEquals(404, $code);
   }
 
   /**
@@ -1444,6 +1368,42 @@ class ApiContext implements Context
         }
       }
       Assert::assertTrue($found, 'User "'.$expected['Name'].'" not found in search response.');
+    }
+  }
+
+  /**
+   * @Then the search response should contain :count studios
+   */
+  public function theSearchResponseShouldContainStudios(int $count): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+
+    Assert::assertArrayHasKey('studios', $data);
+    Assert::assertCount($count, $data['studios'], "Expected {$count} studios in response.");
+  }
+
+  /**
+   * @Then the search response should contain the following studios:
+   */
+  public function theSearchResponseShouldContainTheFollowingStudios(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $expectedStudios = $table->getHash();
+
+    Assert::assertArrayHasKey('studios', $data);
+    $returnedStudios = $data['studios'];
+
+    foreach ($expectedStudios as $expected) {
+      $found = false;
+      foreach ($returnedStudios as $studio) {
+        if ($studio['name'] === $expected['Name']) {
+          $found = true;
+          break;
+        }
+      }
+      Assert::assertTrue($found, 'Studio "'.$expected['Name'].'" not found in search response.');
     }
   }
 

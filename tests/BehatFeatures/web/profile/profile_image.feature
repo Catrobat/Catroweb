@@ -11,7 +11,7 @@ Feature:
     And I log in as "Catrobat"
     And I am on "/app/user"
     And I wait for AJAX to finish
-    Then I should see "My Profile"
+    Then I should see "Profile"
 
   Scenario: uploading avatar should work
     When I attach the avatar "logo.png" to "own-profile-picture-upload-field"

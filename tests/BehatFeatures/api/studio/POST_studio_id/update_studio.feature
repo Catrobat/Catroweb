@@ -15,6 +15,16 @@ Feature: Updating an existing studio
       | 1  | StudioAdmin | 1         | admin  |
       | 2  | Member      | 1         | member |
 
+  Scenario: Updating a non-existent studio returns 404
+    Given I use a valid JWT Bearer token for "StudioAdmin"
+    And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have the POST parameters:
+      | name        | value               |
+      | description | Updated description |
+    And I request "POST" "/api/studio/nonexistent"
+    Then the response status code should be "404"
+
   Scenario: An request with missing jwt token should result in an error
     When I request "POST" "/api/studio/1"
     Then the response status code should be "401"

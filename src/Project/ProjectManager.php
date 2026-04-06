@@ -59,6 +59,7 @@ class ProjectManager
     private readonly ?UrlHelper $urlHelper,
     protected Security $security,
     private readonly MalwareScanner $malware_scanner,
+    private readonly ProjectDeduplicationService $deduplication_service,
   ) {
   }
 
@@ -284,6 +285,21 @@ class ProjectManager
     }
 
     $filesystem->remove($extracted_file->getPath());
+
+    // Deduplicate project assets in content-addressable store
+    $permanentExtractDir = $this->file_extractor->getExtractDir().'/'.$project_id;
+    try {
+      if (null !== $old_project) {
+        $this->deduplication_service->removeProjectMappings($project_id);
+      }
+
+      $this->deduplication_service->deduplicateProject($project, $permanentExtractDir);
+    } catch (\Throwable $e) {
+      $this->logger->error('Asset deduplication failed (non-fatal)', [
+        'project_id' => $project_id,
+        'error' => $e->getMessage(),
+      ]);
+    }
 
     return $project;
   }
@@ -679,6 +695,39 @@ class ProjectManager
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($project);
+  }
+
+  /**
+   * Permanently deletes a project: removes files from disk and the database record.
+   * Doctrine cascade handles related entities (comments, notifications, likes, etc.).
+   */
+  public function hardDeleteProject(Program $project): void
+  {
+    $projectId = $project->getId();
+    if (null === $projectId) {
+      throw new \InvalidArgumentException('Cannot hard-delete a project without an ID');
+    }
+
+    // Delete zip file
+    $this->file_repository->deleteProjectZipFileIfExists($projectId);
+
+    // Delete extracted files
+    try {
+      $this->file_repository->deleteProjectExtractFiles($projectId);
+    } catch (\Exception $e) {
+      $this->logger->warning('hardDeleteProject: could not delete extract files for project {id}: {error}', [
+        'id' => $projectId,
+        'error' => $e->getMessage(),
+      ]);
+    }
+
+    // Delete screenshots and thumbnails
+    $this->screenshot_repository->deleteScreenshot($projectId);
+    $this->screenshot_repository->deleteThumbnail($projectId);
+
+    // Remove from database (Doctrine cascades handle relations)
+    $this->entity_manager->remove($project);
+    $this->entity_manager->flush();
   }
 
   private function getPopularProjects(?string $flavor, int $limit, int $offset, string $max_version): array

@@ -6,10 +6,15 @@ namespace App\Api\Services\Studio;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioProgram;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
+use App\DB\Entity\User\User;
+use App\Project\ProjectManager;
 use App\Studio\StudioManager;
+use OpenAPI\Server\Model\StudioActivityListResponse;
+use OpenAPI\Server\Model\StudioActivityResponse;
 use OpenAPI\Server\Model\StudioCommentListResponse;
 use OpenAPI\Server\Model\StudioCommentResponse;
 use OpenAPI\Server\Model\StudioListResponse;
@@ -18,6 +23,8 @@ use OpenAPI\Server\Model\StudioMemberResponse;
 use OpenAPI\Server\Model\StudioProjectListResponse;
 use OpenAPI\Server\Model\StudioProjectResponse;
 use OpenAPI\Server\Model\StudioResponse;
+use OpenAPI\Server\Model\StudioUserProjectResponse;
+use OpenAPI\Server\Model\StudioUserProjectsResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -34,6 +41,7 @@ class StudioResponseManager extends AbstractResponseManager
     private readonly ParameterBagInterface $parameter_bag,
     private readonly RequestStack $request_stack,
     private readonly StudioManager $studio_manager,
+    private readonly ProjectManager $project_manager,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -52,20 +60,41 @@ class StudioResponseManager extends AbstractResponseManager
     ;
   }
 
+  public function createStudioResponseWithUserContext(Studio $studio, ?User $user): StudioResponse
+  {
+    $response = $this->createStudioResponse($studio);
+
+    if ($user instanceof User) {
+      $studioUser = $this->studio_manager->findStudioUser($user, $studio);
+      $response->setIsMember($studioUser instanceof StudioUser);
+
+      $joinRequest = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
+      $response->setJoinRequestStatus($joinRequest?->getStatus());
+    }
+
+    return $response;
+  }
+
   /**
    * @param Studio[] $studios
    */
-  public function createStudioListResponse(array $studios, bool $has_more): StudioListResponse
+  public function createStudioListResponse(array $studios, bool $has_more, ?User $user = null, ?int $current_offset = null): StudioListResponse
   {
     $data = [];
     foreach ($studios as $studio) {
-      $data[] = $this->createStudioResponse($studio);
+      $data[] = $this->createStudioResponseWithUserContext($studio, $user);
+    }
+
+    $next_cursor = null;
+    if ($has_more && [] !== $studios) {
+      $offset = ($current_offset ?? 0) + count($studios);
+      $next_cursor = base64_encode((string) $offset);
     }
 
     return (new StudioListResponse())
       ->setData($data)
       ->setHasMore($has_more)
-      ->setNextCursor(null)
+      ->setNextCursor($next_cursor)
     ;
   }
 
@@ -104,6 +133,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setRole($member->getRole())
       ->setStatus($member->getStatus())
       ->setJoinedAt($member->getCreatedOn())
+      ->setStudioProjectCount($this->studio_manager->countStudioUserProjects($member->getStudio(), $user))
     ;
   }
 
@@ -133,12 +163,17 @@ class StudioResponseManager extends AbstractResponseManager
   public function createProjectResponse(StudioProgram $studioProject): StudioProjectResponse
   {
     $program = $studioProject->getProgram();
+    $programId = $program->getId();
+    $user = $studioProject->getUser();
 
     return (new StudioProjectResponse())
-      ->setId($program->getId())
+      ->setId($programId)
       ->setName($program->getName())
-      ->setAddedBy($studioProject->getUser()->getUsername())
+      ->setAddedBy($user->getUsername())
       ->setAddedAt($studioProject->getCreatedOn())
+      ->setScreenshotSmall(null !== $programId ? $this->project_manager->getScreenshotSmall($programId) : null)
+      ->setAuthor($program->getUser()?->getUsername())
+      ->setAuthorId($program->getUser()?->getId())
     ;
   }
 
@@ -178,6 +213,62 @@ class StudioResponseManager extends AbstractResponseManager
       ->setParentId($comment->getParentId() ?: null)
       ->setReplyCount($this->studio_manager->countCommentReplies($comment->getId() ?? 0))
       ->setCreatedAt($comment->getUploadDate())
+    ;
+  }
+
+  /**
+   * @param StudioActivity[] $activities
+   */
+  public function createActivityListResponse(array $activities, bool $has_more): StudioActivityListResponse
+  {
+    $data = [];
+    foreach ($activities as $activity) {
+      $data[] = $this->createActivityResponse($activity);
+    }
+
+    $next_cursor = null;
+    if ($has_more && [] !== $activities) {
+      $last = end($activities);
+      $next_cursor = base64_encode((string) $last->getId());
+    }
+
+    return (new StudioActivityListResponse())
+      ->setData($data)
+      ->setHasMore($has_more)
+      ->setNextCursor($next_cursor)
+    ;
+  }
+
+  public function createActivityResponse(StudioActivity $activity): StudioActivityResponse
+  {
+    $user = $activity->getUser();
+
+    return (new StudioActivityResponse())
+      ->setId($activity->getId())
+      ->setType($activity->getType())
+      ->setUserId($user->getId())
+      ->setUsername($user->getUsername())
+      ->setCreatedAt($activity->getCreatedOn())
+    ;
+  }
+
+  /**
+   * @param list<array{id: string|null, name: string, in_studio: bool, screenshot_small: string|null}> $projects
+   */
+  public function createUserProjectsResponse(array $projects): StudioUserProjectsResponse
+  {
+    $data = [];
+    foreach ($projects as $project) {
+      $data[] = (new StudioUserProjectResponse())
+        ->setId($project['id'])
+        ->setName($project['name'])
+        ->setInStudio($project['in_studio'])
+        ->setScreenshotSmall($project['screenshot_small'])
+      ;
+    }
+
+    return (new StudioUserProjectsResponse())
+      ->setProjects($data)
     ;
   }
 

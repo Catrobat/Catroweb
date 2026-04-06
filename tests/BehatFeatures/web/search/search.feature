@@ -39,7 +39,7 @@ Feature: Searching for projects & users
     Given I am on "/app/search/project"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "project 1"
     Then I should see "test project"
     Then I should see "project 3"
@@ -51,7 +51,7 @@ Feature: Searching for projects & users
     Given I am on "/app/search/Test"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "test advanced games"
     Then I should see "test advanced app"
     Then I should see "test project"
@@ -64,7 +64,7 @@ Feature: Searching for projects & users
     Given I am on "/app/search/Test%20advanced"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "test advanced games"
     Then I should see "test advanced app"
 
@@ -72,7 +72,7 @@ Feature: Searching for projects & users
     Given I am on "/app/search/game"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "test advanced games"
     Then I should see "project 1"
     Then I should see "project 3"
@@ -82,13 +82,13 @@ Feature: Searching for projects & users
     Given I am on "/app/search/project%20and%20app"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
 
   Scenario: search for projects, which contain the word "mindstorms"
     Given I am on "/app/search/mindstorms"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "Test advanced games"
     Then I should see "Catrobat"
     Then I should see "project 3"
@@ -98,7 +98,7 @@ Feature: Searching for projects & users
     Given I am on "/app/search/gmail"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "No projects found"
     Then I should see "No users found"
 
@@ -106,7 +106,7 @@ Feature: Searching for projects & users
     Given I am on "/app/search/gmx.at"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "No projects found"
     Then I should see "No users found"
 
@@ -115,7 +115,7 @@ Feature: Searching for projects & users
     Given I am on "/app/search/user"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "User1"
     Then I should see "User2"
     Then I should see "User3"
@@ -130,7 +130,7 @@ Feature: Searching for projects & users
     Given I am on "/app/search/cat"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     Then I should see "Cat"
     Then I should not see "User1"
     Then I should not see "User2"

@@ -31,6 +31,8 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\StudioApiInterface;
+use OpenAPI\Server\Model\StudioAddProjectRequest;
+use OpenAPI\Server\Model\StudioCommentCreateRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -56,7 +58,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioGetAction(Request $request)
+  public function studioGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -138,6 +140,202 @@ class StudioController extends Controller
   }
 
   /**
+   * Operation studioIdActivitiesGet.
+   *
+   * List studio activities
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function studioIdActivitiesGetAction(Request $request, $id): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 20);
+    $cursor = $request->query->get('cursor');
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->studioIdActivitiesGet($id, $accept_language, $limit, $cursor, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        400 => 'Bad request (Invalid, or missing parameters)',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation studioIdCommentsCommentIdDelete.
+   *
+   * Delete a studio comment
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function studioIdCommentsCommentIdDeleteAction(Request $request, $id, $comment_id): Response
+  {
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $comment_id = $this->deserialize($comment_id, 'int', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('int');
+    $response = $this->validate($comment_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 204;
+      $responseHeaders = [];
+
+      $handler->studioIdCommentsCommentIdDelete($id, $comment_id, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        204 => 'No Content',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation studioIdCommentsGet.
    *
    * List studio comments
@@ -146,7 +344,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdCommentsGetAction(Request $request, $id)
+  public function studioIdCommentsGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -246,7 +444,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdCommentsPostAction(Request $request, $id)
+  public function studioIdCommentsPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -279,7 +477,7 @@ class StudioController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_comment_create_request = $this->deserialize($studio_comment_create_request, 'OpenAPI\Server\Model\StudioCommentCreateRequest', $inputFormat);
+      $studio_comment_create_request = $this->deserialize($studio_comment_create_request, StudioCommentCreateRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -296,7 +494,7 @@ class StudioController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\StudioCommentCreateRequest');
+    $asserts[] = new Assert\Type(StudioCommentCreateRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_comment_create_request, $asserts);
     if ($response instanceof Response) {
@@ -356,7 +554,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdDeleteAction(Request $request, $id)
+  public function studioIdDeleteAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -438,7 +636,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdGetAction(Request $request, $id)
+  public function studioIdGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -524,7 +722,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdJoinPostAction(Request $request, $id)
+  public function studioIdJoinPostAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -606,7 +804,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdLeaveDeleteAction(Request $request, $id)
+  public function studioIdLeaveDeleteAction(Request $request, $id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -686,7 +884,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdMembersGetAction(Request $request, $id)
+  public function studioIdMembersGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -778,6 +976,182 @@ class StudioController extends Controller
   }
 
   /**
+   * Operation studioIdMembersUserIdBanPost.
+   *
+   * Ban a studio member
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function studioIdMembersUserIdBanPostAction(Request $request, $id, $user_id): Response
+  {
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $user_id = $this->deserialize($user_id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($user_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 204;
+      $responseHeaders = [];
+
+      $handler->studioIdMembersUserIdBanPost($id, $user_id, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        204 => 'No Content',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
+   * Operation studioIdMembersUserIdPromotePost.
+   *
+   * Promote a studio member to admin
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function studioIdMembersUserIdPromotePostAction(Request $request, $id, $user_id): Response
+  {
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $user_id = $this->deserialize($user_id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($user_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 204;
+      $responseHeaders = [];
+
+      $handler->studioIdMembersUserIdPromotePost($id, $user_id, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        204 => 'No Content',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation studioIdPost.
    *
    * Update a Studio (only available to studio admins)
@@ -786,7 +1160,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdPostAction(Request $request, $id)
+  public function studioIdPostAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -918,7 +1292,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdProjectsGetAction(Request $request, $id)
+  public function studioIdProjectsGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -1018,7 +1392,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdProjectsPostAction(Request $request, $id)
+  public function studioIdProjectsPostAction(Request $request, $id): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -1042,7 +1416,7 @@ class StudioController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_add_project_request = $this->deserialize($studio_add_project_request, 'OpenAPI\Server\Model\StudioAddProjectRequest', $inputFormat);
+      $studio_add_project_request = $this->deserialize($studio_add_project_request, StudioAddProjectRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -1059,7 +1433,7 @@ class StudioController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\StudioAddProjectRequest');
+    $asserts[] = new Assert\Type(StudioAddProjectRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_add_project_request, $asserts);
     if ($response instanceof Response) {
@@ -1119,7 +1493,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioIdProjectsProjectIdDeleteAction(Request $request, $id, $project_id)
+  public function studioIdProjectsProjectIdDeleteAction(Request $request, $id, $project_id): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -1200,6 +1574,95 @@ class StudioController extends Controller
   }
 
   /**
+   * Operation studioIdUserProjectsGet.
+   *
+   * List current user's projects with in_studio flag
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function studioIdUserProjectsGetAction(Request $request, $id): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+    // Authentication 'BearerAuth' required
+    // HTTP bearer authentication required
+    $securityBearerAuth = $request->headers->get('authorization');
+
+    // Read out all input parameter values into variables
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($accept_language, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Set authentication method 'BearerAuth'
+      $handler->setBearerAuth($securityBearerAuth);
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->studioIdUserProjectsGet($id, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation studioPost.
    *
    * Create a new Studio
@@ -1208,7 +1671,7 @@ class StudioController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function studioPostAction(Request $request)
+  public function studioPostAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

@@ -2,6 +2,7 @@
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
 @import '~bootstrap/scss/mixins';
+@import 'RetentionTooltip';
 
 $max-project-thumb-size: 160px;
 $container-padding: 1rem;
@@ -306,6 +307,182 @@ $container-padding: 1rem;
   }
 }
 
+// Shared card list item styles (used on browse and profile pages)
+.projects-list-item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  width: calc(100% + 3rem);
+  margin: 0 -1.5rem;
+  border-bottom: 1px solid light-dark(#f0f0f0, #2a2a3a);
+  transition: background-color 0.15s ease;
+  position: relative;
+
+  &:hover {
+    background: light-dark(#f8f9fa, #2a2a3a);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.projects-list-item-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  flex: 1;
+  min-width: 0;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.projects-list-item--image {
+  height: 50px;
+  width: 50px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  object-fit: cover;
+  background: light-dark(#eee, #3a3a4a);
+}
+
+.projects-list-item--content {
+  flex: 1;
+  min-width: 0;
+}
+
+.projects-list-item--name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.projects-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15rem 0.75rem;
+  margin-top: 0.15rem;
+  font-size: 0.78rem;
+  color: light-dark(#6c757d, #a0aec0);
+  line-height: 1.2;
+}
+
+.projects-meta__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  white-space: nowrap;
+
+  .material-icons {
+    font-size: 0.85rem;
+  }
+
+  &--retention {
+    font-size: 0.6rem;
+    color: light-dark(#bbb, #666);
+
+    .material-icons {
+      font-size: 0.65rem;
+    }
+
+    .retention-info-icon {
+      font-size: 10px !important;
+    }
+  }
+
+  &--protected {
+    color: light-dark(#8cb88e, #7dab7f);
+  }
+
+  &--warning {
+    color: light-dark(#c9a070, #c9975a);
+  }
+
+  &--critical {
+    color: light-dark(#c08080, #c97070);
+  }
+}
+
+.projects-list-item--actions {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.projects-list-item--menu-btn {
+  padding: 0.25rem;
+  border: none;
+  background: none;
+  color: light-dark(#6c757d, #a0aec0);
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    background: light-dark(#f0f0f0, #3a3a4a);
+  }
+
+  .material-icons {
+    font-size: 1.25rem;
+  }
+}
+
+.projects-list-item--dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 50;
+  min-width: 160px;
+  background: light-dark(#fff, #2d2d3d);
+  border: 1px solid light-dark(#dee2e6, #3a3a4a);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
+  overflow: hidden;
+}
+
+.projects-list-item--dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: none;
+  color: light-dark(#212529, #e2e8f0);
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+
+  .material-icons {
+    font-size: 1.1rem;
+    color: light-dark(#6c757d, #a0aec0);
+  }
+
+  &:hover {
+    background: light-dark(#f8f9fa, #3a3a4a);
+    text-decoration: none;
+    color: light-dark(#212529, #e2e8f0);
+  }
+
+  &.text-danger {
+    color: #dc3545;
+
+    .material-icons {
+      color: #dc3545;
+    }
+  }
+}
+
 .no-projects {
   margin-bottom: 25px;
   text-align: center;
@@ -366,4 +543,10 @@ $project-tile-width: 85px;
       }
     }
   }
+}
+
+.projects-list-item--dropdown-divider {
+  height: 1px;
+  margin: 0.25rem 0;
+  background: light-dark(#dee2e6, #3a3a4a);
 }

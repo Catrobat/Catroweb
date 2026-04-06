@@ -22,6 +22,7 @@ use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\Studio\StudioManager;
 use App\System\Testing\DataFixtures\ProjectDataFixtures;
 use App\System\Testing\DataFixtures\UserDataFixtures;
+use App\User\Notification\NotificationManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -75,6 +76,7 @@ class StudioManagerTest extends KernelTestCase
     /** @var ProgramRepository $studio_program_repository */
     $studio_program_repository = $this->entity_manager->getRepository(Program::class);
     $parameter_bag = $this->createStub(ParameterBagInterface::class);
+    $notification_manager = $this->createStub(NotificationManager::class);
     $this->object = new StudioManager(
       $this->entity_manager,
       $studio_repository,
@@ -85,6 +87,7 @@ class StudioManagerTest extends KernelTestCase
       $studio_join_request_repository,
       $studio_program_repository,
       $parameter_bag,
+      $notification_manager,
     );
     $user_manager = $container->get(UserManager::class);
     \assert($user_manager instanceof UserManager);

@@ -30,6 +30,18 @@ const TAB_CONFIG = [
     type: 'remix',
     prefix: 'remix-notification-',
   },
+  {
+    chipId: 'studio-notif',
+    paneId: 'studio-notifications',
+    type: 'studio',
+    prefix: 'studio-notification-',
+  },
+  {
+    chipId: 'project-notif',
+    paneId: 'project-notifications',
+    type: 'project',
+    prefix: 'project-notification-',
+  },
 ]
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -99,9 +111,30 @@ class UserNotifications {
     this.projectPath = projectPath
     this.imgAsset = imgAsset
 
-    this.cursors = { all: null, follow: null, comment: null, reaction: null, remix: null }
-    this.hasMore = { all: true, follow: true, comment: true, reaction: true, remix: true }
-    this.fetchActive = { all: false, follow: false, comment: false, reaction: false, remix: false }
+    this.cursors = {
+      all: null,
+      follow: null,
+      comment: null,
+      reaction: null,
+      remix: null,
+      studio: null,
+    }
+    this.hasMore = {
+      all: true,
+      follow: true,
+      comment: true,
+      reaction: true,
+      remix: true,
+      studio: true,
+    }
+    this.fetchActive = {
+      all: false,
+      follow: false,
+      comment: false,
+      reaction: false,
+      remix: false,
+      studio: false,
+    }
 
     this.containers = {}
     for (const tab of TAB_CONFIG) {
@@ -217,10 +250,14 @@ class UserNotifications {
   getInstanceType(fetched) {
     if (fetched.type === 'follow' && fetched.project) return 'program'
     if (fetched.type === 'moderation' && fetched.project) return 'program'
+    if (fetched.type === 'studio') return 'studio'
+    if (fetched.type === 'project' && fetched.project) return 'program'
+    if (fetched.type === 'project') return 'other'
     return fetched.type
   }
 
   getRedirectTarget(fetched) {
+    if (fetched.type === 'studio' && fetched.studio) return fetched.studio
     if (fetched.project) return fetched.project
     if (fetched.type === 'follow' && fetched.from) return fetched.from
     return ''
@@ -301,6 +338,12 @@ class UserNotifications {
       const safeId =
         typeof id === 'string' ? encodeURIComponent(id.replace(/[^A-Za-z0-9_-]/g, '')) : ''
       window.location.assign(`project/${safeId}`)
+      return
+    }
+    if (type === 'studio' && id) {
+      const safeId =
+        typeof id === 'string' ? encodeURIComponent(id.replace(/[^A-Za-z0-9_-]/g, '')) : ''
+      window.location.assign(`studio/${safeId}`)
     }
   }
 

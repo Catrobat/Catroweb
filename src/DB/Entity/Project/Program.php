@@ -41,12 +41,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program implements \Stringable
 {
-  final public const int APK_NONE = 0;
-
-  final public const int APK_PENDING = 1;
-
-  final public const int APK_READY = 2;
-
   final public const int INITIAL_VERSION = 1;
 
   #[ORM\Id]
@@ -230,14 +224,8 @@ class Program implements \Stringable
   #[ORM\ManyToOne(targetEntity: User::class)]
   protected ?User $approved_by_user = null;
 
-  #[ORM\Column(type: Types::SMALLINT, options: ['default' => 0])]
-  protected int $apk_status = 0;
-
-  #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-  protected ?\DateTime $apk_request_time = null;
-
-  #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
-  protected int $apk_downloads = 0;
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+  protected bool $storage_protected = false;
 
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $debug_build = false;
@@ -601,6 +589,16 @@ class Program implements \Stringable
     return $this->approved;
   }
 
+  public function isStorageProtected(): bool
+  {
+    return $this->storage_protected;
+  }
+
+  public function setStorageProtected(bool $storage_protected): void
+  {
+    $this->storage_protected = $storage_protected;
+  }
+
   public function isVisible(): bool
   {
     return $this->visible;
@@ -619,42 +617,6 @@ class Program implements \Stringable
   public function setFlavor(?string $flavor): void
   {
     $this->flavor = $flavor;
-  }
-
-  public function getApkStatus(): int
-  {
-    return $this->apk_status;
-  }
-
-  public function setApkStatus(int $apk_status): Program
-  {
-    $this->apk_status = $apk_status;
-
-    return $this;
-  }
-
-  public function setApkRequestTime(?\DateTime $apkRequestTime): Program
-  {
-    $this->apk_request_time = $apkRequestTime;
-
-    return $this;
-  }
-
-  public function getApkRequestTime(): ?\DateTime
-  {
-    return $this->apk_request_time;
-  }
-
-  public function setApkDownloads(int $apkDownloads): Program
-  {
-    $this->apk_downloads = $apkDownloads;
-
-    return $this;
-  }
-
-  public function getApkDownloads(): int
-  {
-    return $this->apk_downloads;
   }
 
   public function addTag(Tag $tag): void

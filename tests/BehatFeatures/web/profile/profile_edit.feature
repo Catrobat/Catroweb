@@ -10,15 +10,15 @@ Feature:
       | 1  | Catrobat |
       | 2  | User1    |
     And there are projects:
-      | id | name      | description | owned by | downloads | apk_downloads | views | upload time      | version | language version | private |
-      | 1  | project 1 | p1          | Catrobat | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | false   |
-      | 2  | project 2 |             | Catrobat | 333       | 123           | 9     | 22.04.2014 13:00 | 0.8.5   | 999              | true    |
-      | 3  | project 3 |             | User1    | 133       | 63            | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | false   |
+      | id | name      | description | owned by | downloads | views | upload time      | version | language version | private |
+      | 1  | project 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | 0.6              | false   |
+      | 2  | project 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 999              | true    |
+      | 3  | project 3 |             | User1    | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | 0.6              | false   |
 
     And I log in as "Catrobat"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
+    Then I should see "Profile"
 
   Scenario: changing my username must work
     Given I click "#top-app-bar__btn-settings"
@@ -153,7 +153,7 @@ Feature:
     When I reload the page
     Then I should be on "/app/user"
     And I should be logged in
-    And I should see "My Profile"
+    And I should see "Profile"
     When I logout
     And I wait for the page to be loaded
     Then I should be logged out
@@ -205,8 +205,7 @@ Feature:
     And I should see "project 2"
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then I should see "Delete project"
-    And the element "#project-action-menu" should be visible
-    When I click "#project-action-menu > ul > li[data-action='delete']"
+    When I click ".own-project-list__project[data-id='1'] [data-action='delete']"
     Then I should see "delete it"
     When I click ".swal2-cancel"
     Then I should not see "delete it"
@@ -220,8 +219,7 @@ Feature:
     And I should see "project 2"
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
     Then I should see "Delete project"
-    And the element "#project-action-menu" should be visible
-    When I click "#project-action-menu > ul > li[data-action='delete']"
+    When I click ".own-project-list__project[data-id='1'] [data-action='delete']"
     Then I should see "delete it"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
@@ -233,17 +231,15 @@ Feature:
     Then I should see "project 1"
     And the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "public"
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
-    Then the element "#project-action-menu" should be visible
     And I should see "Set private"
-    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
+    When I click ".own-project-list__project[data-id='1'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for the element ".own-project-list__project[data-id='1'] .loading-spinner-backdrop" to appear and if so to disappear again
     Then the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "private"
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
-    Then the element "#project-action-menu" should be visible
     And I should see "Set public"
-    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
+    When I click ".own-project-list__project[data-id='1'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for the element ".own-project-list__project[data-id='1'] .loading-spinner-backdrop" to appear and if so to disappear again
@@ -253,9 +249,8 @@ Feature:
     Then I should see "project 1"
     And the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "public"
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
-    Then the element "#project-action-menu" should be visible
     And I should see "Set private"
-    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
+    When I click ".own-project-list__project[data-id='1'] [data-action='toggle-visibility']"
     Then the element ".swal2-shown" should be visible
     When I click ".swal2-cancel"
     And I wait for AJAX to finish
@@ -267,18 +262,16 @@ Feature:
     And I should see "project 2"
     And the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "private"
     When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
-    Then the element "#project-action-menu" should be visible
     And I should see "Set private"
-    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
+    When I click ".own-project-list__project[data-id='1'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
     And I wait 1000 milliseconds
     Then the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "private"
     When I click ".own-project-list__project[data-id='2'] .own-project-list__project__action"
-    Then the element "#project-action-menu" should be visible
     And I should see "Set public"
-    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
+    When I click ".own-project-list__project[data-id='2'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
@@ -289,9 +282,8 @@ Feature:
     Then I should see "project 2"
     And the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "private"
     When I click ".own-project-list__project[data-id='2'] .own-project-list__project__action"
-    Then the element "#project-action-menu" should be visible
     And I should see "Set public"
-    When I click "#project-action-menu > ul > li[data-action='toggle-visibility']"
+    When I click ".own-project-list__project[data-id='2'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for the element ".own-project-list__project[data-id='2'] .loading-spinner-backdrop" to appear and if so to disappear again

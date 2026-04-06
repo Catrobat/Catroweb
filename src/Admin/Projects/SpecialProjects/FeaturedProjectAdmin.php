@@ -207,6 +207,11 @@ class FeaturedProjectAdmin extends AbstractAdmin
       ->addIdentifier('id', null, [
         'sortable' => false,
       ])
+      ->add('type', 'string', [
+        'label' => 'Type',
+        'accessor' => static fn (): string => 'Project',
+        'sortable' => false,
+      ])
       ->add('Featured Image', null, [
         'accessor' => $this->getFeaturedImageUrl(...),
         'template' => 'Admin/Projects/FeaturedImage.html.twig',

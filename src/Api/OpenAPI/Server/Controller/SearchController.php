@@ -56,7 +56,7 @@ class SearchController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function searchGetAction(Request $request)
+  public function searchGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -98,7 +98,7 @@ class SearchController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['all', 'projects', 'users']);
+    $asserts[] = new Assert\Choice(['all', 'projects', 'users', 'studios']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($type, $asserts);
     if ($response instanceof Response) {

@@ -7,6 +7,71 @@
 
 {% block content %}
 
+    {# Health Summary Widget #}
+    <div class="row" id="health-summary">
+
+      <div class="col-md-4">
+        <div class="box">
+          <div class="box-header">
+            <h4>
+              {% if storagePressureLevel == 'emergency' %}
+                <span class="badge bg-danger">EMERGENCY</span>
+              {% elseif storagePressureLevel == 'critical' %}
+                <span class="badge bg-danger">CRITICAL</span>
+              {% elseif storagePressureLevel == 'warning' %}
+                <span class="badge bg-warning">WARNING</span>
+              {% else %}
+                <span class="badge bg-success">NORMAL</span>
+              {% endif %}
+              Storage Pressure
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="box">
+          <div class="box-header">
+            <h4>
+              {% if emailBudgetLevel == 'low' %}
+                <span class="badge bg-danger">LOW</span>
+              {% elseif emailBudgetLevel == 'moderate' %}
+                <span class="badge bg-warning">MODERATE</span>
+              {% else %}
+                <span class="badge bg-success">OK</span>
+              {% endif %}
+              Email Budget
+            </h4>
+          </div>
+          <div class="box-body">
+            <p><strong>Sent today:</strong> {{ emailBudget.sent_today }} / {{ emailBudget.daily_limit }}</p>
+            <p><strong>Remaining:</strong> {{ emailBudget.remaining }}</p>
+            <hr>
+            <small>
+              {% for type, data in emailBudget.breakdown %}
+                {{ type|capitalize }}: {{ data.sent }}/{{ data.reserve }}<br>
+              {% endfor %}
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="box">
+          <div class="box-header">
+            <h4>Projects</h4>
+          </div>
+          <div class="box-body">
+            <p><strong>Total:</strong> {{ projectCounts.total }}</p>
+            <p><strong>Visible:</strong> {{ projectCounts.visible }}</p>
+            <p><strong>Private:</strong> {{ projectCounts.private }}</p>
+            <p><strong>Hidden:</strong> {{ projectCounts.hidden }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
     <div class="row">
 
       <div class="col-md-6">

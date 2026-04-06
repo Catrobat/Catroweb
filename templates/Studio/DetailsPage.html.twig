@@ -1,7 +1,29 @@
 {% extends 'Layout/Base.html.twig' %}
 
+{% block title %}{{ studio.name|escape('html_attr') }} – Catrobat{% endblock %}
+
 {% block head %}
   {{ encore_entry_link_tags('studio_detail_page') }}
+
+  {% if studio.description is not empty %}
+    {% set og_description = studio.description|striptags|slice(0, 200)|escape('html_attr') %}
+  {% else %}
+    {% set og_description = 'studio.checkout_this_studio'|trans({}, 'catroweb')|escape('html_attr') %}
+  {% endif %}
+
+  {% set og_image_url = studio.coverAssetPath ? absolute_url(asset(studio.coverAssetPath)) : absolute_url(asset('images/default/studio_default.png')) %}
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ studio.name|escape('html_attr') }} – Catrobat">
+  <meta property="og:description" content="{{ og_description }}">
+  <meta property="og:image" content="{{ og_image_url }}">
+  <meta property="og:image:secure_url" content="{{ og_image_url }}">
+  <meta property="og:url" content="{{ url('studio_details', {id: studio.id}) }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ studio.name|escape('html_attr') }} – Catrobat">
+  <meta name="twitter:description" content="{{ og_description }}">
+  <meta name="twitter:image" content="{{ og_image_url }}">
 {% endblock %}
 
 {% block body %}
@@ -11,19 +33,9 @@
 <div id="tab-content" class="tab-content container">
   {{ include('Studio/Details/ProjectList.html.twig') }}
   {{ include('Studio/Details/CommentList.html.twig') }}
-  {{ include('Studio/Details/CommentReply.html.twig') }}
 </div>
 
-<input id="showMore-text" type="hidden" value="{{ 'studio.details.showMore'|trans({}, 'catroweb') }}">
-    <input id="showLess-text" type="hidden" value="{{ 'studio.details.showLess'|trans({}, 'catroweb') }}">
-    <input id="project-remove-success" type="hidden" value="{{ 'studio.details.remove_project_success'|trans({}, 'catroweb') }}">
-    <input id="project-remove-error" type="hidden" value="{{ 'studio.details.remove_project_error'|trans({}, 'catroweb') }}">
-    <input id="comment-remove-error" type="hidden" value="{{ 'studio.details.comments.remove_error'|trans({}, 'catroweb') }}">
-    <input id="comment-error" type="hidden" value="{{ 'studio.details.comments.post_error'|trans({}, 'catroweb') }}">
-    <input id="comment-rate-limited" type="hidden" value="{{ 'moderation.studio.rate_limited'|trans({}, 'catroweb') }}">
-    <input id="update-cover-error" type="hidden" value="{{ 'studio.details.updateCoverError'|trans({}, 'catroweb') }}">
-    <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
-    <div class="js-studio-detail" data-studio-id="{{ studio.id }}"></div>
+<input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
 
 {% endblock %}
 {% block javascript %}

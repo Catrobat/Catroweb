@@ -21,7 +21,157 @@ img .lazyload:not([src]) {
 }
 
 .carousel-item__image {
-  max-width: 1024px;
-  max-height: 400px;
-  height: auto;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
+
+  @media (width >= 768px) {
+    max-width: 1024px;
+  }
+}
+
+// Featured banner: full-width on mobile
+.featured-banner {
+  margin: 0 calc(-1 * var(--bs-gutter-x, 0.75rem));
+  border-radius: 0;
+  overflow: hidden;
+
+  .carousel-item {
+    background: light-dark(#f0f0f0, #1a1a2e);
+  }
+
+  @media (width >= 768px) {
+    margin: 0;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px light-dark(rgb(0 0 0 / 10%), rgb(0 0 0 / 30%));
+  }
+}
+
+// ── Apple-style: gradient on body, 3D floating cards ──
+
+// Body gradient — the entire viewport has the gradient
+body:has(#home-projects) {
+  background: linear-gradient(
+    180deg,
+    light-dark(#fff, #0f0f1a) 0%,
+    color-mix(in srgb, var(--primary) 4%, light-dark(#f9f9f9, #131328)) 10%,
+    color-mix(in srgb, var(--primary) 8%, light-dark(#f3f3f3, #171730)) 30%,
+    color-mix(in srgb, var(--primary) 12%, light-dark(#ededee, #1b1b36)) 50%,
+    color-mix(in srgb, var(--primary) 8%, light-dark(#f3f3f3, #171730)) 70%,
+    color-mix(in srgb, var(--primary) 5%, light-dark(#f6f6f6, #141428)) 85%,
+    light-dark(#e8e9e8, #1e1d1e) 100%
+  ) !important;
+  background-attachment: fixed !important;
+}
+
+.page-content:has(#home-projects) {
+  margin-bottom: 0;
+  padding-bottom: 3rem;
+  background: transparent;
+}
+
+#home-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem 0;
+
+  > .empty,
+  > .empty-with-text:not(:only-child) {
+    display: none !important;
+  }
+}
+
+// Each slider section is a floating card
+.home-section {
+  background: light-dark(rgb(255 255 255 / 60%), rgb(30 30 50 / 50%)) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid light-dark(rgb(255 255 255 / 80%), rgb(255 255 255 / 8%));
+  margin: 0;
+  padding: 1.25rem 0.75rem;
+  box-shadow:
+    0 2px 12px light-dark(rgb(0 0 0 / 6%), rgb(0 0 0 / 20%)),
+    0 0 0 1px light-dark(rgb(0 0 0 / 3%), rgb(255 255 255 / 4%));
+  transition: box-shadow 0.3s ease;
+
+  // Mobile: full-width, ignore page container padding, slight border-radius
+  border-radius: 12px;
+  margin-left: calc(-1 * var(--bs-gutter-x, 0.75rem));
+  margin-right: calc(-1 * var(--bs-gutter-x, 0.75rem));
+  padding-left: calc(var(--bs-gutter-x, 0.75rem));
+  padding-right: calc(var(--bs-gutter-x, 0.75rem));
+
+  @media (width >= 768px) {
+    border-radius: 16px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  &:hover {
+    box-shadow:
+      0 4px 24px light-dark(rgb(0 0 0 / 10%), rgb(0 0 0 / 30%)),
+      0 0 0 1px light-dark(rgb(0 0 0 / 5%), rgb(255 255 255 / 6%));
+  }
+
+  // Studios accent — slightly more opaque, warmer tint
+  &--accent {
+    background: light-dark(
+      color-mix(in srgb, var(--primary) 8%, rgb(255 255 255 / 70%)),
+      color-mix(in srgb, var(--primary) 12%, rgb(30 30 50 / 60%))
+    ) !important;
+    border-color: light-dark(
+      color-mix(in srgb, var(--primary) 15%, rgb(255 255 255 / 80%)),
+      color-mix(in srgb, var(--primary) 20%, rgb(255 255 255 / 10%))
+    );
+  }
+}
+
+// Individual project/studio cards inside sliders — 3D pop
+.home-section .project-list__project {
+  background: light-dark(rgb(255 255 255 / 80%), rgb(40 40 60 / 60%));
+  border: 1px solid light-dark(rgb(0 0 0 / 5%), rgb(255 255 255 / 6%));
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 1px 6px light-dark(rgb(0 0 0 / 5%), rgb(0 0 0 / 15%));
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  // Mobile: sized so 2.5 cards fit — the last one always peeks
+  min-width: 35vw;
+  flex-shrink: 0;
+
+  @media (width >= 768px) {
+    min-width: auto;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px light-dark(rgb(0 0 0 / 10%), rgb(0 0 0 / 25%));
+  }
+}
+
+// Featured slider — flush against top bar, no gap
+.page-content:has(.featured-slider) {
+  margin-top: 56px;
+  padding-top: 0;
+
+  @media (width >= 600px) {
+    margin-top: 64px;
+  }
+}
+
+.featured-slider {
+  margin: 0 calc(-1 * var(--bs-gutter-x, 0.75rem));
+  padding: 0 0 0.5rem;
+  background: transparent;
+}
+
+// Kill ProjectList.scss margin-bottom
+#home-projects > .project-list,
+.project-list.home-section {
+  margin-bottom: 0 !important;
 }

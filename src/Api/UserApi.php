@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
+use App\Api\Services\Studio\StudioApiLoader;
+use App\Api\Services\Studio\StudioResponseManager;
 use App\Api\Services\User\UserApiFacade;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\Comment\UserComment;
@@ -19,6 +21,7 @@ use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
+use OpenAPI\Server\Model\StudioListResponse;
 use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
 use OpenAPI\Server\Model\UserDataExportResponse;
@@ -35,6 +38,8 @@ class UserApi extends AbstractApiController implements UserApiInterface
 {
   use RateLimitTrait;
 
+  private const int MAX_LIMIT = 50;
+
   public function __construct(
     private readonly UserApiFacade $facade,
     private readonly RateLimiterFactory $registrationBurstLimiter,
@@ -43,6 +48,8 @@ class UserApi extends AbstractApiController implements UserApiInterface
     private readonly RequestStack $request_stack,
     private readonly CaptchaVerifier $captchaVerifier,
     private readonly EntityManagerInterface $entity_manager,
+    private readonly StudioApiLoader $studio_api_loader,
+    private readonly StudioResponseManager $studio_response_manager,
   ) {
   }
 
@@ -165,6 +172,61 @@ class UserApi extends AbstractApiController implements UserApiInterface
     $response = $this->facade->getResponseManager()->createBasicUserDataResponse($user, 'ALL');
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    return $response;
+  }
+
+  #[\Override]
+  public function userIdStudiosGet(string $id, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): ?StudioListResponse
+  {
+    $user = $this->facade->getLoader()->findUserByID($id);
+
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $viewer = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$this->facade->getLoader()->canAccessProfile($user, $viewer)) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $limit = min(max($limit, 1), self::MAX_LIMIT);
+    $cursor_id = $this->decodeIdCursor($cursor);
+
+    if (null === $cursor_id && null !== $cursor && '' !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $is_own_profile = $viewer instanceof User && $viewer->getId() === $user->getId();
+    $page = $this->studio_api_loader->loadUserStudiosPage($user, $limit, $cursor_id, $is_own_profile);
+
+    $studio_responses = [];
+    foreach ($page['studios'] as $studio) {
+      $studio_responses[] = $this->studio_response_manager->createStudioResponseWithUserContext($studio, $viewer);
+    }
+
+    $next_cursor = null;
+    if ($page['has_more'] && [] !== $page['studios']) {
+      $last_studio = end($page['studios']);
+      $su_id = $this->studio_api_loader->getStudioUserIdForCursor($user, $last_studio);
+      if (null !== $su_id) {
+        $next_cursor = base64_encode((string) $su_id);
+      }
+    }
+
+    $responseCode = Response::HTTP_OK;
+
+    $response = new StudioListResponse();
+    $response->setData($studio_responses);
+    $response->setTotal($page['total']);
+    $response->setHasMore($page['has_more']);
+    $response->setNextCursor($next_cursor);
 
     return $response;
   }
@@ -366,5 +428,19 @@ class UserApi extends AbstractApiController implements UserApiInterface
     }
 
     return \DateTime::createFromInterface($dateTime);
+  }
+
+  private function decodeIdCursor(?string $cursor): ?int
+  {
+    if (null === $cursor || '' === $cursor) {
+      return null;
+    }
+
+    $decoded = base64_decode($cursor, true);
+    if (false === $decoded || !ctype_digit($decoded)) {
+      return null;
+    }
+
+    return (int) $decoded;
   }
 }

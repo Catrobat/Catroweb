@@ -1,10 +1,12 @@
-import { AjaxController } from '../ajax_controller'
+import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
+import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
 import { MDCMenu } from '@material/menu'
+import Swal from 'sweetalert2'
 
-export default class extends AjaxController {
+export default class extends Controller {
   static values = {
-    url: String,
+    membersUrl: String,
     studioId: String,
     listElementId: String,
   }
@@ -17,16 +19,111 @@ export default class extends AjaxController {
    * @returns {Promise<void>}
    */
   async loadMembers() {
-    await this.fetchData(
-      this.urlValue,
-      this.listElementIdValue,
-      new URLSearchParams({ studio_id: this.studioIdValue }),
-    )
+    const listElement = document.getElementById(this.listElementIdValue)
+    listElement.innerHTML = ''
 
-    for (const el of document.querySelectorAll('.mdc-menu')) {
-      const menu = new MDCMenu(el)
-      menu.open = false
+    try {
+      const response = await fetch(this.membersUrlValue + '?limit=50', {
+        credentials: 'same-origin',
+      })
+      if (!response.ok) {
+        return
+      }
+
+      const data = await response.json()
+      if (data.data && data.data.length > 0) {
+        const isStudioAdmin = this.element.dataset.isStudioAdmin === 'true'
+        data.data.forEach((member) => {
+          listElement.appendChild(this._renderMember(member, isStudioAdmin))
+        })
+      }
+
+      for (const el of listElement.querySelectorAll('.mdc-menu')) {
+        const menu = new MDCMenu(el)
+        menu.open = false
+      }
+    } catch (e) {
+      console.error('Failed to load members:', e)
     }
+  }
+
+  _renderMember(member, isStudioAdmin) {
+    const li = document.createElement('li')
+    li.className = 'member__list-entry'
+
+    const avatarUrl = member.avatar || '/images/default/avatar_default.png'
+    const profileUrl = '/app/user/' + escapeAttr(String(member.user_id))
+
+    const adminIndicator =
+      member.role === 'admin'
+        ? `<div>
+        <i class="material-icons member__list-entry__admin-indicator">admin_panel_settings</i>
+        <a href="${profileUrl}">${escapeHtml(member.username)}</a>
+      </div>`
+        : `<a href="${profileUrl}">${escapeHtml(member.username)}</a>`
+
+    const projectCount = member.studio_project_count || 0
+    const transNoProjects = this.element.dataset.transNoStudioProjects || 'No studio projects'
+    const transOneProject = this.element.dataset.transOneStudioProject || '1 studio project'
+    const transNProjects = this.element.dataset.transNStudioProjects || '%count% studio projects'
+    let projectCountText = transNoProjects
+    if (projectCount === 1) {
+      projectCountText = transOneProject
+    } else if (projectCount > 1) {
+      projectCountText = transNProjects.replace('%count%', String(projectCount))
+    }
+
+    let adminButtons = ''
+    if (isStudioAdmin && member.role !== 'admin') {
+      const transPromote = this.element.dataset.transPromoteMember || 'Promote'
+      const transBan = this.element.dataset.transBanMember || 'Remove'
+      const transPromoteFailed = this.element.dataset.transPromotionFailed || 'Promotion failed'
+      const transBanFailed = this.element.dataset.transBanFailed || 'Ban failed'
+      const promoteUrl =
+        this.membersUrlValue + '/' + encodeURIComponent(member.user_id) + '/promote'
+      const banUrl = this.membersUrlValue + '/' + encodeURIComponent(member.user_id) + '/ban'
+
+      adminButtons = `
+        <div class="member__list-entry__admin-buttons mdc-menu-surface--anchor">
+          <button class="member__list-entry__admin-button btn material-icons"
+                  data-action="click->studio--member-list#openAdminMenu"
+                  role="button">more_vert</button>
+          <div class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed">
+            <ul class="mdc-list" role="menu" aria-hidden="true">
+              <li class="member__list-entry__admin-button__promote btn mdc-list-item mdc-ripple-upgraded" role="menuitem"
+                  data-action="click->studio--member-list#promoteMemberToAdmin"
+                  data-url="${escapeAttr(promoteUrl)}"
+                  data-user-id="${escapeAttr(String(member.user_id))}"
+                  data-error-message="${escapeAttr(transPromoteFailed)}">
+                <span class="material-icons me-2">upgrade</span>
+                <span class="member__list-entry__admin-buttons__text">${escapeHtml(transPromote)}</span>
+              </li>
+              <li class="member__list-entry__admin-button__ban btn mdc-list-item mdc-ripple-upgraded" role="menuitem"
+                  data-action="click->studio--member-list#banUserFromStudio"
+                  data-url="${escapeAttr(banUrl)}"
+                  data-user-id="${escapeAttr(String(member.user_id))}"
+                  data-error-message="${escapeAttr(transBanFailed)}">
+                <span class="material-icons me-2 text-danger">delete</span>
+                <span class="member__list-entry__admin-buttons__text">${escapeHtml(transBan)}</span>
+              </li>
+            </ul>
+          </div>
+        </div>`
+    }
+
+    li.innerHTML = `
+      <a href="${profileUrl}">
+        <img class="member__list-entry__image"
+             src="${escapeAttr(avatarUrl)}" alt="">
+      </a>
+      <div class="ps-3">
+        ${adminIndicator}
+        <div class="member__list-entry__project-count text-muted small">${escapeHtml(projectCountText)}</div>
+      </div>
+      ${adminButtons}
+    `
+
+    return li
   }
 
   /**
@@ -46,22 +143,34 @@ export default class extends AjaxController {
   /**
    * Promoting a member to an admin
    *
-   * data-action="click->studio--member-list#promoteMemberToAdmin"
-   * data-url="{{ path('...') }}"
-   * data-user-id="{{ ... }}"
-   * data-error-message="{{ "..."|trans({}, "catroweb") }}"
-   *
    * @param event
    * @returns {Promise<void>}
    */
   async promoteMemberToAdmin(event) {
-    const studioId = this.studioIdValue
-    const userId = event.currentTarget.dataset.userId
-    const errorMessage = event.currentTarget.dataset.errorMessage
+    const { url, errorMessage, confirmButton, cancelButton, confirmText } =
+      event.currentTarget.dataset
 
-    const response = await this.fetchPut(event.currentTarget.dataset.url, {
-      studio_id: studioId,
-      user_id: userId,
+    const result = await Swal.fire({
+      title: confirmText || 'Promote this member to admin?',
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary',
+      },
+      buttonsStyling: false,
+      confirmButtonText: confirmButton || 'Promote',
+      cancelButtonText: cancelButton || 'Cancel',
+    })
+
+    if (!result.isConfirmed) {
+      return
+    }
+
+    const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
     })
 
     if (response.status !== 204) {
@@ -69,28 +178,40 @@ export default class extends AjaxController {
       return
     }
 
-    await this.loadMembers()
+    window.location.reload()
   }
 
   /**
    * Banning a member from the studio
    *
-   * data-action="click->studio--member-list#banUserFromStudio"
-   * data-url="{{ path('...') }}"
-   * data-user-id="{{ ... }}"
-   * data-error-message="{{ "..."|trans({}, "catroweb") }}"
-   *
    * @param event
    * @returns {Promise<void>}
    */
   async banUserFromStudio(event) {
-    const studioId = this.studioIdValue
-    const userId = event.currentTarget.dataset.userId
-    const errorMessage = event.currentTarget.dataset.errorMessage
+    const { url, errorMessage, confirmButton, cancelButton, confirmText } =
+      event.currentTarget.dataset
 
-    const response = await this.fetchPut(event.currentTarget.dataset.url, {
-      studio_id: studioId,
-      user_id: userId,
+    const result = await Swal.fire({
+      title: confirmText || 'Remove this member from the studio?',
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary',
+      },
+      buttonsStyling: false,
+      confirmButtonText: confirmButton || 'Remove',
+      cancelButtonText: cancelButton || 'Cancel',
+    })
+
+    if (!result.isConfirmed) {
+      return
+    }
+
+    const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
     })
 
     if (response.status !== 204) {
@@ -98,6 +219,6 @@ export default class extends AjaxController {
       return
     }
 
-    await this.loadMembers()
+    window.location.reload()
   }
 }

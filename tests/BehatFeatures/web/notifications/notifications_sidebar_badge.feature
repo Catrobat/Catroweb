@@ -26,7 +26,7 @@ Feature: Sidebar should show amount of new notifications in form of a badge
     And I open the menu
     Then the element "#sidebar-notifications" should be visible
     And the ".all-notifications" element should contain "5"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     And I open the menu

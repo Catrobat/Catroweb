@@ -123,7 +123,8 @@ class SendMailToUserController extends CRUDController
         'subject' => $subject,
         'title' => $title,
         'message' => $messageText,
-      ]
+      ],
+      'admin'
     );
 
     return new Response('OK - message sent to '.$user->getEmail(), Response::HTTP_OK);

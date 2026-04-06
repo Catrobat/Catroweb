@@ -15,6 +15,7 @@ use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
+use App\Storage\StorageLifecycleService;
 use App\Translation\TranslationDelegate;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\NonUniqueResultException;
@@ -43,7 +44,30 @@ class ProjectController extends AbstractController
     private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
     private readonly ContentVisibilityManager $content_visibility_manager,
     private readonly ProjectStatisticsService $project_statistics_service,
+    private readonly StorageLifecycleService $storage_lifecycle,
   ) {
+  }
+
+  #[Route(path: '/projects', name: 'projects_browse', methods: ['GET'])]
+  public function projectsBrowse(): Response
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+
+    return $this->render('Project/ProjectsBrowse.html.twig', [
+      'is_logged_in' => null !== $user,
+      'user_id' => null !== $user ? ($user->getId() ?? '') : '',
+    ]);
+  }
+
+  #[Route(path: '/project/upload', name: 'project_upload', methods: ['GET'], priority: 10)]
+  public function projectUpload(): Response
+  {
+    if (!$this->getUser()) {
+      return $this->redirectToRoute('login');
+    }
+
+    return $this->render('Project/ProjectUpload.html.twig');
   }
 
   #[Route(path: '/project/{id}', name: 'program', defaults: ['id' => 0])]
@@ -88,7 +112,11 @@ class ProjectController extends AbstractController
       'download_url' => $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $projectId]),
       'age' => $this->elapsed_time->format($project->getUploadedAt()->getTimestamp()),
       'filesize_mb' => sprintf('%.2f', $project->getFilesize() / 1_048_576),
-      'total_downloads' => $project->getDownloads() + $project->getApkDownloads(),
+      'total_downloads' => $project->getDownloads(),
+      'retention_days' => $this->storage_lifecycle->getRetentionDays($project),
+      'retention_expiry' => StorageLifecycleService::PROTECTED_DAYS === $this->storage_lifecycle->getRetentionDays($project)
+        ? null
+        : (clone $project->getUploadedAt())->modify('+'.$this->storage_lifecycle->getRetentionDays($project).' days'),
     ]);
   }
 

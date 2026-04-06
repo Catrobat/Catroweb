@@ -34,3 +34,29 @@ Feature: Remove a project from a studio
     Given I use a valid JWT Bearer token for "Admin"
     When I DELETE "/api/studio/1/projects/1"
     Then the response status code should be "204"
+
+  Scenario: Project owner removes their own project
+    Given I use a valid JWT Bearer token for "Member"
+    When I DELETE "/api/studio/1/projects/1"
+    Then the response status code should be "204"
+
+  Scenario: Remove non-existent project returns 404
+    Given I use a valid JWT Bearer token for "Admin"
+    When I DELETE "/api/studio/1/projects/nonexistent"
+    Then the response status code should be "404"
+
+  Scenario: Remove from non-existent studio returns 404
+    Given I use a valid JWT Bearer token for "Admin"
+    When I DELETE "/api/studio/nonexistent/projects/1"
+    Then the response status code should be "404"
+
+  Scenario: Member removing another users project returns 403
+    Given there are users:
+      | id | name    |
+      | 4  | Member2 |
+    And there are studio users:
+      | id | user    | studio_name | role   |
+      | 4  | Member2 | Studio1     | member |
+    Given I use a valid JWT Bearer token for "Member2"
+    When I DELETE "/api/studio/1/projects/1"
+    Then the response status code should be "403"

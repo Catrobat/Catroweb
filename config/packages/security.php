@@ -157,6 +157,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/featured-banners/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/studio/featured/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/studio/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
@@ -259,7 +271,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/media/categories/[a-zA-Z0-9\-]+/?$',
+          'path' => '^/api/media/categories/[a-zA-Z0-9_-]+/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
@@ -271,7 +283,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/media/assets/[a-zA-Z0-9\-]+/?$',
+          'path' => '^/api/media/assets/[a-zA-Z0-9_-]+/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
@@ -294,37 +306,31 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/catrobat/?$',
+          'path' => '^/api/project/[a-zA-Z0-9_-]+/code/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/code/?$',
+          'path' => '^/api/project/[a-zA-Z0-9_-]+/code-statistics/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/code-statistics/?$',
+          'path' => '^/api/project/[a-zA-Z0-9_-]+/reactions/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/reactions/?$',
+          'path' => '^/api/project/[a-zA-Z0-9_-]+/reactions/users/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/reactions/users/?$',
-          'roles' => 'PUBLIC_ACCESS',
-          'methods' => ['GET'],
-          'requires_channel' => '%env(SECURE_SCHEME)%',
-        ],
-        [
-          'path' => '^/api/project/[a-zA-Z0-9\\\-]+/comments/?$',
+          'path' => '^/api/project/[a-zA-Z0-9_-]+/comments/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
@@ -342,19 +348,25 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/user/[a-zA-Z0-9\\\-]+/followers/?$',
+          'path' => '^/api/user/[a-zA-Z0-9_-]+/followers/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/user/[a-zA-Z0-9\\\-]+/following/?$',
+          'path' => '^/api/user/[a-zA-Z0-9_-]+/following/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/user/[a-zA-Z0-9\\\-]+/achievements/?$',
+          'path' => '^/api/user/[a-zA-Z0-9_-]+/achievements/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/user/[a-zA-Z0-9_-]+/studios/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
@@ -430,7 +442,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'ROLE_ADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN',
           'ROLE_ADMIN',
         ],
-        'ROLE_STATISICS' => [
+        'ROLE_STATISTICS' => [
           'ROLE_ADMIN_BLOCK_STATISTICS_PROJECT_MACHINE_TRANSLATION_ADMIN',
           'ROLE_ADMIN_BLOCK_STATISTICS_PROJECT_CUSTOM_TRANSLATION_ADMIN',
           'ROLE_ADMIN_BLOCK_STATISTICS_COMMENT_MACHINE_TRANSLATION_ADMIN',

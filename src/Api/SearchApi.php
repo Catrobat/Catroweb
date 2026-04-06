@@ -52,6 +52,11 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
         $users_total = $this->facade->getUserManager()->searchCount($query);
         $result = $this->facade->getResponseManager()->getUsersSearchResponse($users, $users_total);
         break;
+      case 'studios':
+        $studios = $this->facade->getStudioSearchService()->search($query, $limit, $offset);
+        $studios_total = $this->facade->getStudioSearchService()->searchCount($query);
+        $result = $this->facade->getResponseManager()->getStudiosSearchResponse($studios, $studios_total);
+        break;
       case 'all':
       default:
         $projects = $this->facade->getProjectSearchService()->search($query, $limit, $offset);
@@ -62,7 +67,11 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
         $users_total = $this->facade->getUserManager()->searchCount($query);
         $users_response = $this->facade->getResponseManager()->getUsersSearchResponse($users, $users_total);
 
-        $result = $this->facade->getResponseManager()->getSearchResponse($projects_response, $users_response);
+        $studios = $this->facade->getStudioSearchService()->search($query, $limit, $offset);
+        $studios_total = $this->facade->getStudioSearchService()->searchCount($query);
+        $studios_response = $this->facade->getResponseManager()->getStudiosSearchResponse($studios, $studios_total);
+
+        $result = $this->facade->getResponseManager()->getSearchResponse($projects_response, $users_response, $studios_response);
         break;
     }
 

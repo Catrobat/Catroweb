@@ -25,10 +25,9 @@ class MaintenanceController extends CRUDController
     protected KernelInterface $kernel,
     #[Autowire('%catrobat.file.storage.dir%')]
     private readonly string $file_storage_dir,
-    #[Autowire('%catrobat.apk.dir%')]
-    private readonly string $apk_dir,
     #[Autowire('%catrobat.logs.dir%')]
     private readonly string $log_dir,
+    private readonly SystemHealthService $healthService,
   ) {
   }
 
@@ -111,33 +110,6 @@ class MaintenanceController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  /**
-   * @throws \Exception
-   */
-  public function apkAction(): RedirectResponse
-  {
-    if (!$this->admin->isGranted('APK')) {
-      throw new AccessDeniedException();
-    }
-
-    $application = new Application($this->kernel);
-    $application->setAutoExit(false);
-
-    $input = new ArrayInput([
-      'command' => 'catrobat:clean:apk',
-    ]);
-
-    $output = new NullOutput();
-
-    $return = $application->run($input, $output);
-
-    if (0 === $return) {
-      $this->addFlash('sonata_flash_success', 'Reset APK Projects OK');
-    }
-
-    return new RedirectResponse($this->admin->generateUrl('list'));
-  }
-
   #[\Override]
   public function listAction(Request $request): Response
   {
@@ -152,12 +124,6 @@ class MaintenanceController extends CRUDController
     $this->setSizeOfObject($rm, $this->file_storage_dir);
     $rm->setCommandName('Delete compressed files');
     $rm->setCommandLink($this->admin->generateUrl('compressed'));
-    $RemovableObjects[] = $rm;
-    $description = "This will remove all generated apk-files in the 'apk'-directory and flag the projects accordingly";
-    $rm = new RemovableMemory('Generated APKs', $description);
-    $this->setSizeOfObject($rm, $this->apk_dir, ['apk']);
-    $rm->setCommandName('Delete APKs');
-    $rm->setCommandLink($this->admin->generateUrl('apk'));
     $RemovableObjects[] = $rm;
     $description = 'This will remove all log files.';
     $rm = new RemovableMemory('Logs', $description);
@@ -184,14 +150,17 @@ class MaintenanceController extends CRUDController
     $shared_ram = (float) shell_exec("free | grep Mem | awk '{print $5}'") * 1_000;
     $cached_ram = (float) shell_exec("free | grep Mem | awk '{print $6}'") * 1_000;
     $available_ram = (float) shell_exec("free | grep Mem | awk '{print $6}'") * 1_000;
-    $free_ram_percentage = ($free_ram / $whole_ram) * 100;
-    $used_ram_percentage = ($used_ram / $whole_ram) * 100;
-    $shared_ram_percentage = ($shared_ram / $whole_ram) * 100;
-    $cached_ram_percentage = ($cached_ram / $whole_ram) * 100;
+    $free_ram_percentage = $whole_ram > 0 ? ($free_ram / $whole_ram) * 100 : 0;
+    $used_ram_percentage = $whole_ram > 0 ? ($used_ram / $whole_ram) * 100 : 0;
+    $shared_ram_percentage = $whole_ram > 0 ? ($shared_ram / $whole_ram) * 100 : 0;
+    $cached_ram_percentage = $whole_ram > 0 ? ($cached_ram / $whole_ram) * 100 : 0;
+
+    $totalSpace = $usedSpace + $freeSpace;
+    $usedPercentage = $totalSpace > 0 ? ($usedSpace / $totalSpace) * 100.0 : 0.0;
 
     return $this->render('Admin/SystemManagement/Maintain.html.twig', [
       'RemovableObjects' => $RemovableObjects,
-      'wholeSpace' => $this->getSymbolByQuantity($usedSpace + $freeSpace),
+      'wholeSpace' => $this->getSymbolByQuantity($totalSpace),
       'usedSpace' => $this->getSymbolByQuantity($usedSpaceRaw),
       'usedSpace_raw' => $usedSpaceRaw,
       'freeSpace_raw' => $freeSpace,
@@ -208,6 +177,10 @@ class MaintenanceController extends CRUDController
       'sharedRam' => $this->getSymbolByQuantity($shared_ram),
       'cachedRam' => $this->getSymbolByQuantity($cached_ram),
       'availableRam' => $this->getSymbolByQuantity($available_ram),
+      'storagePressureLevel' => $this->healthService->getStoragePressureLevel($usedPercentage, (int) $freeSpace),
+      'emailBudget' => $this->healthService->getEmailBudget(),
+      'emailBudgetLevel' => $this->healthService->getEmailBudgetLevel(),
+      'projectCounts' => $this->healthService->getProjectCounts(),
     ]);
   }
 
@@ -254,8 +227,13 @@ class MaintenanceController extends CRUDController
 
   private function getSymbolByQuantity(float $bytes): string
   {
+    if ($bytes <= 0) {
+      return '0.00 B';
+    }
+
     $symbol = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-    $exp = floor(log($bytes) / log(1_024)) > 0 ? intval(floor(log($bytes) / log(1_024))) : 0;
+    $exp = intval(floor(log($bytes) / log(1_024)));
+    $exp = max(0, min($exp, count($symbol) - 1));
 
     return sprintf('%.2f '.$symbol[$exp], $bytes / 1_024 ** $exp);
   }

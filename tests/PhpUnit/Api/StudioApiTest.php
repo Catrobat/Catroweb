@@ -58,6 +58,7 @@ final class StudioApiTest extends TestCase
     $this->api = new StudioApi(
       $this->facade,
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
+      new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
     );
   }
 
@@ -144,6 +145,7 @@ final class StudioApiTest extends TestCase
     $response_headers = [];
 
     $studio = $this->createStub(Studio::class);
+    $studio->method('isIsPublic')->willReturn(true);
     $this->loader->method('loadVisibleStudio')->willReturn($studio);
     $this->loader->method('loadMembersPage')->willReturn(['members' => [], 'has_more' => false]);
     $this->response_manager->method('createMemberListResponse')
@@ -217,6 +219,7 @@ final class StudioApiTest extends TestCase
     $response_headers = [];
 
     $studio = $this->createStub(Studio::class);
+    $studio->method('isIsPublic')->willReturn(true);
     $this->loader->method('loadVisibleStudio')->willReturn($studio);
     $this->loader->method('loadProjectsPage')->willReturn(['projects' => [], 'has_more' => false]);
     $this->response_manager->method('createProjectListResponse')
@@ -257,6 +260,7 @@ final class StudioApiTest extends TestCase
     $response_headers = [];
 
     $studio = $this->createStub(Studio::class);
+    $studio->method('isIsPublic')->willReturn(true);
     $this->loader->method('loadVisibleStudio')->willReturn($studio);
     $this->loader->method('loadCommentsPage')->willReturn(['comments' => [], 'has_more' => false]);
     $this->response_manager->method('createCommentListResponse')

@@ -109,6 +109,5 @@ class RefreshEnvironmentContext implements Context
     FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.screenshot.dir'));
     FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.thumbnail.dir'));
     FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.featuredimage.dir'));
-    FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.apk.dir'));
   }
 }

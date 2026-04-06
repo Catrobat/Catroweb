@@ -11,7 +11,7 @@ Feature: It should be possible to mark notifications marked as read
 
   Scenario: New notifications should be marked
     Given I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "Broadcast msg 1"
@@ -19,7 +19,7 @@ Feature: It should be possible to mark notifications marked as read
 
   Scenario: After revisiting the notification page, old notifications are marked as read
     Given  I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     And I wait 3000 milliseconds

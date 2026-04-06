@@ -107,6 +107,25 @@ interface UserApiInterface
   ): array|object|null;
 
   /**
+   * Operation userIdStudiosGet.
+   *
+   * Get studios a user has joined
+   *
+   * @param string      $id              (required)
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function userIdStudiosGet(
+    string $id,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation userPost.
    *
    * Register

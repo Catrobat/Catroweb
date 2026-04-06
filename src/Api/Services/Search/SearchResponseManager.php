@@ -7,10 +7,13 @@ namespace App\Api\Services\Search;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Projects\ProjectsResponseManager;
 use App\DB\Entity\Project\Program;
+use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
+use App\Studio\StudioManager;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\SearchResponse;
+use OpenAPI\Server\Model\SearchResponseStudiosInner;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -21,17 +24,20 @@ class SearchResponseManager extends AbstractResponseManager
     SerializerInterface $serializer,
     \Psr\Cache\CacheItemPoolInterface $cache,
     protected ProjectsResponseManager $projectsResponseManager,
+    protected StudioManager $studioManager,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
 
-  public function getSearchResponse(array $projects_response, array $users_response): SearchResponse
+  public function getSearchResponse(array $projects_response, array $users_response, array $studios_response = []): SearchResponse
   {
     return new SearchResponse([
       'projects' => $projects_response['projects'],
       'projects_total' => $projects_response['projects_total'],
       'users' => $users_response['users'],
       'users_total' => $users_response['users_total'],
+      'studios' => $studios_response['studios'] ?? [],
+      'studios_total' => $studios_response['studios_total'] ?? 0,
     ]);
   }
 
@@ -58,6 +64,29 @@ class SearchResponseManager extends AbstractResponseManager
       'followers' => $user->getFollowers()->count(),
       'following' => $user->getFollowing()->count(),
     ]);
+  }
+
+  /**
+   * @param Studio[] $studios
+   */
+  public function getStudiosSearchResponse(array $studios, int $total): array
+  {
+    $studios_data_response = [];
+    $studios_data_response['studios'] = [];
+    $studios_data_response['studios_total'] = $total;
+
+    foreach ($studios as $studio) {
+      $studios_data_response['studios'][] = new SearchResponseStudiosInner([
+        'id' => $studio->getId(),
+        'name' => $studio->getName(),
+        'description' => $studio->getDescription(),
+        'image_path' => $studio->getCoverAssetPath() ?? '',
+        'members_count' => $this->studioManager->countStudioUsers($studio),
+        'projects_count' => $this->studioManager->countStudioProjects($studio),
+      ]);
+    }
+
+    return $studios_data_response;
   }
 
   public function getProjectsSearchResponse(array $projects, int $total): array

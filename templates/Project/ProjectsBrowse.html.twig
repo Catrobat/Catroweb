@@ -1,0 +1,79 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ 'projects'|trans({}, 'catroweb') }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('projects_browse_page') }}
+{% endblock %}
+
+{% block body %}
+  <div {{ stimulus_controller('project--browse', {
+    apiBaseUrl: app.request.schemeAndHttpHost ~ '/api',
+    projectDetailPath: path('program', {id: '__ID__'}),
+    uploadPath: is_logged_in ? path('project_upload') : path('login'),
+    loginPath: path('login'),
+    isLoggedIn: is_logged_in,
+    userId: user_id,
+  }) }}
+    data-trans-my-projects="{{ 'project.my_projects'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-explore="{{ 'project.browse.explore'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-no-projects="{{ 'project.browse.no_projects'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-load-more="{{ 'project.browse.load_more'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-no-explore="{{ 'project.browse.no_explore'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-downloads="{{ 'project.downloads'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-views="{{ 'project.views'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-open="{{ 'project.open'|trans({}, 'catroweb')|default('Open')|e('html_attr') }}"
+    data-trans-download="{{ 'project.download'|trans({}, 'catroweb')|default('Download')|e('html_attr') }}"
+    data-trans-share="{{ 'project.shareAction'|trans({}, 'catroweb')|default('Share')|e('html_attr') }}"
+    data-trans-delete="{{ 'project.deleteAction'|trans({}, 'catroweb')|default('Delete')|e('html_attr') }}"
+    data-trans-report="{{ 'report.title'|trans({}, 'catroweb')|default('Report')|e('html_attr') }}"
+    data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb')|default('Link copied!')|e('html_attr') }}"
+    data-trans-are-you-sure="{{ 'project.deleteConfirmationTitle'|trans({}, 'catroweb')|default('Are you sure?')|e('html_attr') }}"
+    data-trans-delete-confirm="{{ 'project.deleteAction'|trans({}, 'catroweb')|default('Delete')|e('html_attr') }}"
+    data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel')|e('html_attr') }}"
+    data-trans-report-title="{{ 'report.title'|trans({}, 'catroweb')|default('Report')|e('html_attr') }}"
+    data-trans-report-submit="{{ 'report.submit'|trans({}, 'catroweb')|default('Submit')|e('html_attr') }}"
+    data-trans-report-cancel="{{ 'report.cancel'|trans({}, 'catroweb')|default('Cancel')|e('html_attr') }}"
+    data-trans-report-success="{{ 'report.success'|trans({}, 'catroweb')|default('Report submitted')|e('html_attr') }}"
+    data-trans-report-error="{{ 'report.error'|trans({}, 'catroweb')|default('Error submitting report')|e('html_attr') }}"
+    data-trans-report-duplicate="{{ 'report.duplicate'|trans({}, 'catroweb')|default('Already reported')|e('html_attr') }}"
+    data-trans-report-trust-too-low="{{ 'report.trustTooLow'|trans({}, 'catroweb')|default('Trust too low')|e('html_attr') }}"
+    data-trans-report-unverified="{{ 'report.unverified'|trans({}, 'catroweb')|default('Email verification required')|e('html_attr') }}"
+    data-trans-report-suspended="{{ 'report.suspended'|trans({}, 'catroweb')|default('Account suspended')|e('html_attr') }}"
+    data-trans-report-rate-limited="{{ 'report.rateLimited'|trans({}, 'catroweb')|default('Too many reports')|e('html_attr') }}"
+    data-trans-report-placeholder="{{ 'report.placeholder'|trans({}, 'catroweb')|default('Please describe the issue...')|e('html_attr') }}"
+    data-trans-retention-protected="{{ 'project.retention.protected'|trans({}, 'catroweb')|default('Protected')|e('html_attr') }}"
+    data-trans-retention-day="{{ 'project.retention.day_left'|trans({}, 'catroweb')|default('1 day left')|e('html_attr') }}"
+    data-trans-retention-days="{{ 'project.retention.days_left'|trans({'%days%': '%days%'}, 'catroweb')|default('%days% days left')|e('html_attr') }}"
+    data-trans-retention-tooltip="{{ 'project.retention.tooltip'|trans({}, 'catroweb')|default('Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.')|e('html_attr') }}"
+    data-trans-retention-tooltip-protected="{{ 'project.retention.tooltip_protected'|trans({}, 'catroweb')|default('This project is protected and will not be automatically deleted.')|e('html_attr') }}"
+    data-login-url="{{ path('login') }}"
+  >
+    {% if is_logged_in %}
+      <section class="projects-section">
+        <h2 class="projects-section__title" data-project--browse-target="myProjectsHeader"></h2>
+        <div data-project--browse-target="myProjects"></div>
+      </section>
+    {% endif %}
+
+    <section class="projects-section">
+      <h2 class="projects-section__title" data-project--browse-target="exploreProjectsHeader"></h2>
+      <div data-project--browse-target="exploreProjects"></div>
+    </section>
+
+    <div id="projects-load-more" class="text-center my-3" data-project--browse-target="loadMore" style="display: none;">
+      <button class="btn btn-outline-primary" data-action="click->project--browse#loadMore">
+        {{ 'project.browse.load_more'|trans({}, 'catroweb')|default('Load More') }}
+      </button>
+    </div>
+
+    <a href="{{ is_logged_in ? path('project_upload') : path('login') }}"
+       class="projects-fab">
+      <span class="material-icons">add</span>
+      <span class="projects-fab__text">{{ 'project.browse.upload'|trans({}, 'catroweb') }}</span>
+    </a>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ encore_entry_script_tags('projects_browse_page') }}
+{% endblock %}

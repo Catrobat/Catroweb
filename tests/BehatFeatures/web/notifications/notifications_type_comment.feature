@@ -19,7 +19,7 @@ Feature: User gets notifications about comments on their programs
       | id | user     | type    | commentID |
       | 1  | Catrobat | comment | 2         |
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "User commented"
@@ -32,7 +32,7 @@ Feature: User gets notifications about comments on their programs
       | id | user     | type    | commentID |
       | 1  | Catrobat | comment | 1         |
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should not see "Catrobat commented"
@@ -42,7 +42,7 @@ Feature: User gets notifications about comments on their programs
       | id | user     | type    | commentID |
       | 1  | Catrobat | comment | 2         |
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "User commented"

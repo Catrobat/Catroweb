@@ -60,7 +60,7 @@ export class ProjectLoader {
 
   async searchResult(q) {
     const searchInput = document.getElementById('top-app-bar__search-input')
-    searchInput.innerHTML = q
+    searchInput.value = q
     await this.initSearch(q)
     document.addEventListener('DOMContentLoaded', () => {
       showTopBarSearch()

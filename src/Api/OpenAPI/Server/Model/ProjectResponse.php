@@ -305,6 +305,28 @@ class ProjectResponse
   protected ?int $not_for_kids = null;
 
   /**
+   * Days until automatic deletion (-1 &#x3D; protected/never). Only returned when explicitly requested via attributes parameter.
+   *
+   * @SerializedName("retention_days")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $retention_days = null;
+
+  /**
+   * ISO 8601 date when the project will be auto-deleted. Null for protected projects. Only returned when explicitly requested.
+   *
+   * @SerializedName("retention_expiry")
+   *
+   * @Assert\Type("\DateTime"))
+   *
+   * @Type("DateTime")
+   */
+  protected ?\DateTime $retention_expiry = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -336,6 +358,8 @@ class ProjectResponse
       $this->download_url = array_key_exists('download_url', $data) ? $data['download_url'] : $this->download_url;
       $this->filesize = array_key_exists('filesize', $data) ? $data['filesize'] : $this->filesize;
       $this->not_for_kids = array_key_exists('not_for_kids', $data) ? $data['not_for_kids'] : $this->not_for_kids;
+      $this->retention_days = array_key_exists('retention_days', $data) ? $data['retention_days'] : $this->retention_days;
+      $this->retention_expiry = array_key_exists('retention_expiry', $data) ? $data['retention_expiry'] : $this->retention_expiry;
     }
   }
 
@@ -859,6 +883,50 @@ class ProjectResponse
   public function setNotForKids(?int $not_for_kids = null): self
   {
     $this->not_for_kids = $not_for_kids;
+
+    return $this;
+  }
+
+  /**
+   * Gets retention_days.
+   */
+  public function getRetentionDays(): ?int
+  {
+    return $this->retention_days;
+  }
+
+  /**
+   * Sets retention_days.
+   *
+   * @param int|null $retention_days Days until automatic deletion (-1 = protected/never). Only returned when explicitly requested via attributes parameter.
+   *
+   * @return $this
+   */
+  public function setRetentionDays(?int $retention_days = null): self
+  {
+    $this->retention_days = $retention_days;
+
+    return $this;
+  }
+
+  /**
+   * Gets retention_expiry.
+   */
+  public function getRetentionExpiry(): ?\DateTime
+  {
+    return $this->retention_expiry;
+  }
+
+  /**
+   * Sets retention_expiry.
+   *
+   * @param \DateTime|null $retention_expiry ISO 8601 date when the project will be auto-deleted. Null for protected projects. Only returned when explicitly requested.
+   *
+   * @return $this
+   */
+  public function setRetentionExpiry(?\DateTime $retention_expiry = null): self
+  {
+    $this->retention_expiry = $retention_expiry;
 
     return $this;
   }

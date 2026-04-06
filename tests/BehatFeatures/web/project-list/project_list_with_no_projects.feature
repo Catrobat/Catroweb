@@ -13,7 +13,7 @@ Feature: Project list must be hidden if there are no projects in a category
     Then I should not see "Newest projects"
     And the element "#home-projects__trending" should not be visible
     And I should not see "Recommended"
-    And I should not see "Most downloaded"
+    And I should not see "Popular projects"
     And I should not see "Most viewed"
     And I should not see "Random projects"
 
@@ -22,11 +22,13 @@ Feature: Project list must be hidden if there are no projects in a category
     Given I log in as "Catrobat"
     And I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see 0 "#myprofile-projects .project"
     And I should see "There are currently no projects."
 
   Scenario: at a profile page when a user has has no projects there should be a text telling us about it
     And I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see 0 "#user-projects .project"
     And I should see "There are currently no projects."

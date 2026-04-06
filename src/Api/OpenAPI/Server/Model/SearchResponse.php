@@ -92,6 +92,31 @@ class SearchResponse
   protected ?int $users_total = null;
 
   /**
+   * Array of studios.
+   *
+   * @var SearchResponseStudiosInner[]|null
+   *
+   * @SerializedName("studios")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\SearchResponseStudiosInner")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\SearchResponseStudiosInner>")
+   */
+  protected ?array $studios = null;
+
+  /**
+   * @SerializedName("studios_total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $studios_total = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -103,6 +128,8 @@ class SearchResponse
       $this->projects_total = array_key_exists('projects_total', $data) ? $data['projects_total'] : $this->projects_total;
       $this->users = array_key_exists('users', $data) ? $data['users'] : $this->users;
       $this->users_total = array_key_exists('users_total', $data) ? $data['users_total'] : $this->users_total;
+      $this->studios = array_key_exists('studios', $data) ? $data['studios'] : $this->studios;
+      $this->studios_total = array_key_exists('studios_total', $data) ? $data['studios_total'] : $this->studios_total;
     }
   }
 
@@ -190,6 +217,50 @@ class SearchResponse
   public function setUsersTotal(?int $users_total = null): self
   {
     $this->users_total = $users_total;
+
+    return $this;
+  }
+
+  /**
+   * Gets studios.
+   *
+   * @return SearchResponseStudiosInner[]|null
+   */
+  public function getStudios(): ?array
+  {
+    return $this->studios;
+  }
+
+  /**
+   * Sets studios.
+   *
+   * @param SearchResponseStudiosInner[]|null $studios Array of studios
+   *
+   * @return $this
+   */
+  public function setStudios(?array $studios = null): self
+  {
+    $this->studios = $studios;
+
+    return $this;
+  }
+
+  /**
+   * Gets studios_total.
+   */
+  public function getStudiosTotal(): ?int
+  {
+    return $this->studios_total;
+  }
+
+  /**
+   * Sets studios_total.
+   *
+   * @return $this
+   */
+  public function setStudiosTotal(?int $studios_total = null): self
+  {
+    $this->studios_total = $studios_total;
 
     return $this;
   }

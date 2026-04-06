@@ -6,8 +6,8 @@ Feature: As a visitor I want to see a project page
       | id | name     |
       | 1  | Catrobat |
     And there are projects:
-      | id | name      | description    | owned by | apk_ready |
-      | 1  | project 1 | my description | Catrobat | true      |
+      | id | name      | description    | owned by |
+      | 1  | project 1 | my description | Catrobat |
 
   Scenario: Viewing project page
     Given I am on "/app/project/1"
@@ -40,15 +40,5 @@ Feature: As a visitor I want to see a project page
     Then I should see "Download"
 #    And I should see "Remix Graph"
 #    And I should see "Download as app"
-    And I should see "Statistics"
-    And I should see "Code View"
-
-  Scenario: On the project page there should be no apk button be visible to ios users
-    Given I use an ios app
-    And I am on "/app/project/1"
-    And I wait for the page to be loaded
-    And I wait for AJAX to finish
-    Then I should see "Download"
-    And I should not see "Download as app"
     And I should see "Statistics"
     And I should see "Code View"
