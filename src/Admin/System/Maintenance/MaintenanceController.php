@@ -150,10 +150,10 @@ class MaintenanceController extends CRUDController
     $shared_ram = (float) shell_exec("free | grep Mem | awk '{print $5}'") * 1_000;
     $cached_ram = (float) shell_exec("free | grep Mem | awk '{print $6}'") * 1_000;
     $available_ram = (float) shell_exec("free | grep Mem | awk '{print $6}'") * 1_000;
-    $free_ram_percentage = ($free_ram / $whole_ram) * 100;
-    $used_ram_percentage = ($used_ram / $whole_ram) * 100;
-    $shared_ram_percentage = ($shared_ram / $whole_ram) * 100;
-    $cached_ram_percentage = ($cached_ram / $whole_ram) * 100;
+    $free_ram_percentage = $whole_ram > 0 ? ($free_ram / $whole_ram) * 100 : 0;
+    $used_ram_percentage = $whole_ram > 0 ? ($used_ram / $whole_ram) * 100 : 0;
+    $shared_ram_percentage = $whole_ram > 0 ? ($shared_ram / $whole_ram) * 100 : 0;
+    $cached_ram_percentage = $whole_ram > 0 ? ($cached_ram / $whole_ram) * 100 : 0;
 
     $totalSpace = $usedSpace + $freeSpace;
     $usedPercentage = $totalSpace > 0 ? ($usedSpace / $totalSpace) * 100.0 : 0.0;
@@ -227,8 +227,13 @@ class MaintenanceController extends CRUDController
 
   private function getSymbolByQuantity(float $bytes): string
   {
+    if ($bytes <= 0) {
+      return '0.00 B';
+    }
+
     $symbol = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-    $exp = floor(log($bytes) / log(1_024)) > 0 ? intval(floor(log($bytes) / log(1_024))) : 0;
+    $exp = intval(floor(log($bytes) / log(1_024)));
+    $exp = max(0, min($exp, count($symbol) - 1));
 
     return sprintf('%.2f '.$symbol[$exp], $bytes / 1_024 ** $exp);
   }
