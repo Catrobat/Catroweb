@@ -138,10 +138,9 @@ task('dump:env', function () {
   run('bin/console dotenv:dump prod');
 });
 
-// Fix ownership on shared resource directories so www-data (PHP-FPM) can write
+// Ensure shared resource directories are world-writable so www-data (PHP-FPM) can write images
 task('fix:resource_permissions', function () {
-  run('sudo chown -R www-data:www-data {{deploy_path}}/shared/public/resources/featured {{deploy_path}}/shared/public/resources/example');
-  run('sudo chmod -R 775 {{deploy_path}}/shared/public/resources/featured {{deploy_path}}/shared/public/resources/example');
+  run('chmod -R 777 {{deploy_path}}/shared/public/resources/featured {{deploy_path}}/shared/public/resources/example');
 });
 
 // Smoke test: verify the health endpoint after deployment
