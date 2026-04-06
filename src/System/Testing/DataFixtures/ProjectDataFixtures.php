@@ -92,6 +92,7 @@ class ProjectDataFixtures
     $project->setVisible(!isset($config['visible']) || 'true' === $config['visible']);
     $project->setUploadLanguage($config['upload_language'] ?? 'en');
     $project->setApproved(isset($config['approved']) && 'true' === $config['approved']);
+    $project->setStorageProtected(isset($config['storage_protected']) && 'true' === $config['storage_protected']);
     $project->setRemixRoot(!isset($config['remix_root']) || 'true' === $config['remix_root']);
     $project->setPrivate(isset($config['private']) && 'true' === $config['private']);
     $project->setDebugBuild(isset($config['debug']) && 'true' === $config['debug']);

@@ -31,6 +31,9 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\UserApiInterface;
+use OpenAPI\Server\Model\RegisterRequest;
+use OpenAPI\Server\Model\ResetPasswordRequest;
+use OpenAPI\Server\Model\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -440,7 +443,7 @@ class UserController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $register_request = $this->deserialize($register_request, \OpenAPI\Server\Model\RegisterRequest::class, $inputFormat);
+      $register_request = $this->deserialize($register_request, RegisterRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -449,7 +452,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\RegisterRequest::class);
+    $asserts[] = new Assert\Type(RegisterRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($register_request, $asserts);
     if ($response instanceof Response) {
@@ -538,7 +541,7 @@ class UserController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $update_user_request = $this->deserialize($update_user_request, \OpenAPI\Server\Model\UpdateUserRequest::class, $inputFormat);
+      $update_user_request = $this->deserialize($update_user_request, UpdateUserRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -547,7 +550,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\UpdateUserRequest::class);
+    $asserts[] = new Assert\Type(UpdateUserRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($update_user_request, $asserts);
     if ($response instanceof Response) {
@@ -634,7 +637,7 @@ class UserController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $reset_password_request = $this->deserialize($reset_password_request, \OpenAPI\Server\Model\ResetPasswordRequest::class, $inputFormat);
+      $reset_password_request = $this->deserialize($reset_password_request, ResetPasswordRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -643,7 +646,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ResetPasswordRequest::class);
+    $asserts[] = new Assert\Type(ResetPasswordRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($reset_password_request, $asserts);
     if ($response instanceof Response) {

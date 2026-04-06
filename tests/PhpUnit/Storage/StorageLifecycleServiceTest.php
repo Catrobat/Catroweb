@@ -30,9 +30,9 @@ class StorageLifecycleServiceTest extends TestCase
     $this->service = $this->buildServiceWithCounts(0, 0);
   }
 
-  public function testProtectedTierForApprovedProject(): void
+  public function testProtectedTierForStorageProtectedProject(): void
   {
-    $project = $this->createProjectStub(approved: true);
+    $project = $this->createProjectStub(storageProtected: true);
 
     self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $this->service->getRetentionDays($project));
     self::assertTrue($this->service->isProtected($project));
@@ -42,7 +42,7 @@ class StorageLifecycleServiceTest extends TestCase
   {
     $service = $this->buildServiceWithCounts(1, 0);
 
-    $project = $this->createProjectStub(approved: false);
+    $project = $this->createProjectStub();
 
     self::assertTrue($service->isProtected($project));
     self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $service->getRetentionDays($project));
@@ -52,7 +52,7 @@ class StorageLifecycleServiceTest extends TestCase
   {
     $service = $this->buildServiceWithCounts(0, 1);
 
-    $project = $this->createProjectStub(approved: false);
+    $project = $this->createProjectStub();
 
     self::assertTrue($service->isProtected($project));
     self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $service->getRetentionDays($project));
@@ -171,7 +171,7 @@ class StorageLifecycleServiceTest extends TestCase
   }
 
   private function createProjectStub(
-    bool $approved = false,
+    bool $storageProtected = false,
     int $downloads = 0,
     bool $visible = true,
     bool $autoHidden = false,
@@ -185,7 +185,7 @@ class StorageLifecycleServiceTest extends TestCase
 
     $project = $this->createStub(Program::class);
     $project->method('getId')->willReturn('test-project-id');
-    $project->method('getApproved')->willReturn($approved);
+    $project->method('isStorageProtected')->willReturn($storageProtected);
     $project->method('getDownloads')->willReturn($downloads);
     $project->method('getVisible')->willReturn($visible);
     $project->method('getAutoHidden')->willReturn($autoHidden);

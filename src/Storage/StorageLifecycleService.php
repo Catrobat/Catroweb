@@ -7,6 +7,8 @@ namespace App\Storage;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
+use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -63,7 +65,7 @@ class StorageLifecycleService
    */
   public function isProtected(Program $project): bool
   {
-    if ($project->getApproved()) {
+    if ($project->isStorageProtected()) {
       return true;
     }
 
@@ -255,6 +257,12 @@ class StorageLifecycleService
         }
 
         try {
+          $user = $project->getUser();
+          if ($user instanceof User) {
+            $notification = new ProjectDeletedNotification($user, $projectName);
+            $this->entity_manager->persist($notification);
+            $this->entity_manager->flush();
+          }
           $this->hardDeleteProject($project);
           ++$deleted;
           $this->logger->info('Storage lifecycle: deleted project {id} "{name}"', [
@@ -308,5 +316,83 @@ class StorageLifecycleService
     // Remove from database (Doctrine cascades handle relations)
     $this->entity_manager->remove($project);
     $this->entity_manager->flush();
+  }
+
+  /**
+   * Sends expiry warning notifications for projects that will be deleted within the given threshold.
+   *
+   * @return array{warned: int}
+   */
+  public function sendExpiryWarnings(int $warning_days = 7, string $storage_path = ''): array
+  {
+    $disk_ratio = '' !== $storage_path ? $this->getDiskUsageRatio($storage_path) : 0.0;
+    $now = new \DateTime();
+    $warned = 0;
+    $offset = 0;
+
+    while (true) {
+      $projects = $this->entity_manager->createQueryBuilder()
+        ->select('p')
+        ->from(Program::class, 'p')
+        ->leftJoin('p.user', 'u')
+        ->orderBy('p.uploaded_at', 'ASC')
+        ->setFirstResult($offset)
+        ->setMaxResults(self::BATCH_SIZE)
+        ->getQuery()
+        ->getResult()
+      ;
+
+      if ([] === $projects) {
+        break;
+      }
+
+      /** @var Program $project */
+      foreach ($projects as $project) {
+        $retention_days = $this->getRetentionDays($project);
+        $retention_days = $this->applyDiskPressure($retention_days, $disk_ratio);
+
+        if (self::PROTECTED_DAYS === $retention_days) {
+          continue;
+        }
+
+        $expiry = (clone $project->getUploadedAt())->modify('+'.$retention_days.' days');
+        $days_left = (int) $now->diff($expiry)->format('%r%a');
+
+        if ($days_left <= 0 || $days_left > $warning_days) {
+          continue;
+        }
+
+        $user = $project->getUser();
+        if (!$user instanceof User) {
+          continue;
+        }
+
+        // Check if we already sent a warning for this project recently
+        $existing = $this->entity_manager->createQueryBuilder()
+          ->select('COUNT(n.id)')
+          ->from(ProjectExpiringNotification::class, 'n')
+          ->where('n.user = :user')
+          ->andWhere('n.program = :project')
+          ->setParameter('user', $user)
+          ->setParameter('project', $project)
+          ->getQuery()
+          ->getSingleScalarResult()
+        ;
+
+        if ((int) $existing > 0) {
+          continue;
+        }
+
+        $notification = new ProjectExpiringNotification($user, $project, $days_left);
+        $this->entity_manager->persist($notification);
+        ++$warned;
+      }
+
+      $this->entity_manager->flush();
+      $offset += self::BATCH_SIZE;
+      $this->entity_manager->clear();
+    }
+
+    return ['warned' => $warned];
   }
 }

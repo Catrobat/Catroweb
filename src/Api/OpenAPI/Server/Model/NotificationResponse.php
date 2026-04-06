@@ -57,7 +57,7 @@ class NotificationResponse
    *
    * @SerializedName("type")
    *
-   * @Assert\Choice({ "reaction", "follow", "comment", "remix", "moderation", "other" })
+   * @Assert\Choice({ "reaction", "follow", "comment", "remix", "moderation", "studio", "project", "other" })
    *
    * @Assert\Type("string")
    *

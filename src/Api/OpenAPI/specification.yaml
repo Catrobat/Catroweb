@@ -3216,6 +3216,7 @@ components:
           - 'comment'
           - 'remix'
           - 'studio'
+          - 'project'
         default: 'all'
 
     ##
@@ -4339,6 +4340,17 @@ components:
           type: integer
           example: 0
           description: 'Indicates whether a project is suitable for kids or not (0 = safe for kids, 1 = not safe for kids, 2 = not safe for kids set by moderator)'
+        retention_days:
+          type: integer
+          example: 365
+          nullable: true
+          description: 'Days until automatic deletion (-1 = protected/never). Only returned when explicitly requested via attributes parameter.'
+        retention_expiry:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2027-04-06T12:00:00+00:00'
+          description: 'ISO 8601 date when the project will be auto-deleted. Null for protected projects. Only returned when explicitly requested.'
 
     ExtensionsResponse:
       type: array
@@ -4403,6 +4415,15 @@ components:
         remix:
           type: integer
           example: 3
+        moderation:
+          type: integer
+          example: 0
+        studio:
+          type: integer
+          example: 0
+        project:
+          type: integer
+          example: 0
 
     NotificationListResponse:
       type: object
@@ -4435,6 +4456,8 @@ components:
             - 'comment'
             - 'remix'
             - 'moderation'
+            - 'studio'
+            - 'project'
             - 'other'
           description: 'Notification Type'
         seen:

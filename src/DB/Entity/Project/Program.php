@@ -225,6 +225,9 @@ class Program implements \Stringable
   protected ?User $approved_by_user = null;
 
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+  protected bool $storage_protected = false;
+
+  #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $debug_build = false;
 
   #[ORM\Column(type: Types::INTEGER, options: ['default' => 0])]
@@ -584,6 +587,16 @@ class Program implements \Stringable
   public function getApproved(): bool
   {
     return $this->approved;
+  }
+
+  public function isStorageProtected(): bool
+  {
+    return $this->storage_protected;
+  }
+
+  public function setStorageProtected(bool $storage_protected): void
+  {
+    $this->storage_protected = $storage_protected;
   }
 
   public function isVisible(): bool

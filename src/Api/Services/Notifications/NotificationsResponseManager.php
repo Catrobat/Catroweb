@@ -11,6 +11,8 @@ use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
+use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\Notifications\StudioCommentNotification;
 use App\DB\Entity\User\Notifications\StudioProjectNotification;
@@ -215,6 +217,32 @@ class NotificationsResponseManager extends AbstractResponseManager
           '%user_link%' => '%user_link%',
           '%program_link%' => '%program_link%',
           '%studio_name%' => $notification->getStudio()?->getName() ?? '',
+        ]),
+      ]);
+    }
+
+    if ($notification instanceof ProjectExpiringNotification) {
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'project',
+        'seen' => $notification->getSeen(),
+        'project' => $notification->getProgram()?->getId(),
+        'project_name' => $notification->getProgram()?->getName(),
+        'message' => $this->trans('catro-notifications.project-expiring.message', [
+          '%program_link%' => '%program_link%',
+          '%days%' => (string) ($notification->getExpiryDays() ?? 0),
+        ]),
+      ]);
+    }
+
+    if ($notification instanceof ProjectDeletedNotification) {
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'project',
+        'seen' => $notification->getSeen(),
+        'project_name' => $notification->getProjectName(),
+        'message' => $this->trans('catro-notifications.project-deleted.message', [
+          '%project_name%' => $notification->getProjectName() ?? '',
         ]),
       ]);
     }

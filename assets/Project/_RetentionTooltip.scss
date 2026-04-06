@@ -1,0 +1,55 @@
+// Shared retention tooltip styles (imported by ProjectList.scss and OwnProjectList.scss)
+
+.retention-info-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.retention-info-icon {
+  font-size: 13px !important;
+  color: light-dark(#9e9e9e, #757575);
+  opacity: 0.7;
+  transition: opacity 0.15s;
+
+  .retention-info-wrap:hover &,
+  .retention-info-wrap:focus-within & {
+    opacity: 1;
+    color: light-dark(#616161, #bdbdbd);
+  }
+}
+
+.retention-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  width: max-content;
+  max-width: min(250px, calc(100vw - 2rem));
+  padding: 0.65rem 0.85rem;
+  background: light-dark(#fff, #1e1e30);
+  border-radius: 10px;
+  box-shadow:
+    0 4px 20px light-dark(rgb(0 0 0 / 14%), rgb(0 0 0 / 45%)),
+    0 0 0 1px light-dark(rgb(0 0 0 / 5%), rgb(255 255 255 / 8%));
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: light-dark(#444, #ddd);
+  z-index: 1080;
+  pointer-events: none;
+  white-space: normal;
+  overflow-wrap: break-word;
+
+  &.align-right {
+    left: auto;
+    right: 0;
+  }
+
+  .retention-info-wrap:hover &,
+  .retention-info-wrap:focus-within & {
+    display: block;
+  }
+}

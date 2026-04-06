@@ -138,7 +138,7 @@ function renderProjects(section, projects, theme, trans) {
       url,
       project.screenshot_small || '/images/default/screenshot.png',
       project.name || '',
-      'schedule',
+      'calendar_today',
       project.uploaded_string || '',
     )
     items.appendChild(card)

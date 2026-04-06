@@ -2,6 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
 import AcceptLanguage from '../../Api/AcceptLanguage'
+import '../../Components/RetentionTooltip'
 
 export default class extends Controller {
   static values = {
@@ -59,7 +60,7 @@ export default class extends Controller {
     const url =
       this.apiBaseUrlValue +
       '/projects/user' +
-      '?limit=50&attributes=id,name,project_url,screenshot_small,downloads,uploaded_string'
+      '?limit=50&attributes=id,name,project_url,screenshot_small,downloads,uploaded_string,retention_days,retention_expiry'
 
     try {
       const response = await fetch(url, {
@@ -93,7 +94,8 @@ export default class extends Controller {
     const params = new URLSearchParams({
       category: 'random',
       limit: '20',
-      attributes: 'id,name,author,screenshot_small,downloads,views,uploaded_string',
+      attributes:
+        'id,name,author,screenshot_small,downloads,views,uploaded_string,retention_days,retention_expiry',
     })
     if (this.exploreCursor) {
       params.set('offset', this.exploreCursor)
@@ -204,9 +206,13 @@ export default class extends Controller {
     if (uploadedString) {
       meta +=
         '<span class="projects-meta__item">' +
-        '<i class="material-icons">schedule</i>' +
+        '<i class="material-icons">calendar_today</i>' +
         uploadedString +
         '</span>'
+    }
+
+    if (project.retention_days !== undefined) {
+      meta += this._buildRetentionMeta(project.retention_days, project.retention_expiry)
     }
 
     if (!isOwned && author) {
@@ -456,5 +462,65 @@ export default class extends Controller {
     if (this.hasLoadMoreTarget) {
       this.loadMoreTarget.style.display = this.hasMoreExplore ? '' : 'none'
     }
+  }
+
+  _buildRetentionMeta(retentionDays, retentionExpiry) {
+    const ds = this.element.dataset
+    const tooltip = escapeAttr(
+      retentionDays === -1
+        ? ds.transRetentionTooltipProtected ||
+            'This project is protected and will not be automatically deleted.'
+        : ds.transRetentionTooltip ||
+            'Projects are automatically removed after a period of inactivity.',
+    )
+    const infoBtn =
+      '<span class="retention-info-wrap" onclick="event.preventDefault();event.stopPropagation()">' +
+      '<span class="material-icons retention-info-icon">info_outline</span>' +
+      '<span class="retention-tooltip">' +
+      tooltip +
+      '</span>' +
+      '</span>'
+
+    if (retentionDays === -1) {
+      return (
+        '<span class="projects-meta__item projects-meta__item--retention projects-meta__item--protected">' +
+        '<i class="material-icons">verified</i>' +
+        escapeHtml(ds.transRetentionProtected || 'Protected') +
+        infoBtn +
+        '</span>'
+      )
+    }
+
+    let daysLeft = 0
+    if (retentionExpiry) {
+      daysLeft = Math.max(0, Math.ceil((new Date(retentionExpiry) - Date.now()) / 86400000))
+    }
+
+    let icon = 'schedule'
+    let cssModifier = ''
+    if (daysLeft <= 7) {
+      icon = 'warning'
+      cssModifier = ' projects-meta__item--critical'
+    } else if (daysLeft <= 30) {
+      icon = 'hourglass_bottom'
+      cssModifier = ' projects-meta__item--warning'
+    }
+
+    const label =
+      daysLeft === 1
+        ? ds.transRetentionDay || '1 day left'
+        : (ds.transRetentionDays || '%days% days left').replace('%days%', String(daysLeft))
+
+    return (
+      '<span class="projects-meta__item projects-meta__item--retention' +
+      cssModifier +
+      '">' +
+      '<i class="material-icons">' +
+      icon +
+      '</i>' +
+      escapeHtml(label) +
+      infoBtn +
+      '</span>'
+    )
   }
 }

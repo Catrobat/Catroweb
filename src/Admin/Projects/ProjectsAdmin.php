@@ -88,6 +88,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('flavor')
       ->add('visible', null, ['required' => false])
       ->add('approved', null, ['required' => false])
+      ->add('storage_protected', null, ['required' => false, 'label' => 'Storage Protected'])
     ;
   }
 
@@ -157,6 +158,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('private', null, ['editable' => false, 'sortable' => false])
       ->add('approved', null, ['editable' => true, 'sortable' => false])
       ->add('visible', null, ['editable' => true, 'sortable' => false])
+      ->add('storage_protected', null, ['editable' => true, 'sortable' => false, 'label' => 'Protected'])
       ->add('not_for_kids', 'choice', [
         'editable' => true,
         'sortable' => false,

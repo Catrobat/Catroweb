@@ -31,6 +31,8 @@ namespace OpenAPI\Server\Controller;
 
 use JMS\Serializer\Exception\RuntimeException as SerializerRuntimeException;
 use OpenAPI\Server\Api\StudioApiInterface;
+use OpenAPI\Server\Model\StudioAddProjectRequest;
+use OpenAPI\Server\Model\StudioCommentCreateRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -475,7 +477,7 @@ class StudioController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_comment_create_request = $this->deserialize($studio_comment_create_request, \OpenAPI\Server\Model\StudioCommentCreateRequest::class, $inputFormat);
+      $studio_comment_create_request = $this->deserialize($studio_comment_create_request, StudioCommentCreateRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -492,7 +494,7 @@ class StudioController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\StudioCommentCreateRequest::class);
+    $asserts[] = new Assert\Type(StudioCommentCreateRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_comment_create_request, $asserts);
     if ($response instanceof Response) {
@@ -1414,7 +1416,7 @@ class StudioController extends Controller
     try {
       $id = $this->deserialize($id, 'string', 'string');
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $studio_add_project_request = $this->deserialize($studio_add_project_request, \OpenAPI\Server\Model\StudioAddProjectRequest::class, $inputFormat);
+      $studio_add_project_request = $this->deserialize($studio_add_project_request, StudioAddProjectRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -1431,7 +1433,7 @@ class StudioController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\StudioAddProjectRequest::class);
+    $asserts[] = new Assert\Type(StudioAddProjectRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($studio_add_project_request, $asserts);
     if ($response instanceof Response) {

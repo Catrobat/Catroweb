@@ -6,6 +6,7 @@ import ProjectApi from '../Api/ProjectApi'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
+import '../Components/RetentionTooltip'
 
 require('./OwnProjectList.scss')
 
@@ -14,7 +15,7 @@ export class OwnProjectList {
     this.container = container
     this.projectsContainer = container.getElementsByClassName('projects-container')[0]
     const attributes =
-      'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private,not_for_kids'
+      'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private,not_for_kids,retention_days,retention_expiry'
     this.baseUrl = baseUrl
     this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' + attributes : apiUrl + '?' + attributes
     this.projectsLoaded = 0
@@ -37,6 +38,15 @@ export class OwnProjectList {
       markNotForKids: ds.transMarkNotForKids || 'Mark not for kids',
       markSafeForKids: ds.transMarkSafeForKids || 'Mark safe for kids',
       delete: ds.transDelete || 'Delete project',
+      retentionProtected: ds.transRetentionProtected || 'Protected',
+      retentionDay: ds.transRetentionDay || '1 day left',
+      retentionDays: ds.transRetentionDays || '%days% days left',
+      retentionTooltip:
+        ds.transRetentionTooltip ||
+        'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.',
+      retentionTooltipProtected:
+        ds.transRetentionTooltipProtected ||
+        'This project is protected and will not be automatically deleted.',
     }
   }
 
@@ -105,13 +115,12 @@ export class OwnProjectList {
           self.projectsData[project.id] = project
           const projectElement = self._generate(project)
           self.projectsContainer.appendChild(projectElement)
-          projectElement.addEventListener(
-            'click',
-            function () {
+          const projectLink = projectElement.querySelector('a[href]')
+          if (projectLink) {
+            projectLink.addEventListener('click', function () {
               self._addLoadingSpinner(projectElement)
-            },
-            false,
-          )
+            })
+          }
         })
         self.container.classList.remove('loading')
 
@@ -174,6 +183,11 @@ export class OwnProjectList {
     const visibilityText = data.private
       ? this.projectInfoConfiguration.visibilityPrivateText
       : this.projectInfoConfiguration.visibilityPublicText
+
+    let retentionHtml = ''
+    if (data.retention_days !== undefined) {
+      retentionHtml = this._buildRetentionBadge(data.retention_days, data.retention_expiry)
+    }
 
     const transVisibility = data.private
       ? escapeHtml(this.translations.setPublic)
@@ -255,6 +269,7 @@ export class OwnProjectList {
       escapeHtml(visibilityText) +
       '</span>' +
       '</div>' +
+      retentionHtml +
       '</div>' +
       '<div class="projects-list-item--actions">' +
       '<button class="btn projects-list-item--menu-btn own-project-list__project__action" data-project-id="' +
@@ -509,5 +524,72 @@ export class OwnProjectList {
     if (spinner) {
       fromElement.removeChild(spinner)
     }
+  }
+
+  _buildRetentionBadge(retentionDays, retentionExpiry) {
+    const tooltip = escapeAttr(
+      retentionDays === -1
+        ? this.translations.retentionTooltipProtected ||
+            'This project is protected and will not be automatically deleted.'
+        : this.translations.retentionTooltip ||
+            'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.',
+    )
+
+    const infoBtn =
+      '<span class="retention-info-wrap" onclick="event.preventDefault();event.stopPropagation()">' +
+      '<span class="material-icons retention-info-icon">info_outline</span>' +
+      '<span class="retention-tooltip">' +
+      tooltip +
+      '</span>' +
+      '</span>'
+
+    if (retentionDays === -1) {
+      return (
+        '<div class="own-project-list__project__details__retention own-project-list__project__details__retention--protected">' +
+        '<span class="material-icons">verified</span>' +
+        '<span>' +
+        escapeHtml(this.translations.retentionProtected || 'Protected') +
+        '</span>' +
+        infoBtn +
+        '</div>'
+      )
+    }
+
+    let daysLeft = 0
+    if (retentionExpiry) {
+      daysLeft = Math.max(0, Math.ceil((new Date(retentionExpiry) - Date.now()) / 86400000))
+    }
+
+    let icon = 'schedule'
+    let cssModifier = ''
+    if (daysLeft <= 7) {
+      icon = 'warning'
+      cssModifier = ' own-project-list__project__details__retention--critical'
+    } else if (daysLeft <= 30) {
+      icon = 'hourglass_bottom'
+      cssModifier = ' own-project-list__project__details__retention--warning'
+    }
+
+    const label =
+      daysLeft === 1
+        ? this.translations.retentionDay || '1 day left'
+        : (this.translations.retentionDays || '%days% days left').replace(
+            '%days%',
+            String(daysLeft),
+          )
+
+    return (
+      '<div class="own-project-list__project__details__retention' +
+      cssModifier +
+      '">' +
+      '<span class="material-icons">' +
+      icon +
+      '</span>' +
+      '<span>' +
+      escapeHtml(label) +
+      '</span>' +
+      infoBtn +
+      '</div>'
+    )
   }
 }

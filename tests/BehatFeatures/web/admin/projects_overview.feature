@@ -24,12 +24,12 @@ Feature: Admin all projects
     And I am on "/admin/project/list"
     And I wait for the page to be loaded
     Then I should see the table with all projects in the following order:
-      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | Safe for kids | Show   |
-      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | Safe for kids | Show   |
-      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | Safe for kids | Show   |
-      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | Safe for kids | Show   |
-      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | Safe for kids | Show   |
+      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | no        | Safe for kids | Show   |
+      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | no        | Safe for kids | Show   |
 
 
   Scenario: List all projects sorted by views ascending
@@ -39,12 +39,12 @@ Feature: Admin all projects
     And I click on the column with the name "Views"
     And I wait for the page to be loaded
     Then I should see the table with all projects in the following order:
-      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | Safe for kids | Show   |
-      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | Safe for kids | Show   |
-      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | Safe for kids | Show   |
-      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | Safe for kids | Show   |
-      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | Safe for kids | Show   |
+      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | no        | Safe for kids | Show   |
+      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | no        | Safe for kids | Show   |
+      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | no        | Safe for kids | Show   |
 
   Scenario: List all projects sorted by downloads ascending
     Given I log in as "Admin" with the password "123456"
@@ -53,12 +53,12 @@ Feature: Admin all projects
     And I click on the column with the name "Downloads"
     And I wait for the page to be loaded
     Then I should see the table with all projects in the following order:
-      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | Safe for kids | Show   |
-      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | Safe for kids | Show   |
-      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | Safe for kids | Show   |
-      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | Safe for kids | Show   |
-      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | Safe for kids | Show   |
+      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | no        | Safe for kids | Show   |
+      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | no        | Safe for kids | Show   |
+      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | no        | Safe for kids | Show   |
 
   Scenario: List all projects sorted by ute ascendin Pauli |g
     Given I log in as "Admin" with the password "123456"
@@ -67,12 +67,12 @@ Feature: Admin all projects
     And I click on the column with the name "Upload Time"
     And I wait for the page to be loaded
     Then I should see the table with all projects in the following order:
-      | Uploaded At           | User      | Name  | Flavor     | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | Safe for kids | Show   |
-      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | Safe for kids | Show   |
-      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | Safe for kids | Show   |
-      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | Safe for kids | Show   |
-      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | Safe for kids | Show   |
+      | Uploaded At           | User      | Name  | Flavor     | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | no        | Safe for kids | Show   |
+      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | no        | Safe for kids | Show   |
+      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | no        | Safe for kids | Show   |
 
 
   Scenario: Filter projects by upload date using filter options
@@ -81,9 +81,9 @@ Feature: Admin all projects
     And I wait for the page to be loaded
     Then I am on "/admin/project/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=Apr+3%2C+2019%2C+4%3A38%3A58+pm&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=Apr+24%2C+2019%2C+4%3A31%3A40+pm&filter%5B_page%5D=1&filter%5B_sort_by%5D=uploaded_at&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     Then I should see the table with all projects in the following order:
-      | Uploaded At          | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | April 22, 2019 13:00 | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | Safe for kids | Show   |
-      | April 6, 2019 13:02  | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | Safe for kids | Show   |
+      | Uploaded At          | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | April 22, 2019 13:00 | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 6, 2019 13:02  | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | no        | Safe for kids | Show   |
     And I should not see "program 1"
     And I should not see "program 2"
     And I should not see "program 4"
@@ -95,8 +95,8 @@ Feature: Admin all projects
     And I wait for the page to be loaded
     Then I am on "/admin/project/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=program+2&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=uploaded_at&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     Then I should see the table with all projects in the following order:
-      | Uploaded At         | Name      | User  | Flavor | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | April 2, 2019 13:00 | program 2 | Karim | luna   | 921   | 123       | no      | no       | yes     | Safe for kids | Show   |
+      | Uploaded At         | Name      | User  | Flavor | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | April 2, 2019 13:00 | program 2 | Karim | luna   | 921   | 123       | no      | no       | yes     | no        | Safe for kids | Show   |
     And I should not see "program 1"
     And I should not see "program 5"
     And I should not see "program 4"
@@ -109,10 +109,10 @@ Feature: Admin all projects
     And I wait for the page to be loaded
     Then I am on "/admin/project/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=Karim&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=uploaded_at&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     Then I should see the table with all projects in the following order:
-      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | Safe for kids | Show   |
-      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | Safe for kids | Show   |
-      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | Safe for kids | Show   |
+      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 2, 2019 13:00   | program 2 | Karim | luna       | 921   | 123       | no      | no       | yes     | no        | Safe for kids | Show   |
+      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | no        | Safe for kids | Show   |
     And I should not see "program 3"
     And I should not see "program 4"
 
@@ -123,8 +123,8 @@ Feature: Admin all projects
     And I wait for the page to be loaded
     Then I am on "/admin/project/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=4&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=uploaded_at&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     Then I should see the table with all projects in the following order:
-      | Uploaded At         | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | April 2, 2019 13:10 | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | Safe for kids | Show   |
+      | Uploaded At         | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | April 2, 2019 13:10 | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | no        | Safe for kids | Show   |
     And I should not see "program 1"
     And I should not see "program 2"
     And I should not see "program 3"
@@ -136,8 +136,8 @@ Feature: Admin all projects
     And I wait for the page to be loaded
     Then I am on "/admin/project/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=&filter%5Bflavor%5D%5Btype%5D=&filter%5Bflavor%5D%5Bvalue%5D=luna&filter%5B_page%5D=1&filter%5B_sort_by%5D=uploaded_at&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     Then I should see the table with all projects in the following order:
-      | Uploaded At         | Name      | User  | Flavor | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | April 2, 2019 13:00 | program 2 | Karim | luna   | 921   | 123       | no      | no       | yes     | Safe for kids | Show   |
+      | Uploaded At         | Name      | User  | Flavor | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | April 2, 2019 13:00 | program 2 | Karim | luna   | 921   | 123       | no      | no       | yes     | no        | Safe for kids | Show   |
     And I should not see "program 1"
     And I should not see "program 3"
     And I should not see "program 4"
@@ -151,12 +151,12 @@ Feature: Admin all projects
     And I change the flavor of the project number "4" in the list to "arduino"
     And I reload the page
     Then I should see the table with all projects in the following order:
-      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | not_for_kids  | Action |
-      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | Safe for kids | Show   |
-      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | Safe for kids | Show   |
-      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | Safe for kids | Show   |
-      | April 2, 2019 13:00   | program 2 | Karim | arduino    | 921   | 123       | no      | no       | yes     | Safe for kids | Show   |
-      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | Safe for kids | Show   |
+      | Uploaded At           | Name      | User  | Flavor     | Views | Downloads | private | Approved | Visible | Protected | not_for_kids  | Action |
+      | April 22, 2019 13:00  | program 5 | Karim | pocketcode | 15    | 111       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 6, 2019 13:02   | program 3 | Pauli | arduino    | 122   | 234       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 2, 2019 13:10   | program 4 | Pauli | pocketcode | 12    | 222       | no      | no       | no      | no        | Safe for kids | Show   |
+      | April 2, 2019 13:00   | program 2 | Karim | arduino    | 921   | 123       | no      | no       | yes     | no        | Safe for kids | Show   |
+      | January 1, 2019 12:00 | program 1 | Karim | pocketcode | 120   | 3         | no      | no       | yes     | no        | Safe for kids | Show   |
 
 
 # # TODO: Report project feature currently disabled
