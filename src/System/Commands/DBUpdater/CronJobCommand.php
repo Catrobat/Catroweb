@@ -153,6 +153,70 @@ class CronJobCommand extends Command
       $output
     );
 
+    $this->runCronJob(
+      'Garbage collect orphaned assets',
+      ['bin/console', 'catrobat:gc-assets'],
+      ['timeout' => self::ONE_DAY_IN_SECONDS],
+      '1 week',
+      $output
+    );
+
+    // User maintenance
+
+    $this->runCronJob(
+      'Clean unverified user accounts',
+      ['bin/console', 'catrobat:clean:unverified-users'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 day',
+      $output
+    );
+
+    // Ranking and popularity
+
+    $this->runCronJob(
+      'Update project popularity scores',
+      ['bin/console', 'catrobat:update:popularity'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '6 hours',
+      $output
+    );
+
+    $this->runCronJob(
+      'Update user rankings',
+      ['bin/console', 'catrobat:update:userranking'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 day',
+      $output
+    );
+
+    // Project integrity
+
+    $this->runCronJob(
+      'Detect broken projects',
+      ['bin/console', 'catrobat:workflow:detect_broken_projects'],
+      ['timeout' => self::ONE_DAY_IN_SECONDS],
+      '1 day',
+      $output
+    );
+
+    // Log maintenance
+
+    $this->runCronJob(
+      'Archive log files',
+      ['bin/console', 'catrobat:logs:archive'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 day',
+      $output
+    );
+
+    $this->runCronJob(
+      'Clean old log files',
+      ['bin/console', 'catrobat:clean:logs'],
+      ['timeout' => self::ONE_HOUR_IN_SECONDS],
+      '1 week',
+      $output
+    );
+
     return 0;
   }
 
