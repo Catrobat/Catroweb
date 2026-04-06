@@ -564,6 +564,18 @@ class DataFixturesContext implements Context
   }
 
   /**
+   * @Given /^there are featured banners:$/
+   */
+  public function thereAreFeaturedBanners(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      $this->insertFeaturedBanner($config, false);
+    }
+
+    $this->getManager()->flush();
+  }
+
+  /**
    * @Given /^there are feature flags:$/
    */
   public function thereAreFeatureFlags(TableNode $table): void
@@ -1251,6 +1263,7 @@ class DataFixturesContext implements Context
       $isPublic = filter_var($config['is_public'] ?? true, FILTER_VALIDATE_BOOLEAN);
       $allowComments = filter_var($config['allow_comments'] ?? true, FILTER_VALIDATE_BOOLEAN);
       $isEnabled = filter_var($config['is_enabled'] ?? true, FILTER_VALIDATE_BOOLEAN);
+      $autoHidden = filter_var($config['auto_hidden'] ?? false, FILTER_VALIDATE_BOOLEAN);
 
       $studio = new Studio()
         ->setName($config['name'])
@@ -1258,6 +1271,7 @@ class DataFixturesContext implements Context
         ->setAllowComments($allowComments)
         ->setIsPublic($isPublic)
         ->setIsEnabled($isEnabled)
+        ->setAutoHidden($autoHidden)
         ->setCreatedOn(
           isset($config['created_on']) ?
             new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :

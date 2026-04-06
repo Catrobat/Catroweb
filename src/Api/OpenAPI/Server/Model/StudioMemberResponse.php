@@ -113,6 +113,17 @@ class StudioMemberResponse
   protected ?\DateTime $joined_at = null;
 
   /**
+   * Number of projects this member has in the studio.
+   *
+   * @SerializedName("studio_project_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $studio_project_count = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -127,6 +138,7 @@ class StudioMemberResponse
       $this->role = array_key_exists('role', $data) ? $data['role'] : $this->role;
       $this->status = array_key_exists('status', $data) ? $data['status'] : $this->status;
       $this->joined_at = array_key_exists('joined_at', $data) ? $data['joined_at'] : $this->joined_at;
+      $this->studio_project_count = array_key_exists('studio_project_count', $data) ? $data['studio_project_count'] : $this->studio_project_count;
     }
   }
 
@@ -270,6 +282,28 @@ class StudioMemberResponse
   public function setJoinedAt(?\DateTime $joined_at = null): self
   {
     $this->joined_at = $joined_at;
+
+    return $this;
+  }
+
+  /**
+   * Gets studio_project_count.
+   */
+  public function getStudioProjectCount(): ?int
+  {
+    return $this->studio_project_count;
+  }
+
+  /**
+   * Sets studio_project_count.
+   *
+   * @param int|null $studio_project_count Number of projects this member has in the studio
+   *
+   * @return $this
+   */
+  public function setStudioProjectCount(?int $studio_project_count = null): self
+  {
+    $this->studio_project_count = $studio_project_count;
 
     return $this;
   }

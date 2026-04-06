@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\System\Testing\Behat;
 
 use App\Admin\System\FeatureFlag\FeatureFlagManager;
+use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
@@ -538,6 +539,36 @@ trait ContextTrait
     }
 
     return $featured_project;
+  }
+
+  public function insertFeaturedBanner(array $config, bool $andFlush = true): FeaturedBanner
+  {
+    $banner = new FeaturedBanner();
+
+    $banner->setType($config['type'] ?? 'project');
+    $banner->setActive(isset($config['active']) && '1' === $config['active']);
+    $banner->setPriority(isset($config['priority']) ? (int) $config['priority'] : 0);
+    $banner->setTitle($config['title'] ?? null);
+    $banner->setImageType($config['imagetype'] ?? 'jpg');
+
+    if (isset($config['url'])) {
+      $banner->setUrl($config['url']);
+    }
+
+    if (isset($config['project_id'])) {
+      $project = $this->getProjectManager()->find($config['project_id']);
+      $banner->setProgram($project);
+    } elseif (isset($config['name']) && '' !== $config['name']) {
+      $project = $this->getProjectManager()->findOneByName($config['name']);
+      $banner->setProgram($project);
+    }
+
+    $this->getManager()->persist($banner);
+    if ($andFlush) {
+      $this->getManager()->flush();
+    }
+
+    return $banner;
   }
 
   public function insertExampleProject(array $config, bool $andFlush = true): ExampleProgram

@@ -82,3 +82,29 @@ Feature: Search projects and users
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/search?query=Fritz&type=invalid"
     Then the response code should be "400"
+
+  Scenario: Search for studios by name
+    Given there are studios:
+      | id | name           | description        | allow_comments | is_public |
+      | 1  | Art Studio     | Creative art space | true           | true      |
+      | 2  | Game Makers    | Building games     | true           | true      |
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I wait for the search index to be updated
+    And I request "GET" "/api/search?query=Art+Studio&type=studios"
+    Then the response code should be "200"
+    Then the search response should contain 1 studios
+    Then the search response should contain the following studios:
+      | Name       |
+      | Art Studio |
+
+  Scenario: Search for studios included in default search results
+    Given there are studios:
+      | id | name        | description    | allow_comments | is_public |
+      | 1  | Game Makers | Building games | true           | true      |
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I wait for the search index to be updated
+    And I request "GET" "/api/search?query=Game+Makers"
+    Then the response code should be "200"
+    Then the search response should contain the following studios:
+      | Name        |
+      | Game Makers |

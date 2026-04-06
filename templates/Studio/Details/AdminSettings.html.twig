@@ -1,4 +1,7 @@
-<div class="modal fade modal-full" id="studio-admin-settings-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-full" id="studio-admin-settings-modal" tabindex="-1" role="dialog" aria-hidden="true"
+     data-studio-id="{{ studio.id }}"
+     data-trans-save-success="{{ 'studio.details.admin_settings.save_success'|trans({}, 'catroweb') }}"
+     data-trans-save-error="{{ 'studio.details.admin_settings.save_error'|trans({}, 'catroweb') }}">
   <div class="modal-dialog full-modal-dialog" role="document">
     <div class="modal-content full-modal-content">
 
@@ -13,16 +16,13 @@
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
           <button id="studio-settings__submit-button" class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-                  type="submit" form="studio-settings">
+                  type="button">
             done
           </button>
         </section>
       </div>
 
-      <form id="studio-settings" class="container-fluid justify-content-center" action="{{ path('update_studio_details') }}" method="post">
-
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('studio_settings') }}">
-        <input type="hidden" name="studio_id" value="{{ studio.id }}">
+      <div id="studio-settings" class="container-fluid justify-content-center">
 
         {{ include('Components/TextField.html.twig', {
           text_field:
@@ -66,49 +66,7 @@
             name: 'is_public',
           },
         }) }}
-        {% if not studio.isPublic %}
-        <h3>Pending Join Requests</h3>
-        <ul id="pending-join-requests">
-          {% for request in pending_join_requests %}
-            <li class="mb-3" id="studio-setting-studio-pending-join-{{ request.id }}"style="list-style: none;">
-            {{ include('Components/Switch.html.twig', {
-              switch:
-              {
-                id: 'studio-setting__switch-studio-pending-join-' ~ request.id,
-                label: request.user,
-                selected: 1,
-                name: 'switches[' ~ request.id ~ ']',
-              },
-            }) }}
-            </li>
-          {% endfor %}
-        </ul>
-        <h3>Approved Join Requests</h3>
-        <ul>
-          {% for request in approved_join_requests %}
-            <li  class="mb-3" id="studio-setting-studio-approved-join-{{ request.id }}"style="list-style: none;">{{ request.user }}</li>
-          {% endfor %}
-        </ul>
-        <h3>Declined Join Requests</h3>
-        <ul id="declined-join-requests">
-          {% for request in declined_join_requests %}
-            <li class="mb-3" id="studio-setting-studio-declined-join-{{ request.id }}" style="list-style: none;">
-
-            {{ include('Components/Switch.html.twig', {
-                switch:
-                {
-                  id: 'studio-setting__switch-studio-declined-join-' ~ request.id,
-                  label: request.user,
-                  selected: 0,
-                  name: 'approved_switches[' ~ request.id ~ ']',
-                },
-              }) }}
-
-            </li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-      </form>
+      </div>
     </div>
   </div>
 </div>

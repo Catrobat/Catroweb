@@ -48,6 +48,86 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UtilityController extends Controller
 {
   /**
+   * Operation featuredBannersGet.
+   *
+   * Get active featured banners
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function featuredBannersGetAction(Request $request): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 10);
+    $offset = $request->query->get('offset', 0);
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $offset = $this->deserialize($offset, 'int', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $response = $this->validate($offset, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->featuredBannersGet($limit, $offset, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation healthGet.
    *
    * Health Check
@@ -56,7 +136,7 @@ class UtilityController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function healthGetAction(Request $request)
+  public function healthGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -115,7 +195,7 @@ class UtilityController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function surveyLangCodeGetAction(Request $request, $lang_code)
+  public function surveyLangCodeGetAction(Request $request, $lang_code): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

@@ -55,16 +55,22 @@ class StudioApiProcessor extends AbstractApiProcessor
     $this->studio_manager->deleteStudio($studio, $user);
   }
 
-  public function joinStudio(User $user, Studio $studio): void
+  /**
+   * @return bool true if joined successfully, false if admin not found
+   */
+  public function joinStudio(User $user, Studio $studio): bool
   {
     if ($studio->isIsPublic()) {
       $admin = $this->studio_manager->getStudioAdmin($studio);
-      if ($admin instanceof StudioUser) {
-        $this->studio_manager->addUserToStudio($admin->getUser(), $studio, $user);
+      if (!$admin instanceof StudioUser) {
+        return false;
       }
+      $this->studio_manager->addUserToStudio($admin->getUser(), $studio, $user);
     } else {
       $this->studio_manager->setJoinRequest($user, $studio, StudioJoinRequest::STATUS_PENDING);
     }
+
+    return true;
   }
 
   public function leaveStudio(User $user, Studio $studio): void
@@ -113,7 +119,7 @@ class StudioApiProcessor extends AbstractApiProcessor
     }
 
     $isAdmin = $this->studio_manager->isUserAStudioAdmin($user, $studio);
-    $isOwner = $project->getUser() === $user;
+    $isOwner = $project->getUser()?->getId() === $user->getId();
     if (!$isAdmin && !$isOwner) {
       return 'forbidden';
     }
@@ -123,8 +129,28 @@ class StudioApiProcessor extends AbstractApiProcessor
     return 'ok';
   }
 
+  public function promoteMember(User $admin, Studio $studio, User $target): ?StudioUser
+  {
+    return $this->studio_manager->changeStudioUserRole($admin, $studio, $target, StudioUser::ROLE_ADMIN);
+  }
+
+  public function banMember(User $admin, Studio $studio, User $target): ?StudioUser
+  {
+    $result = $this->studio_manager->changeStudioUserStatus($admin, $studio, $target, StudioUser::STATUS_BANNED);
+    if ($result instanceof StudioUser && StudioUser::STATUS_BANNED === $result->getStatus()) {
+      return $result;
+    }
+
+    return null;
+  }
+
   public function addComment(User $user, Studio $studio, string $text, int $parent_id): ?UserComment
   {
     return $this->studio_manager->addCommentToStudio($user, $studio, $this->textSanitizer->sanitize($text) ?? '', $parent_id);
+  }
+
+  public function deleteComment(User $user, int $comment_id): void
+  {
+    $this->studio_manager->deleteCommentFromStudio($user, $comment_id);
   }
 }

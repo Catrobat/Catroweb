@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class NotificationController extends AbstractController
 {
-  #[Route(path: '/user_notifications', name: 'notifications', methods: ['GET'])]
+  #[Route(path: '/notifications', name: 'notifications', methods: ['GET'])]
   public function notifications(): Response
   {
     if (!$this->getUser() instanceof \Symfony\Component\Security\Core\User\UserInterface) {

@@ -93,7 +93,9 @@ class ImageRepository
       $path = $this->example_path.$this->generateFileNameFromId($id, $extension, false);
     }
 
-    return $path.FileHelper::getTimestampParameter($this->example_dir.$this->generateFileNameFromId($id, $extension, $featured));
+    $dir = $featured ? $this->featured_dir : $this->example_dir;
+
+    return $path.FileHelper::getTimestampParameter($dir.$this->generateFileNameFromId($id, $extension, $featured));
   }
 
   public function getAbsoluteWebPath(int|string $id, string $extension, bool $featured): string

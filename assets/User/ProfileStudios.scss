@@ -1,0 +1,92 @@
+// Studio cards on profile page — matches studios overview layout
+// without importing the full Studios.scss that conflicts with tab bar
+
+#studios-section {
+  .studios-list-item-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid light-dark(#f0f0f0, #2a2a3a);
+    transition: background-color 0.15s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: light-dark(#f8f9fa, #2a2a3a);
+    }
+  }
+
+  .studios-list-item-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    flex: 1;
+    min-width: 0;
+
+    &:hover {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .studios-list-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .studios-list-item--image {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: light-dark(#eee, #3a3a4a);
+  }
+
+  .studios-list-item--content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .studios-list-item--heading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .studios-list-item--badge .material-icons {
+    font-size: 1rem;
+    color: light-dark(#6c757d, #a0aec0);
+  }
+
+  .studios-list-item--icons {
+    display: flex;
+    gap: 0.75rem;
+    color: light-dark(#6c757d, #a0aec0);
+    font-size: 0.85rem;
+  }
+
+  .studios-list-item--icon-wrapper {
+    display: flex;
+    align-items: center;
+
+    .material-icons {
+      font-size: 1rem;
+    }
+  }
+}

@@ -72,6 +72,46 @@ interface StudioApiInterface
   ): array|object|null;
 
   /**
+   * Operation studioIdActivitiesGet.
+   *
+   * List studio activities
+   *
+   * @param string      $id              (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdActivitiesGet(
+    string $id,
+    string $accept_language,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studioIdCommentsCommentIdDelete.
+   *
+   * Delete a studio comment
+   *
+   * @param string $id              (required)
+   * @param int    $comment_id      (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdCommentsCommentIdDelete(
+    string $id,
+    int $comment_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
    * Operation studioIdCommentsGet.
    *
    * List studio comments
@@ -201,6 +241,44 @@ interface StudioApiInterface
   ): array|object|null;
 
   /**
+   * Operation studioIdMembersUserIdBanPost.
+   *
+   * Ban a studio member
+   *
+   * @param string $id              (required)
+   * @param string $user_id         (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdMembersUserIdBanPost(
+    string $id,
+    string $user_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation studioIdMembersUserIdPromotePost.
+   *
+   * Promote a studio member to admin
+   *
+   * @param string $id              (required)
+   * @param string $user_id         (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdMembersUserIdPromotePost(
+    string $id,
+    string $user_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
    * Operation studioIdPost.
    *
    * Update a Studio (only available to studio admins)
@@ -285,6 +363,23 @@ interface StudioApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): void;
+
+  /**
+   * Operation studioIdUserProjectsGet.
+   *
+   * List current user's projects with in_studio flag
+   *
+   * @param string $id              (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdUserProjectsGet(
+    string $id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
 
   /**
    * Operation studioPost.

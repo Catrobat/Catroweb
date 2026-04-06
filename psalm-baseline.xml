@@ -172,43 +172,6 @@
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Application/Controller/Studio/StudioController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$comment->getStudio()]]></code>
-      <code><![CDATA[$comment->getStudio()]]></code>
-      <code><![CDATA[$joinRequest]]></code>
-      <code><![CDATA[$joinRequest]]></code>
-      <code><![CDATA[$joinRequest->getUser()]]></code>
-      <code><![CDATA[$joinRequest->getUser()]]></code>
-      <code><![CDATA[$logged_in_user]]></code>
-      <code><![CDATA[$project]]></code>
-      <code><![CDATA[$project]]></code>
-      <code><![CDATA[$project]]></code>
-      <code><![CDATA[$project['id']]]></code>
-      <code><![CDATA[$request->headers->get('referer')]]></code>
-      <code><![CDATA[$request->headers->get('referer')]]></code>
-      <code><![CDATA[$request->headers->get('referer')]]></code>
-      <code><![CDATA[$request->headers->get('referer')]]></code>
-      <code><![CDATA[$request->headers->get('referer')]]></code>
-      <code><![CDATA[$studio]]></code>
-      <code><![CDATA[$studio]]></code>
-      <code><![CDATA[$studio]]></code>
-      <code><![CDATA[$user]]></code>
-      <code><![CDATA[$user]]></code>
-      <code><![CDATA[$user]]></code>
-      <code><![CDATA[$user->getUsername()]]></code>
-      <code><![CDATA[$user->getUsername()]]></code>
-    </PossiblyNullArgument>
-    <PossiblyNullReference>
-      <code><![CDATA[format]]></code>
-      <code><![CDATA[getAvatar]]></code>
-      <code><![CDATA[getId]]></code>
-      <code><![CDATA[getText]]></code>
-      <code><![CDATA[getUser]]></code>
-      <code><![CDATA[getUser]]></code>
-      <code><![CDATA[getUserIdentifier]]></code>
-    </PossiblyNullReference>
-  </file>
   <file src="src/Application/Controller/User/ProfileController.php">
     <PossiblyNullArgument>
       <code><![CDATA[$user->getId()]]></code>
@@ -236,6 +199,15 @@
       <code><![CDATA[getName]]></code>
       <code><![CDATA[getUser]]></code>
     </PossiblyNullReference>
+  </file>
+  <file src="src/DB/Entity/Studio/Studio.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function __toString(): string]]></code>
+    </MissingOverrideAttribute>
+    <RedundantPropertyInitializationCheck>
+      <code><![CDATA[$this->id ?? '']]></code>
+      <code><![CDATA[$this->name]]></code>
+    </RedundantPropertyInitializationCheck>
   </file>
   <file src="src/DB/EntityRepository/Project/ProgramRepository.php">
     <PossiblyNullArgument>

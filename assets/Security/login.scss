@@ -1,6 +1,9 @@
 @import '../Layout/Variables';
 
 .content-card {
+  background: light-dark(#fff, #2d2d3d);
+  color: light-dark(#212529, #e2e8f0);
+
   .login-container {
     width: 100%;
     max-width: 500px;
@@ -12,7 +15,17 @@
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
-    box-shadow: 0.1875rem 0.375rem 0.9375rem 0;
+    box-shadow: 0.1875rem 0.375rem 0.9375rem 0 light-dark(rgb(0 0 0 / 15%), rgb(0 0 0 / 40%));
+  }
+
+  p,
+  label,
+  summary {
+    color: light-dark(#212529, #cbd5e0);
+  }
+
+  .text-muted {
+    color: light-dark(#6c757d, #a0aec0) !important;
   }
 }
 

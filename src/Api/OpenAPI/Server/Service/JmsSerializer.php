@@ -30,7 +30,7 @@ class JmsSerializer implements SerializerInterface
 
   public function deserialize($data, string $type, string $format)
   {
-    if ('string' == $format) {
+    if ('string' === $format) {
       return $this->deserializeString($data, $type);
     }
 
@@ -81,11 +81,11 @@ class JmsSerializer implements SerializerInterface
           return $data;
         }
 
-        if ('true' === strtolower($data)) {
+        if ('true' === strtolower((string) $data)) {
           return true;
         }
 
-        if ('false' === strtolower($data)) {
+        if ('false' === strtolower((string) $data)) {
           return false;
         }
 
@@ -123,10 +123,10 @@ class JmsSerializer implements SerializerInterface
 
     // Parse the string using the correct separator
     $data = match ($format) {
-      'csv' => explode(',', $data),
-      'ssv' => explode(' ', $data),
-      'tsv' => explode("\t", $data),
-      'pipes' => explode('|', $data),
+      'csv' => explode(',', (string) $data),
+      'ssv' => explode(' ', (string) $data),
+      'tsv' => explode("\t", (string) $data),
+      'pipes' => explode('|', (string) $data),
       default => [],
     };
 

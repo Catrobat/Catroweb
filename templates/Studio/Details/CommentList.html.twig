@@ -1,66 +1,73 @@
-<div id="comments-pane" class="tab-pane fade-in" role="tabpanel" aria-labelledby="comments-tab">
-  {% for comment in comments %}
-    <div class="studio-comment">
-      <img class="comment-avatar"
-           src="{% if comment.avatar != null %}{{ comment.avatar }}
-                    {% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"
-           alt="">
-      <div class="comment-content">
-        <a href="{{ url('profile', {id: comment.user.id}) }}">{{ comment.username }}</a>
-        {% if user_role == 'admin' or comment.username == user_name %}
-          <a class="comment-delete-button" data-bs-toggle="tooltip" data-comment-id="{{ comment.id }}"
-             title="{{ 'studio.details.comments.remove_comment'|trans({}, 'catroweb') }}">
-            <i class="ms-2 material-icons text-danger">delete</i>
-          </a>
-        {% endif %}
-        <p>{{ comment.text }}</p>
-        <div class="comment-info">
-          <span class="comment-time col-6">
-              <span class="material-icons comment-info-icons">watch_later</span>{{ comment.uploadDate.format('Y-m-d') }}</span>
-          <a class="comment-replies col-6" data-comment-id="{{ comment.id }}"
-             data-bs-toggle="modal"
-             data-bs-target="#comment-reply-modal">
-            <span class="material-icons comment-info-icons">forum</span>
-            <span
-                id="info-{{ comment.id }}">{{ comment.repliesCount }} {{ 'studio.details.comments.replies'|trans({}, 'catroweb') }}</span>
-          </a>
+<div id="comments-pane" class="tab-pane fade-in" role="tabpanel" aria-labelledby="comments-tab"
+     {{ stimulus_controller('studio--comment', {
+       studioId: studio.id,
+       commentsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/comments',
+       postUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/comments',
+       deleteUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/comments/__COMMENT_ID__',
+       userRole: user_role|default(''),
+       userName: user_name|default(''),
+       isLoggedIn: user_name is defined and user_name ? true : false,
+       commentsEnabled: studio.isAllowComments,
+       isMinor: app.user ? app.user.isMinor() : false,
+     }) }}
+     data-trans-are-you-sure="{{ 'studio.details.are_you_sure'|trans({}, 'catroweb')|default('Are you sure?') }}"
+     data-trans-no-way-of-return="{{ 'studio.details.no_way_of_return'|trans({}, 'catroweb')|default('This cannot be undone.') }}"
+     data-trans-delete-it="{{ 'studio.details.delete_it'|trans({}, 'catroweb')|default('Delete') }}"
+     data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel') }}"
+     data-trans-remove-comment="{{ 'studio.details.comments.remove_comment'|trans({}, 'catroweb')|default('Remove comment') }}"
+     data-trans-remove-error="{{ 'studio.details.comments.remove_error'|trans({}, 'catroweb')|default('Failed to remove comment.') }}"
+     data-trans-post-error="{{ 'studio.details.comments.post_error'|trans({}, 'catroweb')|default('Failed to post comment.') }}"
+     data-trans-rate-limited="{{ 'moderation.studio.rate_limited'|trans({}, 'catroweb')|default('You are posting comments too quickly.') }}"
+     data-trans-replies="{{ 'studio.details.comments.replies'|trans({}, 'catroweb')|default('replies') }}"
+     data-trans-deleted-comment="{{ 'project.deletedComment'|trans({}, 'catroweb')|default('Deleted') }}"
+>
+  <div id="studio-comments" class="mt-3">
+
+    {% if user_role is not null and studio.isAllowComments and (not app.user or not app.user.isMinor()) %}
+      <div id="user-comment-wrapper" class="col-12" data-studio--comment-target="form">
+        <div class="comment-avatar">
+          <img class="comment-avatar-img" src="{% if app.user and app.user.avatar is not empty %}
+                          {{ app.user.avatar }}
+                        {% else %}
+                          {{ asset('images/default/avatar_default.png') }}
+                        {% endif %}" alt="Avatar">
+        </div>
+        <div class="comment-payload-wrapper">
+          <div class="comment-message">
+            <textarea data-studio--comment-target="messageInput"
+                      data-action="focus->studio--comment#onMessageFocus"
+                      class="msg"
+                      placeholder="{{ 'studio.details.comments.type_something'|trans({}, 'catroweb') }}"
+                      title="{{ 'studio.details.comments.type_something'|trans({}, 'catroweb') }}"></textarea>
+          </div>
+          <div class="comment-buttons-container" data-studio--comment-target="commentButtons" style="display: none;">
+            <button class="btn btn-outline-secondary rounded-pill me-2"
+                    data-action="click->studio--comment#cancelComment">
+              {{ 'cancel'|trans({}, 'catroweb') }}
+            </button>
+            <button class="btn btn-primary rounded-pill"
+                    data-action="click->studio--comment#postComment">
+              {{ 'studio.details.comments.send'|trans({}, 'catroweb') }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <hr class="comment-hr">
-  {% endfor %}
+    {% endif %}
 
-  {% if comments|length == 0 and studio.isAllowComments == '0' %}
-    <p id="disabled-comments" class="mt-4 center">
+    <div data-studio--comment-target="container"></div>
+
+    <p data-studio--comment-target="disabledComments" class="mt-4 center" style="display: none;">
       {{ 'studio.details.comments.disabled_comments'|trans({}, 'catroweb') }}
     </p>
-  {% else %}
-    <p id="no-comments" class="mt-4 center" {% if comments|length > 0 and studio.isAllowComments == '1' %}style="display: none"{% endif %}>
+
+    <p data-studio--comment-target="noComments" class="mt-4 center" style="display: none;">
       {{ 'studio.details.comments.no_comments'|trans({}, 'catroweb') }}
     </p>
-  {% endif %}
 
-  {% if user_role != null and studio.isAllowComments == '1' and not app.user.isMinor() %}
-
-    <div style="display: flex; align-items: center;">
-      <a href="{{ path('profile', {id: app.user.id}) }}">
-        <img class="member__list-entry__image"
-             src="{{ app.user.avatar|default(asset('/images/default/avatar_default.png')) }}"
-             alt="">
-      </a>
-
-      {{ include('Components/TextArea.html.twig', {
-        text_area:
-        {
-          id: 'add-comment',
-          label: '' ~ 'studio.details.comments.type_something'|trans({}, 'catroweb'),
-          name: 'comment',
-          rows: '1',
-          mb: 'none',
-        },
-      }) }}
-      <button id="studio-send-comment">{{ 'studio.details.comments.send'|trans({}, 'catroweb') }}</button>
+    <div data-studio--comment-target="loadMore" style="display: none;" class="text-center mt-3 mb-3">
+      <button class="btn btn-outline-primary" data-action="click->studio--comment#loadMore">
+        {{ 'studio.details.showMore'|trans({}, 'catroweb')|default('Show More') }}
+      </button>
     </div>
-  {% endif %}
-
+  </div>
 </div>

@@ -14,8 +14,13 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'studio')]
 #[ORM\Entity(repositoryClass: StudioRepository::class)]
-class Studio
+class Studio implements \Stringable
 {
+  public function __toString(): string
+  {
+    return $this->name ?? $this->id ?? '';
+  }
+
   #[ORM\Id]
   #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\GeneratedValue(strategy: 'CUSTOM')]

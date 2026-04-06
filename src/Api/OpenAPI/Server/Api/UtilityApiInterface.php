@@ -42,6 +42,23 @@ namespace OpenAPI\Server\Api;
 interface UtilityApiInterface
 {
   /**
+   * Operation featuredBannersGet.
+   *
+   * Get active featured banners
+   *
+   * @param int   $limit           (optional, default to 10)
+   * @param int   $offset          (optional, default to 0)
+   * @param int   &$responseCode   The HTTP Response Code
+   * @param array $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function featuredBannersGet(
+    int $limit,
+    int $offset,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation healthGet.
    *
    * Health Check

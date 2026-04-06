@@ -6,34 +6,55 @@
 {% endblock %}
 
 {% block body %}
-        {% if user_name %}
-            <h2>{{ 'studio.overview.joined_studios'|trans({}, 'catroweb') }}</h2>
-            {{ include('Studio/StudioList.html.twig', {studios: studios, public: false, user_name: user_name, joined: true}) }}
+  <div {{ stimulus_controller('studio--overview', {
+    apiBaseUrl: app.request.getBaseURL() ~ '/api',
+    studioDetailsPath: path('studio_details', {id: '__ID__', theme: 'app'}),
+    createStudioPath: is_logged_in ? path('studio_new') : path('login'),
+    loginPath: path('login'),
+    isLoggedIn: is_logged_in,
+  }) }}
+    data-trans-public-studios="{{ 'studio.overview.public_studios'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-joined-studios="{{ 'studio.overview.joined_studios'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-private-studios="{{ 'studio.overview.private_studios'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-join="{{ 'studio.details.join'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-leave="{{ 'studio.details.leave'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-pending="{{ 'studio.details.pending'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-declined="{{ 'studio.details.decline'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-load-more="{{ 'studio.overview.load_more'|trans({}, 'catroweb')|default('Load More')|e('html_attr') }}"
+    data-trans-no-studios="{{ 'studio.overview.no_studios'|trans({}, 'catroweb')|default('No studios found')|e('html_attr') }}"
+    data-trans-my-studios="{{ 'studio.overview.my_studios'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-explore="{{ 'studio.overview.explore'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-no-joined="{{ 'studio.overview.no_joined'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-joined="{{ 'studio.overview.joined'|trans({}, 'catroweb')|e('html_attr') }}"
+  >
+    {% if is_logged_in %}
+      <section class="studios-section">
+        <h2 class="studios-section__title" data-studio--overview-target="myStudiosHeader"></h2>
+        <div data-studio--overview-target="myStudios"></div>
+      </section>
 
-            <h2>{{ 'studio.overview.private_studios'|trans({}, 'catroweb') }}</h2>
-            {{ include('Studio/StudioList.html.twig', {studios: studios, public: false, user_name: user_name, joined: false}) }}
-        {% endif %}
-        <h2>{{ 'studio.overview.public_studios'|trans({}, 'catroweb') }}</h2>
-        {{ include('Studio/StudioList.html.twig', {studios: studios, public: true, user_name: user_name, joined: false}) }}
+      <section class="studios-section">
+        <h2 class="studios-section__title" data-studio--overview-target="exploreStudiosHeader"></h2>
+        <div data-studio--overview-target="exploreStudios"></div>
+      </section>
+    {% else %}
+      <div data-studio--overview-target="studiosList"></div>
+    {% endif %}
 
-        <div class="row">
-            {% if user_name %}
-                <div class="text-end col">
-                    <a href="{{ path('studio_new') }}" >
-                        <span id="add-button" class="material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
-                    </a>
-                </div>
-            {% else %}
-                <div class="text-end col ">
-                    <a href="{{ path('login') }}" >
-                        <span id="add-button" class="material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
-                    </a>
-                </div>
-            {% endif %}
-        </div>
+    <div id="studios-load-more" class="text-center my-3" data-studio--overview-target="loadMore" style="display: none;">
+      <button class="btn btn-outline-primary" data-action="click->studio--overview#loadMore">
+        {{ 'studio.overview.load_more'|trans({}, 'catroweb')|default('Load More') }}
+      </button>
+    </div>
 
-        {% endblock %}
+    <a href="{{ is_logged_in ? path('studio_new') : path('login') }}"
+       class="studios-fab">
+      <span class="material-icons">add</span>
+      <span class="studios-fab__text">{{ 'studio.create_studio'|trans({}, 'catroweb') }}</span>
+    </a>
+  </div>
+{% endblock %}
 
 {% block javascript %}
-    {{ encore_entry_script_tags('studios_page') }}
+  {{ encore_entry_script_tags('studios_page') }}
 {% endblock %}

@@ -8,6 +8,7 @@ use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
 use App\Project\ProjectSearchService;
 use App\Storage\ImageRepository;
+use App\Studio\StudioSearchService;
 use App\User\UserManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -25,6 +26,7 @@ class SearchApiFacade extends AbstractApiFacade
     private readonly SearchRequestValidator $request_validator,
     private readonly ProjectSearchService $project_search_service,
     private readonly UserManager $user_manager,
+    private readonly StudioSearchService $studio_search_service,
     private readonly TranslatorInterface $translator,
     private readonly ElapsedTimeStringFormatter $time_formatter,
     private readonly TokenStorageInterface $token_storage,
@@ -67,6 +69,11 @@ class SearchApiFacade extends AbstractApiFacade
   public function getUserManager(): UserManager
   {
     return $this->user_manager;
+  }
+
+  public function getStudioSearchService(): StudioSearchService
+  {
+    return $this->studio_search_service;
   }
 
   public function getTranslator(): TranslatorInterface

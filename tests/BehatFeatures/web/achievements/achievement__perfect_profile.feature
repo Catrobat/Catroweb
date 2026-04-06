@@ -12,7 +12,7 @@ Feature: Every user that changed his profile picture must have the perfect_profi
     Then the "#unlocked-achievements" element should not contain "Initiative"
     When I am on "/app/user"
     And I wait for AJAX to finish
-    Then I should see "My Profile"
+    Then I should see "Profile"
     When I attach the avatar "logo.png" to "own-profile-picture-upload-field"
     And I wait for the page to be loaded
     And I wait for the element "#alert-profile-picture-change-success" to be visible
@@ -27,7 +27,7 @@ Feature: Every user that changed his profile picture must have the perfect_profi
     And I log in as "OldUser"
     When I am on "/app/user"
     And I wait for AJAX to finish
-    Then I should see "My Profile"
+    Then I should see "Profile"
     When I attach the avatar "logo.png" to "own-profile-picture-upload-field"
     And I wait for the page to be loaded
     And I wait for the element "#alert-profile-picture-change-success" to be visible

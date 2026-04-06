@@ -19,7 +19,7 @@ Feature: Searching for projects with ownername
     When I am on "/app/search/User3"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     And I should not see "project 1"
     And I should not see "project 2"
     But I should see "project 3"
@@ -28,7 +28,7 @@ Feature: Searching for projects with ownername
     When I am on "/app/search/User"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "Search results"
+    Then I should see "Results for"
     And I should not see "project 1"
     And I should see "project 2"
     But I should see "project 3"

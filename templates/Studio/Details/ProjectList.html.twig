@@ -1,55 +1,49 @@
-<div id="projects-pane" class="tab-pane fade-in show active" role="tabpanel" aria-labelledby="projects-tab">
+<div id="projects-pane" class="tab-pane fade-in show active" role="tabpanel" aria-labelledby="projects-tab"
+     {{ stimulus_controller('studio--project-list', {
+       studioId: studio.id,
+       projectsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects',
+       addProjectUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects',
+       removeProjectUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects/__PROJECT_ID__',
+       userRole: user_role|default(''),
+       isLoggedIn: user_name is defined and user_name ? true : false,
+     }) }}
+     data-trans-are-you-sure="{{ 'studio.details.are_you_sure'|trans({}, 'catroweb')|default('Are you sure?') }}"
+     data-trans-no-way-of-return="{{ 'studio.details.no_way_of_return'|trans({}, 'catroweb')|default('This cannot be undone.') }}"
+     data-trans-delete-it="{{ 'studio.details.delete_it'|trans({}, 'catroweb')|default('Delete') }}"
+     data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel') }}"
+     data-trans-remove-error="{{ 'studio.details.remove_project_error'|trans({}, 'catroweb')|default('Failed to remove project.') }}"
+     data-trans-add-project="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb')|default('Add Projects') }}"
+     data-trans-add="{{ 'studio.details.add'|trans({}, 'catroweb')|default('Add') }}"
+     data-trans-no-available-projects="{{ 'studio.details.no_available_projects'|trans({}, 'catroweb')|default('No projects available to add.') }}"
+     data-trans-open-project="{{ 'studio.details.projects.open_project'|trans({}, 'catroweb')|default('Open project') }}"
+     data-trans-download="{{ 'studio.details.projects.download'|trans({}, 'catroweb')|default('Download') }}"
+     data-trans-share="{{ 'studio.details.projects.share'|trans({}, 'catroweb')|default('Share') }}"
+     data-trans-remove-from-studio="{{ 'studio.details.projects.remove_from_studio'|trans({}, 'catroweb')|default('Remove from studio') }}"
+     data-trans-share-success="{{ 'studio.details.projects.share_success'|trans({}, 'catroweb')|default('Link copied to clipboard!') }}"
+     data-trans-share-fail="{{ 'studio.details.projects.share_fail'|trans({}, 'catroweb')|default('Failed to copy link.') }}"
+     data-trans-no-projects-empty-state="{{ 'studio.details.projects.no_projects_empty_state'|trans({}, 'catroweb')|default('You have no projects to add yet. Create one in Pocket Code first!') }}"
+     data-trans-add-selected="{{ 'studio.details.projects.add_selected'|trans({}, 'catroweb')|default('Add Selected') }}"
+>
   <p class="mt-3" id="studio-desc">{{ studio.description }}</p>
-  <h3 class="mt-3">Projects</h3>
-  {% if projects|length > 0 %}
-    <div class="studio-projects-container project-list horizontal">
-      <div class="project-list__wrapper">
-        <div class="projects-container">
-          {% if user_role != 'admin' %}
-          {% for project in projects %}
-            <div id="project-{{ project.id }}" class="project-list__project studio-project-list-admin">
-              <img class="project-list__project__image"
-                   src="{{ asset(project.thumbnail|default('')) }}"
-                   alt="{{ project.name }}">
-              <span class="project-list__project__name">{{ project.name }}</span>
-            </div>
-          {% endfor %}
-          {% else %}
-          {% for project in projects %}
-          <div id="project-{{ project.id }}" class="project-list__project studio-project-list-admin ">
-            <img class="project-list__project__image removeProjectsAdmin"
-                 src="{{ asset(project.thumbnail|default('')) }}"
-                 alt="{{ project.name }}"
-                 id="{{ project.id }}">
-            <span class="project-list__project__name">{{ project.name }}</span>
-          </div>
-          {% endfor %}
+  <h3 class="mt-3">{{ 'studio.details.projects.title'|trans({}, 'catroweb') }}</h3>
 
-          {% endif %}
-        </div>
+  <div data-studio--project-list-target="container" class="studio-projects-container"></div>
 
-      </div>
-    </div>
-  {% else %}
-    <p class="mt-3">{{ 'studio.details.no_projects'|trans({}, 'catroweb') }}</p>
-  {% endif %}
-  <div class="col-12 mt-3" data-bs-toggle="tooltip">
-    {% if user_role == 'admin' %}
-      <a id="ajaxRequestDeleteProject" class="project-delete-button" data-bs-toggle="tooltip"
-         title="{{ 'studio.details.remove_project'|trans({}, 'catroweb') }}"
-         data-url="{{ path('delete_studio_projects_admin') }}"
-        data-studio-id="{{ studio.id }}">
-        <i class="ms-2 material-icons text-danger">delete</i>
-      </a>
-    {% endif %}
-    {% if user_role == 'admin' or user_role == 'member' %}
-    <i id="show-add-studio-project-button" class="add-studio-project-button material-icons catro-round-icon-button"
-         data-bs-toggle="modal"  data-bs-target="#studio-add-project-modal" title="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb') }}">add</i>
-    <i id="hide-add-comment-button" style="display:none;"
-       class="add-comment-button material-icons catro-round-icon-button" data-bs-toggle="tooltip"
-       title="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb') }}">remove</i>
-    {% endif %}
+  <p data-studio--project-list-target="noProjects" class="mt-3" style="display: none;">
+    {{ 'studio.details.no_projects'|trans({}, 'catroweb') }}
+  </p>
+
+  <div data-studio--project-list-target="loadMore" style="display: none;" class="text-center mt-3">
+    <button class="btn btn-outline-primary" data-action="click->studio--project-list#loadMore">
+      {{ 'studio.details.showMore'|trans({}, 'catroweb')|default('Show More') }}
+    </button>
   </div>
-  {{ include('Studio/StudioAddProjectDialog.html.twig') }}
 
+  {% if user_role == 'admin' or user_role == 'member' %}
+    <button class="studios-fab"
+            data-action="click->studio--project-list#openAddProjectModal">
+      <span class="material-icons">add</span>
+      <span class="studios-fab__text">{{ 'studio.details.projects.addProject'|trans({}, 'catroweb')|default('Add Project') }}</span>
+    </button>
+  {% endif %}
 </div>

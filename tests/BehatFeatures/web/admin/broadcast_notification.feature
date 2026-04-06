@@ -21,20 +21,20 @@ Feature: Admin Broadcast Notification
     And I wait for AJAX to finish
     And I wait 2000 milliseconds
     Then I should see "Notifications sent to"
-    When I am on "/app/user_notifications"
+    When I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     And I should see text matching "Test Message"
     Then I logout
     When I log in as "Catrobat2"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     And I should see text matching "Test Message"
 
   Scenario: When no notification was sent out, I should not see a notification
     When I log in as "Catrobat2"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should not see text matching "Test Title"

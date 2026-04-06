@@ -13,7 +13,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
       | 1  | program 1 | Catrobat |
       | 2  | program 2 | User     |
 
-  Scenario: Notification page must have multiple tabs
+  Scenario: Notification page must have multiple tabs including studio
     Given I log in as "Catrobat"
     And I am on the homepage
     And I wait for the page to be loaded
@@ -21,17 +21,18 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     And I click "#sidebar-notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should be on "/app/user_notifications"
+    Then I should be on "/app/notifications"
     And I should see "It looks like you don't have any notifications."
     And the element "#all-notif" should be visible
     And the element "#follow-notif" should be visible
     And the element "#reaction-notif" should be visible
     And the element "#comment-notif" should be visible
     And the element "#remix-notif" should be visible
+    And the element "#studio-notif" should be visible
 
   Scenario: Every empty notification tab shows a message
     Given I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     When I click "#follow-notif"
@@ -46,6 +47,9 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     When I click "#remix-notif"
     And I wait for AJAX to finish
     Then I should see "It looks like you don't have any remix notifications."
+    When I click "#studio-notif"
+    And I wait for AJAX to finish
+    Then I should see "It looks like you don't have any studio notifications."
 
   Scenario: Notifications tabs contain only notifications of their type
     Given there are "1" "like" notifications for project "program 1" from "User"
@@ -54,7 +58,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     And there is a notification that "User" follows "Catrobat"
 
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "User is now following you."

@@ -56,6 +56,15 @@ class StudioListResponse
   protected ?array $data = null;
 
   /**
+   * @SerializedName("total")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $total = null;
+
+  /**
    * @SerializedName("has_more")
    *
    * @Assert\Type("bool")
@@ -82,6 +91,7 @@ class StudioListResponse
   {
     if (is_array($data)) {
       $this->data = array_key_exists('data', $data) ? $data['data'] : $this->data;
+      $this->total = array_key_exists('total', $data) ? $data['total'] : $this->total;
       $this->has_more = array_key_exists('has_more', $data) ? $data['has_more'] : $this->has_more;
       $this->next_cursor = array_key_exists('next_cursor', $data) ? $data['next_cursor'] : $this->next_cursor;
     }
@@ -107,6 +117,26 @@ class StudioListResponse
   public function setData(?array $data = null): self
   {
     $this->data = $data;
+
+    return $this;
+  }
+
+  /**
+   * Gets total.
+   */
+  public function getTotal(): ?int
+  {
+    return $this->total;
+  }
+
+  /**
+   * Sets total.
+   *
+   * @return $this
+   */
+  public function setTotal(?int $total = null): self
+  {
+    $this->total = $total;
 
     return $this;
   }

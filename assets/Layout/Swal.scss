@@ -9,3 +9,46 @@
 .swal2-container {
   z-index: 10000 !important;
 }
+
+// Dark mode for SweetAlert2 popups
+.swal2-popup {
+  background: light-dark(#fff, #2d2d3d);
+  color: light-dark(#545454, #e2e8f0);
+}
+
+.swal2-title {
+  color: light-dark(#595959, #e2e8f0);
+}
+
+.swal2-html-container {
+  color: light-dark(#545454, #cbd5e0);
+
+  label {
+    color: light-dark(#545454, #e2e8f0);
+  }
+
+  textarea,
+  input[type='text'] {
+    background: light-dark(#fff, #1a1a2e);
+    color: light-dark(#545454, #e2e8f0);
+    border-color: light-dark(#d9d9d9, #4a4a5a);
+  }
+}
+
+.swal2-validation-message {
+  background: light-dark(#f0f0f0, #3a3a4a);
+  color: light-dark(#666, #e2e8f0);
+}
+
+// MDC radio buttons inside SweetAlert (report categories)
+.swal2-popup .mdc-radio__outer-circle {
+  border-color: light-dark(rgb(0 0 0 / 54%), rgb(255 255 255 / 60%));
+}
+
+.swal2-popup .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__outer-circle {
+  border-color: light-dark(var(--primary, #00acc1), var(--primary, #00acc1));
+}
+
+.swal2-popup .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {
+  border-color: light-dark(var(--primary, #00acc1), var(--primary, #00acc1));
+}

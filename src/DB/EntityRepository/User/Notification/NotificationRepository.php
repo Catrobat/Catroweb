@@ -12,6 +12,8 @@ use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\ModerationNotification;
 use App\DB\Entity\User\Notifications\NewProgramNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
+use App\DB\Entity\User\Notifications\StudioCommentNotification;
+use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -153,7 +155,7 @@ class NotificationRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return array{total: int, like: int, follower: int, comment: int, remix: int, moderation: int}
+   * @return array{total: int, like: int, follower: int, comment: int, remix: int, moderation: int, studio: int}
    */
   public function getUnseenCounts(User $user): array
   {
@@ -167,7 +169,8 @@ class NotificationRepository extends ServiceEntityRepository
         SUM(CASE WHEN notification_type IN ('follow', 'follow_project') THEN 1 ELSE 0 END) AS follower,
         SUM(CASE WHEN notification_type = 'comment' THEN 1 ELSE 0 END) AS comment,
         SUM(CASE WHEN notification_type = 'remix_notification' THEN 1 ELSE 0 END) AS remix,
-        SUM(CASE WHEN notification_type = 'moderation' THEN 1 ELSE 0 END) AS moderation
+        SUM(CASE WHEN notification_type = 'moderation' THEN 1 ELSE 0 END) AS moderation,
+        SUM(CASE WHEN notification_type IN ('studio_comment', 'studio_project') THEN 1 ELSE 0 END) AS studio
       FROM %s
       WHERE user = :user_id AND seen = 0
       SQL;
@@ -175,7 +178,7 @@ class NotificationRepository extends ServiceEntityRepository
     $row = $conn->fetchAssociative(sprintf($sql, $tableName), ['user_id' => $user->getId()]);
 
     if (false === $row) {
-      return ['total' => 0, 'like' => 0, 'follower' => 0, 'comment' => 0, 'remix' => 0, 'moderation' => 0];
+      return ['total' => 0, 'like' => 0, 'follower' => 0, 'comment' => 0, 'remix' => 0, 'moderation' => 0, 'studio' => 0];
     }
 
     return [
@@ -185,6 +188,7 @@ class NotificationRepository extends ServiceEntityRepository
       'comment' => (int) $row['comment'],
       'remix' => (int) $row['remix'],
       'moderation' => (int) $row['moderation'],
+      'studio' => (int) $row['studio'],
     ];
   }
 
@@ -193,9 +197,10 @@ class NotificationRepository extends ServiceEntityRepository
     match ($type) {
       'reaction' => $qb->andWhere('n INSTANCE OF '.LikeNotification::class),
       'follow' => $qb->andWhere('(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')'),
-      'comment' => $qb->andWhere('n INSTANCE OF '.CommentNotification::class),
+      'comment' => $qb->andWhere('(n INSTANCE OF '.CommentNotification::class.' OR n INSTANCE OF '.StudioCommentNotification::class.')'),
       'remix' => $qb->andWhere('n INSTANCE OF '.RemixNotification::class),
       'moderation' => $qb->andWhere('n INSTANCE OF '.ModerationNotification::class),
+      'studio' => $qb->andWhere('(n INSTANCE OF '.StudioCommentNotification::class.' OR n INSTANCE OF '.StudioProjectNotification::class.')'),
       default => null,
     };
   }

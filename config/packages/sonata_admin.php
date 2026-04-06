@@ -74,6 +74,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
         ],
         'groups' => [
+          'sonata.admin.group.featured_banners' => [
+            'label' => 'Featured Banners',
+            'translation_domain' => 'catroweb',
+            'icon' => '<i class="fa fa-star"></i>',
+            'items' => [
+              'admin.block.featured.banners',
+            ],
+          ],
           'sonata.admin.group.projects' => [
             'label' => 'Projects',
             'translation_domain' => 'catroweb',
@@ -82,7 +90,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.projects.overview',
               'admin.block.projects.approve',
               'admin.block.projects.broken',
-              'admin.block.featured.projects',
               'admin.block.example.projects',
               'admin.block.projects.upload',
             ],

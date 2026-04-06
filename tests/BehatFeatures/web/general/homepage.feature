@@ -30,13 +30,13 @@ Feature: Pocketcode homepage
       | 6  | project 6 | Catrobat2 |            | pocketcode |
       | 7  | project 7 | Catrobat2 |            | pocketcode |
 
-    And following projects are featured:
-      | name      | url                   | active | priority |
-      | project 1 |                       | 0      | 1        |
-      | project 2 |                       | 1      | 3        |
-      | project 3 |                       | 1      | 2        |
-      |           | http://www.google.at/ | 1      | 5        |
-      |           | http://www.orf.at/    | 0      | 4        |
+    And there are featured banners:
+      | name      | url                   | active | priority | type    |
+      | project 1 |                       | 0      | 1        | project |
+      | project 2 |                       | 1      | 3        | project |
+      | project 3 |                       | 1      | 2        | project |
+      |           | http://www.google.at/ | 1      | 5        | link    |
+      |           | http://www.orf.at/    | 0      | 4        | link    |
 
     And following projects are examples:
       | name      | active | priority |
@@ -65,7 +65,7 @@ Feature: Pocketcode homepage
     And I wait for AJAX to finish
     Then I should see the featured slider
     Then one of the ".project-list__title" elements should contain "Examples"
-    Then one of the ".project-list__title" elements should contain "Most downloaded"
+    Then one of the ".project-list__title" elements should contain "Trending projects"
     Then one of the ".project-list__title" elements should contain "Scratch remixes"
     Then one of the ".project-list__title" elements should contain "Random projects"
     Then one of the ".project-list__title" elements should contain "Popular projects"
@@ -149,8 +149,13 @@ Feature: Pocketcode homepage
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then the element "#home-projects__my_projects" should exist
-    And the element "#home-projects__most_downloaded" should exist
-    And the element "#home-projects__my_projects ~ #home-projects__most_downloaded" should exist
+    And the element "#home-projects__trending" should exist
+    And the element "#home-projects__my_projects ~ #home-projects__trending" should exist
+
+  Scenario: Homepage shows popular studios section
+    Given I am on homepage
+    And I wait for the page to be loaded
+    Then the element "#popular-studios" should exist
 
   Scenario: User should be able to see legally required links
     Given I am on homepage

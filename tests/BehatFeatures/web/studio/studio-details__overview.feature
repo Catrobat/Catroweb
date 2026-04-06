@@ -34,6 +34,7 @@ Feature: Every Studio should have an overview containing the most necessary info
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I should see "CatrobatStudio01"
     And I should see "hasADescription"
     And I should see "public"
@@ -54,6 +55,7 @@ Feature: Every Studio should have an overview containing the most necessary info
   Scenario:  User not logged in and clicks join button should result to redirect to the login page
     Given I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And  the element ".studio-detail__header__details__join-button" should be visible
     When I click ".studio-detail__header__details__join-button"
     And I wait for the page to be loaded
@@ -63,6 +65,7 @@ Feature: Every Studio should have an overview containing the most necessary info
     Given I log in as "Catrobat1"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And  the element ".studio-detail__header__details__join-button" should be visible
     When I click ".studio-detail__header__details__join-button"
     And  I wait for AJAX to finish
@@ -74,6 +77,7 @@ Feature: Every Studio should have an overview containing the most necessary info
     Given I log in as "Catrobat"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And  the element ".studio-detail__header__details__leave-button" should be visible
     When I click ".studio-detail__header__details__leave-button"
     And  I wait for AJAX to finish
@@ -85,12 +89,14 @@ Feature: Every Studio should have an overview containing the most necessary info
     Given I log in as "Catrobat1"
     And I am on "/app/studio/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And  the element ".studio-detail__header__details__declined-button" should be visible
 
   Scenario: User is logged in and tries to join the the private studio
     Given I log in as "Catrobat"
     And I am on "/app/studio/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And  the element ".studio-detail__header__details__join-button" should be visible
     When I click ".studio-detail__header__details__join-button"
     And  I wait for AJAX to finish

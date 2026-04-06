@@ -346,7 +346,7 @@ Feature: Reactions to projects "likes"
     And I open the menu
     Then the element "#sidebar-notifications" should be visible
     And the ".all-notifications" element should contain "1"
-    When I am on "/app/user_notifications"
+    When I am on "/app/notifications"
     And I wait for the page to be loaded
     And the element "#all-notif" should be visible
     And the element "#follow-notif" should be visible
@@ -372,7 +372,7 @@ Feature: Reactions to projects "likes"
     And I open the menu
     Then the element "#sidebar-notifications" should be visible
     And the ".all-notifications" element should contain "2"
-    When I am on "/app/user_notifications"
+    When I am on "/app/notifications"
     And I wait for the page to be loaded
     And the element "#all-notif" should be visible
     And the element "#follow-notif" should be visible
@@ -391,7 +391,7 @@ Feature: Reactions to projects "likes"
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And the element "#catro-notification-1" should be visible
     And I should see "OtherUser reacted to Minions."
@@ -407,7 +407,7 @@ Feature: Reactions to projects "likes"
     And the element "#project-like-counter-small" should not be visible
     And the "#project-like-counter-small" element should contain "0"
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And the element "#catro-notification-1" should not exist
     Then I should see text matching "It looks like you don't have any notifications."
@@ -422,7 +422,7 @@ Feature: Reactions to projects "likes"
     And I wait for the page to be loaded
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     Then the element "#catro-notification-1" should not exist
     And I should not see "OtherUser reacted to otherPro."

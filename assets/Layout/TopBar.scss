@@ -74,7 +74,7 @@
   top: 0;
   right: 0;
   display: none;
-  color: #000;
+  color: light-dark(#000, #e2e8f0);
   border-radius: 0;
 
   ul {
@@ -87,6 +87,20 @@
     padding: 0.5em 1em;
     text-align: left;
   }
+}
+
+// Dark mode for options menu
+.mdc-menu-surface {
+  background-color: light-dark(#fff, #2d2d3d);
+  color: light-dark(#000, #e2e8f0);
+}
+
+.mdc-deprecated-list-item__graphic.material-icons {
+  color: light-dark(rgb(0 0 0 / 60%), rgb(255 255 255 / 70%));
+}
+
+.mdc-deprecated-list-item__text {
+  color: light-dark(rgb(0 0 0 / 87%), rgb(255 255 255 / 87%));
 }
 
 // Keep the body below the top-bar

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Reset;
 
+use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\Moderation\ContentAppeal;
 use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Program;
@@ -148,6 +149,7 @@ class ResetCommand extends Command
     $this->commentOnProjects($program_names, $user_array, $output);
     $this->likeProjects($program_names, $user_array, $output);
     $this->featureProjects($program_names, $output);
+    $this->createFeaturedBanners($programs, $output);
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
     $this->exampleProject($program_names, $output);
@@ -349,6 +351,8 @@ class ResetCommand extends Command
    */
   private function createStudios(array $user_array, array $program_array, OutputInterface $output): void
   {
+    $this->createNamedStudios($user_array, $output);
+
     $random_studio_amount = random_int(5, 8);
     $i = 0;
 
@@ -415,6 +419,172 @@ class ResetCommand extends Command
 
       ++$i;
     }
+  }
+
+  /**
+   * @param non-empty-array<string> $user_array
+   */
+  private function createNamedStudios(array $user_array, OutputInterface $output): void
+  {
+    $output->writeln('Creating named demo studios...');
+
+    /** @var array<array{name: string, description: string, is_public: bool, admin_index: int, member_indices: list<int>, featured: bool}> $studios */
+    $studios = [
+      [
+        'name' => 'Art Studio',
+        'description' => 'A creative space for sharing artwork and visual projects',
+        'is_public' => true,
+        'admin_index' => 0,
+        'member_indices' => [1, 2, 3],
+        'featured' => true,
+      ],
+      [
+        'name' => 'Game Makers',
+        'description' => 'Collaborate on building amazing games together',
+        'is_public' => true,
+        'admin_index' => 1,
+        'member_indices' => [0, 2, 4, 5],
+        'featured' => false,
+      ],
+      [
+        'name' => 'Music Lab',
+        'description' => 'Experiment with sounds and music projects',
+        'is_public' => true,
+        'admin_index' => 2,
+        'member_indices' => [0, 3],
+        'featured' => false,
+      ],
+      [
+        'name' => 'Secret Inventors Club',
+        'description' => 'A private studio for invited members only',
+        'is_public' => false,
+        'admin_index' => 3,
+        'member_indices' => [0, 1],
+        'featured' => false,
+      ],
+      [
+        'name' => 'Animation Workshop',
+        'description' => 'Learn and share animation techniques with the community',
+        'is_public' => true,
+        'admin_index' => 4,
+        'member_indices' => [0, 1, 2, 3, 5],
+        'featured' => true,
+      ],
+    ];
+
+    $created_count = 0;
+    foreach ($studios as $config) {
+      $admin_index = min($config['admin_index'], count($user_array) - 1);
+      $admin_user = $user_array[$admin_index];
+
+      $users = [$admin_user];
+      $status = ['pending'];
+
+      foreach ($config['member_indices'] as $member_index) {
+        if ($member_index >= count($user_array) || $member_index === $admin_index) {
+          continue;
+        }
+        $users[] = $user_array[$member_index];
+        $status[] = 'pending';
+      }
+
+      $parameters = [
+        'name' => $config['name'],
+        'description' => $config['description'],
+        'admin' => $admin_user,
+        'is_public' => $config['is_public'],
+        'is_enabled' => true,
+        'allow_comments' => true,
+        'users' => $users,
+        'projects' => [],
+        'status' => $status,
+      ];
+
+      $ret = CommandHelper::executeSymfonyCommand('catrobat:studio', $this->getApplicationOrFail(), $parameters, $output);
+      if (0 !== $ret) {
+        $output->writeln('  Failed to create named studio "'.$config['name'].'"');
+        continue;
+      }
+
+      if ($config['featured']) {
+        $this->featureStudio($config['name'], $output);
+      }
+
+      ++$created_count;
+    }
+
+    $output->writeln(sprintf('  Created %d named studios', $created_count));
+  }
+
+  private function featureStudio(string $studioName, OutputInterface $output): void
+  {
+    $studioRepo = $this->entity_manager->getRepository(\App\DB\Entity\Studio\Studio::class);
+    $studio = $studioRepo->findOneBy(['name' => $studioName]);
+    if (null === $studio) {
+      $output->writeln('  Could not feature studio "'.$studioName.'": not found');
+
+      return;
+    }
+
+    $banner = new FeaturedBanner();
+    $banner->setType('studio');
+    $banner->setStudio($studio);
+    $banner->setTitle($studioName);
+    $banner->setActive(true);
+    $banner->setPriority(5);
+    $banner->setImageType('');
+    $banner->setCreatedOn(new \DateTime());
+    $this->entity_manager->persist($banner);
+    $this->entity_manager->flush();
+
+    $output->writeln('  Featured studio "'.$studioName.'"');
+  }
+
+  /**
+   * @param Program[] $programs
+   */
+  private function createFeaturedBanners(array $programs, OutputInterface $output): void
+  {
+    $output->writeln('Creating featured banners...');
+    $count = 0;
+
+    // Create a project banner from the first available project
+    if ([] !== $programs) {
+      $program = $programs[0];
+      $banner = new FeaturedBanner();
+      $banner->setType('project');
+      $banner->setProgram($program);
+      $banner->setTitle($program->getName());
+      $banner->setActive(true);
+      $banner->setPriority(10);
+      $banner->setImageType('');
+      $this->entity_manager->persist($banner);
+      ++$count;
+    }
+
+    // Create a custom link banner
+    $banner = new FeaturedBanner();
+    $banner->setType('link');
+    $banner->setUrl('https://catrobat.org');
+    $banner->setTitle('Visit Catrobat');
+    $banner->setActive(true);
+    $banner->setPriority(3);
+    $banner->setImageType('');
+    $this->entity_manager->persist($banner);
+    ++$count;
+
+    // Create an image-only banner
+    $banner = new FeaturedBanner();
+    $banner->setType('image');
+    $banner->setTitle('Welcome to Catroweb');
+    $banner->setActive(true);
+    $banner->setPriority(1);
+    $banner->setImageType('');
+    $this->entity_manager->persist($banner);
+    ++$count;
+
+    $this->entity_manager->flush();
+    $output->writeln(sprintf('  Created %d featured banners', $count));
   }
 
   private function getRandomStatus(): string

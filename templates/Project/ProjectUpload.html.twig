@@ -1,0 +1,72 @@
+{% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ 'project.upload.title'|trans({}, 'catroweb')|default('Upload Project') }}{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('project_upload_page') }}
+{% endblock %}
+
+{% block body %}
+  <div class="project-upload"
+       data-api-url="{{ app.request.schemeAndHttpHost }}/api/projects"
+       data-project-url="{{ path('program', {id: '__ID__'}) }}"
+       data-trans-drop-here="{{ 'project.upload.drop_here'|trans({}, 'catroweb')|default('Drag & drop your .catrobat file here')|e('html_attr') }}"
+       data-trans-or-browse="{{ 'project.upload.or_browse'|trans({}, 'catroweb')|default('or click to browse')|e('html_attr') }}"
+       data-trans-upload="{{ 'project.upload.button'|trans({}, 'catroweb')|default('Upload')|e('html_attr') }}"
+       data-trans-uploading="{{ 'project.upload.uploading'|trans({}, 'catroweb')|default('Uploading...')|e('html_attr') }}"
+       data-trans-success="{{ 'project.upload.success'|trans({}, 'catroweb')|default('Project uploaded successfully!')|e('html_attr') }}"
+       data-trans-view-project="{{ 'project.upload.view_project'|trans({}, 'catroweb')|default('View Project')|e('html_attr') }}"
+       data-trans-upload-another="{{ 'project.upload.upload_another'|trans({}, 'catroweb')|default('Upload Another')|e('html_attr') }}"
+       data-trans-invalid-file="{{ 'project.upload.invalid_file'|trans({}, 'catroweb')|default('Please select a .catrobat file')|e('html_attr') }}"
+       data-trans-file-too-large="{{ 'project.upload.file_too_large'|trans({}, 'catroweb')|default('File is too large')|e('html_attr') }}"
+       data-trans-upload-error="{{ 'project.upload.error'|trans({}, 'catroweb')|default('Upload failed. Please try again.')|e('html_attr') }}"
+       data-trans-unauthorized="{{ 'project.upload.unauthorized'|trans({}, 'catroweb')|default('You must be logged in to upload.')|e('html_attr') }}"
+       data-trans-rate-limited="{{ 'project.upload.rate_limited'|trans({}, 'catroweb')|default('Too many uploads. Please try again later.')|e('html_attr') }}"
+       data-trans-selected-file="{{ 'project.upload.selected_file'|trans({}, 'catroweb')|default('Selected file:')|e('html_attr') }}"
+       data-login-url="{{ path('login') }}"
+  >
+    <div class="project-upload__card">
+      <div id="upload-drop-zone" class="project-upload__drop-zone">
+        <span class="material-icons project-upload__icon">cloud_upload</span>
+        <p class="project-upload__drop-text"></p>
+        <p class="project-upload__browse-text"></p>
+        <input type="file" id="upload-file-input" accept=".catrobat" class="project-upload__file-input" />
+      </div>
+
+      <div id="upload-file-info" class="project-upload__file-info" style="display: none;">
+        <span class="material-icons">description</span>
+        <span id="upload-file-name" class="project-upload__file-name"></span>
+        <button id="upload-file-remove" class="project-upload__file-remove" type="button" aria-label="Remove">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <div id="upload-progress" class="project-upload__progress" style="display: none;">
+        <div class="project-upload__progress-bar">
+          <div id="upload-progress-fill" class="project-upload__progress-fill"></div>
+        </div>
+        <span id="upload-progress-text" class="project-upload__progress-text">0%</span>
+      </div>
+
+      <div id="upload-error" class="project-upload__error" style="display: none;">
+        <span class="material-icons">error_outline</span>
+        <span id="upload-error-text"></span>
+      </div>
+
+      <div id="upload-success" class="project-upload__success" style="display: none;">
+        <span class="material-icons">check_circle</span>
+        <span id="upload-success-text"></span>
+        <div class="project-upload__success-actions">
+          <a id="upload-view-project" href="#" class="btn btn-primary"></a>
+          <button id="upload-another" class="btn btn-outline-primary" type="button"></button>
+        </div>
+      </div>
+
+      <button id="upload-submit" class="btn btn-primary project-upload__submit" type="button" disabled>
+      </button>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {{ encore_entry_script_tags('project_upload_page') }}
+{% endblock %}

@@ -1,10 +1,7 @@
 @use 'sass:math';
-
-// Material Menu
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
 @import '~bootstrap/scss/mixins';
-@import '../Components/MdcMenu';
 
 $max-project-thumb-size: 160px;
 $container-padding: 1rem;
@@ -143,7 +140,78 @@ $container-padding: 1rem;
   }
 }
 
-#project-action-menu .mdc-list-item {
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+// Shared dropdown menu styles for project actions
+.projects-list-item--actions {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.projects-list-item--menu-btn {
+  padding: 0.25rem;
+  border: none;
+  background: none;
+  color: light-dark(#6c757d, #a0aec0);
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    background: light-dark(#f0f0f0, #3a3a4a);
+  }
+
+  .material-icons {
+    font-size: 1.25rem;
+  }
+}
+
+.projects-list-item--dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 50;
+  min-width: 200px;
+  background: light-dark(#fff, #2d2d3d);
+  border: 1px solid light-dark(#dee2e6, #3a3a4a);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
+  overflow: hidden;
+}
+
+.projects-list-item--dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: none;
+  color: light-dark(#212529, #e2e8f0);
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+
+  .material-icons {
+    font-size: 1.1rem;
+    color: light-dark(#6c757d, #a0aec0);
+  }
+
+  &:hover {
+    background: light-dark(#f8f9fa, #3a3a4a);
+    text-decoration: none;
+    color: light-dark(#212529, #e2e8f0);
+  }
+
+  &.text-danger {
+    color: #dc3545;
+
+    .material-icons {
+      color: #dc3545;
+    }
+  }
+}
+
+.projects-list-item--dropdown-divider {
+  height: 1px;
+  margin: 0.25rem 0;
+  background: light-dark(#dee2e6, #3a3a4a);
 }

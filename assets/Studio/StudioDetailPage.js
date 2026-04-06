@@ -4,15 +4,14 @@ import '../Components/Switch'
 import '../Components/TextArea'
 import '../Components/TextField'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
-import Swal from 'sweetalert2'
-import StudioCommentHandler from './StudioCommentHandler'
 import AcceptLanguage from '../Api/AcceptLanguage'
 require('../Project/ProjectList.scss')
 require('./AdminSettings.scss')
 require('./MembersList.scss')
 require('./ActivityList.scss')
 require('./Studio.scss')
-document.getElementById('std-header-form')?.addEventListener('change', () => {
+
+document.getElementById('std-header-form')?.addEventListener('change', (event) => {
   event.preventDefault()
   const fileInput = document.getElementById('std-header')
   const studioId = document.getElementById('studio-id').value
@@ -22,47 +21,6 @@ document.getElementById('std-header-form')?.addEventListener('change', () => {
   }
 })
 
-document.querySelectorAll('.comment-delete-button').forEach((element) =>
-  element.addEventListener('click', () => {
-    const studioId = document.getElementById('studio-id').value
-    Swal.fire({
-      title: document.getElementById('trans-are-you-sure')?.value || 'Are you sure?',
-      text: document.getElementById('trans-no-way-of-return')?.value || 'This cannot be undone.',
-      icon: 'warning',
-      showCancelButton: true,
-      allowOutsideClick: false,
-      customClass: {
-        confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-outline-primary',
-      },
-      buttonsStyling: false,
-      confirmButtonText: document.getElementById('trans-delete-it')?.value || 'Delete',
-      cancelButtonText: document.getElementById('trans-cancel')?.value || 'Cancel',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        new StudioCommentHandler().removeComment(
-          studioId,
-          element,
-          element.dataset.commentId,
-          false,
-          0,
-        )
-      }
-    })
-  }),
-)
-
-document.getElementById('studio-send-comment')?.addEventListener('click', () => {
-  const studioId = document.getElementById('studio-id').value
-  new StudioCommentHandler().postComment(studioId, false)
-})
-
-document.querySelectorAll('.comment-replies').forEach((element) =>
-  element.addEventListener('click', () => {
-    const studioId = document.getElementById('studio-id').value
-    new StudioCommentHandler().loadReplies(studioId, element, element.dataset.commentId, false, 0)
-  }),
-)
 async function uploadCoverImage(url, file) {
   const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
   const maxFileSize = 1048576 // 1MB
@@ -114,7 +72,7 @@ async function uploadCoverImage(url, file) {
 }
 
 // Report studio button
-const reportStudioBtn = document.getElementById('btn-report-studio')
+const reportStudioBtn = document.getElementById('top-app-bar__btn-report-studio')
 if (reportStudioBtn) {
   import('../Moderation/ReportDialog').then(({ showReportDialog }) => {
     reportStudioBtn.addEventListener('click', () => {
@@ -142,6 +100,82 @@ if (reportStudioBtn) {
   })
 }
 
+// Admin settings form submission via API
+document.getElementById('studio-settings__submit-button')?.addEventListener('click', () => {
+  submitStudioSettings()
+})
+
+async function submitStudioSettings() {
+  const modal = document.getElementById('studio-admin-settings-modal')
+  if (!modal) return
+
+  const studioId = modal.dataset.studioId
+  const baseUrl = document.getElementById('js-api-routing').dataset.baseUrl
+  const url = baseUrl + '/api/studio/' + studioId
+
+  const nameInput = document.querySelector('#studio-settings__studio-name__input')
+  const descTextarea = document.querySelector(
+    '#studio-settings textarea[name="studio_description"]',
+  )
+  const commentsSwitch = document.querySelector(
+    '#studio-setting__switch-enable-comments input[name="allow_comments"]',
+  )
+  const publicSwitch = document.querySelector(
+    '#studio-setting__switch-studio-privacy input[name="is_public"]',
+  )
+
+  const formData = new FormData()
+  if (nameInput) formData.append('name', nameInput.value)
+  if (descTextarea) formData.append('description', descTextarea.value)
+  if (commentsSwitch)
+    formData.append(
+      'enable_comments',
+      commentsSwitch.value === 'true' || commentsSwitch.value === '1' ? 'true' : 'false',
+    )
+  if (publicSwitch)
+    formData.append(
+      'is_public',
+      publicSwitch.value === 'true' || publicSwitch.value === '1' ? 'true' : 'false',
+    )
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: formData,
+      headers: {
+        Accept: 'application/json',
+        'Accept-Language': new AcceptLanguage().get(),
+      },
+    })
+
+    if (response.ok) {
+      showSnackbar(
+        '#share-snackbar',
+        modal.dataset.transSaveSuccess || 'Settings saved.',
+        SnackbarDuration.short,
+      )
+      window.location.reload()
+    } else if (response.status === 422) {
+      const text = await response.text()
+      showSnackbar('#share-snackbar', text, SnackbarDuration.error)
+    } else {
+      showSnackbar(
+        '#share-snackbar',
+        modal.dataset.transSaveError || 'Failed to save settings.',
+        SnackbarDuration.error,
+      )
+    }
+  } catch (error) {
+    console.error('Studio settings save failed:', error)
+    showSnackbar(
+      '#share-snackbar',
+      modal.dataset.transSaveError || 'Failed to save settings.',
+      SnackbarDuration.error,
+    )
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const bodyContentParent = document.getElementById('main_container_content')
   if (bodyContentParent) {
@@ -152,8 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
         pageContentContainerChild[i].style.removeProperty('padding-right')
         pageContentContainerChild[i].style.paddingTop = '1.5rem'
         pageContentContainerChild[i].style.paddingBottom = '1.5rem'
-        pageContentContainerChild[i].style.paddingLeft = '0' // Reset left padding to 0
-        pageContentContainerChild[i].style.paddingRight = '0' // Reset right padding to 0
+        pageContentContainerChild[i].style.paddingLeft = '0'
+        pageContentContainerChild[i].style.paddingRight = '0'
       }
     }
   }
@@ -162,92 +196,15 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('click', (event) => {
       event.preventDefault()
       const url = el.getAttribute('data-url')
-      makeAjaxRequest(url)
+      const method = el.getAttribute('data-method') || 'POST'
+      makeAjaxRequest(url, method)
     })
   })
-
-  // Join request switches are handled by the settings form submission.
-  // Toggle state is persisted when the admin clicks the "done" (submit) button.
 })
 
-document.addEventListener('DOMContentLoaded', function () {
-  const clickedProjectsAdminRemove = []
-  let AJAXdata = ''
-
-  document.querySelectorAll('.removeProjectsAdmin').forEach((el) => {
-    el.addEventListener('click', (event) => {
-      const projectId = event.target.id
-      handleImageClickRemove(projectId)
-    })
-
-    function handleImageClickRemove(projectId) {
-      const index = clickedProjectsAdminRemove.indexOf(projectId)
-      const image = document.getElementById(projectId)
-      if (index === -1) {
-        image.classList.add('red-background')
-        clickedProjectsAdminRemove.push(projectId)
-      } else {
-        image.classList.remove('red-background')
-        clickedProjectsAdminRemove.splice(index, 1)
-      }
-      AJAXdata =
-        clickedProjectsAdminRemove.length > 0 ? JSON.stringify(clickedProjectsAdminRemove) : ''
-    }
-  })
-  const ajaxRequestDeleteProject = document.getElementById('ajaxRequestDeleteProject')
-  if (ajaxRequestDeleteProject) {
-    ajaxRequestDeleteProject.addEventListener('click', function () {
-      if (AJAXdata !== '') {
-        Swal.fire({
-          title: document.getElementById('trans-are-you-sure')?.value || 'Are you sure?',
-          text:
-            document.getElementById('trans-no-way-of-return')?.value || 'This cannot be undone.',
-          icon: 'warning',
-          showCancelButton: true,
-          allowOutsideClick: false,
-          customClass: {
-            confirmButton: 'btn btn-primary',
-            cancelButton: 'btn btn-outline-primary',
-          },
-          buttonsStyling: false,
-          confirmButtonText: document.getElementById('trans-delete-it')?.value || 'Delete',
-          cancelButtonText: document.getElementById('trans-cancel')?.value || 'Cancel',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            const formData = new FormData()
-            formData.append('projects_remove', AJAXdata)
-            formData.append('studio_id', ajaxRequestDeleteProject.dataset.studioId)
-
-            const url = ajaxRequestDeleteProject.dataset.url
-            fetch(url, {
-              method: 'POST',
-              credentials: 'same-origin',
-              body: formData,
-            })
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error('Network response was not ok')
-                }
-                return response.json()
-              })
-              .then((data) => {
-                if (data.redirect_url) {
-                  window.location.href = data.redirect_url
-                }
-              })
-              .catch((error) => {
-                console.error('There was an error with the fetch operation:', error)
-              })
-          }
-        })
-      }
-    })
-  }
-})
-
-function makeAjaxRequest(url) {
+function makeAjaxRequest(url, method) {
   fetch(url, {
-    method: 'POST',
+    method: method,
     credentials: 'same-origin',
   })
     .then((response) => {
@@ -259,19 +216,6 @@ function makeAjaxRequest(url) {
         )
         console.error('Studio request failed:', response.status)
       } else {
-        return response.json()
-      }
-    })
-    .then((data) => {
-      if (!data) {
-        showSnackbar(
-          '#share-snackbar',
-          'Oops, that did not work. Please try again!',
-          SnackbarDuration.error,
-        )
-        console.error('Studio request returned empty data')
-      } else {
-        showSnackbar('#share-snackbar', data.message.toString())
         window.location.reload()
       }
     })

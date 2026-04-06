@@ -15,7 +15,7 @@ Feature: User gets notifications when their content is auto-hidden by community 
       | id | user     | type       | content_type | content_id | action      | message                                                                                        |
       | 1  | Catrobat | moderation | project      | 1          | auto_hidden | Your project "program 1" has been hidden due to community reports. You may appeal this decision. |
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "has been hidden due to community reports"
@@ -25,7 +25,7 @@ Feature: User gets notifications when their content is auto-hidden by community 
       | id | user     | type       | content_type | content_id | action      | message                                                                                        |
       | 1  | Catrobat | moderation | project      | 1          | auto_hidden | Your project "program 1" has been hidden due to community reports. You may appeal this decision. |
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then the element ".notification-broadcast-icon" should be visible
@@ -35,7 +35,7 @@ Feature: User gets notifications when their content is auto-hidden by community 
       | id | user     | type       | content_type | content_id | action      | message                                                                                        |
       | 1  | Catrobat | moderation | project      | 1          | auto_hidden | Your project "program 1" has been hidden due to community reports. You may appeal this decision. |
     When I log in as "Catrobat"
-    And I am on "/app/user_notifications"
+    And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I click "#catro-notification-1"

@@ -129,12 +129,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const followingUrl = baseUrl + '/api/user/' + userId + '/following'
 
     Promise.all([
-      fetch(followersUrl, { credentials: 'same-origin' }).then((r) => r.json()),
-      fetch(followingUrl, { credentials: 'same-origin' }).then((r) => r.json()),
+      fetch(followersUrl, { credentials: 'same-origin' }).then((r) => {
+        if (!r.ok) throw new Error('HTTP ' + r.status)
+        return r.json()
+      }),
+      fetch(followingUrl, { credentials: 'same-origin' }).then((r) => {
+        if (!r.ok) throw new Error('HTTP ' + r.status)
+        return r.json()
+      }),
     ])
       .then(([followersData, followingData]) => {
         updateTabCounts(followersData.total_followers, followersData.total_following)
-        renderList(followerCards, noFollowers, followersData.data || [], true, 'follower-item')
+        renderList(followerCards, noFollowers, followersData.data || [], false, 'follower-item')
         renderList(followingCards, noFollowing, followingData.data || [], false, 'following-item')
       })
       .catch((error) => {

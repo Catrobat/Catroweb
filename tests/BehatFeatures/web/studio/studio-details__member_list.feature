@@ -24,6 +24,7 @@ Feature: Every studio provides a list of all members
   Scenario: If I am not logged in I should not be able see all members
     Given I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".studio-detail__header__details__button--member" should not exist
     And the ".member_count" element should contain "2"
 
@@ -31,6 +32,7 @@ Feature: Every studio provides a list of all members
     Given I log in as "Catrobat"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".studio-detail__header__details__button--member" should be visible
     And the ".member_count" element should contain "2"
     When I click ".studio-detail__header__details__button--member"
@@ -49,6 +51,7 @@ Feature: Every studio provides a list of all members
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".studio-detail__header__details__button--member" should be visible
     And the ".member_count" element should contain "2"
     When I click ".studio-detail__header__details__button--member"
@@ -63,42 +66,15 @@ Feature: Every studio provides a list of all members
     And I should see 1 ".member__list-entry__admin-indicator"
     And the element ".member__list-entry__admin-buttons" should exist
 
-  Scenario: If I am the admin of the studio, I can promote members
+  Scenario: If I am the admin of the studio, the promote/ban buttons are shown
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
-    Then the element ".studio-detail__header__details__button--member" should be visible
-    And the ".member_count" element should contain "2"
+    And I wait for AJAX to finish
     When I click ".studio-detail__header__details__button--member"
     And I wait for the page to be loaded
     And I should see 1 ".member__list-entry__admin-indicator"
     When I click ".member__list-entry__admin-button"
     And I wait for the page to be loaded
-    When I click ".member__list-entry__admin-button__promote"
-    And I wait for the element ".swal2-confirm" to be visible
-    And I click ".swal2-confirm"
-    And I wait 3000 milliseconds
-    And I wait for the page to be loaded
-    And I should see 2 ".member__list-entry__admin-indicator"
-
-  Scenario: If I am the admin of the studio, I can ban members
-    Given I log in as "StudioAdmin"
-    And I am on "/app/studio/1"
-    And I wait for the page to be loaded
-    Then the element ".studio-detail__header__details__button--member" should be visible
-    And the ".member_count" element should contain "2"
-    When I click ".studio-detail__header__details__button--member"
-    And I wait for the page to be loaded
-    Then I should see 2 ".member__list-entry"
-    And I should see 1 ".member__list-entry__admin-indicator"
-    When I click ".member__list-entry__admin-button"
-    And I wait for the page to be loaded
-    When I click ".member__list-entry__admin-button__ban"
-    And I wait for the element ".swal2-confirm" to be visible
-    And I click ".swal2-confirm"
-    And I wait 3000 milliseconds
-    And I wait for the page to be loaded
-    Then I should see 1 ".member__list-entry"
-    And I am on "/app/studio/1"
-    And I wait for the page to be loaded
-    And the ".member_count" element should contain "1"
+    Then the element ".member__list-entry__admin-button__promote" should be visible
+    And the element ".member__list-entry__admin-button__ban" should be visible

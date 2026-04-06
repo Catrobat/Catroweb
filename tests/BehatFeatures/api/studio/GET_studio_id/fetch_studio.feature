@@ -7,9 +7,11 @@ Feature: Updating an existing studio
       | 1  | Non-member | 123456   |
       | 2  | Member     | 123456   |
     And there are studios:
-      | id | name           | description           | is_public |
-      | 1  | Public studio  | cool description      | true      |
-      | 2  | Private Studio | nothing to see here.. | false     |
+      | id | name            | description           | is_public | is_enabled | auto_hidden |
+      | 1  | Public studio   | cool description      | true      | true       | false       |
+      | 2  | Private Studio  | nothing to see here.. | false     | true       | false       |
+      | 3  | Disabled Studio | disabled one          | true      | false      | false       |
+      | 4  | Hidden Studio   | auto hidden one       | true      | true       | true        |
     And there are studio users:
       | id | user       | studio_id | role   |
       | 2  | Member     | 2         | member |
@@ -61,3 +63,21 @@ Feature: Updating an existing studio
         "projects_count": 0
       }
     """
+
+  Scenario: Disabled studio returns 404
+    Given I request "GET" "/api/studio/3"
+    Then the response status code should be "404"
+
+  Scenario: Auto-hidden studio returns 404
+    Given I request "GET" "/api/studio/4"
+    Then the response status code should be "404"
+
+  Scenario: Disabled studio returns 404 even for authenticated users
+    Given I use a valid JWT Bearer token for "Member"
+    And I request "GET" "/api/studio/3"
+    Then the response status code should be "404"
+
+  Scenario: Auto-hidden studio returns 404 even for authenticated users
+    Given I use a valid JWT Bearer token for "Member"
+    And I request "GET" "/api/studio/4"
+    Then the response status code should be "404"

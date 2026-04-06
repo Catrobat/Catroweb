@@ -152,7 +152,7 @@ class Controller extends AbstractController
    */
   private function exceptionToArray(?\Throwable $exception = null): ?array
   {
-    if (null === $exception) {
+    if (!$exception instanceof \Throwable) {
       return null;
     }
 
@@ -164,7 +164,7 @@ class Controller extends AbstractController
 
     return [
       'message' => $exception->getMessage(),
-      'type' => get_class($exception),
+      'type' => $exception::class,
       'previous' => $this->exceptionToArray($exception->getPrevious()),
     ];
   }
@@ -178,7 +178,7 @@ class Controller extends AbstractController
     $accept = preg_split('/[\s,]+/', $accept);
 
     // Remove q-factor weighting. E.g. "application/json;q=0.8" becomes "application/json"
-    $accept = array_map(function ($type) {return explode(';', $type)[0]; }, $accept);
+    $accept = array_map(fn ($type) => explode(';', (string) $type)[0], $accept);
 
     if (in_array('*/*', $accept, true) || in_array('application/*', $accept, true)) {
       // Prefer JSON if the client has no preference
@@ -212,7 +212,7 @@ class Controller extends AbstractController
    */
   public static function isContentTypeAllowed(Request $request, array $consumes = []): bool
   {
-    if (!empty($consumes) && '*/*' !== $consumes[0]) {
+    if ([] !== $consumes && '*/*' !== $consumes[0]) {
       $currentFormat = $request->getContentTypeFormat();
       foreach ($consumes as $mimeType) {
         // canonize mime type

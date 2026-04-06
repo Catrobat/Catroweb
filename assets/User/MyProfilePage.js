@@ -1,6 +1,7 @@
 /* global globalConfiguration */
 /* global myProfileConfiguration */
 
+import 'external-svg-loader'
 import '../Components/FullscreenListModal'
 import '../Components/TextField'
 import '../Components/TabBar'
@@ -10,8 +11,11 @@ import Swal from 'sweetalert2'
 import MessageDialogs from '../Components/MessageDialogs'
 import { ApiFetch, ApiDeleteFetch, ApiPutFetch } from '../Api/ApiHelper'
 import VerifyAccountHandler from './VerifyAccountHandler'
+import { escapeHtml } from '../Components/HtmlEscape'
+import { achievementBadgeHtml } from './AchievementBadge'
 
 require('./Profile.scss')
+require('./Achievements.scss')
 
 document.addEventListener('DOMContentLoaded', () => {
   if (
@@ -30,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const baseUrl = document.getElementById('own-projects').dataset.baseUrl
   new OwnProfile(baseUrl).initializeAll()
   new VerifyAccountHandler().init()
+  initProfileAchievements()
 
   // Appeal button for suspended accounts
   const appealBtn = document.getElementById('btn-appeal-user')
@@ -285,4 +290,52 @@ class OwnProfile {
         'rgba(220, 53, 69, 0.75)' // changes the color of the overlay
     })
   }
+}
+
+function initProfileAchievements() {
+  const container = document.querySelector('.js-profile-achievements')
+  if (!container) {
+    return
+  }
+
+  const baseUrl = container.dataset.baseUrl
+  const userId = container.dataset.userId
+  const title = container.dataset.transTitle
+
+  fetch(baseUrl + '/api/user/' + userId + '/achievements', {
+    headers: { Accept: 'application/json' },
+  })
+    .then((r) => {
+      if (!r.ok) throw new Error('HTTP ' + r.status)
+      return r.json()
+    })
+    .then((achievements) => {
+      if (!achievements || achievements.length === 0) {
+        return
+      }
+
+      const badgesHtml = achievements
+        .map(
+          (achievement) =>
+            '<div class="achievement__badge achievement__badge--profile">' +
+            achievementBadgeHtml(achievement, 'profile') +
+            '</div>',
+        )
+        .join('')
+
+      container.innerHTML =
+        '<hr>' +
+        '<h3>' +
+        escapeHtml(title) +
+        '</h3>' +
+        '<div class="horizontal-scrolling-wrapper">' +
+        badgesHtml +
+        '</div>' +
+        '<hr>'
+
+      container.classList.remove('d-none')
+    })
+    .catch((error) => {
+      console.error('Failed to load profile achievements:', error)
+    })
 }

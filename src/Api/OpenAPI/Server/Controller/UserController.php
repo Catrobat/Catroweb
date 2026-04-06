@@ -56,7 +56,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userDataExportGetAction(Request $request)
+  public function userDataExportGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -123,7 +123,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userDeleteAction(Request $request)
+  public function userDeleteAction(Request $request): Response
   {
     // Handle authentication
     // Authentication 'BearerAuth' required
@@ -178,7 +178,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userGetAction(Request $request)
+  public function userGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -245,7 +245,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userIdGetAction(Request $request, $id)
+  public function userIdGetAction(Request $request, $id): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -312,6 +312,97 @@ class UserController extends Controller
   }
 
   /**
+   * Operation userIdStudiosGet.
+   *
+   * Get studios a user has joined
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function userIdStudiosGetAction(Request $request, $id): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+    $limit = $request->query->get('limit', 20);
+    $cursor = $request->query->get('cursor');
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $limit = $this->deserialize($limit, 'int', 'string');
+      $cursor = $this->deserialize($cursor, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('int');
+    $asserts[] = new Assert\GreaterThanOrEqual(0);
+    $response = $this->validate($limit, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($cursor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->userIdStudiosGet($id, $limit, $cursor, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        404 => 'Not found',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation userPost.
    *
    * Register
@@ -320,7 +411,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userPostAction(Request $request)
+  public function userPostAction(Request $request): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -349,7 +440,7 @@ class UserController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $register_request = $this->deserialize($register_request, 'OpenAPI\Server\Model\RegisterRequest', $inputFormat);
+      $register_request = $this->deserialize($register_request, \OpenAPI\Server\Model\RegisterRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -358,7 +449,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\RegisterRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\RegisterRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($register_request, $asserts);
     if ($response instanceof Response) {
@@ -415,7 +506,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userPutAction(Request $request)
+  public function userPutAction(Request $request): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -447,7 +538,7 @@ class UserController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $update_user_request = $this->deserialize($update_user_request, 'OpenAPI\Server\Model\UpdateUserRequest', $inputFormat);
+      $update_user_request = $this->deserialize($update_user_request, \OpenAPI\Server\Model\UpdateUserRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -456,7 +547,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\UpdateUserRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\UpdateUserRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($update_user_request, $asserts);
     if ($response instanceof Response) {
@@ -514,7 +605,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function userResetPasswordPostAction(Request $request)
+  public function userResetPasswordPostAction(Request $request): Response
   {
     // Make sure that the client is providing something that we can consume
     $consumes = ['application/json'];
@@ -543,7 +634,7 @@ class UserController extends Controller
     // Deserialize the input values that needs it
     try {
       $inputFormat = $request->getMimeType($request->getContentTypeFormat());
-      $reset_password_request = $this->deserialize($reset_password_request, 'OpenAPI\Server\Model\ResetPasswordRequest', $inputFormat);
+      $reset_password_request = $this->deserialize($reset_password_request, \OpenAPI\Server\Model\ResetPasswordRequest::class, $inputFormat);
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
@@ -552,7 +643,7 @@ class UserController extends Controller
     // Validate the input values
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Type('OpenAPI\Server\Model\ResetPasswordRequest');
+    $asserts[] = new Assert\Type(\OpenAPI\Server\Model\ResetPasswordRequest::class);
     $asserts[] = new Assert\Valid();
     $response = $this->validate($reset_password_request, $asserts);
     if ($response instanceof Response) {
@@ -609,7 +700,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function usersGetAction(Request $request)
+  public function usersGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -710,7 +801,7 @@ class UserController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function usersSearchGetAction(Request $request)
+  public function usersSearchGetAction(Request $request): Response
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

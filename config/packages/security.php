@@ -157,6 +157,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/featured-banners/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/studio/featured/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/studio/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
@@ -349,6 +361,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         [
           'path' => '^/api/user/[a-zA-Z0-9_-]+/achievements/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
+          'path' => '^/api/user/[a-zA-Z0-9_-]+/studios/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
