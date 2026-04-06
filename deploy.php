@@ -138,11 +138,6 @@ task('dump:env', function () {
   run('bin/console dotenv:dump prod');
 });
 
-// Ensure shared resource directories are world-writable so www-data (PHP-FPM) can write images
-task('fix:resource_permissions', function () {
-  run('chmod -R 777 {{deploy_path}}/shared/public/resources/featured {{deploy_path}}/shared/public/resources/example');
-});
-
 // Smoke test: verify the health endpoint after deployment
 task('smoke_test', function () {
   $maxRetries = 5;
@@ -184,7 +179,6 @@ task('deploy', [
   'deploy:cache:clear',
   'database:migrate',
   'deploy:symlink',
-  'fix:resource_permissions',
   'restart:nginx',
   'restart:php-fpm',
   'update:flavors',
