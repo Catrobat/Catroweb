@@ -23,10 +23,6 @@ Feature: There is a page to create new studios and also see a list of all availa
       | User     | Studio           | Status   |
       | Catrobat | CatrobatStudio02 | declined |
 
-    And there are feature flags:
-      | name                        | value |
-      | Sidebar-Studio-Link-Feature | true  |
-
   Scenario: A Link in the sidebar is redirecting me to this overview page
     Given I am on the homepage
     When I click "#btn-studio"

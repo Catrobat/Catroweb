@@ -23,7 +23,7 @@ final class FeatureFlagManagerTest extends TestCase
     $repository = $this->createMock(EntityRepository::class);
     $entityManager = $this->createMock(EntityManagerInterface::class);
 
-    $existingFlag = new FeatureFlag('Sidebar-Studio-Link-Feature', false);
+    $existingFlag = new FeatureFlag('GET_projects_elastica', false);
     $staleFlag = new FeatureFlag('Deprecated-Flag', true);
 
     $entityManager->method('isOpen')->willReturn(true);
@@ -63,7 +63,7 @@ final class FeatureFlagManagerTest extends TestCase
       $entityManager,
       [
         'Test-Flag' => false,
-        'Sidebar-Studio-Link-Feature' => false,
+        'GET_projects_elastica' => false,
       ],
     );
 

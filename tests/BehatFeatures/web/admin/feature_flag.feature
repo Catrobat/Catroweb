@@ -27,10 +27,10 @@ Scenario: Overriding test feature with header false:
     And I wait for the page to be loaded
     Then I should see "Test feature is disabled!"
 
-Scenario: List Studio Link Feature Flags:
+Scenario: List Feature Flags:
    Given I log in as "Admin" with the password "123456"
    And I am on "/admin/system/feature-flag/list"
-   Then I should see "Sidebar-Studio-Link-Feature"
+   Then I should see "GET_projects_elastica"
 
 
 
