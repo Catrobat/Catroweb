@@ -34,29 +34,28 @@ export class MaintenanceHandler {
     el.id = 'viewID_' + item.id
 
     const icon = escapeHtml(item.icon || 'info')
-    const code = escapeHtml(item.code || '')
     const featureName = item.feature_name ? escapeHtml(item.feature_name) : ''
     const startDate = item.maintenance_start || ''
     const endDate = item.maintenance_end || ''
     const additionalInfo = item.additional_info || ''
     const closeUrl = this.closeUrlTemplate.replace('__ID__', item.id)
 
-    let message = code
+    let message = escapeHtml(item.message || '')
     if (featureName) {
       message = message.replace(
-        '%featureName%',
-        '<span class="maintenance-feature-name bold-text">' + escapeHtml(featureName) + '</span>',
+        'featureName',
+        '<span class="maintenance-feature-name bold-text">' + featureName + '</span>',
       )
     }
     if (startDate) {
       message = message.replace(
-        '%maintenanceStart%',
+        'maintenanceStart',
         '<span class="maintenanceStart-start-date bold-text">' + escapeHtml(startDate) + '</span>',
       )
     }
     if (endDate) {
       message = message.replace(
-        '%maintenanceEnd%',
+        'maintenanceEnd',
         '<span class="maintenanceStart-end-date bold-text">' + escapeHtml(endDate) + '</span>',
       )
     }
@@ -66,12 +65,12 @@ export class MaintenanceHandler {
     if (additionalInfo) {
       expandHtml =
         '<div class="expand-button" data-id="' +
-        escapeHtml(code) +
+        item.id +
         '">' +
         '<i class="material-icons">arrow_drop_down</i></div>'
       additionalHtml =
         '<div class="additional-info-section" id="additional-info-' +
-        escapeHtml(code) +
+        item.id +
         '" style="display:none;">' +
         '<span>Additional information: ' +
         escapeHtml(additionalInfo) +

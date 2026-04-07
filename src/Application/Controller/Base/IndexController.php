@@ -12,11 +12,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class IndexController extends AbstractController
 {
-  public function __construct(private readonly EntityManagerInterface $entityManager)
-  {
+  public function __construct(
+    private readonly EntityManagerInterface $entityManager,
+    private readonly TranslatorInterface $translator,
+  ) {
   }
 
   #[Route(path: '/', name: 'index', methods: ['GET'])]
@@ -41,7 +44,7 @@ class IndexController extends AbstractController
         $result[] = [
           'id' => $info->getId(),
           'icon' => $info->getIcon(),
-          'code' => $info->getLtmCode(),
+          'message' => $this->translator->trans($info->getLtmCode(), [], 'catroweb'),
           'feature_name' => $info->getInternalTitle(),
           'maintenance_start' => $info->getLtmMaintenanceStart()?->format('Y-m-d'),
           'maintenance_end' => $info->getLtmMaintenanceEnd()?->format('Y-m-d'),
