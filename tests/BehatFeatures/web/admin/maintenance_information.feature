@@ -25,7 +25,8 @@ Feature: Maintenance information
   Scenario: There should be maintenance information
     Given I am on "/app/"
     And I wait for the page to be loaded
-    Then the element "#viewID_1" should be visible
+    And I wait for AJAX to finish
+    Then I wait for the element "#viewID_1" to be visible
     And I should see "test"
     And I should not see "test2"
     When I click ".expand-button"
@@ -35,7 +36,8 @@ Feature: Maintenance information
   Scenario: There should be no maintenance information if closed
     Given I am on "/app/"
     And I wait for the page to be loaded
-    Then the element "#viewID_1" should be visible
+    And I wait for AJAX to finish
+    Then I wait for the element "#viewID_1" to be visible
     When I click ".close-button"
     Then the element "#viewID_1" should not be visible
 

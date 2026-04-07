@@ -6,11 +6,10 @@
 
 {% block body %}
 
-  <div id="maintenance-container">
-    {% for maintenanceMessage in maintenanceInformation %}
-        {{ maintenanceMessage|raw }}
-    {% endfor %}
-  </div>
+  <div id="maintenance-container"
+       data-maintenance-url="{{ path('maintenance_list') }}"
+       data-close-url-template="{{ path('close_maintenance_view', {viewId: '__ID__'}) }}"
+  ></div>
 
   {% if not app.user and not isWebview() %}
     {{ include('Index/WelcomeSection.html.twig') }}
