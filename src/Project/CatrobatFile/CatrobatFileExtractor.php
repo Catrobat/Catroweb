@@ -75,7 +75,29 @@ class CatrobatFileExtractor
     $zip->extractTo($full_extract_dir);
     $zip->close();
 
+    // Some Catrobat apps wrap project files in a subdirectory. If code.xml is not at the
+    // root but exists inside a single subdirectory, promote that subdirectory to root.
+    if (!file_exists($full_extract_dir.'code.xml')) {
+      $entries = array_diff((array) scandir($full_extract_dir), ['.', '..']);
+      if (1 === count($entries)) {
+        $single_entry = reset($entries);
+        $nested_dir = $full_extract_dir.$single_entry.'/';
+        if (is_dir($nested_dir) && file_exists($nested_dir.'code.xml')) {
+          $this->promoteDirectoryContents($nested_dir, $full_extract_dir);
+        }
+      }
+    }
+
     return new ExtractedCatrobatFile($full_extract_dir, $full_extract_path, $temp_path);
+  }
+
+  private function promoteDirectoryContents(string $nested_dir, string $target_dir): void
+  {
+    $items = array_diff((array) scandir($nested_dir), ['.', '..']);
+    foreach ($items as $item) {
+      rename($nested_dir.$item, $target_dir.$item);
+    }
+    rmdir($nested_dir);
   }
 
   public function getExtractDir(): string

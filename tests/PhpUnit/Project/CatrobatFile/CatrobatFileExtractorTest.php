@@ -50,4 +50,26 @@ class CatrobatFileExtractorTest extends TestCase
     $this->expectException(InvalidCatrobatFileException::class);
     $this->catrobat_file_extractor->extract($invalid_catrobat_file);
   }
+
+  /**
+   * @throws \Exception
+   */
+  public function testExtractsFileWithNestedDirectory(): void
+  {
+    $nested_catrobat_file = $this->createNestedCatrobatFile();
+    $extracted = $this->catrobat_file_extractor->extract(new File($nested_catrobat_file));
+    self::assertFileExists($extracted->getPath().'code.xml');
+    unlink($nested_catrobat_file);
+  }
+
+  private function createNestedCatrobatFile(): string
+  {
+    $tmp_file = (string) tempnam(sys_get_temp_dir(), 'catrobat_test_').'.catrobat';
+    $zip = new \ZipArchive();
+    $zip->open($tmp_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+    $zip->addFromString('ProjectName/code.xml', '<program><header><programName>Test</programName><catrobatLanguageVersion>0.99</catrobatLanguageVersion><description></description><notesAndCredits></notesAndCredits><applicationVersion>1.0</applicationVersion><url></url><remixOf></remixOf><tags></tags></header><objectList></objectList></program>');
+    $zip->close();
+
+    return $tmp_file;
+  }
 }
