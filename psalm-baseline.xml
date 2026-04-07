@@ -32,11 +32,6 @@
       <code><![CDATA[getId]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/Admin/System/CronJobs/CronJobsAdminController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$cron_job]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/Admin/System/DB_Updater/Controller/AchievementsAdminController.php">
     <PossiblyNullArgument>
       <code><![CDATA[$id]]></code>
