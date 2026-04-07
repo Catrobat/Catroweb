@@ -92,7 +92,8 @@ function loadFileContent(file) {
   document.getElementById('inner-log-container').innerHTML = ''
   document.getElementById('currentFileName').textContent = file
 
-  fetch(`${window.location.href}?file=${file}&count=1000`)
+  const baseUrl = window.location.origin + window.location.pathname
+  fetch(`${baseUrl}?file=${encodeURIComponent(file)}&count=1000`)
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok')
