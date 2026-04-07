@@ -72,7 +72,11 @@ class CatrobatFileExtractor
       }
     }
 
-    $zip->extractTo($full_extract_dir);
+    if (!$zip->extractTo($full_extract_dir)) {
+      $zip->close();
+      throw new InvalidCatrobatFileException('errors.file.invalid', 505, 'Failed to extract archive');
+    }
+
     $zip->close();
 
     // Some Catrobat apps wrap project files in a subdirectory. If code.xml is not at the
