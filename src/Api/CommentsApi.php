@@ -390,6 +390,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $response->setIsDeleted((bool) $comment_data['is_deleted']);
     $response->setIsReported((bool) $comment_data['is_reported']);
     $response->setUserApproved((bool) ($comment_data['user_approved'] ?? false));
+    // Keep API compatibility for tests/clients still expecting the rendered field.
+    $response->setRendered('');
 
     $user_info = new CommentUserInfo();
     $user_info->setId((string) $comment_data['user_id']);
