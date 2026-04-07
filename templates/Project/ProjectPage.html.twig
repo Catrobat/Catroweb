@@ -189,6 +189,15 @@
 
   {{ include('Project/Tags.html.twig') }}
 
+  {% if isFeatureFlagEnabled('sign-apk') %}
+     <div class="row d-lg-none">
+      <div class="col-12 mt-3 mb-3">
+        {{ include('Project/SignAppButton.html.twig') }}
+      </div>
+    </div>
+    {{ include('Project/SignAppModal.html.twig') }}
+  {% endif %}
+
   {{ include('Project/Details.html.twig') }}
 
   {{ include('Project/RemixGraphInline.html.twig') }}
