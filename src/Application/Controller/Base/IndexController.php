@@ -44,7 +44,7 @@ class IndexController extends AbstractController
         $result[] = [
           'id' => $info->getId(),
           'icon' => $info->getIcon(),
-          'message' => $this->translator->trans($info->getLtmCode(), [], 'catroweb'),
+          'message' => $this->translator->trans((string) $info->getLtmCode(), [], 'catroweb'),
           'feature_name' => $info->getInternalTitle(),
           'maintenance_start' => $info->getLtmMaintenanceStart()?->format('Y-m-d'),
           'maintenance_end' => $info->getLtmMaintenanceEnd()?->format('Y-m-d'),
