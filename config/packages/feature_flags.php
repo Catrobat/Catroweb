@@ -10,9 +10,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     'feature_flags',
     [
       'Test-Flag' => false,
-      'Sidebar-Studio-Link-Feature' => false,
       'GET_projects_elastica' => false,
-      'sign-apk' => false, // not allowed by Google
     ]
   );
 };
