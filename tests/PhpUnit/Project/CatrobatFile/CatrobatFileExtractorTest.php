@@ -64,7 +64,7 @@ class CatrobatFileExtractorTest extends TestCase
 
   private function createNestedCatrobatFile(): string
   {
-    $tmp_file = tempnam(sys_get_temp_dir(), 'catrobat_test_').'.catrobat';
+    $tmp_file = (string) tempnam(sys_get_temp_dir(), 'catrobat_test_').'.catrobat';
     $zip = new \ZipArchive();
     $zip->open($tmp_file, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
     $zip->addFromString('ProjectName/code.xml', '<program><header><programName>Test</programName><catrobatLanguageVersion>0.99</catrobatLanguageVersion><description></description><notesAndCredits></notesAndCredits><applicationVersion>1.0</applicationVersion><url></url><remixOf></remixOf><tags></tags></header><objectList></objectList></program>');
