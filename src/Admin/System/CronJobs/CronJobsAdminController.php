@@ -47,8 +47,10 @@ class CronJobsAdminController extends CRUDController
     }
 
     $cron_job = $this->cron_job_repository->findByName(strval($request->query->get('id')));
-    if (is_null($cron_job)) {
+    if (null === $cron_job) {
       $this->addFlash('sonata_flash_error', 'Resetting cron job failed');
+
+      return new RedirectResponse($this->admin->generateUrl('list'));
     }
 
     $this->entity_manager->remove($cron_job);
