@@ -605,6 +605,7 @@ table td:nth-child(1) {
     color: light-dark(#4a5568, #cbd5e0);
     line-height: 1.5;
     font-size: 0.95rem;
+    overflow-wrap: anywhere;
 
     p {
       margin-bottom: 0;
