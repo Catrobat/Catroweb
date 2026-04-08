@@ -10,7 +10,7 @@ Feature: All uploaded programs have to be validated.
     And I should get the json object:
     """
       {
-        "error": "invalid code xml"
+        "error": "unknown error: project_xml_not_found!"
       }
     """
 
