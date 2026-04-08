@@ -57,7 +57,6 @@ class StudioApiLoader extends AbstractApiLoader
       ->from(Studio::class, 's')
       ->where('s.auto_hidden = false')
       ->andWhere('s.is_enabled = true')
-      ->andWhere('s.is_public = true')
       ->orderBy('s.created_on', 'DESC')
       ->addOrderBy('s.id', 'DESC')
       ->setMaxResults($limit + 1)
