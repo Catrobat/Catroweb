@@ -6,6 +6,7 @@ namespace App\Project\CatrobatFile;
 
 use App\Storage\FileHelper;
 use App\Utils\TimeUtils;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -21,6 +22,7 @@ class CatrobatFileExtractor
     string $extract_dir,
     #[Autowire('%catrobat.file.extract.path%')]
     private readonly string $extract_path,
+    private readonly LoggerInterface $logger,
   ) {
     FileHelper::verifyDirectoryExists($extract_dir);
     $this->extract_dir = $extract_dir;
@@ -36,9 +38,17 @@ class CatrobatFileExtractor
     $full_extract_path = $this->extract_path.$temp_path.'/';
 
     $zip = new \ZipArchive();
-    $res = $zip->open($file->getPathname());
+    $pathname = $file->getPathname();
+    $res = $zip->open($pathname);
 
     if (true !== $res) {
+      $this->logger->error('ZipArchive::open() failed', [
+        'path' => $pathname,
+        'error_code' => $res,
+        'file_exists' => file_exists($pathname),
+        'file_size' => file_exists($pathname) ? filesize($pathname) : null,
+        'is_readable' => is_readable($pathname),
+      ]);
       throw new InvalidCatrobatFileException('errors.file.invalid', 505);
     }
 
