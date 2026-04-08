@@ -162,6 +162,7 @@ services:
       - '3310:3310'
     volumes:
       - clamav-data:/var/lib/clamav
+      - ./clamav/clamd.conf:/etc/clamav/clamd.conf:ro
     restart: unless-stopped
 
   # --- NSFW content safety scanning:
