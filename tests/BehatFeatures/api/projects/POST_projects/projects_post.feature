@@ -77,7 +77,7 @@ Feature: Uploading a project
     And I should get the json object:
     """
       {
-        "error": "Error while creating project entity. Try uploading again!"
+        "error": "invalid file"
       }
     """
 
@@ -93,7 +93,7 @@ Feature: Uploading a project
     And I should get the json object:
     """
       {
-        "error": "Fehler während dem Erstellen der Program Entity. Bitte versuche es erneut!"
+        "error": "Ungültige Datei"
       }
     """
 
