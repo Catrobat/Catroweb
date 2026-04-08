@@ -10,9 +10,28 @@
   cursor: pointer;
 }
 
+.studio-file-hint {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: $text-muted;
+}
+
 #studio-file-name {
-  margin-top: 20px;
+  margin-top: 12px;
   font-style: italic;
+}
+
+.studio-file-compressed {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--primary);
+
+  .material-icons {
+    font-size: 1rem;
+  }
 }
 
 .error-text {
