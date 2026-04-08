@@ -63,10 +63,8 @@
       <span>{{ 'studio.cover_image'|trans({}, 'catroweb') }}</span>
       <input type="file" id="studio-file-input" name="studio-file-input" accept="image/jpeg,image/png,image/gif,image/webp">
     </button>
-    <div id="studio-file-hint" class="studio-file-hint">
-      {{ 'studio.cover_image_hint'|trans({}, 'catroweb') }}
-    </div>
-    <div id="studio-file-name">{{ 'studio.cover_image_empty'|trans({}, 'catroweb') }}</div>
+    <div class="form-text mt-1">{{ 'studio.cover_image_hint'|trans({}, 'catroweb') }}</div>
+    <div id="studio-file-name" class="mt-2">{{ 'studio.cover_image_empty'|trans({}, 'catroweb') }}</div>
     <div id="studio-file-compressed" class="studio-file-compressed" style="display: none;">
       <span class="material-icons">info_outline</span>
       {{ 'studio.cover_image_compressed'|trans({}, 'catroweb') }}
