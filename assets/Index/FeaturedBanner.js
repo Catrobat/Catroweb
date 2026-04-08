@@ -20,6 +20,7 @@ export class FeaturedBanner {
         return r.json()
       })
       .then((items) => {
+        this.removeSkeleton()
         if (!Array.isArray(items) || items.length === 0) {
           this.container.style.display = 'none'
           return
@@ -41,6 +42,7 @@ export class FeaturedBanner {
       })
       .catch((error) => {
         console.error('Failed to load featured banners', error)
+        this.removeSkeleton()
         this.container.style.display = 'none'
       })
   }
@@ -127,5 +129,12 @@ export class FeaturedBanner {
 
     this.container.appendChild(carouselDiv)
     new Carousel(carouselDiv)
+  }
+
+  removeSkeleton() {
+    const skeleton = this.container.querySelector('.featured-slider__skeleton')
+    if (skeleton) {
+      skeleton.remove()
+    }
   }
 }
