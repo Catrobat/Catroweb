@@ -2,7 +2,7 @@ import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { redirect } from '../Components/RedirectButton'
-import { ApiFetch } from '../Api/ApiHelper'
+import { ApiFetch, ApiDeleteFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
 
 export const Project = function (
@@ -831,6 +831,43 @@ document.addEventListener('DOMContentLoaded', function () {
           '#share-snackbar',
           newValue ? visItem.dataset.transSuccessPrivate : visItem.dataset.transSuccessPublic,
         )
+      })
+    })
+  }
+
+  const deleteItem = document.getElementById('top-app-bar__btn-delete-project')
+  if (deleteItem) {
+    deleteItem.addEventListener('click', function () {
+      const projectId = deleteItem.dataset.projectId
+      const baseUrl = document.querySelector('#js-api-routing').dataset.baseUrl
+
+      Swal.fire({
+        title: deleteItem.dataset.transConfirmTitle,
+        html: deleteItem.dataset.transConfirmText,
+        icon: 'warning',
+        showCancelButton: true,
+        allowOutsideClick: false,
+        customClass: {
+          confirmButton: 'btn btn-danger',
+          cancelButton: 'btn btn-outline-primary',
+        },
+        buttonsStyling: false,
+        confirmButtonText: deleteItem.dataset.transConfirmYes,
+        cancelButtonText: deleteItem.dataset.transCancel,
+      }).then((result) => {
+        if (!result.value) return
+
+        new ApiDeleteFetch(
+          baseUrl + '/api/project/' + projectId,
+          'Delete Project',
+          deleteItem.dataset.transError,
+          function () {
+            window.location.href = baseUrl + '/'
+          },
+          {
+            404: deleteItem.dataset.transNotFound,
+          },
+        ).run()
       })
     })
   }
