@@ -12,6 +12,9 @@ use App\DB\Entity\User\User;
 use OpenAPI\Server\Api\StudioApiInterface;
 use OpenAPI\Server\Model\CreateStudioErrorResponse;
 use OpenAPI\Server\Model\StudioAddProjectRequest;
+use OpenAPI\Server\Model\StudioBatchAddProjectsRequest;
+use OpenAPI\Server\Model\StudioBatchAddProjectsResponse;
+use OpenAPI\Server\Model\StudioBatchAddProjectsResponseFailedInner;
 use OpenAPI\Server\Model\StudioCommentCreateRequest;
 use OpenAPI\Server\Model\UpdateStudioErrorResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -349,6 +352,56 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     }
 
     $responseCode = Response::HTTP_CREATED;
+  }
+
+  #[\Override]
+  public function studioIdBatchAddProjectsPost(string $id, StudioBatchAddProjectsRequest $studio_batch_add_projects_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
+    if (!$studioUser instanceof StudioUser) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    $project_ids = $studio_batch_add_projects_request->getProjectIds();
+    if (null === $project_ids || [] === $project_ids) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $result = $this->facade->getProcessor()->addProjects($user, $studio, $project_ids);
+
+    $response = new StudioBatchAddProjectsResponse();
+    $response->setAdded($result['added']);
+
+    $failed_items = [];
+    foreach ($result['failed'] as $failure) {
+      $item = new StudioBatchAddProjectsResponseFailedInner();
+      $item->setProjectId($failure['project_id']);
+      $item->setReason($failure['reason']);
+      $failed_items[] = $item;
+    }
+    $response->setFailed($failed_items);
+
+    $responseCode = Response::HTTP_OK;
+
+    return $response;
   }
 
   #[\Override]

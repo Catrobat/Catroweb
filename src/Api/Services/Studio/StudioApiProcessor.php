@@ -84,6 +84,28 @@ class StudioApiProcessor extends AbstractApiProcessor
   }
 
   /**
+   * @param string[] $project_ids
+   *
+   * @return array{added: string[], failed: array<array{project_id: string, reason: string}>}
+   */
+  public function addProjects(User $user, Studio $studio, array $project_ids): array
+  {
+    $added = [];
+    $failed = [];
+
+    foreach ($project_ids as $project_id) {
+      $result = $this->addProject($user, $studio, $project_id);
+      if ('ok' === $result) {
+        $added[] = $project_id;
+      } else {
+        $failed[] = ['project_id' => $project_id, 'reason' => $result];
+      }
+    }
+
+    return ['added' => $added, 'failed' => $failed];
+  }
+
+  /**
    * @return string 'ok'|'not_found'|'conflict'
    */
   public function addProject(User $user, Studio $studio, string $project_id): string

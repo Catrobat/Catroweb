@@ -2435,6 +2435,39 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
+  '/studio/{id}/batch-add-projects':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Add multiple projects to a studio in a single request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudioBatchAddProjectsRequest'
+      responses:
+        '200':
+          description: Batch result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioBatchAddProjectsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
   '/studio/{id}/projects/{project_id}':
     parameters:
       - $ref: '#/components/parameters/Uuid'
@@ -4836,6 +4869,38 @@ components:
           type: string
           description: The project UUID to add
 
+    StudioBatchAddProjectsRequest:
+      type: object
+      required:
+        - project_ids
+      properties:
+        project_ids:
+          type: array
+          items:
+            type: string
+          description: List of project UUIDs to add
+          minItems: 1
+          maxItems: 50
+
+    StudioBatchAddProjectsResponse:
+      type: object
+      properties:
+        added:
+          type: array
+          items:
+            type: string
+          description: Project IDs that were successfully added
+        failed:
+          type: array
+          items:
+            type: object
+            properties:
+              project_id:
+                type: string
+              reason:
+                type: string
+                enum: [not_found, conflict]
+          description: Project IDs that failed with reasons
     StudioCommentResponse:
       type: object
       properties:
