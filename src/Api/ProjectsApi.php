@@ -11,6 +11,7 @@ use App\Api\Services\Reactions\ReactionsApiProcessor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramDownloads;
 use App\Project\AddProjectRequest;
+use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Event\ProjectDownloadEvent;
@@ -227,6 +228,16 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
           $user, $file, $this->facade->getLoader()->getClientIp(), $accept_language, $flavor
         )
       );
+    } catch (InvalidCatrobatFileException $e) {
+      $this->facade->getLogger()->warning('Project upload rejected: '.$e->getMessage(), [
+        'debug' => $e->getDebugMessage(),
+      ]);
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $error_response = $this->facade->getResponseManager()->createUploadValidationErrorResponse($e->getMessage(), $accept_language);
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $error_response;
     } catch (\Exception $e) {
       $this->facade->getLogger()->critical('Project Upload broken: '.$e->getMessage().$e->getTraceAsString());
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
