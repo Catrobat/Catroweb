@@ -66,11 +66,6 @@ class StudioController extends AbstractController
       }
     }
 
-    // Block anonymous users from viewing private studios
-    if (!$is_public && null === $user) {
-      throw $this->createNotFoundException();
-    }
-
     return $this->render('Studio/DetailsPage.html.twig', [
       'studio' => $studio,
       'user_role' => $user_role,

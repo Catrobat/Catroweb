@@ -66,14 +66,6 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
       return null;
     }
 
-    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
-    if (!$studio->isIsPublic() && !$studioUser instanceof StudioUser) {
-      $responseCode = Response::HTTP_FORBIDDEN;
-
-      return null;
-    }
-
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createStudioResponse($studio);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);

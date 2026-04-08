@@ -107,7 +107,7 @@ final class StudioApiTest extends TestCase
   }
 
   #[Group('unit')]
-  public function testStudioIdGetPrivateNonMemberReturnsForbidden(): void
+  public function testStudioIdGetPrivateNonMemberReturnsOk(): void
   {
     $response_code = 200;
     $response_headers = [];
@@ -120,8 +120,8 @@ final class StudioApiTest extends TestCase
 
     $result = $this->api->studioIdGet('some-id', 'en', $response_code, $response_headers);
 
-    $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
-    $this->assertNull($result);
+    $this->assertSame(Response::HTTP_OK, $response_code);
+    $this->assertNotNull($result);
   }
 
   #[Group('unit')]
