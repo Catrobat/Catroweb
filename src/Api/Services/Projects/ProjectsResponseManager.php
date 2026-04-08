@@ -355,6 +355,13 @@ class ProjectsResponseManager extends AbstractResponseManager
     ]);
   }
 
+  public function createUploadValidationErrorResponse(string $translation_key, string $locale): UploadErrorResponse
+  {
+    return new UploadErrorResponse([
+      'error' => $this->__($translation_key, [], $locale),
+    ]);
+  }
+
   public function createProjectsExtensionsResponse(array $extensions, string $locale): array
   {
     $response = [];

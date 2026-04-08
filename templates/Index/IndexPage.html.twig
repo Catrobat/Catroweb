@@ -22,7 +22,11 @@
        data-is-guest="{{ app.user ? '0' : '1' }}"
        data-is-webview="{{ isWebview() ? '1' : '0' }}"
        data-trans-featured="{{ 'project.featured'|trans({}, 'catroweb') }}"
-  ></div>
+  >
+    <div class="featured-slider__skeleton featured-banner">
+      <div style="aspect-ratio: 1024/400; background: light-dark(#f0f0f0, #1a1a2e);"></div>
+    </div>
+  </div>
 
   <div id="home-projects">
     {# array values: [api project_type, translation, property to show] #}
@@ -39,7 +43,6 @@
         ['example', 'example', 'author'],
         ['trending', 'trending', 'downloads'],
         ['_studios_', null, null],
-        ['scratch', 'scratchremixes', 'views'],
         ['popular', 'popular', 'author'],
       ] %}
     {% else %}
@@ -48,7 +51,6 @@
         ['trending', 'trending', 'downloads'],
         ['random', 'random', 'uploaded'],
         ['_studios_', null, null],
-        ['scratch', 'scratchremixes', 'views'],
         ['popular', 'popular', 'author'],
       ] %}
     {% endif %}

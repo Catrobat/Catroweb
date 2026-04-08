@@ -7,6 +7,7 @@ namespace App\System\Commands\Helpers;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Remix\RemixUrlIndicator;
+use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\File\File;
 
 class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
@@ -15,7 +16,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
 
   public function __construct(private readonly mixed $remix_graph_mapping, mixed $extract_dir, mixed $extract_path)
   {
-    parent::__construct($extract_dir, $extract_path);
+    parent::__construct($extract_dir, $extract_path, new NullLogger());
   }
 
   /**

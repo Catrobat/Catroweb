@@ -9,6 +9,7 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
@@ -22,13 +23,13 @@ class CatrobatFileExtractorTest extends TestCase
   #[\Override]
   protected function setUp(): void
   {
-    $this->catrobat_file_extractor = new CatrobatFileExtractor(BootstrapExtension::$CACHE_DIR, '/webpath');
+    $this->catrobat_file_extractor = new CatrobatFileExtractor(BootstrapExtension::$CACHE_DIR, '/webpath', new NullLogger());
   }
 
   public function testThrowsAnExceptionIfGivenAnValidExtractionDirectory(): void
   {
     $this->expectException(\Exception::class);
-    $this->catrobat_file_extractor = new CatrobatFileExtractor(__DIR__.'invalid_directory/', '');
+    $this->catrobat_file_extractor = new CatrobatFileExtractor(__DIR__.'invalid_directory/', '', new NullLogger());
   }
 
   /**

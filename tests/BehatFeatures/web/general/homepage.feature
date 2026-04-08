@@ -49,16 +49,6 @@ Feature: Pocketcode homepage
       | 70058680          | 6                 |
       | 70058680          | 7                 |
 
-  Scenario: Scratch remixes project should be visible:
-    Given I am on homepage
-    And I wait for the page to be loaded
-    And I wait for AJAX to finish
-    Then I should see the featured slider
-    Then the element "#home-projects__scratch" should exist
-    And the "#home-projects__scratch" element should contain "project 6"
-    And the "#home-projects__scratch" element should contain "project 7"
-    And the "#home-projects__scratch" element should not contain "project 1"
-
   Scenario: Viewing the homepage at website root
     Given I am on homepage
     And I wait for the page to be loaded
@@ -66,7 +56,6 @@ Feature: Pocketcode homepage
     Then I should see the featured slider
     Then one of the ".project-list__title" elements should contain "Examples"
     Then one of the ".project-list__title" elements should contain "Trending projects"
-    Then one of the ".project-list__title" elements should contain "Scratch remixes"
     Then one of the ".project-list__title" elements should contain "Random projects"
     Then one of the ".project-list__title" elements should contain "Popular projects"
 
