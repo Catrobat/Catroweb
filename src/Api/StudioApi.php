@@ -661,6 +661,111 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     );
   }
 
+  #[\Override]
+  public function studioIdJoinRequestsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $context = $this->loadAdminContext($id, $responseCode);
+    if (null === $context) {
+      return null;
+    }
+
+    $limit = $this->normalizeLimit($limit);
+    $cursor_id = $this->decodeIdCursor($cursor);
+    if (null === $cursor_id && null !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $page = $this->facade->getLoader()->loadPendingJoinRequestsPage($context['studio'], $limit, $cursor_id);
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->facade->getResponseManager()->createJoinRequestListResponse(
+      $page['join_requests'],
+      $page['has_more'],
+    );
+  }
+
+  #[\Override]
+  public function studioIdJoinRequestsRequestIdAcceptPost(string $id, int $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $context = $this->loadAdminContext($id, $responseCode);
+    if (null === $context) {
+      return;
+    }
+
+    $joinRequest = $this->facade->getLoader()->loadJoinRequestById($request_id);
+    if (null === $joinRequest || $joinRequest->getStudio()?->getId() !== $context['studio']->getId()) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return;
+    }
+
+    if ('pending' !== $joinRequest->getStatus()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return;
+    }
+
+    $this->facade->getProcessor()->acceptJoinRequest($context['user'], $context['studio'], $joinRequest);
+    $responseCode = Response::HTTP_OK;
+  }
+
+  #[\Override]
+  public function studioIdJoinRequestsRequestIdDeclinePost(string $id, int $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $context = $this->loadAdminContext($id, $responseCode);
+    if (null === $context) {
+      return;
+    }
+
+    $joinRequest = $this->facade->getLoader()->loadJoinRequestById($request_id);
+    if (null === $joinRequest || $joinRequest->getStudio()?->getId() !== $context['studio']->getId()) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return;
+    }
+
+    if ('pending' !== $joinRequest->getStatus()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return;
+    }
+
+    $this->facade->getProcessor()->declineJoinRequest($joinRequest);
+    $responseCode = Response::HTTP_OK;
+  }
+
+  /**
+   * @return array{user: User, studio: Studio, studio_user: StudioUser}|null
+   */
+  private function loadAdminContext(string $studio_id, int &$responseCode): ?array
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $studio = $this->facade->getLoader()->loadVisibleStudio($studio_id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
+    if (!$studioUser instanceof StudioUser || !$studioUser->isAdmin()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    return ['user' => $user, 'studio' => $studio, 'studio_user' => $studioUser];
+  }
+
   /**
    * @return array{studio: Studio, cursor_id: ?int}|null null if response was set (error)
    */

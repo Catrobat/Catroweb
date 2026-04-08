@@ -2672,6 +2672,89 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  '/studio/{id}/join-requests':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: List pending join requests for a studio (admin only)
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioJoinRequestListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/join-requests/{request_id}/accept':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Accept a pending join request (admin only)
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/studio/{id}/join-requests/{request_id}/decline':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Decline a pending join request (admin only)
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
   ##############################################
   # Followers
   ###
@@ -4949,6 +5032,40 @@ components:
           type: integer
           nullable: true
           description: Parent comment ID for replies
+
+    StudioJoinRequestResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Join request ID
+        user_id:
+          type: string
+          description: User UUID
+        username:
+          type: string
+        avatar:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum:
+            - 'pending'
+            - 'approved'
+            - 'declined'
+
+    StudioJoinRequestListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioJoinRequestResponse'
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+          nullable: true
 
     ######################################################
     # Utility Schemas

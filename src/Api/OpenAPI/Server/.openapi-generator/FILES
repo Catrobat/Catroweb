@@ -104,6 +104,8 @@ Model/StudioAddProjectRequest.php
 Model/StudioCommentCreateRequest.php
 Model/StudioCommentListResponse.php
 Model/StudioCommentResponse.php
+Model/StudioJoinRequestListResponse.php
+Model/StudioJoinRequestResponse.php
 Model/StudioListResponse.php
 Model/StudioMemberListResponse.php
 Model/StudioMemberResponse.php
@@ -227,6 +229,8 @@ Tests/Model/StudioAddProjectRequestTest.php
 Tests/Model/StudioCommentCreateRequestTest.php
 Tests/Model/StudioCommentListResponseTest.php
 Tests/Model/StudioCommentResponseTest.php
+Tests/Model/StudioJoinRequestListResponseTest.php
+Tests/Model/StudioJoinRequestResponseTest.php
 Tests/Model/StudioListResponseTest.php
 Tests/Model/StudioMemberListResponseTest.php
 Tests/Model/StudioMemberResponseTest.php
@@ -340,6 +344,8 @@ docs/Model/StudioAddProjectRequest.md
 docs/Model/StudioCommentCreateRequest.md
 docs/Model/StudioCommentListResponse.md
 docs/Model/StudioCommentResponse.md
+docs/Model/StudioJoinRequestListResponse.md
+docs/Model/StudioJoinRequestResponse.md
 docs/Model/StudioListResponse.md
 docs/Model/StudioMemberListResponse.md
 docs/Model/StudioMemberResponse.md

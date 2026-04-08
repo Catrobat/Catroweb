@@ -175,4 +175,25 @@ class StudioApiProcessor extends AbstractApiProcessor
   {
     $this->studio_manager->deleteCommentFromStudio($user, $comment_id);
   }
+
+  public function acceptJoinRequest(User $admin, Studio $studio, StudioJoinRequest $joinRequest): void
+  {
+    $requestUser = $joinRequest->getUser();
+    if (null === $requestUser) {
+      return;
+    }
+
+    $this->studio_manager->updateJoinRequests($joinRequest, '1', $requestUser, $admin, $studio);
+  }
+
+  public function declineJoinRequest(StudioJoinRequest $joinRequest): void
+  {
+    $requestUser = $joinRequest->getUser();
+    $requestStudio = $joinRequest->getStudio();
+    if (null === $requestUser || null === $requestStudio) {
+      return;
+    }
+
+    $this->studio_manager->updateJoinRequests($joinRequest, '0', $requestUser, $requestUser, $requestStudio);
+  }
 }

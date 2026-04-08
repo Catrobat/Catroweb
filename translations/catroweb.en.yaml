@@ -1253,6 +1253,15 @@ studio:
       ban_member: 'Ban member from studio'
       ban_failed: 'Something went wrong while banning this member. Try again later.'
 
+    join_requests:
+      title: 'Join Requests'
+      accept: 'Accept'
+      decline: 'Decline'
+      accept_success: 'Join request accepted.'
+      decline_success: 'Join request declined.'
+      error: 'Something went wrong. Please try again.'
+      no_requests: 'No pending join requests.'
+
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
