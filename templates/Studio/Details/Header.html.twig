@@ -4,11 +4,18 @@
     <img src="{{ asset(studio.CoverAssetPath|default('')) }}" class="img-fluid" alt="">
     {% if user_role == 'admin' %}
       <form class="studio-detail__header__details__button--upload-image" id="std-header-form"
-            enctype="multipart/form-data" method="post">
+            enctype="multipart/form-data" method="post"
+            data-trans-invalid-type="{{ 'studio.cover_image_invalid_type'|trans({}, 'catroweb') }}"
+            data-trans-image-compressed="{{ 'studio.cover_image_compressed'|trans({}, 'catroweb') }}"
+            data-trans-file-too-large="{{ 'studio.cover_image_still_too_large'|trans({}, 'catroweb') }}"
+            data-trans-compression-failed="{{ 'studio.cover_image_compression_failed'|trans({}, 'catroweb') }}">
         <span class="material-icons">photo_camera</span>
-        <input id="std-header" name="header-img" type="file" accept="image/*">
+        <input id="std-header" name="header-img" type="file" accept="image/jpeg,image/png,image/gif,image/webp">
         <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
       </form>
+      <div class="studio-cover-hint">
+        {{ 'studio.cover_image_hint'|trans({}, 'catroweb') }}
+      </div>
     {% endif %}
   </div>
 

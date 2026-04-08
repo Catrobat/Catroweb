@@ -62,6 +62,18 @@
   opacity: 0;
 }
 
+.studio-cover-hint {
+  position: absolute;
+  right: 15px;
+  bottom: 70px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  color: #555;
+  background-color: rgb(255 255 255 / 80%);
+  border-radius: 4px;
+  z-index: 10;
+}
+
 #studio-img-container {
   position: relative;
   width: 100%;

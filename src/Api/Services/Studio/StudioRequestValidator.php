@@ -96,7 +96,7 @@ class StudioRequestValidator extends AbstractRequestValidator
 
     $KEY = 'image_file';
     $maxFileSize = 1048576; // 1MB in bytes
-    $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
     if (!$image_file->isValid()) {
       $this->getValidationWrapper()->addError($this->__('api.createStudio.imageFileInvalid', [], $locale), $KEY);

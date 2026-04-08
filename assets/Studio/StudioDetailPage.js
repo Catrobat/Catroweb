@@ -11,42 +11,67 @@ require('./MembersList.scss')
 require('./ActivityList.scss')
 require('./Studio.scss')
 
+import { isAllowedImageType, exceedsMaxSize, compressImageIfNeeded } from './ImageCompressor'
+
 document.getElementById('std-header-form')?.addEventListener('change', (event) => {
   event.preventDefault()
   const fileInput = document.getElementById('std-header')
   const studioId = document.getElementById('studio-id').value
   const url = document.getElementById('js-api-routing').dataset.baseUrl + '/api/studio/' + studioId
   if (fileInput.files.length > 0) {
-    uploadCoverImage(url, fileInput.files[0], studioId)
+    uploadCoverImage(url, fileInput.files[0])
   }
 })
 
 async function uploadCoverImage(url, file) {
-  const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
-  const maxFileSize = 1048576 // 1MB
+  const headerForm = document.getElementById('std-header-form')
 
-  if (!allowedMimeTypes.includes(file.type)) {
+  if (!isAllowedImageType(file)) {
     showSnackbar(
       '#share-snackbar',
-      document.getElementById('trans-image-invalid-type')?.value ||
-        'Invalid image type. Please use JPEG, PNG, or GIF.',
+      headerForm?.dataset.transInvalidType || 'Invalid image type. Please use JPEG, PNG, or GIF.',
       SnackbarDuration.error,
     )
     return
   }
 
-  if (file.size > maxFileSize) {
-    showSnackbar(
-      '#share-snackbar',
-      document.getElementById('trans-image-too-large')?.value ||
-        'Image is too large. Maximum size is 1 MB.',
-      SnackbarDuration.error,
-    )
-    return
+  let uploadFile = file
+
+  if (exceedsMaxSize(file)) {
+    try {
+      const result = await compressImageIfNeeded(file)
+      uploadFile = result.file
+
+      if (result.wasCompressed) {
+        showSnackbar(
+          '#share-snackbar',
+          headerForm?.dataset.transImageCompressed ||
+            'Image was automatically compressed to fit the 1 MB limit.',
+          SnackbarDuration.short,
+        )
+      }
+
+      if (exceedsMaxSize(uploadFile)) {
+        showSnackbar(
+          '#share-snackbar',
+          headerForm?.dataset.transFileTooLarge ||
+            'Image is too large even after compression. Please choose a smaller file.',
+          SnackbarDuration.error,
+        )
+        return
+      }
+    } catch {
+      showSnackbar(
+        '#share-snackbar',
+        headerForm?.dataset.transCompressionFailed || 'Failed to process image.',
+        SnackbarDuration.error,
+      )
+      return
+    }
   }
 
   const formData = new FormData()
-  formData.append('image_file', file)
+  formData.append('image_file', uploadFile)
 
   const response = await fetch(url, {
     method: 'POST',

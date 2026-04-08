@@ -333,7 +333,7 @@ class StudioManager
   {
     $cover_asset_path = null;
     if ($image_file instanceof UploadedFile) {
-      $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+      $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
       $extension = strtolower($image_file->getClientOriginalExtension());
       if (!in_array($extension, $allowed_extensions, true)) {
         throw new \InvalidArgumentException('Invalid image file extension.');
