@@ -55,7 +55,6 @@ class StudioSearchService
 
     $bool_query = new BoolQuery();
 
-    $bool_query->addMust(new Terms('is_public', [true]));
     $bool_query->addMust(new Terms('is_enabled', [true]));
     $bool_query->addMust(new Terms('auto_hidden', [false]));
 

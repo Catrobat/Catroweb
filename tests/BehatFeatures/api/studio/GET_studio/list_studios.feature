@@ -17,7 +17,7 @@ Feature: List studios
       | 2  | Admin | Studio2     | admin |
       | 3  | Admin | Studio3     | admin |
 
-  Scenario: List all public studios
+  Scenario: List all studios including private (invite-only)
     When I GET "/api/studio"
     Then the response status code should be "200"
     And the client response should contain "Studio1"
@@ -29,18 +29,18 @@ Feature: List studios
     Then the response status code should be "200"
     And the client response should contain "has_more"
 
-  Scenario: Private studios are not included in public list
+  Scenario: Private (invite-only) studios are included in public list
     When I GET "/api/studio?limit=50"
     Then the response status code should be "200"
     And the client response should contain "Studio1"
     And the client response should contain "Studio2"
-    And the client response should not contain "Studio3"
+    And the client response should contain "Studio3"
 
-  Scenario: Authenticated user also only sees public studios in list
+  Scenario: Authenticated user also sees private (invite-only) studios in list
     Given I use a valid JWT Bearer token for "User1"
     When I GET "/api/studio?limit=50"
     Then the response status code should be "200"
-    And the client response should not contain "Studio3"
+    And the client response should contain "Studio3"
 
   Scenario: Invalid cursor returns 400
     When I GET "/api/studio?cursor=invalid!!"
