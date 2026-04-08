@@ -149,6 +149,7 @@ project:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public

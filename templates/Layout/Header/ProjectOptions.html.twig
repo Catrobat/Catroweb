@@ -48,6 +48,20 @@
         {{ project.notForKids ? 'MarkSafeForKids'|trans({}, 'catroweb') : 'MarkNotForKids'|trans({}, 'catroweb') }}
       </span>
     </li>
+    <li id="top-app-bar__btn-delete-project"
+        class="mdc-deprecated-list-item"
+        role="menuitem"
+        data-project-id="{{ project.id }}"
+        data-trans-confirm-title="{{ 'profile.reallyDeleteProgram'|trans({}, 'catroweb') }}"
+        data-trans-confirm-text="{{ 'project.deleteConfirmText'|trans({}, 'catroweb') }}"
+        data-trans-confirm-yes="{{ 'project.deleteAction'|trans({}, 'catroweb') }}"
+        data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+        data-trans-error="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+        data-trans-not-found="{{ 'project.deleteNotFoundError'|trans({}, 'catroweb') }}">
+      <span class="mdc-deprecated-list-item__ripple"></span>
+      <span class="mdc-deprecated-list-item__graphic material-icons" style="color: var(--bs-danger)">delete</span>
+      <span class="mdc-deprecated-list-item__text" style="color: var(--bs-danger)">{{ 'project.deleteAction'|trans({}, 'catroweb') }}</span>
+    </li>
   {% endif %}
 
   {% if not my_project|default(false) and not is_whitelisted|default(false) and not project.autoHidden %}
