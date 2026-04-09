@@ -13,9 +13,10 @@
         <input id="std-header" name="header-img" type="file" accept="image/jpeg,image/png,image/gif,image/webp">
         <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
       </form>
-      <div class="studio-cover-hint">
-        {{ 'studio.cover_image_hint'|trans({}, 'catroweb') }}
-      </div>
+      <span class="studio-cover-hint-wrap">
+        <span class="material-icons studio-cover-hint-icon">info_outline</span>
+        <span class="studio-cover-hint-tooltip">{{ 'studio.cover_image_hint'|trans({}, 'catroweb') }}</span>
+      </span>
     {% endif %}
   </div>
 
