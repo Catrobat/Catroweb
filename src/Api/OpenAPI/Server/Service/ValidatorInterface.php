@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace OpenAPI\Server\Service;
 
 use Symfony\Component\Validator\Constraint;
