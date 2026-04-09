@@ -66,11 +66,6 @@ class StudioController extends AbstractController
       }
     }
 
-    // Block anonymous users from viewing private studios
-    if (!$is_public && null === $user) {
-      throw $this->createNotFoundException();
-    }
-
     $pending_join_requests_count = 0;
     if ('admin' === $user_role) {
       $pending_join_requests_count = count($this->studio_manager->findPendingJoinRequests($studio));
