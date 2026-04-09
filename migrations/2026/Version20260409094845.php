@@ -9,11 +9,13 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20260409094845 extends AbstractMigration
 {
+  #[\Override]
   public function getDescription(): string
   {
     return 'Add admin_user_id and join_request_action columns to CatroNotification for studio join request notifications.';
   }
 
+  #[\Override]
   public function up(Schema $schema): void
   {
     $this->addSql('ALTER TABLE CatroNotification ADD join_request_action VARCHAR(20) DEFAULT NULL, ADD admin_user_id CHAR(36) DEFAULT NULL');
@@ -21,6 +23,7 @@ final class Version20260409094845 extends AbstractMigration
     $this->addSql('CREATE INDEX IDX_22087FCA6352511C ON CatroNotification (admin_user_id)');
   }
 
+  #[\Override]
   public function down(Schema $schema): void
   {
     $this->addSql('ALTER TABLE CatroNotification DROP FOREIGN KEY FK_22087FCA6352511C');
