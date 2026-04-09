@@ -612,7 +612,7 @@ open_api_server_studio_studioidmembersuseridbanpost:
     _controller: open_api_server.controller.studio::studioIdMembersUserIdBanPostAction
   requirements:
     id: '^[a-zA-Z0-9\\-]+$'
-    user_id: '[a-z0-9]+'
+    user_id: '[a-z0-9\\-]+'
 
 open_api_server_studio_studioidmembersuseridpromotepost:
   path: /studio/{id}/members/{user_id}/promote
@@ -621,7 +621,7 @@ open_api_server_studio_studioidmembersuseridpromotepost:
     _controller: open_api_server.controller.studio::studioIdMembersUserIdPromotePostAction
   requirements:
     id: '^[a-zA-Z0-9\\-]+$'
-    user_id: '[a-z0-9]+'
+    user_id: '[a-z0-9\\-]+'
 
 open_api_server_studio_studioidpost:
   path: /studio/{id}
