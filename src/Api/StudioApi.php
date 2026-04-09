@@ -7,6 +7,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Studio\StudioApiFacade;
 use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\User;
 use OpenAPI\Server\Api\StudioApiInterface;
@@ -690,50 +691,24 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   #[\Override]
   public function studioIdJoinRequestsRequestIdAcceptPost(string $id, int $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    $context = $this->loadAdminContext($id, $responseCode);
-    if (null === $context) {
+    $result = $this->loadAdminContextWithPendingJoinRequest($id, $request_id, $responseCode);
+    if (null === $result) {
       return;
     }
 
-    $joinRequest = $this->facade->getLoader()->loadJoinRequestById($request_id);
-    if (null === $joinRequest || $joinRequest->getStudio()?->getId() !== $context['studio']->getId()) {
-      $responseCode = Response::HTTP_NOT_FOUND;
-
-      return;
-    }
-
-    if ('pending' !== $joinRequest->getStatus()) {
-      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-
-      return;
-    }
-
-    $this->facade->getProcessor()->acceptJoinRequest($context['user'], $context['studio'], $joinRequest);
+    $this->facade->getProcessor()->acceptJoinRequest($result['user'], $result['studio'], $result['join_request']);
     $responseCode = Response::HTTP_OK;
   }
 
   #[\Override]
   public function studioIdJoinRequestsRequestIdDeclinePost(string $id, int $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    $context = $this->loadAdminContext($id, $responseCode);
-    if (null === $context) {
+    $result = $this->loadAdminContextWithPendingJoinRequest($id, $request_id, $responseCode);
+    if (null === $result) {
       return;
     }
 
-    $joinRequest = $this->facade->getLoader()->loadJoinRequestById($request_id);
-    if (null === $joinRequest || $joinRequest->getStudio()?->getId() !== $context['studio']->getId()) {
-      $responseCode = Response::HTTP_NOT_FOUND;
-
-      return;
-    }
-
-    if ('pending' !== $joinRequest->getStatus()) {
-      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-
-      return;
-    }
-
-    $this->facade->getProcessor()->declineJoinRequest($joinRequest);
+    $this->facade->getProcessor()->declineJoinRequest($result['join_request']);
     $responseCode = Response::HTTP_OK;
   }
 
@@ -764,6 +739,32 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     }
 
     return ['user' => $user, 'studio' => $studio, 'studio_user' => $studioUser];
+  }
+
+  /**
+   * @return array{user: User, studio: Studio, join_request: StudioJoinRequest}|null
+   */
+  private function loadAdminContextWithPendingJoinRequest(string $studio_id, int $request_id, int &$responseCode): ?array
+  {
+    $context = $this->loadAdminContext($studio_id, $responseCode);
+    if (null === $context) {
+      return null;
+    }
+
+    $joinRequest = $this->facade->getLoader()->loadJoinRequestById($request_id);
+    if (null === $joinRequest || $joinRequest->getStudio()?->getId() !== $context['studio']->getId()) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    if ('pending' !== $joinRequest->getStatus()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return null;
+    }
+
+    return ['user' => $context['user'], 'studio' => $context['studio'], 'join_request' => $joinRequest];
   }
 
   /**

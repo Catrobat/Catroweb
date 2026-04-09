@@ -1,6 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
-import { escapeHtml } from '../../Components/HtmlEscape'
+import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { getCookie } from '../../Security/CookieHelper'
 
 export default class extends Controller {
   static values = {
@@ -20,7 +21,7 @@ export default class extends Controller {
 
     try {
       const response = await fetch(this.joinRequestsUrlValue + '?limit=50', {
-        credentials: 'same-origin',
+        headers: { Authorization: 'Bearer ' + getCookie('BEARER') },
       })
       if (!response.ok) {
         return
@@ -47,7 +48,7 @@ export default class extends Controller {
     li.className = 'join-request-item d-flex align-items-center py-2 px-3 border-bottom'
     li.id = `join-request-${request.id}`
 
-    const avatarSrc = request.avatar || '/images/default/avatar_default.png'
+    const avatarSrc = escapeAttr(request.avatar || '/images/default/avatar_default.png')
     const username = escapeHtml(request.username || 'Unknown')
 
     li.innerHTML = `
@@ -86,7 +87,7 @@ export default class extends Controller {
     try {
       const response = await fetch(url, {
         method: 'POST',
-        credentials: 'same-origin',
+        headers: { Authorization: 'Bearer ' + getCookie('BEARER') },
       })
 
       if (response.ok) {

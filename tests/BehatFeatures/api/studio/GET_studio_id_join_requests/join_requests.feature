@@ -43,9 +43,23 @@ Feature: Studio join request management
 
   Scenario: Admin can accept a join request
     Given I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    When I POST "/api/studio/1/join-requests/1/accept"
+    Then the response status code should be "200"
     When I GET "/api/studio/1/join-requests"
     Then the response status code should be "200"
-    And the client response should contain "User1"
+    And the client response should not contain "User1"
+    And the client response should contain "User2"
+
+  Scenario: Admin can decline a join request
+    Given I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    When I POST "/api/studio/1/join-requests/1/decline"
+    Then the response status code should be "200"
+    When I GET "/api/studio/1/join-requests"
+    Then the response status code should be "200"
+    And the client response should not contain "User1"
+    And the client response should contain "User2"
 
   Scenario: Unauthenticated user cannot accept a join request
     When I POST "/api/studio/1/join-requests/1/accept"
@@ -67,10 +81,20 @@ Feature: Studio join request management
 
   Scenario: Accept non-existent join request returns 404
     Given I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
     When I POST "/api/studio/1/join-requests/999/accept"
     Then the response status code should be "404"
 
   Scenario: Decline non-existent join request returns 404
     Given I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
     When I POST "/api/studio/1/join-requests/999/decline"
     Then the response status code should be "404"
+
+  Scenario: Cannot accept an already declined join request
+    Given I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    When I POST "/api/studio/1/join-requests/1/decline"
+    Then the response status code should be "200"
+    When I POST "/api/studio/1/join-requests/1/accept"
+    Then the response status code should be "422"

@@ -76,7 +76,6 @@ class StudioController extends AbstractController
       $pending_join_requests_count = count($this->studio_manager->findPendingJoinRequests($studio));
     }
 
-
     return $this->render('Studio/DetailsPage.html.twig', [
       'studio' => $studio,
       'user_role' => $user_role,
