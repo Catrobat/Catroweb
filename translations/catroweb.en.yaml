@@ -987,6 +987,9 @@ catro-notifications:
     message: '%user_link% commented in studio %studio_name%.'
   studio-project:
     message: '%user_link% added %program_link% to studio %studio_name%.'
+  studio-join-request:
+    accepted: 'Your request to join studio %studio_name% was accepted.'
+    declined: 'Your request to join studio %studio_name% was declined.'
   project-expiring:
     message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
   project-deleted:

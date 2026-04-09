@@ -13,6 +13,7 @@ use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\StudioCommentNotification;
+use App\DB\Entity\User\Notifications\StudioJoinRequestNotification;
 use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramRepository;
@@ -571,14 +572,14 @@ class StudioManager
     if ('pending' == $joinRequest->getStatus() && '1' === $switchValue) {
       $joinRequest->setStatus('approved');
       $this->addUserToStudio($admin, $studio, $user);
-    /* ---Notification*-- */
+      $this->notification_manager->addNotification(new StudioJoinRequestNotification($user, $studio, $admin, 'accepted'));
     } elseif ('pending' == $joinRequest->getStatus() && '0' === $switchValue) {
       $joinRequest->setStatus('declined');
-    /* ---Notification*-- */
+      $this->notification_manager->addNotification(new StudioJoinRequestNotification($user, $studio, $admin, 'declined'));
     } elseif ('declined' == $joinRequest->getStatus() && '0' === $switchValue) {
       $joinRequest->setStatus('approved');
       $this->addUserToStudio($admin, $studio, $user);
-      /* ---Notification*-- */
+      $this->notification_manager->addNotification(new StudioJoinRequestNotification($user, $studio, $admin, 'accepted'));
     }
 
     $this->entity_manager->persist($joinRequest);

@@ -1,7 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
-import { getCookie } from '../../Security/CookieHelper'
 
 export default class extends Controller {
   static values = {
@@ -21,7 +20,7 @@ export default class extends Controller {
 
     try {
       const response = await fetch(this.joinRequestsUrlValue + '?limit=50', {
-        headers: { Authorization: 'Bearer ' + getCookie('BEARER') },
+        credentials: 'same-origin',
       })
       if (!response.ok) {
         return
@@ -87,7 +86,7 @@ export default class extends Controller {
     try {
       const response = await fetch(url, {
         method: 'POST',
-        headers: { Authorization: 'Bearer ' + getCookie('BEARER') },
+        credentials: 'same-origin',
       })
 
       if (response.ok) {

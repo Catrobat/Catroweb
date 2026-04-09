@@ -98,3 +98,23 @@ Feature: Studio join request management
     Then the response status code should be "200"
     When I POST "/api/studio/1/join-requests/1/accept"
     Then the response status code should be "422"
+
+  Scenario: Accepting a join request creates a notification for the requesting user
+    Given I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    When I POST "/api/studio/1/join-requests/1/accept"
+    Then the response status code should be "200"
+    When I use a valid JWT Bearer token for "User1"
+    And I request "GET" "/api/notifications?type=studio"
+    Then the response status code should be "200"
+    And the client response should contain "accepted"
+
+  Scenario: Declining a join request creates a notification for the requesting user
+    Given I use a valid JWT Bearer token for "Admin"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    When I POST "/api/studio/1/join-requests/1/decline"
+    Then the response status code should be "200"
+    When I use a valid JWT Bearer token for "User1"
+    And I request "GET" "/api/notifications?type=studio"
+    Then the response status code should be "200"
+    And the client response should contain "declined"

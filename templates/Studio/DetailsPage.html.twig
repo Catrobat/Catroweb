@@ -1,4 +1,5 @@
 {% extends 'Layout/Base.html.twig' %}
+{% block top_bar_page_title %}{{ studio.name }}{% endblock %}
 
 {% block title %}{{ studio.name|escape('html_attr') }} – Catrobat{% endblock %}
 
