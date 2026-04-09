@@ -1536,6 +1536,77 @@ class StudioController extends Controller
   }
 
   /**
+   * Operation studioIdMembersUserIdDemotePost.
+   *
+   * Demote a studio admin to member
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function studioIdMembersUserIdDemotePostAction(Request $request, $id, $user_id): Response
+  {
+    $securityBearerAuth = $request->headers->get('authorization');
+    $accept_language = $request->headers->get('Accept-Language', 'en');
+
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+      $user_id = $this->deserialize($user_id, 'string', 'string');
+      $accept_language = $this->deserialize($accept_language, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($user_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+      $handler->setBearerAuth($securityBearerAuth);
+
+      $responseCode = 204;
+      $responseHeaders = [];
+
+      $handler->studioIdMembersUserIdDemotePost($id, $user_id, $accept_language, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        204 => 'No Content',
+        401 => 'Invalid JWT token | JWT token not found | JWT token expired',
+        403 => 'Insufficient privileges, action not allowed.',
+        404 => 'Not found',
+        422 => 'Unprocessable Entity',
+        default => '',
+      };
+
+      return new Response(
+        '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation studioIdPost.
    *
    * Update a Studio (only available to studio admins)

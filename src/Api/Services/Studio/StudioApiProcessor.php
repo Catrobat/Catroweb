@@ -156,6 +156,15 @@ class StudioApiProcessor extends AbstractApiProcessor
     return $this->studio_manager->changeStudioUserRole($admin, $studio, $target, StudioUser::ROLE_ADMIN);
   }
 
+  public function demoteMember(User $admin, Studio $studio, User $target): ?StudioUser
+  {
+    if ($this->studio_manager->countStudioAdmins($studio) <= 1) {
+      return null;
+    }
+
+    return $this->studio_manager->changeStudioUserRole($admin, $studio, $target, StudioUser::ROLE_MEMBER);
+  }
+
   public function banMember(User $admin, Studio $studio, User $target): ?StudioUser
   {
     $result = $this->studio_manager->changeStudioUserStatus($admin, $studio, $target, StudioUser::STATUS_BANNED);

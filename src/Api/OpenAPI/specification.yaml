@@ -2621,6 +2621,33 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  '/studio/{id}/members/{userId}/demote':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Demote a studio admin to member
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
   '/studio/{id}/activities':
     parameters:
       - $ref: '#/components/parameters/Uuid'

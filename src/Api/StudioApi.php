@@ -579,6 +579,24 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
+  public function studioIdMembersUserIdDemotePost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $context = $this->loadMemberActionContext($id, $user_id, $responseCode);
+    if (null === $context) {
+      return;
+    }
+
+    $result = $this->facade->getProcessor()->demoteMember($context['logged_in_user'], $context['studio'], $context['target_user']);
+    if (null === $result) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
   public function studioIdMembersUserIdBanPost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $context = $this->loadMemberActionContext($id, $user_id, $responseCode);

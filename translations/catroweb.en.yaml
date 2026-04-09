@@ -1255,6 +1255,9 @@ studio:
       promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
       ban_member: 'Ban member from studio'
       ban_failed: 'Something went wrong while banning this member. Try again later.'
+      demote_member: 'Demote admin to member'
+      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
+      last_admin: 'Cannot demote the last admin of this studio.'
 
     join_requests:
       title: 'Join Requests'

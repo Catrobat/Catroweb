@@ -358,6 +358,25 @@ interface StudioApiInterface
   ): void;
 
   /**
+   * Operation studioIdMembersUserIdDemotePost.
+   *
+   * Demote a studio admin to member
+   *
+   * @param string $id              (required)
+   * @param string $user_id         (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdMembersUserIdDemotePost(
+    string $id,
+    string $user_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
    * Operation studioIdPost.
    *
    * Update a Studio (only available to studio admins)

@@ -421,6 +421,11 @@ class StudioManager
     return $this->studio_user_repository->countStudioUsers($studio);
   }
 
+  public function countStudioAdmins(Studio $studio): int
+  {
+    return $this->studio_user_repository->countStudioAdmins($studio);
+  }
+
   public function getStudioUserRole(?User $user, Studio $studio): ?string
   {
     $studio_user = $this->findStudioUser($user, $studio);
