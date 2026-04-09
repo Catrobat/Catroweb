@@ -13,9 +13,10 @@ Feature: Projects should have an editor a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 500 milliseconds
-    When I click "#edit-project-button"
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project"
+    When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
     Then the element "#edit-text-navigation" should be visible
     And the element "#edit-default-button" should be visible
     And the element "#add-translation-button" should be visible
@@ -34,12 +35,15 @@ Feature: Projects should have an editor a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 500 milliseconds
-    When I click "#edit-project-button"
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project"
+    When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
     And I click "#add-translation-button"
     And I wait for AJAX to finish
+    And I wait for the element "#edit-language-selector" to be visible
     And I click "#edit-language-selector"
+    And I wait 500 milliseconds
     Then I should see "Chinese (China)"
     And I should see "Chinese (Taiwan)"
     And I should see "Portuguese (Brazil)"
@@ -52,12 +56,17 @@ Feature: Projects should have an editor a custom translation can be defined
     And I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 500 milliseconds
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project"
     When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
+    And I wait for the element "#edit-fr-button" to be visible
     And I wait for AJAX to finish
     And I click "#add-translation-button"
     And I wait for AJAX to finish
+    And I wait for the element "#edit-language-selector" to be visible
     And I click "#edit-language-selector"
+    And I wait 500 milliseconds
     Then I should see "Default"
     Then I should see "French"
 
@@ -65,12 +74,14 @@ Feature: Projects should have an editor a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 500 milliseconds
-    When I click "#edit-project-button"
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project"
+    When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
     Then the element "#edit-text-navigation" should be visible
     When I click "#add-translation-button"
     And I wait for AJAX to finish
+    And I wait for the element "#edit-language-selector" to be visible
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
     Then the element "#edit-submit-button" should be disabled
@@ -92,9 +103,12 @@ Feature: Projects should have an editor a custom translation can be defined
     And I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 500 milliseconds
-    When I click "#edit-project-button"
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project"
+    When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
+    And I wait for AJAX to finish
+    And I wait for the element "#edit-fr-button" to be visible
     Then the element "#edit-text-navigation" should be visible
     And the element "#edit-fr-button" should be visible
     And I should see "French"
@@ -119,9 +133,10 @@ Feature: Projects should have an editor a custom translation can be defined
     And I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    And I wait 500 milliseconds
-    When I click "#edit-project-button"
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project"
+    When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
     Then the element "#edit-fr-button" should be visible
     When I click "#edit-fr-button"
     And I wait for AJAX to finish

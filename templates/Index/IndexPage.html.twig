@@ -16,6 +16,7 @@
   {% endif %}
 
   <div id="featured-slider" class="featured-slider"
+       style="display: grid;"
        data-base-url="{{ app.request.getBaseURL() }}"
        data-theme="{{ theme() }}"
        data-flavor="{{ flavor() }}"
@@ -23,7 +24,7 @@
        data-is-webview="{{ isWebview() ? '1' : '0' }}"
        data-trans-featured="{{ 'project.featured'|trans({}, 'catroweb') }}"
   >
-    <div class="featured-slider__skeleton featured-banner">
+    <div class="featured-slider__skeleton featured-banner mb-2" style="grid-area: 1/1;">
       <div style="aspect-ratio: 1024/400; background: light-dark(#f0f0f0, #1a1a2e);"></div>
     </div>
   </div>

@@ -64,7 +64,7 @@
 
   {{ include('Project/Comment/JsData.html.twig', {
     comment: comment,
-    project: project,
+    project_id: project.id,
     comments: replies,
   }) }}
 

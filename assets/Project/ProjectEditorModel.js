@@ -6,7 +6,7 @@ export const DIALOG = {
   CONFIRM_DELETE: 'confirm_delete',
 }
 
-export function ProjectEditorModel(programId, textFieldModels) {
+export function ProjectEditorModel(programId, textFieldModels, preloadedLanguages) {
   this.programId = programId
   this.textFieldModels = textFieldModels
 
@@ -164,11 +164,10 @@ export function ProjectEditorModel(programId, textFieldModels) {
   }
 
   // region private
-  document.addEventListener('DOMContentLoaded', () => this.getLanguages())
-
   this.getLanguages = () => {
-    const languagesUrl = this.routing ? this.routing.dataset.languages : '/languages'
-    const languagesPromise = fetch(languagesUrl).then((response) => response.json())
+    const languagesPromise = preloadedLanguages
+      ? preloadedLanguages
+      : fetch(this.routing ? this.routing.dataset.languages : '/languages').then((r) => r.json())
     const definedLanguagesPromise = this.customTranslationApi.getCustomTranslationLanguages(
       this.programId,
     )
@@ -179,6 +178,12 @@ export function ProjectEditorModel(programId, textFieldModels) {
       this.filterLanguages()
       this.onLanguageList(this.languages)
     })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => this.getLanguages())
+  } else {
+    this.getLanguages()
   }
 
   this.filterLanguages = () => {

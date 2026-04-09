@@ -1,24 +1,19 @@
 import Swal from 'sweetalert2'
 
-export function ProjectComments(
-  programId,
-  visibleComments,
-  showStep,
-  minAmountOfVisibleComments,
-  cancel,
-  deleteIt,
-  reportIt,
-  areYouSure,
-  noWayOfReturn,
-  deleteConfirmation,
-  reportConfirmation,
-  popUpCommentReportedTitle,
-  popUpCommentReportedText,
-  popUpDeletedTitle,
-  popUpDeletedText,
-  noAdminRightsMessage,
-  defaultErrorMessage,
-) {
+export function ProjectComments(config) {
+  const {
+    showStep,
+    minAmountOfVisibleComments,
+    cancel,
+    deleteIt,
+    areYouSure,
+    noWayOfReturn,
+    deleteConfirmation,
+    popUpDeletedTitle,
+    popUpDeletedText,
+    noAdminRightsMessage,
+    defaultErrorMessage,
+  } = config
   let fetchActive = false
   let nextCursor = null
   let hasMore = true

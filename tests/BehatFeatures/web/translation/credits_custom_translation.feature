@@ -14,8 +14,10 @@ Feature: Projects should have credits where a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
-    When I click "#edit-project-button"
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 2"
+    When I click "#edit-project-button"
+    And I wait for the element "#edit-default-button" to be visible
     When I click "#add-translation-button"
     And I wait for AJAX to finish
     Then the element "#edit-credits-text" should be disabled

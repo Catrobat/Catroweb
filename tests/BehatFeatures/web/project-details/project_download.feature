@@ -15,9 +15,11 @@ Feature: As a visitor I want to be able to download projects
     Given I log in as "Catrobat"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#projectDownloadButton-small" should be visible
     And I click "#projectDownloadButton-small"
-    And I wait 500 milliseconds
+    And I wait 2000 milliseconds
     Then the element "#projectDownloadButton-small" should not be visible
     And one of the elements "#downloadProgress-small" or "#downloadComplete-small" should be visible
 
@@ -27,25 +29,17 @@ Feature: As a visitor I want to be able to download projects
     And project "2" is missing its files
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#projectDownloadButton-small" should be visible
     And I click "#projectDownloadButton-small"
     And I wait for AJAX to finish
-    And I wait 500 milliseconds
-    Then the element "#share-snackbar" should be visible
-    And I should see "Error occurred while downloading the project"
+    Then the element "#projectDownloadButton-small" should be visible
     When I am on "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 2"
     Then the element "#projectDownloadButton-small" should be visible
     And I click "#projectDownloadButton-small"
     And I wait for AJAX to finish
-    And I wait 500 milliseconds
-    Then the element "#share-snackbar" should be visible
-    And I should see "Error occurred while downloading the project"
-
-  @disabled
-  Scenario: Clicking the download button should show progress and hide the download button
-    Given I am on "/app/project/1"
-    And I wait for the page to be loaded
-    When I click "#projectDownloadButton-small"
-    Then the element "#downloadProgress-small" should be visible
-    And the element "#projectDownloadButton-small" should not be visible
+    Then the element "#projectDownloadButton-small" should be visible

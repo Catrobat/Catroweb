@@ -5,25 +5,23 @@ import { redirect } from '../Components/RedirectButton'
 import { ApiFetch, ApiDeleteFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
 
-export const Project = function (
-  projectId,
-  projectName,
-  userRole,
-  myProgram,
-  loginUrl,
-  apiReactionUrl,
-  apiReactionsUrl,
-  apiReactionsUsersUrl,
-  updateAppHeader,
-  updateAppText,
-  likeActionAdd,
-  likeActionRemove,
-  profileUrl,
-  wowWhite,
-  wowBlack,
-  reactionsText,
-  downloadErrorText,
-) {
+export const Project = function (config) {
+  const {
+    projectId,
+    projectName,
+    userRole,
+    loginUrl,
+    apiReactionUrl,
+    apiReactionsUrl,
+    apiReactionsUsersUrl,
+    likeActionAdd,
+    likeActionRemove,
+    profileUrl,
+    wowWhite,
+    wowBlack,
+    reactionsText,
+    downloadErrorText,
+  } = config
   createLinks()
 
   // -------------------------- FileHelper
@@ -656,7 +654,11 @@ export const Project = function (
       .catch((e) => console.error('Failed to load initial reactions', e))
   }
 
-  document.addEventListener('DOMContentLoaded', initProjectLike)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProjectLike)
+  } else {
+    initProjectLike()
+  }
 }
 
 // -------------------------- Sign App UI

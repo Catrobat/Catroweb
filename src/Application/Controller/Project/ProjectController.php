@@ -15,9 +15,7 @@ use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
-use App\Storage\StorageLifecycleService;
 use App\Translation\TranslationDelegate;
-use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -33,9 +31,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ProjectController extends AbstractController
 {
   public function __construct(
-    private readonly ScreenshotRepository $screenshot_repository,
     private readonly ProjectManager $project_manager,
-    private readonly ElapsedTimeStringFormatter $elapsed_time,
+    private readonly ScreenshotRepository $screenshot_repository,
     private readonly TranslatorInterface $translator,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly EventDispatcherInterface $event_dispatcher,
@@ -44,7 +41,6 @@ class ProjectController extends AbstractController
     private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
     private readonly ContentVisibilityManager $content_visibility_manager,
     private readonly ProjectStatisticsService $project_statistics_service,
-    private readonly StorageLifecycleService $storage_lifecycle,
   ) {
   }
 
@@ -102,21 +98,17 @@ class ProjectController extends AbstractController
 
     return $this->render('Project/ProjectPage.html.twig', [
       'project' => $project,
+      'project_id' => $projectId,
+      'project_name' => $project->getName(),
+      'project_description' => $project->getDescription(),
+      'screenshot_big' => $this->screenshot_repository->getScreenshotWebPath($projectId),
       'my_project' => $my_project,
       'logged_in' => $logged_in,
       'is_whitelisted' => $this->content_visibility_manager->isWhitelisted(ContentType::Project, $projectId),
+      'auto_hidden' => $project->getAutoHidden(),
       'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
       'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
-      'screenshot_big' => $this->screenshot_repository->getScreenshotWebPath($projectId),
-      'download_url' => $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $projectId]),
-      'age' => $this->elapsed_time->format($project->getUploadedAt()->getTimestamp()),
-      'filesize_mb' => sprintf('%.2f', $project->getFilesize() / 1_048_576),
-      'total_downloads' => $project->getDownloads(),
-      'retention_days' => $this->storage_lifecycle->getRetentionDays($project),
-      'retention_expiry' => StorageLifecycleService::PROTECTED_DAYS === $this->storage_lifecycle->getRetentionDays($project)
-        ? null
-        : (clone $project->getUploadedAt())->modify('+'.$this->storage_lifecycle->getRetentionDays($project).' days'),
     ]);
   }
 

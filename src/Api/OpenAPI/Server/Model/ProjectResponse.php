@@ -221,6 +221,22 @@ class ProjectResponse
   protected ?array $tags = null;
 
   /**
+   * Extensions used by this project (e.g., arduino, mindstorms).
+   *
+   * @var string[]|null
+   *
+   * @SerializedName("extensions")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("string")
+   * })
+   *
+   * @Type("array<string>")
+   */
+  protected ?array $extensions = null;
+
+  /**
    * The time of the upload.
    *
    * @SerializedName("uploaded")
@@ -350,6 +366,7 @@ class ProjectResponse
       $this->private = array_key_exists('private', $data) ? $data['private'] : $this->private;
       $this->flavor = array_key_exists('flavor', $data) ? $data['flavor'] : $this->flavor;
       $this->tags = array_key_exists('tags', $data) ? $data['tags'] : $this->tags;
+      $this->extensions = array_key_exists('extensions', $data) ? $data['extensions'] : $this->extensions;
       $this->uploaded = array_key_exists('uploaded', $data) ? $data['uploaded'] : $this->uploaded;
       $this->uploaded_string = array_key_exists('uploaded_string', $data) ? $data['uploaded_string'] : $this->uploaded_string;
       $this->screenshot_large = array_key_exists('screenshot_large', $data) ? $data['screenshot_large'] : $this->screenshot_large;
@@ -711,6 +728,30 @@ class ProjectResponse
   public function setTags(?array $tags = null): self
   {
     $this->tags = $tags;
+
+    return $this;
+  }
+
+  /**
+   * Gets extensions.
+   *
+   * @return string[]|null
+   */
+  public function getExtensions(): ?array
+  {
+    return $this->extensions;
+  }
+
+  /**
+   * Sets extensions.
+   *
+   * @param string[]|null $extensions Extensions used by this project
+   *
+   * @return $this
+   */
+  public function setExtensions(?array $extensions = null): self
+  {
+    $this->extensions = $extensions;
 
     return $this;
   }

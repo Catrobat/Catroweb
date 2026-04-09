@@ -26,6 +26,7 @@ Feature: Reactions to projects "likes"
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minions"
     Then the element "#project-like-buttons-small" should be visible
     And I should see 1 "#project-like-buttons-small > *"
     And the element "#project-like-buttons-small .thumbs-up" should be visible
@@ -154,6 +155,7 @@ Feature: Reactions to projects "likes"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minions"
     And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
     Then the element "#project-like-detail-small" should be visible
@@ -191,6 +193,7 @@ Feature: Reactions to projects "likes"
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minions"
     And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
     # click on Smile button
@@ -334,6 +337,8 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minions"
     And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
     And I click "#project-like-detail-small .btn[data-like-type=1]"
@@ -362,10 +367,14 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minions"
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minimies"
     And I click "#project-like-detail-small .btn[data-like-type=4]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
@@ -388,6 +397,8 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minions"
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     When I log in as "Catrobat"
@@ -398,6 +409,8 @@ Feature: Reactions to projects "likes"
     When I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minions"
     And I click "#project-like-buttons-small"
     And I wait for AJAX to finish
     Then the element "#project-like-detail-small > .btn.active[data-like-type=1]" should exist
@@ -416,10 +429,14 @@ Feature: Reactions to projects "likes"
     Given I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "Minions"
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/project/3"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "otherPro"
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
     And I am on "/app/notifications"

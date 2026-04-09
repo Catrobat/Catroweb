@@ -105,6 +105,8 @@ Feature: Persist project and comment machine translation
     And I switch the language to "French"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#comment-translation-button-2" to be visible
     When I click "#comment-translation-button-2"
     And I wait for AJAX to finish
     Then there should be comment machine translations:
@@ -119,6 +121,8 @@ Feature: Persist project and comment machine translation
     And I switch the language to "French"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#comment-translation-button-2" to be visible
     When I click "#comment-translation-button-2"
     And I wait for AJAX to finish
     Then there should be comment machine translations:

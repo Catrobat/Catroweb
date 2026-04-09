@@ -34,9 +34,11 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then the element "#edit-text-navigation" should be visible
     And I should see "Default"
     And the element "#edit-default-button" should be visible
@@ -56,14 +58,16 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     And I should see "This is a new name"
     And I should see "This is a new description"
     And I should see "This is a new credit"
-  
+
   Scenario: Updating all fields is possible if it's my project
     Given I log in as "OtherUser"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 2"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then the element "#edit-text-navigation" should be visible
     And I should see "Default"
     When I click "#edit-default-button"

@@ -142,13 +142,8 @@ $container-padding: 1rem;
     }
 
     .project-list__project {
-      width: 25vw;
-      max-width: $max-project-thumb-size;
+      width: clamp(120px, 18vw, $max-project-thumb-size);
       text-decoration: none;
-
-      @include media-breakpoint-up(md) {
-        width: 10vw;
-      }
     }
 
     .project-list__project + .project-list__project {

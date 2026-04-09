@@ -17,12 +17,16 @@ Feature:
   Scenario: The project image should be visible
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then I should see "project 1"
     And the element "#project-thumbnail-big" should be visible
 
   Scenario: Uploading a new image should not work when not logged in
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then I should see "project 1"
     But the element "#change-project-thumbnail-button" should not exist
 
@@ -30,6 +34,8 @@ Feature:
     Given I log in as "User1"
     When I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then I should see "project 1"
     But the element "#change-project-thumbnail-button" should not exist
 
@@ -37,7 +43,10 @@ Feature:
     Given I log in as "Catrobat"
     When I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then I should see "project 1"
+    And I wait for the element "#change-project-thumbnail-button" to be visible
     When I attach the avatar "logo.png" to "project-screenshot-upload-field"
     And I wait for AJAX to finish
     And I wait for the element ".text-img-upload-success" to be visible
