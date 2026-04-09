@@ -23,10 +23,11 @@ Feature: As a project owner, I should be able to give credits for my project.
     When I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then I should see "Notes and credits"
     And the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -36,15 +37,16 @@ Feature: As a project owner, I should be able to give credits for my project.
     When I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then I should see "This is a credit"
-  
+
   Scenario: Editing credits, closing the editor while saving edits
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -63,9 +65,10 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -85,9 +88,10 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish

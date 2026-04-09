@@ -61,7 +61,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = array_merge($default_attributes, $catroid_catty_hotfixes);
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'name', 'author', 'author_id', 'scratch_id', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids', 'download'];
+      $attributes_list = ['id', 'name', 'author', 'author_id', 'scratch_id', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids', 'download', 'retention_days', 'retention_expiry'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -136,10 +136,21 @@ class ProjectsResponseManager extends AbstractResponseManager
       $project_tags = $extraced_project->getTags();
       /** @var Tag $tag */
       foreach ($project_tags as $tag) {
-        $tags[$tag->getId()] = $tag->getInternalTitle();
+        $tags[$tag->getInternalTitle()] = $this->trans($tag->getTitleLtmCode());
       }
 
       $data['tags'] = $tags;
+    }
+
+    if (in_array('extensions', $attributes_list, true)) {
+      $extensions = [];
+      $project_extensions = $extraced_project->getExtensions();
+      /** @var Extension $extension */
+      foreach ($project_extensions as $extension) {
+        $extensions[$extension->getInternalTitle()] = $this->trans($extension->getTitleLtmCode());
+      }
+
+      $data['extensions'] = $extensions;
     }
 
     if (in_array('uploaded', $attributes_list, true)) {

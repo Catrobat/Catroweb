@@ -109,6 +109,29 @@ export default class extends Controller {
             </ul>
           </div>
         </div>`
+    } else if (isStudioAdmin && member.role === 'admin') {
+      const transDemote = this.element.dataset.transDemoteMember || 'Demote'
+      const transDemoteFailed = this.element.dataset.transDemotionFailed || 'Demotion failed'
+      const demoteUrl = this.membersUrlValue + '/' + encodeURIComponent(member.user_id) + '/demote'
+
+      adminButtons = `
+        <div class="member__list-entry__admin-buttons mdc-menu-surface--anchor">
+          <button class="member__list-entry__admin-button btn material-icons"
+                  data-action="click->studio--member-list#openAdminMenu"
+                  role="button">more_vert</button>
+          <div class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed">
+            <ul class="mdc-list" role="menu" aria-hidden="true">
+              <li class="member__list-entry__admin-button__demote btn mdc-list-item mdc-ripple-upgraded" role="menuitem"
+                  data-action="click->studio--member-list#demoteAdminToMember"
+                  data-url="${escapeAttr(demoteUrl)}"
+                  data-user-id="${escapeAttr(String(member.user_id))}"
+                  data-error-message="${escapeAttr(transDemoteFailed)}">
+                <span class="material-icons me-2 text-warning">arrow_downward</span>
+                <span class="member__list-entry__admin-buttons__text">${escapeHtml(transDemote)}</span>
+              </li>
+            </ul>
+          </div>
+        </div>`
     }
 
     li.innerHTML = `
@@ -203,6 +226,46 @@ export default class extends Controller {
       buttonsStyling: false,
       confirmButtonText: confirmButton || 'Remove',
       cancelButtonText: cancelButton || 'Cancel',
+    })
+
+    if (!result.isConfirmed) {
+      return
+    }
+
+    const response = await fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+    })
+
+    if (response.status !== 204) {
+      showSnackbar('#share-snackbar', errorMessage, SnackbarDuration.error)
+      return
+    }
+
+    window.location.reload()
+  }
+
+  /**
+   * Demoting an admin to a regular member
+   *
+   * @param event
+   * @returns {Promise<void>}
+   */
+  async demoteAdminToMember(event) {
+    const { url, errorMessage } = event.currentTarget.dataset
+
+    const result = await Swal.fire({
+      title: 'Demote this admin to member?',
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary',
+      },
+      buttonsStyling: false,
+      confirmButtonText: 'Demote',
+      cancelButtonText: 'Cancel',
     })
 
     if (!result.isConfirmed) {

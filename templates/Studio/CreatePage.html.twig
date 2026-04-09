@@ -11,7 +11,11 @@
 
 {% block body %}
   <form id="studio-create-form" class="container"
-        data-trans-rate-limited="{{ 'moderation.studio.rate_limited'|trans({}, 'catroweb') }}">
+        data-trans-rate-limited="{{ 'moderation.studio.rate_limited'|trans({}, 'catroweb') }}"
+        data-trans-invalid-type="{{ 'studio.cover_image_invalid_type'|trans({}, 'catroweb') }}"
+        data-trans-compressing="{{ 'studio.cover_image_compressing'|trans({}, 'catroweb') }}"
+        data-trans-file-too-large="{{ 'studio.cover_image_still_too_large'|trans({}, 'catroweb') }}"
+        data-trans-compression-failed="{{ 'studio.cover_image_compression_failed'|trans({}, 'catroweb') }}">
 
     {{ include('Components/TextField.html.twig', {
       text_field:
@@ -57,9 +61,16 @@
 
     <button class="btn btn-secondary" style="position: relative;">
       <span>{{ 'studio.cover_image'|trans({}, 'catroweb') }}</span>
-      <input type="file" id="studio-file-input" name="studio-file-input" accept="image/*">
+      <input type="file" id="studio-file-input" name="studio-file-input" accept="image/jpeg,image/png,image/gif,image/webp">
     </button>
-    <div id="studio-file-name">{{ 'studio.cover_image_empty'|trans({}, 'catroweb') }}</div>
+    <div class="form-text mt-1">
+      {{ 'studio.cover_image_hint'|trans({}, 'catroweb') }}
+      <span id="studio-file-name">{{ 'studio.cover_image_empty'|trans({}, 'catroweb') }}</span>
+    </div>
+    <div id="studio-file-compressed" class="studio-file-compressed" style="display: none;">
+      <span class="material-icons">info_outline</span>
+      {{ 'studio.cover_image_compressed'|trans({}, 'catroweb') }}
+    </div>
     <div id="studio-image-preview">
       <button id="studio-delete-button" aria-label="{{ 'studio.cover_image_remove'|trans({}, 'catroweb')|default('Remove image') }}"><span class="material-icons">close</span></button>
       <img id="studio-preview-image" alt="{{ 'studio.cover_image_alt'|trans({}, 'catroweb') }}">

@@ -20,8 +20,8 @@ export class FeaturedBanner {
         return r.json()
       })
       .then((items) => {
-        this.removeSkeleton()
         if (!Array.isArray(items) || items.length === 0) {
+          this.removeSkeleton()
           this.container.style.display = 'none'
           return
         }
@@ -92,6 +92,11 @@ export class FeaturedBanner {
       img.width = 1024
       img.height = 400
       img.loading = i === 0 ? 'eager' : 'lazy'
+      if (i === 0) {
+        img.fetchPriority = 'high'
+        img.onload = () => this.removeSkeleton()
+        img.onerror = () => this.removeSkeleton()
+      }
 
       wrapper.appendChild(img)
 
@@ -127,6 +132,8 @@ export class FeaturedBanner {
       '<span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span>'
     carouselDiv.appendChild(nextBtn)
 
+    // Stack carousel in same grid cell as skeleton (both grid-area: 1/1)
+    carouselDiv.style.gridArea = '1/1'
     this.container.appendChild(carouselDiv)
     new Carousel(carouselDiv)
   }

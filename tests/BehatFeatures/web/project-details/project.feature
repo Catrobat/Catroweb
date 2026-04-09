@@ -13,6 +13,7 @@ Feature: As a visitor I want to see a project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then I should see "project 1"
     And I wait for the element "#description" to contain "my description"
     Then I should see "Description"
@@ -30,6 +31,8 @@ Feature: As a visitor I want to see a project page
   Scenario: Viewing the uploader's profile page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     And I click "#project-owner-username"
     And I wait for the page to be loaded
     Then I should be on "/app/user/1"
@@ -37,6 +40,8 @@ Feature: As a visitor I want to see a project page
   Scenario: On the project page there should be all buttons visible to web and android
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then I should see "Download"
 #    And I should see "Remix Graph"
 #    And I should see "Download as app"

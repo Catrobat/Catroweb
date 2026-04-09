@@ -1,6 +1,6 @@
 {% extends 'Layout/Base.html.twig' %}
 
-{% block title %}{{ project.name }} – Catrobat{% endblock %}
+{% block title %}{{ project_name }} – Catrobat{% endblock %}
 
 {% block head %}
   {{ encore_entry_link_tags('project_page') }}
@@ -8,27 +8,28 @@
   {{ encore_entry_link_tags('project_code_view_inline') }}
 
   {% set og_image_url = absolute_url(asset(screenshot_big)) %}
-  {% if project.description is not empty %}
-    {% set og_description = project.description|striptags|slice(0, 200)|escape('html_attr') %}
+  {% if project_description is not empty %}
+    {% set og_description = project_description|striptags|slice(0, 200)|escape('html_attr') %}
   {% else %}
     {% set og_description = 'project.checkout_this_project'|trans({}, 'catroweb')|escape('html_attr') %}
   {% endif %}
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ project.name|escape('html_attr') }} – Catrobat">
+  <meta property="og:title" content="{{ project_name|escape('html_attr') }} – Catrobat">
   <meta property="og:description" content="{{ og_description }}">
   <meta property="og:image" content="{{ og_image_url }}">
   <meta property="og:image:secure_url" content="{{ og_image_url }}">
-  <meta property="og:url" content="{{ url('program', {id: project.id}) }}">
+  <meta property="og:url" content="{{ url('program', {id: project_id}) }}">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ project.name|escape('html_attr') }} – Catrobat">
+  <meta name="twitter:title" content="{{ project_name|escape('html_attr') }} – Catrobat">
   <meta name="twitter:description" content="{{ og_description }}">
   <meta name="twitter:image" content="{{ og_image_url }}">
 {% endblock %}
 
 {% block body %}
-  {% if project.autoHidden is defined and project.autoHidden and (my_project|default(false) or is_granted('ROLE_ADMIN')) %}
+  {# Auto-hidden banner (server-rendered since it requires auth context) #}
+  {% if auto_hidden and (my_project|default(false) or is_granted('ROLE_ADMIN')) %}
     <div class="alert alert-warning d-flex align-items-center mb-3" role="alert">
       <i class="material-icons me-2">visibility_off</i>
       <div class="flex-grow-1">
@@ -37,8 +38,8 @@
       {% if my_project|default(false) %}
         <button id="btn-appeal-project" class="btn btn-outline-warning btn-sm ms-2"
                 data-content-type="project"
-                data-content-id="{{ project.id }}"
-                data-appeal-url="{{ url('open_api_server_moderation_projectidappealpost', {id: project.id}) }}"
+                data-content-id="{{ project_id }}"
+                data-appeal-url="{{ url('open_api_server_moderation_projectidappealpost', {id: project_id}) }}"
                 data-trans-appeal-title="{{ 'moderation.appeal.title'|trans({}, 'catroweb') }}"
                 data-trans-appeal-placeholder="{{ 'moderation.appeal.placeholder'|trans({}, 'catroweb') }}"
                 data-trans-appeal-submit="{{ 'moderation.appeal.submit'|trans({}, 'catroweb') }}"
@@ -53,14 +54,30 @@
       {% endif %}
     </div>
   {% endif %}
+
+  {# Main project layout -- JS fills content after API fetch #}
   <div class="row">
     <div class="col-5 col-sm-4 col-md-4 col-lg-3">
-      {{ include('Project/Thumbnail.html.twig') }}
+      <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big" src="{{ asset(screenshot_big) }}"/>
+      {% if my_project %}
+        <div class="position-relative">
+          <div id="change-project-thumbnail-button" class="upload-project-image align-items-center justify-content-center d-flex">
+              <span class="material-icons md-light">camera_alt</span>
+          </div>
+        </div>
+        <div class="text-center">
+          <i class="material-icons text-start d-none" id="upload-image-spinner">
+            {{ include('Components/LoadingSpinner.html.twig', {spinner_id: 'upload-image-pb', size: 'small'}, false) }}</i>
+        </div>
+        <div class="d-none mt-2 error-message text-img-upload-success alert alert-success">
+          {{ 'success.imgUpload'|trans({}, 'catroweb') }}
+        </div>
+      {% endif %}
     </div>
 
     <div class="col-7 col-sm-8 col-md-8 col-lg-5">
       <div class="name-wrapper">
-        <span id="name" class="h2 project-name">{{ project.name }}</span>
+        <span id="name" class="h2 project-name">{{ project_name }}</span>
         <span id="name-translation" class="h2 project-name" style="display: none;" lang=""></span>
 
         {% if app.user and my_project %}
@@ -95,58 +112,29 @@
         {% endif %}
       </div>
 
-      <a class="icon-text align-bottom" id="project-owner-username" style="display: block;"
+      <a class="icon-text align-bottom" id="project-owner-username"
          href="{{ path('profile', {id: project.user.id}) }}">
         <i class="material-icons pe-2" id="user-profile-icon">person</i>
-        {{ project.user }}
+        <span id="project-owner-username-text">{{ project.user.username }}</span>
       </a>
 
       <div class="">
         <i class="material-icons mt-2">calendar_today</i>
-        <span class="icon-text ms-2 align-bottom mt-2" id="project-age">{{ age }}</span>
+        <span class="skeleton skeleton--text js-skeleton ms-2" style="width: 80px;"></span>
+        <span class="icon-text ms-2 align-bottom mt-2" id="project-age"></span>
       </div>
 
       <div class="">
         <i class="material-icons mt-2">description</i>
-        <span class="icon-text ms-2 align-bottom mt-2" id="project-filesize">{{ filesize_mb }} MB</span>
+        <span class="skeleton skeleton--text js-skeleton ms-2" style="width: 60px;"></span>
+        <span class="icon-text ms-2 align-bottom mt-2" id="project-filesize"></span>
       </div>
 
-      {% set retention_tooltip = retention_days == -1
-        ? 'project.retention.tooltip_protected'|trans({}, 'catroweb')|default('This project is protected and will not be automatically deleted.')
-        : 'project.retention.tooltip'|trans({}, 'catroweb')|default('Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.')
-      %}
-      <div class="mt-2 d-flex align-items-center gap-1">
-        {% if retention_days == -1 %}
-          <span class="badge bg-success-subtle text-success">
-            <i class="material-icons" style="font-size: 14px; vertical-align: middle;">verified</i>
-            {{ 'project.retention.protected'|trans({}, 'catroweb')|default('Protected') }}
-          </span>
-        {% elseif retention_expiry %}
-          {% set days_left = max(0, ((retention_expiry.timestamp - 'now'|date('U')) / 86400)|round(0, 'ceil')) %}
-          {% if days_left <= 7 %}
-            <span class="badge bg-danger-subtle text-danger">
-              <i class="material-icons" style="font-size: 14px; vertical-align: middle;">warning</i>
-              {{ 'project.retention.days_left'|trans({'%days%': days_left}, 'catroweb')|default(days_left ~ ' days left') }}
-            </span>
-          {% elseif days_left <= 30 %}
-            <span class="badge bg-warning-subtle text-warning">
-              <i class="material-icons" style="font-size: 14px; vertical-align: middle;">hourglass_bottom</i>
-              {{ 'project.retention.days_left'|trans({'%days%': days_left}, 'catroweb')|default(days_left ~ ' days left') }}
-            </span>
-          {% else %}
-            <span class="badge bg-secondary-subtle text-secondary">
-              <i class="material-icons" style="font-size: 14px; vertical-align: middle;">schedule</i>
-              {{ 'project.retention.days_left'|trans({'%days%': days_left}, 'catroweb')|default(days_left ~ ' days left') }}
-            </span>
-          {% endif %}
-        {% endif %}
-        <span class="retention-info-wrap">
-          <span class="material-icons retention-info-icon">info_outline</span>
-          <span class="retention-tooltip">{{ retention_tooltip }}</span>
-        </span>
+      <div id="retention-badge-container" class="mt-2 d-flex align-items-center gap-1">
+        <span class="skeleton js-skeleton" style="width: 100px; height: 24px; border-radius: 50rem;"></span>
       </div>
 
-      <div id="not-for-kids-indicator" class="{{ not project.getNotForKids() ? 'd-none' : '' }}">
+      <div id="not-for-kids-indicator" class="d-none">
         <img alt="Not for Kids" class="not-for-kids-logo" src="{{ asset('images/default/not_for_kids.svg') }}" style="width: 24px; height: 24px;">
         <span class="icon-text ms-2 align-bottom mt-2">{{ 'project.notForKids'|trans({}, 'catroweb') }}</span>
       </div>
@@ -156,10 +144,10 @@
       </div>
     </div>
 
-    <div class="d-none d-lg-block col-lg-4 mt-4 ">
-      {% if not project.hasMissingFiles %}
-        {{ include('Project/DownloadButton.html.twig') }}
-      {% endif %}
+    <div class="d-none d-lg-block col-lg-4 mt-4">
+      <div id="download-button-wrapper">
+        <div class="skeleton skeleton--button js-skeleton"></div>
+      </div>
       <div class="mt-3">
         {{ include('Project/SignAppButton.html.twig') }}
       </div>
@@ -167,11 +155,11 @@
   </div>
 
   <div class="row d-lg-none">
-    {% if not project.hasMissingFiles %}
-      <div class="col-12 mt-3">
-        {{ include('Project/DownloadButton.html.twig', {suffix: '-small'}) }}
+    <div class="col-12 mt-3">
+      <div id="download-button-small-wrapper">
+        <div class="skeleton skeleton--button js-skeleton"></div>
       </div>
-    {% endif %}
+    </div>
     <div class="col-12 mt-3">
       <div id="project-like-small">
         {{ include('Project/Reactions.html.twig', {suffix: '-small'}) }}
@@ -181,13 +169,58 @@
 
   {{ include('Project/ReactionsModal.html.twig') }}
 
-  {{ include('Project/Description.html.twig') }}
+  {# Description and credits -- JS fills content #}
+  <div class="row">
+    <div class="col mt-3 mb-3">
+      <div id="description-headline">
+        <span class="h2">{{ 'description'|trans({}, 'catroweb') }}</span>
+      </div>
+      <div id="description-credits-container" style="height:auto; overflow: hidden;">
+        <div class="skeleton skeleton--block js-skeleton mb-2"></div>
+        <div id="description" class="text-break"></div>
+        <div id="description-translation" class="text-break" style="display: none;"></div>
+        <div class="mt-3" id="credits-headline">
+          <span class="h2">{{ 'credits'|trans({}, 'catroweb') }}</span>
+        </div>
+        <div class="skeleton skeleton--block js-skeleton mb-2"></div>
+        <div id="credits" class="text-break"></div>
+        <div id="credits-translation-wrapper" style="display: none;">
+          <div id="credits-translation" class="text-break"></div>
+          <span id="project-translation-before-languages" class="translation-credit"></span>
+          <span id="project-translation-first-language" class="translation-credit"></span>
+          <span id="project-translation-between-languages" class="translation-credit"></span>
+          <span id="project-translation-second-language" class="translation-credit"></span>
+          <span id="project-translation-after-languages" class="translation-credit"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-12 text-center">
+      <a id="descriptionShowMoreToggle" aria-expanded="false"
+         aria-controls="descriptionFulltext" href="#"
+         class="toggle-content d-none">
+        <i class="material-icons">keyboard_arrow_down</i>
+        <span id="descriptionShowMoreText" class="text text-capitalize">
+            {{ ('more-information')|trans({}, 'catroweb') }}
+          </span>
+      </a>
+    </div>
+  </div>
 
   {{ include('Project/EditorNavigation.html.twig') }}
 
   {{ include('Project/Editor.html.twig') }}
 
-  {{ include('Project/Tags.html.twig') }}
+  {# Tags and extensions container -- JS fills content #}
+  <div id="tag-extension-wrapper">
+    <div class="row js-skeleton"><div class="col-12"><div class="d-flex gap-2 mt-2">
+      <span class="skeleton" style="width: 60px; height: 28px; border-radius: 50rem;"></span>
+      <span class="skeleton" style="width: 80px; height: 28px; border-radius: 50rem;"></span>
+      <span class="skeleton" style="width: 50px; height: 28px; border-radius: 50rem;"></span>
+    </div></div></div>
+  </div>
 
   {% if isFeatureFlagEnabled('sign-apk') %}
      <div class="row d-lg-none">
@@ -198,7 +231,42 @@
     {{ include('Project/SignAppModal.html.twig') }}
   {% endif %}
 
-  {{ include('Project/Details.html.twig') }}
+  {# Details section -- JS fills content #}
+  <div id="details">
+    <h2 class="mt-3">
+      {{ 'projectDetails'|trans({}, 'catroweb') }}
+    </h2>
+    <div class="row">
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
+        <i class="material-icons">visibility</i>
+        <span class="skeleton skeleton--text js-skeleton ms-2" style="width: 70px;"></span>
+        <span class="icon-text ms-2 align-bottom" id="details-views"></span>
+      </div>
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
+        <i class="material-icons">query_builder</i>
+        <span class="skeleton skeleton--text js-skeleton ms-2" style="width: 80px;"></span>
+        <span class="icon-text ms-2 align-bottom" id="details-age"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
+        <i class="material-icons">description</i>
+        <span class="skeleton skeleton--text js-skeleton ms-2" style="width: 60px;"></span>
+        <span class="icon-text ms-2" id="details-filesize"></span>
+      </div>
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
+        <i class="material-icons ">get_app</i>
+        <span class="skeleton skeleton--text js-skeleton ms-2" style="width: 90px;"></span>
+        <span class="icon-text ms-2" id="details-downloads"></span>
+      </div>
+    </div>
+    <div id="details-not-for-kids" class="row d-none">
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
+        <img alt="Not for Kids" class="not-for-kids-logo" src="{{ asset('images/default/not_for_kids.svg') }}" style="width: 24px; height: 24px;">
+        <span id="notForKidsText" class="icon-text ms-2 align-bottom">{{ 'project.notForKids'|trans({}, 'catroweb') }}</span>
+      </div>
+    </div>
+  </div>
 
   {{ include('Project/RemixGraphInline.html.twig') }}
 
@@ -206,61 +274,70 @@
 
   {{ include('Project/CodeViewInline.html.twig') }}
 
+  {% set placeholder_svg = "data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20360'%3E%3Crect%20width='360'%20height='360'%20fill='%23E8E8E8'%20/%3E%3C/svg%3E" %}
   <div id="recommended-projects">
-    {# array values: [api project_type, translation, property to show] #}
-    {% for category in [
-      ['more_from_user', 'moreFromThisUser', 'views'],
-    ] %}
-      <div id="recommended-projects__{{ category[0] }}" data-category="{{ category[0] }}"
-           data-property="{{ category[2] }}" class="project-list loading horizontal"
-           data-theme="{{ theme() }}"
-           data-flavor="{{ flavor() }}"
-           data-base-url="{{ app.request.getBaseURL() }}"
-           data-project-id="{{ project.id }}"
-      >
-        <div class="container">
-          <div class="project-list__title">
-            <h2>{{ ('recommender.' ~ category[1])|trans({'%username%': project.user.username}, 'catroweb') }}</h2>
-            <div class="project-list__title__btn-toggle btn-view-open">
-              <div class="project-list__title__btn-toggle__text">{{ 'show-more'|trans({}, 'catroweb') }}</div>
-              <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
-            </div>
+    {# Recommended projects -- JS fills the title with author name after API fetch #}
+    <div id="recommended-projects__more_from_user" data-category="more_from_user"
+         data-property="views" class="project-list loading horizontal"
+         data-theme="{{ theme() }}"
+         data-flavor="{{ flavor() }}"
+         data-base-url="{{ app.request.getBaseURL() }}"
+         data-project-id="{{ project_id }}"
+    >
+      <div class="container">
+        <div class="project-list__title">
+          <h2 id="recommended-projects-title"></h2>
+          <div class="project-list__title__btn-toggle btn-view-open">
+            <div class="project-list__title__btn-toggle__text">{{ 'show-more'|trans({}, 'catroweb') }}</div>
+            <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
           </div>
-          <div class="lazyload projects-spinner-container">
-            {{ include('Components/LoadingSpinner.html.twig', [], false) }}
-          </div>
-          <div class="lazyload project-list__wrapper">
-            <div class="lazyload projects-container"></div>
-            <div class="lazyload project-list__chevrons">
-              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">
-                chevron_left
+        </div>
+        <div class="lazyload project-list__wrapper">
+          <div class="lazyload projects-container">
+            {% for i in range(0, 10) %}
+              <div class="project-list__project">
+                <img src="{{ placeholder_svg }}" class="project-list__project__image">
+                <span class="project-list__project__name"></span>
+                <div class="project-list__project__property project-list__project__property-views lazyloaded">
+                  <i class="material-icons"></i>
+                  <span class="project-list__project__property__value"></span>
+                </div>
+                <div class="project-list__project__property project-list__project__property__not-for-kids lazyloaded">
+                  <img class="project-list__not-for-kids-logo" style="display: none">
+                  <span class="project-list__project__property__value"></span>
+                </div>
               </div>
-              <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+            {% endfor %}
+          </div>
+          <div class="lazyload project-list__chevrons">
+            <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">
+              chevron_left
             </div>
+            <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
           </div>
         </div>
       </div>
-    {% endfor %}
+    </div>
   </div>
 
   {{ include('Project/Comment/Overview.html.twig') }}
 
   <div class="js-project"
-       data-project-id="{{ project.id }}"
+       data-project-id="{{ project_id }}"
        data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
        data-google-translate-display-name="{{ 'project.googleTranslate'|trans({}, 'catroweb') }}"
-       data-has-description="{% if project.description %}true{% else %}false{% endif %}"
-       data-has-credits="{% if project.credits %}true{% else %}false{% endif %}"
+       data-has-description=""
+       data-has-credits=""
        data-theme="{{ theme() }}"
        data-flavor="{{ flavor() }}"
        data-base-url="{{ app.request.getBaseURL() }}"
-       data-project-name="{{ project.name }}"
+       data-project-name=""
        data-user-role="{% if app.user %}user{% else %}guest{% endif %}"
        data-my-project="{% if my_project %}true{% else %}false{% endif %}"
        data-login-url="{{ url('login') }}"
-       data-api-reaction-url="{{ path('open_api_server_projects_projectidreactionpost', {id: project.id}) }}"
-       data-api-reactions-url="{{ path('open_api_server_projects_projectidreactionsget', {id: project.id}) }}"
-       data-api-reactions-users-url="{{ path('open_api_server_projects_projectidreactionsusersget', {id: project.id}) }}"
+       data-api-reaction-url="{{ path('open_api_server_projects_projectidreactionpost', {id: project_id}) }}"
+       data-api-reactions-url="{{ path('open_api_server_projects_projectidreactionsget', {id: project_id}) }}"
+       data-api-reactions-users-url="{{ path('open_api_server_projects_projectidreactionsusersget', {id: project_id}) }}"
        data-trans-update-app-header="{{ 'project.updateAppHeader'|trans({}, 'catroweb') }}"
        data-trans-update-app-text="{{ 'project.updateAppText'|trans({}, 'catroweb') }}"
        data-const-action-add="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::ACTION_ADD') }}"
@@ -274,12 +351,35 @@
        data-trans-account-not-verified="{{ 'accountNotVerified'|trans({}, 'catroweb') }}"
        data-trans-account-suspended="{{ 'accountSuspended'|trans({}, 'catroweb') }}"
        data-trans-rate-limited="{{ 'moderation.reaction.rate_limited'|trans({}, 'catroweb') }}"
+       data-trans-views="{{ 'project.views'|trans({}, 'catroweb') }}"
+       data-trans-downloads="{{ 'project.downloads'|trans({}, 'catroweb') }}"
+       data-trans-no-description="{{ 'noDescription'|trans({}, 'catroweb') }}"
+       data-trans-no-credits="{{ 'noCredits'|trans({}, 'catroweb') }}"
+       data-trans-imported-from-scratch="{{ 'projectImportedFromScratch'|trans({}, 'catroweb') }}"
+       data-trans-scratch-link="{{ 'scratchImportedProjectLinkHere'|trans({}, 'catroweb') }}"
+       data-trans-extensions-title-one="{{ 'extensions.title'|trans({'%count%': 1}, 'catroweb') }}"
+       data-trans-extensions-title-other="{{ 'extensions.title'|trans({'%count%': 2}, 'catroweb') }}"
+       data-trans-tags-title-one="{{ 'tags.title'|trans({'%count%': 1}, 'catroweb') }}"
+       data-trans-tags-title-other="{{ 'tags.title'|trans({'%count%': 2}, 'catroweb') }}"
+       data-trans-retention-protected="{{ 'project.retention.protected'|trans({}, 'catroweb')|default('Protected') }}"
+       data-trans-retention-tooltip-protected="{{ 'project.retention.tooltip_protected'|trans({}, 'catroweb')|default('This project is protected and will not be automatically deleted.') }}"
+       data-trans-retention-tooltip="{{ 'project.retention.tooltip'|trans({}, 'catroweb')|default('Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.') }}"
+       data-trans-retention-days-left="{{ 'project.retention.days_left'|trans({'%days%': '__DAYS__'}, 'catroweb')|default('__DAYS__ days left') }}"
+       data-trans-download="{{ 'download'|trans({}, 'catroweb') }}"
+       data-trans-downloading="{{ 'project.downloading'|trans({}, 'catroweb') }}"
+       data-trans-downloaded="{{ 'project.downloaded'|trans({}, 'catroweb') }}"
+       data-trans-open-in-app="{{ 'project.openInApp'|trans({}, 'catroweb') }}"
+       data-trans-update-app-header-download="{{ 'project.updateAppHeaderDownload'|trans({}, 'catroweb') }}"
+       data-trans-update-app-text-download="{{ 'project.updateAppTextDownload'|trans({}, 'catroweb') }}"
+       data-trans-more-from-user="{{ 'recommender.moreFromThisUser'|trans({'%username%': '__USERNAME__'}, 'catroweb') }}"
+       data-search-url="{{ url('search', {q: '__QUERY__'}) }}"
+       data-is-webview="{% if isWebview() %}true{% else %}false{% endif %}"
   ></div>
 
   <div class="js-project-description-credits"
-       data-project-id="{{ project.id }}"
-       data-has-description="{% if project.description %}true{% else %}false{% endif %}"
-       data-has-credits="{% if project.credits %}true{% else %}false{% endif %}"
+       data-project-id="{{ project_id }}"
+       data-has-description=""
+       data-has-credits=""
        data-trans-more-info="{{ 'more-information'|trans({}, 'catroweb') }}"
        data-trans-less-info="{{ 'less-information'|trans({}, 'catroweb') }}"
        data-trans-confirm-delete="{{ 'project.confrimDelete'|trans({}, 'catroweb') }}"
@@ -296,7 +396,7 @@
        data-trans-translations="{{ 'project.translations'|trans({}, 'catroweb') }}"
   ></div>
   <div class="js-project-comments"
-       data-project-id="{{ project.id }}"
+       data-project-id="{{ project_id }}"
        data-total-number-of-comments="{{ 0 }}"
        data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
        data-trans-delete-it="{{ 'deleteIt'|trans({}, 'catroweb') }}"
@@ -317,7 +417,7 @@
 {% block javascript %}
 <script>
   const projectConfiguration = {
-    id: '{{ project.id }}',
+    id: '{{ project_id }}',
     messages: {
       forbidden: '{{ 'api.updateProject.forbidden'|trans({}, 'catroweb') }}',
       notFound: '{{ 'api.updateProject.notFound'|trans({}, 'catroweb') }}',

@@ -16,17 +16,23 @@ Feature: As a visitor I want to the correct display of notes and credits on a pr
   Scenario: Showing no credits on project page when the project has nocredits
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#credits" to contain "No notes and credits available."
     Then I should see "No notes and credits available."
 
   Scenario: Showing credits on project page when the project has credits
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#credits" to contain "These are credits"
     Then I should see "These are credits"
     And I should not see "No notes and credits available."
 
   Scenario: Showing credits and scratch project notice on project page when the project has credits and is a scratch project
     Given I am on "/app/project/3"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#credits" to contain "These are credits"
     Then I should see "These are credits"
     And I should see "This project was imported from MIT Scratch. You can check out the original project"
     And I should not see "No notes and credits available."
@@ -34,6 +40,8 @@ Feature: As a visitor I want to the correct display of notes and credits on a pr
   Scenario: Showing scratch notice on project page when the project is a scratch project and has not credits
     Given I am on "/app/project/4"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#credits" to contain "imported from MIT Scratch"
     Then I should see "This project was imported from MIT Scratch. You can check out the original project"
     And I should not see "These are credits"
     And I should not see "No notes and credits available."

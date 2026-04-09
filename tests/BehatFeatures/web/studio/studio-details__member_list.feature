@@ -66,7 +66,7 @@ Feature: Every studio provides a list of all members
     And I should see 1 ".member__list-entry__admin-indicator"
     And the element ".member__list-entry__admin-buttons" should exist
 
-  Scenario: If I am the admin of the studio, the promote/ban buttons are shown
+  Scenario: If I am the admin of the studio, the promote/ban buttons are shown for members
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
@@ -74,7 +74,18 @@ Feature: Every studio provides a list of all members
     When I click ".studio-detail__header__details__button--member"
     And I wait for the page to be loaded
     And I should see 1 ".member__list-entry__admin-indicator"
-    When I click ".member__list-entry__admin-button"
+    When I click ".member__list-entry:nth-child(2) .member__list-entry__admin-button"
     And I wait for the page to be loaded
     Then the element ".member__list-entry__admin-button__promote" should be visible
     And the element ".member__list-entry__admin-button__ban" should be visible
+
+  Scenario: If I am the admin of the studio, the demote button is shown for other admins
+    Given I log in as "StudioAdmin"
+    And I am on "/app/studio/1"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    When I click ".studio-detail__header__details__button--member"
+    And I wait for the page to be loaded
+    When I click ".member__list-entry:nth-child(1) .member__list-entry__admin-button"
+    And I wait for the page to be loaded
+    Then the element ".member__list-entry__admin-button__demote" should be visible

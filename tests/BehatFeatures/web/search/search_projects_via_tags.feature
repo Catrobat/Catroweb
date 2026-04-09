@@ -21,6 +21,8 @@ Feature: Searching for projects with tags
   Scenario: Searching other projects with the same tag
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     And I should see "project 1"
     And I should see "__Game"
     And I should see "__Animation"

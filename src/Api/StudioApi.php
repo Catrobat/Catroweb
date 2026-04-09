@@ -7,11 +7,15 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Studio\StudioApiFacade;
 use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\User;
 use OpenAPI\Server\Api\StudioApiInterface;
 use OpenAPI\Server\Model\CreateStudioErrorResponse;
 use OpenAPI\Server\Model\StudioAddProjectRequest;
+use OpenAPI\Server\Model\StudioBatchAddProjectsRequest;
+use OpenAPI\Server\Model\StudioBatchAddProjectsResponse;
+use OpenAPI\Server\Model\StudioBatchAddProjectsResponseFailedInner;
 use OpenAPI\Server\Model\StudioCommentCreateRequest;
 use OpenAPI\Server\Model\UpdateStudioErrorResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -62,14 +66,6 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (!$studio instanceof Studio) {
       $responseCode = Response::HTTP_NOT_FOUND;
-
-      return null;
-    }
-
-    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
-    if (!$studio->isIsPublic() && !$studioUser instanceof StudioUser) {
-      $responseCode = Response::HTTP_FORBIDDEN;
 
       return null;
     }
@@ -352,6 +348,56 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
+  public function studioIdBatchAddProjectsPost(string $id, StudioBatchAddProjectsRequest $studio_batch_add_projects_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $studio = $this->facade->getLoader()->loadVisibleStudio($id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
+    if (!$studioUser instanceof StudioUser) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    $project_ids = $studio_batch_add_projects_request->getProjectIds();
+    if (null === $project_ids || [] === $project_ids) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $result = $this->facade->getProcessor()->addProjects($user, $studio, $project_ids);
+
+    $response = new StudioBatchAddProjectsResponse();
+    $response->setAdded($result['added']);
+
+    $failed_items = [];
+    foreach ($result['failed'] as $failure) {
+      $item = new StudioBatchAddProjectsResponseFailedInner();
+      $item->setProjectId($failure['project_id']);
+      $item->setReason($failure['reason']);
+      $failed_items[] = $item;
+    }
+    $response->setFailed($failed_items);
+
+    $responseCode = Response::HTTP_OK;
+
+    return $response;
+  }
+
+  #[\Override]
   public function studioIdProjectsProjectIdDelete(string $id, string $project_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -533,6 +579,24 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
+  public function studioIdMembersUserIdDemotePost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $context = $this->loadMemberActionContext($id, $user_id, $responseCode);
+    if (null === $context) {
+      return;
+    }
+
+    $result = $this->facade->getProcessor()->demoteMember($context['logged_in_user'], $context['studio'], $context['target_user']);
+    if (null === $result) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return;
+    }
+
+    $responseCode = Response::HTTP_NO_CONTENT;
+  }
+
+  #[\Override]
   public function studioIdMembersUserIdBanPost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $context = $this->loadMemberActionContext($id, $user_id, $responseCode);
@@ -614,6 +678,111 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     return $this->facade->getResponseManager()->createUserProjectsResponse(
       $this->facade->getLoader()->loadUserProjectsWithStudioFlag($user, $studio),
     );
+  }
+
+  #[\Override]
+  public function studioIdJoinRequestsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    $context = $this->loadAdminContext($id, $responseCode);
+    if (null === $context) {
+      return null;
+    }
+
+    $limit = $this->normalizeLimit($limit);
+    $cursor_id = $this->decodeIdCursor($cursor);
+    if (null === $cursor_id && null !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $page = $this->facade->getLoader()->loadPendingJoinRequestsPage($context['studio'], $limit, $cursor_id);
+
+    $responseCode = Response::HTTP_OK;
+
+    return $this->facade->getResponseManager()->createJoinRequestListResponse(
+      $page['join_requests'],
+      $page['has_more'],
+    );
+  }
+
+  #[\Override]
+  public function studioIdJoinRequestsRequestIdAcceptPost(string $id, int $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $result = $this->loadAdminContextWithPendingJoinRequest($id, $request_id, $responseCode);
+    if (null === $result) {
+      return;
+    }
+
+    $this->facade->getProcessor()->acceptJoinRequest($result['user'], $result['studio'], $result['join_request']);
+    $responseCode = Response::HTTP_OK;
+  }
+
+  #[\Override]
+  public function studioIdJoinRequestsRequestIdDeclinePost(string $id, int $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  {
+    $result = $this->loadAdminContextWithPendingJoinRequest($id, $request_id, $responseCode);
+    if (null === $result) {
+      return;
+    }
+
+    $this->facade->getProcessor()->declineJoinRequest($result['join_request']);
+    $responseCode = Response::HTTP_OK;
+  }
+
+  /**
+   * @return array{user: User, studio: Studio, studio_user: StudioUser}|null
+   */
+  private function loadAdminContext(string $studio_id, int &$responseCode): ?array
+  {
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (!$user instanceof User) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    $studio = $this->facade->getLoader()->loadVisibleStudio($studio_id);
+    if (!$studio instanceof Studio) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $studioUser = $this->facade->getLoader()->loadStudioUser($user, $studio);
+    if (!$studioUser instanceof StudioUser || !$studioUser->isAdmin()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    return ['user' => $user, 'studio' => $studio, 'studio_user' => $studioUser];
+  }
+
+  /**
+   * @return array{user: User, studio: Studio, join_request: StudioJoinRequest}|null
+   */
+  private function loadAdminContextWithPendingJoinRequest(string $studio_id, int $request_id, int &$responseCode): ?array
+  {
+    $context = $this->loadAdminContext($studio_id, $responseCode);
+    if (null === $context) {
+      return null;
+    }
+
+    $joinRequest = $this->facade->getLoader()->loadJoinRequestById($request_id);
+    if (null === $joinRequest || $joinRequest->getStudio()?->getId() !== $context['studio']->getId()) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    if ('pending' !== $joinRequest->getStatus()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return null;
+    }
+
+    return ['user' => $context['user'], 'studio' => $context['studio'], 'join_request' => $joinRequest];
   }
 
   /**

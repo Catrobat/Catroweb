@@ -84,6 +84,28 @@ class StudioApiProcessor extends AbstractApiProcessor
   }
 
   /**
+   * @param string[] $project_ids
+   *
+   * @return array{added: string[], failed: array<array{project_id: string, reason: string}>}
+   */
+  public function addProjects(User $user, Studio $studio, array $project_ids): array
+  {
+    $added = [];
+    $failed = [];
+
+    foreach ($project_ids as $project_id) {
+      $result = $this->addProject($user, $studio, $project_id);
+      if ('ok' === $result) {
+        $added[] = $project_id;
+      } else {
+        $failed[] = ['project_id' => $project_id, 'reason' => $result];
+      }
+    }
+
+    return ['added' => $added, 'failed' => $failed];
+  }
+
+  /**
    * @return string 'ok'|'not_found'|'conflict'
    */
   public function addProject(User $user, Studio $studio, string $project_id): string
@@ -134,6 +156,15 @@ class StudioApiProcessor extends AbstractApiProcessor
     return $this->studio_manager->changeStudioUserRole($admin, $studio, $target, StudioUser::ROLE_ADMIN);
   }
 
+  public function demoteMember(User $admin, Studio $studio, User $target): ?StudioUser
+  {
+    if ($this->studio_manager->countStudioAdmins($studio) <= 1) {
+      return null;
+    }
+
+    return $this->studio_manager->changeStudioUserRole($admin, $studio, $target, StudioUser::ROLE_MEMBER);
+  }
+
   public function banMember(User $admin, Studio $studio, User $target): ?StudioUser
   {
     $result = $this->studio_manager->changeStudioUserStatus($admin, $studio, $target, StudioUser::STATUS_BANNED);
@@ -152,5 +183,26 @@ class StudioApiProcessor extends AbstractApiProcessor
   public function deleteComment(User $user, int $comment_id): void
   {
     $this->studio_manager->deleteCommentFromStudio($user, $comment_id);
+  }
+
+  public function acceptJoinRequest(User $admin, Studio $studio, StudioJoinRequest $joinRequest): void
+  {
+    $requestUser = $joinRequest->getUser();
+    if (null === $requestUser) {
+      return;
+    }
+
+    $this->studio_manager->updateJoinRequests($joinRequest, '1', $requestUser, $admin, $studio);
+  }
+
+  public function declineJoinRequest(StudioJoinRequest $joinRequest): void
+  {
+    $requestUser = $joinRequest->getUser();
+    $requestStudio = $joinRequest->getStudio();
+    if (null === $requestUser || null === $requestStudio) {
+      return;
+    }
+
+    $this->studio_manager->updateJoinRequests($joinRequest, '0', $requestUser, $requestUser, $requestStudio);
   }
 }

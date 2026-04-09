@@ -1,24 +1,19 @@
 import Swal from 'sweetalert2'
 
-export function ProjectComments(
-  programId,
-  visibleComments,
-  showStep,
-  minAmountOfVisibleComments,
-  cancel,
-  deleteIt,
-  reportIt,
-  areYouSure,
-  noWayOfReturn,
-  deleteConfirmation,
-  reportConfirmation,
-  popUpCommentReportedTitle,
-  popUpCommentReportedText,
-  popUpDeletedTitle,
-  popUpDeletedText,
-  noAdminRightsMessage,
-  defaultErrorMessage,
-) {
+export function ProjectComments(config) {
+  const {
+    showStep,
+    minAmountOfVisibleComments,
+    cancel,
+    deleteIt,
+    areYouSure,
+    noWayOfReturn,
+    deleteConfirmation,
+    popUpDeletedTitle,
+    popUpDeletedText,
+    noAdminRightsMessage,
+    defaultErrorMessage,
+  } = config
   let fetchActive = false
   let nextCursor = null
   let hasMore = true
@@ -308,9 +303,8 @@ export function ProjectComments(
 
         const commentsWrapper = document.querySelector('#comments-wrapper')
         if (commentsWrapper) {
-          const tempDiv = document.createElement('div')
-          tempDiv.innerHTML = data.rendered
-          const newComment = tempDiv.firstChild
+          const doc = new DOMParser().parseFromString(data.rendered, 'text/html')
+          const newComment = doc.body.firstElementChild
 
           if (parentCommentId > 0) {
             commentsWrapper.appendChild(newComment)
@@ -391,9 +385,8 @@ export function ProjectComments(
   }
 
   function appendRenderedComment(rendered) {
-    const tempDiv = document.createElement('div')
-    tempDiv.innerHTML = rendered
-    const newComment = tempDiv.firstChild
+    const doc = new DOMParser().parseFromString(rendered, 'text/html')
+    const newComment = doc.body.firstElementChild
     if (!newComment) return
     commentsWrapper.appendChild(newComment)
   }

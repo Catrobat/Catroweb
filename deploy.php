@@ -29,6 +29,8 @@ set('slack_success_color', '#4BB543');
 // Symfony environment
 set('symfony_env', 'prod');
 set('writable_recursive', true);
+set('http_user', 'www-data');
+set('writable_mode', 'acl');
 
 // Shared directories
 set('shared_dirs', [

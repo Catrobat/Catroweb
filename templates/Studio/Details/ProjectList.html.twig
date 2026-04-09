@@ -3,6 +3,7 @@
        studioId: studio.id,
        projectsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects',
        addProjectUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects',
+       batchAddProjectsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/batch-add-projects',
        removeProjectUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects/__PROJECT_ID__',
        userRole: user_role|default(''),
        isLoggedIn: user_name is defined and user_name ? true : false,

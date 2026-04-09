@@ -15,9 +15,11 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "OtherUser"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 2"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -31,14 +33,16 @@ Feature: Projects should have a name that can be changed by the project owner
     And the element "#edit-text-navigation" should not be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "This is a new name"
-  
+
   Scenario: Editing name, closing the editor while saving edits
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -56,9 +60,11 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -77,9 +83,11 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish

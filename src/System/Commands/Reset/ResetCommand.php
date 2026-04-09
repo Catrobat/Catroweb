@@ -149,7 +149,7 @@ class ResetCommand extends Command
     $this->commentOnProjects($program_names, $user_array, $output);
     $this->likeProjects($program_names, $user_array, $output);
     $this->featureProjects($program_names, $output);
-    $this->createFeaturedBanners($programs, $output);
+    $this->createFeaturedBanners($output);
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
     $this->exampleProject($program_names, $output);
@@ -540,51 +540,44 @@ class ResetCommand extends Command
     $output->writeln('  Featured studio "'.$studioName.'"');
   }
 
-  /**
-   * @param Program[] $programs
-   */
-  private function createFeaturedBanners(array $programs, OutputInterface $output): void
+  private function createFeaturedBanners(OutputInterface $output): void
   {
     $output->writeln('Creating featured banners...');
-    $count = 0;
 
-    // Create a project banner from the first available project
-    if ([] !== $programs) {
-      $program = $programs[0];
+    /** @var string $project_dir */
+    $project_dir = $this->parameter_bag->get('kernel.project_dir');
+    /** @var string $featured_dir */
+    $featured_dir = $this->parameter_bag->get('catrobat.featuredimage.dir');
+    $seed_dir = $project_dir.'/tests/TestData/DataFixtures/FeaturedBanners/';
+
+    $banners = [
+      ['type' => 'image', 'title' => '', 'priority' => 20, 'seed_file' => 'banner_3.webp'],
+      ['type' => 'link', 'title' => '', 'url' => '/app/project/upload', 'priority' => 15, 'seed_file' => 'banner_4.webp'],
+      ['type' => 'link', 'title' => '', 'url' => 'https://github.com/Catrobat/Catroweb/issues', 'priority' => 12, 'seed_file' => 'banner_5.webp'],
+      ['type' => 'link', 'title' => '', 'url' => '/app/studios', 'priority' => 10, 'seed_file' => 'banner_6.webp'],
+    ];
+
+    foreach ($banners as $config) {
       $banner = new FeaturedBanner();
-      $banner->setType('project');
-      $banner->setProgram($program);
-      $banner->setTitle($program->getName());
+      $banner->setType($config['type']);
+      $banner->setTitle($config['title']);
       $banner->setActive(true);
-      $banner->setPriority(10);
-      $banner->setImageType('');
+      $banner->setPriority($config['priority']);
+      $banner->setImageType('webp');
+      if (isset($config['url'])) {
+        $banner->setUrl($config['url']);
+      }
       $this->entity_manager->persist($banner);
-      ++$count;
+      $this->entity_manager->flush();
+
+      $src = $seed_dir.$config['seed_file'];
+      $dest = $featured_dir.'featured_'.$banner->getId().'.webp';
+      if (is_file($src)) {
+        copy($src, $dest);
+      }
     }
 
-    // Create a custom link banner
-    $banner = new FeaturedBanner();
-    $banner->setType('link');
-    $banner->setUrl('https://catrobat.org');
-    $banner->setTitle('Visit Catrobat');
-    $banner->setActive(true);
-    $banner->setPriority(3);
-    $banner->setImageType('');
-    $this->entity_manager->persist($banner);
-    ++$count;
-
-    // Create an image-only banner
-    $banner = new FeaturedBanner();
-    $banner->setType('image');
-    $banner->setTitle('Welcome to Catroweb');
-    $banner->setActive(true);
-    $banner->setPriority(1);
-    $banner->setImageType('');
-    $this->entity_manager->persist($banner);
-    ++$count;
-
-    $this->entity_manager->flush();
-    $output->writeln(sprintf('  Created %d featured banners', $count));
+    $output->writeln(sprintf('  Created %d featured banners', count($banners)));
   }
 
   private function getRandomStatus(): string

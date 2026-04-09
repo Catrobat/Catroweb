@@ -15,6 +15,7 @@ use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
 use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\Notifications\StudioCommentNotification;
+use App\DB\Entity\User\Notifications\StudioJoinRequestNotification;
 use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
@@ -184,6 +185,26 @@ class NotificationsResponseManager extends AbstractResponseManager
       }
 
       return new NotificationResponse($response);
+    }
+
+    if ($notification instanceof StudioJoinRequestNotification) {
+      $action = $notification->getAction() ?? 'accepted';
+      $translationKey = 'accepted' === $action
+        ? 'catro-notifications.studio-join-request.accepted'
+        : 'catro-notifications.studio-join-request.declined';
+
+      return new NotificationResponse([
+        'id' => $notification->getId(),
+        'type' => 'studio',
+        'seen' => $notification->getSeen(),
+        'from' => $notification->getAdminUser()?->getId(),
+        'from_name' => $notification->getAdminUser()?->getUserIdentifier(),
+        'avatar' => $notification->getAdminUser()?->getAvatar(),
+        'studio' => $notification->getStudio()?->getId(),
+        'message' => $this->trans($translationKey, [
+          '%studio_name%' => $notification->getStudio()?->getName() ?? '',
+        ]),
+      ]);
     }
 
     if ($notification instanceof StudioCommentNotification) {

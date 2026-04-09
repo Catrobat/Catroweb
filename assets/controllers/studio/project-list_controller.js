@@ -9,6 +9,7 @@ export default class extends Controller {
     studioId: String,
     projectsUrl: String,
     addProjectUrl: String,
+    batchAddProjectsUrl: String,
     removeProjectUrl: String,
     userRole: String,
     isLoggedIn: Boolean,
@@ -294,9 +295,7 @@ export default class extends Controller {
       })
 
       if (result.isConfirmed && result.value.length > 0) {
-        for (const projectId of result.value) {
-          await this.addProject(projectId)
-        }
+        await this.batchAddProjects(result.value)
         this.containerTarget.innerHTML = ''
         this.cursor = null
         this.loadProjects()
@@ -318,6 +317,32 @@ export default class extends Controller {
       })
     } catch (e) {
       console.error('Failed to add project:', e)
+    }
+  }
+
+  async batchAddProjects(projectIds) {
+    const url = this.batchAddProjectsUrlValue
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ project_ids: projectIds }),
+      })
+      if (!response.ok) {
+        showSnackbar(
+          '#share-snackbar',
+          this.element.dataset.transAddError || 'Failed to add projects.',
+          SnackbarDuration.error,
+        )
+      }
+    } catch (e) {
+      console.error('Failed to batch add projects:', e)
+      showSnackbar(
+        '#share-snackbar',
+        this.element.dataset.transAddError || 'Failed to add projects.',
+        SnackbarDuration.error,
+      )
     }
   }
 

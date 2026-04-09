@@ -39,4 +39,9 @@ class StudioUserRepository extends ServiceEntityRepository
   {
     return $this->count(['studio' => $studio, 'status' => 'active']);
   }
+
+  public function countStudioAdmins(Studio $studio): int
+  {
+    return $this->count(['studio' => $studio, 'role' => StudioUser::ROLE_ADMIN, 'status' => StudioUser::STATUS_ACTIVE]);
+  }
 }

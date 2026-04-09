@@ -117,6 +117,58 @@
 
 // ---------- End Download Button ----------
 
+// ---------- Skeleton Loading ----------
+
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.15;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+
+  &--thumbnail {
+    aspect-ratio: 1;
+    width: 100%;
+    border-radius: 10%;
+  }
+
+  &--text {
+    height: 1em;
+    display: inline-block;
+  }
+
+  &--title {
+    height: 1.5em;
+    width: 60%;
+  }
+
+  &--button {
+    height: 48px;
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  &--block {
+    height: 3em;
+    width: 100%;
+  }
+}
+
+// ---------- End Skeleton Loading ----------
+
 #project-thumbnail-big,
 .project-thumbnail-big {
   max-width: 100%;
@@ -605,6 +657,7 @@ table td:nth-child(1) {
     color: light-dark(#4a5568, #cbd5e0);
     line-height: 1.5;
     font-size: 0.95rem;
+    overflow-wrap: anywhere;
 
     p {
       margin-bottom: 0;

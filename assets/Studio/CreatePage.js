@@ -1,12 +1,18 @@
 import '../Components/Switch'
 import { showValidationMessage } from '../Components/TextField'
 import AcceptLanguage from '../Api/AcceptLanguage'
+import { isAllowedImageType, exceedsMaxSize, compressImageIfNeeded } from './ImageCompressor'
 
 require('./CreateStudio.scss')
 
 document.addEventListener('DOMContentLoaded', function () {
   const saveButton = document.getElementById('top-app-bar__btn-save')
   const createForm = document.getElementById('studio-create-form')
+  const compressedNotice = document.getElementById('studio-file-compressed')
+
+  // Holds the (possibly compressed) file ready for upload
+  let processedFile = null
+
   saveButton.addEventListener('click', function (event) {
     if (createForm.reportValidity()) {
       event.preventDefault()
@@ -19,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
           description: createForm.querySelector('#studio-description__input').value,
           is_public: createForm.querySelector('[name="is-public"]').value,
           enable_comments: createForm.querySelector('[name="enable-comments"]').value,
-          image_file: createForm.querySelector('#studio-file-input').files[0],
+          image_file: processedFile,
         },
       )
     }
@@ -84,11 +90,52 @@ document.addEventListener('DOMContentLoaded', function () {
   const emptyFileMsg = fileName.textContent
   let currentFileName = emptyFileMsg
 
-  fileInput.addEventListener('change', function (event) {
+  fileInput.addEventListener('change', async function (event) {
     const file = event.target.files[0]
-    if (file) {
-      currentFileName = file.name.length > 20 ? file.name.substring(0, 17) + '...' : file.name
-      fileName.textContent = currentFileName
+    compressedNotice.style.display = 'none'
+
+    if (!file) {
+      resetFileInput()
+      return
+    }
+
+    if (!isAllowedImageType(file)) {
+      fileName.textContent =
+        createForm.dataset.transInvalidType || 'Invalid image type. Please use JPEG, PNG, or GIF.'
+      fileName.classList.add('error-text')
+      processedFile = null
+      return
+    }
+
+    currentFileName = file.name.length > 20 ? file.name.substring(0, 17) + '...' : file.name
+    fileName.textContent = currentFileName
+    fileName.classList.remove('error-text')
+
+    if (exceedsMaxSize(file)) {
+      fileName.textContent = createForm.dataset.transCompressing || 'Compressing image...'
+    }
+
+    try {
+      const result = await compressImageIfNeeded(file)
+      processedFile = result.file
+
+      if (result.wasCompressed) {
+        compressedNotice.style.display = 'block'
+        currentFileName =
+          processedFile.name.length > 20
+            ? processedFile.name.substring(0, 17) + '...'
+            : processedFile.name
+        fileName.textContent = currentFileName
+      }
+
+      if (result.wasCompressed && exceedsMaxSize(result.file)) {
+        fileName.textContent =
+          createForm.dataset.transFileTooLarge ||
+          'Image is too large even after compression. Please choose a smaller file.'
+        fileName.classList.add('error-text')
+        processedFile = null
+        return
+      }
 
       // Display image preview
       const reader = new FileReader()
@@ -97,9 +144,11 @@ document.addEventListener('DOMContentLoaded', function () {
         previewImage.style.display = 'block'
         deleteButton.style.display = 'flex'
       }
-      reader.readAsDataURL(file)
-    } else {
-      resetFileInput()
+      reader.readAsDataURL(processedFile)
+    } catch {
+      fileName.textContent = createForm.dataset.transCompressionFailed || 'Failed to process image.'
+      fileName.classList.add('error-text')
+      processedFile = null
     }
   })
 
@@ -109,9 +158,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function resetFileInput() {
     fileInput.value = ''
+    processedFile = null
     currentFileName = emptyFileMsg
     fileName.textContent = currentFileName
     fileName.classList.remove('error-text')
+    compressedNotice.style.display = 'none'
     previewImage.style.display = 'none'
     deleteButton.style.display = 'none'
   }

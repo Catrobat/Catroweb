@@ -1,4 +1,5 @@
 import { CustomTranslationApi } from '../Api/CustomTranslationApi'
+import { escapeAttr } from '../Components/HtmlEscape'
 import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 
 export function ProjectEditorNavigation(projectDescriptionCredits, programId, programEditor) {
@@ -26,7 +27,20 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
     this.openEditor(null, true, false, this.createTranslationText)
   })
 
-  // Handle both cases: script runs before or after DOMContentLoaded
+  this.renderDefaultButtonHtml = () => `
+    <li>
+      <div id="edit-default-button" class="text-icon-aligned edit-defined-translation" data-value="default">
+        <span class="language-code"></span>
+        <span class="language-name">${this.defaultText}</span>
+        <span data-bs-toggle="tooltip" title="${escapeAttr(this.editDefaultText)}" class="catro-icon-button material-icons trailing-icon" style="font-size: 1.75rem;">edit</span>
+      </div>
+    </li>
+  `
+
+  // Render default button immediately so it's available before async fetches complete
+  this.navigationLanguageList.innerHTML = this.renderDefaultButtonHtml()
+
+  // Load languages and translations asynchronously
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', getLanguages)
   } else {
@@ -128,27 +142,21 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
   }
 
   this.showTranslations = (translationLanguages) => {
-    this.navigationLanguageList.innerHTML = '' // Clear existing content
-    this.navigationLanguageList.innerHTML += `
-      <li>
-        <div id="edit-default-button" class="text-icon-aligned edit-defined-translation" data-value="default">
-          <span class="language-code"></span>
-          <span class="language-name">${this.defaultText}</span>
-          <span data-bs-toggle="tooltip" title="${this.editDefaultText}" class="catro-icon-button material-icons trailing-icon" style="font-size: 1.75rem;">edit</span>
-        </div>
-      </li>
-    `
+    let html = this.renderDefaultButtonHtml()
 
     translationLanguages.forEach((language) => {
-      this.navigationLanguageList.innerHTML += `
+      const langName = this.languages[language] || language
+      html += `
         <li>
-          <div id="edit-${language}-button" class="text-icon-aligned edit-defined-translation" data-value="${language}" data-language="${this.languages[language]}">
-            <span class="language-code">${language}</span>
-            <span class="language-name">${this.languages[language]}</span>
-            <span data-bs-toggle="tooltip" title="${this.editTranslationText.replace('%language%', this.languages[language])}" class="catro-icon-button material-icons trailing-icon" style="font-size: 1.75rem;">edit</span>
+          <div id="edit-${escapeAttr(language)}-button" class="text-icon-aligned edit-defined-translation" data-value="${escapeAttr(language)}" data-language="${escapeAttr(langName)}">
+            <span class="language-code">${escapeAttr(language)}</span>
+            <span class="language-name">${escapeAttr(langName)}</span>
+            <span data-bs-toggle="tooltip" title="${escapeAttr(this.editTranslationText.replace('%language%', langName))}" class="catro-icon-button material-icons trailing-icon" style="font-size: 1.75rem;">edit</span>
           </div>
         </li>
       `
     })
+
+    this.navigationLanguageList.innerHTML = html
   }
 }

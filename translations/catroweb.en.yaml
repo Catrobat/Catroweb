@@ -149,6 +149,7 @@ project:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
@@ -986,6 +987,9 @@ catro-notifications:
     message: '%user_link% commented in studio %studio_name%.'
   studio-project:
     message: '%user_link% added %program_link% to studio %studio_name%.'
+  studio-join-request:
+    accepted: 'Your request to join studio %studio_name% was accepted.'
+    declined: 'Your request to join studio %studio_name% was declined.'
   project-expiring:
     message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
   project-deleted:
@@ -1170,7 +1174,13 @@ studio:
   is_public: 'Make it public?'
   enable_comments: 'Enable comments?'
   cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen. The filesize must be less than 1 Megabyte.'
+  cover_image_empty: 'No image chosen.'
+  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
+  cover_image_compressing: 'Compressing image...'
+  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
+  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
+  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
   cover_image_alt: 'Your cover image'
   popular: 'Popular Studios'
   join: 'Join'
@@ -1245,6 +1255,18 @@ studio:
       promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
       ban_member: 'Ban member from studio'
       ban_failed: 'Something went wrong while banning this member. Try again later.'
+      demote_member: 'Demote admin to member'
+      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
+      last_admin: 'Cannot demote the last admin of this studio.'
+
+    join_requests:
+      title: 'Join Requests'
+      accept: 'Accept'
+      decline: 'Decline'
+      accept_success: 'Join request accepted.'
+      decline_success: 'Join request declined.'
+      error: 'Something went wrong. Please try again.'
+      no_requests: 'No pending join requests.'
 
     admin_settings:
       title: 'General Settings'

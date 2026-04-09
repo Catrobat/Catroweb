@@ -43,9 +43,7 @@
 
 </div>
 
-{{ include('Project/Comment/JsData.html.twig', {
-  project: project,
-}) }}
+{{ include('Project/Comment/JsData.html.twig') }}
 <div class="session-vars-names" data-visible-comments-session-var="visibleComments"></div>
 <div class="comments-class-selector" data-comments-class-selector=".single-comment"></div>
 {% endif %}

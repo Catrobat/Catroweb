@@ -62,6 +62,56 @@
   opacity: 0;
 }
 
+.studio-cover-hint-wrap {
+  position: absolute;
+  right: 15px;
+  bottom: 70px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.studio-cover-hint-icon {
+  font-size: 20px !important;
+  color: rgb(255 255 255 / 85%);
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 40%));
+  opacity: 0.8;
+  transition: opacity 0.15s;
+
+  .studio-cover-hint-wrap:hover &,
+  .studio-cover-hint-wrap:focus-within & {
+    opacity: 1;
+  }
+}
+
+.studio-cover-hint-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  right: 0;
+  width: max-content;
+  max-width: min(250px, calc(100vw - 2rem));
+  padding: 0.65rem 0.85rem;
+  background: light-dark(#fff, #1e1e30);
+  border-radius: 10px;
+  box-shadow:
+    0 4px 20px light-dark(rgb(0 0 0 / 14%), rgb(0 0 0 / 45%)),
+    0 0 0 1px light-dark(rgb(0 0 0 / 5%), rgb(255 255 255 / 8%));
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: light-dark(#444, #ddd);
+  z-index: 1080;
+  pointer-events: none;
+  white-space: normal;
+  overflow-wrap: break-word;
+
+  .studio-cover-hint-wrap:hover &,
+  .studio-cover-hint-wrap:focus-within & {
+    display: block;
+  }
+}
+
 #studio-img-container {
   position: relative;
   width: 100%;
@@ -376,6 +426,7 @@
       color: light-dark(#4a5568, #cbd5e0);
       line-height: 1.5;
       font-size: 0.95rem;
+      overflow-wrap: anywhere;
 
       p {
         margin-bottom: 0;

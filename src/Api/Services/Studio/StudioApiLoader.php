@@ -7,6 +7,7 @@ namespace App\Api\Services\Studio;
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProgram;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
@@ -57,7 +58,6 @@ class StudioApiLoader extends AbstractApiLoader
       ->from(Studio::class, 's')
       ->where('s.auto_hidden = false')
       ->andWhere('s.is_enabled = true')
-      ->andWhere('s.is_public = true')
       ->orderBy('s.created_on', 'DESC')
       ->addOrderBy('s.id', 'DESC')
       ->setMaxResults($limit + 1)
@@ -310,6 +310,47 @@ class StudioApiLoader extends AbstractApiLoader
     }
 
     return $projects;
+  }
+
+  /**
+   * @return array{join_requests: StudioJoinRequest[], has_more: bool}
+   */
+  public function loadPendingJoinRequestsPage(Studio $studio, int $limit, ?int $cursor_id): array
+  {
+    $qb = $this->entity_manager->createQueryBuilder();
+    $qb->select('jr')
+      ->from(StudioJoinRequest::class, 'jr')
+      ->where('jr.studio = :studio')
+      ->andWhere('jr.status = :status')
+      ->setParameter('studio', $studio)
+      ->setParameter('status', StudioJoinRequest::STATUS_PENDING)
+      ->orderBy('jr.id', 'ASC')
+      ->setMaxResults($limit + 1)
+    ;
+
+    if (null !== $cursor_id) {
+      $qb->andWhere('jr.id > :cursor_id')
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    /** @var StudioJoinRequest[] $joinRequests */
+    $joinRequests = $qb->getQuery()->getResult();
+
+    $has_more = count($joinRequests) > $limit;
+    if ($has_more) {
+      array_pop($joinRequests);
+    }
+
+    return [
+      'join_requests' => $joinRequests,
+      'has_more' => $has_more,
+    ];
+  }
+
+  public function loadJoinRequestById(int $id): ?StudioJoinRequest
+  {
+    return $this->studio_manager->findJoinRequestById($id);
   }
 
   public function loadStudioComment(int $comment_id): ?UserComment
