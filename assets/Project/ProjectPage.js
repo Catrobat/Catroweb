@@ -31,6 +31,8 @@ const projectCommentsElement = document.querySelector('.js-project-comments')
 const appLanguageElement = document.querySelector('#app-language')
 const projectId = projectElement.dataset.projectId
 const baseUrl = projectElement.dataset.baseUrl
+const isMyProject = isMyProject
+const isWebview = isWebview
 
 // Fetch project data from API, then render and init all components
 // Start independent fetches immediately (don't wait for project data)
@@ -78,12 +80,11 @@ function initEarlyComponents() {
   // Shared languages fetch — used by both EditorNavigation and EditorModel
   const routing = document.getElementById('js-api-routing')
   const languagesUrl = routing ? routing.dataset.languages : '/languages'
-  const languagesPromise =
-    projectElement.dataset.myProject === 'true'
-      ? fetch(languagesUrl)
-          .then((r) => r.json())
-          .catch(() => ({}))
-      : null
+  const languagesPromise = isMyProject
+    ? fetch(languagesUrl)
+        .then((r) => r.json())
+        .catch(() => ({}))
+    : null
 
   return { languagesPromise }
 }
@@ -103,11 +104,7 @@ function renderProjectMetadata(data) {
       thumbnail.classList.add('blurred')
     }
     // In webview, wrap thumbnail with download link
-    if (
-      projectElement.dataset.isWebview === 'true' &&
-      data.download_url &&
-      !thumbnail.parentElement.closest('a')
-    ) {
+    if (isWebview && data.download_url && !thumbnail.parentElement.closest('a')) {
       const link = document.createElement('a')
       link.href = data.download_url
       thumbnail.parentElement.insertBefore(link, thumbnail)
@@ -243,6 +240,13 @@ function renderProjectMetadata(data) {
   removeSkeletons()
 }
 
+function retentionBadgeSpan(colorClass, icon, text) {
+  return `<span class="badge ${colorClass}">
+      <i class="material-icons" style="font-size: 14px; vertical-align: middle;">${icon}</i>
+      ${escapeHtml(text)}
+    </span>`
+}
+
 function renderRetentionBadge(data) {
   const container = document.getElementById('retention-badge-container')
   if (!container) return
@@ -260,10 +264,7 @@ function renderRetentionBadge(data) {
 
   if (retentionDays === RETENTION_PROTECTED) {
     const protectedText = projectElement.dataset.transRetentionProtected || 'Protected'
-    badgeHtml = `<span class="badge bg-success-subtle text-success">
-      <i class="material-icons" style="font-size: 14px; vertical-align: middle;">verified</i>
-      ${escapeHtml(protectedText)}
-    </span>`
+    badgeHtml = retentionBadgeSpan('bg-success-subtle text-success', 'verified', protectedText)
   } else if (data.retention_expiry) {
     const expiryDate = new Date(data.retention_expiry)
     const now = new Date()
@@ -272,20 +273,15 @@ function renderRetentionBadge(data) {
     const daysLeftText = daysLeftTemplate.replace('__DAYS__', String(daysLeft))
 
     if (daysLeft <= RETENTION_WARN_DAYS) {
-      badgeHtml = `<span class="badge bg-danger-subtle text-danger">
-        <i class="material-icons" style="font-size: 14px; vertical-align: middle;">warning</i>
-        ${escapeHtml(daysLeftText)}
-      </span>`
+      badgeHtml = retentionBadgeSpan('bg-danger-subtle text-danger', 'warning', daysLeftText)
     } else if (daysLeft <= RETENTION_CAUTION_DAYS) {
-      badgeHtml = `<span class="badge bg-warning-subtle text-warning">
-        <i class="material-icons" style="font-size: 14px; vertical-align: middle;">hourglass_bottom</i>
-        ${escapeHtml(daysLeftText)}
-      </span>`
+      badgeHtml = retentionBadgeSpan(
+        'bg-warning-subtle text-warning',
+        'hourglass_bottom',
+        daysLeftText,
+      )
     } else {
-      badgeHtml = `<span class="badge bg-secondary-subtle text-secondary">
-        <i class="material-icons" style="font-size: 14px; vertical-align: middle;">schedule</i>
-        ${escapeHtml(daysLeftText)}
-      </span>`
+      badgeHtml = retentionBadgeSpan('bg-secondary-subtle text-secondary', 'schedule', daysLeftText)
     }
   }
 
@@ -317,34 +313,37 @@ function renderTagsAndExtensions(data) {
 
   const searchUrl = projectElement.dataset.searchUrl || '/search?q=__QUERY__'
 
+  const renderPillSection = (id, titleOne, titleOther, items, keys) => {
+    const title = keys.length === 1 ? titleOne : titleOther
+    let sectionHtml = `<div id="${id}"><p>${escapeHtml(title)}:</p><div class="list">`
+    keys.forEach((key) => {
+      const url = searchUrl.replace('__QUERY__', encodeURIComponent(key))
+      sectionHtml += `<a href="${url}"><span class="badge rounded-pill bg-primary">${escapeHtml(items[key])}</span></a>`
+    })
+    sectionHtml += '</div></div>'
+    return sectionHtml
+  }
+
   let html = '<div class="row"><div class="col-12"><div id="tag-extension-container">'
 
   if (hasExtensions) {
-    const extensionsTitle =
-      extensionKeys.length === 1
-        ? projectElement.dataset.transExtensionsTitleOne || 'Extension'
-        : projectElement.dataset.transExtensionsTitleOther || 'Extensions'
-    html += `<div id="extensions"><p>${escapeHtml(extensionsTitle)}:</p><div class="list">`
-    extensionKeys.forEach((key) => {
-      const extName = extensions[key]
-      const extUrl = searchUrl.replace('__QUERY__', encodeURIComponent(key))
-      html += `<a href="${extUrl}"><span class="badge rounded-pill bg-primary">${escapeHtml(extName)}</span></a>`
-    })
-    html += '</div></div>'
+    html += renderPillSection(
+      'extensions',
+      projectElement.dataset.transExtensionsTitleOne || 'Extension',
+      projectElement.dataset.transExtensionsTitleOther || 'Extensions',
+      extensions,
+      extensionKeys,
+    )
   }
 
   if (hasTags) {
-    const tagsTitle =
-      tagKeys.length === 1
-        ? projectElement.dataset.transTagsTitleOne || 'Tag'
-        : projectElement.dataset.transTagsTitleOther || 'Tags'
-    html += `<div id="tags"><p>${escapeHtml(tagsTitle)}:</p><div class="list">`
-    tagKeys.forEach((key) => {
-      const tagName = tags[key]
-      const tagUrl = searchUrl.replace('__QUERY__', encodeURIComponent(key))
-      html += `<a href="${tagUrl}"><span class="badge rounded-pill bg-primary">${escapeHtml(tagName)}</span></a>`
-    })
-    html += '</div></div>'
+    html += renderPillSection(
+      'tags',
+      projectElement.dataset.transTagsTitleOne || 'Tag',
+      projectElement.dataset.transTagsTitleOther || 'Tags',
+      tags,
+      tagKeys,
+    )
   }
 
   html += '</div></div></div>'
@@ -353,7 +352,7 @@ function renderTagsAndExtensions(data) {
 
 function renderDownloadButtons(data) {
   const downloadUrl = data.download_url || ''
-  const isWebview = projectElement.dataset.isWebview === 'true'
+  const isWebview = isWebview
   const transDownload = projectElement.dataset.transDownload || 'Download'
   const transDownloading = projectElement.dataset.transDownloading || 'Downloading...'
   const transDownloaded = projectElement.dataset.transDownloaded || 'Downloaded'
@@ -440,7 +439,7 @@ function renderDownloadButtons(data) {
 function initComponents(data, earlyInits) {
   let editorNavigation = null
 
-  if (projectElement.dataset.myProject === 'true') {
+  if (isMyProject) {
     // Initialize MDCTextField only if a proper mdc-text-field element exists.
     const commentMessageWrapper = document.querySelector('.comment-message')
     if (commentMessageWrapper) {
@@ -456,7 +455,7 @@ function initComponents(data, earlyInits) {
     }
 
     const nameEditorTextFieldModel = new ProjectEditorTextFieldModel(
-      projectDescriptionCreditsElement.dataset.projectId,
+      projectId,
       'name',
       true,
       document.querySelector('#name').textContent.trim(),
@@ -464,7 +463,7 @@ function initComponents(data, earlyInits) {
     new ProjectEditorTextField(nameEditorTextFieldModel)
 
     const descriptionEditorTextFieldModel = new ProjectEditorTextFieldModel(
-      projectDescriptionCreditsElement.dataset.projectId,
+      projectId,
       'description',
       projectDescriptionCreditsElement.dataset.hasDescription === 'true',
       document.querySelector('#description').textContent.trim(),
@@ -472,7 +471,7 @@ function initComponents(data, earlyInits) {
     new ProjectEditorTextField(descriptionEditorTextFieldModel)
 
     const creditsEditorTextFieldModel = new ProjectEditorTextFieldModel(
-      projectDescriptionCreditsElement.dataset.projectId,
+      projectId,
       'credits',
       projectDescriptionCreditsElement.dataset.hasCredits === 'true',
       document.querySelector('#credits').textContent.trim(),
@@ -480,20 +479,21 @@ function initComponents(data, earlyInits) {
     new ProjectEditorTextField(creditsEditorTextFieldModel)
 
     const projectEditorModel = new ProjectEditorModel(
-      projectDescriptionCreditsElement.dataset.projectId,
+      projectId,
       [nameEditorTextFieldModel, descriptionEditorTextFieldModel, creditsEditorTextFieldModel],
       earlyInits.languagesPromise,
     )
     const projectEditor = new ProjectEditor(
       projectDescriptionCreditsElement,
-      projectDescriptionCreditsElement.dataset.projectId,
+      projectId,
       projectEditorModel,
     )
 
     editorNavigation = new ProjectEditorNavigation(
       projectDescriptionCreditsElement,
-      projectDescriptionCreditsElement.dataset.projectId,
+      projectId,
       projectEditor,
+      earlyInits.languagesPromise,
     )
   }
 
@@ -576,7 +576,7 @@ function initComponents(data, earlyInits) {
   }
 
   Project({
-    projectId: projectElement.dataset.projectId,
+    projectId,
     projectName: data.name || '',
     userRole: projectElement.dataset.userRole,
     loginUrl: projectElement.dataset.loginUrl,
@@ -593,26 +593,26 @@ function initComponents(data, earlyInits) {
   })
 
   ProjectName(
-    projectDescriptionCreditsElement.dataset.projectId,
+    projectId,
     appLanguageElement.dataset.appLanguage,
-    projectElement.dataset.myProject === 'true',
+    isMyProject,
     new CustomTranslationApi('name'),
     editorNavigation,
   )
 
   ProjectDescription(
-    projectDescriptionCreditsElement.dataset.projectId,
+    projectId,
     appLanguageElement.dataset.appLanguage,
     projectDescriptionCreditsElement.dataset.transMoreInfo,
     projectDescriptionCreditsElement.dataset.transLessInfo,
-    projectElement.dataset.myProject === 'true',
+    isMyProject,
     new CustomTranslationApi('description'),
   )
 
   ProjectCredits(
-    projectDescriptionCreditsElement.dataset.projectId,
+    projectId,
     appLanguageElement.dataset.appLanguage,
-    projectElement.dataset.myProject === 'true',
+    isMyProject,
     new CustomTranslationApi('credit'),
   )
 

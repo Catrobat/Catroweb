@@ -287,7 +287,7 @@ export const Project = function (config) {
       detailOpened = true
     })
 
-    document.body.addEventListener('mousedown', function () {
+    document.body.addEventListener('mousedown', function (event) {
       if (!detailOpened) {
         return
       }

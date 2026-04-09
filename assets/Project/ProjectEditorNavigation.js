@@ -2,7 +2,12 @@ import { CustomTranslationApi } from '../Api/CustomTranslationApi'
 import { escapeAttr } from '../Components/HtmlEscape'
 import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 
-export function ProjectEditorNavigation(projectDescriptionCredits, programId, programEditor) {
+export function ProjectEditorNavigation(
+  projectDescriptionCredits,
+  programId,
+  programEditor,
+  languagesPromise,
+) {
   const self = this
 
   this.programId = programId
@@ -40,9 +45,12 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
   // Render default button immediately so it's available before async fetches complete
   this.navigationLanguageList.innerHTML = this.renderDefaultButtonHtml()
 
-  // Load languages and translations asynchronously
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', getLanguages)
+  // Load languages from shared promise and translations asynchronously
+  if (languagesPromise) {
+    languagesPromise.then((data) => {
+      self.languages = data
+      self.getTranslations()
+    })
   } else {
     getLanguages()
   }
