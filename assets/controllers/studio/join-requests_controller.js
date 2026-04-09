@@ -44,25 +44,34 @@ export default class extends Controller {
 
   _renderJoinRequest(request) {
     const li = document.createElement('li')
-    li.className = 'join-request-item d-flex align-items-center py-2 px-3 border-bottom'
+    li.className = 'member__list-entry'
     li.id = `join-request-${request.id}`
 
     const avatarSrc = escapeAttr(request.avatar || '/images/default/avatar_default.png')
     const username = escapeHtml(request.username || 'Unknown')
+    const profileUrl = '/app/user/' + escapeAttr(String(request.user_id))
+    const transAccept = escapeHtml(this.element.dataset.transAccept || 'Accept')
+    const transDecline = escapeHtml(this.element.dataset.transDecline || 'Decline')
 
     li.innerHTML = `
-      <img src="${avatarSrc}" alt="" class="rounded-circle me-3" width="40" height="40">
-      <span class="flex-grow-1 fw-medium">${username}</span>
-      <button class="btn btn-sm btn-success me-2 join-request-accept-btn"
-              data-request-id="${request.id}">
-        <span class="material-icons" style="font-size: 18px; vertical-align: middle;">check</span>
-        ${escapeHtml(this.element.dataset.transAccept || 'Accept')}
-      </button>
-      <button class="btn btn-sm btn-outline-danger join-request-decline-btn"
-              data-request-id="${request.id}">
-        <span class="material-icons" style="font-size: 18px; vertical-align: middle;">close</span>
-        ${escapeHtml(this.element.dataset.transDecline || 'Decline')}
-      </button>
+      <a href="${profileUrl}">
+        <img class="member__list-entry__image" src="${avatarSrc}" alt="">
+      </a>
+      <div class="ps-3 flex-grow-1">
+        <a href="${profileUrl}" class="fw-medium text-decoration-none">${username}</a>
+      </div>
+      <div class="d-flex gap-2 ms-auto">
+        <button class="btn btn-sm btn-success join-request-accept-btn"
+                data-request-id="${request.id}">
+          <span class="material-icons" style="font-size: 18px; vertical-align: middle;">check</span>
+          ${transAccept}
+        </button>
+        <button class="btn btn-sm btn-outline-danger join-request-decline-btn"
+                data-request-id="${request.id}">
+          <span class="material-icons" style="font-size: 18px; vertical-align: middle;">close</span>
+          ${transDecline}
+        </button>
+      </div>
     `
 
     li.querySelector('.join-request-accept-btn').addEventListener('click', (e) => {
