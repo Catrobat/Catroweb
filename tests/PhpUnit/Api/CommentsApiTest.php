@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Twig\Environment;
 
 /**
  * @internal
@@ -46,6 +47,7 @@ final class CommentsApiTest extends TestCase
     ?TranslationDelegate $translation_delegate = null,
     ?NotificationManager $notification_manager = null,
     ?RequestStack $request_stack = null,
+    ?Environment $twig = null,
     ?AuthorizationCheckerInterface $authorization_checker = null,
     ?RateLimiterFactory $comment_burst_limiter = null,
     ?RateLimiterFactory $comment_daily_limiter = null,
@@ -59,6 +61,7 @@ final class CommentsApiTest extends TestCase
       $translation_delegate ?? $this->createStub(TranslationDelegate::class),
       $notification_manager ?? $this->createStub(NotificationManager::class),
       $request_stack ?? new RequestStack(),
+      $twig ?? $this->createStub(Environment::class),
       $authorization_checker ?? $this->createStub(AuthorizationCheckerInterface::class),
       $comment_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_burst'),
       $comment_daily_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_daily'),

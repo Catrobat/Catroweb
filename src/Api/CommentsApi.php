@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Twig\Environment;
 
 class CommentsApi extends AbstractApiController implements CommentsApiInterface
 {
@@ -43,6 +44,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly TranslationDelegate $translation_delegate,
     private readonly NotificationManager $notification_manager,
     private readonly RequestStack $request_stack,
+    private readonly Environment $twig,
     private readonly AuthorizationCheckerInterface $authorization_checker,
     private readonly RateLimiterFactory $commentBurstLimiter,
     private readonly RateLimiterFactory $commentDailyLimiter,
@@ -389,9 +391,6 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $response->setReplyCount((int) ($comment_data['number_of_replies'] ?? 0));
     $response->setIsDeleted((bool) $comment_data['is_deleted']);
     $response->setIsReported((bool) $comment_data['is_reported']);
-    $response->setUserApproved((bool) ($comment_data['user_approved'] ?? false));
-    // Keep API compatibility for tests/clients still expecting the rendered field.
-    $response->setRendered('');
 
     $user_info = new CommentUserInfo();
     $user_info->setId((string) $comment_data['user_id']);
@@ -399,7 +398,18 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $user_info->setAvatar($comment_data['user_avatar'] ?? null);
     $response->setUser($user_info);
 
+    $response->setRendered($this->renderCommentHtml($comment_data, $are_replies));
+
     return $response;
+  }
+
+  private function renderCommentHtml(array $comment_data, bool $are_replies): string
+  {
+    return $this->twig->render('Project/Comment/Comment.html.twig', [
+      'comment' => $comment_data,
+      'isAdmin' => $this->authorization_checker->isGranted('ROLE_ADMIN'),
+      'are_replies' => $are_replies,
+    ]);
   }
 
   private function buildCommentDataFromEntity(UserComment $comment, int $reply_count): array
