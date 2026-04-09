@@ -2435,6 +2435,39 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
+  '/studio/{id}/batch-add-projects':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Add multiple projects to a studio in a single request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StudioBatchAddProjectsRequest'
+      responses:
+        '200':
+          description: Batch result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioBatchAddProjectsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
   '/studio/{id}/projects/{project_id}':
     parameters:
       - $ref: '#/components/parameters/Uuid'
@@ -2588,6 +2621,33 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  '/studio/{id}/members/{userId}/demote':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Demote a studio admin to member
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
   '/studio/{id}/activities':
     parameters:
       - $ref: '#/components/parameters/Uuid'
@@ -2638,6 +2698,89 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         '404':
           $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/join-requests':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - $ref: '#/components/parameters/Locale'
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: List pending join requests for a studio (admin only)
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudioJoinRequestListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/studio/{id}/join-requests/{request_id}/accept':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Accept a pending join request (admin only)
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  '/studio/{id}/join-requests/{request_id}/decline':
+    parameters:
+      - $ref: '#/components/parameters/Uuid'
+      - name: request_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/Locale'
+    post:
+      security:
+        - BearerAuth: []
+      tags:
+        - Studio
+      summary: Decline a pending join request (admin only)
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
 
   ##############################################
   # Followers
@@ -4310,6 +4453,12 @@ components:
           items:
             type: string
           example: ['game', 'art']
+        extensions:
+          type: array
+          description: 'Extensions used by this project (e.g., arduino, mindstorms)'
+          items:
+            type: string
+          example: ['arduino', 'mindstorms']
         uploaded:
           type: integer
           description: 'The time of the upload.'
@@ -4836,6 +4985,38 @@ components:
           type: string
           description: The project UUID to add
 
+    StudioBatchAddProjectsRequest:
+      type: object
+      required:
+        - project_ids
+      properties:
+        project_ids:
+          type: array
+          items:
+            type: string
+          description: List of project UUIDs to add
+          minItems: 1
+          maxItems: 50
+
+    StudioBatchAddProjectsResponse:
+      type: object
+      properties:
+        added:
+          type: array
+          items:
+            type: string
+          description: Project IDs that were successfully added
+        failed:
+          type: array
+          items:
+            type: object
+            properties:
+              project_id:
+                type: string
+              reason:
+                type: string
+                enum: [not_found, conflict]
+          description: Project IDs that failed with reasons
     StudioCommentResponse:
       type: object
       properties:
@@ -4884,6 +5065,40 @@ components:
           type: integer
           nullable: true
           description: Parent comment ID for replies
+
+    StudioJoinRequestResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Join request ID
+        user_id:
+          type: string
+          description: User UUID
+        username:
+          type: string
+        avatar:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum:
+            - 'pending'
+            - 'approved'
+            - 'declined'
+
+    StudioJoinRequestListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StudioJoinRequestResponse'
+        has_more:
+          type: boolean
+        next_cursor:
+          type: string
+          nullable: true
 
     ######################################################
     # Utility Schemas
