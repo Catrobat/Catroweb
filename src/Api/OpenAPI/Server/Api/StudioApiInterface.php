@@ -31,6 +31,7 @@
 namespace OpenAPI\Server\Api;
 
 use OpenAPI\Server\Model\StudioAddProjectRequest;
+use OpenAPI\Server\Model\StudioBatchAddProjectsRequest;
 use OpenAPI\Server\Model\StudioCommentCreateRequest;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -88,6 +89,25 @@ interface StudioApiInterface
     string $accept_language,
     int $limit,
     ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studioIdBatchAddProjectsPost.
+   *
+   * Add multiple projects to a studio in a single request
+   *
+   * @param string                        $id                                (required)
+   * @param StudioBatchAddProjectsRequest $studio_batch_add_projects_request (required)
+   * @param string                        $accept_language                   (optional, default to 'en')
+   * @param int                           &$responseCode                     The HTTP Response Code
+   * @param array                         $responseHeaders                   Additional HTTP headers to return with the response ()
+   */
+  public function studioIdBatchAddProjectsPost(
+    string $id,
+    StudioBatchAddProjectsRequest $studio_batch_add_projects_request,
+    string $accept_language,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
