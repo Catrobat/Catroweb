@@ -7,6 +7,7 @@ namespace App\Api\Services\Studio;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProgram;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
@@ -17,6 +18,8 @@ use OpenAPI\Server\Model\StudioActivityListResponse;
 use OpenAPI\Server\Model\StudioActivityResponse;
 use OpenAPI\Server\Model\StudioCommentListResponse;
 use OpenAPI\Server\Model\StudioCommentResponse;
+use OpenAPI\Server\Model\StudioJoinRequestListResponse;
+use OpenAPI\Server\Model\StudioJoinRequestResponse;
 use OpenAPI\Server\Model\StudioListResponse;
 use OpenAPI\Server\Model\StudioMemberListResponse;
 use OpenAPI\Server\Model\StudioMemberResponse;
@@ -269,6 +272,42 @@ class StudioResponseManager extends AbstractResponseManager
 
     return (new StudioUserProjectsResponse())
       ->setProjects($data)
+    ;
+  }
+
+  /**
+   * @param StudioJoinRequest[] $joinRequests
+   */
+  public function createJoinRequestListResponse(array $joinRequests, bool $has_more): StudioJoinRequestListResponse
+  {
+    $data = [];
+    foreach ($joinRequests as $joinRequest) {
+      $data[] = $this->createJoinRequestResponse($joinRequest);
+    }
+
+    $next_cursor = null;
+    if ($has_more && [] !== $joinRequests) {
+      $last = end($joinRequests);
+      $next_cursor = base64_encode((string) $last->getId());
+    }
+
+    return (new StudioJoinRequestListResponse())
+      ->setData($data)
+      ->setHasMore($has_more)
+      ->setNextCursor($next_cursor)
+    ;
+  }
+
+  public function createJoinRequestResponse(StudioJoinRequest $joinRequest): StudioJoinRequestResponse
+  {
+    $user = $joinRequest->getUser();
+
+    return (new StudioJoinRequestResponse())
+      ->setId($joinRequest->getId())
+      ->setUserId($user?->getId())
+      ->setUsername($user?->getUsername())
+      ->setAvatar($user?->getAvatar())
+      ->setStatus($joinRequest->getStatus())
     ;
   }
 

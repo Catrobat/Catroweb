@@ -36,8 +36,7 @@
   </div>
 {% endif %}
 
-{# Options menu with color scheme (always shown, except studio admin which uses settings button for studio-specific actions) #}
-{% if page_context != 'studio' or user_role != 'admin' %}
+{# Options menu with color scheme #}
   <div class="mdc-menu-surface--anchor">
     {{ include('Layout/Header/OptionButton.html.twig') }}
 
@@ -45,17 +44,17 @@
       <ul class="mdc-deprecated-list mdc-deprecated-list--icon-list" role="menu" aria-hidden="true"
           aria-orientation="vertical" tabindex="-1">
 
-        {# Page-specific items #}
+        {# Page-specific items (skip for studio admin — they have a dedicated settings button) #}
         {% if page_context == 'project' %}
           {{ include('Layout/Header/ProjectOptions.html.twig') }}
-        {% elseif page_context == 'studio' %}
+        {% elseif page_context == 'studio' and user_role != 'admin' %}
           {{ include('Layout/Header/StudioOptions.html.twig') }}
         {% elseif page_context == 'user' %}
           {{ include('Layout/Header/UserOptions.html.twig') }}
         {% endif %}
 
         {# Divider between page-specific and share items #}
-        {% if page_context in ['project', 'studio', 'user'] %}
+        {% if page_context in ['project', 'user'] or (page_context == 'studio' and user_role != 'admin') %}
           <li class="mdc-deprecated-list-divider" role="separator"></li>
         {% endif %}
 
@@ -95,4 +94,3 @@
       </ul>
     </div>
   </div>
-{% endif %}

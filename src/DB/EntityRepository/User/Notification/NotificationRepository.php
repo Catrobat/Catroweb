@@ -15,6 +15,7 @@ use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
 use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\Notifications\StudioCommentNotification;
+use App\DB\Entity\User\Notifications\StudioJoinRequestNotification;
 use App\DB\Entity\User\Notifications\StudioProjectNotification;
 use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -172,7 +173,7 @@ class NotificationRepository extends ServiceEntityRepository
         SUM(CASE WHEN notification_type = 'comment' THEN 1 ELSE 0 END) AS comment,
         SUM(CASE WHEN notification_type = 'remix_notification' THEN 1 ELSE 0 END) AS remix,
         SUM(CASE WHEN notification_type = 'moderation' THEN 1 ELSE 0 END) AS moderation,
-        SUM(CASE WHEN notification_type IN ('studio_comment', 'studio_project') THEN 1 ELSE 0 END) AS studio,
+        SUM(CASE WHEN notification_type IN ('studio_comment', 'studio_project', 'studio_join_request') THEN 1 ELSE 0 END) AS studio,
         SUM(CASE WHEN notification_type IN ('comment', 'project_expiring', 'project_deleted') THEN 1 ELSE 0 END) AS project
       FROM %s
       WHERE user = :user_id AND seen = 0
@@ -204,7 +205,7 @@ class NotificationRepository extends ServiceEntityRepository
       'comment' => $qb->andWhere('(n INSTANCE OF '.CommentNotification::class.' OR n INSTANCE OF '.StudioCommentNotification::class.')'),
       'remix' => $qb->andWhere('n INSTANCE OF '.RemixNotification::class),
       'moderation' => $qb->andWhere('n INSTANCE OF '.ModerationNotification::class),
-      'studio' => $qb->andWhere('(n INSTANCE OF '.StudioCommentNotification::class.' OR n INSTANCE OF '.StudioProjectNotification::class.')'),
+      'studio' => $qb->andWhere('(n INSTANCE OF '.StudioCommentNotification::class.' OR n INSTANCE OF '.StudioProjectNotification::class.' OR n INSTANCE OF '.StudioJoinRequestNotification::class.')'),
       'project' => $qb->andWhere('(n INSTANCE OF '.CommentNotification::class.' OR n INSTANCE OF '.ProjectExpiringNotification::class.' OR n INSTANCE OF '.ProjectDeletedNotification::class.')'),
       default => null,
     };

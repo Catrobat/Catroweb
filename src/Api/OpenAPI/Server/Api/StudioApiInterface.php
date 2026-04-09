@@ -223,6 +223,65 @@ interface StudioApiInterface
   ): void;
 
   /**
+   * Operation studioIdJoinRequestsGet.
+   *
+   * List pending join requests for a studio (admin only)
+   *
+   * @param string      $id              (required)
+   * @param string      $accept_language (optional, default to 'en')
+   * @param int         $limit           (optional, default to 20)
+   * @param string|null $cursor          Cursor for pagination (opaque string from the previous response) (optional)
+   * @param int         &$responseCode   The HTTP Response Code
+   * @param array       $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdJoinRequestsGet(
+    string $id,
+    string $accept_language,
+    int $limit,
+    ?string $cursor,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
+   * Operation studioIdJoinRequestsRequestIdAcceptPost.
+   *
+   * Accept a pending join request (admin only)
+   *
+   * @param string $id              (required)
+   * @param int    $request_id      (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdJoinRequestsRequestIdAcceptPost(
+    string $id,
+    int $request_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation studioIdJoinRequestsRequestIdDeclinePost.
+   *
+   * Decline a pending join request (admin only)
+   *
+   * @param string $id              (required)
+   * @param int    $request_id      (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdJoinRequestsRequestIdDeclinePost(
+    string $id,
+    int $request_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
    * Operation studioIdLeaveDelete.
    *
    * Leave a studio
@@ -291,6 +350,25 @@ interface StudioApiInterface
    * @param array  $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function studioIdMembersUserIdPromotePost(
+    string $id,
+    string $user_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation studioIdMembersUserIdDemotePost.
+   *
+   * Demote a studio admin to member
+   *
+   * @param string $id              (required)
+   * @param string $user_id         (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdMembersUserIdDemotePost(
     string $id,
     string $user_id,
     string $accept_language,

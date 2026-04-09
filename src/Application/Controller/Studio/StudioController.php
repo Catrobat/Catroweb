@@ -66,6 +66,11 @@ class StudioController extends AbstractController
       }
     }
 
+    $pending_join_requests_count = 0;
+    if ('admin' === $user_role) {
+      $pending_join_requests_count = count($this->studio_manager->findPendingJoinRequests($studio));
+    }
+
     return $this->render('Studio/DetailsPage.html.twig', [
       'studio' => $studio,
       'user_role' => $user_role,
@@ -77,6 +82,7 @@ class StudioController extends AbstractController
       'activities_count' => $this->studio_manager->countStudioActivities($studio),
       'projects_count' => $this->studio_manager->countStudioProjects($studio),
       'comments_count' => $this->studio_manager->countStudioComments($studio),
+      'pending_join_requests_count' => $pending_join_requests_count,
     ]);
   }
 }

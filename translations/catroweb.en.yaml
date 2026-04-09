@@ -987,6 +987,9 @@ catro-notifications:
     message: '%user_link% commented in studio %studio_name%.'
   studio-project:
     message: '%user_link% added %program_link% to studio %studio_name%.'
+  studio-join-request:
+    accepted: 'Your request to join studio %studio_name% was accepted.'
+    declined: 'Your request to join studio %studio_name% was declined.'
   project-expiring:
     message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
   project-deleted:
@@ -1252,6 +1255,18 @@ studio:
       promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
       ban_member: 'Ban member from studio'
       ban_failed: 'Something went wrong while banning this member. Try again later.'
+      demote_member: 'Demote admin to member'
+      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
+      last_admin: 'Cannot demote the last admin of this studio.'
+
+    join_requests:
+      title: 'Join Requests'
+      accept: 'Accept'
+      decline: 'Decline'
+      accept_success: 'Join request accepted.'
+      decline_success: 'Join request declined.'
+      error: 'Something went wrong. Please try again.'
+      no_requests: 'No pending join requests.'
 
     admin_settings:
       title: 'General Settings'

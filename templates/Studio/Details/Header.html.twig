@@ -40,6 +40,8 @@
                data-trans-ban-member="{{ 'studio.details.members_list.ban_member'|trans({}, 'catroweb') }}"
                data-trans-promotion-failed="{{ 'studio.details.members_list.promotion_failed'|trans({}, 'catroweb') }}"
                data-trans-ban-failed="{{ 'studio.details.members_list.ban_failed'|trans({}, 'catroweb') }}"
+               data-trans-demote-member="{{ 'studio.details.members_list.demote_member'|trans({}, 'catroweb') }}"
+               data-trans-demotion-failed="{{ 'studio.details.members_list.demotion_failed'|trans({}, 'catroweb') }}"
                data-trans-no-studio-projects="{{ 'studio.details.members_list.no_studio_projects'|trans({}, 'catroweb') }}"
                data-trans-one-studio-project="{{ 'studio.details.members_list.one_studio_project'|trans({}, 'catroweb') }}"
                data-trans-n-studio-projects="{{ 'studio.details.members_list.n_studio_projects'|trans({'%count%': '%count%'}, 'catroweb') }}"
@@ -105,6 +107,45 @@
           </div>
         {% endif %}
       </div>
+
+      {% if user_role == 'admin' and not is_public %}
+        <div class="col-3">
+          <div {{ stimulus_controller('studio--join-requests', {
+            joinRequestsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/join-requests',
+            studioId: studio.id,
+            listElementId: 'studioDetailJoinRequestsList',
+          }) }}
+               data-trans-accept="{{ 'studio.details.join_requests.accept'|trans({}, 'catroweb') }}"
+               data-trans-decline="{{ 'studio.details.join_requests.decline'|trans({}, 'catroweb') }}"
+               data-trans-accept-success="{{ 'studio.details.join_requests.accept_success'|trans({}, 'catroweb') }}"
+               data-trans-decline-success="{{ 'studio.details.join_requests.decline_success'|trans({}, 'catroweb') }}"
+               data-trans-error="{{ 'studio.details.join_requests.error'|trans({}, 'catroweb') }}"
+               data-trans-no-requests="{{ 'studio.details.join_requests.no_requests'|trans({}, 'catroweb') }}"
+          >
+            <a type="button"
+               class="studio-detail__header__details__button studio-detail__header__details__button--join-requests"
+               data-bs-toggle="modal"
+               data-bs-target="#studioDetailJoinRequestsModal"
+               data-action="click->studio--join-requests#loadJoinRequests"
+            >
+              <span class="material-icons">person_add</span>
+              <span id="join-requests-badge"
+                    class="badge bg-danger ms-1 rounded-pill"
+                    {% if pending_join_requests_count == 0 %}style="display: none"{% endif %}>
+                {{ pending_join_requests_count }}
+              </span>
+            </a>
+            {{ include('Components/FullscreenListModal.html.twig', {
+              modal:
+              {
+                id: 'studioDetailJoinRequestsModal',
+                title: '' ~ 'studio.details.join_requests.title'|trans({}, 'catroweb'),
+                list_id: 'studioDetailJoinRequestsList',
+              },
+            }) }}
+          </div>
+        </div>
+      {% endif %}
 
       <div class="col-3">
         {% if user_name %}
