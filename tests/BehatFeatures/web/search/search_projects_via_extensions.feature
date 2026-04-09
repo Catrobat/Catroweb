@@ -23,6 +23,8 @@ Feature: Searching for projects with extensions
   Scenario: Searching other projects with the same extensions
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     And I should see "project 1"
     And I should see "__mindstorms"
     And I should see "__phiro"

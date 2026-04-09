@@ -76,6 +76,7 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     And I click "#add-comment-button"
     And I wait for AJAX to finish
     And I write "comment to remember" in textbox
@@ -93,6 +94,8 @@ Feature: As a visitor I want to write, see and report comments.
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
+    And I wait for the element "#user-comment-wrapper" to be visible
     And the element "#add-comment-button" should not be visible
     And the element "#comment-cancel-button" should be visible
     And the element "#user-comment-wrapper" should be visible
@@ -222,22 +225,33 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "Admin"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
+    And I wait for the element ".comment-delete-button" to be visible
     Then the element ".comment-delete-button" should be visible
 
   Scenario: I should see a delete button only for my own comments when I am no admin
     Given I log in as "Catrobat"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
+    And I wait for the element ".single-comment" to be visible
+    And I wait for the element ".comment-delete-button" to be visible
     Then the element ".comment-delete-button" should be visible
     When I log in as "OtherUser"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
+    And I wait for the element ".single-comment" to be visible
     Then the element ".comment-delete-button" should not exist
 
   Scenario: When I am logged in as an admin and I delete a comment it should be gone, but there should be a confirmation pop up
     Given I log in as "Admin"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then I should see "c1"
     When I click ".comment-delete-button"
     And I wait for AJAX to finish
@@ -270,8 +284,10 @@ Feature: As a visitor I want to write, see and report comments.
     Given I log in as "Catrobat"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#add-comment-button"
     And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
+    And I click "#add-comment-button"
+    And I wait for the element "#comment-message" to be visible
     And I write "hello" in textbox
     And I wait for AJAX to finish
     When I click "#comment-post-button"

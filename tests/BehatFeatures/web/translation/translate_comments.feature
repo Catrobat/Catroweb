@@ -61,6 +61,8 @@ Feature: Project comments should be translatable via a button
     Given I log in as "Catrobat"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element ".single-comment" to be visible
     Then the element "#comment-translation-button-1" should not exist
     And the element "#comment-translation-button-2" should be visible
 

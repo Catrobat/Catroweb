@@ -20,197 +20,632 @@ import ProjectApi from '../Api/ProjectApi'
 import { ProjectEditorTextFieldModel } from './ProjectEditorTextFieldModel'
 import { ProjectEditorModel } from './ProjectEditorModel'
 import MessageDialogs from '../Components/MessageDialogs'
+import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import './RemixGraphInline'
 
 require('./ProjectPage.scss')
 
 const projectElement = document.querySelector('.js-project')
-
 const projectDescriptionCreditsElement = document.querySelector('.js-project-description-credits')
 const projectCommentsElement = document.querySelector('.js-project-comments')
 const appLanguageElement = document.querySelector('#app-language')
+const projectId = projectElement.dataset.projectId
+const baseUrl = projectElement.dataset.baseUrl
 
-let editorNavigation = null
+// Fetch project data from API, then render and init all components
+// Start independent fetches immediately (don't wait for project data)
+const earlyInits = initEarlyComponents()
 
-if (projectElement.dataset.myProject === 'true') {
-  // Initialize MDCTextField only if a proper mdc-text-field element exists.
-  const commentMessageWrapper = document.querySelector('.comment-message')
-  if (commentMessageWrapper) {
-    // Prefer an explicit .mdc-text-field inside the wrapper, otherwise try the wrapper itself
-    const commentMdcRoot =
-      commentMessageWrapper.querySelector('.mdc-text-field') ||
-      (commentMessageWrapper.classList && commentMessageWrapper.classList.contains('mdc-text-field')
-        ? commentMessageWrapper
-        : null)
-    if (commentMdcRoot) {
-      new MDCTextField(commentMdcRoot)
+// Project data fetch — renders metadata, then inits data-dependent components
+fetchProjectData().then((data) => {
+  if (!data) {
+    removeSkeletons()
+    return
+  }
+  renderProjectMetadata(data)
+  initComponents(data, earlyInits)
+})
+
+function fetchProjectData() {
+  const url = `${baseUrl}/api/project/${encodeURIComponent(projectId)}?attributes=ALL`
+  return fetch(url, {
+    method: 'GET',
+    headers: { Accept: 'application/json' },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.error('Failed to fetch project data:', response.status)
+        return null
+      }
+      return response.json()
+    })
+    .catch((error) => {
+      console.error('Error fetching project data:', error)
+      return null
+    })
+}
+
+const RETENTION_PROTECTED = -1
+const MS_PER_DAY = 86400000
+const RETENTION_WARN_DAYS = 7
+const RETENTION_CAUTION_DAYS = 30
+
+function formatFilesize(filesize) {
+  return (filesize != null ? filesize.toFixed(2) : '0.00') + ' MB'
+}
+
+function initEarlyComponents() {
+  // Shared languages fetch — used by both EditorNavigation and EditorModel
+  const routing = document.getElementById('js-api-routing')
+  const languagesUrl = routing ? routing.dataset.languages : '/languages'
+  const languagesPromise =
+    projectElement.dataset.myProject === 'true'
+      ? fetch(languagesUrl)
+          .then((r) => r.json())
+          .catch(() => ({}))
+      : null
+
+  return { languagesPromise }
+}
+
+function removeSkeletons() {
+  document.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+}
+
+function renderProjectMetadata(data) {
+  // Screenshot — server-rendered, API updates if changed
+  const thumbnail = document.getElementById('project-thumbnail-big')
+  if (thumbnail) {
+    if (data.screenshot_large) {
+      thumbnail.src = data.screenshot_large
+    }
+    if (data.not_for_kids) {
+      thumbnail.classList.add('blurred')
+    }
+    // In webview, wrap thumbnail with download link
+    if (
+      projectElement.dataset.isWebview === 'true' &&
+      data.download_url &&
+      !thumbnail.parentElement.closest('a')
+    ) {
+      const link = document.createElement('a')
+      link.href = data.download_url
+      thumbnail.parentElement.insertBefore(link, thumbnail)
+      link.appendChild(thumbnail)
     }
   }
 
-  const nameEditorTextFieldModel = new ProjectEditorTextFieldModel(
-    projectDescriptionCreditsElement.dataset.projectId,
-    'name',
-    true,
-    document.querySelector('#name').textContent.trim(),
-  )
-  new ProjectEditorTextField(nameEditorTextFieldModel)
+  // Project name — server-rendered, API updates if changed
+  const nameEl = document.getElementById('name')
+  if (nameEl) {
+    nameEl.textContent = data.name || ''
+  }
 
-  const descriptionEditorTextFieldModel = new ProjectEditorTextFieldModel(
-    projectDescriptionCreditsElement.dataset.projectId,
-    'description',
-    projectDescriptionCreditsElement.dataset.hasDescription === 'true',
-    document.querySelector('#description').textContent.trim(),
-  )
-  new ProjectEditorTextField(descriptionEditorTextFieldModel)
+  // Author — server-rendered, API updates if changed
+  const authorLink = document.getElementById('project-owner-username')
+  const authorText = document.getElementById('project-owner-username-text')
+  if (authorLink && data.author_id) {
+    const profilePath = projectElement.dataset.pathProfile.replace('USERID', data.author_id)
+    authorLink.href = profilePath
+    if (authorText) {
+      authorText.textContent = data.author || ''
+    }
+  }
 
-  const creditsEditorTextFieldModel = new ProjectEditorTextFieldModel(
-    projectDescriptionCreditsElement.dataset.projectId,
-    'credits',
-    projectDescriptionCreditsElement.dataset.hasCredits === 'true',
-    document.querySelector('#credits').textContent.trim(),
-  )
-  new ProjectEditorTextField(creditsEditorTextFieldModel)
+  // Age (uploaded_string)
+  const ageEl = document.getElementById('project-age')
+  if (ageEl) {
+    ageEl.textContent = data.uploaded_string || ''
+  }
 
-  const projectEditorModel = new ProjectEditorModel(
-    projectDescriptionCreditsElement.dataset.projectId,
-    [nameEditorTextFieldModel, descriptionEditorTextFieldModel, creditsEditorTextFieldModel],
-  )
-  const projectEditor = new ProjectEditor(
-    projectDescriptionCreditsElement,
-    projectDescriptionCreditsElement.dataset.projectId,
-    projectEditorModel,
-  )
+  // Filesize
+  const filesizeEl = document.getElementById('project-filesize')
+  if (filesizeEl) {
+    filesizeEl.textContent = formatFilesize(data.filesize)
+  }
 
-  editorNavigation = new ProjectEditorNavigation(
-    projectDescriptionCreditsElement,
-    projectDescriptionCreditsElement.dataset.projectId,
-    projectEditor,
-  )
+  // Retention badge
+  renderRetentionBadge(data)
+
+  // Not for kids indicator
+  if (data.not_for_kids) {
+    const nfkIndicator = document.getElementById('not-for-kids-indicator')
+    if (nfkIndicator) {
+      nfkIndicator.classList.remove('d-none')
+    }
+  }
+
+  // Description
+  const descEl = document.getElementById('description')
+  if (descEl) {
+    if (data.description) {
+      descEl.innerHTML = escapeHtml(data.description).replace(/\n/g, '<br>')
+    } else {
+      descEl.textContent = projectElement.dataset.transNoDescription || 'No description available.'
+    }
+  }
+
+  // Credits
+  const creditsEl = document.getElementById('credits')
+  if (creditsEl) {
+    if (data.credits || data.scratch_id) {
+      let creditsHtml = ''
+      if (data.credits) {
+        creditsHtml += escapeHtml(data.credits).replace(/\n/g, '<br>')
+      }
+      if (data.scratch_id) {
+        const scratchText =
+          projectElement.dataset.transImportedFromScratch ||
+          'This project was imported from Scratch.'
+        const scratchLink = projectElement.dataset.transScratchLink || 'Click here'
+        creditsHtml += ` ${escapeHtml(scratchText)} <a href="https://scratch.mit.edu/projects/${encodeURIComponent(data.scratch_id)}" target="_blank" rel="noopener noreferrer">${escapeHtml(scratchLink)}</a>`
+      }
+      creditsEl.innerHTML = creditsHtml
+    } else {
+      creditsEl.textContent = projectElement.dataset.transNoCredits || 'No notes or credits.'
+    }
+  }
+
+  // Update data attributes for downstream components
+  projectElement.dataset.projectName = data.name || ''
+  projectElement.dataset.hasDescription = data.description ? 'true' : 'false'
+  projectElement.dataset.hasCredits = data.credits ? 'true' : 'false'
+  projectDescriptionCreditsElement.dataset.hasDescription = data.description ? 'true' : 'false'
+  projectDescriptionCreditsElement.dataset.hasCredits = data.credits ? 'true' : 'false'
+
+  // Details section
+  const detailsViews = document.getElementById('details-views')
+  if (detailsViews) {
+    const viewsTemplate = projectElement.dataset.transViews || '%views% views'
+    detailsViews.textContent = viewsTemplate.replace('%views%', String(data.views ?? 0))
+  }
+
+  const detailsAge = document.getElementById('details-age')
+  if (detailsAge) {
+    detailsAge.textContent = data.uploaded_string || ''
+  }
+
+  const detailsFilesize = document.getElementById('details-filesize')
+  if (detailsFilesize) {
+    detailsFilesize.textContent = formatFilesize(data.filesize)
+  }
+
+  const detailsDownloads = document.getElementById('details-downloads')
+  if (detailsDownloads) {
+    const downloadsTemplate = projectElement.dataset.transDownloads || '%downloads% downloads'
+    detailsDownloads.textContent = downloadsTemplate.replace(
+      '%downloads%',
+      String(data.downloads ?? 0),
+    )
+  }
+
+  if (data.not_for_kids) {
+    const detailsNfk = document.getElementById('details-not-for-kids')
+    if (detailsNfk) {
+      detailsNfk.classList.remove('d-none')
+    }
+  }
+
+  // Tags and extensions
+  renderTagsAndExtensions(data)
+
+  // Download buttons
+  renderDownloadButtons(data)
+
+  // Recommended projects title (needs author name)
+  const recommendedTitle = document.getElementById('recommended-projects-title')
+  if (recommendedTitle && data.author) {
+    const template = projectElement.dataset.transMoreFromUser || 'More from %username%'
+    recommendedTitle.textContent = template.replace('__USERNAME__', data.author)
+  }
+
+  // Remove all skeleton placeholders now that content is rendered
+  removeSkeletons()
 }
 
-// Report project button
-const reportBtn = document.getElementById('top-app-bar__btn-report-project')
-if (reportBtn) {
-  import('../Moderation/ReportDialog').then(({ showReportDialog }) => {
-    const buildReportDialogConfig = () => ({
-      contentType: reportBtn.dataset.contentType,
-      contentId: reportBtn.dataset.contentId,
-      apiUrl: reportBtn.dataset.reportUrl,
-      loginUrl: reportBtn.dataset.loginUrl,
-      isLoggedIn: reportBtn.dataset.loggedIn === 'true',
-      translations: {
-        title: reportBtn.dataset.transReportTitle,
-        submit: reportBtn.dataset.transReportSubmit,
-        cancel: reportBtn.dataset.transReportCancel,
-        success: reportBtn.dataset.transReportSuccess,
-        error: reportBtn.dataset.transReportError,
-        duplicate: reportBtn.dataset.transReportDuplicate,
-        trustTooLow: reportBtn.dataset.transReportTrustTooLow,
-        unverified: reportBtn.dataset.transReportUnverified,
-        suspended: reportBtn.dataset.transReportSuspended,
-        rateLimited: reportBtn.dataset.transReportRateLimited,
-        notePlaceholder: reportBtn.dataset.transReportPlaceholder,
-      },
+function renderRetentionBadge(data) {
+  const container = document.getElementById('retention-badge-container')
+  if (!container) return
+
+  const retentionDays = data.retention_days
+  if (retentionDays == null) {
+    container.classList.add('d-none')
+    return
+  }
+
+  container.removeAttribute('style')
+  container.classList.add('mt-2', 'd-flex', 'align-items-center', 'gap-1')
+
+  let badgeHtml = ''
+
+  if (retentionDays === RETENTION_PROTECTED) {
+    const protectedText = projectElement.dataset.transRetentionProtected || 'Protected'
+    badgeHtml = `<span class="badge bg-success-subtle text-success">
+      <i class="material-icons" style="font-size: 14px; vertical-align: middle;">verified</i>
+      ${escapeHtml(protectedText)}
+    </span>`
+  } else if (data.retention_expiry) {
+    const expiryDate = new Date(data.retention_expiry)
+    const now = new Date()
+    const daysLeft = Math.max(0, Math.ceil((expiryDate - now) / MS_PER_DAY))
+    const daysLeftTemplate = projectElement.dataset.transRetentionDaysLeft || '__DAYS__ days left'
+    const daysLeftText = daysLeftTemplate.replace('__DAYS__', String(daysLeft))
+
+    if (daysLeft <= RETENTION_WARN_DAYS) {
+      badgeHtml = `<span class="badge bg-danger-subtle text-danger">
+        <i class="material-icons" style="font-size: 14px; vertical-align: middle;">warning</i>
+        ${escapeHtml(daysLeftText)}
+      </span>`
+    } else if (daysLeft <= RETENTION_CAUTION_DAYS) {
+      badgeHtml = `<span class="badge bg-warning-subtle text-warning">
+        <i class="material-icons" style="font-size: 14px; vertical-align: middle;">hourglass_bottom</i>
+        ${escapeHtml(daysLeftText)}
+      </span>`
+    } else {
+      badgeHtml = `<span class="badge bg-secondary-subtle text-secondary">
+        <i class="material-icons" style="font-size: 14px; vertical-align: middle;">schedule</i>
+        ${escapeHtml(daysLeftText)}
+      </span>`
+    }
+  }
+
+  const tooltipText =
+    retentionDays === RETENTION_PROTECTED
+      ? projectElement.dataset.transRetentionTooltipProtected
+      : projectElement.dataset.transRetentionTooltip
+
+  badgeHtml += `<span class="retention-info-wrap">
+    <span class="material-icons retention-info-icon">info_outline</span>
+    <span class="retention-tooltip">${escapeHtml(tooltipText || '')}</span>
+  </span>`
+
+  container.innerHTML = badgeHtml
+}
+
+function renderTagsAndExtensions(data) {
+  const wrapper = document.getElementById('tag-extension-wrapper')
+  if (!wrapper) return
+
+  const extensions = data.extensions || {}
+  const extensionKeys = Object.keys(extensions)
+  const tags = data.tags || {}
+  const tagKeys = Object.keys(tags)
+  const hasExtensions = extensionKeys.length > 0
+  const hasTags = tagKeys.length > 0
+
+  if (!hasTags && !hasExtensions) return
+
+  const searchUrl = projectElement.dataset.searchUrl || '/search?q=__QUERY__'
+
+  let html = '<div class="row"><div class="col-12"><div id="tag-extension-container">'
+
+  if (hasExtensions) {
+    const extensionsTitle =
+      extensionKeys.length === 1
+        ? projectElement.dataset.transExtensionsTitleOne || 'Extension'
+        : projectElement.dataset.transExtensionsTitleOther || 'Extensions'
+    html += `<div id="extensions"><p>${escapeHtml(extensionsTitle)}:</p><div class="list">`
+    extensionKeys.forEach((key) => {
+      const extName = extensions[key]
+      const extUrl = searchUrl.replace('__QUERY__', encodeURIComponent(key))
+      html += `<a href="${extUrl}"><span class="badge rounded-pill bg-primary">${escapeHtml(extName)}</span></a>`
     })
+    html += '</div></div>'
+  }
 
-    reportBtn.addEventListener('click', () => {
-      showReportDialog(buildReportDialogConfig())
+  if (hasTags) {
+    const tagsTitle =
+      tagKeys.length === 1
+        ? projectElement.dataset.transTagsTitleOne || 'Tag'
+        : projectElement.dataset.transTagsTitleOther || 'Tags'
+    html += `<div id="tags"><p>${escapeHtml(tagsTitle)}:</p><div class="list">`
+    tagKeys.forEach((key) => {
+      const tagName = tags[key]
+      const tagUrl = searchUrl.replace('__QUERY__', encodeURIComponent(key))
+      html += `<a href="${tagUrl}"><span class="badge rounded-pill bg-primary">${escapeHtml(tagName)}</span></a>`
     })
+    html += '</div></div>'
+  }
 
-    // Re-open one pending report handoff once after login on the matching content page.
-    if (reportBtn.dataset.loggedIn === 'true') {
-      const pending = sessionStorage.getItem('pendingAction')
-      if (pending) {
-        try {
-          const pendingAction = JSON.parse(pending)
-          const isMatchingReportHandoff =
-            pendingAction?.actionType === 'report' &&
-            String(pendingAction?.contentType || '') ===
-              String(reportBtn.dataset.contentType || '') &&
-            String(pendingAction?.contentId || '') === String(reportBtn.dataset.contentId || '')
+  html += '</div></div></div>'
+  wrapper.innerHTML = html
+}
 
-          if (isMatchingReportHandoff) {
-            sessionStorage.removeItem('pendingAction')
-            showReportDialog(buildReportDialogConfig())
-          }
-        } catch (e) {
-          console.error('Failed to parse pending report handoff', e)
-          sessionStorage.removeItem('pendingAction')
-        }
+function renderDownloadButtons(data) {
+  const downloadUrl = data.download_url || ''
+  const isWebview = projectElement.dataset.isWebview === 'true'
+  const transDownload = projectElement.dataset.transDownload || 'Download'
+  const transDownloading = projectElement.dataset.transDownloading || 'Downloading...'
+  const transDownloaded = projectElement.dataset.transDownloaded || 'Downloaded'
+  const transOpenInApp = projectElement.dataset.transOpenInApp || 'Open in App'
+  const transNotSupportedTitle = projectElement.dataset.transUpdateAppHeaderDownload || ''
+  const transNotSupportedText = projectElement.dataset.transUpdateAppTextDownload || ''
+  const transDownloadError = projectElement.dataset.transDownloadError || ''
+
+  if (!downloadUrl) return
+
+  const buildButtonHtml = (suffix) => {
+    let html = `<div id="downloadButtonWrapper${suffix}" class="download-button-wrapper">`
+
+    // State 1: Default
+    html += `<button id="projectDownloadButton${suffix}"
+            class="btn btn-primary btn-download js-btn-project-download"
+            data-path-url="${escapeAttr(downloadUrl)}"
+            data-project-id="${escapeAttr(projectId)}"
+            data-suffix="${escapeAttr(suffix)}"
+            data-is-webview="${isWebview ? 'true' : 'false'}"
+            data-is-supported="true"
+            data-is-not-supported-title="${escapeAttr(transNotSupportedTitle)}"
+            data-is-not-supported-text="${escapeAttr(transNotSupportedText)}"
+            data-trans-downloading="${escapeAttr(transDownloading)}"
+            data-trans-open-in-app="${escapeAttr(transOpenInApp)}"
+            data-trans-download-error="${escapeAttr(transDownloadError)}"
+    >
+      <i class="material-icons align-bottom">get_app</i>
+      <span>${escapeHtml(transDownload)}</span>
+    </button>`
+
+    // State 2: Progress
+    html += `<div id="downloadProgress${suffix}" class="btn-download-progress d-none">
+      <div class="download-progress-track">
+        <div id="downloadProgressBar${suffix}" class="download-progress-bar"></div>
+      </div>
+      <span id="downloadProgressText${suffix}" class="download-progress-text">
+        ${escapeHtml(transDownloading)} 0%
+      </span>
+      <button id="downloadCancelBtn${suffix}"
+              class="btn-download-cancel js-btn-download-cancel"
+              aria-label="Cancel download"
+              data-suffix="${escapeAttr(suffix)}"
+      >
+        <i class="material-icons">close</i>
+      </button>
+    </div>`
+
+    // State 3: Complete
+    if (isWebview) {
+      html += `<button id="downloadComplete${suffix}"
+              class="btn btn-download btn-download-complete d-none js-btn-download-open"
+              data-project-id="${escapeAttr(projectId)}"
+              data-suffix="${escapeAttr(suffix)}"
+      >
+        <i class="material-icons align-bottom">open_in_new</i>
+        <span>${escapeHtml(transOpenInApp)}</span>
+      </button>`
+    } else {
+      html += `<button id="downloadComplete${suffix}"
+              class="btn btn-download btn-download-complete d-none"
+              disabled
+      >
+        <i class="material-icons align-bottom">check_circle</i>
+        <span>${escapeHtml(transDownloaded)}</span>
+      </button>`
+    }
+
+    html += '</div>'
+    return html
+  }
+
+  const largeWrapper = document.getElementById('download-button-wrapper')
+  if (largeWrapper) {
+    largeWrapper.innerHTML = buildButtonHtml('')
+  }
+
+  const smallWrapper = document.getElementById('download-button-small-wrapper')
+  if (smallWrapper) {
+    smallWrapper.innerHTML = buildButtonHtml('-small')
+  }
+}
+
+function initComponents(data, earlyInits) {
+  let editorNavigation = null
+
+  if (projectElement.dataset.myProject === 'true') {
+    // Initialize MDCTextField only if a proper mdc-text-field element exists.
+    const commentMessageWrapper = document.querySelector('.comment-message')
+    if (commentMessageWrapper) {
+      const commentMdcRoot =
+        commentMessageWrapper.querySelector('.mdc-text-field') ||
+        (commentMessageWrapper.classList &&
+        commentMessageWrapper.classList.contains('mdc-text-field')
+          ? commentMessageWrapper
+          : null)
+      if (commentMdcRoot) {
+        new MDCTextField(commentMdcRoot)
       }
     }
-  })
-}
 
-// Appeal button for auto-hidden projects
-const appealBtn = document.getElementById('btn-appeal-project')
-if (appealBtn) {
-  import('../Moderation/AppealDialog').then(({ showAppealDialog }) => {
-    appealBtn.addEventListener('click', () => {
-      showAppealDialog({
-        contentType: appealBtn.dataset.contentType,
-        contentId: appealBtn.dataset.contentId,
-        apiUrl: appealBtn.dataset.appealUrl,
+    const nameEditorTextFieldModel = new ProjectEditorTextFieldModel(
+      projectDescriptionCreditsElement.dataset.projectId,
+      'name',
+      true,
+      document.querySelector('#name').textContent.trim(),
+    )
+    new ProjectEditorTextField(nameEditorTextFieldModel)
+
+    const descriptionEditorTextFieldModel = new ProjectEditorTextFieldModel(
+      projectDescriptionCreditsElement.dataset.projectId,
+      'description',
+      projectDescriptionCreditsElement.dataset.hasDescription === 'true',
+      document.querySelector('#description').textContent.trim(),
+    )
+    new ProjectEditorTextField(descriptionEditorTextFieldModel)
+
+    const creditsEditorTextFieldModel = new ProjectEditorTextFieldModel(
+      projectDescriptionCreditsElement.dataset.projectId,
+      'credits',
+      projectDescriptionCreditsElement.dataset.hasCredits === 'true',
+      document.querySelector('#credits').textContent.trim(),
+    )
+    new ProjectEditorTextField(creditsEditorTextFieldModel)
+
+    const projectEditorModel = new ProjectEditorModel(
+      projectDescriptionCreditsElement.dataset.projectId,
+      [nameEditorTextFieldModel, descriptionEditorTextFieldModel, creditsEditorTextFieldModel],
+      earlyInits.languagesPromise,
+    )
+    const projectEditor = new ProjectEditor(
+      projectDescriptionCreditsElement,
+      projectDescriptionCreditsElement.dataset.projectId,
+      projectEditorModel,
+    )
+
+    editorNavigation = new ProjectEditorNavigation(
+      projectDescriptionCreditsElement,
+      projectDescriptionCreditsElement.dataset.projectId,
+      projectEditor,
+    )
+  }
+
+  // Report project button
+  const reportBtn = document.getElementById('top-app-bar__btn-report-project')
+  if (reportBtn) {
+    import('../Moderation/ReportDialog').then(({ showReportDialog }) => {
+      const buildReportDialogConfig = () => ({
+        contentType: reportBtn.dataset.contentType,
+        contentId: reportBtn.dataset.contentId,
+        apiUrl: reportBtn.dataset.reportUrl,
+        loginUrl: reportBtn.dataset.loginUrl,
+        isLoggedIn: reportBtn.dataset.loggedIn === 'true',
         translations: {
-          title: appealBtn.dataset.transAppealTitle,
-          placeholder: appealBtn.dataset.transAppealPlaceholder,
-          submit: appealBtn.dataset.transAppealSubmit,
-          cancel: appealBtn.dataset.transAppealCancel,
-          success: appealBtn.dataset.transAppealSuccess,
-          alreadyPending: appealBtn.dataset.transAppealAlreadyPending,
-          error: appealBtn.dataset.transAppealError,
-          rateLimited: appealBtn.dataset.transAppealRateLimited,
+          title: reportBtn.dataset.transReportTitle,
+          submit: reportBtn.dataset.transReportSubmit,
+          cancel: reportBtn.dataset.transReportCancel,
+          success: reportBtn.dataset.transReportSuccess,
+          error: reportBtn.dataset.transReportError,
+          duplicate: reportBtn.dataset.transReportDuplicate,
+          trustTooLow: reportBtn.dataset.transReportTrustTooLow,
+          unverified: reportBtn.dataset.transReportUnverified,
+          suspended: reportBtn.dataset.transReportSuspended,
+          rateLimited: reportBtn.dataset.transReportRateLimited,
+          notePlaceholder: reportBtn.dataset.transReportPlaceholder,
         },
       })
+
+      reportBtn.addEventListener('click', () => {
+        showReportDialog(buildReportDialogConfig())
+      })
+
+      // Re-open one pending report handoff once after login on the matching content page.
+      if (reportBtn.dataset.loggedIn === 'true') {
+        const pending = sessionStorage.getItem('pendingAction')
+        if (pending) {
+          try {
+            const pendingAction = JSON.parse(pending)
+            const isMatchingReportHandoff =
+              pendingAction?.actionType === 'report' &&
+              String(pendingAction?.contentType || '') ===
+                String(reportBtn.dataset.contentType || '') &&
+              String(pendingAction?.contentId || '') === String(reportBtn.dataset.contentId || '')
+
+            if (isMatchingReportHandoff) {
+              sessionStorage.removeItem('pendingAction')
+              showReportDialog(buildReportDialogConfig())
+            }
+          } catch (e) {
+            console.error('Failed to parse pending report handoff', e)
+            sessionStorage.removeItem('pendingAction')
+          }
+        }
+      }
     })
+  }
+
+  // Appeal button for auto-hidden projects
+  const appealBtn = document.getElementById('btn-appeal-project')
+  if (appealBtn) {
+    import('../Moderation/AppealDialog').then(({ showAppealDialog }) => {
+      appealBtn.addEventListener('click', () => {
+        showAppealDialog({
+          contentType: appealBtn.dataset.contentType,
+          contentId: appealBtn.dataset.contentId,
+          apiUrl: appealBtn.dataset.appealUrl,
+          translations: {
+            title: appealBtn.dataset.transAppealTitle,
+            placeholder: appealBtn.dataset.transAppealPlaceholder,
+            submit: appealBtn.dataset.transAppealSubmit,
+            cancel: appealBtn.dataset.transAppealCancel,
+            success: appealBtn.dataset.transAppealSuccess,
+            alreadyPending: appealBtn.dataset.transAppealAlreadyPending,
+            error: appealBtn.dataset.transAppealError,
+            rateLimited: appealBtn.dataset.transAppealRateLimited,
+          },
+        })
+      })
+    })
+  }
+
+  Project({
+    projectId: projectElement.dataset.projectId,
+    projectName: data.name || '',
+    userRole: projectElement.dataset.userRole,
+    loginUrl: projectElement.dataset.loginUrl,
+    apiReactionUrl: projectElement.dataset.apiReactionUrl,
+    apiReactionsUrl: projectElement.dataset.apiReactionsUrl,
+    apiReactionsUsersUrl: projectElement.dataset.apiReactionsUsersUrl,
+    likeActionAdd: projectElement.dataset.constActionAdd,
+    likeActionRemove: projectElement.dataset.constActionRemove,
+    profileUrl: projectElement.dataset.pathProfile,
+    wowWhite: projectElement.dataset.assetWowWhite,
+    wowBlack: projectElement.dataset.assetWowBlack,
+    reactionsText: projectElement.dataset.transReaction,
+    downloadErrorText: projectElement.dataset.transDownloadError,
   })
+
+  ProjectName(
+    projectDescriptionCreditsElement.dataset.projectId,
+    appLanguageElement.dataset.appLanguage,
+    projectElement.dataset.myProject === 'true',
+    new CustomTranslationApi('name'),
+    editorNavigation,
+  )
+
+  ProjectDescription(
+    projectDescriptionCreditsElement.dataset.projectId,
+    appLanguageElement.dataset.appLanguage,
+    projectDescriptionCreditsElement.dataset.transMoreInfo,
+    projectDescriptionCreditsElement.dataset.transLessInfo,
+    projectElement.dataset.myProject === 'true',
+    new CustomTranslationApi('description'),
+  )
+
+  ProjectCredits(
+    projectDescriptionCreditsElement.dataset.projectId,
+    appLanguageElement.dataset.appLanguage,
+    projectElement.dataset.myProject === 'true',
+    new CustomTranslationApi('credit'),
+  )
+
+  initProjectScreenshotUpload()
+  initProjects()
+
+  new TranslateComments(
+    projectElement.dataset.translatedByLine,
+    projectElement.dataset.googleTranslateDisplayName,
+  )
+
+  ProjectComments({
+    showStep: 5,
+    minAmountOfVisibleComments: 5,
+    cancel: projectCommentsElement.dataset.transCancel,
+    deleteIt: projectCommentsElement.dataset.transDeleteIt,
+    areYouSure: projectCommentsElement.dataset.transAreYouSure,
+    noWayOfReturn: projectCommentsElement.dataset.transNoWayOfReturn,
+    deleteConfirmation: projectCommentsElement.dataset.transDeleteConfirmation,
+    popUpDeletedTitle: projectCommentsElement.dataset.transPopUpDeletedTitle,
+    popUpDeletedText: projectCommentsElement.dataset.transPopUpDeletedText,
+    noAdminRightsMessage: projectCommentsElement.dataset.transNoAdminRightsMessage,
+    defaultErrorMessage: projectCommentsElement.dataset.transDefaultErrorMessage,
+  })
+
+  new TranslateProgram(
+    projectElement.dataset.translatedByLine,
+    projectElement.dataset.googleTranslateDisplayName,
+    projectElement.dataset.projectId,
+    projectElement.dataset.hasDescription === 'true',
+    projectElement.dataset.hasCredits === 'true',
+  )
 }
-
-Project(
-  projectElement.dataset.projectId,
-  projectElement.dataset.projectName,
-  projectElement.dataset.userRole,
-  projectElement.dataset.myProject === 'true',
-  projectElement.dataset.loginUrl,
-  projectElement.dataset.apiReactionUrl,
-  projectElement.dataset.apiReactionsUrl,
-  projectElement.dataset.apiReactionsUsersUrl,
-  projectElement.dataset.transUpdateAppHeader,
-  projectElement.dataset.transUpdateAppText,
-  projectElement.dataset.constActionAdd,
-  projectElement.dataset.constActionRemove,
-  projectElement.dataset.pathProfile,
-  projectElement.dataset.assetWowWhite,
-  projectElement.dataset.assetWowBlack,
-  projectElement.dataset.transReaction,
-  projectElement.dataset.transDownloadError,
-)
-
-ProjectName(
-  projectDescriptionCreditsElement.dataset.projectId,
-  appLanguageElement.dataset.appLanguage,
-  projectElement.dataset.myProject === 'true',
-  new CustomTranslationApi('name'),
-  editorNavigation,
-)
-
-ProjectDescription(
-  projectDescriptionCreditsElement.dataset.projectId,
-  appLanguageElement.dataset.appLanguage,
-  projectDescriptionCreditsElement.dataset.transMoreInfo,
-  projectDescriptionCreditsElement.dataset.transLessInfo,
-  projectElement.dataset.myProject === 'true',
-  new CustomTranslationApi('description'),
-)
-
-ProjectCredits(
-  projectDescriptionCreditsElement.dataset.projectId,
-  appLanguageElement.dataset.appLanguage,
-  projectElement.dataset.myProject === 'true',
-  new CustomTranslationApi('credit'),
-)
-
-initProjectScreenshotUpload()
 
 function initProjectScreenshotUpload() {
   const addChangeListenerToFileInput = function (input) {
@@ -250,7 +685,6 @@ function initProjectScreenshotUpload() {
   }
   const changeButton = document.getElementById('change-project-thumbnail-button')
   if (changeButton) {
-    // otherwise user is not allowed to change screenshot (e.g., not owner of project)
     changeButton.addEventListener('click', function () {
       const input = document.createElement('input')
       input.type = 'file'
@@ -271,8 +705,6 @@ function initProjectScreenshotUpload() {
   }
 }
 
-initProjects()
-
 function initProjects() {
   const recommendedProjectsElement = document.querySelector('#recommended-projects')
   document.querySelectorAll('.project-list', recommendedProjectsElement).forEach((element) => {
@@ -281,49 +713,14 @@ function initProjects() {
     const property = element.dataset.property
     const theme = element.dataset.theme
     const flavor = element.dataset.flavor
-    const baseUrl = element.dataset.baseUrl
+    const elBaseUrl = element.dataset.baseUrl
 
-    let url = `${baseUrl}/api/project/${id}/recommendations?category=${category}`
+    let url = `${elBaseUrl}/api/project/${id}/recommendations?category=${category}`
 
     if (flavor !== 'pocketcode' || category === 'example') {
-      // Only the pocketcode flavor shows projects from all flavors!
-      // Other flavors must only show projects from their flavor.
       url += `&flavor=${flavor}`
     }
 
     new ProjectList(element, category, url, property, theme)
   })
 }
-
-new TranslateComments(
-  projectElement.dataset.translatedByLine,
-  projectElement.dataset.googleTranslateDisplayName,
-)
-
-ProjectComments(
-  projectCommentsElement.dataset.projectId,
-  5,
-  5,
-  5,
-  projectCommentsElement.dataset.transCancel,
-  projectCommentsElement.dataset.transDeleteIt,
-  projectCommentsElement.dataset.transReportIt,
-  projectCommentsElement.dataset.transAreYouSure,
-  projectCommentsElement.dataset.transNoWayOfReturn,
-  projectCommentsElement.dataset.transDeleteConfirmation,
-  projectCommentsElement.dataset.transReportConfirmation,
-  projectCommentsElement.dataset.transPopUpCommentReportedTitle,
-  projectCommentsElement.dataset.transPopUpCommentReportedText,
-  projectCommentsElement.dataset.transPopUpDeletedTitle,
-  projectCommentsElement.dataset.transPopUpDeletedText,
-  projectCommentsElement.dataset.transNoAdminRightsMessage,
-  projectCommentsElement.dataset.transDefaultErrorMessage,
-)
-
-new TranslateProgram(
-  projectElement.dataset.translatedByLine,
-  projectElement.dataset.googleTranslateDisplayName,
-  projectElement.dataset.projectId,
-  projectElement.dataset.hasDescription === 'true',
-  projectElement.dataset.hasCredits === 'true',
-)

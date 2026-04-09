@@ -15,9 +15,11 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Given I log in as "OtherUser"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 2"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -34,9 +36,11 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -54,9 +58,11 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -75,9 +81,11 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "project 1"
     Then the element "#edit-project-button" should be visible
     When I click "#edit-project-button"
-    And I wait for AJAX to finish
+    And I wait for the element "#edit-default-button" to be visible
     Then I should see "Default"
     When I click "#edit-default-button"
     And I wait for AJAX to finish
@@ -95,6 +103,8 @@ Feature: Projects should have descriptions that can be changed by the project ow
       | 3  | long description project | Catrobat |
     When I go to "/app/project/3"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#name" to contain "long description project"
     Then I should see "long description project"
     And I should see "MORE INFORMATION"
     When I click "#descriptionShowMoreToggle"
@@ -105,6 +115,7 @@ Feature: Projects should have descriptions that can be changed by the project ow
   Scenario: Small Project Descriptions are fully visible
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#description" to contain "my description"
     Then I should see "my description"
     And I should not see "Show more"
-

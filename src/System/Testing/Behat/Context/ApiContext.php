@@ -105,8 +105,9 @@ class ApiContext implements Context
    * @var string[]
    */
   private array $full_project_structure = ['id', 'name', 'author', 'author_id', 'description', 'credits', 'version', 'views',
-    'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string',
-    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', 'not_for_kids', ];
+    'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded', 'uploaded_string',
+    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', 'not_for_kids',
+    'retention_days', 'retention_expiry', ];
 
   /**
    * @var string[]
@@ -2226,6 +2227,9 @@ class ApiContext implements Context
       'tags' => static function ($tags): void {
         Assert::assertIsArray($tags, 'Tags is not an array!');
       },
+      'extensions' => static function ($extensions): void {
+        Assert::assertIsArray($extensions, 'Extensions is not an array!');
+      },
       'uploaded' => static function ($uploaded): void {
         Assert::assertIsInt($uploaded, 'uploaded is not an integer!');
       },
@@ -2270,6 +2274,12 @@ class ApiContext implements Context
       'not_for_kids' => static function ($not_for_kids): void {
         Assert::assertIsInt($not_for_kids, 'not_for_kids is not an integer! '.$not_for_kids);
         Assert::assertContains($not_for_kids, [0, 1, 2], 'not_for_kids is not 0 or 1 or 2! '.$not_for_kids);
+      },
+      'retention_days' => static function ($retention_days): void {
+        Assert::assertIsInt($retention_days, 'retention_days is not an integer!');
+      },
+      'retention_expiry' => static function ($retention_expiry): void {
+        Assert::assertTrue(is_null($retention_expiry) || is_string($retention_expiry), 'retention_expiry must be null or a string!');
       },
     ];
 
