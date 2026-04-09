@@ -113,7 +113,7 @@ export default class extends Controller {
     el.innerHTML = `
       <div class="comment-avatar">
         <a href="/app/user/${escapeAttr(String(comment.user_id || ''))}">
-          <img class="comment-avatar-img" src="${escapeAttr(avatarSrc)}" alt="Avatar">
+          <img class="comment-avatar-img" src="${escapeAttr(avatarSrc)}" alt="Avatar" width="48" height="48">
         </a>
       </div>
       <div class="comment-payload-wrapper">
