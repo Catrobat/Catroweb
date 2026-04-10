@@ -26,19 +26,42 @@
     data-trans-explore="{{ 'studio.overview.explore'|trans({}, 'catroweb')|e('html_attr') }}"
     data-trans-no-joined="{{ 'studio.overview.no_joined'|trans({}, 'catroweb')|e('html_attr') }}"
     data-trans-joined="{{ 'studio.overview.joined'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-open="{{ 'studio.overview.open'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-share="{{ 'studio.overview.share'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-share-success="{{ 'studio.overview.share_success'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-leave-confirm-title="{{ 'studio.overview.leave_confirm_title'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-cancel="{{ 'studio.overview.cancel'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-cancel-request="{{ 'studio.overview.cancel_request'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-cancel-request-confirm-title="{{ 'studio.overview.cancel_request_confirm_title'|trans({}, 'catroweb')|e('html_attr') }}"
+    data-trans-admin="{{ 'studio.overview.admin'|trans({}, 'catroweb')|e('html_attr') }}"
   >
     {% if is_logged_in %}
       <section class="studios-section">
-        <h2 class="studios-section__title" data-studio--overview-target="myStudiosHeader"></h2>
-        <div data-studio--overview-target="myStudios"></div>
+        <h2 class="studios-section__title" data-studio--overview-target="myStudiosHeader">{{ 'studio.overview.my_studios'|trans({}, 'catroweb') }}</h2>
+        <div data-studio--overview-target="myStudios">
+          {% for i in range(1, 3) %}
+            {{ include('Studio/_SkeletonCard.html.twig') }}
+          {% endfor %}
+        </div>
       </section>
 
       <section class="studios-section">
-        <h2 class="studios-section__title" data-studio--overview-target="exploreStudiosHeader"></h2>
-        <div data-studio--overview-target="exploreStudios"></div>
+        <h2 class="studios-section__title" data-studio--overview-target="exploreStudiosHeader">{{ 'studio.overview.explore'|trans({}, 'catroweb') }}</h2>
+        <div data-studio--overview-target="exploreStudios">
+          {% for i in range(1, 5) %}
+            {{ include('Studio/_SkeletonCard.html.twig') }}
+          {% endfor %}
+        </div>
       </section>
     {% else %}
-      <div data-studio--overview-target="studiosList"></div>
+      <section class="studios-section">
+        <h2 class="studios-section__title">{{ 'studio.overview.explore'|trans({}, 'catroweb') }}</h2>
+        <div data-studio--overview-target="studiosList">
+          {% for i in range(1, 5) %}
+            {{ include('Studio/_SkeletonCard.html.twig') }}
+          {% endfor %}
+        </div>
+      </section>
     {% endif %}
 
     <div id="studios-load-more" class="text-center my-3" data-studio--overview-target="loadMore" style="display: none;">

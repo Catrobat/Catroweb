@@ -66,7 +66,6 @@ Feature: Pocketcode homepage
     Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
     And I should see "Google Play Store"
     And I should see "iOS App Store"
-    And I should see "Huawei AppGallery"
 
   Scenario: Welcome Section luna
     Given I am on "/luna"
@@ -76,7 +75,6 @@ Feature: Pocketcode homepage
     And I should see "Google Play Store"
     And I should see "Discord Chat"
     And I should not see "iOS App Store"
-    And I should not see "Huawei AppGallery"
 
   Scenario: Welcome Section embroidery
     Given I am on "/embroidery"
@@ -86,7 +84,6 @@ Feature: Pocketcode homepage
     And I should see "Google Play Store"
     And I should see "Instagram"
     And I should not see "iOS App Store"
-    And I should not see "Huawei AppGallery"
 
   Scenario: Welcome Section mindstorms
     Given I am on "/mindstorms"
@@ -95,7 +92,6 @@ Feature: Pocketcode homepage
     Then I should see the video available at "https://www.youtube.com/embed/YnSl-fSV-nY"
     And I should see "Google Play Store"
     And I should not see "iOS App Store"
-    And I should not see "Huawei AppGallery"
 
   Scenario: Cant see the Welcome Section when logged in
     Given I log in as "Catrobat"

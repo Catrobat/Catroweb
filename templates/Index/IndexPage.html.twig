@@ -25,7 +25,7 @@
        data-trans-featured="{{ 'project.featured'|trans({}, 'catroweb') }}"
   >
     <div class="featured-slider__skeleton featured-banner mb-2" style="grid-area: 1/1;">
-      <div style="aspect-ratio: 1024/400; background: light-dark(#f0f0f0, #1a1a2e);"></div>
+      <div style="aspect-ratio: 1024/600; background: light-dark(#f0f0f0, #1a1a2e);"></div>
     </div>
   </div>
 
@@ -36,20 +36,20 @@
     {% if isWebview() %}
       {% set categories = [
         ['example', 'example', 'author'],
-        ['trending', 'trending', 'downloads'],
+        ['trending', 'trending', 'author'],
         ['popular', 'popular', 'author'],
       ] %}
     {% elseif app.user %}
       {% set categories = [
         ['example', 'example', 'author'],
-        ['trending', 'trending', 'downloads'],
+        ['trending', 'trending', 'author'],
         ['_studios_', null, null],
         ['popular', 'popular', 'author'],
       ] %}
     {% else %}
       {% set categories = [
         ['example', 'example', 'author'],
-        ['trending', 'trending', 'downloads'],
+        ['trending', 'trending', 'author'],
         ['random', 'random', 'uploaded'],
         ['_studios_', null, null],
         ['popular', 'popular', 'author'],

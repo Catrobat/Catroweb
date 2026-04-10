@@ -42,23 +42,29 @@ Feature: As studio admin I must be able to configure a studio
     Given I am on "/app/studio/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the element "#top-app-bar__btn-settings" should not exist
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    Then the element "#top-app-bar__btn-edit-studio" should not be visible
 
   Scenario: If I am not the admin of the studio, I must not see the button to open the settings modal
     Given I log in as "Catrobat"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the element "#top-app-bar__btn-settings" should not exist
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    Then the element "#top-app-bar__btn-edit-studio" should not be visible
 
   Scenario: If I am the admin of the studio, I have access to an settings modal
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the element "#top-app-bar__btn-settings" should be visible
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    Then the element "#top-app-bar__btn-edit-studio" should be visible
     Then I should not see "General Settings"
-    When I click "#top-app-bar__btn-settings"
+    When I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     Then I should see "General Settings"
 
@@ -69,7 +75,9 @@ Feature: As studio admin I must be able to configure a studio
     And I wait for AJAX to finish
     And I should see "CatrobatStudio01"
     And the element "#studio-settings__submit-button" should not be visible
-    When I click "#top-app-bar__btn-settings"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     And the element "#studio-settings__submit-button" should be visible
     When I fill in "studio_name" with "CatrobatStudio02"
@@ -86,7 +94,9 @@ Feature: As studio admin I must be able to configure a studio
     And I wait for AJAX to finish
     And I should see "hasADescription"
     And the element "#studio-settings__submit-button" should not be visible
-    When I click "#top-app-bar__btn-settings"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     And the element "#studio-settings__submit-button" should be visible
     When I fill in "studio_description" with "hasANewDescription"
@@ -103,7 +113,9 @@ Feature: As studio admin I must be able to configure a studio
     And I wait for AJAX to finish
     And I should see "CatrobatStudio01"
     And the element "#studio-settings__close-button" should not be visible
-    When I click "#top-app-bar__btn-settings"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     Then the element "#studio-settings__close-button" should be visible
     When I fill in "studio_name" with "CatrobatStudio02"
@@ -120,7 +132,9 @@ Feature: As studio admin I must be able to configure a studio
     And I click "#comments-tab"
     And I wait for the page to be loaded
     Then I should see "This studio has no comments yet"
-    When I click "#top-app-bar__btn-settings"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     And I click "#studio-setting__switch-enable-comments"
     And I click "#studio-settings__submit-button"
@@ -143,19 +157,23 @@ Feature: As studio admin I must be able to configure a studio
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "public"
-    When I click "#top-app-bar__btn-settings"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     And I click "#studio-setting__switch-studio-privacy"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
     Then I should not see "public"
-    Then I should see "private"
-    When I click "#top-app-bar__btn-settings"
+    Then the "#header-visibility" element should contain "private"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     And I click "#studio-setting__switch-studio-privacy"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
-    Then I should see "public"
+    Then the "#header-visibility" element should contain "public"
     Then I should not see "private"
 
   Scenario:As a public Studio admin, I can not see pending join requests, approved join requests, and declined join requests.
@@ -163,8 +181,10 @@ Feature: As studio admin I must be able to configure a studio
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "public"
-    When I click "#top-app-bar__btn-settings"
+    Then the "#header-visibility" element should contain "public"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     Then I should not see "Pending Join Request"
     And  I should not see "Approved Join Requests"
@@ -175,8 +195,10 @@ Feature: As studio admin I must be able to configure a studio
     And I am on "/app/studio/2"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I should see "private"
-    When I click "#top-app-bar__btn-settings"
+    Then the "#header-visibility" element should contain "private"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
     And I wait for the page to be loaded
     Then I should not see "Pending Join Request"
     And I should not see "Approved Join Requests"

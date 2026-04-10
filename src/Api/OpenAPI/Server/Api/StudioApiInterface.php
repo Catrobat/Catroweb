@@ -339,25 +339,6 @@ interface StudioApiInterface
   ): void;
 
   /**
-   * Operation studioIdMembersUserIdPromotePost.
-   *
-   * Promote a studio member to admin
-   *
-   * @param string $id              (required)
-   * @param string $user_id         (required)
-   * @param string $accept_language (optional, default to 'en')
-   * @param int    &$responseCode   The HTTP Response Code
-   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
-   */
-  public function studioIdMembersUserIdPromotePost(
-    string $id,
-    string $user_id,
-    string $accept_language,
-    int &$responseCode,
-    array &$responseHeaders,
-  ): void;
-
-  /**
    * Operation studioIdMembersUserIdDemotePost.
    *
    * Demote a studio admin to member
@@ -369,6 +350,25 @@ interface StudioApiInterface
    * @param array  $responseHeaders Additional HTTP headers to return with the response ()
    */
   public function studioIdMembersUserIdDemotePost(
+    string $id,
+    string $user_id,
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): void;
+
+  /**
+   * Operation studioIdMembersUserIdPromotePost.
+   *
+   * Promote a studio member to admin
+   *
+   * @param string $id              (required)
+   * @param string $user_id         (required)
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function studioIdMembersUserIdPromotePost(
     string $id,
     string $user_id,
     string $accept_language,

@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
 import AcceptLanguage from '../../Api/AcceptLanguage'
 import '../../Components/RetentionTooltip'
@@ -28,6 +28,7 @@ export default class extends Controller {
     this.hasMoreExplore = true
     this.exploreLoading = false
     this.myProjectsLoaded = false
+    this._projectsMap = {}
 
     this._readTranslations()
 
@@ -60,7 +61,7 @@ export default class extends Controller {
     const url =
       this.apiBaseUrlValue +
       '/projects/user' +
-      '?limit=50&attributes=id,name,project_url,screenshot_small,downloads,uploaded_string,retention_days,retention_expiry'
+      '?limit=50&attributes=id,name,project_url,screenshot_small,downloads,views,uploaded_string,retention_days,retention_expiry,private,not_for_kids'
 
     try {
       const response = await fetch(url, {
@@ -74,6 +75,7 @@ export default class extends Controller {
 
       if (!response.ok) {
         console.error('Failed to fetch my projects:', response.status, await response.text())
+        this._removeMyProjectsSkeletons()
         return
       }
 
@@ -81,6 +83,7 @@ export default class extends Controller {
       this._renderMyProjects(projects)
     } catch (error) {
       console.error('Error fetching my projects:', error)
+      this._removeMyProjectsSkeletons()
     }
   }
 
@@ -95,7 +98,7 @@ export default class extends Controller {
       category: 'random',
       limit: '20',
       attributes:
-        'id,name,author,screenshot_small,downloads,views,uploaded_string,retention_days,retention_expiry',
+        'id,name,author,screenshot_small,downloads,views,uploaded_string,retention_days,retention_expiry,private',
     })
     if (this.exploreCursor) {
       params.set('offset', this.exploreCursor)
@@ -115,6 +118,7 @@ export default class extends Controller {
 
       if (!response.ok) {
         console.error('Failed to fetch explore projects:', response.status)
+        this._removeExploreSkeletons()
         this.exploreLoading = false
         return
       }
@@ -131,6 +135,7 @@ export default class extends Controller {
       this._updateLoadMoreButton()
     } catch (error) {
       console.error('Error fetching explore projects:', error)
+      this._removeExploreSkeletons()
     } finally {
       this.exploreLoading = false
     }
@@ -153,6 +158,7 @@ export default class extends Controller {
 
     container.innerHTML = ''
     for (const project of projects) {
+      this._projectsMap[project.id] = project
       container.insertAdjacentHTML('beforeend', this._buildProjectCard(project, true))
     }
 
@@ -167,6 +173,9 @@ export default class extends Controller {
 
     const container = this.exploreProjectsTarget
 
+    // Remove skeleton placeholders on first render
+    this._removeExploreSkeletons()
+
     if (projects.length === 0 && !this.exploreCursor) {
       container.innerHTML =
         '<p class="text-muted text-center py-4">' + escapeHtml(this.translations.noExplore) + '</p>'
@@ -174,6 +183,7 @@ export default class extends Controller {
     }
 
     for (const project of projects) {
+      this._projectsMap[project.id] = project
       container.insertAdjacentHTML('beforeend', this._buildProjectCard(project, false))
     }
 
@@ -186,7 +196,10 @@ export default class extends Controller {
     const author = escapeHtml(project.author || '')
     const screenshotSmall = project.screenshot_small || '/images/default/thumbnail.png'
     const downloads = parseInt(project.downloads, 10) || 0
+    const views = parseInt(project.views, 10) || 0
     const uploadedString = escapeHtml(project.uploaded_string || '')
+    const isPrivate = project.private || false
+    const isNfk = project.not_for_kids || false
 
     const detailUrl = this.projectDetailPathValue.replace('__ID__', id)
 
@@ -201,6 +214,10 @@ export default class extends Controller {
       '<span class="projects-meta__item">' +
       '<i class="material-icons">file_download</i>' +
       String(downloads) +
+      '</span>' +
+      '<span class="projects-meta__item">' +
+      '<i class="material-icons">visibility</i>' +
+      String(views) +
       '</span>'
 
     if (uploadedString) {
@@ -245,21 +262,31 @@ export default class extends Controller {
       '</button>'
 
     if (isOwned) {
-      const transToggleVisibility = this.element.dataset.transToggleVisibility || 'Set Private'
-      const transNotForKids = this.element.dataset.transNotForKids || 'Mark as not safe for kids'
+      const transSetPrivate = this.element.dataset.transSetPrivate || 'Set private'
+      const transSetPublic = this.element.dataset.transSetPublic || 'Set public'
+      const transMarkNfk = this.element.dataset.transMarkNotForKids || 'Mark as not safe for kids'
+      const transMarkSafe = this.element.dataset.transMarkSafeForKids || 'Mark as safe for kids'
       menuItems +=
         '<div class="projects-list-item--dropdown-divider"></div>' +
         '<button class="projects-list-item--dropdown-item" data-action="toggle-visibility" data-project-id="' +
         id +
         '">' +
-        '<i class="material-icons">lock</i>' +
-        escapeHtml(transToggleVisibility) +
+        '<i class="material-icons">' +
+        (isPrivate ? 'lock_open' : 'lock') +
+        '</i>' +
+        '<span class="js-visibility-text">' +
+        escapeHtml(isPrivate ? transSetPublic : transSetPrivate) +
+        '</span>' +
         '</button>' +
-        '<button class="projects-list-item--dropdown-item" data-action="not-for-kids" data-project-id="' +
+        '<button class="projects-list-item--dropdown-item" data-action="toggle-nfk" data-project-id="' +
         id +
         '">' +
-        '<i class="material-icons">child_care</i>' +
-        escapeHtml(transNotForKids) +
+        '<i class="material-icons">' +
+        (isNfk ? 'child_care' : 'no_stroller') +
+        '</i>' +
+        '<span class="js-nfk-text">' +
+        escapeHtml(isNfk ? transMarkSafe : transMarkNfk) +
+        '</span>' +
         '</button>' +
         '<div class="projects-list-item--dropdown-divider"></div>' +
         '<button class="projects-list-item--dropdown-item text-danger" data-action="delete" data-project-id="' +
@@ -298,9 +325,17 @@ export default class extends Controller {
       '<a href="' +
       escapeAttr(detailUrl) +
       '" class="projects-list-item-link">' +
+      '<span class="projects-list-item--image-wrap">' +
       '<img src="' +
       escapeAttr(screenshotSmall) +
-      '" class="projects-list-item--image" alt="" loading="lazy">' +
+      '" class="projects-list-item--image" alt="" loading="lazy"' +
+      (!isOwned && isNfk ? ' style="filter: blur(10px)"' : '') +
+      '>' +
+      (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
+      (isNfk
+        ? '<i class="material-icons projects-list-item--lock-badge projects-list-item--nfk-badge">no_accounts</i>'
+        : '') +
+      '</span>' +
       '<div class="projects-list-item--content">' +
       '<h3 class="projects-list-item--name">' +
       name +
@@ -428,25 +463,121 @@ export default class extends Controller {
         e.preventDefault()
         e.stopPropagation()
         btn.closest('.projects-list-item--dropdown').style.display = 'none'
+        const wrapper = btn.closest('.projects-list-item-wrapper')
         const projectId = btn.dataset.projectId
-        const { default: ProjectApi } = await import('../../Api/ProjectApi')
-        const api = new ProjectApi()
-        api.updateProject(projectId, { private: true }, () => window.location.reload())
+        const project = this._findProject(projectId)
+        const currentlyPrivate = project?.private || false
+        const transConfirm = this.element.dataset.transConfirm || 'Confirm'
+        const transCancel = this.element.dataset.transCancel || 'Cancel'
+        const { default: Swal } = await import('sweetalert2')
+        const result = await Swal.fire({
+          title: currentlyPrivate
+            ? this.element.dataset.transConfirmPublic || 'Set project public?'
+            : this.element.dataset.transConfirmPrivate || 'Set project private?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: transConfirm,
+          cancelButtonText: transCancel,
+          customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-primary',
+          },
+          buttonsStyling: false,
+        })
+        if (result.isConfirmed) {
+          const { default: ProjectApi } = await import('../../Api/ProjectApi')
+          const api = new ProjectApi()
+          api.updateProject(projectId, { private: !currentlyPrivate }, () => {
+            if (project) project.private = !currentlyPrivate
+            // Update button text/icon
+            const visIcon = btn.querySelector('.material-icons')
+            const visText = btn.querySelector('.js-visibility-text')
+            if (visIcon) visIcon.textContent = !currentlyPrivate ? 'lock_open' : 'lock'
+            if (visText) {
+              visText.textContent = !currentlyPrivate
+                ? this.element.dataset.transSetPublic || 'Set public'
+                : this.element.dataset.transSetPrivate || 'Set private'
+            }
+            // Update lock badge
+            const lockBadge = wrapper?.querySelector('.projects-list-item--lock-badge')
+            if (!currentlyPrivate) {
+              if (!lockBadge) {
+                const imgWrap = wrapper?.querySelector('.projects-list-item--image-wrap')
+                if (imgWrap) {
+                  const icon = document.createElement('i')
+                  icon.className = 'material-icons projects-list-item--lock-badge'
+                  icon.textContent = 'lock'
+                  imgWrap.appendChild(icon)
+                }
+              }
+            } else if (lockBadge) {
+              lockBadge.remove()
+            }
+          })
+        }
       })
     })
 
-    // Not for kids action
-    container.querySelectorAll('[data-action="not-for-kids"]').forEach((btn) => {
+    // Toggle not-for-kids action
+    container.querySelectorAll('[data-action="toggle-nfk"]').forEach((btn) => {
       if (btn.dataset.bound) return
       btn.dataset.bound = 'true'
       btn.addEventListener('click', async (e) => {
         e.preventDefault()
         e.stopPropagation()
         btn.closest('.projects-list-item--dropdown').style.display = 'none'
+        const wrapper = btn.closest('.projects-list-item-wrapper')
         const projectId = btn.dataset.projectId
-        const { default: ProjectApi } = await import('../../Api/ProjectApi')
-        const api = new ProjectApi()
-        api.updateProject(projectId, { not_for_kids: true }, () => window.location.reload())
+        const project = this._findProject(projectId)
+        const currentNfk = project?.not_for_kids || 0
+        const newValue = currentNfk === 0
+        const transConfirm = this.element.dataset.transConfirm || 'Confirm'
+        const transCancel = this.element.dataset.transCancel || 'Cancel'
+        const { default: Swal } = await import('sweetalert2')
+        const result = await Swal.fire({
+          title: newValue
+            ? this.element.dataset.transMarkNfkConfirm || 'Mark as not safe for kids?'
+            : this.element.dataset.transUnmarkNfkConfirm || 'Remove not-for-kids mark?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: transConfirm,
+          cancelButtonText: transCancel,
+          customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-primary',
+          },
+          buttonsStyling: false,
+        })
+        if (result.isConfirmed) {
+          const { default: ProjectApi } = await import('../../Api/ProjectApi')
+          const api = new ProjectApi()
+          api.updateProject(projectId, { not_for_kids: newValue }, () => {
+            if (project) project.not_for_kids = newValue ? 1 : 0
+            // Update button text/icon
+            const nfkIcon = btn.querySelector('.material-icons')
+            const nfkText = btn.querySelector('.js-nfk-text')
+            if (nfkIcon) nfkIcon.textContent = newValue ? 'child_care' : 'no_stroller'
+            if (nfkText) {
+              nfkText.textContent = newValue
+                ? this.element.dataset.transMarkSafeForKids || 'Mark as safe for kids'
+                : this.element.dataset.transMarkNotForKids || 'Mark as not safe for kids'
+            }
+            // Update nfk badge on thumbnail
+            const nfkBadge = wrapper?.querySelector('.projects-list-item--nfk-badge')
+            if (newValue && !nfkBadge) {
+              const imgWrap = wrapper?.querySelector('.projects-list-item--image-wrap')
+              if (imgWrap) {
+                const badge = document.createElement('i')
+                badge.className =
+                  'material-icons projects-list-item--lock-badge projects-list-item--nfk-badge'
+                badge.textContent = 'no_accounts'
+                imgWrap.appendChild(badge)
+              }
+            } else if (!newValue && nfkBadge) {
+              nfkBadge.remove()
+            }
+          })
+        }
       })
     })
 
@@ -456,6 +587,27 @@ export default class extends Controller {
         d.style.display = 'none'
       })
     })
+  }
+
+  _removeMyProjectsSkeletons() {
+    if (this.hasMyProjectsTarget) {
+      this.myProjectsTarget
+        .querySelectorAll('.projects-browse-skeleton')
+        .forEach((el) => el.remove())
+    }
+  }
+
+  _findProject(id) {
+    return this._projectsMap[id] || null
+  }
+
+  _removeExploreSkeletons() {
+    if (!this.exploreSkeletonsRemoved && this.hasExploreProjectsTarget) {
+      this.exploreProjectsTarget
+        .querySelectorAll('.projects-browse-skeleton')
+        .forEach((el) => el.remove())
+      this.exploreSkeletonsRemoved = true
+    }
   }
 
   _updateLoadMoreButton() {

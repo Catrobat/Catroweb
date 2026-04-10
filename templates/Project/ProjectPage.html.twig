@@ -60,7 +60,10 @@
   {# Main project layout -- JS fills content after API fetch #}
   <div class="row">
     <div class="col-5 col-sm-4 col-md-4 col-lg-3">
-      <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big" src="{{ asset(screenshot_big) }}" width="480" height="480"/>
+      <div class="project-thumbnail-wrap position-relative">
+        <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big" src="{{ asset(screenshot_big) }}" width="480" height="480"/>
+        <div id="project-thumbnail-badges" class="project-thumbnail-badges"></div>
+      </div>
       {% if my_project %}
         <div class="position-relative">
           <div id="change-project-thumbnail-button" class="upload-project-image align-items-center justify-content-center d-flex">
@@ -136,10 +139,7 @@
         <span class="skeleton js-skeleton" style="width: 100px; height: 24px; border-radius: 50rem;"></span>
       </div>
 
-      <div id="not-for-kids-indicator" class="d-none">
-        <img alt="Not for Kids" class="not-for-kids-logo" src="{{ asset('images/default/not_for_kids.svg') }}" style="width: 24px; height: 24px;">
-        <span class="icon-text ms-2 align-bottom mt-2">{{ 'project.notForKids'|trans({}, 'catroweb') }}</span>
-      </div>
+      {# Not-for-kids indicator moved to thumbnail badge overlay #}
 
       <div id="project-like" class="d-none d-lg-block mt-3">
         {{ include('Project/Reactions.html.twig') }}
@@ -346,6 +346,7 @@
        data-asset-wow-white="{{ asset('images/default/wow_white.svg') }}"
        data-asset-wow-black="{{ asset('images/default/wow_black.svg') }}"
        data-trans-reaction="{{ 'project.reactionsText'|trans({}, 'catroweb') }}"
+       data-trans-not-for-kids="{{ 'project.notForKids'|trans({}, 'catroweb') }}"
        data-trans-download-error="{{ 'project.downloadErrorText'|trans({}, 'catroweb') }}"
        data-trans-download-start="{{ 'project.downloadStartText'|trans({}, 'catroweb') }}"
        data-trans-account-not-verified="{{ 'accountNotVerified'|trans({}, 'catroweb') }}"

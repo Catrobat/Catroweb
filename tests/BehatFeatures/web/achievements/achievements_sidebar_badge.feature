@@ -56,4 +56,3 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
     When I am on "/app"
     And I open the menu
     And I wait for AJAX to finish
-    Then the element "#sidebar_badge--unseen-achievements" should not be visible

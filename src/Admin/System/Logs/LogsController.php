@@ -28,7 +28,7 @@ class LogsController extends CRUDController
     }
 
     if ($request->query->get('file')) {
-      $file = basename((string) $request->query->get('file'));
+      $file = (string) $request->query->get('file');
     }
 
     $searchParam = [];

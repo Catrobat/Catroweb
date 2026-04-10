@@ -31,9 +31,21 @@
       </div>
 
       <div id="follower-cards" class="row mb-5">
-        <div class="text-center py-3 follower-loading">
-          {{ include('Components/LoadingSpinner.html.twig', [], false) }}
-        </div>
+        {% for i in range(1, 4) %}
+          <div class="col-12 my-3 js-skeleton">
+            <div class="follower-item">
+              <div class="follower-item__avatar">
+                <span class="skeleton" style="display: block; width: 3.5rem; height: 3.5rem; border-radius: 50%;"></span>
+              </div>
+              <div class="follower-item__text" style="flex: 1;">
+                <span class="skeleton" style="display: inline-block; width: 40%; height: 1rem;"></span>
+                <div style="margin-top: 0.35rem;">
+                  <span class="skeleton" style="display: inline-block; width: 25%; height: 0.85rem;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
 
@@ -43,9 +55,21 @@
       </div>
 
       <div id="following-cards" class="row mb-5">
-        <div class="text-center py-3 following-loading">
-          {{ include('Components/LoadingSpinner.html.twig', [], false) }}
-        </div>
+        {% for i in range(1, 4) %}
+          <div class="col-12 my-3 js-skeleton">
+            <div class="follower-item">
+              <div class="follower-item__avatar">
+                <span class="skeleton" style="display: block; width: 3.5rem; height: 3.5rem; border-radius: 50%;"></span>
+              </div>
+              <div class="follower-item__text" style="flex: 1;">
+                <span class="skeleton" style="display: inline-block; width: 40%; height: 1rem;"></span>
+                <div style="margin-top: 0.35rem;">
+                  <span class="skeleton" style="display: inline-block; width: 25%; height: 0.85rem;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>

@@ -203,10 +203,10 @@ Feature:
   Scenario: check project deletion PopUp
     Then I should see "project 1"
     And I should see "project 2"
-    When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
+    When I click ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--menu-btn"
     Then I should see "Delete project"
-    When I click ".own-project-list__project[data-id='1'] [data-action='delete']"
-    Then I should see "delete it"
+    When I click ".projects-list-item-wrapper[data-project-id='1'] [data-action='delete']"
+    Then I should see "Are you sure?"
     When I click ".swal2-cancel"
     Then I should not see "delete it"
     When I reload the page
@@ -217,10 +217,10 @@ Feature:
   Scenario: Delete a project
     Then I should see "project 1"
     And I should see "project 2"
-    When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
+    When I click ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--menu-btn"
     Then I should see "Delete project"
-    When I click ".own-project-list__project[data-id='1'] [data-action='delete']"
-    Then I should see "delete it"
+    When I click ".projects-list-item-wrapper[data-project-id='1'] [data-action='delete']"
+    Then I should see "Are you sure?"
     When I click ".swal2-confirm"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
@@ -229,65 +229,65 @@ Feature:
 
   Scenario: It should be possible toggle the project privacy on my profile
     Then I should see "project 1"
-    And the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "public"
-    When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
+    And the element ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--lock-badge" should not exist
+    When I click ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--menu-btn"
     And I should see "Set private"
-    When I click ".own-project-list__project[data-id='1'] [data-action='toggle-visibility']"
+    When I click ".projects-list-item-wrapper[data-project-id='1'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
-    And I wait for the element ".own-project-list__project[data-id='1'] .loading-spinner-backdrop" to appear and if so to disappear again
-    Then the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "private"
-    When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
+    And I wait for AJAX to finish
+    Then the element ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--lock-badge" should be visible
+    When I click ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--menu-btn"
     And I should see "Set public"
-    When I click ".own-project-list__project[data-id='1'] [data-action='toggle-visibility']"
+    When I click ".projects-list-item-wrapper[data-project-id='1'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
-    And I wait for the element ".own-project-list__project[data-id='1'] .loading-spinner-backdrop" to appear and if so to disappear again
-    Then the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "public"
+    And I wait for AJAX to finish
+    Then the element ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--lock-badge" should not exist
 
   Scenario: Project visibility should not get updated if the user clicks on cancel
     Then I should see "project 1"
-    And the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "public"
-    When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
+    And the element ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--lock-badge" should not exist
+    When I click ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--menu-btn"
     And I should see "Set private"
-    When I click ".own-project-list__project[data-id='1'] [data-action='toggle-visibility']"
+    When I click ".projects-list-item-wrapper[data-project-id='1'] [data-action='toggle-visibility']"
     Then the element ".swal2-shown" should be visible
     When I click ".swal2-cancel"
     And I wait for AJAX to finish
-    Then the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "public"
+    Then the element ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--lock-badge" should not exist
 
   Scenario: It should be possible toggle the project privacy on my profile for more than 1 project
     Then I should see "project 1"
-    And the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "public"
+    And the element ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--lock-badge" should not exist
     And I should see "project 2"
-    And the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "private"
-    When I click ".own-project-list__project[data-id='1'] .own-project-list__project__action"
+    And the element ".projects-list-item-wrapper[data-project-id='2'] .projects-list-item--lock-badge" should be visible
+    When I click ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--menu-btn"
     And I should see "Set private"
-    When I click ".own-project-list__project[data-id='1'] [data-action='toggle-visibility']"
+    When I click ".projects-list-item-wrapper[data-project-id='1'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
     And I wait 1000 milliseconds
-    Then the ".own-project-list__project[data-id='1'] .own-project-list__project__details__visibility__text" element should contain "private"
-    When I click ".own-project-list__project[data-id='2'] .own-project-list__project__action"
+    Then the element ".projects-list-item-wrapper[data-project-id='1'] .projects-list-item--lock-badge" should be visible
+    When I click ".projects-list-item-wrapper[data-project-id='2'] .projects-list-item--menu-btn"
     And I should see "Set public"
-    When I click ".own-project-list__project[data-id='2'] [data-action='toggle-visibility']"
+    When I click ".projects-list-item-wrapper[data-project-id='2'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
     And I wait 1000 milliseconds
-    Then the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "public"
+    Then the element ".projects-list-item-wrapper[data-project-id='2'] .projects-list-item--lock-badge" should not exist
 
   Scenario: Programs with too high language version can also be set to visible
     Then I should see "project 2"
-    And the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "private"
-    When I click ".own-project-list__project[data-id='2'] .own-project-list__project__action"
+    And the element ".projects-list-item-wrapper[data-project-id='2'] .projects-list-item--lock-badge" should be visible
+    When I click ".projects-list-item-wrapper[data-project-id='2'] .projects-list-item--menu-btn"
     And I should see "Set public"
-    When I click ".own-project-list__project[data-id='2'] [data-action='toggle-visibility']"
+    When I click ".projects-list-item-wrapper[data-project-id='2'] [data-action='toggle-visibility']"
     And I wait for the element ".swal2-shown" to be visible
     And I click ".swal2-confirm"
-    And I wait for the element ".own-project-list__project[data-id='2'] .loading-spinner-backdrop" to appear and if so to disappear again
-    Then the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "public"
+    And I wait for AJAX to finish
+    Then the element ".projects-list-item-wrapper[data-project-id='2'] .projects-list-item--lock-badge" should not exist
 
   Scenario: I should be able to delete my account
     Given I click "#top-app-bar__btn-settings"

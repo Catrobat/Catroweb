@@ -117,7 +117,7 @@ class ApiContext implements Context
   /**
    * @var string[]
    */
-  private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
+  private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following', 'is_verified', 'scratch_username', 'is_followed_by_viewer'];
 
   /**
    * @var string[]
@@ -2402,6 +2402,15 @@ class ApiContext implements Context
       },
       'following' => static function ($following): void {
         Assert::assertIsInt($following);
+      },
+      'is_verified' => static function ($is_verified): void {
+        Assert::assertIsBool($is_verified);
+      },
+      'scratch_username' => static function ($scratch_username): void {
+        Assert::assertTrue(null === $scratch_username || is_string($scratch_username));
+      },
+      'is_followed_by_viewer' => static function ($is_followed_by_viewer): void {
+        Assert::assertTrue(null === $is_followed_by_viewer || is_bool($is_followed_by_viewer));
       },
     ];
 

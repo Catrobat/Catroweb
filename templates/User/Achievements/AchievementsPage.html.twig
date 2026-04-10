@@ -19,6 +19,20 @@
        data-trans-locked-empty="{{ 'achievements.overview.tab_locked.empty'|trans({}, 'catroweb') }}"
   ></div>
 
+  <div id="most-recent-skeleton" class="mb-4 js-skeleton">
+    <h3>{{ 'achievements.overview.most_recent_achievement.title'|trans({}, 'catroweb') }}</h3>
+    <div class="mt-4 mb-4 achievement-top__wrapper">
+      <div class="achievement__badge achievement__badge--top">
+        <span class="skeleton" style="width: 7rem; height: 7rem; border-radius: 50%; display: block;"></span>
+      </div>
+      <div class="achievement-top__text-wrapper">
+        <div class="skeleton skeleton--text" style="width: 10rem; height: 1rem;"></div>
+        <div class="skeleton skeleton--text" style="width: 7rem; height: 1rem; margin-top: 0.5rem;"></div>
+        <div class="skeleton skeleton--text" style="width: 5rem; height: 1rem; margin-top: 0.5rem;"></div>
+      </div>
+    </div>
+  </div>
+
   {{ include('Components/TabBar.html.twig', {
     tabs: [
       {
@@ -37,6 +51,14 @@
   <div class="tab-content mt-4" aria-live="polite">
 
     <div id="unlocked-achievements" class="achievement__wrapper tab-pane show active" role="tabpanel">
+      {% for i in range(0, 5) %}
+        <div class="achievement js-skeleton">
+          <div class="achievement__badge achievement__badge--tab">
+            <span class="skeleton" style="width: 10rem; height: 10rem; border-radius: 50%; display: block;"></span>
+          </div>
+          <span class="skeleton skeleton--text" style="width: 6rem; height: 0.85rem; margin-top: 0.5rem;"></span>
+        </div>
+      {% endfor %}
       <p id="no-unlocked-achievements" class="d-none"></p>
     </div>
 

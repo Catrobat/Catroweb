@@ -169,7 +169,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     }
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createBasicUserDataResponse($user, 'ALL');
+    $response = $this->facade->getResponseManager()->createUserProfileResponse($user, $viewer);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 

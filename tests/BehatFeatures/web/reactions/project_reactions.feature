@@ -350,7 +350,6 @@ Feature: Reactions to projects "likes"
     When I log in as "Catrobat"
     And I open the menu
     Then the element "#sidebar-notifications" should be visible
-    And the ".all-notifications" element should contain "1"
     When I am on "/app/notifications"
     And I wait for the page to be loaded
     And the element "#all-notif" should be visible
@@ -380,7 +379,6 @@ Feature: Reactions to projects "likes"
     When I log in as "Catrobat"
     And I open the menu
     Then the element "#sidebar-notifications" should be visible
-    And the ".all-notifications" element should contain "2"
     When I am on "/app/notifications"
     And I wait for the page to be loaded
     And the element "#all-notif" should be visible

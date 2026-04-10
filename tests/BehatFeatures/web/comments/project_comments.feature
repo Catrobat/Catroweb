@@ -219,7 +219,7 @@ Feature: As a visitor I want to write, see and report comments.
     When I click "#comment-report-button-1"
     And I wait 500 milliseconds
     Then I should see "Report"
-    And the element "input[name='report-category']" should exist
+    And the element "#report-category-value" should exist
 
   Scenario: When I am logged in as an admin, I should see a delete button
     Given I log in as "Admin"

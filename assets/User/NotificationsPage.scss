@@ -225,6 +225,42 @@
   }
 }
 
+// ===== CLS Prevention =====
+.tab-pane {
+  min-height: 60vh;
+}
+
+// ===== Skeleton Loading =====
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.notification-skeleton__avatar {
+  border-radius: 50% !important;
+  aspect-ratio: 1;
+}
+
+.notification-skeleton__indicator {
+  border-radius: 50% !important;
+}
+
 // ===== Legacy Classes (for backward compatibility) =====
 .notification-header {
   width: 100%;

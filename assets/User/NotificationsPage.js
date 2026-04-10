@@ -202,6 +202,7 @@ class UserNotifications {
     new ApiFetch(`${self.baseUrl}/api/notifications?${params}`, 'GET', undefined, 'json')
       .run()
       .then((data) => {
+        self._removeSkeletons(container)
         data.data.forEach((fetched) => {
           self.generateNotificationBody(fetched, idPrefix, container)
         })
@@ -211,17 +212,21 @@ class UserNotifications {
         self.fetchActive[type] = false
       })
       .catch((error) => {
+        self._removeSkeletons(container)
         self.fetchActive[type] = false
         self.handleError(error)
       })
   }
 
   updateNoNotificationsPlaceholder(type, fetchedAmount) {
+    const emptyElement = document.getElementById(`no-notif-${type}`)
+    if (!emptyElement) return
     if (fetchedAmount > 0) {
-      const emptyElement = document.getElementById(`no-notif-${type}`)
-      if (emptyElement) {
-        emptyElement.parentElement.classList.replace('d-block', 'd-none')
-      }
+      emptyElement.parentElement.classList.remove('d-block')
+      emptyElement.parentElement.classList.add('d-none')
+    } else if (!this.cursors[type]) {
+      emptyElement.parentElement.classList.remove('d-none')
+      emptyElement.parentElement.classList.add('d-block')
     }
   }
 
@@ -367,6 +372,10 @@ class UserNotifications {
   hideBadge() {
     const badge = document.getElementById('sidebar_badge--unseen-notifications')
     badge.style.display = 'none'
+  }
+
+  _removeSkeletons(container) {
+    container.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
   }
 
   handleError(error) {

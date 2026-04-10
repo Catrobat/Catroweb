@@ -35,6 +35,189 @@
   }
 }
 
+.theme-picker {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 0.75rem;
+}
+
+.theme-picker__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid light-dark(rgb(15 23 42 / 8%), rgb(255 255 255 / 8%));
+  border-radius: 16px;
+  background: light-dark(#f7f8fb, #2d2d3d);
+  color: inherit;
+  text-align: left;
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
+
+  &:hover {
+    background: light-dark(#f1f4f9, #353548);
+    border-color: light-dark(rgb(15 23 42 / 12%), rgb(255 255 255 / 12%));
+    transform: translateY(-1px);
+  }
+
+  &.is-active {
+    border-color: var(--primary, #00acc1);
+    background: light-dark(
+      custom-alpha(--color-primary, 0.08),
+      custom-alpha(--color-primary, 0.16)
+    );
+    box-shadow: 0 0 0 1px custom-alpha(--color-primary, 0.14);
+  }
+}
+
+.theme-picker__option__icon {
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: light-dark(rgb(255 255 255 / 95%), rgb(18 18 28 / 60%));
+  color: var(--primary, #00acc1);
+  box-shadow: inset 0 0 0 1px light-dark(rgb(15 23 42 / 5%), rgb(255 255 255 / 5%));
+}
+
+.theme-picker__option__content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.theme-picker__option__label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: light-dark(#111827, #f8fafc);
+}
+
+.theme-picker__option__description {
+  font-size: 0.86rem;
+  color: light-dark(#667085, #a0aec0);
+}
+
+.theme-picker__option__check {
+  flex: 0 0 auto;
+  color: light-dark(rgb(15 23 42 / 28%), rgb(255 255 255 / 28%));
+}
+
+.theme-picker__option.is-active .theme-picker__option__check {
+  color: var(--primary, #00acc1);
+}
+
+.report-dialog {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.report-dialog__options {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.report-dialog__option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid light-dark(rgb(15 23 42 / 8%), rgb(255 255 255 / 8%));
+  border-radius: 14px;
+  background: light-dark(#f7f8fb, #2d2d3d);
+  color: inherit;
+  text-align: left;
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
+
+  &:hover {
+    background: light-dark(#f1f4f9, #353548);
+    border-color: light-dark(rgb(15 23 42 / 12%), rgb(255 255 255 / 12%));
+    transform: translateY(-1px);
+  }
+
+  &.is-active {
+    border-color: var(--primary, #00acc1);
+    background: light-dark(
+      custom-alpha(--color-primary, 0.08),
+      custom-alpha(--color-primary, 0.16)
+    );
+    box-shadow: 0 0 0 1px custom-alpha(--color-primary, 0.14);
+  }
+}
+
+.report-dialog__option__icon {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: light-dark(rgb(255 255 255 / 95%), rgb(18 18 28 / 60%));
+  color: var(--primary, #00acc1);
+  box-shadow: inset 0 0 0 1px light-dark(rgb(15 23 42 / 5%), rgb(255 255 255 / 5%));
+}
+
+.report-dialog__option__label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: light-dark(#111827, #f8fafc);
+}
+
+.report-dialog__option__check {
+  flex: 0 0 auto;
+  color: light-dark(rgb(15 23 42 / 28%), rgb(255 255 255 / 28%));
+}
+
+.report-dialog__option.is-active .report-dialog__option__check {
+  color: var(--primary, #00acc1);
+}
+
+.report-dialog__note-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: light-dark(#475467, #cbd5e0);
+}
+
+.report-dialog__note {
+  width: 100%;
+  margin: 0;
+  background: light-dark(#f7f8fb, #2d2d3d);
+  border-radius: 14px;
+
+  .mdc-text-field__resizer {
+    width: 100%;
+  }
+
+  .mdc-text-field__input {
+    min-height: 96px;
+    padding: 0.95rem 1rem;
+    resize: vertical;
+    background: transparent;
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing {
+    border-color: light-dark(rgb(15 23 42 / 8%), rgb(255 255 255 / 8%));
+  }
+}
+
 .swal2-validation-message {
   background: light-dark(#f0f0f0, #3a3a4a);
   color: light-dark(#666, #e2e8f0);

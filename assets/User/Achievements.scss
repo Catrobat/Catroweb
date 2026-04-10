@@ -42,25 +42,43 @@
   position: relative;
   overflow: hidden;
 
+  --achievement-banner-bottom: 0;
+  --achievement-banner-height: 20%;
+  --achievement-banner-safe-inline: 14%;
+  --achievement-banner-text-size: 0.6rem;
+  --achievement-banner-text-shift: -4%;
+
   &.achievement__badge--tab {
     width: 10rem;
     height: 10rem;
+
+    --achievement-banner-bottom: 5%;
+    --achievement-banner-text-size: 0.8rem;
+    --achievement-banner-text-shift: -3%;
   }
 
   &.achievement__badge--top {
     width: 7rem;
     height: 7rem;
+
+    --achievement-banner-text-size: 0.56rem;
   }
 
   &.achievement__badge--profile {
     width: 6rem;
     height: 6rem;
+
+    --achievement-banner-safe-inline: 15%;
+    --achievement-banner-text-size: 0.5rem;
   }
 
   &.achievement__badge--popup {
     width: 12rem;
     height: 12rem;
     margin: auto;
+
+    --achievement-banner-text-size: 0.95rem;
+    --achievement-banner-text-shift: -2%;
     animation-name: zoom-in-down-animation;
     animation-duration: 4s;
     animation-fill-mode: both;
@@ -83,15 +101,11 @@
 
 .achievement__badge__banner {
   position: absolute;
-  bottom: 0;
+  bottom: var(--achievement-banner-bottom);
   left: 0;
   z-index: 2;
   width: 100%;
-  height: 20%;
-
-  &.achievement__badge__banner--tab {
-    bottom: 5%;
-  }
+  height: var(--achievement-banner-height);
 
   &.achievement__badge__banner--popup {
     animation-name: fade-in-animation;
@@ -103,29 +117,20 @@
 
 .achievement__badge__banner__text {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: var(--achievement-banner-bottom);
+  left: var(--achievement-banner-safe-inline);
+  right: var(--achievement-banner-safe-inline);
   z-index: 3;
-  width: 100%;
+  display: grid;
+  place-items: center;
+  height: var(--achievement-banner-height);
   overflow: hidden;
   text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   line-height: 1;
-  padding-bottom: 2%;
-
-  &.achievement__badge__banner__text--tab {
-    bottom: 5%;
-    font-size: 90%;
-  }
-
-  &.achievement__badge__banner__text--top {
-    font-size: 70%;
-  }
-
-  &.achievement__badge__banner__text--profile {
-    font-size: 60%;
-  }
+  font-size: var(--achievement-banner-text-size);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transform: translateY(var(--achievement-banner-text-shift));
 
   &.achievement__badge__banner__text--popup {
     animation-name: fade-in-animation;
@@ -133,6 +138,23 @@
     animation-delay: 4s;
     animation-fill-mode: both;
   }
+
+  &.achievement__badge__banner__text--long {
+    font-size: calc(var(--achievement-banner-text-size) * 0.92);
+  }
+
+  &.achievement__badge__banner__text--very-long {
+    font-size: calc(var(--achievement-banner-text-size) * 0.84);
+    letter-spacing: 0;
+  }
+}
+
+.achievement__badge__banner__text-label {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .achievement__badge__text {
@@ -194,7 +216,38 @@
   }
 }
 
+// --- Skeleton Loading ---
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.skeleton--text-heading {
+  display: block;
+}
+
+.skeleton--text {
+  display: block;
+}
+
 // --- Animation Keyframes ---
+
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
 
 @keyframes alternate-color-animation {
   0% {

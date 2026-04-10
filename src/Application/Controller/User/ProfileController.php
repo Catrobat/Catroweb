@@ -50,8 +50,9 @@ class ProfileController extends AbstractController
         return $this->redirectToRoute('index');
       }
 
-      $project_count = $this->project_manager->countPublicUserProjects($id);
-      $view = 'User/Profile/ProfilePage.html.twig';
+      return $this->render('User/Profile/ProfilePage.html.twig', [
+        'profile' => $user,
+      ]);
     }
 
     return $this->render($view, [

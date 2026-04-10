@@ -15,6 +15,7 @@ use App\Moderation\TextSanitizer;
 use App\Project\ProjectManager;
 use App\Studio\StudioManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\Response;
 
 class StudioApiProcessor extends AbstractApiProcessor
 {
@@ -80,6 +81,17 @@ class StudioApiProcessor extends AbstractApiProcessor
     $joinRequest = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
     if (null !== $joinRequest) {
       $this->studio_manager->removeJoinRequest($joinRequest);
+    }
+  }
+
+  public function cancelPendingJoinRequest(User $user, Studio $studio, int &$responseCode): void
+  {
+    $joinRequest = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
+    if (null !== $joinRequest && StudioJoinRequest::STATUS_PENDING === $joinRequest->getStatus()) {
+      $this->studio_manager->removeJoinRequest($joinRequest);
+      $responseCode = Response::HTTP_NO_CONTENT;
+    } else {
+      $responseCode = Response::HTTP_NOT_FOUND;
     }
   }
 

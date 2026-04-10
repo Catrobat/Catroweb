@@ -86,10 +86,17 @@ $container-padding: 1rem;
       }
     }
 
+    &__image-wrap {
+      position: relative;
+      display: block;
+    }
+
     &__image {
       width: 100%;
+      height: auto;
       border-radius: 10%;
-      aspect-ratio: auto 1 / 1;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
       box-shadow: 3px 3px 20px 0 rgb(50 50 50 / 15%);
     }
 
@@ -161,6 +168,20 @@ $container-padding: 1rem;
       margin-right: 0.5rem;
       margin-bottom: 1.5rem;
       margin-left: 0.5rem !important;
+    }
+
+    // When using action list items, override grid card sizing
+    .projects-list-item-wrapper.project-list__project {
+      width: calc(100% + 3rem);
+      margin: 0 -1.5rem !important;
+      margin-bottom: 0 !important;
+    }
+
+    .projects-container:has(.projects-list-item-wrapper) {
+      justify-content: flex-start;
+      flex-direction: column;
+      padding: 0;
+      overflow: visible;
     }
   }
 
@@ -289,16 +310,22 @@ $container-padding: 1rem;
       right: 0;
     }
   }
-  &__not-for-kids-logo {
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-left: 0.25rem;
-  }
-}
+  &__lock-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 0.85rem;
+    color: #fff;
+    background: rgb(0 0 0 / 50%);
+    border-radius: 50%;
+    padding: 2px;
+    line-height: 1;
 
-@include color-mode(dark) {
-  .project-list__not-for-kids-logo {
-    filter: invert(1);
+    &--nfk {
+      right: auto;
+      left: 2px;
+      background: rgb(200 112 112 / 80%);
+    }
   }
 }
 
@@ -338,6 +365,13 @@ $container-padding: 1rem;
   }
 }
 
+.projects-list-item--image-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+}
+
 .projects-list-item--image {
   height: 50px;
   width: 50px;
@@ -345,6 +379,24 @@ $container-padding: 1rem;
   flex-shrink: 0;
   object-fit: cover;
   background: light-dark(#eee, #3a3a4a);
+}
+
+.projects-list-item--lock-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  font-size: 0.7rem;
+  color: #fff;
+  background: rgb(0 0 0 / 50%);
+  border-radius: 50%;
+  padding: 2px;
+  line-height: 1;
+}
+
+.projects-list-item--nfk-badge {
+  right: auto;
+  left: -2px;
+  background: rgb(200 112 112 / 80%);
 }
 
 .projects-list-item--content {
@@ -442,6 +494,12 @@ $container-padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
   overflow: hidden;
+
+  // Open upward when near bottom of viewport
+  &.dropdown-up {
+    top: auto;
+    bottom: 100%;
+  }
 }
 
 .projects-list-item--dropdown-item {
@@ -474,6 +532,26 @@ $container-padding: 1rem;
 
     .material-icons {
       color: #dc3545;
+    }
+  }
+}
+
+// Secondary metadata line (small view/download counts)
+.project-list__meta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: light-dark(#999, #777);
+  line-height: 1;
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+
+    .material-icons {
+      font-size: 0.8rem;
     }
   }
 }

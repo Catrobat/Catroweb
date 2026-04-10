@@ -107,6 +107,7 @@ class UserReports {
     new ApiFetch(`${this.baseUrl}/api/user/reports?${params}`, 'GET', undefined, 'json')
       .run()
       .then((data) => {
+        this._removeSkeletons()
         data.data.forEach((report) => {
           this.items.push(report)
           this._renderCard(report, this.containers.all)
@@ -117,6 +118,7 @@ class UserReports {
         this.fetching = false
       })
       .catch((error) => {
+        this._removeSkeletons()
         this.fetching = false
         this._handleError(error)
       })
@@ -177,13 +179,22 @@ class UserReports {
     }
   }
 
+  _removeSkeletons() {
+    for (const tab of TAB_CONFIG) {
+      this.containers[tab.status]?.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+    }
+  }
+
   _updatePlaceholder(status, count) {
     const el = document.getElementById(`no-reports-${status}`)
     if (el) {
-      el.parentElement.classList.replace(
-        count > 0 ? 'd-block' : 'd-none',
-        count > 0 ? 'd-none' : 'd-block',
-      )
+      if (count > 0) {
+        el.parentElement.classList.remove('d-block')
+        el.parentElement.classList.add('d-none')
+      } else {
+        el.parentElement.classList.remove('d-none')
+        el.parentElement.classList.add('d-block')
+      }
     }
   }
 

@@ -17,12 +17,12 @@ others: Others
 tutorials: Help
 googlePlay: Google Play Store
 iosAppStore: iOS App store
-huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
 discordChat: Discord chat
 passwordsNoMatch: The passwords didn't match.
 error: Oops!
 cancel: Cancel
+confirm: Confirm
 report: Report
 report.title: Report
 deleteIt: Yes, delete it!
@@ -84,9 +84,14 @@ statistics: "Statistics"
 languageSelection: "Language selection"
 
 color-scheme:
-  auto: 'Auto'
+  title: 'Theme'
+  auto: 'System'
+  auto_description: 'Follow your device setting'
   light: 'Light'
+  light_description: 'Bright appearance'
   dark: 'Dark'
+  dark_description: 'Dark appearance'
+  apply: 'Apply'
 
 indexPage:
   recommendedSection:
@@ -137,6 +142,11 @@ project:
     unauthorized: You must be logged in to upload.
     rate_limited: Too many uploads. Please try again later.
     selected_file: 'Selected file:'
+    info:
+      file_size: Maximum file size is 100 MB.
+      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
+      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
+      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
   example: Examples
   newest: Newest projects
   recommended: Recommended projects
@@ -151,11 +161,17 @@ project:
     Yes, delete it!
     Cancel
   deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+  deleteConfirmationTitle: Are you sure?
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
+  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
+  setPublicConfirm: "Make this project public? It will be visible to everyone."
+  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
+  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
+  nfkModeratorLocked: "This setting has been locked by a moderator."
   confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
   confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
   changeVisibility: |+
@@ -1183,29 +1199,43 @@ studio:
   cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
   cover_image_compression_failed: 'Failed to process image. Please try a different file.'
   cover_image_alt: 'Your cover image'
+  cover_image_remove: 'Remove image'
   popular: 'Popular Studios'
   join: 'Join'
   leave: 'Leave'
   report: 'Report'
   public: 'public'
-  private: 'private'
+  private: 'Invite-only'
 
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
-    private_studios: 'Private studios'
+    private_studios: 'Invite-only studios'
     no_studios: 'No studios yet'
     my_studios: 'My Studios'
     explore: 'Explore Studios'
     no_joined: "You haven't joined any studios yet"
     joined: 'Joined'
     load_more: 'Load More'
+    open: 'Open'
+    share: 'Share'
+    share_success: 'Link copied to clipboard!'
+    leave_confirm_title: 'Leave this studio?'
+    cancel: 'Cancel'
+    cancel_request: 'Cancel Request'
+    cancel_request_confirm_title: 'Cancel join request?'
+    admin: 'Admin'
+    member: 'Member'
 
 
   details:
     add_project: 'click to add the project'
+    add: 'Add'
     showMore: 'show more'
     showLess: 'show less'
+    are_you_sure: 'Are you sure?'
+    no_way_of_return: 'This cannot be undone.'
+    delete_it: 'Delete'
     remove_project: 'Remove from studio'
     remove_project_error: 'Failed to remove project from studio.'
     remove_project_success: 'Project removed successfully from studio.'
@@ -1217,6 +1247,8 @@ studio:
       download: 'Download'
       share: 'Share'
       remove_from_studio: 'Remove from studio'
+      remove_from_studio_title: 'Remove project from studio?'
+      remove_from_studio_text: 'You can add it again later if you change your mind.'
       share_success: 'Link copied to clipboard!'
       share_fail: 'Failed to copy link.'
       no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
@@ -1269,8 +1301,11 @@ studio:
       error: 'Something went wrong. Please try again.'
       no_requests: 'No pending join requests.'
 
+    show_more: 'Show more'
+    show_less: 'Show less'
+
     admin_settings:
-      title: 'General Settings'
+      title: 'Settings'
       studio_name: 'Studio Name'
       studio_description: 'Description'
       toggle_allow_comments: 'Comments'
@@ -1329,6 +1364,7 @@ moderation:
     trust_too_low: "Your account is too new to file reports."
     unverified: "Please make sure you are logged in and your account's email is verified."
     rate_limited: "You're submitting reports too quickly. Please wait and try again."
+    suspended: "Your account is suspended."
   appeal:
     button: "Appeal"
     title: "Appeal this decision"

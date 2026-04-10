@@ -1,6 +1,14 @@
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 
 export function achievementBadgeHtml(achievement, variant) {
+  let bannerTextLengthClass = ''
+
+  if (achievement.title.length > 18) {
+    bannerTextLengthClass = ' achievement__badge__banner__text--very-long'
+  } else if (achievement.title.length > 12) {
+    bannerTextLengthClass = ' achievement__badge__banner__text--long'
+  }
+
   return (
     '<svg class="achievement__badge__coin achievement__badge__coin--' +
     variant +
@@ -21,8 +29,13 @@ export function achievementBadgeHtml(achievement, variant) {
     '" data-unique-ids="disabled"></svg>' +
     '<div class="achievement__badge__banner__text achievement__badge__banner__text--' +
     variant +
+    bannerTextLengthClass +
+    '" title="' +
+    escapeAttr(achievement.title) +
     '">' +
+    '<span class="achievement__badge__banner__text-label">' +
     escapeHtml(achievement.title) +
+    '</span>' +
     '</div>'
   )
 }

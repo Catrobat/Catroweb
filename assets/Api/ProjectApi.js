@@ -10,6 +10,14 @@ export default class ProjectApi {
   }
 
   updateProject(id, data, successCallback, finalCallback) {
+    const msg403 =
+      typeof projectConfiguration !== 'undefined'
+        ? projectConfiguration.messages.forbidden
+        : 'Forbidden'
+    const msg404 =
+      typeof projectConfiguration !== 'undefined'
+        ? projectConfiguration.messages.notFound
+        : 'Not found'
     new ApiPutFetch(
       this.baseUrl + '/api/project/' + id,
       data,
@@ -17,8 +25,8 @@ export default class ProjectApi {
       null,
       successCallback,
       {
-        403: projectConfiguration.messages.forbidden,
-        404: projectConfiguration.messages.notFound,
+        403: msg403,
+        404: msg404,
         500: function (response) {
           response
             .json()
@@ -26,7 +34,11 @@ export default class ProjectApi {
               MessageDialogs.showErrorMessage(data.error)
             })
             .catch(function () {
-              MessageDialogs.showErrorMessage(globalConfiguration.messages.unspecifiedErrorText)
+              const fallback =
+                typeof globalConfiguration !== 'undefined'
+                  ? globalConfiguration.messages.unspecifiedErrorText
+                  : 'An error occurred'
+              MessageDialogs.showErrorMessage(fallback)
             })
         },
       },

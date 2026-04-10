@@ -13,8 +13,26 @@
     <div id="search-results-text"></div>
   </div>
 
-  <div id="loading-spinner" class="medialib-spinner">
-    {{ include('Components/LoadingSpinner.html.twig') }}
+  <div id="skeleton-media-items" class="js-skeleton medialib-content">
+    <div class="category" style="display: block;">
+      <div class="files">
+        {% for i in range(1, 8) %}
+          <div class="mediafile">
+            <div class="img-container">
+              <span class="skeleton" style="display: block; width: 100%; height: 100%;"></span>
+            </div>
+            <div class="text-container">
+              <div class="name">
+                <span class="skeleton" style="display: inline-block; width: {{ [120, 160, 100, 140, 180, 110, 150, 130][i - 1] }}px; height: 0.9rem;"></span>
+              </div>
+              <div class="description">
+                <span class="skeleton" style="display: inline-block; width: {{ [90, 70, 100, 80, 60, 95, 75, 85][i - 1] }}px; height: 0.75rem;"></span>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 
   <div id="content" class="medialib-content">

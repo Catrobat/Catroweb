@@ -53,6 +53,7 @@ class FollowersResponseManager extends AbstractResponseManager
       'username' => $user->getUsername(),
       'avatar' => $user->getAvatar(),
       'project_count' => $this->project_manager->countPublicUserProjects($user->getId()),
+      'follower_count' => $user->getFollowers()->count(),
       'is_following' => $is_following,
       'follows_you' => $follows_you,
     ]);

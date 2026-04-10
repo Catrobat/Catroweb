@@ -46,11 +46,11 @@ Feature: As a visitor I want to see public user profiles
     Then the element "#studios-count" should exist
     And I should see "Studios"
 
-  Scenario: My profile shows achievements section
+  Scenario: My profile without achievements hides achievements section
     Given I log in as "Catrobat"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then the element "#user-achievements" should exist
+    Then the element "#user-achievements" should not exist
 
   Scenario: Other user profile shows studios tab
     Given I log in as "Catrobat"
