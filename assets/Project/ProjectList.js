@@ -249,7 +249,9 @@ export class ProjectList {
       '" class="projects-list-item-link">' +
       '<img src="' +
       escapeAttr(screenshotSmall) +
-      '" class="projects-list-item--image" alt="" loading="lazy">' +
+      '" class="projects-list-item--image" alt="' +
+      escapeAttr(data.name || '') +
+      '" width="360" height="360" loading="lazy">' +
       '<div class="projects-list-item--content">' +
       '<h3 class="projects-list-item--name">' +
       name +
@@ -433,6 +435,9 @@ export class ProjectList {
     const img = document.createElement('img')
     img.setAttribute('data-src', data.image_path || '/images/default/screenshot.png')
     img.className = 'lazyload project-list__project__image'
+    img.alt = data.name || ''
+    img.width = 360
+    img.height = 360
     img.style.aspectRatio = '1 / 1'
     img.style.objectFit = 'cover'
     el.appendChild(img)
@@ -468,6 +473,9 @@ export class ProjectList {
     img.setAttribute('data-srcset', `${data.screenshot_small} 80w, ${data.screenshot_large} 480w`)
     img.setAttribute('data-sizes', '(min-width: 768px) 10vw, 25vw')
     img.className = 'lazyload project-list__project__image'
+    img.alt = data.name || ''
+    img.width = 360
+    img.height = 360
     if (data.not_for_kids) {
       img.style.filter = 'blur(10px)'
     }

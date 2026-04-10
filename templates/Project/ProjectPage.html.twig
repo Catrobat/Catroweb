@@ -2,6 +2,8 @@
 
 {% block title %}{{ project_name }} – Catrobat{% endblock %}
 
+{% block meta_description %}{% if project_description is not empty %}{{ project_description|striptags|slice(0, 200) }}{% else %}{{ 'project.checkout_this_project'|trans({}, 'catroweb') }}{% endif %}{% endblock %}
+
 {% block head %}
   {{ encore_entry_link_tags('project_page') }}
   {{ encore_entry_link_tags('project_code_statistics_inline') }}
@@ -58,7 +60,7 @@
   {# Main project layout -- JS fills content after API fetch #}
   <div class="row">
     <div class="col-5 col-sm-4 col-md-4 col-lg-3">
-      <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big" src="{{ asset(screenshot_big) }}"/>
+      <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big" src="{{ asset(screenshot_big) }}" width="480" height="480"/>
       {% if my_project %}
         <div class="position-relative">
           <div id="change-project-thumbnail-button" class="upload-project-image align-items-center justify-content-center d-flex">
