@@ -63,10 +63,10 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     Then the element "#top-app-bar__btn-edit-studio" should be visible
-    Then I should not see "General Settings"
+    Then I should not see "Settings"
     When I click "#top-app-bar__btn-edit-studio"
     And I wait for the element "#studio-admin-settings-modal" to be visible
-    Then I should see "General Settings"
+    Then I should see "Settings"
 
   Scenario: As Studio admin I can change the studio name
     Given I log in as "StudioAdmin"
@@ -173,7 +173,7 @@ Feature: As studio admin I must be able to configure a studio
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I wait for the element "#header-visibility" to contain "private"
+    Then I wait for the element "#header-visibility" to contain "Invite-only"
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
@@ -203,7 +203,7 @@ Feature: As studio admin I must be able to configure a studio
     And I am on "/app/studio/2"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I wait for the element "#header-visibility" to contain "private"
+    Then I wait for the element "#header-visibility" to contain "Invite-only"
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"

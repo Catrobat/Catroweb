@@ -38,7 +38,7 @@ Feature: Studio header renders content from API (CSR)
     And I am on "/app/studio/2"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I wait for the element "#header-visibility" to contain "private"
+    Then I wait for the element "#header-visibility" to contain "Invite-only"
 
   Scenario: Member count renders from API data
     Given I am on "/app/studio/1"
