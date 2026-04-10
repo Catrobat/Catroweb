@@ -31,8 +31,8 @@ const projectCommentsElement = document.querySelector('.js-project-comments')
 const appLanguageElement = document.querySelector('#app-language')
 const projectId = projectElement.dataset.projectId
 const baseUrl = projectElement.dataset.baseUrl
-const isMyProject = isMyProject
-const isWebview = isWebview
+const isMyProject = projectElement.dataset.myProject === 'true'
+const isWebview = projectElement.dataset.isWebview === 'true'
 
 // Fetch project data from API, then render and init all components
 // Start independent fetches immediately (don't wait for project data)
@@ -352,7 +352,6 @@ function renderTagsAndExtensions(data) {
 
 function renderDownloadButtons(data) {
   const downloadUrl = data.download_url || ''
-  const isWebview = isWebview
   const transDownload = projectElement.dataset.transDownload || 'Download'
   const transDownloading = projectElement.dataset.transDownloading || 'Downloading...'
   const transDownloaded = projectElement.dataset.transDownloaded || 'Downloaded'
