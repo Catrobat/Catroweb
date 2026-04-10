@@ -492,7 +492,6 @@ function initComponents(data, earlyInits) {
       projectDescriptionCreditsElement,
       projectId,
       projectEditor,
-      earlyInits.languagesPromise,
     )
   }
 
