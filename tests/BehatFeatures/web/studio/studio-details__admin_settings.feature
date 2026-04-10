@@ -83,6 +83,7 @@ Feature: As studio admin I must be able to configure a studio
     When I fill in "studio_name" with "CatrobatStudio02"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element "#studio-settings__submit-button" should not be visible
     And I should not see "CatrobatStudio01"
     And I should see "CatrobatStudio02"
@@ -102,6 +103,7 @@ Feature: As studio admin I must be able to configure a studio
     When I fill in "studio_description" with "hasANewDescription"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And the element "#studio-settings__submit-button" should not be visible
     And I should not see "hasADescription"
     And I should see "hasANewDescription"
@@ -139,13 +141,19 @@ Feature: As studio admin I must be able to configure a studio
     And I click "#studio-setting__switch-enable-comments"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I click "#comments-tab"
     And I wait for the page to be loaded
     Then I should not see "This studio has no comments yet"
     Then I should see "Comments have been disabled for this studio"
-    When I click "#studio-setting__switch-enable-comments"
+    When I click "#top-app-bar__btn-options"
+    And I wait 500 milliseconds
+    And I click "#top-app-bar__btn-edit-studio"
+    And I wait for the element "#studio-admin-settings-modal" to be visible
+    And I click "#studio-setting__switch-enable-comments"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     And I click "#comments-tab"
     And I wait for the page to be loaded
     Then I should see "This studio has no comments yet"
