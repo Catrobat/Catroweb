@@ -63,10 +63,10 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     Then the element "#top-app-bar__btn-edit-studio" should be visible
-    Then I should not see "Settings"
+    And the element "#studio-admin-settings-modal" should not be visible
     When I click "#top-app-bar__btn-edit-studio"
     And I wait for the element "#studio-admin-settings-modal" to be visible
-    Then I should see "Settings"
+    Then the element "#studio-settings__submit-button" should be visible
 
   Scenario: As Studio admin I can change the studio name
     Given I log in as "StudioAdmin"
