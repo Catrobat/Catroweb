@@ -228,6 +228,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           } catch (err) {
             console.error('Failed to leave studio:', err)
+            const { showSnackbar } = await import('../Layout/Snackbar')
+            showSnackbar('#share-snackbar', 'Failed to leave studio.', 3000)
           }
         }
       }
@@ -264,6 +266,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           } catch (err) {
             console.error('Failed to cancel request:', err)
+            const { showSnackbar } = await import('../Layout/Snackbar')
+            showSnackbar('#share-snackbar', 'Failed to cancel request.', 3000)
           }
         }
       }

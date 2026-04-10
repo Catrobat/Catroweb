@@ -449,6 +449,8 @@ export default class extends Controller {
   }
 
   async removeProject(projectId) {
+    if (this._isRemoving) return
+    this._isRemoving = true
     const url = this.removeProjectUrlValue.replace('__PROJECT_ID__', projectId)
     try {
       const response = await fetch(url, {
@@ -477,6 +479,8 @@ export default class extends Controller {
         this.element.dataset.transRemoveError || 'Failed to remove project.',
         SnackbarDuration.error,
       )
+    } finally {
+      this._isRemoving = false
     }
   }
 

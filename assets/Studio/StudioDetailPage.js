@@ -183,8 +183,14 @@ async function submitStudioSettings() {
       )
       window.location.reload()
     } else if (response.status === 422) {
-      const text = await response.text()
-      showSnackbar('#share-snackbar', text, SnackbarDuration.error)
+      let errorMessage = modal.dataset.transSaveError || 'Failed to save settings.'
+      try {
+        const json = await response.json()
+        if (json.error) errorMessage = json.error
+      } catch {
+        // Use default error message
+      }
+      showSnackbar('#share-snackbar', errorMessage, SnackbarDuration.error)
     } else {
       showSnackbar(
         '#share-snackbar',

@@ -79,11 +79,11 @@ function initProfileHeader() {
         if (followingSection) followingSection.remove()
       }
     })
-    .then(() => {
-      document.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
-    })
     .catch((error) => {
       console.error('Failed to load profile data:', error)
+    })
+    .finally(() => {
+      document.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
     })
 }
 
