@@ -56,13 +56,8 @@ class StudioController extends AbstractController
       $userRole = $this->studio_manager->getStudioUserRole($user, $studio);
     }
 
-    if (!$studio->isIsPublic()) {
-      if (null === $userRole) {
-        $joinRequest = $user ? $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio) : null;
-        if (null === $joinRequest) {
-          throw $this->createAccessDeniedException();
-        }
-      }
+    if (!$studio->isIsPublic() && null === $user) {
+      return $this->redirectToRoute('login');
     }
 
     return $this->render('Studio/DetailsPage.html.twig', [

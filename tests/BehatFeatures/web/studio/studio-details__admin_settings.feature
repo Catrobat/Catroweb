@@ -65,7 +65,7 @@ Feature: As studio admin I must be able to configure a studio
     Then the element "#top-app-bar__btn-edit-studio" should be visible
     Then I should not see "General Settings"
     When I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     Then I should see "General Settings"
 
   Scenario: As Studio admin I can change the studio name
@@ -78,7 +78,7 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     And the element "#studio-settings__submit-button" should be visible
     When I fill in "studio_name" with "CatrobatStudio02"
     And I click "#studio-settings__submit-button"
@@ -97,7 +97,7 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     And the element "#studio-settings__submit-button" should be visible
     When I fill in "studio_description" with "hasANewDescription"
     And I click "#studio-settings__submit-button"
@@ -116,7 +116,7 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     Then the element "#studio-settings__close-button" should be visible
     When I fill in "studio_name" with "CatrobatStudio02"
     And I click "#studio-settings__close-button"
@@ -135,7 +135,7 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     And I click "#studio-setting__switch-enable-comments"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
@@ -160,32 +160,32 @@ Feature: As studio admin I must be able to configure a studio
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     And I click "#studio-setting__switch-studio-privacy"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
-    Then I should not see "public"
-    Then the "#header-visibility" element should contain "private"
+    And I wait for AJAX to finish
+    Then I wait for the element "#header-visibility" to contain "private"
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     And I click "#studio-setting__switch-studio-privacy"
     And I click "#studio-settings__submit-button"
     And I wait for the page to be loaded
-    Then the "#header-visibility" element should contain "public"
-    Then I should not see "private"
+    And I wait for AJAX to finish
+    Then I wait for the element "#header-visibility" to contain "public"
 
   Scenario:As a public Studio admin, I can not see pending join requests, approved join requests, and declined join requests.
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the "#header-visibility" element should contain "public"
+    Then I wait for the element "#header-visibility" to contain "public"
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     Then I should not see "Pending Join Request"
     And  I should not see "Approved Join Requests"
     And  I should not see "Declined Join Requests"
@@ -195,11 +195,11 @@ Feature: As studio admin I must be able to configure a studio
     And I am on "/app/studio/2"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the "#header-visibility" element should contain "private"
+    Then I wait for the element "#header-visibility" to contain "private"
     When I click "#top-app-bar__btn-options"
     And I wait 500 milliseconds
     And I click "#top-app-bar__btn-edit-studio"
-    And I wait for the page to be loaded
+    And I wait for the element "#studio-admin-settings-modal" to be visible
     Then I should not see "Pending Join Request"
     And I should not see "Approved Join Requests"
     And I should not see "Declined Join Requests"

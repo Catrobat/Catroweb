@@ -31,14 +31,14 @@ Feature: Studio header renders content from API (CSR)
     Given I am on "/app/studio/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the "#header-visibility" element should contain "public"
+    Then I wait for the element "#header-visibility" to contain "public"
 
   Scenario: Visibility badge shows private for private studio
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/2"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the "#header-visibility" element should contain "private"
+    Then I wait for the element "#header-visibility" to contain "private"
 
   Scenario: Member count renders from API data
     Given I am on "/app/studio/1"

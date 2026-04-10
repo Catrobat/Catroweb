@@ -54,6 +54,8 @@ Feature: There is a page to create new studios and also see a list of all availa
     And I wait for the element ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn" to be visible
     When I click ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn"
     And I click "[data-action='leave'][data-studio-id='1']"
+    And I wait 500 milliseconds
+    And I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then I wait for the element "#studios-user-count-1" to contain "1"
 
