@@ -37,6 +37,7 @@ function fetchAchievements() {
   new ApiFetch(baseUrl + '/api/achievements', 'GET', undefined, 'json')
     .run()
     .then((data) => {
+      removeSkeletons()
       renderUnlockedAchievements(data.unlocked || [])
       renderLockedAchievements(data.locked || [])
       renderMostRecentSection(data)
@@ -47,8 +48,13 @@ function fetchAchievements() {
       }
     })
     .catch((error) => {
+      removeSkeletons()
       console.error('Failed to load achievements:', error)
     })
+}
+
+function removeSkeletons() {
+  document.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
 }
 
 function renderUnlockedAchievements(achievements) {

@@ -2,8 +2,11 @@
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
 
+.page-content:has(#studio-header) {
+  padding: 0 0 1.5rem;
+}
+
 .studio-detail__header {
-  margin-top: -1.5rem;
   background-color: light-dark($gray-200, #2d2d3d);
   color: light-dark(inherit, #e2e8f0);
 }
@@ -12,6 +15,26 @@
   flex: 0 0 100%;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
+  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+#studio-desc {
+  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+  margin-bottom: 0;
+}
+
+.studio-desc--clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#studio-desc-toggle {
+  font-size: 0.85rem;
+  text-decoration: none;
 }
 
 .studio-detail__header__details,
@@ -129,6 +152,91 @@
   min-height: 10rem;
   height: auto;
   object-fit: cover;
+  display: block;
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.15;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.studio-detail__header--loading {
+  .studio-detail__header__details {
+    min-height: 3rem;
+  }
+}
+
+.studio-detail__header__detail-skeleton-icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+}
+
+.studio-detail__header__detail-skeleton-text {
+  width: 1.5rem;
+  height: 0.75rem;
+  margin-left: 0.35rem;
+}
+
+.studio-detail__header__action-skeleton {
+  display: inline-block;
+  width: min(100%, 6rem);
+  height: 2rem;
+  border-radius: 999px;
+}
+
+.studio-detail__tab-count-skeleton {
+  display: inline-block;
+  width: 2rem;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.studio-project-skeleton {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $gray-300;
+
+  &__image {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 10%;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    padding: 0 0.75rem;
+  }
+
+  &__title {
+    width: 60%;
+    height: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__subtitle {
+    width: 35%;
+    height: 0.7rem;
+  }
 }
 
 .tab-text {
@@ -156,6 +264,12 @@
   width: 100% !important;
   height: auto !important;
   padding: 0 !important;
+
+  .projects-list-item-wrapper {
+    width: calc(100% + 2rem);
+    margin: 0 -1rem;
+    padding: 0.6rem 1rem;
+  }
 }
 
 .studio-project-card {

@@ -93,6 +93,25 @@ class UserResponseManager extends AbstractResponseManager
     return $data;
   }
 
+  public function createUserProfileResponse(User $user, ?User $viewer): BasicUserDataResponse
+  {
+    $attributes_list = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
+    $data = $this->createBasicUserDataArray($user, $attributes_list);
+
+    $is_own_profile = $viewer instanceof User && $viewer->getId() === $user->getId();
+    if (!$is_own_profile) {
+      $data['projects'] = $user->getPrograms()->filter(
+        static fn ($p) => !$p->getPrivate() && $p->isVisible()
+      )->count();
+    }
+
+    $data['is_verified'] = $user->isVerified();
+    $data['scratch_username'] = $user->isScratchUser() ? $user->getScratchUsername() : '';
+    $data['is_followed_by_viewer'] = $viewer instanceof User && $viewer->getFollowing()->contains($user);
+
+    return new BasicUserDataResponse($data);
+  }
+
   public function createUsersDataResponse(array $users, ?string $attributes = null): array
   {
     $users_data_response = [];

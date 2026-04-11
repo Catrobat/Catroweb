@@ -49,40 +49,21 @@ class StudioController extends AbstractController
 
     /** @var User|null $user */
     $user = $this->getUser();
-    $user_role = null;
-    $user_name = null;
-    $is_public = $studio->isIsPublic();
-    $is_member = false;
-    $join_request_status = null;
-
+    $userRole = null;
+    $userName = null;
     if (null !== $user) {
-      $user_name = $user->getUsername();
-      $user_role = $this->studio_manager->getStudioUserRole($user, $studio);
-      $is_member = null !== $user_role;
-
-      if (!$is_public && !$is_member) {
-        $joinRequest = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
-        $join_request_status = $joinRequest?->getStatus();
-      }
+      $userName = $user->getUsername();
+      $userRole = $this->studio_manager->getStudioUserRole($user, $studio);
     }
 
-    $pending_join_requests_count = 0;
-    if ('admin' === $user_role) {
-      $pending_join_requests_count = count($this->studio_manager->findPendingJoinRequests($studio));
+    if (!$studio->isIsPublic() && null === $user) {
+      return $this->redirectToRoute('login');
     }
 
     return $this->render('Studio/DetailsPage.html.twig', [
       'studio' => $studio,
-      'user_role' => $user_role,
-      'user_name' => $user_name,
-      'is_public' => $is_public,
-      'is_member' => $is_member,
-      'join_request_status' => $join_request_status,
-      'members_count' => $this->studio_manager->countStudioUsers($studio),
-      'activities_count' => $this->studio_manager->countStudioActivities($studio),
-      'projects_count' => $this->studio_manager->countStudioProjects($studio),
-      'comments_count' => $this->studio_manager->countStudioComments($studio),
-      'pending_join_requests_count' => $pending_join_requests_count,
+      'user_role' => $userRole,
+      'user_name' => $userName,
     ]);
   }
 }

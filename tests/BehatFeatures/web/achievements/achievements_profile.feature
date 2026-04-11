@@ -33,4 +33,4 @@ Feature: As a user i want to see other users achievements on a user page
     Given I am on "/app/user/2"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the element "#user-achievements" should not be visible
+    Then the element ".achievement__badge" should not exist

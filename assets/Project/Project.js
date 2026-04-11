@@ -2,7 +2,7 @@ import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { redirect } from '../Components/RedirectButton'
-import { ApiFetch, ApiDeleteFetch } from '../Api/ApiHelper'
+import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
 
 export const Project = function (config) {
@@ -287,7 +287,7 @@ export const Project = function (config) {
       detailOpened = true
     })
 
-    document.body.addEventListener('mousedown', function () {
+    document.body.addEventListener('mousedown', function (event) {
       if (!detailOpened) {
         return
       }
@@ -801,8 +801,21 @@ document.addEventListener('DOMContentLoaded', function () {
           newValue ? nfkItem.dataset.transMarkSafe : nfkItem.dataset.transMarkNotForKids,
         )
 
-        const indicatorWrapper = document.getElementById('not-for-kids-indicator')
-        if (indicatorWrapper) indicatorWrapper.classList.toggle('d-none', !newValue)
+        // Update thumbnail blur + badge
+        const thumbnail = document.getElementById('project-thumbnail-big')
+        if (thumbnail) thumbnail.classList.toggle('blurred', newValue)
+        const badgesContainer = document.getElementById('project-thumbnail-badges')
+        if (badgesContainer) {
+          const existing = badgesContainer.querySelector('.project-thumbnail-badge--nfk')
+          if (newValue && !existing) {
+            const icon = document.createElement('i')
+            icon.className = 'material-icons project-thumbnail-badge project-thumbnail-badge--nfk'
+            icon.textContent = 'no_accounts'
+            badgesContainer.appendChild(icon)
+          } else if (!newValue && existing) {
+            existing.remove()
+          }
+        }
 
         showSnackbar(
           '#share-snackbar',
@@ -828,6 +841,20 @@ document.addEventListener('DOMContentLoaded', function () {
           newValue ? 'lock' : 'lock_open',
           newValue ? visItem.dataset.transSetPublic : visItem.dataset.transSetPrivate,
         )
+
+        // Update lock badge on thumbnail
+        const badgesContainer = document.getElementById('project-thumbnail-badges')
+        if (badgesContainer) {
+          const existing = badgesContainer.querySelector('.project-thumbnail-badge--lock')
+          if (newValue && !existing) {
+            const icon = document.createElement('i')
+            icon.className = 'material-icons project-thumbnail-badge project-thumbnail-badge--lock'
+            icon.textContent = 'lock'
+            badgesContainer.prepend(icon)
+          } else if (!newValue && existing) {
+            existing.remove()
+          }
+        }
 
         showSnackbar(
           '#share-snackbar',

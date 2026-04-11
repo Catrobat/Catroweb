@@ -30,6 +30,7 @@
 
 .mdc-top-app-bar__title {
   padding-left: 0.2rem;
+  color: var(--on-primary, #fff);
 }
 
 // ---- SEARCH Header
@@ -101,6 +102,30 @@
 
 .mdc-deprecated-list-item__text {
   color: light-dark(rgb(0 0 0 / 87%), rgb(255 255 255 / 87%));
+}
+
+#top-app-bar__btn-color-scheme {
+  gap: 0.85rem;
+
+  .mdc-deprecated-list-item__graphic.material-icons {
+    margin-right: 0;
+  }
+
+  .mdc-deprecated-list-item__text {
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .mdc-deprecated-list-item__meta {
+    margin-left: auto;
+    padding: 0.2rem 0.65rem;
+    border: 1px solid light-dark(rgb(0 0 0 / 8%), rgb(255 255 255 / 10%));
+    border-radius: 999px;
+    background: light-dark(rgb(15 23 42 / 5%), rgb(255 255 255 / 6%));
+    color: light-dark(rgb(0 0 0 / 60%), rgb(255 255 255 / 70%));
+    line-height: 1.2;
+    font-size: 0.9rem;
+  }
 }
 
 // Keep the body below the top-bar

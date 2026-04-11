@@ -141,6 +141,39 @@ class ExtendedUserDataResponse
   protected ?int $ranking_score = null;
 
   /**
+   * Whether the user account is verified (only populated for GET /user/{id}).
+   *
+   * @SerializedName("is_verified")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
+  protected ?bool $is_verified = null;
+
+  /**
+   * The Scratch username if the user was imported from Scratch; null otherwise (only populated for GET /user/{id}).
+   *
+   * @SerializedName("scratch_username")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $scratch_username = null;
+
+  /**
+   * Whether the authenticated viewer follows this user; null when unauthenticated (only populated for GET /user/{id}).
+   *
+   * @SerializedName("is_followed_by_viewer")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
+  protected ?bool $is_followed_by_viewer = null;
+
+  /**
    * EMail of the user.
    *
    * @SerializedName("email")
@@ -168,6 +201,9 @@ class ExtendedUserDataResponse
       $this->followers = array_key_exists('followers', $data) ? $data['followers'] : $this->followers;
       $this->following = array_key_exists('following', $data) ? $data['following'] : $this->following;
       $this->ranking_score = array_key_exists('ranking_score', $data) ? $data['ranking_score'] : $this->ranking_score;
+      $this->is_verified = array_key_exists('is_verified', $data) ? $data['is_verified'] : $this->is_verified;
+      $this->scratch_username = array_key_exists('scratch_username', $data) ? $data['scratch_username'] : $this->scratch_username;
+      $this->is_followed_by_viewer = array_key_exists('is_followed_by_viewer', $data) ? $data['is_followed_by_viewer'] : $this->is_followed_by_viewer;
       $this->email = array_key_exists('email', $data) ? $data['email'] : $this->email;
     }
   }
@@ -366,6 +402,72 @@ class ExtendedUserDataResponse
   public function setRankingScore(?int $ranking_score = null): self
   {
     $this->ranking_score = $ranking_score;
+
+    return $this;
+  }
+
+  /**
+   * Gets is_verified.
+   */
+  public function isIsVerified(): ?bool
+  {
+    return $this->is_verified;
+  }
+
+  /**
+   * Sets is_verified.
+   *
+   * @param bool|null $is_verified Whether the user account is verified (only populated for GET /user/{id})
+   *
+   * @return $this
+   */
+  public function setIsVerified(?bool $is_verified = null): self
+  {
+    $this->is_verified = $is_verified;
+
+    return $this;
+  }
+
+  /**
+   * Gets scratch_username.
+   */
+  public function getScratchUsername(): ?string
+  {
+    return $this->scratch_username;
+  }
+
+  /**
+   * Sets scratch_username.
+   *
+   * @param string|null $scratch_username The Scratch username if the user was imported from Scratch; null otherwise (only populated for GET /user/{id})
+   *
+   * @return $this
+   */
+  public function setScratchUsername(?string $scratch_username = null): self
+  {
+    $this->scratch_username = $scratch_username;
+
+    return $this;
+  }
+
+  /**
+   * Gets is_followed_by_viewer.
+   */
+  public function isIsFollowedByViewer(): ?bool
+  {
+    return $this->is_followed_by_viewer;
+  }
+
+  /**
+   * Sets is_followed_by_viewer.
+   *
+   * @param bool|null $is_followed_by_viewer Whether the authenticated viewer follows this user; null when unauthenticated (only populated for GET /user/{id})
+   *
+   * @return $this
+   */
+  public function setIsFollowedByViewer(?bool $is_followed_by_viewer = null): self
+  {
+    $this->is_followed_by_viewer = $is_followed_by_viewer;
 
     return $this;
   }

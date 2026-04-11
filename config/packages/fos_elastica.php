@@ -56,8 +56,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'visible' => null,
             'debug_build' => null,
             'auto_hidden' => null,
-            'getTagsString' => null,
-            'getExtensionsString' => null,
+            'getTagsString' => [
+              'type' => 'text',
+            ],
+            'getExtensionsString' => [
+              'type' => 'text',
+            ],
             'getUsernameString' => null,
             'downloads' => [
               'type' => 'integer',

@@ -40,6 +40,12 @@
   {{ encore_entry_script_tags('base_layout') }}
   {% block javascript %}{% endblock %}
 
+  {% if block('meta_description') is defined and block('meta_description') is not empty %}
+    <meta name="description" content="{{ block('meta_description')|striptags|trim|escape('html_attr') }}">
+  {% else %}
+    <meta name="description" content="{{ 'meta.description'|trans({}, 'catroweb')|escape('html_attr') }}">
+  {% endif %}
+
   <meta property="og:site_name" content="Catrobat">
   {% block head %}{% endblock %}
 </head>

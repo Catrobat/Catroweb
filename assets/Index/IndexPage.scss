@@ -22,7 +22,8 @@ img .lazyload:not([src]) {
 
 .carousel-item__image {
   width: 100%;
-  aspect-ratio: 1024 / 400;
+  height: auto;
+  aspect-ratio: 1024 / 600;
   object-fit: cover;
   display: block;
   margin: 0 auto;
@@ -95,17 +96,19 @@ body:has(#home-projects) {
     0 0 0 1px light-dark(rgb(0 0 0 / 3%), rgb(255 255 255 / 4%));
   transition: box-shadow 0.3s ease;
 
-  // Mobile: full-width, ignore page container padding, slight border-radius
-  border-radius: 12px;
-  margin-left: calc(-1 * var(--bs-gutter-x, 0.75rem));
-  margin-right: calc(-1 * var(--bs-gutter-x, 0.75rem));
-  padding-left: calc(var(--bs-gutter-x, 0.75rem));
-  padding-right: calc(var(--bs-gutter-x, 0.75rem));
+  &:not(.vertical) {
+    // Mobile: full-width, ignore page container padding, slight border-radius
+    border-radius: 12px;
+    margin-left: calc(-1 * var(--bs-gutter-x, 0.75rem));
+    margin-right: calc(-1 * var(--bs-gutter-x, 0.75rem));
+    padding-left: calc(var(--bs-gutter-x, 0.75rem));
+    padding-right: calc(var(--bs-gutter-x, 0.75rem));
 
-  @media (width >= 768px) {
-    border-radius: 16px;
-    margin-left: 0;
-    margin-right: 0;
+    @media (width >= 768px) {
+      border-radius: 16px;
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 
   &:hover {
@@ -125,6 +128,17 @@ body:has(#home-projects) {
       color-mix(in srgb, var(--primary) 20%, rgb(255 255 255 / 10%))
     );
   }
+}
+
+.project-list.home-section.vertical {
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
+  border-right: none;
+  border-left: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  background: var(--theme-background) !important;
 }
 
 // Individual project/studio cards inside sliders — 3D pop

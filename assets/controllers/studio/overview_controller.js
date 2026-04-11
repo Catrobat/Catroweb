@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
-import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
+import { shareOrCopy } from '../../Components/ClipboardHelper'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import AcceptLanguage from '../../Api/AcceptLanguage'
 
@@ -29,6 +30,18 @@ export default class extends Controller {
 
     this._readTranslations()
     this._fetchAllStudios()
+
+    // Close dropdowns when clicking outside
+    this._onDocumentClick = () => {
+      this.element.querySelectorAll('.projects-list-item--dropdown').forEach((d) => {
+        d.style.display = 'none'
+      })
+    }
+    document.addEventListener('click', this._onDocumentClick)
+  }
+
+  disconnect() {
+    document.removeEventListener('click', this._onDocumentClick)
   }
 
   async loadMore() {
@@ -52,6 +65,15 @@ export default class extends Controller {
       explore: this.element.dataset.transExplore || 'Explore Studios',
       noJoined: this.element.dataset.transNoJoined || "You haven't joined any studios yet",
       joined: this.element.dataset.transJoined || 'Joined',
+      open: this.element.dataset.transOpen || 'Open',
+      share: this.element.dataset.transShare || 'Share',
+      shareSuccess: this.element.dataset.transShareSuccess || 'Link copied to clipboard!',
+      leaveConfirmTitle: this.element.dataset.transLeaveConfirmTitle || 'Leave this studio?',
+      cancel: this.element.dataset.transCancel || 'Cancel',
+      cancelRequest: this.element.dataset.transCancelRequest || 'Cancel Request',
+      cancelRequestConfirmTitle:
+        this.element.dataset.transCancelRequestConfirmTitle || 'Cancel join request?',
+      admin: this.element.dataset.transAdmin || 'Admin',
     }
   }
 
@@ -103,14 +125,22 @@ export default class extends Controller {
       console.error('Error fetching studios:', error)
     } finally {
       this.loading = false
+      this._removeSkeletons()
     }
   }
 
-  _renderTwoSections() {
-    const myStudios = this.allStudios.filter((s) => s.is_member === true)
-    const exploreStudios = this.allStudios.filter((s) => s.is_member !== true)
+  _removeSkeletons() {
+    this.element.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+  }
 
-    // Sort my studios by recent activity (use updated_at or id as proxy)
+  _renderTwoSections() {
+    const myStudios = this.allStudios.filter(
+      (s) => s.is_member === true || s.join_request_status === 'pending',
+    )
+    const exploreStudios = this.allStudios.filter(
+      (s) => s.is_member !== true && s.join_request_status !== 'pending',
+    )
+
     // Sort explore studios by member count descending
     exploreStudios.sort((a, b) => {
       const countA = parseInt(a.members_count, 10) || 0
@@ -125,13 +155,18 @@ export default class extends Controller {
       this.exploreStudiosHeaderTarget.textContent = this.translations.explore
     }
 
-    this._renderSection(this.myStudiosTarget, myStudios, this.translations.noJoined)
-    this._renderSection(this.exploreStudiosTarget, exploreStudios, this.translations.noStudios)
+    this._renderSection(this.myStudiosTarget, myStudios, this.translations.noJoined, true)
+    this._renderSection(
+      this.exploreStudiosTarget,
+      exploreStudios,
+      this.translations.noStudios,
+      false,
+    )
 
     this._bindCardEvents()
   }
 
-  _renderSection(container, studios, emptyMessage) {
+  _renderSection(container, studios, emptyMessage, isMyStudios) {
     container.innerHTML = ''
 
     if (studios.length === 0) {
@@ -141,7 +176,7 @@ export default class extends Controller {
     }
 
     for (const studio of studios) {
-      container.insertAdjacentHTML('beforeend', this._buildStudioCard(studio))
+      container.insertAdjacentHTML('beforeend', this._buildStudioCard(studio, isMyStudios))
     }
   }
 
@@ -155,13 +190,13 @@ export default class extends Controller {
     }
 
     for (const studio of studios) {
-      container.insertAdjacentHTML('beforeend', this._buildStudioCard(studio))
+      container.insertAdjacentHTML('beforeend', this._buildStudioCard(studio, false))
     }
 
     this._bindCardEvents()
   }
 
-  _buildStudioCard(studio) {
+  _buildStudioCard(studio, isMyStudios) {
     const id = escapeAttr(studio.id || '')
     const name = escapeHtml(studio.name || '')
     const description = escapeHtml(this._truncate(studio.description || '', 100))
@@ -170,14 +205,35 @@ export default class extends Controller {
     const projectsCount = parseInt(studio.projects_count, 10) || 0
     const isPublic = studio.is_public !== false
     const isMember = studio.is_member === true
+    const userRole = studio.user_role || null
     const joinRequestStatus = studio.join_request_status || null
 
     const detailUrl = this.studioDetailsPathValue.replace('__ID__', id)
 
-    let actionButton = ''
-    if (this.isLoggedInValue) {
-      actionButton = this._buildActionButton(id, isMember, joinRequestStatus)
+    // Build pill badges
+    let pills = ''
+    if (isMyStudios && userRole === 'admin') {
+      pills +=
+        '<span class="studios-list-item--pill studios-list-item--pill-admin">' +
+        escapeHtml(this.translations.admin) +
+        '</span>'
     }
+    if (joinRequestStatus === 'pending') {
+      pills +=
+        '<span class="studios-list-item--pill studios-list-item--pill-pending">' +
+        escapeHtml(this.translations.pending) +
+        '</span>'
+    }
+
+    // Build action area (menu + optional join button)
+    const actionArea = this._buildActionArea(
+      id,
+      detailUrl,
+      isMyStudios,
+      isMember,
+      userRole,
+      joinRequestStatus,
+    )
 
     return (
       '<div class="studios-list-item-wrapper" data-studio-id="' +
@@ -198,6 +254,7 @@ export default class extends Controller {
       (!isPublic
         ? '<div class="studios-list-item--badge"><span class="material-icons">lock</span></div>'
         : '') +
+      pills +
       '</div>' +
       '<div class="studios-list-item--icons">' +
       '<div class="studios-list-item--icon-wrapper">' +
@@ -219,16 +276,74 @@ export default class extends Controller {
       '</div>' +
       '</div>' +
       '</a>' +
-      actionButton +
+      actionArea +
       '</div>'
     )
   }
 
-  _buildActionButton(studioId, isMember, joinRequestStatus) {
-    const buttonHtml = this._buildMembershipButton(studioId, isMember, joinRequestStatus)
+  _buildActionArea(studioId, detailUrl, isMyStudios, isMember, userRole, joinRequestStatus) {
+    // Build dropdown menu items
+    let menuItems =
+      '<a href="' +
+      escapeAttr(detailUrl) +
+      '" class="projects-list-item--dropdown-item">' +
+      '<i class="material-icons">open_in_new</i>' +
+      escapeHtml(this.translations.open) +
+      '</a>' +
+      '<button class="projects-list-item--dropdown-item" data-action="share" data-studio-id="' +
+      escapeAttr(studioId) +
+      '">' +
+      '<i class="material-icons">share</i>' +
+      escapeHtml(this.translations.share) +
+      '</button>'
+
+    if (this.isLoggedInValue && isMyStudios && isMember && userRole !== 'admin') {
+      menuItems +=
+        '<div class="projects-list-item--dropdown-divider"></div>' +
+        '<button class="projects-list-item--dropdown-item text-danger" data-action="leave" data-studio-id="' +
+        escapeAttr(studioId) +
+        '">' +
+        '<i class="material-icons">logout</i>' +
+        escapeHtml(this.translations.leave) +
+        '</button>'
+    }
+
+    if (this.isLoggedInValue && joinRequestStatus === 'pending' && !isMember) {
+      menuItems +=
+        '<div class="projects-list-item--dropdown-divider"></div>' +
+        '<button class="projects-list-item--dropdown-item text-danger" data-action="cancel-request" data-studio-id="' +
+        escapeAttr(studioId) +
+        '">' +
+        '<i class="material-icons">close</i>' +
+        escapeHtml(this.translations.cancelRequest) +
+        '</button>'
+    }
+
+    // Join button shown directly on explore cards (not in menu)
+    let joinButton = ''
+    if (this.isLoggedInValue && !isMyStudios && !isMember) {
+      joinButton =
+        '<button class="btn btn-primary btn-sm studio-join-btn" data-studio-id="' +
+        escapeAttr(studioId) +
+        '">' +
+        escapeHtml(this.translations.join) +
+        '</button>'
+    }
 
     return (
-      '<div class="studios-list-item--buttons d-flex align-items-center">' + buttonHtml + '</div>'
+      '<div class="studios-list-item--buttons">' +
+      joinButton +
+      '<div class="projects-list-item--actions">' +
+      '<button class="btn projects-list-item--menu-btn" data-studio-id="' +
+      escapeAttr(studioId) +
+      '">' +
+      '<i class="material-icons">more_vert</i>' +
+      '</button>' +
+      '<div class="projects-list-item--dropdown" style="display:none;">' +
+      menuItems +
+      '</div>' +
+      '</div>' +
+      '</div>'
     )
   }
 
@@ -242,6 +357,73 @@ export default class extends Controller {
     }
 
     for (const container of containers) {
+      // Dropdown toggle
+      container.querySelectorAll('.projects-list-item--menu-btn').forEach((btn) => {
+        if (!btn.dataset.bound) {
+          btn.dataset.bound = 'true'
+          btn.addEventListener('click', (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            const dropdown = btn.nextElementSibling
+            const isOpen = dropdown.style.display !== 'none'
+            // Close all dropdowns first
+            this.element.querySelectorAll('.projects-list-item--dropdown').forEach((d) => {
+              d.style.display = 'none'
+            })
+            dropdown.style.display = isOpen ? 'none' : 'block'
+          })
+        }
+      })
+
+      // Share buttons inside dropdown
+      container.querySelectorAll('[data-action="share"]').forEach((btn) => {
+        if (!btn.dataset.bound) {
+          btn.dataset.bound = 'true'
+          btn.addEventListener('click', (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            btn.closest('.projects-list-item--dropdown').style.display = 'none'
+            const studioId = btn.dataset.studioId
+            const url =
+              window.location.origin + this.studioDetailsPathValue.replace('__ID__', studioId)
+            shareOrCopy(url, () => {
+              showSnackbar(
+                '#share-snackbar',
+                this.translations.shareSuccess,
+                SnackbarDuration.short,
+              )
+            })
+          })
+        }
+      })
+
+      // Leave buttons inside dropdown
+      container.querySelectorAll('[data-action="leave"]').forEach((btn) => {
+        if (!btn.dataset.bound) {
+          btn.dataset.bound = 'true'
+          btn.addEventListener('click', async (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            btn.closest('.projects-list-item--dropdown').style.display = 'none'
+            await this._confirmAndLeaveStudio(btn.dataset.studioId)
+          })
+        }
+      })
+
+      // Cancel request buttons inside dropdown
+      container.querySelectorAll('[data-action="cancel-request"]').forEach((btn) => {
+        if (!btn.dataset.bound) {
+          btn.dataset.bound = 'true'
+          btn.addEventListener('click', async (e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            btn.closest('.projects-list-item--dropdown').style.display = 'none'
+            await this._confirmAndCancelRequest(btn.dataset.studioId)
+          })
+        }
+      })
+
+      // Join buttons (directly on card, not in dropdown)
       container.querySelectorAll('.studio-join-btn').forEach((btn) => {
         if (!btn.dataset.bound) {
           btn.dataset.bound = 'true'
@@ -252,17 +434,22 @@ export default class extends Controller {
           })
         }
       })
+    }
+  }
 
-      container.querySelectorAll('.studio-leave-btn').forEach((btn) => {
-        if (!btn.dataset.bound) {
-          btn.dataset.bound = 'true'
-          btn.addEventListener('click', (e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            this._leaveStudio(btn.dataset.studioId, btn)
-          })
-        }
-      })
+  async _confirmAndLeaveStudio(studioId) {
+    const { default: Swal } = await import('sweetalert2')
+    const result = await Swal.fire({
+      title: this.translations.leaveConfirmTitle,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: this.translations.leave,
+      cancelButtonText: this.translations.cancel,
+    })
+
+    if (result.isConfirmed) {
+      await this._leaveStudio(studioId)
     }
   }
 
@@ -290,11 +477,9 @@ export default class extends Controller {
 
         if (studio) {
           if (studio.is_public !== false) {
-            // Public studio: joined immediately
             studio.is_member = true
             studio.members_count = (parseInt(studio.members_count, 10) || 0) + 1
           } else {
-            // Private studio: join request created, pending approval
             studio.join_request_status = 'pending'
           }
         }
@@ -307,11 +492,8 @@ export default class extends Controller {
           if (countEl) {
             countEl.textContent = parseInt(countEl.textContent, 10) + 1
           }
-          const buttonsContainer = btn.closest('.studios-list-item--buttons')
-          if (buttonsContainer) {
-            buttonsContainer.innerHTML = this._buildMembershipButton(studioId, true, null)
-            this._bindCardEvents()
-          }
+          // Re-render the card without join button
+          this._bindCardEvents()
         }
       } else if (response.status === 409) {
         // Already a member
@@ -323,7 +505,7 @@ export default class extends Controller {
     }
   }
 
-  async _leaveStudio(studioId, btn) {
+  async _leaveStudio(studioId) {
     if (!this.isLoggedInValue) {
       window.location.href = this.loginPathValue
       return
@@ -343,7 +525,6 @@ export default class extends Controller {
       )
 
       if (response.ok || response.status === 204) {
-        // Update the studio in allStudios
         const studio = this.allStudios.find((s) => String(s.id) === String(studioId))
         if (studio) {
           studio.is_member = false
@@ -352,17 +533,6 @@ export default class extends Controller {
 
         if (this.isLoggedInValue) {
           this._renderTwoSections()
-        } else {
-          const wrapper = btn.closest('.studios-list-item-wrapper')
-          const countEl = wrapper?.querySelector('#studios-user-count-' + CSS.escape(studioId))
-          if (countEl) {
-            countEl.textContent = Math.max(0, parseInt(countEl.textContent, 10) - 1)
-          }
-          const buttonsContainer = btn.closest('.studios-list-item--buttons')
-          if (buttonsContainer) {
-            buttonsContainer.innerHTML = this._buildMembershipButton(studioId, false, null)
-            this._bindCardEvents()
-          }
         }
       } else if (response.status === 422) {
         showSnackbar('#share-snackbar', 'Admins cannot leave the studio', SnackbarDuration.error)
@@ -374,39 +544,56 @@ export default class extends Controller {
     }
   }
 
-  _buildMembershipButton(studioId, isMember, joinRequestStatus) {
-    if (isMember) {
-      return (
-        '<button class="btn btn-sm btn-outline-secondary studio-action-btn studio-leave-btn" ' +
-        'data-studio-id="' +
-        escapeAttr(studioId) +
-        '" data-action-type="leave">' +
-        escapeHtml(this.translations.joined) +
-        '</button>'
-      )
+  async _confirmAndCancelRequest(studioId) {
+    const { default: Swal } = await import('sweetalert2')
+    const result = await Swal.fire({
+      title: this.translations.cancelRequestConfirmTitle,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: this.translations.cancelRequest,
+      cancelButtonText: this.translations.cancel,
+    })
+
+    if (result.isConfirmed) {
+      await this._cancelRequest(studioId)
     }
-    if (joinRequestStatus === 'pending') {
-      return (
-        '<span class="btn btn-sm btn-outline-warning disabled studio-action-btn">' +
-        escapeHtml(this.translations.pending) +
-        '</span>'
-      )
+  }
+
+  async _cancelRequest(studioId) {
+    if (!this.isLoggedInValue) {
+      window.location.href = this.loginPathValue
+      return
     }
-    if (joinRequestStatus === 'declined') {
-      return (
-        '<span class="btn btn-sm btn-outline-danger disabled studio-action-btn">' +
-        escapeHtml(this.translations.declined) +
-        '</span>'
+
+    try {
+      const response = await fetch(
+        this.apiBaseUrlValue + '/studio/' + encodeURIComponent(studioId) + '/leave',
+        {
+          method: 'DELETE',
+          credentials: 'same-origin',
+          headers: {
+            Accept: 'application/json',
+            'Accept-Language': new AcceptLanguage().get(),
+          },
+        },
       )
+
+      if (response.ok || response.status === 204) {
+        const studio = this.allStudios.find((s) => String(s.id) === String(studioId))
+        if (studio) {
+          studio.join_request_status = null
+        }
+
+        if (this.isLoggedInValue) {
+          this._renderTwoSections()
+        }
+      } else {
+        console.error('Cancel request failed:', response.status)
+      }
+    } catch (error) {
+      console.error('Cancel request error:', error)
     }
-    return (
-      '<button class="btn btn-sm btn-primary studio-action-btn studio-join-btn" ' +
-      'data-studio-id="' +
-      escapeAttr(studioId) +
-      '" data-action-type="join">' +
-      escapeHtml(this.translations.join) +
-      '</button>'
-    )
   }
 
   _updateLoadMoreButton() {

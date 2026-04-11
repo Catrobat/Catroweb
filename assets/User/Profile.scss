@@ -123,6 +123,10 @@
   }
 }
 
+.tab-content .tab-pane {
+  min-height: 50vh;
+}
+
 .follower-tabs {
   margin-top: -1rem;
 }
@@ -234,6 +238,28 @@
       overflow: hidden;
     }
   }
+}
+
+// ===== Skeleton Loading =====
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .loading-spinner-backdrop {

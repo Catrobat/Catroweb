@@ -90,7 +90,7 @@ export class FeaturedBanner {
       img.className = 'carousel-item__image d-block w-100'
       img.alt = slide.title || ''
       img.width = 1024
-      img.height = 400
+      img.height = 600
       img.loading = i === 0 ? 'eager' : 'lazy'
       if (i === 0) {
         img.fetchPriority = 'high'

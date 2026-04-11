@@ -14,6 +14,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\Studio\StudioManager;
+use App\Utils\ElapsedTimeStringFormatter;
 use OpenAPI\Server\Model\StudioActivityListResponse;
 use OpenAPI\Server\Model\StudioActivityResponse;
 use OpenAPI\Server\Model\StudioCommentListResponse;
@@ -45,6 +46,7 @@ class StudioResponseManager extends AbstractResponseManager
     private readonly RequestStack $request_stack,
     private readonly StudioManager $studio_manager,
     private readonly ProjectManager $project_manager,
+    private readonly ElapsedTimeStringFormatter $time_formatter,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -60,6 +62,8 @@ class StudioResponseManager extends AbstractResponseManager
       ->setImagePath($this->generateImagePath($studio))
       ->setMembersCount($this->studio_manager->countStudioUsers($studio))
       ->setProjectsCount($this->studio_manager->countStudioProjects($studio))
+      ->setActivitiesCount($this->studio_manager->countStudioActivities($studio))
+      ->setCommentsCount($this->studio_manager->countStudioComments($studio))
     ;
   }
 
@@ -70,6 +74,15 @@ class StudioResponseManager extends AbstractResponseManager
     if ($user instanceof User) {
       $studioUser = $this->studio_manager->findStudioUser($user, $studio);
       $response->setIsMember($studioUser instanceof StudioUser);
+
+      $userRole = $this->studio_manager->getStudioUserRole($user, $studio);
+      $response->setUserRole($userRole);
+
+      if ('admin' === $userRole) {
+        $response->setPendingJoinRequestsCount(
+          count($this->studio_manager->findPendingJoinRequests($studio))
+        );
+      }
 
       $joinRequest = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
       $response->setJoinRequestStatus($joinRequest?->getStatus());
@@ -169,6 +182,13 @@ class StudioResponseManager extends AbstractResponseManager
     $programId = $program->getId();
     $user = $studioProject->getUser();
 
+    $uploadedString = null;
+    try {
+      $uploadedString = $this->time_formatter->format($program->getUploadedAt()->getTimestamp());
+    } catch (\Exception) {
+      $uploadedString = $program->getUploadedAt()->format(\DateTimeInterface::RFC2822);
+    }
+
     return (new StudioProjectResponse())
       ->setId($programId)
       ->setName($program->getName())
@@ -177,6 +197,11 @@ class StudioResponseManager extends AbstractResponseManager
       ->setScreenshotSmall(null !== $programId ? $this->project_manager->getScreenshotSmall($programId) : null)
       ->setAuthor($program->getUser()?->getUsername())
       ->setAuthorId($program->getUser()?->getId())
+      ->setDownloads($program->getDownloads())
+      ->setViews($program->getViews())
+      ->setUploadedString($uploadedString)
+      ->setPrivate($program->getPrivate())
+      ->setNotForKids($program->getNotForKids())
     ;
   }
 

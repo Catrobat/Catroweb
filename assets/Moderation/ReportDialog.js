@@ -1,9 +1,24 @@
 import Swal from 'sweetalert2'
 import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { REPORT_CATEGORIES } from './ReportCategories'
 
 const SESSION_KEY_PREFIX = 'pendingReport_'
+const REPORT_CATEGORY_ICONS = {
+  copyright: 'copyright',
+  sexual_content: 'no_adult_content',
+  graphic_violence: 'warning',
+  hateful_content: 'block',
+  improper_rating: 'report_problem',
+  spam: 'alternate_email',
+  other: 'more_horiz',
+  inappropriate: 'error_outline',
+  harassment: 'front_hand',
+  impersonation: 'badge',
+  inappropriate_profile: 'person_off',
+  spam_account: 'person_search',
+  inappropriate_content: 'hide_source',
+}
 
 export function showReportDialog({
   contentType,
@@ -44,25 +59,59 @@ export function showReportDialog({
     confirmButtonText: translations.submit || 'Submit Report',
     cancelButtonText: translations.cancel || 'Cancel',
     preConfirm: () => {
-      const checked = document.querySelector('input[name="report-category"]:checked')
-      const note = document.getElementById('report-note')?.value || ''
+      const popup = Swal.getPopup()
+      const category = popup?.querySelector('#report-category-value')?.value || ''
+      const note = popup?.querySelector('#report-note')?.value || ''
 
-      if (!checked) {
-        Swal.showValidationMessage('Please select a category')
+      if (!category) {
+        Swal.showValidationMessage(translations.selectCategory || 'Please select a category')
         return false
       }
 
-      return submitReport(apiUrl, { category: checked.value, note }, translations, sessionKey)
+      return submitReport(apiUrl, { category, note }, translations, sessionKey)
     },
     didOpen: (popup) => {
-      // Persist form state in session (scoped to popup to avoid listener leak)
-      popup.addEventListener('input', (e) => {
-        if (e.target.id === 'report-note' || e.target.name === 'report-category') {
-          const checked = popup.querySelector('input[name="report-category"]:checked')
+      const categoryValueInput = popup.querySelector('#report-category-value')
+      const categoryButtons = popup.querySelectorAll('[data-report-category]')
+
+      const updateCategorySelection = (category) => {
+        if (!categoryValueInput) {
+          return
+        }
+
+        categoryValueInput.value = category
+        categoryButtons.forEach((button) => {
+          const isActive = button.dataset.reportCategory === category
+          button.classList.toggle('is-active', isActive)
+          button.setAttribute('aria-checked', isActive ? 'true' : 'false')
+
+          const checkIcon = button.querySelector('.report-dialog__option__check')
+          if (checkIcon) {
+            checkIcon.textContent = isActive ? 'radio_button_checked' : 'radio_button_unchecked'
+          }
+        })
+      }
+
+      categoryButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          updateCategorySelection(button.dataset.reportCategory)
           sessionStorage.setItem(
             sessionKey,
             JSON.stringify({
-              category: checked?.value || '',
+              category: button.dataset.reportCategory,
+              note: popup.querySelector('#report-note')?.value || '',
+            }),
+          )
+        })
+      })
+
+      // Persist form state in session (scoped to popup to avoid listener leak)
+      popup.addEventListener('input', (e) => {
+        if (e.target.id === 'report-note') {
+          sessionStorage.setItem(
+            sessionKey,
+            JSON.stringify({
+              category: categoryValueInput?.value || '',
               note: popup.querySelector('#report-note')?.value || '',
             }),
           )
@@ -89,6 +138,7 @@ function submitReport(apiUrl, { category, note }, translations, sessionKey) {
           icon: 'success',
           customClass: { confirmButton: 'btn btn-primary' },
           buttonsStyling: false,
+          confirmButtonText: translations.confirm || 'Confirm',
         })
         return true
       } else if (response.status === 409) {
@@ -122,25 +172,23 @@ function submitReport(apiUrl, { category, note }, translations, sessionKey) {
 }
 
 function buildReportHtml(categories, translations, oldData) {
+  const selectedCategory = oldData.category || ''
+
   const categoryHtml = categories
     .map((cat) => {
-      const checked = oldData.category === cat.value ? 'checked' : ''
-      const label = translations['category_' + cat.labelKey] || cat.value
+      const isActive = selectedCategory === cat.value
+      const label = getCategoryLabel(cat, translations)
+      const icon = REPORT_CATEGORY_ICONS[cat.labelKey] || 'flag'
       return `
-      <div class="mdc-form-field">
-        <div class="mdc-radio">
-          <input class="mdc-radio__native-control" type="radio"
-            id="report-cat-${escapeAttr(cat.value)}"
-            name="report-category"
-            value="${escapeAttr(cat.value)}" ${checked}>
-          <div class="mdc-radio__background">
-            <div class="mdc-radio__outer-circle"></div>
-            <div class="mdc-radio__inner-circle"></div>
-          </div>
-          <div class="mdc-radio__ripple"></div>
-        </div>
-        <label for="report-cat-${escapeAttr(cat.value)}">${escapeHtml(label)}</label>
-      </div>`
+      <button type="button"
+        class="report-dialog__option${isActive ? ' is-active' : ''}"
+        data-report-category="${escapeAttr(cat.value)}"
+        role="radio"
+        aria-checked="${isActive ? 'true' : 'false'}">
+        <span class="report-dialog__option__icon material-icons" aria-hidden="true">${icon}</span>
+        <span class="report-dialog__option__label">${escapeHtml(label)}</span>
+        <span class="report-dialog__option__check material-icons" aria-hidden="true">${isActive ? 'radio_button_checked' : 'radio_button_unchecked'}</span>
+      </button>`
     })
     .join('')
 
@@ -149,17 +197,32 @@ function buildReportHtml(categories, translations, oldData) {
   const noteValue = oldData.note || ''
 
   return `
-    ${categoryHtml}
-    <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea report-reason" style="margin-top: 1rem; width: 100%;">
-      <span class="mdc-text-field__resizer">
-        <textarea class="mdc-text-field__input" id="report-note"
-          placeholder="${escapeAttr(placeholder)}"
-          style="width: 100%; height: 80px">${escapeHtml(noteValue)}</textarea>
-      </span>
-      <span class="mdc-notched-outline">
-        <span class="mdc-notched-outline__leading"></span>
-        <span class="mdc-notched-outline__trailing"></span>
-      </span>
-    </label>
+    <div class="report-dialog">
+      <div class="report-dialog__options" role="radiogroup" aria-label="${escapeAttr(translations.title || 'Report')}">
+        ${categoryHtml}
+      </div>
+      <input id="report-category-value" type="hidden" value="${escapeAttr(selectedCategory)}">
+      <label class="report-dialog__note-label" for="report-note">${escapeHtml(translations.noteLabel || 'Additional details')}</label>
+      <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea report-reason report-dialog__note">
+        <span class="mdc-text-field__resizer">
+          <textarea class="mdc-text-field__input" id="report-note"
+            placeholder="${escapeAttr(placeholder)}">${escapeHtml(noteValue)}</textarea>
+        </span>
+        <span class="mdc-notched-outline">
+          <span class="mdc-notched-outline__leading"></span>
+          <span class="mdc-notched-outline__trailing"></span>
+        </span>
+      </label>
+    </div>
   `
+}
+
+function getCategoryLabel(category, translations) {
+  const translatedLabel = translations['category_' + category.labelKey]
+
+  if (translatedLabel) {
+    return translatedLabel
+  }
+
+  return category.labelKey.replaceAll('_', ' ').replace(/\b\w/g, (char) => char.toUpperCase())
 }

@@ -24,6 +24,7 @@
 
 {% block body %}
 
+  {# Profile header — server renders avatar + username, JS fills verification badge + follow buttons #}
   <div class="row no-gutters profile">
     <div class="col-4 col-md-2 avatar-container mt-2 pe-3">
       <img alt="" id="user-image" class="img-fluid round"
@@ -31,45 +32,40 @@
     </div>
 
     <div id="user-information" class="col-8 col-md-10 mt-2 user-info d-flex flex-column justify-content-between">
-      <h1 class="h4">{{ profile.username }} {% if profile.isVerified %}<i class="verification-icon material-icons">check</i>{% endif %}</h1>
+      <h1 class="h4">
+        {{ profile.username }}
+        <i id="verification-badge" class="verification-icon material-icons d-none">check</i>
+      </h1>
 
       <div class="button-container w-100 mt-3">
-        {% if profile.isScratchUser() %}
-          <a href={{ 'https://scratch.mit.edu/users/' ~ profile.getScratchUsername() }}>
-            <button class="btn btn-outline-primary profile-goto-scratch mt-0 ms-auto">
-              {{ 'profile.goToScratchProfile'|trans({}, 'catroweb') }}
-            </button>
-          </a>
-        {% endif %}
-        {% if app.user != null and app.user.id != profile.id and not app.user.isMinor() and not profile.isMinor() %}
-          <button class="btn btn-outline-primary profile-follows unfollow-btn mt-0 ms-auto"
-                  style="{{ profile.hasFollower(app.user) ? 'display: block' : 'display:none' }}"
-                  data-user-id="{{ profile.id }}"
-                  data-user-name="{{ profile.username }}">
-            {{ 'follower.follows'|trans({}, 'catroweb') }}
+        <a id="scratch-link" class="d-none" href="">
+          <button class="btn btn-outline-primary profile-goto-scratch mt-0 ms-auto">
+            {{ 'profile.goToScratchProfile'|trans({}, 'catroweb') }}
           </button>
-          <button class="btn btn-primary profile-follow follow-btn mt-0 ms-auto"
-                  style="{{ profile.hasFollower(app.user) ? 'display: none' : 'display:block' }}"
-                  data-user-id="{{ profile.id }}">
-            {{ 'follower.follow'|trans({}, 'catroweb') }}
-          </button>
-        {% endif %}
-        {% if app.user == null %}
-          <button class="btn btn-primary profile-follow follow-btn mt-0 mt-auto"
-                  data-user-id="{{ profile.id }}">
-            {{ 'follower.follow'|trans({}, 'catroweb') }}
-          </button>
-        {% endif %}
+        </a>
+        <span class="skeleton skeleton--button js-skeleton" style="width: 100px; height: 36px;"></span>
       </div>
     </div>
   </div>
 
-  <div id="user-achievements" class="js-profile-achievements d-none mt-4 mb-2"
+  <div id="user-achievements" class="js-profile-achievements mt-4 mb-2"
        data-base-url="{{ app.request.getBaseURL() }}"
        data-user-id="{{ profile.id }}"
        data-trans-title="{{ 'achievements.profile.title'|trans({}, 'catroweb') }}"
-  ></div>
+  >
+    <hr>
+    <div class="js-achievements-skeleton">
+      <div style="height: 1.5rem; width: 10rem; background: var(--bg-skeleton, #e0e0e0); border-radius: 4px; margin-bottom: 0.5rem;"></div>
+      <div style="display: flex; gap: 0.5rem;">
+        {% for i in range(0, 4) %}
+          <div style="width: 6rem; height: 6rem; border-radius: 50%; background: var(--bg-skeleton, #e0e0e0); flex-shrink: 0;"></div>
+        {% endfor %}
+      </div>
+    </div>
+    <hr>
+  </div>
 
+  {# Tab bar — server renders structure with skeleton counts, JS updates counts and hides minor tabs #}
   <div class="tab-bar-container mt-3">
     <div class="mdc-tab-bar" role="tablist">
       <div class="mdc-tab-scroller">
@@ -77,7 +73,7 @@
           <div class="mdc-tab-scroller__scroll-content">
             <button class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
               <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="projects-count">{{ project_count }}</span>
+                <span class="mdc-tab__icon" id="projects-count">-</span>
                 <span class="mdc-tab__icon-text">{{ 'projects'|trans({}, 'catroweb') }}</span>
               </span>
               <span class="mdc-tab-indicator mdc-tab-indicator--active">
@@ -85,27 +81,25 @@
               </span>
             </button>
 
-            {% if (not app.user or not app.user.isMinor()) and not profile.isMinor() %}
-              <button class="mdc-tab mdc-tab--stacked" id="test" role="tab" aria-selected="false" tabindex="0">
-                <span class="mdc-tab__content">
-                  <span class="mdc-tab__icon" id="followers-count">-</span>
-                  <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
-                </span>
-                <span class="mdc-tab-indicator">
-                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                </span>
-              </button>
+            <button class="mdc-tab mdc-tab--stacked js-follower-tab" id="test" role="tab" aria-selected="false" tabindex="0">
+              <span class="mdc-tab__content">
+                <span class="mdc-tab__icon" id="followers-count">-</span>
+                <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
+              </span>
+              <span class="mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+              </span>
+            </button>
 
-              <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
-                <span class="mdc-tab__content">
-                  <span class="mdc-tab__icon" id="following-count">-</span>
-                  <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
-                </span>
-                <span class="mdc-tab-indicator">
-                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                </span>
-              </button>
-            {% endif %}
+            <button class="mdc-tab mdc-tab--stacked js-follower-tab" role="tab" aria-selected="false" tabindex="0">
+              <span class="mdc-tab__content">
+                <span class="mdc-tab__icon" id="following-count">-</span>
+                <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
+              </span>
+              <span class="mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+              </span>
+            </button>
 
             <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
               <span class="mdc-tab__content">
@@ -147,16 +141,16 @@
            data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel')|e('html_attr') }}"
            data-login-url="{{ path('login') }}"
            data-trans-report-title="{{ 'report.title'|trans({}, 'catroweb')|default('Report')|e('html_attr') }}"
-           data-trans-report-submit="{{ 'report.submit'|trans({}, 'catroweb')|default('Submit')|e('html_attr') }}"
-           data-trans-report-cancel="{{ 'report.cancel'|trans({}, 'catroweb')|default('Cancel')|e('html_attr') }}"
-           data-trans-report-success="{{ 'report.success'|trans({}, 'catroweb')|default('Report submitted')|e('html_attr') }}"
-           data-trans-report-error="{{ 'report.error'|trans({}, 'catroweb')|default('Error submitting report')|e('html_attr') }}"
-           data-trans-report-duplicate="{{ 'report.duplicate'|trans({}, 'catroweb')|default('Already reported')|e('html_attr') }}"
-           data-trans-report-trust-too-low="{{ 'report.trustTooLow'|trans({}, 'catroweb')|default('Trust too low')|e('html_attr') }}"
-           data-trans-report-unverified="{{ 'report.unverified'|trans({}, 'catroweb')|default('Email verification required')|e('html_attr') }}"
-           data-trans-report-suspended="{{ 'report.suspended'|trans({}, 'catroweb')|default('Account suspended')|e('html_attr') }}"
-           data-trans-report-rate-limited="{{ 'report.rateLimited'|trans({}, 'catroweb')|default('Too many reports')|e('html_attr') }}"
-           data-trans-report-placeholder="{{ 'report.placeholder'|trans({}, 'catroweb')|default('Please describe the issue...')|e('html_attr') }}"
+           data-trans-report-submit="{{ 'moderation.report.submit'|trans({}, 'catroweb')|default('Submit')|e('html_attr') }}"
+           data-trans-report-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel')|e('html_attr') }}"
+           data-trans-report-success="{{ 'moderation.report.success'|trans({}, 'catroweb')|default('Report submitted')|e('html_attr') }}"
+           data-trans-report-error="{{ 'moderation.report.error'|trans({}, 'catroweb')|default('Error submitting report')|e('html_attr') }}"
+           data-trans-report-duplicate="{{ 'moderation.report.duplicate'|trans({}, 'catroweb')|default('Already reported')|e('html_attr') }}"
+           data-trans-report-trust-too-low="{{ 'moderation.report.trust_too_low'|trans({}, 'catroweb')|default('Trust too low')|e('html_attr') }}"
+           data-trans-report-unverified="{{ 'moderation.report.unverified'|trans({}, 'catroweb')|default('Email verification required')|e('html_attr') }}"
+           data-trans-report-suspended="{{ 'moderation.report.suspended'|trans({}, 'catroweb')|default('Account suspended')|e('html_attr') }}"
+           data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb')|default('Too many reports')|e('html_attr') }}"
+           data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb')|default('Please describe the issue...')|e('html_attr') }}"
            data-trans-retention-protected="{{ 'project.retention.protected'|trans({}, 'catroweb')|default('Protected')|e('html_attr') }}"
            data-trans-retention-day="{{ 'project.retention.day_left'|trans({}, 'catroweb')|default('1 day left')|e('html_attr') }}"
            data-trans-retention-days="{{ 'project.retention.days_left'|trans({'%days%': '%days%'}, 'catroweb')|default('%days% days left')|e('html_attr') }}"
@@ -164,19 +158,27 @@
            data-trans-retention-tooltip-protected="{{ 'project.retention.tooltip_protected'|trans({}, 'catroweb')|default('This project is protected and will not be automatically deleted.')|e('html_attr') }}"
            class="project-list loading project-list--full">
         <div class="container">
-          <div class="lazyload projects-spinner-container">
-            {{ include('Components/LoadingSpinner.html.twig', [], false) }}
-          </div>
           <div class="lazyload project-list__wrapper">
-            <div class="lazyload projects-container"></div>
+            <div class="lazyload projects-container">
+              {% for i in range(0, 3) %}
+                <div class="projects-list-item-wrapper projects-browse-skeleton js-skeleton">
+                  <div class="projects-browse-skeleton__image"></div>
+                  <div class="projects-browse-skeleton__content">
+                    <div class="projects-browse-skeleton__name"></div>
+                    <div class="projects-browse-skeleton__meta">
+                      <span class="projects-browse-skeleton__meta-item"></span>
+                      <span class="projects-browse-skeleton__meta-item projects-browse-skeleton__meta-item--short"></span>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    {% if (not app.user or not app.user.isMinor()) and not profile.isMinor() %}
-      {{ include('User/Followers/FollowersTabs.twig') }}
-    {% endif %}
+    {{ include('User/Followers/FollowersTabs.twig') }}
 
     <div id="studios-section" class="tab-pane fade" role="tabpanel" aria-labelledby="studios-tab">
       <div id="no-studios" class="text-center mb-5 d-none">
@@ -190,18 +192,40 @@
     </div>
   </div>
 
-  {% if (not app.user or not app.user.isMinor()) and not profile.isMinor() %}
-    {{ include('User/Followers/FollowerOverviewData.html.twig', {
-      follower_user_id: profile.id,
-      follower_user_role: app.user is not null ? 'user' : 'guest',
-    }) }}
-  {% endif %}
+  {{ include('User/Followers/FollowerOverviewData.html.twig', {
+    follower_user_id: profile.id,
+    follower_user_role: app.user is not null ? 'user' : 'guest',
+  }) }}
 
   <div class="js-profile-studios"
        data-user-id="{{ profile.id }}"
        data-base-url="{{ app.request.getBaseURL() }}"
        data-studio-details-path="{{ path('studio_details', {theme: theme(), id: '__ID__'}) }}"
        data-trans-no-studios="{{ 'studio.overview.no_studios'|trans({}, 'catroweb') }}"
+       data-is-logged-in="{{ app.user is not null ? 'true' : 'false' }}"
+       data-is-own-profile="{{ app.user is not null and app.user.id == profile.id ? 'true' : 'false' }}"
+       data-trans-open="{{ 'project.open'|trans({}, 'catroweb')|default('Open')|e('html_attr') }}"
+       data-trans-share="{{ 'project.shareAction'|trans({}, 'catroweb')|default('Share')|e('html_attr') }}"
+       data-trans-leave="{{ 'studio.details.leave'|trans({}, 'catroweb')|default('Leave')|e('html_attr') }}"
+       data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb')|default('Link copied!')|e('html_attr') }}"
+       data-trans-leave-confirm-title="{{ 'studio.overview.leave_confirm_title'|trans({}, 'catroweb')|default('Leave studio?')|e('html_attr') }}"
+       data-trans-leave-confirm="{{ 'studio.details.leave'|trans({}, 'catroweb')|default('Leave')|e('html_attr') }}"
+       data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel')|e('html_attr') }}"
+       data-trans-role-admin="{{ 'studio.overview.admin'|trans({}, 'catroweb')|default('Admin')|e('html_attr') }}"
+       data-trans-role-member="{{ 'studio.overview.member'|trans({}, 'catroweb')|default('Member')|e('html_attr') }}"
+       data-trans-pending="{{ 'studio.details.pending'|trans({}, 'catroweb')|default('Pending')|e('html_attr') }}"
+       data-trans-cancel-request="{{ 'studio.overview.cancel_request'|trans({}, 'catroweb')|default('Cancel Request')|e('html_attr') }}"
+       data-trans-cancel-request-confirm-title="{{ 'studio.overview.cancel_request_confirm_title'|trans({}, 'catroweb')|default('Cancel join request?')|e('html_attr') }}"
+  ></div>
+
+  {# Data attributes for JS profile header rendering #}
+  <div class="js-profile d-none"
+       data-user-id="{{ profile.id }}"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-viewer-is-minor="{{ app.user is not null and app.user.isMinor() ? 'true' : 'false' }}"
+       data-profile-is-minor="{{ profile.isMinor() ? 'true' : 'false' }}"
+       data-is-logged-in="{{ app.user is not null ? 'true' : 'false' }}"
+       data-viewer-id="{{ app.user is not null ? app.user.id : '' }}"
   ></div>
 
 {% endblock %}

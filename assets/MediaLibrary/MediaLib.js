@@ -17,6 +17,8 @@ export function MediaLib(
 
     const downloadBtn = document.getElementById('top-app-bar__btn-download-selection')
     const cancelBtn = document.getElementById('top-app-bar__btn-cancel-download-selection')
+    const skeletonMediaItems = document.getElementById('skeleton-media-items')
+    const categoryEl = document.querySelector('#content .category')
 
     if (downloadBtn) {
       downloadBtn.onclick = function () {
@@ -53,6 +55,20 @@ export function MediaLib(
     let isLoading = false
     let hasMore = true
     let totalAssets = null
+
+    function removeSkeletonMediaItems() {
+      if (skeletonMediaItems) {
+        skeletonMediaItems.remove()
+      }
+    }
+
+    function showCategoryContent() {
+      removeSkeletonMediaItems()
+
+      if (categoryEl) {
+        categoryEl.style.display = 'block'
+      }
+    }
 
     function buildUrl(pageOffset) {
       let url
@@ -206,17 +222,11 @@ export function MediaLib(
             }
           }
 
-          // Show the category container
-          const categoryEl = document.querySelector('#content .category')
-          if (categoryEl) {
-            categoryEl.style.display = 'block'
-          }
-
-          document.getElementById('loading-spinner').style.display = 'none'
+          showCategoryContent()
         })
         .catch((error) => {
           console.error('Error loading media library category ' + categoryName, error)
-          document.getElementById('loading-spinner').style.display = 'none'
+          removeSkeletonMediaItems()
         })
         .finally(() => {
           isLoading = false

@@ -3942,6 +3942,20 @@ components:
           type: integer
           example: 151
           description: 'Ranking score of this user'
+        is_verified:
+          type: boolean
+          example: true
+          description: 'Whether the user account is verified (only populated for GET /user/{id})'
+        scratch_username:
+          type: string
+          nullable: true
+          example: null
+          description: 'The Scratch username if the user was imported from Scratch; null otherwise (only populated for GET /user/{id})'
+        is_followed_by_viewer:
+          type: boolean
+          nullable: true
+          example: null
+          description: 'Whether the authenticated viewer follows this user; null when unauthenticated (only populated for GET /user/{id})'
 
     ExtendedUserDataResponse:
       allOf:
@@ -4822,6 +4836,24 @@ components:
           type: string
           nullable: true
           description: Status of the authenticated user's join request (pending, approved, declined) or null
+        activities_count:
+          type: integer
+          example: 42
+          description: Number of activities in the studio
+        comments_count:
+          type: integer
+          example: 15
+          description: Number of comments in the studio
+        user_role:
+          type: string
+          nullable: true
+          description: "Authenticated user's role in the studio (admin, member) or null"
+          example: admin
+        pending_join_requests_count:
+          type: integer
+          nullable: true
+          description: Number of pending join requests (only for admins, null otherwise)
+          example: 3
 
     StudioListResponse:
       type: object
@@ -5421,6 +5453,10 @@ components:
           type: integer
           description: 'Number of public projects'
           example: 5
+        follower_count:
+          type: integer
+          description: 'Number of followers'
+          example: 3
         is_following:
           type: boolean
           description: 'Does the authenticated user follow this user?'

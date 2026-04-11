@@ -3,6 +3,16 @@
 @import '~material-icons/iconfont/material-icons';
 @import '~@fontsource/roboto/index.css';
 
+// Override material-icons font-display: block -> swap for better Lighthouse performance
+// This avoids invisible text during font loading
+@font-face {
+  font-family: 'Material Icons';
+  font-display: swap;
+  src:
+    url('~material-icons/iconfont/material-icons.woff2') format('woff2'),
+    url('~material-icons/iconfont/material-icons.woff') format('woff');
+}
+
 .body {
   font-size: $default-font-size;
   letter-spacing: 0.25px;

@@ -93,7 +93,27 @@
       },
     ] %}
     <div id="{{ category.id }}" class="tab-pane fade {% if loop.first %} show active {% endif %}" role="tabpanel">
-      <div class="no-notifications text-center mb-5 d-block">
+      {% if loop.first %}
+        {% for i in range(0, 4) %}
+          <div class="notification-item js-skeleton">
+            <div class="notification-card">
+              <div class="notification-avatar">
+                <span class="skeleton notification-skeleton__avatar" style="display: block; width: 48px; height: 48px;"></span>
+              </div>
+              <div class="notification-content">
+                <span class="skeleton" style="display: inline-block; width: {{ [55, 70, 45, 60, 50][i] }}%; height: 0.9rem;"></span>
+                <div style="margin-top: 0.4rem;">
+                  <span class="skeleton" style="display: inline-block; width: {{ [35, 25, 40, 30, 35][i] }}%; height: 0.75rem;"></span>
+                </div>
+              </div>
+              <div class="notification-indicator">
+                <span class="skeleton notification-skeleton__indicator" style="display: block; width: 10px; height: 10px;"></span>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+      <div class="no-notifications text-center mb-5 d-none">
         <span id="{{ category.emptyID }}">{{ category.emptyMessage }}</span>
       </div>
     </div>

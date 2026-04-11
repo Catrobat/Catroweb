@@ -13,6 +13,8 @@
      data-trans-delete-it="{{ 'studio.details.delete_it'|trans({}, 'catroweb')|default('Delete') }}"
      data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel') }}"
      data-trans-remove-error="{{ 'studio.details.remove_project_error'|trans({}, 'catroweb')|default('Failed to remove project.') }}"
+     data-trans-remove-from-studio-title="{{ 'studio.details.projects.remove_from_studio_title'|trans({}, 'catroweb')|default('Remove project from studio?') }}"
+     data-trans-remove-from-studio-text="{{ 'studio.details.projects.remove_from_studio_text'|trans({}, 'catroweb')|default('You can add it again later if you change your mind.') }}"
      data-trans-add-project="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb')|default('Add Projects') }}"
      data-trans-add="{{ 'studio.details.add'|trans({}, 'catroweb')|default('Add') }}"
      data-trans-no-available-projects="{{ 'studio.details.no_available_projects'|trans({}, 'catroweb')|default('No projects available to add.') }}"
@@ -25,10 +27,28 @@
      data-trans-no-projects-empty-state="{{ 'studio.details.projects.no_projects_empty_state'|trans({}, 'catroweb')|default('You have no projects to add yet. Create one in Pocket Code first!') }}"
      data-trans-add-selected="{{ 'studio.details.projects.add_selected'|trans({}, 'catroweb')|default('Add Selected') }}"
 >
-  <p class="mt-3" id="studio-desc">{{ studio.description }}</p>
+  <div class="mt-3 studio-desc-wrap">
+    <p id="studio-desc" class="studio-desc studio-desc--clamped">{{ studio.description }}</p>
+    <button id="studio-desc-toggle" class="btn btn-link btn-sm p-0 d-none"
+            data-trans-show-more="{{ 'studio.details.show_more'|trans({}, 'catroweb')|default('Show more') }}"
+            data-trans-show-less="{{ 'studio.details.show_less'|trans({}, 'catroweb')|default('Show less') }}"
+    >{{ 'studio.details.show_more'|trans({}, 'catroweb')|default('Show more') }}</button>
+  </div>
   <h3 class="mt-3">{{ 'studio.details.projects.title'|trans({}, 'catroweb') }}</h3>
 
-  <div data-studio--project-list-target="container" class="studio-projects-container"></div>
+  <div data-studio--project-list-target="container" class="studio-projects-container">
+    {% for i in 1..4 %}
+      <div class="projects-list-item-wrapper js-skeleton">
+        <div class="projects-list-item-link" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">
+          <span class="skeleton" style="width: 50px; height: 50px; border-radius: 8px; flex-shrink: 0;"></span>
+          <div style="flex: 1;">
+            <div class="skeleton" style="width: 60%; height: 1rem; margin-bottom: 0.4rem;"></div>
+            <div class="skeleton" style="width: 40%; height: 0.75rem;"></div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 
   <p data-studio--project-list-target="noProjects" class="mt-3" style="display: none;">
     {{ 'studio.details.no_projects'|trans({}, 'catroweb') }}
@@ -40,11 +60,9 @@
     </button>
   </div>
 
-  {% if user_role == 'admin' or user_role == 'member' %}
-    <button class="studios-fab"
-            data-action="click->studio--project-list#openAddProjectModal">
-      <span class="material-icons">add</span>
-      <span class="studios-fab__text">{{ 'studio.details.projects.addProject'|trans({}, 'catroweb')|default('Add Project') }}</span>
-    </button>
-  {% endif %}
+  <button class="studios-fab js-studio-member-only" style="display: none"
+          data-action="click->studio--project-list#openAddProjectModal">
+    <span class="material-icons">add</span>
+    <span class="studios-fab__text">{{ 'studio.details.projects.addProject'|trans({}, 'catroweb')|default('Add Project') }}</span>
+  </button>
 </div>
