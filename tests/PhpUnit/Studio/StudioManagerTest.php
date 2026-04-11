@@ -200,24 +200,31 @@ class StudioManagerTest extends KernelTestCase
     $userComment = $this->object->addCommentToStudio($newUser, $this->studio, 'normal member comment');
     $this->assertNotNull($userComment);
 
-    $this->assertNotNull($adminComment->getId());
+    $adminCommentId = $adminComment->getId();
+    $this->assertNotNull($adminCommentId);
     $userComment_2 = $this->object->addCommentToStudio($newUser, $this->studio, 'normal user comment 2');
 
-    $this->assertNull($this->object->editStudioComment($newUser, $adminComment->getId(), "can't edit comments that are not your own"));
+    $this->assertNull($this->object->editStudioComment($newUser, $adminCommentId, "can't edit comments that are not your own"));
 
-    $this->object->deleteCommentFromStudio($newUser, $adminComment->getId());
+    $this->object->deleteCommentFromStudio($newUser, $adminCommentId);
     $this->assertNotNull($adminComment->getId(), "Can't delete comments that are not your own");
 
-    $this->object->deleteCommentFromStudio($newUser, $userComment->getId());
+    $userCommentId = $userComment->getId();
+    \assert(null !== $userCommentId);
+    $this->object->deleteCommentFromStudio($newUser, $userCommentId);
     $this->assertNull($userComment->getId());
 
-    $this->object->deleteCommentFromStudio($newUser, $userComment_2->getId());
+    $userComment2Id = $userComment_2->getId();
+    \assert(null !== $userComment2Id);
+    $this->object->deleteCommentFromStudio($newUser, $userComment2Id);
     $this->assertNull($userComment_2->getId());
 
     $this->assertCount(1, $this->object->findAllStudioComments($this->studio));
     $this->assertEquals(1, $this->object->countStudioComments($this->studio));
 
-    $this->object->deleteCommentFromStudio($this->user, $adminComment->getId());
+    $adminCommentId2 = $adminComment->getId();
+    \assert(null !== $adminCommentId2);
+    $this->object->deleteCommentFromStudio($this->user, $adminCommentId2);
     $this->assertNull($adminComment->getId());
 
     $this->assertCount(0, $this->object->findAllStudioComments($this->studio));

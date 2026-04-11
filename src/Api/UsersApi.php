@@ -383,7 +383,7 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
         'id' => $comment->getId(),
         'text' => $comment->getText(),
         'posted_at' => $comment->getUploadDate(),
-        'parent_id' => 0 === $comment->getParentId() ? null : $comment->getParentId(),
+        'parent_id' => $comment->getParentId(),
       ]);
     }
 
@@ -448,17 +448,17 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
     return \DateTime::createFromInterface($dateTime);
   }
 
-  private function decodeIdCursor(?string $cursor): ?int
+  private function decodeIdCursor(?string $cursor): ?string
   {
     if (null === $cursor || '' === $cursor) {
       return null;
     }
 
     $decoded = base64_decode($cursor, true);
-    if (false === $decoded || !ctype_digit($decoded)) {
+    if (false === $decoded || '' === $decoded) {
       return null;
     }
 
-    return (int) $decoded;
+    return $decoded;
   }
 }

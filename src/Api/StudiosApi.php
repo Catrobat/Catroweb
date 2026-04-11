@@ -39,14 +39,14 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   public function studiosGet(string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $limit = $this->normalizeLimit($limit);
-    $cursor_id = $this->decodeIdCursor($cursor);
-    if (null === $cursor_id && null !== $cursor) {
+    $offset = $this->decodeOffsetCursor($cursor);
+    if (null === $offset && null !== $cursor) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return null;
     }
 
-    $page = $this->facade->getLoader()->loadStudiosPage($limit, $cursor_id);
+    $page = $this->facade->getLoader()->loadStudiosPage($limit, $offset);
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     $responseCode = Response::HTTP_OK;
@@ -55,7 +55,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       $page['studios'],
       $page['has_more'],
       $user,
-      $cursor_id,
+      $offset,
     );
   }
 
@@ -787,7 +787,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   }
 
   /**
-   * @return array{studio: Studio, cursor_id: ?int}|null null if response was set (error)
+   * @return array{studio: Studio, cursor_id: ?string}|null null if response was set (error)
    */
   private function loadStudioForListing(string $id, int $limit, ?string $cursor, int &$responseCode): ?array
   {
@@ -873,5 +873,19 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     }
 
     return $decoded;
+  }
+
+  private function decodeOffsetCursor(?string $cursor): ?int
+  {
+    if (null === $cursor || '' === $cursor) {
+      return null;
+    }
+
+    $decoded = base64_decode($cursor, true);
+    if (false === $decoded || !ctype_digit($decoded)) {
+      return null;
+    }
+
+    return (int) $decoded;
   }
 }

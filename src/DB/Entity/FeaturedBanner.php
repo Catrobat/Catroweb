@@ -20,7 +20,7 @@ class FeaturedBanner
 
   public ?string $old_image_type = null;
 
-  public ?int $removed_id = null;
+  public ?string $removed_id = null;
 
   public function __construct()
   {

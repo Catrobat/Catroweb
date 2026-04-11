@@ -12,7 +12,7 @@
     {% set og_description = 'studio.checkout_this_studio'|trans({}, 'catroweb')|escape('html_attr') %}
   {% endif %}
 
-  {% set og_image_url = studio.coverAssetPath ? absolute_url(asset(studio.coverAssetPath)) : absolute_url(asset('images/default/studio_default.png')) %}
+  {% set og_image_url = studio.coverAssetPath ? absolute_url(asset(studio.coverAssetPath)) : absolute_url(asset('images/default/thumbnail.png')) %}
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ studio.name|escape('html_attr') }} – Catrobat">

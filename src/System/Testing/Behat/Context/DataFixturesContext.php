@@ -2176,12 +2176,12 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Then /^the comment (\d+) should be (hidden|visible)$/
+   * @Then /^the comment "([^"]*)" should be (hidden|visible)$/
    */
-  public function theCommentShouldBeHiddenOrVisible(int $comment_id, string $visibility): void
+  public function theCommentShouldBeHiddenOrVisible(string $comment_id, string $visibility): void
   {
     $comment = $this->getManager()->find(UserComment::class, $comment_id);
-    Assert::assertNotNull($comment, sprintf('Comment %d not found', $comment_id));
+    Assert::assertNotNull($comment, sprintf('Comment %s not found', $comment_id));
     Assert::assertSame('hidden' === $visibility, $comment->getAutoHidden());
   }
 

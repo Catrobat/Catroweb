@@ -51,7 +51,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * @return array{studios: Studio[], has_more: bool}
    */
-  public function loadStudiosPage(int $limit, ?string $cursor_id): array
+  public function loadStudiosPage(int $limit, ?int $cursor_id): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('s')
@@ -222,7 +222,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * Returns the StudioUser ID for the last studio in the list (used for cursor pagination).
    */
-  public function getStudioUserIdForCursor(User $user, Studio $studio): ?int
+  public function getStudioUserIdForCursor(User $user, Studio $studio): ?string
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('su.id')

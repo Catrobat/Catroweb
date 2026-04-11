@@ -271,7 +271,7 @@ class StudioManager
     return $studioUser;
   }
 
-  public function editStudioComment(User $user, int $comment_id, string $comment_text): ?UserComment
+  public function editStudioComment(User $user, string $comment_id, string $comment_text): ?UserComment
   {
     $studioComment = $this->findStudioCommentById($comment_id);
     if ($this->isUserInStudio($user, $studioComment->getStudio()) && $user->getUsername() === $studioComment->getUser()->getUserIdentifier()) {
@@ -521,7 +521,9 @@ class StudioManager
   public function removeJoinRequest(StudioJoinRequest $joinRequest): void
   {
     $joinRequestId = $joinRequest->getId();
-    $this->studio_join_request_repository->deleteJoinRequestById($joinRequestId);
+    if (null !== $joinRequestId) {
+      $this->studio_join_request_repository->deleteJoinRequestById($joinRequestId);
+    }
   }
 
   public function findJoinRequestByUserAndStudio(User $user, Studio $studio): ?StudioJoinRequest

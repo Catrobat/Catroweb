@@ -45,7 +45,7 @@ class StudioJoinRequestRepository extends ServiceEntityRepository
     return $this->findOneBy(['user' => $user, 'studio' => $studio]);
   }
 
-  public function deleteJoinRequestById(int $joinRequestId): void
+  public function deleteJoinRequestById(string $joinRequestId): void
   {
     $joinRequest = $this->findJoinRequestById($joinRequestId);
 

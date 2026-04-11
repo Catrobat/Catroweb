@@ -126,7 +126,7 @@ class ContentReportRepository extends ServiceEntityRepository
    * Checks whether other reports (excluding the given report) exist for the same content
    * that are still pending (New) or have been accepted.
    */
-  public function hasOtherActiveReports(string $content_type, string $content_id, int $exclude_report_id): bool
+  public function hasOtherActiveReports(string $content_type, string $content_id, string $exclude_report_id): bool
   {
     $qb = $this->createQueryBuilder('r');
 
