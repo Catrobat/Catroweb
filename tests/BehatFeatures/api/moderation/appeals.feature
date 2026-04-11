@@ -17,8 +17,8 @@ Feature: Moderation Appeals API
       | 1  | project1 | Catrobat | mydescription |
       | 2  | project2 | User2    | other project |
     And there are comments:
-      | id | project_id | user_id | text          | upload_date         | parent_id |
-      | 10 | 1          | 1       | first comment | 2013-01-01 12:00:00 |           |
+      | id                                   | project_id | user_id | text          | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 1       | first comment | 2013-01-01 12:00:00 |           |
     And there are studios:
       | id | name    | description  |
       | 1  | studio1 | test studio  |
@@ -227,6 +227,7 @@ Feature: Moderation Appeals API
       | 00000000-0000-0000-0000-000000000301 | User2    | project      | 1          | spam     | accepted | 2024-01-01 09:00:00 | 2024-01-01 09:10:00 | User2       |
       | 00000000-0000-0000-0000-000000000302 | Admin    | project      | 1          | spam     | new      | 2024-01-01 09:11:00 |                      |             |
     And the project "project1" is auto-hidden
+    And the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -249,6 +250,7 @@ Feature: Moderation Appeals API
 
   Scenario: Re-appeal allowed after prior rejection
     Given the project "project1" is auto-hidden
+    And the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:

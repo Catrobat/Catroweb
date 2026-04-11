@@ -17,22 +17,22 @@ Feature: As a visitor I want to write, see and report comments.
       | 5  | project 5 | OtherUser |
 
     And there are comments:
-      | project_id | user_id | text | parent_id  | is_deleted |
-      | 1          | 1       | c1   |  NULL      |            |
-      | 2          | 2       | c2   |  NULL      |            |
-      | 2          | 2       | c3   |  NULL      |            |
-      | 2          | 2       | c4   |  NULL      |            |
-      | 2          | 1       | c5   |  NULL      |            |
-      | 2          | 1       | c6   |  NULL      |            |
-      | 2          | 1       | c7   |  NULL      |            |
-      | 2          | 1       | c8   |  NULL      |            |
-      | 2          | 1       | c9   |  8         |            |
-      | 2          | 1       | c10  |  8         |            |
-      | 2          | 1       | c11  |  8         |            |
-      | 4          | 2       | c12  |  NULL      |            |
-      | 4          | 2       | c13  |  12        |            |
-      | 5          | 2       | c14  |  NULL      |   true     |
-      | 5          | 2       | c15  |  14        |            |
+      | id                                   | project_id | user_id | text | parent_id                            | is_deleted |
+      | 00000000-0000-0000-0000-000000000001 | 1          | 1       | c1   |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000002 | 2          | 2       | c2   |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000003 | 2          | 2       | c3   |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000004 | 2          | 2       | c4   |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000005 | 2          | 1       | c5   |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000006 | 2          | 1       | c6   |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000007 | 2          | 1       | c7   |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000008 | 2          | 1       | c8   |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000009 | 2          | 1       | c9   |  00000000-0000-0000-0000-000000000008 |            |
+      | 00000000-0000-0000-0000-000000000010 | 2          | 1       | c10  |  00000000-0000-0000-0000-000000000008 |            |
+      | 00000000-0000-0000-0000-000000000011 | 2          | 1       | c11  |  00000000-0000-0000-0000-000000000008 |            |
+      | 00000000-0000-0000-0000-000000000012 | 4          | 2       | c12  |  NULL                                |            |
+      | 00000000-0000-0000-0000-000000000013 | 4          | 2       | c13  |  00000000-0000-0000-0000-000000000012 |            |
+      | 00000000-0000-0000-0000-000000000014 | 5          | 2       | c14  |  NULL                                |   true     |
+      | 00000000-0000-0000-0000-000000000015 | 5          | 2       | c15  |  00000000-0000-0000-0000-000000000014 |            |
 #      3 has no comments
 
 
@@ -131,7 +131,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "c1"
-    And one of the "#comment-1 .comment-replies-count span" elements should contain "0"
+    And one of the "#comment-00000000-0000-0000-0000-000000000001 .comment-replies-count span" elements should contain "0"
     But I should not see "c2"
 
   Scenario: I should be able to see the number of replies that belong to a comment - comment with more than one reply
@@ -166,14 +166,14 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "c12"
-    And one of the "#comment-12 .comment-replies-count span" elements should contain "1"
+    And one of the "#comment-00000000-0000-0000-0000-000000000012 .comment-replies-count span" elements should contain "1"
 
   Scenario: I should be able to see the deleted comments, however, not their text.
     Given I am on "/app/project/5"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    And one of the "#comment-14 .comment-text" elements should contain "**Deleted**"
-    And one of the "#comment-14 .comment-replies-count span" elements should contain "1"
+    And one of the "#comment-00000000-0000-0000-0000-000000000014 .comment-text" elements should contain "**Deleted**"
+    And one of the "#comment-00000000-0000-0000-0000-000000000014 .comment-replies-count span" elements should contain "1"
 
     And the element ".comment-translation-button" should not exist
     And the element ".comment-report-button" should not exist
@@ -216,7 +216,7 @@ Feature: As a visitor I want to write, see and report comments.
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    When I click "#comment-report-button-1"
+    When I click "#comment-report-button-00000000-0000-0000-0000-000000000001"
     And I wait 500 milliseconds
     Then I should see "Report"
     And the element "#report-category-value" should exist
@@ -277,7 +277,7 @@ Feature: As a visitor I want to write, see and report comments.
     When I log in as "Catrobat"
     And I am on "/app/notifications"
     And I wait for AJAX to finish
-    Then the element "#catro-notification-1" should be visible
+    Then the element ".notification-item" should be visible
     And I should see "OtherUser"
 
   Scenario: I should be able to write a comment for my own program but I wont get a notification
@@ -294,4 +294,4 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for AJAX to finish
     Then I should see "hello"
     When I am on "/app/notifications"
-    Then the element "#catro-notification-1" should not exist
+    Then the element ".notification-item" should not exist

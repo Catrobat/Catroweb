@@ -357,8 +357,7 @@ Feature: Reactions to projects "likes"
     And the element "#reaction-notif" should be visible
     And the element "#comment-notif" should be visible
     And the element "#remix-notif" should be visible
-    And the element "#catro-notification-1" should be visible
-    And the element "#catro-notification-2" should not exist
+    And the element ".notification-item" should be visible
     Then I should see text matching "OtherUser reacted to Minions."
 
 
@@ -386,8 +385,7 @@ Feature: Reactions to projects "likes"
     And the element "#reaction-notif" should be visible
     And the element "#comment-notif" should be visible
     And the element "#remix-notif" should be visible
-    And the element "#catro-notification-1" should be visible
-    And the element "#catro-notification-2" should be visible
+    And the element ".notification-item" should be visible
     And I should see "OtherUser reacted to Minions."
 
 
@@ -402,7 +400,7 @@ Feature: Reactions to projects "likes"
     When I log in as "Catrobat"
     And I am on "/app/notifications"
     And I wait for the page to be loaded
-    And the element "#catro-notification-1" should be visible
+    And the element ".notification-item" should be visible
     And I should see "OtherUser reacted to Minions."
     When I log in as "OtherUser"
     And I am on "/app/project/1"
@@ -420,7 +418,7 @@ Feature: Reactions to projects "likes"
     When I log in as "Catrobat"
     And I am on "/app/notifications"
     And I wait for the page to be loaded
-    And the element "#catro-notification-1" should not exist
+    And the element ".notification-item" should not exist
     Then I should see text matching "It looks like you don't have any notifications."
 
   Scenario: I can't notify myself
@@ -439,5 +437,5 @@ Feature: Reactions to projects "likes"
     And I wait for AJAX to finish
     And I am on "/app/notifications"
     And I wait for the page to be loaded
-    Then the element "#catro-notification-1" should not exist
+    Then the element ".notification-item" should not exist
     And I should not see "OtherUser reacted to otherPro."

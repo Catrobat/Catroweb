@@ -36,7 +36,7 @@ Feature: Follower and new programs of users you follow notifications
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then I should see "User is now following you"
-    And I click "#catro-notification-1"
+    And I click ".notification-item"
     And I wait for the page to be loaded
     Then I should be on "/app/follower"
 
@@ -56,12 +56,12 @@ Feature: Follower and new programs of users you follow notifications
 
   Scenario: Clicking on a new program notification should redirect the user to the program page
     Given there are catro notifications:
-      | id | user | type           | follower_id | project_id |
-      | 1  | User | follow_project |             | 1          |
+      | id                                   | user | type           | follower_id | project_id |
+      | 00000000-0000-0000-0000-000000000001 | User | follow_project |             | 1          |
     And I log in as "User"
     And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    When I click "#catro-notification-1"
+    When I click "#catro-notification-00000000-0000-0000-0000-000000000001"
     And I wait for the page to be loaded
     Then I should be on "/app/project/1"

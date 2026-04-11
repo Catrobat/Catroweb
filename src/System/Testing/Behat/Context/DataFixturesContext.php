@@ -342,6 +342,9 @@ class DataFixturesContext implements Context
       $joinRequest->setUser($user);
       $joinRequest->setStudio($studio);
       $joinRequest->setStatus($joinRequestConfig['Status']);
+      if (isset($joinRequestConfig['id'])) {
+        MyUuidGenerator::setNextValue($joinRequestConfig['id']);
+      }
       $em->persist($joinRequest);
     }
 

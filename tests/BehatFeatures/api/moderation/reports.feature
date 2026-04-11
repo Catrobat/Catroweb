@@ -14,8 +14,8 @@ Feature: Moderation Reports API
       | id | name     | owned by | description   | credit   |
       | 1  | project1 | Catrobat | mydescription | mycredit |
     And there are comments:
-      | id | project_id | user_id | text          | upload_date         | parent_id |
-      | 10 | 1          | 1       | first comment | 2013-01-01 12:00:00 |           |
+      | id                                   | project_id | user_id | text          | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 1       | first comment | 2013-01-01 12:00:00 |           |
     And there are studios:
       | id | name    | description  |
       | 1  | studio1 | test studio  |
@@ -149,8 +149,8 @@ Feature: Moderation Reports API
 
   Scenario: Report already hidden comment returns 409
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -348,11 +348,11 @@ Feature: Moderation Reports API
 
   Scenario: Auto-hidden comment does not appear in comments list API
     And there are comments:
-      | id | project_id | user_id | text            | upload_date         | parent_id |
-      | 11 | 1          | 2       | visible comment | 2013-01-02 12:00:00 |           |
+      | id                                   | project_id | user_id | text            | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000011 | 1          | 2       | visible comment | 2013-01-02 12:00:00 |           |
     And the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     When I request "GET" "/api/projects/1/comments?limit=10"
     Then the response status code should be "200"
