@@ -774,8 +774,6 @@
     </PossiblyInvalidClone>
     <PossiblyNullArgument>
       <code><![CDATA[$adminComment->getId()]]></code>
-      <code><![CDATA[$adminComment->getId()]]></code>
-      <code><![CDATA[$adminComment->getId()]]></code>
       <code><![CDATA[$studioComment->getId()]]></code>
       <code><![CDATA[$studioComment->getId()]]></code>
       <code><![CDATA[$studioComment->getId()]]></code>
