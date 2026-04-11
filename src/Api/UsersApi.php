@@ -214,7 +214,7 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
       $last_studio = end($page['studios']);
       $su_id = $this->studio_api_loader->getStudioUserIdForCursor($user, $last_studio);
       if (null !== $su_id) {
-        $next_cursor = base64_encode((string) $su_id);
+        $next_cursor = base64_encode($su_id);
       }
     }
 

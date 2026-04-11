@@ -222,9 +222,7 @@ class StudioManagerTest extends KernelTestCase
     $this->assertCount(1, $this->object->findAllStudioComments($this->studio));
     $this->assertEquals(1, $this->object->countStudioComments($this->studio));
 
-    $adminCommentId2 = $adminComment->getId();
-    \assert(null !== $adminCommentId2);
-    $this->object->deleteCommentFromStudio($this->user, $adminCommentId2);
+    $this->object->deleteCommentFromStudio($this->user, $adminComment->getId());
     $this->assertNull($adminComment->getId());
 
     $this->assertCount(0, $this->object->findAllStudioComments($this->studio));
