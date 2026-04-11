@@ -133,17 +133,6 @@ class CommentResponse
   protected ?bool $is_reported = null;
 
   /**
-   * Rendered HTML for web clients (optional).
-   *
-   * @SerializedName("rendered")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
-  protected ?string $rendered = null;
-
-  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -160,7 +149,6 @@ class CommentResponse
       $this->reply_count = array_key_exists('reply_count', $data) ? $data['reply_count'] : $this->reply_count;
       $this->is_deleted = array_key_exists('is_deleted', $data) ? $data['is_deleted'] : $this->is_deleted;
       $this->is_reported = array_key_exists('is_reported', $data) ? $data['is_reported'] : $this->is_reported;
-      $this->rendered = array_key_exists('rendered', $data) ? $data['rendered'] : $this->rendered;
     }
   }
 
@@ -348,28 +336,6 @@ class CommentResponse
   public function setIsReported(?bool $is_reported = null): self
   {
     $this->is_reported = $is_reported;
-
-    return $this;
-  }
-
-  /**
-   * Gets rendered.
-   */
-  public function getRendered(): ?string
-  {
-    return $this->rendered;
-  }
-
-  /**
-   * Sets rendered.
-   *
-   * @param string|null $rendered Rendered HTML for web clients (optional)
-   *
-   * @return $this
-   */
-  public function setRendered(?string $rendered = null): self
-  {
-    $this->rendered = $rendered;
 
     return $this;
   }

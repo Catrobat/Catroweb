@@ -123,7 +123,7 @@ Feature: Comments API
     When I request "POST" "/api/project/1/comments"
     Then the response status code should be "201"
     And the client response should contain "new comment"
-    And the client response should contain "rendered"
+    And the client response should contain "approved"
 
   Scenario: Create a comment requires authentication
     Given I have a request header "CONTENT_TYPE" with value "application/json"
