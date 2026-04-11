@@ -86,17 +86,6 @@ class FollowerResponse
   protected ?int $project_count = null;
 
   /**
-   * Number of followers.
-   *
-   * @SerializedName("follower_count")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
-  protected ?int $follower_count = null;
-
-  /**
    * Does the authenticated user follow this user?
    *
    * @SerializedName("is_following")
@@ -130,7 +119,6 @@ class FollowerResponse
       $this->username = array_key_exists('username', $data) ? $data['username'] : $this->username;
       $this->avatar = array_key_exists('avatar', $data) ? $data['avatar'] : $this->avatar;
       $this->project_count = array_key_exists('project_count', $data) ? $data['project_count'] : $this->project_count;
-      $this->follower_count = array_key_exists('follower_count', $data) ? $data['follower_count'] : $this->follower_count;
       $this->is_following = array_key_exists('is_following', $data) ? $data['is_following'] : $this->is_following;
       $this->follows_you = array_key_exists('follows_you', $data) ? $data['follows_you'] : $this->follows_you;
     }
@@ -218,28 +206,6 @@ class FollowerResponse
   public function setProjectCount(?int $project_count = null): self
   {
     $this->project_count = $project_count;
-
-    return $this;
-  }
-
-  /**
-   * Gets follower_count.
-   */
-  public function getFollowerCount(): ?int
-  {
-    return $this->follower_count;
-  }
-
-  /**
-   * Sets follower_count.
-   *
-   * @param int|null $follower_count Number of followers
-   *
-   * @return $this
-   */
-  public function setFollowerCount(?int $follower_count = null): self
-  {
-    $this->follower_count = $follower_count;
 
     return $this;
   }

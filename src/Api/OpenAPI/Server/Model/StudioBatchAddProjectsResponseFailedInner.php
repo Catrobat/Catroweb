@@ -32,7 +32,6 @@ namespace OpenAPI\Server\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the StudioBatchAddProjectsResponseFailedInner model.
@@ -41,24 +40,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class StudioBatchAddProjectsResponseFailedInner
 {
-  /**
-   * @SerializedName("project_id")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('project_id')]
+  #[Type('string')]
   protected ?string $project_id = null;
 
-  /**
-   * @SerializedName("reason")
-   *
-   * @Assert\Choice({ "not_found", "conflict" })
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
+  #[SerializedName('reason')]
+  #[Type('string')]
   protected ?string $reason = null;
 
   /**

@@ -357,11 +357,12 @@ export function ProjectComments(config) {
       })
       .then((data) => {
         const comments = data?.data || []
+        const fragment = document.createDocumentFragment()
         comments.forEach((comment) => {
           if (!comment) return
-          const el = buildCommentElement(comment, isRepliesPage)
-          commentsWrapper.appendChild(el)
+          fragment.appendChild(buildCommentElement(comment, isRepliesPage))
         })
+        commentsWrapper.appendChild(fragment)
 
         nextCursor = data?.next_cursor || null
         hasMore = Boolean(data?.has_more)
@@ -374,7 +375,8 @@ export function ProjectComments(config) {
       })
   }
 
-  // Build a complete comment DOM element from JSON data (no innerHTML with user data)
+  const spinnerTemplate = buildSmallSpinner()
+
   function buildCommentElement(comment, isReply) {
     const commentId = comment.id
     const userId = comment.user?.id || ''
@@ -387,6 +389,8 @@ export function ProjectComments(config) {
     const isDeleted = comment.is_deleted || false
     const isOwnComment = currentUserId && userId === currentUserId
 
+    const profileUrl = profileUrlTemplate.replace('__USER_ID__', userId)
+
     const el = document.createElement('div')
     el.id = `comment-${commentId}`
     el.dataset.pathProjectComment = commentDetailUrlTemplate.replace('__COMMENT_ID__', commentId)
@@ -397,7 +401,7 @@ export function ProjectComments(config) {
     const avatarDiv = document.createElement('div')
     avatarDiv.className = 'comment-avatar'
     const avatarLink = document.createElement('a')
-    avatarLink.href = profileUrlTemplate.replace('__USER_ID__', userId)
+    avatarLink.href = profileUrl
     const avatarImg = document.createElement('img')
     avatarImg.className = 'comment-avatar-img'
     avatarImg.src = avatarUrl
@@ -421,7 +425,7 @@ export function ProjectComments(config) {
     userInfo.className = 'comment-user-info'
 
     const usernameLink = document.createElement('a')
-    usernameLink.href = profileUrlTemplate.replace('__USER_ID__', userId)
+    usernameLink.href = profileUrl
     usernameLink.className = 'usr-name no-overflow'
     const usernameSpan = document.createElement('span')
     usernameSpan.id = `profile-comment-user-id-${userId}`
@@ -483,7 +487,7 @@ export function ProjectComments(config) {
       spinner.id = `comment-translation-loading-spinner-${commentId}`
       spinner.className = 'comment-translation-loading-spinner'
       spinner.style.display = 'none'
-      spinner.appendChild(buildSmallSpinner())
+      spinner.appendChild(spinnerTemplate.cloneNode(true))
       translationActions.appendChild(spinner)
 
       const removeTranslateBtn = document.createElement('span')
@@ -507,7 +511,7 @@ export function ProjectComments(config) {
       reportBtn.className = 'comment-report-button'
       reportBtn.dataset.contentType = 'comment'
       reportBtn.dataset.contentId = String(commentId)
-      reportBtn.dataset.reportUrl = `/api/comments/${commentId}/report`
+      reportBtn.dataset.reportUrl = `${commentsBaseUrl}/${commentId}/report`
       reportBtn.dataset.bsToggle = 'tooltip'
       reportBtn.title = transReport
       reportBtn.appendChild(materialIcon('report'))
