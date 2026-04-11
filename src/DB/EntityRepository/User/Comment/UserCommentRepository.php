@@ -38,25 +38,25 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function findAllStudioComments(?Studio $studio): array
   {
-    return $this->findBy(['studio' => $studio, 'parent_id' => 0]);
+    return $this->findBy(['studio' => $studio, 'parent_id' => null]);
   }
 
   public function countStudioComments(?Studio $studio): int
   {
-    return $this->count(['studio' => $studio, 'parent_id' => 0]);
+    return $this->count(['studio' => $studio, 'parent_id' => null]);
   }
 
-  public function findStudioCommentById(int $comment_id): ?UserComment
+  public function findStudioCommentById(string $comment_id): ?UserComment
   {
     return $this->findOneBy(['id' => $comment_id]);
   }
 
-  public function findCommentReplies(int $comment_id): array
+  public function findCommentReplies(string $comment_id): array
   {
     return $this->findBy(['parent_id' => $comment_id]);
   }
 
-  public function countCommentReplies(int $comment_id): int
+  public function countCommentReplies(string $comment_id): int
   {
     return $this->count(['parent_id' => $comment_id]);
   }
@@ -70,10 +70,7 @@ class UserCommentRepository extends ServiceEntityRepository
       ->leftJoin('uc.user', 'u')
       ->where('uc.program = :program_id')
       ->setParameter('program_id', $program_id)
-      ->andWhere($qb->expr()->orX()->addMultiple([
-        $qb->expr()->isNull('uc.parent_id'),
-        $qb->expr()->eq('uc.parent_id', 0),
-      ]))
+      ->andWhere('uc.parent_id IS NULL')
       ->orderBy('uc.uploadDate', 'DESC')
       ->getQuery()->getResult()
     ;
@@ -118,7 +115,7 @@ class UserCommentRepository extends ServiceEntityRepository
     ;
   }
 
-  public function getProjectCommentsPageData(Program $project, int $limit, ?\DateTimeInterface $cursor_date, ?int $cursor_id): array
+  public function getProjectCommentsPageData(Program $project, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
   {
     $qb = $this->createQueryBuilder('c');
 
@@ -136,10 +133,7 @@ class UserCommentRepository extends ServiceEntityRepository
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
       ->where('c.program = :program')
-      ->andWhere($qb->expr()->orX()->addMultiple([
-        $qb->expr()->isNull('c.parent_id'),
-        $qb->expr()->eq('c.parent_id', 0),
-      ]))
+      ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
       ->setParameter('program', $project)
       ->orderBy('c.uploadDate', 'DESC')
@@ -174,7 +168,7 @@ class UserCommentRepository extends ServiceEntityRepository
     ];
   }
 
-  public function getCommentRepliesPageData(int $comment_id, int $limit, ?\DateTimeInterface $cursor_date, ?int $cursor_id): array
+  public function getCommentRepliesPageData(string $comment_id, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
   {
     $qb = $this->createQueryBuilder('c');
 

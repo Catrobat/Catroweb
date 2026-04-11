@@ -9,26 +9,26 @@ Feature: Comment translation should be cached
       | id | name     | owned by | description   | credit   |
       | 1  | project1 | Catrobat | mydescription | mycredit |
     And there are comments:
-      | id | project_id | user_id | text |
-      | 1  | 1          | 1       | c1   |
+      | id                                   | project_id | user_id | text |
+      | 00000000-0000-0000-0000-000000000001 | 1          | 1       | c1   |
 
   Scenario: Comment translation should include etag
-    Given I request "GET" "/api/comments/1/translation?target_language=fr"
+    Given I request "GET" "/api/comments/00000000-0000-0000-0000-000000000001/translation?target_language=fr"
     Then the response status code should be "200"
     And the response Header should contain the key "ETAG" with the value '"a9f7e97965d6cf799a529102a973b8b9fr"'
 
   Scenario: Comment translation should be cached when comment is not modified
     Given I have a request header "HTTP_IF_NONE_MATCH" with value '"a9f7e97965d6cf799a529102a973b8b9fr"'
-    And I request "GET" "/api/comments/1/translation?target_language=fr"
+    And I request "GET" "/api/comments/00000000-0000-0000-0000-000000000001/translation?target_language=fr"
     Then the response status code should be "304"
 
   Scenario: Comment translation should not be cached when comment is changed
     Given I have a request header "HTTP_IF_NONE_MATCH" with value '"different value"'
-    And I request "GET" "/api/comments/1/translation?target_language=fr"
+    And I request "GET" "/api/comments/00000000-0000-0000-0000-000000000001/translation?target_language=fr"
     Then the response status code should be "200"
 
   Scenario: Comment translation should not be cached when target language changes
     Given I have a request header "HTTP_IF_NONE_MATCH" with value '"a9f7e97965d6cf799a529102a973b8b9fr"'
-    And I request "GET" "/api/comments/1/translation?target_language=es"
+    And I request "GET" "/api/comments/00000000-0000-0000-0000-000000000001/translation?target_language=es"
     Then the response status code should be "200"
     And the response Header should contain the key "ETAG" with the value '"a9f7e97965d6cf799a529102a973b8b9es"'

@@ -32,6 +32,7 @@ use App\DB\EntityRepository\System\StatisticRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRepository;
 use App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository;
+use App\DB\Generator\MyUuidGenerator;
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
@@ -620,7 +621,7 @@ trait ContextTrait
       : $this->getUserManager()->findUserByUsername($config['user']);
 
     $parent_id = $config['parent_id'] ?? null;
-    $parent_id = ('NULL' === $parent_id || is_null($parent_id)) ? null : intval($parent_id);
+    $parent_id = ('NULL' === $parent_id || null === $parent_id || '' === trim((string) $parent_id)) ? null : (string) $parent_id;
 
     $is_deleted = $config['is_deleted'] ?? false;
     $is_deleted = 'true' === $is_deleted;
@@ -638,29 +639,7 @@ trait ContextTrait
     $new_comment->setText($config['text']);
 
     if (isset($config['id'])) {
-      // Force a specific ID via raw SQL (Doctrine AUTO_INCREMENT ignores setId())
-      $forced_id = (int) $config['id'];
-      $upload_date_str = isset($config['upload_date']) ?
-        new \DateTime($config['upload_date'], new \DateTimeZone('UTC'))->format('Y-m-d H:i:s') :
-        new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))->format('Y-m-d H:i:s');
-
-      $this->getManager()->getConnection()->executeStatement(
-        'INSERT INTO user_comment (id, user_id, programId, uploadDate, text, username, parent_id, is_deleted)
-         VALUES (:id, :user_id, :program_id, :upload_date, :text, :username, :parent_id, :is_deleted)',
-        [
-          'id' => $forced_id,
-          'user_id' => $user->getId(),
-          'program_id' => $project->getId(),
-          'upload_date' => $upload_date_str,
-          'text' => (string) $config['text'],
-          'username' => $user->getUserIdentifier(),
-          'parent_id' => $parent_id,
-          'is_deleted' => (int) $is_deleted,
-        ]
-      );
-
-      return $this->getManager()->find(UserComment::class, $forced_id)
-        ?? throw new \RuntimeException("Comment with id {$forced_id} not found after insert");
+      MyUuidGenerator::setNextValue((string) $config['id']);
     }
 
     $this->getManager()->persist($new_comment);

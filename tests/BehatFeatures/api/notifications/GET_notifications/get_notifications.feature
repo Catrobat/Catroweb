@@ -13,15 +13,15 @@ Feature: Get notifications via API with cursor-based pagination
       | 2  | project2  | User2    |
       | 3  | project3  | User3    |
     And there are comments:
-      | id | project_id | user_id | text       | upload_date         | parent_id |
-      | 10 | 1          | 2       | a comment  | 2024-01-01 12:00:00 |           |
+      | id                                   | project_id | user_id | text       | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 2       | a comment  | 2024-01-01 12:00:00 |           |
     And there are catro notifications:
-      | id | user     | type           | like_from | project_id | commentID | follower_id | parent_project | child_project | seen |
-      | 1  | Catrobat | like           | User2     | 1          |           |             |                |               | 0    |
-      | 2  | Catrobat | follower       |           |            |           | 2           |                |               | 0    |
-      | 3  | Catrobat | comment        |           |            | 10        |             |                |               | 1    |
-      | 4  | Catrobat | follow_project |           | 2          |           |             |                |               | 0    |
-      | 5  | Catrobat | remix          |           |            |           |             | 2              | 3             | 0    |
+      | id                                   | user     | type           | like_from | project_id | commentID                            | follower_id | parent_project | child_project | seen |
+      | 00000000-0000-0000-0000-000000000001 | Catrobat | like           | User2     | 1          |                                      |             |                |               | 0    |
+      | 00000000-0000-0000-0000-000000000002 | Catrobat | follower       |           |            |                                      | 2           |                |               | 0    |
+      | 00000000-0000-0000-0000-000000000003 | Catrobat | comment        |           |            | 00000000-0000-0000-0000-000000000010 |             |                |               | 1    |
+      | 00000000-0000-0000-0000-000000000004 | Catrobat | follow_project |           | 2          |                                      |             |                |               | 0    |
+      | 00000000-0000-0000-0000-000000000005 | Catrobat | remix          |           |            |                                      |             | 2              | 3             | 0    |
 
   # ---------------------------------------------------------------------------
   # GET /api/notifications — authentication
@@ -97,8 +97,8 @@ Feature: Get notifications via API with cursor-based pagination
 
   Scenario: User does not see own like notifications
     Given there are catro notifications:
-      | id | user     | type | like_from | project_id | seen |
-      | 10 | Catrobat | like | Catrobat  | 1          | 0    |
+      | id                                   | user     | type | like_from | project_id | seen |
+      | 00000000-0000-0000-0000-000000000010 | Catrobat | like | Catrobat  | 1          | 0    |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/notifications?type=reaction"

@@ -104,12 +104,12 @@ Feature: Moderation Appeals API
       """
       {"reason": "My comment was appropriate"}
       """
-    When I request "POST" "/api/comments/10/appeal"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/appeal"
     Then the response status code should be "201"
 
   Scenario: Appeal a comment requires authentication
     Given the comment 10 is auto-hidden
-    When I request "POST" "/api/comments/10/appeal"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/appeal"
     Then the response status code should be "401"
 
   Scenario: Appeal a comment that is not hidden returns 400
@@ -119,7 +119,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "Please review"}
       """
-    When I request "POST" "/api/comments/10/appeal"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/appeal"
     Then the response status code should be "400"
 
   Scenario: Non-owner cannot appeal a comment (403)
@@ -130,7 +130,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "This comment is fine"}
       """
-    When I request "POST" "/api/comments/10/appeal"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/appeal"
     Then the response status code should be "403"
 
   Scenario: Appeal non-existent comment returns 404
@@ -140,7 +140,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "Please review"}
       """
-    When I request "POST" "/api/comments/9999/appeal"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000009999/appeal"
     Then the response status code should be "404"
 
   # ---------------------------------------------------------------------------
@@ -223,9 +223,9 @@ Feature: Moderation Appeals API
 
   Scenario: Approving an appeal rejects new reports but leaves accepted reports unchanged
     Given there are moderation reports:
-      | id  | reporter | content_type | content_id | category | state    | created_at           | resolved_at          | resolved_by |
-      | 301 | User2    | project      | 1          | spam     | accepted | 2024-01-01 09:00:00 | 2024-01-01 09:10:00 | User2       |
-      | 302 | Admin    | project      | 1          | spam     | new      | 2024-01-01 09:11:00 |                      |             |
+      | id                                   | reporter | content_type | content_id | category | state    | created_at           | resolved_at          | resolved_by |
+      | 00000000-0000-0000-0000-000000000301 | User2    | project      | 1          | spam     | accepted | 2024-01-01 09:00:00 | 2024-01-01 09:10:00 | User2       |
+      | 00000000-0000-0000-0000-000000000302 | Admin    | project      | 1          | spam     | new      | 2024-01-01 09:11:00 |                      |             |
     And the project "project1" is auto-hidden
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -241,10 +241,10 @@ Feature: Moderation Appeals API
       """
       {"action": "approve"}
       """
-    When I request "PUT" "/api/moderation/appeals/1/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
-    And moderation report 301 should have state "accepted"
-    And moderation report 302 should have state "rejected"
+    And moderation report "00000000-0000-0000-0000-000000000301" should have state "accepted"
+    And moderation report "00000000-0000-0000-0000-000000000302" should have state "rejected"
     And the project "project1" should be visible
 
   Scenario: Re-appeal allowed after prior rejection
@@ -263,7 +263,7 @@ Feature: Moderation Appeals API
       """
       {"action": "reject"}
       """
-    When I request "PUT" "/api/moderation/appeals/1/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
     # Content must be re-hidden for a second appeal to be valid
     Given the project "project1" is auto-hidden

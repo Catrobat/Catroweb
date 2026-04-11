@@ -122,7 +122,7 @@ class NotificationRepository extends ServiceEntityRepository
   /**
    * @return array{notifications: CatroNotification[], has_more: bool}
    */
-  public function getNotificationsPageData(User $user, string $type, int $limit, ?int $cursor_id): array
+  public function getNotificationsPageData(User $user, string $type, int $limit, ?string $cursor_id): array
   {
     $qb = $this->getEntityManager()->createQueryBuilder();
 

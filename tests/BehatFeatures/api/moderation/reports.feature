@@ -120,11 +120,11 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "204"
 
   Scenario: Report a comment requires authentication
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "401"
 
   Scenario: Report own comment returns 403
@@ -134,7 +134,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "403"
 
   Scenario: Report non-existent comment returns 404
@@ -144,7 +144,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/9999/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000009999/report"
     Then the response status code should be "404"
 
   Scenario: Report already hidden comment returns 409
@@ -157,7 +157,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "409"
 
   Scenario: Duplicate comment report returns 409
@@ -167,14 +167,14 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "204"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "409"
 
   # ---------------------------------------------------------------------------
@@ -316,7 +316,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "403"
 
   Scenario: Report on non-whitelisted content succeeds (204)

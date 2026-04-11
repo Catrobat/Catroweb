@@ -10,6 +10,7 @@ use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
+use App\DB\Generator\MyUuidGenerator;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,9 +24,10 @@ use Doctrine\ORM\Mapping as ORM;
 class UserComment implements \Stringable
 {
   #[ORM\Id]
-  #[ORM\GeneratedValue(strategy: 'AUTO')]
-  #[ORM\Column(type: Types::INTEGER)]
-  protected ?int $id = null;
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  #[ORM\Column(type: Types::GUID)]
+  protected ?string $id = null;
 
   /**
    * The User who wrote this UserComment. If this User gets deleted, this UserComment gets deleted as well.
@@ -57,8 +59,8 @@ class UserComment implements \Stringable
   #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'comments')]
   private ?Program $program = null;
 
-  #[ORM\Column(type: Types::INTEGER, nullable: true)]
-  protected ?int $parent_id = null;
+  #[ORM\Column(type: Types::GUID, nullable: true)]
+  protected ?string $parent_id = null;
 
   #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'], inversedBy: 'user_comments')]
@@ -103,12 +105,12 @@ class UserComment implements \Stringable
     return $this;
   }
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(int $id): UserComment
+  public function setId(string $id): UserComment
   {
     $this->id = $id;
 
@@ -211,12 +213,12 @@ class UserComment implements \Stringable
     return $this;
   }
 
-  public function getParentId(): ?int
+  public function getParentId(): ?string
   {
     return $this->parent_id;
   }
 
-  public function setParentId(?int $parent_id): UserComment
+  public function setParentId(?string $parent_id): UserComment
   {
     $this->parent_id = $parent_id;
 

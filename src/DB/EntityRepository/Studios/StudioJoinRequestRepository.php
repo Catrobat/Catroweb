@@ -35,7 +35,7 @@ class StudioJoinRequestRepository extends ServiceEntityRepository
     return $this->findBy(['studio' => $studio, 'status' => StudioJoinRequest::STATUS_DECLINED]);
   }
 
-  public function findJoinRequestById(int $joinRequestId): ?StudioJoinRequest
+  public function findJoinRequestById(string $joinRequestId): ?StudioJoinRequest
   {
     return $this->findOneBy(['id' => $joinRequestId]);
   }

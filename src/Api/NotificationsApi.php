@@ -35,7 +35,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
       return;
     }
 
-    $successful = $this->facade->getProcessor()->markNotificationAsSeen((int) $id, $user);
+    $successful = $this->facade->getProcessor()->markNotificationAsSeen($id, $user);
     $responseCode = $successful ? Response::HTTP_NO_CONTENT : Response::HTTP_NOT_FOUND;
   }
 
@@ -91,12 +91,12 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
     $cursor_id = null;
     if (null !== $cursor) {
       $decoded = base64_decode($cursor, true);
-      if (false === $decoded || !ctype_digit($decoded)) {
+      if (false === $decoded || '' === $decoded) {
         $responseCode = Response::HTTP_BAD_REQUEST;
 
         return null;
       }
-      $cursor_id = (int) $decoded;
+      $cursor_id = $decoded;
     }
 
     $page_data = $this->facade->getLoader()->getNotificationsPage($user, $type, $limit, $cursor_id);

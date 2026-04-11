@@ -73,7 +73,7 @@ Feature: Admin Moderation API
       """
       {"action": "accept"}
       """
-    When I request "PUT" "/api/moderation/reports/1/resolve"
+    When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
 
   Scenario: Admin can reject a report
@@ -93,7 +93,7 @@ Feature: Admin Moderation API
       """
       {"action": "reject"}
       """
-    When I request "PUT" "/api/moderation/reports/1/resolve"
+    When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
 
   Scenario: Resolve non-existent report returns 404
@@ -103,7 +103,7 @@ Feature: Admin Moderation API
       """
       {"action": "accept"}
       """
-    When I request "PUT" "/api/moderation/reports/9999/resolve"
+    When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000009999/resolve"
     Then the response status code should be "404"
 
   Scenario: Resolve report with invalid action returns 400
@@ -123,7 +123,7 @@ Feature: Admin Moderation API
       """
       {"action": "invalid_action"}
       """
-    When I request "PUT" "/api/moderation/reports/1/resolve"
+    When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "400"
 
   Scenario: Non-admin cannot resolve reports (403)
@@ -133,7 +133,7 @@ Feature: Admin Moderation API
       """
       {"action": "accept"}
       """
-    When I request "PUT" "/api/moderation/reports/1/resolve"
+    When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "403"
 
   Scenario: Resolving an already resolved report returns 400
@@ -151,27 +151,27 @@ Feature: Admin Moderation API
       """
       {"action": "accept"}
       """
-    When I request "PUT" "/api/moderation/reports/1/resolve"
+    When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
     And I have the following JSON request body:
       """
       {"action": "reject"}
       """
-    When I request "PUT" "/api/moderation/reports/1/resolve"
+    When I request "PUT" "/api/moderation/reports/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "400"
 
   Scenario: Report pagination cursor uses created_at and id ordering
     Given there are moderation reports:
-      | id  | reporter | content_type | content_id | category | state | created_at           |
-      | 101 | User2    | project      | 911        | spam     | new   | 2024-01-01 10:00:00 |
-      | 102 | User2    | project      | 912        | spam     | new   | 2024-01-01 10:00:00 |
-      | 103 | User2    | project      | 913        | spam     | new   | 2024-01-01 10:00:01 |
+      | id                                   | reporter | content_type | content_id | category | state | created_at           |
+      | 00000000-0000-0000-0000-000000000101 | User2    | project      | 911        | spam     | new   | 2024-01-01 10:00:00 |
+      | 00000000-0000-0000-0000-000000000102 | User2    | project      | 912        | spam     | new   | 2024-01-01 10:00:00 |
+      | 00000000-0000-0000-0000-000000000103 | User2    | project      | 913        | spam     | new   | 2024-01-01 10:00:01 |
     And I use a valid JWT Bearer token for "Admin"
     When I GET "/api/moderation/reports?limit=2"
     Then the response status code should be "200"
     And the client response should contain "next_cursor"
-    And the client response should contain "MjAyNC0wMS0wMVQxMDowMDowMCswMDowMHwxMDI="
-    When I GET "/api/moderation/reports?limit=2&cursor=MjAyNC0wMS0wMVQxMDowMDowMCswMDowMHwxMDI="
+    And the client response should contain "MjAyNC0wMS0wMVQxMDowMDowMCswMDowMHwwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAxMDI="
+    When I GET "/api/moderation/reports?limit=2&cursor=MjAyNC0wMS0wMVQxMDowMDowMCswMDowMHwwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAxMDI="
     Then the response status code should be "200"
     And the client response should contain "913"
     And the client response should not contain "911"
@@ -223,7 +223,7 @@ Feature: Admin Moderation API
       """
       {"action": "approve", "note": "Content reviewed and restored"}
       """
-    When I request "PUT" "/api/moderation/appeals/1/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
 
   Scenario: Admin can reject an appeal
@@ -243,7 +243,7 @@ Feature: Admin Moderation API
       """
       {"action": "reject", "note": "Content violates guidelines"}
       """
-    When I request "PUT" "/api/moderation/appeals/1/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
 
   Scenario: Resolve non-existent appeal returns 404
@@ -253,7 +253,7 @@ Feature: Admin Moderation API
       """
       {"action": "approve"}
       """
-    When I request "PUT" "/api/moderation/appeals/9999/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000009999/resolve"
     Then the response status code should be "404"
 
   Scenario: Resolve appeal with invalid action returns 400
@@ -272,7 +272,7 @@ Feature: Admin Moderation API
       """
       {"action": "invalid_action"}
       """
-    When I request "PUT" "/api/moderation/appeals/1/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "400"
 
   Scenario: Non-admin cannot resolve appeals (403)
@@ -282,7 +282,7 @@ Feature: Admin Moderation API
       """
       {"action": "approve"}
       """
-    When I request "PUT" "/api/moderation/appeals/1/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "403"
 
   Scenario: Resolving an already resolved appeal returns 400
@@ -301,27 +301,27 @@ Feature: Admin Moderation API
       """
       {"action": "approve"}
       """
-    When I request "PUT" "/api/moderation/appeals/1/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "200"
     And I have the following JSON request body:
       """
       {"action": "reject"}
       """
-    When I request "PUT" "/api/moderation/appeals/1/resolve"
+    When I request "PUT" "/api/moderation/appeals/00000000-0000-0000-0000-000000000001/resolve"
     Then the response status code should be "400"
 
   Scenario: Appeal pagination cursor uses created_at and id ordering
     Given there are moderation appeals:
-      | id  | appellant | content_type | content_id | reason   | state   | created_at           |
-      | 201 | Catrobat  | project      | 921        | first    | pending | 2024-01-01 11:00:00 |
-      | 202 | Catrobat  | project      | 922        | second   | pending | 2024-01-01 11:00:00 |
-      | 203 | Catrobat  | project      | 923        | third    | pending | 2024-01-01 11:00:01 |
+      | id                                   | appellant | content_type | content_id | reason   | state   | created_at           |
+      | 00000000-0000-0000-0000-000000000201 | Catrobat  | project      | 921        | first    | pending | 2024-01-01 11:00:00 |
+      | 00000000-0000-0000-0000-000000000202 | Catrobat  | project      | 922        | second   | pending | 2024-01-01 11:00:00 |
+      | 00000000-0000-0000-0000-000000000203 | Catrobat  | project      | 923        | third    | pending | 2024-01-01 11:00:01 |
     And I use a valid JWT Bearer token for "Admin"
     When I GET "/api/moderation/appeals?limit=2"
     Then the response status code should be "200"
     And the client response should contain "next_cursor"
-    And the client response should contain "MjAyNC0wMS0wMVQxMTowMDowMCswMDowMHwyMDI="
-    When I GET "/api/moderation/appeals?limit=2&cursor=MjAyNC0wMS0wMVQxMTowMDowMCswMDowMHwyMDI="
+    And the client response should contain "MjAyNC0wMS0wMVQxMTowMDowMCswMDowMHwwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAyMDI="
+    When I GET "/api/moderation/appeals?limit=2&cursor=MjAyNC0wMS0wMVQxMTowMDowMCswMDowMHwwMDAwMDAwMC0wMDAwLTAwMDAtMDAwMC0wMDAwMDAwMDAyMDI="
     Then the response status code should be "200"
     And the client response should contain "923"
     And the client response should not contain "921"

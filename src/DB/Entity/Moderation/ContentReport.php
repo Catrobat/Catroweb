@@ -7,6 +7,7 @@ namespace App\DB\Entity\Moderation;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentReportRepository;
 use App\DB\Enum\ReportState;
+use App\DB\Generator\MyUuidGenerator;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,10 +21,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ContentReportRepository::class)]
 class ContentReport
 {
-  #[ORM\Column(name: 'id', type: Types::INTEGER)]
+  #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\Id]
-  #[ORM\GeneratedValue(strategy: 'AUTO')]
-  private ?int $id = null;
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  private ?string $id = null;
 
   #[ORM\JoinColumn(name: 'reporter_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
   #[ORM\ManyToOne(targetEntity: User::class)]
@@ -68,12 +70,12 @@ class ContentReport
     }
   }
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(?int $id): ContentReport
+  public function setId(?string $id): ContentReport
   {
     $this->id = $id;
 
