@@ -56,7 +56,7 @@ final class FollowersApiTest extends TestCase
 
     $this->user_manager->method('find')->willReturn(null);
 
-    $result = $this->object->userIdFollowersGet('nonexistent', $response_code, $response_headers);
+    $result = $this->object->usersIdFollowersGet('nonexistent', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -85,7 +85,7 @@ final class FollowersApiTest extends TestCase
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
     );
 
-    $result = $this->object->userIdFollowersGet('hidden-user', $response_code, $response_headers);
+    $result = $this->object->usersIdFollowersGet('hidden-user', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -121,7 +121,7 @@ final class FollowersApiTest extends TestCase
     $response_manager->method('createFollowersListResponse')->willReturn($expected_response);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $result = $this->object->userIdFollowersGet('user-1', $response_code, $response_headers);
+    $result = $this->object->usersIdFollowersGet('user-1', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(FollowersListResponse::class, $result);
@@ -135,7 +135,7 @@ final class FollowersApiTest extends TestCase
 
     $this->user_manager->method('find')->willReturn(null);
 
-    $result = $this->object->userIdFollowingGet('nonexistent', $response_code, $response_headers);
+    $result = $this->object->usersIdFollowingGet('nonexistent', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -171,7 +171,7 @@ final class FollowersApiTest extends TestCase
     $response_manager->method('createFollowersListResponse')->willReturn($expected_response);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $result = $this->object->userIdFollowingGet('user-1', $response_code, $response_headers);
+    $result = $this->object->usersIdFollowingGet('user-1', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(FollowersListResponse::class, $result);
@@ -187,7 +187,7 @@ final class FollowersApiTest extends TestCase
     $auth_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->facade->method('getAuthenticationManager')->willReturn($auth_manager);
 
-    $this->object->userIdFollowPost('target-user', $response_code, $response_headers);
+    $this->object->usersIdFollowPost('target-user', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
   }
@@ -205,7 +205,7 @@ final class FollowersApiTest extends TestCase
     $auth_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($auth_manager);
 
-    $this->object->userIdFollowPost('user-1', $response_code, $response_headers);
+    $this->object->usersIdFollowPost('user-1', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
   }
@@ -225,7 +225,7 @@ final class FollowersApiTest extends TestCase
 
     $this->user_manager->method('find')->willReturn(null);
 
-    $this->object->userIdFollowPost('nonexistent', $response_code, $response_headers);
+    $this->object->usersIdFollowPost('nonexistent', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
   }
@@ -250,7 +250,7 @@ final class FollowersApiTest extends TestCase
 
     $this->user_manager->method('find')->willReturn($target_user);
 
-    $this->object->userIdFollowPost('user-2', $response_code, $response_headers);
+    $this->object->usersIdFollowPost('user-2', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
   }
@@ -276,7 +276,7 @@ final class FollowersApiTest extends TestCase
     $processor = $this->createStub(FollowersApiProcessor::class);
     $this->facade->method('getProcessor')->willReturn($processor);
 
-    $this->object->userIdFollowPost('user-2', $response_code, $response_headers);
+    $this->object->usersIdFollowPost('user-2', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
@@ -291,7 +291,7 @@ final class FollowersApiTest extends TestCase
     $auth_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->facade->method('getAuthenticationManager')->willReturn($auth_manager);
 
-    $this->object->userIdUnfollowDelete('target-user', $response_code, $response_headers);
+    $this->object->usersIdUnfollowDelete('target-user', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
   }
@@ -309,7 +309,7 @@ final class FollowersApiTest extends TestCase
     $auth_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($auth_manager);
 
-    $this->object->userIdUnfollowDelete('user-1', $response_code, $response_headers);
+    $this->object->usersIdUnfollowDelete('user-1', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
   }
@@ -329,7 +329,7 @@ final class FollowersApiTest extends TestCase
 
     $this->user_manager->method('find')->willReturn(null);
 
-    $this->object->userIdUnfollowDelete('nonexistent', $response_code, $response_headers);
+    $this->object->usersIdUnfollowDelete('nonexistent', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
   }
@@ -354,7 +354,7 @@ final class FollowersApiTest extends TestCase
     $processor = $this->createStub(FollowersApiProcessor::class);
     $this->facade->method('getProcessor')->willReturn($processor);
 
-    $this->object->userIdUnfollowDelete('user-2', $response_code, $response_headers);
+    $this->object->usersIdUnfollowDelete('user-2', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NO_CONTENT, $response_code);
   }

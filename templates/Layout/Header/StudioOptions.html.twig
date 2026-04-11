@@ -5,7 +5,7 @@
         role="menuitem"
         data-content-type="studio"
         data-content-id="{{ studio.id }}"
-        data-report-url="{{ url('open_api_server_moderation_studioidreportpost', {id: studio.id}) }}"
+        data-report-url="{{ url('open_api_server_moderation_studiosidreportpost', {id: studio.id}) }}"
         data-logged-in="{{ app.user ? 'true' : 'false' }}"
         data-login-url="{{ url('login') }}"
         data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'studio'}, 'catroweb') }}"

@@ -1,3 +1,4 @@
+import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
@@ -28,6 +29,8 @@ export class ProjectList {
     this.propertyToShow = propertyToShow
     this.cardType = container.dataset.cardType || 'project'
     this.projectsLoaded = 0
+    this.nextCursor = null
+    this.hasMoreFromApi = true
     this.projectFetchCount = fetchCount
     this.empty = false
     this.fetchActive = false
@@ -75,13 +78,18 @@ export class ProjectList {
   }
 
   fetchMore(clear = false) {
-    if (this.empty || this.fetchActive) {
+    if (this.empty || this.fetchActive || !this.hasMoreFromApi) {
       return
     }
 
     this.fetchActive = true
 
-    fetch(`${this.apiUrl}limit=${this.projectFetchCount}&offset=${this.projectsLoaded}`, {
+    let fetchUrl = `${this.apiUrl}limit=${this.projectFetchCount}`
+    if (this.nextCursor) {
+      fetchUrl += `&cursor=${encodeURIComponent(this.nextCursor)}`
+    }
+
+    fetch(fetchUrl, {
       headers: this.extraHeaders,
       credentials: 'same-origin',
     })
@@ -90,11 +98,21 @@ export class ProjectList {
         return response.json()
       })
       .then((data) => {
-        const items = Array.isArray(data) ? data : data?.data || []
+        const envelope = normalizeApiResponse(data)
+        const items = envelope.data || []
         if (!Array.isArray(items)) {
           console.error(`Data received for ${this.category} is not an array!`)
           this.container.classList.remove('loading')
           return
+        }
+
+        if (envelope.next_cursor !== undefined) {
+          this.nextCursor = envelope.next_cursor
+        }
+        if (envelope.has_more !== undefined) {
+          this.hasMoreFromApi = envelope.has_more
+        } else {
+          this.hasMoreFromApi = items.length >= this.projectFetchCount
         }
 
         if (clear) {
@@ -250,7 +268,7 @@ export class ProjectList {
       '<i class="material-icons">open_in_new</i>' +
       escapeHtml(transOpen) +
       '</a>' +
-      '<a href="/api/project/' +
+      '<a href="/api/projects/' +
       id +
       '/catrobat" download class="projects-list-item--dropdown-item">' +
       '<i class="material-icons">download</i>' +
@@ -397,7 +415,7 @@ export class ProjectList {
         })
         if (result.isConfirmed) {
           const baseUrl = ds.baseUrl || ''
-          const delResp = await fetch(baseUrl + '/api/project/' + projectId, {
+          const delResp = await fetch(baseUrl + '/api/projects/' + projectId, {
             method: 'DELETE',
             credentials: 'same-origin',
           })
@@ -427,7 +445,7 @@ export class ProjectList {
         showReportDialog({
           contentType: 'project',
           contentId: projectId,
-          apiUrl: '/api/project/' + projectId + '/report',
+          apiUrl: '/api/projects/' + projectId + '/report',
           loginUrl: ds.loginUrl || '/app/login',
           isLoggedIn: this.isLoggedIn,
           translations: {

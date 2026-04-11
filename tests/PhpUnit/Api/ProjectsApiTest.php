@@ -23,11 +23,10 @@ use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use OpenAPI\Server\Model\ErrorResponse;
 use OpenAPI\Server\Model\ProjectResponse;
-use OpenAPI\Server\Model\UpdateProjectErrorResponse;
-use OpenAPI\Server\Model\UpdateProjectFailureResponse;
+use OpenAPI\Server\Model\ProjectsListResponse;
 use OpenAPI\Server\Model\UpdateProjectRequest;
-use OpenAPI\Server\Model\UploadErrorResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
@@ -94,7 +93,7 @@ final class ProjectsApiTest extends KernelTestCase
    * @throws \Exception|Exception
    */
   #[Group('unit')]
-  public function testProjectIdGetNotFound(): void
+  public function testProjectsIdGetNotFound(): void
   {
     $response_code = 200;
     $response_headers = [];
@@ -103,7 +102,7 @@ final class ProjectsApiTest extends KernelTestCase
     $loader->method('findProjectByID')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectIdGet('id', $response_code, $response_headers);
+    $response = $this->object->projectsIdGet('id', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -114,7 +113,7 @@ final class ProjectsApiTest extends KernelTestCase
    * @throws Exception
    */
   #[Group('unit')]
-  public function testProjectIdGet(): void
+  public function testProjectsIdGet(): void
   {
     $response_code = 200;
     $response_headers = [];
@@ -123,7 +122,7 @@ final class ProjectsApiTest extends KernelTestCase
     $loader->method('findProjectByID')->willReturn($this->createStub(Program::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectIdGet('id', $response_code, $response_headers);
+    $response = $this->object->projectsIdGet('id', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(ProjectResponse::class, $response);
@@ -141,7 +140,7 @@ final class ProjectsApiTest extends KernelTestCase
     return $stub;
   }
 
-  private function projectIdPut_setLoaderAndAuthManager(MockObject|Program|null $project = null, MockObject|User|null $user = null): void
+  private function projectsIdPatch_setLoaderAndAuthManager(MockObject|Program|null $project = null, MockObject|User|null $user = null): void
   {
     if (is_null($user)) {
       $user = $this->createStub(User::class);
@@ -152,14 +151,14 @@ final class ProjectsApiTest extends KernelTestCase
       $project->method('getUser')->willReturn($user);
     }
 
-    $this->projectIdPut_setLoader($project);
-    $this->projectIdPut_setAuthManager($user);
+    $this->projectsIdPatch_setLoader($project);
+    $this->projectsIdPatch_setAuthManager($user);
   }
 
   /**
    * @throws Exception
    */
-  private function projectIdPut_setLoader(MockObject|Program|null $project): void
+  private function projectsIdPatch_setLoader(MockObject|Program|null $project): void
   {
     $loader = $this->createStub(ProjectsApiLoader::class);
     $loader->method('findProjectByID')->willReturn($project);
@@ -169,7 +168,7 @@ final class ProjectsApiTest extends KernelTestCase
   /**
    * @throws Exception
    */
-  private function projectIdPut_setAuthManager(MockObject|User|null $user): void
+  private function projectsIdPatch_setAuthManager(MockObject|User|null $user): void
   {
     $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
@@ -194,7 +193,7 @@ final class ProjectsApiTest extends KernelTestCase
     $project->setPrivate(false);
     $project->setUser($user);
 
-    $this->projectIdPut_setLoaderAndAuthManager($project, $user);
+    $this->projectsIdPatch_setLoaderAndAuthManager($project, $user);
 
     $extracted_file_repository = $this->createStub(ExtractedFileRepository::class);
     $extracted_file_repository->method('loadProjectExtractedFile')->willReturn(null);
@@ -221,7 +220,7 @@ final class ProjectsApiTest extends KernelTestCase
     $update_project_request->method('getCredits')->willReturn($project_credits);
     $update_project_request->method('isPrivate')->willReturn(true);
 
-    $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdPatch('id', $update_project_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NO_CONTENT, $response_code);
     $this->assertNull($response);
@@ -240,11 +239,11 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->projectIdPut_setLoader(null);
+    $this->projectsIdPatch_setLoader(null);
 
     $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
-    $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdPatch('id', $update_project_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -259,12 +258,12 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->projectIdPut_setLoader($this->createStub(Program::class));
-    $this->projectIdPut_setAuthManager(null);
+    $this->projectsIdPatch_setLoader($this->createStub(Program::class));
+    $this->projectsIdPatch_setAuthManager(null);
 
     $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
-    $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdPatch('id', $update_project_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
     $this->assertNull($response);
@@ -288,11 +287,11 @@ final class ProjectsApiTest extends KernelTestCase
 
     $project->setUser($wrong_user);
 
-    $this->projectIdPut_setLoaderAndAuthManager($project, $user);
+    $this->projectsIdPatch_setLoaderAndAuthManager($project, $user);
 
     $update_project_request = $this->createStub(UpdateProjectRequest::class);
 
-    $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdPatch('id', $update_project_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
     $this->assertNull($response);
@@ -307,7 +306,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->projectIdPut_setLoaderAndAuthManager();
+    $this->projectsIdPatch_setLoaderAndAuthManager();
 
     $this->facade->method('getRequestValidator')->willReturn($this->full_validator);
 
@@ -323,18 +322,28 @@ final class ProjectsApiTest extends KernelTestCase
     $update_project_request->method('getCredits')->willReturn($project_credits);
     $update_project_request->method('getScreenshot')->willReturn($project_screenshot);
 
-    $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdPatch('id', $update_project_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
-    $this->assertInstanceOf(UpdateProjectErrorResponse::class, $response);
-    $this->assertNotNull($response->getName(), 'Name should not be null');
-    $this->assertStringContainsString('empty', $response->getName(), 'Name Validation failed');
-    $this->assertNotNull($response->getDescription(), 'Description should not be null');
-    $this->assertStringContainsString('long', $response->getDescription(), 'Description Validation failed');
-    $this->assertNotNull($response->getCredits(), 'Credits should not be null');
-    $this->assertStringContainsString('long', $response->getCredits(), 'Credits Validation failed');
-    $this->assertNotNull($response->getScreenshot(), 'Screenshot should not be null');
-    $this->assertStringContainsString('invalid', $response->getScreenshot(), 'Screenshot Validation failed');
+    $this->assertInstanceOf(ErrorResponse::class, $response);
+    $error = $response->getError();
+    $this->assertNotNull($error);
+    $this->assertSame(422, $error->getCode());
+    $this->assertSame('validation_error', $error->getType());
+    $details = $error->getDetails();
+    $this->assertNotNull($details);
+    $detail_map = [];
+    foreach ($details as $detail) {
+      $detail_map[$detail->getField()] = $detail->getMessage();
+    }
+    $this->assertArrayHasKey('name', $detail_map, 'Name should be in details');
+    $this->assertStringContainsString('empty', (string) $detail_map['name'], 'Name Validation failed');
+    $this->assertArrayHasKey('description', $detail_map, 'Description should be in details');
+    $this->assertStringContainsString('long', (string) $detail_map['description'], 'Description Validation failed');
+    $this->assertArrayHasKey('credits', $detail_map, 'Credits should be in details');
+    $this->assertStringContainsString('long', (string) $detail_map['credits'], 'Credits Validation failed');
+    $this->assertArrayHasKey('screenshot', $detail_map, 'Screenshot should be in details');
+    $this->assertStringContainsString('invalid', (string) $detail_map['screenshot'], 'Screenshot Validation failed');
   }
 
   /**
@@ -346,7 +355,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->projectIdPut_setLoaderAndAuthManager();
+    $this->projectsIdPatch_setLoaderAndAuthManager();
 
     $extracted_file_repository = $this->createStub(ExtractedFileRepository::class);
     $extracted_file = $this->createStub(ExtractedCatrobatFile::class);
@@ -375,13 +384,16 @@ final class ProjectsApiTest extends KernelTestCase
 
     $update_project_request->method('getName')->willReturn('New name');
 
-    $response = $this->object->projectIdPut('id', $update_project_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdPatch('id', $update_project_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_INTERNAL_SERVER_ERROR, $response_code);
-    $this->assertInstanceOf(UpdateProjectFailureResponse::class, $response);
-    $this->assertNotNull($response->getError());
-    $this->assertNotEmpty($response->getError());
-    $this->assertStringContainsString('Failed saving', $response->getError());
+    $this->assertInstanceOf(ErrorResponse::class, $response);
+    $error = $response->getError();
+    $this->assertNotNull($error);
+    $this->assertSame(500, $error->getCode());
+    $this->assertSame('internal_error', $error->getType());
+    $this->assertNotEmpty($error->getMessage());
+    $this->assertStringContainsString('Failed saving', (string) $error->getMessage());
   }
 
   /**
@@ -399,7 +411,7 @@ final class ProjectsApiTest extends KernelTestCase
     $loader->method('getFeaturedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $this->object->projectsFeaturedGet('', '', 20, 0, null, '', '', $response_code, $response_headers);
+    $this->object->projectsFeaturedGet('', '', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
@@ -414,7 +426,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->projectsGet('category', 'en', '', 20, 0, null, '', '', $response_code, $response_headers);
+    $this->object->projectsGet('en', 'category', '', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
@@ -424,12 +436,12 @@ final class ProjectsApiTest extends KernelTestCase
    *
    * @throws \Exception
    */
-  public function testProjectIdRecommendationsGetNotFound(): void
+  public function testProjectsIdRecommendationsGetNotFound(): void
   {
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->projectIdRecommendationsGet('id', 'category', 'en', '', 20, 0, null, '', '', $response_code, $response_headers);
+    $this->object->projectsIdRecommendationsGet('id', 'category', 'en', '', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
   }
@@ -440,7 +452,7 @@ final class ProjectsApiTest extends KernelTestCase
    * @throws \Exception
    * @throws Exception
    */
-  public function testProjectIdRecommendationsGet(): void
+  public function testProjectsIdRecommendationsGet(): void
   {
     $response_code = 200;
     $response_headers = [];
@@ -450,10 +462,10 @@ final class ProjectsApiTest extends KernelTestCase
     $loader->method('getRecommendedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectIdRecommendationsGet('id', 'category', 'en', '', 20, 0, null, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsIdRecommendationsGet('id', 'category', 'en', '', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
+    $this->assertInstanceOf(ProjectsListResponse::class, $response);
   }
 
   /**
@@ -466,7 +478,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->projectsSearchGet('query', '', 20, 0, null, '', '', $response_code, $response_headers);
+    $this->object->projectsSearchGet('query', '', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
@@ -501,7 +513,7 @@ final class ProjectsApiTest extends KernelTestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->projectsUserGet('', 20, 0, null, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsUserGet('', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
     $this->assertNull($response);
@@ -524,10 +536,10 @@ final class ProjectsApiTest extends KernelTestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->projectsUserGet('', 20, 0, null, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsUserGet('', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
+    $this->assertInstanceOf(ProjectsListResponse::class, $response);
   }
 
   /**
@@ -545,10 +557,10 @@ final class ProjectsApiTest extends KernelTestCase
     $request_validator->method('validateUserExists')->willReturn(true);
     $this->facade->method('getRequestValidator')->willReturn($request_validator);
 
-    $response = $this->object->projectsUserIdGet('id', '', 20, 0, null, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsUserIdGet('id', '', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
+    $this->assertInstanceOf(ProjectsListResponse::class, $response);
   }
 
   /**
@@ -566,7 +578,7 @@ final class ProjectsApiTest extends KernelTestCase
     $request_validator->method('validateUserExists')->willReturn(false);
     $this->facade->method('getRequestValidator')->willReturn($request_validator);
 
-    $response = $this->object->projectsUserIdGet('id', '', 20, 0, null, '', '', $response_code, $response_headers);
+    $response = $this->object->projectsUserIdGet('id', '', 20, null, '', '', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -629,7 +641,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
-    $this->assertInstanceOf(UploadErrorResponse::class, $response);
+    $this->assertInstanceOf(ErrorResponse::class, $response);
   }
 
   /**
@@ -656,7 +668,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
-    $this->assertInstanceOf(UploadErrorResponse::class, $response);
+    $this->assertInstanceOf(ErrorResponse::class, $response);
   }
 
   /**
@@ -664,12 +676,12 @@ final class ProjectsApiTest extends KernelTestCase
    *
    * @throws \Exception
    */
-  public function testProjectIdDelete(): void
+  public function testProjectsIdDelete(): void
   {
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->projectIdDelete('id', $response_code, $response_headers);
+    $this->object->projectsIdDelete('id', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
   }

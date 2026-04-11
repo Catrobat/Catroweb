@@ -12,15 +12,15 @@ Feature: Get recommended project based on a specific project
 
   Scenario: Invalid Request Header
     Given I have a request header "HTTP_ACCEPT" with value "invalid"
-    When I request "GET" "/api/project/1/recommendations?category=also_downloaded"
+    When I request "GET" "/api/projects/1/recommendations?category=also_downloaded"
     Then the response status code should be "406"
 
   Scenario: Not found
     When I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/0/recommendations?category=also_downloaded"
+    And I request "GET" "/api/projects/0/recommendations?category=also_downloaded"
     Then the response status code should be "404"
 
   Scenario: Get also downloaded projects
     When I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/1/recommendations?category=also_downloaded"
+    And I request "GET" "/api/projects/1/recommendations?category=also_downloaded"
     Then the response status code should be "200"

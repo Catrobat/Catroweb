@@ -459,8 +459,8 @@ export function ProjectComments(config) {
     replyAction.appendChild(replyBtn)
     actions.appendChild(replyAction)
 
-    // Reply count
-    if (replyCount > 0) {
+    // Reply count (always show for top-level comments, even when 0)
+    if (!isReply) {
       const repliesCount = document.createElement('div')
       repliesCount.className = 'comment-replies-count'
       repliesCount.appendChild(materialIcon('comment'))

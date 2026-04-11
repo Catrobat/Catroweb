@@ -49,7 +49,7 @@ fetchProjectData().then((data) => {
 })
 
 function fetchProjectData() {
-  const url = `${baseUrl}/api/project/${encodeURIComponent(projectId)}?attributes=ALL`
+  const url = `${baseUrl}/api/projects/${encodeURIComponent(projectId)}?attributes=ALL`
   return fetch(url, {
     method: 'GET',
     headers: { Accept: 'application/json' },
@@ -724,7 +724,7 @@ function initProjects() {
     const flavor = element.dataset.flavor
     const elBaseUrl = element.dataset.baseUrl
 
-    let url = `${elBaseUrl}/api/project/${id}/recommendations?category=${category}`
+    let url = `${elBaseUrl}/api/projects/${id}/recommendations?category=${category}`
 
     if (flavor !== 'pocketcode' || category === 'example') {
       url += `&flavor=${flavor}`

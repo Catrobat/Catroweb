@@ -21,20 +21,20 @@ Feature: Delete logged in user
 
   Scenario: Delete logged in user
     Given I use a valid JWT Bearer token for "Catrobat"
-    And I request "DELETE" "/api/user"
+    And I request "DELETE" "/api/users/me"
     Then the response status code should be "204"
     And the user "Catrobat" should not exist
 
   Scenario: Delete user without JWT Bearer token should return 401 status code
-    And I request "DELETE" "/api/user"
+    And I request "DELETE" "/api/users/me"
     Then the response status code should be "401"
 
   Scenario: Delete user with invalid JWT Bearer token should return 401 status code
     Given I use an invalid JWT Bearer token
-    And I request "DELETE" "/api/user"
+    And I request "DELETE" "/api/users/me"
     Then the response status code should be "401"
 
   Scenario: Delete user with expired JWT Bearer token should return 401 status code
     Given I use an invalid JWT authorization header for "Catroweb"
-    And I request "DELETE" "/api/user"
+    And I request "DELETE" "/api/users/me"
     Then the response status code should be "401"

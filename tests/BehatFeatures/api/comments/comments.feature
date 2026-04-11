@@ -17,11 +17,11 @@ Feature: Comments API
       | 21 | 1          | 1       | reply comment 2 | 2013-01-05 12:00:00 | 10        |
 
   # ---------------------------------------------------------------------------
-  # GET /api/project/{id}/comments
+  # GET /api/projects/{id}/comments
   # ---------------------------------------------------------------------------
 
   Scenario: Get project comments with cursor pagination returns newest first
-    Given I request "GET" "/api/project/1/comments?limit=2"
+    Given I request "GET" "/api/projects/1/comments?limit=2"
     Then the response status code should be "200"
     And the response should be in json format
     And the client response should contain "has_more"
@@ -30,11 +30,11 @@ Feature: Comments API
     And the client response should contain "second comment"
 
   Scenario: Get project comments returns 404 for non-existent project
-    Given I request "GET" "/api/project/9999/comments"
+    Given I request "GET" "/api/projects/9999/comments"
     Then the response status code should be "404"
 
   Scenario: Get project comments returns 400 for an invalid cursor
-    Given I request "GET" "/api/project/1/comments?cursor=!!!invalid!!!"
+    Given I request "GET" "/api/projects/1/comments?cursor=!!!invalid!!!"
     Then the response status code should be "400"
 
   # ---------------------------------------------------------------------------
@@ -108,7 +108,7 @@ Feature: Comments API
     Then the response status code should be "200"
 
   # ---------------------------------------------------------------------------
-  # POST /api/project/{id}/comments
+  # POST /api/projects/{id}/comments
   # ---------------------------------------------------------------------------
 
   Scenario: Create a comment
@@ -120,7 +120,7 @@ Feature: Comments API
         "message": "new comment"
       }
       """
-    When I request "POST" "/api/project/1/comments"
+    When I request "POST" "/api/projects/1/comments"
     Then the response status code should be "201"
     And the client response should contain "new comment"
     And the client response should contain "approved"
@@ -133,7 +133,7 @@ Feature: Comments API
         "message": "unauthenticated comment"
       }
       """
-    When I request "POST" "/api/project/1/comments"
+    When I request "POST" "/api/projects/1/comments"
     Then the response status code should be "401"
 
   Scenario: Create a comment returns 404 for non-existent project
@@ -145,7 +145,7 @@ Feature: Comments API
         "message": "hello"
       }
       """
-    When I request "POST" "/api/project/9999/comments"
+    When I request "POST" "/api/projects/9999/comments"
     Then the response status code should be "404"
 
   Scenario: Non-owner cannot reply to a hidden parent comment
@@ -158,10 +158,10 @@ Feature: Comments API
       """
       {
         "message": "hidden parent reply should fail",
-        "parent_id": 10
+        "parent_id": "10"
       }
       """
-    When I request "POST" "/api/project/1/comments"
+    When I request "POST" "/api/projects/1/comments"
     Then the response status code should be "404"
 
   Scenario: Owner can reply to a hidden parent comment
@@ -174,10 +174,10 @@ Feature: Comments API
       """
       {
         "message": "owner hidden parent reply",
-        "parent_id": 10
+        "parent_id": "10"
       }
       """
-    When I request "POST" "/api/project/1/comments"
+    When I request "POST" "/api/projects/1/comments"
     Then the response status code should be "201"
 
   Scenario: Admin can reply to a hidden parent comment
@@ -193,10 +193,10 @@ Feature: Comments API
       """
       {
         "message": "admin hidden parent reply",
-        "parent_id": 10
+        "parent_id": "10"
       }
       """
-    When I request "POST" "/api/project/1/comments"
+    When I request "POST" "/api/projects/1/comments"
     Then the response status code should be "201"
 
   # ---------------------------------------------------------------------------

@@ -49,12 +49,21 @@ class UserApiLoader extends AbstractApiLoader
     return $this->user_manager->search($query, $limit, $offset);
   }
 
-  public function getAllUsers(string $query, int $limit, int $offset): array
+  public function getAllUsers(?string $query, int $limit, int $offset): array
   {
-    if ('' === trim($query) || ctype_space($query)) {
-      return [];
+    if (null === $query || '' === trim($query)) {
+      return $this->user_manager->findBy([], ['createdAt' => 'DESC'], $limit, $offset);
     }
 
-    return $this->user_manager->findAll();
+    return $this->user_manager->search($query, $limit, $offset);
+  }
+
+  public function countAllUsers(?string $query): int
+  {
+    if (null === $query || '' === trim($query)) {
+      return count($this->user_manager->findAll());
+    }
+
+    return $this->user_manager->searchCount($query);
   }
 }

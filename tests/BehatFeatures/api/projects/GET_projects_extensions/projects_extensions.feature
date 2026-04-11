@@ -12,8 +12,9 @@ Feature: Get project extensions
     Then the response status code should be "200"
     Then I should get the json object:
     """
-    [
-    ]
+    {
+      "data": []
+    }
     """
 
   Scenario: Get all enabled extensions
@@ -27,15 +28,17 @@ Feature: Get project extensions
     Then the response status code should be "200"
     Then I should get the json object:
     """
-    [
-      {
-        "id": "game",
-        "text": "__game"
-      },
-      {
-        "id": "animation",
-        "text": "__animation"
-      }
-    ]
+    {
+      "data": [
+        {
+          "id": "game",
+          "text": "__game"
+        },
+        {
+          "id": "animation",
+          "text": "__animation"
+        }
+      ]
+    }
     """
 

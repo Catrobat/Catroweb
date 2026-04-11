@@ -17,7 +17,7 @@ Feature: It should be possible to mark notifications marked as read by id
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I request "PUT" "/api/notification/1/read"
+    And I request "PUT" "/api/notifications/1/read"
     Then the response code should be "204"
     And the following catro notifications exist in the database:
       | id | seen  |
@@ -29,7 +29,7 @@ Feature: It should be possible to mark notifications marked as read by id
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I request "PUT" "/api/notification/5/read"
+    And I request "PUT" "/api/notifications/5/read"
     Then the response code should be "404"
 
 
@@ -37,9 +37,9 @@ Feature: It should be possible to mark notifications marked as read by id
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I request "PUT" "/api/notification/1/read"
+    And I request "PUT" "/api/notifications/1/read"
     Then the response code should be "204"
-    And I request "PUT" "/api/notification/3/read"
+    And I request "PUT" "/api/notifications/3/read"
     Then the response code should be "204"
     And the following catro notifications exist in the database:
       | id | seen  |

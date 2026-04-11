@@ -13,32 +13,35 @@ Feature: Get more projects from an user as recommendation
 
   Scenario: Invalid Request Header
     Given I have a request header "HTTP_ACCEPT" with value "invalid"
-    When I request "GET" "/api/project/1/recommendations?category=more_from_user"
+    When I request "GET" "/api/projects/1/recommendations?category=more_from_user"
     Then the response status code should be "406"
 
   Scenario: Not found
     When I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/0/recommendations?category=more_from_user"
+    And I request "GET" "/api/projects/0/recommendations?category=more_from_user"
     Then the response status code should be "404"
 
   Scenario: Get more_from_user projects
     When I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/1/recommendations?category=more_from_user"
+    And I request "GET" "/api/projects/1/recommendations?category=more_from_user"
     Then the response status code should be "200"
 
   Scenario: Get more_from_user projects with specified attributes
     When I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a parameter "category" with value "more_from_user"
     And I have a parameter "attributes" with value "id,name,author"
-    And I request "GET" "/api/project/1/recommendations"
+    And I request "GET" "/api/projects/1/recommendations"
     Then the response status code should be "200"
     And I should get the json object:
     """
-    [
-      {
-        "id": "2",
-        "name": "project 2",
-        "author": "Catrobat"
-      }
-    ]
+    {
+      "data": [
+        {
+          "id": "2",
+          "name": "project 2",
+          "author": "Catrobat"
+        }
+      ],
+      "has_more": false
+    }
     """

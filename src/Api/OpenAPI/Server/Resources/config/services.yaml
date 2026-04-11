@@ -102,8 +102,8 @@ services:
       - [setContainer, ['@service_container']]
     tags: ['controller.service_arguments']
 
-  open_api_server.controller.studio:
-    class: OpenAPI\Server\Controller\StudioController
+  open_api_server.controller.studios:
+    class: OpenAPI\Server\Controller\StudiosController
     calls:
       - [setSerializer, ['@open_api_server.service.serializer']]
       - [setValidator, ['@open_api_server.service.validator']]
@@ -111,8 +111,8 @@ services:
       - [setContainer, ['@service_container']]
     tags: ['controller.service_arguments']
 
-  open_api_server.controller.user:
-    class: OpenAPI\Server\Controller\UserController
+  open_api_server.controller.users:
+    class: OpenAPI\Server\Controller\UsersController
     calls:
       - [setSerializer, ['@open_api_server.service.serializer']]
       - [setValidator, ['@open_api_server.service.validator']]

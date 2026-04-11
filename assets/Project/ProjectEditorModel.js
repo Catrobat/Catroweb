@@ -112,8 +112,8 @@ export function ProjectEditorModel(programId, textFieldModels, preloadedLanguage
         return
       }
 
-      fetch(`${this.baseUrl}/api/project/${this.programId}`, {
-        method: 'PUT',
+      fetch(`${this.baseUrl}/api/projects/${this.programId}`, {
+        method: 'PATCH',
         credentials: 'same-origin',
         headers: {
           Accept: 'application/json',

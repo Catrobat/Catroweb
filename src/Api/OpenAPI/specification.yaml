@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: 'Catroweb API'
   description: 'API for the Catrobat Share Platform'
-  version: 'v1.6.0'
+  version: 'v2.0.0'
   termsOfService: 'https://share.catrob.at/pocketcode/termsOfUse'
   contact:
     name: 'Catrobat'
@@ -26,7 +26,7 @@ tags:
       - **Example**&#58; `curl -H \"Authorization: Bearer sagu4235afsyvyvdgsdqaWER22\" /route`
       "
 
-  - name: 'User'
+  - name: 'Users'
     description: 'Everything related to users; from registration to managing their data.'
 
   - name: 'Projects'
@@ -50,7 +50,7 @@ tags:
   - name: 'Search'
     description: 'Everything related to searching'
 
-  - name: 'Studio'
+  - name: 'Studios'
     description: 'Create, join and update studios'
 
   - name: 'Followers'
@@ -184,8 +184,8 @@ paths:
           $ref: '#/components/responses/NotAcceptable'
         '415':
           $ref: '#/components/responses/UnsupportedMediaType'
-        422:
-          description: 'Unprocessable Entity'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
@@ -221,7 +221,7 @@ paths:
             type: string
             example: 'de'
           required: true
-          description: '2 letter Language-Code is based on ISO693-1 (e.g. German = de, English = en, Russian = ru)'
+          description: '2 letter language code based on ISO 639-1 (e.g. German = de, English = en, Russian = ru)'
         - $ref: '#/components/parameters/Flavor'
         - $ref: '#/components/parameters/Platform'
       tags:
@@ -253,35 +253,25 @@ paths:
       summary: Get active featured banners
       operationId: featuredBannersGet
       parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-        - name: offset
-          in: query
-          schema:
-            type: integer
-            default: 0
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/FeaturedBannerResponse'
+                $ref: '#/components/schemas/FeaturedBannersListResponse'
 
   ##############################################
-  # User
+  # Users
   ###
-  /user/data-export:
+  /users/me/data-export:
     get:
       security:
         - BearerAuth: []
       tags:
-        - 'User'
+        - 'Users'
       summary: 'Export your personal data (GDPR)'
       description: '
         Returns a JSON export of all personal data associated with
@@ -302,12 +292,12 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  /user:
+  /users/me:
     get:
       security:
         - BearerAuth: []
       tags:
-        - 'User'
+        - 'Users'
       summary: 'Get your private user data'
       description: '
         Get your private user data. Additionally to the public user data,
@@ -332,11 +322,109 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+    patch:
+      parameters:
+        - $ref: '#/components/parameters/Locale'
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Users'
+      summary: 'Update User'
+      description: '
+        Update your user account. All attributes are optional.
+        For example you can update only the username.
+        Or you can update multiple attributes at once. E.g. username + email.
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '204':
+          description: 'User successfully updated'
+          # Content hack necessary else OpenAPI-generator will ignore content for error responses (hopefully fixed sometime)
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/InvalidCredentials'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Users'
+      summary: 'Delete user account'
+      description: 'Delete your user account. But be warned, there is no way to restore the user data!'
+      responses:
+        '204':
+          description: User successfully deleted.
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /users/me/reports:
+    get:
+      security:
+        - BearerAuth: []
+      tags:
+        - Moderation
+      summary: 'List reports filed by the current user'
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserReportListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /users:
+    get:
+      tags:
+        - 'Users'
+      summary: 'Get users'
+      description: 'Get all users with their corresponding data. When query is provided, filters by keyword. Uses cursor-based pagination.'
+      parameters:
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersListResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
     post:
       parameters:
         - $ref: '#/components/parameters/Locale'
       tags:
-        - User
+        - Users
       summary: 'Register'
       description: '
         Register a user. For pre-validation use the dry-run option.
@@ -374,77 +462,44 @@ paths:
         415:
           $ref: '#/components/responses/UnsupportedMediaType'
         422:
-          description: 'Unprocessable Entity (Specific error messages will be translated to the locale)'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RegisterErrorResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
+          $ref: '#/components/responses/UnprocessableEntity'
 
-    put:
-      parameters:
-        - $ref: '#/components/parameters/Locale'
-      security:
-        - BearerAuth: []
-      tags:
-        - 'User'
-      summary: 'Update User'
-      description: '
-        Update your user account. All attributes are optional.
-        For example you can update only the username.
-        Or you can update multiple attributes at once. E.g. username + email.
-        '
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateUserRequest'
-      responses:
-        '204':
-          description: 'User successfully updated'
-          # Content hack necessary else OpenAPI-generator will ignore content for error responses (hopefully fixed sometime)
-          content:
-            application/json:
-              schema:
-                type: object
-        '401':
-          $ref: '#/components/responses/InvalidCredentials'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
-        '422':
-          description: 'Unprocessable Entity. (Specific error messages will be translated to the locale)'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateUserErrorResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
-
-    delete:
-      security:
-        - BearerAuth: []
-      tags:
-        - 'User'
-      summary: 'Delete user account'
-      description: 'Delete your user account. But be warned, there is no way to restore the user data!'
-      responses:
-        '204':
-          description: User successfully deleted.
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-
-  /user/{id}:
+  /users/search:
     get:
       tags:
-        - 'User'
+        - 'Users'
+      summary: 'Search for users'
+      description: 'Search for users associated by keywords. Uses cursor-based pagination.'
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Attributes'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersListResponse'
+          headers:
+            X-Response-Hash:
+              $ref: '#/components/headers/X-Response-Hash'
+            Content-Language:
+              $ref: '#/components/headers/Content-Language'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
+  '/users/{id}':
+    get:
+      tags:
+        - 'Users'
       summary: 'Get public user data'
       description: 'Get all the public data of a user'
       parameters:
@@ -466,10 +521,10 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
-  /user/reset-password:
+  /users/reset-password:
     post:
       tags:
-        - 'User'
+        - 'Users'
       summary: 'Request email to reset password'
       description: '
         If an account with the provided email exists, an email to reset the password will be sent to the user.
@@ -498,83 +553,9 @@ paths:
         '415':
           $ref: '#/components/responses/UnsupportedMediaType'
         '422':
-          description: 'Unprocessable Entity. (Specific error messages will be translated to the locale)'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResetPasswordErrorResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
+          $ref: '#/components/responses/UnprocessableEntity'
         '429':
           $ref: '#/components/responses/TooManyRequests'
-
-  /users/search:
-    get:
-      tags:
-        - 'User'
-      summary: 'Search for users'
-      description: 'Search for users associated by keywords. Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
-      parameters:
-        - name: query
-          in: query
-          required: true
-          schema:
-            type: string
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Cursor'
-        - $ref: '#/components/parameters/Attributes'
-      responses:
-        '200':
-          description: 'OK'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsersDataResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
-
-  /users:
-    get:
-      tags:
-        - 'User'
-      summary: 'Get users'
-      description: 'Get all users with their corresponding data. Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
-      parameters:
-        - name: query
-          in: query
-          required: true
-          schema:
-            type: string
-        - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
-        - $ref: '#/components/parameters/Cursor'
-      responses:
-        '200':
-          description: 'OK'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UsersDataResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '406':
-          $ref: '#/components/responses/NotAcceptable'
 
   ################################################
   # Projects
@@ -587,12 +568,11 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get projects'
-      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
+      description: 'Get projects by category. When no category is specified, returns recent projects. Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/ProjectType'
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
@@ -602,7 +582,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectsResponse'
+                $ref: '#/components/schemas/ProjectsListResponse'
           headers:
             X-Response-Hash:
               $ref: '#/components/headers/X-Response-Hash'
@@ -646,16 +626,7 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
         '422':
-          description: 'Upload Error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UploadErrorResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
+          $ref: '#/components/responses/UnprocessableEntity'
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
@@ -664,12 +635,11 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get the currently featured projects'
-      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
+      description: 'Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/Platform'
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
@@ -684,7 +654,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FeaturedProjectsResponse'
+                $ref: '#/components/schemas/FeaturedProjectsListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '406':
@@ -710,7 +680,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectsCategoryResponse'
+                $ref: '#/components/schemas/ProjectsCategoryListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '406':
@@ -721,7 +691,7 @@ paths:
       tags:
         - 'Projects'
       summary: 'Search for projects associated with a keywords'
-      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
+      description: 'Uses cursor-based pagination.'
       parameters:
         - name: query
           in: query
@@ -730,7 +700,6 @@ paths:
             type: string
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
@@ -745,7 +714,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectsResponse'
+                $ref: '#/components/schemas/ProjectsListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '406':
@@ -758,11 +727,10 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get the projects of the logged in user'
-      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
+      description: 'Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
@@ -777,7 +745,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectsResponse'
+                $ref: '#/components/schemas/ProjectsListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -792,12 +760,11 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get the public projects of a given user'
-      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
+      description: 'Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/Uuid'
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
@@ -812,7 +779,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectsResponse'
+                $ref: '#/components/schemas/ProjectsListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '404':
@@ -848,7 +815,7 @@ paths:
     get:
       tags:
         - 'Projects'
-      summary: 'Get all possible project tags. Some Tags will only be availabe during events.'
+      summary: 'Get all possible project tags. Some Tags will only be available during events.'
       responses:
         '200':
           description: 'OK'
@@ -864,7 +831,7 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
-  '/project/{id}':
+  '/projects/{id}':
     get:
       tags:
         - 'Projects'
@@ -889,7 +856,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '406':
           $ref: '#/components/responses/NotAcceptable'
-    put:
+    patch:
       parameters:
         - $ref: '#/components/parameters/Uuid'
         - $ref: '#/components/parameters/Locale'
@@ -926,27 +893,7 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
         '422':
-          description: 'Unprocessable Entity. (Specific error messages will be translated to the locale)'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateProjectErrorResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
-        '500':
-          description: 'Server error'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateProjectFailureResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
+          $ref: '#/components/responses/UnprocessableEntity'
     delete:
       security:
         - BearerAuth: []
@@ -967,7 +914,7 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
-  '/project/{id}/catrobat':
+  '/projects/{id}/catrobat':
     get:
       tags:
         - Projects
@@ -997,7 +944,7 @@ paths:
         '500':
           description: 'We were not able to create a .catrobat file for this project. There is a high possibility that the project files are missing on the server.'
 
-  '/project/{id}/report':
+  '/projects/{id}/report':
     post:
       security:
         - BearerAuth: []
@@ -1028,7 +975,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/project/{id}/appeal':
+  '/projects/{id}/appeal':
     post:
       security:
         - BearerAuth: []
@@ -1059,7 +1006,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/project/{id}/recommendations':
+  '/projects/{id}/recommendations':
     parameters:
       - $ref: '#/components/parameters/Locale'
 
@@ -1067,13 +1014,12 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get recommended projects related to the specific project'
-      description: 'Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
+      description: 'Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/Uuid'
         - $ref: '#/components/parameters/RecommendedProjectType'
         - $ref: '#/components/parameters/MaxVersion'
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
         - $ref: '#/components/parameters/Attributes'
         - $ref: '#/components/parameters/Flavor'
@@ -1088,13 +1034,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectsResponse'
+                $ref: '#/components/schemas/ProjectsListResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
-  '/project/{id}/code':
+  '/projects/{id}/code':
     get:
       tags:
         - 'Projects'
@@ -1114,7 +1060,7 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
-  '/project/{id}/code-statistics':
+  '/projects/{id}/code-statistics':
     get:
       tags:
         - 'Projects'
@@ -1134,7 +1080,7 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
-  '/project/{id}/reaction':
+  '/projects/{id}/reaction':
     parameters:
       - $ref: '#/components/parameters/Locale'
 
@@ -1212,7 +1158,7 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
-  '/project/{id}/reactions':
+  '/projects/{id}/reactions':
     parameters:
       - $ref: '#/components/parameters/Locale'
 
@@ -1238,7 +1184,7 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
-  '/project/{id}/reactions/users':
+  '/projects/{id}/reactions/users':
     parameters:
       - $ref: '#/components/parameters/Locale'
 
@@ -1246,7 +1192,7 @@ paths:
       tags:
         - 'Projects'
       summary: 'Get users who reacted to a project'
-      description: 'Get a paginated list of users who reacted to a project with their reaction types. Uses cursor-based pagination for efficient handling of large datasets. Returns 404 if project is not visible to the current user.'
+      description: 'Get a paginated list of users who reacted to a project with their reaction types. Uses cursor-based pagination. Returns 404 if project is not visible to the current user.'
       parameters:
         - $ref: '#/components/parameters/Uuid'
         - name: type
@@ -1286,7 +1232,7 @@ paths:
   ################################################
   # Comments
   #
-  '/project/{id}/comments':
+  '/projects/{id}/comments':
     parameters:
       - $ref: '#/components/parameters/Locale'
 
@@ -1515,7 +1461,7 @@ paths:
       tags:
         - 'Notifications'
       summary: 'Get user notifications'
-      description: 'Returns paginated notifications using cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page.'
+      description: 'Returns paginated notifications using cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Cursor'
@@ -1537,7 +1483,7 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 
-  '/notification/{id}/read':
+  '/notifications/{id}/read':
     parameters:
       - $ref: '#/components/parameters/Locale'
     put:
@@ -1547,7 +1493,7 @@ paths:
         - 'Notifications'
       summary: 'Mark specified notification as read'
       parameters:
-        - $ref: '#/components/parameters/NotificationsId'
+        - $ref: '#/components/parameters/NotificationId'
       responses:
         '204':
           $ref: '#/components/responses/NoContent'
@@ -1662,7 +1608,7 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 
-  '/user/{id}/achievements':
+  '/users/{id}/achievements':
     get:
       tags:
         - 'Achievements'
@@ -1677,19 +1623,17 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AchievementResponse'
+                $ref: '#/components/schemas/AchievementsDataResponse'
           headers:
             Content-Language:
               $ref: '#/components/headers/Content-Language'
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/user/{id}/studios':
+  '/users/{id}/studios':
     get:
       tags:
-        - 'User'
+        - 'Users'
       summary: 'Get studios a user has joined'
       operationId: userIdStudiosGet
       parameters:
@@ -1717,10 +1661,9 @@ paths:
       tags:
         - 'Media Library'
       summary: 'Get media library overview with categories and preview assets'
-      description: 'Returns all categories with a preview of assets per category. Similar to /projects/categories for browsing the media library. Supports cursor-based pagination. The offset parameter is deprecated.'
+      description: 'Returns all categories with a preview of assets per category. Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
         - name: file_type
           in: query
@@ -1777,10 +1720,9 @@ paths:
       tags:
         - 'Media Library'
       summary: 'Get all media library categories'
-      description: 'Supports cursor-based pagination. The offset parameter is deprecated.'
+      description: 'Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
@@ -1788,7 +1730,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediaCategoriesResponse'
+                $ref: '#/components/schemas/MediaCategoriesListResponse'
           headers:
             X-Response-Hash:
               $ref: '#/components/headers/X-Response-Hash'
@@ -1847,10 +1789,9 @@ paths:
       tags:
         - 'Media Library'
       summary: 'Get a specific media category with its assets'
-      description: 'Supports cursor-based pagination. The offset parameter is deprecated.'
+      description: 'Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
@@ -1931,10 +1872,9 @@ paths:
       tags:
         - 'Media Library'
       summary: 'Get media library assets with pagination and filtering'
-      description: 'Supports cursor-based pagination. The offset parameter is deprecated.'
+      description: 'Uses cursor-based pagination.'
       parameters:
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
         - name: category_id
           in: query
@@ -1983,7 +1923,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MediaAssetsResponse'
+                $ref: '#/components/schemas/MediaAssetsListResponse'
           headers:
             X-Response-Hash:
               $ref: '#/components/headers/X-Response-Hash'
@@ -2115,7 +2055,7 @@ paths:
       tags:
         - Search
       summary: 'Search for projects, users,..'
-      description: 'The default is to search in all categories. Supports cursor-based pagination. Pass the next_cursor value from a previous response to fetch the next page. The offset parameter is deprecated.'
+      description: 'The default is to search in all categories. Uses cursor-based pagination.'
       parameters:
         - name: query
           in: query
@@ -2124,7 +2064,6 @@ paths:
             type: string
         - $ref: '#/components/parameters/SearchType'
         - $ref: '#/components/parameters/Limit'
-        - $ref: '#/components/parameters/Offset'
         - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
@@ -2148,12 +2087,12 @@ paths:
   ################################################
   # Studios
   #
-  '/studio':
+  '/studios':
     parameters:
       - $ref: '#/components/parameters/Locale'
     get:
       tags:
-        - Studio
+        - Studios
       summary: List public studios
       parameters:
         - $ref: '#/components/parameters/Limit'
@@ -2172,7 +2111,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Create a new Studio
       requestBody:
         required: true
@@ -2201,27 +2140,18 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
         '422':
-          description: 'Unprocessable Entity (Specific error messages will be translated to the locale)'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateStudioErrorResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
+          $ref: '#/components/responses/UnprocessableEntity'
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/studio/{id}':
+  '/studios/{id}':
     parameters:
       - $ref: '#/components/parameters/Locale'
-    post:
+    patch:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Update a Studio (only available to studio admins)
       parameters:
         - $ref: '#/components/parameters/Uuid'
@@ -2255,22 +2185,13 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
         '422':
-          description: 'Unprocessable Entity (Specific error messages will be translated to the locale)'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateStudioErrorResponse'
-          headers:
-            X-Response-Hash:
-              $ref: '#/components/headers/X-Response-Hash'
-            Content-Language:
-              $ref: '#/components/headers/Content-Language'
+          $ref: '#/components/responses/UnprocessableEntity'
 
     delete:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Delete a studio (only available to studio admins)
       parameters:
         - $ref: '#/components/parameters/Uuid'
@@ -2290,7 +2211,7 @@ paths:
 
     get:
       tags:
-        - Studio
+        - Studios
       summary: Get studio details (private studios are only available to members)
       parameters:
         - $ref: '#/components/parameters/Uuid'
@@ -2318,13 +2239,13 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
-  '/studio/{id}/members':
+  '/studios/{id}/members':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
     get:
       tags:
-        - Studio
+        - Studios
       summary: List studio members
       parameters:
         - $ref: '#/components/parameters/Limit'
@@ -2341,7 +2262,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/studio/{id}/join':
+  '/studios/{id}/join':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
@@ -2349,7 +2270,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Join a studio
       responses:
         '200':
@@ -2365,7 +2286,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/studio/{id}/leave':
+  '/studios/{id}/leave':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
@@ -2373,7 +2294,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Leave a studio
       responses:
         '204':
@@ -2385,13 +2306,13 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
-  '/studio/{id}/projects':
+  '/studios/{id}/projects':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
     get:
       tags:
-        - Studio
+        - Studios
       summary: List studio projects
       parameters:
         - $ref: '#/components/parameters/Limit'
@@ -2411,7 +2332,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Add a project to a studio
       requestBody:
         required: true
@@ -2435,7 +2356,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/studio/{id}/batch-add-projects':
+  '/studios/{id}/batch-add-projects':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
@@ -2443,7 +2364,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Add multiple projects to a studio in a single request
       requestBody:
         required: true
@@ -2468,7 +2389,8 @@ paths:
           $ref: '#/components/responses/NotFound'
         '429':
           $ref: '#/components/responses/TooManyRequests'
-  '/studio/{id}/projects/{project_id}':
+
+  '/studios/{id}/projects/{project_id}':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - name: project_id
@@ -2482,7 +2404,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Remove a project from a studio
       responses:
         '204':
@@ -2494,13 +2416,13 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/studio/{id}/comments':
+  '/studios/{id}/comments':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
     get:
       tags:
-        - Studio
+        - Studios
       summary: List studio comments
       parameters:
         - $ref: '#/components/parameters/Limit'
@@ -2520,7 +2442,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Add a comment to a studio
       requestBody:
         required: true
@@ -2546,20 +2468,20 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/studio/{id}/comments/{comment_id}':
+  '/studios/{id}/comments/{comment_id}':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - name: comment_id
         in: path
         required: true
         schema:
-          type: integer
+          type: string
       - $ref: '#/components/parameters/Locale'
     delete:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Delete a studio comment
       responses:
         '204':
@@ -2571,7 +2493,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/studio/{id}/members/{userId}/promote':
+  '/studios/{id}/members/{userId}/promote':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - name: userId
@@ -2584,7 +2506,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Promote a studio member to admin
       responses:
         '204':
@@ -2596,7 +2518,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/studio/{id}/members/{userId}/ban':
+  '/studios/{id}/members/{userId}/ban':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - name: userId
@@ -2609,7 +2531,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Ban a studio member
       responses:
         '204':
@@ -2621,7 +2543,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/studio/{id}/members/{userId}/demote':
+  '/studios/{id}/members/{userId}/demote':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - name: userId
@@ -2634,7 +2556,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Demote a studio admin to member
       responses:
         '204':
@@ -2648,7 +2570,7 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
-  '/studio/{id}/activities':
+  '/studios/{id}/activities':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
@@ -2656,7 +2578,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: List studio activities
       parameters:
         - $ref: '#/components/parameters/Limit'
@@ -2677,7 +2599,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/studio/{id}/user-projects':
+  '/studios/{id}/user-projects':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
@@ -2685,7 +2607,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: List current user's projects with in_studio flag
       responses:
         '200':
@@ -2699,7 +2621,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/studio/{id}/join-requests':
+  '/studios/{id}/join-requests':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - $ref: '#/components/parameters/Locale'
@@ -2707,7 +2629,7 @@ paths:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: List pending join requests for a studio (admin only)
       parameters:
         - $ref: '#/components/parameters/Limit'
@@ -2728,20 +2650,20 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/studio/{id}/join-requests/{request_id}/accept':
+  '/studios/{id}/join-requests/{request_id}/accept':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - name: request_id
         in: path
         required: true
         schema:
-          type: integer
+          type: string
       - $ref: '#/components/parameters/Locale'
     post:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Accept a pending join request (admin only)
       responses:
         '200':
@@ -2755,20 +2677,20 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 
-  '/studio/{id}/join-requests/{request_id}/decline':
+  '/studios/{id}/join-requests/{request_id}/decline':
     parameters:
       - $ref: '#/components/parameters/Uuid'
       - name: request_id
         in: path
         required: true
         schema:
-          type: integer
+          type: string
       - $ref: '#/components/parameters/Locale'
     post:
       security:
         - BearerAuth: []
       tags:
-        - Studio
+        - Studios
       summary: Decline a pending join request (admin only)
       responses:
         '200':
@@ -2786,7 +2708,7 @@ paths:
   # Followers
   ###
 
-  '/user/{id}/followers':
+  '/users/{id}/followers':
     get:
       tags:
         - 'Followers'
@@ -2803,7 +2725,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/user/{id}/following':
+  '/users/{id}/following':
     get:
       tags:
         - 'Followers'
@@ -2820,7 +2742,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
-  '/user/{id}/follow':
+  '/users/{id}/follow':
     post:
       security:
         - BearerAuth: []
@@ -2841,7 +2763,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/user/{id}/unfollow':
+  '/users/{id}/unfollow':
     delete:
       security:
         - BearerAuth: []
@@ -2866,7 +2788,7 @@ paths:
   # Moderation
   ###
 
-  '/user/{id}/report':
+  '/users/{id}/report':
     post:
       security:
         - BearerAuth: []
@@ -2897,7 +2819,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/user/{id}/appeal':
+  '/users/{id}/appeal':
     post:
       security:
         - BearerAuth: []
@@ -2928,7 +2850,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/studio/{id}/report':
+  '/studios/{id}/report':
     post:
       security:
         - BearerAuth: []
@@ -2959,7 +2881,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/studio/{id}/appeal':
+  '/studios/{id}/appeal':
     post:
       security:
         - BearerAuth: []
@@ -2990,34 +2912,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 
-  '/user/reports':
-    get:
-      security:
-        - BearerAuth: []
-      tags:
-        - Moderation
-      summary: 'List reports filed by the current user'
-      parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-        - name: cursor
-          in: query
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'OK'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserReportListResponse'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-
   '/moderation/reports':
     get:
       security:
@@ -3026,16 +2920,8 @@ paths:
         - Moderation
       summary: 'List pending reports (admin only)'
       parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-        - name: cursor
-          in: query
-          required: false
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
           description: 'OK'
@@ -3060,7 +2946,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       requestBody:
         required: true
         content:
@@ -3087,16 +2973,8 @@ paths:
         - Moderation
       summary: 'List pending appeals (admin only)'
       parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-        - name: cursor
-          in: query
-          required: false
-          schema:
-            type: string
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Cursor'
       responses:
         '200':
           description: 'OK'
@@ -3121,7 +2999,7 @@ paths:
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       requestBody:
         required: true
         content:
@@ -3257,7 +3135,7 @@ components:
       required: false
       schema:
         type: string
-        description: 'ISO_639-1 or ISO_3166-1 locale of the user. Defaults internally to en'
+        description: 'ISO 639-1 or ISO 3166-1 locale of the user. Defaults internally to en'
         default: 'en'
 
     Uuid:
@@ -3295,14 +3173,6 @@ components:
       schema:
         $ref: '#/components/schemas/Limit'
 
-    Offset:
-      name: offset
-      in: query
-      deprecated: true
-      description: 'Deprecated: Use cursor-based pagination instead. How many objects should be skipped.'
-      schema:
-        $ref: '#/components/schemas/Offset'
-
     Cursor:
       name: cursor
       in: query
@@ -3333,18 +3203,18 @@ components:
     ##
     # Notifications specific
     #
-    NotificationsId:
+    NotificationId:
       name: id
       in: path
       schema:
-        $ref: '#/components/schemas/NotificationsId'
+        $ref: '#/components/schemas/Uuid'
       required: true
 
     CommentId:
       name: id
       in: path
       schema:
-        $ref: '#/components/schemas/CommentId'
+        $ref: '#/components/schemas/Uuid'
       required: true
 
     NotificationsType:
@@ -3368,7 +3238,8 @@ components:
     ProjectType:
       in: query
       name: category
-      required: true
+      required: false
+      description: 'Project category. When omitted, defaults to recent projects.'
       schema:
         type: string
         enum:
@@ -3486,53 +3357,23 @@ components:
       default: 20
       example: 3
 
-    Offset:
-      type: integer
-      minimum: 0
-      description: 'Deprecated: Use cursor-based pagination instead. How many objects should be skipped.'
-      default: 0
-      example: 2
-      deprecated: true
-
-    CommentId:
-      type: integer
-      description: 'Unique ID of the comment'
-      example: 123
-
     ##############################################
     # Media Library Schemas
     ###
-
-    # Pagination
-    PaginationInfo:
-      type: object
-      deprecated: true
-      description: 'Deprecated: Use cursor-based pagination (next_cursor + has_more) instead.'
-      properties:
-        total:
-          type: integer
-          example: 150
-          description: 'Total number of items'
-        limit:
-          type: integer
-          example: 20
-        offset:
-          type: integer
-          example: 0
-        has_more:
-          type: boolean
-          example: true
 
     # Library Overview Response
     MediaLibraryResponse:
       type: object
       properties:
-        categories:
+        data:
           type: array
           items:
             $ref: '#/components/schemas/MediaLibraryCategoryPreview'
-        pagination:
-          $ref: '#/components/schemas/PaginationInfo'
+        next_cursor:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
 
     MediaLibraryCategoryPreview:
       type: object
@@ -3563,15 +3404,18 @@ components:
             $ref: '#/components/schemas/MediaAssetResponse'
 
     # Category Responses
-    MediaCategoriesResponse:
+    MediaCategoriesListResponse:
       type: object
       properties:
-        categories:
+        data:
           type: array
           items:
             $ref: '#/components/schemas/MediaCategoryResponse'
-        pagination:
-          $ref: '#/components/schemas/PaginationInfo'
+        next_cursor:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
 
     MediaCategoryResponse:
       type: object
@@ -3603,12 +3447,15 @@ components:
         - $ref: '#/components/schemas/MediaCategoryResponse'
         - type: object
           properties:
-            assets:
+            data:
               type: array
               items:
                 $ref: '#/components/schemas/MediaAssetResponse'
-            assets_pagination:
-              $ref: '#/components/schemas/PaginationInfo'
+            next_cursor:
+              type: string
+              nullable: true
+            has_more:
+              type: boolean
 
     # Category Requests
     MediaCategoryRequest:
@@ -3630,15 +3477,18 @@ components:
           default: 0
 
     # Asset Responses
-    MediaAssetsResponse:
+    MediaAssetsListResponse:
       type: object
       properties:
-        assets:
+        data:
           type: array
           items:
             $ref: '#/components/schemas/MediaAssetResponse'
-        pagination:
-          $ref: '#/components/schemas/PaginationInfo'
+        next_cursor:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
 
     MediaAssetResponse:
       type: object
@@ -3898,10 +3748,18 @@ components:
 
     ## Response
 
-    UsersDataResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/BasicUserDataResponse'
+    UsersListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasicUserDataResponse'
+        next_cursor:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
 
     BasicUserDataResponse:
       type: object
@@ -3945,17 +3803,17 @@ components:
         is_verified:
           type: boolean
           example: true
-          description: 'Whether the user account is verified (only populated for GET /user/{id})'
+          description: 'Whether the user account is verified (only populated for GET /users/{id})'
         scratch_username:
           type: string
           nullable: true
           example: null
-          description: 'The Scratch username if the user was imported from Scratch; null otherwise (only populated for GET /user/{id})'
+          description: 'The Scratch username if the user was imported from Scratch; null otherwise (only populated for GET /users/{id})'
         is_followed_by_viewer:
           type: boolean
           nullable: true
           example: null
-          description: 'Whether the authenticated viewer follows this user; null when unauthenticated (only populated for GET /user/{id})'
+          description: 'Whether the authenticated viewer follows this user; null when unauthenticated (only populated for GET /users/{id})'
 
     ExtendedUserDataResponse:
       allOf:
@@ -4025,14 +3883,14 @@ components:
             type: object
             properties:
               id:
-                type: integer
+                type: string
               text:
                 type: string
               posted_at:
                 type: string
                 format: date-time
               parent_id:
-                type: integer
+                type: string
                 nullable: true
         reactions:
           type: array
@@ -4123,127 +3981,6 @@ components:
                     description: 'Human-readable error message for this field'
                     example: 'Email is required'
 
-    RegisterErrorResponse:
-      type: object
-      properties:
-        email:
-          type: string
-          enum:
-            - 'Email already in use'
-            - 'Email invalid'
-            - 'Email missing'
-        username:
-          type: string
-          enum:
-            - 'Username too short'
-            - 'Username too long'
-            - 'Username already in use'
-            - 'Username missing'
-            - 'Username must not contain an email address'
-        password:
-          type: string
-          enum:
-            - 'Password too short'
-            - 'Password too long'
-            - 'Password contains invalid chars'
-            - 'Password missing'
-        date_of_birth:
-          type: string
-          enum:
-            - 'Date of birth is required'
-            - 'Date of birth is invalid'
-            - 'You must be at least 3 years old to create an account'
-        parent_email:
-          type: string
-          enum:
-            - 'Parent email is required for users under 13'
-            - 'Parent email is invalid'
-
-    UpdateUserErrorResponse:
-      type: object
-      properties:
-        email:
-          type: string
-          enum:
-            - 'Email already in use'
-            - 'Email invalid'
-        username:
-          type: string
-          enum:
-            - 'Username too short'
-            - 'Username too long'
-            - 'Username already in use'
-            - 'Username must not contain an email address'
-        password:
-          type: string
-          enum:
-            - 'Password too short'
-            - 'Password too long'
-            - 'Password contains invalid chars'
-        current_password:
-          type: string
-          enum:
-            - 'Current password is missing'
-            - 'Current password is wrong'
-        picture:
-          type: string
-          enum:
-            - 'Profile picture invalid or not supported'
-
-    ResetPasswordErrorResponse:
-      type: object
-      properties:
-        email:
-          type: string
-          enum:
-            - 'Email invalid'
-            - 'Email missing'
-
-    CreateStudioErrorResponse:
-      type: object
-      properties:
-        name:
-          type: string
-          enum:
-            - 'Name already in use'
-            - 'Name missing'
-            - 'Name too short'
-            - 'Name too long'
-        description:
-          type: string
-          enum:
-            - 'Description too short'
-            - 'Description too long'
-            - 'Description missing'
-        image_file:
-          type: string
-          enum:
-            - 'Image size too large'
-            - 'Image type not supported'
-            - 'Image invalid'
-
-    UpdateStudioErrorResponse:
-      type: object
-      properties:
-        name:
-          type: string
-          enum:
-            - 'Name already in use'
-            - 'Name too short'
-            - 'Name too long'
-        description:
-          type: string
-          enum:
-            - 'Description too short'
-            - 'Description too long'
-            - 'Description missing'
-        image_file:
-          type: string
-          enum:
-            - 'Image size too large'
-            - 'Image type not supported'
-            - 'Image invalid'
-
     ######################################################
     # Project Schemas
     ###
@@ -4303,54 +4040,25 @@ components:
 
     ## Response
 
-    UploadErrorResponse:
+    FeaturedProjectsListResponse:
       type: object
       properties:
-        error:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturedProjectResponse'
+        next_cursor:
           type: string
-          example: 'There is a problem'
-
-    UpdateProjectErrorResponse:
-      type: object
-      properties:
-        name:
-          type: string
-          enum:
-            - 'Name empty'
-            - 'Name too long'
-        description:
-          type: string
-          enum:
-            - 'Description too long'
-        credits:
-          type: string
-          enum:
-            - 'Credits too long'
-        screenshot:
-          type: string
-          enum:
-            - 'Project screenshot invalid or not supported'
-
-    UpdateProjectFailureResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          enum:
-            - 'Failed saving details of the project.'
-            - 'Failed reading, converting or storing the screenshot. Please check your input.'
-
-    FeaturedProjectsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/FeaturedProjectResponse'
+          nullable: true
+        has_more:
+          type: boolean
 
     FeaturedProjectResponse:
       type: object
       properties:
         id:
           type: string
-          example: 1
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         project_id:
           type: string
           example: '1234abcd-12ab-12ab-12ab-123456abcdef'
@@ -4370,10 +4078,13 @@ components:
           type: string
           example: 'https://share.catrob.at/resources/featured/featured_999.png'
 
-    ProjectsCategoryResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/ProjectsCategory'
+    ProjectsCategoryListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectsCategory'
 
     ProjectsCategory:
       type: object
@@ -4392,10 +4103,18 @@ components:
           items:
             $ref: '#/components/schemas/ProjectResponse'
 
-    ProjectsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/ProjectResponse'
+    ProjectsListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectResponse'
+        next_cursor:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
 
     ProjectResponse:
       type: object
@@ -4437,11 +4156,6 @@ components:
           type: integer
           description: "The projects' count of views"
           example: 2
-        download:
-          type: integer
-          example: 2
-          deprecated: true
-          description: "The projects' count of downloads. Deprecated. Use downloads"
         downloads:
           type: integer
           description: "The projects' count of downloads"
@@ -4473,10 +4187,11 @@ components:
           items:
             type: string
           example: ['arduino', 'mindstorms']
-        uploaded:
-          type: integer
-          description: 'The time of the upload.'
-          example: 1575562569
+        uploaded_at:
+          type: string
+          format: date-time
+          description: 'The time of the upload in ISO 8601 format.'
+          example: '2024-01-15T10:30:00+00:00'
         uploaded_string:
           type: string
           description: 'A localised text interpretation of the uploaded timestamp'
@@ -4494,7 +4209,7 @@ components:
         download_url:
           type: string
           description: 'The url to GET the catrobat file of this project'
-          example: 'https://share.catrob.at/api/project/1234abcd-12ab-12ab-12ab-123456abcdef/catrobat'
+          example: 'https://share.catrob.at/api/projects/1234abcd-12ab-12ab-12ab-123456abcdef/catrobat'
         filesize:
           type: number
           example: 0.14381762458251943
@@ -4516,9 +4231,12 @@ components:
           description: 'ISO 8601 date when the project will be auto-deleted. Null for protected projects. Only returned when explicitly requested.'
 
     ExtensionsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/ExtensionResponse'
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExtensionResponse'
 
     ExtensionResponse:
       type: object
@@ -4533,9 +4251,12 @@ components:
           description: 'The translated text of the project extension.'
 
     TagsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/TagResponse'
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponse'
 
     TagResponse:
       type: object
@@ -4552,13 +4273,6 @@ components:
     ######################################################
     # Notification Schemas
     ###
-
-    NotificationsId:
-      type: integer
-      minimum: 0
-      description: 'Id of a notification'
-      default: 0
-      example: 2
 
     NotificationsCountResponse:
       type: object
@@ -4608,8 +4322,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          example: 123
+          type: string
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
           description: 'Id of the notification'
         type:
           type: string
@@ -4699,8 +4413,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          description: 'Achievement ID'
+          type: string
+          description: 'Achievement UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         internal_title:
           type: string
           description: 'Internal title of the achievement'
@@ -4730,6 +4445,14 @@ components:
           type: integer
           description: 'Number of unseen achievements'
           example: 2
+
+    AchievementsDataResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AchievementResponse'
 
     ######################################################
     # Studio Schema
@@ -4874,8 +4597,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          description: Studio membership ID
+          type: string
+          description: Studio membership UUID
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         user_id:
           type: string
           description: User UUID
@@ -4941,6 +4665,26 @@ components:
           type: string
           nullable: true
           description: UUID of the project author
+        downloads:
+          type: integer
+          description: Download count
+          example: 42
+        views:
+          type: integer
+          description: View count
+          example: 100
+        uploaded_string:
+          type: string
+          description: Localized upload time
+          example: '2 days ago'
+        private:
+          type: boolean
+          description: Whether the project is private
+          example: false
+        not_for_kids:
+          type: integer
+          description: Not-for-kids flag (0=safe, 1=flagged, 2=moderator-flagged)
+          example: 0
 
     StudioProjectListResponse:
       type: object
@@ -4959,7 +4703,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          description: 'Activity UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         type:
           type: string
           enum:
@@ -5049,11 +4795,14 @@ components:
                 type: string
                 enum: [not_found, conflict]
           description: Project IDs that failed with reasons
+
     StudioCommentResponse:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          description: 'Comment UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         message:
           type: string
         username:
@@ -5064,7 +4813,7 @@ components:
           type: string
           nullable: true
         parent_id:
-          type: integer
+          type: string
           nullable: true
         reply_count:
           type: integer
@@ -5094,16 +4843,17 @@ components:
           type: string
           description: The comment text
         parent_id:
-          type: integer
+          type: string
           nullable: true
-          description: Parent comment ID for replies
+          description: Parent comment UUID for replies
 
     StudioJoinRequestResponse:
       type: object
       properties:
         id:
-          type: integer
-          description: Join request ID
+          type: string
+          description: 'Join request UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         user_id:
           type: string
           description: User UUID
@@ -5147,7 +4897,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
+          description: 'Banner UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         type:
           type: string
           enum: [project, studio, link, image]
@@ -5160,6 +4912,19 @@ components:
           nullable: true
         priority:
           type: integer
+
+    FeaturedBannersListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturedBannerResponse'
+        next_cursor:
+          type: string
+          nullable: true
+        has_more:
+          type: boolean
 
     ######################################################
     # Search Schemas
@@ -5190,7 +4955,9 @@ components:
             type: object
             properties:
               id:
-                type: integer
+                type: string
+                description: 'Studio UUID'
+                example: '1234abcd-12ab-12ab-12ab-123456abcdef'
               name:
                 type: string
               description:
@@ -5353,12 +5120,15 @@ components:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/CommentId'
+          type: string
+          description: 'Comment UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         project_id:
           $ref: '#/components/schemas/Uuid'
         parent_id:
-          $ref: '#/components/schemas/CommentId'
+          type: string
           nullable: true
+          description: 'Parent comment UUID, null for top-level comments'
         user:
           $ref: '#/components/schemas/CommentUserInfo'
         message:
@@ -5379,6 +5149,7 @@ components:
         is_reported:
           type: boolean
           example: false
+
     CommentListResponse:
       type: object
       properties:
@@ -5391,11 +5162,9 @@ components:
           type: string
           nullable: true
           description: 'Cursor for the next page, null if no more results'
-          example: '2024-01-15T10:30:00Z:123'
         has_more:
           type: boolean
           description: 'Whether there are more results available'
-          example: true
 
     CommentCreateRequest:
       type: object
@@ -5407,14 +5176,17 @@ components:
           description: 'Comment text'
           example: 'Nice project!'
         parent_id:
-          $ref: '#/components/schemas/CommentId'
+          type: string
           nullable: true
+          description: 'Parent comment UUID for replies'
 
     CommentTranslationResponse:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/CommentId'
+          type: string
+          description: 'Comment UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         source_language:
           type: string
           example: 'en'
@@ -5541,8 +5313,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          example: 1
+          type: string
+          description: 'Report UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         reporter_id:
           type: string
           nullable: true
@@ -5587,8 +5360,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          example: 1
+          type: string
+          description: 'Report UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         content_type:
           type: string
           example: 'project'
@@ -5631,8 +5405,9 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          example: 1
+          type: string
+          description: 'Appeal UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         content_type:
           type: string
           example: 'project'

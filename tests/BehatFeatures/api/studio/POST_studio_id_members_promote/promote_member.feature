@@ -17,21 +17,21 @@ Feature: Promote a studio member to admin
 
   Scenario: Admin can promote a member
     Given I use a valid JWT Bearer token for "StudioAdmin"
-    And I request "POST" "/api/studio/1/members/2/promote"
+    And I request "POST" "/api/studios/1/members/2/promote"
     Then the response status code should be "204"
 
   Scenario: Promoted member should now be admin
     Given I use a valid JWT Bearer token for "StudioAdmin"
-    And I request "POST" "/api/studio/1/members/2/promote"
+    And I request "POST" "/api/studios/1/members/2/promote"
     Then the response status code should be "204"
-    When I request "GET" "/api/studio/1/members"
+    When I request "GET" "/api/studios/1/members"
     Then the response status code should be "200"
 
   Scenario: Non-admin cannot promote
     Given I use a valid JWT Bearer token for "Member"
-    And I request "POST" "/api/studio/1/members/2/promote"
+    And I request "POST" "/api/studios/1/members/2/promote"
     Then the response status code should be "403"
 
   Scenario: Unauthenticated user cannot promote
-    Given I request "POST" "/api/studio/1/members/2/promote"
+    Given I request "POST" "/api/studios/1/members/2/promote"
     Then the response status code should be "401"

@@ -28,7 +28,7 @@ Feature: Admin Moderation API
       """
       {"category": "spam", "note": "Test report"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
     # Now list as admin
     Given I use a valid JWT Bearer token for "Admin"
@@ -64,7 +64,7 @@ Feature: Admin Moderation API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
     # Resolve it as admin
     Given I use a valid JWT Bearer token for "Admin"
@@ -84,7 +84,7 @@ Feature: Admin Moderation API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
     # Reject it as admin
     Given I use a valid JWT Bearer token for "Admin"
@@ -114,7 +114,7 @@ Feature: Admin Moderation API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
     # Try invalid action
     Given I use a valid JWT Bearer token for "Admin"
@@ -143,7 +143,7 @@ Feature: Admin Moderation API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -189,7 +189,7 @@ Feature: Admin Moderation API
       """
       {"reason": "My project was hidden unfairly"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
     # List as admin
     Given I use a valid JWT Bearer token for "Admin"
@@ -214,7 +214,7 @@ Feature: Admin Moderation API
       """
       {"reason": "Wrongly hidden"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
     # Approve as admin
     Given I use a valid JWT Bearer token for "Admin"
@@ -234,7 +234,7 @@ Feature: Admin Moderation API
       """
       {"reason": "Please review my project"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
     # Reject as admin
     Given I use a valid JWT Bearer token for "Admin"
@@ -264,7 +264,7 @@ Feature: Admin Moderation API
       """
       {"reason": "Please review"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -293,7 +293,7 @@ Feature: Admin Moderation API
       """
       {"reason": "Please restore"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"

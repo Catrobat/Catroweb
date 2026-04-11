@@ -112,7 +112,7 @@ export default class extends Controller {
       '<i class="material-icons">open_in_new</i>' +
       escapeHtml(transOpen) +
       '</a>' +
-      '<a href="/api/project/' +
+      '<a href="/api/projects/' +
       id +
       '/catrobat" download class="projects-list-item--dropdown-item" data-menu-action="download" data-project-id="' +
       id +
@@ -314,7 +314,7 @@ export default class extends Controller {
 
   async openAddProjectModal() {
     try {
-      // Derive base from projectsUrl (e.g., "/index_test.php/api/studio/1/projects" -> "/index_test.php/api/studio/1")
+      // Derive base from projectsUrl (e.g., "/index_test.php/api/studios/1/projects" -> "/index_test.php/api/studios/1")
       const studioBase = this.projectsUrlValue.replace(/\/projects$/, '')
       const url = studioBase + '/user-projects'
       const response = await fetch(url, { credentials: 'same-origin' })

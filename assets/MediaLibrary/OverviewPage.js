@@ -12,10 +12,9 @@ if (overviewContainer) {
 
   const limit = 10
   const assetsPerCategory = 8
-  let currentOffset = 0
+  let categoriesNextCursor = null
   let isLoadingCategories = false
   let categoriesHasMore = true
-  let totalCategories = 0
   const searchQuery = new URLSearchParams(window.location.search).get('search')
 
   const downloadList = []
@@ -56,14 +55,17 @@ if (overviewContainer) {
     loadingSpinner.style.display = 'none'
   }
 
-  function loadCategories(offset = 0, append = false) {
+  function loadCategories(cursor = null, append = false) {
     if (isLoadingCategories) {
       return
     }
     isLoadingCategories = true
     showLoading(append)
 
-    let url = `${apiUrl}?limit=${limit}&offset=${offset}&assets_per_category=${assetsPerCategory}`
+    let url = `${apiUrl}?limit=${limit}&assets_per_category=${assetsPerCategory}`
+    if (cursor) {
+      url += `&cursor=${encodeURIComponent(cursor)}`
+    }
     if (searchQuery) {
       url += `&search=${encodeURIComponent(searchQuery)}`
     }
@@ -74,12 +76,12 @@ if (overviewContainer) {
         hideLoading()
         removeSkeletons()
 
-        if (data.categories && data.categories.length > 0) {
-          renderCategories(data.categories, append)
+        const categories = data.data || []
+        if (categories.length > 0) {
+          renderCategories(categories, append)
           categoriesContainer.style.display = 'block'
-          totalCategories = data.pagination?.total ?? data.categories.length
-          currentOffset = offset
-          categoriesHasMore = offset + data.categories.length < totalCategories
+          categoriesNextCursor = data.next_cursor || null
+          categoriesHasMore = data.has_more ?? categories.length === limit
         } else {
           if (searchQuery) {
             noCategoriesAlert.textContent = translations.no_results
@@ -264,7 +266,7 @@ if (overviewContainer) {
       const scrollPosition = window.innerHeight + window.scrollY
       const pageHeight = document.documentElement.scrollHeight
       if (scrollPosition >= pageHeight - threshold) {
-        loadCategories(currentOffset + limit, true)
+        loadCategories(categoriesNextCursor, true)
       }
     })
   }
@@ -400,7 +402,8 @@ if (overviewContainer) {
     const url = new URL(mediaAssetsApi, window.location.origin)
     url.searchParams.set('category_id', categoryId)
     url.searchParams.set('limit', assetsPerCategory)
-    url.searchParams.set('offset', state.offset)
+    // The media assets API uses base64-encoded offset as cursor
+    url.searchParams.set('cursor', btoa(String(state.offset)))
     if (searchQuery) {
       url.searchParams.set('search', searchQuery)
     }
@@ -408,12 +411,14 @@ if (overviewContainer) {
     fetch(url.toString())
       .then((response) => response.json())
       .then((data) => {
-        const assets = data.assets || []
+        const assets = data.data || data.assets || []
         assets.forEach((asset) => {
           assetsGrid.appendChild(buildAssetCard(asset))
         })
         state.offset += assets.length
-        if (assets.length < assetsPerCategory || state.offset >= state.total) {
+        if (data.has_more !== undefined) {
+          state.hasMore = data.has_more
+        } else if (assets.length < assetsPerCategory || state.offset >= state.total) {
           state.hasMore = false
         }
 
@@ -482,5 +487,5 @@ if (overviewContainer) {
   }
 
   // Initial load
-  loadCategories(0)
+  loadCategories(null)
 }

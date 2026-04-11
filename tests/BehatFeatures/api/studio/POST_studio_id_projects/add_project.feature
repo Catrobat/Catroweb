@@ -24,7 +24,7 @@ Feature: Add a project to a studio
       """
       {"project_id": "1"}
       """
-    When I POST "/api/studio/1/projects"
+    When I POST "/api/studios/1/projects"
     Then the response status code should be "401"
 
   Scenario: Non-member cannot add project
@@ -34,7 +34,7 @@ Feature: Add a project to a studio
       """
       {"project_id": "1"}
       """
-    When I POST "/api/studio/1/projects"
+    When I POST "/api/studios/1/projects"
     Then the response status code should be "403"
 
   Scenario: Member adds project successfully
@@ -44,7 +44,7 @@ Feature: Add a project to a studio
       """
       {"project_id": "1"}
       """
-    When I POST "/api/studio/1/projects"
+    When I POST "/api/studios/1/projects"
     Then the response status code should be "201"
 
   Scenario: Add project to non-existent studio returns 404
@@ -54,7 +54,7 @@ Feature: Add a project to a studio
       """
       {"project_id": "1"}
       """
-    When I POST "/api/studio/nonexistent/projects"
+    When I POST "/api/studios/nonexistent/projects"
     Then the response status code should be "404"
 
   Scenario: Add non-existent project returns 404
@@ -64,7 +64,7 @@ Feature: Add a project to a studio
       """
       {"project_id": "nonexistent"}
       """
-    When I POST "/api/studio/1/projects"
+    When I POST "/api/studios/1/projects"
     Then the response status code should be "404"
 
   Scenario: Add duplicate project returns 409
@@ -77,7 +77,7 @@ Feature: Add a project to a studio
       """
       {"project_id": "1"}
       """
-    When I POST "/api/studio/1/projects"
+    When I POST "/api/studios/1/projects"
     Then the response status code should be "409"
 
   Scenario: Add project with empty project_id returns 400
@@ -87,5 +87,5 @@ Feature: Add a project to a studio
       """
       {"project_id": ""}
       """
-    When I POST "/api/studio/1/projects"
+    When I POST "/api/studios/1/projects"
     Then the response status code should be "400"

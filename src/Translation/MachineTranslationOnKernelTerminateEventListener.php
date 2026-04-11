@@ -151,7 +151,7 @@ class MachineTranslationOnKernelTerminateEventListener
     return json_decode($json_response, true, 512, JSON_THROW_ON_ERROR);
   }
 
-  private function findCommentAndIncrement(int $comment_id, string $source_language, string $target_language, string $provider): void
+  private function findCommentAndIncrement(int|string $comment_id, string $source_language, string $target_language, string $provider): void
   {
     /** @var UserComment|null $comment */
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($comment_id);

@@ -148,12 +148,12 @@
       <code><![CDATA[$username]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Api/StudioApi.php">
+  <file src="src/Api/StudiosApi.php">
     <PossiblyNullArgument>
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Api/UserApi.php">
+  <file src="src/Api/UsersApi.php">
     <PossiblyNullArgument>
       <code><![CDATA[$reset_password_request->getEmail()]]></code>
       <code><![CDATA[$this->facade->getAuthenticationManager()->getAuthenticatedUser()]]></code>
@@ -709,15 +709,6 @@
       <code><![CDATA[$achievement->getId()]]></code>
       <code><![CDATA[$user->getId()]]></code>
       <code><![CDATA[$user->getId()]]></code>
-    </PossiblyNullArgument>
-  </file>
-  <file src="tests/PhpUnit/Api/ProjectsApiTest.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$response->getCredits()]]></code>
-      <code><![CDATA[$response->getDescription()]]></code>
-      <code><![CDATA[$response->getError()]]></code>
-      <code><![CDATA[$response->getName()]]></code>
-      <code><![CDATA[$response->getScreenshot()]]></code>
     </PossiblyNullArgument>
   </file>
   <file src="tests/PhpUnit/Project/CatrobatFile/ExtractedCatrobatFileTest.php">

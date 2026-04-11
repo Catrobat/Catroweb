@@ -10,6 +10,7 @@ use App\Security\Authentication\CookieService;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
+use OpenAPI\Server\Model\UsersListResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -112,15 +113,19 @@ class UserResponseManager extends AbstractResponseManager
     return new BasicUserDataResponse($data);
   }
 
-  public function createUsersDataResponse(array $users, ?string $attributes = null): array
+  public function createUsersListResponse(array $users, bool $has_more, ?string $next_cursor, ?string $attributes = null): UsersListResponse
   {
-    $users_data_response = [];
+    $users_data = [];
     foreach ($users as $user) {
-      $user_data = $this->createBasicUserDataResponse($user, $attributes);
-      $users_data_response[] = $user_data;
+      $users_data[] = $this->createBasicUserDataResponse($user, $attributes);
     }
 
-    return $users_data_response;
+    $response = new UsersListResponse();
+    $response->setData($users_data);
+    $response->setHasMore($has_more);
+    $response->setNextCursor($next_cursor);
+
+    return $response;
   }
 
   public function createUserRegisteredResponse(string $token, string $refresh_token): JWTResponse

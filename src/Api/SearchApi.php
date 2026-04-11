@@ -6,6 +6,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Search\SearchApiFacade;
+use App\Api\Traits\CursorPaginationTrait;
 use OpenAPI\Server\Api\SearchApiInterface;
 use OpenAPI\Server\Model\SearchResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -14,6 +15,7 @@ use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class SearchApi extends AbstractApiController implements SearchApiInterface
 {
+  use CursorPaginationTrait;
   use RateLimitTrait;
 
   public function __construct(
@@ -27,8 +29,9 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
    * @throws \JsonException
    */
   #[\Override]
-  public function searchGet(string $query, string $type, int $limit, int $offset, ?string $cursor, int &$responseCode, array &$responseHeaders): array|SearchResponse
+  public function searchGet(string $query, string $type, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|SearchResponse
   {
+    $offset = $this->decodeCursorToOffset($cursor);
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
     if (null === $this->checkIpRateLimit($ip, $this->searchBurstLimiter)) {
       $responseCode = Response::HTTP_TOO_MANY_REQUESTS;

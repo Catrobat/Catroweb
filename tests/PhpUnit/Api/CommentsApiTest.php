@@ -86,7 +86,7 @@ final class CommentsApiTest extends TestCase
     return $stub;
   }
 
-  // ==================== projectIdCommentsGet ====================
+  // ==================== projectsIdCommentsGet ====================
 
   #[Group('unit')]
   public function testProjectIdCommentsGetReturnsNotFoundWhenProjectInvisible(): void
@@ -99,7 +99,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->projectIdCommentsGet('1', 'en', 20, null, $response_code, $response_headers);
+    $result = $api->projectsIdCommentsGet('1', 'en', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -116,13 +116,13 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->projectIdCommentsGet('1', 'en', 20, 'not-valid-base64!!', $response_code, $response_headers);
+    $result = $api->projectsIdCommentsGet('1', 'en', 20, 'not-valid-base64!!', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
     $this->assertNull($result);
   }
 
-  // ==================== projectIdCommentsPost ====================
+  // ==================== projectsIdCommentsPost ====================
 
   #[Group('unit')]
   public function testProjectIdCommentsPostRequiresAuthentication(): void
@@ -137,7 +137,7 @@ final class CommentsApiTest extends TestCase
     $request = new CommentCreateRequest();
     $request->setMessage('hello');
 
-    $result = $api->projectIdCommentsPost('1', $request, 'en', $response_code, $response_headers);
+    $result = $api->projectsIdCommentsPost('1', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
     $this->assertNull($result);
@@ -162,7 +162,7 @@ final class CommentsApiTest extends TestCase
     $request = new CommentCreateRequest();
     $request->setMessage('hello');
 
-    $result = $api->projectIdCommentsPost('1', $request, 'en', $response_code, $response_headers);
+    $result = $api->projectsIdCommentsPost('1', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -187,7 +187,7 @@ final class CommentsApiTest extends TestCase
     $request = new CommentCreateRequest();
     $request->setMessage('   ');
 
-    $result = $api->projectIdCommentsPost('1', $request, 'en', $response_code, $response_headers);
+    $result = $api->projectsIdCommentsPost('1', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
     $this->assertNull($result);
@@ -215,9 +215,9 @@ final class CommentsApiTest extends TestCase
     $response_headers = [];
     $request = new CommentCreateRequest();
     $request->setMessage('reply text');
-    $request->setParentId(999);
+    $request->setParentId('999');
 
-    $result = $api->projectIdCommentsPost('1', $request, 'en', $response_code, $response_headers);
+    $result = $api->projectsIdCommentsPost('1', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -254,9 +254,9 @@ final class CommentsApiTest extends TestCase
     $response_headers = [];
     $request = new CommentCreateRequest();
     $request->setMessage('reply text');
-    $request->setParentId(42);
+    $request->setParentId('42');
 
-    $result = $api->projectIdCommentsPost('project-1', $request, 'en', $response_code, $response_headers);
+    $result = $api->projectsIdCommentsPost('project-1', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
     $this->assertNull($result);
@@ -272,7 +272,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $api->commentsIdDelete(0, 'en', $response_code, $response_headers);
+    $api->commentsIdDelete('0', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
   }
@@ -288,7 +288,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $api->commentsIdDelete(1, 'en', $response_code, $response_headers);
+    $api->commentsIdDelete('1', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
   }
@@ -310,7 +310,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $api->commentsIdDelete(1, 'en', $response_code, $response_headers);
+    $api->commentsIdDelete('1', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
   }
@@ -335,7 +335,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $api->commentsIdDelete(1, 'en', $response_code, $response_headers);
+    $api->commentsIdDelete('1', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
   }
@@ -367,7 +367,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $api->commentsIdDelete(1, 'en', $response_code, $response_headers);
+    $api->commentsIdDelete('1', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NO_CONTENT, $response_code);
   }
@@ -385,7 +385,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdRepliesGet(1, 'en', 20, null, $response_code, $response_headers);
+    $result = $api->commentsIdRepliesGet('1', 'en', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -414,7 +414,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdRepliesGet(1, 'en', 20, null, $response_code, $response_headers);
+    $result = $api->commentsIdRepliesGet('1', 'en', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -443,7 +443,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdRepliesGet(1, 'en', 20, 'not-valid-base64!!', $response_code, $response_headers);
+    $result = $api->commentsIdRepliesGet('1', 'en', 20, 'not-valid-base64!!', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
     $this->assertNull($result);
@@ -476,7 +476,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdTranslationGet(1, 'fr', 'en', null, $response_code, $response_headers);
+    $result = $api->commentsIdTranslationGet('1', 'fr', 'en', null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_MODIFIED, $response_code);
     $this->assertNull($result);
@@ -494,7 +494,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdTranslationGet(1, 'fr', 'en', null, $response_code, $response_headers);
+    $result = $api->commentsIdTranslationGet('1', 'fr', 'en', null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -515,7 +515,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdTranslationGet(1, 'fr', 'en', null, $response_code, $response_headers);
+    $result = $api->commentsIdTranslationGet('1', 'fr', 'en', null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
     $this->assertNull($result);
@@ -536,7 +536,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdTranslationGet(1, 'de', 'en', 'de', $response_code, $response_headers);
+    $result = $api->commentsIdTranslationGet('1', 'de', 'en', 'de', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertNull($result);
@@ -563,7 +563,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdTranslationGet(1, 'xx', 'en', null, $response_code, $response_headers);
+    $result = $api->commentsIdTranslationGet('1', 'xx', 'en', null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
     $this->assertNull($result);
@@ -590,7 +590,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdTranslationGet(1, 'fr', 'en', null, $response_code, $response_headers);
+    $result = $api->commentsIdTranslationGet('1', 'fr', 'en', null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_SERVICE_UNAVAILABLE, $response_code);
     $this->assertNull($result);
@@ -623,7 +623,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $api->commentsIdTranslationGet(42, 'fr', 'en', null, $response_code, $response_headers);
+    $result = $api->commentsIdTranslationGet('42', 'fr', 'en', null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(CommentTranslationResponse::class, $result);

@@ -22,7 +22,7 @@ class RemixController extends AbstractController
   ) {
   }
 
-  #[Route(path: '/api/project/{id}/remix-graph', name: 'project_remix_graph_api', methods: ['GET'])]
+  #[Route(path: '/api/projects/{id}/remix-graph', name: 'project_remix_graph_api', methods: ['GET'])]
   public function getRemixGraph(string $id): JsonResponse
   {
     $remix_graph = $this->remix_manager->getRenderableRemixGraph($id);

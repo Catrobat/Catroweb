@@ -16,7 +16,7 @@ Feature: Registering a new user.
         "password": "123456"
       }
     """
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "415"
 
   Scenario: An invalid request should result in an error
@@ -30,7 +30,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "400"
 
   Scenario: Empty request fields should result in an error
@@ -45,15 +45,22 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "email": "Email missing",
-        "username": "Username missing",
-        "password": "Password missing",
-        "date_of_birth": "Date of birth is required"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "email", "message": "Email missing"},
+            {"field": "username", "message": "Username missing"},
+            {"field": "password", "message": "Password missing"},
+            {"field": "date_of_birth", "message": "Date of birth is required"}
+          ]
+        }
       }
     """
 
@@ -69,15 +76,22 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "email": "Email invalid",
-        "username": "Username too short",
-        "password": "Password too short",
-        "date_of_birth": "Date of birth is required"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "email", "message": "Email invalid"},
+            {"field": "username", "message": "Username too short"},
+            {"field": "password", "message": "Password too short"},
+            {"field": "date_of_birth", "message": "Date of birth is required"}
+          ]
+        }
       }
     """
 
@@ -93,14 +107,21 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "username": "Username too long",
-        "password": "Password too long",
-        "date_of_birth": "Date of birth is required"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "username", "message": "Username too long"},
+            {"field": "password", "message": "Password too long"},
+            {"field": "date_of_birth", "message": "Date of birth is required"}
+          ]
+        }
       }
     """
 
@@ -116,14 +137,21 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "email": "Email already in use",
-        "username": "Username already in use",
-        "date_of_birth": "Date of birth is required"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "email", "message": "Email already in use"},
+            {"field": "username", "message": "Username already in use"},
+            {"field": "date_of_birth", "message": "Date of birth is required"}
+          ]
+        }
       }
     """
 
@@ -141,7 +169,7 @@ Feature: Registering a new user.
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And the client response should contain "E-Mail wird bereits verwendet"
     And the client response should contain "Benutzername wird bereits ben"
@@ -161,7 +189,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "204"
     And the user "Testuser" should not exist
 
@@ -178,7 +206,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "201"
     And I should get the json object:
     """
@@ -204,12 +232,19 @@ Feature: Registering a new user.
 
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "username": "Username must not contain an email address"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "username", "message": "Username must not contain an email address"}
+          ]
+        }
       }
     """
 
@@ -227,12 +262,19 @@ Feature: Registering a new user.
 
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "username": "Username invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "username", "message": "Username invalid"}
+          ]
+        }
       }
     """
 
@@ -245,15 +287,22 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "email": "Email missing",
-        "username": "Username missing",
-        "password": "Password missing",
-        "date_of_birth": "Date of birth is required"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "email", "message": "Email missing"},
+            {"field": "username", "message": "Username missing"},
+            {"field": "password", "message": "Password missing"},
+            {"field": "date_of_birth", "message": "Date of birth is required"}
+          ]
+        }
       }
     """
 
@@ -269,7 +318,7 @@ Feature: Registering a new user.
     """
     And I have a request header "HTTP_ACCEPT_LANGUAGE" with value "de_DE"
     And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "406"
 
   Scenario: Invalid TLD in email
@@ -286,12 +335,19 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "email": "Email invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "email", "message": "Email invalid"}
+          ]
+        }
       }
     """
 
@@ -308,7 +364,7 @@ Feature: Registering a new user.
     And the current time is "01.08.2014 14:00"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "201"
     And I should get the json object:
     """
@@ -331,7 +387,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And the client response should contain "date_of_birth"
 
@@ -348,7 +404,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And the client response should contain "date_of_birth"
 
@@ -365,7 +421,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And the client response should contain "date_of_birth"
 
@@ -382,7 +438,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "201"
 
   Scenario: Registration as child without parent email should fail
@@ -398,7 +454,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And the client response should contain "parent_email"
 
@@ -416,7 +472,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "201"
 
   Scenario: Registration as child with invalid parent email should fail
@@ -433,7 +489,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And the client response should contain "parent_email"
 
@@ -451,7 +507,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And the client response should contain "parent_email"
 
@@ -468,7 +524,7 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "422"
     And the client response should contain "parent_email"
 
@@ -485,5 +541,5 @@ Feature: Registering a new user.
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/user"
+    And I request "POST" "/api/users"
     Then the response status code should be "204"

@@ -4,25 +4,24 @@ declare(strict_types=1);
 
 namespace App\Api;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Studio\StudioApiFacade;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\User;
-use OpenAPI\Server\Api\StudioApiInterface;
-use OpenAPI\Server\Model\CreateStudioErrorResponse;
+use OpenAPI\Server\Api\StudiosApiInterface;
 use OpenAPI\Server\Model\StudioAddProjectRequest;
 use OpenAPI\Server\Model\StudioBatchAddProjectsRequest;
 use OpenAPI\Server\Model\StudioBatchAddProjectsResponse;
 use OpenAPI\Server\Model\StudioBatchAddProjectsResponseFailedInner;
 use OpenAPI\Server\Model\StudioCommentCreateRequest;
-use OpenAPI\Server\Model\UpdateStudioErrorResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 
-class StudioApi extends AbstractApiController implements StudioApiInterface
+class StudiosApi extends AbstractApiController implements StudiosApiInterface
 {
   use RateLimitTrait;
 
@@ -37,7 +36,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioGet(string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosGet(string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $limit = $this->normalizeLimit($limit);
     $cursor_id = $this->decodeIdCursor($cursor);
@@ -61,7 +60,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (!$studio instanceof Studio) {
@@ -81,7 +80,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioPost(string $accept_language, ?string $name, ?string $description, bool $is_public, bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosPost(string $accept_language, ?string $name, ?string $description, bool $is_public, bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if ($user instanceof User && null === $this->checkUserRateLimit($user, $this->studioCreateDailyLimiter)) {
@@ -99,7 +98,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
 
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $error_response = new CreateStudioErrorResponse($validation_wrapper->getErrors());
+      $error_response = ApiErrorResponse::createValidationModel($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -131,7 +130,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdPost(string $id, string $accept_language, ?string $name, ?string $description, ?bool $is_public, ?bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdPatch(string $id, string $accept_language, ?string $name, ?string $description, ?bool $is_public, ?bool $enable_comments, ?UploadedFile $image_file, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (!$studio instanceof Studio) {
@@ -157,7 +156,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     );
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $error_response = new UpdateStudioErrorResponse($validation_wrapper->getErrors());
+      $error_response = ApiErrorResponse::createValidationModel($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -183,7 +182,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $studio = $this->facade->getLoader()->loadVisibleStudio($id);
     if (!$studio instanceof Studio) {
@@ -205,7 +204,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdMembersGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdMembersGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
     if (null === $result) {
@@ -223,7 +222,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdJoinPost(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdJoinPost(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -251,7 +250,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdLeaveDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdLeaveDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -286,7 +285,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdProjectsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdProjectsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
     if (null === $result) {
@@ -304,7 +303,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdProjectsPost(string $id, StudioAddProjectRequest $studio_add_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdProjectsPost(string $id, StudioAddProjectRequest $studio_add_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -350,7 +349,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdBatchAddProjectsPost(string $id, StudioBatchAddProjectsRequest $studio_batch_add_projects_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdBatchAddProjectsPost(string $id, StudioBatchAddProjectsRequest $studio_batch_add_projects_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -400,7 +399,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdProjectsProjectIdDelete(string $id, string $project_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdProjectsProjectIdDelete(string $id, string $project_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -439,7 +438,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdCommentsCommentIdDelete(string $id, int $comment_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdCommentsCommentIdDelete(string $id, string $comment_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -462,7 +461,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
       return;
     }
 
-    $comment = $this->facade->getLoader()->loadStudioComment($comment_id);
+    $comment = $this->facade->getLoader()->loadStudioComment((int) $comment_id);
     if (null === $comment || $comment->getStudio()?->getId() !== $studio->getId()) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
@@ -477,12 +476,12 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
       return;
     }
 
-    $this->facade->getProcessor()->deleteComment($user, $comment_id);
+    $this->facade->getProcessor()->deleteComment($user, (int) $comment_id);
     $responseCode = Response::HTTP_NO_CONTENT;
   }
 
   #[\Override]
-  public function studioIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $result = $this->loadStudioForListing($id, $limit, $cursor, $responseCode);
     if (null === $result) {
@@ -500,7 +499,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdCommentsPost(string $id, StudioCommentCreateRequest $studio_comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdCommentsPost(string $id, StudioCommentCreateRequest $studio_comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -550,7 +549,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
 
     $parent_id = $studio_comment_create_request->getParentId() ?? 0;
 
-    $comment = $this->facade->getProcessor()->addComment($user, $studio, $message, $parent_id);
+    $comment = $this->facade->getProcessor()->addComment($user, $studio, $message, (int) $parent_id);
     if (null === $comment) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
@@ -563,7 +562,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdMembersUserIdPromotePost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdMembersUserIdPromotePost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $context = $this->loadMemberActionContext($id, $user_id, $responseCode);
     if (null === $context) {
@@ -581,7 +580,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdMembersUserIdDemotePost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdMembersUserIdDemotePost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $context = $this->loadMemberActionContext($id, $user_id, $responseCode);
     if (null === $context) {
@@ -599,7 +598,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdMembersUserIdBanPost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdMembersUserIdBanPost(string $id, string $user_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $context = $this->loadMemberActionContext($id, $user_id, $responseCode);
     if (null === $context) {
@@ -617,7 +616,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdActivitiesGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdActivitiesGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $logged_in_user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$logged_in_user instanceof User) {
@@ -659,7 +658,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdUserProjectsGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdUserProjectsGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -683,7 +682,7 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdJoinRequestsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function studiosIdJoinRequestsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $context = $this->loadAdminContext($id, $responseCode);
     if (null === $context) {
@@ -709,9 +708,9 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdJoinRequestsRequestIdAcceptPost(string $id, int $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdJoinRequestsRequestIdAcceptPost(string $id, string $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    $result = $this->loadAdminContextWithPendingJoinRequest($id, $request_id, $responseCode);
+    $result = $this->loadAdminContextWithPendingJoinRequest($id, (int) $request_id, $responseCode);
     if (null === $result) {
       return;
     }
@@ -721,9 +720,9 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
   }
 
   #[\Override]
-  public function studioIdJoinRequestsRequestIdDeclinePost(string $id, int $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function studiosIdJoinRequestsRequestIdDeclinePost(string $id, string $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    $result = $this->loadAdminContextWithPendingJoinRequest($id, $request_id, $responseCode);
+    $result = $this->loadAdminContextWithPendingJoinRequest($id, (int) $request_id, $responseCode);
     if (null === $result) {
       return;
     }

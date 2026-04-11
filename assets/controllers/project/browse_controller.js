@@ -1,3 +1,4 @@
+import { normalizeApiResponse } from '../../Api/ResponseHelper'
 import { Controller } from '@hotwired/stimulus'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
@@ -79,7 +80,8 @@ export default class extends Controller {
         return
       }
 
-      const projects = await response.json()
+      const responseData = await response.json()
+      const projects = Array.isArray(responseData) ? responseData : responseData?.data || []
       this._renderMyProjects(projects)
     } catch (error) {
       console.error('Error fetching my projects:', error)
@@ -101,7 +103,7 @@ export default class extends Controller {
         'id,name,author,screenshot_small,downloads,views,uploaded_string,retention_days,retention_expiry,private',
     })
     if (this.exploreCursor) {
-      params.set('offset', this.exploreCursor)
+      params.set('cursor', this.exploreCursor)
     }
 
     const url = this.apiBaseUrlValue + '/projects?' + params.toString()
@@ -123,13 +125,21 @@ export default class extends Controller {
         return
       }
 
-      const projects = await response.json()
+      const responseData = await response.json()
+      const envelope = normalizeApiResponse(responseData)
+      const projects = envelope.data || []
 
-      if (projects.length < 20) {
-        this.hasMoreExplore = false
+      if (envelope.has_more !== undefined) {
+        this.hasMoreExplore = envelope.has_more
+      } else {
+        this.hasMoreExplore = projects.length >= 20
       }
 
-      this.exploreCursor = String(parseInt(this.exploreCursor || '0', 10) + projects.length)
+      if (envelope.next_cursor) {
+        this.exploreCursor = envelope.next_cursor
+      } else {
+        this.exploreCursor = String(parseInt(this.exploreCursor || '0', 10) + projects.length)
+      }
 
       this._renderExploreProjects(projects)
       this._updateLoadMoreButton()
@@ -248,7 +258,7 @@ export default class extends Controller {
       '<i class="material-icons">open_in_new</i>' +
       escapeHtml(transOpen) +
       '</a>' +
-      '<a href="/api/project/' +
+      '<a href="/api/projects/' +
       id +
       '/catrobat" download class="projects-list-item--dropdown-item">' +
       '<i class="material-icons">download</i>' +
@@ -408,7 +418,7 @@ export default class extends Controller {
           buttonsStyling: false,
         })
         if (result.isConfirmed) {
-          await fetch(this.apiBaseUrlValue + '/project/' + projectId, {
+          await fetch(this.apiBaseUrlValue + '/projects/' + projectId, {
             method: 'DELETE',
             credentials: 'same-origin',
           })
@@ -434,7 +444,7 @@ export default class extends Controller {
         showReportDialog({
           contentType: 'project',
           contentId: projectId,
-          apiUrl: '/api/project/' + projectId + '/report',
+          apiUrl: '/api/projects/' + projectId + '/report',
           loginUrl: this.loginPathValue,
           isLoggedIn: this.isLoggedInValue,
           translations: {

@@ -12,15 +12,15 @@ Feature: Get recommended project based on a specific project
 
   Scenario: Invalid Request Header
     Given I have a request header "HTTP_ACCEPT" with value "invalid"
-    When I request "GET" "/api/project/1/recommendations?category=similar"
+    When I request "GET" "/api/projects/1/recommendations?category=similar"
     Then the response status code should be "406"
 
   Scenario: Not found
     When I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/0/recommendations?category=similar"
+    And I request "GET" "/api/projects/0/recommendations?category=similar"
     Then the response status code should be "404"
 
   Scenario: Get similar projects
     When I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/1/recommendations?category=similar"
+    And I request "GET" "/api/projects/1/recommendations?category=similar"
     Then the response status code should be "200"

@@ -18,7 +18,7 @@ Feature: Minor users cannot post comments
         "message": "Hello from adult"
       }
     """
-    And I request "POST" "/api/project/1/comments"
+    And I request "POST" "/api/projects/1/comments"
     Then the response status code should be "201"
 
   Scenario: Minor user cannot post a comment
@@ -30,5 +30,5 @@ Feature: Minor users cannot post comments
         "message": "Hello from minor"
       }
     """
-    And I request "POST" "/api/project/1/comments"
+    And I request "POST" "/api/projects/1/comments"
     Then the response status code should be "403"

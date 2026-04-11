@@ -53,7 +53,7 @@ export class ApiFetch {
   }
 }
 
-export class ApiPutFetch {
+export class ApiPatchFetch {
   constructor(
     url,
     data,
@@ -77,7 +77,7 @@ export class ApiPutFetch {
   }
 
   run() {
-    new ApiFetch(this.url, 'PUT', this.data)
+    new ApiFetch(this.url, 'PATCH', this.data)
       .generateAuthenticatedFetch()
       .then((response) => {
         switch (response.status) {
@@ -92,9 +92,16 @@ export class ApiPutFetch {
             MessageDialogs.showErrorMessage(globalConfiguration.messages.authenticationErrorText)
             break
           case 422:
-            response.json().then((errors) => {
-              console.error(this.componentName + ' ERROR 422', errors, response)
-              MessageDialogs.showErrorList(errors)
+            response.json().then((body) => {
+              console.error(this.componentName + ' ERROR 422', body, response)
+              const details = body?.error?.details
+              if (Array.isArray(details)) {
+                MessageDialogs.showErrorList(details.map((d) => d.message))
+              } else if (body?.error?.message) {
+                MessageDialogs.showErrorMessage(body.error.message)
+              } else {
+                MessageDialogs.showErrorList(body)
+              }
             })
             break
           default:

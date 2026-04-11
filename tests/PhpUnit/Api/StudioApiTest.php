@@ -9,7 +9,7 @@ use App\Api\Services\Studio\StudioApiFacade;
 use App\Api\Services\Studio\StudioApiLoader;
 use App\Api\Services\Studio\StudioApiProcessor;
 use App\Api\Services\Studio\StudioResponseManager;
-use App\Api\StudioApi;
+use App\Api\StudiosApi;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
@@ -31,10 +31,10 @@ use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 /**
  * @internal
  */
-#[CoversClass(StudioApi::class)]
+#[CoversClass(StudiosApi::class)]
 final class StudioApiTest extends TestCase
 {
-  private StudioApi $api;
+  private StudiosApi $api;
   private \PHPUnit\Framework\MockObject\Stub&StudioApiFacade $facade;
   private \PHPUnit\Framework\MockObject\Stub&StudioApiLoader $loader;
   private \PHPUnit\Framework\MockObject\Stub&StudioApiProcessor $processor;
@@ -55,7 +55,7 @@ final class StudioApiTest extends TestCase
     $this->facade->method('getResponseManager')->willReturn($this->response_manager);
     $this->facade->method('getAuthenticationManager')->willReturn($this->auth_manager);
 
-    $this->api = new StudioApi(
+    $this->api = new StudiosApi(
       $this->facade,
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
@@ -74,7 +74,7 @@ final class StudioApiTest extends TestCase
     $this->loader->method('loadStudiosPage')->willReturn(['studios' => [], 'has_more' => false]);
     $this->response_manager->method('createStudioListResponse')->willReturn($expected);
 
-    $result = $this->api->studioGet('en', 20, null, $response_code, $response_headers);
+    $result = $this->api->studiosGet('en', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(StudioListResponse::class, $result);
@@ -86,7 +86,7 @@ final class StudioApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $result = $this->api->studioGet('en', 20, 'invalid!!!', $response_code, $response_headers);
+    $result = $this->api->studiosGet('en', 20, 'invalid!!!', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
     $this->assertNull($result);
@@ -100,7 +100,7 @@ final class StudioApiTest extends TestCase
 
     $this->loader->method('loadVisibleStudio')->willReturn(null);
 
-    $result = $this->api->studioIdGet('nonexistent', 'en', $response_code, $response_headers);
+    $result = $this->api->studiosIdGet('nonexistent', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -118,7 +118,7 @@ final class StudioApiTest extends TestCase
     $this->auth_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->loader->method('loadStudioUser')->willReturn(null);
 
-    $result = $this->api->studioIdGet('some-id', 'en', $response_code, $response_headers);
+    $result = $this->api->studiosIdGet('some-id', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertNotNull($result);
@@ -132,7 +132,7 @@ final class StudioApiTest extends TestCase
 
     $this->loader->method('loadVisibleStudio')->willReturn(null);
 
-    $result = $this->api->studioIdMembersGet('nonexistent', 'en', 20, null, $response_code, $response_headers);
+    $result = $this->api->studiosIdMembersGet('nonexistent', 'en', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($result);
@@ -152,7 +152,7 @@ final class StudioApiTest extends TestCase
       ->willReturn(new StudioMemberListResponse())
     ;
 
-    $result = $this->api->studioIdMembersGet('some-id', 'en', 20, null, $response_code, $response_headers);
+    $result = $this->api->studiosIdMembersGet('some-id', 'en', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(StudioMemberListResponse::class, $result);
@@ -166,7 +166,7 @@ final class StudioApiTest extends TestCase
 
     $this->auth_manager->method('getAuthenticatedUser')->willReturn(null);
 
-    $this->api->studioIdJoinPost('some-id', 'en', $response_code, $response_headers);
+    $this->api->studiosIdJoinPost('some-id', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
   }
@@ -186,7 +186,7 @@ final class StudioApiTest extends TestCase
     $studioUser = $this->createStub(StudioUser::class);
     $this->loader->method('loadStudioUser')->willReturn($studioUser);
 
-    $this->api->studioIdJoinPost('some-id', 'en', $response_code, $response_headers);
+    $this->api->studiosIdJoinPost('some-id', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_CONFLICT, $response_code);
   }
@@ -207,7 +207,7 @@ final class StudioApiTest extends TestCase
     $studioUser->method('isAdmin')->willReturn(true);
     $this->loader->method('loadStudioUser')->willReturn($studioUser);
 
-    $this->api->studioIdLeaveDelete('some-id', 'en', $response_code, $response_headers);
+    $this->api->studiosIdLeaveDelete('some-id', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
   }
@@ -226,7 +226,7 @@ final class StudioApiTest extends TestCase
       ->willReturn(new StudioProjectListResponse())
     ;
 
-    $result = $this->api->studioIdProjectsGet('some-id', 'en', 20, null, $response_code, $response_headers);
+    $result = $this->api->studiosIdProjectsGet('some-id', 'en', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(StudioProjectListResponse::class, $result);
@@ -248,7 +248,7 @@ final class StudioApiTest extends TestCase
     $request = $this->createStub(StudioAddProjectRequest::class);
     $request->method('getProjectId')->willReturn('project-1');
 
-    $this->api->studioIdProjectsPost('some-id', $request, 'en', $response_code, $response_headers);
+    $this->api->studiosIdProjectsPost('some-id', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
   }
@@ -267,7 +267,7 @@ final class StudioApiTest extends TestCase
       ->willReturn(new StudioCommentListResponse())
     ;
 
-    $result = $this->api->studioIdCommentsGet('some-id', 'en', 20, null, $response_code, $response_headers);
+    $result = $this->api->studiosIdCommentsGet('some-id', 'en', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(StudioCommentListResponse::class, $result);
@@ -292,7 +292,7 @@ final class StudioApiTest extends TestCase
     $request = $this->createStub(StudioCommentCreateRequest::class);
     $request->method('getMessage')->willReturn('   ');
 
-    $result = $this->api->studioIdCommentsPost('some-id', $request, 'en', $response_code, $response_headers);
+    $result = $this->api->studiosIdCommentsPost('some-id', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
     $this->assertNull($result);
@@ -323,7 +323,7 @@ final class StudioApiTest extends TestCase
     $request = $this->createStub(StudioCommentCreateRequest::class);
     $request->method('getMessage')->willReturn('Hello studio!');
 
-    $result = $this->api->studioIdCommentsPost('some-id', $request, 'en', $response_code, $response_headers);
+    $result = $this->api->studiosIdCommentsPost('some-id', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_CREATED, $response_code);
     $this->assertInstanceOf(StudioCommentResponse::class, $result);
@@ -344,7 +344,7 @@ final class StudioApiTest extends TestCase
 
     $request = $this->createStub(StudioCommentCreateRequest::class);
 
-    $result = $this->api->studioIdCommentsPost('some-id', $request, 'en', $response_code, $response_headers);
+    $result = $this->api->studiosIdCommentsPost('some-id', $request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
     $this->assertNull($result);
@@ -363,7 +363,7 @@ final class StudioApiTest extends TestCase
     $this->loader->method('loadVisibleStudio')->willReturn($studio);
     $this->loader->method('loadStudioUser')->willReturn(null);
 
-    $this->api->studioIdProjectsProjectIdDelete('some-id', 'project-1', 'en', $response_code, $response_headers);
+    $this->api->studiosIdProjectsProjectIdDelete('some-id', 'project-1', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
   }

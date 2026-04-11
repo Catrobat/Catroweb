@@ -23,7 +23,7 @@ Feature: Update project
         "screenshot": "data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
       }
     """
-    And I request "PUT" "/api/project/1"
+    And I request "PATCH" "/api/projects/1"
     Then the response code should be "204"
     And the following projects exist in the database:
       | id | name         | description                                     | credits                             | private |
@@ -42,14 +42,21 @@ Feature: Update project
         "screenshot": "data:image/png;base64,Catro/web"
       }
     """
-    And I request "PUT" "/api/project/1"
+    And I request "PATCH" "/api/projects/1"
     Then the response code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name cannot be empty",
-        "credits": "Notes and credits too long",
-        "screenshot": "Project screenshot invalid or not supported"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name cannot be empty"},
+            {"field": "credits", "message": "Notes and credits too long"},
+            {"field": "screenshot", "message": "Project screenshot invalid or not supported"}
+          ]
+        }
       }
     """
     And the following projects exist in the database:
@@ -66,7 +73,7 @@ Feature: Update project
         "not_for_kids": true
       }
     """
-    And I request "PUT" "/api/project/1"
+    And I request "PATCH" "/api/projects/1"
     Then the response status code should be "204"
 
   Scenario: Mark project as safe for kids via API
@@ -79,7 +86,7 @@ Feature: Update project
         "not_for_kids": true
       }
     """
-    And I request "PUT" "/api/project/1"
+    And I request "PATCH" "/api/projects/1"
     Then the response status code should be "204"
     Given I have the following JSON request body:
     """
@@ -87,7 +94,7 @@ Feature: Update project
         "not_for_kids": false
       }
     """
-    And I request "PUT" "/api/project/1"
+    And I request "PATCH" "/api/projects/1"
     Then the response status code should be "204"
 
   Scenario: Cannot toggle not-for-kids when moderator-locked
@@ -101,5 +108,5 @@ Feature: Update project
         "not_for_kids": false
       }
     """
-    And I request "PUT" "/api/project/1"
+    And I request "PATCH" "/api/projects/1"
     Then the response status code should be "204"
