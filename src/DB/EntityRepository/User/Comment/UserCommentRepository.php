@@ -53,7 +53,7 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function findCommentReplies(string $comment_id): array
   {
-    return $this->findBy(['parent_id' => $comment_id]);
+    return $this->findBy(['parent_id' => $comment_id], ['uploadDate' => 'ASC']);
   }
 
   public function countCommentReplies(string $comment_id): int

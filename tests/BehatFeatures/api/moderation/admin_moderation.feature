@@ -58,7 +58,8 @@ Feature: Admin Moderation API
 
   Scenario: Admin can accept a report
     # Create a report
-    Given I use a valid JWT Bearer token for "User2"
+    Given the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
+    And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
@@ -78,7 +79,8 @@ Feature: Admin Moderation API
 
   Scenario: Admin can reject a report
     # Create a report
-    Given I use a valid JWT Bearer token for "User2"
+    Given the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
+    And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
@@ -108,7 +110,8 @@ Feature: Admin Moderation API
 
   Scenario: Resolve report with invalid action returns 400
     # Create a report
-    Given I use a valid JWT Bearer token for "User2"
+    Given the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
+    And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
@@ -137,7 +140,8 @@ Feature: Admin Moderation API
     Then the response status code should be "403"
 
   Scenario: Resolving an already resolved report returns 400
-    Given I use a valid JWT Bearer token for "User2"
+    Given the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
+    And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
@@ -208,6 +212,7 @@ Feature: Admin Moderation API
 
   Scenario: Admin can approve an appeal
     Given the project "project1" is auto-hidden
+    And the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -228,6 +233,7 @@ Feature: Admin Moderation API
 
   Scenario: Admin can reject an appeal
     Given the project "project1" is auto-hidden
+    And the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -258,6 +264,7 @@ Feature: Admin Moderation API
 
   Scenario: Resolve appeal with invalid action returns 400
     Given the project "project1" is auto-hidden
+    And the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -287,6 +294,7 @@ Feature: Admin Moderation API
 
   Scenario: Resolving an already resolved appeal returns 400
     Given the project "project1" is auto-hidden
+    And the next Uuid Value will be "00000000-0000-0000-0000-000000000001"
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:

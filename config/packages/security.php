@@ -336,13 +336,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/comments/[0-9]+/replies/?$',
+          'path' => '^/api/comments/[a-zA-Z0-9-]+/replies/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
-          'path' => '^/api/comments/[0-9]+/translation/?$',
+          'path' => '^/api/comments/[a-zA-Z0-9-]+/translation/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
           'requires_channel' => '%env(SECURE_SCHEME)%',

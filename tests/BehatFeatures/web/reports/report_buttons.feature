@@ -71,21 +71,21 @@ Feature: Report button visibility and dialog
 
   Scenario: Report button is visible on another users comment
     Given there are comments:
-      | id | project_id | user_id | text           | upload_date         | parent_id |
-      | 10 | 1          | 1       | Catrobats text | 2013-01-01 12:00:00 |           |
+      | id                                   | project_id | user_id | text           | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 1       | Catrobats text | 2013-01-01 12:00:00 |           |
     And I log in as "User2"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#comment-report-button-10" should exist
+    Then the element "#comment-report-button-00000000-0000-0000-0000-000000000010" should exist
 
   Scenario: Report button is not visible on own comment
     Given there are comments:
-      | id | project_id | user_id | text       | upload_date         | parent_id |
-      | 10 | 1          | 1       | My comment | 2013-01-01 12:00:00 |           |
+      | id                                   | project_id | user_id | text       | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 1       | My comment | 2013-01-01 12:00:00 |           |
     And I log in as "Catrobat"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#comment-report-button-10" should not exist
+    Then the element "#comment-report-button-00000000-0000-0000-0000-000000000010" should not exist
 
   # ---------------------------------------------------------------------------
   # Whitelisted content: report button hidden
@@ -120,12 +120,12 @@ Feature: Report button visibility and dialog
 
   Scenario: Report button is not visible on comment by approved user
     Given there are comments:
-      | id | project_id | user_id | text          | upload_date         | parent_id |
-      | 10 | 1          | 1       | Approved text | 2013-01-01 12:00:00 |           |
+      | id                                   | project_id | user_id | text          | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 1       | Approved text | 2013-01-01 12:00:00 |           |
     And the users are approved:
       | name     |
       | Catrobat |
     And I log in as "User2"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#comment-report-button-10" should not exist
+    Then the element "#comment-report-button-00000000-0000-0000-0000-000000000010" should not exist

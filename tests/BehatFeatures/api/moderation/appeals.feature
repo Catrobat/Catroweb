@@ -97,7 +97,7 @@ Feature: Moderation Appeals API
   # ---------------------------------------------------------------------------
 
   Scenario: Appeal a hidden comment (authenticated owner)
-    Given the comment 10 is auto-hidden
+    Given the comment "00000000-0000-0000-0000-000000000010" is auto-hidden
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -108,7 +108,7 @@ Feature: Moderation Appeals API
     Then the response status code should be "201"
 
   Scenario: Appeal a comment requires authentication
-    Given the comment 10 is auto-hidden
+    Given the comment "00000000-0000-0000-0000-000000000010" is auto-hidden
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/appeal"
     Then the response status code should be "401"
 
@@ -123,7 +123,7 @@ Feature: Moderation Appeals API
     Then the response status code should be "400"
 
   Scenario: Non-owner cannot appeal a comment (403)
-    Given the comment 10 is auto-hidden
+    Given the comment "00000000-0000-0000-0000-000000000010" is auto-hidden
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
