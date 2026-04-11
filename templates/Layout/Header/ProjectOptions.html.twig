@@ -70,7 +70,7 @@
         role="menuitem"
         data-content-type="project"
         data-content-id="{{ project.id }}"
-        data-report-url="{{ url('open_api_server_moderation_projectidreportpost', {id: project.id}) }}"
+        data-report-url="{{ url('open_api_server_moderation_projectsidreportpost', {id: project.id}) }}"
         data-login-url="{{ url('login') }}"
         data-logged-in="{{ app.user ? 'true' : 'false' }}"
         data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'project'}, 'catroweb') }}"

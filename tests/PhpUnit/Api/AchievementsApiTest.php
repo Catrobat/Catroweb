@@ -14,6 +14,7 @@ use App\DB\Entity\User\User;
 use App\User\UserManager;
 use OpenAPI\Server\Model\AchievementResponse;
 use OpenAPI\Server\Model\AchievementsCountResponse;
+use OpenAPI\Server\Model\AchievementsDataResponse;
 use OpenAPI\Server\Model\AchievementsListResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
@@ -175,7 +176,7 @@ class AchievementsApiTest extends TestCase
 
     $this->user_manager->method('find')->willReturn(null);
 
-    $response = $this->object->userIdAchievementsGet('non-existent-id', 'en', $response_code, $response_headers);
+    $response = $this->object->usersIdAchievementsGet('non-existent-id', 'en', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -209,12 +210,13 @@ class AchievementsApiTest extends TestCase
     $response_manager->method('createAchievementResponseList')->willReturn([$achievement_response]);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->object->userIdAchievementsGet('valid-id', 'en', $response_code, $response_headers);
+    $response = $this->object->usersIdAchievementsGet('valid-id', 'en', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
-    $this->assertIsArray($response);
-    $this->assertCount(1, $response);
-    $this->assertInstanceOf(AchievementResponse::class, $response[0]);
+    $this->assertInstanceOf(AchievementsDataResponse::class, $response);
+    $data = $response->getData();
+    $this->assertNotNull($data);
+    $this->assertCount(1, $data);
   }
 
   private function createNoLimitRateLimiterFactory(string $id): RateLimiterFactory

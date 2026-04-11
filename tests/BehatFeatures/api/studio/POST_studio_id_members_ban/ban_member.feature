@@ -17,21 +17,21 @@ Feature: Ban a studio member
 
   Scenario: Admin can ban a member
     Given I use a valid JWT Bearer token for "StudioAdmin"
-    And I request "POST" "/api/studio/1/members/2/ban"
+    And I request "POST" "/api/studios/1/members/2/ban"
     Then the response status code should be "204"
 
   Scenario: Banned member should no longer appear in members list
     Given I use a valid JWT Bearer token for "StudioAdmin"
-    And I request "POST" "/api/studio/1/members/2/ban"
+    And I request "POST" "/api/studios/1/members/2/ban"
     Then the response status code should be "204"
-    When I request "GET" "/api/studio/1/members"
+    When I request "GET" "/api/studios/1/members"
     Then the response status code should be "200"
 
   Scenario: Non-admin cannot ban
     Given I use a valid JWT Bearer token for "Member"
-    And I request "POST" "/api/studio/1/members/2/ban"
+    And I request "POST" "/api/studios/1/members/2/ban"
     Then the response status code should be "403"
 
   Scenario: Unauthenticated user cannot ban
-    Given I request "POST" "/api/studio/1/members/2/ban"
+    Given I request "POST" "/api/studios/1/members/2/ban"
     Then the response status code should be "401"

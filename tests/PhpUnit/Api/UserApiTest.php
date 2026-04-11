@@ -13,17 +13,17 @@ use App\Api\Services\User\UserApiProcessor;
 use App\Api\Services\User\UserRequestValidator;
 use App\Api\Services\User\UserResponseManager;
 use App\Api\Services\ValidationWrapper;
-use App\Api\UserApi;
+use App\Api\UsersApi;
 use App\DB\Entity\User\User;
 use App\Security\Captcha\CaptchaVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
+use OpenAPI\Server\Model\ErrorResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
-use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
-use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
+use OpenAPI\Server\Model\UsersListResponse;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\Exception;
@@ -37,10 +37,10 @@ use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 /**
  * @internal
  */
-#[CoversClass(UserApi::class)]
+#[CoversClass(UsersApi::class)]
 final class UserApiTest extends TestCase
 {
-  protected UserApi $object;
+  protected UsersApi $object;
 
   protected Stub&UserApiFacade $facade;
 
@@ -55,8 +55,8 @@ final class UserApiTest extends TestCase
     // Setup ResponseManager stub
     $response_manager = $this->createStub(UserResponseManager::class);
     $response_manager->method('createExtendedUserDataResponse')->willReturn($this->createStub(ExtendedUserDataResponse::class));
-    $response_manager->method('createBasicUserDataResponse')->willReturn($this->createStub(BasicUserDataResponse::class));
-    $response_manager->method('createUsersDataResponse')->willReturn([]);
+    $response_manager->method('createUserProfileResponse')->willReturn($this->createStub(BasicUserDataResponse::class));
+    $response_manager->method('createUsersListResponse')->willReturn($this->createStub(UsersListResponse::class));
     $response_manager->method('createUserRegisteredResponse')->willReturn($this->createStub(JWTResponse::class));
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
@@ -75,7 +75,7 @@ final class UserApiTest extends TestCase
     $captchaVerifier = $this->createStub(CaptchaVerifier::class);
     $captchaVerifier->method('verify')->willReturn(['success' => true, 'result' => 'test-auto-pass']);
 
-    $this->object = new UserApi(
+    $this->object = new UsersApi(
       $this->facade,
       $this->createNoLimitRateLimiterFactory('phpunit_user_registration'),
       $this->createNoLimitRateLimiterFactory('phpunit_user_password_reset'),
@@ -117,7 +117,7 @@ final class UserApiTest extends TestCase
     $register_request = $this->createStub(RegisterRequest::class);
     $register_request->method('isDryRun')->willReturn(true);
 
-    $response = $this->object->userPost($register_request, 'de', $response_code, $response_headers);
+    $response = $this->object->usersPost($register_request, 'de', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
     $this->assertNull($response);
@@ -140,11 +140,11 @@ final class UserApiTest extends TestCase
 
     $register_request = $this->createStub(RegisterRequest::class);
 
-    $response = $this->object->userPost($register_request, 'de', $response_code, $response_headers);
+    $response = $this->object->usersPost($register_request, 'de', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
 
-    $this->assertInstanceOf(RegisterErrorResponse::class, $response);
+    $this->assertInstanceOf(ErrorResponse::class, $response);
   }
 
   /**
@@ -165,7 +165,7 @@ final class UserApiTest extends TestCase
     $register_request = $this->createStub(RegisterRequest::class);
     $register_request->method('isDryRun')->willReturn(false);
 
-    $response = $this->object->userPost($register_request, 'de', $response_code, $response_headers);
+    $response = $this->object->usersPost($register_request, 'de', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_CREATED, $response_code);
 
@@ -185,7 +185,7 @@ final class UserApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $this->object->userDelete($response_code, $response_headers);
+    $this->object->usersMeDelete($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
   }
@@ -203,7 +203,7 @@ final class UserApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $this->object->userGet($response_code, $response_headers);
+    $this->object->usersMeGet($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
   }
@@ -221,7 +221,7 @@ final class UserApiTest extends TestCase
     $loader->method('findUserByID')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->userIdGet('id', $response_code, $response_headers);
+    $response = $this->object->usersIdGet('id', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -241,7 +241,7 @@ final class UserApiTest extends TestCase
     $loader->method('canAccessProfile')->willReturn(true);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->userIdGet('id', $response_code, $response_headers);
+    $response = $this->object->usersIdGet('id', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
 
@@ -261,7 +261,7 @@ final class UserApiTest extends TestCase
     $loader->method('searchUsers')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $this->object->usersSearchGet('query', 20, 0, null, '', $response_code, $response_headers);
+    $this->object->usersSearchGet('query', 20, null, '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
   }
@@ -287,7 +287,7 @@ final class UserApiTest extends TestCase
     $update_user_request = $this->createStub(UpdateUserRequest::class);
     $update_user_request->method('isDryRun')->willReturn(true);
 
-    $response = $this->object->userPut($update_user_request, 'de', $response_code, $response_headers);
+    $response = $this->object->usersMePatch($update_user_request, 'de', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
     $this->assertNull($response);
@@ -313,11 +313,11 @@ final class UserApiTest extends TestCase
 
     $update_user_request = $this->createStub(UpdateUserRequest::class);
 
-    $response = $this->object->userPut($update_user_request, 'de', $response_code, $response_headers);
+    $response = $this->object->usersMePatch($update_user_request, 'de', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
 
-    $this->assertInstanceOf(UpdateUserErrorResponse::class, $response);
+    $this->assertInstanceOf(ErrorResponse::class, $response);
   }
 
   /**
@@ -342,7 +342,7 @@ final class UserApiTest extends TestCase
     $update_user_request = $this->createStub(UpdateUserRequest::class);
     $update_user_request->method('isDryRun')->willReturn(false);
 
-    $response = $this->object->userPut($update_user_request, 'de', $response_code, $response_headers);
+    $response = $this->object->usersMePatch($update_user_request, 'de', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
 
@@ -367,7 +367,7 @@ final class UserApiTest extends TestCase
     $captchaVerifier = $this->createStub(CaptchaVerifier::class);
     $captchaVerifier->method('verify')->willReturn(['success' => false, 'result' => 'verification-failed']);
 
-    $object = new UserApi(
+    $object = new UsersApi(
       $this->facade,
       $this->createNoLimitRateLimiterFactory('phpunit_user_registration'),
       $this->createNoLimitRateLimiterFactory('phpunit_user_password_reset'),
@@ -382,7 +382,7 @@ final class UserApiTest extends TestCase
     $register_request = $this->createStub(RegisterRequest::class);
     $register_request->method('isDryRun')->willReturn(false);
 
-    $response = $object->userPost($register_request, 'de', $response_code, $response_headers);
+    $response = $object->usersPost($register_request, 'de', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_FORBIDDEN, $response_code);
     $this->assertSame('verification-failed', $response_headers['X-Captcha-Result']);

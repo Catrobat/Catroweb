@@ -64,38 +64,45 @@ Feature: Get recommended programs on homepage
       | Other6  |
       | Other   |
 
-  Scenario: Get recommended projects with limit 2
+  Scenario: Cursor pagination - page 1 then page 2 via cursor
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=recommended&limit=2"
+    Then the response status code should be "200"
+    Then the response should contain projects in the following order:
+      | Name    |
+      | Game    |
+      | Minions |
+    And the client response should contain "has_more"
+    And I save the next_cursor from the response
+    When I request page 2 with the saved cursor at "/api/projects/?category=recommended&limit=2"
+    Then the response status code should be "200"
+    Then the response should contain projects in the following order:
+      | Name   |
+      | Other2 |
+      | Other4 |
+
+  Scenario: Get recommended projects with limit 4
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/projects/?category=recommended&limit=4"
     Then the response status code should be "200"
     Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name    |
       | Game    |
       | Minions |
+      | Other2  |
+      | Other4  |
 
-
-  Scenario: Get recommended projects with offset 2
+  Scenario: Get recommended projects with limit 3
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?category=recommended&offset=2"
+    And I request "GET" "/api/projects/?category=recommended&limit=3"
     Then the response status code should be "200"
     Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
-      | Name   |
-      | Other2 |
-      | Other4 |
-      | Other6 |
-      | Other  |
-
-  Scenario: Get recommended projects with limit 2 and offset 2
-    Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?category=recommended&limit=2&offset=2"
-    Then the response status code should be "200"
-    Then the response should have the default projects model structure
-    Then the response should contain projects in the following order:
-      | Name   |
-      | Other2 |
-      | Other  |
+      | Name    |
+      | Game    |
+      | Minions |
+      | Other2  |
 
 
   Scenario: Get recommended projects with luna flavor

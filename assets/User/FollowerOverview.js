@@ -129,8 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!followerCards || !followingCards) return
 
-    const followersUrl = baseUrl + '/api/user/' + userId + '/followers'
-    const followingUrl = baseUrl + '/api/user/' + userId + '/following'
+    const followersUrl = baseUrl + '/api/users/' + userId + '/followers'
+    const followingUrl = baseUrl + '/api/users/' + userId + '/following'
 
     Promise.all([
       fetch(followersUrl, { credentials: 'same-origin' }).then((r) => {
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return
     }
 
-    const url = baseUrl + '/api/user/' + targetUserId + '/follow'
+    const url = baseUrl + '/api/users/' + targetUserId + '/follow'
     fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
       buttonsStyling: false,
     }).then((result) => {
       if (result.value) {
-        const url = baseUrl + '/api/user/' + targetUserId + '/unfollow'
+        const url = baseUrl + '/api/users/' + targetUserId + '/unfollow'
         fetch(url, {
           method: 'DELETE',
           credentials: 'same-origin',

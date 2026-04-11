@@ -4,25 +4,22 @@ declare(strict_types=1);
 
 namespace App\Api;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Studio\StudioApiLoader;
 use App\Api\Services\Studio\StudioResponseManager;
 use App\Api\Services\User\UserApiFacade;
+use App\Api\Traits\CursorPaginationTrait;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Security\Captcha\CaptchaVerifier;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
 use Doctrine\ORM\EntityManagerInterface;
-use OpenAPI\Server\Api\UserApiInterface;
-use OpenAPI\Server\Model\BasicUserDataResponse;
-use OpenAPI\Server\Model\ExtendedUserDataResponse;
-use OpenAPI\Server\Model\JWTResponse;
-use OpenAPI\Server\Model\RegisterErrorResponse;
+use OpenAPI\Server\Api\UsersApiInterface;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
 use OpenAPI\Server\Model\StudioListResponse;
-use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
 use OpenAPI\Server\Model\UserDataExportResponse;
 use OpenAPI\Server\Model\UserDataExportResponseCommentsInner;
@@ -34,8 +31,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 
-class UserApi extends AbstractApiController implements UserApiInterface
+class UsersApi extends AbstractApiController implements UsersApiInterface
 {
+  use CursorPaginationTrait;
   use RateLimitTrait;
 
   private const int MAX_LIMIT = 50;
@@ -54,7 +52,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function userDataExportGet(int &$responseCode, array &$responseHeaders): array|object|null
+  public function usersMeDataExportGet(int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
@@ -79,7 +77,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
    * @throws \Exception
    */
   #[\Override]
-  public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
+  public function usersPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
     if (null === $this->checkIpRateLimit($ip, $this->registrationBurstLimiter)) {
@@ -92,7 +90,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
 
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $error_response = new RegisterErrorResponse($validation_wrapper->getErrors());
+      $error_response = ApiErrorResponse::createValidationModel($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -126,7 +124,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function userDelete(int &$responseCode, array &$responseHeaders): void
+  public function usersMeDelete(int &$responseCode, array &$responseHeaders): void
   {
     $responseCode = Response::HTTP_NO_CONTENT;
 
@@ -138,7 +136,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
    * @throws \Exception
    */
   #[\Override]
-  public function userGet(&$responseCode, array &$responseHeaders): ExtendedUserDataResponse
+  public function usersMeGet(int &$responseCode, array &$responseHeaders): array|object|null
   {
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createExtendedUserDataResponse(
@@ -151,7 +149,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function userIdGet(string $id, int &$responseCode, array &$responseHeaders): ?BasicUserDataResponse
+  public function usersIdGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getLoader()->findUserByID($id);
 
@@ -177,7 +175,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function userIdStudiosGet(string $id, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): ?StudioListResponse
+  public function userIdStudiosGet(string $id, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getLoader()->findUserByID($id);
 
@@ -232,14 +230,14 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function userPut(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function usersMePatch(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($user, $update_user_request, $accept_language);
 
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $error_response = new UpdateUserErrorResponse($validation_wrapper->getErrors());
+      $error_response = ApiErrorResponse::createValidationModel($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -264,12 +262,22 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function usersSearchGet(string $query, int $limit, int $offset, ?string $cursor, string $attributes, int &$responseCode, array &$responseHeaders): array
+  public function usersSearchGet(string $query, int $limit, ?string $cursor, string $attributes, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $users = $this->facade->getLoader()->searchUsers($query, $limit, $offset);
+    $limit = min(max($limit, 1), self::MAX_LIMIT);
+    $offset = $this->decodeCursorToOffset($cursor);
+
+    $users = $this->facade->getLoader()->searchUsers($query, $limit + 1, $offset);
+
+    $has_more = count($users) > $limit;
+    if ($has_more) {
+      array_pop($users);
+    }
+
+    $next_cursor = $has_more ? base64_encode((string) ($offset + $limit)) : null;
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createUsersDataResponse($users, $attributes);
+    $response = $this->facade->getResponseManager()->createUsersListResponse($users, $has_more, $next_cursor, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -277,7 +285,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language, int &$responseCode, array &$responseHeaders): ?RegisterErrorResponse
+  public function usersResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
     if (null === $this->checkIpRateLimit($ip, $this->passwordResetBurstLimiter)) {
@@ -290,7 +298,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
 
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $error_response = new RegisterErrorResponse($validation_wrapper->getErrors());
+      $error_response = ApiErrorResponse::createValidationModel($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -313,12 +321,22 @@ class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   #[\Override]
-  public function usersGet(string $query, int $limit, int $offset, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function usersGet(?string $query, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $users = $this->facade->getLoader()->getAllUsers($query, $limit, $offset);
+    $limit = min(max($limit, 1), self::MAX_LIMIT);
+    $offset = $this->decodeCursorToOffset($cursor);
+
+    $users = $this->facade->getLoader()->getAllUsers($query, $limit + 1, $offset);
+
+    $has_more = count($users) > $limit;
+    if ($has_more) {
+      array_pop($users);
+    }
+
+    $next_cursor = $has_more ? base64_encode((string) ($offset + $limit)) : null;
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createUsersDataResponse($users, 'ALL');
+    $response = $this->facade->getResponseManager()->createUsersListResponse($users, $has_more, $next_cursor, 'ALL');
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 

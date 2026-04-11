@@ -36,33 +36,38 @@ Feature: User public projects
       | project 7  |
       | project 9  |
 
-  Scenario: Get user public projects with limit = 1 and offset = 0
+  Scenario: Cursor pagination - page 1 then page 2 via cursor
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/user/user-1/?limit=1&offset=0"
+    And I request "GET" "/api/projects/user/user-1/?limit=2"
     Then the response status code should be "200"
-    Then the response should have the default projects model structure
+    Then the response should contain projects in the following order:
+      | Name       |
+      | project 1  |
+      | project 10 |
+    And the client response should contain "has_more"
+    And I save the next_cursor from the response
+    When I request page 2 with the saved cursor at "/api/projects/user/user-1/?limit=2"
+    Then the response status code should be "200"
     Then the response should contain projects in the following order:
       | Name      |
-      | project 1 |
+      | project 3 |
+      | project 6 |
 
-  Scenario: Get user public projects with limit = 1 and offset = 1
+  Scenario: Get user public projects for user-2 with limit = 2
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/user/user-2/?limit=1&offset=1"
+    And I request "GET" "/api/projects/user/user-2/?limit=2"
     Then the response status code should be "200"
     Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name      |
+      | project 2 |
       | project 5 |
 
-  Scenario: Get user public projects with offset = 1
+  Scenario: Get user public projects for user-3
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/user/user-3/?offset=1"
+    And I request "GET" "/api/projects/user/user-3/"
     Then the response status code should be "200"
     Then the response should have the default projects model structure
-    Then I should get the json object:
-      """
-      []
-      """
 
   Scenario: Get user public projects with maxVersion = 0.984
     And I have a request header "HTTP_ACCEPT" with value "application/json"
@@ -81,15 +86,19 @@ Feature: User public projects
     Then the response status code should be "200"
     Then I should get the json object:
       """
-      [
-        {
-          "id": "2",
-          "name": "project 2",
-          "author": "User1",
-          "views": 50,
-          "flavor": "luna"
-        }
-      ]
+      {
+        "data": [
+          {
+            "id": "2",
+            "name": "project 2",
+            "author": "User1",
+            "views": 50,
+            "flavor": "luna"
+          }
+        ],
+
+        "has_more": false
+      }
       """
 
   Scenario: Get user public projects with flavor = luna

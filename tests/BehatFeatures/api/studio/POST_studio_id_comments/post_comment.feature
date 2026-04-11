@@ -23,7 +23,7 @@ Feature: Post a comment to a studio
       """
       {"message": "Hello studio"}
       """
-    When I POST "/api/studio/1/comments"
+    When I POST "/api/studios/1/comments"
     Then the response status code should be "401"
 
   Scenario: Non-member cannot post comment
@@ -33,7 +33,7 @@ Feature: Post a comment to a studio
       """
       {"message": "Hello studio"}
       """
-    When I POST "/api/studio/1/comments"
+    When I POST "/api/studios/1/comments"
     Then the response status code should be "403"
 
   Scenario: Member posts comment successfully
@@ -43,7 +43,7 @@ Feature: Post a comment to a studio
       """
       {"message": "Hello studio!"}
       """
-    When I POST "/api/studio/1/comments"
+    When I POST "/api/studios/1/comments"
     Then the response status code should be "201"
     And the client response should contain "Hello studio!"
 
@@ -54,7 +54,7 @@ Feature: Post a comment to a studio
       """
       {"message": "Should fail"}
       """
-    When I POST "/api/studio/2/comments"
+    When I POST "/api/studios/2/comments"
     Then the response status code should be "403"
 
   Scenario: Empty message returns 400
@@ -64,7 +64,7 @@ Feature: Post a comment to a studio
       """
       {"message": "   "}
       """
-    When I POST "/api/studio/1/comments"
+    When I POST "/api/studios/1/comments"
     Then the response status code should be "400"
 
   Scenario: Minor user cannot post comment
@@ -80,7 +80,7 @@ Feature: Post a comment to a studio
       """
       {"message": "Hello from minor"}
       """
-    When I POST "/api/studio/1/comments"
+    When I POST "/api/studios/1/comments"
     Then the response status code should be "403"
 
   Scenario: Post comment to non-existent studio returns 404
@@ -90,7 +90,7 @@ Feature: Post a comment to a studio
       """
       {"message": "Hello"}
       """
-    When I POST "/api/studio/nonexistent/comments"
+    When I POST "/api/studios/nonexistent/comments"
     Then the response status code should be "404"
 
   Scenario: Post comment with parent_id for reply
@@ -101,8 +101,8 @@ Feature: Post a comment to a studio
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
-      {"message": "This is a reply", "parent_id": 1}
+      {"message": "This is a reply", "parent_id": "1"}
       """
-    When I POST "/api/studio/1/comments"
+    When I POST "/api/studios/1/comments"
     Then the response status code should be "201"
     And the client response should contain "This is a reply"

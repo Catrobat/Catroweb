@@ -19,7 +19,8 @@ export class FeaturedBanner {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()
       })
-      .then((items) => {
+      .then((response) => {
+        const items = Array.isArray(response) ? response : response?.data || []
         if (!Array.isArray(items) || items.length === 0) {
           this.removeSkeleton()
           this.container.style.display = 'none'

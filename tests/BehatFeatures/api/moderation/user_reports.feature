@@ -1,5 +1,5 @@
 @api @moderation
-Feature: User Reports API (GET /api/user/reports)
+Feature: User Reports API (GET /api/users/me/reports)
 
   Background:
     Given there are users:
@@ -28,7 +28,7 @@ Feature: User Reports API (GET /api/user/reports)
   # ---------------------------------------------------------------------------
 
   Scenario: Unauthenticated user gets 401
-    When I request "GET" "/api/user/reports"
+    When I request "GET" "/api/users/me/reports"
     Then the response status code should be "401"
 
   # ---------------------------------------------------------------------------
@@ -38,7 +38,7 @@ Feature: User Reports API (GET /api/user/reports)
   Scenario: Authenticated user with no reports gets empty data
     Given I use a valid JWT Bearer token for "User3"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the response should be in json format
     And the client response should contain "data"
@@ -55,7 +55,7 @@ Feature: User Reports API (GET /api/user/reports)
       | 102 | User3    | project      | 1          | inappropriate | new   | 2024-06-02 12:00:00 |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "spam"
     And the client response should not contain "inappropriate"
@@ -72,7 +72,7 @@ Feature: User Reports API (GET /api/user/reports)
       | 203 | Catrobat | comment      | 10         | spam          | rejected | 2024-06-03 10:00:00 | 2024-06-04 10:00:00 | User2       |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "pending"
     And the client response should contain "accepted"
@@ -89,7 +89,7 @@ Feature: User Reports API (GET /api/user/reports)
       | 302 | User2    | project      | 2          | inappropriate | accepted | 2024-06-02 10:00:00 | 2024-06-05 14:30:00 | User3       |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "2024-06-05"
     And the client response should contain "resolved_at"
@@ -106,7 +106,7 @@ Feature: User Reports API (GET /api/user/reports)
       | 403 | Catrobat | comment      | 10         | copyright     | new   | 2024-06-02 10:00:00 |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "spam"
     And the client response should contain "inappropriate"
@@ -124,7 +124,7 @@ Feature: User Reports API (GET /api/user/reports)
       | 503 | User2    | comment      | 10         | copyright     | new   | 2024-06-03 10:00:00 |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=2"
+    When I request "GET" "/api/users/me/reports?limit=2"
     Then the response status code should be "200"
     And the client response should contain "next_cursor"
 
@@ -141,7 +141,7 @@ Feature: User Reports API (GET /api/user/reports)
       | 704 | Catrobat | studio       | 1          | copyright     | new   | 2024-06-04 10:00:00 |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "project"
     And the client response should contain "comment"

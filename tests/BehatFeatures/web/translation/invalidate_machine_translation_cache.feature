@@ -24,7 +24,7 @@ Feature: Invalidate project cached machine translation
             "<property>": "new random value"
           }
         """
-    When I request "PUT" "/api/project/1"
+    When I request "PATCH" "/api/projects/1"
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count |
       | 1          | en              | fr-FR           | itranslate | 16          |
@@ -47,7 +47,7 @@ Feature: Invalidate project cached machine translation
             "<property>": "new value"
           }
         """
-    When I request "PUT" "/api/project/1"
+    When I request "PATCH" "/api/projects/1"
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |
@@ -93,7 +93,7 @@ Feature: Invalidate project cached machine translation
             "<property>": "new value"
           }
         """
-    When I request "PUT" "/api/project/2"
+    When I request "PATCH" "/api/projects/2"
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 1          | en              | fr-FR           | itranslate | 16          | translated project1 | translated description1 | translated credit1 |

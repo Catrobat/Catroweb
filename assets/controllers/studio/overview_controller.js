@@ -89,7 +89,7 @@ export default class extends Controller {
       params.set('cursor', this.cursor)
     }
 
-    const url = this.apiBaseUrlValue + '/studio?' + params.toString()
+    const url = this.apiBaseUrlValue + '/studios?' + params.toString()
 
     try {
       const response = await fetch(url, {
@@ -461,7 +461,7 @@ export default class extends Controller {
 
     try {
       const response = await fetch(
-        this.apiBaseUrlValue + '/studio/' + encodeURIComponent(studioId) + '/join',
+        this.apiBaseUrlValue + '/studios/' + encodeURIComponent(studioId) + '/join',
         {
           method: 'POST',
           credentials: 'same-origin',
@@ -513,7 +513,7 @@ export default class extends Controller {
 
     try {
       const response = await fetch(
-        this.apiBaseUrlValue + '/studio/' + encodeURIComponent(studioId) + '/leave',
+        this.apiBaseUrlValue + '/studios/' + encodeURIComponent(studioId) + '/leave',
         {
           method: 'DELETE',
           credentials: 'same-origin',
@@ -568,7 +568,7 @@ export default class extends Controller {
 
     try {
       const response = await fetch(
-        this.apiBaseUrlValue + '/studio/' + encodeURIComponent(studioId) + '/leave',
+        this.apiBaseUrlValue + '/studios/' + encodeURIComponent(studioId) + '/leave',
         {
           method: 'DELETE',
           credentials: 'same-origin',

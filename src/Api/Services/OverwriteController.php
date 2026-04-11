@@ -15,11 +15,11 @@ class OverwriteController extends AbstractController
   {
   }
 
-  public function projectIdCatrobatGet(string $id): ?Response
+  public function projectsIdCatrobatGet(string $id): ?Response
   {
     $responseCode = 200;
     $responseHeaders = [];
-    $result = $this->projectsApi->customProjectIdCatrobatGet($id, $responseCode, $responseHeaders);
+    $result = $this->projectsApi->customProjectsIdCatrobatGet($id, $responseCode, $responseHeaders);
 
     if (!$result instanceof BinaryFileResponse) {
       return new Response(null, $responseCode, $responseHeaders);

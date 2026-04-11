@@ -1,7 +1,7 @@
 /* global globalConfiguration */
 /* global projectConfiguration */
 
-import { ApiPutFetch } from './ApiHelper'
+import { ApiPatchFetch } from './ApiHelper'
 import MessageDialogs from '../Components/MessageDialogs'
 
 export default class ProjectApi {
@@ -18,8 +18,8 @@ export default class ProjectApi {
       typeof projectConfiguration !== 'undefined'
         ? projectConfiguration.messages.notFound
         : 'Not found'
-    new ApiPutFetch(
-      this.baseUrl + '/api/project/' + id,
+    new ApiPatchFetch(
+      this.baseUrl + '/api/projects/' + id,
       data,
       'Save Project',
       null,
@@ -31,7 +31,7 @@ export default class ProjectApi {
           response
             .json()
             .then(function (data) {
-              MessageDialogs.showErrorMessage(data.error)
+              MessageDialogs.showErrorMessage(data?.error?.message || data.error)
             })
             .catch(function () {
               const fallback =

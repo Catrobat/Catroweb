@@ -51,7 +51,7 @@ class NotificationsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->notificationIdReadPut(1, 'en', $response_code, $response_headers);
+    $this->object->notificationsIdReadPut('1', 'en', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_UNAUTHORIZED, $response_code);
   }

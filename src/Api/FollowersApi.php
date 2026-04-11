@@ -27,13 +27,13 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
   }
 
   #[\Override]
-  public function userIdFollowersGet(string $id, int &$responseCode, array &$responseHeaders): ?FollowersListResponse
+  public function usersIdFollowersGet(string $id, int &$responseCode, array &$responseHeaders): ?FollowersListResponse
   {
     return $this->handleGetList($id, $responseCode, fn (User $user): array => $this->facade->getLoader()->getFollowers($user));
   }
 
   #[\Override]
-  public function userIdFollowingGet(string $id, int &$responseCode, array &$responseHeaders): ?FollowersListResponse
+  public function usersIdFollowingGet(string $id, int &$responseCode, array &$responseHeaders): ?FollowersListResponse
   {
     return $this->handleGetList($id, $responseCode, fn (User $user): array => $this->facade->getLoader()->getFollowing($user));
   }
@@ -70,7 +70,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
   }
 
   #[\Override]
-  public function userIdFollowPost(string $id, int &$responseCode, array &$responseHeaders): void
+  public function usersIdFollowPost(string $id, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -110,7 +110,7 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
   }
 
   #[\Override]
-  public function userIdUnfollowDelete(string $id, int &$responseCode, array &$responseHeaders): void
+  public function usersIdUnfollowDelete(string $id, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {

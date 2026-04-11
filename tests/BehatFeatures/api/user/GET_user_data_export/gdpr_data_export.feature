@@ -20,7 +20,7 @@ Feature: GDPR personal data export
   Scenario: Successfully export personal data
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/data-export"
+    When I request "GET" "/api/users/me/data-export"
     Then the response status code should be "200"
     And the client response should contain "exported_at"
     And the client response should contain "profile"
@@ -37,11 +37,11 @@ Feature: GDPR personal data export
 
   Scenario: Export data requires authentication
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/data-export"
+    When I request "GET" "/api/users/me/data-export"
     Then the response status code should be "401"
 
   Scenario: Export data with invalid token returns 401
     Given I use an invalid JWT Bearer token
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/data-export"
+    When I request "GET" "/api/users/me/data-export"
     Then the response status code should be "401"

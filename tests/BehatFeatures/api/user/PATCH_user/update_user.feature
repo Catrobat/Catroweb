@@ -21,7 +21,7 @@ Feature: Update user
         "username": "User2"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "204"
 
   Scenario: Update user username
@@ -35,7 +35,7 @@ Feature: Update user
         "username": "User2"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "204"
     And the following users exist in the database:
       | name  |
@@ -53,12 +53,19 @@ Feature: Update user
         "username": "Catroweb"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "422"
     And I should get the json object:
     """
       {
-        "username": "Username already in use"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "username", "message": "Username already in use"}
+          ]
+        }
       }
     """
 
@@ -73,12 +80,19 @@ Feature: Update user
         "username": "Scratch: admin"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "422"
     And I should get the json object:
     """
       {
-        "username": "Username invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "username", "message": "Username invalid"}
+          ]
+        }
       }
     """
 
@@ -93,7 +107,7 @@ Feature: Update user
         "password": "123456"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "204"
     And the following users exist in the database:
       | name     | password |
@@ -109,12 +123,19 @@ Feature: Update user
         "password": "123456"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "422"
     And I should get the json object:
     """
       {
-        "current_password": "Current password is missing"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "current_password", "message": "Current password is missing"}
+          ]
+        }
       }
     """
 
@@ -130,12 +151,19 @@ Feature: Update user
         "password": ""
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "422"
     And I should get the json object:
     """
       {
-        "password": "Password cannot be empty"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "password", "message": "Password cannot be empty"}
+          ]
+        }
       }
     """
 
@@ -150,7 +178,7 @@ Feature: Update user
         "email": "user@catrobat.at"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "204"
     And user "Catroweb" with email "user@catrobat.at" should exist
 
@@ -164,12 +192,19 @@ Feature: Update user
         "email": "catroweb"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "422"
     And I should get the json object:
     """
       {
-        "email": "Email invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "email", "message": "Email invalid"}
+          ]
+        }
       }
     """
 
@@ -184,12 +219,19 @@ Feature: Update user
         "email": "User1@catrobat.at"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "422"
     And I should get the json object:
     """
       {
-        "email": "Email already in use"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "email", "message": "Email already in use"}
+          ]
+        }
       }
     """
 
@@ -204,7 +246,7 @@ Feature: Update user
         "username": "User2"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "401"
 
   Scenario: Update user with expired JWT Bearer token should return 401 status code
@@ -218,7 +260,7 @@ Feature: Update user
         "username": "User2"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "401"
 
   Scenario: Update user without setting content-type header should return 415 status code
@@ -231,7 +273,7 @@ Feature: Update user
         "username": "User2"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "415"
 
   Scenario: Update email with invalid TLD
@@ -244,12 +286,19 @@ Feature: Update user
         "email": "user@catrobat.invalid"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "422"
     And I should get the json object:
     """
       {
-        "email": "Email invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "email", "message": "Email invalid"}
+          ]
+        }
       }
     """
 
@@ -263,7 +312,7 @@ Feature: Update user
         "username": "new"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "204"
     And the user "new" should have a verification status of "true"
     And the user "new" should have a verification email requested at "null"
@@ -279,7 +328,7 @@ Feature: Update user
         "email": "new@catrobat.at"
       }
     """
-    And I request "PUT" "/api/user"
+    And I request "PATCH" "/api/users/me"
     Then the response code should be "204"
     And the user "Catrobat" should have a verification status of "false"
     And the user "Catrobat" should have a verification email requested at "1406901600"

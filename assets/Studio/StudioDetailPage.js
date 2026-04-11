@@ -18,7 +18,7 @@ document.getElementById('std-header-form')?.addEventListener('change', (event) =
   event.preventDefault()
   const fileInput = document.getElementById('std-header')
   const studioId = document.getElementById('studio-id').value
-  const url = document.getElementById('js-api-routing').dataset.baseUrl + '/api/studio/' + studioId
+  const url = document.getElementById('js-api-routing').dataset.baseUrl + '/api/studios/' + studioId
   if (fileInput.files.length > 0) {
     uploadCoverImage(url, fileInput.files[0])
   }
@@ -75,7 +75,7 @@ async function uploadCoverImage(url, file) {
   formData.append('image_file', uploadFile)
 
   const response = await fetch(url, {
-    method: 'POST',
+    method: 'PATCH',
     credentials: 'same-origin',
     body: formData,
     headers: {
@@ -137,7 +137,7 @@ async function submitStudioSettings() {
 
   const studioId = modal.dataset.studioId
   const baseUrl = document.getElementById('js-api-routing').dataset.baseUrl
-  const url = baseUrl + '/api/studio/' + studioId
+  const url = baseUrl + '/api/studios/' + studioId
 
   const nameInput = document.querySelector('#studio-settings__studio-name__input')
   const descTextarea = document.querySelector(
@@ -166,7 +166,7 @@ async function submitStudioSettings() {
 
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'PATCH',
       credentials: 'same-origin',
       body: formData,
       headers: {
@@ -186,7 +186,8 @@ async function submitStudioSettings() {
       let errorMessage = modal.dataset.transSaveError || 'Failed to save settings.'
       try {
         const json = await response.json()
-        if (json.error) errorMessage = json.error
+        const msg = json?.error?.message || json.error
+        if (msg) errorMessage = msg
       } catch {
         // Use default error message
       }
@@ -216,7 +217,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const baseUrl = header.dataset.baseUrl
 
   try {
-    const response = await fetch(`${baseUrl}/api/studio/${studioId}`, {
+    const response = await fetch(`${baseUrl}/api/studios/${studioId}`, {
       credentials: 'same-origin',
       headers: { Accept: 'application/json' },
     })
@@ -359,7 +360,7 @@ function renderMembersSection(header, studio, baseUrl, studioId, isLoggedIn) {
   if (!container) return
 
   if (isLoggedIn && studio.user_role) {
-    const membersUrl = `${baseUrl}/api/studio/${studioId}/members`
+    const membersUrl = `${baseUrl}/api/studios/${studioId}/members`
     const isAdmin = studio.user_role === 'admin'
     const modalId = 'studioDetailMembersListModal'
     const listId = 'studioDetailMembersList'
@@ -406,7 +407,7 @@ function renderActivitiesSection(header, studio, baseUrl, studioId, isAdmin) {
   if (!container) return
 
   if (isAdmin) {
-    const activitiesUrl = `${baseUrl}/api/studio/${studioId}/activities`
+    const activitiesUrl = `${baseUrl}/api/studios/${studioId}/activities`
     const modalId = 'studioDetailActivityListModal'
     const listId = 'studioDetailActivityList'
 
@@ -447,7 +448,7 @@ function renderJoinRequestsSection(header, studio, baseUrl, studioId) {
   const container = document.getElementById('header-join-requests')
   if (!container) return
 
-  const joinRequestsUrl = `${baseUrl}/api/studio/${studioId}/join-requests`
+  const joinRequestsUrl = `${baseUrl}/api/studios/${studioId}/join-requests`
   const modalId = 'studioDetailJoinRequestsModal'
   const listId = 'studioDetailJoinRequestsList'
   const count = studio.pending_join_requests_count ?? 0
@@ -504,7 +505,7 @@ function renderActionButton(header, studio, baseUrl, studioId, isLoggedIn, isAdm
   if (isMember) {
     container.innerHTML = `
       <button class="studio-detail__header__details__leave-button btn btn-outline-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestLeave"
-              data-url="${baseUrl}/api/studio/${escapeHtml(studioId)}/leave"
+              data-url="${baseUrl}/api/studios/${escapeHtml(studioId)}/leave"
               data-method="DELETE">
         ${escapeHtml(header.dataset.transLeave)}
       </button>
@@ -524,7 +525,7 @@ function renderActionButton(header, studio, baseUrl, studioId, isLoggedIn, isAdm
   } else {
     container.innerHTML = `
       <button class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestJoin"
-              data-url="${baseUrl}/api/studio/${escapeHtml(studioId)}/join"
+              data-url="${baseUrl}/api/studios/${escapeHtml(studioId)}/join"
               data-method="POST">
         ${escapeHtml(header.dataset.transJoin)}
       </button>

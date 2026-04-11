@@ -27,7 +27,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": ["1", "2", "3"]}
       """
-    When I POST "/api/studio/1/batch-add-projects"
+    When I POST "/api/studios/1/batch-add-projects"
     Then the response status code should be "200"
     And the client response should contain "added"
     And the client response should contain "added"
@@ -39,7 +39,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": ["1", "nonexistent"]}
       """
-    When I POST "/api/studio/1/batch-add-projects"
+    When I POST "/api/studios/1/batch-add-projects"
     Then the response status code should be "200"
     And the client response should contain "added"
     And the client response should contain "failed"
@@ -55,7 +55,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": ["1", "2"]}
       """
-    When I POST "/api/studio/1/batch-add-projects"
+    When I POST "/api/studios/1/batch-add-projects"
     Then the response status code should be "200"
     And the client response should contain "added"
     And the client response should contain "failed"
@@ -72,7 +72,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": ["1", "2"]}
       """
-    When I POST "/api/studio/1/batch-add-projects"
+    When I POST "/api/studios/1/batch-add-projects"
     Then the response status code should be "200"
     And the client response should contain "conflict"
 
@@ -82,7 +82,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": ["1", "2"]}
       """
-    When I POST "/api/studio/1/batch-add-projects"
+    When I POST "/api/studios/1/batch-add-projects"
     Then the response status code should be "401"
 
   Scenario: Non-member cannot batch add projects
@@ -92,7 +92,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": ["1", "2"]}
       """
-    When I POST "/api/studio/1/batch-add-projects"
+    When I POST "/api/studios/1/batch-add-projects"
     Then the response status code should be "403"
 
   Scenario: Empty project_ids array returns 400
@@ -102,7 +102,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": []}
       """
-    When I POST "/api/studio/1/batch-add-projects"
+    When I POST "/api/studios/1/batch-add-projects"
     Then the response status code should be "400"
 
   Scenario: Non-existent studio returns 404
@@ -112,7 +112,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": ["1"]}
       """
-    When I POST "/api/studio/nonexistent/batch-add-projects"
+    When I POST "/api/studios/nonexistent/batch-add-projects"
     Then the response status code should be "404"
 
   Scenario: Mixed results with valid, duplicate, and non-existent projects
@@ -125,7 +125,7 @@ Feature: Batch add projects to a studio
       """
       {"project_ids": ["1", "2", "nonexistent"]}
       """
-    When I POST "/api/studio/1/batch-add-projects"
+    When I POST "/api/studios/1/batch-add-projects"
     Then the response status code should be "200"
     And the client response should contain "added"
     And the client response should contain "failed"

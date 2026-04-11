@@ -9,6 +9,7 @@ use App\Api\Services\Base\AbstractApiController;
 use App\User\UserManager;
 use OpenAPI\Server\Api\AchievementsApiInterface;
 use OpenAPI\Server\Model\AchievementsCountResponse;
+use OpenAPI\Server\Model\AchievementsDataResponse;
 use OpenAPI\Server\Model\AchievementsListResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
@@ -104,7 +105,7 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
   }
 
   #[\Override]
-  public function userIdAchievementsGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function usersIdAchievementsGet(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): ?AchievementsDataResponse
   {
     $user = $this->user_manager->find($id);
     if (!$user instanceof \App\DB\Entity\User\User) {
@@ -119,6 +120,9 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
     $responseCode = Response::HTTP_OK;
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
-    return $responses;
+    $response = new AchievementsDataResponse();
+    $response->setData($responses);
+
+    return $response;
   }
 }

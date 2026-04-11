@@ -62,7 +62,11 @@ Feature: Uploading a project
     And I should get the json object:
     """
       {
-        "error": "Invalid checksum. Try uploading again!"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Invalid checksum. Try uploading again!"
+        }
       }
     """
 
@@ -77,7 +81,11 @@ Feature: Uploading a project
     And I should get the json object:
     """
       {
-        "error": "invalid file"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "invalid file"
+        }
       }
     """
 
@@ -93,7 +101,11 @@ Feature: Uploading a project
     And I should get the json object:
     """
       {
-        "error": "Ungültige Datei"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Ungültige Datei"
+        }
       }
     """
 

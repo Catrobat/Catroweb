@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace App\Api\Services\MediaLibrary;
 
 use App\Api\Services\Base\AbstractResponseManager;
+use App\Api\Traits\CursorPaginationTrait;
 use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\MediaLibrary\MediaAssetRepository;
 use OpenAPI\Server\Model\MediaAssetResponse;
-use OpenAPI\Server\Model\MediaAssetsResponse;
-use OpenAPI\Server\Model\MediaCategoriesResponse;
+use OpenAPI\Server\Model\MediaAssetsListResponse;
+use OpenAPI\Server\Model\MediaCategoriesListResponse;
 use OpenAPI\Server\Model\MediaCategoryDetailResponse;
 use OpenAPI\Server\Model\MediaCategoryResponse;
-use OpenAPI\Server\Model\PaginationInfo;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MediaLibraryResponseManager extends AbstractResponseManager
 {
+  use CursorPaginationTrait;
+
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
@@ -32,25 +34,28 @@ class MediaLibraryResponseManager extends AbstractResponseManager
     parent::__construct($translator, $serializer, $cache);
   }
 
-  public function createPaginationInfo(int $total, int $limit, int $offset): PaginationInfo
+  public function createCategoriesResponse(array $categories, int $limit, ?string $cursor): MediaCategoriesListResponse
   {
-    return new PaginationInfo([
-      'total' => $total,
-      'limit' => $limit,
-      'offset' => $offset,
-    ]);
-  }
+    $has_more = count($categories) > $limit;
+    if ($has_more) {
+      array_pop($categories);
+    }
 
-  public function createCategoriesResponse(array $categories, int $total, int $limit, int $offset): MediaCategoriesResponse
-  {
     $category_responses = array_map(
       $this->createCategoryResponse(...),
       $categories
     );
 
-    return new MediaCategoriesResponse([
-      'categories' => $category_responses,
-      'pagination' => $this->createPaginationInfo($total, $limit, $offset),
+    $next_cursor = null;
+    if ($has_more && [] !== $categories) {
+      $last = end($categories);
+      $next_cursor = base64_encode((string) $last->getId());
+    }
+
+    return new MediaCategoriesListResponse([
+      'data' => $category_responses,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
     ]);
   }
 
@@ -64,33 +69,51 @@ class MediaLibraryResponseManager extends AbstractResponseManager
     ]);
   }
 
-  public function createCategoryDetailResponse(MediaCategory $category, array $assets, int $total_assets, int $limit, int $offset): MediaCategoryDetailResponse
+  public function createCategoryDetailResponse(MediaCategory $category, array $assets, int $limit, int $current_offset = 0): MediaCategoryDetailResponse
   {
+    $has_more = count($assets) > $limit;
+    if ($has_more) {
+      array_pop($assets);
+    }
+
     $asset_responses = array_map(
       fn (MediaAsset $asset): MediaAssetResponse => $this->createAssetResponse($asset),
       $assets
     );
+
+    $next_cursor = $has_more ? $this->encodeCursorFromOffset($current_offset, count($assets)) : null;
 
     return new MediaCategoryDetailResponse([
       'id' => $category->getId(),
       'name' => $this->trans($category->getName()),
       'description' => $category->getDescription() ? $this->trans($category->getDescription()) : null,
       'priority' => $category->getPriority(),
-      'assets' => $asset_responses,
-      'pagination' => $this->createPaginationInfo($total_assets, $limit, $offset),
+      'created_at' => $category->getCreatedAt(),
+      'updated_at' => $category->getUpdatedAt(),
+      'data' => $asset_responses,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
     ]);
   }
 
-  public function createAssetsResponse(array $assets, int $total, int $limit, int $offset): MediaAssetsResponse
+  public function createAssetsResponse(array $assets, int $limit, int $current_offset = 0): MediaAssetsListResponse
   {
+    $has_more = count($assets) > $limit;
+    if ($has_more) {
+      array_pop($assets);
+    }
+
     $asset_responses = array_map(
       fn (MediaAsset $asset): MediaAssetResponse => $this->createAssetResponse($asset),
       $assets
     );
 
-    return new MediaAssetsResponse([
-      'assets' => $asset_responses,
-      'pagination' => $this->createPaginationInfo($total, $limit, $offset),
+    $next_cursor = $has_more ? $this->encodeCursorFromOffset($current_offset, count($assets)) : null;
+
+    return new MediaAssetsListResponse([
+      'data' => $asset_responses,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
     ]);
   }
 
@@ -142,9 +165,8 @@ class MediaLibraryResponseManager extends AbstractResponseManager
    */
   public function createLibraryOverviewResponse(
     array $categories,
-    int $total_categories,
     int $limit,
-    int $offset,
+    ?string $cursor,
     int $assets_per_category,
     ?\App\DB\Entity\MediaLibrary\MediaFileType $file_type,
     ?string $flavor,
@@ -155,7 +177,14 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       $search = null;
     }
 
+    $current_offset = $this->decodeCursorToOffset($cursor);
+
     if (null === $search) {
+      $has_more = count($categories) > $limit;
+      if ($has_more) {
+        array_pop($categories);
+      }
+
       $category_previews = array_map(
         function (MediaCategory $category) use ($assets_per_category, $file_type, $flavor): \OpenAPI\Server\Model\MediaLibraryCategoryPreview {
           // Get preview assets for this category
@@ -230,13 +259,21 @@ class MediaLibraryResponseManager extends AbstractResponseManager
         ]);
       }
 
-      $total_categories = count($category_previews);
-      $category_previews = array_slice($category_previews, $offset, $limit);
+      $category_previews = array_slice($category_previews, $current_offset, $limit + 1);
+      $has_more = count($category_previews) > $limit;
+      if ($has_more) {
+        array_pop($category_previews);
+      }
     }
 
+    $next_cursor = ($has_more && [] !== $category_previews)
+      ? $this->encodeCursorFromOffset($current_offset, count($category_previews))
+      : null;
+
     return new \OpenAPI\Server\Model\MediaLibraryResponse([
-      'categories' => $category_previews,
-      'pagination' => $this->createPaginationInfo($total_categories, $limit, $offset),
+      'data' => $category_previews,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
     ]);
   }
 

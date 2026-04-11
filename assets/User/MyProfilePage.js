@@ -9,7 +9,7 @@ import { Modal } from 'bootstrap'
 import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle'
 import Swal from 'sweetalert2'
 import MessageDialogs from '../Components/MessageDialogs'
-import { ApiDeleteFetch, ApiFetch, ApiPutFetch } from '../Api/ApiHelper'
+import { ApiDeleteFetch, ApiFetch, ApiPatchFetch } from '../Api/ApiHelper'
 import VerifyAccountHandler from './VerifyAccountHandler'
 import { escapeHtml } from '../Components/HtmlEscape'
 import { achievementBadgeHtml } from './AchievementBadge'
@@ -79,8 +79,8 @@ class OwnProfile {
   }
 
   updateProfile(data, successCallback, finalCallback) {
-    new ApiPutFetch(
-      this.baseUrl + '/api/user',
+    new ApiPatchFetch(
+      this.baseUrl + '/api/users/me',
       data,
       'Save Profile',
       myProfileConfiguration.messages.unspecifiedErrorText,
@@ -224,7 +224,7 @@ class OwnProfile {
 
       try {
         const response = await new ApiFetch(
-          this.baseUrl + '/api/user/data-export',
+          this.baseUrl + '/api/users/me/data-export',
           'GET',
           undefined,
           'none',
@@ -281,7 +281,7 @@ class OwnProfile {
       }).then((result) => {
         if (result.value) {
           new ApiDeleteFetch(
-            this.baseUrl + '/api/user',
+            this.baseUrl + '/api/users/me',
             'Delete User',
             myProfileConfiguration.messages.unspecifiedErrorText,
             function () {
@@ -306,14 +306,15 @@ function initProfileAchievements() {
   const userId = container.dataset.userId
   const title = container.dataset.transTitle
 
-  fetch(baseUrl + '/api/user/' + userId + '/achievements', {
+  fetch(baseUrl + '/api/users/' + userId + '/achievements', {
     headers: { Accept: 'application/json' },
   })
     .then((r) => {
       if (!r.ok) throw new Error('HTTP ' + r.status)
       return r.json()
     })
-    .then((achievements) => {
+    .then((response) => {
+      const achievements = Array.isArray(response) ? response : response?.data || []
       if (!achievements || achievements.length === 0) {
         container.remove()
         return

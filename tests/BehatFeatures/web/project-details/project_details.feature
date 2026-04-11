@@ -25,7 +25,7 @@ Feature: As a visitor I want to see a project page
     And I should see "43 views"
 
   Scenario: Downloading a project is possible
-    When I download "/api/project/1/catrobat"
+    When I download "/api/projects/1/catrobat"
     Then I should receive an application file
 
   @disabled

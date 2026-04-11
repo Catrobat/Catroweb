@@ -6,38 +6,54 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Utility\UtilityApiFacade;
+use App\Api\Traits\CursorPaginationTrait;
 use Doctrine\DBAL\Connection;
 use OpenAPI\Server\Api\UtilityApiInterface;
-use OpenAPI\Server\Model\FeaturedBannerResponse;
+use OpenAPI\Server\Model\FeaturedBannersListResponse;
 use OpenAPI\Server\Model\HealthResponse;
 use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
+  use CursorPaginationTrait;
+
   public function __construct(
     private readonly UtilityApiFacade $facade,
     private readonly Connection $connection,
   ) {
   }
 
-  /**
-   * @return FeaturedBannerResponse[]
-   */
   #[\Override]
-  public function featuredBannersGet(int $limit, int $offset, int &$responseCode, array &$responseHeaders): array
+  public function featuredBannersGet(int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): FeaturedBannersListResponse
   {
     $limit = min(max($limit, 1), 50);
-    $offset = max($offset, 0);
+    $offset = $this->decodeCursorToOffset($cursor);
 
-    $banners = $this->facade->getLoader()->getActiveBanners($limit, $offset);
+    $banners = $this->facade->getLoader()->getActiveBanners($limit + 1, $offset);
+
+    $has_more = count($banners) > $limit;
+    if ($has_more) {
+      array_pop($banners);
+    }
+
+    $banner_responses = array_map(
+      fn ($banner) => $this->facade->getResponseManager()->createFeaturedBannerResponse($banner),
+      $banners,
+    );
+
+    $next_cursor = ($has_more && [] !== $banner_responses)
+      ? $this->encodeCursorFromOffset($offset, count($banner_responses))
+      : null;
 
     $responseCode = Response::HTTP_OK;
 
-    return array_map(
-      fn ($banner): FeaturedBannerResponse => $this->facade->getResponseManager()->createFeaturedBannerResponse($banner),
-      $banners,
-    );
+    $response = new FeaturedBannersListResponse();
+    $response->setData($banner_responses);
+    $response->setNextCursor($next_cursor);
+    $response->setHasMore($has_more);
+
+    return $response;
   }
 
   #[\Override]

@@ -58,7 +58,7 @@ final class ReactionsApiTest extends TestCase
     );
   }
 
-  // ==================== projectIdReactionPost Tests ====================
+  // ==================== projectsIdReactionPost Tests ====================
 
   /**
    * @throws Exception
@@ -75,7 +75,7 @@ final class ReactionsApiTest extends TestCase
 
     $reaction_request = $this->createStub(ReactionRequest::class);
 
-    $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
     $this->assertNull($response);
@@ -101,7 +101,7 @@ final class ReactionsApiTest extends TestCase
 
     $reaction_request = $this->createStub(ReactionRequest::class);
 
-    $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -129,7 +129,7 @@ final class ReactionsApiTest extends TestCase
     $reaction_request = $this->createStub(ReactionRequest::class);
     $reaction_request->method('getType')->willReturn(null);
 
-    $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertNull($response);
@@ -157,7 +157,7 @@ final class ReactionsApiTest extends TestCase
     $reaction_request = $this->createStub(ReactionRequest::class);
     $reaction_request->method('getType')->willReturn('invalid_type');
 
-    $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertNull($response);
@@ -189,7 +189,7 @@ final class ReactionsApiTest extends TestCase
     $reaction_request = $this->createStub(ReactionRequest::class);
     $reaction_request->method('getType')->willReturn('thumbs_up');
 
-    $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_CONFLICT, $response_code);
     $this->assertNull($response);
@@ -231,13 +231,13 @@ final class ReactionsApiTest extends TestCase
     $reaction_request = $this->createStub(ReactionRequest::class);
     $reaction_request->method('getType')->willReturn('thumbs_up');
 
-    $response = $this->object->projectIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionPost('id', $reaction_request, 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_CREATED, $response_code);
     $this->assertInstanceOf(ReactionSummaryResponse::class, $response);
   }
 
-  // ==================== projectIdReactionDelete Tests ====================
+  // ==================== projectsIdReactionDelete Tests ====================
 
   /**
    * @throws Exception
@@ -252,7 +252,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $this->object->projectIdReactionDelete('id', 'thumbs_up', 'en', $response_code, $response_headers);
+    $this->object->projectsIdReactionDelete('id', 'thumbs_up', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNAUTHORIZED, $response_code);
   }
@@ -275,7 +275,7 @@ final class ReactionsApiTest extends TestCase
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn(null);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $this->object->projectIdReactionDelete('id', 'thumbs_up', 'en', $response_code, $response_headers);
+    $this->object->projectsIdReactionDelete('id', 'thumbs_up', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
   }
@@ -299,7 +299,7 @@ final class ReactionsApiTest extends TestCase
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $this->object->projectIdReactionDelete('id', 'invalid_type', 'en', $response_code, $response_headers);
+    $this->object->projectsIdReactionDelete('id', 'invalid_type', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
   }
@@ -326,12 +326,12 @@ final class ReactionsApiTest extends TestCase
     $processor = $this->createStub(ReactionsApiProcessor::class);
     $this->reactions_facade->method('getProcessor')->willReturn($processor);
 
-    $this->object->projectIdReactionDelete('id', 'thumbs_up', 'en', $response_code, $response_headers);
+    $this->object->projectsIdReactionDelete('id', 'thumbs_up', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NO_CONTENT, $response_code);
   }
 
-  // ==================== projectIdReactionsGet Tests ====================
+  // ==================== projectsIdReactionsGet Tests ====================
 
   /**
    * @throws Exception
@@ -350,7 +350,7 @@ final class ReactionsApiTest extends TestCase
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn(null);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectIdReactionsGet('id', 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionsGet('id', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -385,7 +385,7 @@ final class ReactionsApiTest extends TestCase
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->object->projectIdReactionsGet('id', 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionsGet('id', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(ReactionSummaryResponse::class, $response);
@@ -418,13 +418,13 @@ final class ReactionsApiTest extends TestCase
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->object->projectIdReactionsGet('id', 'en', $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionsGet('id', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(ReactionSummaryResponse::class, $response);
   }
 
-  // ==================== projectIdReactionsUsersGet Tests ====================
+  // ==================== projectsIdReactionsUsersGet Tests ====================
 
   /**
    * @throws Exception
@@ -443,7 +443,7 @@ final class ReactionsApiTest extends TestCase
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn(null);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectIdReactionsUsersGet('id', 'en', null, 20, null, $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionsUsersGet('id', 'en', null, 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -478,7 +478,7 @@ final class ReactionsApiTest extends TestCase
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->object->projectIdReactionsUsersGet('id', 'en', null, 20, null, $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionsUsersGet('id', 'en', null, 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(ReactionUsersResponse::class, $response);
@@ -513,7 +513,7 @@ final class ReactionsApiTest extends TestCase
     ;
     $this->reactions_facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->object->projectIdReactionsUsersGet('id', 'en', 'love', 20, null, $response_code, $response_headers);
+    $response = $this->object->projectsIdReactionsUsersGet('id', 'en', 'love', 20, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(ReactionUsersResponse::class, $response);

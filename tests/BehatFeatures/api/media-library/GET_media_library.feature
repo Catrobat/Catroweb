@@ -23,7 +23,7 @@ Feature: Get media library overview
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/library?assets_per_category=1"
     Then the response status code should be "200"
-    And the client response should contain "categories"
+    And the client response should contain "data"
     And the client response should contain "media_library.category.animals"
     And the client response should contain "Dog Image"
 
@@ -54,7 +54,7 @@ Feature: Get media library overview
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/library?search=unknown"
     Then the response status code should be "200"
-    And the client response should contain "categories"
+    And the client response should contain "data"
     And the client response should not contain "media_library.category.animals"
 
   Scenario: Request media library with invalid assets per category

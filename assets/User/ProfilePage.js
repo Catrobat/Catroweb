@@ -28,7 +28,7 @@ function initProfileHeader() {
   const transFollow = followerContainer?.dataset.transFollow || ''
   const transFollows = followerContainer?.dataset.transFollows || ''
 
-  fetch(baseUrl + '/api/user/' + userId, {
+  fetch(baseUrl + '/api/users/' + userId, {
     headers: { Accept: 'application/json' },
     credentials: 'same-origin',
   })
@@ -226,11 +226,12 @@ function initProfileAchievements() {
   const userId = container.dataset.userId
   const title = container.dataset.transTitle
 
-  fetch(baseUrl + '/api/user/' + userId + '/achievements', {
+  fetch(baseUrl + '/api/users/' + userId + '/achievements', {
     headers: { Accept: 'application/json' },
   })
     .then((r) => r.json())
-    .then((achievements) => {
+    .then((response) => {
+      const achievements = Array.isArray(response) ? response : response?.data || []
       const skeleton = container.querySelector('.js-achievements-skeleton')
 
       if (!achievements || achievements.length === 0) {

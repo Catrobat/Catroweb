@@ -22,8 +22,8 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     ->defaults(['_format' => 'json'])
   ;
 
-  $routingConfigurator->add('open_api_server_projects_projectidcatrobatget', '/api/project/{id}/catrobat')
-    ->controller([OverwriteController::class, 'projectIdCatrobatGet'])
+  $routingConfigurator->add('open_api_server_projects_projectsidcatrobatget', '/api/projects/{id}/catrobat')
+    ->controller([OverwriteController::class, 'projectsIdCatrobatGet'])
     ->methods(['GET'])
     ->requirements(['id' => '^[a-zA-Z0-9\\\-]+$'])
   ;

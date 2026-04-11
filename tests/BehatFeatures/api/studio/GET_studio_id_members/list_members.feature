@@ -18,42 +18,42 @@ Feature: List studio members
       | 3  | Admin  | PrivateStudio | admin  |
 
   Scenario: List members of a public studio
-    When I GET "/api/studio/1/members"
+    When I GET "/api/studios/1/members"
     Then the response status code should be "200"
     And the client response should contain "Admin"
     And the client response should contain "Member"
     And the client response should contain "has_more"
 
   Scenario: List members of non-existent studio returns 404
-    When I GET "/api/studio/nonexistent/members"
+    When I GET "/api/studios/nonexistent/members"
     Then the response status code should be "404"
 
   Scenario: List members with limit
-    When I GET "/api/studio/1/members?limit=1"
+    When I GET "/api/studios/1/members?limit=1"
     Then the response status code should be "200"
     And the client response should contain "has_more"
 
   Scenario: Response contains role information
-    When I GET "/api/studio/1/members"
+    When I GET "/api/studios/1/members"
     Then the response status code should be "200"
     And the client response should contain "role"
     And the client response should contain "admin"
     And the client response should contain "member"
 
   Scenario: Invalid cursor returns 400
-    When I GET "/api/studio/1/members?cursor=invalid!!"
+    When I GET "/api/studios/1/members?cursor=invalid!!"
     Then the response status code should be "400"
 
   Scenario: Non-member cannot list members of a private studio
     Given I use a valid JWT Bearer token for "Non-member"
-    When I GET "/api/studio/2/members"
+    When I GET "/api/studios/2/members"
     Then the response status code should be "403"
 
   Scenario: Unauthenticated user cannot list members of a private studio
-    When I GET "/api/studio/2/members"
+    When I GET "/api/studios/2/members"
     Then the response status code should be "403"
 
   Scenario: Member of private studio can list members
     Given I use a valid JWT Bearer token for "Admin"
-    When I GET "/api/studio/2/members"
+    When I GET "/api/studios/2/members"
     Then the response status code should be "200"

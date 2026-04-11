@@ -28,7 +28,7 @@
       <button id="btn-appeal-user" class="btn btn-outline-danger btn-sm ms-2"
               data-content-type="user"
               data-content-id="{{ app.user.id }}"
-              data-appeal-url="{{ url('open_api_server_moderation_useridappealpost', {id: app.user.id}) }}"
+              data-appeal-url="{{ url('open_api_server_moderation_usersidappealpost', {id: app.user.id}) }}"
               data-trans-appeal-title="{{ 'moderation.appeal.title'|trans({}, 'catroweb') }}"
               data-trans-appeal-placeholder="{{ 'moderation.appeal.placeholder'|trans({}, 'catroweb') }}"
               data-trans-appeal-submit="{{ 'moderation.appeal.submit'|trans({}, 'catroweb') }}"

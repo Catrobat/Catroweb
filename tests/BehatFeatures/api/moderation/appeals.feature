@@ -24,7 +24,7 @@ Feature: Moderation Appeals API
       | 1  | studio1 | test studio  |
 
   # ---------------------------------------------------------------------------
-  # POST /api/project/{id}/appeal
+  # POST /api/projects/{id}/appeal
   # ---------------------------------------------------------------------------
 
   Scenario: Appeal a hidden project (authenticated owner)
@@ -35,12 +35,12 @@ Feature: Moderation Appeals API
       """
       {"reason": "This project was hidden by mistake"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
 
   Scenario: Appeal a project requires authentication
     Given the project "project1" is auto-hidden
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "401"
 
   Scenario: Appeal a project that is not hidden returns 400
@@ -50,7 +50,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "Please review"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "400"
 
   Scenario: Non-owner cannot appeal a project (403)
@@ -61,7 +61,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "This should be visible"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "403"
 
   Scenario: Appeal non-existent project returns 404
@@ -71,7 +71,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "Please review"}
       """
-    When I request "POST" "/api/project/9999/appeal"
+    When I request "POST" "/api/projects/9999/appeal"
     Then the response status code should be "404"
 
   Scenario: Duplicate pending appeal returns 409
@@ -82,14 +82,14 @@ Feature: Moderation Appeals API
       """
       {"reason": "First appeal"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {"reason": "Second appeal attempt"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "409"
 
   # ---------------------------------------------------------------------------
@@ -144,7 +144,7 @@ Feature: Moderation Appeals API
     Then the response status code should be "404"
 
   # ---------------------------------------------------------------------------
-  # POST /api/user/{id}/appeal
+  # POST /api/users/{id}/appeal
   # ---------------------------------------------------------------------------
 
   Scenario: Appeal own hidden user profile
@@ -155,12 +155,12 @@ Feature: Moderation Appeals API
       """
       {"reason": "My profile was hidden unfairly"}
       """
-    When I request "POST" "/api/user/1/appeal"
+    When I request "POST" "/api/users/1/appeal"
     Then the response status code should be "201"
 
   Scenario: Appeal user profile requires authentication
     Given the user "Catrobat" profile is hidden
-    When I request "POST" "/api/user/1/appeal"
+    When I request "POST" "/api/users/1/appeal"
     Then the response status code should be "401"
 
   Scenario: Cannot appeal another users profile (403)
@@ -171,11 +171,11 @@ Feature: Moderation Appeals API
       """
       {"reason": "This user is fine"}
       """
-    When I request "POST" "/api/user/1/appeal"
+    When I request "POST" "/api/users/1/appeal"
     Then the response status code should be "403"
 
   # ---------------------------------------------------------------------------
-  # POST /api/studio/{id}/appeal
+  # POST /api/studios/{id}/appeal
   # ---------------------------------------------------------------------------
 
   Scenario: Appeal a hidden studio
@@ -189,12 +189,12 @@ Feature: Moderation Appeals API
       """
       {"reason": "This studio complies with guidelines"}
       """
-    When I request "POST" "/api/studio/1/appeal"
+    When I request "POST" "/api/studios/1/appeal"
     Then the response status code should be "201"
 
   Scenario: Appeal a studio requires authentication
     Given the studio "studio1" is auto-hidden
-    When I request "POST" "/api/studio/1/appeal"
+    When I request "POST" "/api/studios/1/appeal"
     Then the response status code should be "401"
 
   Scenario: Appeal a studio that is not hidden returns 400
@@ -204,7 +204,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "Please review"}
       """
-    When I request "POST" "/api/studio/1/appeal"
+    When I request "POST" "/api/studios/1/appeal"
     Then the response status code should be "400"
 
   Scenario: Non-owner cannot appeal a hidden studio
@@ -218,7 +218,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "I should not be allowed"}
       """
-    When I request "POST" "/api/studio/1/appeal"
+    When I request "POST" "/api/studios/1/appeal"
     Then the response status code should be "403"
 
   Scenario: Approving an appeal rejects new reports but leaves accepted reports unchanged
@@ -233,7 +233,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "Please restore this project"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -255,7 +255,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "Initial appeal"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -273,7 +273,7 @@ Feature: Moderation Appeals API
       """
       {"reason": "Second appeal after rejection"}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "201"
 
   Scenario: Appeal with empty reason returns 400
@@ -284,5 +284,5 @@ Feature: Moderation Appeals API
       """
       {"reason": ""}
       """
-    When I request "POST" "/api/project/1/appeal"
+    When I request "POST" "/api/projects/1/appeal"
     Then the response status code should be "400"

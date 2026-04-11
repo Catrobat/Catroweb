@@ -51,7 +51,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function projectIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
     if (!$project instanceof Program) {
@@ -87,7 +87,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function projectIdCommentsPost(string $id, CommentCreateRequest $comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsIdCommentsPost(string $id, CommentCreateRequest $comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->authentication_manager->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -155,7 +155,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $comment->setUploadDate(new \DateTime('now', new \DateTimeZone('UTC')));
     $comment->setIsDeleted(false);
     if (null !== $parent_id) {
-      $comment->setParentId($parent_id);
+      $comment->setParentId((int) $parent_id);
     }
 
     $this->entity_manager->persist($comment);
@@ -185,9 +185,9 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function commentsIdDelete(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function commentsIdDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    if ($id <= 0) {
+    if ((int) $id <= 0) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return;
@@ -226,7 +226,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function commentsIdRepliesGet(int $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function commentsIdRepliesGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $comment = $this->comment_repository->findOneBy(['id' => $id]);
     if (!$comment instanceof UserComment) {
@@ -257,7 +257,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $page = $this->comment_repository->getCommentRepliesPageData(
-      $id,
+      (int) $id,
       $limit,
       $cursor_data['date'] ?? null,
       $cursor_data['id'] ?? null,
@@ -275,7 +275,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function commentsIdTranslationGet(int $id, string $target_language, string $accept_language, ?string $source_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function commentsIdTranslationGet(string $id, string $target_language, string $accept_language, ?string $source_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $comment = $this->comment_repository->findOneBy(['id' => $id]);
     if (!$comment instanceof UserComment) {
@@ -340,7 +340,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $response = new CommentTranslationResponse();
-    $response->setId($comment->getId() ?? 0);
+    $response->setId((string) ($comment->getId() ?? 0));
     $response->setSourceLanguage($source_language ?? $translation_result->detected_source_language);
     $response->setTargetLanguage($target_language);
     $response->setTranslation($translation_result->translation);
@@ -377,13 +377,13 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   private function createCommentResponse(array $comment_data, string $project_id, bool $are_replies): CommentResponse
   {
     $response = new CommentResponse();
-    $response->setId((int) $comment_data['id']);
+    $response->setId((string) $comment_data['id']);
     $response->setProjectId($project_id);
     $parent_id = isset($comment_data['parent_id']) ? (int) $comment_data['parent_id'] : null;
     if (0 === $parent_id) {
       $parent_id = null;
     }
-    $response->setParentId($parent_id);
+    $response->setParentId(null !== $parent_id ? (string) $parent_id : null);
     $response->setMessage(true === $comment_data['is_deleted'] ? null : (string) $comment_data['text']);
     $response->setCreatedAt($comment_data['upload_date']);
     $response->setReplyCount((int) ($comment_data['number_of_replies'] ?? 0));

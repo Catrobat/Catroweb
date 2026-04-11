@@ -1,10 +1,10 @@
 <div id="projects-pane" class="tab-pane fade-in show active" role="tabpanel" aria-labelledby="projects-tab"
      {{ stimulus_controller('studio--project-list', {
        studioId: studio.id,
-       projectsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects',
-       addProjectUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects',
-       batchAddProjectsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/batch-add-projects',
-       removeProjectUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/projects/__PROJECT_ID__',
+       projectsUrl: app.request.getBaseURL() ~ '/api/studios/' ~ studio.id ~ '/projects',
+       addProjectUrl: app.request.getBaseURL() ~ '/api/studios/' ~ studio.id ~ '/projects',
+       batchAddProjectsUrl: app.request.getBaseURL() ~ '/api/studios/' ~ studio.id ~ '/batch-add-projects',
+       removeProjectUrl: app.request.getBaseURL() ~ '/api/studios/' ~ studio.id ~ '/projects/__PROJECT_ID__',
        userRole: user_role|default(''),
        isLoggedIn: user_name is defined and user_name ? true : false,
      }) }}

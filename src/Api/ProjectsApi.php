@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Api;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
 use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\Api\Services\Reactions\ReactionsApiProcessor;
+use App\Api\Traits\CursorPaginationTrait;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramDownloads;
 use App\Project\AddProjectRequest;
@@ -17,12 +19,14 @@ use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Event\ProjectDownloadEvent;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\CodeViewResponse;
+use OpenAPI\Server\Model\ExtensionsResponse;
+use OpenAPI\Server\Model\FeaturedProjectsListResponse;
 use OpenAPI\Server\Model\ProjectResponse;
+use OpenAPI\Server\Model\ProjectsCategoryListResponse;
+use OpenAPI\Server\Model\ProjectsListResponse;
 use OpenAPI\Server\Model\ReactionRequest;
-use OpenAPI\Server\Model\UpdateProjectErrorResponse;
-use OpenAPI\Server\Model\UpdateProjectFailureResponse;
+use OpenAPI\Server\Model\TagsResponse;
 use OpenAPI\Server\Model\UpdateProjectRequest;
-use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -32,6 +36,7 @@ use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
+  use CursorPaginationTrait;
   use RateLimitTrait;
 
   public function __construct(
@@ -46,7 +51,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdGet(string $id, int &$responseCode, array &$responseHeaders): ?ProjectResponse
+  public function projectsIdGet(string $id, int &$responseCode, array &$responseHeaders): ?ProjectResponse
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -64,7 +69,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): UpdateProjectErrorResponse|UpdateProjectFailureResponse|null
+  public function projectsIdPatch(string $id, UpdateProjectRequest $update_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -91,7 +96,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $error_response = new UpdateProjectErrorResponse($validation_wrapper->getErrors());
+      $error_response = ApiErrorResponse::createValidationModel($validation_wrapper->getErrors());
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -114,12 +119,13 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsFeaturedGet(string $platform, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
+  public function projectsFeaturedGet(string $platform, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): FeaturedProjectsListResponse
   {
-    $featured_projects = $this->facade->getLoader()->getFeaturedProjects($flavor, $limit, $offset, $platform, $max_version);
+    $offset = $this->decodeCursorToOffset($cursor);
+    $featured_projects = $this->facade->getLoader()->getFeaturedProjects($flavor, $limit + 1, $offset, $platform, $max_version);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createFeaturedProjectsResponse($featured_projects, $attributes);
+    $response = $this->facade->getResponseManager()->createFeaturedProjectsListResponse($featured_projects, $limit, $attributes, $offset);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -131,18 +137,20 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
    * @throws \Psr\Cache\InvalidArgumentException
    */
   #[\Override]
-  public function projectsGet(string $category, string $accept_language, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
+  public function projectsGet(string $accept_language, ?string $category, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ProjectsListResponse
   {
+    $category = $category ?? 'recent';
+    $offset = $this->decodeCursorToOffset($cursor);
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
-    $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%d_%s', $category, $locale, $flavor, $max_version, $limit, $offset, $cursor ?? '');
+    $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%d', $category, $locale, $flavor, $max_version, $limit, $offset);
 
     // Don't cache 'recent' category as it changes frequently
     if ('recent' === $category) {
       $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-      $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit, $offset, $flavor, $user);
+      $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit + 1, $offset, $flavor, $user);
 
       $responseCode = Response::HTTP_OK;
-      $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
+      $response = $this->facade->getResponseManager()->createProjectsListResponse($projects, $limit, $attributes, $offset);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -158,10 +166,10 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit, $offset, $flavor, $user);
+    $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit + 1, $offset, $flavor, $user);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
+    $response = $this->facade->getResponseManager()->createProjectsListResponse($projects, $limit, $attributes, $offset);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
     $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
@@ -170,8 +178,9 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
+  public function projectsIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?ProjectsListResponse
   {
+    $offset = $this->decodeCursorToOffset($cursor);
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
       $responseCode = Response::HTTP_NOT_FOUND;
@@ -180,11 +189,11 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $recommended_projects = $this->facade->getLoader()->getRecommendedProjects(
-      $id, $category, $max_version, $limit, $offset, $flavor, $this->facade->getAuthenticationManager()->getAuthenticatedUser()
+      $id, $category, $max_version, $limit + 1, $offset, $flavor, $this->facade->getAuthenticationManager()->getAuthenticatedUser()
     );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($recommended_projects, $attributes);
+    $response = $this->facade->getResponseManager()->createProjectsListResponse($recommended_projects, $limit, $attributes, $offset);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -206,7 +215,9 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $validation_wrapper = $this->facade->getRequestValidator()->validateUploadFile($checksum, $file, $accept_language);
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-      $error_response = new UploadErrorResponse($validation_wrapper->getErrors());
+      $errors = $validation_wrapper->getErrors();
+      $first_message = reset($errors) ?: 'Upload validation failed';
+      $error_response = ApiErrorResponse::createModel(422, 'validation_error', $first_message);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -266,12 +277,14 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsSearchGet(string $query, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
+  public function projectsSearchGet(string $query, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ProjectsListResponse
   {
-    $projects = $this->facade->getLoader()->searchProjects($query, $limit, $offset, $max_version, $flavor);
+    // Elasticsearch: offset-based pagination (cursor decoded to offset)
+    $offset = $this->decodeCursorToOffset($cursor);
+    $projects = $this->facade->getLoader()->searchProjects($query, $limit + 1, $offset, $max_version, $flavor);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
+    $response = $this->facade->getResponseManager()->createProjectsListResponse($projects, $limit, $attributes, $offset);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -283,7 +296,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
    * @throws \Psr\Cache\InvalidArgumentException
    */
   #[\Override]
-  public function projectsCategoriesGet(string $max_version, string $flavor, string $accept_language, int &$responseCode, array &$responseHeaders): array
+  public function projectsCategoriesGet(string $max_version, string $flavor, string $accept_language, int &$responseCode, array &$responseHeaders): ProjectsCategoryListResponse
   {
     $limit = 20;
     $offset = 0;
@@ -306,7 +319,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return $cached['response'];
     }
 
-    $response = [];
+    $categories_data = [];
     $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch', 'trending'];
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -321,8 +334,11 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
         $user
       );
 
-      $response[] = $rm->createProjectCategoryResponse($projects, $category, $accept_language);
+      $categories_data[] = $rm->createProjectCategoryResponse($projects, $category, $accept_language);
     }
+
+    $response = new ProjectsCategoryListResponse();
+    $response->setData($categories_data);
 
     $responseHeaders = [];
     $rm->addResponseHashToHeaders($responseHeaders, $response);
@@ -336,7 +352,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsUserGet(string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
+  public function projectsUserGet(string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?ProjectsListResponse
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
@@ -352,10 +368,11 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $user_projects = $this->facade->getLoader()->getUserProjects($user_id, $limit, $offset, $flavor, $max_version);
+    $offset = $this->decodeCursorToOffset($cursor);
+    $user_projects = $this->facade->getLoader()->getUserProjects($user_id, $limit + 1, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($user_projects, $attributes);
+    $response = $this->facade->getResponseManager()->createProjectsListResponse($user_projects, $limit, $attributes, $offset);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -363,7 +380,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsUserIdGet(string $id, string $max_version, int $limit, int $offset, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
+  public function projectsUserIdGet(string $id, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?ProjectsListResponse
   {
     if (!$this->facade->getRequestValidator()->validateUserExists($id)) {
       $responseCode = Response::HTTP_NOT_FOUND;
@@ -371,10 +388,11 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $projects = $this->facade->getLoader()->getUserPublicProjects($id, $limit, $offset, $flavor, $max_version);
+    $offset = $this->decodeCursorToOffset($cursor);
+    $projects = $this->facade->getLoader()->getUserPublicProjects($id, $limit + 1, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
+    $response = $this->facade->getResponseManager()->createProjectsListResponse($projects, $limit, $attributes, $offset);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -382,7 +400,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdDelete(string $id, int &$responseCode, array &$responseHeaders): void
+  public function projectsIdDelete(string $id, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
@@ -397,13 +415,17 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsExtensionsGet(string $accept_language, int &$responseCode, array &$responseHeaders): array
+  public function projectsExtensionsGet(string $accept_language, int &$responseCode, array &$responseHeaders): ExtensionsResponse
   {
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
     $extensions = $this->facade->getLoader()->getProjectExtensions();
 
-    $response = $this->facade->getResponseManager()->createProjectsExtensionsResponse($extensions, $locale);
+    $extension_items = $this->facade->getResponseManager()->createProjectsExtensionsResponse($extensions, $locale);
+
+    $response = new ExtensionsResponse();
+    $response->setData($extension_items);
+
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
     $responseCode = Response::HTTP_OK;
@@ -412,13 +434,17 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsTagsGet(string $accept_language, int &$responseCode, array &$responseHeaders): array
+  public function projectsTagsGet(string $accept_language, int &$responseCode, array &$responseHeaders): TagsResponse
   {
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
     $tags = $this->facade->getLoader()->getProjectTags();
 
-    $response = $this->facade->getResponseManager()->createProjectsTagsResponse($tags, $locale);
+    $tag_items = $this->facade->getResponseManager()->createProjectsTagsResponse($tags, $locale);
+
+    $response = new TagsResponse();
+    $response->setData($tag_items);
+
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
     $responseCode = Response::HTTP_OK;
@@ -427,7 +453,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Currently not used due to an issue with the serializer and accept encoding in the generated code
     // The route is overwritten by the OverwriteController which uses the method: customProjectIdCatrobatGet
@@ -437,7 +463,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   /**
    * @psalm-param 200|404|429|500 $responseCode
    */
-  public function customProjectIdCatrobatGet(string $id, int &$responseCode, ?array &$responseHeaders = null): ?BinaryFileResponse
+  public function customProjectsIdCatrobatGet(string $id, int &$responseCode, ?array &$responseHeaders = null): ?BinaryFileResponse
   {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
     if (null === $this->checkIpRateLimit($ip, $this->downloadBurstLimiter)) {
@@ -478,7 +504,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdReactionPost(
+  public function projectsIdReactionPost(
     string $id,
     ReactionRequest $reaction_request,
     string $accept_language,
@@ -537,7 +563,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdReactionDelete(
+  public function projectsIdReactionDelete(
     string $id,
     string $type,
     string $accept_language,
@@ -570,7 +596,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdReactionsGet(
+  public function projectsIdReactionsGet(
     string $id,
     string $accept_language,
     int &$responseCode,
@@ -596,7 +622,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdReactionsUsersGet(
+  public function projectsIdReactionsUsersGet(
     string $id,
     string $accept_language,
     ?string $type,
@@ -626,7 +652,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdCodeGet(
+  public function projectsIdCodeGet(
     string $id,
     int &$responseCode,
     array &$responseHeaders,
@@ -654,7 +680,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectIdCodeStatisticsGet(
+  public function projectsIdCodeStatisticsGet(
     string $id,
     int &$responseCode,
     array &$responseHeaders,

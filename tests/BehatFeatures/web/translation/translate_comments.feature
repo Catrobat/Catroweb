@@ -17,6 +17,8 @@ Feature: Project comments should be translatable via a button
   Scenario: Translate button should translate the corresponding comment
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#comment-translation-button-1" to be visible
     When I click "#comment-translation-button-1"
     And I wait for AJAX to finish
     Then the element "#remove-comment-translation-button-1" should be visible
@@ -30,6 +32,8 @@ Feature: Project comments should be translatable via a button
   Scenario: Comment should only be translated by API once
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element "#comment-translation-button-2" to be visible
     When I click "#comment-translation-button-2"
     And I wait for AJAX to finish
     Then the element "#remove-comment-translation-button-2" should be visible

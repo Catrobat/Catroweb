@@ -1,3 +1,4 @@
+import { extractFieldErrors } from '../../Api/ResponseHelper'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { showValidationMessage } from '../../Components/TextField'
 import { AjaxController } from '../ajax_controller'
@@ -130,10 +131,11 @@ export default class extends AjaxController {
 
   handleValidationError(responseText) {
     const responseObj = JSON.parse(responseText)
-    showValidationMessage(responseObj.username, 'username')
-    showValidationMessage(responseObj.email, 'email')
-    showValidationMessage(responseObj.password, 'password')
-    showValidationMessage(responseObj.date_of_birth, 'date-of-birth')
-    showValidationMessage(responseObj.parent_email, 'parent-email')
+    const byField = extractFieldErrors(responseObj)
+    showValidationMessage(byField.username, 'username')
+    showValidationMessage(byField.email, 'email')
+    showValidationMessage(byField.password, 'password')
+    showValidationMessage(byField.date_of_birth, 'date-of-birth')
+    showValidationMessage(byField.parent_email, 'parent-email')
   }
 }

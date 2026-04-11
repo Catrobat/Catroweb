@@ -73,21 +73,18 @@ Feature: Featured Projects
       | project 6  |
       | project 1  |
 
-  Scenario: Get featured projects with limit 2 and offset 0
+  Scenario: Cursor pagination - page 1 then page 2 via cursor
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/featured/?limit=2&offset=0"
+    And I request "GET" "/api/projects/featured/?limit=2"
     Then the response status code should be "200"
-    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
       | project 10 |
-
-  Scenario: Get featured projects with limit 2 and offset 2
-    Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/featured/?limit=2&offset=2"
+    And the client response should contain "has_more"
+    And I save the next_cursor from the response
+    When I request page 2 with the saved cursor at "/api/projects/featured/?limit=2"
     Then the response status code should be "200"
-    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 5  |
@@ -138,27 +135,30 @@ Feature: Featured Projects
       | project 2  |
       | project 6  |
 
-  Scenario: Get featured projects with limit 2, offset 0 and some attributes specified
+  Scenario: Get featured projects with limit 2 and some attributes specified
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a parameter "limit" with value "2"
-    And I have a parameter "offset" with value "0"
     And I have a parameter "attributes" with value "project_id,name,author,url"
     And I request "GET" "/api/projects/featured"
     Then the response status code should be "200"
     And I should get the json object:
     """
-    [
-      {
-        "project_id": "12",
-        "url": "http:\/\/localhost\/app\/project\/12",
-        "name": "project 12",
-        "author": "Catrobat"
-      },
-      {
-        "project_id": "10",
-        "url": "http:\/\/localhost\/app\/project\/10",
-        "name": "project 10",
-        "author": "Catrobat"
-      }
-    ]
+    {
+      "data": [
+        {
+          "project_id": "12",
+          "url": "http:\/\/localhost\/app\/project\/12",
+          "name": "project 12",
+          "author": "Catrobat"
+        },
+        {
+          "project_id": "10",
+          "url": "http:\/\/localhost\/app\/project\/10",
+          "name": "project 10",
+          "author": "Catrobat"
+        }
+      ],
+      "next_cursor": "Mg==",
+      "has_more": true
+    }
     """

@@ -21,14 +21,14 @@ Feature: Get user by id
 
   Scenario: Get user by id
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/user/2"
+    And I request "GET" "/api/users/2"
     Then the response status code should be "200"
     Then the response should have the user model structure excluding "picture"
     Then the response should contain the user "User1"
 
   Scenario: User not found should return 404 status code
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/user/5"
+    And I request "GET" "/api/users/5"
     Then the response status code should be "404"
 
   Scenario: Hidden profile returns 404 for public callers
@@ -36,7 +36,7 @@ Feature: Get user by id
       | name  |
       | User1 |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/2"
+    When I request "GET" "/api/users/2"
     Then the response status code should be "404"
 
   Scenario: Hidden profile is accessible to owner
@@ -45,7 +45,7 @@ Feature: Get user by id
       | User1 |
     And I use a valid JWT Bearer token for "User1"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/2"
+    When I request "GET" "/api/users/2"
     Then the response status code should be "200"
     And the response should contain the user "User1"
 
@@ -58,11 +58,11 @@ Feature: Get user by id
       | User1 |
     And I use a valid JWT Bearer token for "Admin"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/2"
+    When I request "GET" "/api/users/2"
     Then the response status code should be "200"
     And the response should contain the user "User1"
 
   Scenario: Get user without setting accept header should return 406 status code
     Given I have a request header "HTTP_ACCEPT" with value "invalid"
-    When I request "GET" "/api/user/2"
+    When I request "GET" "/api/users/2"
     Then the response status code should be "406"

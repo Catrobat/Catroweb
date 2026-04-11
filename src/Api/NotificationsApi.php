@@ -26,7 +26,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
   }
 
   #[\Override]
-  public function notificationIdReadPut(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function notificationsIdReadPut(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
@@ -35,7 +35,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
       return;
     }
 
-    $successful = $this->facade->getProcessor()->markNotificationAsSeen($id, $user);
+    $successful = $this->facade->getProcessor()->markNotificationAsSeen((int) $id, $user);
     $responseCode = $successful ? Response::HTTP_NO_CONTENT : Response::HTTP_NOT_FOUND;
   }
 

@@ -30,7 +30,7 @@ Feature: Verified account enforcement for write API endpoints
       """
       {"message": "Hello world"}
       """
-    When I request "POST" "/api/project/1/comments"
+    When I request "POST" "/api/projects/1/comments"
     Then the response status code should be "403"
 
   Scenario: Unverified user POST report returns 403
@@ -40,7 +40,7 @@ Feature: Verified account enforcement for write API endpoints
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "403"
 
   # ---------------------------------------------------------------------------
@@ -49,7 +49,7 @@ Feature: Verified account enforcement for write API endpoints
 
   Scenario: Unverified user GET project is allowed
     Given I use a valid JWT Bearer token for "UnverifiedUser"
-    When I request "GET" "/api/project/1"
+    When I request "GET" "/api/projects/1"
     Then the response status code should be "200"
 
   # ---------------------------------------------------------------------------
@@ -76,5 +76,5 @@ Feature: Verified account enforcement for write API endpoints
       """
       {"message": "Hello world"}
       """
-    When I request "POST" "/api/project/1/comments"
+    When I request "POST" "/api/projects/1/comments"
     Then the response status code should be "201"

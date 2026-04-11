@@ -21,7 +21,7 @@ Feature: Consent-pending and revoked users are blocked from write API actions
         "message": "test"
       }
     """
-    And I request "POST" "/api/project/1/comments"
+    And I request "POST" "/api/projects/1/comments"
     Then the response status code should be "403"
 
   Scenario: Consent-revoked user is blocked from posting comments
@@ -33,7 +33,7 @@ Feature: Consent-pending and revoked users are blocked from write API actions
         "message": "test"
       }
     """
-    And I request "POST" "/api/project/1/comments"
+    And I request "POST" "/api/projects/1/comments"
     Then the response status code should be "403"
 
   Scenario: Consent-granted child can read projects
@@ -50,5 +50,5 @@ Feature: Consent-pending and revoked users are blocked from write API actions
         "type": "thumbs_up"
       }
     """
-    And I request "POST" "/api/project/1/reaction"
+    And I request "POST" "/api/projects/1/reaction"
     Then the response status code should be "201"

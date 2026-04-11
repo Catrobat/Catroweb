@@ -1,3 +1,4 @@
+import { extractFieldErrors } from '../Api/ResponseHelper'
 import '../Components/Switch'
 import { showValidationMessage } from '../Components/TextField'
 import AcceptLanguage from '../Api/AcceptLanguage'
@@ -18,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault()
       submitForm(
         {
-          url: document.getElementById('js-api-routing').dataset.baseUrl + '/api/studio',
+          url: document.getElementById('js-api-routing').dataset.baseUrl + '/api/studios',
         },
         {
           name: createForm.querySelector('#studio-name__input').value,
@@ -72,10 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function handleValidationError(responseText) {
     const responseObj = JSON.parse(responseText)
-    showValidationMessage(responseObj.name, 'studio-name')
-    showValidationMessage(responseObj.description, 'studio-description')
-    if (responseObj.image_file) {
-      fileName.textContent = responseObj.image_file
+    const byField = extractFieldErrors(responseObj)
+    showValidationMessage(byField.name, 'studio-name')
+    showValidationMessage(byField.description, 'studio-description')
+    if (byField.image_file) {
+      fileName.textContent = byField.image_file
       fileName.classList.add('error-text')
     } else {
       fileName.textContent = currentFileName
