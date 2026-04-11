@@ -132,7 +132,7 @@ class ContentVisibilityManager
    */
   public function getCommentProjectId(string $content_id): ?string
   {
-    $comment = $this->entity_manager->find(UserComment::class, (int) $content_id);
+    $comment = $this->entity_manager->find(UserComment::class, $content_id);
 
     return $comment?->getProgram()?->getId();
   }
@@ -142,7 +142,7 @@ class ContentVisibilityManager
    */
   public function getCommentProjectName(string $content_id): ?string
   {
-    $comment = $this->entity_manager->find(UserComment::class, (int) $content_id);
+    $comment = $this->entity_manager->find(UserComment::class, $content_id);
 
     return $comment?->getProgram()?->getName();
   }
@@ -275,7 +275,7 @@ class ContentVisibilityManager
   {
     return match ($content_type) {
       ContentType::Project => $this->entity_manager->find(Program::class, $content_id),
-      ContentType::Comment => $this->entity_manager->find(UserComment::class, (int) $content_id),
+      ContentType::Comment => $this->entity_manager->find(UserComment::class, $content_id),
       ContentType::User => $this->entity_manager->find(User::class, $content_id),
       ContentType::Studio => $this->entity_manager->find(Studio::class, $content_id),
     };
