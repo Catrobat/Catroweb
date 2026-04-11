@@ -294,4 +294,4 @@ Feature: As a visitor I want to write, see and report comments.
     And I wait for AJAX to finish
     Then I should see "hello"
     When I am on "/app/notifications"
-    Then the element ".notification-item" should not exist
+    Then the element "#catro-notification-1" should not exist

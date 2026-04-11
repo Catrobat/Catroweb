@@ -1295,10 +1295,6 @@ class DataFixturesContext implements Context
   public function thereAreStudioUsers(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      if (array_key_exists('id', $config)) {
-        MyUuidGenerator::setNextValue($config['id']);
-      }
-
       if (array_key_exists('studio_name', $config)) {
         $studio = $this->getStudioManager()->findStudioByName($config['studio_name']);
       } else {
@@ -1319,6 +1315,10 @@ class DataFixturesContext implements Context
       ;
 
       $this->getManager()->persist($activity);
+
+      if (array_key_exists('id', $config)) {
+        MyUuidGenerator::setNextValue($config['id']);
+      }
 
       $studio_user = new StudioUser()
         ->setUser($user)
