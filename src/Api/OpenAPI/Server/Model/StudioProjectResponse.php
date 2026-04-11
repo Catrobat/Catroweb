@@ -115,53 +115,6 @@ class StudioProjectResponse
   protected ?string $author_id = null;
 
   /**
-   * @SerializedName("downloads")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
-  protected ?int $downloads = null;
-
-  /**
-   * @SerializedName("views")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
-  protected ?int $views = null;
-
-  /**
-   * Human-readable upload time (e.g. "2 days ago").
-   *
-   * @SerializedName("uploaded_string")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
-  protected ?string $uploaded_string = null;
-
-  /**
-   * @SerializedName("private")
-   *
-   * @Assert\Type("bool")
-   *
-   * @Type("bool")
-   */
-  protected ?bool $private = null;
-
-  /**
-   * @SerializedName("not_for_kids")
-   *
-   * @Assert\Type("int")
-   *
-   * @Type("int")
-   */
-  protected ?int $not_for_kids = null;
-
-  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -176,11 +129,6 @@ class StudioProjectResponse
       $this->screenshot_small = array_key_exists('screenshot_small', $data) ? $data['screenshot_small'] : $this->screenshot_small;
       $this->author = array_key_exists('author', $data) ? $data['author'] : $this->author;
       $this->author_id = array_key_exists('author_id', $data) ? $data['author_id'] : $this->author_id;
-      $this->downloads = array_key_exists('downloads', $data) ? $data['downloads'] : $this->downloads;
-      $this->views = array_key_exists('views', $data) ? $data['views'] : $this->views;
-      $this->uploaded_string = array_key_exists('uploaded_string', $data) ? $data['uploaded_string'] : $this->uploaded_string;
-      $this->private = array_key_exists('private', $data) ? $data['private'] : $this->private;
-      $this->not_for_kids = array_key_exists('not_for_kids', $data) ? $data['not_for_kids'] : $this->not_for_kids;
     }
   }
 
@@ -330,81 +278,6 @@ class StudioProjectResponse
   public function setAuthorId(?string $author_id = null): self
   {
     $this->author_id = $author_id;
-
-    return $this;
-  }
-
-  public function getDownloads(): ?int
-  {
-    return $this->downloads;
-  }
-
-  /**
-   * @return $this
-   */
-  public function setDownloads(?int $downloads = null): self
-  {
-    $this->downloads = $downloads;
-
-    return $this;
-  }
-
-  public function getViews(): ?int
-  {
-    return $this->views;
-  }
-
-  /**
-   * @return $this
-   */
-  public function setViews(?int $views = null): self
-  {
-    $this->views = $views;
-
-    return $this;
-  }
-
-  public function getUploadedString(): ?string
-  {
-    return $this->uploaded_string;
-  }
-
-  /**
-   * @return $this
-   */
-  public function setUploadedString(?string $uploaded_string = null): self
-  {
-    $this->uploaded_string = $uploaded_string;
-
-    return $this;
-  }
-
-  public function getPrivate(): ?bool
-  {
-    return $this->private;
-  }
-
-  /**
-   * @return $this
-   */
-  public function setPrivate(?bool $private = null): self
-  {
-    $this->private = $private;
-
-    return $this;
-  }
-
-  public function getNotForKids(): ?int
-  {
-    return $this->not_for_kids;
-  }
-
-  /**
-   * @return $this
-   */
-  public function setNotForKids(?int $not_for_kids = null): self
-  {
-    $this->not_for_kids = $not_for_kids;
 
     return $this;
   }

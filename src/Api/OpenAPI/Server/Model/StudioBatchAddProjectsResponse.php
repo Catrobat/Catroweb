@@ -32,6 +32,7 @@ namespace OpenAPI\Server\Model;
 
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the StudioBatchAddProjectsResponse model.
@@ -44,18 +45,32 @@ class StudioBatchAddProjectsResponse
    * Project IDs that were successfully added.
    *
    * @var string[]|null
+   *
+   * @SerializedName("added")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("string")
+   * })
+   *
+   * @Type("array<string>")
    */
-  #[SerializedName('added')]
-  #[Type('array<string>')]
   protected ?array $added = null;
 
   /**
    * Project IDs that failed with reasons.
    *
    * @var StudioBatchAddProjectsResponseFailedInner[]|null
+   *
+   * @SerializedName("failed")
+   *
+   * @Assert\All({
+   *
+   *   @Assert\Type("OpenAPI\Server\Model\StudioBatchAddProjectsResponseFailedInner")
+   * })
+   *
+   * @Type("array<OpenAPI\Server\Model\StudioBatchAddProjectsResponseFailedInner>")
    */
-  #[SerializedName('failed')]
-  #[Type('array<OpenAPI\Server\Model\StudioBatchAddProjectsResponseFailedInner>')]
   protected ?array $failed = null;
 
   /**

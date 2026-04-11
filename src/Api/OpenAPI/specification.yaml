@@ -5344,6 +5344,10 @@ components:
           type: string
           description: 'URL to the users avatar image'
           example: 'https://share.catrob.at/images/default/avatar_default.png'
+        approved:
+          type: boolean
+          description: 'Whether the user is approved/whitelisted by admins'
+          example: false
 
     CommentResponse:
       type: object
@@ -5375,11 +5379,6 @@ components:
         is_reported:
           type: boolean
           example: false
-        rendered:
-          type: string
-          nullable: true
-          description: 'Rendered HTML for web clients (optional)'
-
     CommentListResponse:
       type: object
       properties:
