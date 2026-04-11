@@ -1,187 +1,90 @@
-<div class="studio-detail__header ">
+<div id="studio-header"
+     class="studio-detail__header studio-detail__header--loading"
+     data-studio-id="{{ studio.id }}"
+     data-base-url="{{ app.request.getBaseURL() }}"
+     data-login-url="{{ path('login') }}"
+     data-is-logged-in="{{ app.user ? 'true' : 'false' }}"
+     data-trans-public="{{ 'studio.public'|trans({}, 'catroweb') }}"
+     data-trans-private="{{ 'studio.private'|trans({}, 'catroweb') }}"
+     data-trans-leave="{{ 'studio.details.leave'|trans({}, 'catroweb') }}"
+     data-trans-join="{{ 'studio.join'|trans({}, 'catroweb') }}"
+     data-trans-pending="{{ 'studio.details.pending'|trans({}, 'catroweb') }}"
+     data-trans-declined="{{ 'studio.details.decline'|trans({}, 'catroweb') }}"
+     data-default-cover="{{ asset('images/default/studio_default.png') }}"
+     data-trans-invalid-type="{{ 'studio.cover_image_invalid_type'|trans({}, 'catroweb') }}"
+     data-trans-image-compressed="{{ 'studio.cover_image_compressed'|trans({}, 'catroweb') }}"
+     data-trans-file-too-large="{{ 'studio.cover_image_still_too_large'|trans({}, 'catroweb') }}"
+     data-trans-compression-failed="{{ 'studio.cover_image_compression_failed'|trans({}, 'catroweb') }}"
+     data-trans-cover-hint="{{ 'studio.cover_image_hint'|trans({}, 'catroweb') }}"
+     data-trans-promote-member="{{ 'studio.details.members_list.promote_member'|trans({}, 'catroweb') }}"
+     data-trans-ban-member="{{ 'studio.details.members_list.ban_member'|trans({}, 'catroweb') }}"
+     data-trans-promotion-failed="{{ 'studio.details.members_list.promotion_failed'|trans({}, 'catroweb') }}"
+     data-trans-ban-failed="{{ 'studio.details.members_list.ban_failed'|trans({}, 'catroweb') }}"
+     data-trans-demote-member="{{ 'studio.details.members_list.demote_member'|trans({}, 'catroweb') }}"
+     data-trans-demotion-failed="{{ 'studio.details.members_list.demotion_failed'|trans({}, 'catroweb') }}"
+     data-trans-no-studio-projects="{{ 'studio.details.members_list.no_studio_projects'|trans({}, 'catroweb') }}"
+     data-trans-one-studio-project="{{ 'studio.details.members_list.one_studio_project'|trans({}, 'catroweb') }}"
+     data-trans-n-studio-projects="{{ 'studio.details.members_list.n_studio_projects'|trans({'%count%': '%count%'}, 'catroweb') }}"
+     data-trans-join-studio="{{ 'studio.details.activity_list.join_studio'|trans({'%user%': '%user%'}, 'catroweb') }}"
+     data-trans-add-project="{{ 'studio.details.activity_list.add_project'|trans({'%user%': '%user%'}, 'catroweb') }}"
+     data-trans-add-comment="{{ 'studio.details.activity_list.add_comment'|trans({'%user%': '%user%'}, 'catroweb') }}"
+     data-trans-activity-title="{{ 'studio.details.activity_list.title'|trans({}, 'catroweb') }}"
+     data-trans-members-title="{{ 'studio.details.members_list.title'|trans({}, 'catroweb') }}"
+     data-trans-accept="{{ 'studio.details.join_requests.accept'|trans({}, 'catroweb') }}"
+     data-trans-decline="{{ 'studio.details.join_requests.decline'|trans({}, 'catroweb') }}"
+     data-trans-accept-success="{{ 'studio.details.join_requests.accept_success'|trans({}, 'catroweb') }}"
+     data-trans-decline-success="{{ 'studio.details.join_requests.decline_success'|trans({}, 'catroweb') }}"
+     data-trans-join-requests-error="{{ 'studio.details.join_requests.error'|trans({}, 'catroweb') }}"
+     data-trans-no-requests="{{ 'studio.details.join_requests.no_requests'|trans({}, 'catroweb') }}"
+     data-trans-join-requests-title="{{ 'studio.details.join_requests.title'|trans({}, 'catroweb') }}"
+>
 
   <div id="studio-img-container" class="studio-detail__header__img__container">
-    <img src="{{ asset(studio.CoverAssetPath|default('')) }}" class="img-fluid" alt="">
-    {% if user_role == 'admin' %}
-      <form class="studio-detail__header__details__button--upload-image" id="std-header-form"
-            enctype="multipart/form-data" method="post"
-            data-trans-invalid-type="{{ 'studio.cover_image_invalid_type'|trans({}, 'catroweb') }}"
-            data-trans-image-compressed="{{ 'studio.cover_image_compressed'|trans({}, 'catroweb') }}"
-            data-trans-file-too-large="{{ 'studio.cover_image_still_too_large'|trans({}, 'catroweb') }}"
-            data-trans-compression-failed="{{ 'studio.cover_image_compression_failed'|trans({}, 'catroweb') }}">
-        <span class="material-icons">photo_camera</span>
-        <input id="std-header" name="header-img" type="file" accept="image/jpeg,image/png,image/gif,image/webp">
-        <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
-      </form>
-      <span class="studio-cover-hint-wrap">
-        <span class="material-icons studio-cover-hint-icon">info_outline</span>
-        <span class="studio-cover-hint-tooltip">{{ 'studio.cover_image_hint'|trans({}, 'catroweb') }}</span>
-      </span>
-    {% endif %}
+    <img src="{{ studio.coverAssetPath ? asset(studio.coverAssetPath) : asset('images/default/studio_default.png') }}"
+         class="img-fluid"
+         alt="{{ studio.name }}"
+         loading="eager"
+         fetchpriority="high">
+    <form class="studio-detail__header__details__button--upload-image" id="std-header-form"
+          enctype="multipart/form-data" method="post" style="display: none">
+      <span class="material-icons">photo_camera</span>
+      <input id="std-header" name="header-img" type="file" accept="image/jpeg,image/png,image/gif,image/webp">
+      <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
+    </form>
+    <span class="studio-cover-hint-wrap" style="display: none">
+      <span class="material-icons studio-cover-hint-icon">info_outline</span>
+      <span class="studio-cover-hint-tooltip"></span>
+    </span>
   </div>
 
   <div class="container">
-    <h2 class="studio-detail__header__name container" class="ps-3 pe-2 mt-2">{{ studio.name }}</h2>
+    <h2 class="studio-detail__header__name ps-3 pe-2 mt-2">{{ studio.name }}</h2>
     <div class="studio-detail__header__details container">
 
-      <div class="col-3">
-        {{ is_public ? 'studio.public'|trans({}, 'catroweb') : 'studio.private'|trans({}, 'catroweb') }}
-      </div>
-
-      <div class="col-3">
-        {% if user_role != null %}
-          <div {{ stimulus_controller('studio--member-list', {
-            membersUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/members',
-            studioId: studio.id,
-            listElementId: 'studioDetailMembersList',
-          }) }}
-               data-is-studio-admin="{{ user_role == 'admin' ? 'true' : 'false' }}"
-               data-trans-promote-member="{{ 'studio.details.members_list.promote_member'|trans({}, 'catroweb') }}"
-               data-trans-ban-member="{{ 'studio.details.members_list.ban_member'|trans({}, 'catroweb') }}"
-               data-trans-promotion-failed="{{ 'studio.details.members_list.promotion_failed'|trans({}, 'catroweb') }}"
-               data-trans-ban-failed="{{ 'studio.details.members_list.ban_failed'|trans({}, 'catroweb') }}"
-               data-trans-demote-member="{{ 'studio.details.members_list.demote_member'|trans({}, 'catroweb') }}"
-               data-trans-demotion-failed="{{ 'studio.details.members_list.demotion_failed'|trans({}, 'catroweb') }}"
-               data-trans-no-studio-projects="{{ 'studio.details.members_list.no_studio_projects'|trans({}, 'catroweb') }}"
-               data-trans-one-studio-project="{{ 'studio.details.members_list.one_studio_project'|trans({}, 'catroweb') }}"
-               data-trans-n-studio-projects="{{ 'studio.details.members_list.n_studio_projects'|trans({'%count%': '%count%'}, 'catroweb') }}"
-          >
-            <a type="button"
-               class="studio-detail__header__details__button studio-detail__header__details__button--member"
-               data-bs-toggle="modal"
-               data-bs-target="#studioDetailMembersListModal"
-               data-action="click->studio--member-list#loadMembers"
-            >
-              <span class="material-icons">person</span><span class="ms-2 member_count">{{ members_count }}</span>
-            </a>
-            {{ include('Components/FullscreenListModal.html.twig', {
-              modal:
-              {
-                id: 'studioDetailMembersListModal',
-                title: '' ~ 'studio.details.members_list.title'|trans({}, 'catroweb'),
-                list_id: 'studioDetailMembersList',
-              },
-            }) }}
-          </div>
-        {% else %}
-          <div class="studio-detail__header__details__info">
-            <span class="material-icons">person</span>
-            <span class="ms-2 member_count">{{ members_count }}</span>
-          </div>
-        {% endif %}
-      </div>
-
-      <div class="col-3">
-        {% if user_role == 'admin' %}
-          <div {{ stimulus_controller('studio--activity-list', {
-            activitiesUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/activities',
-            studioId: studio.id,
-            listElementId: 'studioDetailActivityList',
-          }) }}
-               data-trans-join-studio="{{ 'studio.details.activity_list.join_studio'|trans({'%user%': '%user%'}, 'catroweb') }}"
-               data-trans-add-project="{{ 'studio.details.activity_list.add_project'|trans({'%user%': '%user%'}, 'catroweb') }}"
-               data-trans-add-comment="{{ 'studio.details.activity_list.add_comment'|trans({'%user%': '%user%'}, 'catroweb') }}"
-          >
-            <a type="button"
-               class="studio-detail__header__details__button studio-detail__header__details__button--activity"
-               data-bs-toggle="modal"
-               data-bs-target="#studioDetailActivityListModal"
-               data-action="click->studio--activity-list#loadActivities"
-            >
-              <span class="material-icons">schedule</span>
-              <span id="activity_count" class="ms-2 activity_count">{{ activities_count }}</span>
-            </a>
-            {{ include('Components/FullscreenListModal.html.twig', {
-              modal:
-              {
-                id: 'studioDetailActivityListModal',
-                title: '' ~ 'studio.details.activity_list.title'|trans({}, 'catroweb'),
-                list_id: 'studioDetailActivityList',
-              },
-            }) }}
-          </div>
-        {% else %}
-          <div class="studio-detail__header__details__info">
-            <span class="material-icons">schedule</span>
-            <span id="activity_count" class="ms-2 activity_count">{{ activities_count }}</span>
-          </div>
-        {% endif %}
-      </div>
-
-      {% if user_role == 'admin' and not is_public %}
-        <div class="col-3">
-          <div {{ stimulus_controller('studio--join-requests', {
-            joinRequestsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/join-requests',
-            studioId: studio.id,
-            listElementId: 'studioDetailJoinRequestsList',
-          }) }}
-               data-trans-accept="{{ 'studio.details.join_requests.accept'|trans({}, 'catroweb') }}"
-               data-trans-decline="{{ 'studio.details.join_requests.decline'|trans({}, 'catroweb') }}"
-               data-trans-accept-success="{{ 'studio.details.join_requests.accept_success'|trans({}, 'catroweb') }}"
-               data-trans-decline-success="{{ 'studio.details.join_requests.decline_success'|trans({}, 'catroweb') }}"
-               data-trans-error="{{ 'studio.details.join_requests.error'|trans({}, 'catroweb') }}"
-               data-trans-no-requests="{{ 'studio.details.join_requests.no_requests'|trans({}, 'catroweb') }}"
-          >
-            <a type="button"
-               class="studio-detail__header__details__button studio-detail__header__details__button--join-requests"
-               data-bs-toggle="modal"
-               data-bs-target="#studioDetailJoinRequestsModal"
-               data-action="click->studio--join-requests#loadJoinRequests"
-            >
-              <span class="material-icons">person_add</span>
-              <span id="join-requests-badge"
-                    class="badge bg-danger ms-1 rounded-pill"
-                    {% if pending_join_requests_count == 0 %}style="display: none"{% endif %}>
-                {{ pending_join_requests_count }}
-              </span>
-            </a>
-            {{ include('Components/FullscreenListModal.html.twig', {
-              modal:
-              {
-                id: 'studioDetailJoinRequestsModal',
-                title: '' ~ 'studio.details.join_requests.title'|trans({}, 'catroweb'),
-                list_id: 'studioDetailJoinRequestsList',
-              },
-            }) }}
-          </div>
+      <div class="col-3" id="header-visibility">
+        <div class="studio-detail__header__details__info">
+          {{ studio.isPublic ? 'studio.public'|trans({}, 'catroweb') : 'studio.private'|trans({}, 'catroweb') }}
         </div>
-      {% endif %}
+      </div>
 
-      <div class="col-3">
-        {% if user_name %}
-          {% if user_role == 'admin' %}
-            {# Admins cannot leave — show nothing #}
-          {% elseif is_member %}
-            <button
-                class="studio-detail__header__details__leave-button btn btn-outline-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestLeave"
-                data-url="{{ app.request.getBaseURL() }}/api/studio/{{ studio.id }}/leave"
-                data-method="DELETE">
-              {{ 'studio.details.leave'|trans({}, 'catroweb') }}
-            </button>
-          {% elseif join_request_status == 'pending' %}
-            <button
-                class="studio-detail__header__details__pending-button btn btn-outline-primary btn-block requestPending" disabled>
-              {{ 'studio.details.pending'|trans({}, 'catroweb') }}
-            </button>
-          {% elseif join_request_status == 'declined' %}
-            <button
-                class="studio-detail__header__details__declined-button btn btn-outline-danger btn-block requestDecline" disabled>
-              {{ 'studio.details.decline'|trans({}, 'catroweb') }}
-            </button>
-          {% else %}
-            <button
-                class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestJoin"
-                data-url="{{ app.request.getBaseURL() }}/api/studio/{{ studio.id }}/join"
-                data-method="POST">
-              {{ 'studio.join'|trans({}, 'catroweb') }}
-            </button>
-          {% endif %}
-        {% else %}
-          <a href="{{ path('login') }}"
-             class="studio-detail__header__details__join-button btn btn-outline-primary btn-block">
-            {{ 'studio.join'|trans({}, 'catroweb') }}
-          </a>
-        {% endif %}
+      <div class="col-3" id="header-members">
+        <div class="studio-detail__header__details__info">
+          <span class="material-icons">person</span>
+          <span class="ms-2 skeleton studio-detail__header__detail-skeleton-text js-studio-header-skeleton"></span>
+        </div>
+      </div>
+
+      <div class="col-3" id="header-activities">
+        <div class="studio-detail__header__details__info">
+          <span class="material-icons">schedule</span>
+          <span class="ms-2 skeleton studio-detail__header__detail-skeleton-text js-studio-header-skeleton"></span>
+        </div>
+      </div>
+
+      <div class="col-3" id="header-join-requests" style="display: none"></div>
+
+      <div class="col-3" id="header-action-button">
+        <span class="skeleton studio-detail__header__action-skeleton js-studio-header-skeleton"></span>
       </div>
     </div>
 

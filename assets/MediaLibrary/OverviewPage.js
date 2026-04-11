@@ -34,8 +34,18 @@ if (overviewContainer) {
   setupDownloadActions()
   setupInfiniteScroll()
 
+  const skeletonCategories = document.getElementById('skeleton-categories')
+
+  function removeSkeletons() {
+    if (skeletonCategories) {
+      skeletonCategories.remove()
+    }
+  }
+
   function showLoading(append = false) {
-    loadingSpinner.style.display = 'block'
+    if (append) {
+      loadingSpinner.style.display = 'block'
+    }
     paginationContainer.style.display = 'none'
     if (!append) {
       categoriesContainer.style.display = 'none'
@@ -62,6 +72,7 @@ if (overviewContainer) {
       .then((response) => response.json())
       .then((data) => {
         hideLoading()
+        removeSkeletons()
 
         if (data.categories && data.categories.length > 0) {
           renderCategories(data.categories, append)
@@ -80,6 +91,7 @@ if (overviewContainer) {
       .catch((error) => {
         console.error('Error loading media library overview', error)
         hideLoading()
+        removeSkeletons()
         if (searchQuery) {
           noCategoriesAlert.textContent = translations.no_results
         }

@@ -20,7 +20,7 @@ import ProjectApi from '../Api/ProjectApi'
 import { ProjectEditorTextFieldModel } from './ProjectEditorTextFieldModel'
 import { ProjectEditorModel } from './ProjectEditorModel'
 import MessageDialogs from '../Components/MessageDialogs'
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import './RemixGraphInline'
 
 require('./ProjectPage.scss')
@@ -103,6 +103,23 @@ function renderProjectMetadata(data) {
     if (data.not_for_kids) {
       thumbnail.classList.add('blurred')
     }
+    // Thumbnail badge overlays (lock + not-for-kids)
+    const badgesContainer = document.getElementById('project-thumbnail-badges')
+    if (badgesContainer) {
+      if (data.private) {
+        const lockIcon = document.createElement('i')
+        lockIcon.className = 'material-icons project-thumbnail-badge project-thumbnail-badge--lock'
+        lockIcon.textContent = 'lock'
+        badgesContainer.appendChild(lockIcon)
+      }
+      if (data.not_for_kids) {
+        const nfkIcon = document.createElement('i')
+        nfkIcon.className = 'material-icons project-thumbnail-badge project-thumbnail-badge--nfk'
+        nfkIcon.textContent = 'no_accounts'
+        nfkIcon.title = projectElement.dataset.transNotForKids || 'Not for kids'
+        badgesContainer.appendChild(nfkIcon)
+      }
+    }
     // In webview, wrap thumbnail with download link
     if (isWebview && data.download_url && !thumbnail.parentElement.closest('a')) {
       const link = document.createElement('a')
@@ -144,13 +161,7 @@ function renderProjectMetadata(data) {
   // Retention badge
   renderRetentionBadge(data)
 
-  // Not for kids indicator
-  if (data.not_for_kids) {
-    const nfkIndicator = document.getElementById('not-for-kids-indicator')
-    if (nfkIndicator) {
-      nfkIndicator.classList.remove('d-none')
-    }
-  }
+  // Not-for-kids indicator is now shown as a thumbnail badge overlay (see renderProjectMetadata)
 
   // Description
   const descEl = document.getElementById('description')

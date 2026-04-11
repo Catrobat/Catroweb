@@ -9,6 +9,40 @@ $tile-padding-y: 8px;
 $tile-padding-overflow-x: 1.5rem;
 $img-border-strength: 2px;
 
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.js-skeleton {
+  color: light-dark(#d7dde4, #464c55);
+
+  .mediafile {
+    pointer-events: none;
+  }
+
+  .img-container {
+    border-color: transparent;
+    background: transparent;
+  }
+}
+
 .medialib-content {
   .category {
     margin-top: 1.5rem;

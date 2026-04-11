@@ -745,7 +745,7 @@ class ProjectResponse
   /**
    * Sets extensions.
    *
-   * @param string[]|null $extensions Extensions used by this project
+   * @param string[]|null $extensions Extensions used by this project (e.g., arduino, mindstorms)
    *
    * @return $this
    */

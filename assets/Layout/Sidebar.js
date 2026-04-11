@@ -7,6 +7,35 @@ const sidebarJs = document.querySelector('.js-sidebar')
 
 const sidebarToggleBtn = document.getElementById('top-app-bar__btn-sidebar-toggle')
 
+const BADGE_CACHE_TTL = 60000 // 60 seconds
+const BADGE_ERROR_RETRY = 60000 // 60 seconds
+
+const BadgeCache = {
+  get(badgeID) {
+    try {
+      const raw = localStorage.getItem(`badge_cache_${badgeID}`)
+      if (!raw) return null
+      const cached = JSON.parse(raw)
+      if (Date.now() - cached.timestamp < BADGE_CACHE_TTL) {
+        return cached.count
+      }
+    } catch {
+      // Corrupted cache entry; ignore
+    }
+    return null
+  },
+  set(badgeID, count) {
+    try {
+      localStorage.setItem(
+        `badge_cache_${badgeID}`,
+        JSON.stringify({ count, timestamp: Date.now() }),
+      )
+    } catch {
+      // localStorage full or unavailable; ignore
+    }
+  },
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initSidebarBadges()
   setClickListener()
@@ -29,6 +58,16 @@ function initSidebarBadges() {
   }
 }
 
+function displayBadge(badge, count, maxAmountToFetch) {
+  if (count > 0) {
+    badge.innerHTML = count <= maxAmountToFetch ? count.toString() : maxAmountToFetch + '+'
+    badge.style.display = 'block'
+  } else {
+    badge.innerHTML = ''
+    badge.style.display = 'none'
+  }
+}
+
 function updateBadge(
   url,
   badgeID,
@@ -40,22 +79,37 @@ function updateBadge(
   if (!badge) {
     return
   }
+
+  const cachedCount = BadgeCache.get(badgeID)
+  if (cachedCount !== null) {
+    displayBadge(badge, cachedCount, maxAmountToFetch)
+    setTimeout(updateBadge, refreshRate, url, badgeID, countField, maxAmountToFetch, refreshRate)
+    return
+  }
+
   new ApiFetch(url)
     .generateAuthenticatedFetch()
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) throw new Error('HTTP ' + response.status)
+      return response.json()
+    })
     .then((data) => {
       const count = data[countField]
-      if (count > 0) {
-        badge.innerHTML = count <= maxAmountToFetch ? count.toString() : maxAmountToFetch + '+'
-        badge.style.display = 'block'
-      } else {
-        badge.innerHTML = ''
-        badge.style.display = 'none'
-      }
+      BadgeCache.set(badgeID, count)
+      displayBadge(badge, count, maxAmountToFetch)
       setTimeout(updateBadge, refreshRate, url, badgeID, countField, maxAmountToFetch, refreshRate)
     })
     .catch((error) => {
       console.error('Unable to update sidebar badge! Error: ', error)
+      setTimeout(
+        updateBadge,
+        BADGE_ERROR_RETRY,
+        url,
+        badgeID,
+        countField,
+        maxAmountToFetch,
+        refreshRate,
+      )
     })
 }
 

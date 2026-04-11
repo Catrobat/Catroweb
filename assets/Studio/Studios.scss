@@ -68,11 +68,20 @@ $list-item-padding-overflow-x: 1.5rem;
 .studios-list-item--content {
   flex: 1 1 auto;
   min-width: 0;
+  overflow: hidden;
+
+  p {
+    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
 }
 
 .studios-list-item--buttons {
   flex: 0 0 auto;
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .studios-list-item--heading {
@@ -80,12 +89,17 @@ $list-item-padding-overflow-x: 1.5rem;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  min-width: 0;
 
   h3 {
     margin: 0;
     padding: 0;
     display: block;
-    flex: 0 0 auto;
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .studios-list-item--text {
@@ -102,6 +116,31 @@ $list-item-padding-overflow-x: 1.5rem;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+  }
+
+  .studios-list-item--pill {
+    margin: 0 0 0 0.5rem;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    border-radius: 0.75rem;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+
+  .studios-list-item--pill-admin {
+    color: #084298;
+    background-color: #cfe2ff;
+    border: 1px solid #9ec5fe;
+  }
+
+  .studios-list-item--pill-pending {
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
   }
 }
 
@@ -358,6 +397,28 @@ $list-item-padding-overflow-x: 1.5rem;
     transform: scale(1.1);
     transition: transform 0.3s ease;
   }
+}
+
+// Skeleton loading placeholders
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.15;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
 }
 
 // Floating action button for "Create Studio"

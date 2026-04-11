@@ -36,8 +36,6 @@
   {{ include('Studio/Details/CommentList.html.twig') }}
 </div>
 
-<input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
-
 {% endblock %}
 {% block javascript %}
     {{ encore_entry_script_tags('studio_detail_page') }}

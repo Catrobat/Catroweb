@@ -56,12 +56,13 @@ Feature: Project list to provides users with different categories of projects
   Scenario Outline: A project list project has a unique property
     Given I am on <page>
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element <category> should be visible
     And the <category> element should contain <value>
     Examples:
       | category                                                                  | value    | page |
       | "#home-projects__popular .project-list__project__property-author"         | "person" | "/"  |
-      | "#home-projects__trending .project-list__project__property-downloads"     | "get_app" | "/"  |
+      | "#home-projects__trending .project-list__project__property-author"        | "person" | "/"  |
 
   Scenario Outline: A click on a project redirects to the project page
     Given I am on <page>

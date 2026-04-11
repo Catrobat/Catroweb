@@ -85,13 +85,10 @@ Feature: Every Studio should have an overview containing the most necessary info
     Then the ".member_count" element should contain "1"
     And the element ".studio-detail__header__details__join-button" should be visible
 
-  Scenario: Anonymous user can view invite-only studio detail page
+  Scenario: Anonymous user is redirected to login for invite-only studio
     Given I am on "/app/studio/2"
     And I wait for the page to be loaded
-    And I wait for AJAX to finish
-    Then I should see "CatrobatStudio02"
-    And I should see "hasADescription"
-    And the element ".studio-detail__header__details__join-button" should be visible
+    Then I should see "Login"
 
   Scenario: User logged in and their request was declined form the admin of the private studio
     Given I log in as "Catrobat1"
@@ -111,7 +108,6 @@ Feature: Every Studio should have an overview containing the most necessary info
     And I wait for the page to be loaded
     Then the ".member_count" element should contain "1"
     And  the element ".studio-detail__header__details__pending-button" should be visible
-
 
 
 

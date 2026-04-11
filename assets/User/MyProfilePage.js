@@ -9,13 +9,15 @@ import { Modal } from 'bootstrap'
 import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle'
 import Swal from 'sweetalert2'
 import MessageDialogs from '../Components/MessageDialogs'
-import { ApiFetch, ApiDeleteFetch, ApiPutFetch } from '../Api/ApiHelper'
+import { ApiDeleteFetch, ApiFetch, ApiPutFetch } from '../Api/ApiHelper'
 import VerifyAccountHandler from './VerifyAccountHandler'
 import { escapeHtml } from '../Components/HtmlEscape'
 import { achievementBadgeHtml } from './AchievementBadge'
+import { ProjectList } from '../Project/ProjectList'
 
 require('./Profile.scss')
 require('./Achievements.scss')
+require('../Project/ProjectsBrowse.scss')
 
 document.addEventListener('DOMContentLoaded', () => {
   if (
@@ -31,10 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new PasswordVisibilityToggle()
 
-  const baseUrl = document.getElementById('own-projects').dataset.baseUrl
+  const ownProjects = document.getElementById('own-projects')
+  const baseUrl = ownProjects.dataset.baseUrl
   new OwnProfile(baseUrl).initializeAll()
   new VerifyAccountHandler().init()
   initProfileAchievements()
+  initOwnProjectList(ownProjects)
 
   // Appeal button for suspended accounts
   const appealBtn = document.getElementById('btn-appeal-user')
@@ -311,6 +315,7 @@ function initProfileAchievements() {
     })
     .then((achievements) => {
       if (!achievements || achievements.length === 0) {
+        container.remove()
         return
       }
 
@@ -332,10 +337,26 @@ function initProfileAchievements() {
         badgesHtml +
         '</div>' +
         '<hr>'
-
-      container.classList.remove('d-none')
     })
     .catch((error) => {
       console.error('Failed to load profile achievements:', error)
+      container.remove()
     })
+}
+
+function initOwnProjectList(container) {
+  const baseUrl = container.dataset.baseUrl
+  const theme = container.dataset.theme
+  const emptyMessage = container.dataset.emptyMessage
+
+  new ProjectList(
+    container,
+    'user-projects',
+    `${baseUrl}/api/projects/user`,
+    container.dataset.property,
+    theme,
+    999,
+    emptyMessage,
+    {},
+  )
 }

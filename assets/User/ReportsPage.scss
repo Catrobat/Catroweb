@@ -11,6 +11,7 @@
 
 .tab-pane {
   padding: 0;
+  min-height: 60vh;
 }
 
 // ===== Individual Report Item =====
@@ -143,6 +144,28 @@
 .report-badge-rejected {
   background-color: light-dark(#f8d7da, #3a1e22);
   color: light-dark(#721c24, #f88090);
+}
+
+// ===== Skeleton Loading =====
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
 }
 
 // ===== Empty State =====

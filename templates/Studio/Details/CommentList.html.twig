@@ -23,7 +23,7 @@
 >
   <div id="studio-comments" class="mt-3">
 
-    {% if user_role is not null and studio.isAllowComments and (not app.user or not app.user.isMinor()) %}
+    {% if user_role|default(null) is not null and studio.isAllowComments and (not app.user or not app.user.isMinor()) %}
       <div id="user-comment-wrapper" class="col-12" data-studio--comment-target="form">
         <div class="comment-avatar">
           <img class="comment-avatar-img" src="{% if app.user and app.user.avatar is not empty %}

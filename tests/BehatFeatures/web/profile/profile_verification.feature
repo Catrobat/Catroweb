@@ -16,6 +16,7 @@ Feature: As a visitor I want to see if a user is verified
   Scenario: I should see the verification status of any user
     And I am on "/app/user/1"
     And I wait for the page to be loaded
+    And I wait for AJAX to finish
     Then the element ".verification-icon" should be visible
 
   Scenario: I should see my own verification status (neg)
@@ -27,7 +28,8 @@ Feature: As a visitor I want to see if a user is verified
   Scenario: I should see the verification status of any user (neg)
     And I am on "/app/user/2"
     And I wait for the page to be loaded
-    Then the element ".verification-icon" should not exist
+    And I wait for AJAX to finish
+    Then the element ".verification-icon" should not be visible
 
   Scenario: I can't request an email if I am already verified
     Given I log in as "Catrobat"

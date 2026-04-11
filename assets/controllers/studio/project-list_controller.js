@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
-import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
 import Swal from 'sweetalert2'
 
@@ -32,6 +32,15 @@ export default class extends Controller {
     document.addEventListener('click', this._boundOutsideClick)
   }
 
+  // When userRole value is updated dynamically (e.g., from StudioDetailPage.js after API),
+  // show/hide pre-rendered remove buttons
+  userRoleValueChanged() {
+    const show = this._canRemove()
+    this.containerTarget.querySelectorAll('.js-remove-action').forEach((el) => {
+      el.style.display = show ? '' : 'none'
+    })
+  }
+
   disconnect() {
     this.element.removeEventListener('click', this._boundContainerClick)
     document.removeEventListener('click', this._boundOutsideClick)
@@ -54,6 +63,8 @@ export default class extends Controller {
       this.hasMore = data.has_more
       this.cursor = data.next_cursor
 
+      this._clearSkeletons()
+
       if (data.data && data.data.length > 0) {
         this.noProjectsTarget.style.display = 'none'
         data.data.forEach((project) => this.renderProject(project))
@@ -63,73 +74,151 @@ export default class extends Controller {
 
       this.loadMoreTarget.style.display = this.hasMore ? 'block' : 'none'
     } catch (e) {
+      this._clearSkeletons()
       console.error('Failed to load projects:', e)
     }
   }
 
-  renderProject(project) {
-    const canRemove =
+  _canRemove() {
+    return (
       this.userRoleValue === 'admin' || (this.isLoggedInValue && this.userRoleValue === 'member')
+    )
+  }
 
-    const card = document.createElement('div')
-    card.className = 'studio-project-card'
-    card.dataset.projectId = project.id
+  renderProject(project) {
+    const canRemove = this._canRemove()
+    const id = escapeAttr(String(project.id))
+    const name = escapeHtml(project.name || '')
+    const screenshotUrl = escapeAttr(project.screenshot_small || '/images/default/screenshot.png')
+    const author = escapeHtml(project.author || project.added_by || '')
+    const isPrivate = project.private || false
+    const isNfk = project.not_for_kids || false
 
-    const projectUrl = '/app/project/' + escapeAttr(String(project.id))
-    const screenshotUrl = project.screenshot_small || '/images/default/screenshot.png'
-    const addedDate = project.added_at ? new Date(project.added_at).toLocaleDateString() : ''
+    const projectUrl = '/app/project/' + id
 
     const transOpen = this.element.dataset.transOpenProject || 'Open project'
     const transDownload = this.element.dataset.transDownload || 'Download'
     const transShare = this.element.dataset.transShare || 'Share'
     const transRemove = this.element.dataset.transRemoveFromStudio || 'Remove from studio'
 
-    let menuItems = `
-      <a href="${projectUrl}" class="projects-list-item--dropdown-item" data-menu-action="open" data-project-id="${escapeAttr(String(project.id))}">
-        <i class="material-icons">open_in_new</i>${escapeHtml(transOpen)}
-      </a>
-      <a href="/api/project/${escapeAttr(String(project.id))}/catrobat${project.name ? '?fname=' + encodeURIComponent(project.name) : ''}" download class="projects-list-item--dropdown-item" data-menu-action="download" data-project-id="${escapeAttr(String(project.id))}" data-project-name="${escapeAttr(project.name || '')}">
-        <i class="material-icons">download</i>${escapeHtml(transDownload)}
-      </a>
-      <button class="projects-list-item--dropdown-item" data-menu-action="share" data-project-id="${escapeAttr(String(project.id))}">
-        <i class="material-icons">share</i>${escapeHtml(transShare)}
-      </button>`
+    // Menu: Open, Download, Share + Remove (hidden until role confirmed)
+    const removeDisplay = canRemove ? '' : 'display:none;'
+    const menuItems =
+      '<a href="' +
+      projectUrl +
+      '" class="projects-list-item--dropdown-item" data-menu-action="open" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">open_in_new</i>' +
+      escapeHtml(transOpen) +
+      '</a>' +
+      '<a href="/api/project/' +
+      id +
+      '/catrobat" download class="projects-list-item--dropdown-item" data-menu-action="download" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">download</i>' +
+      escapeHtml(transDownload) +
+      '</a>' +
+      '<button class="projects-list-item--dropdown-item" data-menu-action="share" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">share</i>' +
+      escapeHtml(transShare) +
+      '</button>' +
+      '<div class="projects-list-item--dropdown-divider js-remove-action" style="' +
+      removeDisplay +
+      '"></div>' +
+      '<button class="projects-list-item--dropdown-item text-danger js-remove-action" style="' +
+      removeDisplay +
+      '" data-menu-action="remove" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">delete</i>' +
+      escapeHtml(transRemove) +
+      '</button>'
 
-    if (canRemove) {
-      menuItems += `
-      <div class="projects-list-item--dropdown-divider"></div>
-      <button class="projects-list-item--dropdown-item text-danger" data-menu-action="remove" data-project-id="${escapeAttr(String(project.id))}">
-        <i class="material-icons">delete</i>${escapeHtml(transRemove)}
-      </button>`
+    // Meta: downloads, views, upload date, author (same layout as browse page)
+    const downloads = parseInt(project.downloads, 10) || 0
+    const views = parseInt(project.views, 10) || 0
+    const uploadedString = escapeHtml(project.uploaded_string || '')
+
+    let meta =
+      '<span class="projects-meta__item">' +
+      '<i class="material-icons">file_download</i>' +
+      String(downloads) +
+      '</span>' +
+      '<span class="projects-meta__item">' +
+      '<i class="material-icons">visibility</i>' +
+      String(views) +
+      '</span>'
+
+    if (uploadedString) {
+      meta +=
+        '<span class="projects-meta__item">' +
+        '<i class="material-icons">calendar_today</i>' +
+        uploadedString +
+        '</span>'
     }
 
-    card.innerHTML = `
-      <a href="${projectUrl}" class="studio-project-card__screenshot">
-        <img src="${escapeAttr(screenshotUrl)}" class="studio-project-card__image" alt="${escapeAttr(project.name || '')}" loading="lazy">
-      </a>
-      <div class="studio-project-card__info">
-        <a href="${projectUrl}" class="studio-project-card__name">${escapeHtml(project.name || '')}</a>
-        <div class="studio-project-card__meta">
-          ${project.author_id ? `<a href="/app/user/${escapeAttr(String(project.author_id))}" class="studio-project-card__author">${escapeHtml(project.author || project.added_by || '')}</a>` : `<span class="studio-project-card__author">${escapeHtml(project.author || project.added_by || '')}</span>`}
-          ${addedDate ? '<span class="studio-project-card__date">' + escapeHtml(addedDate) + '</span>' : ''}
-        </div>
-      </div>
-      <div class="projects-list-item--actions">
-        <button class="btn projects-list-item--menu-btn" type="button" aria-label="Options" data-project-id="${escapeAttr(String(project.id))}">
-          <i class="material-icons">more_vert</i>
-        </button>
-        <div class="projects-list-item--dropdown" style="display:none;">
-          ${menuItems}
-        </div>
-      </div>
-    `
-    this.containerTarget.appendChild(card)
+    if (project.author_id) {
+      meta += '<span class="projects-meta__item"><i class="material-icons">person</i>' + author
+    } else if (author) {
+      meta +=
+        '<span class="projects-meta__item"><i class="material-icons">person</i>' +
+        author +
+        '</span>'
+    }
+
+    // Card HTML — same structure as browse_controller._buildProjectCard
+    const wrapper = document.createElement('div')
+    wrapper.className = 'projects-list-item-wrapper'
+    wrapper.dataset.projectId = project.id
+    wrapper.innerHTML =
+      '<a href="' +
+      projectUrl +
+      '" class="projects-list-item-link">' +
+      '<span class="projects-list-item--image-wrap">' +
+      '<img src="' +
+      screenshotUrl +
+      '" class="projects-list-item--image" alt="' +
+      escapeAttr(project.name || '') +
+      '" width="360" height="360" loading="lazy">' +
+      (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
+      (isNfk
+        ? '<i class="material-icons projects-list-item--lock-badge projects-list-item--nfk-badge">no_accounts</i>'
+        : '') +
+      '</span>' +
+      '<div class="projects-list-item--content">' +
+      '<h3 class="projects-list-item--name">' +
+      name +
+      '</h3>' +
+      '<div class="projects-meta">' +
+      meta +
+      '</div>' +
+      '</div>' +
+      '</a>' +
+      '<div class="projects-list-item--actions">' +
+      '<button class="btn projects-list-item--menu-btn" type="button" aria-label="Options" data-project-id="' +
+      id +
+      '">' +
+      '<i class="material-icons">more_vert</i>' +
+      '</button>' +
+      '<div class="projects-list-item--dropdown" style="display:none;">' +
+      menuItems +
+      '</div>' +
+      '</div>'
+    this.containerTarget.appendChild(wrapper)
   }
 
   loadMore() {
     if (this.hasMore) {
       this.loadProjects()
     }
+  }
+
+  _clearSkeletons() {
+    this.containerTarget.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
   }
 
   _handleContainerClick(event) {
@@ -159,7 +248,18 @@ export default class extends Controller {
     const dropdown = button.nextElementSibling
     const isOpen = dropdown.style.display !== 'none'
     this._closeAllDropdowns()
-    dropdown.style.display = isOpen ? 'none' : 'block'
+    if (!isOpen) {
+      dropdown.style.display = 'block'
+      // Open upward if dropdown would be clipped by viewport bottom
+      const rect = dropdown.getBoundingClientRect()
+      if (rect.bottom > window.innerHeight) {
+        dropdown.classList.add('dropdown-up')
+      } else {
+        dropdown.classList.remove('dropdown-up')
+      }
+    } else {
+      dropdown.style.display = 'none'
+    }
   }
 
   _closeAllDropdowns() {
@@ -191,8 +291,10 @@ export default class extends Controller {
 
   async confirmRemoveProject(projectId) {
     const result = await Swal.fire({
-      title: this.element.dataset.transAreYouSure || 'Are you sure?',
-      text: this.element.dataset.transNoWayOfReturn || 'This cannot be undone.',
+      title: this.element.dataset.transRemoveFromStudioTitle || 'Remove project from studio?',
+      text:
+        this.element.dataset.transRemoveFromStudioText ||
+        'You can add it again later if you change your mind.',
       icon: 'warning',
       showCancelButton: true,
       allowOutsideClick: false,
@@ -201,7 +303,7 @@ export default class extends Controller {
         cancelButton: 'btn btn-outline-primary',
       },
       buttonsStyling: false,
-      confirmButtonText: this.element.dataset.transDeleteIt || 'Delete',
+      confirmButtonText: this.element.dataset.transRemoveFromStudio || 'Remove from studio',
       cancelButtonText: this.element.dataset.transCancel || 'Cancel',
     })
 
@@ -347,6 +449,8 @@ export default class extends Controller {
   }
 
   async removeProject(projectId) {
+    if (this._isRemoving) return
+    this._isRemoving = true
     const url = this.removeProjectUrlValue.replace('__PROJECT_ID__', projectId)
     try {
       const response = await fetch(url, {
@@ -375,6 +479,8 @@ export default class extends Controller {
         this.element.dataset.transRemoveError || 'Failed to remove project.',
         SnackbarDuration.error,
       )
+    } finally {
+      this._isRemoving = false
     }
   }
 

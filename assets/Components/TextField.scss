@@ -62,6 +62,11 @@ input:-webkit-autofill:active {
   color: var(--mdc-theme-error, #b00020) !important;
 }
 
+.mdc-text-field-helper-text--persistent,
+.mdc-text-field-character-counter {
+  color: light-dark(rgb(0 0 0 / 60%), rgb(255 255 255 / 70%));
+}
+
 .mdc-text-field--textarea.mdc-text-field--with-leading-icon {
   .mdc-text-field__icon {
     position: absolute;

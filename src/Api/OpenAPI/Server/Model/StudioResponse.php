@@ -152,6 +152,50 @@ class StudioResponse
   protected ?string $join_request_status = null;
 
   /**
+   * Number of activities in the studio.
+   *
+   * @SerializedName("activities_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $activities_count = null;
+
+  /**
+   * Number of comments in the studio.
+   *
+   * @SerializedName("comments_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $comments_count = null;
+
+  /**
+   * Authenticated user&#39;s role in the studio (admin, member) or null.
+   *
+   * @SerializedName("user_role")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $user_role = null;
+
+  /**
+   * Number of pending join requests (only for admins, null otherwise).
+   *
+   * @SerializedName("pending_join_requests_count")
+   *
+   * @Assert\Type("int")
+   *
+   * @Type("int")
+   */
+  protected ?int $pending_join_requests_count = null;
+
+  /**
    * Constructor.
    *
    * @param array|null $data Associated array of property values initializing the model
@@ -169,6 +213,10 @@ class StudioResponse
       $this->projects_count = array_key_exists('projects_count', $data) ? $data['projects_count'] : $this->projects_count;
       $this->is_member = array_key_exists('is_member', $data) ? $data['is_member'] : $this->is_member;
       $this->join_request_status = array_key_exists('join_request_status', $data) ? $data['join_request_status'] : $this->join_request_status;
+      $this->activities_count = array_key_exists('activities_count', $data) ? $data['activities_count'] : $this->activities_count;
+      $this->comments_count = array_key_exists('comments_count', $data) ? $data['comments_count'] : $this->comments_count;
+      $this->user_role = array_key_exists('user_role', $data) ? $data['user_role'] : $this->user_role;
+      $this->pending_join_requests_count = array_key_exists('pending_join_requests_count', $data) ? $data['pending_join_requests_count'] : $this->pending_join_requests_count;
     }
   }
 
@@ -388,6 +436,94 @@ class StudioResponse
   public function setJoinRequestStatus(?string $join_request_status = null): self
   {
     $this->join_request_status = $join_request_status;
+
+    return $this;
+  }
+
+  /**
+   * Gets activities_count.
+   */
+  public function getActivitiesCount(): ?int
+  {
+    return $this->activities_count;
+  }
+
+  /**
+   * Sets activities_count.
+   *
+   * @param int|null $activities_count Number of activities in the studio
+   *
+   * @return $this
+   */
+  public function setActivitiesCount(?int $activities_count = null): self
+  {
+    $this->activities_count = $activities_count;
+
+    return $this;
+  }
+
+  /**
+   * Gets comments_count.
+   */
+  public function getCommentsCount(): ?int
+  {
+    return $this->comments_count;
+  }
+
+  /**
+   * Sets comments_count.
+   *
+   * @param int|null $comments_count Number of comments in the studio
+   *
+   * @return $this
+   */
+  public function setCommentsCount(?int $comments_count = null): self
+  {
+    $this->comments_count = $comments_count;
+
+    return $this;
+  }
+
+  /**
+   * Gets user_role.
+   */
+  public function getUserRole(): ?string
+  {
+    return $this->user_role;
+  }
+
+  /**
+   * Sets user_role.
+   *
+   * @param string|null $user_role Authenticated user's role in the studio (admin, member) or null
+   *
+   * @return $this
+   */
+  public function setUserRole(?string $user_role = null): self
+  {
+    $this->user_role = $user_role;
+
+    return $this;
+  }
+
+  /**
+   * Gets pending_join_requests_count.
+   */
+  public function getPendingJoinRequestsCount(): ?int
+  {
+    return $this->pending_join_requests_count;
+  }
+
+  /**
+   * Sets pending_join_requests_count.
+   *
+   * @param int|null $pending_join_requests_count Number of pending join requests (only for admins, null otherwise)
+   *
+   * @return $this
+   */
+  public function setPendingJoinRequestsCount(?int $pending_join_requests_count = null): self
+  {
+    $this->pending_join_requests_count = $pending_join_requests_count;
 
     return $this;
   }

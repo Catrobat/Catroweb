@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     unfollowButton: container.dataset.unfollowButton,
     unfollowQuestion: container.dataset.unfollowQuestion,
     cancelButton: container.dataset.cancelButton,
-    projects: container.dataset.transProjects,
     follows: container.dataset.transFollows,
     follow: container.dataset.transFollow,
     followsMe: container.dataset.transFollowsMe,
@@ -80,8 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="follower-item__text">
             <a href="${profileUrl}">
               <span class="h4">${escapeHtml(user.username)}</span>
-              <div class="text-dark">
-                <span>${user.project_count} ${escapeHtml(trans.projects)}</span>
+              <div class="text-muted d-flex gap-3">
+                <span><i class="material-icons" style="font-size: inherit; vertical-align: middle; margin-right: 2px;">code</i> ${user.project_count ?? 0}</span>
+                ${user.follower_count !== undefined ? '<span><i class="material-icons" style="font-size: inherit; vertical-align: middle; margin-right: 2px;">people</i> ' + user.follower_count + '</span>' : ''}
               </div>
               <div class="text-muted text-uppercase follower-item__info">
                 ${followsMeHtml}
@@ -100,8 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (followingCount) followingCount.textContent = totalFollowing
   }
 
+  function removeSkeletons(container) {
+    container.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+  }
+
   function renderList(cardsContainer, emptyContainer, users, showFollowsMe, itemClassPrefix) {
-    cardsContainer.innerHTML = ''
+    removeSkeletons(cardsContainer)
     if (users.length === 0) {
       emptyContainer.classList.remove('d-none')
       emptyContainer.classList.add('d-block')
@@ -145,6 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch((error) => {
         console.error('Failed to load follower data:', error)
+        removeSkeletons(followerCards)
+        removeSkeletons(followingCards)
         showSnackbar('#share-snackbar', trans.somethingWentWrong, SnackbarDuration.error)
       })
   }
@@ -306,18 +312,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  // Also handle follow/unfollow buttons outside tab-content (e.g., profile header)
-  document.querySelectorAll('.profile-follow, .profile-follows').forEach((btn) => {
-    btn.addEventListener('click', (e) => {
+  // Handle follow/unfollow buttons in profile header via event delegation
+  // (buttons may be rendered dynamically by ProfilePage.js after DOMContentLoaded)
+  document.querySelector('.profile')?.addEventListener('click', (e) => {
+    const followBtn = e.target.closest('.profile-follow.follow-btn')
+    if (followBtn) {
       e.preventDefault()
       e.stopImmediatePropagation()
-      if (btn.classList.contains('follow-btn')) {
-        handleFollow(btn.dataset.userId)
-      } else if (btn.classList.contains('unfollow-btn')) {
-        handleUnfollow(btn.dataset.userId, btn.dataset.userName)
-      }
-    })
+      handleFollow(followBtn.dataset.userId)
+      return
+    }
+
+    const unfollowBtn = e.target.closest('.profile-follows.unfollow-btn')
+    if (unfollowBtn) {
+      e.preventDefault()
+      e.stopImmediatePropagation()
+      handleUnfollow(unfollowBtn.dataset.userId, unfollowBtn.dataset.userName)
+    }
   })
 
-  loadFollowData()
+  // Skip follower data loading if either user is a minor
+  const profileContainer = document.querySelector('.js-profile')
+  const viewerIsMinor = profileContainer?.dataset.viewerIsMinor === 'true'
+  const profileIsMinor = profileContainer?.dataset.profileIsMinor === 'true'
+  if (!viewerIsMinor && !profileIsMinor) {
+    loadFollowData()
+  }
 })

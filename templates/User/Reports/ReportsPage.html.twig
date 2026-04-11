@@ -60,7 +60,30 @@
       },
     ] %}
     <div id="{{ category.id }}" class="tab-pane fade {% if loop.first %} show active {% endif %}" role="tabpanel">
-      <div class="no-reports text-center mb-5 d-block">
+      {% if loop.first %}
+        {% for i in range(0, 3) %}
+          <div class="report-item js-skeleton">
+            <div class="report-card">
+              <div class="report-icon">
+                <span class="skeleton" style="display: block; width: 48px; height: 48px; border-radius: 50%;"></span>
+              </div>
+              <div class="report-content" style="flex: 1;">
+                <span class="skeleton" style="display: inline-block; width: {{ [50, 40, 55, 45][i] }}%; height: 0.9rem;"></span>
+                <div style="margin-top: 0.3rem;">
+                  <span class="skeleton" style="display: inline-block; width: {{ [35, 30, 40, 25][i] }}%; height: 0.75rem;"></span>
+                </div>
+                <div style="margin-top: 0.25rem;">
+                  <span class="skeleton" style="display: inline-block; width: 20%; height: 0.7rem;"></span>
+                </div>
+              </div>
+              <div class="report-status">
+                <span class="skeleton" style="display: inline-block; width: 60px; height: 1.25rem; border-radius: 1rem;"></span>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+      <div class="no-reports text-center mb-5 d-none">
         <span id="{{ category.emptyID }}">{{ category.emptyMessage }}</span>
       </div>
     </div>

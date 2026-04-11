@@ -24,6 +24,25 @@
        data-trans-selected-file="{{ 'project.upload.selected_file'|trans({}, 'catroweb')|default('Selected file:')|e('html_attr') }}"
        data-login-url="{{ path('login') }}"
   >
+    <div class="project-upload__info">
+      <div class="project-upload__info-item">
+        <span class="material-icons">cloud_upload</span>
+        <span>{{ 'project.upload.info.file_size'|trans({}, 'catroweb') }}</span>
+      </div>
+      <div class="project-upload__info-item">
+        <span class="material-icons">phone_android</span>
+        <span>{{ 'project.upload.info.app_upload'|trans({}, 'catroweb') }}</span>
+      </div>
+      <div class="project-upload__info-item">
+        <span class="material-icons">schedule</span>
+        <span>{{ 'project.upload.info.retention'|trans({}, 'catroweb') }}</span>
+      </div>
+      <div class="project-upload__info-item">
+        <span class="material-icons">verified</span>
+        <span>{{ 'project.upload.info.protection'|trans({}, 'catroweb') }}</span>
+      </div>
+    </div>
+
     <div class="project-upload__card">
       <div id="upload-drop-zone" class="project-upload__drop-zone">
         <span class="material-icons project-upload__icon">cloud_upload</span>

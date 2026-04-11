@@ -1,5 +1,5 @@
-import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../Layout/TopBar'
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
 import '../Components/RetentionTooltip'
 
@@ -20,6 +20,7 @@ export class ProjectList {
     theme,
     fetchCount = 30,
     emptyMessage = '',
+    extraHeaders = {},
   ) {
     this.container = container
     this.projectsContainer = container.querySelector('.projects-container')
@@ -33,6 +34,7 @@ export class ProjectList {
     this.isFullView = false
     this.theme = theme
     this.emptyMessage = emptyMessage
+    this.extraHeaders = extraHeaders
     this.$title = container.querySelector('.project-list__title')
     this.$body = document.body
     this.$chevronLeft = container.querySelector('.project-list__chevrons__left')
@@ -50,6 +52,7 @@ export class ProjectList {
     this.isOwnProfile = container.dataset.isOwnProfile === 'true'
     this.isLoggedIn = container.dataset.isLoggedIn === 'true'
     this.projectDetailPath = container.dataset.projectDetailPath || ''
+    this.projectsData = {}
 
     if (container.id) {
       projectListRegistry.set(container.id, this)
@@ -61,10 +64,10 @@ export class ProjectList {
 
   formatApiUrl(apiUrl) {
     let attributes =
-      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,uploaded_string,retention_days,retention_expiry,'
+      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,uploaded_string,retention_days,retention_expiry,private,views,downloads'
 
-    if (this.propertyToShow && !attributes.includes(`,${this.propertyToShow},`)) {
-      attributes += this.propertyToShow
+    if (this.propertyToShow && !attributes.split(',').includes(this.propertyToShow)) {
+      attributes += ',' + this.propertyToShow
     }
     return apiUrl.includes('?')
       ? `${apiUrl}&attributes=${attributes}&`
@@ -78,7 +81,10 @@ export class ProjectList {
 
     this.fetchActive = true
 
-    fetch(`${this.apiUrl}limit=${this.projectFetchCount}&offset=${this.projectsLoaded}`)
+    fetch(`${this.apiUrl}limit=${this.projectFetchCount}&offset=${this.projectsLoaded}`, {
+      headers: this.extraHeaders,
+      credentials: 'same-origin',
+    })
       .then((response) => {
         if (!response.ok) throw new Error('HTTP ' + response.status)
         return response.json()
@@ -96,6 +102,7 @@ export class ProjectList {
         }
 
         items.forEach((item) => {
+          if (item.id) this.projectsData[item.id] = item
           const el =
             this.cardType === 'studio'
               ? this.generateStudioElement(item)
@@ -134,8 +141,23 @@ export class ProjectList {
     projectElement.href = projectUrl
     projectElement.dataset.id = data.id
 
+    const imgWrap = document.createElement('div')
+    imgWrap.className = 'project-list__project__image-wrap'
     const img = this.createImageElement(data)
-    projectElement.appendChild(img)
+    imgWrap.appendChild(img)
+    if (data.private) {
+      const lockIcon = document.createElement('i')
+      lockIcon.className = 'material-icons project-list__lock-badge'
+      lockIcon.textContent = 'lock'
+      imgWrap.appendChild(lockIcon)
+    }
+    if (data.not_for_kids) {
+      const nfkIcon = document.createElement('i')
+      nfkIcon.className = 'material-icons project-list__lock-badge project-list__lock-badge--nfk'
+      nfkIcon.textContent = 'no_accounts'
+      imgWrap.appendChild(nfkIcon)
+    }
+    projectElement.appendChild(imgWrap)
 
     const nameSpan = document.createElement('span')
     nameSpan.className = 'project-list__project__name'
@@ -143,10 +165,12 @@ export class ProjectList {
     projectElement.appendChild(nameSpan)
 
     const propDiv = this.createPropertyElement(data)
-    if (data.not_for_kids) {
-      this.addNotForKidsIcon(propDiv)
-    }
     projectElement.appendChild(propDiv)
+
+    const secondaryMeta = this._buildSecondaryMeta(data)
+    if (secondaryMeta) {
+      projectElement.appendChild(secondaryMeta)
+    }
 
     if (data.retention_days !== undefined) {
       const retDiv = document.createElement('div')
@@ -177,9 +201,15 @@ export class ProjectList {
     const transOpen = ds.transOpen || 'Open'
     const transDownload = ds.transDownload || 'Download'
     const transShare = ds.transShare || 'Share'
-    const transToggleVisibility = ds.transToggleVisibility || 'Set Private'
+    const transSetPrivate = ds.transSetPrivate || 'Set private'
+    const transSetPublic = ds.transSetPublic || 'Set public'
     const transDelete = ds.transDelete || 'Delete'
     const transReport = ds.transReport || 'Report'
+    const transMarkNotForKids = ds.transMarkNotForKids || 'Mark not for kids'
+    const transMarkSafeForKids = ds.transMarkSafeForKids || 'Mark safe for kids'
+    const isPrivate = data.private || false
+    const isNfk = data.not_for_kids || false
+    const isNotForKids = data.not_for_kids || 0
 
     // Metadata line
     let meta = ''
@@ -189,6 +219,24 @@ export class ProjectList {
         '<i class="material-icons">calendar_today</i>' +
         uploadedString +
         '</span>'
+    }
+    if (data.views !== undefined || data.downloads !== undefined) {
+      meta += '<span class="project-list__meta-secondary">'
+      if (data.views !== undefined) {
+        meta +=
+          '<span class="project-list__meta-secondary__item">' +
+          '<i class="material-icons">visibility</i>' +
+          escapeHtml(String(data.views)) +
+          '</span>'
+      }
+      if (data.downloads !== undefined) {
+        meta +=
+          '<span class="project-list__meta-secondary__item">' +
+          '<i class="material-icons">get_app</i>' +
+          escapeHtml(String(data.downloads)) +
+          '</span>'
+      }
+      meta += '</span>'
     }
     if (data.retention_days !== undefined) {
       meta += this._buildRetentionMeta(data.retention_days, data.retention_expiry, ds)
@@ -217,11 +265,24 @@ export class ProjectList {
 
     if (this.isOwnProfile) {
       menuItems +=
+        '<div class="projects-list-item--dropdown-divider"></div>' +
         '<button class="projects-list-item--dropdown-item" data-action="toggle-visibility" data-project-id="' +
         id +
         '">' +
-        '<i class="material-icons">lock</i>' +
-        escapeHtml(transToggleVisibility) +
+        '<i class="material-icons">' +
+        (isPrivate ? 'lock_open' : 'lock') +
+        '</i>' +
+        '<span class="js-visibility-text">' +
+        escapeHtml(isPrivate ? transSetPublic : transSetPrivate) +
+        '</span>' +
+        '</button>' +
+        '<button class="projects-list-item--dropdown-item" data-action="toggle-not-for-kids" data-project-id="' +
+        id +
+        '">' +
+        '<i class="material-icons">child_care</i>' +
+        '<span class="js-nfk-text">' +
+        escapeHtml(isNotForKids ? transMarkSafeForKids : transMarkNotForKids) +
+        '</span>' +
         '</button>' +
         '<div class="projects-list-item--dropdown-divider"></div>' +
         '<button class="projects-list-item--dropdown-item text-danger" data-action="delete" data-project-id="' +
@@ -247,11 +308,17 @@ export class ProjectList {
       '<a href="' +
       escapeAttr(detailUrl) +
       '" class="projects-list-item-link">' +
+      '<span class="projects-list-item--image-wrap">' +
       '<img src="' +
       escapeAttr(screenshotSmall) +
       '" class="projects-list-item--image" alt="' +
       escapeAttr(data.name || '') +
       '" width="360" height="360" loading="lazy">' +
+      (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
+      (isNfk
+        ? '<i class="material-icons projects-list-item--lock-badge projects-list-item--nfk-badge">no_accounts</i>'
+        : '') +
+      '</span>' +
       '<div class="projects-list-item--content">' +
       '<h3 class="projects-list-item--name">' +
       name +
@@ -387,9 +454,13 @@ export class ProjectList {
         e.stopPropagation()
         btn.closest('.projects-list-item--dropdown').style.display = 'none'
         const projectId = btn.dataset.projectId
+        const project = this.projectsData[projectId]
+        const currentlyPrivate = project?.private || false
         const { default: Swal } = await import('sweetalert2')
         const result = await Swal.fire({
-          title: ds.transToggleVisibilityTitle || 'Change visibility?',
+          title: currentlyPrivate
+            ? ds.transSetPublicConfirm || 'Make this project public?'
+            : ds.transSetPrivateConfirm || 'Make this project private?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonText: ds.transConfirm || 'Confirm',
@@ -403,22 +474,85 @@ export class ProjectList {
         if (result.isConfirmed) {
           const { default: ProjectApi } = await import('../Api/ProjectApi')
           const api = new ProjectApi()
-          // Fetch current project state to determine toggle direction
-          try {
-            const projResp = await fetch(
-              (ds.baseUrl || '') + '/api/project/' + projectId + '?attributes=private',
-            )
-            if (projResp.ok) {
-              const projData = await projResp.json()
-              const currentlyPrivate = projData.private || false
-              api.updateProject(projectId, { private: !currentlyPrivate }, () =>
-                window.location.reload(),
-              )
+          api.updateProject(projectId, { private: !currentlyPrivate }, () => {
+            if (project) project.private = !currentlyPrivate
+            // Update button text/icon in dropdown
+            const icon = btn.querySelector('.material-icons')
+            const text = btn.querySelector('.js-visibility-text')
+            if (icon) icon.textContent = !currentlyPrivate ? 'lock_open' : 'lock'
+            if (text) {
+              text.textContent = !currentlyPrivate
+                ? ds.transSetPublic || 'Set public'
+                : ds.transSetPrivate || 'Set private'
             }
-          } catch {
-            // fallback: reload to let user retry
-            window.location.reload()
-          }
+            // Update lock badge on thumbnail
+            const lockBadge = wrapper.querySelector('.projects-list-item--lock-badge')
+            if (!currentlyPrivate) {
+              // Now private — add badge if missing
+              if (!lockBadge) {
+                const imgWrap = wrapper.querySelector('.projects-list-item--image-wrap')
+                if (imgWrap) {
+                  const icon = document.createElement('i')
+                  icon.className = 'material-icons projects-list-item--lock-badge'
+                  icon.textContent = 'lock'
+                  imgWrap.appendChild(icon)
+                }
+              }
+            } else {
+              // Now public — remove badge
+              if (lockBadge) lockBadge.remove()
+            }
+          })
+        }
+      })
+    })
+
+    // Toggle not-for-kids action
+    wrapper.querySelectorAll('[data-action="toggle-not-for-kids"]').forEach((btn) => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        btn.closest('.projects-list-item--dropdown').style.display = 'none'
+        const projectId = btn.dataset.projectId
+        const project = this.projectsData[projectId]
+        const currentNfk = project?.not_for_kids || 0
+        if (currentNfk === 2) {
+          const { showSnackbar, SnackbarDuration } = await import('../Layout/Snackbar')
+          showSnackbar(
+            '#share-snackbar',
+            ds.transNfkModeratorLocked || 'Locked by moderator',
+            SnackbarDuration.error,
+          )
+          return
+        }
+        const newValue = currentNfk === 0
+        const { default: Swal } = await import('sweetalert2')
+        const result = await Swal.fire({
+          title: newValue
+            ? ds.transMarkNotForKidsConfirm || 'Mark as not for kids?'
+            : ds.transMarkSafeForKidsConfirm || 'Mark as safe for kids?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: ds.transConfirm || 'Confirm',
+          cancelButtonText: ds.transCancel || 'Cancel',
+          customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-primary',
+          },
+          buttonsStyling: false,
+        })
+        if (result.isConfirmed) {
+          const { default: ProjectApi } = await import('../Api/ProjectApi')
+          const api = new ProjectApi()
+          api.updateProject(projectId, { not_for_kids: newValue }, () => {
+            if (project) project.not_for_kids = newValue ? 1 : 0
+            const text = btn.querySelector('.js-nfk-text')
+            if (text) {
+              text.textContent = newValue
+                ? ds.transMarkSafeForKids || 'Mark safe for kids'
+                : ds.transMarkNotForKids || 'Mark not for kids'
+            }
+          })
         }
       })
     })
@@ -507,14 +641,6 @@ export class ProjectList {
     propDiv.appendChild(valueSpan)
 
     return propDiv
-  }
-
-  addNotForKidsIcon(propDiv) {
-    const notForKidsImg = document.createElement('img')
-    notForKidsImg.className = 'project-list__not-for-kids-logo'
-    notForKidsImg.src = '/images/default/not_for_kids.svg'
-    notForKidsImg.alt = 'Not for kids'
-    propDiv.appendChild(notForKidsImg)
   }
 
   updateChevronVisibility() {
@@ -626,12 +752,37 @@ export class ProjectList {
   closeFullView() {
     window.removeEventListener('popstate', this.popStateHandler)
     showDefaultTopBarTitle()
-    this.$title.style.display = 'block'
+    this.$title.style.removeProperty('display')
     this.isFullView = false
     this.container.classList.add('horizontal')
     this.container.classList.remove('vertical')
     this.$body.classList.remove('overflow-hidden')
     return false
+  }
+
+  _buildSecondaryMeta(data) {
+    const items = []
+    if (data.views !== undefined && this.propertyToShow !== 'views') {
+      items.push({ icon: 'visibility', value: data.views })
+    }
+    if (data.downloads !== undefined && this.propertyToShow !== 'downloads') {
+      items.push({ icon: 'get_app', value: data.downloads })
+    }
+    if (items.length === 0) return null
+
+    const wrapper = document.createElement('div')
+    wrapper.className = 'project-list__meta-secondary'
+    items.forEach((item) => {
+      const span = document.createElement('span')
+      span.className = 'project-list__meta-secondary__item'
+      const icon = document.createElement('i')
+      icon.className = 'material-icons'
+      icon.textContent = item.icon
+      span.appendChild(icon)
+      span.appendChild(document.createTextNode(String(item.value)))
+      wrapper.appendChild(span)
+    })
+    return wrapper
   }
 
   _buildRetentionMeta(retentionDays, retentionExpiry, ds) {

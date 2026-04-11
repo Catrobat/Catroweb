@@ -53,8 +53,10 @@ $container-padding: 1rem;
     &__image {
       flex: 0 0 6rem;
       width: 6rem;
+      height: auto;
       border-radius: 10%;
-      aspect-ratio: auto 1 / 1;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
       box-shadow: 3px 3px 20px 0 rgb(50 50 50 / 15%);
 
       @include media-breakpoint-up(sm) {

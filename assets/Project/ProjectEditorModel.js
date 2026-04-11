@@ -108,7 +108,7 @@ export function ProjectEditorModel(programId, textFieldModels, preloadedLanguage
         .filter((update) => update !== null)
         .reduce((acc, curr) => ({ ...acc, ...curr }), {})
 
-      if (requestData.length === 0) {
+      if (Object.keys(requestData).length === 0) {
         return
       }
 

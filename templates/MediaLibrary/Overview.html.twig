@@ -10,8 +10,39 @@
   <div class="container">
     <p>{{ 'media-packages.description'|trans({}, 'catroweb') }}</p>
 
-    <div id="loading-spinner" class="medialib-spinner">
+    <div id="loading-spinner" class="medialib-spinner" style="display: none;">
       {{ include('Components/LoadingSpinner.html.twig') }}
+    </div>
+
+    <div id="skeleton-categories" class="js-skeleton">
+      {% for i in range(1, 3) %}
+        <div class="category-section mb-5">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+              <span class="skeleton" style="display: inline-block; width: {{ [180, 220, 160][i - 1] }}px; height: 1.5rem;"></span>
+              <div style="margin-top: 0.35rem;">
+                <span class="skeleton" style="display: inline-block; width: {{ [250, 200, 280][i - 1] }}px; height: 0.85rem;"></span>
+              </div>
+            </div>
+            <span class="skeleton" style="display: inline-block; width: 70px; height: 1.25rem; border-radius: 1rem;"></span>
+          </div>
+          <div class="media-assets-row mb-3">
+            {% for j in range(1, 6) %}
+              <div class="media-asset-col">
+                <div class="card h-100">
+                  <div class="asset-preview">
+                    <span class="skeleton" style="display: block; width: 100%; height: 120px; border-radius: 0;"></span>
+                  </div>
+                  <div class="card-body p-2">
+                    <span class="skeleton" style="display: inline-block; width: 80%; height: 0.8rem;"></span>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <span class="skeleton" style="display: inline-block; width: 120px; height: 2rem; border-radius: 0.25rem;"></span>
+        </div>
+      {% endfor %}
     </div>
 
     <div id="categories-container" style="display: none;">

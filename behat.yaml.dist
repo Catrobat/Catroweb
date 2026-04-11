@@ -345,6 +345,7 @@ default:
                 - tests/BehatFeatures/web/profile/profile_verification.feature
                 - tests/BehatFeatures/web/profile/profile_suspended.feature
                 - tests/BehatFeatures/web/profile/many_follower.feature
+                - tests/BehatFeatures/web/profile/profile_studios.feature
             contexts:
                 - App\System\Testing\Behat\Context\RefreshEnvironmentContext
                 - App\System\Testing\Behat\Context\DataFixturesContext

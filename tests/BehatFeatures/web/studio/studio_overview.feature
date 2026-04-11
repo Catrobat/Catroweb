@@ -51,8 +51,11 @@ Feature: There is a page to create new studios and also see a list of all availa
     And I am on "/app/studios"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    And I wait for the element ".studio-leave-btn[data-studio-id='1']" to be visible
-    When I click ".studio-leave-btn[data-studio-id='1']"
+    And I wait for the element ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn" to be visible
+    When I click ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn"
+    And I click "[data-action='leave'][data-studio-id='1']"
+    And I wait 500 milliseconds
+    And I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then I wait for the element "#studios-user-count-1" to contain "1"
 
@@ -89,6 +92,17 @@ Feature: There is a page to create new studios and also see a list of all availa
     And I wait for AJAX to finish
     Then I should see "CatrobatStudio01"
     And I should not see "My Studios"
+
+  Scenario: Studio card menu has Open and Share options
+    Given I log in as "Catrobat"
+    And I am on "/app/studios"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    And I wait for the element ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn" to be visible
+    When I click ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn"
+    And I wait 500 milliseconds
+    Then I should see "Open"
+    And I should see "Share"
 
   Scenario: Create Studio FAB is visible on studios page
     Given I am on "/app/studios"

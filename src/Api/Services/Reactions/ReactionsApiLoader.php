@@ -27,17 +27,17 @@ class ReactionsApiLoader extends AbstractApiLoader
       return null;
     }
 
-    // Project is visible if it's public OR if the user owns it
-    if ($project->isVisible() && !$project->getPrivate()) {
-      return $project;
+    // Admin-hidden projects are only visible to their owner
+    if (!$project->isVisible()) {
+      if ($user instanceof User && $project->getUser() === $user) {
+        return $project;
+      }
+
+      return null;
     }
 
-    // Private/invisible projects are only visible to their owner
-    if ($user instanceof User && $project->getUser() === $user) {
-      return $project;
-    }
-
-    return null;
+    // Visible projects (including private ones) are accessible via direct link
+    return $project;
   }
 
   /**

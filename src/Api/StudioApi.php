@@ -71,7 +71,8 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
     }
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createStudioResponse($studio);
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    $response = $this->facade->getResponseManager()->createStudioResponseWithUserContext($studio, $user);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
     $this->facade->getResponseManager()->addStudioLocationToHeaders($responseHeaders, $studio);
@@ -268,7 +269,8 @@ class StudioApi extends AbstractApiController implements StudioApiInterface
 
     $existingMember = $this->facade->getLoader()->loadStudioUser($user, $studio);
     if (!$existingMember instanceof StudioUser) {
-      $responseCode = Response::HTTP_NOT_FOUND;
+      // Not a member — check for a pending join request to cancel
+      $this->facade->getProcessor()->cancelPendingJoinRequest($user, $studio, $responseCode);
 
       return;
     }
