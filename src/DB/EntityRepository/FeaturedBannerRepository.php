@@ -36,4 +36,31 @@ class FeaturedBannerRepository extends ServiceEntityRepository
       ->getResult()
     ;
   }
+
+  /**
+   * Keyset cursor query for active banners ordered by priority DESC, id DESC.
+   *
+   * @return FeaturedBanner[]
+   */
+  public function findActiveBannersKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null): array
+  {
+    $qb = $this->createQueryBuilder('fb')
+      ->select('fb')
+      ->where('fb.active = true')
+      ->orderBy('fb.priority', 'DESC')
+      ->addOrderBy('fb.id', 'DESC')
+      ->setMaxResults($limit)
+    ;
+
+    if (null !== $cursor_priority && null !== $cursor_id) {
+      $qb->andWhere(
+        '(fb.priority < :cursor_priority) OR (fb.priority = :cursor_priority AND fb.id < :cursor_id)'
+      )
+        ->setParameter('cursor_priority', $cursor_priority)
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    return $qb->getQuery()->getResult();
+  }
 }

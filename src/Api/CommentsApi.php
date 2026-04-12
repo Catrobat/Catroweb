@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Twig\Environment;
 
 class CommentsApi extends AbstractApiController implements CommentsApiInterface
 {
@@ -44,7 +43,6 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly TranslationDelegate $translation_delegate,
     private readonly NotificationManager $notification_manager,
     private readonly RequestStack $request_stack,
-    private readonly Environment $twig,
     private readonly AuthorizationCheckerInterface $authorization_checker,
     private readonly RateLimiterFactory $commentBurstLimiter,
     private readonly RateLimiterFactory $commentDailyLimiter,
@@ -53,7 +51,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function projectIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
     if (!$project instanceof Program) {
@@ -89,7 +87,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function projectIdCommentsPost(string $id, CommentCreateRequest $comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsIdCommentsPost(string $id, CommentCreateRequest $comment_create_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->authentication_manager->getAuthenticatedUser();
     if (!$user instanceof User) {
@@ -187,9 +185,9 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function commentsIdDelete(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function commentsIdDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    if ($id <= 0) {
+    if ('' === $id) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return;
@@ -228,7 +226,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function commentsIdRepliesGet(int $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function commentsIdRepliesGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $comment = $this->comment_repository->findOneBy(['id' => $id]);
     if (!$comment instanceof UserComment) {
@@ -277,7 +275,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   }
 
   #[\Override]
-  public function commentsIdTranslationGet(int $id, string $target_language, string $accept_language, ?string $source_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function commentsIdTranslationGet(string $id, string $target_language, string $accept_language, ?string $source_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $comment = $this->comment_repository->findOneBy(['id' => $id]);
     if (!$comment instanceof UserComment) {
@@ -342,7 +340,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $response = new CommentTranslationResponse();
-    $response->setId($comment->getId() ?? 0);
+    $response->setId($comment->getId() ?? '');
     $response->setSourceLanguage($source_language ?? $translation_result->detected_source_language);
     $response->setTargetLanguage($target_language);
     $response->setTranslation($translation_result->translation);
@@ -366,7 +364,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $next_cursor = null;
     if ($has_more && [] !== $comments) {
       $last = array_last($comments);
-      $next_cursor = $this->encodeCursor($last['upload_date'], (int) $last['id']);
+      $next_cursor = $this->encodeCursor($last['upload_date'], (string) $last['id']);
     }
 
     $response->setData($data);
@@ -379,13 +377,10 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   private function createCommentResponse(array $comment_data, string $project_id, bool $are_replies): CommentResponse
   {
     $response = new CommentResponse();
-    $response->setId((int) $comment_data['id']);
+    $response->setId((string) $comment_data['id']);
     $response->setProjectId($project_id);
-    $parent_id = isset($comment_data['parent_id']) ? (int) $comment_data['parent_id'] : null;
-    if (0 === $parent_id) {
-      $parent_id = null;
-    }
-    $response->setParentId($parent_id);
+    $parent_id = $comment_data['parent_id'] ?? null;
+    $response->setParentId(null !== $parent_id ? (string) $parent_id : null);
     $response->setMessage(true === $comment_data['is_deleted'] ? null : (string) $comment_data['text']);
     $response->setCreatedAt($comment_data['upload_date']);
     $response->setReplyCount((int) ($comment_data['number_of_replies'] ?? 0));
@@ -396,20 +391,10 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $user_info->setId((string) $comment_data['user_id']);
     $user_info->setUsername((string) $comment_data['username']);
     $user_info->setAvatar($comment_data['user_avatar'] ?? null);
+    $user_info->setApproved((bool) ($comment_data['user_approved'] ?? false));
     $response->setUser($user_info);
 
-    $response->setRendered($this->renderCommentHtml($comment_data, $are_replies));
-
     return $response;
-  }
-
-  private function renderCommentHtml(array $comment_data, bool $are_replies): string
-  {
-    return $this->twig->render('Project/Comment/Comment.html.twig', [
-      'comment' => $comment_data,
-      'isAdmin' => $this->authorization_checker->isGranted('ROLE_ADMIN'),
-      'are_replies' => $are_replies,
-    ]);
   }
 
   private function buildCommentDataFromEntity(UserComment $comment, int $reply_count): array
@@ -480,18 +465,17 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
-    $id = filter_var($id_string, FILTER_VALIDATE_INT);
-    if (false === $id) {
+    if ('' === $id_string) {
       return null;
     }
 
     return [
       'date' => $date,
-      'id' => $id,
+      'id' => $id_string,
     ];
   }
 
-  private function encodeCursor(\DateTimeInterface $date, int $id): string
+  private function encodeCursor(\DateTimeInterface $date, string $id): string
   {
     $utc_date = \DateTimeImmutable::createFromInterface($date)->setTimezone(new \DateTimeZone('UTC'));
     $value = $utc_date->format('Y-m-d\TH:i:s.u\Z').'|'.$id;

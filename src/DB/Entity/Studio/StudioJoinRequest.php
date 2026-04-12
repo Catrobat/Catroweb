@@ -6,6 +6,7 @@ namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
+use App\DB\Generator\MyUuidGenerator;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,9 +23,10 @@ class StudioJoinRequest
   public const string STATUS_JOINED = 'joined';
 
   #[ORM\Id]
-  #[ORM\GeneratedValue]
-  #[ORM\Column(type: Types::INTEGER)]
-  protected ?int $id = null;
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  #[ORM\Column(type: Types::GUID)]
+  protected ?string $id = null;
 
   #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
@@ -37,7 +39,7 @@ class StudioJoinRequest
   #[ORM\Column(type: Types::STRING, length: 20)]
   protected ?string $status = null;
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }

@@ -25,7 +25,7 @@ class AchievementsApiLoader extends AbstractApiLoader
     $user_achievements = $this->achievement_manager->findUserAchievements($user);
 
     $unlocked = array_map(static fn (UserAchievement $ua): Achievement => $ua->getAchievement(), $user_achievements);
-    $unlocked_ids = array_map(static fn (Achievement $a): ?int => $a->getId(), $unlocked);
+    $unlocked_ids = array_map(static fn (Achievement $a): ?string => $a->getId(), $unlocked);
     $locked = array_values(array_filter($all_enabled, static fn (Achievement $a): bool => !in_array($a->getId(), $unlocked_ids, true)));
 
     $most_recent = $user_achievements[0] ?? null;

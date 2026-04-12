@@ -6,6 +6,7 @@ namespace App\DB\Entity\User\Achievements;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Achievements\UserAchievementRepository;
+use App\DB\Generator\MyUuidGenerator;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,10 +15,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: UserAchievementRepository::class)]
 class UserAchievement
 {
-  #[ORM\Column(name: 'id', type: Types::INTEGER)]
+  #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\Id]
-  #[ORM\GeneratedValue(strategy: 'AUTO')]
-  protected ?int $id = null;
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  protected ?string $id = null;
 
   #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: User::class)]
@@ -33,12 +35,12 @@ class UserAchievement
   #[ORM\Column(name: 'seen_at', type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTimeInterface $seen_at = null;
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(int $id): UserAchievement
+  public function setId(string $id): UserAchievement
   {
     $this->id = $id;
 

@@ -200,18 +200,23 @@ class StudioManagerTest extends KernelTestCase
     $userComment = $this->object->addCommentToStudio($newUser, $this->studio, 'normal member comment');
     $this->assertNotNull($userComment);
 
-    $this->assertNotNull($adminComment->getId());
+    $adminCommentId = $adminComment->getId();
+    $this->assertNotNull($adminCommentId);
     $userComment_2 = $this->object->addCommentToStudio($newUser, $this->studio, 'normal user comment 2');
 
-    $this->assertNull($this->object->editStudioComment($newUser, $adminComment->getId(), "can't edit comments that are not your own"));
+    $this->assertNull($this->object->editStudioComment($newUser, $adminCommentId, "can't edit comments that are not your own"));
 
-    $this->object->deleteCommentFromStudio($newUser, $adminComment->getId());
+    $this->object->deleteCommentFromStudio($newUser, $adminCommentId);
     $this->assertNotNull($adminComment->getId(), "Can't delete comments that are not your own");
 
-    $this->object->deleteCommentFromStudio($newUser, $userComment->getId());
+    $userCommentId = $userComment->getId();
+    \assert(null !== $userCommentId);
+    $this->object->deleteCommentFromStudio($newUser, $userCommentId);
     $this->assertNull($userComment->getId());
 
-    $this->object->deleteCommentFromStudio($newUser, $userComment_2->getId());
+    $userComment2Id = $userComment_2->getId();
+    \assert(null !== $userComment2Id);
+    $this->object->deleteCommentFromStudio($newUser, $userComment2Id);
     $this->assertNull($userComment_2->getId());
 
     $this->assertCount(1, $this->object->findAllStudioComments($this->studio));
@@ -264,15 +269,13 @@ class StudioManagerTest extends KernelTestCase
     $this->object->addCommentToStudio($this->user, $this->studio, $replies[0], $studioComment->getId());
     $this->object->addCommentToStudio($this->user, $this->studio, $replies[1], $studioComment->getId());
     $this->assertEquals(2, $this->object->countCommentReplies($studioComment->getId()));
-    $i = 0;
-    foreach ($this->object->findCommentReplies($studioComment->getId()) as $reply) {
-      $this->assertInstanceOf(UserComment::class, $reply);
-      $this->assertEquals($replies[$i], $reply->getText());
-      ++$i;
-      if ($i >= count($replies)) {
-        break;
-      }
-    }
+    $replyTexts = array_map(
+      static fn (UserComment $reply) => $reply->getText(),
+      $this->object->findCommentReplies($studioComment->getId()),
+    );
+    sort($replyTexts);
+    sort($replies);
+    $this->assertEquals($replies, $replyTexts);
 
     $this->object->deleteCommentFromStudio($this->user, $studioComment->getId());
 

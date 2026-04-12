@@ -65,12 +65,12 @@ class ModerationApiLoader extends AbstractApiLoader
     return $this->paginateResults($reports, $limit);
   }
 
-  public function findReport(int $id): ?ContentReport
+  public function findReport(string $id): ?ContentReport
   {
     return $this->report_repository->find($id);
   }
 
-  public function findAppeal(int $id): ?ContentAppeal
+  public function findAppeal(string $id): ?ContentAppeal
   {
     return $this->appeal_repository->find($id);
   }
@@ -78,12 +78,12 @@ class ModerationApiLoader extends AbstractApiLoader
   /**
    * Resolve a legacy (id-only) report cursor into created_at+id components.
    *
-   * @return array{?\DateTimeInterface, ?int, ?int}
+   * @return array{?\DateTimeInterface, ?string, ?string}
    */
   private function resolveReportLegacyCursor(
     ?\DateTimeInterface $cursor_created_at,
-    ?int $cursor_id,
-    ?int $legacy_cursor_id = null,
+    ?string $cursor_id,
+    ?string $legacy_cursor_id = null,
   ): array {
     if (null !== $legacy_cursor_id && (null === $cursor_created_at || null === $cursor_id)) {
       $legacy_report = $this->report_repository->find($legacy_cursor_id);
@@ -98,7 +98,7 @@ class ModerationApiLoader extends AbstractApiLoader
   /**
    * Parse and normalize cursor pagination parameters.
    *
-   * @return array{int, ?\DateTimeInterface, ?int, ?int}
+   * @return array{int, ?\DateTimeInterface, ?string, ?string}
    */
   private function parseCursorParams(int $limit, ?string $cursor): array
   {
@@ -139,7 +139,7 @@ class ModerationApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @return array{created_at: ?\DateTimeInterface, id: ?int, legacy_id: ?int}|null
+   * @return array{created_at: ?\DateTimeInterface, id: ?string, legacy_id: ?string}|null
    */
   private function decodeModerationCursor(?string $cursor): ?array
   {
@@ -153,21 +153,15 @@ class ModerationApiLoader extends AbstractApiLoader
     }
 
     if (!str_contains($decoded, '|')) {
-      $legacy_id = filter_var($decoded, FILTER_VALIDATE_INT);
-      if (false === $legacy_id) {
-        return null;
-      }
-
       return [
         'created_at' => null,
         'id' => null,
-        'legacy_id' => $legacy_id,
+        'legacy_id' => $decoded,
       ];
     }
 
     [$created_at_raw, $id_raw] = explode('|', $decoded, 2);
-    $id = filter_var($id_raw, FILTER_VALIDATE_INT);
-    if (false === $id) {
+    if ('' === $id_raw) {
       return null;
     }
 
@@ -179,12 +173,12 @@ class ModerationApiLoader extends AbstractApiLoader
 
     return [
       'created_at' => $created_at->setTimezone(new \DateTimeZone('UTC')),
-      'id' => $id,
+      'id' => $id_raw,
       'legacy_id' => null,
     ];
   }
 
-  private function encodeModerationCursor(?\DateTimeInterface $created_at, ?int $id): ?string
+  private function encodeModerationCursor(?\DateTimeInterface $created_at, ?string $id): ?string
   {
     if (!($created_at instanceof \DateTimeInterface) || null === $id) {
       return null;

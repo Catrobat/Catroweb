@@ -87,11 +87,14 @@ Feature: Search users
     Then the response status code should be "200"
     And I should get the json object:
     """
-    [
-      {
-        "id": "4",
-        "username": "Catroweb",
-        "following": 2
-      }
-    ]
+    {
+      "data": [
+        {
+          "id": "4",
+          "username": "Catroweb",
+          "following": 2
+        }
+      ],
+      "has_more": false
+    }
     """

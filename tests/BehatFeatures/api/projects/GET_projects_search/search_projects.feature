@@ -50,7 +50,11 @@ Feature: Search projects
     Then the response should have the default projects model structure
     Then I should get the json object:
       """
-      []
+      {
+        "data": [],
+
+        "has_more": false
+      }
       """
 
   Scenario: Hidden projects must not appear in the results
@@ -62,7 +66,11 @@ Feature: Search projects
     Then the response should have the default projects model structure
     Then I should get the json object:
       """
-      []
+      {
+        "data": [],
+
+        "has_more": false
+      }
       """
 
   Scenario: Search for projects with specific word
@@ -76,15 +84,15 @@ Feature: Search projects
       | Name       |
       | Galaxy War |
 
-  Scenario: Search for project using the offset query
+  Scenario: Search for project with description query
 
     Given I have a parameter "query" with value "description"
-    And I have a parameter "offset" with value "1"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
     Then the response should contain projects in the following order:
       | Name       |
+      | Galaxy War |
       | Superponny |
 
 
@@ -101,6 +109,22 @@ Feature: Search projects
       | Galaxy War |
       | Webteam    |
 
+  Scenario: Cursor pagination - search page 1 then page 2 via cursor
+
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/projects/search/?query=arduino&limit=2"
+    Then the response status code should be "200"
+    Then the response should contain projects in the following order:
+      | Name       |
+      | ponny      |
+      | Galaxy War |
+    And the client response should contain "has_more"
+    And I save the next_cursor from the response
+    When I request page 2 with the saved cursor at "/api/projects/search/?query=arduino&limit=2"
+    Then the response status code should be "200"
+    Then the response should contain projects in the following order:
+      | Name    |
+      | Webteam |
 
   Scenario: Search for project with specific extension with max_version = 0.984
     Given I have a parameter "query" with value "arduino"
@@ -122,19 +146,23 @@ Feature: Search projects
     Then the response status code should be "200"
     And I should get the json object:
       """
-      [
-        {
-          "id": "qysm-rhwt",
-          "name": "Galaxy War",
-          "author": "User1",
-          "description": "description1"
-        },
-        {
-          "id": "isxs-adkt",
-          "name": "Webteam",
-          "author": "NewUser",
-          "description": ""
-        }
-      ]
+      {
+        "data": [
+          {
+            "id": "qysm-rhwt",
+            "name": "Galaxy War",
+            "author": "User1",
+            "description": "description1"
+          },
+          {
+            "id": "isxs-adkt",
+            "name": "Webteam",
+            "author": "NewUser",
+            "description": ""
+          }
+        ],
+
+        "has_more": false
+      }
       """
 

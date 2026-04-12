@@ -14,7 +14,6 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\Studio\StudioManager;
-use App\Utils\ElapsedTimeStringFormatter;
 use OpenAPI\Server\Model\StudioActivityListResponse;
 use OpenAPI\Server\Model\StudioActivityResponse;
 use OpenAPI\Server\Model\StudioCommentListResponse;
@@ -46,7 +45,6 @@ class StudioResponseManager extends AbstractResponseManager
     private readonly RequestStack $request_stack,
     private readonly StudioManager $studio_manager,
     private readonly ProjectManager $project_manager,
-    private readonly ElapsedTimeStringFormatter $time_formatter,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -182,13 +180,6 @@ class StudioResponseManager extends AbstractResponseManager
     $programId = $program->getId();
     $user = $studioProject->getUser();
 
-    $uploadedString = null;
-    try {
-      $uploadedString = $this->time_formatter->format($program->getUploadedAt()->getTimestamp());
-    } catch (\Exception) {
-      $uploadedString = $program->getUploadedAt()->format(\DateTimeInterface::RFC2822);
-    }
-
     return (new StudioProjectResponse())
       ->setId($programId)
       ->setName($program->getName())
@@ -197,11 +188,6 @@ class StudioResponseManager extends AbstractResponseManager
       ->setScreenshotSmall(null !== $programId ? $this->project_manager->getScreenshotSmall($programId) : null)
       ->setAuthor($program->getUser()?->getUsername())
       ->setAuthorId($program->getUser()?->getId())
-      ->setDownloads($program->getDownloads())
-      ->setViews($program->getViews())
-      ->setUploadedString($uploadedString)
-      ->setPrivate($program->getPrivate())
-      ->setNotForKids($program->getNotForKids())
     ;
   }
 
@@ -238,8 +224,8 @@ class StudioResponseManager extends AbstractResponseManager
       ->setUsername($comment->getUsername())
       ->setUserId($user?->getId())
       ->setUserAvatar($user?->getAvatar())
-      ->setParentId($comment->getParentId() ?: null)
-      ->setReplyCount($this->studio_manager->countCommentReplies($comment->getId() ?? 0))
+      ->setParentId($comment->getParentId())
+      ->setReplyCount($this->studio_manager->countCommentReplies($comment->getId() ?? ''))
       ->setCreatedAt($comment->getUploadDate())
     ;
   }

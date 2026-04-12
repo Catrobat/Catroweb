@@ -39,6 +39,6 @@ Feature: User gets notifications when somebody uploads a remix of his project
     And I am on "/app/notifications"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    When I click "#catro-notification-1"
+    When I click ".notification-item"
     And I wait for the page to be loaded
     Then I should be on "/app/project/3"

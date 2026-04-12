@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         if (result.isConfirmed) {
           try {
-            const resp = await fetch(baseUrl + '/api/studio/' + studioId + '/leave', {
+            const resp = await fetch(baseUrl + '/api/studios/' + studioId + '/leave', {
               method: 'DELETE',
               credentials: 'same-origin',
             })
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         if (result.isConfirmed) {
           try {
-            const resp = await fetch(baseUrl + '/api/studio/' + studioId + '/leave', {
+            const resp = await fetch(baseUrl + '/api/studios/' + studioId + '/leave', {
               method: 'DELETE',
               credentials: 'same-origin',
             })
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!studioCards) return
 
-    const studiosUrl = baseUrl + '/api/user/' + userId + '/studios'
+    const studiosUrl = baseUrl + '/api/users/' + userId + '/studios'
 
     fetch(studiosUrl, { credentials: 'same-origin' })
       .then((r) => {

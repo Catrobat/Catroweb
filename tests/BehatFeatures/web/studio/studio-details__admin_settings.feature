@@ -25,17 +25,17 @@ Feature: As studio admin I must be able to configure a studio
       | Catrobat3 | CatrobatStudio05   | declined |
 
     And there are studio users:
-      | id | user          | studio_id | role   |
-      | 1  | StudioAdmin   | 1         | admin  |
-      | 2  | Catrobat      | 1         | member |
-      | 3  | Catrobat1     | 2         | member |
-      | 4  | Catrobat2     | 2         | member |
-      | 5  | Catrobat3     | 2         | member |
-      | 6  | StudioAdmin2  | 2         | admin  |
-      | 7  | StudioAdmin2  | 3         | admin  |
-      | 8  | StudioAdmin2  | 4         | admin  |
-      | 9  | Catrobat3     | 3         | member |
-      | 10 | Catrobat3     | 4         | member |
+      | id                                   | user          | studio_id | role   |
+      | 00000000-0000-0000-0000-000000000001 | StudioAdmin   | 1         | admin  |
+      | 00000000-0000-0000-0000-000000000002 | Catrobat      | 1         | member |
+      | 00000000-0000-0000-0000-000000000003 | Catrobat1     | 2         | member |
+      | 00000000-0000-0000-0000-000000000004 | Catrobat2     | 2         | member |
+      | 00000000-0000-0000-0000-000000000005 | Catrobat3     | 2         | member |
+      | 00000000-0000-0000-0000-000000000006 | StudioAdmin2  | 2         | admin  |
+      | 00000000-0000-0000-0000-000000000007 | StudioAdmin2  | 3         | admin  |
+      | 00000000-0000-0000-0000-000000000008 | StudioAdmin2  | 4         | admin  |
+      | 00000000-0000-0000-0000-000000000009 | Catrobat3     | 3         | member |
+      | 00000000-0000-0000-0000-000000000010 | Catrobat3     | 4         | member |
 
 
   Scenario: If I am not logged in I must not see the button to open the settings modal

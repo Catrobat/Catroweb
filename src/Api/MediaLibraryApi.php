@@ -6,15 +6,17 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\MediaLibrary\MediaLibraryApiFacade;
+use App\Api\Traits\CursorPaginationTrait;
+use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaFileType as DbMediaFileType;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\FlavorRepository;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
 use OpenAPI\Server\Model\MediaAssetResponse;
-use OpenAPI\Server\Model\MediaAssetsResponse;
+use OpenAPI\Server\Model\MediaAssetsListResponse;
 use OpenAPI\Server\Model\MediaAssetUpdateRequest;
-use OpenAPI\Server\Model\MediaCategoriesResponse;
+use OpenAPI\Server\Model\MediaCategoriesListResponse;
 use OpenAPI\Server\Model\MediaCategoryDetailResponse;
 use OpenAPI\Server\Model\MediaCategoryRequest;
 use OpenAPI\Server\Model\MediaCategoryResponse;
@@ -25,6 +27,8 @@ use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiInterface
 {
+  use CursorPaginationTrait;
+  use KeysetCursorTrait;
   use RateLimitTrait;
 
   public function __construct(
@@ -39,7 +43,6 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
   public function mediaLibraryGet(
     string $accept_language,
     int $limit,
-    int $offset,
     ?string $cursor,
     ?string $file_type,
     ?string $flavor,
@@ -65,19 +68,20 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     }
 
     if (null !== $search) {
+      // Search uses in-memory filtering with array_slice — must stay offset-based
       $categories = $this->facade->getLoader()->getAllCategories();
-      $total_categories = count($categories);
     } else {
-      $categories = $this->facade->getLoader()->getCategories($limit, $offset);
-      $total_categories = $this->facade->getLoader()->countCategories();
+      $cursor_data = $this->decodeIntKeysetCursor($cursor);
+      $categories = $this->facade->getLoader()->getCategoriesKeyset(
+        $limit, $cursor_data['value'] ?? null, $cursor_data['id'] ?? null
+      );
     }
 
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createLibraryOverviewResponse(
       $categories,
-      $total_categories,
       $limit,
-      $offset,
+      $cursor,
       $assets_per_category,
       $db_file_type,
       $flavor,
@@ -93,13 +97,19 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
   public function mediaCategoriesGet(
     string $accept_language,
     int $limit,
-    int $offset,
     ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
-  ): ?MediaCategoriesResponse {
+  ): ?MediaCategoriesListResponse {
+    $cursor_data = $this->decodeIntKeysetCursor($cursor);
+    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
-    $cache_id = sprintf('mediaCategoriesGet_%s_%d_%d', $locale, $limit, $offset);
+    $cache_id = sprintf('mediaCategoriesGet_%s_%d_%s', $locale, $limit, $cursor ?? '');
 
     $cached = $this->facade->getResponseManager()->getCachedResponse($cache_id);
     if (null !== $cached) {
@@ -109,13 +119,15 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
       return $cached['response'];
     }
 
-    $categories = $this->facade->getLoader()->getCategories($limit, $offset);
-    $total = $this->facade->getLoader()->countCategories();
+    $categories = $this->facade->getLoader()->getCategoriesKeyset(
+      $limit, $cursor_data['value'] ?? null, $cursor_data['id'] ?? null
+    );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createCategoriesResponse($categories, $total, $limit, $offset);
+    $response = $this->facade->getResponseManager()->createCategoriesKeysetResponse($categories, $limit);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
 
     return $response;
   }
@@ -158,7 +170,6 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     string $id,
     string $accept_language,
     int $limit,
-    int $offset,
     ?string $cursor,
     int &$responseCode,
     array &$responseHeaders,
@@ -170,11 +181,20 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
       return null;
     }
 
-    $assets = $this->facade->getLoader()->getAssets($limit, $offset, $id, null, null, null, 'created_at', 'DESC');
-    $total_assets = $this->facade->getLoader()->countAssets($id, null, null, null);
+    $cursor_data = $this->decodeKeysetCursor($cursor);
+    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $assets = $this->facade->getLoader()->getAssetsPaginatedKeyset(
+      $limit, $id, null, null, null, 'created_at', 'DESC',
+      $cursor_data['value'] ?? null, $cursor_data['id'] ?? null
+    );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createCategoryDetailResponse($category, $assets, $total_assets, $limit, $offset);
+    $response = $this->facade->getResponseManager()->createCategoryDetailKeysetResponse($category, $assets, $limit);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -253,7 +273,6 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
   public function mediaAssetsGet(
     string $accept_language,
     int $limit,
-    int $offset,
     ?string $cursor,
     ?string $category_id,
     ?string $file_type,
@@ -263,7 +282,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     string $sort_order,
     int &$responseCode,
     array &$responseHeaders,
-  ): ?MediaAssetsResponse {
+  ): ?MediaAssetsListResponse {
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
     $rate_limit = $this->checkIpRateLimit($ip, $this->mediaLibraryBurstLimiter);
     if (null === $rate_limit) {
@@ -276,21 +295,27 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
 
     $db_file_type = $file_type ? $this->convertToDbFileType($file_type) : null;
 
-    $assets = $this->facade->getLoader()->getAssets(
+    $cursor_data = $this->decodeKeysetCursor($cursor);
+    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return null;
+    }
+
+    $assets = $this->facade->getLoader()->getAssetsPaginatedKeyset(
       $limit,
-      $offset,
       $category_id,
       $db_file_type,
       $flavor,
       $search,
       $sort_by,
-      $sort_order
+      $sort_order,
+      $cursor_data['value'] ?? null,
+      $cursor_data['id'] ?? null
     );
 
-    $total = $this->facade->getLoader()->countAssets($category_id, $db_file_type, $flavor, $search);
-
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createAssetsResponse($assets, $total, $limit, $offset);
+    $response = $this->facade->getResponseManager()->createAssetsKeysetResponse($assets, $limit, $sort_by);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 

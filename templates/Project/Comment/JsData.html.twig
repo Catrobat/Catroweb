@@ -19,7 +19,7 @@
      data-trans-rate-limited="{{ 'moderation.comment.rate_limited'|trans({}, 'catroweb') }}"
      data-trans-report-unverified="{{ 'moderation.report.unverified'|trans({}, 'catroweb') }}"
      data-trans-report-suspended="{{ 'accountSuspended'|trans({}, 'catroweb') }}"
-     data-path-comments-list-url="{{ path('open_api_server_comments_projectidcommentsget', {id: project_id}) }}"
+     data-path-comments-list-url="{{ path('open_api_server_comments_projectsidcommentsget', {id: project_id}) }}"
      data-path-comments-base-url="{{ path('open_api_server_comments_commentsiddelete', {id: 0})|replace({'/0': ''}) }}"
      data-path-login-url="{{ path('login') }}"
      data-translated-by-line="{{ 'project.translatedByLine'|trans({}, 'catroweb') }}"
@@ -33,5 +33,17 @@
      data-trans-report-trust-too-low="{{ 'moderation.report.trust_too_low'|trans({}, 'catroweb') }}"
      data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb') }}"
      data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb') }}"
-     data-is-logged-in="{{ app.user ? 'true' : 'false' }}">
+     data-is-logged-in="{{ app.user ? 'true' : 'false' }}"
+     data-is-admin="{{ is_granted('ROLE_ADMIN') ? 'true' : 'false' }}"
+     data-current-user-id="{{ app.user ? app.user.id : '' }}"
+     data-current-user-is-minor="{{ (app.user and app.user.isMinor()) ? 'true' : 'false' }}"
+     data-default-avatar-url="{{ asset('images/default/avatar_default.png') }}"
+     data-profile-url-template="{{ url('profile', {id: '__USER_ID__', theme: app.request.attributes.get('flavor')|default('pocketcode')}) }}"
+     data-comment-detail-url-template="{{ path('project_comment', {id: '__COMMENT_ID__', theme: app.request.attributes.get('flavor')|default('pocketcode')}) }}"
+     data-translate-url-template="{{ path('open_api_server_comments_commentsidtranslationget', {id: 0})|replace({'/0/translation': ''}) }}"
+     data-trans-reply="{{ 'project.reply'|trans({}, 'catroweb') }}"
+     data-trans-show-translation="{{ 'project.showTranslation'|trans({}, 'catroweb') }}"
+     data-trans-hide-translation="{{ 'project.hideTranslation'|trans({}, 'catroweb') }}"
+     data-trans-report="{{ 'project.report'|trans({}, 'catroweb') }}"
+     data-trans-delete="{{ 'project.delete'|trans({}, 'catroweb') }}">
 </div>

@@ -10,25 +10,32 @@ Feature: Creating a new studio
       | 1  | Cool Studio | A cool studio |
 
   Scenario: An request with missing jwt token should result in an error
-    When I request "POST" "/api/studio"
+    When I request "POST" "/api/studios"
     Then the response status code should be "401"
 
   Scenario: An request with an invalid jwt token should result in an error
     Given I use an invalid JWT Bearer token
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "401"
 
   Scenario: Empty request fields should result in an error for all required fields
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name missing",
-        "description": "Description missing"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name missing"},
+            {"field": "description", "message": "Description missing"}
+          ]
+        }
       }
     """
 
@@ -40,12 +47,19 @@ Feature: Creating a new studio
       | name        | value |
       | name        | <3    |
       | description | -     |
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name too short"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name too short"}
+          ]
+        }
       }
     """
 
@@ -57,13 +71,20 @@ Feature: Creating a new studio
       | name        | value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
       | name        | more than 180: ----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
       | description | more than 3000: --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name too long",
-        "description": "Description too long"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name too long"},
+            {"field": "description", "message": "Description too long"}
+          ]
+        }
       }
     """
 
@@ -75,12 +96,19 @@ Feature: Creating a new studio
       | name        | value            |
       | name        | Cool Studio      |
       | description | with description |
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name already in use"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name already in use"}
+          ]
+        }
       }
     """
 
@@ -92,7 +120,7 @@ Feature: Creating a new studio
       | name        | value              |
       | name        | New default Studio |
       | description | with description   |
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "201"
     And I should get the json object:
     """
@@ -121,7 +149,7 @@ Feature: Creating a new studio
       | is_public       | false            |
       | enable_comments | false            |
     And I add the file "galaxy.jpg" from path "Studio" as "image_file"
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "201"
     And I should get the json object:
     """
@@ -148,12 +176,19 @@ Feature: Creating a new studio
       | name            | New Studio       |
       | description     | with description |
     And I add the file "corrupt.jpg" from path "Studio" as "image_file"
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "image_file": "Image file invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "image_file", "message": "Image file invalid"}
+          ]
+        }
       }
     """
 
@@ -166,12 +201,19 @@ Feature: Creating a new studio
       | name            | New Studio       |
       | description     | with description |
     And I add the file "galaxy.tif" from path "Studio" as "image_file"
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "image_file": "Image file type invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "image_file", "message": "Image file type invalid"}
+          ]
+        }
       }
     """
 
@@ -184,12 +226,19 @@ Feature: Creating a new studio
       | name            | New Studio       |
       | description     | with description |
     And I add the file "galaxy-too-large.jpg" from path "Studio" as "image_file"
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "image_file": "Image file too large"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "image_file", "message": "Image file too large"}
+          ]
+        }
       }
     """
 
@@ -201,11 +250,18 @@ Feature: Creating a new studio
     And I have the POST parameters:
       | name | value      |
       | name | New Studio |
-    And I request "POST" "/api/studio"
+    And I request "POST" "/api/studios"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "description": "Beschreibung fehlt"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "description", "message": "Beschreibung fehlt"}
+          ]
+        }
       }
     """

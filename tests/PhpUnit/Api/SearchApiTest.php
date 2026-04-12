@@ -50,7 +50,7 @@ final class SearchApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $response = $this->search_api->searchGet('query', 'type', 20, 0, null, $response_code, $response_headers);
+    $response = $this->search_api->searchGet('query', 'type', 20, null, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(SearchResponse::class, $response);

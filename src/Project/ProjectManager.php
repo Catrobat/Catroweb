@@ -531,6 +531,40 @@ class ProjectManager
     return $this->project_repository->getPublicUserProjects($user_id, $flavor, $max_version, $limit, $offset);
   }
 
+  /**
+   * Keyset cursor query for projects ordered by a given column.
+   *
+   * @return Program[]
+   */
+  public function getProjectsKeyset(string $order_by, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?int $cursor_value = null, ?string $cursor_id = null): array
+  {
+    return $this->project_repository->getProjectsKeyset($flavor, $max_version, $limit, $order_by, $cursor_date, $cursor_value, $cursor_id);
+  }
+
+  /**
+   * @return Program[]
+   */
+  public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    return $this->project_repository->getPublicUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id);
+  }
+
+  /**
+   * @return Program[]
+   */
+  public function getUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    return $this->project_repository->getUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id);
+  }
+
+  /**
+   * @return Program[]
+   */
+  public function getMoreProjectsFromUserKeyset(string $user_id, string $exclude_project_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    return $this->project_repository->getMoreProjectsFromUserKeyset($user_id, $exclude_project_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id);
+  }
+
   public function countPublicUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
   {
     return $this->project_repository->countPublicUserProjects($user_id, $flavor, $max_version);

@@ -88,6 +88,52 @@ class MediaAssetRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * Keyset cursor query for assets with configurable sort.
+   *
+   * @return array<MediaAsset>
+   */
+  public function findPaginatedKeyset(
+    int $limit,
+    ?MediaCategory $category = null,
+    ?MediaFileType $fileType = null,
+    ?string $flavor = null,
+    ?string $search = null,
+    string $sortBy = 'created_at',
+    string $sortOrder = 'DESC',
+    ?string $cursor_sort_value = null,
+    ?string $cursor_id = null,
+  ): array {
+    $qb = $this->createBaseQueryBuilder($category, $fileType, $flavor, $search);
+
+    $allowedSortFields = ['name', 'created_at', 'downloads', 'updated_at'];
+    if (!in_array($sortBy, $allowedSortFields, true)) {
+      $sortBy = 'created_at';
+    }
+    $sortOrder = 'ASC' === strtoupper($sortOrder) ? 'ASC' : 'DESC';
+    $cmp = 'DESC' === $sortOrder ? '<' : '>';
+    $idOrder = 'DESC' === $sortOrder ? 'DESC' : 'ASC';
+
+    $qb->orderBy('a.'.$sortBy, $sortOrder)
+      ->addOrderBy('a.id', $idOrder)
+      ->setMaxResults($limit)
+    ;
+
+    if (null !== $cursor_sort_value && null !== $cursor_id) {
+      $qb->andWhere(
+        sprintf(
+          '(a.%s %s :cursor_sort_value) OR (a.%s = :cursor_sort_value AND a.id %s :cursor_id)',
+          $sortBy, $cmp, $sortBy, $cmp
+        )
+      )
+        ->setParameter('cursor_sort_value', $cursor_sort_value)
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    return $qb->getQuery()->getResult();
+  }
+
   public function countAll(
     ?MediaCategory $category = null,
     ?MediaFileType $fileType = null,

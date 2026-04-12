@@ -22,24 +22,24 @@ Feature: Get logged in user
   Scenario: Get logged in user
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user"
+    When I request "GET" "/api/users/me"
     Then the response status code should be "200"
     And the response should have the default extended user model structure
     And the response should contain the user "Catrobat"
 
   Scenario: Get user without logging in should return 401 status code
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/user"
+    And I request "GET" "/api/users/me"
     Then the response status code should be "401"
 
   Scenario: Get user with invalid JWT Bearer token should return 401 status code
     Given I use an invalid JWT Bearer token
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/user"
+    And I request "GET" "/api/users/me"
     Then the response status code should be "401"
 
   Scenario: Get user without setting accept header should return 406 status code
     Given I have a request header "HTTP_ACCEPT" with value "invalid"
     And I use a valid JWT Bearer token for "Catrobat"
-    When I request "GET" "/api/user"
+    When I request "GET" "/api/users/me"
     Then the response status code should be "406"

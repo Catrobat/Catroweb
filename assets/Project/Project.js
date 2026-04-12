@@ -887,7 +887,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!result.value) return
 
         new ApiDeleteFetch(
-          baseUrl + '/api/project/' + projectId,
+          baseUrl + '/api/projects/' + projectId,
           'Delete Project',
           deleteItem.dataset.transError,
           function () {

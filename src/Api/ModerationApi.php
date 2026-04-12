@@ -31,7 +31,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
   }
 
   #[\Override]
-  public function projectIdReportPost(
+  public function projectsIdReportPost(
     string $id,
     ContentReportRequest $content_report_request,
     int &$responseCode,
@@ -42,16 +42,16 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
 
   #[\Override]
   public function commentsIdReportPost(
-    int $id,
+    string $id,
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
   ): void {
-    $this->handleReport(ContentType::Comment, (string) $id, $content_report_request, $responseCode);
+    $this->handleReport(ContentType::Comment, $id, $content_report_request, $responseCode);
   }
 
   #[\Override]
-  public function userIdReportPost(
+  public function usersIdReportPost(
     string $id,
     ContentReportRequest $content_report_request,
     int &$responseCode,
@@ -61,7 +61,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
   }
 
   #[\Override]
-  public function studioIdReportPost(
+  public function studiosIdReportPost(
     string $id,
     ContentReportRequest $content_report_request,
     int &$responseCode,
@@ -71,7 +71,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
   }
 
   #[\Override]
-  public function projectIdAppealPost(
+  public function projectsIdAppealPost(
     string $id,
     ContentAppealRequest $content_appeal_request,
     int &$responseCode,
@@ -82,16 +82,16 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
 
   #[\Override]
   public function commentsIdAppealPost(
-    int $id,
+    string $id,
     ContentAppealRequest $content_appeal_request,
     int &$responseCode,
     array &$responseHeaders,
   ): void {
-    $this->handleAppeal(ContentType::Comment, (string) $id, $content_appeal_request, $responseCode);
+    $this->handleAppeal(ContentType::Comment, $id, $content_appeal_request, $responseCode);
   }
 
   #[\Override]
-  public function userIdAppealPost(
+  public function usersIdAppealPost(
     string $id,
     ContentAppealRequest $content_appeal_request,
     int &$responseCode,
@@ -101,7 +101,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
   }
 
   #[\Override]
-  public function studioIdAppealPost(
+  public function studiosIdAppealPost(
     string $id,
     ContentAppealRequest $content_appeal_request,
     int &$responseCode,
@@ -142,7 +142,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
 
   #[\Override]
   public function moderationReportsIdResolvePut(
-    int $id,
+    string $id,
     ResolveReportRequest $resolve_report_request,
     int &$responseCode,
     array &$responseHeaders,
@@ -225,7 +225,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
 
   #[\Override]
   public function moderationAppealsIdResolvePut(
-    int $id,
+    string $id,
     ResolveAppealRequest $resolve_appeal_request,
     int &$responseCode,
     array &$responseHeaders,
@@ -283,7 +283,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
   }
 
   #[\Override]
-  public function userReportsGet(
+  public function usersMeReportsGet(
     int $limit,
     ?string $cursor,
     int &$responseCode,

@@ -16,23 +16,23 @@ Feature: Updating an existing studio
       | 2  | Member | 2         | member |
 
   Scenario: missing jwt token results in an error
-    And I request "DELETE" "/api/studio/1"
+    And I request "DELETE" "/api/studios/1"
     Then the response status code should be "401"
 
   Scenario: Only Studio Admins are allowed to delete studios
     Given I use a valid JWT Bearer token for "Member"
-    And I request "DELETE" "/api/studio/2"
+    And I request "DELETE" "/api/studios/2"
     Then the response status code should be "403"
 
   Scenario: Studios have to exist to delete them
     Given I use a valid JWT Bearer token for "Admin"
-    And I request "DELETE" "/api/studio/not-exist"
+    And I request "DELETE" "/api/studios/not-exist"
     Then the response status code should be "404"
 
   Scenario: public studios can be seen by everyone
     Given I use a valid JWT Bearer token for "Admin"
-    When I request "DELETE" "/api/studio/2"
+    When I request "DELETE" "/api/studios/2"
     Then the response status code should be "204"
     Given I use a valid JWT Bearer token for "Admin"
-    When I request "DELETE" "/api/studio/2"
+    When I request "DELETE" "/api/studios/2"
     Then the response status code should be "404"

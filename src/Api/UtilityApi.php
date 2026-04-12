@@ -6,38 +6,74 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Utility\UtilityApiFacade;
+use App\Api\Traits\CursorPaginationTrait;
+use App\Api\Traits\KeysetCursorTrait;
 use Doctrine\DBAL\Connection;
 use OpenAPI\Server\Api\UtilityApiInterface;
-use OpenAPI\Server\Model\FeaturedBannerResponse;
+use OpenAPI\Server\Model\FeaturedBannersListResponse;
 use OpenAPI\Server\Model\HealthResponse;
 use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
+  use CursorPaginationTrait;
+  use KeysetCursorTrait;
+
   public function __construct(
     private readonly UtilityApiFacade $facade,
     private readonly Connection $connection,
   ) {
   }
 
-  /**
-   * @return FeaturedBannerResponse[]
-   */
   #[\Override]
-  public function featuredBannersGet(int $limit, int $offset, int &$responseCode, array &$responseHeaders): array
+  public function featuredBannersGet(int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): FeaturedBannersListResponse
   {
     $limit = min(max($limit, 1), 50);
-    $offset = max($offset, 0);
 
-    $banners = $this->facade->getLoader()->getActiveBanners($limit, $offset);
+    $cursor_data = $this->decodeIntKeysetCursor($cursor);
+    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      $response = new FeaturedBannersListResponse();
+      $response->setData([]);
+      $response->setNextCursor(null);
+      $response->setHasMore(false);
+
+      return $response;
+    }
+
+    $banners = $this->facade->getLoader()->getActiveBannersKeyset(
+      $limit + 1, $cursor_data['value'] ?? null, $cursor_data['id'] ?? null
+    );
+
+    $has_more = count($banners) > $limit;
+    if ($has_more) {
+      array_pop($banners);
+    }
+
+    $banner_responses = array_map(
+      fn ($banner) => $this->facade->getResponseManager()->createFeaturedBannerResponse($banner),
+      $banners,
+    );
+
+    $next_cursor = null;
+    if ($has_more && [] !== $banners) {
+      $last = end($banners);
+      $last_id = $last->getId();
+      if (null !== $last_id) {
+        $next_cursor = $this->encodeIntKeysetCursor($last->getPriority(), $last_id);
+      }
+    }
 
     $responseCode = Response::HTTP_OK;
 
-    return array_map(
-      fn ($banner): FeaturedBannerResponse => $this->facade->getResponseManager()->createFeaturedBannerResponse($banner),
-      $banners,
-    );
+    $response = new FeaturedBannersListResponse();
+    $response->setData($banner_responses);
+    $response->setNextCursor($next_cursor);
+    $response->setHasMore($has_more);
+
+    return $response;
   }
 
   #[\Override]

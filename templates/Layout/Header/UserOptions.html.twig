@@ -6,7 +6,7 @@
         role="menuitem"
         data-content-type="user"
         data-content-id="{{ profile.id }}"
-        data-report-url="{{ url('open_api_server_moderation_useridreportpost', {id: profile.id}) }}"
+        data-report-url="{{ url('open_api_server_moderation_usersidreportpost', {id: profile.id}) }}"
         data-login-url="{{ url('login') }}"
         data-logged-in="{{ app.user ? 'true' : 'false' }}"
         data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'user'}, 'catroweb') }}"

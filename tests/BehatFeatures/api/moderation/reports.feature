@@ -14,14 +14,14 @@ Feature: Moderation Reports API
       | id | name     | owned by | description   | credit   |
       | 1  | project1 | Catrobat | mydescription | mycredit |
     And there are comments:
-      | id | project_id | user_id | text          | upload_date         | parent_id |
-      | 10 | 1          | 1       | first comment | 2013-01-01 12:00:00 |           |
+      | id                                   | project_id | user_id | text          | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 1       | first comment | 2013-01-01 12:00:00 |           |
     And there are studios:
       | id | name    | description  |
       | 1  | studio1 | test studio  |
 
   # ---------------------------------------------------------------------------
-  # POST /api/project/{id}/report
+  # POST /api/projects/{id}/report
   # ---------------------------------------------------------------------------
 
   Scenario: Report a project (authenticated)
@@ -31,11 +31,11 @@ Feature: Moderation Reports API
       """
       {"category": "spam", "note": "This is spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
 
   Scenario: Report a project requires authentication
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "401"
 
   Scenario: Report own project returns 403
@@ -45,7 +45,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "403"
 
   Scenario: Report non-existent project returns 404
@@ -55,7 +55,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/9999/report"
+    When I request "POST" "/api/projects/9999/report"
     Then the response status code should be "404"
 
   Scenario: Report already hidden project returns 409
@@ -68,7 +68,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "409"
 
   Scenario: Report with invalid category returns 400
@@ -78,7 +78,7 @@ Feature: Moderation Reports API
       """
       {"category": "nonexistent_cat"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "400"
 
   Scenario: Duplicate project report returns 409
@@ -88,7 +88,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
     # Report the same project again
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -96,7 +96,7 @@ Feature: Moderation Reports API
       """
       {"category": "copyright"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "409"
 
   Scenario: User with trust too low cannot report (403)
@@ -106,7 +106,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "403"
 
   # ---------------------------------------------------------------------------
@@ -120,11 +120,11 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "204"
 
   Scenario: Report a comment requires authentication
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "401"
 
   Scenario: Report own comment returns 403
@@ -134,7 +134,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "403"
 
   Scenario: Report non-existent comment returns 404
@@ -144,20 +144,20 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/9999/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000009999/report"
     Then the response status code should be "404"
 
   Scenario: Report already hidden comment returns 409
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "409"
 
   Scenario: Duplicate comment report returns 409
@@ -167,18 +167,18 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "204"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "409"
 
   # ---------------------------------------------------------------------------
-  # POST /api/user/{id}/report
+  # POST /api/users/{id}/report
   # ---------------------------------------------------------------------------
 
   Scenario: Report a user (authenticated)
@@ -188,11 +188,11 @@ Feature: Moderation Reports API
       """
       {"category": "impersonation", "note": "Pretending to be someone else"}
       """
-    When I request "POST" "/api/user/1/report"
+    When I request "POST" "/api/users/1/report"
     Then the response status code should be "204"
 
   Scenario: Report a user requires authentication
-    When I request "POST" "/api/user/1/report"
+    When I request "POST" "/api/users/1/report"
     Then the response status code should be "401"
 
   Scenario: Report own user profile returns 403
@@ -202,7 +202,7 @@ Feature: Moderation Reports API
       """
       {"category": "impersonation"}
       """
-    When I request "POST" "/api/user/1/report"
+    When I request "POST" "/api/users/1/report"
     Then the response status code should be "403"
 
   Scenario: Report non-existent user returns 404
@@ -212,7 +212,7 @@ Feature: Moderation Reports API
       """
       {"category": "impersonation"}
       """
-    When I request "POST" "/api/user/9999/report"
+    When I request "POST" "/api/users/9999/report"
     Then the response status code should be "404"
 
   Scenario: Report user with invalid category returns 400
@@ -222,11 +222,11 @@ Feature: Moderation Reports API
       """
       {"category": "copyright"}
       """
-    When I request "POST" "/api/user/1/report"
+    When I request "POST" "/api/users/1/report"
     Then the response status code should be "400"
 
   # ---------------------------------------------------------------------------
-  # POST /api/studio/{id}/report
+  # POST /api/studios/{id}/report
   # ---------------------------------------------------------------------------
 
   Scenario: Report a studio (authenticated)
@@ -236,11 +236,11 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate_content"}
       """
-    When I request "POST" "/api/studio/1/report"
+    When I request "POST" "/api/studios/1/report"
     Then the response status code should be "204"
 
   Scenario: Report a studio requires authentication
-    When I request "POST" "/api/studio/1/report"
+    When I request "POST" "/api/studios/1/report"
     Then the response status code should be "401"
 
   Scenario: Report non-existent studio returns 404
@@ -250,7 +250,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate_content"}
       """
-    When I request "POST" "/api/studio/9999/report"
+    When I request "POST" "/api/studios/9999/report"
     Then the response status code should be "404"
 
   Scenario: Report studio with invalid category returns 400
@@ -260,7 +260,7 @@ Feature: Moderation Reports API
       """
       {"category": "sexual_content"}
       """
-    When I request "POST" "/api/studio/1/report"
+    When I request "POST" "/api/studios/1/report"
     Then the response status code should be "400"
 
   # ---------------------------------------------------------------------------
@@ -277,7 +277,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "403"
 
   Scenario: Report on project by approved user returns 403
@@ -290,7 +290,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "403"
 
   Scenario: Report on approved user returns 403
@@ -303,7 +303,7 @@ Feature: Moderation Reports API
       """
       {"category": "impersonation"}
       """
-    When I request "POST" "/api/user/1/report"
+    When I request "POST" "/api/users/1/report"
     Then the response status code should be "403"
 
   Scenario: Report on comment by approved user returns 403
@@ -316,7 +316,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "403"
 
   Scenario: Report on non-whitelisted content succeeds (204)
@@ -326,7 +326,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam", "note": "Non-whitelisted report"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
 
   # ---------------------------------------------------------------------------
@@ -348,13 +348,13 @@ Feature: Moderation Reports API
 
   Scenario: Auto-hidden comment does not appear in comments list API
     And there are comments:
-      | id | project_id | user_id | text            | upload_date         | parent_id |
-      | 11 | 1          | 2       | visible comment | 2013-01-02 12:00:00 |           |
+      | id                                   | project_id | user_id | text            | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000011 | 1          | 2       | visible comment | 2013-01-02 12:00:00 |           |
     And the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/project/1/comments?limit=10"
+    When I request "GET" "/api/projects/1/comments?limit=10"
     Then the response status code should be "200"
     And the client response should contain "visible comment"
     And the client response should not contain "first comment"
@@ -368,7 +368,7 @@ Feature: Moderation Reports API
       | name    |
       | NewUser |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/1/followers"
+    When I request "GET" "/api/users/1/followers"
     Then the response status code should be "200"
     And the client response should contain "User2"
     And the client response should not contain "NewUser"
@@ -387,7 +387,7 @@ Feature: Moderation Reports API
       """
       {"category": "spam", "note": "Obvious spam project"}
       """
-    When I request "POST" "/api/project/1/report"
+    When I request "POST" "/api/projects/1/report"
     Then the response status code should be "204"
     And the project "project1" should be hidden
     Given I use a valid JWT Bearer token for "Catrobat"

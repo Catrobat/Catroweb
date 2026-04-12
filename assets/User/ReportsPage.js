@@ -104,7 +104,7 @@ class UserReports {
     const params = new URLSearchParams({ limit: 20 })
     if (this.cursor) params.set('cursor', this.cursor)
 
-    new ApiFetch(`${this.baseUrl}/api/user/reports?${params}`, 'GET', undefined, 'json')
+    new ApiFetch(`${this.baseUrl}/api/users/me/reports?${params}`, 'GET', undefined, 'json')
       .run()
       .then((data) => {
         this._removeSkeletons()

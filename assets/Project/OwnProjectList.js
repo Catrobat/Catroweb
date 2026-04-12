@@ -1,5 +1,6 @@
 /* global myProfileConfiguration */
 
+import { normalizeApiResponse } from '../Api/ResponseHelper'
 import Swal from 'sweetalert2'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
@@ -19,6 +20,8 @@ export class OwnProjectList {
     this.baseUrl = baseUrl
     this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' + attributes : apiUrl + '?' + attributes
     this.projectsLoaded = 0
+    this.nextCursor = null
+    this.hasMoreFromApi = true
     this.projectsData = {}
     this.projectFetchCount = 20
     this.empty = false
@@ -87,22 +90,38 @@ export class OwnProjectList {
   }
 
   fetchMore(clear = false) {
-    if (this.empty === true || this.fetchActive === true) {
+    if (this.empty === true || this.fetchActive === true || !this.hasMoreFromApi) {
       return
     }
 
     this.fetchActive = true
     const self = this
 
-    const url = this.apiUrl + '&limit=' + this.projectFetchCount + '&offset=' + this.projectsLoaded
+    let url = this.apiUrl + '&limit=' + this.projectFetchCount
+    if (this.nextCursor) {
+      url += '&cursor=' + encodeURIComponent(this.nextCursor)
+    } else {
+      url += '&offset=' + this.projectsLoaded
+    }
 
     new ApiFetch(url, 'GET', undefined, 'json')
       .run()
-      .then(function (data) {
+      .then(function (response) {
+        const envelope = normalizeApiResponse(response)
+        const data = envelope.data || []
         if (!Array.isArray(data)) {
           console.error('Data received for own projects is no array!')
           self.container.classList.remove('loading')
           return
+        }
+
+        if (envelope.next_cursor !== undefined) {
+          self.nextCursor = envelope.next_cursor
+        }
+        if (envelope.has_more !== undefined) {
+          self.hasMoreFromApi = envelope.has_more
+        } else {
+          self.hasMoreFromApi = data.length >= self.projectFetchCount
         }
 
         if (clear) {
@@ -204,7 +223,7 @@ export class OwnProjectList {
       '<i class="material-icons">open_in_new</i>' +
       escapeHtml(this.translations.open) +
       '</a>' +
-      '<a href="/api/project/' +
+      '<a href="/api/projects/' +
       id +
       '/catrobat" download class="projects-list-item--dropdown-item">' +
       '<i class="material-icons">download</i>' +
@@ -382,7 +401,7 @@ export class OwnProjectList {
     }).then((result) => {
       if (result.value) {
         new ApiDeleteFetch(
-          this.baseUrl + '/api/project/' + id,
+          this.baseUrl + '/api/projects/' + id,
           'Delete Project',
           myProfileConfiguration.messages.unspecifiedErrorText,
           function () {

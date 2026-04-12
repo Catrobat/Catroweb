@@ -18,10 +18,11 @@ class AccountStateEventListener
   /** @var array<array{pattern: string, methods?: list<string>}> */
   private const array EXEMPT_RULES = [
     ['pattern' => '#^/api/authentication#'],
-    ['pattern' => '#^/api/user/?$#', 'methods' => ['POST', 'PUT']],
-    ['pattern' => '#^/api/user/reset-password#'],
-    ['pattern' => '#^/api/(project|comments|user|studio)/[^/]+/appeal$#'],
-    ['pattern' => '#^/api/project/[^/]+/reaction#'],
+    ['pattern' => '#^/api/users/?$#', 'methods' => ['POST']],
+    ['pattern' => '#^/api/users/me/?$#', 'methods' => ['PATCH']],
+    ['pattern' => '#^/api/users/reset-password#'],
+    ['pattern' => '#^/api/(projects|comments|users|studios)/[^/]+/appeal$#'],
+    ['pattern' => '#^/api/projects/[^/]+/reaction#'],
   ];
 
   public function __construct(

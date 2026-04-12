@@ -6,6 +6,7 @@ namespace App\DB\Entity\User\Notifications;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
+use App\DB\Generator\MyUuidGenerator;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,10 +22,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\DiscriminatorMap(['default' => 'CatroNotification', 'comment' => 'CommentNotification', 'like' => 'LikeNotification', 'follow' => 'FollowNotification', 'follow_project' => 'NewProgramNotification', 'broadcast_notification' => 'BroadcastNotification', 'remix_notification' => 'RemixNotification', 'moderation' => 'ModerationNotification', 'studio_comment' => 'StudioCommentNotification', 'studio_project' => 'StudioProjectNotification', 'project_expiring' => 'ProjectExpiringNotification', 'project_deleted' => 'ProjectDeletedNotification', 'studio_join_request' => 'StudioJoinRequestNotification'])]
 class CatroNotification
 {
-  #[ORM\Column(name: 'id', type: Types::INTEGER)]
+  #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\Id]
-  #[ORM\GeneratedValue(strategy: 'AUTO')]
-  private ?int $id = null;
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  private ?string $id = null;
 
   #[ORM\Column(name: 'seen', type: Types::BOOLEAN, options: ['default' => false])]
   private bool $seen = false;
@@ -48,12 +50,12 @@ class CatroNotification
   ) {
   }
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(int $id): void
+  public function setId(string $id): void
   {
     $this->id = $id;
   }

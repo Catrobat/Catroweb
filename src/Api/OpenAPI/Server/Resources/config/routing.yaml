@@ -21,13 +21,13 @@ open_api_server_achievements_achievementsreadput:
   defaults:
     _controller: open_api_server.controller.achievements::achievementsReadPutAction
 
-open_api_server_achievements_useridachievementsget:
-  path: /user/{id}/achievements
+open_api_server_achievements_usersidachievementsget:
+  path: /users/{id}/achievements
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.achievements::userIdAchievementsGetAction
+    _controller: open_api_server.controller.achievements::usersIdAchievementsGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 # authentication
 open_api_server_authentication_authenticationdelete:
@@ -67,7 +67,7 @@ open_api_server_comments_commentsiddelete:
   defaults:
     _controller: open_api_server.controller.comments::commentsIdDeleteAction
   requirements:
-    id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_comments_commentsidrepliesget:
   path: /comments/{id}/replies
@@ -75,7 +75,7 @@ open_api_server_comments_commentsidrepliesget:
   defaults:
     _controller: open_api_server.controller.comments::commentsIdRepliesGetAction
   requirements:
-    id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_comments_commentsidtranslationget:
   path: /comments/{id}/translation
@@ -83,56 +83,56 @@ open_api_server_comments_commentsidtranslationget:
   defaults:
     _controller: open_api_server.controller.comments::commentsIdTranslationGetAction
   requirements:
-    id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_comments_projectidcommentsget:
-  path: /project/{id}/comments
+open_api_server_comments_projectsidcommentsget:
+  path: /projects/{id}/comments
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.comments::projectIdCommentsGetAction
+    _controller: open_api_server.controller.comments::projectsIdCommentsGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_comments_projectidcommentspost:
-  path: /project/{id}/comments
+open_api_server_comments_projectsidcommentspost:
+  path: /projects/{id}/comments
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.comments::projectIdCommentsPostAction
+    _controller: open_api_server.controller.comments::projectsIdCommentsPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 # followers
-open_api_server_followers_useridfollowpost:
-  path: /user/{id}/follow
+open_api_server_followers_usersidfollowpost:
+  path: /users/{id}/follow
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.followers::userIdFollowPostAction
+    _controller: open_api_server.controller.followers::usersIdFollowPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_followers_useridfollowersget:
-  path: /user/{id}/followers
+open_api_server_followers_usersidfollowersget:
+  path: /users/{id}/followers
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.followers::userIdFollowersGetAction
+    _controller: open_api_server.controller.followers::usersIdFollowersGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_followers_useridfollowingget:
-  path: /user/{id}/following
+open_api_server_followers_usersidfollowingget:
+  path: /users/{id}/following
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.followers::userIdFollowingGetAction
+    _controller: open_api_server.controller.followers::usersIdFollowingGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_followers_useridunfollowdelete:
-  path: /user/{id}/unfollow
+open_api_server_followers_usersidunfollowdelete:
+  path: /users/{id}/unfollow
   methods: [DELETE]
   defaults:
-    _controller: open_api_server.controller.followers::userIdUnfollowDeleteAction
+    _controller: open_api_server.controller.followers::usersIdUnfollowDeleteAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 # mediaLibrary
 open_api_server_mediaLibrary_mediaassetsget:
@@ -147,7 +147,7 @@ open_api_server_mediaLibrary_mediaassetsiddelete:
   defaults:
     _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdDeleteAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_mediaLibrary_mediaassetsidget:
   path: /media/assets/{id}
@@ -155,7 +155,7 @@ open_api_server_mediaLibrary_mediaassetsidget:
   defaults:
     _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_mediaLibrary_mediaassetsidpatch:
   path: /media/assets/{id}
@@ -163,7 +163,7 @@ open_api_server_mediaLibrary_mediaassetsidpatch:
   defaults:
     _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdPatchAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_mediaLibrary_mediaassetspost:
   path: /media/assets
@@ -183,7 +183,7 @@ open_api_server_mediaLibrary_mediacategoriesiddelete:
   defaults:
     _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdDeleteAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_mediaLibrary_mediacategoriesidget:
   path: /media/categories/{id}
@@ -191,7 +191,7 @@ open_api_server_mediaLibrary_mediacategoriesidget:
   defaults:
     _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_mediaLibrary_mediacategoriesidpatch:
   path: /media/categories/{id}
@@ -199,7 +199,7 @@ open_api_server_mediaLibrary_mediacategoriesidpatch:
   defaults:
     _controller: open_api_server.controller.mediaLibrary::mediaCategoriesIdPatchAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_mediaLibrary_mediacategoriespost:
   path: /media/categories
@@ -220,7 +220,7 @@ open_api_server_moderation_commentsidappealpost:
   defaults:
     _controller: open_api_server.controller.moderation::commentsIdAppealPostAction
   requirements:
-    id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_moderation_commentsidreportpost:
   path: /comments/{id}/report
@@ -228,7 +228,7 @@ open_api_server_moderation_commentsidreportpost:
   defaults:
     _controller: open_api_server.controller.moderation::commentsIdReportPostAction
   requirements:
-    id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_moderation_moderationappealsget:
   path: /moderation/appeals
@@ -242,7 +242,7 @@ open_api_server_moderation_moderationappealsidresolveput:
   defaults:
     _controller: open_api_server.controller.moderation::moderationAppealsIdResolvePutAction
   requirements:
-    id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_moderation_moderationreportsget:
   path: /moderation/reports
@@ -256,71 +256,65 @@ open_api_server_moderation_moderationreportsidresolveput:
   defaults:
     _controller: open_api_server.controller.moderation::moderationReportsIdResolvePutAction
   requirements:
-    id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_moderation_projectidappealpost:
-  path: /project/{id}/appeal
+open_api_server_moderation_projectsidappealpost:
+  path: /projects/{id}/appeal
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.moderation::projectIdAppealPostAction
+    _controller: open_api_server.controller.moderation::projectsIdAppealPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_moderation_projectidreportpost:
-  path: /project/{id}/report
+open_api_server_moderation_projectsidreportpost:
+  path: /projects/{id}/report
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.moderation::projectIdReportPostAction
+    _controller: open_api_server.controller.moderation::projectsIdReportPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_moderation_studioidappealpost:
-  path: /studio/{id}/appeal
+open_api_server_moderation_studiosidappealpost:
+  path: /studios/{id}/appeal
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.moderation::studioIdAppealPostAction
+    _controller: open_api_server.controller.moderation::studiosIdAppealPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_moderation_studioidreportpost:
-  path: /studio/{id}/report
+open_api_server_moderation_studiosidreportpost:
+  path: /studios/{id}/report
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.moderation::studioIdReportPostAction
+    _controller: open_api_server.controller.moderation::studiosIdReportPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_moderation_useridappealpost:
-  path: /user/{id}/appeal
+open_api_server_moderation_usersidappealpost:
+  path: /users/{id}/appeal
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.moderation::userIdAppealPostAction
+    _controller: open_api_server.controller.moderation::usersIdAppealPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_moderation_useridreportpost:
-  path: /user/{id}/report
+open_api_server_moderation_usersidreportpost:
+  path: /users/{id}/report
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.moderation::userIdReportPostAction
+    _controller: open_api_server.controller.moderation::usersIdReportPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_moderation_userreportsget:
-  path: /user/reports
+open_api_server_moderation_usersmereportsget:
+  path: /users/me/reports
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.moderation::userReportsGetAction
+    _controller: open_api_server.controller.moderation::usersMeReportsGetAction
 
 # notifications
-open_api_server_notifications_notificationidreadput:
-  path: /notification/{id}/read
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.notifications::notificationIdReadPutAction
-  requirements:
-    id: '\d+'
-
+# IMPORTANT: /notifications/count and /notifications/read (literal) MUST come
+# BEFORE /notifications/{id}/read, otherwise "read" and "count" match {id}.
 open_api_server_notifications_notificationscountget:
   path: /notifications/count
   methods: [GET]
@@ -339,95 +333,18 @@ open_api_server_notifications_notificationsreadput:
   defaults:
     _controller: open_api_server.controller.notifications::notificationsReadPutAction
 
-# projects
-open_api_server_projects_projectidcatrobatget:
-  path: /project/{id}/catrobat
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdCatrobatGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidcodeget:
-  path: /project/{id}/code
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdCodeGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidcodestatisticsget:
-  path: /project/{id}/code-statistics
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdCodeStatisticsGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectiddelete:
-  path: /project/{id}
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidget:
-  path: /project/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidput:
-  path: /project/{id}
+open_api_server_notifications_notificationsidreadput:
+  path: /notifications/{id}/read
   methods: [PUT]
   defaults:
-    _controller: open_api_server.controller.projects::projectIdPutAction
+    _controller: open_api_server.controller.notifications::notificationsIdReadPutAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_projects_projectidreactiondelete:
-  path: /project/{id}/reaction
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReactionDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidreactionpost:
-  path: /project/{id}/reaction
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReactionPostAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidreactionsget:
-  path: /project/{id}/reactions
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReactionsGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidreactionsusersget:
-  path: /project/{id}/reactions/users
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdReactionsUsersGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_projects_projectidrecommendationsget:
-  path: /project/{id}/recommendations
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectIdRecommendationsGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
+# projects
+# IMPORTANT: Literal path segments (categories, extensions, featured, search, tags, user)
+# MUST be defined BEFORE the /projects/{id} wildcard routes, because the {id} requirement
+# (^[a-zA-Z0-9\-]+$) would match these literal words and route to the wrong controller.
 open_api_server_projects_projectscategoriesget:
   path: /projects/categories
   methods: [GET]
@@ -445,18 +362,6 @@ open_api_server_projects_projectsfeaturedget:
   methods: [GET]
   defaults:
     _controller: open_api_server.controller.projects::projectsFeaturedGetAction
-
-open_api_server_projects_projectsget:
-  path: /projects
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsGetAction
-
-open_api_server_projects_projectspost:
-  path: /projects
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsPostAction
 
 open_api_server_projects_projectssearchget:
   path: /projects/search
@@ -482,7 +387,107 @@ open_api_server_projects_projectsuseridget:
   defaults:
     _controller: open_api_server.controller.projects::projectsUserIdGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsget:
+  path: /projects
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsGetAction
+
+open_api_server_projects_projectspost:
+  path: /projects
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsPostAction
+
+open_api_server_projects_projectsidcatrobatget:
+  path: /projects/{id}/catrobat
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdCatrobatGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidcodeget:
+  path: /projects/{id}/code
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdCodeGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidcodestatisticsget:
+  path: /projects/{id}/code-statistics
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdCodeStatisticsGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsiddelete:
+  path: /projects/{id}
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdDeleteAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidget:
+  path: /projects/{id}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidpatch:
+  path: /projects/{id}
+  methods: [PATCH]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdPatchAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidreactiondelete:
+  path: /projects/{id}/reaction
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdReactionDeleteAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidreactionpost:
+  path: /projects/{id}/reaction
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdReactionPostAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidreactionsget:
+  path: /projects/{id}/reactions
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdReactionsGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidreactionsusersget:
+  path: /projects/{id}/reactions/users
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdReactionsUsersGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_projects_projectsidrecommendationsget:
+  path: /projects/{id}/recommendations
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsIdRecommendationsGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
 
 # search
 open_api_server_search_searchget:
@@ -491,258 +496,260 @@ open_api_server_search_searchget:
   defaults:
     _controller: open_api_server.controller.search::searchGetAction
 
-# studio
-open_api_server_studio_studioget:
-  path: /studio
+# studios
+open_api_server_studios_studiosget:
+  path: /studios
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.studio::studioGetAction
+    _controller: open_api_server.controller.studios::studiosGetAction
 
-open_api_server_studio_studioidactivitiesget:
-  path: /studio/{id}/activities
+open_api_server_studios_studiosidactivitiesget:
+  path: /studios/{id}/activities
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdActivitiesGetAction
+    _controller: open_api_server.controller.studios::studiosIdActivitiesGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidbatchaddprojectspost:
-  path: /studio/{id}/batch-add-projects
+open_api_server_studios_studiosidbatchaddprojectspost:
+  path: /studios/{id}/batch-add-projects
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdBatchAddProjectsPostAction
+    _controller: open_api_server.controller.studios::studiosIdBatchAddProjectsPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidcommentscommentiddelete:
-  path: /studio/{id}/comments/{comment_id}
+open_api_server_studios_studiosidcommentscommentiddelete:
+  path: /studios/{id}/comments/{comment_id}
   methods: [DELETE]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdCommentsCommentIdDeleteAction
+    _controller: open_api_server.controller.studios::studiosIdCommentsCommentIdDeleteAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-    comment_id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
+    comment_id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidcommentsget:
-  path: /studio/{id}/comments
+open_api_server_studios_studiosidcommentsget:
+  path: /studios/{id}/comments
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdCommentsGetAction
+    _controller: open_api_server.controller.studios::studiosIdCommentsGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidcommentspost:
-  path: /studio/{id}/comments
+open_api_server_studios_studiosidcommentspost:
+  path: /studios/{id}/comments
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdCommentsPostAction
+    _controller: open_api_server.controller.studios::studiosIdCommentsPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioiddelete:
-  path: /studio/{id}
+open_api_server_studios_studiosiddelete:
+  path: /studios/{id}
   methods: [DELETE]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdDeleteAction
+    _controller: open_api_server.controller.studios::studiosIdDeleteAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidget:
-  path: /studio/{id}
+open_api_server_studios_studiosidget:
+  path: /studios/{id}
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdGetAction
+    _controller: open_api_server.controller.studios::studiosIdGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidjoinpost:
-  path: /studio/{id}/join
+open_api_server_studios_studiosidjoinpost:
+  path: /studios/{id}/join
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdJoinPostAction
+    _controller: open_api_server.controller.studios::studiosIdJoinPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidjoinrequestsget:
-  path: /studio/{id}/join-requests
+open_api_server_studios_studiosidjoinrequestsget:
+  path: /studios/{id}/join-requests
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdJoinRequestsGetAction
+    _controller: open_api_server.controller.studios::studiosIdJoinRequestsGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidjoinrequestsrequestidacceptpost:
-  path: /studio/{id}/join-requests/{request_id}/accept
+open_api_server_studios_studiosidjoinrequestsrequestidacceptpost:
+  path: /studios/{id}/join-requests/{request_id}/accept
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdJoinRequestsRequestIdAcceptPostAction
+    _controller: open_api_server.controller.studios::studiosIdJoinRequestsRequestIdAcceptPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-    request_id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
+    request_id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidjoinrequestsrequestiddeclinepost:
-  path: /studio/{id}/join-requests/{request_id}/decline
+open_api_server_studios_studiosidjoinrequestsrequestiddeclinepost:
+  path: /studios/{id}/join-requests/{request_id}/decline
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdJoinRequestsRequestIdDeclinePostAction
+    _controller: open_api_server.controller.studios::studiosIdJoinRequestsRequestIdDeclinePostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-    request_id: '\d+'
+    id: '^[a-zA-Z0-9\-]+$'
+    request_id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidleavedelete:
-  path: /studio/{id}/leave
+open_api_server_studios_studiosidleavedelete:
+  path: /studios/{id}/leave
   methods: [DELETE]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdLeaveDeleteAction
+    _controller: open_api_server.controller.studios::studiosIdLeaveDeleteAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidmembersget:
-  path: /studio/{id}/members
+open_api_server_studios_studiosidmembersget:
+  path: /studios/{id}/members
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdMembersGetAction
+    _controller: open_api_server.controller.studios::studiosIdMembersGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidmembersuseridbanpost:
-  path: /studio/{id}/members/{user_id}/ban
+open_api_server_studios_studiosidmembersuseridbanpost:
+  path: /studios/{id}/members/{user_id}/ban
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdMembersUserIdBanPostAction
+    _controller: open_api_server.controller.studios::studiosIdMembersUserIdBanPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-    user_id: '[a-z0-9\\-]+'
+    id: '^[a-zA-Z0-9\-]+$'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidmembersuseridpromotepost:
-  path: /studio/{id}/members/{user_id}/promote
+open_api_server_studios_studiosidmembersuseriddemotepost:
+  path: /studios/{id}/members/{user_id}/demote
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdMembersUserIdPromotePostAction
+    _controller: open_api_server.controller.studios::studiosIdMembersUserIdDemotePostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-    user_id: '[a-z0-9\\-]+'
+    id: '^[a-zA-Z0-9\-]+$'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidmembersuseriddemotepost:
-  path: /studio/{id}/members/{user_id}/demote
+open_api_server_studios_studiosidmembersuseridpromotepost:
+  path: /studios/{id}/members/{user_id}/promote
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdMembersUserIdDemotePostAction
+    _controller: open_api_server.controller.studios::studiosIdMembersUserIdPromotePostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-    user_id: '[a-z0-9\\-]+'
+    id: '^[a-zA-Z0-9\-]+$'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidpost:
-  path: /studio/{id}
-  methods: [POST]
+open_api_server_studios_studiosidpatch:
+  path: /studios/{id}
+  methods: [PATCH]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdPostAction
+    _controller: open_api_server.controller.studios::studiosIdPatchAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidprojectsget:
-  path: /studio/{id}/projects
+open_api_server_studios_studiosidprojectsget:
+  path: /studios/{id}/projects
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdProjectsGetAction
+    _controller: open_api_server.controller.studios::studiosIdProjectsGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidprojectspost:
-  path: /studio/{id}/projects
+open_api_server_studios_studiosidprojectspost:
+  path: /studios/{id}/projects
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdProjectsPostAction
+    _controller: open_api_server.controller.studios::studiosIdProjectsPostAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studioidprojectsprojectiddelete:
-  path: /studio/{id}/projects/{project_id}
+open_api_server_studios_studiosidprojectsprojectiddelete:
+  path: /studios/{id}/projects/{project_id}
   methods: [DELETE]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdProjectsProjectIdDeleteAction
+    _controller: open_api_server.controller.studios::studiosIdProjectsProjectIdDeleteAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-    project_id: '^[a-zA-Z0-9\\-]+'
+    id: '^[a-zA-Z0-9\-]+$'
+    project_id: '^[a-zA-Z0-9\-]+'
 
-open_api_server_studio_studioiduserprojectsget:
-  path: /studio/{id}/user-projects
+open_api_server_studios_studiosiduserprojectsget:
+  path: /studios/{id}/user-projects
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.studio::studioIdUserProjectsGetAction
+    _controller: open_api_server.controller.studios::studiosIdUserProjectsGetAction
   requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_studio_studiopost:
-  path: /studio
+open_api_server_studios_studiospost:
+  path: /studios
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.studio::studioPostAction
+    _controller: open_api_server.controller.studios::studiosPostAction
 
-# user
-open_api_server_user_userdataexportget:
-  path: /user/data-export
+# users
+# IMPORTANT: Literal path segments (me, search, reset-password) MUST be defined
+# BEFORE /users/{id} wildcard routes, otherwise they match {id}.
+open_api_server_users_usersmedataexportget:
+  path: /users/me/data-export
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.user::userDataExportGetAction
+    _controller: open_api_server.controller.users::usersMeDataExportGetAction
 
-open_api_server_user_userdelete:
-  path: /user
+open_api_server_users_usersmedelete:
+  path: /users/me
   methods: [DELETE]
   defaults:
-    _controller: open_api_server.controller.user::userDeleteAction
+    _controller: open_api_server.controller.users::usersMeDeleteAction
 
-open_api_server_user_userget:
-  path: /user
+open_api_server_users_usersmeget:
+  path: /users/me
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.user::userGetAction
+    _controller: open_api_server.controller.users::usersMeGetAction
 
-open_api_server_user_useridget:
-  path: /user/{id}
-  methods: [GET]
+open_api_server_users_usersmepatch:
+  path: /users/me
+  methods: [PATCH]
   defaults:
-    _controller: open_api_server.controller.user::userIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
+    _controller: open_api_server.controller.users::usersMePatchAction
 
-open_api_server_user_useridstudiosget:
-  path: /user/{id}/studios
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.user::userIdStudiosGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\\-]+$'
-
-open_api_server_user_userpost:
-  path: /user
+open_api_server_users_usersresetpasswordpost:
+  path: /users/reset-password
   methods: [POST]
   defaults:
-    _controller: open_api_server.controller.user::userPostAction
+    _controller: open_api_server.controller.users::usersResetPasswordPostAction
 
-open_api_server_user_userput:
-  path: /user
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.user::userPutAction
-
-open_api_server_user_userresetpasswordpost:
-  path: /user/reset-password
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.user::userResetPasswordPostAction
-
-open_api_server_user_usersget:
-  path: /users
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.user::usersGetAction
-
-open_api_server_user_userssearchget:
+open_api_server_users_userssearchget:
   path: /users/search
   methods: [GET]
   defaults:
-    _controller: open_api_server.controller.user::usersSearchGetAction
+    _controller: open_api_server.controller.users::usersSearchGetAction
+
+open_api_server_users_usersget:
+  path: /users
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.users::usersGetAction
+
+open_api_server_users_userspost:
+  path: /users
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.users::usersPostAction
+
+open_api_server_users_usersidget:
+  path: /users/{id}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.users::usersIdGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_users_useridstudiosget:
+  path: /users/{id}/studios
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.users::userIdStudiosGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
 
 # utility
 open_api_server_utility_featuredbannersget:

@@ -127,7 +127,7 @@ class StudioManager
     return $studioUser;
   }
 
-  protected function createStudioComment(User $user, Studio $studio, StudioActivity $activity, string $text, int $parent_id): UserComment
+  protected function createStudioComment(User $user, Studio $studio, StudioActivity $activity, string $text, string $parent_id): UserComment
   {
     $comment = new UserComment()
       ->setStudio($studio)
@@ -136,7 +136,7 @@ class StudioManager
       ->setUser($user)
       ->setUploadDate(new \DateTime())
       ->setUsername($user->getUsername())
-      ->setParentId($parent_id)
+      ->setParentId('' !== $parent_id ? $parent_id : null)
     ;
 
     $this->entity_manager->persist($comment);
@@ -194,7 +194,7 @@ class StudioManager
     return null;
   }
 
-  public function addCommentToStudio(User $user, Studio $studio, string $comment_text, int $parent_id = 0): ?UserComment
+  public function addCommentToStudio(User $user, Studio $studio, string $comment_text, string $parent_id = ''): ?UserComment
   {
     if (!$this->isUserInStudio($user, $studio)) {
       return null;
@@ -271,7 +271,7 @@ class StudioManager
     return $studioUser;
   }
 
-  public function editStudioComment(User $user, int $comment_id, string $comment_text): ?UserComment
+  public function editStudioComment(User $user, string $comment_id, string $comment_text): ?UserComment
   {
     $studioComment = $this->findStudioCommentById($comment_id);
     if ($this->isUserInStudio($user, $studioComment->getStudio()) && $user->getUsername() === $studioComment->getUser()->getUserIdentifier()) {
@@ -294,7 +294,7 @@ class StudioManager
     }
   }
 
-  public function deleteCommentFromStudio(User $user, int $comment_id): void
+  public function deleteCommentFromStudio(User $user, string $comment_id): void
   {
     $comment = $this->findStudioCommentById($comment_id);
     if ($this->isUserInStudio($user, $comment->getStudio()) && ($user->getUsername() === $comment->getUser()->getUserIdentifier() || $this->isUserAStudioAdmin($user, $comment->getStudio()))) {
@@ -461,17 +461,17 @@ class StudioManager
     return $this->user_comment_repository->countStudioComments($studio);
   }
 
-  public function findStudioCommentById(int $comment_id): ?UserComment
+  public function findStudioCommentById(string $comment_id): ?UserComment
   {
     return $this->user_comment_repository->findStudioCommentById($comment_id);
   }
 
-  public function findCommentReplies(int $comment_id): array
+  public function findCommentReplies(string $comment_id): array
   {
     return $this->user_comment_repository->findCommentReplies($comment_id);
   }
 
-  public function countCommentReplies(int $comment_id): int
+  public function countCommentReplies(string $comment_id): int
   {
     return $this->user_comment_repository->countCommentReplies($comment_id);
   }
@@ -521,7 +521,9 @@ class StudioManager
   public function removeJoinRequest(StudioJoinRequest $joinRequest): void
   {
     $joinRequestId = $joinRequest->getId();
-    $this->studio_join_request_repository->deleteJoinRequestById($joinRequestId);
+    if (null !== $joinRequestId) {
+      $this->studio_join_request_repository->deleteJoinRequestById($joinRequestId);
+    }
   }
 
   public function findJoinRequestByUserAndStudio(User $user, Studio $studio): ?StudioJoinRequest
@@ -564,7 +566,7 @@ class StudioManager
     return $this->studio_join_request_repository->findDeclinedJoinRequests($studio);
   }
 
-  public function findJoinRequestById(int $joinRequestId): ?StudioJoinRequest
+  public function findJoinRequestById(string $joinRequestId): ?StudioJoinRequest
   {
     return $this->studio_join_request_repository->findJoinRequestById($joinRequestId);
   }

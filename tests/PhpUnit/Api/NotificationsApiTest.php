@@ -51,7 +51,7 @@ class NotificationsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->object->notificationIdReadPut(1, 'en', $response_code, $response_headers);
+    $this->object->notificationsIdReadPut('1', 'en', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_UNAUTHORIZED, $response_code);
   }
@@ -180,7 +180,7 @@ class NotificationsApiTest extends TestCase
    * @throws Exception
    */
   #[Group('unit')]
-  public function testNotificationsGetWithInvalidCursorNonNumeric(): void
+  public function testNotificationsGetWithInvalidCursorEmpty(): void
   {
     $response_code = 200;
     $response_headers = [];
@@ -190,7 +190,7 @@ class NotificationsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $cursor = base64_encode('not-a-number');
+    $cursor = base64_encode('');
     $response = $this->object->notificationsGet('en', 20, $cursor, 'all', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_BAD_REQUEST, $response_code);

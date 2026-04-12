@@ -10,7 +10,11 @@ Feature: All uploaded programs have to be validated.
     And I should get the json object:
     """
       {
-        "error": "unknown error: project_xml_not_found!"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "unknown error: project_xml_not_found!"
+        }
       }
     """
 
@@ -20,7 +24,11 @@ Feature: All uploaded programs have to be validated.
     And I should get the json object:
     """
       {
-        "error": "invalid code xml"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "invalid code xml"
+        }
       }
     """
 
@@ -31,7 +39,11 @@ Feature: All uploaded programs have to be validated.
     And I should get the json object:
     """
       {
-        "error": "Error while creating project entity. Try uploading again!"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Error while creating project entity. Try uploading again!"
+        }
       }
     """
 
@@ -42,7 +54,11 @@ Feature: All uploaded programs have to be validated.
     And I should get the json object:
     """
       {
-        "error": "Error while creating project entity. Try uploading again!"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Error while creating project entity. Try uploading again!"
+        }
       }
     """
 
@@ -52,7 +68,11 @@ Feature: All uploaded programs have to be validated.
     And I should get the json object:
     """
       {
-        "error": "invalid file"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "invalid file"
+        }
       }
     """
 
@@ -63,7 +83,11 @@ Feature: All uploaded programs have to be validated.
     And I should get the json object:
     """
       {
-        "error": "Sorry, you are using an old version of Pocket Code. Please update to the latest version."
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Sorry, you are using an old version of Pocket Code. Please update to the latest version."
+        }
       }
     """
 
@@ -94,6 +118,10 @@ Feature: All uploaded programs have to be validated.
     And I should get the json object:
     """
       {
-        "error": "Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?"
+        }
       }
     """

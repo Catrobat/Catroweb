@@ -12,10 +12,9 @@ if (overviewContainer) {
 
   const limit = 10
   const assetsPerCategory = 8
-  let currentOffset = 0
+  let categoriesNextCursor = null
   let isLoadingCategories = false
   let categoriesHasMore = true
-  let totalCategories = 0
   const searchQuery = new URLSearchParams(window.location.search).get('search')
 
   const downloadList = []
@@ -56,14 +55,17 @@ if (overviewContainer) {
     loadingSpinner.style.display = 'none'
   }
 
-  function loadCategories(offset = 0, append = false) {
+  function loadCategories(cursor = null, append = false) {
     if (isLoadingCategories) {
       return
     }
     isLoadingCategories = true
     showLoading(append)
 
-    let url = `${apiUrl}?limit=${limit}&offset=${offset}&assets_per_category=${assetsPerCategory}`
+    let url = `${apiUrl}?limit=${limit}&assets_per_category=${assetsPerCategory}`
+    if (cursor) {
+      url += `&cursor=${encodeURIComponent(cursor)}`
+    }
     if (searchQuery) {
       url += `&search=${encodeURIComponent(searchQuery)}`
     }
@@ -74,12 +76,12 @@ if (overviewContainer) {
         hideLoading()
         removeSkeletons()
 
-        if (data.categories && data.categories.length > 0) {
-          renderCategories(data.categories, append)
+        const categories = data.data || []
+        if (categories.length > 0) {
+          renderCategories(categories, append)
           categoriesContainer.style.display = 'block'
-          totalCategories = data.pagination?.total ?? data.categories.length
-          currentOffset = offset
-          categoriesHasMore = offset + data.categories.length < totalCategories
+          categoriesNextCursor = data.next_cursor || null
+          categoriesHasMore = data.has_more ?? categories.length === limit
         } else {
           if (searchQuery) {
             noCategoriesAlert.textContent = translations.no_results
@@ -174,8 +176,18 @@ if (overviewContainer) {
         chevrons.appendChild(leftChevron)
         chevrons.appendChild(rightChevron)
 
+        // Compute initial keyset cursor from the last preview asset
+        const lastPreview =
+          category.preview_assets.length > 0
+            ? category.preview_assets[category.preview_assets.length - 1]
+            : null
+        const initialCursor =
+          lastPreview && lastPreview.created_at && lastPreview.id
+            ? btoa(`${lastPreview.created_at}|${lastPreview.id}`)
+            : null
+
         const state = {
-          offset: category.preview_assets.length,
+          nextCursor: initialCursor,
           total: category.assets_count,
           isLoading: false,
           hasMore: category.assets_count > category.preview_assets.length,
@@ -264,7 +276,7 @@ if (overviewContainer) {
       const scrollPosition = window.innerHeight + window.scrollY
       const pageHeight = document.documentElement.scrollHeight
       if (scrollPosition >= pageHeight - threshold) {
-        loadCategories(currentOffset + limit, true)
+        loadCategories(categoriesNextCursor, true)
       }
     })
   }
@@ -400,7 +412,9 @@ if (overviewContainer) {
     const url = new URL(mediaAssetsApi, window.location.origin)
     url.searchParams.set('category_id', categoryId)
     url.searchParams.set('limit', assetsPerCategory)
-    url.searchParams.set('offset', state.offset)
+    if (state.nextCursor) {
+      url.searchParams.set('cursor', state.nextCursor)
+    }
     if (searchQuery) {
       url.searchParams.set('search', searchQuery)
     }
@@ -408,14 +422,12 @@ if (overviewContainer) {
     fetch(url.toString())
       .then((response) => response.json())
       .then((data) => {
-        const assets = data.assets || []
+        const assets = data.data || []
         assets.forEach((asset) => {
           assetsGrid.appendChild(buildAssetCard(asset))
         })
-        state.offset += assets.length
-        if (assets.length < assetsPerCategory || state.offset >= state.total) {
-          state.hasMore = false
-        }
+        state.nextCursor = data.next_cursor || null
+        state.hasMore = data.has_more ?? false
 
         const wrapper = assetsGrid.closest('.media-assets-wrapper')
         const leftChevron = wrapper?.querySelector('.media-assets-chevron--left')
@@ -482,5 +494,5 @@ if (overviewContainer) {
   }
 
   // Initial load
-  loadCategories(0)
+  loadCategories(null)
 }

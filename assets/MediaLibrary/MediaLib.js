@@ -1,3 +1,4 @@
+import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
 
 export function MediaLib(
@@ -51,10 +52,9 @@ export function MediaLib(
 
     // api url - new media library API
     const limit = 20
-    let offset = 0
+    let nextCursor = null
     let isLoading = false
     let hasMore = true
-    let totalAssets = null
 
     function removeSkeletonMediaItems() {
       if (skeletonMediaItems) {
@@ -70,14 +70,15 @@ export function MediaLib(
       }
     }
 
-    function buildUrl(pageOffset) {
+    function buildUrl(cursor) {
       let url
       if (mediaSearchPath !== '' && mediaSearchPath) {
-        // Search path already has query string
-        url = `${mediaSearchPath}&limit=${limit}&offset=${pageOffset}`
+        url = `${mediaSearchPath}&limit=${limit}`
       } else {
-        // Regular category assets endpoint
-        url = `${mediaAssetsApi}&limit=${limit}&offset=${pageOffset}`
+        url = `${mediaAssetsApi}&limit=${limit}`
+      }
+      if (cursor) {
+        url += `&cursor=${encodeURIComponent(cursor)}`
       }
       return url
     }
@@ -88,14 +89,14 @@ export function MediaLib(
       }
 
       isLoading = true
-      fetch(buildUrl(offset))
+      fetch(buildUrl(nextCursor))
         .then((response) => response.json())
         .then((responseData) => {
-          // New API returns {assets: [], pagination: {...}}
-          const assets = responseData.assets || responseData
-          const pagination = responseData.pagination
-          if (pagination && Number.isInteger(pagination.total)) {
-            totalAssets = pagination.total
+          // API returns {data: [], next_cursor, has_more}
+          const envelope = normalizeApiResponse(responseData)
+          const assets = envelope.data || envelope.assets || []
+          if (envelope.has_more !== undefined) {
+            hasMore = envelope.has_more
           }
 
           assets.forEach((file) => {
@@ -204,9 +205,9 @@ export function MediaLib(
             }
           })
 
-          offset += assets.length
-          if (totalAssets !== null) {
-            hasMore = offset < totalAssets
+          nextCursor = envelope.next_cursor || null
+          if (envelope.has_more !== undefined) {
+            hasMore = envelope.has_more
           } else {
             hasMore = assets.length === limit
           }

@@ -15,7 +15,7 @@ Feature: Get project
 
   Scenario: Get specific project
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/1"
+    And I request "GET" "/api/projects/1"
     Then the response status code should be "200"
     Then the response should have the project model structure
     Then the response should contain the following project:
@@ -25,7 +25,7 @@ Feature: Get project
 
   Scenario: Get specific project
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/2"
+    And I request "GET" "/api/projects/2"
     Then the response status code should be "200"
     Then the response should have the project model structure
     Then the response should contain the following project:
@@ -34,7 +34,7 @@ Feature: Get project
 
   Scenario: Accessing private project must be possible
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/3"
+    And I request "GET" "/api/projects/3"
     Then the response status code should be "200"
     Then the response should have the project model structure
     Then the response should contain the following project:
@@ -43,17 +43,17 @@ Feature: Get project
 
   Scenario: Accessing hidden project must be not possible
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/4"
+    And I request "GET" "/api/projects/4"
     Then the response status code should be "404"
     Then the response content must be empty
 
   Scenario: Get specific project with no existing id
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/project/5"
+    And I request "GET" "/api/projects/5"
     Then the response status code should be "404"
     Then the response content must be empty
 
   Scenario: Get specific project without accept header
     Given I have a request header "HTTP_ACCEPT" with value "invalid"
-    And I request "GET" "/api/project/1"
+    And I request "GET" "/api/projects/1"
     Then the response status code should be "406"

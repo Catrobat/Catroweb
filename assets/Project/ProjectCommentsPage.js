@@ -5,25 +5,19 @@ require('./ProjectPage.scss')
 
 const projectComments = document.querySelector('.js-project-comments')
 
-ProjectComments(
-  projectComments.dataset.projectId,
-  5,
-  5,
-  5,
-  projectComments.dataset.transCancel,
-  projectComments.dataset.transDeleteIt,
-  projectComments.dataset.transReportIt,
-  projectComments.dataset.transAreYouSure,
-  projectComments.dataset.transNoWayOfReturn,
-  projectComments.dataset.transDeleteConfirmation,
-  projectComments.dataset.transReportConfirmation,
-  projectComments.dataset.transPopUpCommentReportedTitle,
-  projectComments.dataset.transPopUpCommentReportedText,
-  projectComments.dataset.transPopUpDeletedTitle,
-  projectComments.dataset.transPopUpDeletedText,
-  projectComments.dataset.transNoAdminRightsMessage,
-  projectComments.dataset.transDefaultErrorMessage,
-)
+ProjectComments({
+  showStep: 5,
+  minAmountOfVisibleComments: 5,
+  cancel: projectComments.dataset.transCancel,
+  deleteIt: projectComments.dataset.transDeleteIt,
+  areYouSure: projectComments.dataset.transAreYouSure,
+  noWayOfReturn: projectComments.dataset.transNoWayOfReturn,
+  deleteConfirmation: projectComments.dataset.transDeleteConfirmation,
+  popUpDeletedTitle: projectComments.dataset.transPopUpDeletedTitle,
+  popUpDeletedText: projectComments.dataset.transPopUpDeletedText,
+  noAdminRightsMessage: projectComments.dataset.transNoAdminRightsMessage,
+  defaultErrorMessage: projectComments.dataset.transDefaultErrorMessage,
+})
 
 new TranslateComments(
   projectComments.dataset.translatedByLine,

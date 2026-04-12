@@ -70,6 +70,8 @@ class ApiContext implements Context
 
   private ?KernelBrowser $kernel_browser = null;
 
+  private ?string $saved_cursor = null;
+
   // to df ->function
   private array $checked_catrobat_remix_forward_ancestor_relations;
 
@@ -92,10 +94,9 @@ class ApiContext implements Context
     'screenshot_small',
     'project_url',
     'tags',
-    'download',
     'description',
     'version',
-    'uploaded',
+    'uploaded_at',
     'download_url',
     'filesize',
     'not_for_kids',
@@ -105,8 +106,8 @@ class ApiContext implements Context
    * @var string[]
    */
   private array $full_project_structure = ['id', 'name', 'author', 'author_id', 'description', 'credits', 'version', 'views',
-    'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded', 'uploaded_string',
-    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', 'not_for_kids',
+    'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded_at', 'uploaded_string',
+    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids',
     'retention_days', 'retention_expiry', ];
 
   /**
@@ -787,6 +788,30 @@ class ApiContext implements Context
   }
 
   /**
+   * @Then /^I save the next_cursor from the response$/
+   *
+   * @throws \JsonException
+   */
+  public function iSaveTheNextCursorFromTheResponse(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $data = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    Assert::assertArrayHasKey('next_cursor', $data, 'Response does not contain next_cursor');
+    Assert::assertNotNull($data['next_cursor'], 'next_cursor is null — no more pages');
+    $this->saved_cursor = $data['next_cursor'];
+  }
+
+  /**
+   * @When /^I request page 2 with the saved cursor at "([^"]*)"$/
+   */
+  public function iRequestPage2WithTheSavedCursorAt(string $url): void
+  {
+    Assert::assertNotNull($this->saved_cursor, 'No cursor saved — call "I save the next_cursor from the response" first');
+    $separator = str_contains($url, '?') ? '&' : '?';
+    $this->iRequestWith('GET', $url.$separator.'cursor='.urlencode($this->saved_cursor));
+  }
+
+  /**
    * @Then /^the response should contain the URL of the uploaded project$/
    *
    * @throws \JsonException
@@ -950,7 +975,8 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = $responseArray['data'] ?? $responseArray;
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredProjects($expected_projects);
     Assert::assertEquals(count($expected_projects), count($returned_projects), 'Number of returned projects should be '.count($expected_projects));
@@ -971,7 +997,8 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = $responseArray['data'] ?? $responseArray;
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredFeaturedProjects($expected_projects);
     Assert::assertEquals(count($expected_projects), count($returned_projects),
@@ -996,9 +1023,10 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $projects = $responseArray['data'] ?? $responseArray;
 
     /** @var array $project */
-    foreach ($responseArray as $project) {
+    foreach ($projects as $project) {
       Assert::assertCount(
         count($this->default_project_structure),
         $project,
@@ -1021,7 +1049,8 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_users = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_users = $responseArray['data'] ?? $responseArray;
     $expected_users = $table->getHash();
     $stored_users = $this->getStoredUsers();
 
@@ -1059,8 +1088,9 @@ class ApiContext implements Context
   public function responseShouldHaveDefaultUsersModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     /** @var array<int,array<string,mixed>> $returned_users */
-    $returned_users = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_users = $responseArray['data'] ?? $responseArray;
 
     foreach ($returned_users as $user) {
       Assert::assertEquals(count($this->default_user_structure), count($user),
@@ -1146,8 +1176,9 @@ class ApiContext implements Context
   public function responseShouldHaveDefaultFeaturedProjectsModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     /** @var array<int,array<string,mixed>> $returned_projects */
-    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = $responseArray['data'] ?? $responseArray;
 
     foreach ($returned_projects as $project) {
       Assert::assertEquals(count($this->default_featured_project_structure), count($project),
@@ -1168,8 +1199,9 @@ class ApiContext implements Context
   public function responseShouldHaveDefaultMediaFilesModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
     /** @var array<int,array<string,mixed>> $returned_media_files */
-    $returned_media_files = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_media_files = $responseArray['data'] ?? $responseArray;
 
     foreach ($returned_media_files as $project) {
       Assert::assertEquals(count($project), count($this->default_media_file_structure),
@@ -1255,7 +1287,8 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_files = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_files = $responseArray['data'] ?? $responseArray;
     $expected_files = $table->getHash();
     $stored_files = $this->getStoredMediaFiles($expected_files);
 
@@ -1280,7 +1313,8 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = $responseArray['data'] ?? $responseArray;
 
     Assert::assertEquals(count($returned_projects), $projects,
       'Number of returned projects should be '.count($returned_projects));
@@ -1976,7 +2010,8 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
 
     $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch', 'trending'];
-    $categories = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $categories = $responseArray['data'] ?? $responseArray;
     Assert::assertEquals(count($expected_categories), count($categories), 'Number of returned projects should be '.count($expected_categories));
 
     foreach ($categories as $category) {
@@ -2005,7 +2040,8 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_projects = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $responseArray = json_decode($response->getContent() ?: '', true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = $responseArray['data'] ?? $responseArray;
     $expected_projects = $table->getHash();
     $stored_projects = $this->getStoredProjects($expected_projects);
     Assert::assertEquals(count($expected_projects), count($returned_projects), 'Number of returned projects should be '.count($expected_projects));
@@ -2098,7 +2134,7 @@ class ApiContext implements Context
         'private' => $project->getPrivate(),
         'flavor' => $project->getFlavor(),
         'project_url' => 'http://localhost/app/project/'.$project->getId(),
-        'download_url' => 'http://localhost/api/project/'.$project->getId().'/catrobat',
+        'download_url' => 'http://localhost/api/projects/'.$project->getId().'/catrobat',
         'filesize' => ($project->getFilesize() / 1_048_576),
       ];
       $stored_projects[] = $result;
@@ -2205,10 +2241,6 @@ class ApiContext implements Context
       'views' => static function ($views): void {
         Assert::assertIsInt($views, 'Views is not an integer!');
       },
-      'download' => static function ($downloads): void {
-        Assert::assertIsInt($downloads, 'Download is not an integer!');
-        // deprecated
-      },
       'downloads' => static function ($downloads): void {
         Assert::assertIsInt($downloads, 'Downloads is not an integer!');
       },
@@ -2230,8 +2262,9 @@ class ApiContext implements Context
       'extensions' => static function ($extensions): void {
         Assert::assertIsArray($extensions, 'Extensions is not an array!');
       },
-      'uploaded' => static function ($uploaded): void {
-        Assert::assertIsInt($uploaded, 'uploaded is not an integer!');
+      'uploaded_at' => static function ($uploaded_at): void {
+        Assert::assertIsString($uploaded_at, 'uploaded_at is not a string!');
+        Assert::assertMatchesRegularExpression('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/', $uploaded_at, 'uploaded_at is not in ISO 8601 format!');
       },
       'uploaded_string' => static function ($uploaded_string): void {
         Assert::assertIsString($uploaded_string, 'uploaded_string is not a string!');
@@ -2263,7 +2296,7 @@ class ApiContext implements Context
       'download_url' => static function ($download_url): void {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression(
-          '/http:\/\/localhost\/api\/project\/([a-zA-Z0-9-]+)\/catrobat/',
+          '/http:\/\/localhost\/api\/projects\/([a-zA-Z0-9-]+)\/catrobat/',
           $download_url,
           'download_url is not a valid URL!'
         );

@@ -16,8 +16,8 @@ Feature: Get media categories from the API
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/categories"
     Then the response status code should be "200"
-    And the client response should contain "categories"
-    And the client response should contain "total"
+    And the client response should contain "data"
+    And the client response should contain "has_more"
     And the client response should contain "media_library.category.space"
     And the client response should contain "media_library.category.animals"
     And the client response should contain "media_library.category.sounds"
@@ -26,7 +26,7 @@ Feature: Get media categories from the API
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/categories?limit=2&offset=0"
     Then the response status code should be "200"
-    And the client response should contain "total"
+    And the client response should contain "has_more"
 
   Scenario: Get media categories with invalid limit
     And I have a request header "HTTP_ACCEPT" with value "application/json"

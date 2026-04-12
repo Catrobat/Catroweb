@@ -342,6 +342,9 @@ class DataFixturesContext implements Context
       $joinRequest->setUser($user);
       $joinRequest->setStudio($studio);
       $joinRequest->setStatus($joinRequestConfig['Status']);
+      if (isset($joinRequestConfig['id'])) {
+        MyUuidGenerator::setNextValue($joinRequestConfig['id']);
+      }
       $em->persist($joinRequest);
     }
 
@@ -1045,7 +1048,7 @@ class DataFixturesContext implements Context
 
       // Some specific id desired?
       if (isset($notification['id'])) {
-        $to_create->setId((int) $notification['id']);
+        MyUuidGenerator::setNextValue((string) $notification['id']);
       }
 
       if (isset($notification['seen'])) {
@@ -1190,7 +1193,7 @@ class DataFixturesContext implements Context
   {
     foreach ($table->getHash() as $config) {
       /** @var UserComment $comment */
-      $comment = $this->getManager()->getRepository(UserComment::class)->find((int) $config['id']);
+      $comment = $this->getManager()->getRepository(UserComment::class)->find($config['id']);
       $comment->setAutoHidden(true);
     }
 
@@ -1292,10 +1295,6 @@ class DataFixturesContext implements Context
   public function thereAreStudioUsers(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      if (array_key_exists('id', $config)) {
-        MyUuidGenerator::setNextValue($config['id']);
-      }
-
       if (array_key_exists('studio_name', $config)) {
         $studio = $this->getStudioManager()->findStudioByName($config['studio_name']);
       } else {
@@ -1316,6 +1315,10 @@ class DataFixturesContext implements Context
       ;
 
       $this->getManager()->persist($activity);
+
+      if (array_key_exists('id', $config)) {
+        MyUuidGenerator::setNextValue($config['id']);
+      }
 
       $studio_user = new StudioUser()
         ->setUser($user)
@@ -1959,12 +1962,12 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given /^the comment (\d+) is auto-hidden$/
+   * @Given /^the comment "([^"]*)" is auto-hidden$/
    */
-  public function theCommentIsAutoHidden(int $comment_id): void
+  public function theCommentIsAutoHidden(string $comment_id): void
   {
     $comment = $this->getManager()->find(UserComment::class, $comment_id);
-    Assert::assertNotNull($comment, sprintf('Comment %d not found', $comment_id));
+    Assert::assertNotNull($comment, sprintf('Comment %s not found', $comment_id));
     $comment->setAutoHidden(true);
     $this->getManager()->flush();
   }
@@ -2006,7 +2009,7 @@ class DataFixturesContext implements Context
     $em = $this->getManager();
 
     foreach ($table->getHash() as $config) {
-      $forced_id = (isset($config['id']) && '' !== trim($config['id'])) ? (int) $config['id'] : null;
+      $forced_id = (isset($config['id']) && '' !== trim($config['id'])) ? (string) $config['id'] : null;
       if (isset($config['reporter']) && '' !== trim($config['reporter'])) {
         $reporter = $this->findUserByUsernameOrId($config['reporter']);
         Assert::assertNotNull($reporter, sprintf('Reporter "%s" not found', $config['reporter']));
@@ -2026,30 +2029,7 @@ class DataFixturesContext implements Context
       $resolved_by = $resolution['resolved_by'];
 
       if (null !== $forced_id) {
-        $em->getConnection()->executeStatement(
-          'INSERT INTO content_report (
-            id, reporter_id, content_type, content_id, category, note, state,
-            reporter_trust_score, created_at, resolved_at, resolved_by_id
-          ) VALUES (
-            :id, :reporter_id, :content_type, :content_id, :category, :note, :state,
-            :reporter_trust_score, :created_at, :resolved_at, :resolved_by_id
-          )',
-          [
-            'id' => $forced_id,
-            'reporter_id' => $reporter?->getId(),
-            'content_type' => $content_type,
-            'content_id' => $content_id,
-            'category' => $category,
-            'note' => $note,
-            'state' => $state,
-            'reporter_trust_score' => $trust_score,
-            'created_at' => $created_at->format('Y-m-d H:i:s'),
-            'resolved_at' => $resolved_at?->format('Y-m-d H:i:s'),
-            'resolved_by_id' => $resolved_by?->getId(),
-          ]
-        );
-
-        continue;
+        MyUuidGenerator::setNextValue($forced_id);
       }
 
       $report = new ContentReport();
@@ -2090,7 +2070,7 @@ class DataFixturesContext implements Context
     $em = $this->getManager();
 
     foreach ($table->getHash() as $config) {
-      $forced_id = (isset($config['id']) && '' !== trim($config['id'])) ? (int) $config['id'] : null;
+      $forced_id = (isset($config['id']) && '' !== trim($config['id'])) ? (string) $config['id'] : null;
 
       $appellant_identifier = (string) ($config['appellant'] ?? '');
       $appellant = $this->findUserByUsernameOrId($appellant_identifier);
@@ -2107,29 +2087,7 @@ class DataFixturesContext implements Context
       $resolved_by = $resolution['resolved_by'];
 
       if (null !== $forced_id) {
-        $em->getConnection()->executeStatement(
-          'INSERT INTO content_appeal (
-            id, content_type, content_id, appellant_id, reason, state,
-            created_at, resolved_at, resolved_by_id, resolution_note
-          ) VALUES (
-            :id, :content_type, :content_id, :appellant_id, :reason, :state,
-            :created_at, :resolved_at, :resolved_by_id, :resolution_note
-          )',
-          [
-            'id' => $forced_id,
-            'content_type' => $content_type,
-            'content_id' => $content_id,
-            'appellant_id' => $appellant->getId(),
-            'reason' => $reason,
-            'state' => $state,
-            'created_at' => $created_at->format('Y-m-d H:i:s'),
-            'resolved_at' => $resolved_at?->format('Y-m-d H:i:s'),
-            'resolved_by_id' => $resolved_by?->getId(),
-            'resolution_note' => $resolution_note,
-          ]
-        );
-
-        continue;
+        MyUuidGenerator::setNextValue($forced_id);
       }
 
       $appeal = new ContentAppeal();
@@ -2154,22 +2112,22 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Then /^moderation report (\d+) should have state "([^"]*)"$/
+   * @Then /^moderation report "([^"]*)" should have state "([^"]*)"$/
    */
-  public function moderationReportShouldHaveState(int $report_id, string $expected_state): void
+  public function moderationReportShouldHaveState(string $report_id, string $expected_state): void
   {
     $report = $this->getManager()->find(ContentReport::class, $report_id);
-    Assert::assertNotNull($report, sprintf('Report %d not found', $report_id));
+    Assert::assertNotNull($report, sprintf('Report %s not found', $report_id));
     Assert::assertSame($this->parseReportState($expected_state), $report->getState());
   }
 
   /**
-   * @Then /^moderation appeal (\d+) should have state "([^"]*)"$/
+   * @Then /^moderation appeal "([^"]*)" should have state "([^"]*)"$/
    */
-  public function moderationAppealShouldHaveState(int $appeal_id, string $expected_state): void
+  public function moderationAppealShouldHaveState(string $appeal_id, string $expected_state): void
   {
     $appeal = $this->getManager()->find(ContentAppeal::class, $appeal_id);
-    Assert::assertNotNull($appeal, sprintf('Appeal %d not found', $appeal_id));
+    Assert::assertNotNull($appeal, sprintf('Appeal %s not found', $appeal_id));
     Assert::assertSame($this->parseAppealState($expected_state), $appeal->getState());
   }
 
@@ -2221,12 +2179,12 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Then /^the comment (\d+) should be (hidden|visible)$/
+   * @Then /^the comment "([^"]*)" should be (hidden|visible)$/
    */
-  public function theCommentShouldBeHiddenOrVisible(int $comment_id, string $visibility): void
+  public function theCommentShouldBeHiddenOrVisible(string $comment_id, string $visibility): void
   {
     $comment = $this->getManager()->find(UserComment::class, $comment_id);
-    Assert::assertNotNull($comment, sprintf('Comment %d not found', $comment_id));
+    Assert::assertNotNull($comment, sprintf('Comment %s not found', $comment_id));
     Assert::assertSame('hidden' === $visibility, $comment->getAutoHidden());
   }
 

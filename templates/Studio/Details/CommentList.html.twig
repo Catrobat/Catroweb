@@ -1,9 +1,9 @@
 <div id="comments-pane" class="tab-pane fade-in" role="tabpanel" aria-labelledby="comments-tab"
      {{ stimulus_controller('studio--comment', {
        studioId: studio.id,
-       commentsUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/comments',
-       postUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/comments',
-       deleteUrl: app.request.getBaseURL() ~ '/api/studio/' ~ studio.id ~ '/comments/__COMMENT_ID__',
+       commentsUrl: app.request.getBaseURL() ~ '/api/studios/' ~ studio.id ~ '/comments',
+       postUrl: app.request.getBaseURL() ~ '/api/studios/' ~ studio.id ~ '/comments',
+       deleteUrl: app.request.getBaseURL() ~ '/api/studios/' ~ studio.id ~ '/comments/__COMMENT_ID__',
        userRole: user_role|default(''),
        userName: user_name|default(''),
        isLoggedIn: user_name is defined and user_name ? true : false,

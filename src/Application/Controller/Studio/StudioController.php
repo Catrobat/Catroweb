@@ -25,6 +25,7 @@ class StudioController extends AbstractController
 
     return $this->render('Studio/Studios.html.twig', [
       'is_logged_in' => null !== $user,
+      'user_id' => $user?->getId(),
       'user_name' => $user?->getUsername(),
     ]);
   }

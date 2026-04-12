@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Api\Exceptions;
 
+use OpenAPI\Server\Model\ErrorResponse;
+use OpenAPI\Server\Model\ErrorResponseError;
+use OpenAPI\Server\Model\ErrorResponseErrorDetailsInner;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -41,6 +44,53 @@ final class ApiErrorResponse
     $headers = array_merge($headers, ['Content-Type' => 'application/json']);
 
     return new Response(json_encode($body, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES), $code, $headers);
+  }
+
+  /**
+   * Creates an ErrorResponse model object from validation errors.
+   *
+   * Use this when returning error responses from API handler methods
+   * (which return model objects serialized by the framework).
+   *
+   * @param int                   $code    HTTP status code
+   * @param string                $type    Machine-readable error type
+   * @param string                $message Human-readable error summary
+   * @param array<string, string> $errors  Field-name => error-message map from ValidationWrapper::getErrors()
+   */
+  public static function createModel(int $code, string $type, string $message, array $errors = []): ErrorResponse
+  {
+    $details = [];
+    foreach ($errors as $field => $fieldMessage) {
+      $detail = new ErrorResponseErrorDetailsInner();
+      $detail->setField($field);
+      $detail->setMessage($fieldMessage);
+      $details[] = $detail;
+    }
+
+    $error = new ErrorResponseError();
+    $error->setCode($code);
+    $error->setType($type);
+    $error->setMessage($message);
+    if ([] !== $details) {
+      $error->setDetails($details);
+    }
+
+    $response = new ErrorResponse();
+    $response->setError($error);
+
+    return $response;
+  }
+
+  /**
+   * Creates a validation ErrorResponse model from ValidationWrapper errors.
+   *
+   * Convenience wrapper for the common 422 validation error case.
+   *
+   * @param array<string, string> $errors Field-name => error-message map from ValidationWrapper::getErrors()
+   */
+  public static function createValidationModel(array $errors): ErrorResponse
+  {
+    return self::createModel(422, 'validation_error', 'Validation failed', $errors);
   }
 
   public static function httpStatusToErrorType(int $statusCode): string

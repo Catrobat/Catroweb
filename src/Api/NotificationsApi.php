@@ -26,7 +26,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
   }
 
   #[\Override]
-  public function notificationIdReadPut(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
+  public function notificationsIdReadPut(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
@@ -91,12 +91,12 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
     $cursor_id = null;
     if (null !== $cursor) {
       $decoded = base64_decode($cursor, true);
-      if (false === $decoded || !ctype_digit($decoded)) {
+      if (false === $decoded || '' === $decoded) {
         $responseCode = Response::HTTP_BAD_REQUEST;
 
         return null;
       }
-      $cursor_id = (int) $decoded;
+      $cursor_id = $decoded;
     }
 
     $page_data = $this->facade->getLoader()->getNotificationsPage($user, $type, $limit, $cursor_id);

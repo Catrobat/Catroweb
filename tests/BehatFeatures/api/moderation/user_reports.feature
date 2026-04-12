@@ -1,5 +1,5 @@
 @api @moderation
-Feature: User Reports API (GET /api/user/reports)
+Feature: User Reports API (GET /api/users/me/reports)
 
   Background:
     Given there are users:
@@ -28,7 +28,7 @@ Feature: User Reports API (GET /api/user/reports)
   # ---------------------------------------------------------------------------
 
   Scenario: Unauthenticated user gets 401
-    When I request "GET" "/api/user/reports"
+    When I request "GET" "/api/users/me/reports"
     Then the response status code should be "401"
 
   # ---------------------------------------------------------------------------
@@ -38,7 +38,7 @@ Feature: User Reports API (GET /api/user/reports)
   Scenario: Authenticated user with no reports gets empty data
     Given I use a valid JWT Bearer token for "User3"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the response should be in json format
     And the client response should contain "data"
@@ -50,12 +50,12 @@ Feature: User Reports API (GET /api/user/reports)
 
   Scenario: User sees their own reports but not reports filed by others
     Given there are moderation reports:
-      | id  | reporter | content_type | content_id | category      | state | created_at          |
-      | 101 | User2    | project      | 1          | spam          | new   | 2024-06-01 12:00:00 |
-      | 102 | User3    | project      | 1          | inappropriate | new   | 2024-06-02 12:00:00 |
+      | id                                   | reporter | content_type | content_id | category      | state | created_at          |
+      | 00000000-0000-0000-0000-000000000101 | User2    | project      | 1          | spam          | new   | 2024-06-01 12:00:00 |
+      | 00000000-0000-0000-0000-000000000102 | User3    | project      | 1          | inappropriate | new   | 2024-06-02 12:00:00 |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "spam"
     And the client response should not contain "inappropriate"
@@ -66,13 +66,13 @@ Feature: User Reports API (GET /api/user/reports)
 
   Scenario: Response contains correct status mapping for report states
     Given there are moderation reports:
-      | id  | reporter | content_type | content_id | category      | state    | created_at          | resolved_at         | resolved_by |
-      | 201 | Catrobat | project      | 1          | spam          | new      | 2024-06-01 10:00:00 |                     |             |
-      | 202 | Catrobat | project      | 2          | inappropriate | accepted | 2024-06-02 10:00:00 | 2024-06-03 10:00:00 | User2       |
-      | 203 | Catrobat | comment      | 10         | spam          | rejected | 2024-06-03 10:00:00 | 2024-06-04 10:00:00 | User2       |
+      | id                                   | reporter | content_type | content_id                           | category      | state    | created_at          | resolved_at         | resolved_by |
+      | 00000000-0000-0000-0000-000000000201 | Catrobat | project      | 1                                    | spam          | new      | 2024-06-01 10:00:00 |                     |             |
+      | 00000000-0000-0000-0000-000000000202 | Catrobat | project      | 2                                    | inappropriate | accepted | 2024-06-02 10:00:00 | 2024-06-03 10:00:00 | User2       |
+      | 00000000-0000-0000-0000-000000000203 | Catrobat | comment      | 00000000-0000-0000-0000-000000000010 | spam          | rejected | 2024-06-03 10:00:00 | 2024-06-04 10:00:00 | User2       |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "pending"
     And the client response should contain "accepted"
@@ -84,12 +84,12 @@ Feature: User Reports API (GET /api/user/reports)
 
   Scenario: User sees resolved_at for resolved reports
     Given there are moderation reports:
-      | id  | reporter | content_type | content_id | category      | state    | created_at          | resolved_at         | resolved_by |
-      | 301 | User2    | project      | 1          | spam          | new      | 2024-06-01 10:00:00 |                     |             |
-      | 302 | User2    | project      | 2          | inappropriate | accepted | 2024-06-02 10:00:00 | 2024-06-05 14:30:00 | User3       |
+      | id                                   | reporter | content_type | content_id | category      | state    | created_at          | resolved_at         | resolved_by |
+      | 00000000-0000-0000-0000-000000000301 | User2    | project      | 1          | spam          | new      | 2024-06-01 10:00:00 |                     |             |
+      | 00000000-0000-0000-0000-000000000302 | User2    | project      | 2          | inappropriate | accepted | 2024-06-02 10:00:00 | 2024-06-05 14:30:00 | User3       |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "2024-06-05"
     And the client response should contain "resolved_at"
@@ -100,13 +100,13 @@ Feature: User Reports API (GET /api/user/reports)
 
   Scenario: Reports are ordered by most recent first
     Given there are moderation reports:
-      | id  | reporter | content_type | content_id | category      | state | created_at          |
-      | 401 | Catrobat | project      | 1          | spam          | new   | 2024-06-01 10:00:00 |
-      | 402 | Catrobat | project      | 2          | inappropriate | new   | 2024-06-03 10:00:00 |
-      | 403 | Catrobat | comment      | 10         | copyright     | new   | 2024-06-02 10:00:00 |
+      | id                                   | reporter | content_type | content_id                           | category      | state | created_at          |
+      | 00000000-0000-0000-0000-000000000401 | Catrobat | project      | 1                                    | spam          | new   | 2024-06-01 10:00:00 |
+      | 00000000-0000-0000-0000-000000000402 | Catrobat | project      | 2                                    | inappropriate | new   | 2024-06-03 10:00:00 |
+      | 00000000-0000-0000-0000-000000000403 | Catrobat | comment      | 00000000-0000-0000-0000-000000000010 | copyright     | new   | 2024-06-02 10:00:00 |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "spam"
     And the client response should contain "inappropriate"
@@ -118,13 +118,13 @@ Feature: User Reports API (GET /api/user/reports)
 
   Scenario: Pagination returns has_more and next_cursor when more results exist
     Given there are moderation reports:
-      | id  | reporter | content_type | content_id | category      | state | created_at          |
-      | 501 | User2    | project      | 1          | spam          | new   | 2024-06-01 10:00:00 |
-      | 502 | User2    | project      | 2          | inappropriate | new   | 2024-06-02 10:00:00 |
-      | 503 | User2    | comment      | 10         | copyright     | new   | 2024-06-03 10:00:00 |
+      | id                                   | reporter | content_type | content_id                           | category      | state | created_at          |
+      | 00000000-0000-0000-0000-000000000501 | User2    | project      | 1                                    | spam          | new   | 2024-06-01 10:00:00 |
+      | 00000000-0000-0000-0000-000000000502 | User2    | project      | 2                                    | inappropriate | new   | 2024-06-02 10:00:00 |
+      | 00000000-0000-0000-0000-000000000503 | User2    | comment      | 00000000-0000-0000-0000-000000000010 | copyright     | new   | 2024-06-03 10:00:00 |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=2"
+    When I request "GET" "/api/users/me/reports?limit=2"
     Then the response status code should be "200"
     And the client response should contain "next_cursor"
 
@@ -134,14 +134,14 @@ Feature: User Reports API (GET /api/user/reports)
 
   Scenario: User with reports from different content types sees all of them
     Given there are moderation reports:
-      | id  | reporter | content_type | content_id | category      | state | created_at          |
-      | 701 | Catrobat | project      | 2          | spam          | new   | 2024-06-01 10:00:00 |
-      | 702 | Catrobat | comment      | 10         | inappropriate | new   | 2024-06-02 10:00:00 |
-      | 703 | Catrobat | user         | 2          | offensive     | new   | 2024-06-03 10:00:00 |
-      | 704 | Catrobat | studio       | 1          | copyright     | new   | 2024-06-04 10:00:00 |
+      | id                                   | reporter | content_type | content_id                           | category      | state | created_at          |
+      | 00000000-0000-0000-0000-000000000701 | Catrobat | project      | 2                                    | spam          | new   | 2024-06-01 10:00:00 |
+      | 00000000-0000-0000-0000-000000000702 | Catrobat | comment      | 00000000-0000-0000-0000-000000000010 | inappropriate | new   | 2024-06-02 10:00:00 |
+      | 00000000-0000-0000-0000-000000000703 | Catrobat | user         | 2                                    | offensive     | new   | 2024-06-03 10:00:00 |
+      | 00000000-0000-0000-0000-000000000704 | Catrobat | studio       | 1                                    | copyright     | new   | 2024-06-04 10:00:00 |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    When I request "GET" "/api/user/reports?limit=20"
+    When I request "GET" "/api/users/me/reports?limit=20"
     Then the response status code should be "200"
     And the client response should contain "project"
     And the client response should contain "comment"

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Api\Services\Projects;
 
+use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Base\TranslatorAwareTrait;
+use App\Api\Traits\CursorPaginationTrait;
+use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProjectCodeStatistics;
@@ -19,12 +22,14 @@ use App\Storage\StorageLifecycleService;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\CodeStatisticsResponse;
+use OpenAPI\Server\Model\ErrorResponse;
+use OpenAPI\Server\Model\ExtensionResponse;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
+use OpenAPI\Server\Model\FeaturedProjectsListResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ProjectsCategory;
+use OpenAPI\Server\Model\ProjectsListResponse;
 use OpenAPI\Server\Model\TagResponse;
-use OpenAPI\Server\Model\UpdateProjectFailureResponse;
-use OpenAPI\Server\Model\UploadErrorResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -34,6 +39,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectsResponseManager extends AbstractResponseManager
 {
+  use CursorPaginationTrait;
+  use KeysetCursorTrait;
   use TranslatorAwareTrait;
 
   public function __construct(
@@ -56,12 +63,12 @@ class ProjectsResponseManager extends AbstractResponseManager
   public function createProjectDataResponse(Program|SpecialProgram $project, ?string $attributes): ProjectResponse
   {
     $default_attributes = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
-    $catroid_catty_hotfixes = ['download', 'tags', 'description', 'version', 'uploaded', 'download_url', 'filesize', 'not_for_kids'];
+    $catroid_catty_hotfixes = ['tags', 'description', 'version', 'uploaded_at', 'download_url', 'filesize', 'not_for_kids'];
 
     if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = array_merge($default_attributes, $catroid_catty_hotfixes);
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'name', 'author', 'author_id', 'scratch_id', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids', 'download', 'retention_days', 'retention_expiry'];
+      $attributes_list = ['id', 'name', 'author', 'author_id', 'scratch_id', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded_at', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids', 'retention_days', 'retention_expiry'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -107,10 +114,6 @@ class ProjectsResponseManager extends AbstractResponseManager
       $data['views'] = $extraced_project->getViews();
     }
 
-    if (in_array('download', $attributes_list, true)) {
-      $data['download'] = $extraced_project->getDownloads(); // deprecated and will be removed
-    }
-
     if (in_array('downloads', $attributes_list, true)) {
       $data['downloads'] = $extraced_project->getDownloads();
     }
@@ -153,8 +156,8 @@ class ProjectsResponseManager extends AbstractResponseManager
       $data['extensions'] = $extensions;
     }
 
-    if (in_array('uploaded', $attributes_list, true)) {
-      $data['uploaded'] = $extraced_project->getUploadedAt()->getTimestamp();
+    if (in_array('uploaded_at', $attributes_list, true)) {
+      $data['uploaded_at'] = \DateTime::createFromInterface($extraced_project->getUploadedAt());
     }
 
     if (in_array('uploaded_string', $attributes_list, true)) {
@@ -179,7 +182,7 @@ class ProjectsResponseManager extends AbstractResponseManager
 
     if (in_array('download_url', $attributes_list, true)) {
       $data['download_url'] = ltrim($this->url_generator->generate(
-        'open_api_server_projects_projectidcatrobatget',
+        'open_api_server_projects_projectsidcatrobatget',
         [
           'id' => $extraced_project->getId(),
         ],
@@ -213,6 +216,96 @@ class ProjectsResponseManager extends AbstractResponseManager
     return new ProjectResponse($data);
   }
 
+  public function createProjectsListResponse(array $projects, int $limit, ?string $attributes = null, int $offset = 0): ProjectsListResponse
+  {
+    $has_more = count($projects) > $limit;
+    if ($has_more) {
+      array_pop($projects);
+    }
+
+    $data = [];
+    foreach ($projects as $project) {
+      $data[] = $this->createProjectDataResponse($project, $attributes);
+    }
+
+    $next_cursor = ($has_more && [] !== $data) ? $this->encodeCursorFromOffset($offset, count($data)) : null;
+
+    return new ProjectsListResponse([
+      'data' => $data,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ]);
+  }
+
+  /**
+   * Create a paginated projects list response using keyset cursor from actual project data.
+   *
+   * @param string $sort_by The sort column: 'uploaded_at', 'views', or 'downloads'
+   */
+  public function createProjectsKeysetResponse(array $projects, int $limit, string $sort_by, ?string $attributes = null): ProjectsListResponse
+  {
+    $has_more = count($projects) > $limit;
+    if ($has_more) {
+      array_pop($projects);
+    }
+
+    $data = [];
+    foreach ($projects as $project) {
+      $data[] = $this->createProjectDataResponse($project, $attributes);
+    }
+
+    $next_cursor = null;
+    if ($has_more && [] !== $data) {
+      /** @var Program $last */
+      $last = end($projects);
+      $last_id = (string) $last->getId();
+      $next_cursor = match ($sort_by) {
+        'views' => $this->encodeIntKeysetCursor($last->getViews(), $last_id),
+        'downloads' => $this->encodeIntKeysetCursor($last->getDownloads(), $last_id),
+        default => $this->encodeDateKeysetCursor($last->getUploadedAt(), $last_id),
+      };
+    }
+
+    return new ProjectsListResponse([
+      'data' => $data,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ]);
+  }
+
+  /**
+   * Create a paginated featured projects list response using keyset cursor.
+   */
+  public function createFeaturedProjectsKeysetResponse(array $featured_projects, int $limit, ?string $attributes = null): FeaturedProjectsListResponse
+  {
+    $has_more = count($featured_projects) > $limit;
+    if ($has_more) {
+      array_pop($featured_projects);
+    }
+
+    $data = [];
+    /** @var FeaturedProgram $featured_project */
+    foreach ($featured_projects as $featured_project) {
+      $data[] = $this->createFeaturedProjectResponse($featured_project, $attributes);
+    }
+
+    $next_cursor = null;
+    if ($has_more && [] !== $data) {
+      /** @var FeaturedProgram $last */
+      $last = end($featured_projects);
+      $next_cursor = $this->encodeIntKeysetCursor($last->getPriority(), (string) $last->getId());
+    }
+
+    return new FeaturedProjectsListResponse([
+      'data' => $data,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ]);
+  }
+
+  /**
+   * @deprecated Use createProjectsListResponse() for paginated endpoints
+   */
   public function createProjectsDataResponse(array $projects, ?string $attributes = null): array
   {
     $response = [];
@@ -326,16 +419,27 @@ class ProjectsResponseManager extends AbstractResponseManager
     return new FeaturedProjectResponse($data);
   }
 
-  public function createFeaturedProjectsResponse(array $featured_projects, ?string $attributes = null): array
+  public function createFeaturedProjectsListResponse(array $featured_projects, int $limit, ?string $attributes = null, int $offset = 0): FeaturedProjectsListResponse
   {
-    $response = [];
+    $has_more = count($featured_projects) > $limit;
+    if ($has_more) {
+      array_pop($featured_projects);
+    }
+
+    $data = [];
 
     /** @var FeaturedProgram $featured_project */
     foreach ($featured_projects as $featured_project) {
-      $response[] = $this->createFeaturedProjectResponse($featured_project, $attributes);
+      $data[] = $this->createFeaturedProjectResponse($featured_project, $attributes);
     }
 
-    return $response;
+    $next_cursor = ($has_more && [] !== $data) ? $this->encodeCursorFromOffset($offset, count($data)) : null;
+
+    return new FeaturedProjectsListResponse([
+      'data' => $data,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ]);
   }
 
   public function createProjectCategoryResponse(array $projects, string $category, string $locale, ?string $attributes = null): ProjectsCategory
@@ -359,18 +463,22 @@ class ProjectsResponseManager extends AbstractResponseManager
     );
   }
 
-  public function createUploadErrorResponse(string $locale): UploadErrorResponse
+  public function createUploadErrorResponse(string $locale): ErrorResponse
   {
-    return new UploadErrorResponse([
-      'error' => $this->__('api.projectsPost.creating_error', [], $locale),
-    ]);
+    return ApiErrorResponse::createModel(
+      422,
+      'validation_error',
+      $this->__('api.projectsPost.creating_error', [], $locale),
+    );
   }
 
-  public function createUploadValidationErrorResponse(string $translation_key, string $locale): UploadErrorResponse
+  public function createUploadValidationErrorResponse(string $translation_key, string $locale): ErrorResponse
   {
-    return new UploadErrorResponse([
-      'error' => $this->__($translation_key, [], $locale),
-    ]);
+    return ApiErrorResponse::createModel(
+      422,
+      'validation_error',
+      $this->__($translation_key, [], $locale),
+    );
   }
 
   public function createProjectsExtensionsResponse(array $extensions, string $locale): array
@@ -385,9 +493,9 @@ class ProjectsResponseManager extends AbstractResponseManager
     return $response;
   }
 
-  public function createExtensionResponse(Extension $extension, string $locale): TagResponse
+  public function createExtensionResponse(Extension $extension, string $locale): ExtensionResponse
   {
-    return new TagResponse([
+    return new ExtensionResponse([
       'id' => $extension->getInternalTitle(),
       'text' => $this->__($extension->getTitleLtmCode(), [], $locale),
     ]);
@@ -440,20 +548,28 @@ class ProjectsResponseManager extends AbstractResponseManager
     ]);
   }
 
-  public function createUpdateFailureResponse(int $failure, string $locale): UpdateProjectFailureResponse
+  public function createUpdateFailureResponse(int $failure, string $locale): ErrorResponse
   {
     if (ProjectsApiProcessor::SERVER_ERROR_SAVE_XML === $failure) {
-      return new UpdateProjectFailureResponse([
-        'error' => $this->__('api.updateProject.xmlError', [], $locale),
-      ]);
+      return ApiErrorResponse::createModel(
+        500,
+        'internal_error',
+        $this->__('api.updateProject.xmlError', [], $locale),
+      );
     }
 
     if (ProjectsApiProcessor::SERVER_ERROR_SCREENSHOT === $failure) {
-      return new UpdateProjectFailureResponse([
-        'error' => $this->__('api.updateProject.screenshotError', [], $locale),
-      ]);
+      return ApiErrorResponse::createModel(
+        500,
+        'internal_error',
+        $this->__('api.updateProject.screenshotError', [], $locale),
+      );
     }
 
-    return new UpdateProjectFailureResponse();
+    return ApiErrorResponse::createModel(
+      500,
+      'internal_error',
+      'An unexpected error occurred',
+    );
   }
 }

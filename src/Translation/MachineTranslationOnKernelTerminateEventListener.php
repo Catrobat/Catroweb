@@ -107,13 +107,13 @@ class MachineTranslationOnKernelTerminateEventListener
     return substr((string) strrchr($path, '/'), 1);
   }
 
-  private function getCommentIdFromPath(string $path): int
+  private function getCommentIdFromPath(string $path): string
   {
-    if (1 === preg_match('/\/comments\/(\d+)\//', $path, $matches)) {
-      return (int) $matches[1];
+    if (1 === preg_match('/\/comments\/([a-zA-Z0-9\-]+)\//', $path, $matches)) {
+      return $matches[1];
     }
 
-    return 0;
+    return '';
   }
 
   private function getLanguages(Request $request): array
@@ -151,7 +151,7 @@ class MachineTranslationOnKernelTerminateEventListener
     return json_decode($json_response, true, 512, JSON_THROW_ON_ERROR);
   }
 
-  private function findCommentAndIncrement(int $comment_id, string $source_language, string $target_language, string $provider): void
+  private function findCommentAndIncrement(string $comment_id, string $source_language, string $target_language, string $provider): void
   {
     /** @var UserComment|null $comment */
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($comment_id);

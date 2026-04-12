@@ -22,16 +22,16 @@ Feature: Updating an existing studio
     And I have the POST parameters:
       | name        | value               |
       | description | Updated description |
-    And I request "POST" "/api/studio/nonexistent"
+    And I request "PATCH" "/api/studios/nonexistent"
     Then the response status code should be "404"
 
   Scenario: An request with missing jwt token should result in an error
-    When I request "POST" "/api/studio/1"
+    When I request "PATCH" "/api/studios/1"
     Then the response status code should be "401"
 
   Scenario: An request with an invalid jwt token should result in an error
     Given I use an invalid JWT Bearer token
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "401"
 
   Scenario: Updating a studio with a name that's too short should result in an error
@@ -42,12 +42,19 @@ Feature: Updating an existing studio
       | name        | value |
       | name        | <3    |
       | description | -     |
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name too short"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name too short"}
+          ]
+        }
       }
     """
 
@@ -59,13 +66,20 @@ Feature: Updating an existing studio
       | name        | value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
       | name        | more than 180: ----------------------------------------------------------------------------------------------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
       | description | more than 3000: --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name too long",
-        "description": "Description too long"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name too long"},
+            {"field": "description", "message": "Description too long"}
+          ]
+        }
       }
     """
 
@@ -77,12 +91,19 @@ Feature: Updating an existing studio
       | name        | value            |
       | name        | Another studio   |
       | description | with description |
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name already in use"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name already in use"}
+          ]
+        }
       }
     """
 
@@ -93,7 +114,7 @@ Feature: Updating an existing studio
     And I have the POST parameters:
       | name        | value               |
       | description | Updated description |
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "403"
 
   Scenario: Updating a studio with a single valid fields should succeed
@@ -103,7 +124,7 @@ Feature: Updating an existing studio
     And I have the POST parameters:
       | name        | value               |
       | description | Updated description |
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "200"
     And I should get the json object:
     """
@@ -129,7 +150,7 @@ Feature: Updating an existing studio
       | name        | value               |
       | name        | Updated Studio      |
       | description | Updated description |
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "200"
     And I should get the json object:
     """
@@ -154,7 +175,7 @@ Feature: Updating an existing studio
     And I have the POST parameters:
       | name | value       |
       | name | Cool Studio |
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "200"
     And I should get the json object:
     """
@@ -183,7 +204,7 @@ Feature: Updating an existing studio
       | is_public       | false               |
       | enable_comments | false               |
     And I add the file "galaxy.jpg" from path "Studio" as "image_file"
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "200"
     And I should get the json object:
     """
@@ -207,7 +228,7 @@ Feature: Updating an existing studio
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I add the file "galaxy.jpg" from path "Studio" as "image_file"
     And the current time is "30.08.2024 12:00"
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "200"
     And I should get the json object:
     """
@@ -230,7 +251,7 @@ Feature: Updating an existing studio
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I add the file "galaxy.jpg" from path "Studio" as "image_file"
     And the current time is "30.08.2025 13:00"
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "200"
     And I should get the json object:
     """
@@ -259,12 +280,19 @@ Feature: Updating an existing studio
       | name        | New Studio       |
       | description | with description |
     And I add the file "corrupt.jpg" from path "Studio" as "image_file"
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "image_file": "Image file invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "image_file", "message": "Image file invalid"}
+          ]
+        }
       }
     """
 
@@ -277,12 +305,19 @@ Feature: Updating an existing studio
       | name        | New Studio       |
       | description | with description |
     And I add the file "galaxy.tif" from path "Studio" as "image_file"
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "image_file": "Image file type invalid"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "image_file", "message": "Image file type invalid"}
+          ]
+        }
       }
     """
 
@@ -295,12 +330,19 @@ Feature: Updating an existing studio
       | name        | New Studio       |
       | description | with description |
     And I add the file "galaxy-too-large.jpg" from path "Studio" as "image_file"
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "image_file": "Image file too large"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "image_file", "message": "Image file too large"}
+          ]
+        }
       }
     """
 
@@ -312,11 +354,18 @@ Feature: Updating an existing studio
     And I have the POST parameters:
       | name | value                                                                                                                                                                                 |
       | name | more than 180: ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    And I request "POST" "/api/studio/1"
+    And I request "PATCH" "/api/studios/1"
     Then the response status code should be "422"
     And I should get the json object:
     """
       {
-        "name": "Name zu lang"
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "name", "message": "Name zu lang"}
+          ]
+        }
       }
     """

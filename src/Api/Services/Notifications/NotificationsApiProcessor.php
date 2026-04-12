@@ -15,7 +15,7 @@ class NotificationsApiProcessor extends AbstractApiProcessor
   {
   }
 
-  public function markNotificationAsSeen(int $notification_id, User $user): bool
+  public function markNotificationAsSeen(string $notification_id, User $user): bool
   {
     $notification_seen = $this->notification_repository->findOneBy(['id' => $notification_id, 'user' => $user]);
     if (null === $notification_seen) {

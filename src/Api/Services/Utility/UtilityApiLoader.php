@@ -27,6 +27,14 @@ class UtilityApiLoader extends AbstractApiLoader
     return $this->featured_banner_repository->findActiveBanners($limit, $offset);
   }
 
+  /**
+   * @return FeaturedBanner[]
+   */
+  public function getActiveBannersKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null): array
+  {
+    return $this->featured_banner_repository->findActiveBannersKeyset($limit, $cursor_priority, $cursor_id);
+  }
+
   public function getSurvey(array $criteria): ?Survey
   {
     $survey_repo = $this->entity_manager->getRepository(Survey::class);
