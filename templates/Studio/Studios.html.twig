@@ -12,6 +12,7 @@
     createStudioPath: is_logged_in ? path('studio_new') : path('login'),
     loginPath: path('login'),
     isLoggedIn: is_logged_in,
+    userId: user_id|default(''),
   }) }}
     data-trans-public-studios="{{ 'studio.overview.public_studios'|trans({}, 'catroweb')|e('html_attr') }}"
     data-trans-joined-studios="{{ 'studio.overview.joined_studios'|trans({}, 'catroweb')|e('html_attr') }}"
@@ -42,6 +43,11 @@
           {% for i in range(1, 3) %}
             {{ include('Studio/_SkeletonCard.html.twig') }}
           {% endfor %}
+        </div>
+        <div class="text-center my-3" data-studio--overview-target="loadMoreMy" style="display: none;">
+          <button class="btn btn-outline-primary" data-action="click->studio--overview#loadMoreMy">
+            {{ 'studio.overview.load_more'|trans({}, 'catroweb')|default('Load More') }}
+          </button>
         </div>
       </section>
 

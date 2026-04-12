@@ -3,6 +3,7 @@ import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import AcceptLanguage from '../../Api/AcceptLanguage'
+import { getCookie } from '../../Security/CookieHelper'
 
 export default class extends Controller {
   static values = {
@@ -11,6 +12,7 @@ export default class extends Controller {
     createStudioPath: String,
     loginPath: String,
     isLoggedIn: Boolean,
+    userId: String,
   }
 
   static targets = [
@@ -20,18 +22,25 @@ export default class extends Controller {
     'myStudiosHeader',
     'exploreStudiosHeader',
     'loadMore',
+    'loadMoreMy',
   ]
 
   connect() {
-    this.cursor = null
-    this.hasMoreStudios = true
-    this.loading = false
-    this.allStudios = []
+    this.exploreCursor = null
+    this.hasMoreExplore = true
+    this.exploreLoading = false
+
+    this.myCursor = null
+    this.hasMoreMy = true
+    this.myLoading = false
 
     this._readTranslations()
-    this._fetchAllStudios()
 
-    // Close dropdowns when clicking outside
+    if (this.isLoggedInValue && this.userIdValue) {
+      this._fetchMyStudios()
+    }
+    this._fetchExploreStudios()
+
     this._onDocumentClick = () => {
       this.element.querySelectorAll('.projects-list-item--dropdown').forEach((d) => {
         d.style.display = 'none'
@@ -45,8 +54,14 @@ export default class extends Controller {
   }
 
   async loadMore() {
-    if (!this.loading && this.hasMoreStudios) {
-      await this._fetchAllStudios()
+    if (!this.exploreLoading && this.hasMoreExplore) {
+      await this._fetchExploreStudios()
+    }
+  }
+
+  async loadMoreMy() {
+    if (!this.myLoading && this.hasMoreMy) {
+      await this._fetchMyStudios()
     }
   }
 
@@ -77,120 +92,140 @@ export default class extends Controller {
     }
   }
 
-  async _fetchAllStudios() {
-    if (this.loading || !this.hasMoreStudios) {
+  _buildHeaders() {
+    const headers = {
+      Accept: 'application/json',
+      'Accept-Language': new AcceptLanguage().get(),
+    }
+    const token = getCookie('BEARER')
+    if (token) {
+      headers.Authorization = 'Bearer ' + token
+    }
+    return headers
+  }
+
+  _emptyMessageHtml(message) {
+    return (
+      '<p class="text-muted text-center py-4 studios-empty-message">' + escapeHtml(message) + '</p>'
+    )
+  }
+
+  async _fetchMyStudios() {
+    if (this.myLoading || !this.hasMoreMy) {
       return
     }
 
-    this.loading = true
+    this.myLoading = true
 
     const params = new URLSearchParams({ limit: '20' })
-    if (this.cursor) {
-      params.set('cursor', this.cursor)
+    if (this.myCursor) {
+      params.set('cursor', this.myCursor)
     }
 
+    const url =
+      this.apiBaseUrlValue +
+      '/users/' +
+      encodeURIComponent(this.userIdValue) +
+      '/studios?' +
+      params.toString()
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        credentials: 'same-origin',
+        headers: this._buildHeaders(),
+      })
+
+      if (!response.ok) {
+        console.error('Failed to fetch my studios:', response.status)
+        this.myLoading = false
+        return
+      }
+
+      const json = await response.json()
+      const studios = json.data || []
+      this.hasMoreMy = json.has_more || false
+      this.myCursor = json.next_cursor || null
+
+      this._appendToSection(this.myStudiosTarget, studios, this.translations.noJoined, true)
+      this._updateLoadMoreMyButton()
+    } catch (error) {
+      console.error('Error fetching my studios:', error)
+    } finally {
+      this.myLoading = false
+      this._removeSkeletons(this.myStudiosTarget)
+    }
+  }
+
+  async _fetchExploreStudios() {
+    if (this.exploreLoading || !this.hasMoreExplore) {
+      return
+    }
+
+    this.exploreLoading = true
+
+    const params = new URLSearchParams({ limit: '20' })
+    if (this.exploreCursor) {
+      params.set('cursor', this.exploreCursor)
+    }
+
+    const container = this.isLoggedInValue ? this.exploreStudiosTarget : this.studiosListTarget
     const url = this.apiBaseUrlValue + '/studios?' + params.toString()
 
     try {
       const response = await fetch(url, {
         method: 'GET',
         credentials: 'same-origin',
-        headers: {
-          Accept: 'application/json',
-          'Accept-Language': new AcceptLanguage().get(),
-        },
+        headers: this._buildHeaders(),
       })
 
       if (!response.ok) {
         console.error('Failed to fetch studios:', response.status)
-        this.loading = false
+        this.exploreLoading = false
         return
       }
 
       const json = await response.json()
-      const studios = json.data || []
-      this.hasMoreStudios = json.has_more || false
-      this.cursor = json.next_cursor || null
-
-      this.allStudios = this.allStudios.concat(studios)
+      let studios = json.data || []
+      this.hasMoreExplore = json.has_more || false
+      this.exploreCursor = json.next_cursor || null
 
       if (this.isLoggedInValue) {
-        this._renderTwoSections()
-      } else {
-        this._renderSingleList(studios)
+        studios = studios.filter((s) => s.is_member !== true && s.join_request_status !== 'pending')
       }
 
+      this._appendToSection(container, studios, this.translations.noStudios, false)
       this._updateLoadMoreButton()
     } catch (error) {
       console.error('Error fetching studios:', error)
     } finally {
-      this.loading = false
-      this._removeSkeletons()
+      this.exploreLoading = false
+      this._removeSkeletons(container)
     }
   }
 
-  _removeSkeletons() {
-    this.element.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+  _removeSkeletons(container) {
+    if (container) {
+      container.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+    }
   }
 
-  _renderTwoSections() {
-    const myStudios = this.allStudios.filter(
-      (s) => s.is_member === true || s.join_request_status === 'pending',
-    )
-    const exploreStudios = this.allStudios.filter(
-      (s) => s.is_member !== true && s.join_request_status !== 'pending',
-    )
-
-    // Sort explore studios by member count descending
-    exploreStudios.sort((a, b) => {
-      const countA = parseInt(a.members_count, 10) || 0
-      const countB = parseInt(b.members_count, 10) || 0
-      return countB - countA
-    })
-
-    if (this.hasMyStudiosHeaderTarget) {
-      this.myStudiosHeaderTarget.textContent = this.translations.myStudios
-    }
-    if (this.hasExploreStudiosHeaderTarget) {
-      this.exploreStudiosHeaderTarget.textContent = this.translations.explore
+  _appendToSection(container, studios, emptyMessage, isMyStudios) {
+    const existingEmpty = container.querySelector('.studios-empty-message')
+    if (existingEmpty) {
+      existingEmpty.remove()
     }
 
-    this._renderSection(this.myStudiosTarget, myStudios, this.translations.noJoined, true)
-    this._renderSection(
-      this.exploreStudiosTarget,
-      exploreStudios,
-      this.translations.noStudios,
-      false,
-    )
-
-    this._bindCardEvents()
-  }
-
-  _renderSection(container, studios, emptyMessage, isMyStudios) {
-    container.innerHTML = ''
-
-    if (studios.length === 0) {
-      container.innerHTML =
-        '<p class="text-muted text-center py-4">' + escapeHtml(emptyMessage) + '</p>'
+    if (
+      studios.length === 0 &&
+      container.querySelectorAll('.studios-list-item-wrapper').length === 0
+    ) {
+      container.insertAdjacentHTML('beforeend', this._emptyMessageHtml(emptyMessage))
       return
     }
 
     for (const studio of studios) {
       container.insertAdjacentHTML('beforeend', this._buildStudioCard(studio, isMyStudios))
-    }
-  }
-
-  _renderSingleList(studios) {
-    const container = this.studiosListTarget
-
-    if (studios.length === 0 && !this.cursor) {
-      container.innerHTML =
-        '<p class="text-muted text-center py-4">' + escapeHtml(this.translations.noStudios) + '</p>'
-      return
-    }
-
-    for (const studio of studios) {
-      container.insertAdjacentHTML('beforeend', this._buildStudioCard(studio, false))
     }
 
     this._bindCardEvents()
@@ -210,7 +245,6 @@ export default class extends Controller {
 
     const detailUrl = this.studioDetailsPathValue.replace('__ID__', id)
 
-    // Build pill badges
     let pills = ''
     if (isMyStudios && userRole === 'admin') {
       pills +=
@@ -225,7 +259,6 @@ export default class extends Controller {
         '</span>'
     }
 
-    // Build action area (menu + optional join button)
     const actionArea = this._buildActionArea(
       id,
       detailUrl,
@@ -282,7 +315,6 @@ export default class extends Controller {
   }
 
   _buildActionArea(studioId, detailUrl, isMyStudios, isMember, userRole, joinRequestStatus) {
-    // Build dropdown menu items
     let menuItems =
       '<a href="' +
       escapeAttr(detailUrl) +
@@ -319,7 +351,7 @@ export default class extends Controller {
         '</button>'
     }
 
-    // Join button shown directly on explore cards (not in menu)
+    // Join button on explore cards only (not in dropdown menu)
     let joinButton = ''
     if (this.isLoggedInValue && !isMyStudios && !isMember) {
       joinButton =
@@ -357,7 +389,6 @@ export default class extends Controller {
     }
 
     for (const container of containers) {
-      // Dropdown toggle
       container.querySelectorAll('.projects-list-item--menu-btn').forEach((btn) => {
         if (!btn.dataset.bound) {
           btn.dataset.bound = 'true'
@@ -366,7 +397,6 @@ export default class extends Controller {
             e.stopPropagation()
             const dropdown = btn.nextElementSibling
             const isOpen = dropdown.style.display !== 'none'
-            // Close all dropdowns first
             this.element.querySelectorAll('.projects-list-item--dropdown').forEach((d) => {
               d.style.display = 'none'
             })
@@ -375,7 +405,6 @@ export default class extends Controller {
         }
       })
 
-      // Share buttons inside dropdown
       container.querySelectorAll('[data-action="share"]').forEach((btn) => {
         if (!btn.dataset.bound) {
           btn.dataset.bound = 'true'
@@ -397,7 +426,6 @@ export default class extends Controller {
         }
       })
 
-      // Leave buttons inside dropdown
       container.querySelectorAll('[data-action="leave"]').forEach((btn) => {
         if (!btn.dataset.bound) {
           btn.dataset.bound = 'true'
@@ -410,7 +438,6 @@ export default class extends Controller {
         }
       })
 
-      // Cancel request buttons inside dropdown
       container.querySelectorAll('[data-action="cancel-request"]').forEach((btn) => {
         if (!btn.dataset.bound) {
           btn.dataset.bound = 'true'
@@ -423,14 +450,13 @@ export default class extends Controller {
         }
       })
 
-      // Join buttons (directly on card, not in dropdown)
       container.querySelectorAll('.studio-join-btn').forEach((btn) => {
         if (!btn.dataset.bound) {
           btn.dataset.bound = 'true'
           btn.addEventListener('click', (e) => {
             e.preventDefault()
             e.stopPropagation()
-            this._joinStudio(btn.dataset.studioId, btn)
+            this._joinStudio(btn.dataset.studioId)
           })
         }
       })
@@ -449,98 +475,7 @@ export default class extends Controller {
     })
 
     if (result.isConfirmed) {
-      await this._leaveStudio(studioId)
-    }
-  }
-
-  async _joinStudio(studioId, btn) {
-    if (!this.isLoggedInValue) {
-      window.location.href = this.loginPathValue
-      return
-    }
-
-    try {
-      const response = await fetch(
-        this.apiBaseUrlValue + '/studios/' + encodeURIComponent(studioId) + '/join',
-        {
-          method: 'POST',
-          credentials: 'same-origin',
-          headers: {
-            Accept: 'application/json',
-            'Accept-Language': new AcceptLanguage().get(),
-          },
-        },
-      )
-
-      if (response.ok) {
-        const studio = this.allStudios.find((s) => String(s.id) === String(studioId))
-
-        if (studio) {
-          if (studio.is_public !== false) {
-            studio.is_member = true
-            studio.members_count = (parseInt(studio.members_count, 10) || 0) + 1
-          } else {
-            studio.join_request_status = 'pending'
-          }
-        }
-
-        if (this.isLoggedInValue) {
-          this._renderTwoSections()
-        } else {
-          const wrapper = btn.closest('.studios-list-item-wrapper')
-          const countEl = wrapper?.querySelector('#studios-user-count-' + CSS.escape(studioId))
-          if (countEl) {
-            countEl.textContent = parseInt(countEl.textContent, 10) + 1
-          }
-          // Re-render the card without join button
-          this._bindCardEvents()
-        }
-      } else if (response.status === 409) {
-        // Already a member
-      } else {
-        console.error('Join failed:', response.status)
-      }
-    } catch (error) {
-      console.error('Join error:', error)
-    }
-  }
-
-  async _leaveStudio(studioId) {
-    if (!this.isLoggedInValue) {
-      window.location.href = this.loginPathValue
-      return
-    }
-
-    try {
-      const response = await fetch(
-        this.apiBaseUrlValue + '/studios/' + encodeURIComponent(studioId) + '/leave',
-        {
-          method: 'DELETE',
-          credentials: 'same-origin',
-          headers: {
-            Accept: 'application/json',
-            'Accept-Language': new AcceptLanguage().get(),
-          },
-        },
-      )
-
-      if (response.ok || response.status === 204) {
-        const studio = this.allStudios.find((s) => String(s.id) === String(studioId))
-        if (studio) {
-          studio.is_member = false
-          studio.members_count = Math.max(0, (parseInt(studio.members_count, 10) || 0) - 1)
-        }
-
-        if (this.isLoggedInValue) {
-          this._renderTwoSections()
-        }
-      } else if (response.status === 422) {
-        showSnackbar('#share-snackbar', 'Admins cannot leave the studio', SnackbarDuration.error)
-      } else {
-        console.error('Leave failed:', response.status)
-      }
-    } catch (error) {
-      console.error('Leave error:', error)
+      await this._removeMembership(studioId, true)
     }
   }
 
@@ -556,11 +491,65 @@ export default class extends Controller {
     })
 
     if (result.isConfirmed) {
-      await this._cancelRequest(studioId)
+      await this._removeMembership(studioId, false)
     }
   }
 
-  async _cancelRequest(studioId) {
+  async _joinStudio(studioId) {
+    if (!this.isLoggedInValue) {
+      window.location.href = this.loginPathValue
+      return
+    }
+
+    try {
+      const response = await fetch(
+        this.apiBaseUrlValue + '/studios/' + encodeURIComponent(studioId) + '/join',
+        {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: this._buildHeaders(),
+        },
+      )
+
+      if (response.ok) {
+        const wrapper = this.element.querySelector(
+          '.studios-list-item-wrapper[data-studio-id="' + CSS.escape(studioId) + '"]',
+        )
+        if (wrapper) {
+          wrapper.remove()
+        }
+
+        if (this.hasMyStudiosTarget) {
+          const emptyMsg = this.myStudiosTarget.querySelector('.studios-empty-message')
+          if (emptyMsg) {
+            emptyMsg.remove()
+          }
+        }
+
+        // Re-fetch to get the card with correct user_role and membership state
+        this.myCursor = null
+        this.hasMoreMy = true
+        if (this.hasMyStudiosTarget) {
+          this.myStudiosTarget.innerHTML = ''
+        }
+        await this._fetchMyStudios()
+
+        this._showEmptyExploreIfNeeded()
+      } else if (response.status === 409) {
+        // Already a member
+      } else {
+        console.error('Join failed:', response.status)
+      }
+    } catch (error) {
+      console.error('Join error:', error)
+    }
+  }
+
+  /**
+   * Shared handler for both "leave studio" and "cancel join request" — both
+   * DELETE to the same endpoint, remove the card from My Studios, and refresh Explore.
+   */
+  async _removeMembership(studioId, isLeave) {
     if (!this.isLoggedInValue) {
       window.location.href = this.loginPathValue
       return
@@ -572,33 +561,70 @@ export default class extends Controller {
         {
           method: 'DELETE',
           credentials: 'same-origin',
-          headers: {
-            Accept: 'application/json',
-            'Accept-Language': new AcceptLanguage().get(),
-          },
+          headers: this._buildHeaders(),
         },
       )
 
-      if (response.ok || response.status === 204) {
-        const studio = this.allStudios.find((s) => String(s.id) === String(studioId))
-        if (studio) {
-          studio.join_request_status = null
-        }
-
-        if (this.isLoggedInValue) {
-          this._renderTwoSections()
-        }
+      if (response.ok) {
+        this._removeCardFromMyStudios(studioId)
+        await this._resetAndRefetchExplore()
+      } else if (isLeave && response.status === 422) {
+        showSnackbar('#share-snackbar', 'Admins cannot leave the studio', SnackbarDuration.error)
       } else {
-        console.error('Cancel request failed:', response.status)
+        console.error(isLeave ? 'Leave failed:' : 'Cancel request failed:', response.status)
       }
     } catch (error) {
-      console.error('Cancel request error:', error)
+      console.error(isLeave ? 'Leave error:' : 'Cancel request error:', error)
+    }
+  }
+
+  _removeCardFromMyStudios(studioId) {
+    if (!this.hasMyStudiosTarget) return
+
+    const wrapper = this.myStudiosTarget.querySelector(
+      '.studios-list-item-wrapper[data-studio-id="' + CSS.escape(studioId) + '"]',
+    )
+    if (wrapper) {
+      wrapper.remove()
+    }
+
+    if (this.myStudiosTarget.querySelectorAll('.studios-list-item-wrapper').length === 0) {
+      this.myStudiosTarget.insertAdjacentHTML(
+        'beforeend',
+        this._emptyMessageHtml(this.translations.noJoined),
+      )
+    }
+  }
+
+  async _resetAndRefetchExplore() {
+    this.exploreCursor = null
+    this.hasMoreExplore = true
+    if (this.hasExploreStudiosTarget) {
+      this.exploreStudiosTarget.innerHTML = ''
+    }
+    await this._fetchExploreStudios()
+  }
+
+  _showEmptyExploreIfNeeded() {
+    if (!this.isLoggedInValue || !this.hasExploreStudiosTarget) return
+
+    if (this.exploreStudiosTarget.querySelectorAll('.studios-list-item-wrapper').length === 0) {
+      this.exploreStudiosTarget.insertAdjacentHTML(
+        'beforeend',
+        this._emptyMessageHtml(this.translations.noStudios),
+      )
     }
   }
 
   _updateLoadMoreButton() {
     if (this.hasLoadMoreTarget) {
-      this.loadMoreTarget.style.display = this.hasMoreStudios ? '' : 'none'
+      this.loadMoreTarget.style.display = this.hasMoreExplore ? '' : 'none'
+    }
+  }
+
+  _updateLoadMoreMyButton() {
+    if (this.hasLoadMoreMyTarget) {
+      this.loadMoreMyTarget.style.display = this.hasMoreMy ? '' : 'none'
     }
   }
 
