@@ -279,6 +279,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       $search = null;
     }
 
+    $current_offset = 0;
     if (null === $search) {
       $has_more = count($categories) > $limit;
       if ($has_more) {
