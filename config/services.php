@@ -22,6 +22,7 @@ use App\Admin\Statistics\Translation\Controller\CommentMachineTranslationAdminCo
 use App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController;
 use App\Admin\Statistics\Translation\ProjectCustomTranslationAdmin;
 use App\Admin\Statistics\Translation\ProjectMachineTranslationAdmin;
+use App\Admin\Studios\StudioAdmin;
 use App\Admin\System\CronJobs\CronJobsAdmin;
 use App\Admin\System\CronJobs\CronJobsAdminController;
 use App\Admin\System\DB_Updater\AchievementsAdmin;
@@ -74,6 +75,7 @@ use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\Entity\Project\Tag;
+use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\System\CronJob;
 use App\DB\Entity\System\FeatureFlag;
 use App\DB\Entity\System\MaintenanceInformation;
@@ -401,6 +403,21 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'code' => null,
         'model_class' => ConsentLog::class,
         'controller' => null,
+      ]
+    )
+  ;
+  $services->set('admin.block.studios.overview', StudioAdmin::class)
+    ->tag(
+      'sonata.admin',
+      [
+        'manager_type' => 'orm',
+        'model_class' => Studio::class,
+        'label' => 'Studio Overview',
+        'show_mosaic_button' => false,
+        'default' => true,
+        'code' => null,
+        'controller' => null,
+        'pager_type' => 'simple',
       ]
     )
   ;
