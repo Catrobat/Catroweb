@@ -14,6 +14,8 @@ use App\Api\Services\Reactions\ReactionsResponseManager;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\CodeView\CodeTreeBuilder;
+use App\Project\Remix\RemixManager;
+use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\ReactionSummaryResponse;
 use OpenAPI\Server\Model\ReactionUsersResponse;
@@ -51,6 +53,8 @@ final class ReactionsApiTest extends TestCase
       $this->facade,
       $this->reactions_facade,
       $this->createStub(CodeTreeBuilder::class),
+      $this->createStub(RemixManager::class),
+      $this->createStub(ScreenshotRepository::class),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
       new RateLimiterFactory(['id' => 'test', 'policy' => 'no_limit'], new InMemoryStorage()),
