@@ -15,13 +15,13 @@ Feature: Studio project cards display metadata and action menus
       | id | name             | description     | allow_comments | is_public |
       | 1  | CatrobatStudio01 | hasADescription | true           | true      |
     And there are studio users:
-      | id | user        | studio_id | role   |
-      | 1  | StudioAdmin | 1         | admin  |
-      | 2  | Catrobat    | 1         | member |
+      | id                                   | user        | studio_id | role   |
+      | 00000000-0000-0000-0000-000000000001 | StudioAdmin | 1         | admin  |
+      | 00000000-0000-0000-0000-000000000002 | Catrobat    | 1         | member |
     And there are studio projects:
-      | id | studio_id | project   | user        |
-      | 1  | 1         | project 1 | StudioAdmin |
-      | 2  | 1         | project 2 | Catrobat    |
+      | id                                   | studio_id | project   | user        |
+      | 00000000-0000-0000-0000-000000000001 | 1         | project 1 | StudioAdmin |
+      | 00000000-0000-0000-0000-000000000002 | 1         | project 2 | Catrobat    |
 
   Scenario: Project cards render with project names after API load
     Given I am on "/app/studio/1"

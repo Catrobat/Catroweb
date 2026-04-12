@@ -269,15 +269,13 @@ class StudioManagerTest extends KernelTestCase
     $this->object->addCommentToStudio($this->user, $this->studio, $replies[0], $studioComment->getId());
     $this->object->addCommentToStudio($this->user, $this->studio, $replies[1], $studioComment->getId());
     $this->assertEquals(2, $this->object->countCommentReplies($studioComment->getId()));
-    $i = 0;
-    foreach ($this->object->findCommentReplies($studioComment->getId()) as $reply) {
-      $this->assertInstanceOf(UserComment::class, $reply);
-      $this->assertEquals($replies[$i], $reply->getText());
-      ++$i;
-      if ($i >= count($replies)) {
-        break;
-      }
-    }
+    $replyTexts = array_map(
+      static fn (UserComment $reply) => $reply->getText(),
+      $this->object->findCommentReplies($studioComment->getId()),
+    );
+    sort($replyTexts);
+    sort($replies);
+    $this->assertEquals($replies, $replyTexts);
 
     $this->object->deleteCommentFromStudio($this->user, $studioComment->getId());
 

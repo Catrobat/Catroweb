@@ -15,16 +15,16 @@ Feature: Every Studio should have an overview containing the most necessary info
       | 1  | CatrobatStudio01 | hasADescription | true           | true      |
       | 2  | CatrobatStudio02 | hasADescription | true           | false      |
     And there are studio users:
-      | id | user        | studio_id | role   |
-      | 1  | StudioAdmin | 1         | admin  |
-      | 2  | Catrobat    | 1         | member |
-      | 5  | StudioAdmin   | 2         | admin |
+      | id                                   | user        | studio_id | role   |
+      | 00000000-0000-0000-0000-000000000001 | StudioAdmin | 1         | admin  |
+      | 00000000-0000-0000-0000-000000000002 | Catrobat    | 1         | member |
+      | 00000000-0000-0000-0000-000000000005 | StudioAdmin | 2         | admin  |
     And there are studio projects:
-      | id | project   | user     | studio_id |
-      | 1  | program 1 | Catrobat | 1         |
+      | id                                   | project   | user     | studio_id |
+      | 00000000-0000-0000-0000-000000000001 | program 1 | Catrobat | 1         |
     And there are studio comments:
-      | id | comment     | user     | studio_id |
-      | 1  | Cool studio | Catrobat | 1         |
+      | id                                   | comment     | user     | studio_id |
+      | 00000000-0000-0000-0000-000000000001 | Cool studio | Catrobat | 1         |
     And there are studio join requests:
       | User      | Studio              | Status   |
       | Catrobat1 | CatrobatStudio02   | declined |

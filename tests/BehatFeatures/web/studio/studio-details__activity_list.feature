@@ -14,15 +14,15 @@ Feature: Every studio provides a list of all members
       | id | name             | description     | allow_comments | is_public |
       | 1  | CatrobatStudio01 | hasADescription | true           | true      |
     And there are studio users:
-      | id | user        | studio_id | role   |
-      | 1  | StudioAdmin | 1         | admin  |
-      | 2  | Catrobat    | 1         | member |
+      | id                                   | user        | studio_id | role   |
+      | 00000000-0000-0000-0000-000000000001 | StudioAdmin | 1         | admin  |
+      | 00000000-0000-0000-0000-000000000002 | Catrobat    | 1         | member |
     And there are studio projects:
-      | id | project   | user     | studio_id |
-      | 1  | program 1 | Catrobat | 1         |
+      | id                                   | project   | user     | studio_id |
+      | 00000000-0000-0000-0000-000000000001 | program 1 | Catrobat | 1         |
     And there are studio comments:
-      | id | comment     | user     | studio_id |
-      | 1  | Cool studio | Catrobat | 1         |
+      | id                                   | comment     | user     | studio_id |
+      | 00000000-0000-0000-0000-000000000001 | Cool studio | Catrobat | 1         |
 
   Scenario: If I am not logged in I should not be able see all members
     Given I am on "/app/studio/1"
