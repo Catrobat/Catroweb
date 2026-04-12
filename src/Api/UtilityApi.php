@@ -7,6 +7,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Utility\UtilityApiFacade;
 use App\Api\Traits\CursorPaginationTrait;
+use App\Api\Traits\KeysetCursorTrait;
 use Doctrine\DBAL\Connection;
 use OpenAPI\Server\Api\UtilityApiInterface;
 use OpenAPI\Server\Model\FeaturedBannersListResponse;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
   use CursorPaginationTrait;
+  use KeysetCursorTrait;
 
   public function __construct(
     private readonly UtilityApiFacade $facade,
@@ -28,9 +30,22 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
   public function featuredBannersGet(int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): FeaturedBannersListResponse
   {
     $limit = min(max($limit, 1), 50);
-    $offset = $this->decodeCursorToOffset($cursor);
 
-    $banners = $this->facade->getLoader()->getActiveBanners($limit + 1, $offset);
+    $cursor_data = $this->decodeIntKeysetCursor($cursor);
+    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      $response = new FeaturedBannersListResponse();
+      $response->setData([]);
+      $response->setNextCursor(null);
+      $response->setHasMore(false);
+
+      return $response;
+    }
+
+    $banners = $this->facade->getLoader()->getActiveBannersKeyset(
+      $limit + 1, $cursor_data['value'] ?? null, $cursor_data['id'] ?? null
+    );
 
     $has_more = count($banners) > $limit;
     if ($has_more) {
@@ -42,9 +57,11 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
       $banners,
     );
 
-    $next_cursor = ($has_more && [] !== $banner_responses)
-      ? $this->encodeCursorFromOffset($offset, count($banner_responses))
-      : null;
+    $next_cursor = null;
+    if ($has_more && [] !== $banners) {
+      $last = end($banners);
+      $next_cursor = $this->encodeIntKeysetCursor($last->getPriority(), $last->getId());
+    }
 
     $responseCode = Response::HTTP_OK;
 

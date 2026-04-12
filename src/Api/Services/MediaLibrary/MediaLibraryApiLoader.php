@@ -37,6 +37,43 @@ class MediaLibraryApiLoader extends AbstractApiLoader
     return $this->category_repository->findPaginated($limit + 1, $offset);
   }
 
+  /**
+   * @return array<MediaCategory>
+   */
+  public function getCategoriesKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null): array
+  {
+    return $this->category_repository->findPaginatedKeyset($limit + 1, $cursor_priority, $cursor_id);
+  }
+
+  /**
+   * @return array<MediaAsset>
+   */
+  public function getAssetsPaginatedKeyset(
+    int $limit,
+    ?string $category_id,
+    ?MediaFileType $file_type,
+    ?string $flavor,
+    ?string $search,
+    string $sort_by,
+    string $sort_order,
+    ?string $cursor_sort_value = null,
+    ?string $cursor_id = null,
+  ): array {
+    $category = $category_id ? $this->category_repository->find($category_id) : null;
+
+    return $this->asset_repository->findPaginatedKeyset(
+      $limit + 1,
+      $category,
+      $file_type,
+      $flavor,
+      $search,
+      $sort_by,
+      $sort_order,
+      $cursor_sort_value,
+      $cursor_id,
+    );
+  }
+
   public function getAllCategories(): array
   {
     return $this->category_repository->findAll();

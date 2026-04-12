@@ -121,6 +121,78 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->getPublicUserProjects($user_id, $limit, $offset, $flavor, $max_version);
   }
 
+  /**
+   * @return array<Program>
+   */
+  public function getProjectsKeyset(string $category, string $max_version, int $limit, string $flavor, ?\DateTimeInterface $cursor_date = null, ?int $cursor_value = null, ?string $cursor_id = null, ?User $user = null): array
+  {
+    $order_by = match ($category) {
+      'most_viewed' => 'views',
+      'most_downloaded' => 'downloads',
+      default => 'uploaded_at',
+    };
+
+    return $this->filterNotSafeForMinors(
+      $this->project_manager->getProjectsKeyset($order_by, $flavor, $max_version, $limit, $cursor_date, $cursor_value, $cursor_id)
+    );
+  }
+
+  /**
+   * @return array<Program>
+   */
+  public function getFeaturedProjectsKeyset(?string $flavor, int $limit, string $platform, string $max_version, ?int $cursor_priority = null, ?int $cursor_id = null): array
+  {
+    return $this->featured_repository->getFeaturedProgramsKeyset($flavor, $limit, $platform, $max_version, $cursor_priority, $cursor_id);
+  }
+
+  /**
+   * @return array<Program>
+   */
+  public function getUserProjectsKeyset(string $user_id, int $limit, string $flavor, string $max_version, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    return $this->filterNotSafeForMinors(
+      $this->project_manager->getUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id)
+    );
+  }
+
+  /**
+   * @return array<Program>
+   */
+  public function getUserPublicProjectsKeyset(string $user_id, int $limit, string $flavor, string $max_version, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    return $this->filterNotSafeForMinors(
+      $this->project_manager->getPublicUserProjectsKeyset($user_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id)
+    );
+  }
+
+  /**
+   * @return array<Program>
+   */
+  public function getRecommendedProjectsKeyset(string $project_id, string $category, string $max_version, int $limit, string $flavor, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    if ('more_from_user' !== $category) {
+      return [];
+    }
+
+    $project = $this->findProjectByID($project_id, true);
+    if (null === $project) {
+      return [];
+    }
+
+    /** @var Program $base_project */
+    $base_project = $project->isExample() ? $project->getProgram() : $project;
+    $user_id = $base_project->getUser()?->getId();
+    if (null === $user_id) {
+      return [];
+    }
+
+    return $this->filterNotSafeForMinors(
+      $this->project_manager->getMoreProjectsFromUserKeyset(
+        $user_id, $project_id, $flavor, $max_version, $limit, $cursor_date, $cursor_id
+      )
+    );
+  }
+
   public function getClientIp(): ?string
   {
     return $this->request_stack->getCurrentRequest()->getClientIp();

@@ -8,6 +8,7 @@ use App\Api\Exceptions\ApiErrorResponse;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Base\TranslatorAwareTrait;
 use App\Api\Traits\CursorPaginationTrait;
+use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProjectCodeStatistics;
@@ -39,6 +40,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ProjectsResponseManager extends AbstractResponseManager
 {
   use CursorPaginationTrait;
+  use KeysetCursorTrait;
   use TranslatorAwareTrait;
 
   public function __construct(
@@ -229,6 +231,72 @@ class ProjectsResponseManager extends AbstractResponseManager
     $next_cursor = ($has_more && [] !== $data) ? $this->encodeCursorFromOffset($offset, count($data)) : null;
 
     return new ProjectsListResponse([
+      'data' => $data,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ]);
+  }
+
+  /**
+   * Create a paginated projects list response using keyset cursor from actual project data.
+   *
+   * @param string $sort_by The sort column: 'uploaded_at', 'views', or 'downloads'
+   */
+  public function createProjectsKeysetResponse(array $projects, int $limit, string $sort_by, ?string $attributes = null): ProjectsListResponse
+  {
+    $has_more = count($projects) > $limit;
+    if ($has_more) {
+      array_pop($projects);
+    }
+
+    $data = [];
+    foreach ($projects as $project) {
+      $data[] = $this->createProjectDataResponse($project, $attributes);
+    }
+
+    $next_cursor = null;
+    if ($has_more && [] !== $data) {
+      /** @var Program $last */
+      $last = end($projects);
+      $last_id = (string) $last->getId();
+      $next_cursor = match ($sort_by) {
+        'views' => $this->encodeIntKeysetCursor($last->getViews(), $last_id),
+        'downloads' => $this->encodeIntKeysetCursor($last->getDownloads(), $last_id),
+        default => $this->encodeDateKeysetCursor($last->getUploadedAt(), $last_id),
+      };
+    }
+
+    return new ProjectsListResponse([
+      'data' => $data,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ]);
+  }
+
+  /**
+   * Create a paginated featured projects list response using keyset cursor.
+   */
+  public function createFeaturedProjectsKeysetResponse(array $featured_projects, int $limit, ?string $attributes = null): FeaturedProjectsListResponse
+  {
+    $has_more = count($featured_projects) > $limit;
+    if ($has_more) {
+      array_pop($featured_projects);
+    }
+
+    $data = [];
+    /** @var FeaturedProgram $featured_project */
+    foreach ($featured_projects as $featured_project) {
+      $data[] = $this->createFeaturedProjectResponse($featured_project, $attributes);
+    }
+
+    $next_cursor = null;
+    if ($has_more && [] !== $data) {
+      /** @var FeaturedProgram $last */
+      $last = end($featured_projects);
+      $next_cursor = $this->encodeIntKeysetCursor($last->getPriority(), (string) $last->getId());
+    }
+
+    return new FeaturedProjectsListResponse([
       'data' => $data,
       'next_cursor' => $next_cursor,
       'has_more' => $has_more,

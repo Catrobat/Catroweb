@@ -10,6 +10,7 @@ use App\Api\Services\Studio\StudioApiLoader;
 use App\Api\Services\Studio\StudioResponseManager;
 use App\Api\Services\User\UserApiFacade;
 use App\Api\Traits\CursorPaginationTrait;
+use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
@@ -34,6 +35,7 @@ use Symfony\Component\RateLimiter\RateLimiterFactory;
 class UsersApi extends AbstractApiController implements UsersApiInterface
 {
   use CursorPaginationTrait;
+  use KeysetCursorTrait;
   use RateLimitTrait;
 
   private const int MAX_LIMIT = 50;
@@ -264,6 +266,7 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
   #[\Override]
   public function usersSearchGet(string $query, int $limit, ?string $cursor, string $attributes, int &$responseCode, array &$responseHeaders): array|object|null
   {
+    // Elasticsearch only supports offset-based pagination (from/size), not keyset cursors
     $limit = min(max($limit, 1), self::MAX_LIMIT);
     $offset = $this->decodeCursorToOffset($cursor);
 
@@ -324,16 +327,53 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
   public function usersGet(?string $query, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $limit = min(max($limit, 1), self::MAX_LIMIT);
-    $offset = $this->decodeCursorToOffset($cursor);
 
-    $users = $this->facade->getLoader()->getAllUsers($query, $limit + 1, $offset);
+    // With search query: Elasticsearch only supports offset-based pagination
+    if (null !== $query && '' !== trim($query)) {
+      $offset = $this->decodeCursorToOffset($cursor);
+      $users = $this->facade->getLoader()->getAllUsers($query, $limit + 1, $offset);
+
+      $has_more = count($users) > $limit;
+      if ($has_more) {
+        array_pop($users);
+      }
+
+      $next_cursor = $has_more ? base64_encode((string) ($offset + $limit)) : null;
+
+      $responseCode = Response::HTTP_OK;
+      $response = $this->facade->getResponseManager()->createUsersListResponse($users, $has_more, $next_cursor, 'ALL');
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $response;
+    }
+
+    // No query: real keyset cursor pagination ordered by createdAt DESC
+    $cursor_date = null;
+    $cursor_id = null;
+    if (null !== $cursor && '' !== $cursor) {
+      $cursor_data = $this->decodeDateKeysetCursor($cursor);
+      if (null === $cursor_data) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return null;
+      }
+      $cursor_date = $cursor_data['date'];
+      $cursor_id = $cursor_data['id'];
+    }
+
+    $users = $this->facade->getLoader()->getAllUsersKeyset($limit + 1, $cursor_date, $cursor_id);
 
     $has_more = count($users) > $limit;
     if ($has_more) {
       array_pop($users);
     }
 
-    $next_cursor = $has_more ? base64_encode((string) ($offset + $limit)) : null;
+    $next_cursor = null;
+    if ($has_more && [] !== $users) {
+      $last = end($users);
+      $next_cursor = $this->encodeDateKeysetCursor($last->getCreatedAt(), $last->getId());
+    }
 
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createUsersListResponse($users, $has_more, $next_cursor, 'ALL');

@@ -283,6 +283,95 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   // -------------------------------------------------------------------------------------------------------------------
+  //  Keyset Cursor Pagination
+  //
+
+  /**
+   * @return Program[]
+   */
+  public function getProjectsKeyset(?string $flavor, string $max_version, int $limit, string $order_by, ?\DateTimeInterface $cursor_date = null, ?int $cursor_value = null, ?string $cursor_id = null): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+
+    $sort_field = match ($order_by) {
+      'views' => 'e.views',
+      'downloads' => 'e.downloads',
+      default => 'e.uploaded_at',
+    };
+
+    $qb->orderBy($sort_field, 'DESC')->addOrderBy('e.id', 'DESC');
+    $cursor_value_param = 'uploaded_at' === $order_by ? $cursor_date : $cursor_value;
+    $this->applyKeysetCursor($qb, $sort_field, $cursor_value_param, $cursor_id);
+    $qb->setMaxResults($limit);
+
+    return $qb->getQuery()->getResult();
+  }
+
+  /**
+   * @return Program[]
+   */
+  public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb->orderBy('e.uploaded_at', 'DESC')->addOrderBy('e.id', 'DESC');
+    $qb->andWhere($qb->expr()->eq('e.user', ':user_id'))->setParameter('user_id', $user_id);
+    $this->applyKeysetCursor($qb, 'e.uploaded_at', $cursor_date, $cursor_id);
+    $qb->setMaxResults($limit);
+
+    return $qb->getQuery()->getResult();
+  }
+
+  /**
+   * @return Program[]
+   */
+  public function getUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
+    $qb->orderBy('e.uploaded_at', 'DESC')->addOrderBy('e.id', 'DESC');
+    $qb->andWhere($qb->expr()->eq('e.user', ':user_id'))->setParameter('user_id', $user_id);
+    $this->applyKeysetCursor($qb, 'e.uploaded_at', $cursor_date, $cursor_id);
+    $qb->setMaxResults($limit);
+
+    return $qb->getQuery()->getResult();
+  }
+
+  /**
+   * @return Program[]
+   */
+  public function getMoreProjectsFromUserKeyset(string $user_id, string $exclude_project_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb->orderBy('e.uploaded_at', 'DESC')->addOrderBy('e.id', 'DESC');
+    $qb->andWhere($qb->expr()->eq('e.user', ':user_id'))->setParameter('user_id', $user_id);
+    $qb->andWhere($qb->expr()->neq('e.id', ':project_id'))->setParameter('project_id', $exclude_project_id);
+    $this->applyKeysetCursor($qb, 'e.uploaded_at', $cursor_date, $cursor_id);
+    $qb->setMaxResults($limit);
+
+    return $qb->getQuery()->getResult();
+  }
+
+  /**
+   * Applies a keyset cursor WHERE clause for DESC ordering with id DESC tiebreaker.
+   */
+  private function applyKeysetCursor(QueryBuilder $qb, string $field, mixed $cursor_value, ?string $cursor_id): void
+  {
+    if (null === $cursor_value || null === $cursor_id) {
+      return;
+    }
+
+    $qb->andWhere(
+      sprintf('(%s < :cursor_value) OR (%s = :cursor_value AND e.id < :cursor_id)', $field, $field)
+    )
+      ->setParameter('cursor_value', $cursor_value)
+      ->setParameter('cursor_id', $cursor_id)
+    ;
+  }
+
+  // -------------------------------------------------------------------------------------------------------------------
   //  Remix System
   //
 

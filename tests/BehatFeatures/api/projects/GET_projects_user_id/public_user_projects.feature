@@ -29,29 +29,29 @@ Feature: User public projects
     Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
-      | project 1  |
-      | project 10 |
-      | project 3  |
-      | project 6  |
-      | project 7  |
       | project 9  |
+      | project 7  |
+      | project 6  |
+      | project 3  |
+      | project 10 |
+      | project 1  |
 
   Scenario: Cursor pagination - page 1 then page 2 via cursor
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/user/user-1/?limit=2"
     Then the response status code should be "200"
     Then the response should contain projects in the following order:
-      | Name       |
-      | project 1  |
-      | project 10 |
+      | Name      |
+      | project 9 |
+      | project 7 |
     And the client response should contain "has_more"
     And I save the next_cursor from the response
     When I request page 2 with the saved cursor at "/api/projects/user/user-1/?limit=2"
     Then the response status code should be "200"
     Then the response should contain projects in the following order:
       | Name      |
-      | project 3 |
       | project 6 |
+      | project 3 |
 
   Scenario: Get user public projects for user-2 with limit = 2
     And I have a request header "HTTP_ACCEPT" with value "application/json"

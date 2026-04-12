@@ -28,8 +28,8 @@ Feature: Get most downloaded projects
       | project 3 |
       | project 4 |
       | project 6 |
-      | project 1 |
       | project 5 |
+      | project 1 |
       | project 2 |
 
   Scenario: Get most download projects in german and limit = 1
@@ -58,7 +58,7 @@ Feature: Get most downloaded projects
     Then the response should contain projects in the following order:
       | Name      |
       | project 6 |
-      | project 1 |
+      | project 5 |
 
   Scenario: Get most download projects in french with max_version = 0.982
     And I have a request header "HTTP_ACCEPT" with value "application/json"

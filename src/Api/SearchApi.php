@@ -31,6 +31,7 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
   #[\Override]
   public function searchGet(string $query, string $type, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|SearchResponse
   {
+    // Elasticsearch only supports offset-based pagination (from/size), not keyset cursors
     $offset = $this->decodeCursorToOffset($cursor);
     $ip = $this->request_stack->getCurrentRequest()?->getClientIp() ?? 'unknown';
     if (null === $this->checkIpRateLimit($ip, $this->searchBurstLimiter)) {
