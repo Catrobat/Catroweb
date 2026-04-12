@@ -20,11 +20,11 @@ Feature: Every Studio should have an overview containing the most necessary info
       | 00000000-0000-0000-0000-000000000002 | Catrobat    | 1         | member |
       | 00000000-0000-0000-0000-000000000005 | StudioAdmin | 2         | admin  |
     And there are studio projects:
-      | id                                   | project   | user     | studio_id |
-      | 00000000-0000-0000-0000-000000000001 | program 1 | Catrobat | 1         |
+      | project   | user     | studio_id |
+      | program 1 | Catrobat | 1         |
     And there are studio comments:
-      | id                                   | comment     | user     | studio_id |
-      | 00000000-0000-0000-0000-000000000001 | Cool studio | Catrobat | 1         |
+      | comment     | user     | studio_id |
+      | Cool studio | Catrobat | 1         |
     And there are studio join requests:
       | User      | Studio              | Status   |
       | Catrobat1 | CatrobatStudio02   | declined |

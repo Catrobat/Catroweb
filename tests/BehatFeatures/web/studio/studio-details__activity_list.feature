@@ -18,11 +18,11 @@ Feature: Every studio provides a list of all members
       | 00000000-0000-0000-0000-000000000001 | StudioAdmin | 1         | admin  |
       | 00000000-0000-0000-0000-000000000002 | Catrobat    | 1         | member |
     And there are studio projects:
-      | id                                   | project   | user     | studio_id |
-      | 00000000-0000-0000-0000-000000000001 | program 1 | Catrobat | 1         |
+      | project   | user     | studio_id |
+      | program 1 | Catrobat | 1         |
     And there are studio comments:
-      | id                                   | comment     | user     | studio_id |
-      | 00000000-0000-0000-0000-000000000001 | Cool studio | Catrobat | 1         |
+      | comment     | user     | studio_id |
+      | Cool studio | Catrobat | 1         |
 
   Scenario: If I am not logged in I should not be able see all members
     Given I am on "/app/studio/1"
