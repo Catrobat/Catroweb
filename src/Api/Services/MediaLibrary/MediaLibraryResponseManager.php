@@ -279,8 +279,6 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       $search = null;
     }
 
-    $current_offset = $this->decodeCursorToOffset($cursor);
-
     if (null === $search) {
       $has_more = count($categories) > $limit;
       if ($has_more) {
@@ -320,6 +318,8 @@ class MediaLibraryResponseManager extends AbstractResponseManager
         $categories
       );
     } else {
+      // Search uses in-memory filtering — must stay offset-based
+      $current_offset = $this->decodeCursorToOffset($cursor);
       $category_previews = [];
       foreach ($categories as $category) {
         $translated_name = $this->trans($category->getName());
@@ -369,9 +369,17 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       }
     }
 
-    $next_cursor = ($has_more && [] !== $category_previews)
-      ? $this->encodeCursorFromOffset($current_offset, count($category_previews))
-      : null;
+    $next_cursor = null;
+    if ($has_more && [] !== $category_previews) {
+      if (null === $search && [] !== $categories) {
+        /** @var MediaCategory $last_cat */
+        $last_cat = end($categories);
+        $next_cursor = $this->encodeIntKeysetCursor($last_cat->getPriority(), $last_cat->getId());
+      } else {
+        // Search path uses in-memory filtering — must stay offset-based
+        $next_cursor = $this->encodeCursorFromOffset($current_offset, count($category_previews));
+      }
+    }
 
     return new \OpenAPI\Server\Model\MediaLibraryResponse([
       'data' => $category_previews,
