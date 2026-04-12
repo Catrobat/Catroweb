@@ -3,7 +3,6 @@ import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import AcceptLanguage from '../../Api/AcceptLanguage'
-import { getCookie } from '../../Security/CookieHelper'
 
 export default class extends Controller {
   static values = {
@@ -92,16 +91,12 @@ export default class extends Controller {
     }
   }
 
+  // BEARER cookie is HttpOnly; credentials: 'same-origin' sends it automatically
   _buildHeaders() {
-    const headers = {
+    return {
       Accept: 'application/json',
       'Accept-Language': new AcceptLanguage().get(),
     }
-    const token = getCookie('BEARER')
-    if (token) {
-      headers.Authorization = 'Bearer ' + token
-    }
-    return headers
   }
 
   _emptyMessageHtml(message) {
