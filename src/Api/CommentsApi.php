@@ -155,7 +155,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $comment->setUploadDate(new \DateTime('now', new \DateTimeZone('UTC')));
     $comment->setIsDeleted(false);
     if (null !== $parent_id) {
-      $comment->setParentId((int) $parent_id);
+      $comment->setParentId($parent_id);
     }
 
     $this->entity_manager->persist($comment);
@@ -187,7 +187,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   #[\Override]
   public function commentsIdDelete(string $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    if ((int) $id <= 0) {
+    if ('' === $id) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return;
@@ -257,7 +257,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $page = $this->comment_repository->getCommentRepliesPageData(
-      (int) $id,
+      $id,
       $limit,
       $cursor_data['date'] ?? null,
       $cursor_data['id'] ?? null,
@@ -340,7 +340,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $response = new CommentTranslationResponse();
-    $response->setId((string) ($comment->getId() ?? 0));
+    $response->setId($comment->getId() ?? '');
     $response->setSourceLanguage($source_language ?? $translation_result->detected_source_language);
     $response->setTargetLanguage($target_language);
     $response->setTranslation($translation_result->translation);
@@ -364,7 +364,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $next_cursor = null;
     if ($has_more && [] !== $comments) {
       $last = array_last($comments);
-      $next_cursor = $this->encodeCursor($last['upload_date'], (int) $last['id']);
+      $next_cursor = $this->encodeCursor($last['upload_date'], (string) $last['id']);
     }
 
     $response->setData($data);
@@ -379,10 +379,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $response = new CommentResponse();
     $response->setId((string) $comment_data['id']);
     $response->setProjectId($project_id);
-    $parent_id = isset($comment_data['parent_id']) ? (int) $comment_data['parent_id'] : null;
-    if (0 === $parent_id) {
-      $parent_id = null;
-    }
+    $parent_id = $comment_data['parent_id'] ?? null;
     $response->setParentId(null !== $parent_id ? (string) $parent_id : null);
     $response->setMessage(true === $comment_data['is_deleted'] ? null : (string) $comment_data['text']);
     $response->setCreatedAt($comment_data['upload_date']);
@@ -468,18 +465,17 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
-    $id = filter_var($id_string, FILTER_VALIDATE_INT);
-    if (false === $id) {
+    if ('' === $id_string) {
       return null;
     }
 
     return [
       'date' => $date,
-      'id' => $id,
+      'id' => $id_string,
     ];
   }
 
-  private function encodeCursor(\DateTimeInterface $date, int $id): string
+  private function encodeCursor(\DateTimeInterface $date, string $id): string
   {
     $utc_date = \DateTimeImmutable::createFromInterface($date)->setTimezone(new \DateTimeZone('UTC'));
     $value = $utc_date->format('Y-m-d\TH:i:s.u\Z').'|'.$id;

@@ -85,7 +85,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * @return array{members: StudioUser[], has_more: bool}
    */
-  public function loadMembersPage(Studio $studio, int $limit, ?int $cursor_id): array
+  public function loadMembersPage(Studio $studio, int $limit, ?string $cursor_id): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('su')
@@ -122,7 +122,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * @return array{projects: StudioProgram[], has_more: bool}
    */
-  public function loadProjectsPage(Studio $studio, int $limit, ?int $cursor_id): array
+  public function loadProjectsPage(Studio $studio, int $limit, ?string $cursor_id): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('sp')
@@ -157,7 +157,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * @return array{studios: Studio[], total: int, has_more: bool}
    */
-  public function loadUserStudiosPage(User $user, int $limit, ?int $cursor_id, bool $include_private = false): array
+  public function loadUserStudiosPage(User $user, int $limit, ?string $cursor_id, bool $include_private = false): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('s')
@@ -222,7 +222,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * Returns the StudioUser ID for the last studio in the list (used for cursor pagination).
    */
-  public function getStudioUserIdForCursor(User $user, Studio $studio): ?int
+  public function getStudioUserIdForCursor(User $user, Studio $studio): ?string
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('su.id')
@@ -238,7 +238,7 @@ class StudioApiLoader extends AbstractApiLoader
 
     $result = $qb->getQuery()->getOneOrNullResult();
 
-    return $result ? (int) $result['id'] : null;
+    return $result ? (string) $result['id'] : null;
   }
 
   public function loadUserById(string $id): ?User
@@ -249,7 +249,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * @return array{activities: StudioActivity[], has_more: bool}
    */
-  public function loadActivitiesPage(Studio $studio, int $limit, ?int $cursor_id): array
+  public function loadActivitiesPage(Studio $studio, int $limit, ?string $cursor_id): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('a')
@@ -315,7 +315,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * @return array{join_requests: StudioJoinRequest[], has_more: bool}
    */
-  public function loadPendingJoinRequestsPage(Studio $studio, int $limit, ?int $cursor_id): array
+  public function loadPendingJoinRequestsPage(Studio $studio, int $limit, ?string $cursor_id): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('jr')
@@ -348,12 +348,12 @@ class StudioApiLoader extends AbstractApiLoader
     ];
   }
 
-  public function loadJoinRequestById(int $id): ?StudioJoinRequest
+  public function loadJoinRequestById(string $id): ?StudioJoinRequest
   {
     return $this->studio_manager->findJoinRequestById($id);
   }
 
-  public function loadStudioComment(int $comment_id): ?UserComment
+  public function loadStudioComment(string $comment_id): ?UserComment
   {
     return $this->studio_manager->findStudioCommentById($comment_id);
   }
@@ -361,7 +361,7 @@ class StudioApiLoader extends AbstractApiLoader
   /**
    * @return array{comments: UserComment[], has_more: bool}
    */
-  public function loadCommentsPage(Studio $studio, int $limit, ?int $cursor_id): array
+  public function loadCommentsPage(Studio $studio, int $limit, ?string $cursor_id): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('c')

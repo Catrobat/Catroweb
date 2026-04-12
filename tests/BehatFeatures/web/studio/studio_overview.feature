@@ -15,9 +15,9 @@ Feature: There is a page to create new studios and also see a list of all availa
       | 1  | CatrobatStudio01 | hasADescription | true           | true      |
       | 2  | CatrobatStudio02 | hasADescription | true           | false     |
     And there are studio users:
-      | id | user        | studio_id | role   |
-      | 1  | StudioAdmin | 1         | admin  |
-      | 2  | Catrobat    | 1         | member |
+      | id                                   | user        | studio_id | role   |
+      | 00000000-0000-0000-0000-000000000001 | StudioAdmin | 1         | admin  |
+      | 00000000-0000-0000-0000-000000000002 | Catrobat    | 1         | member |
 
     And there are studio join requests:
       | User     | Studio           | Status   |

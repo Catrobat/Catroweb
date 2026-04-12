@@ -131,10 +131,11 @@ class ReportProcessor
     } else {
       // Only restore content visibility if no other active (new/accepted) reports exist.
       // This prevents un-hiding content that was legitimately reported by others.
-      $has_other_reports = $this->report_repository->hasOtherActiveReports(
+      $report_id = $report->getId();
+      $has_other_reports = null !== $report_id && $this->report_repository->hasOtherActiveReports(
         $report->getContentType(),
         $report->getContentId(),
-        $report->getId(),
+        $report_id,
       );
       if (!$has_other_reports) {
         $this->visibility_manager->showContent($content_type, $report->getContentId());

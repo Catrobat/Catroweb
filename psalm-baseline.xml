@@ -32,11 +32,6 @@
       <code><![CDATA[getId]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/Admin/System/DB_Updater/Controller/AchievementsAdminController.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$id]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/Admin/System/FeatureFlag/FeatureFlagController.php">
     <PossiblyNullArgument>
       <code><![CDATA[$object->getName()]]></code>
@@ -230,7 +225,6 @@
   <file src="src/Moderation/ReportProcessor.php">
     <PossiblyNullArgument>
       <code><![CDATA[$related->getReporter()]]></code>
-      <code><![CDATA[$report->getId()]]></code>
       <code><![CDATA[$report->getReporter()]]></code>
       <code><![CDATA[$reporter->getId()]]></code>
     </PossiblyNullArgument>
@@ -388,7 +382,6 @@
     <PossiblyNullArgument>
       <code><![CDATA[$comment->getStudio()]]></code>
       <code><![CDATA[$comment->getStudio()]]></code>
-      <code><![CDATA[$joinRequestId]]></code>
       <code><![CDATA[$studio]]></code>
       <code><![CDATA[$studioComment->getStudio()]]></code>
       <code><![CDATA[$studio_project]]></code>
@@ -706,8 +699,6 @@
   </file>
   <file src="src/User/Achievements/AchievementManager.php">
     <PossiblyNullArgument>
-      <code><![CDATA[$achievement->getId()]]></code>
-      <code><![CDATA[$user->getId()]]></code>
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
@@ -783,8 +774,6 @@
     </PossiblyInvalidClone>
     <PossiblyNullArgument>
       <code><![CDATA[$adminComment->getId()]]></code>
-      <code><![CDATA[$adminComment->getId()]]></code>
-      <code><![CDATA[$adminComment->getId()]]></code>
       <code><![CDATA[$studioComment->getId()]]></code>
       <code><![CDATA[$studioComment->getId()]]></code>
       <code><![CDATA[$studioComment->getId()]]></code>
@@ -806,8 +795,6 @@
       <code><![CDATA[$this->user]]></code>
       <code><![CDATA[$this->user]]></code>
       <code><![CDATA[$this->user]]></code>
-      <code><![CDATA[$userComment->getId()]]></code>
-      <code><![CDATA[$userComment_2->getId()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
       <code><![CDATA[getId]]></code>

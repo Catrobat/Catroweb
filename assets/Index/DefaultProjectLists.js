@@ -27,7 +27,10 @@ export class DefaultProjectLists {
         }
       }
 
-      new ProjectList(projectList, category, url, property, theme)
+      const fetchCount = projectList.dataset.fetchCount
+        ? parseInt(projectList.dataset.fetchCount, 10)
+        : undefined
+      new ProjectList(projectList, category, url, property, theme, fetchCount)
     })
   }
 }

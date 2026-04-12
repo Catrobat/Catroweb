@@ -14,8 +14,8 @@ Feature: Moderation Reports API
       | id | name     | owned by | description   | credit   |
       | 1  | project1 | Catrobat | mydescription | mycredit |
     And there are comments:
-      | id | project_id | user_id | text          | upload_date         | parent_id |
-      | 10 | 1          | 1       | first comment | 2013-01-01 12:00:00 |           |
+      | id                                   | project_id | user_id | text          | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 1       | first comment | 2013-01-01 12:00:00 |           |
     And there are studios:
       | id | name    | description  |
       | 1  | studio1 | test studio  |
@@ -120,11 +120,11 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "204"
 
   Scenario: Report a comment requires authentication
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "401"
 
   Scenario: Report own comment returns 403
@@ -134,7 +134,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "403"
 
   Scenario: Report non-existent comment returns 404
@@ -144,20 +144,20 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/9999/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000009999/report"
     Then the response status code should be "404"
 
   Scenario: Report already hidden comment returns 409
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "409"
 
   Scenario: Duplicate comment report returns 409
@@ -167,14 +167,14 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "204"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "409"
 
   # ---------------------------------------------------------------------------
@@ -316,7 +316,7 @@ Feature: Moderation Reports API
       """
       {"category": "inappropriate"}
       """
-    When I request "POST" "/api/comments/10/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "403"
 
   Scenario: Report on non-whitelisted content succeeds (204)
@@ -348,11 +348,11 @@ Feature: Moderation Reports API
 
   Scenario: Auto-hidden comment does not appear in comments list API
     And there are comments:
-      | id | project_id | user_id | text            | upload_date         | parent_id |
-      | 11 | 1          | 2       | visible comment | 2013-01-02 12:00:00 |           |
+      | id                                   | project_id | user_id | text            | upload_date         | parent_id |
+      | 00000000-0000-0000-0000-000000000011 | 1          | 2       | visible comment | 2013-01-02 12:00:00 |           |
     And the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     When I request "GET" "/api/projects/1/comments?limit=10"
     Then the response status code should be "200"

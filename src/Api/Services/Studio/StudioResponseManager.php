@@ -140,7 +140,7 @@ class StudioResponseManager extends AbstractResponseManager
     $user = $member->getUser();
 
     return (new StudioMemberResponse())
-      ->setId((string) $member->getId())
+      ->setId($member->getId())
       ->setUserId($user->getId())
       ->setUsername($user->getUsername())
       ->setAvatar($user->getAvatar())
@@ -219,13 +219,13 @@ class StudioResponseManager extends AbstractResponseManager
     $user = $comment->getUser();
 
     return (new StudioCommentResponse())
-      ->setId((string) $comment->getId())
+      ->setId($comment->getId())
       ->setMessage($comment->getText())
       ->setUsername($comment->getUsername())
       ->setUserId($user?->getId())
       ->setUserAvatar($user?->getAvatar())
-      ->setParentId($comment->getParentId() ? (string) $comment->getParentId() : null)
-      ->setReplyCount($this->studio_manager->countCommentReplies($comment->getId() ?? 0))
+      ->setParentId($comment->getParentId())
+      ->setReplyCount($this->studio_manager->countCommentReplies($comment->getId() ?? ''))
       ->setCreatedAt($comment->getUploadDate())
     ;
   }
@@ -258,7 +258,7 @@ class StudioResponseManager extends AbstractResponseManager
     $user = $activity->getUser();
 
     return (new StudioActivityResponse())
-      ->setId((string) $activity->getId())
+      ->setId($activity->getId())
       ->setType($activity->getType())
       ->setUserId($user->getId())
       ->setUsername($user->getUsername())
@@ -314,7 +314,7 @@ class StudioResponseManager extends AbstractResponseManager
     $user = $joinRequest->getUser();
 
     return (new StudioJoinRequestResponse())
-      ->setId((string) $joinRequest->getId())
+      ->setId($joinRequest->getId())
       ->setUserId($user?->getId())
       ->setUsername($user?->getUsername())
       ->setAvatar($user?->getAvatar())

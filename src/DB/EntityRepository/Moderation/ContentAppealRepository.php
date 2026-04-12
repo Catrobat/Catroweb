@@ -66,8 +66,8 @@ class ContentAppealRepository extends ServiceEntityRepository
   public function findPendingAppeals(
     int $limit,
     ?\DateTimeInterface $cursor_created_at = null,
-    ?int $cursor_id = null,
-    ?int $legacy_cursor_id = null,
+    ?string $cursor_id = null,
+    ?string $legacy_cursor_id = null,
   ): array {
     $qb = $this->createQueryBuilder('a');
     $qb

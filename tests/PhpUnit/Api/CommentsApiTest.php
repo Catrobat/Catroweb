@@ -272,7 +272,7 @@ final class CommentsApiTest extends TestCase
     $response_code = 200;
     $response_headers = [];
 
-    $api->commentsIdDelete('0', 'en', $response_code, $response_headers);
+    $api->commentsIdDelete('', 'en', $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_BAD_REQUEST, $response_code);
   }
@@ -600,7 +600,7 @@ final class CommentsApiTest extends TestCase
   public function testCommentsIdTranslationGetReturnsTranslationResponse(): void
   {
     $comment = $this->createStub(UserComment::class);
-    $comment->method('getId')->willReturn(42);
+    $comment->method('getId')->willReturn('00000000-0000-0000-0000-000000000042');
     $comment->method('getIsDeleted')->willReturn(false);
     $comment->method('getText')->willReturn('hello');
 

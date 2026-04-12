@@ -166,7 +166,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return;
     }
 
-    $report = $this->facade->getLoader()->findReport((int) $id);
+    $report = $this->facade->getLoader()->findReport($id);
     if (null === $report) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
@@ -249,7 +249,7 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
       return;
     }
 
-    $appeal = $this->facade->getLoader()->findAppeal((int) $id);
+    $appeal = $this->facade->getLoader()->findAppeal($id);
     if (null === $appeal) {
       $responseCode = Response::HTTP_NOT_FOUND;
 

@@ -14,10 +14,10 @@ Feature: A studio has a comment section
       | 2  | NoComments       | noComments      | false          | true      |
 
     And there are studio users:
-      | id | user        | studio_id | role   |
-      | 1  | StudioAdmin | 1         | admin  |
-      | 2  | StudioUser  | 1         | member |
-      | 3  | StudioAdmin | 2         | admin  |
+      | id                                   | user        | studio_id | role   |
+      | 00000000-0000-0000-0000-000000000001 | StudioAdmin | 1         | admin  |
+      | 00000000-0000-0000-0000-000000000002 | StudioUser  | 1         | member |
+      | 00000000-0000-0000-0000-000000000003 | StudioAdmin | 2         | admin  |
 
   Scenario: Non-logged-in user sees comments tab but cannot post
     Given I am on "/app/studio/1"

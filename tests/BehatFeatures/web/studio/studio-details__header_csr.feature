@@ -15,10 +15,10 @@ Feature: Studio header renders content from API (CSR)
       | 1  | CatrobatStudio01 | hasADescription | true           | true      |
       | 2  | PrivateStudio02  | privateDesc     | true           | false     |
     And there are studio users:
-      | id | user        | studio_id | role   |
-      | 1  | StudioAdmin | 1         | admin  |
-      | 2  | Catrobat    | 1         | member |
-      | 3  | StudioAdmin | 2         | admin  |
+      | id                                   | user        | studio_id | role   |
+      | 00000000-0000-0000-0000-000000000001 | StudioAdmin | 1         | admin  |
+      | 00000000-0000-0000-0000-000000000002 | Catrobat    | 1         | member |
+      | 00000000-0000-0000-0000-000000000003 | StudioAdmin | 2         | admin  |
 
   Scenario: Studio header displays name and description after API load
     Given I am on "/app/studio/1"

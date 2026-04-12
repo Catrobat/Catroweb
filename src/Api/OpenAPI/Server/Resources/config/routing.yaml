@@ -242,7 +242,7 @@ open_api_server_moderation_moderationappealsidresolveput:
   defaults:
     _controller: open_api_server.controller.moderation::moderationAppealsIdResolvePutAction
   requirements:
-    id: '[a-z0-9]+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_moderation_moderationreportsget:
   path: /moderation/reports
@@ -256,7 +256,7 @@ open_api_server_moderation_moderationreportsidresolveput:
   defaults:
     _controller: open_api_server.controller.moderation::moderationReportsIdResolvePutAction
   requirements:
-    id: '[a-z0-9]+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_moderation_projectsidappealpost:
   path: /projects/{id}/appeal
@@ -526,7 +526,7 @@ open_api_server_studios_studiosidcommentscommentiddelete:
     _controller: open_api_server.controller.studios::studiosIdCommentsCommentIdDeleteAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    comment_id: '[a-z0-9]+'
+    comment_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidcommentsget:
   path: /studios/{id}/comments
@@ -583,7 +583,7 @@ open_api_server_studios_studiosidjoinrequestsrequestidacceptpost:
     _controller: open_api_server.controller.studios::studiosIdJoinRequestsRequestIdAcceptPostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    request_id: '[a-z0-9]+'
+    request_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidjoinrequestsrequestiddeclinepost:
   path: /studios/{id}/join-requests/{request_id}/decline
@@ -592,7 +592,7 @@ open_api_server_studios_studiosidjoinrequestsrequestiddeclinepost:
     _controller: open_api_server.controller.studios::studiosIdJoinRequestsRequestIdDeclinePostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    request_id: '[a-z0-9]+'
+    request_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidleavedelete:
   path: /studios/{id}/leave
@@ -617,7 +617,7 @@ open_api_server_studios_studiosidmembersuseridbanpost:
     _controller: open_api_server.controller.studios::studiosIdMembersUserIdBanPostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    user_id: '[a-z0-9]+'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidmembersuseriddemotepost:
   path: /studios/{id}/members/{user_id}/demote
@@ -626,7 +626,7 @@ open_api_server_studios_studiosidmembersuseriddemotepost:
     _controller: open_api_server.controller.studios::studiosIdMembersUserIdDemotePostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    user_id: '[a-z0-9]+'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidmembersuseridpromotepost:
   path: /studios/{id}/members/{user_id}/promote
@@ -635,7 +635,7 @@ open_api_server_studios_studiosidmembersuseridpromotepost:
     _controller: open_api_server.controller.studios::studiosIdMembersUserIdPromotePostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    user_id: '[a-z0-9]+'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidpatch:
   path: /studios/{id}

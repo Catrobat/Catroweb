@@ -9,12 +9,12 @@ Feature: Comments API
       | id | name     | owned by | description   | credit   |
       | 1  | project1 | Catrobat | mydescription | mycredit |
     And there are comments:
-      | id | project_id | user_id | text            | upload_date         | parent_id |
-      | 10 | 1          | 1       | first comment   | 2013-01-01 12:00:00 |           |
-      | 11 | 1          | 2       | second comment  | 2013-01-02 12:00:00 |           |
-      | 12 | 1          | 2       | third comment   | 2013-01-03 12:00:00 |           |
-      | 20 | 1          | 2       | reply comment 1 | 2013-01-04 12:00:00 | 10        |
-      | 21 | 1          | 1       | reply comment 2 | 2013-01-05 12:00:00 | 10        |
+      | id                                   | project_id | user_id | text            | upload_date         | parent_id                            |
+      | 00000000-0000-0000-0000-000000000010 | 1          | 1       | first comment   | 2013-01-01 12:00:00 |                                      |
+      | 00000000-0000-0000-0000-000000000011 | 1          | 2       | second comment  | 2013-01-02 12:00:00 |                                      |
+      | 00000000-0000-0000-0000-000000000012 | 1          | 2       | third comment   | 2013-01-03 12:00:00 |                                      |
+      | 00000000-0000-0000-0000-000000000020 | 1          | 2       | reply comment 1 | 2013-01-04 12:00:00 | 00000000-0000-0000-0000-000000000010 |
+      | 00000000-0000-0000-0000-000000000021 | 1          | 1       | reply comment 2 | 2013-01-05 12:00:00 | 00000000-0000-0000-0000-000000000010 |
 
   # ---------------------------------------------------------------------------
   # GET /api/projects/{id}/comments
@@ -42,28 +42,28 @@ Feature: Comments API
   # ---------------------------------------------------------------------------
 
   Scenario: Get comment replies with cursor pagination returns newest first
-    Given I request "GET" "/api/comments/10/replies?limit=1"
+    Given I request "GET" "/api/comments/00000000-0000-0000-0000-000000000010/replies?limit=1"
     Then the response status code should be "200"
     And the response should be in json format
     And the client response should contain "reply comment 2"
 
   Scenario: Get replies returns 404 for non-existent comment
-    Given I request "GET" "/api/comments/9999/replies"
+    Given I request "GET" "/api/comments/00000000-0000-0000-0000-000000009999/replies"
     Then the response status code should be "404"
 
   Scenario: Public caller cannot access replies for a hidden comment
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
-    When I request "GET" "/api/comments/10/replies?limit=1"
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
+    When I request "GET" "/api/comments/00000000-0000-0000-0000-000000000010/replies?limit=1"
     Then the response status code should be "404"
 
   Scenario: Owner can access replies for a hidden comment
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "Catrobat"
-    When I request "GET" "/api/comments/10/replies?limit=1"
+    When I request "GET" "/api/comments/00000000-0000-0000-0000-000000000010/replies?limit=1"
     Then the response status code should be "200"
 
   Scenario: Admin can access replies for a hidden comment
@@ -71,10 +71,10 @@ Feature: Comments API
       | name  |
       | Admin |
     And the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "Admin"
-    When I request "GET" "/api/comments/10/replies?limit=1"
+    When I request "GET" "/api/comments/00000000-0000-0000-0000-000000000010/replies?limit=1"
     Then the response status code should be "200"
 
   # ---------------------------------------------------------------------------
@@ -83,17 +83,17 @@ Feature: Comments API
 
   Scenario: Public caller cannot translate a hidden comment
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
-    When I request "GET" "/api/comments/10/translation?target_language=de"
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
+    When I request "GET" "/api/comments/00000000-0000-0000-0000-000000000010/translation?target_language=de"
     Then the response status code should be "404"
 
   Scenario: Owner can translate a hidden comment
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "Catrobat"
-    When I request "GET" "/api/comments/10/translation?target_language=de"
+    When I request "GET" "/api/comments/00000000-0000-0000-0000-000000000010/translation?target_language=de"
     Then the response status code should be "200"
 
   Scenario: Admin can translate a hidden comment
@@ -101,10 +101,10 @@ Feature: Comments API
       | name  |
       | Admin |
     And the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "Admin"
-    When I request "GET" "/api/comments/10/translation?target_language=de"
+    When I request "GET" "/api/comments/00000000-0000-0000-0000-000000000010/translation?target_language=de"
     Then the response status code should be "200"
 
   # ---------------------------------------------------------------------------
@@ -150,15 +150,15 @@ Feature: Comments API
 
   Scenario: Non-owner cannot reply to a hidden parent comment
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {
         "message": "hidden parent reply should fail",
-        "parent_id": "10"
+        "parent_id": "00000000-0000-0000-0000-000000000010"
       }
       """
     When I request "POST" "/api/projects/1/comments"
@@ -166,15 +166,15 @@ Feature: Comments API
 
   Scenario: Owner can reply to a hidden parent comment
     Given the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {
         "message": "owner hidden parent reply",
-        "parent_id": "10"
+        "parent_id": "00000000-0000-0000-0000-000000000010"
       }
       """
     When I request "POST" "/api/projects/1/comments"
@@ -185,15 +185,15 @@ Feature: Comments API
       | name  |
       | Admin |
     And the comments are auto-hidden:
-      | id |
-      | 10 |
+      | id                                   |
+      | 00000000-0000-0000-0000-000000000010 |
     And I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
       {
         "message": "admin hidden parent reply",
-        "parent_id": "10"
+        "parent_id": "00000000-0000-0000-0000-000000000010"
       }
       """
     When I request "POST" "/api/projects/1/comments"
@@ -205,22 +205,22 @@ Feature: Comments API
 
   Scenario: Delete a comment
     Given I use a valid JWT Bearer token for "Catrobat"
-    When I request "DELETE" "/api/comments/10"
+    When I request "DELETE" "/api/comments/00000000-0000-0000-0000-000000000010"
     Then the response status code should be "204"
     And the response content must be empty
 
   Scenario: Delete a comment requires authentication
-    When I request "DELETE" "/api/comments/10"
+    When I request "DELETE" "/api/comments/00000000-0000-0000-0000-000000000010"
     Then the response status code should be "401"
 
   Scenario: Delete a comment returns 404 for non-existent comment
     Given I use a valid JWT Bearer token for "Catrobat"
-    When I request "DELETE" "/api/comments/9999"
+    When I request "DELETE" "/api/comments/00000000-0000-0000-0000-000000009999"
     Then the response status code should be "404"
 
   Scenario: Delete a comment by another user returns 403
     Given I use a valid JWT Bearer token for "User2"
-    When I request "DELETE" "/api/comments/10"
+    When I request "DELETE" "/api/comments/00000000-0000-0000-0000-000000000010"
     Then the response status code should be "403"
 
   # ---------------------------------------------------------------------------
@@ -234,7 +234,7 @@ Feature: Comments API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/comments/11/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000011/report"
     Then the response status code should be "204"
 
   Scenario: Report a comment requires authentication
@@ -243,7 +243,7 @@ Feature: Comments API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/comments/11/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000011/report"
     Then the response status code should be "401"
 
   Scenario: Report a comment returns 404 for non-existent comment
@@ -253,5 +253,5 @@ Feature: Comments API
       """
       {"category": "spam"}
       """
-    When I request "POST" "/api/comments/9999/report"
+    When I request "POST" "/api/comments/00000000-0000-0000-0000-000000009999/report"
     Then the response status code should be "404"

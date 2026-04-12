@@ -7,6 +7,7 @@ namespace App\DB\Entity;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Studio\Studio;
 use App\DB\EntityRepository\FeaturedBannerRepository;
+use App\DB\Generator\MyUuidGenerator;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -19,7 +20,7 @@ class FeaturedBanner
 
   public ?string $old_image_type = null;
 
-  public ?int $removed_id = null;
+  public ?string $removed_id = null;
 
   public function __construct()
   {
@@ -27,9 +28,10 @@ class FeaturedBanner
   }
 
   #[ORM\Id]
-  #[ORM\Column(type: Types::INTEGER)]
-  #[ORM\GeneratedValue(strategy: 'AUTO')]
-  protected ?int $id = null;
+  #[ORM\Column(type: Types::GUID)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  protected ?string $id = null;
 
   #[ORM\Column(type: Types::STRING, length: 20)]
   protected string $type = 'project';
@@ -63,7 +65,7 @@ class FeaturedBanner
   #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTime $updated_on = null;
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }

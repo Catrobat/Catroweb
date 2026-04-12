@@ -39,14 +39,14 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   public function studiosGet(string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $limit = $this->normalizeLimit($limit);
-    $cursor_id = $this->decodeIdCursor($cursor);
-    if (null === $cursor_id && null !== $cursor) {
+    $offset = $this->decodeOffsetCursor($cursor);
+    if (null === $offset && null !== $cursor) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
       return null;
     }
 
-    $page = $this->facade->getLoader()->loadStudiosPage($limit, $cursor_id);
+    $page = $this->facade->getLoader()->loadStudiosPage($limit, $offset);
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     $responseCode = Response::HTTP_OK;
@@ -55,7 +55,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       $page['studios'],
       $page['has_more'],
       $user,
-      $cursor_id,
+      $offset,
     );
   }
 
@@ -461,7 +461,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       return;
     }
 
-    $comment = $this->facade->getLoader()->loadStudioComment((int) $comment_id);
+    $comment = $this->facade->getLoader()->loadStudioComment($comment_id);
     if (null === $comment || $comment->getStudio()?->getId() !== $studio->getId()) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
@@ -476,7 +476,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       return;
     }
 
-    $this->facade->getProcessor()->deleteComment($user, (int) $comment_id);
+    $this->facade->getProcessor()->deleteComment($user, $comment_id);
     $responseCode = Response::HTTP_NO_CONTENT;
   }
 
@@ -547,9 +547,9 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
       return null;
     }
 
-    $parent_id = $studio_comment_create_request->getParentId() ?? 0;
+    $parent_id = $studio_comment_create_request->getParentId() ?? '';
 
-    $comment = $this->facade->getProcessor()->addComment($user, $studio, $message, (int) $parent_id);
+    $comment = $this->facade->getProcessor()->addComment($user, $studio, $message, $parent_id);
     if (null === $comment) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 
@@ -710,7 +710,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   #[\Override]
   public function studiosIdJoinRequestsRequestIdAcceptPost(string $id, string $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    $result = $this->loadAdminContextWithPendingJoinRequest($id, (int) $request_id, $responseCode);
+    $result = $this->loadAdminContextWithPendingJoinRequest($id, $request_id, $responseCode);
     if (null === $result) {
       return;
     }
@@ -722,7 +722,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   #[\Override]
   public function studiosIdJoinRequestsRequestIdDeclinePost(string $id, string $request_id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {
-    $result = $this->loadAdminContextWithPendingJoinRequest($id, (int) $request_id, $responseCode);
+    $result = $this->loadAdminContextWithPendingJoinRequest($id, $request_id, $responseCode);
     if (null === $result) {
       return;
     }
@@ -763,7 +763,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   /**
    * @return array{user: User, studio: Studio, join_request: StudioJoinRequest}|null
    */
-  private function loadAdminContextWithPendingJoinRequest(string $studio_id, int $request_id, int &$responseCode): ?array
+  private function loadAdminContextWithPendingJoinRequest(string $studio_id, string $request_id, int &$responseCode): ?array
   {
     $context = $this->loadAdminContext($studio_id, $responseCode);
     if (null === $context) {
@@ -787,7 +787,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
   }
 
   /**
-   * @return array{studio: Studio, cursor_id: ?int}|null null if response was set (error)
+   * @return array{studio: Studio, cursor_id: ?string}|null null if response was set (error)
    */
   private function loadStudioForListing(string $id, int $limit, ?string $cursor, int &$responseCode): ?array
   {
@@ -861,7 +861,21 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     return ['logged_in_user' => $logged_in_user, 'studio' => $studio, 'target_user' => $target_user, 'studio_user' => $studio_user];
   }
 
-  private function decodeIdCursor(?string $cursor): ?int
+  private function decodeIdCursor(?string $cursor): ?string
+  {
+    if (null === $cursor || '' === $cursor) {
+      return null;
+    }
+
+    $decoded = base64_decode($cursor, true);
+    if (false === $decoded || '' === $decoded) {
+      return null;
+    }
+
+    return $decoded;
+  }
+
+  private function decodeOffsetCursor(?string $cursor): ?int
   {
     if (null === $cursor || '' === $cursor) {
       return null;

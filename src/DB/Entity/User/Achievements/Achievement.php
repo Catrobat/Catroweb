@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\DB\Entity\User\Achievements;
 
 use App\DB\EntityRepository\User\Achievements\AchievementRepository;
+use App\DB\Generator\MyUuidGenerator;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,10 +38,11 @@ class Achievement
 
   final public const string ACCOUNT_VERIFICATION = 'account_verification';
 
-  #[ORM\Column(name: 'id', type: Types::INTEGER)]
+  #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\Id]
-  #[ORM\GeneratedValue(strategy: 'AUTO')]
-  protected ?int $id = null;
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  protected ?string $id = null;
 
   #[ORM\Column(name: 'internal_title', type: Types::STRING, unique: true, nullable: false)]
   protected string $internal_title = '';
@@ -72,12 +74,12 @@ class Achievement
   #[ORM\Column(name: 'priority', type: Types::INTEGER, nullable: false)]
   protected int $priority;
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(int $id): Achievement
+  public function setId(string $id): Achievement
   {
     $this->id = $id;
 

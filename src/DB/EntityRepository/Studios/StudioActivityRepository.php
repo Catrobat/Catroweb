@@ -35,7 +35,7 @@ class StudioActivityRepository extends ServiceEntityRepository
     return $this->count(['studio' => $studio]);
   }
 
-  public function findStudioActivityById(int $activity_id): ?StudioActivity
+  public function findStudioActivityById(string $activity_id): ?StudioActivity
   {
     return $this->findOneBy(['id' => $activity_id]);
   }

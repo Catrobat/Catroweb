@@ -6,6 +6,7 @@ namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
+use App\DB\Generator\MyUuidGenerator;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,9 +26,10 @@ class StudioActivity
   private array $activity_types = [self::TYPE_COMMENT, self::TYPE_PROJECT, self::TYPE_USER];
 
   #[ORM\Id]
-  #[ORM\Column(name: 'id', type: Types::INTEGER)]
-  #[ORM\GeneratedValue(strategy: 'AUTO')]
-  protected ?int $id = null;
+  #[ORM\Column(name: 'id', type: Types::GUID)]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  protected ?string $id = null;
 
   #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
@@ -43,12 +45,12 @@ class StudioActivity
   #[ORM\Column(name: 'created_on', type: Types::DATETIME_MUTABLE, nullable: false)]
   protected \DateTime $created_on;
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(?int $id): StudioActivity
+  public function setId(?string $id): StudioActivity
   {
     $this->id = $id;
 

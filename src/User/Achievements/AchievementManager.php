@@ -64,14 +64,14 @@ class AchievementManager
     ]);
   }
 
-  public function countUserAchievementsOfAchievement(int $achievement_id): int
+  public function countUserAchievementsOfAchievement(string $achievement_id): int
   {
     return $this->user_achievement_repository->count([
       'achievement' => $achievement_id,
     ]);
   }
 
-  public function isAchievementAlreadyUnlocked(string $user_id, int $achievement_id): bool
+  public function isAchievementAlreadyUnlocked(string $user_id, string $achievement_id): bool
   {
     return $this->user_achievement_repository->count([
       'user' => $user_id,
@@ -112,7 +112,7 @@ class AchievementManager
   {
     $achievements = $this->findAllEnabledAchievements();
     $unlocked_achievements = $this->findUnlockedAchievements($user);
-    $achievements_unlocked_id_list = array_map(static fn (Achievement $achievement): ?int => $achievement->getId(), $unlocked_achievements);
+    $achievements_unlocked_id_list = array_map(static fn (Achievement $achievement): ?string => $achievement->getId(), $unlocked_achievements);
 
     return array_filter($achievements, static fn (Achievement $achievement): bool => !in_array($achievement->getId(), $achievements_unlocked_id_list, true));
   }
@@ -287,7 +287,9 @@ class AchievementManager
       return null;
     }
 
-    if ($this->isAchievementAlreadyUnlocked($user->getId(), $achievement->getId())) {
+    $user_id = $user->getId();
+    $achievement_id = $achievement->getId();
+    if (null === $user_id || null === $achievement_id || $this->isAchievementAlreadyUnlocked($user_id, $achievement_id)) {
       return null;
     }
 

@@ -7,6 +7,7 @@ namespace App\DB\Entity\Moderation;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentAppealRepository;
 use App\DB\Enum\AppealState;
+use App\DB\Generator\MyUuidGenerator;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,10 +19,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ContentAppealRepository::class)]
 class ContentAppeal
 {
-  #[ORM\Column(name: 'id', type: Types::INTEGER)]
+  #[ORM\Column(name: 'id', type: Types::GUID)]
   #[ORM\Id]
-  #[ORM\GeneratedValue(strategy: 'AUTO')]
-  private ?int $id = null;
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
+  private ?string $id = null;
 
   #[ORM\Column(name: 'content_type', type: Types::STRING, length: 20)]
   private string $content_type;
@@ -63,12 +65,12 @@ class ContentAppeal
     }
   }
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(?int $id): ContentAppeal
+  public function setId(?string $id): ContentAppeal
   {
     $this->id = $id;
 

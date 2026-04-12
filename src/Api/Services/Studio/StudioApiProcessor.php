@@ -187,12 +187,12 @@ class StudioApiProcessor extends AbstractApiProcessor
     return null;
   }
 
-  public function addComment(User $user, Studio $studio, string $text, int $parent_id): ?UserComment
+  public function addComment(User $user, Studio $studio, string $text, string $parent_id): ?UserComment
   {
     return $this->studio_manager->addCommentToStudio($user, $studio, $this->textSanitizer->sanitize($text) ?? '', $parent_id);
   }
 
-  public function deleteComment(User $user, int $comment_id): void
+  public function deleteComment(User $user, string $comment_id): void
   {
     $this->studio_manager->deleteCommentFromStudio($user, $comment_id);
   }
