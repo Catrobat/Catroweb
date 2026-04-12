@@ -1469,6 +1469,80 @@ class ProjectsController extends Controller
   }
 
   /**
+   * Operation projectsIdRemixGraphGet.
+   *
+   * Get remix graph of a project
+   *
+   * @param Request $request the Symfony request to handle
+   *
+   * @return Response the Symfony response
+   */
+  public function projectsIdRemixGraphGetAction(Request $request, $id): Response
+  {
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    // Figure out what the client accepts
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
+    // Handle authentication
+
+    // Read out all input parameter values into variables
+
+    // Use the default value if no value was provided
+
+    // Deserialize the input values that needs it
+    try {
+      $id = $this->deserialize($id, 'string', 'string');
+    } catch (SerializerRuntimeException $exception) {
+      return $this->createBadRequestResponse($exception->getMessage());
+    }
+
+    // Validate the input values
+    $asserts = [];
+    $asserts[] = new Assert\NotNull();
+    $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Regex('/^[a-zA-Z0-9\-]+$/');
+    $response = $this->validate($id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
+
+    try {
+      $handler = $this->getApiHandler();
+
+      // Make the call to the business logic
+      $responseCode = 200;
+      $responseHeaders = [];
+
+      $result = $handler->projectsIdRemixGraphGet($id, $responseCode, $responseHeaders);
+
+      $message = match ($responseCode) {
+        200 => 'OK',
+        406 => 'Not acceptable - client must accept application/json as content type',
+        default => '',
+      };
+
+      return new Response(
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
+        $responseCode,
+        array_merge(
+          $responseHeaders,
+          [
+            'Content-Type' => $responseFormat,
+            'X-OpenAPI-Message' => $message,
+          ]
+        )
+      );
+    } catch (\Throwable $fallthrough) {
+      return $this->createErrorResponse(new HttpException(500, 'An unsuspected error occurred.', $fallthrough));
+    }
+  }
+
+  /**
    * Operation projectsPost.
    *
    * Upload a catrobat project
