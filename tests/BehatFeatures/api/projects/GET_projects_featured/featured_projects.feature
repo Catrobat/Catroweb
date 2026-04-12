@@ -68,8 +68,8 @@ Feature: Featured Projects
       | project 12 |
       | project 10 |
       | project 5  |
-      | project 15 |
       | project 2  |
+      | project 15 |
       | project 6  |
       | project 1  |
 
@@ -88,7 +88,7 @@ Feature: Featured Projects
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 5  |
-      | project 15 |
+      | project 2  |
 
   Scenario: Get featured projects for android platform
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
@@ -158,7 +158,7 @@ Feature: Featured Projects
           "author": "Catrobat"
         }
       ],
-      "next_cursor": "Mg==",
+      "next_cursor": "Nnw0",
       "has_more": true
     }
     """

@@ -6,6 +6,7 @@ namespace App\Api\Services\MediaLibrary;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Traits\CursorPaginationTrait;
+use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
 use App\DB\Entity\User\User;
@@ -22,6 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class MediaLibraryResponseManager extends AbstractResponseManager
 {
   use CursorPaginationTrait;
+  use KeysetCursorTrait;
 
   public function __construct(
     TranslatorInterface $translator,
@@ -66,6 +68,106 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       'name' => $this->trans($category->getName()),
       'description' => $category->getDescription() ? $this->trans($category->getDescription()) : null,
       'priority' => $category->getPriority(),
+    ]);
+  }
+
+  /**
+   * Keyset cursor response for categories ordered by priority ASC, id ASC.
+   */
+  public function createCategoriesKeysetResponse(array $categories, int $limit): MediaCategoriesListResponse
+  {
+    $has_more = count($categories) > $limit;
+    if ($has_more) {
+      array_pop($categories);
+    }
+
+    $category_responses = array_map(
+      $this->createCategoryResponse(...),
+      $categories
+    );
+
+    $next_cursor = null;
+    if ($has_more && [] !== $categories) {
+      /** @var MediaCategory $last */
+      $last = end($categories);
+      $next_cursor = $this->encodeIntKeysetCursor($last->getPriority(), $last->getId());
+    }
+
+    return new MediaCategoriesListResponse([
+      'data' => $category_responses,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ]);
+  }
+
+  /**
+   * Keyset cursor response for assets.
+   */
+  public function createAssetsKeysetResponse(array $assets, int $limit, string $sort_by): MediaAssetsListResponse
+  {
+    $has_more = count($assets) > $limit;
+    if ($has_more) {
+      array_pop($assets);
+    }
+
+    $asset_responses = array_map(
+      fn (MediaAsset $asset): MediaAssetResponse => $this->createAssetResponse($asset),
+      $assets
+    );
+
+    $next_cursor = null;
+    if ($has_more && [] !== $assets) {
+      /** @var MediaAsset $last */
+      $last = end($assets);
+      $sort_value = match ($sort_by) {
+        'name' => $last->getName(),
+        'downloads' => (string) $last->getDownloads(),
+        'updated_at' => $last->getUpdatedAt()?->format('Y-m-d\TH:i:s.uP') ?? '',
+        default => $last->getCreatedAt()?->format('Y-m-d\TH:i:s.uP') ?? '',
+      };
+      $next_cursor = $this->encodeKeysetCursor($sort_value, $last->getId());
+    }
+
+    return new MediaAssetsListResponse([
+      'data' => $asset_responses,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
+    ]);
+  }
+
+  /**
+   * Keyset cursor response for category detail (assets within a category).
+   */
+  public function createCategoryDetailKeysetResponse(MediaCategory $category, array $assets, int $limit): MediaCategoryDetailResponse
+  {
+    $has_more = count($assets) > $limit;
+    if ($has_more) {
+      array_pop($assets);
+    }
+
+    $asset_responses = array_map(
+      fn (MediaAsset $asset): MediaAssetResponse => $this->createAssetResponse($asset),
+      $assets
+    );
+
+    $next_cursor = null;
+    if ($has_more && [] !== $assets) {
+      /** @var MediaAsset $last */
+      $last = end($assets);
+      $sort_value = $last->getCreatedAt()?->format('Y-m-d\TH:i:s.uP') ?? '';
+      $next_cursor = $this->encodeKeysetCursor($sort_value, $last->getId());
+    }
+
+    return new MediaCategoryDetailResponse([
+      'id' => $category->getId(),
+      'name' => $this->trans($category->getName()),
+      'description' => $category->getDescription() ? $this->trans($category->getDescription()) : null,
+      'priority' => $category->getPriority(),
+      'created_at' => $category->getCreatedAt(),
+      'updated_at' => $category->getUpdatedAt(),
+      'data' => $asset_responses,
+      'next_cursor' => $next_cursor,
+      'has_more' => $has_more,
     ]);
   }
 
@@ -177,8 +279,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       $search = null;
     }
 
-    $current_offset = $this->decodeCursorToOffset($cursor);
-
+    $current_offset = 0;
     if (null === $search) {
       $has_more = count($categories) > $limit;
       if ($has_more) {
@@ -218,10 +319,13 @@ class MediaLibraryResponseManager extends AbstractResponseManager
         $categories
       );
     } else {
+      // Search uses in-memory filtering — must stay offset-based
+      $current_offset = $this->decodeCursorToOffset($cursor);
       $category_previews = [];
       foreach ($categories as $category) {
         $translated_name = $this->trans($category->getName());
-        $translated_description = $category->getDescription() ? $this->trans($category->getDescription()) : '';
+        $description = $category->getDescription();
+        $translated_description = null !== $description ? $this->trans($description) : '';
         $search_lower = strtolower($search);
         $name_match = str_contains(strtolower($translated_name), $search_lower);
         $desc_match = '' !== $translated_description && str_contains(strtolower($translated_description), $search_lower);
@@ -266,9 +370,17 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       }
     }
 
-    $next_cursor = ($has_more && [] !== $category_previews)
-      ? $this->encodeCursorFromOffset($current_offset, count($category_previews))
-      : null;
+    $next_cursor = null;
+    if ($has_more && [] !== $category_previews) {
+      if (null === $search && [] !== $categories) {
+        /** @var MediaCategory $last_cat */
+        $last_cat = end($categories);
+        $next_cursor = $this->encodeIntKeysetCursor($last_cat->getPriority(), $last_cat->getId());
+      } else {
+        // Search path uses in-memory filtering — must stay offset-based
+        $next_cursor = $this->encodeCursorFromOffset($current_offset, count($category_previews));
+      }
+    }
 
     return new \OpenAPI\Server\Model\MediaLibraryResponse([
       'data' => $category_previews,

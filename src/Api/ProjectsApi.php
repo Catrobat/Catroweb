@@ -10,6 +10,7 @@ use App\Api\Services\Projects\ProjectsApiFacade;
 use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\Api\Services\Reactions\ReactionsApiProcessor;
 use App\Api\Traits\CursorPaginationTrait;
+use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramDownloads;
 use App\Project\AddProjectRequest;
@@ -37,6 +38,7 @@ use Symfony\Component\RateLimiter\RateLimiterFactory;
 class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
   use CursorPaginationTrait;
+  use KeysetCursorTrait;
   use RateLimitTrait;
 
   public function __construct(
@@ -121,11 +123,20 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   #[\Override]
   public function projectsFeaturedGet(string $platform, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): FeaturedProjectsListResponse
   {
-    $offset = $this->decodeCursorToOffset($cursor);
-    $featured_projects = $this->facade->getLoader()->getFeaturedProjects($flavor, $limit + 1, $offset, $platform, $max_version);
+    $cursor_data = $this->decodeIntKeysetCursor($cursor);
+    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+      $responseCode = Response::HTTP_BAD_REQUEST;
+
+      return new FeaturedProjectsListResponse(['data' => [], 'next_cursor' => null, 'has_more' => false]);
+    }
+
+    $featured_projects = $this->facade->getLoader()->getFeaturedProjectsKeyset(
+      $flavor, $limit + 1, $platform, $max_version,
+      $cursor_data['value'] ?? null, isset($cursor_data['id']) ? (int) $cursor_data['id'] : null
+    );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createFeaturedProjectsListResponse($featured_projects, $limit, $attributes, $offset);
+    $response = $this->facade->getResponseManager()->createFeaturedProjectsKeysetResponse($featured_projects, $limit, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -140,12 +151,21 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   public function projectsGet(string $accept_language, ?string $category, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ProjectsListResponse
   {
     $category = $category ?? 'recent';
-    $offset = $this->decodeCursorToOffset($cursor);
-    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
-    $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%d', $category, $locale, $flavor, $max_version, $limit, $offset);
 
-    // Don't cache 'recent' category as it changes frequently
-    if ('recent' === $category) {
+    // Categories that must stay offset-based (Elasticsearch, random, or no stable sort)
+    if (in_array($category, ['random', 'example', 'scratch', 'trending', 'popular'], true)) {
+      $offset = $this->decodeCursorToOffset($cursor);
+      $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+      $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%d', $category, $locale, $flavor, $max_version, $limit, $offset);
+
+      $cached = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+      if (null !== $cached) {
+        $responseCode = $cached['response_code'];
+        $responseHeaders = $cached['response_headers'];
+
+        return $cached['response'];
+      }
+
       $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
       $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit + 1, $offset, $flavor, $user);
 
@@ -153,26 +173,70 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       $response = $this->facade->getResponseManager()->createProjectsListResponse($projects, $limit, $attributes, $offset);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
       $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+      $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
 
       return $response;
     }
 
-    $cached = $this->facade->getResponseManager()->getCachedResponse($cache_id);
-    if (null !== $cached) {
-      $responseCode = $cached['response_code'];
-      $responseHeaders = $cached['response_headers'];
+    // Keyset cursor pagination for recent, most_viewed, most_downloaded
+    $sort_by = match ($category) {
+      'most_viewed' => 'views',
+      'most_downloaded' => 'downloads',
+      default => 'uploaded_at',
+    };
 
-      return $cached['response'];
+    $cursor_date = null;
+    $cursor_value = null;
+    $cursor_id = null;
+
+    if (null !== $cursor && '' !== $cursor) {
+      if ('uploaded_at' === $sort_by) {
+        $cursor_data = $this->decodeDateKeysetCursor($cursor);
+        if (null === $cursor_data) {
+          $responseCode = Response::HTTP_BAD_REQUEST;
+
+          return new ProjectsListResponse(['data' => [], 'next_cursor' => null, 'has_more' => false]);
+        }
+        $cursor_date = $cursor_data['date'];
+        $cursor_id = $cursor_data['id'];
+      } else {
+        $cursor_data = $this->decodeIntKeysetCursor($cursor);
+        if (null === $cursor_data) {
+          $responseCode = Response::HTTP_BAD_REQUEST;
+
+          return new ProjectsListResponse(['data' => [], 'next_cursor' => null, 'has_more' => false]);
+        }
+        $cursor_value = $cursor_data['value'];
+        $cursor_id = $cursor_data['id'];
+      }
     }
 
-    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
-    $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit + 1, $offset, $flavor, $user);
+    // Cache most_viewed/most_downloaded but not recent (changes too frequently)
+    if ('recent' !== $category) {
+      $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+      $cache_id = sprintf('projectsGet_%s_%s_%s_%s_%d_%s', $category, $locale, $flavor, $max_version, $limit, $cursor ?? '');
+
+      $cached = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+      if (null !== $cached) {
+        $responseCode = $cached['response_code'];
+        $responseHeaders = $cached['response_headers'];
+
+        return $cached['response'];
+      }
+    }
+
+    $projects = $this->facade->getLoader()->getProjectsKeyset(
+      $category, $max_version, $limit + 1, $flavor, $cursor_date, $cursor_value, $cursor_id
+    );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsListResponse($projects, $limit, $attributes, $offset);
+    $response = $this->facade->getResponseManager()->createProjectsKeysetResponse($projects, $limit, $sort_by, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-    $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
+
+    if ('recent' !== $category && isset($cache_id)) {
+      $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
+    }
 
     return $response;
   }
@@ -180,7 +244,6 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   #[\Override]
   public function projectsIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?ProjectsListResponse
   {
-    $offset = $this->decodeCursorToOffset($cursor);
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
       $responseCode = Response::HTTP_NOT_FOUND;
@@ -188,12 +251,25 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $recommended_projects = $this->facade->getLoader()->getRecommendedProjects(
-      $id, $category, $max_version, $limit + 1, $offset, $flavor, $this->facade->getAuthenticationManager()->getAuthenticatedUser()
+    $cursor_date = null;
+    $cursor_id = null;
+    if (null !== $cursor && '' !== $cursor) {
+      $cursor_data = $this->decodeDateKeysetCursor($cursor);
+      if (null === $cursor_data) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return new ProjectsListResponse(['data' => [], 'next_cursor' => null, 'has_more' => false]);
+      }
+      $cursor_date = $cursor_data['date'];
+      $cursor_id = $cursor_data['id'];
+    }
+
+    $recommended_projects = $this->facade->getLoader()->getRecommendedProjectsKeyset(
+      $id, $category, $max_version, $limit + 1, $flavor, $cursor_date, $cursor_id
     );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsListResponse($recommended_projects, $limit, $attributes, $offset);
+    $response = $this->facade->getResponseManager()->createProjectsKeysetResponse($recommended_projects, $limit, 'uploaded_at', $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -279,7 +355,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   #[\Override]
   public function projectsSearchGet(string $query, string $max_version, int $limit, ?string $cursor, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ProjectsListResponse
   {
-    // Elasticsearch: offset-based pagination (cursor decoded to offset)
+    // Elasticsearch only supports offset-based pagination (from/size), not keyset cursors
     $offset = $this->decodeCursorToOffset($cursor);
     $projects = $this->facade->getLoader()->searchProjects($query, $limit + 1, $offset, $max_version, $flavor);
 
@@ -368,11 +444,23 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $offset = $this->decodeCursorToOffset($cursor);
-    $user_projects = $this->facade->getLoader()->getUserProjects($user_id, $limit + 1, $offset, $flavor, $max_version);
+    $cursor_date = null;
+    $cursor_id = null;
+    if (null !== $cursor && '' !== $cursor) {
+      $cursor_data = $this->decodeDateKeysetCursor($cursor);
+      if (null === $cursor_data) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return new ProjectsListResponse(['data' => [], 'next_cursor' => null, 'has_more' => false]);
+      }
+      $cursor_date = $cursor_data['date'];
+      $cursor_id = $cursor_data['id'];
+    }
+
+    $user_projects = $this->facade->getLoader()->getUserProjectsKeyset($user_id, $limit + 1, $flavor, $max_version, $cursor_date, $cursor_id);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsListResponse($user_projects, $limit, $attributes, $offset);
+    $response = $this->facade->getResponseManager()->createProjectsKeysetResponse($user_projects, $limit, 'uploaded_at', $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -388,11 +476,23 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $offset = $this->decodeCursorToOffset($cursor);
-    $projects = $this->facade->getLoader()->getUserPublicProjects($id, $limit + 1, $offset, $flavor, $max_version);
+    $cursor_date = null;
+    $cursor_id = null;
+    if (null !== $cursor && '' !== $cursor) {
+      $cursor_data = $this->decodeDateKeysetCursor($cursor);
+      if (null === $cursor_data) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return new ProjectsListResponse(['data' => [], 'next_cursor' => null, 'has_more' => false]);
+      }
+      $cursor_date = $cursor_data['date'];
+      $cursor_id = $cursor_data['id'];
+    }
+
+    $projects = $this->facade->getLoader()->getUserPublicProjectsKeyset($id, $limit + 1, $flavor, $max_version, $cursor_date, $cursor_id);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsListResponse($projects, $limit, $attributes, $offset);
+    $response = $this->facade->getResponseManager()->createProjectsKeysetResponse($projects, $limit, 'uploaded_at', $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 

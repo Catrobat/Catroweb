@@ -66,7 +66,7 @@ Feature: Get recent projects
           "filesize": 1.3369998931884766
         }
       ],
-      "next_cursor": "MQ==",
+      "next_cursor": "MjAxNC0wOC0wNVQxMjowMDowMC4wMDAwMDArMDA6MDB8NQ==",
       "has_more": true
     }
     """

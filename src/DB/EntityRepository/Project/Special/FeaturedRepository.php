@@ -125,6 +125,35 @@ class FeaturedRepository extends ServiceEntityRepository
     ;
   }
 
+  /**
+   * Keyset cursor query for featured programs ordered by priority DESC, id DESC.
+   */
+  public function getFeaturedProgramsKeyset(?string $flavor, int $limit, ?string $platform = null, ?string $max_version = null, ?int $cursor_priority = null, ?int $cursor_id = null): array
+  {
+    $qb = $this->createQueryBuilder('e');
+    $qb->select('e')->addSelect('program')
+      ->where('e.active = true')
+    ;
+    $qb->leftJoin('e.program', 'program');
+    $qb->orderBy('e.priority', 'DESC')->addOrderBy('e.id', 'DESC');
+    $qb = $this->addMaxVersionCondition($qb, $max_version);
+    $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);
+    $qb = $this->addPlatformCondition($qb, $platform);
+
+    if (null !== $cursor_priority && null !== $cursor_id) {
+      $qb->andWhere(
+        '(e.priority < :cursor_priority) OR (e.priority = :cursor_priority AND e.id < :cursor_id)'
+      )
+        ->setParameter('cursor_priority', $cursor_priority)
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    $qb->setMaxResults($limit);
+
+    return $qb->getQuery()->getResult();
+  }
+
   public function isFeatured(Program $program): bool
   {
     $qb = $this->createQueryBuilder('e');

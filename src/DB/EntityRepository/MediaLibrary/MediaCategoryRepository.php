@@ -42,6 +42,31 @@ class MediaCategoryRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
+  /**
+   * Keyset cursor query for categories ordered by priority ASC, id ASC.
+   *
+   * @return array<MediaCategory>
+   */
+  public function findPaginatedKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null): array
+  {
+    $qb = $this->createQueryBuilder('c')
+      ->orderBy('c.priority', 'ASC')
+      ->addOrderBy('c.id', 'ASC')
+      ->setMaxResults($limit)
+    ;
+
+    if (null !== $cursor_priority && null !== $cursor_id) {
+      $qb->andWhere(
+        '(c.priority > :cursor_priority) OR (c.priority = :cursor_priority AND c.id > :cursor_id)'
+      )
+        ->setParameter('cursor_priority', $cursor_priority)
+        ->setParameter('cursor_id', $cursor_id)
+      ;
+    }
+
+    return $qb->getQuery()->getResult();
+  }
+
   public function countAll(): int
   {
     $qb = $this->createQueryBuilder('c')

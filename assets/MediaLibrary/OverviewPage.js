@@ -176,8 +176,18 @@ if (overviewContainer) {
         chevrons.appendChild(leftChevron)
         chevrons.appendChild(rightChevron)
 
+        // Compute initial keyset cursor from the last preview asset
+        const lastPreview =
+          category.preview_assets.length > 0
+            ? category.preview_assets[category.preview_assets.length - 1]
+            : null
+        const initialCursor =
+          lastPreview && lastPreview.created_at && lastPreview.id
+            ? btoa(`${lastPreview.created_at}|${lastPreview.id}`)
+            : null
+
         const state = {
-          offset: category.preview_assets.length,
+          nextCursor: initialCursor,
           total: category.assets_count,
           isLoading: false,
           hasMore: category.assets_count > category.preview_assets.length,
@@ -402,8 +412,9 @@ if (overviewContainer) {
     const url = new URL(mediaAssetsApi, window.location.origin)
     url.searchParams.set('category_id', categoryId)
     url.searchParams.set('limit', assetsPerCategory)
-    // The media assets API uses base64-encoded offset as cursor
-    url.searchParams.set('cursor', btoa(String(state.offset)))
+    if (state.nextCursor) {
+      url.searchParams.set('cursor', state.nextCursor)
+    }
     if (searchQuery) {
       url.searchParams.set('search', searchQuery)
     }
@@ -411,16 +422,12 @@ if (overviewContainer) {
     fetch(url.toString())
       .then((response) => response.json())
       .then((data) => {
-        const assets = data.data || data.assets || []
+        const assets = data.data || []
         assets.forEach((asset) => {
           assetsGrid.appendChild(buildAssetCard(asset))
         })
-        state.offset += assets.length
-        if (data.has_more !== undefined) {
-          state.hasMore = data.has_more
-        } else if (assets.length < assetsPerCategory || state.offset >= state.total) {
-          state.hasMore = false
-        }
+        state.nextCursor = data.next_cursor || null
+        state.hasMore = data.has_more ?? false
 
         const wrapper = assetsGrid.closest('.media-assets-wrapper')
         const leftChevron = wrapper?.querySelector('.media-assets-chevron--left')
