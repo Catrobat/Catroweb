@@ -27,6 +27,11 @@ Feature: Get project remix graph
     And I request "GET" "/api/projects/1/remix-graph"
     Then the response status code should be "406"
 
+  Scenario: Get remix graph for non-existing project returns 404
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "GET" "/api/projects/999/remix-graph"
+    Then the response status code should be "404"
+
   Scenario: Get remix graph includes nodes, edges and thumbnail urls
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/1/remix-graph"

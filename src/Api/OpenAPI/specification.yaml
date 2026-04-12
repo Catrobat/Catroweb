@@ -1095,6 +1095,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RemixGraphResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
         '406':
           $ref: '#/components/responses/NotAcceptable'
 

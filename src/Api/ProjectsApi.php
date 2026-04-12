@@ -817,6 +817,13 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null {
+    $project = $this->facade->getLoader()->findProjectByID($id, true);
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
     $remix_graph = $this->remix_manager->getRenderableRemixGraph($id);
 
     $nodes = array_map(function (array $node): array {

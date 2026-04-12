@@ -190,6 +190,7 @@ class ProjectsController extends Controller
 
       $message = match ($responseCode) {
         200 => 'OK',
+        404 => 'No project found with this id',
         406 => 'Not acceptable - client must accept application/json as content type',
         default => '',
       };
