@@ -705,10 +705,12 @@ async function loadAndRenderGraph(state) {
 }
 
 function createState(container) {
+  const projectId = container.dataset.projectId
+
   return {
     container,
-    projectId: container.dataset.projectId,
-    graphUrl: container.dataset.graphUrl,
+    projectId,
+    graphUrl: '/api/projects/' + encodeURIComponent(projectId) + '/remix-graph',
     loadPromise: null,
     loaded: false,
     network: null,

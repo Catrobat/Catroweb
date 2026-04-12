@@ -21,6 +21,7 @@ use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\ProjectManager;
+use App\Project\Remix\RemixManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\ErrorResponse;
@@ -67,6 +68,8 @@ final class ProjectsApiTest extends KernelTestCase
       $this->facade,
       $this->reactions_facade,
       $this->createStub(CodeTreeBuilder::class),
+      $this->createStub(RemixManager::class),
+      $this->createStub(ScreenshotRepository::class),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_upload_daily'),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_reaction_burst'),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_download_burst'),
