@@ -60,7 +60,10 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
     $next_cursor = null;
     if ($has_more && [] !== $banners) {
       $last = end($banners);
-      $next_cursor = $this->encodeIntKeysetCursor($last->getPriority(), $last->getId());
+      $last_id = $last->getId();
+      if (null !== $last_id) {
+        $next_cursor = $this->encodeIntKeysetCursor($last->getPriority(), $last_id);
+      }
     }
 
     $responseCode = Response::HTTP_OK;

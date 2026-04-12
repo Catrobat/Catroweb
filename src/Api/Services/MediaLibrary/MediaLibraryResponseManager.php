@@ -323,7 +323,8 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       $category_previews = [];
       foreach ($categories as $category) {
         $translated_name = $this->trans($category->getName());
-        $translated_description = $category->getDescription() ? $this->trans($category->getDescription()) : '';
+        $description = $category->getDescription();
+        $translated_description = null !== $description ? $this->trans($description) : '';
         $search_lower = strtolower($search);
         $name_match = str_contains(strtolower($translated_name), $search_lower);
         $desc_match = '' !== $translated_description && str_contains(strtolower($translated_description), $search_lower);

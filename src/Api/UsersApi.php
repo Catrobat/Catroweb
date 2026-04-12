@@ -372,7 +372,11 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
     $next_cursor = null;
     if ($has_more && [] !== $users) {
       $last = end($users);
-      $next_cursor = $this->encodeDateKeysetCursor($last->getCreatedAt(), $last->getId());
+      $created_at = $last->getCreatedAt();
+      $last_id = $last->getId();
+      if (null !== $created_at && null !== $last_id) {
+        $next_cursor = $this->encodeDateKeysetCursor($created_at, $last_id);
+      }
     }
 
     $responseCode = Response::HTTP_OK;

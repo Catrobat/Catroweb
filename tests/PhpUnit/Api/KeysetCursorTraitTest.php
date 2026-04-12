@@ -8,9 +8,9 @@ use App\Api\Traits\KeysetCursorTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @internal
- *
  * @coversDefaultClass \App\Api\Traits\KeysetCursorTrait
+ *
+ * @internal
  */
 class KeysetCursorTraitTest extends TestCase
 {
@@ -59,6 +59,7 @@ class KeysetCursorTraitTest extends TestCase
   {
     $cursor = $this->encodeKeysetCursor('value123', 'id456');
     $decoded = $this->decodeKeysetCursor($cursor);
+    $this->assertNotNull($decoded);
     $this->assertSame('value123', $decoded['value']);
     $this->assertSame('id456', $decoded['id']);
   }
@@ -131,6 +132,7 @@ class KeysetCursorTraitTest extends TestCase
     // Test that pipe in ID is handled correctly (only first pipe splits)
     $cursor = base64_encode('value|id|with|pipes');
     $result = $this->decodeKeysetCursor($cursor);
+    $this->assertNotNull($result);
     $this->assertSame('value', $result['value']);
     $this->assertSame('id|with|pipes', $result['id']);
   }
