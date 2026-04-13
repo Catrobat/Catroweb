@@ -31,7 +31,6 @@ use OpenAPI\Server\Model\StudioUserProjectResponse;
 use OpenAPI\Server\Model\StudioUserProjectsResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -43,7 +42,6 @@ class StudioResponseManager extends AbstractResponseManager
     \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly UrlGeneratorInterface $url_generator,
     private readonly ParameterBagInterface $parameter_bag,
-    private readonly RequestStack $request_stack,
     private readonly StudioManager $studio_manager,
     private readonly ProjectManager $project_manager,
     private readonly UserAvatarService $user_avatar_service,
