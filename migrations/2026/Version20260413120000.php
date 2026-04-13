@@ -21,7 +21,7 @@ final class Version20260413120000 extends AbstractMigration
   #[\Override]
   public function getDescription(): string
   {
-    return 'Add fos_user.avatar_key for responsive AVIF/WebP avatar variant storage (#6628).';
+    return 'Add fos_user.avatar_key for responsive AVIF/WebP avatar variant storage.';
   }
 
   #[\Override]

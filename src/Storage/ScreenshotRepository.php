@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Storage;
 
 use App\Storage\Images\ImageVariantGenerator;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -35,10 +37,14 @@ class ScreenshotRepository
   /**
    * @throws \Exception
    */
+  private readonly LoggerInterface $logger;
+
   public function __construct(
     ParameterBagInterface $parameter_bag,
     private readonly ImageVariantGenerator $image_variant_generator,
+    ?LoggerInterface $logger = null,
   ) {
+    $this->logger = $logger ?? new NullLogger();
     /** @var string $screenshot_dir */
     $screenshot_dir = $parameter_bag->get('catrobat.screenshot.dir');
     /** @var string $screenshot_path */
@@ -147,8 +153,14 @@ class ScreenshotRepository
         $this->screenshot_dir,
         $this->getScreenshotVariantBasename($id),
       );
-    } catch (\Throwable) {
-      // swallow — covered by the legacy PNG fallback
+    } catch (\Throwable $e) {
+      // Legacy PNG is the source of truth, so variant failures aren't fatal —
+      // but they're invisible without a log line when we go looking.
+      $this->logger->warning('Screenshot variant generation failed for project {id}: {error}', [
+        'id' => $id,
+        'error' => $e->getMessage(),
+        'exception' => $e,
+      ]);
     }
   }
 

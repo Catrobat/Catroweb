@@ -76,6 +76,7 @@ class ScreenshotRepositoryTest extends TestCase
         'catrobat.file.storage.dir' => $this->tmp_zip_dir,
       ]),
       new ImageVariantGenerator(),
+      new \Psr\Log\NullLogger(),
     );
   }
 

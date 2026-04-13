@@ -24,10 +24,12 @@ use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\Storage\Images\ImageVariantGenerator;
+use App\Storage\Images\ImageVariantUrlBuilder;
 use App\User\Notification\NotificationManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
+use OpenAPI\Server\Model\ImageVariants;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -45,6 +47,7 @@ class StudioManager
     protected ParameterBagInterface $parameter_bag,
     protected NotificationManager $notification_manager,
     protected ImageVariantGenerator $image_variant_generator,
+    protected ImageVariantUrlBuilder $image_variant_url_builder,
   ) {
   }
 
@@ -59,6 +62,20 @@ class StudioManager
   public function getStudioCoverPublicPath(): string
   {
     return 'resources/images/studio/';
+  }
+
+  public function getCoverVariants(?Studio $studio): ?ImageVariants
+  {
+    $key = $studio?->getCoverAssetPath();
+    if (null === $key || '' === $key) {
+      return null;
+    }
+
+    return $this->image_variant_url_builder->build(
+      $this->getStudioCoverDir(),
+      $this->getStudioCoverPublicPath(),
+      $key,
+    );
   }
 
   public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, ?UploadedFile $image_file = null): Studio

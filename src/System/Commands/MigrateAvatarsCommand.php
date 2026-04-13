@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\System\Commands;
 
 use App\DB\Entity\User\User;
-use App\Storage\Images\ImageVariantGenerator;
 use App\User\UserAvatarService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -30,13 +29,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 #[AsCommand(
   name: 'catro:migrate:avatars',
-  description: 'Generate responsive avatar variants from the legacy base64 avatar column (#6628).',
+  description: 'Generate responsive avatar variants from the legacy base64 avatar column.',
 )]
 class MigrateAvatarsCommand extends Command
 {
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
-    private readonly ImageVariantGenerator $image_variant_generator,
     private readonly UserAvatarService $user_avatar_service,
   ) {
     parent::__construct();
@@ -131,34 +129,8 @@ class MigrateAvatarsCommand extends Command
       return;
     }
 
-    if (!preg_match('#^data:([^;]+);base64,(.*)$#s', $data_uri, $matches)) {
-      throw new \RuntimeException('avatar is not a base64 data URI');
-    }
-
-    $decoded = base64_decode((string) $matches[2], true);
-    if (false === $decoded) {
-      throw new \RuntimeException('base64 decode failed');
-    }
-
-    $temp_source = tempnam(sys_get_temp_dir(), 'catroweb-avatar-migrate-');
-    if (false === $temp_source) {
-      throw new \RuntimeException('could not allocate a temp file');
-    }
-
-    try {
-      if (false === file_put_contents($temp_source, $decoded)) {
-        throw new \RuntimeException('could not write temp file');
-      }
-
-      $key = (string) $user->getId().'-'.dechex(random_int(0, 0xFFFFFFFF));
-      $this->image_variant_generator->generate(
-        $temp_source,
-        $this->user_avatar_service->getStorageDir(),
-        $key,
-      );
-      $user->setAvatarKey($key);
-    } finally {
-      @unlink($temp_source);
+    if (null === $this->user_avatar_service->storeFromDataUri($user, $data_uri)) {
+      throw new \RuntimeException('could not decode legacy avatar data URI');
     }
   }
 }

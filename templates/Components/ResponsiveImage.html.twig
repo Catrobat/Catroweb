@@ -9,13 +9,14 @@
       {class: 'img-fluid', sizes: '(min-width: 768px) 60vw, 100vw', fallback: asset('images/default/thumbnail.png')}
     ) }}
 
-  Browsers pick the first <source> they understand:
-    1. AVIF (~20–30 % smaller than WebP)
-    2. WebP (universal modern fallback)
-    3. <img src> — the WebP 1x URL or the caller-supplied fallback.
+  For each format (AVIF first, then WebP) the macro emits a <source> per
+  variant set (detail → card → thumb). Within a format bucket, browsers use
+  the `sizes` hint + srcset descriptors to pick the correct density; they do
+  not fall back *between* sets, so the detail set carries every width needed
+  for typical hero layouts.
 
-  Passing `null` for `variants` renders the fallback <img> only, so the macro is
-  safe to use even before the avatar/screenshot data migration has run.
+  Passing `null` for `variants` renders the fallback <img> only, so the macro
+  is safe to use even before the avatar/screenshot data migration has run.
 #}
 {% macro picture(variants, alt, options = {}) %}
   {% set klass = options.class|default('') %}
@@ -29,19 +30,17 @@
   <picture>
     {% if variants %}
       {% for fmt_type, set_suffix in {'image/avif': 'avif', 'image/webp': 'webp'} %}
-        {% for variant_name in ['detail', 'card', 'thumb'] %}
-          {% set set = attribute(variants, variant_name) %}
-          {% if set %}
-            {% set u1 = attribute(set, set_suffix ~ '_1x') %}
-            {% set u2 = attribute(set, set_suffix ~ '_2x') %}
-            {% if u1 or u2 %}
-              {% set srcset_parts = [] %}
-              {% if u1 %}{% set srcset_parts = srcset_parts|merge([u1 ~ ' 1x']) %}{% endif %}
-              {% if u2 %}{% set srcset_parts = srcset_parts|merge([u2 ~ ' 2x']) %}{% endif %}
-              <source type="{{ fmt_type }}" srcset="{{ srcset_parts|join(', ') }}"{% if sizes %} sizes="{{ sizes }}"{% endif %} media="(max-width: {{ variant_name == 'thumb' ? 192 : (variant_name == 'card' ? 640 : 9999) }}px)">
-            {% endif %}
+        {% set set = variants.detail %}
+        {% if set %}
+          {% set u1 = attribute(set, set_suffix ~ '_1x') %}
+          {% set u2 = attribute(set, set_suffix ~ '_2x') %}
+          {% if u1 or u2 %}
+            {% set srcset_parts = [] %}
+            {% if u1 %}{% set srcset_parts = srcset_parts|merge([u1 ~ ' 1x']) %}{% endif %}
+            {% if u2 %}{% set srcset_parts = srcset_parts|merge([u2 ~ ' 2x']) %}{% endif %}
+            <source type="{{ fmt_type }}" srcset="{{ srcset_parts|join(', ') }}"{% if sizes %} sizes="{{ sizes }}"{% endif %}>
           {% endif %}
-        {% endfor %}
+        {% endif %}
       {% endfor %}
     {% endif %}
     <img

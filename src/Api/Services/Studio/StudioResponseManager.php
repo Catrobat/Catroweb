@@ -13,10 +13,8 @@ use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
-use App\Storage\Images\ImageVariantUrlBuilder;
 use App\Studio\StudioManager;
 use App\User\UserAvatarService;
-use OpenAPI\Server\Model\ImageVariants;
 use OpenAPI\Server\Model\StudioActivityListResponse;
 use OpenAPI\Server\Model\StudioActivityResponse;
 use OpenAPI\Server\Model\StudioCommentListResponse;
@@ -48,7 +46,6 @@ class StudioResponseManager extends AbstractResponseManager
     private readonly RequestStack $request_stack,
     private readonly StudioManager $studio_manager,
     private readonly ProjectManager $project_manager,
-    private readonly ImageVariantUrlBuilder $image_variant_url_builder,
     private readonly UserAvatarService $user_avatar_service,
   ) {
     parent::__construct($translator, $serializer, $cache);
@@ -62,7 +59,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setDescription($studio->getDescription())
       ->setIsPublic($studio->isIsPublic())
       ->setEnableComments($studio->isAllowComments())
-      ->setCover($this->generateCoverVariants($studio))
+      ->setCover($this->studio_manager->getCoverVariants($studio))
       ->setMembersCount($this->studio_manager->countStudioUsers($studio))
       ->setProjectsCount($this->studio_manager->countStudioProjects($studio))
       ->setActivitiesCount($this->studio_manager->countStudioActivities($studio))
@@ -345,20 +342,6 @@ class StudioResponseManager extends AbstractResponseManager
         'id' => $studio->getId(),
       ],
       UrlGeneratorInterface::ABSOLUTE_URL
-    );
-  }
-
-  protected function generateCoverVariants(Studio $studio): ?ImageVariants
-  {
-    $cover_key = $studio->getCoverAssetPath();
-    if (null === $cover_key || '' === $cover_key) {
-      return null;
-    }
-
-    return $this->image_variant_url_builder->build(
-      $this->studio_manager->getStudioCoverDir(),
-      $this->studio_manager->getStudioCoverPublicPath(),
-      $cover_key,
     );
   }
 }

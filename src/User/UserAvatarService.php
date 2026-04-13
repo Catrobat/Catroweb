@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\User;
 
 use App\DB\Entity\User\User;
+use App\Storage\Images\ImageVariantGenerator;
 use App\Storage\Images\ImageVariantUrlBuilder;
 use OpenAPI\Server\Model\ImageVariants;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -26,6 +27,7 @@ class UserAvatarService
 
   public function __construct(
     private readonly ImageVariantUrlBuilder $url_builder,
+    private readonly ImageVariantGenerator $generator,
     ParameterBagInterface $parameter_bag,
   ) {
     /** @var string $resources_dir */
@@ -61,5 +63,60 @@ class UserAvatarService
     }
 
     return $this->url_builder->build($this->storage_dir, $this->public_path, $key);
+  }
+
+  /**
+   * Decodes a validated+resized avatar data URI and writes the full variant
+   * set under {@see self::getStorageDir()}. Stamps the basename key on the
+   * user and deletes the previous set (if any). Shared between upload-time
+   * writes ({@see \App\Api\Services\User\UserApiProcessor}) and the
+   * backfill command.
+   *
+   * Returns the basename key, or null if the input is not a base64 data URI
+   * or cannot be decoded (callers should log/skip).
+   */
+  public function storeFromDataUri(User $user, string $data_uri): ?string
+  {
+    if (!preg_match('#^data:([^;]+);base64,(.*)$#s', $data_uri, $matches)) {
+      return null;
+    }
+
+    $decoded = base64_decode((string) $matches[2], true);
+    if (false === $decoded) {
+      return null;
+    }
+
+    $previous_key = $user->getAvatarKey();
+    if (null !== $previous_key && '' !== $previous_key) {
+      $this->generator->remove($this->storage_dir, $previous_key);
+    }
+
+    $temp_source = tempnam(sys_get_temp_dir(), 'catroweb-avatar-');
+    if (false === $temp_source) {
+      return null;
+    }
+
+    try {
+      if (false === file_put_contents($temp_source, $decoded)) {
+        return null;
+      }
+
+      $key = (string) $user->getId().'-'.dechex(random_int(0, 0xFFFFFFFF));
+      $this->generator->generate($temp_source, $this->storage_dir, $key);
+      $user->setAvatarKey($key);
+
+      return $key;
+    } finally {
+      @unlink($temp_source);
+    }
+  }
+
+  public function clearStoredAvatar(User $user): void
+  {
+    $key = $user->getAvatarKey();
+    if (null !== $key && '' !== $key) {
+      $this->generator->remove($this->storage_dir, $key);
+    }
+    $user->setAvatarKey(null);
   }
 }
