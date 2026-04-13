@@ -30,9 +30,9 @@ final class Version20260411120000_uuid_migration extends AbstractMigration
     // ──────────────────────────────────────────────
 
     // Drop FKs pointing to studio_activity.id
-    $this->addSql('ALTER TABLE studio_user DROP FOREIGN KEY FK_EC686DD1AC74095A');
-    $this->addSql('ALTER TABLE studio_program DROP FOREIGN KEY FK_4CB3C24AAC74095A');
-    $this->addSql('ALTER TABLE user_comment DROP FOREIGN KEY FK_CC794C66AC74095A');
+    $this->dropForeignKeyByReference('studio_user', 'activity', 'studio_activity');
+    $this->dropForeignKeyByReference('studio_program', 'activity', 'studio_activity');
+    $this->dropForeignKeyByReference('user_comment', 'activity', 'studio_activity');
 
     // Add temp uuid column, populate, propagate to FK columns via JOIN
     $this->addSql('ALTER TABLE studio_activity ADD uuid_new CHAR(36) DEFAULT NULL');
@@ -63,8 +63,8 @@ final class Version20260411120000_uuid_migration extends AbstractMigration
     // ──────────────────────────────────────────────
 
     // Drop FKs pointing to user_comment.id
-    $this->addSql('ALTER TABLE CatroNotification DROP FOREIGN KEY FK_22087FCAF8697D13');
-    $this->addSql('ALTER TABLE user_comment_machine_translation DROP FOREIGN KEY FK_2CEF8196F8697D13');
+    $this->dropForeignKeyByReference('CatroNotification', 'comment_id', 'user_comment');
+    $this->dropForeignKeyByReference('user_comment_machine_translation', 'comment_id', 'user_comment');
 
     // Clean up parent_id: set 0 values to NULL (legacy "no parent" convention)
     $this->addSql("UPDATE user_comment SET parent_id = NULL WHERE parent_id = '0' OR parent_id = ''");
@@ -105,7 +105,7 @@ final class Version20260411120000_uuid_migration extends AbstractMigration
     // 4. achievement (referenced by user_achievement.achievement)
     // ──────────────────────────────────────────────
 
-    $this->addSql('ALTER TABLE user_achievement DROP FOREIGN KEY FK_3F68B66496737FF1');
+    $this->dropForeignKeyByReference('user_achievement', 'achievement', 'achievement');
 
     $this->addSql('ALTER TABLE achievement ADD uuid_new CHAR(36) DEFAULT NULL');
     $this->addSql('UPDATE achievement SET uuid_new = UUID()');
@@ -138,5 +138,38 @@ final class Version20260411120000_uuid_migration extends AbstractMigration
   public function down(Schema $schema): void
   {
     $this->throwIrreversibleMigrationException('UUID migration cannot be reversed — data would be lost.');
+  }
+
+  private function dropForeignKeyByReference(string $table, string $column, string $referenced_table): void
+  {
+    $schema = $this->connection->fetchOne('SELECT DATABASE()');
+    if (!is_string($schema) || '' === $schema) {
+      return;
+    }
+
+    $foreign_key = $this->connection->fetchOne(
+      <<<'SQL'
+        SELECT CONSTRAINT_NAME
+        FROM information_schema.KEY_COLUMN_USAGE
+        WHERE TABLE_SCHEMA = :schema
+          AND TABLE_NAME = :table
+          AND COLUMN_NAME = :column
+          AND REFERENCED_TABLE_NAME = :referenced_table
+        LIMIT 1
+      SQL,
+      [
+        'schema' => $schema,
+        'table' => $table,
+        'column' => $column,
+        'referenced_table' => $referenced_table,
+      ],
+    );
+
+    if (!is_string($foreign_key) || '' === $foreign_key) {
+      return;
+    }
+
+    $escaped_foreign_key = str_replace('`', '``', $foreign_key);
+    $this->addSql("ALTER TABLE {$table} DROP FOREIGN KEY `{$escaped_foreign_key}`");
   }
 }
