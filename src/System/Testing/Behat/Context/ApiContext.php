@@ -2340,10 +2340,13 @@ class ApiContext implements Context
         Assert::assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
       },
       'featured_image' => static function ($featured_image): void {
-        // TODO(#6628 follow-up): featured banners currently return null until the
-        // ImageRepository is routed through ImageVariantGenerator. When wired, this
-        // should assert the ImageVariants object shape (like screenshot/avatar).
+        // ImageVariants object, or null before the banner has been (re)uploaded.
         Assert::assertTrue(null === $featured_image || is_array($featured_image));
+        if (null !== $featured_image) {
+          Assert::assertArrayHasKey('thumb', $featured_image);
+          Assert::assertArrayHasKey('card', $featured_image);
+          Assert::assertArrayHasKey('detail', $featured_image);
+        }
       },
     ];
 

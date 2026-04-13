@@ -17,6 +17,7 @@ use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Special\SpecialProgram;
 use App\DB\Entity\Project\Tag;
 use App\Project\ProjectManager;
+use App\Storage\ImageRepository;
 use App\Storage\StorageLifecycleService;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,6 +52,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     private readonly ProjectManager $project_manager,
     \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly EntityManagerInterface $entity_manager,
+    private readonly ImageRepository $image_repository,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -394,10 +396,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     }
 
     if (in_array('featured_image', $attributes_list, true)) {
-      // TODO(#6628): wire FeaturedBanner uploads through ImageVariantGenerator;
-      // until then, expose null so clients render the placeholder instead of
-      // a stale single-URL image.
-      $data['featured_image'] = null;
+      $data['featured_image'] = $this->image_repository->getFeaturedVariants($featured_project->getId());
     }
 
     if (in_array('url', $attributes_list, true) || in_array('project_url', $attributes_list, true)) {
