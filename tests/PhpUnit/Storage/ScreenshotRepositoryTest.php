@@ -96,7 +96,7 @@ class ScreenshotRepositoryTest extends TestCase
   public function testThrowsAnExceptionIfGivenAnInvalidScreenshotDirectory(): void
   {
     $this->expectException(\Exception::class);
-    $this->screenshot_repository->__construct(
+    new ScreenshotRepository(
       new ParameterBag([
         'catrobat.screenshot.dir' => __DIR__.'/invalid_directory/',
         'catrobat.screenshot.path' => $this->screenshot_base_url,
@@ -113,7 +113,7 @@ class ScreenshotRepositoryTest extends TestCase
   public function testThrowsAnExceptionIfGivenAnInvalidThumbnailDirectory(): void
   {
     $this->expectException(\Exception::class);
-    $this->screenshot_repository->__construct(
+    new ScreenshotRepository(
       new ParameterBag([
         'catrobat.screenshot.dir' => $this->screenshot_dir,
         'catrobat.screenshot.path' => $this->screenshot_base_url,

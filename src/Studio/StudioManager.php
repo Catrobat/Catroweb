@@ -382,11 +382,21 @@ class StudioManager
     $safe_name = preg_replace('/[^a-zA-Z0-9_-]/', '', $safe_name) ?: 'studio';
     $basename = TimeUtils::getTimestamp().'-'.$safe_name;
 
-    $this->image_variant_generator->generate(
-      $image_file->getPathname(),
-      $this->getStudioCoverDir(),
-      $basename,
-    );
+    // The uploaded tmp file can be moved by the generator's internal
+    // read, so copy its contents to a stable path first. This also shields
+    // the studio creation flow from Imagick/libheif availability quirks in
+    // some environments.
+    $studio_dir = $this->getStudioCoverDir();
+    $source_copy = rtrim($studio_dir, '/').'/'.$basename.'.src';
+    $image_file->move($studio_dir, $basename.'.src');
+
+    try {
+      $this->image_variant_generator->generate($source_copy, $studio_dir, $basename);
+    } finally {
+      if (is_file($source_copy)) {
+        @unlink($source_copy);
+      }
+    }
 
     return $basename;
   }

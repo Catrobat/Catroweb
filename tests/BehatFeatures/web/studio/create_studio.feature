@@ -80,7 +80,7 @@ Feature: There is a dedicated page to create a new studio
       | is_enabled      | true                        |
       | is_public       | false                       |
       | enable_comments | false                       |
-      | cover_path      | My-random-studio.png        |
+      | cover_path      | My-random-studio            |
     And the element ".studio-detail__header" should be visible
     And I should see "My random studio"
     And I should see "with a specific description"
