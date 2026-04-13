@@ -72,8 +72,8 @@ Feature: There is a dedicated page to create a new studio
     # image
     And I attach the avatar "logo.png" to "studio-file-input"
     When I click "#top-app-bar__btn-save"
-    # Variant generation (12 AVIF+WebP files) takes ~1.5s in the container, so wait for the redirect first.
-    And I wait for the element ".studio-detail__header" to be visible
+    # Variant generation (12 AVIF+WebP files) takes ~1.5s in the container; wait long enough for the redirect + render.
+    And I wait 5000 milliseconds
     Then the studio with the name "My random studio" should exist with following values:
       | key             | value                       |
       | description     | with a specific description |
@@ -81,5 +81,6 @@ Feature: There is a dedicated page to create a new studio
       | is_public       | true                        |
       | enable_comments | false                       |
       | cover_path      | My-random-studio            |
+    And the element ".studio-detail__header" should be visible
     And I should see "My random studio"
     And I should see "with a specific description"
