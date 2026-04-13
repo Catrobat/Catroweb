@@ -43,10 +43,14 @@ jobs:
         uses: ./.github/actions/setup-php-composer
 
       - name: Deploy Share
-        uses: deployphp/action@v1
+        # Pin to a commit that still streams full dep output in Actions logs.
+        # Newer deployphp/action@v1 revisions swallow task-level output and only
+        # print "Failed: dep deploy", which blocks root-cause debugging.
+        uses: deployphp/action@5d9b48b8ce6a81cfff681cbc330eb7944f102093
         with:
           private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
           dep: deploy
+          verbosity: -vvv
         env:
           APP_NAME: Catroweb
           DEPLOY_GIT: https://github.com/Catrobat/Catroweb.git
