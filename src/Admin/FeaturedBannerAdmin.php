@@ -57,6 +57,10 @@ class FeaturedBannerAdmin extends AbstractAdmin
       return '/images/default/screenshot.png';
     }
 
+    if (!$this->featured_image_repository->exists($id, $image_type, true)) {
+      return '/images/default/screenshot.png';
+    }
+
     return '/'.$this->featured_image_repository->getWebPath($id, $image_type, true);
   }
 

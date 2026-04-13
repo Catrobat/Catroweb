@@ -107,6 +107,13 @@ class ImageRepository
     return $this->urlHelper->getAbsoluteUrl('/').$this->getWebPath($id, $extension, $featured);
   }
 
+  public function exists(int|string $id, string $extension, bool $featured): bool
+  {
+    $dir = $featured ? $this->featured_dir : $this->example_dir;
+
+    return is_file($dir.$this->generateFileNameFromId($id, $extension, $featured));
+  }
+
   public function getImagick(): \Imagick
   {
     if (null == $this->imagick) {

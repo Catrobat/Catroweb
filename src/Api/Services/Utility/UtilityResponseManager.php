@@ -48,7 +48,11 @@ class UtilityResponseManager extends AbstractResponseManager
   {
     $image_type = $banner->getImageType();
     $id = $banner->getId();
-    if ('' !== $image_type && null !== $id) {
+    if (
+      '' !== $image_type
+      && null !== $id
+      && $this->image_repository->exists($id, $image_type, true)
+    ) {
       return '/'.$this->image_repository->getWebPath($id, $image_type, true);
     }
 
