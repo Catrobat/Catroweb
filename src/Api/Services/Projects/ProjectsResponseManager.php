@@ -17,7 +17,6 @@ use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Special\SpecialProgram;
 use App\DB\Entity\Project\Tag;
 use App\Project\ProjectManager;
-use App\Storage\ImageRepository;
 use App\Storage\StorageLifecycleService;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,7 +44,6 @@ class ProjectsResponseManager extends AbstractResponseManager
 
   public function __construct(
     private readonly ElapsedTimeStringFormatter $time_formatter,
-    private readonly ImageRepository $image_repository,
     private readonly UrlGeneratorInterface $url_generator,
     private readonly ParameterBagInterface $parameter_bag,
     TranslatorInterface $translator,
@@ -62,13 +60,13 @@ class ProjectsResponseManager extends AbstractResponseManager
    */
   public function createProjectDataResponse(Program|SpecialProgram $project, ?string $attributes): ProjectResponse
   {
-    $default_attributes = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
+    $default_attributes = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot', 'project_url'];
     $catroid_catty_hotfixes = ['tags', 'description', 'version', 'uploaded_at', 'download_url', 'filesize', 'not_for_kids'];
 
     if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = array_merge($default_attributes, $catroid_catty_hotfixes);
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'name', 'author', 'author_id', 'scratch_id', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded_at', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids', 'retention_days', 'retention_expiry'];
+      $attributes_list = ['id', 'name', 'author', 'author_id', 'scratch_id', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded_at', 'uploaded_string', 'screenshot', 'project_url', 'download_url', 'filesize', 'not_for_kids', 'retention_days', 'retention_expiry'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -168,12 +166,12 @@ class ProjectsResponseManager extends AbstractResponseManager
       }
     }
 
-    if (in_array('screenshot_large', $attributes_list, true)) {
-      $data['screenshot_large'] = $project->isExample() ? $this->image_repository->getAbsoluteWebPath($project->getId(), $project->getImageType(), false) : $this->project_manager->getScreenshotLarge($extraced_project->getId());
-    }
-
-    if (in_array('screenshot_small', $attributes_list, true)) {
-      $data['screenshot_small'] = $project->isExample() ? $this->image_repository->getAbsoluteWebPath($project->getId(), $project->getImageType(), false) : $this->project_manager->getScreenshotSmall($extraced_project->getId());
+    if (in_array('screenshot', $attributes_list, true)) {
+      // Example projects keep their fixed 80x80 image (no variants generated for those).
+      // Regular projects expose responsive AVIF/WebP variants.
+      $data['screenshot'] = $project->isExample()
+        ? null
+        : $this->project_manager->getScreenshotVariants($extraced_project->getId());
     }
 
     if (in_array('project_url', $attributes_list, true)) {
@@ -396,7 +394,10 @@ class ProjectsResponseManager extends AbstractResponseManager
     }
 
     if (in_array('featured_image', $attributes_list, true)) {
-      $data['featured_image'] = $this->image_repository->getAbsoluteWebPath($featured_project->getId(), $featured_project->getImageType(), true);
+      // TODO(#6628): wire FeaturedBanner uploads through ImageVariantGenerator;
+      // until then, expose null so clients render the placeholder instead of
+      // a stale single-URL image.
+      $data['featured_image'] = null;
     }
 
     if (in_array('url', $attributes_list, true) || in_array('project_url', $attributes_list, true)) {

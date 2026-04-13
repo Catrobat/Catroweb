@@ -4879,8 +4879,7 @@ components:
         user_id:
           type: string
         user_avatar:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/ImageVariants'
         parent_id:
           type: string
           nullable: true

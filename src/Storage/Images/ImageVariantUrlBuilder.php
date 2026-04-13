@@ -21,11 +21,11 @@ class ImageVariantUrlBuilder
   }
 
   /**
-   * @param string      $storageDir absolute filesystem directory that holds the variants (used only for mtime lookup)
-   * @param string      $publicPath public URL path prefix where the same files are served from (e.g. `resources/images/users/`)
-   * @param string      $basename   basename shared by every variant file
-   * @param int|null    $width      optional original-image width, for layout hints
-   * @param int|null    $height     optional original-image height, for layout hints
+   * @param string   $storageDir absolute filesystem directory that holds the variants (used only for mtime lookup)
+   * @param string   $publicPath public URL path prefix where the same files are served from (e.g. `resources/images/users/`)
+   * @param string   $basename   basename shared by every variant file
+   * @param int|null $width      optional original-image width, for layout hints
+   * @param int|null $height     optional original-image height, for layout hints
    */
   public function build(
     string $storageDir,

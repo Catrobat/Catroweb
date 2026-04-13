@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Storage;
 
+use App\Storage\Images\ImageVariantGenerator;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -34,8 +35,10 @@ class ScreenshotRepository
   /**
    * @throws \Exception
    */
-  public function __construct(ParameterBagInterface $parameter_bag)
-  {
+  public function __construct(
+    ParameterBagInterface $parameter_bag,
+    private readonly ImageVariantGenerator $image_variant_generator,
+  ) {
     /** @var string $screenshot_dir */
     $screenshot_dir = $parameter_bag->get('catrobat.screenshot.dir');
     /** @var string $screenshot_path */
@@ -108,6 +111,45 @@ class ScreenshotRepository
     $this->saveImagickScreenshot($screen, $id);
     $this->overwriteOriginalScreenshot($screen, $id);
     $screen->destroy();
+    $this->generateScreenshotVariants($filepath, $id);
+  }
+
+  public function getScreenshotDir(): string
+  {
+    return $this->screenshot_dir;
+  }
+
+  public function getScreenshotPublicPath(): string
+  {
+    return $this->screenshot_path;
+  }
+
+  public function getScreenshotVariantBasename(string $id): string
+  {
+    return 'screen_'.$id;
+  }
+
+  /**
+   * Best-effort generation of the AVIF/WebP variant set next to the legacy
+   * `screen_{id}.png`. Failures are non-fatal: the legacy PNG is the source
+   * of truth and the URL builder returns null URLs for missing variants so
+   * the client falls back to the placeholder.
+   */
+  private function generateScreenshotVariants(string $source_filepath, string $id): void
+  {
+    if (!is_file($source_filepath)) {
+      return;
+    }
+
+    try {
+      $this->image_variant_generator->generate(
+        $source_filepath,
+        $this->screenshot_dir,
+        $this->getScreenshotVariantBasename($id),
+      );
+    } catch (\Throwable) {
+      // swallow — covered by the legacy PNG fallback
+    }
   }
 
   /**

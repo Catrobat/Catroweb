@@ -82,11 +82,11 @@ class StudioCommentResponse
   /**
    * @SerializedName("user_avatar")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $user_avatar = null;
+  protected ?ImageVariants $user_avatar = null;
 
   /**
    * @SerializedName("parent_id")
@@ -231,7 +231,7 @@ class StudioCommentResponse
   /**
    * Gets user_avatar.
    */
-  public function getUserAvatar(): ?string
+  public function getUserAvatar(): ?ImageVariants
   {
     return $this->user_avatar;
   }
@@ -241,7 +241,7 @@ class StudioCommentResponse
    *
    * @return $this
    */
-  public function setUserAvatar(?string $user_avatar = null): self
+  public function setUserAvatar(?ImageVariants $user_avatar = null): self
   {
     $this->user_avatar = $user_avatar;
 
@@ -291,7 +291,7 @@ class StudioCommentResponse
   /**
    * Gets user_approved.
    */
-  public function getUserApproved(): ?bool
+  public function isUserApproved(): ?bool
   {
     return $this->user_approved;
   }

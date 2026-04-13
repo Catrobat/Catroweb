@@ -124,7 +124,7 @@ class ImageVariantGenerator
 
       if (ImageVariantLayout::FORMAT_AVIF === $format) {
         $clone->setImageCompressionQuality($this->avifQuality);
-        // AVIF defaults are fine for color; heif container is implicit.
+      // AVIF defaults are fine for color; heif container is implicit.
       } elseif (ImageVariantLayout::FORMAT_WEBP === $format) {
         $clone->setImageCompressionQuality($this->webpQuality);
         $clone->setOption('webp:method', '6');

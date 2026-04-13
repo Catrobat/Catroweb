@@ -13,7 +13,10 @@ use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
+use App\Storage\Images\ImageVariantUrlBuilder;
 use App\Studio\StudioManager;
+use App\User\UserAvatarService;
+use OpenAPI\Server\Model\ImageVariants;
 use OpenAPI\Server\Model\StudioActivityListResponse;
 use OpenAPI\Server\Model\StudioActivityResponse;
 use OpenAPI\Server\Model\StudioCommentListResponse;
@@ -45,6 +48,8 @@ class StudioResponseManager extends AbstractResponseManager
     private readonly RequestStack $request_stack,
     private readonly StudioManager $studio_manager,
     private readonly ProjectManager $project_manager,
+    private readonly ImageVariantUrlBuilder $image_variant_url_builder,
+    private readonly UserAvatarService $user_avatar_service,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -57,7 +62,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setDescription($studio->getDescription())
       ->setIsPublic($studio->isIsPublic())
       ->setEnableComments($studio->isAllowComments())
-      ->setImagePath($this->generateImagePath($studio))
+      ->setCover($this->generateCoverVariants($studio))
       ->setMembersCount($this->studio_manager->countStudioUsers($studio))
       ->setProjectsCount($this->studio_manager->countStudioProjects($studio))
       ->setActivitiesCount($this->studio_manager->countStudioActivities($studio))
@@ -143,7 +148,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setId($member->getId())
       ->setUserId($user->getId())
       ->setUsername($user->getUsername())
-      ->setAvatar($user->getAvatar())
+      ->setAvatar($this->user_avatar_service->getVariants($user))
       ->setRole($member->getRole())
       ->setStatus($member->getStatus())
       ->setJoinedAt($member->getCreatedOn())
@@ -185,7 +190,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setName($program->getName())
       ->setAddedBy($user->getUsername())
       ->setAddedAt($studioProject->getCreatedOn())
-      ->setScreenshotSmall(null !== $programId ? $this->project_manager->getScreenshotSmall($programId) : null)
+      ->setScreenshot(null !== $programId ? $this->project_manager->getScreenshotVariants($programId) : null)
       ->setAuthor($program->getUser()?->getUsername())
       ->setAuthorId($program->getUser()?->getId())
     ;
@@ -223,7 +228,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setMessage($comment->getText())
       ->setUsername($comment->getUsername())
       ->setUserId($user?->getId())
-      ->setUserAvatar($user?->getAvatar())
+      ->setUserAvatar($this->user_avatar_service->getVariants($user))
       ->setParentId($comment->getParentId())
       ->setReplyCount($this->studio_manager->countCommentReplies($comment->getId() ?? ''))
       ->setUserApproved($user?->isApproved() ?? false)
@@ -274,12 +279,15 @@ class StudioResponseManager extends AbstractResponseManager
   {
     $data = [];
     foreach ($projects as $project) {
-      $data[] = (new StudioUserProjectResponse())
+      $entry = (new StudioUserProjectResponse())
         ->setId($project['id'])
         ->setName($project['name'])
         ->setInStudio($project['in_studio'])
-        ->setScreenshotSmall($project['screenshot_small'])
       ;
+      if (null !== $project['id']) {
+        $entry->setScreenshot($this->project_manager->getScreenshotVariants($project['id']));
+      }
+      $data[] = $entry;
     }
 
     return (new StudioUserProjectsResponse())
@@ -318,7 +326,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setId($joinRequest->getId())
       ->setUserId($user?->getId())
       ->setUsername($user?->getUsername())
-      ->setAvatar($user?->getAvatar())
+      ->setAvatar($this->user_avatar_service->getVariants($user))
       ->setStatus($joinRequest->getStatus())
     ;
   }
@@ -340,15 +348,17 @@ class StudioResponseManager extends AbstractResponseManager
     );
   }
 
-  protected function generateImagePath(Studio $studio): string
+  protected function generateCoverVariants(Studio $studio): ?ImageVariants
   {
-    $assetPath = $studio->getCoverAssetPath();
-    if (in_array($assetPath, [null, '', '0'], true)) {
-      return '';
+    $cover_key = $studio->getCoverAssetPath();
+    if (null === $cover_key || '' === $cover_key) {
+      return null;
     }
 
-    $baseUrl = $this->request_stack->getCurrentRequest()?->getSchemeAndHttpHost() ?? '';
-
-    return $baseUrl.'/'.$assetPath;
+    return $this->image_variant_url_builder->build(
+      $this->studio_manager->getStudioCoverDir(),
+      $this->studio_manager->getStudioCoverPublicPath(),
+      $cover_key,
+    );
   }
 }

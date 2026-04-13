@@ -16,6 +16,7 @@ use App\Project\ProjectManager;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
 use App\User\Notification\NotificationManager;
+use App\User\UserAvatarService;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Api\CommentsApiInterface;
 use OpenAPI\Server\Model\CommentCreateRequest;
@@ -47,6 +48,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     private readonly RateLimiterFactory $commentBurstLimiter,
     private readonly RateLimiterFactory $commentDailyLimiter,
     private readonly TextSanitizer $textSanitizer,
+    private readonly UserAvatarService $user_avatar_service,
   ) {
   }
 
@@ -390,7 +392,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $user_info = new CommentUserInfo();
     $user_info->setId((string) $comment_data['user_id']);
     $user_info->setUsername((string) $comment_data['username']);
-    $user_info->setAvatar($comment_data['user_avatar'] ?? null);
+    $user_info->setAvatar($this->user_avatar_service->getVariants($comment_data['user'] ?? null));
     $user_info->setApproved((bool) ($comment_data['user_approved'] ?? false));
     $response->setUser($user_info);
 
@@ -407,7 +409,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       'is_reported' => $comment->getAutoHidden(),
       'upload_date' => $comment->getUploadDate(),
       'user_id' => $comment->getUser()?->getId(),
-      'user_avatar' => $comment->getUser()?->getAvatar(),
+      'user' => $comment->getUser(),
       'user_approved' => $comment->getUser()?->isApproved() ?? false,
       'parent_id' => $comment->getParentId(),
       'number_of_replies' => $reply_count,
