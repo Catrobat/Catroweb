@@ -4837,6 +4837,9 @@ components:
           nullable: true
         reply_count:
           type: integer
+        user_approved:
+          type: boolean
+          description: 'Whether the comment author is an approved (whitelisted) user'
         created_at:
           type: string
           format: date-time
