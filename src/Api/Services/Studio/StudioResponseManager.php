@@ -323,9 +323,23 @@ class StudioResponseManager extends AbstractResponseManager
     ;
   }
 
-  public function addStudioLocationToHeaders(array &$responseHeaders, Studio $studio): void
+  /**
+   * For 201 Created responses. Emits a `Location` header per HTTP semantics.
+   */
+  public function addStudioCreatedLocationToHeaders(array &$responseHeaders, Studio $studio): void
   {
     $responseHeaders['Location'] = $this->createStudioLocation($studio);
+  }
+
+  /**
+   * For 200 OK responses. Emits `Content-Location` (descriptive metadata)
+   * instead of `Location` — PHP's CGI/FastCGI SAPI rewrites a response with
+   * `200 + Location` into `302 Found`, which breaks client-side fetches that
+   * then follow the redirect to an HTML page and fail JSON parsing.
+   */
+  public function addStudioContentLocationToHeaders(array &$responseHeaders, Studio $studio): void
+  {
+    $responseHeaders['Content-Location'] = $this->createStudioLocation($studio);
   }
 
   protected function createStudioLocation(Studio $studio): string

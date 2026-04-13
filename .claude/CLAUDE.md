@@ -181,6 +181,12 @@ Always use `--using-cache=no` on generated OpenAPI files. CI runs without cache 
 # Then rebuild Docker container if using Docker
 ```
 
+### Never set `Location` on a 2xx non-201 response
+
+PHP's CGI/FastCGI SAPI rewrites `200 OK + Location: ...` into `302 Found`, even though the framework set status 200. This silently breaks client-side `fetch()` that tries `response.json()` after following the redirect to an HTML page. Symfony's PHP built-in server (cli-server SAPI) doesn't do this rewrite, so dev works while prod is broken.
+
+Use `Content-Location` for descriptive metadata on 2xx non-201 responses. Keep `Location` only on `201 Created`.
+
 ### PHP-CS-Fixer: Multiple Files
 
 Run on each file separately: `bin/php-cs-fixer fix file1 && bin/php-cs-fixer fix file2`
