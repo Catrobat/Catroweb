@@ -55,27 +55,11 @@ class UserAvatarService
       return null;
     }
 
-    $key = $this->getAvatarKey($user);
+    $key = $user->getAvatarKey();
     if (null === $key || '' === $key) {
       return null;
     }
 
     return $this->url_builder->build($this->storage_dir, $this->public_path, $key);
-  }
-
-  /**
-   * Future-proof accessor: today the entity does not yet expose an
-   * `avatar_key` field — that lands together with the avatar migration in
-   * a follow-up PR. Centralising the lookup here means only this method
-   * needs to change once the column is added.
-   */
-  private function getAvatarKey(User $user): ?string
-  {
-    if (method_exists($user, 'getAvatarKey')) {
-      /** @var ?string $key */
-      return $user->getAvatarKey();
-    }
-
-    return null;
   }
 }

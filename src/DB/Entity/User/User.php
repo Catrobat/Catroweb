@@ -46,8 +46,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
   protected string $id;
 
+  /**
+   * @deprecated Kept for the transitional release while
+   *             {@see \App\System\Commands\MigrateAvatarsCommand} backfills
+   *             {@see self::$avatar_key}. Drop in a follow-up migration once
+   *             every row has an avatar_key (or null) and the data URI field
+   *             is no longer read by any caller.
+   */
   #[ORM\Column(type: Types::TEXT, nullable: true)]
   protected ?string $avatar = null;
+
+  /**
+   * Basename key for the responsive avatar variant set on disk.
+   * Files live under `public/resources/images/users/{avatar_key}-{variant}@{dpr}x.{format}`.
+   */
+  #[ORM\Column(name: 'avatar_key', type: Types::STRING, length: 200, nullable: true)]
+  protected ?string $avatar_key = null;
 
   /**
    * Programs owned by this user.
@@ -305,6 +319,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   public function setAvatar(?string $avatar): User
   {
     $this->avatar = $avatar;
+
+    return $this;
+  }
+
+  public function getAvatarKey(): ?string
+  {
+    return $this->avatar_key;
+  }
+
+  public function setAvatarKey(?string $avatar_key): User
+  {
+    $this->avatar_key = $avatar_key;
 
     return $this;
   }
