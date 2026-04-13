@@ -82,15 +82,13 @@ class StudioProjectResponse
   protected ?\DateTime $added_at = null;
 
   /**
-   * Path to the project thumbnail.
+   * @SerializedName("screenshot")
    *
-   * @SerializedName("screenshot_small")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $screenshot_small = null;
+  protected ?ImageVariants $screenshot = null;
 
   /**
    * Username of the project author.
@@ -181,7 +179,7 @@ class StudioProjectResponse
       $this->name = array_key_exists('name', $data) ? $data['name'] : $this->name;
       $this->added_by = array_key_exists('added_by', $data) ? $data['added_by'] : $this->added_by;
       $this->added_at = array_key_exists('added_at', $data) ? $data['added_at'] : $this->added_at;
-      $this->screenshot_small = array_key_exists('screenshot_small', $data) ? $data['screenshot_small'] : $this->screenshot_small;
+      $this->screenshot = array_key_exists('screenshot', $data) ? $data['screenshot'] : $this->screenshot;
       $this->author = array_key_exists('author', $data) ? $data['author'] : $this->author;
       $this->author_id = array_key_exists('author_id', $data) ? $data['author_id'] : $this->author_id;
       $this->downloads = array_key_exists('downloads', $data) ? $data['downloads'] : $this->downloads;
@@ -277,23 +275,21 @@ class StudioProjectResponse
   }
 
   /**
-   * Gets screenshot_small.
+   * Gets screenshot.
    */
-  public function getScreenshotSmall(): ?string
+  public function getScreenshot(): ?ImageVariants
   {
-    return $this->screenshot_small;
+    return $this->screenshot;
   }
 
   /**
-   * Sets screenshot_small.
-   *
-   * @param string|null $screenshot_small Path to the project thumbnail
+   * Sets screenshot.
    *
    * @return $this
    */
-  public function setScreenshotSmall(?string $screenshot_small = null): self
+  public function setScreenshot(?ImageVariants $screenshot = null): self
   {
-    $this->screenshot_small = $screenshot_small;
+    $this->screenshot = $screenshot;
 
     return $this;
   }

@@ -125,15 +125,13 @@ class NotificationResponse
   protected ?string $project_name = null;
 
   /**
-   * Avatar of the user who caused the notification.
-   *
    * @SerializedName("avatar")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $avatar = null;
+  protected ?ImageVariants $avatar = null;
 
   /**
    * Id of the remixed project.
@@ -361,7 +359,7 @@ class NotificationResponse
   /**
    * Gets avatar.
    */
-  public function getAvatar(): ?string
+  public function getAvatar(): ?ImageVariants
   {
     return $this->avatar;
   }
@@ -369,11 +367,9 @@ class NotificationResponse
   /**
    * Sets avatar.
    *
-   * @param string|null $avatar Avatar of the user who caused the notification
-   *
    * @return $this
    */
-  public function setAvatar(?string $avatar = null): self
+  public function setAvatar(?ImageVariants $avatar = null): self
   {
     $this->avatar = $avatar;
 

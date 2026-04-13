@@ -98,11 +98,11 @@ class FeaturedProjectResponse
   /**
    * @SerializedName("featured_image")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $featured_image = null;
+  protected ?ImageVariants $featured_image = null;
 
   /**
    * Constructor.
@@ -245,7 +245,7 @@ class FeaturedProjectResponse
   /**
    * Gets featured_image.
    */
-  public function getFeaturedImage(): ?string
+  public function getFeaturedImage(): ?ImageVariants
   {
     return $this->featured_image;
   }
@@ -255,7 +255,7 @@ class FeaturedProjectResponse
    *
    * @return $this
    */
-  public function setFeaturedImage(?string $featured_image = null): self
+  public function setFeaturedImage(?ImageVariants $featured_image = null): self
   {
     $this->featured_image = $featured_image;
 

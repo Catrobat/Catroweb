@@ -3335,6 +3335,70 @@ components:
 
   schemas:
     ##############################################
+    # Shared Image Schemas
+    ###
+
+    ImageVariantSet:
+      type: object
+      description: |
+        A set of URLs for one logical image width (e.g. thumb/card/detail) in
+        modern formats and device-pixel ratios. Clients should prefer AVIF
+        and fall back to WebP. URLs are nullable when a given format is not
+        available (e.g. AVIF when the encoder is missing).
+      properties:
+        avif_1x:
+          type: string
+          format: uri
+          nullable: true
+          description: 'AVIF encoded at 1x device-pixel ratio'
+          example: 'https://share.catrob.at/resources/images/users/abc-thumb@1x.avif'
+        avif_2x:
+          type: string
+          format: uri
+          nullable: true
+          description: 'AVIF encoded at 2x device-pixel ratio (retina)'
+        webp_1x:
+          type: string
+          format: uri
+          nullable: true
+          description: 'WebP encoded at 1x device-pixel ratio'
+        webp_2x:
+          type: string
+          format: uri
+          nullable: true
+          description: 'WebP encoded at 2x device-pixel ratio (retina)'
+
+    ImageVariants:
+      type: object
+      description: |
+        Responsive image variants shared by studio covers, user avatars and
+        project screenshots. Each property is an {@see ImageVariantSet}
+        intended for a specific render context:
+          * `thumb`   ~ 96 CSS px  (comment/list avatars, small cards)
+          * `card`    ~ 320 CSS px (project tiles, search cards, profile hero)
+          * `detail`  ~ 960 CSS px (project detail, studio header, featured banner)
+        Build a `<picture>` with `<source type="image/avif">` then
+        `<source type="image/webp">` and a final `<img>` fallback to the WebP
+        1x URL, using `srcset` `"url 1x, url2 2x"` per set.
+      properties:
+        thumb:
+          $ref: '#/components/schemas/ImageVariantSet'
+        card:
+          $ref: '#/components/schemas/ImageVariantSet'
+        detail:
+          $ref: '#/components/schemas/ImageVariantSet'
+        width:
+          type: integer
+          nullable: true
+          description: 'Original image width in pixels (useful as a CLS-safe layout hint)'
+          example: 1920
+        height:
+          type: integer
+          nullable: true
+          description: 'Original image height in pixels (useful as a CLS-safe layout hint)'
+          example: 1080
+
+    ##############################################
     # Default Schemas
     ###
 
@@ -3792,10 +3856,8 @@ components:
           type: string
           example: 'Catroweb'
           description: 'Nickname of the user'
-        picture:
-          type: string
-          example: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ…'
-          description: 'The profile picture of the user in data URI scheme.'
+        avatar:
+          $ref: '#/components/schemas/ImageVariants'
         about:
           type: string
           example: 'My name is Irving and I love developing games with Pocket Code!'
@@ -4095,8 +4157,7 @@ components:
           type: string
           example: 'Catrobat'
         featured_image:
-          type: string
-          example: 'https://share.catrob.at/resources/featured/featured_999.png'
+          $ref: '#/components/schemas/ImageVariants'
 
     ProjectsCategoryListResponse:
       type: object
@@ -4216,12 +4277,8 @@ components:
           type: string
           description: 'A localised text interpretation of the uploaded timestamp'
           example: 11 minutes ago
-        screenshot_large:
-          type: string
-          example: 'https://share.catrob.at/resources/screenshots/screen_1234abcd-12ab-12ab-12ab-123456abcdef.png'
-        screenshot_small:
-          type: string
-          example: 'https://share.catrob.at/resources/thumbnails/screen_1234abcd-12ab-12ab-12ab-123456abcdef.png'
+        screenshot:
+          $ref: '#/components/schemas/ImageVariants'
         project_url:
           type: string
           description: 'The url to the project on our official share community platform'
@@ -4377,9 +4434,7 @@ components:
           example: 'Awesome Game'
           description: 'Name of the project for which the notification is about'
         avatar:
-          type: string
-          example: 'https://share.catrob.at/pocketcode/images/default/avatar_default.png'
-          description: 'Avatar of the user who caused the notification'
+          $ref: '#/components/schemas/ImageVariants'
         remixed_project:
           description: 'Id of the remixed project'
           allOf:
@@ -4559,10 +4614,8 @@ components:
           example: true
           default: true
           description: This flag enables or disabled the possibility to add comments to the studio
-        image_path:
-          type: string
-          example: https://share.catrob.at/resources/studio/panda.png
-          description: Cover image
+        cover:
+          $ref: '#/components/schemas/ImageVariants'
         members_count:
           type: integer
           example: 5
@@ -4626,8 +4679,7 @@ components:
         username:
           type: string
         avatar:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/ImageVariants'
         role:
           type: string
           enum:
@@ -4673,10 +4725,8 @@ components:
         added_at:
           type: string
           format: date-time
-        screenshot_small:
-          type: string
-          nullable: true
-          description: Path to the project thumbnail
+        screenshot:
+          $ref: '#/components/schemas/ImageVariants'
         author:
           type: string
           nullable: true
@@ -4762,9 +4812,8 @@ components:
           type: string
         in_studio:
           type: boolean
-        screenshot_small:
-          type: string
-          nullable: true
+        screenshot:
+          $ref: '#/components/schemas/ImageVariants'
 
     StudioUserProjectsResponse:
       type: object
@@ -4883,8 +4932,7 @@ components:
         username:
           type: string
         avatar:
-          type: string
-          nullable: true
+          $ref: '#/components/schemas/ImageVariants'
         status:
           type: string
           enum:
@@ -4985,8 +5033,8 @@ components:
                 type: string
               description:
                 type: string
-              image_path:
-                type: string
+              cover:
+                $ref: '#/components/schemas/ImageVariants'
               members_count:
                 type: integer
               projects_count:
@@ -5111,9 +5159,7 @@ components:
           description: 'Username of the user'
           example: 'Catrobat'
         avatar:
-          type: string
-          description: 'URL to the users avatar image'
-          example: 'https://share.catrob.at/images/default/avatar_default.png'
+          $ref: '#/components/schemas/ImageVariants'
 
     ######################################################
     # Comment Schemas
@@ -5131,9 +5177,7 @@ components:
           description: 'Username of the user'
           example: 'Catrobat'
         avatar:
-          type: string
-          description: 'URL to the users avatar image'
-          example: 'https://share.catrob.at/images/default/avatar_default.png'
+          $ref: '#/components/schemas/ImageVariants'
         approved:
           type: boolean
           description: 'Whether the user is approved/whitelisted by admins'
@@ -5239,10 +5283,7 @@ components:
           type: string
           example: 'john_doe'
         avatar:
-          type: string
-          nullable: true
-          format: uri
-          description: 'User avatar URL'
+          $ref: '#/components/schemas/ImageVariants'
         project_count:
           type: integer
           description: 'Number of public projects'
