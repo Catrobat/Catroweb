@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Storage\Images;
 
-use App\Api\OpenAPI\Server\Model\ImageVariantSet as ImageVariantSetModel;
-use App\Api\OpenAPI\Server\Model\ImageVariants as ImageVariantsModel;
 use App\Storage\FileHelper;
+use OpenAPI\Server\Model\ImageVariants as ImageVariantsModel;
+use OpenAPI\Server\Model\ImageVariantSet as ImageVariantSetModel;
 use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
