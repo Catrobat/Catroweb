@@ -1389,14 +1389,16 @@ class DataFixturesContext implements Context
       if (array_key_exists('id', $config)) {
         // Create comment directly to ensure the forced ID is applied to the comment
         // (addCommentToStudio creates an activity first, which would consume the UUID)
-        \assert(null !== $user);
+        if (!$user instanceof User) {
+          throw new \RuntimeException('User not found: '.$config['user']);
+        }
         MyUuidGenerator::setNextValue($config['id']);
         $comment = new UserComment();
         $comment->setStudio($studio);
         $comment->setText($config['comment']);
         $comment->setUser($user);
         $comment->setUploadDate(new \DateTime());
-        $comment->setUsername($user->getUsername());
+        $comment->setUsername($user->getUsername() ?? $config['user']);
         $this->getManager()->persist($comment);
       } else {
         $studio_comment = $studioManager->addCommentToStudio($user, $studio, $config['comment']);
