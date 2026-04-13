@@ -47,13 +47,10 @@ Feature:
     And I wait for the element "#name" to contain "project 1"
     Then I should see "project 1"
     And I wait for the element "#change-project-thumbnail-button" to be visible
+    But the element ".text-img-upload-success" should not exist
     When I attach the avatar "logo.png" to "project-screenshot-upload-field"
-    And I wait for AJAX to finish
-    And I wait for the element ".text-img-upload-success" to be visible
-    Then I wait for the element ".text-img-upload-success" to contain "Your image was uploaded successfully!"
-    And I wait 3100 milliseconds
-    Then the element ".text-img-upload-success" should not be visible
+    Then I wait for the element "#upload-image-spinner" to appear and if so to disappear again
+    And I wait for the element "#share-snackbar-label" to contain "Your image was uploaded successfully!"
     When I attach the avatar "galaxy.jpg" to "project-screenshot-upload-field"
-    And I wait for AJAX to finish
-    And I wait for the element ".text-img-upload-success" to be visible
-    Then I wait for the element ".text-img-upload-success" to contain "Your image was uploaded successfully!"
+    Then I wait for the element "#upload-image-spinner" to appear and if so to disappear again
+    And I wait for the element "#share-snackbar-label" to contain "Your image was uploaded successfully!"

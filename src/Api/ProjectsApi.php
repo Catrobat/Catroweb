@@ -18,6 +18,8 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\CodeView\CodeTreeBuildException;
 use App\Project\Event\ProjectDownloadEvent;
+use App\Project\Remix\RemixManager;
+use App\Storage\ScreenshotRepository;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\CodeViewResponse;
 use OpenAPI\Server\Model\ExtensionsResponse;
@@ -41,10 +43,15 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   use KeysetCursorTrait;
   use RateLimitTrait;
 
+  private const string SCRATCH_THUMBNAIL_URL_TEMPLATE = 'https://cdn2.scratch.mit.edu/get_image/project/%s_140x140.png';
+  private const string IMAGE_NOT_AVAILABLE_URL = '/images/default/not_available.png';
+
   public function __construct(
     private readonly ProjectsApiFacade $facade,
     private readonly ReactionsApiFacade $reactions_facade,
     private readonly CodeTreeBuilder $code_tree_builder,
+    private readonly RemixManager $remix_manager,
+    private readonly ScreenshotRepository $screenshot_repository,
     private readonly RateLimiterFactory $uploadDailyLimiter,
     private readonly RateLimiterFactory $reactionBurstLimiter,
     private readonly RateLimiterFactory $downloadBurstLimiter,
@@ -802,5 +809,47 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $responseCode = Response::HTTP_OK;
 
     return $this->facade->getResponseManager()->createCodeStatisticsResponse($stats);
+  }
+
+  #[\Override]
+  public function projectsIdRemixGraphGet(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null {
+    $project = $this->facade->getLoader()->findProjectByID($id, true);
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $remix_graph = $this->remix_manager->getRenderableRemixGraph($id);
+
+    $nodes = array_map(function (array $node): array {
+      if (!$node['available']) {
+        $node['thumbnailUrl'] = self::IMAGE_NOT_AVAILABLE_URL;
+
+        return $node;
+      }
+
+      if ('scratch' === $node['source']) {
+        $node['thumbnailUrl'] = sprintf(self::SCRATCH_THUMBNAIL_URL_TEMPLATE, $node['projectId']);
+
+        return $node;
+      }
+
+      $node['thumbnailUrl'] = '/'.$this->screenshot_repository->getThumbnailWebPath($node['projectId']);
+
+      return $node;
+    }, $remix_graph['nodes']);
+
+    $responseCode = Response::HTTP_OK;
+    $responseHeaders['Cache-Control'] = 'private, max-age=300';
+
+    return [
+      ...$remix_graph,
+      'nodes' => $nodes,
+    ];
   }
 }

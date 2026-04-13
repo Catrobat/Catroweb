@@ -340,6 +340,21 @@ interface ProjectsApiInterface
   ): array|object|null;
 
   /**
+   * Operation projectsIdRemixGraphGet.
+   *
+   * Get remix graph of a project
+   *
+   * @param string $id              (required)
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function projectsIdRemixGraphGet(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation projectsPost.
    *
    * Upload a catrobat project

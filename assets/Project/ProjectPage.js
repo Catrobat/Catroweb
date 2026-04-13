@@ -16,11 +16,11 @@ import { ProjectEditorNavigation } from './ProjectEditorNavigation'
 import { ProjectEditor } from './ProjectEditor'
 import { ProjectEditorTextField } from './ProjectEditorTextField'
 import { ProjectName } from './ProjectName'
-import ProjectApi from '../Api/ProjectApi'
 import { ProjectEditorTextFieldModel } from './ProjectEditorTextFieldModel'
 import { ProjectEditorModel } from './ProjectEditorModel'
-import MessageDialogs from '../Components/MessageDialogs'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
+import { prepareImageFileForUpload, readFileAsDataUrl } from '../Components/ImageUploadHelper'
 import './RemixGraphInline'
 
 require('./ProjectPage.scss')
@@ -658,38 +658,60 @@ function initComponents(data, earlyInits) {
 
 function initProjectScreenshotUpload() {
   const addChangeListenerToFileInput = function (input) {
-    input.onchange = () => {
-      document.getElementById('upload-image-spinner').classList.remove('d-none')
+    input.onchange = async () => {
+      const spinner = document.getElementById('upload-image-spinner')
+      spinner.classList.remove('d-none')
 
-      const reader = new window.FileReader()
-      reader.onerror = () => {
-        document.getElementById('upload-image-spinner').classList.add('d-none')
-        MessageDialogs.showErrorMessage(projectConfiguration.messages.screenshotInvalid)
+      const file = input.files?.[0]
+      const processed = await prepareImageFileForUpload(file)
+      if (!processed.ok) {
+        spinner.classList.add('d-none')
+        showSnackbar(
+          '#share-snackbar',
+          projectConfiguration.messages.screenshotInvalid,
+          SnackbarDuration.error,
+        )
+        return
       }
-      reader.onload = (event) => {
-        const image = event.currentTarget.result // base64 data url
-        const projectApi = new ProjectApi()
-        projectApi.updateProject(
-          projectElement.dataset.projectId,
-          { screenshot: image },
-          function () {
-            const imageElement = document.getElementById('project-thumbnail-big')
-            if (imageElement.src.includes('?')) {
-              imageElement.src += '&x=' + new Date().getTime()
-            } else {
-              imageElement.src += '?x=' + new Date().getTime()
-            }
-            document.querySelector('.text-img-upload-success').classList.remove('d-none')
-            setTimeout(function () {
-              document.querySelector('.text-img-upload-success').classList.add('d-none')
-            }, 3000)
-          },
-          function () {
-            document.getElementById('upload-image-spinner').classList.add('d-none')
+
+      try {
+        const image = await readFileAsDataUrl(processed.file)
+        const response = await window.fetch(
+          `${baseUrl}/api/projects/${encodeURIComponent(projectElement.dataset.projectId)}`,
+          {
+            method: 'PATCH',
+            credentials: 'same-origin',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ screenshot: image }),
           },
         )
+
+        if (response.status !== 204) {
+          showSnackbar(
+            '#share-snackbar',
+            projectConfiguration.messages.screenshotInvalid,
+            SnackbarDuration.error,
+          )
+          return
+        }
+
+        const imageElement = document.getElementById('project-thumbnail-big')
+        if (imageElement) {
+          const cacheBuster = 'x=' + new Date().getTime()
+          const hasQuery = imageElement.src.includes('?')
+          imageElement.src = `${imageElement.src}${hasQuery ? '&' : '?'}${cacheBuster}`
+        }
+
+        showSnackbar('#share-snackbar', projectConfiguration.messages.imageUploadSuccess)
+      } catch {
+        showSnackbar(
+          '#share-snackbar',
+          projectConfiguration.messages.screenshotInvalid,
+          SnackbarDuration.error,
+        )
+      } finally {
+        spinner.classList.add('d-none')
       }
-      reader.readAsDataURL(input.files[0])
     }
   }
   const changeButton = document.getElementById('change-project-thumbnail-button')

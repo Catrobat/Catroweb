@@ -1080,6 +1080,26 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  '/projects/{id}/remix-graph':
+    get:
+      tags:
+        - 'Projects'
+      summary: 'Get remix graph of a project'
+      description: 'Returns remix graph metadata with nodes and directed edges. Each node includes a thumbnailUrl resolved by source and availability.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemixGraphResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+
   '/projects/{id}/reaction':
     parameters:
       - $ref: '#/components/parameters/Locale'
@@ -4817,6 +4837,9 @@ components:
           nullable: true
         reply_count:
           type: integer
+        user_approved:
+          type: boolean
+          description: 'Whether the comment author is an approved (whitelisted) user'
         created_at:
           type: string
           format: date-time
@@ -5595,3 +5618,102 @@ components:
           type: string
           description: 'Identifier of the rubric version used to compute the scores'
           example: 'rubric_2021_v1'
+
+    RemixGraphResponse:
+      type: object
+      required:
+        - projectId
+        - projectCount
+        - scratchCount
+        - remixCount
+        - nodes
+        - edges
+      properties:
+        projectId:
+          type: string
+          description: 'ID of the project for which the remix graph was requested'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        projectCount:
+          type: integer
+          description: 'Number of Catrobat projects in the connected remix graph'
+          example: 7
+        scratchCount:
+          type: integer
+          description: 'Number of Scratch projects in the connected remix graph'
+          example: 2
+        remixCount:
+          type: integer
+          description: 'Number of remixes in the connected Catrobat graph'
+          example: 6
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemixGraphNode'
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemixGraphEdge'
+
+    RemixGraphNode:
+      type: object
+      required:
+        - id
+        - projectId
+        - source
+        - available
+        - name
+        - username
+        - thumbnailUrl
+      properties:
+        id:
+          type: string
+          description: 'Graph node id composed of source and project id'
+          example: 'catrobat_1234abcd-12ab-12ab-12ab-123456abcdef'
+        projectId:
+          type: string
+          description: 'Project ID in its source namespace'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        source:
+          type: string
+          enum:
+            - 'catrobat'
+            - 'scratch'
+          description: 'Source platform of the node'
+        available:
+          type: boolean
+          description: 'Whether project metadata is available on the server'
+          example: true
+        name:
+          type: string
+          nullable: true
+          description: 'Project title, if available'
+          example: 'My Remix'
+        username:
+          type: string
+          nullable: true
+          description: 'Username of the project owner, if available'
+          example: 'Catrobat'
+        thumbnailUrl:
+          type: string
+          description: 'Thumbnail URL resolved from project source and availability'
+          example: '/images/default/thumbnail.png'
+
+    RemixGraphEdge:
+      type: object
+      required:
+        - id
+        - from
+        - to
+      properties:
+        id:
+          type: string
+          description: 'Unique edge id'
+          example: 'edge_0'
+        from:
+          type: string
+          description: 'Source node id'
+          example: 'catrobat_1234abcd-12ab-12ab-12ab-123456abcdef'
+        to:
+          type: string
+          description: 'Target node id'
+          example: 'catrobat_2234abcd-12ab-12ab-12ab-123456abcdef'
