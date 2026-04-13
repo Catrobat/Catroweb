@@ -72,6 +72,17 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'color' => 'bg-green',
             ],
           ],
+          [
+            'class' => 'col-lg-3 col-xs-6',
+            'position' => 'bottom',
+            'type' => 'sonata.admin.block.stats',
+            'settings' => [
+              'code' => 'admin.block.studios.overview',
+              'icon' => 'fas fa-object-group',
+              'text' => 'All studios',
+              'color' => 'bg-purple',
+            ],
+          ],
         ],
         'groups' => [
           'sonata.admin.group.featured_banners' => [
@@ -102,6 +113,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.users.overview',
               'admin.block.users.consent_log',
               'admin.block.users.data_report',
+            ],
+          ],
+          'sonata.admin.group.studios' => [
+            'label' => 'Studios',
+            'translation_domain' => 'catroweb',
+            'icon' => '<i class="fa fa-object-group"></i>',
+            'items' => [
+              'admin.block.studios.overview',
             ],
           ],
           'sonata.admin.group.comments' => [
