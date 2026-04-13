@@ -30,11 +30,15 @@ use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use OpenAPI\Server\Model\ImageVariants;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class StudioManager
 {
+  protected readonly LoggerInterface $logger;
+
   public function __construct(
     protected EntityManagerInterface $entity_manager,
     protected StudioRepository $studio_repository,
@@ -48,7 +52,9 @@ class StudioManager
     protected NotificationManager $notification_manager,
     protected ImageVariantGenerator $image_variant_generator,
     protected ImageVariantUrlBuilder $image_variant_url_builder,
+    ?LoggerInterface $logger = null,
   ) {
+    $this->logger = $logger ?? new NullLogger();
   }
 
   public function getStudioCoverDir(): string
@@ -392,6 +398,16 @@ class StudioManager
 
     try {
       $this->image_variant_generator->generate($source_copy, $studio_dir, $basename);
+    } catch (\Throwable $e) {
+      // Variant generation must not block studio creation — the key is
+      // still persisted, the URL builder returns null URLs for any variant
+      // that is missing on disk, and the client falls back to the default
+      // thumbnail. A warning makes the failure observable.
+      $this->logger->warning('Studio cover variant generation failed for {key}: {error}', [
+        'key' => $basename,
+        'error' => $e->getMessage(),
+        'exception' => $e,
+      ]);
     } finally {
       if (is_file($source_copy)) {
         @unlink($source_copy);
