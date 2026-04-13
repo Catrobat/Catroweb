@@ -74,7 +74,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     $response = $this->facade->getResponseManager()->createStudioResponseWithUserContext($studio, $user);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-    $this->facade->getResponseManager()->addStudioLocationToHeaders($responseHeaders, $studio);
+    $this->facade->getResponseManager()->addStudioContentLocationToHeaders($responseHeaders, $studio);
 
     return $response;
   }
@@ -124,7 +124,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     $response = $this->facade->getResponseManager()->createStudioResponse($studio);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-    $this->facade->getResponseManager()->addStudioLocationToHeaders($responseHeaders, $studio);
+    $this->facade->getResponseManager()->addStudioCreatedLocationToHeaders($responseHeaders, $studio);
 
     return $response;
   }
@@ -176,7 +176,7 @@ class StudiosApi extends AbstractApiController implements StudiosApiInterface
     $response = $this->facade->getResponseManager()->createStudioResponse($studio);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-    $this->facade->getResponseManager()->addStudioLocationToHeaders($responseHeaders, $studio);
+    $this->facade->getResponseManager()->addStudioContentLocationToHeaders($responseHeaders, $studio);
 
     return $response;
   }
