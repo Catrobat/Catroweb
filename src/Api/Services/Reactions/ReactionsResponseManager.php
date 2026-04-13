@@ -7,7 +7,7 @@ namespace App\Api\Services\Reactions;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\User;
-use App\Storage\ImageRepository;
+use App\User\UserAvatarService;
 use OpenAPI\Server\Model\ReactionSummaryResponse;
 use OpenAPI\Server\Model\ReactionUserEntry;
 use OpenAPI\Server\Model\ReactionUserInfo;
@@ -22,7 +22,7 @@ class ReactionsResponseManager extends AbstractResponseManager
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     CacheItemPoolInterface $cache,
-    private readonly ImageRepository $image_repository,
+    private readonly UserAvatarService $user_avatar_service,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -79,14 +79,11 @@ class ReactionsResponseManager extends AbstractResponseManager
       $user_data['types']
     ));
 
-    $avatar = $user->getAvatar();
-    $avatar_url = null !== $avatar ? $this->image_repository->getAbsoluteWebPath($avatar, '', true) : '';
-
     $entry = new ReactionUserEntry();
     $entry->setUser(new ReactionUserInfo([
       'id' => $user->getId() ?? '',
       'username' => $user->getUsername(),
-      'avatar' => $avatar_url,
+      'avatar' => $this->user_avatar_service->getVariants($user),
     ]));
     $entry->setTypes(array_values($types));
 

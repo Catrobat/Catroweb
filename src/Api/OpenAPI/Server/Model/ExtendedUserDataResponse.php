@@ -64,15 +64,13 @@ class ExtendedUserDataResponse
   protected ?string $username = null;
 
   /**
-   * The profile picture of the user in data URI scheme.
+   * @SerializedName("avatar")
    *
-   * @SerializedName("picture")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $picture = null;
+  protected ?ImageVariants $avatar = null;
 
   /**
    * An introduction of the user.
@@ -194,7 +192,7 @@ class ExtendedUserDataResponse
     if (is_array($data)) {
       $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->username = array_key_exists('username', $data) ? $data['username'] : $this->username;
-      $this->picture = array_key_exists('picture', $data) ? $data['picture'] : $this->picture;
+      $this->avatar = array_key_exists('avatar', $data) ? $data['avatar'] : $this->avatar;
       $this->about = array_key_exists('about', $data) ? $data['about'] : $this->about;
       $this->currently_working_on = array_key_exists('currently_working_on', $data) ? $data['currently_working_on'] : $this->currently_working_on;
       $this->projects = array_key_exists('projects', $data) ? $data['projects'] : $this->projects;
@@ -253,23 +251,21 @@ class ExtendedUserDataResponse
   }
 
   /**
-   * Gets picture.
+   * Gets avatar.
    */
-  public function getPicture(): ?string
+  public function getAvatar(): ?ImageVariants
   {
-    return $this->picture;
+    return $this->avatar;
   }
 
   /**
-   * Sets picture.
-   *
-   * @param string|null $picture the profile picture of the user in data URI scheme
+   * Sets avatar.
    *
    * @return $this
    */
-  public function setPicture(?string $picture = null): self
+  public function setAvatar(?ImageVariants $avatar = null): self
   {
-    $this->picture = $picture;
+    $this->avatar = $avatar;
 
     return $this;
   }

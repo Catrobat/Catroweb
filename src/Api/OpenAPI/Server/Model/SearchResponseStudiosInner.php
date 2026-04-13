@@ -71,13 +71,13 @@ class SearchResponseStudiosInner
   protected ?string $description = null;
 
   /**
-   * @SerializedName("image_path")
+   * @SerializedName("cover")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $image_path = null;
+  protected ?ImageVariants $cover = null;
 
   /**
    * @SerializedName("members_count")
@@ -108,7 +108,7 @@ class SearchResponseStudiosInner
       $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->name = array_key_exists('name', $data) ? $data['name'] : $this->name;
       $this->description = array_key_exists('description', $data) ? $data['description'] : $this->description;
-      $this->image_path = array_key_exists('image_path', $data) ? $data['image_path'] : $this->image_path;
+      $this->cover = array_key_exists('cover', $data) ? $data['cover'] : $this->cover;
       $this->members_count = array_key_exists('members_count', $data) ? $data['members_count'] : $this->members_count;
       $this->projects_count = array_key_exists('projects_count', $data) ? $data['projects_count'] : $this->projects_count;
     }
@@ -177,21 +177,21 @@ class SearchResponseStudiosInner
   }
 
   /**
-   * Gets image_path.
+   * Gets cover.
    */
-  public function getImagePath(): ?string
+  public function getCover(): ?ImageVariants
   {
-    return $this->image_path;
+    return $this->cover;
   }
 
   /**
-   * Sets image_path.
+   * Sets cover.
    *
    * @return $this
    */
-  public function setImagePath(?string $image_path = null): self
+  public function setCover(?ImageVariants $cover = null): self
   {
-    $this->image_path = $image_path;
+    $this->cover = $cover;
 
     return $this;
   }

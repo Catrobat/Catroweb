@@ -7,6 +7,7 @@ namespace App\Api\Services\Followers;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
+use App\User\UserAvatarService;
 use OpenAPI\Server\Model\FollowerResponse;
 use OpenAPI\Server\Model\FollowersListResponse;
 
@@ -14,6 +15,7 @@ class FollowersResponseManager extends AbstractResponseManager
 {
   public function __construct(
     private readonly ProjectManager $project_manager,
+    private readonly UserAvatarService $user_avatar_service,
   ) {
   }
 
@@ -51,7 +53,7 @@ class FollowersResponseManager extends AbstractResponseManager
     return new FollowerResponse([
       'id' => $user->getId(),
       'username' => $user->getUsername(),
-      'avatar' => $user->getAvatar(),
+      'avatar' => $this->user_avatar_service->getVariants($user),
       'project_count' => $this->project_manager->countPublicUserProjects($user->getId()),
       'follower_count' => $user->getFollowers()->count(),
       'is_following' => $is_following,

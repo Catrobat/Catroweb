@@ -170,6 +170,7 @@ class ProjectManagerTest extends TestCase
       $security,
       $malware_scanner,
       $this->createStub(ProjectDeduplicationService::class),
+      $this->createStub(\App\Storage\Images\ImageVariantUrlBuilder::class),
     );
   }
 

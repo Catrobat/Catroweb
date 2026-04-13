@@ -75,11 +75,11 @@ class StudioJoinRequestResponse
   /**
    * @SerializedName("avatar")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $avatar = null;
+  protected ?ImageVariants $avatar = null;
 
   /**
    * @SerializedName("status")
@@ -175,7 +175,7 @@ class StudioJoinRequestResponse
   /**
    * Gets avatar.
    */
-  public function getAvatar(): ?string
+  public function getAvatar(): ?ImageVariants
   {
     return $this->avatar;
   }
@@ -185,7 +185,7 @@ class StudioJoinRequestResponse
    *
    * @return $this
    */
-  public function setAvatar(?string $avatar = null): self
+  public function setAvatar(?ImageVariants $avatar = null): self
   {
     $this->avatar = $avatar;
 

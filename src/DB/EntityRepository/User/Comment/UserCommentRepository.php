@@ -103,7 +103,6 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.uploadDate as upload_date',
         'c.parent_id as parent_id',
         'cu.id as user_id',
-        'cu.avatar as user_avatar',
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
       ->where('c.program = :program')
@@ -129,7 +128,6 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.uploadDate as upload_date',
         'c.parent_id as parent_id',
         'cu.id as user_id',
-        'cu.avatar as user_avatar',
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
       ->where('c.program = :program')
@@ -182,7 +180,6 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.uploadDate as upload_date',
         'c.parent_id as parent_id',
         'cu.id as user_id',
-        'cu.avatar as user_avatar',
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
       ->where('c.parent_id = :parentId')
@@ -238,7 +235,6 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.parent_id as parent_id',
         'cp.id as program_id',
         'cu.id as user_id',
-        'cu.avatar as user_avatar',
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies'
       )
@@ -259,8 +255,7 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.text',
         'c.is_deleted',
         'c.uploadDate as upload_date',
-        'cu.id as user_id',
-        'cu.avatar as user_avatar'
+        'cu.id as user_id'
       )
       ->where('c.parent_id = :parentId')
       ->setParameter('parentId', $parent_comment_id)

@@ -23,6 +23,7 @@ use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Event\ProjectBeforeInsertEvent;
 use App\Project\Event\ProjectBeforePersistEvent;
 use App\Security\Malware\MalwareScanner;
+use App\Storage\Images\ImageVariantUrlBuilder;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
@@ -31,6 +32,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use OpenAPI\Server\Model\ImageVariants;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -60,6 +62,7 @@ class ProjectManager
     protected Security $security,
     private readonly MalwareScanner $malware_scanner,
     private readonly ProjectDeduplicationService $deduplication_service,
+    private readonly ImageVariantUrlBuilder $image_variant_url_builder,
   ) {
   }
 
@@ -669,6 +672,24 @@ class ProjectManager
   public function getScreenshotSmall(string $id): string
   {
     return $this->urlHelper->getAbsoluteUrl('/').$this->screenshot_repository->getThumbnailWebPath($id);
+  }
+
+  /**
+   * Responsive screenshot variants for the given project. Returns null when
+   * neither legacy PNG nor the variant set exists yet (e.g. a brand-new
+   * project before the first upload completes).
+   */
+  public function getScreenshotVariants(string $id): ?ImageVariants
+  {
+    if ('' === $id) {
+      return null;
+    }
+
+    return $this->image_variant_url_builder->build(
+      $this->screenshot_repository->getScreenshotDir(),
+      $this->screenshot_repository->getScreenshotPublicPath(),
+      $this->screenshot_repository->getScreenshotVariantBasename($id),
+    );
   }
 
   /**

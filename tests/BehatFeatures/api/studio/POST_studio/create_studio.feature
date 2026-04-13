@@ -130,7 +130,6 @@ Feature: Creating a new studio
         "description": "with description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": "",
         "members_count": 1,
         "projects_count": 0,
         "activities_count": 1,
@@ -159,7 +158,11 @@ Feature: Creating a new studio
         "description": "with description",
         "is_public": false,
         "enable_comments": false,
-        "image_path": "REGEX_STRING_WILDCARD-New-Studio.jpg",
+        "cover": {
+          "thumb": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "card": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"}
+        },
         "members_count": 1,
         "projects_count": 0,
         "activities_count": 1,

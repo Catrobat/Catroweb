@@ -77,6 +77,8 @@ class StudioManagerTest extends KernelTestCase
     $studio_program_repository = $this->entity_manager->getRepository(Program::class);
     $parameter_bag = $this->createStub(ParameterBagInterface::class);
     $notification_manager = $this->createStub(NotificationManager::class);
+    $image_variant_generator = $this->createStub(\App\Storage\Images\ImageVariantGenerator::class);
+    $image_variant_url_builder = $this->createStub(\App\Storage\Images\ImageVariantUrlBuilder::class);
     $this->object = new StudioManager(
       $this->entity_manager,
       $studio_repository,
@@ -88,6 +90,8 @@ class StudioManagerTest extends KernelTestCase
       $studio_program_repository,
       $parameter_bag,
       $notification_manager,
+      $image_variant_generator,
+      $image_variant_url_builder,
     );
     $user_manager = $container->get(UserManager::class);
     \assert($user_manager instanceof UserManager);

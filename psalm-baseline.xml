@@ -123,11 +123,8 @@
   <file src="src/Api/Services/Projects/ProjectsResponseManager.php">
     <PossiblyNullArgument>
       <code><![CDATA[$extraced_project->getId()]]></code>
-      <code><![CDATA[$extraced_project->getId()]]></code>
       <code><![CDATA[$featured_project->getId()]]></code>
       <code><![CDATA[$featured_project->getProgram()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
-      <code><![CDATA[$project->getId()]]></code>
       <code><![CDATA[$project->getProgram()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
