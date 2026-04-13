@@ -21,7 +21,7 @@
      data-trans-replies="{{ 'studio.details.comments.replies'|trans({}, 'catroweb')|default('replies') }}"
      data-trans-deleted-comment="{{ 'project.deletedComment'|trans({}, 'catroweb')|default('Deleted') }}"
      data-trans-report="{{ 'project.report'|trans({}, 'catroweb')|default('Report') }}"
-     data-trans-report-title="{{ 'moderation.report.title'|trans({}, 'catroweb')|default('Report') }}"
+     data-trans-report-title="{{ 'moderation.report.title'|trans({'%content_type%': 'comment'}, 'catroweb') }}"
      data-trans-report-submit="{{ 'moderation.report.submit'|trans({}, 'catroweb')|default('Submit Report') }}"
      data-trans-report-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel') }}"
      data-trans-report-success="{{ 'moderation.report.success'|trans({}, 'catroweb')|default('Your report has been submitted.') }}"
