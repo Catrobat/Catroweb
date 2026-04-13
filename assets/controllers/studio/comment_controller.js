@@ -89,13 +89,8 @@ export default class extends Controller {
     const dateStr = rawDate ? new Date(rawDate).toLocaleString('en-GB') : ''
 
     const isOwnComment = this.isLoggedInValue && comment.username === this.userNameValue
-    const isDeleted = comment.is_deleted
-    const userApproved = comment.user_approved
     const showReport =
-      (this.userRoleValue === 'admin' || !this.isLoggedInValue || !isOwnComment) &&
-      !isDeleted &&
-      !userApproved &&
-      !this.isMinorValue
+      !isOwnComment && !comment.is_deleted && !comment.user_approved && !this.isMinorValue
 
     const reportBtn = showReport
       ? `<a id="comment-report-button-${escapeAttr(String(comment.id))}"
