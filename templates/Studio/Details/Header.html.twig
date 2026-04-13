@@ -39,12 +39,19 @@
      data-trans-join-requests-title="{{ 'studio.details.join_requests.title'|trans({}, 'catroweb') }}"
 >
 
+  {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
   <div id="studio-img-container" class="studio-detail__header__img__container">
-    <img src="{{ studio.coverAssetPath ? asset(studio.coverAssetPath) : asset('images/default/thumbnail.png') }}"
-         class="img-fluid"
-         alt="{{ studio.name }}"
-         loading="eager"
-         fetchpriority="high">
+    {{ responsive_image.picture(
+      studio_cover_variants(studio),
+      studio.name,
+      {
+        class: 'img-fluid',
+        sizes: '(min-width: 768px) 1024px, 100vw',
+        loading: 'eager',
+        fetchpriority: 'high',
+        fallback: asset('images/default/thumbnail.png'),
+      },
+    ) }}
     <form class="studio-detail__header__details__button--upload-image" id="std-header-form"
           enctype="multipart/form-data" method="post" style="display: none">
       <span class="material-icons">photo_camera</span>

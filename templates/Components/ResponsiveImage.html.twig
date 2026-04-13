@@ -1,0 +1,58 @@
+{#
+  Responsive <picture> for an OpenAPI ImageVariants payload.
+
+  Usage:
+    {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
+    {{ responsive_image.picture(
+      studio_cover_variants(studio),
+      studio.name,
+      {class: 'img-fluid', sizes: '(min-width: 768px) 60vw, 100vw', fallback: asset('images/default/thumbnail.png')}
+    ) }}
+
+  Browsers pick the first <source> they understand:
+    1. AVIF (~20–30 % smaller than WebP)
+    2. WebP (universal modern fallback)
+    3. <img src> — the WebP 1x URL or the caller-supplied fallback.
+
+  Passing `null` for `variants` renders the fallback <img> only, so the macro is
+  safe to use even before the avatar/screenshot data migration has run.
+#}
+{% macro picture(variants, alt, options = {}) %}
+  {% set klass = options.class|default('') %}
+  {% set sizes = options.sizes|default('') %}
+  {% set loading = options.loading|default('lazy') %}
+  {% set fetchpriority = options.fetchpriority|default(null) %}
+  {% set fallback = options.fallback|default(null) %}
+  {% set width = options.width|default(variants and variants.width ? variants.width : null) %}
+  {% set height = options.height|default(variants and variants.height ? variants.height : null) %}
+  {% set img_src = variants and variants.card ? variants.card.webp_1x|default(variants.card.webp_2x|default(fallback)) : fallback %}
+  <picture>
+    {% if variants %}
+      {% for fmt_type, set_suffix in {'image/avif': 'avif', 'image/webp': 'webp'} %}
+        {% for variant_name in ['detail', 'card', 'thumb'] %}
+          {% set set = attribute(variants, variant_name) %}
+          {% if set %}
+            {% set u1 = attribute(set, set_suffix ~ '_1x') %}
+            {% set u2 = attribute(set, set_suffix ~ '_2x') %}
+            {% if u1 or u2 %}
+              {% set srcset_parts = [] %}
+              {% if u1 %}{% set srcset_parts = srcset_parts|merge([u1 ~ ' 1x']) %}{% endif %}
+              {% if u2 %}{% set srcset_parts = srcset_parts|merge([u2 ~ ' 2x']) %}{% endif %}
+              <source type="{{ fmt_type }}" srcset="{{ srcset_parts|join(', ') }}"{% if sizes %} sizes="{{ sizes }}"{% endif %} media="(max-width: {{ variant_name == 'thumb' ? 192 : (variant_name == 'card' ? 640 : 9999) }}px)">
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+    <img
+      src="{{ img_src }}"
+      alt="{{ alt }}"
+      {% if klass %}class="{{ klass }}"{% endif %}
+      {% if width %}width="{{ width }}"{% endif %}
+      {% if height %}height="{{ height }}"{% endif %}
+      loading="{{ loading }}"
+      decoding="async"
+      {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %}
+    >
+  </picture>
+{% endmacro %}
