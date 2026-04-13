@@ -90,8 +90,7 @@ class ApiContext implements Context
     'downloads',
     'flavor',
     'uploaded_string',
-    'screenshot_large',
-    'screenshot_small',
+    'screenshot',
     'project_url',
     'tags',
     'description',
@@ -107,7 +106,7 @@ class ApiContext implements Context
    */
   private array $full_project_structure = ['id', 'name', 'author', 'author_id', 'description', 'credits', 'version', 'views',
     'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'extensions', 'uploaded_at', 'uploaded_string',
-    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids',
+    'screenshot', 'project_url', 'download_url', 'filesize', 'not_for_kids',
     'retention_days', 'retention_expiry', ];
 
   /**
@@ -118,7 +117,7 @@ class ApiContext implements Context
   /**
    * @var string[]
    */
-  private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following', 'is_verified', 'scratch_username', 'is_followed_by_viewer'];
+  private array $full_user_structure = ['id', 'username', 'avatar', 'about', 'currently_working_on', 'projects', 'followers', 'following', 'is_verified', 'scratch_username', 'is_followed_by_viewer'];
 
   /**
    * @var string[]
@@ -2168,7 +2167,7 @@ class ApiContext implements Context
         'project_id' => $featured_project->getProgram()->getId(),
         'project_url' => $project_url,
         'url' => $url,
-        'featured_image' => 'http://localhost/resources_test/featured/featured_'.$featured_project->getId().'.jpg',
+        'featured_image' => null,
       ];
       $projects[] = $result;
     }
@@ -2269,21 +2268,14 @@ class ApiContext implements Context
       'uploaded_string' => static function ($uploaded_string): void {
         Assert::assertIsString($uploaded_string, 'uploaded_string is not a string!');
       },
-      'screenshot_large' => static function ($screenshot_large): void {
-        Assert::assertIsString($screenshot_large);
-        Assert::assertMatchesRegularExpression(
-          '/http:\/\/localhost\/((resources_test\/screenshots\/screen_\d+)|(images\/default\/screenshot))\.png/',
-          $screenshot_large,
-          'screenshot_large is not a valid URL!'
-        );
-      },
-      'screenshot_small' => static function ($screenshot_small): void {
-        Assert::assertIsString($screenshot_small);
-        Assert::assertMatchesRegularExpression(
-          '/http:\/\/localhost\/((resources_test\/thumbnails\/screen_\d+)|(images\/default\/thumbnail))\.png/',
-          $screenshot_small,
-          'screenshot_small is not a valid URL!'
-        );
+      'screenshot' => static function ($screenshot): void {
+        // ImageVariants object, or null when the project has no screenshot yet.
+        Assert::assertTrue(null === $screenshot || is_array($screenshot), 'screenshot must be null or an ImageVariants object');
+        if (null !== $screenshot) {
+          Assert::assertArrayHasKey('thumb', $screenshot);
+          Assert::assertArrayHasKey('card', $screenshot);
+          Assert::assertArrayHasKey('detail', $screenshot);
+        }
       },
       'project_url' => static function ($project_url): void {
         Assert::assertIsString($project_url);
@@ -2348,9 +2340,10 @@ class ApiContext implements Context
         Assert::assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
       },
       'featured_image' => static function ($featured_image): void {
-        Assert::assertIsString($featured_image);
-        Assert::assertMatchesRegularExpression('/http:\/\/localhost\/resources_test\/featured\/featured_\d+\.(jpg|png)/',
-          $featured_image);
+        // TODO(#6628 follow-up): featured banners currently return null until the
+        // ImageRepository is routed through ImageVariantGenerator. When wired, this
+        // should assert the ImageVariants object shape (like screenshot/avatar).
+        Assert::assertTrue(null === $featured_image || is_array($featured_image));
       },
     ];
 
@@ -2417,9 +2410,14 @@ class ApiContext implements Context
       'email' => static function ($email): void {
         Assert::assertIsString($email);
       },
-      'picture' => static function ($picture): void {
-        Assert::assertIsString($picture);
-        Assert::assertMatchesRegularExpression('/^data:image\/([^;]+);base64,([A-Za-z0-9\/+=]+)$/', $picture, 'Invalid user picture data-URL');
+      'avatar' => static function ($avatar): void {
+        // ImageVariants object, or null when the user has no filesystem-backed avatar yet.
+        Assert::assertTrue(null === $avatar || is_array($avatar), 'avatar must be null or an ImageVariants object');
+        if (null !== $avatar) {
+          Assert::assertArrayHasKey('thumb', $avatar);
+          Assert::assertArrayHasKey('card', $avatar);
+          Assert::assertArrayHasKey('detail', $avatar);
+        }
       },
       'about' => static function ($about): void {
         Assert::assertIsString($about);
@@ -2550,16 +2548,12 @@ class ApiContext implements Context
     foreach ($this->default_project_structure as $key) {
       if (array_key_exists($key, $stored_project)) {
         Assert::assertEquals($stored_project[$key], $returned_project[$key]);
-      } elseif ('screenshot_large' === $key) {
-        Assert::assertContains($this->pathWithoutParam($returned_project[$key]),
-          ['http://localhost/resources/screenshots/screen_'.$returned_project['id'].'.png',
-            'http://localhost/resources_test/screenshots/screen_'.$returned_project['id'].'.png',
-            'http://localhost/images/default/screenshot.png', ]);
-      } elseif ('screenshot_small' === $key) {
-        Assert::assertContains($this->pathWithoutParam($returned_project[$key]),
-          ['http://localhost/resources/thumbnails/screen_'.$returned_project['id'].'.png',
-            'http://localhost/resources_test/thumbnails/screen_'.$returned_project['id'].'.png',
-            'http://localhost/images/default/thumbnail.png', ]);
+      } elseif ('screenshot' === $key) {
+        // screenshot is an ImageVariants object (or null for brand-new projects).
+        Assert::assertTrue(
+          null === $returned_project['screenshot'] || is_array($returned_project['screenshot']),
+          'screenshot must be null or an ImageVariants object'
+        );
       }
     }
   }
@@ -2580,12 +2574,10 @@ class ApiContext implements Context
     foreach ($this->default_project_structure as $key) {
       if (array_key_exists($key, $stored_project)) {
         Assert::assertEquals($stored_project[$key], $example_project[$key]);
-      } elseif ('screenshot_large' === $key) {
-        Assert::assertContains($this->pathWithoutParam($example_project[$key]),
-          ['http://localhost/resources/example/example_'.$example_project['id'].'.jpg']);
-      } elseif ('screenshot_small' === $key) {
-        Assert::assertContains($this->pathWithoutParam($example_project[$key]),
-          ['http://localhost/resources/example/example_'.$example_project['id'].'.jpg']);
+      } elseif ('screenshot' === $key) {
+        // Example projects currently expose null until FeaturedBanner / example images
+        // are routed through the variant generator (tracked as a follow-up to #6628).
+        Assert::assertNull($example_project['screenshot']);
       }
     }
   }

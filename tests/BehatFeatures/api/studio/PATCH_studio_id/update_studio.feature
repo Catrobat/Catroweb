@@ -134,7 +134,7 @@ Feature: Updating an existing studio
         "description": "Updated description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": "",
+        "cover": null,
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
@@ -160,7 +160,7 @@ Feature: Updating an existing studio
         "description": "Updated description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": "",
+        "cover": null,
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
@@ -185,7 +185,7 @@ Feature: Updating an existing studio
         "description": "cool description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": "",
+        "cover": null,
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
@@ -214,7 +214,13 @@ Feature: Updating an existing studio
         "description": "Updated description",
         "is_public": false,
         "enable_comments": false,
-        "image_path": "REGEX_STRING_WILDCARDUpdated-Studio.jpg",
+        "cover": {
+          "thumb": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "card": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "width": null,
+          "height": null
+        },
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
@@ -238,14 +244,20 @@ Feature: Updating an existing studio
         "description": "cool description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": "REGEX_STRING_WILDCARD1725019200-Cool-Studio.jpg",
+        "cover": {
+          "thumb": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "card": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "width": null,
+          "height": null
+        },
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
         "comments_count": 0
       }
     """
-    And the uploaded file "resources/images/studio/1725019200-Cool-Studio.jpg" exists
+    And the uploaded file "resources/images/studio/1725019200-Cool-Studio-detail@2x.webp" exists
     Given I use a valid JWT Bearer token for "StudioAdmin"
     And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
@@ -261,15 +273,21 @@ Feature: Updating an existing studio
         "description": "cool description",
         "is_public": true,
         "enable_comments": true,
-        "image_path": "REGEX_STRING_WILDCARD1756558800-Cool-Studio.jpg",
+        "cover": {
+          "thumb": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "card": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
+          "width": null,
+          "height": null
+        },
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
         "comments_count": 0
       }
     """
-    And the uploaded file "resources/images/studio/1725019200-Cool-Studio.jpg" does not exist
-    And the uploaded file "resources/images/studio/1756558800-Cool-Studio.jpg" exists
+    And the uploaded file "resources/images/studio/1725019200-Cool-Studio-detail@2x.webp" does not exist
+    And the uploaded file "resources/images/studio/1756558800-Cool-Studio-detail@2x.webp" exists
 
   Scenario: Only allow valid images as file upload
     Given I use a valid JWT Bearer token for "StudioAdmin"
