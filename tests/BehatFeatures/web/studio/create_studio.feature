@@ -67,8 +67,7 @@ Feature: There is a dedicated page to create a new studio
     And I wait for the page to be loaded
     When  I fill in "name" with "My random studio"
     And  I fill in "description" with "with a specific description"
-    # toggle switches
-    And  I click "#studio-is-public"
+    # toggle comments off; keep is_public on so the redirected details page does not fall into the anonymous-visitor login guard
     And  I click "#studio-enable-comments"
     # image
     And I attach the avatar "logo.png" to "studio-file-input"
@@ -79,7 +78,7 @@ Feature: There is a dedicated page to create a new studio
       | key             | value                       |
       | description     | with a specific description |
       | is_enabled      | true                        |
-      | is_public       | false                       |
+      | is_public       | true                        |
       | enable_comments | false                       |
       | cover_path      | My-random-studio            |
     And I should see "My random studio"

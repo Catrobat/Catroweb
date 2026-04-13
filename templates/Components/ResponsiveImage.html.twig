@@ -26,14 +26,16 @@
   {% set fallback = options.fallback|default(null) %}
   {% set width = options.width|default(variants and variants.width ? variants.width : null) %}
   {% set height = options.height|default(variants and variants.height ? variants.height : null) %}
-  {% set img_src = variants and variants.card ? variants.card.webp_1x|default(variants.card.webp_2x|default(fallback)) : fallback %}
+  {# Generated OpenAPI model uses camelCase getters (getWebp1x, getAvif2x, …); accessors below match that. #}
+  {% set card = variants ? variants.card : null %}
+  {% set img_src = card ? (card.webp1x|default(card.webp2x|default(fallback))) : fallback %}
   <picture>
     {% if variants %}
       {% for fmt_type, set_suffix in {'image/avif': 'avif', 'image/webp': 'webp'} %}
         {% set set = variants.detail %}
         {% if set %}
-          {% set u1 = attribute(set, set_suffix ~ '_1x') %}
-          {% set u2 = attribute(set, set_suffix ~ '_2x') %}
+          {% set u1 = attribute(set, set_suffix ~ '1x') %}
+          {% set u2 = attribute(set, set_suffix ~ '2x') %}
           {% if u1 or u2 %}
             {% set srcset_parts = [] %}
             {% if u1 %}{% set srcset_parts = srcset_parts|merge([u1 ~ ' 1x']) %}{% endif %}
