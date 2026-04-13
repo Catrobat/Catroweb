@@ -10,20 +10,19 @@ import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle
 import Swal from 'sweetalert2'
 import MessageDialogs from '../Components/MessageDialogs'
 import { ApiDeleteFetch, ApiFetch, ApiPatchFetch } from '../Api/ApiHelper'
+import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import VerifyAccountHandler from './VerifyAccountHandler'
 import { escapeHtml } from '../Components/HtmlEscape'
 import { achievementBadgeHtml } from './AchievementBadge'
 import { ProjectList } from '../Project/ProjectList'
+import { prepareImageFileForUpload, readFileAsDataUrl } from '../Components/ImageUploadHelper'
 
 require('./Profile.scss')
 require('./Achievements.scss')
 require('../Project/ProjectsBrowse.scss')
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (
-    window.location.search.includes('profileChangeSuccess') ||
-    window.location.search.includes('profilePictureChangeSuccess')
-  ) {
+  if (window.location.search.includes('profileChangeSuccess')) {
     window.history.replaceState(
       undefined,
       document.title,
@@ -78,6 +77,17 @@ class OwnProfile {
     this.initDeleteAccount()
   }
 
+  async updateProfilePicture(pictureDataUrl) {
+    const response = await window.fetch(this.baseUrl + '/api/users/me', {
+      method: 'PATCH',
+      credentials: 'same-origin',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({ picture: pictureDataUrl }),
+    })
+
+    return response.status === 204
+  }
+
   updateProfile(data, successCallback, finalCallback) {
     new ApiPatchFetch(
       this.baseUrl + '/api/users/me',
@@ -117,7 +127,7 @@ class OwnProfile {
 
   addProfilePictureChangeListenerToInput(input) {
     const self = this
-    input.addEventListener('change', () => {
+    input.addEventListener('change', async () => {
       let loadingSpinner
       if (this.avatarElement) {
         const loadingSpinnerTemplate = document.getElementById(
@@ -128,8 +138,8 @@ class OwnProfile {
           loadingSpinnerTemplate.children[0].className,
         )[0]
       }
-      const reader = new window.FileReader()
-      reader.onerror = () => {
+
+      const removeLoadingSpinner = () => {
         if (
           loadingSpinner &&
           self.avatarElement &&
@@ -138,28 +148,45 @@ class OwnProfile {
           this.avatarElement.removeChild(loadingSpinner)
           loadingSpinner = null
         }
-        MessageDialogs.showErrorMessage(myProfileConfiguration.messages.profilePictureInvalid)
       }
-      reader.onload = (event) => {
-        const image = event.currentTarget.result // base64 data url
-        self.updateProfile(
-          { picture: image },
-          function () {
-            window.location.search = 'profilePictureChangeSuccess'
-          },
-          function () {
-            if (
-              loadingSpinner &&
-              self.avatarElement &&
-              loadingSpinner.parentElement === self.avatarElement
-            ) {
-              self.avatarElement.removeChild(loadingSpinner)
-              loadingSpinner = null
-            }
-          },
+
+      const processed = await prepareImageFileForUpload(input.files?.[0])
+      if (!processed.ok) {
+        removeLoadingSpinner()
+        showSnackbar(
+          '#share-snackbar',
+          myProfileConfiguration.messages.profilePictureInvalid,
+          SnackbarDuration.error,
         )
+        return
       }
-      reader.readAsDataURL(input.files[0])
+
+      try {
+        const image = await readFileAsDataUrl(processed.file)
+        const wasSuccessful = await self.updateProfilePicture(image)
+        if (!wasSuccessful) {
+          showSnackbar(
+            '#share-snackbar',
+            myProfileConfiguration.messages.profilePictureInvalid,
+            SnackbarDuration.error,
+          )
+          return
+        }
+
+        const avatarImage = self.avatarElement?.querySelector('.profile__basic-info__avatar__img')
+        if (avatarImage) {
+          avatarImage.src = image
+        }
+        showSnackbar('#share-snackbar', myProfileConfiguration.messages.imageUploadSuccess)
+      } catch {
+        showSnackbar(
+          '#share-snackbar',
+          myProfileConfiguration.messages.profilePictureInvalid,
+          SnackbarDuration.error,
+        )
+      } finally {
+        removeLoadingSpinner()
+      }
     })
   }
 
