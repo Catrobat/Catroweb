@@ -1378,10 +1378,6 @@ class DataFixturesContext implements Context
     \assert(null !== $studioManager);
 
     foreach ($table->getHash() as $config) {
-      if (array_key_exists('id', $config)) {
-        MyUuidGenerator::setNextValue($config['id']);
-      }
-
       if (array_key_exists('studio_name', $config)) {
         $studio = $studioManager->findStudioByName($config['studio_name']);
       } else {
@@ -1390,8 +1386,21 @@ class DataFixturesContext implements Context
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
 
-      $studio_comment = $studioManager->addCommentToStudio($user, $studio, $config['comment']);
-      $this->getManager()->persist($studio_comment);
+      if (array_key_exists('id', $config)) {
+        // Create comment directly to ensure the forced ID is applied to the comment
+        // (addCommentToStudio creates an activity first, which would consume the UUID)
+        MyUuidGenerator::setNextValue($config['id']);
+        $comment = new UserComment();
+        $comment->setStudio($studio);
+        $comment->setText($config['comment']);
+        $comment->setUser($user);
+        $comment->setUploadDate(new \DateTime());
+        $comment->setUsername($user->getUsername());
+        $this->getManager()->persist($comment);
+      } else {
+        $studio_comment = $studioManager->addCommentToStudio($user, $studio, $config['comment']);
+        $this->getManager()->persist($studio_comment);
+      }
     }
 
     $this->getManager()->flush();

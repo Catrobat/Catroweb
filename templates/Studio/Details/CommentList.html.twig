@@ -20,6 +20,19 @@
      data-trans-rate-limited="{{ 'moderation.studio.rate_limited'|trans({}, 'catroweb')|default('You are posting comments too quickly.') }}"
      data-trans-replies="{{ 'studio.details.comments.replies'|trans({}, 'catroweb')|default('replies') }}"
      data-trans-deleted-comment="{{ 'project.deletedComment'|trans({}, 'catroweb')|default('Deleted') }}"
+     data-trans-report="{{ 'project.report'|trans({}, 'catroweb')|default('Report') }}"
+     data-trans-report-title="{{ 'moderation.report.title'|trans({}, 'catroweb')|default('Report') }}"
+     data-trans-report-submit="{{ 'moderation.report.submit'|trans({}, 'catroweb')|default('Submit Report') }}"
+     data-trans-report-cancel="{{ 'cancel'|trans({}, 'catroweb')|default('Cancel') }}"
+     data-trans-report-success="{{ 'moderation.report.success'|trans({}, 'catroweb')|default('Your report has been submitted.') }}"
+     data-trans-report-error="{{ 'moderation.report.error'|trans({}, 'catroweb')|default('Oops, that did not work. Please try again!') }}"
+     data-trans-report-duplicate="{{ 'moderation.report.duplicate'|trans({}, 'catroweb')|default('You have already reported this content.') }}"
+     data-trans-report-trust-too-low="{{ 'moderation.report.trust_too_low'|trans({}, 'catroweb')|default('Your account is too new to file reports.') }}"
+     data-trans-report-unverified="{{ 'moderation.report.unverified'|trans({}, 'catroweb')|default('Email verification required.') }}"
+     data-trans-report-suspended="{{ 'moderation.report.suspended'|trans({}, 'catroweb')|default('Your account has been suspended.') }}"
+     data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb')|default('You are submitting reports too quickly.') }}"
+     data-trans-report-placeholder="{{ 'moderation.report.placeholder'|trans({}, 'catroweb')|default('Please describe why you are reporting this...') }}"
+     data-path-login-url="{{ path('login', {theme: 'pocketcode'}) }}"
 >
   <div id="studio-comments" class="mt-3">
 

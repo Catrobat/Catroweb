@@ -107,6 +107,17 @@ class StudioCommentResponse
   protected ?int $reply_count = null;
 
   /**
+   * Whether the comment author is an approved (whitelisted) user.
+   *
+   * @SerializedName("user_approved")
+   *
+   * @Assert\Type("bool")
+   *
+   * @Type("bool")
+   */
+  protected ?bool $user_approved = null;
+
+  /**
    * @SerializedName("created_at")
    *
    * @Assert\Type("\DateTime"))
@@ -130,6 +141,7 @@ class StudioCommentResponse
       $this->user_avatar = array_key_exists('user_avatar', $data) ? $data['user_avatar'] : $this->user_avatar;
       $this->parent_id = array_key_exists('parent_id', $data) ? $data['parent_id'] : $this->parent_id;
       $this->reply_count = array_key_exists('reply_count', $data) ? $data['reply_count'] : $this->reply_count;
+      $this->user_approved = array_key_exists('user_approved', $data) ? $data['user_approved'] : $this->user_approved;
       $this->created_at = array_key_exists('created_at', $data) ? $data['created_at'] : $this->created_at;
     }
   }
@@ -272,6 +284,28 @@ class StudioCommentResponse
   public function setReplyCount(?int $reply_count = null): self
   {
     $this->reply_count = $reply_count;
+
+    return $this;
+  }
+
+  /**
+   * Gets user_approved.
+   */
+  public function getUserApproved(): ?bool
+  {
+    return $this->user_approved;
+  }
+
+  /**
+   * Sets user_approved.
+   *
+   * @param bool|null $user_approved Whether the comment author is an approved (whitelisted) user
+   *
+   * @return $this
+   */
+  public function setUserApproved(?bool $user_approved = null): self
+  {
+    $this->user_approved = $user_approved;
 
     return $this;
   }

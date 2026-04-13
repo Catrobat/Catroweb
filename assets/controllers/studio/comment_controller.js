@@ -88,6 +88,26 @@ export default class extends Controller {
     const rawDate = comment.created_at || comment.timestamp
     const dateStr = rawDate ? new Date(rawDate).toLocaleString('en-GB') : ''
 
+    const isOwnComment = this.isLoggedInValue && comment.username === this.userNameValue
+    const isDeleted = comment.is_deleted
+    const userApproved = comment.user_approved
+    const showReport =
+      (this.userRoleValue === 'admin' || !this.isLoggedInValue || !isOwnComment) &&
+      !isDeleted &&
+      !userApproved &&
+      !this.isMinorValue
+
+    const reportBtn = showReport
+      ? `<a id="comment-report-button-${escapeAttr(String(comment.id))}"
+            class="comment-report-button"
+            data-action="click->studio--comment#reportComment"
+            data-comment-id="${escapeAttr(String(comment.id))}"
+            data-bs-toggle="tooltip"
+            title="${escapeAttr(this.element.dataset.transReport || 'Report')}">
+          <i class="material-icons">report</i>
+        </a>`
+      : ''
+
     const deleteBtn = canDelete
       ? `<a class="comment-delete-button"
             data-action="click->studio--comment#confirmDeleteComment"
@@ -129,6 +149,7 @@ export default class extends Controller {
           </div>
           <div class="comment-actions d-flex align-items-center gap-2">
             ${replyInfo}
+            ${reportBtn}
             ${deleteBtn}
           </div>
         </div>
@@ -230,6 +251,50 @@ export default class extends Controller {
         SnackbarDuration.error,
       )
     }
+  }
+
+  reportComment(event) {
+    const commentId =
+      event.currentTarget.dataset.commentId ||
+      event.target.closest('[data-comment-id]')?.dataset.commentId
+
+    if (!commentId) {
+      return
+    }
+
+    const apiUrl = `/api/comments/${encodeURIComponent(commentId)}/report`
+
+    import('../../Moderation/ReportDialog').then(({ showReportDialog }) =>
+      showReportDialog({
+        contentType: 'comment',
+        contentId: commentId,
+        apiUrl,
+        loginUrl: this.element.dataset.pathLoginUrl || '/app/login',
+        isLoggedIn: this.isLoggedInValue,
+        translations: {
+          title: this.element.dataset.transReportTitle || 'Report',
+          submit: this.element.dataset.transReportSubmit || 'Submit Report',
+          cancel: this.element.dataset.transReportCancel || 'Cancel',
+          success: this.element.dataset.transReportSuccess || 'Your report has been submitted.',
+          error:
+            this.element.dataset.transReportError || 'Oops, that did not work. Please try again!',
+          duplicate:
+            this.element.dataset.transReportDuplicate || "You've already reported this content.",
+          trustTooLow:
+            this.element.dataset.transReportTrustTooLow ||
+            'Your account is too new to file reports.',
+          unverified: this.element.dataset.transReportUnverified || 'Email verification required.',
+          suspended:
+            this.element.dataset.transReportSuspended || 'Your account has been suspended.',
+          rateLimited:
+            this.element.dataset.transReportRateLimited ||
+            "You're submitting reports too quickly. Please wait and try again.",
+          notePlaceholder:
+            this.element.dataset.transReportPlaceholder ||
+            'Please describe why you are reporting this...',
+        },
+      }),
+    )
   }
 
   async confirmDeleteComment(event) {

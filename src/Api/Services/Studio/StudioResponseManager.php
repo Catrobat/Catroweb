@@ -226,6 +226,7 @@ class StudioResponseManager extends AbstractResponseManager
       ->setUserAvatar($user?->getAvatar())
       ->setParentId($comment->getParentId())
       ->setReplyCount($this->studio_manager->countCommentReplies($comment->getId() ?? ''))
+      ->setUserApproved($user?->isApproved() ?? false)
       ->setCreatedAt($comment->getUploadDate())
     ;
   }
