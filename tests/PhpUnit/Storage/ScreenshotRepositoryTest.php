@@ -105,7 +105,8 @@ class ScreenshotRepositoryTest extends TestCase
         'catrobat.upload.temp.dir' => $this->tmp_dir,
         'catrobat.file.extract.dir' => $this->tmp_extract_dir,
         'catrobat.file.storage.dir' => $this->tmp_zip_dir,
-      ])
+      ]),
+      new ImageVariantGenerator(),
     );
   }
 
@@ -121,7 +122,8 @@ class ScreenshotRepositoryTest extends TestCase
         'catrobat.upload.temp.dir' => $this->tmp_dir,
         'catrobat.file.extract.dir' => $this->tmp_extract_dir,
         'catrobat.file.storage.dir' => $this->tmp_zip_dir,
-      ])
+      ]),
+      new ImageVariantGenerator(),
     );
   }
 

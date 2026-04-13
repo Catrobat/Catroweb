@@ -81,7 +81,7 @@ class UserAvatarService
       return null;
     }
 
-    $decoded = base64_decode((string) $matches[2], true);
+    $decoded = base64_decode($matches[2], true);
     if (false === $decoded) {
       return null;
     }

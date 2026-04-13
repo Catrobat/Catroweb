@@ -134,7 +134,6 @@ Feature: Updating an existing studio
         "description": "Updated description",
         "is_public": true,
         "enable_comments": true,
-        "cover": null,
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
@@ -160,7 +159,6 @@ Feature: Updating an existing studio
         "description": "Updated description",
         "is_public": true,
         "enable_comments": true,
-        "cover": null,
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
@@ -185,7 +183,6 @@ Feature: Updating an existing studio
         "description": "cool description",
         "is_public": true,
         "enable_comments": true,
-        "cover": null,
         "members_count": 2,
         "projects_count": 0,
         "activities_count": 2,
@@ -217,9 +214,7 @@ Feature: Updating an existing studio
         "cover": {
           "thumb": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
           "card": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
-          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
-          "width": null,
-          "height": null
+          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"}
         },
         "members_count": 2,
         "projects_count": 0,
@@ -247,9 +242,7 @@ Feature: Updating an existing studio
         "cover": {
           "thumb": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
           "card": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
-          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
-          "width": null,
-          "height": null
+          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"}
         },
         "members_count": 2,
         "projects_count": 0,
@@ -276,9 +269,7 @@ Feature: Updating an existing studio
         "cover": {
           "thumb": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
           "card": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
-          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"},
-          "width": null,
-          "height": null
+          "detail": {"avif_1x": "REGEX_STRING_WILDCARD", "avif_2x": "REGEX_STRING_WILDCARD", "webp_1x": "REGEX_STRING_WILDCARD", "webp_2x": "REGEX_STRING_WILDCARD"}
         },
         "members_count": 2,
         "projects_count": 0,

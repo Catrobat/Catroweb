@@ -1007,6 +1007,14 @@ class ApiContext implements Context
       $stored_project = $this->findProject($stored_projects, $returned_project['name']);
       foreach ($this->default_featured_project_structure as $key) {
         Assert::assertNotEmpty($stored_project);
+        if ('featured_image' === $key) {
+          // URLs embed a per-test timestamp; shape-check only.
+          Assert::assertTrue(
+            null === $returned_project['featured_image'] || is_array($returned_project['featured_image']),
+            'featured_image must be null or an ImageVariants object'
+          );
+          continue;
+        }
         Assert::assertEquals($returned_project[$key], $stored_project[$key]);
       }
     }
@@ -2537,11 +2545,6 @@ class ApiContext implements Context
     $user_agent = 'Catrobat/'.$lang_version.' '.$flavor.'/'.$app_version.' Platform/'.$platform.
       ' BuildType/'.$build_type.' Theme/'.$theme;
     $this->iUseTheUserAgent($user_agent);
-  }
-
-  private function pathWithoutParam(string $path): string
-  {
-    return strtok($path, '?') ?: '';
   }
 
   private function assertProjectsEqual(array $stored_project, array $returned_project): void

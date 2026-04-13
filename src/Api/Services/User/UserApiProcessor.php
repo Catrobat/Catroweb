@@ -33,10 +33,11 @@ class UserApiProcessor extends AbstractApiProcessor
     $user->setEnabled(true);
     $user->setVerified(false);
 
-    if (null !== $request->getPicture() && '' !== $request->getPicture() && '0' !== $request->getPicture()) {
+    $picture = $request->getPicture();
+    if (null !== $picture && '' !== $picture && '0' !== $picture) {
       // Resize + safety scan happen once in UserRequestValidator::validateAndResizePicture.
-      $user->setAvatar($request->getPicture());
-      $this->user_avatar_service->storeFromDataUri($user, $request->getPicture());
+      $user->setAvatar($picture);
+      $this->user_avatar_service->storeFromDataUri($user, $picture);
     }
 
     if (null !== $request->getAbout() && '' !== $request->getAbout() && '0' !== $request->getAbout()) {
@@ -89,14 +90,15 @@ class UserApiProcessor extends AbstractApiProcessor
       $user->setPlainPassword($request->getPassword());
     }
 
-    if (!is_null($request->getPicture())) {
-      if ('' === $request->getPicture() || '0' === $request->getPicture()) {
+    $picture = $request->getPicture();
+    if (null !== $picture) {
+      if ('' === $picture || '0' === $picture) {
         $user->setAvatar(null);
         $this->user_avatar_service->clearStoredAvatar($user);
       } else {
         // Resize + safety scan happen once in UserRequestValidator::validateAndResizePicture.
-        $user->setAvatar($request->getPicture());
-        $this->user_avatar_service->storeFromDataUri($user, $request->getPicture());
+        $user->setAvatar($picture);
+        $this->user_avatar_service->storeFromDataUri($user, $picture);
       }
     }
 
