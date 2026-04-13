@@ -14,11 +14,6 @@
       {{ 'myprofile.profileChangeSuccess'|trans({}, 'catroweb') }}
     </div>
   {% endif %}
-  {% if queryParams.profilePictureChangeSuccess is defined %}
-    <div id="alert-profile-picture-change-success" class="alert alert-success">
-      {{ 'success.imgUpload'|trans({}, 'catroweb') }}
-    </div>
-  {% endif %}
   {% if app.user.profileHidden %}
     <div class="alert alert-danger d-flex align-items-center mb-3" role="alert">
       <i class="material-icons me-2">block</i>
@@ -303,6 +298,7 @@
         passwordsDontMatch: '{{ 'passwordsNoMatch'|trans({}, 'catroweb')|escape('js')|raw }}'
       },
       profilePictureInvalid: '{{ 'api.registerUser.pictureInvalid'|trans({}, 'catroweb')|escape('js')|raw }}',
+      imageUploadSuccess: '{{ 'success.imgUpload'|trans({}, 'catroweb')|escape('js')|raw }}',
       passwordChangedSuccessText:  '{{ 'myprofile.passwordUpdated'|trans({}, 'catroweb')|escape('js')|raw }}'
     }
   }
