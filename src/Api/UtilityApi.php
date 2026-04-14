@@ -27,7 +27,7 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
   }
 
   #[\Override]
-  public function featuredBannersGet(int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): FeaturedBannersListResponse
+  public function featuredBannersGet(int $limit, ?string $cursor, ?string $flavor, int &$responseCode, array &$responseHeaders): FeaturedBannersListResponse
   {
     $limit = min(max($limit, 1), 50);
 
@@ -44,7 +44,7 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
     }
 
     $banners = $this->facade->getLoader()->getActiveBannersKeyset(
-      $limit + 1, $cursor_data['value'] ?? null, $cursor_data['id'] ?? null
+      $limit + 1, $cursor_data['value'] ?? null, $cursor_data['id'] ?? null, $flavor
     );
 
     $has_more = count($banners) > $limit;

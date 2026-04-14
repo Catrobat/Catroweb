@@ -21,20 +21,21 @@ class FeaturedBannerRepository extends ServiceEntityRepository
   /**
    * @return FeaturedBanner[]
    */
-  public function findActiveBanners(int $limit = 10, int $offset = 0): array
+  public function findActiveBanners(int $limit = 10, int $offset = 0, ?string $flavor = null): array
   {
     $qb = $this->createQueryBuilder('fb');
 
-    return $qb
-      ->select('fb')
+    $qb->select('fb')
       ->where('fb.active = true')
       ->orderBy('fb.priority', 'DESC')
       ->addOrderBy('fb.created_on', 'DESC')
       ->setFirstResult($offset)
       ->setMaxResults($limit)
-      ->getQuery()
-      ->getResult()
     ;
+
+    $this->addFlavorFilter($qb, $flavor);
+
+    return $qb->getQuery()->getResult();
   }
 
   /**
@@ -42,7 +43,7 @@ class FeaturedBannerRepository extends ServiceEntityRepository
    *
    * @return FeaturedBanner[]
    */
-  public function findActiveBannersKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null): array
+  public function findActiveBannersKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null, ?string $flavor = null): array
   {
     $qb = $this->createQueryBuilder('fb')
       ->select('fb')
@@ -61,6 +62,20 @@ class FeaturedBannerRepository extends ServiceEntityRepository
       ;
     }
 
+    $this->addFlavorFilter($qb, $flavor);
+
     return $qb->getQuery()->getResult();
+  }
+
+  private function addFlavorFilter(\Doctrine\ORM\QueryBuilder $qb, ?string $flavor): void
+  {
+    if (null === $flavor || '' === $flavor) {
+      return;
+    }
+
+    // JSON column: null = all flavors, otherwise must contain the flavor string
+    $qb->andWhere('fb.flavors IS NULL OR fb.flavors LIKE :flavorPattern')
+      ->setParameter('flavorPattern', '%"'.$flavor.'"%')
+    ;
   }
 }

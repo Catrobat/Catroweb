@@ -22,17 +22,17 @@ class UtilityApiLoader extends AbstractApiLoader
   /**
    * @return FeaturedBanner[]
    */
-  public function getActiveBanners(int $limit, int $offset): array
+  public function getActiveBanners(int $limit, int $offset, ?string $flavor = null): array
   {
-    return $this->featured_banner_repository->findActiveBanners($limit, $offset);
+    return $this->featured_banner_repository->findActiveBanners($limit, $offset, $flavor);
   }
 
   /**
    * @return FeaturedBanner[]
    */
-  public function getActiveBannersKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null): array
+  public function getActiveBannersKeyset(int $limit, ?int $cursor_priority = null, ?string $cursor_id = null, ?string $flavor = null): array
   {
-    return $this->featured_banner_repository->findActiveBannersKeyset($limit, $cursor_priority, $cursor_id);
+    return $this->featured_banner_repository->findActiveBannersKeyset($limit, $cursor_priority, $cursor_id, $flavor);
   }
 
   public function getSurvey(array $criteria): ?Survey

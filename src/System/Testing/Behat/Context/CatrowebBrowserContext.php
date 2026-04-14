@@ -849,7 +849,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->iWaitForTheElementToBeVisible('#feature-slider');
     $slider_items = explode(',', $values);
-    $owl_items = $this->getSession()->getPage()->findAll('css', '.carousel-item');
+    $owl_items = $this->getSession()->getPage()->findAll('css', '.carousel-item a[href]');
     $owl_items_count = count($owl_items);
     Assert::assertEquals($owl_items_count, count($slider_items));
 
@@ -863,7 +863,7 @@ class CatrowebBrowserContext extends BrowserContext
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
-      Assert::assertStringContainsString($url, $feature_url);
+      Assert::assertStringContainsString($url, (string) $feature_url);
     }
   }
 

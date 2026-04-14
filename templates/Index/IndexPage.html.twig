@@ -1,9 +1,13 @@
 {% extends 'Layout/Base.html.twig' %}
+{% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
 
 {% block head %}
   {{ encore_entry_link_tags('index_page') }}
   {% if first_banner is defined and first_banner %}
-    <link rel="preload" as="image" href="{{ first_banner.image_url }}" fetchpriority="high">
+    {% set _preload_url = (first_banner.image_variants and first_banner.image_variants.detail and first_banner.image_variants.detail.webp1x)
+        ? first_banner.image_variants.detail.webp1x
+        : first_banner.image_url %}
+    <link rel="preload" as="image" href="{{ _preload_url }}" fetchpriority="high">
   {% endif %}
 {% endblock %}
 
@@ -13,10 +17,6 @@
        data-maintenance-url="{{ path('maintenance_list') }}"
        data-close-url-template="{{ path('close_maintenance_view', {viewId: '__ID__'}) }}"
   ></div>
-
-  {% if not app.user and not isWebview() %}
-    {{ include('Index/WelcomeSection.html.twig') }}
-  {% endif %}
 
   <div id="featured-slider" class="featured-slider"
        style="display: grid;"
@@ -29,21 +29,50 @@
   >
     {% if first_banner is defined and first_banner %}
       <div class="featured-slider__ssr featured-banner mb-2" style="grid-area: 1/1;">
+        {% set _has_variants = first_banner.image_variants and first_banner.image_variants.detail and first_banner.image_variants.detail.webp1x %}
         {% if first_banner.link_url %}
           <a href="{{ first_banner.link_url }}">
-            <img src="{{ first_banner.image_url }}"
-                 class="carousel-item__image d-block w-100"
-                 alt="{{ first_banner.title }}"
-                 width="1024" height="600"
-                 fetchpriority="high">
+            {% if _has_variants %}
+              {{ responsive_image.picture(
+                first_banner.image_variants,
+                first_banner.title,
+                {
+                  class: 'carousel-item__image d-block w-100',
+                  sizes: '(min-width: 1200px) 960px, 100vw',
+                  loading: 'eager',
+                  fetchpriority: 'high',
+                  fallback: first_banner.image_url,
+                },
+              ) }}
+            {% else %}
+              <img src="{{ first_banner.image_url }}"
+                   class="carousel-item__image d-block w-100"
+                   alt="{{ first_banner.title }}"
+                   width="960" height="563"
+                   fetchpriority="high">
+            {% endif %}
           </a>
         {% else %}
           <div>
-            <img src="{{ first_banner.image_url }}"
-                 class="carousel-item__image d-block w-100"
-                 alt="{{ first_banner.title }}"
-                 width="1024" height="600"
-                 fetchpriority="high">
+            {% if _has_variants %}
+              {{ responsive_image.picture(
+                first_banner.image_variants,
+                first_banner.title,
+                {
+                  class: 'carousel-item__image d-block w-100',
+                  sizes: '(min-width: 1200px) 960px, 100vw',
+                  loading: 'eager',
+                  fetchpriority: 'high',
+                  fallback: first_banner.image_url,
+                },
+              ) }}
+            {% else %}
+              <img src="{{ first_banner.image_url }}"
+                   class="carousel-item__image d-block w-100"
+                   alt="{{ first_banner.title }}"
+                   width="960" height="563"
+                   fetchpriority="high">
+            {% endif %}
           </div>
         {% endif %}
       </div>

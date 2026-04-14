@@ -14,6 +14,10 @@
 .mdc-top-app-bar {
   z-index: 5000;
 
+  // Darken primary by 26% so white text passes WCAG AA (4.5:1).
+  // e.g. pocketcode #00acc1 → ~#007f8f (4.73:1 with #fff).
+  background-color: color-mix(in srgb, var(--primary), black 26%);
+
   a {
     color: inherit;
 

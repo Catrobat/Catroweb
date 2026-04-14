@@ -9,6 +9,7 @@ use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\System\Survey;
 use App\Storage\ImageRepository;
 use OpenAPI\Server\Model\FeaturedBannerResponse;
+use OpenAPI\Server\Model\ImageVariants;
 use OpenAPI\Server\Model\SurveyResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -40,8 +41,19 @@ class UtilityResponseManager extends AbstractResponseManager
       'title' => $banner->getTitle() ?? '',
       'image_url' => $this->resolveImageUrl($banner),
       'link_url' => $this->resolveLinkUrl($banner),
+      'video_url' => $banner->getVideoUrl(),
       'priority' => $banner->getPriority(),
     ]);
+  }
+
+  public function getFeaturedBannerVariants(FeaturedBanner $banner): ?ImageVariants
+  {
+    $id = $banner->getId();
+    if (null === $id) {
+      return null;
+    }
+
+    return $this->image_repository->getFeaturedVariants($id);
   }
 
   private function resolveImageUrl(FeaturedBanner $banner): string
@@ -55,6 +67,7 @@ class UtilityResponseManager extends AbstractResponseManager
     return match ($banner->getType()) {
       'project' => $this->resolveProjectScreenshot($banner),
       'studio' => $this->resolveStudioCover($banner),
+      'video' => $this->resolveVideoThumbnail($banner),
       default => '/images/default/screenshot-card@1x.webp',
     };
   }
@@ -79,6 +92,16 @@ class UtilityResponseManager extends AbstractResponseManager
     $cover = $studio->getCoverAssetPath();
 
     return null !== $cover && '' !== $cover ? '/'.$cover : '/images/default/screenshot-card@1x.webp';
+  }
+
+  private function resolveVideoThumbnail(FeaturedBanner $banner): string
+  {
+    $video_url = $banner->getVideoUrl();
+    if (null !== $video_url && 1 === preg_match('#/embed/([a-zA-Z0-9_-]+)#', $video_url, $m)) {
+      return 'https://img.youtube.com/vi/'.$m[1].'/hqdefault.jpg';
+    }
+
+    return '/images/default/screenshot-card@1x.webp';
   }
 
   private function resolveLinkUrl(FeaturedBanner $banner): ?string

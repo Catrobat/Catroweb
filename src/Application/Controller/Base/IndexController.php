@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\Base;
 
+use App\Api\Services\Utility\UtilityApiLoader;
 use App\Api\Services\Utility\UtilityResponseManager;
 use App\DB\Entity\System\MaintenanceInformation;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\FeaturedBannerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -21,8 +23,10 @@ class IndexController extends AbstractController
   public function __construct(
     private readonly EntityManagerInterface $entityManager,
     private readonly TranslatorInterface $translator,
-    private readonly FeaturedBannerRepository $featuredBannerRepository,
+    private readonly UtilityApiLoader $utilityApiLoader,
     private readonly UtilityResponseManager $utilityResponseManager,
+    private readonly RequestStack $requestStack,
+    private readonly ParameterBagInterface $parameterBag,
   ) {
   }
 
@@ -40,23 +44,35 @@ class IndexController extends AbstractController
     ]);
   }
 
-  /**
-   * @return array{image_url: string, link_url: string|null, title: string}|null
-   */
   private function getFirstBannerData(): ?array
   {
-    $banners = $this->featuredBannerRepository->findActiveBannersKeyset(1);
-    if ([] === $banners) {
+    try {
+      $flavor = $this->getCurrentFlavor();
+      $banners = $this->utilityApiLoader->getActiveBannersKeyset(1, flavor: $flavor);
+      if ([] === $banners) {
+        return null;
+      }
+
+      $banner = $banners[0];
+      $response = $this->utilityResponseManager->createFeaturedBannerResponse($banner);
+
+      return [
+        'image_url' => $response->getImageUrl() ?? '/images/default/screenshot-card@1x.webp',
+        'link_url' => $response->getLinkUrl(),
+        'title' => $response->getTitle() ?? '',
+        'image_variants' => $this->utilityResponseManager->getFeaturedBannerVariants($banner),
+      ];
+    } catch (\Throwable) {
       return null;
     }
+  }
 
-    $response = $this->utilityResponseManager->createFeaturedBannerResponse($banners[0]);
+  private function getCurrentFlavor(): string
+  {
+    /** @var string $defaultFlavor */
+    $defaultFlavor = $this->parameterBag->get('defaultFlavor');
 
-    return [
-      'image_url' => $response->getImageUrl() ?? '/images/default/screenshot-card@1x.webp',
-      'link_url' => $response->getLinkUrl(),
-      'title' => $response->getTitle() ?? '',
-    ];
+    return $this->requestStack->getCurrentRequest()?->attributes->get('flavor') ?? $defaultFlavor;
   }
 
   #[Route(path: '/maintenance/list', name: 'maintenance_list', methods: ['GET'])]

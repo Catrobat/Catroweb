@@ -29,6 +29,7 @@ Feature: Users can choose between multiple languages. Text should be automatical
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then the selected language should be "Deutsch"
+    And I wait for the element "#home-projects" to be visible
     And one of the ".project-list__title" elements should contain "Interessante Projekte"
     But I should not see "Trending projects"
 
