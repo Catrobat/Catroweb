@@ -2,6 +2,7 @@ import { normalizeApiResponse } from '../../Api/ResponseHelper'
 import { Controller } from '@hotwired/stimulus'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
+import { getImageUrl } from '../../Layout/ImageVariants'
 import AcceptLanguage from '../../Api/AcceptLanguage'
 import '../../Components/RetentionTooltip'
 
@@ -62,7 +63,7 @@ export default class extends Controller {
     const url =
       this.apiBaseUrlValue +
       '/projects/user' +
-      '?limit=50&attributes=id,name,project_url,screenshot_small,downloads,views,uploaded_string,retention_days,retention_expiry,private,not_for_kids'
+      '?limit=50&attributes=id,name,project_url,screenshot,downloads,views,uploaded_string,retention_days,retention_expiry,private,not_for_kids'
 
     try {
       const response = await fetch(url, {
@@ -100,7 +101,7 @@ export default class extends Controller {
       category: 'random',
       limit: '20',
       attributes:
-        'id,name,author,screenshot_small,downloads,views,uploaded_string,retention_days,retention_expiry,private',
+        'id,name,author,screenshot,downloads,views,uploaded_string,retention_days,retention_expiry,private',
     })
     if (this.exploreCursor) {
       params.set('cursor', this.exploreCursor)
@@ -204,7 +205,11 @@ export default class extends Controller {
     const id = escapeAttr(String(project.id || ''))
     const name = escapeHtml(project.name || '')
     const author = escapeHtml(project.author || '')
-    const screenshotSmall = project.screenshot_small || '/images/default/thumbnail.png'
+    const screenshotSmall = getImageUrl(
+      project.screenshot,
+      'card',
+      '/images/default/thumbnail-card@1x.webp',
+    )
     const downloads = parseInt(project.downloads, 10) || 0
     const views = parseInt(project.views, 10) || 0
     const uploadedString = escapeHtml(project.uploaded_string || '')

@@ -21,6 +21,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
+use App\User\UserAvatarService;
 use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationResponse;
 use OpenAPI\Server\Model\NotificationsCountResponse;
@@ -35,6 +36,7 @@ class NotificationsResponseManager extends AbstractResponseManager
     \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly NotificationRepository $notification_repository,
     private readonly ContentVisibilityManager $content_visibility_manager,
+    private readonly UserAvatarService $user_avatar_service,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -88,7 +90,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'from_name' => $notification->getLikeFrom()?->getUserIdentifier(),
         'project' => $notification->getProgram()?->getId(),
         'project_name' => $notification->getProgram()?->getName(),
-        'avatar' => $notification->getLikeFrom()?->getAvatar(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getLikeFrom()),
         'message' => $this->trans('catro-notifications.like.message'),
       ]);
     }
@@ -104,7 +106,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'seen' => $notification->getSeen(),
         'from' => $notification->getFollower()->getId(),
         'from_name' => $notification->getFollower()->getUserIdentifier(),
-        'avatar' => $notification->getFollower()->getAvatar(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getFollower()),
         'message' => $this->trans('catro-notifications.follow.message'),
       ]);
     }
@@ -122,7 +124,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'from_name' => $notification->getProgram()?->getUser()?->getUserIdentifier(),
         'project' => $notification->getProgram()?->getId(),
         'project_name' => $notification->getProgram()?->getName(),
-        'avatar' => $notification->getProgram()?->getUser()?->getAvatar(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getProgram()?->getUser()),
         'message' => $this->trans('catro-notifications.project-upload.message'),
       ]);
     }
@@ -140,7 +142,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'from_name' => $notification->getComment()?->getUser()?->getUserIdentifier(),
         'project' => $notification->getComment()?->getProgram()?->getId(),
         'project_name' => $notification->getComment()?->getProgram()?->getName(),
-        'avatar' => $notification->getComment()?->getUser()?->getAvatar(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getComment()?->getUser()),
         'message' => $this->trans('catro-notifications.comment.message'),
       ]);
     }
@@ -158,7 +160,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'from_name' => $notification->getRemixFrom()?->getUserIdentifier(),
         'project' => $notification->getRemixProgram()?->getId(),
         'project_name' => $notification->getRemixProgram()?->getName(),
-        'avatar' => $notification->getRemixFrom()?->getAvatar(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getRemixFrom()),
         'remixed_project' => $notification->getProgram()?->getId(),
         'remixed_project_name' => $notification->getProgram()?->getName(),
         'message' => $this->trans('catro-notifications.remix.message'),
@@ -199,7 +201,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'seen' => $notification->getSeen(),
         'from' => $notification->getAdminUser()?->getId(),
         'from_name' => $notification->getAdminUser()?->getUserIdentifier(),
-        'avatar' => $notification->getAdminUser()?->getAvatar(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getAdminUser()),
         'studio' => $notification->getStudio()?->getId(),
         'message' => $this->trans($translationKey, [
           '%studio_name%' => $notification->getStudio()?->getName() ?? '',
@@ -214,7 +216,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'seen' => $notification->getSeen(),
         'from' => $notification->getCommentUser()?->getId(),
         'from_name' => $notification->getCommentUser()?->getUserIdentifier(),
-        'avatar' => $notification->getCommentUser()?->getAvatar(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getCommentUser()),
         'studio' => $notification->getStudio()?->getId(),
         'message' => $this->trans('catro-notifications.studio-comment.message', [
           '%user_link%' => '%user_link%',
@@ -232,7 +234,7 @@ class NotificationsResponseManager extends AbstractResponseManager
         'from_name' => $notification->getProjectUser()?->getUserIdentifier(),
         'project' => $notification->getProgram()?->getId(),
         'project_name' => $notification->getProgram()?->getName(),
-        'avatar' => $notification->getProjectUser()?->getAvatar(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getProjectUser()),
         'studio' => $notification->getStudio()?->getId(),
         'message' => $this->trans('catro-notifications.studio-project.message', [
           '%user_link%' => '%user_link%',

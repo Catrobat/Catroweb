@@ -1,6 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { getImageUrl } from '../../Layout/ImageVariants'
 
 export default class extends Controller {
   static values = {
@@ -47,7 +48,9 @@ export default class extends Controller {
     li.className = 'member__list-entry'
     li.id = `join-request-${request.id}`
 
-    const avatarSrc = escapeAttr(request.avatar || '/images/default/avatar_default.png')
+    const avatarSrc = escapeAttr(
+      getImageUrl(request.avatar, 'thumb', '/images/default/avatar_default-thumb@1x.webp'),
+    )
     const username = escapeHtml(request.username || 'Unknown')
     const profileUrl = '/app/user/' + escapeAttr(String(request.user_id))
     const transAccept = escapeHtml(this.element.dataset.transAccept || 'Accept')

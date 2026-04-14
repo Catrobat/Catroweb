@@ -7,6 +7,7 @@ namespace App\Api\Services\User;
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
 use App\Moderation\TextSanitizer;
+use App\User\UserAvatarService;
 use App\User\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
@@ -16,6 +17,7 @@ class UserApiProcessor extends AbstractApiProcessor
   public function __construct(
     private readonly UserManager $user_manager,
     private readonly TextSanitizer $textSanitizer,
+    private readonly UserAvatarService $user_avatar_service,
   ) {
   }
 
@@ -31,9 +33,11 @@ class UserApiProcessor extends AbstractApiProcessor
     $user->setEnabled(true);
     $user->setVerified(false);
 
-    if (null !== $request->getPicture() && '' !== $request->getPicture() && '0' !== $request->getPicture()) {
-      // Resize happens in UserRequestValidator::validateAndResizePicture
-      $user->setAvatar($request->getPicture());
+    $picture = $request->getPicture();
+    if (null !== $picture && '' !== $picture && '0' !== $picture) {
+      // Resize + safety scan happen once in UserRequestValidator::validateAndResizePicture.
+      $user->setAvatar($picture);
+      $this->user_avatar_service->storeFromDataUri($user, $picture);
     }
 
     if (null !== $request->getAbout() && '' !== $request->getAbout() && '0' !== $request->getAbout()) {
@@ -86,12 +90,15 @@ class UserApiProcessor extends AbstractApiProcessor
       $user->setPlainPassword($request->getPassword());
     }
 
-    if (!is_null($request->getPicture())) {
-      if ('' === $request->getPicture() || '0' === $request->getPicture()) {
+    $picture = $request->getPicture();
+    if (null !== $picture) {
+      if ('' === $picture || '0' === $picture) {
         $user->setAvatar(null);
+        $this->user_avatar_service->clearStoredAvatar($user);
       } else {
-        // Resize happens in UserRequestValidator::validateAndResizePicture
-        $user->setAvatar($request->getPicture());
+        // Resize + safety scan happen once in UserRequestValidator::validateAndResizePicture.
+        $user->setAvatar($picture);
+        $this->user_avatar_service->storeFromDataUri($user, $picture);
       }
     }
 

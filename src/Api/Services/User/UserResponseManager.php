@@ -7,6 +7,7 @@ namespace App\Api\Services\User;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\User\User;
 use App\Security\Authentication\CookieService;
+use App\User\UserAvatarService;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
@@ -21,6 +22,7 @@ class UserResponseManager extends AbstractResponseManager
     SerializerInterface $serializer,
     \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly CookieService $cookie_service,
+    private readonly UserAvatarService $user_avatar_service,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -30,7 +32,7 @@ class UserResponseManager extends AbstractResponseManager
     if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = ['id', 'username'];
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following', 'ranking_score'];
+      $attributes_list = ['id', 'username', 'avatar', 'about', 'currently_working_on', 'projects', 'followers', 'following', 'ranking_score'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -43,7 +45,7 @@ class UserResponseManager extends AbstractResponseManager
     if (null === $attributes || '' === $attributes || '0' === $attributes) {
       $attributes_list = ['id', 'username', 'email'];
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'username', 'email', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
+      $attributes_list = ['id', 'username', 'email', 'avatar', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -67,8 +69,8 @@ class UserResponseManager extends AbstractResponseManager
       $data['username'] = $user->getUsername();
     }
 
-    if (in_array('picture', $attributes_list, true)) {
-      $data['picture'] = $user->getAvatar();
+    if (in_array('avatar', $attributes_list, true)) {
+      $data['avatar'] = $this->user_avatar_service->getVariants($user);
     }
 
     if (in_array('about', $attributes_list, true)) {
@@ -96,7 +98,7 @@ class UserResponseManager extends AbstractResponseManager
 
   public function createUserProfileResponse(User $user, ?User $viewer): BasicUserDataResponse
   {
-    $attributes_list = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
+    $attributes_list = ['id', 'username', 'avatar', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
     $data = $this->createBasicUserDataArray($user, $attributes_list);
 
     $is_own_profile = $viewer instanceof User && $viewer->getId() === $user->getId();

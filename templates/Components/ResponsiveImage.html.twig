@@ -1,0 +1,59 @@
+{#
+  Responsive <picture> for an OpenAPI ImageVariants payload.
+
+  Usage:
+    {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
+    {{ responsive_image.picture(
+      studio_cover_variants(studio),
+      studio.name,
+      {class: 'img-fluid', sizes: '(min-width: 768px) 60vw, 100vw', fallback: asset('images/default/thumbnail-card@1x.webp')}
+    ) }}
+
+  For each format (AVIF first, then WebP) the macro emits a <source> per
+  variant set (detail → card → thumb). Within a format bucket, browsers use
+  the `sizes` hint + srcset descriptors to pick the correct density; they do
+  not fall back *between* sets, so the detail set carries every width needed
+  for typical hero layouts.
+
+  Passing `null` for `variants` renders the fallback <img> only, so the macro
+  is safe to use even before the avatar/screenshot data migration has run.
+#}
+{% macro picture(variants, alt, options = {}) %}
+  {% set klass = options.class|default('') %}
+  {% set sizes = options.sizes|default('') %}
+  {% set loading = options.loading|default('lazy') %}
+  {% set fetchpriority = options.fetchpriority|default(null) %}
+  {% set fallback = options.fallback|default(null) %}
+  {% set width = options.width|default(variants and variants.width ? variants.width : null) %}
+  {% set height = options.height|default(variants and variants.height ? variants.height : null) %}
+  {# Generated OpenAPI model uses camelCase getters (getWebp1x, getAvif2x, …); accessors below match that. #}
+  {% set card = variants ? variants.card : null %}
+  {% set img_src = card ? (card.webp1x|default(card.webp2x|default(fallback))) : fallback %}
+  <picture>
+    {% if variants %}
+      {% for fmt_type, set_suffix in {'image/avif': 'avif', 'image/webp': 'webp'} %}
+        {% set set = variants.detail %}
+        {% if set %}
+          {% set u1 = attribute(set, set_suffix ~ '1x') %}
+          {% set u2 = attribute(set, set_suffix ~ '2x') %}
+          {% if u1 or u2 %}
+            {% set srcset_parts = [] %}
+            {% if u1 %}{% set srcset_parts = srcset_parts|merge([u1 ~ ' 1x']) %}{% endif %}
+            {% if u2 %}{% set srcset_parts = srcset_parts|merge([u2 ~ ' 2x']) %}{% endif %}
+            <source type="{{ fmt_type }}" srcset="{{ srcset_parts|join(', ') }}"{% if sizes %} sizes="{{ sizes }}"{% endif %}>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    <img
+      src="{{ img_src }}"
+      alt="{{ alt }}"
+      {% if klass %}class="{{ klass }}"{% endif %}
+      {% if width %}width="{{ width }}"{% endif %}
+      {% if height %}height="{{ height }}"{% endif %}
+      loading="{{ loading }}"
+      decoding="async"
+      {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %}
+    >
+  </picture>
+{% endmacro %}

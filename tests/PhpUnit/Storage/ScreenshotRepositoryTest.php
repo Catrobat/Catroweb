@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Storage;
 
 use App\Storage\FileHelper;
+use App\Storage\Images\ImageVariantGenerator;
 use App\Storage\ScreenshotRepository;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
@@ -64,15 +65,19 @@ class ScreenshotRepositoryTest extends TestCase
     $this->filesystem->mkdir($this->tmp_extract_dir.$this->project_id);
     $this->filesystem->mkdir($this->tmp_zip_dir.$this->project_id);
 
-    $this->screenshot_repository = new ScreenshotRepository(new ParameterBag([
-      'catrobat.screenshot.dir' => $this->screenshot_dir,
-      'catrobat.screenshot.path' => $this->screenshot_base_url,
-      'catrobat.thumbnail.dir' => $this->thumbnail_dir,
-      'catrobat.thumbnail.path' => $this->thumbnail_base_url,
-      'catrobat.upload.temp.dir' => $this->tmp_dir,
-      'catrobat.file.extract.dir' => $this->tmp_extract_dir,
-      'catrobat.file.storage.dir' => $this->tmp_zip_dir,
-    ]));
+    $this->screenshot_repository = new ScreenshotRepository(
+      new ParameterBag([
+        'catrobat.screenshot.dir' => $this->screenshot_dir,
+        'catrobat.screenshot.path' => $this->screenshot_base_url,
+        'catrobat.thumbnail.dir' => $this->thumbnail_dir,
+        'catrobat.thumbnail.path' => $this->thumbnail_base_url,
+        'catrobat.upload.temp.dir' => $this->tmp_dir,
+        'catrobat.file.extract.dir' => $this->tmp_extract_dir,
+        'catrobat.file.storage.dir' => $this->tmp_zip_dir,
+      ]),
+      new ImageVariantGenerator(),
+      new \Psr\Log\NullLogger(),
+    );
   }
 
   /**
@@ -91,7 +96,7 @@ class ScreenshotRepositoryTest extends TestCase
   public function testThrowsAnExceptionIfGivenAnInvalidScreenshotDirectory(): void
   {
     $this->expectException(\Exception::class);
-    $this->screenshot_repository->__construct(
+    new ScreenshotRepository(
       new ParameterBag([
         'catrobat.screenshot.dir' => __DIR__.'/invalid_directory/',
         'catrobat.screenshot.path' => $this->screenshot_base_url,
@@ -100,14 +105,15 @@ class ScreenshotRepositoryTest extends TestCase
         'catrobat.upload.temp.dir' => $this->tmp_dir,
         'catrobat.file.extract.dir' => $this->tmp_extract_dir,
         'catrobat.file.storage.dir' => $this->tmp_zip_dir,
-      ])
+      ]),
+      new ImageVariantGenerator(),
     );
   }
 
   public function testThrowsAnExceptionIfGivenAnInvalidThumbnailDirectory(): void
   {
     $this->expectException(\Exception::class);
-    $this->screenshot_repository->__construct(
+    new ScreenshotRepository(
       new ParameterBag([
         'catrobat.screenshot.dir' => $this->screenshot_dir,
         'catrobat.screenshot.path' => $this->screenshot_base_url,
@@ -116,7 +122,8 @@ class ScreenshotRepositoryTest extends TestCase
         'catrobat.upload.temp.dir' => $this->tmp_dir,
         'catrobat.file.extract.dir' => $this->tmp_extract_dir,
         'catrobat.file.storage.dir' => $this->tmp_zip_dir,
-      ])
+      ]),
+      new ImageVariantGenerator(),
     );
   }
 

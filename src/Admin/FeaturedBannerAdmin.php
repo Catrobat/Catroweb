@@ -54,7 +54,7 @@ class FeaturedBannerAdmin extends AbstractAdmin
 
     $image_type = $object->getImageType();
     if ('' === $image_type) {
-      return '/images/default/screenshot.png';
+      return '/images/default/screenshot-card@1x.webp';
     }
 
     return '/'.$this->featured_image_repository->getWebPath($id, $image_type, true);

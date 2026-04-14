@@ -4,7 +4,9 @@
         {% if not public and studio.is_joined and joined or public and not studio.is_joined and not joined and studio.is_public and studio.is_enabled or not public and not joined and not studio.is_joined and not studio.is_public and studio.is_enabled %}
             <a href="{{ path('studio_details', {id: studio.id}) }}">
                 <div class="studios-list-item">
-                    <img src="{{ asset(studio.cover_path|default('images/default/thumbnail.png')) }}" class="img-fluid studios-list-item--image" alt="">
+                    {# cover_path now stores a basename key; template-rendered lists fall back to the default thumbnail.
+                       API-backed lists receive full ImageVariants via StudioResponse.cover. #}
+                    <img src="{{ asset('images/default/thumbnail-card@1x.webp') }}" class="img-fluid studios-list-item--image" alt="">
                     <div class="studios-list-item--content">
                         <div class="studios-list-item--heading">
                             <h3>{{ studio.name }}</h3>

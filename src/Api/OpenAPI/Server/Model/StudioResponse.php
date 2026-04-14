@@ -97,15 +97,13 @@ class StudioResponse
   protected ?bool $enable_comments = true;
 
   /**
-   * Cover image.
+   * @SerializedName("cover")
    *
-   * @SerializedName("image_path")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $image_path = null;
+  protected ?ImageVariants $cover = null;
 
   /**
    * Number of members in the studio.
@@ -208,7 +206,7 @@ class StudioResponse
       $this->description = array_key_exists('description', $data) ? $data['description'] : $this->description;
       $this->is_public = array_key_exists('is_public', $data) ? $data['is_public'] : $this->is_public;
       $this->enable_comments = array_key_exists('enable_comments', $data) ? $data['enable_comments'] : $this->enable_comments;
-      $this->image_path = array_key_exists('image_path', $data) ? $data['image_path'] : $this->image_path;
+      $this->cover = array_key_exists('cover', $data) ? $data['cover'] : $this->cover;
       $this->members_count = array_key_exists('members_count', $data) ? $data['members_count'] : $this->members_count;
       $this->projects_count = array_key_exists('projects_count', $data) ? $data['projects_count'] : $this->projects_count;
       $this->is_member = array_key_exists('is_member', $data) ? $data['is_member'] : $this->is_member;
@@ -331,23 +329,21 @@ class StudioResponse
   }
 
   /**
-   * Gets image_path.
+   * Gets cover.
    */
-  public function getImagePath(): ?string
+  public function getCover(): ?ImageVariants
   {
-    return $this->image_path;
+    return $this->cover;
   }
 
   /**
-   * Sets image_path.
-   *
-   * @param string|null $image_path Cover image
+   * Sets cover.
    *
    * @return $this
    */
-  public function setImagePath(?string $image_path = null): self
+  public function setCover(?ImageVariants $cover = null): self
   {
-    $this->image_path = $image_path;
+    $this->cover = $cover;
 
     return $this;
   }

@@ -767,7 +767,7 @@ class CatrowebBrowserContext extends BrowserContext
         break;
 
       case 'default':
-        $defaultSource = 'images/default/avatar_default.png';
+        $defaultSource = 'images/default/avatar_default-thumb@1x.webp';
         'not' === $not ? Assert::assertStringNotContainsString($defaultSource, $source) : Assert::assertStringContainsString($defaultSource, $source);
         break;
 

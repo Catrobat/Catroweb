@@ -248,22 +248,13 @@ class ProjectResponse
   protected ?string $uploaded_string = null;
 
   /**
-   * @SerializedName("screenshot_large")
+   * @SerializedName("screenshot")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $screenshot_large = null;
-
-  /**
-   * @SerializedName("screenshot_small")
-   *
-   * @Assert\Type("string")
-   *
-   * @Type("string")
-   */
-  protected ?string $screenshot_small = null;
+  protected ?ImageVariants $screenshot = null;
 
   /**
    * The url to the project on our official share community platform.
@@ -357,8 +348,7 @@ class ProjectResponse
       $this->extensions = array_key_exists('extensions', $data) ? $data['extensions'] : $this->extensions;
       $this->uploaded_at = array_key_exists('uploaded_at', $data) ? $data['uploaded_at'] : $this->uploaded_at;
       $this->uploaded_string = array_key_exists('uploaded_string', $data) ? $data['uploaded_string'] : $this->uploaded_string;
-      $this->screenshot_large = array_key_exists('screenshot_large', $data) ? $data['screenshot_large'] : $this->screenshot_large;
-      $this->screenshot_small = array_key_exists('screenshot_small', $data) ? $data['screenshot_small'] : $this->screenshot_small;
+      $this->screenshot = array_key_exists('screenshot', $data) ? $data['screenshot'] : $this->screenshot;
       $this->project_url = array_key_exists('project_url', $data) ? $data['project_url'] : $this->project_url;
       $this->download_url = array_key_exists('download_url', $data) ? $data['download_url'] : $this->download_url;
       $this->filesize = array_key_exists('filesize', $data) ? $data['filesize'] : $this->filesize;
@@ -767,41 +757,21 @@ class ProjectResponse
   }
 
   /**
-   * Gets screenshot_large.
+   * Gets screenshot.
    */
-  public function getScreenshotLarge(): ?string
+  public function getScreenshot(): ?ImageVariants
   {
-    return $this->screenshot_large;
+    return $this->screenshot;
   }
 
   /**
-   * Sets screenshot_large.
+   * Sets screenshot.
    *
    * @return $this
    */
-  public function setScreenshotLarge(?string $screenshot_large = null): self
+  public function setScreenshot(?ImageVariants $screenshot = null): self
   {
-    $this->screenshot_large = $screenshot_large;
-
-    return $this;
-  }
-
-  /**
-   * Gets screenshot_small.
-   */
-  public function getScreenshotSmall(): ?string
-  {
-    return $this->screenshot_small;
-  }
-
-  /**
-   * Sets screenshot_small.
-   *
-   * @return $this
-   */
-  public function setScreenshotSmall(?string $screenshot_small = null): self
-  {
-    $this->screenshot_small = $screenshot_small;
+    $this->screenshot = $screenshot;
 
     return $this;
   }

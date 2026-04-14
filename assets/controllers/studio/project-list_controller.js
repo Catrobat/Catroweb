@@ -2,6 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
+import { getImageUrl } from '../../Layout/ImageVariants'
 import Swal from 'sweetalert2'
 
 export default class extends Controller {
@@ -89,7 +90,9 @@ export default class extends Controller {
     const canRemove = this._canRemove()
     const id = escapeAttr(String(project.id))
     const name = escapeHtml(project.name || '')
-    const screenshotUrl = escapeAttr(project.screenshot_small || '/images/default/screenshot.png')
+    const screenshotUrl = escapeAttr(
+      getImageUrl(project.screenshot, 'card', '/images/default/screenshot-card@1x.webp'),
+    )
     const author = escapeHtml(project.author || project.added_by || '')
     const isPrivate = project.private || false
     const isNfk = project.not_for_kids || false
@@ -346,11 +349,11 @@ export default class extends Controller {
         return
       }
 
-      const defaultScreenshot = '/images/default/screenshot.png'
+      const defaultScreenshot = '/images/default/screenshot-card@1x.webp'
       let html =
         '<div class="studio-add-project-list" style="max-height: 400px; overflow-y: auto;">'
       available.forEach((p) => {
-        const screenshot = p.screenshot_small || defaultScreenshot
+        const screenshot = getImageUrl(p.screenshot, 'card', defaultScreenshot)
         html += `<label class="studio-add-project-item" for="add-project-${escapeAttr(String(p.id))}"
           style="display: flex; align-items: center; gap: 12px; padding: 8px 12px; margin: 0; cursor: pointer; border-bottom: 1px solid #eee; transition: background-color 0.15s;">
           <input class="form-check-input mt-0" type="checkbox" value="${escapeAttr(String(p.id))}" id="add-project-${escapeAttr(String(p.id))}"

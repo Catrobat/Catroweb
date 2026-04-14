@@ -23,7 +23,7 @@ Feature: Get user by id
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/users/2"
     Then the response status code should be "200"
-    Then the response should have the user model structure excluding "picture"
+    Then the response should have the user model structure excluding "avatar"
     Then the response should contain the user "User1"
 
   Scenario: User not found should return 404 status code

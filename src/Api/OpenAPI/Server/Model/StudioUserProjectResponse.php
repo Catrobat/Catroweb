@@ -69,13 +69,13 @@ class StudioUserProjectResponse
   protected ?bool $in_studio = null;
 
   /**
-   * @SerializedName("screenshot_small")
+   * @SerializedName("screenshot")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $screenshot_small = null;
+  protected ?ImageVariants $screenshot = null;
 
   /**
    * Constructor.
@@ -88,7 +88,7 @@ class StudioUserProjectResponse
       $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->name = array_key_exists('name', $data) ? $data['name'] : $this->name;
       $this->in_studio = array_key_exists('in_studio', $data) ? $data['in_studio'] : $this->in_studio;
-      $this->screenshot_small = array_key_exists('screenshot_small', $data) ? $data['screenshot_small'] : $this->screenshot_small;
+      $this->screenshot = array_key_exists('screenshot', $data) ? $data['screenshot'] : $this->screenshot;
     }
   }
 
@@ -153,21 +153,21 @@ class StudioUserProjectResponse
   }
 
   /**
-   * Gets screenshot_small.
+   * Gets screenshot.
    */
-  public function getScreenshotSmall(): ?string
+  public function getScreenshot(): ?ImageVariants
   {
-    return $this->screenshot_small;
+    return $this->screenshot;
   }
 
   /**
-   * Sets screenshot_small.
+   * Sets screenshot.
    *
    * @return $this
    */
-  public function setScreenshotSmall(?string $screenshot_small = null): self
+  public function setScreenshot(?ImageVariants $screenshot = null): self
   {
-    $this->screenshot_small = $screenshot_small;
+    $this->screenshot = $screenshot;
 
     return $this;
   }

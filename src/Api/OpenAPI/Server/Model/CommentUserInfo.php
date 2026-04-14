@@ -64,15 +64,13 @@ class CommentUserInfo
   protected ?string $username = null;
 
   /**
-   * URL to the users avatar image.
-   *
    * @SerializedName("avatar")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $avatar = null;
+  protected ?ImageVariants $avatar = null;
 
   /**
    * Whether the user is approved/whitelisted by admins.
@@ -147,7 +145,7 @@ class CommentUserInfo
   /**
    * Gets avatar.
    */
-  public function getAvatar(): ?string
+  public function getAvatar(): ?ImageVariants
   {
     return $this->avatar;
   }
@@ -155,11 +153,9 @@ class CommentUserInfo
   /**
    * Sets avatar.
    *
-   * @param string|null $avatar URL to the users avatar image
-   *
    * @return $this
    */
-  public function setAvatar(?string $avatar = null): self
+  public function setAvatar(?ImageVariants $avatar = null): self
   {
     $this->avatar = $avatar;
 

@@ -50,6 +50,7 @@ final class CommentsApiTest extends TestCase
     ?RateLimiterFactory $comment_burst_limiter = null,
     ?RateLimiterFactory $comment_daily_limiter = null,
     ?TextSanitizer $text_sanitizer = null,
+    ?\App\User\UserAvatarService $user_avatar_service = null,
   ): CommentsApi {
     return new CommentsApi(
       $authentication_manager ?? $this->createStub(AuthenticationManager::class),
@@ -63,6 +64,7 @@ final class CommentsApiTest extends TestCase
       $comment_burst_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_burst'),
       $comment_daily_limiter ?? $this->createNoLimitRateLimiterFactory('phpunit_comments_daily'),
       $text_sanitizer ?? $this->createPassthroughTextSanitizer(),
+      $user_avatar_service ?? $this->createStub(\App\User\UserAvatarService::class),
     );
   }
 

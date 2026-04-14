@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Storage;
 
+use App\Storage\Images\ImageVariantGenerator;
+use App\Storage\Images\ImageVariantUrlBuilder;
+use OpenAPI\Server\Model\ImageVariants;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\UrlHelper;
@@ -23,8 +26,12 @@ class ImageRepository
   /**
    * @throws \Exception
    */
-  public function __construct(ParameterBagInterface $parameter_bag, private readonly ?UrlHelper $urlHelper = null)
-  {
+  public function __construct(
+    ParameterBagInterface $parameter_bag,
+    private readonly ?UrlHelper $urlHelper = null,
+    private readonly ?ImageVariantGenerator $image_variant_generator = null,
+    private readonly ?ImageVariantUrlBuilder $image_variant_url_builder = null,
+  ) {
     /** @var string $example_dir */
     $example_dir = $parameter_bag->get('catrobat.exampleimage.dir');
     /** @var string $example_path */
@@ -74,6 +81,17 @@ class ImageRepository
     $thumb->writeImage($filename);
     chmod($filename, 0664);
     $thumb->destroy();
+
+    // Featured banners get the full responsive variant set alongside the
+    // legacy file (example crops stay at 80x80 — they're already sized for
+    // their only render context).
+    if ($featured && $this->image_variant_generator instanceof ImageVariantGenerator) {
+      $this->image_variant_generator->generate(
+        $filename,
+        $this->featured_dir,
+        $this->getVariantBasename($id, true),
+      );
+    }
   }
 
   public function remove(int|string $id, string $extension, bool $featured): void
@@ -87,6 +105,28 @@ class ImageRepository
     if (is_file($path)) {
       unlink($path);
     }
+
+    if ($featured && $this->image_variant_generator instanceof ImageVariantGenerator) {
+      $this->image_variant_generator->remove($this->featured_dir, $this->getVariantBasename($id, true));
+    }
+  }
+
+  public function getFeaturedVariants(int|string $id): ?ImageVariants
+  {
+    if (!$this->image_variant_url_builder instanceof ImageVariantUrlBuilder) {
+      return null;
+    }
+
+    return $this->image_variant_url_builder->build(
+      $this->featured_dir,
+      $this->featured_path,
+      $this->getVariantBasename($id, true),
+    );
+  }
+
+  private function getVariantBasename(int|string $id, bool $featured): string
+  {
+    return ($featured ? 'featured_' : 'example_').$id;
   }
 
   public function getWebPath(int|string $id, string $extension, bool $featured): string
