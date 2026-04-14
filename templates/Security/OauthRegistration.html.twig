@@ -14,11 +14,6 @@
     <a class="btn social-login-btn me-2" id="btn-login-google" href="{{ path('hwi_oauth_service_redirect', {service: 'google'}) }}">
       <img class="social-login-btn__img" alt="Google Login" src="{{ asset('images/social/btn_google_custom.png') }}"/>
     </a>
-    <a class="btn social-login-btn social-login-btn--facebook me-2" id="btn-login-facebook" href="{{ path('hwi_oauth_service_redirect', {service: 'facebook'}) }}">
-      <img class="social-login-btn__img social-login-btn__img--facebook" alt="Facebook Login" src="{{ asset('images/social/fb_logo.svg') }}"/>
-    </a>
-    <a class="btn social-login-btn me-2" id="btn-login-apple" href="{{ path('hwi_oauth_service_redirect', {service: 'apple'}) }}">
-      <img class="social-login-btn__img" alt="Apple Login" src="{{ asset('images/social/apple_logo__black.svg') }}"/>
-    </a>
+    {# Facebook and Apple OAuth disabled — see GitHub issues #6679 and #6680 #}
   </div>
 </div>
