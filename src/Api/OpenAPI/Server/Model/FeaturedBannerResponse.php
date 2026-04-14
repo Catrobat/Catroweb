@@ -55,7 +55,7 @@ class FeaturedBannerResponse
   /**
    * @SerializedName("type")
    *
-   * @Assert\Choice({ "project", "studio", "link", "image" })
+   * @Assert\Choice({ "project", "studio", "link", "image", "video" })
    *
    * @Assert\Type("string")
    *
@@ -91,6 +91,17 @@ class FeaturedBannerResponse
   protected ?string $link_url = null;
 
   /**
+   * YouTube embed URL for video-type banners.
+   *
+   * @SerializedName("video_url")
+   *
+   * @Assert\Type("string")
+   *
+   * @Type("string")
+   */
+  protected ?string $video_url = null;
+
+  /**
    * @SerializedName("priority")
    *
    * @Assert\Type("int")
@@ -112,6 +123,7 @@ class FeaturedBannerResponse
       $this->title = array_key_exists('title', $data) ? $data['title'] : $this->title;
       $this->image_url = array_key_exists('image_url', $data) ? $data['image_url'] : $this->image_url;
       $this->link_url = array_key_exists('link_url', $data) ? $data['link_url'] : $this->link_url;
+      $this->video_url = array_key_exists('video_url', $data) ? $data['video_url'] : $this->video_url;
       $this->priority = array_key_exists('priority', $data) ? $data['priority'] : $this->priority;
     }
   }
@@ -214,6 +226,28 @@ class FeaturedBannerResponse
   public function setLinkUrl(?string $link_url = null): self
   {
     $this->link_url = $link_url;
+
+    return $this;
+  }
+
+  /**
+   * Gets video_url.
+   */
+  public function getVideoUrl(): ?string
+  {
+    return $this->video_url;
+  }
+
+  /**
+   * Sets video_url.
+   *
+   * @param string|null $video_url YouTube embed URL for video-type banners
+   *
+   * @return $this
+   */
+  public function setVideoUrl(?string $video_url = null): self
+  {
+    $this->video_url = $video_url;
 
     return $this;
   }

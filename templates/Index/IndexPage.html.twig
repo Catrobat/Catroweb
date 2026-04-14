@@ -1,9 +1,13 @@
 {% extends 'Layout/Base.html.twig' %}
+{% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
 
 {% block head %}
   {{ encore_entry_link_tags('index_page') }}
   {% if first_banner is defined and first_banner %}
-    <link rel="preload" as="image" href="{{ first_banner.image_url }}" fetchpriority="high">
+    {% set _preload_url = (first_banner.image_variants and first_banner.image_variants.detail and first_banner.image_variants.detail.webp1x)
+        ? first_banner.image_variants.detail.webp1x
+        : first_banner.image_url %}
+    <link rel="preload" as="image" href="{{ _preload_url }}" fetchpriority="high">
   {% endif %}
 {% endblock %}
 
@@ -13,10 +17,6 @@
        data-maintenance-url="{{ path('maintenance_list') }}"
        data-close-url-template="{{ path('close_maintenance_view', {viewId: '__ID__'}) }}"
   ></div>
-
-  {% if not app.user and not isWebview() %}
-    {{ include('Index/WelcomeSection.html.twig') }}
-  {% endif %}
 
   <div id="featured-slider" class="featured-slider"
        style="display: grid;"
@@ -29,27 +29,56 @@
   >
     {% if first_banner is defined and first_banner %}
       <div class="featured-slider__ssr featured-banner mb-2" style="grid-area: 1/1;">
+        {% set _has_variants = first_banner.image_variants and first_banner.image_variants.detail and first_banner.image_variants.detail.webp1x %}
         {% if first_banner.link_url %}
           <a href="{{ first_banner.link_url }}">
-            <img src="{{ first_banner.image_url }}"
-                 class="carousel-item__image d-block w-100"
-                 alt="{{ first_banner.title }}"
-                 width="1024" height="600"
-                 fetchpriority="high">
+            {% if _has_variants %}
+              {{ responsive_image.picture(
+                first_banner.image_variants,
+                first_banner.title,
+                {
+                  class: 'carousel-item__image d-block w-100',
+                  sizes: '(min-width: 1200px) 960px, 100vw',
+                  loading: 'eager',
+                  fetchpriority: 'high',
+                  fallback: first_banner.image_url,
+                },
+              ) }}
+            {% else %}
+              <img src="{{ first_banner.image_url }}"
+                   class="carousel-item__image d-block w-100"
+                   alt="{{ first_banner.title }}"
+                   width="960" height="563"
+                   fetchpriority="high">
+            {% endif %}
           </a>
         {% else %}
           <div>
-            <img src="{{ first_banner.image_url }}"
-                 class="carousel-item__image d-block w-100"
-                 alt="{{ first_banner.title }}"
-                 width="1024" height="600"
-                 fetchpriority="high">
+            {% if _has_variants %}
+              {{ responsive_image.picture(
+                first_banner.image_variants,
+                first_banner.title,
+                {
+                  class: 'carousel-item__image d-block w-100',
+                  sizes: '(min-width: 1200px) 960px, 100vw',
+                  loading: 'eager',
+                  fetchpriority: 'high',
+                  fallback: first_banner.image_url,
+                },
+              ) }}
+            {% else %}
+              <img src="{{ first_banner.image_url }}"
+                   class="carousel-item__image d-block w-100"
+                   alt="{{ first_banner.title }}"
+                   width="960" height="563"
+                   fetchpriority="high">
+            {% endif %}
           </div>
         {% endif %}
       </div>
     {% else %}
       <div class="featured-slider__skeleton featured-banner mb-2" style="grid-area: 1/1;">
-        <div style="aspect-ratio: 1024/600; background: light-dark(#f0f0f0, #1a1a2e);"></div>
+        <div style="aspect-ratio: 1024/600;"></div>
       </div>
     {% endif %}
   </div>
@@ -60,24 +89,24 @@
 
     {% if isWebview() %}
       {% set categories = [
-        ['example', 'example', 'author'],
         ['trending', 'trending', 'author'],
         ['popular', 'popular', 'author'],
+        ['example', 'example', 'author'],
       ] %}
     {% elseif app.user %}
       {% set categories = [
-        ['example', 'example', 'author'],
         ['trending', 'trending', 'author'],
         ['_studios_', null, null],
         ['popular', 'popular', 'author'],
+        ['example', 'example', 'author'],
       ] %}
     {% else %}
       {% set categories = [
-        ['example', 'example', 'author'],
         ['trending', 'trending', 'author'],
         ['random', 'random', 'uploaded'],
         ['_studios_', null, null],
         ['popular', 'popular', 'author'],
+        ['example', 'example', 'author'],
       ] %}
     {% endif %}
 
@@ -94,31 +123,28 @@
               <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
             </div>
           </div>
-          <div class="lazyload project-list__wrapper">
-            <div class="lazyload projects-container">
+          <div class="lazyloaded project-list__wrapper">
+            <div class="lazyloaded projects-container">
 
-              {% for i in range(0, 10) %} {# Fill with dummy data until loaded to prevent cls #}
+              {% for i in range(0, 10) %}
                 <div class="project-list__project">
                   <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20360'%3E%3Crect%20width='360'%20height='360'%20fill='%23E8E8E8'%20/%3E%3C/svg%3E"
                        class="project-list__project__image" alt="" width="360" height="360">
-                  <span class="project-list__project__name"></span>
+                  <span class="project-list__project__name"><span class="skeleton-bar skeleton-bar--lg" style="width: 70%"></span></span>
                   <div class="project-list__project__property project-list__project__property-uploaded lazyloaded">
-                    <i class="material-icons"></i>
-                    <span class="project-list__project__property__value"></span>
+                    <span class="skeleton-bar" style="width: 55%"></span>
                   </div>
-                  <div class="project-list__project__property project-list__project__property__not-for-kids lazyloaded">
-                    <img class="project-list__not-for-kids-logo" style="display: none" alt="">
-                    <span class="project-list__project__property__value"></span>
-                  </div>
+                  <div class="project-list__meta-secondary"><span class="skeleton-bar skeleton-bar--sm" style="width: 35%"></span></div>
+                  <span class="projects-meta__item projects-meta__item--retention"><span class="skeleton-bar skeleton-bar--sm" style="width: 45%"></span></span>
                 </div>
               {% endfor %}
 
             </div>
-            <div class="lazyload project-list__chevrons">
-              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">
+            <div class="lazyloaded project-list__chevrons">
+              <div class="lazyloaded project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">
                 chevron_left
               </div>
-              <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+              <div class="lazyloaded project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
             </div>
           </div>
         </div>
@@ -145,22 +171,21 @@
                 <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
               </div>
             </div>
-            <div class="lazyload project-list__wrapper">
-              <div class="lazyload projects-container">
+            <div class="lazyloaded project-list__wrapper">
+              <div class="lazyloaded projects-container">
                 {% for i in range(0, 5) %}
                   <div class="project-list__project">
                     <img src="{{ placeholder_svg }}" class="project-list__project__image" alt="" width="360" height="360">
-                    <span class="project-list__project__name"></span>
+                    <span class="project-list__project__name"><span class="skeleton-bar skeleton-bar--lg" style="width: 65%"></span></span>
                     <div class="project-list__project__property project-list__project__property-members lazyloaded">
-                      <i class="material-icons"></i>
-                      <span class="project-list__project__property__value"></span>
+                      <span class="skeleton-bar" style="width: 50%"></span>
                     </div>
                   </div>
                 {% endfor %}
               </div>
-              <div class="lazyload project-list__chevrons">
-                <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">chevron_left</div>
-                <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+              <div class="lazyloaded project-list__chevrons">
+                <div class="lazyloaded project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">chevron_left</div>
+                <div class="lazyloaded project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
               </div>
             </div>
           </div>
@@ -177,26 +202,23 @@
                 <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
               </div>
             </div>
-            <div class="lazyload project-list__wrapper">
-              <div class="lazyload projects-container">
+            <div class="lazyloaded project-list__wrapper">
+              <div class="lazyloaded projects-container">
                 {% for i in range(0, 10) %}
                   <div class="project-list__project">
                     <img src="{{ placeholder_svg }}" class="project-list__project__image" alt="" width="360" height="360">
-                    <span class="project-list__project__name"></span>
+                    <span class="project-list__project__name"><span class="skeleton-bar skeleton-bar--lg" style="width: 70%"></span></span>
                     <div class="project-list__project__property project-list__project__property-uploaded lazyloaded">
-                      <i class="material-icons"></i>
-                      <span class="project-list__project__property__value"></span>
+                      <span class="skeleton-bar" style="width: 55%"></span>
                     </div>
-                    <div class="project-list__project__property project-list__project__property__not-for-kids lazyloaded">
-                      <img class="project-list__not-for-kids-logo" style="display: none" alt="">
-                      <span class="project-list__project__property__value"></span>
-                    </div>
+                    <div class="project-list__meta-secondary"><span class="skeleton-bar skeleton-bar--sm" style="width: 35%"></span></div>
+                    <span class="projects-meta__item projects-meta__item--retention"><span class="skeleton-bar skeleton-bar--sm" style="width: 45%"></span></span>
                   </div>
                 {% endfor %}
               </div>
-              <div class="lazyload project-list__chevrons">
-                <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">chevron_left</div>
-                <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
+              <div class="lazyloaded project-list__chevrons">
+                <div class="lazyloaded project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">chevron_left</div>
+                <div class="lazyloaded project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
               </div>
             </div>
           </div>

@@ -12,7 +12,8 @@ export class FeaturedBanner {
 
     const { baseUrl, flavor } = this.container.dataset
 
-    const apiUrl = `${baseUrl}/api/featured-banners`
+    const params = flavor ? `?flavor=${encodeURIComponent(flavor)}` : ''
+    const apiUrl = `${baseUrl}/api/featured-banners${params}`
 
     fetch(apiUrl)
       .then((r) => {
@@ -36,6 +37,7 @@ export class FeaturedBanner {
             url: url || null,
             image: item.image_url || '/images/default/screenshot-card@1x.webp',
             title: item.title || '',
+            videoUrl: item.video_url || null,
           }
         })
 
@@ -77,29 +79,20 @@ export class FeaturedBanner {
     const inner = document.createElement('div')
     inner.className = 'carousel-inner'
     slides.forEach((slide, i) => {
-      const wrapper = slide.url ? document.createElement('a') : document.createElement('div')
+      const wrapper = document.createElement('div')
       wrapper.className = i === 0 ? 'carousel-item active' : 'carousel-item'
-      if (slide.url) {
-        wrapper.href = slide.url
-      }
       if (i > 0) {
         wrapper.style.background = '#fff'
       }
 
-      const img = document.createElement('img')
-      img.src = slide.image
-      img.className = 'carousel-item__image d-block w-100'
-      img.alt = slide.title || ''
-      img.width = 1024
-      img.height = 600
-      img.loading = i === 0 ? 'eager' : 'lazy'
-      if (i === 0) {
-        img.fetchPriority = 'high'
-        img.onload = () => this.removeSkeleton()
-        img.onerror = () => this.removeSkeleton()
+      if (slide.videoUrl) {
+        wrapper.appendChild(this.createVideoSlide(slide, i))
+      } else {
+        const link = slide.url ? document.createElement('a') : document.createElement('div')
+        if (slide.url) link.href = slide.url
+        link.appendChild(this.createSlideImage(slide, i))
+        wrapper.appendChild(link)
       }
-
-      wrapper.appendChild(img)
 
       if (slide.title) {
         const caption = document.createElement('div')
@@ -137,6 +130,60 @@ export class FeaturedBanner {
     carouselDiv.style.gridArea = '1/1'
     this.container.appendChild(carouselDiv)
     new Carousel(carouselDiv)
+  }
+
+  createSlideImage(slide, index) {
+    const img = document.createElement('img')
+    img.src = slide.image
+    img.className = 'carousel-item__image d-block w-100'
+    img.alt = slide.title || ''
+    img.width = 1024
+    img.height = 600
+    img.loading = index === 0 ? 'eager' : 'lazy'
+    if (index === 0) {
+      img.fetchPriority = 'high'
+      img.onload = () => this.removeSkeleton()
+      img.onerror = () => this.removeSkeleton()
+    }
+    return img
+  }
+
+  createVideoSlide(slide, index) {
+    const container = document.createElement('div')
+    container.className = 'featured-video-slide'
+    container.style.position = 'relative'
+    container.style.cursor = 'pointer'
+
+    const img = this.createSlideImage(slide, index)
+    container.appendChild(img)
+
+    // Play button overlay
+    const playBtn = document.createElement('div')
+    playBtn.className = 'featured-video-slide__play'
+    playBtn.innerHTML =
+      '<svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="red"/><path d="M45 24L27 14v20" fill="#fff"/></svg>'
+    container.appendChild(playBtn)
+
+    container.addEventListener('click', () => {
+      const iframe = document.createElement('iframe')
+      iframe.src = slide.videoUrl + '?autoplay=1&controls=1'
+      iframe.className = 'carousel-item__image d-block w-100'
+      iframe.style.aspectRatio = '1024 / 600'
+      iframe.style.border = 'none'
+      iframe.allow = 'autoplay; encrypted-media'
+      iframe.allowFullscreen = true
+
+      container.replaceWith(iframe)
+
+      // Pause carousel auto-rotation while video plays
+      const carouselEl = this.container.querySelector('.carousel')
+      if (carouselEl) {
+        const bsCarousel = Carousel.getInstance(carouselEl)
+        if (bsCarousel) bsCarousel.pause()
+      }
+    })
+
+    return container
   }
 
   removeSkeleton() {

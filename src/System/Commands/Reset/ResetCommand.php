@@ -577,7 +577,27 @@ class ResetCommand extends Command
       }
     }
 
-    $output->writeln(sprintf('  Created %d featured banners', count($banners)));
+    $video_banners = [
+      ['title' => 'Welcome to Pocket Code', 'video_url' => 'https://www.youtube.com/embed/BHe2r2WU-T8', 'flavors' => ['pocketcode']],
+      ['title' => 'Welcome to Luna', 'video_url' => 'https://www.youtube.com/embed/-6AEZrSbOMg', 'flavors' => ['luna']],
+      ['title' => 'Welcome to Embroidery', 'video_url' => 'https://www.youtube.com/embed/IjHI0UZzuWM', 'flavors' => ['embroidery']],
+      ['title' => 'Welcome to Mindstorms', 'video_url' => 'https://www.youtube.com/embed/YnSl-fSV-nY', 'flavors' => ['mindstorms']],
+    ];
+
+    foreach ($video_banners as $config) {
+      $banner = new FeaturedBanner();
+      $banner->setType('video');
+      $banner->setTitle($config['title']);
+      $banner->setVideoUrl($config['video_url']);
+      $banner->setFlavors($config['flavors']);
+      $banner->setActive(true);
+      $banner->setPriority(100);
+      $this->entity_manager->persist($banner);
+    }
+
+    $this->entity_manager->flush();
+
+    $output->writeln(sprintf('  Created %d featured banners + %d video banners', count($banners), count($video_banners)));
   }
 
   private function getRandomStatus(): string

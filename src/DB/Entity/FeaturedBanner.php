@@ -47,6 +47,15 @@ class FeaturedBanner
   #[ORM\Column(type: Types::STRING, nullable: true)]
   protected ?string $url = null;
 
+  #[ORM\Column(type: Types::STRING, nullable: true)]
+  protected ?string $video_url = null;
+
+  /**
+   * @var string[]|null flavor names this banner is visible on; null = all flavors
+   */
+  #[ORM\Column(type: Types::JSON, nullable: true)]
+  protected ?array $flavors = null;
+
   #[ORM\Column(type: Types::STRING)]
   protected string $image_type = '';
 
@@ -114,6 +123,36 @@ class FeaturedBanner
   public function setUrl(?string $url): self
   {
     $this->url = $url;
+
+    return $this;
+  }
+
+  public function getVideoUrl(): ?string
+  {
+    return $this->video_url;
+  }
+
+  public function setVideoUrl(?string $video_url): self
+  {
+    $this->video_url = $video_url;
+
+    return $this;
+  }
+
+  /**
+   * @return string[]|null
+   */
+  public function getFlavors(): ?array
+  {
+    return $this->flavors;
+  }
+
+  /**
+   * @param string[]|null $flavors
+   */
+  public function setFlavors(?array $flavors): self
+  {
+    $this->flavors = (null !== $flavors && [] !== $flavors) ? array_values($flavors) : null;
 
     return $this;
   }

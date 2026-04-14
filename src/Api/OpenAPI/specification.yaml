@@ -255,6 +255,12 @@ paths:
       parameters:
         - $ref: '#/components/parameters/Limit'
         - $ref: '#/components/parameters/Cursor'
+        - name: flavor
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Filter banners by flavor (e.g. pocketcode, luna). Omit for all.'
       responses:
         '200':
           description: OK
@@ -4972,7 +4978,7 @@ components:
           example: '1234abcd-12ab-12ab-12ab-123456abcdef'
         type:
           type: string
-          enum: [project, studio, link, image]
+          enum: [project, studio, link, image, video]
         title:
           type: string
         image_url:
@@ -4980,6 +4986,10 @@ components:
         link_url:
           type: string
           nullable: true
+        video_url:
+          type: string
+          nullable: true
+          description: 'YouTube embed URL for video-type banners'
         priority:
           type: integer
 

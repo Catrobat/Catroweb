@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Admin;
 
 use App\DB\Entity\FeaturedBanner;
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Studio\Studio;
 use App\Storage\ImageRepository;
@@ -111,6 +112,7 @@ class FeaturedBannerAdmin extends AbstractAdmin
           'Studio' => 'studio',
           'Link' => 'link',
           'Image' => 'image',
+          'Video' => 'video',
         ],
         'required' => true,
       ])
@@ -130,7 +132,21 @@ class FeaturedBannerAdmin extends AbstractAdmin
         'required' => false,
         'help' => 'Custom URL (for type "link")',
       ])
+      ->add('video_url', UrlType::class, [
+        'required' => false,
+        'help' => 'YouTube embed URL (for type "video"), e.g. https://www.youtube.com/embed/VIDEO_ID',
+      ])
       ->add('file', FileType::class, $file_options)
+      ->add('flavors', ChoiceType::class, [
+        'choices' => array_combine(
+          array_map('ucfirst', Flavor::ALL),
+          Flavor::ALL,
+        ),
+        'multiple' => true,
+        'expanded' => true,
+        'required' => false,
+        'help' => 'Select flavors to show this banner on. Leave empty for all flavors.',
+      ])
       ->add('title', TextType::class, [
         'required' => false,
         'help' => 'Optional overlay title for the banner',

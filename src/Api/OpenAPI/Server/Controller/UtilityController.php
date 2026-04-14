@@ -56,7 +56,7 @@ class UtilityController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function featuredBannersGetAction(Request $request): Response
+  public function featuredBannersGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -72,6 +72,7 @@ class UtilityController extends Controller
     // Read out all input parameter values into variables
     $limit = $request->query->get('limit', 20);
     $cursor = $request->query->get('cursor');
+    $flavor = $request->query->get('flavor');
 
     // Use the default value if no value was provided
 
@@ -79,6 +80,7 @@ class UtilityController extends Controller
     try {
       $limit = $this->deserialize($limit, 'int', 'string');
       $cursor = $this->deserialize($cursor, 'string', 'string');
+      $flavor = $this->deserialize($flavor, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -97,6 +99,12 @@ class UtilityController extends Controller
     if ($response instanceof Response) {
       return $response;
     }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($flavor, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
 
     try {
       $handler = $this->getApiHandler();
@@ -105,7 +113,7 @@ class UtilityController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->featuredBannersGet($limit, $cursor, $responseCode, $responseHeaders);
+      $result = $handler->featuredBannersGet($limit, $cursor, $flavor, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         200 => 'OK',
@@ -137,7 +145,7 @@ class UtilityController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function healthGetAction(Request $request): Response
+  public function healthGetAction(Request $request)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];
@@ -196,7 +204,7 @@ class UtilityController extends Controller
    *
    * @return Response the Symfony response
    */
-  public function surveyLangCodeGetAction(Request $request, $lang_code): Response
+  public function surveyLangCodeGetAction(Request $request, $lang_code)
   {
     // Figure out what data format to return to the client
     $produces = ['application/json'];

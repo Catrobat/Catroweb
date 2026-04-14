@@ -531,7 +531,6 @@
   </file>
   <file src="src/System/Testing/Behat/Context/CatrowebBrowserContext.php">
     <PossiblyNullArgument>
-      <code><![CDATA[$feature_url]]></code>
       <code><![CDATA[$user]]></code>
       <code><![CDATA[$user]]></code>
     </PossiblyNullArgument>

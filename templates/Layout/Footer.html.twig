@@ -7,11 +7,11 @@
           <h2>{{ 'footer.title'|trans({'%user_count%': stats.users}, 'catroweb') }}</h2>
           <p class="mt-4 mb-4">{{ 'footer.text'|trans({'%project_count%': stats.projects}, 'catroweb') }}:</p>
           <a href="{{ url('apple_app_store') }}" target="_blank">
-            <img alt="{{ 'iosAppStore'|trans({}, 'catroweb') }}" src="{{ asset('images/social/download-on-app-store.svg') }}" height="42px"/>
+            <img alt="{{ 'iosAppStore'|trans({}, 'catroweb') }}" src="{{ asset('images/social/download-on-app-store.svg') }}" width="126" height="42"/>
           </a>
           {% if flavor() == 'pocketcode' %}
             <a href="{{ url('google_play_store') }}" target="_blank">
-              <img alt="{{ 'googlePlay'|trans({}, 'catroweb') }}" src="{{ asset('images/social/google-play.svg') }}" height="42px"/>
+              <img alt="{{ 'googlePlay'|trans({}, 'catroweb') }}" src="{{ asset('images/social/google-play.svg') }}" width="142" height="42"/>
             </a>
           {% endif %}
         </div>
