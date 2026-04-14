@@ -20,9 +20,8 @@ Encore
   // public path used by the web server to access the output path
   .setPublicPath('/build')
 
-  // overwriting the css versioning until the transition to webpack is full done
   .configureFilenames({
-    css: 'css/[name].css', // -[contenthash] to be used once styles are only imported!
+    css: 'css/[name]-[contenthash].css',
     js: 'js/[name]-[chunkhash].js',
   })
 
