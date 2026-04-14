@@ -5,6 +5,7 @@ import { AjaxController } from '../ajax_controller'
 import { LoginTokenHandler } from '../../Security/LoginTokenHandler'
 import { initCaptchaWidget } from '../../Security/CaptchaWidget'
 
+/* stimulusFetch: 'lazy' */
 export default class extends AjaxController {
   static values = {
     baseUrl: String,

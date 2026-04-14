@@ -4,6 +4,7 @@ import { showValidationMessage } from '../../Components/TextField'
 import { AjaxController } from '../ajax_controller'
 import { initCaptchaWidget } from '../../Security/CaptchaWidget'
 
+/* stimulusFetch: 'lazy' */
 export default class extends AjaxController {
   static values = {
     apiPath: String,

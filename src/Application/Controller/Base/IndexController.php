@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\Base;
 
+use App\Api\Services\Utility\UtilityResponseManager;
 use App\DB\Entity\System\MaintenanceInformation;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\FeaturedBannerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,6 +21,8 @@ class IndexController extends AbstractController
   public function __construct(
     private readonly EntityManagerInterface $entityManager,
     private readonly TranslatorInterface $translator,
+    private readonly FeaturedBannerRepository $featuredBannerRepository,
+    private readonly UtilityResponseManager $utilityResponseManager,
   ) {
   }
 
@@ -28,9 +32,31 @@ class IndexController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
 
+    $first_banner = $this->getFirstBannerData();
+
     return $this->render('Index/IndexPage.html.twig', [
       'is_first_oauth_login' => null !== $user && $user->isOauthUser() && !$user->isOauthPasswordCreated(),
+      'first_banner' => $first_banner,
     ]);
+  }
+
+  /**
+   * @return array{image_url: string, link_url: string|null, title: string}|null
+   */
+  private function getFirstBannerData(): ?array
+  {
+    $banners = $this->featuredBannerRepository->findActiveBannersKeyset(1);
+    if ([] === $banners) {
+      return null;
+    }
+
+    $response = $this->utilityResponseManager->createFeaturedBannerResponse($banners[0]);
+
+    return [
+      'image_url' => $response->getImageUrl() ?? '/images/default/screenshot-card@1x.webp',
+      'link_url' => $response->getLinkUrl(),
+      'title' => $response->getTitle() ?? '',
+    ];
   }
 
   #[Route(path: '/maintenance/list', name: 'maintenance_list', methods: ['GET'])]

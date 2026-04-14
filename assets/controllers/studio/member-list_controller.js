@@ -5,6 +5,7 @@ import { getImageUrl } from '../../Layout/ImageVariants'
 import { MDCMenu } from '@material/menu'
 import Swal from 'sweetalert2'
 
+/* stimulusFetch: 'lazy' */
 export default class extends Controller {
   static values = {
     membersUrl: String,

@@ -5,6 +5,7 @@ import { getImageUrl } from '../../Layout/ImageVariants'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import AcceptLanguage from '../../Api/AcceptLanguage'
 
+/* stimulusFetch: 'lazy' */
 export default class extends Controller {
   static values = {
     apiBaseUrl: String,

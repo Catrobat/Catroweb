@@ -6,6 +6,7 @@ import { getImageUrl } from '../../Layout/ImageVariants'
 import AcceptLanguage from '../../Api/AcceptLanguage'
 import '../../Components/RetentionTooltip'
 
+/* stimulusFetch: 'lazy' */
 export default class extends Controller {
   static values = {
     apiBaseUrl: String,

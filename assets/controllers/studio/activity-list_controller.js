@@ -1,6 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { escapeHtml } from '../../Components/HtmlEscape'
 
+/* stimulusFetch: 'lazy' */
 export default class extends Controller {
   static values = {
     activitiesUrl: String,
