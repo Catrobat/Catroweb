@@ -55,7 +55,7 @@ class UtilityResponseManager extends AbstractResponseManager
     return match ($banner->getType()) {
       'project' => $this->resolveProjectScreenshot($banner),
       'studio' => $this->resolveStudioCover($banner),
-      default => '/images/default/screenshot.png',
+      default => '/images/default/screenshot-card@1x.webp',
     };
   }
 
@@ -63,7 +63,7 @@ class UtilityResponseManager extends AbstractResponseManager
   {
     $program = $banner->getProgram();
     if (null === $program) {
-      return '/images/default/screenshot.png';
+      return '/images/default/screenshot-card@1x.webp';
     }
 
     return '/resources/screenshots/'.$program->getId().'/screenshot.png';
@@ -73,12 +73,12 @@ class UtilityResponseManager extends AbstractResponseManager
   {
     $studio = $banner->getStudio();
     if (null === $studio) {
-      return '/images/default/screenshot.png';
+      return '/images/default/screenshot-card@1x.webp';
     }
 
     $cover = $studio->getCoverAssetPath();
 
-    return null !== $cover && '' !== $cover ? '/'.$cover : '/images/default/screenshot.png';
+    return null !== $cover && '' !== $cover ? '/'.$cover : '/images/default/screenshot-card@1x.webp';
   }
 
   private function resolveLinkUrl(FeaturedBanner $banner): ?string

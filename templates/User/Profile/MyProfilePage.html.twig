@@ -38,9 +38,10 @@
     </div>
   {% endif %}
   <div class="profile__basic-info">
+    {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
+    {% set my_avatar_variants = user_avatar_variants(app.user) %}
     <div class="profile__basic-info__avatar">
-      <img class="profile__basic-info__avatar__img" alt="{{ 'profile.picture'|trans({}, 'catroweb') }}"
-           src="{% if app.user.avatar is not empty %}{{ app.user.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"/>
+      {{ responsive_image.picture(my_avatar_variants, 'profile.picture'|trans({}, 'catroweb'), {class: 'profile__basic-info__avatar__img', loading: 'eager', fallback: (app.user.avatar is not empty ? app.user.avatar : asset('images/default/avatar_default-thumb@1x.webp'))}) }}
       <div class="profile__basic-info__avatar__btn-change"
            aria-label="{{ 'profile.changePicture'|trans({}, 'catroweb') }}"><span
             class="material-icons">photo_camera</span></div>

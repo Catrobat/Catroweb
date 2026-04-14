@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { getImageUrl } from '../../Layout/ImageVariants'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import Swal from 'sweetalert2'
 
@@ -84,7 +85,11 @@ export default class extends Controller {
       this.userRoleValue === 'admin' ||
       (this.isLoggedInValue && comment.username === this.userNameValue)
 
-    const avatarSrc = comment.user_avatar || '/images/default/avatar_default.png'
+    const avatarSrc = getImageUrl(
+      comment.user_avatar,
+      'thumb',
+      '/images/default/avatar_default-thumb@1x.webp',
+    )
     const rawDate = comment.created_at || comment.timestamp
     const dateStr = rawDate ? new Date(rawDate).toLocaleString('en-GB') : ''
 

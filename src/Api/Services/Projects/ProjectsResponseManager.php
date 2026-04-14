@@ -169,11 +169,10 @@ class ProjectsResponseManager extends AbstractResponseManager
     }
 
     if (in_array('screenshot', $attributes_list, true)) {
-      // Example projects keep their fixed 80x80 image (no variants generated for those).
-      // Regular projects expose responsive AVIF/WebP variants.
-      $data['screenshot'] = $project->isExample()
-        ? null
-        : $this->project_manager->getScreenshotVariants($extraced_project->getId());
+      $project_id = $extraced_project->getId();
+      $data['screenshot'] = (!$project->isExample() && null !== $project_id)
+        ? $this->project_manager->getScreenshotVariants($project_id)
+        : null;
     }
 
     if (in_array('project_url', $attributes_list, true)) {

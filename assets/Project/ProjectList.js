@@ -2,6 +2,7 @@ import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
+import { getImageUrl } from '../Layout/ImageVariants'
 import '../Components/RetentionTooltip'
 
 require('./ProjectList.scss')
@@ -67,7 +68,7 @@ export class ProjectList {
 
   formatApiUrl(apiUrl) {
     let attributes =
-      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,uploaded_string,retention_days,retention_expiry,private,views,downloads'
+      'id,name,project_url,screenshot,not_for_kids,uploaded_string,retention_days,retention_expiry,private,views,downloads'
 
     if (this.propertyToShow && !attributes.split(',').includes(this.propertyToShow)) {
       attributes += ',' + this.propertyToShow
@@ -208,7 +209,11 @@ export class ProjectList {
   _generateProjectElementWithActions(data, projectUrl) {
     const id = escapeAttr(String(data.id || ''))
     const name = escapeHtml(data.name || '')
-    const screenshotSmall = data.screenshot_small || '/images/default/screenshot.png'
+    const screenshotSmall = getImageUrl(
+      data.screenshot,
+      'card',
+      '/images/default/screenshot-card@1x.webp',
+    )
     const uploadedString = escapeHtml(data.uploaded_string || '')
 
     const detailUrl = this.projectDetailPath
@@ -585,7 +590,10 @@ export class ProjectList {
     el.dataset.id = data.id
 
     const img = document.createElement('img')
-    img.setAttribute('data-src', data.image_path || '/images/default/screenshot.png')
+    img.setAttribute(
+      'data-src',
+      getImageUrl(data.cover, 'card', '/images/default/screenshot-card@1x.webp'),
+    )
     img.className = 'lazyload project-list__project__image'
     img.alt = data.name || ''
     img.width = 360
@@ -621,8 +629,10 @@ export class ProjectList {
 
   createImageElement(data) {
     const img = document.createElement('img')
-    img.setAttribute('data-src', data.screenshot_small)
-    img.setAttribute('data-srcset', `${data.screenshot_small} 80w, ${data.screenshot_large} 480w`)
+    const thumbUrl = getImageUrl(data.screenshot, 'thumb', '/images/default/thumbnail-card@1x.webp')
+    const cardUrl = getImageUrl(data.screenshot, 'card', '/images/default/screenshot-card@1x.webp')
+    img.setAttribute('data-src', thumbUrl)
+    img.setAttribute('data-srcset', `${thumbUrl} 80w, ${cardUrl} 480w`)
     img.setAttribute('data-sizes', '(min-width: 768px) 10vw, 25vw')
     img.className = 'lazyload project-list__project__image'
     img.alt = data.name || ''

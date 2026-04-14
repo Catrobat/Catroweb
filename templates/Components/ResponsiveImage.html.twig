@@ -6,7 +6,7 @@
     {{ responsive_image.picture(
       studio_cover_variants(studio),
       studio.name,
-      {class: 'img-fluid', sizes: '(min-width: 768px) 60vw, 100vw', fallback: asset('images/default/thumbnail.png')}
+      {class: 'img-fluid', sizes: '(min-width: 768px) 60vw, 100vw', fallback: asset('images/default/thumbnail-card@1x.webp')}
     ) }}
 
   For each format (AVIF first, then WebP) the macro emits a <source> per
