@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import { getImageUrl } from '../Layout/ImageVariants'
 
 export function ProjectComments(config) {
   const {
@@ -381,7 +382,7 @@ export function ProjectComments(config) {
     const commentId = comment.id
     const userId = comment.user?.id || ''
     const username = comment.user?.username || ''
-    const avatarUrl = comment.user?.avatar || defaultAvatarUrl
+    const avatarUrl = getImageUrl(comment.user?.avatar, 'thumb', defaultAvatarUrl)
     const userApproved = comment.user?.approved || false
     const message = comment.message
     const createdAt = comment.created_at

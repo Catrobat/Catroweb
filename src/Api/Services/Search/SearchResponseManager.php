@@ -80,7 +80,7 @@ class SearchResponseManager extends AbstractResponseManager
         'id' => $studio->getId(),
         'name' => $studio->getName(),
         'description' => $studio->getDescription(),
-        'image_path' => $studio->getCoverAssetPath() ?? '',
+        'cover' => $this->studioManager->getCoverVariants($studio),
         'members_count' => $this->studioManager->countStudioUsers($studio),
         'projects_count' => $this->studioManager->countStudioProjects($studio),
       ]);

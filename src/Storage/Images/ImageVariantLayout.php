@@ -86,6 +86,17 @@ final class ImageVariantLayout
   }
 
   /**
+   * Quick check: does at least one variant file (WebP thumb@1x) exist on disk?
+   * Used by backfill commands as an idempotency guard.
+   */
+  public static function hasVariants(string $directory, string $basename): bool
+  {
+    return is_file(
+      rtrim($directory, '/').'/'.self::filename($basename, self::VARIANT_THUMB, self::DPR_1X, self::FORMAT_WEBP)
+    );
+  }
+
+  /**
    * All 12 filenames that make up a complete variant set.
    *
    * @return list<array{variant: string, dpr: int, format: string, filename: string}>

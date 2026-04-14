@@ -10,7 +10,7 @@
      data-trans-join="{{ 'studio.join'|trans({}, 'catroweb') }}"
      data-trans-pending="{{ 'studio.details.pending'|trans({}, 'catroweb') }}"
      data-trans-declined="{{ 'studio.details.decline'|trans({}, 'catroweb') }}"
-     data-default-cover="{{ asset('images/default/thumbnail.png') }}"
+     data-default-cover="{{ asset('images/default/thumbnail-card@1x.webp') }}"
      data-trans-invalid-type="{{ 'studio.cover_image_invalid_type'|trans({}, 'catroweb') }}"
      data-trans-image-compressed="{{ 'studio.cover_image_compressed'|trans({}, 'catroweb') }}"
      data-trans-file-too-large="{{ 'studio.cover_image_still_too_large'|trans({}, 'catroweb') }}"
@@ -49,7 +49,7 @@
         sizes: '(min-width: 768px) 1024px, 100vw',
         loading: 'eager',
         fetchpriority: 'high',
-        fallback: asset('images/default/thumbnail.png'),
+        fallback: asset('images/default/thumbnail-card@1x.webp'),
       },
     ) }}
     <form class="studio-detail__header__details__button--upload-image" id="std-header-form"

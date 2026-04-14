@@ -1,6 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { getImageUrl } from '../../Layout/ImageVariants'
 import { MDCMenu } from '@material/menu'
 import Swal from 'sweetalert2'
 
@@ -51,7 +52,11 @@ export default class extends Controller {
     const li = document.createElement('li')
     li.className = 'member__list-entry'
 
-    const avatarUrl = member.avatar || '/images/default/avatar_default.png'
+    const avatarUrl = getImageUrl(
+      member.avatar,
+      'thumb',
+      '/images/default/avatar_default-thumb@1x.webp',
+    )
     const profileUrl = '/app/user/' + escapeAttr(String(member.user_id))
 
     const adminIndicator =

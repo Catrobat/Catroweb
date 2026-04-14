@@ -1,5 +1,6 @@
 import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { getImageUrl } from '../Layout/ImageVariants'
 import './Search.scss'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -136,7 +137,7 @@ function renderProjects(section, projects, theme, trans) {
     const url = (project.project_url || '').replace('/app/', '/' + theme + '/')
     const card = createCard(
       url,
-      project.screenshot_small || '/images/default/screenshot.png',
+      getImageUrl(project.screenshot, 'card', '/images/default/screenshot-card@1x.webp'),
       project.name || '',
       'calendar_today',
       project.uploaded_string || '',
@@ -160,10 +161,7 @@ function renderUsers(section, users, baseUrl, trans) {
 
   users.forEach((user) => {
     const url = baseUrl + '/app/user/' + escapeAttr(String(user.id))
-    const avatar =
-      typeof user.picture === 'string' && user.picture.length > 0
-        ? user.picture
-        : '/images/default/avatar_default.png'
+    const avatar = getImageUrl(user.avatar, 'thumb', '/images/default/avatar_default-thumb@1x.webp')
     const card = createCard(
       url,
       avatar,
@@ -190,7 +188,7 @@ function renderStudios(section, studios, baseUrl, trans) {
 
   studios.forEach((studio) => {
     const url = baseUrl + '/app/studio/' + escapeAttr(String(studio.id))
-    const image = studio.image_path ? '/' + studio.image_path : '/images/default/screenshot.png'
+    const image = getImageUrl(studio.cover, 'card', '/images/default/screenshot-card@1x.webp')
     const card = createCard(
       url,
       image,

@@ -6,7 +6,7 @@
                 <div class="studios-list-item">
                     {# cover_path now stores a basename key; template-rendered lists fall back to the default thumbnail.
                        API-backed lists receive full ImageVariants via StudioResponse.cover. #}
-                    <img src="{{ asset('images/default/thumbnail.png') }}" class="img-fluid studios-list-item--image" alt="">
+                    <img src="{{ asset('images/default/thumbnail-card@1x.webp') }}" class="img-fluid studios-list-item--image" alt="">
                     <div class="studios-list-item--content">
                         <div class="studios-list-item--heading">
                             <h3>{{ studio.name }}</h3>

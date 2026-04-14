@@ -15,7 +15,7 @@
   {% set cover_variants = studio_cover_variants(studio) %}
   {# Open Graph crawlers don't speak <picture>; pick the WebP 2x URL (widest, universally supported) and fall back to the default. #}
   {% set cover_detail_webp_2x = cover_variants ? attribute(cover_variants, 'detail').webp2x|default(null) : null %}
-  {% set og_image_url = cover_detail_webp_2x ?? absolute_url(asset('images/default/thumbnail.png')) %}
+  {% set og_image_url = cover_detail_webp_2x ?? absolute_url(asset('images/default/thumbnail-card@1x.webp')) %}
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ studio.name|escape('html_attr') }} – Catrobat">

@@ -37,7 +37,7 @@
      data-is-admin="{{ is_granted('ROLE_ADMIN') ? 'true' : 'false' }}"
      data-current-user-id="{{ app.user ? app.user.id : '' }}"
      data-current-user-is-minor="{{ (app.user and app.user.isMinor()) ? 'true' : 'false' }}"
-     data-default-avatar-url="{{ asset('images/default/avatar_default.png') }}"
+     data-default-avatar-url="{{ asset('images/default/avatar_default-thumb@1x.webp') }}"
      data-profile-url-template="{{ url('profile', {id: '__USER_ID__', theme: app.request.attributes.get('flavor')|default('pocketcode')}) }}"
      data-comment-detail-url-template="{{ path('project_comment', {id: '__COMMENT_ID__', theme: app.request.attributes.get('flavor')|default('pocketcode')}) }}"
      data-translate-url-template="{{ path('open_api_server_comments_commentsidtranslationget', {id: 0})|replace({'/0/translation': ''}) }}"

@@ -3,6 +3,7 @@ import '../Components/TabBar'
 import './Profile.scss'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
+import { getImageUrl } from '../Layout/ImageVariants'
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.js-follower-overview')
@@ -39,7 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderFollowerCard(user, showFollowsMe, itemClassPrefix) {
-    const avatarSrc = user.avatar || baseUrl + '/images/default/avatar_default.png'
+    const avatarSrc = getImageUrl(
+      user.avatar,
+      'thumb',
+      baseUrl + '/images/default/avatar_default-thumb@1x.webp',
+    )
     const profileUrl = baseUrl + '/' + escapeAttr(theme) + '/user/' + escapeAttr(user.id)
     const itemClass = itemClassPrefix + '-' + escapeAttr(user.id)
 

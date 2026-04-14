@@ -34,7 +34,7 @@ export class FeaturedBanner {
           }
           return {
             url: url || null,
-            image: item.image_url || '/images/default/screenshot.png',
+            image: item.image_url || '/images/default/screenshot-card@1x.webp',
             title: item.title || '',
           }
         })

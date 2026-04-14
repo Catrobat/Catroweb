@@ -11,8 +11,9 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ profile.username|escape('html_attr') }} – Catrobat">
   <meta property="og:url" content="{{ url('profile', {id: profile.id}) }}">
-  {% if profile.avatar is not empty %}
-    {% set og_avatar_url = absolute_url(asset(profile.avatar)) %}
+  {% set og_avatar_variants = user_avatar_variants(profile) %}
+  {% set og_avatar_url = (og_avatar_variants and og_avatar_variants.detail) ? og_avatar_variants.detail.webp2x|default(null) : null %}
+  {% if og_avatar_url %}
     <meta property="og:image" content="{{ og_avatar_url }}">
     <meta property="og:image:secure_url" content="{{ og_avatar_url }}">
     <meta name="twitter:card" content="summary">
@@ -26,9 +27,10 @@
 
   {# Profile header — server renders avatar + username, JS fills verification badge + follow buttons #}
   <div class="row no-gutters profile">
+    {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
+    {% set body_avatar_variants = user_avatar_variants(profile) %}
     <div class="col-4 col-md-2 avatar-container mt-2 pe-3">
-      <img alt="" id="user-image" class="img-fluid round"
-           src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"/>
+      {{ responsive_image.picture(body_avatar_variants, profile.username, {class: 'img-fluid round', loading: 'eager', fallback: (profile.avatar is not empty ? profile.avatar : asset('images/default/avatar_default-thumb@1x.webp'))}) }}
     </div>
 
     <div id="user-information" class="col-8 col-md-10 mt-2 user-info d-flex flex-column justify-content-between">

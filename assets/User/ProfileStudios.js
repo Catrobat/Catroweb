@@ -1,5 +1,6 @@
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
+import { getImageUrl } from '../Layout/ImageVariants'
 import './ProfileStudios.scss'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = escapeAttr(studio.id || '')
     const name = escapeHtml(studio.name || '')
     const description = escapeHtml(truncate(studio.description || '', 100))
-    const imagePath = studio.image_path || '/images/default/screenshot.png'
+    const imagePath = getImageUrl(studio.cover, 'card', '/images/default/screenshot-card@1x.webp')
     const membersCount = parseInt(studio.members_count, 10) || 0
     const projectsCount = parseInt(studio.projects_count, 10) || 0
     const isPublic = studio.is_public !== false

@@ -7,6 +7,7 @@ import ProjectApi from '../Api/ProjectApi'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
+import { getImageUrl } from '../Layout/ImageVariants'
 import '../Components/RetentionTooltip'
 
 require('./OwnProjectList.scss')
@@ -16,7 +17,7 @@ export class OwnProjectList {
     this.container = container
     this.projectsContainer = container.getElementsByClassName('projects-container')[0]
     const attributes =
-      'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private,not_for_kids,retention_days,retention_expiry'
+      'attributes=id,project_url,screenshot,name,downloads,views,reactions,comments,private,not_for_kids,retention_days,retention_expiry'
     this.baseUrl = baseUrl
     this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' + attributes : apiUrl + '?' + attributes
     this.projectsLoaded = 0
@@ -174,7 +175,11 @@ export class OwnProjectList {
     //
 
     const id = escapeAttr(String(data.id))
-    const screenshotSmall = data.screenshot_small || '/images/default/screenshot.png'
+    const screenshotSmall = getImageUrl(
+      data.screenshot,
+      'card',
+      '/images/default/screenshot-card@1x.webp',
+    )
 
     const icons = {
       downloads: 'get_app',

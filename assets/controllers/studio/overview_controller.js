@@ -1,6 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
+import { getImageUrl } from '../../Layout/ImageVariants'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import AcceptLanguage from '../../Api/AcceptLanguage'
 
@@ -230,7 +231,7 @@ export default class extends Controller {
     const id = escapeAttr(studio.id || '')
     const name = escapeHtml(studio.name || '')
     const description = escapeHtml(this._truncate(studio.description || '', 100))
-    const imagePath = studio.image_path || '/images/default/thumbnail.png'
+    const imagePath = getImageUrl(studio.cover, 'card', '/images/default/thumbnail-card@1x.webp')
     const membersCount = parseInt(studio.members_count, 10) || 0
     const projectsCount = parseInt(studio.projects_count, 10) || 0
     const isPublic = studio.is_public !== false
