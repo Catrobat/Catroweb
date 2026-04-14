@@ -1,5 +1,8 @@
 {% block stylesheets %}
-{{ encore_entry_link_tags('layout_language_menu') }}
+  {% for link in encore_entry_css_files('layout_language_menu') %}
+    <link rel="preload" href="{{ link }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ link }}"></noscript>
+  {% endfor %}
 {% endblock stylesheets %}
 
 <div class="language-body-overlay"></div>
