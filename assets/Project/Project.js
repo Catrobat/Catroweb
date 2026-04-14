@@ -621,7 +621,7 @@ export const Project = function (config) {
       }
       if (activeLikeTypes.includes('wow')) {
         html += `<div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center" id="wow-reaction">
-                    <img src="${wowWhite}" id="${iconSize === 'md-24' ? 'wow-reaction-img-small' : 'wow-reaction-img'}" class="wow"></div>`
+                    <img src="${wowWhite}" id="${iconSize === 'md-24' ? 'wow-reaction-img-small' : 'wow-reaction-img'}" class="wow" alt=""></div>`
       }
       likeButtons.innerHTML = html
     }
