@@ -3,7 +3,7 @@ import '../Components/TabBar'
 import './Profile.scss'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { buildPictureHTML } from '../Layout/ImageVariants'
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.js-follower-overview')
@@ -40,11 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderFollowerCard(user, showFollowsMe, itemClassPrefix) {
-    const avatarSrc = getImageUrl(
-      user.avatar,
-      'thumb',
-      baseUrl + '/images/default/avatar_default-thumb@1x.webp',
-    )
+    const avatarFallback = baseUrl + '/images/default/avatar_default-thumb@1x.webp'
     const profileUrl = baseUrl + '/' + escapeAttr(theme) + '/user/' + escapeAttr(user.id)
     const itemClass = itemClassPrefix + '-' + escapeAttr(user.id)
 
@@ -78,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="follower-item">
           <div class="follower-item__avatar">
             <a href="${profileUrl}">
-              <img class="round" src="${escapeAttr(avatarSrc)}" alt="">
+              ${buildPictureHTML(user.avatar, 'thumb', avatarFallback, 'class="round" alt=""')}
             </a>
           </div>
           <div class="follower-item__text">

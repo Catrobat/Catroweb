@@ -20,7 +20,7 @@ import { ProjectEditorTextFieldModel } from './ProjectEditorTextFieldModel'
 import { ProjectEditorModel } from './ProjectEditorModel'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { updatePictureSources } from '../Layout/ImageVariants'
 import { prepareImageFileForUpload, readFileAsDataUrl } from '../Components/ImageUploadHelper'
 import './RemixGraphInline'
 
@@ -98,10 +98,7 @@ function renderProjectMetadata(data) {
   // Screenshot — server-rendered, API updates if changed
   const thumbnail = document.getElementById('project-thumbnail-big')
   if (thumbnail) {
-    const detailScreenshot = getImageUrl(data.screenshot, 'detail', null)
-    if (detailScreenshot) {
-      thumbnail.src = detailScreenshot
-    }
+    updatePictureSources(thumbnail, data.screenshot, 'detail', null)
     if (data.not_for_kids) {
       thumbnail.classList.add('blurred')
     }

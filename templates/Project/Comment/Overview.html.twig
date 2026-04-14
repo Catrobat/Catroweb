@@ -1,4 +1,5 @@
 {% if not app.user or not app.user.isMinor() %}
+{% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
 <div id="project-comments" class="row mb-3">
 
   <div class="col-12 d-flex align-items-center justify-content-between mb-3">
@@ -13,11 +14,11 @@
 
   <div id="user-comment-wrapper" class="col-12" style="display: none;">
     <div class="comment-avatar">
-      <img class="comment-avatar-img" src="{% if app.user and app.user.avatar is not empty %}
-                      {{ app.user.avatar }}
-                    {% else %}
-                      {{ asset('images/default/avatar_default-thumb@1x.webp') }}
-                    {% endif %}" alt="Avatar" width="48" height="48">
+      {{ responsive_image.picture(
+        app.user ? user_avatar_variants(app.user) : null,
+        'Avatar',
+        {class: 'comment-avatar-img', width: 48, height: 48, fallback: asset('images/default/avatar_default-thumb@1x.webp')},
+      ) }}
     </div>
     <div class="comment-payload-wrapper">
       <div class="comment-message">

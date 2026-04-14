@@ -6,7 +6,7 @@ import '../Components/TextField'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import AcceptLanguage from '../Api/AcceptLanguage'
 import { escapeHtml } from '../Components/HtmlEscape'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { updatePictureSources } from '../Layout/ImageVariants'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
 
 require('../Project/ProjectList.scss')
@@ -87,11 +87,15 @@ async function uploadCoverImage(url, file) {
 
   if (response.status === 200) {
     response.json().then(function (data) {
-      document.querySelector('#studio-img-container img').src = getImageUrl(
-        data.cover,
-        'detail',
-        '/images/default/thumbnail-card@1x.webp',
-      )
+      const uploadedImg = document.querySelector('#studio-img-container img')
+      if (uploadedImg) {
+        updatePictureSources(
+          uploadedImg,
+          data.cover,
+          'detail',
+          '/images/default/thumbnail-card@1x.webp',
+        )
+      }
     })
   }
 
@@ -254,7 +258,7 @@ function renderHeader(header, studio) {
   // Cover image
   const coverImg = header.querySelector('#studio-img-container img')
   if (coverImg) {
-    coverImg.src = getImageUrl(studio.cover, 'detail', defaultCover)
+    updatePictureSources(coverImg, studio.cover, 'detail', defaultCover)
   }
 
   // Studio name

@@ -37,13 +37,14 @@
   <div id="studio-comments" class="mt-3">
 
     {% if user_role|default(null) is not null and studio.isAllowComments and (not app.user or not app.user.isMinor()) %}
+      {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
       <div id="user-comment-wrapper" class="col-12" data-studio--comment-target="form">
         <div class="comment-avatar">
-          <img class="comment-avatar-img" src="{% if app.user and app.user.avatar is not empty %}
-                          {{ app.user.avatar }}
-                        {% else %}
-                          {{ asset('images/default/avatar_default-thumb@1x.webp') }}
-                        {% endif %}" alt="Avatar" width="48" height="48">
+          {{ responsive_image.picture(
+            app.user ? user_avatar_variants(app.user) : null,
+            'Avatar',
+            {class: 'comment-avatar-img', width: 48, height: 48, fallback: asset('images/default/avatar_default-thumb@1x.webp')},
+          ) }}
         </div>
         <div class="comment-payload-wrapper">
           <div class="comment-message">

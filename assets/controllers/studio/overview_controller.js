@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
-import { getImageUrl } from '../../Layout/ImageVariants'
+import { buildPictureHTML } from '../../Layout/ImageVariants'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import AcceptLanguage from '../../Api/AcceptLanguage'
 
@@ -144,13 +144,14 @@ export default class extends Controller {
       this.hasMoreMy = json.has_more || false
       this.myCursor = json.next_cursor || null
 
+      this._removeSkeletons(this.myStudiosTarget)
       this._appendToSection(this.myStudiosTarget, studios, this.translations.noJoined, true)
       this._updateLoadMoreMyButton()
     } catch (error) {
       console.error('Error fetching my studios:', error)
+      this._removeSkeletons(this.myStudiosTarget)
     } finally {
       this.myLoading = false
-      this._removeSkeletons(this.myStudiosTarget)
     }
   }
 
@@ -191,13 +192,14 @@ export default class extends Controller {
         studios = studios.filter((s) => s.is_member !== true && s.join_request_status !== 'pending')
       }
 
+      this._removeSkeletons(container)
       this._appendToSection(container, studios, this.translations.noStudios, false)
       this._updateLoadMoreButton()
     } catch (error) {
       console.error('Error fetching studios:', error)
+      this._removeSkeletons(container)
     } finally {
       this.exploreLoading = false
-      this._removeSkeletons(container)
     }
   }
 
@@ -232,7 +234,6 @@ export default class extends Controller {
     const id = escapeAttr(studio.id || '')
     const name = escapeHtml(studio.name || '')
     const description = escapeHtml(this._truncate(studio.description || '', 100))
-    const imagePath = getImageUrl(studio.cover, 'card', '/images/default/thumbnail-card@1x.webp')
     const membersCount = parseInt(studio.members_count, 10) || 0
     const projectsCount = parseInt(studio.projects_count, 10) || 0
     const isPublic = studio.is_public !== false
@@ -273,9 +274,12 @@ export default class extends Controller {
       escapeAttr(detailUrl) +
       '" class="studios-list-item-link">' +
       '<div class="studios-list-item">' +
-      '<img src="' +
-      escapeAttr(imagePath) +
-      '" class="img-fluid studios-list-item--image" alt="">' +
+      buildPictureHTML(
+        studio.cover,
+        'card',
+        '/images/default/thumbnail-card@1x.webp',
+        'class="img-fluid studios-list-item--image" alt=""',
+      ) +
       '<div class="studios-list-item--content">' +
       '<div class="studios-list-item--heading">' +
       '<h3>' +
@@ -348,20 +352,19 @@ export default class extends Controller {
         '</button>'
     }
 
-    // Join button on explore cards only (not in dropdown menu)
-    let joinButton = ''
-    if (this.isLoggedInValue && !isMyStudios && !isMember) {
-      joinButton =
-        '<button class="btn btn-primary btn-sm studio-join-btn" data-studio-id="' +
+    if (this.isLoggedInValue && !isMyStudios && !isMember && joinRequestStatus !== 'pending') {
+      menuItems +=
+        '<div class="projects-list-item--dropdown-divider"></div>' +
+        '<button class="projects-list-item--dropdown-item fw-medium" style="color: var(--primary);" data-action="join" data-studio-id="' +
         escapeAttr(studioId) +
         '">' +
+        '<i class="material-icons" style="color: var(--primary);">group_add</i>' +
         escapeHtml(this.translations.join) +
         '</button>'
     }
 
     return (
       '<div class="studios-list-item--buttons">' +
-      joinButton +
       '<div class="projects-list-item--actions">' +
       '<button class="btn projects-list-item--menu-btn" data-studio-id="' +
       escapeAttr(studioId) +
@@ -447,12 +450,13 @@ export default class extends Controller {
         }
       })
 
-      container.querySelectorAll('.studio-join-btn').forEach((btn) => {
+      container.querySelectorAll('[data-action="join"]').forEach((btn) => {
         if (!btn.dataset.bound) {
           btn.dataset.bound = 'true'
           btn.addEventListener('click', (e) => {
             e.preventDefault()
             e.stopPropagation()
+            btn.closest('.projects-list-item--dropdown').style.display = 'none'
             this._joinStudio(btn.dataset.studioId)
           })
         }

@@ -7,6 +7,7 @@ namespace App\User;
 use App\DB\Entity\User\User;
 use App\Storage\Images\ImageVariantGenerator;
 use App\Storage\Images\ImageVariantUrlBuilder;
+use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\ImageVariants;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -28,6 +29,7 @@ class UserAvatarService
   public function __construct(
     private readonly ImageVariantUrlBuilder $url_builder,
     private readonly ImageVariantGenerator $generator,
+    private readonly EntityManagerInterface $entity_manager,
     ParameterBagInterface $parameter_bag,
   ) {
     /** @var string $resources_dir */
@@ -63,6 +65,17 @@ class UserAvatarService
     }
 
     return $this->url_builder->build($this->storage_dir, $this->public_path, $key);
+  }
+
+  public function getVariantsById(?string $user_id): ?ImageVariants
+  {
+    if (null === $user_id || '' === $user_id) {
+      return null;
+    }
+
+    $user = $this->entity_manager->find(User::class, $user_id);
+
+    return $this->getVariants($user);
   }
 
   /**

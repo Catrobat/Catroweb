@@ -1,4 +1,5 @@
 import { Carousel } from 'bootstrap'
+import { createPictureElement } from '../Layout/ImageVariants'
 
 export class FeaturedBanner {
   constructor(containerId) {
@@ -35,9 +36,10 @@ export class FeaturedBanner {
           }
           return {
             url: url || null,
-            image: item.image_url || '/images/default/screenshot-card@1x.webp',
+            imageVariants: item.image_variants || null,
             title: item.title || '',
             videoUrl: item.video_url || null,
+            youtubeThumbnail: this.extractYouTubeThumbnail(item.video_url),
           }
         })
 
@@ -133,19 +135,26 @@ export class FeaturedBanner {
   }
 
   createSlideImage(slide, index) {
-    const img = document.createElement('img')
-    img.src = slide.image
-    img.className = 'carousel-item__image d-block w-100'
-    img.alt = slide.title || ''
-    img.width = 1024
-    img.height = 600
-    img.loading = index === 0 ? 'eager' : 'lazy'
-    if (index === 0) {
-      img.fetchPriority = 'high'
-      img.onload = () => this.removeSkeleton()
-      img.onerror = () => this.removeSkeleton()
+    const attrs = {
+      class: 'carousel-item__image d-block w-100',
+      alt: slide.title || '',
+      width: 1024,
+      height: 600,
+      loading: index === 0 ? 'eager' : 'lazy',
     }
-    return img
+    if (index === 0) {
+      attrs.fetchpriority = 'high'
+    }
+    const fallback = slide.youtubeThumbnail || '/images/default/screenshot-detail@2x.avif'
+    const el = createPictureElement(slide.imageVariants, 'detail', fallback, attrs)
+    if (index === 0) {
+      const img = el.tagName === 'IMG' ? el : el.querySelector('img')
+      if (img) {
+        img.onload = () => this.removeSkeleton()
+        img.onerror = () => this.removeSkeleton()
+      }
+    }
+    return el
   }
 
   createVideoSlide(slide, index) {
@@ -184,6 +193,12 @@ export class FeaturedBanner {
     })
 
     return container
+  }
+
+  extractYouTubeThumbnail(videoUrl) {
+    if (!videoUrl) return null
+    const m = videoUrl.match(/\/embed\/([a-zA-Z0-9_-]+)/)
+    return m ? `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg` : null
   }
 
   removeSkeleton() {

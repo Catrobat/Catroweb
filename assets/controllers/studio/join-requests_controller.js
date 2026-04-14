@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
-import { getImageUrl } from '../../Layout/ImageVariants'
+import { buildPictureHTML } from '../../Layout/ImageVariants'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -49,9 +49,6 @@ export default class extends Controller {
     li.className = 'member__list-entry'
     li.id = `join-request-${request.id}`
 
-    const avatarSrc = escapeAttr(
-      getImageUrl(request.avatar, 'thumb', '/images/default/avatar_default-thumb@1x.webp'),
-    )
     const username = escapeHtml(request.username || 'Unknown')
     const profileUrl = '/app/user/' + escapeAttr(String(request.user_id))
     const transAccept = escapeHtml(this.element.dataset.transAccept || 'Accept')
@@ -59,7 +56,7 @@ export default class extends Controller {
 
     li.innerHTML = `
       <a href="${profileUrl}">
-        <img class="member__list-entry__image" src="${avatarSrc}" alt="">
+        ${buildPictureHTML(request.avatar, 'thumb', '/images/default/avatar_default-thumb@1x.webp', 'class="member__list-entry__image" alt=""')}
       </a>
       <div class="ps-3 flex-grow-1">
         <a href="${profileUrl}" class="fw-medium text-decoration-none">${username}</a>

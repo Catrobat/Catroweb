@@ -7,7 +7,7 @@ import ProjectApi from '../Api/ProjectApi'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { buildPictureHTML } from '../Layout/ImageVariants'
 import '../Components/RetentionTooltip'
 
 require('./OwnProjectList.scss')
@@ -175,11 +175,6 @@ export class OwnProjectList {
     //
 
     const id = escapeAttr(String(data.id))
-    const screenshotSmall = getImageUrl(
-      data.screenshot,
-      'card',
-      '/images/default/screenshot-card@1x.webp',
-    )
 
     const icons = {
       downloads: 'get_app',
@@ -274,9 +269,12 @@ export class OwnProjectList {
       '<a href="' +
       escapeAttr(projectUrl) +
       '">' +
-      '<img src="' +
-      escapeAttr(screenshotSmall) +
-      '" class="lazyload own-project-list__project__image" alt="" loading="lazy">' +
+      buildPictureHTML(
+        data.screenshot,
+        'card',
+        '/images/default/screenshot-card@1x.webp',
+        'class="lazyload own-project-list__project__image" alt="" loading="lazy"',
+      ) +
       '</a>' +
       '<div class="own-project-list__project__details">' +
       '<div class="own-project-list__project__details__name">' +

@@ -57,7 +57,6 @@ class IndexController extends AbstractController
       $response = $this->utilityResponseManager->createFeaturedBannerResponse($banner);
 
       return [
-        'image_url' => $response->getImageUrl() ?? '/images/default/screenshot-card@1x.webp',
         'link_url' => $response->getLinkUrl(),
         'title' => $response->getTitle() ?? '',
         'image_variants' => $this->utilityResponseManager->getFeaturedBannerVariants($banner),
