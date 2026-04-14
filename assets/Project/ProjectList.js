@@ -590,16 +590,12 @@ export class ProjectList {
     el.dataset.id = data.id
 
     const img = document.createElement('img')
-    img.setAttribute(
-      'data-src',
-      getImageUrl(data.cover, 'card', '/images/default/screenshot-card@1x.webp'),
-    )
-    img.className = 'lazyload project-list__project__image'
+    img.src = getImageUrl(data.cover, 'card', '/images/default/screenshot-card@1x.webp')
+    img.className = 'project-list__project__image'
     img.alt = data.name || ''
     img.width = 360
     img.height = 360
-    img.style.aspectRatio = '1 / 1'
-    img.style.objectFit = 'cover'
+    img.loading = 'lazy'
     el.appendChild(img)
 
     const nameSpan = document.createElement('span')
@@ -608,8 +604,7 @@ export class ProjectList {
     el.appendChild(nameSpan)
 
     const propDiv = document.createElement('div')
-    propDiv.className =
-      'lazyload project-list__project__property project-list__project__property-members'
+    propDiv.className = 'project-list__project__property project-list__project__property-members'
 
     const icon = document.createElement('i')
     icon.className = 'material-icons'
@@ -631,13 +626,14 @@ export class ProjectList {
     const img = document.createElement('img')
     const thumbUrl = getImageUrl(data.screenshot, 'thumb', '/images/default/thumbnail-card@1x.webp')
     const cardUrl = getImageUrl(data.screenshot, 'card', '/images/default/screenshot-card@1x.webp')
-    img.setAttribute('data-src', thumbUrl)
-    img.setAttribute('data-srcset', `${thumbUrl} 80w, ${cardUrl} 480w`)
-    img.setAttribute('data-sizes', '(min-width: 768px) 10vw, 25vw')
-    img.className = 'lazyload project-list__project__image'
+    img.src = thumbUrl
+    img.srcset = `${thumbUrl} 80w, ${cardUrl} 480w`
+    img.sizes = '(min-width: 768px) 10vw, 25vw'
+    img.className = 'project-list__project__image'
     img.alt = data.name || ''
     img.width = 360
     img.height = 360
+    img.loading = 'lazy'
     if (data.not_for_kids) {
       img.style.filter = 'blur(10px)'
     }

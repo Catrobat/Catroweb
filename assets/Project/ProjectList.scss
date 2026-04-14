@@ -436,6 +436,7 @@ $container-padding: 1rem;
   }
 
   &--retention {
+    display: flex;
     font-size: 0.6rem;
     color: light-dark(#bbb, #666);
 

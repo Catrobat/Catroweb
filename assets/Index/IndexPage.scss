@@ -19,6 +19,23 @@ img .lazyload:not([src]) {
   visibility: hidden;
 }
 
+// Skeleton placeholder bars for loading cards
+.skeleton-bar {
+  display: inline-block;
+  height: 12px;
+  border-radius: 3px;
+  background: light-dark(#c8c8c8, #3a3a50);
+  vertical-align: middle;
+
+  &--lg {
+    height: 16px;
+  }
+
+  &--sm {
+    height: 8px;
+  }
+}
+
 .carousel-item__image {
   width: 100%;
   height: auto;
@@ -181,18 +198,11 @@ body:has(#home-projects) {
   opacity: 1;
 }
 
-// Featured slider — flush against top bar, no gap
-.page-content:has(.featured-slider) {
-  margin-top: 56px;
-  padding-top: 0;
-
-  @media (width >= 600px) {
-    margin-top: 64px;
-  }
-}
-
+// Featured slider — negative top margin eats into page-content padding
+// so the slider sits flush against the top bar. When JS hides the slider
+// (no banners), the negative margin has no effect and normal padding stays.
 .featured-slider {
-  margin: 0 calc(-1 * var(--bs-gutter-x, 0.75rem));
+  margin: -2rem calc(-1 * var(--bs-gutter-x, 0.75rem)) 0;
   padding: 0 0 0.5rem;
   background: transparent;
 }
