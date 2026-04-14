@@ -2,7 +2,7 @@ import { normalizeApiResponse } from '../../Api/ResponseHelper'
 import { Controller } from '@hotwired/stimulus'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
-import { getImageUrl } from '../../Layout/ImageVariants'
+import { buildPictureHTML } from '../../Layout/ImageVariants'
 import AcceptLanguage from '../../Api/AcceptLanguage'
 import '../../Components/RetentionTooltip'
 
@@ -206,16 +206,12 @@ export default class extends Controller {
     const id = escapeAttr(String(project.id || ''))
     const name = escapeHtml(project.name || '')
     const author = escapeHtml(project.author || '')
-    const screenshotSmall = getImageUrl(
-      project.screenshot,
-      'card',
-      '/images/default/thumbnail-card@1x.webp',
-    )
     const downloads = parseInt(project.downloads, 10) || 0
     const views = parseInt(project.views, 10) || 0
     const uploadedString = escapeHtml(project.uploaded_string || '')
     const isPrivate = project.private || false
     const isNfk = project.not_for_kids || false
+    const nfkStyle = !isOwned && isNfk ? ' style="filter: blur(10px)"' : ''
 
     const detailUrl = this.projectDetailPathValue.replace('__ID__', id)
 
@@ -342,11 +338,12 @@ export default class extends Controller {
       escapeAttr(detailUrl) +
       '" class="projects-list-item-link">' +
       '<span class="projects-list-item--image-wrap">' +
-      '<img src="' +
-      escapeAttr(screenshotSmall) +
-      '" class="projects-list-item--image" alt="" loading="lazy"' +
-      (!isOwned && isNfk ? ' style="filter: blur(10px)"' : '') +
-      '>' +
+      buildPictureHTML(
+        project.screenshot,
+        'card',
+        '/images/default/thumbnail-card@1x.webp',
+        'class="projects-list-item--image" alt="" loading="lazy"' + nfkStyle,
+      ) +
       (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
       (isNfk
         ? '<i class="material-icons projects-list-item--lock-badge projects-list-item--nfk-badge">no_accounts</i>'

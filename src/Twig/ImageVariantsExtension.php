@@ -29,6 +29,7 @@ class ImageVariantsExtension extends AbstractExtension
     return [
       new TwigFunction('studio_cover_variants', $this->studio_manager->getCoverVariants(...)),
       new TwigFunction('user_avatar_variants', $this->user_avatar_service->getVariants(...)),
+      new TwigFunction('user_avatar_variants_by_id', $this->user_avatar_service->getVariantsById(...)),
       new TwigFunction('project_screenshot_variants', $this->project_manager->getScreenshotVariants(...)),
     ];
   }

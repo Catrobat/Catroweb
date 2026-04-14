@@ -10,6 +10,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
+use App\User\UserAvatarService;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\SearchResponse;
@@ -25,6 +26,7 @@ class SearchResponseManager extends AbstractResponseManager
     \Psr\Cache\CacheItemPoolInterface $cache,
     protected ProjectsResponseManager $projectsResponseManager,
     protected StudioManager $studioManager,
+    private readonly UserAvatarService $user_avatar_service,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -60,6 +62,7 @@ class SearchResponseManager extends AbstractResponseManager
     return new BasicUserDataResponse([
       'id' => $user->getId(),
       'username' => $user->getUsername(),
+      'avatar' => $this->user_avatar_service->getVariants($user),
       'projects' => $user->getPrograms()->count(),
       'followers' => $user->getFollowers()->count(),
       'following' => $user->getFollowing()->count(),

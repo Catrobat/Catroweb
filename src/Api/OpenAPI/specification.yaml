@@ -4981,8 +4981,8 @@ components:
           enum: [project, studio, link, image, video]
         title:
           type: string
-        image_url:
-          type: string
+        image_variants:
+          $ref: '#/components/schemas/ImageVariants'
         link_url:
           type: string
           nullable: true

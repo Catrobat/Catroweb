@@ -2,7 +2,7 @@ import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { buildPictureHTML, createPictureElement } from '../Layout/ImageVariants'
 import '../Components/RetentionTooltip'
 
 require('./ProjectList.scss')
@@ -209,11 +209,6 @@ export class ProjectList {
   _generateProjectElementWithActions(data, projectUrl) {
     const id = escapeAttr(String(data.id || ''))
     const name = escapeHtml(data.name || '')
-    const screenshotSmall = getImageUrl(
-      data.screenshot,
-      'card',
-      '/images/default/screenshot-card@1x.webp',
-    )
     const uploadedString = escapeHtml(data.uploaded_string || '')
 
     const detailUrl = this.projectDetailPath
@@ -332,11 +327,14 @@ export class ProjectList {
       escapeAttr(detailUrl) +
       '" class="projects-list-item-link">' +
       '<span class="projects-list-item--image-wrap">' +
-      '<img src="' +
-      escapeAttr(screenshotSmall) +
-      '" class="projects-list-item--image" alt="' +
-      escapeAttr(data.name || '') +
-      '" width="360" height="360" loading="lazy">' +
+      buildPictureHTML(
+        data.screenshot,
+        'card',
+        '/images/default/screenshot-card@1x.webp',
+        'class="projects-list-item--image" alt="' +
+          escapeAttr(data.name || '') +
+          '" width="360" height="360" loading="lazy"',
+      ) +
       (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
       (isNfk
         ? '<i class="material-icons projects-list-item--lock-badge projects-list-item--nfk-badge">no_accounts</i>'
@@ -589,14 +587,19 @@ export class ProjectList {
     el.href = studioUrl
     el.dataset.id = data.id
 
-    const img = document.createElement('img')
-    img.src = getImageUrl(data.cover, 'card', '/images/default/screenshot-card@1x.webp')
-    img.className = 'project-list__project__image'
-    img.alt = data.name || ''
-    img.width = 360
-    img.height = 360
-    img.loading = 'lazy'
-    el.appendChild(img)
+    const picture = createPictureElement(
+      data.cover,
+      'card',
+      '/images/default/screenshot-card@1x.webp',
+      {
+        class: 'project-list__project__image',
+        alt: data.name || '',
+        width: 360,
+        height: 360,
+        loading: 'lazy',
+      },
+    )
+    el.appendChild(picture)
 
     const nameSpan = document.createElement('span')
     nameSpan.className = 'project-list__project__name'
@@ -623,21 +626,22 @@ export class ProjectList {
   }
 
   createImageElement(data) {
-    const img = document.createElement('img')
-    const thumbUrl = getImageUrl(data.screenshot, 'thumb', '/images/default/thumbnail-card@1x.webp')
-    const cardUrl = getImageUrl(data.screenshot, 'card', '/images/default/screenshot-card@1x.webp')
-    img.src = thumbUrl
-    img.srcset = `${thumbUrl} 80w, ${cardUrl} 480w`
-    img.sizes = '(min-width: 768px) 10vw, 25vw'
-    img.className = 'project-list__project__image'
-    img.alt = data.name || ''
-    img.width = 360
-    img.height = 360
-    img.loading = 'lazy'
-    if (data.not_for_kids) {
-      img.style.filter = 'blur(10px)'
+    const attrs = {
+      class: 'project-list__project__image',
+      alt: data.name || '',
+      width: 360,
+      height: 360,
+      loading: 'lazy',
     }
-    return img
+    if (data.not_for_kids) {
+      attrs.style = 'filter: blur(10px)'
+    }
+    return createPictureElement(
+      data.screenshot,
+      'card',
+      '/images/default/screenshot-card@1x.webp',
+      attrs,
+    )
   }
 
   createPropertyElement(data) {

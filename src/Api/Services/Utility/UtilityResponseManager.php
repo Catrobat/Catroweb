@@ -7,7 +7,9 @@ namespace App\Api\Services\Utility;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\System\Survey;
+use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
+use App\Studio\StudioManager;
 use OpenAPI\Server\Model\FeaturedBannerResponse;
 use OpenAPI\Server\Model\ImageVariants;
 use OpenAPI\Server\Model\SurveyResponse;
@@ -22,6 +24,8 @@ class UtilityResponseManager extends AbstractResponseManager
     SerializerInterface $serializer,
     CacheItemPoolInterface $cache,
     private readonly ImageRepository $image_repository,
+    private readonly StudioManager $studio_manager,
+    private readonly ProjectManager $project_manager,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -39,7 +43,7 @@ class UtilityResponseManager extends AbstractResponseManager
       'id' => $banner->getId(),
       'type' => $banner->getType(),
       'title' => $banner->getTitle() ?? '',
-      'image_url' => $this->resolveImageUrl($banner),
+      'image_variants' => $this->getFeaturedBannerVariants($banner),
       'link_url' => $this->resolveLinkUrl($banner),
       'video_url' => $banner->getVideoUrl(),
       'priority' => $banner->getPriority(),
@@ -53,55 +57,32 @@ class UtilityResponseManager extends AbstractResponseManager
       return null;
     }
 
-    return $this->image_repository->getFeaturedVariants($id);
-  }
-
-  private function resolveImageUrl(FeaturedBanner $banner): string
-  {
-    $image_type = $banner->getImageType();
-    $id = $banner->getId();
-    if ('' !== $image_type && null !== $id) {
-      return '/'.$this->image_repository->getWebPath($id, $image_type, true);
+    // Own uploaded/generated variants first
+    $variants = $this->image_repository->getFeaturedVariants($id);
+    if (null !== $variants) {
+      return $variants;
     }
 
+    // Fall back to linked content's variants
     return match ($banner->getType()) {
-      'project' => $this->resolveProjectScreenshot($banner),
-      'studio' => $this->resolveStudioCover($banner),
-      'video' => $this->resolveVideoThumbnail($banner),
-      default => '/images/default/screenshot-card@1x.webp',
+      'project' => $this->resolveProjectVariants($banner),
+      'studio' => $this->resolveStudioVariants($banner),
+      default => null,
     };
   }
 
-  private function resolveProjectScreenshot(FeaturedBanner $banner): string
+  private function resolveProjectVariants(FeaturedBanner $banner): ?ImageVariants
   {
     $program = $banner->getProgram();
-    if (null === $program) {
-      return '/images/default/screenshot-card@1x.webp';
-    }
 
-    return '/resources/screenshots/'.$program->getId().'/screenshot.png';
+    $id = $program?->getId();
+
+    return null !== $id ? $this->project_manager->getScreenshotVariants($id) : null;
   }
 
-  private function resolveStudioCover(FeaturedBanner $banner): string
+  private function resolveStudioVariants(FeaturedBanner $banner): ?ImageVariants
   {
-    $studio = $banner->getStudio();
-    if (null === $studio) {
-      return '/images/default/screenshot-card@1x.webp';
-    }
-
-    $cover = $studio->getCoverAssetPath();
-
-    return null !== $cover && '' !== $cover ? '/'.$cover : '/images/default/screenshot-card@1x.webp';
-  }
-
-  private function resolveVideoThumbnail(FeaturedBanner $banner): string
-  {
-    $video_url = $banner->getVideoUrl();
-    if (null !== $video_url && 1 === preg_match('#/embed/([a-zA-Z0-9_-]+)#', $video_url, $m)) {
-      return 'https://img.youtube.com/vi/'.$m[1].'/hqdefault.jpg';
-    }
-
-    return '/images/default/screenshot-card@1x.webp';
+    return $this->studio_manager->getCoverVariants($banner->getStudio());
   }
 
   private function resolveLinkUrl(FeaturedBanner $banner): ?string

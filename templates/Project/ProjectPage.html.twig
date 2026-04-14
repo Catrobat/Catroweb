@@ -58,10 +58,22 @@
   {% endif %}
 
   {# Main project layout -- JS fills content after API fetch #}
+  {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
   <div class="row">
     <div class="col-5 col-sm-4 col-md-4 col-lg-3">
       <div class="project-thumbnail-wrap position-relative">
-        <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big" src="{{ asset(screenshot_big) }}" width="480" height="480"/>
+        {{ responsive_image.picture(
+          project_screenshot_variants(project_id),
+          'project thumbnail',
+          {
+            id: 'project-thumbnail-big',
+            class: 'project-thumbnail-big',
+            width: 480,
+            height: 480,
+            loading: 'eager',
+            fallback: asset(screenshot_big),
+          },
+        ) }}
         <div id="project-thumbnail-badges" class="project-thumbnail-badges"></div>
       </div>
       {% if my_project %}

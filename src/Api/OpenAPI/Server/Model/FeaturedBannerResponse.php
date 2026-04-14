@@ -73,13 +73,13 @@ class FeaturedBannerResponse
   protected ?string $title = null;
 
   /**
-   * @SerializedName("image_url")
+   * @SerializedName("image_variants")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $image_url = null;
+  protected ?ImageVariants $image_variants = null;
 
   /**
    * @SerializedName("link_url")
@@ -121,7 +121,7 @@ class FeaturedBannerResponse
       $this->id = array_key_exists('id', $data) ? $data['id'] : $this->id;
       $this->type = array_key_exists('type', $data) ? $data['type'] : $this->type;
       $this->title = array_key_exists('title', $data) ? $data['title'] : $this->title;
-      $this->image_url = array_key_exists('image_url', $data) ? $data['image_url'] : $this->image_url;
+      $this->image_variants = array_key_exists('image_variants', $data) ? $data['image_variants'] : $this->image_variants;
       $this->link_url = array_key_exists('link_url', $data) ? $data['link_url'] : $this->link_url;
       $this->video_url = array_key_exists('video_url', $data) ? $data['video_url'] : $this->video_url;
       $this->priority = array_key_exists('priority', $data) ? $data['priority'] : $this->priority;
@@ -191,21 +191,21 @@ class FeaturedBannerResponse
   }
 
   /**
-   * Gets image_url.
+   * Gets image_variants.
    */
-  public function getImageUrl(): ?string
+  public function getImageVariants(): ?ImageVariants
   {
-    return $this->image_url;
+    return $this->image_variants;
   }
 
   /**
-   * Sets image_url.
+   * Sets image_variants.
    *
    * @return $this
    */
-  public function setImageUrl(?string $image_url = null): self
+  public function setImageVariants(?ImageVariants $image_variants = null): self
   {
-    $this->image_url = $image_url;
+    $this->image_variants = $image_variants;
 
     return $this;
   }

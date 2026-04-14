@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
-import { getImageUrl } from '../../Layout/ImageVariants'
+import { buildPictureHTML } from '../../Layout/ImageVariants'
 import Swal from 'sweetalert2'
 
 /* stimulusFetch: 'lazy' */
@@ -91,9 +91,6 @@ export default class extends Controller {
     const canRemove = this._canRemove()
     const id = escapeAttr(String(project.id))
     const name = escapeHtml(project.name || '')
-    const screenshotUrl = escapeAttr(
-      getImageUrl(project.screenshot, 'card', '/images/default/screenshot-card@1x.webp'),
-    )
     const author = escapeHtml(project.author || project.added_by || '')
     const isPrivate = project.private || false
     const isNfk = project.not_for_kids || false
@@ -183,11 +180,14 @@ export default class extends Controller {
       projectUrl +
       '" class="projects-list-item-link">' +
       '<span class="projects-list-item--image-wrap">' +
-      '<img src="' +
-      screenshotUrl +
-      '" class="projects-list-item--image" alt="' +
-      escapeAttr(project.name || '') +
-      '" width="360" height="360" loading="lazy">' +
+      buildPictureHTML(
+        project.screenshot,
+        'card',
+        '/images/default/screenshot-card@1x.webp',
+        'class="projects-list-item--image" alt="' +
+          escapeAttr(project.name || '') +
+          '" width="360" height="360" loading="lazy"',
+      ) +
       (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
       (isNfk
         ? '<i class="material-icons projects-list-item--lock-badge projects-list-item--nfk-badge">no_accounts</i>'
@@ -354,13 +354,11 @@ export default class extends Controller {
       let html =
         '<div class="studio-add-project-list" style="max-height: 400px; overflow-y: auto;">'
       available.forEach((p) => {
-        const screenshot = getImageUrl(p.screenshot, 'card', defaultScreenshot)
         html += `<label class="studio-add-project-item" for="add-project-${escapeAttr(String(p.id))}"
           style="display: flex; align-items: center; gap: 12px; padding: 8px 12px; margin: 0; cursor: pointer; border-bottom: 1px solid #eee; transition: background-color 0.15s;">
           <input class="form-check-input mt-0" type="checkbox" value="${escapeAttr(String(p.id))}" id="add-project-${escapeAttr(String(p.id))}"
             style="flex-shrink: 0;">
-          <img src="${escapeAttr(screenshot)}" alt="" width="40" height="40"
-            style="border-radius: 4px; object-fit: cover; flex-shrink: 0;">
+          ${buildPictureHTML(p.screenshot, 'card', defaultScreenshot, 'alt="" width="40" height="40" style="border-radius: 4px; object-fit: cover; flex-shrink: 0;"')}
           <span style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left;">
             ${escapeHtml(p.name)}
           </span>

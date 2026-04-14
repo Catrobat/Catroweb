@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { createPictureElement } from '../Layout/ImageVariants'
 
 export function ProjectComments(config) {
   const {
@@ -382,7 +382,7 @@ export function ProjectComments(config) {
     const commentId = comment.id
     const userId = comment.user?.id || ''
     const username = comment.user?.username || ''
-    const avatarUrl = getImageUrl(comment.user?.avatar, 'thumb', defaultAvatarUrl)
+    const avatarVariants = comment.user?.avatar || null
     const userApproved = comment.user?.approved || false
     const message = comment.message
     const createdAt = comment.created_at
@@ -403,13 +403,13 @@ export function ProjectComments(config) {
     avatarDiv.className = 'comment-avatar'
     const avatarLink = document.createElement('a')
     avatarLink.href = profileUrl
-    const avatarImg = document.createElement('img')
-    avatarImg.className = 'comment-avatar-img'
-    avatarImg.src = avatarUrl
-    avatarImg.alt = 'Avatar'
-    avatarImg.width = 48
-    avatarImg.height = 48
-    avatarLink.appendChild(avatarImg)
+    const avatarPicture = createPictureElement(avatarVariants, 'thumb', defaultAvatarUrl, {
+      class: 'comment-avatar-img',
+      alt: 'Avatar',
+      width: 48,
+      height: 48,
+    })
+    avatarLink.appendChild(avatarPicture)
     avatarDiv.appendChild(avatarLink)
     el.appendChild(avatarDiv)
 

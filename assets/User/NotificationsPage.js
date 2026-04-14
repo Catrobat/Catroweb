@@ -2,7 +2,7 @@ import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { MDCChipSet } from '@material/chips'
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { buildPictureHTML } from '../Layout/ImageVariants'
 import './NotificationsPage.scss'
 
 const TAB_CONFIG = [
@@ -275,15 +275,10 @@ class UserNotifications {
       return '<span class="material-icons notification-broadcast-icon">flag</span>'
     }
     if (fetched.type !== 'other') {
-      let imgLeft = self.imgAsset
-      const avatarUrl = getImageUrl(fetched.avatar, 'thumb', null)
-      if (avatarUrl) {
-        imgLeft = avatarUrl
-      }
       const safeFrom = encodeURIComponent(fetched.from)
       const safeName = escapeAttr(fetched.from_name || '')
       return `<a href="${self.profilePath}/${safeFrom}">
-        <img class="notification-avatar-img" src="${escapeAttr(imgLeft)}" alt="${safeName}">
+        ${buildPictureHTML(fetched.avatar, 'thumb', self.imgAsset, `class="notification-avatar-img" alt="${safeName}"`)}
       </a>`
     } else {
       let iconName = 'notifications_active'

@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
-import { getImageUrl } from '../../Layout/ImageVariants'
+import { buildPictureHTML } from '../../Layout/ImageVariants'
 import { MDCMenu } from '@material/menu'
 import Swal from 'sweetalert2'
 
@@ -53,11 +53,6 @@ export default class extends Controller {
     const li = document.createElement('li')
     li.className = 'member__list-entry'
 
-    const avatarUrl = getImageUrl(
-      member.avatar,
-      'thumb',
-      '/images/default/avatar_default-thumb@1x.webp',
-    )
     const profileUrl = '/app/user/' + escapeAttr(String(member.user_id))
 
     const adminIndicator =
@@ -142,8 +137,7 @@ export default class extends Controller {
 
     li.innerHTML = `
       <a href="${profileUrl}">
-        <img class="member__list-entry__image"
-             src="${escapeAttr(avatarUrl)}" alt="">
+        ${buildPictureHTML(member.avatar, 'thumb', '/images/default/avatar_default-thumb@1x.webp', 'class="member__list-entry__image" alt=""')}
       </a>
       <div class="ps-3">
         ${adminIndicator}

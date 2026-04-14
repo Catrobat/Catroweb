@@ -20,6 +20,7 @@
 #}
 {% macro picture(variants, alt, options = {}) %}
   {% set klass = options.class|default('') %}
+  {% set img_id = options.id|default(null) %}
   {% set sizes = options.sizes|default('') %}
   {% set loading = options.loading|default('lazy') %}
   {% set fetchpriority = options.fetchpriority|default(null) %}
@@ -29,6 +30,17 @@
   {# Generated OpenAPI model uses camelCase getters (getWebp1x, getAvif2x, …); accessors below match that. #}
   {% set card = variants ? variants.card : null %}
   {% set img_src = card ? (card.webp1x|default(card.webp2x|default(fallback))) : fallback %}
+  {#
+    When variants is null but fallback matches /images/default/*-{size}@1x.webp,
+    derive AVIF/WebP sources from the naming convention so defaults also get <picture>.
+  #}
+  {% set _default_prefix = null %}
+  {% if not variants and fallback and fallback starts with '/images/default/' %}
+    {% set _fb_bare = fallback|split('?')|first %}
+    {% if _fb_bare ends with '.webp' %}
+      {% set _default_prefix = _fb_bare|replace({'@1x.webp': '', '@2x.webp': ''}) %}
+    {% endif %}
+  {% endif %}
   <picture>
     {% if variants %}
       {% for fmt_type, set_suffix in {'image/avif': 'avif', 'image/webp': 'webp'} %}
@@ -44,10 +56,14 @@
           {% endif %}
         {% endif %}
       {% endfor %}
+    {% elseif _default_prefix %}
+      <source type="image/avif" srcset="{{ _default_prefix }}@1x.avif 1x, {{ _default_prefix }}@2x.avif 2x">
+      <source type="image/webp" srcset="{{ _default_prefix }}@1x.webp 1x, {{ _default_prefix }}@2x.webp 2x">
     {% endif %}
     <img
       src="{{ img_src }}"
       alt="{{ alt }}"
+      {% if img_id %}id="{{ img_id }}"{% endif %}
       {% if klass %}class="{{ klass }}"{% endif %}
       {% if width %}width="{{ width }}"{% endif %}
       {% if height %}height="{{ height }}"{% endif %}

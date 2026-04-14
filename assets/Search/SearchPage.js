@@ -1,6 +1,6 @@
 import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { createPictureElement } from '../Layout/ImageVariants'
 import './Search.scss'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -137,7 +137,9 @@ function renderProjects(section, projects, theme, trans) {
     const url = (project.project_url || '').replace('/app/', '/' + theme + '/')
     const card = createCard(
       url,
-      getImageUrl(project.screenshot, 'card', '/images/default/screenshot-card@1x.webp'),
+      project.screenshot,
+      'card',
+      '/images/default/screenshot-card@1x.webp',
       project.name || '',
       'calendar_today',
       project.uploaded_string || '',
@@ -161,10 +163,11 @@ function renderUsers(section, users, baseUrl, trans) {
 
   users.forEach((user) => {
     const url = baseUrl + '/app/user/' + escapeAttr(String(user.id))
-    const avatar = getImageUrl(user.avatar, 'thumb', '/images/default/avatar_default-thumb@1x.webp')
     const card = createCard(
       url,
-      avatar,
+      user.avatar,
+      'thumb',
+      '/images/default/avatar_default-thumb@1x.webp',
       user.username || '',
       'code',
       (user.projects || 0) + ' ' + trans.projects,
@@ -188,10 +191,11 @@ function renderStudios(section, studios, baseUrl, trans) {
 
   studios.forEach((studio) => {
     const url = baseUrl + '/app/studio/' + escapeAttr(String(studio.id))
-    const image = getImageUrl(studio.cover, 'card', '/images/default/screenshot-card@1x.webp')
     const card = createCard(
       url,
-      image,
+      studio.cover,
+      'card',
+      '/images/default/screenshot-card@1x.webp',
       studio.name || '',
       'group',
       (studio.members_count || 0) + ' ' + trans.members,
@@ -200,16 +204,19 @@ function renderStudios(section, studios, baseUrl, trans) {
   })
 }
 
-function createCard(url, imageSrc, name, metaIcon, metaText) {
+function createCard(url, variants, size, fallback, name, metaIcon, metaText) {
   const a = document.createElement('a')
   a.className = 'search-card'
   a.href = url
 
-  const img = document.createElement('img')
-  img.className = 'search-card__image lazyload'
-  img.setAttribute('data-src', imageSrc)
-  img.alt = name
-  a.appendChild(img)
+  const picture = createPictureElement(
+    variants,
+    size,
+    fallback,
+    { class: 'search-card__image lazyload', alt: name },
+    { lazy: true },
+  )
+  a.appendChild(picture)
 
   const nameSpan = document.createElement('span')
   nameSpan.className = 'search-card__name'

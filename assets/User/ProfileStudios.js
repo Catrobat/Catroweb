@@ -1,6 +1,6 @@
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
-import { getImageUrl } from '../Layout/ImageVariants'
+import { buildPictureHTML } from '../Layout/ImageVariants'
 import './ProfileStudios.scss'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = escapeAttr(studio.id || '')
     const name = escapeHtml(studio.name || '')
     const description = escapeHtml(truncate(studio.description || '', 100))
-    const imagePath = getImageUrl(studio.cover, 'card', '/images/default/screenshot-card@1x.webp')
     const membersCount = parseInt(studio.members_count, 10) || 0
     const projectsCount = parseInt(studio.projects_count, 10) || 0
     const isPublic = studio.is_public !== false
@@ -121,9 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
       escapeAttr(detailUrl) +
       '" class="studios-list-item-link">' +
       '<div class="studios-list-item">' +
-      '<img src="' +
-      escapeAttr(imagePath) +
-      '" class="img-fluid studios-list-item--image" alt="">' +
+      buildPictureHTML(
+        studio.cover,
+        'card',
+        '/images/default/screenshot-card@1x.webp',
+        'class="img-fluid studios-list-item--image" alt=""',
+      ) +
       '<div class="studios-list-item--content">' +
       '<div class="studios-list-item--heading">' +
       '<h3>' +

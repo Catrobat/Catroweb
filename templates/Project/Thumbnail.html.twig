@@ -1,7 +1,19 @@
+{% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
 {% if isWebview() %}
   <a href="{{ download_url }}">
 {% endif %}
-    <img alt="project thumbnail" id="project-thumbnail-big" class="project-thumbnail-big{% if project.notForKids() %} blurred{% endif %}" src="{{ asset(screenshot_big) }}" width="480" height="480"/>
+    {{ responsive_image.picture(
+      project_screenshot_variants(project.id),
+      'project thumbnail',
+      {
+        id: 'project-thumbnail-big',
+        class: 'project-thumbnail-big' ~ (project.notForKids() ? ' blurred' : ''),
+        width: 480,
+        height: 480,
+        loading: 'eager',
+        fallback: asset(screenshot_big),
+      },
+    ) }}
 {% if isWebview() %}
   </a>
 {% endif %}
