@@ -1,6 +1,7 @@
 require('./OverviewPage.scss')
 
 import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
+import { createPictureElement } from '../Layout/ImageVariants'
 
 const overviewContainer = document.querySelector('.js-media-library-overview')
 
@@ -365,12 +366,13 @@ if (overviewContainer) {
 
     const fileType = (asset.file_type || '').toLowerCase()
     if (fileType === 'image') {
-      const img = document.createElement('img')
-      img.src = asset.thumbnail_url || asset.download_url
-      img.alt = asset.name
-      img.classList.add('card-img-top')
-      img.loading = 'lazy'
-      imageContainer.appendChild(img)
+      const picture = createPictureElement(
+        asset.thumbnail || null,
+        'thumb',
+        asset.download_url || null,
+        { alt: asset.name, class: 'card-img-top', loading: 'lazy' },
+      )
+      imageContainer.appendChild(picture)
     } else if (fileType === 'sound') {
       const soundIcon = document.createElement('i')
       soundIcon.classList.add('material-icons', 'asset-icon')

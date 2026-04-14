@@ -8,6 +8,7 @@ use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
 use App\DB\Entity\MediaLibrary\MediaFileType;
 use App\Storage\FileHelper;
+use App\Storage\Images\ImageVariantGenerator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -34,6 +35,7 @@ class MediaAssetRepository extends ServiceEntityRepository
   public function __construct(
     ParameterBagInterface $parameter_bag,
     ManagerRegistry $manager_registry,
+    private readonly ImageVariantGenerator $image_variant_generator,
   ) {
     parent::__construct($manager_registry, MediaAsset::class);
 
@@ -192,6 +194,8 @@ class MediaAssetRepository extends ServiceEntityRepository
     if (is_file($thumb)) {
       unlink($thumb);
     }
+
+    $this->image_variant_generator->remove($this->thumb_dir, $id);
   }
 
   /**
@@ -229,7 +233,26 @@ class MediaAssetRepository extends ServiceEntityRepository
     } catch (\ImagickException $e) {
       // Thumbnail creation failed, but don't throw - asset can still be used
       error_log("Failed to create thumbnail for {$id}.{$extension}: ".$e->getMessage());
+
+      return;
     }
+
+    try {
+      $this->image_variant_generator->generate($thumb_file, $this->thumb_dir, $id);
+    } catch (\Throwable $e) {
+      // Variant generation is best-effort; thumbnail itself was written successfully
+      error_log("Failed to generate AVIF/WebP variants for {$id}: ".$e->getMessage());
+    }
+  }
+
+  public function getThumbnailDir(): string
+  {
+    return $this->thumb_dir;
+  }
+
+  public function getThumbnailPublicPath(): string
+  {
+    return $this->path.'thumbs/';
   }
 
   public function getWebPath(string $id, string $extension): string

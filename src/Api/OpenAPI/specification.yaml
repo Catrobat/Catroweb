@@ -3638,9 +3638,8 @@ components:
         download_url:
           type: string
           example: 'https://share.catrob.at/api/media/123e4567-e89b-12d3-a456-426614174000.png'
-        thumbnail_url:
-          type: string
-          example: 'https://share.catrob.at/resources/media/thumbs/123e4567-e89b-12d3-a456-426614174000.png'
+        thumbnail:
+          $ref: '#/components/schemas/ImageVariants'
 
     # Asset Requests
     MediaAssetUploadRequest:

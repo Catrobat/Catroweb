@@ -190,13 +190,13 @@ class MediaAssetResponse
   protected ?string $download_url = null;
 
   /**
-   * @SerializedName("thumbnail_url")
+   * @SerializedName("thumbnail")
    *
-   * @Assert\Type("string")
+   * @Assert\Type("OpenAPI\Server\Model\ImageVariants")
    *
-   * @Type("string")
+   * @Type("OpenAPI\Server\Model\ImageVariants")
    */
-  protected ?string $thumbnail_url = null;
+  protected ?ImageVariants $thumbnail = null;
 
   /**
    * Constructor.
@@ -221,7 +221,7 @@ class MediaAssetResponse
       $this->category_name = array_key_exists('category_name', $data) ? $data['category_name'] : $this->category_name;
       $this->flavors = array_key_exists('flavors', $data) ? $data['flavors'] : $this->flavors;
       $this->download_url = array_key_exists('download_url', $data) ? $data['download_url'] : $this->download_url;
-      $this->thumbnail_url = array_key_exists('thumbnail_url', $data) ? $data['thumbnail_url'] : $this->thumbnail_url;
+      $this->thumbnail = array_key_exists('thumbnail', $data) ? $data['thumbnail'] : $this->thumbnail;
     }
   }
 
@@ -536,21 +536,21 @@ class MediaAssetResponse
   }
 
   /**
-   * Gets thumbnail_url.
+   * Gets thumbnail.
    */
-  public function getThumbnailUrl(): ?string
+  public function getThumbnail(): ?ImageVariants
   {
-    return $this->thumbnail_url;
+    return $this->thumbnail;
   }
 
   /**
-   * Sets thumbnail_url.
+   * Sets thumbnail.
    *
    * @return $this
    */
-  public function setThumbnailUrl(?string $thumbnail_url = null): self
+  public function setThumbnail(?ImageVariants $thumbnail = null): self
   {
-    $this->thumbnail_url = $thumbnail_url;
+    $this->thumbnail = $thumbnail;
 
     return $this;
   }
