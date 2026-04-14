@@ -3,12 +3,9 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        useBuiltIns: 'usage', // Only includes the polyfills you need based on the usage
-        corejs: 3, // Use core-js version 3 for polyfilling
+        useBuiltIns: false,
       },
     ],
   ],
-  plugins: [
-    '@babel/plugin-proposal-class-properties', // Add the class properties plugin
-  ],
+  plugins: ['@babel/plugin-proposal-class-properties'],
 }

@@ -1,6 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 import { OwnProjectList } from '../../Project/OwnProjectList'
 
+/* stimulusFetch: 'lazy' */
 export default class extends Controller {
   connect() {
     const baseUrl = this.element.dataset.baseUrl

@@ -2,6 +2,9 @@
 
 {% block head %}
   {{ encore_entry_link_tags('index_page') }}
+  {% if first_banner is defined and first_banner %}
+    <link rel="preload" as="image" href="{{ first_banner.image_url }}" fetchpriority="high">
+  {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -24,9 +27,31 @@
        data-is-webview="{{ isWebview() ? '1' : '0' }}"
        data-trans-featured="{{ 'project.featured'|trans({}, 'catroweb') }}"
   >
-    <div class="featured-slider__skeleton featured-banner mb-2" style="grid-area: 1/1;">
-      <div style="aspect-ratio: 1024/600; background: light-dark(#f0f0f0, #1a1a2e);"></div>
-    </div>
+    {% if first_banner is defined and first_banner %}
+      <div class="featured-slider__ssr featured-banner mb-2" style="grid-area: 1/1;">
+        {% if first_banner.link_url %}
+          <a href="{{ first_banner.link_url }}">
+            <img src="{{ first_banner.image_url }}"
+                 class="carousel-item__image d-block w-100"
+                 alt="{{ first_banner.title }}"
+                 width="1024" height="600"
+                 fetchpriority="high">
+          </a>
+        {% else %}
+          <div>
+            <img src="{{ first_banner.image_url }}"
+                 class="carousel-item__image d-block w-100"
+                 alt="{{ first_banner.title }}"
+                 width="1024" height="600"
+                 fetchpriority="high">
+          </div>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="featured-slider__skeleton featured-banner mb-2" style="grid-area: 1/1;">
+        <div style="aspect-ratio: 1024/600; background: light-dark(#f0f0f0, #1a1a2e);"></div>
+      </div>
+    {% endif %}
   </div>
 
   <div id="home-projects">

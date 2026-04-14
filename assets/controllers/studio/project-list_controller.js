@@ -5,6 +5,7 @@ import { shareOrCopy } from '../../Components/ClipboardHelper'
 import { getImageUrl } from '../../Layout/ImageVariants'
 import Swal from 'sweetalert2'
 
+/* stimulusFetch: 'lazy' */
 export default class extends Controller {
   static values = {
     studioId: String,

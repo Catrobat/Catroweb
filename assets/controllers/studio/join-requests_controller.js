@@ -3,6 +3,7 @@ import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
 import { getImageUrl } from '../../Layout/ImageVariants'
 
+/* stimulusFetch: 'lazy' */
 export default class extends Controller {
   static values = {
     joinRequestsUrl: String,

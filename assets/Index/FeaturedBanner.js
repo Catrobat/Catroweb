@@ -140,9 +140,8 @@ export class FeaturedBanner {
   }
 
   removeSkeleton() {
-    const skeleton = this.container.querySelector('.featured-slider__skeleton')
-    if (skeleton) {
-      skeleton.remove()
-    }
+    this.container
+      .querySelectorAll('.featured-slider__skeleton, .featured-slider__ssr')
+      .forEach((el) => el.remove())
   }
 }
