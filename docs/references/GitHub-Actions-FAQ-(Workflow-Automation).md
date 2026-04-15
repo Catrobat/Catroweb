@@ -62,7 +62,7 @@ Every CI job, such as automated builds or tests that must run on every contribut
 
 ##### The `on push` (to master) trigger/event.
 
-The `on push` event initiates actions that must be executed after a merge. Besides, events can be configured to only react to specific branches. This allows us to combine the `on push` event with the `master` branch. Hence, for example, we can start the release process on the merge of a pull request into the `master` branch.
+The `on push` event initiates actions that must be executed after a merge. Besides, events can be configured to only react to specific branches. This allows us to combine the `on push` event with the `main` branch. Hence, for example, we can start the deployment on the merge of a pull request into the `main` branch.
 
 ##### The `on schedule` trigger/event.
 
@@ -150,7 +150,7 @@ Yes, add `need: <name-of-job-you-need-for-this-job>` to the job that requires an
 
 At **Catroweb** we are responsible for **[Catrobat's Share community platform](https://share.catrob.at/)**. To easy the development we extensively make use of GitHub Actions to implement our continuous integration (CI) and continuous delivery (CD) system. Besides, various additional workflows have been automated, such as the Crowdin translation synchronization process, our API code generation process, or a check to compare our supported bricks with all existing bricks in the Catroid project.
 
-So, what are you waiting for, head over to the **[Catroweb](https://github.com/Catrobat/Catroweb)** or [Catroweb-API](https://github.com/Catrobat/Catroweb-API)) repositories on GitHub. You find the exact implementations, in the [workflow directory at Catroweb](https://github.com/Catrobat/Catroweb/tree/develop/.github/workflows) or at the [API repository](<(https://github.com/Catrobat/Catroweb/tree/develop/.github/workflows)>). You might also want to check out the integrated [GitHub Actions feedback](https://github.com/Catrobat/Catroweb/actions) or the [pull request feedback](https://github.com/Catrobat/Catroweb/pull/913).
+So, what are you waiting for, head over to the **[Catroweb](https://github.com/Catrobat/Catroweb)** or [Catroweb-API](https://github.com/Catrobat/Catroweb-API)) repositories on GitHub. You find the exact implementations, in the [workflow directory at Catroweb](https://github.com/Catrobat/Catroweb/tree/main/.github/workflows) or at the [API repository](<(https://github.com/Catrobat/Catroweb/tree/main/.github/workflows)>). You might also want to check out the integrated [GitHub Actions feedback](https://github.com/Catrobat/Catroweb/actions) or the [pull request feedback](https://github.com/Catrobat/Catroweb/pull/913).
 A detailed description of each workflow and the challenges of their automation is provided by the following work: (ToDo: add link to confluence once published) In case you need more details about specific implementations or design decisions feel free to contact [the author](mailto:daniiel.metzner@gmail.com).
 
 ### Still need more information?

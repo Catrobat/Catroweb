@@ -25,7 +25,6 @@ on:
   pull_request:
     branches:
       - '**' # all branches
-      - '!main' # excludes main to prevent double test runs during release prep.
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}

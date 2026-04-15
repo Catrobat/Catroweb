@@ -10,11 +10,19 @@ name: Deployment
 permissions:
   contents: read
 
-# Run-on every merge of a pull request into the main branch
+# Deploy automatically when the version is bumped (release PR merged), or manually with a branch/tag selection.
 on:
   push:
     branches:
       - main
+    paths:
+      - '.env'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch or tag to deploy (e.g. main, v26.4.0)'
+        required: false
+        default: 'main'
 
 # The concurrency group prevents concurrent deploys. cancel-in-progress is false
 # to avoid leaving the server in a half-deployed state.
@@ -38,6 +46,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || 'main' }}
 
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
@@ -51,7 +61,7 @@ jobs:
           APP_NAME: Catroweb
           DEPLOY_GIT: https://github.com/Catrobat/Catroweb.git
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_BRANCH: main
+          DEPLOY_BRANCH: ${{ inputs.ref || 'main' }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   # Post-deployment health check is handled by Deployer's smoke_test task

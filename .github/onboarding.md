@@ -75,4 +75,4 @@ The general workflow of the project involves the following steps:
 - Do the Work
 - Submit the Changes
 
-Please refer to our [contribution guide](https://github.com/Catrobat/Catroweb/blob/develop/.github/contributing.md) to receive step-by-step guidance throughout your contribution.
+Please refer to our [contribution guide](https://github.com/Catrobat/Catroweb/blob/main/.github/contributing.md) to receive step-by-step guidance throughout your contribution.

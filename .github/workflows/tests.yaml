@@ -22,7 +22,6 @@ on:
   pull_request:
     branches:
       - '**' # all branches
-      - '!main' # excludes main to prevent double test runs during release prep.
   schedule:
     - cron: '0 4 * * *' # Every day at 04:00 UTC
   workflow_dispatch: # Allow manual trigger
