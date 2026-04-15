@@ -41,7 +41,9 @@ Feature: There is a page to create new studios and also see a list of all availa
     And I am on "/app/studios"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then I wait for the element ".studio-join-btn[data-studio-id='1']" to be visible
+    And I wait for the element ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn" to be visible
+    When I click ".studios-list-item-wrapper[data-studio-id='1'] .projects-list-item--menu-btn"
+    Then I wait for the element "[data-action='join'][data-studio-id='1']" to be visible
 
   Scenario: Catrobat is logged in and tries to leave a studio
     Given I log in as "Catrobat"
