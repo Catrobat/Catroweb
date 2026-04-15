@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\DB\EntityRepository\Moderation;
 
 use App\DB\Entity\Moderation\ContentModerationAction;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -46,7 +46,7 @@ class ContentModerationActionRepository extends ServiceEntityRepository
       ->where('a.action = :action')
       ->andWhere('a.content_type = :project_type')
       ->andWhere('a.created_at >= :since')
-      ->andWhere('a.content_id IN (SELECT p.id FROM '.Program::class.' p WHERE p.user = :user_id)')
+      ->andWhere('a.content_id IN (SELECT p.id FROM '.Project::class.' p WHERE p.user = :user_id)')
       ->setParameter('action', ContentModerationAction::ACTION_AUTO_HIDDEN)
       ->setParameter('project_type', 'project')
       ->setParameter('since', $since)

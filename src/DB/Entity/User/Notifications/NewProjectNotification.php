@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\User\Notifications;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-class NewProgramNotification extends CatroNotification
+class NewProjectNotification extends CatroNotification
 {
   /**
    *  You have to set this parameter otherwise the wrong template will be rendered.
@@ -19,26 +19,26 @@ class NewProgramNotification extends CatroNotification
   public function __construct(
     User $user,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
-    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'new_program_notification_mentions')]
-    private ?Program $program,
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'new_program_notification_mentions')]
+    private ?Project $project,
   ) {
     parent::__construct($user, '', '', 'follow');
   }
 
   /**
-   * Returns the new Program which triggered this NewProgramNotification.
+   * Returns the new Program which triggered this NewProjectNotification.
    */
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   /**
-   * Sets the new Program which triggered this NewProgramNotification.
+   * Sets the new Program which triggered this NewProjectNotification.
    */
-  public function setProgram(?Program $program): void
+  public function setProject(?Project $project): void
   {
-    $this->program = $program;
+    $this->project = $project;
   }
 
   /**

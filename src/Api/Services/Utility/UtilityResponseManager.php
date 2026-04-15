@@ -73,9 +73,9 @@ class UtilityResponseManager extends AbstractResponseManager
 
   private function resolveProjectVariants(FeaturedBanner $banner): ?ImageVariants
   {
-    $program = $banner->getProgram();
+    $project = $banner->getProject();
 
-    $id = $program?->getId();
+    $id = $project?->getId();
 
     return null !== $id ? $this->project_manager->getScreenshotVariants($id) : null;
   }
@@ -97,9 +97,9 @@ class UtilityResponseManager extends AbstractResponseManager
 
   private function resolveProjectLinkUrl(FeaturedBanner $banner): ?string
   {
-    $program = $banner->getProgram();
+    $project = $banner->getProject();
 
-    return null !== $program ? '/app/project/'.$program->getId() : null;
+    return null !== $project ? '/app/project/'.$project->getId() : null;
   }
 
   private function resolveStudioLinkUrl(FeaturedBanner $banner): ?string

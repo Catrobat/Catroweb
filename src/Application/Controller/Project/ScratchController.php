@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Controller\Project;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\Scratch\AsyncHttpClient;
 use App\Project\Scratch\ScratchManager;
 use Doctrine\ORM\Exception\ORMException;
@@ -25,15 +25,15 @@ class ScratchController extends AbstractController
   /**
    * @throws \Exception|ORMException
    */
-  #[Route(path: '/scratch/project/{id}', name: 'scratch_program', methods: ['GET', 'POST'])]
+  #[Route(path: '/scratch/project/{id}', name: 'scratch_project', methods: ['GET', 'POST'])]
   public function scratchProject(Request $request, int $id): Response
   {
     $project = $this->scratch_manager->createScratchProjectFromId($id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       throw $this->createNotFoundException('Error creating Scratch project');
     }
 
-    $url = $this->generateUrl('program', ['id' => $project->getId()]);
+    $url = $this->generateUrl('project', ['id' => $project->getId()]);
     if ($request->isMethod('GET')) {
       return $this->redirect($url);
     }

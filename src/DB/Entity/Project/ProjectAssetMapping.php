@@ -20,9 +20,9 @@ class ProjectAssetMapping
   #[ORM\Column(type: Types::INTEGER)]
   private ?int $id = null; /* @phpstan-ignore-line (Doctrine hydrates the int value) */
 
-  #[ORM\ManyToOne(targetEntity: Program::class)]
+  #[ORM\ManyToOne(targetEntity: Project::class)]
   #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-  private Program $project;
+  private Project $project;
 
   #[ORM\ManyToOne(targetEntity: ProjectAsset::class)]
   #[ORM\JoinColumn(name: 'asset_hash', referencedColumnName: 'hash', nullable: false)]
@@ -34,7 +34,7 @@ class ProjectAssetMapping
   #[ORM\Column(name: 'path_in_zip', type: Types::STRING, length: 512)]
   private string $pathInZip;
 
-  public function __construct(Program $project, ProjectAsset $asset, string $originalFilename, string $pathInZip)
+  public function __construct(Project $project, ProjectAsset $asset, string $originalFilename, string $pathInZip)
   {
     $this->project = $project;
     $this->asset = $asset;
@@ -47,7 +47,7 @@ class ProjectAssetMapping
     return $this->id;
   }
 
-  public function getProject(): Program
+  public function getProject(): Project
   {
     return $this->project;
   }

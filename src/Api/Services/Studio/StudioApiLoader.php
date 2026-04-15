@@ -8,7 +8,7 @@ use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
-use App\DB\Entity\Studio\StudioProgram;
+use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
@@ -120,13 +120,13 @@ class StudioApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @return array{projects: StudioProgram[], has_more: bool}
+   * @return array{projects: StudioProject[], has_more: bool}
    */
   public function loadProjectsPage(Studio $studio, int $limit, ?string $cursor_id): array
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('sp')
-      ->from(StudioProgram::class, 'sp')
+      ->from(StudioProject::class, 'sp')
       ->where('sp.studio = :studio')
       ->setParameter('studio', $studio)
       ->orderBy('sp.created_on', 'DESC')
@@ -140,7 +140,7 @@ class StudioApiLoader extends AbstractApiLoader
       ;
     }
 
-    /** @var StudioProgram[] $projects */
+    /** @var StudioProject[] $projects */
     $projects = $qb->getQuery()->getResult();
 
     $has_more = count($projects) > $limit;
@@ -290,8 +290,8 @@ class StudioApiLoader extends AbstractApiLoader
 
     // Load all studio project IDs for this studio in one query to avoid N+1
     $qb = $this->entity_manager->createQueryBuilder();
-    $studioProjectIds = $qb->select('IDENTITY(sp.program)')
-      ->from(StudioProgram::class, 'sp')
+    $studioProjectIds = $qb->select('IDENTITY(sp.project)')
+      ->from(StudioProject::class, 'sp')
       ->where('sp.studio = :studio')
       ->setParameter('studio', $studio)
       ->getQuery()

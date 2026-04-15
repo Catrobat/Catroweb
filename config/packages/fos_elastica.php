@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -83,7 +83,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
           'persistence' => [
             'driver' => 'orm',
-            'model' => Program::class,
+            'model' => Project::class,
           ],
         ],
         'app_user' => [

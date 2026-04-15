@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Project\Remix;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Remix\RemixData;
@@ -36,7 +36,7 @@ class RemixUpdaterEventListenerTest extends TestCase
 
   private MockObject&AsyncHttpClient $async_http_client;
 
-  private MockObject&Program $program_entity;
+  private MockObject&Project $program_entity;
 
   #[\Override]
   protected function setUp(): void
@@ -49,8 +49,8 @@ class RemixUpdaterEventListenerTest extends TestCase
 
     $route_map = [
       // It is important to explicitly define all optional parameters!
-      ['program', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
-      ['program', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+      ['project', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['project', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
     ];
 
     $router
@@ -58,7 +58,7 @@ class RemixUpdaterEventListenerTest extends TestCase
       ->willReturnMap($route_map)
     ;
 
-    $this->program_entity = $this->createMock(Program::class);
+    $this->program_entity = $this->createMock(Project::class);
 
     $this->remix_updater = new RemixUpdaterEventListener($this->remix_manager, $this->async_http_client, $router, $logger, './CatrobatRemixMigration.lock');
 
@@ -128,7 +128,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     ;
 
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+      ->method('addRemixes')->with($this->isInstanceOf(Project::class))
     ;
 
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
@@ -199,7 +199,7 @@ class RemixUpdaterEventListenerTest extends TestCase
 
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+      ->method('addRemixes')->with($this->isInstanceOf(Project::class))
     ;
 
     $this->remix_updater->update($file, $this->program_entity);
@@ -243,7 +243,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+      ->method('addRemixes')->with($this->isInstanceOf(Project::class))
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
@@ -298,7 +298,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     ;
 
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+      ->method('addRemixes')->with($this->isInstanceOf(Project::class))
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
@@ -344,7 +344,7 @@ class RemixUpdaterEventListenerTest extends TestCase
     ;
     $this->remix_manager->expects($this->atLeastOnce())
       ->method('addRemixes')
-      ->willReturnCallback(function (Program $project, array $remixes_data): void {
+      ->willReturnCallback(function (Project $project, array $remixes_data): void {
         $second_expected_url = '/app/project/3570';
         $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
         $this->assertEquals($this->program_entity, $project);
@@ -391,8 +391,8 @@ class RemixUpdaterEventListenerTest extends TestCase
     $logger_stub = $this->createStub(LoggerInterface::class);
 
     $route_map = [
-      ['program', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
-      ['program', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+      ['project', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['project', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
     ];
 
     $router_stub
@@ -438,7 +438,7 @@ class RemixUpdaterEventListenerTest extends TestCase
       ->willReturn([$expected_scratch_program_id])
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
-    $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Program::class));
+    $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Project::class));
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
@@ -481,7 +481,7 @@ class RemixUpdaterEventListenerTest extends TestCase
       ->willReturn([])
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
-    $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Program::class));
+    $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Project::class));
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
@@ -507,8 +507,8 @@ class RemixUpdaterEventListenerTest extends TestCase
     $logger_stub = $this->createStub(LoggerInterface::class);
 
     $route_map = [
-      ['program', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
-      ['program', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+      ['project', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['project', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
     ];
 
     $router_stub

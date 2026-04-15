@@ -24,7 +24,7 @@ class ProjectZipReconstructor
 
   /**
    * Reconstruct the .catrobat ZIP for a project from its asset mappings
-   * and extracted code.xml. Caches the result in the programs/ directory.
+   * and extracted code.xml. Caches the result in the projects/ directory.
    *
    * Returns the absolute path to the reconstructed ZIP, or null on failure.
    */

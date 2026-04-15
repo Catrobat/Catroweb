@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Admin\Projects\SpecialProjects;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\ExampleProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\ExampleProject;
 use App\DB\EntityRepository\FlavorRepository;
 use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
@@ -24,7 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @phpstan-extends AbstractAdmin<ExampleProgram>
+ * @phpstan-extends AbstractAdmin<ExampleProject>
  */
 class ExampleProjectAdmin extends AbstractAdmin
 {
@@ -47,7 +47,7 @@ class ExampleProjectAdmin extends AbstractAdmin
   ) {
   }
 
-  public function getExampleImageUrl(ExampleProgram $object): string
+  public function getExampleImageUrl(ExampleProject $object): string
   {
     $id = $object->getId();
     if (null === $id) {
@@ -60,13 +60,13 @@ class ExampleProjectAdmin extends AbstractAdmin
   #[\Override]
   public function getObjectMetadata($object): MetadataInterface
   {
-    /** @var ExampleProgram $example_project */
+    /** @var ExampleProject $example_project */
     $example_project = $object;
-    $program = $example_project->getProgram();
+    $project = $example_project->getProject();
 
     return new Metadata(
-      $program?->getName() ?? '',
-      $program?->getDescription() ?? '',
+      $project?->getName() ?? '',
+      $project?->getDescription() ?? '',
       $this->getExampleImageUrl($example_project),
     );
   }
@@ -74,7 +74,7 @@ class ExampleProjectAdmin extends AbstractAdmin
   #[\Override]
   protected function preUpdate(object $object): void
   {
-    /** @var ExampleProgram $example_project */
+    /** @var ExampleProject $example_project */
     $example_project = $object;
 
     $example_project->old_image_type = $example_project->getImageType();
@@ -96,7 +96,7 @@ class ExampleProjectAdmin extends AbstractAdmin
     $qb = $query->getQueryBuilder();
 
     $qb->andWhere(
-      $qb->expr()->isNotNull($qb->getRootAliases()[0].'.program')
+      $qb->expr()->isNotNull($qb->getRootAliases()[0].'.project')
     );
 
     /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
@@ -111,7 +111,7 @@ class ExampleProjectAdmin extends AbstractAdmin
   #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
-    /** @var ExampleProgram $example_project */
+    /** @var ExampleProject $example_project */
     $example_project = $this->getSubject();
     $file_options = [
       'required' => (null === $example_project->getId()),
@@ -121,7 +121,7 @@ class ExampleProjectAdmin extends AbstractAdmin
 
     if (null !== $this->getSubject()->getId()) {
       $file_options['help'] = '<img src="../'.$this->getExampleImageUrl($example_project).'">';
-      $id_value = $this->getSubject()->getProgram()->getId();
+      $id_value = $this->getSubject()->getProject()->getId();
     }
 
     $form
@@ -130,7 +130,7 @@ class ExampleProjectAdmin extends AbstractAdmin
       ->add('flavor', null, ['class' => Flavor::class, 'choices' => $this->getFlavors(), 'required' => true])
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
-        'help' => 'Toggle for iOS example programs api call.', ])
+        'help' => 'Toggle for iOS example projects api call.', ])
       ->add('active', null, ['required' => false])
     ;
   }
@@ -164,7 +164,7 @@ class ExampleProjectAdmin extends AbstractAdmin
         'accessor' => $this->getExampleImageUrl(...),
         'template' => 'Admin/Projects/ExampleImage.html.twig',
       ])
-      ->add('program', EntityType::class, ['class' => Program::class, 'editable' => false])
+      ->add('project', EntityType::class, ['class' => Project::class, 'editable' => false])
       ->add('flavor', 'string')
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])
@@ -178,13 +178,13 @@ class ExampleProjectAdmin extends AbstractAdmin
     ;
   }
 
-  private function checkProjectID(ExampleProgram $object): void
+  private function checkProjectID(ExampleProject $object): void
   {
     $id = $this->getForm()->get('program_id')->getData();
     $project = $this->project_manager->find($id);
 
-    if ($project instanceof Program) {
-      $object->setProgram($project);
+    if ($project instanceof Project) {
+      $object->setProject($project);
     } else {
       throw new NotFoundHttpException(sprintf('Unable to find project with id : %s', $id));
     }

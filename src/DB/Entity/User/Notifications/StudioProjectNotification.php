@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\User\Notifications;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,8 +23,8 @@ class StudioProjectNotification extends CatroNotification
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $project_user,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
-    #[ORM\ManyToOne(targetEntity: Program::class)]
-    private ?Program $program,
+    #[ORM\ManyToOne(targetEntity: Project::class)]
+    private ?Project $project,
   ) {
     parent::__construct($user, '', '', 'studio');
   }
@@ -49,14 +49,14 @@ class StudioProjectNotification extends CatroNotification
     $this->project_user = $project_user;
   }
 
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
-  public function setProgram(?Program $program): void
+  public function setProject(?Project $project): void
   {
-    $this->program = $program;
+    $this->project = $project;
   }
 
   #[\Override]

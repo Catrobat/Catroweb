@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectAsset;
 use App\DB\Entity\Project\ProjectAssetMapping;
 use App\DB\EntityRepository\Project\ProjectAssetMappingRepository;
@@ -440,9 +440,9 @@ class ProjectDeduplicationServiceTest extends TestCase
     $service->deduplicateProject($project, $extract_dir);
   }
 
-  private function createProjectStub(): Stub&Program
+  private function createProjectStub(): Stub&Project
   {
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $project->method('getId')->willReturn('test-uuid-1234');
 
     return $project;

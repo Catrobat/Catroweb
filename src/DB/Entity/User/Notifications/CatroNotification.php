@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'notification_type', type: 'string')]
-#[ORM\DiscriminatorMap(['default' => 'CatroNotification', 'comment' => 'CommentNotification', 'like' => 'LikeNotification', 'follow' => 'FollowNotification', 'follow_project' => 'NewProgramNotification', 'broadcast_notification' => 'BroadcastNotification', 'remix_notification' => 'RemixNotification', 'moderation' => 'ModerationNotification', 'studio_comment' => 'StudioCommentNotification', 'studio_project' => 'StudioProjectNotification', 'project_expiring' => 'ProjectExpiringNotification', 'project_deleted' => 'ProjectDeletedNotification', 'studio_join_request' => 'StudioJoinRequestNotification'])]
+#[ORM\DiscriminatorMap(['default' => 'CatroNotification', 'comment' => 'CommentNotification', 'like' => 'LikeNotification', 'follow' => 'FollowNotification', 'follow_project' => 'NewProjectNotification', 'broadcast_notification' => 'BroadcastNotification', 'remix_notification' => 'RemixNotification', 'moderation' => 'ModerationNotification', 'studio_comment' => 'StudioCommentNotification', 'studio_project' => 'StudioProjectNotification', 'project_expiring' => 'ProjectExpiringNotification', 'project_deleted' => 'ProjectDeletedNotification', 'studio_join_request' => 'StudioJoinRequestNotification'])]
 class CatroNotification
 {
   #[ORM\Column(name: 'id', type: Types::GUID)]

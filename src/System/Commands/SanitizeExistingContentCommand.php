@@ -45,7 +45,7 @@ class SanitizeExistingContentCommand extends Command
     }
 
     $total_sanitized = 0;
-    $total_sanitized += $this->sanitizeTable($io, 'program', ['name', 'description', 'credits'], 'id', $dryRun);
+    $total_sanitized += $this->sanitizeTable($io, 'project', ['name', 'description', 'credits'], 'id', $dryRun);
     $total_sanitized += $this->sanitizeTable($io, 'user_comment', ['text'], 'id', $dryRun);
     $total_sanitized += $this->sanitizeTable($io, 'studio', ['name', 'description'], 'id', $dryRun);
     $total_sanitized += $this->sanitizeTable($io, 'fos_user', ['about', 'currently_working_on'], 'id', $dryRun);

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\Project\Special;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\ExampleProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\ExampleProject;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -14,17 +14,17 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ExampleProgram>
+ * @extends ServiceEntityRepository<ExampleProject>
  */
 class ExampleRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
   {
-    parent::__construct($managerRegistry, ExampleProgram::class);
+    parent::__construct($managerRegistry, ExampleProject::class);
   }
 
   /**
-   * @return Program[]
+   * @return Project[]
    */
   public function getExampleProjects(bool $debug_build, ?string $flavor, ?int $limit = 20, ?int $offset = 0, ?string $platform = null, ?string $max_version = null): array
   {
@@ -32,14 +32,14 @@ class ExampleRepository extends ServiceEntityRepository
 
     $qb
       ->select('e')
-      ->addSelect('program')
+      ->addSelect('project')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->isNotNull('e.program'))
+      ->andWhere($qb->expr()->isNotNull('e.project'))
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
     $qb->orderBy('e.priority', 'DESC');
-    $qb->leftJoin('e.program', 'program');
+    $qb->leftJoin('e.project', 'project');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
     $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);
 
@@ -53,10 +53,10 @@ class ExampleRepository extends ServiceEntityRepository
     $qb
       ->select('count(e.id)')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->isNotNull('e.program'))
+      ->andWhere($qb->expr()->isNotNull('e.project'))
     ;
     $qb->orderBy('e.priority', 'DESC');
-    $qb->leftJoin('e.program', 'program');
+    $qb->leftJoin('e.project', 'project');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
     $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);
 
@@ -82,7 +82,7 @@ class ExampleRepository extends ServiceEntityRepository
       ->join('e.flavor', 'fl')
       ->where('e.active = true')
       ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
-      ->andWhere($qb->expr()->isNotNull('e.program'))
+      ->andWhere($qb->expr()->isNotNull('e.project'))
       ->andWhere($qb->expr()->eq('e.for_ios', ':for_ios'))
       ->setParameter('flavor', $flavor)
       ->setParameter('for_ios', $for_ios)
@@ -131,13 +131,13 @@ class ExampleRepository extends ServiceEntityRepository
   /**
    * @throws NoResultException
    */
-  public function isExample(Program $program): bool
+  public function isExample(Project $project): bool
   {
     $qb = $this->createQueryBuilder('e');
     $qb
       ->select('count(e.id)')
-      ->where($qb->expr()->eq('e.program', ':program'))
-      ->setParameter('program', $program)
+      ->where($qb->expr()->eq('e.project', ':project'))
+      ->setParameter('project', $project)
     ;
     try {
       $count = $qb->getQuery()->getSingleScalarResult();
@@ -166,8 +166,8 @@ class ExampleRepository extends ServiceEntityRepository
   {
     if (null !== $max_version && '' !== $max_version) {
       $query_builder
-        ->innerJoin(Program::class, 'p', Join::WITH,
-          $query_builder->expr()->eq('e.program', 'p')->__toString())
+        ->innerJoin(Project::class, 'p', Join::WITH,
+          $query_builder->expr()->eq('e.project', 'p')->__toString())
         ->andWhere($query_builder->expr()->lte('p.language_version', ':max_version'))
         ->setParameter('max_version', $max_version)
         ->addOrderBy('e.id', 'ASC')

@@ -11,8 +11,8 @@ use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\Api\Services\Reactions\ReactionsApiProcessor;
 use App\Api\Traits\CursorPaginationTrait;
 use App\Api\Traits\KeysetCursorTrait;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramDownloads;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectDownloads;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CodeView\CodeTreeBuilder;
@@ -342,7 +342,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return $error_response;
     }
 
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
 
       return null;
@@ -580,7 +580,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $project = $this->facade->getLoader()->findProjectByID($id, true);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -604,7 +604,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $this->facade->getEventDispatcher()->dispatch(
-      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_PROJECT)
+      new ProjectDownloadEvent($user, $project, ProjectDownloads::TYPE_PROJECT)
     );
 
     return $response;
@@ -632,7 +632,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -685,7 +685,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return;
@@ -712,7 +712,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
     $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
 
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -741,7 +741,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     $user = $this->reactions_facade->getAuthenticationManager()->getAuthenticatedUser();
     $project = $this->reactions_facade->getLoader()->findProjectIfVisibleToCurrentUser($id, $user);
 
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;

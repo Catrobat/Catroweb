@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project\CatrobatFile;
 
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
@@ -132,7 +132,7 @@ class ExtractedCatrobatFileTest extends TestCase
 
   public function testGetsRelativeAndAbsoluteRemixUrls(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/app/project/3570';
     $new_program_id = '3571';
@@ -164,7 +164,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractSimpleCatrobatAbsoluteRemixUrl(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://pocketcode.org/details/1234/';
     $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
     $this->assertNotNull($xml->header);
@@ -180,7 +180,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testNotExtractNumberFromNormalText(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'SomeText 123';
     $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
     $this->assertNotNull($xml->header);
@@ -195,7 +195,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractSimpleScratchAbsoluteRemixUrl(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
     $this->assertNotNull($xml->header);
@@ -211,7 +211,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractSimpleRelativeCatrobatRemixUrl(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = '/app/flavors/3570/';
     $xml = $this->extracted_catrobat_file->getProjectXmlProperties();
     $this->assertNotNull($xml->header);
@@ -227,7 +227,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractMergedProgramRemixUrls(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/3570/';
     $new_program_id = '3571';
@@ -246,7 +246,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testExtractUniqueProgramRemixUrls(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/1234/';
     $new_program_id = '3571';
@@ -264,7 +264,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testDontExtractProgramRemixUrlsReferencingToCurrentProgram(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/790/';
     $new_program_id = '1234';
@@ -282,7 +282,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testExtractOnlyOlderProgramRemixUrls(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/790/';
     $new_program_id = '791';
@@ -300,7 +300,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractDoubleMergedProgramRemixUrls(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/3570/';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
@@ -320,7 +320,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testExtractUniqueProgramRemixUrlsOfDoubleMergedProgram(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'https://scratch.mit.edu/projects/121648946/';
     $third_expected_url = 'http://pocketcode.org/details/1234/';
@@ -340,7 +340,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testDontExtractProgramRemixUrlsReferencingToCurrentDoubleMergedProgram(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/7901';
     $third_expected_url = 'http://pocketcode.org/details/1234/';
@@ -360,7 +360,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractMultipleMergedRemixUrls(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/3570';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
@@ -381,7 +381,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testExtractUniqueProgramRemixUrlsOfMultipleMergedProgram(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16267';
     $third_expected_url = $first_expected_url;
@@ -402,7 +402,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testExtractOnlyOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsAnInitialVersion(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16268';
     $third_expected_url = $first_expected_url;
@@ -423,7 +423,7 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testExtractOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsNotAnInitialVersion(): void
   {
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16267';
     $third_expected_url = $first_expected_url;

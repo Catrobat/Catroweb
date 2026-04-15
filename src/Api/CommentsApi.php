@@ -6,7 +6,7 @@ namespace App\Api;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiController;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
@@ -56,7 +56,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
   public function projectsIdCommentsGet(string $id, string $accept_language, int $limit, ?string $cursor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -113,7 +113,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     }
 
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;
@@ -136,7 +136,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
         return null;
       }
 
-      if ($parent_comment->getProgram()?->getId() !== $project->getId()) {
+      if ($parent_comment->getProject()?->getId() !== $project->getId()) {
         $responseCode = Response::HTTP_BAD_REQUEST;
 
         return null;
@@ -153,7 +153,7 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
     $comment->setUser($user);
     $comment->setUsername($user->getUsername() ?? '');
     $comment->setText($message);
-    $comment->setProgram($project);
+    $comment->setProject($project);
     $comment->setUploadDate(new \DateTime('now', new \DateTimeZone('UTC')));
     $comment->setIsDeleted(false);
     if (null !== $parent_id) {
@@ -243,8 +243,8 @@ class CommentsApi extends AbstractApiController implements CommentsApiInterface
       return null;
     }
 
-    $project = $comment->getProgram();
-    if (!$project instanceof Program || !$this->project_manager->findProjectIfVisibleToCurrentUser($project->getId()) instanceof Program) {
+    $project = $comment->getProject();
+    if (!$project instanceof Project || !$this->project_manager->findProjectIfVisibleToCurrentUser($project->getId()) instanceof Project) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
       return null;

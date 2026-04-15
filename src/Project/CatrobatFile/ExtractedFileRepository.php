@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\CatrobatFile;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use Psr\Log\LoggerInterface;
@@ -48,7 +48,7 @@ class ExtractedFileRepository
     return $this->local_path.$id.'/';
   }
 
-  public function loadProjectExtractedFile(Program $project): ?ExtractedCatrobatFile
+  public function loadProjectExtractedFile(Project $project): ?ExtractedCatrobatFile
   {
     try {
       $project_id = $project->getId();
@@ -68,7 +68,7 @@ class ExtractedFileRepository
     }
   }
 
-  public function removeProjectExtractedFile(Program $project): void
+  public function removeProjectExtractedFile(Project $project): void
   {
     try {
       $project_id = $project->getId();

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Project\CatrobatFile;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\Event\ProjectBeforePersistEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -22,7 +22,7 @@ readonly class ProjectFlavorEventListener
     $this->checkFlavor($event->getProjectEntity());
   }
 
-  public function checkFlavor(Program $project): void
+  public function checkFlavor(Project $project): void
   {
     $request = $this->request_stack->getCurrentRequest();
     if (null == $request) {

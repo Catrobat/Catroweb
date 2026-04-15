@@ -18,20 +18,20 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ParsedSceneProject::class)]
 class ParsedSceneProgramTest extends TestCase
 {
-  protected ParsedSceneProject $program;
+  protected ParsedSceneProject $project;
 
   #[\Override]
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
-    $this->program = new ParsedSceneProject($xml_properties);
+    $this->project = new ParsedSceneProject($xml_properties);
   }
 
   #[DataProvider('provideMethodNames')]
   public function testMustHaveMethod(mixed $method_name): void
   {
-    $this->assertTrue(method_exists($this->program, $method_name));
+    $this->assertTrue(method_exists($this->project, $method_name));
   }
 
   /**
@@ -51,7 +51,7 @@ class ParsedSceneProgramTest extends TestCase
    */
   public function testHasScenesMustReturnTrue(): void
   {
-    $this->assertTrue($this->program->hasScenes());
+    $this->assertTrue($this->project->hasScenes());
   }
 
   /**
@@ -61,7 +61,7 @@ class ParsedSceneProgramTest extends TestCase
   {
     $expected = ParsedScene::class;
 
-    foreach ($this->program->getScenes() as $actual) {
+    foreach ($this->project->getScenes() as $actual) {
       $this->assertInstanceOf($expected, $actual);
     }
   }

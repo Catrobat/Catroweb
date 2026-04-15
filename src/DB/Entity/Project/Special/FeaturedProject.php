@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Project\Special;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,33 +12,33 @@ use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Table(name: 'featured')]
 #[ORM\Entity(repositoryClass: FeaturedRepository::class)]
-class FeaturedProgram extends SpecialProgram
+class FeaturedProject extends SpecialProject
 {
   #[ORM\Column(type: Types::STRING, nullable: true)]
   protected ?string $url = null;
 
-  public function setImageType(string $image): FeaturedProgram
+  public function setImageType(string $image): FeaturedProject
   {
     $this->imagetype = $image;
 
     return $this;
   }
 
-  public function setProgram(?Program $program): FeaturedProgram
+  public function setProject(?Project $project): FeaturedProject
   {
-    $this->program = $program;
+    $this->project = $project;
 
     return $this;
   }
 
-  public function setUrl(?string $url): FeaturedProgram
+  public function setUrl(?string $url): FeaturedProject
   {
     $this->url = $url;
 
     return $this;
   }
 
-  public function setActive(bool $active): FeaturedProgram
+  public function setActive(bool $active): FeaturedProject
   {
     $this->active = $active;
 

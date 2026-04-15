@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\User;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -65,12 +65,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
 
   /**
    * Programs owned by this user.
-   * When this user is deleted, all the programs owned by him should be deleted too.
+   * When this user is deleted, all the projects owned by him should be deleted too.
    *
-   * @var Collection<int, Program>
+   * @var Collection<int, Project>
    */
-  #[ORM\OneToMany(targetEntity: Program::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
-  protected Collection $programs;
+  #[ORM\OneToMany(targetEntity: Project::class, mappedBy: 'user', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  protected Collection $projects;
 
   /**
    * Requests to change the password issued by this user.
@@ -132,9 +132,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   protected Collection $following;
 
   /**
-   * @var Collection<int, ProgramLike>
+   * @var Collection<int, ProjectLike>
    */
-  #[ORM\OneToMany(targetEntity: ProgramLike::class, mappedBy: 'user', cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProjectLike::class, mappedBy: 'user', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $likes;
 
   /**
@@ -265,7 +265,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   public function __construct()
   {
     $this->reset_password_requests = new ArrayCollection();
-    $this->programs = new ArrayCollection();
+    $this->projects = new ArrayCollection();
     $this->notifications = new ArrayCollection();
     $this->comments = new ArrayCollection();
     $this->follow_notification_mentions = new ArrayCollection();
@@ -289,21 +289,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
     return $this->id;
   }
 
-  public function addProgram(Program $program): User
+  public function addProject(Project $project): User
   {
-    $this->programs[] = $program;
+    $this->projects[] = $project;
 
     return $this;
   }
 
-  public function removeProgram(Program $program): void
+  public function removeProject(Project $project): void
   {
-    $this->programs->removeElement($program);
+    $this->projects->removeElement($project);
   }
 
-  public function getPrograms(): Collection
+  public function getProjects(): Collection
   {
-    return $this->programs;
+    return $this->projects;
   }
 
   public function setId(string $id): void

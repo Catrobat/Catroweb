@@ -4,7 +4,7 @@
 
   <button id="code-view{{ suffix|default('') }}"
           class="btn"
-          onclick="location.href='{{ path('program', {id: object.id}) }}#code-view-inline'">
+          onclick="location.href='{{ path('project', {id: object.id}) }}#code-view-inline'">
     <span>{{ 'codeview.title'|trans({}, 'catroweb') }}</span>
   </button>
 

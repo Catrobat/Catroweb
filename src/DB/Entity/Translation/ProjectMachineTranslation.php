@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,13 +26,13 @@ class ProjectMachineTranslation extends MachineTranslation
 
   public function __construct(
     #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
-    #[ORM\ManyToOne(targetEntity: Program::class)]
-    protected Program $project, string $source_language, string $target_language, string $provider, int $usage_count = 1)
+    #[ORM\ManyToOne(targetEntity: Project::class)]
+    protected Project $project, string $source_language, string $target_language, string $provider, int $usage_count = 1)
   {
     parent::__construct($source_language, $target_language, $provider, $usage_count);
   }
 
-  public function getProject(): Program
+  public function getProject(): Project
   {
     return $this->project;
   }

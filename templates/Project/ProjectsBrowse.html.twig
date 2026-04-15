@@ -8,7 +8,7 @@
 {% block body %}
   <div {{ stimulus_controller('project--browse', {
     apiBaseUrl: app.request.schemeAndHttpHost ~ '/api',
-    projectDetailPath: path('program', {id: '__ID__'}),
+    projectDetailPath: path('project', {id: '__ID__'}),
     uploadPath: is_logged_in ? path('project_upload') : path('login'),
     loginPath: path('login'),
     isLoggedIn: is_logged_in,

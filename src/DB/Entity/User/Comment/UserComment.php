@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\User\Comment;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\User\Notifications\CommentNotification;
@@ -56,8 +56,8 @@ class UserComment implements \Stringable
    * The Program which this UserComment comments. If this Program gets deleted, this UserComment gets deleted as well.
    */
   #[ORM\JoinColumn(name: 'programId', referencedColumnName: 'id', nullable: true)]
-  #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'comments')]
-  private ?Program $program = null;
+  #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'comments')]
+  private ?Project $project = null;
 
   #[ORM\Column(type: Types::GUID, nullable: true)]
   protected ?string $parent_id = null;
@@ -90,17 +90,17 @@ class UserComment implements \Stringable
   /**
    * Returns the Program which this UserComment comments.
    */
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   /**
    * Sets the Program which this UserComment comments.
    */
-  public function setProgram(Program $program): UserComment
+  public function setProject(Project $project): UserComment
   {
-    $this->program = $program;
+    $this->project = $project;
 
     return $this;
   }

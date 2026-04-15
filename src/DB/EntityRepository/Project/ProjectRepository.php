@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\DB\EntityRepository\Project;
 
 use App\Admin\System\FeatureFlag\FeatureFlagManager;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
+use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
 use App\Utils\RequestHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -22,9 +22,9 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 /**
- * @extends ServiceEntityRepository<Program>
+ * @extends ServiceEntityRepository<Project>
  */
-class ProgramRepository extends ServiceEntityRepository
+class ProjectRepository extends ServiceEntityRepository
 {
   public function __construct(
     ManagerRegistry $managerRegistry,
@@ -33,7 +33,7 @@ class ProgramRepository extends ServiceEntityRepository
     #[Autowire(service: 'fos_elastica.finder.app_program')]
     private readonly TransformedFinder $program_finder,
   ) {
-    parent::__construct($managerRegistry, Program::class);
+    parent::__construct($managerRegistry, Project::class);
   }
 
   public function getProjectByUserID(string $user_id, bool $include_private = false): array
@@ -139,7 +139,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->setPagination($qb, $limit, $offset);
     $qb = $this->setOrderBy($qb, 'views');
     $qb
-      ->innerJoin(ScratchProgramRemixRelation::class, 'rp')
+      ->innerJoin(ScratchProjectRemixRelation::class, 'rp')
       ->andWhere($qb->expr()->eq('e.id', 'rp.catrobat_child'))
     ;
 
@@ -151,7 +151,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
     $qb
-      ->innerJoin(ScratchProgramRemixRelation::class, 'rp')
+      ->innerJoin(ScratchProjectRemixRelation::class, 'rp')
       ->where($qb->expr()->eq('e.id', 'rp.catrobat_child'))
     ;
 
@@ -287,7 +287,7 @@ class ProgramRepository extends ServiceEntityRepository
   //
 
   /**
-   * @return Program[]
+   * @return Project[]
    */
   public function getProjectsKeyset(?string $flavor, string $max_version, int $limit, string $order_by, ?\DateTimeInterface $cursor_date = null, ?int $cursor_value = null, ?string $cursor_id = null): array
   {
@@ -309,7 +309,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return Program[]
+   * @return Project[]
    */
   public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -324,7 +324,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return Program[]
+   * @return Project[]
    */
   public function getUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -339,7 +339,7 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return Program[]
+   * @return Project[]
    */
   public function getMoreProjectsFromUserKeyset(string $user_id, string $exclude_project_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -481,7 +481,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $query_builder
       ->select(['e as program', 'COUNT(e.id) as like_count'])
-      ->innerJoin(ProgramLike::class, 'l', Join::WITH,
+      ->innerJoin(ProjectLike::class, 'l', Join::WITH,
         $query_builder->expr()->eq('e.id', 'l.program_id')->__toString())
       ->having($query_builder->expr()->gt('like_count', $query_builder->expr()->literal(1)))
       ->groupBy('e.id')
@@ -491,40 +491,40 @@ class ProgramRepository extends ServiceEntityRepository
 
     $results = $query_builder->getQuery()->getResult();
 
-    return array_map(static fn (array $result): mixed => $result['program'], $results);
+    return array_map(static fn (array $result): mixed => $result['project'], $results);
   }
 
-  public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Program $program, ?int $limit, int $offset): array
+  public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Project $project, ?int $limit, int $offset): array
   {
     return []; // disabled
   }
 
-  public function filterVisiblePrograms(array $programs, string $max_version = ''): array
+  public function filterVisiblePrograms(array $projects, string $max_version = ''): array
   {
-    if ([] === $programs) {
+    if ([] === $projects) {
       return [];
     }
 
-    /** @var Program[] $filtered_programs */
+    /** @var Project[] $filtered_programs */
     $filtered_programs = [];
 
-    foreach ($programs as $program) {
-      if (true !== $program->getVisible()) {
+    foreach ($projects as $project) {
+      if (true !== $project->getVisible()) {
         continue;
       }
-      if (false !== $program->getPrivate()) {
+      if (false !== $project->getPrivate()) {
         continue;
       }
-      if ($program->getAutoHidden()) {
+      if ($project->getAutoHidden()) {
         continue;
       }
-      if (!$this->app_request->isDebugBuildRequest() && false !== $program->isDebugBuild()) {
+      if (!$this->app_request->isDebugBuildRequest() && false !== $project->isDebugBuild()) {
         continue;
       }
-      if ('' !== $max_version && $program->getLanguageVersion() > $max_version) {
+      if ('' !== $max_version && $project->getLanguageVersion() > $max_version) {
         continue;
       }
-      $filtered_programs[] = $program;
+      $filtered_programs[] = $project;
     }
 
     return $filtered_programs;
@@ -744,7 +744,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $query;
   }
 
-  public function findOneByName(string $programName): ?Program
+  public function findOneByName(string $programName): ?Project
   {
     return $this->findOneBy(['name' => $programName]);
   }

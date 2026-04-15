@@ -10,7 +10,7 @@ use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\ModerationNotification;
-use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
 use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
@@ -88,8 +88,8 @@ class NotificationsResponseManager extends AbstractResponseManager
         'seen' => $notification->getSeen(),
         'from' => $notification->getLikeFrom()?->getId(),
         'from_name' => $notification->getLikeFrom()?->getUserIdentifier(),
-        'project' => $notification->getProgram()?->getId(),
-        'project_name' => $notification->getProgram()?->getName(),
+        'project' => $notification->getProject()?->getId(),
+        'project_name' => $notification->getProject()?->getName(),
         'avatar' => $this->user_avatar_service->getVariants($notification->getLikeFrom()),
         'message' => $this->trans('catro-notifications.like.message'),
       ]);
@@ -111,8 +111,8 @@ class NotificationsResponseManager extends AbstractResponseManager
       ]);
     }
 
-    if ($notification instanceof NewProgramNotification) {
-      if ($notification->getProgram()?->getUser() === $user) {
+    if ($notification instanceof NewProjectNotification) {
+      if ($notification->getProject()?->getUser() === $user) {
         return null;
       }
 
@@ -120,11 +120,11 @@ class NotificationsResponseManager extends AbstractResponseManager
         'id' => $notification->getId(),
         'type' => 'follow',
         'seen' => $notification->getSeen(),
-        'from' => $notification->getProgram()?->getUser()?->getId(),
-        'from_name' => $notification->getProgram()?->getUser()?->getUserIdentifier(),
-        'project' => $notification->getProgram()?->getId(),
-        'project_name' => $notification->getProgram()?->getName(),
-        'avatar' => $this->user_avatar_service->getVariants($notification->getProgram()?->getUser()),
+        'from' => $notification->getProject()?->getUser()?->getId(),
+        'from_name' => $notification->getProject()?->getUser()?->getUserIdentifier(),
+        'project' => $notification->getProject()?->getId(),
+        'project_name' => $notification->getProject()?->getName(),
+        'avatar' => $this->user_avatar_service->getVariants($notification->getProject()?->getUser()),
         'message' => $this->trans('catro-notifications.project-upload.message'),
       ]);
     }
@@ -140,8 +140,8 @@ class NotificationsResponseManager extends AbstractResponseManager
         'seen' => $notification->getSeen(),
         'from' => $notification->getComment()?->getUser()?->getId(),
         'from_name' => $notification->getComment()?->getUser()?->getUserIdentifier(),
-        'project' => $notification->getComment()?->getProgram()?->getId(),
-        'project_name' => $notification->getComment()?->getProgram()?->getName(),
+        'project' => $notification->getComment()?->getProject()?->getId(),
+        'project_name' => $notification->getComment()?->getProject()?->getName(),
         'avatar' => $this->user_avatar_service->getVariants($notification->getComment()?->getUser()),
         'message' => $this->trans('catro-notifications.comment.message'),
       ]);
@@ -161,8 +161,8 @@ class NotificationsResponseManager extends AbstractResponseManager
         'project' => $notification->getRemixProgram()?->getId(),
         'project_name' => $notification->getRemixProgram()?->getName(),
         'avatar' => $this->user_avatar_service->getVariants($notification->getRemixFrom()),
-        'remixed_project' => $notification->getProgram()?->getId(),
-        'remixed_project_name' => $notification->getProgram()?->getName(),
+        'remixed_project' => $notification->getProject()?->getId(),
+        'remixed_project_name' => $notification->getProject()?->getName(),
         'message' => $this->trans('catro-notifications.remix.message'),
       ]);
     }
@@ -232,8 +232,8 @@ class NotificationsResponseManager extends AbstractResponseManager
         'seen' => $notification->getSeen(),
         'from' => $notification->getProjectUser()?->getId(),
         'from_name' => $notification->getProjectUser()?->getUserIdentifier(),
-        'project' => $notification->getProgram()?->getId(),
-        'project_name' => $notification->getProgram()?->getName(),
+        'project' => $notification->getProject()?->getId(),
+        'project_name' => $notification->getProject()?->getName(),
         'avatar' => $this->user_avatar_service->getVariants($notification->getProjectUser()),
         'studio' => $notification->getStudio()?->getId(),
         'message' => $this->trans('catro-notifications.studio-project.message', [
@@ -249,8 +249,8 @@ class NotificationsResponseManager extends AbstractResponseManager
         'id' => $notification->getId(),
         'type' => 'project',
         'seen' => $notification->getSeen(),
-        'project' => $notification->getProgram()?->getId(),
-        'project_name' => $notification->getProgram()?->getName(),
+        'project' => $notification->getProject()?->getId(),
+        'project_name' => $notification->getProject()?->getName(),
         'message' => $this->trans('catro-notifications.project-expiring.message', [
           '%program_link%' => '%program_link%',
           '%days%' => (string) ($notification->getExpiryDays() ?? 0),

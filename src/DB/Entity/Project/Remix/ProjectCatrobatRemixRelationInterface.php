@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Project\Remix;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 
-interface ProgramCatrobatRemixRelationInterface
+interface ProjectCatrobatRemixRelationInterface
 {
-  public function getAncestor(): Program;
+  public function getAncestor(): Project;
 
-  public function getDescendant(): Program;
+  public function getDescendant(): Project;
 
   public function getCreatedAt(): ?\DateTime;
 

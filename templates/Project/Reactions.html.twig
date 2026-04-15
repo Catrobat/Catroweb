@@ -18,7 +18,7 @@
   {# Thumbs-Up Button #}
   <div
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center"
-     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_THUMBS_UP') }}"
+     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_THUMBS_UP') }}"
      data-bs-toggle="tooltip" title="{{ 'project.thumbsUp'|trans({}, 'catroweb') }}">
     <i class="material-icons md-24">
       thumb_up
@@ -27,7 +27,7 @@
   {# Smile Button #}
   <div
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center"
-     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_SMILE') }}"
+     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_SMILE') }}"
      data-bs-toggle="tooltip" title="{{ 'project.smile'|trans({}, 'catroweb') }}">
             <span class="material-icons md-24">
               sentiment_very_satisfied
@@ -36,7 +36,7 @@
   {# Love Button #}
   <div
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center"
-     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_LOVE') }}"
+     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_LOVE') }}"
      data-bs-toggle="tooltip" title="{{ 'project.love'|trans({}, 'catroweb') }}">
             <span class="material-icons md-24">
               favorite
@@ -45,7 +45,7 @@
   {# Wow Button #}
   <div
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center"
-     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_WOW') }}"
+     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_WOW') }}"
      data-bs-toggle="tooltip" title="{{ 'project.wow'|trans({}, 'catroweb') }}">
     <img alt="Wow reaction" id="wow-reaction-img-small" src="{{ asset('images/default/wow_white.svg') }}">
   </div>

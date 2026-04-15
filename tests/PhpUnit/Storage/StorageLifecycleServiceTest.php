@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Storage;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Storage\ScreenshotRepository;
@@ -176,14 +176,14 @@ class StorageLifecycleServiceTest extends TestCase
     bool $visible = true,
     bool $autoHidden = false,
     ?User $user = null,
-  ): Program {
+  ): Project {
     if (null === $user) {
       $user = $this->createStub(User::class);
       $user->method('getLastLogin')->willReturn(null);
       $user->method('isVerified')->willReturn(false);
     }
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $project->method('getId')->willReturn('test-project-id');
     $project->method('isStorageProtected')->willReturn($storageProtected);
     $project->method('getDownloads')->willReturn($downloads);

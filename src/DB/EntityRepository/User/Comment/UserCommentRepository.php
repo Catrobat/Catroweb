@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\User\Comment;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
@@ -68,7 +68,7 @@ class UserCommentRepository extends ServiceEntityRepository
     return $qb->select('uc')
       ->addSelect('u')
       ->leftJoin('uc.user', 'u')
-      ->where('uc.program = :program_id')
+      ->where('uc.project = :program_id')
       ->setParameter('program_id', $program_id)
       ->andWhere('uc.parent_id IS NULL')
       ->orderBy('uc.uploadDate', 'DESC')
@@ -90,7 +90,7 @@ class UserCommentRepository extends ServiceEntityRepository
     ;
   }
 
-  public function getProjectCommentOverviewListData(Program $project): array
+  public function getProjectCommentOverviewListData(Project $project): array
   {
     return $this->createQueryBuilder('c')
       ->innerJoin('c.user', 'cu')
@@ -105,16 +105,16 @@ class UserCommentRepository extends ServiceEntityRepository
         'cu.id as user_id',
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
-      ->where('c.program = :program')
+      ->where('c.project = :project')
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
-      ->setParameter('program', $project)
+      ->setParameter('project', $project)
       ->getQuery()
       ->getResult()
     ;
   }
 
-  public function getProjectCommentsPageData(Program $project, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
+  public function getProjectCommentsPageData(Project $project, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
   {
     $qb = $this->createQueryBuilder('c');
 
@@ -130,10 +130,10 @@ class UserCommentRepository extends ServiceEntityRepository
         'cu.id as user_id',
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
-      ->where('c.program = :program')
+      ->where('c.project = :project')
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
-      ->setParameter('program', $project)
+      ->setParameter('project', $project)
       ->orderBy('c.uploadDate', 'DESC')
       ->addOrderBy('c.id', 'DESC')
       ->setMaxResults($limit + 1)
@@ -224,7 +224,7 @@ class UserCommentRepository extends ServiceEntityRepository
   {
     return $this->createQueryBuilder('c')
       ->innerJoin('c.user', 'cu')
-      ->innerJoin('c.program', 'cp')
+      ->innerJoin('c.project', 'cp')
       ->select(
         'c.id',
         'c.username',

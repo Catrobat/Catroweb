@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\System\Testing\Behat\Context;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
@@ -32,7 +32,7 @@ class CatrowebBrowserContext extends BrowserContext
 
   protected bool $use_real_oauth_javascript_code = false;
 
-  protected ?Program $my_project = null;
+  protected ?Project $my_project = null;
 
   // -------------------------------------------------------------------------------------------------------------------
   //  Initialization
@@ -859,7 +859,7 @@ class CatrowebBrowserContext extends BrowserContext
         $project = $this->getProjectManager()->findOneByName($url);
         Assert::assertNotNull($project);
         Assert::assertNotNull($project->getId());
-        $url = $this->getRouter()->generate('program', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
+        $url = $this->getRouter()->generate('project', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');

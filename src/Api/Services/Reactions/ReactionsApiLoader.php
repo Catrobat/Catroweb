@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Api\Services\Reactions;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\User;
 use App\Project\ProjectLikeService;
 use App\Project\ProjectManager;
@@ -19,11 +19,11 @@ class ReactionsApiLoader extends AbstractApiLoader
   ) {
   }
 
-  public function findProjectIfVisibleToCurrentUser(string $id, ?User $user): ?Program
+  public function findProjectIfVisibleToCurrentUser(string $id, ?User $user): ?Project
   {
     $project = $this->project_manager->find($id);
 
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       return null;
     }
 
@@ -49,15 +49,15 @@ class ReactionsApiLoader extends AbstractApiLoader
   {
     $counts = [
       'total' => $this->project_like_service->totalLikeCount($project_id),
-      'thumbs_up' => $this->project_like_service->likeTypeCount($project_id, ProgramLike::TYPE_THUMBS_UP),
-      'smile' => $this->project_like_service->likeTypeCount($project_id, ProgramLike::TYPE_SMILE),
-      'love' => $this->project_like_service->likeTypeCount($project_id, ProgramLike::TYPE_LOVE),
-      'wow' => $this->project_like_service->likeTypeCount($project_id, ProgramLike::TYPE_WOW),
+      'thumbs_up' => $this->project_like_service->likeTypeCount($project_id, ProjectLike::TYPE_THUMBS_UP),
+      'smile' => $this->project_like_service->likeTypeCount($project_id, ProjectLike::TYPE_SMILE),
+      'love' => $this->project_like_service->likeTypeCount($project_id, ProjectLike::TYPE_LOVE),
+      'wow' => $this->project_like_service->likeTypeCount($project_id, ProjectLike::TYPE_WOW),
     ];
 
     $active_type_ids = $this->project_like_service->findProjectLikeTypes($project_id);
     $counts['active_types'] = array_map(
-      static fn (int $type_id): string => ProgramLike::$TYPE_NAMES[$type_id] ?? '',
+      static fn (int $type_id): string => ProjectLike::$TYPE_NAMES[$type_id] ?? '',
       $active_type_ids
     );
 
@@ -79,7 +79,7 @@ class ReactionsApiLoader extends AbstractApiLoader
     $likes = $this->project_like_service->findUserLikes($project_id, $user_id);
 
     return array_map(
-      static fn (ProgramLike $like): string => ProgramLike::$TYPE_NAMES[$like->getType()] ?? '',
+      static fn (ProjectLike $like): string => ProjectLike::$TYPE_NAMES[$like->getType()] ?? '',
       $likes
     );
   }

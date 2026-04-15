@@ -82,7 +82,7 @@ class UserResponseManager extends AbstractResponseManager
     }
 
     if (in_array('projects', $attributes_list, true)) {
-      $data['projects'] = $user->getPrograms()->count();
+      $data['projects'] = $user->getProjects()->count();
     }
 
     if (in_array('followers', $attributes_list, true)) {
@@ -103,7 +103,7 @@ class UserResponseManager extends AbstractResponseManager
 
     $is_own_profile = $viewer instanceof User && $viewer->getId() === $user->getId();
     if (!$is_own_profile) {
-      $data['projects'] = $user->getPrograms()->filter(
+      $data['projects'] = $user->getProjects()->filter(
         static fn ($p) => !$p->getPrivate() && $p->isVisible()
       )->count();
     }

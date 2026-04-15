@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Project;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramDownloads;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectDownloads;
 use App\DB\Entity\Project\Tag;
-use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\Project\Special\ExampleRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
@@ -48,7 +48,7 @@ class ProjectManager
     protected ProjectFileRepository $file_repository,
     protected ScreenshotRepository $screenshot_repository,
     protected EntityManagerInterface $entity_manager,
-    protected ProgramRepository $project_repository,
+    protected ProjectRepository $project_repository,
     protected TagRepository $tag_repository,
     protected FeaturedRepository $featured_repository,
     protected ExampleRepository $example_repository,
@@ -84,7 +84,7 @@ class ProjectManager
   /**
    * Check visibility of the given project for the current user.
    */
-  protected function isProjectVisibleForCurrentUser(Program $project): bool
+  protected function isProjectVisibleForCurrentUser(Project $project): bool
   {
     /** @var User|null $user */
     $user = $this->security->getUser();
@@ -134,7 +134,7 @@ class ProjectManager
   /**
    * @throws ORMException
    */
-  public function addProject(AddProjectRequest $request): ?Program
+  public function addProject(AddProjectRequest $request): ?Project
   {
     $file = $request->getProjectFile();
 
@@ -164,7 +164,7 @@ class ProjectManager
       return null;
     }
 
-    /** @var Program|null $old_project */
+    /** @var Project|null $old_project */
     $old_project = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
     if (null !== $old_project) {
       $project = $old_project;
@@ -173,7 +173,7 @@ class ProjectManager
       $project->incrementVersion();
       $project->setVisible($old_project->getVisible()); // necessary to keep reported projects invisible after re-upload!
     } else {
-      $project = new Program();
+      $project = new Project();
       $project->setRemixRoot(true);
       $project->setVisible(true);
     }
@@ -313,11 +313,11 @@ class ProjectManager
    * @throws ORMException
    * @throws \ImagickException
    */
-  public function createProjectFromScratch(?Program $project, User $user, array $project_data): Program
+  public function createProjectFromScratch(?Project $project, User $user, array $project_data): Project
   {
     $modified_time = TimeUtils::dateTimeFromScratch($project_data['history']['modified']);
-    if (!$project instanceof Program) {
-      $project = new Program();
+    if (!$project instanceof Project) {
+      $project = new Project();
       $project->setUser($user);
       $project->setScratchId($project_data['id']);
       $project->setDebugBuild(false);
@@ -378,7 +378,7 @@ class ProjectManager
     return $project;
   }
 
-  public function addTags(Program $project, ExtractedCatrobatFile $extracted_file): void
+  public function addTags(Project $project, ExtractedCatrobatFile $extracted_file): void
   {
     $tags = $extracted_file->getTags();
 
@@ -401,7 +401,7 @@ class ProjectManager
     }
   }
 
-  public function removeAllTags(Program $project): void
+  public function removeAllTags(Project $project): void
   {
     $tags = $project->getTags();
 
@@ -423,7 +423,7 @@ class ProjectManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findOneByNameAndUser(string $project_name, UserInterface $user): ?Program
+  public function findOneByNameAndUser(string $project_name, UserInterface $user): ?Project
   {
     return $this->project_repository->findOneBy([
       'name' => $project_name,
@@ -435,7 +435,7 @@ class ProjectManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findOneByName(string $project_name): ?Program
+  public function findOneByName(string $project_name): ?Project
   {
     return $this->project_repository->findOneBy(['name' => $project_name]);
   }
@@ -444,7 +444,7 @@ class ProjectManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findOneByScratchId(int $scratch_id): ?Program
+  public function findOneByScratchId(int $scratch_id): ?Project
   {
     return $this->project_repository->findOneBy(['scratch_id' => $scratch_id]);
   }
@@ -482,18 +482,18 @@ class ProjectManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function find(string $id): ?Program
+  public function find(string $id): ?Project
   {
     return $this->project_repository->find($id);
   }
 
-  public function findProjectIfVisibleToCurrentUser(?string $id): ?Program
+  public function findProjectIfVisibleToCurrentUser(?string $id): ?Project
   {
     if (null === $id) {
       return null;
     }
 
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->find($id);
 
     if (null === $project) {
@@ -509,7 +509,7 @@ class ProjectManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findOneByRemixMigratedAt(?\DateTime $remix_migrated_at): ?Program
+  public function findOneByRemixMigratedAt(?\DateTime $remix_migrated_at): ?Project
   {
     return $this->project_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
   }
@@ -537,7 +537,7 @@ class ProjectManager
   /**
    * Keyset cursor query for projects ordered by a given column.
    *
-   * @return Program[]
+   * @return Project[]
    */
   public function getProjectsKeyset(string $order_by, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?int $cursor_value = null, ?string $cursor_id = null): array
   {
@@ -545,7 +545,7 @@ class ProjectManager
   }
 
   /**
-   * @return Program[]
+   * @return Project[]
    */
   public function getPublicUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -553,7 +553,7 @@ class ProjectManager
   }
 
   /**
-   * @return Program[]
+   * @return Project[]
    */
   public function getUserProjectsKeyset(string $user_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -561,7 +561,7 @@ class ProjectManager
   }
 
   /**
-   * @return Program[]
+   * @return Project[]
    */
   public function getMoreProjectsFromUserKeyset(string $user_id, string $exclude_project_id, ?string $flavor, string $max_version, int $limit, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -627,7 +627,7 @@ class ProjectManager
     return $this->project_repository->countProjects($flavor, $max_version);
   }
 
-  public function save(Program $project, ?ProgramDownloads $downloads = null): void
+  public function save(Project $project, ?ProjectDownloads $downloads = null): void
   {
     $this->entity_manager->persist($project);
     if (!is_null($downloads)) {
@@ -657,7 +657,7 @@ class ProjectManager
     return $this->project_repository->searchExtensionCount($query);
   }
 
-  public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Program $project, ?int $limit, int $offset): array
+  public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Project $project, ?int $limit, int $offset): array
   {
     return $this->project_repository->getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(
       $flavor, $project, $limit, $offset
@@ -732,11 +732,11 @@ class ProjectManager
     };
   }
 
-  private function notifyFollower(Program $project): void
+  private function notifyFollower(Project $project): void
   {
     $followers = $project->getUser()->getFollowers();
     for ($i = 0; $i < $followers->count(); ++$i) {
-      $notification = new NewProgramNotification($followers[$i], $project);
+      $notification = new NewProjectNotification($followers[$i], $project);
       $this->notification_service->addNotification($notification);
     }
   }
@@ -744,7 +744,7 @@ class ProjectManager
   /**
    * @throws ORMException
    */
-  public function deleteProject(Program $project): void
+  public function deleteProject(Project $project): void
   {
     $project->setVisible(false);
     $this->entity_manager->persist($project);
@@ -756,7 +756,7 @@ class ProjectManager
    * Permanently deletes a project: removes files from disk and the database record.
    * Doctrine cascade handles related entities (comments, notifications, likes, etc.).
    */
-  public function hardDeleteProject(Program $project): void
+  public function hardDeleteProject(Project $project): void
   {
     $projectId = $project->getId();
     if (null === $projectId) {

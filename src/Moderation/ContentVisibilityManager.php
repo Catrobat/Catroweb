@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Moderation;
 
 use App\DB\Entity\Moderation\ContentReport;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
@@ -28,7 +28,7 @@ class ContentVisibilityManager
       return;
     }
 
-    if ($entity instanceof Program || $entity instanceof UserComment || $entity instanceof Studio) {
+    if ($entity instanceof Project || $entity instanceof UserComment || $entity instanceof Studio) {
       $entity->setAutoHidden(true);
     } else {
       $entity->setProfileHidden(true);
@@ -55,7 +55,7 @@ class ContentVisibilityManager
       }
     }
 
-    if ($entity instanceof Program || $entity instanceof UserComment || $entity instanceof Studio) {
+    if ($entity instanceof Project || $entity instanceof UserComment || $entity instanceof Studio) {
       $entity->setAutoHidden(false);
     } else {
       $entity->setProfileHidden(false);
@@ -70,7 +70,7 @@ class ContentVisibilityManager
       return false;
     }
 
-    if ($entity instanceof Program || $entity instanceof UserComment || $entity instanceof Studio) {
+    if ($entity instanceof Project || $entity instanceof UserComment || $entity instanceof Studio) {
       return $entity->getAutoHidden();
     }
 
@@ -84,7 +84,7 @@ class ContentVisibilityManager
       return null;
     }
 
-    if ($entity instanceof Program || $entity instanceof UserComment) {
+    if ($entity instanceof Project || $entity instanceof UserComment) {
       return $entity->getUser()?->getId();
     }
 
@@ -114,7 +114,7 @@ class ContentVisibilityManager
       return null;
     }
 
-    if ($entity instanceof Program || $entity instanceof Studio) {
+    if ($entity instanceof Project || $entity instanceof Studio) {
       return $entity->getName();
     }
 
@@ -134,7 +134,7 @@ class ContentVisibilityManager
   {
     $comment = $this->entity_manager->find(UserComment::class, $content_id);
 
-    return $comment?->getProgram()?->getId();
+    return $comment?->getProject()?->getId();
   }
 
   /**
@@ -144,7 +144,7 @@ class ContentVisibilityManager
   {
     $comment = $this->entity_manager->find(UserComment::class, $content_id);
 
-    return $comment?->getProgram()?->getName();
+    return $comment?->getProject()?->getName();
   }
 
   public function isWhitelisted(ContentType $content_type, string $content_id): bool
@@ -154,7 +154,7 @@ class ContentVisibilityManager
       return false;
     }
 
-    if ($entity instanceof Program) {
+    if ($entity instanceof Project) {
       return $entity->getApproved() || ($entity->getUser()?->isApproved() ?? false);
     }
 
@@ -179,8 +179,8 @@ class ContentVisibilityManager
    */
   private function hideAllUserContent(User $user): void
   {
-    foreach ([Program::class, UserComment::class] as $entity_class) {
-      $alias = Program::class === $entity_class ? 'p' : 'c';
+    foreach ([Project::class, UserComment::class] as $entity_class) {
+      $alias = Project::class === $entity_class ? 'p' : 'c';
       $this->entity_manager->createQueryBuilder()
         ->update($entity_class, $alias)
         ->set($alias.'.auto_hidden', ':target')
@@ -203,7 +203,7 @@ class ContentVisibilityManager
   private function restoreUserContentNotIndependentlyReported(User $user): void
   {
     $content_type_map = [
-      Program::class => ['alias' => 'p', 'content_type' => ContentType::Project->value],
+      Project::class => ['alias' => 'p', 'content_type' => ContentType::Project->value],
       UserComment::class => ['alias' => 'c', 'content_type' => ContentType::Comment->value],
     ];
 
@@ -271,10 +271,10 @@ class ContentVisibilityManager
     }
   }
 
-  private function findEntity(ContentType $content_type, string $content_id): Program|UserComment|User|Studio|null
+  private function findEntity(ContentType $content_type, string $content_id): Project|UserComment|User|Studio|null
   {
     return match ($content_type) {
-      ContentType::Project => $this->entity_manager->find(Program::class, $content_id),
+      ContentType::Project => $this->entity_manager->find(Project::class, $content_id),
       ContentType::Comment => $this->entity_manager->find(UserComment::class, $content_id),
       ContentType::User => $this->entity_manager->find(User::class, $content_id),
       ContentType::Studio => $this->entity_manager->find(Studio::class, $content_id),

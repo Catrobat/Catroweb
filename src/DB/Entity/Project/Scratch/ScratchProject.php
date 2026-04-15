@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Project\Scratch;
 
-use App\DB\EntityRepository\Project\ScratchProgramRepository;
+use App\DB\EntityRepository\Project\ScratchProjectRepository;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Table(name: 'scratch_program')]
+#[ORM\Table(name: 'scratch_project')]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Entity(repositoryClass: ScratchProgramRepository::class)]
-class ScratchProgram
+#[ORM\Entity(repositoryClass: ScratchProjectRepository::class)]
+class ScratchProject
 {
   #[ORM\Column(type: Types::STRING, length: 300, nullable: true)]
   protected ?string $name = null;
@@ -27,7 +27,7 @@ class ScratchProgram
   protected ?\DateTime $last_modified_at = null;
 
   /**
-   * ScratchProgram constructor.
+   * ScratchProject constructor.
    *
    * @throws \Exception
    */
@@ -39,21 +39,21 @@ class ScratchProgram
     $this->updateLastModifiedTimestamp();
   }
 
-  public function setName(?string $name): ScratchProgram
+  public function setName(?string $name): ScratchProject
   {
     $this->name = $name;
 
     return $this;
   }
 
-  public function setDescription(?string $description): ScratchProgram
+  public function setDescription(?string $description): ScratchProject
   {
     $this->description = $description;
 
     return $this;
   }
 
-  public function setUsername(?string $username): ScratchProgram
+  public function setUsername(?string $username): ScratchProject
   {
     $this->username = $username;
 
@@ -89,7 +89,7 @@ class ScratchProgram
     return $this->username;
   }
 
-  public function setLastModifiedAt(\DateTime $last_modified_at): ScratchProgram
+  public function setLastModifiedAt(\DateTime $last_modified_at): ScratchProject
   {
     $this->last_modified_at = $last_modified_at;
 

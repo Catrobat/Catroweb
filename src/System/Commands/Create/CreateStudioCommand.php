@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
@@ -114,7 +114,7 @@ class CreateStudioCommand extends Command
       }
 
       foreach ($projects as $project) {
-        /** @var Program $currentProject */
+        /** @var Project $currentProject */
         $currentProject = $this->studioManager->findOneByName($project);
         /** @var User $user */
         $user = $this->user_manager->findUserByUsername($currentProject->getUser()->getUsername());

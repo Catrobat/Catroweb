@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\DBUpdater\CronJobs;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\CatrobatFile\ProjectFileRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -40,7 +40,7 @@ class DetectBrokenProjectsCommand extends Command
     while (true) {
       $projects = $this->entity_manager->createQueryBuilder()
         ->select('p.id')
-        ->from(Program::class, 'p')
+        ->from(Project::class, 'p')
         ->orderBy('p.id', 'ASC')
         ->setFirstResult($offset)
         ->setMaxResults(self::BATCH_SIZE)
@@ -71,7 +71,7 @@ class DetectBrokenProjectsCommand extends Command
       // Batch update broken projects that were not already flagged
       if ([] !== $broken_ids) {
         $updated = (int) $this->entity_manager->createQueryBuilder()
-          ->update(Program::class, 'p')
+          ->update(Project::class, 'p')
           ->set('p.has_missing_files', ':true')
           ->where('p.id IN (:ids)')
           ->andWhere('p.has_missing_files = :false')
@@ -87,7 +87,7 @@ class DetectBrokenProjectsCommand extends Command
       // Batch update projects that were flagged but are now fixed
       if ([] !== $fixed_ids) {
         $updated = (int) $this->entity_manager->createQueryBuilder()
-          ->update(Program::class, 'p')
+          ->update(Project::class, 'p')
           ->set('p.has_missing_files', ':false')
           ->where('p.id IN (:ids)')
           ->andWhere('p.has_missing_files = :true')

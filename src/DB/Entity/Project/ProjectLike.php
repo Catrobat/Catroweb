@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\DB\Entity\Project;
 
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
+use App\DB\EntityRepository\Project\ProjectLikeRepository;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_like')]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Entity(repositoryClass: ProgramLikeRepository::class)]
-class ProgramLike implements \Stringable
+#[ORM\Entity(repositoryClass: ProjectLikeRepository::class)]
+class ProjectLike implements \Stringable
 {
   final public const int TYPE_NONE = 0;
 
@@ -59,8 +59,8 @@ class ProgramLike implements \Stringable
   protected string $program_id;
 
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
-  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'likes')]
-  protected Program $program;
+  #[ORM\ManyToOne(targetEntity: Project::class, fetch: 'LAZY', inversedBy: 'likes')]
+  protected Project $project;
 
   #[ORM\Id]
   #[ORM\Column(type: Types::GUID, nullable: false)]
@@ -77,9 +77,9 @@ class ProgramLike implements \Stringable
   #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $created_at = null;
 
-  public function __construct(Program $program, User $user, int $type)
+  public function __construct(Project $project, User $user, int $type)
   {
-    $this->setProgram($program);
+    $this->setProject($project);
     $this->setUser($user);
     $this->setType($type);
   }
@@ -87,7 +87,7 @@ class ProgramLike implements \Stringable
   #[\Override]
   public function __toString(): string
   {
-    return $this->program->__toString();
+    return $this->project->__toString();
   }
 
   public static function isValidType(int $type): bool
@@ -106,17 +106,17 @@ class ProgramLike implements \Stringable
     }
   }
 
-  public function setProgram(Program $program): ProgramLike
+  public function setProject(Project $project): ProjectLike
   {
-    $this->program = $program;
-    $this->program_id = $program->getId() ?? throw new \LogicException('Program must have an ID before being used in a ProgramLike.');
+    $this->project = $project;
+    $this->program_id = $project->getId() ?? throw new \LogicException('Program must have an ID before being used in a ProjectLike.');
 
     return $this;
   }
 
-  public function getProgram(): Program
+  public function getProject(): Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   public function getProgramId(): string
@@ -124,10 +124,10 @@ class ProgramLike implements \Stringable
     return $this->program_id;
   }
 
-  public function setUser(User $user): ProgramLike
+  public function setUser(User $user): ProjectLike
   {
     $this->user = $user;
-    $this->user_id = $user->getId() ?? throw new \LogicException('User must have an ID before being used in a ProgramLike.');
+    $this->user_id = $user->getId() ?? throw new \LogicException('User must have an ID before being used in a ProjectLike.');
 
     return $this;
   }
@@ -142,7 +142,7 @@ class ProgramLike implements \Stringable
     return $this->user_id;
   }
 
-  public function setType(int $type): ProgramLike
+  public function setType(int $type): ProjectLike
   {
     $this->type = $type;
 
@@ -164,7 +164,7 @@ class ProgramLike implements \Stringable
     return $this->created_at;
   }
 
-  public function setCreatedAt(\DateTime $created_at): ProgramLike
+  public function setCreatedAt(\DateTime $created_at): ProjectLike
   {
     $this->created_at = $created_at;
 

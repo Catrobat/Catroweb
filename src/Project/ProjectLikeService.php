@@ -4,22 +4,22 @@ declare(strict_types=1);
 
 namespace App\Project;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
+use App\DB\EntityRepository\Project\ProjectLikeRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 
 class ProjectLikeService
 {
   public function __construct(
-    private readonly ProgramLikeRepository $project_like_repository,
+    private readonly ProjectLikeRepository $project_like_repository,
   ) {
   }
 
   /**
-   * @return ProgramLike[]
+   * @return ProjectLike[]
    */
   public function findUserLikes(string $project_id, string $user_id): array
   {
@@ -34,11 +34,11 @@ class ProjectLikeService
   /**
    * @throws NoResultException|\InvalidArgumentException
    */
-  public function changeLike(Program $project, User $user, int $type, string $action): void
+  public function changeLike(Project $project, User $user, int $type, string $action): void
   {
-    if (ProgramLike::ACTION_ADD === $action) {
+    if (ProjectLike::ACTION_ADD === $action) {
       $this->project_like_repository->addLike($project, $user, $type);
-    } elseif (ProgramLike::ACTION_REMOVE === $action) {
+    } elseif (ProjectLike::ACTION_REMOVE === $action) {
       $this->project_like_repository->removeLike($project, $user, $type);
     } else {
       throw new \InvalidArgumentException('Invalid action: '.$action);
@@ -48,7 +48,7 @@ class ProjectLikeService
   /**
    * @throws NoResultException
    */
-  public function areThereOtherLikeTypes(Program $project, User $user, int $type): bool
+  public function areThereOtherLikeTypes(Project $project, User $user, int $type): bool
   {
     try {
       return $this->project_like_repository->areThereOtherLikeTypes($project, $user, $type);

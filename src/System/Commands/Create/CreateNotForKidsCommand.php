@@ -37,7 +37,7 @@ class CreateNotForKidsCommand extends Command
 
     $project = $this->remix_manipulation_program_manager->findOneByName($project_name);
 
-    if (!$project instanceof \App\DB\Entity\Project\Program || null === $type) {
+    if (!$project instanceof \App\DB\Entity\Project\Project || null === $type) {
       $output->writeln('Marking '.$project_name.' as not safe for kids failed');
 
       return 1;

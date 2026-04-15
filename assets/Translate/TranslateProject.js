@@ -1,9 +1,9 @@
 import { ByLineElementContainer, Translation } from './Translation'
 
-export class TranslateProgram extends Translation {
-  constructor(translatedByLine, googleTranslateDisplayName, programId, hasDescription, hasCredit) {
+export class TranslateProject extends Translation {
+  constructor(translatedByLine, googleTranslateDisplayName, projectId, hasDescription, hasCredit) {
     super(translatedByLine, googleTranslateDisplayName)
-    this.programId = programId
+    this.projectId = projectId
     this.hasDescription = hasDescription
     this.hasCredit = hasCredit
     this.ANIMATION_TIME = 400
@@ -11,7 +11,7 @@ export class TranslateProgram extends Translation {
   }
 
   _initListeners() {
-    const translateProgram = this
+    const translateProject = this
 
     if (document.getElementById('project-translation-button') == null) {
       return
@@ -20,11 +20,11 @@ export class TranslateProgram extends Translation {
     document.getElementById('project-translation-button').addEventListener('click', function () {
       this.style.display = 'none'
 
-      if (translateProgram.isTranslationNotAvailable('#name-translation')) {
+      if (translateProject.isTranslationNotAvailable('#name-translation')) {
         document.getElementById('project-translation-loading-spinner').style.display = 'block'
-        translateProgram.translateProgram()
+        translateProject.translateProject()
       } else {
-        translateProgram.openTranslatedProgram()
+        translateProject.openTranslatedProject()
       }
     })
 
@@ -48,21 +48,21 @@ export class TranslateProgram extends Translation {
           name.classList.add('project-name')
           nameTranslation.classList.remove('project-name-animation')
           nameTranslation.classList.add('project-name')
-        }, translateProgram.ANIMATION_TIME)
+        }, translateProject.ANIMATION_TIME)
 
-        if (translateProgram.hasDescription) {
+        if (translateProject.hasDescription) {
           document.getElementById('description').style.display = 'block'
           document.getElementById('description-translation').style.display = 'none'
         }
 
         document.getElementById('credits-translation-wrapper').style.display = 'none'
-        if (translateProgram.hasCredit) {
+        if (translateProject.hasCredit) {
           document.getElementById('credits').style.display = 'block'
         }
       })
   }
 
-  setTranslatedProgramData(data) {
+  setTranslatedProjectData(data) {
     const nameTranslation = document.getElementById('name-translation')
     nameTranslation.setAttribute('lang', data.target_language)
     nameTranslation.textContent = data.translated_title
@@ -86,7 +86,7 @@ export class TranslateProgram extends Translation {
     this.setTranslationCredit(data, byLineElements)
   }
 
-  openTranslatedProgram() {
+  openTranslatedProject() {
     document.getElementById('project-translation-loading-spinner').style.display = 'none'
     document.getElementById('remove-project-translation-button').style.display = 'block'
 
@@ -117,7 +117,7 @@ export class TranslateProgram extends Translation {
     }
   }
 
-  programNotTranslated() {
+  projectNotTranslated() {
     document.getElementById('project-translation-loading-spinner').style.display = 'none'
     document.getElementById('project-translation-button').style.display = 'block'
 
@@ -134,18 +134,18 @@ export class TranslateProgram extends Translation {
     this.openGoogleTranslatePage(text)
   }
 
-  translateProgram() {
+  translateProject() {
     const self = this
-    fetch('../translate/project/' + self.programId + '?target_language=' + self.targetLanguage, {
+    fetch('../translate/project/' + self.projectId + '?target_language=' + self.targetLanguage, {
       method: 'GET',
     })
       .then((response) => response.json())
       .then((data) => {
-        self.setTranslatedProgramData(data)
-        self.openTranslatedProgram()
+        self.setTranslatedProjectData(data)
+        self.openTranslatedProject()
       })
       .catch(() => {
-        self.programNotTranslated()
+        self.projectNotTranslated()
       })
   }
 }

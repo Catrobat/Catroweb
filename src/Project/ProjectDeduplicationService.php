@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectAsset;
 use App\DB\Entity\Project\ProjectAssetMapping;
 use App\DB\EntityRepository\Project\ProjectAssetMappingRepository;
@@ -32,7 +32,7 @@ class ProjectDeduplicationService
    * Process a newly extracted project: hash all assets, store unique ones,
    * create mappings, update reference counts.
    */
-  public function deduplicateProject(Program $project, string $extractDir): void
+  public function deduplicateProject(Project $project, string $extractDir): void
   {
     $assetFiles = $this->collectAssetFiles($extractDir);
 

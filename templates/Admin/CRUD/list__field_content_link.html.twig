@@ -6,7 +6,7 @@
   {% set link = null %}
 
   {% if content_type == 'project' %}
-    {% set link = path('program', {id: content_id, theme: 'pocketcode'}) %}
+    {% set link = path('project', {id: content_id, theme: 'pocketcode'}) %}
   {% elseif content_type == 'comment' %}
     {% set link = path('project_comment', {id: content_id, theme: 'pocketcode'}) %}
   {% elseif content_type == 'user' %}

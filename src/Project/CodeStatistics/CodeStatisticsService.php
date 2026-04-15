@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\CodeStatistics;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,13 +28,13 @@ class CodeStatisticsService
    * Get the latest code statistics for a project.
    * If no persisted stats exist, attempts to parse on-demand and persist.
    */
-  public function getStatistics(Program $project): ?ProjectCodeStatistics
+  public function getStatistics(Project $project): ?ProjectCodeStatistics
   {
     // Query the latest row directly so lazy collections do not hand us an older
     // in-memory snapshot after additional statistics rows have been persisted.
     /** @var ?ProjectCodeStatistics $latest */
     $latest = $this->entity_manager->getRepository(ProjectCodeStatistics::class)->findOneBy(
-      ['program' => $project],
+      ['project' => $project],
       ['created_at' => 'DESC'],
     );
 
@@ -50,7 +50,7 @@ class CodeStatisticsService
   /**
    * Parse code.xml for a project and persist the statistics.
    */
-  private function parseAndPersist(Program $project): ?ProjectCodeStatistics
+  private function parseAndPersist(Project $project): ?ProjectCodeStatistics
   {
     try {
       $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
@@ -64,7 +64,7 @@ class CodeStatisticsService
       }
 
       $stats = $this->parser->parse($code_xml_path);
-      $stats->setProgram($project);
+      $stats->setProject($project);
 
       $this->entity_manager->persist($stats);
       $this->entity_manager->flush();

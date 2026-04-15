@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\User\Notifications;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,7 +21,7 @@ class LikeNotification extends CatroNotification
    *
    * @param User         $user      the User to which this LikeNotification will be shown
    * @param User|null    $like_from the User which "like action" to another user triggered this LikeNotification
-   * @param Program|null $program   the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
+   * @param Project|null $project   the Program to which the ProjectLike and this LikeNotification is notifying, belongs to
    */
   public function __construct(
     User $user,
@@ -29,8 +29,8 @@ class LikeNotification extends CatroNotification
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'like_notification_mentions')]
     private ?User $like_from,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
-    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'like_notification_mentions')]
-    private ?Program $program,
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'like_notification_mentions')]
+    private ?Project $project,
   ) {
     parent::__construct($user, '', '', 'reaction');
   }
@@ -62,18 +62,18 @@ class LikeNotification extends CatroNotification
   }
 
   /**
-   * Returns the Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
+   * Returns the Program to which the ProjectLike and this LikeNotification is notifying, belongs to.
    */
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   /**
-   * Sets the Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
+   * Sets the Program to which the ProjectLike and this LikeNotification is notifying, belongs to.
    */
-  public function setProgram(?Program $program): void
+  public function setProject(?Project $project): void
   {
-    $this->program = $program;
+    $this->project = $project;
   }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use App\Translation\TranslationApiInterface;
@@ -169,7 +169,7 @@ class TranslationDelegateTest extends TestCase
       ->willReturn($translation_result)
     ;
 
-    $project = new Program();
+    $project = new Project();
     $project->setName('name');
 
     $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api);
@@ -191,7 +191,7 @@ class TranslationDelegateTest extends TestCase
       ->willReturn($translation_result)
     ;
 
-    $project = new Program();
+    $project = new Project();
     $project->setName('name');
     $project->setDescription('description');
     $project->setCredits('credit');
@@ -214,7 +214,7 @@ class TranslationDelegateTest extends TestCase
       ->willReturn(null)
     ;
 
-    $project = new Program();
+    $project = new Project();
     $project->setName('name');
     $project->setDescription('description');
     $project->setCredits('credit');
@@ -234,7 +234,7 @@ class TranslationDelegateTest extends TestCase
     // For this test, we need a mock (not a stub) because we're verifying behavior
     $custom_translation_repository = $this->createMock(ProjectCustomTranslationRepository::class);
     $translation_delegate = new TranslationDelegate($custom_translation_repository, $this->project_machine_translation_repository);
-    $project = new Program();
+    $project = new Project();
 
     $custom_translation_repository->expects($this->once())
       ->method('addNameTranslation')
@@ -275,7 +275,7 @@ class TranslationDelegateTest extends TestCase
 
     $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $machine_translation_repository, $api);
 
-    $actual_result = $translation_delegate->translateProject(new Program(), 'en', 'fr');
+    $actual_result = $translation_delegate->translateProject(new Project(), 'en', 'fr');
 
     $this->assertEquals($cached_translation, $actual_result);
   }

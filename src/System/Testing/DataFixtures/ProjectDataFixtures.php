@@ -6,7 +6,7 @@ namespace App\System\Testing\DataFixtures;
 
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Extension;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
@@ -56,7 +56,7 @@ class ProjectDataFixtures
   /**
    * @throws \Exception
    */
-  public function insertProject(array $config, bool $andFlush = true): Program
+  public function insertProject(array $config, bool $andFlush = true): Project
   {
     ++ProjectDataFixtures::$number_of_projects;
 
@@ -70,7 +70,7 @@ class ProjectDataFixtures
       MyUuidGenerator::setNextValue($config['id']);
     }
 
-    $project = new Program();
+    $project = new Project();
     $project->setUser($user);
 
     $project->setName($config['name'] ?? 'Project '.ProjectDataFixtures::$number_of_projects);

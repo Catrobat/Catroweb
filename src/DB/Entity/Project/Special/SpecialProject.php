@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\DB\Entity\Project\Special;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
-class SpecialProgram
+class SpecialProject
 {
   public ?File $file = null;
 
@@ -39,8 +39,9 @@ class SpecialProgram
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $for_ios = false;
 
-  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'EAGER')]
-  protected ?Program $program = null;
+  #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
+  #[ORM\ManyToOne(targetEntity: Project::class, fetch: 'EAGER')]
+  protected ?Project $project = null;
 
   public function getFlavor(): ?Flavor
   {
@@ -62,9 +63,9 @@ class SpecialProgram
     return $this->id;
   }
 
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   public function getActive(): bool
@@ -99,12 +100,12 @@ class SpecialProgram
 
   public function getName(): string
   {
-    return $this->program->getName();
+    return $this->project->getName();
   }
 
   public function getUser(): ?User
   {
-    return $this->getProgram()->getUser();
+    return $this->getProject()->getUser();
   }
 
   public function getNotForKids(): bool

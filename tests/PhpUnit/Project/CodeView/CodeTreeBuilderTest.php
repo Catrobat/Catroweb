@@ -227,7 +227,7 @@ class CodeTreeBuilderTest extends TestCase
       new CatrobatCodeParser(),
     );
 
-    $project = $this->createStub(\App\DB\Entity\Project\Program::class);
+    $project = $this->createStub(\App\DB\Entity\Project\Project::class);
     $builder->buildCodeTree($project);
   }
 

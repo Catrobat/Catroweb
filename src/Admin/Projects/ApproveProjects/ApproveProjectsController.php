@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Admin\Projects\ApproveProjects;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Sonata\AdminBundle\Exception\LockException;
 use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * @phpstan-extends CRUDController<Program>
+ * @phpstan-extends CRUDController<Project>
  */
 class ApproveProjectsController extends CRUDController
 {
@@ -21,7 +21,7 @@ class ApproveProjectsController extends CRUDController
    */
   public function approveAction(): RedirectResponse
   {
-    /** @var Program|null $object */
+    /** @var Project|null $object */
     $object = $this->admin->getSubject();
     if (null === $object) {
       return new RedirectResponse($this->admin->generateUrl('list'));
@@ -50,7 +50,7 @@ class ApproveProjectsController extends CRUDController
    */
   public function invisibleAction(): RedirectResponse
   {
-    /** @var Program $project */
+    /** @var Project $project */
     $project = $this->admin->getSubject();
     $project->setApproved(true);
     $project->setVisible(false);
@@ -85,7 +85,7 @@ class ApproveProjectsController extends CRUDController
     $object_key = array_rand($objectsArray);
     $object = $objectsArray[$object_key];
 
-    if (!$object instanceof Program) {
+    if (!$object instanceof Project) {
       return null;
     }
 

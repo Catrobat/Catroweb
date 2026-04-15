@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Api\Services\Studio;
 
 use App\Api\Services\Base\AbstractApiProcessor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
@@ -123,7 +123,7 @@ class StudioApiProcessor extends AbstractApiProcessor
   public function addProject(User $user, Studio $studio, string $project_id): string
   {
     $project = $this->project_manager->find($project_id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       return 'not_found';
     }
 
@@ -143,7 +143,7 @@ class StudioApiProcessor extends AbstractApiProcessor
   public function removeProject(User $user, Studio $studio, string $project_id): string
   {
     $project = $this->project_manager->find($project_id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       return 'not_found';
     }
 

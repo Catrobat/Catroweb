@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\Project;
 
-use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
+use App\DB\Entity\Project\Remix\ProjectRemixBackwardRelation;
 use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProgramRemixBackwardRelation>
+ * @extends ServiceEntityRepository<ProjectRemixBackwardRelation>
  */
-class ProgramRemixBackwardRepository extends ServiceEntityRepository
+class ProjectRemixBackwardRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
   {
-    parent::__construct($managerRegistry, ProgramRemixBackwardRelation::class);
+    parent::__construct($managerRegistry, ProjectRemixBackwardRelation::class);
   }
 
   /**
-   * @return ProgramRemixBackwardRelation[]
+   * @return ProjectRemixBackwardRelation[]
    */
   public function getParentRelations(array $program_ids): array
   {
@@ -38,7 +38,7 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return ProgramRemixBackwardRelation[]
+   * @return ProjectRemixBackwardRelation[]
    */
   public function getDirectEdgeRelations(array $edge_start_program_ids, array $edge_end_program_ids): array
   {
@@ -86,7 +86,7 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return ProgramRemixBackwardRelation[]
+   * @return ProjectRemixBackwardRelation[]
    */
   public function getUnseenChildRelationsOfUser(User $user): array
   {

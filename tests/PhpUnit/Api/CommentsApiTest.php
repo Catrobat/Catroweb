@@ -6,7 +6,7 @@ namespace Tests\PhpUnit\Api;
 
 use App\Api\CommentsApi;
 use App\Api\Services\AuthenticationManager;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
@@ -111,7 +111,7 @@ final class CommentsApiTest extends TestCase
   public function testProjectIdCommentsGetReturnsBadRequestOnInvalidCursor(): void
   {
     $project_manager = $this->createStub(ProjectManager::class);
-    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createStub(Program::class));
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createStub(Project::class));
 
     $api = $this->buildApi(project_manager: $project_manager);
 
@@ -177,7 +177,7 @@ final class CommentsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
 
     $project_manager = $this->createStub(ProjectManager::class);
-    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createStub(Program::class));
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createStub(Project::class));
 
     $api = $this->buildApi(
       authentication_manager: $authentication_manager,
@@ -202,7 +202,7 @@ final class CommentsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
 
     $project_manager = $this->createStub(ProjectManager::class);
-    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createStub(Program::class));
+    $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($this->createStub(Project::class));
 
     $comment_repository = $this->createStub(UserCommentRepository::class);
     $comment_repository->method('findOneBy')->willReturn(null);
@@ -231,17 +231,17 @@ final class CommentsApiTest extends TestCase
     $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createStub(User::class));
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $project->method('getId')->willReturn('project-1');
 
     $project_manager = $this->createStub(ProjectManager::class);
     $project_manager->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
 
-    $other_project = $this->createStub(Program::class);
+    $other_project = $this->createStub(Project::class);
     $other_project->method('getId')->willReturn('project-2');
 
     $parent_comment = $this->createStub(UserComment::class);
-    $parent_comment->method('getProgram')->willReturn($other_project);
+    $parent_comment->method('getProject')->willReturn($other_project);
 
     $comment_repository = $this->createStub(UserCommentRepository::class);
     $comment_repository->method('findOneBy')->willReturn($parent_comment);
@@ -396,11 +396,11 @@ final class CommentsApiTest extends TestCase
   #[Group('unit')]
   public function testCommentsIdRepliesGetReturnsNotFoundWhenProjectNotVisible(): void
   {
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $project->method('getId')->willReturn('project-1');
 
     $comment = $this->createStub(UserComment::class);
-    $comment->method('getProgram')->willReturn($project);
+    $comment->method('getProject')->willReturn($project);
 
     $comment_repository = $this->createStub(UserCommentRepository::class);
     $comment_repository->method('findOneBy')->willReturn($comment);
@@ -425,11 +425,11 @@ final class CommentsApiTest extends TestCase
   #[Group('unit')]
   public function testCommentsIdRepliesGetReturnsBadRequestOnInvalidCursor(): void
   {
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $project->method('getId')->willReturn('project-1');
 
     $comment = $this->createStub(UserComment::class);
-    $comment->method('getProgram')->willReturn($project);
+    $comment->method('getProject')->willReturn($project);
 
     $comment_repository = $this->createStub(UserCommentRepository::class);
     $comment_repository->method('findOneBy')->willReturn($comment);

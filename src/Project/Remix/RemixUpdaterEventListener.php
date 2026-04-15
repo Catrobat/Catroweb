@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Project\Remix;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Event\ProjectAfterInsertEvent;
 use App\Project\Scratch\AsyncHttpClient;
@@ -44,7 +44,7 @@ class RemixUpdaterEventListener
    *
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function update(ExtractedCatrobatFile $file, Program $project): void
+  public function update(ExtractedCatrobatFile $file, Project $project): void
   {
     $remixes_data = $file->getRemixesData(
       $project->getId(),
@@ -77,7 +77,7 @@ class RemixUpdaterEventListener
     }
 
     $project_xml_properties->header->remixOf = $remix_url_string;
-    $project_xml_properties->header->url = $this->router->generate('program', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
+    $project_xml_properties->header->url = $this->router->generate('project', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
     $project_xml_properties->header->userHandle = $project->getUser()->getUsername();
     $file->saveProjectXmlProperties();
   }

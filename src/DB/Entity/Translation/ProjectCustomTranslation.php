@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,8 +29,8 @@ class ProjectCustomTranslation
 
   public function __construct(
     #[ORM\JoinColumn(name: 'project_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
-    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'custom_translations')]
-    private Program $project,
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'custom_translations')]
+    private Project $project,
     #[ORM\Column(type: Types::STRING, length: 5)]
     private string $language,
   ) {
@@ -48,14 +48,14 @@ class ProjectCustomTranslation
     return $this;
   }
 
-  public function getProject(): Program
+  public function getProject(): Project
   {
     return $this->project;
   }
 
-  public function setProject(Program $program): void
+  public function setProject(Project $project): void
   {
-    $this->project = $program;
+    $this->project = $project;
   }
 
   public function getLanguage(): string

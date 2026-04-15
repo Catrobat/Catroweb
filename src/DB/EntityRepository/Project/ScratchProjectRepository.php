@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\Project;
 
-use App\DB\Entity\Project\Scratch\ScratchProgram;
+use App\DB\Entity\Project\Scratch\ScratchProject;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ScratchProgram>
+ * @extends ServiceEntityRepository<ScratchProject>
  */
-class ScratchProgramRepository extends ServiceEntityRepository
+class ScratchProjectRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
   {
-    parent::__construct($managerRegistry, ScratchProgram::class);
+    parent::__construct($managerRegistry, ScratchProject::class);
   }
 
   /**

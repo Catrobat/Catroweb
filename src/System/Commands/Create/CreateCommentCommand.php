@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
@@ -50,19 +50,19 @@ class CreateCommentCommand extends Command
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
 
-    $program = $this->project_manager->findOneByName($program_name);
+    $project = $this->project_manager->findOneByName($program_name);
 
-    if (null === $user || !$program instanceof Program) {
+    if (null === $user || !$project instanceof Project) {
       return 1;
     }
 
     try {
-      $this->postComment($user, $program, $message);
+      $this->postComment($user, $project, $message);
     } catch (\Exception) {
       return 2;
     }
 
-    $output->writeln('Commenting '.$program->getName().' with user '.$user->getUsername());
+    $output->writeln('Commenting '.$project->getName().' with user '.$user->getUsername());
 
     return 0;
   }
@@ -70,18 +70,18 @@ class CreateCommentCommand extends Command
   /**
    * @throws RandomException
    */
-  private function postComment(User $user, Program $program, string $message): void
+  private function postComment(User $user, Project $project, string $message): void
   {
     $comment = new UserComment();
     $comment->setUsername($user->getUsername() ?? '');
     $comment->setUser($user);
     $comment->setText($message);
-    $comment->setProgram($program);
+    $comment->setProject($project);
     $comment->setUploadDate(new \DateTime());
 
     $this->em->persist($comment);
 
-    $program_user = $program->getUser();
+    $program_user = $project->getUser();
     if (null === $program_user) {
       throw new \RuntimeException('Program has no user');
     }

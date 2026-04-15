@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Studio;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Studios\StudioProgramRepository;
+use App\DB\EntityRepository\Studios\StudioProjectRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'studio_program')]
-#[ORM\Entity(repositoryClass: StudioProgramRepository::class)]
-class StudioProgram
+#[ORM\Entity(repositoryClass: StudioProjectRepository::class)]
+class StudioProject
 {
   #[ORM\Id]
   #[ORM\Column(name: 'id', type: Types::INTEGER)]
@@ -28,8 +28,8 @@ class StudioProgram
   protected StudioActivity $activity;
 
   #[ORM\JoinColumn(name: 'program', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-  #[ORM\ManyToOne(targetEntity: Program::class, cascade: ['persist'])]
-  protected Program $program;
+  #[ORM\ManyToOne(targetEntity: Project::class, cascade: ['persist'])]
+  protected Project $project;
 
   #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
@@ -46,7 +46,7 @@ class StudioProgram
     return $this->id;
   }
 
-  public function setId(?int $id): StudioProgram
+  public function setId(?int $id): StudioProject
   {
     $this->id = $id;
 
@@ -58,7 +58,7 @@ class StudioProgram
     return $this->studio;
   }
 
-  public function setStudio(Studio $studio): StudioProgram
+  public function setStudio(Studio $studio): StudioProject
   {
     $this->studio = $studio;
 
@@ -70,21 +70,21 @@ class StudioProgram
     return $this->activity;
   }
 
-  public function setActivity(StudioActivity $activity): StudioProgram
+  public function setActivity(StudioActivity $activity): StudioProject
   {
     $this->activity = $activity;
 
     return $this;
   }
 
-  public function getProgram(): Program
+  public function getProject(): Project
   {
-    return $this->program;
+    return $this->project;
   }
 
-  public function setProgram(Program $program): StudioProgram
+  public function setProject(Project $project): StudioProject
   {
-    $this->program = $program;
+    $this->project = $project;
 
     return $this;
   }
@@ -94,7 +94,7 @@ class StudioProgram
     return $this->user;
   }
 
-  public function setUser(User $user): StudioProgram
+  public function setUser(User $user): StudioProject
   {
     $this->user = $user;
 
@@ -106,7 +106,7 @@ class StudioProgram
     return $this->updated_on;
   }
 
-  public function setUpdatedOn(?\DateTime $updated_on): StudioProgram
+  public function setUpdatedOn(?\DateTime $updated_on): StudioProject
   {
     $this->updated_on = $updated_on;
 
@@ -118,7 +118,7 @@ class StudioProgram
     return $this->created_on;
   }
 
-  public function setCreatedOn(\DateTime $created_on): StudioProgram
+  public function setCreatedOn(\DateTime $created_on): StudioProject
   {
     $this->created_on = $created_on;
 

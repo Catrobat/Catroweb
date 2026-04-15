@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Project\Scratch;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Remix\ProgramRemixRelationInterface;
-use App\DB\EntityRepository\Project\ScratchProgramRemixRepository;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Remix\ProjectRemixRelationInterface;
+use App\DB\EntityRepository\Project\ScratchProjectRemixRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'scratch_program_remix_relation')]
-#[ORM\Entity(repositoryClass: ScratchProgramRemixRepository::class)]
-class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Stringable
+#[ORM\Entity(repositoryClass: ScratchProjectRemixRepository::class)]
+class ScratchProjectRemixRelation implements ProjectRemixRelationInterface, \Stringable
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
@@ -30,10 +30,10 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
   protected string $catrobat_child_id;
 
   #[ORM\JoinColumn(name: 'catrobat_child_id', referencedColumnName: 'id')]
-  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'scratch_remix_parent_relations')]
-  protected Program $catrobat_child;
+  #[ORM\ManyToOne(targetEntity: Project::class, fetch: 'LAZY', inversedBy: 'scratch_remix_parent_relations')]
+  protected Project $catrobat_child;
 
-  public function __construct(string $scratch_parent_id, Program $catrobat_child)
+  public function __construct(string $scratch_parent_id, Project $catrobat_child)
   {
     $this->setScratchParentId($scratch_parent_id);
     $this->setCatrobatChild($catrobat_child);
@@ -45,7 +45,7 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
     return '(Scratch: #'.$this->scratch_parent_id.', Catrobat: #'.$this->catrobat_child_id.')';
   }
 
-  public function setScratchParentId(string $scratch_parent_id): ScratchProgramRemixRelation
+  public function setScratchParentId(string $scratch_parent_id): ScratchProjectRemixRelation
   {
     $this->scratch_parent_id = $scratch_parent_id;
 
@@ -57,7 +57,7 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
     return $this->scratch_parent_id;
   }
 
-  public function setCatrobatChild(Program $catrobat_child): ScratchProgramRemixRelation
+  public function setCatrobatChild(Project $catrobat_child): ScratchProjectRemixRelation
   {
     $this->catrobat_child = $catrobat_child;
     $this->catrobat_child_id = $catrobat_child->getId() ?? throw new \LogicException('Catrobat child program must have an ID.');
@@ -65,7 +65,7 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
     return $this;
   }
 
-  public function getCatrobatChild(): Program
+  public function getCatrobatChild(): Project
   {
     return $this->catrobat_child;
   }
@@ -84,6 +84,6 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
   #[\Override]
   public function getUniqueKey(): string
   {
-    return sprintf('ScratchProgramRemixRelation(%d, %d)', $this->scratch_parent_id, $this->catrobat_child_id);
+    return sprintf('ScratchProjectRemixRelation(%d, %d)', $this->scratch_parent_id, $this->catrobat_child_id);
   }
 }

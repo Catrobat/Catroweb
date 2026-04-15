@@ -17,20 +17,20 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ParsedSimpleProject::class)]
 class ParsedSimpleProgramTest extends TestCase
 {
-  protected ParsedSimpleProject $program;
+  protected ParsedSimpleProject $project;
 
   #[\Override]
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
-    $this->program = new ParsedSimpleProject($xml_properties);
+    $this->project = new ParsedSimpleProject($xml_properties);
   }
 
   #[DataProvider('provideMethodNames')]
   public function testMustHaveMethod(mixed $method_name): void
   {
-    $this->assertTrue(method_exists($this->program, $method_name));
+    $this->assertTrue(method_exists($this->project, $method_name));
   }
 
   /**
@@ -49,6 +49,6 @@ class ParsedSimpleProgramTest extends TestCase
    */
   public function testHasScenesMustReturnFalse(): void
   {
-    $this->assertFalse($this->program->hasScenes());
+    $this->assertFalse($this->project->hasScenes());
   }
 }
