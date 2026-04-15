@@ -123,8 +123,8 @@
   <file src="src/Api/Services/Projects/ProjectsResponseManager.php">
     <PossiblyNullArgument>
       <code><![CDATA[$featured_project->getId()]]></code>
-      <code><![CDATA[$featured_project->getProgram()]]></code>
-      <code><![CDATA[$project->getProgram()]]></code>
+      <code><![CDATA[$featured_project->getProject()]]></code>
+      <code><![CDATA[$project->getProject()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
       <code><![CDATA[getUserIdentifier]]></code>
@@ -175,12 +175,12 @@
       <code><![CDATA[getLocale]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/DB/Entity/Project/Program.php">
+  <file src="src/DB/Entity/Project/Project.php">
     <PossiblyNullReference>
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/DB/Entity/Project/Special/SpecialProgram.php">
+  <file src="src/DB/Entity/Project/Special/SpecialProject.php">
     <PossiblyNullReference>
       <code><![CDATA[getName]]></code>
       <code><![CDATA[getUser]]></code>
@@ -195,7 +195,7 @@
       <code><![CDATA[$this->name]]></code>
     </RedundantPropertyInitializationCheck>
   </file>
-  <file src="src/DB/EntityRepository/Project/ProgramRepository.php">
+  <file src="src/DB/EntityRepository/Project/ProjectRepository.php">
     <PossiblyNullArgument>
       <code><![CDATA[$flavor]]></code>
       <code><![CDATA[$flavor]]></code>
@@ -259,7 +259,7 @@
   </file>
   <file src="src/Project/EntityListener/ProjectPostPersistEntityListener.php">
     <PossiblyNullReference>
-      <code><![CDATA[addProgram]]></code>
+      <code><![CDATA[addProject]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/Project/EntityListener/ProjectPostUpdateEntityListener.php">
@@ -391,12 +391,12 @@
       <code><![CDATA[getUserIdentifier]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/System/Commands/Create/CreateExampleProgramCommand.php">
+  <file src="src/System/Commands/Create/CreateExampleProjectCommand.php">
     <PossiblyNullArgument>
       <code><![CDATA[0 !== random_int(0, 1) ? $this->flavor_repository->getFlavorByName(Flavor::ARDUINO) : $this->flavor_repository->getFlavorByName(Flavor::EMBROIDERY)]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/System/Commands/Create/CreateFeatureProgramCommand.php">
+  <file src="src/System/Commands/Create/CreateFeatureProjectCommand.php">
     <PossiblyNullArgument>
       <code><![CDATA[$this->flavor_repository->getFlavorByName(Flavor::POCKETCODE)]]></code>
     </PossiblyNullArgument>
@@ -451,7 +451,7 @@
       <code><![CDATA[$this->getApplication()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/System/Commands/ImportProjects/ProgramImportCommand.php">
+  <file src="src/System/Commands/ImportProjects/ProjectImportCommand.php">
     <PossiblyNullReference>
       <code><![CDATA[setViews]]></code>
     </PossiblyNullReference>
@@ -464,7 +464,7 @@
   <file src="src/System/Commands/Reset/ResetCommand.php">
     <PossiblyNullArgument>
       <code><![CDATA[$hidden_project->getId()]]></code>
-      <code><![CDATA[$program->getId()]]></code>
+      <code><![CDATA[$project->getId()]]></code>
     </PossiblyNullArgument>
     <PossiblyNullReference>
       <code><![CDATA[getUserIdentifier]]></code>

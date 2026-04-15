@@ -39,6 +39,7 @@ class SpecialProject
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
   protected bool $for_ios = false;
 
+  #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
   #[ORM\ManyToOne(targetEntity: Project::class, fetch: 'EAGER')]
   protected ?Project $project = null;
 

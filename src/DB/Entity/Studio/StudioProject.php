@@ -27,7 +27,7 @@ class StudioProject
   #[ORM\OneToOne(targetEntity: StudioActivity::class, cascade: ['persist'])]
   protected StudioActivity $activity;
 
-  #[ORM\JoinColumn(name: 'project', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\JoinColumn(name: 'program', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
   #[ORM\ManyToOne(targetEntity: Project::class, cascade: ['persist'])]
   protected Project $project;
 
