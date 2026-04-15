@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @phpstan-extends CRUDController<ProjectMachineTranslation|CommentMachineTranslation>
@@ -98,7 +99,9 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
 
   public function trimAction(Request $request): Response
   {
-    $this->admin->checkAccess('list');
+    if (!$this->admin->isGranted('MASTER')) {
+      throw new AccessDeniedException();
+    }
 
     $days = (string) $request->query->get('days');
 

@@ -11,19 +11,20 @@
 
         {{ include('@SonataTwig/FlashMessage/render.html.twig') }}
 
-{# TODO wrap in permission #}
-        <form action="{{ trimUrl }}">
-            <h3>Delete old entries based on last modified date</h3><br/>
-            <label for="days">Older than (days):</label>
-            <input type="number" id="days" name="days" value="30" min="1" max="999"><br>
+        {% if admin.isGranted('MASTER') %}
+            <form action="{{ trimUrl }}">
+                <h3>Delete old entries based on last modified date</h3><br/>
+                <label for="days">Older than (days):</label>
+                <input type="number" id="days" name="days" value="30" min="1" max="999"><br>
 
-            <button id="delete-button" class="btn btn-danger">Delete </button>
+                <button id="delete-button" class="btn btn-danger">Delete </button>
 
-            <div id='confirmation' style="display: none">
-                <label>Are you sure? This cannot be undone.</label>
-                <input class="btn btn-danger" type="submit" value="YES">
-            </div>
-        </form>
+                <div id='confirmation' style="display: none">
+                    <label>Are you sure? This cannot be undone.</label>
+                    <input class="btn btn-danger" type="submit" value="YES">
+                </div>
+            </form>
+        {% endif %}
     </div>
 
 {% endblock %}
