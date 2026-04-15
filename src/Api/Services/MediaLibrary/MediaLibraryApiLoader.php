@@ -13,6 +13,8 @@ use App\DB\EntityRepository\MediaLibrary\MediaCategoryRepository;
 
 class MediaLibraryApiLoader extends AbstractApiLoader
 {
+  private const RANKING_FETCH_LIMIT = 1000;
+
   public function __construct(
     private readonly MediaCategoryRepository $category_repository,
     private readonly MediaAssetRepository $asset_repository,
@@ -165,6 +167,50 @@ class MediaLibraryApiLoader extends AbstractApiLoader
       $flavor,
       $search
     );
+  }
+
+  /**
+   * @param array<string> $flavors
+   *
+   * @return array<MediaAsset>
+   */
+  public function getAssetsRankedByFlavors(
+    int $limit,
+    int $offset,
+    ?string $category_id,
+    ?MediaFileType $file_type,
+    ?string $flavor,
+    ?string $search,
+    string $sort_by,
+    string $sort_order,
+    array $flavors,
+  ): array {
+    $category = $category_id ? $this->category_repository->find($category_id) : null;
+
+    $all = $this->asset_repository->findPaginated(self::RANKING_FETCH_LIMIT, 0, $category, $file_type, $flavor, $search, $sort_by, $sort_order);
+
+    $scoreCache = [];
+    foreach ($all as $asset) {
+      $scoreCache[$asset->getId()] = $this->flavorScore($asset->getFlavorNames(), $flavors);
+    }
+
+    usort($all, static function (MediaAsset $a, MediaAsset $b) use ($scoreCache): int {
+      return $scoreCache[$b->getId()] <=> $scoreCache[$a->getId()];
+    });
+
+    return array_slice($all, $offset, $limit + 1);
+  }
+
+  // overlap_count >= 1 for matches, -1 for neutral (no flavors), -2 for non-matching
+  private function flavorScore(array $assetFlavors, array $activeFlavors): int
+  {
+    if ([] === $assetFlavors) {
+      return -1;
+    }
+
+    $overlap = count(array_intersect($assetFlavors, $activeFlavors));
+
+    return $overlap > 0 ? $overlap : -2;
   }
 
   private function decodeCursorToOffset(?string $cursor): int

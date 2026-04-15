@@ -280,6 +280,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     ?string $search,
     string $sort_by,
     string $sort_order,
+    ?string $flavors,
     int &$responseCode,
     array &$responseHeaders,
   ): ?MediaAssetsListResponse {
@@ -294,6 +295,31 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     $this->addRateLimitHeaders($responseHeaders, $rate_limit);
 
     $db_file_type = $file_type ? $this->convertToDbFileType($file_type) : null;
+
+    $flavor_list = null !== $flavors && '' !== trim($flavors)
+      ? array_values(array_filter(array_map('trim', explode(',', $flavors))))
+      : [];
+
+    if ([] !== $flavor_list) {
+      $offset = $this->decodeCursorToOffset($cursor);
+      $assets = $this->facade->getLoader()->getAssetsRankedByFlavors(
+        $limit,
+        $offset,
+        $category_id,
+        $db_file_type,
+        $flavor,
+        $search,
+        $sort_by,
+        $sort_order,
+        $flavor_list,
+      );
+      $responseCode = Response::HTTP_OK;
+      $response = $this->facade->getResponseManager()->createAssetsResponse($assets, $limit, $offset);
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $response;
+    }
 
     $cursor_data = $this->decodeKeysetCursor($cursor);
     if (null === $cursor_data && null !== $cursor && '' !== $cursor) {

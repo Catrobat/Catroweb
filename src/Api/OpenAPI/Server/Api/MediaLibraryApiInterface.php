@@ -66,6 +66,7 @@ interface MediaLibraryApiInterface
    * @param string|null $search          Search in name and description (optional)
    * @param string      $sort_by         (optional, default to 'created_at')
    * @param string      $sort_order      (optional, default to 'DESC')
+   * @param string|null $flavors         Comma-separated flavor names to rank results by. Matching assets appear first (ranked by overlap count), then flavorless assets, then non-matching flavored assets. (optional)
    * @param int         &$responseCode   The HTTP Response Code
    * @param array       $responseHeaders Additional HTTP headers to return with the response ()
    */
@@ -79,6 +80,7 @@ interface MediaLibraryApiInterface
     ?string $search,
     string $sort_by,
     string $sort_order,
+    ?string $flavors,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;
