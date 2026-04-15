@@ -6,8 +6,14 @@
 
 {% block head %}
   {{ encore_entry_link_tags('project_page') }}
-  {{ encore_entry_link_tags('project_code_statistics_inline') }}
-  {{ encore_entry_link_tags('project_code_view_inline') }}
+  {% for link in encore_entry_css_files('project_code_statistics_inline') %}
+    <link rel="preload" href="{{ link }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ link }}"></noscript>
+  {% endfor %}
+  {% for link in encore_entry_css_files('project_code_view_inline') %}
+    <link rel="preload" href="{{ link }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ link }}"></noscript>
+  {% endfor %}
 
   {% set og_image_url = absolute_url(asset(screenshot_big)) %}
   {% if project_description is not empty %}

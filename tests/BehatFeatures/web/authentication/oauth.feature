@@ -34,12 +34,8 @@ Feature:
     And I click ".swal2-confirm"
     Then I should see "Password"
 
-  Scenario: I should see google, facebook, and apple log in buttons on the login page and on the registration page
+  Scenario: I should see google log in button on the login page and on the registration page
     Given I am on "app/login"
     Then the element "#btn-login-google" should be visible
-    And the element "#btn-login-facebook" should be visible
-    And the element "#btn-login-apple" should be visible
     Given I am on "app/register"
     Then the element "#btn-login-google" should be visible
-    And the element "#btn-login-facebook" should be visible
-    And the element "#btn-login-apple" should be visible
