@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Api\Services\OverwriteController;
 use App\Application\Controller\Base\RedirectController;
+use App\System\Controller\StaticController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return static function (RoutingConfigurator $routingConfigurator): void {
@@ -34,7 +35,7 @@ return static function (RoutingConfigurator $routingConfigurator): void {
   ;
 
   $routingConfigurator->add('robots_txt_route', '/robots.txt')
-    ->controller([RedirectController::class, 'robotsTxt'])
+    ->controller([StaticController::class, 'robotsTxt'])
     ->methods(['GET'])
   ;
 

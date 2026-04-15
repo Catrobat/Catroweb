@@ -37,7 +37,7 @@
   {# Leading Icon (Optional) #}
   {% if text_field.leading_icon|default() %}
     <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading"
-          role="button">
+          aria-hidden="true">
       {{ text_field.leading_icon }}
     </span>
   {% endif %}
@@ -48,7 +48,7 @@
          type="{{ text_field.type|default('text') }}"
          aria-labelledby="{{ text_field.id }}__label"
          tabindex="{{ text_field.tab_index|default('0') }}"
-         {% if text_field.type|default('') %}autocomplete="{{ text_field.type }}"{% endif %}
+         {% if text_field.autocomplete is defined %}autocomplete="{{ text_field.autocomplete }}"{% elseif text_field.type|default('') and text_field.type != 'password' %}autocomplete="{{ text_field.type }}"{% endif %}
          {% if text_field.required ?? true %}required="required"{% endif %}
          value="{{ text_field.value|default() }}">
 
@@ -56,7 +56,7 @@
   {% if text_field.trailing_icon|default() %}
     <span class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing
                 {% if text_field.trailing_icon|default() == 'visibility' %}password-toggle{% endif %}"
-          role="button" style="pointer-events: all;"
+          role="button" tabindex="0" style="pointer-events: all;"
     >{{ text_field.trailing_icon }}</span>
   {% endif %}
   <span class="mdc-line-ripple"></span>

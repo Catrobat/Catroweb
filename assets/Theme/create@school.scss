@@ -1,10 +1,11 @@
 :root {
-  --primary: #00acc1;
+  --primary: light-dark(#007f8f, #4dd0e1);
+  --primary-bg: #007f8f;
   --on-primary: #fff;
-  --color-primary: hsl(187deg 100% 38%);
+  --color-primary: hsl(187deg 100% 28%);
   --color-primary-h: 187;
   --color-primary-s: 100%;
-  --color-primary-l: 38%;
+  --color-primary-l: 28%;
   --theme-logo-color-primary: #ee225a;
   --theme-logo-color-secondary: #aa154b;
   --theme-background: var(--bs-body-bg);

@@ -24,10 +24,10 @@
      data-trans-project-not-available="{{ 'remixGraph.projectNotAvailable'|trans({}, 'catroweb') }}"
      data-trans-project-unknown-user="{{ 'remixGraph.projectUnknownUser'|trans({}, 'catroweb') }}"
 >
-  <button id="remix-graph-toggle" type="button" aria-expanded="false" aria-controls="remix-graph-panel">
+  <button id="remix-graph-toggle" class="project-section-toggle" type="button" aria-expanded="false" aria-controls="remix-graph-panel">
     <i class="material-icons">call_split</i>
     <span>{{ 'remixGraph.showRemixGraph'|trans({}, 'catroweb') }}</span>
-    <i class="material-icons remix-graph-chevron">expand_more</i>
+    <i class="material-icons project-section-toggle__chevron">expand_more</i>
   </button>
 
   <div id="remix-graph-panel" class="remix-graph-panel d-none">

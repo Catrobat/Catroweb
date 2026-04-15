@@ -30,7 +30,8 @@ Catroweb is the share/communication platform for the Catrobat community. Symfony
 ## Command Execution
 
 - **yarn commands**: Run **locally**
-- **PHP commands**: Try **native first** (`bin/phpstan`, `bin/psalm`, etc.), fall back to **Docker** (`docker exec app.catroweb ...`)
+- **PHP commands**: Try **native first** (`bin/phpstan`, `bin/psalm`, etc.), fall back to **Docker** (`docker exec app.catroweb ...`) only when Docker is confirmed running
+- **Native-first rule**: Always prefer native commands (`bin/console`, `bin/phpunit`, `bin/php-cs-fixer`, etc.) before reaching for `docker exec`. The user does not always run Docker. Check if a native binary exists before suggesting Docker.
 
 ### Yarn (Berry)
 
@@ -123,6 +124,56 @@ Catroweb/
 - **Dart Sass** v1.97.2, sass-loader 16+ auto-detects compiler
 - Bootstrap 5 variables via `assets/Layout/Variables.scss`
 - Bootstrap 5.x deprecation warnings (global `mix()`, `shade-color()`) are harmless; fixed in Bootstrap 6
+
+## CSS Styling Patterns
+
+### Dark Mode
+
+- Use `light-dark(lightValue, darkValue)` for automatic dark mode color adaptation — works because Bootstrap sets `color-scheme: light dark`.
+- `--primary` is `light-dark(#007f8f, #4dd0e1)` — auto-adapts in dark mode for text/borders/links.
+- `--primary-bg: #007f8f` — always dark, for filled backgrounds (topbar, btn-primary, FABs, pills) where `#fff` on-primary text sits on top.
+- `--on-primary: #fff` — text on filled primary surfaces.
+- MDC components use `--mdc-theme-primary: var(--primary-bg, var(--primary))` so MDC buttons/topbar always stay dark.
+- Prefer `light-dark()` over `@media (prefers-color-scheme)` — the latter is overridden by Bootstrap's `data-bs-theme` attribute.
+
+### Contrast Requirements (WCAG AA)
+
+- Normal text: 4.5:1 minimum. Bootstrap `$text-muted` (#6c757d on white) = 4.48:1 — just fails. Use `#5a6374` (≈ 5.1:1) instead, or `light-dark(#5a6374, #a0aec0)`.
+- `#a0aec0` on dark backgrounds (≈ #1a1a2e) passes comfortably.
+- Bootstrap subtle badge variants (`bg-success-subtle`, `bg-danger-subtle`, etc.) may fail in dark mode — override with explicit `light-dark()` colors using `!important`.
+
+### Full-bleed Topbar Overlap Pattern
+
+- The topbar is `position: fixed`; `.page-content` has `margin-top: 64px` (56px mobile) to clear it.
+- Default `.page-content` has `padding: 0.75rem`.
+- To make a hero/banner bleed flush against (or slightly behind) the topbar:
+
+  ```scss
+  // Option A — negative margin on element (featured banner pattern):
+  .featured-slider {
+    margin: -1.25rem calc(-1 * var(--bs-gutter-x, 0.75rem)) 0;
+  }
+  // Net: eats 1.25rem up past 0.75rem padding → 0.5rem behind topbar, full-width gutter bleed
+
+  // Option B — zero page-content top padding + negative margin on header (studio pattern):
+  .page-content:has(#studio-header) {
+    padding: 0 0 1.5rem;
+  }
+  .studio-detail__header {
+    margin-top: -0.75rem;
+  } // pulls into topbar area
+  ```
+
+### Shared Toggle Class Pattern
+
+- `#remix-graph-toggle`, `#code-stats-toggle`, `#code-view-toggle` all share `.project-section-toggle` class defined in `assets/Layout/LegacyBase.scss`.
+- Use a **CSS class**, not a mixin — class is applied in Twig templates, avoids per-file `@include`.
+- Chevron uses `.project-section-toggle__chevron` (BEM element), rotates 180° on `[aria-expanded='true']`.
+
+### Stylelint Rules to Remember
+
+- Double-slash comments (`//`) must have an empty line before them (rule: `scss/double-slash-comment-empty-line-before`).
+- No empty rule blocks — remove the `{}` entirely when content is deleted.
 
 ## Themes
 

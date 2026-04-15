@@ -68,7 +68,7 @@ export class FeaturedBanner {
       btn.type = 'button'
       btn.setAttribute('data-bs-target', `#${carouselId}`)
       btn.setAttribute('data-bs-slide-to', String(i))
-      btn.setAttribute('aria-label', `Slide ${i}`)
+      btn.setAttribute('aria-label', `Slide ${i + 1} of ${slides.length}`)
       if (i === 0) {
         btn.className = 'active'
         btn.setAttribute('aria-current', 'true')
@@ -99,7 +99,8 @@ export class FeaturedBanner {
       if (slide.title) {
         const caption = document.createElement('div')
         caption.className = 'carousel-caption d-block'
-        const captionTitle = document.createElement('h5')
+        const captionTitle = document.createElement('p')
+        captionTitle.className = 'featured-banner__caption-title'
         captionTitle.textContent = slide.title
         caption.appendChild(captionTitle)
         wrapper.appendChild(caption)
@@ -131,7 +132,59 @@ export class FeaturedBanner {
     // Stack carousel in same grid cell as skeleton (both grid-area: 1/1)
     carouselDiv.style.gridArea = '1/1'
     this.container.appendChild(carouselDiv)
-    new Carousel(carouselDiv)
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const carouselInstance = new Carousel(carouselDiv, {
+      interval: prefersReducedMotion ? false : 5000,
+      ride: prefersReducedMotion ? false : 'carousel',
+    })
+
+    // Pause/play toggle button for auto-playing carousel (a11y)
+    if (slides.length > 1) {
+      const pauseBtn = document.createElement('button')
+      pauseBtn.type = 'button'
+      pauseBtn.className = 'featured-banner__pause-btn'
+      pauseBtn.setAttribute('aria-label', 'Pause slideshow')
+      pauseBtn.innerHTML =
+        '<span class="visually-hidden">Pause slideshow</span>' +
+        '<svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">' +
+        '<rect x="3" y="2" width="3" height="12" rx="1"/><rect x="10" y="2" width="3" height="12" rx="1"/>' +
+        '</svg>'
+
+      let isPaused = prefersReducedMotion
+      if (prefersReducedMotion) {
+        pauseBtn.setAttribute('aria-label', 'Play slideshow')
+        pauseBtn.innerHTML =
+          '<span class="visually-hidden">Play slideshow</span>' +
+          '<svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">' +
+          '<path d="M4 2l10 6-10 6V2z"/>' +
+          '</svg>'
+      }
+
+      pauseBtn.addEventListener('click', () => {
+        if (isPaused) {
+          carouselInstance.cycle()
+          isPaused = false
+          pauseBtn.setAttribute('aria-label', 'Pause slideshow')
+          pauseBtn.innerHTML =
+            '<span class="visually-hidden">Pause slideshow</span>' +
+            '<svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">' +
+            '<rect x="3" y="2" width="3" height="12" rx="1"/><rect x="10" y="2" width="3" height="12" rx="1"/>' +
+            '</svg>'
+        } else {
+          carouselInstance.pause()
+          isPaused = true
+          pauseBtn.setAttribute('aria-label', 'Play slideshow')
+          pauseBtn.innerHTML =
+            '<span class="visually-hidden">Play slideshow</span>' +
+            '<svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">' +
+            '<path d="M4 2l10 6-10 6V2z"/>' +
+            '</svg>'
+        }
+      })
+
+      carouselDiv.appendChild(pauseBtn)
+    }
   }
 
   createSlideImage(slide, index) {

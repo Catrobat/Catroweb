@@ -2,6 +2,12 @@
 #homepage translation
 title: Catrobat community
 meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
+meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
+meta.og.title.login: Sign in to Catrobat
+meta.og.description.login: Sign in to share your Catrobat projects with the community.
+meta.og.title.register: Create a Catrobat account
+meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
+meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
 localLanguage: English
 username: Username
 password: Password

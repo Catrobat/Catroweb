@@ -29,7 +29,7 @@ $text-color: $gray-900;
 
 // Customizing Material.io:
 :root {
-  --mdc-theme-primary: var(--primary);
+  --mdc-theme-primary: var(--primary-bg, var(--primary));
   --mdc-theme-on-primary: var(--on-primary);
 
   // Currently not used (https://material.io/develop/web/docs/theming/)

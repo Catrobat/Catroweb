@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html prefix="og: https://ogp.me/ns#" lang="{{ app.request.locale|slice(0, 2) }}">
 <head>
-  <meta http-equiv="Content-Type" content="text/html"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){var t=localStorage.getItem('theme');t=t==='light'||t==='dark'||t==='auto'?t:'auto';if(t==='auto'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-bs-theme',t);document.documentElement.setAttribute('data-swal2-theme',t);})();</script>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>
     {% block title %}{{ 'title'|trans({}, 'catroweb') }}{% endblock %}
@@ -36,7 +35,7 @@
       },
       environment: '{{ app.environment }}',
     }</script>
-  {{ encore_entry_script_tags('color_scheme', null, '_default', {defer: false}) }}
+  {{ encore_entry_script_tags('color_scheme') }}
   {{ encore_entry_script_tags('base_layout') }}
   {% block javascript %}{% endblock %}
 
@@ -47,10 +46,15 @@
   {% endif %}
 
   <meta property="og:site_name" content="Catrobat">
+  {% if app.request.attributes.get('_route') %}
+    <link rel="canonical" href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|default({})) }}">
+  {% endif %}
   {% block head %}{% endblock %}
 </head>
 
 <body class="body-with-sidebar">
+
+<a href="#main_container_content" class="skip-to-content">Skip to main content</a>
 
 <noscript>
   <div class="noscript-warning">

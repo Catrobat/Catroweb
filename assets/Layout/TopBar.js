@@ -12,6 +12,12 @@ const title = document.querySelector('#top-app-bar__title')
 const toggleSidebarButton = document.querySelector('#top-app-bar__btn-sidebar-toggle')
 let backButton = document.querySelector('#top-app-bar__back__btn-back')
 
+if (backButton && backButton.dataset.backPath) {
+  backButton.addEventListener('click', () => {
+    window.location.href = backButton.dataset.backPath
+  })
+}
+
 const searchButton = document.querySelector('#top-app-bar__btn-search')
 const searchBackButton = document.querySelector('#top-app-bar__btn-search-back')
 const searchClearButton = document.querySelector('#top-app-bar__btn-search-clear')

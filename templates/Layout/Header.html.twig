@@ -10,7 +10,7 @@
               <button id="top-app-bar__back__btn-back"
                       class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                       aria-label="Back to previous page"
-                      onclick="location.href='{{ top_bar_back_path }}'">
+                      data-back-path="{{ top_bar_back_path }}">
                 {{ top_bar_back_icon|default('arrow_back') }}
               </button>
             {% else %}

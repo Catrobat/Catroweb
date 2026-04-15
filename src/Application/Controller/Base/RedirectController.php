@@ -35,13 +35,6 @@ class RedirectController extends AbstractController
     return $this->redirect('https://apps.apple.com/at/developer/international-catrobat-association-verein-zur-foerderung/id1117935891');
   }
 
-  #[Route(path: '/robots.txt', name: 'robots.txt', methods: ['GET'])]
-  public function robotsTxt(): Response
-  {
-    return $this->redirect('/robots.txt', Response::HTTP_MOVED_PERMANENTLY);
-    // The file is only hosted without flavors/themes!
-  }
-
   #[Route(path: 'resetting/request', name: 'legacy_app_forgot_password_request')]
   public function legacyAppReset(): Response
   {

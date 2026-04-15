@@ -12,8 +12,8 @@
 }
 
 .btn-primary {
-  background-color: var(--primary);
-  border-color: var(--primary);
+  background-color: var(--primary-bg, var(--primary));
+  border-color: var(--primary-bg, var(--primary));
 
   &:hover {
     background-color: custom-darken(--color-primary, 7.5);
@@ -32,8 +32,8 @@
   }
 
   &:disabled {
-    background-color: var(--primary);
-    border-color: var(--primary);
+    background-color: var(--primary-bg, var(--primary));
+    border-color: var(--primary-bg, var(--primary));
   }
 
   .mdc-circular-progress__indeterminate-circle-graphic {

@@ -49,6 +49,16 @@ img .lazyload:not([src]) {
   }
 }
 
+// Banner caption title — <p> replacing Bootstrap's default carousel-caption h5
+.featured-banner__caption-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0;
+  color: #fff;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 60%);
+}
+
 // Featured banner: full-width on mobile
 .featured-banner {
   border-radius: 0;
@@ -198,11 +208,9 @@ body:has(#home-projects) {
   opacity: 1;
 }
 
-// Featured slider — negative top margin eats into page-content padding
-// so the slider sits flush against the top bar. When JS hides the slider
-// (no banners), the negative margin has no effect and normal padding stays.
+// Eat slightly into page-content padding so banner sits close to top bar.
 .featured-slider {
-  margin: -2rem calc(-1 * var(--bs-gutter-x, 0.75rem)) 0;
+  margin: -1.25rem calc(-1 * var(--bs-gutter-x, 0.75rem)) 0;
   padding: 0 0 0.5rem;
   background: transparent;
 }
@@ -211,4 +219,37 @@ body:has(#home-projects) {
 #home-projects > .project-list,
 .project-list.home-section {
   margin-bottom: 0 !important;
+}
+
+// Pause/play button for featured banner carousel
+.featured-banner__pause-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: light-dark(rgb(0 0 0 / 45%), rgb(255 255 255 / 20%));
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: light-dark(rgb(0 0 0 / 65%), rgb(255 255 255 / 35%));
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  svg {
+    display: block;
+  }
 }

@@ -12,7 +12,7 @@ a {
 
 /* stylelint-disable */
 .bg-primary {
-  background-color: var(--primary) !important;
+  background-color: var(--primary-bg, var(--primary)) !important;
 
   &:hover {
     background-color: custom-darken(--color-primary, 7.5) !important;
