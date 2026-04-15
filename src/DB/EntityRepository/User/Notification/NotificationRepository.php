@@ -47,8 +47,8 @@ class NotificationRepository extends ServiceEntityRepository
       ->from(LikeNotification::class, 'n')
       ->leftJoin('n.user', 'nu')
       ->leftJoin('n.like_from', 'lf')
-      ->leftJoin('n.program', 'p')
-      ->where($qb->expr()->eq('n.program', ':program_id'))
+      ->leftJoin('n.project', 'p')
+      ->where($qb->expr()->eq('n.project', ':program_id'))
       ->setParameter(':program_id', $project->getId())
     ;
 

@@ -68,7 +68,7 @@ class UserCommentRepository extends ServiceEntityRepository
     return $qb->select('uc')
       ->addSelect('u')
       ->leftJoin('uc.user', 'u')
-      ->where('uc.program = :program_id')
+      ->where('uc.project = :program_id')
       ->setParameter('program_id', $program_id)
       ->andWhere('uc.parent_id IS NULL')
       ->orderBy('uc.uploadDate', 'DESC')
@@ -105,7 +105,7 @@ class UserCommentRepository extends ServiceEntityRepository
         'cu.id as user_id',
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
-      ->where('c.program = :program')
+      ->where('c.project = :project')
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
       ->setParameter('project', $project)
@@ -130,7 +130,7 @@ class UserCommentRepository extends ServiceEntityRepository
         'cu.id as user_id',
         'cu.approved as user_approved',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
-      ->where('c.program = :program')
+      ->where('c.project = :project')
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
       ->setParameter('project', $project)
@@ -224,7 +224,7 @@ class UserCommentRepository extends ServiceEntityRepository
   {
     return $this->createQueryBuilder('c')
       ->innerJoin('c.user', 'cu')
-      ->innerJoin('c.program', 'cp')
+      ->innerJoin('c.project', 'cp')
       ->select(
         'c.id',
         'c.username',

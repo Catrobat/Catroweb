@@ -290,7 +290,7 @@ class StudioApiLoader extends AbstractApiLoader
 
     // Load all studio project IDs for this studio in one query to avoid N+1
     $qb = $this->entity_manager->createQueryBuilder();
-    $studioProjectIds = $qb->select('IDENTITY(sp.program)')
+    $studioProjectIds = $qb->select('IDENTITY(sp.project)')
       ->from(StudioProject::class, 'sp')
       ->where('sp.studio = :studio')
       ->setParameter('studio', $studio)

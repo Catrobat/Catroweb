@@ -96,7 +96,7 @@ class ExampleProjectAdmin extends AbstractAdmin
     $qb = $query->getQueryBuilder();
 
     $qb->andWhere(
-      $qb->expr()->isNotNull($qb->getRootAliases()[0].'.program')
+      $qb->expr()->isNotNull($qb->getRootAliases()[0].'.project')
     );
 
     /* @psalm-suppress LessSpecificReturnStatement, MoreSpecificReturnType */
