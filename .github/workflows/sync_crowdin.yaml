@@ -16,6 +16,7 @@ name: Synchronize Crowdin
 
 permissions:
   contents: write
+  pull-requests: write
 
 #
 # New base strings could be uploaded on the merge of a new feature.
