@@ -1,6 +1,6 @@
 {% extends 'Layout/Base.html.twig' %}
 {% block top_bar_page_title %}{{ project.name }}{% endblock %}
-{% block top_bar_back_path %}{{ path('program', {id: project.id}) ~ '#comments-wrapper' }}{% endblock %}
+{% block top_bar_back_path %}{{ path('project', {id: project.id}) ~ '#comments-wrapper' }}{% endblock %}
 
 {% block title %}{{ project.name }} – Catrobat{% endblock %}
 

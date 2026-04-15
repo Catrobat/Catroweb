@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\DB\Entity\Project;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectAsset;
 use App\DB\Entity\Project\ProjectAssetMapping;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -20,7 +20,7 @@ class ProjectAssetMappingTest extends TestCase
   #[Group('unit')]
   public function testConstructorSetsAllFields(): void
   {
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $asset = new ProjectAsset('abc123', 500, 'audio/wav', 'ab/c1/abc123');
 
     $mapping = new ProjectAssetMapping($project, $asset, 'click.wav', 'sounds/click.wav');
@@ -35,7 +35,7 @@ class ProjectAssetMappingTest extends TestCase
   #[Group('unit')]
   public function testMappingWithNestedScenePath(): void
   {
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $asset = new ProjectAsset('def456', 1024, 'image/png', 'de/f4/def456');
 
     $mapping = new ProjectAssetMapping($project, $asset, 'cat.png', 'Scene1/images/cat.png');

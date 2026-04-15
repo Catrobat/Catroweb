@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\CodeView;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\CatrobatCode\Parser\Bricks\Brick;
 use App\Project\CatrobatCode\Parser\Bricks\BrickFactory;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
@@ -82,7 +82,7 @@ class CodeTreeBuilder
    *
    * @throws CodeTreeBuildException
    */
-  public function buildCodeTree(Program $project): array
+  public function buildCodeTree(Project $project): array
   {
     $extracted = $this->extracted_file_repository->loadProjectExtractedFile($project);
     if (null === $extracted) {

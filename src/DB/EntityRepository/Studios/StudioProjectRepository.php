@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\Studios;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
-use App\DB\Entity\Studio\StudioProgram;
+use App\DB\Entity\Studio\StudioProject;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @extends ServiceEntityRepository<StudioProgram>
+ * @extends ServiceEntityRepository<StudioProject>
  */
-class StudioProgramRepository extends ServiceEntityRepository
+class StudioProjectRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
   {
-    parent::__construct($managerRegistry, StudioProgram::class);
+    parent::__construct($managerRegistry, StudioProject::class);
   }
 
   public function findAllStudioProjects(Studio $studio): array
@@ -26,9 +26,9 @@ class StudioProgramRepository extends ServiceEntityRepository
     return $this->findBy(['studio' => $studio]);
   }
 
-  public function findStudioProject(Studio $studio, Program $program): ?StudioProgram
+  public function findStudioProject(Studio $studio, Project $project): ?StudioProject
   {
-    return $this->findOneBy(['studio' => $studio, 'program' => $program]);
+    return $this->findOneBy(['studio' => $studio, 'project' => $project]);
   }
 
   public function countStudioProjects(?Studio $studio): int

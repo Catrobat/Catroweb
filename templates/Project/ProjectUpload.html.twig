@@ -8,7 +8,7 @@
 {% block body %}
   <div class="project-upload"
        data-api-url="{{ app.request.schemeAndHttpHost }}/api/projects"
-       data-project-url="{{ path('program', {id: '__ID__'}) }}"
+       data-project-url="{{ path('project', {id: '__ID__'}) }}"
        data-trans-drop-here="{{ 'project.upload.drop_here'|trans({}, 'catroweb')|default('Drag & drop your .catrobat file here')|e('html_attr') }}"
        data-trans-or-browse="{{ 'project.upload.or_browse'|trans({}, 'catroweb')|default('or click to browse')|e('html_attr') }}"
        data-trans-upload="{{ 'project.upload.button'|trans({}, 'catroweb')|default('Upload')|e('html_attr') }}"

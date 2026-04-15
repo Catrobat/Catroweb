@@ -6,7 +6,7 @@ namespace App\DB\EntityRepository\Studios;
 
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioJoinRequest;
-use App\DB\Entity\Studio\StudioProgram;
+use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -31,7 +31,7 @@ class StudioRepository extends ServiceEntityRepository
     ;
     $qb_sp = $this->getEntityManager()->createQueryBuilder();
     $qb_sp->select('COUNT(sp)')
-      ->from(StudioProgram::class, 'sp')
+      ->from(StudioProject::class, 'sp')
       ->where('s.id = sp.studio')
     ;
     $qb = $this->getEntityManager()->createQueryBuilder();
@@ -61,7 +61,7 @@ class StudioRepository extends ServiceEntityRepository
 
     $qb_sp = $em->createQueryBuilder();
     $qb_sp->select('COUNT(sp)')
-      ->from(StudioProgram::class, 'sp')
+      ->from(StudioProject::class, 'sp')
       ->where('s.id = sp.studio')
     ;
 

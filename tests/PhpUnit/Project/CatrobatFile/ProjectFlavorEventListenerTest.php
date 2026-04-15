@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Project\CatrobatFile;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\CatrobatFile\ProjectFlavorEventListener;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -32,17 +32,17 @@ class ProjectFlavorEventListenerTest extends TestCase
 
   public function testSetsTheFlavorOfAProgramBasedOnItsRequestFlavor(): void
   {
-    $program = new Program();
+    $project = new Project();
     $request = new Request();
 
     $request->attributes->set('flavor', Flavor::POCKETCODE);
     $this->stack->push($request);
-    $this->program_flavor_listener->checkFlavor($program);
-    Assert::assertEquals(Flavor::POCKETCODE, $program->getFlavor());
+    $this->program_flavor_listener->checkFlavor($project);
+    Assert::assertEquals(Flavor::POCKETCODE, $project->getFlavor());
 
     $request->attributes->set('flavor', Flavor::PHIROCODE);
     $this->stack->push($request);
-    $this->program_flavor_listener->checkFlavor($program);
-    Assert::assertEquals(Flavor::PHIROCODE, $program->getFlavor());
+    $this->program_flavor_listener->checkFlavor($project);
+    Assert::assertEquals(Flavor::PHIROCODE, $project->getFlavor());
   }
 }

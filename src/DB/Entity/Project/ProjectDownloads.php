@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(name: 'pd_downloaded_at_idx', columns: ['downloaded_at'])]
 #[ORM\Index(name: 'pd_user_idx', columns: ['user'])]
 #[ORM\Entity]
-class ProgramDownloads
+class ProjectDownloads
 {
   final public const string TYPE_PROJECT = 'project';
 
@@ -23,8 +23,8 @@ class ProgramDownloads
   protected ?int $id = null;
 
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
-  #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'program_downloads')]
-  protected Program $program;
+  #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'program_downloads')]
+  protected Project $project;
 
   #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
   #[ORM\ManyToOne(targetEntity: User::class)]
@@ -41,21 +41,21 @@ class ProgramDownloads
     return $this->id;
   }
 
-  public function setId(int $id): ProgramDownloads
+  public function setId(int $id): ProjectDownloads
   {
     $this->id = $id;
 
     return $this;
   }
 
-  public function getProgram(): Program
+  public function getProject(): Project
   {
-    return $this->program;
+    return $this->project;
   }
 
-  public function setProgram(Program $program): ProgramDownloads
+  public function setProject(Project $project): ProjectDownloads
   {
-    $this->program = $program;
+    $this->project = $project;
 
     return $this;
   }
@@ -65,7 +65,7 @@ class ProgramDownloads
     return $this->user;
   }
 
-  public function setUser(?User $user): ProgramDownloads
+  public function setUser(?User $user): ProjectDownloads
   {
     $this->user = $user;
 
@@ -77,7 +77,7 @@ class ProgramDownloads
     return $this->downloaded_at;
   }
 
-  public function setDownloadedAt(?\DateTime $downloaded_at): ProgramDownloads
+  public function setDownloadedAt(?\DateTime $downloaded_at): ProjectDownloads
   {
     $this->downloaded_at = $downloaded_at;
 
@@ -89,7 +89,7 @@ class ProgramDownloads
     return $this->type;
   }
 
-  public function setType(?string $type): ProgramDownloads
+  public function setType(?string $type): ProjectDownloads
   {
     $this->type = $type;
 

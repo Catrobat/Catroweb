@@ -68,7 +68,7 @@ class UserDataReportController extends CRUDController
   protected function getUserProjects(string $user_id): mixed
   {
     return $this->entity_manager
-      ->createQuery(sprintf('SELECT up FROM App\DB\Entity\Project\Program up WHERE up.user=\'%s\'', $user_id))
+      ->createQuery(sprintf('SELECT up FROM App\DB\Entity\Project\Project up WHERE up.user=\'%s\'', $user_id))
       ->getResult()
     ;
   }

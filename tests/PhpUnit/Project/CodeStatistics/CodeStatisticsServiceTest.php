@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project\CodeStatistics;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
@@ -56,7 +56,7 @@ class CodeStatisticsServiceTest extends TestCase
       ->setScoringVersion(CodeStatisticsParser::CURRENT_SCORING_VERSION)
     ;
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $project->method('getLatestCodeStatistics')->willReturn($legacy_stats);
 
     $parser = $this->createMock(CodeStatisticsParser::class);
@@ -76,7 +76,7 @@ class CodeStatisticsServiceTest extends TestCase
     $statistics_repository = $this->createMock(EntityRepository::class);
     $statistics_repository->expects(self::once())
       ->method('findOneBy')
-      ->with(['program' => $project], ['created_at' => 'DESC'])
+      ->with(['project' => $project], ['created_at' => 'DESC'])
       ->willReturn($legacy_stats)
     ;
 
@@ -113,7 +113,7 @@ class CodeStatisticsServiceTest extends TestCase
       ->setScoringVersion(CodeStatisticsParser::LEGACY_SCORING_VERSION)
     ;
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $project->method('getLatestCodeStatistics')->willReturn($legacy_stats);
 
     $repository = $this->createMock(ExtractedFileRepository::class);
@@ -126,7 +126,7 @@ class CodeStatisticsServiceTest extends TestCase
     $statistics_repository = $this->createMock(EntityRepository::class);
     $statistics_repository->expects(self::once())
       ->method('findOneBy')
-      ->with(['program' => $project], ['created_at' => 'DESC'])
+      ->with(['project' => $project], ['created_at' => 'DESC'])
       ->willReturn($legacy_stats)
     ;
 

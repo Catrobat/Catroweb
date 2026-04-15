@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Api\Services\Reactions;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\User;
 use App\User\UserAvatarService;
 use OpenAPI\Server\Model\ReactionSummaryResponse;
@@ -75,7 +75,7 @@ class ReactionsResponseManager extends AbstractResponseManager
   {
     $user = $user_data['user'];
     $types = array_filter(array_map(
-      static fn (int $type_id): ?string => ProgramLike::$TYPE_NAMES[$type_id] ?? null,
+      static fn (int $type_id): ?string => ProjectLike::$TYPE_NAMES[$type_id] ?? null,
       $user_data['types']
     ));
 

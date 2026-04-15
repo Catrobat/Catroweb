@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\User\Achievements;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\Entity\User\Achievements\UserAchievement;
 use App\DB\Entity\User\User;
@@ -180,7 +180,7 @@ class AchievementManager
       return null;
     }
 
-    if (count($user->getPrograms()) <= 0) {
+    if (count($user->getProjects()) <= 0) {
       return null;
     }
 
@@ -197,8 +197,8 @@ class AchievementManager
     }
 
     $years_with_project_uploads = [];
-    foreach ($user->getPrograms() as $project) {
-      /** @var Program $project */
+    foreach ($user->getProjects() as $project) {
+      /** @var Project $project */
       $year = $project->getUploadedAt()->format('Y');
       $years_with_project_uploads[$year] = true;
     }
@@ -220,8 +220,8 @@ class AchievementManager
     }
 
     $years_with_project_uploads = [];
-    foreach ($user->getPrograms() as $project) {
-      /** @var Program $project */
+    foreach ($user->getProjects() as $project) {
+      /** @var Project $project */
       $year = $project->getUploadedAt()->format('Y');
       $years_with_project_uploads[$year] = true;
     }
@@ -243,8 +243,8 @@ class AchievementManager
     }
 
     $years_with_project_uploads = [];
-    foreach ($user->getPrograms() as $project) {
-      /** @var Program $project */
+    foreach ($user->getProjects() as $project) {
+      /** @var Project $project */
       $year = $project->getUploadedAt()->format('Y');
       $years_with_project_uploads[$year] = true;
     }

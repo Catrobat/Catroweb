@@ -6,7 +6,7 @@ namespace App\Api\Services\Search;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Projects\ProjectsResponseManager;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
@@ -63,7 +63,7 @@ class SearchResponseManager extends AbstractResponseManager
       'id' => $user->getId(),
       'username' => $user->getUsername(),
       'avatar' => $this->user_avatar_service->getVariants($user),
-      'projects' => $user->getPrograms()->count(),
+      'projects' => $user->getProjects()->count(),
       'followers' => $user->getFollowers()->count(),
       'following' => $user->getFollowing()->count(),
     ]);
@@ -98,7 +98,7 @@ class SearchResponseManager extends AbstractResponseManager
     $projects_data_response['projects'] = [];
     $projects_data_response['projects_total'] = $total;
 
-    /** @var Program $project */
+    /** @var Project $project */
     foreach ($projects as $project) {
       $project_data = $this->getProjectDataResponse($project);
       $projects_data_response['projects'][] = $project_data;
@@ -107,7 +107,7 @@ class SearchResponseManager extends AbstractResponseManager
     return $projects_data_response;
   }
 
-  public function getProjectDataResponse(Program $project): ProjectResponse
+  public function getProjectDataResponse(Project $project): ProjectResponse
   {
     return $this->projectsResponseManager->createProjectDataResponse($project, null);
   }

@@ -6,8 +6,8 @@ namespace App\Admin\Projects\SpecialProjects;
 
 use App\Admin\Projects\SpecialProjects\Forms\FeaturedImageConstraint;
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -25,7 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormError;
 
 /**
- * @phpstan-extends AbstractAdmin<FeaturedProgram>
+ * @phpstan-extends AbstractAdmin<FeaturedProject>
  */
 class FeaturedProjectAdmin extends AbstractAdmin
 {
@@ -47,7 +47,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
   ) {
   }
 
-  public function getFeaturedImageUrl(FeaturedProgram $object): string
+  public function getFeaturedImageUrl(FeaturedProject $object): string
   {
     $id = $object->getId();
     if (null === $id) {
@@ -60,13 +60,13 @@ class FeaturedProjectAdmin extends AbstractAdmin
   #[\Override]
   public function getObjectMetadata($object): MetadataInterface
   {
-    /** @var FeaturedProgram $featured_project */
+    /** @var FeaturedProject $featured_project */
     $featured_project = $object;
-    $program = $featured_project->getProgram();
+    $project = $featured_project->getProject();
 
     return new Metadata(
-      $program?->getName() ?? '',
-      $program?->getDescription() ?? '',
+      $project?->getName() ?? '',
+      $project?->getDescription() ?? '',
       $this->getFeaturedImageUrl($featured_project),
     );
   }
@@ -74,7 +74,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
   #[\Override]
   protected function preUpdate(object $object): void
   {
-    /** @var FeaturedProgram $featured_project */
+    /** @var FeaturedProject $featured_project */
     $featured_project = $object;
 
     $featured_project->old_image_type = $featured_project->getImageType();
@@ -91,8 +91,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
         $projectId = preg_replace('$(.*)/project/$', '', (string) $id) ?? '';
         $project = $this->project_manager->find($projectId);
 
-        if ($project instanceof Program) {
-          $object->setProgram($project);
+        if ($project instanceof Project) {
+          $object->setProject($project);
           if (null !== $object->getURL()) {
             $object->setURL(null);
           }
@@ -102,7 +102,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
       } elseif (filter_var($id, FILTER_VALIDATE_URL)) {
         $object->setUrl($id);
         if (null !== $object->getId()) {
-          $object->setProgram(null);
+          $object->setProject(null);
         }
       } else {
         $this->getForm()->addError(new FormError('Please enter a valid URL.'));
@@ -120,8 +120,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
       $project = $this->project_manager->find($id);
 
-      if ($project instanceof Program) {
-        $object->setProgram($project);
+      if ($project instanceof Project) {
+        $object->setProject($project);
         if (null !== $object->getURL()) {
           $object->setURL(null);
         }
@@ -139,7 +139,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
   #[\Override]
   protected function configureFormFields(FormMapper $form): void
   {
-    /** @var FeaturedProgram $featured_project */
+    /** @var FeaturedProject $featured_project */
     $featured_project = $this->getSubject();
     $file_options = [
       'required' => (null === $featured_project->getId()),
@@ -156,8 +156,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
       $id_value = $this->getSubject()->getUrl();
       $use_url = true;
-      if (null == $id_value && !is_null($this->getSubject()->getProgram())) {
-        $id_value = $this->getSubject()->getProgram()->getId();
+      if (null == $id_value && !is_null($this->getSubject()->getProject())) {
+        $id_value = $this->getSubject()->getProject()->getId();
         $use_url = false;
       }
     } else {
@@ -172,7 +172,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
       ->add('flavor', null, ['class' => Flavor::class, 'multiple' => false, 'required' => true])
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
-        'help' => 'Toggle for iOS featured programs api call.', ])
+        'help' => 'Toggle for iOS featured projects api call.', ])
       ->add('active', null, ['required' => false])
     ;
   }
@@ -216,8 +216,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
         'accessor' => $this->getFeaturedImageUrl(...),
         'template' => 'Admin/Projects/FeaturedImage.html.twig',
       ])
-      ->add('program', EntityType::class, [
-        'class' => Program::class,
+      ->add('project', EntityType::class, [
+        'class' => Project::class,
         'editable' => false,
       ])
       ->add('url', UrlType::class)

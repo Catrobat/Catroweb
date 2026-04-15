@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\Scratch;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\Exception\ORMException;
@@ -23,7 +23,7 @@ class ScratchManager
    * @throws \Exception
    * @throws ORMException
    */
-  public function createScratchProjectFromId(int $id): ?Program
+  public function createScratchProjectFromId(int $id): ?Project
   {
     $project_arr = $this->async_http_client->fetchScratchProjectDetails([$id]);
     if (null == $project_arr) {
@@ -31,7 +31,7 @@ class ScratchManager
     }
 
     $project_data = $project_arr[$id];
-    /** @var Program|null $old_project */
+    /** @var Project|null $old_project */
     $old_project = $this->project_manager->findOneByScratchId($id);
     if (null === $old_project) {
       $user = $this->user_manager->createUserFromScratch($project_data['author']);

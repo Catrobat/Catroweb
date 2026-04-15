@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\Project;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -14,13 +14,13 @@ use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProgramLike>
+ * @extends ServiceEntityRepository<ProjectLike>
  */
-class ProgramLikeRepository extends ServiceEntityRepository
+class ProjectLikeRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
   {
-    parent::__construct($managerRegistry, ProgramLike::class);
+    parent::__construct($managerRegistry, ProjectLike::class);
   }
 
   public function likeTypeCount(string $program_id, int $type): int
@@ -74,7 +74,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
    * @param string[] $user_ids
    * @param string[] $exclude_program_ids
    *
-   * @return ProgramLike[]
+   * @return ProjectLike[]
    */
   public function getLikesOfUsers(array $user_ids, string $exclude_user_id, array $exclude_program_ids, string $flavor): array
   {
@@ -82,7 +82,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
 
     return $qb
       ->select('l')
-      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('p.id', 'l.program')->__toString())
+      ->innerJoin(Project::class, 'p', Join::WITH, $qb->expr()->eq('p.id', 'l.program')->__toString())
       ->where($qb->expr()->in('l.user_id', ':user_ids'))
       ->andWhere($qb->expr()->neq('IDENTITY(p.user)', ':exclude_user_id'))
       ->andWhere($qb->expr()->notIn('p.id', ':exclude_program_ids'))
@@ -99,13 +99,13 @@ class ProgramLikeRepository extends ServiceEntityRepository
     ;
   }
 
-  public function addLike(Program $project, User $user, int $type): void
+  public function addLike(Project $project, User $user, int $type): void
   {
     $entityManager = $this->getEntityManager();
     $entityManager->beginTransaction();
 
     try {
-      $obj = new ProgramLike($project, $user, $type);
+      $obj = new ProjectLike($project, $user, $type);
       $entityManager->persist($obj);
       $entityManager->flush();
       $entityManager->commit();
@@ -115,7 +115,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
     }
   }
 
-  public function removeLike(Program $project, User $user, int $type): void
+  public function removeLike(Project $project, User $user, int $type): void
   {
     $qb = $this->createQueryBuilder('l');
     $qb->delete()
@@ -134,7 +134,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
    * @throws NoResultException
    * @throws NonUniqueResultException
    */
-  public function areThereOtherLikeTypes(Program $project, User $user, int $type): bool
+  public function areThereOtherLikeTypes(Project $project, User $user, int $type): bool
   {
     $qb = $this->createQueryBuilder('l');
     $qb->select('count(l)')
@@ -190,7 +190,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
     // Fetch one extra to check if more exist
     $qb->setMaxResults($limit + 1);
 
-    /** @var ProgramLike[] $results */
+    /** @var ProjectLike[] $results */
     $results = $qb->getQuery()->getResult();
 
     $has_more = count($results) > $limit;

@@ -17,9 +17,9 @@ class ProjectCodeStatistics
   #[ORM\GeneratedValue(strategy: 'AUTO')]
   private ?int $id = null;
 
-  #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'code_statistics')]
+  #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'code_statistics')]
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-  private Program $program;
+  private Project $project;
 
   #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   private \DateTimeInterface $created_at;
@@ -100,14 +100,14 @@ class ProjectCodeStatistics
     return $this;
   }
 
-  public function getProgram(): Program
+  public function getProject(): Project
   {
-    return $this->program;
+    return $this->project;
   }
 
-  public function setProgram(Program $program): self
+  public function setProject(Project $project): self
   {
-    $this->program = $program;
+    $this->project = $project;
 
     return $this;
   }

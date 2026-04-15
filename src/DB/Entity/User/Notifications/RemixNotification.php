@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\User\Notifications;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,8 +21,8 @@ class RemixNotification extends CatroNotification
    *
    * @param User         $user          the User to which this RemixNotification will be shown
    * @param User|null    $remix_from    the owner of the parent Program
-   * @param Program|null $program       the parent Program
-   * @param Program|null $remix_program the newly remixed child Program
+   * @param Project|null $project       the parent Program
+   * @param Project|null $remix_program the newly remixed child Program
    */
   public function __construct(
     User $user,
@@ -30,11 +30,11 @@ class RemixNotification extends CatroNotification
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $remix_from,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
-    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'remix_notification_mentions_as_parent')]
-    private ?Program $program,
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'remix_notification_mentions_as_parent')]
+    private ?Project $project,
     #[ORM\JoinColumn(name: 'remix_program_id', referencedColumnName: 'id', nullable: true)]
-    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'remix_notification_mentions_as_child')]
-    private ?Program $remix_program,
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'remix_notification_mentions_as_child')]
+    private ?Project $remix_program,
   ) {
     parent::__construct($user, '', '', 'remix');
   }
@@ -68,23 +68,23 @@ class RemixNotification extends CatroNotification
   /**
    * Returns the parent Program.
    */
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   /**
    * Sets the parent Program.
    */
-  public function setProgram(?Program $program): void
+  public function setProject(?Project $project): void
   {
-    $this->program = $program;
+    $this->project = $project;
   }
 
   /**
    * Returns the child Program.
    */
-  public function getRemixProgram(): ?Program
+  public function getRemixProgram(): ?Project
   {
     return $this->remix_program;
   }
@@ -92,7 +92,7 @@ class RemixNotification extends CatroNotification
   /**
    * Sets the child Program.
    */
-  public function setRemixProgram(?Program $remix_program): void
+  public function setRemixProgram(?Project $remix_program): void
   {
     $this->remix_program = $remix_program;
   }

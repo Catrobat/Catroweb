@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\DBUpdater;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\ProjectDeduplicationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -54,7 +54,7 @@ class MigrateAssetsToContentAddressableStoreCommand extends Command
 
     $qb = $this->entityManager->createQueryBuilder()
       ->select('p.id')
-      ->from(Program::class, 'p')
+      ->from(Project::class, 'p')
       ->orderBy('p.uploaded_at', 'ASC')
     ;
 
@@ -100,7 +100,7 @@ class MigrateAssetsToContentAddressableStoreCommand extends Command
         }
 
         try {
-          $project = $this->entityManager->find(Program::class, $id);
+          $project = $this->entityManager->find(Project::class, $id);
           if (null === $project) {
             ++$skipped;
             continue;

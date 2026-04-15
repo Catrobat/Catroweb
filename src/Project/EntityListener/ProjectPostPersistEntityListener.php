@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Project\EntityListener;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\System\StatisticRepository;
 use App\User\Achievements\AchievementManager;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PostPersistEventArgs;
 use Doctrine\ORM\Events;
 
-#[AsEntityListener(event: Events::postPersist, method: 'postPersist', entity: Program::class)]
+#[AsEntityListener(event: Events::postPersist, method: 'postPersist', entity: Project::class)]
 class ProjectPostPersistEntityListener
 {
   public function __construct(
@@ -23,10 +23,10 @@ class ProjectPostPersistEntityListener
   /**
    * @throws \Exception
    */
-  public function postPersist(Program $project, PostPersistEventArgs $args): void
+  public function postPersist(Project $project, PostPersistEventArgs $args): void
   {
     $user = $project->getUser();
-    $user->addProgram($project);
+    $user->addProject($project);
     $this->achievement_manager->unlockAchievementBronzeUser($user);
     $this->statistic_repository->incrementProjects();
   }

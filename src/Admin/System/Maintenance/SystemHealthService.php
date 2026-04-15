@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Admin\System\Maintenance;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\System\Mail\EmailBudgetManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -60,14 +60,14 @@ class SystemHealthService
   {
     $total = (int) $this->entityManager->createQueryBuilder()
       ->select('COUNT(p.id)')
-      ->from(Program::class, 'p')
+      ->from(Project::class, 'p')
       ->getQuery()
       ->getSingleScalarResult()
     ;
 
     $visible = (int) $this->entityManager->createQueryBuilder()
       ->select('COUNT(p.id)')
-      ->from(Program::class, 'p')
+      ->from(Project::class, 'p')
       ->where('p.visible = true')
       ->andWhere('p.auto_hidden = false')
       ->andWhere('p.private = false')
@@ -77,7 +77,7 @@ class SystemHealthService
 
     $private = (int) $this->entityManager->createQueryBuilder()
       ->select('COUNT(p.id)')
-      ->from(Program::class, 'p')
+      ->from(Project::class, 'p')
       ->where('p.private = true')
       ->getQuery()
       ->getSingleScalarResult()
@@ -85,7 +85,7 @@ class SystemHealthService
 
     $hidden = (int) $this->entityManager->createQueryBuilder()
       ->select('COUNT(p.id)')
-      ->from(Program::class, 'p')
+      ->from(Project::class, 'p')
       ->where('p.visible = false OR p.auto_hidden = true')
       ->getQuery()
       ->getSingleScalarResult()

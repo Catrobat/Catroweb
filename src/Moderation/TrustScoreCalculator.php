@@ -7,7 +7,7 @@ namespace App\Moderation;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentModerationActionRepository;
 use App\DB\EntityRepository\Moderation\ContentReportRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -28,7 +28,7 @@ class TrustScoreCalculator
 
   public function __construct(
     private readonly ContentReportRepository $report_repository,
-    private readonly ProgramRepository $program_repository,
+    private readonly ProjectRepository $program_repository,
     private readonly UserCommentRepository $comment_repository,
     private readonly CacheItemPoolInterface $cache,
     private readonly ContentModerationActionRepository $action_repository,

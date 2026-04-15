@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Studio;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
-use App\DB\Entity\Studio\StudioProgram;
+use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
 use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
-use App\DB\EntityRepository\Studios\StudioProgramRepository;
+use App\DB\EntityRepository\Studios\StudioProjectRepository;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
@@ -65,16 +65,16 @@ class StudioManagerTest extends KernelTestCase
     $studio_repository = $this->entity_manager->getRepository(Studio::class);
     /** @var StudioActivityRepository $studio_activity_repository */
     $studio_activity_repository = $this->entity_manager->getRepository(StudioActivity::class);
-    /** @var StudioProgramRepository $studio_project_repository */
-    $studio_project_repository = $this->entity_manager->getRepository(StudioProgram::class);
+    /** @var StudioProjectRepository $studio_project_repository */
+    $studio_project_repository = $this->entity_manager->getRepository(StudioProject::class);
     /** @var StudioUserRepository $studio_user_repository */
     $studio_user_repository = $this->entity_manager->getRepository(StudioUser::class);
     /** @var UserCommentRepository $user_comment_repository */
     $user_comment_repository = $this->entity_manager->getRepository(UserComment::class);
     /** @var StudioJoinRequestRepository $studio_join_request_repository */
     $studio_join_request_repository = $this->entity_manager->getRepository(StudioJoinRequest::class);
-    /** @var ProgramRepository $studio_program_repository */
-    $studio_program_repository = $this->entity_manager->getRepository(Program::class);
+    /** @var ProjectRepository $studio_program_repository */
+    $studio_program_repository = $this->entity_manager->getRepository(Project::class);
     $parameter_bag = $this->createStub(ParameterBagInterface::class);
     $notification_manager = $this->createStub(NotificationManager::class);
     $image_variant_generator = $this->createStub(\App\Storage\Images\ImageVariantGenerator::class);
@@ -251,7 +251,7 @@ class StudioManagerTest extends KernelTestCase
     $this->object->addUserToStudio($this->user, $this->studio, $newUser_2);
 
     $studio_project = $this->object->addProjectToStudio($newUser, $this->studio, $project);
-    $this->assertInstanceOf(StudioProgram::class, $studio_project);
+    $this->assertInstanceOf(StudioProject::class, $studio_project);
     $this->object->deleteProjectFromStudio($newUser_2, $this->studio, $project);
     $this->assertNotNull($this->object->findStudioProject($this->studio, $project));
     $this->object->deleteProjectFromStudio($newUser, $this->studio, $project);

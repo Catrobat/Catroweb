@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\Comment\UserComment;
@@ -184,7 +184,7 @@ class MachineTranslationOnKernelTerminateEventListener
     string $provider, ?string $cache = null,
     ?string $translated_name = null, ?string $translated_description = null, ?string $translated_credits = null): void
   {
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->project_manager->find($project_id);
 
     if (null === $project) {

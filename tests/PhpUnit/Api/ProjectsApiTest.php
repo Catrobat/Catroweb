@@ -13,7 +13,7 @@ use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Api\Services\Projects\ProjectsResponseManager;
 use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\Api\Services\ValidationWrapper;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Moderation\TextSanitizer;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
@@ -122,7 +122,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_headers = [];
 
     $loader = $this->createStub(ProjectsApiLoader::class);
-    $loader->method('findProjectByID')->willReturn($this->createStub(Program::class));
+    $loader->method('findProjectByID')->willReturn($this->createStub(Project::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->object->projectsIdGet('id', $response_code, $response_headers);
@@ -143,14 +143,14 @@ final class ProjectsApiTest extends KernelTestCase
     return $stub;
   }
 
-  private function projectsIdPatch_setLoaderAndAuthManager(MockObject|Program|null $project = null, MockObject|User|null $user = null): void
+  private function projectsIdPatch_setLoaderAndAuthManager(MockObject|Project|null $project = null, MockObject|User|null $user = null): void
   {
     if (is_null($user)) {
       $user = $this->createStub(User::class);
     }
 
     if (is_null($project)) {
-      $project = $this->createStub(Program::class);
+      $project = $this->createStub(Project::class);
       $project->method('getUser')->willReturn($user);
     }
 
@@ -161,7 +161,7 @@ final class ProjectsApiTest extends KernelTestCase
   /**
    * @throws Exception
    */
-  private function projectsIdPatch_setLoader(MockObject|Program|null $project): void
+  private function projectsIdPatch_setLoader(MockObject|Project|null $project): void
   {
     $loader = $this->createStub(ProjectsApiLoader::class);
     $loader->method('findProjectByID')->willReturn($project);
@@ -187,7 +187,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $project = new Program();
+    $project = new Project();
     $user = new User();
     $project->setId('id');
     $project->setName('Old name');
@@ -261,7 +261,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->projectsIdPatch_setLoader($this->createStub(Program::class));
+    $this->projectsIdPatch_setLoader($this->createStub(Project::class));
     $this->projectsIdPatch_setAuthManager(null);
 
     $update_project_request = $this->createStub(UpdateProjectRequest::class);
@@ -281,7 +281,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $project = new Program();
+    $project = new Project();
     $user = new User();
     $user->setId('user1');
 
@@ -461,7 +461,7 @@ final class ProjectsApiTest extends KernelTestCase
     $response_headers = [];
 
     $loader = $this->createStub(ProjectsApiLoader::class);
-    $loader->method('findProjectByID')->willReturn($this->createStub(Program::class));
+    $loader->method('findProjectByID')->willReturn($this->createStub(Project::class));
     $loader->method('getRecommendedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -601,7 +601,7 @@ final class ProjectsApiTest extends KernelTestCase
     $user = $this->createStub(User::class);
     $user->method('isVerified')->willReturn(true);
     $processor = $this->createStub(ProjectsApiProcessor::class);
-    $processor->method('addProject')->willReturn($this->createStub(Program::class));
+    $processor->method('addProject')->willReturn($this->createStub(Project::class));
     $authentication_manager = $this->createStub(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
@@ -631,7 +631,7 @@ final class ProjectsApiTest extends KernelTestCase
     $validation_wrapper->method('hasError')->willReturn(true);
     $validator->method('validateUploadFile')->willReturn($validation_wrapper);
     $processor = $this->createStub(ProjectsApiProcessor::class);
-    $processor->method('addProject')->willReturn($this->createStub(Program::class));
+    $processor->method('addProject')->willReturn($this->createStub(Project::class));
     $authentication_manager = $this->createStub(AuthenticationManager::class);
     $user = $this->createStub(User::class);
     $user->method('isVerified')->willReturn(true);

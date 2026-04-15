@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
@@ -42,9 +42,9 @@ class ProjectsApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @param array<Program> $projects
+   * @param array<Project> $projects
    *
-   * @return array<Program>
+   * @return array<Project>
    */
   private function filterNotSafeForMinors(array $projects): array
   {
@@ -53,7 +53,7 @@ class ProjectsApiLoader extends AbstractApiLoader
       return $projects;
     }
 
-    return array_values(array_filter($projects, static fn (Program $p): bool => 0 === $p->getNotForKids()));
+    return array_values(array_filter($projects, static fn (Project $p): bool => 0 === $p->getNotForKids()));
   }
 
   public function findProjectsByID(string $id, bool $include_private = false): array
@@ -61,7 +61,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->getProjectByID($id, $include_private);
   }
 
-  public function findProjectByID(string $id, bool $include_private = false): ?Program
+  public function findProjectByID(string $id, bool $include_private = false): ?Project
   {
     $projects = $this->findProjectsByID($id, $include_private);
 
@@ -101,8 +101,8 @@ class ProjectsApiLoader extends AbstractApiLoader
         return []; // Features removed
 
       case 'more_from_user':
-        /** @var Program $project */
-        $project = $project->isExample() ? $project->getProgram() : $project;
+        /** @var Project $project */
+        $project = $project->isExample() ? $project->getProject() : $project;
         $project_user_id = $project->getUser()->getId();
 
         return $this->filterNotSafeForMinors($this->project_manager->getMoreProjectsFromUser($project_user_id, $project_id, $limit, $offset, $flavor, $max_version));
@@ -122,7 +122,7 @@ class ProjectsApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @return array<Program>
+   * @return array<Project>
    */
   public function getProjectsKeyset(string $category, string $max_version, int $limit, string $flavor, ?\DateTimeInterface $cursor_date = null, ?int $cursor_value = null, ?string $cursor_id = null, ?User $user = null): array
   {
@@ -138,7 +138,7 @@ class ProjectsApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @return array<Program>
+   * @return array<Project>
    */
   public function getFeaturedProjectsKeyset(?string $flavor, int $limit, string $platform, string $max_version, ?int $cursor_priority = null, ?int $cursor_id = null): array
   {
@@ -146,7 +146,7 @@ class ProjectsApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @return array<Program>
+   * @return array<Project>
    */
   public function getUserProjectsKeyset(string $user_id, int $limit, string $flavor, string $max_version, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -156,7 +156,7 @@ class ProjectsApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @return array<Program>
+   * @return array<Project>
    */
   public function getUserPublicProjectsKeyset(string $user_id, int $limit, string $flavor, string $max_version, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -166,7 +166,7 @@ class ProjectsApiLoader extends AbstractApiLoader
   }
 
   /**
-   * @return array<Program>
+   * @return array<Project>
    */
   public function getRecommendedProjectsKeyset(string $project_id, string $category, string $max_version, int $limit, string $flavor, ?\DateTimeInterface $cursor_date = null, ?string $cursor_id = null): array
   {
@@ -179,8 +179,8 @@ class ProjectsApiLoader extends AbstractApiLoader
       return [];
     }
 
-    /** @var Program $base_project */
-    $base_project = $project->isExample() ? $project->getProgram() : $project;
+    /** @var Project $base_project */
+    $base_project = $project->isExample() ? $project->getProject() : $project;
     $user_id = $base_project->getUser()?->getId();
     if (null === $user_id) {
       return [];
@@ -235,7 +235,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $zipFile;
   }
 
-  public function getCodeStatistics(Program $project): ?ProjectCodeStatistics
+  public function getCodeStatistics(Project $project): ?ProjectCodeStatistics
   {
     return $this->code_statistics_service->getStatistics($project);
   }

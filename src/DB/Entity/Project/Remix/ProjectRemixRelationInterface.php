@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Project\Remix;
 
-interface ProgramRemixRelationInterface
+interface ProjectRemixRelationInterface
 {
   public function getUniqueKey(): string;
 

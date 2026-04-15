@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,7 +19,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     parent::__construct($manager_registry, ProjectCustomTranslation::class);
   }
 
-  public function addNameTranslation(Program $project, string $language, string $name_translation): bool
+  public function addNameTranslation(Project $project, string $language, string $name_translation): bool
   {
     $entry_count = $this->count($this->getCriteria($project, $language));
 
@@ -46,7 +46,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     return true;
   }
 
-  public function addDescriptionTranslation(Program $project, string $language, string $description_translation): bool
+  public function addDescriptionTranslation(Project $project, string $language, string $description_translation): bool
   {
     $entry_count = $this->count($this->getCriteria($project, $language));
 
@@ -73,7 +73,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     return true;
   }
 
-  public function addCreditTranslation(Program $project, string $language, string $credit_translation): bool
+  public function addCreditTranslation(Project $project, string $language, string $credit_translation): bool
   {
     $entry_count = $this->count($this->getCriteria($project, $language));
 
@@ -100,28 +100,28 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     return true;
   }
 
-  public function getNameTranslation(Program $project, string $language): ?string
+  public function getNameTranslation(Project $project, string $language): ?string
   {
     $translation = $this->findTranslation($project, $language);
 
     return $translation?->getName();
   }
 
-  public function getDescriptionTranslation(Program $project, string $language): ?string
+  public function getDescriptionTranslation(Project $project, string $language): ?string
   {
     $translation = $this->findTranslation($project, $language);
 
     return $translation?->getDescription();
   }
 
-  public function getCreditTranslation(Program $project, string $language): ?string
+  public function getCreditTranslation(Project $project, string $language): ?string
   {
     $translation = $this->findTranslation($project, $language);
 
     return $translation?->getCredits();
   }
 
-  public function deleteNameTranslation(Program $project, string $language): bool
+  public function deleteNameTranslation(Project $project, string $language): bool
   {
     $translation = $this->findTranslation($project, $language);
 
@@ -141,7 +141,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     return true;
   }
 
-  public function deleteDescriptionTranslation(Program $project, string $language): bool
+  public function deleteDescriptionTranslation(Project $project, string $language): bool
   {
     $translation = $this->findTranslation($project, $language);
 
@@ -161,7 +161,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     return true;
   }
 
-  public function deleteCreditTranslation(Program $project, string $language): bool
+  public function deleteCreditTranslation(Project $project, string $language): bool
   {
     $translation = $this->findTranslation($project, $language);
 
@@ -181,7 +181,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     return true;
   }
 
-  public function listDefinedLanguages(Program $project): array
+  public function listDefinedLanguages(Project $project): array
   {
     $qb = $this->createQueryBuilder('t');
 
@@ -198,7 +198,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
   }
 
   /**
-   * @psalm-param array<Program> $projects
+   * @psalm-param array<Project> $projects
    */
   public function countDefinedLanguages(array $projects): int
   {
@@ -210,12 +210,12 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     return count($languages);
   }
 
-  private function findTranslation(Program $project, string $language): ?ProjectCustomTranslation
+  private function findTranslation(Project $project, string $language): ?ProjectCustomTranslation
   {
     return $this->findOneBy($this->getCriteria($project, $language));
   }
 
-  private function getCriteria(Program $project, string $language): array
+  private function getCriteria(Project $project, string $language): array
   {
     return ['project' => $project, 'language' => $language];
   }

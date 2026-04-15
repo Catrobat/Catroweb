@@ -6,7 +6,7 @@ namespace App\Admin;
 
 use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\Storage\ImageRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -116,8 +116,8 @@ class FeaturedBannerAdmin extends AbstractAdmin
         ],
         'required' => true,
       ])
-      ->add('program', EntityType::class, [
-        'class' => Program::class,
+      ->add('project', EntityType::class, [
+        'class' => Project::class,
         'choice_label' => 'name',
         'required' => false,
         'help' => 'Select a project (for type "project")',

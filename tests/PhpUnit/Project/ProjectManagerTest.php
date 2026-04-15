@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Project;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\Project\Special\ExampleRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
@@ -71,7 +71,7 @@ class ProjectManagerTest extends TestCase
   {
     // Use stubs for dependencies that only return values (no behavior verification needed)
     $file_extractor = $this->createStub(CatrobatFileExtractor::class);
-    $this->createStub(ProgramRepository::class);
+    $this->createStub(ProjectRepository::class);
     $this->createStub(TagRepository::class);
     $this->createStub(FeaturedRepository::class);
     $this->createStub(ExampleRepository::class);
@@ -82,7 +82,7 @@ class ProjectManagerTest extends TestCase
     $this->createStub(NotificationManager::class);
     $this->createStub(Security::class);
     $user = $this->createStub(User::class);
-    $inserted_program = $this->createStub(Program::class);
+    $inserted_program = $this->createStub(Project::class);
 
     $this->file_repository = $this->createStub(ProjectFileRepository::class);
     $this->file_repository->zip_dir = sys_get_temp_dir().'/catroweb_test_zips/';
@@ -127,7 +127,7 @@ class ProjectManagerTest extends TestCase
     ?MalwareScanner $malware_scanner = null,
   ): ProjectManager {
     $file_extractor = $this->createStub(CatrobatFileExtractor::class);
-    $program_repository = $this->createStub(ProgramRepository::class);
+    $program_repository = $this->createStub(ProjectRepository::class);
     $tag_repository = $this->createStub(TagRepository::class);
     $featured_repository = $this->createStub(FeaturedRepository::class);
     $example_repository = $this->createStub(ExampleRepository::class);
@@ -180,19 +180,19 @@ class ProjectManagerTest extends TestCase
    */
   public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
   {
-    $func = static function (Program $project): Program {
+    $func = static function (Project $project): Project {
       $project->setId('1');
 
       return $project;
     };
 
     $entity_manager = $this->createMock(EntityManager::class);
-    $entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Program::class))
+    $entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Project::class))
       ->willReturnCallback($func)
     ;
     $entity_manager->expects($this->atLeastOnce())->method('flush');
     $entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
+      ->with($this->isInstanceOf(Project::class))
     ;
 
     $event_dispatcher = $this->createMock(EventDispatcherInterface::class);
@@ -205,7 +205,7 @@ class ProjectManagerTest extends TestCase
       event_dispatcher: $event_dispatcher
     );
 
-    $this->assertInstanceOf(Program::class, $program_manager->addProject($this->request));
+    $this->assertInstanceOf(Project::class, $program_manager->addProject($this->request));
   }
 
   /**
@@ -216,14 +216,14 @@ class ProjectManagerTest extends TestCase
   {
     $entity_manager = $this->createMock(EntityManager::class);
     $entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->willReturnCallback(static function (Program $project): Program {
+      ->willReturnCallback(static function (Project $project): Project {
         $project->setId('1');
 
         return $project;
       })
     ;
     $entity_manager->expects($this->atLeastOnce())->method('flush');
-    $entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
+    $entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Project::class));
 
     fopen('/tmp/PhpUnitTest', 'w');
     $file = new File('/tmp/PhpUnitTest');
@@ -263,7 +263,7 @@ class ProjectManagerTest extends TestCase
 
     $entity_manager = $this->createMock(EntityManager::class);
     $entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->willReturnCallback(static function (Program $project): Program {
+      ->willReturnCallback(static function (Project $project): Project {
         $project->setId('1');
 
         return $project;
@@ -271,7 +271,7 @@ class ProjectManagerTest extends TestCase
     ;
     $entity_manager->expects($this->atLeastOnce())->method('flush');
     $entity_manager->expects($this->atLeastOnce())
-      ->method('refresh')->with($this->isInstanceOf(Program::class))
+      ->method('refresh')->with($this->isInstanceOf(Project::class))
     ;
 
     $screenshot_repository = $this->createMock(ScreenshotRepository::class);
@@ -301,7 +301,7 @@ class ProjectManagerTest extends TestCase
    */
   public function testFiresAnEventBeforeInsertingAProgram(): void
   {
-    $func = static function (Program $project): Program {
+    $func = static function (Project $project): Project {
       $project->setId('1');
 
       return $project;
@@ -313,7 +313,7 @@ class ProjectManagerTest extends TestCase
     ;
     $entity_manager->expects($this->atLeastOnce())->method('flush');
     $entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
+      ->with($this->isInstanceOf(Project::class))
     ;
 
     $event_dispatcher = $this->createMock(EventDispatcherInterface::class);
@@ -326,7 +326,7 @@ class ProjectManagerTest extends TestCase
       event_dispatcher: $event_dispatcher
     );
 
-    $this->assertInstanceOf(Program::class, $program_manager->addProject($this->request));
+    $this->assertInstanceOf(Project::class, $program_manager->addProject($this->request));
   }
 
   /**
@@ -397,19 +397,19 @@ class ProjectManagerTest extends TestCase
    */
   public function testAllowsUploadWhenMalwareScanSkipped(): void
   {
-    $func = static function (Program $project): Program {
+    $func = static function (Project $project): Project {
       $project->setId('1');
 
       return $project;
     };
 
     $entity_manager = $this->createMock(EntityManager::class);
-    $entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Program::class))
+    $entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Project::class))
       ->willReturnCallback($func)
     ;
     $entity_manager->expects($this->atLeastOnce())->method('flush');
     $entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
+      ->with($this->isInstanceOf(Project::class))
     ;
 
     $event_dispatcher = $this->createMock(EventDispatcherInterface::class);
@@ -426,7 +426,7 @@ class ProjectManagerTest extends TestCase
       malware_scanner: $malware_scanner,
     );
 
-    $this->assertInstanceOf(Program::class, $program_manager->addProject($this->request));
+    $this->assertInstanceOf(Project::class, $program_manager->addProject($this->request));
   }
 
   /**
@@ -437,7 +437,7 @@ class ProjectManagerTest extends TestCase
   {
     $entity_manager = $this->createMock(EntityManager::class);
     $entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->willReturnCallback(static function (Program $project): Program {
+      ->willReturnCallback(static function (Project $project): Project {
         $project->setId('1');
 
         return $project;
@@ -445,7 +445,7 @@ class ProjectManagerTest extends TestCase
     ;
     $entity_manager->expects($this->atLeastOnce())->method('flush');
     $entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
+      ->with($this->isInstanceOf(Project::class))
     ;
 
     $event_dispatcher = $this->createMock(EventDispatcherInterface::class);
@@ -459,6 +459,6 @@ class ProjectManagerTest extends TestCase
       event_dispatcher: $event_dispatcher
     );
 
-    $this->assertInstanceOf(Program::class, $program_manager->addProject($this->request));
+    $this->assertInstanceOf(Project::class, $program_manager->addProject($this->request));
   }
 }

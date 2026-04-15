@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Storage;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\ExampleProgram;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\ExampleProject;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
 use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
 use App\DB\Entity\User\User;
@@ -43,7 +43,7 @@ class StorageLifecycleService
    *
    * @return int days until deletion (-1 = protected/never)
    */
-  public function getRetentionDays(Program $project): int
+  public function getRetentionDays(Project $project): int
   {
     if ($this->isProtected($project)) {
       return self::PROTECTED_DAYS;
@@ -63,7 +63,7 @@ class StorageLifecycleService
   /**
    * Protected: featured, example, or admin-approved projects. Never deleted.
    */
-  public function isProtected(Program $project): bool
+  public function isProtected(Project $project): bool
   {
     if ($project->isStorageProtected()) {
       return true;
@@ -76,7 +76,7 @@ class StorageLifecycleService
 
     $featured = $this->entity_manager->createQueryBuilder()
       ->select('COUNT(f.id)')
-      ->from(FeaturedProgram::class, 'f')
+      ->from(FeaturedProject::class, 'f')
       ->where('f.program = :project')
       ->setParameter('project', $project)
       ->getQuery()
@@ -89,7 +89,7 @@ class StorageLifecycleService
 
     $example = $this->entity_manager->createQueryBuilder()
       ->select('COUNT(e.id)')
-      ->from(ExampleProgram::class, 'e')
+      ->from(ExampleProject::class, 'e')
       ->where('e.program = :project')
       ->setParameter('project', $project)
       ->getQuery()
@@ -102,7 +102,7 @@ class StorageLifecycleService
   /**
    * Active: >= 10 downloads OR owner logged in within 180 days.
    */
-  public function isActive(Program $project): bool
+  public function isActive(Project $project): bool
   {
     if ($project->getDownloads() >= self::ACTIVE_DOWNLOAD_MINIMUM) {
       return true;
@@ -126,7 +126,7 @@ class StorageLifecycleService
   /**
    * Standard: visible project by a verified user.
    */
-  public function isStandard(Program $project): bool
+  public function isStandard(Project $project): bool
   {
     if (!$project->getVisible()) {
       return false;
@@ -211,7 +211,7 @@ class StorageLifecycleService
     while (true) {
       $projects = $this->entity_manager->createQueryBuilder()
         ->select('p')
-        ->from(Program::class, 'p')
+        ->from(Project::class, 'p')
         ->leftJoin('p.user', 'u')
         ->orderBy('p.uploaded_at', 'ASC')
         ->setFirstResult($offset)
@@ -224,7 +224,7 @@ class StorageLifecycleService
         break;
       }
 
-      /** @var Program $project */
+      /** @var Project $project */
       foreach ($projects as $project) {
         ++$checked;
 
@@ -289,7 +289,7 @@ class StorageLifecycleService
    * Permanently deletes a project: files, screenshots, thumbnails, and database record.
    * Doctrine cascade handles related entities (comments, notifications, likes, etc.).
    */
-  public function hardDeleteProject(Program $project): void
+  public function hardDeleteProject(Project $project): void
   {
     $projectId = $project->getId();
     if (null === $projectId) {
@@ -333,7 +333,7 @@ class StorageLifecycleService
     while (true) {
       $projects = $this->entity_manager->createQueryBuilder()
         ->select('p')
-        ->from(Program::class, 'p')
+        ->from(Project::class, 'p')
         ->leftJoin('p.user', 'u')
         ->orderBy('p.uploaded_at', 'ASC')
         ->setFirstResult($offset)
@@ -346,7 +346,7 @@ class StorageLifecycleService
         break;
       }
 
-      /** @var Program $project */
+      /** @var Project $project */
       foreach ($projects as $project) {
         $retention_days = $this->getRetentionDays($project);
         $retention_days = $this->applyDiskPressure($retention_days, $disk_ratio);

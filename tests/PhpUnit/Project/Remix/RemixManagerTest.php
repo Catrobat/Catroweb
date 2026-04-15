@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Project\Remix;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Remix\ProgramRemixRelation;
-use App\DB\Entity\Project\Scratch\ScratchProgram;
-use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Remix\ProjectRemixRelation;
+use App\DB\Entity\Project\Scratch\ScratchProject;
+use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
-use App\DB\EntityRepository\Project\ProgramRemixRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
-use App\DB\EntityRepository\Project\ScratchProgramRemixRepository;
-use App\DB\EntityRepository\Project\ScratchProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRemixBackwardRepository;
+use App\DB\EntityRepository\Project\ProjectRemixRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
+use App\DB\EntityRepository\Project\ScratchProjectRemixRepository;
+use App\DB\EntityRepository\Project\ScratchProjectRepository;
 use App\Project\Remix\RemixData;
 use App\Project\Remix\RemixGraphManipulator;
 use App\Project\Remix\RemixManager;
@@ -50,11 +50,11 @@ class RemixManagerTest extends TestCase
   protected function setUp(): void
   {
     $this->entity_manager = $this->createMock(EntityManager::class);
-    $this->program_repository = $this->createMock(ProgramRepository::class);
-    $this->scratch_program_repository = $this->createMock(ScratchProgramRepository::class);
-    $this->program_remix_repository = $this->createMock(ProgramRemixRepository::class);
-    $program_remix_backward_repository = $this->createMock(ProgramRemixBackwardRepository::class);
-    $scratch_program_remix_repository = $this->createMock(ScratchProgramRemixRepository::class);
+    $this->program_repository = $this->createMock(ProjectRepository::class);
+    $this->scratch_program_repository = $this->createMock(ScratchProjectRepository::class);
+    $this->program_remix_repository = $this->createMock(ProjectRemixRepository::class);
+    $program_remix_backward_repository = $this->createMock(ProjectRemixBackwardRepository::class);
+    $scratch_program_remix_repository = $this->createMock(ScratchProjectRemixRepository::class);
     $remix_graph_manipulator = $this->createMock(RemixGraphManipulator::class);
     $catro_notification_service = $this->createMock(NotificationManager::class);
     $this->remix_manager = new RemixManager($this->entity_manager, $this->program_repository, $this->scratch_program_repository, $this->program_remix_repository, $program_remix_backward_repository, $scratch_program_remix_repository, $remix_graph_manipulator, $catro_notification_service);
@@ -84,8 +84,8 @@ class RemixManagerTest extends TestCase
 
     $this->entity_manager
       ->expects($this->atLeastOnce())
-      ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
-      ->willReturnCallback(function (ScratchProgram $scratch_project) use (
+      ->method('persist')->with($this->isInstanceOf(ScratchProject::class))
+      ->willReturnCallback(function (ScratchProject $scratch_project) use (
         $expected_id_of_first_program, $expected_name_of_first_program,
         $expected_description_of_first_program, $expected_username_of_first_program
       ): void {
@@ -115,8 +115,8 @@ class RemixManagerTest extends TestCase
 
     $this->entity_manager
       ->expects($this->atLeastOnce())
-      ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
-      ->willReturnCallback(function (ScratchProgram $scratch_project) use ($expected_id_of_first_program): void {
+      ->method('persist')->with($this->isInstanceOf(ScratchProject::class))
+      ->willReturnCallback(function (ScratchProject $scratch_project) use ($expected_id_of_first_program): void {
         $this->assertSame($expected_id_of_first_program, $scratch_project->getId());
         $this->assertNull($scratch_project->getName());
         $this->assertNull($scratch_project->getDescription());
@@ -161,8 +161,8 @@ class RemixManagerTest extends TestCase
 
     $this->entity_manager
       ->expects($this->atLeastOnce())
-      ->method('persist')->with($this->isInstanceOf(ScratchProgram::class))
-      ->willReturnCallback(function (ScratchProgram $scratch_project) use (
+      ->method('persist')->with($this->isInstanceOf(ScratchProject::class))
+      ->willReturnCallback(function (ScratchProject $scratch_project) use (
         $expected_id_of_first_program, $expected_name_of_first_program,
         $expected_description_of_first_program, $expected_username_of_first_program,
         $expected_id_of_second_program, $expected_name_of_second_program, $expected_username_of_second_program
@@ -189,13 +189,13 @@ class RemixManagerTest extends TestCase
    */
   public function testSetProgramAsRootAndDontAddRemixRelationsWhenNoParentsAreGiven(): void
   {
-    $program_entity = $this->createMock(Program::class);
+    $program_entity = $this->createMock(Project::class);
     $program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('123');
     $program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
 
     $parent_data = [];
     $expected_relations = [
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
     ];
 
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
@@ -208,15 +208,15 @@ class RemixManagerTest extends TestCase
    */
   public function testSetProgramAsRootAndDontAddRemixRelationsForNonExistingParents(): void
   {
-    $program_entity = $this->createMock(Program::class);
+    $program_entity = $this->createMock(Project::class);
     $program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('123');
     $program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
 
-    $first_parent_entity = $this->createMock(Program::class);
+    $first_parent_entity = $this->createMock(Project::class);
     $first_parent_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3570');
     $first_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
 
-    $second_parent_entity = $this->createMock(Program::class);
+    $second_parent_entity = $this->createMock(Project::class);
     $second_parent_entity->expects($this->atLeastOnce())->method('getId')->willReturn('16267');
     $second_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
 
@@ -235,7 +235,7 @@ class RemixManagerTest extends TestCase
       ],
     ];
     $expected_relations = [
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
     ];
 
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
@@ -257,7 +257,7 @@ class RemixManagerTest extends TestCase
     //              (123)                <--------- to be added
     //
     // --------------------------------------------------------------------------------------------------------------
-    $program_entity = $this->createMock(Program::class);
+    $program_entity = $this->createMock(Project::class);
     $program_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn('123')
     ;
@@ -282,9 +282,9 @@ class RemixManagerTest extends TestCase
       ],
     ];
     $expected_relations = [
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
-      new ScratchProgramRemixRelation($first_scratch_parent_id, $program_entity),
-      new ScratchProgramRemixRelation($second_scratch_parent_id, $program_entity),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
+      new ScratchProjectRemixRelation($first_scratch_parent_id, $program_entity),
+      new ScratchProjectRemixRelation($second_scratch_parent_id, $program_entity),
     ];
 
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
@@ -307,13 +307,13 @@ class RemixManagerTest extends TestCase
 
     $program_entities = $this->getProgramEntityAndParents('2');
 
-    /** @var Program $program_entity */
+    /** @var Project $program_entity */
     $program_entity = $program_entities[0];
 
-    /** @var Program $first_parent_entity */
+    /** @var Project $first_parent_entity */
     $first_parent_entity = $program_entities[1];
 
-    /** @var Program $second_parent_entity */
+    /** @var Project $second_parent_entity */
     $second_parent_entity = $program_entities[2];
 
     $parent_data = [
@@ -331,8 +331,8 @@ class RemixManagerTest extends TestCase
       ],
     ];
     $expected_relations = [
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
-      new ProgramRemixRelation($second_parent_entity, $program_entity, 1),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($second_parent_entity, $program_entity, 1),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -374,9 +374,9 @@ class RemixManagerTest extends TestCase
       ],
     ];
     $expected_relations = [
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
-      new ProgramRemixRelation($first_parent_entity, $program_entity, 1),
-      new ProgramRemixRelation($second_parent_entity, $program_entity, 1),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($first_parent_entity, $program_entity, 1),
+      new ProjectRemixRelation($second_parent_entity, $program_entity, 1),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -397,7 +397,7 @@ class RemixManagerTest extends TestCase
     //
     // --------------------------------------------------------------------------------------------------------------
 
-    $parent_entity_of_both_parents = $this->createMock(Program::class);
+    $parent_entity_of_both_parents = $this->createMock(Project::class);
     $parent_entity_of_both_parents->expects($this->atLeastOnce())
       ->method('getId')->willReturn('1')
     ;
@@ -414,8 +414,8 @@ class RemixManagerTest extends TestCase
         'entity' => $first_parent_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($first_parent_entity, $first_parent_entity, 0),
-          new ProgramRemixRelation($parent_entity_of_both_parents, $first_parent_entity, 1),
+          new ProjectRemixRelation($first_parent_entity, $first_parent_entity, 0),
+          new ProjectRemixRelation($parent_entity_of_both_parents, $first_parent_entity, 1),
         ],
       ],
       $second_parent_entity->getId() => [
@@ -423,22 +423,22 @@ class RemixManagerTest extends TestCase
         'entity' => $second_parent_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($second_parent_entity, $second_parent_entity, 0),
-          new ProgramRemixRelation($parent_entity_of_both_parents, $second_parent_entity, 1),
+          new ProjectRemixRelation($second_parent_entity, $second_parent_entity, 0),
+          new ProjectRemixRelation($parent_entity_of_both_parents, $second_parent_entity, 1),
         ],
       ],
     ];
 
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($first_parent_entity, $program_entity, 1),
-      new ProgramRemixRelation($second_parent_entity, $program_entity, 1),
+      new ProjectRemixRelation($first_parent_entity, $program_entity, 1),
+      new ProjectRemixRelation($second_parent_entity, $program_entity, 1),
 
       // relation to grandparents
-      new ProgramRemixRelation($parent_entity_of_both_parents, $program_entity, 2),
+      new ProjectRemixRelation($parent_entity_of_both_parents, $program_entity, 2),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -458,27 +458,27 @@ class RemixManagerTest extends TestCase
     //                        (5)              <--------- to be added
     //
     // --------------------------------------------------------------------------------------------------------------
-    $parent_entity_of_first_parent = $this->createMock(Program::class);
+    $parent_entity_of_first_parent = $this->createMock(Project::class);
     $parent_entity_of_first_parent->expects($this->atLeastOnce())
       ->method('getId')->willReturn('1')
     ;
     $parent_entity_of_first_parent->method('getUser')->willReturn($this->createMock(User::class));
-    $parent_entity_of_second_parent = $this->createMock(Program::class);
+    $parent_entity_of_second_parent = $this->createMock(Project::class);
     $parent_entity_of_second_parent->expects($this->atLeastOnce())
       ->method('getId')->willReturn('2')
     ;
     $parent_entity_of_second_parent->method('getUser')->willReturn($this->createMock(User::class));
-    $first_parent_entity = $this->createMock(Program::class);
+    $first_parent_entity = $this->createMock(Project::class);
     $first_parent_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn('3')
     ;
     $first_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
-    $second_parent_entity = $this->createMock(Program::class);
+    $second_parent_entity = $this->createMock(Project::class);
     $second_parent_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn('4')
     ;
     $second_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
-    $program_entity = $this->createMock(Program::class);
+    $program_entity = $this->createMock(Project::class);
     $program_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn('5')
     ;
@@ -492,8 +492,8 @@ class RemixManagerTest extends TestCase
         'entity' => $first_parent_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($first_parent_entity, $first_parent_entity, 0),
-          new ProgramRemixRelation($parent_entity_of_first_parent, $first_parent_entity, 1),
+          new ProjectRemixRelation($first_parent_entity, $first_parent_entity, 0),
+          new ProjectRemixRelation($parent_entity_of_first_parent, $first_parent_entity, 1),
         ],
       ],
       $second_parent_entity->getId() ?? 'second' => [
@@ -501,22 +501,22 @@ class RemixManagerTest extends TestCase
         'entity' => $second_parent_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($second_parent_entity, $second_parent_entity, 0),
-          new ProgramRemixRelation($parent_entity_of_second_parent, $second_parent_entity, 1),
+          new ProjectRemixRelation($second_parent_entity, $second_parent_entity, 0),
+          new ProjectRemixRelation($parent_entity_of_second_parent, $second_parent_entity, 1),
         ],
       ],
     ];
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($first_parent_entity, $program_entity, 1),
-      new ProgramRemixRelation($second_parent_entity, $program_entity, 1),
+      new ProjectRemixRelation($first_parent_entity, $program_entity, 1),
+      new ProjectRemixRelation($second_parent_entity, $program_entity, 1),
 
       // relation to grandparents
-      new ProgramRemixRelation($parent_entity_of_first_parent, $program_entity, 2),
-      new ProgramRemixRelation($parent_entity_of_second_parent, $program_entity, 2),
+      new ProjectRemixRelation($parent_entity_of_first_parent, $program_entity, 2),
+      new ProjectRemixRelation($parent_entity_of_second_parent, $program_entity, 2),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -538,7 +538,7 @@ class RemixManagerTest extends TestCase
     // --------------------------------------------------------------------------------------------------------------
     $scratch_parent_id = '29495624';
 
-    $parent_entity_of_first_parent = $this->createMock(Program::class);
+    $parent_entity_of_first_parent = $this->createMock(Project::class);
     $parent_entity_of_first_parent->expects($this->atLeastOnce())
       ->method('getId')->willReturn('1')
     ;
@@ -555,8 +555,8 @@ class RemixManagerTest extends TestCase
         'entity' => $first_parent_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($first_parent_entity, $first_parent_entity, 0),
-          new ProgramRemixRelation($parent_entity_of_first_parent, $first_parent_entity, 1),
+          new ProjectRemixRelation($first_parent_entity, $first_parent_entity, 0),
+          new ProjectRemixRelation($parent_entity_of_first_parent, $first_parent_entity, 1),
         ],
       ],
       $second_parent_entity->getId() => [
@@ -564,8 +564,8 @@ class RemixManagerTest extends TestCase
         'entity' => $second_parent_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($second_parent_entity, $second_parent_entity, 0),
-          new ScratchProgramRemixRelation($scratch_parent_id, $second_parent_entity),
+          new ProjectRemixRelation($second_parent_entity, $second_parent_entity, 0),
+          new ScratchProjectRemixRelation($scratch_parent_id, $second_parent_entity),
         ],
       ],
       $scratch_parent_id => [
@@ -577,15 +577,15 @@ class RemixManagerTest extends TestCase
     ];
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($first_parent_entity, $program_entity, 1),
-      new ProgramRemixRelation($second_parent_entity, $program_entity, 1),
-      new ScratchProgramRemixRelation($scratch_parent_id, $program_entity),
+      new ProjectRemixRelation($first_parent_entity, $program_entity, 1),
+      new ProjectRemixRelation($second_parent_entity, $program_entity, 1),
+      new ScratchProjectRemixRelation($scratch_parent_id, $program_entity),
 
       // relation to grandparents
-      new ProgramRemixRelation($parent_entity_of_first_parent, $program_entity, 2),
+      new ProjectRemixRelation($parent_entity_of_first_parent, $program_entity, 2),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -625,9 +625,9 @@ class RemixManagerTest extends TestCase
         'entity' => $third_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($third_program_entity, $third_program_entity, 0),
-          new ProgramRemixRelation($first_program_entity, $third_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $third_program_entity, 1),
+          new ProjectRemixRelation($third_program_entity, $third_program_entity, 0),
+          new ProjectRemixRelation($first_program_entity, $third_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $third_program_entity, 1),
         ],
       ],
       $fourth_program_entity->getId() => [
@@ -635,22 +635,22 @@ class RemixManagerTest extends TestCase
         'entity' => $fourth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($fourth_program_entity, $fourth_program_entity, 0),
-          new ProgramRemixRelation($second_program_entity, $fourth_program_entity, 1),
+          new ProjectRemixRelation($fourth_program_entity, $fourth_program_entity, 0),
+          new ProjectRemixRelation($second_program_entity, $fourth_program_entity, 1),
         ],
       ],
     ];
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($third_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($fourth_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($third_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($fourth_program_entity, $program_entity, 1),
 
       // relation to grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 2),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -694,11 +694,11 @@ class RemixManagerTest extends TestCase
         'entity' => $fifth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($fifth_program_entity, $fifth_program_entity, 0),
-          new ProgramRemixRelation($third_program_entity, $fifth_program_entity, 1),
-          new ProgramRemixRelation($fourth_program_entity, $fifth_program_entity, 1),
-          new ProgramRemixRelation($first_program_entity, $fifth_program_entity, 2),
-          new ProgramRemixRelation($second_program_entity, $fifth_program_entity, 2),
+          new ProjectRemixRelation($fifth_program_entity, $fifth_program_entity, 0),
+          new ProjectRemixRelation($third_program_entity, $fifth_program_entity, 1),
+          new ProjectRemixRelation($fourth_program_entity, $fifth_program_entity, 1),
+          new ProjectRemixRelation($first_program_entity, $fifth_program_entity, 2),
+          new ProjectRemixRelation($second_program_entity, $fifth_program_entity, 2),
         ],
       ],
       $sixth_program_entity->getId() => [
@@ -706,27 +706,27 @@ class RemixManagerTest extends TestCase
         'entity' => $sixth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($sixth_program_entity, $sixth_program_entity, 0),
-          new ProgramRemixRelation($fourth_program_entity, $sixth_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $sixth_program_entity, 2),
+          new ProjectRemixRelation($sixth_program_entity, $sixth_program_entity, 0),
+          new ProjectRemixRelation($fourth_program_entity, $sixth_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $sixth_program_entity, 2),
         ],
       ],
     ];
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($fifth_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($sixth_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($fifth_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($sixth_program_entity, $program_entity, 1),
 
       // relation to grandparents
-      new ProgramRemixRelation($third_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($fourth_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($third_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($fourth_program_entity, $program_entity, 2),
 
       // relation to parents of grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 3),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 3),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 3),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 3),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -767,11 +767,11 @@ class RemixManagerTest extends TestCase
         'entity' => $fifth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($fifth_program_entity, $fifth_program_entity, 0),
-          new ProgramRemixRelation($third_program_entity, $fifth_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $fifth_program_entity, 1),
-          new ProgramRemixRelation($first_program_entity, $fifth_program_entity, 2),
-          new ProgramRemixRelation($second_program_entity, $fifth_program_entity, 2),
+          new ProjectRemixRelation($fifth_program_entity, $fifth_program_entity, 0),
+          new ProjectRemixRelation($third_program_entity, $fifth_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $fifth_program_entity, 1),
+          new ProjectRemixRelation($first_program_entity, $fifth_program_entity, 2),
+          new ProjectRemixRelation($second_program_entity, $fifth_program_entity, 2),
         ],
       ],
       $sixth_program_entity->getId() => [
@@ -779,28 +779,28 @@ class RemixManagerTest extends TestCase
         'entity' => $sixth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($sixth_program_entity, $sixth_program_entity, 0),
-          new ProgramRemixRelation($fourth_program_entity, $sixth_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $sixth_program_entity, 2),
+          new ProjectRemixRelation($sixth_program_entity, $sixth_program_entity, 0),
+          new ProjectRemixRelation($fourth_program_entity, $sixth_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $sixth_program_entity, 2),
         ],
       ],
     ];
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($fifth_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($sixth_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($fifth_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($sixth_program_entity, $program_entity, 1),
 
       // relation to grandparents
-      new ProgramRemixRelation($third_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($fourth_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($third_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($fourth_program_entity, $program_entity, 2),
 
       // relation to parents of grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 3),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 3),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 3),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 3),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -842,9 +842,9 @@ class RemixManagerTest extends TestCase
         'entity' => $third_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($third_program_entity, $third_program_entity, 0),
-          new ProgramRemixRelation($first_program_entity, $third_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $third_program_entity, 1),
+          new ProjectRemixRelation($third_program_entity, $third_program_entity, 0),
+          new ProjectRemixRelation($first_program_entity, $third_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $third_program_entity, 1),
         ],
       ],
       $fifth_program_entity->getId() => [
@@ -852,12 +852,12 @@ class RemixManagerTest extends TestCase
         'entity' => $fifth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($fifth_program_entity, $fifth_program_entity, 0),
-          new ProgramRemixRelation($third_program_entity, $fifth_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $fifth_program_entity, 1),
-          new ProgramRemixRelation($fourth_program_entity, $fifth_program_entity, 1),
-          new ProgramRemixRelation($first_program_entity, $fifth_program_entity, 2),
-          new ProgramRemixRelation($second_program_entity, $fifth_program_entity, 2),
+          new ProjectRemixRelation($fifth_program_entity, $fifth_program_entity, 0),
+          new ProjectRemixRelation($third_program_entity, $fifth_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $fifth_program_entity, 1),
+          new ProjectRemixRelation($fourth_program_entity, $fifth_program_entity, 1),
+          new ProjectRemixRelation($first_program_entity, $fifth_program_entity, 2),
+          new ProjectRemixRelation($second_program_entity, $fifth_program_entity, 2),
         ],
       ],
       $sixth_program_entity->getId() => [
@@ -865,31 +865,31 @@ class RemixManagerTest extends TestCase
         'entity' => $sixth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($sixth_program_entity, $sixth_program_entity, 0),
-          new ProgramRemixRelation($fourth_program_entity, $sixth_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $sixth_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $sixth_program_entity, 2),
+          new ProjectRemixRelation($sixth_program_entity, $sixth_program_entity, 0),
+          new ProjectRemixRelation($fourth_program_entity, $sixth_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $sixth_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $sixth_program_entity, 2),
         ],
       ],
     ];
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($third_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($fifth_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($sixth_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($third_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($fifth_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($sixth_program_entity, $program_entity, 1),
 
       // relation to grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($third_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($fourth_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($third_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($fourth_program_entity, $program_entity, 2),
 
       // relation to parents of grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 3),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 3),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 3),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 3),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -932,9 +932,9 @@ class RemixManagerTest extends TestCase
         'entity' => $second_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($second_program_entity, $second_program_entity, 0),
-          new ProgramRemixRelation($first_program_entity, $second_program_entity, 1),
-          new ScratchProgramRemixRelation($scratch_parent_id, $second_program_entity),
+          new ProjectRemixRelation($second_program_entity, $second_program_entity, 0),
+          new ProjectRemixRelation($first_program_entity, $second_program_entity, 1),
+          new ScratchProjectRemixRelation($scratch_parent_id, $second_program_entity),
         ],
       ],
       $fourth_program_entity->getId() => [
@@ -942,11 +942,11 @@ class RemixManagerTest extends TestCase
         'entity' => $fourth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($fourth_program_entity, $fourth_program_entity, 0),
-          new ProgramRemixRelation($third_program_entity, $fourth_program_entity, 1),
-          new ProgramRemixRelation($second_program_entity, $fourth_program_entity, 1),
-          new ScratchProgramRemixRelation($scratch_parent_id, $fourth_program_entity),
-          new ProgramRemixRelation($first_program_entity, $fourth_program_entity, 2),
+          new ProjectRemixRelation($fourth_program_entity, $fourth_program_entity, 0),
+          new ProjectRemixRelation($third_program_entity, $fourth_program_entity, 1),
+          new ProjectRemixRelation($second_program_entity, $fourth_program_entity, 1),
+          new ScratchProjectRemixRelation($scratch_parent_id, $fourth_program_entity),
+          new ProjectRemixRelation($first_program_entity, $fourth_program_entity, 2),
         ],
       ],
       $fifth_program_entity->getId() => [
@@ -954,9 +954,9 @@ class RemixManagerTest extends TestCase
         'entity' => $fifth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($fifth_program_entity, $fifth_program_entity, 0),
-          new ProgramRemixRelation($third_program_entity, $fifth_program_entity, 1),
-          new ScratchProgramRemixRelation($scratch_parent_id, $fifth_program_entity),
+          new ProjectRemixRelation($fifth_program_entity, $fifth_program_entity, 0),
+          new ProjectRemixRelation($third_program_entity, $fifth_program_entity, 1),
+          new ScratchProjectRemixRelation($scratch_parent_id, $fifth_program_entity),
         ],
       ],
       $scratch_parent_id => [
@@ -968,21 +968,21 @@ class RemixManagerTest extends TestCase
     ];
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($second_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($fourth_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($fifth_program_entity, $program_entity, 1),
-      new ScratchProgramRemixRelation($scratch_parent_id, $program_entity),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($fourth_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($fifth_program_entity, $program_entity, 1),
+      new ScratchProjectRemixRelation($scratch_parent_id, $program_entity),
 
       // relation to grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($third_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($third_program_entity, $program_entity, 2),
 
       // relation to parents of grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 3),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 3),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -1024,9 +1024,9 @@ class RemixManagerTest extends TestCase
         'entity' => $first_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($first_program_entity, $first_program_entity, 0),
-          new ScratchProgramRemixRelation($first_scratch_ancestor_id, $first_program_entity),
-          new ScratchProgramRemixRelation($second_scratch_parent_id, $first_program_entity),
+          new ProjectRemixRelation($first_program_entity, $first_program_entity, 0),
+          new ScratchProjectRemixRelation($first_scratch_ancestor_id, $first_program_entity),
+          new ScratchProjectRemixRelation($second_scratch_parent_id, $first_program_entity),
         ],
       ],
       $third_program_entity->getId() => [
@@ -1034,10 +1034,10 @@ class RemixManagerTest extends TestCase
         'entity' => $third_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($third_program_entity, $third_program_entity, 0),
-          new ProgramRemixRelation($second_program_entity, $third_program_entity, 1),
-          new ProgramRemixRelation($first_program_entity, $third_program_entity, 1),
-          new ScratchProgramRemixRelation($second_scratch_parent_id, $third_program_entity),
+          new ProjectRemixRelation($third_program_entity, $third_program_entity, 0),
+          new ProjectRemixRelation($second_program_entity, $third_program_entity, 1),
+          new ProjectRemixRelation($first_program_entity, $third_program_entity, 1),
+          new ScratchProjectRemixRelation($second_scratch_parent_id, $third_program_entity),
         ],
       ],
       $fourth_program_entity->getId() => [
@@ -1045,9 +1045,9 @@ class RemixManagerTest extends TestCase
         'entity' => $fourth_program_entity,
         'exists' => true,
         'existingRelations' => [
-          new ProgramRemixRelation($fourth_program_entity, $fourth_program_entity, 0),
-          new ProgramRemixRelation($second_program_entity, $fourth_program_entity, 1),
-          new ScratchProgramRemixRelation($second_scratch_parent_id, $fourth_program_entity),
+          new ProjectRemixRelation($fourth_program_entity, $fourth_program_entity, 0),
+          new ProjectRemixRelation($second_program_entity, $fourth_program_entity, 1),
+          new ScratchProjectRemixRelation($second_scratch_parent_id, $fourth_program_entity),
         ],
       ],
       $second_scratch_parent_id => [
@@ -1060,17 +1060,17 @@ class RemixManagerTest extends TestCase
 
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($third_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($fourth_program_entity, $program_entity, 1),
-      new ScratchProgramRemixRelation($second_scratch_parent_id, $program_entity),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($third_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($fourth_program_entity, $program_entity, 1),
+      new ScratchProjectRemixRelation($second_scratch_parent_id, $program_entity),
 
       // relation to grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 2),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -1108,22 +1108,22 @@ class RemixManagerTest extends TestCase
     $program_entity = $program_entities[4];
 
     $existingRelationsFirstProgramEntity = [
-      new ProgramRemixRelation($first_program_entity, $first_program_entity, 0),
-      new ScratchProgramRemixRelation($first_scratch_ancestor_id, $first_program_entity),
-      new ScratchProgramRemixRelation($second_scratch_parent_id, $first_program_entity),
+      new ProjectRemixRelation($first_program_entity, $first_program_entity, 0),
+      new ScratchProjectRemixRelation($first_scratch_ancestor_id, $first_program_entity),
+      new ScratchProjectRemixRelation($second_scratch_parent_id, $first_program_entity),
     ];
 
     $existingRelationsThirdProgramEntity = [
-      new ProgramRemixRelation($third_program_entity, $third_program_entity, 0),
-      new ProgramRemixRelation($second_program_entity, $third_program_entity, 1),
-      new ProgramRemixRelation($first_program_entity, $third_program_entity, 1),
-      new ScratchProgramRemixRelation($second_scratch_parent_id, $third_program_entity),
+      new ProjectRemixRelation($third_program_entity, $third_program_entity, 0),
+      new ProjectRemixRelation($second_program_entity, $third_program_entity, 1),
+      new ProjectRemixRelation($first_program_entity, $third_program_entity, 1),
+      new ScratchProjectRemixRelation($second_scratch_parent_id, $third_program_entity),
     ];
 
     $existingRelationsFourthProgramEntity = [
-      new ProgramRemixRelation($fourth_program_entity, $fourth_program_entity, 0),
-      new ProgramRemixRelation($second_program_entity, $fourth_program_entity, 1),
-      new ScratchProgramRemixRelation($second_scratch_parent_id, $fourth_program_entity),
+      new ProjectRemixRelation($fourth_program_entity, $fourth_program_entity, 0),
+      new ProjectRemixRelation($second_program_entity, $fourth_program_entity, 1),
+      new ScratchProjectRemixRelation($second_scratch_parent_id, $fourth_program_entity),
     ];
 
     $parent_data = [
@@ -1161,18 +1161,18 @@ class RemixManagerTest extends TestCase
 
     $expected_relations = [
       // self-relation
-      new ProgramRemixRelation($program_entity, $program_entity, 0),
+      new ProjectRemixRelation($program_entity, $program_entity, 0),
 
       // relation to parents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($third_program_entity, $program_entity, 1),
-      new ProgramRemixRelation($fourth_program_entity, $program_entity, 1),
-      new ScratchProgramRemixRelation($second_scratch_parent_id, $program_entity),
-      new ScratchProgramRemixRelation($third_scratch_parent_id, $program_entity),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($third_program_entity, $program_entity, 1),
+      new ProjectRemixRelation($fourth_program_entity, $program_entity, 1),
+      new ScratchProjectRemixRelation($second_scratch_parent_id, $program_entity),
+      new ScratchProjectRemixRelation($third_scratch_parent_id, $program_entity),
 
       // relation to grandparents
-      new ProgramRemixRelation($first_program_entity, $program_entity, 2),
-      new ProgramRemixRelation($second_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($first_program_entity, $program_entity, 2),
+      new ProjectRemixRelation($second_program_entity, $program_entity, 2),
     ];
     $this->checkRemixRelations($program_entity, $parent_data, $expected_relations);
     $this->assertFalse($program_entity->isRemixRoot());
@@ -1181,12 +1181,12 @@ class RemixManagerTest extends TestCase
   /**
    * @throws \Exception
    */
-  private function checkRemixRelations(Program $program_entity, array $parent_data, array $expected_relations): void
+  private function checkRemixRelations(Project $program_entity, array $parent_data, array $expected_relations): void
   {
     $expected_relations_map = [];
     $expected_catrobat_relations = [];
     foreach ($expected_relations as $expected_relation) {
-      if ($expected_relation instanceof ProgramRemixRelation) {
+      if ($expected_relation instanceof ProjectRemixRelation) {
         $expected_catrobat_relations[] = $expected_relation;
       }
 
@@ -1197,7 +1197,7 @@ class RemixManagerTest extends TestCase
     $program_remix_repository_find_map = [];
 
     foreach ($parent_data as $parent_id => $data) {
-      $catrobat_relations = array_filter($data['existingRelations'], static fn ($relation): bool => $relation instanceof ProgramRemixRelation);
+      $catrobat_relations = array_filter($data['existingRelations'], static fn ($relation): bool => $relation instanceof ProjectRemixRelation);
       if ($data['exists']) {
         $program_remix_repository_find_map[(string) $parent_id] = $catrobat_relations;
       }
@@ -1223,12 +1223,12 @@ class RemixManagerTest extends TestCase
       ->expects($this->atLeastOnce())
       ->method('persist')
       ->willReturnCallback(static function ($arg) use ($program_entity, &$expected_relations_map): void {
-        if ($arg instanceof ProgramRemixRelation || $arg instanceof ScratchProgramRemixRelation) {
+        if ($arg instanceof ProjectRemixRelation || $arg instanceof ScratchProjectRemixRelation) {
           $relation = $arg;
           Assert::assertArrayHasKey($relation->getUniqueKey(), $expected_relations_map);
           unset($expected_relations_map[$relation->getUniqueKey()]);
         }
-        if ($arg instanceof Program) {
+        if ($arg instanceof Project) {
           Assert::assertEquals($arg, $program_entity);
         }
       })
@@ -1260,7 +1260,7 @@ class RemixManagerTest extends TestCase
   {
     $array = [];
     for ($i = 1; $i <= $amount; ++$i) {
-      $program_entity = $this->createMock(Program::class);
+      $program_entity = $this->createMock(Project::class);
       $program_entity->expects($this->atLeastOnce())
         ->method('getId')
         ->willReturn(strval($i))
@@ -1284,7 +1284,7 @@ class RemixManagerTest extends TestCase
    */
   private function getProgramEntityAndParents(string $entityReturn = '123', string $firstParentReturn = '3570', string $secParentReturn = '16267'): array
   {
-    $program_entity = $this->createMock(Program::class);
+    $program_entity = $this->createMock(Project::class);
     $program_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn($entityReturn)
     ;
@@ -1293,13 +1293,13 @@ class RemixManagerTest extends TestCase
     ;
     $program_entity->method('getUser')->willReturn($this->createMock(User::class));
 
-    $first_parent_entity = $this->createMock(Program::class);
+    $first_parent_entity = $this->createMock(Project::class);
     $first_parent_entity->expects($this->atLeastOnce())
       ->method('getId')->willReturn($firstParentReturn)
     ;
     $first_parent_entity->method('getUser')->willReturn($this->createMock(User::class));
 
-    $second_parent_entity = $this->createMock(Program::class);
+    $second_parent_entity = $this->createMock(Project::class);
     $second_parent_entity->expects($this->atLeastOnce())
       ->method('getId')
       ->willReturn($secParentReturn)

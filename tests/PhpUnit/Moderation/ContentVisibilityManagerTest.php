@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Moderation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
@@ -26,14 +26,14 @@ final class ContentVisibilityManagerTest extends TestCase
     $owner->method('getId')->willReturn('owner-id');
     $owner->method('getProfileHidden')->willReturn(true);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $project->method('getUser')->willReturn($owner);
     $project->method('getAutoHidden')->willReturn(true);
 
     $em = $this->createStub(EntityManagerInterface::class);
     $em->method('find')
       ->willReturnCallback(function (string $class, mixed $id) use ($project, $owner): ?\PHPUnit\Framework\MockObject\Stub {
-        if (Program::class === $class) {
+        if (Project::class === $class) {
           return $project;
         }
         if (User::class === $class) {
@@ -62,7 +62,7 @@ final class ContentVisibilityManagerTest extends TestCase
     $owner->method('getId')->willReturn('owner-id');
     $owner->method('getProfileHidden')->willReturn(false);
 
-    $project = $this->createMock(Program::class);
+    $project = $this->createMock(Project::class);
     $project->method('getUser')->willReturn($owner);
     $project->expects($this->once())
       ->method('setAutoHidden')
@@ -72,7 +72,7 @@ final class ContentVisibilityManagerTest extends TestCase
     $em = $this->createStub(EntityManagerInterface::class);
     $em->method('find')
       ->willReturnCallback(function (string $class, mixed $id) use ($project, $owner): \PHPUnit\Framework\MockObject\MockObject|\PHPUnit\Framework\MockObject\Stub|null {
-        if (Program::class === $class) {
+        if (Project::class === $class) {
           return $project;
         }
         if (User::class === $class) {

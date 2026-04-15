@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Admin\Projects\ApproveProjects;
 
 use App\Admin\Projects\ProjectPreUpdateTrait;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
@@ -27,7 +27,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * @phpstan-extends AbstractAdmin<Program>
+ * @phpstan-extends AbstractAdmin<Project>
  */
 class ApproveProjectsAdmin extends AbstractAdmin
 {
@@ -57,7 +57,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed|Program $object
+   * @param mixed|Project $object
    */
   public function getThumbnailImageUrl(mixed $object): string
   {
@@ -98,7 +98,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed|Program $object
+   * @param mixed|Project $object
    */
   public function getContainingStrings(mixed $object): array
   {
@@ -114,7 +114,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed|Program $object
+   * @param mixed|Project $object
    */
   public function getContainingCodeObjects(mixed $object): array
   {

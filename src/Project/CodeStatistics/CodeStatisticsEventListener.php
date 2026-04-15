@@ -31,7 +31,7 @@ class CodeStatisticsEventListener
       }
 
       $stats = $this->parser->parse($code_xml_path);
-      $stats->setProgram($project);
+      $stats->setProject($project);
 
       $this->entity_manager->persist($stats);
       $this->entity_manager->flush();

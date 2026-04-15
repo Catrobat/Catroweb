@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiProcessor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Moderation\TextSanitizer;
 use App\Project\AddProjectRequest;
@@ -37,17 +37,17 @@ class ProjectsApiProcessor extends AbstractApiProcessor
    * @throws \Exception
    * @throws ORMException
    */
-  public function addProject(AddProjectRequest $add_program_request): ?Program
+  public function addProject(AddProjectRequest $add_program_request): ?Project
   {
     return $this->project_manager->addProject($add_program_request);
   }
 
-  public function saveProject(Program $project): void
+  public function saveProject(Project $project): void
   {
     $this->project_manager->save($project);
   }
 
-  public function updateProject(Program $project, UpdateProjectRequest $request): bool|int
+  public function updateProject(Project $project, UpdateProjectRequest $request): bool|int
   {
     $project_touched = false;
     $extracted_file = null;
@@ -163,13 +163,13 @@ class ProjectsApiProcessor extends AbstractApiProcessor
       return false;
     }
 
-    $program = $this->project_manager->getProjectByID($id, true);
+    $project = $this->project_manager->getProjectByID($id, true);
 
-    if ([] === $program || $program[0]->getUser() != $user) {
+    if ([] === $project || $project[0]->getUser() != $user) {
       return false;
     }
 
-    $this->project_manager->deleteProject($program[0]);
+    $this->project_manager->deleteProject($project[0]);
 
     return true;
   }

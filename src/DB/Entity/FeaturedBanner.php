@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\EntityRepository\FeaturedBannerRepository;
 use App\DB\Generator\MyUuidGenerator;
@@ -36,9 +36,9 @@ class FeaturedBanner
   #[ORM\Column(type: Types::STRING, length: 20)]
   protected string $type = 'project';
 
-  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'EAGER')]
+  #[ORM\ManyToOne(targetEntity: Project::class, fetch: 'EAGER')]
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
-  protected ?Program $program = null;
+  protected ?Project $project = null;
 
   #[ORM\ManyToOne(targetEntity: Studio::class, fetch: 'EAGER')]
   #[ORM\JoinColumn(name: 'studio_id', referencedColumnName: 'id', nullable: true)]
@@ -91,14 +91,14 @@ class FeaturedBanner
     return $this;
   }
 
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
-  public function setProgram(?Program $program): self
+  public function setProject(?Project $project): self
   {
-    $this->program = $program;
+    $this->project = $project;
 
     return $this;
   }

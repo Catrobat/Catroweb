@@ -32,7 +32,7 @@ class ImportProjectsFromShare extends Command
         'catroweb')
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED,
         'Generates remix graph based on given layout',
-        ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT)
+        ProjectImportCommand::REMIX_GRAPH_NO_LAYOUT)
     ;
   }
 
@@ -83,9 +83,9 @@ class ImportProjectsFromShare extends Command
       $server_json = json_decode($projects, true, 512, JSON_THROW_ON_ERROR);
 
       $base_url = $server_json['CatrobatInformation']['BaseUrl'];
-      foreach ($server_json['CatrobatProjects'] as $program) {
-        $project_url = $base_url.$program['DownloadUrl'];
-        $name = $dir.$program['ProjectId'].'.catrobat';
+      foreach ($server_json['CatrobatProjects'] as $project) {
+        $project_url = $base_url.$project['DownloadUrl'];
+        $name = $dir.$project['ProjectId'].'.catrobat';
         $output->writeln('Saving <'.$project_url.'> to <'.$name.'>');
         try {
           $project_json = @file_get_contents($project_url);

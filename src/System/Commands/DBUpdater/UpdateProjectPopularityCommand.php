@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\System\Commands\DBUpdater;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\Project\Remix\ProgramRemixRelation;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
-use App\DB\EntityRepository\Project\ProgramRemixRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
+use App\DB\Entity\Project\Remix\ProjectRemixRelation;
+use App\DB\EntityRepository\Project\ProjectLikeRepository;
+use App\DB\EntityRepository\Project\ProjectRemixRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -31,7 +31,7 @@ class UpdateProjectPopularityCommand extends Command
 
   final public const int REACTIONS_W = 15;
 
-  public function __construct(protected EntityManagerInterface $entity_manager, protected ProgramRepository $program_repository, protected ProgramRemixRepository $program_remix_repository, protected ProgramLikeRepository $program_like_repository)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected ProjectRepository $program_repository, protected ProjectRemixRepository $program_remix_repository, protected ProjectLikeRepository $program_like_repository)
   {
     parent::__construct();
   }
@@ -44,11 +44,11 @@ class UpdateProjectPopularityCommand extends Command
     $offset = 0;
     $min_max_values = $this->getMinMaxValues();
     while ($offset < $program_count) {
-      $programs = $this->program_repository->getProjects(limit: self::BATCH_SIZE, offset: $offset);
-      foreach ($programs as $program) {
-        $popularity = $this->computePopularity($program, $min_max_values);
-        $program->setPopularity($popularity);
-        $this->entity_manager->persist($program);
+      $projects = $this->program_repository->getProjects(limit: self::BATCH_SIZE, offset: $offset);
+      foreach ($projects as $project) {
+        $popularity = $this->computePopularity($project, $min_max_values);
+        $project->setPopularity($popularity);
+        $this->entity_manager->persist($project);
       }
 
       $offset += self::BATCH_SIZE;
@@ -60,20 +60,20 @@ class UpdateProjectPopularityCommand extends Command
     return Command::SUCCESS;
   }
 
-  protected function computePopularity(Program $program, array $min_max_values): float
+  protected function computePopularity(Project $project, array $min_max_values): float
   {
-    $normalized_data = $this->getNormalizedData($program, $min_max_values);
+    $normalized_data = $this->getNormalizedData($project, $min_max_values);
 
     return round($normalized_data['views'] * self::VIEWS_W + $normalized_data['downloads'] * self::DOWNLOADS_W + $normalized_data['remixes'] * self::REMIXES_W + $normalized_data['reactions'] * self::REACTIONS_W, 2);
   }
 
-  protected function getNormalizedData(Program $program, array $min_max_values): array
+  protected function getNormalizedData(Project $project, array $min_max_values): array
   {
     return [
-      'views' => $this->scale($program->getViews(), $min_max_values['views_min'], $min_max_values['views_max']),
-      'downloads' => $this->scale($program->getDownloads(), $min_max_values['downloads_min'], $min_max_values['downloads_max']),
-      'remixes' => $this->scale(count($program->getCatrobatRemixDescendantRelations()), $min_max_values['remixes_min'], $min_max_values['remixes_max']),
-      'reactions' => $this->scale(count($program->getLikes()), $min_max_values['reactions_min'], $min_max_values['reactions_max']),
+      'views' => $this->scale($project->getViews(), $min_max_values['views_min'], $min_max_values['views_max']),
+      'downloads' => $this->scale($project->getDownloads(), $min_max_values['downloads_min'], $min_max_values['downloads_max']),
+      'remixes' => $this->scale(count($project->getCatrobatRemixDescendantRelations()), $min_max_values['remixes_min'], $min_max_values['remixes_max']),
+      'reactions' => $this->scale(count($project->getLikes()), $min_max_values['reactions_min'], $min_max_values['reactions_max']),
     ];
   }
 
@@ -132,8 +132,8 @@ class UpdateProjectPopularityCommand extends Command
     $query_builder = $this->entity_manager->createQueryBuilder();
     $query_builder
       ->select('COUNT(r.ancestor_id) as count')
-      ->from(Program::class, 'p')
-      ->leftJoin(ProgramRemixRelation::class, 'r', Join::WITH, 'p.id = r.ancestor_id')
+      ->from(Project::class, 'p')
+      ->leftJoin(ProjectRemixRelation::class, 'r', Join::WITH, 'p.id = r.ancestor_id')
       ->groupBy('r.ancestor_id')
       ->orderBy('count', 'DESC')
     ;
@@ -154,8 +154,8 @@ class UpdateProjectPopularityCommand extends Command
 
     $query_builder
       ->select('COUNT(e.program_id) as count')
-      ->from(Program::class, 'p')
-      ->leftJoin(ProgramLike::class, 'e', Join::WITH, 'p.id = e.program_id')
+      ->from(Project::class, 'p')
+      ->leftJoin(ProjectLike::class, 'e', Join::WITH, 'p.id = e.program_id')
       ->groupBy('e.program_id')
       ->orderBy('count', 'DESC')
       ->setMaxResults(1)

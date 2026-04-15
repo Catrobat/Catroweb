@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Testing\Behat\Context;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\System\Testing\Behat\ContextTrait;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
@@ -38,9 +38,9 @@ class SanitizerContext implements Context
     Assert::assertSame($description, $project->getDescription());
   }
 
-  private function getLastUploadedProject(): Program
+  private function getLastUploadedProject(): Project
   {
-    $projects = $this->getManager()->getRepository(Program::class)->findBy(
+    $projects = $this->getManager()->getRepository(Project::class)->findBy(
       [],
       ['uploaded_at' => 'DESC'],
       1

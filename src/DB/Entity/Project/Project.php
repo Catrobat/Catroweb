@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\DB\Entity\Project;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
-use App\DB\Entity\Project\Remix\ProgramRemixRelation;
-use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
+use App\DB\Entity\Project\Remix\ProjectRemixBackwardRelation;
+use App\DB\Entity\Project\Remix\ProjectRemixRelation;
+use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\LikeNotification;
-use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\Generator\MyUuidGenerator;
 use App\Utils\TimeUtils;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -38,8 +38,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(name: 'program_popularity_idx', columns: ['visible', 'auto_hidden', 'private', 'debug_build', 'popularity'])]
 #[ORM\Index(name: 'has_missing_files_idx', columns: ['has_missing_files'])]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Entity(repositoryClass: ProgramRepository::class)]
-class Program implements \Stringable
+#[ORM\Entity(repositoryClass: ProjectRepository::class)]
+class Project implements \Stringable
 {
   final public const int INITIAL_VERSION = 1;
 
@@ -68,7 +68,7 @@ class Program implements \Stringable
    * The user owning this Program. If this User gets deleted, this Program gets deleted as well.
    */
   #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
-  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'programs')]
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'projects')]
   protected ?User $user = null;
 
   /**
@@ -76,7 +76,7 @@ class Program implements \Stringable
    *
    * @var Collection<int, UserComment>
    */
-  #[ORM\OneToMany(targetEntity: UserComment::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: UserComment::class, mappedBy: 'project', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $comments;
 
   /**
@@ -85,16 +85,16 @@ class Program implements \Stringable
    *
    * @var Collection<int, LikeNotification>
    */
-  #[ORM\OneToMany(targetEntity: LikeNotification::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: LikeNotification::class, mappedBy: 'project', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $like_notification_mentions;
 
   /**
-   * The NewProgramNotification mentioning this Program as a new Program.
+   * The NewProjectNotification mentioning this Program as a new Program.
    * If this Program gets deleted, these NewProgramNotifications get deleted as well.
    *
-   * @var Collection<int, NewProgramNotification>
+   * @var Collection<int, NewProjectNotification>
    */
-  #[ORM\OneToMany(targetEntity: NewProgramNotification::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: NewProjectNotification::class, mappedBy: 'project', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $new_program_notification_mentions;
 
   /**
@@ -112,7 +112,7 @@ class Program implements \Stringable
    *
    * @var Collection<int, RemixNotification>
    */
-  #[ORM\OneToMany(targetEntity: RemixNotification::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: RemixNotification::class, mappedBy: 'project', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $remix_notification_mentions_as_parent;
 
   /**
@@ -121,7 +121,7 @@ class Program implements \Stringable
   #[ORM\JoinTable(name: 'program_tag')]
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
   #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'id')]
-  #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'programs')]
+  #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'projects')]
   protected Collection $tags;
 
   /**
@@ -130,7 +130,7 @@ class Program implements \Stringable
   #[ORM\JoinTable(name: 'program_extension')]
   #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
   #[ORM\InverseJoinColumn(name: 'extension_id', referencedColumnName: 'id')]
-  #[ORM\ManyToMany(targetEntity: Extension::class, inversedBy: 'programs')]
+  #[ORM\ManyToMany(targetEntity: Extension::class, inversedBy: 'projects')]
   protected Collection $extensions;
 
   #[ORM\Column(type: Types::INTEGER)]
@@ -182,39 +182,39 @@ class Program implements \Stringable
   protected ?\DateTime $remix_migrated_at = null;
 
   /**
-   * @var Collection<int, ProgramRemixRelation>
+   * @var Collection<int, ProjectRemixRelation>
    */
-  #[ORM\OneToMany(targetEntity: ProgramRemixRelation::class, mappedBy: 'descendant', cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProjectRemixRelation::class, mappedBy: 'descendant', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_ancestor_relations;
 
   /**
-   * @var Collection<int, ProgramRemixBackwardRelation>
+   * @var Collection<int, ProjectRemixBackwardRelation>
    */
-  #[ORM\OneToMany(targetEntity: ProgramRemixBackwardRelation::class, mappedBy: 'child', cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProjectRemixBackwardRelation::class, mappedBy: 'child', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_backward_parent_relations;
 
   /**
-   * @var Collection<int, ProgramRemixRelation>
+   * @var Collection<int, ProjectRemixRelation>
    */
-  #[ORM\OneToMany(targetEntity: ProgramRemixRelation::class, mappedBy: 'ancestor', cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProjectRemixRelation::class, mappedBy: 'ancestor', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_descendant_relations;
 
   /**
-   * @var Collection<int, ProgramRemixBackwardRelation>
+   * @var Collection<int, ProjectRemixBackwardRelation>
    */
-  #[ORM\OneToMany(targetEntity: ProgramRemixBackwardRelation::class, mappedBy: 'parent', cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProjectRemixBackwardRelation::class, mappedBy: 'parent', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_backward_child_relations;
 
   /**
-   * @var Collection<int, ScratchProgramRemixRelation>
+   * @var Collection<int, ScratchProjectRemixRelation>
    */
-  #[ORM\OneToMany(targetEntity: ScratchProgramRemixRelation::class, mappedBy: 'catrobat_child', cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ScratchProjectRemixRelation::class, mappedBy: 'catrobat_child', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $scratch_remix_parent_relations;
 
   /**
-   * @var Collection<int, ProgramLike>
+   * @var Collection<int, ProjectLike>
    */
-  #[ORM\OneToMany(targetEntity: ProgramLike::class, mappedBy: 'program', cascade: ['persist', 'remove'], orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: ProjectLike::class, mappedBy: 'project', cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $likes;
 
   #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
@@ -245,7 +245,7 @@ class Program implements \Stringable
   /**
    * @var Collection<int, ProjectCodeStatistics>
    */
-  #[ORM\OneToMany(targetEntity: ProjectCodeStatistics::class, mappedBy: 'program', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: ProjectCodeStatistics::class, mappedBy: 'project', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   #[ORM\OrderBy(['created_at' => 'DESC'])]
   private Collection $code_statistics;
 
@@ -332,7 +332,7 @@ class Program implements \Stringable
     return $this->id;
   }
 
-  public function setName(string $name): Program
+  public function setName(string $name): Project
   {
     $this->name = $name;
     $this->should_invalidate_translation_cache = true;
@@ -345,7 +345,7 @@ class Program implements \Stringable
     return $this->name;
   }
 
-  public function setDescription(?string $description): Program
+  public function setDescription(?string $description): Project
   {
     $this->description = $description;
     $this->should_invalidate_translation_cache = true;
@@ -358,7 +358,7 @@ class Program implements \Stringable
     return $this->description;
   }
 
-  public function setCredits(?string $credits): Program
+  public function setCredits(?string $credits): Project
   {
     $this->credits = $credits;
     $this->should_invalidate_translation_cache = true;
@@ -371,7 +371,7 @@ class Program implements \Stringable
     return $this->credits;
   }
 
-  public function setViews(int $views): Program
+  public function setViews(int $views): Project
   {
     $this->views = $views;
 
@@ -383,14 +383,14 @@ class Program implements \Stringable
     return $this->views;
   }
 
-  public function setVersion(int $version): Program
+  public function setVersion(int $version): Project
   {
     $this->version = $version;
 
     return $this;
   }
 
-  public function incrementVersion(): Program
+  public function incrementVersion(): Project
   {
     ++$this->version;
 
@@ -402,7 +402,7 @@ class Program implements \Stringable
     return $this->version;
   }
 
-  public function setDownloads(int $downloads): Program
+  public function setDownloads(int $downloads): Project
   {
     $this->downloads = $downloads;
 
@@ -414,7 +414,7 @@ class Program implements \Stringable
     return $this->downloads;
   }
 
-  public function setUploadedAt(\DateTime $uploadedAt): Program
+  public function setUploadedAt(\DateTime $uploadedAt): Project
   {
     $this->uploaded_at = $uploadedAt;
 
@@ -426,7 +426,7 @@ class Program implements \Stringable
     return $this->uploaded_at;
   }
 
-  public function setLastModifiedAt(\DateTime $lastModifiedAt): Program
+  public function setLastModifiedAt(\DateTime $lastModifiedAt): Project
   {
     $this->last_modified_at = $lastModifiedAt;
 
@@ -438,7 +438,7 @@ class Program implements \Stringable
     return $this->last_modified_at;
   }
 
-  public function setRemixMigratedAt(?\DateTime $remix_migrated_at): Program
+  public function setRemixMigratedAt(?\DateTime $remix_migrated_at): Project
   {
     $this->remix_migrated_at = $remix_migrated_at;
 
@@ -453,7 +453,7 @@ class Program implements \Stringable
   /**
    * Sets the user owning this Program.
    */
-  public function setUser(?User $user = null): Program
+  public function setUser(?User $user = null): Project
   {
     $this->user = $user;
 
@@ -483,7 +483,7 @@ class Program implements \Stringable
     $this->comments = $comments;
   }
 
-  public function setLanguageVersion(string $languageVersion): Program
+  public function setLanguageVersion(string $languageVersion): Project
   {
     $this->language_version = $languageVersion;
 
@@ -495,7 +495,7 @@ class Program implements \Stringable
     return $this->language_version;
   }
 
-  public function setCatrobatVersionName(string $catrobat_version_name): Program
+  public function setCatrobatVersionName(string $catrobat_version_name): Project
   {
     $this->catrobat_version_name = $catrobat_version_name;
 
@@ -507,7 +507,7 @@ class Program implements \Stringable
     return $this->catrobat_version_name;
   }
 
-  public function setUploadIp(string $uploadIp): Program
+  public function setUploadIp(string $uploadIp): Project
   {
     $this->upload_ip = $uploadIp;
 
@@ -519,7 +519,7 @@ class Program implements \Stringable
     return $this->upload_ip;
   }
 
-  public function setVisible(bool $visible): Program
+  public function setVisible(bool $visible): Project
   {
     $this->visible = $visible;
 
@@ -531,14 +531,14 @@ class Program implements \Stringable
     return $this->auto_hidden;
   }
 
-  public function setAutoHidden(bool $auto_hidden): Program
+  public function setAutoHidden(bool $auto_hidden): Project
   {
     $this->auto_hidden = $auto_hidden;
 
     return $this;
   }
 
-  public function setPrivate(bool $private): Program
+  public function setPrivate(bool $private): Project
   {
     $this->private = $private;
 
@@ -555,7 +555,7 @@ class Program implements \Stringable
     return $this->visible;
   }
 
-  public function setUploadLanguage(string $uploadLanguage): Program
+  public function setUploadLanguage(string $uploadLanguage): Project
   {
     $this->upload_language = $uploadLanguage;
 
@@ -567,7 +567,7 @@ class Program implements \Stringable
     return $this->upload_language;
   }
 
-  public function setFilesize(int $filesize): Program
+  public function setFilesize(int $filesize): Project
   {
     $this->filesize = $filesize;
 
@@ -683,7 +683,7 @@ class Program implements \Stringable
   {
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(static fn (ProgramRemixRelation $ra): string => $ra->getDescendantId(), $relations));
+    return array_unique(array_map(static fn (ProjectRemixRelation $ra): string => $ra->getDescendantId(), $relations));
   }
 
   public function getScratchRemixParentRelations(): Collection
@@ -760,7 +760,7 @@ class Program implements \Stringable
   }
 
   /**
-   * Returns the NewProgramNotification mentioning this Program as a new Program.
+   * Returns the NewProjectNotification mentioning this Program as a new Program.
    */
   public function getNewProgramNotificationMentions(): Collection
   {
@@ -819,7 +819,7 @@ class Program implements \Stringable
     return '';
   }
 
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
     return $this;
   }
@@ -849,7 +849,7 @@ class Program implements \Stringable
     return $this->rand;
   }
 
-  public function setRand(int $rand): Program
+  public function setRand(int $rand): Project
   {
     $this->rand = $rand;
 
@@ -866,7 +866,7 @@ class Program implements \Stringable
     return $this->popularity;
   }
 
-  public function setPopularity(float $popularity): Program
+  public function setPopularity(float $popularity): Project
   {
     $this->popularity = $popularity;
 
@@ -878,7 +878,7 @@ class Program implements \Stringable
     return $this->not_for_kids;
   }
 
-  public function setNotForKids(int $not_for_kids): Program
+  public function setNotForKids(int $not_for_kids): Project
   {
     $this->not_for_kids = $not_for_kids;
 
@@ -907,7 +907,7 @@ class Program implements \Stringable
     return $this->has_missing_files;
   }
 
-  public function setHasMissingFiles(bool $has_missing_files): Program
+  public function setHasMissingFiles(bool $has_missing_files): Project
   {
     $this->has_missing_files = $has_missing_files;
 

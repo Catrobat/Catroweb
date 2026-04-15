@@ -8,7 +8,7 @@ use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
-use App\DB\Entity\Studio\StudioProgram;
+use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
@@ -152,7 +152,7 @@ class StudioResponseManager extends AbstractResponseManager
   }
 
   /**
-   * @param StudioProgram[] $projects
+   * @param StudioProject[] $projects
    */
   public function createProjectListResponse(array $projects, bool $has_more): StudioProjectListResponse
   {
@@ -174,20 +174,20 @@ class StudioResponseManager extends AbstractResponseManager
     ;
   }
 
-  public function createProjectResponse(StudioProgram $studioProject): StudioProjectResponse
+  public function createProjectResponse(StudioProject $studioProject): StudioProjectResponse
   {
-    $program = $studioProject->getProgram();
-    $programId = $program->getId();
+    $project = $studioProject->getProject();
+    $programId = $project->getId();
     $user = $studioProject->getUser();
 
     return (new StudioProjectResponse())
       ->setId($programId)
-      ->setName($program->getName())
+      ->setName($project->getName())
       ->setAddedBy($user->getUsername())
       ->setAddedAt($studioProject->getCreatedOn())
       ->setScreenshot(null !== $programId ? $this->project_manager->getScreenshotVariants($programId) : null)
-      ->setAuthor($program->getUser()?->getUsername())
-      ->setAuthorId($program->getUser()?->getId())
+      ->setAuthor($project->getUser()?->getUsername())
+      ->setAuthorId($project->getUser()?->getId())
     ;
   }
 

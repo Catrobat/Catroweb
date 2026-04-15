@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\Controller\Project;
 
 use App\Api\Services\Projects\ProjectsRequestValidator;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
@@ -66,13 +66,13 @@ class ProjectController extends AbstractController
     return $this->render('Project/ProjectUpload.html.twig');
   }
 
-  #[Route(path: '/project/{id}', name: 'program', defaults: ['id' => 0])]
-  #[Route(path: '/program/{id}', name: 'program_deprecated')]
+  #[Route(path: '/project/{id}', name: 'project', defaults: ['id' => 0])]
+  #[Route(path: '/program/{id}', name: 'project_deprecated')]
   #[Route(path: '/details/{id}', name: 'catrobat_web_detail', methods: ['GET'])]
   public function project(Request $request, string $id): Response
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
 
       return $this->redirectToRoute('index');
@@ -120,7 +120,7 @@ class ProjectController extends AbstractController
     }
 
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       return new Response('No project found for this id', Response::HTTP_NOT_FOUND);
     }
 
@@ -176,7 +176,7 @@ class ProjectController extends AbstractController
   public function projectCustomTranslationLanguageList(string $id): Response
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
@@ -195,7 +195,7 @@ class ProjectController extends AbstractController
     }
 
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($arr_comment['program_id']);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       return $this->redirectToIndexOnError();
     }
 
@@ -229,7 +229,7 @@ class ProjectController extends AbstractController
     return $this->redirectToRoute('index');
   }
 
-  private function checkAndAddViewed(Request $request, Program $project, array $viewed): void
+  private function checkAndAddViewed(Request $request, Project $project, array $viewed): void
   {
     if (!in_array($project->getId(), $viewed, true)) {
       $this->project_statistics_service->increaseViews($project);
@@ -246,7 +246,7 @@ class ProjectController extends AbstractController
     }
 
     $project = $this->project_manager->find($id);
-    if (!$project instanceof Program || $project->getUser() !== $user) {
+    if (!$project instanceof Project || $project->getUser() !== $user) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
@@ -283,7 +283,7 @@ class ProjectController extends AbstractController
   private function projectCustomTranslationGetAction(Request $request, string $id): Response
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Program) {
+    if (!$project instanceof Project) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
@@ -325,7 +325,7 @@ class ProjectController extends AbstractController
     }
 
     $project = $this->project_manager->find($id);
-    if (!$project instanceof Program || $project->getUser() !== $user) {
+    if (!$project instanceof Project || $project->getUser() !== $user) {
       return new Response(null, Response::HTTP_NOT_FOUND);
     }
 

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\Project;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Remix\ProgramRemixRelation;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Remix\ProjectRemixRelation;
 use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ProgramRemixRelation>
+ * @extends ServiceEntityRepository<ProjectRemixRelation>
  */
-class ProgramRemixRepository extends ServiceEntityRepository
+class ProjectRemixRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
   {
-    parent::__construct($managerRegistry, ProgramRemixRelation::class);
+    parent::__construct($managerRegistry, ProjectRemixRelation::class);
   }
 
   public function getAncestorRelations(array $descendant_program_ids): array
@@ -39,7 +39,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   {
     $parents_catrobat_ancestor_relations = $this->getAncestorRelations($descendant_program_ids);
 
-    return array_unique(array_map(static fn (ProgramRemixRelation $relation): string => $relation->getAncestorId(), $parents_catrobat_ancestor_relations));
+    return array_unique(array_map(static fn (ProjectRemixRelation $relation): string => $relation->getAncestorId(), $parents_catrobat_ancestor_relations));
   }
 
   public function getParentAncestorRelations(array $descendant_program_ids): array
@@ -81,7 +81,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
       ->getDirectAndIndirectDescendantRelations($ancestor_program_ids_to_exclude, $descendant_program_ids)
     ;
 
-    return array_unique(array_map(static fn (ProgramRemixRelation $relation): string => $relation->getAncestorId(), $direct_and_indirect_descendant_relations));
+    return array_unique(array_map(static fn (ProjectRemixRelation $relation): string => $relation->getAncestorId(), $direct_and_indirect_descendant_relations));
   }
 
   public function getGraphDescendantIds(array $program_ids): array
@@ -90,8 +90,8 @@ class ProgramRemixRepository extends ServiceEntityRepository
 
     $result_data = $qb
       ->select('r2.descendant_id')
-      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('r1.ancestor_id', 'p.id'))
-      ->innerJoin(ProgramRemixRelation::class, 'r2', Join::WITH, $qb->expr()->eq('r1.ancestor_id', 'r2.ancestor_id'))
+      ->innerJoin(Project::class, 'p', Join::WITH, $qb->expr()->eq('r1.ancestor_id', 'p.id'))
+      ->innerJoin(ProjectRemixRelation::class, 'r2', Join::WITH, $qb->expr()->eq('r1.ancestor_id', 'r2.ancestor_id'))
       ->where('r1.descendant_id IN (:program_ids)')
       ->andWhere($qb->expr()->eq('p.remix_root', $qb->expr()->literal(true)))
       ->setParameter('program_ids', $program_ids)
@@ -121,7 +121,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   {
     $catrobat_root_descendant_relations = $this->getDescendantRelations($ancestor_program_ids);
 
-    return array_unique(array_map(static fn (ProgramRemixRelation $relation): string => $relation->getDescendantId(), $catrobat_root_descendant_relations));
+    return array_unique(array_map(static fn (ProjectRemixRelation $relation): string => $relation->getDescendantId(), $catrobat_root_descendant_relations));
   }
 
   public function getDirectEdgeRelationsBetweenProgramIds(array $edge_start_program_ids, array $edge_end_program_ids): array
@@ -172,7 +172,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return ProgramRemixRelation[]
+   * @return ProjectRemixRelation[]
    */
   public function getUnseenDirectDescendantRelationsOfUser(User $user): array
   {
@@ -225,7 +225,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return ProgramRemixRelation[]
+   * @return ProjectRemixRelation[]
    */
   public function getDirectParentRelationDataOfUser(string $user_id): array
   {
@@ -244,7 +244,7 @@ class ProgramRemixRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return ProgramRemixRelation[]
+   * @return ProjectRemixRelation[]
    */
   public function getDirectParentRelationsOfUsersRemixes(array $user_ids, string $exclude_user_id, array $exclude_program_ids, string $flavor): array
   {

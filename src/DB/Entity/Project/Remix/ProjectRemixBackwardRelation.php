@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\Project\Remix;
 
-use App\DB\Entity\Project\Program;
-use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
+use App\DB\Entity\Project\Project;
+use App\DB\EntityRepository\Project\ProjectRemixBackwardRepository;
 use App\Utils\TimeUtils;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'program_remix_backward_relation')]
 #[ORM\HasLifecycleCallbacks]
-#[ORM\Entity(repositoryClass: ProgramRemixBackwardRepository::class)]
-class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, ProgramCatrobatRemixRelationInterface, \Stringable
+#[ORM\Entity(repositoryClass: ProjectRemixBackwardRepository::class)]
+class ProjectRemixBackwardRelation implements ProjectRemixRelationInterface, ProjectCatrobatRemixRelationInterface, \Stringable
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------
@@ -27,16 +27,16 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   protected string $parent_id;
 
   #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id')]
-  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_backward_child_relations')]
-  protected Program $parent;
+  #[ORM\ManyToOne(targetEntity: Project::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_backward_child_relations')]
+  protected Project $parent;
 
   #[ORM\Id]
   #[ORM\Column(type: Types::GUID)]
   protected string $child_id;
 
   #[ORM\JoinColumn(name: 'child_id', referencedColumnName: 'id')]
-  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_backward_parent_relations')]
-  protected Program $child;
+  #[ORM\ManyToOne(targetEntity: Project::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_backward_parent_relations')]
+  protected Project $child;
 
   #[ORM\Column(type: Types::DATETIME_MUTABLE)]
   protected ?\DateTime $created_at = null;
@@ -44,7 +44,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
   protected ?\DateTime $seen_at = null;
 
-  public function __construct(Program $parent, Program $child)
+  public function __construct(Project $parent, Project $child)
   {
     $this->setParent($parent);
     $this->setChild($child);
@@ -67,7 +67,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     }
   }
 
-  public function setParent(Program $parent): ProgramRemixBackwardRelation
+  public function setParent(Project $parent): ProjectRemixBackwardRelation
   {
     $this->parent = $parent;
     $this->parent_id = $parent->getId() ?? throw new \LogicException('Parent program must have an ID.');
@@ -75,7 +75,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return $this;
   }
 
-  public function getParent(): Program
+  public function getParent(): Project
   {
     return $this->parent;
   }
@@ -85,7 +85,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return $this->parent_id;
   }
 
-  public function setChild(Program $child): ProgramRemixBackwardRelation
+  public function setChild(Project $child): ProjectRemixBackwardRelation
   {
     $this->child = $child;
     $this->child_id = $child->getId() ?? throw new \LogicException('Child program must have an ID.');
@@ -93,7 +93,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return $this;
   }
 
-  public function getChild(): Program
+  public function getChild(): Project
   {
     return $this->child;
   }
@@ -136,17 +136,17 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   #[\Override]
   public function getUniqueKey(): string
   {
-    return sprintf('ProgramRemixBackwardRelation(%d,%d)', $this->parent_id, $this->child_id);
+    return sprintf('ProjectRemixBackwardRelation(%d,%d)', $this->parent_id, $this->child_id);
   }
 
   #[\Override]
-  public function getAncestor(): Program
+  public function getAncestor(): Project
   {
     return $this->parent;
   }
 
   #[\Override]
-  public function getDescendant(): Program
+  public function getDescendant(): Project
   {
     return $this->child;
   }

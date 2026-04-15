@@ -3,7 +3,7 @@
 
 import { MDCTextField } from '@material/textfield'
 import '../Components/FullscreenListModal'
-import { TranslateProgram } from '../Translate/TranslateProgram'
+import { TranslateProject } from '../Translate/TranslateProject'
 import { TranslateComments } from '../Translate/TranslateComments'
 import { ProjectList } from './ProjectList'
 import { Project } from './Project'
@@ -646,7 +646,7 @@ function initComponents(data, earlyInits) {
     defaultErrorMessage: projectCommentsElement.dataset.transDefaultErrorMessage,
   })
 
-  new TranslateProgram(
+  new TranslateProject(
     projectElement.dataset.translatedByLine,
     projectElement.dataset.googleTranslateDisplayName,
     projectElement.dataset.projectId,

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramDownloads;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectDownloads;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\User\UserManager;
@@ -40,36 +40,36 @@ class CreateDownloadsCommand extends Command
     $program_name = $input->getArgument('program_name');
     $user_name = $input->getArgument('user_name');
 
-    $program = $this->program_manager->findOneByName($program_name);
+    $project = $this->program_manager->findOneByName($program_name);
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if (!$program instanceof Program || null === $user) {
+    if (!$project instanceof Project || null === $user) {
       return 1;
     }
 
     try {
-      $this->downloadProgram($program, $user);
+      $this->downloadProgram($project, $user);
     } catch (\Exception) {
       return 2;
     }
 
-    $output->writeln('Downloading '.$program->getName().' with user '.$user->getUsername());
+    $output->writeln('Downloading '.$project->getName().' with user '.$user->getUsername());
 
     return 0;
   }
 
-  private function downloadProgram(Program $program, User $user): void
+  private function downloadProgram(Project $project, User $user): void
   {
-    $download = new ProgramDownloads();
+    $download = new ProjectDownloads();
     $download->setUser($user);
-    $download->setProgram($program);
+    $download->setProject($project);
     $download->setDownloadedAt(new \DateTime());
 
-    $program->setDownloads($program->getDownloads() + 1);
+    $project->setDownloads($project->getDownloads() + 1);
 
-    $this->entity_manager->persist($program);
+    $this->entity_manager->persist($project);
     $this->entity_manager->persist($download);
     $this->entity_manager->flush();
   }

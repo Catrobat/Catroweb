@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\User\Comment;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
@@ -90,7 +90,7 @@ class UserCommentRepository extends ServiceEntityRepository
     ;
   }
 
-  public function getProjectCommentOverviewListData(Program $project): array
+  public function getProjectCommentOverviewListData(Project $project): array
   {
     return $this->createQueryBuilder('c')
       ->innerJoin('c.user', 'cu')
@@ -108,13 +108,13 @@ class UserCommentRepository extends ServiceEntityRepository
       ->where('c.program = :program')
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
-      ->setParameter('program', $project)
+      ->setParameter('project', $project)
       ->getQuery()
       ->getResult()
     ;
   }
 
-  public function getProjectCommentsPageData(Program $project, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
+  public function getProjectCommentsPageData(Project $project, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
   {
     $qb = $this->createQueryBuilder('c');
 
@@ -133,7 +133,7 @@ class UserCommentRepository extends ServiceEntityRepository
       ->where('c.program = :program')
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
-      ->setParameter('program', $project)
+      ->setParameter('project', $project)
       ->orderBy('c.uploadDate', 'DESC')
       ->addOrderBy('c.id', 'DESC')
       ->setMaxResults($limit + 1)

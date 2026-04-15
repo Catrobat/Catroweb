@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\System\Commands\DBUpdater\CronJobs;
 
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\Extension\ProjectExtensionManager;
 use App\Project\ProjectManager;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ProjectRefreshExtensionsWorkflowCommand extends Command
 {
   public function __construct(protected ProjectManager $program_manager,
-    protected ProgramRepository $program_repository,
+    protected ProjectRepository $program_repository,
     protected ProjectExtensionManager $extension_manager,
     protected ExtractedFileRepository $extracted_file_repo,
     protected EntityManagerInterface $entity_manager)

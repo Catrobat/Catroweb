@@ -216,7 +216,7 @@ class ParentPortalController extends AbstractController
         'name' => $p->getName(),
         'description' => $p->getDescription(),
         'uploaded_at' => $p->getUploadedAt()?->format(\DateTimeInterface::ATOM),
-      ], $user->getPrograms()->toArray()),
+      ], $user->getProjects()->toArray()),
     ];
 
     $json = json_encode($export, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) ?: '{}';

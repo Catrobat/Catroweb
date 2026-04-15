@@ -7,15 +7,15 @@ namespace App\System\Commands\Reset;
 use App\DB\Entity\FeaturedBanner;
 use App\DB\Entity\Moderation\ContentAppeal;
 use App\DB\Entity\Moderation\ContentReport;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\System\Statistic;
 use App\DB\Entity\User\Comment\UserComment;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\System\StatisticRepository;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportCategory;
 use App\System\Commands\Helpers\CommandHelper;
-use App\System\Commands\ImportProjects\ProgramImportCommand;
+use App\System\Commands\ImportProjects\ProjectImportCommand;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Random\RandomException;
@@ -35,7 +35,7 @@ class ResetCommand extends Command
 
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
-    private readonly ProgramRepository $program_manager,
+    private readonly ProjectRepository $program_manager,
     private readonly StatisticRepository $statistic_repository,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly UserManager $user_manager)
@@ -53,7 +53,7 @@ class ResetCommand extends Command
         self::DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT)
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED,
         'Generates remix graph based on given layout',
-        ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT)
+        ProjectImportCommand::REMIX_GRAPH_NO_LAYOUT)
       ->addOption('with-remixes', null, InputOption::VALUE_NONE,
         'Should projects have remixes?')
     ;
@@ -130,18 +130,18 @@ class ResetCommand extends Command
       }
     }
 
-    $programs = $this->program_manager->findAll();
+    $projects = $this->program_manager->findAll();
     $program_names = [];
-    /** @var Program $program */
-    foreach ($programs as $program) {
-      $program_names[] = $program->getName();
+    /** @var Project $project */
+    foreach ($projects as $project) {
+      $program_names[] = $project->getName();
     }
 
-    if ([] !== $programs) {
-      $this->createStudios($user_array, $programs, $output);
+    if ([] !== $projects) {
+      $this->createStudios($user_array, $projects, $output);
     }
 
-    $this->createModerationData($programs, $user_array, $output);
+    $this->createModerationData($projects, $user_array, $output);
     // if ($input->hasOption('with-remixes')) {
     // $this->remixGen($program_names, $output);  // Currently not working
     // }
@@ -343,7 +343,7 @@ class ResetCommand extends Command
 
   /**
    * @param non-empty-array<string>  $user_array
-   * @param non-empty-array<Program> $program_array
+   * @param non-empty-array<Project> $program_array
    *
    * @throws ExceptionInterface
    * @throws RandomException
@@ -382,21 +382,21 @@ class ResetCommand extends Command
       }
 
       $numPrograms = random_int(3, 10);
-      $programs = [];
+      $projects = [];
       for ($k = 0; $k < $numPrograms; ++$k) {
         $random_program_id = array_rand($program_array);
-        /** @var Program $program */
-        $program = $program_array[$random_program_id];
-        $program->getUser()->getUserIdentifier();
+        /** @var Project $project */
+        $project = $program_array[$random_program_id];
+        $project->getUser()->getUserIdentifier();
 
         foreach ($users as $user) {
-          if ($user != $program->getUser()->getUsername()) {
+          if ($user != $project->getUser()->getUsername()) {
             continue;
           }
           if (!$isPublic) {
             continue;
           }
-          $programs[] = $program->getName();
+          $projects[] = $project->getName();
         }
       }
 
@@ -408,7 +408,7 @@ class ResetCommand extends Command
         'is_enabled' => $isEnabled,
         'allow_comments' => $allowComments,
         'users' => $users,
-        'projects' => $programs,
+        'projects' => $projects,
         'status' => $status,
       ];
 
@@ -609,12 +609,12 @@ class ResetCommand extends Command
   }
 
   /**
-   * @param Program[]               $programs
+   * @param Project[]               $projects
    * @param non-empty-array<string> $user_array
    *
    * @throws RandomException
    */
-  private function createModerationData(array $programs, array $user_array, OutputInterface $output): void
+  private function createModerationData(array $projects, array $user_array, OutputInterface $output): void
   {
     $output->writeln('Creating moderation test data...');
 
@@ -626,7 +626,7 @@ class ResetCommand extends Command
 
     // Report a subset of projects
     $rand_interval = random_int(4, 6);
-    foreach ($programs as $i => $program) {
+    foreach ($projects as $i => $project) {
       if (0 !== $i % $rand_interval) {
         continue;
       }
@@ -636,14 +636,14 @@ class ResetCommand extends Command
       if (!$reporter instanceof \App\DB\Entity\User\User) {
         continue;
       }
-      if ($reporter->getId() === $program->getUser()?->getId()) {
+      if ($reporter->getId() === $project->getUser()?->getId()) {
         continue;
       }
 
       $report = new ContentReport();
       $report->setReporter($reporter);
       $report->setContentType(ContentType::Project->value);
-      $report->setContentId($program->getId());
+      $report->setContentId($project->getId());
       $report->setCategory($project_categories[array_rand($project_categories)]);
       $report->setNote('This project seems problematic');
       $report->setReporterTrustScore(random_int(10, 30) / 10.0);
@@ -674,8 +674,8 @@ class ResetCommand extends Command
     }
 
     // Auto-hide one project and create an appeal
-    if (count($programs) > 2) {
-      $hidden_project = $programs[1];
+    if (count($projects) > 2) {
+      $hidden_project = $projects[1];
       $hidden_project->setAutoHidden(true);
 
       $owner = $hidden_project->getUser();

@@ -21,8 +21,8 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
 
-#[AsCommand(name: 'catrobat:import', description: 'Import programs from a given directory to the application')]
-class ProgramImportCommand extends Command
+#[AsCommand(name: 'catrobat:import', description: 'Import projects from a given directory to the application')]
+class ProjectImportCommand extends Command
 {
   final public const string REMIX_GRAPH_NO_LAYOUT = '0';
 
@@ -38,12 +38,12 @@ class ProgramImportCommand extends Command
       ->addArgument('directory', InputArgument::REQUIRED,
         'Directory containing catrobat files for import')
       ->addArgument('user', InputArgument::REQUIRED,
-        'User who will be the owner of these programs')
+        'User who will be the owner of these projects')
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED,
         'Generates remix graph based on given layout',
         self::REMIX_GRAPH_NO_LAYOUT)
       ->addOption('limit', 'l', InputOption::VALUE_REQUIRED,
-        'Maximum number of programs to import',
+        'Maximum number of projects to import',
         '0')
     ;
   }
@@ -95,9 +95,9 @@ class ProgramImportCommand extends Command
       try {
         $output->writeln('Importing file '.$file->getFilename());
         $add_program_request = new AddProjectRequest($user, new File($file->__toString()));
-        $program = $this->remix_manipulation_program_manager->addProject($add_program_request);
-        $program->setViews(random_int(0, 10));
-        $output->writeln('Added program <'.$program->getName().'> for user: <'.$username.'>');
+        $project = $this->remix_manipulation_program_manager->addProject($add_program_request);
+        $project->setViews(random_int(0, 10));
+        $output->writeln('Added program <'.$project->getName().'> for user: <'.$username.'>');
         ++$imported;
       } catch (InvalidCatrobatFileException $e) {
         $output->writeln('FAILED to add program!');

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\DB\EntityRepository\User\Notification;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\ModerationNotification;
-use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\Notifications\ProjectDeletedNotification;
 use App\DB\Entity\User\Notifications\ProjectExpiringNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
@@ -35,7 +35,7 @@ class NotificationRepository extends ServiceEntityRepository
   /**
    * @return LikeNotification[]
    */
-  public function getLikeNotificationsForProject(Program $project, ?User $owner = null, ?User $likeFrom = null): array
+  public function getLikeNotificationsForProject(Project $project, ?User $owner = null, ?User $likeFrom = null): array
   {
     $qb = $this->getEntityManager()->createQueryBuilder();
 
@@ -201,7 +201,7 @@ class NotificationRepository extends ServiceEntityRepository
   {
     match ($type) {
       'reaction' => $qb->andWhere('n INSTANCE OF '.LikeNotification::class),
-      'follow' => $qb->andWhere('(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProgramNotification::class.')'),
+      'follow' => $qb->andWhere('(n INSTANCE OF '.FollowNotification::class.' OR n INSTANCE OF '.NewProjectNotification::class.')'),
       'comment' => $qb->andWhere('(n INSTANCE OF '.CommentNotification::class.' OR n INSTANCE OF '.StudioCommentNotification::class.')'),
       'remix' => $qb->andWhere('n INSTANCE OF '.RemixNotification::class),
       'moderation' => $qb->andWhere('n INSTANCE OF '.ModerationNotification::class),

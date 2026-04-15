@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DB\Entity\User\Notifications;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,17 +15,17 @@ class ProjectExpiringNotification extends CatroNotification
   public function __construct(
     User $user,
     #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
-    #[ORM\ManyToOne(targetEntity: Program::class)]
-    private ?Program $program = null,
+    #[ORM\ManyToOne(targetEntity: Project::class)]
+    private ?Project $project = null,
     #[ORM\Column(name: 'expiry_days', type: Types::INTEGER, nullable: true)]
     private ?int $expiry_days = null,
   ) {
     parent::__construct($user, '', '', 'project_expiring');
   }
 
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   public function getExpiryDays(): ?int

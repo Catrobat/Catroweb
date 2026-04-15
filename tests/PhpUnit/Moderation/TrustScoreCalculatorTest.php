@@ -7,7 +7,7 @@ namespace Tests\PhpUnit\Moderation;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentModerationActionRepository;
 use App\DB\EntityRepository\Moderation\ContentReportRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\Moderation\TrustScoreCalculator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +27,7 @@ final class TrustScoreCalculatorTest extends TestCase
 {
   private function buildCalculator(
     ?ContentReportRepository $report_repository = null,
-    ?ProgramRepository $program_repository = null,
+    ?ProjectRepository $program_repository = null,
     ?UserCommentRepository $comment_repository = null,
     ?CacheItemPoolInterface $cache = null,
     ?ContentModerationActionRepository $action_repository = null,
@@ -48,7 +48,7 @@ final class TrustScoreCalculatorTest extends TestCase
 
     return new TrustScoreCalculator(
       $report_repository,
-      $program_repository ?? $this->createStub(ProgramRepository::class),
+      $program_repository ?? $this->createStub(ProjectRepository::class),
       $comment_repository ?? $this->createStub(UserCommentRepository::class),
       $cache,
       $action_repository ?? $this->createStub(ContentModerationActionRepository::class),
@@ -125,7 +125,7 @@ final class TrustScoreCalculatorTest extends TestCase
   #[Group('unit')]
   public function testActivityScoreCountsProjects(): void
   {
-    $program_repo = $this->createStub(ProgramRepository::class);
+    $program_repo = $this->createStub(ProjectRepository::class);
     $program_repo->method('count')->willReturn(10);
 
     $user = $this->createUserStub(created_at: new \DateTime());
@@ -140,7 +140,7 @@ final class TrustScoreCalculatorTest extends TestCase
   #[Group('unit')]
   public function testActivityScoreCapsAtThree(): void
   {
-    $program_repo = $this->createStub(ProgramRepository::class);
+    $program_repo = $this->createStub(ProjectRepository::class);
     $program_repo->method('count')->willReturn(50);
 
     $user = $this->createUserStub(created_at: new \DateTime());

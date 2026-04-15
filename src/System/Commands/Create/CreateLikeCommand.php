@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
@@ -47,43 +47,43 @@ class CreateLikeCommand extends Command
     $program_name = $input->getArgument('program_name');
     $user_name = $input->getArgument('user_name');
 
-    $program = $this->remix_manipulation_program_manager->findOneByName($program_name);
+    $project = $this->remix_manipulation_program_manager->findOneByName($program_name);
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($user_name);
 
-    if (!$program instanceof Program || null === $user) {
+    if (!$project instanceof Project || null === $user) {
       $output->writeln('Liking '.$program_name.' with user '.$user_name.' failed');
 
       return 1;
     }
 
     try {
-      $program_user = $program->getUser();
+      $program_user = $project->getUser();
       if (null !== $program_user && $program_user !== $user) {
-        $this->likeProgram($program, $user);
-        $notification = new LikeNotification($program_user, $user, $program);
+        $this->likeProgram($project, $user);
+        $notification = new LikeNotification($program_user, $user, $project);
         $notification->setSeen(boolval(random_int(0, 3)));
         $this->notification_service->addNotification($notification);
       }
     } catch (\Exception) {
-      $output->writeln('Liking '.$program->getName().' with user '.$user_name.'failed');
+      $output->writeln('Liking '.$project->getName().' with user '.$user_name.'failed');
 
       return 2;
     }
 
-    $output->writeln('Liking '.$program->getName().' with user '.$user_name);
+    $output->writeln('Liking '.$project->getName().' with user '.$user_name);
 
     return 0;
   }
 
-  private function likeProgram(Program $program, User $user): void
+  private function likeProgram(Project $project, User $user): void
   {
-    $program_like = $this->entity_manager->getRepository(ProgramLike::class)->findOneBy(['program' => $program, 'user' => $user]);
+    $program_like = $this->entity_manager->getRepository(ProjectLike::class)->findOneBy(['project' => $project, 'user' => $user]);
     if (null === $program_like) {
       /** @var non-empty-array<int, string> $type_names */
-      $type_names = ProgramLike::$TYPE_NAMES;
-      $like = new ProgramLike($program, $user, (int) array_rand($type_names));
+      $type_names = ProjectLike::$TYPE_NAMES;
+      $like = new ProjectLike($project, $user, (int) array_rand($type_names));
       $this->entity_manager->persist($like);
       $this->entity_manager->flush();
     }

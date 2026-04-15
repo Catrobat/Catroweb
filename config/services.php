@@ -72,8 +72,8 @@ use App\DB\Entity\MediaLibrary\MediaCategory;
 use App\DB\Entity\Moderation\ContentAppeal;
 use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\Project\Extension;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\ExampleProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\ExampleProject;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\System\CronJob;
@@ -235,7 +235,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'show_mosaic_button' => false,
         'default' => true,
         'code' => null,
-        'model_class' => Program::class,
+        'model_class' => Project::class,
         'controller' => null,
         'pager_type' => 'simple',
       ]
@@ -248,7 +248,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'manager_type' => 'orm',
         'label' => 'Approve Projects',
         'code' => null,
-        'model_class' => Program::class,
+        'model_class' => Project::class,
         'controller' => ApproveProjectsController::class,
       ]
     )
@@ -261,7 +261,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'label' => 'Broken Projects',
         'show_mosaic_button' => false,
         'code' => null,
-        'model_class' => Program::class,
+        'model_class' => Project::class,
         'controller' => null,
         'pager_type' => 'simple',
       ]
@@ -349,7 +349,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'manager_type' => 'orm',
         'label' => 'Example Projects',
         'code' => null,
-        'model_class' => ExampleProgram::class,
+        'model_class' => ExampleProject::class,
         'controller' => null,
       ]
     )
@@ -361,7 +361,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'manager_type' => 'orm',
         'label' => 'Upload Project',
         'code' => null,
-        'model_class' => Program::class,
+        'model_class' => Project::class,
         'controller' => UploadProjectController::class,
       ]
     )

@@ -11,7 +11,7 @@ use App\Api\Services\Reactions\ReactionsApiFacade;
 use App\Api\Services\Reactions\ReactionsApiLoader;
 use App\Api\Services\Reactions\ReactionsApiProcessor;
 use App\Api\Services\Reactions\ReactionsResponseManager;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CodeView\CodeTreeBuilder;
 use App\Project\Remix\RemixManager;
@@ -125,7 +125,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
@@ -153,7 +153,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
@@ -181,7 +181,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
@@ -213,7 +213,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionCounts')->willReturn([
@@ -298,7 +298,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
@@ -322,7 +322,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $this->reactions_facade->method('getLoader')->willReturn($loader);
@@ -374,7 +374,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionCounts')->willReturn([
@@ -408,7 +408,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionCounts')->willReturn([
@@ -466,7 +466,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionUsersPaginated')->willReturn([
@@ -501,7 +501,7 @@ final class ReactionsApiTest extends TestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->reactions_facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $project = $this->createStub(Program::class);
+    $project = $this->createStub(Project::class);
     $loader = $this->createStub(ReactionsApiLoader::class);
     $loader->method('findProjectIfVisibleToCurrentUser')->willReturn($project);
     $loader->method('getReactionUsersPaginated')->willReturn([

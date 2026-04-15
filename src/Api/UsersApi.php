@@ -11,7 +11,7 @@ use App\Api\Services\Studio\StudioResponseManager;
 use App\Api\Services\User\UserApiFacade;
 use App\Api\Traits\CursorPaginationTrait;
 use App\Api\Traits\KeysetCursorTrait;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\Security\Captcha\CaptchaVerifier;
@@ -399,15 +399,15 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
     ]);
 
     $projects = [];
-    foreach ($user->getPrograms() as $program) {
+    foreach ($user->getProjects() as $project) {
       $projects[] = new UserDataExportResponseProjectsInner([
-        'id' => $program->getId(),
-        'name' => $program->getName(),
-        'description' => $program->getDescription(),
-        'uploaded_at' => $program->getUploadedAt(),
-        'views' => $program->getViews(),
-        'downloads' => $program->getDownloads(),
-        'private' => $program->getPrivate(),
+        'id' => $project->getId(),
+        'name' => $project->getName(),
+        'description' => $project->getDescription(),
+        'uploaded_at' => $project->getUploadedAt(),
+        'views' => $project->getViews(),
+        'downloads' => $project->getDownloads(),
+        'private' => $project->getPrivate(),
       ]);
     }
 
@@ -435,7 +435,7 @@ class UsersApi extends AbstractApiController implements UsersApiInterface
     foreach ($user->getLikes() as $like) {
       $reactions[] = new UserDataExportResponseReactionsInner([
         'project_id' => $like->getProgramId(),
-        'type' => ProgramLike::$TYPE_NAMES[$like->getType()] ?? 'unknown',
+        'type' => ProjectLike::$TYPE_NAMES[$like->getType()] ?? 'unknown',
         'created_at' => $like->getCreatedAt(),
       ]);
     }

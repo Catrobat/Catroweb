@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Project\EntityListener;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\TagRepository;
@@ -14,7 +14,7 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PostUpdateEventArgs;
 use Doctrine\ORM\Events;
 
-#[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: Program::class)]
+#[AsEntityListener(event: Events::postUpdate, method: 'postUpdate', entity: Project::class)]
 class ProjectPostUpdateEntityListener
 {
   public function __construct(
@@ -27,7 +27,7 @@ class ProjectPostUpdateEntityListener
   /**
    * @throws \Exception
    */
-  public function postUpdate(Program $project, PostUpdateEventArgs $args): void
+  public function postUpdate(Project $project, PostUpdateEventArgs $args): void
   {
     $user = $project->getUser();
     $this->addCodingJam092021Achievement($project, $user);
@@ -37,7 +37,7 @@ class ProjectPostUpdateEntityListener
   /**
    * @throws \Exception
    */
-  protected function addCodingJam092021Achievement(Program $project, User $user): void
+  protected function addCodingJam092021Achievement(Project $project, User $user): void
   {
     $tags = $project->getTags();
     /** @var Tag $tag */
@@ -58,7 +58,7 @@ class ProjectPostUpdateEntityListener
     }
   }
 
-  private function invalidateTranslationCacheIfNecessary(Program $project): void
+  private function invalidateTranslationCacheIfNecessary(Project $project): void
   {
     if ($project->shouldInvalidateTranslationCache()) {
       $this->machine_translation_repository->invalidateCachedTranslation($project);

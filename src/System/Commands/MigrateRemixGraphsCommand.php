@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\System\Commands;
 
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\ProjectManager;
 use App\Project\Remix\RemixData;
@@ -31,7 +31,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
 
-#[AsCommand(name: 'catrobat:remixgraph:migrate', description: 'Imports remix graphs from all XML files of uploaded programs to database')]
+#[AsCommand(name: 'catrobat:remixgraph:migrate', description: 'Imports remix graphs from all XML files of uploaded projects to database')]
 class MigrateRemixGraphsCommand extends Command
 {
   private readonly AsyncHttpClient $async_http_client;
@@ -43,7 +43,7 @@ class MigrateRemixGraphsCommand extends Command
   public function __construct(private readonly UserManager $user_manager,
     private readonly ProjectManager $project_manager, private readonly RemixManager $remix_manager,
     private readonly EntityManagerInterface $entity_manager, private readonly CatrobatFileExtractor $file_extractor,
-    private readonly ProgramRepository $project_repository,
+    private readonly ProjectRepository $project_repository,
     #[Autowire('%kernel.project_dir%/CatrobatRemixMigration.lock')]
     private readonly string $migration_lock_file_path)
   {
@@ -71,7 +71,7 @@ class MigrateRemixGraphsCommand extends Command
   {
     $this
       ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat files for import')
-      ->addArgument('user', InputArgument::OPTIONAL, 'User who will be the owner of these programs '.
+      ->addArgument('user', InputArgument::OPTIONAL, 'User who will be the owner of these projects '.
         '(only required if --debug-import-missing-programs is set)')
       ->addOption('debug-import-missing-programs', 'debug')
     ;
@@ -121,7 +121,7 @@ class MigrateRemixGraphsCommand extends Command
    */
   private function migrateRemixDataOfExistingProjects(OutputInterface $output, string $directory): void
   {
-    /* @var Program $unmigrated_project */
+    /* @var Project $unmigrated_project */
 
     $migration_start_time = TimeUtils::getDateTime();
     $progress_bar_format_simple = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
@@ -341,7 +341,7 @@ class MigrateRemixGraphsCommand extends Command
   /**
    * @throws \Exception
    */
-  private function addRemixData(Program $project, array $remixes_data, bool $is_update = false): void
+  private function addRemixData(Project $project, array $remixes_data, bool $is_update = false): void
   {
     $scratch_remixes_data = array_filter($remixes_data, static fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
     $scratch_info_data = [];
@@ -354,7 +354,7 @@ class MigrateRemixGraphsCommand extends Command
     }
 
     $preserved_version = $project->getVersion();
-    $project->setVersion($is_update ? (Program::INITIAL_VERSION + 1) : Program::INITIAL_VERSION);
+    $project->setVersion($is_update ? (Project::INITIAL_VERSION + 1) : Project::INITIAL_VERSION);
 
     $this->remix_manager->addScratchProjects($scratch_info_data);
     $this->remix_manager->addRemixes($project, $remixes_data);
@@ -395,7 +395,7 @@ class MigrateRemixGraphsCommand extends Command
 
     $number_imported_projects = 0;
 
-    $metadata = $this->entity_manager->getClassMetaData(Program::class);
+    $metadata = $this->entity_manager->getClassMetaData(Project::class);
     $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     $batch_size = 300;
@@ -428,7 +428,7 @@ class MigrateRemixGraphsCommand extends Command
         continue;
       }
 
-      $project = new Program();
+      $project = new Project();
       $project->setId($project_id);
       $project->setName($extracted_file->getName());
       $project->setDescription($extracted_file->getDescription());

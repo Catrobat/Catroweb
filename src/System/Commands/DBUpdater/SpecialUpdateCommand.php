@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\System\Commands\DBUpdater;
 
 use App\DB\Entity\System\Statistic;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\System\StatisticRepository;
 use App\DB\EntityRepository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +21,7 @@ class SpecialUpdateCommand extends Command
     protected EntityManagerInterface $entity_manager,
     protected StatisticRepository $statistic_repository,
     protected UserRepository $user_repository,
-    protected ProgramRepository $project_repository,
+    protected ProjectRepository $project_repository,
   ) {
     parent::__construct();
   }
