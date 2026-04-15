@@ -14,7 +14,8 @@
 
 <div class="row justify-content-center">
   <div class="login-container">
-    <a class="btn social-login-btn me-2" id="btn-login-google" href="{{ path('hwi_oauth_service_redirect', {service: 'google'}) }}">
+    <a class="btn social-login-btn me-2" id="btn-login-google"
+       href="{{ app.environment in ['dev', 'test'] ? path('dev_fake_oauth') : path('hwi_oauth_service_redirect', {service: 'google'}) }}">
       <img class="social-login-btn__img" alt="Google Login" src="{{ asset('images/social/btn_google_custom.png') }}"/>
     </a>
     {# Facebook and Apple OAuth disabled — see GitHub issues #6679 and #6680 #}

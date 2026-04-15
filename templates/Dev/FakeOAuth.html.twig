@@ -1,0 +1,44 @@
+{% extends 'Layout/Base.html.twig' %}
+
+{% block header '' %}
+
+{% block body %}
+
+  <div class="content-card">
+    <div class="row justify-content-center">
+      <div class="login-container mb-4">
+
+        <h1>Dev: Fake Google OAuth</h1>
+        <p class="text-muted mb-4">Simulates Google OAuth login. Only available in dev environment.</p>
+
+        <form method="post" action="{{ path('dev_fake_oauth_submit') }}">
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control"
+                   value="fake-google-user@example.com" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" id="first_name" name="first_name" class="form-control" value="Dev">
+          </div>
+
+          <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" id="last_name" name="last_name" class="form-control" value="User">
+          </div>
+
+          <button type="submit" id="btn-fake-oauth-submit" class="btn btn-warning">
+            Login / Register as Fake Google User
+          </button>
+
+          <a href="{{ path('login') }}" class="ms-2 btn btn-secondary">Back to Login</a>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock body %}

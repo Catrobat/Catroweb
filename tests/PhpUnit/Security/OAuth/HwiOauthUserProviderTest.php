@@ -6,6 +6,7 @@ namespace Tests\PhpUnit\Security\OAuth;
 
 use App\DB\Entity\User\User;
 use App\Security\OAuth\HwiOauthUserProvider;
+use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
 use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GoogleResourceOwner;
@@ -72,7 +73,9 @@ json;
     $container = static::getContainer();
     /** @var UserManager $user_manager */
     $user_manager = $container->get(UserManager::class);
-    $this->object = new HwiOauthUserProvider($user_manager);
+    /** @var AchievementManager $achievement_manager */
+    $achievement_manager = $container->get(AchievementManager::class);
+    $this->object = new HwiOauthUserProvider($user_manager, $achievement_manager);
     $this->object->setProperties($this->properties);
   }
 

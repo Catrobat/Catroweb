@@ -6,6 +6,7 @@ namespace App\Security\OAuth;
 
 use App\DB\Entity\User\User;
 use App\Security\PasswordGenerator;
+use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
@@ -15,8 +16,10 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
 {
   protected array $properties = ['identifier' => 'id', 'google' => 'google_id', 'facebook' => 'facebook_id', 'apple' => 'apple_id'];
 
-  public function __construct(protected UserManager $user_manager)
-  {
+  public function __construct(
+    protected UserManager $user_manager,
+    private readonly AchievementManager $achievement_manager,
+  ) {
   }
 
   public function setProperties(array $properties): self
@@ -45,7 +48,8 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
     if (!$user instanceof User) {
       $user = $this->user_manager->findUserByEmail($response->getEmail());
       // if user with the given email doesnt exists create a new user
-      if (!$user instanceof UserInterface) {
+      $isNewUser = false;
+      if (!$user instanceof User) {
         $user = $this->user_manager->create();
         // generate random username for example user12345678, needs to be discussed
         $user->setUsername($this->createRandomUsername($response));
@@ -53,11 +57,17 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
         $user->setEnabled(true);
         $user->setPassword(PasswordGenerator::generateRandomPassword());
         $user->setOauthUser(true);
+        $user->setVerified(true);
+        $isNewUser = true;
       }
 
       $user->{$setter_id}($username);
       $user->{$setter_access_token}($access_token);
       $this->user_manager->updateUser($user);
+
+      if ($isNewUser) {
+        $this->achievement_manager->unlockAchievementAccountVerification($user);
+      }
 
       return $user;
     }

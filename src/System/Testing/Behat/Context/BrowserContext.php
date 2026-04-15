@@ -37,6 +37,8 @@ class BrowserContext extends MinkContext implements Context
   {
     $this->getSession()->start();
     $this->getSession()->resizeWindow(412, 823);
+    $this->getSession()->visit($this->getMinkParameter('base_url'));
+    $this->getSession()->executeScript("localStorage.removeItem('oauthSignIn')");
   }
 
   /**
