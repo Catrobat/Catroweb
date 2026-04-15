@@ -313,35 +313,30 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
         $sort_order,
         $flavor_list,
       );
-      $responseCode = Response::HTTP_OK;
       $response = $this->facade->getResponseManager()->createAssetsResponse($assets, $limit, $offset);
-      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
-      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    } else {
+      $cursor_data = $this->decodeKeysetCursor($cursor);
+      if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
 
-      return $response;
+        return null;
+      }
+
+      $assets = $this->facade->getLoader()->getAssetsPaginatedKeyset(
+        $limit,
+        $category_id,
+        $db_file_type,
+        $flavor,
+        $search,
+        $sort_by,
+        $sort_order,
+        $cursor_data['value'] ?? null,
+        $cursor_data['id'] ?? null
+      );
+      $response = $this->facade->getResponseManager()->createAssetsKeysetResponse($assets, $limit, $sort_by);
     }
-
-    $cursor_data = $this->decodeKeysetCursor($cursor);
-    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
-
-      return null;
-    }
-
-    $assets = $this->facade->getLoader()->getAssetsPaginatedKeyset(
-      $limit,
-      $category_id,
-      $db_file_type,
-      $flavor,
-      $search,
-      $sort_by,
-      $sort_order,
-      $cursor_data['value'] ?? null,
-      $cursor_data['id'] ?? null
-    );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createAssetsKeysetResponse($assets, $limit, $sort_by);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
