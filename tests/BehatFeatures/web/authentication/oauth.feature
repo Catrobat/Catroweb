@@ -45,17 +45,17 @@ Feature:
     And I wait for the page to be loaded
     When I click "#btn-login-google"
     And I wait for the page to be loaded
-    Then I should be on "/dev/fake-oauth"
+    Then I should be on "/app/dev/fake-oauth"
     When I fill in "email" with "new-oauth-user@catrobat.org"
     And I fill in "first_name" with "New"
     And I fill in "last_name" with "OAuthUser"
     And I click "#btn-fake-oauth-submit"
     And I wait for the page to be loaded
-    Then I should be on "/complete-registration"
+    Then I should be on "/app/complete-registration"
     When I fill in "date-of-birth__input" with "2000-06-15"
     And I click "#complete-registration-form button[type=submit]"
     And I wait for the page to be loaded
-    Then I should be on "/"
+    Then I should be on "/app/"
     And I should see "External account sign in information"
     And I should see "random username"
     When I click ".swal2-confirm"
