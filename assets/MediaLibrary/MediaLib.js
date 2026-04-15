@@ -1,5 +1,6 @@
 import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
+import { createPictureElement } from '../Layout/ImageVariants'
 
 export function MediaLib(
   categoryId,
@@ -323,15 +324,24 @@ export function MediaLib(
   }
 
   function buildImageFromFile(file) {
-    const image = document.createElement('img')
-    image.setAttribute('alt', file.id)
-    // Use thumbnail_url from API response
-    image.setAttribute('src', file.thumbnail_url || file.download_url)
-    image.setAttribute('title', file.name)
-    image.addEventListener('error', function () {
-      image.remove()
+    const fallback = file.download_url || null
+    const picture = createPictureElement(file.thumbnail || null, 'thumb', fallback, {
+      alt: file.name,
+      title: file.name,
     })
-    return image
+    if (picture.tagName === 'IMG') {
+      picture.addEventListener('error', function () {
+        picture.remove()
+      })
+    } else {
+      const img = picture.querySelector('img')
+      if (img) {
+        img.addEventListener('error', function () {
+          picture.remove()
+        })
+      }
+    }
+    return picture
   }
 }
 

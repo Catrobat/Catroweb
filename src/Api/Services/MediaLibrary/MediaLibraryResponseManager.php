@@ -11,6 +11,7 @@ use App\DB\Entity\MediaLibrary\MediaAsset;
 use App\DB\Entity\MediaLibrary\MediaCategory;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\MediaLibrary\MediaAssetRepository;
+use App\Storage\Images\ImageVariantUrlBuilder;
 use OpenAPI\Server\Model\MediaAssetResponse;
 use OpenAPI\Server\Model\MediaAssetsListResponse;
 use OpenAPI\Server\Model\MediaCategoriesListResponse;
@@ -32,6 +33,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
     private readonly MediaLibraryApiLoader $loader,
     private readonly MediaAssetRepository $asset_repository,
     private readonly ?UrlHelper $url_helper,
+    private readonly ImageVariantUrlBuilder $image_variant_url_builder,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -225,10 +227,13 @@ class MediaLibraryResponseManager extends AbstractResponseManager
     $download_path = $this->asset_repository->getWebPath($asset->getId(), $asset->getExtension());
     $download_url = $base_url.$download_path;
 
-    $thumbnail_url = null;
+    $thumbnail = null;
     if ($asset->isImage()) {
-      $thumbnail_path = $this->asset_repository->getThumbnailWebPath($asset->getId(), $asset->getExtension());
-      $thumbnail_url = $base_url.$thumbnail_path;
+      $thumbnail = $this->image_variant_url_builder->build(
+        $this->asset_repository->getThumbnailDir(),
+        $this->asset_repository->getThumbnailPublicPath(),
+        $asset->getId(),
+      );
     }
 
     // Calculate file size
@@ -256,7 +261,7 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       'active' => $asset->getActive(),
       'flavors' => array_map(fn ($flavor) => $flavor->getName(), $asset->getFlavors()->toArray()),
       'download_url' => $download_url,
-      'thumbnail_url' => $thumbnail_url,
+      'thumbnail' => $thumbnail,
       'created_at' => $asset->getCreatedAt(),
       'updated_at' => $asset->getUpdatedAt(),
     ]);
