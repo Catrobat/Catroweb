@@ -137,6 +137,9 @@ export class FeaturedBanner {
     const carouselInstance = new Carousel(carouselDiv, {
       interval: prefersReducedMotion ? false : 5000,
       ride: prefersReducedMotion ? false : 'carousel',
+      // Keep manual pause/play deterministic: Bootstrap's default `pause: 'hover'`
+      // can restart cycling on mouseleave/touchend via `_maybeEnableCycle()`.
+      pause: false,
     })
 
     // Pause/play toggle button for auto-playing carousel (a11y)
