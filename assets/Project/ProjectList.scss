@@ -117,7 +117,7 @@ $container-padding: 1rem;
       display: flex;
       flex-direction: row;
       align-items: center;
-      color: $text-muted;
+      color: light-dark(#5a6374, #a0aec0);
 
       .material-icons {
         font-size: 1.25rem;
@@ -126,7 +126,7 @@ $container-padding: 1rem;
       &__value {
         padding-left: 0.3rem;
         font-size: 0.9rem;
-        color: $text-muted;
+        color: light-dark(#5a6374, #a0aec0);
 
         @include text-truncate;
       }
@@ -421,7 +421,7 @@ $container-padding: 1rem;
   gap: 0.15rem 0.75rem;
   margin-top: 0.15rem;
   font-size: 0.78rem;
-  color: light-dark(#6c757d, #a0aec0);
+  color: light-dark(#5a6374, #a0aec0);
   line-height: 1.2;
 }
 
@@ -438,7 +438,7 @@ $container-padding: 1rem;
   &--retention {
     display: flex;
     font-size: 0.6rem;
-    color: light-dark(#bbb, #666);
+    color: light-dark(#5a6374, #a0aec0);
 
     .material-icons {
       font-size: 0.65rem;

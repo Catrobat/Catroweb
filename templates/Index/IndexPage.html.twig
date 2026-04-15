@@ -4,14 +4,31 @@
 {% block head %}
   {{ encore_entry_link_tags('index_page') }}
   {% if first_banner is defined and first_banner %}
-    {% set _preload_url = (first_banner.image_variants and first_banner.image_variants.detail and first_banner.image_variants.detail.webp1x)
-        ? first_banner.image_variants.detail.webp1x
-        : '/images/default/screenshot-detail@1x.webp' %}
-    <link rel="preload" as="image" href="{{ _preload_url }}" fetchpriority="high">
+    {% set _variants = first_banner.image_variants.detail ?? {} %}
+    {% if _variants.avif1x is defined %}
+      <link rel="preload" as="image"
+            href="{{ _variants.avif1x }}"
+            imagesrcset="{{ _variants.avif1x }} 1x{% if _variants.avif2x is defined %}, {{ _variants.avif2x }} 2x{% endif %}"
+            imagesizes="(min-width: 1200px) 960px, 100vw"
+            type="image/avif"
+            fetchpriority="high">
+    {% endif %}
+    {% if _variants.webp1x is defined %}
+      <link rel="preload" as="image"
+            href="{{ _variants.webp1x }}"
+            imagesrcset="{{ _variants.webp1x }} 1x{% if _variants.webp2x is defined %}, {{ _variants.webp2x }} 2x{% endif %}"
+            imagesizes="(min-width: 1200px) 960px, 100vw"
+            type="image/webp"
+            fetchpriority="high">
+    {% else %}
+      <link rel="preload" as="image" href="/images/default/screenshot-detail@1x.webp" fetchpriority="high">
+    {% endif %}
   {% endif %}
 {% endblock %}
 
 {% block body %}
+
+  <h1 class="visually-hidden">{{ 'title'|trans({}, 'catroweb') }}</h1>
 
   <div id="maintenance-container"
        data-maintenance-url="{{ path('maintenance_list') }}"

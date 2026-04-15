@@ -10,7 +10,9 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ profile.username|escape('html_attr') }} – Catrobat">
+  <meta property="og:description" content="{{ 'meta.og.description.profile'|trans({'%username%': profile.username}, 'catroweb')|escape('html_attr') }}">
   <meta property="og:url" content="{{ url('profile', {id: profile.id}) }}">
+  <meta name="twitter:description" content="{{ 'meta.og.description.profile'|trans({'%username%': profile.username}, 'catroweb')|escape('html_attr') }}">
   {% set og_avatar_variants = user_avatar_variants(profile) %}
   {% set og_avatar_url = (og_avatar_variants and og_avatar_variants.detail) ? og_avatar_variants.detail.webp2x|default(null) : null %}
   {% if og_avatar_url %}
@@ -73,7 +75,7 @@
       <div class="mdc-tab-scroller">
         <div class="mdc-tab-scroller__scroll-area" id="scroll-area">
           <div class="mdc-tab-scroller__scroll-content">
-            <button class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
+            <button id="tab-projects" class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
               <span class="mdc-tab__content">
                 <span class="mdc-tab__icon" id="projects-count">-</span>
                 <span class="mdc-tab__icon-text">{{ 'projects'|trans({}, 'catroweb') }}</span>
@@ -83,7 +85,7 @@
               </span>
             </button>
 
-            <button class="mdc-tab mdc-tab--stacked js-follower-tab" id="test" role="tab" aria-selected="false" tabindex="0">
+            <button id="tab-followers" class="mdc-tab mdc-tab--stacked js-follower-tab" role="tab" aria-selected="false" tabindex="-1">
               <span class="mdc-tab__content">
                 <span class="mdc-tab__icon" id="followers-count">-</span>
                 <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
@@ -93,7 +95,7 @@
               </span>
             </button>
 
-            <button class="mdc-tab mdc-tab--stacked js-follower-tab" role="tab" aria-selected="false" tabindex="0">
+            <button id="tab-following" class="mdc-tab mdc-tab--stacked js-follower-tab" role="tab" aria-selected="false" tabindex="-1">
               <span class="mdc-tab__content">
                 <span class="mdc-tab__icon" id="following-count">-</span>
                 <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
@@ -103,7 +105,7 @@
               </span>
             </button>
 
-            <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
+            <button id="tab-studios" class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="-1">
               <span class="mdc-tab__content">
                 <span class="mdc-tab__icon" id="studios-count">-</span>
                 <span class="mdc-tab__icon-text">{{ 'menu.studio'|trans({}, 'catroweb') }}</span>
@@ -120,7 +122,7 @@
   </div>
 
   <div class="tab-content mt-4">
-    <div id="projects-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="projects-tab">
+    <div id="projects-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tab-projects">
       <div id="user-projects"
            data-property="uploaded"
            data-theme="{{ theme() }}"
@@ -182,7 +184,7 @@
 
     {{ include('User/Followers/FollowersTabs.twig') }}
 
-    <div id="studios-section" class="tab-pane fade" role="tabpanel" aria-labelledby="studios-tab">
+    <div id="studios-section" class="tab-pane fade" role="tabpanel" aria-labelledby="tab-studios">
       <div id="no-studios" class="text-center mb-5 d-none">
         {{ 'studio.overview.no_studios'|trans({}, 'catroweb') }}
       </div>

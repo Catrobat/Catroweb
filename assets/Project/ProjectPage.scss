@@ -554,7 +554,7 @@ table td:nth-child(1) {
     bottom: 2rem;
     right: 2rem;
     z-index: 100;
-    background-color: var(--primary);
+    background-color: var(--primary-bg, var(--primary));
     color: #fff;
     box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
     transition: all 0.2s ease;
@@ -1164,5 +1164,28 @@ input[type='number'] {
     inset: 0;
     cursor: pointer;
     opacity: 0.001;
+  }
+}
+
+// Retention badge: ensure sufficient contrast for Bootstrap subtle variants in both modes
+#retention-badge-container {
+  .badge.bg-secondary-subtle {
+    color: light-dark(#3d4451, #c8cfd8) !important;
+    background-color: light-dark(#e2e5ea, #2a2d35) !important;
+  }
+
+  .badge.bg-success-subtle {
+    color: light-dark(#1a6932, #7ecf96) !important;
+    background-color: light-dark(#c8e6cd, #0f2e18) !important;
+  }
+
+  .badge.bg-warning-subtle {
+    color: light-dark(#7a5800, #f5c842) !important;
+    background-color: light-dark(#fdf0c5, #302200) !important;
+  }
+
+  .badge.bg-danger-subtle {
+    color: light-dark(#8b1a1a, #f08080) !important;
+    background-color: light-dark(#fad7d7, #2e0d0d) !important;
   }
 }

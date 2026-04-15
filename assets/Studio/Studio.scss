@@ -6,9 +6,11 @@
   padding: 0 0 1.5rem;
 }
 
+// Pull cover image flush against topbar — mirrors the featured-slider bleed on the index page
 .studio-detail__header {
   background-color: light-dark($gray-200, #2d2d3d);
   color: light-dark(inherit, #e2e8f0);
+  margin-top: -0.75rem;
 }
 
 .studio-detail__header__name {

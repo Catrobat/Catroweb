@@ -2,6 +2,9 @@
 
 {% block head %}
   {{ encore_entry_link_tags('registration_page') }}
+  <meta property="og:title" content="{{ 'meta.og.title.register'|trans({}, 'catroweb') }}">
+  <meta property="og:description" content="{{ 'meta.og.description.register'|trans({}, 'catroweb') }}">
+  <meta property="og:type" content="website">
 {% endblock %}
 
 {% block header '' %}
@@ -26,6 +29,7 @@
               name: '_username',
               leading_icon: 'person',
               tabindex: 1,
+              autocomplete: 'username',
             },
           }) }}
 
@@ -38,6 +42,7 @@
               type: 'email',
               leading_icon: 'email',
               tabindex: 2,
+              autocomplete: 'email',
             },
           }) }}
 
@@ -51,6 +56,7 @@
               trailing_icon: 'visibility',
               leading_icon: 'lock',
               tabindex: 3,
+              autocomplete: 'new-password',
             },
           }) }}
 

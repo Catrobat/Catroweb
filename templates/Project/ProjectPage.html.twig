@@ -6,6 +6,17 @@
 
 {% block head %}
   {{ encore_entry_link_tags('project_page') }}
+  {# Preload LCP thumbnail image #}
+  {% set _thumb_variants = project_screenshot_variants(project_id) %}
+  {% if _thumb_variants and _thumb_variants.detail %}
+    {% set _preload_url = _thumb_variants.detail.avif1x|default(_thumb_variants.detail.webp1x|default(null)) %}
+    {% set _preload_type = _thumb_variants.detail.avif1x is defined and _thumb_variants.detail.avif1x ? 'image/avif' : 'image/webp' %}
+    {% if _preload_url %}
+      <link rel="preload" as="image" href="{{ _preload_url }}" type="{{ _preload_type }}" fetchpriority="high">
+    {% endif %}
+  {% else %}
+    <link rel="preload" as="image" href="{{ asset(screenshot_big) }}" fetchpriority="high">
+  {% endif %}
   {% for link in encore_entry_css_files('project_code_statistics_inline') %}
     <link rel="preload" href="{{ link }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ link }}"></noscript>

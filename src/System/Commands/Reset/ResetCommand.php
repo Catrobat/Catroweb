@@ -160,20 +160,20 @@ class ResetCommand extends Command
 
     // Creating sample Media Samples
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:create:media-assets-samples'], [], 'Creating media asset samples', $output
+      ['bin/console', 'catrobat:create:media-assets-samples'], ['timeout' => 300], 'Creating media asset samples', $output
     );
 
     // Insert static achievements
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements', $output
+      ['bin/console', 'catrobat:update:achievements'], ['timeout' => 120], 'Creating Achievements', $output
     );
 
     // Resetting Elastic
     CommandHelper::executeShellCommand(
-      ['bin/console', 'fos:elastica:reset', '-q'], [], 'Resetting', $output
+      ['bin/console', 'fos:elastica:reset', '-q'], ['timeout' => 120], 'Resetting', $output
     );
     CommandHelper::executeShellCommand(
-      ['bin/console', 'fos:elastica:populate', '-q'], [], 'Populating data', $output
+      ['bin/console', 'fos:elastica:populate', '-q'], ['timeout' => 300], 'Populating data', $output
     );
 
     $output->writeln('Reset Done');

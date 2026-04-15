@@ -120,23 +120,39 @@ const fnCloseSidebarInternal = function () {
   window.removeEventListener('popstate', fnCloseSidebarInternal)
   sidebar.classList.remove('active')
   sidebarToggleBtn?.setAttribute('aria-expanded', 'false')
+  sidebarToggleBtn?.focus()
 }
 const fnCloseSidebarDesktop = function () {
   sidebar.classList.add('inactive')
   document.body.classList.remove('body-with-sidebar')
   sidebarToggleBtn?.setAttribute('aria-expanded', 'false')
+  sidebarToggleBtn?.focus()
 }
 const fnOpenSidebar = function () {
   sidebar.classList.add('active')
   sidebarToggleBtn?.setAttribute('aria-expanded', 'true')
   window.history.pushState('sidebar-open', null, '')
   window.addEventListener('popstate', fnCloseSidebarInternal)
+  const focusable = sidebar.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')
+  if (focusable.length) focusable[0].focus()
 }
 const fnOpenSidebarDesktop = function () {
   sidebar.classList.remove('inactive')
   document.body.classList.add('body-with-sidebar')
   sidebarToggleBtn?.setAttribute('aria-expanded', 'true')
+  const focusable = sidebar.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')
+  if (focusable.length) focusable[0].focus()
 }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (window.innerWidth < 768 && sidebar.classList.contains('active')) {
+      fnCloseSidebar()
+    } else if (window.innerWidth >= 768 && !sidebar.classList.contains('inactive')) {
+      fnCloseSidebarDesktop()
+    }
+  }
+})
 
 function setClickListener() {
   if (window.innerWidth >= 768) {

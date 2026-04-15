@@ -1,3 +1,4 @@
+{# No HTML escaping needed — plain text output #}
 User-agent: *
 Allow: /app
 Allow: /pocketcode
@@ -10,3 +11,5 @@ Allow: /embroidery
 Allow: /arduino
 Allow: /mindstorms
 Disallow: /
+
+Sitemap: {{ app.request.schemeAndHttpHost }}/sitemap.xml

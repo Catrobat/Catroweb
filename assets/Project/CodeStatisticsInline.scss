@@ -5,50 +5,6 @@
   margin: 1.5rem 0;
 }
 
-// ─── Toggle Button ───────────────────────────────────────────
-#code-stats-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--primary);
-  background: transparent;
-  border: 2px solid var(--primary);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-
-  &:hover {
-    background: custom-alpha(--color-primary, 0.06);
-  }
-
-  &:active {
-    background: custom-alpha(--color-primary, 0.12);
-  }
-
-  .material-icons {
-    font-size: 1.25rem;
-  }
-
-  .code-stats-chevron {
-    margin-left: auto;
-    transition: transform 0.3s ease;
-  }
-
-  &[aria-expanded='true'] {
-    border-radius: 10px 10px 0 0;
-    border-bottom-color: transparent;
-    background: custom-alpha(--color-primary, 0.04);
-
-    .code-stats-chevron {
-      transform: rotate(180deg);
-    }
-  }
-}
-
 // ─── Panel ───────────────────────────────────────────────────
 .code-stats-panel {
   border: 3px dashed var(--primary);

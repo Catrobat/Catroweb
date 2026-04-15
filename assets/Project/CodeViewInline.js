@@ -418,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const toggleBtn = document.getElementById('code-view-toggle')
   const panel = document.getElementById('code-view-panel')
-  const chevron = toggleBtn.querySelector('.code-view-chevron')
+  const chevron = toggleBtn.querySelector('.project-section-toggle__chevron')
   const codeUrl = container.dataset.codeUrl
   let loaded = false
 

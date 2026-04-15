@@ -4,10 +4,13 @@
   {{ encore_entry_link_tags('media_library_overview_page') }}
 {% endblock %}
 
+{% block meta_description %}{{ 'meta.description.media.library'|trans({}, 'catroweb') }}{% endblock %}
+
 {% block top_bar_page_title %}{{ 'media-packages.title'|trans({}, 'catroweb') }}{% endblock %}
 
 {% block body %}
   <div class="container">
+    <h1 class="visually-hidden">{{ 'media-packages.title'|trans({}, 'catroweb') }}</h1>
     <p>{{ 'media-packages.description'|trans({}, 'catroweb') }}</p>
 
     <div id="loading-spinner" class="medialib-spinner" style="display: none;">

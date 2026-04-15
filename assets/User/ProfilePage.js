@@ -13,6 +13,7 @@ initProfileHeader()
 initUserProjects()
 initProfileAchievements()
 initReportUser()
+initTabKeyNavigation()
 
 function initProfileHeader() {
   const container = document.querySelector('.js-profile')
@@ -263,6 +264,23 @@ function initProfileAchievements() {
       console.error('Failed to load profile achievements:', error)
       collapseContainer(container)
     })
+}
+
+function initTabKeyNavigation() {
+  // Add arrow key navigation for ARIA tabs (WAI-ARIA tab pattern)
+  const tabs = Array.from(document.querySelectorAll('[role="tab"]'))
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('keydown', (e) => {
+      let newIndex
+      if (e.key === 'ArrowRight') newIndex = (index + 1) % tabs.length
+      else if (e.key === 'ArrowLeft') newIndex = (index - 1 + tabs.length) % tabs.length
+      else return
+      e.preventDefault()
+      tabs[newIndex].focus()
+      tabs[newIndex].click()
+      tabs.forEach((t, i) => t.setAttribute('tabindex', i === newIndex ? '0' : '-1'))
+    })
+  })
 }
 
 function collapseContainer(container) {

@@ -23,52 +23,6 @@ $cv-categories: (
   margin: 1.5rem 0;
 }
 
-// ── Toggle Button ───────────────────────────────────────────
-#code-view-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--primary);
-  background: transparent;
-  border: 2px solid var(--primary);
-  border-radius: 10px;
-  cursor: pointer;
-  transition:
-    background-color 0.25s ease,
-    border-radius 0.25s ease;
-
-  &:hover {
-    background: custom-alpha(--color-primary, 0.06);
-  }
-
-  &:active {
-    background: custom-alpha(--color-primary, 0.12);
-  }
-
-  .material-icons {
-    font-size: 1.25rem;
-  }
-
-  .code-view-chevron {
-    margin-left: auto;
-    transition: transform 0.3s ease;
-  }
-
-  &[aria-expanded='true'] {
-    background: custom-alpha(--color-primary, 0.04);
-    border-bottom-color: transparent;
-    border-radius: 10px 10px 0 0;
-
-    .code-view-chevron {
-      transform: rotate(180deg);
-    }
-  }
-}
-
 // ── Panel ───────────────────────────────────────────────────
 .code-view-panel {
   border: 2px solid var(--primary);

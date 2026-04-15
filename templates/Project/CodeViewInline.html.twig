@@ -10,10 +10,10 @@
      data-trans-looks="{{ 'codeView.looks'|trans({}, 'catroweb') }}"
      data-trans-sounds="{{ 'codeView.sounds'|trans({}, 'catroweb') }}"
 >
-  <button id="code-view-toggle" type="button" aria-expanded="false" aria-controls="code-view-panel">
+  <button id="code-view-toggle" class="project-section-toggle" type="button" aria-expanded="false" aria-controls="code-view-panel">
     <i class="material-icons">code</i>
     <span>{{ 'codeView.title'|trans({}, 'catroweb') }}</span>
-    <i class="material-icons code-view-chevron">expand_more</i>
+    <i class="material-icons project-section-toggle__chevron">expand_more</i>
   </button>
   <div id="code-view-panel" class="code-view-panel d-none"></div>
 </div>

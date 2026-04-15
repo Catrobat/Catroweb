@@ -2,6 +2,9 @@
 
 {% block head %}
   {{ encore_entry_link_tags('login_page') }}
+  <meta property="og:title" content="{{ 'meta.og.title.login'|trans({}, 'catroweb') }}">
+  <meta property="og:description" content="{{ 'meta.og.description.login'|trans({}, 'catroweb') }}">
+  <meta property="og:type" content="website">
 {% endblock %}
 
 {% block header %}{% endblock header %}
@@ -37,6 +40,7 @@
             name: '_username',
             leading_icon: 'person',
             tabindex: 1,
+            autocomplete: 'username',
           },
         }) }}
 
@@ -50,6 +54,7 @@
             trailing_icon: 'visibility',
             leading_icon: 'lock',
             tabindex: 2,
+            autocomplete: 'current-password',
           },
         }) }}
 

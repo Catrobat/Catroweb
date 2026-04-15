@@ -78,7 +78,7 @@ label {
 .catro-round-icon-button {
   color: $white;
   cursor: pointer;
-  background-color: var(--primary);
+  background-color: var(--primary-bg, var(--primary));
   border-radius: 50%;
 
   &:hover {
@@ -98,7 +98,7 @@ label {
   width: 2.5em;
   height: 2.5em;
   text-align: center;
-  background-color: var(--primary);
+  background-color: var(--primary-bg, var(--primary));
   border-radius: 50%;
 }
 
@@ -113,7 +113,7 @@ label {
   width: 3em;
   height: 3em;
   text-align: center;
-  background-color: var(--primary);
+  background-color: var(--primary-bg, var(--primary));
   border-radius: 50%;
 }
 
@@ -167,6 +167,51 @@ label {
   justify-content: center;
   min-height: 35px;
   margin: 0 auto 30px;
+}
+
+.project-section-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  transition:
+    background-color 0.25s ease,
+    border-radius 0.25s ease;
+
+  .material-icons {
+    font-size: 1.25rem;
+  }
+
+  .project-section-toggle__chevron {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: custom-alpha(--color-primary, 0.06);
+  }
+
+  &:active {
+    background: custom-alpha(--color-primary, 0.12);
+  }
+
+  &[aria-expanded='true'] {
+    border-radius: 10px 10px 0 0;
+    border-bottom-color: transparent;
+    background: custom-alpha(--color-primary, 0.04);
+
+    .project-section-toggle__chevron {
+      transform: rotate(180deg);
+    }
+  }
 }
 
 .button-show-more,

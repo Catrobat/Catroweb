@@ -14,10 +14,10 @@
      data-trans-loading="{{ 'codeStatistics.loading'|trans({}, 'catroweb') }}"
      data-trans-error="{{ 'codeStatistics.error'|trans({}, 'catroweb') }}"
 >
-  <button id="code-stats-toggle" type="button" aria-expanded="false" aria-controls="code-stats-panel">
+  <button id="code-stats-toggle" class="project-section-toggle" type="button" aria-expanded="false" aria-controls="code-stats-panel">
     <i class="material-icons">show_chart</i>
     <span>{{ 'codeStatistics.title'|trans({}, 'catroweb') }}</span>
-    <i class="material-icons code-stats-chevron">expand_more</i>
+    <i class="material-icons project-section-toggle__chevron">expand_more</i>
   </button>
   <div id="code-stats-panel" class="code-stats-panel d-none"></div>
 </div>
