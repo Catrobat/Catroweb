@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
 # Use composer image for better caching
-FROM composer:2.9.5 AS composer-build
+FROM composer:2.9.7 AS composer-build
 WORKDIR /app
 ENV COMPOSER_CACHE_DIR=/tmp/composer-cache
 COPY composer.json composer.lock ./
