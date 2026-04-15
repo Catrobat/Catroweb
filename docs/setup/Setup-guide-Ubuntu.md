@@ -7,8 +7,8 @@ Fork and check-out the project
 git clone <your repo URL>
 cd Catroweb
 git remote add catroweb git@github.com:Catrobat/Catroweb.git
-git checkout develop
-git pull catroweb develop
+git checkout main
+git pull catroweb main
 ```
 
 Then run this script: `./bin/initial_setup.sh`

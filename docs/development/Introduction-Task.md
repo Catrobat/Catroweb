@@ -525,11 +525,11 @@ Webpack Encore loads scripts with `defer`. Use `document.addEventListener('DOMCo
 
 ### Git workflow
 
-1. **Create a branch** from `develop`:
+1. **Create a branch** from `main`:
 
    ```bash
-   git checkout develop
-   git pull origin develop
+   git checkout main
+   git pull origin main
    git checkout -b feature/steal-project
    ```
 
@@ -551,13 +551,13 @@ Webpack Encore loads scripts with `defer`. Use `document.addEventListener('DOMCo
    docker exec app.catroweb bin/phpstan analyse src/Application/Controller/Project/ProjectController.php
    ```
 
-4. **Push and create a PR** against `develop`:
+4. **Push and create a PR** against `main`:
 
    ```bash
    git push -u origin feature/steal-project
    ```
 
-   Then open a Pull Request on GitHub targeting the `develop` branch.
+   Then open a Pull Request on GitHub targeting the `main` branch.
 
 ### PR checklist
 

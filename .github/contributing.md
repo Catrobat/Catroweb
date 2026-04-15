@@ -48,7 +48,7 @@ git commit --amend
 Go to GitHub and **create a Pull-Request** from your forked repository into the official repository.<br/>
 
 - check that you create the PR from your correct ticket branch!
-- check that PR goes to the `develop` branch and not `main` branch!
+- check that PR targets the `main` branch!
 - enable "allow edits from maintainers", this allows the Seniors to rebase your PR if needed
 
 ##### 7. Keep your PR up-to-date and be responsive to requested changes. Make sure the CI tests pass
@@ -56,10 +56,10 @@ Go to GitHub and **create a Pull-Request** from your forked repository into the 
 - **merge-conflicts?** Resolve them and rebase your PR.<br/>
 
   ```
-  git checkout develop
-  git pull catroweb develop
+  git checkout main
+  git pull catroweb main
   git checkout SHARE-XX
-  git rebase -i develop
+  git rebase -i main
   ```
 
   Resolve conflicts if necessary (Note: IDE's like Phpstorm have great tools to resolve such conflicts).

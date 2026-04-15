@@ -10,8 +10,8 @@ This page is the fastest path to a productive Catroweb setup.
 git clone <your-fork-url>
 cd Catroweb
 git remote add catroweb git@github.com:Catrobat/Catroweb.git
-git checkout develop
-git pull catroweb develop
+git checkout main
+git pull catroweb main
 ```
 
 2. Start the development stack:
@@ -36,11 +36,11 @@ docker exec -it app.catroweb php bin/console catrobat:reset --hard
 
 Run in the project root unless stated otherwise.
 
-### Pull latest changes from upstream `develop`
+### Pull latest changes from upstream `main`
 
 ```bash
-git checkout develop
-git pull catroweb develop
+git checkout main
+git pull catroweb main
 ```
 
 ### Run static checks
