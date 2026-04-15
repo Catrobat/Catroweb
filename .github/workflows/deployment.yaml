@@ -10,11 +10,13 @@ name: Deployment
 permissions:
   contents: read
 
-# Run on every merge into main, or manually with a branch/tag selection.
+# Deploy automatically when the version is bumped (release PR merged), or manually with a branch/tag selection.
 on:
   push:
     branches:
       - main
+    paths:
+      - '.env'
   workflow_dispatch:
     inputs:
       ref:
