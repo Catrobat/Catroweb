@@ -280,6 +280,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     ?string $search,
     string $sort_by,
     string $sort_order,
+    ?string $flavors,
     int &$responseCode,
     array &$responseHeaders,
   ): ?MediaAssetsListResponse {
@@ -295,27 +296,47 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
 
     $db_file_type = $file_type ? $this->convertToDbFileType($file_type) : null;
 
-    $cursor_data = $this->decodeKeysetCursor($cursor);
-    if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
-      $responseCode = Response::HTTP_BAD_REQUEST;
+    $flavor_list = null !== $flavors && '' !== trim($flavors)
+      ? array_values(array_filter(array_map('trim', explode(',', $flavors))))
+      : [];
 
-      return null;
+    if ([] !== $flavor_list) {
+      $offset = $this->decodeCursorToOffset($cursor);
+      $assets = $this->facade->getLoader()->getAssetsRankedByFlavors(
+        $limit,
+        $offset,
+        $category_id,
+        $db_file_type,
+        $flavor,
+        $search,
+        $sort_by,
+        $sort_order,
+        $flavor_list,
+      );
+      $response = $this->facade->getResponseManager()->createAssetsResponse($assets, $limit, $offset);
+    } else {
+      $cursor_data = $this->decodeKeysetCursor($cursor);
+      if (null === $cursor_data && null !== $cursor && '' !== $cursor) {
+        $responseCode = Response::HTTP_BAD_REQUEST;
+
+        return null;
+      }
+
+      $assets = $this->facade->getLoader()->getAssetsPaginatedKeyset(
+        $limit,
+        $category_id,
+        $db_file_type,
+        $flavor,
+        $search,
+        $sort_by,
+        $sort_order,
+        $cursor_data['value'] ?? null,
+        $cursor_data['id'] ?? null
+      );
+      $response = $this->facade->getResponseManager()->createAssetsKeysetResponse($assets, $limit, $sort_by);
     }
 
-    $assets = $this->facade->getLoader()->getAssetsPaginatedKeyset(
-      $limit,
-      $category_id,
-      $db_file_type,
-      $flavor,
-      $search,
-      $sort_by,
-      $sort_order,
-      $cursor_data['value'] ?? null,
-      $cursor_data['id'] ?? null
-    );
-
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createAssetsKeysetResponse($assets, $limit, $sort_by);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 

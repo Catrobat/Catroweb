@@ -343,15 +343,15 @@ final class MediaLibraryApiTest extends TestCase
     $response_headers = [];
 
     $loader = $this->createStub(MediaLibraryApiLoader::class);
-    $loader->method('getAssetsPaginated')->willReturn([]);
+    $loader->method('getAssetsPaginatedKeyset')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response_manager = $this->createStub(MediaLibraryResponseManager::class);
     $assets_response = $this->createStub(MediaAssetsListResponse::class);
-    $response_manager->method('createAssetsResponse')->willReturn($assets_response);
+    $response_manager->method('createAssetsKeysetResponse')->willReturn($assets_response);
     $this->facade->method('getResponseManager')->willReturn($response_manager);
 
-    $response = $this->api->mediaAssetsGet('en', 20, null, null, null, null, null, 'name', 'asc', $response_code, $response_headers);
+    $response = $this->api->mediaAssetsGet('en', 20, null, null, null, null, null, 'name', 'asc', null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(MediaAssetsListResponse::class, $response);

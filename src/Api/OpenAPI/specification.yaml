@@ -1943,6 +1943,12 @@ paths:
             type: string
             enum: [ASC, DESC]
             default: DESC
+        - name: flavors
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Comma-separated flavor names to rank results by. Matching assets appear first (ranked by overlap count), then flavorless assets, then non-matching flavored assets.'
       responses:
         '200':
           description: 'OK'

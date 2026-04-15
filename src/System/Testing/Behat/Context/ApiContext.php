@@ -845,6 +845,21 @@ class ApiContext implements Context
   }
 
   /**
+   * @Then /^the client response should contain "([^"]*)" before "([^"]*)"$/
+   *
+   * @throws \Exception
+   */
+  public function theResponseShouldContainBefore(string $first, string $second): void
+  {
+    $content = $this->getResponseContent();
+    $pos_first = strpos($content, $first);
+    $pos_second = strpos($content, $second);
+    Assert::assertNotFalse($pos_first, sprintf('"%s" not found in response', $first));
+    Assert::assertNotFalse($pos_second, sprintf('"%s" not found in response', $second));
+    Assert::assertLessThan($pos_second, $pos_first, sprintf('Expected "%s" before "%s" in response', $first, $second));
+  }
+
+  /**
    * @When /^I update this project$/
    *
    * @throws \Exception
