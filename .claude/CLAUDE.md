@@ -379,7 +379,7 @@ Data attributes: `data-trans-account-suspended`, `data-trans-report-suspended`
 
 ## Git Workflow
 
-- Main branch: `develop`
+- Main branch: `main`
 - Feature branches merged via PR
 - CI: GitHub Actions (static + dynamic analysis)
 

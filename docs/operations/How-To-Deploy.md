@@ -37,7 +37,7 @@ E.g for web-test without credentials:
 DEPLOY_GIT=https://github.com/Catrobat/Catroweb.git
 SLACK_WEBHOOK=https://hooks.slack.com/services/_KEY_
 DEPLOY_WEBTEST=_USERNAME_@_HOST_
-DEPLOY_WEBTEST_BRANCH=develop
+DEPLOY_WEBTEST_BRANCH=main
 ```
 
 #### 2) go into the root directory and run

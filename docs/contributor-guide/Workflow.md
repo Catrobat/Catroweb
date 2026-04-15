@@ -2,24 +2,23 @@
 
 ### Forking Workflow
 
-Do not create any branches on the official public repository. Instead: Fork the project and use Pull Requests to merge back into develop.
+Do not create any branches on the official public repository. Instead: Fork the project and use Pull Requests to merge back into main.
 [(Atlassian Tutorial explaining this workflow)](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow)
 
 ### Official Public Repository Branches
 
 Never push any changes directly to those branches! Always create Pull Requests!
 
-- **develop**: The develop branch is our development branch and represents the current state of the project including all already merged changes for the next release. This is the branch you should be working with and merge your PRs into.
-- **main**: The main branch represents the current public release state and is not the default target for regular feature PRs.
-- **release/XYZ**: Before releasing a new release branch is created (from _develop_). This branch will be tested and hot-fixed, but no new features will be added. When releasing this branch will be merged into _develop_ and _main_ and then deleted.
+- **main**: The single integration and production branch. All feature PRs target main. Merging a release PR into main triggers deployment.
+- **release/XYZ**: Created automatically by the release workflow (from _main_). Contains only the version bump. Merging it back into _main_ triggers the deployment.
 
 ## Checking out the newest version of the project
 
 Before starting to work on your ticket make sure to work with the latest version of the projects official public repository, lets call the remote _catroweb_.
 
 ```
-git checkout develop
-git pull catroweb develop
+git checkout main
+git pull catroweb main
 ```
 
 Do not forget to reset the project.
@@ -74,7 +73,7 @@ git commit --amend
 Go to GitHub and **create a Pull-Request** from your forked repository into the official repository.
 
 - check that you create the PR from your correct ticket branch!
-- check that PR goes to the _develop_ branch and not _main_ branch!
+- check that PR targets the _main_ branch!
 - "allow edits from maintainers" must be ticked off, this allows the Seniors to rebase your PR if needed
 
 ## After creating the PR
@@ -82,10 +81,10 @@ Go to GitHub and **create a Pull-Request** from your forked repository into the 
 **The PR has merge-conflicts?**<br/>Resolve them and rebase your PR.
 
 ```
-git checkout develop
-git pull catroweb develop
+git checkout main
+git pull catroweb main
 git checkout SHARE-XXX
-git rebase -i develop
+git rebase -i main
 ```
 
 Resolve the conflicts. E.g. Phpstorm has great tools to resolve such conflicts.
