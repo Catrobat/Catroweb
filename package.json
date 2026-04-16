@@ -70,7 +70,7 @@
     "sass-loader": "^16.0.7",
     "stylelint": "^17.7.0",
     "stylelint-config-standard-scss": "^17.0.0",
-    "webpack": "^5.106.1",
+    "webpack": "^5.106.2",
     "webpack-bugsnag-plugins": "^2.2.3",
     "webpack-bundle-analyzer": "^5.3.0",
     "webpack-cli": "^7.0.2",
