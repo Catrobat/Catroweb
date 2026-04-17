@@ -68,6 +68,13 @@ class RefreshTokenService
       /** @var User|null $user */
       $user = $this->user_manager->findUserByUsername($refresh_token->getUsername());
       if (null !== $user) {
+        if ($user->getProfileHidden()) {
+          $this->refresh_manager->delete($refresh_token);
+          $this->markAuthenticationCookiesForClearing($request);
+
+          return;
+        }
+
         $new_bearer = $this->jwt_manager->create($user);
         $request->attributes->set(self::REFRESHED_BEARER_COOKIE_ATTRIBUTE, $new_bearer);
         // Update both Symfony's ParameterBag and the PHP superglobal so that

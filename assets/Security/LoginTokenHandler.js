@@ -55,16 +55,35 @@ export class LoginTokenHandler {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Login failed')
+          return response
+            .json()
+            .then((body) => {
+              this.showLoginError(
+                body?.error_code === 'account_suspended' ? 'suspended' : 'invalid',
+              )
+            })
+            .catch(() => {
+              this.showLoginError('invalid')
+            })
         }
 
         window.location.href = this.getRedirectUri()
       })
       .catch(() => {
-        const element = document.getElementById('login-alert')
-        if (element) {
-          element.style.display = 'block'
-        }
+        this.showLoginError('invalid')
       })
+  }
+
+  showLoginError(type) {
+    const alertInvalid = document.getElementById('login-alert')
+    const alertSuspended = document.getElementById('login-alert-suspended')
+
+    if (alertInvalid) {
+      alertInvalid.style.display = type === 'suspended' ? 'none' : 'block'
+    }
+
+    if (alertSuspended) {
+      alertSuspended.style.display = type === 'suspended' ? 'block' : 'none'
+    }
   }
 }

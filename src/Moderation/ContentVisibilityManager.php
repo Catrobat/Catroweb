@@ -12,12 +12,14 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
 use App\DB\Enum\ReportState;
+use App\Security\Authentication\JwtRefresh\RefreshTokenService;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ContentVisibilityManager
 {
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
+    private readonly RefreshTokenService $refresh_token_service,
   ) {
   }
 
@@ -33,6 +35,7 @@ class ContentVisibilityManager
     } else {
       $entity->setProfileHidden(true);
       $this->hideAllUserContent($entity);
+      $this->refresh_token_service->invalidateRefreshTokenOfUser($entity->getUserIdentifier());
     }
   }
 

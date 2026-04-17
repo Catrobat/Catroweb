@@ -966,8 +966,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ContentReportRequest'
       responses:
-        '204':
-          description: 'Project successfully reported'
+        '201':
+          description: 'Report created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportReceiptResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -1389,8 +1393,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ContentReportRequest'
       responses:
-        '204':
-          description: 'Comment successfully reported'
+        '201':
+          description: 'Report created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportReceiptResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -2836,8 +2844,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ContentReportRequest'
       responses:
-        '204':
-          description: 'User successfully reported'
+        '201':
+          description: 'Report created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportReceiptResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -2898,8 +2910,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ContentReportRequest'
       responses:
-        '204':
-          description: 'Studio successfully reported'
+        '201':
+          description: 'Report created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportReceiptResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -3346,6 +3362,20 @@ components:
       description: 'Locale of the response content. Default: `en`'
 
   schemas:
+    ##############################################
+    # Moderation Schemas
+    ###
+
+    ReportReceiptResponse:
+      type: object
+      required:
+        - report_id
+      properties:
+        report_id:
+          type: string
+          format: uuid
+          description: 'The unique identifier of the created report'
+
     ##############################################
     # Shared Image Schemas
     ###

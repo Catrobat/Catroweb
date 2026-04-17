@@ -158,6 +158,14 @@ class ModerationController extends Controller
       return new Response('', 415);
     }
 
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
     // Handle authentication
     // Authentication 'BearerAuth' required
     // HTTP bearer authentication required
@@ -202,13 +210,13 @@ class ModerationController extends Controller
       $handler->setBearerAuth($securityBearerAuth);
 
       // Make the call to the business logic
-      $responseCode = 204;
+      $responseCode = 201;
       $responseHeaders = [];
 
-      $handler->commentsIdReportPost($id, $content_report_request, $responseCode, $responseHeaders);
+      $result = $handler->commentsIdReportPost($id, $content_report_request, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
-        204 => 'Comment successfully reported',
+        201 => 'Report created',
         400 => 'Bad request (Invalid, or missing parameters)',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         403 => 'Insufficient privileges, action not allowed.',
@@ -219,11 +227,12 @@ class ModerationController extends Controller
       };
 
       return new Response(
-        '',
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
         $responseCode,
         array_merge(
           $responseHeaders,
           [
+            'Content-Type' => $responseFormat,
             'X-OpenAPI-Message' => $message,
           ]
         )
@@ -702,6 +711,14 @@ class ModerationController extends Controller
       return new Response('', 415);
     }
 
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
     // Handle authentication
     // Authentication 'BearerAuth' required
     // HTTP bearer authentication required
@@ -746,13 +763,13 @@ class ModerationController extends Controller
       $handler->setBearerAuth($securityBearerAuth);
 
       // Make the call to the business logic
-      $responseCode = 204;
+      $responseCode = 201;
       $responseHeaders = [];
 
-      $handler->projectsIdReportPost($id, $content_report_request, $responseCode, $responseHeaders);
+      $result = $handler->projectsIdReportPost($id, $content_report_request, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
-        204 => 'Project successfully reported',
+        201 => 'Report created',
         400 => 'Bad request (Invalid, or missing parameters)',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         403 => 'Insufficient privileges, action not allowed.',
@@ -763,11 +780,12 @@ class ModerationController extends Controller
       };
 
       return new Response(
-        '',
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
         $responseCode,
         array_merge(
           $responseHeaders,
           [
+            'Content-Type' => $responseFormat,
             'X-OpenAPI-Message' => $message,
           ]
         )
@@ -888,6 +906,14 @@ class ModerationController extends Controller
       return new Response('', 415);
     }
 
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
     // Handle authentication
     // Authentication 'BearerAuth' required
     // HTTP bearer authentication required
@@ -932,13 +958,13 @@ class ModerationController extends Controller
       $handler->setBearerAuth($securityBearerAuth);
 
       // Make the call to the business logic
-      $responseCode = 204;
+      $responseCode = 201;
       $responseHeaders = [];
 
-      $handler->studiosIdReportPost($id, $content_report_request, $responseCode, $responseHeaders);
+      $result = $handler->studiosIdReportPost($id, $content_report_request, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
-        204 => 'Studio successfully reported',
+        201 => 'Report created',
         400 => 'Bad request (Invalid, or missing parameters)',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         403 => 'Insufficient privileges, action not allowed.',
@@ -949,11 +975,12 @@ class ModerationController extends Controller
       };
 
       return new Response(
-        '',
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
         $responseCode,
         array_merge(
           $responseHeaders,
           [
+            'Content-Type' => $responseFormat,
             'X-OpenAPI-Message' => $message,
           ]
         )
@@ -1074,6 +1101,14 @@ class ModerationController extends Controller
       return new Response('', 415);
     }
 
+    // Figure out what data format to return to the client
+    $produces = ['application/json'];
+    $clientAccepts = $request->headers->has('Accept') ? $request->headers->get('Accept') : '*/*';
+    $responseFormat = $this->getOutputFormat($clientAccepts, $produces);
+    if (null === $responseFormat) {
+      return new Response('', 406);
+    }
+
     // Handle authentication
     // Authentication 'BearerAuth' required
     // HTTP bearer authentication required
@@ -1118,13 +1153,13 @@ class ModerationController extends Controller
       $handler->setBearerAuth($securityBearerAuth);
 
       // Make the call to the business logic
-      $responseCode = 204;
+      $responseCode = 201;
       $responseHeaders = [];
 
-      $handler->usersIdReportPost($id, $content_report_request, $responseCode, $responseHeaders);
+      $result = $handler->usersIdReportPost($id, $content_report_request, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
-        204 => 'User successfully reported',
+        201 => 'Report created',
         400 => 'Bad request (Invalid, or missing parameters)',
         401 => 'Invalid JWT token | JWT token not found | JWT token expired',
         403 => 'Insufficient privileges, action not allowed.',
@@ -1135,11 +1170,12 @@ class ModerationController extends Controller
       };
 
       return new Response(
-        '',
+        null !== $result ? $this->serialize($result, $responseFormat) : '',
         $responseCode,
         array_merge(
           $responseHeaders,
           [
+            'Content-Type' => $responseFormat,
             'X-OpenAPI-Message' => $message,
           ]
         )

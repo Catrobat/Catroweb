@@ -32,7 +32,7 @@ Feature: Moderation Reports API
       {"category": "spam", "note": "This is spam"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
 
   Scenario: Report a project requires authentication
     When I request "POST" "/api/projects/1/report"
@@ -89,7 +89,7 @@ Feature: Moderation Reports API
       {"category": "spam"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     # Report the same project again
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -121,7 +121,7 @@ Feature: Moderation Reports API
       {"category": "inappropriate"}
       """
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
 
   Scenario: Report a comment requires authentication
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
@@ -168,7 +168,7 @@ Feature: Moderation Reports API
       {"category": "inappropriate"}
       """
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
       """
@@ -189,7 +189,7 @@ Feature: Moderation Reports API
       {"category": "impersonation", "note": "Pretending to be someone else"}
       """
     When I request "POST" "/api/users/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
 
   Scenario: Report a user requires authentication
     When I request "POST" "/api/users/1/report"
@@ -237,7 +237,7 @@ Feature: Moderation Reports API
       {"category": "inappropriate_content"}
       """
     When I request "POST" "/api/studios/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
 
   Scenario: Report a studio requires authentication
     When I request "POST" "/api/studios/1/report"
@@ -319,7 +319,7 @@ Feature: Moderation Reports API
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000010/report"
     Then the response status code should be "403"
 
-  Scenario: Report on non-whitelisted content succeeds (204)
+  Scenario: Report on non-whitelisted content succeeds
     Given I use a valid JWT Bearer token for "User2"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:
@@ -327,7 +327,7 @@ Feature: Moderation Reports API
       {"category": "spam", "note": "Non-whitelisted report"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
 
   # ---------------------------------------------------------------------------
   # Hidden content filtering
@@ -388,7 +388,7 @@ Feature: Moderation Reports API
       {"category": "spam", "note": "Obvious spam project"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     And the project "project1" should be hidden
     Given I use a valid JWT Bearer token for "Catrobat"
     When I request "GET" "/api/notifications?type=all&limit=10"

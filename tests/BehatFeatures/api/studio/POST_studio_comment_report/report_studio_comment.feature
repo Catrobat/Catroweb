@@ -34,7 +34,7 @@ Feature: Report a studio comment
       {"category": "inappropriate"}
       """
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000050/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
 
   Scenario: Report a studio comment requires authentication
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000050/report"
@@ -58,7 +58,7 @@ Feature: Report a studio comment
       {"category": "inappropriate"}
       """
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000050/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     Given I have the following JSON request body:
       """
       {"category": "spam"}

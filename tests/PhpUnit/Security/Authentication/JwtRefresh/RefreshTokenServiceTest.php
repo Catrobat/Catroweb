@@ -147,6 +147,52 @@ final class RefreshTokenServiceTest extends TestCase
   }
 
   #[Group('unit')]
+  public function testRefreshRequestAuthenticationBlocksSuspendedUser(): void
+  {
+    $request = Request::create('/api/projects', 'GET');
+    $request->cookies->set('REFRESH_TOKEN', 'refresh-cookie');
+    $_COOKIE['REFRESH_TOKEN'] = 'refresh-cookie';
+
+    $refresh_token = $this->createStub(RefreshTokenInterface::class);
+    $refresh_token->method('isValid')->willReturn(true);
+    $refresh_token->method('getUsername')->willReturn('suspended-user');
+
+    $user = $this->createStub(User::class);
+    $user->method('getProfileHidden')->willReturn(true);
+
+    $this->refresh_manager
+      ->expects($this->once())
+      ->method('get')
+      ->with('refresh-cookie')
+      ->willReturn($refresh_token)
+    ;
+    $this->user_manager
+      ->expects($this->once())
+      ->method('findUserByUsername')
+      ->with('suspended-user')
+      ->willReturn($user)
+    ;
+    $this->jwt_manager
+      ->expects($this->never())
+      ->method('create')
+    ;
+    $this->refresh_manager
+      ->expects($this->once())
+      ->method('delete')
+      ->with($refresh_token)
+    ;
+
+    $this->service->refreshRequestAuthentication($request);
+
+    $this->assertTrue(
+      $request->attributes->get(RefreshTokenService::CLEAR_AUTHENTICATION_COOKIES_ATTRIBUTE)
+    );
+    $this->assertFalse($request->cookies->has('BEARER'));
+    $this->assertFalse($request->cookies->has('REFRESH_TOKEN'));
+    $this->assertArrayNotHasKey('REFRESH_TOKEN', $_COOKIE);
+  }
+
+  #[Group('unit')]
   public function testRefreshRequestAuthenticationClearsInvalidAuthCookies(): void
   {
     $request = Request::create('/api/projects', 'GET');
