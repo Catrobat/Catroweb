@@ -966,8 +966,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ContentReportRequest'
       responses:
-        '204':
-          description: 'Project successfully reported'
+        '201':
+          description: 'Report created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportReceiptResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -1389,8 +1393,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ContentReportRequest'
       responses:
-        '204':
-          description: 'Comment successfully reported'
+        '201':
+          description: 'Report created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportReceiptResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -1943,6 +1951,12 @@ paths:
             type: string
             enum: [ASC, DESC]
             default: DESC
+        - name: flavors
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Comma-separated flavor names to rank results by. Matching assets appear first (ranked by overlap count), then flavorless assets, then non-matching flavored assets.'
       responses:
         '200':
           description: 'OK'
@@ -2830,8 +2844,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ContentReportRequest'
       responses:
-        '204':
-          description: 'User successfully reported'
+        '201':
+          description: 'Report created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportReceiptResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -2892,8 +2910,12 @@ paths:
             schema:
               $ref: '#/components/schemas/ContentReportRequest'
       responses:
-        '204':
-          description: 'Studio successfully reported'
+        '201':
+          description: 'Report created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportReceiptResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
@@ -3341,6 +3363,20 @@ components:
 
   schemas:
     ##############################################
+    # Moderation Schemas
+    ###
+
+    ReportReceiptResponse:
+      type: object
+      required:
+        - report_id
+      properties:
+        report_id:
+          type: string
+          format: uuid
+          description: 'The unique identifier of the created report'
+
+    ##############################################
     # Shared Image Schemas
     ###
 
@@ -3638,9 +3674,8 @@ components:
         download_url:
           type: string
           example: 'https://share.catrob.at/api/media/123e4567-e89b-12d3-a456-426614174000.png'
-        thumbnail_url:
-          type: string
-          example: 'https://share.catrob.at/resources/media/thumbs/123e4567-e89b-12d3-a456-426614174000.png'
+        thumbnail:
+          $ref: '#/components/schemas/ImageVariants'
 
     # Asset Requests
     MediaAssetUploadRequest:
