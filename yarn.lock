@@ -1491,7 +1491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:^10.0.0":
+"@eslint/js@npm:^10.0.1":
   version: 10.0.1
   resolution: "@eslint/js@npm:10.0.1"
   peerDependencies:
@@ -3849,7 +3849,7 @@ __metadata:
     "@bugsnag/browser-performance": "npm:^3.4.1"
     "@bugsnag/js": "npm:^8.9.0"
     "@cap.js/widget": "npm:^0.1.43"
-    "@eslint/js": "npm:^10.0.0"
+    "@eslint/js": "npm:^10.0.1"
     "@fontsource/roboto": "npm:^5.2.6"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@material/checkbox": "npm:^14.0.0"
@@ -7284,7 +7284,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.5.10":
+"postcss@npm:^8.5.10, postcss@npm:^8.5.9":
   version: 8.5.10
   resolution: "postcss@npm:8.5.10"
   dependencies:
