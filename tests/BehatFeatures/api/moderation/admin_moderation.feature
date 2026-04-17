@@ -29,7 +29,7 @@ Feature: Admin Moderation API
       {"category": "spam", "note": "Test report"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     # Now list as admin
     Given I use a valid JWT Bearer token for "Admin"
     When I GET "/api/moderation/reports?limit=20"
@@ -66,7 +66,7 @@ Feature: Admin Moderation API
       {"category": "spam"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     # Resolve it as admin
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -87,7 +87,7 @@ Feature: Admin Moderation API
       {"category": "spam"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     # Reject it as admin
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -118,7 +118,7 @@ Feature: Admin Moderation API
       {"category": "spam"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     # Try invalid action
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
@@ -148,7 +148,7 @@ Feature: Admin Moderation API
       {"category": "spam"}
       """
     When I request "POST" "/api/projects/1/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
     Given I use a valid JWT Bearer token for "Admin"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:

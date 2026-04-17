@@ -235,7 +235,7 @@ Feature: Comments API
       {"category": "spam"}
       """
     When I request "POST" "/api/comments/00000000-0000-0000-0000-000000000011/report"
-    Then the response status code should be "204"
+    Then the response status code should be "201"
 
   Scenario: Report a comment requires authentication
     And I have a request header "CONTENT_TYPE" with value "application/json"

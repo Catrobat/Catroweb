@@ -1,5 +1,5 @@
 @web @profile_page
-Feature: Suspended user sees a banner on their profile page with appeal option
+Feature: Suspended user is blocked from logging in
 
   Background:
     Given there are users:
@@ -7,23 +7,22 @@ Feature: Suspended user sees a banner on their profile page with appeal option
       | 1  | Catrobat |
       | 2  | User2    |
 
-  Scenario: Suspended user sees suspension banner on own profile
+  Scenario: Suspended user cannot log in
     Given the user "Catrobat" profile is hidden
-    And I log in as "Catrobat"
-    And I am on "/app/user"
+    And I am on "/app/login"
     And I wait for the page to be loaded
-    Then I should see "has been suspended due to community reports"
+    And I fill in "username__input" with "Catrobat"
+    And I fill in "password__input" with "123456"
+    And I press "Login"
+    And I wait for the page to be loaded
+    Then the element "#login-alert-suspended" should be visible
+    And the element "#login-alert" should not be visible
 
-  Scenario: Suspended user sees appeal button on own profile
-    Given the user "Catrobat" profile is hidden
-    And I log in as "Catrobat"
-    And I am on "/app/user"
+  Scenario: Non-suspended user does not see suspension alert on login
+    Given I am on "/app/login"
     And I wait for the page to be loaded
-    Then the element "#btn-appeal-user" should be visible
-
-  Scenario: Non-suspended user does not see suspension banner
-    Given I log in as "Catrobat"
-    And I am on "/app/user"
+    And I fill in "username__input" with "Catrobat"
+    And I fill in "password__input" with "123456"
+    And I press "Login"
     And I wait for the page to be loaded
-    Then I should not see "has been suspended due to community reports"
-    And the element "#btn-appeal-user" should not exist
+    Then I should not see "has been suspended"
