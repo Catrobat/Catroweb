@@ -23,6 +23,7 @@ final class SuspensionAuthenticationFailureEventListenerTest extends TestCase
 {
   private SuspensionAuthenticationFailureEventListener $listener;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->listener = new SuspensionAuthenticationFailureEventListener();

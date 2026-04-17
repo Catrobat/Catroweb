@@ -20,6 +20,7 @@ final class SuspendedUserCheckerTest extends TestCase
 {
   private SuspendedUserChecker $checker;
 
+  #[\Override]
   protected function setUp(): void
   {
     $this->checker = new SuspendedUserChecker();
@@ -40,32 +41,32 @@ final class SuspendedUserCheckerTest extends TestCase
   #[Group('unit')]
   public function testActiveUserPassesWithoutException(): void
   {
+    $this->expectNotToPerformAssertions();
+
     $user = $this->createStub(User::class);
     $user->method('getProfileHidden')->willReturn(false);
 
     $this->checker->checkPreAuth($user);
-
-    $this->addToAssertionCount(1);
   }
 
   #[Group('unit')]
   public function testNonUserInterfaceImplementationPassesWithoutException(): void
   {
+    $this->expectNotToPerformAssertions();
+
     $user = $this->createStub(UserInterface::class);
 
     $this->checker->checkPreAuth($user);
-
-    $this->addToAssertionCount(1);
   }
 
   #[Group('unit')]
   public function testCheckPostAuthDoesNothing(): void
   {
+    $this->expectNotToPerformAssertions();
+
     $user = $this->createStub(User::class);
     $user->method('getProfileHidden')->willReturn(true);
 
     $this->checker->checkPostAuth($user);
-
-    $this->addToAssertionCount(1);
   }
 }

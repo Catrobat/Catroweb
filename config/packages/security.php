@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 use App\DB\Entity\User\User;
 use App\Security\Authentication\ApiAuthenticationSuccessHandler;
-use App\Security\SuspendedUserChecker;
 use App\Security\Authentication\FormLoginSuccessHandler;
 use App\Security\Authentication\JwtRefresh\ApiRefreshTokenSuccessHandler;
 use App\Security\Authentication\WebView\WebviewJWTAuthenticator;
 use App\Security\OAuth\HwiOauthUserProvider;
 use App\Security\OAuth\OAuthSuccessHandler;
+use App\Security\SuspendedUserChecker;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Security\Core\User\UserInterface;
 
