@@ -36,8 +36,8 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
-  ): void {
-    $this->handleReport(ContentType::Project, $id, $content_report_request, $responseCode);
+  ): array|object|null {
+    return $this->handleReport(ContentType::Project, $id, $content_report_request, $responseCode);
   }
 
   #[\Override]
@@ -46,8 +46,8 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
-  ): void {
-    $this->handleReport(ContentType::Comment, $id, $content_report_request, $responseCode);
+  ): array|object|null {
+    return $this->handleReport(ContentType::Comment, $id, $content_report_request, $responseCode);
   }
 
   #[\Override]
@@ -56,8 +56,8 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
-  ): void {
-    $this->handleReport(ContentType::User, $id, $content_report_request, $responseCode);
+  ): array|object|null {
+    return $this->handleReport(ContentType::User, $id, $content_report_request, $responseCode);
   }
 
   #[\Override]
@@ -66,8 +66,8 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
-  ): void {
-    $this->handleReport(ContentType::Studio, $id, $content_report_request, $responseCode);
+  ): array|object|null {
+    return $this->handleReport(ContentType::Studio, $id, $content_report_request, $responseCode);
   }
 
   #[\Override]
@@ -318,25 +318,29 @@ class ModerationApi extends AbstractApiController implements ModerationApiInterf
     string $content_id,
     ContentReportRequest $request,
     int &$responseCode,
-  ): void {
+  ): ?array {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (!$user instanceof User) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
-      return;
+      return null;
     }
 
     if ($user->isMinor()) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
-      return;
+      return null;
     }
 
     try {
-      $this->facade->getProcessor()->processReport($user, $content_type, $content_id, $request);
-      $responseCode = Response::HTTP_NO_CONTENT;
+      $report = $this->facade->getProcessor()->processReport($user, $content_type, $content_id, $request);
+      $responseCode = Response::HTTP_CREATED;
+
+      return ['report_id' => $report->getId()];
     } catch (ReportException $e) {
       $responseCode = $e->getCode();
+
+      return null;
     }
   }
 

@@ -85,7 +85,7 @@ interface ModerationApiInterface
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
-  ): void;
+  ): array|object|null;
 
   /**
    * Operation moderationAppealsGet.
@@ -187,7 +187,7 @@ interface ModerationApiInterface
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
-  ): void;
+  ): array|object|null;
 
   /**
    * Operation studiosIdAppealPost.
@@ -221,7 +221,7 @@ interface ModerationApiInterface
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
-  ): void;
+  ): array|object|null;
 
   /**
    * Operation usersIdAppealPost.
@@ -255,7 +255,7 @@ interface ModerationApiInterface
     ContentReportRequest $content_report_request,
     int &$responseCode,
     array &$responseHeaders,
-  ): void;
+  ): array|object|null;
 
   /**
    * Operation usersMeReportsGet.

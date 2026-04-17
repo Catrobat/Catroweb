@@ -22,6 +22,9 @@
         <div id="login-alert" class="alert alert-danger col-sm-12">
           {{ 'login.passOrUser'|trans({}, 'catroweb') }}
         </div>
+        <div id="login-alert-suspended" class="alert alert-warning col-sm-12">
+          {{ 'login.accountSuspended'|trans({}, 'catroweb') }}
+        </div>
         {% if showResetError|default(false) %}
           <div class="alert alert-danger">
             {{ 'login.alreadyReset'|trans({}, 'catroweb') }}

@@ -32,14 +32,14 @@ class ModerationApiProcessor extends AbstractApiProcessor
     ContentType $content_type,
     string $content_id,
     ContentReportRequest $request,
-  ): void {
-    $this->report_processor->processReport(
+  ): ContentReport {
+    return $this->report_processor->processReport(
       $user,
       $content_type,
       $content_id,
       $request->getCategory() ?? '',
       $request->getNote(),
-    );
+    )['report'];
   }
 
   /**

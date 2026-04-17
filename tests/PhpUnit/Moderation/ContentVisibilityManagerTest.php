@@ -8,7 +8,10 @@ use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
+use App\Security\Authentication\JwtRefresh\RefreshTokenService;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
@@ -44,7 +47,7 @@ final class ContentVisibilityManagerTest extends TestCase
       })
     ;
 
-    $manager = new ContentVisibilityManager($em);
+    $manager = new ContentVisibilityManager($em, $this->createStub(RefreshTokenService::class));
 
     // showContent should return early without clearing auto_hidden
     // because the owner is suspended. We verify by checking isContentHidden after.
@@ -83,8 +86,38 @@ final class ContentVisibilityManagerTest extends TestCase
       })
     ;
 
-    $manager = new ContentVisibilityManager($em);
+    $manager = new ContentVisibilityManager($em, $this->createStub(RefreshTokenService::class));
     $manager->showContent(ContentType::Project, 'project-id');
+  }
+
+  #[Group('unit')]
+  public function testHideContentUserInvalidatesRefreshToken(): void
+  {
+    $user = $this->createStub(User::class);
+    $user->method('getUserIdentifier')->willReturn('suspended-user');
+
+    $query = $this->createStub(Query::class);
+
+    $qb = $this->createStub(QueryBuilder::class);
+    $qb->method('update')->willReturnSelf();
+    $qb->method('set')->willReturnSelf();
+    $qb->method('where')->willReturnSelf();
+    $qb->method('andWhere')->willReturnSelf();
+    $qb->method('setParameter')->willReturnSelf();
+    $qb->method('getQuery')->willReturn($query);
+
+    $em = $this->createStub(EntityManagerInterface::class);
+    $em->method('find')->willReturn($user);
+    $em->method('createQueryBuilder')->willReturn($qb);
+
+    $refresh_token_service = $this->createMock(RefreshTokenService::class);
+    $refresh_token_service->expects($this->once())
+      ->method('invalidateRefreshTokenOfUser')
+      ->with('suspended-user')
+    ;
+
+    $manager = new ContentVisibilityManager($em, $refresh_token_service);
+    $manager->hideContent(ContentType::User, 'user-id');
   }
 
   #[Group('unit')]
@@ -99,7 +132,7 @@ final class ContentVisibilityManagerTest extends TestCase
     $em = $this->createStub(EntityManagerInterface::class);
     $em->method('find')->willReturn($user);
 
-    $manager = new ContentVisibilityManager($em);
+    $manager = new ContentVisibilityManager($em, $this->createStub(RefreshTokenService::class));
     $manager->showContent(ContentType::User, 'user-id');
   }
 }

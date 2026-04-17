@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\DB\Entity\User\User;
 use App\Security\Authentication\ApiAuthenticationSuccessHandler;
+use App\Security\SuspendedUserChecker;
 use App\Security\Authentication\FormLoginSuccessHandler;
 use App\Security\Authentication\JwtRefresh\ApiRefreshTokenSuccessHandler;
 use App\Security\Authentication\WebView\WebviewJWTAuthenticator;
@@ -30,6 +31,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'firewalls' => [
         'api_authentication_login' => [
           'provider' => 'user_provider',
+          'user_checker' => SuspendedUserChecker::class,
           'pattern' => '^/api/authentication',
           'methods' => ['POST'],
           'stateless' => true,
@@ -57,6 +59,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'main' => [
           'pattern' => '^/(?!(api/))',
           'provider' => 'user_provider',
+          'user_checker' => SuspendedUserChecker::class,
           'stateless' => false,
           'form_login' => [
             'login_path' => '/app/login',
