@@ -153,7 +153,7 @@
       </li>
     {% endif %}
 
-    {% if not isWebview() and app.user %}
+    {% if app.user %}
       {# logout #}
       <li class="nav-item" id="logout-nav-item">
         <a class="nav-link" href="#" id="btn-logout" data-logout-path="{{ url('logout') }}">

@@ -142,8 +142,9 @@
 
 // In Catroid WebView the page may render behind the Android status bar.
 // Push the topbar down by the safe-area inset and adjust page-content.
+// Use direct child selector so nested .mdc-top-app-bar (e.g. search bar) don't get double padding.
 .is-webview {
-  .mdc-top-app-bar {
+  > .mdc-top-app-bar {
     padding-top: env(safe-area-inset-top);
   }
 

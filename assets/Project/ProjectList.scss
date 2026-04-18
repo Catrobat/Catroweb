@@ -203,6 +203,17 @@ $container-padding: 1rem;
       height: calc(100vh - 56px);
     }
 
+    // In webview the topbar is taller due to safe-area inset
+    .is-webview & {
+      top: calc(64px + env(safe-area-inset-top));
+      height: calc(100vh - 64px - env(safe-area-inset-top));
+
+      @media (width <= 599px) {
+        top: calc(56px + env(safe-area-inset-top));
+        height: calc(100vh - 56px - env(safe-area-inset-top));
+      }
+    }
+
     .project-list__title {
       padding-bottom: 1rem;
     }
