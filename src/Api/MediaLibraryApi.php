@@ -20,9 +20,11 @@ use OpenAPI\Server\Model\MediaCategoriesListResponse;
 use OpenAPI\Server\Model\MediaCategoryDetailResponse;
 use OpenAPI\Server\Model\MediaCategoryRequest;
 use OpenAPI\Server\Model\MediaCategoryResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 
 class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiInterface
@@ -420,6 +422,36 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     $response = $this->facade->getResponseManager()->createAssetResponse($asset, $user);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    return $response;
+  }
+
+  #[\Override]
+  public function mediaAssetsIdDownloadGet(
+    string $id,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null {
+    $asset = $this->facade->getLoader()->getAssetById($id);
+    if (!$asset instanceof \App\DB\Entity\MediaLibrary\MediaAsset) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $file = $this->facade->getResponseManager()->getAssetFile($asset);
+    if (null === $file) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $this->facade->getProcessor()->incrementDownloads($asset);
+
+    $filename = $asset->getName().'.'.$asset->getExtension();
+    $fallback = $asset->getId().'.'.$asset->getExtension();
+    $response = new BinaryFileResponse($file);
+    $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $fallback);
 
     return $response;
   }

@@ -12,7 +12,6 @@ use App\Api\Traits\KeysetCursorTrait;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectCodeStatistics;
-use App\DB\Entity\Project\Special\ExampleProject;
 use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\Project\Special\SpecialProject;
 use App\DB\Entity\Project\Tag;
@@ -20,7 +19,6 @@ use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use App\Storage\StorageLifecycleService;
 use App\Utils\ElapsedTimeStringFormatter;
-use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\CodeStatisticsResponse;
 use OpenAPI\Server\Model\ErrorResponse;
 use OpenAPI\Server\Model\ExtensionResponse;
@@ -34,6 +32,7 @@ use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -51,8 +50,8 @@ class ProjectsResponseManager extends AbstractResponseManager
     SerializerInterface $serializer,
     private readonly ProjectManager $project_manager,
     \Psr\Cache\CacheItemPoolInterface $cache,
-    private readonly EntityManagerInterface $entity_manager,
     private readonly ImageRepository $image_repository,
+    private readonly StorageLifecycleService $storage_lifecycle,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -317,54 +316,7 @@ class ProjectsResponseManager extends AbstractResponseManager
 
   private function computeRetentionDays(Project $project): int
   {
-    if ($project->isStorageProtected()) {
-      return StorageLifecycleService::PROTECTED_DAYS;
-    }
-
-    $projectId = $project->getId();
-    if (null !== $projectId) {
-      $featured = (int) $this->entity_manager->createQueryBuilder()
-        ->select('COUNT(f.id)')
-        ->from(FeaturedProject::class, 'f')
-        ->where('f.project = :project')
-        ->setParameter('project', $project)
-        ->getQuery()
-        ->getSingleScalarResult()
-      ;
-      if ($featured > 0) {
-        return StorageLifecycleService::PROTECTED_DAYS;
-      }
-
-      $example = (int) $this->entity_manager->createQueryBuilder()
-        ->select('COUNT(e.id)')
-        ->from(ExampleProject::class, 'e')
-        ->where('e.project = :project')
-        ->setParameter('project', $project)
-        ->getQuery()
-        ->getSingleScalarResult()
-      ;
-      if ($example > 0) {
-        return StorageLifecycleService::PROTECTED_DAYS;
-      }
-    }
-
-    if ($project->getDownloads() >= 10) {
-      return StorageLifecycleService::ACTIVE_DAYS;
-    }
-
-    $user = $project->getUser();
-    if (null !== $user) {
-      $lastLogin = $user->getLastLogin();
-      if (null !== $lastLogin && $lastLogin > new \DateTime('-180 days')) {
-        return StorageLifecycleService::ACTIVE_DAYS;
-      }
-    }
-
-    if ($project->isVisible() && !$project->getAutoHidden() && null !== $user && $user->isVerified()) {
-      return StorageLifecycleService::STANDARD_DAYS;
-    }
-
-    return StorageLifecycleService::SHORT_DAYS;
+    return $this->storage_lifecycle->getRetentionDays($project);
   }
 
   public function createFeaturedProjectResponse(FeaturedProject $featured_project, ?string $attributes = null): FeaturedProjectResponse
@@ -519,13 +471,11 @@ class ProjectsResponseManager extends AbstractResponseManager
     ]);
   }
 
-  public function createProjectCatrobatFileResponse(string $id, File $file): BinaryFileResponse
+  public function createProjectCatrobatFileResponse(string $id, File $file, ?string $name = null): BinaryFileResponse
   {
     $response = new BinaryFileResponse($file);
-    $response->headers->set(
-      'Content-Disposition',
-      'attachment; filename="'.$id.'.catrobat"'
-    );
+    $filename = null !== $name ? $name.'.catrobat' : $id.'.catrobat';
+    $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $id.'.catrobat');
     $response->headers->set('Content-Type', 'application/zip');
 
     return $response;

@@ -29,6 +29,12 @@ return static function (RoutingConfigurator $routingConfigurator): void {
     ->requirements(['id' => '^[a-zA-Z0-9\\\-]+$'])
   ;
 
+  $routingConfigurator->add('open_api_server_mediaLibrary_mediaassetsiddownloadget', '/api/media/assets/{id}/download')
+    ->controller([OverwriteController::class, 'mediaAssetsIdDownloadGet'])
+    ->methods(['GET'])
+    ->requirements(['id' => '^[a-zA-Z0-9\\\-]+$'])
+  ;
+
   $routingConfigurator->add('legacy_hour_of_code_route', '/hourOfCode')
     ->controller([RedirectController::class, 'hourOfCode'])
     ->methods(['GET'])

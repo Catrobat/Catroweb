@@ -2087,6 +2087,39 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  '/media/assets/{id}/download':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          pattern: '^[a-zA-Z0-9\-]+$'
+        description: 'Asset UUID'
+
+    get:
+      tags:
+        - 'Media Library'
+      summary: 'Download a media asset file'
+      description: 'Returns the media asset file with a Content-Disposition header containing the human-readable asset name. Increments the download counter.'
+      responses:
+        '200':
+          description: 'Media asset file successfully downloaded'
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+                description: Used only with `application/octet-stream` responses
+                example: attachment; filename="Cat.png"
+        '404':
+          $ref: '#/components/responses/NotFound'
+
   ######################################################
   # Search
   ###
