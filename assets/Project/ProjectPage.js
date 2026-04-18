@@ -119,12 +119,15 @@ function renderProjectMetadata(data) {
         badgesContainer.appendChild(nfkIcon)
       }
     }
-    // In webview, wrap thumbnail with download link
-    if (isWebview && data.download_url && !thumbnail.parentElement.closest('a')) {
-      const link = document.createElement('a')
-      link.href = data.download_url
-      thumbnail.parentElement.insertBefore(link, thumbnail)
-      link.appendChild(thumbnail)
+    // In webview, tapping thumbnail triggers the download button (with progress bar)
+    if (isWebview && data.download_url) {
+      thumbnail.style.cursor = 'pointer'
+      thumbnail.addEventListener('click', () => {
+        const downloadBtn = document.querySelector('.js-btn-project-download')
+        if (downloadBtn) {
+          downloadBtn.click()
+        }
+      })
     }
   }
 
