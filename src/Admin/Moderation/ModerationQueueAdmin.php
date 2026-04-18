@@ -92,6 +92,7 @@ class ModerationQueueAdmin extends AbstractAdmin
       ->add('content_owner', null, [
         'label' => 'Content Owner',
         'sortable' => false,
+        'virtual_field' => true,
         'template' => 'Admin/CRUD/list__field_content_owner.html.twig',
       ])
       ->add('reporter_trust_score', null, ['label' => 'Trust Score'])
