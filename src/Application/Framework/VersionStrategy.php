@@ -15,31 +15,37 @@ class VersionStrategy implements VersionStrategyInterface
   ) {
   }
 
-  /**
-   * @throws \Exception
-   */
   #[\Override]
   public function getVersion(string $path): string
   {
-    $hash = '';
-    $app_env = $_ENV['APP_ENV'];
-    if ('dev' === $app_env) {
-      $hash = '--'.md5(strval(random_int(0, 999999)));
+    if ($this->hasContentHash($path)) {
+      return '';
     }
 
-    if (preg_match('/\?/', $path)) {
-      return '&v='.$this->app_version.$hash;
+    $suffix = '';
+    if ('dev' === ($_ENV['APP_ENV'] ?? '')) {
+      $suffix = '--'.md5(strval(random_int(0, 999_999)));
     }
 
-    return '?v='.$this->app_version.$hash;
+    $separator = str_contains($path, '?') ? '&' : '?';
+
+    return $separator.'v='.$this->app_version.$suffix;
   }
 
-  /**
-   * @throws \Exception
-   */
   #[\Override]
   public function applyVersion(string $path): string
   {
     return $path.$this->getVersion($path);
+  }
+
+  /**
+   * Webpack Encore outputs filenames with content/chunk hashes (e.g. runtime-537e323c06d3e.js).
+   * Appending ?v=APP_VERSION to these is redundant and causes unnecessary cache busts on deploy.
+   */
+  private function hasContentHash(string $path): bool
+  {
+    $file = basename(parse_url($path, PHP_URL_PATH) ?: $path);
+
+    return (bool) preg_match('/[-\.][0-9a-f]{8,}\./', $file);
   }
 }
