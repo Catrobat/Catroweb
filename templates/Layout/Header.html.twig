@@ -1,4 +1,4 @@
-<header class="mdc-top-app-bar">
+<header class="mdc-top-app-bar{% if top_bar_fixed|default %} mdc-top-app-bar--fixed{% endif %}">
   <div class="body-content">
     <div class="container">
       {% block header %}
