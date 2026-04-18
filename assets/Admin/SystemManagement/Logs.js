@@ -54,7 +54,6 @@ if (document.readyState === 'loading') {
 
 function applyFilters() {
   const logEntries = document.querySelectorAll('.log-entry')
-  let visibleCount = 0
 
   logEntries.forEach(function (entry) {
     let visible = true
@@ -77,7 +76,6 @@ function applyFilters() {
 
     if (visible) {
       entry.style.display = ''
-      visibleCount++
     } else {
       entry.style.display = 'none'
     }
