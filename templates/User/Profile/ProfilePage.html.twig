@@ -28,7 +28,7 @@
 {% block body %}
 
   {# Profile header — server renders avatar + username, JS fills verification badge + follow buttons #}
-  <div class="row no-gutters profile">
+  <div class="row g-0 profile">
     {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
     {% set body_avatar_variants = user_avatar_variants(profile) %}
     <div class="col-4 col-md-2 avatar-container mt-2 pe-3">
