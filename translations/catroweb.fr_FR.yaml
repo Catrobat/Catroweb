@@ -578,6 +578,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: Votre mot de passe ou votre nom d'utilisateur est incorrect.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Votre nom d'utilisateur ou votre adresse e-mail n'a pas été trouvé.
   forgotPass: Identifiants oubliés?
   recoverPassSend: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.

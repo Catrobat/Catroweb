@@ -582,6 +582,7 @@ login:
   oauth:
     title: یا می توانید به آن بپیوندید
   passOrUser: نام کاربری یا کلمه عبور نادرست است.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: آدرس ایمیل یا نام کاربری یافت نشد.
   forgotPass: نام کاربری یا رمز عبور را فراموش کرده اید؟
   recoverPassSend: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.

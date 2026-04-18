@@ -583,6 +583,7 @@ login:
   oauth:
     title: หรือจะร่วมด้วยก็ได้
   passOrUser: รหัสผ่านหรือชื่อผู้ใช้ของคุณไม่ถูกต้อง
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: ไม่พบชื่อผู้ใช้หรืออีเมล์คุณ
   forgotPass: ลืมรหัสผ่านหรือชื่อผู้ใช้?
   recoverPassSend: อีเมล์ถูกส่งไปยังอีเมล์แอดเดรสของคุณ กรุณาตรวจสอบกล่องขาเข้า

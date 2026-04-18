@@ -578,6 +578,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਜਾਂ ਯੂਜ਼ਰ ਨਾਂ ਗਲਤ ਸੀ.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: ਤੁਹਾਡਾ ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਜਾਂ ਈਮੇਲ ਪਤਾ ਨਹੀਂ ਮਿਲਿਆ.
   forgotPass: ਪਾਸਵਰਡ ਜਾਂ ਯੂਜ਼ਰ ਨਾਂ ਭੁੱਲ ਗਏ ਹੋ?
   recoverPassSend: ਤੁਹਾਡੇ ਈਮੇਲ ਪਤੇ ਤੇ ਇੱਕ ਈਮੇਲ ਭੇਜਿਆ ਗਿਆ ਸੀ. ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਇਨਬਾਕਸ ਦੀ ਜਾਂਚ ਕਰੋ.

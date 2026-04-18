@@ -578,6 +578,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: ユーザー名またはパスワードが正しくありません。
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: あなたのユーザー名または電子メール アドレスが見つかりませんでした。
   forgotPass: パスワードまたはユーザ名を忘れましたか?
   recoverPassSend: あなたのメール アドレスにメールが送信されました。受信トレイを確認してください。

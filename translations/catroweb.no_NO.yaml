@@ -579,6 +579,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: Ditt passord eller brukernavn er feil.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Din brukernavn eller e-postadresse ble ikke funnet.
   forgotPass: Glemt passord eller brukernavn?
   recoverPassSend: En e-post ble sendt til e-postadressen din. Vennligst sjekk innboksen din.

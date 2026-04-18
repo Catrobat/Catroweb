@@ -578,6 +578,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: 您的密碼或使用者名稱錯誤。
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: 找不到您的使用者名稱或電子郵件地址。
   forgotPass: 忘記密碼或使用者名稱嗎?
   recoverPassSend: 一封電子郵件已發送到您的電子郵件地址。請檢查您的收件箱。

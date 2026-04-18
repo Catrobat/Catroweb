@@ -578,6 +578,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: Лозинка или корисничко име су погрешни.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Ваше корисничко име или адреса е-поште није пронађена.
   forgotPass: Заборавили сте лозинку или корисничко име?
   recoverPassSend: На вашу адресу е-поште послата је е-пошта. Проверите своје сандуче.

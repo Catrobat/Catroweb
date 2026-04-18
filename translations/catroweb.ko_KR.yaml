@@ -576,6 +576,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: 사용자 이름 또는 암호가 잘못되었습니다.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: 사용자 이름 또는 이메일 주소를 찾을 수 없습니다.
   forgotPass: 아이디나 비밀번호가 잘못 되었습니다.
   recoverPassSend: 이메일이 귀하의 이메일 주소로 보냈습니다. 받은 편지함을 확인하시기 바랍니다.

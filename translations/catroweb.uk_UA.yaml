@@ -578,6 +578,7 @@ login:
   oauth:
     title: Або ти можеш увійти за допомогою
   passOrUser: Ваш пароль або імʼя користувача некоректне.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Ваше імʼя користувача або адрес електронної пошти не знайдено.
   forgotPass: Забули пароль або імʼя користувача?
   recoverPassSend: На вашу електронну адресу було надіслано електронний лист. Будь ласка, перевірте свою поштову скриньку.

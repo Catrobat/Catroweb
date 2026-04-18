@@ -584,6 +584,7 @@ login:
   oauth:
     title: অথবা আপনি সাথে যোগ দিতে পারেন
   passOrUser: আপনার পাসওয়ার্ড বা ব্যবহারকারীর নামটি ভুল ছিল।
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: আপনার ব্যবহারকারী নাম বা ইমেল ঠিকানা পাওয়া যায় নি।
   forgotPass: পাসওয়ার্ড বা ব্যবহারকারীর নাম ভুলে গেছেন?
   recoverPassSend: আপনার ইমেল ঠিকানায় একটি ইমেল প্রেরণ করা হয়েছিল। অনুগ্রহ করে আপনার ইনবক্স চেক করুন।

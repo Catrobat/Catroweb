@@ -582,6 +582,7 @@ login:
   oauth:
     title: Oder beitreten mit
   passOrUser: Das Passwort oder der Username ist falsch.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.
   forgotPass: Passwort oder Usernamen vergessen?
   recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.

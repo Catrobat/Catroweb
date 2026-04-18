@@ -578,6 +578,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: आपका पासवर्ड या उपयोगकर्ता नाम गलत था।
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: आपका उपयोगकर्ता नाम या ईमेल पता नहीं मिला।
   forgotPass: आप पारण शब्द या उपयोगकर्ता नाम भूल चुके हैं ?
   recoverPassSend: एक ईमेल आपके ईमेल पते पर भेजा गया था। कृपया अपने इनबॉक्स की जाँच करें।

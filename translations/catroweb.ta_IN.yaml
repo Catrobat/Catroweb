@@ -582,6 +582,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: உங்கள் கடவுச்சொல் அல்லது பயனர்பெயர் தவறானது.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: உங்கள் பயனர்பெயர் அல்லது மின்னஞ்சல் முகவரி கிடைக்கவில்லை.
   forgotPass: கடவுச்சொல் அல்லது பயனர்பெயரை மறந்துவிட்டீர்களா?
   recoverPassSend: உங்கள் மின்னஞ்சல் முகவரிக்கு ஒரு மின்னஞ்சல் அனுப்பப்பட்டது. உங்கள் இன்பாக்ஸை சரிபார்க்கவும்.

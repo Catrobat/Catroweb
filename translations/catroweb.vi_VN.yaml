@@ -577,6 +577,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: Mật khẩu hoặc tên người dùng của bạn không chính xác.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Không tìm thấy địa chỉ email hoặc tên người dùng của bạn.
   forgotPass: Quên mật khẩu hoặc tên người dùng?
   recoverPassSend: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
