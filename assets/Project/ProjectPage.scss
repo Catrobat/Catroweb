@@ -1064,6 +1064,11 @@ input[type='number'] {
   padding: 1rem math.div($grid-gutter-width, 2) 1.5rem;
   overflow-y: auto;
   background: var(--theme-background);
+
+  .is-webview & {
+    top: calc(50px + env(safe-area-inset-top));
+    height: calc(100vh - 50px - env(safe-area-inset-top));
+  }
 }
 
 .translation-list {
