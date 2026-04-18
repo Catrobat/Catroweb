@@ -126,7 +126,7 @@ class MediaLibraryController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['IMAGE', 'SOUND']);
+    $asserts[] = new Assert\Choice(choices: ['IMAGE', 'SOUND']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($file_type, $asserts);
     if ($response instanceof Response) {
@@ -145,14 +145,14 @@ class MediaLibraryController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['name', 'created_at', 'downloads', 'updated_at']);
+    $asserts[] = new Assert\Choice(choices: ['name', 'created_at', 'downloads', 'updated_at']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($sort_by, $asserts);
     if ($response instanceof Response) {
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['ASC', 'DESC']);
+    $asserts[] = new Assert\Choice(choices: ['ASC', 'DESC']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($sort_order, $asserts);
     if ($response instanceof Response) {
@@ -1163,7 +1163,7 @@ class MediaLibraryController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['IMAGE', 'SOUND']);
+    $asserts[] = new Assert\Choice(choices: ['IMAGE', 'SOUND']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($file_type, $asserts);
     if ($response instanceof Response) {

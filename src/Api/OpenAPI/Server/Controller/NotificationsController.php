@@ -177,7 +177,7 @@ class NotificationsController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['all', 'reaction', 'follow', 'comment', 'remix', 'studio', 'project']);
+    $asserts[] = new Assert\Choice(choices: ['all', 'reaction', 'follow', 'comment', 'remix', 'studio', 'project']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($type, $asserts);
     if ($response instanceof Response) {

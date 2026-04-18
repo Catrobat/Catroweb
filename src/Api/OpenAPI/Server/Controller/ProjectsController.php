@@ -257,7 +257,7 @@ class ProjectsController extends Controller
 
     // Validate the input values
     $asserts = [];
-    $asserts[] = new Assert\Choice(['', 'android', 'ios']);
+    $asserts[] = new Assert\Choice(choices: ['', 'android', 'ios']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($platform, $asserts);
     if ($response instanceof Response) {
@@ -382,7 +382,7 @@ class ProjectsController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch', 'recommended', 'trending', 'popular']);
+    $asserts[] = new Assert\Choice(choices: ['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch', 'recommended', 'trending', 'popular']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($category, $asserts);
     if ($response instanceof Response) {
@@ -980,7 +980,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Choice(['thumbs_up', 'smile', 'love', 'wow']);
+    $asserts[] = new Assert\Choice(choices: ['thumbs_up', 'smile', 'love', 'wow']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($type, $asserts);
     if ($response instanceof Response) {
@@ -1282,7 +1282,7 @@ class ProjectsController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['thumbs_up', 'smile', 'love', 'wow']);
+    $asserts[] = new Assert\Choice(choices: ['thumbs_up', 'smile', 'love', 'wow']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($type, $asserts);
     if ($response instanceof Response) {
@@ -1392,7 +1392,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\NotNull();
-    $asserts[] = new Assert\Choice(['similar', 'also_downloaded', 'more_from_user']);
+    $asserts[] = new Assert\Choice(choices: ['similar', 'also_downloaded', 'more_from_user']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($category, $asserts);
     if ($response instanceof Response) {
