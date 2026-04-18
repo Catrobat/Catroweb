@@ -119,13 +119,15 @@ function renderProjectMetadata(data) {
         badgesContainer.appendChild(nfkIcon)
       }
     }
-    // In webview, tapping thumbnail triggers the download button (with progress bar)
+    // In webview, tapping thumbnail triggers the download button (with progress bar).
+    // There are two download buttons (large + small for responsive layout) — click the visible one.
     if (isWebview && data.download_url) {
       thumbnail.style.cursor = 'pointer'
       thumbnail.addEventListener('click', () => {
-        const downloadBtn = document.querySelector('.js-btn-project-download')
-        if (downloadBtn) {
-          downloadBtn.click()
+        const buttons = document.querySelectorAll('.js-btn-project-download')
+        const visibleBtn = Array.from(buttons).find((btn) => btn.offsetParent !== null)
+        if (visibleBtn) {
+          visibleBtn.click()
         }
       })
     }
