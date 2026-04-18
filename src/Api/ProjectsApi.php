@@ -138,8 +138,12 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $featured_projects = $this->facade->getLoader()->getFeaturedProjectsKeyset(
-      $flavor, $limit + 1, $platform, $max_version,
-      $cursor_data['value'] ?? null, isset($cursor_data['id']) ? (int) $cursor_data['id'] : null
+      $flavor,
+      $limit + 1,
+      $platform,
+      $max_version,
+      $cursor_data['value'] ?? null,
+      isset($cursor_data['id']) ? (int) $cursor_data['id'] : null
     );
 
     $responseCode = Response::HTTP_OK;
@@ -233,7 +237,13 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $projects = $this->facade->getLoader()->getProjectsKeyset(
-      $category, $max_version, $limit + 1, $flavor, $cursor_date, $cursor_value, $cursor_id
+      $category,
+      $max_version,
+      $limit + 1,
+      $flavor,
+      $cursor_date,
+      $cursor_value,
+      $cursor_id
     );
 
     $responseCode = Response::HTTP_OK;
@@ -272,7 +282,13 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $recommended_projects = $this->facade->getLoader()->getRecommendedProjectsKeyset(
-      $id, $category, $max_version, $limit + 1, $flavor, $cursor_date, $cursor_id
+      $id,
+      $category,
+      $max_version,
+      $limit + 1,
+      $flavor,
+      $cursor_date,
+      $cursor_id
     );
 
     $responseCode = Response::HTTP_OK;
@@ -319,7 +335,11 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     try {
       $project = $this->facade->getProcessor()->addProject(
         new AddProjectRequest(
-          $user, $file, $this->facade->getLoader()->getClientIp(), $accept_language, $flavor
+          $user,
+          $file,
+          $this->facade->getLoader()->getClientIp(),
+          $accept_language,
+          $flavor
         )
       );
     } catch (InvalidCatrobatFileException $e) {
@@ -403,7 +423,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     }
 
     $categories_data = [];
-    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch', 'trending'];
+    $categories = ['popular', 'random', 'trending'];
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
