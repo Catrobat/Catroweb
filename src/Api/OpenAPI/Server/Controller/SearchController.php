@@ -96,7 +96,7 @@ class SearchController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['all', 'projects', 'users', 'studios']);
+    $asserts[] = new Assert\Choice(choices: ['all', 'projects', 'users', 'studios']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($type, $asserts);
     if ($response instanceof Response) {

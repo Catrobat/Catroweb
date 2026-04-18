@@ -46,6 +46,8 @@ rm -rf "$PRESERVE_DIR"
 # Fix generated code: double-escaped regex, string Assert\Type refs
 find src/Api/OpenAPI/Server -name '*.php' -exec sed -i '' 's/\\\\-/\\-/g' {} +
 find src/Api/OpenAPI/Server -name '*.yaml' -exec sed -i '' 's/\\\\-/\\-/g' {} +
+# Fix deprecated Choice(array) → Choice(choices: array) for Symfony 7.4+
+find src/Api/OpenAPI/Server -name '*.php' -exec sed -i '' 's/new Assert\\Choice(\[/new Assert\\Choice(choices: [/g' {} +
 # Note: Do NOT replace Assert\Type('OpenAPI\\Server\\Model\\...') with ::class syntax.
 # The generated controllers don't import Model classes, so ::class resolves to the
 # Controller namespace and breaks validation.

@@ -247,7 +247,7 @@ class UtilityController extends Controller
       return $response;
     }
     $asserts = [];
-    $asserts[] = new Assert\Choice(['', 'android', 'ios']);
+    $asserts[] = new Assert\Choice(choices: ['', 'android', 'ios']);
     $asserts[] = new Assert\Type('string');
     $response = $this->validate($platform, $asserts);
     if ($response instanceof Response) {
