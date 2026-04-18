@@ -685,10 +685,16 @@ class ProjectManager
       return null;
     }
 
+    $legacyPath = $this->screenshot_repository->getScreenshotWebPath($id);
+    $legacyFallback = ScreenshotRepository::DEFAULT_SCREENSHOT !== $legacyPath && null !== $this->urlHelper
+      ? $this->urlHelper->getAbsoluteUrl('/'.ltrim($legacyPath, '/'))
+      : null;
+
     return $this->image_variant_url_builder->build(
       $this->screenshot_repository->getScreenshotDir(),
       $this->screenshot_repository->getScreenshotPublicPath(),
       $this->screenshot_repository->getScreenshotVariantBasename($id),
+      legacyFallbackPath: $legacyFallback,
     );
   }
 
