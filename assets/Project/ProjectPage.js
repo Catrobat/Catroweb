@@ -719,6 +719,8 @@ function initProjectScreenshotUpload() {
       const input = document.createElement('input')
       input.type = 'file'
       input.accept = 'image/*'
+      input.style.display = 'none'
+      document.body.appendChild(input)
       addChangeListenerToFileInput(input)
       input.click()
     })
