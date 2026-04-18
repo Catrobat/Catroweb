@@ -1,6 +1,7 @@
 @use 'sass:math';
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
+@import '../Components/Fab';
 
 $tile-size-sm: 92px;
 $tile-size-md: 104px;

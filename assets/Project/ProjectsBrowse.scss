@@ -1,4 +1,5 @@
 @import '../Layout/Variables';
+@import '../Components/Fab';
 
 $list-item-padding-overflow-x: 1.5rem;
 
@@ -84,38 +85,3 @@ $list-item-padding-overflow-x: 1.5rem;
 }
 
 // ---------- End Skeleton Loading ----------
-
-// Floating action button — pill style matching studios FAB
-.projects-fab {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0 1.25rem;
-  height: 48px;
-  border-radius: 24px;
-  background: var(--primary, #00acc1);
-  color: var(--on-primary, #fff);
-  box-shadow: 0 4px 12px rgb(0 0 0 / 25%);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  white-space: nowrap;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-
-  .material-icons {
-    font-size: 1.25rem;
-  }
-
-  &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgb(0 0 0 / 30%);
-    color: var(--on-primary, #fff);
-    text-decoration: none;
-  }
-}

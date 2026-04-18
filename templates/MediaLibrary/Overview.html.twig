@@ -71,6 +71,13 @@
     }
   %}
 
+  {% if isWebview() %}
+    <a href="{{ path('exit-webview') }}" id="media-library-done-fab" class="floating-action-button" style="display: none;">
+      <span class="material-icons">check</span>
+      <span>{{ 'done'|trans({}, 'catroweb') }}</span>
+    </a>
+  {% endif %}
+
   <div class="js-media-library-overview"
        data-path-media-library-api="{{ path('open_api_server_mediaLibrary_medialibraryget') }}"
        data-path-media-assets-api="{{ path('open_api_server_mediaLibrary_mediaassetsget') }}"
