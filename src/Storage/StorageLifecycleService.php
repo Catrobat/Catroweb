@@ -46,6 +46,10 @@ class StorageLifecycleService
    */
   public function getRetentionDays(Project $project): int
   {
+    if ($project->isDebugBuild()) {
+      return self::DEBUG_DAYS;
+    }
+
     if ($this->isProtected($project)) {
       return self::PROTECTED_DAYS;
     }
@@ -56,10 +60,6 @@ class StorageLifecycleService
 
     if ($this->isStandard($project)) {
       return self::STANDARD_DAYS;
-    }
-
-    if ($project->isDebugBuild()) {
-      return self::DEBUG_DAYS;
     }
 
     return self::SHORT_DAYS;
