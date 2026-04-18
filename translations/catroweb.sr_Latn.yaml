@@ -582,6 +582,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: Lozinka ili korisničko ime je netačno.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Korisničko ime ili e-mail adresa nije pronađena.
   forgotPass: Zaboravio lozinku ili korisničko ime?
   recoverPassSend: E-mail je poslan na tvoju e-mail adresu. Molimo proveri svoje prijemno sanduče.

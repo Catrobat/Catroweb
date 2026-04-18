@@ -577,6 +577,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: Jina la mtumiji au nenosiri havikuwa sahihi.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Your username or email address was not found.
   forgotPass: Umesahau nenosiri au jina la mtumiaji?
   recoverPassSend: Barua pepe imetumwa kwenye anauani ya barua pepe yako. Tafadhali angalia akaunti yako.

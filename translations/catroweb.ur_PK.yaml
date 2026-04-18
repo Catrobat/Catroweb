@@ -573,6 +573,7 @@ login:
   oauth:
     title: یا آپ شامل ہو سکتے ہیں۔
   passOrUser: آپ کا پاس ورڈ یا صارف نام غلط تھا۔
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: آپکا یوزر نیم یا ای میل نہیں ملا.
   forgotPass: صارف نام یا خفیہ کوڈ بھول گئے ہیں؟
   recoverPassSend: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔

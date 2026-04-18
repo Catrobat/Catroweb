@@ -577,6 +577,7 @@ login:
   oauth:
     title: Or you can join with
   passOrUser: Your password or username was incorrect.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
   recoverPassSend: Email bat bidali dugu zure helbidera. Begiratu sarrera ontzia.

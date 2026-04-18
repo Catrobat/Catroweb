@@ -578,6 +578,7 @@ login:
   oauth:
     title: O puede unirse con
   passOrUser: Su contraseña o nombre de usuario era incorrecto.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: Su nombre de usuario o correo electrónico no han podido ser encontrados.
   forgotPass: '¿Ha olvidado su contraseña o usuario?'
   recoverPassSend: Un correo electrónico ha sido enviado a tu dirección de correo electrónico. Por favor revise su bandeja de entrada.

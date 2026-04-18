@@ -580,6 +580,7 @@ login:
   oauth:
     title: یا تاسو کولی شئ یوځای شئ
   passOrUser: ستاسو پټنوم یا کارن نوم غلط و.
+  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
   noUsername: ستاسو کارن نوم یا بریښنالیک پته ونه موندل شوه.
   forgotPass: پټنوم یا کارن نوم هیر شوی؟
   recoverPassSend: ستاسو بریښنالیک ته یو بریښنالیک لیږل شوی. مهرباني وکړئ خپل ان باکس چیک کړئ.
