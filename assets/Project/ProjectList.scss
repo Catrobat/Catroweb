@@ -172,15 +172,15 @@ $container-padding: 1rem;
 
     // When using action list items, override grid card sizing
     .projects-list-item-wrapper.project-list__project {
-      width: calc(100% + 3rem);
-      margin: 0 -1.5rem !important;
-      margin-bottom: 0 !important;
+      width: 100%;
+      margin: 0 !important;
     }
 
     .projects-container:has(.projects-list-item-wrapper) {
       justify-content: flex-start;
       flex-direction: column;
       padding: 0;
+      margin: 0;
       overflow: visible;
     }
   }
