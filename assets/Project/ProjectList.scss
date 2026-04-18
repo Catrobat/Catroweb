@@ -188,10 +188,10 @@ $container-padding: 1rem;
   &.vertical {
     position: fixed;
     top: 64px;
+    bottom: 0;
     left: 0;
     z-index: 100;
     width: 100vw;
-    height: calc(100vh - 64px);
     padding-top: 1rem;
     padding-right: math.div($grid-gutter-width, 2);
     padding-left: math.div($grid-gutter-width, 2);
@@ -200,17 +200,13 @@ $container-padding: 1rem;
 
     @media (width <= 599px) {
       top: 56px;
-      height: calc(100vh - 56px);
     }
 
-    // In webview the topbar is taller due to safe-area inset
     .is-webview & {
       top: calc(64px + env(safe-area-inset-top));
-      height: calc(100vh - 64px - env(safe-area-inset-top));
 
       @media (width <= 599px) {
         top: calc(56px + env(safe-area-inset-top));
-        height: calc(100vh - 56px - env(safe-area-inset-top));
       }
     }
 

@@ -1057,17 +1057,16 @@ input[type='number'] {
 .full-screen {
   position: fixed;
   top: 50px;
+  bottom: 0;
   left: 0;
   z-index: 100;
   width: 100vw;
-  height: calc(100vh - 50px);
   padding: 1rem math.div($grid-gutter-width, 2) 1.5rem;
   overflow-y: auto;
   background: var(--theme-background);
 
   .is-webview & {
     top: calc(50px + env(safe-area-inset-top));
-    height: calc(100vh - 50px - env(safe-area-inset-top));
   }
 }
 

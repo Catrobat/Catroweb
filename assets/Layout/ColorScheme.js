@@ -170,10 +170,30 @@ const initializeColorScheme = () => {
   const menuItem = document.getElementById('top-app-bar__btn-color-scheme')
   if (!menuItem) return
 
-  menuItem.addEventListener('click', () => {
+  const openThemePicker = () => {
     showThemePicker(menuItem).catch((error) => {
       console.error('Failed to show color scheme picker', error)
     })
+  }
+
+  // Use MDCMenu:selected event — direct click handlers on <li> elements
+  // may not fire in Android WebView due to MDC's touch event handling.
+  let handledByMdc = false
+  const optionsMenu = document.getElementById('top-app-bar__options-menu')
+  if (optionsMenu) {
+    optionsMenu.addEventListener('MDCMenu:selected', (event) => {
+      if (event.detail?.item === menuItem) {
+        handledByMdc = true
+        openThemePicker()
+      }
+    })
+  }
+
+  menuItem.addEventListener('click', () => {
+    if (!handledByMdc) {
+      openThemePicker()
+    }
+    handledByMdc = false
   })
 }
 
