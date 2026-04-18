@@ -3,7 +3,7 @@
 <head>
   <script>(function(){var t=localStorage.getItem('theme');t=t==='light'||t==='dark'||t==='auto'?t:'auto';if(t==='auto'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-bs-theme',t);document.documentElement.setAttribute('data-swal2-theme',t);})();</script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <title>
     {% block title %}{{ 'title'|trans({}, 'catroweb') }}{% endblock %}
@@ -52,7 +52,7 @@
   {% block head %}{% endblock %}
 </head>
 
-<body class="body-with-sidebar">
+<body class="body-with-sidebar{% if isWebview() %} is-webview{% endif %}">
 
 <a href="#main_container_content" class="skip-to-content">Skip to main content</a>
 

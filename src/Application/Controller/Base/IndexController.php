@@ -31,6 +31,7 @@ class IndexController extends AbstractController
   }
 
   #[Route(path: '/', name: 'index', methods: ['GET'])]
+  #[Route(path: '/exit', name: 'exit-webview', methods: ['GET'])]
   public function index(): Response
   {
     /** @var User|null $user */
