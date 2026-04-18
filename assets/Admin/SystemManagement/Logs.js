@@ -82,9 +82,6 @@ function applyFilters() {
       entry.style.display = 'none'
     }
   })
-
-  // Show count of visible logs
-  console.log(`Showing ${visibleCount} of ${logEntries.length} log entries`)
 }
 
 function loadFileContent(file) {
@@ -123,6 +120,6 @@ function loadFileContent(file) {
     })
     .catch(() => {
       document.getElementById('loading-spinner').style.display = 'none'
-      alert('something went terribly wrong')
+      alert('Failed to load log file. Please try again.')
     })
 }
