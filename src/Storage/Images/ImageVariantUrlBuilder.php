@@ -33,7 +33,6 @@ class ImageVariantUrlBuilder
     string $basename,
     ?int $width = null,
     ?int $height = null,
-    ?string $legacyFallbackPath = null,
   ): ImageVariantsModel {
     $variants = new ImageVariantsModel();
     $variants->setWidth($width);
@@ -50,35 +49,7 @@ class ImageVariantUrlBuilder
       $variants->{$setters[$variant]}($set);
     }
 
-    // When no variant files exist but a legacy PNG does, use it as webp_1x
-    // fallback so the client always has at least one URL to render.
-    if (null !== $legacyFallbackPath) {
-      $this->applyLegacyFallback($variants, $legacyFallbackPath);
-    }
-
     return $variants;
-  }
-
-  private function applyLegacyFallback(ImageVariantsModel $variants, string $fallbackUrl): void
-  {
-    $setters = [
-      'getThumb' => 'setThumb',
-      'getCard' => 'setCard',
-      'getDetail' => 'setDetail',
-    ];
-
-    foreach ($setters as $getter => $setter) {
-      $set = $variants->{$getter}();
-      if (null === $set) {
-        $set = new ImageVariantSetModel();
-        $variants->{$setter}($set);
-      }
-
-      if (null === $set->getWebp1x() && null === $set->getWebp2x()
-          && null === $set->getAvif1x() && null === $set->getAvif2x()) {
-        $set->setWebp1x($fallbackUrl);
-      }
-    }
   }
 
   private function buildSet(string $storageDir, string $publicPath, string $basename, string $variant): ImageVariantSetModel
