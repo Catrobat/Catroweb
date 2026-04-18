@@ -102,9 +102,9 @@
     </div>
 
     <a href="{{ is_logged_in ? path('project_upload') : path('login') }}"
-       class="projects-fab">
+       class="floating-action-button">
       <span class="material-icons">add</span>
-      <span class="projects-fab__text">{{ 'project.browse.upload'|trans({}, 'catroweb') }}</span>
+      <span>{{ 'project.browse.upload'|trans({}, 'catroweb') }}</span>
     </a>
   </div>
 {% endblock %}

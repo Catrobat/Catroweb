@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block top_bar_page_title %}{{ category_name }}{% endblock %}
+{% block top_bar_fixed %}true{% endblock %}
 {% block top_bar_back_path %}{{ path('media_library_overview') }}{% endblock %}
 
 {% block body %}
@@ -58,6 +59,13 @@
       },
     }
   %}
+
+  {% if isWebview() %}
+    <a href="{{ path('exit-webview') }}" id="media-library-done-fab" class="floating-action-button" style="display: none;">
+      <span class="material-icons">check</span>
+      <span>{{ 'done'|trans({}, 'catroweb') }}</span>
+    </a>
+  {% endif %}
 
   <div class="js-media-library"
        data-category-id="{{ category.id }}"

@@ -71,6 +71,27 @@ optionsButton?.addEventListener('click', () => {
   showTopBarOptions()
 })
 
+// In Android WebView, MDC's touch/ripple handling can swallow native click events
+// on menu <li> items. Listen for MDCMenu:selected (MDC's own reliable event) and
+// re-dispatch a synthetic click so that handlers attached by other modules always fire.
+// A short dedup window prevents double-firing on desktop where both events occur.
+if (optionsMenu) {
+  const recentlyClicked = new WeakSet()
+  optionsMenuEl.addEventListener('click', (event) => {
+    const item = event.target.closest('.mdc-deprecated-list-item')
+    if (item) {
+      recentlyClicked.add(item)
+      setTimeout(() => recentlyClicked.delete(item), 300)
+    }
+  })
+  optionsMenu.listen('MDCMenu:selected', (event) => {
+    const item = event.detail?.item
+    if (item && !recentlyClicked.has(item)) {
+      item.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+    }
+  })
+}
+
 export function showTopBarDownload() {
   hideTopBars()
   document.querySelector('#top-app-bar__media-library-download').style.display = 'flex'

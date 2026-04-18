@@ -130,6 +130,7 @@ class OwnProfile {
   addProfilePictureChangeListenerToInput(input) {
     const self = this
     input.addEventListener('change', async () => {
+      input.remove()
       let loadingSpinner
       if (this.avatarElement) {
         const loadingSpinnerTemplate = document.getElementById(

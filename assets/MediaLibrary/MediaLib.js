@@ -352,5 +352,11 @@ function medialibDownloadSelectedFile(file) {
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(link)
+
+  const fab = document.getElementById('media-library-done-fab')
+  if (fab) {
+    fab.style.display = ''
+  }
+
   return false
 }
