@@ -8,7 +8,7 @@
 
     {% if isWebview() %}
       <li class="nav-item">
-        <a class="nav-link" href="{{ path('index') }}" id="btn-back-to-app">
+        <a class="nav-link" href="{{ path('exit-webview') }}" id="btn-back-to-app">
           <span class="sidebar-link-icon material-icons">arrow_back</span>
           <span class="sidebar-link-text">{{ 'back_to_app'|trans({}, 'catroweb') }}</span>
         </a>

@@ -8,7 +8,6 @@ import ProjectApi from '../Api/ProjectApi'
 export const Project = function (config) {
   const {
     projectId,
-    projectName,
     userRole,
     loginUrl,
     apiReactionUrl,
@@ -126,14 +125,6 @@ export const Project = function (config) {
     // Older app version do not support new features and projects that use them
     if (isWebView && !supported) {
       showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText)
-      return
-    }
-
-    // Unfortunately the android implementation of pocket code has its issues with the new download
-    if (isWebView) {
-      downloadUrl += downloadUrl.includes('?') ? '&' : '?'
-      downloadUrl += 'fname=' + encodeURIComponent(projectName)
-      window.location = downloadUrl
       return
     }
 

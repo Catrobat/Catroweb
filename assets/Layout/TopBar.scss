@@ -50,7 +50,7 @@
     width: 100%;
     height: 100%;
     color: #fff;
-    background-color: color-mix(in srgb, var(--primary-bg, var(--primary)), black 26%);
+    background-color: var(--primary-bg, var(--primary));
     border: none;
     outline: none;
   }
@@ -64,7 +64,8 @@
     position: absolute;
     top: 50%;
     display: block;
-    color: #fff;
+    color: rgb(255 255 255 / 60%);
+    font-size: 0.875rem;
     pointer-events: none;
     transform: translateY(-50%);
   }
@@ -137,4 +138,20 @@
   }
 
   margin-top: 64px; // mdc-top-app-bar__row
+}
+
+// In Catroid WebView the page may render behind the Android status bar.
+// Push the topbar down by the safe-area inset and adjust page-content.
+.is-webview {
+  .mdc-top-app-bar {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .page-content {
+    @media (width <= 599px) {
+      margin-top: calc(56px + env(safe-area-inset-top));
+    }
+
+    margin-top: calc(64px + env(safe-area-inset-top));
+  }
 }
