@@ -1,0 +1,13 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+  {% set owner_id = admin.getContentOwnerId(object) %}
+
+  {% if owner_id %}
+    <a href="{{ path('profile', {id: owner_id, theme: 'pocketcode'}) }}" target="_blank">
+      {{ owner_id }} <i class="fa fa-external-link"></i>
+    </a>
+  {% else %}
+    <span class="text-muted">&mdash;</span>
+  {% endif %}
+{% endblock %}

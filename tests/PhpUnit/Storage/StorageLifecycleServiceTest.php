@@ -103,6 +103,17 @@ class StorageLifecycleServiceTest extends TestCase
     self::assertSame(StorageLifecycleService::SHORT_DAYS, $this->service->getRetentionDays($project));
   }
 
+  public function testDebugTierForDebugBuild(): void
+  {
+    $user = $this->createStub(User::class);
+    $user->method('getLastLogin')->willReturn(new \DateTime('-365 days'));
+    $user->method('isVerified')->willReturn(false);
+
+    $project = $this->createProjectStub(downloads: 0, visible: true, autoHidden: false, debugBuild: true, user: $user);
+
+    self::assertSame(StorageLifecycleService::DEBUG_DAYS, $this->service->getRetentionDays($project));
+  }
+
   public function testShortTierForHiddenProject(): void
   {
     $user = $this->createStub(User::class);
@@ -175,6 +186,7 @@ class StorageLifecycleServiceTest extends TestCase
     int $downloads = 0,
     bool $visible = true,
     bool $autoHidden = false,
+    bool $debugBuild = false,
     ?User $user = null,
   ): Project {
     if (null === $user) {
@@ -189,6 +201,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project->method('getDownloads')->willReturn($downloads);
     $project->method('getVisible')->willReturn($visible);
     $project->method('getAutoHidden')->willReturn($autoHidden);
+    $project->method('isDebugBuild')->willReturn($debugBuild);
     $project->method('getUser')->willReturn($user);
     $project->method('getUploadedAt')->willReturn(new \DateTime('-400 days'));
     $project->method('getName')->willReturn('Test Project');

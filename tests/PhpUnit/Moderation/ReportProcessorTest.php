@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\PhpUnit\Moderation;
 
+use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentReportRepository;
 use App\DB\Enum\ContentType;
@@ -482,6 +483,131 @@ final class ReportProcessorTest extends TestCase
       'project-id',
       'spam',
     );
+  }
+
+  #[Group('unit')]
+  public function testAcceptingReportBansContentOwner(): void
+  {
+    $report = $this->createStub(ContentReport::class);
+    $report->method('getId')->willReturn('report-1');
+    $report->method('getContentType')->willReturn('project');
+    $report->method('getContentId')->willReturn('project-123');
+    $report->method('getState')->willReturn(1);
+    $report->method('getReporter')->willReturn($this->createUserStub('reporter-1'));
+
+    $owner = $this->createStub(User::class);
+    $owner->method('getId')->willReturn('owner-id');
+    $owner->method('getProfileHidden')->willReturn(false);
+
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('getContentOwnerId')->willReturn('owner-id');
+    $visibility->expects($this->exactly(2))
+      ->method('hideContent')
+      ->with(
+        $this->callback(function (ContentType $type): bool {
+          static $call = 0;
+          ++$call;
+
+          return match ($call) {
+            1 => ContentType::Project === $type,
+            2 => ContentType::User === $type,
+            default => false,
+          };
+        }),
+        $this->callback(function (string $id): bool {
+          static $call = 0;
+          ++$call;
+
+          return match ($call) {
+            1 => 'project-123' === $id,
+            2 => 'owner-id' === $id,
+            default => false,
+          };
+        }),
+      )
+    ;
+
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('findReportsForContent')->willReturn([$report]);
+
+    $em = $this->createStub(EntityManagerInterface::class);
+    $em->method('find')->willReturn($owner);
+
+    $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      visibility_manager: $visibility,
+      entity_manager: $em,
+    );
+
+    $processor->resolveReport($report, $this->createUserStub('admin-id'), 'accept');
+  }
+
+  #[Group('unit')]
+  public function testAcceptingReportSkipsBanForAlreadyBannedOwner(): void
+  {
+    $report = $this->createStub(ContentReport::class);
+    $report->method('getId')->willReturn('report-1');
+    $report->method('getContentType')->willReturn('project');
+    $report->method('getContentId')->willReturn('project-123');
+    $report->method('getState')->willReturn(1);
+    $report->method('getReporter')->willReturn($this->createUserStub('reporter-1'));
+
+    $owner = $this->createStub(User::class);
+    $owner->method('getId')->willReturn('owner-id');
+    $owner->method('getProfileHidden')->willReturn(true);
+
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    $visibility->method('getContentOwnerId')->willReturn('owner-id');
+    // Only one call: hiding the project. Owner already banned, so no second call.
+    $visibility->expects($this->once())
+      ->method('hideContent')
+      ->with(ContentType::Project, 'project-123')
+    ;
+
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('findReportsForContent')->willReturn([$report]);
+
+    $em = $this->createStub(EntityManagerInterface::class);
+    $em->method('find')->willReturn($owner);
+
+    $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      visibility_manager: $visibility,
+      entity_manager: $em,
+    );
+
+    $processor->resolveReport($report, $this->createUserStub('admin-id'), 'accept');
+  }
+
+  #[Group('unit')]
+  public function testAcceptingUserReportDoesNotDoubleBan(): void
+  {
+    $report = $this->createStub(ContentReport::class);
+    $report->method('getId')->willReturn('report-1');
+    $report->method('getContentType')->willReturn('user');
+    $report->method('getContentId')->willReturn('bad-user-id');
+    $report->method('getState')->willReturn(1);
+    $report->method('getReporter')->willReturn($this->createUserStub('reporter-1'));
+
+    $visibility = $this->createMock(ContentVisibilityManager::class);
+    // Only one call for User content type — banContentOwner skips User type
+    $visibility->expects($this->once())
+      ->method('hideContent')
+      ->with(ContentType::User, 'bad-user-id')
+    ;
+
+    $report_repo = $this->createStub(ContentReportRepository::class);
+    $report_repo->method('findReportsForContent')->willReturn([$report]);
+
+    $em = $this->createStub(EntityManagerInterface::class);
+
+    $processor = $this->buildProcessor(
+      report_repository: $report_repo,
+      visibility_manager: $visibility,
+      entity_manager: $em,
+    );
+
+    $processor->resolveReport($report, $this->createUserStub('admin-id'), 'accept');
   }
 
   #[Group('unit')]

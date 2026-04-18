@@ -128,6 +128,7 @@ class ReportProcessor
 
     if ($accepted) {
       $this->visibility_manager->hideContent($content_type, $report->getContentId());
+      $this->banContentOwner($content_type, $report->getContentId());
     } else {
       // Only restore content visibility if no other active (new/accepted) reports exist.
       // This prevents un-hiding content that was legitimately reported by others.
@@ -255,6 +256,29 @@ class ReportProcessor
       );
       $this->entity_manager->persist($notification);
     }
+  }
+
+  /**
+   * When an admin accepts a report on a project, studio, or comment,
+   * also ban (profile-hide) the content owner as a safety measure.
+   */
+  private function banContentOwner(ContentType $content_type, string $content_id): void
+  {
+    if (ContentType::User === $content_type) {
+      return; // User reports already ban the user directly via hideContent()
+    }
+
+    $owner_id = $this->visibility_manager->getContentOwnerId($content_type, $content_id);
+    if (null === $owner_id) {
+      return;
+    }
+
+    $owner = $this->entity_manager->find(User::class, $owner_id);
+    if (!$owner instanceof User || $owner->getProfileHidden()) {
+      return; // Already banned or not found
+    }
+
+    $this->visibility_manager->hideContent(ContentType::User, $owner_id);
   }
 
   /**

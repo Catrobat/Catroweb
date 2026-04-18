@@ -6,6 +6,8 @@ namespace App\Admin\Moderation;
 
 use App\DB\Entity\Moderation\ContentReport;
 use App\DB\Entity\User\User;
+use App\DB\Enum\ContentType;
+use App\Moderation\ContentVisibilityManager;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -22,6 +24,21 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
  */
 class ModerationQueueAdmin extends AbstractAdmin
 {
+  public function __construct(
+    private readonly ContentVisibilityManager $visibility_manager,
+  ) {
+  }
+
+  public function getContentOwnerId(ContentReport $report): ?string
+  {
+    $content_type = ContentType::tryFrom($report->getContentType());
+    if (null === $content_type) {
+      return null;
+    }
+
+    return $this->visibility_manager->getContentOwnerId($content_type, $report->getContentId());
+  }
+
   #[\Override]
   protected function generateBaseRouteName(bool $isChildAdmin = false): string
   {
@@ -72,6 +89,11 @@ class ModerationQueueAdmin extends AbstractAdmin
       ->add('category')
       ->add('note', null, ['sortable' => false])
       ->add('reporter', EntityType::class, ['class' => User::class, 'label' => 'Reporter'])
+      ->add('content_owner', null, [
+        'label' => 'Content Owner',
+        'sortable' => false,
+        'template' => 'Admin/CRUD/list__field_content_owner.html.twig',
+      ])
       ->add('reporter_trust_score', null, ['label' => 'Trust Score'])
       ->add('state', 'choice', [
         'choices' => [1 => 'New', 2 => 'Accepted', 3 => 'Rejected'],

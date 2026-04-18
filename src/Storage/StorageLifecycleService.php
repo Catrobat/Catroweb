@@ -22,6 +22,7 @@ class StorageLifecycleService
   public const int ACTIVE_DAYS = 365;
   public const int STANDARD_DAYS = 90;
   public const int SHORT_DAYS = 30;
+  public const int DEBUG_DAYS = 7;
 
   public const float DISK_WARN_THRESHOLD = 0.70;
   public const float DISK_PRESSURE_THRESHOLD = 0.85;
@@ -45,6 +46,10 @@ class StorageLifecycleService
    */
   public function getRetentionDays(Project $project): int
   {
+    if ($project->isDebugBuild()) {
+      return self::DEBUG_DAYS;
+    }
+
     if ($this->isProtected($project)) {
       return self::PROTECTED_DAYS;
     }

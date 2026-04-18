@@ -118,6 +118,7 @@ class ProjectsAdmin extends AbstractAdmin
           ],
         ],
       ])
+      ->add('debug_build', null, ['label' => 'Debug Build'])
     ;
   }
 
@@ -159,6 +160,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('approved', null, ['editable' => true, 'sortable' => false])
       ->add('visible', null, ['editable' => true, 'sortable' => false])
       ->add('storage_protected', null, ['editable' => true, 'sortable' => false, 'label' => 'Protected'])
+      ->add('debug_build', null, ['editable' => false, 'sortable' => false, 'label' => 'Debug'])
       ->add('not_for_kids', 'choice', [
         'editable' => true,
         'sortable' => false,
