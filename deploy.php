@@ -145,7 +145,7 @@ task('smoke_test', function () {
   $maxRetries = 5;
   $retryDelay = 5;
   for ($i = 1; $i <= $maxRetries; ++$i) {
-    $result = run('curl -sf -o /dev/null -w "%{http_code}" -H "Host: share.catrob.at" http://localhost/api/health --max-time 10 || echo "000"');
+    $result = run('curl -sf -o /dev/null -w "%{http_code}" -H "Host: share.catrobat.org" https://localhost/api/health --max-time 10 -k || echo "000"');
     if ('200' === trim($result)) {
       info("Health check passed (attempt {$i})");
 
@@ -153,7 +153,7 @@ task('smoke_test', function () {
     }
     warning("Health check attempt {$i}/{$maxRetries} returned HTTP {$result}");
     if ($i === $maxRetries) {
-      $body = run('curl -s -H "Host: share.catrob.at" http://localhost/api/health --max-time 10 || echo "N/A"');
+      $body = run('curl -s -H "Host: share.catrobat.org" https://localhost/api/health --max-time 10 -k || echo "N/A"');
       warning("Final health check failed. Response body: {$body}");
     }
     if ($i < $maxRetries) {

@@ -98,7 +98,7 @@ function renderProjectMetadata(data) {
   // Screenshot — server-rendered, API updates if changed
   const thumbnail = document.getElementById('project-thumbnail-big')
   if (thumbnail) {
-    updatePictureSources(thumbnail, data.screenshot, 'detail', null)
+    updatePictureSources(thumbnail, data.screenshot, 'detail', thumbnail.getAttribute('src'))
     if (data.not_for_kids) {
       thumbnail.classList.add('blurred')
     }
