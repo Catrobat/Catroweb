@@ -1,0 +1,25 @@
+{% extends sonata_block.templates.block_base %}
+
+{% set translation_domain = settings.translation_domain ?? admin.translationDomain %}
+
+{% block block %}
+    <!-- small box -->
+    <div class="small-box {{ settings.color }}">
+        <div class="inner">
+            <h3>{{ count|number_format }}</h3>
+            <p>
+                {% if translation_domain %}
+                    {{ settings.text|trans({'%count%': count}, translation_domain) }}
+                {% else %}
+                    {{ settings.text }}
+                {% endif %}
+            </p>
+        </div>
+        <div class="icon">
+            {{ settings.icon|parse_icon }}
+        </div>
+        <a href="{{ admin.generateUrl('list') }}" class="small-box-footer">
+            {{ 'stats_view_more'|trans({}, 'SonataAdminBundle') }} <i class="fas fa-arrow-circle-right" aria-hidden="true"></i>
+        </a>
+    </div>
+{% endblock %}

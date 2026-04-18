@@ -221,6 +221,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(OverwriteController::class);
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 
+  $services->set('admin.block.service.count', App\Admin\Block\AdminCountBlockService::class)
+    ->tag('sonata.block')
+  ;
+
   // -------------------------------------------------------------------------------------------------------------------
   // Sonata admin service definitions:
   //   - used by config/packages/sonata_admin.php to build the navigation tree

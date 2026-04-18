@@ -28,6 +28,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           ],
         ],
         'sonata.block.service.text' => null,
+        'admin.block.service.count' => [
+          'contexts' => [
+            'admin',
+          ],
+        ],
       ],
     ]
   );
@@ -53,7 +58,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           [
             'class' => 'col-lg-3 col-xs-6',
             'position' => 'bottom',
-            'type' => 'sonata.admin.block.stats',
+            'type' => 'admin.block.service.count',
             'settings' => [
               'code' => 'admin.block.projects.overview',
               'icon' => 'fas fa-cubes',
@@ -64,7 +69,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           [
             'class' => 'col-lg-3 col-xs-6',
             'position' => 'bottom',
-            'type' => 'sonata.admin.block.stats',
+            'type' => 'admin.block.service.count',
             'settings' => [
               'code' => 'admin.block.users.overview',
               'icon' => 'fas fa-users',
@@ -75,7 +80,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           [
             'class' => 'col-lg-3 col-xs-6',
             'position' => 'bottom',
-            'type' => 'sonata.admin.block.stats',
+            'type' => 'admin.block.service.count',
             'settings' => [
               'code' => 'admin.block.studios.overview',
               'icon' => 'fas fa-object-group',
