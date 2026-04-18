@@ -5,6 +5,7 @@
  * Adapted by the Catroweb Project
  */
 
+import Swal from 'sweetalert2'
 import { showSnackbar, SnackbarDuration } from './Snackbar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 
@@ -68,7 +69,6 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () 
 })
 
 async function showThemePicker(menuItem) {
-  const { default: Swal } = await import('sweetalert2')
   const themeOptions = [
     {
       value: 'light',

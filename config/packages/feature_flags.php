@@ -11,6 +11,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     [
       'Test-Flag' => false,
       'GET_projects_elastica' => false,
+      'force_webview' => false,
     ]
   );
 };

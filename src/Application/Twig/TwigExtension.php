@@ -216,7 +216,8 @@ class TwigExtension extends AbstractExtension
   public function isWebview(): bool
   {
     // Example Webview: $user_agent = "Catrobat/0.93 PocketCode/0.9.14 Platform/Android";
-    return boolval(preg_match('/Catrobat/', $this->getUserAgent()));
+    return boolval(preg_match('/Catrobat/', $this->getUserAgent()))
+      || $this->feature_flag_manager->isEnabled('force_webview');
   }
 
   public function isAndroid(): bool
