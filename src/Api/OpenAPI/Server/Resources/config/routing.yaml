@@ -149,6 +149,14 @@ open_api_server_mediaLibrary_mediaassetsiddelete:
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
 
+open_api_server_mediaLibrary_mediaassetsiddownloadget:
+  path: /media/assets/{id}/download
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.mediaLibrary::mediaAssetsIdDownloadGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
 open_api_server_mediaLibrary_mediaassetsidget:
   path: /media/assets/{id}
   methods: [GET]

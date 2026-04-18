@@ -619,7 +619,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
       return null;
     }
-    $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project_id, $zipFile);
+    $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project_id, $zipFile, $project->getName());
     $responseCode = Response::HTTP_OK;
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();

@@ -123,6 +123,18 @@ class MediaLibraryApiProcessor extends AbstractApiProcessor
     $this->entity_manager->flush();
   }
 
+  public function incrementDownloads(MediaAsset $asset): void
+  {
+    $this->entity_manager->createQueryBuilder()
+      ->update(MediaAsset::class, 'a')
+      ->set('a.downloads', 'a.downloads + 1')
+      ->where('a.id = :id')
+      ->setParameter('id', $asset->getId())
+      ->getQuery()
+      ->execute()
+    ;
+  }
+
   public function deleteAsset(MediaAsset $asset): void
   {
     $this->asset_repository->removeFile($asset->getId(), $asset->getExtension());

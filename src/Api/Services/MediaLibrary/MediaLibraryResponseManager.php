@@ -18,7 +18,8 @@ use OpenAPI\Server\Model\MediaCategoriesListResponse;
 use OpenAPI\Server\Model\MediaCategoryDetailResponse;
 use OpenAPI\Server\Model\MediaCategoryResponse;
 use OpenAPI\Server\Service\SerializerInterface;
-use Symfony\Component\HttpFoundation\UrlHelper;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MediaLibraryResponseManager extends AbstractResponseManager
@@ -32,8 +33,8 @@ class MediaLibraryResponseManager extends AbstractResponseManager
     \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly MediaLibraryApiLoader $loader,
     private readonly MediaAssetRepository $asset_repository,
-    private readonly ?UrlHelper $url_helper,
     private readonly ImageVariantUrlBuilder $image_variant_url_builder,
+    private readonly UrlGeneratorInterface $url_generator,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
@@ -223,9 +224,11 @@ class MediaLibraryResponseManager extends AbstractResponseManager
 
   public function createAssetResponse(MediaAsset $asset, ?User $user = null): MediaAssetResponse
   {
-    $base_url = $this->url_helper?->getAbsoluteUrl('/') ?? '';
-    $download_path = $this->asset_repository->getWebPath($asset->getId(), $asset->getExtension());
-    $download_url = $base_url.$download_path;
+    $download_url = $this->url_generator->generate(
+      'open_api_server_mediaLibrary_mediaassetsiddownloadget',
+      ['id' => $asset->getId()],
+      UrlGeneratorInterface::ABSOLUTE_URL
+    );
 
     $thumbnail = null;
     if ($asset->isImage()) {
@@ -265,6 +268,16 @@ class MediaLibraryResponseManager extends AbstractResponseManager
       'created_at' => $asset->getCreatedAt(),
       'updated_at' => $asset->getUpdatedAt(),
     ]);
+  }
+
+  public function getAssetFile(MediaAsset $asset): ?File
+  {
+    $path = $this->asset_repository->getFilePath($asset->getId(), $asset->getExtension());
+    if (!is_file($path)) {
+      return null;
+    }
+
+    return new File($path);
   }
 
   /**

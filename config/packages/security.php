@@ -292,6 +292,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/media/assets/[a-zA-Z0-9_-]+/download/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/health/?$',
           'roles' => 'PUBLIC_ACCESS',
           'methods' => ['GET'],
