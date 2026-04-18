@@ -87,7 +87,7 @@ class ImageVariantGenerator
     foreach (ImageVariantLayout::allVariantFiles($basename) as $file) {
       $path = rtrim($targetDir, '/').'/'.$file['filename'];
       if (is_file($path)) {
-        @unlink($path);
+        unlink($path);
       }
     }
   }
