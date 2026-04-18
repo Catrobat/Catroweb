@@ -26,6 +26,7 @@ final class AdminCountBlockService extends AbstractBlockService
     parent::__construct($twig);
   }
 
+  #[\Override]
   public function execute(BlockContextInterface $blockContext, ?Response $response = null): Response
   {
     $admin = $this->pool->getAdminByAdminCode($blockContext->getSetting('code'));
@@ -46,6 +47,7 @@ final class AdminCountBlockService extends AbstractBlockService
     ], $response);
   }
 
+  #[\Override]
   public function configureSettings(OptionsResolver $resolver): void
   {
     $resolver->setDefaults([
