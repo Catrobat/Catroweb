@@ -244,8 +244,10 @@ class ScreenshotRepository
   public function makeScreenshotPerm(string $id): void
   {
     $filesystem = new Filesystem();
-    $filesystem->copy($this->tmp_dir.$this->generateFileNameFromId($id), $this->screenshot_dir.$this->generateFileNameFromId($id));
+    $perm_path = $this->screenshot_dir.$this->generateFileNameFromId($id);
+    $filesystem->copy($this->tmp_dir.$this->generateFileNameFromId($id), $perm_path);
     unlink($this->tmp_dir.$this->generateFileNameFromId($id));
+    $this->generateScreenshotVariants($perm_path, $id);
   }
 
   public function makeThumbnailPerm(string $id): void
