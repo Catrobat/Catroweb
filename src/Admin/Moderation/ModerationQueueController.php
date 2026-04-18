@@ -51,7 +51,7 @@ class ModerationQueueController extends CRUDController
 
     $this->report_processor->resolveReport($report, $admin, $action);
 
-    $label = 'accept' === $action ? 'accepted - content hidden' : 'rejected - content restored';
+    $label = 'accept' === $action ? 'accepted - content hidden, owner banned' : 'rejected - content restored';
     $this->addFlash('sonata_flash_success', 'Report #'.$report->getId().' '.$label);
 
     return new RedirectResponse($this->admin->generateUrl('list'));

@@ -22,6 +22,7 @@ class StorageLifecycleService
   public const int ACTIVE_DAYS = 365;
   public const int STANDARD_DAYS = 90;
   public const int SHORT_DAYS = 30;
+  public const int DEBUG_DAYS = 7;
 
   public const float DISK_WARN_THRESHOLD = 0.70;
   public const float DISK_PRESSURE_THRESHOLD = 0.85;
@@ -55,6 +56,10 @@ class StorageLifecycleService
 
     if ($this->isStandard($project)) {
       return self::STANDARD_DAYS;
+    }
+
+    if ($project->isDebugBuild()) {
+      return self::DEBUG_DAYS;
     }
 
     return self::SHORT_DAYS;

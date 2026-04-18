@@ -47,6 +47,7 @@ class StudioAdmin extends AbstractAdmin
       ->add('is_public')
       ->add('is_enabled')
       ->add('allow_comments')
+      ->add('auto_hidden', null, ['label' => 'Auto Hidden'])
       ->add('created_on', DateTimeRangeFilter::class, [
         'field_type' => DateTimeRangePickerType::class,
         'label' => 'Created On',
@@ -63,6 +64,7 @@ class StudioAdmin extends AbstractAdmin
       ->add('is_public', null, ['label' => 'Public'])
       ->add('is_enabled', null, ['label' => 'Enabled'])
       ->add('allow_comments', null, ['label' => 'Comments'])
+      ->add('auto_hidden', null, ['label' => 'Auto Hidden'])
       ->add('created_on', null, ['label' => 'Created On'])
       ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
