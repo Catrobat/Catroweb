@@ -131,7 +131,7 @@ function submitReport(apiUrl, { category, note }, translations, sessionKey) {
     body: JSON.stringify({ category, note: note || null }),
   })
     .then((response) => {
-      if (response.status === 204) {
+      if (response.status === 201) {
         sessionStorage.removeItem(sessionKey)
         Swal.fire({
           text: translations.success || 'Your report has been submitted.',
