@@ -21,7 +21,9 @@
   border: none;
 
   .is-webview & {
-    padding-top: env(safe-area-inset-top);
+    // Android WebView may not report env(safe-area-inset-top) inside
+    // position:fixed modals. Use a 24px fallback (standard status bar height).
+    padding-top: max(env(safe-area-inset-top, 0px), 24px);
   }
 }
 
