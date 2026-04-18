@@ -163,11 +163,7 @@
       <code><![CDATA[$user->getId()]]></code>
     </PossiblyNullArgument>
   </file>
-  <file src="src/Application/Framework/VersionStrategy.php">
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$_ENV['APP_ENV']]]></code>
-    </PossiblyUndefinedArrayOffset>
-  </file>
+
   <file src="src/Application/Twig/TwigExtension.php">
     <PossiblyNullReference>
       <code><![CDATA[get]]></code>
