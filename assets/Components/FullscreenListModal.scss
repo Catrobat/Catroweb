@@ -18,6 +18,10 @@
   color: #fff;
   background-color: var(--mdc-theme-primary, #00acc1);
   border: none;
+
+  .is-webview & {
+    padding-top: env(safe-area-inset-top);
+  }
 }
 
 @media only screen and (width >= 768px) {
