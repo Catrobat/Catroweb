@@ -663,6 +663,7 @@ function initComponents(data, earlyInits) {
 function initProjectScreenshotUpload() {
   const addChangeListenerToFileInput = function (input) {
     input.onchange = async () => {
+      input.remove()
       const spinner = document.getElementById('upload-image-spinner')
       spinner.classList.remove('d-none')
 
