@@ -597,17 +597,17 @@
     "stella-maris/clock": {
         "version": "0.1.4"
     },
-    "symfony/asset": {
-        "version": "v4.4.5"
-    },
-    "symfony/brevo-mailer": {
-        "version": "6.4",
+    "symfony/amazon-mailer": {
+        "version": "7.4",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
-            "version": "6.4",
-            "ref": "7c1038ceb733175f610a913a885a7c8b552b703a"
+            "version": "4.4",
+            "ref": "9648db3ecae5c8a6b1a5f74715d3907124348815"
         }
+    },
+    "symfony/asset": {
+        "version": "v4.4.5"
     },
     "symfony/browser-kit": {
         "version": "v5.0.5"

@@ -11,14 +11,14 @@ use Psr\Log\LoggerInterface;
 
 class EmailBudgetManager
 {
-  public const int DAILY_LIMIT = 300;
+  public const int DAILY_LIMIT = 5000;
 
   public const array TYPE_RESERVES = [
-    'verification' => 150,
-    'reset' => 30,
-    'consent' => 30,
-    'admin' => 50,
-    'management' => 40,
+    'verification' => 2500,
+    'reset' => 500,
+    'consent' => 500,
+    'admin' => 750,
+    'management' => 750,
   ];
 
   public function __construct(
