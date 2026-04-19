@@ -134,4 +134,4 @@ Feature: Uploading a project
     And the uploaded project should exist in the database
     When I upload a valid Catrobat project, setting the project_id parameter to the id of the last uploaded project
     Then the response status code should be "201"
-    And it should be updated
+    And the response should have the same project id as the first upload

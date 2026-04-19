@@ -72,6 +72,8 @@ class ApiContext implements Context
 
   private ?string $saved_cursor = null;
 
+  private ?string $stored_project_id = null;
+
   // to df ->function
   private array $checked_catrobat_remix_forward_ancestor_relations;
 
@@ -328,8 +330,18 @@ class ApiContext implements Context
   public function iUploadAValidCatrobatProjectWithProjectId(): void
   {
     $project_id = $this->getIDOfLastUploadedProject();
+    $this->stored_project_id = $project_id;
     $this->request_parameters['project_id'] = $project_id;
     $this->uploadProject($this->FIXTURES_DIR.'test.catrobat');
+  }
+
+  /**
+   * @Then the response should have the same project id as the first upload
+   */
+  public function theResponseShouldHaveSameProjectId(): void
+  {
+    $current_id = $this->getIDOfLastUploadedProject();
+    Assert::assertSame($this->stored_project_id, $current_id);
   }
 
   /**

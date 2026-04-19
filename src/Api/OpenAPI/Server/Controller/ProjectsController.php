@@ -1624,6 +1624,7 @@ class ProjectsController extends Controller
     }
     $asserts = [];
     $asserts[] = new Assert\Type('string');
+    $asserts[] = new Assert\Uuid();
     $response = $this->validate($project_id, $asserts);
     if ($response instanceof Response) {
       return $response;

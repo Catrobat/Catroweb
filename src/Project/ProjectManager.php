@@ -169,8 +169,8 @@ class ProjectManager
     $request_project_id = $request->getProjectId();
     if (null !== $request_project_id) {
       $old_project = $this->find($request_project_id);
-      if (null !== $old_project && $old_project->getUser()->getId() !== $request->getUser()->getId()) {
-        $old_project = null; // ignore project_id if it belongs to a different user
+      if (null !== $old_project && $old_project->getUser()?->getId() !== $request->getUser()->getId()) {
+        $old_project = null;
       }
     }
 
