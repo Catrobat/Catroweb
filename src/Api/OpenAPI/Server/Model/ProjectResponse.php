@@ -196,7 +196,7 @@ class ProjectResponse
   /**
    * Tags allow projects to be categorized by their creators.
    *
-   * @var \ArrayObject<string, string>|string[]|null
+   * @var array<string, string>|null
    *
    * @SerializedName("tags")
    *
@@ -205,14 +205,14 @@ class ProjectResponse
    *   @Assert\Type("string")
    * })
    *
-   * @Type("ArrayObject<string, string>")
+   * @Type("array<string, string>")
    */
-  protected \ArrayObject|array|null $tags = null;
+  protected ?array $tags = null;
 
   /**
    * Extensions used by this project (e.g., arduino, mindstorms).
    *
-   * @var \ArrayObject<string, string>|string[]|null
+   * @var array<string, string>|null
    *
    * @SerializedName("extensions")
    *
@@ -221,9 +221,9 @@ class ProjectResponse
    *   @Assert\Type("string")
    * })
    *
-   * @Type("ArrayObject<string, string>")
+   * @Type("array<string, string>")
    */
-  protected \ArrayObject|array|null $extensions = null;
+  protected ?array $extensions = null;
 
   /**
    * The time of the upload in ISO 8601 format.
@@ -667,9 +667,9 @@ class ProjectResponse
   /**
    * Gets tags.
    *
-   * @return string[]|null
+   * @return array<string, string>|null
    */
-  public function getTags(): \ArrayObject|array|null
+  public function getTags(): ?array
   {
     return $this->tags;
   }
@@ -677,11 +677,11 @@ class ProjectResponse
   /**
    * Sets tags.
    *
-   * @param \ArrayObject<string, string>|string[]|null $tags Tags allow projects to be categorized by their creators
+   * @param array<string, string>|null $tags Tags allow projects to be categorized by their creators
    *
    * @return $this
    */
-  public function setTags(\ArrayObject|array|null $tags = null): self
+  public function setTags(?array $tags = null): self
   {
     $this->tags = $tags;
 
@@ -691,9 +691,9 @@ class ProjectResponse
   /**
    * Gets extensions.
    *
-   * @return \ArrayObject<string, string>|string[]|null
+   * @return array<string, string>|null
    */
-  public function getExtensions(): \ArrayObject|array|null
+  public function getExtensions(): ?array
   {
     return $this->extensions;
   }
@@ -701,11 +701,11 @@ class ProjectResponse
   /**
    * Sets extensions.
    *
-   * @param \ArrayObject<string, string>|string[]|null $extensions Extensions used by this project (e.g., arduino, mindstorms)
+   * @param array<string, string>|null $extensions Extensions used by this project (e.g., arduino, mindstorms)
    *
    * @return $this
    */
-  public function setExtensions(\ArrayObject|array|null $extensions = null): self
+  public function setExtensions(?array $extensions = null): self
   {
     $this->extensions = $extensions;
 
