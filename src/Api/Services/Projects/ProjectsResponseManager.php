@@ -474,7 +474,8 @@ class ProjectsResponseManager extends AbstractResponseManager
   public function createProjectCatrobatFileResponse(string $id, File $file, ?string $name = null): BinaryFileResponse
   {
     $response = new BinaryFileResponse($file);
-    $filename = null !== $name ? $name.'.catrobat' : $id.'.catrobat';
+    $sanitized = null !== $name ? str_replace(['/', '\\'], '_', $name) : $id;
+    $filename = $sanitized.'.catrobat';
     $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename, $id.'.catrobat');
     $response->headers->set('Content-Type', 'application/zip');
 
