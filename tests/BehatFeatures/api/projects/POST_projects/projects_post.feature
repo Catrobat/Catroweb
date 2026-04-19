@@ -126,3 +126,12 @@ Feature: Uploading a project
     And I upload a valid Catrobat project with the same name
     Then the uploaded project should exist in the database
     And it should be updated
+
+  Scenario: uploading with project_id should update the existing project even with a different name
+    Given I am "Catrobat"
+    When I upload a valid Catrobat project
+    Then the response status code should be "201"
+    And the uploaded project should exist in the database
+    When I upload a valid Catrobat project, setting the project_id parameter to the id of the last uploaded project
+    Then the response status code should be "201"
+    And the response should have the same project id as the first upload

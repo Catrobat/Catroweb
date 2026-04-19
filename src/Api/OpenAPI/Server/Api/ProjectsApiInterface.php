@@ -364,6 +364,7 @@ interface ProjectsApiInterface
    * @param string       $accept_language (optional, default to 'en')
    * @param string       $flavor          The flavor of this project (optional, default to 'pocketcode')
    * @param bool         $private         Indicates whether a project should be private (optional, default to false)
+   * @param string|null  $project_id      Optional UUID of an existing project to update (optional)
    * @param int          &$responseCode   The HTTP Response Code
    * @param array        $responseHeaders Additional HTTP headers to return with the response ()
    */
@@ -373,6 +374,7 @@ interface ProjectsApiInterface
     string $accept_language,
     string $flavor,
     bool $private,
+    ?string $project_id,
     int &$responseCode,
     array &$responseHeaders,
   ): array|object|null;

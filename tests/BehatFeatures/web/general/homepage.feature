@@ -86,7 +86,7 @@ Feature: Pocketcode homepage
     And I wait for the page to be loaded
     And I wait for AJAX to finish
     Then the element "#home-projects__my_projects" should exist
-    And one of the ".project-list__title" elements should contain "My projects"
+    And one of the ".project-list__title" elements should contain "My shared projects"
 
   Scenario: My Projects section appears before other categories on the landing page
     Given I log in as "Catrobat"
