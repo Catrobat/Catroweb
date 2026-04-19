@@ -323,6 +323,16 @@ class ApiContext implements Context
   }
 
   /**
+   * @When I upload a valid Catrobat project, setting the project_id parameter to the id of the last uploaded project
+   */
+  public function iUploadAValidCatrobatProjectWithProjectId(): void
+  {
+    $project_id = $this->getIDOfLastUploadedProject();
+    $this->request_parameters['project_id'] = $project_id;
+    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat');
+  }
+
+  /**
    * @When user :username uploads a valid Catrobat project
    *
    * @param string $username The name of the user who initiates the upload

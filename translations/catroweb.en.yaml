@@ -199,7 +199,7 @@ project:
   tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
-  my_projects: My projects
+  my_projects: My shared projects
   trending: Trending projects
   popular: Popular projects
   most:

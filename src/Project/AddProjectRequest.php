@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class AddProjectRequest
 {
-  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = Flavor::POCKETCODE)
+  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = Flavor::POCKETCODE, private readonly ?string $project_id = null)
   {
   }
 
@@ -52,5 +52,10 @@ class AddProjectRequest
   public function getFlavor(): ?string
   {
     return $this->flavor;
+  }
+
+  public function getProjectId(): ?string
+  {
+    return $this->project_id;
   }
 }

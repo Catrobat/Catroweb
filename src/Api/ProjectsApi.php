@@ -302,7 +302,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   }
 
   #[\Override]
-  public function projectsPost(string $checksum, UploadedFile $file, string $accept_language, string $flavor, bool $private, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsPost(string $checksum, UploadedFile $file, string $accept_language, string $flavor, bool $private, ?string $project_id, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -341,7 +341,8 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
           $file,
           $this->facade->getLoader()->getClientIp(),
           $accept_language,
-          $flavor
+          $flavor,
+          $project_id,
         )
       );
     } catch (InvalidCatrobatFileException $e) {

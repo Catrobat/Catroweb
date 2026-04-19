@@ -609,7 +609,7 @@ final class ProjectsApiTest extends KernelTestCase
     $this->facade->method('getProcessor')->willReturn($processor);
 
     $file = $this->createStub(UploadedFile::class);
-    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
+    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_CREATED, $response_code);
     $this->assertArrayHasKey('Location', $response_headers);
@@ -642,7 +642,7 @@ final class ProjectsApiTest extends KernelTestCase
     $this->facade->method('getRequestValidator')->willReturn($validator);
 
     $file = $this->createStub(UploadedFile::class);
-    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
+    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertInstanceOf(ErrorResponse::class, $response);
@@ -669,7 +669,7 @@ final class ProjectsApiTest extends KernelTestCase
     $this->facade->method('getProcessor')->willReturn($processor);
 
     $file = $this->createStub(UploadedFile::class);
-    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
+    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, null, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertInstanceOf(ErrorResponse::class, $response);

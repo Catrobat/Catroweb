@@ -1574,6 +1574,7 @@ class ProjectsController extends Controller
     $file = $request->files->get('file');
     $flavor = $request->request->get('flavor', 'pocketcode');
     $private = $request->request->get('private', false);
+    $project_id = $request->request->get('project_id');
 
     // Use the default value if no value was provided
 
@@ -1583,6 +1584,7 @@ class ProjectsController extends Controller
       $accept_language = $this->deserialize($accept_language, 'string', 'string');
       $flavor = $this->deserialize($flavor, 'string', 'string');
       $private = $this->deserialize($private, 'bool', 'string');
+      $project_id = $this->deserialize($project_id, 'string', 'string');
     } catch (SerializerRuntimeException $exception) {
       return $this->createBadRequestResponse($exception->getMessage());
     }
@@ -1620,6 +1622,12 @@ class ProjectsController extends Controller
     if ($response instanceof Response) {
       return $response;
     }
+    $asserts = [];
+    $asserts[] = new Assert\Type('string');
+    $response = $this->validate($project_id, $asserts);
+    if ($response instanceof Response) {
+      return $response;
+    }
 
     try {
       $handler = $this->getApiHandler();
@@ -1631,7 +1639,7 @@ class ProjectsController extends Controller
       $responseCode = 200;
       $responseHeaders = [];
 
-      $result = $handler->projectsPost($checksum, $file, $accept_language, $flavor, $private, $responseCode, $responseHeaders);
+      $result = $handler->projectsPost($checksum, $file, $accept_language, $flavor, $private, $project_id, $responseCode, $responseHeaders);
 
       $message = match ($responseCode) {
         201 => 'Project successfully uploaded',
