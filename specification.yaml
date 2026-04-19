@@ -4331,17 +4331,17 @@ components:
           type: string
           example: 'pocketcode'
         tags:
-          type: array
-          description: 'Tags allow projects to be categorized by their creators'
-          items:
+          type: object
+          description: 'Tags allow projects to be categorized by their creators. Keys are internal tag names, values are translated display names.'
+          additionalProperties:
             type: string
-          example: ['game', 'art']
+          example: { 'game': 'Game', 'art': 'Art' }
         extensions:
-          type: array
-          description: 'Extensions used by this project (e.g., arduino, mindstorms)'
-          items:
+          type: object
+          description: 'Extensions used by this project (e.g., arduino, mindstorms). Keys are internal extension names, values are translated display names.'
+          additionalProperties:
             type: string
-          example: ['arduino', 'mindstorms']
+          example: { 'arduino': 'Arduino', 'mindstorms': 'Mindstorms' }
         uploaded_at:
           type: string
           format: date-time
