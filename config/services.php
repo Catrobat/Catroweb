@@ -141,7 +141,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.translations.project_cache_threshold', 15);
   $parameters->set('catrobat.upload.temp.dir', '%catrobat.pubdir%resources/tmp/uploads/');
   $parameters->set('catrobat.upload.temp.path', 'resources/tmp/uploads/');
-  $parameters->set('dkim.private.key', '%kernel.project_dir%/.dkim/private.key');
+
   $parameters->set('.container.dumper.inline_class_loader', true);
   $parameters->set('reset_password.throttle_limit', 86400);
 

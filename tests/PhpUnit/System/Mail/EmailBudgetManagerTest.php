@@ -53,12 +53,11 @@ class EmailBudgetManagerTest extends TestCase
 
   public function testCanSendRespectsTypeReserve(): void
   {
-    // Fill up verification reserve (150)
-    $this->budget->setVerificationSent(150);
-    $this->budget->setTotalSent(150);
+    // Fill up verification reserve (2500)
+    $this->budget->setVerificationSent(2500);
+    $this->budget->setTotalSent(2500);
 
-    // Verification can still send from shared pool (300 - 300 reserves = 0 shared)
-    // Total reserved = 150 + 30 + 30 + 50 + 40 = 300, shared pool = 0
+    // Total reserved = 2500 + 500 + 500 + 750 + 750 = 5000, shared pool = 0
     self::assertFalse($this->manager->canSend('verification'));
 
     // Other types are still within their reserves
@@ -67,10 +66,10 @@ class EmailBudgetManagerTest extends TestCase
 
   public function testCanSendAllowsOverflowIntoSharedPool(): void
   {
-    // With total reserves = 300 and daily limit = 300, shared pool = 0
+    // With total reserves = 5000 and daily limit = 5000, shared pool = 0
     // So overflowing a reserve is NOT possible when reserves sum to daily limit
-    $this->budget->setVerificationSent(150);
-    $this->budget->setTotalSent(150);
+    $this->budget->setVerificationSent(2500);
+    $this->budget->setTotalSent(2500);
 
     self::assertFalse($this->manager->canSend('verification'));
   }
@@ -107,23 +106,23 @@ class EmailBudgetManagerTest extends TestCase
 
     $remaining = $this->manager->getRemainingBudget();
 
-    self::assertSame(148, $remaining['verification']);
-    self::assertSame(29, $remaining['reset']);
-    self::assertSame(30, $remaining['consent']);
-    self::assertSame(50, $remaining['admin']);
-    self::assertSame(40, $remaining['management']);
-    self::assertSame(297, $remaining['total']);
+    self::assertSame(2498, $remaining['verification']);
+    self::assertSame(499, $remaining['reset']);
+    self::assertSame(500, $remaining['consent']);
+    self::assertSame(750, $remaining['admin']);
+    self::assertSame(750, $remaining['management']);
+    self::assertSame(4997, $remaining['total']);
   }
 
   public function testGetRemainingBudgetNeverNegative(): void
   {
-    $this->budget->setResetSent(100);
-    $this->budget->setTotalSent(100);
+    $this->budget->setResetSent(1000);
+    $this->budget->setTotalSent(1000);
 
     $remaining = $this->manager->getRemainingBudget();
 
     self::assertSame(0, $remaining['reset']);
-    self::assertSame(200, $remaining['total']);
+    self::assertSame(4000, $remaining['total']);
   }
 
   public function testCanSendThrowsOnInvalidType(): void
@@ -143,12 +142,12 @@ class EmailBudgetManagerTest extends TestCase
   public function testBudgetExhaustionByType(): void
   {
     // Fill reset reserve completely
-    for ($i = 0; $i < 30; ++$i) {
+    for ($i = 0; $i < 500; ++$i) {
       self::assertTrue($this->manager->canSend('reset'));
       $this->manager->recordSend('reset');
     }
 
-    // Reset reserve exhausted, shared pool = 0 (reserves sum to 300 = daily limit)
+    // Reset reserve exhausted, shared pool = 0 (reserves sum to 5000 = daily limit)
     self::assertFalse($this->manager->canSend('reset'));
 
     // Other types still have budget within their reserves
@@ -158,7 +157,7 @@ class EmailBudgetManagerTest extends TestCase
 
   public function testTotalLimitPreventsAllSending(): void
   {
-    $this->budget->setTotalSent(300);
+    $this->budget->setTotalSent(5000);
     $this->budget->setVerificationSent(0);
 
     self::assertFalse($this->manager->canSend('verification'));

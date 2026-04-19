@@ -475,11 +475,7 @@
       <code><![CDATA[getUser]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/System/Mail/MailerAdapter.php">
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$_ENV['APP_ENV']]]></code>
-    </PossiblyUndefinedArrayOffset>
-  </file>
+
   <file src="src/System/Testing/Behat/Context/ApiContext.php">
     <PossiblyFalseArgument>
       <code><![CDATA[$response->getContent()]]></code>
