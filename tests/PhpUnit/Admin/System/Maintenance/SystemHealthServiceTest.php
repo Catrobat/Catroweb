@@ -76,8 +76,8 @@ class SystemHealthServiceTest extends TestCase
     self::assertArrayHasKey('verification', $email['breakdown']);
     self::assertArrayHasKey('reset', $email['breakdown']);
     self::assertSame(10, $email['breakdown']['verification']['sent']);
-    self::assertSame(150, $email['breakdown']['verification']['reserve']);
-    self::assertSame(140, $email['breakdown']['verification']['remaining']);
+    self::assertSame(EmailBudgetManager::TYPE_RESERVES['verification'], $email['breakdown']['verification']['reserve']);
+    self::assertSame(EmailBudgetManager::TYPE_RESERVES['verification'] - 10, $email['breakdown']['verification']['remaining']);
   }
 
   public function testGetProjectCountsReturnsAllCategories(): void
