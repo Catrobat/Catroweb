@@ -23,7 +23,10 @@
   .is-webview & {
     // Android WebView may not report env(safe-area-inset-top) inside
     // position:fixed modals. Use a 24px fallback (standard status bar height).
+    // The row has a fixed 56px height from MDC; padding-top eats into that,
+    // so override min-height to accommodate both safe-area and content.
     padding-top: max(env(safe-area-inset-top, 0px), 24px);
+    min-height: calc(56px + max(env(safe-area-inset-top, 0px), 24px));
   }
 }
 

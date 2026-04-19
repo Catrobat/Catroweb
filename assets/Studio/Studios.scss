@@ -30,11 +30,11 @@ $list-item-padding-overflow-x: 1.5rem;
   padding: 0.75rem $list-item-padding-overflow-x;
   width: calc(100% + (2 * $list-item-padding-overflow-x));
   margin: 0 (-$list-item-padding-overflow-x);
-  border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+  border-bottom: 1px solid light-dark(#f0f0f0, #2a2a3a);
   transition: background-color 0.15s ease;
 
   &:hover {
-    background: custom-alpha(--color-primary, 0.06);
+    background: light-dark(#f8f9fa, #2a2a3a);
   }
 
   &:last-child {
@@ -53,16 +53,24 @@ $list-item-padding-overflow-x: 1.5rem;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  gap: 1rem;
   color: var(--bs-body-color);
 }
 
 .studios-list-item--image {
   height: 60px;
   width: 60px;
-  margin: 0 1rem 0 0;
   border-radius: 8px;
-  flex: 0 0 auto;
+  flex-shrink: 0;
   object-fit: cover;
+  background: light-dark(#eee, #3a3a4a);
+}
+
+// <picture> wraps the <img>; it becomes the flex child and needs sizing
+.studios-list-item picture {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
 }
 
 .studios-list-item--content {
@@ -85,16 +93,17 @@ $list-item-padding-overflow-x: 1.5rem;
 }
 
 .studios-list-item--heading {
-  padding: 0 0 0.5rem;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
+  gap: 0.5rem;
   min-width: 0;
 
   h3 {
     margin: 0;
     padding: 0;
-    display: block;
+    font-size: 1rem;
+    font-weight: 500;
     flex: 0 1 auto;
     min-width: 0;
     overflow: hidden;
@@ -103,23 +112,23 @@ $list-item-padding-overflow-x: 1.5rem;
   }
 
   .studios-list-item--text {
-    margin: 0 0 0 0.5rem;
-    color: var(--bs-gray-600);
+    color: light-dark(#6c757d, #a0aec0);
     flex: 0 0 auto;
     align-self: baseline;
   }
 
   .studios-list-item--badge {
-    margin: 0 0 0 0.5rem;
-    color: var(--bs-gray-600);
     flex: 0 0 auto;
     display: flex;
-    flex-flow: row nowrap;
     align-items: center;
+
+    .material-icons {
+      font-size: 1rem;
+      color: light-dark(#6c757d, #a0aec0);
+    }
   }
 
   .studios-list-item--pill {
-    margin: 0 0 0 0.5rem;
     padding: 0.1rem 0.5rem;
     font-size: 0.65rem;
     font-weight: 600;
@@ -148,22 +157,18 @@ $list-item-padding-overflow-x: 1.5rem;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  color: var(--bs-gray-600);
+  gap: 0.75rem;
+  color: light-dark(#6c757d, #a0aec0);
+  font-size: 0.85rem;
 }
 
 .studios-list-item--icon-wrapper {
-  margin: 0 1rem;
-  flex: 0 0 auto;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 
-  &:first-of-type {
-    margin-left: 0.25rem;
-  }
-
-  &:last-of-type {
-    margin-right: 0.25rem;
+  .material-icons {
+    font-size: 1rem;
   }
 }
 
@@ -424,7 +429,7 @@ $list-item-padding-overflow-x: 1.5rem;
 // Floating action button for "Create Studio"
 .studios-fab {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 2.5rem;
   right: 1.5rem;
   z-index: 100;
   display: flex;
