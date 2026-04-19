@@ -4164,6 +4164,11 @@ components:
           description: 'Indicates whether a project should be private'
           default: false
           example: false
+        project_id:
+          type: string
+          format: uuid
+          description: 'Optional UUID of an existing project to update. When provided, the server matches by ID instead of by name, allowing project renames without creating duplicates.'
+          example: '63768cf1-5f07-11ea-a2ae-000c292a0f49'
       required:
         - checksum
         - file
