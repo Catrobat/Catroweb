@@ -44,8 +44,8 @@ Feature: Get project remix graph
     And the client response should contain "remixCount"
     And the client response should contain "catrobat"
     And the client response should contain "scratch"
-    And the client response should contain "images/default/thumbnail.png"
-    And the client response should contain "images/default/not_available.png"
+    And the client response should contain "thumbnail-card@1x.webp"
+    And the client response should contain "not_available.png"
     And the client response should contain "scratch_12345"
     And the client response should contain "catrobat_1"
 
