@@ -19,6 +19,7 @@ class StorageLifecycleService
   private const int BATCH_SIZE = 100;
 
   public const int PROTECTED_DAYS = -1;
+  public const int HIDDEN_DAYS = 0;
   public const int ACTIVE_DAYS = 365;
   public const int STANDARD_DAYS = 90;
   public const int SHORT_DAYS = 30;
@@ -31,6 +32,12 @@ class StorageLifecycleService
   private const int ACTIVE_DOWNLOAD_MINIMUM = 10;
   private const int USER_ACTIVE_DAYS = 180;
 
+  /** @var string[]|null */
+  private ?array $featured_project_ids = null;
+
+  /** @var string[]|null */
+  private ?array $example_project_ids = null;
+
   public function __construct(
     private readonly EntityManagerInterface $entity_manager,
     private readonly ProjectFileRepository $file_repository,
@@ -40,12 +47,54 @@ class StorageLifecycleService
   }
 
   /**
+   * Returns the number of days remaining before a project expires.
+   * Returns -1 for protected (never expires), 0 for pending immediate deletion.
+   *
+   * @return array{remaining: int, tier: int}
+   */
+  public function getRetentionInfo(Project $project): array
+  {
+    $tier = $this->getRetentionTier($project);
+    if (self::PROTECTED_DAYS === $tier || self::HIDDEN_DAYS === $tier) {
+      return ['remaining' => $tier, 'tier' => $tier];
+    }
+
+    $expiry = (clone $this->getAnchorDate($project, $tier))->modify('+'.$tier.' days');
+    $remaining = (int) (new \DateTime())->diff($expiry)->format('%r%a');
+
+    return ['remaining' => max(0, $remaining), 'tier' => $tier];
+  }
+
+  /**
+   * Returns the date from which retention is measured.
+   * ACTIVE projects use the latest of uploaded_at or owner's last login.
+   */
+  public function getAnchorDate(Project $project, int $tier): \DateTime
+  {
+    $uploaded = $project->getUploadedAt();
+
+    if (self::ACTIVE_DAYS === $tier) {
+      $user = $project->getUser();
+      $lastLogin = $user?->getLastLogin();
+      if ($lastLogin instanceof \DateTime && $lastLogin > $uploaded) {
+        return $lastLogin;
+      }
+    }
+
+    return $uploaded;
+  }
+
+  /**
    * Determines which retention tier a project belongs to.
    *
    * @return int days until deletion (-1 = protected/never)
    */
-  public function getRetentionDays(Project $project): int
+  public function getRetentionTier(Project $project): int
   {
+    if (!$project->getVisible()) {
+      return self::HIDDEN_DAYS;
+    }
+
     if ($project->isDebugBuild()) {
       return self::DEBUG_DAYS;
     }
@@ -79,29 +128,29 @@ class StorageLifecycleService
       return false;
     }
 
-    $featured = $this->entity_manager->createQueryBuilder()
-      ->select('COUNT(f.id)')
-      ->from(FeaturedProject::class, 'f')
-      ->where('f.project = :project')
-      ->setParameter('project', $project)
-      ->getQuery()
-      ->getSingleScalarResult()
-    ;
+    if (null === $this->featured_project_ids) {
+      $this->featured_project_ids = $this->entity_manager->createQueryBuilder()
+        ->select('IDENTITY(f.project)')
+        ->from(FeaturedProject::class, 'f')
+        ->getQuery()
+        ->getSingleColumnResult()
+      ;
+    }
 
-    if ((int) $featured > 0) {
+    if (in_array($projectId, $this->featured_project_ids, true)) {
       return true;
     }
 
-    $example = $this->entity_manager->createQueryBuilder()
-      ->select('COUNT(e.id)')
-      ->from(ExampleProject::class, 'e')
-      ->where('e.project = :project')
-      ->setParameter('project', $project)
-      ->getQuery()
-      ->getSingleScalarResult()
-    ;
+    if (null === $this->example_project_ids) {
+      $this->example_project_ids = $this->entity_manager->createQueryBuilder()
+        ->select('IDENTITY(e.project)')
+        ->from(ExampleProject::class, 'e')
+        ->getQuery()
+        ->getSingleColumnResult()
+      ;
+    }
 
-    return (int) $example > 0;
+    return in_array($projectId, $this->example_project_ids, true);
   }
 
   /**
@@ -233,14 +282,15 @@ class StorageLifecycleService
       foreach ($projects as $project) {
         ++$checked;
 
-        $retention_days = $this->getRetentionDays($project);
-        $retention_days = $this->applyDiskPressure($retention_days, $disk_ratio);
+        $tier = $this->getRetentionTier($project);
+        $retention_days = $this->applyDiskPressure($tier, $disk_ratio);
 
         if (self::PROTECTED_DAYS === $retention_days) {
           continue;
         }
 
-        $expiry = (clone $project->getUploadedAt())->modify('+'.$retention_days.' days');
+        $anchor = $this->getAnchorDate($project, $tier);
+        $expiry = (clone $anchor)->modify('+'.$retention_days.' days');
 
         if ($expiry >= $now) {
           continue;
@@ -353,14 +403,15 @@ class StorageLifecycleService
 
       /** @var Project $project */
       foreach ($projects as $project) {
-        $retention_days = $this->getRetentionDays($project);
-        $retention_days = $this->applyDiskPressure($retention_days, $disk_ratio);
+        $tier = $this->getRetentionTier($project);
+        $retention_days = $this->applyDiskPressure($tier, $disk_ratio);
 
         if (self::PROTECTED_DAYS === $retention_days) {
           continue;
         }
 
-        $expiry = (clone $project->getUploadedAt())->modify('+'.$retention_days.' days');
+        $anchor = $this->getAnchorDate($project, $tier);
+        $expiry = (clone $anchor)->modify('+'.$retention_days.' days');
         $days_left = (int) $now->diff($expiry)->format('%r%a');
 
         if ($days_left <= 0 || $days_left > $warning_days) {

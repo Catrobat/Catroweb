@@ -1,0 +1,16 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+{% block field %}
+  {% set remaining = value.remaining %}
+  {% set tier = value.tier %}
+  {% if tier == -1 %}
+    <span class="badge bg-info">Protected</span>
+  {% elseif tier == 0 %}
+    <span class="badge bg-danger">Pending deletion</span>
+  {% elseif remaining == 0 %}
+    <span class="badge bg-danger">Expired ({{ tier }}d)</span>
+  {% elseif remaining <= 7 %}
+    <span class="badge bg-warning">{{ remaining }}d</span>
+  {% else %}
+    <span class="badge bg-success">{{ remaining }}d</span>
+  {% endif %}
+{% endblock %}

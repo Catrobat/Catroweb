@@ -7,6 +7,7 @@ namespace App\Admin\Projects;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Storage\ScreenshotRepository;
+use App\Storage\StorageLifecycleService;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -59,6 +60,7 @@ class ProjectsAdmin extends AbstractAdmin
     private readonly ScreenshotRepository $screenshot_repository,
     protected TokenStorageInterface $security_token_storage,
     private readonly ParameterBagInterface $parameter_bag,
+    private readonly StorageLifecycleService $storage_lifecycle,
   ) {
   }
 
@@ -107,8 +109,10 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('uploaded_at', DateTimeRangeFilter::class, ['field_type' => DateTimeRangePickerType::class,
         'label' => 'Upload Time', ])
       ->add('flavor')
-      ->add('approved')
+      ->add('approved', null, ['label' => 'Whitelisted'])
       ->add('visible')
+      ->add('private')
+      ->add('storage_protected', null, ['label' => 'Protected'])
       ->add('not_for_kids', NumberFilter::class, [
         'field_type' => ChoiceType::class,
         'field_options' => [
@@ -140,6 +144,11 @@ class ProjectsAdmin extends AbstractAdmin
     }
 
     $list
+      ->add('id', 'string', [
+        'label' => 'UUID',
+        'sortable' => false,
+        'template' => 'Admin/Projects/UuidLink.html.twig',
+      ])
       ->add('uploaded_at', null, ['label' => 'Upload Time'])
       ->addIdentifier('name', 'string', ['sortable' => false])
       ->add('user')
@@ -150,14 +159,17 @@ class ProjectsAdmin extends AbstractAdmin
       ])
       ->add('views')
       ->add('downloads')
-      ->add('thumbnail', 'string',
-        [
-          'accessor' => $this->getThumbnailImageUrl(...),
-          'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
-        ]
-      )
-      ->add('private', null, ['editable' => false, 'sortable' => false])
-      ->add('approved', null, ['editable' => true, 'sortable' => false])
+      ->add('filesize', 'string', [
+        'label' => 'Size',
+        'sortable' => false,
+        'template' => 'Admin/Projects/FilesizeField.html.twig',
+      ])
+      ->add('thumbnail', 'string', [
+        'accessor' => $this->getThumbnailImageUrl(...),
+        'template' => 'Admin/Projects/ThumbnailImageList.html.twig',
+      ])
+      ->add('private', null, ['editable' => true, 'sortable' => false])
+      ->add('approved', null, ['editable' => true, 'sortable' => false, 'label' => 'Whitelisted'])
       ->add('visible', null, ['editable' => true, 'sortable' => false])
       ->add('storage_protected', null, ['editable' => true, 'sortable' => false, 'label' => 'Protected'])
       ->add('debug_build', null, ['editable' => false, 'sortable' => false, 'label' => 'Debug'])
@@ -169,8 +181,14 @@ class ProjectsAdmin extends AbstractAdmin
           self::NOT_FOR_KIDS_MOD => 'Not for kids',
         ],
       ])
+      ->add('retention', 'string', [
+        'label' => 'Retention',
+        'sortable' => false,
+        'accessor' => $this->storage_lifecycle->getRetentionInfo(...),
+        'template' => 'Admin/Projects/RetentionField.html.twig',
+      ])
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
-        'show' => ['template' => 'Admin/CRUD/list__action_show_project_details.html.twig'],
+        'actions' => ['template' => 'Admin/CRUD/list__action_project_actions.html.twig'],
       ]])
     ;
   }
@@ -212,6 +230,14 @@ class ProjectsAdmin extends AbstractAdmin
   #[\Override]
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
-    $collection->remove('create')->remove('delete')->remove('export');
+    $collection
+      ->remove('create')
+      ->remove('delete')
+      ->remove('export')
+      ->add('hardDelete', $this->getRouterIdParameter().'/hard-delete')
+      ->add('softDelete', $this->getRouterIdParameter().'/soft-delete')
+      ->add('toggleProtected', $this->getRouterIdParameter().'/toggle-protected')
+      ->add('toggleApproved', $this->getRouterIdParameter().'/toggle-approved')
+    ;
   }
 }

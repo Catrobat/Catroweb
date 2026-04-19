@@ -14,6 +14,7 @@ use App\Admin\Projects\ApproveProjects\ApproveProjectsAdmin;
 use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
 use App\Admin\Projects\BrokenProjects\BrokenProjectsAdmin;
 use App\Admin\Projects\ProjectsAdmin;
+use App\Admin\Projects\ProjectsController;
 use App\Admin\Projects\SpecialProjects\ExampleProjectAdmin;
 use App\Admin\Projects\UploadProject\UploadProjectAdmin;
 use App\Admin\Projects\UploadProject\UploadProjectController;
@@ -240,7 +241,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'default' => true,
         'code' => null,
         'model_class' => Project::class,
-        'controller' => null,
+        'controller' => ProjectsController::class,
         'pager_type' => 'simple',
       ]
     )

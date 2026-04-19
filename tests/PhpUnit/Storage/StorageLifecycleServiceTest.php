@@ -34,7 +34,7 @@ class StorageLifecycleServiceTest extends TestCase
   {
     $project = $this->createProjectStub(storageProtected: true);
 
-    self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $this->service->getRetentionTier($project));
     self::assertTrue($this->service->isProtected($project));
   }
 
@@ -45,7 +45,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project = $this->createProjectStub();
 
     self::assertTrue($service->isProtected($project));
-    self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $service->getRetentionTier($project));
   }
 
   public function testProtectedTierForExampleProject(): void
@@ -55,7 +55,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project = $this->createProjectStub();
 
     self::assertTrue($service->isProtected($project));
-    self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::PROTECTED_DAYS, $service->getRetentionTier($project));
   }
 
   public function testActiveTierHighDownloads(): void
@@ -63,7 +63,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project = $this->createProjectStub(downloads: 50, visible: true);
 
     self::assertTrue($this->service->isActive($project));
-    self::assertSame(StorageLifecycleService::ACTIVE_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::ACTIVE_DAYS, $this->service->getRetentionTier($project));
   }
 
   public function testActiveTierRecentUserLogin(): void
@@ -75,7 +75,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project = $this->createProjectStub(downloads: 0, visible: true, user: $user);
 
     self::assertTrue($this->service->isActive($project));
-    self::assertSame(StorageLifecycleService::ACTIVE_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::ACTIVE_DAYS, $this->service->getRetentionTier($project));
   }
 
   public function testStandardTierVisibleVerifiedUser(): void
@@ -87,7 +87,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project = $this->createProjectStub(downloads: 5, visible: true, autoHidden: false, user: $user);
 
     self::assertTrue($this->service->isStandard($project));
-    self::assertSame(StorageLifecycleService::STANDARD_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::STANDARD_DAYS, $this->service->getRetentionTier($project));
   }
 
   public function testShortTierZeroDownloadsInactiveUser(): void
@@ -100,7 +100,7 @@ class StorageLifecycleServiceTest extends TestCase
 
     self::assertFalse($this->service->isActive($project));
     self::assertFalse($this->service->isStandard($project));
-    self::assertSame(StorageLifecycleService::SHORT_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::SHORT_DAYS, $this->service->getRetentionTier($project));
   }
 
   public function testDebugTierForDebugBuild(): void
@@ -111,10 +111,10 @@ class StorageLifecycleServiceTest extends TestCase
 
     $project = $this->createProjectStub(downloads: 0, visible: true, autoHidden: false, debugBuild: true, user: $user);
 
-    self::assertSame(StorageLifecycleService::DEBUG_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::DEBUG_DAYS, $this->service->getRetentionTier($project));
   }
 
-  public function testShortTierForHiddenProject(): void
+  public function testHiddenProjectReturnsZeroDays(): void
   {
     $user = $this->createStub(User::class);
     $user->method('getLastLogin')->willReturn(new \DateTime('-200 days'));
@@ -122,8 +122,7 @@ class StorageLifecycleServiceTest extends TestCase
 
     $project = $this->createProjectStub(downloads: 5, visible: false, user: $user);
 
-    self::assertFalse($this->service->isStandard($project));
-    self::assertSame(StorageLifecycleService::SHORT_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::HIDDEN_DAYS, $this->service->getRetentionTier($project));
   }
 
   public function testShortTierForAutoHiddenProject(): void
@@ -135,7 +134,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project = $this->createProjectStub(downloads: 5, visible: true, autoHidden: true, user: $user);
 
     self::assertFalse($this->service->isStandard($project));
-    self::assertSame(StorageLifecycleService::SHORT_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::SHORT_DAYS, $this->service->getRetentionTier($project));
   }
 
   public function testShortTierForUnverifiedUser(): void
@@ -147,7 +146,7 @@ class StorageLifecycleServiceTest extends TestCase
     $project = $this->createProjectStub(downloads: 5, visible: true, autoHidden: false, user: $user);
 
     self::assertFalse($this->service->isStandard($project));
-    self::assertSame(StorageLifecycleService::SHORT_DAYS, $this->service->getRetentionDays($project));
+    self::assertSame(StorageLifecycleService::SHORT_DAYS, $this->service->getRetentionTier($project));
   }
 
   public function testDiskPressureHalvesRetention(): void
@@ -214,9 +213,11 @@ class StorageLifecycleServiceTest extends TestCase
     $query = $this->createStub(Query::class);
 
     $callCount = 0;
-    $query->method('getSingleScalarResult')
-      ->willReturnCallback(function () use (&$callCount, $featured, $example): int {
-        return 0 === $callCount++ % 2 ? $featured : $example;
+    $query->method('getSingleColumnResult')
+      ->willReturnCallback(function () use (&$callCount, $featured, $example): array {
+        $count = 0 === $callCount++ % 2 ? $featured : $example;
+
+        return $count > 0 ? ['test-project-id'] : [];
       })
     ;
 

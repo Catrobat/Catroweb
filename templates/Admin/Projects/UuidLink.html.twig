@@ -1,0 +1,7 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+{% block field %}
+  {% set uuid = object.id %}
+  <a href="/app/project/{{ uuid }}" target="_blank" title="{{ uuid }}">
+    {% if uuid|length > 8 %}{{ uuid|slice(0, 8) }}&hellip;{% else %}{{ uuid }}{% endif %}
+  </a>
+{% endblock %}

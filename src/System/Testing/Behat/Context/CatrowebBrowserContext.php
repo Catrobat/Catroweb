@@ -408,27 +408,12 @@ class CatrowebBrowserContext extends BrowserContext
     $page = $this->getSession()->getPage();
     switch ($arg1) {
       case 'Name':
-        $page
-          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[3]/a')
-          ->click()
-        ;
-        break;
       case 'Views':
-        $page
-          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[5]/a')
-          ->click()
-        ;
-        break;
       case 'Downloads':
-        $page
-          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[6]/a')
-          ->click()
-        ;
-        break;
       case 'Upload Time':
       case 'Id':
         $page
-          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[1]/a')
+          ->find('xpath', '//table/thead/tr/th/a[contains(text(),"'.$arg1.'")]')
           ->click()
         ;
         break;
@@ -493,7 +478,7 @@ class CatrowebBrowserContext extends BrowserContext
 
     // /click the visibility button (yes/no)
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[10]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[12]/span')
       ->click()
     ;
 
@@ -532,7 +517,7 @@ class CatrowebBrowserContext extends BrowserContext
     $page = $this->getSession()->getPage();
     // /click the visibility button (yes/no)
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[9]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[11]/span')
       ->click()
     ;
 
@@ -570,7 +555,7 @@ class CatrowebBrowserContext extends BrowserContext
     $page = $this->getSession()->getPage();
     // /click the visibility button (yes/no)
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[4]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[5]/span')
       ->click()
     ;
     // click the input on the popup to show yes or no option
@@ -654,13 +639,9 @@ class CatrowebBrowserContext extends BrowserContext
   public function iClickOnTheShowButton(string $project_number): void
   {
     $page = $this->getSession()->getPage();
-    $this->assertSession()->elementExists('xpath',
-      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[14]/div/a');
-
-    $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[14]/div/a')
-      ->click()
-    ;
+    $xpath = '//table/tbody/tr['.$project_number.']//a[contains(text(),"Show")]';
+    $this->assertSession()->elementExists('xpath', $xpath);
+    $page->find('xpath', $xpath)->click();
   }
 
   /**
