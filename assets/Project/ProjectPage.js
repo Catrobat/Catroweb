@@ -661,9 +661,23 @@ function initComponents(data, earlyInits) {
 }
 
 function initProjectScreenshotUpload() {
+  const createTestFileInput = function (parent) {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    input.name = 'project-screenshot-upload-field'
+    input.className = 'd-none'
+    addChangeListenerToFileInput(input)
+    parent.appendChild(input)
+  }
+
   const addChangeListenerToFileInput = function (input) {
     input.onchange = async () => {
+      const parentElement = input.parentElement
       input.remove()
+      if (globalConfiguration.environment === 'test' && parentElement) {
+        createTestFileInput(parentElement)
+      }
       const spinner = document.getElementById('upload-image-spinner')
       spinner.classList.remove('d-none')
 
@@ -732,13 +746,7 @@ function initProjectScreenshotUpload() {
     })
 
     if (globalConfiguration.environment === 'test') {
-      const input = document.createElement('input')
-      input.type = 'file'
-      input.accept = 'image/*'
-      addChangeListenerToFileInput(input)
-      input.name = 'project-screenshot-upload-field'
-      input.className = 'd-none'
-      changeButton.parentElement.appendChild(input)
+      createTestFileInput(changeButton.parentElement)
     }
   }
 }

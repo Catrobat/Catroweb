@@ -3,6 +3,8 @@ import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import { createPictureElement } from '../Layout/ImageVariants'
 import './Search.scss'
 
+const RESULTS_PER_PAGE = 30
+
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('search-results')
   if (!container) return
@@ -73,7 +75,11 @@ function renderPage(container, query, theme, baseUrl, trans) {
   }
 
   const apiUrl =
-    baseUrl + '/api/search?query=' + encodeURIComponent(query) + '&type=all&limit=30&offset=0'
+    baseUrl +
+    '/api/search?query=' +
+    encodeURIComponent(query) +
+    '&type=all&limit=' +
+    RESULTS_PER_PAGE
 
   fetch(apiUrl)
     .then((response) => {
@@ -84,6 +90,10 @@ function renderPage(container, query, theme, baseUrl, trans) {
       renderProjects(projectsSection, data.projects || [], theme, trans)
       renderUsers(usersSection, data.users || [], baseUrl, trans)
       renderStudios(studiosSection, data.studios || [], baseUrl, trans)
+
+      wireShowMore(projectsSection, 'projects', query, baseUrl, theme, trans)
+      wireShowMore(usersSection, 'users', query, baseUrl, theme, trans)
+      wireShowMore(studiosSection, 'studios', query, baseUrl, theme, trans)
     })
     .catch((error) => {
       console.error('Search API error:', error)
@@ -91,6 +101,103 @@ function renderPage(container, query, theme, baseUrl, trans) {
       showEmpty(usersSection, trans.noUsers)
       showEmpty(studiosSection, trans.noStudios)
     })
+}
+
+function wireShowMore(section, type, query, baseUrl, theme, trans) {
+  const btn = section.querySelector('.search-section__title__show-more')
+  if (!btn || btn.classList.contains('d-none')) return
+
+  let nextOffset = RESULTS_PER_PAGE
+  let loading = false
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    if (loading) return
+    loading = true
+    btn.style.opacity = '0.5'
+
+    const cursor = btoa(String(nextOffset))
+    const apiUrl =
+      baseUrl +
+      '/api/search?query=' +
+      encodeURIComponent(query) +
+      '&type=' +
+      type +
+      '&limit=' +
+      RESULTS_PER_PAGE +
+      '&cursor=' +
+      encodeURIComponent(cursor)
+
+    fetch(apiUrl)
+      .then((response) => {
+        if (!response.ok) throw new Error('HTTP ' + response.status)
+        return response.json()
+      })
+      .then((data) => {
+        const items = data[type] || []
+        const container = section.querySelector('.search-section__items')
+
+        if (type === 'projects') {
+          items.forEach((project) => {
+            const url = (project.project_url || '').replace('/app/', '/' + theme + '/')
+            container.appendChild(
+              createCard(
+                url,
+                project.screenshot,
+                'card',
+                '/images/default/screenshot-card@1x.webp',
+                project.name || '',
+                'calendar_today',
+                project.uploaded_string || '',
+              ),
+            )
+          })
+        } else if (type === 'users') {
+          items.forEach((user) => {
+            const url = baseUrl + '/app/user/' + escapeAttr(String(user.id))
+            container.appendChild(
+              createCard(
+                url,
+                user.avatar,
+                'thumb',
+                '/images/default/avatar_default-thumb@1x.webp',
+                user.username || '',
+                'code',
+                (user.projects || 0) + ' ' + trans.projects,
+              ),
+            )
+          })
+        } else if (type === 'studios') {
+          items.forEach((studio) => {
+            const url = baseUrl + '/app/studio/' + escapeAttr(String(studio.id))
+            container.appendChild(
+              createCard(
+                url,
+                studio.cover,
+                'card',
+                '/images/default/screenshot-card@1x.webp',
+                studio.name || '',
+                'group',
+                (studio.members_count || 0) + ' ' + trans.members,
+              ),
+            )
+          })
+        }
+
+        nextOffset += RESULTS_PER_PAGE
+
+        if (items.length < RESULTS_PER_PAGE) {
+          btn.classList.add('d-none')
+        }
+      })
+      .catch((error) => {
+        console.error('Search load more error:', error)
+      })
+      .finally(() => {
+        loading = false
+        btn.style.opacity = ''
+      })
+  })
 }
 
 function createSection(id, variant, title, showMoreText) {
@@ -129,7 +236,7 @@ function renderProjects(section, projects, theme, trans) {
     return
   }
 
-  if (projects.length >= 30) {
+  if (projects.length >= RESULTS_PER_PAGE) {
     section.querySelector('.search-section__title__show-more').classList.remove('d-none')
   }
 
@@ -157,7 +264,7 @@ function renderUsers(section, users, baseUrl, trans) {
     return
   }
 
-  if (users.length >= 30) {
+  if (users.length >= RESULTS_PER_PAGE) {
     section.querySelector('.search-section__title__show-more').classList.remove('d-none')
   }
 
@@ -185,7 +292,7 @@ function renderStudios(section, studios, baseUrl, trans) {
     return
   }
 
-  if (studios.length >= 30) {
+  if (studios.length >= RESULTS_PER_PAGE) {
     section.querySelector('.search-section__title__show-more').classList.remove('d-none')
   }
 
