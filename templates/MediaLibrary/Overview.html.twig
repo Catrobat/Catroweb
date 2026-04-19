@@ -74,8 +74,8 @@
 
   {% if isWebview() %}
     <a href="{{ path('exit-webview') }}" id="media-library-done-fab" class="floating-action-button" style="display: none;">
-      <span class="material-icons">check</span>
-      <span>{{ 'done'|trans({}, 'catroweb') }}</span>
+      <span class="material-icons">arrow_back</span>
+      <span>{{ 'media_library.back_to_app'|trans({}, 'catroweb') }}</span>
     </a>
   {% endif %}
 

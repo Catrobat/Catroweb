@@ -1333,6 +1333,7 @@ media_library:
   assets_count: 'assets'
   view_all: 'View all'
   view_all_category: 'View all %category%'
+  back_to_app: 'Back to app'
 
 snackbar:
   project_not_found: 'The requested project is not available'
