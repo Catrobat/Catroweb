@@ -719,4 +719,20 @@ final class ProjectsApiTest extends KernelTestCase
 
     $this->assertSame(Response::HTTP_OK, $response_code);
   }
+
+  public function testCreateProjectCatrobatFileResponseSanitizesSlashesInName(): void
+  {
+    $tmp = tempnam(sys_get_temp_dir(), 'catrobat_test_');
+    $this->assertIsString($tmp);
+    file_put_contents($tmp, 'dummy');
+    $file = new \Symfony\Component\HttpFoundation\File\File($tmp);
+
+    $response = $this->full_response_manager->createProjectCatrobatFileResponse('abc', $file, 'path/to\project');
+
+    $disposition = $response->headers->get('Content-Disposition');
+    $this->assertStringContainsString('path_to_project.catrobat', $disposition);
+    $this->assertStringNotContainsString('/', $disposition);
+
+    unlink($tmp);
+  }
 }
