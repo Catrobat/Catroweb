@@ -723,6 +723,7 @@ final class ProjectsApiTest extends KernelTestCase
   public function testCreateProjectCatrobatFileResponseSanitizesSlashesInName(): void
   {
     $tmp = tempnam(sys_get_temp_dir(), 'catrobat_test_');
+    $this->assertIsString($tmp);
     file_put_contents($tmp, 'dummy');
     $file = new \Symfony\Component\HttpFoundation\File\File($tmp);
 
