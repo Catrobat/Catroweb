@@ -196,7 +196,7 @@ class ProjectResponse
   /**
    * Tags allow projects to be categorized by their creators.
    *
-   * @var string[]|null
+   * @var array<string, string>|null
    *
    * @SerializedName("tags")
    *
@@ -205,14 +205,14 @@ class ProjectResponse
    *   @Assert\Type("string")
    * })
    *
-   * @Type("array<string>")
+   * @Type("array<string, string>")
    */
   protected ?array $tags = null;
 
   /**
    * Extensions used by this project (e.g., arduino, mindstorms).
    *
-   * @var string[]|null
+   * @var array<string, string>|null
    *
    * @SerializedName("extensions")
    *
@@ -221,7 +221,7 @@ class ProjectResponse
    *   @Assert\Type("string")
    * })
    *
-   * @Type("array<string>")
+   * @Type("array<string, string>")
    */
   protected ?array $extensions = null;
 
@@ -667,7 +667,7 @@ class ProjectResponse
   /**
    * Gets tags.
    *
-   * @return string[]|null
+   * @return array<string, string>|null
    */
   public function getTags(): ?array
   {
@@ -677,7 +677,7 @@ class ProjectResponse
   /**
    * Sets tags.
    *
-   * @param string[]|null $tags Tags allow projects to be categorized by their creators
+   * @param array<string, string>|null $tags Tags allow projects to be categorized by their creators
    *
    * @return $this
    */
@@ -691,7 +691,7 @@ class ProjectResponse
   /**
    * Gets extensions.
    *
-   * @return string[]|null
+   * @return array<string, string>|null
    */
   public function getExtensions(): ?array
   {
@@ -701,7 +701,7 @@ class ProjectResponse
   /**
    * Sets extensions.
    *
-   * @param string[]|null $extensions Extensions used by this project (e.g., arduino, mindstorms)
+   * @param array<string, string>|null $extensions Extensions used by this project (e.g., arduino, mindstorms)
    *
    * @return $this
    */

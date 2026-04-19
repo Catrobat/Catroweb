@@ -122,6 +122,7 @@ default:
                 - tests/BehatFeatures/api/projects/GET_projects_featured
                 - tests/BehatFeatures/api/projects/GET_projects_search
                 - tests/BehatFeatures/api/projects/GET_projects_tags
+                - tests/BehatFeatures/api/projects/GET_project_id_remix_graph
                 - tests/BehatFeatures/api/projects/GET_projects_user
                 - tests/BehatFeatures/api/projects/GET_projects_user_id
             contexts:

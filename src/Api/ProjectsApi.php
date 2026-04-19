@@ -30,6 +30,7 @@ use OpenAPI\Server\Model\ProjectsListResponse;
 use OpenAPI\Server\Model\ReactionRequest;
 use OpenAPI\Server\Model\TagsResponse;
 use OpenAPI\Server\Model\UpdateProjectRequest;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -56,6 +57,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     private readonly RateLimiterFactory $reactionBurstLimiter,
     private readonly RateLimiterFactory $downloadBurstLimiter,
     private readonly RequestStack $request_stack,
+    private readonly LoggerInterface $logger,
   ) {
   }
 
@@ -844,7 +846,18 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $remix_graph = $this->remix_manager->getRenderableRemixGraph($id);
+    try {
+      $remix_graph = $this->remix_manager->getRenderableRemixGraph($id);
+    } catch (\Throwable $e) {
+      $this->logger->error('Failed to build remix graph for project {id}: {message}', [
+        'id' => $id,
+        'message' => $e->getMessage(),
+        'exception' => $e,
+      ]);
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
+    }
 
     $nodes = array_map(function (array $node): array {
       if (!$node['available']) {
