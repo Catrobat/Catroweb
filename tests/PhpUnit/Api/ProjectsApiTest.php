@@ -74,6 +74,7 @@ final class ProjectsApiTest extends KernelTestCase
       $this->createNoLimitRateLimiterFactory('phpunit_projects_reaction_burst'),
       $this->createNoLimitRateLimiterFactory('phpunit_projects_download_burst'),
       new \Symfony\Component\HttpFoundation\RequestStack(),
+      new \Psr\Log\NullLogger(),
     );
 
     ProjectsApiTest::bootKernel();
