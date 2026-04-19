@@ -39,8 +39,16 @@ export const Project = function (config) {
         }
         const url = match[0]
         const a = document.createElement('a')
-        a.setAttribute('href', /^(https?|ftp):\/\//i.test(url) ? url : '#')
+        try {
+          const parsed = new URL(url)
+          if (['http:', 'https:', 'ftp:'].includes(parsed.protocol)) {
+            a.href = parsed.href
+          }
+        } catch {
+          // invalid URL — leave href empty so link is inert
+        }
         a.target = '_blank'
+        a.rel = 'noopener noreferrer'
         a.textContent = url
         fragment.appendChild(a)
         fragment.appendChild(document.createTextNode(' '))
