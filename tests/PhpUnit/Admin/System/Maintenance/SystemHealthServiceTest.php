@@ -69,9 +69,9 @@ class SystemHealthServiceTest extends TestCase
   {
     $email = $this->service->getEmailBudget();
 
-    self::assertSame(300, $email['daily_limit']);
+    self::assertSame(EmailBudgetManager::DAILY_LIMIT, $email['daily_limit']);
     self::assertSame(25, $email['sent_today']);
-    self::assertSame(275, $email['remaining']);
+    self::assertSame(EmailBudgetManager::DAILY_LIMIT - 25, $email['remaining']);
     self::assertArrayHasKey('breakdown', $email);
     self::assertArrayHasKey('verification', $email['breakdown']);
     self::assertArrayHasKey('reset', $email['breakdown']);
