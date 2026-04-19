@@ -26,11 +26,33 @@ export const Project = function (config) {
   // -------------------------- FileHelper
 
   function createLinks() {
+    const urlPattern = /(https?|ftp):\/\/[\w?=&./+\-;#~%]+/g
     document.querySelectorAll('#description').forEach((element) => {
-      element.innerHTML = element.innerHTML.replace(
-        /((http|https|ftp):\/\/[\w?=&./+\-;#~%]+(?![\w\s?&./;#~%"=-]*>))/g,
-        '<a href="$1" target="_blank">$1</a> ',
-      )
+      const text = element.textContent
+      const fragment = document.createDocumentFragment()
+      let lastIndex = 0
+      let match
+
+      while ((match = urlPattern.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)))
+        }
+        const url = match[0]
+        const a = document.createElement('a')
+        a.setAttribute('href', /^(https?|ftp):\/\//i.test(url) ? url : '#')
+        a.target = '_blank'
+        a.textContent = url
+        fragment.appendChild(a)
+        fragment.appendChild(document.createTextNode(' '))
+        lastIndex = urlPattern.lastIndex
+      }
+
+      if (lastIndex < text.length) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIndex)))
+      }
+
+      element.textContent = ''
+      element.appendChild(fragment)
     })
   }
 
