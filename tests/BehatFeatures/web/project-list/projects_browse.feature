@@ -29,19 +29,19 @@ Feature: Projects browse page shows user's projects and explore sections
   Scenario: Upload FAB button is visible
     Given I am on "/app/projects"
     And I wait for the page to be loaded
-    Then the element ".projects-fab" should be visible
+    Then the element ".floating-action-button" should be visible
 
   Scenario: Upload FAB redirects logged-in user to upload page
     Given I log in as "Catrobat"
     And I am on "/app/projects"
     And I wait for the page to be loaded
-    When I click ".projects-fab"
+    When I click ".floating-action-button"
     And I wait for the page to be loaded
     Then I should be on "/app/project/upload"
 
   Scenario: Upload FAB redirects not-logged-in user to login
     Given I am on "/app/projects"
     And I wait for the page to be loaded
-    When I click ".projects-fab"
+    When I click ".floating-action-button"
     And I wait for the page to be loaded
     Then I should be on "/app/login"
