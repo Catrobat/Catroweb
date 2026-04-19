@@ -77,4 +77,4 @@ Feature: Get project remix graph
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/1/remix-graph"
     Then the response status code should be "200"
-    And the response Header should contain the key "Cache-Control" with the value 'private, max-age=300'
+    And the response Header should contain the key "Cache-Control" with the value 'max-age=300, private'
