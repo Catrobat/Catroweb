@@ -141,7 +141,7 @@ class ProjectsResponseManager extends AbstractResponseManager
         $tags[$tag->getInternalTitle()] = $this->trans($tag->getTitleLtmCode());
       }
 
-      $data['tags'] = $tags;
+      $data['tags'] = new \ArrayObject($tags);
     }
 
     if (in_array('extensions', $attributes_list, true)) {
@@ -152,7 +152,7 @@ class ProjectsResponseManager extends AbstractResponseManager
         $extensions[$extension->getInternalTitle()] = $this->trans($extension->getTitleLtmCode());
       }
 
-      $data['extensions'] = $extensions;
+      $data['extensions'] = new \ArrayObject($extensions);
     }
 
     if (in_array('uploaded_at', $attributes_list, true)) {
