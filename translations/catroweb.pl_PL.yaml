@@ -1259,6 +1259,7 @@ media_library:
   assets_count: 'assets'
   view_all: 'View all'
   view_all_category: 'View all %category%'
+  back_to_app: 'Back to app'
 snackbar:
   project_not_found: 'Żądany projekt nie jest dostępny'
   project_not_for_kids: 'Projekt został oznaczony jako niebezpieczny dla dzieci!'

@@ -1264,6 +1264,7 @@ media_library:
   assets_count: 'assets'
   view_all: 'View all'
   view_all_category: 'View all %category%'
+  back_to_app: 'Back to app'
 snackbar:
   project_not_found: '请求的项目不可用'
   project_not_for_kids: '该项目被标记为对儿童不安全！'
