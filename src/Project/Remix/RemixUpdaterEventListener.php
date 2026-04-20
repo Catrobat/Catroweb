@@ -71,14 +71,42 @@ class RemixUpdaterEventListener
     }
 
     if (!file_exists($this->migration_lock_file_path)) {
-      // TODO: make sure no inconsistencies (due to concurrency issues) can happen here!!
-      $this->remix_manager->addScratchProjects($scratch_info_data);
-      $this->remix_manager->addRemixes($project, $remixes_data);
+      $this->withRemixUpdateLock(function () use ($scratch_info_data, $project, $remixes_data): void {
+        if (file_exists($this->migration_lock_file_path)) {
+          return;
+        }
+
+        $this->remix_manager->addScratchProjects($scratch_info_data);
+        $this->remix_manager->addRemixes($project, $remixes_data);
+      });
     }
 
     $project_xml_properties->header->remixOf = $remix_url_string;
     $project_xml_properties->header->url = $this->router->generate('project', ['id' => $project->getId(), 'theme' => Flavor::POCKETCODE]);
     $project_xml_properties->header->userHandle = $project->getUser()->getUsername();
     $file->saveProjectXmlProperties();
+  }
+
+  /**
+   * Serializes remix writes to avoid races when multiple uploads are processed in parallel.
+   */
+  private function withRemixUpdateLock(callable $update_callback): void
+  {
+    $lock_file_path = sys_get_temp_dir().'/catrobat-remix-updater-'.md5($this->migration_lock_file_path).'.lock';
+    $lock_file = fopen($lock_file_path, 'c+');
+    if (false === $lock_file) {
+      throw new \RuntimeException('Could not open lock file: '.$lock_file_path);
+    }
+
+    try {
+      if (!flock($lock_file, LOCK_EX)) {
+        throw new \RuntimeException('Could not acquire lock file: '.$lock_file_path);
+      }
+
+      $update_callback();
+    } finally {
+      flock($lock_file, LOCK_UN);
+      fclose($lock_file);
+    }
   }
 }

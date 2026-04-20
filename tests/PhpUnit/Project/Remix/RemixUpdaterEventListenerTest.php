@@ -497,6 +497,43 @@ class RemixUpdaterEventListenerTest extends TestCase
   /**
    * @throws \Exception
    */
+  public function testSkipsRemixDatabaseUpdatesDuringMigration(): void
+  {
+    $migration_lock_file_path = tempnam(sys_get_temp_dir(), 'catrobat-remix-migration-');
+    $this->assertIsString($migration_lock_file_path);
+
+    $router = $this->createStub(RouterInterface::class);
+    $logger = $this->createStub(LoggerInterface::class);
+    $router->method('generate')->willReturnMap([
+      ['project', ['id' => '3571', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['project', ['id' => '3572', 'theme' => Flavor::POCKETCODE], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+    ]);
+
+    $remix_updater = new RemixUpdaterEventListener(
+      $this->remix_manager,
+      $this->async_http_client,
+      $router,
+      $logger,
+      $migration_lock_file_path
+    );
+
+    $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
+    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
+    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->async_http_client->expects($this->atLeastOnce())->method('fetchScratchProjectDetails')->with($this->isArray())->willReturn([]);
+    $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
+    $this->remix_manager->expects($this->atLeastOnce())->method('filterExistingScratchProjectIds')->with(['117697631'])->willReturn([]);
+    $this->remix_manager->expects($this->never())->method('addScratchProjects');
+    $this->remix_manager->expects($this->never())->method('addRemixes');
+
+    $remix_updater->update($file, $this->program_entity);
+
+    @unlink($migration_lock_file_path);
+  }
+
+  /**
+   * @throws \Exception
+   */
   #[AllowMockObjectsWithoutExpectations]
   public function testUpdateTheRemixOfOfTheEntity(): void
   {
