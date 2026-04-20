@@ -316,7 +316,7 @@ class ProjectsResponseManager extends AbstractResponseManager
 
   private function computeRetentionDays(Project $project): int
   {
-    return $this->storage_lifecycle->getRetentionDays($project);
+    return $this->storage_lifecycle->getRetentionInfo($project)['remaining'];
   }
 
   public function createFeaturedProjectResponse(FeaturedProject $featured_project, ?string $attributes = null): FeaturedProjectResponse

@@ -1,0 +1,34 @@
+<div class="btn-group btn-group-sm" role="group">
+  <a class="btn btn-sm btn-outline-secondary" href="{{ path('admin_approve_projects_show', {id: object.id}) }}"
+     title="Show project details"><i class="fa fa-eye"></i> Show</a>
+
+  {% if object.visible %}
+    <a class="btn btn-sm btn-warning" href="{{ admin.generateObjectUrl('softDelete', object) }}"
+       onclick="return confirm('Hide project \'{{ object.name|e('js') }}\'? It will be pending deletion.')"
+       title="Set invisible (soft delete)"><i class="fa fa-eye-slash"></i> Hide</a>
+  {% else %}
+    <a class="btn btn-sm btn-danger" href="{{ admin.generateObjectUrl('hardDelete', object) }}"
+       onclick="return confirm('Permanently delete project \'{{ object.name|e('js') }}\'? This removes all files and cannot be undone.')"
+       title="Permanently remove project and files"><i class="fa fa-trash"></i> Hard Delete</a>
+  {% endif %}
+
+  {% if object.storageProtected %}
+    <a class="btn btn-sm btn-info" href="{{ admin.generateObjectUrl('toggleProtected', object) }}"
+       onclick="return confirm('Remove retention protection from \'{{ object.name|e('js') }}\'?')"
+       title="Currently protected from auto-deletion. Click to unprotect."><i class="fa fa-unlock"></i> Unprotect</a>
+  {% else %}
+    <a class="btn btn-sm btn-outline-info" href="{{ admin.generateObjectUrl('toggleProtected', object) }}"
+       onclick="return confirm('Protect \'{{ object.name|e('js') }}\' from auto-deletion?')"
+       title="Not protected. Click to protect from auto-deletion."><i class="fa fa-lock"></i> Protect</a>
+  {% endif %}
+
+  {% if object.approved %}
+    <a class="btn btn-sm btn-success" href="{{ admin.generateObjectUrl('toggleApproved', object) }}"
+       onclick="return confirm('Remove report protection from \'{{ object.name|e('js') }}\'?')"
+       title="Currently whitelisted (protected from reports). Click to remove."><i class="fa fa-shield"></i> Unwhitelist</a>
+  {% else %}
+    <a class="btn btn-sm btn-outline-success" href="{{ admin.generateObjectUrl('toggleApproved', object) }}"
+       onclick="return confirm('Whitelist \'{{ object.name|e('js') }}\' (protect from reports)?')"
+       title="Not whitelisted. Click to protect from reports."><i class="fa fa-shield"></i> Whitelist</a>
+  {% endif %}
+</div>
