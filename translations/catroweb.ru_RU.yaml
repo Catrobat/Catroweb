@@ -1260,6 +1260,7 @@ media_library:
   assets_count: 'ресурсы'
   view_all: 'Показать все'
   view_all_category: 'Показать все %category%'
+  back_to_app: 'Back to app'
 snackbar:
   project_not_found: 'Запрошенный проект недоступен'
   project_not_for_kids: 'Проект был отмечен как небезопасный для детей!'
