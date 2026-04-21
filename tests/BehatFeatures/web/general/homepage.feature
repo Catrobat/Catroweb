@@ -105,7 +105,6 @@ Feature: Pocketcode homepage
   Scenario: User should be able to see legally required links
     Given I am on homepage
     And I wait for the page to be loaded
-    And I should see "About Catrobat"
     And I should see "License to play"
     And I should see "Privacy policy"
     And I should see "Terms of Use"

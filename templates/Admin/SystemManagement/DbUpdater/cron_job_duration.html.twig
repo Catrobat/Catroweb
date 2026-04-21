@@ -1,0 +1,15 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+  {% if value is null %}
+    <span class="text-muted">—</span>
+  {% elseif value >= 3600 %}
+    <span class="badge bg-danger" title="{{ value }}s">{{ (value / 3600)|number_format(1) }}h</span>
+  {% elseif value >= 300 %}
+    <span class="badge bg-warning" title="{{ value }}s">{{ (value / 60)|number_format(0) }}m</span>
+  {% elseif value >= 1 %}
+    {{ value }}s
+  {% else %}
+    &lt;1s
+  {% endif %}
+{% endblock %}

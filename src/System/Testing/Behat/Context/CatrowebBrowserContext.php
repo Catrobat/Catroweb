@@ -1195,17 +1195,13 @@ class CatrowebBrowserContext extends BrowserContext
     $this->assertSession()->pageTextContains('State');
     $this->assertSession()->pageTextContains('Cron Interval');
     $this->assertSession()->pageTextContains('Start At');
-    $this->assertSession()->pageTextContains('End At');
-    $this->assertSession()->pageTextContains('Result Code');
+    $this->assertSession()->pageTextContains('Duration');
+    $this->assertSession()->pageTextContains('Result');
 
-    $survey_stats = $table->getHash();
-    foreach ($survey_stats as $survey_stat) {
-      $this->assertSession()->pageTextContains($survey_stat['Name']);
-      $this->assertSession()->pageTextContains($survey_stat['State']);
-      $this->assertSession()->pageTextContains($survey_stat['Cron Interval']);
-      $this->assertSession()->pageTextContains($survey_stat['Start At']);
-      $this->assertSession()->pageTextContains($survey_stat['End At']);
-      $this->assertSession()->pageTextContains($survey_stat['Result Code']);
+    $rows = $table->getHash();
+    foreach ($rows as $row) {
+      $this->assertSession()->pageTextContains($row['Name']);
+      $this->assertSession()->pageTextContains($row['Cron Interval']);
     }
   }
 

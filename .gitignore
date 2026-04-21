@@ -117,3 +117,4 @@ yarn-error.log
 /.twig-cs-fixer.cache
 ###< vincentlanglet/twig-cs-fixer ###
 /public/resources/assets/
+.claude/scheduled_tasks.lock

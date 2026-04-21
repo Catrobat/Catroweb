@@ -49,11 +49,18 @@ class CronJobsAdmin extends AbstractAdmin
   {
     $list
       ->add('name')
-      ->add('state')
+      ->add('state', null, [
+        'template' => 'Admin/SystemManagement/DbUpdater/cron_job_state.html.twig',
+      ])
       ->add('cron_interval')
       ->add('start_at')
-      ->add('end_at')
-      ->add('result_code')
+      ->add('duration_seconds', null, [
+        'label' => 'Duration',
+        'template' => 'Admin/SystemManagement/DbUpdater/cron_job_duration.html.twig',
+      ])
+      ->add('result_code', null, [
+        'template' => 'Admin/SystemManagement/DbUpdater/cron_job_result.html.twig',
+      ])
       ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'reset_cron_job' => [

@@ -160,7 +160,7 @@ class ResetCommand extends Command
 
     // Creating sample Media Samples
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:create:media-assets-samples'], ['timeout' => 300], 'Creating media asset samples', $output
+      ['bin/console', 'catrobat:create:media-assets-samples'], ['timeout' => 600], 'Creating media asset samples', $output
     );
 
     // Insert static achievements

@@ -133,11 +133,10 @@ class MaintenanceController extends CRUDController
     $rm->setArchiveCommandLink($this->admin->generateUrl('archive_logs'));
     $rm->setArchiveCommandName('Archive logs files');
     $RemovableObjects[] = $rm;
-    $freeSpace = disk_free_space('/') ?: 0.0;
-    $usedSpace = (disk_total_space('/') ?: 0.0) - $freeSpace;
-    $usedSpace = max($usedSpace, 0);
+    $disks = $this->getDiskStats();
+    $primaryDisk = $disks[0];
 
-    $usedSpaceRaw = $usedSpace;
+    $usedSpaceRaw = $primaryDisk['used_raw'];
     foreach ($RemovableObjects as $obj) {
       $usedSpaceRaw -= $obj->size_raw;
     }
@@ -155,16 +154,16 @@ class MaintenanceController extends CRUDController
     $shared_ram_percentage = $whole_ram > 0 ? ($shared_ram / $whole_ram) * 100 : 0;
     $cached_ram_percentage = $whole_ram > 0 ? ($cached_ram / $whole_ram) * 100 : 0;
 
-    $totalSpace = $usedSpace + $freeSpace;
-    $usedPercentage = $totalSpace > 0 ? ($usedSpace / $totalSpace) * 100.0 : 0.0;
+    $storageDisk = $this->getStorageDisk($disks);
 
     return $this->render('Admin/SystemManagement/Maintain.html.twig', [
       'RemovableObjects' => $RemovableObjects,
-      'wholeSpace' => $this->getSymbolByQuantity($totalSpace),
+      'disks' => $disks,
+      'wholeSpace' => $this->getSymbolByQuantity($primaryDisk['total_raw']),
       'usedSpace' => $this->getSymbolByQuantity($usedSpaceRaw),
       'usedSpace_raw' => $usedSpaceRaw,
-      'freeSpace_raw' => $freeSpace,
-      'freeSpace' => $this->getSymbolByQuantity($freeSpace),
+      'freeSpace_raw' => $primaryDisk['free_raw'],
+      'freeSpace' => $this->getSymbolByQuantity($primaryDisk['free_raw']),
       'projectsSpace_raw' => $projectsSize,
       'projectsSpace' => $this->getSymbolByQuantity($projectsSize),
       'freeRamPercentage' => $free_ram_percentage,
@@ -177,11 +176,71 @@ class MaintenanceController extends CRUDController
       'sharedRam' => $this->getSymbolByQuantity($shared_ram),
       'cachedRam' => $this->getSymbolByQuantity($cached_ram),
       'availableRam' => $this->getSymbolByQuantity($available_ram),
-      'storagePressureLevel' => $this->healthService->getStoragePressureLevel($usedPercentage, (int) $freeSpace),
+      'storagePressureLevel' => $this->healthService->getStoragePressureLevel(
+        $storageDisk['used_percentage'], (int) $storageDisk['free_raw']
+      ),
       'emailBudget' => $this->healthService->getEmailBudget(),
       'emailBudgetLevel' => $this->healthService->getEmailBudgetLevel(),
       'projectCounts' => $this->healthService->getProjectCounts(),
     ]);
+  }
+
+  /**
+   * @return list<array{name: string, mount: string, total: string, used: string, free: string, total_raw: float, used_raw: float, free_raw: float, used_percentage: float}>
+   */
+  private function getDiskStats(): array
+  {
+    $mounts = ['/' => 'System', '/data' => 'Data', '/backup' => 'Backup'];
+    $disks = [];
+
+    foreach ($mounts as $path => $name) {
+      $total = @disk_total_space($path);
+      $free = @disk_free_space($path);
+      if (false === $total || false === $free) {
+        continue;
+      }
+
+      $used = max($total - $free, 0);
+      $percentage = $total > 0 ? ($used / $total) * 100.0 : 0.0;
+
+      $disks[] = [
+        'name' => $name,
+        'mount' => $path,
+        'total' => $this->getSymbolByQuantity($total),
+        'used' => $this->getSymbolByQuantity($used),
+        'free' => $this->getSymbolByQuantity($free),
+        'total_raw' => $total,
+        'used_raw' => $used,
+        'free_raw' => $free,
+        'used_percentage' => $percentage,
+      ];
+    }
+
+    return $disks;
+  }
+
+  /**
+   * Returns the disk where project storage actually lives (follows symlinks).
+   *
+   * @param list<array{name: string, mount: string, total: string, used: string, free: string, total_raw: float, used_raw: float, free_raw: float, used_percentage: float}> $disks
+   *
+   * @return array{name: string, mount: string, total: string, used: string, free: string, total_raw: float, used_raw: float, free_raw: float, used_percentage: float}
+   */
+  private function getStorageDisk(array $disks): array
+  {
+    $storage_real = realpath($this->file_storage_dir) ?: $this->file_storage_dir;
+    $best = $disks[0];
+    $best_len = 0;
+
+    foreach ($disks as $disk) {
+      $mount = $disk['mount'];
+      if (str_starts_with($storage_real, $mount) && strlen($mount) > $best_len) {
+        $best = $disk;
+        $best_len = strlen($mount);
+      }
+    }
+
+    return $best;
   }
 
   private function get_dir_size(string $directory, ?array $extension = null): int
