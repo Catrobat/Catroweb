@@ -134,7 +134,7 @@ Feature: Persist project and comment machine translation
     Given there are project machine translations:
       | project_id | source_language | target_language | provider | usage_count |
     And I have a request header "HTTP_IF_NONE_MATCH" with value '"eeb28b694e178d22952bf92a025a892cfr"'
-    When I request "GET" "/app/translate/project/1?target_language=fr"
+    When I request "GET" "/api/projects/1/translation?target_language=fr"
     Then the response status code should be "304"
     And there should be project machine translations:
       | project_id | source_language | target_language | provider | usage_count |
@@ -146,7 +146,7 @@ Feature: Persist project and comment machine translation
       | 1          |                 | fr              | etag     | 2           |
       | 2          |                 | fr              | etag     | 1           |
     And I have a request header "HTTP_IF_NONE_MATCH" with value '"eeb28b694e178d22952bf92a025a892cfr"'
-    When I request "GET" "/app/translate/project/1?target_language=fr"
+    When I request "GET" "/api/projects/1/translation?target_language=fr"
     Then the response status code should be "304"
     And there should be project machine translations:
       | project_id | source_language | target_language | provider | usage_count |

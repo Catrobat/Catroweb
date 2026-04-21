@@ -13,32 +13,70 @@ Feature: Owner should get trilingual achievement when projects have custom trans
       | 3  | project 3 | Catrobat |
 
   Scenario: Owner should get achievement when one project has custom translations for three languages
-    Given I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=name&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/1?field=description&language=es&text=translated"
-    And I request "PUT" "/app/translate/custom/project/1?field=credit&language=it&text=translated"
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/name/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/description/es"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/credit/it"
     When I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should contain "Trilingual"
 
   Scenario: Owner should get achievement when three projects each have a custom translations for a different language
-    Given I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=description&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/2?field=credit&language=es&text=translated"
-    And I request "PUT" "/app/translate/custom/project/3?field=name&language=de&text=translated"
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/description/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/2/translation/credit/es"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/3/translation/name/de"
     When I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should contain "Trilingual"
 
   Scenario: Owner should not get achievement when three projects have a custom translations for the same language
-    Given I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=credit&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/2?field=name&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/3?field=description&language=fr&text=translated"
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/credit/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/2/translation/name/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/3/translation/description/fr"
     When I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Trilingual"
-

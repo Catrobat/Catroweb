@@ -1,4 +1,4 @@
-@web
+@api
 Feature: Server deletes custom translation
 
   Background:
@@ -14,9 +14,9 @@ Feature: Server deletes custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I POST login with user "Catrobat" and password "123456"
-    And I request "DELETE" "/app/translate/custom/project/1?field=<field>&language=fr"
-    Then the response status code should be "200"
+    And I use a valid JWT Bearer token for "Catrobat"
+    When I request "DELETE" "/api/projects/1/translation/<field>/fr"
+    Then the response status code should be "204"
     And there should be project custom translations:
       | project_id | language | name   | description   | credit   |
       | 1          | fr       | <name> | <description> | <credit> |
@@ -31,9 +31,9 @@ Feature: Server deletes custom translation
     Given there are project custom translations:
       | project_id | language | name   | description   | credit   |
       | 1          | fr       | <name> | <description> | <credit> |
-    When I POST login with user "Catrobat" and password "123456"
-    And I request "DELETE" "/app/translate/custom/project/1?field=<field>&language=fr"
-    Then the response status code should be "200"
+    And I use a valid JWT Bearer token for "Catrobat"
+    When I request "DELETE" "/api/projects/1/translation/<field>/fr"
+    Then the response status code should be "204"
     And there should be project custom translations:
       | project_id | language | name | description | credit |
 
@@ -47,8 +47,8 @@ Feature: Server deletes custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I POST login with user "Oscar" and password "123456"
-    And I request "DELETE" "/app/translate/custom/project/1?field=<field>language=fr"
+    And I use a valid JWT Bearer token for "Oscar"
+    When I request "DELETE" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "404"
     And there are project custom translations:
       | project_id | language | name            | description            | credit            |
@@ -64,7 +64,7 @@ Feature: Server deletes custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I request "DELETE" "/app/translate/custom/project/1?field=<field>&language=fr"
+    When I request "DELETE" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "401"
     And there are project custom translations:
       | project_id | language | name            | description            | credit            |

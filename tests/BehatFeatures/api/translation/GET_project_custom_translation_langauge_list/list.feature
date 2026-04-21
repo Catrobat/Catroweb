@@ -16,7 +16,7 @@ Feature: List languages with defined custom translation
       | 1          | de       |         |                | de_credit |
 
   Scenario: List languages with custom translations for any of name, description and credit
-    When I request "GET" "/app/translate/custom/project/1/list"
+    When I request "GET" "/api/projects/1/translation/languages"
     Then the response code should be "200"
     And the response should be in json format
     And the client response should contain "fr"

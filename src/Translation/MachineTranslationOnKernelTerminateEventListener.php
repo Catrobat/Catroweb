@@ -45,7 +45,7 @@ class MachineTranslationOnKernelTerminateEventListener
       } else {
         $this->persistCachedCommentTranslation($request);
       }
-    } elseif (str_contains($path, '/translate/project/')) {
+    } elseif ($this->isProjectTranslationPath($path)) {
       if (200 === $status_code) {
         $this->persistProjectTranslation($event);
       } else {
@@ -104,7 +104,16 @@ class MachineTranslationOnKernelTerminateEventListener
 
   private function getId(string $path): string
   {
-    return substr((string) strrchr($path, '/'), 1);
+    if (1 === preg_match('/\/projects\/([a-zA-Z0-9\-]+)\/translation/', $path, $matches)) {
+      return $matches[1];
+    }
+
+    return '';
+  }
+
+  private function isProjectTranslationPath(string $path): bool
+  {
+    return 1 === preg_match('/\/projects\/[a-zA-Z0-9\-]+\/translation$/', $path);
   }
 
   private function getCommentIdFromPath(string $path): string

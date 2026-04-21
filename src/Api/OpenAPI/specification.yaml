@@ -59,6 +59,9 @@ tags:
   - name: 'Moderation'
     description: 'Content moderation: reporting, appeals, and admin review'
 
+  - name: 'Translation'
+    description: 'Machine and custom translations for projects'
+
 paths:
   ##############################################
   # Authentication
@@ -1482,6 +1485,153 @@ paths:
           $ref: '#/components/responses/NotAcceptable'
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
+
+  ##############################################
+  # Translation
+  ###
+  '/projects/{id}/translation':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Translation'
+      summary: 'Machine-translate a project'
+      description: 'Translates the project name, description, and credits using machine translation.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+        - name: target_language
+          in: query
+          required: true
+          description: 'Target language (ISO 639-1 or BCP 47)'
+          schema:
+            type: string
+            example: 'de'
+        - name: source_language
+          in: query
+          required: false
+          description: 'Optional source language override'
+          schema:
+            type: string
+            example: 'en'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTranslationResponse'
+        '304':
+          description: 'Not Modified (ETag match)'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '503':
+          description: 'Translation service unavailable'
+
+  '/projects/{id}/translation/{field}/{language}':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+      - $ref: '#/components/parameters/Uuid'
+      - name: field
+        in: path
+        required: true
+        description: 'Project field to translate'
+        schema:
+          type: string
+          enum:
+            - name
+            - description
+            - credit
+      - name: language
+        in: path
+        required: true
+        description: 'Language code (ISO 639-1 or BCP 47)'
+        schema:
+          type: string
+          example: 'fr'
+
+    get:
+      tags:
+        - 'Translation'
+      summary: 'Get a custom translation'
+      description: 'Returns a user-defined custom translation for a specific project field and language.'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectCustomTranslationResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Translation'
+      summary: 'Save a custom translation'
+      description: 'Creates or updates a custom translation for a project field. Only the project owner can do this.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCustomTranslationSaveRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/OK'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      security:
+        - BearerAuth: []
+      tags:
+        - 'Translation'
+      summary: 'Delete a custom translation'
+      description: 'Removes a custom translation for a project field. Only the project owner can do this.'
+      responses:
+        '204':
+          $ref: '#/components/responses/NoContent'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  '/projects/{id}/translation/languages':
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+
+    get:
+      tags:
+        - 'Translation'
+      summary: 'List custom translation languages'
+      description: 'Returns a list of languages that have custom translations for the given project.'
+      parameters:
+        - $ref: '#/components/parameters/Uuid'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: 'fr'
+        '404':
+          $ref: '#/components/responses/NotFound'
 
   ################################################
   # Notifications
@@ -5351,6 +5501,60 @@ components:
         _cache:
           type: boolean
           nullable: true
+
+    ##############################################
+    # Translation
+    ###
+
+    ProjectTranslationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Project UUID'
+          example: '1234abcd-12ab-12ab-12ab-123456abcdef'
+        source_language:
+          type: string
+          example: 'en'
+        target_language:
+          type: string
+          example: 'de'
+        translated_title:
+          type: string
+          nullable: true
+          example: 'Mein Projekt'
+        translated_description:
+          type: string
+          nullable: true
+          example: 'Ein tolles Projekt'
+        translated_credit:
+          type: string
+          nullable: true
+          example: 'Danke an alle'
+        provider:
+          type: string
+          example: 'google'
+        _cache:
+          type: boolean
+          nullable: true
+
+    ProjectCustomTranslationResponse:
+      type: object
+      properties:
+        translation:
+          type: string
+          nullable: true
+          example: 'Mon Projet'
+
+    ProjectCustomTranslationSaveRequest:
+      type: object
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          description: 'The translated text'
+          example: 'Mon Projet'
 
     ##############################################
     # Followers

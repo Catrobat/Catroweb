@@ -15,38 +15,100 @@ Feature: Owner should get linguist achievement when projects have custom transla
       | 5  | project 5 | Catrobat |
 
   Scenario: Owner should get achievement when one project has custom translations for five languages
-    Given I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=name&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/1?field=description&language=es&text=translated"
-    And I request "PUT" "/app/translate/custom/project/1?field=credit&language=it&text=translated"
-    And I request "PUT" "/app/translate/custom/project/1?field=name&language=de&text=translated"
-    And I request "PUT" "/app/translate/custom/project/1?field=description&language=ar&text=translated"
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/name/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/description/es"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/credit/it"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/name/de"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/description/ar"
     When I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should contain "Linguist"
 
   Scenario: Owner should get achievement when five projects each have a custom translations for a different language
-    Given I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=name&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/2?field=description&language=es&text=translated"
-    And I request "PUT" "/app/translate/custom/project/3?field=credit&language=it&text=translated"
-    And I request "PUT" "/app/translate/custom/project/4?field=name&language=de&text=translated"
-    And I request "PUT" "/app/translate/custom/project/5?field=description&language=ar&text=translated"
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/name/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/2/translation/description/es"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/3/translation/credit/it"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/4/translation/name/de"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/5/translation/description/ar"
     When I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should contain "Linguist"
 
   Scenario: Owner should not get achievement when five projects have a custom translations for the same language
-    Given I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=credit&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/2?field=name&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/3?field=name&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/4?field=name&language=fr&text=translated"
-    And I request "PUT" "/app/translate/custom/project/5?field=name&language=fr&text=translated"
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/1/translation/credit/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/2/translation/name/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/3/translation/name/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/4/translation/name/fr"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    And I request "PUT" "/api/projects/5/translation/name/fr"
     When I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Linguist"
-

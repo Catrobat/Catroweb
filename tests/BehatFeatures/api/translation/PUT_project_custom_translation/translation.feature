@@ -13,8 +13,13 @@ Feature: Server stores new custom translation
   Scenario Outline: Project owner can set translation
     Given there are project custom translations:
       | project_id | language | name | description | credit |
-    When I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=<field>&language=fr&text=translated"
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"translated"}
+      """
+    When I request "PUT" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "200"
     And there should be project custom translations:
       | project_id | language | name   | description   | credit   |
@@ -30,8 +35,13 @@ Feature: Server stores new custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=<field>&language=fr&text=updated"
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"updated"}
+      """
+    When I request "PUT" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "200"
     And there should be project custom translations:
       | project_id | language | name   | description   | credit   |
@@ -47,8 +57,13 @@ Feature: Server stores new custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I POST login with user "Oscar" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=<field>&language=fr&text=updated"
+    And I use a valid JWT Bearer token for "Oscar"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"updated"}
+      """
+    When I request "PUT" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "404"
     And there are project custom translations:
       | project_id | language | name            | description            | credit            |
@@ -64,7 +79,12 @@ Feature: Server stores new custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I request "PUT" "/app/translate/custom/project/1?field=<field>&language=fr&text=updated"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"updated"}
+      """
+    When I request "PUT" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "401"
     And there are project custom translations:
       | project_id | language | name            | description            | credit            |
@@ -80,8 +100,13 @@ Feature: Server stores new custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=<field>&language=fr&text="
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":""}
+      """
+    When I request "PUT" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "400"
     And there should be project custom translations:
       | project_id | language | name            | description            | credit            |
@@ -97,8 +122,13 @@ Feature: Server stores new custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I POST login with user "Catrobat" and password "123456"
-    And I request "PUT" "/app/translate/custom/project/1?field=other&language=fr&text=new"
+    And I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+      """
+      {"text":"new"}
+      """
+    When I request "PUT" "/api/projects/1/translation/other/fr"
     Then the response status code should be "400"
     And there should be project custom translations:
       | project_id | language | name            | description            | credit            |

@@ -7,7 +7,6 @@ namespace App\Application\Controller\Project;
 use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\Enum\ContentType;
 use App\Moderation\ContentVisibilityManager;
@@ -15,17 +14,14 @@ use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Project\ProjectStatisticsService;
 use App\Storage\ScreenshotRepository;
-use App\Translation\TranslationDelegate;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectController extends AbstractController
@@ -36,9 +32,7 @@ class ProjectController extends AbstractController
     private readonly TranslatorInterface $translator,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly EventDispatcherInterface $event_dispatcher,
-    private readonly TranslationDelegate $translation_delegate,
     private readonly UserCommentRepository $comment_repository,
-    private readonly ProjectCustomTranslationRepository $projectCustomTranslationRepository,
     private readonly ContentVisibilityManager $content_visibility_manager,
     private readonly ProjectStatisticsService $project_statistics_service,
   ) {
@@ -112,77 +106,6 @@ class ProjectController extends AbstractController
     ]);
   }
 
-  #[Route(path: '/translate/project/{id}', name: 'translate_project', methods: ['GET'])]
-  public function translateProject(Request $request, string $id): Response
-  {
-    if (!$request->query->has('target_language')) {
-      return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
-    }
-
-    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Project) {
-      return new Response('No project found for this id', Response::HTTP_NOT_FOUND);
-    }
-
-    $source_language = $request->query->get('source_language');
-    $source_language = is_null($source_language) ? $source_language : (string) $source_language;
-
-    $target_language = (string) $request->query->get('target_language');
-    if ($source_language === $target_language) {
-      return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
-    }
-
-    $response = new JsonResponse();
-    $response->setEtag(md5($project->getName().$project->getDescription().$project->getCredits()).$target_language);
-    $response->setPublic();
-    if ($response->isNotModified($request)) {
-      return $response;
-    }
-
-    $translation_result = $this->translation_delegate->translateProject($project, $source_language, $target_language);
-    if (null === $translation_result) {
-      return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
-    }
-
-    $title_translation = $translation_result[0] ?? null;
-    if (null === $title_translation) {
-      return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
-    }
-
-    return $response->setData([
-      'id' => $project->getId(),
-      'source_language' => $source_language ?? $title_translation->detected_source_language,
-      'target_language' => $target_language,
-      'translated_title' => $title_translation->translation,
-      'translated_description' => $translation_result[1]?->translation,
-      'translated_credit' => $translation_result[2]?->translation,
-      'provider' => $title_translation->provider,
-      '_cache' => $title_translation->cache,
-    ]);
-  }
-
-  #[Route(path: '/translate/custom/project/{id}', name: 'project_custom_translation', methods: ['PUT', 'GET', 'DELETE'])]
-  public function projectCustomTranslation(Request $request, string $id): Response
-  {
-    return match ($request->getMethod()) {
-      'PUT' => $this->projectCustomTranslationPutAction($request, $id),
-      'GET' => $this->projectCustomTranslationGetAction($request, $id),
-      'DELETE' => $this->projectCustomTranslationDeleteAction($request, $id),
-      default => new Response(null, Response::HTTP_BAD_REQUEST),
-    };
-  }
-
-  #[Route(path: '/translate/custom/project/{id}/list', name: 'project_custom_translation_language_list', methods: ['GET'])]
-  public function projectCustomTranslationLanguageList(string $id): Response
-  {
-    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Project) {
-      return new Response(null, Response::HTTP_NOT_FOUND);
-    }
-
-    return new JsonResponse($this->projectCustomTranslationRepository->listDefinedLanguages($project));
-  }
-
   /**
    * @throws NonUniqueResultException
    */
@@ -236,132 +159,5 @@ class ProjectController extends AbstractController
       $viewed[] = $project->getId();
       $request->getSession()->set('viewed', $viewed);
     }
-  }
-
-  private function projectCustomTranslationDeleteAction(Request $request, string $id): Response
-  {
-    $user = $this->getUser();
-    if (!$user instanceof UserInterface) {
-      return new Response(null, Response::HTTP_UNAUTHORIZED);
-    }
-
-    $project = $this->project_manager->find($id);
-    if (!$project instanceof Project || $project->getUser() !== $user) {
-      return new Response(null, Response::HTTP_NOT_FOUND);
-    }
-
-    if (!$request->query->has('field')
-      || !$request->query->has('language')) {
-      return new Response(null, Response::HTTP_BAD_REQUEST);
-    }
-
-    $field = (string) $request->query->get('field');
-    $language = (string) $request->query->get('language');
-
-    $result = false;
-    try {
-      switch ($field) {
-        case 'name':
-          $result = $this->translation_delegate->deleteProjectNameCustomTranslation($project, $language);
-          break;
-        case 'description':
-          $result = $this->translation_delegate->deleteProjectDescriptionCustomTranslation($project, $language);
-          break;
-        case 'credit':
-          $result = $this->translation_delegate->deleteProjectCreditCustomTranslation($project, $language);
-          break;
-        default:
-          return new Response(null, Response::HTTP_BAD_REQUEST);
-      }
-    } catch (\InvalidArgumentException $invalidArgumentException) {
-      return new Response($invalidArgumentException->getMessage(), Response::HTTP_BAD_REQUEST);
-    }
-
-    return new Response(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
-  }
-
-  private function projectCustomTranslationGetAction(Request $request, string $id): Response
-  {
-    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
-    if (!$project instanceof Project) {
-      return new Response(null, Response::HTTP_NOT_FOUND);
-    }
-
-    if (!$request->query->has('field')
-      || !$request->query->has('language')) {
-      return new Response(null, Response::HTTP_BAD_REQUEST);
-    }
-
-    $field = (string) $request->query->get('field');
-    $language = (string) $request->query->get('language');
-
-    $result = null;
-    try {
-      switch ($field) {
-        case 'name':
-          $result = $this->translation_delegate->getProjectNameCustomTranslation($project, $language);
-          break;
-        case 'description':
-          $result = $this->translation_delegate->getProjectDescriptionCustomTranslation($project, $language);
-          break;
-        case 'credit':
-          $result = $this->translation_delegate->getProjectCreditCustomTranslation($project, $language);
-          break;
-        default:
-          return new Response(null, Response::HTTP_BAD_REQUEST);
-      }
-    } catch (\InvalidArgumentException $invalidArgumentException) {
-      return new Response($invalidArgumentException->getMessage(), Response::HTTP_BAD_REQUEST);
-    }
-
-    return new Response($result, null == $result ? Response::HTTP_NOT_FOUND : Response::HTTP_OK);
-  }
-
-  private function projectCustomTranslationPutAction(Request $request, string $id): Response
-  {
-    $user = $this->getUser();
-    if (!$user instanceof UserInterface) {
-      return new Response(null, Response::HTTP_UNAUTHORIZED);
-    }
-
-    $project = $this->project_manager->find($id);
-    if (!$project instanceof Project || $project->getUser() !== $user) {
-      return new Response(null, Response::HTTP_NOT_FOUND);
-    }
-
-    if (!$request->query->has('field')
-      || !$request->query->has('language')
-      || !$request->query->has('text')) {
-      return new Response(null, Response::HTTP_BAD_REQUEST);
-    }
-
-    $field = (string) $request->query->get('field');
-    $language = (string) $request->query->get('language');
-    $text = (string) $request->query->get('text');
-
-    if ('' === trim($text)) {
-      return new Response(null, Response::HTTP_BAD_REQUEST);
-    }
-
-    $result = false;
-    try {
-      switch ($field) {
-        case 'name':
-          $result = $this->translation_delegate->addProjectNameCustomTranslation($project, $language, $text);
-          break;
-        case 'description':
-          $result = $this->translation_delegate->addProjectDescriptionCustomTranslation($project, $language, $text);
-          break;
-        case 'credit':
-          $result = $this->translation_delegate->addProjectCreditCustomTranslation($project, $language, $text);
-          break;
-        default:
-          return new Response(null, Response::HTTP_BAD_REQUEST);
-      }
-    } catch (\InvalidArgumentException $invalidArgumentException) {
-      return new Response($invalidArgumentException->getMessage(), Response::HTTP_BAD_REQUEST);
-    }
-
-    return new Response(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
 }

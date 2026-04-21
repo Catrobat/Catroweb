@@ -64,6 +64,7 @@ use App\Api\ProjectsApi;
 use App\Api\SearchApi;
 use App\Api\Services\OverwriteController;
 use App\Api\StudiosApi;
+use App\Api\TranslationApi;
 use App\Api\UsersApi;
 use App\Api\UtilityApi;
 use App\DB\Entity\FeaturedBanner;
@@ -219,6 +220,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(FollowersApi::class)->tag('open_api_server.api', ['api' => 'followers']);
   $services->set(StudiosApi::class)->tag('open_api_server.api', ['api' => 'studios']);
   $services->set(ModerationApi::class)->tag('open_api_server.api', ['api' => 'moderation']);
+  $services->set(TranslationApi::class)->tag('open_api_server.api', ['api' => 'translation']);
   $services->set(OverwriteController::class);
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 

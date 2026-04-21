@@ -14,7 +14,7 @@ Feature: Server returns existing custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I request "GET" "/app/translate/custom/project/1?field=<field>&language=fr"
+    When I request "GET" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "200"
     And the client response should contain "translated <field>"
     And there should be project custom translations:
@@ -31,11 +31,11 @@ Feature: Server returns existing custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I request "GET" "/app/translate/custom/project/1?field=<field>&language=fr"
+    When I request "GET" "/api/projects/1/translation/<field>/fr"
     Then the response status code should be "200"
-    When I request "GET" "/app/translate/custom/project/1?field=<field>&language=en"
+    When I request "GET" "/api/projects/1/translation/<field>/en"
     Then the response status code should be "404"
-    When I request "GET" "/app/translate/custom/project/2?field=<field>&language=fr"
+    When I request "GET" "/api/projects/2/translation/<field>/fr"
     Then the response status code should be "404"
     And there should be project custom translations:
       | project_id | language | name            | description            | credit            |
@@ -48,7 +48,7 @@ Feature: Server returns existing custom translation
       | credit      |
 
   Scenario Outline: Translation doesn't exist for non existent project
-    When I request "GET" "/app/translate/custom/project/2?field=<field>&language=fr"
+    When I request "GET" "/api/projects/2/translation/<field>/fr"
     Then the response status code should be "404"
 
     Examples:
@@ -61,7 +61,7 @@ Feature: Server returns existing custom translation
     Given there are project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
-    When I request "GET" "/app/translate/custom/project/1?field=other&language=fr"
+    When I request "GET" "/api/projects/1/translation/other/fr"
     Then the response status code should be "400"
     And there should be project custom translations:
       | project_id | language | name            | description            | credit            |
