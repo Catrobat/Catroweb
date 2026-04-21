@@ -13,26 +13,29 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     And I wait for the page to be loaded
     Then I should see "Cron Jobs"
     And I should see the cron jobs table:
-      | Name                                                         | State | Cron Interval | Start At | End At | Result Code |
-      | (Re-)Add project extensions                                  | idle  | 1 year        |          |        | 0           |
-      | Add bronze_user UserAchievements                             | idle  | 1 year        |          |        | 0           |
-      | Add diamond_user UserAchievements                            | idle  | 1 week        |          |        | 0           |
-      | Add gold_user UserAchievements                               | idle  | 1 week        |          |        | 0           |
-      | Add perfect_profile UserAchievements                         | idle  | 1 year        |          |        | 0           |
-      | Add silver_user UserAchievements                             | idle  | 1 week        |          |        | 0           |
-      | Add verified_developer UserAchievements                      | idle  | 1 week        |          |        | 0           |
-      | Archive log files                                            | idle  | 1 day         |          |        | 0           |
-      | Clean old extracted project files                            | idle  | 1 day         |          |        | 0           |
-      | Clean old log files                                          | idle  | 1 week        |          |        | 0           |
-      | Clean unverified user accounts                               | idle  | 1 day         |          |        | 0           |
-      | Delete expired projects based on retention rules             | idle  | 1 day         |          |        | 0           |
-      | Delete old entries in machine translation table              | idle  | 1 month       |          |        | 0           |
-      | Detect broken projects                                       | idle  | 1 day         |          |        | 0           |
-      | Garbage collect orphaned assets                              | idle  | 1 week        |          |        | 0           |
-      | Remove and add new projects to the random projects' category | idle  | 1 week        |          |        | 0           |
-      | Retroactively unlock custom translation achievements         | idle  | 1 month       |          |        | 0           |
-      | Update project popularity scores                             | idle  | 6 hours       |          |        | 0           |
-      | Update user rankings                                         | idle  | 1 day         |          |        | 0           |
+      | Name                                                         | State | Cron Interval | Start At | Duration | Result |
+      | (Re-)Add project extensions                                  | idle  | 1 year        |          |          | OK     |
+      | Add bronze_user UserAchievements                             | idle  | 1 year        |          |          | OK     |
+      | Add diamond_user UserAchievements                            | idle  | 1 week        |          |          | OK     |
+      | Add gold_user UserAchievements                               | idle  | 1 week        |          |          | OK     |
+      | Add perfect_profile UserAchievements                         | idle  | 1 year        |          |          | OK     |
+      | Add silver_user UserAchievements                             | idle  | 1 week        |          |          | OK     |
+      | Add verified_developer (gold) UserAchievements               | idle  | 1 week        |          |          | OK     |
+      | Add verified_developer (silver) UserAchievements             | idle  | 1 week        |          |          | OK     |
+      | Archive log files                                            | idle  | 1 day         |          |          | OK     |
+      | Clean compressed project files                               | idle  | 1 week        |          |          | OK     |
+      | Clean old extracted project files                            | idle  | 1 day         |          |          | OK     |
+      | Clean old log files                                          | idle  | 1 week        |          |          | OK     |
+      | Clean unverified user accounts                               | idle  | 1 day         |          |          | OK     |
+      | Delete expired projects based on retention rules             | idle  | 1 day         |          |          | OK     |
+      | Delete old entries in machine translation table              | idle  | 1 month       |          |          | OK     |
+      | Detect broken projects                                       | idle  | 1 day         |          |          | OK     |
+      | Garbage collect orphaned assets                              | idle  | 1 week        |          |          | OK     |
+      | Re-sanitize user-generated content                           | idle  | 1 month       |          |          | OK     |
+      | Remove and add new projects to the random projects' category | idle  | 1 week        |          |          | OK     |
+      | Retroactively unlock custom translation achievements         | idle  | 1 month       |          |          | OK     |
+      | Update project popularity scores                             | idle  | 6 hours       |          |          | OK     |
+      | Update user rankings                                         | idle  | 1 day         |          |          | OK     |
 
   Scenario: Cron jobs can be manually triggered
     Given I log in as "Admin"
@@ -46,7 +49,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     Then I should see "Cron jobs finished successfully"
     When I am on "/admin/system/cron-job/list"
     And I wait for the page to be loaded
-    And there should be "19" cron jobs in the database
+    And there should be "22" cron jobs in the database
 
   Scenario: Cron jobs can be reset
     Given I log in as "Admin"

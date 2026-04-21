@@ -56,18 +56,16 @@ class CleanUnverifiedUsersCommand extends Command
 
     $cutoff = new \DateTimeImmutable("-{$days} days");
 
-    $qb = $this->entity_manager->createQueryBuilder();
-    $users = $qb->select('u')
+    $qb = $this->entity_manager->createQueryBuilder()
+      ->select('u')
       ->from(User::class, 'u')
       ->where('u.verified = :verified')
       ->andWhere('u.createdAt < :cutoff')
       ->setParameter('verified', false)
       ->setParameter('cutoff', $cutoff)
-      ->getQuery()
-      ->getResult()
     ;
 
-    $count = count($users);
+    $count = (int) (clone $qb)->select('COUNT(u.id)')->getQuery()->getSingleScalarResult();
 
     if (0 === $count) {
       $io->success('No unverified accounts older than '.$days.' days found.');
@@ -76,20 +74,31 @@ class CleanUnverifiedUsersCommand extends Command
     }
 
     if ($dryRun) {
-      $io->note("Dry run: would delete {$count} unverified account(s):");
-      foreach ($users as $user) {
-        $io->writeln(sprintf('  - %s (%s), created %s', $user->getUsername(), $user->getEmail(), $user->getCreatedAt()?->format('Y-m-d') ?? 'unknown'));
-      }
+      $io->note("Dry run: would delete {$count} unverified account(s).");
 
       return Command::SUCCESS;
     }
 
-    foreach ($users as $user) {
-      $io->writeln(sprintf('Deleting: %s (%s)', $user->getUsername(), $user->getEmail()));
-      $this->user_manager->delete($user);
+    $deleted = 0;
+    $batchSize = 50;
+
+    while ($deleted < $count) {
+      $users = $qb->setMaxResults($batchSize)->getQuery()->getResult();
+      if ([] === $users) {
+        break;
+      }
+
+      foreach ($users as $user) {
+        $this->user_manager->delete($user, false);
+        ++$deleted;
+      }
+
+      $this->entity_manager->flush();
+      $this->entity_manager->clear();
+      $io->writeln(sprintf('  ... %d / %d deleted', $deleted, $count));
     }
 
-    $io->success("Deleted {$count} unverified account(s) older than {$days} days.");
+    $io->success("Deleted {$deleted} unverified account(s) older than {$days} days.");
 
     return Command::SUCCESS;
   }

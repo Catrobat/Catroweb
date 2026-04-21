@@ -72,6 +72,34 @@
 
     </div>
 
+    {% if disks|length > 1 %}
+    <div class="row" id="disk-overview">
+      {% for disk in disks %}
+        <div class="col-md-{{ 12 // disks|length }}">
+          <div class="box">
+            <div class="box-header">
+              <h4>
+                {% if disk.used_percentage >= 95 %}
+                  <span class="badge bg-danger">{{ disk.used_percentage|number_format(0) }}%</span>
+                {% elseif disk.used_percentage >= 80 %}
+                  <span class="badge bg-warning">{{ disk.used_percentage|number_format(0) }}%</span>
+                {% else %}
+                  <span class="badge bg-success">{{ disk.used_percentage|number_format(0) }}%</span>
+                {% endif %}
+                {{ disk.name }} ({{ disk.mount }})
+              </h4>
+            </div>
+            <div class="box-body">
+              <p><strong>Total:</strong> {{ disk.total }}</p>
+              <p><strong>Used:</strong> {{ disk.used }}</p>
+              <p><strong>Free:</strong> {{ disk.free }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="row">
 
       <div class="col-md-6">

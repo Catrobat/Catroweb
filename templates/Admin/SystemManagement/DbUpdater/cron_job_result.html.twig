@@ -1,0 +1,15 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+  {% if value is null %}
+    <span class="text-muted">—</span>
+  {% elseif value == 0 %}
+    <span class="badge bg-success">OK</span>
+  {% elseif value == -1 %}
+    <span class="badge bg-danger">timeout</span>
+  {% elseif value == -2 %}
+    <span class="badge bg-warning">auto-recovered</span>
+  {% else %}
+    <span class="badge bg-danger">exit {{ value }}</span>
+  {% endif %}
+{% endblock %}

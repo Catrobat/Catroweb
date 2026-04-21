@@ -34,6 +34,12 @@ class CronJob
   #[ORM\Column(name: 'result_code', type: Types::INTEGER, nullable: true)]
   protected ?int $result_code = null;
 
+  #[ORM\Column(name: 'duration_seconds', type: Types::INTEGER, nullable: true)]
+  protected ?int $duration_seconds = null;
+
+  #[ORM\Column(name: 'timeout_seconds', type: Types::INTEGER, nullable: true)]
+  protected ?int $timeout_seconds = null;
+
   public function getName(): string
   {
     return $this->name;
@@ -114,6 +120,30 @@ class CronJob
   public function setResultCode(?int $result_code): CronJob
   {
     $this->result_code = $result_code;
+
+    return $this;
+  }
+
+  public function getDurationSeconds(): ?int
+  {
+    return $this->duration_seconds;
+  }
+
+  public function setDurationSeconds(?int $duration_seconds): CronJob
+  {
+    $this->duration_seconds = $duration_seconds;
+
+    return $this;
+  }
+
+  public function getTimeoutSeconds(): ?int
+  {
+    return $this->timeout_seconds;
+  }
+
+  public function setTimeoutSeconds(?int $timeout_seconds): CronJob
+  {
+    $this->timeout_seconds = $timeout_seconds;
 
     return $this;
   }
