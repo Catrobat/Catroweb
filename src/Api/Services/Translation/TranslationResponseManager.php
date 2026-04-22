@@ -12,7 +12,7 @@ use OpenAPI\Server\Model\ProjectTranslationResponse;
 class TranslationResponseManager extends AbstractResponseManager
 {
   /**
-   * @param TranslationResult[] $translation_result
+   * @param array<TranslationResult|null> $translation_result
    */
   public function createProjectTranslationResponse(
     string $project_id,

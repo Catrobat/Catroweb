@@ -62,7 +62,7 @@ Feature: Server returns existing custom translation
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
     When I request "GET" "/api/projects/1/translation/other/fr"
-    Then the response status code should be "400"
+    Then the response status code should be "404"
     And there should be project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |

@@ -129,7 +129,7 @@ Feature: Server stores new custom translation
       {"text":"new"}
       """
     When I request "PUT" "/api/projects/1/translation/other/fr"
-    Then the response status code should be "400"
+    Then the response status code should be "404"
     And there should be project custom translations:
       | project_id | language | name            | description            | credit            |
       | 1          | fr       | translated name | translated description | translated credit |
