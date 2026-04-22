@@ -274,6 +274,9 @@ class UserNotifications {
     if (fetched.type === 'moderation') {
       return '<span class="material-icons notification-broadcast-icon">flag</span>'
     }
+    if (fetched.type === 'project' && !fetched.from) {
+      return '<span class="material-icons notification-broadcast-icon">auto_delete</span>'
+    }
     if (fetched.type !== 'other') {
       const safeFrom = encodeURIComponent(fetched.from)
       const safeName = escapeAttr(fetched.from_name || '')
