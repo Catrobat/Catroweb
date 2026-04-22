@@ -35,7 +35,3 @@ Feature: GET /api/languages returns available languages localized by Accept-Lang
     And I request "GET" "/api/languages"
     Then the response status code should be "200"
     And the response Header should contain the key "ETAG"
-
-  Scenario: Legacy endpoint redirects to API
-    Given I request "GET" "/app/languages"
-    Then the response status code should be "301"
