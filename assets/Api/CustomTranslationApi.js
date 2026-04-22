@@ -8,7 +8,7 @@ export class CustomTranslationApi {
   async getCustomTranslation(programId, language, successCallback, errorCallback = () => {}) {
     try {
       const response = await fetch(
-        `../api/projects/${programId}/translation/${this.programSection}/${language}`,
+        `/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'GET',
         },
@@ -27,7 +27,7 @@ export class CustomTranslationApi {
   async deleteCustomTranslation(programId, language, successCallback, errorCallback) {
     try {
       const response = await fetch(
-        `../api/projects/${programId}/translation/${this.programSection}/${language}`,
+        `/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'DELETE',
           headers: {
@@ -48,7 +48,7 @@ export class CustomTranslationApi {
   async saveCustomTranslation(programId, text, language, successCallback, errorCallback) {
     try {
       const response = await fetch(
-        `../api/projects/${programId}/translation/${this.programSection}/${language}`,
+        `/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'PUT',
           headers: {
@@ -70,7 +70,7 @@ export class CustomTranslationApi {
 
   async getCustomTranslationLanguages(programId) {
     try {
-      const response = await fetch(`../api/projects/${programId}/translation/languages`, {
+      const response = await fetch(`/api/projects/${programId}/translation/languages`, {
         method: 'GET',
       })
 

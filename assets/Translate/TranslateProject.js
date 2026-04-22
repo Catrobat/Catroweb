@@ -137,7 +137,7 @@ export class TranslateProject extends Translation {
   translateProject() {
     const self = this
     fetch(
-      '../api/projects/' + self.projectId + '/translation?target_language=' + self.targetLanguage,
+      '/api/projects/' + self.projectId + '/translation?target_language=' + self.targetLanguage,
       {
         method: 'GET',
       },
