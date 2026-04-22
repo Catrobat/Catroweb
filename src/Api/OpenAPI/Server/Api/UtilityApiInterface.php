@@ -74,6 +74,21 @@ interface UtilityApiInterface
   ): array|object|null;
 
   /**
+   * Operation languagesGet.
+   *
+   * Get available languages
+   *
+   * @param string $accept_language (optional, default to 'en')
+   * @param int    &$responseCode   The HTTP Response Code
+   * @param array  $responseHeaders Additional HTTP headers to return with the response ()
+   */
+  public function languagesGet(
+    string $accept_language,
+    int &$responseCode,
+    array &$responseHeaders,
+  ): array|object|null;
+
+  /**
    * Operation surveyLangCodeGet.
    *
    * Get survey link for given language code.

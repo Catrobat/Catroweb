@@ -829,6 +829,12 @@ open_api_server_utility_healthget:
   defaults:
     _controller: open_api_server.controller.utility::healthGetAction
 
+open_api_server_utility_languagesget:
+  path: /languages
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.utility::languagesGetAction
+
 open_api_server_utility_surveylangcodeget:
   path: /survey/{lang_code}
   methods: [GET]

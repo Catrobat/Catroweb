@@ -14,6 +14,7 @@ use OpenAPI\Server\Model\FeaturedBannersListResponse;
 use OpenAPI\Server\Model\HealthResponse;
 use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Locales;
 
 class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
@@ -96,6 +97,33 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
     $response->setDatabase($dbStatus);
 
     return $response;
+  }
+
+  #[\Override]
+  public function languagesGet(string $accept_language, int &$responseCode, array &$responseHeaders): array
+  {
+    $locale = \Locale::lookup(
+      array_keys(Locales::getNames()),
+      str_replace('-', '_', $accept_language),
+      true,
+      'en',
+    );
+
+    $locales = [];
+    foreach (Locales::getNames($locale) as $key => $value) {
+      $len = strlen((string) $key);
+      if (2 === $len || 5 === $len) {
+        $locales[str_replace('_', '-', (string) $key)] = $value;
+      }
+    }
+
+    $etag = '"'.$locale.'"';
+    $responseHeaders['ETag'] = $etag;
+    $responseHeaders['Cache-Control'] = 'public';
+
+    $responseCode = Response::HTTP_OK;
+
+    return $locales;
   }
 
   #[\Override]
