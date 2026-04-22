@@ -250,7 +250,7 @@ open_api_server_moderation_moderationappealsidresolveput:
   defaults:
     _controller: open_api_server.controller.moderation::moderationAppealsIdResolvePutAction
   requirements:
-    id: '[a-z0-9]+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_moderation_moderationreportsget:
   path: /moderation/reports
@@ -264,7 +264,7 @@ open_api_server_moderation_moderationreportsidresolveput:
   defaults:
     _controller: open_api_server.controller.moderation::moderationReportsIdResolvePutAction
   requirements:
-    id: '[a-z0-9]+'
+    id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_moderation_projectsidappealpost:
   path: /projects/{id}/appeal
@@ -321,6 +321,8 @@ open_api_server_moderation_usersmereportsget:
     _controller: open_api_server.controller.moderation::usersMeReportsGetAction
 
 # notifications
+# IMPORTANT: /notifications/count and /notifications/read (literal) MUST come
+# BEFORE /notifications/{id}/read, otherwise "read" and "count" match {id}.
 open_api_server_notifications_notificationscountget:
   path: /notifications/count
   methods: [GET]
@@ -333,6 +335,12 @@ open_api_server_notifications_notificationsget:
   defaults:
     _controller: open_api_server.controller.notifications::notificationsGetAction
 
+open_api_server_notifications_notificationsreadput:
+  path: /notifications/read
+  methods: [PUT]
+  defaults:
+    _controller: open_api_server.controller.notifications::notificationsReadPutAction
+
 open_api_server_notifications_notificationsidreadput:
   path: /notifications/{id}/read
   methods: [PUT]
@@ -341,13 +349,10 @@ open_api_server_notifications_notificationsidreadput:
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_notifications_notificationsreadput:
-  path: /notifications/read
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.notifications::notificationsReadPutAction
-
 # projects
+# IMPORTANT: Literal path segments (categories, extensions, featured, search, tags, user)
+# MUST be defined BEFORE the /projects/{id} wildcard routes, because the {id} requirement
+# (^[a-zA-Z0-9\-]+$) would match these literal words and route to the wrong controller.
 open_api_server_projects_projectscategoriesget:
   path: /projects/categories
   methods: [GET]
@@ -366,11 +371,43 @@ open_api_server_projects_projectsfeaturedget:
   defaults:
     _controller: open_api_server.controller.projects::projectsFeaturedGetAction
 
+open_api_server_projects_projectssearchget:
+  path: /projects/search
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsSearchGetAction
+
+open_api_server_projects_projectstagsget:
+  path: /projects/tags
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsTagsGetAction
+
+open_api_server_projects_projectsuserget:
+  path: /projects/user
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsUserGetAction
+
+open_api_server_projects_projectsuseridget:
+  path: /projects/user/{id}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsUserIdGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
 open_api_server_projects_projectsget:
   path: /projects
   methods: [GET]
   defaults:
     _controller: open_api_server.controller.projects::projectsGetAction
+
+open_api_server_projects_projectspost:
+  path: /projects
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.projects::projectsPostAction
 
 open_api_server_projects_projectsidcatrobatget:
   path: /projects/{id}/catrobat
@@ -468,38 +505,6 @@ open_api_server_projects_projectsidremixgraphget:
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
 
-open_api_server_projects_projectspost:
-  path: /projects
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsPostAction
-
-open_api_server_projects_projectssearchget:
-  path: /projects/search
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsSearchGetAction
-
-open_api_server_projects_projectstagsget:
-  path: /projects/tags
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsTagsGetAction
-
-open_api_server_projects_projectsuserget:
-  path: /projects/user
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsUserGetAction
-
-open_api_server_projects_projectsuseridget:
-  path: /projects/user/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.projects::projectsUserIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\-]+$'
-
 # search
 open_api_server_search_searchget:
   path: /search
@@ -537,7 +542,7 @@ open_api_server_studios_studiosidcommentscommentiddelete:
     _controller: open_api_server.controller.studios::studiosIdCommentsCommentIdDeleteAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    comment_id: '[a-z0-9]+'
+    comment_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidcommentsget:
   path: /studios/{id}/comments
@@ -594,7 +599,7 @@ open_api_server_studios_studiosidjoinrequestsrequestidacceptpost:
     _controller: open_api_server.controller.studios::studiosIdJoinRequestsRequestIdAcceptPostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    request_id: '[a-z0-9]+'
+    request_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidjoinrequestsrequestiddeclinepost:
   path: /studios/{id}/join-requests/{request_id}/decline
@@ -603,7 +608,7 @@ open_api_server_studios_studiosidjoinrequestsrequestiddeclinepost:
     _controller: open_api_server.controller.studios::studiosIdJoinRequestsRequestIdDeclinePostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    request_id: '[a-z0-9]+'
+    request_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidleavedelete:
   path: /studios/{id}/leave
@@ -622,31 +627,31 @@ open_api_server_studios_studiosidmembersget:
     id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidmembersuseridbanpost:
-  path: /studios/{id}/members/{userId}/ban
+  path: /studios/{id}/members/{user_id}/ban
   methods: [POST]
   defaults:
     _controller: open_api_server.controller.studios::studiosIdMembersUserIdBanPostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    user_id: '[a-z0-9]+'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidmembersuseriddemotepost:
-  path: /studios/{id}/members/{userId}/demote
+  path: /studios/{id}/members/{user_id}/demote
   methods: [POST]
   defaults:
     _controller: open_api_server.controller.studios::studiosIdMembersUserIdDemotePostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    user_id: '[a-z0-9]+'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidmembersuseridpromotepost:
-  path: /studios/{id}/members/{userId}/promote
+  path: /studios/{id}/members/{user_id}/promote
   methods: [POST]
   defaults:
     _controller: open_api_server.controller.studios::studiosIdMembersUserIdPromotePostAction
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
-    user_id: '[a-z0-9]+'
+    user_id: '^[a-zA-Z0-9\-]+$'
 
 open_api_server_studios_studiosidpatch:
   path: /studios/{id}
@@ -696,36 +701,8 @@ open_api_server_studios_studiospost:
     _controller: open_api_server.controller.studios::studiosPostAction
 
 # translation
-open_api_server_translation_projectsidtranslationfieldlanguagedelete:
-  path: /projects/{id}/translation/{field}/{language}
-  methods: [DELETE]
-  defaults:
-    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguageDeleteAction
-  requirements:
-    id: '^[a-zA-Z0-9\-]+$'
-    field: '[a-z0-9]+'
-    language: '[a-z0-9]+'
-
-open_api_server_translation_projectsidtranslationfieldlanguageget:
-  path: /projects/{id}/translation/{field}/{language}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguageGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\-]+$'
-    field: '[a-z0-9]+'
-    language: '[a-z0-9]+'
-
-open_api_server_translation_projectsidtranslationfieldlanguageput:
-  path: /projects/{id}/translation/{field}/{language}
-  methods: [PUT]
-  defaults:
-    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguagePutAction
-  requirements:
-    id: '^[a-zA-Z0-9\-]+$'
-    field: '[a-z0-9]+'
-    language: '[a-z0-9]+'
-
+# IMPORTANT: /projects/{id}/translation/languages (literal) MUST come
+# BEFORE /projects/{id}/translation/{field}/{language}, otherwise "languages" matches {field}.
 open_api_server_translation_projectsidtranslationget:
   path: /projects/{id}/translation
   methods: [GET]
@@ -742,29 +719,39 @@ open_api_server_translation_projectsidtranslationlanguagesget:
   requirements:
     id: '^[a-zA-Z0-9\-]+$'
 
+open_api_server_translation_projectsidtranslationfieldlanguageget:
+  path: /projects/{id}/translation/{field}/{language}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguageGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+    field: '^(name|description|credit)$'
+    language: '^[a-zA-Z\-]+$'
+
+open_api_server_translation_projectsidtranslationfieldlanguageput:
+  path: /projects/{id}/translation/{field}/{language}
+  methods: [PUT]
+  defaults:
+    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguagePutAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+    field: '^(name|description|credit)$'
+    language: '^[a-zA-Z\-]+$'
+
+open_api_server_translation_projectsidtranslationfieldlanguagedelete:
+  path: /projects/{id}/translation/{field}/{language}
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguageDeleteAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+    field: '^(name|description|credit)$'
+    language: '^[a-zA-Z\-]+$'
+
 # users
-open_api_server_users_useridstudiosget:
-  path: /users/{id}/studios
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.users::userIdStudiosGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\-]+$'
-
-open_api_server_users_usersget:
-  path: /users
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.users::usersGetAction
-
-open_api_server_users_usersidget:
-  path: /users/{id}
-  methods: [GET]
-  defaults:
-    _controller: open_api_server.controller.users::usersIdGetAction
-  requirements:
-    id: '^[a-zA-Z0-9\-]+$'
-
+# IMPORTANT: Literal path segments (me, search, reset-password) MUST be defined
+# BEFORE /users/{id} wildcard routes, otherwise they match {id}.
 open_api_server_users_usersmedataexportget:
   path: /users/me/data-export
   methods: [GET]
@@ -789,12 +776,6 @@ open_api_server_users_usersmepatch:
   defaults:
     _controller: open_api_server.controller.users::usersMePatchAction
 
-open_api_server_users_userspost:
-  path: /users
-  methods: [POST]
-  defaults:
-    _controller: open_api_server.controller.users::usersPostAction
-
 open_api_server_users_usersresetpasswordpost:
   path: /users/reset-password
   methods: [POST]
@@ -806,6 +787,34 @@ open_api_server_users_userssearchget:
   methods: [GET]
   defaults:
     _controller: open_api_server.controller.users::usersSearchGetAction
+
+open_api_server_users_usersget:
+  path: /users
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.users::usersGetAction
+
+open_api_server_users_userspost:
+  path: /users
+  methods: [POST]
+  defaults:
+    _controller: open_api_server.controller.users::usersPostAction
+
+open_api_server_users_usersidget:
+  path: /users/{id}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.users::usersIdGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_users_useridstudiosget:
+  path: /users/{id}/studios
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.users::userIdStudiosGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
 
 # utility
 open_api_server_utility_featuredbannersget:
