@@ -609,7 +609,7 @@ function initComponents(data, earlyInits) {
     projectId,
     appLanguageElement.dataset.appLanguage,
     isMyProject,
-    new CustomTranslationApi('name'),
+    new CustomTranslationApi('name', baseUrl),
     editorNavigation,
   )
 
@@ -619,14 +619,14 @@ function initComponents(data, earlyInits) {
     projectDescriptionCreditsElement.dataset.transMoreInfo,
     projectDescriptionCreditsElement.dataset.transLessInfo,
     isMyProject,
-    new CustomTranslationApi('description'),
+    new CustomTranslationApi('description', baseUrl),
   )
 
   ProjectCredits(
     projectId,
     appLanguageElement.dataset.appLanguage,
     isMyProject,
-    new CustomTranslationApi('credit'),
+    new CustomTranslationApi('credit', baseUrl),
   )
 
   initProjectScreenshotUpload()
@@ -657,6 +657,7 @@ function initComponents(data, earlyInits) {
     projectElement.dataset.projectId,
     projectElement.dataset.hasDescription === 'true',
     projectElement.dataset.hasCredits === 'true',
+    baseUrl,
   )
 }
 

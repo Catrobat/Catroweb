@@ -1,9 +1,17 @@
 import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateProject extends Translation {
-  constructor(translatedByLine, googleTranslateDisplayName, projectId, hasDescription, hasCredit) {
+  constructor(
+    translatedByLine,
+    googleTranslateDisplayName,
+    projectId,
+    hasDescription,
+    hasCredit,
+    baseUrl = '',
+  ) {
     super(translatedByLine, googleTranslateDisplayName)
     this.projectId = projectId
+    this.baseUrl = baseUrl
     this.hasDescription = hasDescription
     this.hasCredit = hasCredit
     this.ANIMATION_TIME = 400
@@ -137,7 +145,11 @@ export class TranslateProject extends Translation {
   translateProject() {
     const self = this
     fetch(
-      '/api/projects/' + self.projectId + '/translation?target_language=' + self.targetLanguage,
+      self.baseUrl +
+        '/api/projects/' +
+        self.projectId +
+        '/translation?target_language=' +
+        self.targetLanguage,
       {
         method: 'GET',
       },

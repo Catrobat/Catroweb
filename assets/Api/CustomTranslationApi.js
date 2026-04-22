@@ -1,14 +1,15 @@
 import { getCookie } from '../Security/CookieHelper'
 
 export class CustomTranslationApi {
-  constructor(programSection) {
+  constructor(programSection, baseUrl = '') {
     this.programSection = programSection === 'credits' ? 'credit' : programSection
+    this.baseUrl = baseUrl
   }
 
   async getCustomTranslation(programId, language, successCallback, errorCallback = () => {}) {
     try {
       const response = await fetch(
-        `/api/projects/${programId}/translation/${this.programSection}/${language}`,
+        `${this.baseUrl}/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'GET',
         },
@@ -27,7 +28,7 @@ export class CustomTranslationApi {
   async deleteCustomTranslation(programId, language, successCallback, errorCallback) {
     try {
       const response = await fetch(
-        `/api/projects/${programId}/translation/${this.programSection}/${language}`,
+        `${this.baseUrl}/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'DELETE',
           headers: {
@@ -48,7 +49,7 @@ export class CustomTranslationApi {
   async saveCustomTranslation(programId, text, language, successCallback, errorCallback) {
     try {
       const response = await fetch(
-        `/api/projects/${programId}/translation/${this.programSection}/${language}`,
+        `${this.baseUrl}/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'PUT',
           headers: {
@@ -70,9 +71,12 @@ export class CustomTranslationApi {
 
   async getCustomTranslationLanguages(programId) {
     try {
-      const response = await fetch(`/api/projects/${programId}/translation/languages`, {
-        method: 'GET',
-      })
+      const response = await fetch(
+        `${this.baseUrl}/api/projects/${programId}/translation/languages`,
+        {
+          method: 'GET',
+        },
+      )
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
