@@ -80,7 +80,7 @@
     "@analytics/google-tag-manager": "^0.6.0",
     "@bugsnag/browser-performance": "^3.4.1",
     "@bugsnag/js": "^8.9.0",
-    "@cap.js/widget": "^0.1.43",
+    "@cap.js/widget": "^0.1.44",
     "@fontsource/roboto": "^5.2.6",
     "@material/checkbox": "^14.0.0",
     "@material/chips": "^14.0.0",
