@@ -940,6 +940,17 @@ class ApiContext implements Context
   }
 
   /**
+   * @Then /^the response Header should contain the key "([^"]*)"$/
+   *
+   * @throws \Exception
+   */
+  public function theResponseHeaderShouldContainTheKey(string $headerKey): void
+  {
+    $headers = $this->getKernelBrowser()->getResponse()->headers;
+    Assert::assertTrue($headers->has($headerKey), 'Response header "'.$headerKey.'" not found');
+  }
+
+  /**
    * @Then /^the response Header should contain the key "([^"]*)" with the value '([^']*)'$/
    *
    * @throws \Exception
