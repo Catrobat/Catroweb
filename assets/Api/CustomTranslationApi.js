@@ -1,12 +1,13 @@
 export class CustomTranslationApi {
-  constructor(programSection) {
+  constructor(programSection, baseUrl = '') {
     this.programSection = programSection === 'credits' ? 'credit' : programSection
+    this.baseUrl = baseUrl
   }
 
   async getCustomTranslation(programId, language, successCallback, errorCallback = () => {}) {
     try {
       const response = await fetch(
-        `../translate/custom/project/${programId}?field=${this.programSection}&language=${language}`,
+        `${this.baseUrl}/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'GET',
         },
@@ -15,64 +16,61 @@ export class CustomTranslationApi {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
       }
-      const data = await response.text()
-      successCallback(data)
+      const data = await response.json()
+      successCallback(data.translation)
     } catch (error) {
       errorCallback(error)
     }
   }
 
-  deleteCustomTranslation(programId, language, successCallback, errorCallback) {
-    const self = this
-    return new Promise((resolve, reject) => {
-      fetch(
-        `../translate/custom/project/${programId}?field=${self.programSection}&language=${language}`,
+  async deleteCustomTranslation(programId, language, successCallback, errorCallback) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'DELETE',
         },
       )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Error: ${response.status}`)
-          }
-          successCallback(language)
-          resolve()
-        })
-        .catch((error) => {
-          errorCallback(error)
-          reject(error)
-        })
-    })
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`)
+      }
+      successCallback(language)
+    } catch (error) {
+      errorCallback(error)
+    }
   }
 
-  saveCustomTranslation(programId, text, language, successCallback, errorCallback) {
-    const self = this
-    return new Promise((resolve, reject) => {
-      fetch(
-        `../translate/custom/project/${programId}?field=${self.programSection}&text=${text}&language=${language}`,
+  async saveCustomTranslation(programId, text, language, successCallback, errorCallback) {
+    try {
+      const response = await fetch(
+        `${this.baseUrl}/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ text }),
         },
       )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Error: ${response.status}`)
-          }
-          successCallback(language)
-          resolve()
-        })
-        .catch((error) => {
-          errorCallback(error)
-          reject(error)
-        })
-    })
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`)
+      }
+      successCallback(language)
+    } catch (error) {
+      errorCallback(error)
+    }
   }
 
   async getCustomTranslationLanguages(programId) {
     try {
-      const response = await fetch(`../translate/custom/project/${programId}/list`, {
-        method: 'GET',
-      })
+      const response = await fetch(
+        `${this.baseUrl}/api/projects/${programId}/translation/languages`,
+        {
+          method: 'GET',
+        },
+      )
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)

@@ -18,7 +18,7 @@ export function ProjectEditorModel(programId, textFieldModels, preloadedLanguage
   this.baseUrl = this.routing.dataset.baseUrl
   this.theme = this.routing.dataset.index
 
-  this.customTranslationApi = new CustomTranslationApi()
+  this.customTranslationApi = new CustomTranslationApi('', this.baseUrl)
 
   this.setOnLanguageList = (onLanguageList) => {
     this.onLanguageList = onLanguageList

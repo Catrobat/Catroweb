@@ -60,6 +60,12 @@ readonly class CustomTranslationAchievementEventListener
 
   private function isCreateCustomTranslationAction(Request $request): bool
   {
-    return 'PUT' === $request->getMethod() && str_contains($request->getPathInfo(), '/translate/custom/project/');
+    if ('PUT' !== $request->getMethod()) {
+      return false;
+    }
+
+    $path = $request->getPathInfo();
+
+    return 1 === preg_match('/\/projects\/[a-zA-Z0-9\-]+\/translation\/[a-z]+\/[a-zA-Z\-]+$/', $path);
   }
 }

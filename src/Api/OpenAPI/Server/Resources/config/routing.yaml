@@ -700,6 +700,55 @@ open_api_server_studios_studiospost:
   defaults:
     _controller: open_api_server.controller.studios::studiosPostAction
 
+# translation
+# IMPORTANT: /projects/{id}/translation/languages (literal) MUST come
+# BEFORE /projects/{id}/translation/{field}/{language}, otherwise "languages" matches {field}.
+open_api_server_translation_projectsidtranslationget:
+  path: /projects/{id}/translation
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.translation::projectsIdTranslationGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_translation_projectsidtranslationlanguagesget:
+  path: /projects/{id}/translation/languages
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.translation::projectsIdTranslationLanguagesGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+
+open_api_server_translation_projectsidtranslationfieldlanguageget:
+  path: /projects/{id}/translation/{field}/{language}
+  methods: [GET]
+  defaults:
+    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguageGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+    field: '^(name|description|credit)$'
+    language: '^[a-zA-Z\-]+$'
+
+open_api_server_translation_projectsidtranslationfieldlanguageput:
+  path: /projects/{id}/translation/{field}/{language}
+  methods: [PUT]
+  defaults:
+    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguagePutAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+    field: '^(name|description|credit)$'
+    language: '^[a-zA-Z\-]+$'
+
+open_api_server_translation_projectsidtranslationfieldlanguagedelete:
+  path: /projects/{id}/translation/{field}/{language}
+  methods: [DELETE]
+  defaults:
+    _controller: open_api_server.controller.translation::projectsIdTranslationFieldLanguageDeleteAction
+  requirements:
+    id: '^[a-zA-Z0-9\-]+$'
+    field: '^(name|description|credit)$'
+    language: '^[a-zA-Z\-]+$'
+
 # users
 # IMPORTANT: Literal path segments (me, search, reset-password) MUST be defined
 # BEFORE /users/{id} wildcard routes, otherwise they match {id}.

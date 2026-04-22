@@ -14,7 +14,8 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
 
   this.languages = {}
 
-  this.customTranslationApi = new CustomTranslationApi()
+  const navBaseUrl = document.getElementById('js-api-routing')?.dataset?.baseUrl || ''
+  this.customTranslationApi = new CustomTranslationApi('', navBaseUrl)
 
   this.translationsText = projectDescriptionCredits.dataset.transTranslations
   this.defaultText = projectDescriptionCredits.dataset.transDefault
