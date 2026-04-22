@@ -109,16 +109,12 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
       'en',
     );
 
-    $all_locales = Locales::getNames($locale);
-    $all_locales = array_filter(
-      $all_locales,
-      static fn ($key): bool => 2 === strlen((string) $key) || 5 === strlen((string) $key),
-      ARRAY_FILTER_USE_KEY,
-    );
-
     $locales = [];
-    foreach ($all_locales as $key => $value) {
-      $locales[str_replace('_', '-', (string) $key)] = $value;
+    foreach (Locales::getNames($locale) as $key => $value) {
+      $len = strlen((string) $key);
+      if (2 === $len || 5 === $len) {
+        $locales[str_replace('_', '-', (string) $key)] = $value;
+      }
     }
 
     $etag = '"'.$locale.'"';
