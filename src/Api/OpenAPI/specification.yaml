@@ -249,6 +249,35 @@ paths:
         '406':
           $ref: '#/components/responses/NotAcceptable'
 
+  /languages:
+    parameters:
+      - $ref: '#/components/parameters/Locale'
+    get:
+      tags:
+        - 'Utility'
+      summary: 'Get available languages'
+      description: 'Returns a map of language codes to their display names, localized to the Accept-Language header. Supports ETag-based HTTP caching (304 Not Modified).'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+                example:
+                  en: 'English'
+                  de: 'German'
+                  fr: 'French'
+          headers:
+            ETag:
+              description: 'Locale-based ETag for cache validation'
+              schema:
+                type: string
+        '304':
+          description: 'Not Modified — cached response is still valid'
+
   /featured-banners:
     get:
       tags:

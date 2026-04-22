@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace App\Application\Controller\Base;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Intl\Locales;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultController extends AbstractController
 {
@@ -31,25 +30,15 @@ class DefaultController extends AbstractController
     return $this->render('PrivacyAndTerms/LicenseToPlayPage.html.twig');
   }
 
+  /**
+   * @deprecated Use GET /api/languages instead. Will be removed in a future release.
+   */
   #[Route(path: '/languages', name: 'languages', methods: ['GET'])]
-  public function languages(Request $request): Response
+  public function languages(): Response
   {
-    $display_locale = $request->getLocale();
-    $response = new JsonResponse();
-    $response->setEtag($display_locale);
-    $response->setPublic();
-    if ($response->isNotModified($request)) {
-      return $response;
-    }
-
-    $all_locales = Locales::getNames($display_locale);
-    $all_locales = array_filter($all_locales, static fn ($key): bool => 2 === strlen((string) $key) || 5 === strlen((string) $key), ARRAY_FILTER_USE_KEY);
-
-    $locales = [];
-    foreach ($all_locales as $key => $value) {
-      $locales[str_replace('_', '-', (string) $key)] = $value;
-    }
-
-    return $response->setData($locales);
+    return new RedirectResponse(
+      $this->generateUrl('open_api_server_utility_languagesget', [], UrlGeneratorInterface::ABSOLUTE_URL),
+      Response::HTTP_MOVED_PERMANENTLY,
+    );
   }
 }

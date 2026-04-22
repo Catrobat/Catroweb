@@ -405,6 +405,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'requires_channel' => '%env(SECURE_SCHEME)%',
         ],
         [
+          'path' => '^/api/languages/?$',
+          'roles' => 'PUBLIC_ACCESS',
+          'methods' => ['GET'],
+          'requires_channel' => '%env(SECURE_SCHEME)%',
+        ],
+        [
           'path' => '^/api/moderation/',
           'roles' => 'ROLE_ADMIN',
           'methods' => ['GET', 'PUT'],

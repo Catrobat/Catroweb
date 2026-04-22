@@ -217,4 +217,61 @@ class UtilityApiTest extends TestCase
 
     $this->assertNull($response);
   }
+
+  #[Group('unit')]
+  public function testLanguagesGetReturnsLocalizedList(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $result = $this->utility_api->languagesGet('en', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertArrayHasKey('en', $result);
+    $this->assertSame('English', $result['en']);
+    $this->assertArrayHasKey('de', $result);
+    $this->assertSame('German', $result['de']);
+    $this->assertArrayHasKey('ETag', $response_headers);
+    $this->assertArrayHasKey('Cache-Control', $response_headers);
+    $this->assertSame('public', $response_headers['Cache-Control']);
+  }
+
+  #[Group('unit')]
+  public function testLanguagesGetLocalizedToGerman(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $result = $this->utility_api->languagesGet('de', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertSame('Englisch', $result['en']);
+    $this->assertSame('Deutsch', $result['de']);
+  }
+
+  #[Group('unit')]
+  public function testLanguagesGetFiltersLocales(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $result = $this->utility_api->languagesGet('en', $response_code, $response_headers);
+
+    foreach (array_keys($result) as $code) {
+      $len = strlen((string) $code);
+      $this->assertTrue(2 === $len || 5 === $len, "Language code '{$code}' should be 2 or 5 characters");
+    }
+  }
+
+  #[Group('unit')]
+  public function testLanguagesGetUsesHyphenInCodes(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $result = $this->utility_api->languagesGet('en', $response_code, $response_headers);
+
+    $this->assertArrayHasKey('en-US', $result);
+    $this->assertArrayNotHasKey('en_US', $result);
+  }
 }
