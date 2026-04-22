@@ -30,7 +30,7 @@ class TranslationResponseManager extends AbstractResponseManager
       'translated_description' => ($translation_result[1] ?? null)?->translation,
       'translated_credit' => ($translation_result[2] ?? null)?->translation,
       'provider' => $title_translation?->provider,
-      '_cache' => null !== ($title_translation?->cache) ? true : null,
+      '_cache' => $title_translation?->cache,
     ]);
   }
 

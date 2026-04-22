@@ -5535,8 +5535,9 @@ components:
           type: string
           example: 'google'
         _cache:
-          type: boolean
+          type: string
           nullable: true
+          description: 'Cache source (e.g. "db") or null if not cached'
 
     ProjectCustomTranslationResponse:
       type: object

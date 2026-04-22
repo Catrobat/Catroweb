@@ -1,5 +1,3 @@
-import { getCookie } from '../Security/CookieHelper'
-
 export class CustomTranslationApi {
   constructor(programSection, baseUrl = '') {
     this.programSection = programSection === 'credits' ? 'credit' : programSection
@@ -31,9 +29,6 @@ export class CustomTranslationApi {
         `${this.baseUrl}/api/projects/${programId}/translation/${this.programSection}/${language}`,
         {
           method: 'DELETE',
-          headers: {
-            Authorization: 'Bearer ' + getCookie('BEARER'),
-          },
         },
       )
 
@@ -54,7 +49,6 @@ export class CustomTranslationApi {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + getCookie('BEARER'),
           },
           body: JSON.stringify({ text }),
         },

@@ -16,7 +16,7 @@ export function ProjectEditorTextFieldModel(
   this.hasDefaultLanguage = hasDefaultLanguage
   this.initialText = initialText
 
-  const tfBaseUrl = document.querySelector('.js-project')?.dataset?.baseUrl || ''
+  const tfBaseUrl = document.getElementById('js-api-routing')?.dataset?.baseUrl || ''
   this.customTranslationApi = new CustomTranslationApi(sectionKey, tfBaseUrl)
 
   this.setOnTextChanged = (onTextChanged) => {

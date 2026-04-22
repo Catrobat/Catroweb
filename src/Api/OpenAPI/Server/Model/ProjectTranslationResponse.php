@@ -109,11 +109,11 @@ class ProjectTranslationResponse
   /**
    * @SerializedName("_cache")
    *
-   * @Assert\Type("bool")
+   * @Assert\Type("string")
    *
-   * @Type("bool")
+   * @Type("string")
    */
-  protected ?bool $_cache = null;
+  protected ?string $_cache = null;
 
   /**
    * Constructor.
@@ -279,7 +279,7 @@ class ProjectTranslationResponse
   /**
    * Gets _cache.
    */
-  public function isCache(): ?bool
+  public function getCache(): ?string
   {
     return $this->_cache;
   }
@@ -289,7 +289,7 @@ class ProjectTranslationResponse
    *
    * @return $this
    */
-  public function setCache(?bool $_cache = null): self
+  public function setCache(?string $_cache = null): self
   {
     $this->_cache = $_cache;
 
