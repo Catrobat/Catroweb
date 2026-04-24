@@ -29,7 +29,7 @@ Encore
   .splitEntryChunks()
 
   .configureSplitChunks((splitChunks) => {
-    splitChunks.cacheGroups = {
+    Object.assign(splitChunks.cacheGroups, {
       vendors: {
         test: /[\\/]node_modules[\\/]/,
         name: 'vendors',
@@ -42,7 +42,7 @@ Encore
         priority: 5,
         reuseExistingChunk: true,
       },
-    }
+    })
   })
 
   // will require an extra script tag for runtime.js
