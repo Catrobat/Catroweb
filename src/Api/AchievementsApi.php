@@ -56,7 +56,6 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
     );
 
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['Cache-Control'] = 'private, max-age=300';
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -86,7 +85,6 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
     $response = $this->facade->getResponseManager()->createAchievementsCountResponse($count);
 
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['Cache-Control'] = 'private, max-age=60';
 
     return $response;
   }
@@ -120,7 +118,6 @@ class AchievementsApi extends AbstractApiController implements AchievementsApiIn
     $responses = $this->facade->getResponseManager()->createAchievementResponseList($unlocked, $accept_language);
 
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['Cache-Control'] = 'public, max-age=3600';
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     $response = new AchievementsDataResponse();

@@ -80,8 +80,6 @@ class SearchApi extends AbstractApiController implements SearchApiInterface
     }
 
     $responseHeaders['X-Response-Hash'] = md5(json_encode($result, JSON_THROW_ON_ERROR));
-    $responseHeaders['Cache-Control'] = 'public, max-age=300';
-
     $responseCode = Response::HTTP_OK;
 
     return $result;

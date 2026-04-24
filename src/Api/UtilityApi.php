@@ -68,7 +68,6 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
     }
 
     $responseCode = Response::HTTP_OK;
-    $responseHeaders['Cache-Control'] = 'public, max-age=3600';
 
     $response = new FeaturedBannersListResponse();
     $response->setData($banner_responses);
@@ -120,8 +119,6 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
 
     $etag = '"'.$locale.'"';
     $responseHeaders['ETag'] = $etag;
-    $responseHeaders['Cache-Control'] = 'public';
-
     $responseCode = Response::HTTP_OK;
 
     return $locales;
