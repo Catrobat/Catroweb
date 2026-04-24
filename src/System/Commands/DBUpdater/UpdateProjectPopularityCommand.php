@@ -133,7 +133,7 @@ class UpdateProjectPopularityCommand extends Command
     $query_builder
       ->select('COUNT(r.ancestor_id) as count')
       ->from(Project::class, 'p')
-      ->leftJoin(ProjectRemixRelation::class, 'r', Join::WITH, 'p.id = r.ancestor_id')
+      ->leftJoin(ProjectRemixRelation::class, 'r', Join::ON, 'p.id = r.ancestor_id')
       ->groupBy('r.ancestor_id')
       ->orderBy('count', 'DESC')
     ;
@@ -155,7 +155,7 @@ class UpdateProjectPopularityCommand extends Command
     $query_builder
       ->select('COUNT(e.program_id) as count')
       ->from(Project::class, 'p')
-      ->leftJoin(ProjectLike::class, 'e', Join::WITH, 'p.id = e.program_id')
+      ->leftJoin(ProjectLike::class, 'e', Join::ON, 'p.id = e.program_id')
       ->groupBy('e.program_id')
       ->orderBy('count', 'DESC')
       ->setMaxResults(1)

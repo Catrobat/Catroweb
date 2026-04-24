@@ -94,8 +94,8 @@ class ProjectRemixBackwardRepository extends ServiceEntityRepository
 
     return $qb
       ->select('b')
-      ->innerJoin('b.parent', 'p', Join::WITH, 'b.parent_id = p.id')
-      ->innerJoin('b.child', 'p2', Join::WITH, 'b.child_id = p2.id')
+      ->innerJoin('b.parent', 'p', Join::ON, 'b.parent_id = p.id')
+      ->innerJoin('b.child', 'p2', Join::ON, 'b.child_id = p2.id')
       ->where($qb->expr()->eq('p.user', ':user'))
       ->andWhere($qb->expr()->neq('p2.user', 'p.user'))
       ->andWhere($qb->expr()->isNull('b.seen_at'))

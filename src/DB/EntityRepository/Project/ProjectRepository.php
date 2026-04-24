@@ -482,7 +482,7 @@ class ProjectRepository extends ServiceEntityRepository
 
     $query_builder
       ->select(['e as program', 'COUNT(e.id) as like_count'])
-      ->innerJoin(ProjectLike::class, 'l', Join::WITH,
+      ->innerJoin(ProjectLike::class, 'l', Join::ON,
         $query_builder->expr()->eq('e.id', 'l.program_id')->__toString())
       ->having($query_builder->expr()->gt('like_count', $query_builder->expr()->literal(1)))
       ->groupBy('e.id')

@@ -168,7 +168,7 @@ class StudioApiLoader extends AbstractApiLoader
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('s')
       ->from(Studio::class, 's')
-      ->join(StudioUser::class, 'su', 'WITH', 'su.studio = s')
+      ->join(StudioUser::class, 'su', 'ON', 'su.studio = s')
       ->where('su.user = :user')
       ->andWhere('su.status = :status')
       ->andWhere('s.auto_hidden = false')

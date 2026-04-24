@@ -90,8 +90,8 @@ class ProjectRemixRepository extends ServiceEntityRepository
 
     $result_data = $qb
       ->select('r2.descendant_id')
-      ->innerJoin(Project::class, 'p', Join::WITH, $qb->expr()->eq('r1.ancestor_id', 'p.id'))
-      ->innerJoin(ProjectRemixRelation::class, 'r2', Join::WITH, $qb->expr()->eq('r1.ancestor_id', 'r2.ancestor_id'))
+      ->innerJoin(Project::class, 'p', Join::ON, $qb->expr()->eq('r1.ancestor_id', 'p.id'))
+      ->innerJoin(ProjectRemixRelation::class, 'r2', Join::ON, $qb->expr()->eq('r1.ancestor_id', 'r2.ancestor_id'))
       ->where('r1.descendant_id IN (:program_ids)')
       ->andWhere($qb->expr()->eq('p.remix_root', $qb->expr()->literal(true)))
       ->setParameter('program_ids', $program_ids)
@@ -180,8 +180,8 @@ class ProjectRemixRepository extends ServiceEntityRepository
 
     return $qb
       ->select('r')
-      ->innerJoin('r.ancestor', 'p', Join::WITH, 'r.ancestor_id = p.id')
-      ->innerJoin('r.descendant', 'p2', Join::WITH, 'r.descendant_id = p2.id')
+      ->innerJoin('r.ancestor', 'p', Join::ON, 'r.ancestor_id = p.id')
+      ->innerJoin('r.descendant', 'p2', Join::ON, 'r.descendant_id = p2.id')
       ->where($qb->expr()->eq('p.user', ':user'))
       ->andWhere($qb->expr()->neq('p2.user', 'p.user'))
       ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
@@ -233,7 +233,7 @@ class ProjectRemixRepository extends ServiceEntityRepository
 
     return $qb
       ->select('r.ancestor_id, r.descendant_id')
-      ->innerJoin('r.descendant', 'p', Join::WITH, 'r.descendant_id = p.id')
+      ->innerJoin('r.descendant', 'p', Join::ON, 'r.descendant_id = p.id')
       ->where($qb->expr()->eq('IDENTITY(p.user)', ':user_id'))
       ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))
       ->setParameter('user_id', $user_id)
@@ -252,8 +252,8 @@ class ProjectRemixRepository extends ServiceEntityRepository
 
     return $qb
       ->select('r')
-      ->innerJoin('r.ancestor', 'pa', Join::WITH, 'r.ancestor_id = pa.id')
-      ->innerJoin('r.descendant', 'pd', Join::WITH, 'r.descendant_id = pd.id')
+      ->innerJoin('r.ancestor', 'pa', Join::ON, 'r.ancestor_id = pa.id')
+      ->innerJoin('r.descendant', 'pd', Join::ON, 'r.descendant_id = pd.id')
       ->where($qb->expr()->in('IDENTITY(pd.user)', ':user_ids'))
       ->andWhere($qb->expr()->neq('IDENTITY(pa.user)', ':exclude_user_id'))
       ->andWhere($qb->expr()->eq('r.depth', $qb->expr()->literal(1)))

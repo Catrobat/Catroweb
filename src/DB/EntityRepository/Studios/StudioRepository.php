@@ -28,8 +28,8 @@ class StudioRepository extends ServiceEntityRepository
     $qb->select('s.id, s.name, s.description, s.is_public, s.is_enabled, s.allow_comments, s.cover_path,
       COUNT(DISTINCT su.id) AS studio_users, COUNT(DISTINCT sp.id) AS studio_projects')
       ->from(Studio::class, 's')
-      ->leftJoin(StudioUser::class, 'su', 'WITH', 'su.studio = s')
-      ->leftJoin(StudioProject::class, 'sp', 'WITH', 'sp.studio = s')
+      ->leftJoin(StudioUser::class, 'su', 'ON', 'su.studio = s')
+      ->leftJoin(StudioProject::class, 'sp', 'ON', 'sp.studio = s')
       ->andWhere('s.auto_hidden = false')
       ->groupBy('s.id, s.name, s.description, s.is_public, s.is_enabled, s.allow_comments, s.cover_path')
     ;

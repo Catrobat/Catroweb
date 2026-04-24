@@ -1796,7 +1796,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *             use_underscore?: bool|Param, // Default: true
  *             unordered_list_markers?: list<scalar|Param|null>,
  *         },
- *         ...<mixed>
+ *         ...<string, mixed>
  *     },
  * }
  * @psalm-type LexikJwtAuthenticationConfig = array{
@@ -1916,7 +1916,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         use_authorization_to_get_token?: scalar|Param|null,
  *         paths?: array<string, mixed>,
  *         options?: array<string, scalar|Param|null>,
- *         ...<mixed>
+ *         ...<string, mixed>
  *     }>,
  * }
  * @psalm-type FosElasticaConfig = array{
@@ -2664,6 +2664,27 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         async_client?: scalar|Param|null, // Set to "auto" to see auto discovered client in the web profiler. If provided a service id for a client then this client will be found by auto discovery. // Default: null
  *     },
  * }
+ * @psalm-type PrestaSitemapConfig = array{
+ *     generator?: scalar|Param|null, // Default: "presta_sitemap.generator_default"
+ *     dumper?: scalar|Param|null, // Default: "presta_sitemap.dumper_default"
+ *     timetolive?: int|Param, // Default: 3600
+ *     sitemap_file_prefix?: scalar|Param|null, // Sets sitemap filename prefix defaults to "sitemap" -> sitemap.xml (for index); sitemap.<section>.xml(.gz) (for sitemaps) // Default: "sitemap"
+ *     items_by_set?: int|Param, // The maximum number of items allowed in single sitemap. // Default: 50000
+ *     route_annotation_listener?: scalar|Param|null, // Default: true
+ *     dump_directory?: scalar|Param|null, // The directory to which the sitemap will be dumped. It can be either absolute, or relative (to the place where the command will be triggered). Default to Symfony's public dir. // Default: "%kernel.project_dir%/public"
+ *     defaults?: array{
+ *         priority?: scalar|Param|null, // Default: 0.5
+ *         changefreq?: scalar|Param|null, // Default: "daily"
+ *         lastmod?: scalar|Param|null, // Default: "now"
+ *     },
+ *     default_section?: scalar|Param|null, // The default section in which static routes are registered. // Default: "default"
+ *     alternate?: bool|array{ // Automatically generate alternate (hreflang) urls with static routes. Requires route_annotation_listener config to be enabled.
+ *         enabled?: bool|Param, // Default: false
+ *         default_locale?: scalar|Param|null, // The default locale of your routes. // Default: "en"
+ *         locales?: list<scalar|Param|null>,
+ *         i18n?: "symfony"|"jms"|Param, // Strategy used to create your i18n routes. // Default: "symfony"
+ *     },
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -2696,6 +2717,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     stimulus?: StimulusConfig,
  *     bugsnag?: BugsnagConfig,
  *     httplug?: HttplugConfig,
+ *     presta_sitemap?: PrestaSitemapConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
@@ -2728,6 +2750,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         stimulus?: StimulusConfig,
  *         bugsnag?: BugsnagConfig,
  *         httplug?: HttplugConfig,
+ *         presta_sitemap?: PrestaSitemapConfig,
  *     },
  *     "when@test"?: array{
  *         imports?: ImportsConfig,
@@ -2761,6 +2784,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         stimulus?: StimulusConfig,
  *         bugsnag?: BugsnagConfig,
  *         httplug?: HttplugConfig,
+ *         presta_sitemap?: PrestaSitemapConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

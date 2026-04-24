@@ -1755,6 +1755,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.4
+  resolution: "@kurkle/color@npm:0.3.4"
+  checksum: 10c0/0e9fd55c614b005c5f0c4c755bca19ec0293bc7513b4ea3ec1725234f9c2fa81afbc78156baf555c8b9cb0d305619253c3f5bca016067daeebb3d00ebb4ea683
+  languageName: node
+  linkType: hard
+
 "@lukeed/csprng@npm:^1.0.0":
   version: 1.1.0
   resolution: "@lukeed/csprng@npm:1.1.0"
@@ -3884,6 +3891,7 @@ __metadata:
     autoprefixer: "npm:^10.5.0"
     bootstrap: "npm:^5.3.8"
     browserslist: "npm:^4.28.2"
+    chart.js: "npm:^4.5.1"
     clipboard: "npm:^2.0.11"
     dotenv: "npm:^17.4.2"
     eslint: "npm:^10.2.1"
@@ -3896,7 +3904,6 @@ __metadata:
     file-loader: "npm:^6.2.0"
     glob-all: "npm:^3.3.1"
     globals: "npm:^17.5.0"
-    google-charts: "npm:^2.0.0"
     jwt-decode: "npm:^4.0.0"
     lazysizes: "npm:^5.3.2"
     material-icons: "npm:^1.13.14"
@@ -3927,6 +3934,15 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: 10c0/4a3fef5cc34975c898ffe77141450f679721df9dde00f6c304353fa9c8b571929123b26a0e4617bde5018977eb655b31970c297b91b63ee83bb82aeb04666880
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "chart.js@npm:4.5.1"
+  dependencies:
+    "@kurkle/color": "npm:^0.3.0"
+  checksum: 10c0/3f2a11dcaae9079e8e6b8ad077e2ae311f04996f9da14815730891e66215ee8b5f2c0eb70b5a156e5bde0f89a41bae13506dc6153e50fd22dcb282b21eec706f
   languageName: node
   linkType: hard
 
@@ -5506,13 +5522,6 @@ __metadata:
   dependencies:
     delegate: "npm:^3.1.2"
   checksum: 10c0/5c532f2e223f1f3a12504077d6d960986979a7923fb428a26bde012b88ac57ffba1b28507f95bd16a73c1ae805fdb38d26d9442d538dd559fad159a7f58243fe
-  languageName: node
-  linkType: hard
-
-"google-charts@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "google-charts@npm:2.0.0"
-  checksum: 10c0/4bd7659130fb1d0627febf97850cc03b1dafc7c20820d3dea97d3f9c94d5d12ecebee5d8608e7dddf68a3d7743597b61377570ab933fe2d0eab18f4747734355
   languageName: node
   linkType: hard
 
