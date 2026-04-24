@@ -27,11 +27,6 @@
       <code><![CDATA[getId]]></code>
     </PossiblyNullReference>
   </file>
-  <file src="src/Admin/Projects/SpecialProjects/FeaturedProjectAdmin.php">
-    <PossiblyNullReference>
-      <code><![CDATA[getId]]></code>
-    </PossiblyNullReference>
-  </file>
   <file src="src/Admin/System/FeatureFlag/FeatureFlagController.php">
     <PossiblyNullArgument>
       <code><![CDATA[$object->getName()]]></code>
@@ -66,11 +61,6 @@
       <code><![CDATA[getUser]]></code>
       <code><![CDATA[has]]></code>
     </PossiblyNullReference>
-  </file>
-  <file src="src/Api/Services/Followers/FollowersResponseManager.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$user->getId()]]></code>
-    </PossiblyNullArgument>
   </file>
   <file src="src/Api/Services/MediaLibrary/MediaLibraryResponseManager.php">
     <PossiblyNullArgument>

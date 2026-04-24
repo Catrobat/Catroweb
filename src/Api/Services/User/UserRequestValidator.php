@@ -218,7 +218,8 @@ class UserRequestValidator extends AbstractRequestValidator
       $validTLDs = [];
 
       try {
-        $pslFile = file_get_contents('https://publicsuffix.org/list/public_suffix_list.dat');
+        $context = stream_context_create(['http' => ['timeout' => 5, 'max_redirects' => 2]]);
+        $pslFile = @file_get_contents('https://publicsuffix.org/list/public_suffix_list.dat', false, $context);
       } catch (\Exception $e) {
         $this->logger->warning('Failed to fetch Public Suffix List: '.$e->getMessage());
 

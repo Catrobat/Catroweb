@@ -256,7 +256,7 @@ class StatementFactory
   {
     $this->currentObject = new CodeObject();
     $this->currentObject->setName($objectTree[self::NAME_ATTRIBUTE]?->__toString());
-    if (null == $this->currentObject->getName()) {
+    if (null === $this->currentObject->getName()) {
       return null;
     }
 
@@ -571,7 +571,7 @@ class StatementFactory
   private function generateUserVariableStatement(\SimpleXMLElement $statement): UserVariableStatement
   {
     $variableName = (string) $statement;
-    if (null == $variableName) {
+    if ('' === $variableName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $result = $statement->xpath($reference);
       $variableName = (is_array($result) && isset($result[0])) ? (string) $result[0] : '';
@@ -595,7 +595,7 @@ class StatementFactory
     }
 
     foreach ($elements as $element) {
-      if ((string) $element[self::TYPE_ATTRIBUTE] == $type) {
+      if ((string) $element[self::TYPE_ATTRIBUTE] === $type) {
         return true;
       }
     }
@@ -629,7 +629,7 @@ class StatementFactory
   private function generateLookStatement(\SimpleXMLElement $statement, int $spaces): LookStatement
   {
     $lookName = (string) $statement[self::NAME_ATTRIBUTE];
-    if (null == $lookName) {
+    if ('' === $lookName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $result = $statement->xpath($reference);
       if (is_array($result) && isset($result[0])) {

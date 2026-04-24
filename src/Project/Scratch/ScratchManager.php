@@ -26,7 +26,7 @@ class ScratchManager
   public function createScratchProjectFromId(int $id): ?Project
   {
     $project_arr = $this->async_http_client->fetchScratchProjectDetails([$id]);
-    if (null == $project_arr) {
+    if ([] === $project_arr) {
       return null;
     }
 

@@ -34,9 +34,9 @@ class FormulaResolver
 
   private function resolveFunction(mixed $formula): string
   {
-    if ('TRUE' == $formula->value) {
+    if ('TRUE' === $formula->value) {
       $resolved_function = 'true';
-    } elseif ('FALSE' == $formula->value) {
+    } elseif ('FALSE' === $formula->value) {
       $resolved_function = 'false';
     } else {
       if (null != $formula->rightChild) {

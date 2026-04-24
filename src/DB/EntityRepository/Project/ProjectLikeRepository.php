@@ -71,6 +71,33 @@ class ProjectLikeRepository extends ServiceEntityRepository
   }
 
   /**
+   * Get all reaction counts grouped by type in a single query.
+   *
+   * @return array<int, int> map of type_id => count
+   */
+  public function getReactionCountsByType(string $project_id): array
+  {
+    $qb = $this->createQueryBuilder('l');
+
+    /** @var array<array{type: int, cnt: string}> $results */
+    $results = $qb
+      ->select('l.type, COUNT(l) AS cnt')
+      ->where($qb->expr()->eq('l.program_id', ':project_id'))
+      ->setParameter('project_id', $project_id)
+      ->groupBy('l.type')
+      ->getQuery()
+      ->getResult()
+    ;
+
+    $counts = [];
+    foreach ($results as $row) {
+      $counts[(int) $row['type']] = (int) $row['cnt'];
+    }
+
+    return $counts;
+  }
+
+  /**
    * @param string[] $user_ids
    * @param string[] $exclude_program_ids
    *
@@ -99,19 +126,30 @@ class ProjectLikeRepository extends ServiceEntityRepository
     ;
   }
 
-  public function addLike(Project $project, User $user, int $type): void
+  /**
+   * @return bool true if the like was added, false if it already existed
+   */
+  public function addLike(Project $project, User $user, int $type): bool
   {
     $entityManager = $this->getEntityManager();
     $entityManager->beginTransaction();
 
+    $obj = new ProjectLike($project, $user, $type);
+
     try {
-      $obj = new ProjectLike($project, $user, $type);
       $entityManager->persist($obj);
       $entityManager->flush();
       $entityManager->commit();
+
+      return true;
     } catch (\Exception) {
-      // Like already exits, do nothing
-      $entityManager->rollback();
+      if ($entityManager->getConnection()->isTransactionActive()) {
+        $entityManager->rollback();
+      }
+
+      $entityManager->detach($obj);
+
+      return false;
     }
   }
 
@@ -149,6 +187,39 @@ class ProjectLikeRepository extends ServiceEntityRepository
     $count = (int) $qb->getQuery()->getSingleScalarResult();
 
     return $count > 0;
+  }
+
+  /**
+   * Get like counts for multiple projects in a single query.
+   *
+   * @param string[] $project_ids
+   *
+   * @return array<string, int> map of project_id => like count
+   */
+  public function getLikeCountsForProjects(array $project_ids): array
+  {
+    if ([] === $project_ids) {
+      return [];
+    }
+
+    $qb = $this->createQueryBuilder('l');
+
+    /** @var array<array{program_id: string, cnt: string}> $results */
+    $results = $qb
+      ->select('l.program_id, COUNT(l) AS cnt')
+      ->where($qb->expr()->in('l.program_id', ':ids'))
+      ->setParameter('ids', $project_ids)
+      ->groupBy('l.program_id')
+      ->getQuery()
+      ->getResult()
+    ;
+
+    $counts = [];
+    foreach ($results as $row) {
+      $counts[(string) $row['program_id']] = (int) $row['cnt'];
+    }
+
+    return $counts;
   }
 
   /**

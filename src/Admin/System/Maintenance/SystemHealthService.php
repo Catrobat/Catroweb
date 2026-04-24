@@ -58,44 +58,24 @@ class SystemHealthService
    */
   public function getProjectCounts(): array
   {
-    $total = (int) $this->entityManager->createQueryBuilder()
-      ->select('COUNT(p.id)')
-      ->from(Project::class, 'p')
-      ->getQuery()
-      ->getSingleScalarResult()
-    ;
+    $conn = $this->entityManager->getConnection();
+    $table = $this->entityManager->getClassMetadata(Project::class)->getTableName();
 
-    $visible = (int) $this->entityManager->createQueryBuilder()
-      ->select('COUNT(p.id)')
-      ->from(Project::class, 'p')
-      ->where('p.visible = true')
-      ->andWhere('p.auto_hidden = false')
-      ->andWhere('p.private = false')
-      ->getQuery()
-      ->getSingleScalarResult()
-    ;
-
-    $private = (int) $this->entityManager->createQueryBuilder()
-      ->select('COUNT(p.id)')
-      ->from(Project::class, 'p')
-      ->where('p.private = true')
-      ->getQuery()
-      ->getSingleScalarResult()
-    ;
-
-    $hidden = (int) $this->entityManager->createQueryBuilder()
-      ->select('COUNT(p.id)')
-      ->from(Project::class, 'p')
-      ->where('p.visible = false OR p.auto_hidden = true')
-      ->getQuery()
-      ->getSingleScalarResult()
-    ;
+    /** @var array{total: string, visible: string, private_count: string, hidden: string} $result */
+    $result = $conn->fetchAssociative(sprintf(
+      'SELECT COUNT(*) AS total,
+              SUM(visible = 1 AND auto_hidden = 0 AND private = 0) AS visible,
+              SUM(private = 1) AS private_count,
+              SUM(visible = 0 OR auto_hidden = 1) AS hidden
+       FROM %s',
+      $table,
+    ));
 
     return [
-      'total' => $total,
-      'visible' => $visible,
-      'private' => $private,
-      'hidden' => $hidden,
+      'total' => (int) $result['total'],
+      'visible' => (int) $result['visible'],
+      'private' => (int) $result['private_count'],
+      'hidden' => (int) $result['hidden'],
     ];
   }
 
@@ -109,10 +89,12 @@ class SystemHealthService
     };
   }
 
-  public function getEmailBudgetLevel(): string
+  public function getEmailBudgetLevel(?int $totalRemaining = null): string
   {
-    $remaining = $this->emailBudgetManager->getRemainingBudget();
-    $totalRemaining = $remaining['total'];
+    if (null === $totalRemaining) {
+      $remaining = $this->emailBudgetManager->getRemainingBudget();
+      $totalRemaining = $remaining['total'];
+    }
 
     return match (true) {
       $totalRemaining < self::EMAIL_LOW_THRESHOLD => 'low',

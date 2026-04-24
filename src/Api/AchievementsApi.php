@@ -12,7 +12,7 @@ use OpenAPI\Server\Model\AchievementsCountResponse;
 use OpenAPI\Server\Model\AchievementsDataResponse;
 use OpenAPI\Server\Model\AchievementsListResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 class AchievementsApi extends AbstractApiController implements AchievementsApiInterface
 {

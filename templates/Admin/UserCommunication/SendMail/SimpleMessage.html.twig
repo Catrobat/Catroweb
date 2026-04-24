@@ -10,6 +10,6 @@
 
 {% block body %}
   <p style="margin: 0; text-align: center;">
-    {{ message|raw }}
+    {{ message|escape('html')|nl2br }}
   </p>
 {% endblock %}

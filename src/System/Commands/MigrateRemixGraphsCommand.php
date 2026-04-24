@@ -170,7 +170,7 @@ class MigrateRemixGraphsCommand extends Command
       $truncated_project_name = mb_strimwidth($project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $truncated_project_name, $output, $progress_bar);
-      if ('0.0' == $result['languageVersion']) {
+      if ('0.0' === $result['languageVersion']) {
         ++$skipped;
       }
 
@@ -245,7 +245,7 @@ class MigrateRemixGraphsCommand extends Command
       $truncated_project_name = mb_strimwidth($unmigrated_project->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($project_file_path, $project_id, $unmigrated_project->getName(), $output, $progress_bar);
-      if ('0.0' == $result['languageVersion']) {
+      if ('0.0' === $result['languageVersion']) {
         ++$skipped;
       }
 
@@ -381,7 +381,7 @@ class MigrateRemixGraphsCommand extends Command
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
-    if (null == $user) {
+    if (null === $user) {
       $output->writeln('User "'.$username.'" was not found! You must pass a valid username '.
         'as the user argument in order to use --debug-import-missing-programs!');
 
@@ -443,7 +443,7 @@ class MigrateRemixGraphsCommand extends Command
       $project->setFilesize($project_file->getSize());
       $project->setCatrobatVersionName($extracted_file->getApplicationVersion());
 
-      if (821 == $project_id) {
+      if ((string) 821 === $project_id) {
         $project->setLanguageVersion('0.8');
       } else {
         $project->setLanguageVersion($language_version);

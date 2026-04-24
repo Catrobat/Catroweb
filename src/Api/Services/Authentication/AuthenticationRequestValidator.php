@@ -10,14 +10,23 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class AuthenticationRequestValidator extends AbstractRequestValidator
 {
+  public function __construct(
+    #[Autowire('%env(string:GOOGLE_ID)%')]
+    private readonly string $google_client_id,
+    #[Autowire('%env(string:APPLE_ID)%')]
+    private readonly string $apple_client_id,
+  ) {
+  }
+
   public function validateGoogleIdToken(string $id_token): bool
   {
     try {
       // Specify the CLIENT_ID of the app that accesses the backend
-      $client = new \Google\Client(['client_id' => getenv('GOOGLE_ID')]);
+      $client = new \Google\Client(['client_id' => $this->google_client_id]);
       $payload = $client->verifyIdToken($id_token);
 
       return boolval($payload);
@@ -76,7 +85,7 @@ class AuthenticationRequestValidator extends AbstractRequestValidator
       return false;
     }
 
-    if ($decoded->exp < time() || $decoded->iat > time() || $decoded->aud !== getenv('APPLE_ID')
+    if ($decoded->exp < time() || $decoded->iat > time() || $decoded->aud !== $this->apple_client_id
       || 'https://appleid.apple.com' !== $decoded->iss || empty($decoded->sub) || !isset($decoded->email)) {
       return false;
     }

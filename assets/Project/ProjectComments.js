@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2'
 import { createPictureElement } from '../Layout/ImageVariants'
 
 export function ProjectComments(config) {
@@ -202,15 +201,18 @@ export function ProjectComments(config) {
     commentMessage.focus()
   })
 
+  let scrollTicking = false
   window.addEventListener('scroll', function () {
-    if (fetchActive) return
-    const position = window.scrollY
-    const bottom = document.documentElement.scrollHeight - window.innerHeight
-    if (bottom <= 0) return
-    const pctVertical = position / bottom
-    if (pctVertical >= 0.7) {
-      loadMoreComments()
-    }
+    if (scrollTicking || fetchActive) return
+    scrollTicking = true
+    requestAnimationFrame(function () {
+      const position = window.scrollY
+      const bottom = document.documentElement.scrollHeight - window.innerHeight
+      if (bottom > 0 && position / bottom >= 0.7) {
+        loadMoreComments()
+      }
+      scrollTicking = false
+    })
   })
 
   if (
@@ -661,7 +663,8 @@ export function ProjectComments(config) {
     }
   }
 
-  function setPopUpDeletedRefresh(refresh) {
+  async function setPopUpDeletedRefresh(refresh) {
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: popUpDeletedTitle,
       text: popUpDeletedText,
@@ -729,7 +732,8 @@ export function ProjectComments(config) {
       })
   }
 
-  function askForConfirmation(continueWithAction, commentId, text, okayText) {
+  async function askForConfirmation(continueWithAction, commentId, text, okayText) {
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: areYouSure,
       html: text + '<br><br>' + noWayOfReturn,
@@ -754,7 +758,8 @@ export function ProjectComments(config) {
     showPopUp('error', title, text)
   }
 
-  function showPopUp(type, title, text, refresh = false) {
+  async function showPopUp(type, title, text, refresh = false) {
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title,
       text,

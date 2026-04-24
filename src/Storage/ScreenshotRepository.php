@@ -170,7 +170,9 @@ class ScreenshotRepository
   public function saveScratchScreenshot(int $Scratch_id, string $id): void
   {
     $screen = $this->getImagick();
-    $image = file_get_contents('https://cdn2.scratch.mit.edu/get_image/project/'.$Scratch_id.'_480x360.png');
+    $url = 'https://cdn2.scratch.mit.edu/get_image/project/'.$Scratch_id.'_480x360.png';
+    $context = stream_context_create(['http' => ['timeout' => 5, 'max_redirects' => 2]]);
+    $image = @file_get_contents($url, false, $context);
     if (false === $image) {
       throw new \RuntimeException('Could not download scratch screenshot for project '.$Scratch_id);
     }
@@ -209,7 +211,7 @@ class ScreenshotRepository
 
   public function getImagick(): \Imagick
   {
-    if (null == $this->imagick) {
+    if (null === $this->imagick) {
       $this->imagick = new \Imagick();
     }
 

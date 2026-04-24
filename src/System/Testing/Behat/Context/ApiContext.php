@@ -955,7 +955,7 @@ class ApiContext implements Context
    *
    * @throws \Exception
    */
-  public function theResponseHeadershouldContainTheKeyWithTheValue(string $headerKey, string $headerValue): void
+  public function theResponseHeaderShouldContainTheKeyWithTheValue(string $headerKey, string $headerValue): void
   {
     $headers = $this->getKernelBrowser()->getResponse()->headers;
     Assert::assertEquals($headerValue, $headers->get($headerKey),
@@ -2028,7 +2028,7 @@ class ApiContext implements Context
    */
   public function saveResponseToFile(AfterStepScope $scope): void
   {
-    if (null == $this->ERROR_DIR) {
+    if ('' === $this->ERROR_DIR) {
       return;
     }
 
@@ -2538,7 +2538,7 @@ class ApiContext implements Context
    */
   private function uploadProject(string $file, ?User $user = null, string $desired_id = ''): void
   {
-    if (null == $user) {
+    if (null === $user) {
       if (null !== $this->username) {
         /** @var User $user */
         $user = $this->getUserManager()->findUserByUsername($this->username);

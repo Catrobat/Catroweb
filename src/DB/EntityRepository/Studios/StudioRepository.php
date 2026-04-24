@@ -24,21 +24,14 @@ class StudioRepository extends ServiceEntityRepository
 
   public function findAllStudiosWithUsersAndProjectsCount(): array
   {
-    $qb_su = $this->getEntityManager()->createQueryBuilder();
-    $qb_su->select('COUNT(su)')
-      ->from(StudioUser::class, 'su')
-      ->where('s.id = su.studio')
-    ;
-    $qb_sp = $this->getEntityManager()->createQueryBuilder();
-    $qb_sp->select('COUNT(sp)')
-      ->from(StudioProject::class, 'sp')
-      ->where('s.id = sp.studio')
-    ;
     $qb = $this->getEntityManager()->createQueryBuilder();
-    $qb->select('s.id, s.name, s.description, s.is_public, s.is_enabled, s.allow_comments, s.cover_path ,
-    ('.$qb_su->getDQL().')  AS studio_users, ('.$qb_sp->getDQL().') AS studio_projects')
+    $qb->select('s.id, s.name, s.description, s.is_public, s.is_enabled, s.allow_comments, s.cover_path,
+      COUNT(DISTINCT su.id) AS studio_users, COUNT(DISTINCT sp.id) AS studio_projects')
       ->from(Studio::class, 's')
+      ->leftJoin(StudioUser::class, 'su', 'WITH', 'su.studio = s')
+      ->leftJoin(StudioProject::class, 'sp', 'WITH', 'sp.studio = s')
       ->andWhere('s.auto_hidden = false')
+      ->groupBy('s.id, s.name, s.description, s.is_public, s.is_enabled, s.allow_comments, s.cover_path')
     ;
 
     return $qb->getQuery()->getArrayResult();

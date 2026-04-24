@@ -6,7 +6,6 @@ namespace App\Api\Services\Followers;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\User\User;
-use App\Project\ProjectManager;
 use App\User\UserAvatarService;
 use OpenAPI\Server\Model\FollowerResponse;
 use OpenAPI\Server\Model\FollowersListResponse;
@@ -14,22 +13,30 @@ use OpenAPI\Server\Model\FollowersListResponse;
 class FollowersResponseManager extends AbstractResponseManager
 {
   public function __construct(
-    private readonly ProjectManager $project_manager,
     private readonly UserAvatarService $user_avatar_service,
   ) {
   }
 
   /**
-   * @param User[] $users
+   * @param User[]              $users
+   * @param array<string, true> $following_ids   user IDs the authenticated user follows
+   * @param array<string, true> $follows_you_ids user IDs that follow the authenticated user
+   * @param array<string, int>  $follower_counts user_id => follower count
+   * @param array<string, int>  $project_counts  user_id => public project count
    */
   public function createFollowersListResponse(
     array $users,
     int $total_followers,
     int $total_following,
-    ?User $authenticated_user,
+    array $following_ids = [],
+    array $follows_you_ids = [],
+    array $follower_counts = [],
+    array $project_counts = [],
   ): FollowersListResponse {
     $data = array_map(
-      fn (User $user): FollowerResponse => $this->createFollowerResponse($user, $authenticated_user),
+      fn (User $user): FollowerResponse => $this->createFollowerResponse(
+        $user, $following_ids, $follows_you_ids, $follower_counts, $project_counts,
+      ),
       $users,
     );
 
@@ -40,24 +47,29 @@ class FollowersResponseManager extends AbstractResponseManager
     ]);
   }
 
-  private function createFollowerResponse(User $user, ?User $authenticated_user): FollowerResponse
-  {
-    $is_following = false;
-    $follows_you = false;
-
-    if ($authenticated_user instanceof User) {
-      $is_following = $authenticated_user->getFollowing()->contains($user);
-      $follows_you = $user->getFollowing()->contains($authenticated_user);
-    }
+  /**
+   * @param array<string, true> $following_ids
+   * @param array<string, true> $follows_you_ids
+   * @param array<string, int>  $follower_counts
+   * @param array<string, int>  $project_counts
+   */
+  private function createFollowerResponse(
+    User $user,
+    array $following_ids,
+    array $follows_you_ids,
+    array $follower_counts,
+    array $project_counts,
+  ): FollowerResponse {
+    $user_id = (string) $user->getId();
 
     return new FollowerResponse([
-      'id' => $user->getId(),
+      'id' => $user_id,
       'username' => $user->getUsername(),
       'avatar' => $this->user_avatar_service->getVariants($user),
-      'project_count' => $this->project_manager->countPublicUserProjects($user->getId()),
-      'follower_count' => $user->getFollowers()->count(),
-      'is_following' => $is_following,
-      'follows_you' => $follows_you,
+      'project_count' => $project_counts[$user_id] ?? 0,
+      'follower_count' => $follower_counts[$user_id] ?? 0,
+      'is_following' => isset($following_ids[$user_id]),
+      'follows_you' => isset($follows_you_ids[$user_id]),
     ]);
   }
 }

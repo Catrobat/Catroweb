@@ -28,9 +28,9 @@ class ShowTextStatement extends Statement
 
     foreach ($this->getFormulaListChildStatement()->getStatements() as $statement) {
       if ($statement instanceof FormulaStatement) {
-        if ('Y_POSITION' == $statement->getCategory()) {
+        if ('Y_POSITION' === $statement->getCategory()) {
           $formula_y_pos = $statement->execute();
-        } elseif ('X_POSITION' == $statement->getCategory()) {
+        } elseif ('X_POSITION' === $statement->getCategory()) {
           $formula_x_pos = $statement->execute();
         }
       }

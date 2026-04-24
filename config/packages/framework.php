@@ -30,6 +30,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'php_errors' => [
         'log' => true,
       ],
+      'property_info' => [
+        'with_constructor_extractor' => true,
+      ],
+      'profiler' => [
+        'collect_serializer_data' => true,
+      ],
     ]
   );
 };

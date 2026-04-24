@@ -24,7 +24,12 @@ class MediaCategoryRepository extends ServiceEntityRepository
   #[\Override]
   public function findAll(): array
   {
-    return $this->findBy([], ['priority' => 'ASC', 'name' => 'ASC']);
+    return $this->createQueryBuilder('c')
+      ->orderBy('c.priority', 'ASC')
+      ->addOrderBy('c.name', 'ASC')
+      ->getQuery()
+      ->getResult()
+    ;
   }
 
   /**

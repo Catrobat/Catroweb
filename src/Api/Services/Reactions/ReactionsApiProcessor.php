@@ -29,18 +29,22 @@ class ReactionsApiProcessor extends AbstractApiProcessor
    */
   public function addReaction(Project $project, User $user, int $type): bool
   {
-    // Check if reaction already exists
-    $existing_likes = $this->program_like_repository->findBy([
+    // Fast path: check if reaction already exists (avoids exception overhead)
+    $existing = $this->program_like_repository->findBy([
       'project' => $project,
       'user' => $user,
       'type' => $type,
     ]);
 
-    if ([] !== $existing_likes) {
-      return false; // Reaction already exists
+    if ([] !== $existing) {
+      return false;
     }
 
-    $this->program_like_repository->addLike($project, $user, $type);
+    // Race-safe: addLike returns false on duplicate key constraint
+    if (!$this->program_like_repository->addLike($project, $user, $type)) {
+      return false;
+    }
+
     $this->handleNotification($project, $user, ProjectLike::ACTION_ADD, $type);
 
     return true;

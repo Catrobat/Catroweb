@@ -32,6 +32,8 @@ class SecurityHeadersSubscriber
     $headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
     $headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 
+    $headers->set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.bugsnag.com https://*.google-analytics.com https://*.googletagmanager.com https://appleid.apple.com; frame-ancestors 'self'");
+
     if ('prod' === $this->kernelEnvironment) {
       $headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
     }

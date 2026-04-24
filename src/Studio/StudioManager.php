@@ -469,6 +469,24 @@ class StudioManager
     return $this->studio_activity_repository->countStudioActivities($studio);
   }
 
+  /**
+   * Batch-load all four counts (users, projects, activities, comments) for a set
+   * of studios in only 4 queries total, regardless of the number of studios.
+   *
+   * @param string[] $studioIds
+   *
+   * @return array{users: array<string, int>, projects: array<string, int>, activities: array<string, int>, comments: array<string, int>}
+   */
+  public function countStudioStatsBatch(array $studioIds): array
+  {
+    return [
+      'users' => $this->studio_user_repository->countStudioUsersBatch($studioIds),
+      'projects' => $this->studio_project_repository->countStudioProjectsBatch($studioIds),
+      'activities' => $this->studio_activity_repository->countStudioActivitiesBatch($studioIds),
+      'comments' => $this->user_comment_repository->countStudioCommentsBatch($studioIds),
+    ];
+  }
+
   public function getStudioAdmin(Studio $studio): ?StudioUser
   {
     return $this->studio_user_repository->findStudioAdmin($studio);
@@ -639,14 +657,14 @@ class StudioManager
    */
   public function updateJoinRequests(StudioJoinRequest $joinRequest, string $switchValue, User $user, User $admin, Studio $studio): StudioJoinRequest
   {
-    if ('pending' == $joinRequest->getStatus() && '1' === $switchValue) {
+    if ('pending' === $joinRequest->getStatus() && '1' === $switchValue) {
       $joinRequest->setStatus('approved');
       $this->addUserToStudio($admin, $studio, $user);
       $this->notification_manager->addNotification(new StudioJoinRequestNotification($user, $studio, $admin, 'accepted'));
-    } elseif ('pending' == $joinRequest->getStatus() && '0' === $switchValue) {
+    } elseif ('pending' === $joinRequest->getStatus() && '0' === $switchValue) {
       $joinRequest->setStatus('declined');
       $this->notification_manager->addNotification(new StudioJoinRequestNotification($user, $studio, $admin, 'declined'));
-    } elseif ('declined' == $joinRequest->getStatus() && '0' === $switchValue) {
+    } elseif ('declined' === $joinRequest->getStatus() && '0' === $switchValue) {
       $joinRequest->setStatus('approved');
       $this->addUserToStudio($admin, $studio, $user);
       $this->notification_manager->addNotification(new StudioJoinRequestNotification($user, $studio, $admin, 'accepted'));

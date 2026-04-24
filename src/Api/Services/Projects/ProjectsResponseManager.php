@@ -15,6 +15,8 @@ use App\DB\Entity\Project\ProjectCodeStatistics;
 use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\Project\Special\SpecialProject;
 use App\DB\Entity\Project\Tag;
+use App\DB\EntityRepository\Project\ProjectLikeRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use App\Storage\StorageLifecycleService;
@@ -52,14 +54,49 @@ class ProjectsResponseManager extends AbstractResponseManager
     \Psr\Cache\CacheItemPoolInterface $cache,
     private readonly ImageRepository $image_repository,
     private readonly StorageLifecycleService $storage_lifecycle,
+    private readonly ProjectLikeRepository $project_like_repository,
+    private readonly ProjectRepository $project_repository,
   ) {
     parent::__construct($translator, $serializer, $cache);
   }
 
   /**
-   * @param ?string $attributes Comma-separated list of attributes to include into response
+   * Preload counts for a list of projects in batch (2 queries instead of 2*N).
+   *
+   * @param array<Project|SpecialProject> $projects
+   *
+   * @return array{likes: array<string, int>, comments: array<string, int>}
    */
-  public function createProjectDataResponse(Project|SpecialProject $project, ?string $attributes): ProjectResponse
+  private function preloadProjectListCounts(array $projects): array
+  {
+    $ids = [];
+    foreach ($projects as $project) {
+      $p = $project instanceof SpecialProject ? $project->getProject() : $project;
+      if (null === $p) {
+        continue;
+      }
+
+      $id = $p->getId();
+      if (null !== $id) {
+        $ids[] = $id;
+      }
+    }
+
+    if ([] === $ids) {
+      return ['likes' => [], 'comments' => []];
+    }
+
+    return [
+      'likes' => $this->project_like_repository->getLikeCountsForProjects($ids),
+      'comments' => $this->project_repository->getCommentCountsForProjects($ids),
+    ];
+  }
+
+  /**
+   * @param ?string                                                         $attributes       Comma-separated list of attributes to include into response
+   * @param ?array{likes: array<string, int>, comments: array<string, int>} $preloaded_counts Pre-fetched counts to avoid N+1 queries
+   */
+  public function createProjectDataResponse(Project|SpecialProject $project, ?string $attributes, ?array $preloaded_counts = null): ProjectResponse
   {
     $default_attributes = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot', 'project_url'];
     $catroid_catty_hotfixes = ['tags', 'description', 'version', 'uploaded_at', 'download_url', 'filesize', 'not_for_kids'];
@@ -118,11 +155,17 @@ class ProjectsResponseManager extends AbstractResponseManager
     }
 
     if (in_array('reactions', $attributes_list, true)) {
-      $data['reactions'] = $extraced_project->getLikes()->count();
+      $project_id = $extraced_project->getId();
+      $data['reactions'] = (null !== $preloaded_counts && null !== $project_id)
+        ? ($preloaded_counts['likes'][$project_id] ?? 0)
+        : $extraced_project->getLikes()->count();
     }
 
     if (in_array('comments', $attributes_list, true)) {
-      $data['comments'] = $extraced_project->getComments()->count();
+      $project_id = $extraced_project->getId();
+      $data['comments'] = (null !== $preloaded_counts && null !== $project_id)
+        ? ($preloaded_counts['comments'][$project_id] ?? 0)
+        : $extraced_project->getComments()->count();
     }
 
     if (in_array('private', $attributes_list, true)) {
@@ -221,9 +264,11 @@ class ProjectsResponseManager extends AbstractResponseManager
       array_pop($projects);
     }
 
+    $preloaded_counts = $this->preloadProjectListCounts($projects);
+
     $data = [];
     foreach ($projects as $project) {
-      $data[] = $this->createProjectDataResponse($project, $attributes);
+      $data[] = $this->createProjectDataResponse($project, $attributes, $preloaded_counts);
     }
 
     $next_cursor = ($has_more && [] !== $data) ? $this->encodeCursorFromOffset($offset, count($data)) : null;
@@ -247,9 +292,11 @@ class ProjectsResponseManager extends AbstractResponseManager
       array_pop($projects);
     }
 
+    $preloaded_counts = $this->preloadProjectListCounts($projects);
+
     $data = [];
     foreach ($projects as $project) {
-      $data[] = $this->createProjectDataResponse($project, $attributes);
+      $data[] = $this->createProjectDataResponse($project, $attributes, $preloaded_counts);
     }
 
     $next_cursor = null;
@@ -306,9 +353,11 @@ class ProjectsResponseManager extends AbstractResponseManager
    */
   public function createProjectsDataResponse(array $projects, ?string $attributes = null): array
   {
+    $preloaded_counts = $this->preloadProjectListCounts($projects);
+
     $response = [];
     foreach ($projects as $project) {
-      $response[] = $this->createProjectDataResponse($project, $attributes);
+      $response[] = $this->createProjectDataResponse($project, $attributes, $preloaded_counts);
     }
 
     return $response;

@@ -40,4 +40,33 @@ class StudioProjectRepository extends ServiceEntityRepository
   {
     return $this->count(['studio' => $studio, 'user' => $user]);
   }
+
+  /**
+   * @param string[] $studioIds
+   *
+   * @return array<string, int> studio ID => count
+   */
+  public function countStudioProjectsBatch(array $studioIds): array
+  {
+    if ([] === $studioIds) {
+      return [];
+    }
+
+    $qb = $this->getEntityManager()->createQueryBuilder();
+    $rows = $qb->select('IDENTITY(sp.studio) AS studio_id, COUNT(sp.id) AS cnt')
+      ->from(StudioProject::class, 'sp')
+      ->where('sp.studio IN (:ids)')
+      ->setParameter('ids', $studioIds)
+      ->groupBy('sp.studio')
+      ->getQuery()
+      ->getArrayResult()
+    ;
+
+    $map = [];
+    foreach ($rows as $row) {
+      $map[$row['studio_id']] = (int) $row['cnt'];
+    }
+
+    return $map;
+  }
 }

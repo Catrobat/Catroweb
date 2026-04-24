@@ -453,7 +453,7 @@ class CodeStatisticsParser
       'uses_physics' => $this->hasAnyTypeCount($brick_counts, self::PHYSICS_BRICKS),
     ];
 
-    $xml = @simplexml_load_string($xml_content);
+    $xml = @simplexml_load_string($xml_content, \SimpleXMLElement::class, LIBXML_NONET);
     if (!$xml instanceof \SimpleXMLElement) {
       return $context;
     }

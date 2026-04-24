@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\DB\EntityRepository\User\Notification;
 
 use App\DB\Entity\Project\Project;
+use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -154,7 +156,113 @@ class NotificationRepository extends ServiceEntityRepository
       array_pop($results);
     }
 
+    $this->preloadNotificationRelations($results);
+
     return ['notifications' => $results, 'has_more' => $has_more];
+  }
+
+  /**
+   * Batch-preload related entities (users, projects, comments, studios) into Doctrine's
+   * identity map so that accessing notification relations doesn't trigger N+1 queries.
+   *
+   * @param CatroNotification[] $notifications
+   */
+  private function preloadNotificationRelations(array $notifications): void
+  {
+    if ([] === $notifications) {
+      return;
+    }
+
+    $user_ids = [];
+    $project_ids = [];
+    $comment_ids = [];
+    $studio_ids = [];
+
+    foreach ($notifications as $notification) {
+      if ($notification instanceof LikeNotification) {
+        $user_ids[] = $notification->getLikeFrom()?->getId();
+        $project_ids[] = $notification->getProject()?->getId();
+      } elseif ($notification instanceof FollowNotification) {
+        $user_ids[] = $notification->getFollower()->getId();
+      } elseif ($notification instanceof NewProjectNotification) {
+        $project_ids[] = $notification->getProject()?->getId();
+      } elseif ($notification instanceof CommentNotification) {
+        $comment_ids[] = $notification->getComment()?->getId();
+      } elseif ($notification instanceof RemixNotification) {
+        $user_ids[] = $notification->getRemixFrom()?->getId();
+        $project_ids[] = $notification->getProject()?->getId();
+        $project_ids[] = $notification->getRemixProgram()?->getId();
+      } elseif ($notification instanceof StudioCommentNotification) {
+        $user_ids[] = $notification->getCommentUser()?->getId();
+        $studio_ids[] = $notification->getStudio()?->getId();
+      } elseif ($notification instanceof StudioProjectNotification) {
+        $user_ids[] = $notification->getProjectUser()?->getId();
+        $project_ids[] = $notification->getProject()?->getId();
+        $studio_ids[] = $notification->getStudio()?->getId();
+      } elseif ($notification instanceof StudioJoinRequestNotification) {
+        $user_ids[] = $notification->getAdminUser()?->getId();
+        $studio_ids[] = $notification->getStudio()?->getId();
+      } elseif ($notification instanceof ProjectExpiringNotification) {
+        $project_ids[] = $notification->getProject()?->getId();
+      }
+    }
+
+    $em = $this->getEntityManager();
+
+    // Batch-load users into identity map
+    $user_ids = array_values(array_unique(array_filter($user_ids)));
+    if ([] !== $user_ids) {
+      $em->createQueryBuilder()
+        ->select('u')
+        ->from(User::class, 'u')
+        ->where('u.id IN (:ids)')
+        ->setParameter('ids', $user_ids)
+        ->getQuery()
+        ->getResult()
+      ;
+    }
+
+    // Batch-load projects (with user for getUser() calls)
+    $project_ids = array_values(array_unique(array_filter($project_ids)));
+    if ([] !== $project_ids) {
+      $em->createQueryBuilder()
+        ->select('p, pu')
+        ->from(Project::class, 'p')
+        ->leftJoin('p.user', 'pu')
+        ->where('p.id IN (:ids)')
+        ->setParameter('ids', $project_ids)
+        ->getQuery()
+        ->getResult()
+      ;
+    }
+
+    // Batch-load comments (with user and project)
+    $comment_ids = array_values(array_unique(array_filter($comment_ids)));
+    if ([] !== $comment_ids) {
+      $em->createQueryBuilder()
+        ->select('c, cu, cp')
+        ->from(UserComment::class, 'c')
+        ->leftJoin('c.user', 'cu')
+        ->leftJoin('c.project', 'cp')
+        ->where('c.id IN (:ids)')
+        ->setParameter('ids', $comment_ids)
+        ->getQuery()
+        ->getResult()
+      ;
+    }
+
+    // Batch-load studios
+    $studio_ids = array_values(array_unique(array_filter($studio_ids)));
+    if ([] !== $studio_ids) {
+      $em->createQueryBuilder()
+        ->select('s')
+        ->from(Studio::class, 's')
+        ->where('s.id IN (:ids)')
+        ->setParameter('ids', $studio_ids)
+        ->getQuery()
+        ->getResult()
+      ;
+    }
   }
 
   /**

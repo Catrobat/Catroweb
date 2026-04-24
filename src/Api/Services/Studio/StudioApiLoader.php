@@ -89,7 +89,9 @@ class StudioApiLoader extends AbstractApiLoader
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('su')
+      ->addSelect('u')
       ->from(StudioUser::class, 'su')
+      ->leftJoin('su.user', 'u')
       ->where('su.studio = :studio')
       ->andWhere('su.status = :status')
       ->setParameter('studio', $studio)
@@ -126,7 +128,11 @@ class StudioApiLoader extends AbstractApiLoader
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('sp')
+      ->addSelect('u, p, pu')
       ->from(StudioProject::class, 'sp')
+      ->leftJoin('sp.user', 'u')
+      ->leftJoin('sp.project', 'p')
+      ->leftJoin('p.user', 'pu')
       ->where('sp.studio = :studio')
       ->setParameter('studio', $studio)
       ->orderBy('sp.created_on', 'DESC')
@@ -253,7 +259,9 @@ class StudioApiLoader extends AbstractApiLoader
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('a')
+      ->addSelect('au')
       ->from(StudioActivity::class, 'a')
+      ->leftJoin('a.user', 'au')
       ->where('a.studio = :studio')
       ->setParameter('studio', $studio)
       ->orderBy('a.created_on', 'DESC')
@@ -319,7 +327,9 @@ class StudioApiLoader extends AbstractApiLoader
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('jr')
+      ->addSelect('jru')
       ->from(StudioJoinRequest::class, 'jr')
+      ->leftJoin('jr.user', 'jru')
       ->where('jr.studio = :studio')
       ->andWhere('jr.status = :status')
       ->setParameter('studio', $studio)
@@ -365,7 +375,9 @@ class StudioApiLoader extends AbstractApiLoader
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('c')
+      ->addSelect('cu')
       ->from(UserComment::class, 'c')
+      ->leftJoin('c.user', 'cu')
       ->where('c.studio = :studio')
       ->setParameter('studio', $studio)
       ->orderBy('c.uploadDate', 'DESC')

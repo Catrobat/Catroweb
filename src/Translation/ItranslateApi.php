@@ -136,7 +136,7 @@ class ItranslateApi implements TranslationApiInterface
 
     $translation_result = new TranslationResult();
     $translation_result->provider = 'itranslate';
-    if (null == $source_language) {
+    if (null === $source_language) {
       $translation_result->detected_source_language = $result['source']['detected'];
     }
 

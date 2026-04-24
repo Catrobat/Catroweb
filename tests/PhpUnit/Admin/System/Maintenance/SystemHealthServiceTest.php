@@ -8,9 +8,9 @@ use App\Admin\System\Maintenance\SystemHealthService;
 use App\DB\Entity\System\EmailDailyBudget;
 use App\DB\EntityRepository\System\EmailDailyBudgetRepository;
 use App\System\Mail\EmailBudgetManager;
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -41,23 +41,20 @@ class SystemHealthServiceTest extends TestCase
     $entityManagerForBudget = $this->createStub(EntityManagerInterface::class);
     $emailBudgetManager = new EmailBudgetManager($repository, $entityManagerForBudget, new NullLogger());
 
-    $counts = [100, 80, 10, 15];
-    $callIndex = 0;
+    $connection = $this->createStub(Connection::class);
+    $connection->method('fetchAssociative')->willReturn([
+      'total' => '100',
+      'visible' => '80',
+      'private_count' => '10',
+      'hidden' => '15',
+    ]);
+
+    $metadata = $this->createStub(ClassMetadata::class);
+    $metadata->method('getTableName')->willReturn('project');
 
     $entityManager = $this->createStub(EntityManagerInterface::class);
-    $entityManager->method('createQueryBuilder')->willReturnCallback(function () use (&$callIndex, $counts) {
-      $query = $this->createStub(Query::class);
-      $query->method('getSingleScalarResult')->willReturn($counts[$callIndex++] ?? 0);
-
-      $qb = $this->createStub(QueryBuilder::class);
-      $qb->method('select')->willReturnSelf();
-      $qb->method('from')->willReturnSelf();
-      $qb->method('where')->willReturnSelf();
-      $qb->method('andWhere')->willReturnSelf();
-      $qb->method('getQuery')->willReturn($query);
-
-      return $qb;
-    });
+    $entityManager->method('getConnection')->willReturn($connection);
+    $entityManager->method('getClassMetadata')->willReturn($metadata);
 
     $this->service = new SystemHealthService(
       $entityManager,

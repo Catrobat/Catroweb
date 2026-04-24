@@ -36,7 +36,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
@@ -558,6 +558,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $responseHeaders['Cache-Control'] = 'public, max-age=3600';
     $responseCode = Response::HTTP_OK;
 
     return $response;
@@ -577,6 +578,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $responseHeaders['Cache-Control'] = 'public, max-age=3600';
     $responseCode = Response::HTTP_OK;
 
     return $response;

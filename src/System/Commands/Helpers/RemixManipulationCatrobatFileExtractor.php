@@ -66,7 +66,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
 
   public function generateRemixUrlsStringForMergedProgram(mixed $previous_parent_string, mixed $current_parent_url): string
   {
-    if ('' == $previous_parent_string) {
+    if ('' === $previous_parent_string) {
       return $current_parent_url;
     }
 

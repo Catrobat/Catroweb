@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'studio_user')]
+#[ORM\Index(name: 'idx_studio_user_status', columns: ['studio', 'status'])]
 #[ORM\Entity(repositoryClass: StudioUserRepository::class)]
 class StudioUser
 {

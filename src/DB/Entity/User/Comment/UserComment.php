@@ -20,6 +20,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(name: 'program_id_idx', columns: ['programId'])]
 #[ORM\Index(name: 'studio_idx', columns: ['studio'])]
 #[ORM\Index(name: 'upload_date_idx', columns: ['uploadDate'])]
+#[ORM\Index(name: 'idx_comment_project_date', columns: ['programId', 'uploadDate'])]
+#[ORM\Index(name: 'idx_comment_parent_date', columns: ['parent_id', 'uploadDate'])]
 #[ORM\Entity(repositoryClass: UserCommentRepository::class)]
 class UserComment implements \Stringable
 {

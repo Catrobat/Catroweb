@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'studio_join_requests')]
+#[ORM\Index(name: 'idx_join_request_studio_status', columns: ['studio', 'status'])]
 #[ORM\Entity(repositoryClass: StudioJoinRequestRepository::class)]
 class StudioJoinRequest
 {
@@ -33,7 +34,7 @@ class StudioJoinRequest
   protected User $user;
 
   #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-  #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
+  #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'], inversedBy: 'join_requests')]
   protected Studio $studio;
 
   #[ORM\Column(type: Types::STRING, length: 20)]

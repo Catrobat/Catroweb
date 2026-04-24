@@ -26,7 +26,7 @@ use OpenAPI\Server\Model\CommentTranslationResponse;
 use OpenAPI\Server\Model\CommentUserInfo;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CommentsApi extends AbstractApiController implements CommentsApiInterface

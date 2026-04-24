@@ -25,7 +25,7 @@ class JmsSerializer implements SerializerInterface
 
   public function serialize($data, string $format): string
   {
-    return SerializerBuilder::create()->build()->serialize($data, $this->convertFormat($format));
+    return $this->serializer->serialize($data, $this->convertFormat($format));
   }
 
   public function deserialize($data, string $type, string $format)
