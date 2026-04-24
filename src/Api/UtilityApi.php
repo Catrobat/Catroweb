@@ -119,6 +119,7 @@ class UtilityApi extends AbstractApiController implements UtilityApiInterface
 
     $etag = '"'.$locale.'"';
     $responseHeaders['ETag'] = $etag;
+    $responseHeaders['Cache-Control'] = 'public';
     $responseCode = Response::HTTP_OK;
 
     return $locales;
