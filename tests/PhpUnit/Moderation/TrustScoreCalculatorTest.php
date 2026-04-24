@@ -7,8 +7,6 @@ namespace Tests\PhpUnit\Moderation;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentModerationActionRepository;
 use App\DB\EntityRepository\Moderation\ContentReportRepository;
-use App\DB\EntityRepository\Project\ProjectRepository;
-use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\Moderation\TrustScoreCalculator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
@@ -27,11 +25,12 @@ final class TrustScoreCalculatorTest extends TestCase
 {
   private function buildCalculator(
     ?ContentReportRepository $report_repository = null,
-    ?ProjectRepository $program_repository = null,
-    ?UserCommentRepository $comment_repository = null,
     ?CacheItemPoolInterface $cache = null,
     ?ContentModerationActionRepository $action_repository = null,
     ?EntityManagerInterface $entity_manager = null,
+    int $project_count = 0,
+    int $comment_count = 0,
+    int $follower_count = 0,
   ): TrustScoreCalculator {
     if (!$cache instanceof CacheItemPoolInterface) {
       $cache_item = $this->createStub(CacheItemInterface::class);
@@ -48,18 +47,20 @@ final class TrustScoreCalculatorTest extends TestCase
 
     return new TrustScoreCalculator(
       $report_repository,
-      $program_repository ?? $this->createStub(ProjectRepository::class),
-      $comment_repository ?? $this->createStub(UserCommentRepository::class),
       $cache,
       $action_repository ?? $this->createStub(ContentModerationActionRepository::class),
-      $entity_manager ?? $this->createFollowerCountEntityManager(0),
+      $entity_manager ?? $this->createActivityCountEntityManager($project_count, $comment_count, $follower_count),
     );
   }
 
-  private function createFollowerCountEntityManager(int $count): EntityManagerInterface
+  private function createActivityCountEntityManager(int $project_count = 0, int $comment_count = 0, int $follower_count = 0): EntityManagerInterface
   {
     $query = $this->createStub(Query::class);
-    $query->method('getSingleScalarResult')->willReturn($count);
+    $query->method('getSingleResult')->willReturn([
+      'project_count' => $project_count,
+      'comment_count' => $comment_count,
+      'follower_count' => $follower_count,
+    ]);
 
     $qb = $this->createStub(QueryBuilder::class);
     $qb->method('select')->willReturnSelf();
@@ -125,11 +126,8 @@ final class TrustScoreCalculatorTest extends TestCase
   #[Group('unit')]
   public function testActivityScoreCountsProjects(): void
   {
-    $program_repo = $this->createStub(ProjectRepository::class);
-    $program_repo->method('count')->willReturn(10);
-
     $user = $this->createUserStub(created_at: new \DateTime());
-    $calculator = $this->buildCalculator(program_repository: $program_repo);
+    $calculator = $this->buildCalculator(project_count: 10);
 
     $score = $calculator->calculate($user);
 
@@ -140,11 +138,8 @@ final class TrustScoreCalculatorTest extends TestCase
   #[Group('unit')]
   public function testActivityScoreCapsAtThree(): void
   {
-    $program_repo = $this->createStub(ProjectRepository::class);
-    $program_repo->method('count')->willReturn(50);
-
     $user = $this->createUserStub(created_at: new \DateTime());
-    $calculator = $this->buildCalculator(program_repository: $program_repo);
+    $calculator = $this->buildCalculator(project_count: 50);
 
     $score = $calculator->calculate($user);
 

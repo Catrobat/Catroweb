@@ -500,37 +500,6 @@ class ProjectRepository extends ServiceEntityRepository
     return []; // disabled
   }
 
-  public function filterVisiblePrograms(array $projects, string $max_version = ''): array
-  {
-    if ([] === $projects) {
-      return [];
-    }
-
-    /** @var Project[] $filtered_programs */
-    $filtered_programs = [];
-
-    foreach ($projects as $project) {
-      if (true !== $project->getVisible()) {
-        continue;
-      }
-      if (false !== $project->getPrivate()) {
-        continue;
-      }
-      if ($project->getAutoHidden()) {
-        continue;
-      }
-      if (!$this->app_request->isDebugBuildRequest() && false !== $project->isDebugBuild()) {
-        continue;
-      }
-      if ('' !== $max_version && $project->getLanguageVersion() > $max_version) {
-        continue;
-      }
-      $filtered_programs[] = $project;
-    }
-
-    return $filtered_programs;
-  }
-
   //
   // --------------------------------------------------------------------------------------------------------------------
   //

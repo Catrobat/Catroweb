@@ -36,9 +36,9 @@ class UserCommentRepository extends ServiceEntityRepository
     return $em->getRepository(UserComment::class)->findBy(['user' => $user]);
   }
 
-  public function findAllStudioComments(?Studio $studio): array
+  public function findAllStudioComments(?Studio $studio, ?int $limit = null, int $offset = 0): array
   {
-    return $this->findBy(['studio' => $studio, 'parent_id' => null]);
+    return $this->findBy(['studio' => $studio, 'parent_id' => null], ['id' => 'DESC'], $limit, $offset);
   }
 
   public function countStudioComments(?Studio $studio): int

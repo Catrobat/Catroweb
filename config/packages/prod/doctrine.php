@@ -25,6 +25,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     'framework',
     [
       'cache' => [
+        'app' => 'cache.adapter.redis',
+        'default_redis_provider' => '%env(REDIS_URL)%',
         'pools' => [
           'doctrine.result_cache_pool' => [
             'adapter' => 'cache.app',
