@@ -20,9 +20,9 @@ class StudioActivityRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, StudioActivity::class);
   }
 
-  public function findAllStudioActivities(Studio $studio): array
+  public function findAllStudioActivities(Studio $studio, ?int $limit = null, int $offset = 0): array
   {
-    return $this->findBy(['studio' => $studio]);
+    return $this->findBy(['studio' => $studio], ['created_on' => 'DESC'], $limit, $offset);
   }
 
   public function findAllStudioActivitiesByActivityType(Studio $studio, string $activityType): array
@@ -69,16 +69,20 @@ class StudioActivityRepository extends ServiceEntityRepository
     return $map;
   }
 
-  public function findAllStudioActivitiesCombined(Studio $studio): array
+  public function findAllStudioActivitiesCombined(Studio $studio, ?int $limit = null): array
   {
     $qb = $this->getEntityManager()->createQueryBuilder();
 
-    return $qb->addselect('a')->from(StudioActivity::class, 'a')
+    $qb->addselect('a')->from(StudioActivity::class, 'a')
       ->where($qb->expr()->eq('a.studio', ':studio'))
       ->setParameter('studio', $studio)
       ->orderBy('a.created_on', Criteria::DESC)
-      ->getQuery()
-      ->getResult()
     ;
+
+    if (null !== $limit) {
+      $qb->setMaxResults($limit);
+    }
+
+    return $qb->getQuery()->getResult();
   }
 }

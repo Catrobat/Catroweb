@@ -14,6 +14,9 @@ class FeatureFlagManager
   private array $defaultFlags;
   private bool $defaultsSynchronized = false;
 
+  /** @var array<string, bool|null> */
+  private array $flagCache = [];
+
   public function __construct(
     protected RequestStack $requestStack,
     protected EntityManagerInterface $entityManager,
@@ -79,24 +82,37 @@ class FeatureFlagManager
     }
 
     $this->entityManager->flush();
+    $this->flagCache[$flagName] = $value;
   }
 
   public function getFlagValue(string $flagName): ?bool
   {
+    if (array_key_exists($flagName, $this->flagCache)) {
+      return $this->flagCache[$flagName];
+    }
+
     $this->synchronizeDefaults();
 
     $request = $this->requestStack->getCurrentRequest();
 
     if ($request && $request->headers->has('X-Feature-Flag-'.$flagName)) {
-      return (bool) $request->headers->get('X-Feature-Flag-'.$flagName);
+      $value = (bool) $request->headers->get('X-Feature-Flag-'.$flagName);
+      $this->flagCache[$flagName] = $value;
+
+      return $value;
     }
 
     $flag = $this->entityManager->getRepository(FeatureFlag::class)->findOneBy(['name' => $flagName]);
 
     if (null !== $flag) {
+      $this->flagCache[$flagName] = $flag->getValue();
+
       return $flag->getValue();
     }
 
-    return $this->defaultFlags[$flagName] ?? null;
+    $value = $this->defaultFlags[$flagName] ?? null;
+    $this->flagCache[$flagName] = $value;
+
+    return $value;
   }
 }

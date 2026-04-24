@@ -20,9 +20,9 @@ class StudioUserRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, StudioUser::class);
   }
 
-  public function findAllStudioUsers(?Studio $studio): array
+  public function findAllStudioUsers(?Studio $studio, ?int $limit = null, int $offset = 0): array
   {
-    return $this->findBy(['studio' => $studio, 'status' => StudioUser::STATUS_ACTIVE]);
+    return $this->findBy(['studio' => $studio, 'status' => StudioUser::STATUS_ACTIVE], null, $limit, $offset);
   }
 
   public function findStudioAdmin(?Studio $studio): ?StudioUser

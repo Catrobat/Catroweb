@@ -7,14 +7,20 @@ namespace App\DB\EntityRepository;
 use App\DB\Entity\Flavor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 /**
  * @extends ServiceEntityRepository<Flavor>
  */
 class FlavorRepository extends ServiceEntityRepository
 {
-  public function __construct(ManagerRegistry $managerRegistry)
-  {
+  private const int CACHE_TTL = 86400;
+
+  public function __construct(
+    ManagerRegistry $managerRegistry,
+    private readonly CacheInterface $cache,
+  ) {
     parent::__construct($managerRegistry, Flavor::class);
   }
 
@@ -30,6 +36,10 @@ class FlavorRepository extends ServiceEntityRepository
 
   public function getAllFlavors(): array
   {
-    return $this->findAll();
+    return $this->cache->get('all_flavors', function (ItemInterface $item): array {
+      $item->expiresAfter(self::CACHE_TTL);
+
+      return $this->findAll();
+    });
   }
 }

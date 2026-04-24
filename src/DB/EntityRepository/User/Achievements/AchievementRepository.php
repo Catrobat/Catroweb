@@ -7,14 +7,20 @@ namespace App\DB\EntityRepository\User\Achievements;
 use App\DB\Entity\User\Achievements\Achievement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 /**
  * @extends ServiceEntityRepository<Achievement>
  */
 class AchievementRepository extends ServiceEntityRepository
 {
-  public function __construct(ManagerRegistry $managerRegistry)
-  {
+  private const int CACHE_TTL = 86400;
+
+  public function __construct(
+    ManagerRegistry $managerRegistry,
+    private readonly CacheInterface $cache,
+  ) {
     parent::__construct($managerRegistry, Achievement::class);
   }
 
@@ -28,7 +34,11 @@ class AchievementRepository extends ServiceEntityRepository
    */
   public function findAllEnabledAchievements(): array
   {
-    return $this->findBy(['enabled' => true], ['priority' => 'ASC']);
+    return $this->cache->get('enabled_achievements', function (ItemInterface $item): array {
+      $item->expiresAfter(self::CACHE_TTL);
+
+      return $this->findBy(['enabled' => true], ['priority' => 'ASC']);
+    });
   }
 
   public function countAllEnabledAchievements(): int

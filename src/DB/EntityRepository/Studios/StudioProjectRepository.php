@@ -21,9 +21,9 @@ class StudioProjectRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, StudioProject::class);
   }
 
-  public function findAllStudioProjects(Studio $studio): array
+  public function findAllStudioProjects(Studio $studio, ?int $limit = null, int $offset = 0): array
   {
-    return $this->findBy(['studio' => $studio]);
+    return $this->findBy(['studio' => $studio], null, $limit, $offset);
   }
 
   public function findStudioProject(Studio $studio, Project $project): ?StudioProject

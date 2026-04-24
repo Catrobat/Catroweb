@@ -95,7 +95,10 @@ class IndexController extends AbstractController
       }
     }
 
-    return new JsonResponse($result);
+    $response = new JsonResponse($result);
+    $response->headers->set('Cache-Control', 'public, max-age=300');
+
+    return $response;
   }
 
   #[Route(path: '/maintenance/close/{viewId}', name: 'close_maintenance_view', methods: ['POST'])]

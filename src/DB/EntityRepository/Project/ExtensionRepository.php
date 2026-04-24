@@ -7,14 +7,20 @@ namespace App\DB\EntityRepository\Project;
 use App\DB\Entity\Project\Extension;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 /**
  * @extends ServiceEntityRepository<Extension>
  */
 class ExtensionRepository extends ServiceEntityRepository
 {
-  public function __construct(ManagerRegistry $managerRegistry)
-  {
+  private const int CACHE_TTL = 86400;
+
+  public function __construct(
+    ManagerRegistry $managerRegistry,
+    private readonly CacheInterface $cache,
+  ) {
     parent::__construct($managerRegistry, Extension::class);
   }
 
@@ -33,11 +39,15 @@ class ExtensionRepository extends ServiceEntityRepository
 
   public function getActiveExtensions(): array
   {
-    return $this->createQueryBuilder('e')
-      ->where('e.enabled = :enabled')
-      ->setParameter('enabled', true)
-      ->getQuery()
-      ->getResult()
-    ;
+    return $this->cache->get('active_extensions', function (ItemInterface $item): array {
+      $item->expiresAfter(self::CACHE_TTL);
+
+      return $this->createQueryBuilder('e')
+        ->where('e.enabled = :enabled')
+        ->setParameter('enabled', true)
+        ->getQuery()
+        ->getResult()
+      ;
+    });
   }
 }
