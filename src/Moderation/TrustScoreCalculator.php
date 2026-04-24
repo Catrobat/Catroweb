@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Moderation;
 
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Moderation\ContentModerationActionRepository;
 use App\DB\EntityRepository\Moderation\ContentReportRepository;
-use App\DB\EntityRepository\Project\ProjectRepository;
-use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
@@ -28,8 +28,6 @@ class TrustScoreCalculator
 
   public function __construct(
     private readonly ContentReportRepository $report_repository,
-    private readonly ProjectRepository $program_repository,
-    private readonly UserCommentRepository $comment_repository,
     private readonly CacheItemPoolInterface $cache,
     private readonly ContentModerationActionRepository $action_repository,
     private readonly EntityManagerInterface $entity_manager,
@@ -87,19 +85,23 @@ class TrustScoreCalculator
   private function computeActivityScore(User $user): float
   {
     $user_id = $user->getId();
-    $project_count = $this->program_repository->count(['user' => $user_id]);
-    $comment_count = $this->comment_repository->count(['user' => $user_id]);
-    $follower_count = (int) $this->entity_manager->createQueryBuilder()
-      ->select('COUNT(f)')
-      ->from(User::class, 'f')
-      ->join('f.following', 'u')
-      ->where('u.id = :user_id')
-      ->setParameter('user_id', $user_id)
+
+    $counts = $this->entity_manager->createQueryBuilder()
+      ->select(
+        '(SELECT COUNT(p.id) FROM '.Project::class.' p WHERE p.user = :uid) AS project_count',
+        '(SELECT COUNT(c.id) FROM '.UserComment::class.' c WHERE c.user = :uid) AS comment_count',
+        '(SELECT COUNT(f.id) FROM '.User::class.' f JOIN f.following u WHERE u.id = :uid) AS follower_count',
+      )
+      ->from(User::class, 'dummy')
+      ->where('dummy.id = :uid')
+      ->setParameter('uid', $user_id)
       ->getQuery()
-      ->getSingleScalarResult()
+      ->getSingleResult()
     ;
 
-    $score = ($project_count * 0.3) + ($comment_count * 0.05) + ($follower_count * 0.02);
+    $score = ((int) $counts['project_count'] * 0.3)
+      + ((int) $counts['comment_count'] * 0.05)
+      + ((int) $counts['follower_count'] * 0.02);
 
     return min($score, self::MAX_ACTIVITY_SCORE);
   }

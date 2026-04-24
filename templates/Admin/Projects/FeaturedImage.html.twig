@@ -2,6 +2,6 @@
 
 {% block field %}
   <div>
-    <img src="{{ admin.getFeaturedImageUrl(object) }}" alt="Featured image" style="max-height: 80px; width: auto; border-radius: 6px; object-fit: cover;">
+    <img src="{{ admin.getFeaturedImageUrl(object) }}" alt="Featured image" style="max-height: 80px; width: auto; border-radius: 6px; object-fit: cover;" loading="lazy">
   </div>
 {% endblock %}

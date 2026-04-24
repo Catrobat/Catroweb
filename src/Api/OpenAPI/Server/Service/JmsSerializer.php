@@ -12,6 +12,12 @@ class JmsSerializer implements SerializerInterface
 {
   protected Serializer $serializer;
 
+  private ?object $lastSerializedObject = null;
+
+  private ?string $lastSerializedResult = null;
+
+  private ?string $lastSerializedFormat = null;
+
   public function __construct()
   {
     $namingStrategy = new SerializedNameAnnotationStrategy(new CamelCaseNamingStrategy());
@@ -25,7 +31,19 @@ class JmsSerializer implements SerializerInterface
 
   public function serialize($data, string $format): string
   {
-    return $this->serializer->serialize($data, $this->convertFormat($format));
+    if (is_object($data) && $data === $this->lastSerializedObject && $format === $this->lastSerializedFormat) {
+      return $this->lastSerializedResult;
+    }
+
+    $result = $this->serializer->serialize($data, $this->convertFormat($format));
+
+    if (is_object($data)) {
+      $this->lastSerializedObject = $data;
+      $this->lastSerializedResult = $result;
+      $this->lastSerializedFormat = $format;
+    }
+
+    return $result;
   }
 
   public function deserialize($data, string $type, string $format)

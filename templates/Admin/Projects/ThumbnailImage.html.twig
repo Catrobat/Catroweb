@@ -2,7 +2,7 @@
 {% block field %}
   <div style="">
     {% if admin.getThumbnailImageUrl(object) != null %}
-      <img src="{{ admin.getThumbnailImageUrl(object) }}" alt="Project thumbnail">
+      <img src="{{ admin.getThumbnailImageUrl(object) }}" alt="Project thumbnail" loading="lazy">
     {% else %}
       <span>No picture</span>
     {% endif %}
