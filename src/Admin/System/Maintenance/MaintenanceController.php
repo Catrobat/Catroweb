@@ -143,12 +143,14 @@ class MaintenanceController extends CRUDController
 
     $projectsSize = $this->get_dir_size($this->file_storage_dir);
     $usedSpaceRaw -= $projectsSize;
-    $whole_ram = (float) shell_exec("free | grep Mem | awk '{print $2}'") * 1_000;
-    $used_ram = (float) shell_exec("free | grep Mem | awk '{print $3}'") * 1_000;
-    $free_ram = (float) shell_exec("free | grep Mem | awk '{print $4}'") * 1_000;
-    $shared_ram = (float) shell_exec("free | grep Mem | awk '{print $5}'") * 1_000;
-    $cached_ram = (float) shell_exec("free | grep Mem | awk '{print $6}'") * 1_000;
-    $available_ram = (float) shell_exec("free | grep Mem | awk '{print $6}'") * 1_000;
+    $ram_output = (string) @shell_exec("free 2>/dev/null | grep Mem | awk '{print $2,$3,$4,$5,$6,$7}'");
+    $ram_parts = array_map('floatval', preg_split('/\s+/', trim($ram_output)) ?: []);
+    $whole_ram = ($ram_parts[0] ?? 0) * 1_000;
+    $used_ram = ($ram_parts[1] ?? 0) * 1_000;
+    $free_ram = ($ram_parts[2] ?? 0) * 1_000;
+    $shared_ram = ($ram_parts[3] ?? 0) * 1_000;
+    $cached_ram = ($ram_parts[4] ?? 0) * 1_000;
+    $available_ram = ($ram_parts[5] ?? 0) * 1_000;
     $free_ram_percentage = $whole_ram > 0 ? ($free_ram / $whole_ram) * 100 : 0;
     $used_ram_percentage = $whole_ram > 0 ? ($used_ram / $whole_ram) * 100 : 0;
     $shared_ram_percentage = $whole_ram > 0 ? ($shared_ram / $whole_ram) * 100 : 0;
@@ -179,8 +181,8 @@ class MaintenanceController extends CRUDController
       'storagePressureLevel' => $this->healthService->getStoragePressureLevel(
         $storageDisk['used_percentage'], (int) $storageDisk['free_raw']
       ),
-      'emailBudget' => $this->healthService->getEmailBudget(),
-      'emailBudgetLevel' => $this->healthService->getEmailBudgetLevel(),
+      'emailBudget' => $emailBudget = $this->healthService->getEmailBudget(),
+      'emailBudgetLevel' => $this->healthService->getEmailBudgetLevel($emailBudget['remaining']),
       'projectCounts' => $this->healthService->getProjectCounts(),
     ]);
   }
@@ -245,34 +247,21 @@ class MaintenanceController extends CRUDController
 
   private function get_dir_size(string $directory, ?array $extension = null): int
   {
-    $count_size = 0;
-    $count = 0;
-    $dir_array = preg_grep('#^([^.])#', scandir($directory) ?: []); // no hidden files
-    if (false === $dir_array) {
+    if (!is_dir($directory)) {
       return 0;
     }
 
-    foreach ($dir_array as $filename) {
-      if (null !== $extension && !in_array(pathinfo((string) $filename, PATHINFO_EXTENSION), $extension, true)) {
-        continue;
-      }
-
-      if ('..' == $filename) {
-        continue;
-      }
-      if ('.' == $filename) {
-        continue;
-      }
-      if (is_dir($directory.'/'.$filename)) {
-        $new_folder_size = $this->get_dir_size($directory.'/'.$filename);
-        $count_size += $new_folder_size;
-      } elseif (is_file($directory.'/'.$filename)) {
-        $count_size += filesize($directory.'/'.$filename);
-        ++$count;
-      }
+    // Sum exact file sizes (not block sizes) using find + ls + awk (portable across GNU/BusyBox)
+    // Exclude hidden files (matches legacy scandir behavior that skipped dotfiles)
+    $findCmd = sprintf('find %s -type f -not -name %s', escapeshellarg($directory), escapeshellarg('.*'));
+    if (null !== $extension) {
+      $patterns = array_map(static fn (string $ext): string => '-name '.escapeshellarg("*.{$ext}"), $extension);
+      $findCmd .= ' \( '.implode(' -o ', $patterns).' \)';
     }
 
-    return $count_size;
+    $result = @shell_exec($findCmd." -exec ls -ln {} + 2>/dev/null | awk '{s+=\$5} END {print s+0}'");
+
+    return \is_string($result) ? (int) trim($result) : 0;
   }
 
   private function setSizeOfObject(RemovableMemory $object, string $path, ?array $extension = null): void

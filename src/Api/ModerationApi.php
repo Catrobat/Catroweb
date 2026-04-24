@@ -17,7 +17,7 @@ use OpenAPI\Server\Model\ContentReportRequest;
 use OpenAPI\Server\Model\ResolveAppealRequest;
 use OpenAPI\Server\Model\ResolveReportRequest;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 class ModerationApi extends AbstractApiController implements ModerationApiInterface
 {

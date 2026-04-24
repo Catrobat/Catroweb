@@ -126,7 +126,7 @@ Encore
    */
   .cleanupOutputBeforeBuild()
   .enableBuildNotifications()
-  .enableSourceMaps()
+  .enableSourceMaps(!Encore.isProduction())
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
 
@@ -153,7 +153,13 @@ Encore
       ]),
       content: ['**/*.twig', '**/*.js'],
       safelist: {
-        standard: [/^swal2/, /^modal/, /^mdc/, /^data-bs-theme/, /^cookie-consent/, /^code-stats-row--level-/, /^cv-block--/],
+        standard: [
+          /^swal2/, /^modal/, /^mdc/, /^data-bs-theme/, /^cookie-consent/,
+          /^code-stats-row--level-/, /^cv-block--/,
+          /^projects-list/, /^comment-/, /^remix-graph-/,
+          /^notification-/, /^follower-/, /^following-/,
+          /^studio-/, /^lazyload/, /^carousel/,
+        ],
       },
       defaultExtractor: (content) => {
         return content.match(/[\w-/:]+(?<!:)/g) || []

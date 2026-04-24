@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2'
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml } from '../Components/HtmlEscape'
 import './RemixGraphInline.scss'
@@ -429,7 +428,8 @@ function positionActionMenu(menu, pointer) {
   menu.style.top = top + 'px'
 }
 
-function showUnavailableDialog(container) {
+async function showUnavailableDialog(container) {
+  const { default: Swal } = await import('sweetalert2')
   Swal.fire({
     title: container.dataset.transProjectNotAvailableTitle,
     text: container.dataset.transProjectNotAvailableDescription,

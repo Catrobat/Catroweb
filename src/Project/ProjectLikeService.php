@@ -68,6 +68,14 @@ class ProjectLikeService
   }
 
   /**
+   * @return array<int, int> map of type_id => count
+   */
+  public function getReactionCountsByType(string $project_id): array
+  {
+    return $this->project_like_repository->getReactionCountsByType($project_id);
+  }
+
+  /**
    * @return array{data: array, next_cursor: ?string, has_more: bool}
    */
   public function getReactionUsersPaginated(string $project_id, ?int $type, int $limit, ?string $cursor): array

@@ -50,7 +50,7 @@ class LookStatement extends Statement
   {
     $tmpStatements = parent::getStatements();
     foreach ($tmpStatements as $statement) {
-      if (null == $statement) {
+      if (null === $statement) {
         continue;
       }
       if (!$statement instanceof FileNameStatement) {

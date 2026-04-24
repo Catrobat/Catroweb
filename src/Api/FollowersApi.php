@@ -12,7 +12,7 @@ use App\User\UserManager;
 use OpenAPI\Server\Api\FollowersApiInterface;
 use OpenAPI\Server\Model\FollowersListResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 class FollowersApi extends AbstractApiController implements FollowersApiInterface
 {
@@ -58,14 +58,33 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
       return null;
     }
     $page_data = $load_data($user);
+    $users = $page_data['users'];
+
+    $user_ids = array_values(array_filter(
+      array_map(static fn (User $u): ?string => $u->getId(), $users),
+    ));
+
+    $loader = $this->facade->getLoader();
+    $following_ids = [];
+    $follows_you_ids = [];
+    if ($authenticated_user instanceof User) {
+      $following_ids = $loader->getFollowedUserIds($authenticated_user, $user_ids);
+      $follows_you_ids = $loader->getFollowerOfUserIds($authenticated_user, $user_ids);
+    }
+
+    $follower_counts = $loader->getFollowerCountsForUsers($user_ids);
+    $project_counts = $loader->getProjectCountsForUsers($user_ids);
 
     $responseCode = Response::HTTP_OK;
 
     return $this->facade->getResponseManager()->createFollowersListResponse(
-      $page_data['users'],
+      $users,
       $page_data['total_followers'],
       $page_data['total_following'],
-      $authenticated_user,
+      $following_ids,
+      $follows_you_ids,
+      $follower_counts,
+      $project_counts,
     );
   }
 
@@ -104,7 +123,14 @@ class FollowersApi extends AbstractApiController implements FollowersApiInterfac
       return;
     }
 
-    $this->facade->getProcessor()->followUser($user, $user_to_follow);
+    try {
+      $this->facade->getProcessor()->followUser($user, $user_to_follow);
+    } catch (\Exception) {
+      // Race condition: concurrent request already created the follow
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+
+      return;
+    }
 
     $responseCode = Response::HTTP_OK;
   }

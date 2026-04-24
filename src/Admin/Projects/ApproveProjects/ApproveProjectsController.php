@@ -65,7 +65,7 @@ class ApproveProjectsController extends CRUDController
   private function getRedirectionUrl(): string
   {
     $nextId = $this->getNextRandomApproveProjectId();
-    if (null == $nextId) {
+    if (null === $nextId) {
       return $this->admin->generateUrl('list');
     }
 

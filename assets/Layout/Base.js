@@ -16,9 +16,6 @@ import './Sidebar'
 import { LogoutTokenHandler } from '../Security/LogoutTokenHandler'
 import { showSnackbar } from './Snackbar'
 
-import Bugsnag from '@bugsnag/js'
-import BugsnagPerformance from '@bugsnag/browser-performance'
-
 import { initAnalyticsIfConsented, showCookieSettings } from './CookieConsent'
 
 // Start the stimulus app
@@ -27,8 +24,12 @@ import '../bootstrap'
 const appVersion = document.getElementById('app-version').dataset.appVersion
 const bugsnagApiKey = document.getElementById('bugsnag').dataset.apiKey
 if (bugsnagApiKey) {
-  Bugsnag.start({ apiKey: bugsnagApiKey, appVersion })
-  BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion })
+  import('@bugsnag/js').then(({ default: Bugsnag }) => {
+    Bugsnag.start({ apiKey: bugsnagApiKey, appVersion })
+    import('@bugsnag/browser-performance').then(({ default: BugsnagPerformance }) => {
+      BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion })
+    })
+  })
 }
 
 initAnalyticsIfConsented()

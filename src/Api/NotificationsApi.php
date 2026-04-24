@@ -10,7 +10,7 @@ use OpenAPI\Server\Api\NotificationsApiInterface;
 use OpenAPI\Server\Model\NotificationListResponse;
 use OpenAPI\Server\Model\NotificationsCountResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
 {
@@ -63,6 +63,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
     $responseCode = Response::HTTP_OK;
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $responseHeaders['Cache-Control'] = 'private, max-age=60';
 
     return $response;
   }

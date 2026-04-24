@@ -22,14 +22,14 @@ class FakeTranslationDelegate extends TranslationDelegate
     $translation_result = [];
 
     foreach ($to_translate as $text) {
-      if (null == $text) {
+      if (null === $text) {
         $translation_result[] = null;
         continue;
       }
 
       $translated_text = new TranslationResult();
       $translated_text->provider = 'itranslate';
-      if (null == $source_language) {
+      if (null === $source_language) {
         $translated_text->detected_source_language = 'en';
       }
 
@@ -46,7 +46,7 @@ class FakeTranslationDelegate extends TranslationDelegate
   {
     $translation_result = new TranslationResult();
     $translation_result->provider = 'itranslate';
-    if (null == $source_language) {
+    if (null === $source_language) {
       $translation_result->detected_source_language = 'en';
     }
 

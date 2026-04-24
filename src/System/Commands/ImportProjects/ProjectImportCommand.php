@@ -78,7 +78,7 @@ class ProjectImportCommand extends Command
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
-    if (null == $user) {
+    if (null === $user) {
       $output->writeln('User '.$username.' was not found!');
 
       return 1;

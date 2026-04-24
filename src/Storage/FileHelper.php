@@ -117,7 +117,7 @@ class FileHelper
           continue; // Keep .gitignores if not forced!
         }
 
-        if ('dir' == filetype($directory_path.DIRECTORY_SEPARATOR.$file)) {
+        if ('dir' === filetype($directory_path.DIRECTORY_SEPARATOR.$file)) {
           self::removeDirectory($directory_path.DIRECTORY_SEPARATOR.$file);
         } else {
           unlink($directory_path.DIRECTORY_SEPARATOR.$file);

@@ -38,7 +38,7 @@ class ExtractedCatrobatFile
       $this->xml_filenames[$i] = $this->decodeXmlEntities($this->xml_filenames[$i]);
     }
 
-    $xml = @simplexml_load_string($content);
+    $xml = @simplexml_load_string($content, \SimpleXMLElement::class, LIBXML_NONET);
     if (!$xml) {
       throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
     }

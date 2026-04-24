@@ -130,7 +130,7 @@ class TranslationDelegate
     $translation_result = [];
 
     foreach ($to_translate as $text) {
-      if (null == $text) {
+      if (null === $text) {
         $translation_result[] = null;
         continue;
       }

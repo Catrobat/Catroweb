@@ -43,7 +43,7 @@ class CreateFollowersCommand extends Command
     $user_name = $input->getArgument('user_name');
     $follower_name = $input->getArgument('follower');
 
-    if ($user_name == $follower_name) {
+    if ($user_name === $follower_name) {
       return 1;
     }
 

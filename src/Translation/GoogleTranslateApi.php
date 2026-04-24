@@ -159,7 +159,7 @@ class GoogleTranslateApi implements TranslationApiInterface
 
     $translation_result = new TranslationResult();
     $translation_result->provider = 'google';
-    if (null == $source_language) {
+    if (null === $source_language) {
       $translation_result->detected_source_language = $translation->getDetectedLanguageCode();
     }
 

@@ -21,9 +21,12 @@ class TagRepository extends ServiceEntityRepository
 
   public function getActiveTags(): array
   {
-    $tags = $this->findBy([
-      'enabled' => true,
-    ]);
+    $tags = $this->createQueryBuilder('t')
+      ->where('t.enabled = :enabled')
+      ->setParameter('enabled', true)
+      ->getQuery()
+      ->getResult()
+    ;
 
     $active_tags = [];
     /** @var Tag $tag */

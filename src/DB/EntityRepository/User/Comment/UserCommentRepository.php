@@ -46,6 +46,39 @@ class UserCommentRepository extends ServiceEntityRepository
     return $this->count(['studio' => $studio, 'parent_id' => null]);
   }
 
+  /**
+   * @param string[] $studioIds
+   *
+   * @return array<string, int>
+   */
+  public function countStudioCommentsBatch(array $studioIds): array
+  {
+    if ([] === $studioIds) {
+      return [];
+    }
+
+    $em = $this->getEntityManager();
+
+    /** @var array<array{studio_id: string, cnt: string}> $results */
+    $results = $em->createQueryBuilder()
+      ->select('IDENTITY(c.studio) AS studio_id, COUNT(c) AS cnt')
+      ->from(UserComment::class, 'c')
+      ->where('c.studio IN (:ids)')
+      ->andWhere('c.parent_id IS NULL')
+      ->setParameter('ids', $studioIds)
+      ->groupBy('c.studio')
+      ->getQuery()
+      ->getResult()
+    ;
+
+    $counts = [];
+    foreach ($results as $row) {
+      $counts[(string) $row['studio_id']] = (int) $row['cnt'];
+    }
+
+    return $counts;
+  }
+
   public function findStudioCommentById(string $comment_id): ?UserComment
   {
     return $this->findOneBy(['id' => $comment_id]);
@@ -92,7 +125,7 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function getProjectCommentOverviewListData(Project $project): array
   {
-    return $this->createQueryBuilder('c')
+    $results = $this->createQueryBuilder('c')
       ->innerJoin('c.user', 'cu')
       ->select(
         'c.id',
@@ -103,8 +136,7 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.uploadDate as upload_date',
         'c.parent_id as parent_id',
         'cu.id as user_id',
-        'cu.approved as user_approved',
-        '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
+        'cu.approved as user_approved')
       ->where('c.project = :project')
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
@@ -112,6 +144,8 @@ class UserCommentRepository extends ServiceEntityRepository
       ->getQuery()
       ->getResult()
     ;
+
+    return $this->attachReplyCounts($results);
   }
 
   public function getProjectCommentsPageData(Project $project, int $limit, ?\DateTimeInterface $cursor_date, ?string $cursor_id): array
@@ -128,8 +162,7 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.uploadDate as upload_date',
         'c.parent_id as parent_id',
         'cu.id as user_id',
-        'cu.approved as user_approved',
-        '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
+        'cu.approved as user_approved')
       ->where('c.project = :project')
       ->andWhere('c.parent_id IS NULL')
       ->andWhere('c.auto_hidden = false')
@@ -161,7 +194,7 @@ class UserCommentRepository extends ServiceEntityRepository
     }
 
     return [
-      'comments' => $results,
+      'comments' => $this->attachReplyCounts($results),
       'has_more' => $has_more,
     ];
   }
@@ -180,8 +213,7 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.uploadDate as upload_date',
         'c.parent_id as parent_id',
         'cu.id as user_id',
-        'cu.approved as user_approved',
-        '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
+        'cu.approved as user_approved')
       ->where('c.parent_id = :parentId')
       ->andWhere('c.auto_hidden = false')
       ->setParameter('parentId', $comment_id)
@@ -212,7 +244,7 @@ class UserCommentRepository extends ServiceEntityRepository
     }
 
     return [
-      'comments' => $results,
+      'comments' => $this->attachReplyCounts($results),
       'has_more' => $has_more,
     ];
   }
@@ -220,9 +252,9 @@ class UserCommentRepository extends ServiceEntityRepository
   /**
    * @throws NonUniqueResultException
    */
-  public function getProjectCommentDetailViewData(string $comment_id): array
+  public function getProjectCommentDetailViewData(string $comment_id): ?array
   {
-    return $this->createQueryBuilder('c')
+    $result = $this->createQueryBuilder('c')
       ->innerJoin('c.user', 'cu')
       ->innerJoin('c.project', 'cp')
       ->select(
@@ -235,14 +267,56 @@ class UserCommentRepository extends ServiceEntityRepository
         'c.parent_id as parent_id',
         'cp.id as program_id',
         'cu.id as user_id',
-        'cu.approved as user_approved',
-        '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies'
+        'cu.approved as user_approved'
       )
       ->where('c.id = :id')
       ->setParameter('id', $comment_id)
       ->getQuery()
       ->getOneOrNullResult()
     ;
+
+    if (null === $result) {
+      return null;
+    }
+
+    $results = $this->attachReplyCounts([$result]);
+
+    return $results[0];
+  }
+
+  /**
+   * Batch-loads reply counts for comment rows and attaches them as 'number_of_replies'.
+   *
+   * @param array<int, array<string, mixed>> $results
+   *
+   * @return array<int, array<string, mixed>>
+   */
+  private function attachReplyCounts(array $results): array
+  {
+    $commentIds = array_column($results, 'id');
+    if ([] === $commentIds) {
+      return $results;
+    }
+
+    $replyCounts = $this->createQueryBuilder('r')
+      ->select('r.parent_id AS parent_id, COUNT(r.id) AS cnt')
+      ->where('r.parent_id IN (:ids)')
+      ->setParameter('ids', $commentIds)
+      ->groupBy('r.parent_id')
+      ->getQuery()
+      ->getResult()
+    ;
+
+    $replyMap = [];
+    foreach ($replyCounts as $row) {
+      $replyMap[$row['parent_id']] = (int) $row['cnt'];
+    }
+
+    foreach ($results as &$row) {
+      $row['number_of_replies'] = $replyMap[$row['id']] ?? 0;
+    }
+
+    return $results;
   }
 
   public function getProjectCommentDetailViewCommentListData(string $parent_comment_id): array

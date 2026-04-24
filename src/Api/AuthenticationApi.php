@@ -13,7 +13,7 @@ use OpenAPI\Server\Model\OAuthLoginRequest;
 use OpenAPI\Server\Model\RefreshRequest;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 class AuthenticationApi extends AbstractApiController implements AuthenticationApiInterface
 {

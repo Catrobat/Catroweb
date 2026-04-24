@@ -521,7 +521,7 @@ trait ContextTrait
 
     /* @var Flavor $flavor */
     $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? Flavor::POCKETCODE);
-    if (null == $flavor) {
+    if (null === $flavor) {
       $new_flavor['name'] = $config['flavor'] ?? Flavor::POCKETCODE;
       $flavor = $this->insertFlavor($new_flavor);
     }
@@ -587,7 +587,7 @@ trait ContextTrait
 
     /* @var Flavor $flavor */
     $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? Flavor::POCKETCODE);
-    if (null == $flavor) {
+    if (null === $flavor) {
       $new_flavor['name'] = $config['flavor'] ?? Flavor::POCKETCODE;
       $flavor = $this->insertFlavor($new_flavor);
     }

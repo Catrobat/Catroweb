@@ -25,7 +25,7 @@ readonly class ProjectFlavorEventListener
   public function checkFlavor(Project $project): void
   {
     $request = $this->request_stack->getCurrentRequest();
-    if (null == $request) {
+    if (null === $request) {
       $project->setFlavor(Flavor::POCKETCODE);
     } else {
       $project->setFlavor($request->attributes->get('flavor'));

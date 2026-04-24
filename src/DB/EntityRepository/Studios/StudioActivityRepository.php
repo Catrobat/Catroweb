@@ -40,6 +40,35 @@ class StudioActivityRepository extends ServiceEntityRepository
     return $this->findOneBy(['id' => $activity_id]);
   }
 
+  /**
+   * @param string[] $studioIds
+   *
+   * @return array<string, int> studio ID => count
+   */
+  public function countStudioActivitiesBatch(array $studioIds): array
+  {
+    if ([] === $studioIds) {
+      return [];
+    }
+
+    $qb = $this->getEntityManager()->createQueryBuilder();
+    $rows = $qb->select('IDENTITY(a.studio) AS studio_id, COUNT(a.id) AS cnt')
+      ->from(StudioActivity::class, 'a')
+      ->where('a.studio IN (:ids)')
+      ->setParameter('ids', $studioIds)
+      ->groupBy('a.studio')
+      ->getQuery()
+      ->getArrayResult()
+    ;
+
+    $map = [];
+    foreach ($rows as $row) {
+      $map[$row['studio_id']] = (int) $row['cnt'];
+    }
+
+    return $map;
+  }
+
   public function findAllStudioActivitiesCombined(Studio $studio): array
   {
     $qb = $this->getEntityManager()->createQueryBuilder();

@@ -24,6 +24,10 @@ class ProjectsRequestValidator extends AbstractRequestValidator
 
   final public const int MAX_CREDITS_LENGTH = 3_000;
 
+  final public const string UPLOAD_EXTENSION = 'catrobat';
+
+  final public const int MAX_UPLOAD_SIZE_BYTES = 100 * 1_024 * 1_024; // 100 MB
+
   public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager)
   {
     parent::__construct($validator, $translator);
@@ -43,6 +47,19 @@ class ProjectsRequestValidator extends AbstractRequestValidator
     if (!$file->isValid()) {
       return $this->getValidationWrapper()->addError(
         $this->__('api.projectsPost.upload_error', [], $locale), $KEY
+      );
+    }
+
+    $extension = $file->getClientOriginalExtension();
+    if ('' !== $extension && self::UPLOAD_EXTENSION !== strtolower($extension)) {
+      return $this->getValidationWrapper()->addError(
+        $this->__('api.projectsPost.invalid_file_extension', [], $locale), $KEY
+      );
+    }
+
+    if ($file->getSize() > self::MAX_UPLOAD_SIZE_BYTES) {
+      return $this->getValidationWrapper()->addError(
+        $this->__('api.projectsPost.file_too_large', [], $locale), $KEY
       );
     }
 

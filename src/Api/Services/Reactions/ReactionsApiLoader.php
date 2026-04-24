@@ -47,19 +47,24 @@ class ReactionsApiLoader extends AbstractApiLoader
    */
   public function getReactionCounts(string $project_id): array
   {
+    $counts_by_type = $this->project_like_service->getReactionCountsByType($project_id);
+
     $counts = [
-      'total' => $this->project_like_service->totalLikeCount($project_id),
-      'thumbs_up' => $this->project_like_service->likeTypeCount($project_id, ProjectLike::TYPE_THUMBS_UP),
-      'smile' => $this->project_like_service->likeTypeCount($project_id, ProjectLike::TYPE_SMILE),
-      'love' => $this->project_like_service->likeTypeCount($project_id, ProjectLike::TYPE_LOVE),
-      'wow' => $this->project_like_service->likeTypeCount($project_id, ProjectLike::TYPE_WOW),
+      'total' => array_sum($counts_by_type),
+      'thumbs_up' => $counts_by_type[ProjectLike::TYPE_THUMBS_UP] ?? 0,
+      'smile' => $counts_by_type[ProjectLike::TYPE_SMILE] ?? 0,
+      'love' => $counts_by_type[ProjectLike::TYPE_LOVE] ?? 0,
+      'wow' => $counts_by_type[ProjectLike::TYPE_WOW] ?? 0,
     ];
 
-    $active_type_ids = $this->project_like_service->findProjectLikeTypes($project_id);
-    $counts['active_types'] = array_map(
-      static fn (int $type_id): string => ProjectLike::$TYPE_NAMES[$type_id] ?? '',
-      $active_type_ids
-    );
+    $active_types = [];
+    foreach (array_keys($counts_by_type) as $type_id) {
+      $name = ProjectLike::$TYPE_NAMES[$type_id] ?? '';
+      if ('' !== $name) {
+        $active_types[] = $name;
+      }
+    }
+    $counts['active_types'] = $active_types;
 
     return $counts;
   }

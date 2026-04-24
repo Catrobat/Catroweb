@@ -44,4 +44,35 @@ class StudioUserRepository extends ServiceEntityRepository
   {
     return $this->count(['studio' => $studio, 'role' => StudioUser::ROLE_ADMIN, 'status' => StudioUser::STATUS_ACTIVE]);
   }
+
+  /**
+   * @param string[] $studioIds
+   *
+   * @return array<string, int> studio ID => count
+   */
+  public function countStudioUsersBatch(array $studioIds): array
+  {
+    if ([] === $studioIds) {
+      return [];
+    }
+
+    $qb = $this->getEntityManager()->createQueryBuilder();
+    $rows = $qb->select('IDENTITY(su.studio) AS studio_id, COUNT(su.id) AS cnt')
+      ->from(StudioUser::class, 'su')
+      ->where('su.studio IN (:ids)')
+      ->andWhere('su.status = :status')
+      ->setParameter('ids', $studioIds)
+      ->setParameter('status', 'active')
+      ->groupBy('su.studio')
+      ->getQuery()
+      ->getArrayResult()
+    ;
+
+    $map = [];
+    foreach ($rows as $row) {
+      $map[$row['studio_id']] = (int) $row['cnt'];
+    }
+
+    return $map;
+  }
 }

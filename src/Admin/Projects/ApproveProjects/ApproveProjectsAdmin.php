@@ -71,11 +71,11 @@ class ApproveProjectsAdmin extends AbstractAdmin
 
   public function getContainingImageUrls(mixed $object): array
   {
-    if (null == $this->extractedProject) {
+    if (null === $this->extractedProject) {
       $this->extractedProject = $this->loadExtractedProject($object);
     }
 
-    if (null == $this->extractedProject) {
+    if (null === $this->extractedProject) {
       return [];
     }
 
@@ -86,11 +86,11 @@ class ApproveProjectsAdmin extends AbstractAdmin
 
   public function getContainingSoundUrls(mixed $object): array
   {
-    if (null == $this->extractedProject) {
+    if (null === $this->extractedProject) {
       $this->extractedProject = $this->loadExtractedProject($object);
     }
 
-    if (null == $this->extractedProject) {
+    if (null === $this->extractedProject) {
       return [];
     }
 
@@ -102,11 +102,11 @@ class ApproveProjectsAdmin extends AbstractAdmin
    */
   public function getContainingStrings(mixed $object): array
   {
-    if (null == $this->extractedProject) {
+    if (null === $this->extractedProject) {
       $this->extractedProject = $this->loadExtractedProject($object);
     }
 
-    if (null == $this->extractedProject) {
+    if (null === $this->extractedProject) {
       return [];
     }
 
@@ -118,11 +118,11 @@ class ApproveProjectsAdmin extends AbstractAdmin
    */
   public function getContainingCodeObjects(mixed $object): array
   {
-    if (null == $this->extractedProject) {
+    if (null === $this->extractedProject) {
       $this->extractedProject = $this->loadExtractedProject($object);
     }
 
-    if (null == $this->extractedProject || $this->extractedProject->hasScenes()) {
+    if (null === $this->extractedProject || $this->extractedProject->hasScenes()) {
       return [];
     }
 

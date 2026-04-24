@@ -51,7 +51,7 @@ class CreateRemixCommand extends Command
     $program_original = $this->remix_manipulation_program_manager->findOneByName($original_program_name);
     $program_remix = $this->remix_manipulation_program_manager->findOneByName($remix_program_name);
 
-    if (null == $program_original || null == $program_remix) {
+    if (null === $program_original || null === $program_remix) {
       return 2;
     }
 

@@ -46,7 +46,7 @@ class BroadcastScriptStatement extends Statement
 
   public function getMessage(): mixed
   {
-    if (null == $this->message) {
+    if (null === $this->message) {
       $this->message = $this->xmlTree->receivedMessage;
     }
 

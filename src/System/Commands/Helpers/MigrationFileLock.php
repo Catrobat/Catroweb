@@ -35,7 +35,7 @@ class MigrationFileLock
 
   public function unlock(): void
   {
-    if (null == $this->lock_file) {
+    if (null === $this->lock_file) {
       return;
     }
 

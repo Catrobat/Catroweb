@@ -149,7 +149,7 @@ class ImageRepository
 
   public function getImagick(): \Imagick
   {
-    if (null == $this->imagick) {
+    if (null === $this->imagick) {
       $this->imagick = new \Imagick();
     }
 

@@ -6,7 +6,7 @@ namespace App\Api;
 
 use App\DB\Entity\User\User;
 use Symfony\Component\RateLimiter\RateLimit;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
+use Symfony\Component\RateLimiter\RateLimiterFactoryInterface as RateLimiterFactory;
 
 trait RateLimitTrait
 {

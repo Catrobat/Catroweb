@@ -33,8 +33,11 @@ class ExtensionRepository extends ServiceEntityRepository
 
   public function getActiveExtensions(): array
   {
-    return $this->findBy([
-      'enabled' => true,
-    ]);
+    return $this->createQueryBuilder('e')
+      ->where('e.enabled = :enabled')
+      ->setParameter('enabled', true)
+      ->getQuery()
+      ->getResult()
+    ;
   }
 }

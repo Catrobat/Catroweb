@@ -8,6 +8,7 @@ use App\Admin\System\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
+use App\DB\Entity\User\Comment\UserComment;
 use App\Utils\RequestHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -747,5 +748,40 @@ class ProjectRepository extends ServiceEntityRepository
   public function findOneByName(string $programName): ?Project
   {
     return $this->findOneBy(['name' => $programName]);
+  }
+
+  /**
+   * Get comment counts for multiple projects in a single query.
+   *
+   * @param string[] $project_ids
+   *
+   * @return array<string, int> map of project_id => comment count
+   */
+  public function getCommentCountsForProjects(array $project_ids): array
+  {
+    if ([] === $project_ids) {
+      return [];
+    }
+
+    $em = $this->getEntityManager();
+    $qb = $em->createQueryBuilder();
+
+    /** @var array<array{project_id: string, cnt: string}> $results */
+    $results = $qb
+      ->select('IDENTITY(c.project) AS project_id, COUNT(c) AS cnt')
+      ->from(UserComment::class, 'c')
+      ->where($qb->expr()->in('c.project', ':ids'))
+      ->setParameter('ids', $project_ids)
+      ->groupBy('c.project')
+      ->getQuery()
+      ->getResult()
+    ;
+
+    $counts = [];
+    foreach ($results as $row) {
+      $counts[(string) $row['project_id']] = (int) $row['cnt'];
+    }
+
+    return $counts;
   }
 }
