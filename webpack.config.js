@@ -28,23 +28,6 @@ Encore
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()
 
-  .configureSplitChunks((splitChunks) => {
-    Object.assign(splitChunks.cacheGroups, {
-      vendors: {
-        test: /[\\/]node_modules[\\/]/,
-        name: 'vendors',
-        chunks: 'all',
-        priority: 10,
-        minChunks: 2,
-      },
-      common: {
-        minChunks: 2,
-        priority: 5,
-        reuseExistingChunk: true,
-      },
-    })
-  })
-
   // will require an extra script tag for runtime.js
   // but, you probably want this, unless you're building a single-page app
   .enableSingleRuntimeChunk()
