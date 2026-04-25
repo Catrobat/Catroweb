@@ -1,8 +1,8 @@
-import Swal from 'sweetalert2'
 import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 import { escapeAttr } from '../Components/HtmlEscape'
 
-export function showAppealDialog({ apiUrl, translations }) {
+export async function showAppealDialog({ apiUrl, translations }) {
+  const { default: Swal } = await import('sweetalert2')
   const placeholder = translations.placeholder || 'Explain why this content should not be hidden...'
 
   Swal.fire({
@@ -36,12 +36,12 @@ export function showAppealDialog({ apiUrl, translations }) {
         Swal.showValidationMessage('Please provide a reason for your appeal')
         return false
       }
-      return submitAppeal(apiUrl, reason, translations)
+      return submitAppeal(Swal, apiUrl, reason, translations)
     },
   })
 }
 
-function submitAppeal(apiUrl, reason, translations) {
+function submitAppeal(Swal, apiUrl, reason, translations) {
   return fetch(apiUrl, {
     method: 'POST',
     credentials: 'same-origin',

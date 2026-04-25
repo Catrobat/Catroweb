@@ -2,7 +2,6 @@ import { Controller } from '@hotwired/stimulus'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
 import { buildPictureHTML } from '../../Layout/ImageVariants'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
-import Swal from 'sweetalert2'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -298,6 +297,7 @@ export default class extends Controller {
       event.currentTarget.dataset.commentId ||
       event.target.closest('[data-comment-id]')?.dataset.commentId
 
+    const { default: Swal } = await import('sweetalert2')
     const result = await Swal.fire({
       title: this.element.dataset.transAreYouSure || 'Are you sure?',
       text: this.element.dataset.transNoWayOfReturn || 'This cannot be undone.',

@@ -1,5 +1,3 @@
-import Swal from 'sweetalert2'
-
 /**
  * Handles 403 responses that indicate account-state issues (unverified email, suspended account).
  * Parses the JSON body and shows an appropriate SweetAlert2 dialog.
@@ -8,7 +6,8 @@ import Swal from 'sweetalert2'
  * @param {object} translations - Translation keys: { unverified, suspended, error }
  * @param {string} fallbackMsg  - Default message when 403 is not an account-state error
  */
-export function handleAccountState403(response, translations, fallbackMsg) {
+export async function handleAccountState403(response, translations, fallbackMsg) {
+  const { default: Swal } = await import('sweetalert2')
   return response
     .json()
     .then((body) => {

@@ -5,7 +5,6 @@
  * Adapted by the Catroweb Project
  */
 
-import Swal from 'sweetalert2'
 import { showSnackbar, SnackbarDuration } from './Snackbar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 
@@ -112,6 +111,7 @@ async function showThemePicker(menuItem) {
       <input id="theme-picker-value" type="hidden" value="${escapeAttr(activeTheme)}">
     </div>`
 
+  const { default: Swal } = await import('sweetalert2')
   const result = await Swal.fire({
     title: menuItem.dataset.transTitle || 'Theme',
     html: renderThemePickerHtml(selectedTheme),

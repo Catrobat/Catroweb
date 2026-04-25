@@ -1,8 +1,8 @@
 /* global globalConfiguration */
-import Swal from 'sweetalert2'
 
 export default class MessageDialogs {
-  static showErrorMessage(message, retryCallback = null) {
+  static async showErrorMessage(message, retryCallback = null) {
+    const { default: Swal } = await import('sweetalert2')
     const options = {
       title: globalConfiguration.messages.errorTitle,
       text: message,
@@ -30,12 +30,13 @@ export default class MessageDialogs {
     })
   }
 
-  static showErrorList(errors) {
+  static async showErrorList(errors) {
     if (errors == null) return
     if (!Array.isArray(errors)) {
       errors = Object.values(errors)
     }
 
+    const { default: Swal } = await import('sweetalert2')
     return Swal.fire({
       title: globalConfiguration.messages.errorTitle,
       html: '<ul class="text-start"><li>' + errors.join('</li><li>') + '</li></ul>',
@@ -49,7 +50,8 @@ export default class MessageDialogs {
     })
   }
 
-  static showSuccessMessage(message) {
+  static async showSuccessMessage(message) {
+    const { default: Swal } = await import('sweetalert2')
     return Swal.fire({
       title: globalConfiguration.messages.successTitle,
       text: message,

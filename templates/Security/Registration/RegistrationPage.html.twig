@@ -1,10 +1,13 @@
 {% extends 'Layout/Base.html.twig' %}
 
-{% block head %}
-  {{ encore_entry_link_tags('registration_page') }}
+{% block og_meta %}
   <meta property="og:title" content="{{ 'meta.og.title.register'|trans({}, 'catroweb') }}">
   <meta property="og:description" content="{{ 'meta.og.description.register'|trans({}, 'catroweb') }}">
   <meta property="og:type" content="website">
+{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('registration_page') }}
 {% endblock %}
 
 {% block header '' %}

@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2'
 import 'external-svg-loader'
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
@@ -176,7 +175,8 @@ function updateEmptyStates(data) {
   }
 }
 
-function showNewAchievementAnimation(achievement) {
+async function showNewAchievementAnimation(achievement) {
+  const { default: Swal } = await import('sweetalert2')
   Swal.fire({
     html: getNewAchievementAnimationHtml(achievement),
     customClass: {

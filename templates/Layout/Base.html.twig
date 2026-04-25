@@ -47,8 +47,31 @@
 
   <meta property="og:site_name" content="Catrobat">
   {% if app.request.attributes.get('_route') %}
-    <link rel="canonical" href="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|default({})) }}">
+    {% set _canonical_url = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|default({})) %}
+    <link rel="canonical" href="{{ _canonical_url }}">
   {% endif %}
+
+  {# Default OG/Twitter tags — child templates override this block with page-specific tags #}
+  {% block og_meta %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ block('title')|striptags|trim|escape('html_attr') }}">
+    {% if block('meta_description') is defined and block('meta_description') is not empty %}
+      <meta property="og:description" content="{{ block('meta_description')|striptags|trim|escape('html_attr') }}">
+    {% else %}
+      <meta property="og:description" content="{{ 'meta.description'|trans({}, 'catroweb')|escape('html_attr') }}">
+    {% endif %}
+    {% if _canonical_url is defined %}
+      <meta property="og:url" content="{{ _canonical_url }}">
+    {% endif %}
+    <meta property="og:image" content="{{ absolute_url(asset('images/logo/logo_pocketcode.png')) }}">
+    <meta name="twitter:card" content="summary">
+  {% endblock %}
+
+  {% if _canonical_url is defined %}
+    <link rel="alternate" hreflang="{{ app.request.locale|slice(0, 2) }}" href="{{ _canonical_url }}">
+    <link rel="alternate" hreflang="x-default" href="{{ _canonical_url }}">
+  {% endif %}
+
   {% block head %}{% endblock %}
 </head>
 

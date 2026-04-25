@@ -1,5 +1,3 @@
-import Swal from 'sweetalert2'
-
 export class ProjectEditorDialog {
   constructor(titleText, confirmText, denyText) {
     this.titleText = titleText
@@ -7,7 +5,8 @@ export class ProjectEditorDialog {
     this.denyText = denyText
   }
 
-  show(callback) {
+  async show(callback) {
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: this.titleText,
       icon: 'question',

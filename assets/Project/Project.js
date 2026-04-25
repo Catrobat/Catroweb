@@ -1,5 +1,4 @@
 import { Modal, Tab } from 'bootstrap'
-import Swal from 'sweetalert2'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { redirect } from '../Components/RedirectButton'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
@@ -241,7 +240,8 @@ export const Project = function (config) {
     console.error('Downloading ' + filename + ' failed')
   }
 
-  function showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText) {
+  async function showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText) {
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       icon: 'error',
       title: isNotSupportedTitle,
@@ -258,11 +258,12 @@ export const Project = function (config) {
   // Refactoring would be nice!
   //
 
-  function showErrorAlert(message) {
+  async function showErrorAlert(message) {
     if (typeof message !== 'string' || message === '') {
       message = 'Oops, that did not work. Please try again!'
     }
 
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       icon: 'error',
       title: 'Oops!',
@@ -764,9 +765,10 @@ document.addEventListener('DOMContentLoaded', function () {
 // --------------------------------
 // Project settings (options menu toggles)
 
-function confirmAndUpdate(item, confirmText, payload, onSuccess) {
+async function confirmAndUpdate(item, confirmText, payload, onSuccess) {
   const projectId = item.dataset.projectId
 
+  const { default: Swal } = await import('sweetalert2')
   Swal.fire({
     title: item.dataset.transConfirmTitle,
     html: confirmText,
@@ -887,10 +889,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const deleteItem = document.getElementById('top-app-bar__btn-delete-project')
   if (deleteItem) {
-    deleteItem.addEventListener('click', function () {
+    deleteItem.addEventListener('click', async function () {
       const projectId = deleteItem.dataset.projectId
       const baseUrl = document.querySelector('#js-api-routing').dataset.baseUrl
 
+      const { default: Swal } = await import('sweetalert2')
       Swal.fire({
         title: deleteItem.dataset.transConfirmTitle,
         html: deleteItem.dataset.transConfirmText,

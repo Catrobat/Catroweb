@@ -1,7 +1,6 @@
 /* global myProfileConfiguration */
 
 import { normalizeApiResponse } from '../Api/ResponseHelper'
-import Swal from 'sweetalert2'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
@@ -383,11 +382,12 @@ export class OwnProjectList {
     }
   }
 
-  _actionDeleteProject(id) {
+  async _actionDeleteProject(id) {
     const projectName = escapeHtml(this.projectsData[id].name)
     const msgParts = this.actionConfiguration.delete.confirmationText
       .replace('%programName%', '”' + projectName + '”')
       .split('\n')
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: msgParts[0],
       html: msgParts[1] + '<br><br>' + msgParts[2],
@@ -425,12 +425,13 @@ export class OwnProjectList {
     shareOrCopy(projectUrl, () => showSnackbar('#share-snackbar', successMsg))
   }
 
-  _actionToggleVisibility(id) {
+  async _actionToggleVisibility(id) {
     const self = this
     const project = this.projectsData[id]
     const msgParts = this.actionConfiguration.visibility.confirmationText
       .replaceAll('%programName%', '”' + escapeHtml(project.name) + '”')
       .split('\n')
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: msgParts[0],
       html: project.private ? msgParts[3] : msgParts[1] + '<br><br>' + msgParts[2],
@@ -485,7 +486,7 @@ export class OwnProjectList {
     })
   }
 
-  _actionToggleNotForKids(id) {
+  async _actionToggleNotForKids(id) {
     const self = this
     const project = this.projectsData[id]
     const nfkConfig = this.actionConfiguration.notForKids
@@ -497,6 +498,7 @@ export class OwnProjectList {
     }
 
     const newValue = currentValue === 0
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: nfkConfig.confirmTitle,
       html: newValue ? nfkConfig.confirmMark : nfkConfig.confirmUnmark,

@@ -7,7 +7,6 @@ import '../Components/TextField'
 import '../Components/TabBar'
 import { Modal } from 'bootstrap'
 import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle'
-import Swal from 'sweetalert2'
 import MessageDialogs from '../Components/MessageDialogs'
 import { ApiDeleteFetch, ApiFetch, ApiPatchFetch } from '../Api/ApiHelper'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
@@ -292,9 +291,10 @@ class OwnProfile {
 
   initDeleteAccount() {
     const routingDataset = document.getElementById('js-api-routing').dataset
-    document.getElementById('btn-delete-account').addEventListener('click', () => {
+    document.getElementById('btn-delete-account').addEventListener('click', async () => {
       const msgParts =
         myProfileConfiguration.userSettings.deleteAccount.confirmationText.split('\n')
+      const { default: Swal } = await import('sweetalert2')
       Swal.fire({
         title: msgParts[0],
         html: msgParts[1] + '<br><br>' + msgParts[2],
