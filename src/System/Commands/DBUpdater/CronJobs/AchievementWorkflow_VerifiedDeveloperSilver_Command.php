@@ -42,7 +42,7 @@ class AchievementWorkflow_VerifiedDeveloperSilver_Command extends Command
     }
 
     $qb = $this->user_repository->createQueryBuilder('u');
-    $qb->leftJoin(UserAchievement::class, 'ua', 'WITH', 'u.id = ua.user AND ua.achievement = :aID')
+    $qb->leftJoin(UserAchievement::class, 'ua', 'ON', 'u.id = ua.user AND ua.achievement = :aID')
       ->where('ua.id IS NULL')
       ->setParameter('aID', $achievement->getId())
       ->setMaxResults(500)

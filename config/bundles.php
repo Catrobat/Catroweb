@@ -33,4 +33,5 @@ return [
   Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
   Bugsnag\BugsnagBundle\BugsnagBundle::class => ['all' => true],
   Http\HttplugBundle\HttplugBundle::class => ['all' => true],
+  Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
 ];

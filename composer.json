@@ -30,6 +30,7 @@
     "jms/serializer-bundle": "*",
     "lexik/jwt-authentication-bundle": "3.2.*",
     "php-http/httplug-bundle": "^2.0",
+    "presta/sitemap-bundle": "^4.3",
     "ramsey/uuid": "4.9.*",
     "ramsey/uuid-doctrine": "2.1.*",
     "rosell-dk/webp-convert": "2.9.*",

@@ -211,7 +211,7 @@ class FeaturedRepository extends ServiceEntityRepository
     }
 
     $query_builder
-      ->innerJoin(Project::class, 'p', Join::WITH,
+      ->innerJoin(Project::class, 'p', Join::ON,
         $query_builder->expr()->eq('e.project', 'p')->__toString())
       ->andWhere($query_builder->expr()->lte('p.language_version', ':max_version'))
       ->setParameter('max_version', $max_version)

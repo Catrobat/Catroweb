@@ -1,40 +1,53 @@
-import { GoogleCharts } from 'google-charts'
+import { Chart, PieController, ArcElement, Tooltip, Legend, Title } from 'chart.js'
+
+Chart.register(PieController, ArcElement, Tooltip, Legend, Title)
 
 export class PieChart {
-  constructor() {
-    this.isLoaded = false
-    this.queue = [] // Queue to hold add requests until Google Charts is loaded
-    this.init()
-  }
-
-  init() {
-    GoogleCharts.load(() => {
-      this.isLoaded = true
-      this.queue.forEach(({ elementId, dataArray, title }) =>
-        this.drawChart(elementId, dataArray, title),
-      )
-      this.queue = [] // Clear the queue after processing
-    })
-  }
-
   add(elementId, dataArray, title) {
-    if (!this.isLoaded) {
-      console.warn('Google Charts is not loaded yet, queuing the chart rendering.')
-      this.queue.push({ elementId, dataArray, title }) // Queue the request
+    const container = document.getElementById(elementId)
+    if (!container) {
       return
     }
 
-    this.drawChart(elementId, dataArray, title)
-  }
+    container.innerHTML = ''
+    const canvas = document.createElement('canvas')
+    container.appendChild(canvas)
 
-  drawChart(elementId, dataArray, title) {
-    const dataSpace = new GoogleCharts.api.visualization.arrayToDataTable(dataArray)
-    const optionsSpace = {
-      title,
-      is3D: true,
-    }
+    const labels = dataArray.slice(1).map((row) => row[0])
+    const values = dataArray.slice(1).map((row) => row[1])
 
-    const chart = new GoogleCharts.api.visualization.PieChart(document.getElementById(elementId))
-    chart.draw(dataSpace, optionsSpace)
+    new Chart(canvas, {
+      type: 'pie',
+      data: {
+        labels,
+        datasets: [
+          {
+            data: values,
+            backgroundColor: [
+              '#3366cc',
+              '#dc3912',
+              '#ff9900',
+              '#109618',
+              '#990099',
+              '#0099c6',
+              '#dd4477',
+              '#66aa00',
+              '#b82e2e',
+              '#316395',
+            ],
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: title,
+          },
+        },
+      },
+    })
   }
 }

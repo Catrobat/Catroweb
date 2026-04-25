@@ -65,13 +65,15 @@ class TwigExtension extends AbstractExtension
 
   public static function humanFriendlyNumber(mixed $input, TranslatorInterface $translator, mixed $user_locale): bool|string
   {
-    // Check if the input is numeric or a numeric string
     if (!is_numeric($input)) {
       return $input ?? '0';
     }
 
-    // Handle the case where the input is a string representing a large number
     $input = (string) $input;
+
+    if (!\is_string($user_locale) || !preg_match('/^[a-zA-Z]/', $user_locale)) {
+      $user_locale = 'en_US';
+    }
 
     $number_formatter = new \NumberFormatter($user_locale, \NumberFormatter::DECIMAL);
 

@@ -157,7 +157,7 @@ class UserManager
     $result = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
       ->from(User::class, 'user')
-      ->leftjoin(Project::class, 'project', Join::WITH, 'user.id = project.user')
+      ->leftjoin(Project::class, 'project', Join::ON, 'user.id = project.user')
       ->where('user.createdAt <= :date')
       ->setParameter('date', new \DateTime(sprintf('-%d years', $years)))
       ->groupBy('user.id')
