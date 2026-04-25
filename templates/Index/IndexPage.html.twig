@@ -12,8 +12,7 @@
             imagesizes="(min-width: 1200px) 960px, 100vw"
             type="image/avif"
             fetchpriority="high">
-    {% endif %}
-    {% if _variants.webp1x is defined %}
+    {% elseif _variants.webp1x is defined %}
       <link rel="preload" as="image"
             href="{{ _variants.webp1x }}"
             imagesrcset="{{ _variants.webp1x }} 1x{% if _variants.webp2x is defined %}, {{ _variants.webp2x }} 2x{% endif %}"
