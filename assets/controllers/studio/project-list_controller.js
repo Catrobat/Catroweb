@@ -3,7 +3,6 @@ import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
 import { buildPictureHTML } from '../../Layout/ImageVariants'
-import Swal from 'sweetalert2'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -294,6 +293,7 @@ export default class extends Controller {
   }
 
   async confirmRemoveProject(projectId) {
+    const { default: Swal } = await import('sweetalert2')
     const result = await Swal.fire({
       title: this.element.dataset.transRemoveFromStudioTitle || 'Remove project from studio?',
       text:
@@ -317,6 +317,7 @@ export default class extends Controller {
   }
 
   async openAddProjectModal() {
+    const { default: Swal } = await import('sweetalert2')
     try {
       // Derive base from projectsUrl (e.g., "/index_test.php/api/studios/1/projects" -> "/index_test.php/api/studios/1")
       const studioBase = this.projectsUrlValue.replace(/\/projects$/, '')

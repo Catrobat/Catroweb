@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2'
 import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { REPORT_CATEGORIES } from './ReportCategories'
@@ -20,7 +19,7 @@ const REPORT_CATEGORY_ICONS = {
   inappropriate_content: 'hide_source',
 }
 
-export function showReportDialog({
+export async function showReportDialog({
   contentType,
   contentId,
   apiUrl,
@@ -45,6 +44,7 @@ export function showReportDialog({
   const sessionKey = SESSION_KEY_PREFIX + contentType + '_' + contentId
   const oldData = JSON.parse(sessionStorage.getItem(sessionKey) || '{}')
 
+  const { default: Swal } = await import('sweetalert2')
   Swal.fire({
     title: translations.title || 'Report',
     html: buildReportHtml(categories, translations, oldData),
@@ -68,7 +68,7 @@ export function showReportDialog({
         return false
       }
 
-      return submitReport(apiUrl, { category, note }, translations, sessionKey)
+      return submitReport(Swal, apiUrl, { category, note }, translations, sessionKey)
     },
     didOpen: (popup) => {
       const categoryValueInput = popup.querySelector('#report-category-value')
@@ -121,7 +121,7 @@ export function showReportDialog({
   })
 }
 
-function submitReport(apiUrl, { category, note }, translations, sessionKey) {
+function submitReport(Swal, apiUrl, { category, note }, translations, sessionKey) {
   return fetch(apiUrl, {
     method: 'POST',
     credentials: 'same-origin',

@@ -1,4 +1,3 @@
-import Swal from 'sweetalert2'
 import '../Components/TabBar'
 import './Profile.scss'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
@@ -30,7 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     followsMe: container.dataset.transFollowsMe,
   }
 
-  function showVerificationAlert(message) {
+  async function showVerificationAlert(message) {
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       text: message,
       icon: 'warning',
@@ -223,7 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
       })
   }
 
-  function handleUnfollow(targetUserId, username) {
+  async function handleUnfollow(targetUserId, username) {
+    const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: trans.unfollowQuestion,
       icon: 'question',

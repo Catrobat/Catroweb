@@ -1,5 +1,3 @@
-import Swal from 'sweetalert2'
-
 export class OAuthHandler {
   constructor() {
     const oAuthGreeting = document.querySelector('.js-oauth-greeting')
@@ -9,8 +7,9 @@ export class OAuthHandler {
     this.infoConfirm = oAuthGreeting.dataset.transOk
   }
 
-  showOAuthFirstLoginInformationIfNecessary() {
+  async showOAuthFirstLoginInformationIfNecessary() {
     if (this.show === '1' && localStorage.getItem('oauthSignIn') !== '1') {
+      const { default: Swal } = await import('sweetalert2')
       Swal.fire({
         title: this.infoTitle,
         html: this.infoText,

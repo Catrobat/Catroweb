@@ -3,7 +3,6 @@ import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
 import { buildPictureHTML } from '../../Layout/ImageVariants'
 import { MDCMenu } from '@material/menu'
-import Swal from 'sweetalert2'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -173,6 +172,7 @@ export default class extends Controller {
     const { url, errorMessage, confirmButton, cancelButton, confirmText } =
       event.currentTarget.dataset
 
+    const { default: Swal } = await import('sweetalert2')
     const result = await Swal.fire({
       title: confirmText || 'Promote this member to admin?',
       icon: 'warning',
@@ -214,6 +214,7 @@ export default class extends Controller {
     const { url, errorMessage, confirmButton, cancelButton, confirmText } =
       event.currentTarget.dataset
 
+    const { default: Swal } = await import('sweetalert2')
     const result = await Swal.fire({
       title: confirmText || 'Remove this member from the studio?',
       icon: 'warning',
@@ -254,6 +255,7 @@ export default class extends Controller {
   async demoteAdminToMember(event) {
     const { url, errorMessage } = event.currentTarget.dataset
 
+    const { default: Swal } = await import('sweetalert2')
     const result = await Swal.fire({
       title: 'Demote this admin to member?',
       icon: 'warning',

@@ -3859,7 +3859,6 @@ __metadata:
     "@eslint/js": "npm:^10.0.1"
     "@fontsource/roboto": "npm:^5.2.6"
     "@hotwired/stimulus": "npm:^3.2.2"
-    "@material/checkbox": "npm:^14.0.0"
     "@material/chips": "npm:^14.0.0"
     "@material/circular-progress": "npm:^14.0.0"
     "@material/fab": "npm:^14.0.0"
@@ -3871,7 +3870,6 @@ __metadata:
     "@material/menu": "npm:^14.0.0"
     "@material/menu-surface": "npm:^14.0.0"
     "@material/notched-outline": "npm:^14.0.0"
-    "@material/progress-indicator": "npm:^14.0.0"
     "@material/radio": "npm:^14.0.0"
     "@material/select": "npm:^14.0.0"
     "@material/snackbar": "npm:^14.0.0"
@@ -3892,7 +3890,6 @@ __metadata:
     bootstrap: "npm:^5.3.8"
     browserslist: "npm:^4.28.2"
     chart.js: "npm:^4.5.1"
-    clipboard: "npm:^2.0.11"
     dotenv: "npm:^17.4.2"
     eslint: "npm:^10.2.1"
     eslint-config-prettier: "npm:^10.1.8"
@@ -3904,7 +3901,6 @@ __metadata:
     file-loader: "npm:^6.2.0"
     glob-all: "npm:^3.3.1"
     globals: "npm:^17.5.0"
-    jwt-decode: "npm:^4.0.0"
     lazysizes: "npm:^5.3.2"
     material-icons: "npm:^1.13.14"
     noop-webpack-plugin: "npm:^1.0.1"
@@ -3987,17 +3983,6 @@ __metadata:
   version: 4.1.0
   resolution: "cli-width@npm:4.1.0"
   checksum: 10c0/1fbd56413578f6117abcaf858903ba1f4ad78370a4032f916745fa2c7e390183a9d9029cf837df320b0fdce8137668e522f60a30a5f3d6529ff3872d265a955f
-  languageName: node
-  linkType: hard
-
-"clipboard@npm:^2.0.11":
-  version: 2.0.11
-  resolution: "clipboard@npm:2.0.11"
-  dependencies:
-    good-listener: "npm:^1.2.2"
-    select: "npm:^1.1.2"
-    tiny-emitter: "npm:^2.0.0"
-  checksum: 10c0/23bdf16b875bd2dd101eeefae3c25a2fbd990b613fad3d227ca6719d1b81a3c6f69701b494393fdecd07d98380024f82d045f464124dbbafbcf0557f2921978f
   languageName: node
   linkType: hard
 
@@ -4485,13 +4470,6 @@ __metadata:
   version: 1.0.0
   resolution: "delayed-stream@npm:1.0.0"
   checksum: 10c0/d758899da03392e6712f042bec80aa293bbe9e9ff1b2634baae6a360113e708b91326594c8a486d475c69d6259afb7efacdc3537bfcda1c6c648e390ce601b19
-  languageName: node
-  linkType: hard
-
-"delegate@npm:^3.1.2":
-  version: 3.2.0
-  resolution: "delegate@npm:3.2.0"
-  checksum: 10c0/f8512633514f375b8675018088fdd679d92b84246ad6ba1de9fbc4ea7630f7fb0ff8772ac86c37a68233885f58c6b8b70676d7366f38cb2dcbf7baa474e2362d
   languageName: node
   linkType: hard
 
@@ -5516,15 +5494,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"good-listener@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "good-listener@npm:1.2.2"
-  dependencies:
-    delegate: "npm:^3.1.2"
-  checksum: 10c0/5c532f2e223f1f3a12504077d6d960986979a7923fb428a26bde012b88ac57ffba1b28507f95bd16a73c1ae805fdb38d26d9442d538dd559fad159a7f58243fe
-  languageName: node
-  linkType: hard
-
 "gopd@npm:^1.2.0":
   version: 1.2.0
   resolution: "gopd@npm:1.2.0"
@@ -6081,13 +6050,6 @@ __metadata:
     graceful-fs:
       optional: true
   checksum: 10c0/7f4f43b08d1869ded8a6822213d13ae3b99d651151d77efd1557ced0889c466296a7d9684e397bd126acf5eb2cfcb605808c3e681d0fdccd2fe5a04b47e76c0d
-  languageName: node
-  linkType: hard
-
-"jwt-decode@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "jwt-decode@npm:4.0.0"
-  checksum: 10c0/de75bbf89220746c388cf6a7b71e56080437b77d2edb29bae1c2155048b02c6b8c59a3e5e8d6ccdfd54f0b8bda25226e491a4f1b55ac5f8da04cfbadec4e546c
   languageName: node
   linkType: hard
 
@@ -7737,13 +7699,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"select@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "select@npm:1.1.2"
-  checksum: 10c0/5dbd871c03a52aa70ce29ab46e9115d26cb34404717e7e705e678b3b4d535bacfa0a4c4c2d32262acec7b6fdfb6827e8980ea4ef969a8681f8a0b752331a0a02
-  languageName: node
-  linkType: hard
-
 "semver@npm:^6.3.1":
   version: 6.3.1
   resolution: "semver@npm:6.3.1"
@@ -8282,13 +8237,6 @@ __metadata:
   version: 1.0.3-a
   resolution: "textfilljs@npm:1.0.3-a"
   checksum: 10c0/a11786ff83ecb430910cca44a64668930bd514e14951e0875d20ca47af3fbcbf47e760b690ae4417c5ac5569cca12161b68a9c2e46def5fd19cf65b92b121eb2
-  languageName: node
-  linkType: hard
-
-"tiny-emitter@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "tiny-emitter@npm:2.1.0"
-  checksum: 10c0/459c0bd6e636e80909898220eb390e1cba2b15c430b7b06cec6ac29d87acd29ef618b9b32532283af749f5d37af3534d0e3bde29fdf6bcefbf122784333c953d
   languageName: node
   linkType: hard
 
