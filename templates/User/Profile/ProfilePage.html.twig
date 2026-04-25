@@ -2,12 +2,7 @@
 
 {% block title %}{{ profile.username }} – Catrobat{% endblock %}
 
-{% block head %}
-
-  {{ encore_entry_link_tags('user_profile_page') }}
-  {{ encore_entry_link_tags('user_follower_overview') }}
-  {{ encore_entry_link_tags('user_profile_studios') }}
-
+{% block og_meta %}
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ profile.username|escape('html_attr') }} – Catrobat">
   <meta property="og:description" content="{{ 'meta.og.description.profile'|trans({'%username%': profile.username}, 'catroweb')|escape('html_attr') }}">
@@ -22,7 +17,12 @@
     <meta name="twitter:title" content="{{ profile.username|escape('html_attr') }} – Catrobat">
     <meta name="twitter:image" content="{{ og_avatar_url }}">
   {% endif %}
+{% endblock %}
 
+{% block head %}
+  {{ encore_entry_link_tags('user_profile_page') }}
+  {{ encore_entry_link_tags('user_follower_overview') }}
+  {{ encore_entry_link_tags('user_profile_studios') }}
 {% endblock %}
 
 {% block body %}

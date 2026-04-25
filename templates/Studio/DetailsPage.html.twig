@@ -3,9 +3,7 @@
 
 {% block title %}{{ studio.name|escape('html_attr') }} – Catrobat{% endblock %}
 
-{% block head %}
-  {{ encore_entry_link_tags('studio_detail_page') }}
-
+{% block og_meta %}
   {% if studio.description is not empty %}
     {% set og_description = studio.description|striptags|slice(0, 200)|escape('html_attr') %}
   {% else %}
@@ -28,6 +26,10 @@
   <meta name="twitter:title" content="{{ studio.name|escape('html_attr') }} – Catrobat">
   <meta name="twitter:description" content="{{ og_description }}">
   <meta name="twitter:image" content="{{ og_image_url }}">
+{% endblock %}
+
+{% block head %}
+  {{ encore_entry_link_tags('studio_detail_page') }}
 {% endblock %}
 
 {% block body %}

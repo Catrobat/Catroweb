@@ -4,6 +4,27 @@
 
 {% block meta_description %}{% if project_description is not empty %}{{ project_description|striptags|slice(0, 200) }}{% else %}{{ 'project.checkout_this_project'|trans({}, 'catroweb') }}{% endif %}{% endblock %}
 
+{% block og_meta %}
+  {% set og_image_url = absolute_url(asset(screenshot_big)) %}
+  {% if project_description is not empty %}
+    {% set og_description = project_description|striptags|slice(0, 200)|escape('html_attr') %}
+  {% else %}
+    {% set og_description = 'project.checkout_this_project'|trans({}, 'catroweb')|escape('html_attr') %}
+  {% endif %}
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ project_name|escape('html_attr') }} – Catrobat">
+  <meta property="og:description" content="{{ og_description }}">
+  <meta property="og:image" content="{{ og_image_url }}">
+  <meta property="og:image:secure_url" content="{{ og_image_url }}">
+  <meta property="og:url" content="{{ url('project', {id: project_id}) }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ project_name|escape('html_attr') }} – Catrobat">
+  <meta name="twitter:description" content="{{ og_description }}">
+  <meta name="twitter:image" content="{{ og_image_url }}">
+{% endblock %}
+
 {% block head %}
   {{ encore_entry_link_tags('project_page') }}
   {# Preload LCP thumbnail image #}
@@ -25,25 +46,6 @@
     <link rel="preload" href="{{ link }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ link }}"></noscript>
   {% endfor %}
-
-  {% set og_image_url = absolute_url(asset(screenshot_big)) %}
-  {% if project_description is not empty %}
-    {% set og_description = project_description|striptags|slice(0, 200)|escape('html_attr') %}
-  {% else %}
-    {% set og_description = 'project.checkout_this_project'|trans({}, 'catroweb')|escape('html_attr') %}
-  {% endif %}
-
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ project_name|escape('html_attr') }} – Catrobat">
-  <meta property="og:description" content="{{ og_description }}">
-  <meta property="og:image" content="{{ og_image_url }}">
-  <meta property="og:image:secure_url" content="{{ og_image_url }}">
-  <meta property="og:url" content="{{ url('project', {id: project_id}) }}">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ project_name|escape('html_attr') }} – Catrobat">
-  <meta name="twitter:description" content="{{ og_description }}">
-  <meta name="twitter:image" content="{{ og_image_url }}">
 {% endblock %}
 
 {% block body %}

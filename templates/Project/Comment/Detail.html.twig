@@ -4,9 +4,12 @@
 
 {% block title %}{{ project.name }} – Catrobat{% endblock %}
 
+{% block og_meta %}
+  <meta property="og:type" content="website">
+{% endblock %}
+
 {% block head %}
   {{ encore_entry_link_tags('project_comments_page') }}
-  <meta property="og:type" content="website">
 {% endblock %}
 
 {% block body %}
