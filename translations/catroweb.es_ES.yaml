@@ -1321,3 +1321,5 @@ moderation:
     appeal_approved: "Your appeal has been approved. Your content is now visible again."
     appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
     admin_review_needed: "Content has been auto-hidden and requires review."
+Reports: Reports
+members: members
