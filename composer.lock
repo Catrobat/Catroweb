@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7054a12728b1881de1e9ca95c086187e",
+    "content-hash": "779b06daa614a156d69cf5b21f717b9b",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -9749,7 +9749,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.36.0",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -9808,7 +9808,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.37.0"
             },
             "funding": [
                 {
@@ -9916,16 +9916,16 @@
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.36.0",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "ad1b7b9092976d6c948b8a187cec9faaea9ec1df"
+                "reference": "4864388bfbd3001ce88e234fab652acd91fdc57e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/ad1b7b9092976d6c948b8a187cec9faaea9ec1df",
-                "reference": "ad1b7b9092976d6c948b8a187cec9faaea9ec1df",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/4864388bfbd3001ce88e234fab652acd91fdc57e",
+                "reference": "4864388bfbd3001ce88e234fab652acd91fdc57e",
                 "shasum": ""
             },
             "require": {
@@ -9974,7 +9974,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.37.0"
             },
             "funding": [
                 {
@@ -9994,7 +9994,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-10T16:19:22+00:00"
+            "time": "2026-04-26T13:13:48+00:00"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -10173,7 +10173,7 @@
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.36.0",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
@@ -10234,7 +10234,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.37.0"
             },
             "funding": [
                 {
@@ -10258,7 +10258,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.36.0",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -10319,7 +10319,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.37.0"
             },
             "funding": [
                 {
@@ -10343,7 +10343,7 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.36.0",
+            "version": "v1.37.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
@@ -10403,7 +10403,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.36.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.37.0"
             },
             "funding": [
                 {
@@ -14668,33 +14668,44 @@
         },
         {
             "name": "deployer/deployer",
-            "version": "v7.5.12",
+            "version": "v8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "efc71dac9ccc86b3f9946e75d50cb106b775aae2"
+                "reference": "d091b92a3ead8c5b9358f9e6c65a13b8fbd7f183"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/efc71dac9ccc86b3f9946e75d50cb106b775aae2",
-                "reference": "efc71dac9ccc86b3f9946e75d50cb106b775aae2",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/d091b92a3ead8c5b9358f9e6c65a13b8fbd7f183",
+                "reference": "d091b92a3ead8c5b9358f9e6c65a13b8fbd7f183",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "php": "^8.0|^7.3"
+                "maml/maml": "^3.2",
+                "php": "^8.3",
+                "symfony/console": "^7.4.0 || ^8.0.0",
+                "symfony/process": "^7.4.0 || ^8.0.0",
+                "symfony/yaml": "^7.4.0 || ^8.0.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.64",
-                "pestphp/pest": "^3.3",
-                "phpstan/phpstan": "^1.4",
-                "phpunit/php-code-coverage": "^11.0",
-                "phpunit/phpunit": "^11.4"
+                "friendsofphp/php-cs-fixer": "^3.68",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/php-code-coverage": "^12.0",
+                "phpunit/phpunit": "^12.5"
             },
             "bin": [
                 "bin/dep"
             ],
             "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php",
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "Deployer\\": "src/"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -14718,7 +14729,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-19T16:45:27+00:00"
+            "time": "2026-04-26T21:29:38+00:00"
         },
         {
             "name": "dmore/behat-chrome-extension",
@@ -15866,6 +15877,60 @@
                 }
             ],
             "time": "2026-03-08T20:05:35+00:00"
+        },
+        {
+            "name": "maml/maml",
+            "version": "v3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maml-dev/maml-php.git",
+                "reference": "f11cdff4325bf399f23c33fc1995450e40ac0854"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maml-dev/maml-php/zipball/f11cdff4325bf399f23c33fc1995450e40ac0854",
+                "reference": "f11cdff4325bf399f23c33fc1995450e40ac0854",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.94",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Maml\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Medvedev",
+                    "email": "anton@medv.io"
+                }
+            ],
+            "description": "MAML Parser",
+            "homepage": "https://maml.dev",
+            "keywords": [
+                "config",
+                "configuration",
+                "maml",
+                "parser",
+                "serializer"
+            ],
+            "support": {
+                "issues": "https://github.com/maml-dev/maml-php/issues",
+                "source": "https://github.com/maml-dev/maml-php/tree/v3.2.0"
+            },
+            "time": "2026-04-12T16:50:36+00:00"
         },
         {
             "name": "masterminds/html5",
