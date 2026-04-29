@@ -2501,16 +2501,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openapitools/openapi-generator-cli@npm:^2.31.1":
-  version: 2.31.1
-  resolution: "@openapitools/openapi-generator-cli@npm:2.31.1"
+"@openapitools/openapi-generator-cli@npm:^2.32.0":
+  version: 2.32.0
+  resolution: "@openapitools/openapi-generator-cli@npm:2.32.0"
   dependencies:
     "@inquirer/select": "npm:1.3.3"
     "@nestjs/axios": "npm:4.0.1"
     "@nestjs/common": "npm:11.1.17"
     "@nestjs/core": "npm:11.1.18"
     "@nuxtjs/opencollective": "npm:0.3.2"
-    axios: "npm:^1.14.0"
+    axios: "npm:^1.15.0"
     chalk: "npm:4.1.2"
     commander: "npm:8.3.0"
     compare-versions: "npm:6.1.1"
@@ -2524,7 +2524,7 @@ __metadata:
     tslib: "npm:2.8.1"
   bin:
     openapi-generator-cli: main.js
-  checksum: 10c0/43a554647800ccec146d305cea1a223ae4198d011f0cb1f2ad53565b91bfa2fbbc5d33849ebb81aaaa2a3635f0de67155adf06001c4c311c12db08c18857b5eb
+  checksum: 10c0/72a4e180f43b573b6843dfaf72486e2dff13023756cc24a974e27c6f8d7df04c75f057e9a5491e56176cf3377a45eb77c6fde8f0256703a231f3936c415510e8
   languageName: node
   linkType: hard
 
@@ -3558,14 +3558,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.14.0":
-  version: 1.15.0
-  resolution: "axios@npm:1.15.0"
+"axios@npm:^1.15.0":
+  version: 1.15.2
+  resolution: "axios@npm:1.15.2"
   dependencies:
     follow-redirects: "npm:^1.15.11"
     form-data: "npm:^4.0.5"
     proxy-from-env: "npm:^2.1.0"
-  checksum: 10c0/47e0f860e98d4d7aa145e89ce0cae00e1fb0f1d2485f065c21fce955ddb1dba4103a46bd0e47acd18a27208a7f62c96249e620db575521b92a968619ab133409
+  checksum: 10c0/4eeae0feeaa7fdc1ef24f81f8b378fdadedf4aebdd6bf224484675160f8744cf17b9b0d1c215279979940f7e8ce463beffa2f713099612e428eac238515c81d5
   languageName: node
   linkType: hard
 
@@ -3880,7 +3880,7 @@ __metadata:
     "@material/tab-scroller": "npm:^14.0.0"
     "@material/textfield": "npm:^14.0.0"
     "@material/top-app-bar": "npm:^14.0.0"
-    "@openapitools/openapi-generator-cli": "npm:^2.31.1"
+    "@openapitools/openapi-generator-cli": "npm:^2.32.0"
     "@popperjs/core": "npm:^2.11.8"
     "@symfony/stimulus-bridge": "npm:^4.0.1"
     "@symfony/webpack-encore": "npm:^6.0.0"
