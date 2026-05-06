@@ -14668,16 +14668,16 @@
         },
         {
             "name": "deployer/deployer",
-            "version": "v8.0.1",
+            "version": "v8.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "bb77894b041616a1243f4d8240c0359e0cc360aa"
+                "reference": "98fa6dd5b0840fbe0fd11db5508ea60c57b00b11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/bb77894b041616a1243f4d8240c0359e0cc360aa",
-                "reference": "bb77894b041616a1243f4d8240c0359e0cc360aa",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/98fa6dd5b0840fbe0fd11db5508ea60c57b00b11",
+                "reference": "98fa6dd5b0840fbe0fd11db5508ea60c57b00b11",
                 "shasum": ""
             },
             "require": {
@@ -14729,7 +14729,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-01T09:46:35+00:00"
+            "time": "2026-05-05T14:11:52+00:00"
         },
         {
             "name": "dmore/behat-chrome-extension",
