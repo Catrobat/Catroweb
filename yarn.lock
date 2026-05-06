@@ -3545,19 +3545,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"auto-changelog@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "auto-changelog@npm:2.5.0"
+"auto-changelog@npm:^2.5.1":
+  version: 2.5.1
+  resolution: "auto-changelog@npm:2.5.1"
   dependencies:
     commander: "npm:^7.2.0"
-    handlebars: "npm:^4.7.7"
+    handlebars: "npm:^4.7.9"
     import-cwd: "npm:^3.0.0"
-    node-fetch: "npm:^2.6.1"
-    parse-github-url: "npm:^1.0.3"
-    semver: "npm:^7.3.5"
+    parse-github-url: "npm:^1.0.4"
+    semver: "npm:^7.7.4"
   bin:
     auto-changelog: src/index.js
-  checksum: 10c0/aa4c0389f33902f7185e6956d1dc641db027577a5c2c37782aa5a5dee531030a59f37d943bd8f9e86c457e5a2c75983aab604467a834cb5992c266dc9ac4bbfd
+  checksum: 10c0/2638604b1c2db66260547b2b327948d5b44193edc779460a5a942d0a4603ffdd31473f4bea20ee195632f4057322a663980e9a23cd71d1606a032fa48c809092
   languageName: node
   linkType: hard
 
@@ -3905,7 +3904,7 @@ __metadata:
     "@symfony/stimulus-bridge": "npm:^4.0.1"
     "@symfony/webpack-encore": "npm:^6.0.0"
     analytics: "npm:^0.8.19"
-    auto-changelog: "npm:^2.5.0"
+    auto-changelog: "npm:^2.5.1"
     autoprefixer: "npm:^10.5.0"
     bootstrap: "npm:^5.3.8"
     browserslist: "npm:^4.28.2"
@@ -5535,7 +5534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"handlebars@npm:^4.7.7":
+"handlebars@npm:^4.7.9":
   version: 4.7.9
   resolution: "handlebars@npm:4.7.9"
   dependencies:
@@ -6748,12 +6747,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-github-url@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "parse-github-url@npm:1.0.3"
+"parse-github-url@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "parse-github-url@npm:1.0.4"
   bin:
     parse-github-url: cli.js
-  checksum: 10c0/8a56103f0cdb6f9bd0ffcd7fd4fe1404a414f18441c4d89ab9d9c5eca3b43d6f7cdb899cb979f061df9d8a85d5af275cab05beff953b07f2ff65a6c2826b9293
+  checksum: 10c0/b16cfb1893d70c05d0b24a962664bc25f7bcfa6120dde677d17439d17c148ea72bdd4a5e9a5116139f9e82a65ebb9ae7d9eaacf8b80fca48bb712a02484a4b81
   languageName: node
   linkType: hard
 
@@ -7728,7 +7727,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.2, semver@npm:^7.3.5, semver@npm:^7.6.2, semver@npm:^7.6.3, semver@npm:^7.7.2":
+"semver@npm:^7.3.2, semver@npm:^7.3.5, semver@npm:^7.6.2, semver@npm:^7.6.3, semver@npm:^7.7.2, semver@npm:^7.7.4":
   version: 7.7.4
   resolution: "semver@npm:7.7.4"
   bin:
