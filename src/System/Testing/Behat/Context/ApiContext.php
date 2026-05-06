@@ -455,6 +455,16 @@ class ApiContext implements Context
   }
 
   /**
+   * @Given /^I do not follow redirects$/
+   *
+   * @throws \Exception
+   */
+  public function iDoNotFollowRedirects(): void
+  {
+    $this->getKernelBrowser()->followRedirects(false);
+  }
+
+  /**
    * @Then /^the response should be in json format$/
    *
    * @throws \Exception
