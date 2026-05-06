@@ -24,7 +24,7 @@ services:
     # --- Tests:
 
   chrome.catroweb:
-    image: zenika/alpine-chrome:100
+    image: zenika/alpine-chrome:124
     container_name: chrome.catroweb
     shm_size: '512mb'
     restart: on-failure

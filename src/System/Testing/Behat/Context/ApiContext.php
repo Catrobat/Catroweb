@@ -444,6 +444,17 @@ class ApiContext implements Context
   }
 
   /**
+   * @Then /^the response Location header should be "([^"]*)"$/
+   *
+   * @throws \Exception
+   */
+  public function theResponseLocationHeaderShouldBe(string $expected_url): void
+  {
+    $location_header = $this->getKernelBrowser()->getResponse()->headers->get('Location');
+    Assert::assertSame($expected_url, $location_header);
+  }
+
+  /**
    * @Then /^the response should be in json format$/
    *
    * @throws \Exception
