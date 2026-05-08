@@ -113,7 +113,7 @@
     "material-icons": "^1.13.14",
     "sweetalert2": "^11.26.24",
     "textfilljs": "^1.0.3-a",
-    "vis-network": "^10.0.2"
+    "vis-network": "^10.0.3"
   },
   "browserslist": [
     "> 5%"
