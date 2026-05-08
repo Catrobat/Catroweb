@@ -49,9 +49,10 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
     When I am on "/app/achievements"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element ".swal2-confirm" to be visible
     And I click ".swal2-confirm"
     And I wait for AJAX to finish
-    And I wait for the page to be loaded
+    And the element ".swal2-popup" should not exist
     Then the element "#sidebar_badge--unseen-achievements" should not be visible
     When I am on "/app"
     And I open the menu

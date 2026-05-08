@@ -31,9 +31,10 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
     When I am on "/app/achievements"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    And I wait 1000 milliseconds
+    And I wait for the element ".swal2-popup" to be visible
+    And I wait for the element ".swal2-popup" to contain "Congratulations"
     Then I should see "Congratulations"
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
-    And I wait 500 milliseconds
-    Then I should not see "Congratulations"
+    Then the element ".swal2-popup" should not exist
+    And I should not see "Congratulations"
