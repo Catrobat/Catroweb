@@ -84,8 +84,9 @@ The NSFW scanner runs as a standalone Docker container on the production server.
 One-time prerequisites on the production server (run as `root`):
 
 ```bash
-# Create the scanner directory
+# Create the scanner directory and hand it to the deploy user
 mkdir -p /opt/nsfw-scanner
+chown -R deploy:deploy /opt/nsfw-scanner
 
 # Allow the deploy user to manage the container without sudo
 usermod -aG docker deploy

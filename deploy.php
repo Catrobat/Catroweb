@@ -97,7 +97,8 @@ task('restart:php-fpm', function () {
 // when the source files actually changed (model download is multi-minute). On
 // first run after switching from raw `docker run` to compose, the legacy
 // container is force-removed so compose can take over the `nsfw-scanner` name.
-// Requires the deploy user to be in the `docker` group on the prod host.
+// Requires the deploy user to be in the `docker` group on the prod host and
+// to own /opt/nsfw-scanner (e.g. chown -R deploy:deploy /opt/nsfw-scanner).
 task('restart:nsfw-scanner', function () {
   $dst = '/opt/nsfw-scanner';
   if (!test("[ -d {$dst} ]")) {
@@ -118,7 +119,8 @@ task('restart:nsfw-scanner', function () {
   }
 
   info('nsfw-scanner sources changed, rebuilding');
-  run("rsync -a --delete {$src}/ {$dst}/");
+  // -rlt (not -a): skip owner/group preservation since the deploy user is not root
+  run("rsync -rlt --delete {$src}/ {$dst}/");
 
   $composeProject = trim(run("docker inspect nsfw-scanner --format '{{index .Config.Labels \"com.docker.compose.project\"}}' 2>/dev/null || true"));
   if ('' === $composeProject) {
