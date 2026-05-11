@@ -93,6 +93,42 @@ task('restart:php-fpm', function () {
   run('sudo /usr/sbin/service php{{php_fpm_version}}-fpm restart');
 });
 
+// Sync nsfw-scanner sources to /opt/nsfw-scanner and rebuild the container only
+// when the source files actually changed (model download is multi-minute). On
+// first run after switching from raw `docker run` to compose, the legacy
+// container is force-removed so compose can take over the `nsfw-scanner` name.
+// Requires the deploy user to be in the `docker` group on the prod host.
+task('restart:nsfw-scanner', function () {
+  $dst = '/opt/nsfw-scanner';
+  if (!test("[ -d {$dst} ]")) {
+    info('nsfw-scanner not installed on this host, skipping');
+
+    return;
+  }
+
+  $src = '{{release_path}}/docker/nsfw-scanner';
+  $hashCmd = "find %s -type f -exec sha256sum {} + | sort | sha256sum | cut -d' ' -f1";
+  $srcHash = trim(run(sprintf($hashCmd, $src)));
+  $dstHash = trim(run(sprintf($hashCmd, $dst)));
+
+  if ($srcHash === $dstHash) {
+    info('nsfw-scanner sources unchanged, skipping rebuild');
+
+    return;
+  }
+
+  info('nsfw-scanner sources changed, rebuilding');
+  run("rsync -a --delete {$src}/ {$dst}/");
+
+  $composeProject = trim(run("docker inspect nsfw-scanner --format '{{index .Config.Labels \"com.docker.compose.project\"}}' 2>/dev/null || true"));
+  if ('' === $composeProject) {
+    info('Migrating nsfw-scanner from raw docker-run to docker compose');
+    run('docker rm -f nsfw-scanner 2>/dev/null || true');
+  }
+
+  run("cd {$dst} && docker compose -f docker-compose.prod.yaml up -d --build");
+});
+
 task('install:yarn', function () {
   cd('{{release_path}}');
   run('mkdir -p .corepack-bin && corepack enable --install-directory=.corepack-bin');
@@ -183,6 +219,7 @@ task('deploy', [
   'deploy:symlink',
   'restart:nginx',
   'restart:php-fpm',
+  'restart:nsfw-scanner',
   'update:flavors',
   'update:achievements',
   'update:tags',

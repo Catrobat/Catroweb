@@ -81,27 +81,24 @@ The NSFW scanner runs as a standalone Docker container on the production server.
 
 ### Installation
 
+One-time prerequisites on the production server (run as `root`):
+
 ```bash
 # Create the scanner directory
 mkdir -p /opt/nsfw-scanner
 
-# Copy the three files from the repo
-cp docker/nsfw-scanner/app.py /opt/nsfw-scanner/
-cp docker/nsfw-scanner/requirements.txt /opt/nsfw-scanner/
-cp docker/nsfw-scanner/Dockerfile /opt/nsfw-scanner/
-
-# Build the image (takes ~5 minutes first time)
-cd /opt/nsfw-scanner
-docker build -t nsfw-scanner:latest .
-
-# Run with auto-restart (survives reboots)
-docker run -d \
-  --name nsfw-scanner \
-  --restart always \
-  -p 127.0.0.1:5000:5000 \
-  --memory=4g \
-  nsfw-scanner:latest
+# Allow the deploy user to manage the container without sudo
+usermod -aG docker deploy
 ```
+
+After the next deploy, the `restart:nsfw-scanner` task in `deploy.php` will:
+
+1. `rsync` `docker/nsfw-scanner/` from the release directory into `/opt/nsfw-scanner/`.
+2. Compare a sha256 of the source vs. the deployed tree and skip rebuild when unchanged (the model download is multi-minute).
+3. On the very first run after switching from raw `docker run` to compose, force-remove the legacy container so compose can adopt the `nsfw-scanner` name.
+4. Run `docker compose -f docker-compose.prod.yaml up -d --build` to rebuild and (re)start the container.
+
+Subsequent deploys auto-update the container whenever any file under `docker/nsfw-scanner/` changes.
 
 ### Verify
 
@@ -132,17 +129,11 @@ CONTENT_SAFETY_THRESHOLD=0.7
 
 ### Updating
 
+Merging a change to any file under `docker/nsfw-scanner/` and triggering a deploy is sufficient — the `restart:nsfw-scanner` task picks it up automatically. Manual intervention is only needed if you have to roll back outside the Deployer workflow:
+
 ```bash
 cd /opt/nsfw-scanner
-docker stop nsfw-scanner
-docker rm nsfw-scanner
-docker build -t nsfw-scanner:latest .
-docker run -d \
-  --name nsfw-scanner \
-  --restart always \
-  -p 127.0.0.1:5000:5000 \
-  --memory=4g \
-  nsfw-scanner:latest
+docker compose -f docker-compose.prod.yaml up -d --build
 ```
 
 ## Monitoring
