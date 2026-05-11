@@ -1540,7 +1540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fontsource/roboto@npm:^5.2.6":
+"@fontsource/roboto@npm:^5.2.10":
   version: 5.2.10
   resolution: "@fontsource/roboto@npm:5.2.10"
   checksum: 10c0/abadfcaefbe2196bbd36d9258b336063f721894a3624a9639da00792583c565bfd0748ef978f91a38c3c0de8d247615c9be92a763184c085c630fa43f04b1cd9
@@ -3876,7 +3876,7 @@ __metadata:
     "@bugsnag/js": "npm:^8.9.0"
     "@cap.js/widget": "npm:^0.1.50"
     "@eslint/js": "npm:^10.0.1"
-    "@fontsource/roboto": "npm:^5.2.6"
+    "@fontsource/roboto": "npm:^5.2.10"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@material/chips": "npm:^14.0.0"
     "@material/circular-progress": "npm:^14.0.0"
