@@ -1,5 +1,5 @@
-flask==3.1.*
-gunicorn==23.*
-transformers==4.48.*
-torch==2.6.*
-Pillow==11.*
+flask>=3.1,<4
+gunicorn>=23,<24
+transformers>=4.57,<5
+torch>=2.8,<3
+Pillow>=12.2,<13

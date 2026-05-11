@@ -58,3 +58,11 @@ updates:
       time: '04:00'
       timezone: 'Europe/Vienna'
     open-pull-requests-limit: 99
+
+  - package-ecosystem: 'pip'
+    directory: '/docker/nsfw-scanner'
+    schedule:
+      interval: daily
+      time: '04:00'
+      timezone: 'Europe/Vienna'
+    open-pull-requests-limit: 99

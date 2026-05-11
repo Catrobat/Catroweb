@@ -4,6 +4,7 @@ from PIL import Image
 from transformers import pipeline
 
 app = Flask(__name__)
+app.config["MAX_CONTENT_LENGTH"] = 10 * 1024 * 1024  # 10 MB
 classifier = pipeline("image-classification", model="Falconsai/nsfw_image_detection")
 
 
