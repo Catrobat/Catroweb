@@ -81,7 +81,7 @@
     "@bugsnag/browser-performance": "^3.4.1",
     "@bugsnag/js": "^8.9.0",
     "@cap.js/widget": "^0.1.50",
-    "@fontsource/roboto": "^5.2.6",
+    "@fontsource/roboto": "^5.2.10",
     "@material/chips": "^14.0.0",
     "@material/circular-progress": "^14.0.0",
     "@material/fab": "^14.0.0",
