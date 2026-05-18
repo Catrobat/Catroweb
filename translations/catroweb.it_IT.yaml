@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Community di Catrobat
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: Condividi, scopri e remixa progetti creativi realizzati con Catrobat. Unisciti a una comunità globale di giovani creatori che costruiscono giochi, animazioni e applicazioni.
+meta.description.media.library: 'Cerca e scarica risorse multimediali gratuite per Catrobat — suoni, immagini e altro ancora — per i tuoi progetti.'
+meta.og.title.login: Accedi a Catrobat
+meta.og.description.login: Accedi per condividere i tuoi progetti Catrobat con la community.
+meta.og.title.register: Crea un account Catrobat
+meta.og.description.register: Unisciti alla comunità Catrobat e inizia a condividere subito i tuoi progetti creativi.
+meta.og.description.profile: '%username% su Catrobat – naviga i progetti e le realizzazioni.'
 localLanguage: Inglese
 username: Nome utente
 password: Password
@@ -18,7 +18,7 @@ aboutPocketCode: Su Pocket Code
 about: Su Catrobat
 education: Istruzione
 chat: Chat e forum
-privacyGuide: Privacy Awareness Guide
+privacyGuide: Guida sulla Privacy
 others: Altri
 tutorials: Guida
 googlePlay: Google Play Store
@@ -50,11 +50,11 @@ privacyPolicy: Politica sulla Privacy
 imprint: Imprint
 projectDetails: Dettagli
 somethingWentWrong: 'Ooooops qualcosa è andato storto.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
+accountNotVerified: 'Assicurati di aver effettuato l''accesso e che l''email del tuo account sia verificata.'
+accountSuspended: 'Il tuo account è stato sospeso a causa di segnalazioni da parte della community. Puoi fare appello a questa decisione accedendo al tuo profilo.'
 doesNotExist: 'La risorsa richiesta non esiste.'
 pleaseTryAgain: 'Per favore riprova!'
-tryAgainButton: 'Try again'
+tryAgainButton: 'Riprova'
 oldVersionError: 'Si prega di aggiornare alla nuova versione di Pocket Code!'
 more: 'altro'
 less: 'meno'
@@ -90,7 +90,7 @@ languageSelection: "Seleziona la lingua"
 color-scheme:
   title: 'Theme'
   auto: 'System'
-  auto_description: 'Follow your device setting'
+  auto_description: 'Segui l''impostazione del dispositivo'
   light: 'Light'
   light_description: 'Bright appearance'
   dark: 'Dark'
@@ -895,7 +895,7 @@ codeView:
   title: 'Code View'
   loading: 'Loading code view...'
   error: 'Could not load code view.'
-  retry: 'Try again'
+  retry: 'Riprova'
   empty: 'This project has no code.'
   scripts: 'Script'
   looks: 'Costumi'
@@ -1293,7 +1293,7 @@ moderation:
     error: "Something went wrong. Please try again."
     duplicate: "You've already reported this content."
     trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
+    unverified: "Assicurati di aver effettuato l'accesso e che l'email del tuo account sia verificata."
     rate_limited: "You're submitting reports too quickly. Please wait and try again."
     suspended: "Your account is suspended."
   appeal:
