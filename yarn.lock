@@ -3933,7 +3933,7 @@ __metadata:
     stylelint-config-standard-scss: "npm:^17.0.0"
     sweetalert2: "npm:^11.26.24"
     textfilljs: "npm:^1.0.3-a"
-    vis-network: "npm:^10.0.3"
+    vis-network: "npm:^10.1.0"
     webpack: "npm:^5.106.2"
     webpack-bugsnag-plugins: "npm:^2.2.3"
     webpack-bundle-analyzer: "npm:^5.3.0"
@@ -8545,9 +8545,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vis-network@npm:^10.0.3":
-  version: 10.0.3
-  resolution: "vis-network@npm:10.0.3"
+"vis-network@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "vis-network@npm:10.1.0"
   peerDependencies:
     "@egjs/hammerjs": ^2.0.0
     component-emitter: ^1.3.0 || ^2.0.0
@@ -8555,7 +8555,7 @@ __metadata:
     uuid: ^3.4.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^13.0.0 || ^14.0.0
     vis-data: ">=8.0.0"
     vis-util: ">=6.0.0"
-  checksum: 10c0/3aed60810f029b378e05b1461103f1e51d69bc9782b84627d2886e05d57115450de3338303a251126f2450b18237bdc8f03b95c96ea0c0e5b6038a8945f7c837
+  checksum: 10c0/c3f553f03f80e096c7f8cea4fb98011906dde67c65e7d1e8ca0ed5811dad0dc9f648dde93a6a61ce3ac24f153a7a4eb96e931104c8ad1801701a50db687f5bb6
   languageName: node
   linkType: hard
 
