@@ -1349,10 +1349,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cap.js/widget@npm:^0.1.52":
-  version: 0.1.52
-  resolution: "@cap.js/widget@npm:0.1.52"
-  checksum: 10c0/0e1f0d2f57257faa7132572e90bf9b6c22fcf3adbe3f58f43391cd2cf2179de8ddfb9ebc1c8fff300c799b0eeb2ac53b66381b22f2c1606d400549b6269d200f
+"@cap.js/widget@npm:^0.1.53":
+  version: 0.1.53
+  resolution: "@cap.js/widget@npm:0.1.53"
+  checksum: 10c0/fc978ed0a4700825808708342ac245d6c34f7c8cf46c91acfc46850b47caaee8a13a0c37e045624e436bd58e000a52bbff2605db46f36e08570df2466b90acd0
   languageName: node
   linkType: hard
 
@@ -3874,7 +3874,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.29.5"
     "@bugsnag/browser-performance": "npm:^3.4.1"
     "@bugsnag/js": "npm:^8.9.0"
-    "@cap.js/widget": "npm:^0.1.52"
+    "@cap.js/widget": "npm:^0.1.53"
     "@eslint/js": "npm:^10.0.1"
     "@fontsource/roboto": "npm:^5.2.10"
     "@hotwired/stimulus": "npm:^3.2.2"
