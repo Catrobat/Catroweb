@@ -14,11 +14,9 @@ name: SafeDep vet
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main]
   push:
-    branches: [main, develop]
-  schedule:
-    - cron: '0 4 * * 1'
+    branches: [main]
   workflow_dispatch:
 
 permissions:
