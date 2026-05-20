@@ -1,0 +1,63 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** SBOM + vulnerability scan **
+#
+#  Generates a CycloneDX Software Bill of Materials (SBOM) covering both PHP (composer.lock) and
+#  JavaScript (yarn.lock) dependencies, then scans them for known CVEs using Trivy.
+#
+#  Complements:
+#   - Dependabot       -> continuous CVE alerts via GitHub dependency graph
+#   - SafeDep vet      -> supply-chain risk (malicious / unmaintained / typosquatted packages)
+#   - This workflow    -> CVE gate + auditable SBOM artifact per commit
+#
+#  The SBOM is uploaded as a workflow artifact and can later be attached to GitHub Releases or
+#  fed into a Dependency-Track instance if the org adopts one.
+#
+#  Trivy docs: https://aquasecurity.github.io/trivy/
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+name: SBOM
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sbom:
+    name: Generate SBOM + scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate CycloneDX SBOM
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: cyclonedx
+          output: sbom.cdx.json
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ github.sha }}
+          path: sbom.cdx.json
+          retention-days: 90
+
+      - name: Scan dependencies for CVEs
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: CRITICAL,HIGH
+          exit-code: '1'
+          ignore-unfixed: true
+          # Skip noisy categories — focus on dependency CVEs only.
+          scanners: vuln
