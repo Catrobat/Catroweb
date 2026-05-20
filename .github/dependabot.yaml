@@ -23,7 +23,7 @@ updates:
     open-pull-requests-limit: 99
     cooldown:
       default-days: 5
-      semver-major-days: 7
+      semver-major-days: 5
       semver-minor-days: 5
       semver-patch-days: 3
 
@@ -40,7 +40,7 @@ updates:
           - '@material/*'
     cooldown:
       default-days: 7
-      semver-major-days: 14
+      semver-major-days: 7
       semver-minor-days: 7
       semver-patch-days: 3
 
@@ -67,7 +67,7 @@ updates:
           - 'doctrine/*'
     cooldown:
       default-days: 7
-      semver-major-days: 14
+      semver-major-days: 7
       semver-minor-days: 7
       semver-patch-days: 3
 
@@ -80,7 +80,7 @@ updates:
     open-pull-requests-limit: 99
     cooldown:
       default-days: 5
-      semver-major-days: 7
+      semver-major-days: 5
       semver-minor-days: 5
       semver-patch-days: 3
 
@@ -93,6 +93,6 @@ updates:
     open-pull-requests-limit: 99
     cooldown:
       default-days: 7
-      semver-major-days: 14
+      semver-major-days: 7
       semver-minor-days: 7
       semver-patch-days: 3
