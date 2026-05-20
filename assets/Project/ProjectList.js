@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../Components/DefaultImageAssets'
 import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
@@ -330,7 +331,7 @@ export class ProjectList {
       buildPictureHTML(
         data.screenshot,
         'card',
-        '/images/default/screenshot-card@1x.webp',
+        defaultImageAsset('screenshotCard'),
         'class="projects-list-item--image" alt="' +
           escapeAttr(data.name || '') +
           '" width="360" height="360" loading="lazy"',
@@ -587,18 +588,13 @@ export class ProjectList {
     el.href = studioUrl
     el.dataset.id = data.id
 
-    const picture = createPictureElement(
-      data.cover,
-      'card',
-      '/images/default/screenshot-card@1x.webp',
-      {
-        class: 'project-list__project__image',
-        alt: data.name || '',
-        width: 360,
-        height: 360,
-        loading: 'lazy',
-      },
-    )
+    const picture = createPictureElement(data.cover, 'card', defaultImageAsset('screenshotCard'), {
+      class: 'project-list__project__image',
+      alt: data.name || '',
+      width: 360,
+      height: 360,
+      loading: 'lazy',
+    })
     el.appendChild(picture)
 
     const nameSpan = document.createElement('span')
@@ -636,12 +632,7 @@ export class ProjectList {
     if (data.not_for_kids) {
       attrs.style = 'filter: blur(10px)'
     }
-    return createPictureElement(
-      data.screenshot,
-      'card',
-      '/images/default/screenshot-card@1x.webp',
-      attrs,
-    )
+    return createPictureElement(data.screenshot, 'card', defaultImageAsset('screenshotCard'), attrs)
   }
 
   createPropertyElement(data) {

@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../../Components/DefaultImageAssets'
 import { Controller } from '@hotwired/stimulus'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
@@ -277,7 +278,7 @@ export default class extends Controller {
       buildPictureHTML(
         studio.cover,
         'card',
-        '/images/default/thumbnail-card@1x.webp',
+        defaultImageAsset('thumbnailCard'),
         'class="img-fluid studios-list-item--image" alt=""',
       ) +
       '<div class="studios-list-item--content">' +

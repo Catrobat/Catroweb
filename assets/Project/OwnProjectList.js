@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../Components/DefaultImageAssets'
 /* global myProfileConfiguration */
 
 import { normalizeApiResponse } from '../Api/ResponseHelper'
@@ -271,7 +272,7 @@ export class OwnProjectList {
       buildPictureHTML(
         data.screenshot,
         'card',
-        '/images/default/screenshot-card@1x.webp',
+        defaultImageAsset('screenshotCard'),
         'class="lazyload own-project-list__project__image" alt="" loading="lazy"',
       ) +
       '</a>' +

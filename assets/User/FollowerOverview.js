@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../Components/DefaultImageAssets'
 import '../Components/TabBar'
 import './Profile.scss'
 import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderFollowerCard(user, showFollowsMe, itemClassPrefix) {
-    const avatarFallback = baseUrl + '/images/default/avatar_default-thumb@1x.webp'
+    const avatarFallback = defaultImageAsset('avatarThumb')
     const profileUrl = baseUrl + '/' + escapeAttr(theme) + '/user/' + escapeAttr(user.id)
     const itemClass = itemClassPrefix + '-' + escapeAttr(user.id)
 

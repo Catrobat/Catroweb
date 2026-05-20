@@ -32,6 +32,12 @@
         retryButtonText: '{{ 'tryAgainButton'|trans({}, 'catroweb')|escape('js')|raw }}',
       },
       environment: '{{ app.environment }}',
+      defaultImageAssets: {
+        avatarThumb: '{{ asset('images/default/avatar_default-thumb@1x.webp')|escape('js')|raw }}',
+        screenshotCard: '{{ asset('images/default/screenshot-card@1x.webp')|escape('js')|raw }}',
+        screenshotDetail2x: '{{ asset('images/default/screenshot-detail@2x.avif')|escape('js')|raw }}',
+        thumbnailCard: '{{ asset('images/default/thumbnail-card@1x.webp')|escape('js')|raw }}',
+      },
     }</script>
   {{ vite_entry_script_tags('color_scheme') }}
   {{ vite_entry_script_tags('base_layout') }}

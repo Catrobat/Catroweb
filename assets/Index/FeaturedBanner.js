@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../Components/DefaultImageAssets'
 import { Carousel } from 'bootstrap'
 import { createPictureElement } from '../Layout/ImageVariants'
 
@@ -201,7 +202,7 @@ export class FeaturedBanner {
     if (index === 0) {
       attrs.fetchpriority = 'high'
     }
-    const fallback = slide.youtubeThumbnail || '/images/default/screenshot-detail@2x.avif'
+    const fallback = slide.youtubeThumbnail || defaultImageAsset('screenshotDetail2x')
     const el = createPictureElement(slide.imageVariants, 'detail', fallback, attrs)
     if (index === 0) {
       const img = el.tagName === 'IMG' ? el : el.querySelector('img')

@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../../Components/DefaultImageAssets'
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
@@ -56,7 +57,7 @@ export default class extends Controller {
 
     li.innerHTML = `
       <a href="${profileUrl}">
-        ${buildPictureHTML(request.avatar, 'thumb', '/images/default/avatar_default-thumb@1x.webp', 'class="member__list-entry__image" alt=""')}
+        ${buildPictureHTML(request.avatar, 'thumb', defaultImageAsset('avatarThumb'), 'class="member__list-entry__image" alt=""')}
       </a>
       <div class="ps-3 flex-grow-1">
         <a href="${profileUrl}" class="fw-medium text-decoration-none">${username}</a>

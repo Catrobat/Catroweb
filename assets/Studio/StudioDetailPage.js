@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../Components/DefaultImageAssets'
 import '../Components/TabBar'
 import '../Components/FullscreenListModal'
 import '../Components/Switch'
@@ -89,12 +90,7 @@ async function uploadCoverImage(url, file) {
     response.json().then(function (data) {
       const uploadedImg = document.querySelector('#studio-img-container img')
       if (uploadedImg) {
-        updatePictureSources(
-          uploadedImg,
-          data.cover,
-          'detail',
-          '/images/default/thumbnail-card@1x.webp',
-        )
+        updatePictureSources(uploadedImg, data.cover, 'detail', defaultImageAsset('thumbnailCard'))
       }
     })
   }

@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../../Components/DefaultImageAssets'
 import { Controller } from '@hotwired/stimulus'
 import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
 import { buildPictureHTML } from '../../Layout/ImageVariants'
@@ -128,7 +129,7 @@ export default class extends Controller {
     el.innerHTML = `
       <div class="comment-avatar">
         <a href="/app/user/${escapeAttr(String(comment.user_id || ''))}">
-          ${buildPictureHTML(comment.user_avatar, 'thumb', '/images/default/avatar_default-thumb@1x.webp', 'class="comment-avatar-img" alt="Avatar" width="48" height="48"')}
+          ${buildPictureHTML(comment.user_avatar, 'thumb', defaultImageAsset('avatarThumb'), 'class="comment-avatar-img" alt="Avatar" width="48" height="48"')}
         </a>
       </div>
       <div class="comment-payload-wrapper">

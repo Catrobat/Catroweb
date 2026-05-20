@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../Components/DefaultImageAssets'
 import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
 import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
 import { createPictureElement } from '../Layout/ImageVariants'
@@ -145,7 +146,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
                 url,
                 project.screenshot,
                 'card',
-                '/images/default/screenshot-card@1x.webp',
+                defaultImageAsset('screenshotCard'),
                 project.name || '',
                 'calendar_today',
                 project.uploaded_string || '',
@@ -160,7 +161,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
                 url,
                 user.avatar,
                 'thumb',
-                '/images/default/avatar_default-thumb@1x.webp',
+                defaultImageAsset('avatarThumb'),
                 user.username || '',
                 'code',
                 (user.projects || 0) + ' ' + trans.projects,
@@ -175,7 +176,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
                 url,
                 studio.cover,
                 'card',
-                '/images/default/screenshot-card@1x.webp',
+                defaultImageAsset('screenshotCard'),
                 studio.name || '',
                 'group',
                 (studio.members_count || 0) + ' ' + trans.members,
@@ -246,7 +247,7 @@ function renderProjects(section, projects, theme, trans) {
       url,
       project.screenshot,
       'card',
-      '/images/default/screenshot-card@1x.webp',
+      defaultImageAsset('screenshotCard'),
       project.name || '',
       'calendar_today',
       project.uploaded_string || '',
@@ -274,7 +275,7 @@ function renderUsers(section, users, baseUrl, trans) {
       url,
       user.avatar,
       'thumb',
-      '/images/default/avatar_default-thumb@1x.webp',
+      defaultImageAsset('avatarThumb'),
       user.username || '',
       'code',
       (user.projects || 0) + ' ' + trans.projects,
@@ -302,7 +303,7 @@ function renderStudios(section, studios, baseUrl, trans) {
       url,
       studio.cover,
       'card',
-      '/images/default/screenshot-card@1x.webp',
+      defaultImageAsset('screenshotCard'),
       studio.name || '',
       'group',
       (studio.members_count || 0) + ' ' + trans.members,

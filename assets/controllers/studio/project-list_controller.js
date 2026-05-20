@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../../Components/DefaultImageAssets'
 import { Controller } from '@hotwired/stimulus'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
@@ -182,7 +183,7 @@ export default class extends Controller {
       buildPictureHTML(
         project.screenshot,
         'card',
-        '/images/default/screenshot-card@1x.webp',
+        defaultImageAsset('screenshotCard'),
         'class="projects-list-item--image" alt="' +
           escapeAttr(project.name || '') +
           '" width="360" height="360" loading="lazy"',
@@ -351,7 +352,7 @@ export default class extends Controller {
         return
       }
 
-      const defaultScreenshot = '/images/default/screenshot-card@1x.webp'
+      const defaultScreenshot = defaultImageAsset('screenshotCard')
       let html =
         '<div class="studio-add-project-list" style="max-height: 400px; overflow-y: auto;">'
       available.forEach((p) => {

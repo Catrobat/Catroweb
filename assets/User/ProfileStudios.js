@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../Components/DefaultImageAssets'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
 import { buildPictureHTML } from '../Layout/ImageVariants'
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
       buildPictureHTML(
         studio.cover,
         'card',
-        '/images/default/screenshot-card@1x.webp',
+        defaultImageAsset('screenshotCard'),
         'class="img-fluid studios-list-item--image" alt=""',
       ) +
       '<div class="studios-list-item--content">' +

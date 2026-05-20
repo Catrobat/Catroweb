@@ -1,3 +1,4 @@
+import { defaultImageAsset } from '../../Components/DefaultImageAssets'
 import { normalizeApiResponse } from '../../Api/ResponseHelper'
 import { Controller } from '@hotwired/stimulus'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
@@ -341,7 +342,7 @@ export default class extends Controller {
       buildPictureHTML(
         project.screenshot,
         'card',
-        '/images/default/thumbnail-card@1x.webp',
+        defaultImageAsset('thumbnailCard'),
         'class="projects-list-item--image" alt="" loading="lazy"' + nfkStyle,
       ) +
       (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
