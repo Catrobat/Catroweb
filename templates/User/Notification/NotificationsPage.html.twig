@@ -2,7 +2,7 @@
 {% block top_bar_page_title %}{{ 'notifications'|trans({}, 'catroweb') }}{% endblock %}
 
 {% block head %}
-  {{ encore_entry_link_tags('user_notifications_page') }}
+  {{ vite_entry_link_tags('user_notifications_page') }}
 {% endblock %}
 
 {% block body %}
@@ -132,5 +132,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('user_notifications_page') }}
+  {{ vite_entry_script_tags('user_notifications_page') }}
 {% endblock %}

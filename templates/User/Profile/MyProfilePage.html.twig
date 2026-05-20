@@ -2,9 +2,9 @@
 {% block top_bar_page_title %}{{ 'menu.profile'|trans({}, 'catroweb') }}{% endblock %}
 
 {% block head %}
-  {{ encore_entry_link_tags('user_my_profile_page') }}
-  {{ encore_entry_link_tags('user_follower_overview') }}
-  {{ encore_entry_link_tags('user_profile_studios') }}
+  {{ vite_entry_link_tags('user_my_profile_page') }}
+  {{ vite_entry_link_tags('user_follower_overview') }}
+  {{ vite_entry_link_tags('user_profile_studios') }}
 {% endblock %}
 
 {% block body %}
@@ -310,7 +310,7 @@
     }
   }
 </script>
-  {{ encore_entry_script_tags('user_my_profile_page') }}
-  {{ encore_entry_script_tags('user_follower_overview') }}
-  {{ encore_entry_script_tags('user_profile_studios') }}
+  {{ vite_entry_script_tags('user_my_profile_page') }}
+  {{ vite_entry_script_tags('user_follower_overview') }}
+  {{ vite_entry_script_tags('user_profile_studios') }}
 {% endblock %}

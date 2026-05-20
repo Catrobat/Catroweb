@@ -4,7 +4,7 @@ import { showValidationMessage } from '../Components/TextField'
 import AcceptLanguage from '../Api/AcceptLanguage'
 import { isAllowedImageType, exceedsMaxSize, compressImageIfNeeded } from './ImageCompressor'
 
-require('./CreateStudio.scss')
+import './CreateStudio.scss'
 
 document.addEventListener('DOMContentLoaded', function () {
   const saveButton = document.getElementById('top-app-bar__btn-save')

@@ -10,12 +10,12 @@ When code, tooling, workflows, or setup commands change, update related docs in 
 
 ## Overview
 
-Catroweb is the share/communication platform for the Catrobat community. Symfony-based PHP app with Webpack Encore frontend.
+Catroweb is the share/communication platform for the Catrobat community. Symfony-based PHP app with Vite frontend.
 
 ## Tech Stack
 
 - **Backend**: PHP 8.5, Symfony 7.4
-- **Frontend**: JavaScript (ES6+), SCSS, Webpack Encore
+- **Frontend**: JavaScript (ES6+), SCSS, Vite 7 (via `pentatrion/vite-bundle`)
 - **Database**: MariaDB 10.11
 - **Search**: Elasticsearch 8.17
 - **CSS**: Bootstrap 5, Material Design Components
@@ -44,10 +44,10 @@ Catroweb is the share/communication platform for the Catrobat community. Symfony
 ```bash
 # Build
 composer install && yarn install
-yarn run dev          # Dev build
-yarn run build        # Prod build
-yarn run watch        # Auto-rebuild on save
-yarn run dev-server   # HMR
+yarn run dev          # Dev build (one-shot, ~3s)
+yarn run build        # Prod build (PurgeCSS + Bugsnag sourcemap upload, ~3s)
+yarn run watch        # Vite build --watch (full Rollup rebuild per change)
+yarn run dev-server   # Vite dev server with HMR (sub-200ms updates, port 5173)
 
 # Test & Lint
 yarn test             # All
@@ -90,13 +90,19 @@ docker compose -f docker/docker-compose.dev.yaml build --no-cache app.catroweb
 **Volume-mounted**: `assets/`, `src/`, `templates/`, `config/`, `tests/`
 **NOT mounted**: `node_modules/`, `vendor/` (built inside container), `public/build/`
 
-After dependency changes, rebuild the container. After JS changes, copy built assets:
+After dependency changes, rebuild the container. After JS changes:
 
 ```bash
+# One-shot build + copy (for Behat tests, prod-like dev):
 yarn run dev
 docker cp public/build/. app.catroweb:/var/www/catroweb/public/build/
 docker exec app.catroweb bin/console cache:clear --env=test
+
+# OR for interactive iteration — HMR via Vite dev-server:
+yarn run dev-server   # serves at :5173, app picks it up via pentatrion_vite
 ```
+
+The `pentatrion/vite-bundle` auto-detects the dev server. When `yarn run dev-server` is running, Twig `vite_entry_*` tags point at `http://localhost:5173/build/...` with HMR; otherwise they read `public/build/.vite/manifest.json`.
 
 **Dev DB**: host `db.catroweb.dev`, database `catroweb_dev`, user/password `root`/`root`
 
@@ -115,7 +121,7 @@ Catroweb/
 ├── templates/        # Twig templates
 ├── tests/            # Tests
 ├── translations/     # i18n
-├── webpack.config.js # Webpack Encore config
+├── vite.config.mjs   # Vite config (40+ entries, 9 themes, PurgeCSS, Stimulus)
 └── package.json      # JS dependencies
 ```
 
@@ -177,7 +183,7 @@ Catroweb/
 
 ## Themes
 
-9 themes in `webpack.config.js`: pocketcode (default), arduino, create@school, embroidery, luna, phirocode, pocketalice, pocketgalaxy, mindstorms
+9 themes in `vite.config.mjs`: pocketcode (default), arduino, create@school, embroidery, luna, phirocode, pocketalice, pocketgalaxy, mindstorms. Aliases (phirocode/pocketalice/mindstorms/pocketgalaxy all import pocketcode) dedupe to one CSS file at the hash level; the manifest still maps each theme name to the correct asset path.
 
 ## Environment Files
 
@@ -348,7 +354,7 @@ After JS changes: `yarn run dev` -> `docker cp public/build/. app.catroweb:/var/
 
 ### DOMContentLoaded
 
-Webpack Encore's `defer` scripts run before `DOMContentLoaded` -- the standard `addEventListener('DOMContentLoaded', fn)` pattern works. Fallback for edge cases:
+Vite emits `<script type="module" defer>` tags (defer via `pentatrion_vite.script_attributes`). Modules execute before `DOMContentLoaded`, so the standard `addEventListener('DOMContentLoaded', fn)` pattern works. Fallback for edge cases:
 
 ```javascript
 document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', fn) : fn()

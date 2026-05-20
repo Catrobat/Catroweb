@@ -5,7 +5,7 @@ import { shareOrCopy } from '../Components/ClipboardHelper'
 import { buildPictureHTML, createPictureElement } from '../Layout/ImageVariants'
 import '../Components/RetentionTooltip'
 
-require('./ProjectList.scss')
+import './ProjectList.scss'
 
 const projectListRegistry = new Map()
 

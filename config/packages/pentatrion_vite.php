@@ -6,9 +6,9 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $containerConfigurator): void {
   $containerConfigurator->extension(
-    'webpack_encore',
+    'pentatrion_vite',
     [
-      'output_path' => '%kernel.project_dir%/public/build',
+      'build_directory' => 'build',
       'script_attributes' => [
         'defer' => true,
       ],

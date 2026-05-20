@@ -1,3 +1,3 @@
 import '../Components/TextField'
 
-require('./login.scss')
+import './login.scss'

@@ -9,7 +9,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  {{ encore_entry_link_tags('admin_standard_layout') }}
+  {{ vite_entry_link_tags('admin_standard_layout') }}
 {% endblock %}
 
 {% block sonata_top_nav_menu %}
@@ -82,5 +82,5 @@
 
 {% block javascripts %}
   {{ parent() }}
-  {{ encore_entry_script_tags('admin_standard_layout') }}
+  {{ vite_entry_script_tags('admin_standard_layout') }}
 {% endblock %}

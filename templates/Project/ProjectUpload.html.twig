@@ -2,7 +2,7 @@
 {% block top_bar_page_title %}{{ 'project.upload.title'|trans({}, 'catroweb')|default('Upload Project') }}{% endblock %}
 
 {% block head %}
-  {{ encore_entry_link_tags('project_upload_page') }}
+  {{ vite_entry_link_tags('project_upload_page') }}
 {% endblock %}
 
 {% block body %}
@@ -87,5 +87,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('project_upload_page') }}
+  {{ vite_entry_script_tags('project_upload_page') }}
 {% endblock %}

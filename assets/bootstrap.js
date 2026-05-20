@@ -1,13 +1,27 @@
-import { startStimulusApp } from '@symfony/stimulus-bridge'
+import { startStimulusApp } from 'vite-plugin-symfony/stimulus/helpers'
 
-// Registers Stimulus controllers from controllers.json and in the controllers/ directory
-export const app = startStimulusApp(
-  require.context(
-    '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
-    true,
-    /\.(j|t)sx?$/,
-  ),
+export const app = startStimulusApp()
+
+// vite-plugin-symfony's registerControllers() mis-handles eagerly-globbed
+// ESM modules whose default export is a Stimulus Controller class — it routes
+// them through the third-party "controller infos" branch (which expects
+// { enabled, identifier, controller }) and silently skips because
+// default.enabled is undefined. Register each class directly instead.
+//
+// ajax_controller.js is excluded — it's a shared base class extended by
+// other controllers, not itself a Stimulus controller for the DOM.
+const modules = import.meta.glob(
+  ['./controllers/**/*_controller.js', '!./controllers/ajax_controller.js'],
+  { eager: true },
 )
 
-// register any custom, 3rd party controllers here
-// app.register('some_controller_name', SomeImportedController);
+for (const [path, mod] of Object.entries(modules)) {
+  if (!mod.default) continue
+  const identifier = path
+    .replace(/^.*?controllers\//, '')
+    .replace(/_controller\.js$/, '')
+    .replace(/_/g, '-')
+    .replace(/\//g, '--')
+    .toLowerCase()
+  app.register(identifier, mod.default)
+}

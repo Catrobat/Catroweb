@@ -1,6 +1,6 @@
 import { MediaLib } from './MediaLib'
 
-require('./CategoryDetailPage.scss')
+import './CategoryDetailPage.scss'
 
 const mediaLibrary = document.querySelector('.js-media-library')
 

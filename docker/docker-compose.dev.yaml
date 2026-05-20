@@ -88,7 +88,8 @@ services:
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
       - ./../symfony.lock:/var/www/catroweb/symfony.lock
-      - ./../webpack.config.js:/var/www/catroweb/webpack.config.js
+      - ./../vite.config.mjs:/var/www/catroweb/vite.config.mjs
+      - ./../vite:/var/www/catroweb/vite
       - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
       # sharing package files on windows might not work as expected
       - ./../package.json:/var/www/catroweb/package.json
