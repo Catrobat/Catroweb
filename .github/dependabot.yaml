@@ -23,9 +23,6 @@ updates:
     open-pull-requests-limit: 99
     cooldown:
       default-days: 5
-      semver-major-days: 5
-      semver-minor-days: 5
-      semver-patch-days: 3
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -80,9 +77,6 @@ updates:
     open-pull-requests-limit: 99
     cooldown:
       default-days: 5
-      semver-major-days: 5
-      semver-minor-days: 5
-      semver-patch-days: 3
 
   - package-ecosystem: 'pip'
     directory: '/docker/nsfw-scanner'
