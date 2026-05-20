@@ -1,0 +1,38 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** SafeDep vet — supply chain scanner **
+#
+#  Runs SafeDep `vet` on every pull request and on pushes to main. Flags risky open source dependencies
+#  (known vulns, malicious packages, license issues, unmaintained projects) before they get merged.
+#  Complements the Dependabot cooldown delay — cooldown buys time, vet does the inspection.
+#
+#  Docs: https://github.com/safedep/vet-action
+#  Policy file: .github/vet-policy.yaml (uses bundled default policy if absent)
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+name: SafeDep vet
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  vet:
+    name: SafeDep vet
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run vet
+        uses: safedep/vet-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
