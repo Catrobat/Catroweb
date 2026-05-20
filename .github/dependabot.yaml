@@ -7,6 +7,11 @@
 #
 #   - use this file to configure which dependencies (package-ecosystem) should be updated and on what schedule_
 #
+# Cooldown: delays PRs for freshly published releases as a canary buffer against
+# supply chain attacks (compromised packages are often pulled within days of
+# publication). Patches roll faster than minors/majors so security fixes still
+# land quickly.
+#
 version: 2
 updates:
   - package-ecosystem: 'docker'
@@ -16,6 +21,11 @@ updates:
       time: '04:00'
       timezone: 'Europe/Vienna'
     open-pull-requests-limit: 99
+    cooldown:
+      default-days: 5
+      semver-major-days: 7
+      semver-minor-days: 5
+      semver-patch-days: 3
 
   - package-ecosystem: 'npm'
     directory: '/'
@@ -28,6 +38,11 @@ updates:
       material:
         patterns:
           - '@material/*'
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 3
 
   - package-ecosystem: 'composer'
     directory: '/'
@@ -50,6 +65,11 @@ updates:
       doctrine:
         patterns:
           - 'doctrine/*'
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 3
 
   - package-ecosystem: 'github-actions'
     directory: '/'
@@ -58,6 +78,11 @@ updates:
       time: '04:00'
       timezone: 'Europe/Vienna'
     open-pull-requests-limit: 99
+    cooldown:
+      default-days: 5
+      semver-major-days: 7
+      semver-minor-days: 5
+      semver-patch-days: 3
 
   - package-ecosystem: 'pip'
     directory: '/docker/nsfw-scanner'
@@ -66,3 +91,8 @@ updates:
       time: '04:00'
       timezone: 'Europe/Vienna'
     open-pull-requests-limit: 99
+    cooldown:
+      default-days: 7
+      semver-major-days: 14
+      semver-minor-days: 7
+      semver-patch-days: 3
