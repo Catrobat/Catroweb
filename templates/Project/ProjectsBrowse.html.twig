@@ -2,7 +2,7 @@
 {% block top_bar_page_title %}{{ 'projects'|trans({}, 'catroweb') }}{% endblock %}
 
 {% block head %}
-  {{ encore_entry_link_tags('projects_browse_page') }}
+  {{ vite_entry_link_tags('projects_browse_page') }}
 {% endblock %}
 
 {% block body %}
@@ -110,5 +110,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('projects_browse_page') }}
+  {{ vite_entry_script_tags('projects_browse_page') }}
 {% endblock %}

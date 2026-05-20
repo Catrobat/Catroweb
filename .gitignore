@@ -92,14 +92,6 @@ behat.yaml
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###
-
 ###> symfony/phpunit-bridge ###
 .phpunit
 ###< symfony/phpunit-bridge ###
@@ -118,3 +110,8 @@ yarn-error.log
 ###< vincentlanglet/twig-cs-fixer ###
 /public/resources/assets/
 .claude/scheduled_tasks.lock
+
+###> pentatrion/vite-bundle ###
+/node_modules/
+/public/build/
+###< pentatrion/vite-bundle ###

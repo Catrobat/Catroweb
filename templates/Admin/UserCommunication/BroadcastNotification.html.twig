@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  {{ encore_entry_link_tags('admin_user_communication_broadcast_notification') }}
+  {{ vite_entry_link_tags('admin_user_communication_broadcast_notification') }}
 {% endblock %}
 
 {% block list_table %}
@@ -43,5 +43,5 @@
     </div>
   </div>
 
-  {{ encore_entry_script_tags('admin_user_communication_broadcast_notification') }}
+  {{ vite_entry_script_tags('admin_user_communication_broadcast_notification') }}
 {% endblock %}

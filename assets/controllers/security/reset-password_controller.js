@@ -1,7 +1,7 @@
 import { extractFieldErrors } from '../../Api/ResponseHelper'
 import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import { showValidationMessage } from '../../Components/TextField'
-import { AjaxController } from '../ajax_controller'
+import { AjaxController } from '../../Components/AjaxController'
 import { initCaptchaWidget } from '../../Security/CaptchaWidget'
 
 /* stimulusFetch: 'lazy' */

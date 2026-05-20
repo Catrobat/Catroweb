@@ -57,5 +57,6 @@ docker exec -it app.catroweb bin/phpunit tests
 - [Composer docs](https://getcomposer.org/)
 - [Packagist](https://packagist.org/)
 - [Sass docs](https://sass-lang.com/)
-- [Webpack Encore docs](https://symfony.com/doc/current/frontend/encore/simple-example.html)
-- Project-specific Webpack notes: [Using Webpack (material components)](<../development/Using-Webpack-(material-components).md>)
+- [Vite docs](https://vite.dev/)
+- [pentatrion/vite-bundle docs](https://github.com/lhapaipai/vite-bundle)
+- Project-specific Vite notes: [Using Vite (material components)](<../development/Using-Vite-(material-components).md>)

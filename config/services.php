@@ -121,8 +121,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('catrobat.media.path', 'resources/media/');
   $parameters->set('catrobat.media.sample.dir', '%kernel.project_dir%/tests/TestData/DataFixtures/Media/SampleMedia/');
   $parameters->set('catrobat.media.sample.path', 'tests/TestData/DataFixtures/Media/SampleMedia/');
-  $parameters->set('catrobat.media.font.dir', '%catrobat.pubdir%/build/fonts/Roboto-Regular-webfont.ttf');
-  $parameters->set('catrobat.media.font.path', 'build/fonts/Roboto-Regular-webfont.ttf');
   $parameters->set('catrobat.pubdir', '%kernel.project_dir%/public/');
   $parameters->set('catrobat.resources.dir', '%kernel.project_dir%/public/resources/');
   $parameters->set('catrobat.resources.path', '%catrobat.pubdir%resources/');

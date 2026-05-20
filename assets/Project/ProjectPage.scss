@@ -1,12 +1,12 @@
 @use 'sass:math';
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
-@import '~bootstrap/scss/mixins';
-@import '~@material/circular-progress';
-@import '~@material/textfield/mdc-text-field';
-@import '~@material/radio/mdc-radio';
-@import '~@material/form-field/mdc-form-field';
-@import '~@material/fab/mdc-fab';
+@import 'bootstrap/scss/mixins';
+@import '@material/circular-progress';
+@import '@material/textfield/mdc-text-field';
+@import '@material/radio/mdc-radio';
+@import '@material/form-field/mdc-form-field';
+@import '@material/fab/mdc-fab';
 
 // ---------- Download Button ----------
 

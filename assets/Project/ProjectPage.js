@@ -24,7 +24,7 @@ import { updatePictureSources } from '../Layout/ImageVariants'
 import { prepareImageFileForUpload, readFileAsDataUrl } from '../Components/ImageUploadHelper'
 import './RemixGraphInline'
 
-require('./ProjectPage.scss')
+import './ProjectPage.scss'
 
 const projectElement = document.querySelector('.js-project')
 const projectDescriptionCreditsElement = document.querySelector('.js-project-description-credits')

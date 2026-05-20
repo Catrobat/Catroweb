@@ -16,10 +16,13 @@ Add `@use` and `@include` statements in \_base.scss, `@import` statements in the
 
 Create a JS file in assets/js/ and instantiate the components.
 
-5. Add entry of this file to webpack.config.js
+5. Add entry of this file to `vite.config.mjs`
 
 ```
-.addEntry('ENTRY NAME', './assets/js/FILE)
+const jsEntries = {
+  // ...
+  ENTRY_NAME: './assets/js/FILE.js',
+}
 ```
 
 6. Edit the html.twig file
@@ -27,11 +30,18 @@ Create a JS file in assets/js/ and instantiate the components.
    Insert into the js block at the end of the file:
 
 ```
-{{ encore_entry_script_tags('ENTRY NAME') }}
+{{ vite_entry_script_tags('ENTRY_NAME') }}
+{{ vite_entry_link_tags('ENTRY_NAME') }}
 ```
 
 7. Run the asset build:
 
 ```
 docker exec -it app.catroweb yarn dev
+```
+
+Or for live HMR while iterating locally:
+
+```
+yarn run dev-server
 ```

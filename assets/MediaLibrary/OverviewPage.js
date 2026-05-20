@@ -1,4 +1,4 @@
-require('./OverviewPage.scss')
+import './OverviewPage.scss'
 
 import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
 import { createPictureElement } from '../Layout/ImageVariants'

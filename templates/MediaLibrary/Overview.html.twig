@@ -1,7 +1,7 @@
 {% extends 'Layout/Base.html.twig' %}
 
 {% block head %}
-  {{ encore_entry_link_tags('media_library_overview_page') }}
+  {{ vite_entry_link_tags('media_library_overview_page') }}
 {% endblock %}
 
 {% block meta_description %}{{ 'meta.description.media.library'|trans({}, 'catroweb') }}{% endblock %}
@@ -89,5 +89,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('media_library_overview_page') }}
+  {{ vite_entry_script_tags('media_library_overview_page') }}
 {% endblock %}

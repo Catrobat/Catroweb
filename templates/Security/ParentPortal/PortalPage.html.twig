@@ -1,7 +1,7 @@
 {% extends 'Layout/Base.html.twig' %}
 
 {% block head %}
-  {{ encore_entry_link_tags('request_to_reset_password_page') }}
+  {{ vite_entry_link_tags('request_to_reset_password_page') }}
 {% endblock %}
 
 {% block body %}
@@ -65,5 +65,5 @@
 {% endblock %}
 
 {% block javascript %}
-{{ encore_entry_script_tags('request_to_reset_password_page') }}
+{{ vite_entry_script_tags('request_to_reset_password_page') }}
 {% endblock %}

@@ -23,7 +23,6 @@ return [
   FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
   JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
   OpenAPI\Server\OpenAPIServerBundle::class => ['all' => true],
-  Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
   Sonata\Doctrine\Bridge\Symfony\SonataDoctrineBundle::class => ['all' => true],
   Gesdinet\JWTRefreshTokenBundle\GesdinetJWTRefreshTokenBundle::class => ['all' => true],
   SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle::class => ['all' => true],
@@ -34,4 +33,5 @@ return [
   Bugsnag\BugsnagBundle\BugsnagBundle::class => ['all' => true],
   Http\HttplugBundle\HttplugBundle::class => ['all' => true],
   Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
+  Pentatrion\ViteBundle\PentatrionViteBundle::class => ['all' => true],
 ];

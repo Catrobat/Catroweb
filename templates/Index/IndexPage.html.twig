@@ -2,7 +2,7 @@
 {% import 'Components/ResponsiveImage.html.twig' as responsive_image %}
 
 {% block head %}
-  {{ encore_entry_link_tags('index_page') }}
+  {{ vite_entry_link_tags('index_page') }}
   {% if first_banner is defined and first_banner %}
     {% set _variants = first_banner.image_variants.detail ?? {} %}
     {% if _variants.avif1x is defined %}
@@ -231,5 +231,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('index_page') }}
+  {{ vite_entry_script_tags('index_page') }}
 {% endblock %}

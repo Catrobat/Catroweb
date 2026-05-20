@@ -2,7 +2,7 @@
 {% block top_bar_page_title %}{{ 'studio.title'|trans({}, 'catroweb') }}{% endblock %}
 
 {% block head %}
-  {{ encore_entry_link_tags('studios_page') }}
+  {{ vite_entry_link_tags('studios_page') }}
 {% endblock %}
 
 {% block body %}
@@ -85,5 +85,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('studios_page') }}
+  {{ vite_entry_script_tags('studios_page') }}
 {% endblock %}

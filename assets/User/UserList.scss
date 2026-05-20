@@ -1,7 +1,7 @@
 @use 'sass:math';
 @import '../Layout/Variables';
 @import '../Layout/Mixins';
-@import '~bootstrap/scss/mixins';
+@import 'bootstrap/scss/mixins';
 
 $max-user-thumb-size: 160px;
 $container-padding: 1rem;

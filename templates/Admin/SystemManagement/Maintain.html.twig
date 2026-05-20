@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  {{ encore_entry_link_tags('admin_system_management_maintain') }}
+  {{ vite_entry_link_tags('admin_system_management_maintain') }}
 {% endblock %}
 
 {% block content %}
@@ -190,5 +190,5 @@
     const wholeSpace = '{{ wholeSpace }}'
     const wholeRam = '{{ wholeRam }}'
   </script>
-  {{ encore_entry_script_tags('admin_system_management_maintain') }}
+  {{ vite_entry_script_tags('admin_system_management_maintain') }}
 {% endblock %}
