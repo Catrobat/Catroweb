@@ -1678,6 +1678,23 @@ class DataFixturesContext implements Context
   }
 
   /**
+   * Synchronously populates and refreshes the FOS Elastica indices so search
+   * queries see fixture data immediately. Use after fixtures are persisted
+   * and before any search assertions to avoid races with the default 1s ES
+   * refresh interval.
+   *
+   * @Given the search index is up-to-date
+   */
+  public function theSearchIndexIsUpToDate(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'fos:elastica:populate', '-q'],
+      ['timeout' => 60],
+      'Populating Elasticsearch index'
+    );
+  }
+
+  /**
    * @Given there are project machine translations:
    */
   public function thereAreProjectMachineTranslations(TableNode $table): void

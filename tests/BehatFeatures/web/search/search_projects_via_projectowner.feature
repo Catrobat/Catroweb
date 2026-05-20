@@ -13,12 +13,13 @@ Feature: Searching for projects with ownername
       | 1  | project 1 | Catrobat |
       | 2  | project 2 | User2    |
       | 3  | project 3 | User3    |
-    And I wait 500 milliseconds
+    And the search index is up-to-date
 
   Scenario: search for projects with full name should work
     When I am on "/app/search/User3"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#search-projects" to contain "project 3"
     Then I should see "Results for"
     And I should not see "project 1"
     And I should not see "project 2"
@@ -28,6 +29,7 @@ Feature: Searching for projects with ownername
     When I am on "/app/search/User"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
+    And I wait for the element "#search-projects" to contain "project 3"
     Then I should see "Results for"
     And I should not see "project 1"
     And I should see "project 2"
