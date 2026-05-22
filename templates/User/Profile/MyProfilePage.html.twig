@@ -109,7 +109,7 @@
             </button>
 
             {% if not app.user.isMinor() %}
-              <button class="mdc-tab mdc-tab--stacked" id="test" role="tab" aria-selected="false" tabindex="0">
+              <button class="mdc-tab mdc-tab--stacked" id="tab-followers" role="tab" aria-selected="false" tabindex="0">
               <span class="mdc-tab__content">
                 <span class="mdc-tab__icon" id="followers-count">-</span>
                 <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
