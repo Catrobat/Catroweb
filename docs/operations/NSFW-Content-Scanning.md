@@ -214,13 +214,13 @@ docker restart nsfw-scanner
 If you get false positives (safe images being rejected), lower the threshold:
 
 ```env
-CONTENT_SAFETY_THRESHOLD=0.8
+CONTENT_SAFETY_THRESHOLD=0.6
 ```
 
 If you get false negatives (NSFW images getting through), raise it:
 
 ```env
-CONTENT_SAFETY_THRESHOLD=0.6
+CONTENT_SAFETY_THRESHOLD=0.8
 ```
 
 The default (0.7) is conservative and should work well for most cases.
