@@ -3,12 +3,13 @@ import '../Project/ProjectList.scss'
 
 export class DefaultProjectLists {
   constructor(elementId) {
+    this.elementId = elementId
     this.containerElement = document.getElementById(elementId)
   }
 
   init() {
     if (!this.containerElement) {
-      console.warn(`#${this.containerElement.id} can't be found in the DOM.`)
+      console.warn(`#${this.elementId} can't be found in the DOM.`)
       return
     }
 
