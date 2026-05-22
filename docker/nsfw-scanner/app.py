@@ -1,6 +1,6 @@
 import io
 from flask import Flask, request, jsonify
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 from transformers import pipeline
 
 app = Flask(__name__)
@@ -20,7 +20,7 @@ def scan():
 
     try:
         image = Image.open(io.BytesIO(request.data)).convert("RGB")
-    except Exception:
+    except (UnidentifiedImageError, OSError, ValueError):
         return jsonify({"error": "Invalid image data"}), 400
 
     results = classifier(image)
@@ -41,4 +41,7 @@ def scan():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    raise RuntimeError(
+        "Do not run with Flask's built-in server in production. "
+        "Start this app with gunicorn instead."
+    )
