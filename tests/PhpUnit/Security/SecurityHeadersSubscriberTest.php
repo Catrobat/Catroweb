@@ -27,9 +27,15 @@ class SecurityHeadersSubscriberTest extends TestCase
 
     $response = $event->getResponse();
     $this->assertSame('nosniff', $response->headers->get('X-Content-Type-Options'));
-    $this->assertSame('SAMEORIGIN', $response->headers->get('X-Frame-Options'));
+    $this->assertSame('DENY', $response->headers->get('X-Frame-Options'));
     $this->assertSame('strict-origin-when-cross-origin', $response->headers->get('Referrer-Policy'));
-    $this->assertSame('camera=(), microphone=(), geolocation=()', $response->headers->get('Permissions-Policy'));
+    $this->assertSame(
+      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=()',
+      $response->headers->get('Permissions-Policy')
+    );
+    $this->assertSame('same-origin', $response->headers->get('Cross-Origin-Opener-Policy'));
+    $this->assertSame('same-site', $response->headers->get('Cross-Origin-Resource-Policy'));
+    $this->assertNotNull($response->headers->get('Content-Security-Policy'));
   }
 
   public function testSkipsSubRequests(): void
@@ -54,7 +60,7 @@ class SecurityHeadersSubscriberTest extends TestCase
     $prodEvent = $this->createResponseEvent(HttpKernelInterface::MAIN_REQUEST);
     $prodSubscriber->onKernelResponse($prodEvent);
     $this->assertSame(
-      'max-age=31536000; includeSubDomains',
+      'max-age=31536000; includeSubDomains; preload',
       $prodEvent->getResponse()->headers->get('Strict-Transport-Security')
     );
   }

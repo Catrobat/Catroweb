@@ -28,14 +28,23 @@ class SecurityHeadersSubscriber
     $headers = $response->headers;
 
     $headers->set('X-Content-Type-Options', 'nosniff');
-    $headers->set('X-Frame-Options', 'SAMEORIGIN');
+    // No self-embedding iframes exist in templates; DENY is safe and aligns with frame-ancestors policy.
+    $headers->set('X-Frame-Options', 'DENY');
     $headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
-    $headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+    $headers->set(
+      'Permissions-Policy',
+      'camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), interest-cohort=()'
+    );
+
+    // Isolate browsing context group from cross-origin popups (mitigates Spectre-class attacks, tab-napping).
+    $headers->set('Cross-Origin-Opener-Policy', 'same-origin');
+    // same-site (not same-origin) so resources can be loaded by sibling Catrobat subdomains.
+    $headers->set('Cross-Origin-Resource-Policy', 'same-site');
 
     $headers->set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://*.bugsnag.com https://*.google-analytics.com https://*.googletagmanager.com https://appleid.apple.com; frame-ancestors 'self'");
 
     if ('prod' === $this->kernelEnvironment) {
-      $headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+      $headers->set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
     }
   }
 }
