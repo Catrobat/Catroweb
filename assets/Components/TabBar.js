@@ -1,6 +1,6 @@
 import { MDCTabBar } from '@material/tab-bar'
 
-require('./TabBar.scss')
+import './TabBar.scss'
 
 for (const el of document.querySelectorAll('.mdc-tab-bar')) {
   const tabBar = new MDCTabBar(el)

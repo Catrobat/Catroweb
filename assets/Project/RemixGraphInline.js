@@ -41,9 +41,7 @@ let visNetworkPromise = null
 
 function loadVisNetwork() {
   if (!visNetworkPromise) {
-    visNetworkPromise = import(
-      /* webpackChunkName: "remix-graph-network" */ 'vis-network/standalone'
-    )
+    visNetworkPromise = import('vis-network/standalone')
   }
 
   return visNetworkPromise

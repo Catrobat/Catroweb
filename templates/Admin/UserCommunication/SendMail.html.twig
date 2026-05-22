@@ -2,7 +2,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  {{ encore_entry_link_tags('admin_user_communication_send_mail') }}
+  {{ vite_entry_link_tags('admin_user_communication_send_mail') }}
 {% endblock %}
 
 {% block list_table %}
@@ -66,5 +66,5 @@
 
 {% block javascripts %}
   {{ parent() }}
-  {{ encore_entry_script_tags('admin_user_communication_send_mail') }}
+  {{ vite_entry_script_tags('admin_user_communication_send_mail') }}
 {% endblock %}

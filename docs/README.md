@@ -24,7 +24,7 @@ The previous wiki structure has been consolidated and sorted into topic-based fo
 
 ## Development Topics
 
-- [Using Webpack (material components)](<./development/Using-Webpack-(material-components).md>)
+- [Using Vite (material components)](<./development/Using-Vite-(material-components).md>)
 - [Flavors](./development/Flavors.md)
 - [Migrations](./development/Migrations.md)
 - [OAuth](./development/OAuth.md)

@@ -5,7 +5,7 @@ This page gives a practical map of the Catroweb codebase for contributors.
 ## High-Level Stack
 
 - Backend: PHP + Symfony
-- Frontend assets: Webpack Encore + Sass + JavaScript
+- Frontend assets: Vite + Sass + JavaScript (via `pentatrion/vite-bundle`)
 - Database: MariaDB
 - Search: Elasticsearch
 - Test stack: PHPUnit + Behat (+ headless Chrome for UI flows)

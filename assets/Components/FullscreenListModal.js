@@ -1,3 +1,3 @@
 import './Modal'
 
-require('./FullscreenListModal.scss')
+import './FullscreenListModal.scss'

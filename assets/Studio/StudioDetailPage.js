@@ -9,11 +9,11 @@ import { escapeHtml } from '../Components/HtmlEscape'
 import { updatePictureSources } from '../Layout/ImageVariants'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
 
-require('../Project/ProjectList.scss')
-require('./AdminSettings.scss')
-require('./MembersList.scss')
-require('./ActivityList.scss')
-require('./Studio.scss')
+import '../Project/ProjectList.scss'
+import './AdminSettings.scss'
+import './MembersList.scss'
+import './ActivityList.scss'
+import './Studio.scss'
 
 document.getElementById('std-header-form')?.addEventListener('change', (event) => {
   event.preventDefault()

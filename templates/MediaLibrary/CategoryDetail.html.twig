@@ -1,7 +1,7 @@
 {% extends 'Layout/Base.html.twig' %}
 
 {% block head %}
-  {{ encore_entry_link_tags('media_library_category_detail_page') }}
+  {{ vite_entry_link_tags('media_library_category_detail_page') }}
 {% endblock %}
 
 {% block top_bar_page_title %}{{ category_name }}{% endblock %}
@@ -80,5 +80,5 @@
 {% endblock %}
 
 {% block javascript %}
-{{ encore_entry_script_tags('media_library_category_detail_page') }}
+{{ vite_entry_script_tags('media_library_category_detail_page') }}
 {% endblock %}

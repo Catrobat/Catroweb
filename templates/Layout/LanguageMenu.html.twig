@@ -1,8 +1,5 @@
 {% block stylesheets %}
-  {% for link in encore_entry_css_files('layout_language_menu') %}
-    <link rel="preload" href="{{ link }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ link }}"></noscript>
-  {% endfor %}
+  {{ vite_entry_link_tags('layout_language_menu') }}
 {% endblock stylesheets %}
 
 <div class="language-body-overlay"></div>
@@ -67,4 +64,4 @@
 
 </div>
 
-{{ encore_entry_script_tags('layout_language_menu') }}
+{{ vite_entry_script_tags('layout_language_menu') }}

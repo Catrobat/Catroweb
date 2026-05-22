@@ -2,7 +2,7 @@
 {% block top_bar_page_title %}{{ 'achievements.overview.header'|trans({}, 'catroweb') }}{% endblock %}
 
 {% block head %}
-  {{ encore_entry_link_tags('user_achievements_page') }}
+  {{ vite_entry_link_tags('user_achievements_page') }}
 {% endblock %}
 
 {% block body %}
@@ -70,5 +70,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('user_achievements_page') }}
+  {{ vite_entry_script_tags('user_achievements_page') }}
 {% endblock %}

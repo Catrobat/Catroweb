@@ -39,7 +39,7 @@ class VersionStrategy implements VersionStrategyInterface
   }
 
   /**
-   * Webpack Encore outputs filenames with content/chunk hashes (e.g. runtime-537e323c06d3e.js).
+   * Vite outputs filenames with content/chunk hashes (e.g. base_layout-DgJ7HI_j.js).
    * Appending ?v=APP_VERSION to these is redundant and causes unnecessary cache busts on deploy.
    */
   private function hasContentHash(string $path): bool

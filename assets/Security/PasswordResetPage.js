@@ -1,6 +1,6 @@
 import '../Components/TextField'
 import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle'
 
-require('./login.scss')
+import './login.scss'
 
 new PasswordVisibilityToggle()

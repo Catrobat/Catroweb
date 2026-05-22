@@ -1,20 +1,22 @@
 @import './Variables';
 @import './Mixins';
-@import '~material-icons/iconfont/material-icons';
-@import '~@fontsource/roboto/300.css';
-@import '~@fontsource/roboto/400.css';
-@import '~@fontsource/roboto/500.css';
-@import '~@fontsource/roboto/600.css';
-@import '~@fontsource/roboto/700.css';
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/600.css';
+@import '@fontsource/roboto/700.css';
 
-// Override material-icons font-display: block -> swap for better Lighthouse performance
-// This avoids invisible text during font loading
+// We don't import 'material-icons/iconfont/material-icons' — its CSS declares
+// @font-face for 5 variants (regular/outlined/round/sharp/two-tone) with
+// relative './...woff2' URLs that don't resolve through Vite's CSS pipeline.
+// We use only the regular variant, declared directly below with paths Vite
+// can resolve from node_modules.
 @font-face {
   font-family: 'Material Icons';
   font-display: swap;
   src:
-    url('~material-icons/iconfont/material-icons.woff2') format('woff2'),
-    url('~material-icons/iconfont/material-icons.woff') format('woff');
+    url('material-icons/iconfont/material-icons.woff2') format('woff2'),
+    url('material-icons/iconfont/material-icons.woff') format('woff');
 }
 
 .body {

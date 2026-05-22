@@ -17,7 +17,8 @@ RUN --mount=type=cache,target=/root/.yarn/berry/cache \
     yarn install --immutable
 
 # Build frontend assets in the node stage (runs in parallel with runtime apt-get)
-COPY webpack.config.js postcss.config.js eslint.config.js .prettierrc.json ./
+COPY vite.config.mjs postcss.config.js eslint.config.js .prettierrc.json ./
+COPY vite/ vite/
 COPY .env .env.dev .env.test .env.prod ./
 COPY assets/ assets/
 COPY templates/ templates/
@@ -100,7 +101,8 @@ RUN sh docker/app/init-jwt-config.sh
 # These change less frequently than source code.
 COPY .env .env.dev .env.test .env.prod ./
 COPY composer.json composer.lock symfony.lock ./
-COPY package.json yarn.lock .yarnrc.yml webpack.config.js ./
+COPY package.json yarn.lock .yarnrc.yml vite.config.mjs ./
+COPY vite/ vite/
 COPY behat.yaml.dist phpunit.xml.dist ./
 COPY config/ config/
 COPY translations/ translations/
@@ -117,9 +119,12 @@ COPY templates/ templates/
 COPY tests/ tests/
 
 # Copy all pre-built frontend assets from node stage (replaces `yarn run dev` in runtime).
-# Must copy entire public/ because webpack emits assets outside build/ as well:
-# public/images/, public/fonts/, and other copied/static frontend assets.
-COPY --from=node-build /app/public/ public/
+# Vite emits bundled JS/CSS/fonts/manifest under public/build/, and the staticCopy
+# plugin lands Twig-referenced images at public/images/ + the favicon at the
+# public/ root so asset('images/...') and /favicon.ico resolve.
+COPY --from=node-build /app/public/build/ public/build/
+COPY --from=node-build /app/public/images/ public/images/
+COPY --from=node-build /app/public/favicon.ico public/favicon.ico
 
 # Overwrite behat config:
 RUN cp behat.yaml.dist behat.yaml && \

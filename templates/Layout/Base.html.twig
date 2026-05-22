@@ -17,9 +17,9 @@
   {% endif %}
 
   {% block stylesheets %}
-    {{ encore_entry_link_tags('base_layout') }}
-    {{ encore_entry_link_tags('color_scheme') }}
-    {{ encore_entry_link_tags(themeAssets()) }}
+    {{ vite_entry_link_tags('base_layout') }}
+    {{ vite_entry_link_tags('color_scheme') }}
+    {{ vite_entry_link_tags(themeAssets()) }}
   {% endblock stylesheets %}
 
   <script>const globalConfiguration = {
@@ -33,8 +33,8 @@
       },
       environment: '{{ app.environment }}',
     }</script>
-  {{ encore_entry_script_tags('color_scheme') }}
-  {{ encore_entry_script_tags('base_layout') }}
+  {{ vite_entry_script_tags('color_scheme') }}
+  {{ vite_entry_script_tags('base_layout') }}
   {% block javascript %}{% endblock %}
 
   {% if block('meta_description') is defined and block('meta_description') is not empty %}

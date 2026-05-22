@@ -1,4 +1,4 @@
-require('./LanguageMenu.scss')
+import './LanguageMenu.scss'
 
 document.addEventListener('DOMContentLoaded', function () {
   const cancelButton = document.querySelector('#language_button_cancel')

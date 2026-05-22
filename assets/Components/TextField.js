@@ -1,7 +1,7 @@
 import { MDCTextField } from '@material/textfield'
 import { MDCFloatingLabel } from '@material/floating-label'
 
-require('./TextField.scss')
+import './TextField.scss'
 
 for (const el of document.querySelectorAll('.mdc-text-field')) {
   new MDCTextField(el)

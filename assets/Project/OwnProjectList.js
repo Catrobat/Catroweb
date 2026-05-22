@@ -9,7 +9,7 @@ import { shareOrCopy } from '../Components/ClipboardHelper'
 import { buildPictureHTML } from '../Layout/ImageVariants'
 import '../Components/RetentionTooltip'
 
-require('./OwnProjectList.scss')
+import './OwnProjectList.scss'
 
 export class OwnProjectList {
   constructor(container, apiUrl, theme, emptyMessage, baseUrl) {

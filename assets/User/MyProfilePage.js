@@ -16,9 +16,9 @@ import { achievementBadgeHtml } from './AchievementBadge'
 import { ProjectList } from '../Project/ProjectList'
 import { prepareImageFileForUpload, readFileAsDataUrl } from '../Components/ImageUploadHelper'
 
-require('./Profile.scss')
-require('./Achievements.scss')
-require('../Project/ProjectsBrowse.scss')
+import './Profile.scss'
+import './Achievements.scss'
+import '../Project/ProjectsBrowse.scss'
 
 document.addEventListener('DOMContentLoaded', () => {
   if (window.location.search.includes('profileChangeSuccess')) {

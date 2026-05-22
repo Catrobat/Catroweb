@@ -8,7 +8,7 @@ const importPlugin = require('eslint-plugin-import-x')
 module.exports = defineConfig([
   globalIgnores(['assets/vendor', 'assets/Legacy', 'vendor', 'public', 'node_modules']),
   {
-    files: ['**/*.js'],
+    files: ['**/*.js', '**/*.mjs'],
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
       parserOptions: {

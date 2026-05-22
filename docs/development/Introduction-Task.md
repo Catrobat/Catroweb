@@ -411,7 +411,7 @@ docker exec app.catroweb bin/console cache:clear --env=test
 | `assets/Layout/Snackbar.js`                                | Snackbar notification helper                     |
 | `src/DB/Entity/Project/Program.php`                        | Project (Program) Doctrine entity                |
 | `src/Project/ProjectManager.php`                           | Service for finding/managing projects            |
-| `webpack.config.js`                                        | Webpack Encore config (entry points, build)      |
+| `vite.config.mjs`                                          | Vite config (entry points, build, themes)        |
 | `tests/BehatFeatures/web/project-details/`                 | Behat tests for the project page                 |
 | `config/routes.yaml`                                       | Route configuration (most routes use attributes) |
 
@@ -519,7 +519,7 @@ file_put_contents('/tmp/debug.txt', $exception->getMessage());
 
 ### 10. DOMContentLoaded and deferred scripts
 
-Webpack Encore loads scripts with `defer`. Use `document.addEventListener('DOMContentLoaded', ...)` to ensure the DOM is ready before querying elements. This is the standard pattern used throughout the codebase.
+Vite emits `<script type="module" defer>` tags via the pentatrion bundle. Use `document.addEventListener('DOMContentLoaded', ...)` to ensure the DOM is ready before querying elements. This is the standard pattern used throughout the codebase.
 
 ## Submitting Your Work
 
