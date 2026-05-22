@@ -10,7 +10,7 @@
 #   - This workflow    -> CVE gate + auditable SBOM artifact per commit
 #
 #  The SBOM is uploaded as a workflow artifact and can later be attached to GitHub Releases or
-#  fed into a Dependency-Track instance if the org adopts one.
+#  fed into the Dependency-Track instance at https://deptrack.catrobat.org for CVE tracking.
 #
 #  Trivy docs: https://aquasecurity.github.io/trivy/
 #
@@ -50,6 +50,14 @@ jobs:
           name: sbom-${{ github.sha }}
           path: sbom.cdx.json
           retention-days: 90
+
+      - name: Upload SBOM to Dependency-Track
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          curl -sSf -X POST https://deptrack.catrobat.org/api/v1/bom \
+            -H "X-API-Key: ${{ secrets.DEPTRACK_API_KEY }}" \
+            -F "project=${{ vars.DEPTRACK_CATROWEB_UUID }}" \
+            -F "bom=@sbom.cdx.json"
 
       - name: Scan dependencies for CVEs
         uses: aquasecurity/trivy-action@v0.36.0
