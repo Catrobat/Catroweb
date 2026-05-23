@@ -119,12 +119,16 @@ jobs:
             -F "project=${{ vars.DEPTRACK_CATROWEB_IMAGE_UUID }}" \
             -F "bom=@image-sbom.cdx.json"
 
-      - name: Scan image for CVEs
+      # Soft-fail: this image is dev-only (the production deploy is PHP-FPM
+      # via rsync, not a container image). We surface the OS-layer CVEs in
+      # the Dep-Track project and in the job log for visibility but don't
+      # block PRs on findings that don't ship to prod.
+      - name: Scan image for CVEs (report only)
+        continue-on-error: true
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: image
           image-ref: catroweb:scan
           severity: CRITICAL,HIGH
-          exit-code: '1'
           ignore-unfixed: true
           scanners: vuln
