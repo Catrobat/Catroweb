@@ -67,6 +67,12 @@ Core project docs are maintained in-repo:
 - [docs/setup/Developer-Quickstart.md](./docs/setup/Developer-Quickstart.md)
 - [docs/architecture/Architecture-Overview.md](./docs/architecture/Architecture-Overview.md)
 
+## Operations & Infrastructure
+
+Production deployment configuration for the Catrobat ecosystem (web platform infra, monitoring stacks, reverse proxy, CI/CD) is maintained in the private companion repo [`Catrobat/infrastructure`](https://github.com/Catrobat/infrastructure).
+
+Open-source-friendly operations docs live in [`docs/operations/`](./docs/operations/README.md).
+
 ## Issues
 
 Found a bug?

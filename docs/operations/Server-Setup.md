@@ -1,3 +1,7 @@
+> [!WARNING]
+> **This document is historical / outdated.**
+> Current production server configuration is maintained in the private repo [`Catrobat/infrastructure`](https://github.com/Catrobat/infrastructure). The steps below describe an older PHP 8.4 / manual setup and should not be followed verbatim.
+
 ## Warning: Outdated!
 
 1. **Connect** (via SSH) to the server.

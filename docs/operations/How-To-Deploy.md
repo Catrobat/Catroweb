@@ -1,5 +1,7 @@
 # Deployer
 
+> Note: This document covers Catroweb app deployment via Deployer-PHP. Production infrastructure (compose stacks, nginx vhosts, fail2ban, Cockpit, monitoring) is deployed separately from the private [`Catrobat/infrastructure`](https://github.com/Catrobat/infrastructure) repo on push to its `main` branch.
+
 We use Deployer to deploy to development and production servers.
 
 - You may need to modify the file deploy.php. Ask our coordinator if specific settings are unclear.
