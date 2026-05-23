@@ -143,6 +143,7 @@ Feature: Projects should have an editor a custom translation can be defined
     When I click "#edit-delete-button"
     Then should see "Are you sure you want to delete the translation?"
     When I click ".swal2-deny"
+    And I wait for the element "#edit-text-ui" to appear and if so to disappear again
     And I wait for AJAX to finish
     Then there should be project custom translations:
       | project_id | language | name | description | credit |
