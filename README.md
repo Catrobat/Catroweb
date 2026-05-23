@@ -6,6 +6,8 @@ If you haven’t heard about Catrobat, what we do, or how you can contribute, st
 
 # Catroweb
 
+[![Better Stack Badge](https://uptime.betterstack.com/status-badges/v1/monitor/2n8pf.svg)](https://uptime.betterstack.com/?utm_source=status_badge)
+
 Catroweb is the name of the **Pocket Code sharing platform**, where our community uploads and shares projects.  
 If you uploaded your game in a previous step, it should already be visible to other users.
 
