@@ -16,6 +16,19 @@ They can download and remix your masterpiece, while the platform also provides f
 You can find our API specifications here:  
 👉 https://developer.catrobat.org/Catroweb/
 
+## Services
+
+Public production services that make up the Catroweb platform:
+
+| Service          | URL                                                                         | What it is                                                         |
+| ---------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Sharing platform | [share.catrobat.org](https://share.catrobat.org)                            | Main app — browse, upload and remix projects                       |
+| API docs         | [developer.catrobat.org/Catroweb](https://developer.catrobat.org/Catroweb/) | OpenAPI reference for the public HTTP API                          |
+| CAPTCHA          | [cap.catrob.at](https://cap.catrob.at)                                      | Self-hosted CAPTCHA challenge endpoint used by forms               |
+| Dependency Track | [deptrack.catrobat.org](https://deptrack.catrobat.org)                      | OWASP Dependency-Track — SBOMs from CI land here for vuln tracking |
+
+Live service health is on the [Better Stack status page](https://uptime.betterstack.com/?utm_source=status_badge) (also linked via the badge at the top).
+
 ## Team Culture
 
 We work as a team and expect everyone to follow shared rules and best practices to ensure high-quality code.  
@@ -89,19 +102,3 @@ Please report app crashes, memory issues, or physics glitches in the Catroid rep
    👉 https://github.com/Catrobat/Catroweb/issues/new/choose
 
 > **Note on Scratch2Catrobat:** The Scratch to Catrobat converter is currently unmaintained and abandoned. Feature requests or bug reports related to converting Scratch projects will not be addressed at this time.
-
-## Running PHP Commands in Docker
-
-If you are using Docker, do NOT run `php` commands on host machine.
-
-Instead run:
-
-```
-docker exec -it app.catroweb php bin/console <command>
-```
-
-Example:
-
-```
-docker exec -it app.catroweb php bin/console doctrine:migrations:migrate
-```
