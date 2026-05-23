@@ -50,4 +50,15 @@ class RedirectController extends AbstractController
   {
     return $this->redirect('/');
   }
+
+  /**
+   * Legacy German "My Account" URL still linked from external sources.
+   * Redirects to the profile route, which itself redirects to login for guests
+   * or renders the user's own profile when authenticated.
+   */
+  #[Route(path: '/mein-konto', name: 'legacy_mein_konto', methods: ['GET'])]
+  public function legacyMeinKonto(): Response
+  {
+    return $this->redirectToRoute('profile', [], Response::HTTP_MOVED_PERMANENTLY);
+  }
 }
