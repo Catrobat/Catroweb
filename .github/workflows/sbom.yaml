@@ -1,8 +1,11 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ** SBOM + vulnerability scan **
 #
-#  Generates a CycloneDX Software Bill of Materials (SBOM) covering both PHP (composer.lock) and
-#  JavaScript (yarn.lock) dependencies, then scans them for known CVEs using Trivy.
+#  Two jobs:
+#   1. fs scan   — CycloneDX SBOM of PHP (composer.lock) + JS (yarn.lock) dependencies, CVE gate
+#   2. image scan — builds the runtime container image and scans the OS layer (Debian +
+#                   apt packages) which the fs scan can't see. Posts a second BOM to a
+#                   separate Dep-Track project (vars.DEPTRACK_CATROWEB_IMAGE_UUID).
 #
 #  Complements:
 #   - Dependabot       -> continuous CVE alerts via GitHub dependency graph
@@ -68,4 +71,60 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           # Skip noisy categories — focus on dependency CVEs only.
+          scanners: vuln
+
+  image-scan:
+    name: Scan container image
+    runs-on: ubuntu-latest
+    # The fs job above covers Composer + Yarn deps. This one covers the OS
+    # layer (Debian bookworm-slim + apt packages baked into the runtime image)
+    # which the fs scan can't see.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build runtime image (no push)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          load: true
+          tags: catroweb:scan
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Generate CycloneDX SBOM for image
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: image
+          image-ref: catroweb:scan
+          format: cyclonedx
+          output: image-sbom.cdx.json
+
+      - name: Upload image SBOM artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: image-sbom-${{ github.sha }}
+          path: image-sbom.cdx.json
+          retention-days: 90
+
+      - name: Upload image SBOM to Dependency-Track
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.DEPTRACK_CATROWEB_IMAGE_UUID != ''
+        run: |
+          curl -sSf -X POST https://deptrack.catrobat.org/api/v1/bom \
+            -H "X-API-Key: ${{ secrets.DEPTRACK_API_KEY }}" \
+            -F "project=${{ vars.DEPTRACK_CATROWEB_IMAGE_UUID }}" \
+            -F "bom=@image-sbom.cdx.json"
+
+      - name: Scan image for CVEs
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: image
+          image-ref: catroweb:scan
+          severity: CRITICAL,HIGH
+          exit-code: '1'
+          ignore-unfixed: true
           scanners: vuln
