@@ -7,5 +7,9 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 return static function (ContainerConfigurator $containerConfigurator): void {
   $containerConfigurator->extension('bugsnag', [
     'api_key' => '%env(BUGSNAG_API_KEY)%',
+    'discard_classes' => [
+      Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
+      Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException::class,
+    ],
   ]);
 };
