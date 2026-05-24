@@ -20,6 +20,13 @@ export async function initCaptchaWidget(apiEndpoint, containerId = 'captcha-cont
   widget.addEventListener('solve', (e) => {
     token = e.detail.token
   })
+  // cap.js dispatches a bubbling CustomEvent('error', ...) on network failures.
+  // Without this it bubbles to window and trips Bugsnag's global 'error' listener
+  // (reported as "InvalidError: window onerror received a non-error").
+  widget.addEventListener('error', (e) => {
+    e.stopPropagation()
+    console.warn('[captcha] widget error', e.detail)
+  })
   container.appendChild(widget)
 
   return {
