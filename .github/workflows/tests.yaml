@@ -87,7 +87,7 @@ jobs:
 
       - name: Build and push Catroweb App Image (internal)
         if: steps.fork-check.outputs.is_fork == 'false'
-        uses: docker/build-push-action@v7.1.0
+        uses: docker/build-push-action@v7.2.0
         with:
           context: .
           file: docker/Dockerfile
@@ -99,7 +99,7 @@ jobs:
 
       - name: Build Catroweb App Image (fork)
         if: steps.fork-check.outputs.is_fork == 'true'
-        uses: docker/build-push-action@v7.1.0
+        uses: docker/build-push-action@v7.2.0
         with:
           context: .
           file: docker/Dockerfile
