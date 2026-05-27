@@ -96,7 +96,7 @@
     "external-svg-loader": "^1.7.1",
     "lazysizes": "^5.3.2",
     "material-icons": "^1.13.14",
-    "sweetalert2": "^11.26.24",
+    "sweetalert2": "^11.26.25",
     "textfilljs": "^1.0.3-a",
     "vis-network": "^10.1.0"
   },
