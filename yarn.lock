@@ -2194,7 +2194,7 @@ __metadata:
     sass: "npm:^1.99.0"
     stylelint: "npm:^17.11.1"
     stylelint-config-standard-scss: "npm:^17.0.0"
-    sweetalert2: "npm:^11.26.24"
+    sweetalert2: "npm:^11.26.25"
     textfilljs: "npm:^1.0.3-a"
     vis-network: "npm:^10.1.0"
     vite: "npm:^8"
@@ -4886,10 +4886,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sweetalert2@npm:^11.26.24":
-  version: 11.26.24
-  resolution: "sweetalert2@npm:11.26.24"
-  checksum: 10c0/f002ff982f2cfe48ff24e2faefd990776d7ad38e6d13024fdbdd178f464154061d665682102ddfcb9a65c15019011c6ddae67a93416d4b07716fce77fe9a8484
+"sweetalert2@npm:^11.26.25":
+  version: 11.26.25
+  resolution: "sweetalert2@npm:11.26.25"
+  checksum: 10c0/3ee9d9184bf3467f13132e084cf5544b3d1e9eaa800978754ccb0687362f3e6e3f195ce031dc2de381589edb29c0086fcaec438ac43fdb57210b2a08c0cdc417
   languageName: node
   linkType: hard
 
