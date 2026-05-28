@@ -26,7 +26,6 @@ final readonly class TestUser implements UserInterface
     return $this->roles;
   }
 
-  #[\Override]
   public function eraseCredentials(): void
   {
   }

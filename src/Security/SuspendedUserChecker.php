@@ -6,6 +6,7 @@ namespace App\Security;
 
 use App\DB\Entity\User\User;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -38,7 +39,7 @@ class SuspendedUserChecker implements UserCheckerInterface
   }
 
   #[\Override]
-  public function checkPostAuth(UserInterface $user): void
+  public function checkPostAuth(UserInterface $user, ?TokenInterface $token = null): void
   {
   }
 }

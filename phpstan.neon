@@ -22,6 +22,3 @@ parameters:
   ignoreErrors:
     - identifier: missingType.generics
     - identifier: missingType.iterableValue
-    -
-      message: '#Call to method .+ of internal class Tests\\PhpUnit\\Api\\KeysetCursorTraitTest#'
-      path: src/Api/Traits/KeysetCursorTrait.php
