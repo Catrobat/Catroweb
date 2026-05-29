@@ -666,7 +666,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
   }
 
   #[\Deprecated]
-  #[\Override]
   public function eraseCredentials(): void
   {
   }
