@@ -62,7 +62,7 @@ jobs:
     name: JavaScript [ESLint]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup Node and yarn dependencies'
         uses: ./.github/actions/setup-yarn-node-modules
       - run: yarn run test-js
@@ -81,7 +81,7 @@ jobs:
     name: Sass,CSS [StyleLint]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup Node and yarn dependencies'
         uses: ./.github/actions/setup-yarn-node-modules
       - run: yarn run test-css
@@ -99,7 +99,7 @@ jobs:
     name: Sass,CSS,MD,YAML formatting [Prettier]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup Node and yarn dependencies'
         uses: ./.github/actions/setup-yarn-node-modules
       - run: yarn run test-asset
@@ -118,7 +118,7 @@ jobs:
     name: PHP Code Style [Php-CS-Fixer]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: php bin/php-cs-fixer fix --diff --dry-run --allow-risky=yes --verbose --format=txt
@@ -135,7 +135,7 @@ jobs:
     name: PHP Static Analysis [Php-Stan]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/phpstan analyze
@@ -152,7 +152,7 @@ jobs:
     name: PHP Static Analysis [Psalm]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: vendor/vimeo/psalm/psalm
@@ -166,7 +166,7 @@ jobs:
     name: PHP Static Analysis [PhpCPD]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: PHP Copy Paste Detector
         uses: StephaneBour/actions-php-cpd@8.2
         with:
@@ -182,7 +182,7 @@ jobs:
   #    name: PHP Static Analysis [Phpdd]
   #    runs-on: ubuntu-latest
   #    steps:
-  #      - uses: actions/checkout@v6
+  #      - uses: actions/checkout@v6.0.2
   #      - name: "Setup PHP and composer packages"
   #        uses: ./.github/actions/setup-php-composer
   #      - run: bin/phpdd src tests                                                   # Currently disabled: https://github.com/wapmorgan/PhpDeprecationDetector/issues
@@ -196,7 +196,7 @@ jobs:
     name: PHP Info [PhpLoc]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - run: wget https://phar.phpunit.de/phploc.phar
       - run: php phploc.phar src tests
 
@@ -209,7 +209,7 @@ jobs:
     name: Twig [Lint]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:twig templates/
@@ -223,7 +223,7 @@ jobs:
     name: Yaml [Lint]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:yaml translations/ config/ .github/ docker/ behat.yaml.dist
@@ -238,7 +238,7 @@ jobs:
     name: Symfony Container [Lint]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:container
@@ -253,5 +253,5 @@ jobs:
     name: Secrets [Check Default Secrets]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6.0.2
       - run: bin/check-default-secrets
