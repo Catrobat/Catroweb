@@ -39,7 +39,7 @@ jobs:
     name: Check for new Catroid Bricks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
 
       - name: Set Permissions
         run: sudo chmod 755 bin/checkCatroidRepositoryForNewBricks
