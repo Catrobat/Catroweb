@@ -225,10 +225,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cap.js/widget@npm:^0.1.53":
-  version: 0.1.53
-  resolution: "@cap.js/widget@npm:0.1.53"
-  checksum: 10c0/fc978ed0a4700825808708342ac245d6c34f7c8cf46c91acfc46850b47caaee8a13a0c37e045624e436bd58e000a52bbff2605db46f36e08570df2466b90acd0
+"@cap.js/widget@npm:^0.1.55":
+  version: 0.1.55
+  resolution: "@cap.js/widget@npm:0.1.55"
+  checksum: 10c0/7ee52a0bc592bd8419933d80426cea445a798f6b2d710ef2d7f11db57a38039872364af755a1e8e782f7c6cf687a9cf5de79acf1784986d68ae96454e27b830f
   languageName: node
   linkType: hard
 
@@ -2145,7 +2145,7 @@ __metadata:
     "@analytics/google-tag-manager": "npm:^0.6.0"
     "@bugsnag/browser-performance": "npm:^3.4.1"
     "@bugsnag/js": "npm:^8.9.0"
-    "@cap.js/widget": "npm:^0.1.53"
+    "@cap.js/widget": "npm:^0.1.55"
     "@eslint/js": "npm:^10.0.1"
     "@fontsource/roboto": "npm:^5.2.10"
     "@hotwired/stimulus": "npm:^3.2.2"
