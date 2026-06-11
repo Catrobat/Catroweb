@@ -248,6 +248,10 @@ Use `Content-Location` for descriptive metadata on 2xx non-201 responses. Keep `
 
 Run on each file separately: `bin/php-cs-fixer fix file1 && bin/php-cs-fixer fix file2`
 
+### Don't Stub `Request` (Symfony >= 8.1)
+
+Request bag properties (`attributes`, `query`, `request`, ...) are property hooks since http-foundation 8.1, and PHPUnit doubles hooked properties. A `createStub(Request::class)` with a reflection-injected bag mock silently bypasses the mock (expectations record 0 calls). Use a real `Request::create($uri)` (plus real `RequestEvent`/`RequestContext`) and assert resulting state instead.
+
 ## PHP Static Analysis & Testing
 
 Run before committing (all four must pass):
