@@ -477,7 +477,6 @@ class ExtractedCatrobatFileTest extends TestCase
   {
     self::expectNotToPerformAssertions();
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
-    $this->extracted_catrobat_file->getProjectXmlProperties();
   }
 
   /**
@@ -494,7 +493,6 @@ class ExtractedCatrobatFileTest extends TestCase
     Assert::assertEquals(1, $count);
 
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
-    $this->extracted_catrobat_file->getProjectXmlProperties();
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
@@ -517,7 +515,6 @@ class ExtractedCatrobatFileTest extends TestCase
     Assert::assertEquals(1, $count);
 
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
-    $this->extracted_catrobat_file->getProjectXmlProperties();
     $this->extracted_catrobat_file->saveProjectXmlProperties();
 
     $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
