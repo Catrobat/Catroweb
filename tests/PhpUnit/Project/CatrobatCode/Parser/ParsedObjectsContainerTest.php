@@ -83,7 +83,8 @@ class ParsedObjectsContainerTest extends TestCase
    */
   public function testMustThrowExceptionIfCorruptedGroup(): void
   {
-    $this->expectExceptionMessage(\Exception::class);
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage('Invalid reference');
 
     $xml_properties = simplexml_load_file(
       BootstrapExtension::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
@@ -92,11 +93,8 @@ class ParsedObjectsContainerTest extends TestCase
 
     $xml_scene = $xml_properties->xpath('//scene');
     Assert::assertNotNull($xml_scene);
+    Assert::assertArrayHasKey(0, $xml_scene);
 
-    if (!array_key_exists(0, $xml_scene)) {
-      new ParsedScene($xml_scene[0]);
-    } else {
-      throw new \Exception(\Exception::class);
-    }
+    new ParsedScene($xml_scene[0]);
   }
 }
