@@ -57,7 +57,7 @@ jobs:
       is-fork: ${{ steps.fork-check.outputs.is_fork }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v6.0.3
 
       - name: Check if fork PR
         id: fork-check
@@ -136,7 +136,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v6.0.3
 
       - name: Log in to GitHub Container Registry
         if: needs.build.outputs.is-fork == 'false'
@@ -247,7 +247,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v6.0.3
 
       - name: Log in to GitHub Container Registry
         if: needs.build.outputs.is-fork == 'false'
