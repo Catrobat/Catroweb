@@ -13,7 +13,6 @@ use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -26,38 +25,33 @@ use Symfony\Component\Routing\RouterInterface;
 #[CoversClass(ThemeRequestEventListener::class)]
 class ThemeRequestEventListenerTest extends TestCase
 {
-  protected ThemeRequestEventListener $object;
-
   protected ParameterBagInterface $parameter_bag;
 
   #[\Override]
   protected function setUp(): void
   {
     $this->parameter_bag = $this->mockParameterBag();
-    $this->object = $this->mockThemeRequestEventListener();
   }
 
-  /**
-   * @throws \ReflectionException
-   */
   #[Group('integration')]
   #[DataProvider('provideKernelRequestData')]
   public function testOnKernelRequestThemeInRequest(
     string $request_theme, string $request_uri, string $expected_routing_theme, string $expected_flavor,
   ): void {
-    $request_attributes = $this->mockRequestAttributes();
-    $event = $this->mockRequestEvent(HttpKernelInterface::MAIN_REQUEST, $request_attributes, $request_uri);
+    $request = Request::create('' !== $request_uri ? $request_uri : 'http://localhost/');
+    $event = new RequestEvent($this->createStub(HttpKernelInterface::class), $request, HttpKernelInterface::MAIN_REQUEST);
 
     $app_request = $this->mockAppRequest($request_theme);
 
-    $request_context = $this->mockRequestContext();
+    $request_context = new RequestContext();
     $router = $this->mockRouter($request_context);
 
-    $this->expectRoutingThemeToEqual($request_context, $expected_routing_theme);
-    $this->expectAttributesToEqual($request_attributes, $expected_routing_theme, $expected_flavor);
+    $listener = new ThemeRequestEventListener($this->parameter_bag, $router, $app_request);
+    $listener->onKernelRequest($event);
 
-    $this->object = $this->mockThemeRequestEventListener([$this->parameter_bag, $router, $app_request]);
-    $this->object->onKernelRequest($event);
+    $this->assertSame($expected_routing_theme, $request_context->getParameter('theme'));
+    $this->assertSame($expected_routing_theme, $request->attributes->get('theme'));
+    $this->assertSame($expected_flavor, $request->attributes->get('flavor'));
   }
 
   public static function provideKernelRequestData(): array
@@ -132,63 +126,23 @@ class ThemeRequestEventListenerTest extends TestCase
     ];
   }
 
-  /**
-   * @throws \ReflectionException
-   */
   #[Group('integration')]
   public function testOnKernelRequestSubRequest(): void
   {
-    $request_attributes = $this->mockRequestAttributes();
-    $event = $this->mockRequestEvent(
-      HttpKernelInterface::SUB_REQUEST, $request_attributes, 'http://localhost/index.php/js/randomStuf123'
-    );
+    $request = Request::create('http://localhost/index.php/js/randomStuf123');
+    $event = new RequestEvent($this->createStub(HttpKernelInterface::class), $request, HttpKernelInterface::SUB_REQUEST);
 
     $app_request = $this->mockAppRequest();
 
-    $request_context = $this->mockRequestContext();
+    $request_context = new RequestContext();
     $router = $this->mockRouter($request_context);
 
-    $this->expectRoutingThemeToEqual($request_context, 'app');
-    $this->expectAttributesToEqual($request_attributes, 'app', Flavor::POCKETCODE);
+    $listener = new ThemeRequestEventListener($this->parameter_bag, $router, $app_request);
+    $listener->onKernelRequest($event);
 
-    $this->object = $this->mockThemeRequestEventListener([$this->parameter_bag, $router, $app_request]);
-    $this->object->onKernelRequest($event);
-  }
-
-  private function expectRoutingThemeToEqual(MockObject&RequestContext $request_context, string $theme): void
-  {
-    $request_context->expects($this->once())
-      ->method('setParameter')
-      ->with('theme', $theme)
-    ;
-  }
-
-  private function expectAttributesToEqual(MockObject&ParameterBag $request_attributes, string $theme, string $flavor): void
-  {
-    $request_attributes->expects($this->exactly(2))
-      ->method('set')
-      ->willReturnCallback(
-        function ($key, $value) use ($theme, $flavor): void {
-          switch ($key) {
-            case 'theme':
-              $this->assertEquals($theme, $value);
-              break;
-            case 'flavor':
-              $this->assertEquals($flavor, $value);
-              break;
-          }
-        }
-      )
-    ;
-  }
-
-  private function mockThemeRequestEventListener(?array $ctor_args = null): ThemeRequestEventListener
-  {
-    if (null === $ctor_args) {
-      $ctor_args = [$this->parameter_bag, $this->createStub(RouterInterface::class), $this->createStub(RequestHelper::class)];
-    }
-
-    return new ThemeRequestEventListener($ctor_args[0], $ctor_args[1], $ctor_args[2]);
+    $this->assertSame('app', $request_context->getParameter('theme'));
+    $this->assertSame('app', $request->attributes->get('theme'));
+    $this->assertSame(Flavor::POCKETCODE, $request->attributes->get('flavor'));
   }
 
   private function mockParameterBag(): ParameterBagInterface
@@ -210,50 +164,6 @@ class ThemeRequestEventListenerTest extends TestCase
     return $parameter_bag;
   }
 
-  /**
-   * @throws \ReflectionException
-   */
-  private function mockRequestEvent(int $request_type, (MockObject&ParameterBag)|null $attributes = null, ?string $uri = null): MockObject&RequestEvent
-  {
-    $event = $this->createMock(RequestEvent::class);
-    $event->expects($this->once())
-      ->method('getRequestType')
-      ->willReturn($request_type)
-    ;
-
-    // Create Request stub - always use stub since we only set return values, no behavioral verification
-    $request = $this->createStub(Request::class);
-    if (null !== $uri && '' !== $uri) {
-      $request->method('getUri')->willReturn($uri);
-    }
-
-    if (null !== $attributes) {
-      $reflection = new \ReflectionClass(Request::class);
-      $property = $reflection->getProperty('attributes');
-      $property->setValue($request, $attributes);
-    }
-
-    $event->method('getRequest')->willReturn($request);
-
-    return $event;
-  }
-
-  private function mockRequestAttributes(): MockObject&ParameterBag
-  {
-    return $this->getMockBuilder(ParameterBag::class)
-      ->disableOriginalConstructor()
-      ->getMock()
-    ;
-  }
-
-  private function mockRequestContext(): MockObject&RequestContext
-  {
-    return $this->getMockBuilder(RequestContext::class)
-      ->disableOriginalConstructor()
-      ->getMock()
-    ;
-  }
-
   private function mockAppRequest(string $response = ''): RequestHelper
   {
     if ('' === $response) {
@@ -271,14 +181,8 @@ class ThemeRequestEventListenerTest extends TestCase
     return $app_request;
   }
 
-  private function mockRouter((MockObject&RequestContext)|null $request_context = null): RouterInterface
+  private function mockRouter(RequestContext $request_context): MockObject&RouterInterface
   {
-    if (null === $request_context) {
-      // No expectations needed - use stub
-      return $this->createStub(RouterInterface::class);
-    }
-
-    // Has expectations - use mock
     $router = $this->createMock(RouterInterface::class);
     $router->expects($this->once())->method('getContext')->willReturn($request_context);
 
