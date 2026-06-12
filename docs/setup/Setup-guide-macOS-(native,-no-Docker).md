@@ -2,7 +2,7 @@
 
 This guide sets up **Catroweb** on **macOS** using **system Apache**, **PHP-FPM**, **MariaDB**, **Node**, and **Elasticsearch**.
 
-> Note: Catroweb’s default config expects Elasticsearch on plain HTTP at `http://localhost:9200/` (`ELASTICSEARCH_URL`, `ES_HOST`, `ES_PORT`). The Docker dev setup also uses `http://localhost:9200`. We recommend ES 8.17.x for local development.
+> Note: Catroweb’s default config expects Elasticsearch on plain HTTP at `http://localhost:9200/` (`ELASTICSEARCH_URL`, `ES_HOST`, `ES_PORT`). The Docker dev setup also uses `http://localhost:9200`. We recommend ES 9.4.x for local development.
 
 ## 1) Prerequisites
 
@@ -207,9 +207,9 @@ Open:
 
 http://catroweb
 
-## 4) Elasticsearch (recommended: 8.17.x via archive)
+## 4) Elasticsearch (recommended: 9.4.x via archive)
 
-Install ES 8.17.x from the official archive.
+Install ES 9.4.x from the official archive.
 
 ### 4.1 Download (choose your architecture)
 
@@ -222,39 +222,39 @@ uname -m
 - `arm64` → Apple Silicon
 - `x86_64` → Intel
 
-Example for 8.17.0 (replace version if needed):
+Example for 9.4.2 (replace version if needed):
 
 For Apple Silicon:
 
 ```
 cd ~/Downloads
-curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-darwin-aarch64.tar.gz
-curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-darwin-aarch64.tar.gz.sha512
-shasum -a 512 -c elasticsearch-8.17.0-darwin-aarch64.tar.gz.sha512
-tar -xzf elasticsearch-8.17.0-darwin-aarch64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-9.4.2-darwin-aarch64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-9.4.2-darwin-aarch64.tar.gz.sha512
+shasum -a 512 -c elasticsearch-9.4.2-darwin-aarch64.tar.gz.sha512
+tar -xzf elasticsearch-9.4.2-darwin-aarch64.tar.gz
 ```
 
 For Intel:
 
 ```
 cd ~/Downloads
-curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-darwin-x86_64.tar.gz
-curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.17.0-darwin-x86_64.tar.gz.sha512
-shasum -a 512 -c elasticsearch-8.17.0-darwin-x86_64.tar.gz.sha512
-tar -xzf elasticsearch-8.17.0-darwin-x86_64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-9.4.2-darwin-x86_64.tar.gz
+curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-9.4.2-darwin-x86_64.tar.gz.sha512
+shasum -a 512 -c elasticsearch-9.4.2-darwin-x86_64.tar.gz.sha512
+tar -xzf elasticsearch-9.4.2-darwin-x86_64.tar.gz
 ```
 
 Move it:
 
 ```
 sudo mkdir -p /usr/local/elasticsearch
-sudo mv elasticsearch-8.17.0 /usr/local/elasticsearch/elasticsearch-8
+sudo mv elasticsearch-9.4.2 /usr/local/elasticsearch/elasticsearch-9
 ```
 
 ### 4.2 Configure local dev settings
 
 ```
-sudo nano /usr/local/elasticsearch/elasticsearch-8/config/elasticsearch.yml
+sudo nano /usr/local/elasticsearch/elasticsearch-9/config/elasticsearch.yml
 ```
 
 Add/ensure:
@@ -267,12 +267,12 @@ http.port: 9200
 xpack.security.enabled: false
 ```
 
-> **Note:** `xpack.security.enabled: false` disables TLS/auth for local development. ES 8.x enables security by default; without this setting, you'd need HTTPS and credentials.
+> **Note:** `xpack.security.enabled: false` disables TLS/auth for local development. ES 9.x enables security by default; without this setting, you'd need HTTPS and credentials.
 
 ### 4.3 Start Elasticsearch
 
 ```
-cd /usr/local/elasticsearch/elasticsearch-8
+cd /usr/local/elasticsearch/elasticsearch-9
 ./bin/elasticsearch
 ```
 
