@@ -42,7 +42,7 @@
     "sonata-project/twig-extensions": "2.6.*",
     "symfony/asset": "8.1.*",
     "symfony/brevo-mailer": "8.1.*",
-    "symfony/cache": "8.0.*",
+    "symfony/cache": "8.1.*",
     "symfony/config": "7.4.*",
     "symfony/console": "7.4.*",
     "symfony/dotenv": "8.1.*",
