@@ -1,3 +1,15 @@
+// Vite 8's LightningCSS downlevels light-dark() into the
+// --lightningcss-light/dark var-toggle polyfill and only injects the toggle
+// definitions into rules that declare color-scheme. Bootstrap declares it
+// solely under [data-bs-theme=dark], so without this rule the light-mode
+// toggles stay undefined and every light-dark() value computes to garbage
+// (e.g. the footer lost its colors). "light" (not "light dark") is correct:
+// ColorScheme.js always sets an explicit data-bs-theme, so dark comes from
+// Bootstrap's override, never from the OS preference.
+:root {
+  color-scheme: light;
+}
+
 .container {
   max-width: 1400px !important;
 }
