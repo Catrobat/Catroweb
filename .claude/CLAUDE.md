@@ -137,7 +137,8 @@ Catroweb/
 
 ### Dark Mode
 
-- Use `light-dark(lightValue, darkValue)` for automatic dark mode color adaptation — works because Bootstrap sets `color-scheme: light dark`.
+- Use `light-dark(lightValue, darkValue)` for automatic dark mode color adaptation. Our `:root { color-scheme: light; }` (BootstrapOverwrite.scss) + Bootstrap's `[data-bs-theme=dark] { color-scheme: dark; }` drive it — `ColorScheme.js` always sets an explicit `data-bs-theme`.
+- The `:root` color-scheme rule is **required** for Vite 8's LightningCSS `light-dark()` downlevel polyfill: toggle vars are only injected into rules declaring `color-scheme`; without a light-mode declaration, every `light-dark()` value computes to garbage in light mode (footer lost its colors after the Vite 8 bump).
 - `--primary` is `light-dark(#007f8f, #4dd0e1)` — auto-adapts in dark mode for text/borders/links.
 - `--primary-bg: #007f8f` — always dark, for filled backgrounds (topbar, btn-primary, FABs, pills) where `#fff` on-primary text sits on top.
 - `--on-primary: #fff` — text on filled primary surfaces.
