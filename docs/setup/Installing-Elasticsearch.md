@@ -2,10 +2,10 @@
 
 ```
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/9.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-9.x.list
 sudo apt update
 sudo apt install elasticsearch
-# Disable security for local development (ES 8.x enables it by default)
+# Disable security for local development (ES 9.x enables it by default)
 # Replace if present, otherwise append
 grep -q '^xpack.security.enabled' /etc/elasticsearch/elasticsearch.yml \
   && sudo sed -i 's/^xpack.security.enabled:.*/xpack.security.enabled: false/' /etc/elasticsearch/elasticsearch.yml \

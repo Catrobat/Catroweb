@@ -17,7 +17,7 @@ Catroweb is the share/communication platform for the Catrobat community. Symfony
 - **Backend**: PHP 8.5, Symfony 7.4
 - **Frontend**: JavaScript (ES6+), SCSS, Vite 7 (via `pentatrion/vite-bundle`)
 - **Database**: MariaDB 10.11
-- **Search**: Elasticsearch 8.17
+- **Search**: Elasticsearch 9.4
 - **CSS**: Bootstrap 5, Material Design Components
 - **Package Managers**: Composer (PHP), Yarn (JS)
 
@@ -76,6 +76,8 @@ docker compose -f docker/docker-compose.dev.yaml up -d
 # After dependency changes:
 docker compose -f docker/docker-compose.dev.yaml build --no-cache app.catroweb
 ```
+
+**ES major upgrades**: Elasticsearch refuses to boot on a data volume written by a non-adjacent major (e.g. 8.17 -> 9.x). Wipe and repopulate: `docker compose -f docker/docker-compose.dev.yaml rm -sf elasticsearch && docker volume rm docker_esdata1`, restart, then `bin/console fos:elastica:populate`.
 
 | Service                 | Port | Description      |
 | ----------------------- | ---- | ---------------- |
