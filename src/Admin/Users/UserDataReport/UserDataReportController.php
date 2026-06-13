@@ -52,7 +52,8 @@ class UserDataReportController extends CRUDController
   protected function getReportedProjects(string $user_id): mixed
   {
     return $this->entity_manager
-      ->createQuery(sprintf('SELECT cr FROM App\DB\Entity\Moderation\ContentReport cr WHERE cr.reporter=\'%s\'', $user_id))
+      ->createQuery('SELECT cr FROM App\DB\Entity\Moderation\ContentReport cr WHERE cr.reporter = :user_id')
+      ->setParameter('user_id', $user_id)
       ->getResult()
     ;
   }
@@ -60,7 +61,8 @@ class UserDataReportController extends CRUDController
   protected function getUserComments(string $user_id): mixed
   {
     return $this->entity_manager
-      ->createQuery(sprintf('SELECT uc FROM App\DB\Entity\User\Comment\UserComment uc WHERE uc.user=\'%s\'', $user_id))
+      ->createQuery('SELECT uc FROM App\DB\Entity\User\Comment\UserComment uc WHERE uc.user = :user_id')
+      ->setParameter('user_id', $user_id)
       ->getResult()
     ;
   }
@@ -68,7 +70,8 @@ class UserDataReportController extends CRUDController
   protected function getUserProjects(string $user_id): mixed
   {
     return $this->entity_manager
-      ->createQuery(sprintf('SELECT up FROM App\DB\Entity\Project\Project up WHERE up.user=\'%s\'', $user_id))
+      ->createQuery('SELECT up FROM App\DB\Entity\Project\Project up WHERE up.user = :user_id')
+      ->setParameter('user_id', $user_id)
       ->getResult()
     ;
   }
