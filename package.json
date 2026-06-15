@@ -54,7 +54,7 @@
     "eslint-plugin-promise": "^7.3.0",
     "globals": "^17.6.0",
     "postcss": "^8.5.15",
-    "prettier": "^3.8.3",
+    "prettier": "^3.8.4",
     "purgecss": "^8.0.0",
     "sass": "^1.100.0",
     "stylelint": "^17.11.1",
