@@ -104,7 +104,7 @@
     "symfony/stopwatch": "7.4.*",
     "symfony/web-profiler-bundle": "7.4.*",
     "vimeo/psalm": "6.16.*",
-    "vincentlanglet/twig-cs-fixer": "^3.1",
+    "vincentlanglet/twig-cs-fixer": "^4.0",
     "wapmorgan/php-deprecation-detector": "2.0.*"
   },
   "config": {
