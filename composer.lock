@@ -6311,16 +6311,16 @@
         },
         {
             "name": "rosell-dk/webp-convert",
-            "version": "2.9.3",
+            "version": "2.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rosell-dk/webp-convert.git",
-                "reference": "ea8c20730bd4e7952e99d50e9ae6487c4026354f"
+                "reference": "bce87de61cff098e899a91960f9fdb08e8867194"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rosell-dk/webp-convert/zipball/ea8c20730bd4e7952e99d50e9ae6487c4026354f",
-                "reference": "ea8c20730bd4e7952e99d50e9ae6487c4026354f",
+                "url": "https://api.github.com/repos/rosell-dk/webp-convert/zipball/bce87de61cff098e899a91960f9fdb08e8867194",
+                "reference": "bce87de61cff098e899a91960f9fdb08e8867194",
                 "shasum": ""
             },
             "require": {
@@ -6330,10 +6330,10 @@
                 "rosell-dk/locate-binaries": "^1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.11",
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.3",
-                "squizlabs/php_codesniffer": "3.*"
+                "friendsofphp/php-cs-fixer": "^3.95",
+                "phpstan/phpstan": "^1.12",
+                "phpunit/phpunit": "^9.6",
+                "squizlabs/php_codesniffer": "4.*"
             },
             "suggest": {
                 "ext-gd": "to use GD extension for converting. Note: Gd must be compiled with webp support",
@@ -6387,7 +6387,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rosell-dk/webp-convert/issues",
-                "source": "https://github.com/rosell-dk/webp-convert/tree/2.9.3"
+                "source": "https://github.com/rosell-dk/webp-convert/tree/2.9.5"
             },
             "funding": [
                 {
@@ -6399,7 +6399,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2024-04-06T13:34:24+00:00"
+            "time": "2026-06-18T11:53:25+00:00"
         },
         {
             "name": "ruflin/elastica",
