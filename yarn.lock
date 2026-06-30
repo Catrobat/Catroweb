@@ -1281,13 +1281,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@package-json/types@npm:^0.0.12":
-  version: 0.0.12
-  resolution: "@package-json/types@npm:0.0.12"
-  checksum: 10c0/d9bba086efe7b9901f02f1cff7a68ab23269aeddfb7ee92a16930e219f705bfc188b9fec2dd47265033dbda45ed1514d8a46f46363f38f1ad56bc993754126da
-  languageName: node
-  linkType: hard
-
 "@parcel/watcher-android-arm64@npm:2.5.6":
   version: 2.5.6
   resolution: "@parcel/watcher-android-arm64@npm:2.5.6"
@@ -2188,7 +2181,7 @@ __metadata:
     dotenv: "npm:^17.4.2"
     eslint: "npm:^10.5.0"
     eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-import-x: "npm:^4.16.2"
+    eslint-plugin-import-x: "npm:^4.17.0"
     eslint-plugin-prettier: "npm:^5.5.6"
     eslint-plugin-promise: "npm:^7.3.0"
     external-svg-loader: "npm:^1.7.1"
@@ -2691,11 +2684,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import-x@npm:^4.16.2":
-  version: 4.16.2
-  resolution: "eslint-plugin-import-x@npm:4.16.2"
+"eslint-plugin-import-x@npm:^4.17.0":
+  version: 4.17.0
+  resolution: "eslint-plugin-import-x@npm:4.17.0"
   dependencies:
-    "@package-json/types": "npm:^0.0.12"
     "@typescript-eslint/types": "npm:^8.56.0"
     comment-parser: "npm:^1.4.1"
     debug: "npm:^4.4.1"
@@ -2714,7 +2706,7 @@ __metadata:
       optional: true
     eslint-import-resolver-node:
       optional: true
-  checksum: 10c0/b51b814323a6005c5230fccdffef9a8adc3691ad7a475de6ba635f5ef776fc1f5d1a1c7e65e2c98c6033155cc7e8f8b9f2f507fe31fc038972d535355673e83e
+  checksum: 10c0/d7a6e23cb7920ac478c011e4688d5ddf1b80566c7989da3578347796025d8bd80b11373e317eb79e3f13a587eec2be3628faa7b5eceeaebf788fb9cedb0bf3e4
   languageName: node
   linkType: hard
 
