@@ -52,7 +52,7 @@
     "eslint-plugin-import-x": "^4.17.0",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-promise": "^7.3.0",
-    "globals": "^17.6.0",
+    "globals": "^17.7.0",
     "postcss": "^8.5.15",
     "prettier": "^3.8.5",
     "purgecss": "^8.0.0",
