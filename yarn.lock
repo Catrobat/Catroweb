@@ -2230,7 +2230,7 @@ __metadata:
     dotenv: "npm:^17.4.2"
     eslint: "npm:^10.5.0"
     eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-import-x: "npm:^4.17.0"
+    eslint-plugin-import-x: "npm:^4.17.1"
     eslint-plugin-prettier: "npm:^5.5.6"
     eslint-plugin-promise: "npm:^7.3.0"
     external-svg-loader: "npm:^1.7.1"
@@ -2733,9 +2733,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-import-x@npm:^4.17.0":
-  version: 4.17.0
-  resolution: "eslint-plugin-import-x@npm:4.17.0"
+"eslint-plugin-import-x@npm:^4.17.1":
+  version: 4.17.1
+  resolution: "eslint-plugin-import-x@npm:4.17.1"
   dependencies:
     "@typescript-eslint/types": "npm:^8.56.0"
     comment-parser: "npm:^1.4.1"
@@ -2755,7 +2755,7 @@ __metadata:
       optional: true
     eslint-import-resolver-node:
       optional: true
-  checksum: 10c0/d7a6e23cb7920ac478c011e4688d5ddf1b80566c7989da3578347796025d8bd80b11373e317eb79e3f13a587eec2be3628faa7b5eceeaebf788fb9cedb0bf3e4
+  checksum: 10c0/4ea2ace22c3d805f2253063912211c438055f112ca9a2124df262311744975fc96443e4526fd80eef0acec7845a48fb6d1da444a4c4b0ff9786927fe2755f2a7
   languageName: node
   linkType: hard
 
