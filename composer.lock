@@ -19906,16 +19906,16 @@
         },
         {
             "name": "vincentlanglet/twig-cs-fixer",
-            "version": "4.0.1",
+            "version": "4.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VincentLanglet/Twig-CS-Fixer.git",
-                "reference": "366f7cca494a6f95c5f410ae542aef9c164d329e"
+                "reference": "1cb75618f7dd0f9bf51924aa6d3aa8c588f51d5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VincentLanglet/Twig-CS-Fixer/zipball/366f7cca494a6f95c5f410ae542aef9c164d329e",
-                "reference": "366f7cca494a6f95c5f410ae542aef9c164d329e",
+                "url": "https://api.github.com/repos/VincentLanglet/Twig-CS-Fixer/zipball/1cb75618f7dd0f9bf51924aa6d3aa8c588f51d5a",
+                "reference": "1cb75618f7dd0f9bf51924aa6d3aa8c588f51d5a",
                 "shasum": ""
             },
             "require": {
@@ -19971,7 +19971,7 @@
             "homepage": "https://github.com/VincentLanglet/Twig-CS-Fixer",
             "support": {
                 "issues": "https://github.com/VincentLanglet/Twig-CS-Fixer/issues",
-                "source": "https://github.com/VincentLanglet/Twig-CS-Fixer/tree/4.0.1"
+                "source": "https://github.com/VincentLanglet/Twig-CS-Fixer/tree/4.0.2"
             },
             "funding": [
                 {
@@ -19979,7 +19979,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-18T15:31:27+00:00"
+            "time": "2026-06-29T15:22:14+00:00"
         },
         {
             "name": "wapmorgan/php-deprecation-detector",
