@@ -5,30 +5,30 @@ let currentSearchTerm = ''
 
 const initializeColorScheme = () => {
   // Toggle log details on header click
-  document.querySelectorAll('.log-header').forEach(function (logHeader) {
-    logHeader.addEventListener('click', function () {
+  document.querySelectorAll('.log-header').forEach((logHeader) => {
+    logHeader.addEventListener('click', () => {
       const logDetails = logHeader.nextElementSibling
-      if (logDetails && logDetails.classList.contains('log-details')) {
+      if (logDetails?.classList.contains('log-details')) {
         logDetails.classList.toggle('hide')
       }
     })
   })
 
   // File switcher
-  document.querySelectorAll('.files').forEach(function (fileElement) {
-    fileElement.addEventListener('click', function () {
+  document.querySelectorAll('.files').forEach((fileElement) => {
+    fileElement.addEventListener('click', () => {
       loadFileContent(fileElement.value)
       document.getElementById('currentFile').value = fileElement.value
     })
   })
 
   // Level filter buttons
-  document.querySelectorAll('.filter-btn[data-filter-type="level"]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
+  document.querySelectorAll('.filter-btn[data-filter-type="level"]').forEach((btn) => {
+    btn.addEventListener('click', () => {
       // Remove active class from all level filter buttons
-      document
-        .querySelectorAll('.filter-btn[data-filter-type="level"]')
-        .forEach((b) => b.classList.remove('active'))
+      document.querySelectorAll('.filter-btn[data-filter-type="level"]').forEach((b) => {
+        b.classList.remove('active')
+      })
       btn.classList.add('active')
 
       currentLevelFilter = btn.dataset.filterValue
@@ -55,7 +55,7 @@ if (document.readyState === 'loading') {
 function applyFilters() {
   const logEntries = document.querySelectorAll('.log-entry')
 
-  logEntries.forEach(function (entry) {
+  logEntries.forEach((entry) => {
     let visible = true
 
     // Apply level filter
@@ -108,9 +108,9 @@ function loadFileContent(file) {
       // Reset filters
       currentLevelFilter = 'all'
       currentSearchTerm = ''
-      document
-        .querySelectorAll('.filter-btn[data-filter-type="level"]')
-        .forEach((b) => b.classList.remove('active'))
+      document.querySelectorAll('.filter-btn[data-filter-type="level"]').forEach((b) => {
+        b.classList.remove('active')
+      })
       document.querySelector('.filter-btn[data-filter-value="all"]')?.classList.add('active')
       if (document.getElementById('searchInput')) {
         document.getElementById('searchInput').value = ''

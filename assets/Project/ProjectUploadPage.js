@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return
     }
     selectedFile = file
-    fileName.textContent = file.name + ' (' + formatSize(file.size) + ')'
+    fileName.textContent = `${file.name} (${formatSize(file.size)})`
     fileInfo.style.display = 'flex'
     submitBtn.style.display = 'inline-flex'
     submitBtn.disabled = false
@@ -91,9 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   function formatSize(bytes) {
-    if (bytes < 1024) return bytes + ' B'
-    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB'
-    return (bytes / 1048576).toFixed(1) + ' MB'
+    if (bytes < 1024) return `${bytes} B`
+    if (bytes < 1048576) return `${(bytes / 1024).toFixed(1)} KB`
+    return `${(bytes / 1048576).toFixed(1)} MB`
   }
 
   function showError(msg) {
@@ -115,11 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Read file to compute MD5 checksum, then upload
     const reader = new FileReader()
-    reader.onload = function () {
+    reader.onload = () => {
       const checksum = computeMd5Hex(new Uint8Array(reader.result))
       doUpload(file, checksum)
     }
-    reader.onerror = function () {
+    reader.onerror = () => {
       // If reading fails, try without checksum
       doUpload(file, '')
     }
@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
     xhr.upload.addEventListener('progress', (e) => {
       if (e.lengthComputable) {
         const percent = Math.round((e.loaded / e.total) * 100)
-        progressFill.style.width = percent + '%'
-        progressText.textContent = percent + '%'
+        progressFill.style.width = `${percent}%`
+        progressText.textContent = `${percent}%`
       }
     })
 
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectId = response.project_id || response.id || ''
         const projectUrl = projectUrlTemplate
           ? projectUrlTemplate.replace('__ID__', projectId)
-          : '/app/project/' + projectId
+          : `/app/project/${projectId}`
 
         const successText = document.getElementById('upload-success-text')
         const viewBtn = document.getElementById('upload-view-project')

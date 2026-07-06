@@ -1,5 +1,5 @@
-module.exports = function (Handlebars) {
-  Handlebars.registerHelper('custom', function (context, options) {
+module.exports = (Handlebars) => {
+  Handlebars.registerHelper('custom', (context, options) => {
     if (!context || context.length === 0) {
       return ''
     }

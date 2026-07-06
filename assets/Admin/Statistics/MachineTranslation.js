@@ -4,7 +4,7 @@ import { PieChart } from '../PieChart'
 const pieChart = new PieChart()
 pieChart.add('piechart_3d', providerData, 'Provider breakdown')
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', (event) => {
   if (event.target && event.target.id === 'delete-button') {
     event.preventDefault()
     document.getElementById('delete-button').style.display = 'none'

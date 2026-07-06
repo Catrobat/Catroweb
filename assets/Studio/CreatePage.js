@@ -1,12 +1,12 @@
 import { extractFieldErrors } from '../Api/ResponseHelper'
 import '../Components/Switch'
-import { showValidationMessage } from '../Components/TextField'
 import AcceptLanguage from '../Api/AcceptLanguage'
-import { isAllowedImageType, exceedsMaxSize, compressImageIfNeeded } from './ImageCompressor'
+import { showValidationMessage } from '../Components/TextField'
+import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
 
 import './CreateStudio.scss'
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.getElementById('top-app-bar__btn-save')
   const createForm = document.getElementById('studio-create-form')
   const compressedNotice = document.getElementById('studio-file-compressed')
@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
   // Holds the (possibly compressed) file ready for upload
   let processedFile = null
 
-  saveButton.addEventListener('click', function (event) {
+  saveButton.addEventListener('click', (event) => {
     if (createForm.reportValidity()) {
       event.preventDefault()
       submitForm(
         {
-          url: document.getElementById('js-api-routing').dataset.baseUrl + '/api/studios',
+          url: `${document.getElementById('js-api-routing').dataset.baseUrl}/api/studios`,
         },
         {
           name: createForm.querySelector('#studio-name__input').value,
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (response.status === 422) {
-      response.text().then(function (text) {
+      response.text().then((text) => {
         handleValidationError(text)
       })
     }
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const emptyFileMsg = fileName.textContent
   let currentFileName = emptyFileMsg
 
-  fileInput.addEventListener('change', async function (event) {
+  fileInput.addEventListener('change', async (event) => {
     const file = event.target.files[0]
     compressedNotice.style.display = 'none'
 
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return
     }
 
-    currentFileName = file.name.length > 20 ? file.name.substring(0, 17) + '...' : file.name
+    currentFileName = file.name.length > 20 ? `${file.name.substring(0, 17)}...` : file.name
     fileName.textContent = currentFileName
     fileName.classList.remove('error-text')
 
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
         compressedNotice.style.display = 'block'
         currentFileName =
           processedFile.name.length > 20
-            ? processedFile.name.substring(0, 17) + '...'
+            ? `${processedFile.name.substring(0, 17)}...`
             : processedFile.name
         fileName.textContent = currentFileName
       }
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Display image preview
       const reader = new FileReader()
-      reader.onload = function (e) {
+      reader.onload = (e) => {
         previewImage.src = e.target.result
         previewImage.style.display = 'block'
         deleteButton.style.display = 'flex'
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
-  deleteButton.addEventListener('click', function () {
+  deleteButton.addEventListener('click', () => {
     resetFileInput()
   })
 

@@ -1,12 +1,12 @@
 /* global myProfileConfiguration */
 
-import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
-import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { shareOrCopy } from '../Components/ClipboardHelper'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { buildPictureHTML } from '../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import '../Components/RetentionTooltip'
 
 import './OwnProjectList.scss'
@@ -18,7 +18,7 @@ export class OwnProjectList {
     const attributes =
       'attributes=id,project_url,screenshot,name,downloads,views,reactions,comments,private,not_for_kids,retention_days,retention_expiry'
     this.baseUrl = baseUrl
-    this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' + attributes : apiUrl + '?' + attributes
+    this.apiUrl = apiUrl.includes('?') ? `${apiUrl}&${attributes}` : `${apiUrl}?${attributes}`
     this.projectsLoaded = 0
     this.nextCursor = null
     this.hasMoreFromApi = true
@@ -61,9 +61,9 @@ export class OwnProjectList {
     // remove loading spinners when loading from cache (e.g. browser back button)
     window.addEventListener('pageshow', (ev) => {
       if (ev.persisted) {
-        this.projectsContainer
-          .querySelectorAll('.loading-spinner-backdrop')
-          .forEach((elem) => elem.remove())
+        this.projectsContainer.querySelectorAll('.loading-spinner-backdrop').forEach((elem) => {
+          elem.remove()
+        })
       }
     })
   }
@@ -95,72 +95,71 @@ export class OwnProjectList {
     }
 
     this.fetchActive = true
-    const self = this
 
-    let url = this.apiUrl + '&limit=' + this.projectFetchCount
+    let url = `${this.apiUrl}&limit=${this.projectFetchCount}`
     if (this.nextCursor) {
-      url += '&cursor=' + encodeURIComponent(this.nextCursor)
+      url += `&cursor=${encodeURIComponent(this.nextCursor)}`
     } else {
-      url += '&offset=' + this.projectsLoaded
+      url += `&offset=${this.projectsLoaded}`
     }
 
     new ApiFetch(url, 'GET', undefined, 'json')
       .run()
-      .then(function (response) {
+      .then((response) => {
         const envelope = normalizeApiResponse(response)
         const data = envelope.data || []
         if (!Array.isArray(data)) {
           console.error('Data received for own projects is no array!')
-          self.container.classList.remove('loading')
+          this.container.classList.remove('loading')
           return
         }
 
         if (envelope.next_cursor !== undefined) {
-          self.nextCursor = envelope.next_cursor
+          this.nextCursor = envelope.next_cursor
         }
         if (envelope.has_more !== undefined) {
-          self.hasMoreFromApi = envelope.has_more
+          this.hasMoreFromApi = envelope.has_more
         } else {
-          self.hasMoreFromApi = data.length >= self.projectFetchCount
+          this.hasMoreFromApi = data.length >= this.projectFetchCount
         }
 
         if (clear) {
-          Array.prototype.slice.call(self.projectsContainer.childNodes).forEach(function (child) {
-            self.projectsContainer.removeChild(child)
+          Array.prototype.slice.call(this.projectsContainer.childNodes).forEach((child) => {
+            this.projectsContainer.removeChild(child)
           })
         }
 
-        data.forEach(function (project) {
-          self.projectsData[project.id] = project
-          const projectElement = self._generate(project)
-          self.projectsContainer.appendChild(projectElement)
+        data.forEach((project) => {
+          this.projectsData[project.id] = project
+          const projectElement = this._generate(project)
+          this.projectsContainer.appendChild(projectElement)
           const projectLink = projectElement.querySelector('a[href]')
           if (projectLink) {
-            projectLink.addEventListener('click', function () {
-              self._addLoadingSpinner(projectElement)
+            projectLink.addEventListener('click', () => {
+              this._addLoadingSpinner(projectElement)
             })
           }
         })
-        self.container.classList.remove('loading')
+        this.container.classList.remove('loading')
 
-        self.projectsLoaded += data.length
+        this.projectsLoaded += data.length
 
-        if (self.projectsLoaded === 0 && self.empty === false) {
-          self.empty = true
-          if (self.emptyMessage) {
-            self.projectsContainer.appendChild(document.createTextNode(self.emptyMessage))
-            self.container.classList.add('empty-with-text')
+        if (this.projectsLoaded === 0 && this.empty === false) {
+          this.empty = true
+          if (this.emptyMessage) {
+            this.projectsContainer.appendChild(document.createTextNode(this.emptyMessage))
+            this.container.classList.add('empty-with-text')
           } else {
-            self.container.classList.add('empty')
+            this.container.classList.add('empty')
           }
         }
 
-        self.fetchActive = false
+        this.fetchActive = false
       })
-      .catch(function (reason) {
+      .catch((reason) => {
         console.error('Failed loading own projects', reason)
-        self.container.classList.remove('loading')
-        self.fetchActive = false
+        this.container.classList.remove('loading')
+        this.fetchActive = false
       })
   }
 
@@ -170,7 +169,7 @@ export class OwnProjectList {
      *   Absolute url always uses new 'app' routing flavor. We have to replace it!
      */
     let projectUrl = data.project_url
-    projectUrl = projectUrl.replace('/app/', '/' + this.theme + '/')
+    projectUrl = projectUrl.replace('/app/', `/${this.theme}/`)
     //
 
     const id = escapeAttr(String(data.id))
@@ -183,8 +182,8 @@ export class OwnProjectList {
     }
 
     let metaHtml = ''
-    ;['downloads', 'views', 'reactions', 'comments'].forEach(function (key) {
-      if (Object.prototype.hasOwnProperty.call(data, key)) {
+    ;['downloads', 'views', 'reactions', 'comments'].forEach((key) => {
+      if (Object.hasOwn(data, key)) {
         metaHtml +=
           '<div class="own-project-list__project__details__properties__property">' +
           '<span class="material-icons">' +
@@ -309,24 +308,23 @@ export class OwnProjectList {
   }
 
   _bindDropdownActions(wrapper, data) {
-    const self = this
     const id = data.id
 
     // Toggle dropdown
     const menuBtn = wrapper.querySelector('.projects-list-item--menu-btn')
     if (menuBtn) {
-      menuBtn.addEventListener('click', function (event) {
+      menuBtn.addEventListener('click', (event) => {
         event.preventDefault()
         event.stopPropagation()
         const dropdown = menuBtn.nextElementSibling
         const isOpen = dropdown.style.display !== 'none'
         // Close all dropdowns first
-        self.projectsContainer.querySelectorAll('.projects-list-item--dropdown').forEach((d) => {
+        this.projectsContainer.querySelectorAll('.projects-list-item--dropdown').forEach((d) => {
           d.style.display = 'none'
         })
         if (!isOpen) {
           // Refresh dynamic text before opening
-          self._refreshDropdownTexts(wrapper, id)
+          this._refreshDropdownTexts(wrapper, id)
           dropdown.style.display = 'block'
         }
       })
@@ -334,7 +332,7 @@ export class OwnProjectList {
 
     // Action handlers via event delegation
     wrapper.querySelectorAll('[data-action]').forEach((btn) => {
-      btn.addEventListener('click', function (event) {
+      btn.addEventListener('click', (event) => {
         event.preventDefault()
         event.stopPropagation()
         const dropdown = btn.closest('.projects-list-item--dropdown')
@@ -343,10 +341,10 @@ export class OwnProjectList {
         }
         const action = btn.dataset.action
         const handlers = {
-          'toggle-visibility': () => self._actionToggleVisibility(id),
-          share: () => self._actionShareProject(id),
-          'not-for-kids': () => self._actionToggleNotForKids(id),
-          delete: () => self._actionDeleteProject(id),
+          'toggle-visibility': () => this._actionToggleVisibility(id),
+          share: () => this._actionShareProject(id),
+          'not-for-kids': () => this._actionToggleNotForKids(id),
+          delete: () => this._actionDeleteProject(id),
         }
         if (handlers[action]) {
           handlers[action]()
@@ -385,12 +383,12 @@ export class OwnProjectList {
   async _actionDeleteProject(id) {
     const projectName = escapeHtml(this.projectsData[id].name)
     const msgParts = this.actionConfiguration.delete.confirmationText
-      .replace('%programName%', '”' + projectName + '”')
+      .replace('%programName%', `”${projectName}”`)
       .split('\n')
     const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: msgParts[0],
-      html: msgParts[1] + '<br><br>' + msgParts[2],
+      html: `${msgParts[1]}<br><br>${msgParts[2]}`,
       icon: 'warning',
       showCancelButton: true,
       allowOutsideClick: false,
@@ -404,11 +402,11 @@ export class OwnProjectList {
     }).then((result) => {
       if (result.value) {
         new ApiDeleteFetch(
-          this.baseUrl + '/api/projects/' + id,
+          `${this.baseUrl}/api/projects/${id}`,
           'Delete Project',
           myProfileConfiguration.messages.unspecifiedErrorText,
-          function () {
-            console.info('Project ' + id + ' deleted successfully.')
+          () => {
+            console.info(`Project ${id} deleted successfully.`)
             window.location.reload()
           },
           {
@@ -426,15 +424,14 @@ export class OwnProjectList {
   }
 
   async _actionToggleVisibility(id) {
-    const self = this
     const project = this.projectsData[id]
     const msgParts = this.actionConfiguration.visibility.confirmationText
-      .replaceAll('%programName%', '”' + escapeHtml(project.name) + '”')
+      .replaceAll('%programName%', `”${escapeHtml(project.name)}”`)
       .split('\n')
     const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: msgParts[0],
-      html: project.private ? msgParts[3] : msgParts[1] + '<br><br>' + msgParts[2],
+      html: project.private ? msgParts[3] : `${msgParts[1]}<br><br>${msgParts[2]}`,
       icon: 'warning',
       showCancelButton: true,
       allowOutsideClick: false,
@@ -447,16 +444,14 @@ export class OwnProjectList {
       cancelButtonText: msgParts[6],
     }).then((result) => {
       if (result.value) {
-        const projectElem = document.querySelector(
-          '.own-project-list__project[data-id="' + id + '"]',
-        )
-        self._addLoadingSpinner(projectElem)
+        const projectElem = document.querySelector(`.own-project-list__project[data-id="${id}"]`)
+        this._addLoadingSpinner(projectElem)
         const newValue = !project.private
         const projectApi = new ProjectApi()
         projectApi.updateProject(
           id,
           { private: newValue },
-          function () {
+          () => {
             const visibilityElem = projectElem.querySelector(
               '.own-project-list__project__details__visibility',
             )
@@ -467,7 +462,7 @@ export class OwnProjectList {
               ).innerText = 'lock_open'
               visibilityElem.querySelector(
                 '.own-project-list__project__details__visibility__text',
-              ).innerText = self.projectInfoConfiguration.visibilityPublicText
+              ).innerText = this.projectInfoConfiguration.visibilityPublicText
             } else {
               project.private = true
               visibilityElem.querySelector(
@@ -475,11 +470,11 @@ export class OwnProjectList {
               ).innerText = 'lock'
               visibilityElem.querySelector(
                 '.own-project-list__project__details__visibility__text',
-              ).innerText = self.projectInfoConfiguration.visibilityPrivateText
+              ).innerText = this.projectInfoConfiguration.visibilityPrivateText
             }
           },
-          function () {
-            self._removeLoadingSpinner(projectElem)
+          () => {
+            this._removeLoadingSpinner(projectElem)
           },
         )
       }
@@ -487,7 +482,6 @@ export class OwnProjectList {
   }
 
   async _actionToggleNotForKids(id) {
-    const self = this
     const project = this.projectsData[id]
     const nfkConfig = this.actionConfiguration.notForKids
     const currentValue = project.not_for_kids || 0
@@ -513,23 +507,21 @@ export class OwnProjectList {
       confirmButtonText: nfkConfig.confirmYes,
     }).then((result) => {
       if (result.value) {
-        const projectElem = document.querySelector(
-          '.own-project-list__project[data-id="' + id + '"]',
-        )
-        self._addLoadingSpinner(projectElem)
+        const projectElem = document.querySelector(`.own-project-list__project[data-id="${id}"]`)
+        this._addLoadingSpinner(projectElem)
         const projectApi = new ProjectApi()
         projectApi.updateProject(
           id,
           { not_for_kids: newValue },
-          function () {
+          () => {
             project.not_for_kids = newValue ? 1 : 0
             showSnackbar(
               '#share-snackbar',
               newValue ? nfkConfig.successMarked : nfkConfig.successUnmarked,
             )
           },
-          function () {
-            self._removeLoadingSpinner(projectElem)
+          () => {
+            this._removeLoadingSpinner(projectElem)
           },
         )
       }

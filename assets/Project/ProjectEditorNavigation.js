@@ -48,7 +48,7 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
     getLanguages()
   }
 
-  document.addEventListener('click', function (event) {
+  document.addEventListener('click', (event) => {
     const translationButton = event.target.closest('.edit-defined-translation')
     if (translationButton) {
       const language = translationButton.dataset.value
@@ -75,7 +75,7 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
     )
 
     window.addEventListener('popstate', this.popStateHandler)
-    showCustomTopBarTitle(this.translationsText, function () {
+    showCustomTopBarTitle(this.translationsText, () => {
       window.history.back()
     })
 
@@ -110,7 +110,7 @@ export function ProjectEditorNavigation(projectDescriptionCredits, programId, pr
   this.reopenNavigation = () => {
     window.addEventListener('popstate', this.popStateHandler)
 
-    showCustomTopBarTitle(this.translationsText, function () {
+    showCustomTopBarTitle(this.translationsText, () => {
       window.history.back()
     })
 

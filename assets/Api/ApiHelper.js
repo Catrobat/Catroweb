@@ -47,7 +47,7 @@ export class ApiFetch {
     if (response.ok) {
       return Promise.resolve(data)
     } else {
-      const errorMessage = 'ERROR ' + response.status + ': ' + JSON.stringify(data)
+      const errorMessage = `ERROR ${response.status}: ${JSON.stringify(data)}`
       return Promise.reject(new Error(errorMessage))
     }
   }
@@ -88,12 +88,12 @@ export class ApiPatchFetch {
             break
           case 401:
             // Invalid credentials
-            console.error(this.componentName + ' ERROR 401: Invalid credentials', response)
+            console.error(`${this.componentName} ERROR 401: Invalid credentials`, response)
             MessageDialogs.showErrorMessage(globalConfiguration.messages.authenticationErrorText)
             break
           case 422:
             response.json().then((body) => {
-              console.error(this.componentName + ' ERROR 422', body, response)
+              console.error(`${this.componentName} ERROR 422`, body, response)
               const details = body?.error?.details
               if (Array.isArray(details)) {
                 MessageDialogs.showErrorList(details.map((d) => d.message))
@@ -105,8 +105,8 @@ export class ApiPatchFetch {
             })
             break
           default:
-            console.error(this.componentName + ' ERROR ' + response.status, response)
-            if (Object.prototype.hasOwnProperty.call(this.otherErrorMessages, response.status)) {
+            console.error(`${this.componentName} ERROR ${response.status}`, response)
+            if (Object.hasOwn(this.otherErrorMessages, response.status)) {
               const errorHandler = this.otherErrorMessages[response.status]
               if (typeof errorHandler === 'function') {
                 errorHandler(response)
@@ -123,7 +123,7 @@ export class ApiPatchFetch {
         if (typeof this.finalCallback === 'function') this.finalCallback()
       })
       .catch((reason) => {
-        console.error(this.componentName + ' FAILURE', reason)
+        console.error(`${this.componentName} FAILURE`, reason)
         MessageDialogs.showErrorMessage(this.unspecifiedErrorText)
         if (typeof this.finalCallback === 'function') this.finalCallback()
       })
@@ -163,12 +163,12 @@ export class ApiDeleteFetch {
             break
           case 401:
             // Invalid credentials
-            console.error(this.componentName + ' ERROR 401: Invalid credentials', response)
+            console.error(`${this.componentName} ERROR 401: Invalid credentials`, response)
             MessageDialogs.showErrorMessage(globalConfiguration.messages.authenticationErrorText)
             break
           default:
-            console.error(this.componentName + ' ERROR ' + response.status, response)
-            if (Object.prototype.hasOwnProperty.call(this.otherErrorMessages, response.status)) {
+            console.error(`${this.componentName} ERROR ${response.status}`, response)
+            if (Object.hasOwn(this.otherErrorMessages, response.status)) {
               const errorHandler = this.otherErrorMessages[response.status]
               if (typeof errorHandler === 'function') {
                 errorHandler(response)
@@ -185,7 +185,7 @@ export class ApiDeleteFetch {
         if (typeof this.finalCallback === 'function') this.finalCallback()
       })
       .catch((reason) => {
-        console.error(this.componentName + ' FAILURE', reason)
+        console.error(`${this.componentName} FAILURE`, reason)
         MessageDialogs.showErrorMessage(this.unspecifiedErrorText)
         if (typeof this.finalCallback === 'function') this.finalCallback()
       })

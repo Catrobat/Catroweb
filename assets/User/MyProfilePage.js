@@ -6,15 +6,15 @@ import '../Components/FullscreenListModal'
 import '../Components/TextField'
 import '../Components/TabBar'
 import { Modal } from 'bootstrap'
-import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle'
-import MessageDialogs from '../Components/MessageDialogs'
 import { ApiDeleteFetch, ApiFetch, ApiPatchFetch } from '../Api/ApiHelper'
-import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
-import VerifyAccountHandler from './VerifyAccountHandler'
 import { escapeHtml } from '../Components/HtmlEscape'
-import { achievementBadgeHtml } from './AchievementBadge'
-import { ProjectList } from '../Project/ProjectList'
 import { prepareImageFileForUpload, readFileAsDataUrl } from '../Components/ImageUploadHelper'
+import MessageDialogs from '../Components/MessageDialogs'
+import { PasswordVisibilityToggle } from '../Components/PasswordVisibilityToggle'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
+import { ProjectList } from '../Project/ProjectList'
+import { achievementBadgeHtml } from './AchievementBadge'
+import VerifyAccountHandler from './VerifyAccountHandler'
 
 import './Profile.scss'
 import './Achievements.scss'
@@ -77,7 +77,7 @@ class OwnProfile {
   }
 
   async updateProfilePicture(pictureDataUrl) {
-    const response = await window.fetch(this.baseUrl + '/api/users/me', {
+    const response = await window.fetch(`${this.baseUrl}/api/users/me`, {
       method: 'PATCH',
       credentials: 'same-origin',
       headers: { 'Content-type': 'application/json' },
@@ -89,7 +89,7 @@ class OwnProfile {
 
   updateProfile(data, successCallback, finalCallback) {
     new ApiPatchFetch(
-      this.baseUrl + '/api/users/me',
+      `${this.baseUrl}/api/users/me`,
       data,
       'Save Profile',
       myProfileConfiguration.messages.unspecifiedErrorText,
@@ -100,17 +100,16 @@ class OwnProfile {
   }
 
   initProfilePictureChange() {
-    const self = this
     const avatarElements = document.getElementsByClassName('profile__basic-info__avatar')
     if (avatarElements.length) {
       this.avatarElement = avatarElements[0]
-      this.avatarElement.addEventListener('click', function () {
+      this.avatarElement.addEventListener('click', () => {
         const input = document.createElement('input')
         input.type = 'file'
         input.accept = 'image/*'
         input.style.display = 'none'
         document.body.appendChild(input)
-        self.addProfilePictureChangeListenerToInput(input)
+        this.addProfilePictureChangeListenerToInput(input)
         input.click()
       })
 
@@ -118,7 +117,7 @@ class OwnProfile {
         const input = document.createElement('input')
         input.type = 'file'
         input.accept = 'image/*'
-        self.addProfilePictureChangeListenerToInput(input)
+        this.addProfilePictureChangeListenerToInput(input)
         input.name = 'own-profile-picture-upload-field'
         input.className = 'd-none'
         this.avatarElement.appendChild(input)
@@ -127,7 +126,6 @@ class OwnProfile {
   }
 
   addProfilePictureChangeListenerToInput(input) {
-    const self = this
     input.addEventListener('change', async () => {
       input.remove()
       let loadingSpinner
@@ -144,7 +142,7 @@ class OwnProfile {
       const removeLoadingSpinner = () => {
         if (
           loadingSpinner &&
-          self.avatarElement &&
+          this.avatarElement &&
           loadingSpinner.parentElement === this.avatarElement
         ) {
           this.avatarElement.removeChild(loadingSpinner)
@@ -165,7 +163,7 @@ class OwnProfile {
 
       try {
         const image = await readFileAsDataUrl(processed.file)
-        const wasSuccessful = await self.updateProfilePicture(image)
+        const wasSuccessful = await this.updateProfilePicture(image)
         if (!wasSuccessful) {
           showSnackbar(
             '#share-snackbar',
@@ -175,7 +173,7 @@ class OwnProfile {
           return
         }
 
-        const avatarImage = self.avatarElement?.querySelector('.profile__basic-info__avatar__img')
+        const avatarImage = this.avatarElement?.querySelector('.profile__basic-info__avatar__img')
         if (avatarImage) {
           avatarImage.src = image
         }
@@ -193,14 +191,15 @@ class OwnProfile {
   }
 
   initSaveProfileSettings() {
-    const self = this
     document.getElementById('profile_settings-save_action').addEventListener('click', () => {
       const form = document.getElementById('profile-settings-form')
       if (form.reportValidity() === true) {
         const formData = new window.FormData(form)
         const data = {}
-        formData.forEach((value, key) => (data[key] = value))
-        self.updateProfile(data, function () {
+        formData.forEach((value, key) => {
+          data[key] = value
+        })
+        this.updateProfile(data, () => {
           window.location.search = 'profileChangeSuccess'
         })
       }
@@ -208,7 +207,6 @@ class OwnProfile {
   }
 
   initSaveSecuritySettings() {
-    const self = this
     document.getElementById('security_settings-save_action').addEventListener('click', () => {
       const form = document.getElementById('security-settings-form')
       if (form.reportValidity() === true) {
@@ -218,12 +216,12 @@ class OwnProfile {
             myProfileConfiguration.messages.security.passwordsDontMatch,
           )
         } else {
-          self.updateProfile(
+          this.updateProfile(
             {
               current_password: formData.get('current-password'),
               password: formData.get('password'),
             },
-            function () {
+            () => {
               MessageDialogs.showSuccessMessage(
                 myProfileConfiguration.messages.passwordChangedSuccessText,
               ).then(() => {
@@ -248,12 +246,11 @@ class OwnProfile {
 
     btn.addEventListener('click', async () => {
       btn.disabled = true
-      btn.innerHTML =
-        '<span class="spinner-border spinner-border-sm me-1" role="status"></span> ' + loadingText
+      btn.innerHTML = `<span class="spinner-border spinner-border-sm me-1" role="status"></span> ${loadingText}`
 
       try {
         const response = await new ApiFetch(
-          this.baseUrl + '/api/users/me/data-export',
+          `${this.baseUrl}/api/users/me/data-export`,
           'GET',
           undefined,
           'none',
@@ -273,7 +270,7 @@ class OwnProfile {
           document.body.removeChild(a)
           URL.revokeObjectURL(url)
         } else if (response.status === 401) {
-          window.location.href = this.baseUrl + '/app/login'
+          window.location.href = `${this.baseUrl}/app/login`
           return
         } else if (response.status === 429) {
           MessageDialogs.showErrorMessage(rateLimitedText)
@@ -297,7 +294,7 @@ class OwnProfile {
       const { default: Swal } = await import('sweetalert2')
       Swal.fire({
         title: msgParts[0],
-        html: msgParts[1] + '<br><br>' + msgParts[2],
+        html: `${msgParts[1]}<br><br>${msgParts[2]}`,
         icon: 'warning',
         showCancelButton: true,
         allowOutsideClick: false,
@@ -311,10 +308,10 @@ class OwnProfile {
       }).then((result) => {
         if (result.value) {
           new ApiDeleteFetch(
-            this.baseUrl + '/api/users/me',
+            `${this.baseUrl}/api/users/me`,
             'Delete User',
             myProfileConfiguration.messages.unspecifiedErrorText,
-            function () {
+            () => {
               window.location.href = routingDataset.index
             },
           ).run()
@@ -336,11 +333,11 @@ function initProfileAchievements() {
   const userId = container.dataset.userId
   const title = container.dataset.transTitle
 
-  fetch(baseUrl + '/api/users/' + userId + '/achievements', {
+  fetch(`${baseUrl}/api/users/${userId}/achievements`, {
     headers: { Accept: 'application/json' },
   })
     .then((r) => {
-      if (!r.ok) throw new Error('HTTP ' + r.status)
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
       return r.json()
     })
     .then((response) => {

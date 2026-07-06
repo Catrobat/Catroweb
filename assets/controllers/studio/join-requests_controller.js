@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
-import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
-import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { buildPictureHTML } from '../../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -21,7 +21,7 @@ export default class extends Controller {
     listElement.innerHTML = ''
 
     try {
-      const response = await fetch(this.joinRequestsUrlValue + '?limit=50', {
+      const response = await fetch(`${this.joinRequestsUrlValue}?limit=50`, {
         credentials: 'same-origin',
       })
       if (!response.ok) {
@@ -50,7 +50,7 @@ export default class extends Controller {
     li.id = `join-request-${request.id}`
 
     const username = escapeHtml(request.username || 'Unknown')
-    const profileUrl = '/app/user/' + escapeAttr(String(request.user_id))
+    const profileUrl = `/app/user/${escapeAttr(String(request.user_id))}`
     const transAccept = escapeHtml(this.element.dataset.transAccept || 'Accept')
     const transDecline = escapeHtml(this.element.dataset.transDecline || 'Decline')
 

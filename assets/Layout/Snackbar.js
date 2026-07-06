@@ -8,7 +8,7 @@ export const SnackbarDuration = {
 
 export function showSnackbar(id, text = '', duration = SnackbarDuration.short) {
   const snackbar = document.querySelector(id)
-  const snackbarLabel = document.querySelector(id + '-label')
+  const snackbarLabel = document.querySelector(`${id}-label`)
 
   if (!snackbar || !snackbarLabel) return
 
@@ -20,7 +20,7 @@ export function showSnackbar(id, text = '', duration = SnackbarDuration.short) {
   }).length
 
   if (visibleSnacks > 0) {
-    window.setTimeout(function () {
+    window.setTimeout(() => {
       showSnackbar(id, text, duration)
     }, 250)
     return

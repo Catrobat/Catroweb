@@ -1,6 +1,6 @@
 import { normalizeApiResponse } from '../Api/ResponseHelper'
-import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
 import { createPictureElement } from '../Layout/ImageVariants'
+import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
 
 export function MediaLib(
   categoryId,
@@ -13,7 +13,7 @@ export function MediaLib(
 ) {
   getCategoryFiles(categoryId, mediaSearchPath, flavor)
 
-  function getCategoryFiles(categoryId, mediaSearchPath, flavor) {
+  function getCategoryFiles(_categoryId, mediaSearchPath, flavor) {
     let downloadList = []
     let displayedAssets = 0
 
@@ -23,7 +23,7 @@ export function MediaLib(
     const categoryEl = document.querySelector('#content .category')
 
     if (downloadBtn) {
-      downloadBtn.onclick = function () {
+      downloadBtn.onclick = () => {
         for (let i = 0; i < downloadList.length; i++) {
           medialibDownloadSelectedFile(downloadList[i])
         }
@@ -34,9 +34,9 @@ export function MediaLib(
     }
 
     if (cancelBtn) {
-      cancelBtn.onclick = function () {
+      cancelBtn.onclick = () => {
         for (let i = 0; i < downloadList.length; i++) {
-          document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
+          document.getElementById(`mediafile-${downloadList[i].id}`).classList.remove('selected')
         }
         downloadList = []
         if (typeof showTopBarDefault === 'function') {
@@ -122,8 +122,8 @@ export function MediaLib(
             // media container
             const mediafileContainer = document.createElement('a')
             mediafileContainer.classList.add('mediafile')
-            mediafileContainer.id = 'mediafile-' + file.id
-            mediafileContainer.addEventListener('click', function () {
+            mediafileContainer.id = `mediafile-${file.id}`
+            mediafileContainer.addEventListener('click', () => {
               mediafileContainer.classList.toggle('selected')
               const indexInDownloadList = downloadList.indexOf(file)
 
@@ -133,7 +133,7 @@ export function MediaLib(
                 downloadList.splice(indexInDownloadList, 1)
               }
 
-              let elementsText = downloadList.length + ' '
+              let elementsText = `${downloadList.length} `
               // Dispense support for languages where the count would be right.
               // This way there is no need to dynamically load the translation. (No delay - Less requests)
               if (downloadList.length === 1) {
@@ -227,7 +227,7 @@ export function MediaLib(
           showCategoryContent()
         })
         .catch((error) => {
-          console.error('Error loading media library category ' + categoryName, error)
+          console.error(`Error loading media library category ${categoryName}`, error)
           removeSkeletonMediaItems()
         })
         .finally(() => {
@@ -267,8 +267,8 @@ export function MediaLib(
 
     let sizeText = ''
     if (file.size) {
-      const size = (file.size / (1024 * 1024)).toFixed(2) + 'MB'
-      sizeText = '<br>' + translations.size.replace('%size%', size)
+      const size = `${(file.size / (1024 * 1024)).toFixed(2)}MB`
+      sizeText = `<br>${translations.size.replace('%size%', size)}`
     }
 
     return type + sizeText
@@ -290,7 +290,7 @@ export function MediaLib(
       previewBtn.classList.add('audio-control', 'material-icons')
       previewBtn.textContent = 'play_arrow'
 
-      previewBtn.addEventListener('click', function () {
+      previewBtn.addEventListener('click', () => {
         if (audio.paused) {
           previewBtn.textContent = 'pause'
           audio.play()
@@ -301,7 +301,7 @@ export function MediaLib(
         return false
       })
 
-      audio.onended = function () {
+      audio.onended = () => {
         previewBtn.textContent = 'play_arrow'
       }
 
@@ -330,13 +330,13 @@ export function MediaLib(
       title: file.name,
     })
     if (picture.tagName === 'IMG') {
-      picture.addEventListener('error', function () {
+      picture.addEventListener('error', () => {
         picture.remove()
       })
     } else {
       const img = picture.querySelector('img')
       if (img) {
-        img.addEventListener('error', function () {
+        img.addEventListener('error', () => {
           picture.remove()
         })
       }

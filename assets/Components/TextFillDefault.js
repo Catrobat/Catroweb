@@ -24,11 +24,11 @@ export default function (container) {
     minFontPixels,
     widthOnly: true,
     innerTag: 'span',
-    fail: function () {
+    fail: () => {
       containerElem.classList.add('force-word-break')
       containerElem.innerHTML = html
     },
-    success: function () {
+    success: () => {
       containerElem.classList.remove('force-word-break')
       const newFontSize = window.getComputedStyle(span).fontSize
       containerElem.innerHTML = html

@@ -1,5 +1,5 @@
-import { CustomTranslationApi } from '../Api/CustomTranslationApi'
 import AcceptLanguage from '../Api/AcceptLanguage'
+import { CustomTranslationApi } from '../Api/CustomTranslationApi'
 
 export const DIALOG = {
   CLOSE_EDITOR: 'close_editor',
@@ -106,7 +106,7 @@ export function ProjectEditorModel(programId, textFieldModels, preloadedLanguage
       const requestData = this.textFieldModels
         .map((textField) => textField.collectChanges(this.selectedLanguage))
         .filter((update) => update !== null)
-        .reduce((acc, curr) => ({ ...acc, ...curr }), {})
+        .reduce((acc, curr) => Object.assign(acc, curr), {})
 
       if (Object.keys(requestData).length === 0) {
         return
@@ -142,7 +142,7 @@ export function ProjectEditorModel(programId, textFieldModels, preloadedLanguage
           }
         })
         .catch((reason) => {
-          console.error('Unexpected error on updating project: ' + reason)
+          console.error(`Unexpected error on updating project: ${reason}`)
         })
     } else {
       Promise.all(

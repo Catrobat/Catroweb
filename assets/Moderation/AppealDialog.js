@@ -1,5 +1,5 @@
-import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 import { escapeAttr } from '../Components/HtmlEscape'
+import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 
 export async function showAppealDialog({ apiUrl, translations }) {
   const { default: Swal } = await import('sweetalert2')

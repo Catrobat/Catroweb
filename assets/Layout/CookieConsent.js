@@ -1,5 +1,5 @@
-import { deleteCookie, getCookie, setCookie } from '../Security/CookieHelper'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
+import { deleteCookie, getCookie, setCookie } from '../Security/CookieHelper'
 
 const COOKIE_NAME = 'cookie_consent'
 const COOKIE_EXPIRY_DAYS = 365

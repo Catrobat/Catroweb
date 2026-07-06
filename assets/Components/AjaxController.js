@@ -14,7 +14,7 @@ export class AjaxController extends Controller {
     const listElement = document.getElementById(elementId)
     listElement.innerHTML = ''
 
-    const response = await fetch(url + '?' + params.toString())
+    const response = await fetch(`${url}?${params.toString()}`)
     listElement.innerHTML = await response.text()
   }
 

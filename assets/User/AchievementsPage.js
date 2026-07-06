@@ -1,6 +1,6 @@
 import 'external-svg-loader'
 import { ApiFetch } from '../Api/ApiHelper'
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { achievementBadgeHtml } from './AchievementBadge'
 
 import '../Components/TabBar'
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function fetchAchievements() {
-  new ApiFetch(baseUrl + '/api/achievements', 'GET', undefined, 'json')
+  new ApiFetch(`${baseUrl}/api/achievements`, 'GET', undefined, 'json')
     .run()
     .then((data) => {
       removeSkeletons()
@@ -53,7 +53,9 @@ function fetchAchievements() {
 }
 
 function removeSkeletons() {
-  document.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+  document.querySelectorAll('.js-skeleton').forEach((el) => {
+    el.remove()
+  })
 }
 
 function renderUnlockedAchievements(achievements) {
@@ -220,7 +222,7 @@ function hideAchievementsSidebarBadge() {
 }
 
 function markAchievementsAsRead() {
-  new ApiFetch(baseUrl + '/api/achievements/read', 'PUT').run().catch((error) => {
+  new ApiFetch(`${baseUrl}/api/achievements/read`, 'PUT').run().catch((error) => {
     console.error('Failed to mark achievements as read:', error)
   })
 }

@@ -1,8 +1,8 @@
 import '../Components/TabBar'
 import './Profile.scss'
-import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { buildPictureHTML } from '../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.js-follower-overview')
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderFollowerCard(user, showFollowsMe, itemClassPrefix) {
-    const avatarFallback = baseUrl + '/images/default/avatar_default-thumb@1x.webp'
-    const profileUrl = baseUrl + '/' + escapeAttr(theme) + '/user/' + escapeAttr(user.id)
-    const itemClass = itemClassPrefix + '-' + escapeAttr(user.id)
+    const avatarFallback = `${baseUrl}/images/default/avatar_default-thumb@1x.webp`
+    const profileUrl = `${baseUrl}/${escapeAttr(theme)}/user/${escapeAttr(user.id)}`
+    const itemClass = `${itemClassPrefix}-${escapeAttr(user.id)}`
 
     let followsMeHtml = ''
     if (showFollowsMe && user.follows_you) {
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <span class="h4">${escapeHtml(user.username)}</span>
               <div class="text-muted d-flex gap-3">
                 <span><i class="material-icons" style="font-size: inherit; vertical-align: middle; margin-right: 2px;">code</i> ${user.project_count ?? 0}</span>
-                ${user.follower_count !== undefined ? '<span><i class="material-icons" style="font-size: inherit; vertical-align: middle; margin-right: 2px;">people</i> ' + user.follower_count + '</span>' : ''}
+                ${user.follower_count !== undefined ? `<span><i class="material-icons" style="font-size: inherit; vertical-align: middle; margin-right: 2px;">people</i> ${user.follower_count}</span>` : ''}
               </div>
               <div class="text-muted text-uppercase follower-item__info">
                 ${followsMeHtml}
@@ -102,7 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function removeSkeletons(container) {
-    container.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+    container.querySelectorAll('.js-skeleton').forEach((el) => {
+      el.remove()
+    })
   }
 
   function renderList(cardsContainer, emptyContainer, users, showFollowsMe, itemClassPrefix) {
@@ -130,16 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!followerCards || !followingCards) return
 
-    const followersUrl = baseUrl + '/api/users/' + userId + '/followers'
-    const followingUrl = baseUrl + '/api/users/' + userId + '/following'
+    const followersUrl = `${baseUrl}/api/users/${userId}/followers`
+    const followingUrl = `${baseUrl}/api/users/${userId}/following`
 
     Promise.all([
       fetch(followersUrl, { credentials: 'same-origin' }).then((r) => {
-        if (!r.ok) throw new Error('HTTP ' + r.status)
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()
       }),
       fetch(followingUrl, { credentials: 'same-origin' }).then((r) => {
-        if (!r.ok) throw new Error('HTTP ' + r.status)
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()
       }),
     ])
@@ -169,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return
     }
 
-    const url = baseUrl + '/api/users/' + targetUserId + '/follow'
+    const url = `${baseUrl}/api/users/${targetUserId}/follow`
     fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
@@ -210,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ),
             )
         } else {
-          throw new Error('Request failed with status:' + response.status)
+          throw new Error(`Request failed with status:${response.status}`)
         }
       })
       .catch((error) => {
@@ -239,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
       buttonsStyling: false,
     }).then((result) => {
       if (result.value) {
-        const url = baseUrl + '/api/users/' + targetUserId + '/unfollow'
+        const url = `${baseUrl}/api/users/${targetUserId}/unfollow`
         fetch(url, {
           method: 'DELETE',
           credentials: 'same-origin',
@@ -281,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   ),
                 )
             } else {
-              throw new Error('Request failed with status:' + response.status)
+              throw new Error(`Request failed with status:${response.status}`)
             }
           })
           .catch((error) => {

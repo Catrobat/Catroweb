@@ -1,6 +1,6 @@
 import { OAuthHandler } from '../Security/OAuthHandler'
-import { FeaturedBanner } from './FeaturedBanner'
 import { DefaultProjectLists } from './DefaultProjectLists'
+import { FeaturedBanner } from './FeaturedBanner'
 import { MaintenanceHandler } from './MaintenanceHandler'
 import './IndexPage.scss'
 

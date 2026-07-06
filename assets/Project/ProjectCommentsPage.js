@@ -1,5 +1,5 @@
-import { ProjectComments } from './ProjectComments'
 import { TranslateComments } from '../Translate/TranslateComments'
+import { ProjectComments } from './ProjectComments'
 
 import './ProjectPage.scss'
 

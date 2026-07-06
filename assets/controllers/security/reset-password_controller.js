@@ -1,7 +1,7 @@
 import { extractFieldErrors } from '../../Api/ResponseHelper'
-import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
-import { showValidationMessage } from '../../Components/TextField'
 import { AjaxController } from '../../Components/AjaxController'
+import { showValidationMessage } from '../../Components/TextField'
+import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
 import { initCaptchaWidget } from '../../Security/CaptchaWidget'
 
 /* stimulusFetch: 'lazy' */
@@ -65,15 +65,14 @@ export default class extends AjaxController {
     }
 
     if (response.status === 422) {
-      const self = this
-      response.text().then(function (text) {
-        self.handleValidationError(text)
+      response.text().then((text) => {
+        this.handleValidationError(text)
       })
       return
     }
 
-    response.text().then(function (text) {
-      console.error('Password reset error: ' + response.status + text)
+    response.text().then((text) => {
+      console.error(`Password reset error: ${response.status}${text}`)
     })
     showSnackbar(
       '#share-snackbar',

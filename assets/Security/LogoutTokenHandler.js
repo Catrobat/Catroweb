@@ -6,20 +6,19 @@ export class LogoutTokenHandler {
   }
 
   initListeners() {
-    const self = this
     const logoutButton = document.getElementById('btn-logout')
     if (!logoutButton) {
       return
     }
-    logoutButton.onclick = function () {
-      fetch(self.authenticationPath, {
+    logoutButton.onclick = () => {
+      fetch(this.authenticationPath, {
         method: 'DELETE',
         credentials: 'same-origin',
         headers: {
           'X-Refresh': 'cookie',
         },
       }).finally(() => {
-        if (logoutButton.dataset && logoutButton.dataset.logoutPath) {
+        if (logoutButton.dataset?.logoutPath) {
           window.location.href = logoutButton.dataset.logoutPath
         }
       })

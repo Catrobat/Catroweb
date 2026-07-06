@@ -1,7 +1,7 @@
 import './OverviewPage.scss'
 
-import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
 import { createPictureElement } from '../Layout/ImageVariants'
+import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
 
 const overviewContainer = document.querySelector('.js-media-library-overview')
 
@@ -183,7 +183,7 @@ if (overviewContainer) {
             ? category.preview_assets[category.preview_assets.length - 1]
             : null
         const initialCursor =
-          lastPreview && lastPreview.created_at && lastPreview.id
+          lastPreview?.created_at && lastPreview.id
             ? btoa(`${lastPreview.created_at}|${lastPreview.id}`)
             : null
 
@@ -287,8 +287,10 @@ if (overviewContainer) {
     const cancelBtn = document.getElementById('top-app-bar__btn-cancel-download-selection')
 
     if (downloadBtn) {
-      downloadBtn.onclick = function () {
-        downloadList.forEach((file) => downloadSelectedFile(file))
+      downloadBtn.onclick = () => {
+        downloadList.forEach((file) => {
+          downloadSelectedFile(file)
+        })
         if (cancelBtn) {
           cancelBtn.click()
         }
@@ -296,7 +298,7 @@ if (overviewContainer) {
     }
 
     if (cancelBtn) {
-      cancelBtn.onclick = function () {
+      cancelBtn.onclick = () => {
         downloadList.forEach((file) => {
           const card = document.getElementById(`media-asset-card-${file.id}`)
           if (card) {
@@ -318,7 +320,7 @@ if (overviewContainer) {
       return
     }
 
-    let elementsText = downloadList.length + ' '
+    let elementsText = `${downloadList.length} `
     if (downloadList.length === 1) {
       elementsText += translations.elementsSingular
     } else {

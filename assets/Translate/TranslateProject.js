@@ -132,35 +132,34 @@ export class TranslateProject extends Translation {
     let text = document.getElementById('name').innerText
 
     if (this.hasDescription) {
-      text += '\n\n' + document.getElementById('description').innerText
+      text += `\n\n${document.getElementById('description').innerText}`
     }
 
     if (this.hasCredit) {
-      text += '\n\n' + document.getElementById('credits').innerText
+      text += `\n\n${document.getElementById('credits').innerText}`
     }
 
     this.openGoogleTranslatePage(text)
   }
 
   translateProject() {
-    const self = this
     fetch(
-      self.baseUrl +
+      this.baseUrl +
         '/api/projects/' +
-        self.projectId +
+        this.projectId +
         '/translation?target_language=' +
-        self.targetLanguage,
+        this.targetLanguage,
       {
         method: 'GET',
       },
     )
       .then((response) => response.json())
       .then((data) => {
-        self.setTranslatedProjectData(data)
-        self.openTranslatedProject()
+        this.setTranslatedProjectData(data)
+        this.openTranslatedProject()
       })
       .catch(() => {
-        self.projectNotTranslated()
+        this.projectNotTranslated()
       })
   }
 }

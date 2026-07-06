@@ -1,9 +1,9 @@
 import { Controller } from '@hotwired/stimulus'
-import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
-import { shareOrCopy } from '../../Components/ClipboardHelper'
-import { buildPictureHTML } from '../../Layout/ImageVariants'
-import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
 import AcceptLanguage from '../../Api/AcceptLanguage'
+import { shareOrCopy } from '../../Components/ClipboardHelper'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
+import { buildPictureHTML } from '../../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -102,9 +102,7 @@ export default class extends Controller {
   }
 
   _emptyMessageHtml(message) {
-    return (
-      '<p class="text-muted text-center py-4 studios-empty-message">' + escapeHtml(message) + '</p>'
-    )
+    return `<p class="text-muted text-center py-4 studios-empty-message">${escapeHtml(message)}</p>`
   }
 
   async _fetchMyStudios() {
@@ -168,7 +166,7 @@ export default class extends Controller {
     }
 
     const container = this.isLoggedInValue ? this.exploreStudiosTarget : this.studiosListTarget
-    const url = this.apiBaseUrlValue + '/studios?' + params.toString()
+    const url = `${this.apiBaseUrlValue}/studios?${params.toString()}`
 
     try {
       const response = await fetch(url, {
@@ -205,7 +203,9 @@ export default class extends Controller {
 
   _removeSkeletons(container) {
     if (container) {
-      container.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+      container.querySelectorAll('.js-skeleton').forEach((el) => {
+        el.remove()
+      })
     }
   }
 
@@ -306,7 +306,7 @@ export default class extends Controller {
       '</span>' +
       '</div>' +
       '</div>' +
-      (description ? '<p class="text-muted small mb-0 mt-1">' + description + '</p>' : '') +
+      (description ? `<p class="text-muted small mb-0 mt-1">${description}</p>` : '') +
       '</div>' +
       '</div>' +
       '</a>' +
@@ -504,7 +504,7 @@ export default class extends Controller {
 
     try {
       const response = await fetch(
-        this.apiBaseUrlValue + '/studios/' + encodeURIComponent(studioId) + '/join',
+        `${this.apiBaseUrlValue}/studios/${encodeURIComponent(studioId)}/join`,
         {
           method: 'POST',
           credentials: 'same-origin',
@@ -514,7 +514,7 @@ export default class extends Controller {
 
       if (response.ok) {
         const wrapper = this.element.querySelector(
-          '.studios-list-item-wrapper[data-studio-id="' + CSS.escape(studioId) + '"]',
+          `.studios-list-item-wrapper[data-studio-id="${CSS.escape(studioId)}"]`,
         )
         if (wrapper) {
           wrapper.remove()
@@ -558,7 +558,7 @@ export default class extends Controller {
 
     try {
       const response = await fetch(
-        this.apiBaseUrlValue + '/studios/' + encodeURIComponent(studioId) + '/leave',
+        `${this.apiBaseUrlValue}/studios/${encodeURIComponent(studioId)}/leave`,
         {
           method: 'DELETE',
           credentials: 'same-origin',
@@ -583,7 +583,7 @@ export default class extends Controller {
     if (!this.hasMyStudiosTarget) return
 
     const wrapper = this.myStudiosTarget.querySelector(
-      '.studios-list-item-wrapper[data-studio-id="' + CSS.escape(studioId) + '"]',
+      `.studios-list-item-wrapper[data-studio-id="${CSS.escape(studioId)}"]`,
     )
     if (wrapper) {
       wrapper.remove()
@@ -633,6 +633,6 @@ export default class extends Controller {
     if (str.length <= maxLen) {
       return str
     }
-    return str.substring(0, maxLen) + '...'
+    return `${str.substring(0, maxLen)}...`
   }
 }

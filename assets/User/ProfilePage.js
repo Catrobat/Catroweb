@@ -2,8 +2,8 @@ import 'external-svg-loader'
 import '../Components/TabBar'
 import './FollowerOverview'
 
-import { ProjectList } from '../Project/ProjectList'
 import { escapeHtml } from '../Components/HtmlEscape'
+import { ProjectList } from '../Project/ProjectList'
 import { achievementBadgeHtml } from './AchievementBadge'
 import './Profile.scss'
 import './Achievements.scss'
@@ -29,12 +29,12 @@ function initProfileHeader() {
   const transFollow = followerContainer?.dataset.transFollow || ''
   const transFollows = followerContainer?.dataset.transFollows || ''
 
-  fetch(baseUrl + '/api/users/' + userId, {
+  fetch(`${baseUrl}/api/users/${userId}`, {
     headers: { Accept: 'application/json' },
     credentials: 'same-origin',
   })
     .then((r) => {
-      if (!r.ok) throw new Error('HTTP ' + r.status)
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
       return r.json()
     })
     .then((profile) => {
@@ -49,8 +49,7 @@ function initProfileHeader() {
       if (profile.scratch_username) {
         const scratchLink = document.getElementById('scratch-link')
         if (scratchLink) {
-          scratchLink.href =
-            'https://scratch.mit.edu/users/' + encodeURIComponent(profile.scratch_username)
+          scratchLink.href = `https://scratch.mit.edu/users/${encodeURIComponent(profile.scratch_username)}`
           scratchLink.classList.remove('d-none')
         }
       }
@@ -84,7 +83,9 @@ function initProfileHeader() {
       console.error('Failed to load profile data:', error)
     })
     .finally(() => {
-      document.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+      document.querySelectorAll('.js-skeleton').forEach((el) => {
+        el.remove()
+      })
     })
 }
 
@@ -227,7 +228,7 @@ function initProfileAchievements() {
   const userId = container.dataset.userId
   const title = container.dataset.transTitle
 
-  fetch(baseUrl + '/api/users/' + userId + '/achievements', {
+  fetch(`${baseUrl}/api/users/${userId}/achievements`, {
     headers: { Accept: 'application/json' },
   })
     .then((r) => r.json())
@@ -278,13 +279,15 @@ function initTabKeyNavigation() {
       e.preventDefault()
       tabs[newIndex].focus()
       tabs[newIndex].click()
-      tabs.forEach((t, i) => t.setAttribute('tabindex', i === newIndex ? '0' : '-1'))
+      tabs.forEach((t, i) => {
+        t.setAttribute('tabindex', i === newIndex ? '0' : '-1')
+      })
     })
   })
 }
 
 function collapseContainer(container) {
-  container.style.height = container.offsetHeight + 'px'
+  container.style.height = `${container.offsetHeight}px`
   container.style.transition = 'height 0.2s ease, opacity 0.2s ease'
   container.style.overflow = 'hidden'
   requestAnimationFrame(() => {

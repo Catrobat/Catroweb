@@ -9,10 +9,10 @@ import { escapeAttr } from '../Components/HtmlEscape'
  */
 function srcsetFor(set, format) {
   const parts = []
-  const u1 = set[format + '_1x']
-  const u2 = set[format + '_2x']
-  if (u1) parts.push(u1 + ' 1x')
-  if (u2) parts.push(u2 + ' 2x')
+  const u1 = set[`${format}_1x`]
+  const u2 = set[`${format}_2x`]
+  if (u1) parts.push(`${u1} 1x`)
+  if (u2) parts.push(`${u2} 2x`)
   return parts.join(', ')
 }
 
@@ -89,7 +89,7 @@ function appendSources(picture, set, refNode, lazy = false) {
 export function buildPictureHTML(variants, size, fallback, imgAttrs = '', { lazy = false } = {}) {
   const set = resolveSet(variants, size, fallback)
   const src = bestUrl(set) || fallback || ''
-  const attrStr = imgAttrs ? ' ' + imgAttrs : ''
+  const attrStr = imgAttrs ? ` ${imgAttrs}` : ''
   const srcAttr = lazy ? 'data-src' : 'src'
   const srcsetAttr = lazy ? 'data-srcset' : 'srcset'
 
@@ -172,7 +172,9 @@ export function updatePictureSources(imgElement, variants, size, fallback) {
 
   if (!picture) return
 
-  picture.querySelectorAll('source').forEach((s) => s.remove())
+  picture.querySelectorAll('source').forEach((s) => {
+    s.remove()
+  })
 
   if (set) {
     appendSources(picture, set, imgElement)

@@ -1,4 +1,4 @@
-import { Chart, PieController, ArcElement, Tooltip, Legend, Title } from 'chart.js'
+import { ArcElement, Chart, Legend, PieController, Title, Tooltip } from 'chart.js'
 
 Chart.register(PieController, ArcElement, Tooltip, Legend, Title)
 

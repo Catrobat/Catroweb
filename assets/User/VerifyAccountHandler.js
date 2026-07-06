@@ -1,5 +1,5 @@
 import AcceptLanguage from '../Api/AcceptLanguage'
-import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 
 export default class {
   init() {
@@ -8,7 +8,7 @@ export default class {
     const btn = document.getElementById('btn-verify-account')
     btn.addEventListener('click', () => {
       btn.setAttribute('disabled', 'disabled')
-      fetch(baseUrl + 'verify', {
+      fetch(`${baseUrl}verify`, {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -21,7 +21,7 @@ export default class {
             showSnackbar('#share-snackbar', btn.dataset.success)
             break
           case 401:
-            window.location.href = baseUrl + 'login'
+            window.location.href = `${baseUrl}login`
             break
           case 403:
             showSnackbar('#share-snackbar', btn.dataset.failed, SnackbarDuration.error)

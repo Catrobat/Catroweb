@@ -22,7 +22,9 @@ export class MaintenanceHandler {
       const items = await response.json()
       if (!Array.isArray(items) || items.length === 0) return
 
-      items.forEach((item) => this.renderBanner(item))
+      items.forEach((item) => {
+        this.renderBanner(item)
+      })
     } catch (e) {
       console.error('Failed to load maintenance info:', e)
     }
@@ -31,7 +33,7 @@ export class MaintenanceHandler {
   renderBanner(item) {
     const el = document.createElement('div')
     el.className = 'maintenance'
-    el.id = 'viewID_' + item.id
+    el.id = `viewID_${item.id}`
 
     const icon = escapeHtml(item.icon || 'info')
     const featureName = item.feature_name ? escapeHtml(item.feature_name) : ''
@@ -44,19 +46,19 @@ export class MaintenanceHandler {
     if (featureName) {
       message = message.replace(
         'featureName',
-        '<span class="maintenance-feature-name bold-text">' + featureName + '</span>',
+        `<span class="maintenance-feature-name bold-text">${featureName}</span>`,
       )
     }
     if (startDate) {
       message = message.replace(
         'maintenanceStart',
-        '<span class="maintenanceStart-start-date bold-text">' + escapeHtml(startDate) + '</span>',
+        `<span class="maintenanceStart-start-date bold-text">${escapeHtml(startDate)}</span>`,
       )
     }
     if (endDate) {
       message = message.replace(
         'maintenanceEnd',
-        '<span class="maintenanceStart-end-date bold-text">' + escapeHtml(endDate) + '</span>',
+        `<span class="maintenanceStart-end-date bold-text">${escapeHtml(endDate)}</span>`,
       )
     }
 

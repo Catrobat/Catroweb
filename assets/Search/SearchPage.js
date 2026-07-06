@@ -1,6 +1,6 @@
-import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { createPictureElement } from '../Layout/ImageVariants'
+import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
 import './Search.scss'
 
 const RESULTS_PER_PAGE = 30
@@ -43,10 +43,10 @@ function renderPage(container, query, theme, baseUrl, trans) {
   titleDiv.className = 'search-results__title'
   const h1 = document.createElement('h1')
   if (query) {
-    h1.textContent = trans.searchResults + ' '
+    h1.textContent = `${trans.searchResults} `
     const querySpan = document.createElement('span')
     querySpan.id = 'search-results-text'
-    querySpan.textContent = '"' + query + '"'
+    querySpan.textContent = `"${query}"`
     h1.appendChild(querySpan)
   } else {
     h1.textContent = trans.searchResults
@@ -83,7 +83,7 @@ function renderPage(container, query, theme, baseUrl, trans) {
 
   fetch(apiUrl)
     .then((response) => {
-      if (!response.ok) throw new Error('HTTP ' + response.status)
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
       return response.json()
     })
     .then((data) => {
@@ -130,7 +130,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
 
     fetch(apiUrl)
       .then((response) => {
-        if (!response.ok) throw new Error('HTTP ' + response.status)
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
         return response.json()
       })
       .then((data) => {
@@ -139,7 +139,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
 
         if (type === 'projects') {
           items.forEach((project) => {
-            const url = (project.project_url || '').replace('/app/', '/' + theme + '/')
+            const url = (project.project_url || '').replace('/app/', `/${theme}/`)
             container.appendChild(
               createCard(
                 url,
@@ -154,7 +154,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
           })
         } else if (type === 'users') {
           items.forEach((user) => {
-            const url = baseUrl + '/app/user/' + escapeAttr(String(user.id))
+            const url = `${baseUrl}/app/user/${escapeAttr(String(user.id))}`
             container.appendChild(
               createCard(
                 url,
@@ -163,13 +163,13 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
                 '/images/default/avatar_default-thumb@1x.webp',
                 user.username || '',
                 'code',
-                (user.projects || 0) + ' ' + trans.projects,
+                `${user.projects || 0} ${trans.projects}`,
               ),
             )
           })
         } else if (type === 'studios') {
           items.forEach((studio) => {
-            const url = baseUrl + '/app/studio/' + escapeAttr(String(studio.id))
+            const url = `${baseUrl}/app/studio/${escapeAttr(String(studio.id))}`
             container.appendChild(
               createCard(
                 url,
@@ -178,7 +178,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
                 '/images/default/screenshot-card@1x.webp',
                 studio.name || '',
                 'group',
-                (studio.members_count || 0) + ' ' + trans.members,
+                `${studio.members_count || 0} ${trans.members}`,
               ),
             )
           })
@@ -203,7 +203,7 @@ function wireShowMore(section, type, query, baseUrl, theme, trans) {
 function createSection(id, variant, title, showMoreText) {
   const section = document.createElement('div')
   section.id = id
-  section.className = 'search-section search-section--' + variant
+  section.className = `search-section search-section--${variant}`
 
   const titleDiv = document.createElement('div')
   titleDiv.className = 'search-section__title'
@@ -215,7 +215,7 @@ function createSection(id, variant, title, showMoreText) {
   const showMoreBtn = document.createElement('a')
   showMoreBtn.className = 'search-section__title__show-more d-none'
   showMoreBtn.href = '#'
-  showMoreBtn.innerHTML = escapeHtml(showMoreText) + ' <i class="material-icons">arrow_forward</i>'
+  showMoreBtn.innerHTML = `${escapeHtml(showMoreText)} <i class="material-icons">arrow_forward</i>`
   titleDiv.appendChild(showMoreBtn)
 
   section.appendChild(titleDiv)
@@ -241,7 +241,7 @@ function renderProjects(section, projects, theme, trans) {
   }
 
   projects.forEach((project) => {
-    const url = (project.project_url || '').replace('/app/', '/' + theme + '/')
+    const url = (project.project_url || '').replace('/app/', `/${theme}/`)
     const card = createCard(
       url,
       project.screenshot,
@@ -269,7 +269,7 @@ function renderUsers(section, users, baseUrl, trans) {
   }
 
   users.forEach((user) => {
-    const url = baseUrl + '/app/user/' + escapeAttr(String(user.id))
+    const url = `${baseUrl}/app/user/${escapeAttr(String(user.id))}`
     const card = createCard(
       url,
       user.avatar,
@@ -277,7 +277,7 @@ function renderUsers(section, users, baseUrl, trans) {
       '/images/default/avatar_default-thumb@1x.webp',
       user.username || '',
       'code',
-      (user.projects || 0) + ' ' + trans.projects,
+      `${user.projects || 0} ${trans.projects}`,
     )
     items.appendChild(card)
   })
@@ -297,7 +297,7 @@ function renderStudios(section, studios, baseUrl, trans) {
   }
 
   studios.forEach((studio) => {
-    const url = baseUrl + '/app/studio/' + escapeAttr(String(studio.id))
+    const url = `${baseUrl}/app/studio/${escapeAttr(String(studio.id))}`
     const card = createCard(
       url,
       studio.cover,
@@ -305,7 +305,7 @@ function renderStudios(section, studios, baseUrl, trans) {
       '/images/default/screenshot-card@1x.webp',
       studio.name || '',
       'group',
-      (studio.members_count || 0) + ' ' + trans.members,
+      `${studio.members_count || 0} ${trans.members}`,
     )
     items.appendChild(card)
   })

@@ -1,12 +1,12 @@
-import { MDCSelect } from '@material/select'
 import { MDCFloatingLabel } from '@material/floating-label'
+import { MDCSelect } from '@material/select'
 
 import './Select.scss'
 
 for (const el of document.querySelectorAll('.mdc-select')) {
   const select = new MDCSelect(el)
   select.listen('MDCSelect:change', () => {
-    document.getElementById(el.id + '-native').value = select.value
+    document.getElementById(`${el.id}-native`).value = select.value
   })
 }
 

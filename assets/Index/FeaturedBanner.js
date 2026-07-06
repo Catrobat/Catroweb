@@ -231,7 +231,7 @@ export class FeaturedBanner {
 
     container.addEventListener('click', () => {
       const iframe = document.createElement('iframe')
-      iframe.src = slide.videoUrl + '?autoplay=1&controls=1'
+      iframe.src = `${slide.videoUrl}?autoplay=1&controls=1`
       iframe.className = 'carousel-item__image d-block w-100'
       iframe.style.aspectRatio = '1024 / 600'
       iframe.style.border = 'none'
@@ -260,6 +260,8 @@ export class FeaturedBanner {
   removeSkeleton() {
     this.container
       .querySelectorAll('.featured-slider__skeleton, .featured-slider__ssr')
-      .forEach((el) => el.remove())
+      .forEach((el) => {
+        el.remove()
+      })
   }
 }

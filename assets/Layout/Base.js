@@ -14,9 +14,8 @@ import textFillDefault from '../Components/TextFillDefault'
 import './TopBar'
 import './Sidebar'
 import { LogoutTokenHandler } from '../Security/LogoutTokenHandler'
-import { showSnackbar } from './Snackbar'
-
 import { initAnalyticsIfConsented, showCookieSettings } from './CookieConsent'
+import { showSnackbar } from './Snackbar'
 
 // Start the stimulus app
 import '../bootstrap'
@@ -65,22 +64,22 @@ function showFlashSnackbar() {
 
 function fitHeadingFontSizeToAvailableWidth() {
   // Adjust heading font size or break word
-  ;['h1', '.h1', 'h2', '.h2', 'h3', '.h3'].forEach(function (element) {
-    document.querySelectorAll(element + ':not(.no-textfill)').forEach(function (el) {
+  ;['h1', '.h1', 'h2', '.h2', 'h3', '.h3'].forEach((element) => {
+    document.querySelectorAll(`${element}:not(.no-textfill)`).forEach((el) => {
       textFillDefault(el)
     })
   })
 }
 
 function initScrollToHash() {
-  window.addEventListener('load', function () {
+  window.addEventListener('load', () => {
     let hash
     let timeout = 0
     if (window.location.hash === '') {
       return
     }
 
-    const poll = window.setInterval(function () {
+    const poll = window.setInterval(() => {
       hash = document.querySelector(window.location.hash)
 
       if (hash) {

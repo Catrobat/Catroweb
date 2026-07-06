@@ -5,8 +5,8 @@
  * Adapted by the Catroweb Project
  */
 
-import { showSnackbar, SnackbarDuration } from './Snackbar'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
+import { SnackbarDuration, showSnackbar } from './Snackbar'
 
 const getStoredTheme = () => localStorage.getItem('theme')
 const setStoredTheme = (theme) => localStorage.setItem('theme', theme)
@@ -209,7 +209,7 @@ const initializeShareButton = () => {
 }
 
 function copyToClipboard(text, successMessage, failMessage) {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
+  if (navigator.clipboard?.writeText) {
     navigator.clipboard
       .writeText(text)
       .then(() => {
