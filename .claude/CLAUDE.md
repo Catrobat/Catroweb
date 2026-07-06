@@ -51,17 +51,17 @@ yarn run dev-server   # Vite dev server with HMR (sub-200ms updates, port 5173)
 
 # Test & Lint
 yarn test             # All
-yarn run test-js      # ESLint
+yarn run test-js      # Biome (JS/JSON)
 yarn run test-css     # Stylelint
-yarn run test-asset   # Prettier
+yarn run test-asset   # Prettier (MD/YAML)
 yarn run test-php     # PHP CS Fixer
 yarn run test-twig    # Twig CS Fixer
 
 # Fix
 yarn run fix          # All
-yarn run fix-js       # JS
+yarn run fix-js       # JS/JSON (Biome)
 yarn run fix-css      # SCSS
-yarn run fix-asset    # Assets/Prettier
+yarn run fix-asset    # MD/YAML (Prettier)
 yarn run fix-php      # PHP
 yarn run fix-twig     # Twig
 
