@@ -1287,22 +1287,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openapitools/openapi-generator-cli@npm:^2.39.0":
-  version: 2.39.0
-  resolution: "@openapitools/openapi-generator-cli@npm:2.39.0"
+"@openapitools/openapi-generator-cli@npm:^2.39.1":
+  version: 2.39.1
+  resolution: "@openapitools/openapi-generator-cli@npm:2.39.1"
   dependencies:
     "@inquirer/select": "npm:1.3.3"
     "@nestjs/axios": "npm:4.0.1"
     "@nestjs/common": "npm:11.1.27"
     "@nestjs/core": "npm:11.1.27"
     "@nuxtjs/opencollective": "npm:0.3.2"
-    axios: "npm:^1.18.0"
+    axios: "npm:^1.18.1"
     chalk: "npm:4.1.2"
     commander: "npm:8.3.0"
     compare-versions: "npm:6.1.1"
     concurrently: "npm:10.0.3"
     console.table: "npm:0.10.0"
-    fs-extra: "npm:11.3.5"
+    fs-extra: "npm:11.3.6"
     glob: "npm:13.0.6"
     proxy-agent: "npm:8.0.2"
     reflect-metadata: "npm:0.2.2"
@@ -1310,7 +1310,7 @@ __metadata:
     tslib: "npm:2.8.1"
   bin:
     openapi-generator-cli: main.js
-  checksum: 10c0/8726c63c6060b8391929595c8af36d8c6265329eb3428215400aad6c1a511ca21b7c407d87b3f5fef3318c3863748325097a2e3ba4e101c1a93c6167f47699fa
+  checksum: 10c0/31348bc5b8f5673c48a927aa0a51dff4b97b9bd8680e437a93a9c7c9d74280cede3fecfda0935beeb965f0e2b503995354b617fe8544b3a4aba69d53a93c74c3
   languageName: node
   linkType: hard
 
@@ -2066,7 +2066,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.18.0":
+"axios@npm:^1.18.1":
   version: 1.18.1
   resolution: "axios@npm:1.18.1"
   dependencies:
@@ -2219,7 +2219,7 @@ __metadata:
     "@material/tab-scroller": "npm:^14.0.0"
     "@material/textfield": "npm:^14.0.0"
     "@material/top-app-bar": "npm:^14.0.0"
-    "@openapitools/openapi-generator-cli": "npm:^2.39.0"
+    "@openapitools/openapi-generator-cli": "npm:^2.39.1"
     "@popperjs/core": "npm:^2.11.8"
     analytics: "npm:^0.8.19"
     auto-changelog: "npm:^2.6.0"
@@ -3129,14 +3129,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:11.3.5":
-  version: 11.3.5
-  resolution: "fs-extra@npm:11.3.5"
+"fs-extra@npm:11.3.6":
+  version: 11.3.6
+  resolution: "fs-extra@npm:11.3.6"
   dependencies:
     graceful-fs: "npm:^4.2.0"
     jsonfile: "npm:^6.0.1"
     universalify: "npm:^2.0.0"
-  checksum: 10c0/33e80bad6b5d17308faa197e5ede99ecba4b6f6cb4aa4645d52745476c75afc57665bdf39ec75b2ebb38b97b7110f634a8dcc0a546e248eb4de059275cf5ac90
+  checksum: 10c0/191c96bf71519fe08595f7920b6e568f6e44b48ed968624f35cb3bb7f4f9b05718b99cd6bf81938c0f7b1daa6d151383c33e0cbfdfe4d95419d7ea121de8e91a
   languageName: node
   linkType: hard
 
