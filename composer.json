@@ -122,9 +122,7 @@
       "ext-bcmath": "8.5"
     },
     "audit": {
-      "ignore": [
-        "PKSA-4k7v-pfvw-nqvp"
-      ]
+      "ignore": ["PKSA-4k7v-pfvw-nqvp"]
     },
     "bin-dir": "bin",
     "preferred-install": {
@@ -155,15 +153,9 @@
       "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd"
     },
-    "post-install-cmd": [
-      "@auto-scripts"
-    ],
-    "post-update-cmd": [
-      "@auto-scripts"
-    ],
-    "fix": [
-      "bin/php-cs-fixer fix --allow-risky=yes --verbose --format=txt"
-    ]
+    "post-install-cmd": ["@auto-scripts"],
+    "post-update-cmd": ["@auto-scripts"],
+    "fix": ["bin/php-cs-fixer fix --allow-risky=yes --verbose --format=txt"]
   },
   "extra": {
     "symfony": {
