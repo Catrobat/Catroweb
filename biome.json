@@ -17,7 +17,8 @@
       "!assets/Legacy",
       "!assets/catblocks",
       "!src/Api/OpenAPI",
-      "!**/*.min.js"
+      "!**/*.min.js",
+      "!**/*.svg"
     ]
   },
   "formatter": {
@@ -36,7 +37,10 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noDocumentCookie": "off"
+      }
     }
   },
   "assist": {
