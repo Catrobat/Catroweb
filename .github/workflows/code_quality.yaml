@@ -51,15 +51,15 @@ jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Javascript **
   #
-  # Eslint:
-  #  - Statically analyzes javascript code (depends on node and yarn)
-  #  - Config defined in .eslint.config.js
-  #  - Automatic fix support
-  #  - yarn "test" script must be defined in package.json
-  #  - More information at: (https://eslint.org/)
+  # Biome:
+  #  - Statically analyzes and formats JavaScript/JSON code (depends on node and yarn)
+  #  - Config defined in biome.json
+  #  - Automatic fix support (yarn run fix-js)
+  #  - yarn "test-js" script must be defined in package.json
+  #  - More information at: (https://biomejs.dev/)
   #
-  eslint:
-    name: JavaScript [ESLint]
+  biome:
+    name: JavaScript,JSON [Biome]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.0
@@ -87,16 +87,17 @@ jobs:
       - run: yarn run test-css
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # ** Sass,CSS,MD,YAML **
+  # ** MD,YAML **
   #
   # Prettier:
-  #  - Check formatting style (depends on node and yarn)
+  #  - Check formatting style of Markdown and YAML files (depends on node and yarn)
+  #  - JS/JSON is handled by Biome, SCSS/CSS by Stylelint
   #  - Config defined in .prettierrc.json and .prettierignore
-  #  - Automatic fix support npx prettier . --check
+  #  - Automatic fix support (yarn run fix-asset)
   #  - More information at: https://prettier.io/
   #
   prettier:
-    name: Sass,CSS,MD,YAML formatting [Prettier]
+    name: MD,YAML formatting [Prettier]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.0
