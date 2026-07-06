@@ -87,7 +87,7 @@
     "dmore/behat-chrome-extension": "1.4.*",
     "dmore/chrome-mink-driver": "2.10.*",
     "doctrine/doctrine-fixtures-bundle": "4.3.*",
-    "dvdoug/behat-code-coverage": "5.4.*",
+    "dvdoug/behat-code-coverage": "5.5.*",
     "friends-of-behat/mink-extension": "v2.7.5",
     "friends-of-behat/symfony-extension": "2.6.*",
     "friendsofphp/php-cs-fixer": "3.95.*",
