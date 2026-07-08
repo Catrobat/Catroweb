@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38bc8939334bc11d4cdedeb85629f650",
+    "content-hash": "3b479128a8af7a5985ff6b85ba4c8044",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -15149,33 +15149,33 @@
         },
         {
             "name": "dvdoug/behat-code-coverage",
-            "version": "v5.4.1",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dvdoug/behat-code-coverage.git",
-                "reference": "091fbdeda57a8b27785de5643266000c7fa94d54"
+                "reference": "1ce757bec4e47ef055d7c1d69f003b37b3bce498"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/091fbdeda57a8b27785de5643266000c7fa94d54",
-                "reference": "091fbdeda57a8b27785de5643266000c7fa94d54",
+                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/1ce757bec4e47ef055d7c1d69f003b37b3bce498",
+                "reference": "1ce757bec4e47ef055d7c1d69f003b37b3bce498",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": "^3.27",
+                "behat/behat": "^3.27||^4.0",
                 "composer-runtime-api": "^2.0",
                 "composer/semver": "^3.0",
                 "php": "^8.3",
-                "phpunit/php-code-coverage": "^12.3||^13.0",
-                "symfony/config": "^5.4.45||^6.4.24||^7.3",
-                "symfony/console": "^5.4.45||^6.4.24||^7.3",
-                "symfony/dependency-injection": "^5.4.45||^6.4.24||^7.3",
-                "symfony/event-dispatcher": "^5.4.45||^6.4.24||^7.0.3"
+                "phpunit/php-code-coverage": "^12.3||^13.0||^14.0",
+                "symfony/config": "^5.4.45||^6.4.24||^7.3||^8.0",
+                "symfony/console": "^5.4.45||^6.4.24||^7.3||^8.0",
+                "symfony/dependency-injection": "^5.4.45||^6.4.24||^7.3||^8.0",
+                "symfony/event-dispatcher": "^5.4.45||^6.4.24||^7.0.3||^8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.88.2",
                 "phpunit/phpunit": "^12.3||^13.0",
-                "symfony/filesystem": "^5.4.45||^6.4.24||^7.3"
+                "symfony/filesystem": "^5.4.45||^6.4.24||^7.3||^8.0"
             },
             "suggest": {
                 "ext-pcov": "PCOV allows you to collect line coverage only, but is faster than Xdebug",
@@ -15215,7 +15215,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dvdoug/behat-code-coverage/issues",
-                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.4.1"
+                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.5.0"
             },
             "funding": [
                 {
@@ -15223,7 +15223,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-07T19:53:16+00:00"
+            "time": "2026-06-28T19:06:28+00:00"
         },
         {
             "name": "ergebnis/agent-detector",
@@ -16104,20 +16104,19 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.7.0",
+            "version": "v5.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82"
+                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dca41cd15c2ac9d055ad70dbfd011130757d1f82",
-                "reference": "dca41cd15c2ac9d055ad70dbfd011130757d1f82",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
+                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
                 "shasum": ""
             },
             "require": {
-                "ext-ctype": "*",
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "php": ">=7.4"
@@ -16156,9 +16155,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.7.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.8.0"
             },
-            "time": "2025-12-06T11:56:16+00:00"
+            "time": "2026-07-04T14:30:18+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -18396,23 +18395,23 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "9.3.0",
+            "version": "9.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "6767059a30e4277ac95ee034809e793528464768"
+                "reference": "6c9e487c9eb706a8d258102a1c0b0a3e53e86c2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/6767059a30e4277ac95ee034809e793528464768",
-                "reference": "6767059a30e4277ac95ee034809e793528464768",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/6c9e487c9eb706a8d258102a1c0b0a3e53e86c2e",
+                "reference": "6c9e487c9eb706a8d258102a1c0b0a3e53e86c2e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.0"
+                "phpunit/phpunit": "^13.1.11"
             },
             "suggest": {
                 "ext-posix": "*"
@@ -18448,7 +18447,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
                 "security": "https://github.com/sebastianbergmann/environment/security/policy",
-                "source": "https://github.com/sebastianbergmann/environment/tree/9.3.0"
+                "source": "https://github.com/sebastianbergmann/environment/tree/9.3.2"
             },
             "funding": [
                 {
@@ -18468,7 +18467,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-15T12:14:03+00:00"
+            "time": "2026-05-25T13:41:38+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -18636,24 +18635,24 @@
         },
         {
             "name": "sebastian/lines-of-code",
-            "version": "5.0.0",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/lines-of-code.git",
-                "reference": "4f21bb7768e1c997722ccc7efb1d6b5c11bfd471"
+                "reference": "d2cff273a90c79b0eb590baa682d4b5c318bdbb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/4f21bb7768e1c997722ccc7efb1d6b5c11bfd471",
-                "reference": "4f21bb7768e1c997722ccc7efb1d6b5c11bfd471",
+                "url": "https://api.github.com/repos/sebastianbergmann/lines-of-code/zipball/d2cff273a90c79b0eb590baa682d4b5c318bdbb7",
+                "reference": "d2cff273a90c79b0eb590baa682d4b5c318bdbb7",
                 "shasum": ""
             },
             "require": {
-                "nikic/php-parser": "^5.0",
+                "nikic/php-parser": "^5.7.0",
                 "php": ">=8.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.0"
+                "phpunit/phpunit": "^13.1.10"
             },
             "type": "library",
             "extra": {
@@ -18682,7 +18681,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/lines-of-code/issues",
                 "security": "https://github.com/sebastianbergmann/lines-of-code/security/policy",
-                "source": "https://github.com/sebastianbergmann/lines-of-code/tree/5.0.0"
+                "source": "https://github.com/sebastianbergmann/lines-of-code/tree/5.0.1"
             },
             "funding": [
                 {
@@ -18702,7 +18701,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-02-06T04:45:54+00:00"
+            "time": "2026-05-19T16:23:37+00:00"
         },
         {
             "name": "sebastian/object-enumerator",
