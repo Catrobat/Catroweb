@@ -15,7 +15,7 @@ Catroweb is the share/communication platform for the Catrobat community. Symfony
 ## Tech Stack
 
 - **Backend**: PHP 8.5, Symfony 7.4
-- **Frontend**: JavaScript (ES6+), SCSS, Vite 7 (via `pentatrion/vite-bundle`)
+- **Frontend**: JavaScript (ES6+), plain CSS, Vite 8 (via `pentatrion/vite-bundle`)
 - **Database**: MariaDB 10.11
 - **Search**: Elasticsearch 9.4
 - **CSS**: Bootstrap 5, Material Design Components
@@ -52,7 +52,7 @@ yarn run dev-server   # Vite dev server with HMR (sub-200ms updates, port 5173)
 # Test & Lint
 yarn test             # All
 yarn run test-js      # Biome (JS/JSON)
-yarn run test-css     # Stylelint
+yarn run test-css     # Prettier (CSS)
 yarn run test-asset   # Prettier (MD/YAML)
 yarn run test-php     # PHP CS Fixer
 yarn run test-twig    # Twig CS Fixer
@@ -60,7 +60,7 @@ yarn run test-twig    # Twig CS Fixer
 # Fix
 yarn run fix          # All
 yarn run fix-js       # JS/JSON (Biome)
-yarn run fix-css      # SCSS
+yarn run fix-css      # CSS (Prettier)
 yarn run fix-asset    # MD/YAML (Prettier)
 yarn run fix-php      # PHP
 yarn run fix-twig     # Twig
@@ -114,7 +114,7 @@ The `pentatrion/vite-bundle` auto-detects the dev server. When `yarn run dev-ser
 
 ```
 Catroweb/
-├── assets/           # Frontend (SCSS, JS) — Layout/, Components/, User/, Project/, Themes/
+├── assets/           # Frontend (CSS, JS) — Layout/, Components/, User/, Project/, Themes/
 ├── config/           # Symfony config
 ├── docker/           # Docker config
 ├── migrations/       # DB migrations
@@ -127,17 +127,18 @@ Catroweb/
 └── package.json      # JS dependencies
 ```
 
-## SCSS/Sass
+## CSS
 
-- **Dart Sass** v1.97.2, sass-loader 16+ auto-detects compiler
-- Bootstrap 5 variables via `assets/Layout/Variables.scss`
-- Bootstrap 5.x deprecation warnings (global `mix()`, `shade-color()`) are harmless; fixed in Bootstrap 6
+- Plain CSS only — no Sass/SCSS preprocessing. Vite handles bundling; LightningCSS transforms.
+- Bootstrap comes precompiled via `@import 'bootstrap/dist/css/bootstrap.css'` in `assets/Layout/Base.css`.
+- Shared custom properties live in `assets/Layout/Variables.css`.
+- Formatting is enforced by Prettier (`yarn run test-css` / `fix-css`).
 
 ## CSS Styling Patterns
 
 ### Dark Mode
 
-- Use `light-dark(lightValue, darkValue)` for automatic dark mode color adaptation. Our `:root { color-scheme: light; }` (BootstrapOverwrite.scss) + Bootstrap's `[data-bs-theme=dark] { color-scheme: dark; }` drive it — `ColorScheme.js` always sets an explicit `data-bs-theme`.
+- Use `light-dark(lightValue, darkValue)` for automatic dark mode color adaptation. Our `:root { color-scheme: light; }` (BootstrapOverwrite.css) + Bootstrap's `[data-bs-theme=dark] { color-scheme: dark; }` drive it — `ColorScheme.js` always sets an explicit `data-bs-theme`.
 - The `:root` color-scheme rule is **required** for Vite 8's LightningCSS `light-dark()` downlevel polyfill: toggle vars are only injected into rules declaring `color-scheme`; without a light-mode declaration, every `light-dark()` value computes to garbage in light mode (footer lost its colors after the Vite 8 bump).
 - `--primary` is `light-dark(#007f8f, #4dd0e1)` — auto-adapts in dark mode for text/borders/links.
 - `--primary-bg: #007f8f` — always dark, for filled backgrounds (topbar, btn-primary, FABs, pills) where `#fff` on-primary text sits on top.
@@ -157,36 +158,36 @@ Catroweb/
 - Default `.page-content` has `padding: 0.75rem`.
 - To make a hero/banner bleed flush against (or slightly behind) the topbar:
 
-  ```scss
-  // Option A — negative margin on element (featured banner pattern):
+  ```css
+  /* Option A — negative margin on element (featured banner pattern): */
   .featured-slider {
     margin: -1.25rem calc(-1 * var(--bs-gutter-x, 0.75rem)) 0;
   }
-  // Net: eats 1.25rem up past 0.75rem padding → 0.5rem behind topbar, full-width gutter bleed
+  /* Net: eats 1.25rem up past 0.75rem padding → 0.5rem behind topbar, full-width gutter bleed */
 
-  // Option B — zero page-content top padding + negative margin on header (studio pattern):
+  /* Option B — zero page-content top padding + negative margin on header (studio pattern): */
   .page-content:has(#studio-header) {
     padding: 0 0 1.5rem;
   }
   .studio-detail__header {
-    margin-top: -0.75rem;
-  } // pulls into topbar area
+    margin-top: -0.75rem; /* pulls into topbar area */
+  }
   ```
 
 ### Shared Toggle Class Pattern
 
-- `#remix-graph-toggle`, `#code-stats-toggle`, `#code-view-toggle` all share `.project-section-toggle` class defined in `assets/Layout/LegacyBase.scss`.
-- Use a **CSS class**, not a mixin — class is applied in Twig templates, avoids per-file `@include`.
+- `#remix-graph-toggle`, `#code-stats-toggle`, `#code-view-toggle` all share `.project-section-toggle` class defined in `assets/Layout/LegacyBase.css`.
+- Use a **CSS class** applied in Twig templates.
 - Chevron uses `.project-section-toggle__chevron` (BEM element), rotates 180° on `[aria-expanded='true']`.
 
-### Stylelint Rules to Remember
+### CSS Conventions
 
-- Double-slash comments (`//`) must have an empty line before them (rule: `scss/double-slash-comment-empty-line-before`).
 - No empty rule blocks — remove the `{}` entirely when content is deleted.
+- Run `yarn run fix-css` before committing; CI checks Prettier formatting.
 
 ## Themes
 
-9 themes in `vite.config.mjs`: pocketcode (default), arduino, create@school, embroidery, luna, phirocode, pocketalice, pocketgalaxy, mindstorms. Aliases (phirocode/pocketalice/mindstorms/pocketgalaxy all import pocketcode) dedupe to one CSS file at the hash level; the manifest still maps each theme name to the correct asset path.
+9 themes in `vite.config.mjs`: pocketcode (default), arduino, create@school, embroidery, luna, phirocode, pocketalice, pocketgalaxy, mindstorms. phirocode/pocketalice/mindstorms/pocketgalaxy are content-identical copies of pocketcode; Rollup dedupes them to one CSS file at the hash level, and the virtual-entry wrapper in `vite/plugins.mjs` keeps a distinct manifest entry per theme name.
 
 ## Environment Files
 

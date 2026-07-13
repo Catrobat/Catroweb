@@ -435,7 +435,7 @@ yarn run fix
 
 # Or individually:
 yarn run fix-js       # Biome (JavaScript/JSON)
-yarn run fix-css      # Stylelint (SCSS)
+yarn run fix-css      # Prettier (CSS)
 yarn run fix-asset    # Prettier (Markdown/YAML)
 yarn run fix-php      # PHP CS Fixer
 ```
@@ -470,7 +470,7 @@ docker exec app.catroweb bin/behat -f pretty -s web-project-details \
 
 ### 1. Always rebuild assets after JS changes
 
-JavaScript and SCSS changes in `assets/` are not served directly. You must run `yarn run dev` (or have `yarn run watch` running) to compile them into `public/build/`.
+JavaScript and CSS changes in `assets/` are not served directly. You must run `yarn run dev` (or have `yarn run watch` running) to compile them into `public/build/`.
 
 ### 2. Copy assets into Docker after building
 

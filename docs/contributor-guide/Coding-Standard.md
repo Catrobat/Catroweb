@@ -17,7 +17,7 @@ or
 - `yarn test-js` to test
 - `yarn fix-js` to automatically try to fix the problems
 
-### SASS / CSS
+### CSS
 
 - `yarn test-css` to test
 - `yarn fix-css` to automatically try to fix the problems

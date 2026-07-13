@@ -161,10 +161,6 @@
   color: var(--theme-text-color);
 }
 
-.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
-  color: var(--mdc-theme-primary);
-}
-
 /* fade image in after load */
 .lazyload,
 .lazyloading {

@@ -1,22 +1,55 @@
+/* Base styles formerly provided by @material/snackbar/mdc-snackbar.
+   Snackbar.js drives visibility via inline display/opacity, so the root
+   must default to display: none and fade via the opacity transition. */
 .mdc-snackbar {
+  display: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 7000;
+  margin: 8px;
+  opacity: 0;
+  transition: opacity 0.15s linear;
+  pointer-events: none;
 }
 
 .mdc-snackbar__wrapper {
   display: flex;
   justify-content: center;
   opacity: 0;
+  transition: opacity 0.15s linear;
 }
 
 .mdc-snackbar__surface {
+  display: flex;
+  align-items: center;
+  min-width: min(344px, 100%);
+  max-width: 672px;
+  padding: 0 8px;
+  background-color: #333;
+  border-radius: 4px;
+  box-shadow:
+    0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14),
+    0 1px 18px 0 rgba(0, 0, 0, 0.12);
   transform: none;
   opacity: 1 !important;
+  pointer-events: auto;
+}
+
+.mdc-snackbar__label {
+  flex-grow: 1;
+  padding: 14px 8px;
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .snackbar-dismiss {
   background: none;
   border: none;
-  color: inherit;
+  color: rgba(255, 255, 255, 0.87);
   font-size: 1rem;
   cursor: pointer;
   margin-left: 0.75rem;

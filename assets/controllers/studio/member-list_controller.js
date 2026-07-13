@@ -40,7 +40,6 @@ export default class extends Controller {
           listElement.appendChild(this._renderMember(member, isStudioAdmin))
         })
       }
-
     } catch (e) {
       console.error('Failed to load members:', e)
     }

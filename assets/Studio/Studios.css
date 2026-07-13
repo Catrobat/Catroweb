@@ -182,12 +182,9 @@
   padding-bottom: 0.2rem;
 }
 
-.mdc-tab-bar {
+md-tabs {
   width: 100%;
-  background-color: #e9ecef;
-}
-.mdc-tab-bar .nav-tabs {
-  width: 100%;
+  --md-primary-tab-container-color: #e9ecef;
 }
 
 .studio-detail__header__details__button--upload-image {

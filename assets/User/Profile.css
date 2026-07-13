@@ -110,20 +110,12 @@
   }
 }
 
-.tab-bar-container #scroll-area {
-  overflow: auto;
-}
-
 .tab-content .tab-pane {
   min-height: 50vh;
 }
 
 .follower-tabs {
   margin-top: -1rem;
-}
-
-.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
-  color: var(--mdc-theme-primary);
 }
 
 /* NEW MY PROFILE PAGE */

@@ -4,9 +4,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.btn:hover .mdc-circular-progress__indeterminate-circle-graphic,
-.button:hover .mdc-circular-progress__indeterminate-circle-graphic {
-  stroke: #fff;
+.btn:hover md-circular-progress,
+.button:hover md-circular-progress {
+  --md-circular-progress-active-indicator-color: #fff;
 }
 
 .btn-primary {
@@ -14,24 +14,48 @@
   border-color: var(--primary-bg, var(--primary));
 }
 .btn-primary:hover {
-  background-color: custom-darken(--color-primary, 7.5);
-  border-color: custom-darken(--color-primary, 8.5);
+  background-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 7.5%)
+  );
+  border-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 8.5%)
+  );
 }
 .btn-primary:not(:disabled):not(.disabled):active {
-  background-color: custom-darken(--color-primary, 10);
-  border-color: custom-darken(--color-primary, 11);
+  background-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 10%)
+  );
+  border-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 11%)
+  );
 }
 .btn-primary:not(:disabled):not(.disabled):active:focus,
 .btn-primary:focus {
-  background-color: custom-darken(--color-primary, 5);
-  border-color: custom-darken(--color-primary, 6);
+  background-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 5%)
+  );
+  border-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 6%)
+  );
 }
 .btn-primary:disabled {
   background-color: var(--primary-bg, var(--primary));
   border-color: var(--primary-bg, var(--primary));
 }
-.btn-primary .mdc-circular-progress__indeterminate-circle-graphic {
-  stroke: #fff;
+.btn-primary md-circular-progress {
+  --md-circular-progress-active-indicator-color: #fff;
 }
 
 .btn-outline-primary {
@@ -39,16 +63,33 @@
   border-color: var(--primary);
 }
 .btn-outline-primary:hover {
-  background-color: custom-darken(--color-primary, 7.5);
-  border-color: custom-darken(--color-primary, 8.5);
+  background-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 7.5%)
+  );
+  border-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 8.5%)
+  );
 }
 .btn-outline-primary:not(:disabled):not(.disabled):active {
-  background-color: custom-darken(--color-primary, 10);
-  border-color: custom-darken(--color-primary, 11);
+  background-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 10%)
+  );
+  border-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 11%)
+  );
 }
 .btn-outline-primary:not(:disabled):not(.disabled):active:focus,
 .btn-outline-primary:focus {
-  box-shadow: 0 0 0 0.2rem custom-alpha(--color-primary, 0.3);
+  box-shadow: 0 0 0 0.2rem
+    hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.3);
 }
 .btn-outline-primary:disabled {
   color: var(--primary);

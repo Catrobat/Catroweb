@@ -68,17 +68,16 @@ jobs:
       - run: yarn run test-js
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # ** Sass,CSS **
+  # ** CSS **
   #
-  # StyleLint:
-  #  - Statically analyzes Sass and css files (depends on node and yarn)
-  #  - Config defined in .stylelintrc.json
-  #  - Automatic fix support
-  #  - More information at: https://stylelint.io/
-  #  - "test-style" script is defined in package.json to execute stylelint
+  # Prettier:
+  #  - Checks formatting of plain CSS files (depends on node and yarn)
+  #  - Automatic fix support (yarn run fix-css)
+  #  - More information at: https://prettier.io/
+  #  - "test-css" script is defined in package.json
   #
-  stylelint:
-    name: Sass,CSS [StyleLint]
+  css:
+    name: CSS formatting [Prettier]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.0
@@ -91,7 +90,7 @@ jobs:
   #
   # Prettier:
   #  - Check formatting style of Markdown and YAML files (depends on node and yarn)
-  #  - JS/JSON is handled by Biome, SCSS/CSS by Stylelint
+  #  - JS/JSON is handled by Biome, CSS by the separate Prettier CSS job
   #  - Config defined in .prettierrc.json and .prettierignore
   #  - Automatic fix support (yarn run fix-asset)
   #  - More information at: https://prettier.io/

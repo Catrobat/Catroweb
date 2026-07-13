@@ -49,6 +49,42 @@
   text-decoration: none;
 }
 
+/* Base styles formerly provided by @material/icon-button/styles: consumers
+   outside the top bar (project-list chevrons, sign-app modal icons) rely on
+   the 48px hit area and the ::before/::after backdrop geometry, which they
+   only re-color. Declared before the __action-item rule so the top-bar
+   variant keeps winning at equal specificity. */
+.mdc-icon-button {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  font-size: 24px;
+  color: inherit;
+  text-decoration: none;
+  vertical-align: middle;
+  background-color: transparent;
+  border: none;
+  fill: currentcolor;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mdc-icon-button::before,
+.mdc-icon-button::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0;
+  content: '';
+  pointer-events: none;
+}
+
 .mdc-top-app-bar__action-item,
 .mdc-top-app-bar__navigation-icon {
   display: grid;
@@ -59,6 +95,14 @@
   color: inherit;
   border: 0;
   background: transparent;
+}
+
+.mdc-top-app-bar--fixed-scrolled {
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: box-shadow 200ms linear;
 }
 
 #top-app-bar__search-form {

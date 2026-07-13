@@ -22,10 +22,6 @@ ul {
   display: flex;
   margin-left: auto;
 }
-.member__list-entry__admin-buttons .mdc-list-item {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
 
 .member__list-entry__admin-buttons__text {
   text-transform: none;

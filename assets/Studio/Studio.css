@@ -53,12 +53,9 @@
   padding-bottom: 0.2rem;
 }
 
-.mdc-tab-bar {
+md-tabs {
   width: 100%;
-  background-color: light-dark(#e9ecef, #2d2d3d);
-}
-.mdc-tab-bar .nav-tabs {
-  width: 100%;
+  --md-primary-tab-container-color: light-dark(#e9ecef, #2d2d3d);
 }
 
 .studio-detail__header__details__button--upload-image {
