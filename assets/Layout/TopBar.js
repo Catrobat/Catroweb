@@ -30,6 +30,15 @@ const optionsButton = document.querySelector('#top-app-bar__btn-options')
 const optionsMenuEl = document.querySelector('#top-app-bar__options-menu')
 const optionsMenu = optionsMenuEl
 
+// Menu items that open Bootstrap modals (data-bs-toggle) steal focus while
+// md-menu is mid-close, leaving it stuck at open=true with its light-dismiss
+// listeners swallowing the next click. Force the close on item selection.
+optionsMenuEl?.addEventListener('click', (event) => {
+  if (event.target.closest('md-menu-item')) {
+    optionsMenuEl.open = false
+  }
+})
+
 const defaultAppBarHref = title.getAttribute('href')
 const defaultTitle = title.innerHTML
 
