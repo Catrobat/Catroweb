@@ -1,17 +1,3 @@
-/* Footer */
-/* Default */
-:root {
-  --mdc-theme-primary: var(--primary-bg, var(--primary));
-  --mdc-theme-on-primary: var(--on-primary);
-}
-
-/* Footer */
-/* Default */
-:root {
-  --mdc-theme-primary: var(--primary-bg, var(--primary));
-  --mdc-theme-on-primary: var(--on-primary);
-}
-
 .retention-info-wrap {
   position: relative;
   display: inline-flex;
@@ -612,13 +598,6 @@
   height: 1px;
   margin: 0.25rem 0;
   background: light-dark(#dee2e6, #3a3a4a);
-}
-
-/* Footer */
-/* Default */
-:root {
-  --mdc-theme-primary: var(--primary-bg, var(--primary));
-  --mdc-theme-on-primary: var(--on-primary);
 }
 
 @keyframes spinner {
