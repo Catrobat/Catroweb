@@ -139,12 +139,13 @@
   width: 100%;
   height: auto;
   border-radius: 10%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.15);
 }
 .project-list__project__name {
   display: inline-block;
+  /* biome-ignore lint/suspicious/noDuplicateProperties: line-clamp fallback */
   display: -webkit-box;
   max-width: 100%;
   height: 3rem;
@@ -691,11 +692,12 @@
 .user-list__user__image {
   width: 100%;
   border-radius: 10%;
-  aspect-ratio: auto 1/1;
+  aspect-ratio: auto 1 / 1;
   box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.15);
 }
 .user-list__user__name {
   display: inline-block;
+  /* biome-ignore lint/suspicious/noDuplicateProperties: line-clamp fallback */
   display: -webkit-box;
   max-width: 100%;
   height: 3rem;
@@ -999,7 +1001,7 @@
 }
 .search-card__image {
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 10px;
   background: #e8e8e8;
@@ -1007,6 +1009,7 @@
   transition: box-shadow 0.15s ease;
 }
 .search-card__name {
+  /* biome-ignore lint/suspicious/noDuplicateProperties: line-clamp fallback */
   display: -webkit-box;
   max-width: 100%;
   height: 2.5rem;

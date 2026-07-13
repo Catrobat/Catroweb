@@ -40,6 +40,9 @@
       "preset": "recommended",
       "suspicious": {
         "noDocumentCookie": "off"
+      },
+      "complexity": {
+        "noImportantStyles": "off"
       }
     }
   },
@@ -53,10 +56,11 @@
   },
   "css": {
     "formatter": {
-      "enabled": false
+      "enabled": true,
+      "quoteStyle": "single"
     },
     "linter": {
-      "enabled": false
+      "enabled": true
     }
   }
 }

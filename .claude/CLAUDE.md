@@ -132,7 +132,7 @@ Catroweb/
 - Plain CSS only — no Sass/SCSS preprocessing. Vite handles bundling; LightningCSS transforms.
 - Bootstrap comes precompiled via `@import 'bootstrap/dist/css/bootstrap.css'` in `assets/Layout/Base.css`.
 - Shared custom properties live in `assets/Layout/Variables.css`.
-- Formatting is enforced by Prettier (`yarn run test-css` / `fix-css`).
+- Formatting and linting are enforced by Biome (`yarn run test-css` / `fix-css`; CSS enabled in biome.json).
 
 ## CSS Styling Patterns
 
@@ -183,7 +183,7 @@ Catroweb/
 ### CSS Conventions
 
 - No empty rule blocks — remove the `{}` entirely when content is deleted.
-- Run `yarn run fix-css` before committing; CI checks Prettier formatting.
+- Run `yarn run fix-css` before committing; CI checks Biome formatting and lint rules.
 
 ## Themes
 

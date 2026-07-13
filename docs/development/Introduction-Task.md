@@ -435,7 +435,7 @@ yarn run fix
 
 # Or individually:
 yarn run fix-js       # Biome (JavaScript/JSON)
-yarn run fix-css      # Prettier (CSS)
+yarn run fix-css      # Biome (CSS)
 yarn run fix-asset    # Prettier (Markdown/YAML)
 yarn run fix-php      # PHP CS Fixer
 ```

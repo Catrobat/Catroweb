@@ -132,12 +132,13 @@
   width: 100%;
   height: auto;
   border-radius: 10%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.15);
 }
 .project-list__project__name {
   display: inline-block;
+  /* biome-ignore lint/suspicious/noDuplicateProperties: line-clamp fallback */
   display: -webkit-box;
   max-width: 100%;
   height: 3rem;

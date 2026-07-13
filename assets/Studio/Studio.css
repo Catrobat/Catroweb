@@ -20,11 +20,13 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   overflow-wrap: break-word;
+  /* biome-ignore lint/suspicious/noDuplicateProperties: progressive enhancement over break-word */
   overflow-wrap: anywhere;
 }
 
 #studio-desc {
   overflow-wrap: break-word;
+  /* biome-ignore lint/suspicious/noDuplicateProperties: progressive enhancement over break-word */
   overflow-wrap: anywhere;
   margin-bottom: 0;
 }
@@ -511,6 +513,7 @@ md-tabs {
   color: light-dark(#4a5568, #cbd5e0);
   line-height: 1.5;
   font-size: 0.95rem;
+  /* biome-ignore lint/suspicious/noDuplicateProperties: progressive enhancement over break-word */
   overflow-wrap: anywhere;
 }
 #studio-comments .single-comment .comment-text p,

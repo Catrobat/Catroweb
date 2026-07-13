@@ -45,6 +45,7 @@
 }
 #studios-section .studios-list-item--content p {
   overflow-wrap: break-word;
+  /* biome-ignore lint/suspicious/noDuplicateProperties: progressive enhancement over break-word */
   overflow-wrap: anywhere;
 }
 #studios-section .studios-list-item--heading {

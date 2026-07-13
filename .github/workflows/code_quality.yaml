@@ -49,17 +49,17 @@ concurrency:
 
 jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # ** Javascript **
+  # ** Javascript / CSS **
   #
   # Biome:
-  #  - Statically analyzes and formats JavaScript/JSON code (depends on node and yarn)
+  #  - Statically analyzes and formats JavaScript/JSON/CSS code (depends on node and yarn)
   #  - Config defined in biome.json
   #  - Automatic fix support (yarn run fix-js)
   #  - yarn "test-js" script must be defined in package.json
   #  - More information at: (https://biomejs.dev/)
   #
   biome:
-    name: JavaScript,JSON [Biome]
+    name: JavaScript,JSON,CSS [Biome]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7.0.0
@@ -68,29 +68,11 @@ jobs:
       - run: yarn run test-js
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  # ** CSS **
-  #
-  # Prettier:
-  #  - Checks formatting of plain CSS files (depends on node and yarn)
-  #  - Automatic fix support (yarn run fix-css)
-  #  - More information at: https://prettier.io/
-  #  - "test-css" script is defined in package.json
-  #
-  css:
-    name: CSS formatting [Prettier]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7.0.0
-      - name: 'Setup Node and yarn dependencies'
-        uses: ./.github/actions/setup-yarn-node-modules
-      - run: yarn run test-css
-
-  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** MD,YAML **
   #
   # Prettier:
   #  - Check formatting style of Markdown and YAML files (depends on node and yarn)
-  #  - JS/JSON is handled by Biome, CSS by the separate Prettier CSS job
+  #  - JS/JSON/CSS are handled by Biome
   #  - Config defined in .prettierrc.json and .prettierignore
   #  - Automatic fix support (yarn run fix-asset)
   #  - More information at: https://prettier.io/

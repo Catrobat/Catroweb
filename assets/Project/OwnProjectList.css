@@ -95,7 +95,7 @@
   width: 6rem;
   height: auto;
   border-radius: 10%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.15);
 }
@@ -122,7 +122,7 @@
 }
 .own-project-list__project__details__properties {
   display: grid;
-  grid-template: '. .' max-content '. .' max-content/max-content max-content;
+  grid-template: '. .' max-content '. .' max-content / max-content max-content;
   gap: 0.25rem;
   padding-bottom: 0.4rem;
 }
