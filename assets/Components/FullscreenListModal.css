@@ -20,6 +20,17 @@
   background-color: var(--mdc-theme-primary, #00acc1);
   border: none;
 }
+
+/* Icon buttons in the primary-colored modal header must stay on-primary,
+   like the top app bar. */
+.modal-header-full md-icon-button {
+  --md-icon-button-icon-color: var(--on-primary, #fff);
+  --md-icon-button-hover-icon-color: var(--on-primary, #fff);
+  --md-icon-button-focus-icon-color: var(--on-primary, #fff);
+  --md-icon-button-pressed-icon-color: var(--on-primary, #fff);
+  --md-icon-button-hover-state-layer-color: var(--on-primary, #fff);
+  --md-icon-button-pressed-state-layer-color: var(--on-primary, #fff);
+}
 .is-webview .modal-header-full {
   padding-top: max(env(safe-area-inset-top, 0px), 24px);
   min-height: calc(56px + max(env(safe-area-inset-top, 0px), 24px));

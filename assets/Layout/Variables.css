@@ -4,13 +4,29 @@
 
   /* Theme @material/web components the same way the legacy --mdc-theme-*
      vars themed MDC: without these, every md-* element falls back to the
-     stock Material 3 purple palette. */
+     stock Material 3 baseline palette. The neutral tokens keep the M3
+     defaults in light mode but become dark-aware — md-* shadow styles
+     cannot see Bootstrap's data-bs-theme switch on their own. */
   --md-sys-color-primary: var(--primary-bg, var(--primary));
   --md-sys-color-on-primary: var(--on-primary, #fff);
+  --md-sys-color-surface: var(--bs-body-bg, #fff);
+  --md-sys-color-on-surface: light-dark(rgb(0 0 0 / 87%), rgb(255 255 255 / 87%));
+  --md-sys-color-on-surface-variant: light-dark(rgb(0 0 0 / 60%), rgb(255 255 255 / 70%));
+  --md-sys-color-surface-container: light-dark(#f3edf7, #2d2d3d);
+  --md-sys-color-surface-container-high: light-dark(#ece6f0, #2d2d3d);
+  --md-sys-color-surface-container-highest: light-dark(#e6e0e9, #38384a);
+  --md-sys-color-outline: light-dark(rgb(0 0 0 / 38%), rgb(255 255 255 / 38%));
+  --md-sys-color-outline-variant: light-dark(#cac4d0, rgb(255 255 255 / 12%));
 }
 
 /* Match the legacy MDC filled text field container instead of M3's
    purple-tinted surface-container-highest. */
 md-filled-text-field {
   --md-filled-text-field-container-color: light-dark(whitesmoke, #2d2d3d);
+}
+
+/* Menus render on surface-container; keep them aligned with the page
+   theme like the legacy global MdcMenu overrides did. */
+md-menu {
+  --md-menu-container-color: light-dark(#fff, #2d2d3d);
 }

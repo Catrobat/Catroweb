@@ -170,6 +170,12 @@
   --md-filter-chip-selected-container-color: var(--primary-bg, var(--primary));
   --md-filter-chip-selected-label-text-color: var(--on-primary, #fff);
   --md-filter-chip-selected-leading-icon-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-hover-label-text-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-focus-label-text-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-pressed-label-text-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-hover-leading-icon-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-focus-leading-icon-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-pressed-leading-icon-color: var(--on-primary, #fff);
 }
 
 .chip-default {

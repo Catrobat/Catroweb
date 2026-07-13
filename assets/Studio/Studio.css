@@ -51,7 +51,6 @@
 md-tabs {
   width: 100%;
   background-color: light-dark(#e9ecef, #2d2d3d);
-  --md-primary-tab-container-color: transparent;
 }
 
 .studio-detail__header__details__button--upload-image {
