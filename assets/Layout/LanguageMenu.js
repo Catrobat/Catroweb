@@ -1,6 +1,6 @@
 import './LanguageMenu.scss'
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const cancelButton = document.querySelector('#language_button_cancel')
 
   cancelButton.addEventListener('click', hideLanguageMenu)
@@ -22,18 +22,18 @@ function hideLanguageMenu() {
   })
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const radioButtons = document.querySelectorAll('.language-option-radio')
 
   radioButtons.forEach((radio) => {
-    radio.addEventListener('change', function () {
+    radio.addEventListener('change', () => {
       updateLanguageSelection()
     })
   })
 
   const okButton = document.querySelector('#language_button_ok')
 
-  okButton.addEventListener('click', function () {
+  okButton.addEventListener('click', () => {
     const radioButtons = document.querySelectorAll('.language-option-radio')
     radioButtons.forEach((radio) => {
       if (radio.checked) {

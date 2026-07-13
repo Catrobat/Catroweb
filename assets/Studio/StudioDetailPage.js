@@ -3,10 +3,10 @@ import '../Components/FullscreenListModal'
 import '../Components/Switch'
 import '../Components/TextArea'
 import '../Components/TextField'
-import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
 import AcceptLanguage from '../Api/AcceptLanguage'
 import { escapeHtml } from '../Components/HtmlEscape'
 import { updatePictureSources } from '../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
 
 import '../Project/ProjectList.scss'
@@ -19,7 +19,7 @@ document.getElementById('std-header-form')?.addEventListener('change', (event) =
   event.preventDefault()
   const fileInput = document.getElementById('std-header')
   const studioId = document.getElementById('studio-id').value
-  const url = document.getElementById('js-api-routing').dataset.baseUrl + '/api/studios/' + studioId
+  const url = `${document.getElementById('js-api-routing').dataset.baseUrl}/api/studios/${studioId}`
   if (fileInput.files.length > 0) {
     uploadCoverImage(url, fileInput.files[0])
   }
@@ -86,7 +86,7 @@ async function uploadCoverImage(url, file) {
   })
 
   if (response.status === 200) {
-    response.json().then(function (data) {
+    response.json().then((data) => {
       const uploadedImg = document.querySelector('#studio-img-container img')
       if (uploadedImg) {
         updatePictureSources(
@@ -100,7 +100,7 @@ async function uploadCoverImage(url, file) {
   }
 
   if (response.status === 422) {
-    response.text().then(function (text) {
+    response.text().then((text) => {
       showSnackbar('#share-snackbar', text, SnackbarDuration.error)
     })
   }
@@ -146,7 +146,7 @@ async function submitStudioSettings() {
 
   const studioId = modal.dataset.studioId
   const baseUrl = document.getElementById('js-api-routing').dataset.baseUrl
-  const url = baseUrl + '/api/studios/' + studioId
+  const url = `${baseUrl}/api/studios/${studioId}`
 
   const nameInput = document.querySelector('#studio-settings__studio-name__input')
   const descTextarea = document.querySelector(
@@ -361,7 +361,9 @@ function initDescriptionToggle() {
 
 function clearStudioHeaderLoadingState(header) {
   header.classList.remove('studio-detail__header--loading')
-  header.querySelectorAll('.js-studio-header-skeleton').forEach((element) => element.remove())
+  header.querySelectorAll('.js-studio-header-skeleton').forEach((element) => {
+    element.remove()
+  })
 }
 
 function renderMembersSection(header, studio, baseUrl, studioId, isLoggedIn) {

@@ -1,6 +1,6 @@
-import { PurgeCSS } from 'purgecss'
-import { writeFile, readdir, cp } from 'node:fs/promises'
+import { cp, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
+import { PurgeCSS } from 'purgecss'
 
 // Copy static asset trees verbatim into the build output, preserving each
 // source's subdirectory structure. Use for things Twig references directly via

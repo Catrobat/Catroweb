@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
-import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { buildPictureHTML } from '../../Layout/ImageVariants'
-import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
+import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -65,7 +65,9 @@ export default class extends Controller {
         if (this.hasNoCommentsTarget) {
           this.noCommentsTarget.style.display = 'none'
         }
-        data.data.forEach((comment) => this.renderComment(comment))
+        data.data.forEach((comment) => {
+          this.renderComment(comment)
+        })
       } else if (!this.cursor) {
         if (this.hasNoCommentsTarget) {
           this.noCommentsTarget.style.display = 'block'
@@ -363,7 +365,7 @@ export default class extends Controller {
 
   updateCount(delta) {
     if (this.hasCountTarget) {
-      const current = parseInt(this.countTarget.textContent) || 0
+      const current = parseInt(this.countTarget.textContent, 10) || 0
       const newCount = current + delta
       this.countTarget.textContent = String(newCount)
       if (newCount <= 0 && this.hasNoCommentsTarget) {

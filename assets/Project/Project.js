@@ -1,10 +1,10 @@
 import { Modal, Tab } from 'bootstrap'
-import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
-import { redirect } from '../Components/RedirectButton'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
 import ProjectApi from '../Api/ProjectApi'
+import { redirect } from '../Components/RedirectButton'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 
-export const Project = function (config) {
+export const Project = (config) => {
   const {
     projectId,
     userRole,
@@ -32,6 +32,7 @@ export const Project = function (config) {
       let lastIndex = 0
       let match
 
+      // biome-ignore lint/suspicious/noAssignInExpressions: idiomatic regex exec loop
       while ((match = urlPattern.exec(text)) !== null) {
         if (match.index > lastIndex) {
           fragment.appendChild(document.createTextNode(text.slice(lastIndex, match.index)))
@@ -107,16 +108,15 @@ export const Project = function (config) {
 
   document.querySelectorAll('.js-btn-download-open').forEach((button) => {
     button.addEventListener('click', () => {
-      const deepLink =
-        window.location.origin + window.location.pathname.replace(/\/+$/, '') + '?download'
+      const deepLink = `${window.location.origin + window.location.pathname.replace(/\/+$/, '')}?download`
       window.location.href = deepLink
     })
   })
 
   function showDownloadState(state, suffix) {
-    const defaultBtn = document.getElementById('projectDownloadButton' + suffix)
-    const progressEl = document.getElementById('downloadProgress' + suffix)
-    const completeBtn = document.getElementById('downloadComplete' + suffix)
+    const defaultBtn = document.getElementById(`projectDownloadButton${suffix}`)
+    const progressEl = document.getElementById(`downloadProgress${suffix}`)
+    const completeBtn = document.getElementById(`downloadComplete${suffix}`)
 
     if (!defaultBtn || !progressEl || !completeBtn) return
 
@@ -126,25 +126,25 @@ export const Project = function (config) {
   }
 
   function updateProgressBar(suffix, percent) {
-    const bar = document.getElementById('downloadProgressBar' + suffix)
-    const text = document.getElementById('downloadProgressText' + suffix)
-    const btn = document.getElementById('projectDownloadButton' + suffix)
+    const bar = document.getElementById(`downloadProgressBar${suffix}`)
+    const text = document.getElementById(`downloadProgressText${suffix}`)
+    const btn = document.getElementById(`projectDownloadButton${suffix}`)
     const downloadingText = btn
       ? btn.dataset.transDownloading || 'Downloading...'
       : 'Downloading...'
 
     if (bar) {
-      bar.style.width = percent + '%'
+      bar.style.width = `${percent}%`
     }
     if (text) {
-      text.textContent = downloadingText.replace('...', '') + ' ' + Math.round(percent) + '%'
+      text.textContent = `${downloadingText.replace('...', '')} ${Math.round(percent)}%`
     }
   }
 
   function downloadWithProgress(
     downloadUrl,
     filename,
-    downloadProjectId,
+    _downloadProjectId,
     suffix,
     isWebView = false,
     supported = true,
@@ -170,7 +170,7 @@ export const Project = function (config) {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Download failed with status ' + response.status)
+          throw new Error(`Download failed with status ${response.status}`)
         }
 
         const contentLength = response.headers.get('Content-Length')
@@ -237,7 +237,7 @@ export const Project = function (config) {
 
   function showDownloadFailedSnackbar(errorText, filename) {
     showSnackbar('#share-snackbar', errorText, SnackbarDuration.error)
-    console.error('Downloading ' + filename + ' failed')
+    console.error(`Downloading ${filename} failed`)
   }
 
   async function showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText) {
@@ -288,7 +288,7 @@ export const Project = function (config) {
     projectLikeDetail = container.querySelector('#project-like-detail')
     projectLikeCounter = container.querySelector('#project-like-counter')
 
-    projectLikeButton.addEventListener('click', function () {
+    projectLikeButton.addEventListener('click', () => {
       if (projectLikeDetail.style.display === 'flex') {
         return
       }
@@ -301,7 +301,7 @@ export const Project = function (config) {
     projectLikeDetailSmall = containerSmall.querySelector('#project-like-detail-small')
     projectLikeCounterSmall = containerSmall.querySelector('#project-like-counter-small')
 
-    projectLikeButtonsSmall.addEventListener('click', function () {
+    projectLikeButtonsSmall.addEventListener('click', () => {
       if (projectLikeDetailSmall.style.display === 'flex') {
         return
       }
@@ -309,7 +309,7 @@ export const Project = function (config) {
       detailOpened = true
     })
 
-    document.body.addEventListener('mousedown', function (event) {
+    document.body.addEventListener('mousedown', (event) => {
       if (!detailOpened) {
         return
       }
@@ -325,12 +325,12 @@ export const Project = function (config) {
     projectLikeCounter.addEventListener('click', (event) => counterClickAction(event, false))
     projectLikeCounterSmall.addEventListener('click', (event) => counterClickAction(event, true))
 
-    projectLikeDetail
-      .querySelectorAll('.btn')
-      .forEach((button) => button.addEventListener('click', detailsAction))
-    projectLikeDetailSmall
-      .querySelectorAll('.btn')
-      .forEach((button) => button.addEventListener('click', detailsActionSmall))
+    projectLikeDetail.querySelectorAll('.btn').forEach((button) => {
+      button.addEventListener('click', detailsAction)
+    })
+    projectLikeDetailSmall.querySelectorAll('.btn').forEach((button) => {
+      button.addEventListener('click', detailsActionSmall)
+    })
 
     fetchInitialReactions()
 
@@ -363,13 +363,13 @@ export const Project = function (config) {
     }
   }
 
-  function counterClickAction(event, small) {
+  function counterClickAction(_event, small) {
     const spinner = small
       ? document.getElementById('project-reactions-spinner-small')
       : document.getElementById('project-reactions-spinner')
     spinner.classList.remove('d-none')
 
-    fetch(apiReactionsUsersUrl + '?limit=100', {
+    fetch(`${apiReactionsUsersUrl}?limit=100`, {
       method: 'GET',
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -405,8 +405,8 @@ export const Project = function (config) {
         const wowData = data.filter((x) => x.types.includes('wow'))
 
         const fnUpdateContent = (type, data) => {
-          const tab = modal.querySelector('button#' + type + '-tab')
-          const content = modal.querySelector('#' + type + '-tab-content')
+          const tab = modal.querySelector(`button#${type}-tab`)
+          const content = modal.querySelector(`#${type}-tab-content`)
           content.innerHTML = ''
 
           tab.querySelector('span').textContent = data.length
@@ -418,7 +418,7 @@ export const Project = function (config) {
             tab.parentElement.style.display = 'block'
           }
 
-          data.forEach(function (like) {
+          data.forEach((like) => {
             const likeDiv = document.createElement('div')
             likeDiv.className = 'reaction'
 
@@ -447,7 +447,7 @@ export const Project = function (config) {
             like.types.forEach((type) => {
               if (type !== 'wow') {
                 const icon = document.createElement('i')
-                icon.className = 'material-icons md-18 ' + iconMappingClasses[type]
+                icon.className = `material-icons md-18 ${iconMappingClasses[type]}`
                 icon.textContent = iconMapping[type]
                 likeTypes.appendChild(icon)
               } else {
@@ -686,7 +686,7 @@ export const Project = function (config) {
 // -------------------------- Sign App UI
 //
 
-document.addEventListener('click', function (e) {
+document.addEventListener('click', (e) => {
   const ellipsisContainer = document.getElementById('sign-app-ellipsis-container')
   const ellipsis = document.getElementById('sign-app-ellipsis')
 
@@ -698,12 +698,12 @@ document.addEventListener('click', function (e) {
   }
 })
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('sign-app-ellipsis')?.addEventListener('click', function () {
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('sign-app-ellipsis')?.addEventListener('click', () => {
     document.getElementById('sign-app-ellipsis-container').style.display = 'block'
   })
 
-  document.getElementById('toggle_ads')?.addEventListener('click', function () {
+  document.getElementById('toggle_ads')?.addEventListener('click', () => {
     const adsInfo = document.getElementById('ads_info')
     const showAdsChk = document.getElementById('show_ads_chk')
 
@@ -721,43 +721,43 @@ document.addEventListener('DOMContentLoaded', function () {
   const keyStorePathText = document.getElementById('key_store_path_text')
   const keyFilePathIcon = document.getElementById('key_file_path_icon')
 
-  keyStoreFile?.addEventListener('change', function () {
+  keyStoreFile?.addEventListener('change', () => {
     keyStoreFileText.value = keyStoreFile.value
   })
 
-  keyStoreFileText?.addEventListener('click', function () {
+  keyStoreFileText?.addEventListener('click', () => {
     keyStoreFile.click()
     keyStoreFileText.blur()
   })
 
-  keyStoreIcon?.addEventListener('click', function () {
+  keyStoreIcon?.addEventListener('click', () => {
     keyStoreFile.click()
   })
 
-  keyStorePath?.addEventListener('change', function () {
+  keyStorePath?.addEventListener('change', () => {
     keyStorePathText.value = keyStorePath.value
   })
 
-  keyFilePathIcon?.addEventListener('click', function () {
+  keyFilePathIcon?.addEventListener('click', () => {
     keyStorePath.click()
   })
 
-  keyStorePathText?.addEventListener('click', function () {
+  keyStorePathText?.addEventListener('click', () => {
     keyStorePath.click()
     keyStorePathText.blur()
   })
 
-  document.getElementById('inc_years')?.addEventListener('click', function () {
+  document.getElementById('inc_years')?.addEventListener('click', () => {
     const yearsField = document.getElementById('key_validity')
     if (yearsField.value < 99) {
-      yearsField.value = parseInt(yearsField.value) + 1
+      yearsField.value = parseInt(yearsField.value, 10) + 1
     }
   })
 
-  document.getElementById('dec_years')?.addEventListener('click', function () {
+  document.getElementById('dec_years')?.addEventListener('click', () => {
     const yearsField = document.getElementById('key_validity')
     if (yearsField.value > 0) {
-      yearsField.value = parseInt(yearsField.value) - 1
+      yearsField.value = parseInt(yearsField.value, 10) - 1
     }
   })
 })
@@ -796,10 +796,10 @@ function updateMenuItemUI(item, iconName, textContent) {
   if (text) text.textContent = textContent
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const nfkItem = document.getElementById('top-app-bar__btn-toggle-not-for-kids')
   if (nfkItem) {
-    nfkItem.addEventListener('click', function () {
+    nfkItem.addEventListener('click', () => {
       const currentValue = parseInt(nfkItem.dataset.notForKids, 10)
 
       if (currentValue === 2) {
@@ -816,7 +816,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ? nfkItem.dataset.transConfirmMark
         : nfkItem.dataset.transConfirmUnmark
 
-      confirmAndUpdate(nfkItem, confirmText, { not_for_kids: newValue }, function () {
+      confirmAndUpdate(nfkItem, confirmText, { not_for_kids: newValue }, () => {
         nfkItem.dataset.notForKids = String(newValue ? 1 : 0)
         updateMenuItemUI(
           nfkItem,
@@ -850,14 +850,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const visItem = document.getElementById('top-app-bar__btn-toggle-visibility')
   if (visItem) {
-    visItem.addEventListener('click', function () {
+    visItem.addEventListener('click', () => {
       const isPrivate = visItem.dataset.private === 'true'
       const newValue = !isPrivate
       const confirmText = newValue
         ? visItem.dataset.transConfirmPrivate
         : visItem.dataset.transConfirmPublic
 
-      confirmAndUpdate(visItem, confirmText, { private: newValue }, function () {
+      confirmAndUpdate(visItem, confirmText, { private: newValue }, () => {
         visItem.dataset.private = String(newValue)
         updateMenuItemUI(
           visItem,
@@ -889,7 +889,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const deleteItem = document.getElementById('top-app-bar__btn-delete-project')
   if (deleteItem) {
-    deleteItem.addEventListener('click', async function () {
+    deleteItem.addEventListener('click', async () => {
       const projectId = deleteItem.dataset.projectId
       const baseUrl = document.querySelector('#js-api-routing').dataset.baseUrl
 
@@ -911,11 +911,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!result.value) return
 
         new ApiDeleteFetch(
-          baseUrl + '/api/projects/' + projectId,
+          `${baseUrl}/api/projects/${projectId}`,
           'Delete Project',
           deleteItem.dataset.transError,
-          function () {
-            window.location.href = baseUrl + '/'
+          () => {
+            window.location.href = `${baseUrl}/`
           },
           {
             404: deleteItem.dataset.transNotFound,

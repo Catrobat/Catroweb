@@ -1,7 +1,7 @@
-import { showSnackbar } from '../Layout/Snackbar'
 import { MDCChipSet } from '@material/chips'
 import { ApiFetch } from '../Api/ApiHelper'
-import { escapeHtml, escapeAttr } from '../Components/HtmlEscape'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
+import { showSnackbar } from '../Layout/Snackbar'
 import './ReportsPage.scss'
 
 const TAB_CONFIG = [
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabPaneElements = document.querySelectorAll('.tab-pane')
 
   if (chipset) {
-    chipset.listen('MDCChip:interaction', function (event) {
+    chipset.listen('MDCChip:interaction', (event) => {
       document.querySelector('.show.active').classList.remove('show', 'active')
       tabPaneElements[event.detail.index].classList.add('show', 'active')
     })
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   userReports.fetchMore()
 
   for (const tab of TAB_CONFIG) {
-    document.getElementById(tab.chipId).addEventListener('click', function () {
+    document.getElementById(tab.chipId).addEventListener('click', () => {
       if (userReports.activeTab !== tab.status) {
         userReports.resetChips()
         userReports.selectChip(tab.chipId, tab.paneId)
@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let scrollTicking = false
-  window.addEventListener('scroll', function () {
+  window.addEventListener('scroll', () => {
     if (scrollTicking) return
     scrollTicking = true
-    requestAnimationFrame(function () {
+    requestAnimationFrame(() => {
       const bottom = document.documentElement.scrollHeight - window.innerHeight
       if (bottom > 0 && window.scrollY / bottom >= 0.7) {
         userReports.fetchMore()
@@ -126,10 +126,14 @@ class UserReports {
 
   renderFilteredTab(status) {
     const container = this.containers[status]
-    container.querySelectorAll('.report-item').forEach((el) => el.remove())
+    container.querySelectorAll('.report-item').forEach((el) => {
+      el.remove()
+    })
 
     const filtered = this.items.filter((r) => r.status === status)
-    filtered.forEach((report) => this._renderCard(report, container))
+    filtered.forEach((report) => {
+      this._renderCard(report, container)
+    })
     this._updatePlaceholder(status, filtered.length)
   }
 
@@ -181,7 +185,9 @@ class UserReports {
 
   _removeSkeletons() {
     for (const tab of TAB_CONFIG) {
-      this.containers[tab.status]?.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+      this.containers[tab.status]?.querySelectorAll('.js-skeleton').forEach((el) => {
+        el.remove()
+      })
     }
   }
 
@@ -211,7 +217,8 @@ class UserReports {
   }
 
   _handleError(error) {
-    const status = error?.status || (error?.message && parseInt(error.message.match(/\d+/)?.[0]))
+    const status =
+      error?.status || (error?.message && parseInt(error.message.match(/\d+/)?.[0], 10))
     if (status === 401) {
       window.location.href = '/login'
       return

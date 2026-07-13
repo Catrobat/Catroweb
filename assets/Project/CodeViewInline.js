@@ -44,7 +44,7 @@ function renderBrick(brick) {
       childrenHtml += '<div class="cv-block__children">'
       if (branches.length > 1) {
         const label = BRANCH_LABELS[key] || key
-        childrenHtml += '<div class="cv-branch-label">' + escapeHtml(label) + '</div>'
+        childrenHtml += `<div class="cv-branch-label">${escapeHtml(label)}</div>`
       }
       for (let j = 0; j < bricks.length; j++) {
         childrenHtml += renderBrick(bricks[j])
@@ -53,7 +53,7 @@ function renderBrick(brick) {
     }
   }
 
-  return '<div class="cv-block cv-block--' + cat + commented + '">' + text + childrenHtml + '</div>'
+  return `<div class="cv-block cv-block--${cat}${commented}">${text}${childrenHtml}</div>`
 }
 
 function renderScript(script) {
@@ -112,16 +112,16 @@ function renderLookItem(look) {
   const name = escapeHtml(look.name || '')
   const url = look.url || ''
   const thumb = url
-    ? '<img class="cv-asset-thumb" src="' + escapeHtml(url) + '" alt="' + name + '" loading="lazy">'
+    ? `<img class="cv-asset-thumb" src="${escapeHtml(url)}" alt="${name}" loading="lazy">`
     : '<i class="material-icons">image</i>'
-  return '<li class="cv-asset-item">' + thumb + '<span>' + name + '</span></li>'
+  return `<li class="cv-asset-item">${thumb}<span>${name}</span></li>`
 }
 
 function renderSoundItem(sound) {
   const name = escapeHtml(sound.name || '')
   const url = sound.url || ''
   const player = url
-    ? '<audio class="cv-asset-audio" preload="none" controls src="' + escapeHtml(url) + '"></audio>'
+    ? `<audio class="cv-asset-audio" preload="none" controls src="${escapeHtml(url)}"></audio>`
     : ''
   return (
     '<li class="cv-asset-item">' +
@@ -154,9 +154,9 @@ function renderSpriteCard(obj, expanded, container) {
   const looksLabel = looksCount > 0 ? escapeHtml(container.dataset.transLooks || 'Looks') : ''
   const soundsLabel = soundsCount > 0 ? escapeHtml(container.dataset.transSounds || 'Sounds') : ''
 
-  const parts = [scriptCount + ' ' + scriptsLabel]
-  if (looksCount > 0) parts.push(looksCount + ' ' + looksLabel)
-  if (soundsCount > 0) parts.push(soundsCount + ' ' + soundsLabel)
+  const parts = [`${scriptCount} ${scriptsLabel}`]
+  if (looksCount > 0) parts.push(`${looksCount} ${looksLabel}`)
+  if (soundsCount > 0) parts.push(`${soundsCount} ${soundsLabel}`)
   const badge = parts.join(', ')
 
   const expandedAttr = expanded ? 'true' : 'false'
@@ -165,7 +165,7 @@ function renderSpriteCard(obj, expanded, container) {
 
   const thumbUrl = getSpriteThumbUrl(obj)
   const thumbHtml = thumbUrl
-    ? '<img class="cv-sprite__thumb" src="' + escapeHtml(thumbUrl) + '" alt="" loading="lazy">'
+    ? `<img class="cv-sprite__thumb" src="${escapeHtml(thumbUrl)}" alt="" loading="lazy">`
     : '<i class="material-icons cv-sprite__icon">category</i>'
 
   let html =
@@ -193,10 +193,10 @@ function renderSpriteCard(obj, expanded, container) {
       scriptsLabel +
       '</button>'
     if (looksCount > 0) {
-      html += '<button type="button" class="cv-tab" data-tab="looks">' + looksLabel + '</button>'
+      html += `<button type="button" class="cv-tab" data-tab="looks">${looksLabel}</button>`
     }
     if (soundsCount > 0) {
-      html += '<button type="button" class="cv-tab" data-tab="sounds">' + soundsLabel + '</button>'
+      html += `<button type="button" class="cv-tab" data-tab="sounds">${soundsLabel}</button>`
     }
     html += '</div>'
 
@@ -252,7 +252,7 @@ function renderScene(scene, showHeader, expanded, container) {
   }
 
   const bodyHidden = showHeader && !expanded ? ' d-none' : ''
-  html += '<div class="cv-scene__body' + bodyHidden + '">'
+  html += `<div class="cv-scene__body${bodyHidden}">`
 
   const objects = scene.objects || []
   for (let i = 0; i < objects.length; i++) {
@@ -324,12 +324,14 @@ function handleToggle(e) {
     const sprite = tab.closest('.cv-sprite__body')
     if (!sprite || !tabName) return
 
-    sprite.querySelectorAll('.cv-tab').forEach((t) => t.classList.remove('cv-tab--active'))
-    sprite
-      .querySelectorAll('.cv-tab-panel')
-      .forEach((p) => p.classList.remove('cv-tab-panel--active'))
+    sprite.querySelectorAll('.cv-tab').forEach((t) => {
+      t.classList.remove('cv-tab--active')
+    })
+    sprite.querySelectorAll('.cv-tab-panel').forEach((p) => {
+      p.classList.remove('cv-tab-panel--active')
+    })
     tab.classList.add('cv-tab--active')
-    const targetPanel = sprite.querySelector('[data-tab-panel="' + tabName + '"]')
+    const targetPanel = sprite.querySelector(`[data-tab-panel="${tabName}"]`)
     if (targetPanel) targetPanel.classList.add('cv-tab-panel--active')
     return
   }

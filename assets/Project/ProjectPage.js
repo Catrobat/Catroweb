@@ -3,25 +3,24 @@
 
 import { MDCTextField } from '@material/textfield'
 import '../Components/FullscreenListModal'
-import { TranslateProject } from '../Translate/TranslateProject'
-import { TranslateComments } from '../Translate/TranslateComments'
-import { ProjectList } from './ProjectList'
-import { Project } from './Project'
-
-import { ProjectDescription } from './ProjectDescription'
-import { ProjectCredits } from './ProjectCredits'
-import { ProjectComments } from './ProjectComments'
 import { CustomTranslationApi } from '../Api/CustomTranslationApi'
-import { ProjectEditorNavigation } from './ProjectEditorNavigation'
-import { ProjectEditor } from './ProjectEditor'
-import { ProjectEditorTextField } from './ProjectEditorTextField'
-import { ProjectName } from './ProjectName'
-import { ProjectEditorTextFieldModel } from './ProjectEditorTextFieldModel'
-import { ProjectEditorModel } from './ProjectEditorModel'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
-import { showSnackbar, SnackbarDuration } from '../Layout/Snackbar'
-import { updatePictureSources } from '../Layout/ImageVariants'
 import { prepareImageFileForUpload, readFileAsDataUrl } from '../Components/ImageUploadHelper'
+import { updatePictureSources } from '../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
+import { TranslateComments } from '../Translate/TranslateComments'
+import { TranslateProject } from '../Translate/TranslateProject'
+import { Project } from './Project'
+import { ProjectComments } from './ProjectComments'
+import { ProjectCredits } from './ProjectCredits'
+import { ProjectDescription } from './ProjectDescription'
+import { ProjectEditor } from './ProjectEditor'
+import { ProjectEditorModel } from './ProjectEditorModel'
+import { ProjectEditorNavigation } from './ProjectEditorNavigation'
+import { ProjectEditorTextField } from './ProjectEditorTextField'
+import { ProjectEditorTextFieldModel } from './ProjectEditorTextFieldModel'
+import { ProjectList } from './ProjectList'
+import { ProjectName } from './ProjectName'
 import './RemixGraphInline'
 
 import './ProjectPage.scss'
@@ -74,7 +73,7 @@ const RETENTION_WARN_DAYS = 7
 const RETENTION_CAUTION_DAYS = 30
 
 function formatFilesize(filesize) {
-  return (filesize != null ? filesize.toFixed(2) : '0.00') + ' MB'
+  return `${filesize != null ? filesize.toFixed(2) : '0.00'} MB`
 }
 
 function initEarlyComponents() {
@@ -91,7 +90,9 @@ function initEarlyComponents() {
 }
 
 function removeSkeletons() {
-  document.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+  document.querySelectorAll('.js-skeleton').forEach((el) => {
+    el.remove()
+  })
 }
 
 function renderProjectMetadata(data) {
@@ -459,10 +460,7 @@ function initComponents(data, earlyInits) {
     if (commentMessageWrapper) {
       const commentMdcRoot =
         commentMessageWrapper.querySelector('.mdc-text-field') ||
-        (commentMessageWrapper.classList &&
-        commentMessageWrapper.classList.contains('mdc-text-field')
-          ? commentMessageWrapper
-          : null)
+        (commentMessageWrapper.classList?.contains('mdc-text-field') ? commentMessageWrapper : null)
       if (commentMdcRoot) {
         new MDCTextField(commentMdcRoot)
       }
@@ -662,7 +660,7 @@ function initComponents(data, earlyInits) {
 }
 
 function initProjectScreenshotUpload() {
-  const createTestFileInput = function (parent) {
+  const createTestFileInput = (parent) => {
     const input = document.createElement('input')
     input.type = 'file'
     input.accept = 'image/*'
@@ -672,7 +670,7 @@ function initProjectScreenshotUpload() {
     parent.appendChild(input)
   }
 
-  const addChangeListenerToFileInput = function (input) {
+  const addChangeListenerToFileInput = (input) => {
     input.onchange = async () => {
       const parentElement = input.parentElement
       input.remove()
@@ -717,7 +715,7 @@ function initProjectScreenshotUpload() {
 
         const imageElement = document.getElementById('project-thumbnail-big')
         if (imageElement) {
-          const cacheBuster = 'x=' + new Date().getTime()
+          const cacheBuster = `x=${Date.now()}`
           const hasQuery = imageElement.src.includes('?')
           imageElement.src = `${imageElement.src}${hasQuery ? '&' : '?'}${cacheBuster}`
         }
@@ -736,7 +734,7 @@ function initProjectScreenshotUpload() {
   }
   const changeButton = document.getElementById('change-project-thumbnail-button')
   if (changeButton) {
-    changeButton.addEventListener('click', function () {
+    changeButton.addEventListener('click', () => {
       const input = document.createElement('input')
       input.type = 'file'
       input.accept = 'image/*'

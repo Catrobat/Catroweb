@@ -1,5 +1,6 @@
 /* global globalConfiguration */
 
+// biome-ignore lint/complexity/noStaticOnlyClass: intentional namespace for dialog helpers
 export default class MessageDialogs {
   static async showErrorMessage(message, retryCallback = null) {
     const { default: Swal } = await import('sweetalert2')
@@ -39,7 +40,7 @@ export default class MessageDialogs {
     const { default: Swal } = await import('sweetalert2')
     return Swal.fire({
       title: globalConfiguration.messages.errorTitle,
-      html: '<ul class="text-start"><li>' + errors.join('</li><li>') + '</li></ul>',
+      html: `<ul class="text-start"><li>${errors.join('</li><li>')}</li></ul>`,
       icon: 'warning',
       customClass: {
         confirmButton: 'btn btn-primary',

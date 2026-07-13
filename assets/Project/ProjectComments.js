@@ -53,7 +53,7 @@ export function ProjectComments(config) {
 
   // Attach to document so clicks on comment detail pages (parent-comment-container)
   // are also captured. We narrow handling by checking closest('.single-comment, .single-reply').
-  document.addEventListener('click', function (event) {
+  document.addEventListener('click', (event) => {
     const singleComment = event.target.closest('.single-comment, .single-reply')
     if (!singleComment) return
 
@@ -98,7 +98,7 @@ export function ProjectComments(config) {
   })
 
   // Separate listener for report/delete actions (also on document)
-  document.addEventListener('click', function (event) {
+  document.addEventListener('click', (event) => {
     const reportButton = event.target.closest('.comment-report-button')
     if (reportButton) {
       event.stopPropagation()
@@ -139,17 +139,17 @@ export function ProjectComments(config) {
   const commentCancelButton = document.querySelector('#comment-cancel-button')
 
   if (commentMessage) {
-    commentMessage.addEventListener('focus', function () {
+    commentMessage.addEventListener('focus', () => {
       commentButtonsContainer.style.display = 'flex'
       commentMessage.style.height = '100px'
     })
 
-    commentMessage.addEventListener('input', function () {
+    commentMessage.addEventListener('input', () => {
       sessionStorage.setItem('temp_project_comment', commentMessage.value)
     })
 
     // Hide buttons if focused out and empty
-    commentMessage.addEventListener('blur', function () {
+    commentMessage.addEventListener('blur', () => {
       if (commentMessage.value === '') {
         setTimeout(() => {
           if (
@@ -172,7 +172,7 @@ export function ProjectComments(config) {
   }
 
   if (commentCancelButton) {
-    commentCancelButton.addEventListener('click', function () {
+    commentCancelButton.addEventListener('click', () => {
       commentMessage.value = ''
       sessionStorage.setItem('temp_project_comment', '')
       commentButtonsContainer.style.display = 'none'
@@ -189,7 +189,7 @@ export function ProjectComments(config) {
     })
   }
 
-  document.querySelector('#add-comment-button')?.addEventListener('click', function () {
+  document.querySelector('#add-comment-button')?.addEventListener('click', () => {
     const userCommentWrapper = document.querySelector('#user-comment-wrapper')
     const addCommentInitContainer = document.querySelector('#add-comment-init-container')
     const commentMessage = document.querySelector('#comment-message')
@@ -202,10 +202,10 @@ export function ProjectComments(config) {
   })
 
   let scrollTicking = false
-  window.addEventListener('scroll', function () {
+  window.addEventListener('scroll', () => {
     if (scrollTicking || fetchActive) return
     scrollTicking = true
-    requestAnimationFrame(function () {
+    requestAnimationFrame(() => {
       const position = window.scrollY
       const bottom = document.documentElement.scrollHeight - window.innerHeight
       if (bottom > 0 && position / bottom >= 0.7) {
@@ -640,7 +640,7 @@ export function ProjectComments(config) {
   }
 
   function updateReplyCount(parentId, delta) {
-    const parentEl = document.querySelector('#comment-' + parentId)
+    const parentEl = document.querySelector(`#comment-${parentId}`)
     if (!parentEl) return
 
     const repliesCountWrapper = parentEl.querySelector('.comment-replies-count')
@@ -693,9 +693,9 @@ export function ProjectComments(config) {
     })
       .then((response) => {
         if (response.ok) {
-          const commentElement = document.querySelector('#comment-' + commentId)
+          const commentElement = document.querySelector(`#comment-${commentId}`)
           if (commentElement) {
-            const textWrapper = commentElement.querySelector('#comment-text-wrapper-' + commentId)
+            const textWrapper = commentElement.querySelector(`#comment-text-wrapper-${commentId}`)
             if (textWrapper) {
               textWrapper.replaceChildren()
               const p = document.createElement('p')
@@ -736,7 +736,7 @@ export function ProjectComments(config) {
     const { default: Swal } = await import('sweetalert2')
     Swal.fire({
       title: areYouSure,
-      html: text + '<br><br>' + noWayOfReturn,
+      html: `${text}<br><br>${noWayOfReturn}`,
       icon: 'warning',
       showCancelButton: true,
       allowOutsideClick: false,
@@ -778,7 +778,7 @@ export function ProjectComments(config) {
 
   const replyButtons = document.querySelectorAll('.add-reply-button')
   replyButtons.forEach((replyButton) => {
-    replyButton.addEventListener('click', function () {
+    replyButton.addEventListener('click', () => {
       const parentCommentContainer = document.querySelector('.js-project-parentComment')
       if (parentCommentContainer) {
         if (!parentCommentContainer.dataset.parentCommentId) {

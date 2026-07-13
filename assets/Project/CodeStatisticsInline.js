@@ -114,7 +114,7 @@ function buildTable(container) {
 function createRow(label, score, icon) {
   const levelCount = scoreToLevelCount(score)
   const row = document.createElement('div')
-  row.className = 'code-stats-row code-stats-row--level-' + levelCount
+  row.className = `code-stats-row code-stats-row--level-${levelCount}`
 
   let segmentsHtml = ''
   for (let i = 0; i < MAX_LEVELS; i++) {
@@ -204,7 +204,7 @@ async function runAnimation(data, container) {
 
   // Stagger entrance for category rows
   for (let i = 0; i < categoryRows.length; i++) {
-    categoryRows[i].style.animationDelay = i * 80 + 'ms'
+    categoryRows[i].style.animationDelay = `${i * 80}ms`
     categoryRows[i].classList.add('code-stats-row-enter')
     tableEl.appendChild(categoryRows[i])
   }

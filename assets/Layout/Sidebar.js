@@ -45,13 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function initSidebarBadges() {
   if (document.querySelector('.js-user-state').dataset.isUserLoggedIn === 'true') {
     updateBadge(
-      sidebarJs.dataset.baseUrl + '/api/notifications/count',
+      `${sidebarJs.dataset.baseUrl}/api/notifications/count`,
       'sidebar_badge--unseen-notifications',
       'total',
     )
 
     updateBadge(
-      sidebarJs.dataset.baseUrl + '/api/achievements/count',
+      `${sidebarJs.dataset.baseUrl}/api/achievements/count`,
       'sidebar_badge--unseen-achievements',
       'count',
     )
@@ -60,7 +60,7 @@ function initSidebarBadges() {
 
 function displayBadge(badge, count, maxAmountToFetch) {
   if (count > 0) {
-    badge.innerHTML = count <= maxAmountToFetch ? count.toString() : maxAmountToFetch + '+'
+    badge.innerHTML = count <= maxAmountToFetch ? count.toString() : `${maxAmountToFetch}+`
     badge.style.display = 'block'
   } else {
     badge.innerHTML = ''
@@ -90,7 +90,7 @@ function updateBadge(
   new ApiFetch(url)
     .generateAuthenticatedFetch()
     .then((response) => {
-      if (!response.ok) throw new Error('HTTP ' + response.status)
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
       return response.json()
     })
     .then((data) => {
@@ -113,22 +113,22 @@ function updateBadge(
     })
 }
 
-const fnCloseSidebar = function () {
+const fnCloseSidebar = () => {
   window.history.back() // to remove pushed state
 }
-const fnCloseSidebarInternal = function () {
+const fnCloseSidebarInternal = () => {
   window.removeEventListener('popstate', fnCloseSidebarInternal)
   sidebar.classList.remove('active')
   sidebarToggleBtn?.setAttribute('aria-expanded', 'false')
   sidebarToggleBtn?.focus()
 }
-const fnCloseSidebarDesktop = function () {
+const fnCloseSidebarDesktop = () => {
   sidebar.classList.add('inactive')
   document.body.classList.remove('body-with-sidebar')
   sidebarToggleBtn?.setAttribute('aria-expanded', 'false')
   sidebarToggleBtn?.focus()
 }
-const fnOpenSidebar = function () {
+const fnOpenSidebar = () => {
   sidebar.classList.add('active')
   sidebarToggleBtn?.setAttribute('aria-expanded', 'true')
   window.history.pushState('sidebar-open', null, '')
@@ -136,7 +136,7 @@ const fnOpenSidebar = function () {
   const focusable = sidebar.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')
   if (focusable.length) focusable[0].focus()
 }
-const fnOpenSidebarDesktop = function () {
+const fnOpenSidebarDesktop = () => {
   sidebar.classList.remove('inactive')
   document.body.classList.add('body-with-sidebar')
   sidebarToggleBtn?.setAttribute('aria-expanded', 'true')
@@ -159,7 +159,7 @@ function setClickListener() {
     sidebarToggleBtn?.setAttribute('aria-expanded', 'true')
   }
 
-  sidebarToggleBtn?.addEventListener('click', function () {
+  sidebarToggleBtn?.addEventListener('click', () => {
     if (window.innerWidth < 768) {
       // mobile mode
       if (sidebar.classList.contains('active')) {
@@ -208,7 +208,7 @@ function initSidebarSwipe() {
     }
   }
 
-  document.addEventListener('touchstart', function (e) {
+  document.addEventListener('touchstart', (e) => {
     curX = null
     closing = false
     opening = false
@@ -240,8 +240,8 @@ function initSidebarSwipe() {
     }
   })
 
-  document.addEventListener('touchmove', function (e) {
-    if (e.touches.length === 1 && (closing || opening) && !!curX) {
+  document.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1 && (closing || opening) && curX) {
       curX = e.touches[0].pageX
 
       if (closing) {
@@ -260,8 +260,8 @@ function initSidebarSwipe() {
     }
   })
 
-  document.addEventListener('touchend', function (e) {
-    if (e.changedTouches.length === 1 && (closing || opening) && !!curX && startTime) {
+  document.addEventListener('touchend', (e) => {
+    if (e.changedTouches.length === 1 && (closing || opening) && curX && startTime) {
       const touchX = e.changedTouches[0].pageX
       const touchY = e.changedTouches[0].pageY
       const timeDiff = Date.now() - startTime
@@ -319,7 +319,7 @@ function initSidebarSwipe() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   const languageButton = document.querySelector('#btn-language')
   if (!languageButton) {
     return
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const languageMenu = document.querySelector('.language-body')
   const languageMenuOverlay = document.querySelector('.language-body-overlay')
 
-  languageButton.addEventListener('click', function () {
+  languageButton.addEventListener('click', () => {
     if (languageMenu.style.display === 'none' || languageMenu.style.display === '') {
       languageMenu.style.display = 'block'
       languageMenuOverlay.style.display = 'block'

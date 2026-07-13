@@ -1,8 +1,8 @@
 import { Controller } from '@hotwired/stimulus'
-import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
-import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { shareOrCopy } from '../../Components/ClipboardHelper'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { buildPictureHTML } from '../../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -68,7 +68,9 @@ export default class extends Controller {
 
       if (data.data && data.data.length > 0) {
         this.noProjectsTarget.style.display = 'none'
-        data.data.forEach((project) => this.renderProject(project))
+        data.data.forEach((project) => {
+          this.renderProject(project)
+        })
       } else if (!this.cursor) {
         this.noProjectsTarget.style.display = 'block'
       }
@@ -94,7 +96,7 @@ export default class extends Controller {
     const isPrivate = project.private || false
     const isNfk = project.not_for_kids || false
 
-    const projectUrl = '/app/project/' + id
+    const projectUrl = `/app/project/${id}`
 
     const transOpen = this.element.dataset.transOpenProject || 'Open project'
     const transDownload = this.element.dataset.transDownload || 'Download'
@@ -162,7 +164,7 @@ export default class extends Controller {
     }
 
     if (project.author_id) {
-      meta += '<span class="projects-meta__item"><i class="material-icons">person</i>' + author
+      meta += `<span class="projects-meta__item"><i class="material-icons">person</i>${author}`
     } else if (author) {
       meta +=
         '<span class="projects-meta__item"><i class="material-icons">person</i>' +
@@ -221,7 +223,9 @@ export default class extends Controller {
   }
 
   _clearSkeletons() {
-    this.containerTarget.querySelectorAll('.js-skeleton').forEach((el) => el.remove())
+    this.containerTarget.querySelectorAll('.js-skeleton').forEach((el) => {
+      el.remove()
+    })
   }
 
   _handleContainerClick(event) {
@@ -287,7 +291,7 @@ export default class extends Controller {
   }
 
   _shareProject(projectId) {
-    const projectUrl = window.location.origin + '/app/project/' + projectId
+    const projectUrl = `${window.location.origin}/app/project/${projectId}`
     const msg = this.element.dataset.transShareSuccess || 'Link copied!'
     shareOrCopy(projectUrl, () => showSnackbar('#share-snackbar', msg))
   }
@@ -321,7 +325,7 @@ export default class extends Controller {
     try {
       // Derive base from projectsUrl (e.g., "/index_test.php/api/studios/1/projects" -> "/index_test.php/api/studios/1")
       const studioBase = this.projectsUrlValue.replace(/\/projects$/, '')
-      const url = studioBase + '/user-projects'
+      const url = `${studioBase}/user-projects`
       const response = await fetch(url, { credentials: 'same-origin' })
       if (!response.ok) {
         return
@@ -489,7 +493,7 @@ export default class extends Controller {
 
   updateCount(delta = 0) {
     if (this.hasCountTarget) {
-      const current = parseInt(this.countTarget.textContent) || 0
+      const current = parseInt(this.countTarget.textContent, 10) || 0
       this.countTarget.textContent = String(current + delta)
     }
   }

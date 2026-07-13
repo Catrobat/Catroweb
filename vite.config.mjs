@@ -1,9 +1,9 @@
+import path from 'node:path'
 import { defineConfig } from 'vite'
 import symfony from 'vite-plugin-symfony'
-import path from 'node:path'
 
-import { jsEntries, cssEntries } from './vite/entries.mjs'
-import { purgeCssPlugin, cssEntryWrappers, staticCopy } from './vite/plugins.mjs'
+import { cssEntries, jsEntries } from './vite/entries.mjs'
+import { cssEntryWrappers, purgeCssPlugin, staticCopy } from './vite/plugins.mjs'
 
 const rootDir = import.meta.dirname
 

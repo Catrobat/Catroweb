@@ -434,9 +434,9 @@ yarn run watch
 yarn run fix
 
 # Or individually:
-yarn run fix-js       # ESLint (JavaScript)
+yarn run fix-js       # Biome (JavaScript/JSON)
 yarn run fix-css      # Stylelint (SCSS)
-yarn run fix-asset    # Prettier (formatting)
+yarn run fix-asset    # Prettier (Markdown/YAML)
 yarn run fix-php      # PHP CS Fixer
 ```
 

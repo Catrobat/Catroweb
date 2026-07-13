@@ -17,7 +17,7 @@ RUN --mount=type=cache,target=/root/.yarn/berry/cache \
     yarn install --immutable
 
 # Build frontend assets in the node stage (runs in parallel with runtime apt-get)
-COPY vite.config.mjs postcss.config.js eslint.config.js .prettierrc.json ./
+COPY vite.config.mjs postcss.config.js biome.json .prettierrc.json ./
 COPY vite/ vite/
 COPY .env .env.dev .env.test .env.prod ./
 COPY assets/ assets/

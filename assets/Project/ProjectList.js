@@ -1,8 +1,8 @@
 import { normalizeApiResponse } from '../Api/ResponseHelper'
-import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
-import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { buildPictureHTML, createPictureElement } from '../Layout/ImageVariants'
+import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 import '../Components/RetentionTooltip'
 
 import './ProjectList.scss'
@@ -71,7 +71,7 @@ export class ProjectList {
       'id,name,project_url,screenshot,not_for_kids,uploaded_string,retention_days,retention_expiry,private,views,downloads'
 
     if (this.propertyToShow && !attributes.split(',').includes(this.propertyToShow)) {
-      attributes += ',' + this.propertyToShow
+      attributes += `,${this.propertyToShow}`
     }
     return apiUrl.includes('?')
       ? `${apiUrl}&attributes=${attributes}&`
@@ -95,7 +95,7 @@ export class ProjectList {
       credentials: 'same-origin',
     })
       .then((response) => {
-        if (!response.ok) throw new Error('HTTP ' + response.status)
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
         return response.json()
       })
       .then((data) => {
@@ -390,7 +390,7 @@ export class ProjectList {
         e.preventDefault()
         e.stopPropagation()
         btn.closest('.projects-list-item--dropdown').style.display = 'none'
-        const url = window.location.origin + '/app/project/' + btn.dataset.projectId
+        const url = `${window.location.origin}/app/project/${btn.dataset.projectId}`
         shareOrCopy(url, () => {
           import('../Layout/Snackbar').then(({ showSnackbar }) => {
             showSnackbar('#share-snackbar', ds.transShareSuccess || 'Link copied!')
@@ -418,7 +418,7 @@ export class ProjectList {
         })
         if (result.isConfirmed) {
           const baseUrl = ds.baseUrl || ''
-          const delResp = await fetch(baseUrl + '/api/projects/' + projectId, {
+          const delResp = await fetch(`${baseUrl}/api/projects/${projectId}`, {
             method: 'DELETE',
             credentials: 'same-origin',
           })
@@ -448,7 +448,7 @@ export class ProjectList {
         showReportDialog({
           contentType: 'project',
           contentId: projectId,
-          apiUrl: '/api/projects/' + projectId + '/report',
+          apiUrl: `/api/projects/${projectId}/report`,
           loginUrl: ds.loginUrl || '/app/login',
           isLoggedIn: this.isLoggedIn,
           translations: {
@@ -580,7 +580,7 @@ export class ProjectList {
   }
 
   generateStudioElement(data) {
-    const studioUrl = '/app/studio/' + data.id
+    const studioUrl = `/app/studio/${data.id}`
 
     const el = document.createElement('a')
     el.className = 'project-list__project'
@@ -617,7 +617,7 @@ export class ProjectList {
     const valueSpan = document.createElement('span')
     valueSpan.className = 'project-list__project__property__value'
     const transMembers = this.container.dataset.transMembers || 'members'
-    valueSpan.textContent = (data.members_count || 0) + ' ' + transMembers
+    valueSpan.textContent = `${data.members_count || 0} ${transMembers}`
     propDiv.appendChild(valueSpan)
 
     el.appendChild(propDiv)

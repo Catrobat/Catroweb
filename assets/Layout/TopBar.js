@@ -1,6 +1,6 @@
-import { showSnackbar } from './Snackbar'
-import { MDCTopAppBar } from '@material/top-app-bar'
 import { MDCMenu } from '@material/menu'
+import { MDCTopAppBar } from '@material/top-app-bar'
+import { showSnackbar } from './Snackbar'
 
 import './TopBar.scss'
 import '../Components/MdcMenu.scss'
@@ -12,7 +12,7 @@ const title = document.querySelector('#top-app-bar__title')
 const toggleSidebarButton = document.querySelector('#top-app-bar__btn-sidebar-toggle')
 let backButton = document.querySelector('#top-app-bar__back__btn-back')
 
-if (backButton && backButton.dataset.backPath) {
+if (backButton?.dataset.backPath) {
   backButton.addEventListener('click', () => {
     window.location.href = backButton.dataset.backPath
   })
@@ -186,8 +186,8 @@ function handleSearchBackButton() {
   }
 }
 
-window.addEventListener('popstate', function (event) {
-  if (searchBarPushedState && (!event.state || event.state.type !== 'search-bar-open')) {
+window.addEventListener('popstate', (event) => {
+  if (searchBarPushedState && event.state?.type !== 'search-bar-open') {
     closeSearchBar()
   }
 })

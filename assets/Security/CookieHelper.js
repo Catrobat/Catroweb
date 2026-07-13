@@ -9,7 +9,7 @@ export function deleteCookie(cname, path) {
 }
 
 export function getCookie(cname) {
-  const name = cname + '='
+  const name = `${cname}=`
   const decodedCookie = decodeURIComponent(document.cookie)
   const ca = decodedCookie.split(';')
   for (let i = 0; i < ca.length; i++) {
@@ -25,10 +25,10 @@ export function getCookie(cname) {
 }
 
 export function setCookie(name, value, expires, path) {
-  let cookie = name + '=' + value
+  let cookie = `${name}=${value}`
   if (expires) {
-    cookie += ';expires=' + expires
+    cookie += `;expires=${expires}`
   }
-  cookie += ';path=' + (path && path !== '' ? path : '/')
+  cookie += `;path=${path && path !== '' ? path : '/'}`
   document.cookie = cookie
 }

@@ -8,7 +8,7 @@ export function shareOrCopy(url, onSuccess = () => {}) {
     return
   }
 
-  if (navigator.clipboard && navigator.clipboard.writeText) {
+  if (navigator.clipboard?.writeText) {
     navigator.clipboard
       .writeText(url)
       .then(onSuccess)

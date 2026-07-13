@@ -1,5 +1,5 @@
-import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { shareOrCopy } from '../Components/ClipboardHelper'
+import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { buildPictureHTML } from '../Layout/ImageVariants'
 import './ProfileStudios.scss'
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function truncate(text, maxLength) {
     if (text.length <= maxLength) return text
-    return text.substring(0, maxLength).trimEnd() + '…'
+    return `${text.substring(0, maxLength).trimEnd()}…`
   }
 
   function renderStudioCard(studio) {
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '</span>' +
       '</div>' +
       '</div>' +
-      (description ? '<p class="text-muted small mb-0 mt-1">' + description + '</p>' : '') +
+      (description ? `<p class="text-muted small mb-0 mt-1">${description}</p>` : '') +
       '</div>' +
       '</div>' +
       '</a>' +
@@ -216,12 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         if (result.isConfirmed) {
           try {
-            const resp = await fetch(baseUrl + '/api/studios/' + studioId + '/leave', {
+            const resp = await fetch(`${baseUrl}/api/studios/${studioId}/leave`, {
               method: 'DELETE',
               credentials: 'same-origin',
             })
             if (resp.ok) {
-              const wrapper = cardsContainer.querySelector('[data-studio-id="' + studioId + '"]')
+              const wrapper = cardsContainer.querySelector(`[data-studio-id="${studioId}"]`)
               if (wrapper) wrapper.remove()
               const studiosCount = document.getElementById('studios-count')
               if (studiosCount) {
@@ -254,12 +254,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         if (result.isConfirmed) {
           try {
-            const resp = await fetch(baseUrl + '/api/studios/' + studioId + '/leave', {
+            const resp = await fetch(`${baseUrl}/api/studios/${studioId}/leave`, {
               method: 'DELETE',
               credentials: 'same-origin',
             })
             if (resp.ok) {
-              const wrapper = cardsContainer.querySelector('[data-studio-id="' + studioId + '"]')
+              const wrapper = cardsContainer.querySelector(`[data-studio-id="${studioId}"]`)
               if (wrapper) wrapper.remove()
               const studiosCount = document.getElementById('studios-count')
               if (studiosCount) {
@@ -298,11 +298,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!studioCards) return
 
-    const studiosUrl = baseUrl + '/api/users/' + userId + '/studios'
+    const studiosUrl = `${baseUrl}/api/users/${userId}/studios`
 
     fetch(studiosUrl, { credentials: 'same-origin' })
       .then((r) => {
-        if (!r.ok) throw new Error('HTTP ' + r.status)
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()
       })
       .then((data) => {

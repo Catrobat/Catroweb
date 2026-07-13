@@ -1,5 +1,5 @@
-import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
+import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 import { REPORT_CATEGORIES } from './ReportCategories'
 
 const SESSION_KEY_PREFIX = 'pendingReport_'
@@ -41,7 +41,7 @@ export async function showReportDialog({
   }
 
   const categories = REPORT_CATEGORIES[contentType] || []
-  const sessionKey = SESSION_KEY_PREFIX + contentType + '_' + contentId
+  const sessionKey = `${SESSION_KEY_PREFIX + contentType}_${contentId}`
   const oldData = JSON.parse(sessionStorage.getItem(sessionKey) || '{}')
 
   const { default: Swal } = await import('sweetalert2')
@@ -218,7 +218,7 @@ function buildReportHtml(categories, translations, oldData) {
 }
 
 function getCategoryLabel(category, translations) {
-  const translatedLabel = translations['category_' + category.labelKey]
+  const translatedLabel = translations[`category_${category.labelKey}`]
 
   if (translatedLabel) {
     return translatedLabel

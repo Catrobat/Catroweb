@@ -1,6 +1,6 @@
 import { MDCSelect } from '@material/select'
-import { ProjectEditorDialog } from './ProjectEditorDialog'
 import { showCustomTopBarTitle } from '../Layout/TopBar'
+import { ProjectEditorDialog } from './ProjectEditorDialog'
 import { DIALOG } from './ProjectEditorModel'
 
 export function ProjectEditor(projectDescriptionCredits, programId, model) {

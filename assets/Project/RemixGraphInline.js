@@ -56,7 +56,7 @@ function truncateLabel(value, maxLength) {
     return value
   }
 
-  return value.slice(0, Math.max(0, maxLength - 3)) + '...'
+  return `${value.slice(0, Math.max(0, maxLength - 3))}...`
 }
 
 function createStatusMarkup(iconMarkup, message, extraClass = '') {
@@ -83,7 +83,7 @@ function getNodeDisplayName(node, container) {
     container.dataset.transProjectNotAvailable || container.dataset.transTitle || 'Remix graph'
   const name = node.name || fallbackName
 
-  return node.source === 'scratch' ? '[Scratch] ' + name : name
+  return node.source === 'scratch' ? `[Scratch] ${name}` : name
 }
 
 function createNetworkNode(node, currentProjectId, container) {
@@ -422,8 +422,8 @@ function positionActionMenu(menu, pointer) {
     window.innerHeight - menuRect.height - margin,
   )
 
-  menu.style.left = left + 'px'
-  menu.style.top = top + 'px'
+  menu.style.left = `${left}px`
+  menu.style.top = `${top}px`
 }
 
 async function showUnavailableDialog(container) {
@@ -479,7 +479,7 @@ function showActionMenu(state, node, pointer) {
     escapeHtml(node.displayName || node.name || '') +
     '</div>' +
     '<div class="remix-graph-menu__subtitle">' +
-    escapeHtml((state.container.dataset.transBy || 'by') + ' ' + (node.displayUsername || '')) +
+    escapeHtml(`${state.container.dataset.transBy || 'by'} ${node.displayUsername || ''}`) +
     '</div>' +
     '</div>' +
     '<div class="remix-graph-menu__actions">' +
@@ -495,7 +495,7 @@ function showActionMenu(state, node, pointer) {
         closeActionMenu(state)
         const targetUrl =
           node.source === 'scratch'
-            ? state.container.dataset.scratchProjectBaseUrl + '/' + node.projectId
+            ? `${state.container.dataset.scratchProjectBaseUrl}/${node.projectId}`
             : state.container.dataset.projectUrlTemplate.replace('__PROJECT_ID__', node.projectId)
         window.location.assign(targetUrl)
         return
@@ -708,7 +708,7 @@ function createState(container) {
   return {
     container,
     projectId,
-    graphUrl: '/api/projects/' + encodeURIComponent(projectId) + '/remix-graph',
+    graphUrl: `/api/projects/${encodeURIComponent(projectId)}/remix-graph`,
     loadPromise: null,
     loaded: false,
     network: null,

@@ -1,8 +1,8 @@
 import { Controller } from '@hotwired/stimulus'
-import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
-import { escapeHtml, escapeAttr } from '../../Components/HtmlEscape'
-import { buildPictureHTML } from '../../Layout/ImageVariants'
 import { MDCMenu } from '@material/menu'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
+import { buildPictureHTML } from '../../Layout/ImageVariants'
+import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
@@ -24,7 +24,7 @@ export default class extends Controller {
     listElement.innerHTML = ''
 
     try {
-      const response = await fetch(this.membersUrlValue + '?limit=50', {
+      const response = await fetch(`${this.membersUrlValue}?limit=50`, {
         credentials: 'same-origin',
       })
       if (!response.ok) {
@@ -52,7 +52,7 @@ export default class extends Controller {
     const li = document.createElement('li')
     li.className = 'member__list-entry'
 
-    const profileUrl = '/app/user/' + escapeAttr(String(member.user_id))
+    const profileUrl = `/app/user/${escapeAttr(String(member.user_id))}`
 
     const adminIndicator =
       member.role === 'admin'
@@ -79,9 +79,8 @@ export default class extends Controller {
       const transBan = this.element.dataset.transBanMember || 'Remove'
       const transPromoteFailed = this.element.dataset.transPromotionFailed || 'Promotion failed'
       const transBanFailed = this.element.dataset.transBanFailed || 'Ban failed'
-      const promoteUrl =
-        this.membersUrlValue + '/' + encodeURIComponent(member.user_id) + '/promote'
-      const banUrl = this.membersUrlValue + '/' + encodeURIComponent(member.user_id) + '/ban'
+      const promoteUrl = `${this.membersUrlValue}/${encodeURIComponent(member.user_id)}/promote`
+      const banUrl = `${this.membersUrlValue}/${encodeURIComponent(member.user_id)}/ban`
 
       adminButtons = `
         <div class="member__list-entry__admin-buttons mdc-menu-surface--anchor">
@@ -112,7 +111,7 @@ export default class extends Controller {
     } else if (isStudioAdmin && member.role === 'admin') {
       const transDemote = this.element.dataset.transDemoteMember || 'Demote'
       const transDemoteFailed = this.element.dataset.transDemotionFailed || 'Demotion failed'
-      const demoteUrl = this.membersUrlValue + '/' + encodeURIComponent(member.user_id) + '/demote'
+      const demoteUrl = `${this.membersUrlValue}/${encodeURIComponent(member.user_id)}/demote`
 
       adminButtons = `
         <div class="member__list-entry__admin-buttons mdc-menu-surface--anchor">

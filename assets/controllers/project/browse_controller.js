@@ -1,9 +1,9 @@
-import { normalizeApiResponse } from '../../Api/ResponseHelper'
 import { Controller } from '@hotwired/stimulus'
-import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
-import { shareOrCopy } from '../../Components/ClipboardHelper'
-import { buildPictureHTML } from '../../Layout/ImageVariants'
 import AcceptLanguage from '../../Api/AcceptLanguage'
+import { normalizeApiResponse } from '../../Api/ResponseHelper'
+import { shareOrCopy } from '../../Components/ClipboardHelper'
+import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
+import { buildPictureHTML } from '../../Layout/ImageVariants'
 import '../../Components/RetentionTooltip'
 
 /* stimulusFetch: 'lazy' */
@@ -108,7 +108,7 @@ export default class extends Controller {
       params.set('cursor', this.exploreCursor)
     }
 
-    const url = this.apiBaseUrlValue + '/projects?' + params.toString()
+    const url = `${this.apiBaseUrlValue}/projects?${params.toString()}`
 
     try {
       const response = await fetch(url, {
@@ -189,8 +189,7 @@ export default class extends Controller {
     this._removeExploreSkeletons()
 
     if (projects.length === 0 && !this.exploreCursor) {
-      container.innerHTML =
-        '<p class="text-muted text-center py-4">' + escapeHtml(this.translations.noExplore) + '</p>'
+      container.innerHTML = `<p class="text-muted text-center py-4">${escapeHtml(this.translations.noExplore)}</p>`
       return
     }
 
@@ -342,7 +341,7 @@ export default class extends Controller {
         project.screenshot,
         'card',
         '/images/default/thumbnail-card@1x.webp',
-        'class="projects-list-item--image" alt="" loading="lazy"' + nfkStyle,
+        `class="projects-list-item--image" alt="" loading="lazy"${nfkStyle}`,
       ) +
       (isPrivate ? '<i class="material-icons projects-list-item--lock-badge">lock</i>' : '') +
       (isNfk
@@ -388,7 +387,7 @@ export default class extends Controller {
       btn.addEventListener('click', (e) => {
         e.preventDefault()
         e.stopPropagation()
-        const url = window.location.origin + '/app/project/' + btn.dataset.projectId
+        const url = `${window.location.origin}/app/project/${btn.dataset.projectId}`
         btn.closest('.projects-list-item--dropdown').style.display = 'none'
         shareOrCopy(url, () => {
           import('../../Layout/Snackbar').then(({ showSnackbar }) => {
@@ -421,12 +420,12 @@ export default class extends Controller {
           buttonsStyling: false,
         })
         if (result.isConfirmed) {
-          await fetch(this.apiBaseUrlValue + '/projects/' + projectId, {
+          await fetch(`${this.apiBaseUrlValue}/projects/${projectId}`, {
             method: 'DELETE',
             credentials: 'same-origin',
           })
           const wrapper = container.querySelector(
-            '.projects-list-item-wrapper[data-project-id="' + CSS.escape(projectId) + '"]',
+            `.projects-list-item-wrapper[data-project-id="${CSS.escape(projectId)}"]`,
           )
           if (wrapper) wrapper.remove()
         }
@@ -447,7 +446,7 @@ export default class extends Controller {
         showReportDialog({
           contentType: 'project',
           contentId: projectId,
-          apiUrl: '/api/projects/' + projectId + '/report',
+          apiUrl: `/api/projects/${projectId}/report`,
           loginUrl: this.loginPathValue,
           isLoggedIn: this.isLoggedInValue,
           translations: {
@@ -604,9 +603,9 @@ export default class extends Controller {
 
   _removeMyProjectsSkeletons() {
     if (this.hasMyProjectsTarget) {
-      this.myProjectsTarget
-        .querySelectorAll('.projects-browse-skeleton')
-        .forEach((el) => el.remove())
+      this.myProjectsTarget.querySelectorAll('.projects-browse-skeleton').forEach((el) => {
+        el.remove()
+      })
     }
   }
 
@@ -616,9 +615,9 @@ export default class extends Controller {
 
   _removeExploreSkeletons() {
     if (!this.exploreSkeletonsRemoved && this.hasExploreProjectsTarget) {
-      this.exploreProjectsTarget
-        .querySelectorAll('.projects-browse-skeleton')
-        .forEach((el) => el.remove())
+      this.exploreProjectsTarget.querySelectorAll('.projects-browse-skeleton').forEach((el) => {
+        el.remove()
+      })
       this.exploreSkeletonsRemoved = true
     }
   }

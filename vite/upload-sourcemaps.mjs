@@ -6,7 +6,7 @@
 // retired @bugsnag/source-maps package, which was flagged unmaintained and
 // dragged in 30+ low-popularity transitive deps.
 
-import { readFile, readdir } from 'node:fs/promises'
+import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 
 const API_KEY = process.env.BUGSNAG_API_KEY

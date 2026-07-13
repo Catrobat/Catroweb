@@ -63,7 +63,7 @@ This page gives a practical map of the Catroweb codebase for contributors.
 
 ## Quality Gates (CI)
 
-- Static analysis: ESLint, Stylelint, Prettier, PHP-CS-Fixer, PhpStan, Psalm, Twig/YAML/Container lints
+- Static analysis: Biome, Stylelint, Prettier, PHP-CS-Fixer, PhpStan, Psalm, Twig/YAML/Container lints
 - Dynamic analysis: PHPUnit + Behat suites in Docker-based jobs
 
 See `.github/workflows/` for the latest exact CI implementation.

@@ -1,9 +1,9 @@
 import { extractFieldErrors } from '../../Api/ResponseHelper'
-import { showSnackbar, SnackbarDuration } from '../../Layout/Snackbar'
-import { showValidationMessage } from '../../Components/TextField'
 import { AjaxController } from '../../Components/AjaxController'
-import { LoginTokenHandler } from '../../Security/LoginTokenHandler'
+import { showValidationMessage } from '../../Components/TextField'
+import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
 import { initCaptchaWidget } from '../../Security/CaptchaWidget'
+import { LoginTokenHandler } from '../../Security/LoginTokenHandler'
 
 /* stimulusFetch: 'lazy' */
 export default class extends AjaxController {
@@ -32,7 +32,7 @@ export default class extends AjaxController {
           return
         }
         const msPerYear = 365.25 * 24 * 60 * 60 * 1000
-        const age = Math.floor((new Date() - new Date(dob)) / msPerYear)
+        const age = Math.floor((Date.now() - new Date(dob)) / msPerYear)
         parentSection.style.display = age < 14 ? '' : 'none'
       })
     }
@@ -91,15 +91,14 @@ export default class extends AjaxController {
     }
 
     if (response.status === 422) {
-      const self = this
-      response.text().then(function (text) {
-        self.handleValidationError(text)
+      response.text().then((text) => {
+        this.handleValidationError(text)
       })
       return
     }
 
-    response.text().then(function (text) {
-      console.error('Registration error: ' + response.status + text)
+    response.text().then((text) => {
+      console.error(`Registration error: ${response.status}${text}`)
     })
     showSnackbar(
       '#share-snackbar',

@@ -6,7 +6,6 @@ export class LoginTokenHandler {
   }
 
   getRedirectUri() {
-    const self = this
     const targetPath = document.getElementById('target-path')
     const rawValue =
       targetPath && typeof targetPath.value === 'string' ? targetPath.value.trim() : ''
@@ -28,14 +27,13 @@ export class LoginTokenHandler {
       }
     }
 
-    return self.indexPath
+    return this.indexPath
   }
 
   initListeners() {
-    const self = this
-    document.getElementById('login-form').addEventListener('submit', function (event) {
+    document.getElementById('login-form').addEventListener('submit', (event) => {
       event.preventDefault()
-      self.login({
+      this.login({
         username: document.getElementById('username__input').value,
         password: document.getElementById('password__input').value,
       })
