@@ -15,6 +15,17 @@ import './MembersList.css'
 import './ActivityList.css'
 import './Studio.css'
 
+document.getElementById('studio-detail-tabs')?.addEventListener('change', (event) => {
+  const tabs = Array.from(event.currentTarget.querySelectorAll('md-primary-tab'))
+  const activeTab = tabs[event.currentTarget.activeTabIndex]
+  const activePane = activeTab && document.getElementById(activeTab.getAttribute('aria-controls'))
+
+  if (!activePane) return
+
+  document.querySelector('.show.active')?.classList.remove('show', 'active')
+  activePane.classList.add('show', 'active')
+})
+
 document.getElementById('std-header-form')?.addEventListener('change', (event) => {
   event.preventDefault()
   const fileInput = document.getElementById('std-header')

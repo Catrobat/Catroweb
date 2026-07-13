@@ -71,54 +71,27 @@
 
   {# Tab bar — server renders structure with skeleton counts, JS updates counts and hides minor tabs #}
   <div class="tab-bar-container mt-3">
-    <div class="mdc-tab-bar" role="tablist">
-      <div class="mdc-tab-scroller">
-        <div class="mdc-tab-scroller__scroll-area" id="scroll-area">
-          <div class="mdc-tab-scroller__scroll-content">
-            <button id="tab-projects" class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
-              <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="projects-count">-</span>
-                <span class="mdc-tab__icon-text">{{ 'projects'|trans({}, 'catroweb') }}</span>
-              </span>
-              <span class="mdc-tab-indicator mdc-tab-indicator--active">
-                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-              </span>
-            </button>
+    <md-tabs aria-label="Profile sections">
+      <md-primary-tab id="tab-projects" active aria-controls="projects-section">
+        <span slot="icon" id="projects-count">-</span>
+        {{ 'projects'|trans({}, 'catroweb') }}
+      </md-primary-tab>
 
-            <button id="tab-followers" class="mdc-tab mdc-tab--stacked js-follower-tab" role="tab" aria-selected="false" tabindex="-1">
-              <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="followers-count">-</span>
-                <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
-              </span>
-              <span class="mdc-tab-indicator">
-                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-              </span>
-            </button>
+      <md-primary-tab id="tab-followers" class="js-follower-tab" aria-controls="follower-section">
+        <span slot="icon" id="followers-count">-</span>
+        {{ 'follower.followers'|trans({}, 'catroweb') }}
+      </md-primary-tab>
 
-            <button id="tab-following" class="mdc-tab mdc-tab--stacked js-follower-tab" role="tab" aria-selected="false" tabindex="-1">
-              <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="following-count">-</span>
-                <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
-              </span>
-              <span class="mdc-tab-indicator">
-                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-              </span>
-            </button>
+      <md-primary-tab id="tab-following" class="js-follower-tab" aria-controls="following-section">
+        <span slot="icon" id="following-count">-</span>
+        {{ 'follower.follows'|trans({}, 'catroweb') }}
+      </md-primary-tab>
 
-            <button id="tab-studios" class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="-1">
-              <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="studios-count">-</span>
-                <span class="mdc-tab__icon-text">{{ 'menu.studio'|trans({}, 'catroweb') }}</span>
-              </span>
-              <span class="mdc-tab-indicator">
-                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-              </span>
-            </button>
-
-          </div>
-        </div>
-      </div>
-    </div>
+      <md-primary-tab id="tab-studios" aria-controls="studios-section">
+        <span slot="icon" id="studios-count">-</span>
+        {{ 'menu.studio'|trans({}, 'catroweb') }}
+      </md-primary-tab>
+    </md-tabs>
   </div>
 
   <div class="tab-content mt-4">

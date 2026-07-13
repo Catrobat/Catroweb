@@ -120,7 +120,7 @@ function renderMostRecentSection(data) {
   }
 
   const achievement = data.most_recent
-  const tabBar = document.querySelector('.mdc-tab-bar')
+  const tabBar = document.querySelector('md-tabs')
   if (!tabBar) {
     return
   }
