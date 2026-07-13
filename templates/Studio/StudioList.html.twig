@@ -34,49 +34,45 @@
                         </div>
                     </div>
                     {% if user_name %}
-                        <div class="studios-list-item--buttons mdc-menu-surface--anchor">
-                            <button id="studios-list-item--button-{{ studio.id }}" class="mdc-icon-button" data-studio-id="{{ studio.id }}">
+                        <div class="studios-list-item--buttons">
+                            <md-icon-button id="studios-list-item--button-{{ studio.id }}" data-studio-id="{{ studio.id }}" aria-label="Studio actions">
                                 <span class="material-icons">more_vert</span>
-                            </button>
-                            <div id="studios-list-item--menu-{{ studio.id }}" class="mdc-menu mdc-menu-surface" data-studio-id="{{ studio.id }}">
-                                <ul class="mdc-deprecated-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                                    <li  class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
+                            </md-icon-button>
+                            <md-menu id="studios-list-item--menu-{{ studio.id }}" anchor="studios-list-item--button-{{ studio.id }}" positioning="popover" data-studio-id="{{ studio.id }}">
+                                    <md-menu-item>
                                         {% if not studio.is_joined and studio.status != 'pending' and studio.status != 'declined' %}
-                                            <span id="requestJoin-{{ studio.id }}" class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestJoin"
+                                            <span id="requestJoin-{{ studio.id }}" slot="headline" class="ajaxRequestJoinLeaveReport ajaxRequestJoin"
                                                   data-url="/api/studios/{{ studio.id }}/join"
                                                   data-method="POST">
                                                  {{ 'studio.details.join'|trans({}, 'catroweb') }}
                                            </span>
                                         {% else %}
                                             {% if studio.status == 'pending' %}
-                                                <span id="requestPending-{{ studio.id }}" class="mdc-deprecated-list-item__text requestPending">
+                                                <span id="requestPending-{{ studio.id }}" slot="headline" class="requestPending">
                                                 {{ 'studio.details.pending'|trans({}, 'catroweb') }}
                                                  </span>
 
                                             {% elseif studio.status == 'declined' %}
-                                                    <span id="requestDecline-{{ studio.id }}" class="mdc-deprecated-list-item__text requestDecline">
+                                                    <span id="requestDecline-{{ studio.id }}" slot="headline" class="requestDecline">
                                                 {{ 'studio.details.decline'|trans({}, 'catroweb') }}
                                                  </span>
                                             {% elseif studio.status == 'approved' or studio.is_joined %}
-                                                <span id="requestLeave-{{ studio.id }}" class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestLeave"
+                                                <span id="requestLeave-{{ studio.id }}" slot="headline" class="ajaxRequestJoinLeaveReport ajaxRequestLeave"
                                                       data-url="/api/studios/{{ studio.id }}/leave"
                                                       data-method="DELETE">
                                                    {{ 'studio.details.leave'|trans({}, 'catroweb') }}
                                                 </span>
                                             {% endif %}
                                         {% endif %}
-                                    </li>
+                                    </md-menu-item>
 
-                                    <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
-                                        <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestReport"
+                                    <md-menu-item>
+                                        <span slot="headline" class="ajaxRequestJoinLeaveReport ajaxRequestReport"
                                               data-url="{{ path('studio_report', {id: studio.id}) }}">
                                             {{ 'studio.report'|trans({}, 'catroweb') }}"
                                         </span>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </md-menu-item>
+                            </md-menu>
                         </div>
                     {% endif %}
                 </div>
