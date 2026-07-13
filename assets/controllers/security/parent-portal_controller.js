@@ -26,7 +26,7 @@ export default class extends AjaxController {
   }
 
   async requestManagementLink() {
-    const emailInput = document.getElementById('parent-email__input')
+    const emailInput = document.getElementById('parent-email')
     const email = emailInput?.value?.trim() || ''
 
     if (!email) {

@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
           url: `${document.getElementById('js-api-routing').dataset.baseUrl}/api/studios`,
         },
         {
-          name: createForm.querySelector('#studio-name__input').value,
-          description: createForm.querySelector('#studio-description__input').value,
+          name: createForm.querySelector('#studio-name').value,
+          description: createForm.querySelector('#studio-description').value,
           is_public: createForm.querySelector('[name="is-public"]').value,
           enable_comments: createForm.querySelector('[name="enable-comments"]').value,
           image_file: processedFile,

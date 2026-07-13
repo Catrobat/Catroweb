@@ -34,8 +34,8 @@ export class LoginTokenHandler {
     document.getElementById('login-form').addEventListener('submit', (event) => {
       event.preventDefault()
       this.login({
-        username: document.getElementById('username__input').value,
-        password: document.getElementById('password__input').value,
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value,
       })
     })
   }

@@ -55,9 +55,9 @@ export default class extends AjaxController {
     this.spinRegistrationButton()
 
     const data = {
-      username: document.getElementById('username__input').value,
-      email: document.getElementById('email__input').value,
-      password: document.getElementById('password__input').value,
+      username: document.getElementById('username').value,
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value,
       captcha_token: this.captchaWidget?.getToken() ?? '',
       date_of_birth: document.getElementById('date-of-birth__input').value,
       parent_email: document.getElementById('parent-email__input').value || undefined,

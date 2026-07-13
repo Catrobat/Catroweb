@@ -159,10 +159,8 @@ async function submitStudioSettings() {
   const baseUrl = document.getElementById('js-api-routing').dataset.baseUrl
   const url = `${baseUrl}/api/studios/${studioId}`
 
-  const nameInput = document.querySelector('#studio-settings__studio-name__input')
-  const descTextarea = document.querySelector(
-    '#studio-settings textarea[name="studio_description"]',
-  )
+  const nameInput = document.querySelector('#studio-settings__studio-name')
+  const descTextarea = document.querySelector('#studio-settings__studio-description')
   const commentsSwitch = document.querySelector(
     '#studio-setting__switch-enable-comments input[name="allow_comments"]',
   )

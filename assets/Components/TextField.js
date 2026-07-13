@@ -1,19 +1,19 @@
-import { MDCFloatingLabel } from '@material/floating-label'
-import { MDCTextField } from '@material/textfield'
-
-import './TextField.css'
-
-for (const el of document.querySelectorAll('.mdc-text-field')) {
-  new MDCTextField(el)
-}
-
-for (const el of document.querySelectorAll('.mdc-floating-label')) {
-  new MDCFloatingLabel(el)
-}
+import '@material/web/iconbutton/icon-button.js'
+import '@material/web/textfield/filled-text-field.js'
 
 export function showValidationMessage(msg, textFieldId) {
   const element = document.getElementById(textFieldId)
+  if (!element) return
+
+  if (element.matches('md-filled-text-field')) {
+    element.error = Boolean(msg)
+    element.errorText = msg || ''
+    return
+  }
+
   const errorElement = document.getElementById(`${textFieldId}__helper`)
+  if (!errorElement) return
+
   if (msg) {
     errorElement.innerText = msg
     errorElement.classList.add('mdc-text-field-helper-text--persistent')
