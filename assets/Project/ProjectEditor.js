@@ -1,4 +1,5 @@
-import { MDCSelect } from '@material/select'
+import '@material/web/select/outlined-select.js'
+import '@material/web/select/select-option.js'
 import { showCustomTopBarTitle } from '../Layout/TopBar'
 import { ProjectEditorDialog } from './ProjectEditorDialog'
 import { DIALOG } from './ProjectEditorModel'
@@ -6,11 +7,9 @@ import { DIALOG } from './ProjectEditorModel'
 export function ProjectEditor(projectDescriptionCredits, programId, model) {
   this.body = document.body
   this.editTextUI = document.getElementById('edit-text-ui')
-  this.languageSelectorList = document.getElementById('edit-language-selector-list')
   this.saveButton = document.getElementById('edit-submit-button')
 
-  const languageSelectElement = document.querySelector('#edit-language-selector')
-  this.languageSelect = languageSelectElement ? new MDCSelect(languageSelectElement) : null
+  this.languageSelect = document.querySelector('#edit-language-selector')
 
   this.closeEditorDialog = new ProjectEditorDialog(
     projectDescriptionCredits.dataset.transCloseEditorPrompt,
@@ -29,14 +28,14 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
   document.getElementById('edit-delete-button').addEventListener('click', model.deleteTranslation)
 
   if (this.languageSelect) {
-    this.languageSelect.listen('MDCSelect:change', () => {
+    this.languageSelect.addEventListener('change', () => {
       if (!this.editTextUI.classList.contains('d-none')) {
         model.setLanguage(this.languageSelect.value)
       }
     })
   }
 
-  Array.from(document.querySelectorAll('.mdc-text-field__input')).forEach((input) => {
+  Array.from(document.querySelectorAll('#edit-text-ui textarea')).forEach((input) => {
     input.addEventListener('input', model.onInput)
   })
 
@@ -86,22 +85,14 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
   }
 
   model.setOnLanguageList((languages) => {
-    this.languageSelectorList.innerHTML = ''
+    this.languageSelect.innerHTML = ''
 
     for (const language in languages) {
-      const listItem = document.createElement('li')
-      listItem.classList.add('mdc-list-item')
-      listItem.dataset.value = language
-      listItem.setAttribute('role', 'option')
-      listItem.setAttribute('tabindex', '-1')
-      listItem.innerHTML = `
-        <span class="mdc-list-item__ripple"></span>
-        <span class="mdc-list-item__text">${languages[language]}</span>
-      `
-      this.languageSelectorList.appendChild(listItem)
+      const option = document.createElement('md-select-option')
+      option.value = language
+      option.innerHTML = `<span slot="headline">${languages[language]}</span>`
+      this.languageSelect.appendChild(option)
     }
-
-    if (this.languageSelect) this.languageSelect.layoutOptions()
   })
 
   model.setOnDialog((dialog) => {

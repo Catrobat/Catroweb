@@ -64,33 +64,13 @@
         </label>
 
         <div class="row justify-content-between" style="margin-top: 1rem;">
-          <div id="edit-language-selector" class="mdc-select mdc-select--outlined">
-            <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
-              <span class="mdc-notched-outline">
-                <span class="mdc-notched-outline__leading"></span>
-                <span class="mdc-notched-outline__notch">
-                  <span class="mdc-floating-label">{{ 'footer.language'|trans({}, 'catroweb') }}</span>
-                </span>
-                <span class="mdc-notched-outline__trailing"></span>
-              </span>
-              <span class="mdc-select__selected-text-container">
-                <span id="edit-selected-language" class="mdc-select__selected-text" data-selected-value="default"></span>
-              </span>
-              <span class="mdc-select__dropdown-icon">
-                {{ include('Components/MdcSelectSvg.html.twig') }}
-              </span>
-            </div>
-            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-              <ul id="edit-language-selector-list" class="mdc-list" role="listbox">
-                <li class="mdc-list-item" data-value="default" role="option">
-                    <span class="mdc-list-item__ripple"></span>
-                    <span class="mdc-list-item__text">
-                      {{ 'project.default'|trans({}, 'catroweb') }}
-                    </span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <md-outlined-select id="edit-language-selector"
+                              label="{{ 'footer.language'|trans({}, 'catroweb') }}"
+                              menu-positioning="popover">
+            <md-select-option value="default" selected>
+              <span slot="headline">{{ 'project.default'|trans({}, 'catroweb') }}</span>
+            </md-select-option>
+          </md-outlined-select>
         </div>
 
         <div class="justify-content-between" style="margin-top: 1rem; float: right;">

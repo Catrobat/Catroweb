@@ -1,15 +1,10 @@
-import { MDCFloatingLabel } from '@material/floating-label'
-import { MDCSelect } from '@material/select'
+import '@material/web/select/outlined-select.js'
+import '@material/web/select/select-option.js'
 
-import './Select.css'
+for (const select of document.querySelectorAll('md-outlined-select')) {
+  const nativeInput = document.getElementById(`${select.id}-native`)
 
-for (const el of document.querySelectorAll('.mdc-select')) {
-  const select = new MDCSelect(el)
-  select.listen('MDCSelect:change', () => {
-    document.getElementById(`${el.id}-native`).value = select.value
+  select.addEventListener('change', () => {
+    if (nativeInput) nativeInput.value = select.value
   })
-}
-
-for (const el of document.querySelectorAll('.mdc-floating-label')) {
-  new MDCFloatingLabel(el)
 }
