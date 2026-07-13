@@ -22,7 +22,7 @@ export default class extends AjaxController {
       })
     }
 
-    const dobInput = document.getElementById('date-of-birth__input')
+    const dobInput = document.getElementById('date-of-birth')
     const parentSection = document.getElementById('parent-email-section')
     if (dobInput && parentSection) {
       dobInput.addEventListener('change', () => {
@@ -59,8 +59,8 @@ export default class extends AjaxController {
       email: document.getElementById('email').value,
       password: document.getElementById('password').value,
       captcha_token: this.captchaWidget?.getToken() ?? '',
-      date_of_birth: document.getElementById('date-of-birth__input').value,
-      parent_email: document.getElementById('parent-email__input').value || undefined,
+      date_of_birth: document.getElementById('date-of-birth').value,
+      parent_email: document.getElementById('parent-email').value || undefined,
     }
 
     const response = await this.fetchPost(this.apiPathValue, data)
