@@ -1,0 +1,13 @@
+/* Shared look for md-tabs, matching the legacy MDC tab bar: tabs stretch
+   across the full bar width with uppercase labels. */
+md-tabs {
+  width: 100%;
+}
+
+md-primary-tab {
+  flex: 1 0 auto;
+  text-transform: uppercase;
+  white-space: nowrap;
+  --md-primary-tab-label-text-weight: 500;
+  --md-primary-tab-label-text-color: light-dark(#49454f, #cbd5e0);
+}

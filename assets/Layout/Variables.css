@@ -1,6 +1,16 @@
-/* Footer */
-/* Default */
 :root {
   --mdc-theme-primary: var(--primary-bg, var(--primary));
   --mdc-theme-on-primary: var(--on-primary);
+
+  /* Theme @material/web components the same way the legacy --mdc-theme-*
+     vars themed MDC: without these, every md-* element falls back to the
+     stock Material 3 purple palette. */
+  --md-sys-color-primary: var(--primary-bg, var(--primary));
+  --md-sys-color-on-primary: var(--on-primary, #fff);
+}
+
+/* Match the legacy MDC filled text field container instead of M3's
+   purple-tinted surface-container-highest. */
+md-filled-text-field {
+  --md-filled-text-field-container-color: light-dark(whitesmoke, #2d2d3d);
 }

@@ -185,7 +185,8 @@
 
 md-tabs {
   width: 100%;
-  --md-primary-tab-container-color: #e9ecef;
+  background-color: #e9ecef;
+  --md-primary-tab-container-color: transparent;
 }
 
 .studio-detail__header__details__button--upload-image {

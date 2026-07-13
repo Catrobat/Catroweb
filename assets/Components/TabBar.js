@@ -1,4 +1,5 @@
 import '@material/web/tabs/primary-tab.js'
+import './TabBar.css'
 import '@material/web/tabs/tabs.js'
 
 for (const tabBar of document.querySelectorAll('md-tabs')) {

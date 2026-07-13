@@ -73,6 +73,7 @@ class BrowserContext extends MinkContext implements Context
    * @param string $field
    * @param string $value
    */
+  #[\Override]
   public function fillField($field, $value): void
   {
     $field = $this->fixStepArgument($field);
@@ -93,6 +94,7 @@ class BrowserContext extends MinkContext implements Context
    * @param string $field
    * @param string $value
    */
+  #[\Override]
   public function assertFieldContains($field, $value): void
   {
     $field = $this->fixStepArgument($field);
@@ -115,6 +117,7 @@ class BrowserContext extends MinkContext implements Context
    * @param string $field
    * @param string $value
    */
+  #[\Override]
   public function assertFieldNotContains($field, $value): void
   {
     $field = $this->fixStepArgument($field);
