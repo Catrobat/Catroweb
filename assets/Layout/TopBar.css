@@ -102,6 +102,17 @@
   background: transparent;
 }
 
+/* md-icon-button defaults to the M3 on-surface-variant icon color; on the
+   primary-colored bar it must stay on-primary like every other action item. */
+.mdc-top-app-bar md-icon-button {
+  --md-icon-button-icon-color: var(--on-primary, #fff);
+  --md-icon-button-hover-icon-color: var(--on-primary, #fff);
+  --md-icon-button-focus-icon-color: var(--on-primary, #fff);
+  --md-icon-button-pressed-icon-color: var(--on-primary, #fff);
+  --md-icon-button-hover-state-layer-color: var(--on-primary, #fff);
+  --md-icon-button-pressed-state-layer-color: var(--on-primary, #fff);
+}
+
 .mdc-top-app-bar--fixed-scrolled {
   box-shadow:
     0 2px 4px -1px rgba(0, 0, 0, 0.2),
