@@ -28,18 +28,14 @@
 
 #}
 
-<div class="mdc-chip-set mdc-chip-set--choice scroll-wrapper nav" role="tablist">
+<md-chip-set class="scroll-wrapper nav" role="tablist">
   {% for chip in chips %}
-    <button id="{{ chip.id }}"
-            class="mdc-chip chip {% if loop.first %} chip-selected {% else %} chip-default {% endif %}"
-            role="tab" aria-controls="{{ chip.controls }}" aria-selected="{{ loop.first }}">
-
-      <span class="material-icons mdc-chip__icon mdc-chip__icon--leading">{{ chip.icon }}</span>
-      <span role="gridcell">
-          <span role="button" class="mdc-chip__primary-action">
-            <span class="mdc-chip__text">{{ chip.title }}</span>
-          </span>
-        </span>
-    </button>
+    <md-filter-chip id="{{ chip.id }}"
+                    class="chip {% if loop.first %}chip-selected{% else %}chip-default{% endif %}"
+                    {% if loop.first %}selected{% endif %}
+                    role="tab" aria-controls="{{ chip.controls }}" aria-selected="{{ loop.first }}">
+      <span slot="icon" class="material-icons">{{ chip.icon }}</span>
+      {{ chip.title }}
+    </md-filter-chip>
   {% endfor %}
-</div>
+</md-chip-set>

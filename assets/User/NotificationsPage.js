@@ -1,4 +1,5 @@
-import { MDCChipSet } from '@material/chips'
+import '@material/web/chips/chip-set.js'
+import '@material/web/chips/filter-chip.js'
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { buildPictureHTML } from '../Layout/ImageVariants'
@@ -46,17 +47,6 @@ const TAB_CONFIG = [
 ]
 
 document.addEventListener('DOMContentLoaded', () => {
-  const chipsetRoot = document.querySelector('.mdc-chip-set')
-  const chipset = chipsetRoot ? new MDCChipSet(chipsetRoot) : null
-  const tabPaneElements = document.querySelectorAll('.tab-pane')
-
-  if (chipset) {
-    chipset.listen('MDCChip:interaction', (event) => {
-      document.querySelector('.show.active').classList.remove('show', 'active')
-      tabPaneElements[event.detail.index].classList.add('show', 'active')
-    })
-  }
-
   const notificationsElement = document.querySelector('.js-notifications')
   const userNotifications = new UserNotifications(
     notificationsElement.dataset.baseUrl,
@@ -318,13 +308,19 @@ class UserNotifications {
 
   resetChips() {
     for (const tab of TAB_CONFIG) {
-      document.getElementById(tab.chipId).classList.replace('chip-selected', 'chip-default')
+      const chip = document.getElementById(tab.chipId)
+      chip.selected = false
+      chip.setAttribute('aria-selected', 'false')
+      chip.classList.replace('chip-selected', 'chip-default')
       document.getElementById(tab.paneId).classList.remove('show', 'active')
     }
   }
 
   selectChip(elementId, paneID) {
-    document.getElementById(elementId).classList.replace('chip-default', 'chip-selected')
+    const chip = document.getElementById(elementId)
+    chip.selected = true
+    chip.setAttribute('aria-selected', 'true')
+    chip.classList.replace('chip-default', 'chip-selected')
     document.getElementById(paneID).classList.add('show', 'active')
   }
 
