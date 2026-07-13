@@ -48,7 +48,7 @@
     "browserslist": "^4.28.5",
     "dotenv": "^17.4.2",
     "postcss": "^8.5.16",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.5",
     "purgecss": "^8.0.0",
     "sass": "^1.101.0",
     "stylelint": "^17.14.0",
