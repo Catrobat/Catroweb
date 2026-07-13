@@ -35,7 +35,11 @@ const optionsMenu = optionsMenuEl
 // listeners swallowing the next click. Force the close on item selection.
 optionsMenuEl?.addEventListener('click', (event) => {
   if (event.target.closest('md-menu-item')) {
-    optionsMenuEl.open = false
+    // Defer so document-level handlers (Bootstrap's data-bs-toggle) still
+    // see the click before the menu closes.
+    window.setTimeout(() => {
+      optionsMenuEl.open = false
+    }, 0)
   }
 })
 
