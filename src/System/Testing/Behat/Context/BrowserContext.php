@@ -27,6 +27,148 @@ class BrowserContext extends MinkContext implements Context
   use ContextTrait;
 
   // --------------------------------------------------------------------------------------------------------------------
+  //  Shadow-DOM aware form fields (@material/web custom elements)
+  // --------------------------------------------------------------------------------------------------------------------
+  //
+  // Since #7031 text fields / selects are rendered as @material/web custom elements
+  // (md-filled-text-field, md-outlined-select, ...). Their native <input> lives inside the
+  // element's SHADOW DOM, so Mink's NamedSelector (which only matches light-DOM
+  // input/textarea/select) can neither find nor fill them.
+  //
+  // The host custom element carries the id / name / value, e.g.:
+  //     <md-filled-text-field id="username" name="_username" value="...">
+  //
+  // Legacy MDC markup exposed a light-DOM `<input id="{id}__input">`; feature files therefore
+  // still reference locators such as "username__input". The single, documented mapping applied
+  // here is: {id}__input  ->  host element with id {id}. Resolution order for a field locator:
+  //     1. element with that id
+  //     2. (if the locator ends with "__input") element with the id minus the "__input" suffix
+  //     3. element carrying that name attribute
+  //
+  // Setting `.value` on the host + dispatching bubbling/composed input & change events mirrors a
+  // real user edit: form-associated md-* elements update their submitted value and Stimulus
+  // controllers listening for input/change react correctly.
+  private const string FIELD_RESOLVER_JS = <<<'JS'
+    function catrowebResolveField(locator) {
+      var el = document.getElementById(locator);
+      if (el) { return el; }
+      if (locator.length > 7 && '__input' === locator.slice(-7)) {
+        el = document.getElementById(locator.slice(0, -7));
+        if (el) { return el; }
+      }
+      return document.querySelector('[name=' + JSON.stringify(locator) + ']');
+    }
+    JS;
+
+  /**
+   * Fills a form field, transparently falling back to shadow-DOM aware handling for md-* elements.
+   *
+   * Behat reads step annotations from the overriding method only, so the parent MinkContext
+   * patterns must be repeated here verbatim.
+   *
+   * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/
+   * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/
+   * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/
+   *
+   * @param string $field
+   * @param string $value
+   */
+  public function fillField($field, $value): void
+  {
+    $field = $this->fixStepArgument($field);
+    $value = $this->fixStepArgument($value);
+
+    try {
+      $this->getSession()->getPage()->fillField($field, $value);
+    } catch (ElementNotFoundException $exception) {
+      if (!$this->setMaterialFieldValue($field, $value)) {
+        throw $exception;
+      }
+    }
+  }
+
+  /**
+   * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/
+   *
+   * @param string $field
+   * @param string $value
+   */
+  public function assertFieldContains($field, $value): void
+  {
+    $field = $this->fixStepArgument($field);
+    $value = $this->fixStepArgument($value);
+
+    try {
+      $this->assertSession()->fieldValueEquals($field, $value);
+    } catch (ElementNotFoundException $exception) {
+      $actual = $this->getMaterialFieldValue($field);
+      if (null === $actual) {
+        throw $exception;
+      }
+      Assert::assertSame($value, $actual, sprintf('Field "%s" should contain "%s" but contains "%s".', $field, $value, $actual));
+    }
+  }
+
+  /**
+   * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/
+   *
+   * @param string $field
+   * @param string $value
+   */
+  public function assertFieldNotContains($field, $value): void
+  {
+    $field = $this->fixStepArgument($field);
+    $value = $this->fixStepArgument($value);
+
+    try {
+      $this->assertSession()->fieldValueNotEquals($field, $value);
+    } catch (ElementNotFoundException $exception) {
+      $actual = $this->getMaterialFieldValue($field);
+      if (null === $actual) {
+        throw $exception;
+      }
+      Assert::assertNotSame($value, $actual, sprintf('Field "%s" should not contain "%s".', $field, $value));
+    }
+  }
+
+  /**
+   * Sets the value of a shadow-DOM md-* form field via JavaScript. Returns false if no element
+   * could be resolved for the given locator.
+   */
+  protected function setMaterialFieldValue(string $locator, string $value): bool
+  {
+    $script = sprintf(
+      'return (function() { %s var el = catrowebResolveField(%s); if (!el) { return false; }'
+      .' el.value = %s;'
+      .' el.dispatchEvent(new Event("input", {bubbles: true, composed: true}));'
+      .' el.dispatchEvent(new Event("change", {bubbles: true, composed: true}));'
+      .' return true; })();',
+      self::FIELD_RESOLVER_JS,
+      json_encode($locator, JSON_THROW_ON_ERROR),
+      json_encode($value, JSON_THROW_ON_ERROR)
+    );
+
+    return true === $this->getSession()->getDriver()->evaluateScript($script);
+  }
+
+  /**
+   * Reads the value of a shadow-DOM md-* form field via JavaScript. Returns null if no element
+   * could be resolved for the given locator.
+   */
+  protected function getMaterialFieldValue(string $locator): ?string
+  {
+    $script = sprintf(
+      'return (function() { %s var el = catrowebResolveField(%s); return el ? String(el.value) : null; })();',
+      self::FIELD_RESOLVER_JS,
+      json_encode($locator, JSON_THROW_ON_ERROR)
+    );
+
+    $value = $this->getSession()->getDriver()->evaluateScript($script);
+
+    return null === $value ? null : (string) $value;
+  }
+
+  // --------------------------------------------------------------------------------------------------------------------
   //  Session Handling
   // --------------------------------------------------------------------------------------------------------------------
 
@@ -107,8 +249,9 @@ class BrowserContext extends MinkContext implements Context
   public function theElementShouldHaveType(string $locator, string $expected_type): void
   {
     $page = $this->getMink()->getSession()->getPage();
-    $type = $page->find('css', $locator)->getAttribute('type');
-    Assert::assertEquals($expected_type, $type);
+    $element = $page->find('css', $locator);
+    Assert::assertNotNull($element, sprintf('Element "%s" not found.', $locator));
+    Assert::assertEquals($expected_type, $element->getAttribute('type'));
   }
 
   /**
@@ -117,8 +260,9 @@ class BrowserContext extends MinkContext implements Context
   public function theElementShouldNotHaveType(string $element, string $expected_type): void
   {
     $page = $this->getMink()->getSession()->getPage();
-    $type = $page->find('css', $element)->getAttribute('type');
-    Assert::assertNotEquals($expected_type, $type);
+    $node = $page->find('css', $element);
+    Assert::assertNotNull($node, sprintf('Element "%s" not found.', $element));
+    Assert::assertNotEquals($expected_type, $node->getAttribute('type'));
   }
 
   /**

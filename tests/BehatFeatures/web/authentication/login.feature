@@ -70,8 +70,8 @@ Feature:
     And I wait for the page to be loaded
     And I fill in "_username" with "Catrobat"
     And I fill in "_password" with "123456"
-    Then the element "#password__input" should have type "password"
-    But the element "#password__input" should not have type "text"
+    Then the element "#password" should have type "password"
+    But the element "#password" should not have type "text"
     And the ".password-toggle" element should contain "visibility"
 
   Scenario: It should be possible to change the visibility of the password
@@ -79,14 +79,14 @@ Feature:
     And I wait for the page to be loaded
     And I fill in "_username" with "Catrobat"
     And I fill in "_password" with "123456"
-    Then the element "#password__input" should have type "password"
+    Then the element "#password" should have type "password"
     And the ".password-toggle" element should contain "visibility"
-    But the element "#password__input" should not have type "text"
+    But the element "#password" should not have type "text"
     When I click ".password-toggle"
-    Then the element "#password__input" should have type "text"
+    Then the element "#password" should have type "text"
     And the ".password-toggle" element should contain "visibility_off"
-    But the element "#password__input" should not have type "password"
+    But the element "#password" should not have type "password"
     When I click ".password-toggle"
-    Then the element "#password__input" should have type "password"
+    Then the element "#password" should have type "password"
     And the ".password-toggle" element should contain "visibility"
-    But the element "#password__input" should not have type "text"
+    But the element "#password" should not have type "text"

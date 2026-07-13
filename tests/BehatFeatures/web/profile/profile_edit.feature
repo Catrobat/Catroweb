@@ -27,7 +27,7 @@ Feature:
     And I click ".profile__user-settings .nav-link[data-bs-target='#profile-settings-modal']"
     And I wait for the element "#profile-settings-modal" to be visible
     Then I should see "Edit profile"
-    And the element "#profile-username__input" should be visible
+    And the element "#profile-username" should be visible
     When I fill in "username" with "Mr.Catro"
     And I click "#profile_settings-save_action"
     And I wait for the page to be loaded

@@ -62,7 +62,10 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->visit('/app/login');
     $this->iWaitForThePageToBeLoaded();
-    $username_field = $this->getSession()->getPage()->findField('_username');
+    // The login form renders the username field as an @material/web custom element
+    // (md-filled-text-field id="username" name="_username") whose native <input> lives in the
+    // shadow DOM, so Mink's findField('_username') cannot see it. Detect the host element via CSS.
+    $username_field = $this->getSession()->getPage()->find('css', '#username, [name="_username"]');
     if (null === $username_field) {
       $this->getUserDataFixtures()->setCurrentUserByUsername($username);
 
