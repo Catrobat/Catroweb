@@ -35,7 +35,7 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
     })
   }
 
-  Array.from(document.querySelectorAll('#edit-text-ui textarea')).forEach((input) => {
+  Array.from(document.querySelectorAll('#edit-text-ui md-filled-text-field')).forEach((input) => {
     input.addEventListener('input', model.onInput)
   })
 

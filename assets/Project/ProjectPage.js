@@ -1,7 +1,8 @@
 /* global globalConfiguration */
 /* global projectConfiguration */
 
-import { MDCTextField } from '@material/textfield'
+import '@material/web/textfield/filled-text-field.js'
+import '@material/web/fab/fab.js'
 import '../Components/FullscreenListModal'
 import { CustomTranslationApi } from '../Api/CustomTranslationApi'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
@@ -455,17 +456,6 @@ function initComponents(data, earlyInits) {
   let editorNavigation = null
 
   if (isMyProject) {
-    // Initialize MDCTextField only if a proper mdc-text-field element exists.
-    const commentMessageWrapper = document.querySelector('.comment-message')
-    if (commentMessageWrapper) {
-      const commentMdcRoot =
-        commentMessageWrapper.querySelector('.mdc-text-field') ||
-        (commentMessageWrapper.classList?.contains('mdc-text-field') ? commentMessageWrapper : null)
-      if (commentMdcRoot) {
-        new MDCTextField(commentMdcRoot)
-      }
-    }
-
     const nameEditorTextFieldModel = new ProjectEditorTextFieldModel(
       projectId,
       'name',
