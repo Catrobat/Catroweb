@@ -1919,7 +1919,17 @@ class DataFixturesContext implements Context
   {
     $studioManager = $this->getStudioManager();
     \assert(null !== $studioManager);
-    $studio = $studioManager->findStudioByName($name);
+
+    // The create page submits asynchronously (client-side image compression + fetch), so poll
+    // instead of asserting instantly — a fixed wait in the feature races against slow CI runs.
+    $studio = null;
+    for ($attempt = 0; $attempt < 20 && null === $studio; ++$attempt) {
+      $studio = $studioManager->findStudioByName($name);
+      if (null === $studio) {
+        usleep(500_000);
+        $this->getManager()->clear();
+      }
+    }
     Assert::assertNotNull($studio, 'Studio does not exist!');
     foreach ($table->getHash() as $set) {
       $result = match ($set['key']) {

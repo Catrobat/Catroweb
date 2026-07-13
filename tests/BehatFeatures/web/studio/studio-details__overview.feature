@@ -40,8 +40,8 @@ Feature: Every Studio should have an overview containing the most necessary info
     And I should see "public"
     And the ".member_count" element should contain "2"
     And the ".activity_count" element should contain "4"
-    Then the ".mdc-tab-bar" element should contain "projects"
-    And the ".mdc-tab-bar" element should contain "comments"
+    Then the "md-tabs" element should contain "projects"
+    And the "md-tabs" element should contain "comments"
     And the element "#projects-pane" should be visible
     And the element "#comments-pane" should not be visible
     When I click "#comments-tab"
