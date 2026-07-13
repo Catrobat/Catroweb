@@ -1,10 +1,9 @@
-import { MDCSwitch } from '@material/switch'
+import '@material/web/switch/switch.js'
 
-import './Switch.css'
+for (const switchControl of document.querySelectorAll('md-switch')) {
+  const nativeInput = document.getElementById(`${switchControl.id}-native`)
 
-for (const el of document.querySelectorAll('.mdc-switch')) {
-  const switchControl = new MDCSwitch(el)
-  el.addEventListener('click', () => {
-    el.getElementsByTagName('input')[0].value = `${switchControl.selected}`
+  switchControl.addEventListener('change', () => {
+    if (nativeInput) nativeInput.value = String(switchControl.selected)
   })
 }
