@@ -1,10 +1,3 @@
-/* Footer */
-/* Default */
-:root {
-  --mdc-theme-primary: var(--primary-bg, var(--primary));
-  --mdc-theme-on-primary: var(--on-primary);
-}
-
 .swal2-actions button {
   margin: 0 5px;
 }
@@ -194,38 +187,17 @@
 }
 
 .report-dialog__note {
+  display: block;
   width: 100%;
   margin: 0;
-  background: light-dark(#f7f8fb, #2d2d3d);
-  border-radius: 14px;
-}
-.report-dialog__note .mdc-text-field__resizer {
-  width: 100%;
-}
-.report-dialog__note .mdc-text-field__input {
-  min-height: 96px;
-  padding: 0.95rem 1rem;
-  resize: vertical;
-  background: transparent;
-}
-.report-dialog__note .mdc-notched-outline__leading,
-.report-dialog__note .mdc-notched-outline__trailing {
-  border-color: light-dark(rgba(15, 23, 42, 0.08), rgba(255, 255, 255, 0.08));
+  --md-outlined-text-field-outline-color: light-dark(
+    rgba(15, 23, 42, 0.08),
+    rgba(255, 255, 255, 0.08)
+  );
+  --md-outlined-text-field-hover-outline-color: var(--md-outlined-text-field-outline-color);
 }
 
 .swal2-validation-message {
   background: light-dark(#f0f0f0, #3a3a4a);
   color: light-dark(#666, #e2e8f0);
-}
-
-.swal2-popup .mdc-radio__outer-circle {
-  border-color: light-dark(rgba(0, 0, 0, 0.54), rgba(255, 255, 255, 0.6));
-}
-
-.swal2-popup .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__outer-circle {
-  border-color: light-dark(var(--primary, #00acc1), var(--primary, #00acc1));
-}
-
-.swal2-popup .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {
-  border-color: light-dark(var(--primary, #00acc1), var(--primary, #00acc1));
 }

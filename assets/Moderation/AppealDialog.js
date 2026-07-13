@@ -1,6 +1,8 @@
 import { escapeAttr } from '../Components/HtmlEscape'
 import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 
+import '@material/web/textfield/outlined-text-field.js'
+
 export async function showAppealDialog({ apiUrl, translations }) {
   const { default: Swal } = await import('sweetalert2')
   const placeholder = translations.placeholder || 'Explain why this content should not be hidden...'
@@ -8,17 +10,11 @@ export async function showAppealDialog({ apiUrl, translations }) {
   Swal.fire({
     title: translations.title || 'Appeal this decision',
     html: `
-      <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea" style="width: 100%;">
-        <span class="mdc-text-field__resizer">
-          <textarea class="mdc-text-field__input" id="appeal-reason"
-            placeholder="${escapeAttr(placeholder)}"
-            style="width: 100%; height: 120px"></textarea>
-        </span>
-        <span class="mdc-notched-outline">
-          <span class="mdc-notched-outline__leading"></span>
-          <span class="mdc-notched-outline__trailing"></span>
-        </span>
-      </label>
+      <md-outlined-text-field id="appeal-reason"
+                              style="display: block; width: 100%;"
+                              type="textarea"
+                              rows="5"
+                              placeholder="${escapeAttr(placeholder)}"></md-outlined-text-field>
     `,
     focusConfirm: false,
     showCancelButton: true,

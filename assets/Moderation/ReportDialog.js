@@ -2,6 +2,8 @@ import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { handleAccountState403 } from '../Security/AccountStateErrorHandler'
 import { REPORT_CATEGORIES } from './ReportCategories'
 
+import '@material/web/textfield/outlined-text-field.js'
+
 const SESSION_KEY_PREFIX = 'pendingReport_'
 const REPORT_CATEGORY_ICONS = {
   copyright: 'copyright',
@@ -203,16 +205,12 @@ function buildReportHtml(categories, translations, oldData) {
       </div>
       <input id="report-category-value" type="hidden" value="${escapeAttr(selectedCategory)}">
       <label class="report-dialog__note-label" for="report-note">${escapeHtml(translations.noteLabel || 'Additional details')}</label>
-      <label class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea report-reason report-dialog__note">
-        <span class="mdc-text-field__resizer">
-          <textarea class="mdc-text-field__input" id="report-note"
-            placeholder="${escapeAttr(placeholder)}">${escapeHtml(noteValue)}</textarea>
-        </span>
-        <span class="mdc-notched-outline">
-          <span class="mdc-notched-outline__leading"></span>
-          <span class="mdc-notched-outline__trailing"></span>
-        </span>
-      </label>
+      <md-outlined-text-field id="report-note"
+                              class="report-reason report-dialog__note"
+                              type="textarea"
+                              rows="4"
+                              placeholder="${escapeAttr(placeholder)}"
+                              value="${escapeAttr(noteValue)}"></md-outlined-text-field>
     </div>
   `
 }
