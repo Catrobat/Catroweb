@@ -506,10 +506,6 @@
       <code><![CDATA[click]]></code>
       <code><![CDATA[click]]></code>
       <code><![CDATA[click]]></code>
-      <code><![CDATA[click]]></code>
-      <code><![CDATA[getAttribute]]></code>
-      <code><![CDATA[getAttribute]]></code>
-      <code><![CDATA[getXpath]]></code>
     </PossiblyNullReference>
   </file>
   <file src="src/System/Testing/Behat/Context/CatrowebBrowserContext.php">

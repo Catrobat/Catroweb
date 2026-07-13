@@ -161,12 +161,10 @@ async function submitStudioSettings() {
 
   const nameInput = document.querySelector('#studio-settings__studio-name')
   const descTextarea = document.querySelector('#studio-settings__studio-description')
-  const commentsSwitch = document.querySelector(
-    '#studio-setting__switch-enable-comments input[name="allow_comments"]',
-  )
-  const publicSwitch = document.querySelector(
-    '#studio-setting__switch-studio-privacy input[name="is_public"]',
-  )
+  // Switch.js keeps the value in a hidden input that is a SIBLING of the
+  // md-switch host, id {switch-id}-native.
+  const commentsSwitch = document.getElementById('studio-setting__switch-enable-comments-native')
+  const publicSwitch = document.getElementById('studio-setting__switch-studio-privacy-native')
 
   const formData = new FormData()
   if (nameInput) formData.append('name', nameInput.value)
