@@ -63,12 +63,9 @@ class BrowserContext extends MinkContext implements Context
   /**
    * Fills a form field, transparently falling back to shadow-DOM aware handling for md-* elements.
    *
-   * Behat reads step annotations from the overriding method only, so the parent MinkContext
-   * patterns must be repeated here verbatim.
-   *
-   * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/
-   * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with:$/
-   * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/
+   * NOTE: no step annotations here — Behat inherits the parent MinkContext patterns through
+   * getPrototype() (AnnotatedContextReader::readMethodCallees), so repeating them would register
+   * duplicate step definitions and abort every suite.
    *
    * @param string $field
    * @param string $value
@@ -89,8 +86,6 @@ class BrowserContext extends MinkContext implements Context
   }
 
   /**
-   * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should contain "(?P<value>(?:[^"]|\\")*)"$/
-   *
    * @param string $field
    * @param string $value
    */
@@ -112,8 +107,6 @@ class BrowserContext extends MinkContext implements Context
   }
 
   /**
-   * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should not contain "(?P<value>(?:[^"]|\\")*)"$/
-   *
    * @param string $field
    * @param string $value
    */
