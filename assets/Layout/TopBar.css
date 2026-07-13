@@ -2,7 +2,6 @@
   position: fixed;
   inset: 0 0 auto;
   z-index: 5000;
-  height: 64px;
   color: var(--on-primary, #fff);
   background-color: var(--primary-bg, var(--primary));
 }
@@ -13,9 +12,11 @@
   align-items: center;
 }
 
+/* The row sits inside .body-content > .container (auto height), so it must
+   carry the bar height itself — height: 100% would collapse to content. */
 .mdc-top-app-bar__row {
   width: 100%;
-  height: 100%;
+  height: 64px;
 }
 
 .mdc-top-app-bar__section {
@@ -36,6 +37,10 @@
   padding-left: 0.2rem;
   overflow: hidden;
   color: inherit;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: 0.0125em;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -182,7 +187,7 @@
 }
 
 @media (width <= 599px) {
-  .mdc-top-app-bar {
+  .mdc-top-app-bar__row {
     height: 56px;
   }
 
