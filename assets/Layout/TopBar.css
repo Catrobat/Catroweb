@@ -121,6 +121,29 @@
   transition: box-shadow 200ms linear;
 }
 
+/* Hover/press feedback formerly provided by the MDC ripple state layers. */
+.mdc-top-app-bar__action-item::before,
+.mdc-top-app-bar__action-item::after,
+.mdc-top-app-bar__navigation-icon::before,
+.mdc-top-app-bar__navigation-icon::after {
+  background-color: var(--on-primary, #fff);
+}
+
+.mdc-top-app-bar__action-item:hover::before,
+.mdc-top-app-bar__navigation-icon:hover::before {
+  opacity: 0.08;
+}
+
+.mdc-top-app-bar__action-item:focus-visible::before,
+.mdc-top-app-bar__navigation-icon:focus-visible::before {
+  opacity: 0.24;
+}
+
+.mdc-top-app-bar__action-item:active::after,
+.mdc-top-app-bar__navigation-icon:active::after {
+  opacity: 0.32;
+}
+
 #top-app-bar__search-form {
   position: relative;
   width: 100%;
