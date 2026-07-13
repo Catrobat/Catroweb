@@ -790,8 +790,8 @@ async function confirmAndUpdate(item, confirmText, payload, onSuccess) {
 }
 
 function updateMenuItemUI(item, iconName, textContent) {
-  const icon = item.querySelector('.mdc-deprecated-list-item__graphic')
-  const text = item.querySelector('.mdc-deprecated-list-item__text')
+  const icon = item.querySelector('[slot="start"]')
+  const text = item.querySelector('[slot="headline"]')
   if (icon) icon.textContent = iconName
   if (text) text.textContent = textContent
 }

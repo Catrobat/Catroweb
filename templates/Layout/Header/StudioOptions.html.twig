@@ -1,8 +1,6 @@
 {% if '/studio/' in app.request.pathinfo and studio|default(false) and studio.id|default(false) %}
 
-    <li id="top-app-bar__btn-report-studio"
-        class="mdc-deprecated-list-item"
-        role="menuitem"
+    <md-menu-item id="top-app-bar__btn-report-studio"
         data-content-type="studio"
         data-content-id="{{ studio.id }}"
         data-report-url="{{ url('open_api_server_moderation_studiosidreportpost', {id: studio.id}) }}"
@@ -19,9 +17,8 @@
         data-trans-report-suspended="{{ 'accountSuspended'|trans({}, 'catroweb') }}"
         data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb') }}"
         data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb') }}">
-      <span class="mdc-deprecated-list-item__ripple"></span>
-      <span class="mdc-deprecated-list-item__graphic material-icons">flag</span>
-      <span class="mdc-deprecated-list-item__text">{{ 'report'|trans({}, 'catroweb') }}</span>
-    </li>
+      <span slot="start" class="material-icons">flag</span>
+      <span slot="headline">{{ 'report'|trans({}, 'catroweb') }}</span>
+    </md-menu-item>
 
 {% endif %}

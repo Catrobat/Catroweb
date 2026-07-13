@@ -80,6 +80,7 @@
     "@material/tab-scroller": "^14.0.0",
     "@material/textfield": "^14.0.0",
     "@material/top-app-bar": "^14.0.0",
+    "@material/web": "^2.4.1",
     "@popperjs/core": "^2.11.8",
     "analytics": "^0.8.19",
     "bootstrap": "^5.3.8",

@@ -49,27 +49,23 @@
 {% endif %}
 
 {# Options menu with color scheme #}
-  <div class="mdc-menu-surface--anchor">
+  <div class="top-app-bar__options-anchor">
     {{ include('Layout/Header/OptionButton.html.twig') }}
 
-    <div id="top-app-bar__options-menu" class="mdc-menu mdc-menu-surface">
-      <ul class="mdc-deprecated-list mdc-deprecated-list--icon-list" role="menu" aria-hidden="true"
-          aria-orientation="vertical" tabindex="-1">
+    <md-menu id="top-app-bar__options-menu" anchor="top-app-bar__btn-options" positioning="popover">
 
         {# Page-specific items #}
         {% if page_context == 'project' %}
           {{ include('Layout/Header/ProjectOptions.html.twig') }}
         {% elseif page_context == 'studio' %}
-          <li id="top-app-bar__btn-edit-studio"
-              class="mdc-deprecated-list-item js-studio-admin-only"
-              role="menuitem"
+          <md-menu-item id="top-app-bar__btn-edit-studio"
+              class="js-studio-admin-only"
               style="display: none"
               data-bs-toggle="modal"
               data-bs-target="#studio-admin-settings-modal">
-            <span class="mdc-deprecated-list-item__ripple"></span>
-            <span class="mdc-deprecated-list-item__graphic material-icons">edit</span>
-            <span class="mdc-deprecated-list-item__text">{{ 'studio.details.admin_settings.title'|trans({}, 'catroweb') }}</span>
-          </li>
+            <span slot="start" class="material-icons">edit</span>
+            <span slot="headline">{{ 'studio.details.admin_settings.title'|trans({}, 'catroweb') }}</span>
+          </md-menu-item>
           <div id="top-app-bar__studio-report-wrapper" class="js-studio-non-admin-only">
             {{ include('Layout/Header/StudioOptions.html.twig') }}
           </div>
@@ -79,32 +75,29 @@
 
         {# Divider between page-specific and share items #}
         {% if page_context in ['project', 'user', 'studio'] %}
-          <li class="mdc-deprecated-list-divider" role="separator"></li>
+          <md-divider role="separator"></md-divider>
         {% endif %}
 
         {# Share current page — hidden on personal/utility pages where sharing the URL is not useful #}
         {% set _no_share_routes = ['notifications', 'achievements_overview', 'catrobat_follower', 'user_reports'] %}
         {% if app.request.attributes.get('_route') not in _no_share_routes %}
-        <li id="top-app-bar__btn-share-page" class="mdc-deprecated-list-item" role="menuitem"
+        <md-menu-item id="top-app-bar__btn-share-page"
             {% if page_context == 'my_profile' and app.user.id|default(false) %}
               data-share-url="{{ url('profile', {id: app.user.id}) }}"
             {% endif %}
             data-trans-share-success="{{ 'share.success'|trans({}, 'catroweb') }}"
             data-trans-clipboard-success="{{ 'clipboard.success'|trans({}, 'catroweb') }}"
             data-trans-clipboard-fail="{{ 'clipboard.fail'|trans({}, 'catroweb') }}">
-          <span class="mdc-deprecated-list-item__ripple"></span>
-          <span class="mdc-deprecated-list-item__graphic material-icons">share</span>
-          <span class="mdc-deprecated-list-item__text">{{ 'share.text'|trans({}, 'catroweb') }}</span>
-        </li>
+          <span slot="start" class="material-icons">share</span>
+          <span slot="headline">{{ 'share.text'|trans({}, 'catroweb') }}</span>
+        </md-menu-item>
         {% endif %}
 
         {# Divider between share and color scheme items #}
-        <li class="mdc-deprecated-list-divider" role="separator"></li>
+        <md-divider role="separator"></md-divider>
 
         {# Compact color scheme entry (always shown) #}
-        <li id="top-app-bar__btn-color-scheme"
-            class="mdc-deprecated-list-item"
-            role="menuitem"
+        <md-menu-item id="top-app-bar__btn-color-scheme"
             data-trans-title="{{ color_scheme_title|e('html_attr') }}"
             data-trans-light="{{ 'color-scheme.light'|trans({}, 'catroweb')|e('html_attr') }}"
             data-trans-light-description="{{ color_scheme_light_description|e('html_attr') }}"
@@ -114,12 +107,10 @@
             data-trans-auto-description="{{ color_scheme_auto_description|e('html_attr') }}"
             data-trans-cancel="{{ 'cancelMessage'|trans({}, 'catroweb')|e('html_attr') }}"
             data-trans-confirm="{{ color_scheme_apply|e('html_attr') }}">
-          <span class="mdc-deprecated-list-item__ripple"></span>
-          <span class="mdc-deprecated-list-item__graphic material-icons js-color-scheme-icon">contrast</span>
-          <span class="mdc-deprecated-list-item__text">{{ color_scheme_title }}</span>
-          <span class="mdc-deprecated-list-item__meta js-color-scheme-current"></span>
-        </li>
+          <span slot="start" class="material-icons js-color-scheme-icon">contrast</span>
+          <span slot="headline">{{ color_scheme_title }}</span>
+          <span slot="end" class="js-color-scheme-current"></span>
+        </md-menu-item>
 
-      </ul>
-    </div>
+    </md-menu>
   </div>

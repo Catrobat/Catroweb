@@ -1,9 +1,7 @@
 {% if '/user/' in app.request.pathinfo and profile|default(false) and profile.id|default(false) %}
 
   {% if (app.user is null or app.user.id != profile.id) and not profile.approved %}
-    <li id="top-app-bar__btn-report-user"
-        class="mdc-deprecated-list-item"
-        role="menuitem"
+    <md-menu-item id="top-app-bar__btn-report-user"
         data-content-type="user"
         data-content-id="{{ profile.id }}"
         data-report-url="{{ url('open_api_server_moderation_usersidreportpost', {id: profile.id}) }}"
@@ -20,10 +18,9 @@
         data-trans-report-suspended="{{ 'accountSuspended'|trans({}, 'catroweb') }}"
         data-trans-report-rate-limited="{{ 'moderation.report.rate_limited'|trans({}, 'catroweb') }}"
         data-trans-report-placeholder="{{ 'moderation.report.reason_placeholder'|trans({}, 'catroweb') }}">
-      <span class="mdc-deprecated-list-item__ripple"></span>
-      <span class="mdc-deprecated-list-item__graphic material-icons">flag</span>
-      <span class="mdc-deprecated-list-item__text">{{ 'report'|trans({}, 'catroweb') }}</span>
-    </li>
+      <span slot="start" class="material-icons">flag</span>
+      <span slot="headline">{{ 'report'|trans({}, 'catroweb') }}</span>
+    </md-menu-item>
   {% endif %}
 
 {% endif %}
