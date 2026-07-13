@@ -6120,7 +6120,7 @@ fieldset:disabled .btn {
   height: 1em;
   padding: 0.25em 0.25em;
   color: var(--bs-btn-close-color);
-  background: transparent var(--bs-btn-close-bg) center / 1em auto no-repeat;
+  background: transparent var(--bs-btn-close-bg) center/1em auto no-repeat;
   filter: var(--bs-btn-close-filter);
   border: 0;
   border-radius: 0.375rem;
@@ -12809,6 +12809,7 @@ a {
   text-decoration: none;
 }
 
+/* stylelint-disable */
 .bg-primary {
   background-color: var(--primary-bg, var(--primary)) !important;
 }
@@ -12840,6 +12841,7 @@ a {
   background-color: var(--primary) !important;
 }
 
+/* stylelint-enable */
 .carousel-indicators .active {
   background-color: var(--primary);
 }

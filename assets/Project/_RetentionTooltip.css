@@ -1,5 +1,3 @@
-/* Shared retention tooltip styles (imported by ProjectList.css and OwnProjectList.css) */
-
 .retention-info-wrap {
   position: relative;
   display: inline-flex;
@@ -14,12 +12,11 @@
   color: light-dark(#6c757d, #a0aec0);
   opacity: 0.8;
   transition: opacity 0.15s;
-
-  .retention-info-wrap:hover &,
-  .retention-info-wrap:focus-within & {
-    opacity: 1;
-    color: light-dark(#495057, #cbd5e0);
-  }
+}
+.retention-info-wrap:hover .retention-info-icon,
+.retention-info-wrap:focus-within .retention-info-icon {
+  opacity: 1;
+  color: light-dark(#495057, #cbd5e0);
 }
 
 .retention-tooltip {
@@ -28,13 +25,13 @@
   bottom: calc(100% + 6px);
   left: 0;
   width: max-content;
-  max-width: min(250px, calc(100vw - 2rem));
+  max-width: min(250px, 100vw - 2rem);
   padding: 0.65rem 0.85rem;
   background: light-dark(#fff, #1e1e30);
   border-radius: 10px;
   box-shadow:
-    0 4px 20px light-dark(rgb(0 0 0 / 14%), rgb(0 0 0 / 45%)),
-    0 0 0 1px light-dark(rgb(0 0 0 / 5%), rgb(255 255 255 / 8%));
+    0 4px 20px light-dark(rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.45)),
+    0 0 0 1px light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.08));
   font-size: 0.78rem;
   line-height: 1.55;
   color: light-dark(#444, #ddd);
@@ -42,14 +39,12 @@
   pointer-events: none;
   white-space: normal;
   overflow-wrap: break-word;
-
-  &.align-right {
-    left: auto;
-    right: 0;
-  }
-
-  .retention-info-wrap:hover &,
-  .retention-info-wrap:focus-within & {
-    display: block;
-  }
+}
+.retention-tooltip.align-right {
+  left: auto;
+  right: 0;
+}
+.retention-info-wrap:hover .retention-tooltip,
+.retention-info-wrap:focus-within .retention-tooltip {
+  display: block;
 }

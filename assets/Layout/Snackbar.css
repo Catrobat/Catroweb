@@ -1,7 +1,5 @@
-/* Override mdc-snackbar */
-
 .mdc-snackbar {
-  z-index: 7000; /* reason: modal */
+  z-index: 7000;
 }
 
 .mdc-snackbar__wrapper {
@@ -25,8 +23,7 @@
   padding: 0.25rem 0.5rem;
   opacity: 0.8;
   line-height: 1;
-
-  &:hover {
-    opacity: 1;
-  }
+}
+.snackbar-dismiss:hover {
+  opacity: 1;
 }

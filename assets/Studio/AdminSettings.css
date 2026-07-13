@@ -1,5 +1,10 @@
-@import '../Layout/Variables.css';
+/* Footer */
+/* Default */
+:root {
+  --mdc-theme-primary: var(--primary-bg, var(--primary));
+  --mdc-theme-on-primary: var(--on-primary);
+}
 
 #studio-admin-settings-modal {
-  color: var(--bs-body-color);
+  color: #212529;
 }

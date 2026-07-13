@@ -1,9 +1,15 @@
-@import './Variables.css';
+/* Footer */
+/* Default */
+:root {
+  --mdc-theme-primary: var(--primary-bg, var(--primary));
+  --mdc-theme-on-primary: var(--on-primary);
+}
 
 .article-columns {
   column-count: 2;
-
-  @media (max-width: 991.98px) {
+}
+@media (max-width: 991.98px) {
+  .article-columns {
     column-count: 1;
   }
 }

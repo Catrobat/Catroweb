@@ -1,4 +1,9 @@
-@import '../Layout/Variables.css';
+/* Footer */
+/* Default */
+:root {
+  --mdc-theme-primary: var(--primary-bg, var(--primary));
+  --mdc-theme-on-primary: var(--on-primary);
+}
 
 .project-upload {
   display: flex;
@@ -18,8 +23,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-
-  @media (width <= 600px) {
+}
+@media (width <= 600px) {
+  .project-upload__info {
     padding: 0.875rem 1rem;
     border-radius: 10px;
     gap: 0.625rem;
@@ -33,13 +39,12 @@
   font-size: 0.85rem;
   line-height: 1.4;
   color: light-dark(#334155, #c8d6e5);
-
-  .material-icons {
-    font-size: 1.2rem;
-    color: light-dark(#0284c7, #38bdf8);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+}
+.project-upload__info-item .material-icons {
+  font-size: 1.2rem;
+  color: light-dark(#0284c7, #38bdf8);
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .project-upload__card {
@@ -49,9 +54,10 @@
   border: 1px solid light-dark(#e8e8e8, #3a3a4a);
   border-radius: 16px;
   padding: 2rem 2.5rem;
-  box-shadow: 0 4px 16px light-dark(rgb(0 0 0 / 8%), rgb(0 0 0 / 25%));
-
-  @media (width <= 600px) {
+  box-shadow: 0 4px 16px light-dark(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.25));
+}
+@media (width <= 600px) {
+  .project-upload__card {
     padding: 1.5rem 1.25rem;
     border-radius: 12px;
   }
@@ -70,22 +76,20 @@
   transition:
     border-color 0.2s,
     background-color 0.2s;
-
-  &:hover,
-  &.drag-over {
-    border-color: var(--primary, #00acc1);
-    background: light-dark(rgb(0 172 193 / 5%), rgb(0 172 193 / 10%));
-  }
+}
+.project-upload__drop-zone:hover,
+.project-upload__drop-zone.drag-over {
+  border-color: var(--primary, #00acc1);
+  background: light-dark(rgba(0, 172, 193, 0.05), rgba(0, 172, 193, 0.1));
 }
 
 .project-upload__icon {
   font-size: 3rem;
   color: light-dark(#999, #777);
   margin-bottom: 0.75rem;
-
-  .drag-over & {
-    color: var(--primary, #00acc1);
-  }
+}
+.drag-over .project-upload__icon {
+  color: var(--primary, #00acc1);
 }
 
 .project-upload__drop-text {
@@ -116,11 +120,10 @@
   border-radius: 8px;
   font-size: 0.9rem;
   color: light-dark(#333, #ddd);
-
-  .material-icons:first-child {
-    color: var(--primary, #00acc1);
-    font-size: 1.25rem;
-  }
+}
+.project-upload__file-info .material-icons:first-child {
+  color: var(--primary, #00acc1);
+  font-size: 1.25rem;
 }
 
 .project-upload__file-name {
@@ -137,14 +140,12 @@
   padding: 0;
   color: light-dark(#999, #777);
   display: flex;
-
-  &:hover {
-    color: light-dark(#333, #ddd);
-  }
-
-  .material-icons {
-    font-size: 1.25rem;
-  }
+}
+.project-upload__file-remove:hover {
+  color: light-dark(#333, #ddd);
+}
+.project-upload__file-remove .material-icons {
+  font-size: 1.25rem;
 }
 
 .project-upload__progress {
@@ -187,10 +188,9 @@
   border-radius: 8px;
   color: light-dark(#dc2626, #f87171);
   font-size: 0.9rem;
-
-  .material-icons {
-    font-size: 1.25rem;
-  }
+}
+.project-upload__error .material-icons {
+  font-size: 1.25rem;
 }
 
 .project-upload__success {
@@ -200,25 +200,22 @@
   gap: 0.5rem;
   margin-top: 1.5rem;
   text-align: center;
-
-  > .material-icons {
-    font-size: 2.5rem;
-    color: light-dark(#16a34a, #4ade80);
-  }
-
-  > span:nth-child(2) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: light-dark(#333, #ddd);
-
-    .material-icons {
-      font-size: 1.3rem;
-      vertical-align: middle;
-    }
-  }
+}
+.project-upload__success > .material-icons {
+  font-size: 2.5rem;
+  color: light-dark(#16a34a, #4ade80);
+}
+.project-upload__success > span:nth-child(2) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: light-dark(#333, #ddd);
+}
+.project-upload__success > span:nth-child(2) .material-icons {
+  font-size: 1.3rem;
+  vertical-align: middle;
 }
 
 .project-upload__success-actions {

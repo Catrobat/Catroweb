@@ -4,29 +4,24 @@
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-
-  .error-container {
-    width: 512px;
-    max-width: 80vw;
-    text-align: center;
-
-    .error-img {
-      width: 80%;
-      margin-bottom: 2rem;
-    }
-
-    .error-img-placeholder {
-      margin-bottom: 0.5rem;
-      color: #c4c4c4;
-      font-size: 1.5rem;
-    }
-
-    .error-code {
-      color: #c4c4c4;
-    }
-
-    .error-link {
-      padding: 0.75rem 0;
-    }
-  }
+}
+.error-wrapper .error-container {
+  width: 512px;
+  max-width: 80vw;
+  text-align: center;
+}
+.error-wrapper .error-container .error-img {
+  width: 80%;
+  margin-bottom: 2rem;
+}
+.error-wrapper .error-container .error-img-placeholder {
+  margin-bottom: 0.5rem;
+  color: #c4c4c4;
+  font-size: 1.5rem;
+}
+.error-wrapper .error-container .error-code {
+  color: #c4c4c4;
+}
+.error-wrapper .error-container .error-link {
+  padding: 0.75rem 0;
 }

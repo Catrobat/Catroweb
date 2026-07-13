@@ -1,4 +1,9 @@
-@import './Variables.css';
+/* Footer */
+/* Default */
+:root {
+  --mdc-theme-primary: var(--primary-bg, var(--primary));
+  --mdc-theme-on-primary: var(--on-primary);
+}
 
 .cookie-consent-banner {
   position: fixed;
@@ -14,11 +19,10 @@
   transition:
     transform 0.3s ease,
     opacity 0.3s ease;
-
-  &.cookie-consent-visible {
-    transform: translateY(0);
-    opacity: 1;
-  }
+}
+.cookie-consent-banner.cookie-consent-visible {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .cookie-consent-content {
@@ -27,8 +31,9 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-
-  @media (width < 768px) {
+}
+@media (width < 768px) {
+  .cookie-consent-content {
     flex-direction: column;
     text-align: center;
   }
@@ -46,11 +51,10 @@
   color: var(--primary);
   text-decoration: underline;
   margin-left: 0.25rem;
-
-  &:hover {
-    color: var(--primary);
-    opacity: 0.8;
-  }
+}
+.cookie-consent-link:hover {
+  color: var(--primary);
+  opacity: 0.8;
 }
 
 .cookie-consent-actions {
@@ -69,14 +73,13 @@
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
-
-  &.cookie-consent-decline,
-  &.cookie-consent-accept {
-    background-color: transparent;
-    color: light-dark(#555, #ccc);
-
-    &:hover {
-      background-color: light-dark(#e9ecef, #3a3a3a);
-    }
-  }
+}
+.cookie-consent-btn.cookie-consent-decline,
+.cookie-consent-btn.cookie-consent-accept {
+  background-color: transparent;
+  color: light-dark(#555, #ccc);
+}
+.cookie-consent-btn.cookie-consent-decline:hover,
+.cookie-consent-btn.cookie-consent-accept:hover {
+  background-color: light-dark(#e9ecef, #3a3a3a);
 }

@@ -1,29 +1,6 @@
+/* Footer */
+/* Default */
 :root {
-  --default-font-size: 1rem;
-  --theme-logo-color-primary: var(--theme-logo-color-primary, #17a6b7);
-  --theme-logo-color-secondary: var(--theme-logo-color-secondary, #ff7701);
-  --theme-logo-font-size: 1.5rem;
-  --theme-logo-font-weight: 500;
-  --footer-background-color: light-dark(#e1e2e1, #1e1d1e);
-  --footer-color: light-dark(#000, #fff);
-  --default-background-color: var(--theme-background, #fff);
-  --default-input-background-color: #96ced6;
-  --default-input-padding: 5px;
-  --default-input-size: 18px;
-  --default-button-size: 26px;
-  --default-button-padding: 10px;
-  --default-text-color: var(--primary);
-  --default-border-color: var(--primary);
-  --help-link-color: var(--primary);
-  --content-default-link-color: var(--primary);
-  --text-color: var(--bs-gray-900);
-
-  /* Material Web design tokens, derived from the active Catroweb theme. */
-  --md-sys-color-primary: var(--primary-bg, var(--primary));
-  --md-sys-color-on-primary: var(--on-primary, #fff);
-  --md-sys-color-surface: var(--bs-body-bg);
-  --md-sys-color-on-surface: var(--bs-body-color);
-  --md-sys-color-surface-container: light-dark(#f7f2fa, #211f26);
-  --md-sys-color-outline: light-dark(#79747e, #938f99);
-  --md-sys-color-error: var(--bs-danger);
+  --mdc-theme-primary: var(--primary-bg, var(--primary));
+  --mdc-theme-on-primary: var(--on-primary);
 }

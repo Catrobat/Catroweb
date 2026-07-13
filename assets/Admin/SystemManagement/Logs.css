@@ -1,4 +1,3 @@
-/* ===== Loading Spinner ===== */
 .popup-bg {
   display: flex;
   justify-content: center;
@@ -13,7 +12,6 @@
   z-index: 999;
 }
 
-/* ===== Global Styles ===== */
 body {
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
@@ -30,13 +28,12 @@ h5 {
   display: none;
 }
 
-/* ===== Log Files Container ===== */
 #log-files-container {
   margin: 1rem;
   padding: 1rem;
   background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .chip-button {
@@ -50,16 +47,14 @@ h5 {
   margin: 0.25rem;
   display: inline-block;
   transition: all 0.2s;
-
-  &:hover {
-    background-color: #495659;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
-  }
-
-  &.files {
-    font-size: 0.875rem;
-  }
+}
+.chip-button:hover {
+  background-color: #495659;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.chip-button.files {
+  font-size: 0.875rem;
 }
 
 ul#log-files {
@@ -68,19 +63,17 @@ ul#log-files {
   display: flex;
   flex-wrap: wrap;
   margin: 0.5rem 0;
-
-  li {
-    display: inline-block;
-  }
+}
+ul#log-files li {
+  display: inline-block;
 }
 
-/* ===== Filter Container ===== */
 #filter-container {
   margin: 1rem;
   padding: 1rem;
   background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .filter-controls {
@@ -95,12 +88,11 @@ ul#log-files {
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-
-  label {
-    font-weight: 600;
-    font-size: 0.875rem;
-    color: #333;
-  }
+}
+.filter-group label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #333;
 }
 
 .filter-btn {
@@ -113,53 +105,36 @@ ul#log-files {
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s;
-
-  &:hover {
-    border-color: #999;
-    background-color: #f5f5f5;
-  }
-
-  &.active {
-    border-color: #007bff;
-    background-color: #007bff;
-    color: #fff;
-  }
-
-  &.level-critical {
-    &.active {
-      background-color: #8b0000;
-      border-color: #8b0000;
-    }
-  }
-
-  &.level-error {
-    &.active {
-      background-color: #dc3545;
-      border-color: #dc3545;
-    }
-  }
-
-  &.level-warning {
-    &.active {
-      background-color: #ffc107;
-      border-color: #ffc107;
-      color: #000;
-    }
-  }
-
-  &.level-info {
-    &.active {
-      background-color: #17a2b8;
-      border-color: #17a2b8;
-    }
-  }
-
-  &.level-debug {
-    &.active {
-      background-color: #6c757d;
-      border-color: #6c757d;
-    }
-  }
+}
+.filter-btn:hover {
+  border-color: #999;
+  background-color: #f5f5f5;
+}
+.filter-btn.active {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: #fff;
+}
+.filter-btn.level-critical.active {
+  background-color: #8b0000;
+  border-color: #8b0000;
+}
+.filter-btn.level-error.active {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+.filter-btn.level-warning.active {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+.filter-btn.level-info.active {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+.filter-btn.level-debug.active {
+  background-color: #6c757d;
+  border-color: #6c757d;
 }
 
 .search-input {
@@ -169,20 +144,18 @@ ul#log-files {
   font-size: 0.875rem;
   min-width: 250px;
   transition: border-color 0.2s;
-
-  &:focus {
-    outline: none;
-    border-color: #007bff;
-  }
+}
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
 }
 
-/* ===== Log Container ===== */
 #outer-log-container {
   display: flex;
   min-width: 100%;
   padding: 1rem;
   background-color: #fff;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
 }
 
@@ -193,17 +166,15 @@ ul#log-files {
   max-height: 80vh;
 }
 
-/* ===== Log Entries ===== */
 .log-entry {
   margin-bottom: 0.75rem;
   border-radius: 0.375rem;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s;
-
-  &:hover {
-    box-shadow: 0 2px 6px rgb(0 0 0 / 15%);
-  }
+}
+.log-entry:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .log-header {
@@ -211,51 +182,41 @@ ul#log-files {
   cursor: pointer;
   border-left: 4px solid;
   transition: background-color 0.2s;
-
-  &.level-critical {
-    background-color: #ffe6e6;
-    border-left-color: #8b0000;
-
-    &:hover {
-      background-color: #ffd1d1;
-    }
-  }
-
-  &.level-error {
-    background-color: #fff5f5;
-    border-left-color: #dc3545;
-
-    &:hover {
-      background-color: #ffe6e6;
-    }
-  }
-
-  &.level-warning {
-    background-color: #fffbf0;
-    border-left-color: #ffc107;
-
-    &:hover {
-      background-color: #fff4d6;
-    }
-  }
-
-  &.level-info {
-    background-color: #f0f9ff;
-    border-left-color: #17a2b8;
-
-    &:hover {
-      background-color: #d9f1f7;
-    }
-  }
-
-  &.level-debug {
-    background-color: #f8f9fa;
-    border-left-color: #6c757d;
-
-    &:hover {
-      background-color: #e9ecef;
-    }
-  }
+}
+.log-header.level-critical {
+  background-color: #ffe6e6;
+  border-left-color: #8b0000;
+}
+.log-header.level-critical:hover {
+  background-color: #ffd1d1;
+}
+.log-header.level-error {
+  background-color: #fff5f5;
+  border-left-color: #dc3545;
+}
+.log-header.level-error:hover {
+  background-color: #ffe6e6;
+}
+.log-header.level-warning {
+  background-color: #fffbf0;
+  border-left-color: #ffc107;
+}
+.log-header.level-warning:hover {
+  background-color: #fff4d6;
+}
+.log-header.level-info {
+  background-color: #f0f9ff;
+  border-left-color: #17a2b8;
+}
+.log-header.level-info:hover {
+  background-color: #d9f1f7;
+}
+.log-header.level-debug {
+  background-color: #f8f9fa;
+  border-left-color: #6c757d;
+}
+.log-header.level-debug:hover {
+  background-color: #e9ecef;
 }
 
 .log-header-main {
@@ -274,31 +235,26 @@ ul#log-files {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-
-  &.level-critical {
-    background-color: #8b0000;
-    color: #fff;
-  }
-
-  &.level-error {
-    background-color: #dc3545;
-    color: #fff;
-  }
-
-  &.level-warning {
-    background-color: #ffc107;
-    color: #000;
-  }
-
-  &.level-info {
-    background-color: #17a2b8;
-    color: #fff;
-  }
-
-  &.level-debug {
-    background-color: #6c757d;
-    color: #fff;
-  }
+}
+.log-level-badge.level-critical {
+  background-color: #8b0000;
+  color: #fff;
+}
+.log-level-badge.level-error {
+  background-color: #dc3545;
+  color: #fff;
+}
+.log-level-badge.level-warning {
+  background-color: #ffc107;
+  color: #000;
+}
+.log-level-badge.level-info {
+  background-color: #17a2b8;
+  color: #fff;
+}
+.log-level-badge.level-debug {
+  background-color: #6c757d;
+  color: #fff;
 }
 
 .log-channel-badge {
@@ -334,7 +290,6 @@ ul#log-files {
   white-space: nowrap;
 }
 
-/* ===== Log Details ===== */
 .log-details {
   background-color: #fff;
   border-top: 1px solid #dee2e6;
@@ -346,17 +301,15 @@ ul#log-files {
 
 .log-section {
   margin-bottom: 1rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  strong {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #495057;
-    font-size: 0.875rem;
-  }
+}
+.log-section:last-child {
+  margin-bottom: 0;
+}
+.log-section strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #495057;
+  font-size: 0.875rem;
 }
 
 .log-message,
@@ -382,29 +335,25 @@ ul#log-files {
   overflow-y: auto;
 }
 
-/* ===== Current File Container ===== */
 #current-file-container {
   display: flex;
   flex-direction: column;
   padding: 1rem;
   width: 30%;
   border-left: 2px solid #dee2e6;
-
-  h5 {
-    margin: 0 0 1rem;
-    text-align: right;
-    font-size: 0.9rem;
-
-    span {
-      color: #007bff;
-      font-weight: 700;
-    }
-  }
-
-  form {
-    margin: 0 0 1rem;
-    text-align: right;
-  }
+}
+#current-file-container h5 {
+  margin: 0 0 1rem;
+  text-align: right;
+  font-size: 0.9rem;
+}
+#current-file-container h5 span {
+  color: #007bff;
+  font-weight: 700;
+}
+#current-file-container form {
+  margin: 0 0 1rem;
+  text-align: right;
 }
 
 .btn {
@@ -416,14 +365,12 @@ ul#log-files {
   border-radius: 0.25rem;
   font-weight: 500;
   transition: all 0.2s;
-
-  &:hover {
-    background-color: #218838;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
+}
+.btn:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.btn:active {
+  transform: translateY(0);
 }

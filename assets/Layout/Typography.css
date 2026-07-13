@@ -1,15 +1,15 @@
-@import './Variables.css';
+/* Footer */
+/* Default */
 @import '@fontsource/roboto/300.css';
 @import '@fontsource/roboto/400.css';
 @import '@fontsource/roboto/500.css';
 @import '@fontsource/roboto/600.css';
 @import '@fontsource/roboto/700.css';
+:root {
+  --mdc-theme-primary: var(--primary-bg, var(--primary));
+  --mdc-theme-on-primary: var(--on-primary);
+}
 
-/* We don't import 'material-icons/iconfont/material-icons' — its CSS declares */
-/* @font-face for 5 variants (regular/outlined/round/sharp/two-tone) with */
-/* relative './...woff2' URLs that don't resolve through Vite's CSS pipeline. */
-/* We use only the regular variant, declared directly below with paths Vite */
-/* can resolve from node_modules. */
 @font-face {
   font-family: 'Material Icons';
   font-display: swap;
@@ -17,19 +17,18 @@
     url('material-icons/iconfont/material-icons.woff2') format('woff2'),
     url('material-icons/iconfont/material-icons.woff') format('woff');
 }
-
 .body {
-  font-size: var(--default-font-size);
+  font-size: 1rem;
   letter-spacing: 0.25px;
 }
 
 a,
 textarea {
   color: var(--primary);
-
-  &:hover {
-    color: hsl(var(--color-primary-h) var(--color-primary-s) calc(var(--color-primary-l) - 15%));
-  }
+}
+a:hover,
+textarea:hover {
+  color: hsl(var(--color-primary-h), var(--color-primary-s), calc(var(--color-primary-l) - 15%));
 }
 
 i {

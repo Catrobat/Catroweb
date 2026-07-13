@@ -1,4 +1,9 @@
-@import '../Layout/Variables.css';
+/* Footer */
+/* Default */
+:root {
+  --mdc-theme-primary: var(--primary-bg, var(--primary));
+  --mdc-theme-on-primary: var(--on-primary);
+}
 
 #studio-file-input {
   position: absolute;
@@ -22,10 +27,9 @@
   margin-top: 8px;
   font-size: 0.85rem;
   color: var(--primary);
-
-  .material-icons {
-    font-size: 1rem;
-  }
+}
+.studio-file-compressed .material-icons {
+  font-size: 1rem;
 }
 
 .error-text {
@@ -57,20 +61,28 @@
   border-radius: 50%;
   color: white;
   padding: 0.2rem;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition:
     background-color 0.3s,
     transform 0.2s;
 }
 
 #studio-delete-button:hover {
-  background-color: hsl(
-    var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / 0.12
+  background-color: hsla(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    var(--color-primary-l),
+    0.12
   );
 }
 
 #studio-delete-button:active {
-  background-color: hsl(var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / 0.4);
+  background-color: hsla(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    var(--color-primary-l),
+    0.4
+  );
 }
 
 #studio-delete-button .material-icons {
