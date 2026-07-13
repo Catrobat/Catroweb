@@ -1,4 +1,4 @@
-import './Logs.scss'
+import './Logs.css'
 
 let currentLevelFilter = 'all'
 let currentSearchTerm = ''

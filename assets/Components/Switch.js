@@ -1,6 +1,6 @@
 import { MDCSwitch } from '@material/switch'
 
-import './Switch.scss'
+import './Switch.css'
 
 for (const el of document.querySelectorAll('.mdc-switch')) {
   const switchControl = new MDCSwitch(el)

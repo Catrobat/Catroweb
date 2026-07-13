@@ -1,0 +1,85 @@
+@import '../Layout/Variables.css';
+@import '../Components/Fab.css';
+
+/* Prevent retention tooltips from widening the page */
+[data-controller='project--browse'] {
+  overflow-x: clip;
+}
+
+.projects-section {
+  margin-bottom: 1.5rem;
+}
+
+.projects-section__title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid light-dark(#dee2e6, #3a3a4a);
+}
+
+/* Card list item styles are shared from ProjectList.css */
+
+/* ---------- Skeleton Loading ---------- */
+
+@keyframes projects-browse-skeleton-pulse {
+  0% {
+    opacity: 0.15;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.projects-browse-skeleton {
+  pointer-events: none;
+
+  &__image {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: currentcolor;
+    animation: projects-browse-skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  &__name {
+    height: 0.95rem;
+    width: 55%;
+    border-radius: 4px;
+    background: currentcolor;
+    animation: projects-browse-skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  &__meta {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  &__meta-item {
+    height: 0.7rem;
+    width: 60px;
+    border-radius: 3px;
+    background: currentcolor;
+    animation: projects-browse-skeleton-pulse 1.5s ease-in-out infinite;
+
+    &--short {
+      width: 40px;
+    }
+  }
+}
+
+/* ---------- End Skeleton Loading ---------- */

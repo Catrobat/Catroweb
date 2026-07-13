@@ -3,7 +3,7 @@ import { ApiFetch } from '../Api/ApiHelper'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { buildPictureHTML } from '../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
-import './NotificationsPage.scss'
+import './NotificationsPage.css'
 
 const TAB_CONFIG = [
   { chipId: 'all-notif', paneId: 'notifications', type: 'all', prefix: 'catro-notification-' },

@@ -1,4 +1,4 @@
-import './Snackbar.scss'
+import './Snackbar.css'
 
 export const SnackbarDuration = {
   short: 4500,

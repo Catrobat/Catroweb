@@ -1,6 +1,6 @@
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml } from '../Components/HtmlEscape'
-import './RemixGraphInline.scss'
+import './RemixGraphInline.css'
 
 const ACTIVE_NODE_BORDER = '#00acc1'
 const DEFAULT_NODE_BORDER = '#c8d1da'

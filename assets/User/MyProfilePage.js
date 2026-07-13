@@ -16,9 +16,9 @@ import { ProjectList } from '../Project/ProjectList'
 import { achievementBadgeHtml } from './AchievementBadge'
 import VerifyAccountHandler from './VerifyAccountHandler'
 
-import './Profile.scss'
-import './Achievements.scss'
-import '../Project/ProjectsBrowse.scss'
+import './Profile.css'
+import './Achievements.css'
+import '../Project/ProjectsBrowse.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   if (window.location.search.includes('profileChangeSuccess')) {

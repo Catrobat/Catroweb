@@ -33,8 +33,8 @@ if (bugsnagApiKey) {
 
 initAnalyticsIfConsented()
 
-import './Base.scss'
-import './Footer.scss'
+import './Base.css'
+import './Footer.css'
 
 new LogoutTokenHandler()
 

@@ -2,8 +2,8 @@ import { MDCMenu } from '@material/menu'
 import { MDCTopAppBar } from '@material/top-app-bar'
 import { showSnackbar } from './Snackbar'
 
-import './TopBar.scss'
-import '../Components/MdcMenu.scss'
+import './TopBar.css'
+import '../Components/MdcMenu.css'
 
 const topAppBarElement = document.querySelector('.mdc-top-app-bar')
 const mdcObject = topAppBarElement ? new MDCTopAppBar(topAppBarElement) : null

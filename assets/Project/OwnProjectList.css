@@ -1,0 +1,258 @@
+@import '../Layout/Variables.css';
+@import '_RetentionTooltip.css';
+
+.own-project-list {
+  display: flex;
+  flex-direction: column;
+
+  .projects-spinner-container {
+    display: none;
+  }
+
+  &.loading {
+    .own-project-list__wrapper {
+      display: none;
+    }
+
+    .projects-spinner-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &.empty {
+    display: none;
+  }
+
+  &.empty-with-text {
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__project {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative; /* important for loading spinner */
+
+    &:hover {
+      text-decoration: none;
+
+      .project-list__project__image {
+        box-shadow: 3px 3px 20px 0 rgb(50 50 50 / 35%);
+      }
+    }
+
+    &__image {
+      flex: 0 0 6rem;
+      width: 6rem;
+      height: auto;
+      border-radius: 10%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      box-shadow: 3px 3px 20px 0 rgb(50 50 50 / 15%);
+
+      @media (min-width: 576px) {
+        width: 8rem;
+      }
+
+      @media (min-width: 1400px) {
+        width: 10rem;
+      }
+    }
+
+    &__details {
+      flex: 1 1 auto;
+      margin: 0 1rem;
+      color: var(--bs-body-color);
+
+      &__name {
+        font-size: 1.2rem;
+        padding-bottom: 0.4rem;
+
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
+
+      &__properties {
+        display: grid;
+        grid-template:
+          '. .' max-content
+          '. .' max-content
+          / max-content max-content;
+        gap: 0.25rem;
+        padding-bottom: 0.4rem;
+
+        &__property {
+          display: inline-flex;
+          align-items: center;
+          min-width: 5rem;
+
+          &__value {
+            padding-left: 0.25rem;
+          }
+        }
+      }
+
+      &__visibility {
+        color: var(--bs-secondary-color);
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        display: flex;
+        flex-direction: row;
+
+        &__icon {
+          font-size: 1.5em;
+        }
+
+        &__text {
+          margin-top: 1px;
+          margin-left: 2px;
+          letter-spacing: 0.5px;
+        }
+      }
+
+      &__retention {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+        font-size: 0.7rem;
+        color: var(--bs-secondary-color);
+        margin-top: 0.2rem;
+
+        > .material-icons {
+          font-size: 0.85rem;
+        }
+
+        .retention-info-icon {
+          font-size: 12px !important;
+        }
+
+        &--protected {
+          color: light-dark(#2e7d32, #66bb6a);
+
+          .material-icons {
+            color: light-dark(#2e7d32, #66bb6a);
+          }
+        }
+
+        &--warning {
+          color: light-dark(#e65100, #ff9800);
+
+          .material-icons {
+            color: light-dark(#e65100, #ff9800);
+          }
+        }
+
+        &--critical {
+          color: light-dark(#c62828, #ef5350);
+
+          .material-icons {
+            color: light-dark(#c62828, #ef5350);
+          }
+        }
+      }
+    }
+
+    &__action {
+      flex: 0 0 auto;
+    }
+
+    &__property {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      color: var(--bs-secondary-color);
+
+      .material-icons {
+        font-size: 1.25rem;
+      }
+
+      &__value {
+        padding-left: 0.3rem;
+        font-size: 0.9rem;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+/* Shared dropdown menu styles for project actions */
+.projects-list-item--actions {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.projects-list-item--menu-btn {
+  padding: 0.25rem;
+  border: none;
+  background: none;
+  color: light-dark(#6c757d, #a0aec0);
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    background: light-dark(#f0f0f0, #3a3a4a);
+  }
+
+  .material-icons {
+    font-size: 1.25rem;
+  }
+}
+
+.projects-list-item--dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 50;
+  min-width: 200px;
+  background: light-dark(#fff, #2d2d3d);
+  border: 1px solid light-dark(#dee2e6, #3a3a4a);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
+  overflow: hidden;
+}
+
+.projects-list-item--dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: none;
+  color: light-dark(#212529, #e2e8f0);
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+
+  .material-icons {
+    font-size: 1.1rem;
+    color: light-dark(#6c757d, #a0aec0);
+  }
+
+  &:hover {
+    background: light-dark(#f8f9fa, #3a3a4a);
+    text-decoration: none;
+    color: light-dark(#212529, #e2e8f0);
+  }
+
+  &.text-danger {
+    color: #dc3545;
+
+    .material-icons {
+      color: #dc3545;
+    }
+  }
+}
+
+.projects-list-item--dropdown-divider {
+  height: 1px;
+  margin: 0.25rem 0;
+  background: light-dark(#dee2e6, #3a3a4a);
+}

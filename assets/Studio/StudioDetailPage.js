@@ -9,11 +9,11 @@ import { updatePictureSources } from '../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
 
-import '../Project/ProjectList.scss'
-import './AdminSettings.scss'
-import './MembersList.scss'
-import './ActivityList.scss'
-import './Studio.scss'
+import '../Project/ProjectList.css'
+import './AdminSettings.css'
+import './MembersList.css'
+import './ActivityList.css'
+import './Studio.css'
 
 document.getElementById('std-header-form')?.addEventListener('change', (event) => {
   event.preventDefault()

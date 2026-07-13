@@ -1,6 +1,0 @@
-@import 'bootstrap/scss/mixins';
-
-@mixin force-word-break() {
-  hyphens: auto;
-  overflow-wrap: break-word;
-}

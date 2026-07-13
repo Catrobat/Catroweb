@@ -29,7 +29,7 @@ or
 
 ### Additional information:
 
-- All .scss, .js (and image) files should be in the assets folder.<br>
+- All .css, .js (and image) files should be in the assets folder.<br>
   Do not create/move them directly to the public folder. This is handled by the frontend build.
 
 - For more details feel free to look up the config files in the project if necessary.

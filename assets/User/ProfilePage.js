@@ -5,9 +5,9 @@ import './FollowerOverview'
 import { escapeHtml } from '../Components/HtmlEscape'
 import { ProjectList } from '../Project/ProjectList'
 import { achievementBadgeHtml } from './AchievementBadge'
-import './Profile.scss'
-import './Achievements.scss'
-import '../Project/ProjectsBrowse.scss'
+import './Profile.css'
+import './Achievements.css'
+import '../Project/ProjectsBrowse.css'
 
 initProfileHeader()
 initUserProjects()

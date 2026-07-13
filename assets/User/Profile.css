@@ -1,0 +1,275 @@
+@import '../Layout/Variables.css';
+@import 'VerificationIcon.css';
+
+/* Achievements tab: */
+.horizontal-scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  > div {
+    flex: 0 0 auto;
+  }
+
+  > div + div {
+    margin-left: 1rem;
+  }
+}
+
+.avatar-container {
+  text-align: center;
+
+  img {
+    @media screen and (width <= 576px) {
+      width: 90%;
+      max-width: 15rem !important;
+    }
+  }
+}
+
+.button-container {
+  align-self: flex-end;
+  text-align: right;
+
+  button {
+    margin-bottom: 0.2em;
+  }
+}
+
+/* follower section */
+.follower-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  a {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    width: 3.5rem;
+
+    img.round {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+
+    @media (min-width: 576px) {
+      width: 4rem;
+    }
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+
+    .h4 {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__action {
+    flex-shrink: 0;
+    text-align: end;
+  }
+
+  &__info {
+    font-size: 0.7em;
+    white-space: normal;
+
+    .info-icon {
+      font-size: 1.2em;
+    }
+  }
+
+  .follow-btn {
+    .btn {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+/* should be general */
+.round {
+  border-radius: 100%;
+}
+
+#user-information {
+  .button-container button {
+    min-width: 150px;
+
+    @media (max-width: 575.98px) {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.tab-bar-container {
+  #scroll-area {
+    overflow: auto;
+  }
+}
+
+.tab-content .tab-pane {
+  min-height: 50vh;
+}
+
+.follower-tabs {
+  margin-top: -1rem;
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+  color: var(--mdc-theme-primary);
+}
+
+/* NEW MY PROFILE PAGE */
+.profile {
+  &__basic-info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.5rem;
+
+    &__avatar {
+      flex: 0 0 8rem;
+      margin-right: 1.5rem;
+      position: relative;
+      cursor: pointer;
+
+      @media (min-width: 992px) {
+        flex-basis: 12rem;
+      }
+
+      &__img {
+        border-radius: 100%;
+        width: 100%;
+        height: auto;
+      }
+
+      &__btn-change {
+        position: absolute;
+        top: calc(8rem - 3rem);
+
+        @media (min-width: 992px) {
+          top: calc(12rem - 3rem);
+        }
+
+        right: 0;
+        width: 3rem;
+        height: 3rem;
+        background-color: rgb(0 0 0 / 40%);
+        color: white;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &__text {
+      &__name {
+        font-size: 2rem;
+
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
+    }
+  }
+
+  &__description {
+    &__about {
+      margin-bottom: 0.5rem;
+    }
+
+    &__status {
+      &__label {
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__user-settings {
+    .nav-link {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      color: light-dark(#222, #ddd);
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: none;
+        background: light-dark(rgb(0 0 0 / 20%), rgb(255 255 255 / 20%));
+      }
+
+      &:active,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+
+    .link-icon {
+      flex-shrink: 0;
+      width: 2.5rem;
+      padding-right: 0.5rem;
+      text-align: center;
+      font-size: 1.6rem;
+    }
+
+    .link-text {
+      hyphens: auto;
+      overflow-wrap: break-word;
+
+      font-size: 1.3rem;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+  }
+}
+
+/* ===== Skeleton Loading ===== */
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.loading-spinner-backdrop {
+  background: light-dark(rgb(255 255 255 / 70%), rgb(0 0 0 / 70%));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

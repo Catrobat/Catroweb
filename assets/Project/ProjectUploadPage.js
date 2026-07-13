@@ -1,4 +1,4 @@
-import './ProjectUpload.scss'
+import './ProjectUpload.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.project-upload')

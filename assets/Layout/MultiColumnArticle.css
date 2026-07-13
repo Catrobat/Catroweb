@@ -1,0 +1,9 @@
+@import './Variables.css';
+
+.article-columns {
+  column-count: 2;
+
+  @media (max-width: 991.98px) {
+    column-count: 1;
+  }
+}

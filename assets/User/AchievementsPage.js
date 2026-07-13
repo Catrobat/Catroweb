@@ -5,7 +5,7 @@ import { achievementBadgeHtml } from './AchievementBadge'
 
 import '../Components/TabBar'
 
-import './Achievements.scss'
+import './Achievements.css'
 
 let baseUrl
 let popupBackgroundSvg

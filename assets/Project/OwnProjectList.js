@@ -9,7 +9,7 @@ import { buildPictureHTML } from '../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import '../Components/RetentionTooltip'
 
-import './OwnProjectList.scss'
+import './OwnProjectList.css'
 
 export class OwnProjectList {
   constructor(container, apiUrl, theme, emptyMessage, baseUrl) {

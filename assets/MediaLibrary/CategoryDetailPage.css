@@ -1,0 +1,248 @@
+@import '../Layout/Variables.css';
+@import '../Components/Fab.css';
+
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.js-skeleton {
+  color: light-dark(#d7dde4, #464c55);
+
+  .mediafile {
+    pointer-events: none;
+  }
+
+  .img-container {
+    border-color: transparent;
+    background: transparent;
+  }
+}
+
+.medialib-content {
+  .category {
+    margin-top: 1.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    & .files {
+      display: flex;
+      flex-flow: row wrap;
+    }
+
+    .mediafile {
+      position: relative;
+      height: 92px;
+      width: calc(100% + (2 * 0.75rem));
+      margin: 0 -0.75rem;
+      padding: 8px 0.75rem;
+      font-size: 1rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: border 0.5s;
+
+      &:hover,
+      &:focus {
+        background: hsl(
+          var(--color-primary-h) var(--color-primary-s) var(--color-primary-l) / 0.12
+        );
+      }
+
+      .checkbox {
+        position: absolute;
+        right: 0.75rem;
+        color: #fff;
+        visibility: hidden;
+      }
+
+      &.selected {
+        text-decoration: none;
+        background-color: light-dark(#e5e5e5, #1a1a1a);
+
+        .checkbox {
+          color: #fff;
+          font-size: 1.25rem;
+          visibility: visible;
+        }
+      }
+
+      .img-container {
+        flex: 0 0 auto;
+        width: 76px;
+        height: 76px;
+        border: 2px solid var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+
+        img {
+          max-width: 72px;
+          max-height: 72px;
+        }
+      }
+
+      .media-file-icon {
+        max-width: 90% !important;
+        max-height: 90%;
+        font-size: 4rem;
+      }
+
+      &.flavored {
+        order: -1;
+      }
+
+      .text-container {
+        width: 100%;
+        height: 76px;
+        margin-left: 0.75rem;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+      }
+
+      .name {
+        flex: 0 0 auto;
+        max-width: fit-content;
+        height: auto;
+        max-height: 33.33%;
+        padding: 0 0.25rem;
+        overflow: hidden;
+        color: var(--bs-body-color);
+        text-overflow: ellipsis;
+      }
+
+      .name--link {
+        color: var(--primary) !important;
+      }
+
+      .description {
+        flex: 0 0 auto;
+        max-width: 100%;
+        max-height: 66.66%;
+        padding: 0 0.25rem;
+        overflow: hidden;
+        font-size: 0.85em;
+        font-weight: lighter;
+        color: var(--bs-body-color);
+        text-overflow: ellipsis;
+
+        hyphens: auto;
+        overflow-wrap: break-word;
+      }
+
+      .button-container {
+        min-width: 76px;
+        height: 76px;
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          font-size: 2.5rem;
+        }
+      }
+
+      .audio-control {
+        z-index: 2;
+        font-size: 3rem;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.16s;
+
+        &:hover {
+          transform: scale(1.08);
+        }
+      }
+    }
+
+    & .header {
+      font-size: 1.5em;
+    }
+  }
+}
+
+/* media breakpoints */
+
+@media (min-width: 576px) {
+  .medialib-content .category .files .mediafile {
+    height: 104px;
+
+    .img-container {
+      width: 88px;
+      height: 88px;
+
+      img {
+        max-width: 84px;
+        max-height: 84px;
+      }
+    }
+
+    .text-container {
+      height: 88px;
+    }
+
+    .button-container {
+      min-width: 88px;
+      height: 88px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .medialib-content .category .files .mediafile {
+    height: 128px;
+    font-size: 1.25rem;
+
+    .img-container {
+      width: 96px;
+      height: 96px;
+
+      img {
+        max-width: 92px;
+        max-height: 92px;
+      }
+    }
+
+    .text-container {
+      height: 96px;
+    }
+
+    .button-container {
+      min-width: 96px;
+      height: 96px;
+    }
+  }
+}
+
+/* thumbsize breakpoints */
+
+#thumbsize-control {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  span {
+    margin-right: 0.5rem;
+  }
+}

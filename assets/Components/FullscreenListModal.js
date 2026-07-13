@@ -1,3 +1,3 @@
 import './Modal'
 
-import './FullscreenListModal.scss'
+import './FullscreenListModal.css'

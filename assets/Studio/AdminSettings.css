@@ -1,0 +1,5 @@
+@import '../Layout/Variables.css';
+
+#studio-admin-settings-modal {
+  color: var(--bs-body-color);
+}

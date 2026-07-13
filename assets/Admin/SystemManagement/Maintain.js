@@ -2,7 +2,7 @@
 /* global data_mem_values */
 /* global wholeSpace */
 /* global wholeRam */
-import './Maintain.scss'
+import './Maintain.css'
 import { PieChart } from '../PieChart'
 
 const pieChart = new PieChart()

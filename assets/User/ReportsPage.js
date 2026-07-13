@@ -2,7 +2,7 @@ import { MDCChipSet } from '@material/chips'
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { showSnackbar } from '../Layout/Snackbar'
-import './ReportsPage.scss'
+import './ReportsPage.css'
 
 const TAB_CONFIG = [
   { chipId: 'all-reports', paneId: 'reports-all', status: 'all' },

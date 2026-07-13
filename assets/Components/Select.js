@@ -1,7 +1,7 @@
 import { MDCFloatingLabel } from '@material/floating-label'
 import { MDCSelect } from '@material/select'
 
-import './Select.scss'
+import './Select.css'
 
 for (const el of document.querySelectorAll('.mdc-select')) {
   const select = new MDCSelect(el)

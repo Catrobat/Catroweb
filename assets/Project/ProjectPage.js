@@ -23,7 +23,7 @@ import { ProjectList } from './ProjectList'
 import { ProjectName } from './ProjectName'
 import './RemixGraphInline'
 
-import './ProjectPage.scss'
+import './ProjectPage.css'
 
 const projectElement = document.querySelector('.js-project')
 const projectDescriptionCreditsElement = document.querySelector('.js-project-description-credits')

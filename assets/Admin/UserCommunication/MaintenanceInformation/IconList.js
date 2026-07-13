@@ -1,4 +1,4 @@
-import './Slider.scss'
+import './Slider.css'
 
 const iconData = [
   { id: 1, icon: 'error', caption: 'Error' },
