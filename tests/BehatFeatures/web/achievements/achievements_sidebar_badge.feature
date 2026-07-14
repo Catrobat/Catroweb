@@ -39,7 +39,7 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
       | id | user     | achievement        | seen_at    | unlocked_at |
       | 1  | Catrobat | master_of_disaster |            | 2021-03-03  |
       | 2  | Catrobat | best_user          | 2021-03-03 | 2021-03-03  |
-      | 3  | Catrobat | first_achiever     |            | 2021-03-03  |
+      | 3  | Catrobat | first_achiever     |            | 2021-03-04  |
     And I log in as "Catrobat"
     When I open the menu
     Then the element "#sidebar-achievements" should be visible

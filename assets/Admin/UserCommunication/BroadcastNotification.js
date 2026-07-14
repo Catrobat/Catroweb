@@ -1,4 +1,4 @@
-import './BroadcastNotification.scss'
+import './BroadcastNotification.css'
 
 function broadcastNotification() {
   const container = document.querySelector('[data-api-url]')

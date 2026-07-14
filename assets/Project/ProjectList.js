@@ -5,7 +5,7 @@ import { buildPictureHTML, createPictureElement } from '../Layout/ImageVariants'
 import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../Layout/TopBar'
 import '../Components/RetentionTooltip'
 
-import './ProjectList.scss'
+import './ProjectList.css'
 
 const projectListRegistry = new Map()
 

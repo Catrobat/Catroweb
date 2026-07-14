@@ -75,8 +75,8 @@ Feature: Users have an achievement page for their overviews
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     And I wait for AJAX to finish
-    Then the ".mdc-tab-bar" element should contain "locked"
-    And the ".mdc-tab-bar" element should contain "unlocked"
+    Then the "md-tabs" element should contain "locked"
+    And the "md-tabs" element should contain "unlocked"
     And the element "#unlocked-achievements" should be visible
     And the element "#locked-achievements" should not be visible
     When I click "#locked-achievements-tab"

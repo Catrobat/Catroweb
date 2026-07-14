@@ -1,0 +1,8 @@
+.article-columns {
+  column-count: 2;
+}
+@media (max-width: 991.98px) {
+  .article-columns {
+    column-count: 1;
+  }
+}

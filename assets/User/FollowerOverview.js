@@ -1,5 +1,5 @@
 import '../Components/TabBar'
-import './Profile.scss'
+import './Profile.css'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { buildPictureHTML } from '../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'

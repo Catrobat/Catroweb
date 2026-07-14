@@ -1,5 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
-import { MDCMenu } from '@material/menu'
+import '@material/web/iconbutton/icon-button.js'
+import '@material/web/menu/menu-item.js'
+import '@material/web/menu/menu.js'
 import { escapeAttr, escapeHtml } from '../../Components/HtmlEscape'
 import { buildPictureHTML } from '../../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../../Layout/Snackbar'
@@ -37,11 +39,6 @@ export default class extends Controller {
         data.data.forEach((member) => {
           listElement.appendChild(this._renderMember(member, isStudioAdmin))
         })
-      }
-
-      for (const el of listElement.querySelectorAll('.mdc-menu')) {
-        const menu = new MDCMenu(el)
-        menu.open = false
       }
     } catch (e) {
       console.error('Failed to load members:', e)
@@ -83,30 +80,29 @@ export default class extends Controller {
       const banUrl = `${this.membersUrlValue}/${encodeURIComponent(member.user_id)}/ban`
 
       adminButtons = `
-        <div class="member__list-entry__admin-buttons mdc-menu-surface--anchor">
-          <button class="member__list-entry__admin-button btn material-icons"
+        <div class="member__list-entry__admin-buttons">
+          <md-icon-button id="member-admin-menu-button-${escapeAttr(String(member.user_id))}"
+                          class="member__list-entry__admin-button"
                   data-action="click->studio--member-list#openAdminMenu"
-                  role="button">more_vert</button>
-          <div class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed">
-            <ul class="mdc-list" role="menu" aria-hidden="true">
-              <li class="member__list-entry__admin-button__promote btn mdc-list-item mdc-ripple-upgraded" role="menuitem"
+                  aria-label="Member actions"><span class="material-icons">more_vert</span></md-icon-button>
+          <md-menu anchor="member-admin-menu-button-${escapeAttr(String(member.user_id))}" positioning="popover">
+              <md-menu-item class="member__list-entry__admin-button__promote"
                   data-action="click->studio--member-list#promoteMemberToAdmin"
                   data-url="${escapeAttr(promoteUrl)}"
                   data-user-id="${escapeAttr(String(member.user_id))}"
                   data-error-message="${escapeAttr(transPromoteFailed)}">
-                <span class="material-icons me-2">upgrade</span>
-                <span class="member__list-entry__admin-buttons__text">${escapeHtml(transPromote)}</span>
-              </li>
-              <li class="member__list-entry__admin-button__ban btn mdc-list-item mdc-ripple-upgraded" role="menuitem"
+                <span slot="start" class="material-icons">upgrade</span>
+                <span slot="headline" class="member__list-entry__admin-buttons__text">${escapeHtml(transPromote)}</span>
+              </md-menu-item>
+              <md-menu-item class="member__list-entry__admin-button__ban"
                   data-action="click->studio--member-list#banUserFromStudio"
                   data-url="${escapeAttr(banUrl)}"
                   data-user-id="${escapeAttr(String(member.user_id))}"
                   data-error-message="${escapeAttr(transBanFailed)}">
-                <span class="material-icons me-2 text-danger">delete</span>
-                <span class="member__list-entry__admin-buttons__text">${escapeHtml(transBan)}</span>
-              </li>
-            </ul>
-          </div>
+                <span slot="start" class="material-icons text-danger">delete</span>
+                <span slot="headline" class="member__list-entry__admin-buttons__text">${escapeHtml(transBan)}</span>
+              </md-menu-item>
+          </md-menu>
         </div>`
     } else if (isStudioAdmin && member.role === 'admin') {
       const transDemote = this.element.dataset.transDemoteMember || 'Demote'
@@ -114,22 +110,21 @@ export default class extends Controller {
       const demoteUrl = `${this.membersUrlValue}/${encodeURIComponent(member.user_id)}/demote`
 
       adminButtons = `
-        <div class="member__list-entry__admin-buttons mdc-menu-surface--anchor">
-          <button class="member__list-entry__admin-button btn material-icons"
+        <div class="member__list-entry__admin-buttons">
+          <md-icon-button id="member-admin-menu-button-${escapeAttr(String(member.user_id))}"
+                          class="member__list-entry__admin-button"
                   data-action="click->studio--member-list#openAdminMenu"
-                  role="button">more_vert</button>
-          <div class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed">
-            <ul class="mdc-list" role="menu" aria-hidden="true">
-              <li class="member__list-entry__admin-button__demote btn mdc-list-item mdc-ripple-upgraded" role="menuitem"
+                  aria-label="Member actions"><span class="material-icons">more_vert</span></md-icon-button>
+          <md-menu anchor="member-admin-menu-button-${escapeAttr(String(member.user_id))}" positioning="popover">
+              <md-menu-item class="member__list-entry__admin-button__demote"
                   data-action="click->studio--member-list#demoteAdminToMember"
                   data-url="${escapeAttr(demoteUrl)}"
                   data-user-id="${escapeAttr(String(member.user_id))}"
                   data-error-message="${escapeAttr(transDemoteFailed)}">
-                <span class="material-icons me-2 text-warning">arrow_downward</span>
-                <span class="member__list-entry__admin-buttons__text">${escapeHtml(transDemote)}</span>
-              </li>
-            </ul>
-          </div>
+                <span slot="start" class="material-icons text-warning">arrow_downward</span>
+                <span slot="headline" class="member__list-entry__admin-buttons__text">${escapeHtml(transDemote)}</span>
+              </md-menu-item>
+          </md-menu>
         </div>`
     }
 
@@ -155,10 +150,7 @@ export default class extends Controller {
    * @param event
    */
   openAdminMenu(event) {
-    const menu = new MDCMenu(
-      event.currentTarget.parentElement.getElementsByClassName('mdc-menu')[0],
-    )
-    menu.open = true
+    event.currentTarget.parentElement.querySelector('md-menu').open = true
   }
 
   /**

@@ -1,0 +1,195 @@
+.tab-content {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.tab-pane {
+  padding: 0;
+  min-height: 60vh;
+}
+
+.report-item {
+  margin-bottom: 0.75rem;
+}
+.report-item:last-child {
+  margin-bottom: 0;
+}
+
+.report-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background-color: light-dark(#fff, #2d2d3d);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+  transition: all 0.2s ease;
+  position: relative;
+}
+.report-card:hover {
+  box-shadow: 0 2px 8px light-dark(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.4));
+  transform: translateY(-1px);
+}
+@media screen and (width <= 576px) {
+  .report-card {
+    gap: 0.75rem;
+    padding: 0.875rem;
+    flex-wrap: wrap;
+  }
+}
+
+.report-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: light-dark(#f0f0f0, #3a3a4a);
+}
+.report-icon .material-icons {
+  font-size: 24px;
+  color: light-dark(#555, #b0b0c0);
+}
+@media screen and (width <= 576px) {
+  .report-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .report-icon .material-icons {
+    font-size: 20px;
+  }
+}
+
+.report-content {
+  flex: 1;
+  min-width: 0;
+}
+@media screen and (width <= 576px) {
+  .report-content {
+    font-size: 0.875rem;
+  }
+}
+
+.report-title {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: light-dark(#333, #e2e8f0);
+  line-height: 1.4;
+}
+
+.report-category {
+  font-size: 0.8125rem;
+  color: light-dark(#666, #a0a0b0);
+  margin-top: 0.125rem;
+  text-transform: capitalize;
+}
+
+.report-date {
+  font-size: 0.75rem;
+  color: light-dark(#999, #888);
+  margin-top: 0.25rem;
+}
+
+.report-resolved {
+  font-size: 0.75rem;
+  color: light-dark(#999, #888);
+  margin-top: 0.125rem;
+}
+
+.report-status {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+@media screen and (width <= 576px) {
+  .report-status {
+    margin-left: auto;
+  }
+}
+
+.report-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+}
+
+.report-badge-pending {
+  background-color: light-dark(#fff3cd, #4a4320);
+  color: light-dark(#856404, #ffd866);
+}
+
+.report-badge-accepted {
+  background-color: light-dark(#d4edda, #1e3a2a);
+  color: light-dark(#155724, #6ee7a0);
+}
+
+.report-badge-rejected {
+  background-color: light-dark(#f8d7da, #3a1e22);
+  color: light-dark(#721c24, #f88090);
+}
+
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+.skeleton {
+  background: currentcolor;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.no-reports {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: light-dark(#6c757d, #a0a0b0);
+  font-size: 1rem;
+}
+@media screen and (width <= 576px) {
+  .no-reports {
+    padding: 2rem 1rem;
+    font-size: 0.9375rem;
+  }
+}
+
+.chip-selected {
+  --md-filter-chip-selected-container-color: var(--primary-bg, var(--primary));
+  --md-filter-chip-selected-label-text-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-leading-icon-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-hover-label-text-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-focus-label-text-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-pressed-label-text-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-hover-leading-icon-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-focus-leading-icon-color: var(--on-primary, #fff);
+  --md-filter-chip-selected-pressed-leading-icon-color: var(--on-primary, #fff);
+}
+
+.chip-default {
+  --md-filter-chip-container-color: light-dark(#e0e0e0, #353548);
+  --md-filter-chip-label-text-color: light-dark(rgb(0 0 0 / 87%), #e2e8f0);
+}
+
+.scroll-wrapper {
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+.scroll-wrapper md-filter-chip {
+  flex: 0 0 auto;
+}

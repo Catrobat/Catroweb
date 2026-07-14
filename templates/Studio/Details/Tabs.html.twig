@@ -1,35 +1,10 @@
-<div class="mdc-tab-bar container" role="tablist">
-  <div class="mdc-tab-scroller">
-    <div class="mdc-tab-scroller__scroll-area" id="scroll-area">
-      <div class="mdc-tab-scroller__scroll-content">
-        <ul class="nav nav-tabs">
-          <li class="col-6 active">
-            <button id="projects-tab" class="mdc-tab mdc-tab--active" data-bs-toggle="tab"
-                    href="#projects-pane" role="tab" aria-selected="true" tabindex="0">
-                                                <span class="mdc-tab__content"><span
-                                                      class="tab-text">{{ 'studio.details.projects.title'|trans({}, 'catroweb') }}&nbsp;</span><span
-                                                      id="projects-count"
-                                                      data-studio--project-list-target="count"><span class="skeleton studio-detail__tab-count-skeleton js-studio-header-skeleton"></span></span></span>
-              <span class="mdc-tab-indicator mdc-tab-indicator--active">
-                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                            </span>
-            </button>
-          </li>
-          <li class="col-6">
-            <button id="comments-tab" class="mdc-tab mdc-tab--active" data-bs-toggle="tab"
-                    href="#comments-pane" role="tab" aria-selected="false" tabindex="0">
-                                                <span class="mdc-tab__content">
-                                                  <span class="tab-text">{{ 'studio.details.comments.title'|trans({}, 'catroweb') }}&nbsp;</span>
-                                                  (<span id="comments-count"
-                                                         data-studio--comment-target="count"><span class="skeleton studio-detail__tab-count-skeleton js-studio-header-skeleton"></span></span>)
-                                                </span>
-              <span class="mdc-tab-indicator">
-                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                            </span>
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+<md-tabs id="studio-detail-tabs" class="container" aria-label="Studio sections">
+  {# Each tab slots exactly ONE element: md-primary-tab lays multiple slotted
+     nodes out in a column (icon-over-label), which stacks the label and count. #}
+  <md-primary-tab id="projects-tab" active aria-controls="projects-pane">
+    <span class="tab-text">{{ 'studio.details.projects.title'|trans({}, 'catroweb') }}&nbsp;<span id="projects-count" data-studio--project-list-target="count"><span class="skeleton studio-detail__tab-count-skeleton js-studio-header-skeleton"></span></span></span>
+  </md-primary-tab>
+  <md-primary-tab id="comments-tab" aria-controls="comments-pane">
+    <span class="tab-text">{{ 'studio.details.comments.title'|trans({}, 'catroweb') }}&nbsp;(<span id="comments-count" data-studio--comment-target="count"><span class="skeleton studio-detail__tab-count-skeleton js-studio-header-skeleton"></span></span>)</span>
+  </md-primary-tab>
+</md-tabs>

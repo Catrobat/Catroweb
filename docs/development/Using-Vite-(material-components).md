@@ -10,7 +10,7 @@ yarn add @material/PACKAGE_NAME
 
 3. Styles
 
-Add `@use` and `@include` statements in \_base.scss, `@import` statements in the specific .scss file.
+Add CSS imports only where a stylesheet needs a shared dependency; native CSS nesting is supported directly.
 
 4. JavaScript instantiation
 

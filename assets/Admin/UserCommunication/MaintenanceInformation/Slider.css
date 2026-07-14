@@ -1,0 +1,28 @@
+.horizontal-list-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.horizontal-list {
+  list-style: none;
+  padding: 0;
+  white-space: nowrap;
+}
+.horizontal-list li {
+  display: inline-block;
+  margin: 25px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.horizontal-list li:hover {
+  transform: scale(1.6);
+}
+
+.material-icons {
+  cursor: pointer;
+  font-size: 35px;
+  transition: transform 0.2s;
+}
+.material-icons:hover {
+  cursor: pointer;
+}

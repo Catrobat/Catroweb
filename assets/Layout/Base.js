@@ -9,6 +9,7 @@ import 'lazysizes'
 // no further config is needed - just add the class material-icons to element
 // E.g: <i class="material-icons">thumb_up</i>
 import 'material-icons/iconfont/material-icons.css'
+import '@material/web/progress/circular-progress.js'
 
 import textFillDefault from '../Components/TextFillDefault'
 import './TopBar'
@@ -33,8 +34,8 @@ if (bugsnagApiKey) {
 
 initAnalyticsIfConsented()
 
-import './Base.scss'
-import './Footer.scss'
+import './Base.css'
+import './Footer.css'
 
 new LogoutTokenHandler()
 

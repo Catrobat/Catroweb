@@ -4,7 +4,7 @@ import AcceptLanguage from '../Api/AcceptLanguage'
 import { showValidationMessage } from '../Components/TextField'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
 
-import './CreateStudio.scss'
+import './CreateStudio.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.getElementById('top-app-bar__btn-save')
@@ -22,8 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
           url: `${document.getElementById('js-api-routing').dataset.baseUrl}/api/studios`,
         },
         {
-          name: createForm.querySelector('#studio-name__input').value,
-          description: createForm.querySelector('#studio-description__input').value,
+          name: createForm.querySelector('#studio-name').value,
+          description: createForm.querySelector('#studio-description').value,
           is_public: createForm.querySelector('[name="is-public"]').value,
           enable_comments: createForm.querySelector('[name="enable-comments"]').value,
           image_file: processedFile,

@@ -63,40 +63,28 @@
             },
           }) }}
 
-          <div class="mb-2">
-            <label id="date-of-birth" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon">
-              <span class="mdc-text-field__ripple"></span>
-              <span class="mdc-floating-label mdc-floating-label--float-above" id="date-of-birth__label">{{ 'register.dateOfBirth'|trans({}, 'catroweb') }}</span>
-              <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" role="button">cake</span>
-              <input type="date" id="date-of-birth__input" name="_date_of_birth"
-                     class="mdc-text-field__input" max="{{ 'now'|date('Y-m-d') }}" required
-                     aria-labelledby="date-of-birth__label" tabindex="4">
-              <span class="mdc-line-ripple"></span>
-            </label>
-            <div class="mdc-text-field-helper-line mb-2">
-              <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="date-of-birth__helper" aria-hidden="true">
-                {{ 'register.dateOfBirthInfo'|trans({}, 'catroweb') }}
-              </div>
-            </div>
-          </div>
+          <md-filled-text-field id="date-of-birth"
+                                class="d-block w-100 mb-2"
+                                label="{{ 'register.dateOfBirth'|trans({}, 'catroweb') }}"
+                                supporting-text="{{ 'register.dateOfBirthInfo'|trans({}, 'catroweb') }}"
+                                name="_date_of_birth"
+                                type="date"
+                                max="{{ 'now'|date('Y-m-d') }}"
+                                required
+                                tabindex="4">
+            <span slot="leading-icon" class="material-icons" aria-hidden="true">cake</span>
+          </md-filled-text-field>
 
           <div id="parent-email-section" style="display: none;">
-            <div class="mb-2">
-              <label id="parent-email" class="mdc-text-field mdc-text-field--filled mdc-text-field--with-leading-icon">
-                <span class="mdc-text-field__ripple"></span>
-                <span class="mdc-floating-label mdc-floating-label--float-above" id="parent-email__label">{{ 'register.parentEmail'|trans({}, 'catroweb') }}</span>
-                <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading" role="button">family_restroom</span>
-                <input type="email" id="parent-email__input" name="_parent_email"
-                       class="mdc-text-field__input"
-                       aria-labelledby="parent-email__label" tabindex="5">
-                <span class="mdc-line-ripple"></span>
-              </label>
-              <div class="mdc-text-field-helper-line mb-2">
-                <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent" id="parent-email__helper" aria-hidden="true">
-                  {{ 'register.parentEmailInfo'|trans({}, 'catroweb') }}
-                </div>
-              </div>
-            </div>
+            <md-filled-text-field id="parent-email"
+                                  class="d-block w-100 mb-2"
+                                  label="{{ 'register.parentEmail'|trans({}, 'catroweb') }}"
+                                  supporting-text="{{ 'register.parentEmailInfo'|trans({}, 'catroweb') }}"
+                                  name="_parent_email"
+                                  type="email"
+                                  tabindex="5">
+              <span slot="leading-icon" class="material-icons" aria-hidden="true">family_restroom</span>
+            </md-filled-text-field>
           </div>
 
           <p class="subtext">{{ 'register.subText'|trans({

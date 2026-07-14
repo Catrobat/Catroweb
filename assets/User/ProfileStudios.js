@@ -1,7 +1,7 @@
 import { shareOrCopy } from '../Components/ClipboardHelper'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { buildPictureHTML } from '../Layout/ImageVariants'
-import './ProfileStudios.scss'
+import './ProfileStudios.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.js-profile-studios')

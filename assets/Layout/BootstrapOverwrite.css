@@ -1,0 +1,58 @@
+/* Vite 8's LightningCSS downlevels light-dark() into the
+   --lightningcss-light/dark var-toggle polyfill and only injects the toggle
+   definitions into rules that declare color-scheme. Bootstrap declares it
+   solely under [data-bs-theme=dark], so without this rule the light-mode
+   toggles stay undefined and every light-dark() value computes to garbage
+   (e.g. the footer lost its colors). "light" (not "light dark") is correct:
+   ColorScheme.js always sets an explicit data-bs-theme, so dark comes from
+   Bootstrap's override, never from the OS preference. */
+:root {
+  color-scheme: light;
+}
+
+.container {
+  max-width: 1400px !important;
+}
+
+.modal {
+  z-index: 6000;
+}
+
+a {
+  text-decoration: none;
+}
+
+.bg-primary {
+  background-color: var(--primary-bg, var(--primary)) !important;
+}
+.bg-primary:hover {
+  background-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 7.5%)
+  ) !important;
+}
+.bg-primary:not(:disabled):not(.disabled):active {
+  background-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 10%)
+  ) !important;
+}
+.bg-primary:not(:disabled):not(.disabled):active:focus,
+.bg-primary:focus {
+  background-color: hsl(
+    var(--color-primary-h),
+    var(--color-primary-s),
+    calc(var(--color-primary-l) - 5%)
+  ) !important;
+  box-shadow: 0 0 0 0.2rem
+    hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.3) !important;
+}
+.bg-primary:disabled {
+  background-color: var(--primary) !important;
+}
+
+.carousel-indicators .active {
+  background-color: var(--primary);
+}

@@ -55,17 +55,7 @@ export default defineConfig(({ mode }) => {
       },
     },
 
-    css: {
-      devSourcemap: true,
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-          // Bootstrap 5 Sass deprecations — drop on Bootstrap 6 upgrade.
-          silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'if-function'],
-          loadPaths: [path.resolve(rootDir, 'node_modules')],
-        },
-      },
-    },
+    css: { devSourcemap: true },
 
     plugins: [
       themes.plugin,

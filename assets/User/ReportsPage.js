@@ -1,8 +1,9 @@
-import { MDCChipSet } from '@material/chips'
+import '@material/web/chips/chip-set.js'
+import '@material/web/chips/filter-chip.js'
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { showSnackbar } from '../Layout/Snackbar'
-import './ReportsPage.scss'
+import './ReportsPage.css'
 
 const TAB_CONFIG = [
   { chipId: 'all-reports', paneId: 'reports-all', status: 'all' },
@@ -19,17 +20,6 @@ const CONTENT_TYPE_ICONS = {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const chipsetRoot = document.querySelector('.mdc-chip-set')
-  const chipset = chipsetRoot ? new MDCChipSet(chipsetRoot) : null
-  const tabPaneElements = document.querySelectorAll('.tab-pane')
-
-  if (chipset) {
-    chipset.listen('MDCChip:interaction', (event) => {
-      document.querySelector('.show.active').classList.remove('show', 'active')
-      tabPaneElements[event.detail.index].classList.add('show', 'active')
-    })
-  }
-
   const reportsElement = document.querySelector('.js-reports')
   const userReports = new UserReports(
     reportsElement.dataset.baseUrl,
@@ -206,13 +196,19 @@ class UserReports {
 
   resetChips() {
     for (const tab of TAB_CONFIG) {
-      document.getElementById(tab.chipId).classList.replace('chip-selected', 'chip-default')
+      const chip = document.getElementById(tab.chipId)
+      chip.selected = false
+      chip.setAttribute('aria-selected', 'false')
+      chip.classList.replace('chip-selected', 'chip-default')
       document.getElementById(tab.paneId).classList.remove('show', 'active')
     }
   }
 
   selectChip(elementId, paneId) {
-    document.getElementById(elementId).classList.replace('chip-default', 'chip-selected')
+    const chip = document.getElementById(elementId)
+    chip.selected = true
+    chip.setAttribute('aria-selected', 'true')
+    chip.classList.replace('chip-default', 'chip-selected')
     document.getElementById(paneId).classList.add('show', 'active')
   }
 

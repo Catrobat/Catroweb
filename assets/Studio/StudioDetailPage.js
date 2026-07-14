@@ -9,11 +9,22 @@ import { updatePictureSources } from '../Layout/ImageVariants'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
 import { compressImageIfNeeded, exceedsMaxSize, isAllowedImageType } from './ImageCompressor'
 
-import '../Project/ProjectList.scss'
-import './AdminSettings.scss'
-import './MembersList.scss'
-import './ActivityList.scss'
-import './Studio.scss'
+import '../Project/ProjectList.css'
+import './AdminSettings.css'
+import './MembersList.css'
+import './ActivityList.css'
+import './Studio.css'
+
+document.getElementById('studio-detail-tabs')?.addEventListener('change', (event) => {
+  const tabs = Array.from(event.currentTarget.querySelectorAll('md-primary-tab'))
+  const activeTab = tabs[event.currentTarget.activeTabIndex]
+  const activePane = activeTab && document.getElementById(activeTab.getAttribute('aria-controls'))
+
+  if (!activePane) return
+
+  document.querySelector('.show.active')?.classList.remove('show', 'active')
+  activePane.classList.add('show', 'active')
+})
 
 document.getElementById('std-header-form')?.addEventListener('change', (event) => {
   event.preventDefault()
@@ -148,16 +159,12 @@ async function submitStudioSettings() {
   const baseUrl = document.getElementById('js-api-routing').dataset.baseUrl
   const url = `${baseUrl}/api/studios/${studioId}`
 
-  const nameInput = document.querySelector('#studio-settings__studio-name__input')
-  const descTextarea = document.querySelector(
-    '#studio-settings textarea[name="studio_description"]',
-  )
-  const commentsSwitch = document.querySelector(
-    '#studio-setting__switch-enable-comments input[name="allow_comments"]',
-  )
-  const publicSwitch = document.querySelector(
-    '#studio-setting__switch-studio-privacy input[name="is_public"]',
-  )
+  const nameInput = document.querySelector('#studio-settings__studio-name')
+  const descTextarea = document.querySelector('#studio-settings__studio-description')
+  // Switch.js keeps the value in a hidden input that is a SIBLING of the
+  // md-switch host, id {switch-id}-native.
+  const commentsSwitch = document.getElementById('studio-setting__switch-enable-comments-native')
+  const publicSwitch = document.getElementById('studio-setting__switch-studio-privacy-native')
 
   const formData = new FormData()
   if (nameInput) formData.append('name', nameInput.value)

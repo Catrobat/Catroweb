@@ -77,7 +77,7 @@ export function purgeCssPlugin({ rootDir }) {
   }
 }
 
-// Rollup dedupes pure-CSS entries that share content (theme .scss files that
+// Rollup dedupes pure-CSS entries that share content (theme .css files that
 // all just @import 'pocketcode'). Wrapping each entry in a virtual JS module
 // gives it its own chunk identity, so the manifest emits a unique entry per
 // theme name. Caller spreads `.input` into rollupOptions.input.

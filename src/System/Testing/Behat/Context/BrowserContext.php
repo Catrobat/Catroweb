@@ -27,6 +27,182 @@ class BrowserContext extends MinkContext implements Context
   use ContextTrait;
 
   // --------------------------------------------------------------------------------------------------------------------
+  //  Shadow-DOM aware form fields (@material/web custom elements)
+  // --------------------------------------------------------------------------------------------------------------------
+  //
+  // Since #7031 text fields / selects are rendered as @material/web custom elements
+  // (md-filled-text-field, md-outlined-select, ...). Their native <input> lives inside the
+  // element's SHADOW DOM, so Mink's NamedSelector (which only matches light-DOM
+  // input/textarea/select) can neither find nor fill them.
+  //
+  // The host custom element carries the id / name / value, e.g.:
+  //     <md-filled-text-field id="username" name="_username" value="...">
+  //
+  // Legacy MDC markup exposed a light-DOM `<input id="{id}__input">`; feature files therefore
+  // still reference locators such as "username__input". The single, documented mapping applied
+  // here is: {id}__input  ->  host element with id {id}. Resolution order for a field locator:
+  //     1. element with that id
+  //     2. (if the locator ends with "__input") element with the id minus the "__input" suffix
+  //     3. element carrying that name attribute
+  //
+  // Setting `.value` on the host + dispatching bubbling/composed input & change events mirrors a
+  // real user edit: form-associated md-* elements update their submitted value and Stimulus
+  // controllers listening for input/change react correctly.
+  private const string FIELD_RESOLVER_JS = <<<'JS'
+    function catrowebIsField(el) {
+      return !!el && (el.matches('input, textarea, select') || 0 === el.tagName.indexOf('MD-'));
+    }
+    function catrowebResolveField(locator) {
+      var el = document.getElementById(locator);
+      if (catrowebIsField(el)) { return el; }
+      if (locator.length > 7 && '__input' === locator.slice(-7)) {
+        el = document.getElementById(locator.slice(0, -7));
+        if (catrowebIsField(el)) { return el; }
+      }
+      // getElementsByName also matches e.g. <meta name="description">, which would
+      // swallow the value silently — only form controls count.
+      var named = document.getElementsByName(locator);
+      for (var i = 0; i < named.length; i++) {
+        if (catrowebIsField(named[i])) { return named[i]; }
+      }
+      return null;
+    }
+    JS;
+
+  /**
+   * Fills a form field, transparently falling back to shadow-DOM aware handling for md-* elements.
+   *
+   * NOTE: no step annotations here — Behat inherits the parent MinkContext patterns through
+   * getPrototype() (AnnotatedContextReader::readMethodCallees), so repeating them would register
+   * duplicate step definitions and abort every suite.
+   *
+   * @param string $field
+   * @param string $value
+   */
+  #[\Override]
+  public function fillField($field, $value): void
+  {
+    $field = $this->fixStepArgument($field);
+    $value = $this->fixStepArgument($value);
+
+    try {
+      $this->getSession()->getPage()->fillField($field, $value);
+    } catch (ElementNotFoundException $exception) {
+      if (!$this->setMaterialFieldValue($field, $value)) {
+        throw $exception;
+      }
+    }
+  }
+
+  /**
+   * @param string $field
+   * @param string $value
+   */
+  #[\Override]
+  public function assertFieldContains($field, $value): void
+  {
+    $field = $this->fixStepArgument($field);
+    $value = $this->fixStepArgument($value);
+
+    try {
+      $this->assertSession()->fieldValueEquals($field, $value);
+    } catch (ElementNotFoundException $exception) {
+      $actual = $this->getMaterialFieldValue($field);
+      if (null === $actual) {
+        throw $exception;
+      }
+      Assert::assertSame($value, $actual, sprintf('Field "%s" should contain "%s" but contains "%s".', $field, $value, $actual));
+    }
+  }
+
+  /**
+   * @param string $field
+   * @param string $value
+   */
+  #[\Override]
+  public function assertFieldNotContains($field, $value): void
+  {
+    $field = $this->fixStepArgument($field);
+    $value = $this->fixStepArgument($value);
+
+    try {
+      $this->assertSession()->fieldValueNotEquals($field, $value);
+    } catch (ElementNotFoundException $exception) {
+      $actual = $this->getMaterialFieldValue($field);
+      if (null === $actual) {
+        throw $exception;
+      }
+      Assert::assertNotSame($value, $actual, sprintf('Field "%s" should not contain "%s".', $field, $value));
+    }
+  }
+
+  /**
+   * @param string $text
+   */
+  #[\Override]
+  public function assertPageContainsText($text): void
+  {
+    try {
+      parent::assertPageContainsText($text);
+    } catch (ResponseTextException $exception) {
+      // Validation messages on md-* fields render inside their shadow DOM (errorText),
+      // which Mink's page-text extraction cannot see.
+      if (!$this->materialFieldErrorTextsContain($this->fixStepArgument($text))) {
+        throw $exception;
+      }
+    }
+  }
+
+  /**
+   * Sets the value of a shadow-DOM md-* form field via JavaScript. Returns false if no element
+   * could be resolved for the given locator.
+   */
+  protected function setMaterialFieldValue(string $locator, string $value): bool
+  {
+    $script = sprintf(
+      'return (function() { %s var el = catrowebResolveField(%s); if (!el) { return false; }'
+      .' el.value = %s;'
+      .' el.dispatchEvent(new Event("input", {bubbles: true, composed: true}));'
+      .' el.dispatchEvent(new Event("change", {bubbles: true, composed: true}));'
+      .' return true; })();',
+      self::FIELD_RESOLVER_JS,
+      json_encode($locator, JSON_THROW_ON_ERROR),
+      json_encode($value, JSON_THROW_ON_ERROR)
+    );
+
+    return true === $this->getSession()->getDriver()->evaluateScript($script);
+  }
+
+  /**
+   * Checks whether any md-* text field currently shows the given validation message.
+   */
+  protected function materialFieldErrorTextsContain(string $text): bool
+  {
+    $script = "return Array.from(document.querySelectorAll('md-filled-text-field, md-outlined-text-field'))"
+      .".map(function(el) { return el.errorText || ''; }).join('\\n');";
+    $errors = (string) $this->getSession()->getDriver()->evaluateScript($script);
+
+    return false !== stripos($errors, $text);
+  }
+
+  /**
+   * Reads the value of a shadow-DOM md-* form field via JavaScript. Returns null if no element
+   * could be resolved for the given locator.
+   */
+  protected function getMaterialFieldValue(string $locator): ?string
+  {
+    $script = sprintf(
+      'return (function() { %s var el = catrowebResolveField(%s); return el ? String(el.value) : null; })();',
+      self::FIELD_RESOLVER_JS,
+      json_encode($locator, JSON_THROW_ON_ERROR)
+    );
+
+    $value = $this->getSession()->getDriver()->evaluateScript($script);
+
+    return null === $value ? null : (string) $value;
+  }
+
+  // --------------------------------------------------------------------------------------------------------------------
   //  Session Handling
   // --------------------------------------------------------------------------------------------------------------------
 
@@ -77,9 +253,17 @@ class BrowserContext extends MinkContext implements Context
    */
   public function theElementShouldNotBeVisible(string $locator): void
   {
-    $element = $this->getSession()->getPage()->find('css', $locator);
-    Assert::assertNotNull($element);
-    Assert::assertFalse($element->isVisible());
+    // See theElementShouldBeVisible: poll to bridge Lit's async update cycle.
+    $element = null;
+    for ($attempt = 0; $attempt < 20; ++$attempt) {
+      $element = $this->getSession()->getPage()->find('css', $locator);
+      if (null !== $element && !$element->isVisible()) {
+        return;
+      }
+      usleep(100_000);
+    }
+    Assert::assertNotNull($element, sprintf('Element "%s" not found.', $locator));
+    Assert::assertFalse($element->isVisible(), sprintf('Element "%s" should not be visible.', $locator));
   }
 
   /**
@@ -107,8 +291,9 @@ class BrowserContext extends MinkContext implements Context
   public function theElementShouldHaveType(string $locator, string $expected_type): void
   {
     $page = $this->getMink()->getSession()->getPage();
-    $type = $page->find('css', $locator)->getAttribute('type');
-    Assert::assertEquals($expected_type, $type);
+    $element = $page->find('css', $locator);
+    Assert::assertNotNull($element, sprintf('Element "%s" not found.', $locator));
+    Assert::assertEquals($expected_type, $element->getAttribute('type'));
   }
 
   /**
@@ -117,8 +302,9 @@ class BrowserContext extends MinkContext implements Context
   public function theElementShouldNotHaveType(string $element, string $expected_type): void
   {
     $page = $this->getMink()->getSession()->getPage();
-    $type = $page->find('css', $element)->getAttribute('type');
-    Assert::assertNotEquals($expected_type, $type);
+    $node = $page->find('css', $element);
+    Assert::assertNotNull($node, sprintf('Element "%s" not found.', $element));
+    Assert::assertNotEquals($expected_type, $node->getAttribute('type'));
   }
 
   /**
@@ -126,9 +312,9 @@ class BrowserContext extends MinkContext implements Context
    */
   public function theElementShouldNotBeDisabled(string $element): void
   {
-    $page = $this->getMink()->getSession()->getPage();
-    $disabled = $page->find('css', $element)->getAttribute('disabled');
-    Assert::assertEquals('', $disabled);
+    $node = $this->getMink()->getSession()->getPage()->find('css', $element);
+    Assert::assertNotNull($node, sprintf('Element "%s" not found.', $element));
+    Assert::assertFalse($node->hasAttribute('disabled'), sprintf('Element "%s" should not be disabled.', $element));
   }
 
   /**
@@ -136,9 +322,11 @@ class BrowserContext extends MinkContext implements Context
    */
   public function theElementShouldBeDisabled(string $element): void
   {
-    $page = $this->getMink()->getSession()->getPage();
-    $disabled = $page->find('css', $element)->getAttribute('disabled');
-    Assert::assertEquals('disabled', $disabled);
+    // JS-driven `el.disabled = true` reflects as an empty-string attribute (md-* elements and
+    // native inputs alike), so assert attribute presence rather than the literal "disabled".
+    $node = $this->getMink()->getSession()->getPage()->find('css', $element);
+    Assert::assertNotNull($node, sprintf('Element "%s" not found.', $element));
+    Assert::assertTrue($node->hasAttribute('disabled'), sprintf('Element "%s" should be disabled.', $element));
   }
 
   /**
@@ -146,9 +334,18 @@ class BrowserContext extends MinkContext implements Context
    */
   public function theElementShouldBeVisible(string $element): void
   {
-    $element = $this->getSession()->getPage()->find('css', $element);
-    Assert::assertNotNull($element);
-    Assert::assertTrue($element->isVisible());
+    // md-* components apply state changes in Lit's async update cycle (unlike the synchronous
+    // MDC handlers), so poll briefly instead of asserting the instant the step runs.
+    $node = null;
+    for ($attempt = 0; $attempt < 20; ++$attempt) {
+      $node = $this->getSession()->getPage()->find('css', $element);
+      if (null !== $node && $node->isVisible()) {
+        return;
+      }
+      usleep(100_000);
+    }
+    Assert::assertNotNull($node, sprintf('Element "%s" not found.', $element));
+    Assert::assertTrue($node->isVisible(), sprintf('Element "%s" is not visible.', $element));
   }
 
   /**
@@ -222,9 +419,20 @@ class BrowserContext extends MinkContext implements Context
   public function fieldValidationState(string $field, string $not): void
   {
     $field = $this->fixStepArgument($field);
-    $field = $this->getSession()->getPage()->findField($field);
+    $node = $this->getSession()->getPage()->findField($field);
 
-    $valid = $this->getSession()->getDriver()->evaluateScript('return document.evaluate("'.str_replace('"', '\"', $field->getXpath()).'", document, null, XPathResult.ANY_TYPE, null).iterateNext().checkValidity();');
+    if (null !== $node) {
+      $valid = $this->getSession()->getDriver()->evaluateScript('return document.evaluate("'.str_replace('"', '\"', $node->getXpath()).'", document, null, XPathResult.ANY_TYPE, null).iterateNext().checkValidity();');
+    } else {
+      // Shadow-DOM md-* field: the host is form-associated and implements checkValidity().
+      $script = sprintf(
+        'return (function() { %s var el = catrowebResolveField(%s); return el ? el.checkValidity() : null; })();',
+        self::FIELD_RESOLVER_JS,
+        json_encode($field, JSON_THROW_ON_ERROR)
+      );
+      $valid = $this->getSession()->getDriver()->evaluateScript($script);
+      Assert::assertNotNull($valid, sprintf('Field "%s" not found.', $field));
+    }
     if ('not' === trim($not)) {
       Assert::assertFalse($valid, 'Field needs to be invalid but was valid');
     } else {
@@ -391,16 +599,27 @@ class BrowserContext extends MinkContext implements Context
    */
   public function iChooseItemFromSelector(string $text, string $selector): void
   {
-    $this->getSession()->getPage()->find('css', $selector)->click();
+    $node = $this->getSession()->getPage()->find('css', $selector);
+    Assert::assertNotNull($node, sprintf('Selector "%s" not found.', $selector));
 
-    $selected = false;
-    $items = $this->getSession()->getPage()->findAll('css', '.mdc-list-item');
-    foreach ($items as $item) {
-      if ($item->getText() == $text) {
-        $item->click();
-        $selected = true;
-      }
-    }
+    // md-select renders its menu inside shadow DOM, but its md-select-option children live in
+    // the light DOM: pick by option label, set the host value and fire the events a user
+    // interaction would (Select.js syncs its hidden input from the change event).
+    $script = sprintf(
+      'return (function() {'
+      .' var sel = document.querySelector(%s);'
+      .' if (!sel) { return false; }'
+      .' var opt = Array.from(sel.querySelectorAll("md-select-option"))'
+      .'   .find(function(o) { return o.textContent.trim() === %s; });'
+      .' if (!opt) { return false; }'
+      .' sel.value = opt.getAttribute("value") || opt.value;'
+      .' sel.dispatchEvent(new Event("input", {bubbles: true, composed: true}));'
+      .' sel.dispatchEvent(new Event("change", {bubbles: true}));'
+      .' return true; })();',
+      json_encode($selector, JSON_THROW_ON_ERROR),
+      json_encode($text, JSON_THROW_ON_ERROR)
+    );
+    $selected = true === $this->getSession()->getDriver()->evaluateScript($script);
 
     Assert::assertTrue($selected, "Item '".$text."' for '".$selector."' has not been selected");
   }

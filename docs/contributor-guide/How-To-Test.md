@@ -5,7 +5,7 @@ This page covers practical local testing for Catroweb.
 ## Test Types
 
 - Dynamic tests: PHPUnit + Behat
-- Static analysis: Biome, Stylelint, Prettier, PHP-CS-Fixer, PhpStan, Psalm, and Symfony linters
+- Static analysis: Biome, Prettier, PHP-CS-Fixer, PhpStan, Psalm, and Symfony linters
 
 For CI implementation details, see [GitHub Actions FAQ (Workflow Automation)](<../references/GitHub-Actions-FAQ-(Workflow-Automation).md>) and `.github/workflows/`.
 

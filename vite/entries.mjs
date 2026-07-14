@@ -46,18 +46,18 @@ export const jsEntries = {
 }
 
 export const cssEntries = {
-  layout_multi_column_article: './assets/Layout/MultiColumnArticle.scss',
-  twig_bundle_error: './assets/bundles/TwigBundle/Exception/error.scss',
-  admin_system_management_db_updater_achievements: './assets/User/Achievements.scss',
+  layout_multi_column_article: './assets/Layout/MultiColumnArticle.css',
+  twig_bundle_error: './assets/bundles/TwigBundle/Exception/error.css',
+  admin_system_management_db_updater_achievements: './assets/User/Achievements.css',
 
   // Themes — selected at runtime via request_theme.
-  pocketcode: './assets/Theme/pocketcode.scss',
-  arduino: './assets/Theme/arduino.scss',
-  'create@school': './assets/Theme/create@school.scss',
-  embroidery: './assets/Theme/embroidery.scss',
-  luna: './assets/Theme/luna.scss',
-  phirocode: './assets/Theme/phirocode.scss',
-  pocketalice: './assets/Theme/pocketalice.scss',
-  pocketgalaxy: './assets/Theme/pocketgalaxy.scss',
-  mindstorms: './assets/Theme/mindstorms.scss',
+  pocketcode: './assets/Theme/pocketcode.css',
+  arduino: './assets/Theme/arduino.css',
+  'create@school': './assets/Theme/create@school.css',
+  embroidery: './assets/Theme/embroidery.css',
+  luna: './assets/Theme/luna.css',
+  phirocode: './assets/Theme/phirocode.css',
+  pocketalice: './assets/Theme/pocketalice.css',
+  pocketgalaxy: './assets/Theme/pocketgalaxy.css',
+  mindstorms: './assets/Theme/mindstorms.css',
 }

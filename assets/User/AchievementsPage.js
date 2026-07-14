@@ -5,7 +5,7 @@ import { achievementBadgeHtml } from './AchievementBadge'
 
 import '../Components/TabBar'
 
-import './Achievements.scss'
+import './Achievements.css'
 
 let baseUrl
 let popupBackgroundSvg
@@ -120,7 +120,7 @@ function renderMostRecentSection(data) {
   }
 
   const achievement = data.most_recent
-  const tabBar = document.querySelector('.mdc-tab-bar')
+  const tabBar = document.querySelector('md-tabs')
   if (!tabBar) {
     return
   }

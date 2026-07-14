@@ -99,7 +99,7 @@ async function showThemePicker(menuItem) {
               data-theme-value="${escapeAttr(option.value)}"
               role="radio"
               aria-checked="${option.value === activeTheme ? 'true' : 'false'}">
-              <span class="theme-picker__option__icon material-icons" aria-hidden="true">${option.icon}</span>
+              <span class="theme-picker__option__icon" aria-hidden="true"><span class="material-icons">${option.icon}</span></span>
               <span class="theme-picker__option__content">
                 <span class="theme-picker__option__label">${escapeHtml(option.label || '')}</span>
                 <span class="theme-picker__option__description">${escapeHtml(option.description || '')}</span>

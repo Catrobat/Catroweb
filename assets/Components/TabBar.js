@@ -1,16 +1,16 @@
-import { MDCTabBar } from '@material/tab-bar'
+import '@material/web/tabs/primary-tab.js'
+import './TabBar.css'
+import '@material/web/tabs/tabs.js'
 
-import './TabBar.scss'
+for (const tabBar of document.querySelectorAll('md-tabs')) {
+  tabBar.addEventListener('change', () => {
+    const tabs = Array.from(tabBar.querySelectorAll('md-primary-tab'))
+    const activeTab = tabs[tabBar.activeTabIndex]
+    const activePane = activeTab && document.getElementById(activeTab.getAttribute('aria-controls'))
 
-for (const el of document.querySelectorAll('.mdc-tab-bar')) {
-  const tabBar = new MDCTabBar(el)
-  const tabPaneElements = document.querySelectorAll('.tab-pane')
+    if (!activePane) return
 
-  tabBar.listen('MDCTabBar:activated', (event) => {
-    const lastActiveEl = document.querySelector('.show.active')
-    if (lastActiveEl) {
-      lastActiveEl.classList.remove('show', 'active')
-    }
-    tabPaneElements[event.detail.index].classList.add('show', 'active')
+    document.querySelector('.show.active')?.classList.remove('show', 'active')
+    activePane.classList.add('show', 'active')
   })
 }

@@ -1,0 +1,245 @@
+.mdc-top-app-bar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 5000;
+  color: var(--on-primary, #fff);
+  background-color: var(--primary-bg, var(--primary));
+}
+
+.mdc-top-app-bar__row,
+.mdc-top-app-bar__section {
+  display: flex;
+  align-items: center;
+}
+
+/* The row sits inside .body-content > .container (auto height), so it must
+   carry the bar height itself — height: 100% would collapse to content. */
+.mdc-top-app-bar__row {
+  width: 100%;
+  height: 64px;
+}
+
+.mdc-top-app-bar__section {
+  min-width: 0;
+  padding: 0;
+}
+
+.mdc-top-app-bar__section--align-start {
+  flex: 1 1 auto;
+}
+
+.mdc-top-app-bar__section--align-end {
+  flex: 0 0 auto;
+}
+
+.mdc-top-app-bar__title {
+  min-width: 0;
+  padding-left: 0.2rem;
+  overflow: hidden;
+  color: inherit;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: 0.0125em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mdc-top-app-bar a {
+  color: inherit;
+}
+
+.mdc-top-app-bar a:hover {
+  color: currentcolor;
+  text-decoration: none;
+}
+
+/* Base styles formerly provided by @material/icon-button/styles: consumers
+   outside the top bar (project-list chevrons, sign-app modal icons) rely on
+   the 48px hit area and the ::before/::after backdrop geometry, which they
+   only re-color. Declared before the __action-item rule so the top-bar
+   variant keeps winning at equal specificity. */
+.mdc-icon-button {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
+  font-size: 24px;
+  color: inherit;
+  text-decoration: none;
+  vertical-align: middle;
+  background-color: transparent;
+  border: none;
+  fill: currentcolor;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mdc-icon-button::before,
+.mdc-icon-button::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.mdc-top-app-bar__action-item,
+.mdc-top-app-bar__navigation-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  place-items: center;
+  color: inherit;
+  border: 0;
+  background: transparent;
+}
+
+/* md-icon-button defaults to the M3 on-surface-variant icon color; on the
+   primary-colored bar it must stay on-primary like every other action item. */
+.mdc-top-app-bar md-icon-button {
+  --md-icon-button-icon-color: var(--on-primary, #fff);
+  --md-icon-button-hover-icon-color: var(--on-primary, #fff);
+  --md-icon-button-focus-icon-color: var(--on-primary, #fff);
+  --md-icon-button-pressed-icon-color: var(--on-primary, #fff);
+  --md-icon-button-hover-state-layer-color: var(--on-primary, #fff);
+  --md-icon-button-pressed-state-layer-color: var(--on-primary, #fff);
+}
+
+.mdc-top-app-bar--fixed-scrolled {
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: box-shadow 200ms linear;
+}
+
+/* Hover/press feedback formerly provided by the MDC ripple state layers. */
+.mdc-top-app-bar__action-item::before,
+.mdc-top-app-bar__action-item::after,
+.mdc-top-app-bar__navigation-icon::before,
+.mdc-top-app-bar__navigation-icon::after {
+  background-color: var(--on-primary, #fff);
+}
+
+.mdc-top-app-bar__action-item:hover::before,
+.mdc-top-app-bar__navigation-icon:hover::before {
+  opacity: 0.08;
+}
+
+.mdc-top-app-bar__action-item:focus-visible::before,
+.mdc-top-app-bar__navigation-icon:focus-visible::before {
+  opacity: 0.24;
+}
+
+.mdc-top-app-bar__action-item:active::after,
+.mdc-top-app-bar__navigation-icon:active::after {
+  opacity: 0.32;
+}
+
+#top-app-bar__search-form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#top-app-bar__search-form input {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background-color: var(--primary-bg, var(--primary));
+  border: none;
+  outline: none;
+}
+
+#top-app-bar__search-form input[required]:invalid + label[placeholder][alt]::before {
+  content: attr(alt);
+}
+
+#top-app-bar__search-form input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}
+
+#top-app-bar__search-form label {
+  position: absolute;
+  top: 50%;
+  display: block;
+  color: rgb(255 255 255 / 60%);
+  font-size: 0.875rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+#sign-app-ellipsis-container {
+  top: 0;
+  right: 0;
+  display: none;
+  color: light-dark(#000, #e2e8f0);
+  border-radius: 0;
+}
+
+#sign-app-ellipsis-container ul {
+  display: block;
+  margin-block-end: 0;
+}
+
+#sign-app-ellipsis-container .top-app-bar-btn-options {
+  display: block;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+.top-app-bar__options-anchor {
+  position: relative;
+}
+
+#top-app-bar__options-menu {
+  --md-menu-container-color: light-dark(#fff, #2d2d3d);
+  --md-menu-container-shape: 4px;
+  --md-menu-item-label-text-color: light-dark(rgb(0 0 0 / 87%), rgb(255 255 255 / 87%));
+}
+
+#top-app-bar__btn-color-scheme [slot='end'] {
+  padding: 0.2rem 0.65rem;
+  color: light-dark(rgb(0 0 0 / 60%), rgb(255 255 255 / 70%));
+  font-size: 0.9rem;
+  line-height: 1.2;
+  background: light-dark(rgb(15 23 42 / 5%), rgb(255 255 255 / 6%));
+  border: 1px solid light-dark(rgb(0 0 0 / 8%), rgb(255 255 255 / 10%));
+  border-radius: 999px;
+}
+
+.page-content {
+  margin-top: 64px;
+}
+
+@media (width <= 599px) {
+  .mdc-top-app-bar__row {
+    height: 56px;
+  }
+
+  .page-content {
+    margin-top: 56px;
+  }
+}
+
+.is-webview > .mdc-top-app-bar {
+  padding-top: env(safe-area-inset-top);
+}
+
+.is-webview .page-content {
+  margin-top: calc(64px + env(safe-area-inset-top));
+}
+
+@media (width <= 599px) {
+  .is-webview .page-content {
+    margin-top: calc(56px + env(safe-area-inset-top));
+  }
+}

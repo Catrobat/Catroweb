@@ -1,4 +1,4 @@
-import './SendMail.scss'
+import './SendMail.css'
 
 function adminMail() {
   const sendBtn = document.querySelector('.btn-send')

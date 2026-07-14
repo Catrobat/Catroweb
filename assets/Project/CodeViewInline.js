@@ -1,6 +1,6 @@
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml } from '../Components/HtmlEscape'
-import './CodeViewInline.scss'
+import './CodeViewInline.css'
 
 const COLORS = {
   event: '#CF5717',

@@ -2,7 +2,7 @@ import { OAuthHandler } from '../Security/OAuthHandler'
 import { DefaultProjectLists } from './DefaultProjectLists'
 import { FeaturedBanner } from './FeaturedBanner'
 import { MaintenanceHandler } from './MaintenanceHandler'
-import './IndexPage.scss'
+import './IndexPage.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   new FeaturedBanner('featured-slider').init()

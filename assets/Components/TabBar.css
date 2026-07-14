@@ -1,0 +1,19 @@
+/* Shared look for md-tabs, matching the legacy MDC tab bar: tabs stretch
+   across the full bar width with uppercase labels on a transparent bar
+   (the page or a page-level rule provides the background). */
+md-tabs {
+  width: 100%;
+}
+
+md-primary-tab {
+  flex: 1 0 auto;
+  text-transform: uppercase;
+  white-space: nowrap;
+  --md-primary-tab-container-color: transparent;
+  --md-primary-tab-label-text-weight: 500;
+  --md-primary-tab-label-text-color: light-dark(#49454f, #cbd5e0);
+  --md-primary-tab-icon-color: light-dark(#49454f, #cbd5e0);
+  --md-primary-tab-hover-label-text-color: light-dark(#49454f, #cbd5e0);
+  --md-primary-tab-focus-label-text-color: light-dark(#49454f, #cbd5e0);
+  --md-primary-tab-pressed-label-text-color: light-dark(#49454f, #cbd5e0);
+}

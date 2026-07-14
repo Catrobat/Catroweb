@@ -1,7 +1,7 @@
 import { TranslateComments } from '../Translate/TranslateComments'
 import { ProjectComments } from './ProjectComments'
 
-import './ProjectPage.scss'
+import './ProjectPage.css'
 
 const projectComments = document.querySelector('.js-project-comments')
 

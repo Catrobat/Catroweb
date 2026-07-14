@@ -1,6 +1,6 @@
 import { ApiFetch } from '../Api/ApiHelper'
 
-import './Sidebar.scss'
+import './Sidebar.css'
 
 const sidebar = document.getElementById('sidebar')
 const sidebarJs = document.querySelector('.js-sidebar')

@@ -1,4 +1,4 @@
-import './OverviewPage.scss'
+import './OverviewPage.css'
 
 import { createPictureElement } from '../Layout/ImageVariants'
 import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'

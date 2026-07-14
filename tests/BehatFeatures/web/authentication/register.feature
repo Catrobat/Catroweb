@@ -93,15 +93,15 @@ Feature:
     Given I am on "/app/register"
     And I wait for the page to be loaded
     And I fill in "password__input" with "123456"
-    Then the element "#password__input" should have type "password"
-    And the element "#password__input" should not have type "text"
+    Then the element "#password" should have type "password"
+    And the element "#password" should not have type "text"
 
   Scenario: The visibility of the password should be changeable via a button
     Given I am on "/app/register"
     And I wait for the page to be loaded
     When I click ".password-toggle"
-    Then the element "#password__input" should have type "text"
-    And the element "#password__input" should not have type "password"
+    Then the element "#password" should have type "text"
+    And the element "#password" should not have type "password"
     When I click ".password-toggle"
-    Then the element "#password__input" should have type "password"
-    And the element "#password__input" should not have type "text"
+    Then the element "#password" should have type "password"
+    And the element "#password" should not have type "text"

@@ -1,6 +1,6 @@
 import { ApiFetch } from '../Api/ApiHelper'
 import { escapeHtml } from '../Components/HtmlEscape'
-import './CodeStatisticsInline.scss'
+import './CodeStatisticsInline.css'
 import pandaSvgUrl from './animations/panda.svg'
 import penguinSvgUrl from './animations/penguin.svg'
 

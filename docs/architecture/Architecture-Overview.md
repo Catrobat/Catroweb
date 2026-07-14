@@ -5,7 +5,7 @@ This page gives a practical map of the Catroweb codebase for contributors.
 ## High-Level Stack
 
 - Backend: PHP + Symfony
-- Frontend assets: Vite + Sass + JavaScript (via `pentatrion/vite-bundle`)
+- Frontend assets: Vite + CSS + JavaScript (via `pentatrion/vite-bundle`)
 - Database: MariaDB
 - Search: Elasticsearch
 - Test stack: PHPUnit + Behat (+ headless Chrome for UI flows)
@@ -15,7 +15,7 @@ This page gives a practical map of the Catroweb codebase for contributors.
 - `src/`: application source code
 - `config/`: Symfony configuration
 - `templates/`: Twig templates
-- `assets/`: frontend source files (SCSS/JS/images)
+- `assets/`: frontend source files (CSS/JS/images)
 - `public/`: web root (compiled assets are generated under `public/build/`)
 - `tests/`: PHPUnit and Behat test suites
 - `docker/`: Docker dev/test environment
@@ -63,7 +63,7 @@ This page gives a practical map of the Catroweb codebase for contributors.
 
 ## Quality Gates (CI)
 
-- Static analysis: Biome, Stylelint, Prettier, PHP-CS-Fixer, PhpStan, Psalm, Twig/YAML/Container lints
+- Static analysis: Biome, Prettier, PHP-CS-Fixer, PhpStan, Psalm, Twig/YAML/Container lints
 - Dynamic analysis: PHPUnit + Behat suites in Docker-based jobs
 
 See `.github/workflows/` for the latest exact CI implementation.

@@ -1,0 +1,268 @@
+.remix-graph-inline {
+  margin: 1.5rem 0;
+}
+
+.remix-graph-panel {
+  padding: 1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(245, 250, 255, 0.92)),
+    radial-gradient(circle at top right, rgba(0, 172, 193, 0.14), transparent 45%);
+  border: 3px dashed var(--primary);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  animation: remix-graph-slide-down 0.35s ease-out;
+}
+
+.remix-graph-status {
+  min-height: 8rem;
+}
+
+.remix-graph-loading,
+.remix-graph-error,
+.remix-graph-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 8rem;
+  padding: 1rem;
+  color: light-dark(#213547, #eef7ff);
+  font-weight: 600;
+  text-align: center;
+}
+
+.remix-graph-loading-spinner {
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 3px solid
+    hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.22);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: remix-graph-spin 0.75s linear infinite;
+}
+
+.remix-graph-error {
+  color: #b85c00;
+}
+.remix-graph-error .material-icons {
+  color: #d97706;
+}
+
+.remix-graph-toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+@media (width <= 767px) {
+  .remix-graph-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.remix-graph-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.remix-graph-badge {
+  min-width: 7rem;
+  padding: 0.65rem 0.85rem;
+  background: light-dark(rgba(255, 255, 255, 0.92), rgba(24, 35, 45, 0.92));
+  border: 1px solid
+    hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.18);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+}
+
+.remix-graph-badge__label {
+  display: block;
+  margin-bottom: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: light-dark(rgba(31, 41, 55, 0.7), rgba(226, 232, 240, 0.7));
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.remix-graph-badge__value {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--primary);
+}
+
+.remix-graph-controls {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+.remix-graph-controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--primary);
+  cursor: pointer;
+  background: light-dark(rgba(255, 255, 255, 0.88), rgba(18, 27, 35, 0.88));
+  border: 1px solid
+    hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.2);
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(17, 24, 39, 0.08);
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease;
+}
+.remix-graph-controls button:hover {
+  background: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.08);
+  transform: translateY(-1px);
+}
+.remix-graph-controls button:active {
+  transform: translateY(0);
+}
+@media (width <= 767px) {
+  .remix-graph-controls {
+    justify-content: center;
+  }
+}
+
+.remix-graph-hint {
+  margin-bottom: 1rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: light-dark(rgba(31, 41, 55, 0.78), rgba(226, 232, 240, 0.78));
+}
+
+.remix-graph-network {
+  position: relative;
+  height: min(70vh, 42rem);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.95), rgb(235, 244, 250)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(231, 244, 255, 0.92));
+  border: 1px solid
+    hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.14);
+  border-radius: 20px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 20px 50px rgba(15, 23, 42, 0.1);
+}
+.remix-graph-network canvas {
+  cursor: grab;
+}
+@media (width <= 767px) {
+  .remix-graph-network {
+    height: 26rem;
+  }
+}
+
+.remix-graph-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+}
+
+.remix-graph-menu {
+  position: fixed;
+  z-index: 2001;
+  width: min(20rem, 100vw - 1.5rem);
+}
+
+.remix-graph-menu__surface {
+  overflow: hidden;
+  background: light-dark(rgba(255, 255, 255, 0.98), rgba(20, 28, 35, 0.98));
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.28);
+}
+
+.remix-graph-menu__header {
+  padding: 1rem 1rem 0.85rem;
+  background: linear-gradient(
+    180deg,
+    hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.11),
+    rgba(255, 255, 255, 0)
+  );
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.remix-graph-menu__title {
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 700;
+  color: light-dark(#111827, #f8fafc);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remix-graph-menu__subtitle {
+  overflow: hidden;
+  margin-top: 0.2rem;
+  font-size: 0.86rem;
+  color: light-dark(rgba(17, 24, 39, 0.65), rgba(226, 232, 240, 0.7));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.remix-graph-menu__actions {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.55rem;
+}
+
+.remix-graph-menu__action {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.85rem 0.9rem;
+  font-weight: 600;
+  color: light-dark(#1f2937, #f8fafc);
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+.remix-graph-menu__action:hover {
+  background: hsla(var(--color-primary-h), var(--color-primary-s), var(--color-primary-l), 0.08);
+  transform: translateX(1px);
+}
+.remix-graph-menu__action .material-icons {
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+@media (width <= 767px) {
+  .remix-graph-menu {
+    right: 0.75rem !important;
+    bottom: 0.75rem;
+    left: 0.75rem !important;
+    width: auto;
+    top: auto !important;
+  }
+}
+@keyframes remix-graph-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes remix-graph-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

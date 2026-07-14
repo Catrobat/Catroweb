@@ -46,7 +46,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I wait for the page to be loaded
     Then I should not see "Profile"
     And I should be on "/app/login"
-    And I should see 1 "#password__input"
+    And I should see 1 "#password"
 
   Scenario: Logout button should be visible in webview
     Given I use a valid JWT token for "WebViewUser"

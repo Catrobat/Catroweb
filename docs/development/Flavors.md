@@ -24,10 +24,10 @@ This allows us to easily add theme specific content.
 ### Theme Style
 
 For every theme, there must be a settings file at
-`assets/css/themes/<theme_name>/_theme_settings.scss`.
+`assets/Theme/<theme_name>.css`.
 In this file, variables for colors, sizes, and spacing can be overridden.
 
-Styles are compiled via Vite (`yarn dev`, `yarn watch`, `yarn build`), so ensure the theme styles are included in the relevant SCSS entry files.
+Styles are compiled via Vite (`yarn dev`, `yarn watch`, `yarn build`), so ensure the theme styles are included in the relevant CSS entry files (`vite/entries.mjs`).
 
 ### Admin
 

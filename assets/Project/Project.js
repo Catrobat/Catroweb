@@ -1,5 +1,8 @@
 import { Modal, Tab } from 'bootstrap'
 import { ApiDeleteFetch, ApiFetch } from '../Api/ApiHelper'
+import '@material/web/iconbutton/icon-button.js'
+import '@material/web/menu/menu-item.js'
+import '@material/web/menu/menu.js'
 import ProjectApi from '../Api/ProjectApi'
 import { redirect } from '../Components/RedirectButton'
 import { SnackbarDuration, showSnackbar } from '../Layout/Snackbar'
@@ -686,21 +689,9 @@ export const Project = (config) => {
 // -------------------------- Sign App UI
 //
 
-document.addEventListener('click', (e) => {
-  const ellipsisContainer = document.getElementById('sign-app-ellipsis-container')
-  const ellipsis = document.getElementById('sign-app-ellipsis')
-
-  if (
-    ellipsisContainer &&
-    !(ellipsisContainer.contains(e.target) || ellipsis?.contains(e.target))
-  ) {
-    ellipsisContainer.style.display = 'none'
-  }
-})
-
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('sign-app-ellipsis')?.addEventListener('click', () => {
-    document.getElementById('sign-app-ellipsis-container').style.display = 'block'
+    document.getElementById('sign-app-ellipsis-container').open = true
   })
 
   document.getElementById('toggle_ads')?.addEventListener('click', () => {
@@ -790,8 +781,8 @@ async function confirmAndUpdate(item, confirmText, payload, onSuccess) {
 }
 
 function updateMenuItemUI(item, iconName, textContent) {
-  const icon = item.querySelector('.mdc-deprecated-list-item__graphic')
-  const text = item.querySelector('.mdc-deprecated-list-item__text')
+  const icon = item.querySelector('[slot="start"]')
+  const text = item.querySelector('[slot="headline"]')
   if (icon) icon.textContent = iconName
   if (text) text.textContent = textContent
 }

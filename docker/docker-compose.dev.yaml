@@ -90,7 +90,6 @@ services:
       - ./../symfony.lock:/var/www/catroweb/symfony.lock
       - ./../vite.config.mjs:/var/www/catroweb/vite.config.mjs
       - ./../vite:/var/www/catroweb/vite
-      - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
       # sharing package files on windows might not work as expected
       - ./../package.json:/var/www/catroweb/package.json
       - ./../yarn.lock:/var/www/catroweb/yarn.lock

@@ -56,7 +56,7 @@ docker exec -it app.catroweb bin/phpunit tests
 - [Behat docs](http://behat.org/en/latest/)
 - [Composer docs](https://getcomposer.org/)
 - [Packagist](https://packagist.org/)
-- [Sass docs](https://sass-lang.com/)
+- [CSS nesting](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting)
 - [Vite docs](https://vite.dev/)
 - [pentatrion/vite-bundle docs](https://github.com/lhapaipai/vite-bundle)
 - Project-specific Vite notes: [Using Vite (material components)](<../development/Using-Vite-(material-components).md>)

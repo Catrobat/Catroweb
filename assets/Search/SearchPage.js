@@ -1,7 +1,7 @@
 import { escapeAttr, escapeHtml } from '../Components/HtmlEscape'
 import { createPictureElement } from '../Layout/ImageVariants'
 import { controlTopBarSearchClearButton, showTopBarSearch } from '../Layout/TopBar'
-import './Search.scss'
+import './Search.css'
 
 const RESULTS_PER_PAGE = 30
 

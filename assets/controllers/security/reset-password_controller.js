@@ -36,7 +36,7 @@ export default class extends AjaxController {
    */
   async requestPasswordResetEmail() {
     const data = {
-      email: document.getElementById('email__input').value,
+      email: document.getElementById('email').value,
       captcha_token: this.captchaWidget?.getToken() ?? '',
     }
     const response = await this.fetchPost(this.apiPathValue, data)

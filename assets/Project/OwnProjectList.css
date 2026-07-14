@@ -1,0 +1,264 @@
+.retention-info-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.retention-info-icon {
+  font-size: 13px !important;
+  color: light-dark(#6c757d, #a0aec0);
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.retention-info-wrap:hover .retention-info-icon,
+.retention-info-wrap:focus-within .retention-info-icon {
+  opacity: 1;
+  color: light-dark(#495057, #cbd5e0);
+}
+
+.retention-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  width: max-content;
+  max-width: min(250px, 100vw - 2rem);
+  padding: 0.65rem 0.85rem;
+  background: light-dark(#fff, #1e1e30);
+  border-radius: 10px;
+  box-shadow:
+    0 4px 20px light-dark(rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.45)),
+    0 0 0 1px light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.08));
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: light-dark(#444, #ddd);
+  z-index: 1080;
+  pointer-events: none;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+.retention-tooltip.align-right {
+  left: auto;
+  right: 0;
+}
+.retention-info-wrap:hover .retention-tooltip,
+.retention-info-wrap:focus-within .retention-tooltip {
+  display: block;
+}
+
+.own-project-list {
+  display: flex;
+  flex-direction: column;
+}
+.own-project-list .projects-spinner-container {
+  display: none;
+}
+.own-project-list.loading .own-project-list__wrapper {
+  display: none;
+}
+.own-project-list.loading .projects-spinner-container {
+  display: flex;
+  justify-content: center;
+}
+.own-project-list.empty {
+  display: none;
+}
+.own-project-list.empty-with-text {
+  justify-content: center;
+  text-align: center;
+}
+.own-project-list__project {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.own-project-list__project:hover {
+  text-decoration: none;
+}
+.own-project-list__project:hover .project-list__project__image {
+  box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.35);
+}
+.own-project-list__project__image {
+  flex: 0 0 6rem;
+  width: 6rem;
+  height: auto;
+  border-radius: 10%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.15);
+}
+@media (min-width: 576px) {
+  .own-project-list__project__image {
+    width: 8rem;
+  }
+}
+@media (min-width: 1400px) {
+  .own-project-list__project__image {
+    width: 10rem;
+  }
+}
+.own-project-list__project__details {
+  flex: 1 1 auto;
+  margin: 0 1rem;
+  color: var(--bs-body-color);
+}
+.own-project-list__project__details__name {
+  font-size: 1.2rem;
+  padding-bottom: 0.4rem;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+.own-project-list__project__details__properties {
+  display: grid;
+  grid-template: '. .' max-content '. .' max-content / max-content max-content;
+  gap: 0.25rem;
+  padding-bottom: 0.4rem;
+}
+.own-project-list__project__details__properties__property {
+  display: inline-flex;
+  align-items: center;
+  min-width: 5rem;
+}
+.own-project-list__project__details__properties__property__value {
+  padding-left: 0.25rem;
+}
+.own-project-list__project__details__visibility {
+  color: var(--bs-secondary-color);
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  display: flex;
+  flex-direction: row;
+}
+.own-project-list__project__details__visibility__icon {
+  font-size: 1.5em;
+}
+.own-project-list__project__details__visibility__text {
+  margin-top: 1px;
+  margin-left: 2px;
+  letter-spacing: 0.5px;
+}
+.own-project-list__project__details__retention {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  color: var(--bs-secondary-color);
+  margin-top: 0.2rem;
+}
+.own-project-list__project__details__retention > .material-icons {
+  font-size: 0.85rem;
+}
+.own-project-list__project__details__retention .retention-info-icon {
+  font-size: 12px !important;
+}
+.own-project-list__project__details__retention--protected {
+  color: light-dark(#2e7d32, #66bb6a);
+}
+.own-project-list__project__details__retention--protected .material-icons {
+  color: light-dark(#2e7d32, #66bb6a);
+}
+.own-project-list__project__details__retention--warning {
+  color: light-dark(#e65100, #ff9800);
+}
+.own-project-list__project__details__retention--warning .material-icons {
+  color: light-dark(#e65100, #ff9800);
+}
+.own-project-list__project__details__retention--critical {
+  color: light-dark(#c62828, #ef5350);
+}
+.own-project-list__project__details__retention--critical .material-icons {
+  color: light-dark(#c62828, #ef5350);
+}
+.own-project-list__project__action {
+  flex: 0 0 auto;
+}
+.own-project-list__project__property {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--bs-secondary-color);
+}
+.own-project-list__project__property .material-icons {
+  font-size: 1.25rem;
+}
+.own-project-list__project__property__value {
+  padding-left: 0.3rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.projects-list-item--actions {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.projects-list-item--menu-btn {
+  padding: 0.25rem;
+  border: none;
+  background: none;
+  color: light-dark(#6c757d, #a0aec0);
+  cursor: pointer;
+  border-radius: 50%;
+}
+.projects-list-item--menu-btn:hover {
+  background: light-dark(#f0f0f0, #3a3a4a);
+}
+.projects-list-item--menu-btn .material-icons {
+  font-size: 1.25rem;
+}
+
+.projects-list-item--dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 50;
+  min-width: 200px;
+  background: light-dark(#fff, #2d2d3d);
+  border: 1px solid light-dark(#dee2e6, #3a3a4a);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.projects-list-item--dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: none;
+  color: light-dark(#212529, #e2e8f0);
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: left;
+}
+.projects-list-item--dropdown-item .material-icons {
+  font-size: 1.1rem;
+  color: light-dark(#6c757d, #a0aec0);
+}
+.projects-list-item--dropdown-item:hover {
+  background: light-dark(#f8f9fa, #3a3a4a);
+  text-decoration: none;
+  color: light-dark(#212529, #e2e8f0);
+}
+.projects-list-item--dropdown-item.text-danger {
+  color: #dc3545;
+}
+.projects-list-item--dropdown-item.text-danger .material-icons {
+  color: #dc3545;
+}
+
+.projects-list-item--dropdown-divider {
+  height: 1px;
+  margin: 0.25rem 0;
+  background: light-dark(#dee2e6, #3a3a4a);
+}

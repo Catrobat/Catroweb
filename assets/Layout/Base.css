@@ -1,0 +1,26 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+
+@import './Variables.css';
+@import './BootstrapOverwrite.css';
+@import './Button.css';
+@import './Typography.css';
+@import './Swal.css';
+@import './ProgressBar.css';
+@import './LegacyBase.css';
+@import './CookieConsent.css';
+@import './Noscript.css';
+
+.skip-to-content {
+  position: absolute;
+  left: -9999px;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background: #000;
+  text-decoration: none;
+}
+
+.skip-to-content:focus {
+  top: 0;
+  left: 0;
+}

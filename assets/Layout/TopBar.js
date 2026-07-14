@@ -1,9 +1,11 @@
-import { MDCMenu } from '@material/menu'
 import { MDCTopAppBar } from '@material/top-app-bar'
+import '@material/web/divider/divider.js'
+import '@material/web/iconbutton/icon-button.js'
+import '@material/web/menu/menu-item.js'
+import '@material/web/menu/menu.js'
 import { showSnackbar } from './Snackbar'
 
-import './TopBar.scss'
-import '../Components/MdcMenu.scss'
+import './TopBar.css'
 
 const topAppBarElement = document.querySelector('.mdc-top-app-bar')
 const mdcObject = topAppBarElement ? new MDCTopAppBar(topAppBarElement) : null
@@ -26,7 +28,20 @@ const searchForm = document.querySelector('#top-app-bar__search-form')
 
 const optionsButton = document.querySelector('#top-app-bar__btn-options')
 const optionsMenuEl = document.querySelector('#top-app-bar__options-menu')
-const optionsMenu = optionsMenuEl ? new MDCMenu(optionsMenuEl) : null
+const optionsMenu = optionsMenuEl
+
+// Menu items that open Bootstrap modals (data-bs-toggle) steal focus while
+// md-menu is mid-close, leaving it stuck at open=true with its light-dismiss
+// listeners swallowing the next click. Force the close on item selection.
+optionsMenuEl?.addEventListener('click', (event) => {
+  if (event.target.closest('md-menu-item')) {
+    // Defer so document-level handlers (Bootstrap's data-bs-toggle) still
+    // see the click before the menu closes.
+    window.setTimeout(() => {
+      optionsMenuEl.open = false
+    }, 0)
+  }
+})
 
 const defaultAppBarHref = title.getAttribute('href')
 const defaultTitle = title.innerHTML
@@ -70,27 +85,6 @@ searchForm?.addEventListener('submit', (event) => {
 optionsButton?.addEventListener('click', () => {
   showTopBarOptions()
 })
-
-// In Android WebView, MDC's touch/ripple handling can swallow native click events
-// on menu <li> items. Listen for MDCMenu:selected (MDC's own reliable event) and
-// re-dispatch a synthetic click so that handlers attached by other modules always fire.
-// A short dedup window prevents double-firing on desktop where both events occur.
-if (optionsMenu) {
-  const recentlyClicked = new WeakSet()
-  optionsMenuEl.addEventListener('click', (event) => {
-    const item = event.target.closest('.mdc-deprecated-list-item')
-    if (item) {
-      recentlyClicked.add(item)
-      setTimeout(() => recentlyClicked.delete(item), 300)
-    }
-  })
-  optionsMenu.listen('MDCMenu:selected', (event) => {
-    const item = event.detail?.item
-    if (item && !recentlyClicked.has(item)) {
-      item.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
-    }
-  })
-}
 
 export function showTopBarDownload() {
   hideTopBars()

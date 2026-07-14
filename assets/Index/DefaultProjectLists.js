@@ -1,5 +1,5 @@
 import { ProjectList } from '../Project/ProjectList'
-import '../Project/ProjectList.scss'
+import '../Project/ProjectList.css'
 
 export class DefaultProjectLists {
   constructor(elementId) {
