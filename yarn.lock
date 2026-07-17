@@ -1191,7 +1191,7 @@ __metadata:
     external-svg-loader: "npm:^1.7.1"
     lazysizes: "npm:^5.3.2"
     material-icons: "npm:^1.13.14"
-    postcss: "npm:^8.5.18"
+    postcss: "npm:^8.5.19"
     prettier: "npm:^3.9.5"
     purgecss: "npm:^8.0.0"
     sweetalert2: "npm:^11.26.25"
@@ -2534,14 +2534,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.5.18":
-  version: 8.5.18
-  resolution: "postcss@npm:8.5.18"
+"postcss@npm:^8.5.19":
+  version: 8.5.19
+  resolution: "postcss@npm:8.5.19"
   dependencies:
     nanoid: "npm:^3.3.12"
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
-  checksum: 10c0/6fbab24a457ca5b90d423c333d0bab13e6646fda646e83235eed892f9e4f2dc6c50689ddc5ac1632fc085be2e096d2e8e03779ac092de6353e1cfcbbc3681685
+  checksum: 10c0/302af9e4dfa8cce4f43af1798576b3a77ab7b23abac5522328c6c7a830d49b31281cba9d6071e478e6970a05ef82346d1570b8fbffae912f26a4f1a1a07f0a44
   languageName: node
   linkType: hard
 

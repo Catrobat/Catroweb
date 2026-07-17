@@ -47,7 +47,7 @@
     "autoprefixer": "^10.5.2",
     "browserslist": "^4.28.6",
     "dotenv": "^17.4.2",
-    "postcss": "^8.5.18",
+    "postcss": "^8.5.19",
     "prettier": "^3.9.5",
     "purgecss": "^8.0.0",
     "vite": "^8",
