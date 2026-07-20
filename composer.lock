@@ -5112,16 +5112,16 @@
         },
         {
             "name": "presta/sitemap-bundle",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prestaconcept/PrestaSitemapBundle.git",
-                "reference": "2fc8845e5cc0dfa2911615eb3aec1d4a1bd95eff"
+                "reference": "d59e8716a5d26098022cb2ccb8ad6892885d7134"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prestaconcept/PrestaSitemapBundle/zipball/2fc8845e5cc0dfa2911615eb3aec1d4a1bd95eff",
-                "reference": "2fc8845e5cc0dfa2911615eb3aec1d4a1bd95eff",
+                "url": "https://api.github.com/repos/prestaconcept/PrestaSitemapBundle/zipball/d59e8716a5d26098022cb2ccb8ad6892885d7134",
+                "reference": "d59e8716a5d26098022cb2ccb8ad6892885d7134",
                 "shasum": ""
             },
             "require": {
@@ -5132,7 +5132,7 @@
             },
             "require-dev": {
                 "doctrine/annotations": "^1.0",
-                "phpstan/phpstan": "^1.12",
+                "phpstan/phpstan": "^2.2",
                 "phpunit/phpunit": "^10.0",
                 "squizlabs/php_codesniffer": "^3.5",
                 "symfony/browser-kit": "^6.4|^7.0|^8.0",
@@ -5174,9 +5174,9 @@
             ],
             "support": {
                 "issues": "https://github.com/prestaconcept/PrestaSitemapBundle/issues",
-                "source": "https://github.com/prestaconcept/PrestaSitemapBundle/tree/v4.3.0"
+                "source": "https://github.com/prestaconcept/PrestaSitemapBundle/tree/v4.3.1"
             },
-            "time": "2025-12-16T16:40:00+00:00"
+            "time": "2026-07-15T12:26:35+00:00"
         },
         {
             "name": "psr/cache",
