@@ -44,7 +44,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@openapitools/openapi-generator-cli": "^2.39.1",
     "auto-changelog": "^2.6.0",
-    "autoprefixer": "^10.5.2",
+    "autoprefixer": "^10.5.4",
     "browserslist": "^4.28.6",
     "dotenv": "^17.4.2",
     "postcss": "^8.5.18",
