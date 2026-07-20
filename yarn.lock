@@ -189,12 +189,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bugsnag/browser@npm:^8.9.0":
-  version: 8.9.0
-  resolution: "@bugsnag/browser@npm:8.9.0"
+"@bugsnag/browser@npm:^8.10.0":
+  version: 8.10.0
+  resolution: "@bugsnag/browser@npm:8.10.0"
   dependencies:
     "@bugsnag/core": "npm:^8.9.0"
-  checksum: 10c0/9f89a6faaedd0f7971448aa1bde906515634a5347cbd7066b0abaa02228519a585cf36ceae7feae280e8c112ac1f60e00b16f605cfc2f8808377904e597edfa3
+  checksum: 10c0/688c4bc361528fcbbb01ef7d91b7a7d92ba1001b8418b5112b1205056dcbb3faaca46b221e789ae13b08f0d0317ac2ef5f28cd2783cfb63d7ae61929d7aacc79
   languageName: node
   linkType: hard
 
@@ -236,19 +236,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bugsnag/js@npm:^8.9.0":
-  version: 8.9.0
-  resolution: "@bugsnag/js@npm:8.9.0"
+"@bugsnag/js@npm:^8.10.0":
+  version: 8.10.0
+  resolution: "@bugsnag/js@npm:8.10.0"
   dependencies:
-    "@bugsnag/browser": "npm:^8.9.0"
-    "@bugsnag/node": "npm:^8.9.0"
-  checksum: 10c0/84b66cf4ce0cdb3f3fcfa4670be8edef79a414789229a43a54e6a928df9971cd581d8722f98bc3e2e5d3eab45e1542a39517b8d5337f10754dcf42238b136abe
+    "@bugsnag/browser": "npm:^8.10.0"
+    "@bugsnag/node": "npm:^8.10.0"
+  checksum: 10c0/f091ee5d8ae924462b5a6dd822abb2fb7bc84db9c0468d0526c54f5c5c48a0641cfd6d7058ddd32abb4965afd395f75e7548c8051af066fb1e3e22c8307b5bd9
   languageName: node
   linkType: hard
 
-"@bugsnag/node@npm:^8.9.0":
-  version: 8.9.0
-  resolution: "@bugsnag/node@npm:8.9.0"
+"@bugsnag/node@npm:^8.10.0":
+  version: 8.10.0
+  resolution: "@bugsnag/node@npm:8.10.0"
   dependencies:
     "@bugsnag/core": "npm:^8.9.0"
     byline: "npm:^5.0.0"
@@ -256,7 +256,7 @@ __metadata:
     iserror: "npm:^0.0.2"
     pump: "npm:^3.0.0"
     stack-generator: "npm:^2.0.3"
-  checksum: 10c0/f0366c2693d5122da814bb5ae0dbef72793d8040799c0d22aaabb6111696556271518febd0707d3741ab9200b22c2b485cd5f02de2b0bcb059d1e8c329d1e402
+  checksum: 10c0/ce5f0ecc38e286f2418b29e052e3214e0ff4d34593954861ac1fd79c482b824feda3271f913a45612132e85fe99314f30f75b4673d4844bbd0a21a254a5e81eb
   languageName: node
   linkType: hard
 
@@ -1173,7 +1173,7 @@ __metadata:
     "@analytics/google-tag-manager": "npm:^0.6.0"
     "@biomejs/biome": "npm:2.5.3"
     "@bugsnag/browser-performance": "npm:^3.4.1"
-    "@bugsnag/js": "npm:^8.9.0"
+    "@bugsnag/js": "npm:^8.10.0"
     "@cap.js/widget": "npm:^0.1.56"
     "@fontsource/roboto": "npm:^5.2.10"
     "@hotwired/stimulus": "npm:^3.2.2"
