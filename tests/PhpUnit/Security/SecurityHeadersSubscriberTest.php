@@ -38,6 +38,48 @@ class SecurityHeadersSubscriberTest extends TestCase
     $this->assertNotNull($response->headers->get('Content-Security-Policy'));
   }
 
+  public function testCaptchaCspOmittedWhenDisabled(): void
+  {
+    $subscriber = new SecurityHeadersSubscriber('prod', false, 'https://cap.example.org');
+    $event = $this->createResponseEvent(HttpKernelInterface::MAIN_REQUEST);
+
+    $subscriber->onKernelResponse($event);
+
+    $csp = (string) $event->getResponse()->headers->get('Content-Security-Policy');
+    $this->assertStringNotContainsString('cap.example.org', $csp);
+    $this->assertStringNotContainsString('cdn.jsdelivr.net', $csp);
+    $this->assertStringNotContainsString('blob:', $csp);
+    $this->assertStringContainsString("worker-src 'self'", $csp);
+  }
+
+  public function testCaptchaCspWhitelistsWidgetSourcesWhenEnabled(): void
+  {
+    $subscriber = new SecurityHeadersSubscriber('prod', true, 'https://cap.catrob.at');
+    $event = $this->createResponseEvent(HttpKernelInterface::MAIN_REQUEST);
+
+    $subscriber->onKernelResponse($event);
+
+    $csp = (string) $event->getResponse()->headers->get('Content-Security-Policy');
+    // Backend origin is derived from the configured public URL, so connect-src
+    // always matches the widget's actual endpoint.
+    $this->assertStringContainsString('connect-src ', $csp);
+    $this->assertStringContainsString('https://cap.catrob.at', $csp);
+    // WASM solver CDN and the blob: worker the widget spawns.
+    $this->assertStringContainsString('https://cdn.jsdelivr.net', $csp);
+    $this->assertStringContainsString("worker-src 'self' blob:", $csp);
+  }
+
+  public function testCaptchaOriginPreservesPort(): void
+  {
+    $subscriber = new SecurityHeadersSubscriber('dev', true, 'http://localhost:3000');
+    $event = $this->createResponseEvent(HttpKernelInterface::MAIN_REQUEST);
+
+    $subscriber->onKernelResponse($event);
+
+    $csp = (string) $event->getResponse()->headers->get('Content-Security-Policy');
+    $this->assertStringContainsString('http://localhost:3000', $csp);
+  }
+
   public function testSkipsSubRequests(): void
   {
     $subscriber = new SecurityHeadersSubscriber('prod');
