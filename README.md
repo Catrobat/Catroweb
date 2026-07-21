@@ -24,7 +24,7 @@ Public production services that make up the Catroweb platform:
 | ---------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | Sharing platform | [share.catrobat.org](https://share.catrobat.org)                            | Main app — browse, upload and remix projects                       |
 | API docs         | [developer.catrobat.org/Catroweb](https://developer.catrobat.org/Catroweb/) | OpenAPI reference for the public HTTP API                          |
-| CAPTCHA          | [cap.catrob.at](https://cap.catrob.at)                                      | Self-hosted CAPTCHA challenge endpoint used by forms               |
+| CAPTCHA          | [cap.catrobat.org](https://cap.catrobat.org)                                      | Self-hosted CAPTCHA challenge endpoint used by forms               |
 | Dependency Track | [deptrack.catrobat.org](https://deptrack.catrobat.org)                      | OWASP Dependency-Track — SBOMs from CI land here for vuln tracking |
 
 Live service health is on the [Better Stack status page](https://uptime.betterstack.com/?utm_source=status_badge) (also linked via the badge at the top).
