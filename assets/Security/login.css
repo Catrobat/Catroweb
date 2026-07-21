@@ -63,3 +63,17 @@
   font-size: 3rem;
   color: var(--primary);
 }
+
+/* The Cap captcha (<cap-widget>) is a third-party web component whose stock
+   palette is light-only (background #fdfdfd, text #212121), so it renders as a
+   bright box with poor contrast on the dark form card. Theme its exposed
+   --cap-* custom properties with light-dark() so it follows the color scheme. */
+cap-widget {
+  --cap-background: light-dark(#fdfdfd, #38384a);
+  --cap-color: light-dark(#212121, #e2e8f0);
+  --cap-border-color: light-dark(#dddddd8f, rgb(255 255 255 / 24%));
+  --cap-checkbox-background: light-dark(#fafafa91, rgb(255 255 255 / 8%));
+  --cap-checkbox-border: 1px solid light-dark(#aaaaaad1, rgb(255 255 255 / 40%));
+  --cap-spinner-background-color: light-dark(#eee, #555);
+  --cap-spinner-color: light-dark(#000, #e2e8f0);
+}
