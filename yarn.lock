@@ -392,7 +392,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lit/reactive-element@npm:^2.1.0":
+"@lit/context@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "@lit/context@npm:1.1.6"
+  dependencies:
+    "@lit/reactive-element": "npm:^1.6.2 || ^2.1.0"
+  checksum: 10c0/203f761eda19c8b37d77f01d9a0148535c5b28c47b76e28b321cb6e5ed0546c45332512e68b1647ce92ca67690d8c66de31972ec115410b080d69fa25a5d86f3
+  languageName: node
+  linkType: hard
+
+"@lit/reactive-element@npm:^1.6.2 || ^2.1.0, @lit/reactive-element@npm:^2.1.0":
   version: 2.1.2
   resolution: "@lit/reactive-element@npm:2.1.2"
   dependencies:
@@ -534,13 +543,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@material/web@npm:^2.4.1":
-  version: 2.4.1
-  resolution: "@material/web@npm:2.4.1"
+"@material/web@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "@material/web@npm:2.5.0"
   dependencies:
+    "@lit/context": "npm:^1.1.6"
     lit: "npm:^2.8.0 || ^3.0.0"
     tslib: "npm:^2.4.0"
-  checksum: 10c0/d555bd50782218612d4a3a3ead50c5da7dc3913eacf75fe20853648e711c92d7b147b838b3ce5bd46ef839cd0909d65ce57a4690cbfd7ee9ae5a2a0b814c99ca
+  checksum: 10c0/7272c615c7e325dba7c35f93cba1e7c54b11391dfb960ba926f17801c9eaa30aa1cfa1ec2e931e7a4b4c95e28bae23ac22ab0827aa332052029904b644875d76
   languageName: node
   linkType: hard
 
@@ -1154,7 +1164,7 @@ __metadata:
     "@fontsource/roboto": "npm:^5.2.10"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@material/top-app-bar": "npm:^14.0.0"
-    "@material/web": "npm:^2.4.1"
+    "@material/web": "npm:^2.5.0"
     "@openapitools/openapi-generator-cli": "npm:^2.39.1"
     "@popperjs/core": "npm:^2.11.8"
     analytics: "npm:^0.8.19"
