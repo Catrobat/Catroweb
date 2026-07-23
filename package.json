@@ -60,7 +60,7 @@
     "@cap.js/widget": "^0.1.56",
     "@fontsource/roboto": "^5.2.10",
     "@material/top-app-bar": "^14.0.0",
-    "@material/web": "^2.4.1",
+    "@material/web": "^2.5.0",
     "@popperjs/core": "^2.11.8",
     "analytics": "^0.8.19",
     "bootstrap": "^5.3.8",
