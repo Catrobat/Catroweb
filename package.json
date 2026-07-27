@@ -58,7 +58,7 @@
     "@bugsnag/browser-performance": "^3.4.1",
     "@bugsnag/js": "^8.10.0",
     "@cap.js/widget": "^0.1.56",
-    "@fontsource/roboto": "^5.2.10",
+    "@fontsource/roboto": "^5.3.0",
     "@material/top-app-bar": "^14.0.0",
     "@material/web": "^2.5.0",
     "@popperjs/core": "^2.11.8",
