@@ -85,8 +85,24 @@ jobs:
           TAG="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.pull_request.head.sha || github.sha }}"
           echo "tags=${TAG}" >> "$GITHUB_OUTPUT"
 
+      # ghcr.io occasionally rejects the blob upload PUT with a 5xx. The build itself is
+      # cached (type=gha), so a second attempt only re-pushes and costs a few seconds.
       - name: Build and push Catroweb App Image (internal)
+        id: push-internal
         if: steps.fork-check.outputs.is_fork == 'false'
+        continue-on-error: true
+        uses: docker/build-push-action@v7.3.0
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          build-args: APP_ENVIRONMENT=test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Retry push of Catroweb App Image (internal)
+        if: steps.fork-check.outputs.is_fork == 'false' && steps.push-internal.outcome == 'failure'
         uses: docker/build-push-action@v7.3.0
         with:
           context: .
@@ -164,10 +180,23 @@ jobs:
       - name: Tag image for docker-compose
         run: docker tag ${{ needs.build.outputs.image-tag }} app.catroweb
 
+      # Pulls of the chrome/db images from registry-1.docker.io time out often enough to
+      # be the single biggest source of red CI on otherwise fine PRs. Retry with backoff.
       - name: Build and Start Docker Containers
         run: |
           cd docker
-          docker compose -f docker-compose.test.yaml up -d
+          attempt=1
+          max_attempts=3
+          until docker compose -f docker-compose.test.yaml up -d; do
+            if [ "$attempt" -ge "$max_attempts" ]; then
+              echo "docker compose up failed after $max_attempts attempts"
+              exit 1
+            fi
+            echo "docker compose up failed (attempt $attempt/$max_attempts), retrying..."
+            docker compose -f docker-compose.test.yaml down -v || true
+            sleep "$((attempt * 15))"
+            attempt="$((attempt + 1))"
+          done
 
       - name: Run PHPUnit Tests
         run: |
@@ -275,10 +304,23 @@ jobs:
       - name: Tag image for docker-compose
         run: docker tag ${{ needs.build.outputs.image-tag }} app.catroweb
 
+      # Pulls of the chrome/db images from registry-1.docker.io time out often enough to
+      # be the single biggest source of red CI on otherwise fine PRs. Retry with backoff.
       - name: Build and Start Docker Containers
         run: |
           cd docker
-          docker compose -f docker-compose.test.yaml up -d
+          attempt=1
+          max_attempts=3
+          until docker compose -f docker-compose.test.yaml up -d; do
+            if [ "$attempt" -ge "$max_attempts" ]; then
+              echo "docker compose up failed after $max_attempts attempts"
+              exit 1
+            fi
+            echo "docker compose up failed (attempt $attempt/$max_attempts), retrying..."
+            docker compose -f docker-compose.test.yaml down -v || true
+            sleep "$((attempt * 15))"
+            attempt="$((attempt + 1))"
+          done
 
       - name: Warmup the cache
         run: |
