@@ -64,10 +64,23 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      # Same registry flakiness as in the dynamic analysis workflow: pulls from
+      # registry-1.docker.io time out and take the whole job down. Retry with backoff.
       - name: Build and start all containers (Docker Compose)
         run: |
           cd docker
-          docker compose -f docker-compose.dev.yaml up -d
+          attempt=1
+          max_attempts=3
+          until docker compose -f docker-compose.dev.yaml up -d; do
+            if [ "$attempt" -ge "$max_attempts" ]; then
+              echo "docker compose up failed after $max_attempts attempts"
+              exit 1
+            fi
+            echo "docker compose up failed (attempt $attempt/$max_attempts), retrying..."
+            docker compose -f docker-compose.dev.yaml down -v || true
+            sleep "$((attempt * 15))"
+            attempt="$((attempt + 1))"
+          done
 
       - name: Check Symfony application (info)
         run: |
