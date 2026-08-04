@@ -20,6 +20,7 @@ COPY app.py .
 RUN mkdir -p "$HF_HOME" \
   && for attempt in 1 2 3 4 5; do \
        python -c "from transformers import pipeline; pipeline('image-classification', model='Falconsai/nsfw_image_detection')" && break; \
+       if [ "$attempt" -eq 5 ]; then break; fi; \
        echo "Model download failed (attempt $attempt/5), retrying in $((attempt * 20))s"; \
        sleep "$((attempt * 20))"; \
      done \
