@@ -3,7 +3,8 @@
 #
 #  `main` requires one approving review, so dependency bumps sat blocked on a human even with all checks green. Since
 #  they are only ever a lock file change, and since the pipeline is what actually decides whether a bump is safe, they
-#  are approved and queued for auto-merge here instead.
+#  are approved and queued for auto-merge here instead — majors included, deliberately: the pipeline is trusted to
+#  decide, and a bump that breaks something breaks it visibly.
 #
 #  - Green is still enforced, by GitHub, not by this workflow:
 #
@@ -12,24 +13,17 @@
 #      check goes red the pull request simply stays open. Removing the required contexts from the branch protection
 #      would turn this into an unconditional merge — so do not do that without removing this workflow too.
 #
-#  - Two classes of bump are deliberately left to a human, and get neither the approval nor the auto-merge:
+#  - One class of bump is skipped, because it *cannot* work rather than because it should not:
 #
-#      1. **Major versions.** Catroweb is the backend the Catrobat community actually uses, so a breaking upgrade is
-#         reviewed rather than merged by a robot. Green CI says "nothing we test broke", which is not the same as
-#         "this major is safe to ship". Patch and minor bumps still merge themselves.
+#      Anything touching `.github/workflows/**`. GITHUB_TOKEN is a GitHub App token, and an App may only write those
+#      paths while holding the `workflows` permission — which cannot be granted in a workflow `permissions:` block at
+#      all, since it is a PAT/App-install scope rather than one of the keys Actions accepts. Such a merge always failed:
 #
-#      2. **Anything touching `.github/workflows/**`.** GITHUB_TOKEN is a GitHub App token, and an App may only write
-#         those paths while holding the `workflows` permission — which cannot be granted in a workflow `permissions:`
-#         block at all, since it is a PAT/App-install scope rather than one of the keys Actions accepts. Such a merge
-#         therefore always failed:
+#        GraphQL: refusing to allow a GitHub App to create or update workflow ... without `workflows` permission
 #
-#           GraphQL: refusing to allow a GitHub App to create or update workflow ... without `workflows` permission
-#
-#         With `--auto` that failure is *silent* — auto-merge stays enabled and the pull request simply never lands.
-#         Daniel's `/tidy` sweep merges these with a token that holds the scope.
-#
-#    Both cases are announced with `::notice::` on the run, so a bump that is waiting for a human is visible rather
-#    than mysteriously idle.
+#      With `--auto` that failure is *silent* — auto-merge stays enabled and the pull request simply never lands. Since
+#      the github-actions ecosystem is polled daily here, that was a standing silent stall. Those bumps are announced
+#      with `::notice::` and merged by Daniel's `/tidy` sweep, which runs with a token that holds the scope.
 #
 #  - Only Dependabot's own pull requests are touched. Everything else, including human dependency bumps, keeps the
 #    normal review requirement.
@@ -61,36 +55,19 @@ jobs:
     if: github.event.pull_request.user.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Read the bump's metadata
-        id: meta
-        uses: dependabot/fetch-metadata@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Decide whether this bump may merge itself
+      - name: Skip bumps GITHUB_TOKEN may not merge
         id: gate
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          # On a grouped pull request this is the highest update type in the group.
-          UPDATE_TYPE: ${{ steps.meta.outputs.update-type }}
         run: |
-          echo "update type: ${UPDATE_TYPE:-unknown}"
-
-          if [ "$UPDATE_TYPE" = 'version-update:semver-major' ]; then
-            echo "::notice::#$PR_NUMBER is a major bump — left for a human to review deliberately"
-            echo 'ok=false' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
           files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/files" --jq '.[].filename')
           if grep -q '^\.github/workflows/' <<< "$files"; then
             echo "::notice::#$PR_NUMBER touches .github/workflows/** — GITHUB_TOKEN cannot merge it, left for /tidy"
             echo 'ok=false' >> "$GITHUB_OUTPUT"
-            exit 0
+          else
+            echo 'ok=true' >> "$GITHUB_OUTPUT"
           fi
-
-          echo 'ok=true' >> "$GITHUB_OUTPUT"
 
       - name: Approve
         if: steps.gate.outputs.ok == 'true'
