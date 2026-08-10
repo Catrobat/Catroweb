@@ -248,8 +248,8 @@ class CodeStatistic
       case Constants::DEVICE_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'deviceBricks');
         break;
-      // DEPRECATED_* share the grey images, LEGO_NXT the yellow one, and RASPI/PHIRO/
-      // TESTING/YOUR the light blue one — all already matched by the cases listed here.
+        // DEPRECATED_* share the grey images, LEGO_NXT the yellow one, and RASPI/PHIRO/
+        // TESTING/YOUR the light blue one — all already matched by the cases listed here.
       case Constants::UNKNOWN_BRICK_IMG:
       case Constants::UNKNOWN_SCRIPT_IMG:
       case Constants::LEGO_EV3_BRICK_IMG:
