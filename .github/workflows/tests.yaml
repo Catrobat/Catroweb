@@ -454,3 +454,43 @@ jobs:
           docker logs db.catroweb.test
           echo "--- Chrome Logs ---"
           docker logs chrome.catroweb
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # CI gate:
+  #
+  #   - Aggregates every job of this workflow into a single status check, so that branch protection has one stable
+  #     context to require instead of a list that has to be kept in sync by hand.
+  #
+  #   - This matters most for Behat: those jobs are a matrix, so their check names ("Behat (web-studio)", ...) change
+  #     whenever a test suite is added, renamed or split. Requiring them individually means every such change silently
+  #     blocks all merges until someone edits the branch protection to match.
+  #
+  #   - `skipped` counts as passing on purpose: when an upstream job fails, its dependents report `skipped`, and the
+  #     failure is already caught by checking that upstream job itself.
+  #
+  ci_gate:
+    name: 'CI gate: dynamic analysis'
+    needs: [build, tests_phpunit, tests_behat]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check results of all jobs
+        env:
+          RESULTS: |
+            build ${{ needs.build.result }}
+            tests_phpunit ${{ needs.tests_phpunit.result }}
+            tests_behat ${{ needs.tests_behat.result }}
+        run: |
+          echo "$RESULTS"
+          failed=0
+          while read -r job result; do
+            [ -z "$job" ] && continue
+            case "$result" in
+              success | skipped) ;;
+              *)
+                echo "::error::job '$job' ended with '$result'"
+                failed=1
+                ;;
+            esac
+          done <<< "$RESULTS"
+          exit "$failed"

@@ -1,0 +1,55 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ** Dependabot auto-merge **
+#
+#  `main` requires one approving review, so dependency bumps sat blocked on a human even with all checks green. Since
+#  they are only ever a lock file change, and since the pipeline is what actually decides whether a bump is safe, they
+#  are approved and queued for auto-merge here instead.
+#
+#  - Green is still enforced, by GitHub, not by this workflow:
+#
+#      `--auto` merges only once every *required* status check on the branch has succeeded. The required contexts are
+#      the two `CI gate: ...` jobs plus `Development Container`, which together cover every job of every workflow. If a
+#      check goes red the pull request simply stays open. Removing the required contexts from the branch protection
+#      would turn this into an unconditional merge — so do not do that without removing this workflow too.
+#
+#  - Only Dependabot's own pull requests are touched. Everything else, including human dependency bumps, keeps the
+#    normal review requirement.
+#
+#  - `pull_request_target` is deliberate:
+#
+#      On a `pull_request` run triggered by Dependabot the GITHUB_TOKEN is read-only, so it could neither approve nor
+#      enable auto-merge. `pull_request_target` runs with the base branch's token instead. This workflow never checks
+#      out the pull request, so no code from it is ever executed here — the steps only talk to the GitHub API.
+#
+name: 'Dependabot auto-merge'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  pull_request_target:
+    branches:
+      - '**' # all branches
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  auto_merge:
+    name: Approve and enable auto-merge
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Approve
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge
+        run: gh pr merge --auto --squash --delete-branch "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
