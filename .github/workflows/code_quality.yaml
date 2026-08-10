@@ -237,3 +237,58 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - run: bin/check-default-secrets
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # CI gate:
+  #
+  #   - Aggregates every job of this workflow into a single status check, so branch protection can require one stable
+  #     context instead of eleven that have to be kept in sync whenever a tool is added or removed here.
+  #
+  #   - `skipped` counts as passing on purpose: when an upstream job fails, its dependents report `skipped`, and the
+  #     failure is already caught by checking that upstream job itself.
+  #
+  ci_gate:
+    name: 'CI gate: static analysis'
+    needs:
+      - biome
+      - prettier
+      - php-cs-fixer
+      - phpstan
+      - psalm
+      - phpcpd
+      - php-loc
+      - lint-twig
+      - lint-yaml
+      - lint-container
+      - check-secrets
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check results of all jobs
+        env:
+          RESULTS: |
+            biome ${{ needs.biome.result }}
+            prettier ${{ needs.prettier.result }}
+            php-cs-fixer ${{ needs.php-cs-fixer.result }}
+            phpstan ${{ needs.phpstan.result }}
+            psalm ${{ needs.psalm.result }}
+            phpcpd ${{ needs.phpcpd.result }}
+            php-loc ${{ needs.php-loc.result }}
+            lint-twig ${{ needs.lint-twig.result }}
+            lint-yaml ${{ needs.lint-yaml.result }}
+            lint-container ${{ needs.lint-container.result }}
+            check-secrets ${{ needs.check-secrets.result }}
+        run: |
+          echo "$RESULTS"
+          failed=0
+          while read -r job result; do
+            [ -z "$job" ] && continue
+            case "$result" in
+              success | skipped) ;;
+              *)
+                echo "::error::job '$job' ended with '$result'"
+                failed=1
+                ;;
+            esac
+          done <<< "$RESULTS"
+          exit "$failed"
