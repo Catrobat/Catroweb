@@ -218,30 +218,25 @@ class CodeStatistic
     ++$this->total_num_bricks;
     switch ($brick->getImgFile()) {
       // Normal Bricks
+      // The extension constants (RASPI_*, PHIRO_*, AR_DRONE_*, JUMPING_SUMO_*) alias the
+      // plain ones by value, so they are covered by the cases below and must not be
+      // listed separately — a second case label with the same value is dead code.
       case Constants::EVENT_SCRIPT_IMG:
       case Constants::EVENT_BRICK_IMG:
-      case Constants::RASPI_EVENT_SCRIPT_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'eventBricks');
         break;
       case Constants::CONTROL_SCRIPT_IMG:
       case Constants::CONTROL_BRICK_IMG:
-      case Constants::RASPI_CONTROL_BRICK_IMG:
-      case Constants::PHIRO_CONTROL_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'controlBricks');
         break;
       case Constants::MOTION_SCRIPT_IMG:
       case Constants::MOTION_BRICK_IMG:
-      case Constants::JUMPING_SUMO_BRICK_IMG:
-      case Constants::AR_DRONE_MOTION_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'motionBricks');
         break;
       case Constants::SOUND_BRICK_IMG:
-      case Constants::PHIRO_SOUND_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'soundBricks');
         break;
       case Constants::LOOKS_BRICK_IMG:
-      case Constants::AR_DRONE_LOOKS_BRICK_IMG:
-      case Constants::PHIRO_LOOK_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'looksBricks');
         break;
       case Constants::PEN_BRICK_IMG:
@@ -253,19 +248,13 @@ class CodeStatistic
       case Constants::DEVICE_BRICK_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'deviceBricks');
         break;
+        // DEPRECATED_* share the grey images, LEGO_NXT the yellow one, and RASPI/PHIRO/
+        // TESTING/YOUR the light blue one — all already matched by the cases listed here.
       case Constants::UNKNOWN_BRICK_IMG:
-      case Constants::DEPRECATED_BRICK_IMG:
       case Constants::UNKNOWN_SCRIPT_IMG:
-      case Constants::DEPRECATED_SCRIPT_IMG:
       case Constants::LEGO_EV3_BRICK_IMG:
-      case Constants::LEGO_NXT_BRICK_IMG:
       case Constants::ARDUINO_BRICK_IMG:
       case Constants::EMBROIDERY_BRICK_IMG:
-      case Constants::RASPI_BRICK_IMG:
-      case Constants::PHIRO_BRICK_IMG:
-      case Constants::TESTING_BRICK_IMG:
-      case Constants::YOUR_BRICK_IMG:
-      case Constants::YOUR_SCRIPT_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'specialBricks');
         break;
     }
