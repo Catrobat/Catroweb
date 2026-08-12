@@ -45,7 +45,7 @@
     "@openapitools/openapi-generator-cli": "^2.40.1",
     "auto-changelog": "^2.6.0",
     "autoprefixer": "^10.5.4",
-    "browserslist": "^4.28.7",
+    "browserslist": "^4.28.8",
     "dotenv": "^17.4.2",
     "postcss": "^8.5.26",
     "prettier": "^3.9.6",
