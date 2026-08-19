@@ -1719,22 +1719,22 @@
         },
         {
             "name": "eightpoints/guzzle-bundle",
-            "version": "v8.8.0",
+            "version": "v8.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/8p/EightPointsGuzzleBundle.git",
-                "reference": "85e30d1d75a263cba4a3c44aab33dc1e2ac88967"
+                "reference": "ca642612c7afcb8968febd335f5143b52642090e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/85e30d1d75a263cba4a3c44aab33dc1e2ac88967",
-                "reference": "85e30d1d75a263cba4a3c44aab33dc1e2ac88967",
+                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/ca642612c7afcb8968febd335f5143b52642090e",
+                "reference": "ca642612c7afcb8968febd335f5143b52642090e",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/guzzle": "^6.5.8|^7.4.5",
-                "guzzlehttp/promises": "^1.5.3|^2.0",
-                "guzzlehttp/psr7": "^1.9.1|^2.5",
+                "guzzlehttp/guzzle": "^6.5.8|^7.4.5|^8.0",
+                "guzzlehttp/promises": "^1.5.3|^2.0|^3.0",
+                "guzzlehttp/psr7": "^1.9.1|^2.5|^3.0",
                 "php": ">=7.2",
                 "psr/log": "~1.0|~2.0|~3.0",
                 "symfony/expression-language": "~5.0|~6.0|~7.0|~8.0",
@@ -1771,7 +1771,7 @@
                     "homepage": "https://github.com/8p/GuzzleBundle/contributors"
                 }
             ],
-            "description": "Integrates Guzzle 6.x, a PHP HTTP Client, into Symfony. Comes with easy and powerful configuration options and optional plugins.",
+            "description": "Integrates Guzzle 6.x/7.x/8.x, a PHP HTTP Client, into Symfony. Comes with easy and powerful configuration options and optional plugins.",
             "homepage": "https://github.com/8p/GuzzleBundle",
             "keywords": [
                 "Guzzle",
@@ -1785,9 +1785,9 @@
             ],
             "support": {
                 "issues": "https://github.com/8p/EightPointsGuzzleBundle/issues",
-                "source": "https://github.com/8p/EightPointsGuzzleBundle/tree/v8.8.0"
+                "source": "https://github.com/8p/EightPointsGuzzleBundle/tree/v8.9.0"
             },
-            "time": "2026-07-21T11:38:01+00:00"
+            "time": "2026-08-11T07:45:37+00:00"
         },
         {
             "name": "elastic/transport",
