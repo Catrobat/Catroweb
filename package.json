@@ -57,7 +57,7 @@
     "@analytics/google-tag-manager": "^0.6.0",
     "@bugsnag/browser-performance": "^3.4.1",
     "@bugsnag/js": "^8.10.0",
-    "@cap.js/widget": "^0.1.56",
+    "@cap.js/widget": "^0.1.57",
     "@fontsource/roboto": "^5.3.0",
     "@material/top-app-bar": "^14.0.0",
     "@material/web": "^2.5.0",

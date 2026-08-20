@@ -276,10 +276,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cap.js/widget@npm:^0.1.56":
-  version: 0.1.56
-  resolution: "@cap.js/widget@npm:0.1.56"
-  checksum: 10c0/e6978a8eab7b8df7dc701de6e145bb8cbe1735e2c2e731f679b8c4de271ea197135a149584d66892eb8d84a58b6720e8a682be54b580549af6414f8d33e6b470
+"@cap.js/widget@npm:^0.1.57":
+  version: 0.1.57
+  resolution: "@cap.js/widget@npm:0.1.57"
+  checksum: 10c0/60167c6334ece0e0d7806fefc0d6cc0f2650cfcd49eab3cc080c1ffdd6decbb33cad825995ab48c0b85c0b60d5cc9bef8d5dde1b38c2a287ca8ec27b17185477
   languageName: node
   linkType: hard
 
@@ -1131,7 +1131,7 @@ __metadata:
     "@biomejs/biome": "npm:2.5.8"
     "@bugsnag/browser-performance": "npm:^3.4.1"
     "@bugsnag/js": "npm:^8.10.0"
-    "@cap.js/widget": "npm:^0.1.56"
+    "@cap.js/widget": "npm:^0.1.57"
     "@fontsource/roboto": "npm:^5.3.0"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@material/top-app-bar": "npm:^14.0.0"
