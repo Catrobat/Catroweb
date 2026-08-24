@@ -70,7 +70,7 @@
     "material-icons": "^1.13.14",
     "sweetalert2": "^11.26.25",
     "textfilljs": "^1.0.3-a",
-    "vis-network": "^10.1.1"
+    "vis-network": "^10.1.2"
   },
   "browserslist": [
     "> 5%"
