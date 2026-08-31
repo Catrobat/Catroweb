@@ -8092,7 +8092,7 @@
         },
         {
             "name": "symfony/dotenv",
-            "version": "v8.1.2",
+            "version": "v8.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",
@@ -8142,7 +8142,7 @@
                 "environment"
             ],
             "support": {
-                "source": "https://github.com/symfony/dotenv/tree/v8.1.2"
+                "source": "https://github.com/symfony/dotenv/tree/v8.1.6"
             },
             "funding": [
                 {
@@ -9464,7 +9464,7 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v8.1.5",
+            "version": "v8.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
@@ -9526,7 +9526,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v8.1.5"
+                "source": "https://github.com/symfony/mime/tree/v8.1.6"
             },
             "funding": [
                 {
@@ -10935,7 +10935,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v8.1.5",
+            "version": "v8.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -10976,7 +10976,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v8.1.5"
+                "source": "https://github.com/symfony/process/tree/v8.1.6"
             },
             "funding": [
                 {
@@ -11167,7 +11167,7 @@
         },
         {
             "name": "symfony/rate-limiter",
-            "version": "v8.1.4",
+            "version": "v8.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/rate-limiter.git",
@@ -11217,7 +11217,7 @@
                 "rate-limiter"
             ],
             "support": {
-                "source": "https://github.com/symfony/rate-limiter/tree/v8.1.4"
+                "source": "https://github.com/symfony/rate-limiter/tree/v8.1.6"
             },
             "funding": [
                 {
@@ -11241,7 +11241,7 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v8.1.5",
+            "version": "v8.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
@@ -11297,7 +11297,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/v8.1.5"
+                "source": "https://github.com/symfony/routing/tree/v8.1.6"
             },
             "funding": [
                 {
