@@ -42,7 +42,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.11",
     "@hotwired/stimulus": "^3.2.2",
-    "@openapitools/openapi-generator-cli": "^2.40.1",
+    "@openapitools/openapi-generator-cli": "^2.41.0",
     "auto-changelog": "^2.6.0",
     "autoprefixer": "^10.5.4",
     "browserslist": "^4.28.8",
