@@ -18,6 +18,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
+use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 /**
  * Class CatrowebBrowserContext.
@@ -54,6 +55,23 @@ class CatrowebBrowserContext extends BrowserContext
   // --------------------------------------------------------------------------------------------------------------------
   //  Authentication
   // --------------------------------------------------------------------------------------------------------------------
+  /**
+   * Opens the reset link a user would receive by e-mail, without going through the mailer.
+   *
+   * @When /^I open the password reset link for "([^"]*)"$/
+   */
+  public function iOpenThePasswordResetLinkFor(string $username): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($username);
+    Assert::assertNotNull($user, 'Unknown user: '.$username);
+
+    $helper = $this->getSymfonyService(ResetPasswordHelperInterface::class);
+    Assert::assertInstanceOf(ResetPasswordHelperInterface::class, $helper);
+    $token = $helper->generateResetToken($user)->getToken();
+
+    $this->visit('/app/reset-password/reset/'.$token);
+  }
+
   /**
    * @Given /^I( [^"]*)? log in as "([^"]*)" with the password "([^"]*)"$/
    * @Given /^I( [^"]*)? log in as "([^"]*)"$/
