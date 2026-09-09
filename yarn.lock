@@ -959,9 +959,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"auto-changelog@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "auto-changelog@npm:2.6.0"
+"auto-changelog@npm:^2.6.1":
+  version: 2.6.1
+  resolution: "auto-changelog@npm:2.6.1"
   dependencies:
     commander: "npm:^7.2.0"
     handlebars: "npm:^4.7.9"
@@ -970,7 +970,7 @@ __metadata:
     semver: "npm:^7.8.1"
   bin:
     auto-changelog: src/index.js
-  checksum: 10c0/e28bb8abfa7f318f8a0445cf670b215fd2785c21311c13bdf97797e1904e29c3bb1aee404e8dc4fe28848e61a2489fb7b440d8df88ee21f2a8aff0a588344388
+  checksum: 10c0/ef22cabcc9b26a664def90a3746fcb0bb3cccb1b7c41ba444f509c4c46d98201d8f3d15bb720f9f8ffc65379aef2733e34c7808b92af18eb4d9e1d9b25e03ad5
   languageName: node
   linkType: hard
 
@@ -1108,7 +1108,7 @@ __metadata:
     "@openapitools/openapi-generator-cli": "npm:^2.41.0"
     "@popperjs/core": "npm:^2.11.8"
     analytics: "npm:^0.8.19"
-    auto-changelog: "npm:^2.6.0"
+    auto-changelog: "npm:^2.6.1"
     autoprefixer: "npm:^10.5.5"
     bootstrap: "npm:^5.3.8"
     browserslist: "npm:^4.28.9"
