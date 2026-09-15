@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e38e8a74bc1b21b2d64685b5d3a3adf",
+    "content-hash": "691e77ce7bbd475dc52e5d32de7993f8",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -12246,16 +12246,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v7.4.14",
+            "version": "v7.4.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "a1af4dacb24eb7ef4f1ca71b94da8ddbce572281"
+                "reference": "2ee1e4a3b32a528a642babe041ff7c440b213b4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/a1af4dacb24eb7ef4f1ca71b94da8ddbce572281",
-                "reference": "a1af4dacb24eb7ef4f1ca71b94da8ddbce572281",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/2ee1e4a3b32a528a642babe041ff7c440b213b4b",
+                "reference": "2ee1e4a3b32a528a642babe041ff7c440b213b4b",
                 "shasum": ""
             },
             "require": {
@@ -12322,7 +12322,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v7.4.14"
+                "source": "https://github.com/symfony/translation/tree/v7.4.17"
             },
             "funding": [
                 {
@@ -12342,7 +12342,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-06T09:33:19+00:00"
+            "time": "2026-08-21T17:40:08+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -12969,16 +12969,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v7.4.15",
+            "version": "v7.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "e101850ded5d2c0d44bf32abb8996404afec2dec"
+                "reference": "4cef939e55b8a21c5780418de0d98ab00d0736e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/e101850ded5d2c0d44bf32abb8996404afec2dec",
-                "reference": "e101850ded5d2c0d44bf32abb8996404afec2dec",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/4cef939e55b8a21c5780418de0d98ab00d0736e1",
+                "reference": "4cef939e55b8a21c5780418de0d98ab00d0736e1",
                 "shasum": ""
             },
             "require": {
@@ -13021,7 +13021,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.4.15"
+                "source": "https://github.com/symfony/yaml/tree/v7.4.18"
             },
             "funding": [
                 {
@@ -13041,7 +13041,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-21T15:13:06+00:00"
+            "time": "2026-08-30T00:47:26+00:00"
         },
         {
             "name": "symfonycasts/reset-password-bundle",
@@ -14178,22 +14178,23 @@
         },
         {
             "name": "behat/behat",
-            "version": "v3.32.0",
+            "version": "v3.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "b9b89cf7a3b24c04d6e2d2865ed51bc5e1700de9"
+                "reference": "a76fe078164e72d3183afc48224a6e8902dccaf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/b9b89cf7a3b24c04d6e2d2865ed51bc5e1700de9",
-                "reference": "b9b89cf7a3b24c04d6e2d2865ed51bc5e1700de9",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/a76fe078164e72d3183afc48224a6e8902dccaf0",
+                "reference": "a76fe078164e72d3183afc48224a6e8902dccaf0",
                 "shasum": ""
             },
             "require": {
                 "behat/gherkin": "^4.17.0",
                 "composer-runtime-api": "^2.2",
                 "composer/xdebug-handler": "^1.4 || ^2.0 || ^3.0",
+                "cucumber/tag-expressions": "^11.0",
                 "ext-mbstring": "*",
                 "nikic/php-parser": "^4.19.2 || ^5.2",
                 "php": ">=8.2 <8.6",
@@ -14262,7 +14263,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Behat/Behat/issues",
-                "source": "https://github.com/Behat/Behat/tree/v3.32.0"
+                "source": "https://github.com/Behat/Behat/tree/v3.33.0"
             },
             "funding": [
                 {
@@ -14278,7 +14279,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-20T08:34:52+00:00"
+            "time": "2026-09-07T14:37:47+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -14712,6 +14713,49 @@
                 }
             ],
             "time": "2024-05-06T16:37:16+00:00"
+        },
+        {
+            "name": "cucumber/tag-expressions",
+            "version": "v11.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cucumber/tag-expressions-php.git",
+                "reference": "d88e12c03a2069b4336156dc7831a6b78cce5e1d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cucumber/tag-expressions-php/zipball/d88e12c03a2069b4336156dc7831a6b78cce5e1d",
+                "reference": "d88e12c03a2069b4336156dc7831a6b78cce5e1d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.75",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^10.5.46 || ^11.5 || ^13.0",
+                "symfony/yaml": "^6.4 || ^7.2 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cucumber\\TagExpressions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Cucumber Tag Expressions parser",
+            "homepage": "https://github.com/cucumber/tag-expressions",
+            "support": {
+                "issues": "https://github.com/cucumber/tag-expressions/issues",
+                "source": "https://github.com/cucumber/tag-expressions-php/tree/v11.0.1"
+            },
+            "time": "2026-03-24T10:42:49+00:00"
         },
         {
             "name": "danog/advanced-json-rpc",
@@ -16189,16 +16233,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.8.0",
+            "version": "v5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f"
+                "reference": "9e33da9553fe7786f0962b35f4e4ecf01be89def"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
-                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/9e33da9553fe7786f0962b35f4e4ecf01be89def",
+                "reference": "9e33da9553fe7786f0962b35f4e4ecf01be89def",
                 "shasum": ""
             },
             "require": {
@@ -16240,9 +16284,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.8.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.9.0"
             },
-            "time": "2026-07-04T14:30:18+00:00"
+            "time": "2026-09-13T18:51:52+00:00"
         },
         {
             "name": "phar-io/manifest",
