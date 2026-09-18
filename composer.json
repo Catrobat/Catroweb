@@ -55,7 +55,7 @@
     "symfony/intl": "8.1.*",
     "symfony/mailer": "8.1.*",
     "symfony/mime": "8.1.*",
-    "symfony/monolog-bundle": "4.0.*",
+    "symfony/monolog-bundle": "4.1.*",
     "symfony/password-hasher": "8.1.*",
     "symfony/polyfill-iconv": "1.37.*",
     "symfony/process": "8.1.*",
