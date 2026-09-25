@@ -11,31 +11,35 @@ class TextSanitizer
 {
   private const string REPLACEMENT_CONTACT = '[contact removed]';
 
-  private const string CONTACT_LINKS_PATTERN = '/('
-    .'https?:\/\/(?:www\.)?discord(?:app)?(?:\.gg|\.com\/invite)\/[a-zA-Z0-9\-]+'
+  // The scheme is optional: "t.me/group" works in every chat app, so it is a contact link too
+  private const string CONTACT_LINKS_PATTERN = '/(?<![\w.\-])('
+    .'(?:https?:\/\/)?(?:www\.)?discord(?:app)?(?:\.gg|\.com\/invite)\/[a-zA-Z0-9\-]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:t\.me|telegram\.me|telegram\.org)\/[a-zA-Z0-9_]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:t\.me|telegram\.me|telegram\.org)\/[a-zA-Z0-9_]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:chat\.whatsapp\.com|wa\.me|api\.whatsapp\.com)\/[a-zA-Z0-9\-+]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:chat\.whatsapp\.com|wa\.me|api\.whatsapp\.com)\/[a-zA-Z0-9\-+]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:snapchat\.com\/add|t\.snapchat\.com)\/[a-zA-Z0-9._\-]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:snapchat\.com\/add|t\.snapchat\.com)\/[a-zA-Z0-9._\-]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:instagram\.com|instagr\.am|ig\.me)\/[a-zA-Z0-9._\-]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:instagram\.com|instagr\.am|ig\.me)\/[a-zA-Z0-9._\-]+'
     .'|'
-    .'https?:\/\/(?:www\.)?kik\.me\/[a-zA-Z0-9._\-]+'
+    .'(?:https?:\/\/)?(?:www\.)?kik\.me\/[a-zA-Z0-9._\-]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:tiktok\.com\/@|vm\.tiktok\.com\/|vt\.tiktok\.com\/)[a-zA-Z0-9._\-]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com\/@|vm\.tiktok\.com\/|vt\.tiktok\.com\/)[a-zA-Z0-9._\-]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:facebook\.com|fb\.com|fb\.me|m\.me|messenger\.com)\/[a-zA-Z0-9._\-]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:facebook\.com|fb\.com|fb\.me|m\.me|messenger\.com)\/[a-zA-Z0-9._\-]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:signal\.me|signal\.group)\/[a-zA-Z0-9._\-#\/]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:signal\.me|signal\.group)\/[a-zA-Z0-9._\-#\/]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:join\.skype\.com\/|skype\.com\/)[a-zA-Z0-9._\-]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:join\.skype\.com\/|skype\.com\/)[a-zA-Z0-9._\-]+'
     .'|'
-    .'https?:\/\/(?:www\.)?(?:twitter\.com|x\.com|t\.co)\/[a-zA-Z0-9._\-]+'
+    .'(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com|t\.co)\/[a-zA-Z0-9._\-]+'
     .'|'
-    .'https?:\/\/(?:www\.)?twitch\.tv\/[a-zA-Z0-9._\-]+'
+    .'(?:https?:\/\/)?(?:www\.)?twitch\.tv\/[a-zA-Z0-9._\-]+'
     .')/i';
+
+  // "TG: @handle", "Второй ТГК: @channel": messenger handles work without a link
+  private const string MESSENGER_HANDLE_PATTERN = '/(?<![\p{L}\p{N}])(?:telegram|tg|тг|тгк|телеграм|телега|whatsapp|snapchat|snap|instagram|insta|tiktok|discord|kik|signal)\s*[:\-]?\s*@[\p{L}\p{N}_.]{3,}/iu';
 
   private const array LEETSPEAK_MAP = [
     '4' => 'a', '@' => 'a', '8' => 'b', '(' => 'c', '3' => 'e',
@@ -92,6 +96,7 @@ class TextSanitizer
     $text = $this->redactEmails($text);
     $text = $this->redactPhoneNumbers($text);
     $text = $this->redactContactLinks($text);
+    $text = $this->redactMessengerHandles($text);
     $text = $this->redactUriSchemes($text);
 
     return $this->filterProfanity($text, $locale);
@@ -127,6 +132,11 @@ class TextSanitizer
   private function redactContactLinks(string $text): string
   {
     return preg_replace(self::CONTACT_LINKS_PATTERN, self::REPLACEMENT_CONTACT, $text) ?? $text;
+  }
+
+  private function redactMessengerHandles(string $text): string
+  {
+    return preg_replace(self::MESSENGER_HANDLE_PATTERN, self::REPLACEMENT_CONTACT, $text) ?? $text;
   }
 
   private function redactUriSchemes(string $text): string

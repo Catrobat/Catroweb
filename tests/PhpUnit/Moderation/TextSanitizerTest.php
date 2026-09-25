@@ -166,6 +166,46 @@ class TextSanitizerTest extends TestCase
       'twitter' => ['https://twitter.com/myuser', '[contact removed]'],
       'x.com' => ['https://x.com/myuser', '[contact removed]'],
       'twitch' => ['https://twitch.tv/myuser', '[contact removed]'],
+      'telegram without scheme' => ['subscribe! t.me/bsbetarevival', 'subscribe! [contact removed]'],
+      'discord without scheme' => ['discord.gg/abc123', '[contact removed]'],
+      'instagram with www only' => ['www.instagram.com/myuser', '[contact removed]'],
+    ];
+  }
+
+  #[DataProvider('messengerHandleProvider')]
+  public function testRedactsMessengerHandles(string $input, string $expected): void
+  {
+    $this->assertSame($expected, $this->sanitizer->sanitizeWithLocale($input));
+  }
+
+  /**
+   * @return array<string, array{string, string}>
+   */
+  public static function messengerHandleProvider(): array
+  {
+    return [
+      'russian telegram abbreviation' => ['ТГ: @Gap_Zip', '[contact removed]'],
+      'russian telegram channel' => ['Второй ТГК: @oldhorizons', 'Второй [contact removed]'],
+      'english' => ['my telegram @someone123', 'my [contact removed]'],
+      'insta without colon' => ['insta @cool.user', '[contact removed]'],
+    ];
+  }
+
+  #[DataProvider('textWithoutContactProvider')]
+  public function testKeepsTextWithoutContact(string $input): void
+  {
+    $this->assertSame($input, $this->sanitizer->sanitizeWithLocale($input));
+  }
+
+  /**
+   * @return array<string, array{string}>
+   */
+  public static function textWithoutContactProvider(): array
+  {
+    return [
+      'domain part of a word' => ['I like xt.me/thing'],
+      'platform word without handle' => ['I saw it on TikTok yesterday'],
+      'mention of a user' => ['Thanks @Catrobat for the help'],
     ];
   }
 
