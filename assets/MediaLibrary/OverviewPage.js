@@ -2,6 +2,7 @@ import './OverviewPage.css'
 
 import { createPictureElement } from '../Layout/ImageVariants'
 import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
+import { getFileTypeFilter } from './FileTypeFilter'
 
 const overviewContainer = document.querySelector('.js-media-library-overview')
 
@@ -17,6 +18,7 @@ if (overviewContainer) {
   let isLoadingCategories = false
   let categoriesHasMore = true
   const searchQuery = new URLSearchParams(window.location.search).get('search')
+  const fileType = getFileTypeFilter()
 
   const downloadList = []
 
@@ -69,6 +71,9 @@ if (overviewContainer) {
     }
     if (searchQuery) {
       url += `&search=${encodeURIComponent(searchQuery)}`
+    }
+    if (fileType) {
+      url += `&file_type=${fileType}`
     }
 
     fetch(url)
@@ -248,10 +253,17 @@ if (overviewContainer) {
 
       // View all link
       const viewAllLink = document.createElement('a')
-      viewAllLink.href = categoryWebUrl.replace('CATEGORY-ID', category.id)
+      const viewAllParams = new URLSearchParams()
       if (searchQuery) {
-        viewAllLink.href += `?search=${encodeURIComponent(searchQuery)}`
+        viewAllParams.set('search', searchQuery)
       }
+      if (fileType) {
+        viewAllParams.set('file_type', fileType)
+      }
+      const viewAllQuery = viewAllParams.toString()
+      viewAllLink.href =
+        categoryWebUrl.replace('CATEGORY-ID', category.id) +
+        (viewAllQuery ? `?${viewAllQuery}` : '')
       viewAllLink.classList.add('btn', 'btn-primary', 'btn-sm')
       if (translations.view_all_category) {
         viewAllLink.textContent = translations.view_all_category.replace(
@@ -421,6 +433,9 @@ if (overviewContainer) {
     }
     if (searchQuery) {
       url.searchParams.set('search', searchQuery)
+    }
+    if (fileType) {
+      url.searchParams.set('file_type', fileType)
     }
 
     fetch(url.toString())

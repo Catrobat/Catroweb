@@ -1,6 +1,7 @@
 import { normalizeApiResponse } from '../Api/ResponseHelper'
 import { createPictureElement } from '../Layout/ImageVariants'
 import { showTopBarDefault, showTopBarDownload } from '../Layout/TopBar'
+import { getFileTypeFilter } from './FileTypeFilter'
 
 export function MediaLib(
   categoryId,
@@ -80,6 +81,10 @@ export function MediaLib(
       }
       if (cursor) {
         url += `&cursor=${encodeURIComponent(cursor)}`
+      }
+      const fileType = getFileTypeFilter()
+      if (fileType) {
+        url += `&file_type=${fileType}`
       }
       return url
     }
