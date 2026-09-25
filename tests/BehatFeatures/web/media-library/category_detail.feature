@@ -108,3 +108,9 @@ Feature: Media library category detail
     And I scroll to the bottom of the page
     And I wait 500 milliseconds
     And I should see media file with id "650e8400-e29b-41d4-a716-446655440004"
+
+  Scenario: Opened for sounds, a category of images offers no assets
+    Given I am on "/app/media-library/550e8400-e29b-41d4-a716-446655440001?file_type=SOUND"
+    And I wait for the page to be loaded
+    And I wait for AJAX to finish
+    Then I should not see media file with id "650e8400-e29b-41d4-a716-446655440077"

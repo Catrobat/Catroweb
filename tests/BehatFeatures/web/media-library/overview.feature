@@ -92,3 +92,15 @@ Feature: Media library overview
     And I wait for the page to be loaded
     And I click the currently visible search icon
     Then the element "#top-app-bar__search-label" should have a attribute "alt" with value "Search in media library"
+
+  Scenario: Opened for sounds, the overview offers only sound assets
+    Given I am on "/app/media-library?file_type=SOUND"
+    And I wait for the page to be loaded
+    Then I should see "Meow"
+    And I should not see "Dog Image"
+
+  Scenario: Opened for images, the overview offers only image assets
+    Given I am on "/app/media-library?file_type=IMAGE"
+    And I wait for the page to be loaded
+    Then I should see "Dog Image"
+    And I should not see "Meow"
