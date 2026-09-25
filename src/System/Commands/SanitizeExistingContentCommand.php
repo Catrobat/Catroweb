@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace App\System\Commands;
 
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\User\Comment\UserComment;
+use App\DB\Entity\User\User;
 use App\Moderation\TextSanitizer;
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,6 +29,7 @@ class SanitizeExistingContentCommand extends Command
   public function __construct(
     private readonly TextSanitizer $textSanitizer,
     private readonly Connection $connection,
+    private readonly EntityManagerInterface $entity_manager,
   ) {
     parent::__construct();
   }
@@ -45,14 +51,25 @@ class SanitizeExistingContentCommand extends Command
     }
 
     $total_sanitized = 0;
-    $total_sanitized += $this->sanitizeTable($io, 'project', ['name', 'description', 'credits'], 'id', $dryRun);
-    $total_sanitized += $this->sanitizeTable($io, 'user_comment', ['text'], 'id', $dryRun);
-    $total_sanitized += $this->sanitizeTable($io, 'studio', ['name', 'description'], 'id', $dryRun);
-    $total_sanitized += $this->sanitizeTable($io, 'fos_user', ['about', 'currently_working_on'], 'id', $dryRun);
+    $total_sanitized += $this->sanitizeTable($io, $this->tableOf(Project::class), ['name', 'description', 'credits'], 'id', $dryRun);
+    $total_sanitized += $this->sanitizeTable($io, $this->tableOf(UserComment::class), ['text'], 'id', $dryRun);
+    $total_sanitized += $this->sanitizeTable($io, $this->tableOf(Studio::class), ['name', 'description'], 'id', $dryRun);
+    $total_sanitized += $this->sanitizeTable($io, $this->tableOf(User::class), ['about', 'currently_working_on'], 'id', $dryRun);
 
     $io->success(sprintf('Done. %d rows sanitized across all tables.', $total_sanitized));
 
     return Command::SUCCESS;
+  }
+
+  /**
+   * Table names come from the Doctrine mapping: they differ from the entity names (projects live
+   * in "program") and Behat creates the schema from the mapping too.
+   *
+   * @param class-string $entity_class
+   */
+  private function tableOf(string $entity_class): string
+  {
+    return $this->entity_manager->getClassMetadata($entity_class)->getTableName();
   }
 
   /**
