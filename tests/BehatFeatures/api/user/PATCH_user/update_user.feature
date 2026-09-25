@@ -69,6 +69,33 @@ Feature: Update user
       }
     """
 
+  Scenario: Update user username with a link
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "dry_run": false,
+        "username": "youtube.com/@mychannel"
+      }
+    """
+    And I request "PATCH" "/api/users/me"
+    Then the response code should be "422"
+    And I should get the json object:
+    """
+      {
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "username", "message": "Username must not contain a link"}
+          ]
+        }
+      }
+    """
+
   Scenario: Update user with invalid username
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
