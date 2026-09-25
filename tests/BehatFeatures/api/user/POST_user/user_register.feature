@@ -248,6 +248,36 @@ Feature: Registering a new user.
       }
     """
 
+  Scenario: Trying to register user with username that contains a link should fail
+    Given I have the following JSON request body:
+    """
+      {
+        "dry_run": true,
+        "email": "catro@localhost.at",
+        "username": "https://youtube.com/@test24710?si=gnp8zCcpKyAAjnna",
+        "password": "1234567",
+        "date_of_birth": "2000-01-15"
+      }
+    """
+
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "POST" "/api/users"
+    Then the response status code should be "422"
+    And I should get the json object:
+    """
+      {
+        "error": {
+          "code": 422,
+          "type": "validation_error",
+          "message": "Validation failed",
+          "details": [
+            {"field": "username", "message": "Username must not contain a link"}
+          ]
+        }
+      }
+    """
+
   Scenario: Trying to register user with username that starts with Scratch:
     Given I have the following JSON request body:
     """

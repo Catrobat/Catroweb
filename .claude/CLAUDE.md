@@ -488,6 +488,7 @@ Key rules:
 - Trust accuracy: +1.5 accepted, -2.0 rejected, clamped [-5.0, +5.0]
 - Rejected reports don't whitelist content
 - `auto_hidden` (community) and `visible` (admin) are independent
+- Usernames must not contain links (`LinkDetector`, also for OAuth-derived names); rename older accounts with `bin/console catro:moderation:rename-link-usernames --dry-run`
 
 ## Rate Limiting
 

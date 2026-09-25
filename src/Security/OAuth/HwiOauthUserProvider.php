@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Security\OAuth;
 
 use App\DB\Entity\User\User;
+use App\Moderation\LinkDetector;
 use App\Security\PasswordGenerator;
 use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
@@ -19,6 +20,7 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
   public function __construct(
     protected UserManager $user_manager,
     private readonly AchievementManager $achievement_manager,
+    private readonly LinkDetector $link_detector = new LinkDetector(),
   ) {
   }
 
@@ -83,7 +85,8 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
     $first_name = $response->getFirstName();
     $last_name = $response->getLastName();
     $username_base = $first_name.$last_name;
-    if ('' === $username_base || '0' === $username_base) {
+    // The provider's display name is user-chosen, so it can carry an advertising link
+    if ('' === $username_base || '0' === $username_base || $this->link_detector->containsLink($username_base)) {
       $username_base = 'user';
     }
 

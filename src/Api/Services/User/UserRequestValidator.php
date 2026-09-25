@@ -8,6 +8,7 @@ use App\Api\Services\Base\AbstractRequestValidator;
 use App\Api\Services\GeneralValidator;
 use App\Api\Services\ValidationWrapper;
 use App\DB\Entity\User\User;
+use App\Moderation\LinkDetector;
 use App\Security\ContentSafety\ContentSafetyScanner;
 use App\User\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
@@ -52,6 +53,7 @@ class UserRequestValidator extends AbstractRequestValidator
     private readonly CacheInterface $cache,
     private readonly LoggerInterface $logger,
     private readonly ContentSafetyScanner $content_safety_scanner,
+    private readonly LinkDetector $link_detector,
   ) {
     parent::__construct($validator, $translator);
   }
@@ -137,6 +139,8 @@ class UserRequestValidator extends AbstractRequestValidator
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameTooLong', [], $locale), $KEY);
     } elseif (filter_var(str_replace(' ', '', (string) $username), FILTER_VALIDATE_EMAIL)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameContainsEmail', [], $locale), $KEY);
+    } elseif ($this->link_detector->containsLink($username)) {
+      $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameContainsLink', [], $locale), $KEY);
     } elseif (null != $this->user_manager->findUserByUsername($username)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameAlreadyInUse', [], $locale), $KEY);
     } elseif (0 === strncasecmp($username, User::$SCRATCH_PREFIX, strlen(User::$SCRATCH_PREFIX))) {

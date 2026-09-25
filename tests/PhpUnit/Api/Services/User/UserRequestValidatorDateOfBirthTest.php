@@ -6,6 +6,7 @@ namespace Tests\PhpUnit\Api\Services\User;
 
 use App\Api\Services\User\UserRequestValidator;
 use App\Api\Services\ValidationWrapper;
+use App\Moderation\LinkDetector;
 use App\Security\ContentSafety\ContentSafetyScanner;
 use App\User\UserManager;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -48,6 +49,7 @@ class UserRequestValidatorDateOfBirthTest extends TestCase
       $cache,
       $logger,
       $contentSafetyScanner,
+      new LinkDetector(),
     );
   }
 

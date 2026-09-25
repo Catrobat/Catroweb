@@ -784,6 +784,7 @@ api:
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
     usernameContainsEmail: "Username must not contain an email address"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Country code invalid"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

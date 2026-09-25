@@ -7,6 +7,7 @@ namespace App\Api\Services\Authentication;
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
+use App\Moderation\LinkDetector;
 use App\Security\PasswordGenerator;
 use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
@@ -21,8 +22,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthenticationApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager, protected AchievementManager $achievement_manager)
-  {
+  public function __construct(
+    private readonly UserManager $user_manager,
+    private readonly AuthenticationManager $authentication_manager,
+    protected AchievementManager $achievement_manager,
+    private readonly LinkDetector $link_detector = new LinkDetector(),
+  ) {
   }
 
   public function createJWTByUser(User $user): string
@@ -170,7 +175,8 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
   protected function createRandomUsername(?string $name = null): string
   {
     $username_base = 'user';
-    if (null !== $name && '' !== $name && '0' !== $name) {
+    // The provider's display name is user-chosen, so it can carry an advertising link
+    if (null !== $name && '' !== $name && '0' !== $name && !$this->link_detector->containsLink($name)) {
       $username_base = str_replace(' ', '', $name);
     }
 
