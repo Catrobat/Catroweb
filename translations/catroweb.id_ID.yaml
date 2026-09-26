@@ -751,6 +751,7 @@ api:
     passwordTooLong: 'Kata sandi terlalu panjang'
     passwordInvalidChars: 'Kata sandi mengandung karakter yang tidak valid'
     usernameContainsEmail: "Nama pengguna tidak boleh mengandung alamat email"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Kode negara tidak valid"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

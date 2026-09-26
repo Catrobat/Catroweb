@@ -751,6 +751,7 @@ api:
     passwordTooLong: 'Пароль занадто довгий'
     passwordInvalidChars: 'Пароль містить неприпустимі символи'
     usernameContainsEmail: "Імʼя користувача не повинно містити адресу електронної пошти"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Неприпустимий код країни"
     pictureInvalid: "Неприпустиме зображення профілю або не підтримується"
     dateOfBirthMissing: "Date of birth is required"

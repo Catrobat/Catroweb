@@ -755,6 +755,7 @@ api:
     passwordTooLong: 'Passwort zu lang'
     passwordInvalidChars: 'Password enthält ungültige Zeichen'
     usernameContainsEmail: "Username darf keine Email Adresse beinhalten"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Ungültige Landesvorwahl"
     pictureInvalid: "Profilbild ungültig oder nicht unterstützt"
     dateOfBirthMissing: "Date of birth is required"

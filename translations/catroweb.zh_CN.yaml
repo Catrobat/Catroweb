@@ -756,6 +756,7 @@ api:
     passwordTooLong: '密码太长'
     passwordInvalidChars: '密码包含无效字符'
     usernameContainsEmail: "用户名不能包含电子邮件地址"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "国家代码无效"
     pictureInvalid: "个人资料图片无效或不支持"
     dateOfBirthMissing: "Date of birth is required"
