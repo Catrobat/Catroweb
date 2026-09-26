@@ -751,6 +751,7 @@ api:
     passwordTooLong: 'كلمة المرور طويلة جداً'
     passwordInvalidChars: 'كلمة المرور تحتوي على أحرف غير صالحة'
     usernameContainsEmail: "اسم المستخدم يجب أن لا يحتوي على عنوان بريد إلكتروني"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "رمز البلد غير صالح"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

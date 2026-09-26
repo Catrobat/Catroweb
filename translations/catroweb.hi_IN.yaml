@@ -751,6 +751,7 @@ api:
     passwordTooLong: 'पासवर्ड बहुत लंबा है'
     passwordInvalidChars: 'पासवर्ड में अमान्य वर्ण हैं'
     usernameContainsEmail: "उपयोगकर्ता नाम में ईमेल पता नहीं होना चाहिए"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "देश कोड अमान्य है"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

@@ -750,6 +750,7 @@ api:
     passwordTooLong: 'Құпия сөз тым ұзақ'
     passwordInvalidChars: 'Құпия сөзде жарамсыз таңбалар бар'
     usernameContainsEmail: "Пайдаланушы атында эл. пошта мекенжайы болмауы керек."
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Ел коды жарамсыз"
     pictureInvalid: "Профиль суреті жарамсыз"
     dateOfBirthMissing: "Date of birth is required"

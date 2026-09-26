@@ -750,6 +750,7 @@ api:
     passwordTooLong: 'Lösenord för långt'
     passwordInvalidChars: 'Lösenord innehåller ogiltiga tecken'
     usernameContainsEmail: "Användarnamnet får inte innehålla någon e-postadress"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Landskod ogiltig"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"
