@@ -755,6 +755,7 @@ api:
     passwordTooLong: 'รหัสผ่านยาวเกินไป'
     passwordInvalidChars: 'รหัสผ่านมีตัวอักษรที่ไม่รับรอง'
     usernameContainsEmail: "ไม่สามารถใช้อีเมลเป็นชื่อผู้ใช้"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "ประเทศไม่ถูกต้อง"
     pictureInvalid: "รูปโปรไฟล์ไม่ถูกต้องหรือไม่รองรับ"
     dateOfBirthMissing: "Date of birth is required"

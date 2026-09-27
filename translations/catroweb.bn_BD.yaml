@@ -757,6 +757,7 @@ api:
     passwordTooLong: 'পাসওয়ার্ড খুব দীর্ঘ'
     passwordInvalidChars: 'পাসওয়ার্ডে অবৈধ অক্ষর রয়েছে'
     usernameContainsEmail: "ব্যবহারকারীর নামটিতে অবশ্যই একটি ইমেল ঠিকানা থাকতে হবে না"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "দেশের কোড অবৈধ"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

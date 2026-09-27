@@ -755,6 +755,7 @@ api:
     passwordTooLong: 'رمز عبور بسیار طولانی است'
     passwordInvalidChars: 'رمز عبور شامل علامت های نامعتبر است'
     usernameContainsEmail: "نام کاربری نباید حاوی یک آدرس ایمیل باشد"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "کد کشور نامعتبر است"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

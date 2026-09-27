@@ -751,6 +751,7 @@ api:
     passwordTooLong: 'Fjalëkalimi shumë i gjatë'
     passwordInvalidChars: 'Fjalëkalimi përmban karaktere të pavlefshme'
     usernameContainsEmail: "Emri i përdoruesit nuk duhet të përmbajë një adresë emaili"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Kodi i vendit është i pavlefshëm"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

@@ -755,6 +755,7 @@ api:
     passwordTooLong: 'கடவுச்சொல் மிக நீளமானது'
     passwordInvalidChars: 'கடவுச்சொல் தவறான எழுத்துக்களைக் கொண்டுள்ளது'
     usernameContainsEmail: "பயனர்பெயரில் மின்னஞ்சல் முகவரி இருக்கக்கூடாது"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "நாட்டின் குறியீடு தவறானது"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

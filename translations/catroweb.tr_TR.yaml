@@ -749,6 +749,7 @@ api:
     passwordTooLong: 'Şifre çok uzun'
     passwordInvalidChars: 'Şifre geçersiz karakterler içeriyor'
     usernameContainsEmail: "Kullanıcı adı bir e-posta adresi içermemelidir"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Ülke kodu geçersiz"
     pictureInvalid: "Profil resmi geçersiz veya desteklenmiyor"
     dateOfBirthMissing: "Date of birth is required"

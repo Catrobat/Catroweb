@@ -749,6 +749,7 @@ api:
     passwordTooLong: '비밀번호가 너무 깁니다.'
     passwordInvalidChars: '비밀번호에 사용할 수 없는 문자가 있습니다'
     usernameContainsEmail: "사용자이름에 이메일을 사용할 수 없습니다"
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "국가번호가 잘못됨"
     pictureInvalid: "Profile picture invalid or not supported"
     dateOfBirthMissing: "Date of birth is required"

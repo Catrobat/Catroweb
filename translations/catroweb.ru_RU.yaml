@@ -752,6 +752,7 @@ api:
     passwordTooLong: 'Пароль слишком длинный'
     passwordInvalidChars: 'Пароль содержит недопустимые символы'
     usernameContainsEmail: "Имя пользователя не должно содержать адрес электронной почты."
+    usernameContainsLink: "Username must not contain a link"
     countryCodeInvalid: "Неверный код страны"
     pictureInvalid: "Аватарка профиля недопустима или не поддерживается"
     dateOfBirthMissing: "Date of birth is required"
