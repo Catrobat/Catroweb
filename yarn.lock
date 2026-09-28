@@ -1137,7 +1137,7 @@ __metadata:
     bootstrap: "npm:^5.3.8"
     browserslist: "npm:^4.29.1"
     chart.js: "npm:^4.5.1"
-    dotenv: "npm:^18.0.0"
+    dotenv: "npm:^18.0.3"
     external-svg-loader: "npm:^1.7.1"
     lazysizes: "npm:^5.3.2"
     material-icons: "npm:^1.13.14"
@@ -1374,12 +1374,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "dotenv@npm:18.0.0"
+"dotenv@npm:^18.0.3":
+  version: 18.0.3
+  resolution: "dotenv@npm:18.0.3"
   bin:
     dotenv: dist/index.cjs
-  checksum: 10c0/f8978a2d0a45c66bee47e9c873f0003856f4604d8c20bee600841ffd932d5d8d8f1d93f36cce1ae3fa03d883b05a93b80e0f024af1a92e1128118d860f972e72
+  checksum: 10c0/0132d3dba2022808c31d0c8191cd8567351c8a1b932f751237cfe502563b9eaab309754bd66e5965f2ccee887c3527f883e29016cb4d691df8519e7fc3d452fd
   languageName: node
   linkType: hard
 
