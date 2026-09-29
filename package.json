@@ -46,7 +46,7 @@
     "auto-changelog": "^2.6.1",
     "autoprefixer": "^10.6.1",
     "browserslist": "^4.29.1",
-    "dotenv": "^18.0.3",
+    "dotenv": "^18.0.4",
     "postcss": "^8.5.28",
     "prettier": "^3.9.9",
     "purgecss": "^8.0.0",
