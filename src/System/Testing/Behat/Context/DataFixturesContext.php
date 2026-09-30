@@ -48,6 +48,7 @@ use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Exception\ORMException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -1862,20 +1863,45 @@ class DataFixturesContext implements Context
    */
   public function thereShouldBeProjectCustomTranslations(TableNode $table): void
   {
-    /** @var ProjectCustomTranslation[] $project_custom_translations */
-    $project_custom_translations = $this->getManager()->getRepository(ProjectCustomTranslation::class)->findAll();
-    // The returned entities may not be up to date
-    foreach ($project_custom_translations as $translation) {
-      $this->getManager()->refresh($translation);
-    }
-
     $table_rows = $table->getHash();
 
-    Assert::assertEquals(count($project_custom_translations), count($table_rows), 'table has different number of rows');
+    // The browser's save/delete request may still be in flight ("wait for AJAX" is a fixed
+    // sleep), so poll the database until it matches instead of asserting a single snapshot.
+    $deadline = microtime(true) + 10;
+    do {
+      $mismatch = $this->projectCustomTranslationsMismatch($table_rows);
+      if (null === $mismatch) {
+        return;
+      }
+
+      usleep(200_000);
+    } while (microtime(true) < $deadline);
+
+    Assert::fail($mismatch);
+  }
+
+  /**
+   * @param array<int, array<string, string>> $table_rows
+   */
+  private function projectCustomTranslationsMismatch(array $table_rows): ?string
+  {
+    /** @var ProjectCustomTranslation[] $project_custom_translations */
+    $project_custom_translations = $this->getManager()->getRepository(ProjectCustomTranslation::class)->findAll();
+    try {
+      // The returned entities may not be up to date
+      foreach ($project_custom_translations as $translation) {
+        $this->getManager()->refresh($translation);
+      }
+    } catch (EntityNotFoundException) {
+      return 'a translation was deleted while being read';
+    }
+
+    if (count($project_custom_translations) !== count($table_rows)) {
+      return sprintf('table has different number of rows: expected %d, found %d', count($table_rows), count($project_custom_translations));
+    }
 
     foreach ($project_custom_translations as $translation) {
-      $project = $translation->getProject();
-      $project_id = $project->getId();
+      $project_id = $translation->getProject()->getId();
       $language = $translation->getLanguage();
       $name = $translation->getName();
       $description = $translation->getDescription();
@@ -1890,8 +1916,12 @@ class DataFixturesContext implements Context
           && $credit == $row['credit']
       );
 
-      Assert::assertEquals(1, count($matching_row), 'row not found: '.$project_id);
+      if (1 !== count($matching_row)) {
+        return 'row not found: '.$project_id;
+      }
     }
+
+    return null;
   }
 
   /**
