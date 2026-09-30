@@ -108,8 +108,8 @@ class ProjectManager
       return $this->security->isGranted('ROLE_ADMIN');
     }
 
-    // Minor users cannot see projects marked as not safe for kids
-    if ($project->getNotForKids() > 0 && null !== $user && $user->isMinor()) {
+    // Minor users cannot see projects marked as not safe for kids, except their own
+    if ($project->getNotForKids() > 0 && null !== $user && $user->isMinor() && $project->getUser() !== $user) {
       return false;
     }
 
