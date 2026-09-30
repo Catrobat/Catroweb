@@ -53,7 +53,7 @@ class ProjectsApiLoader extends AbstractApiLoader
       return $projects;
     }
 
-    return array_values(array_filter($projects, static fn (Project $p): bool => 0 === $p->getNotForKids()));
+    return array_values(array_filter($projects, static fn (Project $p): bool => 0 === $p->getNotForKids() || $p->getUser() === $user));
   }
 
   public function findProjectsByID(string $id, bool $include_private = false): array
