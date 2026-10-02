@@ -2359,16 +2359,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.73.3",
+            "version": "v1.73.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "e3ac11b02f96b0b60e8a5659af94c3aa52898714"
+                "reference": "122a803b8ecb9c1cd4ea53330798572484eb7a3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/e3ac11b02f96b0b60e8a5659af94c3aa52898714",
-                "reference": "e3ac11b02f96b0b60e8a5659af94c3aa52898714",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/122a803b8ecb9c1cd4ea53330798572484eb7a3f",
+                "reference": "122a803b8ecb9c1cd4ea53330798572484eb7a3f",
                 "shasum": ""
             },
             "require": {
@@ -2420,22 +2420,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.73.3"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.73.5"
             },
-            "time": "2026-09-14T18:27:51+00:00"
+            "time": "2026-09-28T17:51:46+00:00"
         },
         {
             "name": "google/cloud-translate",
-            "version": "v2.3.5",
+            "version": "v2.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "7ba4e24856b20ea7da8772bfcc46717003890a52"
+                "reference": "9bc25983ea80960aa48320681a1b262b213399fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/7ba4e24856b20ea7da8772bfcc46717003890a52",
-                "reference": "7ba4e24856b20ea7da8772bfcc46717003890a52",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/9bc25983ea80960aa48320681a1b262b213399fe",
+                "reference": "9bc25983ea80960aa48320681a1b262b213399fe",
                 "shasum": ""
             },
             "require": {
@@ -2476,9 +2476,9 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v2.3.5"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v2.3.6"
             },
-            "time": "2026-09-14T18:27:51+00:00"
+            "time": "2026-09-28T17:51:46+00:00"
         },
         {
             "name": "google/common-protos",
@@ -2541,16 +2541,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.49.1",
+            "version": "v1.51.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "920d4d96f324c9138b20eb1851c8f4ea9123f3af"
+                "reference": "4cad310c5b520be80fd89f76b54261f28f10ab54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/920d4d96f324c9138b20eb1851c8f4ea9123f3af",
-                "reference": "920d4d96f324c9138b20eb1851c8f4ea9123f3af",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/4cad310c5b520be80fd89f76b54261f28f10ab54",
+                "reference": "4cad310c5b520be80fd89f76b54261f28f10ab54",
                 "shasum": ""
             },
             "require": {
@@ -2559,11 +2559,11 @@
                 "google/grpc-gcp": "^0.4",
                 "google/longrunning": "~0.4",
                 "google/protobuf": "^4.31||^5.34",
-                "grpc/grpc": "^1.13",
+                "grpc/grpc": "^1.38",
                 "guzzlehttp/promises": "^2.0.3||^3.0",
                 "guzzlehttp/psr7": "^2.6.3||^3.0",
                 "php": "^8.2",
-                "ramsey/uuid": "^4.0"
+                "ramsey/uuid": "^4.2.3"
             },
             "conflict": {
                 "ext-protobuf": "<4.31.0"
@@ -2600,9 +2600,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.49.1"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.51.0"
             },
-            "time": "2026-09-14T18:27:51+00:00"
+            "time": "2026-09-28T17:51:46+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -2651,16 +2651,16 @@
         },
         {
             "name": "google/longrunning",
-            "version": "0.8.4",
+            "version": "0.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-longrunning.git",
-                "reference": "a60c8e2407eab5b2e4c8f36c40cd9c0eeb47d327"
+                "reference": "ca83fbce2e20556f9abdb939efce14f642336acd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/a60c8e2407eab5b2e4c8f36c40cd9c0eeb47d327",
-                "reference": "a60c8e2407eab5b2e4c8f36c40cd9c0eeb47d327",
+                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/ca83fbce2e20556f9abdb939efce14f642336acd",
+                "reference": "ca83fbce2e20556f9abdb939efce14f642336acd",
                 "shasum": ""
             },
             "require-dev": {
@@ -2689,9 +2689,9 @@
             ],
             "description": "Google LongRunning Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/php-longrunning/tree/v0.8.4"
+                "source": "https://github.com/googleapis/php-longrunning/tree/v0.8.5"
             },
-            "time": "2026-09-14T18:27:51+00:00"
+            "time": "2026-09-28T17:51:46+00:00"
         },
         {
             "name": "google/protobuf",
@@ -10294,16 +10294,16 @@
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.42.0",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "51b5ff5ba85452b31ec6f55490b08148612339d9"
+                "reference": "533d68cf99c8f8ee2e8893c59ed59192e92cfd74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/51b5ff5ba85452b31ec6f55490b08148612339d9",
-                "reference": "51b5ff5ba85452b31ec6f55490b08148612339d9",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/533d68cf99c8f8ee2e8893c59ed59192e92cfd74",
+                "reference": "533d68cf99c8f8ee2e8893c59ed59192e92cfd74",
                 "shasum": ""
             },
             "require": {
@@ -10357,7 +10357,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.42.0"
+                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -10377,20 +10377,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-24T10:51:20+00:00"
+            "time": "2026-09-23T14:40:04+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.42.0",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
-                "reference": "aa20edea75bd9c48cfecc8360922e5a6e5c44502"
+                "reference": "ebd57ccc7edb93d632e184efbe7693d2517bab3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/aa20edea75bd9c48cfecc8360922e5a6e5c44502",
-                "reference": "aa20edea75bd9c48cfecc8360922e5a6e5c44502",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/ebd57ccc7edb93d632e184efbe7693d2517bab3b",
+                "reference": "ebd57ccc7edb93d632e184efbe7693d2517bab3b",
                 "shasum": ""
             },
             "require": {
@@ -10442,7 +10442,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.42.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -10462,20 +10462,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-07T06:33:24+00:00"
+            "time": "2026-09-23T22:02:09+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.38.2",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6"
+                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
-                "reference": "d3d318bad5e7a1bfbd026009c8bfb8d8f99ae6b6",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
+                "reference": "4d5d331bf731e0aedbc6b2f5e61135b7b7996a72",
                 "shasum": ""
             },
             "require": {
@@ -10527,7 +10527,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.38.2"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -10547,20 +10547,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-27T06:59:30+00:00"
+            "time": "2026-09-24T15:19:04+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.37.0",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "dfb55726c3a76ea3b6459fcfda1ec2d80a682411"
+                "reference": "9c6a5d6b01ca51d486c813e9a9c0ed55f208bb74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/dfb55726c3a76ea3b6459fcfda1ec2d80a682411",
-                "reference": "dfb55726c3a76ea3b6459fcfda1ec2d80a682411",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/9c6a5d6b01ca51d486c813e9a9c0ed55f208bb74",
+                "reference": "9c6a5d6b01ca51d486c813e9a9c0ed55f208bb74",
                 "shasum": ""
             },
             "require": {
@@ -10611,7 +10611,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.37.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -10631,20 +10631,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-10T16:19:22+00:00"
+            "time": "2026-09-25T15:50:05+00:00"
         },
         {
             "name": "symfony/polyfill-php82",
-            "version": "v1.38.1",
+            "version": "v1.43.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php82.git",
-                "reference": "002dc0cfe5fd4ed6033d48f27d4f19a486c4b04b"
+                "reference": "843bbe8b2a7934307b749751eede0f111f5d1cfc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php82/zipball/002dc0cfe5fd4ed6033d48f27d4f19a486c4b04b",
-                "reference": "002dc0cfe5fd4ed6033d48f27d4f19a486c4b04b",
+                "url": "https://api.github.com/repos/symfony/polyfill-php82/zipball/843bbe8b2a7934307b749751eede0f111f5d1cfc",
+                "reference": "843bbe8b2a7934307b749751eede0f111f5d1cfc",
                 "shasum": ""
             },
             "require": {
@@ -10691,7 +10691,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php82/tree/v1.38.1"
+                "source": "https://github.com/symfony/polyfill-php82/tree/v1.43.0"
             },
             "funding": [
                 {
@@ -10711,7 +10711,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-05-26T12:45:58+00:00"
+            "time": "2026-09-25T15:50:05+00:00"
         },
         {
             "name": "symfony/polyfill-php83",
