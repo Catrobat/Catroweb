@@ -1,995 +1,994 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+title: "Komuniti Catrobat"
+meta.description: "Kongsi, terokai dan remix projek kreatif yang dibuat dengan Catrobat. Sertai komuniti global pencipta muda yang membina permainan, animasi dan aplikasi."
+meta.description.media.library: "Layari dan muat turun aset media percuma untuk Catrobat — bunyi, imej dan banyak lagi untuk projek kamu."
+meta.og.title.login: "Log masuk ke Catrobat"
+meta.og.description.login: "Log masuk untuk berkongsi projek Catrobat kamu dengan komuniti."
+meta.og.title.register: "Cipta akaun Catrobat"
+meta.og.description.register: "Sertai komuniti Catrobat dan mula berkongsi projek kreatif kamu hari ini."
+meta.og.description.profile: "%username% di Catrobat – layari projek dan pencapaiannya."
 localLanguage: Bahasa Inggeris
 username: Nama Pengguna
 password: Kata Laluan
-createNewPassword: Create new password
-accountSettings: Account settings
-email: E-Mail
-aboutPocketCode: Tentang Kod Poket
-about: About Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
-tutorials: Help
+createNewPassword: "Cipta kata laluan baharu"
+accountSettings: "Tetapan akaun"
+email: "E-mel"
+aboutPocketCode: "Tentang Pocket Code"
+about: "Tentang Catrobat"
+education: "Pendidikan"
+chat: "Sembang dan forum"
+privacyGuide: "Panduan Kesedaran Privasi"
+others: "Lain-lain"
+tutorials: "Bantuan"
 googlePlay: Google Play
-iosAppStore: IOS App store
+iosAppStore: "iOS App Store"
 instagram: Instagram
-discordChat: Discord chat
+discordChat: "Sembang Discord"
 passwordsNoMatch: Kata laluan tidak sepadan.
-error: Oops!
+error: "Alamak!"
 cancel: Batal
-confirm: Confirm
-report: Melapor
-report.title: Melapor
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-name: Name
+confirm: "Sahkan"
+report: "Laporkan"
+report.title: "Laporkan"
+deleteIt: "Ya, padamkan!"
+reportIt: "Ya, laporkan!"
+areYouSure: "Kamu pasti?"
+noWayOfReturn: "Tindakan kamu tidak boleh dipulihkan!"
+download: "Muat turun"
+name: "Nama"
 description: Huraian
 noDescription: Tiada huraian diberikan.
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+credits: "Nota dan kredit"
+noCredits: "Tiada nota dan kredit."
+notesAndCreditsDescription: "Bagaimana kamu mencipta projek ini? Adakah kamu menggunakan idea, skrip atau karya seni orang lain? Ucapkan terima kasih kepada mereka di sini."
+projectImportedFromScratch: "Projek ini diimport dari MIT Scratch. Kamu boleh lihat projek asalnya"
+scratchImportedProjectLinkHere: "di sini."
 country: Negara
-loginText: masukkan Text
-privacyPolicy: Polisi peribadi
-imprint: Mendalam
-projectDetails: Details
-somethingWentWrong: 'Ooooops ada masalah.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+loginText: "log masuk"
+privacyPolicy: "Dasar privasi"
+imprint: "Maklumat penerbit"
+projectDetails: "Butiran"
+somethingWentWrong: "Alamak, ada masalah."
+accountNotVerified: "Sila pastikan kamu sudah log masuk dan e-mel akaun kamu telah disahkan."
+accountSuspended: "Akaun kamu telah digantung kerana laporan komuniti. Kamu boleh merayu keputusan ini dari profil kamu."
+doesNotExist: "Sumber yang diminta tidak wujud."
 pleaseTryAgain: 'Sila cuba sekali lagi!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Please update to the newest Pocket Code version!'
+tryAgainButton: "Cuba lagi"
+oldVersionError: "Sila kemas kini ke versi Pocket Code yang terbaharu!"
 more: 'lebih'
 less: 'kurang'
-show-more: 'More information'
-show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Got it
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-allNotifications: 'All'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Habis!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+show-more: "Tunjuk lagi"
+show-less: "Tunjuk kurang"
+more-information: "Maklumat lanjut"
+less-information: "Kurang maklumat"
+ok: "Faham"
+clickToDownloadProgram: "Untuk memuat turun projek contoh, klik %link_start% di sini %link_end%."
+registrationError: "Nama pengguna atau alamat e-mel sudah digunakan."
+notifications: "Pemberitahuan"
+allNotifications: "Semua"
+FollowersNotifications: "Pengikut"
+LikeNotifications: "Reaksi"
+CommentNotifications: "Komen"
+RemixNotifications: "Remix"
+wellDone: "Syabas!"
+done: "Selesai!"
+notificationsReadMessage: "Nampaknya kamu tiada sebarang pemberitahuan."
+confirmMessage: "Ya, padamkan"
 cancelMessage: "Batal"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
-projects: "Projects"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+notificationsUnauthorizedError: "Tidak dapat membenarkan pengguna"
+notificationsClearError: "Tidak dapat menandakan pemberitahuan sebagai telah dibaca!"
+pleaseWait: "Sila tunggu..."
+projects: "Projek"
+users: "Pengguna"
+studios: "Studio"
+oauthPopUpTitle: "Maklumat log masuk akaun luaran"
+oauthInfo: "Kamu baru sahaja menggunakan akaun luaran untuk log masuk. Kami telah mencipta nama pengguna rawak untuk kamu. Jika kamu mahu menukar nama pengguna atau mencipta kata laluan baharu untuk akaun kamu, sila pergi ke halaman profil kamu."
+oauthHere: "di sini"
+statistics: "Statistik"
+languageSelection: "Pilihan bahasa"
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: "Tema"
+  auto: "Sistem"
+  auto_description: "Ikut tetapan peranti kamu"
+  light: "Cerah"
+  light_description: "Rupa terang"
+  dark: "Gelap"
+  dark_description: "Rupa gelap"
+  apply: "Guna"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: "Projek apakah yang disyorkan di sini?"
+      description: "Semakin banyak reaksi (Ibu jari, Senyum ...) yang diterima projek kamu, semakin tinggi kedudukannya dalam senarai ini."
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: "Mengikuti"
+  followers: "Pengikut"
+  follow: "Ikuti"
+  username: "Pengguna"
+  followsMe: "Mengikuti saya"
+  noFollowing: "Kamu tidak mengikuti sesiapa pun buat masa ini."
+  noFollowers: "Kamu belum ada pengikut buat masa ini."
+  noOtherFollowing: "Tiada pengguna yang diikuti buat masa ini."
+  noOtherFollowers: "Tiada pengikut buat masa ini."
+  followError: " Kami tidak dapat mengikuti pengguna ini sekarang."
+  unfollowError: " Kami tidak dapat berhenti mengikuti pengguna ini sekarang."
+  unfollowQuestion: "Kamu pasti mahu berhenti mengikuti pengguna ini?"
+  unfollowButton: "Berhenti ikuti %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  open: Open
-  download: Download
+    title: "Selamat datang ke %theme% Catrobat"
+    title_mindstorms: "Selamat datang ke laman Catrobat untuk Mindstorms EV3 dan NXT"
+    subtitle: "Cipta cerita, permainan dan banyak lagi..."
+    subtitle_embroidery: "Jahit corak kamu sendiri pada baju-T, beg, seluar atau sarung telefon pintar kamu!"
+    subtitle_mindstorms: "Cipta projek kamu sendiri dengan robot Lego Mindstorms EV3 dan NXT kamu"
+    download: "Muat turun aplikasi"
+    statistics: "Lebih banyak statistik"
+  featured: "Pilihan"
+  open: "Buka"
+  download: "Muat turun"
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: "Muat Naik Projek"
+    drop_here: "Seret & lepaskan fail .catrobat kamu di sini"
+    or_browse: "atau klik untuk melayari"
+    button: "Muat naik"
+    uploading: "Sedang memuat naik..."
+    success: "Projek berjaya dimuat naik!"
+    view_project: "Lihat Projek"
+    upload_another: "Muat Naik Lagi"
+    invalid_file: "Sila pilih fail .catrobat"
+    file_too_large: "Fail terlalu besar"
+    error: "Muat naik gagal. Sila cuba lagi."
+    unauthorized: "Kamu mesti log masuk untuk memuat naik."
+    rate_limited: "Terlalu banyak muat naik. Sila cuba lagi nanti."
+    selected_file: "Fail dipilih:"
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
+      file_size: "Saiz fail maksimum ialah 100 MB."
+      app_upload: "Kamu juga boleh memuat naik projek terus dari aplikasi Pocket Code. Ambil perhatian bahawa aplikasi sedang diolah semula dan tidak menyokong muat naik web buat masa ini."
+      retention: "Projek yang dimuat naik akan dibuang secara automatik selepas tempoh tidak aktif. Log masuk dengan kerap atau dapatkan muat turun pada projek kamu untuk melanjutkan tempoh simpanannya."
+      protection: "Projek yang sangat bagus atau popular boleh dilindungi daripada pemadaman automatik oleh moderator."
+  example: "Contoh"
+  newest: "Projek terbaharu"
+  recommended: "Projek disyorkan"
+  scratchremixes: "Remix Scratch"
+  noProjects: "Tiada projek buat masa ini."
+  shareAction: "Kongsi"
+  deleteAction: "Padam projek"
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+    Kamu pasti?
+    Kamu pasti mahu memadam "%programName%"?
+    Tindakan kamu tidak boleh dipulihkan!
+    Ya, padamkan!
+    Batal
+  deleteConfirmText: "Tindakan ini tidak boleh dibuat asal. Projek kamu akan dipadam secara kekal."
+  deleteConfirmationTitle: "Kamu pasti?"
+  deleteNotFoundError: "Projek yang hendak dipadam tidak dapat ditemui di bawah pengguna kamu."
+  private: "peribadi"
+  public: "awam"
+  setPrivateAction: "Jadikan peribadi"
+  setPublicAction: "Jadikan awam"
+  setPrivateConfirm: "Jadikan projek ini peribadi? Ia tidak akan muncul lagi dalam hasil carian."
+  setPublicConfirm: "Jadikan projek ini awam? Ia akan kelihatan kepada semua orang."
+  markNotForKidsConfirm: "Tandakan projek ini sebagai tidak sesuai untuk kanak-kanak?"
+  markSafeForKidsConfirm: "Buang tanda tidak-untuk-kanak-kanak daripada projek ini?"
+  nfkModeratorLocked: "Tetapan ini telah dikunci oleh moderator."
+  confirmSetPrivate: "Kamu pasti mahu menjadikan projek ini peribadi? Ia tidak akan muncul lagi dalam hasil carian."
+  confirmSetPublic: "Kamu pasti mahu menjadikan projek ini awam? Ia akan kelihatan kepada semua orang."
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Kamu pasti?
+    Jika kamu menjadikan '%programName%' peribadi, ia tidak akan dilihat atau ditemui oleh pengguna lain.
+    Kamu masih boleh berkongsi pautan projek kamu dengan rakan-rakan. Kamu boleh menukar keterlihatan dengan mengetik ikon mangga.
+    Jika kamu menjadikan "%programName%" awam, ia boleh dilihat dan ditemui oleh pengguna lain.
+    Ya, jadikan awam
+    Ya, jadikan peribadi
+    Tidak
+  reportCommentConfirmation: "Kamu pasti mahu melaporkan komen ini?"
+  deleteCommentConfirmation: "Kamu pasti mahu memadam komen ini?"
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+    Padam akaun?
+    Kamu pasti mahu memadam akaun kamu? Ini juga akan memadam projek dan komen yang telah kamu muat naik!
+    Tindakan kamu tidak boleh dipulihkan!
+    Ya, padamkan!
+    Batal
+  tooLongName: "Nama projek terlalu panjang!"
+  tooLongDescription: "Huraian projek terlalu panjang!"
+  tooLongCredits: "Nota dan kredit projek terlalu panjang!"
+  my_projects: "Projek yang saya kongsi"
+  trending: "Projek sohor kini"
+  popular: "Projek popular"
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
+    viewed: "Paling banyak dilihat"
+    downloaded: "Paling banyak dimuat turun"
+  random: "Projek rawak"
+  related: "Projek berkaitan"
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: "Terokai Projek"
+    no_projects: "Kamu belum mencipta sebarang projek lagi"
+    no_explore: "Tiada projek ditemui"
+    load_more: "Muat Lagi"
+    upload: "Muat Naik Projek"
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: "Dilindungi"
+    day_left: "Tinggal 1 hari"
+    days_left: "Tinggal %days% hari"
+    tooltip: "Projek dibuang secara automatik selepas tempoh tidak aktif. Dapatkan lebih banyak muat turun atau log masuk dengan kerap untuk melanjutkan tempoh simpanan."
+    tooltip_protected: "Projek ini dilindungi dan tidak akan dipadam secara automatik."
+  downloads: "%downloads% muat turun"
+  sample: "Projek contoh"
+  views: "%views% tontonan"
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "All"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+    likersTitle: "Orang yang memberi reaksi kepada projek itu"
+    all: "Semua"
+  remixes: "{0}0 remix |{1}1 remix |]1,Inf]%remixes% remix"
+  newRemixesNotificationTitle: "|{1}\"%programName%\" ada 1 remix baharu: |]1,Inf] \"%programName%\" ada %remixes% remix baharu:"
+  submitted: "Projek yang dihantar"
+  uploaded: "Projek yang dimuat naik"
+  reportAsInappropriate: "Laporkan sebagai tidak sesuai"
+  reportProgram: "Laporkan projek"
+  languageVersion: "Versi bahasa Catrobat: %languageVersion%"
+  reportLoginText: "Sila %login% untuk melaporkan projek ini."
+  reportDialogHeader: "Kenapa kamu mahu melaporkan projek ini?"
+  reportDialogReason: "Masukkan sebab"
+  reportRadioButtonInappropriate: "Ia tidak sesuai"
+  reportRadioButtonCopyright: "Pelanggaran hak cipta"
+  reportRadioButtonSpam: "Ia spam"
+  reportRadioButtonDislike: "Saya tidak suka"
+  reportOwnProgram: "Kamu tidak boleh melaporkan projek kamu sendiri."
+  reportAlready: "Kamu sudah melaporkan projek ini."
+  reportDone: "Kamu telah melaporkan projek ini!"
+  updateAppHeaderDownload: "Muat turun tidak dapat dilakukan"
+  updateAppTextDownload: "Sila kemas kini aplikasi kamu ke versi terbaharu. Ambil perhatian bahawa tidak semua ciri Android sudah tersedia di iOS."
+  updateAppTextDownloadApk: "Muat turun APK buat masa ini hanya tersedia di Android dan bukan di iOS."
+  updateAppHeader: "Kemas kini aplikasi"
+  updateAppText: "Sila kemas kini aplikasi kamu ke versi terbaharu."
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Delete
-  report: Melapor
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  checkout_this_project: "Lihat projek Catrobat ini"
+  show_more: "Tunjuk Lagi"
+  comments: "Komen"
+  send: "Hantar"
+  delete: "Padam"
+  report: "Laporkan"
+  reply: "Balas"
+  report_popup: "Komen berjaya dilaporkan."
+  report_popup_header: "Dilaporkan"
+  deleted_popup: "Komen berjaya dipadam."
+  deleted_popup_header: "Dipadam"
+  noAdminRights: "Kamu tiada hak pentadbir. Sila log masuk sebagai Pentadbir."
+  editProject: "Sunting projek"
+  closeProjectEditor: "Tutup penyunting projek"
+  closeEditorPrompt: "Kamu mahu menyimpan perubahan kamu?"
+  btnDiscard: "Buang"
+  addComment: "Tulis komen"
+  thumbsUp: "Bagus!"
+  smile: "Senyum!"
+  love: "Sayang!"
+  wow: "Wah!"
+  linkTitle: "Pautan"
+  link: "Salin pautan projek ke papan keratan"
+  reactionsText: "Reaksi"
+  downloadErrorText: "Ralat berlaku semasa memuat turun projek. Sila cuba lagi nanti."
+  downloadStartText: "Muat turun telah bermula..."
+  downloading: "Sedang memuat turun..."
+  openInApp: "Buka dalam Pocket Code"
+  downloaded: "Dimuat turun"
+  showTranslation: "Tunjuk terjemahan"
+  hideTranslation: "Sembunyikan terjemahan"
+  translatedByLine: "Diterjemah oleh %provider% daripada %sourceLanguage% ke %targetLanguage%"
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
-  save: Save
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  confrimDelete: "Kamu pasti mahu memadam terjemahan ini?"
+  default: "Lalai"
+  save: "Simpan"
+  translationTitle: "Terjemahan %language%"
+  editDefault: "Sunting lalai"
+  editTranslation: "Sunting terjemahan %language%"
+  translations: "Terjemahan"
+  createTranslation: "Cipta terjemahan"
+  deletedComment: "**Dipadam**"
+  replyLabel: "balasan"
+  repliesLabel: "balasan"
+  notForKids: "Tidak selamat untuk kanak-kanak"
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
-  by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
-  projectsLabel: 'Projects'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  title: "Remix"
+  showRemixGraph: "Graf remix"
+  by: "oleh"
+  open: "Buka"
+  showPaths: "Tunjuk Laluan"
+  loading: "Memuatkan graf remix..."
+  error: "Tidak dapat memuatkan graf remix."
+  empty: "Belum ada data graf remix untuk projek ini."
+  remixesLabel: "Remix"
+  projectsLabel: "Projek"
+  scratchLabel: "Akar Scratch"
+  interactHint: "Pilih nod untuk membuka projek atau menyerlahkan laluan remixnya."
+  zoomIn: "Zum masuk"
+  zoomOut: "Zum keluar"
+  resetView: "Set semula paparan"
+  projectNotAvailableErrorTitle: "Maaf..."
+  projectNotAvailableErrorDescription: "Projek ini tidak tersedia lagi!"
+  projectNotAvailable: "Tidak tersedia"
+  projectUnknownUser: "Pengguna tidak diketahui"
+noReply: "Ini ialah mesej automatik - Sila jangan balas terus kepada e-mel ini."
 accountConfirmation:
-  subject: Your Catrobat account confirmation
+  subject: "Pengesahan akaun Catrobat kamu"
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Hai %username%.
+    Untuk selesai mengaktifkan akaun kamu, sila lawati %confirmationUrl%
+    Pautan ini hanya boleh digunakan sekali untuk mengesahkan akaun kamu.
+    Salam mesra,
+    Pasukan Catrobat kamu.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Hai %username%.<br>
     <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
+    Untuk selesai mengaktifkan akaun kamu, sila klik <a href="%confirmationUrl%">di sini.</a><br>
+    Pautan ini hanya boleh digunakan sekali untuk mengesahkan akaun kamu.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Salam mesra,<br>
+    Pasukan Catrobat kamu.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: "Sahkan alamat e-mel kamu"
+  welcome: "Selamat datang ke Catrobat!"
+  greeting: "Terima kasih kerana mendaftar! Sila sahkan alamat e-mel kamu untuk bermula."
+  message: "Klik butang di bawah untuk mengesahkan e-mel kamu. Pautan ini sah sehingga %time% dan hanya boleh digunakan sekali."
+  button: "Sahkan Alamat E-mel"
+  ignore: "Jika kamu tidak mencipta akaun Catrobat, kamu boleh abaikan e-mel ini."
+  autoDelete: "Akaun yang tidak disahkan akan dipadam secara automatik selepas 30 hari."
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: "Kebenaran ibu bapa diperlukan untuk akaun Catrobat anak kamu"
+    title: "Kebenaran Ibu Bapa Diperlukan"
+    greeting: "Hai,"
+    message: "Anak kamu %username% telah mencipta akaun di Catrobat dan telah mengesahkan alamat e-melnya."
+    explanation: "Catrobat ialah platform pendidikan percuma di mana golongan muda belajar mengekod dengan mencipta aplikasi, permainan dan animasi. Di bawah peraturan perlindungan kanak-kanak EU, kami memerlukan kebenaran kamu sebelum anak kamu boleh menyertai komuniti sepenuhnya. Sila klik butang di bawah untuk memberi kebenaran."
+    button: "Beri Kebenaran Ibu Bapa"
+    ignore: "Jika kamu tidak menjangkakan e-mel ini, kamu boleh abaikannya. Tanpa kebenaran, akaun ini akan mempunyai fungsi yang terhad."
+    whatIsCatrobat: "Catrobat ialah platform pengaturcaraan pendidikan yang percuma dan bukan untung. Ketahui lebih lanjut di catrobat.org."
+    manageLink: "Kamu boleh mengurus akaun anak kamu pada bila-bila masa melalui <a href=\"%portalUrl%\" style=\"color: #00acc1;\">Portal Ibu Bapa</a> kami. Ketahui lebih lanjut tentang <a href=\"%infoUrl%\" style=\"color: #00acc1;\">hak kamu sebagai ibu bapa</a>."
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: "Kebenaran Diberikan"
+    message: "Terima kasih! Akaun %username% kini diaktifkan sepenuhnya."
+    continueButton: "Terokai projek"
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: "Ibu Bapa & Penjaga"
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: "Maklumat untuk Ibu Bapa & Penjaga"
+    intro: "Catrobat mengambil serius keselamatan dan privasi pengguna muda. Halaman ini menerangkan cara kami melindungi anak kamu dan hak yang kamu miliki."
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: "Apakah itu Catrobat?"
+      text: "Catrobat ialah platform pendidikan percuma dan bukan untung di mana golongan muda belajar pengaturcaraan dengan mencipta aplikasi, permainan dan animasi mereka sendiri. Platform ini tersedia di seluruh dunia dan digunakan dalam persekitaran pendidikan."
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: "Data apakah yang kami kumpul?"
+      text: "Kami mengumpul data minimum yang diperlukan untuk mengendalikan platform: nama pengguna, alamat e-mel, tarikh lahir dan sebarang projek yang dicipta serta dimuat naik oleh anak kamu. Untuk pengguna di bawah 14 tahun, kami juga menyimpan alamat e-mel ibu bapa/penjaga bagi tujuan kebenaran. Kami tidak menjual atau berkongsi data peribadi dengan pihak ketiga."
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: "Hak kamu sebagai ibu bapa atau penjaga"
+      text: "Di bawah peraturan perlindungan kanak-kanak EU (GDPR) dan COPPA, kamu berhak untuk: menyemak data yang kami simpan tentang anak kamu, meminta salinan data tersebut, menarik balik kebenaran kamu pada bila-bila masa (yang akan menyekat akaun), dan meminta pemadaman kekal akaun anak kamu serta semua data berkaitan."
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: "Apakah sekatan yang dikenakan pada akaun bawah umur?"
+      text: "Pengguna di bawah 16 tahun tidak boleh menghantar atau membaca komen, mengikuti pengguna lain atau melihat kandungan yang ditandakan sebagai tidak sesuai untuk kanak-kanak. Mereka masih boleh mencipta dan memuat naik projek, melayari projek awam dan memberi reaksi suka pada projek. Sekatan ini diadakan untuk menyediakan persekitaran pembelajaran yang selamat."
+    manageButton: "Urus Akaun Anak Kamu"
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: "Portal Ibu Bapa"
+    description: "Masukkan alamat e-mel kamu untuk menerima pautan selamat bagi mengurus akaun Catrobat anak kamu. Pautan akan dihantar ke alamat e-mel yang kamu berikan semasa pendaftaran."
+    emailLabel: "Alamat e-mel kamu"
+    submitButton: "Hantar Pautan Pengurusan"
+    infoLink: "Ketahui Lebih Lanjut"
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: "Semak peti masuk kamu"
+      message: "Jika ada akaun yang dikaitkan dengan e-mel ini, kami telah menghantar pautan pengurusan. Sila semak peti masuk kamu dan ikut pautan tersebut untuk mengurus akaun anak kamu."
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: "Urus Akaun Anak"
+    description: "Kamu sedang mengurus akaun yang dikaitkan dengan %email%."
+    consentStatus: "Status kebenaran"
+    accountCreated: "Akaun dicipta"
+    email: "E-mel anak"
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: "Diberikan"
+      pending: "Belum selesai"
+      revoked: "Ditarik balik"
+    grantButton: "Beri Kebenaran"
+    revokeButton: "Tarik Balik Kebenaran"
+    revokeConfirm: "Kamu pasti mahu menarik balik kebenaran? Akaun ini akan mempunyai fungsi yang terhad."
+    exportButton: "Eksport Data"
+    deleteButton: "Padam Akaun"
+    deleteConfirm: "Kamu pasti mahu memadam akaun ini secara kekal? Tindakan ini tidak boleh dibuat asal."
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: "Urus akaun Catrobat anak kamu"
+      title: "Pengurusan Akaun"
+      greeting: "Hai,"
+      message: "Kamu telah meminta pautan untuk mengurus akaun Catrobat anak kamu (%usernames%). Klik butang di bawah untuk melihat dan mengurus akaun tersebut."
+      button: "Urus Akaun"
+      ignore: "Jika kamu tidak membuat permintaan ini, kamu boleh abaikan e-mel ini."
 passwordRecovery:
-  subject: Your Catrobat password recovery
+  subject: "Pemulihan kata laluan Catrobat kamu"
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    Hai %username%.
+    Kamu telah meminta untuk menetapkan semula kata laluan kamu di %appplication_url% kerana kamu terlupa kata laluan.
+    Jika kamu tidak membuat permintaan ini, sila abaikannya. Ia akan tamat tempoh dan tidak boleh digunakan lagi dalam masa 24 jam.
+    Untuk menetapkan semula kata laluan dan mencipta yang baharu, sila lawati halaman berikut: %confirmationUrl%
+    Kamu boleh menggunakan nama pengguna dan kata laluan kamu pada bila-bila masa untuk mengakses komuniti %appplication_url%.
+    Untuk berbuat demikian, lawati sahaja halaman berikut: %loginPage%
+    Untuk menyunting butiran profil kamu, pergi ke halaman ini: %profilePage%
+    Salam mesra,
+    Pasukan Catrobat kamu.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Hai %username%.<br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Kamu telah meminta untuk menetapkan semula kata laluan kamu di <a href="%appplication_url%">Pocket Code</a> kerana kamu terlupa kata laluan.
+    Jika kamu tidak membuat permintaan ini, sila abaikannya. Ia akan tamat tempoh dan tidak boleh digunakan lagi dalam masa 24 jam.<br>
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    Untuk menetapkan semula kata laluan dan mencipta yang baharu, sila klik <a href="%confirmationUrl%">di sini.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
+    Kamu boleh menggunakan nama pengguna dan kata laluan kamu pada bila-bila masa untuk mengakses komuniti <a href="%appplication_url%">Pocket Code</a>.<br>
+    Untuk berbuat demikian, lawati sahaja halaman berikut: <a href="%loginPage%">Halaman Log Masuk</a><br>
+    Untuk menyunting butiran profil kamu, pergi ke <a href="%profilePage%">halaman</a> ini.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Salam mesra,<br>
+    Pasukan Catrobat kamu.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  aboutMe: "Tentang saya"
+  currentlyWorkingOn: "Sedang diusahakan"
+  edit: "Sunting profil kamu"
+  saveChanges: "simpan perubahan"
+  newPass: "kata laluan baharu"
+  repeatPass: "ulang kata laluan"
+  oldPass: "kata laluan lama"
+  firstEmail: "E-mel pertama saya"
+  secondEmail: "E-mel kedua saya"
+  myPrograms: "Projek saya"
+  follows: "Mengikuti"
+  follower: "Pengikut"
+  unfollowUser: "Berhenti ikuti pengguna ini!"
+  followUser: "Ikuti pengguna ini!"
+  amountOfPrograms: "Jumlah projek"
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
-  changePicture: Change picture
-  goToScratchProfile: Profile on Scratch
+    passwordTooShort: "Kata laluan baharu mesti mempunyai sekurang-kurangnya %length% aksara."
+    passwordTooLong: "Kata laluan baharu boleh mempunyai maksimum %length% aksara."
+    passwordIsUsername: "Kata laluan mesti berbeza daripada nama pengguna."
+    passwordWrong: "Kata laluan salah"
+    emailNotValid: "Alamat e-mel ini tidak sah."
+    emailMissing: "Ralat semasa mengemas kini alamat e-mel ini. Kamu mesti mempunyai sekurang-kurangnya satu alamat e-mel yang disahkan."
+    emailExists: "Alamat e-mel ini sudah wujud."
+    usernameNotValid: "Nama pengguna ini tidak sah."
+    usernameMissing: "Kamu mesti mempunyai nama pengguna."
+    usernameExists: "Nama pengguna ini sudah wujud."
+    usernameContainsEmail: "Nama pengguna tidak boleh mengandungi alamat e-mel."
+    submitSuccess: "disimpan!"
+  reallyDeleteProgram: "Kamu betul-betul mahu memadam projek kamu"
+  programsOf: "Projek oleh"
+  picture: "Gambar profil"
+  changePicture: "Tukar gambar"
+  goToScratchProfile: "Profil di Scratch"
 myprofile:
-  userSettings: User settings
-  profileSettings: Edit profile
-  securitySettings: Change password
-  accountSettings: Account settings
-  accountVerification: Verify account
-  account: Account
-  editProfile: Edit profile
-  edit: Edit
-  done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
+  userSettings: "Tetapan pengguna"
+  profileSettings: "Sunting profil"
+  securitySettings: "Tukar kata laluan"
+  accountSettings: "Tetapan akaun"
+  accountVerification: "Sahkan akaun"
+  account: "Akaun"
+  editProfile: "Sunting profil"
+  edit: "Sunting"
+  done: "Selesai"
+  checkMail: "Satu e-mel telah dihantar ke alamat e-mel kamu. Sila semak peti masuk kamu."
+  passwordUpdated: "Kata laluan kamu berjaya dikemas kini."
   avatar: Avatar
-  email: Email
-  deleteAccount: Delete account
+  email: "E-mel"
+  deleteAccount: "Padam akaun"
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+    Ambil perhatian:
+    Kamu telah mencipta %num_projects% projek dan mempunyai %num_followers% pengikut. Semua projek kamu akan dibuang. Kamu tidak akan dapat log masuk lagi dan projek kamu akan hilang daripada semua senarai. Pemadaman profil tidak boleh dibuat asal!
+    Kamu pasti mahu meninggalkan kami?
+  exportData: "Muat turun data saya"
+  exportDataDescription: "Kamu berhak menerima salinan data peribadi kamu. Ini termasuk maklumat profil, projek, komen, reaksi dan pengikut kamu."
+  exportDataLoading: "Sedang memuat turun..."
+  exportDataError: "Ada masalah semasa mengeksport data kamu. Sila cuba lagi nanti."
+  exportDataRateLimited: "Kamu hanya boleh mengeksport data kamu sekali sehari. Sila cuba lagi esok."
+  editAccountSettings: "Sunting tetapan akaun"
+  profileChangeSuccess: "Profil kamu berjaya ditukar."
+  unspecifiedError: "Ada sesuatu yang tidak berfungsi semasa menukar profil kamu. Sila cuba lagi atau beritahu kami jika ia terus berlaku!"
+  verifyAccountText: "Kami akan menghantar e-mel kepada kamu dengan pautan untuk mengesahkan akaun kamu. Pastikan kamu klik pautan itu dalam masa sejam, kamu hanya boleh meminta satu e-mel sehari."
+  verifyAccountButton: "Hantar e-mel"
+  verifyAccountMailSent: "E-mel berjaya dihantar. Sila semak peti masuk kamu"
+  verifyAccountMailFailed: "Kamu hanya boleh meminta satu e-mel sehari"
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: "Lesen untuk bermain"
+  title: "Lesen untuk bermain - Beri kredit dan kongsi"
+  text1: "Bayangkan setiap projek Catrobat ialah sebiji kek, kek yang sangat istimewa yang datang bersama resipinya (blok pengaturcaraan). Semua ahli komuniti Catrobat berkongsi kek mereka bersama resipinya. Ini bermakna kamu boleh menikmati kek itu dan belajar cara membuatnya sendiri!"
+  text2: "Tiada resipi rahsia: arahan cara membuat kek ini terbuka untuk sesiapa sahaja menggunakan, menggunakan semula, mengubah suai dan dijadikan inspirasi untuk idea baharu... maksud saya kek."
+  text3: "Kamu boleh makan kek itu dan juga menyalin resipi orang lain untuk membuat kek kamu sendiri, mungkin dengan bahan yang berbeza. Kebebasan ini datang dengan dua syarat mudah:"
+  text4: "Semasa menubuhkan komuniti Catrobat, kami memutuskan untuk menggunakan pendekatan ini kerana kami percaya ia menyokong pembelajaran dan kreativiti dalam komuniti. Dengan berkongsi resipi dan bahan (skrip dan karya seni), orang ramai boleh membina di atas idea satu sama lain dan semua orang akan mendapat manfaat."
+  text5: "Semasa mereka bentuk laman web Catrobat, kami menyertakan ciri untuk menggalakkan orang berkongsi dan memberi kredit kepada orang lain. Pada setiap halaman projek, kamu sentiasa boleh memuat turun skrip asal projek tersebut. Jika kamu me-remix projek (mengubah suai skrip atau karya seni, dan berkongsi hasilnya), kami menggalakkan kamu memberi kredit dalam nota projek, dengan menyebut orang dan projek yang memberi inspirasi kepada kamu."
+  text6: "Ketahui lebih lanjut tentang terma penggunaan komuniti dalam talian Catrobat di %link-termsOfUse%."
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: "kongsi kek kamu bersama resipinya"
+    item2: "beri kredit kepada mereka yang memberi inspirasi kepada kamu"
+  version: "Versi 1.1, 2 April 2013"
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Hadiah kami untuk anda:'
-  text5: 'Our Terms of Use and Service:'
+  title: "Terma Penggunaan"
+  headline: "Selamat datang ke komuniti Catrobat!"
+  text1: "Sebagai sebahagian daripada komuniti Catrobat, kamu berkongsi projek dan idea dengan orang:"
+  text2: "Kami memerlukan bantuan kamu untuk menjadikan komuniti ini tempat yang menyokong setiap ahli. Begini cara kamu boleh membantu:"
+  text3: "Melalui projek Catrobat, kami mahu memupuk kerjasama dan membolehkan kreativiti semua orang bergabung demi manfaat seluruh umat manusia. Kamu juga boleh menjadi ahli aktif komuniti Catrobat dengan memberikan projek kamu kembali kepada komuniti sebagai hadiah, sama seperti ahli aktif lain memberikan projek mereka kepada kamu:"
+  text4: "Hadiah kami untuk kamu:"
+  text5: "Terma Penggunaan dan Perkhidmatan kami:"
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: "dari pelbagai negara dan budaya"
+    item2: "dari semua peringkat umur (dari kanak-kanak kecil hingga remaja dan datuk nenek)"
+    item3: "dengan semua tahap pengalaman"
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item1: "Hormati orang lain. Semasa berkongsi projek, ingatlah bahawa orang dari pelbagai umur dan latar belakang akan melihat sumbangan kamu."
+    item2: "Beri kredit. Kamu bebas membuat versi ubah suai projek orang lain - pastikan sahaja kamu memberi kredit kepada mereka. Satu tempat untuk memberi kredit ialah bahagian kredit projek kamu. Sila lihat perenggan di bawah senarai bertitik ini untuk butiran tentang mengubah suai projek pengguna lain."
+    item3: "Jujur. Jangan berpura-pura menjadi orang lain atau cuba menipu komuniti."
+    item4: "Rahsiakan maklumat peribadi. Jangan kongsi alamat e-mel, nombor telefon atau maklumat hubungan peribadi kamu yang lain."
+    item5: "Bantu kekalkan laman ini mesra. Jika kamu rasa orang lain akan mendapati sesuatu projek atau komen itu kejam, menghina, terlalu ganas atau tidak sesuai, klik sahaja butang 'laporkan sebagai tidak sesuai' dan tinggalkan penjelasan ringkas. Pasukan Catrobat akan menyemak laporan kamu dan mungkin membuang mana-mana projek, komen atau hantaran."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: "Dengan memuat naik projek ke laman web kami, kamu menerima dan bersetuju untuk meletakkan karya ini di bawah lesen bebas tertentu bagi projek Catrobat yang dimuat naik. Sama seperti lesen bebas yang membolehkan sistem Catrobat itu sendiri tersedia kepada kamu, lesen bebas projek Catrobat yang dimuat naik ini memberi semua orang hak untuk belajar daripada karya yang telah dimuat naik oleh orang lain dan untuk mengadaptasi serta me-remix karya itu bagi membina permainan, animasi dan projek baharu mereka sendiri yang menarik. Ini membolehkan semua orang 'berdiri di atas bahu rakan sebaya', dan salah seorang daripadanya ialah kamu! Karya kamu dengan itu akan memberi manfaat kepada seluruh dunia dan kekal bebas untuk digunakan oleh semua orang, agak serupa dengan teks dan gambar yang disumbangkan secara bebas ke Wikipedia oleh sukarelawan dari seluruh dunia. Anggaplah ia sebagai hadiah kamu kepada manusia sejagat: kamu memberi kepada semua orang, dan semua orang lain yang memuat naik karya mereka ke laman web kami memberi kepada kamu. Oleh itu, projek yang dimuat naik ialah hadiah yang sangat bernilai yang diberikan oleh pemiliknya kepada kamu secara percuma, dengan syarat kamu menyertai komuniti dengan terma yang sama."
+    item2: "Kamu tidak wajib menerima hadiah ini; jika kamu menerimanya, peraturan tertentu terpakai. Manfaat peraturan ini ialah kamu boleh belajar daripada karya tersebut dan membina di atasnya untuk menghasilkan sesuatu yang lebih hebat sendiri, yang kemudian boleh kamu, contohnya, muat naik semula ke laman web kami sebagai karya kamu sendiri. Manfaat lain ialah lesen ini memastikan kamu tidak boleh dipertanggungjawabkan atas sebarang masalah yang timbul kepada orang lain melalui penggunaan projek kamu oleh mereka."
+    item3: "Satu syarat tambahan yang penting ialah kamu mesti memberi atribusi dengan jelas kepada pengarang yang karyanya menjadi asas karya kamu sendiri. Pada masa yang sama, kami akan berusaha keras supaya karya kamu dihargai dengan jelas oleh orang lain sebagai sumbangan kamu, dengan memberi atribusi kepada nama unik yang kamu pilih secara bebas untuk mewakili kamu dalam komuniti Catrobat, dan dengan memberi peluang kepada orang lain untuk menyatakan penghargaan mereka kepada kamu secara terbuka kerana telah memberikan karya kamu kepada semua orang, dan khususnya kepada mereka."
+    item4: "Sila rujuk %link-licenseUploaded% untuk terma dan syarat undang-undang yang tepat."
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: "Kami menawarkan semua perisian dan sumber Internet kami sendiri yang berkaitan dengan sistem Catrobat, contohnya perisian yang ditulis oleh pasukan Catrobat, laman web dan sumber Internet kami, kod sumber kami sendiri yang berkaitan dengan sistem Catrobat, dan semua bahan tambahan yang disertakan seperti gambar, bunyi dan teks, sekarang dan pada masa hadapan kepada kamu di bawah lesen bebas Catrobat."
+    item2: "Lesen ini menjadikan semua bahagian Catrobat percuma untuk kamu dan juga bebas dalam erti kata memberi kamu kebebasan untuk menggunakannya mengikut kehendak kamu, dengan hanya beberapa sekatan yang memastikan, antara lain, bahawa sistem Catrobat akan kekal bebas dan berguna untuk semua orang selama-lamanya."
+    item3: "Sila rujuk %link-licenseToPlay% untuk terma dan syarat undang-undang yang tepat. Kod sumber sistem Catrobat serta banyak dokumen dan sumber lain tersedia melalui %link-developer%."
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: "Jika kamu, atau jika kamu berumur di bawah 13 tahun, ibu bapa atau penjaga sah kamu, mempunyai kaitan dengan organisasi yang terlibat dalam atau bertanggungjawab atas pelanggaran privasi jenis pukat tunda dan/atau pengawasan pukal atau besar-besaran, maka kamu tidak dibenarkan menggunakan aplikasi perisian kami dan mengakses perkhidmatan kami. Butiran tepat sekatan ini dan pengecualian tertentu kepadanya dinyatakan dalam Seksyen 4.a dan 4.b pada %link-termsOfUse% kami."
+    item2: "Jika kamu berumur di bawah 13 tahun, kamu perlu bertanya kepada ibu bapa atau penjaga sah kamu sama ada mereka membenarkan kamu menggunakan Aplikasi Perisian dan Perkhidmatan Catrobat."
+    item3: "Kami berhak untuk menolak, memadam atau menyembunyikan projek, akaun pengguna dan sebarang bahan digital yang dimuat naik ke laman web Catrobat pada bila-bila masa mengikut budi bicara kami sepenuhnya, contohnya jika kami mendapati sesuatu projek mengandungi bahan yang tidak sesuai atau seseorang pengguna melanggar hak orang lain."
+    item4: "Semua perisian dan sumber Internet Catrobat ditawarkan dengan harapan ia akan berguna, tetapi tanpa sebarang waranti."
+    item5: "Sila rujuk %link-termsOfUse% kami di developer.catrobat.org/terms_of_use_and_service untuk rumusan tepat perkara di atas dan beberapa terma serta syarat undang-undang tambahan."
+  bottom1: "Semak semula di sini dari semasa ke semasa, kerana kami sentiasa berusaha menambah baik Terma Penggunaan kami."
+  bottom2: "Sila e-melkan sebarang cadangan mengenai Terma Penggunaan ini kepada %email-webmaster%."
+  version: "Versi 1.3, 4 Mac 2014"
 search:
   dotdotdot: Cari...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
-  results: Results for
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  search: "Cari projek, pengguna & studio"
+  inMediaLib: "Cari dalam pustaka media"
+  inMediaCategory: "Cari dalam kategori media"
+  results: "Hasil untuk"
+  resultcount: "Carian kamu menemui %count% hasil"
+  fail: "Sila masukkan sekurang-kurangnya satu istilah carian"
+  noUsers: "Tiada pengguna ditemui"
+  noProjects: "Tiada projek ditemui"
+  noStudios: "Tiada studio ditemui"
+  sameSearchMessage: "Nampaknya kamu sudah berada di sini! Cuba carian lain?"
 menu:
-  profile: Profile
-  login: Login
-  logout: Logout
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
-  mediaLibrary: Media library
-  studio: Studios
-  language: Language
-  languageOptionsNotAvailable: No language options available.
+  profile: "Profil"
+  login: "Log masuk"
+  logout: "Log keluar"
+  admin: "Pentadbir"
+  home: "Laman utama"
+  helpAndTutorials: "Bantuan & tutorial"
+  followersAndFollowing: "Pengikut"
+  mediaLibrary: "Pustaka media"
+  studio: "Studio"
+  language: "Bahasa"
+  languageOptionsNotAvailable: "Tiada pilihan bahasa tersedia."
 login:
-  login: Login
+  login: "Log masuk"
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: "Log masuk sekarang"
+    createAccount: "Cipta akaun"
+    forgetPassword: "Lupa kata laluan?"
   oauth:
-    title: Or you can join with
-  passOrUser: Your password or username was incorrect.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
-  or: OR
+    title: "Atau kamu boleh sertai dengan"
+  passOrUser: "Kata laluan atau nama pengguna kamu salah."
+  accountSuspended: "Akaun kamu telah digantung. Jika kamu percaya ini satu kesilapan, sila hubungi pihak sokongan."
+  noUsername: "Nama pengguna atau alamat e-mel kamu tidak ditemui."
+  forgotPass: "Lupa kata laluan atau nama pengguna?"
+  recoverPassSend: "Satu e-mel telah dihantar ke alamat e-mel kamu. Sila semak peti masuk kamu."
+  alreadyReset: "Kata laluan untuk pengguna ini telah diminta dalam tempoh 24 jam yang lalu."
+  confirmationSend: "Satu e-mel untuk mengesahkan pendaftaran kamu telah dihantar ke alamat e-mel kamu. Sila semak peti masuk kamu dan aktifkan akaun kamu."
+  userOrEmail: "Nama pengguna atau E-mel"
+  changePass: "Tukar kata laluan"
+  createAccount: "Cipta akaun"
+  noAccount: "Belum ada akaun?"
+  alreadyAccount: "Sudah ada akaun?"
+  or: "ATAU"
   username: Nama Pengguna
-  email: Email
+  email: "E-mel"
   passwordFirst: Kata Laluan
-  passwordSecond: Password confirm
+  passwordSecond: "Sahkan kata laluan"
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: "Daftar"
+  subText: "Dengan meneruskan, kamu sedang menyediakan akaun komuniti Catrobat dan bersetuju dengan %var1% dan %var2% kami."
+  dateOfBirth: "Tarikh lahir"
+  dateOfBirthInfo: "Kami meminta tarikh lahir kamu untuk mematuhi peraturan perlindungan kanak-kanak EU (GDPR/COPPA) dan menyediakan pengalaman yang selamat untuk pengguna muda."
+  parentEmail: "E-mel ibu bapa/penjaga"
+  parentEmailInfo: "Diperlukan untuk pengguna di bawah 14 tahun. Kami akan menghantar permintaan kebenaran ke alamat ini."
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: Continue
+    title: "Lengkapkan pendaftaran kamu"
+    info: "Sila berikan tarikh lahir kamu untuk terus menggunakan platform ini."
+    submit: "Teruskan"
   button:
     cancel: Batal
-    createAccount: Create account
+    createAccount: "Cipta akaun"
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: "Semak peti masuk kamu!"
+    message: "Kami telah menghantar e-mel pengesahan kepada kamu. Klik pautan dalam e-mel itu untuk mengaktifkan akaun kamu."
+    helpTitle: "Tidak menerima e-mel?"
+    hint: "Semak folder spam kamu. Pautan ini sah selama 24 jam."
+    resendButton: "Hantar semula e-mel pengesahan"
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: "Menunggu kebenaran ibu bapa"
+    message: "E-mel kamu telah disahkan! Sebelum kamu boleh menggunakan platform sepenuhnya, ibu bapa atau penjaga perlu memberi kebenaran."
+    sentTo: "Permintaan kebenaran telah dihantar ke %email%"
+    helpTitle: "Tidak menerima e-mel? Perlukan bantuan?"
+    hint: "Minta ibu bapa kamu menyemak folder spam mereka. Pautan ini sah selama 24 jam."
+    resendButton: "Hantar semula e-mel kebenaran"
+    wrongEmail: "Tersalah masukkan e-mel ibu bapa?"
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: "Kebenaran ibu bapa telah ditarik balik"
+    message: "Ibu bapa atau penjaga kamu telah menarik balik kebenaran untuk akaun kamu. Akaun kamu mempunyai fungsi yang terhad sehingga kebenaran diberikan semula."
+    newEmailPlaceholder: "E-mel ibu bapa baharu"
+    changeButton: "Kemas kini & hantar semula"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: "Pemulihan akaun"
+  description: "Jika kamu ingat e-mel atau nama pengguna akaun kamu, kami boleh menghantar pautan untuk menetapkan semula kata laluan kamu."
   button:
     cancel: Batal
-    submit: Recover password
+    submit: "Pulihkan kata laluan"
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Tetapkan semula kata laluan kamu"
+    description: "Jika kamu ingat e-mel akaun kamu, kami boleh menghantar pautan untuk menetapkan semula kata laluan kamu."
     button:
-      submit: "Send reset email"
+      submit: "Hantar e-mel tetapan semula"
       cancel: "Batal"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: "Semak e-mel kamu"
+    description: "Jika ada akaun yang sepadan dengan e-mel kamu, satu e-mel yang mengandungi pautan untuk menetapkan semula kata laluan kamu baru sahaja dihantar. Pautan ini akan tamat tempoh dalam %time%."
+    descriptionTwo: "Kamu boleh meminta tetapan semula kata laluan baharu setiap %throttleLimit% jam."
+    descriptionThree: "Jika kamu tidak menerima e-mel, sila semak folder spam kamu atau tulis e-mel kepada pihak sokongan kami di %email-webmaster%."
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "Hai!"
+    visitLink: "Untuk menetapkan semula kata laluan kamu, sila lawati pautan berikut"
+    expire: "Pautan ini akan tamat tempoh dalam %time%."
+    cheers: "Jumpa lagi!"
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: "Tetapkan semula kata laluan kamu"
+    content: "Kamu baru-baru ini meminta tetapan semula kata laluan untuk akaun Catrobat kamu. Klik butang di bawah untuk memilih kata laluan baharu. Jika kamu tidak membuat permintaan ini, kamu boleh abaikan e-mel ini."
+    visitLink: "Tetapkan Semula Kata Laluan"
+    expire: "Pautan ini sah selama %time% dan hanya boleh digunakan sekali."
   reset:
-    title: "Reset your password"
+    title: "Tetapkan semula kata laluan kamu"
     button:
-      submit: "Reset password"
+      submit: "Tetapkan semula kata laluan"
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: "Muat turun sebagai aplikasi"
+  prepare: "Dapatkan sebagai aplikasi"
+  preparing: "Menyediakan aplikasi"
+  text: "Proses ini mungkin mengambil sedikit masa"
 format:
-  million_abbreviation: M
+  million_abbreviation: "J"
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: "Ada sesuatu yang tidak berfungsi. Sila cuba lagi atau beritahu kami jika ia terus berlaku!"
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    blank: "Nama pengguna tidak boleh kosong"
+    invalid: "Nama pengguna kamu tidak sah"
+    exists: "Nama pengguna ini sudah wujud."
+    not_exists: "Nama pengguna ini tidak wujud."
+    not_email: "Nama pengguna tidak boleh menjadi alamat e-mel."
+    size: "Nama pengguna mesti mempunyai sekurang-kurangnya 3 aksara dan tidak lebih daripada 180"
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: "Kata laluan tiada."
+    short: "Kata laluan kamu mesti mempunyai sekurang-kurangnya {{ limit }} aksara."
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: "Negara tiada."
+    invalid: "Negara tidak sah"
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    blank: "e-mel tidak boleh kosong"
+    invalid: "E-mel kamu nampaknya tidak sah"
+    exists: "Alamat e-mel ini sudah wujud."
   id:
-    blank: Open authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-data not correct or missing!
+    blank: "ID pengesahan terbuka tidak boleh kosong"
+  login: "Kata laluan atau nama pengguna salah."
+  post-data: "Data POST tidak betul atau tiada!"
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: "Klien tidak menghantar fileChecksum! Adakah kamu menggunakan versi Pocket Code yang lama?"
+    invalid: "checksum tidak sah"
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: "xml kod tidak sah"
+    missing: "ralat tidak diketahui: project_xml_not_found!"
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: 'Project XML: Menyebut tentang sebuah fail yang tidak wujud dalam project-folder'
-  unknown: masalah yang tidak ketahui
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: "fail yang tidak dijangka ditemui"
+    invalid: "fail tidak sah"
+  image.missing: "XML projek: Merujuk kepada fail yang tidak wujud dalam folder projek"
+  unknown: "ralat tidak diketahui"
+  token: "Pengesahan peranti gagal: auth-token tidak sah!"
+  uploadTokenAuthFailed: "Pengesahan token muat naik gagal."
   project:
-    invalid: Invalid project.
+    invalid: "Projek tidak sah."
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: "Maaf, projek kamu mengandungi versi lama bahasa Catrobat! Adakah kamu menggunakan versi Pocket Code yang terkini?"
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: "Maaf, kamu menggunakan versi lama Pocket Code. Sila kemas kini ke versi terkini."
   authentication:
-    title: Login did not work
+    title: "Log masuk tidak berjaya"
     webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+      Nampaknya nama pengguna atau kata laluan kamu tidak betul.
+      Sila cuba log masuk semula dalam aplikasi.
 success:
-  text: Success
-  registration: Daftaran berjaya!
+  text: "Berjaya"
+  registration: "Pendaftaran berjaya!"
   token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: "Projek kamu berjaya dimuat naik!"
+  imgUpload: "Imej kamu berjaya dimuat naik!"
+  report: "Laporan kamu berjaya dihantar!"
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: "{0} < 1 minit yang lalu |{1}1 minit yang lalu |]1,Inf] %count% minit yang lalu"
+  hours.ago: "{1}1 jam yang lalu |]1,Inf] %count% jam yang lalu"
+  days.ago: "{1}1 hari yang lalu |]1,Inf] %count% hari yang lalu"
+  months.ago: "{1}1 bulan yang lalu |]1,Inf] %count% bulan yang lalu"
+  years.ago: "{1}1 tahun yang lalu |]1,Inf] lebih daripada setahun yang lalu"
 failure:
-  upload: There was an error during the upload of your app.
+  upload: "Berlaku ralat semasa memuat naik aplikasi kamu."
 user:
   verification:
-    email: 'Verify your email'
+    email: "Sahkan e-mel kamu"
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: "E-mel tiada"
+    emailEmpty: "E-mel tidak boleh kosong"
+    emailInvalid: "E-mel tidak sah"
+    emailAlreadyInUse: "E-mel sudah digunakan"
+    usernameMissing: "Nama pengguna tiada"
+    usernameTooShort: "Nama pengguna terlalu pendek"
+    usernameTooLong: "Nama pengguna terlalu panjang"
+    usernameEmpty: "Nama pengguna tidak boleh kosong"
+    usernameAlreadyInUse: "Nama pengguna sudah digunakan"
+    usernameInvalid: "Nama pengguna tidak sah"
+    passwordMissing: "Kata laluan tiada"
+    passwordEmpty: "Kata laluan tidak boleh kosong"
+    passwordTooShort: "Kata laluan terlalu pendek"
+    passwordTooLong: "Kata laluan terlalu panjang"
+    passwordInvalidChars: "Kata laluan mengandungi aksara tidak sah"
+    usernameContainsEmail: "Nama pengguna tidak boleh mengandungi alamat e-mel"
+    usernameContainsLink: "Nama pengguna tidak boleh mengandungi pautan"
+    countryCodeInvalid: "Kod negara tidak sah"
+    pictureInvalid: "Gambar profil tidak sah atau tidak disokong"
+    dateOfBirthMissing: "Tarikh lahir diperlukan"
+    dateOfBirthInvalid: "Tarikh lahir tidak sah"
+    tooYoung: "Kamu mesti berumur sekurang-kurangnya 3 tahun untuk mencipta akaun"
+    parentEmailMissing: "E-mel ibu bapa diperlukan untuk pengguna di bawah 14 tahun"
+    parentEmailInvalid: "E-mel ibu bapa tidak sah"
+    parentEmailSameAsUser: "E-mel ibu bapa mesti berbeza daripada alamat e-mel kamu sendiri"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Kata laluan semasa tiada"
+    currentPasswordWrong: "Kata laluan semasa salah"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: "Nama tidak boleh kosong"
+    nameTooLong: "Nama terlalu panjang"
+    descriptionTooLong: "Huraian terlalu panjang"
+    creditsTooLong: "Nota dan kredit terlalu panjang"
+    screenshotInvalid: "Tangkapan skrin projek tidak sah atau tidak disokong"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating project entity. Try uploading again!'
+    invalid_checksum: "Checksum tidak sah. Cuba muat naik semula!"
+    upload_error: "Ralat semasa memuat naik. Cuba muat naik semula!"
+    creating_error: "Ralat semasa mencipta entiti projek. Cuba muat naik semula!"
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: "Gagal menyimpan butiran projek."
+    screenshotError: "Gagal membaca, menukar atau menyimpan tangkapan skrin. Sila semak input kamu."
+    notFound: "Projek yang hendak diubah tidak dapat ditemui."
+    forbidden: "Mengubah projek tidak dibenarkan. Adakah kamu masih log masuk?"
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: "Nama tiada"
+    nameEmpty: "Nama tidak boleh kosong"
+    nameTooShort: "Nama terlalu pendek"
+    nameTooLong: "Nama terlalu panjang"
+    nameAlreadyInUse: "Nama sudah digunakan"
+    descriptionMissing: "Huraian tiada"
+    descriptionEmpty: "Huraian kosong"
+    descriptionTooShort: "Huraian terlalu pendek"
+    descriptionTooLong: "Huraian terlalu panjang"
+    imageFileInvalid: "Fail imej tidak sah"
+    imageFileInvalidType: "Jenis fail imej tidak sah"
+    imageFileTooLarge: "Fail imej terlalu besar"
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
-  hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  arabic: "Bahasa Arab"
+  bulgarian: "Bahasa Bulgaria"
+  catalan: "Bahasa Catalonia"
+  chinese_simplified_han: "Bahasa Cina (Han Ringkas)"
+  chinese_traditional_han: "Bahasa Cina (Han Tradisional)"
+  croatian: "Bahasa Croatia"
+  czech: "Bahasa Czech"
+  danish: "Bahasa Denmark"
+  dutch: "Bahasa Belanda"
+  english_united_kingdom: "Bahasa Inggeris (United Kingdom)"
+  english_united_states: "Bahasa Inggeris (Amerika Syarikat)"
+  estonian: "Bahasa Estonia"
+  filipino: "Bahasa Filipina"
+  finnish: "Bahasa Finland"
+  french: "Bahasa Perancis"
+  german: "Bahasa Jerman"
+  greek: "Bahasa Greek"
+  hebrew: "Bahasa Ibrani"
+  hindi: "Bahasa Hindi"
+  hungarian: "Bahasa Hungary"
+  indonesian: "Bahasa Indonesia"
+  italian: "Bahasa Itali"
+  japanese: "Bahasa Jepun"
+  korean: "Bahasa Korea"
+  latvian: "Bahasa Latvia"
+  lithuanian: "Bahasa Lithuania"
+  malay: "Bahasa Melayu"
+  norwegian: "Bahasa Norway"
+  persian: "Bahasa Parsi"
+  polish: "Bahasa Poland"
+  portuguese_brazil: "Bahasa Portugis (Brazil)"
+  portuguese_portugal: "Bahasa Portugis (Portugal)"
+  romanian: "Bahasa Romania"
+  russian: "Bahasa Rusia"
+  serbian: "Bahasa Serbia"
+  slovak: "Bahasa Slovak"
+  slovenian: "Bahasa Slovenia"
+  spanish_latin_america: "Bahasa Sepanyol (Amerika Latin)"
+  spanish_spain: "Bahasa Sepanyol (Sepanyol)"
+  swedish: "Bahasa Sweden"
+  thai: "Bahasa Thai"
+  turkish: "Bahasa Turki"
+  ukrainian: "Bahasa Ukraine"
+  vietnamese: "Bahasa Vietnam"
 ci:
-  generate: Generate apk
-  pending: Generating apk
-  download: Download apk
+  generate: "Jana apk"
+  pending: "Sedang menjana apk"
+  download: "Muat turun apk"
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: "Penyelenggaraan cakera"
+    ramMaintenance: "Penyelenggaraan RAM"
+    noRemovableObjects: "Tiada objek yang boleh dibuang."
+    removableObjects: "Objek yang boleh dibuang"
 recommender:
-  similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users who downloaded this project also downloaded
-  moreFromThisUser: More from %username%
+  similarPrograms: "Projek serupa"
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: "Pengguna yang memuat turun projek ini juga memuat turun"
+  moreFromThisUser: "Lagi daripada %username%"
 pmd:
-  submitBtn: Submit your project
+  submitBtn: "Hantar projek kamu"
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: "Penghantaran"
+    text: "Kamu akan menghantar projek kamu. Sila masukkan kod projek dan klik hantar."
+    btnText: "Hantar"
   successful:
-    text: Your project upload was successful.
+    text: "Muat naik projek kamu berjaya."
   failed:
-    text: Project upload failed.
+    text: "Muat naik projek gagal."
 codeview:
-  title: 'Code view'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
-  scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global variables'
-  localVariables: 'Local variables'
-  eventBricks: 'Event bricks'
-  controlBricks: 'Control bricks'
-  motionBricks: 'Motion bricks'
-  soundBricks: 'Sound bricks'
-  looksBricks: 'Looks bricks'
-  penBricks: 'Pen bricks'
-  dataBricks: 'Data bricks'
-  specialBricks: 'Special bricks'
+  title: "Paparan kod"
+  showCode: "Tunjuk kod"
+  hideCode: "Sembunyikan kod"
+  showStatistics: "Tunjuk statistik kod"
+  hideStatistics: "Sembunyikan statistik kod"
+  cantDisplayCode: "Kod tidak dapat dipaparkan"
+  cantDisplayStatistics: "Kod tidak dapat dipaparkan"
+  totalNumberOf: "Jumlah keseluruhan"
+  scenes: "Adegan"
+  scripts: "Skrip"
+  bricks: "Bata"
+  objects: "Pelakon dan objek"
+  looks: "Rupa"
+  sounds: "Bunyi"
+  globals: "Global"
+  locals: "Tempatan"
+  globalVariables: "Pemboleh ubah global"
+  localVariables: "Pemboleh ubah tempatan"
+  eventBricks: "Bata peristiwa"
+  controlBricks: "Bata kawalan"
+  motionBricks: "Bata gerakan"
+  soundBricks: "Bata bunyi"
+  looksBricks: "Bata rupa"
+  penBricks: "Bata pen"
+  dataBricks: "Bata data"
+  specialBricks: "Bata khas"
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
-  scripts: 'Scripts'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  title: "Paparan Kod"
+  loading: "Memuatkan paparan kod..."
+  error: "Tidak dapat memuatkan paparan kod."
+  retry: "Cuba lagi"
+  empty: "Projek ini tiada kod."
+  scripts: "Skrip"
+  looks: "Rupa"
+  sounds: "Bunyi"
 codeStatistics:
-  title: "Code statistics"
-  error: "Code statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
-  looksBricks: 'Looks'
-  penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  title: "Statistik kod"
+  error: "Statistik kod tidak dapat dipaparkan."
+  general: "Umum"
+  bricks: "Bata"
+  eventBricks: "Peristiwa"
+  controlBricks: "Kawalan"
+  motionBricks: "Gerakan"
+  soundBricks: "Bunyi"
+  looksBricks: "Rupa"
+  penBricks: "Pen"
+  dataBricks: "Data"
+  deviceBricks: "Peranti"
+  specialBricks: "Khas"
+  yourScore: "Skor kamu:"
+  points: "mata"
+  abstraction: "Abstraksi dan penguraian masalah"
+  parallelism: "Keselarian"
+  logicalThinking: "Pemikiran logik"
+  synchronization: "Penyegerakan"
+  flowControl: "Kawalan aliran"
+  userInteractivity: "Interaktiviti pengguna"
+  dataRepresentation: "Perwakilan data"
+  level: "Tahap"
+  loading: "Memuatkan..."
+  bonus: "Bonus"
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: "Sertai Lebih %user_count% Minda Kreatif!"
+  text: "Dengan %project_count% Projek Hebat yang sudah dikongsi, projek seterusnya mungkin milik kamu. Muat turun aplikasi kami dan mula mencipta hari ini"
 privacy-policy:
-  header: Privacy policy
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  header: "Dasar privasi"
+  version: "Versi 2.2, 17 Oktober 2019"
+  text1: "Untuk menawarkan semua manfaat perkhidmatan kami dan akaun yang berkaitan kepada kamu, kami perlu mengumpul data tertentu daripada kamu."
+  text2: "Untuk menyelenggara dan menambah baik perkhidmatan kami (aplikasi dan laman web) serta menjalankan penyelidikan saintifik tentang pendidikan ICT dan STEM/STEAM, kami menggunakan Google Analytics, Crashlytics dan Firebase, semuanya oleh Google LLC (AS), serta Dynatrace oleh Dynatrace LLC (AS) untuk mendapatkan metadata tentang penggunaan perkhidmatan kami, contohnya maklumat ranap, cap masa, halaman/skrin yang dilawati, penggunaan aplikasi dan perkhidmatan kami, sistem pengendalian yang digunakan dan maklumat tentang penyedia rangkaian. Analisis ini dan data yang dikumpul tidak dikaitkan dengan profil kamu dan tidak mengandungi sebarang maklumat peribadi (bit terakhir alamat IP dianonimkan). Walau bagaimanapun, data yang dikumpul akan dipindahkan kepada penyedia perkhidmatan (Google LLC, AS dan Dynatrace LLC, AS). Pemprosesan data adalah berdasarkan perjanjian dengan Google LLC dan Dynatrace LLC. Hubungan dengan penyedia perkhidmatan ini mematuhi Peraturan Perlindungan Data Am Kesatuan Eropah (EU GDPR) dan perjanjian EU-AS \"Privacy Shield\"."
+  text3: "Untuk mencipta dan menggunakan akaun dalam sistem kami, dan untuk memaklumkan kamu melalui e-mel tentang perubahan yang perlu mengenai akaun kamu, contohnya kemas kini atau pelanggaran Terma Penggunaan dan Perkhidmatan, peraturan komuniti atau dasar kami, kami akan menyimpan nama pengguna kamu dan, jika kamu berikan, alamat e-mel kamu. Jika kamu telah menyambungkan akaun kamu melalui Google Plus atau Facebook, kami juga menyimpan kunci pengenalan yang dikaitkan dengan akaun kamu pada perkhidmatan tersebut. Kami tidak akan menggunakan data ini untuk sebarang tujuan lain (contohnya pemasaran), melainkan kamu membenarkan kami secara jelas."
+  text4: "Secara sukarela, kamu boleh memberikan negara tempat tinggal kamu melalui halaman akaun kamu di laman perkongsian. Ini akan dipaparkan pada profil awam kamu dan hanya digunakan oleh kami untuk tujuan statistik dan penyelidikan. Ia boleh dibuang pada bila-bila masa dalam tetapan profil kamu."
+  text5: "Kamu boleh menarik balik penggunaan data peribadi milik akaun kamu pada bila-bila masa dengan memadam akaun kamu melalui halaman profil kamu di https://share.catrob.at/. Selepas memadam akaun, kamu masih boleh menggunakan perkhidmatan yang disediakan, tetapi tidak boleh bekerjasama, contohnya melalui memuat naik program, mengulas atau menyukai. Selain itu, semua kandungan yang dikaitkan dengan akaun kamu, contohnya program yang dimuat naik, komen dan lain-lain, akan dipadam."
+  text6: "Untuk mengelakkan penyalahgunaan perkhidmatan kami, contohnya melalui muat naik atau komen pengguna untuk tujuan haram, semua data awam yang dijana pengguna (muat naik, komen) akan disimpan secara dalaman dalam pangkalan data, bersama cap masa dan alamat internet yang digunakan. Data ini tidak akan digunakan oleh atau dihantar kepada mana-mana institusi, melainkan terdapat syak wasangka munasabah tentang tindakan yang cukup menyalahi undang-undang dan institusi undang-undang yang berhak secara rasmi memintanya berdasarkan undang-undang yang terpakai. Setiap kes akan disemak dengan teliti secara individu oleh kami terlebih dahulu."
+  text7: "Kamu boleh melanggan Surat Berita Catrobat secara sukarela di https://catrob.at/newsletter yang disediakan oleh kami melalui perkhidmatan MailChimp (The Rocket Science Group LLC d/b/a MailChimp, AS). Kamu kemudian akan menerima kemas kini tentang projek Catrobat dan perkhidmatannya ke alamat e-mel yang kamu berikan. Kamu boleh berhenti melanggan surat berita pada bila-bila masa dengan menggunakan pautan \"unsubscribe\" di bahagian bawah setiap surat berita. Surat berita ini disediakan oleh MailChimp yang dengannya kami mempunyai perjanjian pemprosesan data dan yang komited kepada Peraturan Perlindungan Data Am EU dan \"Privacy Shield\" EU-AS. Untuk butiran lanjut tentang MailChimp, sila rujuk juga Dasar Privasi dan Terma Penggunaan MailChimp."
+  text8: "Semua Perkhidmatan disediakan oleh projek sumber terbuka percuma Catrobat di bawah naungan International Catrobat Association – Verein zur Förderung freier Software, sebuah NGO bukan untung yang diperbadankan di Graz, Austria (Kesatuan Eropah). Dasar kami menghormati undang-undang perlindungan data EU dan Austria (GDPR). Untuk menghubungi kami, sila hantar e-mel ke contact@catrobat.org atau pos kepada kami di Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (Kesatuan Eropah)."
+  text9: "Jika kamu berumur di bawah 14 tahun, dasar ini mesti diterima oleh penjaga sah (biasanya ibu bapa)."
+  text10: "Dasar privasi rasmi Catrobat dalam bahasa Inggeris tersedia di web di %privacy_policy%."
+  disagree-text: "Tanpa persetujuan, kami tidak dapat mencipta akaun tetapi ciri teras masih boleh diakses."
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: "Tandakan sebagai dibaca"
+  noFollowers: "Nampaknya kamu tiada pemberitahuan pengikut."
+  noComments: "Nampaknya kamu tiada pemberitahuan komen."
+  noReactions: "Nampaknya kamu tiada pemberitahuan reaksi."
+  noRemixes: "Nampaknya kamu tiada pemberitahuan remix."
+  noStudios: "Nampaknya kamu tiada pemberitahuan studio."
   tab:
-    studio: Studio
-    project: Projects
+    studio: "Studio"
+    project: "Projek"
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: "Pengguna %user_link% memberi komen pada projek kamu %program_link%."
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: "Pengguna %user_link% memberi reaksi pada projek kamu %program_link%."
   follow:
-    message: 'User %user_link% follows you now.'
+    message: "Pengguna %user_link% kini mengikuti kamu."
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: "%user_link% mencipta permainan baharu %program_link%."
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: "Pengguna %user_link% me-remix projek kamu %program_link%. Kamu boleh melihat remix itu di pautan berikut %remix_program_link%."
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: "%user_link% memberi komen dalam studio %studio_name%."
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: "%user_link% menambah %program_link% ke studio %studio_name%."
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: "Permintaan kamu untuk menyertai studio %studio_name% telah diterima."
+    declined: "Permintaan kamu untuk menyertai studio %studio_name% telah ditolak."
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: "Projek kamu %program_link% akan dipadam secara automatik dalam %days% hari. Muat naik versi baharu atau dapatkan lebih banyak muat turun untuk menyimpannya."
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: "Projek kamu \"%project_name%\" telah dibuang secara automatik kerana tidak aktif. Muat naik semula jika kamu masih mahu berkongsinya."
+  noProjects: "Nampaknya kamu tiada pemberitahuan projek."
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: "Pautan disalin ke papan keratan!"
+  success_project: "Pautan ke projek disalin ke papan keratan!"
+  success_user: "Pautan ke pengguna disalin ke papan keratan!"
+  fail: "Gagal menyalin pautan ke papan keratan! :("
+next: "Seterusnya"
+previous: "Sebelumnya"
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: "Pustaka Media"
+  description: "Dalam kategori berikut kamu boleh menemui pelakon dan objek untuk ditambah ke projek kamu."
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: "Saiz pratonton"
+    sm: "kecil"
+    md: "sederhana"
+    lg: "besar"
+  theme-special: "Tema Istimewa %flavor%"
+  search-results: "Hasil carian pustaka media"
+  no-results: "Carian kamu menemui 0 hasil. Sila gunakan istilah carian dalam bahasa Inggeris sahaja."
+  download_these_files: "simpan"
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +996,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: "Hak cipta &copy; %year% <a href=\"http://www.catrobat.org\">Catrobat</a>. Hak cipta terpelihara."
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: "Laman web ini memerlukan JavaScript untuk berfungsi. Sila dayakan JavaScript dalam pelayar kamu atau minta bantuan orang dewasa."
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
-  privacy-link: "Polisi peribadi"
-  settings-link: "Cookie Settings"
-agree: Agree
-disagree: Disagree
+  message: "Kami menggunakan kuki untuk membantu menambah baik perkhidmatan kami. Tiada data dijual atau dikongsi."
+  accept: "Terima"
+  decline: "Tolak"
+  privacy-link: "Dasar privasi"
+  settings-link: "Tetapan Kuki"
+agree: "Setuju"
+disagree: "Tidak setuju"
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: "Tiada profil buat masa ini."
+element: "Elemen"
+elements: "Elemen"
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: "Kongsi"
+  error: "Perkongsian gagal"
+  success: "Perkongsian berjaya"
+copy: "Salin pautan"
+checkOutProject: "Lihat projek ini:"
+checkOutUser: "Lihat pengguna ini:"
+community: "Komuniti Catrobat"
+back_to_app: "Keluar komuniti"
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  recent: "Projek terbaharu"
+  random: "Projek rawak"
+  most_viewed: "Paling banyak dilihat"
+  most_downloaded: "Paling banyak dimuat turun"
+  example: "Contoh"
+  scratch: "Remix Scratch"
+  recommended: "Projek disyorkan"
+  popular: "Paling popular"
+  trending: "Projek sohor kini"
 achievements:
   sidebar:
-    title: 'Achievements'
-    badge: 'new'
+    title: "Pencapaian"
+    badge: "baharu"
   overview:
-    header: 'Achievements'
+    header: "Pencapaian"
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: "Pencapaian Terbaharu"
+      x_out_of_y: "%unlocked% daripada %total% dibuka"
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: "Dibuka"
+      empty: "Kamu belum membuka sebarang pencapaian lagi."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: "Dikunci"
+      empty: "Kamu sudah membuka semua pencapaian."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: "Tahniah!"
+      subtitle: "Kamu telah memperoleh lencana"
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: "Pencapaian"
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: "Perantis"
+        description: "Ikuti seseorang dan muat naik projek"
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: "Tukang"
+        description: "Ahli aktif selama > 1 tahun"
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: "Pakar"
+        description: "Ahli aktif selama > 4 tahun"
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: "Mahaguru"
+        description: "Ahli aktif selama > 7 tahun"
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: "Inisiatif"
+        description: "Tambah gambar profil pertama kamu"
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: "Pemula"
+        description: "Cipta akaun pengguna"
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Peserta Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Dwibahasa"
+        description: "Terjemahkan projek kamu ke 2 bahasa"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Tribahasa"
+        description: "Terjemahkan projek kamu ke 3 bahasa"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Ahli bahasa"
+        description: "Terjemahkan projek kamu ke 5 bahasa"
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: "Disahkan"
+        description: "Sahkan Akaun kamu"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: "{0} |{1} Tag |]1,Inf] Tag"
   tag:
     game:
-      title: Game
+      title: "Permainan"
     animation:
-      title: Animation
+      title: "Animasi"
     story:
-      title: Story
+      title: "Cerita"
     music:
-      title: Music
+      title: "Muzik"
     art:
-      title: Art
+      title: "Seni"
     experimental:
-      title: Experimental
+      title: "Eksperimen"
     tutorial:
-      title: Tutorial
+      title: "Tutorial"
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: "{0} |{1} Sambungan |]1,Inf] Sambungan"
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: "Dron"
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: "Sulaman"
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: "Berbilang pemain"
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: "Studio"
+  singular: "Studio"
+  create_studio: "Cipta studio"
+  delete_studio: "Padam studio"
   cancel_studio: 'Batal'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
-  report: 'Melapor'
-  public: 'public'
-  private: 'Invite-only'
+  studio_name: "Nama studio"
+  studio_description: "Huraian studio"
+  is_public: "Jadikan awam?"
+  enable_comments: "Dayakan komen?"
+  cover_image: "Muat naik kulit"
+  cover_image_empty: "Tiada imej dipilih."
+  cover_image_hint: "Maks 1 MB. Format diterima: JPEG, PNG, GIF, WebP."
+  cover_image_compressed: "Imej telah dimampatkan secara automatik untuk memenuhi had 1 MB."
+  cover_image_compressing: "Memampatkan imej..."
+  cover_image_still_too_large: "Imej masih terlalu besar walaupun selepas dimampatkan. Sila pilih fail yang lebih kecil."
+  cover_image_invalid_type: "Jenis imej tidak sah. Sila gunakan JPEG, PNG, GIF atau WebP."
+  cover_image_compression_failed: "Gagal memproses imej. Sila cuba fail lain."
+  cover_image_alt: "Imej kulit kamu"
+  cover_image_remove: "Buang imej"
+  popular: "Studio Popular"
+  join: "Sertai"
+  leave: "Keluar"
+  report: "Laporkan"
+  public: "awam"
+  private: "Jemputan sahaja"
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
-    open: 'Open'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    joined_studios: "Studio yang disertai"
+    public_studios: "Studio awam"
+    private_studios: "Studio jemputan sahaja"
+    no_studios: "Belum ada studio"
+    my_studios: "Studio Saya"
+    explore: "Terokai Studio"
+    no_joined: "Kamu belum menyertai sebarang studio lagi"
+    joined: "Disertai"
+    load_more: "Muat Lagi"
+    open: "Buka"
+    share: "Kongsi"
+    share_success: "Pautan disalin ke papan keratan!"
+    leave_confirm_title: "Keluar dari studio ini?"
     cancel: 'Batal'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    cancel_request: "Batalkan Permintaan"
+    cancel_request_confirm_title: "Batalkan permintaan untuk menyertai?"
+    admin: "Pentadbir"
+    member: "Ahli"
   details:
-    add_project: 'click to add the project'
-    add: 'Add'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
-    delete_it: 'Delete'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    add_project: "klik untuk menambah projek"
+    add: "Tambah"
+    showMore: "tunjuk lagi"
+    showLess: "tunjuk kurang"
+    are_you_sure: "Kamu pasti?"
+    no_way_of_return: "Tindakan ini tidak boleh dibuat asal."
+    delete_it: "Padam"
+    remove_project: "Buang dari studio"
+    remove_project_error: "Gagal membuang projek dari studio."
+    remove_project_success: "Projek berjaya dibuang dari studio."
+    no_projects: "Studio ini belum mengandungi sebarang projek."
     projects:
-      title: 'Projects'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
-      download: 'Download'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
-    report: 'Melapor'
-    pending: 'Pending'
-    decline: 'Declined'
+      title: "Projek"
+      addProject: "Tambah Projek"
+      open_project: "Buka projek"
+      download: "Muat turun"
+      share: "Kongsi"
+      remove_from_studio: "Buang dari studio"
+      remove_from_studio_title: "Buang projek dari studio?"
+      remove_from_studio_text: "Kamu boleh menambahnya semula kemudian jika kamu ubah fikiran."
+      share_success: "Pautan disalin ke papan keratan!"
+      share_fail: "Gagal menyalin pautan."
+      no_projects_empty_state: "Kamu belum ada projek untuk ditambah. Cipta satu dalam Pocket Code dahulu!"
+      add_selected: "Tambah yang Dipilih"
+    no_available_projects: "Tiada projek tersedia untuk ditambah."
+    updateCoverError: "Ada masalah semasa mengemas kini kulit studio."
+    join: "Sertai"
+    leave: "Keluar"
+    report: "Laporkan"
+    pending: "Belum selesai"
+    decline: "Ditolak"
     comments:
-      title: 'Comments'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      title: "Komen"
+      type_something: "Taip sesuatu"
+      replies: "balasan"
+      send: "hantar"
+      no_comments: "Studio ini belum ada komen."
+      disabled_comments: "Komen telah dinyahdayakan untuk studio ini."
+      remove_comment: "Buang komen"
+      post_error: "Ada masalah semasa menghantar komen kamu. Cuba lagi nanti."
+      remove_error: "Ada masalah semasa membuang komen. Cuba lagi nanti."
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: "Aktiviti"
+      join_studio: "%user% menyertai studio."
+      add_project: "%user% menambah projek."
+      add_comment: "%user% meninggalkan komen."
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: "Ahli studio"
+      project_count: "{0} Tiada projek studio |{1} 1 projek studio |]1,Inf] %count% projek studio"
+      no_studio_projects: "Tiada projek studio"
+      one_studio_project: "1 projek studio"
+      n_studio_projects: "%count% projek studio"
+      promote_member: "Naikkan ahli menjadi pentadbir"
+      promotion_failed: "Ada masalah semasa menaikkan ahli ini. Cuba lagi nanti."
+      ban_member: "Sekat ahli dari studio"
+      ban_failed: "Ada masalah semasa menyekat ahli ini. Cuba lagi nanti."
+      demote_member: "Turunkan pentadbir menjadi ahli"
+      demotion_failed: "Ada masalah semasa menurunkan pentadbir ini. Cuba lagi nanti."
+      last_admin: "Tidak boleh menurunkan pentadbir terakhir studio ini."
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
-    show_more: 'More information'
-    show_less: 'Less information'
+      title: "Permintaan Menyertai"
+      accept: "Terima"
+      decline: "Tolak"
+      accept_success: "Permintaan menyertai diterima."
+      decline_success: "Permintaan menyertai ditolak."
+      error: "Ada masalah. Sila cuba lagi."
+      no_requests: "Tiada permintaan menyertai yang belum selesai."
+    show_more: "Tunjuk lagi"
+    show_less: "Tunjuk kurang"
     admin_settings:
-      title: 'Settings'
-      studio_name: 'Studio Name'
+      title: "Tetapan"
+      studio_name: "Nama Studio"
       studio_description: 'Huraian'
-      toggle_allow_comments: 'Comments'
-      toggle_privacy: 'Public'
+      toggle_allow_comments: "Komen"
+      toggle_privacy: "Awam"
 media_library:
   file:
-    size: 'Size: %size%'
+    size: "Saiz: %size%"
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: "Jenis: imej"
+      project: "Jenis: projek"
+      sound: "Jenis: bunyi"
+      movie: "Jenis: video"
+      default: "Jenis: tidak diketahui"
+  no_categories: "Belum ada kategori media tersedia."
+  no_results: "Tiada hasil ditemui."
+  assets_count: "aset"
+  view_all: "Lihat semua"
+  view_all_category: "Lihat semua %category%"
+  back_to_app: "Kembali ke aplikasi"
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: "Projek yang diminta tidak tersedia"
+  project_not_for_kids: "Projek ini telah ditandakan sebagai tidak selamat untuk kanak-kanak!"
+  project_safe_for_kids: "Projek ini telah ditandakan selamat untuk kanak-kanak!"
+  project_not_for_kids_moderator: "Projek ini telah ditandakan oleh moderator. Kamu tidak boleh membatalkannya!"
+  project_set_private: "Projek telah dijadikan peribadi."
+  project_set_public: "Projek telah dijadikan awam."
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: "Maklumat tambahan: additionalInfo"
+    feature_1: "Ciri featureName tidak tersedia dari maintenanceStart hingga maintenanceEnd"
+    feature_2: "Ciri"
+    feature_3: "Ciri"
+MarkNotForKids: "Tandakan sebagai tidak selamat untuk kanak-kanak"
+MarkSafeForKids: "Tandakan sebagai selamat untuk kanak-kanak"
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: "Pengesahan"
+  confirmMark: "Kamu pasti mahu menandakan projek ini sebagai tidak selamat untuk kanak-kanak?"
+  confirmUnmark: "Kamu pasti mahu membuang tanda tidak-untuk-kanak-kanak daripada projek ini?"
+  confirmYes: "Ya, teruskan!"
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: "Laporkan %content_type% ini"
+    reason_placeholder: "Sila terangkan kenapa kamu melaporkan ini..."
+    submit: "Hantar Laporan"
+    success: "Laporan kamu telah dihantar. Terima kasih."
+    error: "Ada masalah. Sila cuba lagi."
+    duplicate: "Kamu sudah melaporkan kandungan ini."
+    trust_too_low: "Akaun kamu terlalu baharu untuk membuat laporan."
+    unverified: "Sila pastikan kamu sudah log masuk dan e-mel akaun kamu telah disahkan."
+    rate_limited: "Kamu menghantar laporan terlalu cepat. Sila tunggu dan cuba lagi."
+    suspended: "Akaun kamu digantung."
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: "Rayuan"
+    title: "Rayu keputusan ini"
+    placeholder: "Terangkan kenapa kandungan ini tidak sepatutnya disembunyikan..."
+    submit: "Hantar Rayuan"
     cancel: "Batal"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: "Rayuan kamu telah dihantar untuk disemak."
+    already_pending: "Kamu sudah ada rayuan yang belum selesai."
+    error: "Ada masalah. Sila cuba lagi."
+    rate_limited: "Kamu menghantar rayuan terlalu cepat. Sila tunggu dan cuba lagi."
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: "Kamu menghantar komen terlalu cepat. Sila tunggu sebentar."
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: "Kamu memberi reaksi terlalu cepat. Sila tunggu sebentar."
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: "Kamu mengikuti/berhenti mengikuti terlalu cepat. Sila tunggu sebentar."
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: "Kamu melakukan tindakan studio terlalu cepat. Sila tunggu sebentar."
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: "Projek ini telah disembunyikan kerana laporan komuniti."
+    comment: "Komen ini telah disembunyikan kerana laporan komuniti."
+    user: "Profil ini telah disembunyikan kerana laporan komuniti."
+    user_own: "Akaun kamu telah digantung kerana laporan komuniti. Kamu boleh merayu keputusan ini."
+    studio: "Studio ini telah disembunyikan kerana laporan komuniti."
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: "%content_type% kamu telah disembunyikan kerana laporan komuniti. Kamu boleh merayu keputusan ini."
+    appeal_approved: "Rayuan kamu telah diluluskan. Kandungan kamu kini kelihatan semula."
+    appeal_rejected: "Rayuan kamu telah disemak dan keputusan untuk menyembunyikan kandungan kamu kekal."
+    admin_review_needed: "Kandungan telah disembunyikan secara automatik dan perlu disemak."
+Reports: "Laporan"
+members: "ahli"

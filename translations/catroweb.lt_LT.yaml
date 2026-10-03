@@ -1,995 +1,994 @@
 ---
 #homepage translation
-title: Catrobat community
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
-localLanguage: Anglų
-username: Vartotojo vardas
+title: 'Catrobat bendruomenė'
+meta.description: 'Dalinkis, atrask ir remiksuok kūrybinius projektus, sukurtus su Catrobat. Prisijunk prie pasaulinės jaunųjų kūrėjų bendruomenės, kuriančios žaidimus, animacijas ir programėles.'
+meta.description.media.library: 'Naršyk ir atsisiųsk nemokamus Catrobat medijos išteklius – garsus, paveikslėlius ir dar daugiau savo projektams.'
+meta.og.title.login: 'Prisijunk prie Catrobat'
+meta.og.description.login: 'Prisijunk ir dalinkis savo Catrobat projektais su bendruomene.'
+meta.og.title.register: 'Susikurk Catrobat paskyrą'
+meta.og.description.register: 'Prisijunk prie Catrobat bendruomenės ir pradėk dalintis savo kūrybiniais projektais jau šiandien.'
+meta.og.description.profile: '%username% Catrobat bendruomenėje – naršyk šio naudotojo projektus ir pasiekimus.'
+localLanguage: 'Lietuvių'
+username: 'Naudotojo vardas'
 password: Slaptažodis
-createNewPassword: Create new password
-accountSettings: Account Settings
+createNewPassword: 'Sukurk naują slaptažodį'
+accountSettings: 'Paskyros nustatymai'
 email: El. paštas
 aboutPocketCode: Apie Pocket Code
-about: About Catrobat
-education: Education
-chat: Chat and forums
-privacyGuide: Privacy Awareness Guide
-others: Others
-tutorials: Help
+about: 'Apie Catrobat'
+education: 'Švietimas'
+chat: 'Pokalbiai ir forumai'
+privacyGuide: 'Privatumo sąmoningumo gidas'
+others: 'Kita'
+tutorials: 'Pagalba'
 googlePlay: Google Play
-iosAppStore: IOS App store
+iosAppStore: 'iOS App Store'
 instagram: Instagram
-discordChat: Discord chat
+discordChat: 'Discord pokalbiai'
 passwordsNoMatch: Slaptažodžiai turi sutapti.
-error: Oops!
+error: 'Oi!'
 cancel: Atšaukti
-confirm: Confirm
-report: Reportuoti
-report.title: Reportuoti
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-name: Name
+confirm: 'Patvirtinti'
+report: 'Pranešti'
+report.title: 'Pranešti'
+deleteIt: 'Taip, ištrink!'
+reportIt: 'Taip, pranešk!'
+areYouSure: 'Ar tikrai?'
+noWayOfReturn: 'Šio veiksmo nebus galima atšaukti!'
+download: 'Atsisiųsti'
+name: 'Pavadinimas'
 description: Aprašymas
 noDescription: Nėra aprašymo.
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+credits: 'Padėkos'
+noCredits: 'Padėkų nėra.'
+notesAndCreditsDescription: 'Kaip sukūrei šį projektą? Ar naudojai kitų žmonių idėjas, scenarijus ar piešinius? Padėkok jiems čia.'
+projectImportedFromScratch: 'Šis projektas buvo importuotas iš MIT Scratch. Originalų projektą gali peržiūrėti'
+scratchImportedProjectLinkHere: 'čia.'
 country: Šalis
 loginText: prisijungti
 privacyPolicy: Privatumo taisyklės
-imprint: Imprint
-projectDetails: Details
-somethingWentWrong: 'Ooooops kažkas negerai.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
-pleaseTryAgain: 'Bandykite dar kartą!'
-tryAgainButton: 'Try again'
-oldVersionError: 'Atnaujinkite į naujausią programos versija!'
+imprint: 'Rekvizitai'
+projectDetails: 'Išsami informacija'
+somethingWentWrong: 'Oi, kažkas nepavyko.'
+accountNotVerified: 'Įsitikink, kad esi prisijungęs ir tavo paskyros el. pašto adresas patvirtintas.'
+accountSuspended: 'Tavo paskyra sustabdyta dėl bendruomenės pranešimų. Šį sprendimą gali apskųsti savo profilyje.'
+doesNotExist: 'Prašomas išteklius neegzistuoja.'
+pleaseTryAgain: 'Bandyk dar kartą!'
+tryAgainButton: 'Bandyti dar kartą'
+oldVersionError: 'Atnaujink programėlę į naujausią versiją!'
 more: 'daugiau'
 less: 'mažiau'
-show-more: 'More information'
-show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Got it
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Vartotojo vardas arba el. pašto adresas.'
+show-more: 'Daugiau informacijos'
+show-less: 'Mažiau informacijos'
+more-information: 'Daugiau informacijos'
+less-information: 'Mažiau informacijos'
+ok: 'Supratau'
+clickToDownloadProgram: 'Norėdamas atsisiųsti pavyzdinį projektą, spustelėk %link_start% čia %link_end%.'
+registrationError: 'Naudotojo vardas arba el. pašto adresas.'
 notifications: 'Pranešimai'
-allNotifications: 'All'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+allNotifications: 'Visi'
+FollowersNotifications: 'Sekėjai'
+LikeNotifications: 'Reakcijos'
 CommentNotifications: 'Komentarai'
-RemixNotifications: 'Remixes'
+RemixNotifications: 'Remiksai'
 wellDone: "Puiku!"
 done: "Atlikta!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+notificationsReadMessage: 'Panašu, kad neturi jokių pranešimų.'
+confirmMessage: 'Taip, ištrink'
 cancelMessage: "Atšaukti"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Neįmanoma pažymėti pranešimus kaip perskaitytus!"
-pleaseWait: "Prašome palaukti..."
-projects: "Projects"
-users: "User"
-studios: "Studios"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
-languageSelection: "Language selection"
+notificationsUnauthorizedError: 'Nepavyko autorizuoti naudotojo'
+notificationsClearError: 'Nepavyko pažymėti pranešimų kaip perskaitytų!'
+pleaseWait: 'Palauk...'
+projects: 'Projektai'
+users: 'Naudotojai'
+studios: 'Studijos'
+oauthPopUpTitle: 'Informacija apie prisijungimą per išorinę paskyrą'
+oauthInfo: 'Ką tik prisijungei naudodamas išorinę paskyrą. Sukūrėme tau atsitiktinį naudotojo vardą. Jei nori pakeisti naudotojo vardą arba susikurti naują paskyros slaptažodį, eik į savo profilio puslapį.'
+oauthHere: 'čia'
+statistics: 'Statistika'
+languageSelection: 'Kalbos pasirinkimas'
 color-scheme:
-  title: 'Theme'
-  auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  title: 'Tema'
+  auto: 'Sistemos'
+  auto_description: 'Naudoti įrenginio nustatymą'
+  light: 'Šviesi'
+  light_description: 'Šviesi išvaizda'
+  dark: 'Tamsi'
+  dark_description: 'Tamsi išvaizda'
+  apply: 'Taikyti'
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Kokie projektai čia rekomenduojami?'
+      description: 'Kuo daugiau reakcijų (nykštys aukštyn, šypsena...) gauna tavo projektas, tuo aukščiau jis šiame sąraše.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: " We could not follow this user right now."
-  unfollowError: " We could not unfollow this user right now."
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: 'Sekami'
+  followers: 'Sekėjai'
+  follow: 'Sekti'
+  username: 'Naudotojas'
+  followsMe: 'Seka mane'
+  noFollowing: 'Šiuo metu nieko neseki.'
+  noFollowers: 'Šiuo metu neturi sekėjų.'
+  noOtherFollowing: 'Šiuo metu nėra sekamų naudotojų.'
+  noOtherFollowers: 'Šiuo metu nėra sekėjų.'
+  followError: ' Šiuo metu nepavyko pradėti sekti šio naudotojo.'
+  unfollowError: ' Šiuo metu nepavyko nustoti sekti šio naudotojo.'
+  unfollowQuestion: 'Ar tikrai nori nebesekti šio naudotojo?'
+  unfollowButton: 'Nebesekti %username%'
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  open: Open
-  download: Download
+    title: 'Sveiki atvykę į Catrobat %theme%'
+    title_mindstorms: 'Sveiki atvykę į Catrobat svetainę, skirtą Mindstorms EV3 ir NXT'
+    subtitle: 'Kurk istorijas, žaidimus ir dar daugiau...'
+    subtitle_embroidery: 'Išsiuvinėk savo raštus ant marškinėlių, krepšių, kelnių ar išmaniojo telefono dėklo!'
+    subtitle_mindstorms: 'Kurk savo projektus su Lego Mindstorms EV3 ir NXT robotais'
+    download: 'Atsisiųsk programėlę'
+    statistics: 'Daugiau statistikos'
+  featured: 'Išskirtiniai'
+  open: 'Atidaryti'
+  download: 'Atsisiųsti'
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: 'Įkelti projektą'
+    drop_here: 'Nutempk savo .catrobat failą čia'
+    or_browse: 'arba spustelėk ir pasirink'
+    button: 'Įkelti'
+    uploading: 'Įkeliama...'
+    success: 'Projektas sėkmingai įkeltas!'
+    view_project: 'Peržiūrėti projektą'
+    upload_another: 'Įkelti kitą'
+    invalid_file: 'Pasirink .catrobat failą'
+    file_too_large: 'Failas per didelis'
+    error: 'Įkelti nepavyko. Bandyk dar kartą.'
+    unauthorized: 'Norėdamas įkelti, turi prisijungti.'
+    rate_limited: 'Per daug įkėlimų. Bandyk vėliau.'
+    selected_file: 'Pasirinktas failas:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
-  shareAction: Share
-  deleteAction: Delete project
+      file_size: 'Didžiausias failo dydis – 100 MB.'
+      app_upload: 'Projektus taip pat gali įkelti tiesiai iš Pocket Code programėlės. Atkreipk dėmesį, kad programėlės šiuo metu perdirbamos ir kol kas nepalaiko įkėlimo į svetainę.'
+      retention: 'Įkelti projektai automatiškai pašalinami po tam tikro neaktyvumo laikotarpio. Reguliariai prisijunk arba surink atsisiuntimų, kad projektas būtų saugomas ilgiau.'
+      protection: 'Ypač geri ar populiarūs projektai moderatorių gali būti apsaugoti nuo automatinio ištrynimo.'
+  example: 'Pavyzdžiai'
+  newest: 'Naujausi projektai'
+  recommended: 'Rekomenduojami projektai'
+  scratchremixes: 'Scratch remiksai'
+  noProjects: 'Šiuo metu projektų nėra.'
+  shareAction: 'Dalintis'
+  deleteAction: 'Ištrinti projektą'
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
-  deleteConfirmationTitle: Are you sure?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+    Ar tikrai?
+    Ar tikrai nori ištrinti „%programName%“?
+    Šio veiksmo nebus galima atšaukti!
+    Taip, ištrink!
+    Atšaukti
+  deleteConfirmText: 'Šio veiksmo negalima atšaukti. Tavo projektas bus ištrintas visam laikui.'
+  deleteConfirmationTitle: 'Ar tikrai?'
+  deleteNotFoundError: 'Ištrinamas projektas tarp tavo projektų nerastas.'
+  private: 'privatus'
+  public: 'viešas'
+  setPrivateAction: 'Padaryti privatų'
+  setPublicAction: 'Padaryti viešą'
+  setPrivateConfirm: 'Padaryti šį projektą privatų? Jis nebebus rodomas paieškos rezultatuose.'
+  setPublicConfirm: 'Padaryti šį projektą viešą? Jį matys visi.'
+  markNotForKidsConfirm: 'Pažymėti šį projektą kaip netinkamą vaikams?'
+  markSafeForKidsConfirm: 'Pašalinti šio projekto žymą „netinka vaikams“?'
+  nfkModeratorLocked: 'Šį nustatymą užrakino moderatorius.'
+  confirmSetPrivate: 'Ar tikrai nori padaryti šį projektą privatų? Jis nebebus rodomas paieškos rezultatuose.'
+  confirmSetPublic: 'Ar tikrai nori padaryti šį projektą viešą? Jį matys visi.'
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Ar tikrai?
+    Jei padarysi „%programName%“ privatų, kiti naudotojai jo nematys ir neras.
+    Vis tiek galėsi pasidalinti projekto nuoroda su draugais. Matomumą gali perjungti paliesdamas spynos piktogramą.
+    Jei padarysi „%programName%“ viešą, kiti naudotojai galės jį matyti ir rasti.
+    Taip, padaryti viešą
+    Taip, padaryti privatų
+    Ne
+  reportCommentConfirmation: 'Ar tikrai nori pranešti apie šį komentarą?'
+  deleteCommentConfirmation: 'Ar tikrai nori ištrinti šį komentarą?'
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  my_projects: My shared projects
-  trending: Trending projects
-  popular: Popular projects
+    Ištrinti paskyrą?
+    Ar tikrai nori ištrinti savo paskyrą? Kartu bus ištrinti ir tavo įkelti projektai bei komentarai!
+    Šio veiksmo nebus galima atšaukti!
+    Taip, ištrink!
+    Atšaukti
+  tooLongName: 'Projekto pavadinimas per ilgas!'
+  tooLongDescription: 'Projekto aprašymas per ilgas!'
+  tooLongCredits: 'Projekto pastabos ir padėkos per ilgos!'
+  my_projects: 'Mano bendrinami projektai'
+  trending: 'Populiarėjantys projektai'
+  popular: 'Populiarūs projektai'
   most:
-    viewed: Daugiausiai žiūretos
-    downloaded: Labiausiai Atsisiųstos
-  random: Random projects
-  related: Related projects
+    viewed: 'Daugiausiai žiūrėti'
+    downloaded: 'Daugiausiai atsisiųsti'
+  random: 'Atsitiktiniai projektai'
+  related: 'Susiję projektai'
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'Naršyti projektus'
+    no_projects: 'Dar nesukūrei jokių projektų'
+    no_explore: 'Projektų nerasta'
+    load_more: 'Įkelti daugiau'
+    upload: 'Įkelti projektą'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'Apsaugotas'
+    day_left: 'Liko 1 diena'
+    days_left: 'Liko dienų: %days%'
+    tooltip: 'Projektai automatiškai pašalinami po tam tikro neaktyvumo laikotarpio. Surink daugiau atsisiuntimų arba reguliariai prisijunk, kad projektas būtų saugomas ilgiau.'
+    tooltip_protected: 'Šis projektas apsaugotas ir nebus automatiškai ištrintas.'
+  downloads: 'Atsisiuntimai: %downloads%'
+  sample: 'Pavyzdiniai projektai'
+  views: 'Peržiūros: %views%'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "All"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
-  btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+    likersTitle: 'Žmonės, sureagavę į šį projektą'
+    all: 'Visi'
+  remixes: '{0}Remiksų nėra |{1}1 remiksas |]1,Inf]Remiksų: %remixes%'
+  newRemixesNotificationTitle: '|{1}„%programName%“ turi 1 naują remiksą: |]1,Inf] „%programName%“ turi naujų remiksų: %remixes%:'
+  submitted: 'Pateikti projektai'
+  uploaded: 'Įkelti projektai'
+  reportAsInappropriate: 'Pranešti kaip netinkamą'
+  reportProgram: 'Pranešti apie projektą'
+  languageVersion: 'Catrobat kalbos versija: %languageVersion%'
+  reportLoginText: 'Norėdamas pranešti apie šį projektą, turi %login%.'
+  reportDialogHeader: 'Kodėl nori pranešti apie šį projektą?'
+  reportDialogReason: 'Įvesk priežastį'
+  reportRadioButtonInappropriate: 'Jis netinkamas'
+  reportRadioButtonCopyright: 'Autorių teisių pažeidimas'
+  reportRadioButtonSpam: 'Tai šlamštas'
+  reportRadioButtonDislike: 'Man jis nepatinka'
+  reportOwnProgram: 'Negali pranešti apie savo paties projektą.'
+  reportAlready: 'Apie šį projektą jau pranešei.'
+  reportDone: 'Pranešei apie šį projektą!'
+  updateAppHeaderDownload: 'Atsisiųsti neįmanoma'
+  updateAppTextDownload: 'Atnaujink programėlę į naujausią versiją. Atkreipk dėmesį, kad ne visos Android funkcijos jau prieinamos iOS.'
+  updateAppTextDownloadApk: 'APK atsisiuntimas šiuo metu galimas tik Android, bet ne iOS.'
+  updateAppHeader: 'Atnaujink programėlę'
+  updateAppText: 'Atnaujink programėlę į naujausią versiją.'
+  btnClosePopup: 'Gerai'
+  checkout_this_project: 'Pažiūrėk šį Catrobat projektą'
+  show_more: 'Rodyti daugiau'
   comments: Komentarai
-  send: Send
+  send: 'Siųsti'
   delete: Ištrinti
-  report: Reportuoti
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  report: 'Pranešti'
+  reply: 'Atsakyti'
+  report_popup: 'Apie komentarą sėkmingai pranešta.'
+  report_popup_header: 'Pranešta'
+  deleted_popup: 'Komentaras sėkmingai ištrintas.'
+  deleted_popup_header: 'Ištrinta'
+  noAdminRights: 'Neturi administratoriaus teisių. Prisijunk kaip administratorius.'
+  editProject: 'Redaguoti projektą'
+  closeProjectEditor: 'Uždaryti projekto redaktorių'
+  closeEditorPrompt: 'Ar nori išsaugoti pakeitimus?'
+  btnDiscard: 'Atmesti'
+  addComment: 'Parašyk komentarą'
+  thumbsUp: 'Nykštys aukštyn!'
+  smile: 'Šypsena!'
+  love: 'Meilė!'
+  wow: 'Oho!'
+  linkTitle: 'Nuoroda'
+  link: 'Kopijuoti projekto nuorodą į iškarpinę'
+  reactionsText: 'Reakcijos'
+  downloadErrorText: 'Atsisiunčiant projektą įvyko klaida. Bandyk vėliau.'
+  downloadStartText: 'Atsisiuntimas pradėtas...'
+  downloading: 'Atsisiunčiama...'
+  openInApp: 'Atidaryti Pocket Code'
+  downloaded: 'Atsisiųsta'
+  showTranslation: 'Rodyti vertimą'
+  hideTranslation: 'Slėpti vertimą'
+  translatedByLine: 'Išvertė %provider% iš %sourceLanguage% į %targetLanguage%'
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
-  save: Save
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  confrimDelete: 'Ar tikrai nori ištrinti vertimą?'
+  default: 'Numatytasis'
+  save: 'Išsaugoti'
+  translationTitle: 'Vertimas: %language%'
+  editDefault: 'Redaguoti numatytąjį'
+  editTranslation: 'Redaguoti vertimą: %language%'
+  translations: 'Vertimai'
+  createTranslation: 'Sukurti vertimą'
+  deletedComment: '**Ištrinta**'
+  replyLabel: 'atsakymas'
+  repliesLabel: 'atsakymai'
+  notForKids: 'Netinka vaikams'
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
-  by: 'by'
-  open: 'Open'
+  title: 'Remiksai'
+  showRemixGraph: 'Remiksų grafas'
+  by: 'autorius'
+  open: 'Atidaryti'
   showPaths: 'Rodyti kelius'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
-  remixesLabel: 'Remixes'
-  projectsLabel: 'Projects'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  loading: 'Įkeliamas remiksų grafas...'
+  error: 'Nepavyko įkelti remiksų grafo.'
+  empty: 'Šiam projektui remiksų grafo duomenų dar nėra.'
+  remixesLabel: 'Remiksai'
+  projectsLabel: 'Projektai'
+  scratchLabel: 'Scratch šaknys'
+  interactHint: 'Pasirink mazgą, kad atidarytum projektą arba paryškintum jo remiksų kelią.'
+  zoomIn: 'Priartinti'
+  zoomOut: 'Nutolinti'
+  resetView: 'Atstatyti vaizdą'
+  projectNotAvailableErrorTitle: 'Atsiprašome...'
+  projectNotAvailableErrorDescription: 'Šis projektas nebepasiekiamas!'
+  projectNotAvailable: 'Nepasiekiamas'
+  projectUnknownUser: 'Nežinomas naudotojas'
+noReply: 'Tai automatinis pranešimas – neatsakyk tiesiogiai į šį el. laišką.'
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: 'Catrobat paskyros patvirtinimas'
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Sveikas, %username%.
+    Norėdamas užbaigti paskyros aktyvavimą, apsilankyk %confirmationUrl%
+    Šia nuoroda paskyrai patvirtinti galima pasinaudoti tik vieną kartą.
+    Linkėjimai,
+    Tavo Catrobat komanda.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Sveikas, %username%.<br>
     <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
+    Norėdamas užbaigti paskyros aktyvavimą, spustelėk <a href="%confirmationUrl%">čia.</a><br>
+    Šia nuoroda paskyrai patvirtinti galima pasinaudoti tik vieną kartą.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Linkėjimai,<br>
+    Tavo Catrobat komanda.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: 'Patvirtink savo el. pašto adresą'
+  welcome: 'Sveiki atvykę į Catrobat!'
+  greeting: 'Ačiū, kad užsiregistravai! Patvirtink savo el. pašto adresą ir pradėk.'
+  message: 'Spustelėk žemiau esantį mygtuką, kad patvirtintum savo el. paštą. Ši nuoroda galioja iki %time% ir ja galima pasinaudoti tik vieną kartą.'
+  button: 'Patvirtinti el. pašto adresą'
+  ignore: 'Jei nekūrei Catrobat paskyros, šį laišką gali drąsiai ignoruoti.'
+  autoDelete: 'Nepatvirtintos paskyros automatiškai ištrinamos po 30 dienų.'
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: 'Reikia tėvų sutikimo tavo vaiko Catrobat paskyrai'
+    title: 'Reikalingas tėvų sutikimas'
+    greeting: 'Sveiki,'
+    message: 'Tavo vaikas %username% susikūrė Catrobat paskyrą ir patvirtino savo el. pašto adresą.'
+    explanation: 'Catrobat – tai nemokama švietimo platforma, kurioje jaunuoliai mokosi programuoti kurdami programėles, žaidimus ir animacijas. Pagal ES vaikų apsaugos taisykles mums reikia tavo sutikimo, kad tavo vaikas galėtų visavertiškai dalyvauti bendruomenėje. Spustelėk žemiau esantį mygtuką ir duok sutikimą.'
+    button: 'Duoti tėvų sutikimą'
+    ignore: 'Jei šio laiško nesitikėjai, gali jį drąsiai ignoruoti. Be sutikimo paskyros funkcijos bus ribotos.'
+    whatIsCatrobat: 'Catrobat – tai nemokama, ne pelno siekianti švietimo ir programavimo platforma. Daugiau sužinok catrobat.org.'
+    manageLink: 'Savo vaiko paskyrą bet kada gali tvarkyti mūsų <a href="%portalUrl%" style="color: #00acc1;">Tėvų portale</a>. Sužinok daugiau apie <a href="%infoUrl%" style="color: #00acc1;">savo, kaip tėvų, teises</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: 'Sutikimas duotas'
+    message: 'Ačiū! %username% paskyra dabar visiškai aktyvuota.'
+    continueButton: 'Atrasti projektus'
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: 'Tėvams ir globėjams'
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: 'Informacija tėvams ir globėjams'
+    intro: 'Catrobat rimtai rūpinasi jaunųjų naudotojų saugumu ir privatumu. Šiame puslapyje paaiškinama, kaip saugome tavo vaiką ir kokias teises turi tu.'
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: 'Kas yra Catrobat?'
+      text: 'Catrobat – tai nemokama, ne pelno siekianti švietimo platforma, kurioje jaunuoliai mokosi programuoti kurdami savo programėles, žaidimus ir animacijas. Platforma prieinama visame pasaulyje ir naudojama švietimo įstaigose.'
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: 'Kokius duomenis renkame?'
+      text: 'Renkame tik tiek duomenų, kiek būtina platformai veikti: naudotojo vardą, el. pašto adresą, gimimo datą ir projektus, kuriuos tavo vaikas sukuria ir įkelia. Jaunesnių nei 14 metų naudotojų atveju taip pat saugome tėvų ar globėjų el. pašto adresą sutikimui gauti. Asmens duomenų neparduodame ir neperduodame trečiosioms šalims.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: 'Tavo, kaip tėvų ar globėjo, teisės'
+      text: 'Pagal ES vaikų apsaugos taisykles (BDAR) ir COPPA turi teisę: peržiūrėti duomenis, kuriuos turime apie tavo vaiką, gauti tų duomenų kopiją, bet kada atšaukti savo sutikimą (tai apriboja paskyrą) ir paprašyti visam laikui ištrinti tavo vaiko paskyrą bei visus susijusius duomenis.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: 'Kokie apribojimai taikomi nepilnamečių paskyroms?'
+      text: 'Jaunesni nei 16 metų naudotojai negali rašyti ar skaityti komentarų, sekti kitų naudotojų ar matyti turinio, pažymėto kaip netinkamas vaikams. Jie vis tiek gali kurti ir įkelti projektus, naršyti viešus projektus ir reaguoti į projektus. Šie apribojimai taikomi siekiant užtikrinti saugią mokymosi aplinką.'
+    manageButton: 'Tvarkyti vaiko paskyrą'
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: 'Tėvų portalas'
+    description: 'Įvesk savo el. pašto adresą ir gausi saugią nuorodą vaiko Catrobat paskyrai tvarkyti. Nuoroda bus išsiųsta el. pašto adresu, kurį nurodei registracijos metu.'
+    emailLabel: 'Tavo el. pašto adresas'
+    submitButton: 'Siųsti tvarkymo nuorodą'
+    infoLink: 'Sužinoti daugiau'
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: 'Patikrink savo pašto dėžutę'
+      message: 'Jei su šiuo el. pašto adresu susieta paskyra, išsiuntėme tvarkymo nuorodą. Patikrink pašto dėžutę ir paspausk nuorodą, kad galėtum tvarkyti vaiko paskyrą.'
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: 'Tvarkyti vaikų paskyras'
+    description: 'Tvarkai paskyras, susietas su %email%.'
+    consentStatus: 'Sutikimo būsena'
+    accountCreated: 'Paskyra sukurta'
+    email: 'Vaiko el. paštas'
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: 'Duotas'
+      pending: 'Laukiama'
+      revoked: 'Atšauktas'
+    grantButton: 'Duoti sutikimą'
+    revokeButton: 'Atšaukti sutikimą'
+    revokeConfirm: 'Ar tikrai nori atšaukti sutikimą? Paskyros funkcijos bus ribotos.'
+    exportButton: 'Eksportuoti duomenis'
+    deleteButton: 'Ištrinti paskyrą'
+    deleteConfirm: 'Ar tikrai nori visam laikui ištrinti šią paskyrą? To negalima atšaukti.'
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: 'Tvarkyk savo vaiko Catrobat paskyrą'
+      title: 'Paskyros tvarkymas'
+      greeting: 'Sveiki,'
+      message: 'Paprašei nuorodos savo vaiko Catrobat paskyrai (%usernames%) tvarkyti. Spustelėk žemiau esantį mygtuką, kad peržiūrėtum ir tvarkytum paskyrą.'
+      button: 'Tvarkyti paskyrą'
+      ignore: 'Jei to neprašei, šį laišką gali drąsiai ignoruoti.'
 passwordRecovery:
   subject: Catrobat slaptažodžio atkūrimas
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    Sveikas, %username%.
+    Paprašei atkurti slaptažodį svetainėje %appplication_url%, nes jį pamiršai.
+    Jei to neprašei, tiesiog ignoruok šį laišką. Nuoroda nustos galioti po 24 valandų.
+    Norėdamas atkurti slaptažodį ir susikurti naują, apsilankyk šiame puslapyje: %confirmationUrl%
+    Savo naudotojo vardu ir slaptažodžiu bet kada gali prisijungti prie %appplication_url% bendruomenės.
+    Tam tiesiog apsilankyk šiame puslapyje: %loginPage%
+    Norėdamas redaguoti profilio informaciją, eik į šį puslapį: %profilePage%
+    Linkėjimai,
+    Tavo Catrobat komanda.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Sveikas, %username%.<br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Paprašei atkurti slaptažodį svetainėje <a href="%appplication_url%">Pocket Code</a>, nes jį pamiršai.
+    Jei to neprašei, tiesiog ignoruok šį laišką. Nuoroda nustos galioti po 24 valandų.<br>
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    Norėdamas atkurti slaptažodį ir susikurti naują, spustelėk <a href="%confirmationUrl%">čia.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
+    Savo naudotojo vardu ir slaptažodžiu bet kada gali prisijungti prie <a href="%appplication_url%">Pocket Code</a> bendruomenės.<br>
+    Tam tiesiog apsilankyk šiame puslapyje: <a href="%loginPage%">Prisijungimo puslapis</a><br>
+    Norėdamas redaguoti profilio informaciją, eik į šį <a href="%profilePage%">puslapį</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Linkėjimai,<br>
+    Tavo Catrobat komanda.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
-  edit: Edit your profile
+  aboutMe: 'Apie mane'
+  currentlyWorkingOn: 'Šiuo metu kuriu'
+  edit: 'Redaguok savo profilį'
   saveChanges: išsaugoti pakeitimus
   newPass: naujas slaptažodis
-  repeatPass: pakartokite slaptažodį
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  repeatPass: 'pakartok slaptažodį'
+  oldPass: 'senas slaptažodis'
+  firstEmail: 'Mano pirmasis el. paštas'
+  secondEmail: 'Mano antrasis el. paštas'
+  myPrograms: 'Mano projektai'
+  follows: 'Seka'
+  follower: 'Sekėjas'
+  unfollowUser: 'Nebesekti šio naudotojo!'
+  followUser: 'Sekti šį naudotoją!'
+  amountOfPrograms: 'Projektų skaičius'
   form:
-    passwordTooShort: Naujas slaptažodis gali būti ne daugiau kaip %length% simbolių.
-    passwordTooLong: Naujas slaptažodis gali būti ne daugiau kaip %length% simbolių.
-    passwordIsUsername: Slaptažodis turi skirtis nuo vartotojo vardo.
+    passwordTooShort: 'Naujas slaptažodis turi būti bent %length% simbolių.'
+    passwordTooLong: 'Naujas slaptažodis gali būti ne ilgesnis kaip %length% simbolių.'
+    passwordIsUsername: 'Slaptažodis turi skirtis nuo naudotojo vardo.'
     passwordWrong: Neteisingas slaptažodis
-    emailNotValid: Šis el. pašto adresas neteisingas/negaliojantis.
-    emailMissing: Įvyko klaida atnaujinant šį el. pašto adresą. Turite turėti bent vieną patvirtintą el. pašto adresą.
-    emailExists: El. pašto adresas jau egzistuoja.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    emailNotValid: 'Šis el. pašto adresas neteisingas.'
+    emailMissing: 'Atnaujinant šį el. pašto adresą įvyko klaida. Turi turėti bent vieną patvirtintą el. pašto adresą.'
+    emailExists: 'Šis el. pašto adresas jau naudojamas.'
+    usernameNotValid: 'Šis naudotojo vardas netinkamas.'
+    usernameMissing: 'Turi turėti naudotojo vardą.'
+    usernameExists: 'Toks naudotojo vardas jau yra.'
+    usernameContainsEmail: 'Naudotojo varde neturėtų būti el. pašto adreso.'
     submitSuccess: išsaugota!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
+  reallyDeleteProgram: 'Ar tikrai nori ištrinti savo projektą'
+  programsOf: 'Projektai, kuriuos sukūrė'
+  picture: 'Profilio nuotrauka'
   changePicture: Keisti paveikslėlį
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: 'Profilis Scratch svetainėje'
 myprofile:
-  userSettings: User settings
+  userSettings: 'Naudotojo nustatymai'
   profileSettings: Redaguoti profilį
-  securitySettings: Change password
-  accountSettings: Account Settings
-  accountVerification: Verify account
-  account: Account
+  securitySettings: 'Keisti slaptažodį'
+  accountSettings: 'Paskyros nustatymai'
+  accountVerification: 'Patvirtinti paskyrą'
+  account: 'Paskyra'
   editProfile: Redaguoti profilį
   edit: Redaguoti
-  done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
+  done: 'Atlikta'
+  checkMail: 'Tavo el. pašto adresu išsiųstas laiškas. Patikrink pašto dėžutę.'
+  passwordUpdated: 'Tavo slaptažodis sėkmingai atnaujintas.'
   avatar: Asm. paveikslėlis
-  email: Email
+  email: 'El. paštas'
   deleteAccount: Panaikinti paskyrą
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
-  editAccountSettings: Edit account settings
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+    Atkreipk dėmesį:
+    Sukūrei projektų: %num_projects%, turi sekėjų: %num_followers%. Visi tavo projektai bus pašalinti. Nebegalėsi prisijungti, o tavo projektai dings iš visų sąrašų. Profilio ištrynimo negalima atšaukti!
+    Ar tikrai nori mus palikti?
+  exportData: 'Atsisiųsti mano duomenis'
+  exportDataDescription: 'Turi teisę gauti savo asmens duomenų kopiją. Ją sudaro tavo profilio informacija, projektai, komentarai, reakcijos ir sekėjai.'
+  exportDataLoading: 'Atsisiunčiama...'
+  exportDataError: 'Eksportuojant tavo duomenis kažkas nepavyko. Bandyk vėliau.'
+  exportDataRateLimited: 'Savo duomenis gali eksportuoti tik kartą per dieną. Bandyk rytoj.'
+  editAccountSettings: 'Redaguoti paskyros nustatymus'
+  profileChangeSuccess: 'Tavo profilis sėkmingai pakeistas.'
+  unspecifiedError: 'Keičiant tavo profilį kažkas nepavyko. Bandyk dar kartą arba pranešk mums, jei tai kartojasi!'
+  verifyAccountText: 'Atsiųsime tau el. laišką su nuoroda paskyrai patvirtinti. Būtinai paspausk nuorodą per artimiausią valandą – laišką gali prašyti tik kartą per dieną.'
+  verifyAccountButton: 'Siųsti el. laišką'
+  verifyAccountMailSent: 'El. laiškas sėkmingai išsiųstas. Patikrink pašto dėžutę'
+  verifyAccountMailFailed: 'El. laišką gali prašyti tik kartą per dieną'
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  link: 'Licencija žaisti'
+  title: 'Licencija žaisti – nurodyk autorius ir dalinkis'
+  text1: 'Įsivaizduok, kad kiekvienas Catrobat projektas yra pyragas – labai ypatingas pyragas, kuris pateikiamas kartu su receptu (programavimo blokais). Visi Catrobat bendruomenės nariai dalijasi savo pyragais kartu su receptais. Tai reiškia, kad gali mėgautis pyragais ir išmokti juos iškepti pats!'
+  text2: 'Slaptų receptų nėra: instrukcijas, kaip iškepti šiuos pyragus, gali naudoti, naudoti pakartotinai, keisti kiekvienas, o jos gali įkvėpti naujų idėjų... tai yra, pyragų.'
+  text3: 'Gali valgyti pyragus ir kopijuoti kitų žmonių receptus, kad iškeptum savo, galbūt su kitokiais ingredientais. Ši laisvė turi du paprastus reikalavimus:'
+  text4: 'Kurdami Catrobat bendruomenę, nusprendėme laikytis šio požiūrio, nes tikime, kad jis skatina mokymąsi ir kūrybiškumą bendruomenėje. Dalindamiesi receptais ir ingredientais (scenarijais ir piešiniais), žmonės gali remtis vieni kitų idėjomis, ir iš to laimi visi.'
+  text5: 'Kurdami Catrobat svetainę, įdiegėme funkcijas, skatinančias žmones dalintis ir nurodyti kitų autorystę. Kiekvieno projekto puslapyje visada gali atsisiųsti originalius projekto scenarijus. Jei remiksuoji projektą (pakeiti scenarijus ar piešinius ir pasidalini rezultatu), raginame projekto pastabose padėkoti žmonėms ir projektui, kurie tave įkvėpė.'
+  text6: 'Daugiau apie Catrobat internetinės bendruomenės naudojimo sąlygas sužinok %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: suteikti kreditą tiems, kurie įkvėpė jus
-  version: Versija 1.1, 2013 m. balandžio 2
+    item1: 'dalinkis savo pyragais kartu su receptu'
+    item2: 'padėkok tiems, kurie tave įkvėpė'
+  version: 'Versija 1.1, 2013 m. balandžio 2 d.'
 termsOfUse:
   title: Naudojimo taisyklės
   headline: Sveiki atvykę į Catrobat bendruomenę!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Dovanojame jums:'
-  text5: 'Mūsų naudojimo ir aptarnavimo sąlygos:'
+  text1: 'Būdamas Catrobat bendruomenės dalimi, dalijiesi projektais ir idėjomis su žmonėmis:'
+  text2: 'Mums reikia tavo pagalbos, kad ši bendruomenė būtų palaikanti vieta kiekvienam nariui. Štai kaip gali padėti:'
+  text3: 'Per Catrobat projektą norime skatinti bendradarbiavimą ir leisti visų kūrybiškumui susijungti visos žmonijos labui. Ir tu gali tapti aktyviu Catrobat bendruomenės nariu, dovanodamas savo projektus bendruomenei taip pat, kaip kiti aktyvūs nariai dovanoja savo projektus tau:'
+  text4: 'Dovanojame tau:'
+  text5: 'Mūsų naudojimo ir paslaugų teikimo sąlygos:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: 'iš daugelio skirtingų šalių ir kultūrų'
+    item2: 'įvairaus amžiaus (nuo mažų vaikų iki paauglių ir senelių)'
+    item3: 'turinčiais įvairios patirties'
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item1: 'Būk pagarbus. Dalindamasis projektais, atmink, kad tavo darbus matys įvairaus amžiaus ir skirtingos kilmės žmonės.'
+    item2: 'Nurodyk autorius. Drąsiai kurk pakeistas kitų žmonių projektų versijas – tik būtinai nurodyk jų autorius. Tai galima padaryti, pavyzdžiui, savo projekto padėkų skiltyje. Daugiau apie kitų naudotojų projektų keitimą rasi pastraipoje po šiuo sąrašu.'
+    item3: 'Būk sąžiningas. Neapsimetinėk kuo nors kitu ir nebandyk apgauti bendruomenės.'
+    item4: 'Saugok asmeninę informaciją. Nesidalink savo el. pašto adresu, telefono numeriu ar kita asmenine kontaktine informacija.'
+    item5: 'Padėk išlaikyti svetainę draugišką. Jei manai, kad kiti projektą ar komentarą palaikytų piktu, įžeidžiančiu, per daug smurtiniu ar kitaip netinkamu, tiesiog spustelėk mygtuką „pranešti kaip netinkamą“ ir trumpai paaiškink. Catrobat komanda peržiūrės tavo pranešimą ir gali pašalinti bet kokį projektą, komentarą ar įrašą.'
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item1: 'Įkeldamas projektą į mūsų svetaines, sutinki, kad šis darbas būtų platinamas pagal tam tikras laisvąsias įkeltų Catrobat projektų licencijas. Panašiai kaip laisvosios licencijos, pagal kurias tau prieinama pati Catrobat sistema, šios laisvosios įkeltų Catrobat projektų licencijos suteikia kiekvienam teisę mokytis iš kitų anksčiau įkeltų darbų, juos pritaikyti ir remiksuoti, kad sukurtų savo naujus įdomius žaidimus, animacijas ir kitus projektus. Tai leidžia kiekvienam „stovėti ant bendraamžių pečių“, ir vienas iš jų esi tu! Taip tavo darbas bus naudingas visam pasauliui ir liks laisvai prieinamas visiems, panašiai kaip tekstai ir paveikslėliai, kuriuos savanoriai iš viso pasaulio laisvai įneša į Vikipediją. Laikyk tai savo dovana žmonijai: tu dovanoji visiems, o visi kiti, įkeliantys savo darbus į mūsų svetaines, dovanoja tau. Taigi įkeltas projektas yra labai vertinga dovana, kurią jo savininkas tau dovanoja nemokamai su sąlyga, kad bendruomenėje dalyvausi tomis pačiomis sąlygomis.'
+    item2: 'Neprivalai priimti dovanos; jei ją priimi, taikomos tam tikros taisyklės. Šių taisyklių nauda ta, kad gali mokytis iš darbo ir juo remdamasis pats sukurti dar šaunesnių dalykų, kuriuos vėliau gali, pavyzdžiui, vėl įkelti į mūsų svetaines kaip savo. Kita nauda – šios licencijos užtikrina, kad negalėsi būti laikomas atsakingu už jokias problemas, kylančias kitiems naudojantis tavo projektu.'
+    item3: 'Viena svarbi papildoma sąlyga – aiškiai nurodyti autorius, kurių darbais rėmeisi kurdamas savo darbą. Tuo pačiu stengsimės, kad kiti aiškiai matytų, jog darbą sukūrei tu, nurodydami unikalų vardą, kurį laisvai pasirinkai Catrobat bendruomenėje, ir suteikdami kitiems galimybę viešai išreikšti tau padėką už tai, kad savo darbą padovanojai visiems, o ypač jiems.'
+    item4: 'Tikslias teisines sąlygas rasi %link-licenseUploaded%.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item1: 'Visą savo programinę įrangą ir interneto išteklius, susijusius su Catrobat sistema, pvz., Catrobat komandos parašytą programinę įrangą, mūsų svetaines ir interneto išteklius, mūsų pačių su Catrobat sistema susijusį išeities kodą ir visą papildomą medžiagą, pvz., paveikslėlius, garsus ir tekstus, dabar ir ateityje tau siūlome pagal laisvąsias Catrobat licencijas.'
+    item2: 'Šios licencijos visas Catrobat dalis tau padaro ir nemokamas, ir laisvas – suteikia laisvę jas naudoti kaip tik nori, taikant tik kelis apribojimus, kurie, be kita ko, užtikrina, kad Catrobat sistema visada išliktų laisva ir naudinga visiems.'
+    item3: 'Tikslias teisines sąlygas rasi %link-licenseToPlay%. Catrobat sistemos išeities kodas ir daugelis kitų dokumentų bei išteklių pasiekiami per %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+    item1: 'Jei tu arba, jei esi jaunesnis nei 13 metų, tavo tėvai ar teisėti globėjai esate susiję su organizacija, dalyvaujančia ar atsakinga už masinius privatumo pažeidimus ir (arba) masinį sekimą, tau neleidžiama naudotis mūsų programinėmis programomis ir paslaugomis. Tikslios šio apribojimo detalės ir tam tikros jo išimtys aprašytos mūsų %link-termsOfUse% 4.a ir 4.b skirsniuose.'
+    item2: 'Jei esi jaunesnis nei 13 metų, turi paklausti savo tėvų ar teisėtų globėjų, ar jie leidžia tau naudotis Catrobat programomis ir paslaugomis.'
+    item3: 'Pasiliekame teisę bet kada savo nuožiūra atmesti, ištrinti ar paslėpti projektus, naudotojų paskyras ir bet kokią į Catrobat svetaines įkeltą skaitmeninę medžiagą, pavyzdžiui, jei nustatome, kad projekte yra netinkamos medžiagos arba kad naudotojas pažeidžia kitų asmenų teises.'
+    item4: 'Visa Catrobat programinė įranga ir interneto ištekliai siūlomi tikintis, kad bus naudingi, tačiau be jokios garantijos.'
+    item5: 'Tikslias pirmiau nurodytų punktų formuluotes ir kai kurias papildomas teisines sąlygas rasi mūsų %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service.'
+  bottom1: 'Retkarčiais užsuk čia, nes nuolat stengiamės tobulinti savo naudojimo sąlygas.'
+  bottom2: 'Pasiūlymus dėl šių naudojimo sąlygų siųsk el. paštu %email-webmaster%.'
+  version: 'Versija 1.3, 2014 m. kovo 4 d.'
 search:
-  dotdotdot: Search...
-  search: Search projects, users & studios
-  inMediaLib: Search in media library
-  inMediaCategory: Search in media category
-  results: Search Results
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  dotdotdot: 'Ieškoti...'
+  search: 'Ieškok projektų, naudotojų ir studijų'
+  inMediaLib: 'Ieškoti medijų bibliotekoje'
+  inMediaCategory: 'Ieškoti medijų kategorijoje'
+  results: 'Paieškos rezultatai'
+  resultcount: 'Rasta rezultatų: %count%'
+  fail: 'Įvesk bent vieną paieškos žodį'
+  noUsers: 'Naudotojų nerasta'
+  noProjects: 'Projektų nerasta'
+  noStudios: 'Studijų nerasta'
+  sameSearchMessage: 'Panašu, kad tu jau čia! Gal pabandyk kitą paiešką?'
 menu:
-  profile: Profile
-  login: Login
-  logout: Logout
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
-  mediaLibrary: Media library
-  studio: Studios
-  language: Language
-  languageOptionsNotAvailable: No language options available.
+  profile: 'Profilis'
+  login: 'Prisijungti'
+  logout: 'Atsijungti'
+  admin: 'Administravimas'
+  home: 'Pradžia'
+  helpAndTutorials: 'Pagalba ir pamokos'
+  followersAndFollowing: 'Sekėjai'
+  mediaLibrary: 'Medijų biblioteka'
+  studio: 'Studijos'
+  language: 'Kalba'
+  languageOptionsNotAvailable: 'Kalbos parinkčių nėra.'
 login:
-  login: Login
+  login: 'Prisijungti'
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: 'Prisijungti dabar'
+    createAccount: 'Sukurti paskyrą'
+    forgetPassword: 'Pamiršai slaptažodį?'
   oauth:
-    title: Or you can join with
-  passOrUser: Your password or username was incorrect.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
-  or: OR
-  username: Vartotojo vardas
-  email: Email
+    title: 'Arba gali prisijungti per'
+  passOrUser: 'Neteisingas slaptažodis arba naudotojo vardas.'
+  accountSuspended: 'Tavo paskyra sustabdyta. Jei manai, kad tai klaida, susisiek su pagalbos tarnyba.'
+  noUsername: 'Tavo naudotojo vardas arba el. pašto adresas nerastas.'
+  forgotPass: 'Pamiršai slaptažodį ar naudotojo vardą?'
+  recoverPassSend: 'Tavo el. pašto adresu išsiųstas laiškas. Patikrink pašto dėžutę.'
+  alreadyReset: 'Šio naudotojo slaptažodžio atkūrimo jau buvo prašyta per pastarąsias 24 valandas.'
+  confirmationSend: 'Tavo el. pašto adresu išsiųstas registracijos patvirtinimo laiškas. Patikrink pašto dėžutę ir aktyvuok paskyrą.'
+  userOrEmail: 'Naudotojo vardas arba el. paštas'
+  changePass: 'Keisti slaptažodį'
+  createAccount: 'Susikurk paskyrą'
+  noAccount: 'Neturi paskyros?'
+  alreadyAccount: 'Jau turi paskyrą?'
+  or: 'ARBA'
+  username: 'Naudotojo vardas'
+  email: 'El. paštas'
   passwordFirst: Slaptažodis
-  passwordSecond: Password Confirm
+  passwordSecond: 'Pakartok slaptažodį'
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: 'Registruotis'
+  subText: 'Tęsdamas susikuri Catrobat bendruomenės paskyrą ir sutinki su mūsų %var1% ir %var2%.'
+  dateOfBirth: 'Gimimo data'
+  dateOfBirthInfo: 'Gimimo datos klausiame, kad laikytumėmės ES vaikų apsaugos taisyklių (BDAR/COPPA) ir užtikrintume saugią patirtį jaunesniems naudotojams.'
+  parentEmail: 'Tėvų / globėjo el. paštas'
+  parentEmailInfo: 'Privaloma jaunesniems nei 14 metų naudotojams. Šiuo adresu išsiųsime prašymą duoti sutikimą.'
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
-    submit: Continue
+    title: 'Užbaik registraciją'
+    info: 'Nurodyk savo gimimo datą, kad galėtum toliau naudotis platforma.'
+    submit: 'Tęsti'
   button:
     cancel: Atšaukti
-    createAccount: Create account
+    createAccount: 'Sukurti paskyrą'
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: 'Patikrink pašto dėžutę!'
+    message: 'Išsiuntėme tau patvirtinimo laišką. Paspausk laiške esančią nuorodą, kad aktyvuotum paskyrą.'
+    helpTitle: 'Negavai laiško?'
+    hint: 'Patikrink šlamšto aplanką. Nuoroda galioja 24 valandas.'
+    resendButton: 'Siųsti patvirtinimo laišką dar kartą'
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: 'Laukiama tėvų sutikimo'
+    message: 'Tavo el. paštas patvirtintas! Kad galėtum visavertiškai naudotis platforma, tėvai arba globėjas turi duoti sutikimą.'
+    sentTo: 'Prašymas duoti sutikimą išsiųstas adresu %email%'
+    helpTitle: 'Negavai laiško? Reikia pagalbos?'
+    hint: 'Paprašyk tėvų patikrinti šlamšto aplanką. Nuoroda galioja 24 valandas.'
+    resendButton: 'Siųsti sutikimo laišką dar kartą'
+    wrongEmail: 'Įvedei neteisingą tėvų el. paštą?'
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: 'Tėvų sutikimas atšauktas'
+    message: 'Tavo tėvai arba globėjas atšaukė sutikimą tavo paskyrai. Kol sutikimas nebus duotas iš naujo, tavo paskyros funkcijos ribotos.'
+    newEmailPlaceholder: 'Naujas tėvų el. paštas'
+    changeButton: 'Atnaujinti ir siųsti dar kartą'
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: 'Paskyros atkūrimas'
+  description: 'Jei prisimeni savo paskyros el. pašto adresą arba naudotojo vardą, galime atsiųsti tau nuorodą slaptažodžiui atkurti.'
   button:
     cancel: Atšaukti
-    submit: Recover password
+    submit: 'Atkurti slaptažodį'
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: 'Atkurk savo slaptažodį'
+    description: 'Jei prisimeni savo paskyros el. pašto adresą, galime atsiųsti tau nuorodą slaptažodžiui atkurti.'
     button:
-      submit: "Send reset email"
+      submit: 'Siųsti atkūrimo laišką'
       cancel: "Atšaukti"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: 'Patikrink savo el. paštą'
+    description: 'Jei yra paskyra su tavo el. pašto adresu, ką tik išsiuntėme laišką su nuoroda, kuria gali atkurti slaptažodį. Ši nuoroda nustos galioti po %time%.'
+    descriptionTwo: 'Naujo slaptažodžio atkūrimo gali prašyti kas %throttleLimit% val.'
+    descriptionThree: 'Jei negavai laiško, patikrink šlamšto aplanką arba parašyk mūsų pagalbos tarnybai adresu %email-webmaster%.'
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: 'Labas!'
+    visitLink: 'Norėdamas atkurti slaptažodį, apsilankyk šia nuoroda'
+    expire: 'Ši nuoroda nustos galioti po %time%.'
+    cheers: 'Linkėjimai!'
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: 'Atkurk savo slaptažodį'
+    content: 'Neseniai paprašei atkurti savo Catrobat paskyros slaptažodį. Spustelėk žemiau esantį mygtuką ir pasirink naują slaptažodį. Jei to neprašei, šį laišką gali drąsiai ignoruoti.'
+    visitLink: 'Atkurti slaptažodį'
+    expire: 'Ši nuoroda galioja %time% ir ja galima pasinaudoti tik vieną kartą.'
   reset:
-    title: "Reset your password"
+    title: 'Atkurk savo slaptažodį'
     button:
-      submit: "Reset password"
+      submit: 'Atkurti slaptažodį'
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: 'Atsisiųsti kaip programėlę'
+  prepare: 'Gauti kaip programėlę'
+  preparing: 'Ruošiama programėlė'
+  text: 'Tai gali šiek tiek užtrukti'
 format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: 'Kažkas nepavyko. Bandyk dar kartą arba pranešk mums, jei tai kartojasi!'
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    blank: 'Naudotojo vardas negali būti tuščias'
+    invalid: 'Tavo naudotojo vardas netinkamas'
+    exists: 'Toks naudotojo vardas jau yra.'
+    not_exists: 'Toks naudotojo vardas neegzistuoja.'
+    not_email: 'Naudotojo vardas negali būti el. pašto adresas.'
+    size: 'Naudotojo vardas turi būti nuo 3 iki 180 simbolių'
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: 'Trūksta slaptažodžio.'
+    short: 'Tavo slaptažodis turi būti bent {{ limit }} simbolių.'
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: 'Trūksta šalies.'
+    invalid: 'Netinkama šalis'
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
-    exists: El. pašto adresas jau egzistuoja.
+    blank: 'El. paštas negali būti tuščias'
+    invalid: 'Panašu, kad tavo el. pašto adresas netinkamas'
+    exists: 'Šis el. pašto adresas jau naudojamas.'
   id:
-    blank: Open Authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-Data not correct or missing!
+    blank: 'Atvirojo autentifikavimo ID negali būti tuščias'
+  login: 'Neteisingas slaptažodis arba naudotojo vardas.'
+  post-data: 'POST duomenys neteisingi arba jų trūksta!'
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: 'Klientas neatsiuntė fileChecksum! Ar naudoji pasenusią Pocket Code versiją?'
+    invalid: 'neteisinga kontrolinė suma'
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: 'neteisingas kodo XML'
+    missing: 'nežinoma klaida: project_xml_not_found!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: 'rastas netikėtas failas'
+    invalid: 'netinkamas failas'
+  image.missing: 'Projekto XML nurodomas failas, kurio projekto aplanke nėra'
+  unknown: 'nežinoma klaida'
+  token: 'Įrenginio autentifikavimas nepavyko: neteisingas autentifikavimo raktas!'
+  uploadTokenAuthFailed: 'Įkėlimo rakto autentifikavimas nepavyko.'
   project:
-    invalid: Invalid project.
+    invalid: 'Netinkamas projektas.'
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'Atsiprašome, tavo projekte naudojama sena Catrobat kalbos versija! Ar naudoji naujausią Pocket Code versiją?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'Atsiprašome, naudoji seną Pocket Code versiją. Atnaujink ją į naujausią.'
   authentication:
-    title: Login did not work
+    title: 'Prisijungti nepavyko'
     webview: |
-      It looks like your username or password was not right.
-      Please try to log in again in the app.
+      Panašu, kad tavo naudotojo vardas arba slaptažodis buvo neteisingas.
+      Pabandyk dar kartą prisijungti programėlėje.
 success:
-  text: Success
-  registration: Registration successful!
+  text: 'Pavyko'
+  registration: 'Registracija sėkminga!'
   token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  upload: 'Tavo projektas sėkmingai įkeltas!'
+  imgUpload: 'Tavo paveikslėlis sėkmingai įkeltas!'
+  report: 'Tavo pranešimas sėkmingai išsiųstas!'
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} prieš < 1 min. |{1}prieš 1 min. |]1,Inf] prieš %count% min.'
+  hours.ago: '{1}prieš 1 val. |]1,Inf] prieš %count% val.'
+  days.ago: '{1}prieš 1 d. |]1,Inf] prieš %count% d.'
+  months.ago: '{1}prieš 1 mėn. |]1,Inf] prieš %count% mėn.'
+  years.ago: '{1}prieš 1 m. |]1,Inf] daugiau nei prieš metus'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: 'Įkeliant tavo programėlę įvyko klaida.'
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Patvirtink savo el. paštą'
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    usernameContainsLink: "Username must not contain a link"
-    countryCodeInvalid: "Country code invalid"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    emailMissing: 'Trūksta el. pašto'
+    emailEmpty: 'El. paštas negali būti tuščias'
+    emailInvalid: 'Netinkamas el. paštas'
+    emailAlreadyInUse: 'El. paštas jau naudojamas'
+    usernameMissing: 'Trūksta naudotojo vardo'
+    usernameTooShort: 'Naudotojo vardas per trumpas'
+    usernameTooLong: 'Naudotojo vardas per ilgas'
+    usernameEmpty: 'Naudotojo vardas negali būti tuščias'
+    usernameAlreadyInUse: 'Naudotojo vardas jau naudojamas'
+    usernameInvalid: 'Netinkamas naudotojo vardas'
+    passwordMissing: 'Trūksta slaptažodžio'
+    passwordEmpty: 'Slaptažodis negali būti tuščias'
+    passwordTooShort: 'Slaptažodis per trumpas'
+    passwordTooLong: 'Slaptažodis per ilgas'
+    passwordInvalidChars: 'Slaptažodyje yra netinkamų simbolių'
+    usernameContainsEmail: 'Naudotojo varde negali būti el. pašto adreso'
+    usernameContainsLink: 'Naudotojo varde negali būti nuorodos'
+    countryCodeInvalid: 'Netinkamas šalies kodas'
+    pictureInvalid: 'Profilio nuotrauka netinkama arba nepalaikoma'
+    dateOfBirthMissing: 'Gimimo data privaloma'
+    dateOfBirthInvalid: 'Netinkama gimimo data'
+    tooYoung: 'Norėdamas susikurti paskyrą, turi būti bent 3 metų'
+    parentEmailMissing: 'Jaunesniems nei 14 metų naudotojams tėvų el. paštas privalomas'
+    parentEmailInvalid: 'Netinkamas tėvų el. paštas'
+    parentEmailSameAsUser: 'Tėvų el. paštas turi skirtis nuo tavo paties el. pašto adreso'
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: 'Trūksta dabartinio slaptažodžio'
+    currentPasswordWrong: 'Neteisingas dabartinis slaptažodis'
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'Pavadinimas negali būti tuščias'
+    nameTooLong: 'Pavadinimas per ilgas'
+    descriptionTooLong: 'Aprašymas per ilgas'
+    creditsTooLong: 'Pastabos ir padėkos per ilgos'
+    screenshotInvalid: 'Projekto ekrano kopija netinkama arba nepalaikoma'
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    invalid_checksum: 'Neteisinga kontrolinė suma. Pabandyk įkelti dar kartą!'
+    upload_error: 'Įkeliant įvyko klaida. Pabandyk įkelti dar kartą!'
+    creating_error: 'Kuriant projekto įrašą įvyko klaida. Pabandyk įkelti dar kartą!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Nepavyko išsaugoti projekto informacijos.'
+    screenshotError: 'Nepavyko nuskaityti, konvertuoti ar išsaugoti ekrano kopijos. Patikrink įvestus duomenis.'
+    notFound: 'Keičiamas projektas nerastas.'
+    forbidden: 'Keisti projekto neleidžiama. Ar vis dar esi prisijungęs?'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'Trūksta pavadinimo'
+    nameEmpty: 'Pavadinimas negali būti tuščias'
+    nameTooShort: 'Pavadinimas per trumpas'
+    nameTooLong: 'Pavadinimas per ilgas'
+    nameAlreadyInUse: 'Pavadinimas jau naudojamas'
+    descriptionMissing: 'Trūksta aprašymo'
+    descriptionEmpty: 'Aprašymas tuščias'
+    descriptionTooShort: 'Aprašymas per trumpas'
+    descriptionTooLong: 'Aprašymas per ilgas'
+    imageFileInvalid: 'Netinkamas paveikslėlio failas'
+    imageFileInvalidType: 'Netinkamas paveikslėlio failo tipas'
+    imageFileTooLarge: 'Paveikslėlio failas per didelis'
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
+  arabic: 'Arabų'
+  bulgarian: 'Bulgarų'
+  catalan: 'Katalonų'
+  chinese_simplified_han: 'Kinų (supaprastinta)'
+  chinese_traditional_han: 'Kinų (tradicinė)'
+  croatian: 'Kroatų'
+  czech: 'Čekų'
+  danish: 'Danų'
+  dutch: 'Olandų'
+  english_united_kingdom: 'Anglų (Jungtinė Karalystė)'
+  english_united_states: 'Anglų (Jungtinės Valstijos)'
+  estonian: 'Estų'
+  filipino: 'Filipiniečių'
+  finnish: 'Suomių'
+  french: 'Prancūzų'
+  german: 'Vokiečių'
+  greek: 'Graikų'
+  hebrew: 'Hebrajų'
   hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  hungarian: 'Vengrų'
+  indonesian: 'Indoneziečių'
+  italian: 'Italų'
+  japanese: 'Japonų'
+  korean: 'Korėjiečių'
+  latvian: 'Latvių'
+  lithuanian: 'Lietuvių'
+  malay: 'Malajų'
+  norwegian: 'Norvegų'
+  persian: 'Persų'
+  polish: 'Lenkų'
+  portuguese_brazil: 'Portugalų (Brazilija)'
+  portuguese_portugal: 'Portugalų (Portugalija)'
+  romanian: 'Rumunų'
+  russian: 'Rusų'
+  serbian: 'Serbų'
+  slovak: 'Slovakų'
+  slovenian: 'Slovėnų'
+  spanish_latin_america: 'Ispanų (Lotynų Amerika)'
+  spanish_spain: 'Ispanų (Ispanija)'
+  swedish: 'Švedų'
+  thai: 'Tajų'
+  turkish: 'Turkų'
+  ukrainian: 'Ukrainiečių'
+  vietnamese: 'Vietnamiečių'
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: 'Generuoti APK'
+  pending: 'Generuojamas APK'
+  download: 'Atsisiųsti APK'
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: 'Disko priežiūra'
+    ramMaintenance: 'RAM priežiūra'
+    noRemovableObjects: 'Nėra šalintinų objektų.'
+    removableObjects: 'Šalintini objektai'
 recommender:
-  similarPrograms: Similar projects
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  similarPrograms: 'Panašūs projektai'
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: 'Šį projektą atsisiuntę naudotojai taip pat atsisiuntė'
+  moreFromThisUser: 'Daugiau iš %username%'
 pmd:
-  submitBtn: Submit your project
+  submitBtn: 'Pateik savo projektą'
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: 'Pateikimas'
+    text: 'Tuoj pateiksi savo projektą. Įvesk projekto kodą ir spustelėk „Siųsti“.'
+    btnText: 'Pateikti'
   successful:
-    text: Your project upload was successful.
+    text: 'Tavo projektas sėkmingai įkeltas.'
   failed:
-    text: Project upload failed.
+    text: 'Projekto įkelti nepavyko.'
 codeview:
-  title: 'Code View'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
-  scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  title: 'Kodo peržiūra'
+  showCode: 'Rodyti kodą'
+  hideCode: 'Slėpti kodą'
+  showStatistics: 'Rodyti kodo statistiką'
+  hideStatistics: 'Slėpti kodo statistiką'
+  cantDisplayCode: 'Kodo parodyti negalima'
+  cantDisplayStatistics: 'Kodo parodyti negalima'
+  totalNumberOf: 'Iš viso'
+  scenes: 'Scenos'
+  scripts: 'Scenarijai'
+  bricks: 'Blokai'
+  objects: 'Veikėjai ir objektai'
+  looks: 'Išvaizdos'
+  sounds: 'Garsai'
+  globals: 'Globalūs'
+  locals: 'Lokalūs'
+  globalVariables: 'Globalūs kintamieji'
+  localVariables: 'Lokalūs kintamieji'
+  eventBricks: 'Įvykių blokai'
+  controlBricks: 'Valdymo blokai'
+  motionBricks: 'Judėjimo blokai'
+  soundBricks: 'Garso blokai'
+  looksBricks: 'Išvaizdos blokai'
+  penBricks: 'Pieštuko blokai'
+  dataBricks: 'Duomenų blokai'
+  specialBricks: 'Specialieji blokai'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
-  scripts: 'Scripts'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  title: 'Kodo peržiūra'
+  loading: 'Įkeliama kodo peržiūra...'
+  error: 'Nepavyko įkelti kodo peržiūros.'
+  retry: 'Bandyti dar kartą'
+  empty: 'Šiame projekte nėra kodo.'
+  scripts: 'Scenarijai'
+  looks: 'Išvaizdos'
+  sounds: 'Garsai'
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
-  looksBricks: 'Looks'
-  penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
-  bonus: 'Bonus'
+  title: 'Kodo statistika'
+  error: 'Kodo statistikos parodyti negalima.'
+  general: 'Bendra'
+  bricks: 'Blokai'
+  eventBricks: 'Įvykiai'
+  controlBricks: 'Valdymas'
+  motionBricks: 'Judėjimas'
+  soundBricks: 'Garsas'
+  looksBricks: 'Išvaizda'
+  penBricks: 'Pieštukas'
+  dataBricks: 'Duomenys'
+  deviceBricks: 'Įrenginys'
+  specialBricks: 'Specialieji'
+  yourScore: 'Tavo rezultatas:'
+  points: 'taškai'
+  abstraction: 'Abstrakcija ir problemų skaidymas'
+  parallelism: 'Lygiagretumas'
+  logicalThinking: 'Loginis mąstymas'
+  synchronization: 'Sinchronizacija'
+  flowControl: 'Eigos valdymas'
+  userInteractivity: 'Naudotojo sąveika'
+  dataRepresentation: 'Duomenų vaizdavimas'
+  level: 'Lygis'
+  loading: 'Įkeliama...'
+  bonus: 'Premija'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: 'Prisijunk prie daugiau nei %user_count% kūrybingų žmonių!'
+  text: 'Jau pasidalinta %project_count% nuostabių projektų – kitas gali būti tavo. Atsisiųsk mūsų programėlę ir pradėk kurti jau šiandien'
 privacy-policy:
   header: Privatumo taisyklės
-  version: Version 2.2, 17 October 2019
-  text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  version: 'Versija 2.2, 2019 m. spalio 17 d.'
+  text1: 'Kad galėtume tau pasiūlyti visus mūsų paslaugų ir susijusios paskyros privalumus, būtina rinkti tam tikrus tavo duomenis.'
+  text2: 'Siekdami prižiūrėti ir tobulinti savo paslaugas (programėles ir svetaines) bei vykdyti mokslinius IRT ir STEM/STEAM švietimo tyrimus, naudojame Google Analytics, Crashlytics ir Firebase (visos priklauso Google LLC, JAV), taip pat Dynatrace (Dynatrace LLC, JAV), kad gautume metaduomenis apie naudojimąsi mūsų paslaugomis, pvz., informaciją apie gedimus, laiko žymas, aplankytus puslapius ar ekranus, naudojimąsi mūsų programėlėmis ir paslaugomis, naudojamą operacinę sistemą ir informaciją apie tinklo teikėją. Ši analizė ir surinkti duomenys nesiejami su tavo profiliu ir neapima jokios asmeninės informacijos (paskutiniai IP adreso bitai anonimizuojami). Tačiau surinkti duomenys perduodami paslaugų teikėjams (Google LLC, JAV ir Dynatrace LLC, JAV). Duomenų tvarkymas grindžiamas sutartimis su Google LLC ir Dynatrace LLC. Šie santykiai su paslaugų teikėjais atitinka Europos Sąjungos Bendrąjį duomenų apsaugos reglamentą (ES BDAR) ir ES ir JAV „Privatumo skydo“ susitarimą.'
+  text3: 'Kad galėtum susikurti ir naudoti paskyrą mūsų sistemose, o mes galėtume el. paštu informuoti tave apie būtinus su paskyra susijusius pakeitimus, pvz., atnaujinimus ar mūsų naudojimo ir paslaugų teikimo sąlygų, bendruomenės taisyklių ar politikos pažeidimus, saugosime tavo naudotojo vardą ir, jei jį pateikei, el. pašto adresą. Jei savo paskyrą susiejai per Google Plus ar Facebook, papildomai saugome identifikavimo raktą, susietą su tavo paskyra tose paslaugose. Šių duomenų nenaudosime jokiais kitais (pvz., rinkodaros) tikslais, nebent tu tai aiškiai leidai.'
+  text4: 'Savanoriškai gali nurodyti savo gyvenamąją šalį savo paskyros puslapyje dalijimosi svetainėje. Ji bus rodoma tavo viešame profilyje ir mes ją naudosime tik statistikos ir tyrimų tikslais. Ją bet kada gali pašalinti savo profilio nustatymuose.'
+  text5: 'Savo paskyros asmens duomenų naudojimą gali bet kada nutraukti ištrindamas paskyrą savo profilio puslapyje https://share.catrob.at/. Ištrynęs paskyrą vis tiek galėsi naudotis teikiamomis paslaugomis, bet nebegalėsi bendradarbiauti, pvz., įkelti programų, komentuoti ar reaguoti. Be to, bus ištrintas visas su tavo paskyra susietas turinys, pvz., įkeltos programos, komentarai ir kt.'
+  text6: 'Siekiant išvengti piktnaudžiavimo mūsų paslaugomis, pvz., naudotojų įkeliamu turiniu ar komentarais neteisėtais tikslais, visi naudotojų sukurti vieši duomenys (įkėlimai, komentarai) saugomi vidinėje duomenų bazėje kartu su laiko žyma ir naudotu interneto adresu. Šių duomenų nenaudos ir jie nebus perduoti jokioms institucijoms, nebent pagrįstai įtariama pakankamai neteisėtų veiksmų ir oficialiai įgaliotos teisinės institucijos jų paprašo pagal galiojančius įstatymus. Kiekvieną atvejį pirmiausia individualiai ir kruopščiai patikrinsime patys.'
+  text7: 'Savanoriškai gali užsiprenumeruoti Catrobat naujienlaiškį adresu https://catrob.at/newsletter, kurį teikiame per MailChimp paslaugą (The Rocket Science Group LLC d/b/a MailChimp, JAV). Tada savo nurodytu el. pašto adresu gausi naujienas apie Catrobat projektą ir jo paslaugas. Naujienlaiškio prenumeratą gali bet kada atšaukti paspaudęs nuorodą „unsubscribe“ kiekvieno naujienlaiškio apačioje. Šį naujienlaiškį teikia MailChimp, su kuria turime duomenų tvarkymo sutartį ir kuri įsipareigojo laikytis ES Bendrojo duomenų apsaugos reglamento ir ES ir JAV „Privatumo skydo“. Daugiau informacijos apie MailChimp rasi MailChimp privatumo politikoje ir naudojimo sąlygose.'
+  text8: 'Visas paslaugas teikia laisvas atvirojo kodo Catrobat projektas, veikiantis International Catrobat Association – Verein zur Förderung freier Software, ne pelno siekiančios NVO, įregistruotos Grace, Austrijoje (Europos Sąjunga), globoje. Mūsų politika atsižvelgia į ES ir Austrijos duomenų apsaugos teisę (BDAR). Norėdamas su mumis susisiekti, rašyk el. paštu contact@catrobat.org arba paštu adresu Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).'
+  text9: 'Jei esi jaunesnis nei 14 metų, šias taisykles turi priimti teisėtas globėjas (paprastai vienas iš tėvų).'
+  text10: 'Oficiali Catrobat privatumo politika anglų kalba internete pasiekiama adresu %privacy_policy%.'
+  disagree-text: 'Be sutikimo negalime sukurti paskyros, tačiau pagrindinės funkcijos vis tiek prieinamos.'
 catro-notifications:
-  markAsRead: "Mark as read"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
-  noStudios: "It looks like you don't have any studio notifications."
+  markAsRead: 'Pažymėti kaip perskaitytą'
+  noFollowers: 'Panašu, kad neturi jokių pranešimų apie sekėjus.'
+  noComments: 'Panašu, kad neturi jokių pranešimų apie komentarus.'
+  noReactions: 'Panašu, kad neturi jokių pranešimų apie reakcijas.'
+  noRemixes: 'Panašu, kad neturi jokių pranešimų apie remiksus.'
+  noStudios: 'Panašu, kad neturi jokių pranešimų apie studijas.'
   tab:
-    studio: Studio
-    project: Projects
+    studio: 'Studija'
+    project: 'Projektai'
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: 'Naudotojas %user_link% pakomentavo tavo projektą %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: 'Naudotojas %user_link% sureagavo į tavo projektą %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: 'Naudotojas %user_link% dabar tave seka.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% sukūrė naują žaidimą %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: 'Naudotojas %user_link% remiksavo tavo projektą %program_link%. Remiksą gali pamatyti šia nuoroda: %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% pakomentavo studijoje %studio_name%.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% įtraukė %program_link% į studiją %studio_name%.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'Tavo prašymas prisijungti prie studijos %studio_name% priimtas.'
+    declined: 'Tavo prašymas prisijungti prie studijos %studio_name% atmestas.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'Tavo projektas %program_link% bus automatiškai ištrintas po %days% d. Įkelk naują versiją arba surink daugiau atsisiuntimų, kad jį išsaugotum.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'Tavo projektas „%project_name%“ buvo automatiškai pašalintas dėl neaktyvumo. Įkelk jį iš naujo, jei vis dar nori juo dalintis.'
+  noProjects: 'Panašu, kad neturi jokių pranešimų apie projektus.'
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: 'Nuoroda nukopijuota į iškarpinę!'
+  success_project: 'Projekto nuoroda nukopijuota į iškarpinę!'
+  success_user: 'Naudotojo nuoroda nukopijuota į iškarpinę!'
+  fail: 'Nepavyko nukopijuoti nuorodos į iškarpinę! :('
+next: 'Kitas'
+previous: 'Ankstesnis'
 media-packages:
-  title: Media Library
-  description: In the following categories you can find actors and objects to add to your projects.
+  title: 'Medijų biblioteka'
+  description: 'Šiose kategorijose rasi veikėjų ir objektų, kuriuos gali įtraukti į savo projektus.'
   thumb-size:
-    description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    description: 'Peržiūros dydis'
+    sm: 'mažas'
+    md: 'vidutinis'
+    lg: 'didelis'
+  theme-special: '%flavor% teminis rinkinys'
+  search-results: 'Medijų bibliotekos paieškos rezultatai'
+  no-results: 'Paieška nedavė rezultatų. Naudok tik angliškus paieškos žodžius.'
+  download_these_files: 'išsaugoti'
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -997,329 +996,329 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'Autorių teisės &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Visos teisės saugomos.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: 'Šiai svetainei veikti reikia JavaScript. Įjunk JavaScript savo naršyklėje arba paprašyk suaugusiojo pagalbos.'
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
-  accept: "Accept"
-  decline: "Decline"
+  message: 'Naudojame slapukus, kad galėtume tobulinti savo paslaugas. Jokie duomenys neparduodami ir neperduodami.'
+  accept: 'Sutinku'
+  decline: 'Atsisakyti'
   privacy-link: "Privatumo taisyklės"
-  settings-link: "Cookie Settings"
-agree: Agree
-disagree: Disagree
+  settings-link: 'Slapukų nustatymai'
+agree: 'Sutinku'
+disagree: 'Nesutinku'
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: 'Šiuo metu profilių nėra.'
+element: 'Elementas'
+elements: 'Elementai'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: 'Dalintis'
+  error: 'Pasidalinti nepavyko'
+  success: 'Sėkmingai pasidalinta'
+copy: 'Kopijuoti nuorodą'
+checkOutProject: 'Pažiūrėk šį projektą:'
+checkOutUser: 'Pažiūrėk šį naudotoją:'
+community: 'Catrobat bendruomenė'
+back_to_app: 'Išeiti iš bendruomenės'
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Daugiausiai žiūretos
-  most_downloaded: Labiausiai Atsisiųstos
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  recent: 'Naujausi projektai'
+  random: 'Atsitiktiniai projektai'
+  most_viewed: 'Daugiausiai žiūrėti'
+  most_downloaded: 'Daugiausiai atsisiųsti'
+  example: 'Pavyzdžiai'
+  scratch: 'Scratch remiksai'
+  recommended: 'Rekomenduojami projektai'
+  popular: 'Populiariausi'
+  trending: 'Populiarėjantys projektai'
 achievements:
   sidebar:
-    title: 'Achievements'
-    badge: 'new'
+    title: 'Pasiekimai'
+    badge: 'nauja'
   overview:
-    header: 'Achievements'
+    header: 'Pasiekimai'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Naujausias pasiekimas'
+      x_out_of_y: 'Atrakinta %unlocked% iš %total%'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Atrakinti'
+      empty: 'Dar neatrakinai jokių pasiekimų.'
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Užrakinti'
+      empty: 'Jau atrakinai visus pasiekimus.'
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
-      confirm: "Ok"
+      title: 'Sveikiname!'
+      subtitle: 'Gavai ženklelį'
+      confirm: 'Gerai'
   profile:
-    title: 'Achievements'
+    title: 'Pasiekimai'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Mokinys'
+        description: 'Pradėk ką nors sekti ir įkelk projektą'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Amatininkas'
+        description: 'Aktyvus narys > 1 metus'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Meistras'
+        description: 'Aktyvus narys > 4 metus'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Didmeistris'
+        description: 'Aktyvus narys > 7 metus'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Iniciatyva'
+        description: 'Įkelk savo pirmąją profilio nuotrauką'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Naujokas'
+        description: 'Susikurk naudotojo paskyrą'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: 'Coding Jam 2021 dalyvis'
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: 'Dvikalbis'
+        description: 'Išversk savo projektus į 2 kalbas'
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: 'Trikalbis'
+        description: 'Išversk savo projektus į 3 kalbas'
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: 'Kalbininkas'
+        description: 'Išversk savo projektus į 5 kalbas'
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: 'Patvirtintas'
+        description: 'Patvirtink savo paskyrą'
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Žyma |]1,Inf] Žymos'
   tag:
     game:
-      title: Game
+      title: 'Žaidimas'
     animation:
-      title: Animation
+      title: 'Animacija'
     story:
-      title: Story
+      title: 'Istorija'
     music:
-      title: Music
+      title: 'Muzika'
     art:
-      title: Art
+      title: 'Menas'
     experimental:
-      title: Experimental
+      title: 'Eksperimentinis'
     tutorial:
-      title: Tutorial
+      title: 'Pamoka'
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} Plėtinys |]1,Inf] Plėtiniai'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: 'Dronas'
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: 'Siuvinėjimas'
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: 'Keli žaidėjai'
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  title: 'Studijos'
+  singular: 'Studija'
+  create_studio: 'Sukurti studiją'
+  delete_studio: 'Ištrinti studiją'
   cancel_studio: 'Atšaukti'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
-  report: 'Reportuoti'
-  public: 'public'
-  private: 'Invite-only'
+  studio_name: 'Studijos pavadinimas'
+  studio_description: 'Studijos aprašymas'
+  is_public: 'Padaryti viešą?'
+  enable_comments: 'Įjungti komentarus?'
+  cover_image: 'Įkelti viršelį'
+  cover_image_empty: 'Paveikslėlis nepasirinktas.'
+  cover_image_hint: 'Daugiausia 1 MB. Priimami formatai: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 'Paveikslėlis automatiškai suglaudintas, kad tilptų į 1 MB ribą.'
+  cover_image_compressing: 'Glaudinamas paveikslėlis...'
+  cover_image_still_too_large: 'Paveikslėlis per didelis net ir suglaudinus. Pasirink mažesnį failą.'
+  cover_image_invalid_type: 'Netinkamas paveikslėlio tipas. Naudok JPEG, PNG, GIF arba WebP.'
+  cover_image_compression_failed: 'Nepavyko apdoroti paveikslėlio. Pabandyk kitą failą.'
+  cover_image_alt: 'Tavo viršelio paveikslėlis'
+  cover_image_remove: 'Pašalinti paveikslėlį'
+  popular: 'Populiarios studijos'
+  join: 'Prisijungti'
+  leave: 'Išeiti'
+  report: 'Pranešti'
+  public: 'vieša'
+  private: 'Tik su kvietimu'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
-    open: 'Open'
-    share: 'Share'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    joined_studios: 'Studijos, prie kurių prisijungei'
+    public_studios: 'Viešos studijos'
+    private_studios: 'Studijos tik su kvietimu'
+    no_studios: 'Studijų dar nėra'
+    my_studios: 'Mano studijos'
+    explore: 'Naršyti studijas'
+    no_joined: 'Dar neprisijungei prie jokios studijos'
+    joined: 'Prisijungta'
+    load_more: 'Įkelti daugiau'
+    open: 'Atidaryti'
+    share: 'Dalintis'
+    share_success: 'Nuoroda nukopijuota į iškarpinę!'
+    leave_confirm_title: 'Išeiti iš šios studijos?'
     cancel: 'Atšaukti'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
-    admin: 'Admin'
-    member: 'Member'
+    cancel_request: 'Atšaukti prašymą'
+    cancel_request_confirm_title: 'Atšaukti prašymą prisijungti?'
+    admin: 'Administratorius'
+    member: 'Narys'
   details:
-    add_project: 'click to add the project'
-    add: 'Add'
-    showMore: 'show more'
-    showLess: 'show less'
-    are_you_sure: 'Are you sure?'
-    no_way_of_return: 'This cannot be undone.'
+    add_project: 'spustelėk, kad įtrauktum projektą'
+    add: 'Įtraukti'
+    showMore: 'rodyti daugiau'
+    showLess: 'rodyti mažiau'
+    are_you_sure: 'Ar tikrai?'
+    no_way_of_return: 'To negalima atšaukti.'
     delete_it: 'Ištrinti'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    remove_project: 'Pašalinti iš studijos'
+    remove_project_error: 'Nepavyko pašalinti projekto iš studijos.'
+    remove_project_success: 'Projektas sėkmingai pašalintas iš studijos.'
+    no_projects: 'Studijoje dar nėra projektų.'
     projects:
-      title: 'Projects'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
-      download: 'Download'
-      share: 'Share'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
-    report: 'Reportuoti'
-    pending: 'Pending'
-    decline: 'Declined'
+      title: 'Projektai'
+      addProject: 'Įtraukti projektų'
+      open_project: 'Atidaryti projektą'
+      download: 'Atsisiųsti'
+      share: 'Dalintis'
+      remove_from_studio: 'Pašalinti iš studijos'
+      remove_from_studio_title: 'Pašalinti projektą iš studijos?'
+      remove_from_studio_text: 'Jei persigalvosi, vėliau galėsi jį vėl įtraukti.'
+      share_success: 'Nuoroda nukopijuota į iškarpinę!'
+      share_fail: 'Nepavyko nukopijuoti nuorodos.'
+      no_projects_empty_state: 'Dar neturi projektų, kuriuos galėtum įtraukti. Pirmiausia sukurk projektą Pocket Code!'
+      add_selected: 'Įtraukti pasirinktus'
+    no_available_projects: 'Nėra projektų, kuriuos būtų galima įtraukti.'
+    updateCoverError: 'Atnaujinant studijos viršelį kažkas nepavyko.'
+    join: 'Prisijungti'
+    leave: 'Išeiti'
+    report: 'Pranešti'
+    pending: 'Laukiama'
+    decline: 'Atmesta'
     comments:
       title: 'Komentarai'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Parašyk ką nors'
+      replies: 'atsakymai'
+      send: 'siųsti'
+      no_comments: 'Šioje studijoje dar nėra komentarų.'
+      disabled_comments: 'Šioje studijoje komentarai išjungti.'
+      remove_comment: 'Pašalinti komentarą'
+      post_error: 'Skelbiant tavo komentarą kažkas nepavyko. Bandyk vėliau.'
+      remove_error: 'Šalinant komentarą kažkas nepavyko. Bandyk vėliau.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'Veikla'
+      join_studio: '%user% prisijungė prie studijos.'
+      add_project: '%user% įtraukė projektą.'
+      add_comment: '%user% paliko komentarą.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'Studijos nariai'
+      project_count: '{0} Studijos projektų nėra |{1} 1 studijos projektas |]1,Inf] Studijos projektų: %count%'
+      no_studio_projects: 'Studijos projektų nėra'
+      one_studio_project: '1 studijos projektas'
+      n_studio_projects: 'Studijos projektų: %count%'
+      promote_member: 'Paskirti narį administratoriumi'
+      promotion_failed: 'Skiriant šį narį kažkas nepavyko. Bandyk vėliau.'
+      ban_member: 'Užblokuoti narį studijoje'
+      ban_failed: 'Blokuojant šį narį kažkas nepavyko. Bandyk vėliau.'
+      demote_member: 'Pažeminti administratorių iki nario'
+      demotion_failed: 'Žeminant šį administratorių kažkas nepavyko. Bandyk vėliau.'
+      last_admin: 'Negalima pažeminti paskutinio šios studijos administratoriaus.'
     join_requests:
-      title: 'Join Requests'
-      accept: 'Accept'
-      decline: 'Decline'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
-    show_more: 'More information'
-    show_less: 'Less information'
+      title: 'Prašymai prisijungti'
+      accept: 'Priimti'
+      decline: 'Atmesti'
+      accept_success: 'Prašymas prisijungti priimtas.'
+      decline_success: 'Prašymas prisijungti atmestas.'
+      error: 'Kažkas nepavyko. Bandyk dar kartą.'
+      no_requests: 'Laukiančių prašymų prisijungti nėra.'
+    show_more: 'Daugiau informacijos'
+    show_less: 'Mažiau informacijos'
     admin_settings:
-      title: 'Settings'
-      studio_name: 'Studio Name'
+      title: 'Nustatymai'
+      studio_name: 'Studijos pavadinimas'
       studio_description: 'Aprašymas'
       toggle_allow_comments: 'Komentarai'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Vieša'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Dydis: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      image: 'Tipas: paveikslėlis'
+      project: 'Tipas: projektas'
+      sound: 'Tipas: garsas'
+      movie: 'Tipas: vaizdo įrašas'
+      default: 'Tipas: nežinomas'
+  no_categories: 'Medijų kategorijų dar nėra.'
+  no_results: 'Rezultatų nerasta.'
+  assets_count: 'ištekliai'
+  view_all: 'Rodyti viską'
+  view_all_category: 'Rodyti viską: %category%'
+  back_to_app: 'Grįžti į programėlę'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'Prašomas projektas nepasiekiamas'
+  project_not_for_kids: 'Projektas pažymėtas kaip netinkamas vaikams!'
+  project_safe_for_kids: 'Projektas pažymėtas kaip tinkamas vaikams!'
+  project_not_for_kids_moderator: 'Projektą pažymėjo moderatorius. To atšaukti negali!'
+  project_set_private: 'Projektas padarytas privatus.'
+  project_set_public: 'Projektas padarytas viešas.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'Papildoma informacija: additionalInfo'
+    feature_1: 'Funkcija featureName nepasiekiama nuo maintenanceStart iki maintenanceEnd'
+    feature_2: 'Funkcija'
+    feature_3: 'Funkcija'
+MarkNotForKids: 'Pažymėti kaip netinkamą vaikams'
+MarkSafeForKids: 'Pažymėti kaip tinkamą vaikams'
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: 'Patvirtinimas'
+  confirmMark: 'Ar tikrai nori pažymėti šį projektą kaip netinkamą vaikams?'
+  confirmUnmark: 'Ar tikrai nori pašalinti šio projekto žymą „netinka vaikams“?'
+  confirmYes: 'Taip, tęsti!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: 'Pranešti apie: %content_type%'
+    reason_placeholder: 'Aprašyk, kodėl apie tai pranešai...'
+    submit: 'Pateikti pranešimą'
+    success: 'Tavo pranešimas pateiktas. Ačiū.'
+    error: 'Kažkas nepavyko. Bandyk dar kartą.'
+    duplicate: 'Apie šį turinį jau pranešei.'
+    trust_too_low: 'Tavo paskyra per nauja, kad galėtum teikti pranešimus.'
+    unverified: 'Įsitikink, kad esi prisijungęs ir tavo paskyros el. pašto adresas patvirtintas.'
+    rate_limited: 'Pranešimus teiki per greitai. Palauk ir bandyk dar kartą.'
+    suspended: 'Tavo paskyra sustabdyta.'
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: 'Apskųsti'
+    title: 'Apskųsti šį sprendimą'
+    placeholder: 'Paaiškink, kodėl šis turinys neturėtų būti paslėptas...'
+    submit: 'Pateikti skundą'
     cancel: "Atšaukti"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: 'Tavo skundas pateiktas peržiūrai.'
+    already_pending: 'Jau turi laukiantį skundą.'
+    error: 'Kažkas nepavyko. Bandyk dar kartą.'
+    rate_limited: 'Skundus teiki per greitai. Palauk ir bandyk dar kartą.'
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: 'Komentarus rašai per greitai. Šiek tiek palauk.'
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: 'Reaguoji per greitai. Šiek tiek palauk.'
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: 'Per greitai pradedi ir nustoji sekti. Šiek tiek palauk.'
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: 'Studijos veiksmus atlieki per greitai. Šiek tiek palauk.'
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: 'Šis projektas paslėptas dėl bendruomenės pranešimų.'
+    comment: 'Šis komentaras paslėptas dėl bendruomenės pranešimų.'
+    user: 'Šis profilis paslėptas dėl bendruomenės pranešimų.'
+    user_own: 'Tavo paskyra sustabdyta dėl bendruomenės pranešimų. Šį sprendimą gali apskųsti.'
+    studio: 'Ši studija paslėpta dėl bendruomenės pranešimų.'
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: 'Tavo turinys (%content_type%) paslėptas dėl bendruomenės pranešimų. Šį sprendimą gali apskųsti.'
+    appeal_approved: 'Tavo skundas patenkintas. Tavo turinys vėl matomas.'
+    appeal_rejected: 'Tavo skundas peržiūrėtas, ir sprendimas paslėpti tavo turinį lieka galioti.'
+    admin_review_needed: 'Turinys automatiškai paslėptas ir jį reikia peržiūrėti.'
+Reports: 'Pranešimai'
+members: 'nariai'
