@@ -307,8 +307,7 @@ remixGraph:
   projectNotAvailableErrorDescription: 'Projekt nie jest już dostępny!'
   projectNotAvailable: 'Niedostępny'
   projectUnknownUser: 'Nieznany użytkownik'
-noReply:
-  - To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.
+noReply: 'To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.'
 accountConfirmation:
   subject: Potwierdzenie konta Catrobat
   message: |

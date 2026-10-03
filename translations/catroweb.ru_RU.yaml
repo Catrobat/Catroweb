@@ -307,8 +307,7 @@ remixGraph:
   projectNotAvailableErrorDescription: 'Этот проект больше недоступен!'
   projectNotAvailable: 'Недоступно'
   projectUnknownUser: 'Неизвестный пользователь'
-noReply:
-  - Это системное сообщение - Пожалуйста, не отвечайте на это письмо.
+noReply: 'Это системное сообщение - Пожалуйста, не отвечайте на это письмо.'
 accountConfirmation:
   subject: Подтверждение вашего аккаунта Catrobat
   message: |
