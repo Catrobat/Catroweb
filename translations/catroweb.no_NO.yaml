@@ -1,13 +1,13 @@
 ---
 #homepage translation
 title: Catrobat samfunn
-meta.description: Share, discover, and remix creative projects made with Catrobat. Join a global community of young creators building games, animations, and apps.
-meta.description.media.library: 'Browse and download free media assets for Catrobat — sounds, images, and more for your projects.'
-meta.og.title.login: Sign in to Catrobat
-meta.og.description.login: Sign in to share your Catrobat projects with the community.
-meta.og.title.register: Create a Catrobat account
-meta.og.description.register: Join the Catrobat community and start sharing your creative projects today.
-meta.og.description.profile: '%username% on Catrobat – browse their projects and achievements.'
+meta.description: 'Del, oppdag og remiks kreative prosjekter laget med Catrobat. Bli med i et globalt fellesskap av unge skapere som lager spill, animasjoner og apper.'
+meta.description.media.library: 'Bla gjennom og last ned gratis mediefiler for Catrobat — lyder, bilder og mer til prosjektene dine.'
+meta.og.title.login: 'Logg inn på Catrobat'
+meta.og.description.login: 'Logg inn for å dele Catrobat-prosjektene dine med fellesskapet.'
+meta.og.title.register: 'Opprett en Catrobat-konto'
+meta.og.description.register: 'Bli med i Catrobat-fellesskapet og begynn å dele de kreative prosjektene dine i dag.'
+meta.og.description.profile: '%username% på Catrobat – se prosjektene og prestasjonene deres.'
 localLanguage: Engelsk
 username: Brukernavn
 password: Passord
@@ -18,15 +18,15 @@ aboutPocketCode: Om Pocket Code
 about: Om Catrobat
 education: Utdanning
 chat: Chat og forum
-privacyGuide: Privacy Awareness Guide
+privacyGuide: 'Veiledning om personvern'
 others: Annet
 tutorials: Hjelp
 googlePlay: Google Play
 iosAppStore: IOS App store
 instagram: Instagram
-discordChat: Discord chat
+discordChat: 'Discord-chat'
 passwordsNoMatch: Passordene samsvarer ikke.
-error: Oops!
+error: 'Oisann!'
 cancel: Avbryt
 confirm: Bekreft
 report: Rapporter
@@ -36,25 +36,25 @@ reportIt: Ja, rapporter det!
 areYouSure: Er du sikker?
 noWayOfReturn: Det er ingen måte å gjenopprette dine handlinger!
 download: Nedlasting
-name: Name
+name: 'Navn'
 description: Beskrivelse
 noDescription: Ingen beskrivelse tilgjengelig.
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: Hvordan opprettet du dette prosjektet? Bruk du ideer, skript eller kunstverk fra andre folk? Takk dem her.
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+projectImportedFromScratch: 'Dette prosjektet ble importert fra MIT Scratch. Du kan se det opprinnelige prosjektet'
+scratchImportedProjectLinkHere: 'her.'
 country: Land
 loginText: logg på
 privacyPolicy: Personvern
 imprint: Avtrykk
 projectDetails: Detaljer
 somethingWentWrong: 'Ooops, noe gikk galt.'
-accountNotVerified: 'Please make sure you are logged in and your account''s email is verified.'
-accountSuspended: 'Your account has been suspended due to community reports. You may appeal this decision from your profile.'
-doesNotExist: 'The requested resource does not exist.'
+accountNotVerified: 'Sørg for at du er logget inn og at e-postadressen til kontoen din er bekreftet.'
+accountSuspended: 'Kontoen din er suspendert på grunn av rapporter fra fellesskapet. Du kan klage på denne avgjørelsen fra profilen din.'
+doesNotExist: 'Den forespurte ressursen finnes ikke.'
 pleaseTryAgain: 'Vennligst prøv igjen!'
-tryAgainButton: 'Try again'
+tryAgainButton: 'Prøv igjen'
 oldVersionError: 'Oppdater til den nyeste versjonen av Pocket Code!'
 more: 'mer'
 less: 'mindre'
@@ -80,22 +80,22 @@ notificationsUnauthorizedError: "Kunne ikke godkjenne brukeren"
 notificationsClearError: "Kan ikke markere meldinger som lest!"
 pleaseWait: "Vennligst vent..."
 projects: "Programmer"
-users: "User"
+users: 'Bruker'
 studios: "Studioer"
 oauthPopUpTitle: "Innloggingsinformasjon for ekstern konto"
-oauthInfo: 'Du har nettopp brukt en ekstern konto for å logge inn. Vi opprettet et tilfeldig brukernavn for deg. Hvis du ønsker å endre brukernavnet ditt eller opprette et nytt passord for din konto, kan du gå til profilsiden min. Klikk %link_start% her %link_end% for å gå til din profilside'
+oauthInfo: 'Du har nettopp brukt en ekstern konto for å logge inn. Vi opprettet et tilfeldig brukernavn for deg. Hvis du ønsker å endre brukernavnet ditt eller opprette et nytt passord for din konto, kan du gå til profilsiden din.'
 oauthHere: "her"
 statistics: "Statistikk"
-languageSelection: "Language selection"
+languageSelection: 'Språkvalg'
 color-scheme:
-  title: 'Theme'
+  title: 'Tema'
   auto: 'System'
-  auto_description: 'Follow your device setting'
-  light: 'Light'
-  light_description: 'Bright appearance'
-  dark: 'Dark'
-  dark_description: 'Dark appearance'
-  apply: 'Apply'
+  auto_description: 'Følg innstillingen på enheten din'
+  light: 'Lyst'
+  light_description: 'Lyst utseende'
+  dark: 'Mørkt'
+  dark_description: 'Mørkt utseende'
+  apply: 'Bruk'
 indexPage:
   recommendedSection:
     info:
@@ -117,198 +117,197 @@ follower:
   unfollowButton: "Slutt å følge %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
+    title: 'Velkommen til Catrobats %theme%'
+    title_mindstorms: 'Velkommen til Catrobats side for Mindstorms EV3 og NXT'
+    subtitle: 'Lag historier, spill og mer ...'
+    subtitle_embroidery: 'Sy dine egne mønstre på T-skjorter, vesker, bukser eller mobildeksel!'
+    subtitle_mindstorms: 'Lag dine egne prosjekter med Lego Mindstorms EV3- og NXT-robotene dine'
+    download: 'Last ned appen'
+    statistics: 'Mer statistikk'
+  featured: 'Utvalgte'
   open: Åpne 
   download: Nedlasting
   upload:
-    title: Upload Project
-    drop_here: Drag & drop your .catrobat file here
-    or_browse: or click to browse
-    button: Upload
-    uploading: Uploading...
-    success: Project uploaded successfully!
-    view_project: View Project
-    upload_another: Upload Another
-    invalid_file: Please select a .catrobat file
-    file_too_large: File is too large
-    error: Upload failed. Please try again.
-    unauthorized: You must be logged in to upload.
-    rate_limited: Too many uploads. Please try again later.
-    selected_file: 'Selected file:'
+    title: 'Last opp prosjekt'
+    drop_here: 'Dra og slipp .catrobat-filen din her'
+    or_browse: 'eller klikk for å bla gjennom'
+    button: 'Last opp'
+    uploading: 'Laster opp ...'
+    success: 'Prosjektet ble lastet opp!'
+    view_project: 'Vis prosjekt'
+    upload_another: 'Last opp et til'
+    invalid_file: 'Velg en .catrobat-fil'
+    file_too_large: 'Filen er for stor'
+    error: 'Opplastingen mislyktes. Prøv igjen.'
+    unauthorized: 'Du må være logget inn for å laste opp.'
+    rate_limited: 'For mange opplastinger. Prøv igjen senere.'
+    selected_file: 'Valgt fil:'
     info:
-      file_size: Maximum file size is 100 MB.
-      app_upload: You can also upload projects directly from the Pocket Code app. Note that the apps are currently being reworked and do not support web upload at this time.
-      retention: Uploaded projects will be automatically removed after a period of inactivity. Log in regularly or get downloads on your project to extend its retention.
-      protection: Particularly good or popular projects may be protected from automatic deletion by moderators.
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+      file_size: 'Maksimal filstørrelse er 100 MB.'
+      app_upload: 'Du kan også laste opp prosjekter direkte fra Pocket Code-appen. Merk at appene for øyeblikket blir omarbeidet og ikke støtter opplasting til nettet akkurat nå.'
+      retention: 'Opplastede prosjekter fjernes automatisk etter en periode uten aktivitet. Logg inn jevnlig eller få nedlastinger av prosjektet ditt for å forlenge lagringstiden.'
+      protection: 'Spesielt gode eller populære prosjekter kan beskyttes mot automatisk sletting av moderatorer.'
+  example: 'Eksempler'
+  newest: 'Nyeste prosjekter'
+  recommended: 'Anbefalte prosjekter'
+  scratchremixes: 'Scratch-remikser'
+  noProjects: 'Det finnes ingen prosjekter for øyeblikket.'
   shareAction: Del
-  deleteAction: Delete project
+  deleteAction: 'Slett prosjekt'
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  deleteConfirmText: This action cannot be undone. Your project will be permanently deleted.
+    Er du sikker?
+    Er du sikker på at du vil slette "%programName%"?
+    Det er ingen måte å angre dette på!
+    Ja, slett det!
+    Avbryt
+  deleteConfirmText: 'Denne handlingen kan ikke angres. Prosjektet ditt blir slettet for godt.'
   deleteConfirmationTitle: Er du sikker?
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
-  setPrivateConfirm: "Set this project to private? It will no longer appear in search results."
-  setPublicConfirm: "Make this project public? It will be visible to everyone."
-  markNotForKidsConfirm: "Mark this project as not suitable for kids?"
-  markSafeForKidsConfirm: "Remove the not-for-kids mark from this project?"
-  nfkModeratorLocked: "This setting has been locked by a moderator."
-  confirmSetPrivate: Are you sure you want to set this project to private? It will no longer appear in search results.
-  confirmSetPublic: Are you sure you want to make this project public? It will be visible to everyone.
+  deleteNotFoundError: 'Prosjektet som skulle slettes, ble ikke funnet under brukeren din.'
+  private: 'privat'
+  public: 'offentlig'
+  setPrivateAction: 'Gjør privat'
+  setPublicAction: 'Gjør offentlig'
+  setPrivateConfirm: 'Gjøre dette prosjektet privat? Det vil ikke lenger vises i søkeresultater.'
+  setPublicConfirm: 'Gjøre dette prosjektet offentlig? Det blir synlig for alle.'
+  markNotForKidsConfirm: 'Merke dette prosjektet som ikke egnet for barn?'
+  markSafeForKidsConfirm: 'Fjerne merket «ikke for barn» fra dette prosjektet?'
+  nfkModeratorLocked: 'Denne innstillingen er låst av en moderator.'
+  confirmSetPrivate: 'Er du sikker på at du vil gjøre dette prosjektet privat? Det vil ikke lenger vises i søkeresultater.'
+  confirmSetPublic: 'Er du sikker på at du vil gjøre dette prosjektet offentlig? Det blir synlig for alle.'
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Er du sikker?
+    Hvis du gjør '%programName%' privat, kan det ikke ses eller finnes av andre brukere.
+    Du kan fortsatt dele lenken til prosjektet ditt med vennene dine. Du kan endre synligheten ved å trykke på hengelåsikonet.
+    Hvis du gjør "%programName%" offentlig, kan det ses og finnes av andre brukere.
+    Ja, gjør offentlig
+    Ja, gjør privat
+    Nei
+  reportCommentConfirmation: 'Er du sikker på at du vil rapportere denne kommentaren?'
+  deleteCommentConfirmation: 'Er du sikker på at du vil slette denne kommentaren?'
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
+    Slette kontoen?
+    Er du sikker på at du vil slette kontoen din? Dette sletter også prosjektene og kommentarene du har lastet opp!
+    Det er ingen måte å angre dette på!
+    Ja, slett den!
+    Avbryt
+  tooLongName: 'Prosjektnavnet er for langt!'
+  tooLongDescription: 'Prosjektbeskrivelsen er for lang!'
+  tooLongCredits: 'Notatene og kredittene for prosjektet er for lange!'
   my_projects: Mine prosjekter
-  trending: Trending projects
-  popular: Popular projects
+  trending: 'Populære nå'
+  popular: 'Populære prosjekter'
   most:
     viewed: Mest Sett
     downloaded: Mest nedlastet
-  random: Random projects
-  related: Related projects
+  random: 'Tilfeldige prosjekter'
+  related: 'Relaterte prosjekter'
   browse:
-    explore: 'Explore Projects'
-    no_projects: "You haven't created any projects yet"
-    no_explore: 'No projects found'
-    load_more: 'Load More'
-    upload: 'Upload Project'
+    explore: 'Utforsk prosjekter'
+    no_projects: 'Du har ikke laget noen prosjekter ennå'
+    no_explore: 'Ingen prosjekter funnet'
+    load_more: 'Last inn flere'
+    upload: 'Last opp prosjekt'
   retention:
-    protected: 'Protected'
-    day_left: '1 day left'
-    days_left: '%days% days left'
-    tooltip: 'Projects are automatically removed after a period of inactivity. Get more downloads or log in regularly to extend retention.'
-    tooltip_protected: 'This project is protected and will not be automatically deleted.'
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    protected: 'Beskyttet'
+    day_left: '1 dag igjen'
+    days_left: '%days% dager igjen'
+    tooltip: 'Prosjekter fjernes automatisk etter en periode uten aktivitet. Få flere nedlastinger eller logg inn jevnlig for å forlenge lagringstiden.'
+    tooltip_protected: 'Dette prosjektet er beskyttet og blir ikke slettet automatisk.'
+  downloads: '%downloads% nedlastinger'
+  sample: 'Eksempelprosjekter'
+  views: '%views% visninger'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: 'Personer som reagerte på dette prosjektet'
     all: "Alle"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  remixes: '{0}0 remikser |{1}1 remiks |]1,Inf]%remixes% remikser'
+  newRemixesNotificationTitle: '|{1}"%programName%" har 1 ny remiks: |]1,Inf] "%programName%" har %remixes% nye remikser:'
+  submitted: 'Innsendte prosjekter'
+  uploaded: 'Opplastede prosjekter'
+  reportAsInappropriate: 'Rapporter som upassende'
+  reportProgram: 'Rapporter prosjekt'
+  languageVersion: 'Catrobat-språkversjon: %languageVersion%'
+  reportLoginText: 'Vennligst %login% for å rapportere dette prosjektet.'
+  reportDialogHeader: 'Hvorfor vil du rapportere dette prosjektet?'
+  reportDialogReason: 'Skriv inn en grunn'
+  reportRadioButtonInappropriate: 'Det er upassende'
+  reportRadioButtonCopyright: 'Brudd på opphavsrett'
+  reportRadioButtonSpam: 'Det er spam'
+  reportRadioButtonDislike: 'Jeg liker det ikke'
+  reportOwnProgram: 'Du kan ikke rapportere ditt eget prosjekt.'
+  reportAlready: 'Du har allerede rapportert dette prosjektet.'
+  reportDone: 'Du rapporterte dette prosjektet!'
+  updateAppHeaderDownload: 'Nedlasting ikke mulig'
+  updateAppTextDownload: 'Oppdater appen din til nyeste versjon. Vær oppmerksom på at ikke alle Android-funksjoner er tilgjengelige på iOS ennå.'
+  updateAppTextDownloadApk: 'APK-nedlastingen er for øyeblikket bare tilgjengelig på Android og ikke på iOS.'
+  updateAppHeader: 'Oppdater appen'
+  updateAppText: 'Oppdater appen din til nyeste versjon.'
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: 'Sjekk ut dette Catrobat-prosjektet'
+  show_more: 'Vis mer'
   comments: Kommentarer
-  send: Send
+  send: 'Send'
   delete: Slett
   report: Rapporter
-  reply: Reply
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  reply: 'Svar'
+  report_popup: 'Kommentaren ble rapportert.'
+  report_popup_header: 'Rapportert'
+  deleted_popup: 'Kommentaren ble slettet.'
+  deleted_popup_header: 'Slettet'
+  noAdminRights: 'Du har ikke administratorrettigheter. Logg inn som administrator.'
+  editProject: 'Rediger prosjektet'
+  closeProjectEditor: 'Lukk prosjektredigeringen'
   closeEditorPrompt: Vil du lagre endringene?
   btnDiscard: Slett
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: 'Skriv en kommentar'
+  thumbsUp: 'Tommel opp!'
+  smile: 'Smil!'
+  love: 'Elsker det!'
+  wow: 'Wooow!'
+  linkTitle: 'Lenke'
+  link: 'Kopier prosjektlenken til utklippstavlen'
   reactionsText: Reaksjoner
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  downloading: Downloading...
-  openInApp: Open in Pocket Code
-  downloaded: Downloaded
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  downloadErrorText: 'Det oppstod en feil under nedlasting av prosjektet. Prøv igjen senere.'
+  downloadStartText: 'Nedlastingen har startet ...'
+  downloading: 'Laster ned ...'
+  openInApp: 'Åpne i Pocket Code'
+  downloaded: 'Lastet ned'
+  showTranslation: 'Vis oversettelse'
+  hideTranslation: 'Skjul oversettelse'
+  translatedByLine: 'Oversatt av %provider% fra %sourceLanguage% til %targetLanguage%'
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  confrimDelete: 'Er du sikker på at du vil slette oversettelsen?'
   default: Standard
   save: Lagre
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
-  notForKids: Not safe for kids
+  translationTitle: 'Oversettelse til %language%'
+  editDefault: 'Rediger standard'
+  editTranslation: 'Rediger oversettelse til %language%'
+  translations: 'Oversettelser'
+  createTranslation: 'Opprett oversettelse'
+  deletedComment: '**Slettet**'
+  replyLabel: 'svar'
+  repliesLabel: 'svar'
+  notForKids: 'Ikke egnet for barn'
 remixGraph:
   title: Remikser
   showRemixGraph: 'Vis Remiks graf'
   by: 'av'
   open: 'Åpne '
   showPaths: 'Vis baner'
-  loading: 'Loading remix graph...'
-  error: 'Could not load the remix graph.'
-  empty: 'No remix graph data is available for this project yet.'
+  loading: 'Laster remiksgraf ...'
+  error: 'Kunne ikke laste remiksgrafen.'
+  empty: 'Ingen remiksgrafdata er tilgjengelig for dette prosjektet ennå.'
   remixesLabel: 'Remikser'
   projectsLabel: 'Programmer'
-  scratchLabel: 'Scratch roots'
-  interactHint: 'Select a node to open the project or highlight its remix path.'
-  zoomIn: 'Zoom in'
-  zoomOut: 'Zoom out'
-  resetView: 'Reset view'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
-noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  scratchLabel: 'Scratch-opprinnelse'
+  interactHint: 'Velg en node for å åpne prosjektet eller utheve remiksveien.'
+  zoomIn: 'Zoom inn'
+  zoomOut: 'Zoom ut'
+  resetView: 'Tilbakestill visning'
+  projectNotAvailableErrorTitle: 'Beklager ...'
+  projectNotAvailableErrorDescription: 'Prosjektet er ikke tilgjengelig lenger!'
+  projectNotAvailable: 'Ikke tilgjengelig'
+  projectUnknownUser: 'Ukjent bruker'
+noReply: 'Dette er en automatisk melding – ikke svar direkte på denne e-posten.'
 accountConfirmation:
   subject: Din Catrobat konto bekreftelse
   message: |
@@ -321,7 +320,7 @@ accountConfirmation:
     <p>
     Kjære %username%.<br>
     <br>
-    For å fullføre aktiveringen av kontoen din - vennligst klikk <a href=%confirmationUrl%>her.</a><br>
+    For å fullføre aktiveringen av kontoen din - vennligst klikk <a href="%confirmationUrl%">her.</a><br>
     <br>
     Denne linken kan bare brukes én gang for å validere din konto.<br>
     <br>
@@ -329,80 +328,80 @@ accountConfirmation:
     Ditt Catrobat lag.
     </p>
 newAccountConfirmation:
-  subject: "Verify your email address"
-  welcome: "Welcome to Catrobat!"
-  greeting: "Thanks for signing up! Please verify your email address to get started."
-  message: "Click the button below to confirm your email. This link is valid until %time% and can only be used once."
-  button: "Verify Email Address"
-  ignore: "If you did not create a Catrobat account, you can safely ignore this email."
-  autoDelete: "Unverified accounts are automatically deleted after 30 days."
+  subject: 'Bekreft e-postadressen din'
+  welcome: 'Velkommen til Catrobat!'
+  greeting: 'Takk for at du registrerte deg! Bekreft e-postadressen din for å komme i gang.'
+  message: 'Klikk på knappen nedenfor for å bekrefte e-postadressen din. Denne lenken er gyldig til %time% og kan bare brukes én gang.'
+  button: 'Bekreft e-postadresse'
+  ignore: 'Hvis du ikke har opprettet en Catrobat-konto, kan du trygt se bort fra denne e-posten.'
+  autoDelete: 'Ubekreftede kontoer slettes automatisk etter 30 dager.'
 consent:
   email:
-    subject: "Parental consent needed for your child's Catrobat account"
-    title: "Parental Consent Required"
-    greeting: "Hello,"
-    message: "Your child %username% has created an account on Catrobat and has verified their email address."
-    explanation: "Catrobat is a free educational platform where young people learn to code by creating apps, games, and animations. Under EU child protection regulations, we need your consent before your child can fully participate in the community. Please click the button below to give consent."
-    button: "Give Parental Consent"
-    ignore: "If you did not expect this email, you can safely ignore it. Without consent, the account will have limited functionality."
-    whatIsCatrobat: "Catrobat is a free, non-profit educational programming platform. Learn more at catrobat.org."
-    manageLink: 'You can manage your child''s account at any time via our <a href="%portalUrl%" style="color: #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.' #00acc1;">Parent Portal</a>. Learn more about <a href="%infoUrl%" style="color: #00acc1;">your rights as a parent</a>.'
+    subject: 'Foreldresamtykke trengs for barnets Catrobat-konto'
+    title: 'Foreldresamtykke kreves'
+    greeting: 'Hei,'
+    message: 'Barnet ditt %username% har opprettet en konto på Catrobat og bekreftet e-postadressen sin.'
+    explanation: 'Catrobat er en gratis læringsplattform der unge lærer å programmere ved å lage apper, spill og animasjoner. Etter EUs regler for beskyttelse av barn trenger vi ditt samtykke før barnet ditt kan delta fullt ut i fellesskapet. Klikk på knappen nedenfor for å gi samtykke.'
+    button: 'Gi foreldresamtykke'
+    ignore: 'Hvis du ikke ventet denne e-posten, kan du trygt se bort fra den. Uten samtykke vil kontoen ha begrenset funksjonalitet.'
+    whatIsCatrobat: 'Catrobat er en gratis, ideell læringsplattform for programmering. Les mer på catrobat.org.'
+    manageLink: 'Du kan når som helst administrere barnets konto via vår <a href="%portalUrl%" style="color: #00acc1;">foreldreportal</a>. Les mer om <a href="%infoUrl%" style="color: #00acc1;">dine rettigheter som forelder</a>.'
   confirmed:
-    title: "Consent Granted"
-    message: "Thank you! %username%'s account is now fully activated."
-    continueButton: "Discover projects"
+    title: 'Samtykke gitt'
+    message: 'Takk! Kontoen til %username% er nå fullt aktivert.'
+    continueButton: 'Oppdag prosjekter'
 parent:
   footer:
-    link: "Parents & Guardians"
+    link: 'Foreldre og foresatte'
   info:
-    title: "Information for Parents & Guardians"
-    intro: "Catrobat takes the safety and privacy of young users seriously. This page explains how we protect your child and what rights you have."
+    title: 'Informasjon for foreldre og foresatte'
+    intro: 'Catrobat tar sikkerheten og personvernet til unge brukere på alvor. Denne siden forklarer hvordan vi beskytter barnet ditt og hvilke rettigheter du har.'
     whatIsCatrobat:
-      title: "What is Catrobat?"
-      text: "Catrobat is a free, non-profit educational platform where young people learn programming by creating their own apps, games, and animations. The platform is available worldwide and used in educational settings."
+      title: 'Hva er Catrobat?'
+      text: 'Catrobat er en gratis, ideell læringsplattform der unge lærer programmering ved å lage egne apper, spill og animasjoner. Plattformen er tilgjengelig over hele verden og brukes i undervisning.'
     dataCollected:
-      title: "What data do we collect?"
-      text: "We collect the minimum data needed to operate the platform: username, email address, date of birth, and any projects your child creates and uploads. For users under 14, we also store a parent/guardian email address for consent purposes. We do not sell or share personal data with third parties."
+      title: 'Hvilke data samler vi inn?'
+      text: 'Vi samler inn minst mulig data for å drive plattformen: brukernavn, e-postadresse, fødselsdato og prosjektene barnet ditt lager og laster opp. For brukere under 14 år lagrer vi også e-postadressen til en forelder/foresatt for samtykke. Vi selger eller deler ikke personopplysninger med tredjeparter.'
     yourRights:
-      title: "Your rights as a parent or guardian"
-      text: "Under EU child protection regulations (GDPR) and COPPA, you have the right to: review the data we hold about your child, request a copy of that data, revoke your consent at any time (which restricts the account), and request permanent deletion of your child's account and all associated data."
+      title: 'Dine rettigheter som forelder eller foresatt'
+      text: 'Etter EUs regler for beskyttelse av barn (GDPR) og COPPA har du rett til å: se dataene vi har om barnet ditt, be om en kopi av disse dataene, trekke tilbake samtykket ditt når som helst (som begrenser kontoen), og be om permanent sletting av barnets konto og alle tilknyttede data.'
     minorRestrictions:
-      title: "What restrictions apply to minor accounts?"
-      text: "Users under 16 cannot post or read comments, follow other users, or view content marked as not suitable for children. They can still create and upload projects, browse public projects, and react to projects with likes. These restrictions are in place to provide a safe learning environment."
-    manageButton: "Manage Your Child's Account"
+      title: 'Hvilke begrensninger gjelder for kontoer til mindreårige?'
+      text: 'Brukere under 16 år kan ikke skrive eller lese kommentarer, følge andre brukere eller se innhold merket som ikke egnet for barn. De kan fortsatt lage og laste opp prosjekter, bla gjennom offentlige prosjekter og reagere på prosjekter med likerklikk. Disse begrensningene finnes for å gi et trygt læringsmiljø.'
+    manageButton: 'Administrer barnets konto'
   portal:
-    title: "Parent Portal"
-    description: "Enter your email address to receive a secure link for managing your child's Catrobat account. The link will be sent to the email address you provided during registration."
-    emailLabel: "Your email address"
-    submitButton: "Send Management Link"
-    infoLink: "Learn More"
+    title: 'Foreldreportal'
+    description: 'Skriv inn e-postadressen din for å få en sikker lenke til å administrere barnets Catrobat-konto. Lenken sendes til e-postadressen som ble oppgitt ved registreringen.'
+    emailLabel: 'E-postadressen din'
+    submitButton: 'Send administrasjonslenke'
+    infoLink: 'Les mer'
     success:
-      title: "Check your inbox"
-      message: "If an account is associated with this email, we've sent a management link. Please check your inbox and follow the link to manage your child's account."
+      title: 'Sjekk innboksen din'
+      message: 'Hvis en konto er knyttet til denne e-postadressen, har vi sendt en administrasjonslenke. Sjekk innboksen din og følg lenken for å administrere barnets konto.'
   manage:
-    title: "Manage Child Accounts"
-    description: "You are managing accounts associated with %email%."
-    consentStatus: "Consent status"
-    accountCreated: "Account created"
-    email: "Child's email"
+    title: 'Administrer barnekontoer'
+    description: 'Du administrerer kontoer knyttet til %email%.'
+    consentStatus: 'Samtykkestatus'
+    accountCreated: 'Konto opprettet'
+    email: 'Barnets e-post'
     status:
-      granted: "Granted"
-      pending: "Pending"
-      revoked: "Revoked"
-    grantButton: "Grant Consent"
-    revokeButton: "Revoke Consent"
-    revokeConfirm: "Are you sure you want to revoke consent? The account will have limited functionality."
-    exportButton: "Export Data"
-    deleteButton: "Delete Account"
-    deleteConfirm: "Are you sure you want to permanently delete this account? This cannot be undone."
+      granted: 'Gitt'
+      pending: 'Venter'
+      revoked: 'Trukket tilbake'
+    grantButton: 'Gi samtykke'
+    revokeButton: 'Trekk tilbake samtykke'
+    revokeConfirm: 'Er du sikker på at du vil trekke tilbake samtykket? Kontoen vil få begrenset funksjonalitet.'
+    exportButton: 'Eksporter data'
+    deleteButton: 'Slett konto'
+    deleteConfirm: 'Er du sikker på at du vil slette denne kontoen permanent? Dette kan ikke angres.'
   management:
     email:
-      subject: "Manage your child's Catrobat account"
-      title: "Account Management"
-      greeting: "Hello,"
-      message: "You requested a link to manage your child's Catrobat account (%usernames%). Click the button below to view and manage the account."
-      button: "Manage Account"
-      ignore: "If you did not request this, you can safely ignore this email."
+      subject: 'Administrer barnets Catrobat-konto'
+      title: 'Kontoadministrasjon'
+      greeting: 'Hei,'
+      message: 'Du har bedt om en lenke for å administrere barnets Catrobat-konto (%usernames%). Klikk på knappen nedenfor for å se og administrere kontoen.'
+      button: 'Administrer konto'
+      ignore: 'Hvis du ikke har bedt om dette, kan du trygt se bort fra denne e-posten.'
 passwordRecovery:
   subject: Din Catrobat passordgjenoppretting
   message: |
@@ -419,22 +418,22 @@ passwordRecovery:
     <p>
     Kjære %username%.<br>
     <br>
-    Du har bedt om å tilbakestille passordet på <a href=%appplication_url%>Pocket Code</a> fordi du har glemt passordet ditt.
+    Du har bedt om å tilbakestille passordet på <a href="%appplication_url%">Pocket Code</a> fordi du har glemt passordet ditt.
     Hvis du ikke har bedt om dette, kan du ignorer det. Det utløper og blir ubrukelig i løpet av 24 timer.<br>
     <br>
-    For å tilbakestille passordet ditt og opprette et nytt, vennligst klikk  <a href=%confirmationUrl%>her.</a><br>
+    For å tilbakestille passordet ditt og opprette et nytt, vennligst klikk  <a href="%confirmationUrl%">her.</a><br>
     <br>
-    Du kan bruke ditt brukernavn og passord når som helst for å få tilgang til <a href=%appplication_url%>Pocket Code</a> samfunnet.
+    Du kan bruke ditt brukernavn og passord når som helst for å få tilgang til <a href="%appplication_url%">Pocket Code</a> samfunnet.
     <br>
-    Å gjøre slik bare besøk følgende side:  <a href=%loginPage%>Påloggingsside</a><br>
-    For å redigere profildetaljene dine, gå til denne <a href=%profilePage%>siden</a>.<br>
+    Å gjøre slik bare besøk følgende side:  <a href="%loginPage%">Påloggingsside</a><br>
+    For å redigere profildetaljene dine, gå til denne <a href="%profilePage%">siden</a>.<br>
     <br>
     Vennlig hilsen,<br>
     Ditt Catrobat lag.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: 'Om meg'
+  currentlyWorkingOn: 'Jobber med nå'
   edit: Rediger din profil
   saveChanges: lagre endringer
   newPass: nytt passord
@@ -463,16 +462,16 @@ profile:
     submitSuccess: lagret!
   reallyDeleteProgram: Vil du virkelig slette prosjektet ditt
   programsOf: Prosjekter av
-  picture: Profile picture
+  picture: 'Profilbilde'
   changePicture: Endre bilde
   goToScratchProfile: Profil på Scratch
 myprofile:
-  userSettings: User settings
+  userSettings: 'Brukerinnstillinger'
   profileSettings: Rediger profil
   securitySettings: Endre passord
   accountSettings: Kontoinnstillinger
-  accountVerification: Verify account
-  account: Account
+  accountVerification: 'Bekreft konto'
+  account: 'Konto'
   editProfile: Rediger profil
   edit: Rediger
   done: Ferdig
@@ -482,21 +481,21 @@ myprofile:
   email: E-post
   deleteAccount: Slett konto
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
-  exportData: Download my data
-  exportDataDescription: You have the right to receive a copy of your personal data. This includes your profile information, projects, comments, reactions, and followers.
-  exportDataLoading: Downloading...
-  exportDataError: Something went wrong while exporting your data. Please try again later.
-  exportDataRateLimited: You can only export your data once per day. Please try again tomorrow.
+    Vær oppmerksom:
+    Du har laget %num_projects% prosjekt(er) og har %num_followers% følger(e). Alle prosjektene dine blir fjernet. Du vil ikke lenger kunne logge inn, og prosjektene dine forsvinner fra alle lister. Sletting av profilen kan ikke angres!
+    Er du sikker på at du vil forlate oss?
+  exportData: 'Last ned dataene mine'
+  exportDataDescription: 'Du har rett til å få en kopi av personopplysningene dine. Dette omfatter profilinformasjon, prosjekter, kommentarer, reaksjoner og følgere.'
+  exportDataLoading: 'Laster ned ...'
+  exportDataError: 'Noe gikk galt under eksporten av dataene dine. Prøv igjen senere.'
+  exportDataRateLimited: 'Du kan bare eksportere dataene dine én gang per dag. Prøv igjen i morgen.'
   editAccountSettings: Rediger kontoinnstillinger
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: Something did not work while changing your profile. Please try again or let us know if it keeps happening!
-  verifyAccountText: We will send you an email with a link to verify your account. Make sure to click on the link within the next hour, you are only allowed to request one email per day.
-  verifyAccountButton: Send email
-  verifyAccountMailSent: Email sent successfully. Please check your inbox
-  verifyAccountMailFailed: You can only request one email per day
+  profileChangeSuccess: 'Profilen din er endret.'
+  unspecifiedError: 'Noe fungerte ikke da profilen din skulle endres. Prøv igjen, eller si fra til oss hvis det fortsetter å skje!'
+  verifyAccountText: 'Vi sender deg en e-post med en lenke for å bekrefte kontoen din. Husk å klikke på lenken innen en time. Du kan bare be om én e-post per dag.'
+  verifyAccountButton: 'Send e-post'
+  verifyAccountMailSent: 'E-posten er sendt. Sjekk innboksen din'
+  verifyAccountMailFailed: 'Du kan bare be om én e-post per dag'
 licenseToPlay:
   link: 'Lisens til å spille'
   title: 'Lisens til å spille - gi anerkjennelse og del'
@@ -515,7 +514,7 @@ termsOfUse:
   headline: Velkommen til Catrobat samfunnet!
   text1: 'Som en del av Catrobat samfunnet deler du prosjekter og ideer med folk:'
   text2: "Vi trenger din hjelp for at fellesskapet skal kunne støtte alle medlemmer. Her er hvordan du kan hjelpe:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: 'Gjennom Catrobat-prosjektet vil vi fremme samarbeid og la alles kreativitet kombineres til beste for hele menneskeheten. Du kan også bli et aktivt medlem av Catrobat-fellesskapet ved å gi prosjektene dine tilbake til fellesskapet som en gave, på samme måte som andre aktive medlemmer gir prosjektene sine til deg:'
   text4: 'Vår gave til deg:'
   text5: 'Våre vilkår for bruk og Service:'
   list1:
@@ -527,20 +526,20 @@ termsOfUse:
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "Vær ærlig. Ikke lat som du er noen andre enn den du er eller prøv å lure samfunnet."
     item4: "Hold personlig informasjon privat. Ikke del din e-postadresse, telefonnummer eller annen personlig kontaktinformasjon."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item5: 'Hjelp til med å holde nettstedet vennlig. Hvis du tror andre vil oppfatte et prosjekt eller en kommentar som slem, fornærmende, for voldelig eller på annen måte upassende, klikker du bare på knappen «rapporter som upassende» og skriver en kort forklaring. Catrobat-teamet vil se på rapporten din og kan fjerne ethvert prosjekt, enhver kommentar eller ethvert innlegg.'
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
+    item1: 'Ved å laste opp et prosjekt til nettstedene våre godtar du å legge dette arbeidet under bestemte frie lisenser for opplastede Catrobat-prosjekter. I likhet med de frie lisensene som selve Catrobat-systemet er tilgjengelig for deg under, gir disse frie lisensene alle rett til å lære av arbeid som andre tidligere har lastet opp, og til å tilpasse og remikse dette arbeidet for å lage sine egne nye, fascinerende spill, animasjoner og andre prosjekter. Dette lar alle «stå på skuldrene til andre», og en av dem er deg! Arbeidet ditt kommer dermed hele verden til gode og forblir fritt for alle å bruke, litt som tekst og bilder som frivillige fra hele verden fritt bidrar med til Wikipedia. Tenk på det som din gave til menneskeheten: du gir til alle, og alle andre som laster opp arbeidet sitt til nettstedene våre, gir til deg. Et opplastet prosjekt er altså en gave av stor verdi som eieren gir deg gratis, på betingelse av at du deltar i fellesskapet på de samme vilkårene.'
+    item2: 'Du trenger ikke å ta imot gaven; hvis du gjør det, gjelder visse regler. Fordelen med disse reglene er at du kan lære av arbeidet og bygge videre på det for å lage enda kulere ting selv, som du så for eksempel kan laste opp til nettstedene våre igjen som ditt eget. En annen fordel er at disse lisensene sørger for at du ikke kan holdes ansvarlig for problemer som oppstår for andre når de bruker prosjektet ditt.'
+    item3: 'En viktig tilleggsbetingelse er at du tydelig krediterer forfatterne hvis arbeid du har bygget ditt eget arbeid på. Samtidig vil vi jobbe hardt for at andre tydelig skal se at arbeidet ditt er ditt bidrag, ved å kreditere det unike navnet du fritt har valgt for å representere deg i Catrobat-fellesskapet, og ved å gi andre muligheten til å vise deg takknemlighet offentlig for at du har gitt arbeidet ditt til alle, og særlig til dem.'
     item4: 'Vennligst se %link-licenseUploaded% for de presise juridiske vilkårene og betingelsene.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
+    item1: 'Vi tilbyr all vår egen programvare og alle internettressurser knyttet til Catrobat-systemet, f.eks. programvaren skrevet av Catrobat-teamet, nettstedene og internettressursene våre, vår egen kildekode knyttet til Catrobat-systemet og alt tilleggsmateriale som f.eks. bilder, lyder og tekster, nå og i fremtiden, til deg under Catrobats frie lisenser.'
+    item2: 'Disse lisensene gjør alle deler av Catrobat både gratis for deg og fri i den forstand at du har frihet til å bruke dem slik du vil, med bare noen få begrensninger som blant annet sikrer at Catrobat-systemet for alltid forblir fritt og nyttig for alle.'
     item3: 'Vennligst se %link-licenseToPlay% for de presise juridiske vilkårene og betingelsene. Kildekoden til Catrobat systemet samt mange andre dokumenter og ressurser er tilgjengelig via %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
+    item1: 'Hvis du, eller dine foreldre eller foresatte hvis du er under 13 år, er tilknyttet en organisasjon som er involvert i eller ansvarlig for brudd på personvernet i form av masseovervåking eller storstilt overvåking, har du ikke lov til å bruke programvaren vår eller tjenestene våre. De nøyaktige detaljene for denne begrensningen og visse unntak fra den er beskrevet i avsnitt 4.a og 4.b i vår %link-termsOfUse%.'
     item2: Hvis du er under 13 år så må du spørre dine foreldre eller formynder om de tillater deg å bruke Catrobats programvare og tjenester.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item3: 'Vi forbeholder oss retten til når som helst og etter eget skjønn å avvise, slette eller skjule prosjekter, brukerkontoer og alt digitalt materiale som lastes opp til Catrobats nettsteder, for eksempel hvis vi finner at et prosjekt inneholder upassende materiale eller at en bruker krenker andres rettigheter.'
     item4: "All Catrobats programvare og Internett-ressurser tilbys i håp om at de kan være nyttige, men uten garanti."
     item5: 'Se vår %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for nøyaktige formuleringer av punktene ovenfor og noen ytterligere juridiske vilkår og betingelser.'
   bottom1: Sjekk her tilbake fra tid til annen, fordi vi alltid prøver å forbedre våre brukervilkår.
@@ -548,16 +547,16 @@ termsOfUse:
   version: Versjon 1.3, 4. mars 2014
 search:
   dotdotdot: Søk...
-  search: Search projects, users & studios
+  search: 'Søk etter prosjekter, brukere og studioer'
   inMediaLib: Søk i mediebiblioteket
-  inMediaCategory: Search in media category
+  inMediaCategory: 'Søk i mediekategori'
   results: Søkeresultater
   resultcount: Søket ditt returnerte %count% resultater
   fail: Vennligst skriv inn minst ett søkeord
-  noUsers: No users found
-  noProjects: No projects found
-  noStudios: No studios found
-  sameSearchMessage: "Looks like you're already here! Try a different search?"
+  noUsers: 'Ingen brukere funnet'
+  noProjects: 'Ingen prosjekter funnet'
+  noStudios: 'Ingen studioer funnet'
+  sameSearchMessage: 'Det ser ut som du allerede er her! Prøve et annet søk?'
 menu:
   profile: Min profil
   login: Logg på
@@ -569,17 +568,17 @@ menu:
   mediaLibrary: Mediebibliotek
   studio: Studioer
   language: Språk
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: 'Ingen språkvalg tilgjengelig.'
 login:
   login: Logg på
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: 'Logg inn nå'
+    createAccount: 'Opprett konto'
+    forgetPassword: 'Glemt passordet?'
   oauth:
-    title: Or you can join with
+    title: 'Eller bli med via'
   passOrUser: Ditt passord eller brukernavn er feil.
-  accountSuspended: 'Your account has been suspended. If you believe this is an error, please contact support.'
+  accountSuspended: 'Kontoen din er suspendert. Hvis du mener dette er en feil, ta kontakt med brukerstøtten.'
   noUsername: Din brukernavn eller e-postadresse ble ikke funnet.
   forgotPass: Glemt passord eller brukernavn?
   recoverPassSend: En e-post ble sendt til e-postadressen din. Vennligst sjekk innboksen din.
@@ -596,71 +595,71 @@ login:
   passwordFirst: Passord
   passwordSecond: Bekreft passord
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
-  dateOfBirth: Date of birth
-  dateOfBirthInfo: "We ask for your date of birth to comply with EU child protection regulations (GDPR/COPPA) and provide a safe experience for younger users."
-  parentEmail: "Parent/Guardian email"
-  parentEmailInfo: "Required for users under 14. We'll send a consent request to this address."
+  title: 'Registrer deg'
+  subText: 'Ved å fortsette oppretter du en konto i Catrobat-fellesskapet og godtar våre %var1% og %var2%.'
+  dateOfBirth: 'Fødselsdato'
+  dateOfBirthInfo: 'Vi spør om fødselsdatoen din for å følge EUs regler for beskyttelse av barn (GDPR/COPPA) og gi yngre brukere en trygg opplevelse.'
+  parentEmail: 'E-post til forelder/foresatt'
+  parentEmailInfo: 'Påkrevd for brukere under 14 år. Vi sender en forespørsel om samtykke til denne adressen.'
   completeRegistration:
-    title: Complete your registration
-    info: "Please provide your date of birth to continue using the platform."
+    title: 'Fullfør registreringen'
+    info: 'Oppgi fødselsdatoen din for å fortsette å bruke plattformen.'
     submit: Gå videre
   button:
     cancel: Avbryt
-    createAccount: Create account
+    createAccount: 'Opprett konto'
 registration:
   verifyPending:
-    title: "Check your inbox!"
-    message: "We've sent you a verification email. Click the link in the email to activate your account."
-    helpTitle: "Didn't get the email?"
-    hint: "Check your spam folder. The link is valid for 24 hours."
-    resendButton: "Resend verification email"
+    title: 'Sjekk innboksen din!'
+    message: 'Vi har sendt deg en e-post for bekreftelse. Klikk på lenken i e-posten for å aktivere kontoen din.'
+    helpTitle: 'Fikk du ikke e-posten?'
+    hint: 'Sjekk søppelpostmappen. Lenken er gyldig i 24 timer.'
+    resendButton: 'Send bekreftelses-e-posten på nytt'
   consentPending:
-    title: "Waiting for parental consent"
-    message: "Your email is verified! Before you can fully use the platform, a parent or guardian needs to give consent."
-    sentTo: "A consent request was sent to %email%"
-    helpTitle: "Didn't get the email? Need help?"
-    hint: "Ask your parent to check their spam folder. The link is valid for 24 hours."
-    resendButton: "Resend consent email"
-    wrongEmail: "Entered the wrong parent email?"
+    title: 'Venter på foreldresamtykke'
+    message: 'E-postadressen din er bekreftet! Før du kan bruke plattformen fullt ut, må en forelder eller foresatt gi samtykke.'
+    sentTo: 'En forespørsel om samtykke ble sendt til %email%'
+    helpTitle: 'Fikk du ikke e-posten? Trenger du hjelp?'
+    hint: 'Be forelderen din sjekke søppelpostmappen. Lenken er gyldig i 24 timer.'
+    resendButton: 'Send samtykke-e-posten på nytt'
+    wrongEmail: 'Skrev du inn feil e-post til forelderen?'
   consentRevoked:
-    title: "Parental consent was revoked"
-    message: "Your parent or guardian has revoked consent for your account. Your account has limited functionality until consent is granted again."
-    newEmailPlaceholder: "New parent email"
-    changeButton: "Update & resend"
+    title: 'Foreldresamtykket ble trukket tilbake'
+    message: 'Forelderen eller den foresatte din har trukket tilbake samtykket for kontoen din. Kontoen din har begrenset funksjonalitet til samtykke blir gitt igjen.'
+    newEmailPlaceholder: 'Ny e-post til forelder'
+    changeButton: 'Oppdater og send på nytt'
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: 'Gjenoppretting av konto'
+  description: 'Hvis du husker e-postadressen eller brukernavnet til kontoen din, kan vi sende deg en lenke for å tilbakestille passordet.'
   button:
     cancel: Avbryt
-    submit: Recover password
+    submit: 'Gjenopprett passord'
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: 'Tilbakestill passordet ditt'
+    description: 'Hvis du husker e-postadressen til kontoen din, kan vi sende deg en lenke for å tilbakestille passordet.'
     button:
-      submit: "Send reset email"
+      submit: 'Send e-post for tilbakestilling'
       cancel: "Avbryt"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    title: 'Sjekk e-posten din'
+    description: 'Hvis det finnes en konto med denne e-postadressen, har vi nettopp sendt en e-post med en lenke du kan bruke til å tilbakestille passordet. Lenken utløper om %time%.'
+    descriptionTwo: 'Du kan be om en ny tilbakestilling av passordet én gang per %throttleLimit% timer.'
+    descriptionThree: 'Hvis du ikke fikk noen e-post, sjekk søppelpostmappen eller send en e-post til brukerstøtten vår på %email-webmaster%.'
   email:
     title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: 'For å tilbakestille passordet ditt, gå til følgende lenke'
+    expire: 'Denne lenken utløper om %time%.'
+    cheers: 'Hilsen oss!'
   newemail:
-    title: "Reset your password"
-    content: "You recently requested a password reset for your Catrobat account. Click the button below to choose a new password. If you did not request this, you can safely ignore this email."
-    visitLink: "Reset Password"
-    expire: "This link is valid for %time% and can only be used once."
+    title: 'Tilbakestill passordet ditt'
+    content: 'Du ba nylig om å tilbakestille passordet til Catrobat-kontoen din. Klikk på knappen nedenfor for å velge et nytt passord. Hvis du ikke ba om dette, kan du trygt se bort fra denne e-posten.'
+    visitLink: 'Tilbakestill passord'
+    expire: 'Denne lenken er gyldig i %time% og kan bare brukes én gang.'
   reset:
-    title: "Reset your password"
+    title: 'Tilbakestill passordet ditt'
     button:
-      submit: "Reset password"
+      submit: 'Tilbakestill passord'
 apk:
   download: Last ned som app
   prepare: 'Få som app'
@@ -670,7 +669,7 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: Something did not work. Please try again or let us know if it keeps happening!
+  unspecified: 'Noe fungerte ikke. Prøv igjen, eller si fra til oss hvis det fortsetter å skje!'
   username:
     blank: Brukernavn må ikke være tomt
     invalid: Brukernavnet ditt er ugyldig
@@ -706,13 +705,13 @@ errors:
   token: 'Autentisering av enheten feilet: Ugyldig auth-token!'
   uploadTokenAuthFailed: 'Opplasting av token auth feilet'
   project:
-    invalid: Invalid project.
+    invalid: 'Ugyldig prosjekt.'
   languageversion:
     tooold: 'Beklager, prosjektet ditt inneholder en gammel versjon av Catrobat språk! Bruker du den nyeste versjonen av Pocket Code?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'Beklager, du bruker en gammel versjon av Pocket Code. Oppdater til nyeste versjon.'
   authentication:
-    title: Login did not work
+    title: 'Innloggingen fungerte ikke'
     webview: |
       Brukerlegitimasjonen din er feil.
       Vennligst prøv å logge inn igjen i appen.
@@ -733,7 +732,7 @@ failure:
   upload: Det oppstod en feil under opplastingen av din app.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Bekreft e-postadressen din'
 api:
   registerUser:
     emailMissing: 'E-post mangler'
@@ -752,46 +751,46 @@ api:
     passwordTooLong: 'Passord er for langt'
     passwordInvalidChars: 'Passordet inneholder ugyldige tegn'
     usernameContainsEmail: "Brukernavn må ikke inneholde en e-postadresse"
-    usernameContainsLink: "Username must not contain a link"
+    usernameContainsLink: 'Brukernavnet kan ikke inneholde en lenke'
     countryCodeInvalid: "Landkoden er ugyldig"
-    pictureInvalid: "Profile picture invalid or not supported"
-    dateOfBirthMissing: "Date of birth is required"
-    dateOfBirthInvalid: "Date of birth is invalid"
-    tooYoung: "You must be at least 3 years old to create an account"
-    parentEmailMissing: "Parent email is required for users under 14"
-    parentEmailInvalid: "Parent email is invalid"
-    parentEmailSameAsUser: "Parent email must be different from your own email address"
+    pictureInvalid: 'Profilbildet er ugyldig eller støttes ikke'
+    dateOfBirthMissing: 'Fødselsdato er påkrevd'
+    dateOfBirthInvalid: 'Fødselsdatoen er ugyldig'
+    tooYoung: 'Du må være minst 3 år for å opprette en konto'
+    parentEmailMissing: 'E-post til forelder er påkrevd for brukere under 14 år'
+    parentEmailInvalid: 'E-posten til forelderen er ugyldig'
+    parentEmailSameAsUser: 'E-posten til forelderen må være en annen enn din egen e-postadresse'
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: 'Nåværende passord mangler'
+    currentPasswordWrong: 'Nåværende passord er feil'
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'Navnet kan ikke være tomt'
+    nameTooLong: 'Navnet er for langt'
+    descriptionTooLong: 'Beskrivelsen er for lang'
+    creditsTooLong: 'Notater og kreditter er for lange'
+    screenshotInvalid: 'Skjermbildet av prosjektet er ugyldig eller støttes ikke'
   projectsPost:
     invalid_checksum: 'Ugyldig sjeksumk. Prøv å laste opp igjen!'
     upload_error: 'Feil under opplasting. Prøv å laste opp igjen!'
     creating_error: 'Feil under oppretting av prosjektenhet. Prøv å laste opp igjen!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Kunne ikke lagre detaljene for prosjektet.'
+    screenshotError: 'Kunne ikke lese, konvertere eller lagre skjermbildet. Sjekk det du har lagt inn.'
+    notFound: 'Prosjektet som skulle endres, ble ikke funnet.'
+    forbidden: 'Du har ikke lov til å endre prosjektet. Er du fortsatt logget inn?'
   createStudio:
-    nameMissing: 'Name missing'
-    nameEmpty: 'Name cannot be empty'
-    nameTooShort: 'Name too short'
-    nameTooLong: 'Name too long'
-    nameAlreadyInUse: 'Name already in use'
-    descriptionMissing: 'Description missing'
-    descriptionEmpty: 'Description empty'
-    descriptionTooShort: 'Description too short'
-    descriptionTooLong: 'Description too long'
-    imageFileInvalid: 'Image file invalid'
-    imageFileInvalidType: 'Image file type invalid'
-    imageFileTooLarge: 'Image file too large'
+    nameMissing: 'Navn mangler'
+    nameEmpty: 'Navnet kan ikke være tomt'
+    nameTooShort: 'Navnet er for kort'
+    nameTooLong: 'Navnet er for langt'
+    nameAlreadyInUse: 'Navnet er allerede i bruk'
+    descriptionMissing: 'Beskrivelse mangler'
+    descriptionEmpty: 'Beskrivelsen er tom'
+    descriptionTooShort: 'Beskrivelsen er for kort'
+    descriptionTooLong: 'Beskrivelsen er for lang'
+    imageFileInvalid: 'Bildefilen er ugyldig'
+    imageFileInvalidType: 'Bildefiltypen er ugyldig'
+    imageFileTooLarge: 'Bildefilen er for stor'
 #languages and countries
 language:
   arabic: Arabisk
@@ -890,11 +889,11 @@ codeview:
   dataBricks: 'Data blokker'
   specialBricks: 'Spesielle blokker'
 codeView:
-  title: 'Code View'
-  loading: 'Loading code view...'
-  error: 'Could not load code view.'
-  retry: 'Try again'
-  empty: 'This project has no code.'
+  title: 'Kodevisning'
+  loading: 'Laster kodevisning ...'
+  error: 'Kunne ikke laste kodevisningen.'
+  retry: 'Prøv igjen'
+  empty: 'Dette prosjektet har ingen kode.'
   scripts: 'Skript'
   looks: 'Utseende'
   sounds: 'Lyder'
@@ -912,32 +911,32 @@ codeStatistics:
   dataBricks: 'Data'
   deviceBricks: 'Enhet'
   specialBricks: 'Spesiell '
-  yourScore: 'Your score:'
-  points: 'points'
-  abstraction: 'Abstraction and problem decomposition'
-  parallelism: 'Parallelism'
-  logicalThinking: 'Logical thinking'
-  synchronization: 'Synchronization'
-  flowControl: 'Flow control'
-  userInteractivity: 'User interactivity'
-  dataRepresentation: 'Data representation'
-  level: 'Level'
-  loading: 'Loading...'
+  yourScore: 'Din poengsum:'
+  points: 'poeng'
+  abstraction: 'Abstraksjon og oppdeling av problemer'
+  parallelism: 'Parallellisme'
+  logicalThinking: 'Logisk tenkning'
+  synchronization: 'Synkronisering'
+  flowControl: 'Flytkontroll'
+  userInteractivity: 'Brukerinteraktivitet'
+  dataRepresentation: 'Datarepresentasjon'
+  level: 'Nivå'
+  loading: 'Laster ...'
   bonus: 'Bonus'
 footer:
-  title: "Join Over %user_count% Creative Minds!"
-  text: "With %project_count% Amazing Projects already shared, the next one could be yours. Download our app and start creating today"
+  title: 'Bli med over %user_count% kreative hoder!'
+  text: 'Med %project_count% fantastiske prosjekter allerede delt kan det neste bli ditt. Last ned appen vår og begynn å skape i dag'
 privacy-policy:
   header: Personvernregler
   version: Versjon 2.2, 17. oktober 2019
   text1: For å tilby deg alle fordelene ved tjenestene våre og den tilknyttede kontoen er det nødvendig å samle inn visse data fra deg.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
-  text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
-  text4: On a voluntary basis, you can give us your country of residence through your account page on the sharing site. This will get displayed on your public profile and only be used for statistical and research purposes by us. It can be removed at any time in your profile settings.
-  text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
+  text2: 'For å vedlikeholde og forbedre tjenestene våre (apper og nettsteder) og for å drive vitenskapelig forskning på IKT- og STEM/STEAM-undervisning bruker vi Google Analytics, Crashlytics og Firebase, alle fra Google LLC (USA), samt Dynatrace fra Dynatrace LLC (USA), for å få metadata om bruken av tjenestene våre, f.eks. krasjinformasjon, tidsstempler, besøkte sider/skjermer, bruk av appene og tjenestene våre, operativsystemet som brukes og informasjon om nettverksleverandøren. Denne analysen og de innsamlede dataene er ikke knyttet til profilen din og inneholder ingen personopplysninger (de siste delene av IP-adressen anonymiseres). De innsamlede dataene blir likevel overført til tjenesteleverandørene (Google LLC, USA og Dynatrace LLC, USA). Databehandlingen bygger på avtaler med Google LLC og Dynatrace LLC. Dette forholdet til tjenesteleverandørene er i samsvar med EUs personvernforordning (EU GDPR) og avtalen "Privacy Shield" mellom EU og USA.'
+  text3: 'For å opprette og bruke en konto i systemene våre, og for å informere deg på e-post om nødvendige endringer i kontoen din, f.eks. oppdateringer eller brudd på bruks- og tjenestevilkårene, fellesskapsreglene eller retningslinjene våre, lagrer vi brukernavnet ditt og, hvis du har oppgitt den, e-postadressen din. Hvis du har koblet kontoen din via Google Plus eller Facebook, lagrer vi i tillegg en identifikasjonsnøkkel knyttet til kontoen din på disse tjenestene. Vi bruker ikke disse dataene til andre formål (f.eks. markedsføring) med mindre du uttrykkelig har gitt oss lov til det.'
+  text4: 'Du kan frivillig oppgi bostedslandet ditt via kontosiden din på delingsnettstedet. Det vises på den offentlige profilen din og brukes av oss bare til statistikk og forskning. Du kan fjerne det når som helst i profilinnstillingene.'
+  text5: 'Du kan når som helst trekke tilbake bruken av personopplysningene som hører til kontoen din, ved å slette kontoen via profilsiden din på https://share.catrob.at/. Etter at du har slettet kontoen, kan du fortsatt bruke tjenestene, men ikke samarbeide, f.eks. ved å laste opp programmer, kommentere eller like. Alt innhold knyttet til kontoen din, f.eks. opplastede programmer, kommentarer osv., blir også slettet.'
+  text6: 'For å unngå misbruk av tjenestene våre, f.eks. gjennom opplastinger eller kommentarer fra brukere til ulovlige formål, lagres alle offentlige data som brukerne lager (opplastinger, kommentarer) internt i en database, sammen med et tidsstempel og internettadressen som ble brukt. Disse dataene brukes ikke av eller videresendes til noen institusjoner, med mindre det er rimelig mistanke om tilstrekkelig ulovlige handlinger og offentlig autoriserte rettsinstanser ber om dem med hjemmel i gjeldende lov. Hvert tilfelle blir først grundig kontrollert individuelt av oss.'
+  text7: 'Du kan frivillig abonnere på Catrobat-nyhetsbrevet på https://catrob.at/newsletter, som vi leverer via tjenesten MailChimp (The Rocket Science Group LLC d/b/a MailChimp, USA). Du får da oppdateringer om Catrobat-prosjektet og tjenestene dets til e-postadressen du har oppgitt. Du kan når som helst melde deg av nyhetsbrevet med lenken "unsubscribe" nederst i hvert nyhetsbrev. Nyhetsbrevet leveres av MailChimp, som vi har en databehandleravtale med, og som har forpliktet seg til EUs personvernforordning og "Privacy Shield" mellom EU og USA. For mer informasjon om MailChimp, se også MailChimps personvernerklæring og bruksvilkår.'
+  text8: 'Alle tjenester leveres av det frie open source-prosjektet Catrobat under paraplyen til International Catrobat Association – Verein zur Förderung freier Software, en ideell organisasjon registrert i Graz, Østerrike (EU). Retningslinjene våre respekterer EUs og Østerrikes personvernlovgivning (GDPR). For å kontakte oss, send en e-post til contact@catrobat.org eller skriv til Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Østerrike (EU).'
   text9: Hvis du er under 14 år,  denne policyen må aksepteres av en formynder (vanligvis en forelder).
   text10: Catrobats offisielle engelskspråklige personvernregler er tilgjengelig på nettet under %privacy_policy%.
   disagree-text: Uten godkjenning kan vi ikke opprette en konto, men kjernefunksjonene er fortsatt tilgjengelige.
@@ -947,7 +946,7 @@ catro-notifications:
   noComments: "Det ser ut til at du ikke har noen kommentarmeldinger."
   noReactions: "Det ser ut til at du ikke har noen reaksjonvarsler."
   noRemixes: "Det ser ut til at du ikke har noen remiks varsler."
-  noStudios: "It looks like you don't have any studio notifications."
+  noStudios: 'Det ser ut som du ikke har noen studiovarsler.'
   tab:
     studio: Studio
     project: Programmer
@@ -958,25 +957,25 @@ catro-notifications:
   follow:
     message: 'User %user_link% follows you now.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% laget et nytt spill %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
   studio-comment:
-    message: '%user_link% commented in studio %studio_name%.'
+    message: '%user_link% kommenterte i studioet %studio_name%.'
   studio-project:
-    message: '%user_link% added %program_link% to studio %studio_name%.'
+    message: '%user_link% la til %program_link% i studioet %studio_name%.'
   studio-join-request:
-    accepted: 'Your request to join studio %studio_name% was accepted.'
-    declined: 'Your request to join studio %studio_name% was declined.'
+    accepted: 'Forespørselen din om å bli med i studioet %studio_name% ble godtatt.'
+    declined: 'Forespørselen din om å bli med i studioet %studio_name% ble avslått.'
   project-expiring:
-    message: 'Your project %program_link% will be automatically deleted in %days% days. Upload a new version or get more downloads to keep it.'
+    message: 'Prosjektet ditt %program_link% blir automatisk slettet om %days% dager. Last opp en ny versjon eller få flere nedlastinger for å beholde det.'
   project-deleted:
-    message: 'Your project "%project_name%" was automatically removed due to inactivity. Re-upload it if you still want to share it.'
-  noProjects: "It looks like you don't have any project notifications."
+    message: 'Prosjektet ditt "%project_name%" ble automatisk fjernet på grunn av manglende aktivitet. Last det opp på nytt hvis du fortsatt vil dele det.'
+  noProjects: 'Det ser ut som du ikke har noen prosjektvarsler.'
 clipboard:
-  success: Link copied to clipboard!
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success: 'Lenken er kopiert til utklippstavlen!'
+  success_project: 'Lenken til prosjektet er kopiert til utklippstavlen!'
+  success_user: 'Lenken til brukeren er kopiert til utklippstavlen!'
   fail: Kan ikke kopiere lenke til utklippstavlen! :(
 next: Neste
 previous: Forrige
@@ -986,7 +985,7 @@ media-packages:
   thumb-size:
     description: Forhåndsvisning størrelse
     sm: liten
-    md: medium
+    md: 'middels'
     lg: stor
   theme-special: "%flavor% Tema Spesial"
   search-results: Søkeresultater fra mediebiblioteket
@@ -1001,13 +1000,13 @@ flavor:
   create@school: Create@School
 copyright: 'Kopirett &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Alle rettigheter reservert.'
 noscript:
-  warning: "This website needs JavaScript to work. Please enable JavaScript in your browser or ask an adult to help you."
+  warning: 'Dette nettstedet trenger JavaScript for å fungere. Slå på JavaScript i nettleseren din, eller be en voksen om hjelp.'
 cookie-consent:
-  message: "We use cookies to help improve our services. No data is sold or shared."
+  message: 'Vi bruker informasjonskapsler for å forbedre tjenestene våre. Ingen data selges eller deles.'
   accept: "Godta"
   decline: "Avslå"
   privacy-link: "Personvern"
-  settings-link: "Cookie Settings"
+  settings-link: 'Innstillinger for informasjonskapsler'
 agree: Enig
 disagree: Uenig
 profileLoader:
@@ -1020,19 +1019,19 @@ share:
   success: 'Deling vellykket'
 copy: 'Kopier lenke'
 checkOutProject: 'Sjekk ut dette prosjektet:'
-checkOutUser: 'Check out this user:'
+checkOutUser: 'Sjekk ut denne brukeren:'
 community: 'Catrobat samfunn'
 back_to_app: 'Forlat samfunnet'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: 'Nyeste prosjekter'
+  random: 'Tilfeldige prosjekter'
   most_viewed: Mest Sett
   most_downloaded: Mest nedlastet
   example: Eksempel
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
-  trending: Trending projects
+  scratch: 'Scratch-remikser'
+  recommended: 'Anbefalte prosjekter'
+  popular: 'Mest populære'
+  trending: 'Populære nå'
 achievements:
   sidebar:
     title: 'Prestasjoner'
@@ -1077,21 +1076,21 @@ achievements:
         description: 'Opprett en brukerkonto'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: 'Deltaker i Coding Jam 2021'
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: 'Tospråklig'
+        description: 'Oversett prosjektene dine til 2 språk'
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: 'Trespråklig'
+        description: 'Oversett prosjektene dine til 3 språk'
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: 'Språkekspert'
+        description: 'Oversett prosjektene dine til 5 språk'
       account_verification:
-        title: "Verified"
-        description: "Verify your Account"
+        title: 'Bekreftet'
+        description: 'Bekreft kontoen din'
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Tagg |]1,Inf] Tagger'
   tag:
     game:
       title: Spill
@@ -1110,218 +1109,218 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} Utvidelse |]1,Inf] Utvidelser'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: 'Drone'
     phiro:
       title: Phiro
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: 'Brodering'
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: 'Flerspiller'
 studio:
   title: 'Studioer'
   singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
+  create_studio: 'Opprett studio'
+  delete_studio: 'Slett studio'
   cancel_studio: 'Avbryt'
-  studio_name: 'Studio name'
-  studio_description: 'Studio description'
-  is_public: 'Make it public?'
-  enable_comments: 'Enable comments?'
-  cover_image: 'Upload cover'
-  cover_image_empty: 'No image chosen.'
-  cover_image_hint: 'Max 1 MB. Accepted formats: JPEG, PNG, GIF, WebP.'
-  cover_image_compressed: 'Image was automatically compressed to fit the 1 MB limit.'
-  cover_image_compressing: 'Compressing image...'
-  cover_image_still_too_large: 'Image is too large even after compression. Please choose a smaller file.'
-  cover_image_invalid_type: 'Invalid image type. Please use JPEG, PNG, GIF, or WebP.'
-  cover_image_compression_failed: 'Failed to process image. Please try a different file.'
-  cover_image_alt: 'Your cover image'
-  cover_image_remove: 'Remove image'
-  popular: 'Popular Studios'
-  join: 'Join'
-  leave: 'Leave'
+  studio_name: 'Studionavn'
+  studio_description: 'Studiobeskrivelse'
+  is_public: 'Gjøre det offentlig?'
+  enable_comments: 'Slå på kommentarer?'
+  cover_image: 'Last opp forsidebilde'
+  cover_image_empty: 'Ingen bilde valgt.'
+  cover_image_hint: 'Maks 1 MB. Tillatte formater: JPEG, PNG, GIF, WebP.'
+  cover_image_compressed: 'Bildet ble automatisk komprimert for å holde seg under grensen på 1 MB.'
+  cover_image_compressing: 'Komprimerer bildet ...'
+  cover_image_still_too_large: 'Bildet er for stort selv etter komprimering. Velg en mindre fil.'
+  cover_image_invalid_type: 'Ugyldig bildetype. Bruk JPEG, PNG, GIF eller WebP.'
+  cover_image_compression_failed: 'Kunne ikke behandle bildet. Prøv en annen fil.'
+  cover_image_alt: 'Forsidebildet ditt'
+  cover_image_remove: 'Fjern bildet'
+  popular: 'Populære studioer'
+  join: 'Bli med'
+  leave: 'Forlat'
   report: 'Rapporter'
-  public: 'public'
-  private: 'Invite-only'
+  public: 'offentlig'
+  private: 'Kun med invitasjon'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
-    private_studios: 'Invite-only studios'
-    no_studios: 'No studios yet'
-    my_studios: 'My Studios'
-    explore: 'Explore Studios'
-    no_joined: "You haven't joined any studios yet"
-    joined: 'Joined'
-    load_more: 'Load More'
+    joined_studios: 'Studioer du er med i'
+    public_studios: 'Offentlige studioer'
+    private_studios: 'Studioer kun med invitasjon'
+    no_studios: 'Ingen studioer ennå'
+    my_studios: 'Mine studioer'
+    explore: 'Utforsk studioer'
+    no_joined: 'Du har ikke blitt med i noen studioer ennå'
+    joined: 'Med'
+    load_more: 'Last inn flere'
     open: 'Åpne '
     share: 'Del'
-    share_success: 'Link copied to clipboard!'
-    leave_confirm_title: 'Leave this studio?'
+    share_success: 'Lenken er kopiert til utklippstavlen!'
+    leave_confirm_title: 'Forlate dette studioet?'
     cancel: 'Avbryt'
-    cancel_request: 'Cancel Request'
-    cancel_request_confirm_title: 'Cancel join request?'
+    cancel_request: 'Avbryt forespørsel'
+    cancel_request_confirm_title: 'Avbryte forespørselen om å bli med?'
     admin: 'Administrator'
-    member: 'Member'
+    member: 'Medlem'
   details:
-    add_project: 'click to add the project'
+    add_project: 'klikk for å legge til prosjektet'
     add: 'Legg til'
-    showMore: 'show more'
-    showLess: 'show less'
+    showMore: 'vis mer'
+    showLess: 'vis mindre'
     are_you_sure: 'Er du sikker?'
-    no_way_of_return: 'This cannot be undone.'
+    no_way_of_return: 'Dette kan ikke angres.'
     delete_it: 'Slett'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio.'
-    remove_project_success: 'Project removed successfully from studio.'
-    no_projects: 'Studio does not contain any projects yet.'
+    remove_project: 'Fjern fra studioet'
+    remove_project_error: 'Kunne ikke fjerne prosjektet fra studioet.'
+    remove_project_success: 'Prosjektet ble fjernet fra studioet.'
+    no_projects: 'Studioet inneholder ingen prosjekter ennå.'
     projects:
       title: 'Programmer'
-      addProject: 'Add Projects'
-      open_project: 'Open project'
+      addProject: 'Legg til prosjekter'
+      open_project: 'Åpne prosjekt'
       download: 'Nedlasting'
       share: 'Del'
-      remove_from_studio: 'Remove from studio'
-      remove_from_studio_title: 'Remove project from studio?'
-      remove_from_studio_text: 'You can add it again later if you change your mind.'
-      share_success: 'Link copied to clipboard!'
-      share_fail: 'Failed to copy link.'
-      no_projects_empty_state: 'You have no projects to add yet. Create one in Pocket Code first!'
-      add_selected: 'Add Selected'
-    no_available_projects: 'No projects available to add.'
-    updateCoverError: 'Something went wrong while updating the studio cover.'
-    join: 'Join'
-    leave: 'Leave'
+      remove_from_studio: 'Fjern fra studioet'
+      remove_from_studio_title: 'Fjerne prosjektet fra studioet?'
+      remove_from_studio_text: 'Du kan legge det til igjen senere hvis du ombestemmer deg.'
+      share_success: 'Lenken er kopiert til utklippstavlen!'
+      share_fail: 'Kunne ikke kopiere lenken.'
+      no_projects_empty_state: 'Du har ingen prosjekter å legge til ennå. Lag et i Pocket Code først!'
+      add_selected: 'Legg til valgte'
+    no_available_projects: 'Ingen prosjekter tilgjengelig å legge til.'
+    updateCoverError: 'Noe gikk galt under oppdateringen av forsidebildet til studioet.'
+    join: 'Bli med'
+    leave: 'Forlat'
     report: 'Rapporter'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: 'Venter'
+    decline: 'Avslått'
     comments:
       title: 'Kommentarer'
-      type_something: 'Type something'
-      replies: 'replies'
+      type_something: 'Skriv noe'
+      replies: 'svar'
       send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      remove_comment: 'Remove comment'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      no_comments: 'Dette studioet har ingen kommentarer ennå.'
+      disabled_comments: 'Kommentarer er slått av for dette studioet.'
+      remove_comment: 'Fjern kommentar'
+      post_error: 'Noe gikk galt da kommentaren din skulle publiseres. Prøv igjen senere.'
+      remove_error: 'Noe gikk galt da kommentaren skulle fjernes. Prøv igjen senere.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% added a project.'
-      add_comment: '%user% left a comment.'
+      title: 'Aktiviteter'
+      join_studio: '%user% ble med i studioet.'
+      add_project: '%user% la til et prosjekt.'
+      add_comment: '%user% skrev en kommentar.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      no_studio_projects: 'No studio projects'
-      one_studio_project: '1 studio project'
-      n_studio_projects: '%count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
-      demote_member: 'Demote admin to member'
-      demotion_failed: 'Something went wrong while demoting this admin. Try again later.'
-      last_admin: 'Cannot demote the last admin of this studio.'
+      title: 'Studiomedlemmer'
+      project_count: '{0} Ingen studioprosjekter |{1} 1 studioprosjekt |]1,Inf] %count% studioprosjekter'
+      no_studio_projects: 'Ingen studioprosjekter'
+      one_studio_project: '1 studioprosjekt'
+      n_studio_projects: '%count% studioprosjekter'
+      promote_member: 'Gjør medlemmet til administrator'
+      promotion_failed: 'Noe gikk galt da medlemmet skulle forfremmes. Prøv igjen senere.'
+      ban_member: 'Utesteng medlemmet fra studioet'
+      ban_failed: 'Noe gikk galt da medlemmet skulle utestenges. Prøv igjen senere.'
+      demote_member: 'Gjør administratoren til medlem'
+      demotion_failed: 'Noe gikk galt da administratoren skulle degraderes. Prøv igjen senere.'
+      last_admin: 'Kan ikke degradere den siste administratoren i dette studioet.'
     join_requests:
-      title: 'Join Requests'
+      title: 'Forespørsler om å bli med'
       accept: 'Godta'
       decline: 'Avslå'
-      accept_success: 'Join request accepted.'
-      decline_success: 'Join request declined.'
-      error: 'Something went wrong. Please try again.'
-      no_requests: 'No pending join requests.'
+      accept_success: 'Forespørselen om å bli med ble godtatt.'
+      decline_success: 'Forespørselen om å bli med ble avslått.'
+      error: 'Noe gikk galt. Prøv igjen.'
+      no_requests: 'Ingen ventende forespørsler om å bli med.'
     show_more: 'More information'
     show_less: 'Less information'
     admin_settings:
       title: 'Innstillinger'
-      studio_name: 'Studio Name'
+      studio_name: 'Studionavn'
       studio_description: 'Beskrivelse'
       toggle_allow_comments: 'Kommentarer'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Offentlig'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Størrelse: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
+      image: 'Type: bilde'
+      project: 'Type: prosjekt'
+      sound: 'Type: lyd'
       movie: 'Type: video'
-      default: 'Type: unknown'
-  no_categories: 'No media categories available yet.'
-  no_results: 'No results found.'
-  assets_count: 'assets'
-  view_all: 'View all'
-  view_all_category: 'View all %category%'
-  back_to_app: 'Back to app'
+      default: 'Type: ukjent'
+  no_categories: 'Ingen mediekategorier tilgjengelig ennå.'
+  no_results: 'Ingen resultater funnet.'
+  assets_count: 'filer'
+  view_all: 'Vis alle'
+  view_all_category: 'Vis alle %category%'
+  back_to_app: 'Tilbake til appen'
 snackbar:
-  project_not_found: 'The requested project is not available'
-  project_not_for_kids: 'The project was marked as not safe for kids!'
-  project_safe_for_kids: 'The project was marked safe for kids!'
-  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
-  project_set_private: 'The project has been set to private.'
-  project_set_public: 'The project has been set to public.'
+  project_not_found: 'Det forespurte prosjektet er ikke tilgjengelig'
+  project_not_for_kids: 'Prosjektet ble merket som ikke egnet for barn!'
+  project_safe_for_kids: 'Prosjektet ble merket som egnet for barn!'
+  project_not_for_kids_moderator: 'Prosjektet ble merket av en moderator. Du kan ikke angre dette!'
+  project_set_private: 'Prosjektet er nå privat.'
+  project_set_public: 'Prosjektet er nå offentlig.'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
-MarkNotForKids: Mark as not safe for kids
-MarkSafeForKids: Mark as safe for kids
+    additional_info: 'Tilleggsinformasjon: additionalInfo'
+    feature_1: 'Funksjonen featureName er ikke tilgjengelig fra maintenanceStart til maintenanceEnd'
+    feature_2: 'Funksjonen'
+    feature_3: 'Funksjonen'
+MarkNotForKids: 'Merk som ikke egnet for barn'
+MarkSafeForKids: 'Merk som egnet for barn'
 notForKids:
-  confirmTitle: Confirmation
-  confirmMark: Are you sure you want to mark this project as not safe for kids?
-  confirmUnmark: Are you sure you want to remove the not-for-kids flag from this project?
-  confirmYes: 'Yes, proceed!'
+  confirmTitle: 'Bekreftelse'
+  confirmMark: 'Er du sikker på at du vil merke dette prosjektet som ikke egnet for barn?'
+  confirmUnmark: 'Er du sikker på at du vil fjerne merket «ikke for barn» fra dette prosjektet?'
+  confirmYes: 'Ja, fortsett!'
 moderation:
   report:
-    title: "Report this %content_type%"
-    reason_placeholder: "Please describe why you're reporting this..."
-    submit: "Submit Report"
-    success: "Your report has been submitted. Thank you."
-    error: "Something went wrong. Please try again."
-    duplicate: "You've already reported this content."
-    trust_too_low: "Your account is too new to file reports."
-    unverified: "Please make sure you are logged in and your account's email is verified."
-    rate_limited: "You're submitting reports too quickly. Please wait and try again."
-    suspended: "Your account is suspended."
+    title: 'Rapporter denne %content_type%'
+    reason_placeholder: 'Beskriv hvorfor du rapporterer dette ...'
+    submit: 'Send rapport'
+    success: 'Rapporten din er sendt. Takk.'
+    error: 'Noe gikk galt. Prøv igjen.'
+    duplicate: 'Du har allerede rapportert dette innholdet.'
+    trust_too_low: 'Kontoen din er for ny til å sende rapporter.'
+    unverified: 'Sørg for at du er logget inn og at e-postadressen til kontoen din er bekreftet.'
+    rate_limited: 'Du sender rapporter for raskt. Vent litt og prøv igjen.'
+    suspended: 'Kontoen din er suspendert.'
   appeal:
-    button: "Appeal"
-    title: "Appeal this decision"
-    placeholder: "Explain why this content should not be hidden..."
-    submit: "Submit Appeal"
+    button: 'Klag'
+    title: 'Klag på denne avgjørelsen'
+    placeholder: 'Forklar hvorfor dette innholdet ikke bør skjules ...'
+    submit: 'Send klage'
     cancel: "Avbryt"
-    success: "Your appeal has been submitted for review."
-    already_pending: "You already have a pending appeal."
-    error: "Something went wrong. Please try again."
-    rate_limited: "You're submitting appeals too quickly. Please wait and try again."
+    success: 'Klagen din er sendt til vurdering.'
+    already_pending: 'Du har allerede en klage som venter.'
+    error: 'Noe gikk galt. Prøv igjen.'
+    rate_limited: 'Du sender klager for raskt. Vent litt og prøv igjen.'
   comment:
-    rate_limited: "You're posting comments too quickly. Please wait a moment."
+    rate_limited: 'Du skriver kommentarer for raskt. Vent litt.'
   reaction:
-    rate_limited: "You're reacting too quickly. Please wait a moment."
+    rate_limited: 'Du reagerer for raskt. Vent litt.'
   follow:
-    rate_limited: "You're following/unfollowing too quickly. Please wait a moment."
+    rate_limited: 'Du følger/slutter å følge for raskt. Vent litt.'
   studio:
-    rate_limited: "You're performing studio actions too quickly. Please wait a moment."
+    rate_limited: 'Du utfører studiohandlinger for raskt. Vent litt.'
   hidden_notice:
-    project: "This project has been hidden due to community reports."
-    comment: "This comment has been hidden due to community reports."
-    user: "This profile has been hidden due to community reports."
-    user_own: "Your account has been suspended due to community reports. You may appeal this decision."
-    studio: "This studio has been hidden due to community reports."
+    project: 'Dette prosjektet er skjult på grunn av rapporter fra fellesskapet.'
+    comment: 'Denne kommentaren er skjult på grunn av rapporter fra fellesskapet.'
+    user: 'Denne profilen er skjult på grunn av rapporter fra fellesskapet.'
+    user_own: 'Kontoen din er suspendert på grunn av rapporter fra fellesskapet. Du kan klage på denne avgjørelsen.'
+    studio: 'Dette studioet er skjult på grunn av rapporter fra fellesskapet.'
   notification:
-    content_hidden: "Your %content_type% has been hidden due to community reports. You may appeal this decision."
-    appeal_approved: "Your appeal has been approved. Your content is now visible again."
-    appeal_rejected: "Your appeal has been reviewed and the decision to hide your content stands."
-    admin_review_needed: "Content has been auto-hidden and requires review."
-Reports: Reports
-members: members
+    content_hidden: 'Innholdet ditt (%content_type%) er skjult på grunn av rapporter fra fellesskapet. Du kan klage på denne avgjørelsen.'
+    appeal_approved: 'Klagen din er godkjent. Innholdet ditt er synlig igjen.'
+    appeal_rejected: 'Klagen din er vurdert, og avgjørelsen om å skjule innholdet ditt står ved lag.'
+    admin_review_needed: 'Innhold er skjult automatisk og må vurderes.'
+Reports: 'Rapporter'
+members: 'medlemmer'
