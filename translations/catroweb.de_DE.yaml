@@ -237,7 +237,7 @@ project:
   reportAlready: Du hast dieses Projekt bereits gemeldet.
   reportDone: Du hast dieses Projekt gemeldet!
   updateAppHeaderDownload: Download nicht möglich
-  updateAppTextDownload: Bitte aktualisieren Sie deine App auf die neueste Version. Sei dir bewusst, dass nicht alle Android Funktionen bereits auf IOS verfügbar sind.
+  updateAppTextDownload: Bitte aktualisiere deine App auf die neueste Version. Sei dir bewusst, dass nicht alle Android Funktionen bereits auf IOS verfügbar sind.
   updateAppTextDownloadApk: Der APK-Download ist derzeit nur auf Android und nicht auf IOS verfügbar.
   updateAppHeader: App aktualisieren
   updateAppText: "Bitte führe ein Update auf die \nneuste Version der App durch."
@@ -337,15 +337,15 @@ newAccountConfirmation:
   autoDelete: "Nicht bestätigte Konten werden nach 30 Tagen automatisch gelöscht."
 consent:
   email:
-    subject: "Elterliche Zustimmung für das Catrobat-Konto Ihres Kindes erforderlich"
+    subject: "Elterliche Zustimmung für das Catrobat-Konto deines Kindes erforderlich"
     title: "Elterliche Zustimmung erforderlich"
     greeting: "Hallo,"
-    message: "Ihr Kind %username% hat ein Konto bei Catrobat erstellt und seine E-Mail-Adresse bestätigt."
-    explanation: "Catrobat ist eine kostenlose Bildungsplattform, auf der junge Menschen programmieren lernen, indem sie Apps, Spiele und Animationen erstellen. Gemäß den EU-Kinderschutzbestimmungen benötigen wir Ihre Zustimmung, bevor Ihr Kind uneingeschränkt an der Community teilnehmen kann. Bitte klicken Sie auf die Schaltfläche unten, um Ihre Zustimmung zu erteilen."
+    message: "Dein Kind %username% hat ein Konto bei Catrobat erstellt und seine E-Mail-Adresse bestätigt."
+    explanation: "Catrobat ist eine kostenlose Bildungsplattform, auf der junge Menschen programmieren lernen, indem sie Apps, Spiele und Animationen erstellen. Gemäß den EU-Kinderschutzbestimmungen benötigen wir deine Zustimmung, bevor dein Kind uneingeschränkt an der Community teilnehmen kann. Bitte klicke auf die Schaltfläche unten, um deine Zustimmung zu erteilen."
     button: "Elterliche Zustimmung erteilen"
-    ignore: "Wenn Sie diese E-Mail nicht erwartet haben, können Sie sie einfach ignorieren. Ohne Zustimmung ist das Konto nur eingeschränkt nutzbar."
-    whatIsCatrobat: "Catrobat ist eine kostenlose, gemeinnützige Lernplattform zum Programmieren. Mehr erfahren Sie auf catrobat.org."
-    manageLink: 'Sie können das Konto Ihres Kindes jederzeit über unser <a href="%portalUrl%" style="color: #00acc1;">Elternportal</a> verwalten. Erfahren Sie mehr über <a href="%infoUrl%" style="color: #00acc1;">Ihre Rechte als Elternteil</a>.'
+    ignore: "Wenn du diese E-Mail nicht erwartet hast, kannst du sie einfach ignorieren. Ohne Zustimmung ist das Konto nur eingeschränkt nutzbar."
+    whatIsCatrobat: "Catrobat ist eine kostenlose, gemeinnützige Lernplattform zum Programmieren. Mehr erfährst du auf catrobat.org."
+    manageLink: 'Du kannst das Konto deines Kindes jederzeit über unser <a href="%portalUrl%" style="color: #00acc1;">Elternportal</a> verwalten. Erfahre mehr über <a href="%infoUrl%" style="color: #00acc1;">deine Rechte als Elternteil</a>.'
   confirmed:
     title: "Zustimmung erteilt"
     message: "Vielen Dank! Das Konto von %username% ist jetzt vollständig aktiviert."
@@ -355,32 +355,32 @@ parent:
     link: "Eltern & Erziehungsberechtigte"
   info:
     title: "Informationen für Eltern & Erziehungsberechtigte"
-    intro: "Catrobat nimmt die Sicherheit und den Datenschutz junger Nutzerinnen und Nutzer ernst. Auf dieser Seite erfahren Sie, wie wir Ihr Kind schützen und welche Rechte Sie haben."
+    intro: "Catrobat nimmt die Sicherheit und den Datenschutz junger Nutzerinnen und Nutzer ernst. Auf dieser Seite erfährst du, wie wir dein Kind schützen und welche Rechte du hast."
     whatIsCatrobat:
       title: "Was ist Catrobat?"
       text: "Catrobat ist eine kostenlose, gemeinnützige Bildungsplattform, auf der junge Menschen programmieren lernen, indem sie ihre eigenen Apps, Spiele und Animationen erstellen. Die Plattform ist weltweit verfügbar und wird im Unterricht eingesetzt."
     dataCollected:
       title: "Welche Daten erheben wir?"
-      text: "Wir erheben nur die Daten, die für den Betrieb der Plattform nötig sind: Benutzername, E-Mail-Adresse, Geburtsdatum und alle Projekte, die Ihr Kind erstellt und hochlädt. Bei Nutzerinnen und Nutzern unter 14 Jahren speichern wir zusätzlich die E-Mail-Adresse eines Elternteils bzw. Erziehungsberechtigten für die Einwilligung. Wir verkaufen keine personenbezogenen Daten und geben sie nicht an Dritte weiter."
+      text: "Wir erheben nur die Daten, die für den Betrieb der Plattform nötig sind: Benutzername, E-Mail-Adresse, Geburtsdatum und alle Projekte, die dein Kind erstellt und hochlädt. Bei Nutzerinnen und Nutzern unter 14 Jahren speichern wir zusätzlich die E-Mail-Adresse eines Elternteils bzw. Erziehungsberechtigten für die Einwilligung. Wir verkaufen keine personenbezogenen Daten und geben sie nicht an Dritte weiter."
     yourRights:
-      title: "Ihre Rechte als Elternteil oder Erziehungsberechtigte(r)"
-      text: "Nach den EU-Kinderschutzbestimmungen (DSGVO) und COPPA haben Sie das Recht: die Daten einzusehen, die wir über Ihr Kind speichern, eine Kopie dieser Daten anzufordern, Ihre Zustimmung jederzeit zu widerrufen (wodurch das Konto eingeschränkt wird) und die endgültige Löschung des Kontos Ihres Kindes samt aller zugehörigen Daten zu verlangen."
+      title: "Deine Rechte als Elternteil oder Erziehungsberechtigte(r)"
+      text: "Nach den EU-Kinderschutzbestimmungen (DSGVO) und COPPA hast du das Recht: die Daten einzusehen, die wir über dein Kind speichern, eine Kopie dieser Daten anzufordern, deine Zustimmung jederzeit zu widerrufen (wodurch das Konto eingeschränkt wird) und die endgültige Löschung des Kontos deines Kindes samt aller zugehörigen Daten zu verlangen."
     minorRestrictions:
       title: "Welche Einschränkungen gelten für Konten von Minderjährigen?"
       text: "Nutzerinnen und Nutzer unter 16 Jahren können keine Kommentare schreiben oder lesen, anderen nicht folgen und keine Inhalte sehen, die als nicht für Kinder geeignet markiert sind. Sie können aber weiterhin Projekte erstellen und hochladen, öffentliche Projekte ansehen und mit Likes auf Projekte reagieren. Diese Einschränkungen sorgen für eine sichere Lernumgebung."
-    manageButton: "Konto Ihres Kindes verwalten"
+    manageButton: "Konto deines Kindes verwalten"
   portal:
     title: "Elternportal"
-    description: "Geben Sie Ihre E-Mail-Adresse ein, um einen sicheren Link zur Verwaltung des Catrobat-Kontos Ihres Kindes zu erhalten. Der Link wird an die E-Mail-Adresse gesendet, die bei der Registrierung angegeben wurde."
-    emailLabel: "Ihre E-Mail-Adresse"
+    description: "Gib deine E-Mail-Adresse ein, um einen sicheren Link zur Verwaltung des Catrobat-Kontos deines Kindes zu erhalten. Der Link wird an die E-Mail-Adresse gesendet, die bei der Registrierung angegeben wurde."
+    emailLabel: "Deine E-Mail-Adresse"
     submitButton: "Verwaltungslink senden"
     infoLink: "Mehr erfahren"
     success:
-      title: "Bitte prüfen Sie Ihr Postfach"
-      message: "Falls ein Konto mit dieser E-Mail-Adresse verknüpft ist, haben wir einen Verwaltungslink gesendet. Bitte prüfen Sie Ihr Postfach und folgen Sie dem Link, um das Konto Ihres Kindes zu verwalten."
+      title: "Bitte prüfe dein Postfach"
+      message: "Falls ein Konto mit dieser E-Mail-Adresse verknüpft ist, haben wir einen Verwaltungslink gesendet. Bitte prüfe dein Postfach und folge dem Link, um das Konto deines Kindes zu verwalten."
   manage:
     title: "Kinderkonten verwalten"
-    description: "Sie verwalten die Konten, die mit %email% verknüpft sind."
+    description: "Du verwaltest die Konten, die mit %email% verknüpft sind."
     consentStatus: "Zustimmungsstatus"
     accountCreated: "Konto erstellt"
     email: "E-Mail des Kindes"
@@ -390,20 +390,20 @@ parent:
       revoked: "Widerrufen"
     grantButton: "Zustimmung erteilen"
     revokeButton: "Zustimmung widerrufen"
-    revokeConfirm: "Sind Sie sicher, dass Sie die Zustimmung widerrufen möchten? Das Konto ist dann nur eingeschränkt nutzbar."
+    revokeConfirm: "Bist du sicher, dass du die Zustimmung widerrufen möchtest? Das Konto ist dann nur eingeschränkt nutzbar."
     exportButton: "Daten exportieren"
     deleteButton: "Konto löschen"
-    deleteConfirm: "Sind Sie sicher, dass Sie dieses Konto endgültig löschen möchten? Das kann nicht rückgängig gemacht werden."
+    deleteConfirm: "Bist du sicher, dass du dieses Konto endgültig löschen möchtest? Das kann nicht rückgängig gemacht werden."
   management:
     email:
-      subject: "Das Catrobat-Konto Ihres Kindes verwalten"
+      subject: "Das Catrobat-Konto deines Kindes verwalten"
       title: "Kontoverwaltung"
       greeting: "Hallo,"
-      message: "Sie haben einen Link zur Verwaltung des Catrobat-Kontos Ihres Kindes (%usernames%) angefordert. Klicken Sie auf die Schaltfläche unten, um das Konto anzusehen und zu verwalten."
+      message: "Du hast einen Link zur Verwaltung des Catrobat-Kontos deines Kindes (%usernames%) angefordert. Klicke auf die Schaltfläche unten, um das Konto anzusehen und zu verwalten."
       button: "Konto verwalten"
-      ignore: "Wenn Sie das nicht angefordert haben, können Sie diese E-Mail einfach ignorieren."
+      ignore: "Wenn du das nicht angefordert hast, kannst du diese E-Mail einfach ignorieren."
 passwordRecovery:
-  subject: Ihre Catrobat Passwort Wiederherstellung
+  subject: Deine Catrobat Passwort Wiederherstellung
   message: |
     Lieber oder Liebe %username%.
 
@@ -554,7 +554,7 @@ search:
   inMediaLib: In Medienbibliothek suchen
   inMediaCategory: In Medienkategorie suchen
   results: Suchergebnisse
-  resultcount: Ihre Suche brachte %count% Ergebnisse
+  resultcount: Deine Suche brachte %count% Ergebnisse
   fail: Bitte gib zumindest ein Wort ein
   noUsers: Keine Benutzer gefunden
   noProjects: Keine Projekte gefunden
@@ -678,7 +678,7 @@ errors:
     invalid: Dein Benutzername ist ungültig
     exists: Dieser Benutzername existiert bereits.
     not_exists: Dieser Benutzername existiert nicht.
-    not_email: Ihr Username darf keine E-Mail-Adresse sein.
+    not_email: Dein Username darf keine E-Mail-Adresse sein.
     size: Der Benutzername muss mindestens 3 Zeichen lang sein und darf nicht mehr als 180 Zeichen enthalten
   password:
     blank: Du hast kein Passwort angegeben.
@@ -712,12 +712,12 @@ errors:
   languageversion:
     tooold: 'Leider enthält dein Projekt eine alte Version der Catrobat-Sprache! Verwendest du die neueste Version von Pocket Code?'
   projectversion:
-    tooold: 'Entschuldigung, du verwendest eine alte Version von Pocket Code. Bitte aktualisieren deine App.'
+    tooold: 'Entschuldigung, du verwendest eine alte Version von Pocket Code. Bitte aktualisiere deine App.'
   authentication:
     title: Die Anmeldung hat nicht funktioniert
     webview: |
       Deine Benutzerdaten sind falsch.
-      Bitte versuchen dich erneut in der App anzumelden.
+      Bitte versuche, dich erneut in der App anzumelden.
 success:
   text: Abgeschlossen
   registration: Registrierung erfolgreich!
@@ -933,7 +933,7 @@ privacy-policy:
   header: Datenschutz-Vereinbarung
   version: Version 2.2, 17. Oktober 2019
   text1: Um dir alle Vorteile unserer Dienste und dem verknüpften Benutzerkonto bieten zu können, ist es notwendig gewisse Daten von dir zu sammeln.
-  text2: Um unsere Dienste (Apps und Websites) warten und verbessern zu können und um wissenschaftliche Forschung über ICT und STEM/STEAM-Ausbildung zu betreiben, verwenden wir Google Analytics, Crashlytics und Firebase, alle von Google LLC (USA), sowie Dynatrace von Dynatrace LLC (USA), um Metadaten über die Nutzung unserer Dienste zu erhalten, z.B. Absturzinformationen, Zeitstempel, besuchte Seiten/Bildschirme, Nutzung unserer Apps und Dienste, verwendetes Betriebssystem und Informationen über den Netzwerkanbieter. Diese Analyse und die gesammelten Daten werden nicht mit Ihrem Profil verknüpft und enthalten keine persönlichen Informationen (die letzten Bits der IP-Adresse werden anonymisiert). Die gesammelten Daten werden jedoch an die Service-Anbieter (Google LLC, USA und Dynatrace LLC, USA) übermittelt. Die Datenverarbeitung basiert auf Vereinbarungen mit Google LLC und Dynatrace LLC. Diese Beziehung zu den Dienstanbietern entspricht der Allgemeinen Datenschutzverordnung der Europäischen Union (EU GDPR) und dem Abkommen zwischen der EU und den USA "Privacy Shield".
+  text2: Um unsere Dienste (Apps und Websites) warten und verbessern zu können und um wissenschaftliche Forschung über ICT und STEM/STEAM-Ausbildung zu betreiben, verwenden wir Google Analytics, Crashlytics und Firebase, alle von Google LLC (USA), sowie Dynatrace von Dynatrace LLC (USA), um Metadaten über die Nutzung unserer Dienste zu erhalten, z.B. Absturzinformationen, Zeitstempel, besuchte Seiten/Bildschirme, Nutzung unserer Apps und Dienste, verwendetes Betriebssystem und Informationen über den Netzwerkanbieter. Diese Analyse und die gesammelten Daten werden nicht mit deinem Profil verknüpft und enthalten keine persönlichen Informationen (die letzten Bits der IP-Adresse werden anonymisiert). Die gesammelten Daten werden jedoch an die Service-Anbieter (Google LLC, USA und Dynatrace LLC, USA) übermittelt. Die Datenverarbeitung basiert auf Vereinbarungen mit Google LLC und Dynatrace LLC. Diese Beziehung zu den Dienstanbietern entspricht der Allgemeinen Datenschutzverordnung der Europäischen Union (EU GDPR) und dem Abkommen zwischen der EU und den USA "Privacy Shield".
   text3: Um ein Benutzerkonto in unserem System zu erstellen und nutzen, sowie um Nutzer per E-Mail über notwendige Änderungen unserer Dienste/Vereinbarungen zu informieren, werden Nutzername und sofern zur Verfügung gestellt E-Mailadresse von uns gespeichert. Falls der Account via Google Plus oder Facebook erstellt wurde wird zusätzlich ein Identifizierungsschlüssel zu diesen Diensten gespeichert. Diese Daten werden, sofern nicht explizit eingewilligt, nicht für andere Zwecke (z.B. Marketing) verwendet.
   text4: Auf freiwilliger Basis kann das Heimatland auf der Benutzerseite angegeben werden. Diese Information wird öffentlich auf der Benutzerseite angezeigt und für Forschungs-/Statistikzwecke von uns genutzt. Sie kann über die Benutzerseite jederzeit wieder entfernt werden.
   text5: Die Nutzung der persönlichen Daten von uns kann jederzeit durch die Löschung des Benutzerkontos auf https://share.catrob.at widerrufen werden. Durch die Löschung können unsere Dienste weiterhin genutzt werden, jedoch stehen Kontoabhängige Funktionen (z.B. Upload, Kommentieren oder liken) nicht mehr zur Verfügung. Weiters, werden alle mit dem Benutzerkonto verbundenen Inhalte (hochgeladene Programme, Kommentare, etc.) gelöscht.
@@ -954,9 +954,9 @@ catro-notifications:
     studio: Studio
     project: Projekte am Gerät
   comment:
-    message: 'Benutzer %user_link% hat Ihr Projekt %program_link% kommentiert.'
+    message: 'Benutzer %user_link% hat dein Projekt %program_link% kommentiert.'
   like:
-    message: 'Benutzer %user_link% hat Ihr Projekt %program_link% geliked.'
+    message: 'Benutzer %user_link% hat dein Projekt %program_link% geliked.'
   follow:
     message: 'Benutzer %user_link% folgt dir jetzt.'
   project-upload:
